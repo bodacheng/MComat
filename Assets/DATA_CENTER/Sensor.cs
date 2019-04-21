@@ -1,0 +1,551 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using System;
+
+//现在Sensor也必须和其他所有组件同位置。
+//本检测器现在分为内环和外环两部分。外环通过OverlapSphere检测，内环通过AttackRanger的OnTriggerEnter检测。
+public class Sensor : MonoBehaviour {
+
+    public float sensor_radius = 15;//这个范围我们也就看作是普攻的冲击检测范围。
+    public IDictionary<Team, List<Data_Center>> TeamMembers;
+
+    private LayerMask _layers;
+    private Collider[] _hits; //What was hit in this frame?
+    private TeamConfig _TeamConfig;
+
+    private int DetectionInterval = 0;
+    private bool DetectionLoopStarted = false;
+    private int DetectionResultLastFrame = 0;
+    private bool continuousDetection = false;
+
+    private List<Collider> innerEnemies = new List<Collider>();
+    private List<Collider> midEnemies = new List<Collider>();
+    private List<Collider> farEnemies = new List<Collider>();
+    private List<Collider> OutterDamagingWeapon = new List<Collider>();
+    private List<Collider> NearbyDamagingWeapon = new List<Collider>();
+
+    private Data_Center selfDataCenter;
+    private List<Data_Center> frontTeamMates = new List<Data_Center>();
+    private List<Data_Center> frontEnemies = new List<Data_Center>();
+
+    public bool IFContinuousDetectionStarted()
+    {
+        return continuousDetection;
+    }
+
+    public void setDectectLayerAndFrontDirection(TeamConfig teamConfig,Data_Center _self)
+    {
+        this._TeamConfig = teamConfig;
+        if (this._TeamConfig != null)
+            _layers = teamConfig.mySensorAndWeaponTargetLayerMask;
+
+        this.selfDataCenter = _self;
+    }
+
+    public List<Collider> getInnerEnemiesColliders()
+    {
+        //innerEnemies.RemoveAll(item => item == null);
+        return innerEnemies;
+    }
+    public List<Collider> getMidEnemiesColliders()
+    {
+        //innerEnemies.RemoveAll(item => item == null);
+        return midEnemies;
+    }
+    public List<Collider> getfarEnemiesColliders()
+    {
+        //outterEnemies.RemoveAll(item => item == null);
+        return farEnemies;
+    }
+    public List<Collider> getNearbyDamagingWeaponColliders()
+    {
+        //NearbyDamagingWeapon.RemoveAll(item => item == null);
+        return NearbyDamagingWeapon;
+    }
+    public List<Collider> getOutterDamagingWeaponColliders()
+    {
+        return OutterDamagingWeapon;
+    }
+    
+    public Collider getClosestColliderInSensorRange(bool near,bool mid,bool far)
+    {
+        if (near && innerEnemies.Count > 0)
+        {
+            return FindNearestCollider(innerEnemies);
+        }
+        if (mid && midEnemies.Count > 0)
+        {
+            return FindNearestCollider(midEnemies);
+        }
+        if (far && farEnemies.Count > 0)
+        {
+            return FindNearestCollider(farEnemies);
+        }
+        return null;
+    }
+
+    void FixedUpdate()
+    {
+        if (DetectionLoopStarted)
+        {
+            if (DetectionInterval == 0)
+            {
+                SensorDetectionResultClearProcess();
+                SensorDetectProcess();//检测
+                SensorDetectionResultSortProcess();//整理
+            }
+            if (DetectionInterval > DetectionResultLastFrame)
+            {
+                DetectionInterval = 0;
+                if (!continuousDetection)
+                {
+                    DetectionLoopStarted = false;
+                    SensorDetectionResultClearProcess();
+                }
+                return;//否则下面的DetectionInterval++会导致其值立刻从0变到1，无法进入上面的if (DetectionInterval == 0)部分。
+            }
+            DetectionInterval++;
+        }
+	}
+    // continuousDetectionStart(0) 的情况下。
+    // round 0: (一次检测) this.DetectionResultLastFrame == 0, DetectionInterval = 1 
+    // round 1: DetectionInterval = 0; (上次检测结果未被清空)
+    // round 2: 一次检测，DetectionInterval++; (上次检测未被清空)
+    // round 3: DetectionInterval == 1, DetectionInterval = 0,(上次检测未被清空)
+    // round 4: 一次检测，DetectionInterval++; (上次检测未被清空)
+    //。。。。循环
+    // continuousDetectionStart(-1) 的情况下。
+    // round 0:  (一次检测) this.DetectionResultLastFrame == -1, DetectionInterval = 1
+    // round 1: DetectionInterval = 0; (上次检测结果未被清空)
+    // round 2: 一次检测 由于0 > -1, DetectionInterval = 0,
+    // round 3: 一次检测 由于0 > -1, DetectionInterval = 0,
+    // ... 循环
+    // 结论： continuousDetectionStart(0) 让检测器隔一帧检测一次，continuousDetectionStart(-1)(任何负)，让检测器每帧检测一次
+
+    public void continuousDetectionStart(int _DetectionResultLastFrame)
+    {
+        SensorDetectionResultClearProcess();
+        SensorDetectProcess();//检测
+        SensorDetectionResultSortProcess();//整理
+
+        this.continuousDetection = true;
+        this.DetectionResultLastFrame = _DetectionResultLastFrame;
+        this.DetectionLoopStarted = true;
+        this.DetectionInterval = 1;//这个设置是为了在启动本函数瞬间进行检测活动，但不会在update里立刻再进行一次，形成间隔
+    }
+
+    public void OneRoundDetectionStart(int _DetectionResultLastFrame)
+    {
+        SensorDetectionResultClearProcess();
+        SensorDetectProcess();//检测
+        SensorDetectionResultSortProcess();//整理
+
+        this.continuousDetection = false;
+        this.DetectionResultLastFrame = _DetectionResultLastFrame;
+        this.DetectionLoopStarted = false;
+        this.DetectionInterval = 1;
+    }
+
+    public void Stop()
+    {
+        SensorDetectionResultClearProcess();
+        this.DetectionLoopStarted = false;
+        this.continuousDetection = false;
+    }
+
+    private Vector3 offset;
+    public Vector3 recommandDirectionOffSetFromTeammates()
+    {
+        offset = Vector3.zero;
+        for (int i = 0; i < frontTeamMates.Count; i++)
+        {
+            if (frontTeamMates[i] != null)
+            {
+                offset += (selfDataCenter.transform.position - frontTeamMates[i].transform.position).normalized;
+            }
+        }
+        offset.y = 0;
+        return offset;
+    }
+
+    public bool ManyTeamMatesForward()
+    {
+        if (frontTeamMates.Count == 0)
+        {
+            return false;
+        }
+        if (frontEnemies.Count > 0)
+        {
+            if (Vector3.Distance(selfDataCenter.transform.position, frontEnemies[0].transform.position) < Vector3.Distance(selfDataCenter.transform.position, frontTeamMates[0].transform.position))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void SensorDetectProcess()
+    {
+        _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
+
+        if (selfDataCenter == null || this._TeamConfig == null || TeamMembers == null
+            || !TeamMembers.ContainsKey(this._TeamConfig.myTeam))
+            return;
+
+        TeamMembers.TryGetValue(this._TeamConfig.myTeam, out searchingMembers);
+        for (int i = 0; i < searchingMembers.Count; i++)
+        {
+            if (searchingMembers[i] != null && searchingMembers[i] != selfDataCenter)
+            {
+                if (Vector3.Distance(searchingMembers[i].transform.position, selfDataCenter.transform.position) < sensor_radius)
+                {
+                    float angle = Vector3.Angle(selfDataCenter.transform.forward, searchingMembers[i].transform.position - selfDataCenter.transform.position);
+                    if (angle < 60)
+                    {
+                        frontTeamMates.Add(searchingMembers[i]);
+                    }
+                }
+            }
+        }
+        foreach (Team _team in this._TeamConfig.myEnemies)
+        {
+            if (!TeamMembers.ContainsKey(_team))           
+                continue;
+            
+            TeamMembers.TryGetValue(_team, out searchingMembers);
+            for (int i = 0; i < searchingMembers.Count; i++)
+            {
+                if (searchingMembers[i] != null)
+                {
+                    if (Vector3.Distance(searchingMembers[i].transform.position, selfDataCenter.transform.position) < sensor_radius)
+                    {
+                        float angle = Vector3.Angle(selfDataCenter.transform.forward, searchingMembers[i].transform.position - selfDataCenter.transform.position);
+                        if (angle < 60)
+                        {
+                            frontEnemies.Add(searchingMembers[i]);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    internal object getOutterEnemiesColliders()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SensorDetectionResultClearProcess()
+    {
+        farEnemies.Clear();
+        innerEnemies.Clear();
+        midEnemies.Clear();
+        OutterDamagingWeapon.Clear();
+        NearbyDamagingWeapon.Clear();
+
+        frontTeamMates.Clear();
+        frontEnemies.Clear();
+    }
+
+    private List<GameObject> EnemiesByDistance = new List<GameObject>();
+    public List<GameObject> getEnemiesByDistance(bool refresh)
+    {
+        if (this._TeamConfig == null)
+        {
+            EnemiesByDistance.Clear();
+            return EnemiesByDistance;
+        }
+        if (refresh)
+            EnemiesByDistance = FindTargetsByDistance(this._TeamConfig.myEnemies.ToArray());
+        return EnemiesByDistance;
+    }
+
+    private List<GameObject> AlliesByDistance = new List<GameObject>();
+    public List<GameObject> getAlliesAndSelfByDistance(bool refresh)
+    {
+        if (this._TeamConfig == null)
+        {
+            AlliesByDistance.Clear();
+            return AlliesByDistance;
+        }
+        if (refresh)
+            AlliesByDistance = this.FindTargetsByDistance(new Team[] { this._TeamConfig.myTeam });
+        return AlliesByDistance;
+    }
+
+    private List<Data_Center> searchingMembers;
+    private GameObject a;
+    private GameObject b;
+    public List<GameObject> FindTargetsByDistance(Team[] tags) // 根据提供得目标标签获取一个以离自身距离为基准的gameobjects列表。有了这个显然FindClosestEnemy这个函数就很落后了
+    {
+        List<GameObject> target_list = new List<GameObject>();//貌似换成clear的话会减少GC,然而如果那样做，将产生一个极其严重的bug。你很可能在不知不觉中让两个使用了这个函数求列表的函数指向了同一地址。
+        if (tags != null)
+        {
+            for (int i = 0; i < tags.Length; i++)
+            {
+                if (TeamMembers != null)
+                {
+                    for (int y = 0; y < tags.Length; y++)
+                    {
+                        TeamMembers.TryGetValue(tags[y], out searchingMembers);
+                        if (searchingMembers != null)
+                        {
+                            for (int k = 0; k < searchingMembers.Count; k++)
+                            {
+                                //if (searchingMembers [k].tag == tags[y]) //因为角色死亡时候可能会改flag
+                                //{
+                                if (searchingMembers[k].getRunner().getCurrentStateNum() != "Death")
+                                    target_list.Add(searchingMembers[k].gameObject);
+                                //}
+                            }
+                        }
+                        else
+                        {
+                            searchingMembers = null;
+                        }
+                    }
+                }
+            }
+            if (target_list.Count > 1)
+            {
+                target_list.Sort((a, b) => horizontalDistanceCompare(a.transform.position, b.transform.position));
+                return target_list;
+            }
+            else
+            {
+                return target_list;
+            }
+        }
+        return target_list;
+    }
+
+    private Vector3 _ClosestPointOnBounds;
+    private Collider tempCForNearest =null;
+    public void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
+    {
+        if (_hits == null)
+        {
+            return;
+        }
+
+        foreach (Collider hit in this._hits)
+        {
+            if (hit != null)
+            {
+                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) 
+                    ||
+                    _TeamConfig.enemyShieldLayerMask == (_TeamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer))
+                   )
+                    farEnemies.Add(hit);
+                if (_TeamConfig.enemyWeaponLayerMask == (_TeamConfig.enemyWeaponLayerMask | (1 << hit.gameObject.layer)))
+                {
+                    OutterDamagingWeapon.Add(hit);
+                }
+            }
+        }
+
+        if (OutterDamagingWeapon.Count > 1)
+        {
+            //OutterDamagingWeapon.Sort((a, b) => horizontalDistanceCompare(a.transform.position, b.transform.position));
+            tempCForNearest = FindNearestCollider(OutterDamagingWeapon);
+            if (tempCForNearest != null)
+            {
+                OutterDamagingWeapon.Remove(tempCForNearest);
+                OutterDamagingWeapon.Insert(0, tempCForNearest);
+            }
+        }
+
+        for (int i = 0; i < farEnemies.Count; i++)
+        {
+            if (farEnemies[i] != null)
+            {
+                //_ClosestPointOnBounds = outterEnemies[i].ClosestPointOnBounds(transform.position);
+                float dis = Vector3.Distance(farEnemies[i].transform.position, gameObject.transform.position);
+                if (dis <= sensor_radius*2/3 && dis > sensor_radius*1/3)
+                    midEnemies.Add(farEnemies[i]);
+                if (dis <= sensor_radius * 1 / 3)
+                    innerEnemies.Add(farEnemies[i]);
+            }
+        }
+        
+        for (int i = 0; i < innerEnemies.Count; i++)
+            farEnemies.Remove(innerEnemies[i]);
+        for (int i = 0; i < midEnemies.Count; i++)
+            farEnemies.Remove(midEnemies[i]);
+
+        for (int i = 0; i < OutterDamagingWeapon.Count; i++)
+        {
+            if (OutterDamagingWeapon[i] != null)
+            {
+                //_ClosestPointOnBounds = outterEnemies[i].ClosestPointOnBounds(transform.position);
+                if (Vector3.Distance(OutterDamagingWeapon[i].transform.position,gameObject.transform.position) < sensor_radius/3)//主观值。指近距离检测威胁是内环半径再加1
+                {
+                    NearbyDamagingWeapon.Add(OutterDamagingWeapon[i]);
+                }
+            }
+        }
+        for (int i = 0; i < NearbyDamagingWeapon.Count; i++)
+        {
+            OutterDamagingWeapon.Remove(NearbyDamagingWeapon[i]);
+        }
+    }
+
+    private float p1_to_me, p2_to_me;
+    private int horizontalDistanceCompare(Vector3 p1, Vector3 p2)
+    {
+        p1.y = gameObject.transform.position.y;
+        p1_to_me = (p1 - gameObject.transform.position).magnitude;
+
+        p2.y = gameObject.transform.position.y;
+        p2_to_me = (p2 - gameObject.transform.position).magnitude;
+
+        if (p1_to_me > p2_to_me)
+        {
+            return 1;
+        }
+        if (p1_to_me < p2_to_me)
+        {
+            return -1;
+        }
+        return 0;
+    }
+
+    private Collider FindNearestCollider(List<Collider> list)
+    {
+        if (list == null || list.Count == 0)
+            return null;
+        else if (list[0] == null)
+        {
+            return null;
+        }
+        
+        if (list.Count == 1)
+            return list[0];
+
+        Collider target = list[0];
+        for (int i = 1; i < list.Count; i++)
+        {
+            if (list[i] == null)
+                continue;
+            if (horizontalDistanceCompare(target.transform.position, list[i].transform.position) == 1)
+            {
+                target = list[i];
+            }
+        }
+        return target;
+    }
+
+    public bool allyBetweenSelfAndEnemy(float judgmentRange)
+    {
+        getEnemiesByDistance(true);
+        getAlliesAndSelfByDistance(true);
+
+        if (EnemiesByDistance.Count > 0 && AlliesByDistance.Count > 1)
+        {
+            float disToNearestEnemy2j, disToNearestAlly2j;
+            disToNearestEnemy2j = horizontalDistanceCompare(EnemiesByDistance[0].transform.position, gameObject.transform.position);
+            disToNearestAlly2j = horizontalDistanceCompare(AlliesByDistance[1].transform.position, gameObject.transform.position);
+            if (disToNearestEnemy2j >= disToNearestAlly2j && disToNearestEnemy2j < Mathf.Pow(judgmentRange, 2))
+            {
+                if (Vector3.Angle((EnemiesByDistance[0].transform.position - gameObject.transform.position), (AlliesByDistance[1].transform.position - gameObject.transform.position)) < 40)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, sensor_radius);
+    }
+}
+
+//public List<Collider> getInnerRangeWallColliders() //这个函数的调用必须要确保每次都在update函数之后
+//{
+//    wallTs.Clear();
+//    if (_hits == null)
+//    {
+//        return wallTs;
+//    }
+//    foreach (Collider hit in this._hits)
+//    {
+//        if (hit != null)
+//        {
+//            if (hit.gameObject.layer == 13)
+//            {
+
+//                //_ClosestPointOnBounds = hit.ClosestPointOnBounds(transform.position);
+//                if ((hit.transform.position - transform.position).magnitude < innerSensorRadius)
+//                {
+//                    wallTs.Add(hit);
+//                    break;
+//                }
+
+//            }
+//        }
+//    }
+//    return wallTs;
+//}
+
+//public List<Collider> getMyTeammatesNearby()
+//{
+//    return teammatesC;
+//}
+
+//public void MyteamDetectionResultSortProcess()
+//{
+//    teammatesC = teamMatesHIts.ToList();
+//    if (teammatesC.Count > 1)
+//    {
+//        //OutterDamagingWeapon.Sort((a, b) => horizontalDistanceCompare(a.transform.position, b.transform.position));
+//        tempCForNearest = FindNearestCollider(teammatesC);
+//        if (tempCForNearest != null)
+//        {
+//            teammatesC.Remove(tempCForNearest);
+//            teammatesC.Insert(0, tempCForNearest);
+//        }
+//    }
+//}
+
+// What kinds of info we need from all the hits we get ?
+// 1.Other characters
+// 2.Weapons on damaging mode
+// 3.Working shield
+
+// 在这个函数中我们使用了大量getComponent函数，但实际上在新的分层机制下，这些东西可以回避掉。
+// 我们整个AI系统，策略上的一些判定靠的是DATAcente里那些，而这个地方的判定更多的来说是针对敌人近身情况下的一些应急性动作。
+// 也就是说，其实对getNearbyEnemyHealthBody这个函数的利用基本只局限于和近身敌人的距离判定一类。。。
+// 既然层的目的本来就是针对打击判定系统自身，那如果角色层上的collider的确不用来做伤害hitbox，何不直接在这种情况下把角色给设置成other层？
+//List<Collider> FocousingNearbyEnemyColliders;
+//public List<Collider> getNearbyEnemyColliders()
+//{
+//    FocousingNearbyEnemyColliders = new List<Collider>();
+//    foreach (Collider hit in this._hits)
+//    {
+//        if (hit != null)
+//        {
+//            if (enemyMeatLayers == (enemyMeatLayers | (1 << hit.gameObject.layer)))
+//            {
+//                FocousingNearbyEnemyColliders.Add(hit);
+//            }
+//        }
+//    }
+//    return FocousingNearbyEnemyColliders;
+//}

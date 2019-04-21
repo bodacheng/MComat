@@ -1,0 +1,556 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Linq;
+
+#if UNITY_EDITOR
+using UnityEngine.Windows;
+#endif
+
+public enum DebugMode : int
+{
+    resource_mode = 1,
+    ab_mode = 2
+}
+
+//这个Debugmanager其实是为了不浪费老版本企划造出的东西而创建的。因为这个debug版本是依靠xml战斗脚本来决定角色技能。
+//而xml脚本驱动这个东西在正式版本里已经不存在了。所以下面所有的加载角色函数，xml脚本都是读取resource。这个Debug模块能测试的只是角色自身构造以及特效。
+
+public class DebugManager : MonoBehaviour {
+
+    public CharsManager _CharSetManager;//0610 charsetmanger临时扮演数据库的作用
+    public NetFightScene _NetFightScene;
+    public CameraManager _CameraManager;//这个东西其实其他模块如果也拥有对其操作权的话，倒不会产生多大的问题
+
+    public BoundaryControllByGod _BoundaryControllByGod;
+
+    public DebugMode debugMode = DebugMode.ab_mode;
+    public void switchMode()
+    {
+        if (this.debugMode == DebugMode.ab_mode)
+        {
+            this.debugMode = DebugMode.resource_mode;
+            resouceModeOnTypeChanged();
+        }            
+        else
+            this.debugMode = DebugMode.ab_mode;
+    }
+
+    [Header("测试用机能代码。添加object去用的时候靠这些参数来生成角色")]
+    [Space(6)]
+    public GameObject debugCharPlacer;
+    public Dropdown type;
+    public InputField pretabName;
+    public Dropdown charsOfType;//new
+    public Dropdown tag_dropdown;
+    public InputField basicPackNameInput;//
+    public InputField AIScriptName;
+    public Dropdown AIScriptsOfType;//new 
+    public Dropdown ZokuseiDropDown;//new 
+    public InputField personalMagic;
+    public InputField AIlevelNum;
+    public Button _debugCharAddButton;
+    public Texture2D cursorTexture;
+    private float pressed_counter = 1f;
+    private bool create_chance = true;
+    public int debugModePlayerPlacementStep; // 0:没有放置任务，1:正在放置
+
+    public void resouceModeOnTypeChanged()
+    {
+        defaultPools.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type.options[type.value].text);
+
+        List<UnityEngine.Object> fightChars = Resources.LoadAll("charPretabs/"+ type.options[type.value].text).ToList();
+        List<UnityEngine.Object> AIScripts = Resources.LoadAll("AIScripts/" + type.options[type.value].text).ToList();
+
+        List<string> resourceNames = new List<string>();
+        foreach (UnityEngine.Object _one in fightChars)
+        {
+            resourceNames.Add(_one.name);
+        }
+        charsOfType.ClearOptions();
+        foreach (string Rname in resourceNames)
+        {
+            Dropdown.OptionData m_NewData = new Dropdown.OptionData();
+            m_NewData.text = Rname;
+            charsOfType.options.Add(m_NewData);
+        }
+
+        List<string> AISeriesNames = new List<string>();
+        foreach (UnityEngine.Object _one in AIScripts)
+        {
+            AISeriesNames.Add(_one.name);
+        }
+        AIScriptsOfType.ClearOptions();
+        foreach (string AIname in AISeriesNames)
+        {
+            Dropdown.OptionData m_NewData = new Dropdown.OptionData();
+            m_NewData.text = AIname;
+            AIScriptsOfType.options.Add(m_NewData);
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+        type.ClearOptions();
+        CharsManager.loadMonsterDataBaseFileByResource();
+        List<string> typeList = CharsManager._monstersConfigTable.getTypeList();
+
+        foreach (string typeName in typeList)//数据库引入后这个环节就要变化。
+        {
+            Dropdown.OptionData m_NewData = new Dropdown.OptionData();
+            m_NewData.text = typeName;
+            type.options.Add(m_NewData);
+        }
+
+        ZokuseiDropDown.ClearOptions();
+        Dropdown.OptionData m_NewZokuseiData1 = new Dropdown.OptionData();
+        m_NewZokuseiData1.text = "red";
+        Dropdown.OptionData m_NewZokuseiData2 = new Dropdown.OptionData();
+        m_NewZokuseiData2.text = "blue";
+        Dropdown.OptionData m_NewZokuseiData3 = new Dropdown.OptionData();
+        m_NewZokuseiData3.text = "green";
+        Dropdown.OptionData m_NewZokuseiData4 = new Dropdown.OptionData();
+        m_NewZokuseiData4.text = "dark";
+        Dropdown.OptionData m_NewZokuseiData5 = new Dropdown.OptionData();
+        m_NewZokuseiData5.text = "light";
+        ZokuseiDropDown.options.Add(m_NewZokuseiData1);
+        ZokuseiDropDown.options.Add(m_NewZokuseiData2);
+        ZokuseiDropDown.options.Add(m_NewZokuseiData3);
+        ZokuseiDropDown.options.Add(m_NewZokuseiData4);
+        ZokuseiDropDown.options.Add(m_NewZokuseiData5);
+
+        resouceModeOnTypeChanged();
+
+        if (_debugCharAddButton != null)
+        {
+            UnityEngine.Events.UnityAction action1 = () => { this.debugCharAddButton(); };
+            _debugCharAddButton.GetComponentInChildren<Button>().onClick.AddListener(action1);
+        }
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+    public void debugCharAddButton()
+    {
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);//这个是在你点了add按钮之后才有的。。。所以add按钮的函数和这个placingCharacter（）应该是两个
+        this.debugModePlayerPlacementStep = 1;
+    }
+
+    void debugAddCharUIStateReset()
+    {
+        this.debugModePlayerPlacementStep = 0;
+        pressed_counter = 1f;
+        create_chance = true;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
+
+    //这个应该是如果按了那个add按钮后，本程序每帧执行内容.
+    // 只依靠这个模块去实现点了add钮，就进入添加等待，点一下地图，生成角色结束添加等待。。这个应该是没有什么实现起来复杂的。但怕的是什么呢，就是进入了添加等待后产生某些例外让一些状态量卡在这个环节。。。
+    public void placingCharacter()
+    {
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            if (Input.touchCount > 0)
+            {
+                if (this.debugModePlayerPlacementStep == 1)
+                {
+                    if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                    {
+                        this.debugModePlayerPlacementStep = 3;
+                    }
+                }
+                if (this.debugModePlayerPlacementStep == 3)
+                {
+                    if (Input.GetTouch(0).phase == TouchPhase.Began)
+                    {
+                        this.debugModePlayerPlacementStep = 2;
+                    }
+                }
+
+                if (debugModePlayerPlacementStep == 2) // 其实这里面是没有包括按住屏幕但手指不滑动的情况 
+                {
+                    if (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)
+                    {
+                        if (create_chance)
+                        {
+                            int level = int.Parse(AIlevelNum.text);
+                            level = Mathf.Clamp(level, 1, 100);
+
+                            CharacterResourceInfo _CharacterResourceInfo = CharsManager._monstersConfigTable.RowToCharacterResourceInfo(
+                                CharsManager._monstersConfigTable.Find_realName(pretabName.text)
+                            );
+
+                            if (_CharacterResourceInfo == null)
+                            {
+                                debugAddCharUIStateReset();
+                                return;
+                            }
+
+                            if (_NetFightScene._SceneMode == SceneMode.netFight)
+                            {
+                                //_CharSetManager.CreateCharacterNet(_CharacterResourceInfo.prefabName,Script,decidePlace());
+                            }
+                            else if (_NetFightScene._SceneMode == SceneMode.localDebug)
+                            {
+                                TeamConfig teamConfig;
+                                if (tag_dropdown.options[tag_dropdown.value].text == "Player1")
+                                {
+                                    teamConfig = _CharSetManager.heroTeamConfig;
+                                }
+                                else
+                                {
+                                    teamConfig = _CharSetManager.EnemyTeamConfig;
+                                }
+
+                                zokusei Zokusei;
+                                switch (ZokuseiDropDown.options[ZokuseiDropDown.value].text)
+                                {
+                                    case "red":
+                                        Zokusei = zokusei.redMagic;
+                                        break;
+                                    case "blue":
+                                        Zokusei = zokusei.blueMagic;
+                                        break;
+                                    case "green":
+                                        Zokusei = zokusei.greenMagic;
+                                        break;
+                                    case "dark":
+                                        Zokusei = zokusei.darkMagic;
+                                        break;
+                                    case "light":
+                                        Zokusei = zokusei.lightMagic;
+                                        break;
+                                    default:
+                                        Zokusei = zokusei.lightMagic;
+                                        break;
+                                }
+
+                                if (debugMode == DebugMode.ab_mode)
+                                {
+                                    IDictionary<int,GameObject> teamDic = null;
+                                    int localID = -1;
+                                    if (teamConfig == _CharSetManager.heroTeamConfig)
+                                    {
+                                        localID = myModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count;
+                                        teamDic = myModelPool.Instance.ModelDicBasedOnPlayerLocalID;
+                                    }
+                                    if (teamConfig == _CharSetManager.EnemyTeamConfig)
+                                    {
+                                        localID = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID.Count;
+                                        teamDic = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID;
+                                    }
+
+                                    switch (defaultPools.Instance.ModelLoadingMode)
+                                    {
+                                        case ResourceLoadMode.CachAB:
+                                            StartCoroutine(
+                                                _CharSetManager.CreateCharacterFromABByCach(
+                                                    teamDic,
+                                                    localID,
+                                                    _CharacterResourceInfo.getASampleCharacterDataInfo(localID),
+                                                    AIScriptName.text,
+                                                    Zokusei,
+                                                    _CharacterResourceInfo.personalMagicPack,
+                                                    teamConfig.myTeam,
+                                                    decidePlace(), Quaternion.identity
+                                            ));
+                                            break;
+                                        case ResourceLoadMode.StreamingAssetAB:
+                                            StartCoroutine(
+                                                _CharSetManager.CreateCharacterFromABByStreamingAssets(
+                                                    teamDic,
+                                                    localID,
+                                                    _CharacterResourceInfo.getASampleCharacterDataInfo(localID),
+                                                    AIScriptName.text,
+                                                    Zokusei,
+                                                    _CharacterResourceInfo.personalMagicPack,
+                                                    teamConfig.myTeam,
+                                                    decidePlace(), Quaternion.identity
+                                            ));
+                                            break;
+                                    }
+                                }else{
+                                    StartCoroutine(
+                                        createCharByResourcePath(
+                                        type.options[type.value].text,
+                                        charsOfType.options[charsOfType.value].text,
+                                        basicPackNameInput.text,
+                                        AIScriptsOfType.options[AIScriptsOfType.value].text,
+                                        level,
+                                        Zokusei,
+                                         _CharacterResourceInfo.personalMagicPack,
+                                        teamConfig,
+                                        20000,
+                                        decidePlace(),
+                                        Quaternion.identity
+                                        ));
+                                }
+
+                                if (_CharacterResourceInfo == null)
+                                {
+                                  debugAddCharUIStateReset ();
+                                  return;
+                                }
+                            }
+                            create_chance = false;
+                        }
+                        else
+                        {
+                            pressed_counter -= Time.deltaTime;
+                            if (pressed_counter < 0f)
+                            {
+                                pressed_counter = 0.15f;
+                                create_chance = true;
+                            }
+                        }
+                    }
+                    else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                    {
+                        debugAddCharUIStateReset();
+                    }
+                }
+            }
+        }
+
+        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor ||
+            Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                this.debugModePlayerPlacementStep = 2;
+                if (debugModePlayerPlacementStep == 2)
+                {
+                    if (create_chance)
+                    {
+                        int level = int.Parse(AIlevelNum.text);
+                        if (_NetFightScene._SceneMode == SceneMode.netFight)
+                        {
+                            //_CharSetManager.CreateCharacterNet(_CharacterResourceInfo.prefabName,Script,decidePlace());
+                        }
+                        else if (_NetFightScene._SceneMode == SceneMode.localDebug)
+                        {
+                            TeamConfig teamConfig;
+                            if (tag_dropdown.options[tag_dropdown.value].text == "Player1")
+                            {
+                                teamConfig = _CharSetManager.heroTeamConfig;
+                            }
+                            else
+                            {
+                                teamConfig = _CharSetManager.EnemyTeamConfig;
+                            }
+
+                            zokusei Zokusei;
+                            switch (ZokuseiDropDown.options[ZokuseiDropDown.value].text)
+                            {
+                                case "red":
+                                    Zokusei = zokusei.redMagic;
+                                    break;
+                                case "blue":
+                                    Zokusei = zokusei.blueMagic;
+                                    break;
+                                case "green":
+                                    Zokusei = zokusei.greenMagic;
+                                    break;
+                                case "dark":
+                                    Zokusei = zokusei.darkMagic;
+                                    break;
+                                case "light":
+                                    Zokusei = zokusei.lightMagic;
+                                    break;
+                                default:
+                                    Zokusei = zokusei.lightMagic;
+                                    break;
+                            }
+
+                            if (debugMode == DebugMode.ab_mode)
+                            {
+                                IDictionary<int, GameObject> teamDic = null;
+                                int localID = -1;
+                                if (teamConfig == _CharSetManager.heroTeamConfig)
+                                {
+                                    localID = myModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count;
+                                    teamDic = myModelPool.Instance.ModelDicBasedOnPlayerLocalID;
+                                }
+                                if (teamConfig == _CharSetManager.EnemyTeamConfig)
+                                {
+                                    localID = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID.Count;
+                                    teamDic = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID;
+                                }
+
+                                CharacterDataInfo _CharacterDataInfo = new CharacterDataInfo();
+                                _CharacterDataInfo.localID = localID;
+                                _CharacterDataInfo.resource_num = charsOfType.value; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
+                                _CharacterDataInfo.level = level;
+                                _CharacterDataInfo.HP = 30; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
+                                _CharacterDataInfo.EXP = 0;
+                                _CharacterDataInfo._NineAndTwo = null;
+
+                                if (defaultPools.Instance.ModelLoadingMode == ResourceLoadMode.StreamingAssetAB)
+                                {
+                                    StartCoroutine(
+                                        _CharSetManager.CreateCharacterFromABByStreamingAssets(
+                                            teamDic,
+                                            localID,
+                                            _CharacterDataInfo,
+                                            AIScriptName.text,
+                                            Zokusei,
+                                            personalMagic.text,
+                                            teamConfig.myTeam,
+                                            decidePlace(), Quaternion.identity
+                                    ));
+                                }
+                                else if (defaultPools.Instance.ModelLoadingMode == ResourceLoadMode.CachAB)
+                                {
+                                    StartCoroutine(
+                                        _CharSetManager.CreateCharacterFromABByCach(
+                                            teamDic,
+                                            localID,
+                                            _CharacterDataInfo,
+                                            AIScriptName.text,
+                                            Zokusei,
+                                            personalMagic.text,
+                                            teamConfig.myTeam,
+                                            decidePlace(), Quaternion.identity
+                                    ));
+                                }
+                            }else{
+                                StartCoroutine(
+                                    createCharByResourcePath(
+                                    type.options[type.value].text,
+                                    charsOfType.options[charsOfType.value].text,
+                                    basicPackNameInput.text,
+                                    AIScriptsOfType.options[AIScriptsOfType.value].text,
+                                    level,
+                                    Zokusei,
+                                    personalMagic.text,
+                                    teamConfig,
+                                    2000,
+                                    decidePlace(),
+                                    new Quaternion(0, 0, 0, 0)
+                                ));
+                            }
+                        }
+                        create_chance = false;
+                    }
+                    else
+                    {
+                        pressed_counter -= Time.deltaTime;
+                        if (pressed_counter < 0f)
+                        {
+                            pressed_counter = 0.2f;
+                            create_chance = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (!Input.GetMouseButton(0))
+                {
+                    if (this.debugModePlayerPlacementStep == 2)
+                    {
+                        debugAddCharUIStateReset();
+                    }
+                }
+            }
+        }
+    }
+
+    // 通用系 但会针对网络和本地模式进行不同的处理。
+    //根据新的企划，AI模式和player模式的转化看起来不再是靠一个函数进行一个反转，因为从
+    //AI到player和从player到AI是完全不同的两个按钮
+    //原则上jueSeLiebiao模块应该完全负责这一类功能。就是说改造的方向甚至是想法让本张脚本里的focusingchar变量消失
+    public IEnumerator createCharByResourcePath(string type, string prefabName, string basicPackName,string AIScriptName, int AIlevel,
+                                                zokusei _zokusei,string personalMagicpath,
+                                                TeamConfig TeamConfig, int hp, Vector3 position, Quaternion rotation)
+    {
+        GameObject fightChar = Resources.Load("charPretabs/" + type + "/" + prefabName) as GameObject;
+        if (fightChar == null)
+            yield break;
+
+        TextAsset AIScriptPrefab = Resources.Load("AIScripts/" + type + "/" + AIScriptName) as TextAsset;
+        if (AIScriptPrefab == null)
+            yield break;
+
+        if (TeamConfig != null)
+        {
+            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getOrLoadRuntimeAnimatorController(type);
+            //Debug.Log("角色"+ABResourceName+"读取了动画控制器"+ toLoadRuntimeAnimatorController);
+            //AssetBundle modelAsset = AssetBundle.LoadFromFile(Application.dataPath + "/StreamingAssets/charPretabs/" + type +"/" + ABResourceName);
+            if (toLoadRuntimeAnimatorController == null)
+            {
+                defaultPools.Instance.FightLoadErrors.Add(type + "控制器读取失败");
+                yield break;
+            }
+
+            AI_DATA_CENTER aI_DATA_CENTER;
+            if (fightChar != null)
+            {
+                aI_DATA_CENTER = fightChar.GetComponent<AI_DATA_CENTER>();
+                if (aI_DATA_CENTER)
+                {
+                    fightChar.GetComponent<Animator>().runtimeAnimatorController = toLoadRuntimeAnimatorController;
+                }
+            }
+            else
+            {
+                yield break;
+            }
+
+            /// ///////////////////////////////////////////////////////
+            GameObject one_char = Instantiate(fightChar, position, new Quaternion(0, 0, 0, 0));
+            one_char.transform.rotation = rotation;
+            // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
+            aI_DATA_CENTER = one_char.GetComponent<AI_DATA_CENTER>();
+            _CharSetManager.addNewMemberToTeamMemberDic(aI_DATA_CENTER, TeamConfig.myTeam);
+            CharacterDataInfo _CharacterDataInfo = new CharacterDataInfo();
+            _CharacterDataInfo.localID = 0;
+            _CharacterDataInfo._NineAndTwo = new NineAndTwo();//以脚本测试技能。暂不需要九宫格里有什么内容
+            aI_DATA_CENTER._CharacterDataInfo = _CharacterDataInfo;
+            aI_DATA_CENTER._playerBattleInfo.MaxHP = hp;
+            yield return (aI_DATA_CENTER.step1Initialize(type, basicPackName,personalMagicpath));
+            yield return (aI_DATA_CENTER.step2InitializeByResourceFolder(type, AIScriptPrefab, AIlevel, _zokusei, personalMagicpath));
+            aI_DATA_CENTER.step3Initialize(TeamConfig, new playerBattleInfo());
+        }
+        else
+        {
+            defaultPools.Instance.FightLoadErrors.Add("标签设置错误");
+            yield return null;
+        }
+    }
+
+    public List<string> getPathsUnderResourcePath(string resourePath)
+    {
+        List<string> list = new List<string>();
+        var directries = System.IO.Directory.GetDirectories(resourePath);
+        foreach (var directry in directries)
+        {
+            list.Add(directry);
+        }
+        return list;
+    }
+
+    public Vector3 decidePlace()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray();
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            ray = CameraManager._camera.ScreenPointToRay(Input.mousePosition);
+        }
+        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor ||
+            Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            ray = CameraManager._camera.ScreenPointToRay(Input.mousePosition);
+        }
+
+        if (Physics.Raycast(ray, out hit))
+            return hit.point;
+        return new Vector3(0, 0, 0);
+    }
+}

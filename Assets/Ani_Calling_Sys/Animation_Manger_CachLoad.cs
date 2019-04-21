@@ -1,0 +1,252 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using System.Linq;
+
+public partial class Animation_Manger : MonoBehaviour
+{
+    /// <summary>
+    /// CachVersion
+    /// </summary>
+    /// <returns>The basic personal anims.</returns>
+    /// <param name="animPath">Animation path.</param>
+    /// <param name="basicPackName">Basic pack name.</param>
+    /// <param name="hurtPackName">Hurt pack name.</param>
+    /// <param name="toLoadSkillAnimsNames">To load skill anims names.</param>
+    public IEnumerator preloadBasicPersonalAnims(string animPath, string basicPackName)
+    {
+        yield return (defaultPools.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL + "/animClips/"+ animPath, 
+                                                                        "BasicPack/"+ animPath +"/" + basicPackName,
+                                                                        basicPackName));
+        List<AnimationClip> basicAnims = defaultPools.Instance.getAnimationPack("BasicPack/"+ animPath + "/"+ basicPackName);
+
+        toLoadAnims = new Dictionary<string, AnimationClip>();
+
+        if (basicAnims != null)
+        {
+            foreach (AnimationClip _AnimationClip in basicAnims)
+            {
+                if (_AnimationClip.name == "rush")
+                {
+                    if (toLoadAnims.ContainsKey("rush"))
+                    {
+                        toLoadAnims["rush"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "block")
+                {
+                    if (toLoadAnims.ContainsKey("block"))
+                    {
+                        toLoadAnims["block"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "block_break")
+                {
+                    if (toLoadAnims.ContainsKey("block_break"))
+                    {
+                        toLoadAnims["block_break"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "zhuangbi")
+                {
+                    if (toLoadAnims.ContainsKey("zhuangbi"))
+                    {
+                        toLoadAnims["zhuangbi"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "controlled")
+                {
+                    if (toLoadAnims.ContainsKey("controlled"))
+                    {
+                        toLoadAnims["controlled"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("controlled", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "rush")
+                {
+                    if (toLoadAnims.ContainsKey("rush"))
+                    {
+                        toLoadAnims["rush"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "dash")
+                {
+                    if (toLoadAnims.ContainsKey("dash"))
+                    {
+                        toLoadAnims["dash"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "rushback")
+                {
+                    if (toLoadAnims.ContainsKey("rushback"))
+                    {
+                        toLoadAnims["rushback"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", _AnimationClip));
+                    }
+                }
+                if (_AnimationClip.name == "victory")
+                {
+                    if (toLoadAnims.ContainsKey("victory"))
+                    {
+                        toLoadAnims["victory"] = _AnimationClip;
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("victory", _AnimationClip));
+                    }
+                }
+            }
+        }
+
+        animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
+
+        if (basicAnims != null)
+        {
+            foreach (AnimationClip _AnimationClip in basicAnims)
+            {
+                if (_AnimationClip.name == "idle")
+                {
+                    if (animatorOverride["idle"])
+                        animatorOverride["idle"] = _AnimationClip;
+                }
+                if (_AnimationClip.name == "walk")
+                {
+                    if (animatorOverride["walk"])
+                        animatorOverride["walk"] = _AnimationClip;
+                }
+                if (_AnimationClip.name == "run")
+                {
+                    if (animatorOverride["run"])
+                        animatorOverride["run"] = _AnimationClip;
+                }
+                if (_AnimationClip.name == "air")
+                {
+                    if (animatorOverride["air"])
+                        animatorOverride["air"] = _AnimationClip;
+                }
+            }
+        }
+
+        Animator.runtimeAnimatorController = animatorOverride;// 622！！！！！
+        ////////////    以上内容为个性化动画片段对base层基础动画的覆盖   /////////////
+    }
+
+    //这个函数的改造方向：由从服务器下载的来的包决定四大类攻击动作的列表，因为四大类动作都是每个动画片段自成一个包
+    //本函数的改造方向是所有基础类动作全部从某个包里读取。
+    //主意看参数toLoadSkillAnimsNames，这些只是技能类key的名字
+    //另外，本模块现在肩负起提前构建对象池的任务。就是所有的hurtobject。这样一来这个模块现在是和BO_E模块产生密切关系
+    public IEnumerator preloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, zokusei _zokusei)
+    {
+        if (toLoadSkillAnimsNames != null)
+        {
+            foreach (string anim_name in toLoadSkillAnimsNames)
+            {
+                yield return preloadPersonalAnim(url,type, anim_name, personalMagic, _zokusei);
+            }
+        }
+    }
+
+    public IEnumerator preloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, zokusei _zokusei)
+    {
+        if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
+        {
+            yield break;
+        }
+    
+        yield return (defaultPools.Instance.LoadAnimationClipFromCachAndPutItIntoDic(url, type + "/skill/" + toLoadSkillAnimName, toLoadSkillAnimName));
+        _clip = defaultPools.Instance.getAnimationClip(type + "/skill/" + toLoadSkillAnimName);
+        if (_clip != null)
+        {
+            if (!toLoadAnims.ContainsKey(toLoadSkillAnimName))
+            {
+                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(toLoadSkillAnimName, _clip));
+                foreach (AnimationEvent e in _clip.events)
+                {
+                    if (e.functionName == "MagicForward")
+                    {
+                        yield return (defaultPools.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                    }
+                    if (e.functionName == "PrepareOneMagic")
+                    {
+                        yield return (defaultPools.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                    }
+                    if (e.functionName == "bullet_shoot_from_body_part")
+                    {
+                        switch (e.intParameter)
+                        {
+                            case 1:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                break;
+                            case 2:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
+                                break;
+                            case 3:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
+                                break;
+                            default:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                break;
+                        }
+                    }
+                    if (e.functionName == "blastAttack")
+                    {
+                        switch (e.intParameter)
+                        {
+                            case 0:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
+                                break;
+                            default:
+                                yield return (defaultPools.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                break;
+                        }
+                    }
+                    if (e.functionName == "playSoundOnce")
+                    {
+                        yield return (defaultPools.Instance.LoadAudioClipFromCachAndPutItIntoDic(url,"effects", e.stringParameter));
+                    }
+                }
+            }
+        }
+        else
+        {
+            defaultPools.Instance.FightLoadErrors.Add(toLoadSkillAnimName + "动作包有问题，无法从中加载动画片段");
+            Debug.Log(toLoadSkillAnimName + "动作包有问题，无法从中加载动画片段");
+        }
+    }
+}

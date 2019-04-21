@@ -1,0 +1,308 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public partial class BO_Marker_Manager : MonoBehaviour {
+
+    private BO_Health _Raw_Target_Instance; //A single target which was hit.
+    private BO_Health _BO_Health;
+    private BO_Hitbox _BO_Hitbox;
+    private Vector3 _Direction;
+    private Vector3 _StartPoint;
+    private List<Collider> BallDetectHitPool;
+    private BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
+
+    private void DetectProcess()
+    {
+        hitsOnHealthBody = new List<hitOnHealthBody>();
+        if (_markers == null)
+        {
+            return;
+        }
+        for (int i = 0; i < _markers.Length; i++)
+        {
+            if (_markers[i].HitCheck())
+            {
+                if (_markers[i].mode == hit_detection_mode.trail_detect)
+                {
+                    if (traditionalDefendMode)
+                    {
+                        for (int hit_target_index = 0; hit_target_index < _markers[i]._hits.Length; hit_target_index++)
+                        {
+                            if (this.teamConfig != null)
+                            {
+                                if (this.teamConfig.enemyWeaponLayerMask ==
+                                    (this.teamConfig.enemyWeaponLayerMask | 1 << _markers[i]._hits[hit_target_index].collider.gameObject.layer))
+                                {
+                                    WeaponEnergyExaust(_markers[i]._hits[hit_target_index].point,
+                                        _markers[i]._hits[hit_target_index].collider.transform.rotation);
+                                }
+                            }
+    
+                            if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << _markers[i]._hits[hit_target_index].collider.gameObject.layer)
+                               &&
+                                !_Shields_Hit.Contains(_markers[i]._hits[hit_target_index].collider.transform)
+                               )
+                            {
+                                TheS = _markers[i]._hits[hit_target_index].collider.gameObject.GetComponent<BO_Shield>();
+                                if (TheS == null || TheS._ParentHealth == null)
+                                {
+                                    Debug.Log("防御盾构造严重错误");
+                                    break;
+                                }
+    
+                                if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
+                                    && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
+                                    && _Used_Targets.Contains(TheS._ParentHealth.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
+                                                                                                          //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                {
+                                    if (TheS._AdvancedShieldDetection)
+                                    {
+                                        dh = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldBackSpot.transform.position), 2);//这第二个参数也就是被攻击方肉体的transform
+                                        ds1 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldCenterSpot.transform.position), 2);  //center
+                                        ds2 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot1.transform.position), 2);  //Top
+                                        ds3 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot2.transform.position), 2);  //Top Left
+                                        ds4 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot3.transform.position), 2);  //Top Right
+                                        ds5 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot4.transform.position), 2);  //Bottom
+                                        ds6 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot5.transform.position), 2);  //Bottom Left
+                                        ds7 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot6.transform.position), 2);  //Bottom Right
+                                        ds8 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot7.transform.position), 2);  //Right
+                                        ds9 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot8.transform.position), 2);  //Left
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldBackSpot.transform.position - _WeaponHolderCenter.position, Color.green, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldCenterSpot.transform.position - _WeaponHolderCenter.position, Color.red, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot7.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot1.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot2.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot3.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot4.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot6.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot5.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                       //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot8.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                    }
+                                    if (((dh > ds1) || (dh > ds2) || (dh > ds3) || (dh > ds4) || (dh > ds5) || (dh > ds6) || (dh > ds7) || (dh > ds8) || (dh > ds9)) || (TheS._AdvancedShieldDetection == false))
+                                    {
+                                        //飞行道具一律不需要开启_AdvancedShieldDetection功能，因为这个功能本身针对的就是近距离一方对另一方发起大幅度动作的挥舞攻击时攻击区域太广阔所造成的防御失灵，
+                                        //就比如说一个弧形攻击，打中盾牌的瞬间这个弧形攻击动作还是会继续，那攻击点由于动画问题穿透了对方的盾牌打到对方身体话，就和我们对攻击防御演出的认识相违背了。
+                                        _Shields_Hit.Add(TheS.transform);
+                                        HitShield = true;
+                                        _Used_Targets.Add(TheS._ParentHealth.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
+    
+                                        _ShiledHitPositions.Add(_markers[i]._hits[hit_target_index].point);
+                                        if (_ShiledHitPositions.Count > 0)
+                                            TheS.passHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
+                                        _ShiledHitPositions.Clear();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    //以上全部内容都是针对射线检测的防御判断
+
+                    for (int hit_target_index = 0; hit_target_index < _markers[i]._hits.Length; hit_target_index++)
+                    {
+                        if (_markers[i]._hits[hit_target_index].collider.gameObject.layer == 13
+                            && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
+                        {
+                            _Used_Targets.Add(_markers[i]._hits[hit_target_index].collider.transform);
+                            HitWall = true;
+                            _wallHitPositions.Add(_markers[i]._hits[hit_target_index].point);
+                        }
+
+                        //  这个环节本来有个波对波的问题 但我们给删除了。因为感觉不必要 
+                        //_Raw_Target_Instance这个里面全是mainhealth，就是mainhealth，不是含着mainhealth的transform
+                        //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
+                        //if (a_target.tag == _targetTag && _Targets_Raw_Hit.Contains(a_target) == false && _Used_Targets.Contains(a_target) == false)
+                        _BO_Health = _markers[i]._hits[hit_target_index].collider.GetComponent<BO_Health>();
+                        _BO_Hitbox = _markers[i]._hits[hit_target_index].collider.GetComponent<BO_Hitbox>();
+
+                        if (_Targets_Raw_Hit.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false
+                            &&
+                            _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
+                        {
+                            //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
+                            if (_BO_Health != null && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
+                            {
+                                if (_BO_Health.collider_on_health)
+                                {
+                                    HitFlesh = true;
+                                    _Raw_Target_Instance = _BO_Health;
+                                }
+                            }
+                            //方式2：hitbox模式
+                            if (_BO_Hitbox != null)
+                            {
+                                if (_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform) == false) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                {
+                                    HitFlesh = true;
+                                    _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                    _Used_Targets.Add(_BO_Hitbox.transform);
+                                }
+                            }
+
+                            if (_Raw_Target_Instance != null)
+                            {
+                                _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
+                                _Direction = _markers[i]._tempPos;
+                                _StartPoint = _markers[i]._hits[hit_target_index].point;
+                                _StartPoint = _StartPoint + (_markers[i]._hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
+                                //_StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
+                                hitsOnHealthBody.Add(new hitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction));
+                            }
+                            if (HitFlesh && _Raw_Target_Instance != null)
+                            {
+                                if (_Raw_Target_Instance.getShield() != null)
+                                {
+                                    _Used_Targets.Add(_Raw_Target_Instance.getShield().transform);
+                                    //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                    //因此如果一轮攻击内敌人受伤了，也就再不用研究他能不能防御住所受攻击了。
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (_markers[i].mode == hit_detection_mode.ball_detect) //其实是针对球形检测的特殊形式把下面那个大for循环按照marker里的BallDetectHitPool重新循环跑了一次
+                {
+                    BallDetectHitPool = _markers[i].getBallDetectHitPool();
+                    if (BallDetectHitPool != null)
+                    {
+                        if (traditionalDefendMode)
+                        {               
+                            for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
+                            {
+                                if (this.teamConfig != null)
+                                {
+                                    if (this.teamConfig.enemyWeaponLayerMask ==
+                                        (this.teamConfig.enemyWeaponLayerMask | 1 << BallDetectHitPool[hit_target_index].gameObject.layer))
+                                    {
+                                        WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position,
+                                                           BallDetectHitPool[hit_target_index].transform.rotation);
+                                    }
+                                }
+    
+                                if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << BallDetectHitPool[hit_target_index].gameObject.layer)
+                                   &&
+                                    !_Shields_Hit.Contains(BallDetectHitPool[hit_target_index].transform))
+                                {
+                                    TheS = BallDetectHitPool[hit_target_index].gameObject.GetComponent<BO_Shield>();
+                                    if (TheS == null)
+                                    {
+                                        Debug.Log("防御盾构造严重错误");
+                                        break;
+                                    }
+    
+                                    if (TheS._ParentHealth == null)
+                                    {
+                                        break;
+                                    }
+    
+                                    if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
+                                        && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
+                                        && _Used_Targets.Contains(TheS._ParentHealth.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
+                                    {
+                                        if (TheS._AdvancedShieldDetection)
+                                        {
+                                            dh = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldBackSpot.transform.position), 2);//这第二个参数也就是被攻击方肉体的transform
+                                            ds1 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldCenterSpot.transform.position), 2);  //center
+                                            ds2 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot1.transform.position), 2);  //Top
+                                            ds3 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot2.transform.position), 2);  //Top Left
+                                            ds4 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot3.transform.position), 2);  //Top Right
+                                            ds5 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot4.transform.position), 2);  //Bottom
+                                            ds6 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot5.transform.position), 2);  //Bottom Left
+                                            ds7 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot6.transform.position), 2);  //Bottom Right
+                                            ds8 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot7.transform.position), 2);  //Right
+                                            ds9 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot8.transform.position), 2);  //Left
+                                        }
+                                        if (((dh > ds1) || (dh > ds2) || (dh > ds3) || (dh > ds4) || (dh > ds5) || (dh > ds6) || (dh > ds7) || (dh > ds8) || (dh > ds9)) || (TheS._AdvancedShieldDetection == false))
+                                        {
+                                            //飞行道具一律不需要开启_AdvancedShieldDetection功能，因为这个功能本身针对的就是近距离一方对另一方发起大幅度动作的挥舞攻击时攻击区域太广阔所造成的防御失灵，
+                                            //就比如说一个弧形攻击，打中盾牌的瞬间这个弧形攻击动作还是会继续，那攻击点由于动画问题穿透了对方的盾牌打到对方身体话，就和我们对攻击防御演出的认识相违背了。
+                                            _Shields_Hit.Add(TheS.transform);
+                                            HitShield = true;
+                                            _Used_Targets.Add(TheS._ParentHealth.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
+    
+                                            _ShiledHitPositions.Add(BallDetectHitPool[hit_target_index].ClosestPoint(_markers[i].transform.position));//ClosestPointOnBounds
+                                            if (_ShiledHitPositions.Count > 0)
+                                                TheS.passHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
+                                            _ShiledHitPositions.Clear();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
+                        {
+                            if (BallDetectHitPool[hit_target_index].gameObject.layer == 13
+                                && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
+                            {
+                                _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
+                                HitWall = true;
+                                Vector3 _wallHitPoint = BallDetectHitPool[hit_target_index].ClosestPoint(_markers[i].transform.position);//ClosestPointOnBounds
+                                _wallHitPositions.Add(_wallHitPoint);
+                            }
+
+                            _BO_Health = BallDetectHitPool[hit_target_index].GetComponent<BO_Health>();
+                            _BO_Hitbox = BallDetectHitPool[hit_target_index].GetComponent<BO_Hitbox>();
+
+                            if (_Targets_Raw_Hit.Contains(BallDetectHitPool[hit_target_index].transform) == false &&
+                                _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
+                            {
+                                //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
+                                if (_BO_Health != null && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
+                                {
+                                    if (_BO_Health.collider_on_health)
+                                    {
+                                        HitFlesh = true;
+                                        _Raw_Target_Instance = _BO_Health;
+                                    }
+                                }
+                                //方式2：hitbox模式
+                                if (_BO_Hitbox != null)
+                                {
+                                    if (_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform) == false) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                    {
+                                        HitFlesh = true;
+                                        _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                        _Used_Targets.Add(_BO_Hitbox.transform);
+                                    }
+                                }
+
+                                if (_Raw_Target_Instance != null)
+                                {
+                                    _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
+                                    _Direction = _markers[i]._tempPos;
+
+                                    //_StartPoint = 
+                                    //    BallDetectHitPool[hit_target_index].
+                                    //   ClosestPointOnBounds(_markers[i].transform.position);//这个地方不能用ClosestPoint。这里存在unity官方bug。
+                                    //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;//为了打击特效看起来更接近肉体 向里切一下。
+
+                                    // 9.4 日comment out了以上，做了以下更改
+                                    Vector3 fromMarkerToHit = BallDetectHitPool[hit_target_index].transform.position - _markers[i].transform.position;
+                                    _StartPoint = _markers[i].transform.position + fromMarkerToHit.normalized * _markers[i].radius / 2;//我是觉得离攻击体近更稳健些
+
+                                    //_StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
+                                    //如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
+                                    hitsOnHealthBody.Add(new hitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction));
+                                }
+                                if (HitFlesh && _Raw_Target_Instance != null)
+                                {
+                                    if (_Raw_Target_Instance.getShield() != null)
+                                    {
+                                        _Used_Targets.Add(_Raw_Target_Instance.getShield().transform);
+                                        //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                        //因此如果一轮攻击内敌人受伤了，也就再不用研究他能不能防御住所受攻击了。
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            _Raw_Target_Instance = null;
+        }
+        _Targets_Raw_Hit.Clear();//这个列表的各种contains判断是为了防止一个武器单位的多个markers重复打中健康体。一个marker一帧内不会判断击中同一个健康体两次
+    }
+}
