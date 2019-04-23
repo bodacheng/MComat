@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6196275516480215045}
   - component: {fileID: 6196275516480215044}
   m_Layer: 5
-  m_Name: darkMagic 1
+  m_Name: redMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 6fdddff0410ca6d409c52b8c2c5c6bab, type: 2}
+  m_Material: {fileID: 2100000, guid: 114f321c86931e748a754d8eecc01b8d, type: 2}
   m_Color: {r: 1, g: 0, b: 0.06666667, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
