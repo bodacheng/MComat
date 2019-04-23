@@ -103,19 +103,19 @@ public class zokuseiButtonEffectsGroup
                 break;
         }
         
-        GameObject buttonslot = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
-        GameObject normal = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;
-        GameObject EX1 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/EX1", typeof(GameObject)) as GameObject;
-        GameObject EX2 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/EX2", typeof(GameObject)) as GameObject;
-        GameObject EX3 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/EX3", typeof(GameObject)) as GameObject;
-        GameObject Defend = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/defend", typeof(GameObject)) as GameObject;
-        GameObject Rush = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/rush", typeof(GameObject)) as GameObject;
-        GameObject refresh = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/refresh", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab0 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab1 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab2 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab3 = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
-        GameObject pressingExplosionPretab = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
+        GameObject buttonslot = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
+        GameObject normal = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;
+        GameObject EX1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX1", typeof(GameObject)) as GameObject;
+        GameObject EX2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX2", typeof(GameObject)) as GameObject;
+        GameObject EX3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX3", typeof(GameObject)) as GameObject;
+        GameObject Defend = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/defend", typeof(GameObject)) as GameObject;
+        GameObject Rush = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/rush", typeof(GameObject)) as GameObject;
+        GameObject refresh = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/refresh", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPretab1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPretab2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPretab3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
+        GameObject pressingExplosionPretab = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
 
         attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
         fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();

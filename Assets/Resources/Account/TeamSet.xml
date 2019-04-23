@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<positionLocalCharKeySet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PosNumsWithLocalKeys>
+    <PosNumWithLocalKey>
+      <posNum>0</posNum>
+      <LocalID>3</LocalID>
+    </PosNumWithLocalKey>
+    <PosNumWithLocalKey>
+      <posNum>1</posNum>
+      <LocalID>0</LocalID>
+    </PosNumWithLocalKey>
+    <PosNumWithLocalKey>
+      <posNum>2</posNum>
+      <LocalID>4</LocalID>
+    </PosNumWithLocalKey>
+    <PosNumWithLocalKey>
+      <posNum>3</posNum>
+      <LocalID>2</LocalID>
+    </PosNumWithLocalKey>
+  </PosNumsWithLocalKeys>
+</positionLocalCharKeySet>

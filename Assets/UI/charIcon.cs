@@ -19,25 +19,34 @@ public class charIcon : MonoBehaviour {
     {
         frames = new Dictionary<zokusei, Sprite>();
 
-        Sprite frameobject_dark = Resources.Load("iconframes/1") as Sprite;
-        Sprite frameobject_blue = Resources.Load("iconframes/1") as Sprite;
-        Sprite frameobject_red = Resources.Load("iconframes/2") as Sprite;
-        Sprite frameobject_light = Resources.Load("iconframes/2") as Sprite;
-        Sprite frameobject_green = Resources.Load("iconframes/1") as Sprite;
-        Sprite frameobject_null = Resources.Load("iconframes/0") as Sprite;
+        Sprite frameobject_dark = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
+        Sprite frameobject_blue = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
+        Sprite frameobject_red = Resources.Load("essentialUIElements/iconframes/2") as Sprite;
+        Sprite frameobject_light = Resources.Load("essentialUIElements/iconframes/2") as Sprite;
+        Sprite frameobject_green = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
+        Sprite frameobject_null = Resources.Load("essentialUIElements/iconframes/0") as Sprite;
 
-        frames.Add(zokusei.blueMagic,frameobject_blue);
-        frames.Add(zokusei.redMagic,frameobject_red);
-        frames.Add(zokusei.greenMagic,frameobject_green);
-        frames.Add(zokusei.lightMagic,frameobject_light);
-        frames.Add(zokusei.darkMagic,frameobject_dark);
-        frames.Add(zokusei.Null,frameobject_null);
+        if(frameobject_blue)
+            frames.Add(zokusei.blueMagic,frameobject_blue);
+        if(frameobject_red)
+            frames.Add(zokusei.redMagic,frameobject_red);
+        if(frameobject_green)
+            frames.Add(zokusei.greenMagic,frameobject_green);
+        if(frameobject_light)
+            frames.Add(zokusei.lightMagic,frameobject_light);
+        if(frameobject_dark)
+            frames.Add(zokusei.darkMagic,frameobject_dark);
+        if(frameobject_null)
+            frames.Add(zokusei.Null,frameobject_null);
     }
 
     public void changeIcon(Sprite _Sprite,zokusei zokusei)
     {
-        frame.sprite = frames[zokusei];
-        
+        frame.transform.localScale = Vector3.one;
+        Icon.transform.localScale = Vector3.one * 0.75f;
+        frame.transform.SetSiblingIndex(3);
+        Icon.transform.SetSiblingIndex(4);
+
         var colors = iconButton.colors;
         switch (zokusei)
         {
@@ -83,10 +92,8 @@ public class charIcon : MonoBehaviour {
         else
             Icon.color = Color.white;
             
-        frame.transform.localScale = Vector3.one;
-        Icon.transform.localScale = Vector3.one * 0.75f;
-        frame.transform.SetSiblingIndex(3);
-        Icon.transform.SetSiblingIndex(4);
+        if (frames.ContainsKey(zokusei))
+            frame.sprite = frames[zokusei];                
     }
 
     public void decideIconSize(int mainMenuFocusing)

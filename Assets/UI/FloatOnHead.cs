@@ -94,7 +94,7 @@ public class FloatOnHead : MonoBehaviour
 		} else {
             FloatOnHead.focusingPosNum = TeamPositionNum;
             CharacterDataInfo target = _preparingScene.getCurrentOnSetCharInfoByPosNum(FloatOnHead.focusingPosNum);
-            _preparingScene._MemberDetail.SetMemberDetailSystemFocusingCharacter(target.localID);//确立focusing角色
+            _preparingScene._MemberDetail.SetMemberDetailSystemFocusingCharacter(target != null ? target.localID : -1);//确立focusing角色
             _preparingScene.trySwitchToStep(MainSceneStep.TeamEditMonsterDetail, true);
 		}
 	}
