@@ -181,26 +181,27 @@ public class SkillsPrintOut : MonoBehaviour {
     {
         CharacterResourceInfo _watchingCharacterResourceInfo = CharsManager.getCharacterResourceInfo(focusingResourceNum);
         //下面这一大片，在资源存在的情况下压根不应该运行        
-        switch (defaultPools.Instance.AnimationLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                yield return
-                    this._FocusingAnimationManger.preloadPersonalAnim
-                    (AssetBundleLoader.BundleURL,_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                yield return
-                    this._FocusingAnimationManger.preloadPersonalAnimStreamingAssetMode
-                    (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
-                break;
-            case ResourceLoadMode.Resource:
-                yield return
-                    this._FocusingAnimationManger.preloadPersonalAnimResourceMode
-                    (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
-                break;
-        }
+
         if (this._FocusingAnimationManger != null)
         {
+            switch (defaultPools.Instance.AnimationLoadingMode)
+            {
+                case ResourceLoadMode.CachAB:
+                    yield return
+                        this._FocusingAnimationManger.preloadPersonalAnim
+                        (AssetBundleLoader.BundleURL,_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                    break;
+                case ResourceLoadMode.StreamingAssetAB:
+                    yield return
+                        this._FocusingAnimationManger.preloadPersonalAnimStreamingAssetMode
+                        (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                    break;
+                case ResourceLoadMode.Resource:
+                    yield return
+                        this._FocusingAnimationManger.preloadPersonalAnimResourceMode
+                        (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                    break;
+            }
             _CameraManager.Assign_Camera(Camera_Mode_Num.keepTargetLeft, new List<Transform>() { _FocusingAnimationManger.gameObject.transform });
             this._FocusingAnimationManger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, keyname);
         }

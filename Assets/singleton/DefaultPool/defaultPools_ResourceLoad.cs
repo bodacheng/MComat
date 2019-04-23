@@ -89,6 +89,8 @@ public partial class defaultPools
     public GameObject GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform _setParent)
     {
         EffectPool = iniEffectsPool(resource_name, EffectsPath,2);
+        if (EffectPool == null)
+            return null;
         processingEffectObj = EffectPool.TryGetNextObject(Pos, Qua);
         if (_setParent != null)
         {

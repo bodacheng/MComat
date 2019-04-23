@@ -57,6 +57,8 @@ public class FloatOnHead : MonoBehaviour
 	void OnGUI() {
         if (_preparingScene == null)
             return;
+        if (_preparingScene.currentProcess == null)
+            return;
 		switch (_preparingScene.currentProcess.step)
 		{
 		    case MainSceneStep.TeamEditFront:
