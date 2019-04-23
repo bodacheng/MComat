@@ -1,12 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
-using System.Linq;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
 
 // 功能：
 // 1.读取所有攻击类型文件进行配置文件生成。

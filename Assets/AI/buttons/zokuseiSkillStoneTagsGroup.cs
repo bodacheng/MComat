@@ -60,10 +60,14 @@ public class zokuseiSkillStoneTagsGroup
         GameObject pressingExplosionPretab = Resources.Load("buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
         
         buttonEffectsSetsForSkillStoneBox = new Dictionary<EX, ParticleSystem>();
-        buttonEffectsSetsForSkillStoneBox.Add(EX.normal,Object.Instantiate(normal).GetComponent<ParticleSystem>());
-        buttonEffectsSetsForSkillStoneBox.Add(EX.EX1,Object.Instantiate(EX1).GetComponent<ParticleSystem>());
-        buttonEffectsSetsForSkillStoneBox.Add(EX.EX2,Object.Instantiate(EX2).GetComponent<ParticleSystem>());
-        buttonEffectsSetsForSkillStoneBox.Add(EX.EX3,Object.Instantiate(EX3).GetComponent<ParticleSystem>());
+        if (normal)
+            buttonEffectsSetsForSkillStoneBox.Add(EX.normal,Object.Instantiate(normal).GetComponent<ParticleSystem>());
+        if (EX1)
+            buttonEffectsSetsForSkillStoneBox.Add(EX.EX1,Object.Instantiate(EX1).GetComponent<ParticleSystem>());
+        if (EX2)
+            buttonEffectsSetsForSkillStoneBox.Add(EX.EX2,Object.Instantiate(EX2).GetComponent<ParticleSystem>());
+        if (EX3)
+            buttonEffectsSetsForSkillStoneBox.Add(EX.EX3,Object.Instantiate(EX3).GetComponent<ParticleSystem>());
     }
     
     public void refreshforbuttonForSkillStoneBox(EX eX,Vector3 pos)

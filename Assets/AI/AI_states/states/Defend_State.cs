@@ -102,7 +102,7 @@ public class Defend_State : AI_State
         this._Animator.SetFloat("speed", 0f);
         this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, defend_clip_name);
         _Rigidbody.drag = 20f;
-        block_time_counter = 0;
+        block_time_counter = 0.3f;
         if (this.shaderManager != null)
             this.shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);
         else
