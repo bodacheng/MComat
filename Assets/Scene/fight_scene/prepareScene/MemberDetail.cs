@@ -26,7 +26,7 @@ public class MemberDetail : MonoBehaviour {
     [Header("部下详细")]
     public Text focusingCharName;
     public Button expPlus;
-    public UIBulletBar ExpTiao;
+    //public UIBulletBar ExpTiao;
     public Text choosingCharLevel;
     public SkillsPrintOut _SkillsPrintOut;
     public RectTransform SkillShowT;

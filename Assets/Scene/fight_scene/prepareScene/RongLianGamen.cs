@@ -21,7 +21,7 @@ public class RongLianGamen : MonoBehaviour {
     [Header("RongLian——GUI")]
     [Space(5)]
     public Text RongLian_monsterName;
-    public UIBulletBar RongLianExpTiao;
+    //public UIBulletBar RongLianExpTiao;
     public Text RonglianChoosingAILevel;
     public Button ConfirmButton;
     public RectTransform RonglianMonsterBox;
@@ -97,7 +97,7 @@ public class RongLianGamen : MonoBehaviour {
         {
             RongLian_monsterName.gameObject.SetActive(true);
             RonglianChoosingAILevel.gameObject.SetActive(true);
-            RongLianExpTiao.gameObject.SetActive(true);
+            //RongLianExpTiao.gameObject.SetActive(true);
 
             CharacterResourceInfo _CharacterResourceInfo = CharsManager._monstersConfigTable.RowToCharacterResourceInfo(
                 CharsManager._monstersConfigTable.Find_ID(processingCharInfo.resource_num.ToString())
@@ -108,7 +108,7 @@ public class RongLianGamen : MonoBehaviour {
         }else{
             RongLian_monsterName.gameObject.SetActive(false);
             RonglianChoosingAILevel.gameObject.SetActive(false);
-            RongLianExpTiao.gameObject.SetActive(false);
+            //RongLianExpTiao.gameObject.SetActive(false);
             ConfirmButton.gameObject.SetActive(false);
             if (FaceToSky != null)
             {
@@ -167,7 +167,7 @@ public class RongLianGamen : MonoBehaviour {
         {
             this.RongLian_monsterName.text = null;
             this.RonglianChoosingAILevel.text = "";
-            RongLianExpTiao.fillAmount = 0f;
+            //RongLianExpTiao.fillAmount = 0f;
         }
 
         ConfirmButton.onClick.RemoveAllListeners();
