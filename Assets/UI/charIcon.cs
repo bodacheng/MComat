@@ -42,6 +42,12 @@ public class charIcon : MonoBehaviour {
 
     public void changeIcon(Sprite _Sprite,zokusei zokusei)
     {
+        if (frame == null || Icon == null)
+        {
+            Debug.Log("组件缺失");
+            return;
+        }
+
         frame.transform.localScale = Vector3.one;
         Icon.transform.localScale = Vector3.one * 0.75f;
         frame.transform.SetSiblingIndex(3);
