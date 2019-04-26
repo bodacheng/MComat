@@ -13,6 +13,20 @@ public partial class defaultPools
     // 正式版本游戏是根据脚本决定load哪些包从而构成字典的，不会产生load不用动画的问题
     public void prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(string type)
     {
+        if (!RuntimeAnimatorControllerIdic.ContainsKey(type))
+        {
+            RuntimeAnimatorController toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+            if (toLoadRuntimeAnimatorController != null)
+                RuntimeAnimatorControllerIdic.Add(type, toLoadRuntimeAnimatorController);
+        }else{
+            if (RuntimeAnimatorControllerIdic[type] == null)
+            {
+                RuntimeAnimatorController toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+                if (toLoadRuntimeAnimatorController != null)
+                    RuntimeAnimatorControllerIdic[type] = toLoadRuntimeAnimatorController;
+            }
+        }
+               
         List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();

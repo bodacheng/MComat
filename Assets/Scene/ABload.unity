@@ -435,10 +435,11 @@ MonoBehaviour:
   - PolygonalDragon
   - Rhino
   - tiger
-  CharacterConfigTextFile: {fileID: 0}
-  MonstersConfigFilePath: 
-  SkillConfigTextFile: {fileID: 0}
-  SkillConfigFilePath: 
+  CharacterConfigTextFile: {fileID: 4900000, guid: fe08723282fbc4807a3a07b90c1c693b,
+    type: 3}
+  MonstersConfigFilePath: MonstersConfig
+  SkillConfigTextFile: {fileID: 4900000, guid: 2378eb38c0e094c608a5b698fa8774fd, type: 3}
+  SkillConfigFilePath: skillsConfig
 --- !u!1 &366439742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerinfoReferenceMode: 1
-  ConfigFileLoadingMode: 3
+  ConfigFileLoadingMode: 1
   ModelLoadingMode: 3
   AnimationLoadingMode: 3
   MagicLoadingMode: 3

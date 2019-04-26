@@ -6,7 +6,7 @@ public partial class AssetBundleLoader : MonoBehaviour
 {
     private IEnumerator AnimationResourceDownLoad()
     {    
-        foreach (SkillConfigTable.Row row in skillConfigTable.rowList)
+        foreach (SkillConfigTable.Row row in MySkillStonesReader.skillConfigTable.rowList)
         {
             CachDownLoadMission _oneMission = new CachDownLoadMission("animClips/" + row.type + "/skills", row.keyName, 0f);
             DownLoadMissionDic.Add("animClips/" + row.type + "/skills/" + row.keyName, _oneMission);//本地读取每个技能的key也是这个key。

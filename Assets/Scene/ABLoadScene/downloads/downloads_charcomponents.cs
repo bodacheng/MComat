@@ -34,40 +34,12 @@ public partial class AssetBundleLoader : MonoBehaviour
             //这个地方还差个各个type的generic_controller包下载的问题。
             
             ////// 寻找对应type的animator //////////////////
-
-            continue;
-            
             RuntimeAnimatorController _RuntimeAnimatorController;
             defaultPools.Instance.RuntimeAnimatorControllerIdic.TryGetValue(keyValuePair.Key, out _RuntimeAnimatorController);
             if (_RuntimeAnimatorController == null)
             {
-                _loadingProcess = defaultPools.Instance.getABFromCach("animator/" + keyValuePair.Key, "generic_controller");
+                _loadingProcess = defaultPools.Instance.LoadAnimatorFromCache(AssetBundleLoader.BundleURL + "/animClips/"+ keyValuePair.Key + "/animator", keyValuePair.Key, "generic_controller");
                 yield return _loadingProcess;
-                if (_loadingProcess.Current != null)
-                    readingbundle = (AssetBundle)_loadingProcess.Current;
-                else
-                {
-                    Debug.Log("角色配置文件对应ab包读取失败");
-                    startupsucessed = false;
-                    yield break;
-                }
-                var resultObject = readingbundle.LoadAssetAsync<GameObject>("generic_controller");
-                yield return new WaitWhile(() => resultObject.isDone == false);
-                if (resultObject.asset != null)
-                    readingbundle.Unload(false);
-                else
-                {
-                    readingbundle.Unload(false);
-                    Debug.Log("角色配置文件提取失败");
-                    yield break;
-                }
-                _RuntimeAnimatorController = (RuntimeAnimatorController)resultObject.asset;
-                if (_RuntimeAnimatorController != null)
-                    defaultPools.Instance.RuntimeAnimatorControllerIdic.Add(keyValuePair.Key, _RuntimeAnimatorController);
-                else{
-                    Debug.Log("下载资料错误，未能找到"+keyValuePair.Key+"的animator对应包");
-                }
-                ///////////////////////////////////////////////
             }
         }
         yield return downloadingProcess();

@@ -160,6 +160,38 @@ public partial class defaultPools
         yield return readingBundle;
     }
     
+    public IEnumerator LoadAnimatorFromCache(string url_withoutfilename,string dic_key, string packABName)
+    {
+        IEnumerator task = DownloadAndCacheExactFile(url_withoutfilename,packABName);
+        yield return task;
+        task = getABFromCach(url_withoutfilename,packABName);
+        yield return task;
+        if (task.Current != null)
+            readingBundle = (AssetBundle)task.Current;
+        else
+            readingBundle = null;
+
+        if (readingBundle != null)
+        {
+            Debug.Log("定位到animator："+dic_key);
+            RuntimeAnimatorController toLoadRuntimeAnimatorController = readingBundle.LoadAsset<RuntimeAnimatorController>(packABName);
+            readingBundle.Unload(false);
+            if (toLoadRuntimeAnimatorController != null)
+            {
+                Debug.Log("generic_controller"+dic_key+"貌似提取成功");
+                if (defaultPools.Instance.RuntimeAnimatorControllerIdic.ContainsKey(dic_key))
+                    defaultPools.Instance.RuntimeAnimatorControllerIdic[dic_key] = toLoadRuntimeAnimatorController;
+                else
+                    defaultPools.Instance.RuntimeAnimatorControllerIdic.Add(dic_key, toLoadRuntimeAnimatorController);
+            }else{
+                Debug.Log("?");
+            }
+        }else{
+            Debug.Log("generic_controller"+dic_key+"包获取失败");
+        }
+        yield break;
+    }
+    
     public IEnumerator LoadAnimationPackFromCache(string url_withoutfilename,string dic_key, string packABName)
     {
         IEnumerator task = DownloadAndCacheExactFile(url_withoutfilename,packABName);
@@ -237,7 +269,6 @@ public partial class defaultPools
 
     public IEnumerator LoadAudioClipFromCachAndPutItIntoDic(string bundleURL,string additionalPath, string clip_name)
     {
-        
         AudioClip _AudioClip = null;
         string clipkey = additionalPath + "/" + clip_name;
         soundClipsDic.TryGetValue(clipkey, out _AudioClip);

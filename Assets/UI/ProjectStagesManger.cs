@@ -9,6 +9,8 @@ public class ProjectStagesManger : MonoBehaviour {
     public ChapterPreparePage _ChapterPreparePage;
     public List<Season> seasons;
 
+    public int focusingSeasonNum;
+
     void Awake()
     {
         AllStagesButtonINI();
@@ -16,9 +18,10 @@ public class ProjectStagesManger : MonoBehaviour {
 
     public void showThisSeasonGamen(int focusingSeasonNum)
     {
+        this.focusingSeasonNum = focusingSeasonNum;
         foreach (Season season in seasons)
         {
-            if (season.SeasonNum == focusingSeasonNum)
+            if (season.SeasonNum == this.focusingSeasonNum)
                 season.gameObject.SetActive(true);
             else
                 season.gameObject.SetActive(false);

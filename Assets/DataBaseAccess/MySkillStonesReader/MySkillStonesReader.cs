@@ -35,6 +35,7 @@ public partial class MySkillStonesReader {
         }
     }
 
+    public static SkillConfigTable skillConfigTable = new SkillConfigTable();
     public static IDictionary<int, SkillConfig> SkillConfigDicForReference;
     //mySkillStonesDicByType 仅仅是从数据库读取了我拥有的全部石头后，为了本地处理便利而转成的一个临时索引，
     // 在有技能石删除或添加的情况下，为了处理速度我们没有必要让它重新根据数据库信息来全部生成，只需要直接编辑
@@ -167,84 +168,29 @@ public partial class MySkillStonesReader {
         return SkillConfigsOfType;
     }
 
-    public static List<SkillConfig> loadAllSkillConfigFromConfigFile()//1
+    public static void loadAllSkillConfigFromLocalConfigFile()//1
     {
-        SkillConfigTable skillConfigTable = new SkillConfigTable();
-        MySkillStonesReader.SkillConfigDicForReference = new Dictionary<int, SkillConfig>();
-
-        //Debug.Log("开始尝试读取技能列表0");
-        List<SkillConfig> list = new List<SkillConfig>();
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor
             ||
             Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
-            //loadAllSkillConfigFromConfigFile("/Resources/" + "Account/skillsConfig" + ".xml");
             TextAsset csv = Resources.Load("Account/skillsConfig") as TextAsset;
             if (csv != null)
                 skillConfigTable.Load(csv);
         }
         else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            //loadAllSkillConfigFromConfigFile("Account/skillsConfig");
             TextAsset csv = Resources.Load("Account/skillsConfig") as TextAsset;//未定，这个瞎写的。
             if (csv != null)
                 skillConfigTable.Load(csv);
         }
-        MySkillStonesReader.SkillConfigDicForReference = skillConfigTable.getSkillConfigDic();
-        return list;
-    }
-
-    public IDictionary<int, SkillConfig> loadAllSkillConfigFromConfigFile(string accountInfoPath)//假设到时候要是全部从配置文件读取这个信息，那这方面东西写成同步函数应该也不是太大的问题。但这个信息原则上要一直在程序内。
-    {
-        try
-        {
-            List<SkillConfig> list = new List<SkillConfig>();
-            //Debug.Log("开始尝试读取技能列表");
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
-            if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                FileStream FileStream = new FileStream(Application.dataPath + accountInfoPath, FileMode.Open);
-                list = XmlSerializer.Deserialize(FileStream) as List<SkillConfig>;
-                FileStream.Close();
-            }
-            else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                accountInfoPath = accountInfoPath.Replace(Environment.NewLine, "");
-                TextAsset xmlData = Resources.Load(accountInfoPath) as TextAsset;
-                XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
-                var reader = new System.IO.StringReader(xmlData.text);
-                list = XmlSerializer.Deserialize(reader) as List<SkillConfig>;
-                //Debug.Log("技能适配信息读取成功");
-            }
-            else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                accountInfoPath = accountInfoPath.Replace(Environment.NewLine, "");
-                TextAsset xmlData = Resources.Load(accountInfoPath) as TextAsset;
-                XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
-                var reader = new System.IO.StringReader(xmlData.text);
-                list = XmlSerializer.Deserialize(reader) as List<SkillConfig>;
-                //Debug.Log("技能适配信息读取成功");
-            }
-
-            // 那么也就是说每次程序启动，我们为玩家所拥有的所有角色添加的这个key其实都是临时给加的，方便本地索引。这么做有无风险？
-            MySkillStonesReader.SkillConfigDicForReference = new Dictionary<int, SkillConfig>();
-            foreach (SkillConfig _SkillConfig in list)
-            {
-                if (!MySkillStonesReader.SkillConfigDicForReference.ContainsKey(_SkillConfig.id))
-                {
-                    MySkillStonesReader.SkillConfigDicForReference.Add(_SkillConfig.id, _SkillConfig);
-                }
-            }
-            return MySkillStonesReader.SkillConfigDicForReference;
-        }
-        catch (Exception e)
-        {
-            Debug.Log("技能总列表读取失败");
-            Debug.Log(e.ToString());
-            return null;
-        }
     }
     
+    public static void refreshSkillConfigDicForReference()
+    {
+        MySkillStonesReader.SkillConfigDicForReference = skillConfigTable.getSkillConfigDic();
+    }
+
     public static int skillsetValidation(int A1skillid,int A2skillid,int A3skillid,
                                             int B1skillid,int B2skillid,int B3skillid,
                                             int C1skillid,int C2skillid,int C3skillid)
@@ -302,8 +248,58 @@ public partial class MySkillStonesReader {
                     break;
             }
         }
-
         return wholeskillpoint;
     }
-
 }
+
+//曾经的XML技能配置文件
+//public IDictionary<int, SkillConfig> loadAllSkillConfigFromConfigFile(string accountInfoPath)//假设到时候要是全部从配置文件读取这个信息，那这方面东西写成同步函数应该也不是太大的问题。但这个信息原则上要一直在程序内。
+//{
+//    try
+//    {
+//        List<SkillConfig> list = new List<SkillConfig>();
+//        //Debug.Log("开始尝试读取技能列表");
+//        XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
+//        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
+//        {
+//            FileStream FileStream = new FileStream(Application.dataPath + accountInfoPath, FileMode.Open);
+//            list = XmlSerializer.Deserialize(FileStream) as List<SkillConfig>;
+//            FileStream.Close();
+//        }
+//        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+//        {
+//            accountInfoPath = accountInfoPath.Replace(Environment.NewLine, "");
+//            TextAsset xmlData = Resources.Load(accountInfoPath) as TextAsset;
+//            XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
+//            var reader = new System.IO.StringReader(xmlData.text);
+//            list = XmlSerializer.Deserialize(reader) as List<SkillConfig>;
+//            //Debug.Log("技能适配信息读取成功");
+//        }
+//        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+//        {
+//            accountInfoPath = accountInfoPath.Replace(Environment.NewLine, "");
+//            TextAsset xmlData = Resources.Load(accountInfoPath) as TextAsset;
+//            XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
+//            var reader = new System.IO.StringReader(xmlData.text);
+//            list = XmlSerializer.Deserialize(reader) as List<SkillConfig>;
+//            //Debug.Log("技能适配信息读取成功");
+//        }
+
+//        // 那么也就是说每次程序启动，我们为玩家所拥有的所有角色添加的这个key其实都是临时给加的，方便本地索引。这么做有无风险？
+//        MySkillStonesReader.SkillConfigDicForReference = new Dictionary<int, SkillConfig>();
+//        foreach (SkillConfig _SkillConfig in list)
+//        {
+//            if (!MySkillStonesReader.SkillConfigDicForReference.ContainsKey(_SkillConfig.id))
+//            {
+//                MySkillStonesReader.SkillConfigDicForReference.Add(_SkillConfig.id, _SkillConfig);
+//            }
+//        }
+//        return MySkillStonesReader.SkillConfigDicForReference;
+//    }
+//    catch (Exception e)
+//    {
+//        Debug.Log("技能总列表读取失败");
+//        Debug.Log(e.ToString());
+//        return null;
+//    }
+//}

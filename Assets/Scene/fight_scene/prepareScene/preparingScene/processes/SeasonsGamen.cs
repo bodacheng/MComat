@@ -5,21 +5,23 @@ using UnityEngine;
 public class SeasonsGamen : MainSceneProcess
 {
     RectTransform T;
+    ProjectStagesManger _ProjectStagesManger;
     public IEnumerator enterProcess()
     {
         this._LoadingCanvas.DarkOff();
         this._SkillStonesBox.NineAndTwoAndSkillBoxCanvas.gameObject.SetActive(false);
-        //BigMenu_Fight.OnclickBeheviour();
+        _ProjectStagesManger.showThisSeasonGamen(-1);
         this.T.gameObject.SetActive(true);
         this._LoadingCanvas.LightUp();
         yield break;
     }
     
-    public SeasonsGamen(preparingScene _preparingScene,RectTransform T)
+    public SeasonsGamen(preparingScene _preparingScene,ProjectStagesManger _ProjectStagesManger,RectTransform T)
     {
         this.step = MainSceneStep.SeasonsGamen;
         this._preparingScene = _preparingScene;
         this.T = T;
+        this._ProjectStagesManger = _ProjectStagesManger;
         this.EelementsInherit(_preparingScene);
     }
 

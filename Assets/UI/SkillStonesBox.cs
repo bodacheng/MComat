@@ -79,14 +79,11 @@ public class SkillStonesBox : MonoBehaviour {
 
     public IEnumerator startUp()
     {
-        this._preparingScene.triggerPresentationProcess(_SkillStoneBoxTabEffectsManager.startUp());
-
-        // Cell的处理存在一些问题。想象一下玩家可能在什么时候会把Cell的数量进行扩充？
-        //生成的石头是放在_SkillStonesBox.mySkillStones列表里
+        yield return _SkillStoneBoxTabEffectsManager.startUp();
+        // 玩家可能在什么时候会把Cell的数量进行扩充？cellsLimit从哪进行读取？
         DeleteArea.isDeleteArea = true;
         DeleteSkillStoneSlot = new SkillStoneSlot(null, DeleteArea, _TheNineSlot, this);
         yield return generateStones();
-        // cellsLimit从哪进行读取？
         generateCells(cellsLimit);
     }
         
@@ -384,9 +381,6 @@ public class SkillStonesBox : MonoBehaviour {
     {
         clearAllCurrentEditingSkillStone();
         //如果玩家中途断网，下面这个环节不会有问题吗
-        yield return MySkillStonesReader.Instance.loadMySkillStones();
-        //缺返回判断
-
         int myStoneLocalID = 0;
         foreach (KeyValuePair<string,List<int>> _keyValuePair in MySkillStonesReader.mySkillStonesDicByType)
         {

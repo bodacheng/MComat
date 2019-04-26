@@ -24,7 +24,7 @@ public partial class CharsManager : MonoBehaviour
         }
         if (_TempModel == null)
         {
-            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getOrLoadRuntimeAnimatorController(_TempCharacterResourceInfo.type);
+            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getRuntimeAnimatorController(_TempCharacterResourceInfo.type);
             if (toLoadRuntimeAnimatorController == null)
             {
                 defaultPools.Instance.FightLoadErrors.Add(_TempCharacterResourceInfo.type + "控制器读取失败");

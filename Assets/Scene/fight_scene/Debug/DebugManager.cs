@@ -95,6 +95,7 @@ public class DebugManager : MonoBehaviour {
     void Start () {
         type.ClearOptions();
         CharsManager.loadMonsterDataBaseFileByResource();
+        CharsManager.refreshCharacterResourceInfoDic();
         List<string> typeList = CharsManager._monstersConfigTable.getTypeList();
 
         foreach (string typeName in typeList)//数据库引入后这个环节就要变化。
@@ -479,7 +480,7 @@ public class DebugManager : MonoBehaviour {
 
         if (TeamConfig != null)
         {
-            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getOrLoadRuntimeAnimatorController(type);
+            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getRuntimeAnimatorController(type);
             //Debug.Log("角色"+ABResourceName+"读取了动画控制器"+ toLoadRuntimeAnimatorController);
             //AssetBundle modelAsset = AssetBundle.LoadFromFile(Application.dataPath + "/StreamingAssets/charPretabs/" + type +"/" + ABResourceName);
             if (toLoadRuntimeAnimatorController == null)

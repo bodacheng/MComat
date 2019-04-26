@@ -44,9 +44,9 @@ public partial class AssetBundleLoader : MonoBehaviour
         }
         
         CharacterConfigTextFile = (TextAsset)loadAsset.asset;
-        monstersTable = new monstersConfigTable();
+        CharsManager._monstersConfigTable = new monstersConfigTable();
         if (CharacterConfigTextFile != null)
-            monstersTable.Load(CharacterConfigTextFile);
+            CharsManager._monstersConfigTable.Load(CharacterConfigTextFile);
         else{
             Debug.Log("角色配置文件错误。");
             startupsucessed = false;
@@ -90,9 +90,8 @@ public partial class AssetBundleLoader : MonoBehaviour
         }
         SkillConfigTextFile = (TextAsset)loadAsset.asset;
 
-        skillConfigTable = new SkillConfigTable();
         if (SkillConfigTextFile != null)
-            skillConfigTable.Load(SkillConfigTextFile);
+            MySkillStonesReader.skillConfigTable.Load(SkillConfigTextFile);
         else
         {
             Debug.Log("技能配置文件错误。");

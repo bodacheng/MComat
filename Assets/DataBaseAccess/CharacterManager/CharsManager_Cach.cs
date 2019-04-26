@@ -18,7 +18,7 @@ public partial class CharsManager : MonoBehaviour
         }
         if (_TempModel == null)
         {
-            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getOrLoadRuntimeAnimatorController(_TempCharacterResourceInfo.type);
+            RuntimeAnimatorController toLoadRuntimeAnimatorController = defaultPools.Instance.getRuntimeAnimatorController(_TempCharacterResourceInfo.type);
             AssetBundle modelAsset;
             _loadingProcess = defaultPools.Instance.getABFromCach("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.prefabName);
             yield return _loadingProcess;

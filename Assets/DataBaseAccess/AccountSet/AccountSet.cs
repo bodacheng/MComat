@@ -38,7 +38,6 @@ public partial class AccountSet {
                 break;
             case playerinfoReferenceMode.localTestSaveData:
                 yield return loadCustomerInfoViaLocalFile();
-                //yield return loadCustomerInfoFromRemoteServer("http://47.245.7.100:8080/player/1/detail");
                 break;
             case playerinfoReferenceMode.remoteTestPlayer:
                 yield return loadCustomerInfoFromRemoteServer("http://47.245.7.100:8080/player/1/detail");

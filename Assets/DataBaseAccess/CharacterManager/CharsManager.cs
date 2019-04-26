@@ -17,7 +17,7 @@ public partial class CharsManager : MonoBehaviour {
     public Transform _dontDestroyOnLoadParent;
     public static Transform dontDestroyOnLoadParent;
     public static IDictionary<int, CharacterResourceInfo> CharacterResourceInfoDic = new Dictionary<int, CharacterResourceInfo>();
-    public static monstersConfigTable _monstersConfigTable;
+    public static monstersConfigTable _monstersConfigTable = new monstersConfigTable();
 
     public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
     public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
@@ -45,22 +45,25 @@ public partial class CharsManager : MonoBehaviour {
 
     public static void loadMonsterDataBaseFileByResource()
     {
-        _monstersConfigTable = new monstersConfigTable();
         //暂时做如下处理
         TextAsset CSV = Resources.Load("Account/MonstersConfig") as TextAsset;
         if (CSV)
         {
             _monstersConfigTable.Load(CSV);
-            List<monstersConfigTable.Row> rows = _monstersConfigTable.rowList;
-            CharacterResourceInfoDic.Clear();
-            List<CharacterResourceInfo> characterResourceInfos = _monstersConfigTable.RowToCharacterResourceInfoList(rows);
-            foreach (CharacterResourceInfo one in characterResourceInfos)            
-            {
-                CharacterResourceInfoDic.Add(one.charResouceNum,one);
-            }
         }
         else
             Debug.Log("没能读取到角色数据库文件。");
+    }
+    
+    public static void refreshCharacterResourceInfoDic()
+    {
+        List<monstersConfigTable.Row> rows = _monstersConfigTable.rowList;
+        CharacterResourceInfoDic.Clear();
+        List<CharacterResourceInfo> characterResourceInfos = _monstersConfigTable.RowToCharacterResourceInfoList(rows);
+        foreach (CharacterResourceInfo one in characterResourceInfos)            
+        {
+            CharacterResourceInfoDic.Add(one.charResouceNum,one);
+        }
     }
 
     public void preventTheseMyModelsFromDestroying(List<int> myCharLocalIDForNextBattle)

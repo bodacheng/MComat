@@ -20,7 +20,8 @@ public class ConfigFileManager : MonoBehaviour {
         }
         if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
         {
-            MySkillStonesReader.loadAllSkillConfigFromConfigFile();
+            MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
+            MySkillStonesReader.refreshSkillConfigDicForReference();
             List<int> mystones = new List<int>();
             foreach (KeyValuePair<int, SkillConfig> _pair in MySkillStonesReader.SkillConfigDicForReference)
             {
@@ -280,7 +281,7 @@ public class ConfigFileManager : MonoBehaviour {
             if (newRow != null && newRow.keyName != null)
                 skillConfigTable.rowList.Add(newRow);
         }
-        skillConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path);
+        skillConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "skillsConfig");
     }
 
     public int MaxOfIntList(List<int> List)
@@ -459,6 +460,6 @@ public class ConfigFileManager : MonoBehaviour {
             if (newRow != null && newRow.realName != null)
                 monstersTable.rowList.Add(newRow);
         }
-        monstersTable.SaveByCurrentRows(Application.dataPath + "/" + path);
+        monstersTable.SaveByCurrentRows(Application.dataPath + "/" + path != null? path : "MonstersConfig");
     }
 }

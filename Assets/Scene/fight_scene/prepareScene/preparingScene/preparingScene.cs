@@ -76,6 +76,11 @@ public partial class preparingScene : MonoBehaviour {
     public Canvas MainMenuCanvas;
     public Canvas SkillEditCanvas;
 
+    //preparingscene应该就是只有这些画布
+    [Space(7)]
+    [Header("Seasons Ts")]
+    public ProjectStagesManger _ProjectStagesManger;
+
     [Space(7)]
     [Header("若干子画面的总RectTransfrom")]
     public RectTransform QuestInfoT;
@@ -225,70 +230,39 @@ public partial class preparingScene : MonoBehaviour {
         _LoadingCanvas.nowProcess("正在读取账户信息",0);
 
         //SceneProcessDictionary
-
         TeamEditMonsterDetail _TeamEditMonsterDetail = new TeamEditMonsterDetail(this);
         TeamEditFront teamEditFront = new TeamEditFront(this,FrontT);
         SkillStones skillStones = new SkillStones(this);
         SelfFightFront selfFightFront = new SelfFightFront(this,SelfFightUIT);
-        SeasonsProcess seasonsProcess = new SeasonsProcess(this,SeasonsT);
-        SeasonsGamen seasonsGamen = new SeasonsGamen(this,AllSeasonsGamensT);
+        SeasonsGamen seasonsGamen = new SeasonsGamen(this,_ProjectStagesManger,SeasonsT);
+        ShowOneSeasonChapters _ShowOneSeasonChapters = new ShowOneSeasonChapters(this,_ProjectStagesManger,AllSeasonsGamensT);
         QuestInfo questInfo = new QuestInfo(this,QuestInfoT);
         MemberDetailProcess memberDetail = new MemberDetailProcess(this,MemberSelectT);
         MemberDetail_edit memberDetail_edit = new MemberDetail_edit(this);
         MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow(this,MemberT_show);
         frontPage frontPage = new frontPage(this,FrontT);
         FightModeChoose fightModeChoose = new FightModeChoose(this,FightModeChooseT);
-        ChapterProcess chapterProcess = new ChapterProcess(this,ChapterInfoT);
-        
+        ChapterProcess chapterProcess = new ChapterProcess(this,ChapterInfoT);        
         SceneProcessDictionary = new Dictionary<MainSceneStep,MainSceneProcess>();
         SceneProcessDictionary.Add(MainSceneStep.TeamEditMonsterDetail,_TeamEditMonsterDetail);
         SceneProcessDictionary.Add(MainSceneStep.TeamEditFront,teamEditFront);
-        
         SceneProcessDictionary.Add(MainSceneStep.SkillStones,skillStones);
         SceneProcessDictionary.Add(MainSceneStep.SelfFightFront,selfFightFront);
-        SceneProcessDictionary.Add(MainSceneStep.Seasons,seasonsProcess);
+        SceneProcessDictionary.Add(MainSceneStep.ChaptersOfOneSeason,_ShowOneSeasonChapters);
         SceneProcessDictionary.Add(MainSceneStep.SeasonsGamen,seasonsGamen);
         SceneProcessDictionary.Add(MainSceneStep.QuestInfo,questInfo);
         SceneProcessDictionary.Add(MainSceneStep.MemberDetail,memberDetail);
-         SceneProcessDictionary.Add(MainSceneStep.MemberDetail_edit,memberDetail_edit);
+        SceneProcessDictionary.Add(MainSceneStep.MemberDetail_edit,memberDetail_edit);
         SceneProcessDictionary.Add(MainSceneStep.MemberDetail_show,memberDetail_Skillshow);
         SceneProcessDictionary.Add(MainSceneStep.frontPage,frontPage);
         SceneProcessDictionary.Add(MainSceneStep.FightModeChoose,fightModeChoose);
         SceneProcessDictionary.Add(MainSceneStep.Chapter,chapterProcess);
 
         charIcon.iniFrames();
-
-        // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
-        // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
-        // 那这样的话势必我需要来看接下来这个请求工作的返回值。
-
-        MenuProcess = AccountSet.Instance.loadCustomerInfo();
-        yield return (MenuProcess);
-        //if ((bool)MenuProcess.Current == false)
-        //{
-        //    Debug.Log("未能获取账户信息");
-        //    yield break;
-        //}
-
-        CharsManager.loadMonsterDataBaseFileByResource();
-        MySkillStonesReader.loadAllSkillConfigFromConfigFile();
-
-        MenuProcess = AccountCharsSet.Instance.loadMyOwnedCharsInfo();
-        yield return (MenuProcess);// 读取玩家拥有的角色
-        //缺response判断
-
-        MenuProcess = TeamSet.Instance.loadMyTeamSetInfoViaJsonFile("TeamSet.json");
-        yield return (MenuProcess);
-        //缺response判断
-
-        _LoadingCanvas.nowProcess("正在阵容设置", 0.2f);
-        TeamSet.Instance.refreshPositionLocalCharKeySet4V4Mode(AccountCharsSet.ownedChars);//一个本地修复作用的函数，针对阵容设置
-
-        _LoadingCanvas.nowProcess("正在读取技能石头", 0.6f);
-        yield return (_SkillStonesBox.startUp());
-        //缺response判断
-
-        _LoadingCanvas.nowProcess("正在启动技能编辑器", 0.7f);
+      
+        _LoadingCanvas.nowProcess("正在启动技能石头背包", 0.6f);
+        yield return (_SkillStonesBox.startUp());        
+        _LoadingCanvas.nowProcess("正在加载技能编辑器", 0.7f);
         yield return (TheNineSlot.startUp());
 
         MainMenuCanvas.gameObject.SetActive(true);

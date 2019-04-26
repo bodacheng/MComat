@@ -63,7 +63,7 @@ public enum MainSceneStep : int
     Gotcha = 7,
     QuestInfo =8,
     Chapter = 9,
-    Seasons = 10,
+    ChaptersOfOneSeason = 10,
     SeasonsGamen = 11,
     
     JiNengRongLian_selectMaterialMonster = 12,

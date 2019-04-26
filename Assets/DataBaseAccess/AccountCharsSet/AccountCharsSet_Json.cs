@@ -50,6 +50,7 @@ public partial class AccountCharsSet
         AccountCharsSet.ownedChars = new CharacterDataInfo[0];
         File.Create(wholepath).Dispose();
         CharsManager.loadMonsterDataBaseFileByResource();
+        CharsManager.refreshCharacterResourceInfoDic();
         List<CharacterResourceInfo> characterList = CharsManager._monstersConfigTable.RowToCharacterResourceInfoList(CharsManager._monstersConfigTable.rowList);
         foreach (CharacterResourceInfo _CharacterResourceInfo in characterList)
         {

@@ -30,7 +30,8 @@ public class ConfigFileManagerGUI : Editor {
 
         if (GUILayout.Button("本地测试存档获得所有技能石"))
         {
-            MySkillStonesReader.loadAllSkillConfigFromConfigFile();
+            MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
+            MySkillStonesReader.refreshSkillConfigDicForReference();
             List<int> mystones = new List<int>();
             foreach (KeyValuePair<int,SkillConfig> _pair in MySkillStonesReader.SkillConfigDicForReference)
             {

@@ -106,44 +106,10 @@ public partial class defaultPools {
         yield break;
      }
 
-    // 9.13 这个函数有问题。回头再折腾
-    public RuntimeAnimatorController getOrLoadRuntimeAnimatorController(string type)
+    public RuntimeAnimatorController getRuntimeAnimatorController(string type)
     {
         RuntimeAnimatorController toLoadRuntimeAnimatorController;
         RuntimeAnimatorControllerIdic.TryGetValue(type,out toLoadRuntimeAnimatorController);
-
-        if (toLoadRuntimeAnimatorController != null)
-            return toLoadRuntimeAnimatorController;
-
-        toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
-        if (toLoadRuntimeAnimatorController != null)
-        {
-            RuntimeAnimatorControllerIdic.Add(type, toLoadRuntimeAnimatorController);
-            return toLoadRuntimeAnimatorController;
-        }
-
-        return null;
-
-        //AssetBundle controllerBundle = null;
-        //controllerBundle = AssetBundle.LoadFromFile(Application.dataPath + "/StreamingAssets/animClips/" + type + "/animator/generic_controller");
-        //if (controllerBundle != null)
-        //{
-        //    toLoadRuntimeAnimatorController = controllerBundle.LoadAsset<RuntimeAnimatorController>("generic_controller");
-        //    controllerBundle.Unload(false);
-        //    if (toLoadRuntimeAnimatorController != null)
-        //    {
-        //        RuntimeAnimatorControllerIdic.Add(type, toLoadRuntimeAnimatorController);
-        //        return toLoadRuntimeAnimatorController;
-        //    }
-        //    else{
-        //        Debug.Log("找不着controller。返回");
-        //        return null;
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.Log("找不着controller包。返回");
-        //    return null;
-        //}
+        return toLoadRuntimeAnimatorController;
     }
 }

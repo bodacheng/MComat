@@ -54,9 +54,6 @@ public partial class AssetBundleLoader : MonoBehaviour
     private TextAsset CharacterConfigTextFile;
     private TextAsset SkillConfigTextFile;
     
-    private monstersConfigTable monstersTable;
-    private SkillConfigTable skillConfigTable;
-
     private IEnumerator _loadingProcess;
     private bool startupsucessed = false;
     
@@ -80,8 +77,7 @@ public partial class AssetBundleLoader : MonoBehaviour
         _LoadingCanvas.Loading_Canvas.gameObject.SetActive(true);
         _LoadingCanvas.turnOnProcessDescription(true);
         _LoadingCanvas.nowProcess("正在加载资源",0);
-        
-        
+               
         switch (defaultPools.Instance.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -90,8 +86,27 @@ public partial class AssetBundleLoader : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
+                CharsManager.loadMonsterDataBaseFileByResource();
+                MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
                 break;
         }
+        MySkillStonesReader.refreshSkillConfigDicForReference();
+        CharsManager.refreshCharacterResourceInfoDic();
+        
+        // 账户信息读取
+        // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
+        // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
+        // 那这样的话势必我需要来看接下来这个请求工作的返回值。
+        IEnumerator loadAccountProcess = AccountSet.Instance.loadCustomerInfo();
+        yield return (loadAccountProcess);
+        IEnumerator localMyChractersProcess = AccountCharsSet.Instance.loadMyOwnedCharsInfo();
+        yield return (localMyChractersProcess);
+        IEnumerator loadMyTeamSetProcess = TeamSet.Instance.loadMyTeamSetInfoViaJsonFile("TeamSet.json");
+        yield return (loadMyTeamSetProcess);
+        IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
+        yield return (loadMyStonesProcess);
+        //上面这些都缺response判断      
+        TeamSet.Instance.refreshPositionLocalCharKeySet4V4Mode(AccountCharsSet.ownedChars);//一个本地修复作用的函数，针对阵容设置
         
         switch (defaultPools.Instance.ModelLoadingMode)
         {
@@ -101,21 +116,31 @@ public partial class AssetBundleLoader : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
+                //Resource模式下模型都是现加载。
                 break;
+        }
+        
+        //characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
+        foreach (monstersConfigTable.Row row in CharsManager._monstersConfigTable.rowList)
+        {
+            if (!characterTypeAndBasicMoveSets.ContainsKey(row.type))
+                characterTypeAndBasicMoveSets.Add(row.type,new List<string>());
+            if (!characterTypeAndBasicMoveSets[row.type].Contains(row.basicMoveSet))
+            {
+                characterTypeAndBasicMoveSets[row.type].Add(row.basicMoveSet);
+            }
         }
 
         switch (defaultPools.Instance.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
+                yield return characterComponentsDownload();
                 yield return AnimationResourceDownLoad();
-                yield return characterComponentsDownload();//这个是建立在ModelResourceDownLoad()流程中顺便做好了characterTypeAndBasicMoveSets
                 break;
             case ResourceLoadMode.StreamingAssetAB:
-                yield return (defaultPools.Instance.PrepareMagicFromStreamingAssets("defaultmagic"));
                 break;
             case ResourceLoadMode.Resource:
-                //这些的存在是出于测试版本(Resource)的角色画面详细的技能表示功能，正式版不是ResourceLoadMode.Resource所以不起作用。
-                //测试版本要按着文件夹把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
+                //测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
                 int i = 0;
                 foreach (string type in _ConfigFileManager.chartypes)
                 {

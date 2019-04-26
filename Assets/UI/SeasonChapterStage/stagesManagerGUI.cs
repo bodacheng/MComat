@@ -59,6 +59,7 @@ public class stagesManagerGUI : Editor {
     public override void OnInspectorGUI()
     {
         CharsManager.loadMonsterDataBaseFileByResource();
+        CharsManager.refreshCharacterResourceInfoDic();
     
         ButtonStyle = new GUIStyle(GUI.skin.button);
         ButtonStyle.normal.textColor = Color.red;
@@ -106,7 +107,8 @@ public class stagesManagerGUI : Editor {
         _stagesManager = (stagesManager)target;
     
         //第一步，读取配置文件。
-        MySkillStonesReader.loadAllSkillConfigFromConfigFile();
+        MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
+        MySkillStonesReader.refreshSkillConfigDicForReference();
     
         GUILayout.Space(5f);
         EditorGUILayout.LabelField(" 模块基本配件  ", big_title);
