@@ -63,7 +63,6 @@ crashlytics-build.properties
 *.meta
 *.psd
 *.wav
-*.fbx
-*.unity
+*.fax
 *.tga
 Assets/StreamingAssets

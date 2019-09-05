@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
 // 战斗前剧情？对话？姑且把这个环节给表示出来
 // 我们的最初版本不会有那么多废话，但这个模块起码代表载入战斗后双方开火前的环节
