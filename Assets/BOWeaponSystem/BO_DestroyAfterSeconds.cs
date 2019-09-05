@@ -5,75 +5,84 @@ using EZObjectPools;
 
 public class BO_DestroyAfterSeconds : MonoBehaviour {
 
-	public float DestructionDelay = 7;
-    public float stop_emission_delay = 2;
+	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
+    public float stop_emission_delay = 0.9f;
 
     public List<ParticleSystem> to_be_stop_emissions;
     public List<MeshRenderer> to_be_faded_renderers;
 
+    public AudioSource audioSource;
     private float counter = 0;
-    private float A;
-    private Coroutine process;
+    private int phase = 0;
 
     void OnEnable()
     {
-        A = 1;
-        SetMaterialsAlpha(A);
-        //开启协程方法
-        process = StartCoroutine(DelayDisable(stop_emission_delay,DestructionDelay));
+        phase = 1;
+        if (audioSource)
+            audioSource.volume = AudioManager.effectsVolumn;
+        counter = 0;
+        SetMaterialsAlpha(1f);
     }
 
-    void OnDisable()
+    void FixedUpdate()
     {
-        StopCoroutine(process);
+        counter += Time.fixedDeltaTime;
+        magicEffectLifeCircle();
     }
-
+    
+    private void magicEffectLifeCircle()
+    {
+        switch (phase)
+        {
+            case 1:
+                if (counter > stop_emission_delay)
+                {
+                    stopEmissions();
+                    phase = 2;
+                }
+            break;
+            case 2:
+                if (DestructionDelay > stop_emission_delay)
+                {
+                    SetMaterialsAlpha((float)(DestructionDelay - counter) / (DestructionDelay - stop_emission_delay));
+                }
+                if (counter > DestructionDelay)
+                {
+                    phase = 0;
+                    gameObject.SetActive(false);
+                }
+            break;
+        }    
+    }
+    
     public void stopEmissions()
     {
         if (to_be_stop_emissions.Count == 0)
             return;
-        foreach (ParticleSystem p in to_be_stop_emissions)
+        for (int i = 0; i < to_be_stop_emissions.Count; i++)
         {
-            p.Stop();
+            to_be_stop_emissions[i].Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
     }
 
     public void SetMaterialsAlpha(float a)
     {
-        if (to_be_faded_renderers.Count > 0)
+        if (to_be_faded_renderers.Count == 0)
+            return;
+
+        for (int i = 0; i < to_be_faded_renderers.Count; i++)
         {
-            foreach (MeshRenderer meshrender in to_be_faded_renderers)
+            if (to_be_faded_renderers[i] != null)
             {
-                for (int i = 0; i < meshrender.materials.Length; i++)
+                for (int y = 0; y < to_be_faded_renderers[i].materials.Length; y++)
                 {
-                    if (meshrender.materials[0] != null)
-                        meshrender.materials[0].SetColor("_TintColor", new Color(
-                            meshrender.materials[0].GetColor("_TintColor").r,
-                            meshrender.materials[0].GetColor("_TintColor").g, 
-                            meshrender.materials[0].GetColor("_TintColor").b, a));
+                    if (to_be_faded_renderers[i].materials[y] != null)
+                        to_be_faded_renderers[i].materials[y].SetColor("_TintColor", new Color(to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").r,
+                                                                                                to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").g, 
+                                                                                                to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").b, a));
                 }
             }
+
         }
-    }
-
-    IEnumerator DelayDisable(float _stop_emission_delay,float _DestructionDelay)
-    {
-        for (counter = stop_emission_delay; counter > 0; counter -= Time.deltaTime)
-        {
-            A = counter / stop_emission_delay;
-            SetMaterialsAlpha(A);
-            yield return null;
-        }
-
-        //yield return new WaitForSeconds(_stop_emission_delay);
-        stopEmissions();
-        if (_DestructionDelay - _stop_emission_delay > 0)
-            yield return new WaitForSeconds(_DestructionDelay - _stop_emission_delay);
-        else
-            yield return new WaitForSeconds(0f);
-
-        //调用单例中向对象池里面存对象的方法
-        gameObject.SetActive(false);
-        yield break;
     }
 }

@@ -25,47 +25,47 @@ public partial class BO_Health : MonoBehaviour
             return;
         CriticalGauge = CriticalGauge + Gauge;
     }
-    public void costCriticalGaugeBySPlevel(EX level)
+    public void costCriticalGaugeBySPlevel(int level)
     {
         switch (level)
         {
-            case EX.normal:
+            case 0:
                 setGaugeCollecting(true);
                 break;
-            case EX.EX1:
+            case 1:
                 plusCriticalGauge(-10);
                 setGaugeCollecting(false);
                 break;
-            case EX.EX2:
+            case 2:
                 plusCriticalGauge(-20);
                 setGaugeCollecting(false);
                 break;
-            case EX.EX3:
-                plusCriticalGauge(-30);
+            case 3:
+                plusCriticalGauge(-50);
                 setGaugeCollecting(false);
                 break;
         }
     }
 
-    public bool hasPlentyGauge(EX splevel)
+    public bool hasPlentyGauge(int splevel)
     {
         switch (splevel)
         {
-            case EX.normal:
+            case 0:
                 return true;
-            case EX.EX1:
+            case 1:
                 if (CriticalGauge >= 10)
                     return true;
                 break;
-            case EX.EX2:
+            case 2:
                 if (CriticalGauge >= 20)
                     return true;
                 break;
-            case EX.EX3:
-                if (CriticalGauge >= 30)
+            case 3:
+                if (CriticalGauge >= 50)
                     return true;
                 break;
-            case EX.NULL:
+            case -1:
                 return true;
         }
         return false;

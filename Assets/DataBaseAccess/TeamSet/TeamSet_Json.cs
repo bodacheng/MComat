@@ -3,39 +3,76 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Linq;
 
-public partial class TeamSet
+namespace dataAccess
 {
-    public IEnumerator loadMyTeamSetInfoViaJsonFile(string jsonFilename)
+    public partial class TeamSet
     {
-        string wholepath = Application.persistentDataPath + "/" + jsonFilename;
-        if (File.Exists(wholepath))
+        public IEnumerator loadMyTeamSetInfoViaJsonFile(string jsonFilename)
         {
-            string dataAsJson = File.ReadAllText(wholepath);
-            _positionLocalCharKeySet4V4Mode = JsonConvert.DeserializeObject<positionLocalCharKeySet>(dataAsJson);
-            yield break;
+            string wholepath = Application.persistentDataPath + "/" + jsonFilename;
+            positionLocalCharKeySet TeamSet;
+            if (File.Exists(wholepath))
+            {
+                try 
+                {
+                    string dataAsJson = File.ReadAllText(wholepath);
+                    TeamSet = JsonConvert.DeserializeObject<positionLocalCharKeySet>(dataAsJson);
+                    List<PosNumWithLocalKey> posNumWithLocalKeys = TeamSet.PosNumsWithLocalKeys.ToList();
+                    List<PosNum> shouldhave = new List<PosNum>();
+                    foreach(PosNumWithLocalKey posNumWithLocalKey in posNumWithLocalKeys)
+                    {
+                        if (!shouldhave.Contains(posNumWithLocalKey.posNum))
+                            shouldhave.Add(posNumWithLocalKey.posNum);
+                    }
+                    if (!shouldhave.Contains(PosNum.back))
+                    {
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.back,null));
+                    }
+                    if (!shouldhave.Contains(PosNum.front))
+                    {
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.front,null));
+                    }
+                    if (!shouldhave.Contains(PosNum.left))
+                    {
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.left,null));
+                    }
+                    if (!shouldhave.Contains(PosNum.right))
+                    {
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.right,null));
+                    }
+                    TeamSet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray(); 
+                }catch (Exception e)
+                {
+                    Debug.Log("读取阵容配置文件："+jsonFilename+"发生异常"+ e);
+                    TeamSet = new positionLocalCharKeySet();
+                }
+                yield return TeamSet;
+                yield break;
+            }
+            else
+            {
+                Debug.Log("读取阵容配置文件："+jsonFilename+"没有找到");
+                yield return new positionLocalCharKeySet();
+                yield break;
+            }
         }
-        else
+
+        public void overrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
         {
-            Debug.Log("开始新建json格式打架阵容存档");
-            File.Create(wholepath);
-            yield break;
+            switch (teamSetGameMode)
+            {
+                case TeamSetGameMode.story:
+                    string json = JsonConvert.SerializeObject(storyModeTeamSet);
+                    LocalJson.saveInfoToJsonFile(null, "TeamSet.json", json);
+                    break;
+                case TeamSetGameMode.arena3V3:
+                    string json1 = JsonConvert.SerializeObject(Arena3V3);
+                    LocalJson.saveInfoToJsonFile(null, "arena3V3TeamSet.json", json1);
+                    break;
+            }
         }
-    }
-
-    public void overrideTeamSetInfoOnJsonFile()
-    {
-        string json = JsonConvert.SerializeObject(_positionLocalCharKeySet4V4Mode);
-        saveInfoToJsonFile("TeamSet.json", json);
-    }
-
-    public void saveInfoToJsonFile(string subpathWithfilename, string json)
-    {
-        //string wholepath = Path.Combine(Application.persistentDataPath, subpath);
-        string wholepath = Application.persistentDataPath + "/" + subpathWithfilename;
-        File.WriteAllText(wholepath, json, System.Text.Encoding.UTF8);
     }
 }

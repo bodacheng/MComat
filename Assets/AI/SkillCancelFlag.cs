@@ -2,30 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//这其中的唯一一个变量Cancel_Flag也归根结底是用于状态机参考。如果在客服务端不准备运行状态机那这个量也无所谓，不需要同步
 public class SkillCancelFlag : MonoBehaviour {
-    BO_Weapon_Animation_Events BO_Weapon_Animation_Events;
-    Sensor _Sensor;
-    BO_Health BS_Main_Health;
 
+    public Data_Center _C;
+    
     private bool attackApproaching = false;
     private bool rotationAdjustmentStartFlag = true;
     private float rotateLoopCounter = 0f;
+    private bool Cancel_Flag = false;
 
-    bool Cancel_Flag = false;
+    public void ThisIsEndOfAnimation(AnimationEvent e)
+    {
+        //if (!_C.Animation_Manger.getOnAniTransitionFlag())//可能报错 //e.stringParameter == _C.Animation_Manger.currentAnimation.name
+        // 这是目前这个系统最最最最头疼的一个环节了。。。下面这些是无奈之举.我们没能理解为什么上面那种情况也会出现bug
+        // animationcounter那块就是说，，如果真是两个连续相同状态，如果迁移状态太短了代表那啥，肯定是迁移区间里ThisIsEndOfAnimation被激活了
+        if (_C.Animation_Manger._toUse == null || (_C.Animation_Manger._toUse.name == e.stringParameter && _C.Animation_Manger.animationcounter > 0.08f))
+        {
+            _C.Animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.over);
+        }
+    }
 
     public void turn_on_flag()
     {
-        if (_Sensor)
-            _Sensor.continuousDetectionStart(-1);
-
-        BO_Weapon_Animation_Events.clearMarkerManagers();//????????
+        _C.Sensor.continuousDetectionStart(-1);
+        _C.bO_Weapon_Animation_Events.clearMarkerManagers();//????????
         this.Cancel_Flag = true;
     }
 
     public void turn_off_flag()
     {
-        BO_Weapon_Animation_Events.clearMarkerManagers();
+        _C.bO_Weapon_Animation_Events.clearMarkerManagers();
         this.Cancel_Flag = false;
     }
 
@@ -34,10 +40,10 @@ public class SkillCancelFlag : MonoBehaviour {
         return this.Cancel_Flag;
     }
 
-    void Update()
+    public void SkillCancelFlagFixedUpdate()
     {
         if (this.rotationAdjustmentStartFlag || this.attackApproaching)
-            rotateLoopCounter += Time.deltaTime;
+            rotateLoopCounter += Time.fixedDeltaTime;
         
         if (rotationAdjustmentStartFlag)
         {
@@ -57,10 +63,7 @@ public class SkillCancelFlag : MonoBehaviour {
     {
         if (i == 1)
         {
-            if (_Sensor != null)
-            {
-                _Sensor.OneRoundDetectionStart(10);
-            }
+            _C.Sensor.OneRoundDetectionStart(10);
             this.rotateLoopCounter = 0f;
             this.rotationAdjustmentStartFlag = true;
             this.attackApproaching = false;//与校准方向一起 开始校准迈步
@@ -69,17 +72,14 @@ public class SkillCancelFlag : MonoBehaviour {
         {
             this.rotationAdjustmentStartFlag = false;
         }
-        this.BS_Main_Health.clearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
+        _C.pusher.clearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 
     public void turnRotationAdjustmentStartFlag(int i = 1)
     {
         if (i == 1)
         {
-            if (_Sensor != null)
-            {
-                _Sensor.OneRoundDetectionStart(10);
-            }
+            this._C.Sensor.OneRoundDetectionStart(10);
             this.rotateLoopCounter = 0f;
             this.rotationAdjustmentStartFlag = true;
             this.attackApproaching = true;//与校准方向一起 开始校准迈步
@@ -88,8 +88,9 @@ public class SkillCancelFlag : MonoBehaviour {
         {
             this.rotationAdjustmentStartFlag = false;
         }
-        this.BS_Main_Health.clearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
+        _C.pusher.clearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
+    
     public bool getRotationAdjustmentStartFlag()
     {
         return rotationAdjustmentStartFlag;
@@ -102,17 +103,5 @@ public class SkillCancelFlag : MonoBehaviour {
     public bool getAttackApproachingFlag()
     {
         return this.attackApproaching;
-    }
-
-    public void setSensor(Sensor _Sensor)
-    {
-        this._Sensor = _Sensor;
-    }
-
-    // Use this for initialization
-    void Awake() {
-        BO_Weapon_Animation_Events = gameObject.GetComponent<BO_Weapon_Animation_Events>();
-        BS_Main_Health = gameObject.GetComponent<BO_Health>();
-        Cancel_Flag = false;
     }
 }

@@ -24,9 +24,12 @@ public class monsterIconsDic {
     private AssetBundle readingBundle;
     private IDictionary<int, Sprite> characterIconDic = new Dictionary<int, Sprite>();
 
-    public Sprite getMonsterIconSyn(int resourceNum)
+    public Sprite getMonsterIconSyn(int monsterid)
     {
-        characterIconDic.TryGetValue(resourceNum,out readingSprite);
+        readingSprite = null;
+        characterIconDic.TryGetValue(monsterid,out readingSprite);
+        if (readingSprite == null)
+            Debug.Log("没有找到对应角色的icon，monsterid："+monsterid);
         return readingSprite;
     }
 
@@ -35,7 +38,7 @@ public class monsterIconsDic {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
         {
-            IEnumerator ienObj = defaultPools.Instance.getABFromCach("monsterIcons", resource_id.ToString());
+            IEnumerator ienObj = CachManager.Instance.getABFromCach("monsterIcons", resource_id.ToString());
             while (ienObj.MoveNext())
             {
                 // Do Nothing

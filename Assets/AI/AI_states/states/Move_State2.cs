@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System;
+using Soul;
 using System.Linq;
 
 public class Move_State2 : AI_State
@@ -61,22 +61,22 @@ public class Move_State2 : AI_State
         if (this._AIStateRunner.getLastState() == this)
             return;
 
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
         //this.AI_DATA_CENTER.switchToMocaPhysicMaterial();
         this.time_counter = 0f;
         use_speed = speed;
         this.mainCam = CameraManager._camera.transform;
         _Rigidbody.useGravity = true;
-        Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, null);
+        Animation_Manger.PlayLayerAnim(null);
 
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
             use_direction.y = -1;
     }
 
     private int whereToGo;
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
         //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
         EnemiesByDistance = Sensor.getEnemiesByDistance(true);
         switch(_AIMoveStyle)
@@ -159,7 +159,7 @@ public class Move_State2 : AI_State
         }
         use_direction = use_direction.normalized;
 
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
             use_direction.y = -1;
 
         if (this._AIStateRunner.getLastState() == this)
@@ -169,17 +169,17 @@ public class Move_State2 : AI_State
         use_speed = speed;
         this.mainCam = CameraManager._camera.transform;
         _Rigidbody.useGravity = true;
-        Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, null);
+        Animation_Manger.PlayLayerAnim(null);
     }
 
     private float angle;
-    public override void _f_State_Update()
+    public override void _State_FixedUpdate1()
 	{
         _Rigidbody.velocity = Vector3.zero;
         time_counter += Time.deltaTime;
-        if (AI_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
+        if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
-            use_direction = AI_DATA_CENTER.antiWallDirection;
+            use_direction = _DATA_CENTER.antiWallDirection;
             return;
         }
         switch (this.moveDirection)
@@ -208,7 +208,7 @@ public class Move_State2 : AI_State
         }
 
         use_direction = use_direction.normalized;
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
             use_direction.y = -1;
         //if (AI_DATA_CENTER.getAlliesAndSelfByDistance(true).Count > 1)
         //{
@@ -226,7 +226,7 @@ public class Move_State2 : AI_State
     private float h = 0f;
     private float v = 0f;
     private Vector3 vel;
-    public override void _c_State_Update()
+    public override void _c_State_FixedUpdate1()
     {
         _Rigidbody.velocity = Vector3.zero;
         time_counter += Time.deltaTime;
@@ -267,7 +267,7 @@ public class Move_State2 : AI_State
             _Animator.SetFloat("speed", 0f);
             Debug.Log("错误：角色处于控制模式却没有被适配相机。");
         }
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
             use_direction.y = -1;
 
         PositionUpdate();

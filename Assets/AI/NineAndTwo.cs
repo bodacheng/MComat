@@ -22,16 +22,20 @@ using UnityEditor;
 public class NineAndTwo {
 
     public int level;
-    public int A1skillid = -1, A2skillid = -1, A3skillid = -1;
-    public int B1skillid = -1, B2skillid = -1, B3skillid = -1;
-    public int C1skillid = -1, C2skillid = -1, C3skillid = -1;
+
+    public string A1skillid, A2skillid, A3skillid;
+    public string B1skillid, B2skillid, B3skillid;
+    public string C1skillid, C2skillid, C3skillid;
+
+    // 以下这三条，出于本地关卡信息的考虑，也放在这里。但是一般来说这些是由角色自身被动决定。所以存在索引角色被动和依据九宫格固有信息这两种读取方式。
+    public bool canDefend;
+    public MoveType moveType;
+    public RushType rushType;
 
     private SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
     private SkillConfig DConfig, MConfig, RConfig;//这三个其实对应了monster表里定义的三个被动技能
     private State_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
     private List<State_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
-    private IDictionary<string, State_Transition_Set> state_Transition_Dictionary;
-    private List<State_Rate_Set> chuanEndCasualT0 = new List<State_Rate_Set>();
 
     public State_Transition_Set getD_STS()
     {
@@ -125,9 +129,39 @@ public class NineAndTwo {
     {
         level = 1;
 
-        A1skillid = -1; A2skillid = -1; A3skillid = -1;
-        B1skillid = -1; B2skillid = -1; B3skillid = -1;
-        C1skillid = -1; C2skillid = -1; C3skillid = -1;
+        A1skillid = null; A2skillid = null; A3skillid = null;
+        B1skillid = null; B2skillid = null; B3skillid = null;
+        C1skillid = null; C2skillid = null; C3skillid = null;
+
+        this.moveType = MoveType.Mode1;
+        this.canDefend = true;
+        this.rushType = RushType.RushBack;
+
+        AConfig1 = new SkillConfig();
+        AConfig2 = new SkillConfig();
+        AConfig3 = new SkillConfig();
+        BConfig1 = new SkillConfig();
+        BConfig2 = new SkillConfig();
+        BConfig3 = new SkillConfig();
+        CConfig1 = new SkillConfig();
+        CConfig2 = new SkillConfig();
+        CConfig3 = new SkillConfig();
+        DConfig = new SkillConfig();
+        MConfig = new SkillConfig();
+        RConfig = new SkillConfig();
+    }
+    
+    public NineAndTwo(MoveType moveType,bool canDefend, RushType rushType)
+    {
+        level = 1;
+
+        A1skillid = null; A2skillid = null; A3skillid = null;
+        B1skillid = null; B2skillid = null; B3skillid = null;
+        C1skillid = null; C2skillid = null; C3skillid = null;
+
+        this.moveType = moveType;
+        this.canDefend = canDefend;
+        this.rushType = rushType;
 
         AConfig1 = new SkillConfig();
         AConfig2 = new SkillConfig();
@@ -147,17 +181,13 @@ public class NineAndTwo {
     {
         return StateTransitionSetList;
     }
-    public IDictionary<string, State_Transition_Set> returnSTD()
-    {
-        return state_Transition_Dictionary;
-    }
 
-    private SkillConfig FixConfigByReference(int skillid)
+    private SkillConfig FixConfigByReference(string skillid)
     {
-        if (skillid < 0)
+        if (skillid == null)
             return null;
         SkillConfig referenceStandardSkillConfig;
-        MySkillStonesReader.SkillConfigDicForReference.TryGetValue(skillid, out referenceStandardSkillConfig);
+        SkillsConfigInfos.SkillConfigDicForReference.TryGetValue(skillid, out referenceStandardSkillConfig);
         return referenceStandardSkillConfig;
     }
 
@@ -166,7 +196,7 @@ public class NineAndTwo {
         if (_SkillConfig == null)
             return null;
 
-        if (MySkillStonesReader.SkillConfigDicForReference == null)
+        if (SkillsConfigInfos.SkillConfigDicForReference == null)
         {
             Debug.Log("技能列表读取错误，检查相关加载机制");
             return null;
@@ -174,14 +204,19 @@ public class NineAndTwo {
 
         SkillConfig referenceStandardSkillConfig;
 
-        MySkillStonesReader.SkillConfigDicForReference.TryGetValue(_SkillConfig.id,out referenceStandardSkillConfig);
-        if (referenceStandardSkillConfig != null)
+        if (_SkillConfig.id != null)
         {
-            _SkillConfig.keyName = referenceStandardSkillConfig.keyName;
-            _SkillConfig.ShowName = referenceStandardSkillConfig.ShowName;
-            _SkillConfig.ai_trigger_ranges = referenceStandardSkillConfig.ai_trigger_ranges;
-            _SkillConfig.SPLevel = referenceStandardSkillConfig.SPLevel;
-            _SkillConfig.stateType = referenceStandardSkillConfig.stateType;
+            SkillsConfigInfos.SkillConfigDicForReference.TryGetValue(_SkillConfig.id,out referenceStandardSkillConfig);
+            if (referenceStandardSkillConfig != null)
+            {
+                _SkillConfig.keyName = referenceStandardSkillConfig.keyName;
+                _SkillConfig.ShowName = referenceStandardSkillConfig.ShowName;
+                _SkillConfig.ai_trigger_ranges = referenceStandardSkillConfig.ai_trigger_ranges;
+                _SkillConfig.SPLevel = referenceStandardSkillConfig.SPLevel;
+                _SkillConfig.stateType = referenceStandardSkillConfig.stateType;
+            }
+        }else{
+            //防御，受伤等固定技能，他们没有id，直接放行来进行之后的处理。
         }
 
         State_Transition_Set STS = null;
@@ -191,10 +226,10 @@ public class NineAndTwo {
             {
                 STS = new State_Transition_Set(_SkillConfig.keyName,
                                                _SkillConfig.stateType,
+                                               _SkillConfig.AT,
                                                _SkillConfig.ai_trigger_ranges,
                                                 null,
                                                 null,
-                                               true,
                                                inputs_defined.Null, 
                                                inputs_defined.Null,
                                                _SkillConfig.SPLevel,
@@ -214,465 +249,21 @@ public class NineAndTwo {
         }
     }
 
-    public void sortNineAndTwo()//这个版本sortNineAndTwo()函数的存在目的是在于编辑过程中在已经读取角色九宫三格又只去编辑了9宫的情况
-    {
-        // 如果本地配置文件没有加载正确上面这个环节就要出问题。D，M，R不需要进行上述操作，
-        // 理由是这三者有固定性，而且所依靠的动画包是基础动画包而不是各type角色的攻击技能动画包，所以加载方式有不同的地方。
-
-        AConfig1 = FixConfigByReference(A1skillid);
-        AConfig2 = FixConfigByReference(A2skillid);
-        AConfig3 = FixConfigByReference(A3skillid);
-        BConfig1 = FixConfigByReference(B1skillid);
-        BConfig2 = FixConfigByReference(B2skillid);
-        BConfig3 = FixConfigByReference(B3skillid);
-        CConfig1 = FixConfigByReference(C1skillid);
-        CConfig2 = FixConfigByReference(C2skillid);
-        CConfig3 = FixConfigByReference(C3skillid);
-
-        if (AConfig1 != null)
-            A1 = fromConfigToSTS(AConfig1);
-        else
-            A1 = null;
-        if (AConfig2 != null)
-            A2 = fromConfigToSTS(AConfig2);
-        else
-            A2 = null;
-        if (AConfig3 != null)
-            A3 = fromConfigToSTS(AConfig3);
-        else
-            A3 = null;
-
-        if (BConfig1 != null)
-            B1 = fromConfigToSTS(BConfig1);
-        else
-            B1 = null;
-        if (BConfig2 != null)
-            B2 = fromConfigToSTS(BConfig2);
-        else
-            B2 = null;
-        if (BConfig3 != null)
-            B3 = fromConfigToSTS(BConfig3);
-        else
-            B3 = null;
-
-        if (CConfig1 != null)
-            C1 = fromConfigToSTS(CConfig1);
-        else
-            C1 = null;
-        if (CConfig2 != null)
-            C2 = fromConfigToSTS(CConfig2);
-        else
-            C2 = null;
-        if (CConfig3 != null)
-            C3 = fromConfigToSTS(CConfig3);
-        else
-            C3 = null;
-
-        ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ///////////////////
-
-
-        //////////////////////////////////////////////////////////////////////////////
-        List<State_Transition_Set> H1_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> H2_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> H3_list = new List<State_Transition_Set>();
-
-        List<State_Transition_Set> A_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> B_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> C_list = new List<State_Transition_Set>();
-
-
-        if (A1 != null)
-        {
-            A_list.Add(A1);
-            H1_list.Add(A1);
-        }
-        if (A2 != null)
-        {
-            A_list.Add(A2);
-            H2_list.Add(A2);
-        }
-        if (A3 != null)
-        {
-            A_list.Add(A3);
-            H3_list.Add(A3);
-        }
-
-        if (B1 != null)
-        {
-            B_list.Add(B1);
-            H1_list.Add(B1);
-        }
-        if (B2 != null)
-        {
-            B_list.Add(B2);
-            H2_list.Add(B2);
-        }
-        if (B3 != null)
-        {
-            B_list.Add(B3);
-            H3_list.Add(B3);
-        }
-
-        if (C1 != null)
-        {
-            C_list.Add(C1);
-            H1_list.Add(C1);
-        }
-        if (C2 != null)
-        {
-            C_list.Add(C2);
-            H2_list.Add(C2);
-        }
-        if (C3 != null)
-        {
-            C_list.Add(C3);
-            H3_list.Add(C3);
-        }
-
-        for (int i = 0; i < A_list.Count; i++)
-        {
-            List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
-            if (i == 0)
-            {
-                A_list[i].enterInput = inputs_defined.Attack;
-                A_list[i].exitInput = inputs_defined.Null;
-            }
-            else
-            {
-                A_list[i].enterInput = inputs_defined.Null;
-                A_list[i].exitInput = inputs_defined.Null;
-            }
-
-            if (i + 1 < A_list.Count)
-            {
-                State_Rate_Set State_Rate_Set =
-                    new State_Rate_Set(
-                    A_list[i + 1].StateKey,
-                    A_list[i + 1].stateType,
-                    A_list[i + 1].ai_trigger_ranges,
-                    true, true, inputs_defined.Attack, inputs_defined.Null, A_list[i + 1].SPLevel,
-                    A_list[i + 1].skillEmergentLevel);
-                casualT0.Add(State_Rate_Set);
-            }
-
-            switch (i)
-            {
-                case 0://查H2
-                    for (int y = 0; y < H2_list.Count; y++)
-                    {
-                        if (!A_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
-                        {
-                            inputs_defined casualtokey = inputs_defined.Null;
-                            if (B_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire1;
-                            }
-                            if (C_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire2;
-                            }
-
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
-                                H2_list[y].StateKey,
-                                H2_list[y].stateType,
-                                H2_list[y].ai_trigger_ranges,
-                                true, true,
-                                casualtokey, inputs_defined.Null,
-                                H2_list[y].SPLevel,
-                                H2_list[y].skillEmergentLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
-                    }
-                    break;
-                case 1://查H3
-                    for (int y = 0; y < H3_list.Count; y++)
-                    {
-                        if (!A_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
-                        {
-                            inputs_defined casualtokey = inputs_defined.Null;
-                            if (B_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire1;
-                            }
-                            if (C_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire2;
-                            }
-
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
-                                H3_list[y].StateKey,
-                                H3_list[y].stateType,
-                                H3_list[y].ai_trigger_ranges,
-                                true, true,
-                                casualtokey, inputs_defined.Null,
-                                H3_list[y].SPLevel,
-                                H3_list[y].skillEmergentLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
-                    }
-                    break;
-                case 2:
-                    break;
-            }
-
-            if (this.R != null)
-                casualT0.Add(this.R.GetStateRateSet());
-            if (this.D != null)
-                casualT0.Add(this.D.GetStateRateSet());
-
-            A_list[i].casual_to_state_Sets = casualT0.ToArray();
-        }
-
-        //////////////
-        for (int i = 0; i < B_list.Count; i++)
-        {
-            List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
-            if (i == 0)
-            {
-                B_list[i].enterInput = inputs_defined.Fire1;
-                B_list[i].exitInput = inputs_defined.Null;
-            }
-            else
-            {
-                B_list[i].enterInput = inputs_defined.Null;
-                B_list[i].exitInput = inputs_defined.Null;
-            }
-
-            if (i + 1 < B_list.Count)
-            {
-                State_Rate_Set State_Rate_Set =
-                    new State_Rate_Set(
-                    B_list[i + 1].StateKey,
-                    B_list[i + 1].stateType,
-                    B_list[i + 1].ai_trigger_ranges,
-                    true, true, inputs_defined.Fire1, inputs_defined.Null, 
-                    B_list[i + 1].SPLevel,
-                    B_list[i + 1].skillEmergentLevel);
-                casualT0.Add(State_Rate_Set);
-            }
-
-            switch (i)
-            {
-                case 0://查H2
-                    for (int y = 0; y < H2_list.Count; y++)
-                    {
-                        if (!B_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
-                        {
-                            inputs_defined casualtokey = inputs_defined.Null;
-                            if (A_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = inputs_defined.Attack;
-                            }
-                            if (C_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire2;
-                            }
-
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
-                                H2_list[y].StateKey,
-                                H2_list[y].stateType,
-                                H2_list[y].ai_trigger_ranges,
-                                true, true,
-                                casualtokey, inputs_defined.Null,
-                                H2_list[y].SPLevel,
-                                H2_list[y].skillEmergentLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
-                    }
-                    break;
-                case 1://查H3
-                    for (int y = 0; y < H3_list.Count; y++)
-                    {
-                        if (!B_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
-                        {
-                            inputs_defined casualtokey = inputs_defined.Null;
-                            if (A_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = inputs_defined.Attack;
-                            }
-                            if (C_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire2;
-                            }
-
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
-                                H3_list[y].StateKey,
-                                H3_list[y].stateType,
-                                H3_list[y].ai_trigger_ranges,
-                                true, true,
-                                casualtokey, inputs_defined.Null,
-                                H3_list[y].SPLevel,
-                                H3_list[y].skillEmergentLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
-                    }
-                    break;
-                case 2:
-                    break;
-            }
-
-            if (this.R != null)
-                casualT0.Add(this.R.GetStateRateSet());
-            if (this.D != null)
-                casualT0.Add(this.D.GetStateRateSet());
-
-            B_list[i].casual_to_state_Sets = casualT0.ToArray();
-        }
-        //////////////////////////////////
-
-        for (int i = 0; i < C_list.Count; i++)
-        {
-            List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
-            if (i == 0)
-            {
-                C_list[i].enterInput = inputs_defined.Fire2;
-                C_list[i].exitInput = inputs_defined.Null;
-            }
-            else
-            {
-                C_list[i].enterInput = inputs_defined.Null;
-                C_list[i].exitInput = inputs_defined.Null;
-            }
-
-            if (i + 1 < C_list.Count)
-            {
-                State_Rate_Set State_Rate_Set =
-                    new State_Rate_Set(
-                    C_list[i + 1].StateKey,
-                    C_list[i + 1].stateType,
-                    C_list[i + 1].ai_trigger_ranges,
-                    true, true, inputs_defined.Fire2, inputs_defined.Null, 
-                    C_list[i + 1].SPLevel,
-                    C_list[i + 1].skillEmergentLevel);
-                casualT0.Add(State_Rate_Set);
-            }
-
-            switch (i)
-            {
-                case 0://查H2
-                    for (int y = 0; y < H2_list.Count; y++)
-                    {
-                        if (!C_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
-                        {
-                            inputs_defined casualtokey = inputs_defined.Null;
-                            if (A_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = inputs_defined.Attack;
-                            }
-                            if (B_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire1;
-                            }
-
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
-                                H2_list[y].StateKey,
-                                H2_list[y].stateType,
-                                H2_list[y].ai_trigger_ranges,
-                                true, true,
-                                casualtokey, inputs_defined.Null,
-                                H2_list[y].SPLevel,
-                                H2_list[y].skillEmergentLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
-                    }
-                    break;
-                case 1://查H3
-                    for (int y = 0; y < H3_list.Count; y++)
-                    {
-                        if (!C_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
-                        {
-                            inputs_defined casualtokey = inputs_defined.Null;
-                            if (A_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = inputs_defined.Attack;
-                            }
-                            if (B_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = inputs_defined.Fire1;
-                            }
-
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
-                                H3_list[y].StateKey,
-                                H3_list[y].stateType,
-                                H3_list[y].ai_trigger_ranges,
-                                true, true,
-                                casualtokey, inputs_defined.Null,
-                                H3_list[y].SPLevel,
-                                H3_list[y].skillEmergentLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
-                    }
-                    break;
-                case 2:
-                    break;
-            }
-
-            if (this.R != null)
-                casualT0.Add(this.R.GetStateRateSet());
-            if (this.D != null)
-                casualT0.Add(this.D.GetStateRateSet());
-
-            C_list[i].casual_to_state_Sets = casualT0.ToArray();
-        }
-
-        chuanEndCasualT0.Clear();
-        if (A1 != null)
-            chuanEndCasualT0.Add(A1.GetStateRateSet());
-        if (B1 != null)
-            chuanEndCasualT0.Add(B1.GetStateRateSet());
-        if (C1 != null)
-            chuanEndCasualT0.Add(C1.GetStateRateSet());
-        if (R != null)
-            chuanEndCasualT0.Add(R.GetStateRateSet());
-        if (D != null)
-            chuanEndCasualT0.Add(D.GetStateRateSet());
-
-        if (A3 != null)
-        {
-            A3.casual_to_state_Sets = chuanEndCasualT0.ToArray();
-        }
-        if (B3 != null)
-        {
-            B3.casual_to_state_Sets = chuanEndCasualT0.ToArray();
-        }
-        if (C3 != null)
-        {
-            C3.casual_to_state_Sets = chuanEndCasualT0.ToArray();
-        }
-
-        if (this.R != null)
-        {
-            this.R.casual_to_state_Sets = chuanEndCasualT0.ToArray();
-        }
-    }
-
     // 为了正确表现DMR和其他状态的处理顺序，这个函数应该把DMR的config作为参数。表示这几个是被动，要附加在其他技能存档上执行。
-    public void sortNineAndTwo(passiveSkillConfigs passiveSkillConfigs)
+    public void sortNineAndTwo()
     {
         // 如果本地配置文件没有加载正确上面这个环节就要出问题。D，M，R不需要进行上述操作，
         // 理由是这三者有固定性，而且所依靠的动画包是基础动画包而不是各type角色的攻击技能动画包，所以加载方式有不同的地方。
 
-        AConfig1 = FixConfigByReference(A1skillid);
-        AConfig2 = FixConfigByReference(A2skillid);
-        AConfig3 = FixConfigByReference(A3skillid);
-        BConfig1 = FixConfigByReference(B1skillid);
-        BConfig2 = FixConfigByReference(B2skillid);
-        BConfig3 = FixConfigByReference(B3skillid);
-        CConfig1 = FixConfigByReference(C1skillid);
-        CConfig2 = FixConfigByReference(C2skillid);
-        CConfig3 = FixConfigByReference(C3skillid);
+        AConfig1 = A1skillid != null ? FixConfigByReference(A1skillid) : null;
+        AConfig2 = A2skillid != null ? FixConfigByReference(A2skillid) : null;
+        AConfig3 = A3skillid != null ? FixConfigByReference(A3skillid) : null;
+        BConfig1 = B1skillid != null ? FixConfigByReference(B1skillid) : null;
+        BConfig2 = B2skillid != null ? FixConfigByReference(B2skillid) : null;
+        BConfig3 = B3skillid != null ? FixConfigByReference(B3skillid) : null;
+        CConfig1 = C1skillid != null ? FixConfigByReference(C1skillid) : null;
+        CConfig2 = C2skillid != null ? FixConfigByReference(C2skillid) : null;
+        CConfig3 = C3skillid != null ? FixConfigByReference(C3skillid) : null;
 
         if (AConfig1 != null)
             A1 = fromConfigToSTS(AConfig1);
@@ -714,6 +305,8 @@ public class NineAndTwo {
             C3 = null;
 
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ///////////////////
+
+        passiveSkillConfigs passiveSkillConfigs = new passiveSkillConfigs(this.moveType,this.canDefend,this.rushType);
 
         this.DConfig = passiveSkillConfigs.DConfig;
         this.MConfig = passiveSkillConfigs.MConfig;
@@ -824,8 +417,10 @@ public class NineAndTwo {
                     new State_Rate_Set(
                     A_list[i + 1].StateKey,
                     A_list[i + 1].stateType,
+                    A_list[i + 1].AT,
                     A_list[i + 1].ai_trigger_ranges,
-                    true, true, inputs_defined.Attack, inputs_defined.Null, A_list[i + 1].SPLevel,
+                    true, 
+                    inputs_defined.Attack, inputs_defined.Null, A_list[i + 1].SPLevel,
                     A_list[i + 1].skillEmergentLevel);
                 casualT0.Add(State_Rate_Set);
             }
@@ -851,8 +446,9 @@ public class NineAndTwo {
                                 new State_Rate_Set(
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
+                                H2_list[y].AT,
                                 H2_list[y].ai_trigger_ranges,
-                                true, true, 
+                                true,
                                 casualtokey, inputs_defined.Null, 
                                 H2_list[y].SPLevel,
                                 H2_list[y].skillEmergentLevel);
@@ -880,8 +476,9 @@ public class NineAndTwo {
                                 new State_Rate_Set(
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
+                                H3_list[y].AT,
                                 H3_list[y].ai_trigger_ranges,
-                                true, true,
+                                true,
                                 casualtokey, inputs_defined.Null,
                                 H3_list[y].SPLevel,
                                 H3_list[y].skillEmergentLevel);
@@ -923,8 +520,9 @@ public class NineAndTwo {
                     new State_Rate_Set(
                     B_list[i + 1].StateKey,
                     B_list[i + 1].stateType,
+                    B_list[i + 1].AT,
                     B_list[i + 1].ai_trigger_ranges,
-                    true, true, inputs_defined.Fire1, inputs_defined.Null, 
+                    true, inputs_defined.Fire1, inputs_defined.Null, 
                     B_list[i + 1].SPLevel,
                     B_list[i + 1].skillEmergentLevel);
                 casualT0.Add(State_Rate_Set);
@@ -951,8 +549,9 @@ public class NineAndTwo {
                                 new State_Rate_Set(
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
+                                H2_list[y].AT,
                                 H2_list[y].ai_trigger_ranges,
-                                true, true,
+                                true,
                                 casualtokey, inputs_defined.Null,
                                 H2_list[y].SPLevel,
                                 H2_list[y].skillEmergentLevel);
@@ -980,8 +579,9 @@ public class NineAndTwo {
                                 new State_Rate_Set(
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
+                                H3_list[y].AT,
                                 H3_list[y].ai_trigger_ranges,
-                                true, true,
+                                true,
                                 casualtokey, inputs_defined.Null,
                                 H3_list[y].SPLevel,
                                 H3_list[y].skillEmergentLevel);
@@ -1023,8 +623,9 @@ public class NineAndTwo {
                     new State_Rate_Set(
                     C_list[i + 1].StateKey,
                     C_list[i + 1].stateType,
+                    C_list[i + 1].AT,
                     C_list[i + 1].ai_trigger_ranges,
-                    true, true, inputs_defined.Fire2, inputs_defined.Null, 
+                    true,inputs_defined.Fire2, inputs_defined.Null, 
                     C_list[i + 1].SPLevel,
                     C_list[i + 1].skillEmergentLevel);
                 casualT0.Add(State_Rate_Set);
@@ -1051,8 +652,9 @@ public class NineAndTwo {
                                 new State_Rate_Set(
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
+                                H2_list[y].AT,
                                 H2_list[y].ai_trigger_ranges,
-                                true, true,
+                                true,
                                 casualtokey, inputs_defined.Null,
                                 H2_list[y].SPLevel,
                                 H2_list[y].skillEmergentLevel);
@@ -1080,8 +682,9 @@ public class NineAndTwo {
                                 new State_Rate_Set(
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
+                                H3_list[y].AT,
                                 H3_list[y].ai_trigger_ranges,
-                                true, true,
+                                true,
                                 casualtokey, inputs_defined.Null,
                                 H3_list[y].SPLevel,
                                 H3_list[y].skillEmergentLevel);
@@ -1101,7 +704,7 @@ public class NineAndTwo {
             C_list[i].casual_to_state_Sets = casualT0.ToArray();
         }
 
-        chuanEndCasualT0.Clear();
+        List<State_Rate_Set> chuanEndCasualT0 = new List<State_Rate_Set>();
         if (A1 != null)
             chuanEndCasualT0.Add(A1.GetStateRateSet());
         if (B1 != null)
@@ -1143,51 +746,72 @@ public class NineAndTwo {
         if (level <= 0)
             level = 1;
 
-        this.state_Transition_Dictionary = new Dictionary<string, State_Transition_Set>();
+        IDictionary<string, State_Transition_Set> state_Transition_Dictionary = new Dictionary<string, State_Transition_Set>();
         this.StateTransitionSetList = new List<State_Transition_Set>();
 
         State_Transition_Set Empty = new State_Transition_Set("Empty",
                                                               stateType.NONE,
+                                                              0,
                                                               null,
                                                               new State_Rate_Set[0], 
-                                                              new string[0], false, inputs_defined.Null, inputs_defined.Null,
-                                                              EX.normal,
+                                                              new string[0], 
+                                                              inputs_defined.Null, inputs_defined.Null,
+                                                              0,
                                                               skillEmergentLevel.none,0);
 
         State_Transition_Set Victory = new State_Transition_Set("Victory",
                                                                 stateType.NONE,
+                                                                0,
                                                                 null,
                                                                 new State_Rate_Set[0],
-                                                                new string[0],false, inputs_defined.Null, inputs_defined.Null, EX.normal,
+                                                                new string[0],
+                                                                inputs_defined.Null, inputs_defined.Null,
+                                                                0,
                                                                 skillEmergentLevel.none,0);
 
         State_Transition_Set Death = new State_Transition_Set("Death",
                                                               stateType.NONE,
+                                                              0,
                                                               null,
                                                               new State_Rate_Set[0],
-                                                              new string[0], false, inputs_defined.Null, inputs_defined.Null, EX.normal,
+                                                              new string[0],
+                                                              inputs_defined.Null, inputs_defined.Null, 0,
                                                               skillEmergentLevel.none,0);
 
         State_Transition_Set Defend = new State_Transition_Set("Defend",
                                                                stateType.Def,
-                                                              null,
-                                                              new State_Rate_Set[0],
-                                                               (new List<string>() { "Hit", "KnockOff"}).ToArray(),true, inputs_defined.Defend, inputs_defined.Defend_Cancel, EX.normal,
+                                                               0,
+                                                                null,
+                                                              (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0], //chuanEndCasualT0.ToArray(), 
+                                                               (new List<string>() { "Hit", "KnockOff"}).ToArray(),
+                                                               inputs_defined.Defend, inputs_defined.Defend_Cancel, 0,
                                                                skillEmergentLevel.none,0);
         
         State_Transition_Set Move = new State_Transition_Set("Move_normal",
                                                              stateType.NONE,
+                                                             0,
                                                              null,
                                                              new State_Rate_Set[0], 
                                                              (new List<string>() { "Hit", "KnockOff"}).ToArray(),
-                                                             false, inputs_defined.Null, inputs_defined.Null, EX.normal,
+                                                             inputs_defined.Null, inputs_defined.Null, 0,
                                                              skillEmergentLevel.none,0);
                        
         State_Transition_Set Hit = new State_Transition_Set("Hit",
-                                                            stateType.Hit_early,
+                                                            stateType.Hit,
+                                                            0,
                                                             null,
-                                                            (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0], //chuanEndCasualT0.ToArray(), 
-                                                            (new List<string>() { "Hit", "KnockOff"}).ToArray(), false, inputs_defined.Null, inputs_defined.Null, EX.normal,
+                                                            new State_Rate_Set[0], 
+                                                            (new List<string>() { "Hit", "KnockOff"}).ToArray(), 
+                                                            inputs_defined.Null, inputs_defined.Null, 0,
+                                                            skillEmergentLevel.none,0);
+                                                            
+       State_Transition_Set getUp = new State_Transition_Set("getUp",
+                                                            stateType.getUp,
+                                                            0,
+                                                            null,
+                                                            new State_Rate_Set[0],
+                                                            (new List<string>() { "Hit", "KnockOff"}).ToArray(), 
+                                                            inputs_defined.Null, inputs_defined.Null, 0,
                                                             skillEmergentLevel.none,0);
 
 
@@ -1197,6 +821,7 @@ public class NineAndTwo {
         StateTransitionSetList.Add(Victory);
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);
+        StateTransitionSetList.Add(getUp);
 
         string[] regularforceTOSets = { "Hit", "KnockOff"};
 
@@ -1211,8 +836,7 @@ public class NineAndTwo {
         {
             //下面这些就是怕数据库里九宫格里的M记载有错。
             M.forced_to_state_nums = regularforceTOSets;
-            M.SPLevel = EX.NULL;
-            M.playerModeInputDepend = false;
+            M.SPLevel = -1;
             M.casual_to_state_Sets = null;
             M.ai_trigger_ranges = null;
             StateTransitionSetList.Add(this.M);
@@ -1281,6 +905,8 @@ public class NineAndTwo {
             StateTransitionSetList.Add(this.C3);
         }
 
+        knockOFFCasualTransitios.Add(getUp.GetStateRateSet());
+
         /////////////////////
         /// 
 
@@ -1289,11 +915,12 @@ public class NineAndTwo {
             // 并且knockoff可以以常规迁移来猛的释放A1，B1，C1，或M。
         State_Transition_Set KnockOff = new State_Transition_Set("KnockOff",
                                                                  stateType.KnockOff,
+                                                                 0,
                                                                  null,
                                                                  knockOFFCasualTransitios.ToArray(),
-                                                                 (new List<string>() { "KnockOff"}).ToArray(),false, 
+                                                                 (new List<string>() { "Hit","KnockOff"}).ToArray(),
                                                                  inputs_defined.Null, inputs_defined.Null,
-                                                                 EX.normal,
+                                                                 0,
                                                                  skillEmergentLevel.none,
                                                                 0);
 
@@ -1335,7 +962,7 @@ public class NineAndTwo {
             }
         }
 
-        return this.state_Transition_Dictionary;
+        return state_Transition_Dictionary;
     }
 
     //下面的环节纯粹是针对SkillPrintOut的一些处理
@@ -1367,16 +994,16 @@ public class NineAndTwo {
     //这个函数是服务于stagesmanager。因为编辑关卡的时候是直接去编辑九宫格的config
     public void refreshSkillNumsByConfigs()
     {
-        A1skillid = AConfig1 != null ? AConfig1.id : -1;
-        A2skillid = AConfig2 != null ? AConfig2.id : -1;
-        A3skillid = AConfig3 != null ? AConfig3.id : -1;
+        A1skillid = AConfig1 != null ? AConfig1.id : null;
+        A2skillid = AConfig2 != null ? AConfig2.id : null;
+        A3skillid = AConfig3 != null ? AConfig3.id : null;
 
-        B1skillid = BConfig1 != null ? BConfig1.id : -1;
-        B2skillid = BConfig2 != null ? BConfig2.id : -1;
-        B3skillid = BConfig3 != null ? BConfig3.id : -1;
+        B1skillid = BConfig1 != null ? BConfig1.id : null;
+        B2skillid = BConfig2 != null ? BConfig2.id : null;
+        B3skillid = BConfig3 != null ? BConfig3.id : null;
 
-        C1skillid = CConfig1 != null ? CConfig1.id : -1;
-        C2skillid = CConfig2 != null ? CConfig2.id : -1;
-        C3skillid = CConfig3 != null ? CConfig3.id : -1;
+        C1skillid = CConfig1 != null ? CConfig1.id : null;
+        C2skillid = CConfig2 != null ? CConfig2.id : null;
+        C3skillid = CConfig3 != null ? CConfig3.id : null;
     }
 }

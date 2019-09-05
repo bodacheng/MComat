@@ -55,6 +55,7 @@ namespace EZObjectPools
             if (Marker == null)
             {
                 Marker = new GameObject("EZ Object Pools Container");
+                Marker.AddComponent<PoolObjectsReparentManger>();
                 DontDestroyOnLoad(Marker);
                 SharedPools.Clear();
             }

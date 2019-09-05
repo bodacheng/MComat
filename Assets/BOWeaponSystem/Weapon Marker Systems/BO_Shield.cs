@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EZObjectPools;
+using HittingDetection;
 
 public class BO_Shield : MonoBehaviour {
 
@@ -89,7 +90,7 @@ public class BO_Shield : MonoBehaviour {
         if (_hpCounter < 0)
         {
             shieldBreak();
-        }    
+        }
     }
 
     private GameObject shieldbreaking;
@@ -99,7 +100,7 @@ public class BO_Shield : MonoBehaviour {
         {
             if (shieldBreakSpark == null)
             {
-                shieldBreakSpark = defaultPools.Instance.iniEffectsPool("onEnableShieldSpark", personalEffectPath, 3);
+                shieldBreakSpark = EffectAndHurtObjectLoading.Instance.iniEffectsPool("onEnableShieldSpark", personalEffectPath, 3);
             }
             if (shieldBreakSpark != null)
             {
@@ -109,7 +110,7 @@ public class BO_Shield : MonoBehaviour {
         }
         if (_ParentHealth != null)
         {
-            _ParentHealth.ApplyDamage(new v_Damage(0, damageType.heavy_damage, Vector3.zero, this._ShieldCenterSpot.position, _ParentHealth));
+            _ParentHealth.ApplyDamage(new v_Damage(damageType.heavy_damage, Vector3.zero, this._ShieldCenterSpot.position, _ParentHealth,null));
         }
     }
 
@@ -125,7 +126,7 @@ public class BO_Shield : MonoBehaviour {
     public void passHitPointsFromWeaponToShiled(List<Vector3> _ShiledHitPositions)
     {
         if (_hitSparks == null)
-            _hitSparks = defaultPools.Instance.iniEffectsPool("shield_hit", personalEffectPath, 3);
+            _hitSparks = EffectAndHurtObjectLoading.Instance.iniEffectsPool("shield_hit", personalEffectPath, 3);
         
         if (_hitSparks != null)
         {

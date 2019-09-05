@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EZObjectPools;
+using HittingDetection;
+using Soul;
 
 public class Knock_Off_State : AI_State
 {
@@ -61,13 +63,13 @@ public class Knock_Off_State : AI_State
     public override void AI_State_enter()
     {
         base.AI_State_enter();
+        this._DATA_CENTER.setGravitySwitch(false);
         this.time_counter = 0;
         this.BS_Main_Health.SetGettingDamageState(true);
         this._Animator.SetFloat("speed", 0f);
         this._Weapon_Animation_Events.clearMarkerManagers();
         this.BS_Main_Health.enableAllHitBoxCollider(false);
-        this.AI_DATA_CENTER.deActiveObjects();
-        landedCal = 1;
+        this._DATA_CENTER.deActiveObjects();
 
 		if (BS_Main_Health.returnDamageList(damageType.supper_damage).Count > 0)
         {
@@ -82,15 +84,16 @@ public class Knock_Off_State : AI_State
 			BS_Main_Health.returnDamageList(damageType.light_damage).Clear();
         }
 
-        this.BS_Main_Health.plusCriticalGauge(5);
+        this.BS_Main_Health.plusCriticalGauge(2);
 
         _Rigidbody.velocity = Vector3.zero;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         
-        defaultPools.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);
         
         int ranDom = (int)Random.Range(0,knockoffAnimations.Count);
-        Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, knockoffAnimations[ranDom]);
+                
+        Animation_Manger.animationTrigger(knockoffAnimations[ranDom]);
         
         if (BS_Main_Health.returnDamageList(damageType.knockOff_damage) != null)
         {
@@ -103,7 +106,7 @@ public class Knock_Off_State : AI_State
                 else
                     KnockOffSparkPersonalEffectPath = null;
 
-                superHitPool = defaultPools.Instance.iniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 2);
+                superHitPool = EffectAndHurtObjectLoading.Instance.iniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
                 if (superHitPool != null)
                 {
                     processingBlood = superHitPool.TryGetNextObject(BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].damageHappenPoint, Quaternion.identity);
@@ -126,30 +129,6 @@ public class Knock_Off_State : AI_State
             }
             BS_Main_Health.returnDamageList(damageType.knockOff_damage).Clear();
         }
-		//if (BS_Main_Health.returnEventDamageList() != null)
-   //     {
-			//if (BS_Main_Health.returnEventDamageList().Count > 0)
-    //        {
-				//if (BS_Main_Health.returnEventDamageList()[0].Position_set.Child == null)
-    //            {
-				//	BS_Main_Health.returnEventDamageList()[0].Position_set.Child = this.gameObject;
-    //            }
-				//if (BS_Main_Health.returnEventDamageList()[0].Position_set.Parent == null)
-    //            {
-				//	BS_Main_Health.returnEventDamageList()[0].Position_set.Parent = this.gameObject;
-    //            }
-				//BS_Main_Health.returnEventDamageList()[0].getAttackerHealthBody().eventAttackHitApprove(BS_Main_Health.returnEventDamageList()[0]);
-				//BS_Main_Health.returnEventDamageList().Clear();
-				//BS_Main_Health.returnDamageList(damageType.supper_damage).Clear();
-				//BS_Main_Health.returnDamageList(damageType.heavy_damage).Clear();
-				//BS_Main_Health.returnDamageList(damageType.light_damage).Clear();
-				//BS_Main_Health.returnDamageList(damageType.knockOff_damage).Clear();
-        //    }
-        //}
-		//if (BS_Main_Health.returnApprovedEventAttackAttempts() != null)
-   //     {
-			//BS_Main_Health.returnApprovedEventAttackAttempts().Clear();
-        //}
     }
 
     public override bool capacity_exit_condition()
@@ -165,7 +144,6 @@ public class Knock_Off_State : AI_State
         base.AI_State_exit();
         this.BS_Main_Health.SetGettingDamageState(false);
         this.BS_Main_Health.enableAllHitBoxCollider(true);
-        landedCal = 1;
         this._Rigidbody.velocity = Vector3.zero;
     }
 
@@ -179,12 +157,11 @@ public class Knock_Off_State : AI_State
                 force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].force_direction;
                 force_direction.y = 20f;
 
-                this.BS_Main_Health.plusCriticalGauge(5);
+                this.BS_Main_Health.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new v_Damage(0, damageType.knockOff_damage, force_direction,
+                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
                                         BS_Main_Health.returnDamageList(damageType.supper_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.supper_damage)[0].fromWeapon
-                                                       ));
+                                                        BS_Main_Health.returnDamageList(damageType.supper_damage)[0].fromWeapon));
 
                 BS_Main_Health.eatDamage(damageType.supper_damage);
             }
@@ -198,13 +175,11 @@ public class Knock_Off_State : AI_State
                 force_direction = BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].force_direction;
                 force_direction.y = 10f;
 
-                this.BS_Main_Health.plusCriticalGauge(5);
+                this.BS_Main_Health.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new v_Damage(0, damageType.knockOff_damage, force_direction,
+                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
                         BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].fromWeapon
-                                                       ));
-
+                                                        BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].fromWeapon));
                 BS_Main_Health.eatDamage(damageType.heavy_damage);
             }
         }
@@ -217,64 +192,39 @@ public class Knock_Off_State : AI_State
                 force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].force_direction;
                 force_direction.y = 5f;
 
-                this.BS_Main_Health.plusCriticalGauge(5);
+                this.BS_Main_Health.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new v_Damage(0, damageType.knockOff_damage, force_direction,
+                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
                                                         BS_Main_Health.returnDamageList(damageType.light_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.light_damage)[0].fromWeapon
-                                                       ));
+                                                        BS_Main_Health.returnDamageList(damageType.light_damage)[0].fromWeapon));
 
                 BS_Main_Health.eatDamage(damageType.light_damage);
             }
         }
 	}
 
-    public override void _f_State_Update()
+    public override void _State_FixedUpdate1()
     {
-		clearOtherDamage();
-
-        time_counter += Time.deltaTime;
+		//clearOtherDamage();
+        time_counter += Time.fixedDeltaTime;
         if (time_counter > 0.6f)
         {
             _SkillCancelFlag.turn_on_flag();
         }
 
-        if (!_Rigidbody.useGravity)
+        if (!this._DATA_CENTER.getGravitySwitch())
         {
-			_Rigidbody.useGravity = true;
-        }
-
-        if (landedCal == 1)
-        {
-            if (!AI_DATA_CENTER.IsGrounded())
+            _Rigidbody.velocity = used_velcoity;//一定让它飞起来
+            if (time_counter > 0.1)
             {
-                landedCal = 2;
-            }else{
-                _Rigidbody.velocity = used_velcoity;//一定让它飞起来
+                this._DATA_CENTER.setGravitySwitch(true);
             }
-        }
-        if (landedCal == 2)
-        {
-            if (AI_DATA_CENTER.IsGrounded())
-            {
-                landedCal = 3;
-            }
-        }
-
-        if (landedCal == 3)
-        {
+        }else{
             this._Rigidbody.velocity = Vector3.zero;
         }
 
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
             this.RotateToVelocityNegative(3f, true);
-    }
-
-    int landedCal;//1 还在地上 2 已经被打飞起来 3 落地
-
-    public override void _State_FixedUpdate()
-    {
-        
     }
 }
 
@@ -283,3 +233,28 @@ public class Knock_Off_State : AI_State
 // during the transition of knock off animation to self,the turn on flag you put there is triggerd,
 // The AIStateRunner will recognise it as a permision to enter the revive state,then what you will see
 // is that revive state is somehow triggerd immmediately. 1107 -- haku
+
+    //if (BS_Main_Health.returnEventDamageList() != null)
+   //     {
+            //if (BS_Main_Health.returnEventDamageList().Count > 0)
+    //        {
+                //if (BS_Main_Health.returnEventDamageList()[0].Position_set.Child == null)
+    //            {
+                //  BS_Main_Health.returnEventDamageList()[0].Position_set.Child = this.gameObject;
+    //            }
+                //if (BS_Main_Health.returnEventDamageList()[0].Position_set.Parent == null)
+    //            {
+                //  BS_Main_Health.returnEventDamageList()[0].Position_set.Parent = this.gameObject;
+    //            }
+                //BS_Main_Health.returnEventDamageList()[0].getAttackerHealthBody().eventAttackHitApprove(BS_Main_Health.returnEventDamageList()[0]);
+                //BS_Main_Health.returnEventDamageList().Clear();
+                //BS_Main_Health.returnDamageList(damageType.supper_damage).Clear();
+                //BS_Main_Health.returnDamageList(damageType.heavy_damage).Clear();
+                //BS_Main_Health.returnDamageList(damageType.light_damage).Clear();
+                //BS_Main_Health.returnDamageList(damageType.knockOff_damage).Clear();
+        //    }
+        //}
+        //if (BS_Main_Health.returnApprovedEventAttackAttempts() != null)
+   //     {
+            //BS_Main_Health.returnApprovedEventAttackAttempts().Clear();
+        //}

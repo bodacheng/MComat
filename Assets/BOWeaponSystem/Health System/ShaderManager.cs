@@ -23,12 +23,13 @@ public class ShaderManager : MonoBehaviour
             POFX_RimBase pOFX_RimBase = pOFXes[i].GetComponent<POFX_RimBase>();
             if (pOFX_RimBase)
                 pOFX_RimBase.m_params.rimpower = 0.9f;
-            pOFXes[i].enabled = true;
+            pOFXes[i].enabled = false;
         }
     }
 
     public void RimEffectsUp(Color color , float intensity,float lerpspeed)
     {
+        return;
         for (int i = 0; i < colorchangeprocesses.Count; i++)
         {
             StopCoroutine(colorchangeprocesses[i]);
@@ -44,6 +45,7 @@ public class ShaderManager : MonoBehaviour
 
     public void RimEffectsClear()
     {
+        return;
         //RimEffectsClear()的话就不再把其他颜色改变进程清理了，因为这样一个颜色清理进程可能会把其他颜色变化进程给阻断掉，最典型的例子是角色抵抗消失时候会把应该有的受伤变色给搞的不再有效果
         for (int i = 0; i < colorchangeprocesses.Count; i++)
         {
@@ -60,6 +62,7 @@ public class ShaderManager : MonoBehaviour
 
     public void RimEffectsForAShortTime(float tartget_intensity,float lerpspeed, float time, Color targetColor)
     {
+        return;
         for (int i = 0; i < colorchangeprocesses.Count; i++)
         {
             StopCoroutine(colorchangeprocesses[i]);

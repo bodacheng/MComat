@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Soul;
 
 //记住我们AI系统的机制是这样：在任何时候，如果之前的状态已经可以退出，那么进入的是一个所有状态之间抽签的环节。
 //比方说一个角色现在和一个敌人处于近距离，他技能组中所有的近距离攻击的absolutely rate总和与move状态的比例可能是体现出他攻击性的关键。
@@ -15,7 +16,7 @@ public class States_Incubator
     public List<string> moveTypeKeys;
     public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
-    public States_Incubator(string anim_path, IDictionary<string, State_Transition_Set> toFormAttackStateList)
+    public States_Incubator(string anim_path, Empty_State empty_State,IDictionary<string, State_Transition_Set> toFormAttackStateList)
     {
         if (anim_path == null)
             return;
@@ -23,8 +24,7 @@ public class States_Incubator
         Num_State_List = new List<AI_Num_With_State>();
         StateIndexList = new List<string>();
 
-        Empty_State empty = new Empty_State();
-        Num_State_List.Add(new AI_Num_With_State("Empty", empty));
+        Num_State_List.Add(new AI_Num_With_State("Empty", empty_State));
         StateIndexList.Add("Empty");
 
         Move_State move1 = new Move_State(AIMoveStyle.normal,12f, 2f);
@@ -84,12 +84,15 @@ public class States_Incubator
 
         Hurt_State hit = new Hurt_State(2f, 8f, 0.4f, 0.6f);
         hit.nextAttackStateCanRushFirst = false;
-        hit.StateType = stateType.Hit_early;
+        hit.StateType = stateType.Hit;
 
         Controlled_State controlled = new Controlled_State("controlled");
         controlled.nextAttackStateCanRushFirst = false;
 
-        Knock_Off_State knock_off = new Knock_Off_State(2f, 40f,40f);
+        GetUp getUp = new GetUp("getup",2f);
+        getUp.StateType = stateType.getUp;
+
+        Knock_Off_State knock_off = new Knock_Off_State(2f, 20f,40f);
         knock_off.StateType = stateType.KnockOff;
         knock_off.nextAttackStateCanRushFirst = true;
 
@@ -99,6 +102,8 @@ public class States_Incubator
         StateIndexList.Add("Controlled");
         Num_State_List.Add(new AI_Num_With_State("KnockOff", knock_off));
         StateIndexList.Add("KnockOff");
+        Num_State_List.Add(new AI_Num_With_State("getUp",getUp));
+        StateIndexList.Add("getUp");
 
         SkillTypeKeys = new List<string>();
         foreach (KeyValuePair<string, State_Transition_Set> valuePair in toFormAttackStateList)
@@ -106,14 +111,16 @@ public class States_Incubator
             State_Transition_Set _set = valuePair.Value;
             if (_set == null)
                 continue;
+                
             if (!StateIndexList.Contains(_set.StateKey))
             {
                 stateType _attackType = _set.stateType;
                 switch (_attackType)
                 {
                     case stateType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey, true, _set.skillEmergentLevel);
+                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey, _set.skillEmergentLevel);
                         _GI_Attack.StateType = stateType.GI;
+                        _GI_Attack.AT = _set.AT;
                         _GI_Attack.nextAttackStateCanRushFirst = false;
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _GI_Attack));
                         StateIndexList.Add(_set.StateKey);
@@ -122,14 +129,16 @@ public class States_Incubator
                     case stateType.GM:
                         G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey, 5f, 2f, _set.skillEmergentLevel);
                         _GM_Attack.StateType = stateType.GM;
+                        _GM_Attack.AT = _set.AT;
                         _GM_Attack.nextAttackStateCanRushFirst = false;
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _GM_Attack));
                         StateIndexList.Add(_set.StateKey);
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case stateType.GR:
-                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f,20f, _set.StateKey, true, _set.skillEmergentLevel);
+                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f,20f, _set.StateKey, _set.skillEmergentLevel);
                         _GR_Attack.StateType = stateType.GR;
+                        _GR_Attack.AT = _set.AT;
                         _GR_Attack.nextAttackStateCanRushFirst = false;
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _GR_Attack));
                         StateIndexList.Add(_set.StateKey);
@@ -138,6 +147,7 @@ public class States_Incubator
                     case stateType.CT:
                         Counter_State _Counter = new Counter_State(_set.StateKey,1.4f, 2f, 1,_set.skillEmergentLevel);
                         _Counter.StateType = stateType.CT;
+                        _Counter.AT = _set.AT;
                         _Counter.nextAttackStateCanRushFirst = false;
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _Counter));
                         StateIndexList.Add(_set.StateKey);
@@ -211,6 +221,7 @@ public class States_Incubator_ForLocalResourceCheck // 用于本地脚本做成�
         StateIndexList.Add("Hit");
         StateIndexList.Add("Controlled");
         StateIndexList.Add("KnockOff");
+        StateIndexList.Add("getUp");
 
         UnityEngine.Object[] GAttackStateResources = Resources.LoadAll("Animations/" + anim_path + "/G_Attack_State", typeof(AnimationClip));//这个系列的状态角色必须有个叫做“dash”的冲刺动作
         foreach (UnityEngine.Object _anim in GAttackStateResources)
@@ -285,6 +296,7 @@ public class States_Incubator_ForLocalResourceCheck // 用于本地脚本做成�
         StateIndexList.Add("Hit");
         StateIndexList.Add("Controlled");
         StateIndexList.Add("KnockOff");
+        StateIndexList.Add("getUp");
 
         foreach (State_Transition_Set _set in toFormAttackStateList)
         {

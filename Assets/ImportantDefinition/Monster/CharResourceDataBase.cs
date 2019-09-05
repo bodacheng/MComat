@@ -14,7 +14,7 @@ using UnityEngine.UI;
 [Serializable]
 public class CharacterResourceInfo
 {
-	public int charResouceNum;//monsterTable ID
+	public int monsterId;//monsterTable ID
     public string type = null;
     public string prefabName;//monsterTable realName
     public string showNameEN;//monsterTable showNameEN
@@ -37,58 +37,64 @@ public class CharacterResourceInfo
         return passiveSkillConfigs;
     }
 
-    public CharacterDataInfo getASampleCharacterDataInfo(int localID)
+    public CharacterDataInfo getASampleCharacterDataInfo(string localID)
     {
         CharacterDataInfo characterDataInfo = new CharacterDataInfo();
-        characterDataInfo.localID = localID;
-        characterDataInfo.resource_num = charResouceNum; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
+        characterDataInfo.monsterOfPlayerId = localID;
+        characterDataInfo.monsterId = monsterId; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
         characterDataInfo.level = 1;
         characterDataInfo.HP = 500; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
-        characterDataInfo.EXP = 0;
         characterDataInfo._NineAndTwo = null;
         return characterDataInfo;
     }
 }
 
-[Serializable] 
 public class passiveSkillConfigs
 {
+    public MoveType moveType;
+    public bool hasDefend;
+    public RushType rushType;
+
     public SkillConfig MConfig;
     public SkillConfig DConfig;
     public SkillConfig RConfig;
 
     public passiveSkillConfigs(MoveType moveType,bool hasDefend,RushType RStyle)
     {
+        this.moveType = moveType;
+        this.hasDefend = hasDefend;
+        this.rushType = RStyle;
+        
         switch(moveType)
         {
             case MoveType.Mode1:
                 this.MConfig = new SkillConfig
                     (
-                        -1, null, "Move_normal","normal move", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Move_normal","normal move", 0, stateType.NONE, null, 0, skillEmergentLevel.none
                     );
                 break;
             case MoveType.Mode2:
                 this.MConfig = new SkillConfig
                     (
-                        -1, null, "Move_slow", "normal move", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Move_slow", "normal move", 0, stateType.NONE, null, 0,skillEmergentLevel.none
                     );
                 break;
             case MoveType.Mode3:
                 this.MConfig = new SkillConfig
                     (
-                        -1, null, "Move_fast", "normal move", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Move_fast", "normal move", 0, stateType.NONE, null, 0,skillEmergentLevel.none
                     );
                 break;
             case MoveType.Test:
                 this.MConfig = new SkillConfig
                     (
-                        -1, null, "Test_Move", "测试用移动状态(角色站着不动)", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Test_Move", "测试用移动状态(角色站着不动)", 0, stateType.NONE, null, 0, skillEmergentLevel.none
                     );
                 break;
             default:
                 this.MConfig = new SkillConfig
                     (
-                        -1, null, "Move_normal", "normal move", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Move_normal", "normal move", 0, stateType.NONE, null, 0, skillEmergentLevel.none
                     );
                 break;
         }
@@ -97,7 +103,7 @@ public class passiveSkillConfigs
         {
             this.DConfig = new SkillConfig
                     (
-                        -1, null, "Defend", "防衛", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Defend", "防衛", 0, stateType.NONE, null, 0,skillEmergentLevel.none
                     );
         }else{
             this.DConfig = null;
@@ -108,19 +114,19 @@ public class passiveSkillConfigs
             case RushType.Jump:
                 this.RConfig = new SkillConfig
                     (
-                        -1, null, "Jump", "Jump", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Jump", "Jump", 0, stateType.NONE, null, 0, skillEmergentLevel.none
                     );
                 break;
             case RushType.Rush:
                 this.RConfig = new SkillConfig
                     (
-                        -1, null, "Rush", "Rush", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "Rush", "Rush", 0, stateType.NONE, null, 0, skillEmergentLevel.none
                     );
                 break;
             case RushType.RushBack:
                 this.RConfig = new SkillConfig
                     (
-                        -1, null, "RushBack", "RushBack", 0, stateType.NONE, null, EX.normal, false, skillEmergentLevel.none
+                        null, null, "RushBack", "RushBack", 0, stateType.NONE, null, 0,skillEmergentLevel.none
                     );
                 break;
             case RushType.None:

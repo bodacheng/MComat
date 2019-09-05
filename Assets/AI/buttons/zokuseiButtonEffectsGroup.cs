@@ -9,10 +9,10 @@ public class zokuseiButtonEffectsGroup
     public zokusei zokusei;
     
     //攻击键系成员
-    public IDictionary<Button, IDictionary<EX, ParticleSystem>> buttonEffectsSets = new Dictionary<Button, IDictionary<EX, ParticleSystem>>(); 
-    public IDictionary<EX, ParticleSystem> Attack1ButtonEffects;
-    public IDictionary<EX, ParticleSystem> Fire1ButtonEffects;
-    public IDictionary<EX, ParticleSystem> Fire2ButtonEffects;
+    public IDictionary<Button, IDictionary<int, ParticleSystem>> buttonEffectsSets = new Dictionary<Button, IDictionary<int, ParticleSystem>>(); 
+    public IDictionary<int, ParticleSystem> Attack1ButtonEffects;
+    public IDictionary<int, ParticleSystem> Fire1ButtonEffects;
+    public IDictionary<int, ParticleSystem> Fire2ButtonEffects;
     public IDictionary<Button, ParticleSystem> buttonRefreshEffects;
     public ParticleSystem triggerExplosion0;
     public ParticleSystem triggerExplosion1;
@@ -30,9 +30,9 @@ public class zokuseiButtonEffectsGroup
     
     public void close()
     {
-        foreach(KeyValuePair<Button, IDictionary<EX, ParticleSystem>> keyValuePair in buttonEffectsSets)
+        foreach(KeyValuePair<Button, IDictionary<int, ParticleSystem>> keyValuePair in buttonEffectsSets)
         {
-            foreach(KeyValuePair<EX, ParticleSystem> exPPair in keyValuePair.Value)
+            foreach(KeyValuePair<int, ParticleSystem> exPPair in keyValuePair.Value)
             {
                 exPPair.Value.Stop(true);
             }
@@ -51,11 +51,11 @@ public class zokuseiButtonEffectsGroup
         rushbutton.Stop(true);
     }
         
-    public void open(Vector3 attackbuttonpos,Vector3 fire1buttonpos,Vector3 fire2buttonpos,Vector3 defendbuttonpos,Vector3 rushbuttonpos)
+    public void open(Vector3 defendbuttonpos,Vector3 rushbuttonpos)
     {
-        foreach(KeyValuePair<Button, IDictionary<EX, ParticleSystem>> keyValuePair in buttonEffectsSets)
+        foreach(KeyValuePair<Button, IDictionary<int, ParticleSystem>> keyValuePair in buttonEffectsSets)
         {
-            foreach(KeyValuePair<EX, ParticleSystem> exPPair in keyValuePair.Value)
+            foreach(KeyValuePair<int, ParticleSystem> exPPair in keyValuePair.Value)
             {
                 exPPair.Value.Stop(true);
             }
@@ -77,7 +77,7 @@ public class zokuseiButtonEffectsGroup
         rushbutton.Play(true);
     }
                 
-    public void INI(zokusei zokusei,Button Attack,Button Fire1,Button Fire2)
+    public void INI(Transform targetRectT,zokusei zokusei,Button Attack,Button Fire1,Button Fire2)
     {
         this.zokusei = zokusei;
         string buttoneffectspath;
@@ -131,14 +131,28 @@ public class zokuseiButtonEffectsGroup
         triggerExplosion3 = Object.Instantiate(triggerExplosionPretab3).GetComponent<ParticleSystem>();
         pressingExplosion = Object.Instantiate(pressingExplosionPretab).GetComponent<ParticleSystem>();
 
+        attackbuttonslot.transform.SetParent(targetRectT);
+        fire1buttonslot.transform.SetParent(targetRectT);
+        fire2buttonslot.transform.SetParent(targetRectT);
+        defendbutton.transform.SetParent(targetRectT);
+        rushbutton.transform.SetParent(targetRectT);
+        arefresh.transform.SetParent(targetRectT);
+        fire1refresh.transform.SetParent(targetRectT);
+        fire2refresh.transform.SetParent(targetRectT);
+        triggerExplosion0.transform.SetParent(targetRectT);
+        triggerExplosion1.transform.SetParent(targetRectT);
+        triggerExplosion2.transform.SetParent(targetRectT);
+        triggerExplosion3.transform.SetParent(targetRectT);
+        pressingExplosion.transform.SetParent(targetRectT);
+
         buttonRefreshEffects = new Dictionary<Button, ParticleSystem>();
         buttonRefreshEffects.Add(Attack,arefresh);
         buttonRefreshEffects.Add(Fire1,fire1refresh);
         buttonRefreshEffects.Add(Fire2,fire2refresh);
         
-        Attack1ButtonEffects = new Dictionary<EX, ParticleSystem>();
-        Fire1ButtonEffects = new Dictionary<EX, ParticleSystem>();
-        Fire2ButtonEffects = new Dictionary<EX, ParticleSystem>();
+        Attack1ButtonEffects = new Dictionary<int, ParticleSystem>();
+        Fire1ButtonEffects = new Dictionary<int, ParticleSystem>();
+        Fire2ButtonEffects = new Dictionary<int, ParticleSystem>();
 
         GameObject a_normal = Object.Instantiate(normal);
         a_normal.name = "attack_normal"+buttoneffectspath;
@@ -167,35 +181,48 @@ public class zokuseiButtonEffectsGroup
         GameObject fire2_ex3 = Object.Instantiate(EX3);
         fire2_ex3.name = "fire2_ex3"+buttoneffectspath;
         
-        Attack1ButtonEffects.Add(EX.normal,a_normal.GetComponent<ParticleSystem>());
-        Attack1ButtonEffects.Add(EX.EX1,a_ex1.GetComponent<ParticleSystem>());
-        Attack1ButtonEffects.Add(EX.EX2,a_ex2.GetComponent<ParticleSystem>());
-        Attack1ButtonEffects.Add(EX.EX3,a_ex3.GetComponent<ParticleSystem>());
-        Attack1ButtonEffects.Add(EX.NULL,attackbuttonslot.GetComponent<ParticleSystem>());
+        a_normal.transform.SetParent(targetRectT);
+        a_ex1.transform.SetParent(targetRectT);
+        a_ex2.transform.SetParent(targetRectT);
+        a_ex3.transform.SetParent(targetRectT);
+        fire1_normal.transform.SetParent(targetRectT);
+        fire1_ex1.transform.SetParent(targetRectT);
+        fire1_ex2.transform.SetParent(targetRectT);
+        fire1_ex3.transform.SetParent(targetRectT);
+        fire2_normal.transform.SetParent(targetRectT);
+        fire2_ex1.transform.SetParent(targetRectT);
+        fire2_ex2.transform.SetParent(targetRectT);
+        fire2_ex3.transform.SetParent(targetRectT);
         
-        Fire1ButtonEffects.Add(EX.normal,fire1_normal.GetComponent<ParticleSystem>());
-        Fire1ButtonEffects.Add(EX.EX1,fire1_ex1.GetComponent<ParticleSystem>());
-        Fire1ButtonEffects.Add(EX.EX2,fire1_ex2.GetComponent<ParticleSystem>());
-        Fire1ButtonEffects.Add(EX.EX3,fire1_ex3.GetComponent<ParticleSystem>());
-        Fire1ButtonEffects.Add(EX.NULL,fire1buttonslot.GetComponent<ParticleSystem>());
+        Attack1ButtonEffects.Add(0,a_normal.GetComponent<ParticleSystem>());
+        Attack1ButtonEffects.Add(1,a_ex1.GetComponent<ParticleSystem>());
+        Attack1ButtonEffects.Add(2,a_ex2.GetComponent<ParticleSystem>());
+        Attack1ButtonEffects.Add(3,a_ex3.GetComponent<ParticleSystem>());
+        Attack1ButtonEffects.Add(-1,attackbuttonslot.GetComponent<ParticleSystem>());
         
-        Fire2ButtonEffects.Add(EX.normal,fire2_normal.GetComponent<ParticleSystem>());
-        Fire2ButtonEffects.Add(EX.EX1,fire2_ex1.GetComponent<ParticleSystem>());
-        Fire2ButtonEffects.Add(EX.EX2,fire2_ex2.GetComponent<ParticleSystem>());
-        Fire2ButtonEffects.Add(EX.EX3,fire2_ex3.GetComponent<ParticleSystem>());
-        Fire2ButtonEffects.Add(EX.NULL,fire2buttonslot.GetComponent<ParticleSystem>());
+        Fire1ButtonEffects.Add(0,fire1_normal.GetComponent<ParticleSystem>());
+        Fire1ButtonEffects.Add(1,fire1_ex1.GetComponent<ParticleSystem>());
+        Fire1ButtonEffects.Add(2,fire1_ex2.GetComponent<ParticleSystem>());
+        Fire1ButtonEffects.Add(3,fire1_ex3.GetComponent<ParticleSystem>());
+        Fire1ButtonEffects.Add(-1,fire1buttonslot.GetComponent<ParticleSystem>());
         
-        buttonEffectsSets = new Dictionary<Button, IDictionary<EX, ParticleSystem>>();
+        Fire2ButtonEffects.Add(0,fire2_normal.GetComponent<ParticleSystem>());
+        Fire2ButtonEffects.Add(1,fire2_ex1.GetComponent<ParticleSystem>());
+        Fire2ButtonEffects.Add(2,fire2_ex2.GetComponent<ParticleSystem>());
+        Fire2ButtonEffects.Add(3,fire2_ex3.GetComponent<ParticleSystem>());
+        Fire2ButtonEffects.Add(-1,fire2buttonslot.GetComponent<ParticleSystem>());
+        
+        buttonEffectsSets = new Dictionary<Button, IDictionary<int, ParticleSystem>>();
         buttonEffectsSets.Add(Attack,Attack1ButtonEffects);
         buttonEffectsSets.Add(Fire1,Fire1ButtonEffects);
         buttonEffectsSets.Add(Fire2,Fire2ButtonEffects);
     }
     
-    IDictionary<EX, ParticleSystem> tartget;
-    public void refreshforbutton(Button button,EX eX,Vector3 pos)
+    IDictionary<int, ParticleSystem> tartget;
+    public void refreshforbutton(Button button,int eX,Vector3 pos)
     {
         tartget = buttonEffectsSets[button];
-        foreach(KeyValuePair<EX, ParticleSystem> pair in tartget)
+        foreach(KeyValuePair<int, ParticleSystem> pair in tartget)
         {
             if (pair.Key == eX)
             {
@@ -205,7 +232,7 @@ public class zokuseiButtonEffectsGroup
             }
             else
             {
-                pair.Value.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+                pair.Value.Stop(true,ParticleSystemStopBehavior.StopEmitting);
                 //pair.Value.Clear(true);
             }
         }

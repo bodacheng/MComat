@@ -6,7 +6,6 @@ public partial class AssetBundleLoader : MonoBehaviour
 {
     private IEnumerator characterComponentsDownload()
     {
-        AssetBundle readingbundle;
         ////////// 下面统计各个type角色的必要组件 ////////////
         foreach (KeyValuePair<string,List<string>> keyValuePair in characterTypeAndBasicMoveSets)
         {
@@ -19,14 +18,14 @@ public partial class AssetBundleLoader : MonoBehaviour
             ////////////    以上内容为实时动画片段的预备和个性化片段对他们的覆盖   /////////////
             
             //底下这一套有一个特别关键的逻辑：它在通过是不是有对应动画包的key来判断到底这个包的动画有没有load到内存。
-            if (!defaultPools.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts"))
-                yield return (defaultPools.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL+ "/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts"))
+                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL+ "/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
                                                                                 keyValuePair.Key + "/basic_hurts",
                                                                                 "basic_hurts"));
                 
                 
-            if (!defaultPools.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_knockoffs"))
-                yield return (defaultPools.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL +"/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_knockoffs"))
+                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL +"/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
                                                                                 keyValuePair.Key + "/basic_knockoffs",
                                                                                 "basic_knockoffs"));
             //上面这些就是说什么呢。。各个type的伤害动作包和基础动作包就不放进DownLoadMissionDic进行之后的集中下载了。上面的函数已经执行下载处理了。
@@ -35,10 +34,11 @@ public partial class AssetBundleLoader : MonoBehaviour
             
             ////// 寻找对应type的animator //////////////////
             RuntimeAnimatorController _RuntimeAnimatorController;
-            defaultPools.Instance.RuntimeAnimatorControllerIdic.TryGetValue(keyValuePair.Key, out _RuntimeAnimatorController);
+            AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.TryGetValue(keyValuePair.Key, out _RuntimeAnimatorController);
             if (_RuntimeAnimatorController == null)
             {
-                _loadingProcess = defaultPools.Instance.LoadAnimatorFromCache(AssetBundleLoader.BundleURL + "/animClips/"+ keyValuePair.Key + "/animator", keyValuePair.Key, "generic_controller");
+                IEnumerator _loadingProcess = AnimationResourceLoader.Instance.
+                LoadAnimatorFromCache(AssetBundleLoader.BundleURL + "/animClips/"+ keyValuePair.Key + "/animator", keyValuePair.Key, "generic_controller");
                 yield return _loadingProcess;
             }
         }

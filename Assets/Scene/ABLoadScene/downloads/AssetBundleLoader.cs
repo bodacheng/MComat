@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using dataAccess;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
-
 // 资源下载策略：角色模型和技能动画先读取配置文件再根据配置文件一个个请求资源。
 // controller的话从上面的步骤里搞一个type统计，从所有type里找对应的controller组件
 // 魔法包直接代码引导去下那6个大包。
-
 // 所有资源应该进行一个文件数量统计和容量统计。下载过程中应该是前台有一个动画告诉已经下载到多少。
-
 //还有个问题。。。我们看了下主场景里startup函数。。。发现的确很多加载性的东西分布在主场景的很多模块。。。
 //所以我们这么想，这个scene只负责资源加载而不负责信息加载。
+
+// 一上来是要load所有的ab包，所有ab包包括什么呢 
+//  魔法特效，所有角色，所有角色动画，所有角色controller文件，所有技能脚本，所有音乐包。
+// 以上这些如果在load过程里出了任何问题，则应该终止程序运行。这些方法写在哪里都可以只要在头画面里运行就行。
+// 然后如果程序运行途中这些下载完了的数据在读取时候出错，那怎么办？不管任何时候， 直接弹回资源确认画面。
 
 public class CachDownLoadMission
 {
@@ -27,58 +31,94 @@ public class CachDownLoadMission
         this.filename = filename;
         this.subPath = subPath;
         this.filesize = filesize;
-        this.downloadfinished = false;
     }
 }
 
-//Resources.UnloadUnusedAssets();
 public partial class AssetBundleLoader : MonoBehaviour
 {
     [Header("资源读取设置")]
-    public Setting _Setting;
+    public ResourceSetting _ResourceSetting;
     public ConfigFileManager _ConfigFileManager;
     
     [Space(7)]
     [Header("LoadingProcess")]
     public LoadingCanvas _LoadingCanvas;
     
+    [Space(7)]
+    [Header("assetBundleURL。根据服务器可能有变化")]
     public string assetBundleURL = "http://18.218.70.129/ios";
     public static string BundleURL = "http://18.218.70.129/ios";
 
-    public IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
-    public IDictionary<string, List<string>> characterTypeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是type，值是所有基础动画包的名字
+    [Space(7)]
+    [Header("开发公司商标")]
+    public Image logo;
+    public Image bigPic;
+    
 
+    private IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
+    private IDictionary<string, List<string>> characterTypeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是type，值是所有基础动画包的名字
     private CachDownLoadMission modelConfigFileMission;
     private CachDownLoadMission animationConfigFileMission;
 
-    private TextAsset CharacterConfigTextFile;
-    private TextAsset SkillConfigTextFile;
-    
-    private IEnumerator _loadingProcess;
-    private bool startupsucessed = false;
-    
+    private IEnumerator presentationProcess;
+    private IEnumerator resourcePreparingProcess;
+
     void Start()
     {
         BundleURL = assetBundleURL;
-        //StartCoroutine(DownloadAndCacheExactFile(assetBundleURL,"MagicsAB/darkmagic"));
-        //StartCoroutine(justTryToLoadABFromCache(assetBundleURL,"MagicsAB","darkmagic"));
-        StartCoroutine(StartUpProcess());
+        resourcePreparingProcess = ResourcePrepareProcess();
+        presentationProcess = PresentationProcess();
+        
+        pProcessFinished = false;
+        dProcessFinished = false;
+        
+        StartCoroutine(presentationProcess);
+        StartCoroutine(resourcePreparingProcess);
+    }
+
+    bool pProcessFinished = false;
+    bool dProcessFinished = false;
+    
+    void Update()
+    {
+        if (pProcessFinished && dProcessFinished)
+            SceneManager.LoadScene(1);
+    }
+
+    public IEnumerator PresentationProcess()
+    {
+        _LoadingCanvas.LightUp();
+        yield return new WaitForSeconds(1f);
+        _LoadingCanvas.DarkOff(1);
+        yield return new WaitForSeconds(1f);
+        logo.gameObject.SetActive(false);
+        bigPic.gameObject.SetActive(true);
+         _LoadingCanvas.LightUp();
+         pProcessFinished = true;
+        yield break;
     }
     
-    public IEnumerator StartUpProcess()
+    public IEnumerator ResourcePrepareProcess()
     {
-        AccountSet.Instance._playerinfoReferenceMode = _Setting._playerinfoReferenceMode;
-        defaultPools.Instance.ConfigFileLoadingMode = _Setting.ConfigFileLoadingMode;
-        defaultPools.Instance.AnimationLoadingMode = _Setting.AnimationLoadingMode;//确认动画资源读取模式
-        defaultPools.Instance.MagicLoadingMode = _Setting.MagicLoadingMode;//确认动画资源读取模式
-        defaultPools.Instance.ModelLoadingMode = _Setting.ModelLoadingMode;//确认模型资源读取模式
-        defaultPools.Instance.IconLoadingMode = _Setting.IconLoadingMode;//确认模型资源读取模式
+        AccountSet.Instance._playerinfoReferenceMode = _ResourceSetting._playerinfoReferenceMode;        
+        ResourceLoadingSetting.Instance.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
+        ResourceLoadingSetting.Instance.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
+        ResourceLoadingSetting.Instance.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
+        ResourceLoadingSetting.Instance.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
+        ResourceLoadingSetting.Instance.IconLoadingMode = _ResourceSetting.IconLoadingMode;
         
         _LoadingCanvas.Loading_Canvas.gameObject.SetActive(true);
         _LoadingCanvas.turnOnProcessDescription(true);
         _LoadingCanvas.nowProcess("正在加载资源",0);
-               
-        switch (defaultPools.Instance.ConfigFileLoadingMode)
+        
+        switch(AccountSet.Instance._playerinfoReferenceMode)
+        {
+            case playerinfoReferenceMode.remoteTestPlayer:
+                yield return AccountSet.Instance.login();
+                break;
+        }
+
+        switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 yield return ConfigFilesDownLoad();
@@ -86,29 +126,13 @@ public partial class AssetBundleLoader : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                CharsManager.loadMonsterDataBaseFileByResource();
-                MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
+                yield return MonsterConfigInfos.Instance.loadMonstersConfig();
+                yield return SkillsConfigInfos.Instance.loadAllSkillConfigs();
+                _LoadingCanvas.nowProcess("正在加载资源",0.1f);
                 break;
         }
-        MySkillStonesReader.refreshSkillConfigDicForReference();
-        CharsManager.refreshCharacterResourceInfoDic();
-        
-        // 账户信息读取
-        // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
-        // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
-        // 那这样的话势必我需要来看接下来这个请求工作的返回值。
-        IEnumerator loadAccountProcess = AccountSet.Instance.loadCustomerInfo();
-        yield return (loadAccountProcess);
-        IEnumerator localMyChractersProcess = AccountCharsSet.Instance.loadMyOwnedCharsInfo();
-        yield return (localMyChractersProcess);
-        IEnumerator loadMyTeamSetProcess = TeamSet.Instance.loadMyTeamSetInfoViaJsonFile("TeamSet.json");
-        yield return (loadMyTeamSetProcess);
-        IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
-        yield return (loadMyStonesProcess);
-        //上面这些都缺response判断      
-        TeamSet.Instance.refreshPositionLocalCharKeySet4V4Mode(AccountCharsSet.ownedChars);//一个本地修复作用的函数，针对阵容设置
-        
-        switch (defaultPools.Instance.ModelLoadingMode)
+
+        switch (ResourceLoadingSetting.Instance.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 yield return ModelResourceDownLoad();
@@ -121,7 +145,7 @@ public partial class AssetBundleLoader : MonoBehaviour
         }
         
         //characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
-        foreach (monstersConfigTable.Row row in CharsManager._monstersConfigTable.rowList)
+        foreach (monstersConfigTable.Row row in MonsterConfigInfos._monstersConfigTable.rowList)
         {
             if (!characterTypeAndBasicMoveSets.ContainsKey(row.type))
                 characterTypeAndBasicMoveSets.Add(row.type,new List<string>());
@@ -131,7 +155,7 @@ public partial class AssetBundleLoader : MonoBehaviour
             }
         }
 
-        switch (defaultPools.Instance.AnimationLoadingMode)
+        switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 yield return characterComponentsDownload();
@@ -144,14 +168,15 @@ public partial class AssetBundleLoader : MonoBehaviour
                 int i = 0;
                 foreach (string type in _ConfigFileManager.chartypes)
                 {
-                    defaultPools.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
+                    yield return AnimationResourceLoader.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
                     i++;
                     _LoadingCanvas.nowProcess("正在加载资源",i/_ConfigFileManager.chartypes.Length);
+                    yield return null;
                 }
                 break;
         }
-                
-        switch (defaultPools.Instance.MagicLoadingMode)
+
+        switch (ResourceLoadingSetting.Instance.MagicLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 EffectsDownLoadByCach();
@@ -161,8 +186,7 @@ public partial class AssetBundleLoader : MonoBehaviour
             case ResourceLoadMode.Resource:
                 break;
         }
-        
-        SceneManager.LoadScene(1);
+        dProcessFinished = true;
     }
 
     // 初始热更新所还欠缺的环节
@@ -178,6 +202,7 @@ public partial class AssetBundleLoader : MonoBehaviour
             yield return letThisloadMissionBegin(_keyvalue.Value);
         }
         DownLoadMissionDic.Clear();
+        yield break;
     }
 
     public IEnumerator letThisloadMissionBegin(CachDownLoadMission _CachDownLoadMission)
@@ -185,7 +210,7 @@ public partial class AssetBundleLoader : MonoBehaviour
         IEnumerator task;
         if (_CachDownLoadMission != null)
         {
-            task = defaultPools.Instance.DownloadAndCacheExactFile(assetBundleURL + "/" +_CachDownLoadMission.subPath, _CachDownLoadMission.filename);
+            task = CachManager.Instance.DownloadAndCacheExactFile(BundleURL + "/" +_CachDownLoadMission.subPath, _CachDownLoadMission.filename);
             yield return task;
             if (task.Current != null)
                 _CachDownLoadMission.downloadfinished = true;
@@ -195,9 +220,4 @@ public partial class AssetBundleLoader : MonoBehaviour
             Debug.Log("下载任务建立错误");
         }
     }
-
-    // 一上来是要load所有的ab包，所有ab包包括什么呢 
-    //  魔法特效，所有角色，所有角色动画，所有角色controller文件，所有技能脚本，所有音乐包。
-    // 以上这些如果在load过程里出了任何问题，则应该终止程序运行。这些方法写在哪里都可以只要在头画面里运行就行。
-    // 然后如果程序运行途中这些下载完了的数据在读取时候出错，那怎么办？不管任何时候， 直接弹回资源确认画面。
 }

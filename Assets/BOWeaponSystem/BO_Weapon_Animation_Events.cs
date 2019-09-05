@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using HittingDetection;
 
 public class BO_Weapon_Animation_Events : MonoBehaviour {
     public List<Transform> _Used_Targets = new List<Transform>();
@@ -21,7 +22,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
             MarkerManager.ClearTargets();
         }
     }
-	public void DisableMarkers ()
+	public void DisableMarkers()
 	{
         foreach (BO_Marker_Manager MarkerManager in AllMarkerManager_List)
         {
@@ -107,12 +108,23 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
             _bo.setDectionTargetsUnion(this._Used_Targets);
         }
     }
+    
+    public void addMarkerManagerToUsingList(BO_Marker_Manager bO_Marker_Manager)
+    {
+        this.using_MarkerManager_List.Add(bO_Marker_Manager);
+    }
 
     public void clearMarkerManagers()
     {
         foreach(BO_Marker_Manager bom in this.using_MarkerManager_List)
+        {
             bom.DisableMarkers();
-        
+            if (bom._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
+            {
+                if (bom.gameObject.activeSelf)
+                    bom.StartCoroutine(bom.disableAfterTime(0.6f));
+            }
+        }
         this.using_MarkerManager_List.Clear();
         turn_off_Left_energy_blade();
         turn_off_Right_energy_blade();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Soul;
 
 public class Idle_State : AI_State
 {
@@ -20,7 +21,7 @@ public class Idle_State : AI_State
 	{
 		base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);
-        Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, clip_name);
+        Animation_Manger.PlayLayerAnim(clip_name);
         this._Rigidbody.velocity = Vector3.zero;
 	}
 

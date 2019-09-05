@@ -2,15 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HittingDetection;
+using Soul;
 
 public class Defend_State : AI_State
 {
     private string defend_clip_name,block_break_name;
-    private float block_time_counter = 0;
+    public float block_time_counter = 0;
     private int defendHP;
-    
     private List<Collider> damagingweaponList;
     private List<Collider> nearbyenemymeat;
+        
     public Defend_State(string defend_clip_name,string block_break_name)
     {
         this.defend_clip_name = defend_clip_name;
@@ -31,11 +33,10 @@ public class Defend_State : AI_State
 
         if (defendHP <= 0)
         {
-            this.BS_Main_Health.ApplyDamage(new v_Damage(0, damageType.supper_damage, damage.force_direction, damage.damageHappenPoint, damage.toWho));
-            defaultPools.Instance.GenerateEffect("onEnableShieldSpark", null,
+            this.BS_Main_Health.ApplyDamage(new v_Damage(damageType.supper_damage, damage.force_direction, damage.damageHappenPoint, damage.toWho,null));
+            EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null,
                                                  damage.damageHappenPoint, Quaternion.identity,null);
         }
-
     }
 
     public override void pre_process_before_enter()
@@ -50,8 +51,8 @@ public class Defend_State : AI_State
 
     public override bool enter_condition_priority1()
     {
-        if (this.BS_Main_Health.Resistance > 0)
-            return false;
+        if (this.BS_Main_Health.IFgettingDamage())
+            return true;
         damagingweaponList = Sensor.getNearbyDamagingWeaponColliders();
         nearbyenemymeat = Sensor.getInnerEnemiesColliders();
         if (nearbyenemymeat.Count == 0)
@@ -61,9 +62,9 @@ public class Defend_State : AI_State
         }else{
             if (damagingweaponList.Count > 0)
             {
-                if (Vector3.Distance(nearbyenemymeat[0].transform.position, this.AI_DATA_CENTER.geometryCenter.position)
+                if (Vector3.Distance(nearbyenemymeat[0].transform.position, this._DATA_CENTER.geometryCenter.position)
                     >
-                    Vector3.Distance(damagingweaponList[0].transform.position, this.AI_DATA_CENTER.geometryCenter.position))
+                    Vector3.Distance(damagingweaponList[0].transform.position, this._DATA_CENTER.geometryCenter.position))
                     return true;
             }
         }
@@ -72,7 +73,9 @@ public class Defend_State : AI_State
 
     public override bool enter_condition_priority3()
     {
-        if (this.BS_Main_Health.Resistance > 0)
+        if (this._ResistanceManager.Resistance > 0)
+            return false;
+        if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             return false;
         if (Sensor.getInnerEnemiesColliders().Count > 0)
             return true;
@@ -95,12 +98,12 @@ public class Defend_State : AI_State
 
     public override void AI_State_enter()
     {
-        this.defendHP = 10;
+        this.defendHP = 20;
         _Weapon_Animation_Events.clearMarkerManagers();
         this.Sensor.continuousDetectionStart(5);
         base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);
-        this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, defend_clip_name);
+        this.Animation_Manger.PlayLayerAnim(defend_clip_name);
         _Rigidbody.drag = 20f;
         block_time_counter = 0.3f;
         if (this.shaderManager != null)
@@ -108,6 +111,7 @@ public class Defend_State : AI_State
         else
             Debug.Log(gameObject.name+"变色器没适配？？");
         //this.AI_DATA_CENTER.turnShield(true);
+        _SkillCancelFlag.turn_off_flag();
     }
 
     public override void AI_State_exit()
@@ -124,19 +128,18 @@ public class Defend_State : AI_State
         _Rigidbody.drag = 1f;
         BS_Main_Health.returnDamageList(damageType.heavy_block).Clear();
         BS_Main_Health.returnDamageList(damageType.light_block).Clear();
-        block_time_counter = 0;
-        BS_Main_Health.resistanceClear();
+        _ResistanceManager.resistanceClear();
         //AI_DATA_CENTER.turnShield(false);
     }
 
     Vector3 force_direction;
     v_Damage analyzingDamage;
-    public override void _f_State_Update()
+    public override void _State_FixedUpdate1()
     {
         if (defendHP > 0)
-            BS_Main_Health.Resistance = 5;//数字没别的意思就是希望让防御状态下维持一定抵抗，不下降
+            _ResistanceManager.Resistance = 5;//数字没别的意思就是希望让防御状态下维持一定抵抗，不下降
         else
-            BS_Main_Health.Resistance = 0;
+            _ResistanceManager.Resistance = 0;
 
         damagingweaponList = Sensor.getNearbyDamagingWeaponColliders();
         nearbyenemymeat = Sensor.getInnerEnemiesColliders();
@@ -144,20 +147,20 @@ public class Defend_State : AI_State
         if (nearbyenemymeat.Count > 0)
         {
             if (nearbyenemymeat[0] != null)
-                this.RotateToTarget(nearbyenemymeat[0].transform.position, 0.25f, true);
+                this.RotateToTarget(nearbyenemymeat[0].transform.position, 1f, true);
         }
         else
         {
             if (damagingweaponList.Count > 0)
             {
                 if (damagingweaponList[0] != null)
-                    this.RotateToTarget(damagingweaponList[0].transform.position, 0.25f, true);
+                    this.RotateToTarget(damagingweaponList[0].transform.position, 1f, true);
             }
         }
 
         if (BS_Main_Health.returnDamageList(damageType.heavy_block).Count > 0)
         {
-            this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, block_break_name);
+            this.Animation_Manger.PlayLayerAnim(block_break_name);
             analyzingDamage = BS_Main_Health.returnDamageList(damageType.heavy_block)[0];
             analyzingDamage.damage_type = damageType.heavy_block;
             force_direction = analyzingDamage.force_direction;
@@ -167,36 +170,39 @@ public class Defend_State : AI_State
 
             //BS_Main_Health._health -=analyzingDamage._damage;
             block_time_counter = 0.5f;
+            if (this.BS_Main_Health.hasPlentyGauge(3))
+                _SkillCancelFlag.turn_on_flag();
             defendHPfade(analyzingDamage);
             BS_Main_Health.returnDamageList(damageType.heavy_block).RemoveAt(0);
-            this.BS_Main_Health.plusCriticalGauge(5);
+            this.BS_Main_Health.plusCriticalGauge(2);
         }
 
         if (BS_Main_Health.returnDamageList(damageType.light_block).Count > 0)
         {
-            this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, block_break_name);
+            this.Animation_Manger.PlayLayerAnim(block_break_name);
             analyzingDamage = BS_Main_Health.returnDamageList(damageType.light_block)[0];
             analyzingDamage.damage_type = damageType.light_block;
             force_direction = analyzingDamage.force_direction;
             force_direction.y = 0;
 
             this._Rigidbody.velocity = force_direction.normalized * 2f;
-
-            //BS_Main_Health._health-=analyzingDamage._damage);
             block_time_counter = 0.3f;
+            if (this.BS_Main_Health.hasPlentyGauge(3))
+                _SkillCancelFlag.turn_on_flag();
+            
             defendHPfade(analyzingDamage);
             BS_Main_Health.returnDamageList(damageType.light_block).RemoveAt(0);
-            this.BS_Main_Health.plusCriticalGauge(5);
+            this.BS_Main_Health.plusCriticalGauge(2);
         }
         
         if (block_time_counter >= 0f)
         {
-            block_time_counter -= Time.deltaTime;
+            block_time_counter -= Time.fixedDeltaTime;
+            if (block_time_counter < 0f)
+                this.Animation_Manger.PlayLayerAnim(defend_clip_name);
         }
         else
         {
-            if (this.Animation_Manger.current_animation_name != defend_clip_name)
-                this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, defend_clip_name);
             _Rigidbody.velocity = Vector3.zero;
         }
     }

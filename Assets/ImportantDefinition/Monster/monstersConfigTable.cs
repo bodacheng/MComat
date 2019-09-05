@@ -10,19 +10,10 @@ using System.Text;
 public class monstersConfigTable
 {
     [Serializable]
-    public class monsterResponse
-    {
-        public Row data;
-    }
-
-    [Serializable]
     public class Row
 	{
 		public string id;
 		public string type;
-		public string showNameEn;
-        public string showNameCn;
-        public string showNameJp;
         public string realName;
 		public string zokusei;
 		public string personalMagicPack;
@@ -31,9 +22,6 @@ public class monstersConfigTable
 		public string accSkill;
 		public string canDefend;
 		public string rarelevel;
-		public string infoEn;
-		public string infoCn;
-		public string infoJp;
 	}
 
 	public List<Row> rowList = new List<Row>();
@@ -57,26 +45,19 @@ public class monstersConfigTable
         {
             for (int i = 1; i < grid.Length; i++)
             {
-                if (grid[i].Length == 16)
+                if (grid[i].Length == 10)
                 {
                     Row row = new Row();
                     row.id = grid[i][0];
                     row.type = grid[i][1];
-                    row.showNameEn = grid[i][2];
-                    row.showNameCn = grid[i][3];
-                    row.showNameJp = grid[i][4];
-                    row.realName = grid[i][5];
-                    row.zokusei = grid[i][6];
-                    row.personalMagicPack = grid[i][7];
-                    row.basicMoveSet = grid[i][8];
-                    row.moveType = grid[i][9];
-                    row.accSkill = grid[i][10];
-                    row.canDefend = grid[i][11];
-                    row.rarelevel = grid[i][12];
-                    row.infoEn = grid[i][13];
-                    row.infoCn = grid[i][14];
-                    row.infoJp = grid[i][15];
-
+                    row.realName = grid[i][2];
+                    row.zokusei = grid[i][3];
+                    row.personalMagicPack = grid[i][4];
+                    row.basicMoveSet = grid[i][5];
+                    row.moveType = grid[i][6];
+                    row.accSkill = grid[i][7];
+                    row.canDefend = grid[i][8];
+                    row.rarelevel = grid[i][9];
                     rowList.Add(row);
                 }
             }
@@ -105,44 +86,32 @@ public class monstersConfigTable
         string[][] grid = new string[rowList.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
         {
-            grid[i] = new string[16];
+            grid[i] = new string[10];
             if (i == 0)
             {
                 grid[i][0] = "id";
                 grid[i][1] = "type";
-                grid[i][2] = "showNameEn";
-                grid[i][3] = "showNameCn";
-                grid[i][4] = "showNameJp";
-                grid[i][5] = "realName";
-                grid[i][6] = "zokusei";
-                grid[i][7] = "personalMagicPack";
-                grid[i][8] = "basicMoveSet";
-                grid[i][9] = "moveType";
-                grid[i][10] = "accSkill";
-                grid[i][11] = "canDefend";
-                grid[i][12] = "rarelevel";
-                grid[i][13] = "infoEn";
-                grid[i][14] = "infoCn";
-                grid[i][15] = "infoJp";
+                grid[i][2] = "realName";
+                grid[i][3] = "zokusei";
+                grid[i][4] = "personalMagicPack";
+                grid[i][5] = "basicMoveSet";
+                grid[i][6] = "moveType";
+                grid[i][7] = "accSkill";
+                grid[i][8] = "canDefend";
+                grid[i][9] = "rarelevel";
             }
             else
             {
                 grid[i][0] = rowList[i - 1].id;
                 grid[i][1] = rowList[i - 1].type;
-                grid[i][2] = rowList[i - 1].showNameEn;
-                grid[i][3] = rowList[i - 1].showNameCn;
-                grid[i][4] = rowList[i - 1].showNameJp;
-                grid[i][5] = rowList[i - 1].realName;
-                grid[i][6] = rowList[i - 1].zokusei;
-                grid[i][7] = rowList[i - 1].personalMagicPack;
-                grid[i][8] = rowList[i - 1].basicMoveSet;
-                grid[i][9] = rowList[i - 1].moveType;
-                grid[i][10] = rowList[i - 1].accSkill;
-                grid[i][11] = rowList[i - 1].canDefend;
-                grid[i][12] = rowList[i - 1].rarelevel;
-                grid[i][13] = rowList[i - 1].infoEn;
-                grid[i][14] = rowList[i - 1].infoCn;
-                grid[i][15] = rowList[i - 1].infoJp;
+                grid[i][2] = rowList[i - 1].realName;
+                grid[i][3] = rowList[i - 1].zokusei;
+                grid[i][4] = rowList[i - 1].personalMagicPack;
+                grid[i][5] = rowList[i - 1].basicMoveSet;
+                grid[i][6] = rowList[i - 1].moveType;
+                grid[i][7] = rowList[i - 1].accSkill;
+                grid[i][8] = rowList[i - 1].canDefend;
+                grid[i][9] = rowList[i - 1].rarelevel;
             }
         }
         string delimiter = ",";
@@ -169,11 +138,8 @@ public class monstersConfigTable
             {
                 Debug.Log("尝试整理角色：" + characterResourceInfo.prefabName);
                 Row row = new Row();
-                row.id = characterResourceInfo.charResouceNum.ToString();
+                row.id = characterResourceInfo.monsterId.ToString();
                 row.type = characterResourceInfo.type;
-                row.showNameEn = characterResourceInfo.showNameEN;
-                row.showNameCn = characterResourceInfo.showNameCN;
-                row.showNameJp = characterResourceInfo.showNameJP;
                 row.realName = characterResourceInfo.prefabName;
 
                 switch (characterResourceInfo._zokusei)
@@ -241,54 +207,38 @@ public class monstersConfigTable
                     row.canDefend = "0";
 
                 row.rarelevel = characterResourceInfo.rarelevel.ToString();
-                row.infoEn = characterResourceInfo.instructionEN;
-                row.infoCn = characterResourceInfo.instructionCH;
-                row.infoJp = characterResourceInfo.instructionJP;
-
                 rowList.Add(row);
             }
 
             string[][] grid = new string[rowList.Count + 1][];
             for (int i = 0; i < grid.Length; i++)
             {
-                grid[i] = new string[16];
+                grid[i] = new string[10];
                 if (i == 0)
                 {
                     grid[i][0] = "id";
                     grid[i][1] = "type";
-                    grid[i][2] = "showNameEn";
-                    grid[i][3] = "showNameCn";
-                    grid[i][4] = "showNameJp";
-                    grid[i][5] = "realName";
-                    grid[i][6] = "zokusei";
-                    grid[i][7] = "personalMagicPack";
-                    grid[i][8] = "basicMoveSet";
-                    grid[i][9] = "moveType";
-                    grid[i][10] = "accSkill";
-                    grid[i][11] = "canDefend";
-                    grid[i][12] = "rarelevel";
-                    grid[i][13] = "infoEn";
-                    grid[i][14] = "infoCn";
-                    grid[i][15] = "infoJp";
+                    grid[i][2] = "realName";
+                    grid[i][3] = "zokusei";
+                    grid[i][4] = "personalMagicPack";
+                    grid[i][5] = "basicMoveSet";
+                    grid[i][6] = "moveType";
+                    grid[i][7] = "accSkill";
+                    grid[i][8] = "canDefend";
+                    grid[i][9] = "rarelevel";
                 }
                 else
                 {
                     grid[i][0] = rowList[i - 1].id;
                     grid[i][1] = rowList[i - 1].type;
-                    grid[i][2] = rowList[i - 1].showNameEn;
-                    grid[i][3] = rowList[i - 1].showNameCn;
-                    grid[i][4] = rowList[i - 1].showNameJp;
-                    grid[i][5] = rowList[i - 1].realName;
-                    grid[i][6] = rowList[i - 1].zokusei;
-                    grid[i][7] = rowList[i - 1].personalMagicPack;
-                    grid[i][8] = rowList[i - 1].basicMoveSet;
-                    grid[i][9] = rowList[i - 1].moveType;
-                    grid[i][10] = rowList[i - 1].accSkill;
-                    grid[i][11] = rowList[i - 1].canDefend;
-                    grid[i][12] = rowList[i - 1].rarelevel;
-                    grid[i][13] = rowList[i - 1].infoEn;
-                    grid[i][14] = rowList[i - 1].infoCn;
-                    grid[i][15] = rowList[i - 1].infoJp;
+                    grid[i][2] = rowList[i - 1].realName;
+                    grid[i][3] = rowList[i - 1].zokusei;
+                    grid[i][4] = rowList[i - 1].personalMagicPack;
+                    grid[i][5] = rowList[i - 1].basicMoveSet;
+                    grid[i][6] = rowList[i - 1].moveType;
+                    grid[i][7] = rowList[i - 1].accSkill;
+                    grid[i][8] = rowList[i - 1].canDefend;
+                    grid[i][9] = rowList[i - 1].rarelevel;
                 }
             }
             string delimiter = ",";
@@ -323,12 +273,9 @@ public class monstersConfigTable
         if (characterResourceInfo == null)
             return null;
         Row row = new Row();
-        row.id = characterResourceInfo.charResouceNum.ToString();
+        row.id = characterResourceInfo.monsterId.ToString();
 
         row.type = characterResourceInfo.type.ToString();
-        row.showNameEn = characterResourceInfo.showNameEN != null? characterResourceInfo.showNameEN.ToString():"";
-        row.showNameCn = characterResourceInfo.showNameCN != null ? characterResourceInfo.showNameCN.ToString() : "";
-        row.showNameJp = characterResourceInfo.showNameJP != null ? characterResourceInfo.showNameJP.ToString() : "";
         row.realName = characterResourceInfo.prefabName.ToString();
         switch (characterResourceInfo._zokusei)
         {
@@ -385,10 +332,6 @@ public class monstersConfigTable
             row.canDefend = "0";
 
         row.rarelevel = characterResourceInfo.rarelevel.ToString();
-        row.infoEn = characterResourceInfo.instructionEN != null ? characterResourceInfo.instructionEN.ToString(): "" ;
-        row.infoCn = characterResourceInfo.instructionCH != null ? characterResourceInfo.instructionCH.ToString(): "";
-        row.infoJp = characterResourceInfo.instructionJP != null ? characterResourceInfo.instructionJP.ToString() : "";
-
         return row;
     }
 
@@ -397,12 +340,9 @@ public class monstersConfigTable
         if (row == null)
             return null;
         CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo();
-        _CharacterResourceInfo.charResouceNum = int.Parse(row.id);
+        _CharacterResourceInfo.monsterId = int.Parse(row.id);
         _CharacterResourceInfo.type = row.type;
         _CharacterResourceInfo.prefabName = row.realName;
-        _CharacterResourceInfo.showNameEN = row.showNameEn;
-        _CharacterResourceInfo.showNameCN = row.showNameCn;
-        _CharacterResourceInfo.showNameJP = row.showNameJp;
 
         switch (row.zokusei)
         {
@@ -471,11 +411,7 @@ public class monstersConfigTable
         else
             _CharacterResourceInfo.canDefend = false;
 
-        _CharacterResourceInfo.instructionCH = row.infoCn;
-        _CharacterResourceInfo.instructionEN = row.infoEn;
-        _CharacterResourceInfo.instructionJP = row.infoJp;
         _CharacterResourceInfo.rarelevel = Int32.Parse(row.rarelevel);
-
         return _CharacterResourceInfo;
     }
 
@@ -578,31 +514,6 @@ public class monstersConfigTable
 		return rowList.FindAll(x => x.type == find);
 	}
 
-	public Row Find_showNameEN(string find)
-	{
-        return rowList.Find(x => x.showNameEn == find);
-	}
-	public List<Row> FindAll_showNameEN(string find)
-	{
-		return rowList.FindAll(x => x.showNameEn == find);
-	}
-    public Row Find_showNameCN(string find)
-    {
-        return rowList.Find(x => x.showNameCn == find);
-    }
-    public List<Row> FindAll_showNameCN(string find)
-    {
-        return rowList.FindAll(x => x.showNameCn == find);
-    }
-    public Row Find_showNameJP(string find)
-    {
-        return rowList.Find(x => x.showNameJp == find);
-    }
-    public List<Row> FindAll_showNameJP(string find)
-    {
-        return rowList.FindAll(x => x.showNameJp == find);
-    }
-
     public Row Find_realName(string find)
 	{
 		return rowList.Find(x => x.realName == find);
@@ -667,29 +578,4 @@ public class monstersConfigTable
 	{
 		return rowList.FindAll(x => x.rarelevel == find);
 	}
-	public Row Find_InfoEN(string find)
-	{
-        return rowList.Find(x => x.infoEn == find);
-	}
-	public List<Row> FindAll_InfoEN(string find)
-	{
-        return rowList.FindAll(x => x.infoEn == find);
-	}
-	public Row Find_InfoCN(string find)
-	{
-        return rowList.Find(x => x.infoCn == find);
-	}
-	public List<Row> FindAll_InfoCN(string find)
-	{
-		return rowList.FindAll(x => x.infoCn == find);
-	}
-	public Row Find_InfoJP(string find)
-	{
-        return rowList.Find(x => x.infoJp == find);
-	}
-	public List<Row> FindAll_InfoJP(string find)
-	{
-		return rowList.FindAll(x => x.infoJp == find);
-	}
-
 }

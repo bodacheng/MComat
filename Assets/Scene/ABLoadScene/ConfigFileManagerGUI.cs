@@ -1,16 +1,19 @@
 ﻿#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEditor;
-using System.Linq;
+using dataAccess;
+using System;
 
 [CustomEditor(typeof(ConfigFileManager))]
 public class ConfigFileManagerGUI : Editor {
 
     ConfigFileManager _ConfigFileManager;
 
+    string focusingType;
+    float attackframestartat_max,attackframestartat_min,attackframeendtocancelframetime_max,attackframeendtocancelframetime_min;
+    
     public override void OnInspectorGUI()
     {
         _ConfigFileManager = (ConfigFileManager)target;
@@ -22,7 +25,7 @@ public class ConfigFileManagerGUI : Editor {
         {
             _ConfigFileManager.CharsConfigFileGenerate(_ConfigFileManager.MonstersConfigFilePath,_ConfigFileManager.CharacterConfigTextFile);
         }
-
+        
         if (GUILayout.Button("根据Resource文件夹生成,更新技能配置文件"))
         {
             _ConfigFileManager.SkillConfigFileUpdate(_ConfigFileManager.SkillConfigFilePath, _ConfigFileManager.SkillConfigTextFile);
@@ -30,14 +33,21 @@ public class ConfigFileManagerGUI : Editor {
 
         if (GUILayout.Button("本地测试存档获得所有技能石"))
         {
-            MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
-            MySkillStonesReader.refreshSkillConfigDicForReference();
-            List<int> mystones = new List<int>();
-            foreach (KeyValuePair<int,SkillConfig> _pair in MySkillStonesReader.SkillConfigDicForReference)
-            {
-                mystones.Add(_pair.Value.id);
-            }
-            MySkillStonesReader.overrideMySkillStonesInfoOnXMLLocalFile("/Resources/Account/MySkillStones.xml", mystones.ToArray());
+            Debug.Log("该功能过于危险暂时停用");
+            //IEnumerator loadskillconfigs()
+            //{
+            //    yield return SkillsConfigInfos.Instance.loadAllSkillConfigs();
+            //    List<SkillStoneOfPlayerInfoModel> mystones = new List<SkillStoneOfPlayerInfoModel>();
+            //    int i = 1;
+            //    foreach (KeyValuePair<string,SkillConfig> _pair in SkillsConfigInfos.SkillConfigDicForReference)
+            //    {
+            //        Debug.Log("查找技能石头："+_pair.Value.keyName);
+            //        mystones.Add(new SkillStoneOfPlayerInfoModel(String.Format("{0:D20}",i),_pair.Value.id));
+            //        i++;
+            //    }
+            //    MySkillStonesReader.Instance.overrideMySkillStoneInfosOnLocalFile(mystones);
+            //};
+            //_ConfigFileManager.StartCoroutine(loadskillconfigs());
         }
 
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))
@@ -92,7 +102,23 @@ public class ConfigFileManagerGUI : Editor {
                     }
                 }
             }
-            
+        }
+        
+        if (GUILayout.Button("生成剧情用临时角色存档文件"))
+        {
+            _ConfigFileManager.GenerateTutorialCharacterFiles();
+        }
+        
+        EditorGUILayout.LabelField(" 技能参数统计类  ");        
+        focusingType = EditorGUILayout.TextField("统计以下类型角色的技能信息",focusingType);
+        attackframestartat_max = EditorGUILayout.FloatField("攻击帧启动时间小于等于：",attackframestartat_max);
+        attackframestartat_min = EditorGUILayout.FloatField("攻击帧启动时间大于：",attackframestartat_min);
+        attackframeendtocancelframetime_max = EditorGUILayout.FloatField("收手时间小于等于",attackframeendtocancelframetime_max);
+        attackframeendtocancelframetime_min = EditorGUILayout.FloatField("收手时间大于：",attackframeendtocancelframetime_min);
+        if (GUILayout.Button("满足以上条件的技能资源名如下："))
+        {
+            _ConfigFileManager.skillsAnalyzeByFrames(focusingType,attackframestartat_min,attackframestartat_max,
+                                    attackframeendtocancelframetime_min,attackframeendtocancelframetime_max);
         }
     }
 }

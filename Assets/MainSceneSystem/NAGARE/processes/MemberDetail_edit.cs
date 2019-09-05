@@ -1,0 +1,92 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using mainMenu;
+using Api.Dto.Model;
+
+public class MemberDetail_edit : MainSceneProcess
+{
+    public IEnumerator enterProcess()
+    {
+        this._LoadingCanvas.DarkOff(0.5f);
+        this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
+        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(true);
+        this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
+        yield return SkillEditorButtonBehaviour(this._MemberDetail.focusingCharacterDataInfo);
+        this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(true);
+        //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
+        
+        // 表现系
+        CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(this._MemberDetail.focusingCharacterDataInfo.monsterId));
+        _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
+            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
+            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
+            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
+            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
+            _CharacterResourceInfo._zokusei);
+        this._LoadingCanvas.LightUp();
+        yield break;
+    }
+    
+    public MemberDetail_edit(preparingScene _preparingScene)
+    {
+        this.thisProcessStep = MainSceneStep.MemberDetail_edit;
+        this._preparingScene = _preparingScene;
+        this.EelementsInherit(_preparingScene);
+    }
+
+    public override bool canEnterOtherProcess()
+    {
+        return true;
+    }
+    
+    public override void ProcessEnter()
+    {
+        this._preparingScene.triggerMainProcess(enterProcess());
+    }
+    
+    public override void ProcessEnd()
+    {
+         this._SkillStonesBox._SkillStoneBoxTabEffectsManager.closeShowingZokuseiTagEffects();
+    }
+
+    Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    public override void localUpdate()
+    {
+        if (!this._MemberDetail._SkillsPrintOut.showingSkill)
+        {
+            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+        }
+    }
+    
+    // 技能编辑画面的进入按钮按下时候的处理。有这样几个逻辑上极其极其重要的点
+    // 1. 每次进入一次技能编辑画面，代表技能石头盒子进入了一个针对特定type角色的锁定状态，从而应该只生成一次相应type的石头
+    // 2. 除非切换画面，否则石头应该不会再重新生成，进一步说，这次生成石头所进行的石头本地id发配环节(numinbox)也只能进行一次
+    // 3. 除非切换画面，生成的石头应该是数量守恒的，如果消耗就消耗，绝不能出现逻辑错误导致的复制情况
+    IEnumerator SkillEditorButtonBehaviour(GetMonsterOfPlayerDetailModel _AccountCharacterInfo)
+    {
+        if (_AccountCharacterInfo == null)
+        {
+            Debug.Log("到达了没道理到达的地方");
+            yield break;
+        }
+        yield return _TheNineSlot.readANineAndTwo(_AccountCharacterInfo);
+        CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(_AccountCharacterInfo.monsterId));
+        _SkillStonesBox.setFocusingType(_CharacterResourceInfo.type);
+        yield return this._SkillStonesBox.arrangeSkillStonesToBox();
+        yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
+        UnityEngine.Events.UnityAction SkillEditConfirm = () =>
+        {
+            _preparingScene.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
+            _preparingScene.triggerPresentationProcess(_MemberDetail.SkillEditConfirmAnimation());
+        };
+
+        UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
+        {
+            _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
+        };
+        _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
+        _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+
+    }
+}

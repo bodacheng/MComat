@@ -2,8 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
-using System;
 using System.Collections.Generic;
+using dataAccess;
+using mainMenu;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -11,11 +12,12 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Image))]
 public class DragAndDropCell : MonoBehaviour, IDropHandler
 {
-    public enum CellType                                                    // Cell types
+    public enum CellPhase
     {
-        Swap,                                                               // Items will be swapped between any cells
-        DropOnly,                                                           // Item will be dropped into cell
-        DragOnly                                                            // Item will be dragged from this cell
+        SkillStoneBoxCell,
+        NineSlotCell_full,
+        NineSlotCell_empty,
+        DeleteArea,
     }
 
     public enum TriggerType                                                 // Types of drag and drop events
@@ -34,9 +36,11 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         public DragAndDropItem item;                                        // Dropped item
         public bool permission;                                             // Decision need to be made on request
     }
-
+    
 	[Tooltip("Functional type of this cell")]
-    public CellType cellType = CellType.Swap;                               // Special type of this cell
+    public CellPhase cellPhase = CellPhase.SkillStoneBoxCell;
+    [Tooltip("Image of this cell")]
+    public Image image;
 	[Tooltip("Sprite color for empty cell")]
     public Color empty = new Color();                                       // Sprite color for empty cell
 	[Tooltip("Sprite color for filled cell")]
@@ -48,8 +52,6 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 
     // 自定义成员
     public SkillStoneSlot _SkillStoneSlot;//这个看起来比较古怪，目的是和这个cell对应的SkillStoneSlot形成一个互相链接。只针对9宫设置画面，和SkillStoneBox无关。
-    // 自定义成员
-    public bool isDeleteArea = false;
 
     void OnEnable()
     {
@@ -76,16 +78,6 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 		if (myDadItem != null)
         {
 			myDadItem.MakeRaycast(false);                                  	// Disable item's raycast for correct drop handling
-			if (myDadItem == item)                                         	// If item dragged from this cell
-            {
-                // Check cell's type
-                switch (cellType)
-                {
-                    case CellType.DropOnly:
-                        DragAndDropItem.icon.SetActive(false);              // Item can not be dragged. Hide icon
-                        break;
-                }
-            }
         }
     }
 
@@ -103,13 +95,60 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 		UpdateBackgroundState();
     }
 
+    void OnDropEvent_Swap(DropEventDescriptor desc,DragAndDropItem item, DragAndDropCell sourceCell)
+    {
+        desc.item = item;
+        desc.sourceCell = sourceCell;
+        desc.destinationCell = this;
+        SendRequest(desc);                      // Send drop request
+        StartCoroutine(NotifyOnDragEnd(desc));  // Send notification after drop will be finished
+        if (desc.permission == true)            // If drop permitted by application
+        {
+            if (myDadItem != null)            // If destination cell has item
+            {
+                // Fill event descriptor
+                DropEventDescriptor descAutoswap = new DropEventDescriptor();
+                descAutoswap.item = myDadItem;
+                descAutoswap.sourceCell = this;
+                descAutoswap.destinationCell = sourceCell;                                                            
+                SendRequest(descAutoswap);                      // Send drop request
+                StartCoroutine(NotifyOnDragEnd(descAutoswap));  // Send notification after drop will be finished
+                if (descAutoswap.permission == true)            // If drop permitted by application
+                    SwapItems(sourceCell, this);                // Swap items between cells
+                else
+                {
+                    Debug.Log("交换行为未被允许，请检查道具逻辑:"+item);
+                }
+                    
+            }
+            else 
+            {
+                Debug.Log("交换行为未被允许，请检查道具逻辑:"+item);
+            }
+        }
+    }
+    
+    void OnDropEvent_Override(DropEventDescriptor desc,DragAndDropItem item, DragAndDropCell sourceCell)
+    {
+        desc.item = item;
+        desc.sourceCell = sourceCell;
+        desc.destinationCell = this;
+        UpdateMyItem();
+        SendRequest(desc);                              // Send drop request
+        StartCoroutine(NotifyOnDragEnd(desc));          // Send notification after drop will be finished
+        if (desc.permission == true)                    // If drop permitted by application
+        {
+            PlaceItemNotDestroyOldItemVersion(item);// Place dropped item in this cell
+        }
+    }
+    
     /// <summary>
     /// Item is dropped in this cell
     /// </summary>
     /// <param name="data"></param>
-    public void OnDrop(PointerEventData data)//这个函数的很早阶段就应该进行关于9宫技能配置的valiadation，一旦拖入的石头不符合标准，不允许进行任何操作才是。
+    //  这个函数的很早阶段就应该进行关于9宫技能配置的valiadation，一旦拖入的石头不符合标准，不允许进行任何操作才是。
+    public void OnDrop(PointerEventData data)
     {
-        Debug.Log("拖拽操作step2");
         DragAndDropItem item;
         DragAndDropCell sourceCell = DragAndDropItem.sourceCell;
         if (DragAndDropItem.icon != null)
@@ -117,146 +156,97 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
             item = DragAndDropItem.draggedItem;
             sourceCell = DragAndDropItem.sourceCell;
 
-            //由于存在一些技能编辑过程中的禁忌，我们应该有一个拖入技能石检查模块，一旦有错，要直接从这个拖动插件的位置处理环节直接把操作给断下
-            if (DragAndDropItem.icon.activeSelf == true)                    // If icon inactive do not need to drop item into cell
+            // If icon inactive do not need to drop item into cell
+            if (DragAndDropItem.icon.activeSelf == true)
             {
                 if (sourceCell == this)
-                {
                     return;
-                }
+
                 if ((item != null) && (sourceCell != this))
                 {
-                    //这里就应该进行valiadation，因为如果出了问题还不断下来，那么底下的流程就会牵扯到各种的数值更新
-                    if (this._SkillStoneSlot != null && item._SkillConfigOfSkillStone != null)
-                    {
-                        item.ifDropedOnNineSlot = true;//服务于技能石添加撤销
-                        if (this._SkillStoneSlot._TheNineSlot != null)
-                        {
-                            List<int> nineskillids = this._SkillStoneSlot._TheNineSlot.getCurrentNineSlotAllSkillIds();
-                            
-                            if (this == this._SkillStoneSlot._TheNineSlot.A1DragAndDropCell)
-                            {
-                                nineskillids[0] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.A2DragAndDropCell)
-                            {
-                                nineskillids[1] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.A3DragAndDropCell)
-                            {
-                                nineskillids[2] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.B1DragAndDropCell)
-                            {
-                                nineskillids[3] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.B2DragAndDropCell)
-                            {
-                                nineskillids[4] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.B3DragAndDropCell)
-                            {
-                                nineskillids[5] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.C1DragAndDropCell)
-                            {
-                                nineskillids[6] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.C2DragAndDropCell)
-                            {
-                                nineskillids[7] = item._SkillConfigOfSkillStone.id;
-                            }
-                            if (this == this._SkillStoneSlot._TheNineSlot.C3DragAndDropCell)
-                            {
-                                nineskillids[8] = item._SkillConfigOfSkillStone.id;
-                            }
-                            
-                            int wholepint = MySkillStonesReader.skillsetValidation(nineskillids[0],nineskillids[1],nineskillids[2],
-                                                                                    nineskillids[3],nineskillids[4],nineskillids[5],
-                                                                                    nineskillids[6],nineskillids[7],nineskillids[8]);
-                            if (wholepint < 0)
-                            {
-                                Debug.Log("Validation错误，不执行操作，返回");
-                                return;
-                            }
-                        }
-                    }
-
                     DropEventDescriptor desc = new DropEventDescriptor();
-                    switch (cellType)                                       // Check this cell's type
+                    switch (cellPhase)//自身phase
                     {
-                        case CellType.Swap:                                 // Item in destination cell can be swapped
-							UpdateMyItem();
-                            switch (sourceCell.cellType)
+                        case CellPhase.NineSlotCell_full:
+                            switch (sourceCell.cellPhase)
                             {
-                                case CellType.Swap:                         // swap和swap对转只能是两种情况：要么是编辑模式，要么是add模式中新石头之间的互转
-                                    // Fill event descriptor
-                                    desc.item = item;
-                                    desc.sourceCell = sourceCell;
-                                    desc.destinationCell = this;
-                                    SendRequest(desc);                      // Send drop request
-                                    StartCoroutine(NotifyOnDragEnd(desc));  // Send notification after drop will be finished
-                                    if (desc.permission == true)            // If drop permitted by application
-                                    {
-										if (myDadItem != null)            // If destination cell has item
-                                        {
-                                            // Fill event descriptor
-                                            DropEventDescriptor descAutoswap = new DropEventDescriptor();
-											descAutoswap.item = myDadItem;
-                                            descAutoswap.sourceCell = this;
-                                            descAutoswap.destinationCell = sourceCell;                                                            
-                                            SendRequest(descAutoswap);                      // Send drop request
-                                            StartCoroutine(NotifyOnDragEnd(descAutoswap));  // Send notification after drop will be finished
-                                            if (descAutoswap.permission == true)            // If drop permitted by application
-                                            {
-                                                SwapItems(sourceCell, this);                // Swap items between cells
-                                            }
-                                            else
-                                            {
-                                                //我们回头会再看看这个环节，现在看PlaceItemNotDestroyOldItemVersion是没必要的，是我们对这个环节误会了。
-                                                // 其实这个地方真正删除了的是手上拖动的那个图标而已
-                                                PlaceItemNotDestroyOldItemVersion(item);            // Delete old item and place dropped item into this cell
-                                                //PlaceItemNotDestroyOldItemVersion(item);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            PlaceItemNotDestroyOldItemVersion(item);
-                                            //PlaceItemNotDestroyOldItemVersion(item);                // Place dropped item into this empty cell
-                                        }
-                                    }
+                                case CellPhase.NineSlotCell_full://从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                    OnDropEvent_Swap(desc,item,sourceCell);
                                     break;
-                                default:                                    // Source是default目标是Swap，我们系统中最应该小心的一个环节。
-                                                                            // 有以下情况：1.add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
-                                                                            // 2.add模式下，手指拖“原”技能石拖向9宫中的新技能石
-                                                                            // 3.edit模式下，某bug发生导致石头box没关闭，将box中的石头拖向9宫中有石头或没石头的任何格子上。
-                                    // Fill event descriptor
-                                    desc.item = item;
-                                    desc.sourceCell = sourceCell;
-                                    desc.destinationCell = this;                                 
-                                    SendRequest(desc);                      // Send drop request
-                                    StartCoroutine(NotifyOnDragEnd(desc));  // Send notification after drop will be finished
-                                    if (desc.permission == true)            // If drop permitted by application
+                                case CellPhase.NineSlotCell_empty://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                    break;
+                                case CellPhase.SkillStoneBoxCell:
+                                    if (AccountCharsSet.checkifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
                                     {
-                                        PlaceItemNotDestroyOldItemVersion(item);// Place dropped item into this cell  该函数是自己写的，它要么会摧毁愿技能图标，要么单纯关闭拥有技能石头
+                                        Debug.Log("其他玩家正在使用的石头不可拖入");
+                                        return;
                                     }
+                                    if (!refreshWholePoint(item))
+                                    {
+                                        Debug.Log("Validation错误，不执行操作，返回");
+                                        return;
+                                    }
+                                    OnDropEvent_Swap(desc,item,sourceCell);
                                     break;
                             }
                             break;
-                        case CellType.DropOnly:                             // Item only can be dropped into destination cell
-                            // Fill event descriptor
-                            desc.item = item;
-                            desc.sourceCell = sourceCell;
-                            desc.destinationCell = this;
-                            Debug.Log("拖拽操作step3");
-                            UpdateMyItem();
-                            SendRequest(desc);                              // Send drop request
-                            StartCoroutine(NotifyOnDragEnd(desc));          // Send notification after drop will be finished
-                            if (desc.permission == true)                    // If drop permitted by application
+                        case CellPhase.NineSlotCell_empty:
+                            switch (sourceCell.cellPhase)
                             {
-                                PlaceItemNotDestroyOldItemVersion(item);                            // Place dropped item in this cell
-                                //这个也就是我们把技能石头从SkillBox拖到九宫格上的那个瞬间。
-                                //PlaceItemNotDestroyOldItemVersion(item);
+                                case CellPhase.NineSlotCell_full://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                    OnDropEvent_Override(desc,item,sourceCell);
+                                    break;
+                                case CellPhase.SkillStoneBoxCell:
+                                    if (AccountCharsSet.checkifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
+                                    {
+                                        Debug.Log("其他玩家正在使用的石头不可拖入");
+                                        return;
+                                    }
+                                    if (!refreshWholePoint(item))
+                                    {
+                                        Debug.Log("Validation错误，不执行操作，返回");
+                                        return;
+                                    }
+                                    OnDropEvent_Override(desc,item,sourceCell);
+                                    break;
+                                case CellPhase.NineSlotCell_empty:
+                                    break;
+                            }
+                            break;
+                        case CellPhase.SkillStoneBoxCell:
+                            switch (sourceCell.cellPhase)
+                            {
+                                case CellPhase.NineSlotCell_full:// 已装备石头的卸载功能。 
+                                    if (this.GetItem()==null)
+                                    {
+                                        OnDropEvent_Override(desc,item,sourceCell);
+                                    }else{
+                                        sourceCell._SkillStoneSlot.returnStoneToBox();
+                                    }
+                                break;
+                                case CellPhase.NineSlotCell_empty:
+                                    OnDropEvent_Override(desc,item,sourceCell);
+                                    break;
+                                case CellPhase.SkillStoneBoxCell:
+                                    break;
+                            }
+                            break;
+                        case CellPhase.DeleteArea:
+                            switch (sourceCell.cellPhase)
+                            {
+                                case CellPhase.SkillStoneBoxCell:
+                                    UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
+                                    {
+                                        TheNineSlot._TheNineSlot.triggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().localID}));
+                                        UpdateMyItem();
+                                    };
+                                    UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
+                                    {
+                                        TheNineSlot._TheNineSlot.triggerMainProcess(MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox());
+                                    };
+                                    TheNineSlot._TheNineSlot._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
+                                        "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.keyName + "?");
+                                    break;
                             }
                             break;
                         default:
@@ -264,54 +254,18 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                     }
                 }
             }
-            if (item != null)
-            {
-                if (item.GetComponentInParent<DragAndDropCell>() == null)   // If item have no cell after drop
-                {
-                    //Destroy(item.gameObject);                               // Destroy it
-                }
-            }
         }
         
-        ////
-        if (sourceCell == null || sourceCell.cellType == CellType.DropOnly)
+        if (sourceCell == null)
         {
             Debug.Log("按理说不应该经过这里");
             return;
         }
+                      
         UpdateMyItem();
         UpdateBackgroundState();
         sourceCell.UpdateMyItem();
         sourceCell.UpdateBackgroundState();
-        ////
-
-        if (isDeleteArea)
-        {
-            if (this._SkillStoneSlot != null && this._SkillStoneSlot._TheNineSlot != null && this._SkillStoneSlot._TheNineSlot._preparingScene != null && this._SkillStoneSlot._SkillStonesBox != null)
-            {
-                UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
-                {
-                    this._SkillStoneSlot._SkillStonesBox.deleteTheseStonesLocal(new List<DragAndDropItem>{ GetItem()});
-                    DestroyItem();
-                    Debug.Log("删除了一个技能石头。" + GetItem()._SkillConfigOfSkillStone.keyName + " 正式版本这个技能石头的删除操作需要进一步review ");
-                };
-                UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
-                {
-                    this._SkillStoneSlot._SkillStonesBox.arrangeSkillStonesToBox(
-                                this._SkillStoneSlot._SkillStonesBox.getFocusingType(),
-                                this._SkillStoneSlot._SkillStonesBox.getFocusingExType(),
-                                this._SkillStoneSlot._SkillStonesBox.closeCheckBox.isOn,
-                                this._SkillStoneSlot._SkillStonesBox.nearCheckBox.isOn,
-                                this._SkillStoneSlot._SkillStonesBox.farCheckBox.isOn,
-                                this._SkillStoneSlot._SkillStonesBox.outRangeCheckBox.isOn,
-                                this._SkillStoneSlot._TheNineSlot.getUsingStonesId());
-                };
-                this._SkillStoneSlot._TheNineSlot._preparingScene._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
-                                                                                                        "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.keyName + "?");
-            }
-        }
-
-        return;
     }
 
 	/// <summary>
@@ -375,30 +329,25 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         {
             UpdateMyItem();
             if (myDadItem != null)
-            {
-                if (myDadItem.myskillstone_localid != -1)
-                {
-                    myDadItem.gameObject.transform.SetParent(null);
-                    myDadItem.gameObject.SetActive(false);
-                }else{
-                    Destroy(myDadItem.gameObject);
-                }
-            }
+                myDadItem.gameObject.transform.SetParent(MySkillStonesReader.SkillStonesBox.stonesTempContainer);
             myDadItem = null;
             UpdateBackgroundState();
 
-            DragAndDropCell cell = item.GetComponentInParent<DragAndDropCell>();
-            if (cell != null)
+            // 以下功能本游戏用不上。即所谓的无限道具格
+            DragAndDropCell SourceCell = item.GetComponentInParent<DragAndDropCell>();
+            if (SourceCell != null)
             {
-                if (cell.unlimitedSource == true)
+                if (SourceCell.unlimitedSource == true)
                 {
                     string itemName = item.name;
-                    item = Instantiate(item);                               // Clone item from source cell
+                    item = Instantiate(item);// Clone item from source cell
                     item.name = itemName;
                 }
             }
+            //////////////////////////////
+            
             item.transform.SetParent(transform, false);
-            item.transform.localScale = Vector3.one * 0.6f;
+            item.transform.localScale = Vector3.one * 0.7f;
             item.transform.localPosition = Vector3.zero;
             item.MakeRaycast(true);
             myDadItem = item;
@@ -429,6 +378,64 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 		myDadItem = null;
 		UpdateBackgroundState();
         UpdateMyItem();
+    }
+    
+    bool refreshWholePoint(DragAndDropItem item)
+    {
+        //这里就应该进行valiadation，因为如果出了问题还不断下来，那么底下的流程就会牵扯到各种的数值更新
+        if (this._SkillStoneSlot != null && item._SkillConfigOfSkillStone != null)
+        {
+            if (TheNineSlot._TheNineSlot != null)
+            {
+                List<string> nineskillids = TheNineSlot._TheNineSlot.getCurrentNineSlotAllSkillIds();
+                
+                if (this == TheNineSlot._TheNineSlot.A1DragAndDropCell)
+                {
+                    nineskillids[0] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.A2DragAndDropCell)
+                {
+                    nineskillids[1] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.A3DragAndDropCell)
+                {
+                    nineskillids[2] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.B1DragAndDropCell)
+                {
+                    nineskillids[3] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.B2DragAndDropCell)
+                {
+                    nineskillids[4] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.B3DragAndDropCell)
+                {
+                    nineskillids[5] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.C1DragAndDropCell)
+                {
+                    nineskillids[6] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.C2DragAndDropCell)
+                {
+                    nineskillids[7] = item._SkillConfigOfSkillStone.id;
+                }
+                if (this == TheNineSlot._TheNineSlot.C3DragAndDropCell)
+                {
+                    nineskillids[8] = item._SkillConfigOfSkillStone.id;
+                }
+                
+                int wholepint = MySkillStonesReader.skillsetValidation(nineskillids[0],nineskillids[1],nineskillids[2],
+                                                                        nineskillids[3],nineskillids[4],nineskillids[5],
+                                                                        nineskillids[6],nineskillids[7],nineskillids[8]);
+                if (wholepint < 0)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /// <summary>
@@ -529,14 +536,6 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
             //UpdateMyItem();
             SendNotification(desc);
         }
-    }
-
-    /// <summary>
-    /// Manualy delete item from this cell
-    /// </summary>
-    public void RemoveItem()
-    {
-        DestroyItem();
     }
 
     public void RemoveItemWithOutDestroy()

@@ -25,6 +25,8 @@ public class TeamConfig
     public int myWeaponLayer;
     public int myShieldLayer;
 
+    public LayerMask myTeamLayerMask;
+    public LayerMask myTeamAndMyEnemy;
     public LayerMask enemyLayerMask;
     public LayerMask enemyWeaponLayerMask;
     public LayerMask enemyShieldLayerMask;
@@ -54,12 +56,14 @@ public class TeamConfig
             case Team.player1:
                 my_tag = "Player1";
                 mylayer = 9;
+                myTeamLayerMask =  (1 << 9);
                 myWeaponLayer = 11;
                 myShieldLayer = 15;
                 break;
             case Team.player2:
                 my_tag = "Player2";
                 mylayer = 10;
+                myTeamLayerMask =  (1 << 10);
                 myWeaponLayer = 12;
                 myShieldLayer = 16;
                 break;
@@ -88,6 +92,8 @@ public class TeamConfig
                     enemyShieldLayerMask = (1 << 15);
                     mySensorAndWeaponTargetLayerMask = (1 << 9) | (1 << 11) | (1 << 15);
                     enemyAndEnemyWeaponLayerMask = (1 << 9) | (1 << 11);
+                    myTeamAndMyEnemy = (1 << 10) | (1 << 9);
+                    //myTeamAndMyEnemy |=(1 << 9);
                     break;
                 case Team.player2:
                     EnemyTags.Add("Player2");
@@ -96,6 +102,8 @@ public class TeamConfig
                     enemyShieldLayerMask = (1 << 16);
                     mySensorAndWeaponTargetLayerMask = (1 << 10) | (1 << 12) | (1 << 16);
                     enemyAndEnemyWeaponLayerMask = (1 << 10) | (1 << 12);
+                    myTeamAndMyEnemy = (1 << 10) | (1 << 9);
+                    //myTeamAndMyEnemy |=(1 << 10);
                     break;
                 case Team.player3:
                     EnemyTags.Add("Player3");

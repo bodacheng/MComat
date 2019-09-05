@@ -20,21 +20,21 @@ public class skillIconsDic {
         }
     }
 
-    private Sprite readingSprite;
-    private IDictionary<int, Sprite> skillIconDic = new Dictionary<int, Sprite>();
+    private GameObject readingSprite;
+    private IDictionary<string, GameObject> skillIconDic = new Dictionary<string, GameObject>();
 
-    public Sprite getSkillIconSyn(int skillID)
+    public GameObject getSkillIconSyn(string skillID)
     {
         skillIconDic.TryGetValue(skillID, out readingSprite);
         return readingSprite;
     }
 
-    public IEnumerator findSkillIconByCach(int skillID)
+    public IEnumerator findSkillIconByCach(string skillID)
     {
         skillIconDic.TryGetValue(skillID, out readingSprite);
         if (readingSprite == null)
         {
-            IEnumerator ienObj = defaultPools.Instance.getABFromCach("skillIcons", skillID.ToString());
+            IEnumerator ienObj = CachManager.Instance.getABFromCach("skillIcons", skillID.ToString());
             while (ienObj.MoveNext())
             {
                 // Do Nothing
@@ -55,12 +55,17 @@ public class skillIconsDic {
 
             if (resultObject.asset != null)
             {
-                readingSprite = (Sprite)resultObject.asset;
+                GameObject pretab = (GameObject)resultObject.asset;
+                if (pretab != null)
+                    readingSprite = GameObject.Instantiate(pretab) as GameObject;
+                else
+                {
+                    yield return null; yield break;
+                }
                 if (skillIconDic.ContainsKey(skillID))
                     skillIconDic[skillID] = readingSprite;
                 else
                     skillIconDic.Add(skillID, readingSprite);
-
                 Debug.Log("成功从缓存读取了以下图标：" + skillID);
                 readingBundle.Unload(false);
             }
@@ -74,34 +79,37 @@ public class skillIconsDic {
         yield return readingSprite;
     }
 
-    public IEnumerator findSkillIconByResource(int skillID)
+    public IEnumerator findSkillIconByResource(string skillID)
     {
         skillIconDic.TryGetValue(skillID, out readingSprite);
-        if (readingSprite == null)
-            readingSprite = Resources.Load<Sprite>("Sprites/skillIcons/" + skillID.ToString()) as Sprite;
-        else
+        if (readingSprite != null)
             yield return readingSprite;
-
+           
+        GameObject pretab = Resources.Load("Sprites/skillIcons/" + skillID.ToString()) as GameObject;
+        if (pretab != null)
+            readingSprite = GameObject.Instantiate(pretab) as GameObject;
+        else{
+            yield return null;yield break;
+        }
         if (skillIconDic.ContainsKey(skillID))
             skillIconDic[skillID] = readingSprite;
         else
             skillIconDic.Add(skillID, readingSprite);
-            
         yield return readingSprite;
     }
 
-    public Sprite getDefaultSkillIconByResource(EX spLevel)
+    public GameObject getDefaultSkillIconByResource(int spLevel)
     {
         switch (spLevel)
         {
-            case EX.normal:
-                return Resources.Load<Sprite>("Sprites/skillIcons/" + "normal_default") as Sprite;
-            case EX.EX1:
-                return Resources.Load<Sprite>("Sprites/skillIcons/" + "ex1_default") as Sprite;
-            case EX.EX2:
-                return Resources.Load<Sprite>("Sprites/skillIcons/" + "ex2_default") as Sprite;
-            case EX.EX3:
-                return Resources.Load<Sprite>("Sprites/skillIcons/" + "ex3_default") as Sprite;
+            case 0:
+                return Resources.Load<GameObject>("Sprites/skillIcons/" + "normal_default") as GameObject;
+            case 1:
+                return Resources.Load<GameObject>("Sprites/skillIcons/" + "ex1_default") as GameObject;
+            case 2:
+                return Resources.Load<GameObject>("Sprites/skillIcons/" + "ex2_default") as GameObject;
+            case 3:
+                return Resources.Load<GameObject>("Sprites/skillIcons/" + "ex3_default") as GameObject;
         }
         return null;
     }

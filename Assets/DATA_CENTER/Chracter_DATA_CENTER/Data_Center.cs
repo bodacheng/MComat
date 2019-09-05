@@ -1,95 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HittingDetection;
 using System.Linq;
-
-public enum zokusei : int
-{
-    redMagic = 1,
-    blueMagic = 2,
-    greenMagic = 3,
-    darkMagic = 4,
-    lightMagic = 6,
-    Null = 7
-}
+using Soul;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
 //Those paremeters are sent to all parts of character from here.
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(AudioSource))]
-[RequireComponent(typeof(BO_Weapon_Animation_Events))]
+
+[RequireComponent(typeof(AIStateRunner))]
 [RequireComponent(typeof(Animation_Manger))]
 [RequireComponent(typeof(BO_Health))]
-[RequireComponent(typeof(SkillCancelFlag))]
-[RequireComponent(typeof(AIStateRunner))]
-[RequireComponent(typeof(BO_Ani_E))]
-public abstract partial class Data_Center : MonoBehaviour
+[RequireComponent(typeof(Sensor))]
+[RequireComponent(typeof(ShaderManager))]
+[RequireComponent(typeof(BuffsRunner))]
+[RequireComponent(typeof(BlendShapeProxy))]
+public partial class Data_Center : MonoBehaviour
 {
-    //下面这个三级初始化的问题，尤其要主意：那三部初始化并非在分别完成过一次后再运行就一定什么也不错，里面的工作是分部分的。
-    protected bool phase1Initialized = false, phase2Initialized = false, phase3Initialized = false;
-    public bool ifPreparedForBattle()
-    {
-        if (phase1Initialized && phase2Initialized && phase3Initialized)
-        {
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    //以下的这三个信息各有所用。首先队伍适配信息不光是角色本身，而且全身各个武器和hitbox的初始化也和这个量息息相关，
+    protected bool phase1Initialized = false, phase2Initialized = false;
+    // 以下的这三个信息各有所用。首先队伍适配信息不光是角色本身，而且全身各个武器和hitbox的初始化也和这个量息息相关，
     // 然后_CharacterDataInfo 事关GUI，角色信息啦浮动血跳什么的都和它相关，而_playerBattleInfo则是这场战斗为角色分配的攻击力和HP量
     // 因为我们这个游戏不是靠角色等级决定HP等属性，往往一场战斗所有角色会分配固定血量，因此事关总体血量和攻击力分配。
     public TeamConfig _TeamConfig;
-    public CharacterDataInfo _CharacterDataInfo;
-    public playerBattleInfo _playerBattleInfo;
 
     public zokusei Zokusei;
-
     public Transform geometryCenter;
+    public Transform WholeT;
     public Transform floorChecks;
     private Transform[] floorCheckers;
-    float groundedCount = 0f;
-    float airCount = 0f;
-    bool grounded;
+    private float groundedCount = 0f;
+    private float airCount = 0f;
+    private bool grounded;
 
-    //protected float BattleRingRadius = 30f;
-    //public void passBattleGroundInfo(float BattleRingRadius,Vector3 battleRingCenter)
-    //{
-    //    this.battleRingCenter = battleRingCenter;
-    //    this.BattleRingRadius = BattleRingRadius;
-    //}
-    //protected Vector3 battleRingCenter;
-    //public Vector3 getBattleRingCenter()
-    //{
-    //    return battleRingCenter;
-    //}
-
-    public Animator animator;
-    protected List<BO_Marker_Manager> myWeaponList = new List<BO_Marker_Manager>();
-
-    public Sensor Sensor;
-    //protected Collider _collider;
-    protected SkillCancelFlag _SkillCancelFlag;
-    protected BO_Ani_E _BO_Ani_E;
-    protected Rigidbody Rigidbody;
-    protected BO_Health BO_Health;
-    protected BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
-    public BO_Health getBOHealth()
-	{
-		return BO_Health;
-	}
-    protected AIStateRunner AIStateRunner;
-    public AIStateRunner getRunner()
-    {
-        return AIStateRunner;
-    }
+    public AudioSource _AudioSource;
+    public Animator animator;   
+    public Sensor Sensor;   
     public Animation_Manger Animation_Manger;
-
+    public SkillCancelFlag _SkillCancelFlag;
+    public BO_Ani_E _BO_Ani_E;
+    public Rigidbody Rigidbody;
+    public BO_Health BO_Health;
+    public BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
+    public Pusher pusher;
+    public AIStateRunner AIStateRunner;
+    public BuffsRunner buffsRunner;
+    public ResistanceManager _ResistanceManager;
+    public ShaderManager _ShaderManager;
+    public BlendShapeProxy blendShapeProxy;
+    
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
-
     [Header("WeaponOnBody")]
     [Space(9)]
     [Tooltip("All the weapons we hold")]
@@ -98,9 +58,12 @@ public abstract partial class Data_Center : MonoBehaviour
     [Header("传统防御盾。可能真的用不到了")]
     [Space(1)]
     public BO_Shield Shield;
-
-    //private PhysicMaterial moca, smooth;
+   
+    private List<BO_Marker_Manager> myWeaponList = new List<BO_Marker_Manager>();
     private List<GameObject> deActiveObjects_List;
+    
+    public bool onBattleGroundBundary = false;
+    public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
 
     public List<BO_Marker_Manager> getMyWeaponList()
     {
@@ -116,63 +79,28 @@ public abstract partial class Data_Center : MonoBehaviour
     {
         return dead;
     }
-
-    public bool onBattleGroundBundary = false;
-    public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
-
+    
+    public bool ifPreparedForBattle()
+    {
+        if (phase1Initialized && phase2Initialized)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public IEnumerator step1Initialize(string type, string basicPackName,string personalMagicPath)
     {
         if (!phase1Initialized)
         {
-            Animation_Manger = gameObject.GetComponent<Animation_Manger>();
-            AIStateRunner = gameObject.GetComponent<AIStateRunner>();
-            setIfShowMode(true);
-            _BO_Ani_E = gameObject.GetComponent<BO_Ani_E>();
-            _SkillCancelFlag = gameObject.GetComponent<SkillCancelFlag>();
-            bO_Weapon_Animation_Events = gameObject.GetComponent<BO_Weapon_Animation_Events>();
-            BO_Health = gameObject.GetComponent<BO_Health>();//这个只在战斗模式需要
+            this.Rigidbody.useGravity = false;
             BodyElementTagAndLayerSet(null);
-            Rigidbody = GetComponent<Rigidbody>();//这个只在战斗模式需要
-            if (!Rigidbody)
-            {
-                gameObject.AddComponent<Rigidbody>();
-                Rigidbody = GetComponent<Rigidbody>();
-            }
-            Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            //计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
-            //设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
-            Rigidbody.useGravity = false;
-
-            if (!animator)//这个只在战斗模式需要
-            {
-                animator = gameObject.GetComponent<Animator>();
-                if (!animator)
-                {
-                    Debug.Log("Cant find animator,pls check");
-                }
-            }
-
-            floorChecks = gameObject.transform.Find("FloorChecks");
-            if (!floorChecks)
-            {
-                floorChecks = new GameObject().transform;
-                floorChecks.name = "FloorChecks";
-                floorChecks.parent = gameObject.transform;
-                floorChecks.position = gameObject.transform.position;
-                GameObject check = new GameObject();
-                check.name = "Check1";
-                check.transform.parent = floorChecks;
-                Vector3 v = gameObject.transform.position;
-                v.y = -1f;
-                check.transform.position = v;
-                Debug.LogWarning("No 'floorChecks' assigned to PlayerMove script, so a single floorcheck has been created", floorChecks);
-            }
             floorCheckers = new Transform[floorChecks.childCount];
             for (int i = 0; i < floorCheckers.Length; i++)
             {
                 floorCheckers[i] = floorChecks.GetChild(i);
             }
-
             bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(right_hand, left_hand, right_foot, left_foot, right_hand_weapon, left_hand_weapon, head, tail);
 
             // 在第一级初始化中我们把两个角色武器先打开，又关闭，这起到了个非常邪门的效果：使得这两把武器的相关awake函数得以运行，在这里就是找到了相应武器的markers
@@ -207,28 +135,29 @@ public abstract partial class Data_Center : MonoBehaviour
                     personalEffectsPath = "defaultEffects";
                     break;
             }
-            defaultPools.Instance.iniEffectsPool("short_effect", personalEffectsPath, 2);
-            defaultPools.Instance.iniEffectsPool("normal_effect", personalEffectsPath, 2);
-            defaultPools.Instance.iniEffectsPool("long_effect", personalEffectsPath, 2);
-
-            switch (defaultPools.Instance.AnimationLoadingMode)
+            EffectAndHurtObjectLoading.Instance.iniEffectsPool("short_effect", personalEffectsPath, 3);
+            EffectAndHurtObjectLoading.Instance.iniEffectsPool("normal_effect", personalEffectsPath, 3);
+            EffectAndHurtObjectLoading.Instance.iniEffectsPool("long_effect", personalEffectsPath, 3);
+            switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
                     yield return (Animation_Manger.preloadBasicPersonalAnims(type,basicPackName));
-                    
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     yield return (Animation_Manger.preloadBasicPersonalAnimsStreamingAssetMode(type, basicPackName));
-                    
                     break;
                 case ResourceLoadMode.Resource:
                     yield return (Animation_Manger.preloadBasicPersonalAnimsResourceMode(type, basicPackName));
-                    
                     break;
             }
-
             yield return _BO_Ani_E.basicMagicAndEffectsPathDefine(this.Zokusei, personalMagicPath);
-            yield return _BO_Ani_E.setBodyPartsTransform(this, BO_Health);
+            //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
+            //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
+            //else
+            //{
+            //    this.blendShapeProxy = this.gameObject.GetComponent<BlendShapeProxy>();
+            //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
+            //}                
             phase1Initialized = true;
         }
     }
@@ -285,15 +214,7 @@ public abstract partial class Data_Center : MonoBehaviour
             addToDeActiveObjects(left_hand_weapon.gameObject);
         }
 
-        if (Sensor == null)
-        {
-            Debug.Log("请手动适配sensor");
-        }
-        else
-        {
-            _SkillCancelFlag.setSensor(Sensor);
-            Sensor.setDectectLayerAndFrontDirection(_TeamConfig,this);
-        }
+        Sensor.setDectectLayerAndFrontDirection(_TeamConfig,this);
 
         string effectPath;
         switch (Zokusei)
@@ -318,18 +239,17 @@ public abstract partial class Data_Center : MonoBehaviour
                 break;
         }
 
-        defaultPools.Instance.iniEffectsPool("Sparks", effectPath, 2);
-        defaultPools.Instance.iniEffectsPool("light_hit", effectPath, 2);
-        defaultPools.Instance.iniEffectsPool("light_hit", effectPath, 2);
-        defaultPools.Instance.iniEffectsPool("heavy_hit", effectPath, 2);
-        defaultPools.Instance.iniEffectsPool("super_hit", effectPath, 2);
-        defaultPools.Instance.iniEffectsPool("resistanceUp", effectPath, 2);
-        defaultPools.Instance.iniEffectsPool("on_enable_effect", effectPath, 1);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("Sparks", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("light_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("light_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("heavy_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("super_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("resistanceUp", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.iniEffectsPool("on_enable_effect", effectPath, 3);
 
         foreach (BO_Marker_Manager weapon in myWeaponList)
         {
             weapon.setTeamConfig(_TeamConfig);
-            weapon.setAT(this._playerBattleInfo.AT);
             weapon.setHolderCenter(this.geometryCenter);
             weapon.setWeaponOwnerHealth(BO_Health);
             weapon.personalEffectPath = effectPath;
@@ -347,7 +267,7 @@ public abstract partial class Data_Center : MonoBehaviour
         }
     }
     
-    public IEnumerator step2Initialize(string type, NineAndTwo _NineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level,zokusei _zokusei, string personalMagic)
+    public IEnumerator step2Initialize(string type, NineAndTwo _NineAndTwo, int AI_level,zokusei _zokusei, string personalMagic)
     {
         if (!phase2Initialized)
         {
@@ -357,34 +277,30 @@ public abstract partial class Data_Center : MonoBehaviour
         
         if (AIStateRunner.getReadingNineAndTwo() != _NineAndTwo || AIStateRunner.usingScriptLevel != AI_level)
         {
-            AIStateRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo, passiveSkillConfigs, AI_level);
-            AIStateRunner.iniStates();
+            AIStateRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo, AI_level);
+            AIStateRunner.iniStates(this.WholeT,this.geometryCenter);
             //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
             // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
             List<string> toLoadSkillAnimsNames = AIStateRunner.passSkillTypeKeys();
-            switch (defaultPools.Instance.AnimationLoadingMode)
+            switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    yield return (
-                        Animation_Manger.preloadPersonalAnims(AssetBundleLoader.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                    yield return (Animation_Manger.preloadPersonalAnims(AssetBundleLoader.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
                 break;
                 case ResourceLoadMode.Resource:
-                    yield return (
-                        Animation_Manger.preloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                    yield return (Animation_Manger.preloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
                 break;
                 case ResourceLoadMode.StreamingAssetAB:
-                    yield return (
-                        Animation_Manger.preloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                    yield return (Animation_Manger.preloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
                 break;
             }
         }
     }
 
-    public void step3Initialize(TeamConfig _TeamConfig, playerBattleInfo _playerBattleInfo)//战斗必备
+    public void step3Initialize(TeamConfig _TeamConfig)//战斗必备
     {
-        this._playerBattleInfo = _playerBattleInfo;
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
-        BO_Health._health = (this._playerBattleInfo.MaxHP);
+        BO_Health._health = 2000;
         BO_Health.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         BO_Health.changeLayerForAllSelfColliders(_TeamConfig.mylayer);
         BO_Health.enableAllHitBoxCollider(true);
@@ -397,12 +313,6 @@ public abstract partial class Data_Center : MonoBehaviour
         {
             left_hand_weapon.gameObject.SetActive(false);
         }
-
-        if (phase3Initialized)
-        {
-            return;
-        }
-        phase3Initialized = true;
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
@@ -442,32 +352,6 @@ public abstract partial class Data_Center : MonoBehaviour
     //关于角色初始化，我们需要把所有进行初始化的内容都拿出来进行一个归类工作。其实当下我们的系统里最不稳的一个事情在于
     //很多靠字符串表达的地址。。这种东西我们在读取角色和读取脚本的地方已经修改了，但在读取动画文件和读取脚本的地方仍然存在。
     //这些地方有没有必要给想办法去掉呢。。
-    private void Awake()
-    {
-        if (geometryCenter == null)
-        {
-            Debug.Log("没有在DATA中心里适配角色几何中心");
-        }
-    }
-
-    //public void switchToSmoothPhysicMaterial()
-    //{
-    //    if (smooth)
-    //        _collider.material = smooth;
-    //}
-    //public void switchToMocaPhysicMaterial()
-    //{
-    //    if (moca)
-    //        _collider.material = moca;
-    //}
-
-    public virtual void AI_Update()
-    {
-    }
-    public virtual void AI_LateUpdate()
-    {
-    }
-
     public void turnShield(bool isShieldActive)
     {
         //if (PhotonNetwork.offlineMode || !PhotonNetwork.connected) {
@@ -479,54 +363,79 @@ public abstract partial class Data_Center : MonoBehaviour
     }
 
     Vector3 temp;
-    void Update ()
+    void FixedUpdate()
     {
-        if (showMode)
+        if (AIStateRunner.ifRunning())
         {
-            this.grounded = true;
-            if (animator)
-            {
-                animator.SetBool("Grounded", true);
-                animator.SetFloat("groundedCount", 10);
-            }
-            return;
-        }
-        
-        IfGrounded();
-        if (animator)
-        {
+            if (GravitySwitch)
+                IfGrounded();
             animator.SetBool("Grounded", grounded);
             animator.SetFloat("airCount", airCount);
             animator.SetFloat("groundedCount", groundedCount);
-        }
-
-        groundedCount = (grounded) ? groundedCount += Time.deltaTime : 0f;
-        airCount = (!grounded) ? airCount += Time.deltaTime : 0f;
-        if (AIStateRunner != null)
-            AI_Update();
-
-        if (gameObject.transform.position.y <= floorY) 
-        {
-            temp = gameObject.transform.position;
-            temp.y = floorY;
-            if (ifVectorClean(temp))
-                gameObject.transform.position = temp;
-        }
-
-        if (System.Math.Abs(gameObject.transform.rotation.x) > 0.05f || System.Math.Abs(gameObject.transform.rotation.z) > 0.05f)
-        {
-            Quaternion q = gameObject.transform.rotation;
-            q.x = 0f;
-            q.z = 0f;
-            gameObject.transform.rotation = q;
+            groundedCount = (grounded) ? groundedCount += Time.deltaTime : 0f;
+            airCount = (!grounded) ? airCount += Time.deltaTime : 0f;
+            if (WholeT.position.y <= floorY) 
+            {
+                temp = WholeT.position;
+                temp.y = floorY;
+                WholeT.position = temp;
+            }
+            this.Sensor.SensorFixedUpdate();
+            this.buffsRunner.BuffsRunnerFixedUpdate();
+            this.BO_Health.HealthBodyFixedUpdate();
+            this._SkillCancelFlag.SkillCancelFlagFixedUpdate();
         }
     }
     
-    private bool showMode = true;
-    public void setIfShowMode(bool showMOde)
+    public void setGravitySwitch(bool _on)
     {
-        this.showMode = showMOde;
-        this.AIStateRunner.showMode = showMOde;
+        GravitySwitch = _on;
+    }
+    public bool getGravitySwitch()
+    {
+        return GravitySwitch;
+    }
+    
+    private bool GravitySwitch = true;
+    private float floorY = 0f;
+    public void IfGrounded()
+    {
+        if (floorCheckers == null)
+        {
+            this.grounded = false;
+            return;
+        }
+        foreach (Transform check in floorCheckers)
+        {
+            if (this.floorY > check.transform.position.y)//Mathf.Abs(check.transform.position.y - this.floorY) < grounded_judgement_RayUpDis &&
+            {
+                this.grounded = true;
+                return;
+            }
+        }
+        this.grounded = false;
+        temp = WholeT.position;
+        temp.y = floorY;
+        this.WholeT.transform.position = Vector3.Lerp(this.WholeT.transform.position,temp,10 * Time.fixedDeltaTime);
+    }
+
+    public bool IsGrounded()
+    {
+        return this.grounded;
+    }
+    
+    public void cleanClear()
+    {
+        this.grounded = true;
+        if (animator)
+        {
+            animator.SetBool("Grounded", true);
+            animator.SetFloat("groundedCount", 10);
+        }
+        this.Sensor.Stop();
+        this.bO_Weapon_Animation_Events.DisableMarkers();
+        this.buffsRunner.endAllCoroutines();
+        this.pusher.clearHitCountForAttackStepping();  
     }
 
     private float p1_to_me,p2_to_me;
@@ -555,59 +464,6 @@ public abstract partial class Data_Center : MonoBehaviour
         First.CopyTo(result, 0);
         Second.CopyTo(result, First.Length);
         return result;
-    }
-
-    RaycastHit hit;
-
-    private float floorY = 0;
-
-    public float getFloorY()
-    {
-        return floorY;
-    }
-
-    public void IfGrounded()
-    {
-        if (floorCheckers == null)
-        {
-            this.grounded = false;
-            return;
-        }
-        foreach (Transform check in floorCheckers)
-        {
-            //if (floorGot)
-            //{
-                if (this.floorY > check.transform.position.y)//Mathf.Abs(check.transform.position.y - this.floorY) < grounded_judgement_RayUpDis &&
-                {
-                    if (Rigidbody != null)
-                        Rigidbody.useGravity = false;
-                    this.grounded = true;
-                    return;
-                }
-            //}else{
-            //    RaycastHit[] floorCheckersHits = Physics.RaycastAll(check.position, Vector3.up, Mathf.Infinity);
-            //    foreach(RaycastHit _hit in floorCheckersHits)
-            //    {
-            //        if (_hit.collider.gameObject.layer == 19)
-            //        {
-            //            floorGot = true;
-            //            BO_Health.makeHitBoxesDontCollideWithGround(_hit.collider);//我们姑且认为这一步时候所有的hitbox collider都已经加载好。因为这个加载工作是包括在第三级初始化里。
-            //            this.floorY = _hit.collider.transform.position.y;
-            //            this.grounded = true;
-            //            return;
-            //        }
-            //    }
-            //}
-        }
-
-        if (Rigidbody != null)
-            Rigidbody.useGravity = true;
-        this.grounded = false;
-    }
-
-    public bool IsGrounded()
-    {
-        return this.grounded;
     }
 
     public bool ifVectorClean(Vector3 rot)

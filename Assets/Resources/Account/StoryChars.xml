@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<AccountCharacterInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <playerId>-1</playerId>
+  <monsterOfPlayerId>1</monsterOfPlayerId>
+  <monsterId>1</monsterId>
+  <userd_efined_name>null</userd_efined_name>
+  <canBeDeleted>FALSE</canBeDeleted>
+  <exp>0</exp>
+  <a1_skill_stone_record_id>-1</a1_skill_stone_record_id>
+  <a2_skill_stone_record_id>-1</a2_skill_stone_record_id>
+  <a3_skill_stone_record_id>-1</a3_skill_stone_record_id>
+  <b1_skill_stone_record_id>-1</b1_skill_stone_record_id>
+  <b2_skill_stone_record_id>-1</b2_skill_stone_record_id>
+  <b3_skill_stone_record_id>-1</b3_skill_stone_record_id>
+  <c1_skill_stone_record_id>-1</c1_skill_stone_record_id>
+  <c2_skill_stone_record_id>-1</c2_skill_stone_record_id>
+  <c3_skill_stone_record_id>-1</c3_skill_stone_record_id>
+</AccountCharacterInfo>

@@ -4,105 +4,71 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+// 2019 6.1:
+// “动画的终结”现在我们改由动画片段末尾的“ThisIsEndOfAnimation”来判定。
+// 但是产生了一个严重的问题，就是在都有ThisIsEndOfAnimation的两个动画片段迁移过程中，
+// 迁移过程中前一个片段的ThisIsEndOfAnimation也会启动的问题（迁移区间内的前后片段包含动画事件都会触发，我们现在才知道）
+// 为了解决这个事情我们原本是靠ThisIsEndOfAnimation事件的string参数来确定函数是不是对应正确的动画片段，而不是误终结了迁移目标的动画，
+// 但我们发现这个方法没法解决前后动画一样的情况。尤其比如说闪避技能连续发动两次
+// 我们发现了Unity animator的一个bug。拿闪避技能来说，依据游戏企划闪避无法靠状态取消来进行第二次闪避，
+// 我们确定是前一个闪避动作结束后如果连按对应按钮的话才再次开始进行闪避，但因为仍然形成了连续，animator的全身层那边，full_body_state1仍然是直接向full_body_state2进行了迁移。
+// 然后就是严重bug的所在：闪避动画末尾的ThisIsEndOfAnimation函数居然莫名其妙的触发了两次。
+// 我想原因应该是Unity内部在处理迁移的时候有一定的逻辑问题，尤其我们让同一个动画迁移向同一个动画。。
+// 为了解决这个问题，我们在ThisIsEndOfAnimation函数内加入了getOnAniTransitionFlag判断，来看每次ThisIsEndOfAnimation触发的时候，是不是在full_body_state1与full_body_state2之间迁移。
+// 如果是的话，那么这次ThisIsEndOfAnimation不会把动画机状态判断为“终止”，因为实际情况是新的动画已经触发了。
+// 注意看所有的状态因动画终止而回归idle，都是从full_body_state1或full_body_state2往null回归的。
+// 只有在上面两种情况下ThisIsEndOfAnimation才应该起到应该有的作用。从而当下来看，理论上当前做法不会有什么问题。
+
 public partial class Animation_Manger : MonoBehaviour
 {
     // 大体的image就是能够直接通过动画文件名来随时决定animator当中各个层动画的播放。而不再需要复杂的animator。。
     // 然而这和unity的这个animator系统的初衷产生矛盾
-    //整个系统建立在animator本身这样的前提下：
+    // 整个系统建立在animator本身这样的前提下：
     //1. animator在状态迁移过程中，“当前状态”为迁移出发状态
     //2. 在迁移过程中，如果激发了迁移终点状态向另一状态（或返回至出发状态）迁移的条件，（起码我们知道trigger满足这点），则状态机会在按原节奏到达终点状态后，
 	//再去向第三者状态迁移，之前的迁移过程并不会受干扰，后触发的迁移条件也并不会被遗忘，一切会按顺序进行
     //从而也就是说对最后要触发那个状态来说，从条件激活到开始进入会发生一点延迟。
 
     public Animator Animator;
-    public string current_animation_name;
-
-    private AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
+    public AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
     private AnimatorOverrideController animatorOverride;
-    private string nextStateName;
     private bool doNothingFlag;
     private string toRunAniName;
-    private string fullbodylayer_return_trigger_name = null;
-    private string to_be_override_animation_name = null;
-    private string trigger_name = null;
-    private string pre_overrided_anim_name = null;
-    private bool isForShowMode = false;
-    private AniProcessCoroutine _AniProcessCoroutine;
-    private Coroutine animprocess;
+    private string fullbodylayer_return_trigger_name;
+    private string to_be_override_animation_name;
+    private string trigger_name;
+    private string pre_overrided_anim_name;
+    private IDictionary<string , AnimationClip> toLoadAnims;
+    public AnimationClip _toUse;
+    public float animationcounter = 0f;
+    
+    public bool getOnAniTransitionFlag()
+    {
+        return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") ||
+            Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
+    }
+
+    void Update()
+    {
+        if (_toUse != null)
+            animationcounter += Time.deltaTime;
+    }
 
     public void setAnimationPlayingStep(AnimationPlaying_Step _step)
     {
         this.Coroutine_Step = _step;
     }
 
-    public IEnumerator overrideClipTimeCounter(animator_layer_index _animator_layer_index, string clip_name)
+    public void animationTrigger(AnimationClip clip)
     {
-        if (tryAnimationClip(clip_name) != null)
-            yield return new WaitForSeconds(tryAnimationClip(clip_name).length);
-        else
-        {
-            Debug.Log("错误，无法找到动画:" + clip_name);
-            yield return new WaitForSeconds(0.1f);
-        }
-        setAnimationPlayingStep(AnimationPlaying_Step.over);
-        //this.PlayLayerAnim(_animator_layer_index, null);
-        //上面这一行之所以不要了，归根结底是为了防止一些情况下应该正常播放的动作被中止
-        //一个动画进程结束后就把动作复位，这看起来好像没有问题，但并不是所有情况下我们激活动画都是靠animationCustomCoroutineTrigger函数。
-        // animationCustomCoroutineTrigger函数会让上一个动画进程结束后再开始新进程，
-        // 对于那些不是靠animationCustomCoroutineTrigger激活动画的情况，它们就没有终止上一个动画进程，导致上一个进程仍然在进行，进行到末尾就会运行PlayLayerAnim(_animator_layer_index, null)
-        // 所以我们现在只在移动待机状态的进入点运行PlayLayerAnim(_animator_layer_index, null)
+        this.PlayLayerAnim_clip(clip);
+        this.setAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
-    public class AniProcessCoroutine
+    public void animationTrigger(string clip_name)
     {
-        Animation_Manger animation_Manger;
-        animator_layer_index _animator_layer_index;
-        string clip_name;//与下面的clip机能独立
-        AnimationClip clip;//与上面的clip_name机能独立
-
-        public AniProcessCoroutine(Animation_Manger animation_Manger, animator_layer_index animator_layer_index, string clip_name)
-        {
-            this.animation_Manger = animation_Manger;
-            this._animator_layer_index = animator_layer_index;
-            this.clip_name = clip_name;
-        }
-
-        public void customCoroutineTrigger()
-        {
-            if (this.animation_Manger.animprocess != null)
-                this.animation_Manger.StopCoroutine(this.animation_Manger.animprocess);
-            this.animation_Manger.PlayLayerAnim(_animator_layer_index, clip_name);
-            this.animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.running);
-            this.animation_Manger.animprocess = this.animation_Manger.StartCoroutine(this.animation_Manger.overrideClipTimeCounter(_animator_layer_index, clip_name));
-        }
-        
-        public AniProcessCoroutine(Animation_Manger animation_Manger, animator_layer_index animator_layer_index,AnimationClip clip)
-        {
-            this.animation_Manger = animation_Manger;
-            this._animator_layer_index = animator_layer_index;
-            this.clip = clip;
-        }
-        
-        public void customCoroutineTrigger_clip()
-        {
-            if (this.animation_Manger.animprocess != null)
-                this.animation_Manger.StopCoroutine(this.animation_Manger.animprocess);
-            this.animation_Manger.PlayLayerAnim_clip(_animator_layer_index, clip);
-            this.animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.running);
-            this.animation_Manger.animprocess = this.animation_Manger.StartCoroutine(this.animation_Manger.overrideClipTimeCounter(_animator_layer_index, clip));
-        }
-    }
-    
-    public void animationCustomCoroutineTrigger(animator_layer_index animator_layer_index, AnimationClip clip)
-    {
-        _AniProcessCoroutine = new AniProcessCoroutine(this, animator_layer_index, clip);
-        _AniProcessCoroutine.customCoroutineTrigger_clip();
-    }
-
-    public void animationCustomCoroutineTrigger(animator_layer_index animator_layer_index, string clip_name)
-    {
-        _AniProcessCoroutine = new AniProcessCoroutine(this, animator_layer_index, clip_name);
-        _AniProcessCoroutine.customCoroutineTrigger();
+        this.PlayLayerAnim(clip_name);
+        this.setAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
     public AnimationPlaying_Step GetAnimationPlayingStep()
@@ -110,22 +76,6 @@ public partial class Animation_Manger : MonoBehaviour
         return Coroutine_Step;
     }
 
-    public void setForShowMode(bool isForShowMode)
-    {
-        this.isForShowMode = isForShowMode;
-    }
-
-    void Awake()
-    {
-        toRunAniName = null;
-        if (Animator == null)
-            Animator = gameObject.GetComponent<Animator>();
-        if (Animator == null)
-            Debug.Log("animator not found");        
-    }
-
-    private IDictionary<string , AnimationClip> toLoadAnims;
-	private AnimationClip _toUse;
 	public AnimationClip tryAnimationClip(string clip_name)
 	{
 		if (clip_name != null) {
@@ -143,196 +93,158 @@ public partial class Animation_Manger : MonoBehaviour
     private AnimatorStateInfo _BaseAnimatorStateInfo;
     private AnimatorStateInfo AnimatorStateInfo;
     private AnimatorTransitionInfo _AnimatorTransitionInfo;
-    public void PlayLayerAnim(animator_layer_index animator_layer_index, string clip_name)
+    public void PlayLayerAnim(string clip_name)
     {
-        //if ((PhotonNetwork.offlineMode && PhotonNetwork.connected) || !PhotonNetwork.connected)
-        //{
-			this.PlayLayerAnimRPC ((int)animator_layer_index, clip_name);
-		//}
-		//else
-			//photonView.RPC("PlayLayerAnimRPC", PhotonTargets.All, (int)animator_layer_index, clip_name);
-    }
-
-    void PlayLayerAnimRPC(int animator_layer_index, string clip_name)
-    {
-        AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(animator_layer_index);
-        switch (animator_layer_index)
+        animationcounter = 0;
+        if (clip_name == null)
+            _toUse = null;
+        AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(1);
+        if (AnimatorStateInfo.IsName("Full Body.null"))
         {
-            case 1:
-                if (AnimatorStateInfo.IsName("Full Body.null"))
+            if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.null -> Full Body.full_body_state1"))
+            {
+                if (clip_name != "" && clip_name != null)
                 {
-                    if (Animator.GetAnimatorTransitionInfo(animator_layer_index).IsName("Full Body.null -> Full Body.full_body_state1"))
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
-                            to_be_override_animation_name = "fullbody_empty2";
-                            pre_overrided_anim_name = "fullbody_empty1";
-                            trigger_name = "fullbody_trigger2";
-                            fullbodylayer_return_trigger_name = "fullbody_return1";
-                            break;
-                        }
-                        else if (clip_name == "" || clip_name == null)
-                        {                            
-                            nextStateName = "Full Body.full_body_state1 -> Full Body.null";
-                            to_be_override_animation_name = null;
-                            pre_overrided_anim_name = "fullbody_empty1";
-                            trigger_name = null;
-                            fullbodylayer_return_trigger_name = "fullbody_return1";
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        nextStateName = "Full Body.null -> Full Body.full_body_state1";
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            to_be_override_animation_name = "fullbody_empty1";
-                            pre_overrided_anim_name = null;
-                            trigger_name = "fullbody_trigger1";
-                            fullbodylayer_return_trigger_name = null;
-                            break;
-                        }
-                        else
-                        {
-                            doNothingFlag = true;
-                            break;
-                        }
-                    }
+                    //nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
+                    to_be_override_animation_name = "fullbody_empty2";
+                    pre_overrided_anim_name = "fullbody_empty1";
+                    trigger_name = "fullbody_trigger2";
+                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
-                if (AnimatorStateInfo.IsName("Full Body.full_body_state1"))
+                else if (clip_name == "" || clip_name == null)
                 {
-                    if (Animator.GetAnimatorTransitionInfo(animator_layer_index).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2"))
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.full_body_state2 -> Full Body.full_body_state1";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = "fullbody_empty1";
-                            pre_overrided_anim_name = "fullbody_empty2";
-                            trigger_name = "fullbody_trigger1";
-                            fullbodylayer_return_trigger_name = "fullbody_return2";
-                            break;
-                        }
-                        else
-                        {
-                            nextStateName = "Full Body.full_body_state2 -> Full Body.null";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = null;
-                            pre_overrided_anim_name = "fullbody_empty2";
-                            trigger_name = null;
-                            fullbodylayer_return_trigger_name = "fullbody_return2";
-                            break;
-                        }
-                    }
-                    else if (Animator.GetAnimatorTransitionInfo(animator_layer_index).IsName("Full Body.full_body_state1 -> Full Body.null"))
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.null -> Full Body.full_body_state1";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = "fullbody_empty1";
-                            pre_overrided_anim_name = null;
-                            trigger_name = "fullbody_trigger1";
-                            fullbodylayer_return_trigger_name = null;
-                            break;
-                        }
-                        else
-                        {
-                            doNothingFlag = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = "fullbody_empty2";
-                            pre_overrided_anim_name = "fullbody_empty1";
-                            trigger_name = "fullbody_trigger2";
-                            fullbodylayer_return_trigger_name = "fullbody_return1";
-                        }else{
-                            // 0623重大修改！！！！！！
-                            nextStateName = "Full Body.full_body_state1 -> Full Body.null";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = null;
-                            pre_overrided_anim_name = "fullbody_empty1";
-                            trigger_name = null;
-                            fullbodylayer_return_trigger_name = "fullbody_return1";
-                        }
-                        break;
-                    }
+                    //nextStateName = "Full Body.full_body_state1 -> Full Body.null";
+                    to_be_override_animation_name = null;
+                    pre_overrided_anim_name = "fullbody_empty1";
+                    trigger_name = null;
+                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
-                if (AnimatorStateInfo.IsName("Full Body.full_body_state2"))
+            }
+            else
+            {
+                //nextStateName = "Full Body.null -> Full Body.full_body_state1";
+                if (clip_name != "" && clip_name != null)
                 {
-                    if (Animator.GetAnimatorTransitionInfo(animator_layer_index).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1"))
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = "fullbody_empty2";
-                            pre_overrided_anim_name = "fullbody_empty1";
-                            trigger_name = "fullbody_trigger2";
-                            fullbodylayer_return_trigger_name = "fullbody_return1";
-                            break;
-                        }
-                        else
-                        {
-                            nextStateName = "Full Body.full_body_state1 -> Full Body.null";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = null;
-                            pre_overrided_anim_name = "fullbody_empty1";
-                            trigger_name = null;
-                            fullbodylayer_return_trigger_name = "fullbody_return1";
-                            break;
-                        }
-                    }
-                    else if (Animator.GetAnimatorTransitionInfo(animator_layer_index).IsName("Full Body.full_body_state2 -> Full Body.null"))
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.null -> Full Body.full_body_state1";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = "fullbody_empty1";
-                            pre_overrided_anim_name = null;
-                            trigger_name = "fullbody_trigger1";
-                            fullbodylayer_return_trigger_name = null;
-                            break;
-                        }
-                        else
-                        {
-                            doNothingFlag = true;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (clip_name != "" && clip_name != null)
-                        {
-                            nextStateName = "Full Body.full_body_state2 -> Full Body.full_body_state1";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = "fullbody_empty1";
-                            pre_overrided_anim_name = "fullbody_empty2";
-                            trigger_name = "fullbody_trigger1";
-                            fullbodylayer_return_trigger_name = "fullbody_return2";
-                        }else{
-                            // 0623重大修改！！！！！！
-                            nextStateName = "Full Body.full_body_state2 -> Full Body.null";
-                            current_animation_name = Animator.GetCurrentAnimatorClipInfo(animator_layer_index)[0].clip.name;
-                            to_be_override_animation_name = null;
-                            pre_overrided_anim_name = "fullbody_empty2";
-                            trigger_name = null;
-                            fullbodylayer_return_trigger_name = "fullbody_return2";
-                        }
-                        break;
-                    }
+                    to_be_override_animation_name = "fullbody_empty1";
+                    pre_overrided_anim_name = null;
+                    trigger_name = "fullbody_trigger1";
+                    fullbodylayer_return_trigger_name = null;
                 }
-                break;
-            default:
-                break;
+                else
+                {
+                    doNothingFlag = true;
+                }
+            }
+        }
+        if (AnimatorStateInfo.IsName("Full Body.full_body_state1"))
+        {
+            if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2"))
+            {
+                if (clip_name != "" && clip_name != null)
+                {
+                    //nextStateName = "Full Body.full_body_state2 -> Full Body.full_body_state1";
+                    to_be_override_animation_name = "fullbody_empty1";
+                    pre_overrided_anim_name = "fullbody_empty2";
+                    trigger_name = "fullbody_trigger1";
+                    fullbodylayer_return_trigger_name = "fullbody_return2";
+                }
+                else
+                {
+                    //nextStateName = "Full Body.full_body_state2 -> Full Body.null";
+                    to_be_override_animation_name = null;
+                    pre_overrided_anim_name = "fullbody_empty2";
+                    trigger_name = null;
+                    fullbodylayer_return_trigger_name = "fullbody_return2";
+                }
+            }
+            else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null"))
+            {
+                if (clip_name != "" && clip_name != null)
+                {
+                    //nextStateName = "Full Body.null -> Full Body.full_body_state1";
+                    to_be_override_animation_name = "fullbody_empty1";
+                    pre_overrided_anim_name = null;
+                    trigger_name = "fullbody_trigger1";
+                    fullbodylayer_return_trigger_name = null;
+                }
+                else
+                {
+                    doNothingFlag = true;
+                }
+            }
+            else
+            {
+                if (clip_name != "" && clip_name != null)
+                {
+                    //nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
+                    to_be_override_animation_name = "fullbody_empty2";
+                    pre_overrided_anim_name = "fullbody_empty1";
+                    trigger_name = "fullbody_trigger2";
+                    fullbodylayer_return_trigger_name = "fullbody_return1";
+                }else{
+                    // 0623重大修改！！！！！！
+                    //nextStateName = "Full Body.full_body_state1 -> Full Body.null";
+                    to_be_override_animation_name = null;
+                    pre_overrided_anim_name = "fullbody_empty1";
+                    trigger_name = null;
+                    fullbodylayer_return_trigger_name = "fullbody_return1";
+                }
+            }
+        }
+        if (AnimatorStateInfo.IsName("Full Body.full_body_state2"))
+        {
+            if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1"))
+            {
+                if (clip_name != "" && clip_name != null)
+                {
+                    //nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
+                    to_be_override_animation_name = "fullbody_empty2";
+                    pre_overrided_anim_name = "fullbody_empty1";
+                    trigger_name = "fullbody_trigger2";
+                    fullbodylayer_return_trigger_name = "fullbody_return1";
+                }
+                else
+                {
+                    //nextStateName = "Full Body.full_body_state1 -> Full Body.null";
+                    to_be_override_animation_name = null;
+                    pre_overrided_anim_name = "fullbody_empty1";
+                    trigger_name = null;
+                    fullbodylayer_return_trigger_name = "fullbody_return1";
+                }
+            }
+            else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null"))
+            {
+                if (clip_name != "" && clip_name != null)
+                {
+                    //nextStateName = "Full Body.null -> Full Body.full_body_state1";
+                    to_be_override_animation_name = "fullbody_empty1";
+                    pre_overrided_anim_name = null;
+                    trigger_name = "fullbody_trigger1";
+                    fullbodylayer_return_trigger_name = null;
+                }
+                else
+                {
+                    doNothingFlag = true;
+                }
+            }
+            else
+            {
+                if (clip_name != "" && clip_name != null)
+                {
+                    //nextStateName = "Full Body.full_body_state2 -> Full Body.full_body_state1";
+                    to_be_override_animation_name = "fullbody_empty1";
+                    pre_overrided_anim_name = "fullbody_empty2";
+                    trigger_name = "fullbody_trigger1";
+                    fullbodylayer_return_trigger_name = "fullbody_return2";
+                }else{
+                    // 0623重大修改！！！！！！
+                    //nextStateName = "Full Body.full_body_state2 -> Full Body.null";
+                    to_be_override_animation_name = null;
+                    pre_overrided_anim_name = "fullbody_empty2";
+                    trigger_name = null;
+                    fullbodylayer_return_trigger_name = "fullbody_return2";
+                }
+            }
         }
 
         this.toRunAniName = clip_name;
@@ -340,40 +252,28 @@ public partial class Animation_Manger : MonoBehaviour
         doNothingFlag = false;
     }
 
-    void the_trigger(string clip_name,bool doNothingFlag)
+    void the_trigger(string clip_name,bool _doNothingFlag)
     {
-        if (doNothingFlag)
-        {
+        if (_doNothingFlag)
             return;
-        }
 
         if (clip_name != null && clip_name != "")
         {
             if (trigger_name != null)
             {
-                if (pre_overrided_anim_name != null)
-                {
-                    animatorOverride[pre_overrided_anim_name] = tryAnimationClip(current_animation_name); // 关于前动画起始点的问题有待商榷。可能没问题。
-                }
-                else
-                {
+                 // 2019.6.1重大修改。
+                //if (pre_overrided_anim_name != null)
+                    //animatorOverride[pre_overrided_anim_name] = currentAnimation;
+                //else
                     // 0623重大修改！！！！！！把底下这行给comment out了
                     //myOverrideController[pre_overrided_anim_name] = null;//也就是说从null状态出发的时候
-                }
+                
                 if (to_be_override_animation_name != null)
                 {
                     animatorOverride[to_be_override_animation_name] = tryAnimationClip(clip_name);
                 }
                 //Animator.runtimeAnimatorController = animatorOverride;
-                Animator.SetTrigger(trigger_name);                                    
-                if (tryAnimationClip(clip_name) != null)
-                {
-                    current_animation_name = clip_name;
-                }
-                else
-                {
-                    current_animation_name = null;
-                }
+                Animator.SetTrigger(trigger_name);
 
 //                if (trigger_name == "fullbody_trigger1" && 
 //                    (nextStateName == "Full Body.full_body_state1 -> Full Body.null" || nextStateName == "Full Body.full_body_state1 -> Full Body.full_body_state2" || nextStateName == "Full Body.full_body_state2 -> Full Body.null"))
@@ -403,15 +303,8 @@ public partial class Animation_Manger : MonoBehaviour
             {
                 Animator.SetTrigger(fullbodylayer_return_trigger_name);
             }
-			current_animation_name = null;
         }
     }
-}
-
-public enum animator_layer_index
-{
-    Base_Layer = 0,
-    Full_Body = 1
 }
 
 //  private static UnityEditor.Animations.AnimatorState[] GetStateNames(Animator animator)

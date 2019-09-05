@@ -1,0 +1,5 @@
+[title=Cutscene_0_begin]
+This is what will be said
+dsfdff
+喂喂喂饭
+[title=Cutscene_0_end]

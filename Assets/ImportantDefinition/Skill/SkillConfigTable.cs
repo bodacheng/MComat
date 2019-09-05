@@ -14,15 +14,13 @@ public class SkillConfigTable
 		public string ID;
 		public string type;
 		public string keyName;
-		public string ShowName;
-		public string SkillPoint;
+		public string AT;
 		public string attackType;
 		public string AI_close;
 		public string AI_near;
 		public string AI_far;
         public string AI_out;
 		public string SPLevel;
-		public string canAirTrigger;
         public string skillEmergentLevel;
         public string rarelevel;
     }
@@ -57,40 +55,36 @@ public class SkillConfigTable
         string[][] grid = new string[rowList.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
         {
-            grid[i] = new string[14];
+            grid[i] = new string[12];
             if (i == 0)
             {
                 grid[i][0] = "ID";
                 grid[i][1] = "type";
                 grid[i][2] = "keyName";
-                grid[i][3] = "ShowName";
-                grid[i][4] = "SkillPoint";
-                grid[i][5] = "attackType";
-                grid[i][6] = "AI_close";
-                grid[i][7] = "AI_near";
-                grid[i][8] = "AI_far";
-                grid[i][9] = "AI_out";
-                grid[i][10] = "SPLevel";
-                grid[i][11] = "canAirTrigger";
-                grid[i][12] = "skillEmergentLevel";
-                grid[i][13] = "rarelevel";
+                grid[i][3] = "AT";
+                grid[i][4] = "attackType";
+                grid[i][5] = "AI_close";
+                grid[i][6] = "AI_near";
+                grid[i][7] = "AI_far";
+                grid[i][8] = "AI_out";
+                grid[i][9] = "SPLevel";
+                grid[i][10] = "skillEmergentLevel";
+                grid[i][11] = "rarelevel";
             }
             else
             {
                 grid[i][0] = rowList[i - 1].ID;
                 grid[i][1] = rowList[i - 1].type;
                 grid[i][2] = rowList[i - 1].keyName;
-                grid[i][3] = rowList[i - 1].ShowName;
-                grid[i][4] = rowList[i - 1].SkillPoint;
-                grid[i][5] = rowList[i - 1].attackType;
-                grid[i][6] = rowList[i - 1].AI_close;
-                grid[i][7] = rowList[i - 1].AI_near;
-                grid[i][8] = rowList[i - 1].AI_far;
-                grid[i][9] = rowList[i - 1].AI_out;
-                grid[i][10] = rowList[i - 1].SPLevel;
-                grid[i][11] = rowList[i - 1].canAirTrigger;
-                grid[i][12] = rowList[i - 1].skillEmergentLevel;
-                grid[i][13] = rowList[i - 1].rarelevel;
+                grid[i][3] = rowList[i - 1].AT;
+                grid[i][4] = rowList[i - 1].attackType;
+                grid[i][5] = rowList[i - 1].AI_close;
+                grid[i][6] = rowList[i - 1].AI_near;
+                grid[i][7] = rowList[i - 1].AI_far;
+                grid[i][8] = rowList[i - 1].AI_out;
+                grid[i][9] = rowList[i - 1].SPLevel;
+                grid[i][10] = rowList[i - 1].skillEmergentLevel;
+                grid[i][11] = rowList[i - 1].rarelevel;
             }
         }
         string delimiter = ",";
@@ -114,23 +108,21 @@ public class SkillConfigTable
         {
             for (int i = 1; i < grid.Length; i++)
             {
-                if (grid[i].Length == 14)
+                if (grid[i].Length == 12)
                 {
                     Row row = new Row();
                     row.ID = grid[i][0];
                     row.type = grid[i][1];
                     row.keyName = grid[i][2];
-                    row.ShowName = grid[i][3];
-                    row.SkillPoint = grid[i][4];
-                    row.attackType = grid[i][5];
-                    row.AI_close = grid[i][6];
-                    row.AI_near = grid[i][7];
-                    row.AI_far = grid[i][8];
-                    row.AI_out = grid[i][9];
-                    row.SPLevel = grid[i][10];
-                    row.canAirTrigger = grid[i][11];
-                    row.skillEmergentLevel = grid[i][12];
-                    row.rarelevel = grid[i][13];
+                    row.AT = grid[i][3];
+                    row.attackType = grid[i][4];
+                    row.AI_close = grid[i][5];
+                    row.AI_near = grid[i][6];
+                    row.AI_far = grid[i][7];
+                    row.AI_out = grid[i][8];
+                    row.SPLevel = grid[i][9];
+                    row.skillEmergentLevel = grid[i][10];
+                    row.rarelevel = grid[i][11];
                     rowList.Add(row);
                 }
             }
@@ -142,20 +134,14 @@ public class SkillConfigTable
         }
     }
 
-    public void UpdateSkillConfigTableFile(TextAsset oldFile)
+    public IDictionary<string,SkillConfig> getSkillConfigDic()
     {
-    
-    }
-
-    public IDictionary<int,SkillConfig> getSkillConfigDic()
-    {
-        IDictionary<int, SkillConfig> Dic = new Dictionary<int, SkillConfig>();
-
+        IDictionary<string, SkillConfig> Dic = new Dictionary<string, SkillConfig>();
         List<SkillConfig> ALL = RowsToSkillConfigList(this.rowList);
         foreach (SkillConfig keyValuePair in ALL)
         {
             if (!Dic.ContainsKey(keyValuePair.id))
-                Dic.Add(new KeyValuePair<int, SkillConfig>(keyValuePair.id, keyValuePair));
+                Dic.Add(new KeyValuePair<string, SkillConfig>(keyValuePair.id, keyValuePair));
             else
                 Debug.Log("致命错误「技能配置文件」技能ID重复："+ keyValuePair .id);
         }
@@ -183,8 +169,7 @@ public class SkillConfigTable
         row.ID = skillConfig.id.ToString();
         row.type = skillConfig.type;
         row.keyName = skillConfig.keyName;
-        row.ShowName = skillConfig.ShowName;
-        row.SkillPoint = skillConfig.SkillPoint.ToString();
+        row.AT = skillConfig.AT.ToString();
 
         switch (skillConfig.stateType)
         {
@@ -206,48 +191,38 @@ public class SkillConfigTable
         }
 
         if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.inner_range))
-            row.AI_close = "TRUE";
+            row.AI_close = "1";
         else
-            row.AI_close = "FALSE";
+            row.AI_close = "0";
         if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.mid_range))
-            row.AI_near = "TRUE";
+            row.AI_near = "1";
         else
-            row.AI_near = "FALSE";
+            row.AI_near = "0";
         if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.far_range))
-            row.AI_far = "TRUE";
+            row.AI_far = "1";
         else
-            row.AI_far = "FALSE";
+            row.AI_far = "0";
         if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.out_of_range))
-            row.AI_out = "TRUE";
+            row.AI_out = "1";
         else
-            row.AI_out = "FALSE";
+            row.AI_out = "0";
 
         switch (skillConfig.SPLevel)
         {
-            case EX.normal:
-                row.SPLevel = "normal";
+            case 0:
+                row.SPLevel = "0";
                 break;
-            case EX.EX1:
-                row.SPLevel = "EX1";
+            case 1:
+                row.SPLevel = "1";
                 break;
-            case EX.EX2:
-                row.SPLevel = "EX2";
+            case 2:
+                row.SPLevel = "2";
                 break;
-            case EX.EX3:
-                row.SPLevel = "EX3";
+            case 3:
+                row.SPLevel = "3";
                 break;
             default:
-                row.SPLevel = "NULL";
-                break;
-        }
-
-        switch (skillConfig.canAirTrigger)
-        {
-            case true:
-                row.canAirTrigger = "TRUE";
-                break;
-            case false:
-                row.canAirTrigger = "FALSE";
+                row.SPLevel = "-1";
                 break;
         }
 
@@ -277,11 +252,10 @@ public class SkillConfigTable
         if (row == null)
             return null;
         SkillConfig _SkillConfig = new SkillConfig();
-        _SkillConfig.id = int.Parse(row.ID);
+        _SkillConfig.id = row.ID;
         _SkillConfig.type = row.type;
         _SkillConfig.keyName = row.keyName;
-        _SkillConfig.ShowName = row.ShowName;
-        _SkillConfig.SkillPoint = int.Parse(row.SkillPoint);
+        _SkillConfig.AT = int.Parse(row.AT);
 
         switch(row.attackType)
         {
@@ -303,42 +277,32 @@ public class SkillConfigTable
         }
 
         List<behaviorEnterRange> ranges = new List<behaviorEnterRange>();
-        if (row.AI_close == "TRUE")
+        if (row.AI_close == "1")
             ranges.Add(behaviorEnterRange.inner_range);
-        if (row.AI_near == "TRUE")
+        if (row.AI_near == "1")
             ranges.Add(behaviorEnterRange.mid_range);
-        if (row.AI_far == "TRUE")
+        if (row.AI_far == "1")
             ranges.Add(behaviorEnterRange.far_range);
-        if (row.AI_out == "TRUE")
+        if (row.AI_out == "1")
             ranges.Add(behaviorEnterRange.out_of_range);
         _SkillConfig.ai_trigger_ranges = ranges.ToArray();
 
         switch(row.SPLevel)
         {
-            case "normal":
-                _SkillConfig.SPLevel = EX.normal;
+            case "0":
+                _SkillConfig.SPLevel = 0;
                 break;
-            case "EX1":
-                _SkillConfig.SPLevel = EX.EX1;
+            case "1":
+                _SkillConfig.SPLevel = 1;
                 break;
-            case "EX2":
-                _SkillConfig.SPLevel = EX.EX2;
+            case "2":
+                _SkillConfig.SPLevel = 2;
                 break;
-            case "EX3":
-                _SkillConfig.SPLevel = EX.EX3;
+            case "3":
+                _SkillConfig.SPLevel = 3;
                 break;
             default:
-                _SkillConfig.SPLevel = EX.NULL;
-                break;
-        }
-
-        switch (row.canAirTrigger)
-        {
-            case "TRUE":
-                _SkillConfig.canAirTrigger = true;
-                break;
-            case "FALSE":
-                _SkillConfig.canAirTrigger = false;
+                _SkillConfig.SPLevel = -1;
                 break;
         }
 
@@ -404,21 +368,13 @@ public class SkillConfigTable
 	{
 		return rowList.FindAll(x => x.keyName == find);
 	}
-	public Row Find_ShowName(string find)
+	public Row Find_AT(string find)
 	{
-		return rowList.Find(x => x.ShowName == find);
+		return rowList.Find(x => x.AT == find);
 	}
-	public List<Row> FindAll_ShowName(string find)
+	public List<Row> FindAll_AT(string find)
 	{
-		return rowList.FindAll(x => x.ShowName == find);
-	}
-	public Row Find_SkillPoint(string find)
-	{
-		return rowList.Find(x => x.SkillPoint == find);
-	}
-	public List<Row> FindAll_SkillPoint(string find)
-	{
-		return rowList.FindAll(x => x.SkillPoint == find);
+		return rowList.FindAll(x => x.AT == find);
 	}
 	public Row Find_attackType(string find)
 	{
@@ -467,14 +423,6 @@ public class SkillConfigTable
 	public List<Row> FindAll_SPLevel(string find)
 	{
 		return rowList.FindAll(x => x.SPLevel == find);
-	}
-	public Row Find_canAirTrigger(string find)
-	{
-		return rowList.Find(x => x.canAirTrigger == find);
-	}
-	public List<Row> FindAll_canAirTrigger(string find)
-	{
-		return rowList.FindAll(x => x.canAirTrigger == find);
 	}
     public Row Find_skillEmergentLevel(string find)
     {

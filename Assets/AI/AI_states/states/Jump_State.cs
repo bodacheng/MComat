@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Soul;
 
 public class Jump_State : AI_State
 {	
@@ -47,7 +48,7 @@ public class Jump_State : AI_State
 
     public override bool capacity_enter_condition()
     {
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
         {
             return false;
         }return true;
@@ -85,7 +86,7 @@ public class Jump_State : AI_State
         this.Sensor.OneRoundDetectionStart(5);
 
         jumpSuccessed = false;
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
 		_Rigidbody.useGravity = true;
         time_counter = 0;
         jumpDirection = Vector3.zero;
@@ -133,7 +134,7 @@ public class Jump_State : AI_State
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
         if (ifVectorClean(jumpDirection))
             _Rigidbody.velocity = jumpDirection;
-        Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+        Animation_Manger.animationTrigger(clip_name);
     }
 
     public override void c_State_enter()
@@ -143,7 +144,7 @@ public class Jump_State : AI_State
         this.Sensor.OneRoundDetectionStart(5);
 
         jumpSuccessed = false;
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
 		_Rigidbody.useGravity = true;
         time_counter = 0;
         this.mainCam = CameraManager._camera.transform;
@@ -173,14 +174,14 @@ public class Jump_State : AI_State
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
         if (ifVectorClean(jumpDirection))
 		    _Rigidbody.velocity = jumpDirection;
-        Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+        Animation_Manger.animationTrigger(clip_name);
     }
 
-	public override void _f_State_Update()
-	{     
+	public override void _State_FixedUpdate1()
+	{
         if (!jumpSuccessed)
         {
-            if (AI_DATA_CENTER.IsGrounded())
+            if (_DATA_CENTER.IsGrounded())
             {
                 if (ifVectorClean(jumpDirection))
                     _Rigidbody.velocity = jumpDirection;
@@ -190,12 +191,8 @@ public class Jump_State : AI_State
             }
         }
         this.RotateToVelocity(1f,true);
-	}
-
-    public override void _State_FixedUpdate()
-    {
         time_counter += Time.fixedDeltaTime;
-    }
+	}
 
     public override void AI_State_exit()
     {

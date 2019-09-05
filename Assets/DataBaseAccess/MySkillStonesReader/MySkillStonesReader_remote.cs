@@ -1,41 +1,72 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.IO;
-using System.Linq;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using LitJson;
+using System.Text.RegularExpressions;
+using System.Linq;
+using System.Text;
+using Api.Common;
+using Api.Dto.Form;
+using Api.Dto.Form.Common;
+using Api.Dto.Model;
+using Api.Dto.Model.Common;
 
-public partial class MySkillStonesReader
+namespace dataAccess
 {
-    public IEnumerator loadMySkillstonesRemote(int playerid)
+    public partial class MySkillStonesReader
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://47.245.7.100:8080/skill/stones/of/player/list?size=50&playerId=" + playerid.ToString()))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            if (webRequest.isNetworkError)
-            {
-                Debug.Log("Error: " + webRequest.error);
-            }
-            else
-            {
-
-
-                //string a = webRequest.downloadHandler.text;
-                //dynamic deserialized = JObject.Parse(a);
-
-                //for (int i = 0; i < deserialized.Count;i++)
-                //{
-                //    Debug.Log("第"+i+"个json：" + deserialized[i]);
-                //}
-
-                //int[] stones = JsonConvert.DeserializeObject<int[]>(a);
-                //mySkillStonesDicByType = convertSKillStoneNumListToDic(stones.ToList());
-            }
+        private IEnumerator loadMySkillstonesRemote(ApiLanguage apiLanguage) {
+            List<SkillStoneOfPlayerInfoModel> infos;
+            GetSkillStoneOfPlayerInfoForm form = new GetSkillStoneOfPlayerInfoForm();
+            form.sessionId = AccountSet.Instance.sessionId;
+            
+            yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm> ("http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
+                 model => {
+                     infos = model.data.skillStoneOfPlayerInfoList;
+                     Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");
+                    foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
+                    {
+                        Debug.Log("skillStoneOfPlayerId:"+SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:"  + SkillStoneOfPlayerInfoModel.skillId);
+                    }
+                    Debug.Log("以上是查找到的玩家拥有的技能石");
+                    mySkillStonesDataDic = convertSKillStoneNumListToDic(infos.ToList());
+                 }
+                ,
+                 model => {
+                    mySkillStonesDataDic.Clear();
+                 }
+            );
+            yield break;
         }
+        
+        private IEnumerator skillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
+        {
+            List<SkillStoneGotchaInfoModel> infos;
+            SkillStoneGotchaForm form = new SkillStoneGotchaForm();
+            form.sessionId = AccountSet.Instance.sessionId;
+            form.gotchaPolicyKey = gotchaPolicyKey;
+            
+            yield return ApiCaller.Instance.Post<BaseModel<SkillStoneGotchaModel>, SkillStoneGotchaForm> 
+            ("http://160.16.187.230/AssetStoreFight/skillStone/skillStoneGotcha", form, ApiCaller.Instance.getHeader(apiLanguage),
+                 model => {
+                     infos = model.data.skillStoneGotchaInfoList;
+                     Debug.Log("以下是gotcha到的技能石");
+                    foreach (SkillStoneGotchaInfoModel _SkillStoneGotchaInfoModel in infos)
+                    {
+                        Debug.Log("skillId:"+_SkillStoneGotchaInfoModel.skillId + ",rare:"  + _SkillStoneGotchaInfoModel.rarityLevel);
+                    }
+                 }
+                ,
+                 model => {
+                    
+                 }
+            );
+            yield break;
+        }
+        
+        
     }
 }

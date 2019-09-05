@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System;
+using Soul;
 using System.Linq;
 
 public enum AIMoveStyle
@@ -95,23 +95,24 @@ public class Move_State : AI_State
     {
         this.time_counter = 0f;
         this._Weapon_Animation_Events.clearMarkerManagers();
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
         this.mainCam = CameraManager._camera.transform;
-        this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, null);
+        this.Animation_Manger.PlayLayerAnim(null);
     }
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
+        this._DATA_CENTER.setGravitySwitch(true);
         this._Weapon_Animation_Events.clearMarkerManagers();
         this.Sensor.continuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
-        this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body,null);
+        this.Animation_Manger.PlayLayerAnim(null);
 
         // 从这到底下那么也就是AI模式决定第一轮moveDirection和use_direction的
         // 而moveDirection是用来引导use_direction的
         decideDirection();
         this.time_counter = 0f;
         this.mainCam = CameraManager._camera.transform;
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
     }
 
     private void decideDirection()
@@ -210,9 +211,9 @@ public class Move_State : AI_State
         }
 
         time_counter += Time.fixedDeltaTime;
-        if (AI_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
+        if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
-            use_direction = AI_DATA_CENTER.antiWallDirection;
+            use_direction = _DATA_CENTER.antiWallDirection;
             return;
         }
 
@@ -248,11 +249,13 @@ public class Move_State : AI_State
         }
 
         use_direction = use_direction.normalized;
-
-        if (Sensor.ManyTeamMatesForward())
+        Collider[] EnemyAndTeammateBetweenMeAndEnemy = Sensor.EnemyAndTeammateBetweenMeAndEnemy();
+        if (EnemyAndTeammateBetweenMeAndEnemy != null)
         {
-            newDir = Sensor.recommandDirectionOffSetFromTeammates();
-            use_direction = Vector3.RotateTowards(use_direction, newDir, 10 * Time.deltaTime, 0).normalized;//里面的参数都是些很微妙的东西
+            newDir = (EnemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
+            (this.gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized ;
+            newDir.y = 0;
+            use_direction = Vector3.RotateTowards(use_direction, newDir, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
         }
     }
 
@@ -303,7 +306,7 @@ public class Move_State : AI_State
         }
     }
 
-    public override void _c_State_FixedUpdate()
+    public override void _c_State_FixedUpdate1()
     {
         _c_State_Update_SP();
         use_direction = use_direction.normalized;
@@ -320,7 +323,7 @@ public class Move_State : AI_State
         }
     }
 
-    public override void _State_FixedUpdate()
+    public override void _State_FixedUpdate1()
 	{
         _f_State_Update_SP();
         use_direction = use_direction.normalized;

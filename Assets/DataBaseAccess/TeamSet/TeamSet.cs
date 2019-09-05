@@ -1,113 +1,123 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using System;
-using System.Linq;
+using Api.Dto.Model;
 
-//站位信息这个事情，非常重要的是和玩家拥有角色信息进行一个校准。
-public partial class TeamSet
+//站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
+namespace dataAccess
 {
-	public static TeamSet instance;
-    public positionLocalCharKeySet _positionLocalCharKeySet4V4Mode;// //本单例模式的处理对象
-
-	private TeamSet()
-	{
-	}
-	public static TeamSet Instance
-	{
-		get
-		{
-			if (instance == null)
-			{
-				instance = new TeamSet();
-			}
-			return instance;
-		}
-	}
-
-    //整个函数的目的是修复错误的阵容设置
-    public void refreshPositionLocalCharKeySet4V4Mode(CharacterDataInfo[] ownedChars)
+    public partial class TeamSet
     {
-        if (_positionLocalCharKeySet4V4Mode == null)
-            _positionLocalCharKeySet4V4Mode = new positionLocalCharKeySet();
+        public static TeamSet instance;
+        public positionLocalCharKeySet storyModeTeamSet = new positionLocalCharKeySet();
+        public positionLocalCharKeySet Arena3V3 = new positionLocalCharKeySet();
 
-        if (_positionLocalCharKeySet4V4Mode.check4V4ModeTeamPositionNums())//这个是确保PosNumsWithLocalKeys的key没问题
-            return;
-        else
-            _positionLocalCharKeySet4V4Mode.clearSets();
-
-        if (ownedChars == null)
-            return;
-
-        List<int> currentLocalKeys = new List<int>();
-
-        foreach (CharacterDataInfo _one in ownedChars)
+        private TeamSet()
         {
-            if (!currentLocalKeys.Contains(_one.localID))
+        }
+        public static TeamSet Instance
+        {
+            get
             {
-                currentLocalKeys.Add(_one.localID);
-            }
-            else
-            {
-                Debug.Log("LocalID产生重复。这是不该产生的错误，请检查系统结构");
+                if (instance == null)
+                {
+                    instance = new TeamSet();
+                }
+                return instance;
             }
         }
 
-        if (_positionLocalCharKeySet4V4Mode.PosNumsWithLocalKeys != null)//这轮是确保PosNumsWithLocalKeys的value没问题
+        public IEnumerator loadTeamSet(TeamSetGameMode teamSetGameMode)
         {
-            foreach (PosNumWithLocalKey _set in _positionLocalCharKeySet4V4Mode.PosNumsWithLocalKeys)
+            switch (AccountSet.Instance._playerinfoReferenceMode)
             {
-                if (currentLocalKeys.Contains(_set.LocalID))
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    yield return TeamSet.Instance.loadTeamSetsRemote(teamSetGameMode, ApiLanguage.JaJp);
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    
+                    break;
+                case playerinfoReferenceMode.localTestSaveData:
+                    switch (teamSetGameMode)
+                    {
+                        case TeamSetGameMode.story:
+                            IEnumerator enumerator = TeamSet.Instance.loadMyTeamSetInfoViaJsonFile("TeamSet.json");
+                            yield return enumerator;
+                            storyModeTeamSet = (positionLocalCharKeySet)enumerator.Current;
+                            break;
+                        case TeamSetGameMode.arena3V3:
+                            IEnumerator enumerator1 = TeamSet.Instance.loadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json");
+                            yield return enumerator1;
+                            Arena3V3 = (positionLocalCharKeySet)enumerator1.Current;
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        public IEnumerator saveTeamSet(TeamSetGameMode teamSetGameMode)
+        {
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    yield return TeamSet.Instance.saveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
+                case playerinfoReferenceMode.localTestSaveData:
+                    TeamSet.Instance.overrideTeamSetInfoOnJsonFile(teamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
+                    break;
+            }
+            yield break;
+        }
+
+        // 下面的函数让阵容配置可以跳格。比方说一个游戏只能入场2人，那么现在在back和right位置有人，其他位置为空，也可顺利以此两人入场。
+        public IEnumerator myTeamMembersByEntryMemberNum(int playerEntryNum, positionLocalCharKeySet positionLocalCharKeySet)
+        {
+            MultiDictionary<int, int, CharacterDataInfo> teamMembers = new MultiDictionary<int, int, CharacterDataInfo>();
+            int membercount = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                PosNum posNum = PosNum.none;
+                switch (i)
                 {
+                    case 0:
+                        posNum = PosNum.back;
+                        break;
+                    case 1:
+                        posNum = PosNum.left;
+                        break;
+                    case 2:
+                        posNum = PosNum.front;
+                        break;
+                    case 3:
+                        posNum = PosNum.right;
+                        break;
+                }
+                IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(positionLocalCharKeySet.getPositionMonsterOfPlayerId(posNum));
+                yield return getchar;
+                GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
+                if (myfighter != null)
+                {
+                    CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(myfighter);
+                    teamMembers.Set(0,i,characterDataInfo);
+                    membercount += 1;
+                    if (membercount == playerEntryNum)
+                    {
+                        break;
+                    }
                 }
                 else
                 {
-                    _set.LocalID = -9999;//也就是说设置成一个怪异的值，代表这个位置啥也没有
+                    continue;
                 }
             }
+            yield return teamMembers;
         }
     }
 
-    public CharacterDataInfo[] myTeamMembersByEntryMemberNum(int playerEntryNum)
+    public enum TeamSetGameMode
     {
-        CharacterDataInfo[] team1members = new CharacterDataInfo[playerEntryNum];
-        for (int i = 0; i < playerEntryNum; i++)
-        {
-            PosNum posNum = PosNum.none;
-            switch (i)
-            {
-                case 0:
-                    posNum = PosNum.back;
-                    break;
-                case 1:
-                    posNum = PosNum.left;
-                    break;
-                case 2:
-                    posNum = PosNum.front;
-                    break;
-                case 3:
-                    posNum = PosNum.right;
-                    break;
-            }
-
-            CharacterDataInfo myfighter = AccountCharsSet.getTheCharacterOfMine(this._positionLocalCharKeySet4V4Mode.getPositionLocalID(posNum));
-            team1members[i] = myfighter;
-        }
-        return team1members;
+        story = 1,
+        arena3V3 = 2,
     }
 }
-
-// 这个类具体来说就是一个队伍现在的某个位置上到底是我一个账户里哪一个角色。所以monsterbox相关的一些操作里经常牵扯到的是一个什么问题呢...把某个位置的角色给换掉或和其他位置交换的问题
-public class prepareSceneCharShowSet
-{
-    public PosNum positionNum; // positionNum应该和这个实际位置的tansform相对应
-	public CharacterDataInfo _CharacterDataInfo;
-
-	public prepareSceneCharShowSet(PosNum positionNum, CharacterDataInfo _CharacterDataInfo)
-	{
-		this.positionNum = positionNum;
-		this._CharacterDataInfo = _CharacterDataInfo;
-	}
-}
-

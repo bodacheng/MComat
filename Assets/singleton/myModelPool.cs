@@ -17,11 +17,12 @@ public class myModelPool {
             return instance;
         }
     }
-
+    
+    public IDictionary<string, GameObject> ModelDicBasedOnPlayerLocalID = new Dictionary<string, GameObject>();
     public void setAllMyCharactersModelActive(bool active)
     {
-        List<int> problemKeys = new List<int>();
-        foreach(KeyValuePair<int,GameObject> pair  in ModelDicBasedOnPlayerLocalID)
+        List<string> problemKeys = new List<string>();
+        foreach(KeyValuePair<string,GameObject> pair in ModelDicBasedOnPlayerLocalID)
         {
             if (pair.Value == null)
                 problemKeys.Add(pair.Key);
@@ -34,22 +35,18 @@ public class myModelPool {
         }
     }
 
-    public IDictionary<int, GameObject> ModelDicBasedOnPlayerLocalID = new Dictionary<int, GameObject>();
-    public IDictionary<int, GameObject> ModelDicBasedOnEnemiesLocalID = new Dictionary<int, GameObject>();
     //我们希望这个字典来负责加载了的模型的重复利用。另外不同于各种特效是由default单例那个组件保存字典，这个模型的字典我觉得放在这里也有道理，因为毕竟这里保存的是一些展示用模型。
-    public void addToDic(int LocalID,GameObject Model)
+    public void addToDic(string LocalID,GameObject Model,IDictionary<string, GameObject> ReferenceDic)
     {
-        //GameObject model = null;
-        //ModelDicBasedOnLocalID.TryGetValue(localID,out model);
-        if (ModelDicBasedOnPlayerLocalID.ContainsKey(LocalID))
-            ModelDicBasedOnPlayerLocalID[LocalID] = Model;
+        if (ReferenceDic.ContainsKey(LocalID))
+            ReferenceDic[LocalID] = Model;
         else
-            ModelDicBasedOnPlayerLocalID.Add(LocalID, Model);
+            ReferenceDic.Add(LocalID, Model);
     }
 
-    public GameObject getMyModel(int localid)
+    public GameObject getMyModel(string localid)
     {
-        if (localid < 0)
+        if (localid == null || localid == "")
             return null;
         GameObject model;
         ModelDicBasedOnPlayerLocalID.TryGetValue(localid, out model);

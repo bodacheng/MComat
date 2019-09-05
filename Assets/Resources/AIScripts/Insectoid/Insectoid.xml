@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<ArrayOfState_Transition_Set xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <State_Transition_Set>
+    <StateKey>Empty</StateKey>
+    <Absolutely_Casual_rate>0</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Victory</StateKey>
+    <Absolutely_Casual_rate>0</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Air</StateKey>
+    <Absolutely_Casual_rate>0</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Death</StateKey>
+    <Absolutely_Casual_rate>0</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums />
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Hit</StateKey>
+    <Absolutely_Casual_rate>0</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>KnockOff</StateKey>
+    <Absolutely_Casual_rate>0</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Move_normal</StateKey>
+    <Absolutely_Casual_rate>1</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>false</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Swipe_Right</StateKey>
+    <Absolutely_Casual_rate>1</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>true</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Swipe_Left</StateKey>
+    <Absolutely_Casual_rate>1</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>true</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Swipe_Both</StateKey>
+    <Absolutely_Casual_rate>1</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>true</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+  <State_Transition_Set>
+    <StateKey>Sting</StateKey>
+    <Absolutely_Casual_rate>1</Absolutely_Casual_rate>
+    <casual_to_state_Sets />
+    <forced_to_state_nums>
+      <string>Hit</string>
+      <string>KnockOff</string>
+      <string>Death</string>
+    </forced_to_state_nums>
+    <playerModeInputDepend>true</playerModeInputDepend>
+    <enterInput>Null</enterInput>
+    <exitInput>Null</exitInput>
+  </State_Transition_Set>
+</ArrayOfState_Transition_Set>

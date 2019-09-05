@@ -1,8 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
+using dataAccess;
+using Api.Dto.Model;
 
 // 功能：
 // 1.读取所有攻击类型文件进行配置文件生成。
+// 2. 我们的开发环境下应该有权对主表数据库进行更新，调整。那么。。。也就是所谓post操作？
+// 这个操作涉及的安全性问题非常的大。
 
 public class ConfigFileManager : MonoBehaviour {
 
@@ -12,51 +18,30 @@ public class ConfigFileManager : MonoBehaviour {
     public TextAsset SkillConfigTextFile;
     public string SkillConfigFilePath;
 
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
-        {
-            AccountCharsSet.Instance.localSaveDataGetAllCharacters(Application.persistentDataPath + "/" + "myownedCharsJson.json");
-        }
-        if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
-        {
-            MySkillStonesReader.loadAllSkillConfigFromLocalConfigFile();
-            MySkillStonesReader.refreshSkillConfigDicForReference();
-            List<int> mystones = new List<int>();
-            foreach (KeyValuePair<int, SkillConfig> _pair in MySkillStonesReader.SkillConfigDicForReference)
-            {
-                mystones.Add(_pair.Value.id);
-            }
-            MySkillStonesReader.Instance.saveMySkillStones();
-        }
-    }
-
-        //<UnityEngine.Object> basicAnimsObject = Resources.LoadAll(animPath + "/BasicPack/" + basicPackName, typeof(AnimationClip)).ToList();
-
-        // 以下这个函数对技能表的更新机制企划如下：
-        // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
-        // 配置文件允许在一个type下存在相同keyname的复数个条目(同一个动画不同攻击类型)，
-        // 但，为了管理思路清晰我们不允许Resource文件夹下出现同名资源，确切的说不允许一个type下，某一个攻击类型的动画片段在另一个攻击类型的文件夹里有同名动画片段
-        // 一旦发现上述情况将中断配置文件更新。
-        // 如果，检测出现有的配置文件中记载的某一个条目的keyname值找不到对应type的Resource文件夹资源，那么这个条目会被记载下来进行删除。
-        // 如果有复数个同keyname条目找不到对应type的Resource文件夹资源，这几个条目都会被删除。
-        // 上述情况下被删除的条目，他们原先的ID会被记录下来，然后就是重点：如果有新的条目加入，新条目会顶替被删除的旧条目换上这些ID
-        // 而新条目的自动追加原则是：查看Resource文件夹下有没有配置文件里所有条目不存在的keyname(对应type下)，有这样的新资源，就给配置文件追加一个条目。
-        // 因此————1. 配置文件中如果同type下一个keyname有复数个条目，只能是我们手动所为 2. 配置文件里没“基本状态”的定义，只有技能状态定义。
-        // 基本状态是角色加载时候函数给根据九宫格记载给添加的，不参考数据库或配置文件。
-        // 3.如果一个keyname的资源，已经在相应type下的配置文件信息中有一个条目，那么，假设你更改了这个资源在Resource文件夹下的位置，比如从GR移动到了GM，
-        // 那么系统将不会根据它在Resource文件夹下位置的变动来更新它在配置文件对应条目里的信息，原来是怎么定义的就是怎么定义的，除非找不到这个资源把它条目删了。
-        // 也就是说这个配置文件更新函数的重点只是根据资源的有无来决定是不是添加初始条目或删除旧条目，技能详细定义你自己去改，它不会胡乱给你改。
-        // 4. ID的“填补机制”是建立在原有条目对应资源缺失,并且在一次更新操作的前提下。只有那些找不到资源了的条目的旧ID才会被新资源对应的新条目代替ID。假设你在某资源存在的时候删了它条目，然后重新更新一次配置文件，
-        // 会发现被补上的条目ID是最新（最大）值。这一点无论是角色Config还是SkillConfig都是一样的。
+    // 以下这个函数对技能表的更新机制企划如下：
+    // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
+    // 配置文件允许在一个type下存在相同keyname的复数个条目(同一个动画不同攻击类型)，
+    // 但，为了管理思路清晰我们不允许Resource文件夹下出现同名资源，确切的说不允许一个type下，某一个攻击类型的动画片段在另一个攻击类型的文件夹里有同名动画片段
+    // 一旦发现上述情况将中断配置文件更新。
+    // 如果，检测出现有的配置文件中记载的某一个条目的keyname值找不到对应type的Resource文件夹资源，那么这个条目会被记载下来进行删除。
+    // 如果有复数个同keyname条目找不到对应type的Resource文件夹资源，这几个条目都会被删除。
+    // 上述情况下被删除的条目，他们原先的ID会被记录下来，然后就是重点：如果有新的条目加入，新条目会顶替被删除的旧条目换上这些ID
+    // 而新条目的自动追加原则是：查看Resource文件夹下有没有配置文件里所有条目不存在的keyname(对应type下)，有这样的新资源，就给配置文件追加一个条目。
+    // 因此————1. 配置文件中如果同type下一个keyname有复数个条目，只能是我们手动所为 2. 配置文件里没“基本状态”的定义，只有技能状态定义。
+    // 基本状态是角色加载时候函数给根据九宫格记载给添加的，不参考数据库或配置文件。
+    // 3.如果一个keyname的资源，已经在相应type下的配置文件信息中有一个条目，那么，假设你更改了这个资源在Resource文件夹下的位置，比如从GR移动到了GM，
+    // 那么系统将不会根据它在Resource文件夹下位置的变动来更新它在配置文件对应条目里的信息，原来是怎么定义的就是怎么定义的，除非找不到这个资源把它条目删了。
+    // 也就是说这个配置文件更新函数的重点只是根据资源的有无来决定是不是添加初始条目或删除旧条目，技能详细定义你自己去改，它不会胡乱给你改。
+    // 4. ID的“填补机制”是建立在原有条目对应资源缺失,并且在一次更新操作的前提下。只有那些找不到资源了的条目的旧ID才会被新资源对应的新条目代替ID。假设你在某资源存在的时候删了它条目，然后重新更新一次配置文件，
+    // 会发现被补上的条目ID是最新（最大）值。这一点无论是角色Config还是SkillConfig都是一样的。
     public void SkillConfigFileUpdate(string path, TextAsset textAsset)
     {
         SkillConfigTable skillConfigTable = new SkillConfigTable();
         if (textAsset != null)
             skillConfigTable.Load(textAsset);
 
-        List<int> KisoonIDs = new List<int>();
-        List<int> AllDeletedRecordsIDs = new List<int>();
+        List<string> KisoonIDs = new List<string>();
+        List<string> AllDeletedRecordsIDs = new List<string>();
         List<SkillConfig> AllNewSkillConfigsOfAllTypes = new List<SkillConfig>();
 
         foreach (string chartype in chartypes)
@@ -104,35 +89,16 @@ public class ConfigFileManager : MonoBehaviour {
                 if (!KisonnRecourdsOFKeyNames.Contains(_anim.name))
                 {
                     SkillConfig OneConfig = new SkillConfig();
-                    OneConfig.id = -1;
+                    OneConfig.id = null;
                     OneConfig.type = chartype;
                     OneConfig.keyName = _anim.name;
+                    OneConfig.AT = 10;
                     OneConfig.ShowName = "unknown";
-                    OneConfig.SPLevel = EX.normal;
-                    switch (OneConfig.SPLevel)
-                    {
-                        case EX.normal:
-                            OneConfig.SkillPoint = 10;//实际的SKillPoint可能会根据玩家角色等级进行一些加成
-                            break;
-                        case EX.EX1:
-                            OneConfig.SkillPoint = -20;
-                            break;
-                        case EX.EX2:
-                            OneConfig.SkillPoint = -30;
-                            break;
-                        case EX.EX3:
-                            OneConfig.SkillPoint = -50;
-                            break;
-                        default:
-                            OneConfig.SkillPoint = 0;
-                            break;
-                    }
+                    OneConfig.SPLevel = 0;
                     OneConfig.stateType = stateType.GR;
                     OneConfig.ai_trigger_ranges = new behaviorEnterRange[1] { behaviorEnterRange.inner_range };
-                    OneConfig.canAirTrigger = false;
                     OneConfig.skillEmergentLevel = skillEmergentLevel.level2;
                     OneConfig.rarelevel = 1;
-
                     newSkillConfigsOfType.Add(OneConfig);
                 }else{
                     //那么代表这个资源对应的条目已经在原先的config文件里已经有了，保留原先设定，不添加。
@@ -153,32 +119,14 @@ public class ConfigFileManager : MonoBehaviour {
                 if (!KisonnRecourdsOFKeyNames.Contains(_anim.name))
                 {
                     SkillConfig OneConfig = new SkillConfig();
-                    OneConfig.id = -1;
+                    OneConfig.id = null;
                     OneConfig.type = chartype;
                     OneConfig.keyName = _anim.name;
+                    OneConfig.AT = 10;
                     OneConfig.ShowName = "unknown";
-                    OneConfig.SPLevel = EX.normal;
-                    switch (OneConfig.SPLevel)
-                    {
-                        case EX.normal:
-                            OneConfig.SkillPoint = 10;//实际的SKillPoint可能会根据玩家角色等级进行一些加成
-                            break;
-                        case EX.EX1:
-                            OneConfig.SkillPoint = -20;
-                            break;
-                        case EX.EX2:
-                            OneConfig.SkillPoint = -30;
-                            break;
-                        case EX.EX3:
-                            OneConfig.SkillPoint = -50;
-                            break;
-                        default:
-                            OneConfig.SkillPoint = 0;
-                            break;
-                    }
+                    OneConfig.SPLevel = 0;
                     OneConfig.stateType = stateType.GI;
                     OneConfig.ai_trigger_ranges = new behaviorEnterRange[3] { behaviorEnterRange.inner_range, behaviorEnterRange.mid_range, behaviorEnterRange.far_range};
-                    OneConfig.canAirTrigger = false;
                     OneConfig.skillEmergentLevel = skillEmergentLevel.level2;
                     OneConfig.rarelevel = 1;
 
@@ -202,32 +150,14 @@ public class ConfigFileManager : MonoBehaviour {
                 if (!KisonnRecourdsOFKeyNames.Contains(_anim.name))
                 {
                     SkillConfig OneConfig = new SkillConfig();
-                    OneConfig.id = -1;
+                    OneConfig.id = null;
                     OneConfig.type = chartype;
                     OneConfig.keyName = _anim.name;
+                    OneConfig.AT = 10;
                     OneConfig.ShowName = "unknown";
-                    OneConfig.SPLevel = EX.normal;
-                    switch (OneConfig.SPLevel)
-                    {
-                        case EX.normal:
-                            OneConfig.SkillPoint = 10;//实际的SKillPoint可能会根据玩家角色等级进行一些加成
-                            break;
-                        case EX.EX1:
-                            OneConfig.SkillPoint = -20;
-                            break;
-                        case EX.EX2:
-                            OneConfig.SkillPoint = -30;
-                            break;
-                        case EX.EX3:
-                            OneConfig.SkillPoint = -50;
-                            break;
-                        default:
-                            OneConfig.SkillPoint = 0;
-                            break;
-                    }
+                    OneConfig.SPLevel = 0;
                     OneConfig.stateType = stateType.GM;
                     OneConfig.ai_trigger_ranges = new behaviorEnterRange[2] { behaviorEnterRange.mid_range, behaviorEnterRange.inner_range };
-                    OneConfig.canAirTrigger = false;
                     OneConfig.skillEmergentLevel = skillEmergentLevel.level2;
                     OneConfig.rarelevel = 1;
 
@@ -250,10 +180,10 @@ public class ConfigFileManager : MonoBehaviour {
                 List<SkillConfigTable.Row> toDeleteRows = skillConfigTable.FindAll_type_keyName(chartype, keyname);//注意看，同一个key名在数据库可能不止一个条目。比如一个发波动画定义了两种攻击
                 foreach (SkillConfigTable.Row row in toDeleteRows)
                 {
-                    if (!AllDeletedRecordsIDs.Contains(int.Parse(row.ID)))
+                    if (!AllDeletedRecordsIDs.Contains(row.ID))
                     {
                         Debug.Log("这是一个要删除的ID"+ int.Parse(row.ID));
-                        AllDeletedRecordsIDs.Add(int.Parse(row.ID));
+                        AllDeletedRecordsIDs.Add(row.ID);
                     }
                     else
                         Debug.Log("原SkillConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
@@ -264,24 +194,115 @@ public class ConfigFileManager : MonoBehaviour {
         }
 
         /////////  TYpe内处理循环结束  ////////
+        int newid = 0;
         foreach (SkillConfig newSkillConfig in AllNewSkillConfigsOfAllTypes)
         {
-            if (AllDeletedRecordsIDs.Count > 0)
-            {
-                newSkillConfig.id = AllDeletedRecordsIDs[0];
-                Debug.Log(newSkillConfig.keyName + "de 新ID： "+ newSkillConfig.id);
-                AllDeletedRecordsIDs.RemoveAt(0);
-                KisoonIDs.Add(newSkillConfig.id);
-            }
-            else{
-                newSkillConfig.id = MaxOfIntList(KisoonIDs) + 1;
-                KisoonIDs.Add(newSkillConfig.id);
-            }
+            //if (AllDeletedRecordsIDs.Count > 0)
+            //{
+            //    newSkillConfig.id = AllDeletedRecordsIDs[0];
+            //    Debug.Log(newSkillConfig.keyName + "de 新ID： "+ newSkillConfig.id);
+            //    AllDeletedRecordsIDs.RemoveAt(0);
+            //    KisoonIDs.Add(newSkillConfig.id);
+            //}
+            //else{
+            //    newSkillConfig.id = MaxOfIntList(KisoonIDs) + 1;
+            //    KisoonIDs.Add(newSkillConfig.id);
+            //}
+            newSkillConfig.id = String.Format("{0:D20}",newid);
             SkillConfigTable.Row newRow = skillConfigTable.SkillConfigToRow(newSkillConfig);
             if (newRow != null && newRow.keyName != null)
                 skillConfigTable.rowList.Add(newRow);
+            newid++;
         }
         skillConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "skillsConfig");
+    }
+    
+    public void skillsAnalyzeByFrames(string type,float start_min,float start_max,float end_min,float end_max)
+    {
+        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
+
+        List<AnimationClip> AnimationClips = new List<AnimationClip>();
+        foreach (UnityEngine.Object _object in G_Attack_States)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (UnityEngine.Object _object in G_Attack_State_Stays)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (UnityEngine.Object _object in GMStatess)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (AnimationClip _clip in AnimationClips)
+        {
+            if (skillFrameAnalyze(_clip,start_min,start_max,end_min,end_max))
+            {
+                Debug.Log("符合："+_clip.name);
+            }
+        }
+    }
+
+    List<string> attackFrameStartMethodNames = new List<string>() {
+        "SetRightHandMarkerManager","SetLeftHandMarkerManager",
+        "SetRightFootMarkerManager","SetLeftFootMarkerManager",
+        "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
+        "SetHeadMarkerManager","SetTailMarkerManager",
+        "SetAllBodyMarkerManagersIn",
+    };
+    List<string> effectsAttackFrameStartMethodNames = new List<string>()
+    {
+        "MagicForward","bullet_shoot_from_body_part","blastAttack","releasePreparedMagic","releasePreparedMagicToAir"
+    };
+    
+    public bool skillFrameAnalyze(AnimationClip _clip,float start_min,float start_max,float end_min,float end_max)
+    {
+        float earlieststartframe = 0,latestendframe;
+        float cancelflagFrame = 0;
+        List<float> allAttackStartFrames = new List<float>();
+        foreach (AnimationEvent e in _clip.events)
+        {
+            if (e.functionName == "SetAllBodyMarkerManagersIn")
+            {
+                allAttackStartFrames.Add(e.time);
+            }
+            if (attackFrameStartMethodNames.Contains(e.functionName))
+            {
+                if (e.intParameter != 0)
+                    allAttackStartFrames.Add(e.time);
+            }
+            if (effectsAttackFrameStartMethodNames.Contains(e.functionName))
+            {
+                allAttackStartFrames.Add(e.time);
+            }
+            if (e.functionName == "turn_on_flag")
+            {
+                cancelflagFrame = e.time;
+            }
+        }
+        
+        if (allAttackStartFrames.Count == 0)
+        {
+            Debug.Log(_clip.name + "貌似缺乏有效攻击帧控制类函数，需检查");
+            return false;
+        }
+        
+        if (Mathf.Approximately(cancelflagFrame,0))
+        {
+            Debug.Log(_clip.name + "貌似没有取消flag,应做单独分析");
+            return false;
+        }
+        
+        earlieststartframe = allAttackStartFrames.Min();
+        latestendframe = allAttackStartFrames.Max();
+
+        float attackendtocancelstart = cancelflagFrame - latestendframe;
+        bool startfilteroutcome = (earlieststartframe > start_min) && (earlieststartframe <= start_max);
+        bool endfiltercoutcome = (attackendtocancelstart > end_min) && (attackendtocancelstart <= end_max);
+
+        return startfilteroutcome && endfiltercoutcome;
     }
 
     public int MaxOfIntList(List<int> List)
@@ -343,11 +364,11 @@ public class ConfigFileManager : MonoBehaviour {
                 }else{
                     //什么也不做。允许。
                 }
-                if (!kisoonCharacterResourceInfoRID.Contains(oneConfig.charResouceNum))
+                if (!kisoonCharacterResourceInfoRID.Contains(oneConfig.monsterId))
                 {
-                    kisoonCharacterResourceInfoRID.Add(oneConfig.charResouceNum);
+                    kisoonCharacterResourceInfoRID.Add(oneConfig.monsterId);
                 }else{
-                    Debug.Log("致命错误，原COnfig设置中ID重复："+ oneConfig.charResouceNum);
+                    Debug.Log("致命错误，原COnfig设置中ID重复："+ oneConfig.monsterId);
                     return;
                 }
             }
@@ -364,27 +385,22 @@ public class ConfigFileManager : MonoBehaviour {
                 }
 
                 GameObject character = charPretab as GameObject;
-                if (character.GetComponent<Data_Center>() == null
-                   ||
-                    character.GetComponent<BO_Ani_E>() == null
-                    ||
-                    character.GetComponent<AIStateRunner>() == null
-                    ||
-                    character.GetComponent<BO_Health>() == null
-                   )
+                if (character.GetComponent<OutsideDataLink>() == null)
                 {
                     Debug.Log(chartype+"资源"+ charPretab.name + "丢失必要组件，不是一个正常角色资源");
                     continue;
                 }
 
                 CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo();
-                _CharacterResourceInfo.charResouceNum = -1;
+                _CharacterResourceInfo.monsterId = -1;
                 _CharacterResourceInfo.type = chartype;
                 _CharacterResourceInfo.prefabName = charPretab.name;
                 _CharacterResourceInfo.showNameEN = null;
                 _CharacterResourceInfo.showNameCN = null;
                 _CharacterResourceInfo.showNameJP = null;
-                switch (character.GetComponent<Data_Center>().Zokusei)
+
+                OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
+                switch (outsideDataLink._C.Zokusei)
                 {
                     case zokusei.blueMagic:
                         _CharacterResourceInfo._zokusei = zokusei.blueMagic;
@@ -446,20 +462,28 @@ public class ConfigFileManager : MonoBehaviour {
         {
             if (AllDeletedRecordsIDs.Count > 0)
             {
-                characterResourceInfo.charResouceNum = AllDeletedRecordsIDs[0];
-                Debug.Log(characterResourceInfo.prefabName + "的 ID： " + characterResourceInfo.charResouceNum);
+                characterResourceInfo.monsterId = AllDeletedRecordsIDs[0];
+                Debug.Log(characterResourceInfo.prefabName + "的 ID： " + characterResourceInfo.monsterId);
                 AllDeletedRecordsIDs.RemoveAt(0);
-                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.charResouceNum);
+                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.monsterId);
             }
             else
             {
-                characterResourceInfo.charResouceNum = MaxOfIntList(kisoonCharacterResourceInfoRID) + 1;
-                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.charResouceNum);
+                characterResourceInfo.monsterId = MaxOfIntList(kisoonCharacterResourceInfoRID) + 1;
+                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.monsterId);
             }
             monstersConfigTable.Row newRow = monstersTable.CharacterResourceInfoToRow(characterResourceInfo);
             if (newRow != null && newRow.realName != null)
                 monstersTable.rowList.Add(newRow);
         }
         monstersTable.SaveByCurrentRows(Application.dataPath + "/" + path != null? path : "MonstersConfig");
+    }
+    
+    public void GenerateTutorialCharacterFiles()
+    {
+        GetMonsterOfPlayerDetailModel Adam = new GetMonsterOfPlayerDetailModel();
+        Adam.monsterOfPlayerId = 1.ToString();
+        Adam.monsterId = 1.ToString();
+        AccountCharsSet.Instance.generateStoryCharsIntoXMLFile(Adam);
     }
 }

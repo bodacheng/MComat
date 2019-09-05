@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using System;
-using System.Collections.Generic;
+using mainMenu;
 
 /// <summary>
 /// Example of control application for drag and drop events handle
 /// </summary>
 public class DummyControlUnit : MonoBehaviour
 {
-    public TheNineSlot _TheNineSlot;
-    public SkillStonesBox _SkillStonesBox;
-
     //_SkillStoneSlot._SkillStonesBox.addUsingStoneInfo(_SkillStoneSlot._TheNineSlot.getUsingStonesId());
 
     /// <summary>
@@ -33,14 +28,12 @@ public class DummyControlUnit : MonoBehaviour
                 if (desc.permission == true)                                    // If drop successful (was permitted before)
                 {
                     Debug.Log("Successful drop " + desc.item.name + " from " + sourceSheet.name + " to " + destinationSheet.name);
-                    List<int> skillStoneIDs = _TheNineSlot.getUsingStonesId();
-                    _SkillStonesBox.arrangeSkillStonesToBox(_SkillStonesBox.getFocusingType(), _SkillStonesBox.getFocusingExType(),
-                                                            _SkillStonesBox.closeCheckBox.isOn,
-                                                            _SkillStonesBox.nearCheckBox.isOn,
-                                                            _SkillStonesBox.farCheckBox.isOn,
-                                                            _SkillStonesBox.outRangeCheckBox.isOn,
-                                                            skillStoneIDs);
-                    _TheNineSlot.SeliWholeNineAndTwo();
+                    IEnumerator process()
+                    {
+                        yield return TheNineSlot._TheNineSlot.SeliWholeNineAndTwo();
+                        //yield return MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox();
+                    };
+                    TheNineSlot._TheNineSlot.triggerMainProcess(process());
                     //  上面的这行SeliWholeNineAndTwo还有一个相当大的重点在于处理了石头上面的inbox参数
                     //这里有个巨大疑问。为什么skillStoneIDs的获取有问题而这里就没问题？
                 }
@@ -74,24 +67,6 @@ public class DummyControlUnit : MonoBehaviour
 				if (cell.GetItem() == null)
                 {
                     cell.AddItem(Instantiate(item.gameObject).GetComponent<DragAndDropItem>());
-                    break;
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Remove item from first not empty cell
-    /// </summary>
-    public void RemoveFirstItem()
-    {
-        foreach (DragAndDropCell cell in GetComponentsInChildren<DragAndDropCell>())
-        {
-            if (cell != null)
-            {
-				if (cell.GetItem() != null)
-                {
-                    cell.RemoveItem();
                     break;
                 }
             }

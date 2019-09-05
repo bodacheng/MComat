@@ -63,26 +63,24 @@ public class JsonNetSample : MonoBehaviour
         //string json = JsonConvert.SerializeObject(product);
 
         SkillConfig skillConfig = new SkillConfig();
-        skillConfig.id = -1;//和Skills表id对应
+        skillConfig.id = null;//和Skills表id对应
         skillConfig.type = "human";
         skillConfig.keyName = "punch";
         skillConfig.ShowName = "拳头";
-        skillConfig.SkillPoint = 0;
+        skillConfig.AT = 1;
         skillConfig.stateType = stateType.GM;
         skillConfig.ai_trigger_ranges = new behaviorEnterRange[1] {behaviorEnterRange.inner_range };
-        skillConfig.SPLevel = EX.normal;
-        skillConfig.canAirTrigger = false;
+        skillConfig.SPLevel = 0;
 
         SkillConfig skillConfig2 = new SkillConfig();
-        skillConfig.id = -1;//和Skills表id对应
+        skillConfig.id = null;//和Skills表id对应
         skillConfig.type = "human";
         skillConfig.keyName = "punch2";
         skillConfig.ShowName = "拳头";
-        skillConfig.SkillPoint = 0;
+        skillConfig.AT = 1;
         skillConfig.stateType = stateType.GM;
         skillConfig.ai_trigger_ranges = new behaviorEnterRange[1] { behaviorEnterRange.mid_range };
-        skillConfig.SPLevel = EX.normal;
-        skillConfig.canAirTrigger = false;
+        skillConfig.SPLevel = 0;
 
         SkillConfig[] twoSkillCOngif = new SkillConfig[2] { skillConfig, skillConfig2};
 

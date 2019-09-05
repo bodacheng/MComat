@@ -6,39 +6,33 @@ using UnityEngine.UI;
 public class SideCharIcon : MonoBehaviour {
 
 	public Data_Center _charDataCenter;
-	public Slider theHpBar;
+    
+    [Header("浮动血条pretab")]
+    [Space(6)]
+    public Slider hpBarPrefab;
+    [Header("浮动抵抗pretab")]
+    [Space(6)]
+    public Slider resistBarPrefab;
 
 	public charIcon focusingCharIcon;
 
-	BO_Health myHealth;
-	int maxHp = 0;
-	int currentHp = 0;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		CurrentHpBarShow();
-	}
+	float maxHp = 0;
+	float currentHp = 0;
 
 	public void iniHPShow(Data_Center watching)
 	{
 		_charDataCenter = watching;
-		if (_charDataCenter)
-		{
-			myHealth = _charDataCenter.getBOHealth();
-		}
-		maxHp = _charDataCenter._playerBattleInfo.MaxHP;
+		maxHp = 500;
 		currentHp = maxHp;
 	}
     
-	public void CurrentHpBarShow()
-	{
-		if (myHealth == null)
-			return;
-        currentHp = myHealth._health;
-		theHpBar.value = (float)currentHp / (float)maxHp;
-	}
+    public void recallBars()
+    {
+        hpBarPrefab.transform.SetParent(transform);
+        hpBarPrefab.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);
+        hpBarPrefab.transform.localScale = Vector3.one;
+        resistBarPrefab.transform.SetParent(transform);
+        resistBarPrefab.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);
+        resistBarPrefab.transform.localScale = Vector3.one;
+    }
 }

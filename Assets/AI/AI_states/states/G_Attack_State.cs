@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Soul;
 
 //本状态是最复杂的一个攻击种类状态，牵扯到攻击前冲刺
 // 在3月21日我们对这个状态进行了进一步改进，现在针对冲刺阶段本状态有以下机制
@@ -18,8 +19,6 @@ public partial class G_Attack_State : AI_State {
 
 	private string clip_name;
     private string dash_clip_name;
-    private bool attackPartRootAnimation;
-
     private skillEmergentLevel _skillEmergentLevel;
 
     private bool isEventAttackLaunchState = false;
@@ -31,7 +30,7 @@ public partial class G_Attack_State : AI_State {
     private float thisFrameRotateAngle = 0;
 
     private float maxRushTime, rush_time_counter;
-    private Vector3 use_direction;
+    private Transform rushingToTarget;
     private phase _phase;
 
     private UnityEngine.Events.UnityAction rushstart;
@@ -51,46 +50,34 @@ public partial class G_Attack_State : AI_State {
 	{
 		this.clip_name = clip_name;
         this.behaviorEnterRanges = null;
-        this.attackPartRootAnimation = false;
     }
 
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime,
                           float approachingSpeed,
-                          string clip_name, bool attackPartRootAnimation,
+                          string clip_name,
                           skillEmergentLevel skillEmergentLevel)
     {
         this.rushSpeed = rushSpeed;
         this.maxRushTime = maxRushTime;
-
         this.approcahingSpeed = approachingSpeed;
-
         this.clip_name = clip_name;
         this.dash_clip_name = dash_clip_name;
-        this.attackPartRootAnimation = attackPartRootAnimation;
         this._skillEmergentLevel = skillEmergentLevel;
     }
 
-    public G_Attack_State(string clip_name,bool attackPartRootAnimation)
-    {
-        this.clip_name = clip_name;
-        this.attackPartRootAnimation = attackPartRootAnimation;
-    }
-
-    public G_Attack_State(string dash_clip_name,float rushSpeed, float maxRushTime, string clip_name, bool attackPartRootAnimation,bool EventLauncher_Or_Ender)
+    public G_Attack_State(string dash_clip_name,float rushSpeed, float maxRushTime, string clip_name, bool EventLauncher_Or_Ender)
 	{
         this.maxRushTime = maxRushTime;
         this.dash_clip_name = dash_clip_name;
         this.rushSpeed = rushSpeed;
 		this.clip_name = clip_name;
-        this.attackPartRootAnimation = attackPartRootAnimation;
         this.isEventAttackLaunchState = EventLauncher_Or_Ender;
         this.isEventAttackEndState = !EventLauncher_Or_Ender;
     }
 
-    public G_Attack_State(string clip_name, bool attackPartRootAnimation, bool EventLauncher_Or_Ender)
+    public G_Attack_State(string clip_name, bool EventLauncher_Or_Ender)
     {
         this.clip_name = clip_name;
-        this.attackPartRootAnimation = attackPartRootAnimation;
         this.isEventAttackLaunchState = EventLauncher_Or_Ender;
         this.isEventAttackEndState = !EventLauncher_Or_Ender;
     }
@@ -100,11 +87,11 @@ public partial class G_Attack_State : AI_State {
 		base.pre_process_before_enter ();
         rushstart = () =>
         {
-            this.BS_Main_Health.Resistance +=1;
+            this._ResistanceManager.Resistance +=1;
         };
         rushend = () =>
         {
-            this.BS_Main_Health.Resistance -=1;
+            this._ResistanceManager.Resistance -=1;
         };
         rushCoroutine = new customCoroutine(rushstart, 5f, rushend);
     }
@@ -138,20 +125,18 @@ public partial class G_Attack_State : AI_State {
 
     public bool strategic_enter_condition()
     {
-        if (this.Sensor.ManyTeamMatesForward())
+        if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             return false;
 
         if (this._AIStateRunner.getNowState() != null)
         {
             if (this._AIStateRunner.getNowState().nextAttackStateCanRushFirst == true)
                 return this.checkToEnemyDisEnterCondition(this.InnerAndMidAndFarRanges);
-                
-            if (this._AIStateRunner.getNowState().StateType == stateType.GR 
-                ||
-                this._AIStateRunner.getNowState().StateType == stateType.GM
-                ||
-                this._AIStateRunner.getNowState().StateType == stateType.GI)
-                return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
+
+            //if (this._AIStateRunner.getNowState().StateType == stateType.GR ||
+                //this._AIStateRunner.getNowState().StateType == stateType.GM ||
+                //this._AIStateRunner.getNowState().StateType == stateType.GI)
+                //return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
         }
         return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
@@ -160,6 +145,7 @@ public partial class G_Attack_State : AI_State {
 	{
         base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);
+        this._DATA_CENTER.setGravitySwitch(true);
         _SkillCancelFlag.turn_off_flag();
         if (this.StateType == stateType.GR)
             _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
@@ -170,60 +156,60 @@ public partial class G_Attack_State : AI_State {
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
 
-        use_direction = Vector3.zero;
-
         this.rush_time_counter = 0f;
-        _Animator.applyRootMotion = this.attackPartRootAnimation;
+        _Animator.applyRootMotion = true;
 
         Sensor.getEnemiesByDistance(true);//这里算一下，下面的全是false。但要注意中途这个结果变为null
         if (Sensor.getEnemiesByDistance(false).Count == 0)
         {
             //一般来说下面这些情况不跑？
             _phase = phase.noRushState;
-            Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+            Animation_Manger.animationTrigger(clip_name);
             return;
         }
 
         if (Sensor.getInnerEnemiesColliders().Count > 0)//内环检测结果
         {
             _phase = phase.reachedFromThebeginning;
-            Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+            Animation_Manger.animationTrigger(clip_name);
             return;
         }
-
+        
         if (Sensor.getClosestColliderInSensorRange(false,true,true) != null)
+        {
+            rushingToTarget = Sensor.getClosestColliderInSensorRange(false, true, true).transform;
+        }
+        if (rushingToTarget != null)
         {
             //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
             if (this._AIStateRunner.getLastState() != null && this._AIStateRunner.getLastState().nextAttackStateCanRushFirst && this.StateType == stateType.GR)
             {
                 _phase = phase.needToRush;
+                lastFrameRotateAngle = 0;
+                thisFrameRotateAngle = 0;
                 //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
                 if (Animation_Manger.tryAnimationClip(dash_clip_name) != null)
-                    Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, dash_clip_name);
+                    Animation_Manger.PlayLayerAnim(dash_clip_name);
                 else
                 {
                     Debug.Log("here:"+ clip_name);
-                    Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, null);
+                    Animation_Manger.PlayLayerAnim(null);
                 }
 
-                this._AIStateRunner.runSubCoroutineOfState(rushCoroutine);
-
-                if (Sensor.getClosestColliderInSensorRange(false,true,true) != null)
-                    use_direction = Sensor.getClosestColliderInSensorRange(false,true,true).transform.position - gameObject.transform.position;
-                use_direction.y = 0;
+                this._BuffsRunner.runSubCoroutineOfState(rushCoroutine);
                 return;
             }
             else
             {
                 _phase = phase.reachedFromThebeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+                Animation_Manger.animationTrigger(clip_name);
                 return;
             }
         }
 
         if (Sensor.getClosestColliderInSensorRange(true,true,true) == null)//外环检测结果.走到这里就是说，如果内外环都没敌人
         {
-            Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+            Animation_Manger.animationTrigger(clip_name);
             _phase = phase.farFromReach;
             return;
         }
@@ -240,10 +226,13 @@ public partial class G_Attack_State : AI_State {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        this._DATA_CENTER.setGravitySwitch(true);
+        this.rushingToTarget = null;
         this._Weapon_Animation_Events.DisableMarkers();
         _Animator.applyRootMotion = false;
-        AI_DATA_CENTER.deActiveObjects();
-        this._AIStateRunner.endSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
+        _DATA_CENTER.deActiveObjects();
+        this._BuffsRunner.endSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
+        this._BO_Ani_E.closeEffectsOnBodyParts();
         if (isEventAttackLaunchState)
         {
 			if (BS_Main_Health != null)
@@ -252,12 +241,10 @@ public partial class G_Attack_State : AI_State {
             }
         }
         if (isEventAttackEndState)
-        {
             this.eventAttackEnderProcess();
-        }
 	}
 
-    public override void _f_State_Update() 
+    public override void _State_FixedUpdate1() 
 	{
         switch (_phase)
         {
@@ -266,22 +253,24 @@ public partial class G_Attack_State : AI_State {
             case phase.farFromReach:
                 break;
             case phase.needToRush://也就是说冲刺中。在这个环节我们之所以没看到扭转方向的处理是因为在fixedUpdate里针对这个阶段使用this.RotateToVelocity(10f, true);
+                if (rushingToTarget == null)
+                {
+                    this._Rigidbody.velocity = Vector3.zero;
+                    _phase = phase.reached;
+                }
                 if (Sensor.getInnerEnemiesColliders().Count > 0 || rush_time_counter > maxRushTime)
                 {
-                    Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
+                    _phase = phase.reached;
+                }
+                if (_phase == phase.reached)
+                {
+                    Animation_Manger.animationTrigger(clip_name);
                     _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
                     lastFrameRotateAngle = 0;
                     thisFrameRotateAngle = 0;
-
                     this._Rigidbody.velocity = Vector3.zero;
                     this.Sensor.OneRoundDetectionStart(5);
-                    this._AIStateRunner.endSubCoroutineOfState(rushCoroutine);
-                    _phase = phase.reached;
-                }
-                if (this.Sensor.getClosestColliderInSensorRange(false,true,true) != null)
-                {
-                    use_direction = this.Sensor.getClosestColliderInSensorRange(false,true,true).transform.position - gameObject.transform.position;
-                    use_direction.y = 0;
+                    this._BuffsRunner.endSubCoroutineOfState(rushCoroutine);
                 }
                 break;
             case phase.reached:

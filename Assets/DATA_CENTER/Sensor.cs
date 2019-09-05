@@ -4,15 +4,16 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-//现在Sensor也必须和其他所有组件同位置。
-//本检测器现在分为内环和外环两部分。外环通过OverlapSphere检测，内环通过AttackRanger的OnTriggerEnter检测。
+
 public class Sensor : MonoBehaviour {
 
     public float sensor_radius = 15;//这个范围我们也就看作是普攻的冲击检测范围。
     public IDictionary<Team, List<Data_Center>> TeamMembers;
 
     private LayerMask _layers;
+    private LayerMask meAndEnemyLayermask;
     private Collider[] _hits; //What was hit in this frame?
+    private RaycastHit[] _spherecastHits;
     private TeamConfig _TeamConfig;
 
     private int DetectionInterval = 0;
@@ -27,8 +28,6 @@ public class Sensor : MonoBehaviour {
     private List<Collider> NearbyDamagingWeapon = new List<Collider>();
 
     private Data_Center selfDataCenter;
-    private List<Data_Center> frontTeamMates = new List<Data_Center>();
-    private List<Data_Center> frontEnemies = new List<Data_Center>();
 
     public bool IFContinuousDetectionStarted()
     {
@@ -39,8 +38,10 @@ public class Sensor : MonoBehaviour {
     {
         this._TeamConfig = teamConfig;
         if (this._TeamConfig != null)
+        {
             _layers = teamConfig.mySensorAndWeaponTargetLayerMask;
-
+            meAndEnemyLayermask = teamConfig.myTeamAndMyEnemy;
+        }
         this.selfDataCenter = _self;
     }
 
@@ -86,7 +87,7 @@ public class Sensor : MonoBehaviour {
         return null;
     }
 
-    void FixedUpdate()
+    public void SensorFixedUpdate()
     {
         if (DetectionLoopStarted)
         {
@@ -155,87 +156,19 @@ public class Sensor : MonoBehaviour {
         this.continuousDetection = false;
     }
 
-    private Vector3 offset;
-    public Vector3 recommandDirectionOffSetFromTeammates()
+    Collider jiamateammate; Collider nearestenemy;
+    public Collider[] EnemyAndTeammateBetweenMeAndEnemy()
     {
-        offset = Vector3.zero;
-        for (int i = 0; i < frontTeamMates.Count; i++)
-        {
-            if (frontTeamMates[i] != null)
-            {
-                offset += (selfDataCenter.transform.position - frontTeamMates[i].transform.position).normalized;
-            }
-        }
-        offset.y = 0;
-        return offset;
-    }
-
-    public bool ManyTeamMatesForward()
-    {
-        if (frontTeamMates.Count == 0)
-        {
-            return false;
-        }
-        if (frontEnemies.Count > 0)
-        {
-            if (Vector3.Distance(selfDataCenter.transform.position, frontEnemies[0].transform.position) < Vector3.Distance(selfDataCenter.transform.position, frontTeamMates[0].transform.position))
-            {
-                return false;
-            }
-        }
-        return true;
+        if (jiamateammate != null && nearestenemy != null)
+            return new Collider[2] { jiamateammate, nearestenemy };
+        else
+            return null;
     }
 
     public void SensorDetectProcess()
     {
         _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-
-        if (selfDataCenter == null || this._TeamConfig == null || TeamMembers == null
-            || !TeamMembers.ContainsKey(this._TeamConfig.myTeam))
-            return;
-
-        TeamMembers.TryGetValue(this._TeamConfig.myTeam, out searchingMembers);
-        for (int i = 0; i < searchingMembers.Count; i++)
-        {
-            if (searchingMembers[i] != null && searchingMembers[i] != selfDataCenter)
-            {
-                if (Vector3.Distance(searchingMembers[i].transform.position, selfDataCenter.transform.position) < sensor_radius)
-                {
-                    float angle = Vector3.Angle(selfDataCenter.transform.forward, searchingMembers[i].transform.position - selfDataCenter.transform.position);
-                    if (angle < 60)
-                    {
-                        frontTeamMates.Add(searchingMembers[i]);
-                    }
-                }
-            }
-        }
-        foreach (Team _team in this._TeamConfig.myEnemies)
-        {
-            if (!TeamMembers.ContainsKey(_team))           
-                continue;
-            
-            TeamMembers.TryGetValue(_team, out searchingMembers);
-            for (int i = 0; i < searchingMembers.Count; i++)
-            {
-                if (searchingMembers[i] != null)
-                {
-                    if (Vector3.Distance(searchingMembers[i].transform.position, selfDataCenter.transform.position) < sensor_radius)
-                    {
-                        float angle = Vector3.Angle(selfDataCenter.transform.forward, searchingMembers[i].transform.position - selfDataCenter.transform.position);
-                        if (angle < 60)
-                        {
-                            frontEnemies.Add(searchingMembers[i]);
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    internal object getOutterEnemiesColliders()
-    {
-        throw new NotImplementedException();
+        _spherecastHits = Physics.SphereCastAll(transform.position,1f,selfDataCenter.WholeT.forward,sensor_radius,meAndEnemyLayermask);
     }
 
     public void SensorDetectionResultClearProcess()
@@ -245,9 +178,6 @@ public class Sensor : MonoBehaviour {
         midEnemies.Clear();
         OutterDamagingWeapon.Clear();
         NearbyDamagingWeapon.Clear();
-
-        frontTeamMates.Clear();
-        frontEnemies.Clear();
     }
 
     private List<GameObject> EnemiesByDistance = new List<GameObject>();
@@ -295,11 +225,8 @@ public class Sensor : MonoBehaviour {
                         {
                             for (int k = 0; k < searchingMembers.Count; k++)
                             {
-                                //if (searchingMembers [k].tag == tags[y]) //因为角色死亡时候可能会改flag
-                                //{
-                                if (searchingMembers[k].getRunner().getCurrentStateNum() != "Death")
-                                    target_list.Add(searchingMembers[k].gameObject);
-                                //}
+                                if (searchingMembers[k].AIStateRunner.getCurrentStateNum() != "Death" && searchingMembers[k].AIStateRunner.getCurrentStateNum() != "Empty")
+                                    target_list.Add(searchingMembers[k].WholeT.gameObject);
                             }
                         }
                         else
@@ -357,7 +284,7 @@ public class Sensor : MonoBehaviour {
                 OutterDamagingWeapon.Insert(0, tempCForNearest);
             }
         }
-
+        
         for (int i = 0; i < farEnemies.Count; i++)
         {
             if (farEnemies[i] != null)
@@ -391,6 +318,46 @@ public class Sensor : MonoBehaviour {
         {
             OutterDamagingWeapon.Remove(NearbyDamagingWeapon[i]);
         }
+
+        if (_spherecastHits == null)
+            return;
+
+        float matetome = sensor_radius, enemytome = sensor_radius;
+        foreach (RaycastHit raycastHit in _spherecastHits)
+        {
+            if (BO_Health.AllMeatColliders.Contains(raycastHit.collider))
+            {
+                if (_TeamConfig.myTeamLayerMask == (_TeamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
+                {
+                    if (!selfDataCenter.BO_Health.ifMyBody(raycastHit.collider))
+                    {
+                        float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
+                        if (to_me < matetome)
+                        {
+                            jiamateammate = raycastHit.collider;
+                            matetome = to_me;
+                        }
+                    }
+                }               
+                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << raycastHit.collider.gameObject.layer)) )
+                {
+                    float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
+                    if (to_me < enemytome)
+                    {
+                        nearestenemy = raycastHit.collider;
+                        enemytome = to_me;
+                    }
+                }
+            }       
+        }
+        
+        if (jiamateammate != null && nearestenemy != null)
+        {
+            if (Vector3.Distance(transform.position,jiamateammate.transform.position) < Vector3.Distance(transform.position,nearestenemy.transform.position))
+                return;//意思就是说让jiamateammate和nearestenemy不为空
+        }
+        jiamateammate = null;
+        nearestenemy = null;
     }
 
     private float p1_to_me, p2_to_me;
@@ -473,7 +440,8 @@ public class Sensor : MonoBehaviour {
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, sensor_radius);
+        Gizmos.DrawWireSphere(transform.position, 1f);
+        //Gizmos.DrawRay(transform.position,selfDataCenter.WholeT.forward * sensor_radius);
     }
 }
 

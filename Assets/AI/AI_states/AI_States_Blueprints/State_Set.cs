@@ -7,38 +7,38 @@ public class State_Transition_Set
 {
     public string StateKey;
     public stateType stateType;
+    public float AT;
     public behaviorEnterRange[] ai_trigger_ranges;
     public skillEmergentLevel skillEmergentLevel;
     public State_Rate_Set[] casual_to_state_Sets;
     [HideInInspector]
 	public string[] forced_to_state_nums;
-    public bool playerModeInputDepend = true;
     public inputs_defined enterInput = inputs_defined.Null;
     public inputs_defined exitInput = inputs_defined.Null;
-    public EX SPLevel;
+    public int SPLevel;
     public int rarelevel;
 
     public State_Transition_Set()
-    {        
+    {
     }
 
     public State_Transition_Set(string num,
                                 stateType _attackType,
+                                float AT,
                                 behaviorEnterRange[] ai_trigger_ranges,
                                 State_Rate_Set[] casual_to_state_nums, 
                                 string[] forced_to_state_nums, 
-                                bool playerModeInputDepend,
                                 inputs_defined enterInput,inputs_defined exitInput,
-                                EX SPMove,
+                                int SPMove,
                                 skillEmergentLevel skillEmergentLevel,
                                 int rarelevel)
     {
         this.StateKey = num;
         this.stateType = _attackType;
+        this.AT = AT;
         this.ai_trigger_ranges = ai_trigger_ranges;
         this.casual_to_state_Sets = casual_to_state_nums;
         this.forced_to_state_nums = forced_to_state_nums;
-        this.playerModeInputDepend = playerModeInputDepend;
         this.enterInput = enterInput;
         this.exitInput = exitInput;
         this.SPLevel = SPMove;
@@ -51,8 +51,9 @@ public class State_Transition_Set
         State_Rate_Set state_Rate_Set = 
             new State_Rate_Set(this.StateKey,
                                this.stateType,
+                               this.AT,
                                this.ai_trigger_ranges,
-                               true,true, 
+                               true, 
                                this.enterInput, this.exitInput, 
                                this.SPLevel,
                                this.skillEmergentLevel);
@@ -77,12 +78,12 @@ public class State_Rate_Set //This class defines how a state should transitate t
 {
 	public string AI_State_Number;
     public stateType attackType;
+    public float AT;
     public behaviorEnterRange[] ai_trigger_ranges;
     public bool can_be_cancelled_to;
-    public bool casualToNextInputDepend = false;
     public inputs_defined enterInput = inputs_defined.Null;
     public inputs_defined exitInput = inputs_defined.Null;
-    public EX SPLevel = EX.normal;
+    public int SPLevel = 0;
     public skillEmergentLevel skillEmergentLevel;
 
     public State_Rate_Set()
@@ -90,14 +91,15 @@ public class State_Rate_Set //This class defines how a state should transitate t
     }
 	public State_Rate_Set(string AI_State_Number,
                           stateType _attackType,
+                          float AT,
                           behaviorEnterRange[] ai_trigger_ranges,
-                          bool can_be_cancelled_to,bool casualToNextInputDepend,inputs_defined enterInput,inputs_defined exitInput,EX SPlevel, skillEmergentLevel skillEmergentLevel)
+                          bool can_be_cancelled_to,inputs_defined enterInput,inputs_defined exitInput,int SPlevel, skillEmergentLevel skillEmergentLevel)
 	{
 		this.AI_State_Number = AI_State_Number;
         this.attackType = _attackType;
+        this.AT = AT;
         this.ai_trigger_ranges = ai_trigger_ranges;
 		this.can_be_cancelled_to = can_be_cancelled_to;
-		this.casualToNextInputDepend = casualToNextInputDepend;
         this.enterInput = enterInput;
         this.exitInput = exitInput;
         this.SPLevel = SPlevel;

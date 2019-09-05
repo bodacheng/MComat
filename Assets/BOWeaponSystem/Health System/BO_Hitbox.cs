@@ -17,10 +17,6 @@ public class BO_Hitbox : MonoBehaviour {
             MainHealth.addToBOHitBoxeComponent(this);
 	}
 
-	void Start()
-	{        
-	}
-
     public void INI()
     {
         if (GetComponent<Collider>())

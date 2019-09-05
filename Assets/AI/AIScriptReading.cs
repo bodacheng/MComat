@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Soul;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -57,10 +58,11 @@ public class AIScriptReading {
                 list = new List<State_Transition_Set>() {
                 new State_Transition_Set("Empty",
                                         stateType.NONE,
+                                        0,
                                         null,
-                                        null, null, false,
+                                        null, null,
                                          enterInput: inputs_defined.Null, exitInput: inputs_defined.Null, 
-                                         SPMove:EX.normal,
+                                         SPMove:0,
                                          skillEmergentLevel:skillEmergentLevel.none,
                                          rarelevel:0)
                 };
@@ -70,10 +72,11 @@ public class AIScriptReading {
                     list.Add(new State_Transition_Set(
                                    "Empty",
                                    stateType.NONE,
+                                   0,
                                    null,
-                                   null, null, false, 
+                                   null, null,
                                     enterInput: inputs_defined.Null, exitInput: inputs_defined.Null,
-                                    SPMove: EX.normal,
+                                    SPMove: 0,
                                     skillEmergentLevel:skillEmergentLevel.none, 
                                     rarelevel: 0));
                 }
@@ -87,11 +90,12 @@ public class AIScriptReading {
             return new List<State_Transition_Set>() {
                 new State_Transition_Set("Empty",
                                         stateType.NONE,
+                                        0,
                                         null,
-                                        null, null,false,
+                                        null, null,
                                         enterInput: inputs_defined.Null, 
                                          exitInput: inputs_defined.Null, 
-                                         SPMove:EX.normal,skillEmergentLevel:skillEmergentLevel.none,
+                                         SPMove:0,skillEmergentLevel:skillEmergentLevel.none,
                                          rarelevel:0)
                 };
         }

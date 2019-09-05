@@ -9,17 +9,17 @@ public class zokuseiSkillStoneTagsGroup
     public zokusei zokusei;
     
     //技能石盒分类系成员
-    public IDictionary<EX, ParticleSystem> buttonEffectsSetsForSkillStoneBox = new Dictionary<EX, ParticleSystem>(); 
+    public IDictionary<int, ParticleSystem> buttonEffectsSetsForSkillStoneBox = new Dictionary<int, ParticleSystem>(); 
 
     public void close_skillstoneboxtageffects()
     {
-        foreach(KeyValuePair<EX, ParticleSystem> keyValuePair in buttonEffectsSetsForSkillStoneBox)
+        foreach(KeyValuePair<int, ParticleSystem> keyValuePair in buttonEffectsSetsForSkillStoneBox)
         {
-            keyValuePair.Value.Stop(true);
+            keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }       
     }
  
-    public void INI_forSkillStoneBox(zokusei zokusei)
+    public void INI_forSkillStoneBox(zokusei zokusei,Transform effectObjectParent)
     {
         this.zokusei = zokusei;
         string buttoneffectspath;
@@ -45,32 +45,34 @@ public class zokuseiSkillStoneTagsGroup
                 break;
         }
         
-        GameObject buttonslot = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
         GameObject normal = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;
         GameObject EX1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX1", typeof(GameObject)) as GameObject;
         GameObject EX2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX2", typeof(GameObject)) as GameObject;
         GameObject EX3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX3", typeof(GameObject)) as GameObject;
-        GameObject Defend = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/defend", typeof(GameObject)) as GameObject;
-        GameObject Rush = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/rush", typeof(GameObject)) as GameObject;
-        GameObject refresh = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/refresh", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
-        GameObject pressingExplosionPretab = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
+
+        buttonEffectsSetsForSkillStoneBox = new Dictionary<int, ParticleSystem>();
         
-        buttonEffectsSetsForSkillStoneBox = new Dictionary<EX, ParticleSystem>();
+        GameObject normaltab = Object.Instantiate(normal);
+        GameObject ex1tab = Object.Instantiate(EX1);
+        GameObject ex2tab = Object.Instantiate(EX2);
+        GameObject ex3tab = Object.Instantiate(EX3);
+        
+        normaltab.transform.SetParent(effectObjectParent);
+        ex1tab.transform.SetParent(effectObjectParent);
+        ex2tab.transform.SetParent(effectObjectParent);
+        ex3tab.transform.SetParent(effectObjectParent);
+        
         if (normal)
-            buttonEffectsSetsForSkillStoneBox.Add(EX.normal,Object.Instantiate(normal).GetComponent<ParticleSystem>());
+            buttonEffectsSetsForSkillStoneBox.Add(0,normaltab.GetComponent<ParticleSystem>());
         if (EX1)
-            buttonEffectsSetsForSkillStoneBox.Add(EX.EX1,Object.Instantiate(EX1).GetComponent<ParticleSystem>());
+            buttonEffectsSetsForSkillStoneBox.Add(1,ex1tab.GetComponent<ParticleSystem>());
         if (EX2)
-            buttonEffectsSetsForSkillStoneBox.Add(EX.EX2,Object.Instantiate(EX2).GetComponent<ParticleSystem>());
+            buttonEffectsSetsForSkillStoneBox.Add(2,ex2tab.GetComponent<ParticleSystem>());
         if (EX3)
-            buttonEffectsSetsForSkillStoneBox.Add(EX.EX3,Object.Instantiate(EX3).GetComponent<ParticleSystem>());
+            buttonEffectsSetsForSkillStoneBox.Add(3,ex3tab.GetComponent<ParticleSystem>());
     }
     
-    public void refreshforbuttonForSkillStoneBox(EX eX,Vector3 pos)
+    public void refreshforbuttonForSkillStoneBox(int eX,Vector3 pos)
     {
         ParticleSystem p = buttonEffectsSetsForSkillStoneBox[eX];
         p.gameObject.transform.position = pos;

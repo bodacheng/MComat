@@ -4,46 +4,69 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using LitJson;
+using System.Text.RegularExpressions;
 
-public partial class AccountSet
+using System.Text;
+using Api.Common;
+using Api.Dto.Form;
+using Api.Dto.Form.Common;
+using Api.Dto.Model;
+using Api.Dto.Model.Common;
+
+namespace dataAccess
 {
-    public IEnumerator loadCustomerInfoFromRemoteServer(string uri)
+    public partial class AccountSet
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        public IEnumerator login()
         {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            string[] pages = uri.Split('/');
-            int page = pages.Length - 1;
-
-            if (webRequest.isNetworkError)
+            WWWForm form = new WWWForm();
+            form.AddField("userId","abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd");
+            
+            IEnumerator ask = RemoteAccess.generalRemoteAccess(form,"http://160.16.187.230/AssetStoreFight/player/login");
+            yield return ask;
+            DownloadHandler downloadHandler = (DownloadHandler)ask.Current;
+            
+            if (downloadHandler != null)
             {
-                Debug.Log(pages[page] + ": Error: " + webRequest.error);
+                string response = System.Text.Encoding.UTF8.GetString(downloadHandler.data);
+                Debug.Log("login返回:" + response);
+                JsonData jsonvale = JsonMapper.ToObject(downloadHandler.text);
+                this.sessionId = jsonvale["data"]["sessionId"].ToJson();
+                this.sessionId = Regex.Replace(this.sessionId, @"[^a-zA-Z0-9\u4e00-\u9fa5\s]", "");
+            }else{
+                Debug.Log("login失败.按理说应该返回大厅终止程序进行");
+                string response = System.Text.Encoding.UTF8.GetString(downloadHandler.data);
+                Debug.Log("以下是login报错response" + response);
             }
-            else
-            {
-                //Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                string a = webRequest.downloadHandler.text;
-                localCustomerInfo = JsonConvert.DeserializeObject<PlayerAccountInfo>(a);
-                Debug.Log("remoteplayerdetail:"+a);
-            }
+            yield break;
         }
-    }
+        
+        private IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage) {
 
-    public IEnumerator overrideAccountRemote(string uri)
-    {
-        string json = JsonConvert.SerializeObject(localCustomerInfo);
-        UnityWebRequest request = UnityWebRequest.Post("http://localhost:5000/user/login", json);
-        request.SetRequestHeader("content-Type", "application/json");
-        request.SetRequestHeader("Accept", "application/json");
-        request.SetRequestHeader("api-version", "0.1");
-
-        yield return request.SendWebRequest();
-        if (request.isNetworkError || request.isHttpError) 
-            Debug.Log(request.error);
-
-        Debug.Log("Response as byte:" + request.downloadHandler.data);
-        Debug.Log("Response as string:"+ request.downloadHandler.text);
+            // ==============================
+            // フォームの生成
+            // ==============================
+            // フォーム
+            CertificationForm form = new CertificationForm();
+            form.sessionId = this.sessionId;
+       
+            // ==============================
+            // API送信
+            // ==============================
+            // 送信
+            yield return ApiCaller.Instance.Post<BaseModel<GetPlayerInfoModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/player/getPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
+                 model => {
+                     _PlayerAccountInfo.Coin = model.data.coinCount;
+                     _PlayerAccountInfo.Diamond = model.data.diamondCount;
+                 }
+                ,
+                 model => {
+                     _PlayerAccountInfo.Coin = model.data.coinCount;
+                     _PlayerAccountInfo.Diamond = model.data.diamondCount;
+                 }
+            );
+            yield break;
+        }
     }
 }

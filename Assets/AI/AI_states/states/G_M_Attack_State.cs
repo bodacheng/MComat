@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HittingDetection;
+using Soul;
 
 // This kind of state has to be triggerd on the ground, but doesnt need to be on ground wille running,
 // During the state ,colliders of the character heriachy is disabled, same with the gravity 
@@ -73,10 +75,9 @@ public class G_M_Attack_State : AI_State {
             (this._AIStateRunner.getNowState().StateType == stateType.GI || 
             this._AIStateRunner.getNowState().StateType == stateType.GR || 
             this._AIStateRunner.getNowState().StateType == stateType.GM || 
-            this._AIStateRunner.getNowState().StateType == stateType.AC) &&
-            !this.Sensor.ManyTeamMatesForward())
+            this._AIStateRunner.getNowState().StateType == stateType.AC) && this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
             return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
-        if (!this.Sensor.ManyTeamMatesForward())
+        if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
             return (this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges));
         return false;
     }
@@ -84,12 +85,13 @@ public class G_M_Attack_State : AI_State {
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
+        this._DATA_CENTER.setGravitySwitch(true);
         this._Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
         this._Rigidbody.velocity = Vector3.zero;
         
         Collider C = Sensor.getClosestColliderInSensorRange(true,true,true);
@@ -99,8 +101,7 @@ public class G_M_Attack_State : AI_State {
         BS_Main_Health.returnDamageList(damageType.stagger).Clear();
 		_Animator.applyRootMotion = true;
         //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
-        Animation_Manger.animationCustomCoroutineTrigger(animator_layer_index.Full_Body, clip_name);
-        this.BS_Main_Health.setBodyPushFlag(false);
+        Animation_Manger.animationTrigger(clip_name);
 	}
 
 	public override bool capacity_exit_condition()
@@ -113,16 +114,14 @@ public class G_M_Attack_State : AI_State {
 
 	public override void AI_State_exit()
 	{
-        this.BS_Main_Health.setBodyPushFlag(true);
-        //gameObject.GetComponent<Collider>().isTrigger = false;
-		//_Rigidbody.useGravity = true;
-		_Animator.applyRootMotion = false;
-        //this.AI_DATA_CENTER.switchToMocaPhysicMaterial();
         base.AI_State_exit();
+        this._DATA_CENTER.setGravitySwitch(true);
+        this._BO_Ani_E.closeEffectsOnBodyParts();
+		_Animator.applyRootMotion = false;
 	}
 
     private Vector3 rotateTarget;
-	public override void _f_State_Update() 
+	public override void _State_FixedUpdate1() 
 	{
         if (BS_Main_Health.returnDamageList(damageType.stagger).Count > 0)
         {
@@ -150,7 +149,7 @@ public class G_M_Attack_State : AI_State {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.getRotationAdjustmentStartFlag() || keepRotationAdjustment)
         {
-            thisFrameRotateAngle = this.RotateToTarget(P, 0.5f, true);
+            thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {

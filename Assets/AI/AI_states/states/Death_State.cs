@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EZObjectPools;
+using HittingDetection;
+using Soul;
 
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
 public class Death_State : AI_State
@@ -55,15 +57,14 @@ public class Death_State : AI_State
     {
         time_count = 0f;
         base.AI_State_enter();
-        AI_DATA_CENTER.setDeathState(true);
-        AI_DATA_CENTER.deActiveObjects();
-        AI_DATA_CENTER.deathInitialize();
+        _DATA_CENTER.setDeathState(true);
+        _DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deathInitialize();
 
         landedCal = 1;
         _Rigidbody.velocity = Vector3.zero;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
-        Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body, clip_name);
-
+        Animation_Manger.PlayLayerAnim(clip_name);
         if (this.BS_Main_Health.returnDamageList(damageType.deathknockoff).Count > 0)
         {
             //if (BS_Main_Health.returnDamageList(damageType.supper_damage)[0].ifExplosion)
@@ -73,9 +74,9 @@ public class Death_State : AI_State
             else
                 KnockOffSparkPersonalEffectPath = null;
 
-            defaultPools.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
+            EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
                                                  this.BS_Main_Health.returnDamageList(damageType.deathknockoff)[0].damageHappenPoint,this.gameObject.transform.rotation,
-                                                 this.BS_Main_Health.getHealthBodyCenterTransform());               
+                                                 this.BS_Main_Health.transform);               
             force_direction.y = 0;
             if (if_r_rotation)
                 this.RotateToDirection(force_direction, 20f, true);
@@ -84,7 +85,7 @@ public class Death_State : AI_State
             _Rigidbody.velocity = used_velcoity;
             this.BS_Main_Health.eatDamage(damageType.deathknockoff);
         }
-        AI_DATA_CENTER.deActiveObjects();
+        _DATA_CENTER.deActiveObjects();
         this.BS_Main_Health.clearDamageLists();
     }
 
@@ -96,9 +97,9 @@ public class Death_State : AI_State
         this._Rigidbody.velocity = Vector3.zero;
     }
 
-    public override void _f_State_Update()
+    public override void _State_FixedUpdate1()
     {
-        time_count += Time.deltaTime;
+        time_count += Time.fixedDeltaTime;
 
         if (time_count > stopRunningTime)
         {
@@ -113,7 +114,7 @@ public class Death_State : AI_State
 
         if (landedCal == 1)
         {
-            if (!AI_DATA_CENTER.IsGrounded())
+            if (!_DATA_CENTER.IsGrounded())
             {
                 landedCal = 2;
             }
@@ -124,7 +125,7 @@ public class Death_State : AI_State
         }
         if (landedCal == 2)
         {
-            if (AI_DATA_CENTER.IsGrounded())
+            if (_DATA_CENTER.IsGrounded())
             {
                 landedCal = 3;
             }
@@ -135,7 +136,7 @@ public class Death_State : AI_State
             this._Rigidbody.velocity = Vector3.zero;
         }
 
-        if (!AI_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.IsGrounded())
             this.RotateToVelocityNegative(3f, true);
     }
 }

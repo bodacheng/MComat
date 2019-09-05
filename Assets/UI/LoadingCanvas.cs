@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// LoadingCanvas 可以存在很多别的丰富的功能，比如播放视频？用于loading画面？
 public class LoadingCanvas : MonoBehaviour {
+
+    public HollowOutMask hollowOutMask;
+
     public Canvas Loading_Canvas;
     public Slider loadingBar;
     public Text processingDescrition;
     public Image LoadingCanvasBigCurtain;
-    private IEnumerator loadingCanvasProcess;
-
+        
     [Space(11)]
     [Header("Validation")]
     public RectTransform ValidationWindow;
@@ -20,28 +23,70 @@ public class LoadingCanvas : MonoBehaviour {
     [Space(11)]
     [Header("Mails")]
     public RectTransform MailWindow;
-    public Button NewsButton;
-    public Button PresentButton;
     
     [Space(11)]
     [Header("monsterboxfilter")]
     public RectTransform monsterboxfilter;
-
-    void Start()
+    
+    [Space(11)]
+    [Header("Settings")]
+    public RectTransform SettingRectT;
+    
+    //进程类
+    private IEnumerator MenuProcess;
+    private bool processEnded = false;
+    private float processTime = 0;
+    private void setProcessStartEnd(bool a)
     {
-        if (ValidationWindow)
-        ValidationWindow.gameObject.SetActive(false);
-        if (MailWindow)
-        MailWindow.gameObject.SetActive(false);
+        processEnded = a;
     }
-
+    public void triggerMainProcess(IEnumerator _process)
+    {
+        StartCoroutine(this.MainProcess(_process));
+    }
+    private IEnumerator giveProcessStartEndFlag(IEnumerator _process)
+    {
+        setProcessStartEnd(false);
+        yield return _process;
+        setProcessStartEnd(true);
+    }
+    private IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
+    {
+        if (MenuProcess != null)
+        {
+            while (!processEnded)
+            {
+                processTime += 0.01f;
+                if (processTime > 5f)
+                {
+                    Debug.Log("进程超时.");
+                    StopCoroutine(MenuProcess);
+                    break;
+                }
+                yield return null;
+            };
+        }
+        processTime = 0;
+        MenuProcess = giveProcessStartEndFlag(_process);
+        yield return MenuProcess;
+    }
+    
+    public void turnOnSettings()
+    {
+        DarkOff(0.5f);
+        SettingRectT.transform.SetSiblingIndex(4);
+        SettingRectT.gameObject.SetActive(true);
+    }
+    
+    public void turnOffSettings()
+    {
+        LightUp();
+        SettingRectT.gameObject.SetActive(false);
+    }
+    
     public void OpenMailBox()
     {
-        if (loadingCanvasProcess != null)
-            StopCoroutine(loadingCanvasProcess);
-
-        loadingCanvasProcess = LoadMailBox();
-        StartCoroutine(loadingCanvasProcess);
+        triggerMainProcess(LoadMailBox());
     }
 
     public void CloseMailBox()
@@ -52,10 +97,7 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void OpenMonsterBoxFilters()
     {
-        if (loadingCanvasProcess != null)
-            StopCoroutine(loadingCanvasProcess);
-        loadingCanvasProcess = OpenMonsterBoxFilter();
-        StartCoroutine(loadingCanvasProcess);
+        triggerMainProcess(OpenMonsterBoxFilter());
     }
     
     public void CloseMonsterBoxFilters()
@@ -67,7 +109,6 @@ public class LoadingCanvas : MonoBehaviour {
     private IEnumerator OpenMonsterBoxFilter()
     {
         monsterboxfilter.gameObject.SetActive(true);
-        monsterboxfilter.transform.SetSiblingIndex(4);
         yield return darkOffCanvas(0.5f);
     }
 
@@ -89,28 +130,34 @@ public class LoadingCanvas : MonoBehaviour {
         this.loadingBar.gameObject.SetActive(_b);
         this.processingDescrition.gameObject.SetActive(_b);
     }
+    
+    public void HigtLightRect(Transform _Transform)
+    {
+        Loading_Canvas.gameObject.SetActive(true);
+        if (LoadingCanvasBigCurtain != null)
+            LoadingCanvasBigCurtain.color = Color.clear;
+        //Loading_Canvas.sortingOrder = 1;
+        hollowOutMask.SetTarget(_Transform.GetComponent<RectTransform>());
+    }
+    
+    public void ClearHigtLight()
+    {
+        hollowOutMask.SetTarget(null);
+        Loading_Canvas.gameObject.SetActive(false);
+    }
 
     public void LightUp()
     {
-        if (loadingCanvasProcess != null)
-            StopCoroutine(loadingCanvasProcess);
-
-        loadingCanvasProcess = lightUpCanvas();
-        StartCoroutine(loadingCanvasProcess);
+        triggerMainProcess(lightUpCanvas());
     }
 
-    public void DarkOff()
+    public void DarkOff(float darkness)
     {
-        if (loadingCanvasProcess != null)
-            StopCoroutine(loadingCanvasProcess);
-
-        loadingCanvasProcess = darkOffCanvas(1);
-        StartCoroutine(loadingCanvasProcess);
+        triggerMainProcess(darkOffCanvas(darkness));
     }
 
     private IEnumerator lightUpCanvas()
     {
-        Loading_Canvas.gameObject.SetActive(true);
         float a = 1;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
         while (a > 0)

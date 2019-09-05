@@ -10,15 +10,14 @@ public partial class AssetBundleLoader : MonoBehaviour
         
         ////////////  下面开始下载并阅读角色配置文件 ////////////
         modelConfigFileMission = new CachDownLoadMission( "Configs","monstersconfig", 0f);
-        _loadingProcess = letThisloadMissionBegin(modelConfigFileMission);
+        IEnumerator _loadingProcess = letThisloadMissionBegin(modelConfigFileMission);
         yield return _loadingProcess;
         if (!modelConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
         {
             Debug.Log("角色配置文件下载失败。");
-            startupsucessed = false;
             yield break;
         }
-        _loadingProcess = defaultPools.Instance.getABFromCach(modelConfigFileMission.subPath, modelConfigFileMission.filename);
+        _loadingProcess = CachManager.Instance.getABFromCach(modelConfigFileMission.subPath, modelConfigFileMission.filename);
         yield return _loadingProcess;
         if (_loadingProcess .Current != null)
         {
@@ -27,7 +26,6 @@ public partial class AssetBundleLoader : MonoBehaviour
         else
         {
             Debug.Log("角色配置文件对应ab包读取失败");
-            startupsucessed = false;
             yield break;
         }
         AssetBundleRequest loadAsset = readingbundle.LoadAssetAsync<TextAsset>(modelConfigFileMission.filename);
@@ -43,13 +41,15 @@ public partial class AssetBundleLoader : MonoBehaviour
             yield break;
         }
         
-        CharacterConfigTextFile = (TextAsset)loadAsset.asset;
-        CharsManager._monstersConfigTable = new monstersConfigTable();
+        TextAsset CharacterConfigTextFile = (TextAsset)loadAsset.asset;
+        MonsterConfigInfos._monstersConfigTable = new monstersConfigTable();
         if (CharacterConfigTextFile != null)
-            CharsManager._monstersConfigTable.Load(CharacterConfigTextFile);
+        {
+            MonsterConfigInfos._monstersConfigTable.Load(CharacterConfigTextFile);
+            MonsterConfigInfos.refreshCharacterResourceInfoDic();
+        }
         else{
             Debug.Log("角色配置文件错误。");
-            startupsucessed = false;
             yield break;
         }
         
@@ -60,10 +60,9 @@ public partial class AssetBundleLoader : MonoBehaviour
         if (!animationConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
         {
             Debug.Log("技能配置文件下载失败。");
-            startupsucessed = false;
             yield break;
         }
-        _loadingProcess = defaultPools.Instance.getABFromCach(animationConfigFileMission.subPath, animationConfigFileMission.filename);
+        _loadingProcess = CachManager.Instance.getABFromCach(animationConfigFileMission.subPath, animationConfigFileMission.filename);
         yield return _loadingProcess;
         if (_loadingProcess.Current != null)
         {
@@ -72,7 +71,6 @@ public partial class AssetBundleLoader : MonoBehaviour
         else
         {
             Debug.Log("技能配置文件对应ab包读取失败");
-            startupsucessed = false;
             yield break;
         }
         
@@ -88,14 +86,16 @@ public partial class AssetBundleLoader : MonoBehaviour
             Debug.Log("技能配置文件提取失败");
             yield break;
         }
-        SkillConfigTextFile = (TextAsset)loadAsset.asset;
+        TextAsset SkillConfigTextFile = (TextAsset)loadAsset.asset;
 
         if (SkillConfigTextFile != null)
-            MySkillStonesReader.skillConfigTable.Load(SkillConfigTextFile);
+        {
+            SkillsConfigInfos.skillConfigTable.Load(SkillConfigTextFile);
+            SkillsConfigInfos.refreshSkillConfigDicForReference();
+        }
         else
         {
             Debug.Log("技能配置文件错误。");
-            startupsucessed = false;
             yield break;
         }
     }

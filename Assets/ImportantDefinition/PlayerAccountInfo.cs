@@ -8,31 +8,56 @@ using System.Linq;
 [System.Serializable]
 public class PlayerAccountInfo
 {
-    public int intelliCoin;//智慧果实
+    private int coin;//智慧果实
+    private int diamond;
+    public playerAccountProgressStep accountprogress = playerAccountProgressStep.Freedom;
 
     public PlayerAccountInfo()
     {
     }
 
-    public PlayerAccountInfo(int intelliCoin)//第二个参数去掉？
+    public PlayerAccountInfo(int diamond, int intelliCoin)//第二个参数去掉？
     {
-        this.intelliCoin = intelliCoin;
+        this.diamond = diamond;
+        this.coin = intelliCoin;
     }
-
-    public int IntelliCoin
+    
+    public int Diamond
     {
         get
         {
-            return intelliCoin;
+            return diamond;
         }
         set
         {
-            intelliCoin = Mathf.Clamp(value, 0, value);
+            diamond = Mathf.Clamp(value, 0, value);
         }
     }
 
-    public void plusIntelliCoin(int plus)
+    public int Coin
     {
-        this.IntelliCoin = IntelliCoin + plus;
+        get
+        {
+            return coin;
+        }
+        set
+        {
+            coin = Mathf.Clamp(value, 0, value);
+        }
     }
+
+    public void plusCoin(int plus)
+    {
+        this.Coin = Coin + plus;
+    }
+}
+
+public enum playerAccountProgressStep : int
+{
+    justCreated = 1,
+    Tutorial = 2,
+    justNamed = 3,
+    MenuTuorial = 4,
+    Freedom = 5,
+    Season1_Completed = 6,
 }

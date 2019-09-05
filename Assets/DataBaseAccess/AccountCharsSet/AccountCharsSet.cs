@@ -1,162 +1,229 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using System;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using UnityEngine.Networking;
+using Api.Dto.Model;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-//这个函数应该是个一上来就从本地。。。或数据库读取的东西，应该存在很多协程类函数，因为到时候牵扯到从数据库直接读取信息。
-public partial class AccountCharsSet {
-
-    public static AccountCharsSet instance;
-    public static CharacterDataInfo[] ownedChars;//本单例模式的处理对象
-
-    private AccountCharsSet()
+namespace dataAccess
+{
+    //这个函数应该是个一上来就从本地。。。或数据库读取的东西，应该存在很多协程类函数，因为到时候牵扯到从数据库直接读取信息。
+    public partial class AccountCharsSet
     {
-    }
-    public static AccountCharsSet Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new AccountCharsSet();
-            }
-            return instance;
-        }
-    }
+        public static AccountCharsSet instance;
+        public static IDictionary<string, MonsterOfPlayerListModel> accountCharacterInfoListObjectsDictionary = new Dictionary<string, MonsterOfPlayerListModel>();
+        public static IDictionary<string, GetMonsterOfPlayerDetailModel> AccountCharacterInfoDictionary = new Dictionary<string, GetMonsterOfPlayerDetailModel>();
+        //public static AccountCharacterInfo[] ownedChars;//本单例模式的处理对象
 
-    //实际版本中我们不可能每次执行“玩家拥有角色”更新操作都去更新所有角色的信息，对应的json对象应该是针对单独的某个角色。。。
-    // 换句话说可能就不存在整体更新所有拥有角色的函数，你只能把账户拥有的角色一个个添加，一个个修改或一个个删除。
-    public IEnumerator overrideMyCharsInfo()
-    {
-        switch (AccountSet.Instance._playerinfoReferenceMode)
+        public static bool checkifContainsAccountCharsSetKey(string key)
         {
-            case playerinfoReferenceMode.localTestSaveData:
-                overrideMyCharsInfoOnJsonFile();
-                break;
-            case playerinfoReferenceMode.remoteTestPlayer:
-                break;
-            case playerinfoReferenceMode.formalVersion:
-                break;
-        }
-        yield break;
-    }
-
-    public IEnumerator loadMyOwnedCharsInfo()
-    {
-        switch (AccountSet.Instance._playerinfoReferenceMode)
-        {
-            case playerinfoReferenceMode.localTestSaveData:                
-                loadMyOwnedCharsInfoViaJsonFile("myownedCharsJson.json");
-                break;
-            case playerinfoReferenceMode.remoteTestPlayer:
-                yield return loadMyOwnedCharsInfoRemote("http://47.245.7.100:8080/monsters/of/player/list?playerId=1");
-                break;
-            case playerinfoReferenceMode.formalVersion:
-                break;
-        }
-        yield break;
-    }
-
-    public void sellOneChar(int localID) // 这个必然是要建立在正确把握localid的基础上的
-    {
-        List<CharacterDataInfo> ownedCharsList = ownedChars.ToList();
-        CharacterDataInfo toSellCharFound = null;
-        foreach (CharacterDataInfo _CharacterDataInfo in ownedCharsList)
-        {
-            if (_CharacterDataInfo.localID == localID)
-            {
-                toSellCharFound = _CharacterDataInfo;
-                break;
-            }
-        }
-        if (toSellCharFound != null)
-        {
-            ownedCharsList.Remove(toSellCharFound);
-            ownedChars = ownedCharsList.ToArray();
-        }
-        else
-        {
-            Debug.Log("严重错误，要卖的宠物的编号没找到");
-        }
-    }
-
-    public static void updateMyCharInfo(int localID, CharacterDataInfo _CharacterDataInfo)
-    {
-        List<CharacterDataInfo> mycharlist = ownedChars.ToList();
-        CharacterDataInfo old = getTheCharacterOfMine(localID);
-        mycharlist.Remove(old);
-        mycharlist.Add(_CharacterDataInfo);
-        ownedChars = mycharlist.ToArray();
-    }
-
-    public static CharacterDataInfo getTheCharacterOfMine(int Key)
-    {
-        foreach (CharacterDataInfo _CharacterDataInfo in ownedChars)
-        {
-            if (_CharacterDataInfo.localID == Key)
-            {
-                return _CharacterDataInfo;
-            }
-        }
-        return null;
-    }
-    
-    public IEnumerator loadMonsterDataBaseRemote(int playerid)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://47.245.7.100:8080/monsters/7/detail"))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            if (webRequest.isNetworkError)
-            {
-                Debug.Log("Error: " + webRequest.error);
-            }
+            if (key == null)
+                return false;
+            if (accountCharacterInfoListObjectsDictionary.Keys.Contains(key))
+                return true;
             else
+                return false;        
+        }
+
+        private AccountCharsSet()
+        {
+        }
+        public static AccountCharsSet Instance
+        {
+            get
             {
-                string response = System.Text.Encoding.UTF8.GetString(webRequest.downloadHandler.data);
-                //string a = webRequest.downloadHandler.text;
-                //Debug.Log(response);
-                monstersConfigTable.monsterResponse testobject = JsonConvert.DeserializeObject<monstersConfigTable.monsterResponse>(response);
-                if (testobject != null)
+                if (instance == null)
                 {
-                    Debug.Log(testobject.data.realName);
-                    Debug.Log(testobject.data.accSkill);
-                    Debug.Log(testobject.data.id);
-                    Debug.Log(testobject.data.canDefend);
+                    instance = new AccountCharsSet();
                 }
-                //dynamic deserialized = JObject.Parse(a);
-
-                //for (int i = 0; i < deserialized.Count;i++)
-                //{
-                //    Debug.Log("第"+i+"个json：" + deserialized[i]);
-                //}
-
-                //int[] stones = JsonConvert.DeserializeObject<int[]>(a);
-                //mySkillStonesDicByType = convertSKillStoneNumListToDic(stones.ToList());
+                return instance;
             }
         }
-    }
 
-    private int intCompare(int i1, int i2)
-    {
-        if (i1 > i2)
+        public IEnumerator updateMyCharInfo(GetMonsterOfPlayerDetailModel characterDataInfo)
         {
-            return 1;
+            IEnumerator getchar = getAccountCharacterInfo(characterDataInfo.monsterOfPlayerId);
+            yield return getchar;
+            GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            if (targetAccountCharacterInfo == null)
+                yield break;
+
+            if (checkCharDataUpateInfo(targetAccountCharacterInfo, characterDataInfo))
+            {
+                yield return executeCharDataUpate(characterDataInfo);
+            }
+            yield break;
         }
-        if (i1 < i2)
+
+        public IEnumerator loadMyOwnedAccountCharacterInfoList()
         {
-            return -1;
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    loadAccountCharacterInfoListObjectsViaJsonFile();
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    yield return loadAccountCharacterInfoListObjectsRemote(ApiLanguage.JaJp);
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
+            }
+            yield break;
         }
-        return 0;
+
+        // 这个地方就应该产生一个本地版本的更新核实。即所谓本地和远程双把关。
+        // 每次更新一个角色，包括的核实信息有以下：
+        // 1. 技能编辑格式自身没有问题(必杀与普工平衡)
+        // 2. 有对应的石头 
+        // 3. 如果更新需要消耗，有足够的钱
+        public bool checkCharDataUpateInfo(GetMonsterOfPlayerDetailModel before, GetMonsterOfPlayerDetailModel after)//先检查
+        {
+            bool ok = false;
+
+            if (before.a1_skill_stone_record_id != after.a1_skill_stone_record_id)
+            {
+            }
+            if (before.a2_skill_stone_record_id != after.a2_skill_stone_record_id)
+            {
+            }
+            if (before.a3_skill_stone_record_id != after.a3_skill_stone_record_id)
+            {
+            }
+            if (before.b1_skill_stone_record_id != after.b1_skill_stone_record_id)
+            {
+            }
+            if (before.b2_skill_stone_record_id != after.b2_skill_stone_record_id)
+            {
+            }
+            if (before.b3_skill_stone_record_id != after.b3_skill_stone_record_id)
+            {
+            }
+            if (before.c1_skill_stone_record_id != after.c1_skill_stone_record_id)
+            {
+            }
+            if (before.c2_skill_stone_record_id != after.c2_skill_stone_record_id)
+            {
+            }
+            if (before.c3_skill_stone_record_id != after.c3_skill_stone_record_id)
+            {
+            }
+            return true;
+        }
+
+        // 这一步的执行应该是毫不犹豫的因为上一步已经确定了数据无误可以更新
+        // 所以在这里应该也是对应三个版本。
+        public IEnumerator executeCharDataUpate(GetMonsterOfPlayerDetailModel after)//再执行
+        {
+            if (AccountSet.instance._PlayerAccountInfo.accountprogress != playerAccountProgressStep.Freedom)//教程 阶段不保存
+            {
+                IEnumerator getchar = getAccountCharacterInfo(after.monsterOfPlayerId);
+                yield return getchar;
+                GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+
+                if (targetAccountCharacterInfo == null)
+                {
+                    Debug.Log("欲更新角色不存在。");
+                    yield break;
+                }
+                yield break;
+            }
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    yield return updateCharJsonSaveData(after);
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    yield return updateCharRemote(after,ApiLanguage.EnUs);
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
+            }
+            yield return MySkillStonesReader.Instance.refreshAllMyStonesUsingMonsterInfo();
+            yield break;
+        }
+
+        public IEnumerator plusExpForAccountChar(string charlocalID, int plusExp)
+        {
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    yield return plusExpForAccountCharLocalSaveData(charlocalID, plusExp);
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    yield return plusExpForAccountCharRemote(charlocalID, plusExp);
+                    break;
+            }
+        }
+
+        public IEnumerator getAccountCharacterInfo(string monsterlocalid)
+        {
+            if (monsterlocalid == null)
+            {
+                yield return null;
+                yield break;
+            }
+            if (AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
+            {
+                if (AccountCharacterInfoDictionary[monsterlocalid] != null)
+                {
+                    yield return AccountCharacterInfoDictionary[monsterlocalid];
+                    yield break;
+                }
+                else
+                {
+                    Debug.Log("角色字典内存丢失？？localid:" + monsterlocalid);
+                }
+            }
+
+            GetMonsterOfPlayerDetailModel accountCharacterInfo = null;
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    accountCharacterInfo = loadAccountCharacterInfoViaJsonFile(monsterlocalid);
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    IEnumerator load = loadAccountCharacterInfoRemote(monsterlocalid,ApiLanguage.JaJp);
+                    yield return load;
+                    accountCharacterInfo = (GetMonsterOfPlayerDetailModel)load.Current;
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
+            }
+
+            if (accountCharacterInfo != null)
+            {
+                if (!AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
+                {
+                    AccountCharacterInfoDictionary.Add(monsterlocalid, accountCharacterInfo);
+                }
+                else
+                {
+                    Debug.Log("错误?localid重复:" + monsterlocalid);
+                    AccountCharacterInfoDictionary[monsterlocalid] = accountCharacterInfo;
+                }
+                yield return accountCharacterInfo;
+                yield break;
+            }
+            yield return null;
+            yield break;
+        }
+
+        private int intCompare(int i1, int i2)
+        {
+            if (i1 > i2)
+            {
+                return 1;
+            }
+            if (i1 < i2)
+            {
+                return -1;
+            }
+            return 0;
+        }
+
+        public void sellOneChar(string localID)
+        {
+        }
     }
 }

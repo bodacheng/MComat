@@ -16,10 +16,9 @@ public partial class Animation_Manger : MonoBehaviour
     /// <param name="toLoadSkillAnimsNames">To load skill anims names.</param>
     public IEnumerator preloadBasicPersonalAnims(string animPath, string basicPackName)
     {
-        yield return (defaultPools.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL + "/animClips/"+ animPath, 
-                                                                        "BasicPack/"+ animPath +"/" + basicPackName,
-                                                                        basicPackName));
-        List<AnimationClip> basicAnims = defaultPools.Instance.getAnimationPack("BasicPack/"+ animPath + "/"+ basicPackName);
+        string basicPackKey = "BasicPack/" + animPath + "/" + basicPackName;
+        yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL + "/animClips/" + animPath, basicPackKey, basicPackName));
+        List<AnimationClip> basicAnims = AnimationResourceLoader.Instance.getAnimationPack(basicPackKey);
 
         toLoadAnims = new Dictionary<string, AnimationClip>();
 
@@ -31,7 +30,7 @@ public partial class Animation_Manger : MonoBehaviour
                 {
                     if (toLoadAnims.ContainsKey("rush"))
                     {
-                        toLoadAnims["rush"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
@@ -42,7 +41,7 @@ public partial class Animation_Manger : MonoBehaviour
                 {
                     if (toLoadAnims.ContainsKey("block"))
                     {
-                        toLoadAnims["block"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
@@ -53,7 +52,7 @@ public partial class Animation_Manger : MonoBehaviour
                 {
                     if (toLoadAnims.ContainsKey("block_break"))
                     {
-                        toLoadAnims["block_break"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
@@ -64,7 +63,7 @@ public partial class Animation_Manger : MonoBehaviour
                 {
                     if (toLoadAnims.ContainsKey("zhuangbi"))
                     {
-                        toLoadAnims["zhuangbi"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
@@ -75,29 +74,18 @@ public partial class Animation_Manger : MonoBehaviour
                 {
                     if (toLoadAnims.ContainsKey("controlled"))
                     {
-                        toLoadAnims["controlled"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
                         toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("controlled", _AnimationClip));
                     }
                 }
-                if (_AnimationClip.name == "rush")
-                {
-                    if (toLoadAnims.ContainsKey("rush"))
-                    {
-                        toLoadAnims["rush"] = _AnimationClip;
-                    }
-                    else
-                    {
-                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", _AnimationClip));
-                    }
-                }
                 if (_AnimationClip.name == "dash")
                 {
                     if (toLoadAnims.ContainsKey("dash"))
                     {
-                        toLoadAnims["dash"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
@@ -108,18 +96,29 @@ public partial class Animation_Manger : MonoBehaviour
                 {
                     if (toLoadAnims.ContainsKey("rushback"))
                     {
-                        toLoadAnims["rushback"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
                         toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", _AnimationClip));
                     }
                 }
+                if (_AnimationClip.name == "getup")
+                {
+                    if (toLoadAnims.ContainsKey("getup"))
+                    {
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
+                    }
+                    else
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", _AnimationClip));
+                    }
+                }
                 if (_AnimationClip.name == "victory")
                 {
                     if (toLoadAnims.ContainsKey("victory"))
                     {
-                        toLoadAnims["victory"] = _AnimationClip;
+                        Debug.Log("严重错误。基础包里有重名动画片段？");
                     }
                     else
                     {
@@ -184,38 +183,38 @@ public partial class Animation_Manger : MonoBehaviour
             yield break;
         }
     
-        yield return (defaultPools.Instance.LoadAnimationClipFromCachAndPutItIntoDic(url, type + "/skill/" + toLoadSkillAnimName, toLoadSkillAnimName));
-        _clip = defaultPools.Instance.getAnimationClip(type + "/skill/" + toLoadSkillAnimName);
+        yield return (AnimationResourceLoader.Instance.LoadAnimationClipFromCachAndPutItIntoDic(url, type + "/skill/" + toLoadSkillAnimName, toLoadSkillAnimName));
+        _clip = AnimationResourceLoader.Instance.getAnimationClip(type + "/skill/" + toLoadSkillAnimName);
         if (_clip != null)
         {
             if (!toLoadAnims.ContainsKey(toLoadSkillAnimName))
             {
-                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(toLoadSkillAnimName, _clip));
+                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(toLoadSkillAnimName, _clip));                              
                 foreach (AnimationEvent e in _clip.events)
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        yield return (defaultPools.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        yield return (defaultPools.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
                     if (e.functionName == "bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
                                 break;
                             case 2:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
                                 break;
                             case 3:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
                                 break;
                             default:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
                                 break;
                         }
                     }
@@ -224,28 +223,28 @@ public partial class Animation_Manger : MonoBehaviour
                         switch (e.intParameter)
                         {
                             case 0:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
                                 break;
                             case 1:
                                 break;
                             case 2:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
                                 break;
                             default:
-                                yield return (defaultPools.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
                                 break;
                         }
                     }
                     if (e.functionName == "playSoundOnce")
                     {
-                        yield return (defaultPools.Instance.LoadAudioClipFromCachAndPutItIntoDic(url,"effects", e.stringParameter));
+                        yield return (AudioResourceLoading.Instance.LoadAudioClipFromCachAndPutItIntoDic(url,"effects", e.stringParameter));
                     }
                 }
             }
         }
         else
         {
-            defaultPools.Instance.FightLoadErrors.Add(toLoadSkillAnimName + "动作包有问题，无法从中加载动画片段");
+            FightLoadError.Instance.FightLoadErrors.Add(toLoadSkillAnimName + "动作包有问题，无法从中加载动画片段");
             Debug.Log(toLoadSkillAnimName + "动作包有问题，无法从中加载动画片段");
         }
     }

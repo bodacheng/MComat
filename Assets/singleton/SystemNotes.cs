@@ -1,0 +1,51 @@
+﻿using mainMenu;
+
+// 由于读取静态物体的效率可能更高，因此战斗场景我们真的就是可能搞成好几个不同的scene。
+// 但是，系统角度讲整个程序还是分成主菜单类和战斗场景类两个大的scene，那么这个地方我们针对这两个大的scene，
+// 分别搞了个用于记录的单元。
+
+public class FightSceneNote
+{
+    private static FightSceneNote instance;
+
+    public StageScriptableObject nextBattle;
+
+    private FightSceneNote()
+    {
+        nextBattle = new StageScriptableObject();//这个地方无非是意思意思
+    }
+
+    public static FightSceneNote Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new FightSceneNote();
+            }
+            return instance;
+        }
+    }
+}
+
+public class MainMenuNote
+{
+    private static MainMenuNote instance;
+    public MainSceneStep goingtostep = MainSceneStep.frontPage;
+
+    private MainMenuNote()
+    {
+    }
+
+    public static MainMenuNote Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new MainMenuNote();
+            }
+            return instance;
+        }
+    }
+}
