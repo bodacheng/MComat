@@ -43,7 +43,6 @@ crashlytics-build.properties
 *.png
 *.anim
 *.mat
-*.meta
 *.psd
 *.wav
 *.fax

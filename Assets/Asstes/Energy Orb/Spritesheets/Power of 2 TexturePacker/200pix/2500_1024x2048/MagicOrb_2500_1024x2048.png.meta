@@ -1,0 +1,1160 @@
+fileFormatVersion: 2
+guid: 10399e53e7a4adf4aa7322c19da9a015
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CHAOS ORB 16-1_00000
+    21300002: CHAOS ORB 16-1_00001
+    21300004: CHAOS ORB 16-1_00002
+    21300006: CHAOS ORB 16-1_00003
+    21300008: CHAOS ORB 16-1_00004
+    21300010: CHAOS ORB 16-1_00005
+    21300012: CHAOS ORB 16-1_00006
+    21300014: CHAOS ORB 16-1_00007
+    21300016: CHAOS ORB 16-1_00008
+    21300018: CHAOS ORB 16-1_00009
+    21300020: CHAOS ORB 16-1_00010
+    21300022: CHAOS ORB 16-1_00011
+    21300024: CHAOS ORB 16-1_00012
+    21300026: CHAOS ORB 16-1_00013
+    21300028: CHAOS ORB 16-1_00014
+    21300030: CHAOS ORB 16-1_00015
+    21300032: CHAOS ORB 16-1_00016
+    21300034: CHAOS ORB 16-1_00017
+    21300036: CHAOS ORB 16-1_00018
+    21300038: CHAOS ORB 16-1_00019
+    21300040: CHAOS ORB 16-1_00020
+    21300042: CHAOS ORB 16-1_00021
+    21300044: CHAOS ORB 16-1_00022
+    21300046: CHAOS ORB 16-1_00023
+    21300048: CHAOS ORB 16-1_00024
+    21300050: CHAOS ORB 16-1_00025
+    21300052: CHAOS ORB 16-1_00026
+    21300054: CHAOS ORB 16-1_00027
+    21300056: CHAOS ORB 16-1_00028
+    21300058: CHAOS ORB 16-1_00029
+    21300060: CHAOS ORB 16-1_00030
+    21300062: CHAOS ORB 16-1_00031
+    21300064: CHAOS ORB 16-1_00032
+    21300066: CHAOS ORB 16-1_00033
+    21300068: CHAOS ORB 16-1_00034
+    21300070: CHAOS ORB 16-1_00035
+    21300072: CHAOS ORB 16-1_00036
+    21300074: CHAOS ORB 16-1_00037
+    21300076: CHAOS ORB 16-1_00038
+    21300078: CHAOS ORB 16-1_00039
+    21300080: CHAOS ORB 16-1_00040
+    21300082: CHAOS ORB 16-1_00041
+    21300084: CHAOS ORB 16-1_00042
+    21300086: CHAOS ORB 16-1_00043
+    21300088: CHAOS ORB 16-1_00044
+    21300090: CHAOS ORB 16-1_00045
+    21300092: CHAOS ORB 16-1_00046
+    21300094: CHAOS ORB 16-1_00047
+    21300096: CHAOS ORB 16-1_00048
+    21300098: CHAOS ORB 16-1_00049
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 54
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00000
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1845
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34faa4e23a21849c390569df8e47a980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00001
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1642
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a073a5570f2749c3b7f63c225ec5045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00002
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1845
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c9761cdee2264da7b17fbe45891978e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00003
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1845
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62d625150fb704d329970753d6de9c99
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00004
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1845
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e1286c9e06148059533d7c31ae1961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00005
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1845
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f08dd48bee94643288bd730815fd0f4d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00006
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1642
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93bdf39cdc3a841be8e4c215169bce74
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00007
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1642
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bad2d38efc01447d6bfb24151441b8e5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00008
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1642
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852a96531eba44c87980aa2674939a03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00009
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1642
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f470d337faa840fe98b5d9c2c02e33f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00010
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1439
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 052b4c0f8d6394afbaa0bf8f1bb51e1e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00011
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1439
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f60c71cce8c25447daf0eba021b9841c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00012
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1439
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fddeab2b93d844cba364452edad46ef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00013
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1439
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bbb9c9c240a64a129f73c636fb99021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00014
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1236
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c82e2a4a975a64222b869ddbf19b0278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00015
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1236
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6ba104a52d9c4c0e87f97e14cbe01e4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00016
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1236
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cc5a6f46717247b5912db554939b2a3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00017
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1236
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a61c196db65f44432a05cc2bc17199e3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00018
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1439
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03415ccdc35a4b87b752568d491c222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00019
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1236
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 028e567737f6a491a8c27f8063546fc1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00020
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 1033
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5341fa02add4b788e588b0c79dd6da
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00021
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 830
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43990bc834d949c6a6c11e56207c98d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00022
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 627
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6447fc26e519480aab882a86074766b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00023
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 424
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90be11fb90be64753bb0ae7332baf559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00024
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 221
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a967697427594308bd561d136e3b979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00025
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4fcb7322b638482f9ac001938180768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00026
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 627
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6db0d1e2fae494d88b2087000d2372a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00027
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 627
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc713eb1c1cfe4f9aa909a254b098de8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00028
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 627
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e4f3085527d7409ca4e0e443013784c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00029
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 627
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d5089487de994d4795ff9bf6c8a30ad
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00030
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 424
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fd7f58851c05486391935350f4c728a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00031
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 221
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0081e17c0bb2d49438264d211ea031b8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00032
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 18
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e62e5203cf4045519927d4c9b8f983b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00033
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 424
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bec983715a844ff88a4c27742523f99
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00034
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1033
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf687bd3ab5f3452596795c544874f0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00035
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1033
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceebf6c94dee64f4eb6058ddefffd343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00036
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 1033
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a12ddf3a6b6794cc3a382ad649382cbe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00037
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1033
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fae4adcd62bec438384093c0accc1098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00038
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 830
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48bad2b46f9804bc1af8efa3aab13a0e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00039
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 830
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aa316005bb9b49909b87842bd196c27
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00040
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 830
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b9600ad286184fc4aba35dcdc2d7834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00041
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 424
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f7ad7f968554277ab8eb46056e5321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00042
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 830
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50487804, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fbc765f8df4c4896b257dcecf3ef97a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00043
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 424
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2b3aeec15b8747faa4f0e2aca451519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00044
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 221
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b45b53c5da8464256a29befb8f42e82c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00045
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 18
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dfaf5ef40f4c4dc49d6df9980d8b3a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00046
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 221
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a46d49ae115a14731b58fdfc157dca59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00047
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 221
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bbdd7c7bf32e4dc9875340565fbacc1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00048
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 18
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb37c43247394a5abc2cd051c262749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS ORB 16-1_00049
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 18
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50735295, y: 0.50985223}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4d64df4ec69f4081917fca927e54926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

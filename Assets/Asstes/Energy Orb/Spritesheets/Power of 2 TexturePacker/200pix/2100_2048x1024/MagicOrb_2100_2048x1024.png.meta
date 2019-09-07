@@ -1,0 +1,1160 @@
+fileFormatVersion: 2
+guid: e18936cf434b0c844b4a7504dc8d961e
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CHAOS-ORB-v2_00000
+    21300002: CHAOS-ORB-v2_00001
+    21300004: CHAOS-ORB-v2_00002
+    21300006: CHAOS-ORB-v2_00003
+    21300008: CHAOS-ORB-v2_00004
+    21300010: CHAOS-ORB-v2_00005
+    21300012: CHAOS-ORB-v2_00006
+    21300014: CHAOS-ORB-v2_00007
+    21300016: CHAOS-ORB-v2_00008
+    21300018: CHAOS-ORB-v2_00009
+    21300020: CHAOS-ORB-v2_00010
+    21300022: CHAOS-ORB-v2_00011
+    21300024: CHAOS-ORB-v2_00012
+    21300026: CHAOS-ORB-v2_00013
+    21300028: CHAOS-ORB-v2_00014
+    21300030: CHAOS-ORB-v2_00015
+    21300032: CHAOS-ORB-v2_00016
+    21300034: CHAOS-ORB-v2_00017
+    21300036: CHAOS-ORB-v2_00018
+    21300038: CHAOS-ORB-v2_00019
+    21300040: CHAOS-ORB-v2_00020
+    21300042: CHAOS-ORB-v2_00021
+    21300044: CHAOS-ORB-v2_00022
+    21300046: CHAOS-ORB-v2_00023
+    21300048: CHAOS-ORB-v2_00024
+    21300050: CHAOS-ORB-v2_00025
+    21300052: CHAOS-ORB-v2_00026
+    21300054: CHAOS-ORB-v2_00027
+    21300056: CHAOS-ORB-v2_00028
+    21300058: CHAOS-ORB-v2_00029
+    21300060: CHAOS-ORB-v2_00030
+    21300062: CHAOS-ORB-v2_00031
+    21300064: CHAOS-ORB-v2_00032
+    21300066: CHAOS-ORB-v2_00033
+    21300068: CHAOS-ORB-v2_00034
+    21300070: CHAOS-ORB-v2_00035
+    21300072: CHAOS-ORB-v2_00036
+    21300074: CHAOS-ORB-v2_00037
+    21300076: CHAOS-ORB-v2_00038
+    21300078: CHAOS-ORB-v2_00039
+    21300080: CHAOS-ORB-v2_00040
+    21300082: CHAOS-ORB-v2_00041
+    21300084: CHAOS-ORB-v2_00042
+    21300086: CHAOS-ORB-v2_00043
+    21300088: CHAOS-ORB-v2_00044
+    21300090: CHAOS-ORB-v2_00045
+    21300092: CHAOS-ORB-v2_00046
+    21300094: CHAOS-ORB-v2_00047
+    21300096: CHAOS-ORB-v2_00048
+    21300098: CHAOS-ORB-v2_00049
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 54
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 12
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00000
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 621
+        width: 202
+        height: 201
+      alignment: 9
+      pivot: {x: 0.5049505, y: 0.49253732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c573729ddf8d24b2187e5501fff2124a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00001
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 822
+        width: 202
+        height: 202
+      alignment: 9
+      pivot: {x: 0.5049505, y: 0.4950495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cec102f7a3f7418b99884f496205191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00002
+      rect:
+        serializedVersion: 2
+        x: 1437
+        y: 10
+        width: 204
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.4950495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b3ed0021c3f84c7da48bebde04b0039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00003
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 822
+        width: 204
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.4950495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3d5c31cdb3914e0d80cf0aae6ef02a5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00004
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 621
+        width: 204
+        height: 201
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.49253732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 161f311cc3fff42128fefff9b3d5a378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00005
+      rect:
+        serializedVersion: 2
+        x: 1844
+        y: 822
+        width: 204
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.4950495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 222496408e6474bce914ceda761903ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00006
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 212
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 009c70df4b89f497fa44598e0a586ff9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00007
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 9
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddbb0a2dce61f495aa29d2a183bdbef7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00008
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 821
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43f2eacff638442a089950288dcc77d7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00009
+      rect:
+        serializedVersion: 2
+        x: 1030
+        y: 618
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d6854ceef87e4ac3b6427efa49057c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00010
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 618
+        width: 206
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a4b03149c53f433daf976839504d133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00011
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 211
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee6c988bcbf0e4e949dc20e8ffc437a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00012
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 211
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46dd73c8800e14958a2dc17d295079c6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00013
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 617
+        width: 207
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5024155, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 754086c1d93104284856d2550217d1bb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00014
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 6
+        width: 206
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa006861dcd434d6e8cc7ecc44808d4e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00015
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 412
+        width: 206
+        height: 204
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b7541bdac8904f7581ce6a1ccabd8e8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00016
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 415
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01d52ccacd74442a8873908e91abc246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00017
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 8
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed77ae3099fa84f1a9d3b573c2ad1444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00018
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 212
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a3ceeb5205634188814ebb0489f1a52
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00019
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 9
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf8726c18cc3e4048938b1c500d86fb4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00020
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 821
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a578fb4240614e979b72df250285969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00021
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 820
+        width: 207
+        height: 204
+      alignment: 9
+      pivot: {x: 0.5072464, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5bb344ff86ef4c749c552c5b0ba5117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00022
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 821
+        width: 207
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5072464, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b819bd66009d04e248dee2bc0c558c2a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00023
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 209
+        width: 207
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5072464, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a88384e0e114cc5a88f9447339b34a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00024
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 208
+        width: 206
+        height: 204
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0852edbb8ab6b4d33a29183c79e7f57a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00025
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 206
+        height: 204
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7588911afe34d848e980163bd3b365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00026
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 412
+        width: 206
+        height: 204
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2661f421c2b244179b572003605e6209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00027
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 820
+        width: 206
+        height: 204
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6465ee6a2413143a7a64fe20d5af880d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00028
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 616
+        width: 207
+        height: 204
+      alignment: 9
+      pivot: {x: 0.5072464, y: 0.49509802}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e51f34389d24b4688a9d10247088cfe1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00029
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 6
+        width: 206
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50970876, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 983ba5d9474c44a519d42f26ac848be5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00030
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 414
+        width: 207
+        height: 203
+      alignment: 9
+      pivot: {x: 0.5072464, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87bd1262db1b84eda8c7faed4d2f7756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00031
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 618
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50d048d9dd9694ba5bb89e14f6c19425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00032
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 821
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55ba18abc975e4dc9b4e95ba9f74db5e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00033
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 618
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ed09f7d83f104b3699572e6eba9f785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00034
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 415
+        width: 204
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dfff9280f8c54517bb0d28efc196fb6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00035
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 415
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cae02253ae93c492a8ac313fda7d5002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00036
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 212
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d9031daa67a542e0adca74f83cadc9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00037
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 9
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d8c154b9d60f4fc0af539214e6eb9a4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00038
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 821
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50731707, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f514013e05e55422a97155f3bb799e0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00039
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 618
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00a73e7d8e1b24ab49de083c545db9d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00040
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 415
+        width: 205
+        height: 203
+      alignment: 9
+      pivot: {x: 0.502439, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ca8570261b9488ca7a66b3589c6821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00041
+      rect:
+        serializedVersion: 2
+        x: 1437
+        y: 212
+        width: 203
+        height: 203
+      alignment: 9
+      pivot: {x: 0.50246304, y: 0.49261084}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 586ac6fdaddfa4f0583dd1454098151b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00042
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 418
+        width: 203
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50246304, y: 0.490099}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7392ab39494ad4a02a0e17cc49f52ff3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00043
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 216
+        width: 203
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50246304, y: 0.490099}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fc317494f5214132a7768d02f9fd12e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00044
+      rect:
+        serializedVersion: 2
+        x: 1843
+        y: 16
+        width: 203
+        height: 201
+      alignment: 9
+      pivot: {x: 0.50246304, y: 0.49253732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c60a85f54b0e549aab54c7753f85e44b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00045
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 418
+        width: 203
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50246304, y: 0.4950495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b842f541160a471a9fc10e7eda71f06
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00046
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 620
+        width: 204
+        height: 202
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.4950495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa9c2ccbe6a7f4fe6b365c90bdf7d277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00047
+      rect:
+        serializedVersion: 2
+        x: 1843
+        y: 217
+        width: 204
+        height: 201
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.49253732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1007b2b6066f84f97acd1d123171ec9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00048
+      rect:
+        serializedVersion: 2
+        x: 1844
+        y: 420
+        width: 204
+        height: 201
+      alignment: 9
+      pivot: {x: 0.50490195, y: 0.49253732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e83af1040fb934316b71f5458d99ba24
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CHAOS-ORB-v2_00049
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 15
+        width: 202
+        height: 201
+      alignment: 9
+      pivot: {x: 0.5049505, y: 0.49253732}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddbdee2b927cc4f399ab111a49d18112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

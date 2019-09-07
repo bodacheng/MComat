@@ -1,0 +1,1701 @@
+fileFormatVersion: 2
+guid: 42a4e1f7eb4e2984c9f9e866f54125dc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: SapphiArt_19:arms
+    100004: SapphiArt_19:Backhair_01_L
+    100006: SapphiArt_19:Backhair_01_R
+    100008: SapphiArt_19:Backhair_02_L
+    100010: SapphiArt_19:Backhair_02_R
+    100012: SapphiArt_19:Backhair_03_L
+    100014: SapphiArt_19:Backhair_03_R
+    100016: SapphiArt_19:Backhair_04_L
+    100018: SapphiArt_19:Backhair_04_R
+    100020: SapphiArt_19:Backhair_05_L
+    100022: SapphiArt_19:Backhair_05_R
+    100024: SapphiArt_19:BackSkirt_Inside
+    100026: SapphiArt_19:BackSkirt_Tile
+    100028: SapphiArt_19:Belt
+    100030: SapphiArt_19:BindJoints
+    100032: SapphiArt_19:body
+    100034: SapphiArt_19:boots
+    100036: SapphiArt_19:BottomTeeth
+    100038: SapphiArt_19:Breast_L
+    100040: SapphiArt_19:Breast_R
+    100042: SapphiArt_19:Breast_Tip_L
+    100044: SapphiArt_19:Breast_Tip_R
+    100046: SapphiArt_19:brow
+    100048: SapphiArt_19:Button
+    100050: SapphiArt_19:Chest
+    100052: SapphiArt_19:Cloth
+    100054: SapphiArt_19:cloth
+    100056: SapphiArt_19:ClothOuter
+    100058: SapphiArt_19:Colar_Tile
+    100060: SapphiArt_19:Eye_L
+    100062: SapphiArt_19:Eye_R
+    100064: SapphiArt_19:eyes
+    100066: SapphiArt_19:face
+    100068: SapphiArt_19:Foot_L
+    100070: SapphiArt_19:Foot_R
+    100072: SapphiArt_19:Forearm_L
+    100074: SapphiArt_19:Forearm_R
+    100076: SapphiArt_19:ForearmTwist_L
+    100078: SapphiArt_19:ForearmTwist_R
+    100080: SapphiArt_19:group25
+    100082: SapphiArt_19:Hair_Front_01_L
+    100084: SapphiArt_19:Hair_Front_01_R
+    100086: SapphiArt_19:Hair_Front_02_L
+    100088: SapphiArt_19:Hair_Front_02_R
+    100090: SapphiArt_19:Hair_Grp
+    100092: SapphiArt_19:Hair_Side_01_L
+    100094: SapphiArt_19:Hair_Side_01_R
+    100096: SapphiArt_19:Hair_Side_02_L
+    100098: SapphiArt_19:hairAcce
+    100100: SapphiArt_19:hairBack
+    100102: SapphiArt_19:hairFront
+    100104: SapphiArt_19:Hand_L
+    100106: SapphiArt_19:Hand_R
+    100108: SapphiArt_19:Head
+    100110: SapphiArt_19:Head 1
+    100112: SapphiArt_19:Head_End
+    100114: SapphiArt_19:Hips
+    100116: SapphiArt_19:Index_01_L
+    100118: SapphiArt_19:Index_01_R
+    100120: SapphiArt_19:Index_02_L
+    100122: SapphiArt_19:Index_02_R
+    100124: SapphiArt_19:Index_03_L
+    100126: SapphiArt_19:Index_03_R
+    100128: SapphiArt_19:Knee_L
+    100130: SapphiArt_19:Knee_R
+    100132: SapphiArt_19:Leg_L
+    100134: SapphiArt_19:Leg_R
+    100136: SapphiArt_19:legAcc
+    100138: SapphiArt_19:legs
+    100140: SapphiArt_19:Mech_Cover_L
+    100142: SapphiArt_19:Mech_cover_L
+    100144: SapphiArt_19:Mech_Cover_R
+    100146: SapphiArt_19:Mech_cover_R
+    100148: SapphiArt_19:Mech_Grp
+    100150: SapphiArt_19:Mech_In_L
+    100152: SapphiArt_19:Mech_In_R
+    100154: SapphiArt_19:Mech_Inner_L
+    100156: SapphiArt_19:Mech_Inner_R
+    100158: SapphiArt_19:Mech_Out_L
+    100160: SapphiArt_19:Mech_Out_R
+    100162: SapphiArt_19:Mech_Outer_L
+    100164: SapphiArt_19:Mech_Outer_R
+    100166: SapphiArt_19:Mesh_grp
+    100168: SapphiArt_19:Middle_01_L
+    100170: SapphiArt_19:Middle_01_R
+    100172: SapphiArt_19:Middle_02_L
+    100174: SapphiArt_19:Middle_02_R
+    100176: SapphiArt_19:Middle_03_L
+    100178: SapphiArt_19:Middle_03_R
+    100180: SapphiArt_19:Neck
+    100182: SapphiArt_19:OuterSkirt_Back_01_L
+    100184: SapphiArt_19:OuterSkirt_Back_01_R
+    100186: SapphiArt_19:OuterSkirt_Back_02_L
+    100188: SapphiArt_19:OuterSkirt_Back_02_R
+    100190: SapphiArt_19:OuterSkirt_Back_03_L
+    100192: SapphiArt_19:OuterSkirt_Back_03_R
+    100194: SapphiArt_19:OuterSkirt_Front_01_L
+    100196: SapphiArt_19:OuterSkirt_Front_01_R
+    100198: SapphiArt_19:OuterSkirt_Front_02_L
+    100200: SapphiArt_19:OuterSkirt_Front_02_R
+    100202: SapphiArt_19:OuterSkirt_Side_01_L
+    100204: SapphiArt_19:OuterSkirt_Side_01_R
+    100206: SapphiArt_19:OuterSkirt_Side_02_L
+    100208: SapphiArt_19:OuterSkirt_Side_02_R
+    100210: SapphiArt_19:PelvisRoot
+    100212: SapphiArt_19:Pinky_01_L
+    100214: SapphiArt_19:Pinky_01_R
+    100216: SapphiArt_19:Pinky_02_L
+    100218: SapphiArt_19:Pinky_02_R
+    100220: SapphiArt_19:Pinky_03_L
+    100222: SapphiArt_19:Pinky_03_R
+    100224: SapphiArt_19:Ring_01_L
+    100226: SapphiArt_19:Ring_01_R
+    100228: SapphiArt_19:Ring_02_L
+    100230: SapphiArt_19:Ring_02_R
+    100232: SapphiArt_19:Ring_03_L
+    100234: SapphiArt_19:Ring_03_R
+    100236: SapphiArt_19:Shoulder_L
+    100238: SapphiArt_19:Shoulder_R
+    100240: SapphiArt_19:Skirt
+    100242: SapphiArt_19:Skirt_Back_01
+    100244: SapphiArt_19:Skirt_Back_02
+    100246: SapphiArt_19:Skirt_BackSide_01_L
+    100248: SapphiArt_19:Skirt_BackSide_01_R
+    100250: SapphiArt_19:Skirt_BackSide_02_L
+    100252: SapphiArt_19:Skirt_BackSide_02_R
+    100254: SapphiArt_19:Skirt_Front_01
+    100256: SapphiArt_19:Skirt_Front_02
+    100258: SapphiArt_19:Skirt_FrontSide_01_L
+    100260: SapphiArt_19:Skirt_FrontSide_01_R
+    100262: SapphiArt_19:Skirt_FrontSide_02_L
+    100264: SapphiArt_19:Skirt_FrontSide_02_R
+    100266: SapphiArt_19:Skirt_Inside
+    100268: SapphiArt_19:Skirt_Side_01_L
+    100270: SapphiArt_19:Skirt_Side_01_R
+    100272: SapphiArt_19:Skirt_Side_02_L
+    100274: SapphiArt_19:Skirt_Side_02_R
+    100276: SapphiArt_19:Spine
+    100278: SapphiArt_19:Thumb_01_L
+    100280: SapphiArt_19:Thumb_01_R
+    100282: SapphiArt_19:Thumb_02_L
+    100284: SapphiArt_19:Thumb_02_R
+    100286: SapphiArt_19:Thumb_03_L
+    100288: SapphiArt_19:Thumb_03_R
+    100290: SapphiArt_19:Tie
+    100292: SapphiArt_19:Tile
+    100294: SapphiArt_19:Toe_L
+    100296: SapphiArt_19:Toe_R
+    100298: SapphiArt_19:tongue
+    100300: SapphiArt_19:Tongue_grp
+    100302: SapphiArt_19:TopTeeth
+    100304: SapphiArt_19:tummy
+    100306: SapphiArt_19:UpperArm_L
+    100308: SapphiArt_19:UpperArm_R
+    100310: SapphiArt_19:UpperArmTwist_L
+    100312: SapphiArt_19:UpperArmTwist_R
+    400000: //RootNode
+    400002: SapphiArt_19:arms
+    400004: SapphiArt_19:Backhair_01_L
+    400006: SapphiArt_19:Backhair_01_R
+    400008: SapphiArt_19:Backhair_02_L
+    400010: SapphiArt_19:Backhair_02_R
+    400012: SapphiArt_19:Backhair_03_L
+    400014: SapphiArt_19:Backhair_03_R
+    400016: SapphiArt_19:Backhair_04_L
+    400018: SapphiArt_19:Backhair_04_R
+    400020: SapphiArt_19:Backhair_05_L
+    400022: SapphiArt_19:Backhair_05_R
+    400024: SapphiArt_19:BackSkirt_Inside
+    400026: SapphiArt_19:BackSkirt_Tile
+    400028: SapphiArt_19:Belt
+    400030: SapphiArt_19:BindJoints
+    400032: SapphiArt_19:body
+    400034: SapphiArt_19:boots
+    400036: SapphiArt_19:BottomTeeth
+    400038: SapphiArt_19:Breast_L
+    400040: SapphiArt_19:Breast_R
+    400042: SapphiArt_19:Breast_Tip_L
+    400044: SapphiArt_19:Breast_Tip_R
+    400046: SapphiArt_19:brow
+    400048: SapphiArt_19:Button
+    400050: SapphiArt_19:Chest
+    400052: SapphiArt_19:Cloth
+    400054: SapphiArt_19:cloth
+    400056: SapphiArt_19:ClothOuter
+    400058: SapphiArt_19:Colar_Tile
+    400060: SapphiArt_19:Eye_L
+    400062: SapphiArt_19:Eye_R
+    400064: SapphiArt_19:eyes
+    400066: SapphiArt_19:face
+    400068: SapphiArt_19:Foot_L
+    400070: SapphiArt_19:Foot_R
+    400072: SapphiArt_19:Forearm_L
+    400074: SapphiArt_19:Forearm_R
+    400076: SapphiArt_19:ForearmTwist_L
+    400078: SapphiArt_19:ForearmTwist_R
+    400080: SapphiArt_19:group25
+    400082: SapphiArt_19:Hair_Front_01_L
+    400084: SapphiArt_19:Hair_Front_01_R
+    400086: SapphiArt_19:Hair_Front_02_L
+    400088: SapphiArt_19:Hair_Front_02_R
+    400090: SapphiArt_19:Hair_Grp
+    400092: SapphiArt_19:Hair_Side_01_L
+    400094: SapphiArt_19:Hair_Side_01_R
+    400096: SapphiArt_19:Hair_Side_02_L
+    400098: SapphiArt_19:hairAcce
+    400100: SapphiArt_19:hairBack
+    400102: SapphiArt_19:hairFront
+    400104: SapphiArt_19:Hand_L
+    400106: SapphiArt_19:Hand_R
+    400108: SapphiArt_19:Head
+    400110: SapphiArt_19:Head 1
+    400112: SapphiArt_19:Head_End
+    400114: SapphiArt_19:Hips
+    400116: SapphiArt_19:Index_01_L
+    400118: SapphiArt_19:Index_01_R
+    400120: SapphiArt_19:Index_02_L
+    400122: SapphiArt_19:Index_02_R
+    400124: SapphiArt_19:Index_03_L
+    400126: SapphiArt_19:Index_03_R
+    400128: SapphiArt_19:Knee_L
+    400130: SapphiArt_19:Knee_R
+    400132: SapphiArt_19:Leg_L
+    400134: SapphiArt_19:Leg_R
+    400136: SapphiArt_19:legAcc
+    400138: SapphiArt_19:legs
+    400140: SapphiArt_19:Mech_Cover_L
+    400142: SapphiArt_19:Mech_cover_L
+    400144: SapphiArt_19:Mech_Cover_R
+    400146: SapphiArt_19:Mech_cover_R
+    400148: SapphiArt_19:Mech_Grp
+    400150: SapphiArt_19:Mech_In_L
+    400152: SapphiArt_19:Mech_In_R
+    400154: SapphiArt_19:Mech_Inner_L
+    400156: SapphiArt_19:Mech_Inner_R
+    400158: SapphiArt_19:Mech_Out_L
+    400160: SapphiArt_19:Mech_Out_R
+    400162: SapphiArt_19:Mech_Outer_L
+    400164: SapphiArt_19:Mech_Outer_R
+    400166: SapphiArt_19:Mesh_grp
+    400168: SapphiArt_19:Middle_01_L
+    400170: SapphiArt_19:Middle_01_R
+    400172: SapphiArt_19:Middle_02_L
+    400174: SapphiArt_19:Middle_02_R
+    400176: SapphiArt_19:Middle_03_L
+    400178: SapphiArt_19:Middle_03_R
+    400180: SapphiArt_19:Neck
+    400182: SapphiArt_19:OuterSkirt_Back_01_L
+    400184: SapphiArt_19:OuterSkirt_Back_01_R
+    400186: SapphiArt_19:OuterSkirt_Back_02_L
+    400188: SapphiArt_19:OuterSkirt_Back_02_R
+    400190: SapphiArt_19:OuterSkirt_Back_03_L
+    400192: SapphiArt_19:OuterSkirt_Back_03_R
+    400194: SapphiArt_19:OuterSkirt_Front_01_L
+    400196: SapphiArt_19:OuterSkirt_Front_01_R
+    400198: SapphiArt_19:OuterSkirt_Front_02_L
+    400200: SapphiArt_19:OuterSkirt_Front_02_R
+    400202: SapphiArt_19:OuterSkirt_Side_01_L
+    400204: SapphiArt_19:OuterSkirt_Side_01_R
+    400206: SapphiArt_19:OuterSkirt_Side_02_L
+    400208: SapphiArt_19:OuterSkirt_Side_02_R
+    400210: SapphiArt_19:PelvisRoot
+    400212: SapphiArt_19:Pinky_01_L
+    400214: SapphiArt_19:Pinky_01_R
+    400216: SapphiArt_19:Pinky_02_L
+    400218: SapphiArt_19:Pinky_02_R
+    400220: SapphiArt_19:Pinky_03_L
+    400222: SapphiArt_19:Pinky_03_R
+    400224: SapphiArt_19:Ring_01_L
+    400226: SapphiArt_19:Ring_01_R
+    400228: SapphiArt_19:Ring_02_L
+    400230: SapphiArt_19:Ring_02_R
+    400232: SapphiArt_19:Ring_03_L
+    400234: SapphiArt_19:Ring_03_R
+    400236: SapphiArt_19:Shoulder_L
+    400238: SapphiArt_19:Shoulder_R
+    400240: SapphiArt_19:Skirt
+    400242: SapphiArt_19:Skirt_Back_01
+    400244: SapphiArt_19:Skirt_Back_02
+    400246: SapphiArt_19:Skirt_BackSide_01_L
+    400248: SapphiArt_19:Skirt_BackSide_01_R
+    400250: SapphiArt_19:Skirt_BackSide_02_L
+    400252: SapphiArt_19:Skirt_BackSide_02_R
+    400254: SapphiArt_19:Skirt_Front_01
+    400256: SapphiArt_19:Skirt_Front_02
+    400258: SapphiArt_19:Skirt_FrontSide_01_L
+    400260: SapphiArt_19:Skirt_FrontSide_01_R
+    400262: SapphiArt_19:Skirt_FrontSide_02_L
+    400264: SapphiArt_19:Skirt_FrontSide_02_R
+    400266: SapphiArt_19:Skirt_Inside
+    400268: SapphiArt_19:Skirt_Side_01_L
+    400270: SapphiArt_19:Skirt_Side_01_R
+    400272: SapphiArt_19:Skirt_Side_02_L
+    400274: SapphiArt_19:Skirt_Side_02_R
+    400276: SapphiArt_19:Spine
+    400278: SapphiArt_19:Thumb_01_L
+    400280: SapphiArt_19:Thumb_01_R
+    400282: SapphiArt_19:Thumb_02_L
+    400284: SapphiArt_19:Thumb_02_R
+    400286: SapphiArt_19:Thumb_03_L
+    400288: SapphiArt_19:Thumb_03_R
+    400290: SapphiArt_19:Tie
+    400292: SapphiArt_19:Tile
+    400294: SapphiArt_19:Toe_L
+    400296: SapphiArt_19:Toe_R
+    400298: SapphiArt_19:tongue
+    400300: SapphiArt_19:Tongue_grp
+    400302: SapphiArt_19:TopTeeth
+    400304: SapphiArt_19:tummy
+    400306: SapphiArt_19:UpperArm_L
+    400308: SapphiArt_19:UpperArm_R
+    400310: SapphiArt_19:UpperArmTwist_L
+    400312: SapphiArt_19:UpperArmTwist_R
+    4300000: SapphiArt_19:Tie
+    4300002: SapphiArt_19:Skirt
+    4300004: SapphiArt_19:Skirt_Inside
+    4300006: SapphiArt_19:BackSkirt_Inside
+    4300008: SapphiArt_19:ClothOuter
+    4300010: SapphiArt_19:Belt
+    4300012: SapphiArt_19:Button
+    4300014: SapphiArt_19:Colar_Tile
+    4300016: SapphiArt_19:BackSkirt_Tile
+    4300018: SapphiArt_19:hairFront
+    4300020: SapphiArt_19:hairBack
+    4300022: SapphiArt_19:face
+    4300024: SapphiArt_19:eyes
+    4300026: SapphiArt_19:TopTeeth
+    4300028: SapphiArt_19:BottomTeeth
+    4300030: SapphiArt_19:brow
+    4300032: SapphiArt_19:hairAcce
+    4300034: SapphiArt_19:legAcc
+    4300036: SapphiArt_19:Mech_Cover_L
+    4300038: SapphiArt_19:Mech_Cover_R
+    4300040: SapphiArt_19:Mech_Outer_L
+    4300042: SapphiArt_19:Mech_Inner_L
+    4300044: SapphiArt_19:Mech_Inner_R
+    4300046: SapphiArt_19:Mech_Outer_R
+    4300048: SapphiArt_19:arms
+    4300050: SapphiArt_19:legs
+    4300052: SapphiArt_19:tummy
+    4300054: SapphiArt_19:boots
+    4300056: SapphiArt_19:cloth
+    4300058: SapphiArt_19:tongue
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: SapphiArt_19:arms
+    13700002: SapphiArt_19:BackSkirt_Inside
+    13700004: SapphiArt_19:BackSkirt_Tile
+    13700006: SapphiArt_19:Belt
+    13700008: SapphiArt_19:boots
+    13700010: SapphiArt_19:BottomTeeth
+    13700012: SapphiArt_19:brow
+    13700014: SapphiArt_19:Button
+    13700016: SapphiArt_19:cloth
+    13700018: SapphiArt_19:ClothOuter
+    13700020: SapphiArt_19:Colar_Tile
+    13700022: SapphiArt_19:eyes
+    13700024: SapphiArt_19:face
+    13700026: SapphiArt_19:hairAcce
+    13700028: SapphiArt_19:hairBack
+    13700030: SapphiArt_19:hairFront
+    13700032: SapphiArt_19:legAcc
+    13700034: SapphiArt_19:legs
+    13700036: SapphiArt_19:Mech_Cover_L
+    13700038: SapphiArt_19:Mech_Cover_R
+    13700040: SapphiArt_19:Mech_Inner_L
+    13700042: SapphiArt_19:Mech_Inner_R
+    13700044: SapphiArt_19:Mech_Outer_L
+    13700046: SapphiArt_19:Mech_Outer_R
+    13700048: SapphiArt_19:Skirt
+    13700050: SapphiArt_19:Skirt_Inside
+    13700052: SapphiArt_19:Tie
+    13700054: SapphiArt_19:tongue
+    13700056: SapphiArt_19:TopTeeth
+    13700058: SapphiArt_19:tummy
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SapphiArt_19_Sapphi_chequer
+    second: {fileID: 2100000, guid: 07acbfb961f2df744bd8a708c93c896e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SapphiArt_19_Sapphi_clothes
+    second: {fileID: 2100000, guid: e3d7a93425fdc9349b1b034e5fcc0885, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SapphiArt_19_Sapphi_hairhead
+    second: {fileID: 2100000, guid: c896820dae855bb4bb0c683de7cd5f15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SapphiArt_19_Sapphi_underwear
+    second: {fileID: 2100000, guid: e1ea6be83bc15a142b8414ff107402c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SapphiArt_19_lambert3
+    second: {fileID: 2100000, guid: 85a8c695bb295e94db3886bf934a5d87, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'SapphiArt_19:Chest' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: SapphiArt_19:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Leg_L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Leg_R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Knee_L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Knee_R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Foot_L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Foot_R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Head 1
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Shoulder_L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Shoulder_R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:UpperArm_L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:UpperArm_R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Forearm_L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Forearm_R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Hand_L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Hand_R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Toe_L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Toe_R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Eye_L
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Eye_R
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Hair_Front_01_L
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Thumb_01_L
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Thumb_02_L
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Thumb_03_L
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Index_01_L
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Index_02_L
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Index_03_L
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Middle_01_L
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Middle_02_L
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Middle_03_L
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Ring_01_L
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Ring_02_L
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Ring_03_L
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Pinky_01_L
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Pinky_02_L
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Pinky_03_L
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Thumb_01_R
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Thumb_02_R
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Thumb_03_R
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Index_01_R
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Index_02_R
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Index_03_R
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Middle_01_R
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Middle_02_R
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Middle_03_R
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Ring_01_R
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Ring_02_R
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Ring_03_R
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Pinky_01_R
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Pinky_02_R
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: SapphiArt_19:Pinky_03_R
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Sapphiart@running(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mesh_grp
+      parentName: Sapphiart@running(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Cloth
+      parentName: SapphiArt_19:Mesh_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Tie
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Inside
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:BackSkirt_Inside
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:ClothOuter
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Belt
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Button
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Tile
+      parentName: SapphiArt_19:Cloth
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Colar_Tile
+      parentName: SapphiArt_19:Tile
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:BackSkirt_Tile
+      parentName: SapphiArt_19:Tile
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:body
+      parentName: SapphiArt_19:Mesh_grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:group25
+      parentName: SapphiArt_19:body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Grp
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:hairFront
+      parentName: SapphiArt_19:Hair_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:hairBack
+      parentName: SapphiArt_19:Hair_Grp
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Head
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:face
+      parentName: SapphiArt_19:Head
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:eyes
+      parentName: SapphiArt_19:Head
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:TopTeeth
+      parentName: SapphiArt_19:Head
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:BottomTeeth
+      parentName: SapphiArt_19:Head
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:brow
+      parentName: SapphiArt_19:Head
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:hairAcce
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:legAcc
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_Grp
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_Cover_L
+      parentName: SapphiArt_19:Mech_Grp
+      position: {x: -0.04517596, y: 0.21416835, z: -0.081255846}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.88029385, y: 0.88029385, z: 0.88029385}
+    - name: SapphiArt_19:Mech_Cover_R
+      parentName: SapphiArt_19:Mech_Grp
+      position: {x: 0.04517596, y: 0.21416835, z: -0.14475511}
+      rotation: {x: 1, y: 3.7493994e-33, z: -6.123234e-17, w: 6.123234e-17}
+      scale: {x: -0.88029385, y: -0.88029385, z: -0.88029385}
+    - name: SapphiArt_19:Mech_Outer_L
+      parentName: SapphiArt_19:Mech_Grp
+      position: {x: -0.04517596, y: 0.21456183, z: -0.08140428}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.88029385, y: 0.88029385, z: 0.88029385}
+    - name: SapphiArt_19:Mech_Inner_L
+      parentName: SapphiArt_19:Mech_Grp
+      position: {x: -0.04517596, y: 0.21456183, z: -0.08140428}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.88029385, y: 0.88029385, z: 0.88029385}
+    - name: SapphiArt_19:Mech_Inner_R
+      parentName: SapphiArt_19:Mech_Grp
+      position: {x: 0.04517596, y: 0.21456183, z: -0.089892484}
+      rotation: {x: 1, y: 3.7493994e-33, z: -6.123234e-17, w: 6.123234e-17}
+      scale: {x: -0.88029385, y: -0.88029385, z: -0.88029385}
+    - name: SapphiArt_19:Mech_Outer_R
+      parentName: SapphiArt_19:Mech_Grp
+      position: {x: 0.04517596, y: 0.21456183, z: -0.089892484}
+      rotation: {x: 1, y: 3.7493994e-33, z: -6.123234e-17, w: 6.123234e-17}
+      scale: {x: -0.88029385, y: -0.88029385, z: -0.88029385}
+    - name: SapphiArt_19:arms
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:legs
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:tummy
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:boots
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:cloth
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Tongue_grp
+      parentName: SapphiArt_19:group25
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:tongue
+      parentName: SapphiArt_19:Tongue_grp
+      position: {x: 0.007876903, y: 1.4885347, z: 0.113811664}
+      rotation: {x: -0.06013153, y: 0.30075073, z: -0.009440294, w: 0.95175844}
+      scale: {x: 1.9191252, y: 1.9191252, z: 1.9930726}
+    - name: SapphiArt_19:BindJoints
+      parentName: Sapphiart@running(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:PelvisRoot
+      parentName: SapphiArt_19:BindJoints
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hips
+      parentName: SapphiArt_19:PelvisRoot
+      position: {x: -1.7763567e-16, y: 1.0428239, z: 0.06687427}
+      rotation: {x: -0.06967836, y: 0.1875737, z: -0.7279914, w: 0.6557359}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Front_01
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.019639343, y: 6.3329936e-10, z: 0.08953136}
+      rotation: {x: -0.20188157, y: 0.7058107, z: 0.5999389, w: 0.31803825}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Front_02
+      parentName: SapphiArt_19:Skirt_Front_01
+      position: {x: -0.13614978, y: -1.4210854e-16, z: 7.105427e-17}
+      rotation: {x: 0.0745373, y: -0.037749194, z: -0.1875476, w: 0.97869563}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_FrontSide_01_L
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.031569198, y: -0.08032974, z: 0.06713408}
+      rotation: {x: -0.23699276, y: 0.2158615, z: 0.87828666, w: 0.3547545}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_FrontSide_02_L
+      parentName: SapphiArt_19:Skirt_FrontSide_01_L
+      position: {x: -0.13948832, y: -1.4210854e-16, z: -1.7763568e-17}
+      rotation: {x: -0.013326882, y: 0.21071364, z: -0.19233757, w: 0.9583467}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Side_01_L
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.039678786, y: -0.1045269, z: 0.017047284}
+      rotation: {x: -0.054883733, y: 0.05012697, z: 0.9440934, w: 0.32118958}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Side_02_L
+      parentName: SapphiArt_19:Skirt_Side_01_L
+      position: {x: -0.13426991, y: 0, z: -4.4408918e-17}
+      rotation: {x: -0.009934339, y: 0.037272368, z: -0.06850245, w: 0.99690497}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_BackSide_01_L
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.035970062, y: -0.07626896, z: -0.05060033}
+      rotation: {x: 0.116560094, y: -0.39965174, z: 0.87286, w: 0.25457335}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_BackSide_02_L
+      parentName: SapphiArt_19:Skirt_BackSide_01_L
+      position: {x: -0.14571849, y: -2.842171e-16, z: 1.2212454e-16}
+      rotation: {x: 0.071334675, y: 0.035606563, z: 0.10407641, w: 0.9913686}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Back_01
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.02978804, y: 6.3329936e-10, z: -0.06389074}
+      rotation: {x: 0.21748583, y: -0.6728298, z: 0.6728298, w: 0.21748583}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Back_02
+      parentName: SapphiArt_19:Skirt_Back_01
+      position: {x: -0.14642987, y: 0, z: 7.105427e-17}
+      rotation: {x: 0, y: 0, z: 0.0941422, w: 0.9955588}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_FrontSide_01_R
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.031566042, y: 0.0803297, z: 0.067133725}
+      rotation: {x: 0.92737156, y: 0.22106893, z: 0.06999333, w: -0.29361793}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_FrontSide_02_R
+      parentName: SapphiArt_19:Skirt_FrontSide_01_R
+      position: {x: 0.13948512, y: -0.000001645087, z: -0.00000041490725}
+      rotation: {x: -0.033584647, y: -0.014802426, z: 0.052834474, w: 0.9979286}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Side_01_R
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.03967604, y: 0.104527, z: 0.017047327}
+      rotation: {x: 0.97341853, y: 0.22694084, z: 0.007014193, w: -0.030086126}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_Side_02_R
+      parentName: SapphiArt_19:Skirt_Side_01_R
+      position: {x: 0.1342678, y: -0.0000009982347, z: 0.000000047265033}
+      rotation: {x: -0.021570614, y: -0.009793233, z: 0.031896945, w: 0.9992104}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_BackSide_01_R
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.03596604, y: 0.076269, z: -0.05060037}
+      rotation: {x: 0.8728601, y: 0.25457332, z: -0.11656011, w: 0.39965174}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Skirt_BackSide_02_R
+      parentName: SapphiArt_19:Skirt_BackSide_01_R
+      position: {x: 0.14571534, y: -0.0000018129851, z: 0.00000006685689}
+      rotation: {x: 0.071334675, y: 0.035606563, z: 0.10407641, w: 0.9913686}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Leg_R
+      parentName: SapphiArt_19:Hips
+      position: {x: 0.107854955, y: 0.0743864, z: -0.005601773}
+      rotation: {x: -0.5837412, y: -0.1409636, z: -0.04631388, w: 0.7982672}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Knee_R
+      parentName: SapphiArt_19:Leg_R
+      position: {x: 0.40245852, y: -0.000000074021436, z: 4.147511e-10}
+      rotation: {x: 0.7931496, y: 0.60902685, z: -0.00000015871811, w: 0.00000028975828}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Foot_R
+      parentName: SapphiArt_19:Knee_R
+      position: {x: 0.39136767, y: -0.0000000673966, z: -0.000000044866987}
+      rotation: {x: 0.99156195, y: 0.12306167, z: -0.016554812, w: -0.03723832}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Toe_R
+      parentName: SapphiArt_19:Foot_R
+      position: {x: 0.14514394, y: -0.000000055572215, z: -6.217249e-17}
+      rotation: {x: 0, y: -0, z: -0.44158843, w: 0.89721775}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_In_R
+      parentName: SapphiArt_19:Knee_R
+      position: {x: 0.33389702, y: -0.054868415, z: 0.008203787}
+      rotation: {x: 0.4456256, y: 0.5490161, z: -0.46959665, w: 0.52865696}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_Out_R
+      parentName: SapphiArt_19:Knee_R
+      position: {x: 0.33292714, y: -0.05502756, z: -0.01387825}
+      rotation: {x: 0.4456256, y: 0.5490161, z: -0.46959665, w: 0.52865696}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_cover_R
+      parentName: SapphiArt_19:Knee_R
+      position: {x: 0.29455942, y: -0.06716957, z: -0.0010426835}
+      rotation: {x: 0.4456256, y: 0.5490161, z: -0.46959665, w: 0.52865696}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Leg_L
+      parentName: SapphiArt_19:Hips
+      position: {x: 0.10785496, y: -0.0743864, z: -0.0056017707}
+      rotation: {x: -0.3853521, y: 0.41153473, z: 0.7432102, w: 0.36025208}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Knee_L
+      parentName: SapphiArt_19:Leg_L
+      position: {x: -0.4024581, y: -5.684342e-16, z: 7.9936054e-17}
+      rotation: {x: 0.8559813, y: 0.5170068, z: 1.7517455e-16, w: -1.773389e-16}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Foot_L
+      parentName: SapphiArt_19:Knee_L
+      position: {x: -0.39136797, y: 0, z: 2.3092638e-16}
+      rotation: {x: 0.88354504, y: 0.4621314, z: -0.05871535, w: -0.048324566}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Toe_L
+      parentName: SapphiArt_19:Foot_L
+      position: {x: -0.14514406, y: -2.1316282e-16, z: 0}
+      rotation: {x: 0, y: -0, z: -0.44158915, w: 0.8972174}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_In_L
+      parentName: SapphiArt_19:Knee_L
+      position: {x: -0.33389696, y: 0.05486838, z: -0.008203896}
+      rotation: {x: 0.44562516, y: 0.5490157, z: -0.46959713, w: 0.5286573}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_Out_L
+      parentName: SapphiArt_19:Knee_L
+      position: {x: -0.33292708, y: 0.055027563, z: 0.013878143}
+      rotation: {x: 0.44562516, y: 0.5490157, z: -0.46959713, w: 0.5286573}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Mech_cover_L
+      parentName: SapphiArt_19:Knee_L
+      position: {x: -0.2945598, y: 0.06716946, z: 0.0010425274}
+      rotation: {x: 0.44562516, y: 0.5490157, z: -0.46959713, w: 0.5286573}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Front_01_L
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.05009416, y: -0.05583268, z: 0.08101265}
+      rotation: {x: -0.08889374, y: 0.4034869, z: 0.7959504, w: 0.44244677}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Front_02_L
+      parentName: SapphiArt_19:OuterSkirt_Front_01_L
+      position: {x: -0.061532695, y: -2.842171e-16, z: 7.105427e-17}
+      rotation: {x: -0.108777285, y: 0.012018413, z: -0.2165122, w: 0.97012657}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Side_01_L
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.06195493, y: -0.09947915, z: 0.006526317}
+      rotation: {x: 0, y: 0, z: 0.9509827, w: 0.3092442}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Side_02_L
+      parentName: SapphiArt_19:OuterSkirt_Side_01_L
+      position: {x: -0.0945182, y: -1.4210854e-16, z: -8.8817837e-17}
+      rotation: {x: -0.002028733, y: 0.054451283, z: -0.10165178, w: 0.99332666}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Back_01_L
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.060573563, y: -0.046682853, z: -0.053594254}
+      rotation: {x: 0.19227134, y: -0.54251045, z: 0.7662835, w: 0.28552356}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Back_02_L
+      parentName: SapphiArt_19:OuterSkirt_Back_01_L
+      position: {x: -0.15490024, y: -1.4210854e-16, z: 7.105427e-17}
+      rotation: {x: 0.05851682, y: -0.020823503, z: 0.016263453, w: 0.9979367}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Back_03_L
+      parentName: SapphiArt_19:OuterSkirt_Back_02_L
+      position: {x: -0.20751819, y: -0.0017932852, z: -0.0032999867}
+      rotation: {x: 0.046795744, y: -0.042346295, z: 0.103257924, w: 0.9926504}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Front_01_R
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.05009604, y: 0.0558327, z: 0.081012726}
+      rotation: {x: -0.8168552, y: -0.27717063, z: 0.038690925, w: 0.50440764}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Front_02_R
+      parentName: SapphiArt_19:OuterSkirt_Front_01_R
+      position: {x: 0.06153766, y: 0.0000023552896, z: -0.0000020120567}
+      rotation: {x: 0.00029128633, y: 0.022100339, z: -0.013175811, w: 0.9996689}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Side_01_R
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.06195604, y: 0.0994792, z: 0.0065263268}
+      rotation: {x: 0.9509827, y: 0.3092442, z: -1.8935744e-17, w: -5.8230895e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Side_02_R
+      parentName: SapphiArt_19:OuterSkirt_Side_01_R
+      position: {x: 0.094517894, y: -0.000000058817168, z: -7.105427e-17}
+      rotation: {x: 0, y: -0, z: -0.004582341, w: 0.9999895}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Back_01_R
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.06057604, y: 0.0466829, z: -0.053594273}
+      rotation: {x: 0.70136327, y: 0.36476153, z: -0.13989292, w: 0.59621185}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Back_02_R
+      parentName: SapphiArt_19:OuterSkirt_Back_01_R
+      position: {x: 0.15490241, y: 0.0000017973957, z: 0.00000044248927}
+      rotation: {x: -0.036511004, y: 0.053759176, z: -0.026136296, w: 0.9975439}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:OuterSkirt_Back_03_R
+      parentName: SapphiArt_19:OuterSkirt_Back_02_R
+      position: {x: 0.2075177, y: 0.0017932958, z: 0.003300075}
+      rotation: {x: -0.025892636, y: 0.05576522, z: 0.058817327, w: 0.9963736}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Spine
+      parentName: SapphiArt_19:Hips
+      position: {x: -0.069939226, y: 0, z: -3.5527136e-17}
+      rotation: {x: 0.73481363, y: 0.14555272, z: -0.011575833, w: 0.6623665}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Chest
+      parentName: SapphiArt_19:Spine
+      position: {x: -0.076230384, y: 7.105427e-17, z: 0}
+      rotation: {x: 0.18731005, y: -0.0033763135, z: 0.08260402, w: 0.9788157}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Shoulder_L
+      parentName: SapphiArt_19:Chest
+      position: {x: -0.17727691, y: -0.013402609, z: 0.025741484}
+      rotation: {x: -0.29586482, y: 0.5080363, z: 0.5259662, w: 0.6145915}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:UpperArm_L
+      parentName: SapphiArt_19:Shoulder_L
+      position: {x: -0.09172038, y: -1.4210854e-16, z: -0.00024345198}
+      rotation: {x: 0.10266237, y: -0.10488193, z: 0.41555268, w: 0.8976504}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Forearm_L
+      parentName: SapphiArt_19:UpperArm_L
+      position: {x: -0.2088715, y: -1.4210854e-16, z: 2.842171e-16}
+      rotation: {x: 8.658972e-17, y: 0.7153018, z: -8.658972e-17, w: 0.69881564}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hand_L
+      parentName: SapphiArt_19:Forearm_L
+      position: {x: -0.21249798, y: 7.105427e-16, z: 2.2737367e-15}
+      rotation: {x: 0.33508518, y: -0.0818972, z: -0.010775725, w: 0.9385599}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Index_01_L
+      parentName: SapphiArt_19:Hand_L
+      position: {x: -0.078083955, y: 0.011175232, z: 0.023825182}
+      rotation: {x: 0.048977684, y: -0.076976374, z: 0.17604817, w: 0.9801443}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Index_02_L
+      parentName: SapphiArt_19:Index_01_L
+      position: {x: -0.036693573, y: 0, z: 1.2438292e-10}
+      rotation: {x: 0, y: 0, z: 0.79457515, w: 0.6071658}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Index_03_L
+      parentName: SapphiArt_19:Index_02_L
+      position: {x: -0.019916097, y: 2.842171e-16, z: 3.3259795e-12}
+      rotation: {x: 0, y: -0, z: -0.013769883, w: 0.9999052}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Middle_01_L
+      parentName: SapphiArt_19:Hand_L
+      position: {x: -0.07969146, y: 0.012438125, z: 0.0068793464}
+      rotation: {x: 0.031574197, y: -0.03004631, z: 0.52220917, w: 0.8517029}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Middle_02_L
+      parentName: SapphiArt_19:Middle_01_L
+      position: {x: -0.039298084, y: -1.2434498e-16, z: -2.6204972e-10}
+      rotation: {x: 0, y: 0, z: 0.6537348, w: 0.75672376}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Middle_03_L
+      parentName: SapphiArt_19:Middle_02_L
+      position: {x: -0.021268727, y: -2.842171e-16, z: 7.7662316e-14}
+      rotation: {x: 0, y: 0, z: 0.63394356, w: 0.7733794}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Ring_01_L
+      parentName: SapphiArt_19:Hand_L
+      position: {x: -0.07795732, y: 0.011739527, z: -0.010014726}
+      rotation: {x: -0.012406847, y: 0.01107944, z: 0.57486546, w: 0.8180789}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Ring_02_L
+      parentName: SapphiArt_19:Ring_01_L
+      position: {x: -0.035808668, y: -3.907985e-16, z: 0}
+      rotation: {x: 0.000000036476674, y: 0.000000043466528, z: 0.6591864, w: 0.7519796}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Ring_03_L
+      parentName: SapphiArt_19:Ring_02_L
+      position: {x: -0.020048765, y: 1.4210854e-16, z: -7.105427e-17}
+      rotation: {x: 0, y: 0, z: 0.6402807, w: 0.7681411}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Pinky_01_L
+      parentName: SapphiArt_19:Hand_L
+      position: {x: -0.07578271, y: 0.010691146, z: -0.0256051}
+      rotation: {x: -0.051020004, y: 0.046566587, z: 0.7368417, w: 0.67252725}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Pinky_02_L
+      parentName: SapphiArt_19:Pinky_01_L
+      position: {x: -0.02809166, y: -7.105427e-16, z: -3.5527136e-17}
+      rotation: {x: 0.00000008818331, y: 0.00000011081556, z: 0.67853534, w: 0.73456776}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Pinky_03_L
+      parentName: SapphiArt_19:Pinky_02_L
+      position: {x: -0.014394101, y: 0, z: -7.105427e-17}
+      rotation: {x: 0, y: 0, z: 0.80327314, w: 0.59561086}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Thumb_01_L
+      parentName: SapphiArt_19:Hand_L
+      position: {x: -0.030465221, y: -0.01529541, z: 0.026194047}
+      rotation: {x: 0.59753996, y: 0.32124534, z: 0.10819175, w: 0.72666496}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Thumb_02_L
+      parentName: SapphiArt_19:Thumb_01_L
+      position: {x: -0.028057316, y: -1.5987211e-16, z: 4.2632563e-16}
+      rotation: {x: 0.14797656, y: -0.0006921668, z: 0.48030555, w: 0.86452824}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Thumb_03_L
+      parentName: SapphiArt_19:Thumb_02_L
+      position: {x: -0.023759812, y: 1.4210854e-16, z: 2.842171e-16}
+      rotation: {x: 0.042203266, y: -0.0005948606, z: 0.18856712, w: 0.9811529}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:ForearmTwist_L
+      parentName: SapphiArt_19:Forearm_L
+      position: {x: -0.099999994, y: 4.2632563e-16, z: -7.105427e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:UpperArmTwist_L
+      parentName: SapphiArt_19:UpperArm_L
+      position: {x: -0.07, y: -4.2632563e-16, z: 2.842171e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Shoulder_R
+      parentName: SapphiArt_19:Chest
+      position: {x: -0.17727913, y: -0.013401969, z: -0.0257415}
+      rotation: {x: 0.5660701, y: 0.50311464, z: -0.561237, w: 0.33384636}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:UpperArm_R
+      parentName: SapphiArt_19:Shoulder_R
+      position: {x: 0.0917205, y: -1.4210854e-16, z: 0.00024345999}
+      rotation: {x: -0.10932107, y: 0.13425292, z: 0.46985024, w: 0.8656015}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Forearm_R
+      parentName: SapphiArt_19:UpperArm_R
+      position: {x: 0.20887181, y: 1.4210854e-16, z: -0.0000000044187956}
+      rotation: {x: 8.5641556e-17, y: 0.80399024, z: -8.5641556e-17, w: 0.59464246}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hand_R
+      parentName: SapphiArt_19:Forearm_R
+      position: {x: 0.21249726, y: 1.4210854e-16, z: -0.000000007479141}
+      rotation: {x: 0.036616545, y: 0.07433455, z: -0.0021003091, w: 0.99655867}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Index_01_R
+      parentName: SapphiArt_19:Hand_R
+      position: {x: 0.078084, y: -0.01117, z: -0.02382522}
+      rotation: {x: 0.027401686, y: -0.03686712, z: 0.28779787, w: 0.9565889}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Index_02_R
+      parentName: SapphiArt_19:Index_01_R
+      position: {x: 0.03669408, y: -0.00000040329843, z: 0}
+      rotation: {x: 0, y: 0, z: 0.61472934, w: 0.78873813}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Index_03_R
+      parentName: SapphiArt_19:Index_02_R
+      position: {x: 0.019915653, y: 0.0000010109566, z: 0}
+      rotation: {x: 0, y: 0, z: 0.6830015, w: 0.73041695}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Middle_01_R
+      parentName: SapphiArt_19:Hand_R
+      position: {x: 0.079692, y: -0.01244, z: -0.0068793497}
+      rotation: {x: -0.0018500265, y: -0.012509713, z: 0.5187162, w: 0.854853}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Middle_02_R
+      parentName: SapphiArt_19:Middle_01_R
+      position: {x: 0.039298084, y: 0.000005981154, z: 1.4210854e-16}
+      rotation: {x: 0, y: 0, z: 0.63506776, w: 0.7724564}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Middle_03_R
+      parentName: SapphiArt_19:Middle_02_R
+      position: {x: 0.021268949, y: -0.0000032362111, z: 0}
+      rotation: {x: 0, y: 0, z: 0.67673266, w: 0.7362288}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Ring_01_R
+      parentName: SapphiArt_19:Hand_R
+      position: {x: 0.077958, y: -0.01174, z: 0.010014679}
+      rotation: {x: -0.05625129, y: 0.010159861, z: 0.5897392, w: 0.8055683}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Ring_02_R
+      parentName: SapphiArt_19:Ring_01_R
+      position: {x: 0.035807967, y: 0.000004408526, z: 0.00000009593527}
+      rotation: {x: 0.000000035597953, y: 0.00000004418906, z: 0.6439787, w: 0.7650435}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Ring_03_R
+      parentName: SapphiArt_19:Ring_02_R
+      position: {x: 0.020048587, y: -0.0000025847144, z: -6.536993e-15}
+      rotation: {x: 0, y: 0, z: 0.83380884, w: 0.5520533}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Pinky_01_R
+      parentName: SapphiArt_19:Hand_R
+      position: {x: 0.075783, y: -0.01069, z: 0.025605079}
+      rotation: {x: -0.06801029, y: 0.0697912, z: 0.6794528, w: 0.72721916}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Pinky_02_R
+      parentName: SapphiArt_19:Pinky_01_R
+      position: {x: 0.028092086, y: -0.0000014648515, z: -0.000000007978442}
+      rotation: {x: 0.000000094318715, y: 0.00000010564262, z: 0.71905446, w: 0.69495374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Pinky_03_R
+      parentName: SapphiArt_19:Pinky_02_R
+      position: {x: 0.014394091, y: 0.000004867796, z: 1.0189183e-13}
+      rotation: {x: 0, y: 0, z: 0.68677723, w: 0.72686803}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Thumb_01_R
+      parentName: SapphiArt_19:Hand_R
+      position: {x: 0.030465, y: 0.015299999, z: -0.02619402}
+      rotation: {x: 0.42618454, y: 0.33712217, z: 0.06978739, w: 0.83656746}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Thumb_02_R
+      parentName: SapphiArt_19:Thumb_01_R
+      position: {x: 0.028057592, y: 0.0000001771604, z: -0.00000003605942}
+      rotation: {x: 0.19817233, y: -0.08262028, z: 0.38380057, w: 0.8981085}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Thumb_03_R
+      parentName: SapphiArt_19:Thumb_02_R
+      position: {x: 0.023760524, y: 0.00000030989233, z: -0.0000010280095}
+      rotation: {x: 0.04089512, y: -0.010443136, z: 0.4126819, w: 0.90989685}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:ForearmTwist_R
+      parentName: SapphiArt_19:Forearm_R
+      position: {x: 0.09999995, y: 1.4210854e-16, z: 0.0000000012627283}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:UpperArmTwist_R
+      parentName: SapphiArt_19:UpperArm_R
+      position: {x: 0.06999995, y: 1.4210854e-16, z: -0.000000003763722}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Breast_L
+      parentName: SapphiArt_19:Chest
+      position: {x: -0.051405247, y: 0.072187185, z: 0.065098576}
+      rotation: {x: -0.37973455, y: 0.8869624, z: 0.054752853, w: 0.257102}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Breast_Tip_L
+      parentName: SapphiArt_19:Breast_L
+      position: {x: -0.035, y: 2.842171e-16, z: 0}
+      rotation: {x: 0.16257806, y: 0.016759213, z: 0.17053229, w: 0.9717028}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Breast_R
+      parentName: SapphiArt_19:Chest
+      position: {x: -0.05140426, y: 0.07218724, z: -0.0650986}
+      rotation: {x: 0.9108557, y: 0.3593441, z: -0.14940216, w: 0.13745064}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Breast_Tip_R
+      parentName: SapphiArt_19:Breast_R
+      position: {x: 0.035, y: 2.842171e-16, z: 7.105427e-17}
+      rotation: {x: 0.03471501, y: -0.016045637, z: 0.23309045, w: 0.9717028}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Neck
+      parentName: SapphiArt_19:Chest
+      position: {x: -0.24131684, y: -1.0658141e-16, z: -8.8817837e-17}
+      rotation: {x: 0, y: -0, z: -0.18998119, w: 0.98178774}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Head 1
+      parentName: SapphiArt_19:Neck
+      position: {x: -0.072908774, y: -2.842171e-16, z: -3.5527136e-17}
+      rotation: {x: -0.05523269, y: -0.049218822, z: 0.16166173, w: 0.9840693}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Head_End
+      parentName: SapphiArt_19:Head 1
+      position: {x: -0.20366246, y: 1.2016172e-16, z: 4.6945018e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Side_01_R
+      parentName: SapphiArt_19:Head_End
+      position: {x: 0.13547811, y: 0.028747419, z: -0.09248267}
+      rotation: {x: -0.023043742, y: -0.08616705, z: 0.9950258, w: 0.044360533}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Front_01_R
+      parentName: SapphiArt_19:Head_End
+      position: {x: 0.06561661, y: 0.11147242, z: -0.06258158}
+      rotation: {x: 0.09932205, y: -0.3656598, z: 0.8930748, w: 0.24258073}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Front_02_R
+      parentName: SapphiArt_19:Hair_Front_01_R
+      position: {x: -0.039175212, y: 4.2632563e-16, z: 8.8817837e-17}
+      rotation: {x: -0.015286291, y: 0.15192474, z: 0.098938115, w: 0.983309}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Front_01_L
+      parentName: SapphiArt_19:Head_End
+      position: {x: 0.06803913, y: 0.12836015, z: -0.020157231}
+      rotation: {x: -0.08320542, y: -0.6522036, z: 0.74655014, w: -0.101834014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Front_02_L
+      parentName: SapphiArt_19:Hair_Front_01_L
+      position: {x: -0.033834677, y: -2.842171e-16, z: 1.0658141e-16}
+      rotation: {x: -0.014687081, y: 0.11816357, z: 0.12246781, w: 0.98530364}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Side_01_L
+      parentName: SapphiArt_19:Head_End
+      position: {x: 0.043135192, y: 0.11795648, z: 0.031908847}
+      rotation: {x: 0.20090462, y: 0.8603656, z: -0.4033363, w: 0.23817676}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Hair_Side_02_L
+      parentName: SapphiArt_19:Hair_Side_01_L
+      position: {x: -0.050317302, y: 2.842171e-16, z: 2.1316282e-16}
+      rotation: {x: -0.018505137, y: 0.2115147, z: 0.085168555, w: 0.97348106}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_01_L
+      parentName: SapphiArt_19:Head_End
+      position: {x: 0.19190823, y: -0.101860255, z: 0.06827324}
+      rotation: {x: -0.1589935, y: 0.15117545, z: 0.9056651, w: 0.3628192}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_02_L
+      parentName: SapphiArt_19:Backhair_01_L
+      position: {x: -0.10978821, y: -2.842171e-16, z: 7.105427e-17}
+      rotation: {x: -0.031195883, y: 0.012028714, z: -0.022610303, w: 0.99918514}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_03_L
+      parentName: SapphiArt_19:Backhair_02_L
+      position: {x: -0.13302872, y: 0, z: 1.4210854e-16}
+      rotation: {x: -0.03643817, y: -0.041169886, z: 0.06967512, w: 0.9960536}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_04_L
+      parentName: SapphiArt_19:Backhair_03_L
+      position: {x: -0.14336126, y: 5.684342e-16, z: 3.5527135e-16}
+      rotation: {x: -0.04305436, y: -0.07830222, z: 0.19175462, w: 0.9773665}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_05_L
+      parentName: SapphiArt_19:Backhair_04_L
+      position: {x: -0.104947165, y: 4.2632563e-16, z: 7.105427e-17}
+      rotation: {x: 0.032796536, y: -0.09807072, z: 0.31545246, w: 0.9432901}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_01_R
+      parentName: SapphiArt_19:Head_End
+      position: {x: 0.19190581, y: -0.10186061, z: -0.0682732}
+      rotation: {x: 0.25699997, y: 0.23532328, z: -0.34353563, w: 0.87209934}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_02_R
+      parentName: SapphiArt_19:Backhair_01_R
+      position: {x: 0.109791756, y: 0.0000038243465, z: 0.0000006530705}
+      rotation: {x: 0.037185494, y: 0.12835294, z: -0.0068186526, w: 0.9910077}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_03_R
+      parentName: SapphiArt_19:Backhair_02_R
+      position: {x: 0.1330243, y: -0.000005358267, z: -0.0000018846514}
+      rotation: {x: 0.038544916, y: 0.07029962, z: 0.09120969, w: 0.9925991}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_04_R
+      parentName: SapphiArt_19:Backhair_03_R
+      position: {x: 0.14336582, y: 0.000004613942, z: 0.000002385772}
+      rotation: {x: 0.061036337, y: 0.00728629, z: 0.21073434, w: 0.9756088}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Backhair_05_R
+      parentName: SapphiArt_19:Backhair_04_R
+      position: {x: 0.10494513, y: -0.00000075942336, z: -0.00000085513403}
+      rotation: {x: 0.032796536, y: -0.09807072, z: 0.31545246, w: 0.9432901}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Eye_L
+      parentName: SapphiArt_19:Head 1
+      position: {x: -0.05639942, y: 0.09080166, z: 0.043846276}
+      rotation: {x: -0.37067166, y: 0.4293325, z: 0.5618484, w: 0.60216486}
+      scale: {x: 1, y: 1, z: 1}
+    - name: SapphiArt_19:Eye_R
+      parentName: SapphiArt_19:Head 1
+      position: {x: -0.056396622, y: 0.09080168, z: -0.0438463}
+      rotation: {x: 0.4293325, y: 0.37067166, z: -0.60216486, w: 0.5618484}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
