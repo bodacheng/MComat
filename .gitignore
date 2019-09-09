@@ -64,6 +64,7 @@ crashlytics-build.properties
 *.wav
 *.fax
 *.tga
-Assets/StreamingAssets
 
+Assets/StreamingAssets/
 Assets/Asstes/
+*.meta
