@@ -15,6 +15,7 @@ namespace mainMenu
     {
         public preparingScene _preparingScene;//准备由这个模块来切换关卡。
         public CharsManager _CharsManager;
+        public SingleThreadProcesser mainProcessRunner;
 
         [Space(7)]
         [Header("UI elements")]
@@ -100,7 +101,7 @@ namespace mainMenu
             {
                 Debug.Log("严重错误。get不到队员"); yield break;
             }
-            _preparingScene.triggerMainProcess(getReadyToBattle(_StageScriptableObject, SceneMode.QuestFight));
+            mainProcessRunner.triggerMainProcess(getReadyToBattle(_StageScriptableObject, SceneMode.QuestFight));
             yield break;
         }
 

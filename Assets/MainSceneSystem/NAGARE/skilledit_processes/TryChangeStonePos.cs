@@ -53,7 +53,7 @@ public class TryChangeStonePos : MainSceneProcess
                 _preparingScene.LoadFight(SceneMode.QuestFight,stage);
                 this.ProcessEnd();
             };
-            _preparingScene.triggerMainProcess(skilleditconfrim());
+            mainProcessRunner.triggerMainProcess(skilleditconfrim());
         };
 
         UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
@@ -77,7 +77,7 @@ public class TryChangeStonePos : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this._preparingScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

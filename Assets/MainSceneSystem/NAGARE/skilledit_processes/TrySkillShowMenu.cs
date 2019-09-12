@@ -38,7 +38,7 @@ public class TrySkillShowMenu : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this._preparingScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

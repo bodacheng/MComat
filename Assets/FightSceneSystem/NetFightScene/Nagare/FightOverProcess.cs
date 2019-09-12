@@ -22,10 +22,10 @@ public class FightOverProcess : NagareProcess
         switch (this.fightLogger.getWinner())
         {
             case Team.player1:
-                _NetFightScene.triggerMainProcess(this.fightOverControl.WINProcess());//这里是要根据情况的。。
+                mainProcessRunner.triggerMainProcess(this.fightOverControl.WINProcess());//这里是要根据情况的。。
                 break;
             case Team.player2:
-                _NetFightScene.triggerMainProcess(this.fightOverControl.LoseProcess());//这里是要根据情况的。。
+                mainProcessRunner.triggerMainProcess(this.fightOverControl.LoseProcess());//这里是要根据情况的。。
                 break;
         }
     }

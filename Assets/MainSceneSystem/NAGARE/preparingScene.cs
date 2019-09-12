@@ -11,6 +11,10 @@ namespace mainMenu
 {
     public class preparingScene : MonoBehaviour
     {
+        [Space(7)]
+        [Header("主进程处理器")]
+        public SingleThreadProcesser mainProcessRunner;
+            
         [Header("ReturnButtonManager")]
         public ReturnButtonManager _ReturnButtonManager;
 
@@ -71,7 +75,7 @@ namespace mainMenu
         [Space(7)]
         [Header("抽奖管理模块")]
         public gotchaManager _gotchaManager;
-
+        
         [Space(7)]
         [Header("LoadingProcess")]
         public LoadingCanvas _LoadingCanvas;
@@ -94,97 +98,13 @@ namespace mainMenu
         public RectTransform SelfFightUIT;
         
         public ProcessesRunner processesRunner;
-
-        // 主进程
-        private IEnumerator MenuProcess;
-        private bool processEnded = false;
-        private float processTime = 0;
-        private void setProcessStartEnd(bool a)
-        {
-            processEnded = a;
-        }
-        public void triggerMainProcess(IEnumerator _process)
-        {
-            StartCoroutine(this.MainProcess(_process));
-        }
-        private IEnumerator giveProcessStartEndFlag(IEnumerator _process)
-        {
-            setProcessStartEnd(false);
-            yield return _process;
-            setProcessStartEnd(true);
-        }
-        private IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
-        {
-            if (MenuProcess != null)
-            {
-                while (!processEnded)
-                {
-                    processTime += 0.01f;
-                    if (processTime > 5f)
-                    {
-                        Debug.Log("进程超时.");
-                        StopCoroutine(MenuProcess);
-                        break;
-                    }
-                    yield return null;
-                };
-            }
-            processTime = 0;
-            MenuProcess = giveProcessStartEndFlag(_process);
-            yield return MenuProcess;
-        }
-
-        // 表现类进程
-        private IEnumerator runningPresentationProcess;
-        private bool PresentationProcessEnded = false;
-        private float PresentationProcessTime = 0;
-        private void setPresentationProcessStartEnd(bool a)
-        {
-            PresentationProcessEnded = a;
-        }
-        public void triggerPresentationProcess(IEnumerator _process)
-        {
-            StartCoroutine(this.PresentationProcess(_process));
-        }
-        private IEnumerator givePresentationProcessStartEndFlag(IEnumerator _process)
-        {
-            setPresentationProcessStartEnd(false);
-            yield return _process;
-            setPresentationProcessStartEnd(true);
-        }
-        private IEnumerator PresentationProcess(IEnumerator _process)//这个函数是供外界调用的。
-        {
-            if (runningPresentationProcess != null)
-            {
-                while (!PresentationProcessEnded)
-                {
-                    PresentationProcessTime += 0.01f;
-                    if (PresentationProcessTime > 5f)
-                    {
-                        Debug.Log("进程超时.");
-                        StopCoroutine(runningPresentationProcess);
-                        break;
-                    }
-                    yield return null;
-                };
-            }
-            PresentationProcessTime = 0;
-            runningPresentationProcess = givePresentationProcessStartEndFlag(_process);
-            yield return runningPresentationProcess;
-        }
-
-        private IEnumerator combineTwoIenumerator(IEnumerator a1, IEnumerator a2)
-        {
-            yield return a1;
-            yield return a2;
-            yield break;
-        }
-
+        
+        
         void Start()
         {
             //_stagesManager.loadAndRefresh();
             Time.timeScale = 1;
-            this.triggerMainProcess(StartUpProcess());
+            mainProcessRunner.triggerMainProcess(StartUpProcess());
         }
 
         // 这个应该是和热更新进程完全分开了。
@@ -348,7 +268,7 @@ namespace mainMenu
         {
             if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
             {
-                triggerMainProcess(AccountCharsSet.Instance.localSaveDataGetAllCharacters(Application.persistentDataPath + "/" + "myownedCharsJson.json"));
+                mainProcessRunner.triggerMainProcess(AccountCharsSet.Instance.localSaveDataGetAllCharacters(Application.persistentDataPath + "/" + "myownedCharsJson.json"));
             }
             if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
             {
@@ -368,7 +288,7 @@ namespace mainMenu
                     }
                     MySkillStonesReader.Instance.overrideMySkillStoneInfosOnLocalFile(mystones);
                 };
-                triggerMainProcess(getAllStones());
+                mainProcessRunner.triggerMainProcess(getAllStones());
             }
         }
     }

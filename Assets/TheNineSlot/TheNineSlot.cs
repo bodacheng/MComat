@@ -17,6 +17,10 @@ namespace mainMenu
         public preparingScene _preparingScene;
 
         [Space(5)]
+        [Header("进程器")]
+        public SingleThreadProcesser mainProcessRunner;
+
+        [Space(5)]
         [Header("几个重要RectTransform")]
         public RectTransform NineAndTwoCanvas;
         public RectTransform NineSlotT;
@@ -61,11 +65,6 @@ namespace mainMenu
         private SkillStoneSlot C1Slot, C2Slot, C3Slot;
         private List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
 
-        public void triggerMainProcess(IEnumerator _process)
-        {
-            _preparingScene.triggerMainProcess(_process);
-        }
-
         public void SlotButtonBeheviour(SkillStoneSlot skillStoneSlot)
         {
             Button button = skillStoneSlot._DragAndDropCell.gameObject.GetComponent<Button>();
@@ -81,7 +80,7 @@ namespace mainMenu
                         _skillStoneDetail.Showname.text = _stoneOnCell._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.type.text = _stoneOnCell._SkillConfigOfSkillStone.type;
                         _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SPLevel);
-                        this.triggerMainProcess(_SkillsPrintOut.skillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.keyName));
+                        mainProcessRunner.triggerMainProcess(_SkillsPrintOut.skillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.keyName));
                     }
                 };
                 button.onClick.RemoveAllListeners();

@@ -160,7 +160,7 @@ namespace mainMenu
         
         public void onTypeChangeMyMonsterBox()
         {
-            this._preparingScene.triggerMainProcess(myMonsterBox());
+            this._preparingScene.mainProcessRunner.triggerMainProcess(myMonsterBox());
         }
 
         //icon的排列，显示   
@@ -183,7 +183,7 @@ namespace mainMenu
                 UnityEngine.Events.UnityAction action1 = () =>
                 {
                     charIcon.Seletedfeature(_targetingIcon, _selectedFrame);
-                    _preparingScene.triggerMainProcess(_preparingScene.monsterIconButton(monsterOfPlayerId));
+                    _preparingScene.mainProcessRunner.triggerMainProcess(_preparingScene.monsterIconButton(monsterOfPlayerId));
                 };
                 _targetingIcon.iconButton.onClick.AddListener(action1);
                 _targetingIcon.transform.localScale = Vector3.one;

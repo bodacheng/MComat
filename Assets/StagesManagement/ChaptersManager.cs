@@ -11,6 +11,7 @@ namespace mainMenu
         [Space(7)]
         [Header("preparingScene")]
         public preparingScene _preparingScene;
+        public SingleThreadProcesser mainProcessRunner;
 
         [Space(7)]
         [Header("章节标题")]
@@ -32,7 +33,7 @@ namespace mainMenu
         public void OpenChapter1()
         {
             title.text = "第一章：蘑菇大冒险";
-            _preparingScene.triggerMainProcess(loadChapterPage(Chapter1stageIds));
+            mainProcessRunner.triggerMainProcess(loadChapterPage(Chapter1stageIds));
         }
 
         public void clearStagesButtons()
@@ -60,7 +61,7 @@ namespace mainMenu
 
                 UnityEngine.Events.UnityAction stageBUttonFeature = () =>
                 {
-                    _preparingScene.triggerMainProcess(_preparingScene._QuestPreparePage.loadStageByScriptThenGetReadyForIt(stageScriptableObject));
+                    mainProcessRunner.triggerMainProcess(_preparingScene._QuestPreparePage.loadStageByScriptThenGetReadyForIt(stageScriptableObject));
                 };
                 stageBUtton.button.onClick.AddListener(stageBUttonFeature);
                 if (stageScriptableObject.StageButtonSprite)

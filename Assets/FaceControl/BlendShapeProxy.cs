@@ -11,34 +11,6 @@ public class BlendShapeProxy : MonoBehaviour
     /// <summary>
     /// 以下参数为本模块进程控制相关
     /// </summary>
-    private IEnumerator MenuProcess;
-    private bool processEnded = false;
-    private void setProcessStartEnd(bool a)
-    {
-        processEnded = a;
-    }
-    public void triggerMainProcess(IEnumerator _process)
-    {
-        StartCoroutine(this.MainProcess(_process));
-    }
-    private IEnumerator giveProcessStartEndFlag(IEnumerator _process)
-    {
-        setProcessStartEnd(false);
-        yield return _process;
-        setProcessStartEnd(true);
-    }
-    private IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
-    {
-        if (MenuProcess != null)
-        {
-            while (!processEnded)
-            {
-                yield return null;
-            };
-        }
-        MenuProcess = giveProcessStartEndFlag(_process);
-        yield return MenuProcess;
-    }
     
     //IEnumerator SetValueGradually(BlendShapeKey blendShapeKey,float target_value,int lastframes)
     //{

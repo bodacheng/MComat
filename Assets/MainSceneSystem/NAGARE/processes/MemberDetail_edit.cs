@@ -42,7 +42,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this._preparingScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
@@ -77,8 +77,8 @@ public class MemberDetail_edit : MainSceneProcess
         yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
         UnityEngine.Events.UnityAction SkillEditConfirm = () =>
         {
-            _preparingScene.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
-            _preparingScene.triggerPresentationProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
+            _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
         };
 
         UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
@@ -87,6 +87,5 @@ public class MemberDetail_edit : MainSceneProcess
         };
         _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
-
     }
 }

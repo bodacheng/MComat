@@ -33,43 +33,9 @@ public class LoadingCanvas : MonoBehaviour {
     public RectTransform SettingRectT;
     
     //进程类
-    private IEnumerator MenuProcess;
-    private bool processEnded = false;
-    private float processTime = 0;
-    private void setProcessStartEnd(bool a)
-    {
-        processEnded = a;
-    }
-    public void triggerMainProcess(IEnumerator _process)
-    {
-        StartCoroutine(this.MainProcess(_process));
-    }
-    private IEnumerator giveProcessStartEndFlag(IEnumerator _process)
-    {
-        setProcessStartEnd(false);
-        yield return _process;
-        setProcessStartEnd(true);
-    }
-    private IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
-    {
-        if (MenuProcess != null)
-        {
-            while (!processEnded)
-            {
-                processTime += 0.01f;
-                if (processTime > 5f)
-                {
-                    Debug.Log("进程超时.");
-                    StopCoroutine(MenuProcess);
-                    break;
-                }
-                yield return null;
-            };
-        }
-        processTime = 0;
-        MenuProcess = giveProcessStartEndFlag(_process);
-        yield return MenuProcess;
-    }
+    [Space(7)]
+    [Header("主进程处理器")]
+    public SingleThreadProcesser mainProcessRunner;
     
     public void turnOnSettings()
     {
@@ -86,7 +52,7 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void OpenMailBox()
     {
-        triggerMainProcess(LoadMailBox());
+        mainProcessRunner.triggerMainProcess(LoadMailBox());
     }
 
     public void CloseMailBox()
@@ -97,7 +63,7 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void OpenMonsterBoxFilters()
     {
-        triggerMainProcess(OpenMonsterBoxFilter());
+        mainProcessRunner.triggerMainProcess(OpenMonsterBoxFilter());
     }
     
     public void CloseMonsterBoxFilters()
@@ -148,12 +114,12 @@ public class LoadingCanvas : MonoBehaviour {
 
     public void LightUp()
     {
-        triggerMainProcess(lightUpCanvas());
+        mainProcessRunner.triggerMainProcess(lightUpCanvas());
     }
 
     public void DarkOff(float darkness)
     {
-        triggerMainProcess(darkOffCanvas(darkness));
+        mainProcessRunner.triggerMainProcess(darkOffCanvas(darkness));
     }
 
     private IEnumerator lightUpCanvas()

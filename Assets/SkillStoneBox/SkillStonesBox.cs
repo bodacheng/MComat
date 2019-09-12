@@ -174,25 +174,25 @@ namespace mainMenu
         public void NormalTabFeature()
         {
             this.focusingExType = 0;
-            this._TheNineSlot.triggerMainProcess(arrangeSkillStonesToBox());
+            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void EX1TabFeature()
         {
             this.focusingExType = 1;
-            this._TheNineSlot.triggerMainProcess(arrangeSkillStonesToBox());
+            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void EX2TabFeature()
         {
             this.focusingExType = 2;
-            this._TheNineSlot.triggerMainProcess(arrangeSkillStonesToBox());
+            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void EX3TabFeature()
         {
             this.focusingExType = 3;
-            this._TheNineSlot.triggerMainProcess(arrangeSkillStonesToBox());
+            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
@@ -232,13 +232,13 @@ namespace mainMenu
 
         void rangeCheckBoxOnValueChanged()
         {
-            _TheNineSlot.triggerMainProcess(arrangeSkillStonesToBox());
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void typeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            _TheNineSlot.triggerMainProcess(EXTabsFeatureRefresh(targetType, true));
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(EXTabsFeatureRefresh(targetType, true));
         }
 
         // 围绕这个环节的一个问题是玩家账户中格子数量的问题。

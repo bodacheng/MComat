@@ -20,7 +20,7 @@ public class FightSummaryProcess : NagareProcess
     public override void ProcessEnter()
     {
         enternext = false;
-        this._NetFightScene.triggerMainProcess(fightOverControl.showRewards(999,999,new System.Collections.Generic.List<int>()));
+        this.mainProcessRunner.triggerMainProcess(fightOverControl.showRewards(999,999,new System.Collections.Generic.List<int>()));
     }
     
     public override void ProcessEnd()

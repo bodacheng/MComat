@@ -22,13 +22,13 @@ public class PreparingProcess : NagareProcess
             case SceneMode.MyPetsFight:
                 if (FightSceneNote.Instance.nextBattle != null)
                 {
-                    _NetFightScene.triggerMainProcess(_NetFightScene.loadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+                    mainProcessRunner.triggerMainProcess(_NetFightScene.loadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
                 }
             break;
             case SceneMode.QuestFight:
                 if (FightSceneNote.Instance.nextBattle != null)
                 {
-                    _NetFightScene.triggerMainProcess(_NetFightScene.loadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+                    mainProcessRunner.triggerMainProcess(_NetFightScene.loadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
                 }
             break;
         }
@@ -43,7 +43,7 @@ public class PreparingProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        this._NetFightScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

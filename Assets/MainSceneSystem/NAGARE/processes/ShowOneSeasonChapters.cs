@@ -32,7 +32,7 @@ public class ShowOneSeasonChapters : MainSceneProcess
     public override void ProcessEnter()
     {
         Debug.Log("ChaptersOfOneSeason " + this._preparingScene._ReturnButtonManager.returnMissionList.Count);
-        this._preparingScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

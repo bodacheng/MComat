@@ -19,12 +19,14 @@ public abstract class NagareProcess
     public LoadingCanvas loadingCanvas;
     public FightLogger fightLogger;
     public FightOverControl fightOverControl;
+    public SingleThreadProcesser mainProcessRunner;
     
     public void EelementsInherit(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
         this.fightSceneProcessesRunner = fightSceneProcessesRunner;
         this._NetFightScene = _NetFightScene;
         this._RealTimeGameProcessManager = _NetFightScene._RealTimeGameProcessManager;
+        this.mainProcessRunner = _NetFightScene.mainProcessRunner;
         this.mobileInputsManager = this._RealTimeGameProcessManager._mobileInputsManager;
         this.CharsManager = this._NetFightScene._CharSetManager;
         this.cameraManager = this._RealTimeGameProcessManager._CameraManager;

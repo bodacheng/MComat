@@ -11,6 +11,10 @@ namespace mainMenu
         [Space(11)]
         [Header("modelShower")]
         public modelShower _modelShower;
+        
+        [Space(7)]
+        [Header("美术进程处理器")]
+        public SingleThreadProcesser presentationProcessRunner;
 
         [Space(11)]
         [Header("角色明细T，技能显示T")]
@@ -73,7 +77,7 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             UnityEngine.Events.UnityAction step2INI = () =>
             {
-                _preparingScene.triggerMainProcess(step2INIForUIRefresh(focusingCharacterDataInfo));
+                _preparingScene.mainProcessRunner.triggerMainProcess(step2INIForUIRefresh(focusingCharacterDataInfo));
             };
             UnityEngine.Events.UnityAction SkillShow = () =>
             {
@@ -116,7 +120,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            _preparingScene.triggerPresentationProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo)));
+            presentationProcessRunner.triggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo)));
         }
 
         public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharacterDataInfo _focusingCharacterDataInfo)

@@ -79,14 +79,14 @@ public class BasicTryProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        this._NetFightScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
     {
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        _NetFightScene.triggerMainProcess(finalMoment(finalSurviver, loser));
+        mainProcessRunner.triggerMainProcess(finalMoment(finalSurviver, loser));
     }
     
     public override void localUpdate()

@@ -53,7 +53,7 @@ public class TryEditALines : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this._preparingScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
@@ -88,8 +88,8 @@ public class TryEditALines : MainSceneProcess
         yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
         UnityEngine.Events.UnityAction SkillEditConfirm = () =>//这里可能还有一个执行内容，就是进入到测试战斗场景。
         {
-            _preparingScene.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
-            _preparingScene.triggerPresentationProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
             StageScriptableObject stage = new StageScriptableObject();
             stage.battleNameCH = "亚当大战傻逼门卫";
             if (this.TuroialFight != null)

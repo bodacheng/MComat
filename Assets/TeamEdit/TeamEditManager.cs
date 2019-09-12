@@ -112,7 +112,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return _preparingScene._MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             };
-            _preparingScene.triggerMainProcess(setPosB ());
+            _preparingScene.mainProcessRunner.triggerMainProcess(setPosB ());
         };
         team1back.iconButton.onClick.AddListener(pos1B);
 
@@ -126,7 +126,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return _preparingScene._MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.triggerMainProcess(setPosL());
+            _preparingScene.mainProcessRunner.triggerMainProcess(setPosL());
         };
         team1left.iconButton.onClick.AddListener(pos1L);
 
@@ -140,7 +140,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return _preparingScene._MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.triggerMainProcess(setPosF());
+            _preparingScene.mainProcessRunner.triggerMainProcess(setPosF());
         };
         team1front.iconButton.onClick.AddListener(pos1F);
 
@@ -154,7 +154,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return _preparingScene._MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.triggerMainProcess(setPosR());
+            _preparingScene.mainProcessRunner.triggerMainProcess(setPosR());
         };
         team1right.iconButton.onClick.AddListener(pos1R);
         yield break;

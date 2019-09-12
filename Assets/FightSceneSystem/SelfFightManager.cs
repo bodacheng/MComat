@@ -259,7 +259,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             UnityEngine.Events.UnityAction AskStartFight = () =>
             {
-                _preparingScene.triggerMainProcess(FightStart());
+                _preparingScene.mainProcessRunner.triggerMainProcess(FightStart());
             };
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

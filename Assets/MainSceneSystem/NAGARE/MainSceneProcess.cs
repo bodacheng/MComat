@@ -13,6 +13,7 @@ namespace mainMenu
         public MainSceneStep nextProcessStep = MainSceneStep.none;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
         public preparingScene _preparingScene;
+        public SingleThreadProcesser mainProcessRunner;
         public MemberDetail _MemberDetail;
         public modelShower _modelShower;
         public MonsterBox _MonsterBox;
@@ -45,6 +46,7 @@ namespace mainMenu
             _ChaptersManager = _preparingScene._ChaptersManager;
             _TeamEditManager = _preparingScene._TeamEditManager;
             _gotchaManager = _preparingScene._gotchaManager;
+            mainProcessRunner = _preparingScene.mainProcessRunner;
         }
 
         public virtual void ProcessEnter()

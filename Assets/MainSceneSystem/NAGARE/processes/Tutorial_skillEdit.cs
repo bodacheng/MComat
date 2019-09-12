@@ -44,7 +44,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this._preparingScene.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

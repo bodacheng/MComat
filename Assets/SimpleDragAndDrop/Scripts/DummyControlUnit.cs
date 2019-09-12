@@ -33,7 +33,7 @@ public class DummyControlUnit : MonoBehaviour
                         yield return TheNineSlot._TheNineSlot.SeliWholeNineAndTwo();
                         //yield return MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox();
                     };
-                    TheNineSlot._TheNineSlot.triggerMainProcess(process());
+                    TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(process());
                     //  上面的这行SeliWholeNineAndTwo还有一个相当大的重点在于处理了石头上面的inbox参数
                     //这里有个巨大疑问。为什么skillStoneIDs的获取有问题而这里就没问题？
                 }
