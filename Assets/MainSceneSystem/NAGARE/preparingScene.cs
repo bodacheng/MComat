@@ -98,8 +98,7 @@ namespace mainMenu
         public RectTransform SelfFightUIT;
         
         public ProcessesRunner processesRunner;
-        
-        
+                
         void Start()
         {
             //_stagesManager.loadAndRefresh();

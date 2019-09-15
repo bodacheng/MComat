@@ -13,55 +13,112 @@ namespace mainMenu
 
         public Transform selfFightUI;
         public Button FightStartBUtton;
+
+        public Transform MuitiRaidModeIconsT;
         public charIcon team1back, team1front, team1left, team1right;
         public charIcon team2back, team2front, team2left, team2right;
+        
+        public Transform RotationModeIconsT;
+        public charIcon team11_R, team12_R, team13_R;
+        public charIcon team21_R, team22_R, team23_R;
 
         public QuestPreparePage _QuestPreparePage;
 
-        private IDictionary<int, charIcon> team1ButtonDic = new Dictionary<int, charIcon>();
-        private IDictionary<int, charIcon> team2ButtonDic = new Dictionary<int, charIcon>();
+        private IDictionary<int, charIcon> team1ButtonDic_M = new Dictionary<int, charIcon>();
+        private IDictionary<int, charIcon> team2ButtonDic_M = new Dictionary<int, charIcon>();
+        
+        private IDictionary<int, charIcon> team1ButtonDic_R = new Dictionary<int, charIcon>();
+        private IDictionary<int, charIcon> team2ButtonDic_R = new Dictionary<int, charIcon>();
 
         private LocalFight _selfFight;
+        private StageScriptableObject stage;
 
         private Team focusingTeam; //team1或者是team2
         private int focusingPosition; // 0到3
         private charIcon focusingPosButton;
 
-        private positionLocalCharKeySet _team1positionLocalCharKeySet = new positionLocalCharKeySet();
-        private positionLocalCharKeySet _team2positionLocalCharKeySet = new positionLocalCharKeySet();
+        private positionLocalCharKeySet _team1positionLocalCharKeySet_M = new positionLocalCharKeySet();
+        private positionLocalCharKeySet _team2positionLocalCharKeySet_M = new positionLocalCharKeySet();
+        
+        private positionLocalCharKeySet _team1positionLocalCharKeySet_R = new positionLocalCharKeySet();
+        private positionLocalCharKeySet _team2positionLocalCharKeySet_R = new positionLocalCharKeySet();
+
+        private void Awake()
+        {
+            stage = new StageScriptableObject();
+        }
 
         public void clear()
         {
-            foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic)
+            foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_M)
             {
                 keyValuePair.Value.changeIcon(null, zokusei.Null);
             }
-            foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic)
+            foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_M)
             {
                 keyValuePair.Value.changeIcon(null, zokusei.Null);
             }
-            _team1positionLocalCharKeySet = new positionLocalCharKeySet();
-            _team2positionLocalCharKeySet = new positionLocalCharKeySet();
+            foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_R)
+            {
+                keyValuePair.Value.changeIcon(null, zokusei.Null);
+            }
+            foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_R)
+            {
+                keyValuePair.Value.changeIcon(null, zokusei.Null);
+            }
+            _team1positionLocalCharKeySet_M = new positionLocalCharKeySet();
+            _team2positionLocalCharKeySet_M = new positionLocalCharKeySet();
+            _team1positionLocalCharKeySet_R = new positionLocalCharKeySet();
+            _team2positionLocalCharKeySet_R = new positionLocalCharKeySet();
+        }
+        
+        public void switchToMultiRaidMode()
+        {
+            MuitiRaidModeIconsT.gameObject.SetActive(true);
+            RotationModeIconsT.gameObject.SetActive(false);
+            stage.fightModeType = fightModeType.combat;
+            stage._fightEventType = fightEventType.Self;
+            stage.Team1Mode = TeamMode.multiraid;
+            stage.Team2Mode = TeamMode.multiraid;
+        }
+        
+        public void switchToRotationMode()
+        {
+            RotationModeIconsT.gameObject.SetActive(true);
+            MuitiRaidModeIconsT.gameObject.SetActive(false);
+            stage.fightModeType = fightModeType.combat;
+            stage._fightEventType = fightEventType.Self;
+            stage.Team1Mode = TeamMode.rotation;
+            stage.Team2Mode = TeamMode.rotation;
         }
 
         public IEnumerator FightStart()
         {
             _preparingScene._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
-            IEnumerator enumerator1 = _team1positionLocalCharKeySet.convertToMultiDictionary();
-            yield return enumerator1;
-            _selfFight.HeroSets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator1.Current;
             
-            IEnumerator enumerator2 = _team2positionLocalCharKeySet.convertToMultiDictionary();
-            yield return enumerator2;
-            _selfFight.EnemySets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator2.Current;
+            switch (stage.Team1Mode)
+            {
+                case TeamMode.multiraid:
+                    IEnumerator enumerator1 = _team1positionLocalCharKeySet_M.convertToMultiDictionary();
+                    yield return enumerator1;
+                    _selfFight.HeroSets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator1.Current;
+                    IEnumerator enumerator2 = _team2positionLocalCharKeySet_M.convertToMultiDictionary();
+                    yield return enumerator2;
+                    _selfFight.EnemySets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator2.Current;
+                    break;
+                case TeamMode.rotation:
+                    IEnumerator enumerator3 = _team1positionLocalCharKeySet_R.convertToMultiDictionary();
+                    yield return enumerator3;
+                    _selfFight.HeroSets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator3.Current;
+                    IEnumerator enumerator4 = _team2positionLocalCharKeySet_R.convertToMultiDictionary();
+                    yield return enumerator4;
+                    _selfFight.EnemySets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator4.Current;
+                    break;
+            }
             
-            StageScriptableObject stage = new StageScriptableObject();
             stage.BattleGroundID = 2;
             stage.localFight = _selfFight;
-            stage.fightModeType = fightModeType.combat;
-            stage._fightEventType = fightEventType.Self;
-            stage.Team1Mode = TeamMode.multiraid;
-            stage.Team2Mode = TeamMode.multiraid;
+            
             yield return _QuestPreparePage.getReadyToBattle(stage, SceneMode.MyPetsFight);
             yield break;
         }
@@ -78,18 +135,38 @@ namespace mainMenu
                 Debug.Log("角色存档问题。localid：" + localID);
                 yield break;
             }
-            switch (this.focusingTeam)
+            
+            switch (stage.Team1Mode)
             {
-                case Team.player1:
-                    _team1positionLocalCharKeySet.setPosMemInfoByLocalID((PosNum)this.focusingPosition,localID);
-                    yield return changeIconOnPos((PosNum)this.focusingPosition,team1ButtonDic,_team1positionLocalCharKeySet);
+                case TeamMode.multiraid:
+                    switch (this.focusingTeam)
+                    {
+                        case Team.player1:
+                            _team1positionLocalCharKeySet_M.setPosMemInfoByLocalID((PosNum)this.focusingPosition,localID);
+                            yield return changeIconOnPos((PosNum)this.focusingPosition,team1ButtonDic_M,_team1positionLocalCharKeySet_M);
+                            break;
+                        case Team.player2:
+                            _team2positionLocalCharKeySet_M.setPosMemInfoByLocalID((PosNum)this.focusingPosition,localID);
+                            yield return changeIconOnPos((PosNum)this.focusingPosition,team2ButtonDic_M,_team2positionLocalCharKeySet_M);
+                            break;
+                    }
                     break;
-                case Team.player2:
-                    _team2positionLocalCharKeySet.setPosMemInfoByLocalID((PosNum)this.focusingPosition,localID);
-                    yield return changeIconOnPos((PosNum)this.focusingPosition,team2ButtonDic,_team2positionLocalCharKeySet);
+                case TeamMode.rotation:
+                    switch (this.focusingTeam)
+                    {
+                        case Team.player1:
+                            _team1positionLocalCharKeySet_R.setPosMemInfoByLocalID((PosNum)this.focusingPosition,localID);
+                            yield return changeIconOnPos((PosNum)this.focusingPosition,team1ButtonDic_R,_team1positionLocalCharKeySet_R);
+                            break;
+                        case Team.player2:
+                            _team2positionLocalCharKeySet_R.setPosMemInfoByLocalID((PosNum)this.focusingPosition,localID);
+                            yield return changeIconOnPos((PosNum)this.focusingPosition,team2ButtonDic_R,_team2positionLocalCharKeySet_R);
+                            break;
+                    }
                     break;
             }
             yield break;
+            
             //以下为防重复版本选人。
             //switch (this.focusingTeam)
             //{
@@ -175,18 +252,18 @@ namespace mainMenu
             _selfFight = new LocalFight();
             _selfFight.BattleGroundID = 2;
 
-            team1ButtonDic.Clear();
-            team2ButtonDic.Clear();
+            team1ButtonDic_M.Clear();
+            team2ButtonDic_M.Clear();
 
-            team1ButtonDic.Add(0, team1back);
-            team1ButtonDic.Add(1, team1left);
-            team1ButtonDic.Add(2, team1front);
-            team1ButtonDic.Add(3, team1right);
+            team1ButtonDic_M.Add(0, team1back);
+            team1ButtonDic_M.Add(1, team1left);
+            team1ButtonDic_M.Add(2, team1front);
+            team1ButtonDic_M.Add(3, team1right);
 
-            team2ButtonDic.Add(0, team2back);
-            team2ButtonDic.Add(1, team2left);
-            team2ButtonDic.Add(2, team2front);
-            team2ButtonDic.Add(3, team2right);
+            team2ButtonDic_M.Add(0, team2back);
+            team2ButtonDic_M.Add(1, team2left);
+            team2ButtonDic_M.Add(2, team2front);
+            team2ButtonDic_M.Add(3, team2right);
 
             team1back.changeIcon(null, zokusei.Null);
             team1left.changeIcon(null, zokusei.Null);
@@ -226,8 +303,6 @@ namespace mainMenu
             };
             team1right.iconButton.onClick.AddListener(pos1R);
 
-            ////////////////////////////////////////////
-
             team2back.iconButton.onClick.RemoveAllListeners();
             UnityEngine.Events.UnityAction pos2B = () =>
             {
@@ -255,7 +330,66 @@ namespace mainMenu
                 OneTeamPosButtonBehaviour(Team.player2, 3);
             };
             team2right.iconButton.onClick.AddListener(pos2R);
+            
+            /////////////////////
+            
+            team1ButtonDic_R.Clear();
+            team2ButtonDic_R.Clear();
 
+            team1ButtonDic_R.Add(0, team11_R);
+            team1ButtonDic_R.Add(1, team12_R);
+            team1ButtonDic_R.Add(2, team13_R);
+
+            team2ButtonDic_R.Add(0, team21_R);
+            team2ButtonDic_R.Add(1, team22_R);
+            team2ButtonDic_R.Add(2, team23_R);
+  
+            team11_R.changeIcon(null, zokusei.Null);
+            team12_R.changeIcon(null, zokusei.Null);
+            team13_R.changeIcon(null, zokusei.Null);
+
+            team21_R.changeIcon(null, zokusei.Null);
+            team22_R.changeIcon(null, zokusei.Null);
+            team23_R.changeIcon(null, zokusei.Null);
+
+            team11_R.iconButton.onClick.RemoveAllListeners();
+            UnityEngine.Events.UnityAction pos11 = () =>
+            {
+                OneTeamPosButtonBehaviour(Team.player1, 0);
+            };
+            team11_R.iconButton.onClick.AddListener(pos11);
+            team12_R.iconButton.onClick.RemoveAllListeners();
+            UnityEngine.Events.UnityAction pos12 = () =>
+            {
+                OneTeamPosButtonBehaviour(Team.player1, 1);
+            };
+            team12_R.iconButton.onClick.AddListener(pos12);
+            team13_R.iconButton.onClick.RemoveAllListeners();
+            UnityEngine.Events.UnityAction pos13 = () =>
+            {
+                OneTeamPosButtonBehaviour(Team.player1, 2);
+            };
+            team13_R.iconButton.onClick.AddListener(pos13);
+
+            team21_R.iconButton.onClick.RemoveAllListeners();
+            UnityEngine.Events.UnityAction pos21 = () =>
+            {
+                OneTeamPosButtonBehaviour(Team.player2, 0);
+            };
+            team21_R.iconButton.onClick.AddListener(pos21);
+            team22_R.iconButton.onClick.RemoveAllListeners();
+            UnityEngine.Events.UnityAction pos22 = () =>
+            {
+                OneTeamPosButtonBehaviour(Team.player2, 1);
+            };
+            team22_R.iconButton.onClick.AddListener(pos22);
+            team23_R.iconButton.onClick.RemoveAllListeners();
+            UnityEngine.Events.UnityAction pos23 = () =>
+            {
+                OneTeamPosButtonBehaviour(Team.player2, 2);
+            };
+            team23_R.iconButton.onClick.AddListener(pos23);
+            
             FightStartBUtton.onClick.RemoveAllListeners();
             UnityEngine.Events.UnityAction AskStartFight = () =>
             {

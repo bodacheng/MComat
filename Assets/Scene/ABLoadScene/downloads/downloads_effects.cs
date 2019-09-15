@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class AssetBundleLoader : MonoBehaviour
+public partial class ResourceLordSceneStarter : MonoBehaviour
 {
     private IEnumerator EffectsDownLoadByCach()
     {

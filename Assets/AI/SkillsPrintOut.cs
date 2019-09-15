@@ -53,8 +53,13 @@ namespace mainMenu
         {
             SkillsPrintOutLateUpdate();
         }
-
-        public bool showingSkill = false;
+        
+        private bool showingSkill = false;
+        public bool ifShowingSkill()
+        {
+            return showingSkill;
+        }
+       
         public void SkillsPrintOutLateUpdate()
         {
             if (focusingCharacterData != null)
@@ -196,7 +201,7 @@ namespace mainMenu
                     case ResourceLoadMode.CachAB:
                         yield return
                             this.focusingCharacterData.Animation_Manger.preloadPersonalAnim
-                            (AssetBundleLoader.BundleURL, _watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                            (ResourceLordSceneStarter.BundleURL, _watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.StreamingAssetAB:
                         yield return

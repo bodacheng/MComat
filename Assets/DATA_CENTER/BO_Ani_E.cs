@@ -104,9 +104,9 @@ public class BO_Ani_E : MonoBehaviour
         {
             case ResourceLoadMode.CachAB:
                 if (this.myMagicForwardPath != null)
-                    yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(AssetBundleLoader.BundleURL,this.myMagicForwardPath));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(AssetBundleLoader.BundleURL + "/Magics", defaultMagicForwardPath));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(AssetBundleLoader.BundleURL + "/Magics","defaultmagic"));
+                    yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL,this.myMagicForwardPath));
+                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", defaultMagicForwardPath));
+                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics","defaultmagic"));
             break;
             case ResourceLoadMode.Resource:
 

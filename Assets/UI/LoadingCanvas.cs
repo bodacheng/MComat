@@ -19,72 +19,12 @@ public class LoadingCanvas : MonoBehaviour {
     public Text ValidationIntro;
     public Button YesButton;
     public Button NoButton;
-
-    [Space(11)]
-    [Header("Mails")]
-    public RectTransform MailWindow;
-    
-    [Space(11)]
-    [Header("monsterboxfilter")]
-    public RectTransform monsterboxfilter;
-    
-    [Space(11)]
-    [Header("Settings")]
-    public RectTransform SettingRectT;
     
     //进程类
     [Space(7)]
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
     
-    public void turnOnSettings()
-    {
-        DarkOff(0.5f);
-        SettingRectT.transform.SetSiblingIndex(4);
-        SettingRectT.gameObject.SetActive(true);
-    }
-    
-    public void turnOffSettings()
-    {
-        LightUp();
-        SettingRectT.gameObject.SetActive(false);
-    }
-    
-    public void OpenMailBox()
-    {
-        mainProcessRunner.triggerMainProcess(LoadMailBox());
-    }
-
-    public void CloseMailBox()
-    {
-        this.MailWindow.gameObject.SetActive(false);
-        LightUp();
-    }
-    
-    public void OpenMonsterBoxFilters()
-    {
-        mainProcessRunner.triggerMainProcess(OpenMonsterBoxFilter());
-    }
-    
-    public void CloseMonsterBoxFilters()
-    {
-        this.monsterboxfilter.gameObject.SetActive(false);
-        LightUp();
-    }
-    
-    private IEnumerator OpenMonsterBoxFilter()
-    {
-        monsterboxfilter.gameObject.SetActive(true);
-        yield return darkOffCanvas(0.5f);
-    }
-
-    private IEnumerator LoadMailBox()//实际读取邮件应该也是这个函数内部？
-    {
-        MailWindow.gameObject.SetActive(true);
-        MailWindow.transform.SetSiblingIndex(4);
-        yield return darkOffCanvas(0.5f);
-    }
-
     public void nowProcess(string desription,float percent)
     {
         this.processingDescrition.text = desription;

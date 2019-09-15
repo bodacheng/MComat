@@ -137,52 +137,6 @@ namespace mainMenu
             }
         }
 
-        //这个函数有这样的风险：如果你角色由这个函数正在调整位置的过程中step忽然间变了，那角色会停留在途中。而且风险可能不止这些。
-        //说到底这个东西无非是为了确保四个角色在画面的上下左右四边，这不是必要的，只是我们所设计的一个外观小花样，而且这么正的排布这些角色其实只有在队伍编辑模式才有些意义。
-        private Vector3 rotateTo;
-        public void showModelPositionAdjusting()
-        {
-            Member0StandPoint.position = Vector3.Lerp(Member0StandPoint.position, caculateShowModelPosition(new Vector3(0.5f, 0.7f, 10)), 2 * Time.deltaTime);//后
-            rotateTo = _CameraManager.transform.position - Member0StandPoint.position;
-            //rotateTo.y = 0;
-            Member0StandPoint.transform.rotation = Quaternion.Lerp(Member0StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
-            foreach (Transform child in Member0StandPoint.transform)
-            {
-                child.localPosition = Vector3.zero;
-                child.localRotation = Quaternion.identity;
-            }
-
-            Member1StandPoint.position = Vector3.Lerp(Member1StandPoint.position, caculateShowModelPosition(new Vector3(0.8f, 0.45f, 10)), 2 * Time.deltaTime);//左
-            rotateTo = _CameraManager.transform.position - Member1StandPoint.position;
-            //rotateTo.y = 0;
-            Member1StandPoint.transform.rotation = Quaternion.Lerp(Member1StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
-            foreach (Transform child in Member1StandPoint.transform)
-            {
-                child.localPosition = Vector3.zero;
-                child.localRotation = Quaternion.identity;
-            }
-
-            Member2StandPoint.position = Vector3.Lerp(Member2StandPoint.position, caculateShowModelPosition(new Vector3(0.5f, 0.3f, 10)), 2 * Time.deltaTime);//前
-            rotateTo = _CameraManager.transform.position - Member2StandPoint.position;
-            //rotateTo.y = 0;
-            Member2StandPoint.transform.rotation = Quaternion.Lerp(Member2StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
-            foreach (Transform child in Member2StandPoint.transform)
-            {
-                child.localPosition = Vector3.zero;
-                child.localRotation = Quaternion.identity;
-            }
-
-            Member3StandPoint.position = Vector3.Lerp(Member3StandPoint.position, caculateShowModelPosition(new Vector3(0.2f, 0.45f, 10)), 2 * Time.deltaTime);//右
-            rotateTo = _CameraManager.transform.position - Member3StandPoint.position;
-            //rotateTo.y = 0;
-            Member3StandPoint.transform.rotation = Quaternion.Lerp(Member3StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
-            foreach (Transform child in Member3StandPoint.transform)
-            {
-                child.localPosition = Vector3.zero;
-                child.localRotation = Quaternion.identity;
-            }
-        }
-
         private Vector3 tempV;
         public Vector3 caculateShowModelPosition(Vector3 screenP)
         {
@@ -290,6 +244,52 @@ namespace mainMenu
             arrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.getPositionMonsterOfPlayerId(PosNum.left), PosNum.left);
             arrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.getPositionMonsterOfPlayerId(PosNum.front), PosNum.front);
             arrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.getPositionMonsterOfPlayerId(PosNum.right), PosNum.right);
+        }
+        
+        //这个函数有这样的风险：如果你角色由这个函数正在调整位置的过程中step忽然间变了，那角色会停留在途中。而且风险可能不止这些。
+        //说到底这个东西无非是为了确保四个角色在画面的上下左右四边，这不是必要的，只是我们所设计的一个外观小花样，而且这么正的排布这些角色其实只有在队伍编辑模式才有些意义。
+        private Vector3 rotateTo;
+        public void showModelPositionAdjusting()
+        {
+            Member0StandPoint.position = Vector3.Lerp(Member0StandPoint.position, caculateShowModelPosition(new Vector3(0.5f, 0.7f, 10)), 2 * Time.deltaTime);//后
+            rotateTo = _CameraManager.transform.position - Member0StandPoint.position;
+            //rotateTo.y = 0;
+            Member0StandPoint.transform.rotation = Quaternion.Lerp(Member0StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
+            foreach (Transform child in Member0StandPoint.transform)
+            {
+                child.localPosition = Vector3.zero;
+                child.localRotation = Quaternion.identity;
+            }
+
+            Member1StandPoint.position = Vector3.Lerp(Member1StandPoint.position, caculateShowModelPosition(new Vector3(0.8f, 0.45f, 10)), 2 * Time.deltaTime);//左
+            rotateTo = _CameraManager.transform.position - Member1StandPoint.position;
+            //rotateTo.y = 0;
+            Member1StandPoint.transform.rotation = Quaternion.Lerp(Member1StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
+            foreach (Transform child in Member1StandPoint.transform)
+            {
+                child.localPosition = Vector3.zero;
+                child.localRotation = Quaternion.identity;
+            }
+
+            Member2StandPoint.position = Vector3.Lerp(Member2StandPoint.position, caculateShowModelPosition(new Vector3(0.5f, 0.3f, 10)), 2 * Time.deltaTime);//前
+            rotateTo = _CameraManager.transform.position - Member2StandPoint.position;
+            //rotateTo.y = 0;
+            Member2StandPoint.transform.rotation = Quaternion.Lerp(Member2StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
+            foreach (Transform child in Member2StandPoint.transform)
+            {
+                child.localPosition = Vector3.zero;
+                child.localRotation = Quaternion.identity;
+            }
+
+            Member3StandPoint.position = Vector3.Lerp(Member3StandPoint.position, caculateShowModelPosition(new Vector3(0.2f, 0.45f, 10)), 2 * Time.deltaTime);//右
+            rotateTo = _CameraManager.transform.position - Member3StandPoint.position;
+            //rotateTo.y = 0;
+            Member3StandPoint.transform.rotation = Quaternion.Lerp(Member3StandPoint.transform.rotation, Quaternion.LookRotation(rotateTo), 2 * Time.deltaTime);
+            foreach (Transform child in Member3StandPoint.transform)
+            {
+                child.localPosition = Vector3.zero;
+                child.localRotation = Quaternion.identity;
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ public class TrySkillShowMenu : MainSceneProcess
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void localUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.showingSkill)
+        if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
         {
             this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }

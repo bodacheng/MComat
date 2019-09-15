@@ -29,11 +29,11 @@ public class StageScriptableObject : ScriptableObject
 
     public LocalFight localFight;
     
-    public fightModeType fightModeType;
-    public fightEventType _fightEventType;
+    public fightModeType fightModeType = fightModeType.combat;
+    public fightEventType _fightEventType = fightEventType.Arena;
 
-    public TeamMode Team1Mode;
-    public TeamMode Team2Mode;
+    public TeamMode Team1Mode = TeamMode.multiraid;
+    public TeamMode Team2Mode = TeamMode.multiraid;
 
 #if UNITY_EDITOR
     [MenuItem ("Stage/Create StageScriptEditor")]

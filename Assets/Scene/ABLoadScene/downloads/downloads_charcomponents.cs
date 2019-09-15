@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class AssetBundleLoader : MonoBehaviour
+public partial class ResourceLordSceneStarter : MonoBehaviour
 {
     private IEnumerator characterComponentsDownload()
     {
@@ -19,13 +19,13 @@ public partial class AssetBundleLoader : MonoBehaviour
             
             //底下这一套有一个特别关键的逻辑：它在通过是不是有对应动画包的key来判断到底这个包的动画有没有load到内存。
             if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts"))
-                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL+ "/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
+                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL+ "/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
                                                                                 keyValuePair.Key + "/basic_hurts",
                                                                                 "basic_hurts"));
                 
                 
             if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_knockoffs"))
-                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(AssetBundleLoader.BundleURL +"/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
+                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL +"/animClips/"+ keyValuePair.Key + "/hurtAndKnockOff", 
                                                                                 keyValuePair.Key + "/basic_knockoffs",
                                                                                 "basic_knockoffs"));
             //上面这些就是说什么呢。。各个type的伤害动作包和基础动作包就不放进DownLoadMissionDic进行之后的集中下载了。上面的函数已经执行下载处理了。
@@ -38,7 +38,7 @@ public partial class AssetBundleLoader : MonoBehaviour
             if (_RuntimeAnimatorController == null)
             {
                 IEnumerator _loadingProcess = AnimationResourceLoader.Instance.
-                LoadAnimatorFromCache(AssetBundleLoader.BundleURL + "/animClips/"+ keyValuePair.Key + "/animator", keyValuePair.Key, "generic_controller");
+                LoadAnimatorFromCache(ResourceLordSceneStarter.BundleURL + "/animClips/"+ keyValuePair.Key + "/animator", keyValuePair.Key, "generic_controller");
                 yield return _loadingProcess;
             }
         }

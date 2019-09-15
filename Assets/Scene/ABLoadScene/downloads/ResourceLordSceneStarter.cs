@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using dataAccess;
 
 // AssetBundle cache checker & loader with caching
@@ -34,70 +33,32 @@ public class CachDownLoadMission
     }
 }
 
-public partial class AssetBundleLoader : MonoBehaviour
+public partial class ResourceLordSceneStarter : MonoBehaviour
 {
-    [Header("资源读取设置")]
-    public ResourceSetting _ResourceSetting;
-    public ConfigFileManager _ConfigFileManager;
-    
     [Space(7)]
     [Header("LoadingProcess")]
     public LoadingCanvas _LoadingCanvas;
-    
+
+    [Header("资源读取设置")]
+    public ResourceSetting _ResourceSetting;
+    public ConfigFileManager _ConfigFileManager;
+        
     [Space(7)]
     [Header("assetBundleURL。根据服务器可能有变化")]
     public string assetBundleURL = "http://18.218.70.129/ios";
     public static string BundleURL = "http://18.218.70.129/ios";
-
-    [Space(7)]
-    [Header("开发公司商标")]
-    public Image logo;
-    public Image bigPic;
     
-
+    public bool dProcessFinished = false;    
     private IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
     private IDictionary<string, List<string>> characterTypeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是type，值是所有基础动画包的名字
     private CachDownLoadMission modelConfigFileMission;
     private CachDownLoadMission animationConfigFileMission;
-
-    private IEnumerator presentationProcess;
-    private IEnumerator resourcePreparingProcess;
-
+    
     void Start()
     {
         BundleURL = assetBundleURL;
-        resourcePreparingProcess = ResourcePrepareProcess();
-        presentationProcess = PresentationProcess();
+    }
         
-        pProcessFinished = false;
-        dProcessFinished = false;
-        
-        StartCoroutine(presentationProcess);
-        StartCoroutine(resourcePreparingProcess);
-    }
-
-    bool pProcessFinished = false;
-    bool dProcessFinished = false;
-    
-    void Update()
-    {
-        if (pProcessFinished && dProcessFinished)
-            SceneManager.LoadScene(1);
-    }
-
-    public IEnumerator PresentationProcess()
-    {
-        _LoadingCanvas.LightUp();
-        yield return new WaitForSeconds(1f);
-        _LoadingCanvas.DarkOff(1);
-        yield return new WaitForSeconds(1f);
-        logo.gameObject.SetActive(false);
-        bigPic.gameObject.SetActive(true);
-         _LoadingCanvas.LightUp();
-         pProcessFinished = true;
-        yield break;
-    }
-    
     public IEnumerator ResourcePrepareProcess()
     {
         AccountSet.Instance._playerinfoReferenceMode = _ResourceSetting._playerinfoReferenceMode;        
@@ -144,7 +105,7 @@ public partial class AssetBundleLoader : MonoBehaviour
                 break;
         }
         
-        //characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
+        // characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
         foreach (monstersConfigTable.Row row in MonsterConfigInfos._monstersConfigTable.rowList)
         {
             if (!characterTypeAndBasicMoveSets.ContainsKey(row.type))
@@ -164,13 +125,13 @@ public partial class AssetBundleLoader : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                //测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
+                // 测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
                 int i = 0;
                 foreach (string type in _ConfigFileManager.chartypes)
                 {
                     yield return AnimationResourceLoader.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
                     i++;
-                    _LoadingCanvas.nowProcess("正在加载资源",i/_ConfigFileManager.chartypes.Length);
+                    _LoadingCanvas.nowProcess("正在加载资源", i/_ConfigFileManager.chartypes.Length);
                     yield return null;
                 }
                 break;

@@ -92,7 +92,7 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         if (step == 2)
         {
-            if (this._MemberDetail._SkillsPrintOut.showingSkill)
+            if (this._MemberDetail._SkillsPrintOut.ifShowingSkill())
             {
                 step = 3;
                 this._LoadingCanvas.ClearHigtLight();
@@ -100,7 +100,7 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         if (step == 3)
         {
-            if (!this._MemberDetail._SkillsPrintOut.showingSkill)
+            if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
             {
                 step = 4;
                 this._TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(true);
