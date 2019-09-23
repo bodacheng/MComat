@@ -402,10 +402,16 @@ public class mobileInputsManager : MonoBehaviour {
     static Vector3 buttonWorldPosition;
     private static Vector3 ButtonEffectInFxCameraWorldSpace(Button button,float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
     {
-        buttonAnchorPosition = button.GetComponent<RectTransform>().anchoredPosition;
-        true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x,buttonAnchorPosition.y);
+        //buttonAnchorPosition = button.GetComponent<RectTransform>().anchoredPosition;
+        //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x,buttonAnchorPosition.y);
+        //buttonWorldPosition = s_fxCamera.ScreenToWorldPoint(true_buttonAnchorPosition);
+        //buttonWorldPosition = new Vector3(buttonWorldPosition.x,buttonWorldPosition.y,s_fxCamera.transform.position.z + z_offset);
+        //return buttonWorldPosition;
+        
+        buttonAnchorPosition = button.GetComponent<RectTransform>().transform.position;
+        true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
         buttonWorldPosition = s_fxCamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-        buttonWorldPosition = new Vector3(buttonWorldPosition.x,buttonWorldPosition.y,s_fxCamera.transform.position.z + z_offset);
+        buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, s_fxCamera.transform.position.z + z_offset);
         return buttonWorldPosition;
     }
     

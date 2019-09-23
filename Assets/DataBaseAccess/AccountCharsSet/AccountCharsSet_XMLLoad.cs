@@ -27,8 +27,7 @@ namespace dataAccess
                     info = XmlSerializer.Deserialize(FileStream) as GetMonsterOfPlayerDetailModel;
                     FileStream.Close();
                 }
-                else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer
-                    ||
+                else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer ||
                     Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
                 {
                     TextAsset xmlData = Resources.Load(Path) as TextAsset;

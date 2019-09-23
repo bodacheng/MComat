@@ -73,7 +73,7 @@ public class SkillStoneSlot
         if (_DragAndDropItem == null)
             yield break;
         _DragAndDropItem.GetComponent<Image>().color = itemColor;
-        if (_DragAndDropItem._SkillConfigOfSkillStone.SPLevel == 0)
+        if (_DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == 0)
         {
             _DragAndDropCell.GetComponent<Image>().color = new Color(0, 1, 1, 1f); //普通技能格子为黄 
         }else{

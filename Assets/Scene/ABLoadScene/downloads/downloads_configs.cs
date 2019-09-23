@@ -42,11 +42,10 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         }
         
         TextAsset CharacterConfigTextFile = (TextAsset)loadAsset.asset;
-        MonsterConfigInfos._monstersConfigTable = new monstersConfigTable();
         if (CharacterConfigTextFile != null)
         {
-            MonsterConfigInfos._monstersConfigTable.Load(CharacterConfigTextFile);
-            MonsterConfigInfos.refreshCharacterResourceInfoDic();
+            monstersConfigTable.Instance.Load(CharacterConfigTextFile);
+            monstersConfigTable.refreshCharacterResourceInfoDic();
         }
         else{
             Debug.Log("角色配置文件错误。");
@@ -54,7 +53,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         }
         
         ////////////  下面开始下载并阅读技能配置文件 ////////////
-        animationConfigFileMission = new CachDownLoadMission( "Configs","skillsconfig", 0f);
+        animationConfigFileMission = new CachDownLoadMission( "Configs","mst_skill", 0f);
         _loadingProcess = letThisloadMissionBegin(animationConfigFileMission);
         yield return _loadingProcess;
         if (!animationConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
@@ -90,8 +89,8 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
 
         if (SkillConfigTextFile != null)
         {
-            SkillsConfigInfos.skillConfigTable.Load(SkillConfigTextFile);
-            SkillsConfigInfos.refreshSkillConfigDicForReference();
+            SkillConfigTable.Instance.Load(SkillConfigTextFile);
+            SkillConfigTable.refreshSkillConfigDicForReference();
         }
         else
         {

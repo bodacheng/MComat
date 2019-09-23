@@ -41,11 +41,11 @@ namespace dataAccess
                 Debug.Log(e.ToString());
                 List<SkillStoneOfPlayerInfoModel> skillStonesForTest = new List<SkillStoneOfPlayerInfoModel>();
                 int i = 1;
-                foreach (KeyValuePair<string, SkillConfig> _keyValuePair in SkillsConfigInfos.SkillConfigDicForReference)
+                foreach (KeyValuePair<string, SkillConfig> _keyValuePair in SkillConfigTable.Instance.SkillConfigDicForReference)
                 {
                     SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel();
                     skillStoneOfPlayerInfoModel.skillStoneOfPlayerId = String.Format("{0:D20}", i);
-                    skillStoneOfPlayerInfoModel.skillId = _keyValuePair.Value.id;
+                    skillStoneOfPlayerInfoModel.skillId = _keyValuePair.Value.RECORD_ID;
                     skillStonesForTest.Add(skillStoneOfPlayerInfoModel);
                     i++;
                 }

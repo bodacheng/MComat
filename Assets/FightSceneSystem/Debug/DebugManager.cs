@@ -102,8 +102,8 @@ public class DebugManager : MonoBehaviour {
     IEnumerator startUp()
     {
         type.ClearOptions();
-        yield return MonsterConfigInfos.Instance.loadMonstersConfig();
-        List<string> typeList = MonsterConfigInfos._monstersConfigTable.getTypeList();
+        yield return monstersConfigTable.Instance.loadMonstersConfig();
+        List<string> typeList = monstersConfigTable.Instance.getTypeList();
 
         foreach (string typeName in typeList)//数据库引入后这个环节就要变化。
         {
@@ -181,11 +181,7 @@ public class DebugManager : MonoBehaviour {
                         {
                             int level = int.Parse(AIlevelNum.text);
                             level = Mathf.Clamp(level, 1, 100);
-
-                            CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos._monstersConfigTable.RowToCharacterResourceInfo(
-                                MonsterConfigInfos._monstersConfigTable.Find_realName(pretabName.text)
-                            );
-
+                            CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_REAL_NAME(pretabName.text));
                             if (_CharacterResourceInfo == null)
                             {
                                 debugAddCharUIStateReset();
@@ -250,7 +246,7 @@ public class DebugManager : MonoBehaviour {
                                                     _CharacterResourceInfo.getASampleCharacterDataInfo(localID),
                                                     AIScriptName.text,
                                                     Zokusei,
-                                                    _CharacterResourceInfo.personalMagicPack,
+                                                    _CharacterResourceInfo.SPECIAL_ZOKUSEI,
                                                     teamConfig.myTeam,
                                                     decidePlace(), Quaternion.identity
                                             ));
@@ -261,7 +257,7 @@ public class DebugManager : MonoBehaviour {
                                                     _CharacterResourceInfo.getASampleCharacterDataInfo(localID),
                                                     AIScriptName.text,
                                                     Zokusei,
-                                                    _CharacterResourceInfo.personalMagicPack,
+                                                    _CharacterResourceInfo.SPECIAL_ZOKUSEI,
                                                     teamConfig.myTeam,
                                                     decidePlace(), Quaternion.identity
                                             ));
@@ -276,7 +272,7 @@ public class DebugManager : MonoBehaviour {
                                         AIScriptsOfType.options[AIScriptsOfType.value].text,
                                         level,
                                         Zokusei,
-                                         _CharacterResourceInfo.personalMagicPack,
+                                         _CharacterResourceInfo.SPECIAL_ZOKUSEI,
                                         teamConfig,
                                         decidePlace(),
                                         Quaternion.identity
@@ -372,7 +368,7 @@ public class DebugManager : MonoBehaviour {
 
                                 CharacterDataInfo _CharacterDataInfo = new CharacterDataInfo();
                                 _CharacterDataInfo.monsterOfPlayerId = localID;
-                                _CharacterDataInfo.monsterId = charsOfType.value; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
+                                _CharacterDataInfo.monsterId = charsOfType.options[charsOfType.value].text; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
                                 _CharacterDataInfo.level = level;
                                 _CharacterDataInfo.HP = 30; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
                                 _CharacterDataInfo._NineAndTwo = null;

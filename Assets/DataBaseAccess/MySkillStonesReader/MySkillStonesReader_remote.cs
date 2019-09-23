@@ -22,8 +22,8 @@ namespace dataAccess
             List<SkillStoneOfPlayerInfoModel> infos;
             GetSkillStoneOfPlayerInfoForm form = new GetSkillStoneOfPlayerInfoForm();
             form.sessionId = AccountSet.Instance.sessionId;
-            
-            yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm> ("http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
+            yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm> 
+            ("http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
                      infos = model.data.skillStoneOfPlayerInfoList;
                      Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");

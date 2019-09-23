@@ -79,8 +79,8 @@ namespace Soul
                                                                           new State_Rate_Set[0], new string[0],
                                                                           inputs_defined.Null, inputs_defined.Null,
                                                                           0,
-                                                                          skillEmergentLevel.none,
-                                                                        0);
+                                                                          0,
+                                                                          0);
                     after_list.Add(Empty);
                     alreadyInList.Add("Empty");
                 }
@@ -94,8 +94,8 @@ namespace Soul
                                                                             new State_Rate_Set[0], new string[0],
                                                                             inputs_defined.Null, inputs_defined.Null,
                                                                             0,
-                                                                            skillEmergentLevel.none,
-                                                                           0);
+                                                                            0,
+                                                                            0);
                     after_list.Add(Victory);
                     alreadyInList.Add("Victory");
                 }
@@ -109,8 +109,8 @@ namespace Soul
                                                                           new State_Rate_Set[0], new string[0],
                                                                           inputs_defined.Null, inputs_defined.Null,
                                                                           0,
-                                                                          skillEmergentLevel.none,
-                                                                         0);
+                                                                          0,
+                                                                          0);
                     after_list.Add(Death);
                     alreadyInList.Add("Death");
                 }
@@ -125,8 +125,8 @@ namespace Soul
                                                                         (new List<string>() { "Hit", "KnockOff" }).ToArray(),
                                                                         inputs_defined.Null, inputs_defined.Null,
                                                                         0,
-                                                                        skillEmergentLevel.none,
-                                                                         0);
+                                                                        0,
+                                                                        0);
                     after_list.Add(Hit);
                     alreadyInList.Add("Hit");
                 }
@@ -140,8 +140,8 @@ namespace Soul
                                                                              new State_Rate_Set[0], (new List<string>() { "Hit", "KnockOff" }).ToArray(),
                                                                              inputs_defined.Null, inputs_defined.Null,
                                                                              0,
-                                                                            skillEmergentLevel.none,
-                                                                            0);
+                                                                             0,
+                                                                             0);
                     after_list.Add(KnockOff);
                     alreadyInList.Add("KnockOff");
                 }

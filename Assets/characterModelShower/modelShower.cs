@@ -54,7 +54,8 @@ namespace mainMenu
             
             if (this.showingChar == _char)
             {
-                this.showingChar.SetActive(true);
+                if (showingChar != null)
+                    this.showingChar.SetActive(true);
             }else{
                 if (showingChar != null)
                     showingChar.SetActive(false);

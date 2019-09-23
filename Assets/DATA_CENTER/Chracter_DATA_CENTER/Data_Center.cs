@@ -300,7 +300,7 @@ public partial class Data_Center : MonoBehaviour
     public void step3Initialize(TeamConfig _TeamConfig)//战斗必备
     {
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
-        BO_Health._health = 100;
+        BO_Health._health = 1000;
         BO_Health.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         BO_Health.changeLayerForAllSelfColliders(_TeamConfig.mylayer);
         BO_Health.enableAllHitBoxCollider(true);

@@ -112,7 +112,7 @@ namespace mainMenu
                 Debug.Log("读取角色信息严重错误monsterOfPlayerId:" + monsterOfPlayerId);
                 yield break;
             }
-            targetingCharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(targetingCharacterDataInfo.monsterId));
+            targetingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(targetingCharacterDataInfo.monsterId);
             if (targetingCharacterResourceInfo == null)
             {
                 Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);
@@ -121,7 +121,7 @@ namespace mainMenu
 
             if (targetingIcon != null)
             {
-                targetingIcon.name = targetingCharacterResourceInfo.prefabName + "_icon";
+                targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
                 targetingIcon.AccountCharacterInfo = targetingCharacterDataInfo;
                 targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
                 targetingIcon.gameObject.SetActive(false);
@@ -133,10 +133,10 @@ namespace mainMenu
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    onecoroutine = (monsterIconsDic.Instance.findMonsterIconByCach(int.Parse(targetingCharacterDataInfo.monsterId)));
+                    onecoroutine = (monsterIconsDic.Instance.findMonsterIconByCach(targetingCharacterDataInfo.monsterId));
                     break;
                 case ResourceLoadMode.Resource:
-                    onecoroutine = (monsterIconsDic.Instance.findMonsterIconByResource(int.Parse(targetingCharacterDataInfo.monsterId)));
+                    onecoroutine = (monsterIconsDic.Instance.findMonsterIconByResource(targetingCharacterDataInfo.monsterId));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
@@ -144,9 +144,9 @@ namespace mainMenu
             yield return (onecoroutine);
             targetingIcon = Instantiate(noMagic);
             targetingIcon.AccountCharacterInfo = targetingCharacterDataInfo;
-            targetingIcon.name = targetingCharacterResourceInfo.prefabName + "_icon";
+            targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
             targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
-            targetingIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(targetingCharacterResourceInfo.monsterId), targetingCharacterResourceInfo._zokusei);
+            targetingIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
             targetingIcon.gameObject.SetActive(false);
             targetingIcon.transform.SetParent(MonsterBoxWholeT);
 
@@ -176,9 +176,7 @@ namespace mainMenu
                 charIcon _targetingIcon = nowcharIcons[i];
                 if (_targetingIcon == null)
                     Debug.Log("严重错误");
-
                 string monsterOfPlayerId = _targetingIcon.AccountCharacterInfo.monsterOfPlayerId;
-
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
                 UnityEngine.Events.UnityAction action1 = () =>
                 {

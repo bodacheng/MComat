@@ -46,11 +46,11 @@ public class FightSummaryProcess : NagareProcess
                 break;
             case fightEventType.Tutorial_Basic:
                 AccountSet.instance._PlayerAccountInfo.accountprogress = playerAccountProgressStep.Tutorial;
-                this._NetFightScene.returnToFront(MainSceneStep.frontPage);
+                this._NetFightScene.returnToFront();
                 break;
             case fightEventType.Tutorial_Story_AdamVsGuards:
                 AccountSet.instance._PlayerAccountInfo.accountprogress = playerAccountProgressStep.Freedom;
-                this._NetFightScene.returnToFront(MainSceneStep.frontPage);
+                this._NetFightScene.returnToFront();
                 break;
         }    
     }

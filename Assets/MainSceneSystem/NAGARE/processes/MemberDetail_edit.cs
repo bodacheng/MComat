@@ -17,7 +17,7 @@ public class MemberDetail_edit : MainSceneProcess
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         
         // 表现系
-        CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(this._MemberDetail.focusingCharacterDataInfo.monsterId));
+        CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
         _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
             _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
             _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
@@ -65,13 +65,13 @@ public class MemberDetail_edit : MainSceneProcess
     // 3. 除非切换画面，生成的石头应该是数量守恒的，如果消耗就消耗，绝不能出现逻辑错误导致的复制情况
     IEnumerator SkillEditorButtonBehaviour(GetMonsterOfPlayerDetailModel _AccountCharacterInfo)
     {
-        if (_AccountCharacterInfo == null)
+        if (_AccountCharacterInfo == null || _AccountCharacterInfo.monsterId == null)
         {
             Debug.Log("到达了没道理到达的地方");
             yield break;
         }
         yield return _TheNineSlot.readANineAndTwo(_AccountCharacterInfo);
-        CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(_AccountCharacterInfo.monsterId));
+        CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_AccountCharacterInfo.monsterId);
         _SkillStonesBox.setFocusingType(_CharacterResourceInfo.type);
         yield return this._SkillStonesBox.arrangeSkillStonesToBox();
         yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));

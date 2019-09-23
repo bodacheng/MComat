@@ -116,6 +116,7 @@ namespace mainMenu
         // 围绕这个进程画面应该有相应配合
         public IEnumerator StartUpProcess()
         {
+            //QualitySettings.vSyncCount = 1;
             Application.targetFrameRate = 60;
 
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
@@ -175,7 +176,6 @@ namespace mainMenu
             switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
             {
                 case playerAccountProgressStep.Freedom:
-                    // 账户信息读取
                     // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
                     // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
                     // 那这样的话势必我需要来看接下来这个请求工作的返回值。
@@ -185,12 +185,12 @@ namespace mainMenu
                     yield return TeamSet.Instance.loadTeamSet(TeamSetGameMode.story);
                     yield return (this._MonsterBox.myMonsterBox());//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
-                    yield return (loadMyStonesProcess);
+                    yield return loadMyStonesProcess;
                     yield return _TeamEditManager.INITeamPosButtons();
-                    trySwitchToStep(MainMenuNote.Instance.goingtostep, false);//就是一上来那个页面，选战斗模式的。
+                    trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
                     break;
                 case playerAccountProgressStep.justCreated:
-                    trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);//就是一上来那个页面，选战斗模式的。
+                    trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
                     break;
                 case playerAccountProgressStep.Tutorial:
                     trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
@@ -265,29 +265,32 @@ namespace mainMenu
 
         void OnGUI()
         {
-            if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
+            if (AccountSet.Instance._playerinfoReferenceMode == playerinfoReferenceMode.localTestSaveData)
             {
-                mainProcessRunner.triggerMainProcess(AccountCharsSet.Instance.localSaveDataGetAllCharacters(Application.persistentDataPath + "/" + "myownedCharsJson.json"));
-            }
-            if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
-            {
-                IEnumerator getAllStones()
+                if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
                 {
-                    yield return SkillsConfigInfos.Instance.loadAllSkillConfigs();
-                    List<SkillStoneOfPlayerInfoModel> mystones = new List<SkillStoneOfPlayerInfoModel>();
-                    int i = 1;
-                    foreach (KeyValuePair<string,SkillConfig> _pair in SkillsConfigInfos.SkillConfigDicForReference)
+                    mainProcessRunner.triggerMainProcess(AccountCharsSet.Instance.localSaveDataGetAllCharacters());
+                }
+                if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
+                {
+                    IEnumerator getAllStones()
                     {
-                        Debug.Log("尝试于本地存档追加石："+_pair.Value.keyName);
-                        SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel();
-                        skillStoneOfPlayerInfoModel.skillStoneOfPlayerId = String.Format("{0:D20}", i);
-                        skillStoneOfPlayerInfoModel.skillId = _pair.Value.id;
-                        mystones.Add(skillStoneOfPlayerInfoModel);
-                        i++;
-                    }
-                    MySkillStonesReader.Instance.overrideMySkillStoneInfosOnLocalFile(mystones);
-                };
-                mainProcessRunner.triggerMainProcess(getAllStones());
+                        yield return SkillConfigTable.Instance.loadAllSkillConfigs();
+                        List<SkillStoneOfPlayerInfoModel> mystones = new List<SkillStoneOfPlayerInfoModel>();
+                        int i = 1;
+                        foreach (KeyValuePair<string,SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigDicForReference)
+                        {
+                            Debug.Log("尝试于本地存档追加石："+_pair.Value.REAL_NAME);
+                            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel();
+                            skillStoneOfPlayerInfoModel.skillStoneOfPlayerId = String.Format("{0:D20}", i);
+                            skillStoneOfPlayerInfoModel.skillId = _pair.Value.RECORD_ID;
+                            mystones.Add(skillStoneOfPlayerInfoModel);
+                            i++;
+                        }
+                        MySkillStonesReader.Instance.overrideMySkillStoneInfosOnLocalFile(mystones);
+                    };
+                    mainProcessRunner.triggerMainProcess(getAllStones());
+                }
             }
         }
     }

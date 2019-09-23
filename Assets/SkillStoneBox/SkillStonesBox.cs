@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
@@ -132,9 +133,9 @@ namespace mainMenu
                     DragAndDropItem _stone = _SkillStoneCell.GetItem();
                     if (_stone != null && _stone._SkillConfigOfSkillStone != null)
                     {
-                        _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.keyName;
+                        _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.REAL_NAME;
                         _skillStoneDetail.Showname.text = _stone._SkillConfigOfSkillStone.ShowName;
-                        _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SPLevel);
+                        _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
                         switchusingmonstericon(_stone.localID);
                     }
                 };
@@ -295,8 +296,8 @@ namespace mainMenu
             List<String> SkillStonesOfTypeAndExType = new List<String>();//localid
             foreach (KeyValuePair<String, SkillStoneOfPlayerInfoModel> keyValuePair in MySkillStonesReader.mySkillStonesDataDic)
             {
-                SkillConfig _SkillConfigOfSkillStone = SkillsConfigInfos.getSkillConfigByID(keyValuePair.Value.skillId);
-                if (_SkillConfigOfSkillStone.type == type && (_SkillConfigOfSkillStone.SPLevel == exType || exType == -1) && _SkillConfigOfSkillStone.rangeLimit(close, near, far, outrange))
+                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(keyValuePair.Value.skillId);
+                if (_SkillConfigOfSkillStone.type == type && (_SkillConfigOfSkillStone.SP_LEVEL == exType || exType == -1) && SkillConfigTable.rangeLimit(_SkillConfigOfSkillStone.ai_trigger_ranges.ToList(),close, near, far, outrange))
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
             }
 
@@ -343,7 +344,7 @@ namespace mainMenu
                     yield break;
             }
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(stonelocalid);
-            SkillConfig skillConfig = SkillsConfigInfos.getSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
+            SkillConfig skillConfig = SkillConfigTable.getSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             
             IEnumerator process = null;
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
@@ -360,7 +361,7 @@ namespace mainMenu
             yield return (process);
             GameObject Icon = (GameObject)process.Current;
             if (Icon == null)
-                Icon = Instantiate(skillIconsDic.Instance.getDefaultSkillIconByResource(skillConfig.SPLevel));
+                Icon = Instantiate(skillIconsDic.Instance.getDefaultSkillIconByResource(skillConfig.SP_LEVEL));
             DragAndDropItem item = Icon.GetComponent<DragAndDropItem>();
             if (item == null)
                 item = Icon.AddComponent<DragAndDropItem>();
@@ -370,8 +371,8 @@ namespace mainMenu
             else
                  MySkillStonesReader.mySkillStonesObjectsDic[stonelocalid] = item;
 
-            item._SkillConfigOfSkillStone = SkillsConfigInfos.getSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[stonelocalid].skillId);
-            item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.keyName;
+            item._SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[stonelocalid].skillId);
+            item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
             item.localID = stonelocalid;
             item.gameObject.transform.SetParent(stonesTempContainer);           
         }

@@ -23,11 +23,13 @@ public class ConfigFileManagerGUI : Editor {
 
         if (GUILayout.Button("根据Resource文件夹生成所有角色配置文件"))
         {
+            monsterTypeReferenceTable.Instance.loadLocalMonsterTypeReference();
             _ConfigFileManager.CharsConfigFileGenerate(_ConfigFileManager.MonstersConfigFilePath,_ConfigFileManager.CharacterConfigTextFile);
         }
         
         if (GUILayout.Button("根据Resource文件夹生成,更新技能配置文件"))
         {
+            monsterTypeReferenceTable.Instance.loadLocalMonsterTypeReference();
             _ConfigFileManager.SkillConfigFileUpdate(_ConfigFileManager.SkillConfigFilePath, _ConfigFileManager.SkillConfigTextFile);
         }
 

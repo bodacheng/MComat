@@ -83,7 +83,7 @@ public class TryEditALines : MainSceneProcess
             yield break;
         }
         yield return _TheNineSlot.readANineAndTwo(_CharacterDataInfo);
-        CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(_CharacterDataInfo.monsterId));
+        CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
         _SkillStonesBox.setFocusingType(_CharacterResourceInfo.type);
         yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
         UnityEngine.Events.UnityAction SkillEditConfirm = () =>//这里可能还有一个执行内容，就是进入到测试战斗场景。

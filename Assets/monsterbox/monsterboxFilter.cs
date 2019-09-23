@@ -92,7 +92,7 @@ public class monsterboxFilter : MonoBehaviour
                     Dark.Add(origin_mainMenuIcons[i]);
                     break;
                 default:
-                    Debug.Log("角色属性信息错误："+origin_mainMenuIcons[i]._CharacterResourceInfo.prefabName);
+                    Debug.Log("角色属性信息错误："+origin_mainMenuIcons[i]._CharacterResourceInfo.REAL_NAME);
                     Red.Add(origin_mainMenuIcons[i]);
                 break;
             }

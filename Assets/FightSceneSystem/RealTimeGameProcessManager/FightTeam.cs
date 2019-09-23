@@ -32,7 +32,12 @@ public partial class FightTeam : MonoBehaviour
             foreach(int key in keys.Value)
             {
                 Data_Center _one = teamMembers.Get(keys.Key,key);
-                datacenterCharIconDic.TryGetValue(_one,out _tempSideCharIcon);            
+                datacenterCharIconDic.TryGetValue(_one,out _tempSideCharIcon);
+                if (_tempSideCharIcon == null)
+                {
+                    Debug.Log("角色图标逻辑错误");
+                    continue;
+                }
                 _tempSideCharIcon.hpBarPrefab.value = Mathf.Lerp(_tempSideCharIcon.hpBarPrefab.value, (float)_one.BO_Health._health / 500,Time.deltaTime);
                 if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
                 {
@@ -53,6 +58,11 @@ public partial class FightTeam : MonoBehaviour
             foreach(int key in keys.Value)
             {
                 Data_Center _datacenter = teamMembers.Get(keys.Key,key);
+                if (!datacenterHitComboDic.ContainsKey(_datacenter))
+                {
+                    Debug.Log("hitcomboText字典错误");
+                    continue;
+                }
                 TextMeshProUGUI _hitcomboText = datacenterHitComboDic[_datacenter];
                 if (_datacenter.BO_Health.getHitCount() > 1)
                 {
@@ -167,8 +177,7 @@ public partial class FightTeam : MonoBehaviour
                 MultiRaid_mode_start();
             break;
             case TeamMode.rotation:
-                if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
-                    Rotation_mode_start();
+                Rotation_mode_start();
             break;
         }
     }

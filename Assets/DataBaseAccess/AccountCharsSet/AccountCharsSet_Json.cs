@@ -44,6 +44,13 @@ namespace dataAccess
                     accountCharacterInfoListObjectsDictionary.Clear();
                     for (int i = 0; i < info.Length; i++)
                     {
+                        CharacterResourceInfo targetingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(info[i].monsterId);
+                        if (targetingCharacterResourceInfo == null)
+                        {
+                            Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + info[i].monsterId);
+                            continue;
+                        }
+                        
                         if (!accountCharacterInfoListObjectsDictionary.ContainsKey(info[i].monsterOfPlayerId))
                             accountCharacterInfoListObjectsDictionary.Add(info[i].monsterOfPlayerId, info[i]);
                         else
@@ -79,17 +86,16 @@ namespace dataAccess
             }
         }
 
-        public IEnumerator localSaveDataGetAllCharacters(string wholepath)
+        public IEnumerator localSaveDataGetAllCharacters()
         {
-            File.Create(wholepath).Dispose();
-            List<CharacterResourceInfo> characterList = MonsterConfigInfos._monstersConfigTable.RowToCharacterResourceInfoList(MonsterConfigInfos._monstersConfigTable.rowList);
+            List<CharacterResourceInfo> characterList = monstersConfigTable.Instance.RowToCharacterResourceInfoList(monstersConfigTable.Instance.rowList);
             int i = 0;
             foreach (CharacterResourceInfo _CharacterResourceInfo in characterList)
             {
                 GetMonsterOfPlayerDetailModel _CharacterDataInfo = new GetMonsterOfPlayerDetailModel();
-                _CharacterDataInfo.monsterId = _CharacterResourceInfo.monsterId.ToString();
+                _CharacterDataInfo.monsterId = _CharacterResourceInfo.RECORD_ID.ToString();
                 _CharacterDataInfo.monsterOfPlayerId = i.ToString();
-                Debug.Log("将角色" + _CharacterResourceInfo.prefabName + "加入了存档");
+                Debug.Log("将角色" + _CharacterResourceInfo.REAL_NAME + "加入了存档");
                 yield return addNewCharToJsonSaveData(_CharacterDataInfo);
                 i++;
             }

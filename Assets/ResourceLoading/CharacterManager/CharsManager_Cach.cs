@@ -5,10 +5,9 @@ using UnityEngine;
 public partial class CharsManager : MonoBehaviour
 {
     private IEnumerator _loadingProcess;
-    public IEnumerator CreateModelForShowingByCach(int monsterId)
+    public IEnumerator CreateModelForShowingByCach(string monsterId)
     {
-        CharacterResourceInfo _TempCharacterResourceInfo = MonsterConfigInfos._monstersConfigTable.
-            RowToCharacterResourceInfo(MonsterConfigInfos._monstersConfigTable.Find_ID(monsterId.ToString()));
+        CharacterResourceInfo _TempCharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(monsterId.ToString()));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");
@@ -18,7 +17,7 @@ public partial class CharsManager : MonoBehaviour
         RuntimeAnimatorController toLoadRuntimeAnimatorController = AnimationResourceLoader.Instance.getRuntimeAnimatorController(_TempCharacterResourceInfo.type);
         GameObject _TempModel = null;
         AssetBundle modelAsset;
-        _loadingProcess = CachManager.Instance.getABFromCach("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.prefabName);
+        _loadingProcess = CachManager.Instance.getABFromCach("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
         yield return _loadingProcess;
         if (_loadingProcess.Current != null)
         {
@@ -26,11 +25,11 @@ public partial class CharsManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("展示用模型" + _TempCharacterResourceInfo.prefabName+ "包读取失败");
+            Debug.Log("展示用模型" + _TempCharacterResourceInfo.REAL_NAME+ "包读取失败");
             yield break;
         }
 
-        var resultObject = modelAsset.LoadAssetAsync<GameObject>(_TempCharacterResourceInfo.prefabName);
+        var resultObject = modelAsset.LoadAssetAsync<GameObject>(_TempCharacterResourceInfo.REAL_NAME);
         yield return new WaitWhile(() => resultObject.isDone == false);
 
         if (resultObject.asset != null)
@@ -51,7 +50,7 @@ public partial class CharsManager : MonoBehaviour
         Data_Center _TempDATACENTER = _ODL._C;
         _TempDATACENTER.animator.runtimeAnimatorController = toLoadRuntimeAnimatorController;
         _TempDATACENTER.Zokusei = _TempCharacterResourceInfo._zokusei;
-        yield return (_TempDATACENTER.step1Initialize(_TempCharacterResourceInfo.type, _TempCharacterResourceInfo.BasicMoveSetName,_TempCharacterResourceInfo.personalMagicPack));
+        yield return (_TempDATACENTER.step1Initialize(_TempCharacterResourceInfo.type, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;
     }
 

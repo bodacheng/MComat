@@ -19,7 +19,7 @@ public partial class G_Attack_State : AI_State {
 
 	private string clip_name;
     private string dash_clip_name;
-    private skillEmergentLevel _skillEmergentLevel;
+    private int _skillEmergentLevel;
 
     private bool isEventAttackLaunchState = false;
     private bool isEventAttackEndState = false;
@@ -55,7 +55,7 @@ public partial class G_Attack_State : AI_State {
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime,
                           float approachingSpeed,
                           string clip_name,
-                          skillEmergentLevel skillEmergentLevel)
+                          int skillEmergentLevel)
     {
         this.rushSpeed = rushSpeed;
         this.maxRushTime = maxRushTime;
@@ -98,7 +98,7 @@ public partial class G_Attack_State : AI_State {
 
     public override bool enter_condition_priority1()
     {
-        if (_skillEmergentLevel == skillEmergentLevel.level1)
+        if (_skillEmergentLevel == 1)
         {
             return strategic_enter_condition();
         }
@@ -107,7 +107,7 @@ public partial class G_Attack_State : AI_State {
 
     public override bool enter_condition_priority2()
 	{
-        if (_skillEmergentLevel == skillEmergentLevel.level2)
+        if (_skillEmergentLevel == 2)
         {
             return strategic_enter_condition();
         }
@@ -116,7 +116,7 @@ public partial class G_Attack_State : AI_State {
 
     public override bool enter_condition_priority3()
     {
-        if (_skillEmergentLevel == skillEmergentLevel.level3)
+        if (_skillEmergentLevel == 3)
         {
             return strategic_enter_condition();
         }

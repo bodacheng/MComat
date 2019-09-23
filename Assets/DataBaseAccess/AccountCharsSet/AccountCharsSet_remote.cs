@@ -1,12 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-using Newtonsoft.Json;
-using System.Linq;
-using LitJson;
-
-using System.Text;
 using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Form.Common;
@@ -91,11 +85,11 @@ namespace dataAccess
 
             yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel>, SetMonsterSkillStoneForm>("http://160.16.187.230/AssetStoreFight/monster/setMonsterSkillStone", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
-                     Debug.Log("技能编辑成功");
+                     Debug.Log(accountCharsSet.monsterOfPlayerId + "(monsterOfPlayerId)技能编辑成功");
                  }
                 ,
                  model => {
-                     Debug.Log("的技能编辑失败");
+                     Debug.Log(accountCharsSet.monsterOfPlayerId + "(monsterOfPlayerId)技能编辑失败");
                  }
             );
             yield break;

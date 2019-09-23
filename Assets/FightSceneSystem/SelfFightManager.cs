@@ -48,6 +48,11 @@ namespace mainMenu
             stage = new StageScriptableObject();
         }
 
+        void Start()
+        {
+            switchToMultiRaidMode();
+        }
+
         public void clear()
         {
             foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_M)
@@ -238,8 +243,8 @@ namespace mainMenu
                 if (getchar.Current == null)
                     yield break;
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                characterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(_one.monsterId));
-                tar.changeIcon(characterResourceInfo == null ? null: monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.monsterId),
+                characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_one.monsterId);
+                tar.changeIcon(characterResourceInfo == null ? null: monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
                     characterResourceInfo == null ? zokusei.Null : characterResourceInfo._zokusei);
             }else{
                 tar.changeIcon(null,zokusei.Null);

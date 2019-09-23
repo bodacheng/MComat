@@ -220,7 +220,7 @@ namespace dataAccess
             IDictionary<string, SkillStoneOfPlayerInfoModel> Dic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
             for (int i = 0; i < mystones.Count; i++)
             {
-                SkillConfig _SkillConfig = SkillsConfigInfos.getSkillConfigByID(mystones[i].skillId);
+                SkillConfig _SkillConfig = SkillConfigTable.getSkillConfigByID(mystones[i].skillId);
                 if (_SkillConfig == null)
                 {
                     Debug.Log("巨大问题");
@@ -243,15 +243,15 @@ namespace dataAccess
                                                 string B1skillid, string B2skillid, string B3skillid,
                                                     string C1skillid, string C2skillid, string C3skillid)
         {
-            SkillConfig _SkillConfigA1 = SkillsConfigInfos.getSkillConfigByID(A1skillid);
-            SkillConfig _SkillConfigA2 = SkillsConfigInfos.getSkillConfigByID(A2skillid);
-            SkillConfig _SkillConfigA3 = SkillsConfigInfos.getSkillConfigByID(A3skillid);
-            SkillConfig _SkillConfigB1 = SkillsConfigInfos.getSkillConfigByID(B1skillid);
-            SkillConfig _SkillConfigB2 = SkillsConfigInfos.getSkillConfigByID(B2skillid);
-            SkillConfig _SkillConfigB3 = SkillsConfigInfos.getSkillConfigByID(B3skillid);
-            SkillConfig _SkillConfigC1 = SkillsConfigInfos.getSkillConfigByID(C1skillid);
-            SkillConfig _SkillConfigC2 = SkillsConfigInfos.getSkillConfigByID(C2skillid);
-            SkillConfig _SkillConfigC3 = SkillsConfigInfos.getSkillConfigByID(C3skillid);
+            SkillConfig _SkillConfigA1 = SkillConfigTable.getSkillConfigByID(A1skillid);
+            SkillConfig _SkillConfigA2 = SkillConfigTable.getSkillConfigByID(A2skillid);
+            SkillConfig _SkillConfigA3 = SkillConfigTable.getSkillConfigByID(A3skillid);
+            SkillConfig _SkillConfigB1 = SkillConfigTable.getSkillConfigByID(B1skillid);
+            SkillConfig _SkillConfigB2 = SkillConfigTable.getSkillConfigByID(B2skillid);
+            SkillConfig _SkillConfigB3 = SkillConfigTable.getSkillConfigByID(B3skillid);
+            SkillConfig _SkillConfigC1 = SkillConfigTable.getSkillConfigByID(C1skillid);
+            SkillConfig _SkillConfigC2 = SkillConfigTable.getSkillConfigByID(C2skillid);
+            SkillConfig _SkillConfigC3 = SkillConfigTable.getSkillConfigByID(C3skillid);
             List<SkillConfig> allnineskill = new List<SkillConfig>();
 
             if (_SkillConfigA1 != null)
@@ -276,7 +276,7 @@ namespace dataAccess
             int wholeskillpoint = 0;
             for (int i = 0; i < allnineskill.Count; i++)
             {
-                switch (allnineskill[i].SPLevel)
+                switch (allnineskill[i].SP_LEVEL)
                 {
                     case 0:
                         wholeskillpoint += 10;

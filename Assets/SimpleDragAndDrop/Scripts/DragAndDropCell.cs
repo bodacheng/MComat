@@ -245,7 +245,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                         TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox());
                                     };
                                     TheNineSlot._TheNineSlot._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
-                                        "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.keyName + "?");
+                                        "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.REAL_NAME + "?");
                                     break;
                             }
                             break;
@@ -391,39 +391,39 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                 
                 if (this == TheNineSlot._TheNineSlot.A1DragAndDropCell)
                 {
-                    nineskillids[0] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[0] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.A2DragAndDropCell)
                 {
-                    nineskillids[1] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[1] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.A3DragAndDropCell)
                 {
-                    nineskillids[2] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[2] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.B1DragAndDropCell)
                 {
-                    nineskillids[3] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[3] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.B2DragAndDropCell)
                 {
-                    nineskillids[4] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[4] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.B3DragAndDropCell)
                 {
-                    nineskillids[5] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[5] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.C1DragAndDropCell)
                 {
-                    nineskillids[6] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[6] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.C2DragAndDropCell)
                 {
-                    nineskillids[7] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[7] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 if (this == TheNineSlot._TheNineSlot.C3DragAndDropCell)
                 {
-                    nineskillids[8] = item._SkillConfigOfSkillStone.id;
+                    nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 
                 int wholepint = MySkillStonesReader.skillsetValidation(nineskillids[0],nineskillids[1],nineskillids[2],

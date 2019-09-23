@@ -126,16 +126,16 @@ public partial class CharsManager : MonoBehaviour {
         switch (ResourceLoadingSetting.Instance.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                loadshowmodel = CreateModelForShowingByCach(int.Parse(myChar.monsterId));
+                loadshowmodel = CreateModelForShowingByCach(myChar.monsterId);
                 break;
             case ResourceLoadMode.StreamingAssetAB:
-                loadshowmodel = CreateModelForShowingByStreamingAssets(int.Parse(myChar.monsterId));
+                loadshowmodel = CreateModelForShowingByStreamingAssets(myChar.monsterId);
                 break;
             case ResourceLoadMode.Resource:
-                loadshowmodel = CreateModelForShowingByResource(int.Parse(myChar.monsterId));
+                loadshowmodel = CreateModelForShowingByResource(myChar.monsterId);
                 break;
             default:
-                loadshowmodel = CreateModelForShowingByResource(int.Parse(myChar.monsterId));
+                loadshowmodel = CreateModelForShowingByResource(myChar.monsterId);
                 break;
         }
         yield return loadshowmodel;
@@ -168,16 +168,13 @@ public partial class CharsManager : MonoBehaviour {
             Debug.Log("严重资源类错误");
             yield break;
         }
-        
-        CharacterResourceInfo _TempCharacterResourceInfo 
-        = MonsterConfigInfos._monstersConfigTable.RowToCharacterResourceInfo(MonsterConfigInfos._monstersConfigTable.Find_ID(_CharacterDataInfo.monsterId.ToString()));
-        
+        CharacterResourceInfo _TempCharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.monsterId.ToString()));
         yield return (_TempDATACENTER.step2Initialize
             (_TempCharacterResourceInfo.type,
              _CharacterDataInfo._NineAndTwo,
              _CharacterDataInfo.level,
              _TempCharacterResourceInfo._zokusei,
-             _TempCharacterResourceInfo.personalMagicPack));
+             _TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;
     }    
 }

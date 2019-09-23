@@ -426,11 +426,3 @@ public enum AnimationPlaying_Step
     running = 2,
     over = 3
 }
-
-public enum skillEmergentLevel
-{
-    none = 0,
-    level1 = 1,
-    level2 = 2,
-    level3 = 3
-}

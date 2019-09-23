@@ -53,8 +53,8 @@ namespace mainMenu
                 {
                     CharacterDataInfo oneMember = _Stage.localFight.HeroSets.Get(keys.Key,key);
                     charIcon MyMemberIcon = Instantiate(FighterIcon);
-                    CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(oneMember.monsterId);
-                    MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.monsterId), _CharacterResourceInfo._zokusei);
+                    CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
+                    MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                     MyMemberIcon.transform.SetParent(myTeamShowT);
                     MyMemberIcon.transform.localPosition = Vector3.one;
                     MyMemberIcon.transform.localScale = Vector3.one;
@@ -68,8 +68,8 @@ namespace mainMenu
                 {
                     CharacterDataInfo oneMember = _Stage.localFight.EnemySets.Get(keys.Key,key);
                     charIcon MyMemberIcon = Instantiate(FighterIcon);
-                    CharacterResourceInfo _CharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(oneMember.monsterId);
-                    MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.monsterId), _CharacterResourceInfo._zokusei);
+                    CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
+                    MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                     MyMemberIcon.transform.SetParent(enemyTeamShowT);
                     MyMemberIcon.transform.localPosition = Vector3.one;
                     MyMemberIcon.transform.localScale = Vector3.one;

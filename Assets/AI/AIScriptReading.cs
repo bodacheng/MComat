@@ -63,7 +63,7 @@ public class AIScriptReading {
                                         null, null,
                                          enterInput: inputs_defined.Null, exitInput: inputs_defined.Null, 
                                          SPMove:0,
-                                         skillEmergentLevel:skillEmergentLevel.none,
+                                         0,
                                          rarelevel:0)
                 };
             }else{
@@ -77,7 +77,7 @@ public class AIScriptReading {
                                    null, null,
                                     enterInput: inputs_defined.Null, exitInput: inputs_defined.Null,
                                     SPMove: 0,
-                                    skillEmergentLevel:skillEmergentLevel.none, 
+                                    0, 
                                     rarelevel: 0));
                 }
             }
@@ -95,7 +95,8 @@ public class AIScriptReading {
                                         null, null,
                                         enterInput: inputs_defined.Null, 
                                          exitInput: inputs_defined.Null, 
-                                         SPMove:0,skillEmergentLevel:skillEmergentLevel.none,
+                                         SPMove:0,
+                                         0,
                                          rarelevel:0)
                 };
         }

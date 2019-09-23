@@ -34,7 +34,7 @@ public partial class FightTeam : MonoBehaviour
                 {
                     Debug.Log("角色信息字典严重错误");continue;
                 }
-                CharacterResourceInfo characterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(characterDataInfo.monsterId);
+                CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(characterDataInfo.monsterId);
                 _SideCharIcon.focusingCharIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(characterDataInfo.monsterId),characterResourceInfo._zokusei);
     
                 _SideCharIcon.gameObject.SetActive(true);

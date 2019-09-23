@@ -35,7 +35,7 @@ namespace mainMenu
         public Transform MemDetailWatchPos;
         public RectTransform SkillShowT;
 
-        public int focusingResourceNum;
+        public string focusingResourceNum;
         public Data_Center focusingCharacterData;
 
         private IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>();
@@ -191,7 +191,7 @@ namespace mainMenu
 
         public IEnumerator skillShowRunWithPreparing(string keyname)
         {
-            CharacterResourceInfo _watchingCharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(focusingResourceNum);
+            CharacterResourceInfo _watchingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(focusingResourceNum);
             //下面这一大片，在资源存在的情况下压根不应该运行        
 
             if (this.focusingCharacterData.Animation_Manger != null)
@@ -201,17 +201,17 @@ namespace mainMenu
                     case ResourceLoadMode.CachAB:
                         yield return
                             this.focusingCharacterData.Animation_Manger.preloadPersonalAnim
-                            (ResourceLordSceneStarter.BundleURL, _watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                            (ResourceLordSceneStarter.BundleURL, _watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.StreamingAssetAB:
                         yield return
                             this.focusingCharacterData.Animation_Manger.preloadPersonalAnimStreamingAssetMode
-                            (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                            (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.Resource:
                         yield return
                             this.focusingCharacterData.Animation_Manger.preloadPersonalAnimResourceMode
-                            (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.personalMagicPack, _watchingCharacterResourceInfo._zokusei);
+                            (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                 }
                 this.showingSkill = true;
@@ -274,7 +274,7 @@ namespace mainMenu
 
         public void SkillsPrintGamenRefresh(CharacterDataInfo _watchingCharInfo)//根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
         {
-            CharacterResourceInfo _watchingCharacterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(_watchingCharInfo.monsterId);
+            CharacterResourceInfo _watchingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_watchingCharInfo.monsterId);
             skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo._NineAndTwo != null)
             {

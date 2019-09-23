@@ -50,7 +50,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     
     public bool dProcessFinished = false;    
     private IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
-    private IDictionary<string, List<string>> characterTypeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是type，值是所有基础动画包的名字
+    private IDictionary<string, List<string>> characterTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
     private CachDownLoadMission modelConfigFileMission;
     private CachDownLoadMission animationConfigFileMission;
     
@@ -87,8 +87,9 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                yield return MonsterConfigInfos.Instance.loadMonstersConfig();
-                yield return SkillsConfigInfos.Instance.loadAllSkillConfigs();
+                monsterTypeReferenceTable.Instance.loadLocalMonsterTypeReference();
+                yield return monstersConfigTable.Instance.loadMonstersConfig();
+                yield return SkillConfigTable.Instance.loadAllSkillConfigs();
                 _LoadingCanvas.nowProcess("正在加载资源",0.1f);
                 break;
         }
@@ -106,13 +107,13 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         }
         
         // characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
-        foreach (monstersConfigTable.Row row in MonsterConfigInfos._monstersConfigTable.rowList)
+        foreach (monstersConfigTable.Row row in monstersConfigTable.Instance.rowList)
         {
-            if (!characterTypeAndBasicMoveSets.ContainsKey(row.type))
-                characterTypeAndBasicMoveSets.Add(row.type,new List<string>());
-            if (!characterTypeAndBasicMoveSets[row.type].Contains(row.basicMoveSet))
+            if (!characterTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE_CODE))
+                characterTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE_CODE,new List<string>());
+            if (!characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE_CODE].Contains(row.BASIC_MOVEMENT_PACK))
             {
-                characterTypeAndBasicMoveSets[row.type].Add(row.basicMoveSet);
+                characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE_CODE].Add(row.BASIC_MOVEMENT_PACK);
             }
         }
 

@@ -8,7 +8,7 @@ public class Counter_State : AI_State {
     private bool keepRotationAdjustment;
     private float RotationAdjustmentTime;
     private float rotate_speed;
-    private skillEmergentLevel _skillEmergentLevel;    
+    private int _skillEmergentLevel;    
     private List<Collider> damagingweaponList;
 
     private UnityEngine.Events.UnityAction burststart;
@@ -21,7 +21,7 @@ public class Counter_State : AI_State {
     private int lastframeResistent;
     private int gotdamageamont = 0;
     
-    public Counter_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, int burstTriggerDamageAmount,skillEmergentLevel skillEmergentLevel)
+    public Counter_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, int burstTriggerDamageAmount,int skillEmergentLevel)
     {
         this.clip_name = clip_name;
         this.keepRotationAdjustment = false;

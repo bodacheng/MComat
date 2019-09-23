@@ -27,20 +27,17 @@ public class stagesManagerGUI : Editor {
     
     string pathAndNameForLocalSave = "/oneFight.xml";
     stagesManager _stagesManager;
-    
-    string focusingMemberLocalID = null;
-    
+    string focusingMemberRecordID = null;    
     CharacterDataInfo focusingCharInfo = null;
     CharacterResourceInfo focusingCharResourceInfo = null;
     CharacterDataInfo freeEditCharInfo;
     SkillConfig focusingSkillConfig = null;
-    List<SkillConfig> AllSkillsConfigs;
     
     bool skillselectfilter = false;
     bool filterallranges = true;
     bool[] skillrangeselectfilter = new bool[4] { true, true, true,true };//close,near,far,out
 
-    int selectedskillindex;
+    int selectedskillindex, selectedmonsterindex;
     int selectskillrarelevel = -1;
     int[] skillrarelevels = {-1,0,1,2,3};
     string[] skillrarelevelShow = {"ALL","0", "★", "★★", "★★★"};
@@ -54,12 +51,12 @@ public class stagesManagerGUI : Editor {
     }
 
     public override void OnInspectorGUI()
-    {    
+    {
         ButtonStyle = new GUIStyle(GUI.skin.button);
         ButtonStyle.normal.textColor = Color.red;
         ButtonStyle.fixedWidth = 100f;
         ButtonStyle.alignment = TextAnchor.MiddleCenter;
-    
+
         addDeleteMember = new GUIStyle(GUI.skin.button);
         addDeleteMember.normal.textColor = new Color(1,0.3f,0f);
         addDeleteMember.fixedWidth = 50f;
@@ -99,13 +96,13 @@ public class stagesManagerGUI : Editor {
         attackRangeToggleGUI.stretchWidth = false;
     
         _stagesManager = (stagesManager)target;
-    
-        // 关卡编辑器下，技能配置文件定走resource文件夹，所以不需要走SkillsConfigInfos.loadAllSkillConfigs()
-        // 同理角色配置文件也是
-        SkillsConfigInfos.loadAllSkillConfigFromLocalConfigFile();
-        SkillsConfigInfos.refreshSkillConfigDicForReference();
-        MonsterConfigInfos.loadMonstersConfigByResource();
-        MonsterConfigInfos.refreshCharacterResourceInfoDic();
+
+        // 关卡编辑器下，技能配置文件定走resource文件夹，所以不需要走SkillsConfigInfos.loadAllSkillConfigs(), 同理角色配置文件也是
+        monsterTypeReferenceTable.Instance.loadLocalMonsterTypeReference();
+        SkillConfigTable.loadAllSkillConfigFromLocalConfigFile();
+        SkillConfigTable.refreshSkillConfigDicForReference();
+        monstersConfigTable.loadMonstersConfigByResource();
+        monstersConfigTable.refreshCharacterResourceInfoDic();
         
         GUILayout.Space(10);
         EditorGUILayout.LabelField(" 战斗脚本读取  ", big_title);
@@ -119,15 +116,13 @@ public class stagesManagerGUI : Editor {
                 if (one != null)
                 {
                     _stagesManager.editoringFight = one;
-
                     foreach (MultiDictionary<int,int,CharacterDataInfo>.SerializableSets _one in _stagesManager.editoringFight.EnemySets._SerializableSets)
                     {
                         foreach (MultiDictionary<int,int,CharacterDataInfo>.SerializableSet set in _one.value)
                         {
-                            CharacterResourceInfo _CharacterResourceInfo =
-                                MonsterConfigInfos._monstersConfigTable.RowToCharacterResourceInfo(
-                                MonsterConfigInfos._monstersConfigTable.Find_ID(set._Value.monsterId.ToString())
-                            );
+                            CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(set._Value.monsterId.ToString()));
+                            if (_CharacterResourceInfo == null)
+                                continue;
                             if (set._Value._NineAndTwo == null)
                                 set._Value._NineAndTwo = new NineAndTwo();
                             else
@@ -142,12 +137,11 @@ public class stagesManagerGUI : Editor {
             }
         }
         GUILayout.EndHorizontal();
-    
+        
         //暂时做如下处理
-        MonsterConfigInfos._monstersConfigTable = new monstersConfigTable();
-        TextAsset CSV = Resources.Load("Account/MonstersConfig") as TextAsset;
+        TextAsset CSV = Resources.Load("Account/mst_monster") as TextAsset;
         if (CSV)
-            MonsterConfigInfos._monstersConfigTable.Load(CSV);
+            monstersConfigTable.Instance.Load(CSV);
         else
             Debug.Log("没能读取到角色数据库文件。");
         GUILayout.Space(10);
@@ -158,14 +152,16 @@ public class stagesManagerGUI : Editor {
         
         EditorGUILayout.LabelField(" 关卡敌人信息  ", title);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("FreeEdit", (focusingMemberLocalID != null) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("FreeEdit", (focusingMemberRecordID != null) ? ButtonStyle : ButtonStyle_selected))
         {
-            focusingMemberLocalID = (-1).ToString();
+            focusingMemberRecordID = (-1).ToString();
             if (freeEditCharInfo == null)
             {
-                freeEditCharInfo = new CharacterDataInfo();
-                freeEditCharInfo.monsterOfPlayerId = (-1).ToString();
-                freeEditCharInfo._NineAndTwo = new NineAndTwo();
+                freeEditCharInfo = new CharacterDataInfo
+                {
+                    monsterOfPlayerId = (-1).ToString(),
+                    _NineAndTwo = new NineAndTwo()
+                };
             }
             focusingCharInfo = freeEditCharInfo;
         }
@@ -174,27 +170,27 @@ public class stagesManagerGUI : Editor {
         // 四站位 //
         GUILayout.BeginHorizontal();
         GUILayout.Space(100);
-        if (GUILayout.Button("back", (focusingMemberLocalID != 0.ToString())?ButtonStyle:ButtonStyle_selected))
+        if (GUILayout.Button("back", (focusingMemberRecordID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            focusingMemberLocalID = 0.ToString();
-            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0,0);
+            focusingMemberRecordID = 0.ToString();
+            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0, 0);
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("right",(focusingMemberLocalID != 3.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("right",(focusingMemberRecordID != 3.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            focusingMemberLocalID = 3.ToString();
-            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0,3);
+            focusingMemberRecordID = 3.ToString();
+            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0, 3);
         }
-        if (GUILayout.Button("front", (focusingMemberLocalID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("front", (focusingMemberRecordID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            focusingMemberLocalID = 2.ToString();
-            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0,2);
+            focusingMemberRecordID = 2.ToString();
+            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0, 2);
         }
-        if (GUILayout.Button("left",(focusingMemberLocalID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("left",(focusingMemberRecordID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            focusingMemberLocalID = 1.ToString();
-            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0,1);
+            focusingMemberRecordID = 1.ToString();
+            focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0, 1);
         }
         GUILayout.EndHorizontal();
         // 四站位end //
@@ -205,10 +201,12 @@ public class stagesManagerGUI : Editor {
         {
             if (GUILayout.Button("Add", addDeleteMember))
             {
-                focusingCharInfo = new CharacterDataInfo();
-                focusingCharInfo.monsterOfPlayerId = focusingMemberLocalID.ToString();
+                focusingCharInfo = new CharacterDataInfo
+                {
+                    monsterOfPlayerId = focusingMemberRecordID.ToString()
+                };
                 MultiDictionary<int, int, CharacterDataInfo> clist = _stagesManager.editoringFight.EnemySets;
-                clist.Set(0,int.Parse(focusingMemberLocalID),focusingCharInfo);
+                clist.Set(0,int.Parse(focusingMemberRecordID),focusingCharInfo);
                 _stagesManager.editoringFight.EnemySets = clist;
             }
         }
@@ -227,12 +225,10 @@ public class stagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
         // 指定站位人员的添加与删除end //
     
-        if (!(focusingCharInfo == null))
+        if (focusingCharInfo != null)
         {
-            // 角色type指定 //
-            focusingCharResourceInfo = MonsterConfigInfos._monstersConfigTable.RowToCharacterResourceInfo(
-                            MonsterConfigInfos._monstersConfigTable.Find_ID(focusingCharInfo.monsterId.ToString()));
-            if (focusingCharInfo.monsterId != -1)
+            focusingCharResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.monsterId));
+            if (focusingCharInfo.monsterId != "-1" && focusingCharResourceInfo != null)
             {
                 focusingtype = EditorGUILayout.TextField("characerType", focusingCharResourceInfo.type);
             }
@@ -241,20 +237,22 @@ public class stagesManagerGUI : Editor {
                 focusingtype = EditorGUILayout.TextField("characerType", focusingtype);
             }
             // 角色type指定end //
-    
-            int[] charResourceNums = MonsterConfigInfos._monstersConfigTable.getIDList(focusingtype).ToArray();
-            string[] charResourceNames = MonsterConfigInfos._monstersConfigTable.getRealNameList(focusingtype).ToArray();
+
+            RecordIDsAndNames RecordIDsAndNames = monstersConfigTable.getMonsterRecordIDsAndNamesArray(focusingtype);
+            if (RecordIDsAndNames == null)
+                return;
+            string[] charResourceNums = RecordIDsAndNames.RecordIDs.ToArray();
+            string[] charResourceNames = RecordIDsAndNames.Names.ToArray();
     
             if (focusingCharInfo != null && charResourceNums != null && charResourceNames != null && focusingtype != null && charResourceNums.Length != 0)
             {
-                focusingCharInfo.monsterId = EditorGUILayout.IntPopup("角色名：", focusingCharInfo.monsterId, charResourceNames, charResourceNums);
-    
+                selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, charResourceNames);
+                focusingCharInfo.monsterId = charResourceNums[selectedmonsterindex];
+                
                 GUILayout.Space(10f);
-    
-                focusingCharInfo.HP = EditorGUILayout.IntField("HP :", focusingCharInfo.HP);
-    
+                focusingCharInfo.HP = EditorGUILayout.IntField("HP :", focusingCharInfo.HP);    
                 GUILayout.Space(10f);
-    
+                
                 /////// 九宫格 //////////
                 GUILayout.BeginHorizontal();
                 GUI.backgroundColor = Color.gray;
@@ -280,7 +278,7 @@ public class stagesManagerGUI : Editor {
     
                 ButtonStyle_NineAndTwo.normal.textColor = Color.blue;
                 GUILayout.BeginHorizontal();
-                if (focusingCharInfo._NineAndTwo.getA1Config() == null || focusingCharInfo._NineAndTwo.getA1Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getA1Config() == null || focusingCharInfo._NineAndTwo.getA1Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -290,7 +288,7 @@ public class stagesManagerGUI : Editor {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA1Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getA2Config() == null || focusingCharInfo._NineAndTwo.getA2Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getA2Config() == null || focusingCharInfo._NineAndTwo.getA2Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -300,7 +298,7 @@ public class stagesManagerGUI : Editor {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA2Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getA3Config() == null || focusingCharInfo._NineAndTwo.getA3Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getA3Config() == null || focusingCharInfo._NineAndTwo.getA3Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -312,7 +310,7 @@ public class stagesManagerGUI : Editor {
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
     
-                if (focusingCharInfo._NineAndTwo.getB1Config() == null || focusingCharInfo._NineAndTwo.getB1Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getB1Config() == null || focusingCharInfo._NineAndTwo.getB1Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -322,7 +320,7 @@ public class stagesManagerGUI : Editor {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB1Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getB2Config() == null || focusingCharInfo._NineAndTwo.getB2Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getB2Config() == null || focusingCharInfo._NineAndTwo.getB2Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -332,7 +330,7 @@ public class stagesManagerGUI : Editor {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB2Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getB3Config() == null || focusingCharInfo._NineAndTwo.getB3Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getB3Config() == null || focusingCharInfo._NineAndTwo.getB3Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -344,7 +342,7 @@ public class stagesManagerGUI : Editor {
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
     
-                if (focusingCharInfo._NineAndTwo.getC1Config() == null || focusingCharInfo._NineAndTwo.getC1Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getC1Config() == null || focusingCharInfo._NineAndTwo.getC1Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -354,7 +352,7 @@ public class stagesManagerGUI : Editor {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC1Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getC2Config() == null || focusingCharInfo._NineAndTwo.getC2Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getC2Config() == null || focusingCharInfo._NineAndTwo.getC2Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -364,7 +362,7 @@ public class stagesManagerGUI : Editor {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC2Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getC3Config() == null || focusingCharInfo._NineAndTwo.getC3Config().id == null)
+                if (focusingCharInfo._NineAndTwo.getC3Config() == null || focusingCharInfo._NineAndTwo.getC3Config().RECORD_ID == null)
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
@@ -396,7 +394,7 @@ public class stagesManagerGUI : Editor {
                         SanGong = true;
                     }
                     GUILayout.Space(10f);
-                    if (!SanGong)
+                    if (!SanGong)//&& focusingSkillConfig.RECORD_ID != "-1"
                     {
                         skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, attackRangeToggleGUI);
                         if (skillselectfilter)
@@ -415,34 +413,36 @@ public class stagesManagerGUI : Editor {
                             GUILayout.Space(20f);
                         }
     
-                        SkillIDsAndNames _SkillIDsAndNames =
-                                SkillsConfigInfos.getSkillIDAndNameArray(focusingtype,
-                                       new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2],skillrangeselectfilter[3] }, selectskillrarelevel);
-                        string[] SkillIDsOfType = _SkillIDsAndNames.IDs;
-                        string[] SkillKeysOfType = _SkillIDsAndNames.SkillNames;
-                        
-                        selectedskillindex = EditorGUILayout.Popup("技能：",selectedskillindex, SkillKeysOfType);
-                        focusingSkillConfig.id = SkillIDsOfType[selectedskillindex];
-                        SkillConfig defaultSkillConfig = SkillsConfigInfos.getSkillConfigByID(focusingSkillConfig.id);
+                        RecordIDsAndNames _SkillRecordIDsAndNames = SkillConfigTable.getSkillIDAndNameArray(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
+                        string[] SkillIDsOfType = _SkillRecordIDsAndNames.RecordIDs;
+                        string[] SkillNamesOfType = _SkillRecordIDsAndNames.Names;
+
+                        selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, SkillNamesOfType);
+                        focusingSkillConfig.RECORD_ID = SkillIDsOfType[selectedskillindex];
+                        SkillConfig defaultSkillConfig = SkillConfigTable.getSkillConfigByID(focusingSkillConfig.RECORD_ID);
+                        if (defaultSkillConfig == null)
+                        {
+                            Debug.Log("技能读取严重错误。RECORD_ID："+ focusingSkillConfig.RECORD_ID);
+                            return;
+                        }
                         GUILayout.Space(10f);
     
-                        if (focusingSkillConfig.id != null)
+                        if (focusingSkillConfig.RECORD_ID != null)
                         {
-                            focusingSkillConfig.stateType =
-                                                   (stateType)EditorGUILayout.EnumPopup("Attack Type",
+                            focusingSkillConfig.stateType = (stateType)EditorGUILayout.EnumPopup("Attack Type",
                                                                                          (focusingSkillConfig.stateType == stateType.NONE && defaultSkillConfig != null && defaultSkillConfig.stateType != stateType.NONE)
                                                                                          ?
                                                                                          defaultSkillConfig.stateType : focusingSkillConfig.stateType);
     
-                            focusingSkillConfig.AT = EditorGUILayout.FloatField("AT",
+                            focusingSkillConfig.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT",
                                                                               (defaultSkillConfig != null)
                                                                               ?
-                                                                              defaultSkillConfig.AT : focusingSkillConfig.AT);
+                                                                              defaultSkillConfig.ATTACK_WEIGHT : focusingSkillConfig.ATTACK_WEIGHT);
     
-                            focusingSkillConfig.SPLevel = EditorGUILayout.IntPopup("SPLevel",
-                                                                                        (focusingSkillConfig.SPLevel == -1 && defaultSkillConfig != null)
+                            focusingSkillConfig.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel",
+                                                                                        (focusingSkillConfig.SP_LEVEL == -1 && defaultSkillConfig != null)
                                                                                         ?
-                                                                                        defaultSkillConfig.SPLevel : focusingSkillConfig.SPLevel,
+                                                                                        defaultSkillConfig.SP_LEVEL : focusingSkillConfig.SP_LEVEL,
                                                                                         exoptions_display,exoptions);
 
                             bool far = false, near = false, close = false, outrange = false;
@@ -533,14 +533,11 @@ public class stagesManagerGUI : Editor {
             foreach (CharacterDataInfo _one in _stagesManager._FightReward._CharacterDataInfos)
             {
                 CharacterResourceInfo _CharacterResourceInfo =
-                MonsterConfigInfos._monstersConfigTable.RowToCharacterResourceInfo(
-                MonsterConfigInfos._monstersConfigTable.Find_ID(_one.monsterId.ToString())
-                );
-    
+                monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(_one.monsterId.ToString()));
                 if (_CharacterResourceInfo != null)
                 {
                     GUILayout.BeginHorizontal();
-                    if (GUILayout.Button(_CharacterResourceInfo.prefabName, ButtonStyle))
+                    if (GUILayout.Button(_CharacterResourceInfo.REAL_NAME, ButtonStyle))
                     {
                         focusingCharInfo = _one;
                     }

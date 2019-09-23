@@ -39,6 +39,11 @@ public class CameraManager : MonoBehaviour
         _camera.depthTextureMode = DepthTextureMode.Depth;
     }
 
+    void Start()
+    {
+        Screen.SetResolution(1080, 720, true, 60);
+    }
+
     // Update is called once per frame
     void Update()
     {

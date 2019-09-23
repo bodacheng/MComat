@@ -187,7 +187,7 @@ public class NineAndTwo {
         if (skillid == null)
             return null;
         SkillConfig referenceStandardSkillConfig;
-        SkillsConfigInfos.SkillConfigDicForReference.TryGetValue(skillid, out referenceStandardSkillConfig);
+        SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(skillid, out referenceStandardSkillConfig);
         return referenceStandardSkillConfig;
     }
 
@@ -196,23 +196,17 @@ public class NineAndTwo {
         if (_SkillConfig == null)
             return null;
 
-        if (SkillsConfigInfos.SkillConfigDicForReference == null)
-        {
-            Debug.Log("技能列表读取错误，检查相关加载机制");
-            return null;
-        }
-
         SkillConfig referenceStandardSkillConfig;
 
-        if (_SkillConfig.id != null)
+        if (_SkillConfig.RECORD_ID != null)
         {
-            SkillsConfigInfos.SkillConfigDicForReference.TryGetValue(_SkillConfig.id,out referenceStandardSkillConfig);
+            SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(_SkillConfig.RECORD_ID,out referenceStandardSkillConfig);
             if (referenceStandardSkillConfig != null)
             {
-                _SkillConfig.keyName = referenceStandardSkillConfig.keyName;
+                _SkillConfig.REAL_NAME = referenceStandardSkillConfig.REAL_NAME;
                 _SkillConfig.ShowName = referenceStandardSkillConfig.ShowName;
                 _SkillConfig.ai_trigger_ranges = referenceStandardSkillConfig.ai_trigger_ranges;
-                _SkillConfig.SPLevel = referenceStandardSkillConfig.SPLevel;
+                _SkillConfig.SP_LEVEL = referenceStandardSkillConfig.SP_LEVEL;
                 _SkillConfig.stateType = referenceStandardSkillConfig.stateType;
             }
         }else{
@@ -220,21 +214,21 @@ public class NineAndTwo {
         }
 
         State_Transition_Set STS = null;
-        if (_SkillConfig != null && _SkillConfig.keyName != null && _SkillConfig.keyName != "")
+        if (_SkillConfig != null && _SkillConfig.REAL_NAME != null && _SkillConfig.REAL_NAME != "")
         {
             try
             {
-                STS = new State_Transition_Set(_SkillConfig.keyName,
+                STS = new State_Transition_Set(_SkillConfig.REAL_NAME,
                                                _SkillConfig.stateType,
-                                               _SkillConfig.AT,
+                                               _SkillConfig.ATTACK_WEIGHT,
                                                _SkillConfig.ai_trigger_ranges,
                                                 null,
                                                 null,
                                                inputs_defined.Null, 
                                                inputs_defined.Null,
-                                               _SkillConfig.SPLevel,
-                                               _SkillConfig.skillEmergentLevel,
-                                               _SkillConfig.rarelevel);
+                                               _SkillConfig.SP_LEVEL,
+                                               int.Parse(_SkillConfig.AI_PRIORITY),
+                                               _SkillConfig.RARITY_LEVEL);
                 return STS;
             }
             catch(Exception e)
@@ -757,7 +751,8 @@ public class NineAndTwo {
                                                               new string[0], 
                                                               inputs_defined.Null, inputs_defined.Null,
                                                               0,
-                                                              skillEmergentLevel.none,0);
+                                                              0,
+                                                              0);
 
         State_Transition_Set Victory = new State_Transition_Set("Victory",
                                                                 stateType.NONE,
@@ -767,7 +762,8 @@ public class NineAndTwo {
                                                                 new string[0],
                                                                 inputs_defined.Null, inputs_defined.Null,
                                                                 0,
-                                                                skillEmergentLevel.none,0);
+                                                                0,
+                                                                0);
 
         State_Transition_Set Death = new State_Transition_Set("Death",
                                                               stateType.NONE,
@@ -776,7 +772,8 @@ public class NineAndTwo {
                                                               new State_Rate_Set[0],
                                                               new string[0],
                                                               inputs_defined.Null, inputs_defined.Null, 0,
-                                                              skillEmergentLevel.none,0);
+                                                              0,
+                                                              0);
 
         State_Transition_Set Defend = new State_Transition_Set("Defend",
                                                                stateType.Def,
@@ -785,7 +782,8 @@ public class NineAndTwo {
                                                               (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0], //chuanEndCasualT0.ToArray(), 
                                                                (new List<string>() { "Hit", "KnockOff"}).ToArray(),
                                                                inputs_defined.Defend, inputs_defined.Defend_Cancel, 0,
-                                                               skillEmergentLevel.none,0);
+                                                               0,
+                                                               0);
         
         State_Transition_Set Move = new State_Transition_Set("Move_normal",
                                                              stateType.NONE,
@@ -794,7 +792,8 @@ public class NineAndTwo {
                                                              new State_Rate_Set[0], 
                                                              (new List<string>() { "Hit", "KnockOff"}).ToArray(),
                                                              inputs_defined.Null, inputs_defined.Null, 0,
-                                                             skillEmergentLevel.none,0);
+                                                             0,
+                                                             0);
                        
         State_Transition_Set Hit = new State_Transition_Set("Hit",
                                                             stateType.Hit,
@@ -803,7 +802,8 @@ public class NineAndTwo {
                                                             new State_Rate_Set[0], 
                                                             (new List<string>() { "Hit", "KnockOff"}).ToArray(), 
                                                             inputs_defined.Null, inputs_defined.Null, 0,
-                                                            skillEmergentLevel.none,0);
+                                                            0,
+                                                            0);
                                                             
        State_Transition_Set getUp = new State_Transition_Set("getUp",
                                                             stateType.getUp,
@@ -812,7 +812,8 @@ public class NineAndTwo {
                                                             new State_Rate_Set[0],
                                                             (new List<string>() { "Hit", "KnockOff"}).ToArray(), 
                                                             inputs_defined.Null, inputs_defined.Null, 0,
-                                                            skillEmergentLevel.none,0);
+                                                            0,
+                                                            0);
 
 
         List<State_Rate_Set> knockOFFCasualTransitios = new List<State_Rate_Set>();
@@ -921,8 +922,8 @@ public class NineAndTwo {
                                                                  (new List<string>() { "Hit","KnockOff"}).ToArray(),
                                                                  inputs_defined.Null, inputs_defined.Null,
                                                                  0,
-                                                                 skillEmergentLevel.none,
-                                                                0);
+                                                                 0,
+                                                                 0);
 
         StateTransitionSetList.Add(KnockOff);
 
@@ -994,16 +995,16 @@ public class NineAndTwo {
     //这个函数是服务于stagesmanager。因为编辑关卡的时候是直接去编辑九宫格的config
     public void refreshSkillNumsByConfigs()
     {
-        A1skillid = AConfig1 != null ? AConfig1.id : null;
-        A2skillid = AConfig2 != null ? AConfig2.id : null;
-        A3skillid = AConfig3 != null ? AConfig3.id : null;
+        A1skillid = AConfig1 != null ? AConfig1.RECORD_ID : null;
+        A2skillid = AConfig2 != null ? AConfig2.RECORD_ID : null;
+        A3skillid = AConfig3 != null ? AConfig3.RECORD_ID : null;
 
-        B1skillid = BConfig1 != null ? BConfig1.id : null;
-        B2skillid = BConfig2 != null ? BConfig2.id : null;
-        B3skillid = BConfig3 != null ? BConfig3.id : null;
+        B1skillid = BConfig1 != null ? BConfig1.RECORD_ID : null;
+        B2skillid = BConfig2 != null ? BConfig2.RECORD_ID : null;
+        B3skillid = BConfig3 != null ? BConfig3.RECORD_ID : null;
 
-        C1skillid = CConfig1 != null ? CConfig1.id : null;
-        C2skillid = CConfig2 != null ? CConfig2.id : null;
-        C3skillid = CConfig3 != null ? CConfig3.id : null;
+        C1skillid = CConfig1 != null ? CConfig1.RECORD_ID : null;
+        C2skillid = CConfig2 != null ? CConfig2.RECORD_ID : null;
+        C3skillid = CConfig3 != null ? CConfig3.RECORD_ID : null;
     }
 }

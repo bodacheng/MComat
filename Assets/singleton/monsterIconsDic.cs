@@ -22,9 +22,9 @@ public class monsterIconsDic {
 
     public Sprite readingSprite;
     private AssetBundle readingBundle;
-    private IDictionary<int, Sprite> characterIconDic = new Dictionary<int, Sprite>();
+    private IDictionary<string, Sprite> characterIconDic = new Dictionary<string, Sprite>();
 
-    public Sprite getMonsterIconSyn(int monsterid)
+    public Sprite getMonsterIconSyn(string monsterid)
     {
         readingSprite = null;
         characterIconDic.TryGetValue(monsterid,out readingSprite);
@@ -33,7 +33,7 @@ public class monsterIconsDic {
         return readingSprite;
     }
 
-    public IEnumerator findMonsterIconByCach(int resource_id)
+    public IEnumerator findMonsterIconByCach(string resource_id)
     {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
@@ -77,7 +77,7 @@ public class monsterIconsDic {
         yield return readingSprite;
     }
 
-    public IEnumerator findMonsterIconByResource(int resource_id)
+    public IEnumerator findMonsterIconByResource(string resource_id)
     {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)

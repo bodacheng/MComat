@@ -76,11 +76,11 @@ namespace mainMenu
                     DragAndDropItem _stoneOnCell = skillStoneSlot._DragAndDropCell.GetItem();
                     if (_stoneOnCell != null && _stoneOnCell._SkillConfigOfSkillStone != null)
                     {
-                        _skillStoneDetail.keyname.text = _stoneOnCell._SkillConfigOfSkillStone.keyName;
+                        _skillStoneDetail.keyname.text = _stoneOnCell._SkillConfigOfSkillStone.REAL_NAME;
                         _skillStoneDetail.Showname.text = _stoneOnCell._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.type.text = _stoneOnCell._SkillConfigOfSkillStone.type;
-                        _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SPLevel);
-                        mainProcessRunner.triggerMainProcess(_SkillsPrintOut.skillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.keyName));
+                        _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SP_LEVEL);
+                        mainProcessRunner.triggerMainProcess(_SkillsPrintOut.skillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
                     }
                 };
                 button.onClick.RemoveAllListeners();
@@ -150,15 +150,15 @@ namespace mainMenu
         {
             List<string> NineSkillIDs = new List<string>();
 
-            string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string B1 = B1DragAndDropCell.GetItem() != null ? B1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string B2 = B2DragAndDropCell.GetItem() != null ? B2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string B3 = B3DragAndDropCell.GetItem() != null ? B3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
-            string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.id : "-1";
+            string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string B1 = B1DragAndDropCell.GetItem() != null ? B1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string B2 = B2DragAndDropCell.GetItem() != null ? B2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string B3 = B3DragAndDropCell.GetItem() != null ? B3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
 
             NineSkillIDs.Add(A1);
             NineSkillIDs.Add(A2);
@@ -229,7 +229,7 @@ namespace mainMenu
         {
             if (_AccountCharacterInfo == null)
             {
-                Debug.Log("九宫格读取时机严重错误。");
+                Debug.Log("清理九宫格中。");
                 foreach (SkillStoneSlot _slot in allSlot)
                 {
                     _slot.OnSlotStonelocalID = null;

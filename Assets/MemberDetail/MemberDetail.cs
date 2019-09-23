@@ -58,7 +58,7 @@ namespace mainMenu
 
         public IEnumerator refreshMemberDetailGamenSystemBaseOnFocusingChar()
         {
-            if (focusingCharacterDataInfo == null)
+            if (focusingCharacterDataInfo == null || focusingCharacterDataInfo.monsterOfPlayerId == null || focusingCharacterDataInfo.monsterId == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 sell.onClick.RemoveAllListeners();
@@ -66,6 +66,11 @@ namespace mainMenu
                 SkillEditButton.onClick.RemoveAllListeners();
                 this.MemberInfoT.gameObject.SetActive(false);
                 this._LevelManager.turnOnUI(false);
+                
+                if (focusingCharacterDataInfo.monsterOfPlayerId == null || focusingCharacterDataInfo.monsterId == null)
+                {
+                    Debug.Log(" 出现了一个有残缺的GetMonsterOfPlayerDetailModel对象。这不正常，请改修逻辑 ");
+                }
                 yield break;
             }
 
@@ -161,8 +166,14 @@ namespace mainMenu
         Vector3 buttonWorldPosition;
         public Vector3 ButtonEffectInFxCameraWorldSpace(Camera fxcamera, GameObject UI_thing, float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
         {
-            buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().anchoredPosition;
-            true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x, buttonAnchorPosition.y);
+            //buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().anchoredPosition;
+            //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x, buttonAnchorPosition.y);
+            //buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
+            //buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
+            //return buttonWorldPosition;
+            
+            buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().transform.position;
+            true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
             buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
             buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
             return buttonWorldPosition;
@@ -173,7 +184,7 @@ namespace mainMenu
         {
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
             this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
-            CharacterResourceInfo characterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(focusingCharacterDataInfo.monsterId));
+            CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
             {
@@ -221,13 +232,13 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharacterResourceInfo characterResourceInfo = MonsterConfigInfos.getCharacterResourceInfo(int.Parse(accountCharacterInfo.monsterId));
+                CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(accountCharacterInfo.monsterId);
                 CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(accountCharacterInfo);
-                yield return (aI_DATA_CENTER.step1Initialize(characterResourceInfo.type, characterResourceInfo.BasicMoveSetName, characterResourceInfo.personalMagicPack));
+                yield return (aI_DATA_CENTER.step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI));
                 yield return (
                     aI_DATA_CENTER.step2Initialize(
                         characterResourceInfo.type, characterDataInfo._NineAndTwo,
-                        characterDataInfo._NineAndTwo.level, characterResourceInfo._zokusei, characterResourceInfo.personalMagicPack)
+                        characterDataInfo._NineAndTwo.level, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI)
                 );
 
                 if (aI_DATA_CENTER.AIStateRunner != null)

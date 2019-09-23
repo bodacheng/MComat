@@ -12,7 +12,7 @@ public class G_M_Attack_State : AI_State {
     private float RotationAdjustmentTime;
     private float rotate_speed;
 
-    private skillEmergentLevel _skillEmergentLevel;
+    private int _skillEmergentLevel;
 
     public G_M_Attack_State(string clip_name)
 	{
@@ -28,7 +28,7 @@ public class G_M_Attack_State : AI_State {
         this.RotationAdjustmentTime = -1;
     }
 
-    public G_M_Attack_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, skillEmergentLevel skillEmergentLevel)
+    public G_M_Attack_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, int skillEmergentLevel)
     {
         this.clip_name = clip_name;
         this.keepRotationAdjustment = false;
@@ -44,7 +44,7 @@ public class G_M_Attack_State : AI_State {
 
     public override bool enter_condition_priority1()
     {
-        if (_skillEmergentLevel == skillEmergentLevel.level1)
+        if (_skillEmergentLevel == 1)
         {
             return strategic_enter_condition();
         }
@@ -53,7 +53,7 @@ public class G_M_Attack_State : AI_State {
 
     public override bool enter_condition_priority2()
     {
-        if (_skillEmergentLevel == skillEmergentLevel.level2)
+        if (_skillEmergentLevel == 2)
         {
             return strategic_enter_condition();
         }
@@ -62,7 +62,7 @@ public class G_M_Attack_State : AI_State {
 
     public override bool enter_condition_priority3()
     {
-        if (_skillEmergentLevel == skillEmergentLevel.level3)
+        if (_skillEmergentLevel == 3)
         {
             return strategic_enter_condition();
         }

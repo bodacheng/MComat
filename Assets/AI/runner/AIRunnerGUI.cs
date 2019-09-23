@@ -215,7 +215,7 @@ public class AIRunnerGUI : Editor {
                                                                    false,
                                                                    inputs_defined.Null,inputs_defined.Null,
                                                                    0,
-                                                                   skillEmergentLevel.none));
+                                                                   0));
                             myScript.State_Transition_Set_List[i].casual_to_state_Sets = casualStateList.ToArray();
                         }
                     }
@@ -278,7 +278,7 @@ public class AIRunnerGUI : Editor {
                                              inputs_defined.Null, 
                                              inputs_defined.Null,
                                              0,
-                                             skillEmergentLevel.none,
+                                             0,
                                              0
                                             ));
                 InitializeList(-1, myScript.State_Transition_Set_List.Count);

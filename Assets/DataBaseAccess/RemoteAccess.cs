@@ -65,7 +65,7 @@ namespace dataAccess
             try
             {
                 CharacterDataInfo characterDataInfo = new CharacterDataInfo();
-                characterDataInfo.monsterId = int.Parse(accountCharacterInfo.monsterId);
+                characterDataInfo.monsterId = accountCharacterInfo.monsterId;
                 characterDataInfo.monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
                 characterDataInfo.level = 100; //需要一个对应表
 
@@ -81,9 +81,7 @@ namespace dataAccess
                 SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC3 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c3_skill_stone_record_id);
 
                 CharacterResourceInfo _TempCharacterResourceInfo = 
-                MonsterConfigInfos._monstersConfigTable.
-                RowToCharacterResourceInfo(MonsterConfigInfos._monstersConfigTable.Find_ID(accountCharacterInfo.monsterId));
-
+                monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
                 if (_TempCharacterResourceInfo == null)
                 {
                     Debug.Log("角色定义信息错误。monsterId：" + accountCharacterInfo.monsterId);
@@ -102,7 +100,7 @@ namespace dataAccess
                 nineAndTwo.C3skillid = _SkillStoneOfPlayerInfoModelC3.skillId;
                 nineAndTwo.moveType = _TempCharacterResourceInfo.moveType;
                 nineAndTwo.rushType = _TempCharacterResourceInfo.rushType;
-                nineAndTwo.canDefend = _TempCharacterResourceInfo.canDefend;
+                nineAndTwo.canDefend = _TempCharacterResourceInfo.DEFENDABLE_FLAG;
 
                 characterDataInfo._NineAndTwo = nineAndTwo;
                 characterDataInfo._NineAndTwo.sortNineAndTwo();

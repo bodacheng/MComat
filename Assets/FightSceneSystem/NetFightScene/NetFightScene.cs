@@ -62,14 +62,11 @@ public partial class NetFightScene : MonoBehaviour {
     [Space(7)]
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
-
-    void Awake()
-    {
-        Application.targetFrameRate = 60;
-    }
     
     void Start()
     {
+        //QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
         mainProcessRunner.triggerMainProcess(fightSceneStartUp());
     }
     
@@ -149,10 +146,10 @@ public partial class NetFightScene : MonoBehaviour {
                 switch (RealTimeGameProcessManager.playerTeam)
                 {
                     case Team.player1:
-                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0],true);
+                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], false);
                         break;
                     case Team.player2:
-                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0],true);
+                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], false);
                         break;
                 }
                 _RealTimeGameProcessManager.refresh();
@@ -164,16 +161,8 @@ public partial class NetFightScene : MonoBehaviour {
         fightSceneProcessesRunner.ProcessNagare();
     }
     
-    void OnGUI()
-	{
-		if (GUI.Button(new Rect(20, 20, 25, 25), "R"))
-		{
-            returnToFront(MainSceneStep.frontPage);
-        }       
-	}
-
     // 这个函数应该包括一些更深层的考虑。
-    public void returnToFront(MainSceneStep step)
+    public void returnToFront()
     {
         //Position_Set_Executor.Instance.P_sets.Clear();
         List<Data_Center> player1 = _RealTimeGameProcessManager.FightTeam1.teamMembers.values;
@@ -192,7 +181,7 @@ public partial class NetFightScene : MonoBehaviour {
         _CharSetManager.preventTheseMyModelsFromDestroying(dontdestroy);
         EffectAndHurtObjectLoading.Instance.ReparentPooledObjects(true);
         _RealTimeGameProcessManager.Clear();
-        MainMenuNote.Instance.goingtostep = step;
+        MainMenuNote.Instance.goingtostep = MainSceneStep.frontPage;
         SceneManager.LoadScene(1);
     }
 

@@ -125,6 +125,7 @@ namespace dataAccess
                 }
                 yield break;
             }
+            Debug.Log("开始尝试更新角色信息。monsterOfPlayerId:"+after.monsterOfPlayerId);
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:

@@ -94,7 +94,6 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
 
     public FightReward loadFightReward(TextAsset Script)
     {
-        FightReward _FightReward;
         try
         {
             XmlSerializer serializer = new XmlSerializer(typeof(FightReward));
