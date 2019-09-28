@@ -258,18 +258,15 @@ public class stagesManagerGUI : Editor {
                 GUI.backgroundColor = Color.gray;
                 if (focusingCharInfo._NineAndTwo == null)
                     focusingCharInfo._NineAndTwo = new NineAndTwo();
-                if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.getMConfig() != focusingSkillConfig ?
-                     ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.getMConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getMConfig();
                 }
-                if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.getDConfig() != focusingSkillConfig ?
-                    ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.getDConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getDConfig();
                 }
-                if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.getRConfig() != focusingSkillConfig ?
-                    ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.getRConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getRConfig();
                 }
@@ -282,8 +279,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA1Config() ?
-                                     ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA1Config();
                 }
@@ -292,8 +288,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA2Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA2Config();
                 }
@@ -302,8 +297,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA3Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA3Config();
                 }
@@ -314,8 +308,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB1Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB1Config();
                 }
@@ -324,8 +317,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB2Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB2Config();
                 }
@@ -334,8 +326,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB3Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB3Config();
                 }
@@ -346,8 +337,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC1Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC1Config();
                 }
@@ -356,8 +346,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC2Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC2Config();
                 }
@@ -366,8 +355,7 @@ public class stagesManagerGUI : Editor {
                     GUI.backgroundColor = Color.white;
                 else
                     GUI.backgroundColor = Color.yellow;
-                if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC3Config() ?
-                                         ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC3Config();
                 }
