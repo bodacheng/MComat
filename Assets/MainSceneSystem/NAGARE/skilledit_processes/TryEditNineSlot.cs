@@ -51,9 +51,8 @@ public class TryEditNineSlot : MainSceneProcess
     public IEnumerator enterProcess()
     {
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(true);
+        this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
-        this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         
         IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo("1");
         yield return getchar;
@@ -68,10 +67,10 @@ public class TryEditNineSlot : MainSceneProcess
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
         _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
-            this._MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
-            this._MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
-            this._MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
-            this._MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),_CharacterResourceInfo._zokusei);
+            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
+            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
+            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
+            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),_CharacterResourceInfo._zokusei);
         yield return refreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion();
     }
     

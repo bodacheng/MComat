@@ -66,11 +66,7 @@ namespace mainMenu
                 SkillEditButton.onClick.RemoveAllListeners();
                 this.MemberInfoT.gameObject.SetActive(false);
                 this._LevelManager.turnOnUI(false);
-                
-                if (focusingCharacterDataInfo.monsterOfPlayerId == null || focusingCharacterDataInfo.monsterId == null)
-                {
-                    Debug.Log(" 出现了一个有残缺的GetMonsterOfPlayerDetailModel对象。这不正常，请改修逻辑 ");
-                }
+                Debug.Log(" 出现了一个有残缺的GetMonsterOfPlayerDetailModel对象。这不正常，请改修逻辑 ");
                 yield break;
             }
 
@@ -161,29 +157,10 @@ namespace mainMenu
             yield break;
         }
 
-        Vector2 buttonAnchorPosition;
-        Vector2 true_buttonAnchorPosition;
-        Vector3 buttonWorldPosition;
-        public Vector3 ButtonEffectInFxCameraWorldSpace(Camera fxcamera, GameObject UI_thing, float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
-        {
-            //buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().anchoredPosition;
-            //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x, buttonAnchorPosition.y);
-            //buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-            //buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
-            //return buttonWorldPosition;
-            
-            buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().transform.position;
-            true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
-            buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-            buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
-            return buttonWorldPosition;
-        }
-
         // 纯表现系
         public IEnumerator SkillEditConfirmAnimation()
         {
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
             CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
@@ -210,7 +187,6 @@ namespace mainMenu
             EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, caculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             yield return new WaitForSeconds(0.1f);
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
-            this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(true);
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化

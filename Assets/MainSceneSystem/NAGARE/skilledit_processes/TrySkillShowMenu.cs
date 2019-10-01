@@ -22,7 +22,6 @@ public class TrySkillShowMenu : MainSceneProcess
         CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
         this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this._SkillStonesBox.BoxWholeT.gameObject.SetActive(false);
         this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(false);
         this._MemberDetail.MemberSkillshowT.gameObject.SetActive(true);

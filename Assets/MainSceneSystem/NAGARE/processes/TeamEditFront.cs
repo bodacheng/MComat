@@ -9,7 +9,6 @@ public class TeamEditFront : MainSceneProcess
     {
         this._LoadingCanvas.DarkOff(0.5f);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;

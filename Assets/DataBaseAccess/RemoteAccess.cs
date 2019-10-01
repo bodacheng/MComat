@@ -11,26 +11,25 @@ namespace dataAccess
     {
         public static IEnumerator generalRemoteAccess(WWWForm form,string API)
         {
-            //using (UnityWebRequest webRequest = UnityWebRequest.Post(API, form))
+            UnityWebRequest webRequest = UnityWebRequest.Post(API, form);
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+            if (webRequest.isNetworkError)
             {
-                // Request and wait for the desired page.
-                UnityWebRequest webRequest = UnityWebRequest.Post(API, form);
-                yield return webRequest.SendWebRequest();
-                if (webRequest.isNetworkError)
+                Debug.Log("Error: " + webRequest.error);
+                Debug.Log("已经以这个url为目标发送登陆请求：" + webRequest.url);
+                Debug.Log("返回code：" + webRequest.responseCode);
+                yield return null;
+            }
+            else
+            {
+                if (webRequest.responseCode == 200)
                 {
-                    Debug.Log("Error: " + webRequest.error);
+                    Debug.Log(API + "请求成功");
+                    yield return webRequest.downloadHandler;
+                }else{
+                    Debug.Log(API + "请求失败.  " + form);
                     yield return null;
-                }
-                else
-                {
-                    if (webRequest.responseCode == 200)
-                    {
-                        Debug.Log(API + "请求成功");
-                        yield return webRequest.downloadHandler;
-                    }else{
-                        Debug.Log(API + "请求失败.  " + form);
-                        yield return null;
-                    }
                 }
             }
         }

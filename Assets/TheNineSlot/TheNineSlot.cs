@@ -22,7 +22,6 @@ namespace mainMenu
 
         [Space(5)]
         [Header("几个重要RectTransform")]
-        public RectTransform NineAndTwoCanvas;
         public RectTransform NineSlotT;
 
         [Space(5)]

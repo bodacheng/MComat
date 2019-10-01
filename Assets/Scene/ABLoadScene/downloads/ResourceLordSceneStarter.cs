@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using dataAccess;
+using UnityEngine.SceneManagement;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -58,10 +59,33 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     {
         BundleURL = assetBundleURL;
     }
+
+    public void BeginRemoteTestMode()
+    {
+        StartCoroutine(beginRemoteTestMode());
+    }
+    
+    public void BeginLocalTestMode()
+    {
+        StartCoroutine(beginLocalTestMode());
+    }
+    
+    public IEnumerator beginRemoteTestMode()
+    {
+        AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.remoteTestPlayer;
+        yield return AccountSet.Instance.login();
+        SceneManager.LoadScene(1);       
+    }
+    
+    public IEnumerator beginLocalTestMode()
+    {
+        AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
+        SceneManager.LoadScene(1);
+        yield break;
+    }
         
     public IEnumerator ResourcePrepareProcess()
-    {
-        AccountSet.Instance._playerinfoReferenceMode = _ResourceSetting._playerinfoReferenceMode;        
+    {       
         ResourceLoadingSetting.Instance.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
         ResourceLoadingSetting.Instance.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
         ResourceLoadingSetting.Instance.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
@@ -72,13 +96,6 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         _LoadingCanvas.turnOnProcessDescription(true);
         _LoadingCanvas.nowProcess("正在加载资源",0);
         
-        switch(AccountSet.Instance._playerinfoReferenceMode)
-        {
-            case playerinfoReferenceMode.remoteTestPlayer:
-                yield return AccountSet.Instance.login();
-                break;
-        }
-
         switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:

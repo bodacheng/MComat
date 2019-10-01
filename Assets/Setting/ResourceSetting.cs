@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ResourceSetting : MonoBehaviour
 {
-    public playerinfoReferenceMode _playerinfoReferenceMode;
     public ResourceLoadMode ConfigFileLoadingMode;
     public ResourceLoadMode ModelLoadingMode;
     public ResourceLoadMode AnimationLoadingMode;

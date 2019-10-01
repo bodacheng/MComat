@@ -29,10 +29,6 @@ namespace mainMenu
         public RectTransform BoxWholeT, BoxT, stonesTempContainer;
 
         [Space(7)]
-        [Header("MonsterBox")]
-        public MonsterBox _MonsterBox;
-
-        [Space(7)]
         [Header("type按钮")]
         public Dropdown types;
         public Button NormalTab;
@@ -78,11 +74,9 @@ namespace mainMenu
         [Space(7)]
         [Header("技能石详细")]
         public skillStoneDetail _skillStoneDetail;
-
-        [Space(7)]
-        [Header("UI elements 盒子中石头详细")]
-        public RectTransform usingCharacterIconPlace;
-        charIcon stoneusingcharIcon;
+       
+        [Header("fxcamera")]
+        public Camera fxCamera;
 
         private IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
         private string focusingtype;
@@ -136,7 +130,7 @@ namespace mainMenu
                         _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.REAL_NAME;
                         _skillStoneDetail.Showname.text = _stone._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
-                        switchusingmonstericon(_stone.localID);
+                        _skillStoneDetail.switchusingmonstericon(_stone.localID);
                     }
                 };
                 button.onClick.RemoveAllListeners();
@@ -144,58 +138,34 @@ namespace mainMenu
             }
         }
         
-        private void switchusingmonstericon(string stonemonsterOfPlayerId)
+        public void NormalTabFeature(GameObject self)
         {
-            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(stonemonsterOfPlayerId);
-            if (SkillStoneOfPlayerInfoModel != null)
-            {
-                charIcon charIcon = _MonsterBox.getCharIcon(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
-                if (charIcon != null)
-                {
-                    if (stoneusingcharIcon)
-                        stoneusingcharIcon.gameObject.transform.SetParent(_MonsterBox.MonsterBoxContainer);
-                    charIcon.gameObject.SetActive(true);
-                    charIcon.gameObject.transform.SetParent(usingCharacterIconPlace);
-                    charIcon.transform.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
-                    stoneusingcharIcon = charIcon;
-                }
-                else
-                {
-                    if (stoneusingcharIcon)
-                        stoneusingcharIcon.gameObject.transform.SetParent(_MonsterBox.MonsterBoxContainer);
-                }
-            }
-            else
-            {
-                if (stoneusingcharIcon)
-                    stoneusingcharIcon.gameObject.transform.SetParent(_MonsterBox.MonsterBoxContainer);
-            }
-        }
-
-        public void NormalTabFeature()
-        {
+            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 0;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
-        public void EX1TabFeature()
+        public void EX1TabFeature(GameObject self)
         {
+            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 1;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
-        public void EX2TabFeature()
+        public void EX2TabFeature(GameObject self)
         {
+            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 2;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
-        public void EX3TabFeature()
+        public void EX3TabFeature(GameObject self)
         {
+            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 3;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
-
+        
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
         public IEnumerator EXTabsFeatureRefresh(String type, bool viewingMode)
         {
@@ -375,6 +345,24 @@ namespace mainMenu
             item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
             item.localID = stonelocalid;
             item.gameObject.transform.SetParent(stonesTempContainer);           
+        }
+        
+        Vector2 buttonAnchorPosition;
+        Vector2 true_buttonAnchorPosition;
+        Vector3 buttonWorldPosition;
+        public Vector3 ButtonEffectInFxCameraWorldSpace(Camera fxcamera, GameObject UI_thing, float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
+        {
+            //buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().anchoredPosition;
+            //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x, buttonAnchorPosition.y);
+            //buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
+            //buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
+            //return buttonWorldPosition;
+            
+            buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().transform.position;
+            true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
+            buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
+            buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
+            return buttonWorldPosition;
         }
     }
 }

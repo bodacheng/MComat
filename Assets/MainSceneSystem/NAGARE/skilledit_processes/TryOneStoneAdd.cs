@@ -25,7 +25,7 @@ public class TryOneStoneAdd : MainSceneProcess
             yield return (loadMyStonesProcess);
 
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(true);
+        this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
         this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
@@ -45,10 +45,10 @@ public class TryOneStoneAdd : MainSceneProcess
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_MemberDetail.focusingCharacterDataInfo.monsterId);
         _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
             _CharacterResourceInfo._zokusei);
         yield return refreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion();
         yield break;

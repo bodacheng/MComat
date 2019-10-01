@@ -10,7 +10,6 @@ public class SelfFightFront : MainSceneProcess
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this._SelfFightManager.clear();
         yield return this._SelfFightManager.INITeamPosButtons();
         this._MonsterBox.MonsterBoxContainer.gameObject.SetActive(true);

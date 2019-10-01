@@ -24,10 +24,7 @@ namespace mainMenu
         public CharsManager _CharSetManager;
         public Text accountDiamondCoin;
         public Text accountIntelliCoin;
-
-        [Header("fxcamera")]
-        public Camera fxCamera;
-        
+      
         [Space(11)]
         [Header("modelShower")]
         public modelShower _modelShower;
@@ -84,7 +81,6 @@ namespace mainMenu
         [Space(7)]
         [Header("Canvas")]
         public Canvas MainMenuCanvas;
-        public Canvas SkillEditCanvas;
 
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
@@ -120,11 +116,10 @@ namespace mainMenu
             Application.targetFrameRate = 60;
 
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
+            TheNineSlot.NineSlotT.gameObject.SetActive(false);
             _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
             _MemberDetail._LevelManager.turnOnUI(false);
             MainMenuCanvas.gameObject.SetActive(false);
-            SkillEditCanvas.gameObject.SetActive(false);
 
             _LoadingCanvas.Loading_Canvas.gameObject.SetActive(true);
             _LoadingCanvas.turnOnProcessDescription(true);

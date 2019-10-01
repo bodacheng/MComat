@@ -18,7 +18,6 @@ public class MemberDetail_skillshow : MainSceneProcess
         CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
         this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this._SkillStonesBox.BoxWholeT.gameObject.SetActive(false);
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
         this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(false);

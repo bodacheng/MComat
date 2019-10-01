@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class StartUpScenePresentation : MonoBehaviour
 {
     [Space(7)]
     [Header("LoadingProcess")]
     public LoadingCanvas _LoadingCanvas;
+
+    [Space(7)]
+    [Header("选择模式T")]
+    public RectTransform testmodeSelectT;
     
     [Space(7)]
     [Header("ResourceLordSceneStarter")]
@@ -34,7 +37,7 @@ public class StartUpScenePresentation : MonoBehaviour
     void Update()
     {
         if (pProcessFinished && _resourceLordSceneStarter.dProcessFinished)
-            SceneManager.LoadScene(1);
+            testmodeSelectT.gameObject.SetActive(true);
     }
     
     public IEnumerator presentationProcess()

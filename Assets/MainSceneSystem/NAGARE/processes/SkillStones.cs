@@ -12,7 +12,6 @@ public class SkillStones : MainSceneProcess
         this._LoadingCanvas.DarkOff(1f);
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this._TheNineSlot.NineSlotT.gameObject.SetActive(false);
         
         IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();

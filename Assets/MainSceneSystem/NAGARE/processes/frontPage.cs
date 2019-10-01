@@ -22,7 +22,6 @@ public class frontPage : MainSceneProcess
     {
         this._preparingScene.MainMenuCanvas.gameObject.SetActive(true);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
         this._preparingScene.FightModeChooseT.gameObject.SetActive(true);
 

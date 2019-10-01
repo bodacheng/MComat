@@ -149,9 +149,18 @@ public class mobileInputsManager : MonoBehaviour {
         if (!zokuseiButtonEffects.ContainsKey(zokusei))
         {
             zokuseiButtonEffectsGroup zokuseiBUttons = new zokuseiButtonEffectsGroup();
-            zokuseiBUttons.INI(effectsParent,zokusei,Attack,Fire1,Fire2);
+            zokuseiBUttons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
             zokuseiBUttons.close();
-            zokuseiButtonEffects.Add(zokusei,zokuseiBUttons);
+            zokuseiButtonEffects.Add(zokusei, zokuseiBUttons);
+        }
+        else { 
+            if (zokuseiButtonEffects[zokusei] == null)
+            {
+                zokuseiButtonEffectsGroup zokuseiBUttons = new zokuseiButtonEffectsGroup();
+                zokuseiBUttons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
+                zokuseiBUttons.close();
+                zokuseiButtonEffects[zokusei] = zokuseiBUttons;
+            }
         }
     }
 

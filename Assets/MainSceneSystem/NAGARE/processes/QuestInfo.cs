@@ -12,7 +12,6 @@ public class QuestInfo : MainSceneProcess
     public IEnumerator enterProcess()
     {
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this.T.gameObject.SetActive(true);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;

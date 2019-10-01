@@ -10,7 +10,6 @@ public class ShowOneSeasonChapters : MainSceneProcess
     {
         this._LoadingCanvas.DarkOff(1f);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(false);
         this.T.gameObject.SetActive(true);
         this._LoadingCanvas.LightUp();
         yield break;

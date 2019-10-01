@@ -10,7 +10,7 @@ public class MemberDetail_edit : MainSceneProcess
     {
         this._LoadingCanvas.DarkOff(0.5f);
         this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineAndTwoCanvas.gameObject.SetActive(true);
+        this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
         yield return SkillEditorButtonBehaviour(this._MemberDetail.focusingCharacterDataInfo);
         this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(true);
@@ -19,10 +19,10 @@ public class MemberDetail_edit : MainSceneProcess
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
         _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
-            _MemberDetail.ButtonEffectInFxCameraWorldSpace(_preparingScene.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
+            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
             _CharacterResourceInfo._zokusei);
         this._LoadingCanvas.LightUp();
         yield break;
