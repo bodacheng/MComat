@@ -76,16 +76,6 @@
     <Compile Include="Assets\AssetBundleBrowser\UnityEngine.AssetBundles\Editor\AssetBundleBrowser\BundleDetailList.cs" />
     <Compile Include="Assets\AssetBundleBrowser\UnityEngine.AssetBundles\Editor\AssetBundleBrowser\MessageList.cs" />
     <Compile Include="Assets\AssetBundleBrowser\UnityEngine.AssetBundles\Editor\AssetBundleBrowser\MessageSystem.cs" />
-    <Compile Include="Assets\Asstes\charResources\Little Dragons\Editor\DragoEyesEditor.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\PostEffects\PC\Common\Editor\ME_EditorGUIHelper.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\PostEffects\PC\Common\Editor\ME_FieldFinder.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\PostEffects\PC\Common\Editor\ME_MinDrawer.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\Scripts\Editor\ME_LayerUtilsDistortion.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\Scripts\Editor\MeshRendererEditor.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\Shaders\Editor\ME_CustomMaterialInspectorParticle.cs" />
-    <Compile Include="Assets\Asstes\KriptoFX\MeshEffect\Shaders\Editor\ME_CustomShaderGUI.cs" />
-    <Compile Include="Assets\Asstes\UIParticles\Editor\MenuOption.cs" />
-    <Compile Include="Assets\Asstes\UIParticles\Editor\UiParticlesEditor.cs" />
     <Compile Include="Assets\CSV2Table\Editor\CSV2Table.cs" />
     <Compile Include="Assets\CSV2Table\Editor\CSVView.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouch\Plugins\Editor\EasytouchHierachyCallBack.cs" />

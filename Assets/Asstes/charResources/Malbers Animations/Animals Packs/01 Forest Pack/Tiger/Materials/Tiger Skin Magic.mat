@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Tiger Skin Magic
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHATEST_ON _EMISSION
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CutoutTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortTex1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortTex2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 2800000, guid: 19b27dc2488d08b4c913385aaa3bee9d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emissive:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HeightTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Illum:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Specular:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texttr:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AllPower: 7.9
+    - _AlphaClip: 10
+    - _AlphaMultiplier: 96.3
+    - _AlphaPower: 7.1
+    - _Amount: 0.1
+    - _BumpScale: 1
+    - _CullMode: 2
+    - _Cutoff: 0.5
+    - _Cutout: 1
+    - _CutoutThreshold: 0.015
+    - _DetailNormalMapScale: 1
+    - _Distortion: 100
+    - _Divisions: 0.406
+    - _DstBlend: 0
+    - _Emission: 0
+    - _EmissionLM: 0
+    - _EmissionScaleUI: 0
+    - _Emissionvalue: 0.1
+    - _EmissiveV: 0.2
+    - _EmissiveValue: 0
+    - _Fresnel: 2
+    - _FresnelDistort: 1500
+    - _FresnelPow: 5
+    - _FresnelR0: 0.04
+    - _Gloss: 0.8
+    - _GlossMapScale: 1
+    - _Glossiness: 0.25
+    - _GlossyReflections: 1
+    - _Height: 0.1
+    - _InnerColorPower: 1
+    - _InvFade: 1
+    - _LightW: 2
+    - _Metallic: 0.81
+    - _Mode: 1
+    - _OcclusionStrength: 1
+    - _Offset: 0
+    - _Parallax: 0.02
+    - _PowerBC: 2
+    - _PowerNormal: 0
+    - _PowerTexture: 1
+    - _Refract: 1
+    - _RefractFalloff: 1
+    - _RefractiveStrength: 0
+    - _RimPower: 0.708
+    - _Shininess: 0.7
+    - _SmoothNormals: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _SoftNormals: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Thickness: 10
+    - _Transp: 0.6
+    - _UVSec: 0
+    - _UseAlphaCliping: 0
+    - _UseBlending: 0
+    - _UseCutout: 0
+    - _UseFresnel: 0
+    - _UseHeight: 0
+    - _UseMainTex: 0
+    - _UseRefractive: 0
+    - _UseSoft: 0
+    - _UseVelocity: 0
+    - _ZWrite: 1
+    - _ZWriteMode: 0
+    - _alphaCutoffThreshold: 0.125
+    - _specMap: 1
+    - _textureBased: 0
+    m_Colors:
+    - _Color: {r: 0.06953951, g: 0.017132433, b: 0.3301887, a: 1}
+    - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DistortSpeed: {r: 1, g: 0.1, b: 1, a: 0.1}
+    - _EColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Ecolor: {r: 0.5735294, g: 0.1475995, b: 0.1475995, a: 1}
+    - _EmissionColor: {r: 1.3898168, g: 1.3898168, b: 1.3898168, a: 1}
+    - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
+    - _FresnelColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _HeightUVScrollDistort: {r: 8, g: 12, b: 0, a: 0}
+    - _InnerColor: {r: 1, g: 0, b: 0, a: 0.94509804}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 0, b: 0, a: 0.8392157}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 8.574187, g: 0, b: 0, a: 0.8862745}
