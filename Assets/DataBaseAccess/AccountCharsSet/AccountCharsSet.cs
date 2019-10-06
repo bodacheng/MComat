@@ -76,8 +76,6 @@ namespace dataAccess
         // 3. 如果更新需要消耗，有足够的钱
         public bool checkCharDataUpateInfo(GetMonsterOfPlayerDetailModel before, GetMonsterOfPlayerDetailModel after)//先检查
         {
-            bool ok = false;
-
             if (before.a1_skill_stone_record_id != after.a1_skill_stone_record_id)
             {
             }

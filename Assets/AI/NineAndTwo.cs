@@ -7,7 +7,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using System;
 using System.Linq;
-using EZObjectPools;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

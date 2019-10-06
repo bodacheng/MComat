@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZObjectPools;
 using HittingDetection;
 using Soul;
 
@@ -13,7 +12,7 @@ public class Knock_Off_State : AI_State
     private float horizentalForce;
     bool if_r_rotation;
 
-    EZObjectPool superHitPool;
+    DecompositionerPool superHitPool;
 
     public Knock_Off_State(float knock_off_time, float Upforce,float horizentalForce)
     {
@@ -56,7 +55,7 @@ public class Knock_Off_State : AI_State
     }
 
     Vector3 used_velcoity;
-    GameObject processingBlood;
+    Decompositioner processingBlood;
     Vector3 force_direction;
     string KnockOffSparkPersonalEffectPath;    
     List<AnimationClip> knockoffAnimations;    
@@ -109,7 +108,9 @@ public class Knock_Off_State : AI_State
                 superHitPool = EffectAndHurtObjectLoading.Instance.iniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
                 if (superHitPool != null)
                 {
-                    processingBlood = superHitPool.TryGetNextObject(BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].damageHappenPoint, Quaternion.identity);
+                    processingBlood = superHitPool.Rent();
+                    processingBlood.transform.position = BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].damageHappenPoint;
+                    processingBlood.transform.rotation = Quaternion.identity;
                 }
                 
                 //else

@@ -106,39 +106,9 @@
     <Compile Include="Assets\Ani_Calling_Sys\dontuse\NullStateProcess.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\readMe.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\StateStartsRandom.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
-    <Compile Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\AudioManager\AudioManager.cs" />
-    <Compile Include="Assets\BOWeaponSystem\BO_DestroyAfterSeconds.cs" />
     <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
+    <Compile Include="Assets\BOWeaponSystem\Decompositioner.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BO_Health.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BO_Health_CriticalGauge.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BO_Hitbox.cs" />
@@ -312,11 +282,7 @@
     <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
     <Compile Include="Assets\EffectsSystem\DanMuTest.cs" />
     <Compile Include="Assets\EffectsSystem\RanSe.cs" />
-    <Compile Include="Assets\EZ Object Pools\Scripts\EZObjectPool.cs" />
-    <Compile Include="Assets\EZ Object Pools\Scripts\PooledObjects\ParticleSystemDisable.cs" />
-    <Compile Include="Assets\EZ Object Pools\Scripts\PooledObjects\PooledObject.cs" />
-    <Compile Include="Assets\EZ Object Pools\Scripts\PooledObjects\TimedDisable.cs" />
-    <Compile Include="Assets\EZ Object Pools\Scripts\PoolObjectsReparentManger.cs" />
+    <Compile Include="Assets\EZ Object Pools\DecompositionerPool.cs" />
     <Compile Include="Assets\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\FightingSceneUISystem\charIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
@@ -556,16 +522,6 @@
     <Compile Include="Assets\UI\ReturnButtonManager.cs" />
     <Compile Include="Assets\UI\SideCharIcon.cs" />
     <Compile Include="Assets\UI\SwapAllModelShader.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\SampleGameResouce\Script\Bullet.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\SampleGameResouce\Script\DestroyObj.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\SampleGameResouce\Script\Enemy.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\SampleGameResouce\Script\EnemyGenerator.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\SampleGameResouce\Script\GameController.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\SampleGameResouce\Script\PlayerController.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\Script\AnimButton.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\Script\BottonController.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\Script\CategoryButton.cs" />
-    <Compile Include="Assets\UI_TextAnimation_Pack\Script\SliderScale.cs" />
     <None Include="Assets\Resources\AIScripts\human\0616test.xml" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Hsl.shader" />
@@ -615,13 +571,11 @@
     <None Include="Assets\POFX\Shaders\Resources\Desaturate.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
-    <None Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\specialShader\Mobile Particles Additive Culled.shader" />
     <None Include="Assets\JsonSupport\JsonDotNet\link.xml" />
-    <None Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\POFX\Shaders\Resources\FlatColor.shader" />
     <None Include="Assets\Resources\AIScripts\human\1117Test.xml" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
@@ -629,7 +583,6 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
-    <None Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.cginc" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\JsonSupport\UnityPackage\JsonNet.base.json" />
@@ -641,7 +594,6 @@
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
-    <None Include="Assets\Asstes\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
     <None Include="Assets\POFX\Shaders\Resources\Eraser.shader" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
@@ -1265,6 +1217,10 @@
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{75883105-9718-7D52-49BE-8F73049FADDB}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{CFD99446-2050-1694-FB2C-565AD4E01465}</Project>
+      <Name>UniRx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

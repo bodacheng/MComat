@@ -179,7 +179,6 @@ public partial class NetFightScene : MonoBehaviour {
         }
         
         _CharSetManager.preventTheseMyModelsFromDestroying(dontdestroy);
-        EffectAndHurtObjectLoading.Instance.ReparentPooledObjects(true);
         _RealTimeGameProcessManager.Clear();
         MainMenuNote.Instance.goingtostep = MainSceneStep.frontPage;
         SceneManager.LoadScene(1);

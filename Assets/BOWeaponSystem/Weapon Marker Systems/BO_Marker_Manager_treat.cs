@@ -9,7 +9,6 @@ namespace HittingDetection
         private Vector3 force_direction;
         private v_Damage new_damage;
         private BO_Health myOwnerHealth;
-        private BO_DestroyAfterSeconds _BO_DestroyAfterSeconds;
         private attack_on_shield_result collision;
         //These DH and DS variables are Distances to the shield spots. Whie the shield is active, DH ("Distance to Health", distance to the back point of the shiled) has to be less than all the other shield edge spots (DS, "Distance to Shield")
         private float dh;
@@ -110,9 +109,7 @@ namespace HittingDetection
                         point = _wallHitPositions[temp];
                         if (ifVectorClean(point))
                         {
-                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", this.personalEffectPath,
-                                                                               point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up),
-                                                                              null);
+                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", this.personalEffectPath,point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up),null);
                         }
                     }
                 }
@@ -258,56 +255,6 @@ namespace HittingDetection
                     _ContinuousDamage_Timer = 0;
                 }
             }
-
-            switch (_WeaponMode)
-            {
-                case WeaponMode.NormalWeapon:
-                    break;
-                case WeaponMode.EnergyFromBodyWeapon:
-                    if (!DeathDisableDone)
-                    {
-                        if (weaponHP > 0 && weaponHPCounter <= 0)
-                        {
-                            DeathDisableDone = true;
-                        }
-                        if (myOwnerHealth != null)
-                        {
-                            if (myOwnerHealth.IFgettingDamage())
-                            {
-                                DeathDisableDone = true;
-                            }
-                        }
-                        if (DeathDisableDone)
-                        {
-                            DisableMarkers();
-                            StartCoroutine(disableAfterTime(0.1f));
-                        }
-                    }
-                    break;
-                case WeaponMode.FlyerWeapon:
-                    if (!DeathDisableDone)
-                    {
-                        if (weaponHP > 0 && weaponHPCounter <= 0)
-                        {
-                            DeathDisableDone = true;
-                        }
-                        if (DeathDisableDone)
-                        {
-                            DisableMarkers();
-                            StartCoroutine(disableAfterTime(0.1f));
-                        }
-                    }
-                    break;
-            }
-        }
-
-        // 这个函数一般情况下是纯粹关乎表现问题，所以我们认为游戏暂停的话这个不会造成太大影响。。但确实SetActive活动可能影响对象池
-        public IEnumerator disableAfterTime(float time)
-        {
-            if (_BO_DestroyAfterSeconds != null)
-                _BO_DestroyAfterSeconds.stopEmissions();
-            yield return new WaitForSeconds(time);
-            gameObject.SetActive(false);
         }
     }
 }

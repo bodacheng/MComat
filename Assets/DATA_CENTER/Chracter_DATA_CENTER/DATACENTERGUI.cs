@@ -319,38 +319,38 @@ public class DATACENTERGUI : Editor {
             }
 
             string bladeName;
-            string shieldName;
+            //string shieldName;
             switch(myScript.Zokusei)
             {
                 case zokusei.darkMagic:
                     bladeName = "D_enegryBlade";
-                    shieldName = "dark_Shield"; 
+                    //shieldName = "dark_Shield"; 
                     break;
                 case zokusei.blueMagic:
                     bladeName = "B_enegryBlade";
-                    shieldName = "blue_Shield";
+                    //shieldName = "blue_Shield";
                     break;
                 case zokusei.greenMagic:
                     bladeName = "G_enegryBlade";
-                    shieldName = "green_Shield";
+                    //shieldName = "green_Shield";
                     break;
                 case zokusei.lightMagic:
                     bladeName = "W_enegryBlade";
-                    shieldName = "light_Shield";
+                    //shieldName = "light_Shield";
                     break;
                 case zokusei.redMagic:
                     bladeName = "R_enegryBlade";
-                    shieldName = "red_Shield";
+                    //shieldName = "red_Shield";
                     break;
                 default:
                     bladeName = "D_enegryBlade";
-                    shieldName = "blue_Shield";
+                    //shieldName = "blue_Shield";
                     break;
             }
 
             if (myScript.right_hand_weapon == null)
             {
-                GameObject enegryBlade = GameObject.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
+                GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(myScript.right_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
@@ -359,7 +359,7 @@ public class DATACENTERGUI : Editor {
             }
             if (myScript.left_hand_weapon == null)
             {
-                GameObject enegryBlade = GameObject.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
+                GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(myScript.left_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
@@ -378,7 +378,7 @@ public class DATACENTERGUI : Editor {
 
             if (myScript.floorChecks == null)
             {
-                GameObject floorChecker = GameObject.Instantiate(Resources.Load("BasicCharComponent" + "/" + "FloorChecks") as GameObject);
+                GameObject floorChecker = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + "FloorChecks") as GameObject);
                 if (floorChecker)
                 {
                     floorChecker.name = "FloorChecks";

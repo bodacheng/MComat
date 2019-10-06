@@ -145,6 +145,7 @@ namespace Api.Common {
                 }
             }
             catch (Exception e) {
+                Debug.Log(e);
                 Debug.LogError("レスポンスの解析に失敗しました。\n" + req.downloadHandler.text);
                 foreach (var prop in form.GetType().GetProperties())
                 {

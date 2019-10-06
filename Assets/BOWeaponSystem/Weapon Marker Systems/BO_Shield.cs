@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using EZObjectPools;
 using HittingDetection;
 
 public class BO_Shield : MonoBehaviour {
@@ -52,7 +50,7 @@ public class BO_Shield : MonoBehaviour {
     public damageType damage_type = damageType.normal_shield;
 
     private int _hpCounter = 0;
-    private EZObjectPool _hitSparks,shieldBreakSpark;
+    private DecompositionerPool _hitSparks,shieldBreakSpark;
     private string personalEffectPath;
 
     void Awake()
@@ -93,7 +91,7 @@ public class BO_Shield : MonoBehaviour {
         }
     }
 
-    private GameObject shieldbreaking;
+    private Decompositioner shieldbreaking;
     private void shieldBreak()
     {
         if (this._ShieldCenterSpot != null)
@@ -104,7 +102,9 @@ public class BO_Shield : MonoBehaviour {
             }
             if (shieldBreakSpark != null)
             {
-                shieldBreakSpark.TryGetNextObject(this._ShieldCenterSpot.position, Quaternion.identity, out shieldbreaking);
+                shieldbreaking = shieldBreakSpark.Rent();
+                shieldbreaking.transform.position = this._ShieldCenterSpot.position;
+                shieldbreaking.transform.rotation = Quaternion.identity;
                 shieldbreaking.transform.LookAt(_ShieldCenterSpot.position - _ShieldBackSpot.position);
             }
         }
@@ -122,7 +122,6 @@ public class BO_Shield : MonoBehaviour {
         bO_Health.setShield(this);
     }
 
-    private GameObject _missSparksShield;
     public void passHitPointsFromWeaponToShiled(List<Vector3> _ShiledHitPositions)
     {
         if (_hitSparks == null)
@@ -132,7 +131,9 @@ public class BO_Shield : MonoBehaviour {
         {
             for (int i3 = 0; i3 < _ShiledHitPositions.Count; i3++)
             {
-                _missSparksShield = _hitSparks.TryGetNextObject(_ShiledHitPositions[i3], Quaternion.LookRotation(_ShiledHitPositions[i3] - _ShieldBackSpot.position));
+                shieldbreaking = _hitSparks.Rent();
+                shieldbreaking.transform.position = this._ShieldCenterSpot.position;
+                shieldbreaking.transform.rotation = Quaternion.identity;
                 //_missSparksShield.transform.LookAt(2 * _missSparksShield.transform.position - _ShieldBackSpot.position);
             }
         }

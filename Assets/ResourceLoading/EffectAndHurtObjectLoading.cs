@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZObjectPools;
+using UniRx;
 
 public class EffectAndHurtObjectLoading
 {
@@ -18,16 +18,9 @@ public class EffectAndHurtObjectLoading
         }
     }
     
-    public IDictionary<string, EZObjectPool> EffectAndHurtObjectPoolsDic = new Dictionary<string, EZObjectPool>();//现在这里面包含了特效和伤害类物体。这个的重点是主界面和战斗界面通用问题
-    
-    public void ReparentPooledObjects(bool AllorJustInactiveones)
-    {
-        foreach(KeyValuePair<string, EZObjectPool> keyValuePair in EffectAndHurtObjectPoolsDic)
-        {
-            EZObjectPool.ReparentPooledObjects(keyValuePair.Value, AllorJustInactiveones);
-        }
-    }
-    
+    public IDictionary<string, DecompositionerPool> EffectObjectPoolsDic = new Dictionary<string, DecompositionerPool>();//现在这里面包含了特效和伤害类物体。这个的重点是主界面和战斗界面通用问题
+    public IDictionary<string, DecompositionerPool> HurtObjectPoolsDic = new Dictionary<string, DecompositionerPool>();//现在这里面包含了特效和伤害类物体。这个的重点是主界面和战斗界面通用问题
+        
     // 首先这个函数注定不能实时化，这个过程必须是初始化中一个流程
     public IEnumerator PrepareMagicFromCach(string Path,string magicPackName)
     {
@@ -38,18 +31,33 @@ public class EffectAndHurtObjectLoading
     
     //其实上面那些特效啦什么的也应该把先查字典再决定是否load的函数写出来，但为什么没写呢？因为特效物体的来源其实存在些问题。一个是视效物体在本地，而伤害物体在包里，再一个还存在个属性文件夹问题，
     //而现在这两类东西你却安排在一个字典中。这就是为什么可能应该把字典分成两个
-    public EZObjectPool constructPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
+    public DecompositionerPool constructHitBoxPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
     {
-        EZObjectPool poolToConstruct;
         if (prefab != null)
         {
-            poolToConstruct = EZObjectPool.CreateObjectPool(prefab, key, ini_count, true, false, true);
-            poolToConstruct.InstantiatePool();
+            DecompositionerPool poolToConstruct = new DecompositionerPool(prefab);
+            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件"));
 
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(key))
-                this.EffectAndHurtObjectPoolsDic[key] = poolToConstruct;
+            if (HurtObjectPoolsDic.ContainsKey(key))
+                this.HurtObjectPoolsDic[key] = poolToConstruct;
             else
-                this.EffectAndHurtObjectPoolsDic.Add(new KeyValuePair<string, EZObjectPool>(key, poolToConstruct));
+                this.HurtObjectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
+            return poolToConstruct;
+        }
+        return null;
+    }
+    
+    public DecompositionerPool constructEffectPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
+    {
+        if (prefab != null)
+        {
+            DecompositionerPool poolToConstruct = new DecompositionerPool(prefab);
+            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件"));
+
+            if (EffectObjectPoolsDic.ContainsKey(key))
+                this.EffectObjectPoolsDic[key] = poolToConstruct;
+            else
+                this.EffectObjectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
             return poolToConstruct;
         }
         return null;
@@ -73,7 +81,7 @@ public class EffectAndHurtObjectLoading
      
     public IEnumerator ConstructHurtObjectPoolFromCach(string resource_name, string MagicForwardPath, zokusei zokusei)
     {
-        EZObjectPool poolToConstruct2;
+        DecompositionerPool poolToConstruct2;
         GameObject hurtObject;
         AssetBundle assetbundle = null;
         IEnumerator _loadingProcess;
@@ -81,9 +89,9 @@ public class EffectAndHurtObjectLoading
         /////////////// 第一环节 //////////////////
         if (MagicForwardPath != null)
         {
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(MagicForwardPath + "/" + resource_name))
+            if (HurtObjectPoolsDic.ContainsKey(MagicForwardPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue(MagicForwardPath + "/" + resource_name, out poolToConstruct2);
+                HurtObjectPoolsDic.TryGetValue(MagicForwardPath + "/" + resource_name, out poolToConstruct2);
                 if (poolToConstruct2 != null)
                     yield break;
             }
@@ -105,7 +113,7 @@ public class EffectAndHurtObjectLoading
                 assetbundle.Unload(false);
                 if (hurtObject != null)
                 {
-                    poolToConstruct2 = constructPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
+                    poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
                     yield break;
                 }
             }
@@ -135,9 +143,9 @@ public class EffectAndHurtObjectLoading
                 break;
         }
 
-        if (EffectAndHurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
+        if (HurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
         {
-            EffectAndHurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
+            HurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
             if (poolToConstruct2 != null)
                 yield break;
         }
@@ -159,7 +167,7 @@ public class EffectAndHurtObjectLoading
             assetbundle.Unload(false);
             if (hurtObject != null)
             {
-                poolToConstruct2 = constructPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+                poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
                 yield break;
             }
         }
@@ -168,9 +176,9 @@ public class EffectAndHurtObjectLoading
         if (basicMagicForwardPath != "defaultmagic")
         {
             basicMagicForwardPath = "defaultmagic";
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
+            if (HurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
+                HurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
                 if (poolToConstruct2 != null)
                     yield break;
             }
@@ -191,7 +199,7 @@ public class EffectAndHurtObjectLoading
                 assetbundle.Unload(false);
                 if (hurtObject != null)
                 {
-                    poolToConstruct2 = constructPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+                    poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
                     yield break;
                 }
             }
@@ -202,9 +210,9 @@ public class EffectAndHurtObjectLoading
         }
     }
     
-    private EZObjectPool HurtObjectPool;
+    private DecompositionerPool HurtObjectPool;
     private GameObject hurtObjectToHurt;
-    public EZObjectPool getHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
+    public DecompositionerPool getHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
     {
         HurtObjectPool = null;
         hurtObjectToHurt = null;
@@ -212,9 +220,9 @@ public class EffectAndHurtObjectLoading
         // 第一轮
         if (myMagicPath != null)
         {
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(myMagicPath + "/" + resource_name))
+            if (HurtObjectPoolsDic.ContainsKey(myMagicPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue(myMagicPath + "/" + resource_name, out HurtObjectPool);
+                HurtObjectPoolsDic.TryGetValue(myMagicPath + "/" + resource_name, out HurtObjectPool);
                 if (HurtObjectPool != null)
                 {
                     return HurtObjectPool;
@@ -223,9 +231,9 @@ public class EffectAndHurtObjectLoading
         }
 
         // 第二轮
-        if (EffectAndHurtObjectPoolsDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
+        if (HurtObjectPoolsDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
         {
-            EffectAndHurtObjectPoolsDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out HurtObjectPool);
+            HurtObjectPoolsDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out HurtObjectPool);
             if (HurtObjectPool != null)
             {
                 return HurtObjectPool;
@@ -236,9 +244,9 @@ public class EffectAndHurtObjectLoading
         if (myDefaultMagicPath != "defaultmagic")
         {
             myDefaultMagicPath = "defaultmagic";
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
+            if (HurtObjectPoolsDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out HurtObjectPool);
+                HurtObjectPoolsDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out HurtObjectPool);
                 if (HurtObjectPool != null)
                 {
                     return HurtObjectPool;
@@ -248,17 +256,17 @@ public class EffectAndHurtObjectLoading
         return null;
     }
     
-    private EZObjectPool EffectPool;
+    private DecompositionerPool EffectPool;
     private GameObject EffectPrefab;
-    public EZObjectPool iniEffectsPool(string resource_name, string EffectsPath, int object_count)
+    public DecompositionerPool iniEffectsPool(string resource_name, string EffectsPath, int object_count)
     {
         EffectPrefab = null;
         EffectPool = null;
         if (EffectsPath != null)
         {
-            if (EffectAndHurtObjectPoolsDic.ContainsKey("Effects" + "/" + EffectsPath + "/" + resource_name))
+            if (EffectObjectPoolsDic.ContainsKey("Effects" + "/" + EffectsPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue("Effects" + "/" + EffectsPath + "/" + resource_name, out EffectPool);
+                EffectObjectPoolsDic.TryGetValue("Effects" + "/" + EffectsPath + "/" + resource_name, out EffectPool);
                 if (EffectPool != null)
                     return EffectPool;
             }
@@ -266,7 +274,7 @@ public class EffectAndHurtObjectLoading
             EffectPrefab = Resources.Load("Effects" + "/" + EffectsPath + "/" + resource_name, typeof(GameObject)) as GameObject;
             if (EffectPrefab != null)
             {
-                EffectPool = constructPoolWithPrefabAndKey(EffectPrefab, "Effects" + "/" + EffectsPath + "/" + resource_name,object_count);
+                EffectPool = constructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects" + "/" + EffectsPath + "/" + resource_name,object_count);
                 return EffectPool;
             }
             if (EffectsPath == "defaultEffects")
@@ -278,13 +286,15 @@ public class EffectAndHurtObjectLoading
         return EffectPool;
     }
 
-    private GameObject processingEffectObj;
-    public GameObject GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform _setParent)
+    private Decompositioner processingEffectObj;
+    public Decompositioner GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform _setParent)
     {
         EffectPool = iniEffectsPool(resource_name, EffectsPath,3);
         if (EffectPool == null)
             return null;
-        processingEffectObj = EffectPool.TryGetNextObject(Pos, Qua);
+        processingEffectObj = EffectPool.Rent();
+        processingEffectObj.transform.position = Pos;
+        processingEffectObj.transform.rotation = Qua;
         if (_setParent != null)
         {
             processingEffectObj.transform.SetParent(_setParent);
@@ -296,14 +306,14 @@ public class EffectAndHurtObjectLoading
 
     public IEnumerator ConstructHurtObjectPoolResourceMode(string resource_name, string MagicForwardPath, zokusei _zokusei)
     {
-        EZObjectPool poolToConstruct2;
+        DecompositionerPool poolToConstruct2;
         GameObject hurtObject;
         /////////////// 第一环节 : 搜索个性魔法//////////////////
         if (MagicForwardPath != null)
         {
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(MagicForwardPath + "/" + resource_name))
+            if (HurtObjectPoolsDic.ContainsKey(MagicForwardPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue(MagicForwardPath + "/" + resource_name, out poolToConstruct2);
+                HurtObjectPoolsDic.TryGetValue(MagicForwardPath + "/" + resource_name, out poolToConstruct2);
                 if (poolToConstruct2 != null)
                     yield break;
             }
@@ -311,7 +321,7 @@ public class EffectAndHurtObjectLoading
             hurtObject = Resources.Load("HurtObjects/" + MagicForwardPath + "/" + resource_name) as GameObject;
             if (hurtObject != null)
             {
-                poolToConstruct2 = constructPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
+                poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
                 yield break;
             }
         }
@@ -339,16 +349,16 @@ public class EffectAndHurtObjectLoading
                 basicMagicForwardPath = "defaultmagic";
                 break;
         }
-        if (EffectAndHurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
+        if (HurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
         {
-            EffectAndHurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
+            HurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
             if (poolToConstruct2 != null)
                 yield break;
         }
         hurtObject = Resources.Load("HurtObjects/" + basicMagicForwardPath + "/" + resource_name) as GameObject;
         if (hurtObject != null)
         {
-            poolToConstruct2 = constructPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+            poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
             yield break;
         }
 
@@ -356,16 +366,16 @@ public class EffectAndHurtObjectLoading
         if (basicMagicForwardPath != "defaultmagic")
         {
             basicMagicForwardPath = "defaultmagic";
-            if (EffectAndHurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
+            if (HurtObjectPoolsDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
             {
-                EffectAndHurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
+                HurtObjectPoolsDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct2);
                 if (poolToConstruct2 != null)
                     yield break;
             }
             hurtObject = Resources.Load("HurtObjects/" + basicMagicForwardPath + "/" + resource_name) as GameObject;
             if (hurtObject != null)
             {
-                poolToConstruct2 = constructPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+                poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
                 yield break;
             }
         }

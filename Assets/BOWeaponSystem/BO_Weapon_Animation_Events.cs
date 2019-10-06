@@ -7,7 +7,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
     public List<Transform> _Used_Targets = new List<Transform>();
     private List<BO_Marker_Manager> using_MarkerManager_List = new List<BO_Marker_Manager>();
     private List<BO_Marker_Manager> AllMarkerManager_List = new List<BO_Marker_Manager>();
-    private BO_Marker_Manager right_hand, left_hand, right_foot, left_foot, right_hand_weapon, left_hand_weapon,head,tail;
+    private BO_Marker_Manager right_hand, left_hand, right_foot, left_foot, right_hand_weapon, left_hand_weapon, head, tail;
     private damageType damageType;
 
     // 当前这个版本因为把“身体固化武器”的检测对象给联合化了。。其实关于_Used_Targets清理，
@@ -119,11 +119,11 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         foreach(BO_Marker_Manager bom in this.using_MarkerManager_List)
         {
             bom.DisableMarkers();
-            if (bom._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
-            {
-                if (bom.gameObject.activeSelf)
-                    bom.StartCoroutine(bom.disableAfterTime(0.6f));
-            }
+            //if (bom._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
+            //{
+            //    if (bom.gameObject.activeSelf)
+            //        bom.StartCoroutine(bom.disableAfterTime(0.6f));
+            //}
         }
         this.using_MarkerManager_List.Clear();
         turn_off_Left_energy_blade();

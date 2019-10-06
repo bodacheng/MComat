@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EZObjectPools;
 using UnityEngine.UI;
 
 public class zokuseiSkillStoneTagsGroup

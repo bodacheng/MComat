@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement; // 考虑到生成对象池所用的大量时间从而加入这个以根据场景判断是不是进行对象池创建。
-using EZObjectPools;
 
 // 18 年年初
 //该类不进行网络值同步，但个别值向其他组件看齐
@@ -49,10 +48,9 @@ namespace HittingDetection
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic = false;//这个是和其他模块联动的。确实不得不放这儿。
 
-        private int weaponHPCounter;
+        public int weaponHPCounter;
         private bool _markersAreEnabled;
         private TeamConfig teamConfig;
-        private bool DeathDisableDone = false;
         private Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         private Transform _MarkersParent;
         private Transform onEnableEffectT;
@@ -66,7 +64,7 @@ namespace HittingDetection
         private List<Vector3> _wallHitPositions = new List<Vector3>();
         private List<Vector3> _ShiledHitPositions = new List<Vector3>();
         private List<hitOnHealthBody> hitsOnHealthBody;
-        private GameObject processingBlood;
+        private Decompositioner processingBlood;
 
         private bool traditionalDefendMode = false;
         private BO_Shield TheS;
@@ -91,7 +89,6 @@ namespace HittingDetection
                 }
             }
             _markers = bms.ToArray();
-            _BO_DestroyAfterSeconds = gameObject.GetComponent<BO_DestroyAfterSeconds>();
             //按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         }
 
@@ -120,7 +117,6 @@ namespace HittingDetection
                                                                            onEnableEffectT.position, Quaternion.identity, onEnableEffectT);
                 }
             }
-            DeathDisableDone = false;
         }
 
         public void OnDisable()
