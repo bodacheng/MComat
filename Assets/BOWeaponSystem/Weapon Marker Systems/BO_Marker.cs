@@ -13,19 +13,19 @@ namespace HittingDetection
     {
         [HideInInspector]
         public Vector3 _tempPos; //Temporary position of the marker from the last frame
-        private float _dist; //distance between temp and actual marker position
-        private Vector3 _dir; //Direction of the above.
+        float _dist; //distance between temp and actual marker position
+        Vector3 _dir; //Direction of the above.
 
         [HideInInspector]
         public RaycastHit[] _hits = new RaycastHit[0]; //What was hit in this frame?
         [Tooltip("Choose which Layers should be affected by this marker's hit check.")]
         public LayerMask _layers;
         public LayerMask enemyShieldLayer;
-        public float radius = 0.1f;
+        public float radius;
         public hit_detection_mode mode = hit_detection_mode.ball_detect;
 
-        private SphereCollider myCollider;
-        private List<Collider> BallDetectHitPool = new List<Collider>();
+        SphereCollider myCollider;
+        List<Collider> BallDetectHitPool = new List<Collider>();
         public List<Collider> getBallDetectHitPool()
         {
             return BallDetectHitPool;
@@ -121,17 +121,6 @@ namespace HittingDetection
                 Gizmos.DrawWireSphere(transform.position, radius);
             }
         }
-
-        //public void turnOnCollider()
-        //{
-        //    if (myCollider != null)
-        //        myCollider.enabled = true;
-        //}
-        //public void turnOffCollider()
-        //{
-        //    if (myCollider != null)
-        //        myCollider.enabled = false;
-        //}
     }
 }
 

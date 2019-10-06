@@ -218,8 +218,8 @@ public partial class BO_Health : MonoBehaviour
 
             if (_dmg.fromWeapon != null)
             {
-                if (_dmg.fromWeapon.getWeaponOwnerHealth() != null)
-                    _dmg.fromWeapon.getWeaponOwnerHealth().HitCountPlus();
+                if (_dmg.fromWeapon.GetWeaponOwnerHealth() != null)
+                    _dmg.fromWeapon.GetWeaponOwnerHealth().HitCountPlus();
                 _health -= _dmg.AT;
             }
             

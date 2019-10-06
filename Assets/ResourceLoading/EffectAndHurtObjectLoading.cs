@@ -211,11 +211,9 @@ public class EffectAndHurtObjectLoading
     }
     
     private DecompositionerPool HurtObjectPool;
-    private GameObject hurtObjectToHurt;
-    public DecompositionerPool getHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
+    public DecompositionerPool GetHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
     {
         HurtObjectPool = null;
-        hurtObjectToHurt = null;
 
         // 第一轮
         if (myMagicPath != null)
@@ -258,7 +256,7 @@ public class EffectAndHurtObjectLoading
     
     private DecompositionerPool EffectPool;
     private GameObject EffectPrefab;
-    public DecompositionerPool iniEffectsPool(string resource_name, string EffectsPath, int object_count)
+    public DecompositionerPool IniEffectsPool(string resource_name, string EffectsPath, int object_count)
     {
         EffectPrefab = null;
         EffectPool = null;
@@ -282,14 +280,14 @@ public class EffectAndHurtObjectLoading
                 return null;//防止无限循环
             }
         }
-        EffectPool = iniEffectsPool(resource_name, "defaultEffects", object_count);
+        EffectPool = IniEffectsPool(resource_name, "defaultEffects", object_count);
         return EffectPool;
     }
 
     private Decompositioner processingEffectObj;
     public Decompositioner GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform _setParent)
     {
-        EffectPool = iniEffectsPool(resource_name, EffectsPath,3);
+        EffectPool = IniEffectsPool(resource_name, EffectsPath,3);
         if (EffectPool == null)
             return null;
         processingEffectObj = EffectPool.Rent();

@@ -2543,7 +2543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722fc71c16dbf43f18a34cee30721221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerinfoReferenceMode: 1
   ConfigFileLoadingMode: 3
   ModelLoadingMode: 3
   AnimationLoadingMode: 3

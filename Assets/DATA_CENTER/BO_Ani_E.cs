@@ -5,70 +5,68 @@ using UnityEngine;
 public class BO_Ani_E : MonoBehaviour
 {
     public Data_Center _DATA_CENTER;
-    
     private string personalEffectsPath;
     private string myMagicForwardPath;
     private string defaultMagicForwardPath;
     private Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     private DecompositionerPool target_pool;
     private IDictionary<Transform, Decompositioner> EffectsOnBodyParts = new Dictionary<Transform, Decompositioner>();
-    
     private Decompositioner processingHitBox;
     
-    private void setBodyPartsTransform()
+    private void SetBodyPartsTransform()
     {
         if (_DATA_CENTER != null)
         {
-            if (_DATA_CENTER.right_hand != null)
+            if (_DATA_CENTER.right_hand_t != null)
             {
-                this.right_hand = _DATA_CENTER.right_hand.transform;
+                this.right_hand = _DATA_CENTER.right_hand_t.transform;
                 EffectsOnBodyParts.Add(this.right_hand,null);
             }
-            if (_DATA_CENTER.left_hand != null)
+            if (_DATA_CENTER.left_hand_t != null)
             {
-                this.left_hand = _DATA_CENTER.left_hand.transform;
+                this.left_hand = _DATA_CENTER.left_hand_t.transform;
                 EffectsOnBodyParts.Add(this.left_hand,null);
             }
-            if (_DATA_CENTER.right_foot != null)
+            if (_DATA_CENTER.right_foot_t != null)
             {
-                this.right_foot = _DATA_CENTER.right_foot.transform;
+                this.right_foot = _DATA_CENTER.right_foot_t.transform;
                 EffectsOnBodyParts.Add(this.right_foot,null);
             }
-            if (_DATA_CENTER.left_foot != null)
+            if (_DATA_CENTER.left_foot_t != null)
             {
-                this.left_foot = _DATA_CENTER.left_foot.transform;
+                this.left_foot = _DATA_CENTER.left_foot_t.transform;
                 EffectsOnBodyParts.Add(this.left_foot,null);
             }
-            if (_DATA_CENTER.head != null)
+            if (_DATA_CENTER.head_t != null)
             {
-                this.head = _DATA_CENTER.head.transform;
+                this.head = _DATA_CENTER.head_t.transform;
                 EffectsOnBodyParts.Add(this.head,null);
             }
-            if (_DATA_CENTER.tail != null)
+            if (_DATA_CENTER.tail_t != null)
             {
-                this.tail = _DATA_CENTER.tail.transform;
+                this.tail = _DATA_CENTER.tail_t.transform;
                 EffectsOnBodyParts.Add(this.tail,null);
             }
         }
     }
     
-    public void closeEffectsOnBodyParts()
+    public void CloseEffectsOnBodyParts()
     {
         foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in EffectsOnBodyParts)
         {
             if (keyValuePair.Value != null)
-                keyValuePair.Value.disable(0.1f);
+                keyValuePair.Value.Disable(0.1f);
         }
     }
 
     void Start()
     {
-        setBodyPartsTransform();
+        SetBodyPartsTransform();// 设置为private目的是减少出现在inpector里的函数数量
     }
 
-    //这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
+    // 这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
-    public IEnumerator basicMagicAndEffectsPathDefine(zokusei _zokusei, string personalMagic)
+    public IEnumerator BasicMagicAndEffectsPathDefine(zokusei _zokusei, string personalMagic)
     {
         this.myMagicForwardPath = personalMagic;
         switch (_zokusei)
@@ -127,50 +125,45 @@ public class BO_Ani_E : MonoBehaviour
 	}
 
     private Vector3 magicFoward_shoot_direction;
-    private Rigidbody _MagicObjectRigidbody;
     public void MagicForward(AnimationEvent e)
 	{
         if (e.stringParameter == null || e.stringParameter == "")
             return;
 
-        target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool(e.stringParameter, myMagicForwardPath, defaultMagicForwardPath);
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(e.stringParameter, myMagicForwardPath, defaultMagicForwardPath);
         if (target_pool != null)
         {
             processingHitBox = target_pool.Rent();
-            processingHitBox.gameObject.transform.position = _DATA_CENTER.geometryCenter.position + gameObject.transform.forward * e.floatParameter;
-            processingHitBox.gameObject.transform.rotation = transform.rotation;
-            processingHitBox._HitBox.setWeaponOwnerHealth(_DATA_CENTER.BO_Health);
+            processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + gameObject.transform.forward * e.floatParameter;
+            processingHitBox.transform.rotation = transform.rotation;
+            processingHitBox._HitBox.SetWeaponOwnerHealth(_DATA_CENTER.BO_Health);
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-            if (_DATA_CENTER._TeamConfig != null)
-            {
-                processingHitBox._HitBox.setTeamConfig(_DATA_CENTER._TeamConfig);
-            }
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             if (processingHitBox._HitBox.onGroundMagic)
                 processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x,this.transform.position.y, processingHitBox.transform.position.z);
-
             magicFoward_shoot_direction = gameObject.transform.forward;
             magicFoward_shoot_direction.y = 0;
-            _MagicObjectRigidbody = processingHitBox.gameObject.GetComponent<Rigidbody>();
-            if (_MagicObjectRigidbody == null)
-                _MagicObjectRigidbody = processingHitBox.gameObject.AddComponent<Rigidbody>();
-            _MagicObjectRigidbody.useGravity = false;
-            switch (e.intParameter)
+            if (processingHitBox.GetComponent<Rigidbody>() != null)
             {
-                case 1:
-                    _MagicObjectRigidbody.velocity = magicFoward_shoot_direction.normalized * 3f;
-                    break;
-                case 2:
-                    _MagicObjectRigidbody.velocity = magicFoward_shoot_direction.normalized * 8f;
-                    break;
-                case 3:
-                    _MagicObjectRigidbody.velocity = magicFoward_shoot_direction.normalized * 15f;
-                    break;
-                case 0:
-                    _MagicObjectRigidbody.velocity = Vector3.zero;
-                    break;
-                default:
-                    _MagicObjectRigidbody.velocity = magicFoward_shoot_direction.normalized * 3f;
-                    break;
+                processingHitBox.GetComponent<Rigidbody>().useGravity = false;
+                switch (e.intParameter)
+                {
+                    case 1:
+                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 3f;
+                        break;
+                    case 2:
+                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 8f;
+                        break;
+                    case 3:
+                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 15f;
+                        break;
+                    case 0:
+                        processingHitBox.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        break;
+                    default:
+                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 3f;
+                        break;
+                }
             }
         }
 	}
@@ -212,16 +205,16 @@ public class BO_Ani_E : MonoBehaviour
         switch (e.intParameter)
         {
             case 1:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, defaultMagicForwardPath);
                 break;
             case 2:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("big_bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_bullet", myMagicForwardPath, defaultMagicForwardPath);
                 break;
             case 3:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("super_bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("super_bullet", myMagicForwardPath, defaultMagicForwardPath);
                 break;
             default:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, defaultMagicForwardPath);
                 break;
         }
         processingHitBox = target_pool.Rent();
@@ -230,8 +223,8 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         if (_DATA_CENTER._TeamConfig != null)
         {
-            processingHitBox._HitBox.setWeaponOwnerHealth(_DATA_CENTER.BO_Health);
-            processingHitBox._HitBox.setTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.SetWeaponOwnerHealth(_DATA_CENTER.BO_Health);
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
         }
 
         DanMuTest danMuTest = processingHitBox.gameObject.GetComponent<DanMuTest>();
@@ -246,11 +239,11 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox.gameObject.transform.position = intPos;
             magicFoward_shoot_direction = gameObject.transform.forward;
             magicFoward_shoot_direction.y = 0;
-            _MagicObjectRigidbody = processingHitBox.gameObject.GetComponent<Rigidbody>();
-            if (_MagicObjectRigidbody == null)
-                _MagicObjectRigidbody = processingHitBox.gameObject.AddComponent<Rigidbody>();
-            _MagicObjectRigidbody.useGravity = false;
-            _MagicObjectRigidbody.velocity = magicFoward_shoot_direction.normalized * e.floatParameter;
+            if (processingHitBox.GetComponent<Rigidbody>() != null)
+            {
+                processingHitBox.GetComponent<Rigidbody>().useGravity = false;
+                processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * e.floatParameter;
+            }
         }
     }
 
@@ -261,19 +254,19 @@ public class BO_Ani_E : MonoBehaviour
 		switch(e.stringParameter)
 		{
 			case "right_hand":
-			if (right_hand!=null)
+			if (right_hand != null)
 				target = right_hand;
 			break;
 			case "left_hand":
-			if (left_hand!=null)
+			if (left_hand != null)
 				target = left_hand;
 			break;
 			case "right_foot":
-			if (right_foot!=null)
+			if (right_foot != null)
 				target = right_foot;
 			break;
 			case "left_foot":
-			if (left_foot!=null)
+			if (left_foot != null)
 				target = left_foot;
 			break;
             case "head":
@@ -304,8 +297,13 @@ public class BO_Ani_E : MonoBehaviour
                 effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation, target);
                 break;
 		}
+
         if (EffectsOnBodyParts.ContainsKey(target))
-            EffectsOnBodyParts[target] = effect;
+        {
+            if (EffectsOnBodyParts[target] != null)
+                EffectsOnBodyParts[target].Disable(0.1f);
+            EffectsOnBodyParts[target] = effect; 
+        }
 	}
 
     public void blastAttack(AnimationEvent e)
@@ -313,16 +311,16 @@ public class BO_Ani_E : MonoBehaviour
         switch (e.intParameter)
         {
             case 0:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
                 break;
             case 1:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
                 break;
             case 2:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("big_blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_blast", myMagicForwardPath, defaultMagicForwardPath);
                 break;
             default:
-                target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
                 break;
         }
         		
@@ -369,17 +367,16 @@ public class BO_Ani_E : MonoBehaviour
 		}
         
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
-        _DATA_CENTER.bO_Weapon_Animation_Events.addMarkerManagerToUsingList(processingHitBox._HitBox);
-        processingHitBox._HitBox.setWeaponOwnerHealth(_DATA_CENTER.BO_Health);
-        processingHitBox._HitBox.setHolderCenter(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetWeaponOwnerHealth(_DATA_CENTER.BO_Health);
+        processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
         if (_DATA_CENTER._TeamConfig != null)
         {
-            processingHitBox._HitBox.setTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox._HitBox.EnableMarkers();
         }
     }
 
-    private string OnLoadMagic = null;
+    private string OnLoadMagic;
     private void PrepareOneMagic(string magicname)
     {
         OnLoadMagic = magicname;
@@ -388,7 +385,7 @@ public class BO_Ani_E : MonoBehaviour
     {
         if (OnLoadMagic == null)
             return;
-        target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool(OnLoadMagic, myMagicForwardPath, defaultMagicForwardPath);
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, defaultMagicForwardPath);
         if (target_pool == null)
             return;
         processingHitBox = target_pool.Rent();
@@ -442,12 +439,11 @@ public class BO_Ani_E : MonoBehaviour
         }
         
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
-        _DATA_CENTER.bO_Weapon_Animation_Events.addMarkerManagerToUsingList(processingHitBox._HitBox);
-        processingHitBox._HitBox.setWeaponOwnerHealth(_DATA_CENTER.BO_Health);
-        processingHitBox._HitBox.setHolderCenter(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetWeaponOwnerHealth(_DATA_CENTER.BO_Health);
+        processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
         if (_DATA_CENTER._TeamConfig != null)
         {
-            processingHitBox._HitBox.setTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox._HitBox.EnableMarkers();
         }
         OnLoadMagic = null;
@@ -457,7 +453,7 @@ public class BO_Ani_E : MonoBehaviour
     {
         if (OnLoadMagic == null)
             return;
-        target_pool = EffectAndHurtObjectLoading.Instance.getHurtObjectPool(OnLoadMagic, myMagicForwardPath, defaultMagicForwardPath);
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, defaultMagicForwardPath);
         if (target_pool == null)
             return;
 
@@ -503,14 +499,10 @@ public class BO_Ani_E : MonoBehaviour
         }
         
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-        _DATA_CENTER.bO_Weapon_Animation_Events.addMarkerManagerToUsingList(processingHitBox._HitBox);
-        processingHitBox._HitBox.setWeaponOwnerHealth(_DATA_CENTER.BO_Health);
-        processingHitBox._HitBox.setHolderCenter(_DATA_CENTER.geometryCenter);
-        if (_DATA_CENTER._TeamConfig != null)
-        {
-            processingHitBox._HitBox.setTeamConfig(_DATA_CENTER._TeamConfig);
-            processingHitBox._HitBox.EnableMarkers();
-        }
+        processingHitBox._HitBox.SetWeaponOwnerHealth(_DATA_CENTER.BO_Health);
+        processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+        processingHitBox._HitBox.EnableMarkers();
         OnLoadMagic = null;
     }
 }

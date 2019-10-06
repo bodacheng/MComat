@@ -16,7 +16,7 @@ namespace HittingDetection
 
         private void DetectProcess()
         {
-            hitsOnHealthBody = new List<hitOnHealthBody>();
+            hitsOnHealthBody.Clear();
             if (_markers == null)
             {
                 return;
@@ -99,7 +99,6 @@ namespace HittingDetection
                                 && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
                             {
                                 _Used_Targets.Add(_markers[i]._hits[hit_target_index].collider.transform);
-                                HitWall = true;
                                 _wallHitPositions.Add(_markers[i]._hits[hit_target_index].point);
                             }
 
@@ -228,7 +227,6 @@ namespace HittingDetection
                                     && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
                                 {
                                     _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
-                                    HitWall = true;
                                     Vector3 _wallHitPoint = BallDetectHitPool[hit_target_index].ClosestPoint(_markers[i].transform.position);//ClosestPointOnBounds
                                     _wallHitPositions.Add(_wallHitPoint);
                                 }

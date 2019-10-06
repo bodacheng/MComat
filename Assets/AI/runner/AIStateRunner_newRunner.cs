@@ -66,7 +66,7 @@ namespace Soul
                         continue;
                     }
 
-                    if (try_state.capacity_enter_condition())
+                    if (try_state.Capacity_enter_condition())
                     {
                         SRTListForCasualTransitionbuttonRefresh.Add(state_set);
                         if (((state_set.can_be_cancelled_to && _SkillCancelFlag.getFlag()))||
@@ -181,7 +181,7 @@ namespace Soul
             {
                 if (_AS.StateType != stateType.Def && _AS.StateType != stateType.AC && _AS.StateType != stateType.NONE)
                 {
-                    if (_AS.capacity_enter_condition())
+                    if (_AS.Capacity_enter_condition())
                         return true;
                 }
             }
@@ -196,7 +196,7 @@ namespace Soul
             AINextPriority3.Clear();
             foreach (AI_State State_Rate_Set in States_for_AbsoluteInput)
             {
-                if (State_Rate_Set.capacity_enter_condition())
+                if (State_Rate_Set.Capacity_enter_condition())
                 {
                     if (State_Rate_Set.enter_condition_priority1())
                         AINextPriority1.Add(State_Rate_Set);

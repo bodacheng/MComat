@@ -70,11 +70,11 @@ public class DATACENTERGUI : Editor {
         //双手武器你不得不亲自设置，因为这两个东西在手上的位置实在是主观的。在这里设置后接下来的construct会直接把他们加入到其他一些模块的相应参数上
         GUILayout.Space(5f);
         EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript.left_hand_weapon = EditorGUILayout.ObjectField("Left Weapon", myScript.left_hand_weapon, typeof(BO_Marker_Manager), true) as BO_Marker_Manager;
+        myScript.left_sword = EditorGUILayout.ObjectField("Left Weapon", myScript.left_sword, typeof(ParticleSystem), true) as ParticleSystem;
         EditorGUILayout.EndVertical();
         GUILayout.Space(5f);
         EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript.right_hand_weapon = EditorGUILayout.ObjectField("Right Weapon", myScript.right_hand_weapon, typeof(BO_Marker_Manager), true) as BO_Marker_Manager;
+        myScript.right_sword = EditorGUILayout.ObjectField("Right Weapon", myScript.right_sword, typeof(ParticleSystem), true) as ParticleSystem;
         EditorGUILayout.EndVertical();
 
         GUILayout.Space(5f);
@@ -263,7 +263,7 @@ public class DATACENTERGUI : Editor {
                     child_marker.GetComponent<BO_Marker>().radius = 0.5f;
                     child_marker.transform.SetParent(_t);
                     child_marker.transform.localPosition = Vector3.zero;
-                    _t.GetComponent<BO_Marker_Manager>().setWeaponOwnerHealth(myScript.BO_Health);
+                    _t.GetComponent<BO_Marker_Manager>().SetWeaponOwnerHealth(myScript.BO_Health);
 
                     if (_t == myScript.left_foot_t || _t == myScript.right_foot_t)
                     {
@@ -281,41 +281,6 @@ public class DATACENTERGUI : Editor {
                         marker.radius = 0.5f;
                     }
                 }
-            }
-            if (myScript.right_hand_t != null)
-            {
-                if (myScript.right_hand_t.GetComponent<BO_Marker_Manager>())
-                    myScript.right_hand = myScript.right_hand_t.GetComponent<BO_Marker_Manager>();
-            }
-
-            if (myScript.left_hand_t != null)
-            {
-                if (myScript.left_hand_t.GetComponent<BO_Marker_Manager>())
-                    myScript.left_hand = myScript.left_hand_t.GetComponent<BO_Marker_Manager>();
-            }
-
-            if (myScript.right_foot_t != null)
-            {
-                if (myScript.right_foot_t.GetComponent<BO_Marker_Manager>())
-                    myScript.right_foot = myScript.right_foot_t.GetComponent<BO_Marker_Manager>();
-            }
-
-            if (myScript.left_foot_t != null)
-            {
-                if (myScript.left_foot_t.GetComponent<BO_Marker_Manager>())
-                    myScript.left_foot = myScript.left_foot_t.GetComponent<BO_Marker_Manager>();
-            }
-
-            if (myScript.head_t != null)
-            {
-                if (myScript.head_t.GetComponent<BO_Marker_Manager>())
-                    myScript.head = myScript.head_t.GetComponent<BO_Marker_Manager>();
-            }
-
-            if (myScript.tail_t != null)
-            {
-                if (myScript.tail_t.GetComponent<BO_Marker_Manager>())
-                    myScript.tail = myScript.tail_t.GetComponent<BO_Marker_Manager>();
             }
 
             string bladeName;
@@ -348,33 +313,24 @@ public class DATACENTERGUI : Editor {
                     break;
             }
 
-            if (myScript.right_hand_weapon == null)
+            if (myScript.right_sword == null)
             {
                 GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(myScript.right_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
                 enegryBlade.transform.localRotation = Quaternion.Euler(180, 0, 0);//这个事情非常不一定
-                myScript.right_hand_weapon = enegryBlade.GetComponent<BO_Marker_Manager>();
+                myScript.right_sword = enegryBlade.GetComponent<ParticleSystem>();
             }
-            if (myScript.left_hand_weapon == null)
+            if (myScript.left_sword == null)
             {
                 GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(myScript.left_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
 				enegryBlade.transform.localRotation = Quaternion.identity;
-                myScript.left_hand_weapon = enegryBlade.GetComponent<BO_Marker_Manager>();
+                myScript.left_sword = enegryBlade.GetComponent<ParticleSystem>();
             }
-
-			if (myScript.right_hand_weapon)
-			{
-				myScript.right_hand_weapon.setOnEnableEffectT(myScript.right_hand_t);
-			}                    
-			if (myScript.left_hand_weapon)
-			{
-				myScript.left_hand_weapon.setOnEnableEffectT(myScript.left_hand_t);
-			}
 
             if (myScript.floorChecks == null)
             {

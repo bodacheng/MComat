@@ -60,7 +60,7 @@ public class Hurt_State : AI_State {
         this._DATA_CENTER.setGravitySwitch(true);//在之后的eatDamage环节可能被再次解放重力
         this.BS_Main_Health.SetGettingDamageState(true);
         _Weapon_Animation_Events.clearMarkerManagers();
-        this._BO_Ani_E.closeEffectsOnBodyParts();
+        this._BO_Ani_E.CloseEffectsOnBodyParts();
         hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
 
         int ranDom = (int)Random.Range(0,hurtclips.Count);

@@ -5,10 +5,10 @@ using UniRx.Toolkit;
 using HittingDetection;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
-    static GameObject Marker;
-
-    private readonly GameObject Prefab;
     
+    static GameObject Marker;
+    private readonly GameObject Prefab;
+        
     public DecompositionerPool(GameObject prefab)
     {
         if (Marker == null)
@@ -32,6 +32,8 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         a.transform.SetParent(Marker.transform);
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
         BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();
+        Rigidbody rigidbody = a.GetComponent<Rigidbody>();
+        decompositioner.rigidbody = rigidbody;
         decompositioner._HitBox = bO_Marker_Manager;
         decompositioner.setPool(this);
         return decompositioner;

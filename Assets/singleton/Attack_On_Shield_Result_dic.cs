@@ -111,7 +111,7 @@ namespace HittingDetection
             this.toWho = toWho;
             this.fromWeapon = fromWeapon;
             if (this.fromWeapon != null)
-                this.AT = this.fromWeapon.getWeaponOwnerHealth().AT;
+                this.AT = this.fromWeapon.GetWeaponOwnerHealth().AT;
             else
                 this.AT = 0;
             specialApply = specialApply.none;   
@@ -124,7 +124,7 @@ namespace HittingDetection
             this.toWho = toWho;
             this.fromWeapon = fromWeapon;
             if (this.fromWeapon != null)
-                this.AT = this.fromWeapon.getWeaponOwnerHealth().AT;
+                this.AT = this.fromWeapon.GetWeaponOwnerHealth().AT;
             else
                 this.AT = 0;
             this.specialApply = specialApply;   

@@ -116,7 +116,7 @@ public class G_M_Attack_State : AI_State {
 	{
         base.AI_State_exit();
         this._DATA_CENTER.setGravitySwitch(true);
-        this._BO_Ani_E.closeEffectsOnBodyParts();
+        this._BO_Ani_E.CloseEffectsOnBodyParts();
 		_Animator.applyRootMotion = false;
 	}
 

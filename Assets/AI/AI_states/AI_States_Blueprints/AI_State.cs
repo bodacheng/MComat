@@ -71,7 +71,7 @@ namespace Soul
             return true;
         }
 
-        public virtual bool capacity_enter_condition()
+        public virtual bool Capacity_enter_condition()
         {
             return this.BS_Main_Health.hasPlentyGauge(this.splevel);
         }
@@ -173,18 +173,15 @@ namespace Soul
         }
 
         // If the state is based on the distance from the nearest enemy, check if the character is at the proper distance to enter the state
-        bool inner = false;
-        bool mid = false;
-        bool far = false;
-        bool _out = false;
+        bool inner;
+        bool mid;
+        bool far;
         protected bool checkToEnemyDisEnterCondition(behaviorEnterRange[] behaviorEnterRanges)
         {
             if (behaviorEnterRanges != null)
             {
                 if (behaviorEnterRanges.Length == 0)
-                {
                     return true;
-                }
                 else
                 {
                     inner = false;

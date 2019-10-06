@@ -50,25 +50,19 @@ public partial class Data_Center : MonoBehaviour
     
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
-    [Header("WeaponOnBody")]
-    [Space(9)]
-    [Tooltip("All the weapons we hold")]
-    public BO_Marker_Manager right_hand, left_hand, right_foot, left_foot, right_hand_weapon, left_hand_weapon,head,tail;
+
+    [Header("剑")]
+    [Space(1)]
+    public ParticleSystem right_sword,left_sword;
 
     [Header("传统防御盾。可能真的用不到了")]
     [Space(1)]
     public BO_Shield Shield;
-   
-    private List<BO_Marker_Manager> myWeaponList = new List<BO_Marker_Manager>();
-    private List<GameObject> deActiveObjects_List;
+
+    private List<ParticleSystem> deActiveObjects_List;
     
     public bool onBattleGroundBundary = false;
     public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
-
-    public List<BO_Marker_Manager> getMyWeaponList()
-    {
-        return this.myWeaponList;
-    }
 
     bool dead = false;
     public void setDeathState(bool dead)
@@ -101,16 +95,18 @@ public partial class Data_Center : MonoBehaviour
             {
                 floorCheckers[i] = floorChecks.GetChild(i);
             }
-            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(right_hand, left_hand, right_foot, left_foot, right_hand_weapon, left_hand_weapon, head, tail);
+            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(BO_Health,geometryCenter,
+                left_sword,right_sword,
+                right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
 
             // 在第一级初始化中我们把两个角色武器先打开，又关闭，这起到了个非常邪门的效果：使得这两把武器的相关awake函数得以运行，在这里就是找到了相应武器的markers
-            if (right_hand_weapon != null)
+            if (right_sword != null)
             {
-                right_hand_weapon.gameObject.SetActive(false);
+                right_sword.Stop(true);
             }
-            if (left_hand_weapon != null)
+            if (left_sword != null)
             {
-                left_hand_weapon.gameObject.SetActive(false);
+                left_sword.Stop(true);
             }
 
             string personalEffectsPath;
@@ -135,9 +131,9 @@ public partial class Data_Center : MonoBehaviour
                     personalEffectsPath = "defaultEffects";
                     break;
             }
-            EffectAndHurtObjectLoading.Instance.iniEffectsPool("short_effect", personalEffectsPath, 3);
-            EffectAndHurtObjectLoading.Instance.iniEffectsPool("normal_effect", personalEffectsPath, 3);
-            EffectAndHurtObjectLoading.Instance.iniEffectsPool("long_effect", personalEffectsPath, 3);
+            EffectAndHurtObjectLoading.Instance.IniEffectsPool("short_effect", personalEffectsPath, 3);
+            EffectAndHurtObjectLoading.Instance.IniEffectsPool("normal_effect", personalEffectsPath, 3);
+            EffectAndHurtObjectLoading.Instance.IniEffectsPool("long_effect", personalEffectsPath, 3);
             switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
@@ -150,7 +146,7 @@ public partial class Data_Center : MonoBehaviour
                     yield return (Animation_Manger.preloadBasicPersonalAnimsResourceMode(type, basicPackName));
                     break;
             }
-            yield return _BO_Ani_E.basicMagicAndEffectsPathDefine(this.Zokusei, personalMagicPath);
+            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(this.Zokusei, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else
@@ -174,47 +170,19 @@ public partial class Data_Center : MonoBehaviour
             gameObject.tag = "Untagged";
         }
 
-        myWeaponList = new List<BO_Marker_Manager>();
-        deActiveObjects_List = new List<GameObject>();
+        deActiveObjects_List = new List<ParticleSystem>();
 
-        if (right_hand != null)
+        if (right_sword != null)
         {
-            myWeaponList.Add(right_hand);
+            addToDeActiveObjects(right_sword);
         }
-        if (left_hand != null)
+        if (left_sword != null)
         {
-            myWeaponList.Add(left_hand);
-        }
-        if (right_foot != null)
-        {
-            myWeaponList.Add(right_foot);
-        }
-        if (left_foot != null)
-        {
-            myWeaponList.Add(left_foot);
-        }
-        if (head != null)
-        {
-            myWeaponList.Add(head);
-        }
-        if (tail != null)
-        {
-            myWeaponList.Add(tail);
-        }
-        if (right_hand_weapon != null)
-        {
-            right_hand_weapon.gameObject.SetActive(true);
-            myWeaponList.Add(right_hand_weapon);
-            addToDeActiveObjects(right_hand_weapon.gameObject);
-        }
-        if (left_hand_weapon != null)
-        {
-            left_hand_weapon.gameObject.SetActive(true);
-            myWeaponList.Add(left_hand_weapon);
-            addToDeActiveObjects(left_hand_weapon.gameObject);
+            addToDeActiveObjects(left_sword);
         }
 
         Sensor.setDectectLayerAndFrontDirection(_TeamConfig,this);
+        this.bO_Weapon_Animation_Events.assignTeamFlag(_TeamConfig);
 
         string effectPath;
         switch (Zokusei)
@@ -239,23 +207,14 @@ public partial class Data_Center : MonoBehaviour
                 break;
         }
 
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("Sparks", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("light_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("light_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("heavy_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("super_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("resistanceUp", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.iniEffectsPool("on_enable_effect", effectPath, 3);
-
-        foreach (BO_Marker_Manager weapon in myWeaponList)
-        {
-            weapon.setTeamConfig(_TeamConfig);
-            weapon.setHolderCenter(this.geometryCenter);
-            weapon.setWeaponOwnerHealth(BO_Health);
-            weapon.personalEffectPath = effectPath;
-            weapon.DisableMarkers();
-        }
-        
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("Sparks", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("light_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("light_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("heavy_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("resistanceUp", effectPath, 3);
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("on_enable_effect", effectPath, 3);
+                   
         if (Shield != null)
         {
             Shield.gameObject.SetActive(false);
@@ -305,35 +264,21 @@ public partial class Data_Center : MonoBehaviour
         BO_Health.changeLayerForAllSelfColliders(_TeamConfig.mylayer);
         BO_Health.enableAllHitBoxCollider(true);
 
-        if (right_hand_weapon != null)
-        {
-            right_hand_weapon.gameObject.SetActive(false);
-        }
-        if (left_hand_weapon != null)
-        {
-            left_hand_weapon.gameObject.SetActive(false);
-        }
+        deActiveObjects();
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
     public void deathInitialize()
     {
         gameObject.layer = this._TeamConfig.deadLayer;
-        if (myWeaponList != null)
-        {
-            foreach (BO_Marker_Manager weapon in myWeaponList)
-            {
-                weapon.gameObject.layer = this._TeamConfig.deadLayer;
-            }
-        }
         this.BO_Health.changeLayerForAllSelfColliders(_TeamConfig.deadLayer);
     }
 
-    public void addToDeActiveObjects(GameObject gameObject)
+    public void addToDeActiveObjects(ParticleSystem p)
     {
-        if (!deActiveObjects_List.Contains(gameObject))
+        if (!deActiveObjects_List.Contains(p))
         {
-            deActiveObjects_List.Add(gameObject);
+            deActiveObjects_List.Add(p);
         }
     }
 
@@ -341,9 +286,9 @@ public partial class Data_Center : MonoBehaviour
     {
         if (deActiveObjects_List.Count > 0)
         {
-            foreach (GameObject o in deActiveObjects_List)
+            foreach (ParticleSystem o in deActiveObjects_List)
             {
-                o.SetActive(false);
+                o.Stop(true);
             }
         }
     }

@@ -6,7 +6,8 @@ using HittingDetection;
 public class Decompositioner : MonoBehaviour {
 
     DecompositionerPool _DecompositionerPool;
-        
+
+    public Rigidbody rigidbody;
     public BO_Marker_Manager _HitBox;
     
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
@@ -16,8 +17,8 @@ public class Decompositioner : MonoBehaviour {
     public List<MeshRenderer> to_be_faded_renderers;
 
     public AudioSource audioSource;
-    private float counter = 0;
-    private int phase = 0;
+    private float counter;
+    private int phase;
 
     public void setPool(DecompositionerPool _DecompositionerPool)
     {
@@ -39,28 +40,26 @@ public class Decompositioner : MonoBehaviour {
         {
             switch (_HitBox._WeaponMode)
             {
-                case WeaponMode.NormalWeapon:
-                    break;
                 case WeaponMode.EnergyFromBodyWeapon:
-                    if (_HitBox.weaponHP > 0 && _HitBox.weaponHPCounter <= 0)
+                    if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
                         _HitBox.DisableMarkers();
-                        disable(0.1f);
+                        Disable(0.1f);
                     }
-                    if (_HitBox.getWeaponOwnerHealth() != null)
+                    if (_HitBox.GetWeaponOwnerHealth() != null)
                     {
-                        if (_HitBox.getWeaponOwnerHealth().IFgettingDamage())
+                        if (_HitBox.GetWeaponOwnerHealth().IFgettingDamage())
                         {
                             _HitBox.DisableMarkers();
-                            disable(0.1f);
+                            Disable(0.1f);
                         }
                     }
                     break;
                 case WeaponMode.FlyerWeapon:
-                    if (_HitBox.weaponHP > 0 && _HitBox.weaponHPCounter <= 0)
+                    if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
                         _HitBox.DisableMarkers();
-                        disable(0.1f);
+                        Disable(0.1f);
                     }
                     break;
             }
@@ -69,18 +68,21 @@ public class Decompositioner : MonoBehaviour {
 
     void FixedUpdate()
     {
-        counter += Time.fixedDeltaTime;
-        magicEffectLifeCircle();
+        if (DestructionDelay > 0)
+        {
+            counter += Time.fixedDeltaTime;
+            MagicEffectLifeCircle();
+        }
     }
     
-    private void magicEffectLifeCircle()
+    private void MagicEffectLifeCircle()
     {
         switch (phase)
         {
             case 1:
                 if (counter > stop_emission_delay)
                 {
-                    stopEmissions();
+                    StopEmissions();
                     phase = 2;
                 }
             break;
@@ -95,10 +97,10 @@ public class Decompositioner : MonoBehaviour {
                     _DecompositionerPool.Return(this);
                 }
             break;
-        }    
+        }   
     }
     
-    public void stopEmissions()
+    public void StopEmissions()
     {
         if (to_be_stop_emissions.Count == 0)
             return;
@@ -127,16 +129,16 @@ public class Decompositioner : MonoBehaviour {
         }
     }
 
-    public void disable(float time)
+    public void Disable(float time)
     {
         if (this.gameObject.activeSelf)
-            StartCoroutine(this.disableAfterTime(time));
+            StartCoroutine(this.DisableAfterTime(time));
     }
     
     // 这个函数一般情况下是纯粹关乎表现问题，所以我们认为游戏暂停的话这个不会造成太大影响。。但确实SetActive活动可能影响对象池
-    private IEnumerator disableAfterTime(float time)
+    private IEnumerator DisableAfterTime(float time)
     {
-        stopEmissions();
+        StopEmissions();
         yield return new WaitForSeconds(time);
         if (this._DecompositionerPool != null)
             this._DecompositionerPool.Return(this);

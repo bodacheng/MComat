@@ -16,7 +16,6 @@ public enum WeaponPosAdjustMode
 
 public enum WeaponMode
 {
-    NormalWeapon = 1,
     FlyerWeapon = 2,
     EnergyFromBodyWeapon = 3
 }
@@ -28,7 +27,7 @@ namespace HittingDetection
         [Tooltip("damageTypeOfTheWeapon")]
         public damageType damage_type = damageType.light_damage;
         [Tooltip("damageTypeOfTheWeapon")]
-        public WeaponMode _WeaponMode = WeaponMode.NormalWeapon;
+        public WeaponMode _WeaponMode;
         [Tooltip("击中时候靠受力调整敌人位置")]
         public WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
         [Tooltip("特殊施予")]
@@ -44,18 +43,16 @@ namespace HittingDetection
         [Tooltip("魔法特效路径(blueMagic redMagic)")]
         public string personalEffectPath;
         [Tooltip("特效是否有粘身视效")]
-        public bool effectSpreadOnBody = false;
+        public bool effectSpreadOnBody;
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
-        public bool onGroundMagic = false;//这个是和其他模块联动的。确实不得不放这儿。
+        public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
 
-        public int weaponHPCounter;
         private bool _markersAreEnabled;
         private TeamConfig teamConfig;
         private Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         private Transform _MarkersParent;
         private Transform onEnableEffectT;
         private bool HitFlesh;
-        private bool HitWall;
         private bool HitShield;
         private BO_Marker[] _markers;
         private List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
@@ -63,19 +60,31 @@ namespace HittingDetection
         private List<Transform> _Shields_Hit = new List<Transform>();
         private List<Vector3> _wallHitPositions = new List<Vector3>();
         private List<Vector3> _ShiledHitPositions = new List<Vector3>();
-        private List<hitOnHealthBody> hitsOnHealthBody;
+        private List<hitOnHealthBody> hitsOnHealthBody = new List<hitOnHealthBody>();
         private Decompositioner processingBlood;
-
-        private bool traditionalDefendMode = false;
+        private bool traditionalDefendMode;
         private BO_Shield TheS;
 
-        //下面这两个功能暂时不开启。以后真可能用估计也要大改
+        //下面这个功能暂时不开启。以后真可能用估计也要大改
         //[Tooltip("Will this weapon trigger a event?")]
-        private bool is_E_weapon = false;
+        private bool is_E_weapon;
         //[Tooltip("Only if is_E_weapon is true you need to set a e_Damage to it?")]
-        private e_Damage e_Damage = null;
+        private e_Damage e_Damage;
+        
+        private int currentHP;
+        public int CurrentHP
+        {
+            get
+            {
+                return this.currentHP;
+            }
+            set
+            {
+                this.currentHP = value;
+            }
+        }
 
-        void Awake()
+        void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         {
             if (_MarkersParent == null)
                 _MarkersParent = transform;
@@ -89,79 +98,55 @@ namespace HittingDetection
                 }
             }
             _markers = bms.ToArray();
-            //按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         }
 
-        void OnEnable()//onenable函数是你把一个物体从对象池取出来后立刻就会执行，这样你需要仔细看这个函数和其他一些初始化相关的函数存不存在什么顺序错误
+        //OnEnable函数当下所有的行动都是可以在自客户端和他客户端平等进行//onenable函数是你把一个物体从对象池取出来后立刻就会执行，这样你需要仔细看这个函数和其他一些初始化相关的函数存不存在什么顺序错误
+        void OnEnable()
         {
-            // OnEnable函数当下所有的行动都是可以在自客户端和他客户端平等进行
             if (_WeaponHolderCenter == null)
-            {
                 _WeaponHolderCenter = transform;
-                //Debug.Log(this + "weaponmanager没有设置ower，将无法正确计算打击方向,并且无法进行高级防御判定功能");
-            }
-            if (_MarkersParent == null)
-            {
-                _MarkersParent = transform;
-            }
             if (_startActivated)
             {
                 EnableMarkers();
             }
-
             if (onEnableEffectT != null)
             {
                 if (ifVectorClean(onEnableEffectT.position))
                 {
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("on_enable_effect", this.personalEffectPath,
-                                                                           onEnableEffectT.position, Quaternion.identity, onEnableEffectT);
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("on_enable_effect", this.personalEffectPath,onEnableEffectT.position, Quaternion.identity, onEnableEffectT);
                 }
             }
         }
 
         public void OnDisable()
         {
-            weaponHPCounter = weaponHP;
+            currentHP = weaponHP;
             DisableMarkers();
             if (this._WeaponMode == WeaponMode.FlyerWeapon || this._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
-                setTeamConfig(null);
+                SetTeamConfig(null);
         }
 
-        public void setHolderCenter(Transform T)
+        public void SetHolderCenter(Transform T)
         {
             _WeaponHolderCenter = T;
         }
-        public void setOnEnableEffectT(Transform T)
-        {
-            onEnableEffectT = T;
-        }
-        public BO_Health getWeaponOwnerHealth()
+        public BO_Health GetWeaponOwnerHealth()
         {
             return myOwnerHealth;
         }
-        public void setWeaponOwnerHealth(BO_Health _BO_Health)
+        public void SetWeaponOwnerHealth(BO_Health _BO_Health)
         {
             myOwnerHealth = _BO_Health;
         }
-        public bool getWeaponEnableState()
-        {
-            return _markersAreEnabled;
-        }
-        public void setDectionTargetsUnion(List<Transform> Used_Targets)
+        public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
             this._Used_Targets = Used_Targets;
         }
-        public void setLayerAfterDeath(TeamConfig teamConfig)
-        {
-            this.gameObject.layer = teamConfig.deadLayer;
-        }
-        public void setTeamConfig(TeamConfig teamConfig)
+        public void SetTeamConfig(TeamConfig teamConfig)
         {
             this.teamConfig = teamConfig;
             if (teamConfig == null)
-            {
                 teamConfig = TeamConfig.defaultSet;
-            }
             this.gameObject.layer = 0;//武器父节点为默认层，武器层的是marker
             if (_markers != null)
             {
@@ -187,15 +172,12 @@ namespace HittingDetection
         {
             _Used_Targets.Clear();
             _Shields_Hit.Clear();
-            if (_markers != null)
+            for (int i2 = 0; i2 < _markers.Length; i2++)
             {
-                for (int i2 = 0; i2 < _markers.Length; i2++)
-                {
-                    _markers[i2]._tempPos = _markers[i2].transform.position;
-                    //_markers[i2].clearDetection();
-                    if (teamConfig != null)
-                        _markers[i2].gameObject.layer = teamConfig.myWeaponLayer;
-                }
+                _markers[i2]._tempPos = _markers[i2].transform.position;
+                //_markers[i2].clearDetection();
+                if (teamConfig != null)
+                    _markers[i2].gameObject.layer = teamConfig.myWeaponLayer;
             }
             _markersAreEnabled = true;
         }
@@ -225,12 +207,9 @@ namespace HittingDetection
 
         public void ClearMarkersDectections()
         {
-            if (_markers != null)
+            for (int i2 = 0; i2 < _markers.Length; i2++)
             {
-                for (int i2 = 0; i2 < _markers.Length; i2++)
-                {
-                    _markers[i2].clearDetection();
-                }
+                _markers[i2].clearDetection();
             }
         }
 
@@ -238,13 +217,10 @@ namespace HittingDetection
         {
             _Used_Targets.Clear();
             _Shields_Hit.Clear();
-            if (_markers != null)
+            for (int i2 = 0; i2 < _markers.Length; i2++)
             {
-                for (int i2 = 0; i2 < _markers.Length; i2++)
-                {
-                    _markers[i2]._tempPos = _markers[i2].transform.position;
-                    _markers[i2].clearDetection();
-                }
+                _markers[i2]._tempPos = _markers[i2].transform.position;
+                _markers[i2].clearDetection();
             }
         }
 
@@ -257,10 +233,8 @@ namespace HittingDetection
         {
             if (_markersAreEnabled)
             {
-                HitWall = false;
                 HitFlesh = false;
                 HitShield = false;
-
                 DetectProcess();
                 treatProcess();
                 ClearMarkersDectections();
@@ -279,7 +253,7 @@ namespace HittingDetection
         {
             if (weaponHP > 0)
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("energy_resolve", this.personalEffectPath, Pos, Qua, null);
-            weaponHPCounter -= 1;
+            CurrentHP -= 1;
         }
 
         public bool ifVectorClean(Vector3 rot)

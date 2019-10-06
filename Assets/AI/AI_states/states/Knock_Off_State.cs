@@ -105,7 +105,7 @@ public class Knock_Off_State : AI_State
                 else
                     KnockOffSparkPersonalEffectPath = null;
 
-                superHitPool = EffectAndHurtObjectLoading.Instance.iniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
+                superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
                 if (superHitPool != null)
                 {
                     processingBlood = superHitPool.Rent();

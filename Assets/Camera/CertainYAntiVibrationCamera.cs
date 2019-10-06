@@ -25,7 +25,6 @@ class CertainYAntiVibrationCamera : camera_mode
     
     Vector3 FirstPoint;
     Vector3 SecondPoint;
-    float xAngle = 0f;
     float xAngleTemp;
 
     Vector3 rotateToDirection;

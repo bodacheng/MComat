@@ -30,7 +30,7 @@ public class Dash_Back_State : AI_State
 		base.pre_process_before_enter ();
     }
 
-    public override bool capacity_enter_condition()
+    public override bool Capacity_enter_condition()
     {
         if (!_DATA_CENTER.IsGrounded())
             return false;
