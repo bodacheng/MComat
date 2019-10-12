@@ -150,7 +150,7 @@ namespace HittingDetection
                         //jiuzhengweizhi = this.transform.position;
                         //}
                         new_damage = new v_Damage(damage_type, force_direction, _hitOnHealthBody._Startpoint, _hitOnHealthBody._BO_Health, this,_specialApply);
-                        if (effectSpreadOnBody && _hitOnHealthBody._BO_Health._Center._ResistanceManager.Resistance == 0)
+                        if (effectSpreadOnBody && _hitOnHealthBody._BO_Health._Center._ResistanceManager.Resistance.Value == 0)
                             _hitOnHealthBody._BO_Health.runShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
                         _hitOnHealthBody._BO_Health.ApplyDamage(new_damage);
 
@@ -162,7 +162,7 @@ namespace HittingDetection
 
                         if (ifVectorClean(_hitOnHealthBody._Startpoint))
                         {
-                            if (_hitOnHealthBody._BO_Health._Center._ResistanceManager.Resistance > 0)
+                            if (_hitOnHealthBody._BO_Health._Center._ResistanceManager.Resistance.Value > 0)
                             {
                                 processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
                                                                                        this.personalEffectPath,

@@ -16,7 +16,7 @@ public class OldDebugPreparingProcess : NagareProcess
 
     public override bool canEnterNextProcess()
     {
-        return _RealTimeGameProcessManager.FightTeam1.ifAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.ifAllCharsPreparedForBattle();
+        return _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle();
     }
     
     public override void ProcessEnter()

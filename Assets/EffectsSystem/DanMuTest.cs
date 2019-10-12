@@ -25,8 +25,7 @@ public class DanMuTest : MonoBehaviour {
 	void Update()
 	{
         time_counter += Time.deltaTime;
-        transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ) 
-                                * scale, 0,zAnimationCurve.Evaluate( time_counter ) * scale ));
+        transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ) * scale, 0,zAnimationCurve.Evaluate( time_counter ) * scale ));
 
 		//foreach( EventKeyframe ekf in listEventKeyframe )
 		//{

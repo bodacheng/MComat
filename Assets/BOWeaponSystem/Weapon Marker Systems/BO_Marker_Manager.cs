@@ -101,10 +101,8 @@ namespace HittingDetection
         }
 
         //OnEnable函数当下所有的行动都是可以在自客户端和他客户端平等进行//onenable函数是你把一个物体从对象池取出来后立刻就会执行，这样你需要仔细看这个函数和其他一些初始化相关的函数存不存在什么顺序错误
-        void OnEnable()
+        public void Local_OnEnable()
         {
-            if (_WeaponHolderCenter == null)
-                _WeaponHolderCenter = transform;
             if (_startActivated)
             {
                 EnableMarkers();
@@ -118,12 +116,11 @@ namespace HittingDetection
             }
         }
 
-        public void OnDisable()
+        public void Local_OnDisable()
         {
             currentHP = weaponHP;
             DisableMarkers();
-            if (this._WeaponMode == WeaponMode.FlyerWeapon || this._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
-                SetTeamConfig(null);
+            SetTeamConfig(null);
         }
 
         public void SetHolderCenter(Transform T)
@@ -148,18 +145,11 @@ namespace HittingDetection
             if (teamConfig == null)
                 teamConfig = TeamConfig.defaultSet;
             this.gameObject.layer = 0;//武器父节点为默认层，武器层的是marker
-            if (_markers != null)
+            foreach (BO_Marker _Marker in _markers)
             {
-                foreach (BO_Marker _Marker in _markers)
-                {
-                    _Marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
-                    _Marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
-                    _Marker.gameObject.layer = teamConfig.myWeaponLayer;
-                }
-            }
-            else
-            {
-                Debug.Log(gameObject + "对应武器的markers没能适配 检查代码顺序。");
+                _Marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
+                _Marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
+                _Marker.gameObject.layer = teamConfig.myWeaponLayer;
             }
         }
         public TeamConfig getTeamConfig()
@@ -170,7 +160,8 @@ namespace HittingDetection
         // EnableMarkers的运行归根结底也都是建立在动画事件上，而动画片段的播放在双方客户端上是平等的，所以理论上说也没有必须针对主客客户端区别执行的操作
         public void EnableMarkers()
         {
-            _Used_Targets.Clear();
+            if(_Used_Targets != null)
+                _Used_Targets.Clear();
             _Shields_Hit.Clear();
             for (int i2 = 0; i2 < _markers.Length; i2++)
             {
@@ -192,7 +183,8 @@ namespace HittingDetection
                     _markers[i2]._tempPos = _markers[i2].transform.position;
                 }
             }
-            _Used_Targets.Clear();
+            if(_Used_Targets != null)
+                _Used_Targets.Clear();
             _Shields_Hit.Clear();
             if (_markers != null)
             {
@@ -215,7 +207,8 @@ namespace HittingDetection
 
         public void ClearTargets()
         {
-            _Used_Targets.Clear();
+            if (_Used_Targets != null)
+                _Used_Targets.Clear();
             _Shields_Hit.Clear();
             for (int i2 = 0; i2 < _markers.Length; i2++)
             {

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using HittingDetection;
 using UniRx;
@@ -8,7 +7,8 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
 
     private TeamConfig _TeamConfig;
     private List<Transform> _Used_Targets = new List<Transform>();
-    private IDictionary<Transform,Decompositioner> bodyPartsWeaponRegisterDic = new Dictionary<Transform,Decompositioner>();
+    private IDictionary<Transform,Decompositioner> bodyPartsWeaponRegisterDic;
+    private List<Transform> bodyweaponParts;
     private Transform right_hand, left_hand, right_foot, left_foot, head, tail;    
     private Transform geometryCenter;
     private BO_Health myownheath;
@@ -26,6 +26,36 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
             default_hitboxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
         }
     }
+    
+    public void assignWeaponsFromDataCenter(BO_Health Ownheath,Transform geometryCenter,ParticleSystem left_sword, ParticleSystem right_sword, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
+    {
+        this.myownheath = Ownheath;
+        this.geometryCenter = geometryCenter;
+        this.right_sword = right_sword;
+        this.left_sword = left_sword;
+        this.right_hand = right_hand;
+        this.left_hand = left_hand;
+        this.right_foot = right_foot;
+        this.left_foot = left_foot;
+        this.head = head;
+        this.tail = tail;
+        
+        bodyPartsWeaponRegisterDic = new Dictionary<Transform,Decompositioner>();
+        bodyweaponParts = new List<Transform>();
+
+        if (this.right_hand != null)
+            bodyweaponParts.Add(this.right_hand);
+        if (this.left_hand != null)
+            bodyweaponParts.Add(this.left_hand);
+        if (this.left_foot != null)
+            bodyweaponParts.Add(this.left_foot);
+        if (this.right_foot != null)
+            bodyweaponParts.Add(this.right_foot);
+        if (this.head != null)
+            bodyweaponParts.Add(this.head);
+        if (this.tail != null)
+            bodyweaponParts.Add(this.tail);
+    }
 
     // 当前这个版本因为把“身体固化武器”的检测对象给联合化了。。其实关于_Used_Targets清理，
     // 在以下的ClearTargets()DisableMarkers ()EnableMarkers()
@@ -40,14 +70,17 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
                 keyValuePair.Value._HitBox.ClearTargets();
         }
     }
-	public void DisableMarkers()
-	{
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
+    
+    public void clearMarkerManagers()
+    {
+        foreach (Transform T in bodyweaponParts) 
         {
-            if (keyValuePair.Value != null)
-                default_hitboxPool.Return(keyValuePair.Value);
+            RemoveBodyPartWeapon(T);
         }
-	}
+        turn_off_Left_energy_blade();
+        turn_off_Right_energy_blade();
+    }
+    
 	public void EnableMarkers()
 	{
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
@@ -83,42 +116,17 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
                 keyValuePair.Value._HitBox.SetDamageType(damageType);
         }
     }
-
-    public void assignWeaponsFromDataCenter(BO_Health Ownheath,Transform geometryCenter,ParticleSystem left_sword, ParticleSystem right_sword, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
-    {
-        this.myownheath = Ownheath;
-        this.geometryCenter = geometryCenter;
-        this.right_sword = right_sword;
-        this.left_sword = left_sword;
-        this.right_hand = right_hand;
-        this.left_hand = left_hand;
-        this.right_foot = right_foot;
-        this.left_foot = left_foot;
-        this.head = head;
-        this.tail = tail;
-    }
     
     public void assignTeamFlag(TeamConfig teamConfig)
     {
         this._TeamConfig = teamConfig;
     }
     
-    public void clearMarkerManagers()
-    {
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
-        {
-            if (keyValuePair.Value != null)
-                default_hitboxPool.Return(keyValuePair.Value);
-        }
-        turn_off_Left_energy_blade();
-        turn_off_Right_energy_blade();
-    }
-
     public void SetAllBodyMarkerManagersIn()
     {
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic)
+        foreach (Transform T in bodyweaponParts)
         {
-            RegisterBodyPartWeapon(keyValuePair.Key,1);
+            RegisterBodyPartWeapon(T,1);
         }
     }
 
@@ -148,25 +156,32 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
 
     private void RegisterBodyPartWeapon(Transform t)
     {
-        target_hitbox = default_hitboxPool.Rent();
-        target_hitbox.transform.SetParent(t);
-        target_hitbox.transform.localPosition = Vector3.zero;        
-        target_hitbox._HitBox.SetTeamConfig(_TeamConfig);
-        target_hitbox._HitBox.SetHolderCenter(this.geometryCenter);
-        target_hitbox._HitBox.SetWeaponOwnerHealth(myownheath);
-        target_hitbox._HitBox.SetDectionTargetsUnion(this._Used_Targets);
-        target_hitbox._HitBox.EnableMarkers();
-        bodyPartsWeaponRegisterDic[t] = target_hitbox;
+        if (t != null && !bodyPartsWeaponRegisterDic.ContainsKey(t))
+            bodyPartsWeaponRegisterDic.Add(t, null);
+            
+        if (bodyPartsWeaponRegisterDic[t] == null)
+        {
+            target_hitbox = default_hitboxPool.Rent();
+            bodyPartsWeaponRegisterDic[t] = target_hitbox;
+        }
+        bodyPartsWeaponRegisterDic[t].transform.SetParent(t);
+        bodyPartsWeaponRegisterDic[t].transform.localPosition = Vector3.zero;        
+        bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(_TeamConfig);
+        bodyPartsWeaponRegisterDic[t]._HitBox.SetHolderCenter(this.geometryCenter);
+        bodyPartsWeaponRegisterDic[t]._HitBox.SetWeaponOwnerHealth(myownheath);
+        bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(this._Used_Targets);
+        bodyPartsWeaponRegisterDic[t]._HitBox.EnableMarkers();
     }
     
     private void RemoveBodyPartWeapon(Transform t)
     {
+        if (!bodyPartsWeaponRegisterDic.ContainsKey(t))
+            return;
         if (bodyPartsWeaponRegisterDic[t] != null)
         {
-            bodyPartsWeaponRegisterDic[t]._HitBox.DisableMarkers();
             bodyPartsWeaponRegisterDic[t]._HitBox.SetWeaponOwnerHealth(null);
             bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(null);
-            default_hitboxPool.Return(bodyPartsWeaponRegisterDic[t]);
+            default_hitboxPool.Return(bodyPartsWeaponRegisterDic[t]);//diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
             bodyPartsWeaponRegisterDic[t] = null;
         }
     }
@@ -182,7 +197,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         }
     }
 
-	public void  SetRightHandMarkerManager (int in_or_out = 1)
+	public void SetRightHandMarkerManager (int in_or_out = 1)
 	{
         RegisterBodyPartWeapon(right_hand,in_or_out);
     }

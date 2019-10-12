@@ -7,7 +7,6 @@ using HittingDetection;
 
 public class bullet_GPS : MonoBehaviour {
 
-    public BO_Marker_Manager myWeapon;
     public Rigidbody _Rigidbody;
     public float navigation_delay;
     public float navigation_time;
@@ -19,32 +18,10 @@ public class bullet_GPS : MonoBehaviour {
     public LayerMask layerMask;
     private List<Collider> _hits;
 
-	void OnEnable()
+	public void Local_OnEnable()
 	{
         time_counter = 0f;
-        if (myWeapon)
-        {
-            if (myWeapon.getTeamConfig() != null)
-                layerMask = myWeapon.getTeamConfig().enemyAndEnemyWeaponLayerMask;
-        }
     }
-    void OnDisable()
-    {
-        time_counter = 0f;
-    }
-
-    void Awake()
-	{
-        if (_Rigidbody != null)
-        {
-            _Rigidbody.mass = 1f;
-            _Rigidbody.useGravity = false;
-        }
-    }
-
-	void Start () {
-
-	}
 
 	void FixedUpdate()
 	{

@@ -24,19 +24,19 @@ public class RealTimeGameProcessManager : MonoBehaviour
     public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
     public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
     
-    public static bool combatFightPlayerMode = false;
+    public static bool combatFightPlayerMode;
     public static Data_Center focusingChar;
     public static Team playerTeam = Team.player1;
     
-    public void fightGUIProcess()
+    public void FightGUIProcess()
     {
-        FightTeam1.refreshHPAndResistBar();
-        FightTeam2.refreshHPAndResistBar();
-        FightTeam1.refreshComboHit();
-        FightTeam2.refreshComboHit();
+        if (FightTeam1.teamConfig.myTeam == playerTeam)
+            FightTeam2.BarsPositionUpdate();
+        if (FightTeam2.teamConfig.myTeam == playerTeam)
+            FightTeam1.BarsPositionUpdate();
     }
     
-	public void refresh()//这个刷新是倾向于画面制御
+	public void Refresh()//这个刷新是倾向于画面制御
 	{
         if (combatFightPlayerMode && focusingChar != null)
         {
@@ -48,17 +48,17 @@ public class RealTimeGameProcessManager : MonoBehaviour
             _C_button.gameObject.SetActive(false);
             _AI_button.gameObject.SetActive(true);
         }
-        UnityEngine.Events.UnityAction SwitchAUtoMOde = () =>
+        void SwitchAUtoMOde()
         {
             combatFightPlayerMode = !combatFightPlayerMode;
             SwitchToCMode(focusingChar, combatFightPlayerMode);
-            refresh();
-        };
+            Refresh();
+        }
         autoBUtton.onClick.RemoveAllListeners();
         autoBUtton.onClick.AddListener(SwitchAUtoMOde);
 
-        FightTeam1.refresh();
-        FightTeam2.refresh();
+        FightTeam1.Refresh();
+        FightTeam2.Refresh();
         
         if (focusingChar == null)
         {
@@ -82,19 +82,17 @@ public class RealTimeGameProcessManager : MonoBehaviour
 
     public void Clear()// 这个我们还没有添加在合理的地方。
     {
-        FightTeam1.datacenterCharIconDic.Clear();
-        FightTeam1.datacenterHitComboDic.Clear();
-        FightTeam2.datacenterCharIconDic.Clear();
-        FightTeam2.datacenterHitComboDic.Clear();
+        FightTeam1.Clear();
+        FightTeam2.Clear();
     }
     
-    List<Transform> outter_watchetargets = new List<Transform>();
-    List<Transform> inner_watchetargets = new List<Transform>();
+    private List<Transform> outter_watchetargets = new List<Transform>();
+    private List<Transform> inner_watchetargets = new List<Transform>();
     public void FightingStepProcess()
     {
-        FightTeam1.localFightingUpdate();
-        FightTeam2.localFightingUpdate();
-        fightGUIProcess();
+        FightTeam1.LocalFightingUpdate();
+        FightTeam2.LocalFightingUpdate();
+        FightGUIProcess();
         
         outter_watchetargets.Clear();
         inner_watchetargets.Clear();
@@ -113,17 +111,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
                 _CameraManager.current_Camera_Mode.targets = outter_watchetargets;
             if (inner_watchetargets.Count > 0)
                 _CameraManager.current_Camera_Mode.targets = inner_watchetargets;
-        }
-        
-        switch(playerTeam)
-        {
-            case Team.player1:
-                
-                break;
-            case Team.player2:
-                
-                break;
-        }
+        }        
     }
     
     void OnGUI()
@@ -141,7 +129,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
                      SwitchToCMode(null,combatFightPlayerMode);
                 break;
             }
-            refresh();
+            Refresh();
         }
     }
 }

@@ -87,11 +87,11 @@ public partial class G_Attack_State : AI_State {
 		base.pre_process_before_enter ();
         rushstart = () =>
         {
-            this._ResistanceManager.Resistance +=1;
+            this._ResistanceManager.Resistance.Value +=1;
         };
         rushend = () =>
         {
-            this._ResistanceManager.Resistance -=1;
+            this._ResistanceManager.Resistance.Value -=1;
         };
         rushCoroutine = new customCoroutine(rushstart, 5f, rushend);
     }
@@ -228,7 +228,7 @@ public partial class G_Attack_State : AI_State {
         base.AI_State_exit();
         this._DATA_CENTER.setGravitySwitch(true);
         this.rushingToTarget = null;
-        this._Weapon_Animation_Events.DisableMarkers();
+        this._Weapon_Animation_Events.clearMarkerManagers();
         _Animator.applyRootMotion = false;
         _DATA_CENTER.deActiveObjects();
         this._BuffsRunner.endSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态

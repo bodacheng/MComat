@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using mainMenu;
 
-public enum SceneMode : int
+public enum SceneMode
 {
-	localDebug = 1,
-	QuestFight = 3,
+    localDebug = 1,
+    QuestFight = 3,
     MyPetsFight = 6,
 }
 
-public partial class NetFightScene : MonoBehaviour {
+public class NetFightScene : MonoBehaviour {
 
 	public SceneMode _SceneMode = SceneMode.localDebug;
 
@@ -56,7 +56,7 @@ public partial class NetFightScene : MonoBehaviour {
     public Transform[] Team1StandPoints,Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
 
     private FightSceneProcessesRunner fightSceneProcessesRunner = new FightSceneProcessesRunner();
-    private bool loadStageFinished = false;
+    private bool loadStageFinished;
 
     // 主进程
     [Space(7)]
@@ -127,9 +127,9 @@ public partial class NetFightScene : MonoBehaviour {
                 yield return this._RealTimeGameProcessManager.FightTeam1.CharacterResourceLoad(stage.localFight.HeroSets);
                 yield return this._RealTimeGameProcessManager.FightTeam2.CharacterResourceLoad(stage.localFight.EnemySets);
                 _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
-                _RealTimeGameProcessManager.FightTeam1.instantiateCharsIconsAndFloatHPBar ();
-                _RealTimeGameProcessManager.FightTeam2.instantiateCharsIconsAndFloatHPBar ();
-                _RealTimeGameProcessManager.refresh();
+                _RealTimeGameProcessManager.FightTeam1.Instantiate ();
+                _RealTimeGameProcessManager.FightTeam2.Instantiate ();
+                _RealTimeGameProcessManager.Refresh();
                 break;
         }
         loadStageFinished = true;
@@ -152,7 +152,7 @@ public partial class NetFightScene : MonoBehaviour {
                         _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], false);
                         break;
                 }
-                _RealTimeGameProcessManager.refresh();
+                _RealTimeGameProcessManager.Refresh();
                 break;
         }
     }

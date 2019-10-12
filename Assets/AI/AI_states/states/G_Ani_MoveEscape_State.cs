@@ -19,11 +19,11 @@ public class G_Ani_MoveEscape_State : AI_State {
         this.behaviorEnterRanges = null;
         breakfreestart = () =>
         {
-            this._ResistanceManager.Resistance +=10;
+            this._ResistanceManager.Resistance.Value +=10;
         };
         breakfreeend = () =>
         {
-            this._ResistanceManager.Resistance -=10;
+            this._ResistanceManager.Resistance.Value -=10;
         };
         breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
 	}

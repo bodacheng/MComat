@@ -20,7 +20,7 @@ public class OldDebugFightingProcess : NagareProcess
 
     public override bool canEnterNextProcess()
     {
-        return _NetFightScene.ifLoadStageFinished() && _RealTimeGameProcessManager.FightTeam1.ifAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.ifAllCharsPreparedForBattle();
+        return _NetFightScene.ifLoadStageFinished() && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle();
     }
     
     public override void ProcessEnter()
@@ -138,15 +138,15 @@ public class OldDebugFightingProcess : NagareProcess
         {
             foreach (Data_Center _char in _KeyValuePair.Value)
             {
-                if (_char.BO_Health._health > 0)//字符串比较本身消耗比较大。。。这个环节如果我们愿意其实可以搞个death flag
-                {
-                }else{
-                    if (!TeamDeadMemberDictionary[_KeyValuePair.Key].Contains(_char))
-                    {
-                        _char.AIStateRunner.changeState("Death");
-                        TeamDeadMemberDictionary[_KeyValuePair.Key].Add(_char);
-                    }
-                }
+                //if (_char.BO_Health.CurrentHp > 0)//字符串比较本身消耗比较大。。。这个环节如果我们愿意其实可以搞个death flag
+                //{
+                //}else{
+                //    if (!TeamDeadMemberDictionary[_KeyValuePair.Key].Contains(_char))
+                //    {
+                //        _char.AIStateRunner.changeState("Death");
+                //        TeamDeadMemberDictionary[_KeyValuePair.Key].Add(_char);
+                //    }
+                //}
             }
         }
         return TeamDeadMemberDictionary;
@@ -196,10 +196,10 @@ public class OldDebugFightingProcess : NagareProcess
             
         foreach (Data_Center _one in winners)
         {
-            if (_one.BO_Health._health > 0)
-            {
-                _one.AIStateRunner.changeState("Victory");
-            }
+            //if (_one.BO_Health.CurrentHp > 0)
+            //{
+            //    _one.AIStateRunner.changeState("Victory");
+            //}
         }
         Time.timeScale = 1f;
     }

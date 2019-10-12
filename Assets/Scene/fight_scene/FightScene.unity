@@ -2541,6 +2541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a37eb50078234e04bae03343a0c9056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadTeam: 
 --- !u!4 &443880815
 Transform:
   m_ObjectHideFlags: 0
@@ -10675,7 +10676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: eadda6bb5cdf417489cbbf6d12d724a6, type: 2}
+  profile: {fileID: 0}
 --- !u!224 &3000649885149988236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23940,8 +23941,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charDataCenter: {fileID: 0}
-  hpBarPrefab: {fileID: 3000649885150582561}
-  resistBarPrefab: {fileID: 1943282275}
+  HpBar: {fileID: 3000649885150582561}
+  ResistBar: {fileID: 1943282275}
   focusingCharIcon: {fileID: 1121421627}
 --- !u!224 &3000649885712063305
 RectTransform:
@@ -25364,7 +25365,7 @@ MonoBehaviour:
   m_text: Hit Combo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 9ad269c99dcf42b7aedefd83dd5a7b9d, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -25379,8 +25380,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 69a525efa7e6472eab268f6ea605f06e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0

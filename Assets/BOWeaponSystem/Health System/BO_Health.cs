@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Soul;
+using UniRx;
 using System.Linq;
 using HittingDetection;
 
@@ -15,16 +15,15 @@ public partial class BO_Health : MonoBehaviour
     
     [Tooltip("数据中心")]
     public Data_Center _Center;
-    
-    [Tooltip("HP")]
-    public float _health;
+
     [Tooltip("当前攻击力")]
     public float AT = 10;
 
-    public static List<Collider> AllMeatColliders = new List<Collider>();
+    public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
+    public ComboHitCount _ComboHitCount = new ComboHitCount();
     
-    private knockOffCount _knockOffCount= new knockOffCount();
-    private ComboHitCount _ComboHitCount= new ComboHitCount();
+    public static List<Collider> AllMeatColliders = new List<Collider>();    
+    private knockOffCount _knockOffCount = new knockOffCount();    
     private BeHitCount _BeHitCount= new BeHitCount();        
     private bool gettingdamage = false;
     private List<BO_Hitbox> myBOHitBoxeComponent = new List<BO_Hitbox>();//713添加
@@ -55,7 +54,7 @@ public partial class BO_Health : MonoBehaviour
     {
         //registerMyDefaultMaterialsShaderDic();
     }
-
+    
     public void clearDamageLists()
     {
         foreach (KeyValuePair<damageType, List<v_Damage>> _keyvaluepair in DamagesDIC)
@@ -220,7 +219,7 @@ public partial class BO_Health : MonoBehaviour
             {
                 if (_dmg.fromWeapon.GetWeaponOwnerHealth() != null)
                     _dmg.fromWeapon.GetWeaponOwnerHealth().HitCountPlus();
-                _health -= _dmg.AT;
+                CurrentHp.Value -= _dmg.AT;
             }
             
             switch(_dmg.specialApply)
@@ -239,17 +238,6 @@ public partial class BO_Health : MonoBehaviour
                     break;
                 default:
                     break;
-            }
-
-            if (_health <= 0)
-            {
-                v_Damage deathknockOff = new v_Damage(
-                  damageType.deathknockoff,
-                  _dmg.force_direction,
-                  _dmg.damageHappenPoint,
-                  _dmg.toWho,
-                  _dmg.fromWeapon);
-                this.ApplyDamage(deathknockOff);
             }
         }
         v_Damages.Clear();
@@ -276,18 +264,18 @@ public partial class BO_Health : MonoBehaviour
 		//colorTransition.Duration = 0.2f;
 		//colorTransition.LoopMode = TransitionLoopModes.PlayOnce;
 
-        _Center._ResistanceManager.Resistance -= 1;
+        _Center._ResistanceManager.Resistance.Value -= 1;
 		switch (_dmg.damage_type)
 		{
 			case damageType.slight_damage:
-                if (_Center._ResistanceManager.Resistance == 0)
+                if (_Center._ResistanceManager.Resistance.Value == 0)
                     DamagesDIC[damageType.slight_damage].Add(_dmg);
                 break;
 			case damageType.light_damage:
                 switch (this.weight)
 				{
 					case weight.light:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             _dmg.damage_type = damageType.heavy_damage;
                             DamagesDIC[damageType.heavy_damage].Add(_dmg);
@@ -296,7 +284,7 @@ public partial class BO_Health : MonoBehaviour
                         }
                         break;
 					case weight.normal:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[damageType.light_damage].Add(_dmg);
                         }else{
@@ -304,7 +292,7 @@ public partial class BO_Health : MonoBehaviour
                         }
                         break;
 					case weight.heavy:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             _dmg.damage_type = damageType.light_damage;
                             DamagesDIC[damageType.light_damage].Add(_dmg);
@@ -314,7 +302,7 @@ public partial class BO_Health : MonoBehaviour
                         }
                         break;
 					default:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[damageType.light_damage].Add(_dmg);
                         }else{
@@ -327,7 +315,7 @@ public partial class BO_Health : MonoBehaviour
                 switch (this.weight)
 				{
 					case weight.light:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             _dmg.damage_type = damageType.supper_damage;
                             DamagesDIC[damageType.supper_damage].Add(_dmg);
@@ -336,7 +324,7 @@ public partial class BO_Health : MonoBehaviour
                         }
                         break;
 					case weight.normal:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[damageType.heavy_damage].Add(_dmg);
                         }else{
@@ -344,7 +332,7 @@ public partial class BO_Health : MonoBehaviour
                         }
                         break;
 					case weight.heavy:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             _dmg.damage_type = damageType.light_damage;
                             DamagesDIC[damageType.light_damage].Add(_dmg);
@@ -353,7 +341,7 @@ public partial class BO_Health : MonoBehaviour
                         }
                         break;
 					default:
-                        if (_Center._ResistanceManager.Resistance == 0)
+                        if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[damageType.heavy_damage].Add(_dmg);
                         }else{
@@ -366,7 +354,7 @@ public partial class BO_Health : MonoBehaviour
                 switch (this.weight)
 				{
 					case weight.light:
-                    if (_Center._ResistanceManager.Resistance == 0)
+                    if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         _dmg.damage_type = damageType.knockOff_damage;
                         DamagesDIC[damageType.knockOff_damage].Add(_dmg);
@@ -375,7 +363,7 @@ public partial class BO_Health : MonoBehaviour
                     }
                         break;
 					case weight.normal:
-                    if (_Center._ResistanceManager.Resistance == 0)
+                    if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         DamagesDIC[damageType.supper_damage].Add(_dmg);
                     }else{
@@ -383,7 +371,7 @@ public partial class BO_Health : MonoBehaviour
                     }
                         break;
 					case weight.heavy:
-                    if (_Center._ResistanceManager.Resistance == 0)
+                    if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         _dmg.damage_type = damageType.heavy_damage;
                         DamagesDIC[damageType.heavy_damage].Add(_dmg);
@@ -392,7 +380,7 @@ public partial class BO_Health : MonoBehaviour
                     }
                         break;
 					default:
-                    if (_Center._ResistanceManager.Resistance == 0)
+                    if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         DamagesDIC[damageType.supper_damage].Add(_dmg);
                     }else{
@@ -535,11 +523,6 @@ public partial class BO_Health : MonoBehaviour
     public void HitCountPlus()//打别人计数
     {
         this._ComboHitCount.HitCountPlus();
-    }
-
-    public int getHitCount()//打别人计数
-    {
-        return this._ComboHitCount.getHitCount();
     }
 
     public int getBeHitCount()//自己被揍计数

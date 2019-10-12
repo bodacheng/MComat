@@ -104,7 +104,7 @@ public class MultiDictionary<Key1, Key2, Value>
         return defaultValue;
     }
     
-    public Dictionary<Key1, List<Key2>> getAllUnNullKeys()
+    public Dictionary<Key1, List<Key2>> GetAllUnNullKeys()
     {
         return unnullkeys;
     }

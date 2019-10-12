@@ -46,11 +46,11 @@ public class Counter_State : AI_State {
                     this._SkillCancelFlag.turn_on_flag();
                     EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,
                     this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
-                    this._ResistanceManager.Resistance +=10;
+                    this._ResistanceManager.Resistance.Value +=10;
                 };
                 burstend = () =>
                 {
-                    this._ResistanceManager.Resistance -=10;
+                    this._ResistanceManager.Resistance.Value -=10;
                 };
                 burstCoroutine = new customCoroutine(burststart, 1f, burstend);
                 break;
@@ -59,11 +59,11 @@ public class Counter_State : AI_State {
                 {
                     this._SkillCancelFlag.turn_on_flag();
                     this._BO_Ani_E.releasePreparedMagicToAir(null);
-                    this._ResistanceManager.Resistance +=10;
+                    this._ResistanceManager.Resistance.Value +=10;
                 };
                 burstend = () =>
                 {
-                    this._ResistanceManager.Resistance -=10;
+                    this._ResistanceManager.Resistance.Value -=10;
                 };
                 burstCoroutine = new customCoroutine(burststart, 0.2f, burstend);
             break;
@@ -80,11 +80,11 @@ public class Counter_State : AI_State {
             this._SkillCancelFlag.turn_on_flag();
             EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,
             this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
-            this._ResistanceManager.Resistance +=10;
+            this._ResistanceManager.Resistance.Value +=10;
         };
         burstend = () =>
         {
-            this._ResistanceManager.Resistance -=10;
+            this._ResistanceManager.Resistance.Value -=10;
         };
         burstCoroutine = new customCoroutine(burststart, 1f, burstend);
         this.nextAttackStateCanRushFirst = true;
@@ -123,7 +123,7 @@ public class Counter_State : AI_State {
         Animation_Manger.animationTrigger(clip_name);
         
         gotdamageamont = 0;
-        lastframeResistent = this._ResistanceManager.Resistance;
+        lastframeResistent = this._ResistanceManager.Resistance.Value;
         
         Collider C = Sensor.getClosestColliderInSensorRange(true,false,false);
         if (C != null)
@@ -149,16 +149,16 @@ public class Counter_State : AI_State {
         this._Rigidbody.velocity = Vector3.zero;
         if (this._ResistanceManager.getNextCounterEventName() != null)//这个代表吸收伤害区间已经开始了
         {
-            if (lastframeResistent > this._ResistanceManager.Resistance)
+            if (lastframeResistent > this._ResistanceManager.Resistance.Value)
                 gotdamageamont++;
-            if (gotdamageamont >= this._ResistanceManager.getNextCounterEventDamageTriggerAmount() && this._ResistanceManager.Resistance != 0)
+            if (gotdamageamont >= this._ResistanceManager.getNextCounterEventDamageTriggerAmount() && this._ResistanceManager.Resistance.Value != 0)
             {
                 this.burstCoroutineConfig(this._ResistanceManager.getNextCounterEventName());
                 this._BuffsRunner.runSubCoroutineOfState(burstCoroutine);
                 gotdamageamont = -100;//也就是说不再让角色有可能在本状态内再次爆发
             }
         }
-        lastframeResistent = this._ResistanceManager.Resistance;
+        lastframeResistent = this._ResistanceManager.Resistance.Value;
         singleDirectionRotateProcess(rotateTarget);
 	}
     

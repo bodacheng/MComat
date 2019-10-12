@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Soul;
+using UniRx;
 
 public partial class FightTeam : MonoBehaviour
 {
@@ -19,111 +19,121 @@ public partial class FightTeam : MonoBehaviour
     public RealTimeGameProcessManager realTimeGameProcessManager;
     public mobileInputsManager _mobileInputsManager;
     public CharsManager _CharSetManager;
-    public IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-    public IDictionary<Data_Center, TextMeshProUGUI> datacenterHitComboDic = new Dictionary<Data_Center, TextMeshProUGUI>();
-        
     public TeamMode TeamMode;
-
-    SideCharIcon _tempSideCharIcon = null;
-    public void refreshHPAndResistBar()
+    
+    private IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
+    private IDictionary<Data_Center, TextMeshProUGUI> datacenterHitComboDic = new Dictionary<Data_Center, TextMeshProUGUI>();
+    
+    private SideCharIcon _tempSideCharIcon;
+    
+    public void Clear()
     {
-        foreach(KeyValuePair<int,List<int>> keys in teamMembers.getAllUnNullKeys())
+        datacenterCharIconDic.Clear();
+        datacenterHitComboDic.Clear();
+    }
+    
+    public void BarsPositionUpdate()
+    {
+        foreach(Data_Center _one in teamMembers.values)
         {
-            foreach(int key in keys.Value)
-            {
-                Data_Center _one = teamMembers.Get(keys.Key,key);
-                datacenterCharIconDic.TryGetValue(_one,out _tempSideCharIcon);
-                if (_tempSideCharIcon == null)
-                {
-                    Debug.Log("角色图标逻辑错误");
-                    continue;
-                }
-                _tempSideCharIcon.hpBarPrefab.value = Mathf.Lerp(_tempSideCharIcon.hpBarPrefab.value, (float)_one.BO_Health._health / 500,Time.deltaTime);
-                if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
-                {
-                    _tempSideCharIcon.transform.position = 
-                        Vector3.Lerp(_tempSideCharIcon.transform.position,
-                        CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f),Time.deltaTime * 20f);
-                }
-                _tempSideCharIcon.resistBarPrefab.value = 
-                Mathf.Lerp(_tempSideCharIcon.resistBarPrefab.value, (float)_one._ResistanceManager.Resistance / 10f, Time.deltaTime);//抵抗槽最大10格   
-            }
+            datacenterCharIconDic.TryGetValue(_one,out _tempSideCharIcon);
+            _tempSideCharIcon.transform.position = Vector3.Lerp(_tempSideCharIcon.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f),Time.deltaTime * 20f);
         }
     }
-
-    public void refreshComboHit()
+    
+    // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
+    public void Instantiate()
     {
-        foreach(KeyValuePair<int,List<int>> keys in teamMembers.getAllUnNullKeys())
+        switch (TeamMode)
         {
-            foreach(int key in keys.Value)
+            case TeamMode.multiraid:
+                InstantiateCharsIconsAndFloatHPBar_multiRaid();
+            break;
+            case TeamMode.rotation:
+                InstantiateCharsIconsAndFloatHPBar_turnMode();
+            break;
+        }
+        TeamsFightInitialize();
+    }
+    
+    private void TeamsFightInitialize()
+    {
+        foreach(Data_Center a_char in teamMembers.values)
+        {
+            a_char.BO_Health.CurrentHp.Value = 300f;
+            a_char.BO_Health.CurrentHp.Subscribe(x => {a_char.SetHp(x); RefreshHPBar(a_char,x);});            
+            a_char._ResistanceManager.Resistance.Value = 0;
+            a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
+            a_char.BO_Health._ComboHitCount.HitCount.Value = 0;
+            a_char.BO_Health._ComboHitCount.HitCount.Subscribe(x => { RefreshComboHit(a_char); });
+        }
+    }
+    
+    public void RefreshResistanceBar(Data_Center data_Center)
+    {
+        datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
+        _tempSideCharIcon.ResistBar.value = (float)data_Center._ResistanceManager.Resistance.Value / 10f;//抵抗槽最大10格   
+    }
+  
+    public void RefreshHPBar(Data_Center data_Center,float current_hp)
+    {
+        datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
+        _tempSideCharIcon.HpBar.value = current_hp / 500; 
+    }
+
+    private TextMeshProUGUI _hitcomboText;
+    public void RefreshComboHit(Data_Center _datacenter)
+    {
+        _hitcomboText = datacenterHitComboDic[_datacenter];
+        if (_datacenter.BO_Health._ComboHitCount.HitCount.Value > 1)
+        {
+            _hitcomboText.color = Color.yellow;
+            _hitcomboText.text = _datacenter.BO_Health._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+            _hitcomboText.transform.localScale = Vector3.one;
+            _hitcomboText.fontSizeMax = 30f;
+            _hitcomboText.transform.position = Vector3.Lerp(_hitcomboText.transform.position, CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 2.5f),Time.deltaTime * 20f);
+        }
+        else
+            _hitcomboText.color = Color.clear;
+    }
+
+    public void Refresh()//这个刷新是倾向于画面制御
+    {
+        foreach (Data_Center _datacenter in teamMembers.values)
+        {
+            datacenterCharIconDic.TryGetValue(_datacenter, out _tempSideCharIcon);
+            if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
             {
-                Data_Center _datacenter = teamMembers.Get(keys.Key,key);
-                if (!datacenterHitComboDic.ContainsKey(_datacenter))
+                if (_datacenter != RealTimeGameProcessManager.focusingChar)
                 {
-                    Debug.Log("hitcomboText字典错误");
-                    continue;
-                }
-                TextMeshProUGUI _hitcomboText = datacenterHitComboDic[_datacenter];
-                if (_datacenter.BO_Health.getHitCount() > 1)
-                {
-                    _hitcomboText.color = Color.yellow;
-                    _hitcomboText.text = _datacenter.BO_Health.getHitCount().ToString() + "Hits!";
-                    _hitcomboText.transform.localScale = Vector3.one;
-                    _hitcomboText.fontSizeMax = 30f;
-                    _hitcomboText.transform.position = 
-                    Vector3.Lerp(_hitcomboText.transform.position, 
-                    CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 2.5f),Time.deltaTime * 20f);
+                    _tempSideCharIcon.transform.SetParent(sideIconsContainer);
                 }
                 else
-                    _hitcomboText.color = Color.clear;
+                {
+                    _tempSideCharIcon.transform.SetParent(controllingCharT);
+                    _tempSideCharIcon.transform.localPosition = Vector3.zero;
+                    _tempSideCharIcon.transform.localScale = Vector3.one;
+                }
+                _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(true);
+                _tempSideCharIcon.recallBars();
+            }else{
+                _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(false);
+                _tempSideCharIcon.transform.SetParent(_targetCanvas.transform);
             }
-        }
-    }
-    
-    public void refresh()//这个刷新是倾向于画面制御
-    {
-        foreach (KeyValuePair<int,List<int>> keys in teamMembers.getAllUnNullKeys())
-        {
-            foreach (int key in keys.Value)
+            
+            if (datacenterHitComboDic.ContainsKey(_datacenter))
             {
-                Data_Center _datacenter = teamMembers.Get(keys.Key,key);
-                datacenterCharIconDic.TryGetValue(_datacenter, out _tempSideCharIcon);
-                if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
-                {
-                    if (_datacenter != RealTimeGameProcessManager.focusingChar)
-                    {
-                        _tempSideCharIcon.transform.SetParent(sideIconsContainer);
-                    }
-                    else
-                    {
-                        _tempSideCharIcon.transform.SetParent(controllingCharT);
-                        _tempSideCharIcon.transform.localPosition = Vector3.zero;
-                        _tempSideCharIcon.transform.localScale = Vector3.one;
-                    }
-                    _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(true);
-                    _tempSideCharIcon.recallBars();
-                }else{
-                    _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(false);
-                    _tempSideCharIcon.transform.SetParent(_targetCanvas.transform);
-                }
-                
-                if (datacenterHitComboDic.ContainsKey(_datacenter))
-                {
-                    if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
-                        datacenterHitComboDic[_datacenter].color = Color.yellow;
-                    else
-                        datacenterHitComboDic[_datacenter].color = Color.blue;
-                    datacenterHitComboDic[_datacenter].gameObject.SetActive(true);
-                    if (datacenterHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
-                        datacenterHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvas.transform);
-                    datacenterHitComboDic[_datacenter].transform.localScale = Vector3.one;
-                    datacenterHitComboDic[_datacenter].fontSizeMax = 30f;
-                }
+                datacenterHitComboDic[_datacenter].color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
+                datacenterHitComboDic[_datacenter].gameObject.SetActive(true);
+                if (datacenterHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
+                    datacenterHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvas.transform);
+                datacenterHitComboDic[_datacenter].transform.localScale = Vector3.one;
+                datacenterHitComboDic[_datacenter].fontSizeMax = 30f;
             }
         }
     }
     
-    public void localFightingUpdate()
+    public void LocalFightingUpdate()
     {
         switch (TeamMode)
         {
@@ -131,26 +141,12 @@ public partial class FightTeam : MonoBehaviour
             break;
             case TeamMode.rotation:
                 if (this.teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
-                    turnModeEnemySideAutoMemberShaft();
-            break;
-        }
-    }
-    
-    // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-    public void instantiateCharsIconsAndFloatHPBar()
-    {
-        switch (TeamMode)
-        {
-            case TeamMode.multiraid:
-                instantiateCharsIconsAndFloatHPBar_multiRaid();
-            break;
-            case TeamMode.rotation:
-                instantiateCharsIconsAndFloatHPBar_turnMode();
+                    TurnModeEnemySideAutoMemberShaft();
             break;
         }
     }
 
-    public bool ifAllCharsPreparedForBattle()
+    public bool IfAllCharsPreparedForBattle()
     {
         foreach (Data_Center oneMember in teamMembers.values)
         {
@@ -160,7 +156,7 @@ public partial class FightTeam : MonoBehaviour
         return true;
     }
     
-    public void letAllCharactersStartOff()
+    public void LetAllCharactersStartOff()
     {
         foreach (Data_Center oneMember in teamMembers.values)
         {
@@ -184,7 +180,7 @@ public partial class FightTeam : MonoBehaviour
     
     public IEnumerator CharacterResourceLoad(MultiDictionary<int, int, CharacterDataInfo> MembersSets)
     {
-        foreach (KeyValuePair<int,List<int>> keys in MembersSets.getAllUnNullKeys())
+        foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
         {
             foreach (int key in keys.Value)
             {

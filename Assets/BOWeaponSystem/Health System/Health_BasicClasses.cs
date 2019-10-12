@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UniRx;
 using UnityEngine;
 
 public class knockOffCount
@@ -98,13 +97,13 @@ public class BeHitCount
 
 public class ComboHitCount
 {
-    int hitCount;
+    public ReactiveProperty<int> HitCount{ get; set; } = new ReactiveProperty<int>(0);
     float HitConnectTolerate;
     float HItComboTimeCounter;
 
     public ComboHitCount()
     {
-        hitCount = 0;
+        HitCount.Value = 0;
         HitConnectTolerate = 4f;
         HItComboTimeCounter = 0f;
     }
@@ -112,18 +111,13 @@ public class ComboHitCount
     public void HitCountPlus()
     {
         HItComboTimeCounter = HitConnectTolerate;
-        hitCount += 1;
+        HitCount.Value += 1;
     }
 
     public void HitCountInterrupt()
     {
-        hitCount = 0;
+        HitCount.Value = 0;
         HItComboTimeCounter = 0;
-    }
-
-    public int getHitCount()
-    {
-        return hitCount;
     }
 
     public void update()
@@ -133,7 +127,7 @@ public class ComboHitCount
             HItComboTimeCounter -= Time.fixedDeltaTime;
             if (HItComboTimeCounter <= 0f)
             {
-                hitCount = 0;
+                HitCount.Value = 0;
             }
         }
     }

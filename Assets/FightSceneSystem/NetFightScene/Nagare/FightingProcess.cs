@@ -84,7 +84,6 @@ public class FightingProcess : NagareProcess
                 }
                 break;
         }
-        this.fightLogger.TeamMemberDeathProcessing(AllMembers);
     }
 
     IEnumerator finalMoment(Team winner)
@@ -100,7 +99,7 @@ public class FightingProcess : NagareProcess
             
         foreach (Data_Center _one in winners)
         {
-            if (_one.BO_Health._health > 0)
+            if (!_one.IsDead.Value)
             {
                 _one.AIStateRunner.changeState("Victory");
             }

@@ -73,7 +73,7 @@ public class Defend_State : AI_State
 
     public override bool enter_condition_priority3()
     {
-        if (this._ResistanceManager.Resistance > 0)
+        if (this._ResistanceManager.Resistance.Value > 0)
             return false;
         if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             return false;
@@ -137,9 +137,9 @@ public class Defend_State : AI_State
     public override void _State_FixedUpdate1()
     {
         if (defendHP > 0)
-            _ResistanceManager.Resistance = 5;//数字没别的意思就是希望让防御状态下维持一定抵抗，不下降
+            _ResistanceManager.Resistance.Value = 5;//数字没别的意思就是希望让防御状态下维持一定抵抗，不下降
         else
-            _ResistanceManager.Resistance = 0;
+            _ResistanceManager.Resistance.Value = 0;
 
         damagingweaponList = Sensor.getNearbyDamagingWeaponColliders();
         nearbyenemymeat = Sensor.getInnerEnemiesColliders();

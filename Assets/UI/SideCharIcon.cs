@@ -9,10 +9,10 @@ public class SideCharIcon : MonoBehaviour {
     
     [Header("浮动血条pretab")]
     [Space(6)]
-    public Slider hpBarPrefab;
+    public Slider HpBar;
     [Header("浮动抵抗pretab")]
     [Space(6)]
-    public Slider resistBarPrefab;
+    public Slider ResistBar;
 
 	public charIcon focusingCharIcon;
 
@@ -28,11 +28,11 @@ public class SideCharIcon : MonoBehaviour {
     
     public void recallBars()
     {
-        hpBarPrefab.transform.SetParent(transform);
-        hpBarPrefab.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);
-        hpBarPrefab.transform.localScale = Vector3.one;
-        resistBarPrefab.transform.SetParent(transform);
-        resistBarPrefab.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);
-        resistBarPrefab.transform.localScale = Vector3.one;
+        HpBar.transform.SetParent(transform);
+        HpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);
+        HpBar.transform.localScale = Vector3.one;
+        ResistBar.transform.SetParent(transform);
+        ResistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);
+        ResistBar.transform.localScale = Vector3.one;
     }
 }

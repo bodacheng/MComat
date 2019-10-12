@@ -47,34 +47,26 @@ namespace mainMenu
             }
 
             _Stage = stage;
-            foreach(KeyValuePair<int,List<int>> keys in _Stage.localFight.HeroSets.getAllUnNullKeys())
+            foreach(CharacterDataInfo oneMember in _Stage.localFight.HeroSets.values)
             {
-                foreach(int key in keys.Value)
-                {
-                    CharacterDataInfo oneMember = _Stage.localFight.HeroSets.Get(keys.Key,key);
-                    charIcon MyMemberIcon = Instantiate(FighterIcon);
-                    CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
-                    MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
-                    MyMemberIcon.transform.SetParent(myTeamShowT);
-                    MyMemberIcon.transform.localPosition = Vector3.one;
-                    MyMemberIcon.transform.localScale = Vector3.one;
-                    MyMemberIcon.gameObject.SetActive(true);
-                }
+                charIcon MyMemberIcon = Instantiate(FighterIcon);
+                CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
+                MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
+                MyMemberIcon.transform.SetParent(myTeamShowT);
+                MyMemberIcon.transform.localPosition = Vector3.one;
+                MyMemberIcon.transform.localScale = Vector3.one;
+                MyMemberIcon.gameObject.SetActive(true);
             }
 
-            foreach(KeyValuePair<int,List<int>> keys in _Stage.localFight.EnemySets.getAllUnNullKeys())
+            foreach(CharacterDataInfo oneMember in _Stage.localFight.EnemySets.values)
             {
-                foreach(int key in keys.Value)
-                {
-                    CharacterDataInfo oneMember = _Stage.localFight.EnemySets.Get(keys.Key,key);
-                    charIcon MyMemberIcon = Instantiate(FighterIcon);
-                    CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
-                    MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
-                    MyMemberIcon.transform.SetParent(enemyTeamShowT);
-                    MyMemberIcon.transform.localPosition = Vector3.one;
-                    MyMemberIcon.transform.localScale = Vector3.one;
-                    MyMemberIcon.gameObject.SetActive(true);
-                }
+                charIcon MyMemberIcon = Instantiate(FighterIcon);
+                CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
+                MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
+                MyMemberIcon.transform.SetParent(enemyTeamShowT);
+                MyMemberIcon.transform.localPosition = Vector3.one;
+                MyMemberIcon.transform.localScale = Vector3.one;
+                MyMemberIcon.gameObject.SetActive(true);
             }
 
             enterQuest.onClick.RemoveAllListeners();

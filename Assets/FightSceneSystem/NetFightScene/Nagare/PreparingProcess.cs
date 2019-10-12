@@ -38,7 +38,7 @@ public class PreparingProcess : NagareProcess
 
     public override bool canEnterNextProcess()
     {
-        return _NetFightScene.ifLoadStageFinished() && _RealTimeGameProcessManager.FightTeam1.ifAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.ifAllCharsPreparedForBattle();
+        return _NetFightScene.ifLoadStageFinished() && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle();
     }
     
     public override void ProcessEnter()

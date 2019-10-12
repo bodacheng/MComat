@@ -41,7 +41,7 @@ public class BoundaryControllByGod : MonoBehaviour {
         {
             foreach (Data_Center oneBoy in pair.Value)
             {
-                if (!oneBoy.getDeathState())
+                if (!oneBoy.IsDead.Value)
                 {
                     battleRingCenter.y = oneBoy.WholeT.position.y;
                     distanceFromCharToCenter = (oneBoy.WholeT.position - battleRingCenter).magnitude;
@@ -75,7 +75,7 @@ public class BoundaryControllByGod : MonoBehaviour {
         {
             foreach (Data_Center oneBoy in pair.Value)
             {
-                if (!oneBoy.getDeathState())
+                if (!oneBoy.IsDead.Value)
                 {
                     battleRingCenter.y = oneBoy.WholeT.position.y;
                     distanceFromCharToCenter = (oneBoy.WholeT.position - battleRingCenter).magnitude;

@@ -7,8 +7,10 @@ public class Decompositioner : MonoBehaviour {
 
     DecompositionerPool _DecompositionerPool;
 
-    public Rigidbody rigidbody;
+    public Rigidbody Rigidbody;
     public BO_Marker_Manager _HitBox;
+    public DanMuTest danMuTest;
+    public bullet_GPS bullet_GPS;
     
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;
@@ -25,8 +27,12 @@ public class Decompositioner : MonoBehaviour {
         this._DecompositionerPool = _DecompositionerPool;
     }
 
-    void OnEnable()
+    public void Local_OnEnable()
     {
+        for (int i = 0; i < to_be_stop_emissions.Count; i++)
+        {
+            to_be_stop_emissions[i].Play(true);
+        }
         phase = 1;
         if (audioSource)
             audioSource.volume = AudioManager.effectsVolumn;
@@ -44,14 +50,14 @@ public class Decompositioner : MonoBehaviour {
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
                         _HitBox.DisableMarkers();
-                        Disable(0.1f);
+                        StopEmissions();
                     }
                     if (_HitBox.GetWeaponOwnerHealth() != null)
                     {
                         if (_HitBox.GetWeaponOwnerHealth().IFgettingDamage())
                         {
                             _HitBox.DisableMarkers();
-                            Disable(0.1f);
+                            StopEmissions();
                         }
                     }
                     break;
@@ -59,7 +65,7 @@ public class Decompositioner : MonoBehaviour {
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
                         _HitBox.DisableMarkers();
-                        Disable(0.1f);
+                        StopEmissions();
                     }
                     break;
             }
@@ -102,8 +108,6 @@ public class Decompositioner : MonoBehaviour {
     
     public void StopEmissions()
     {
-        if (to_be_stop_emissions.Count == 0)
-            return;
         for (int i = 0; i < to_be_stop_emissions.Count; i++)
         {
             to_be_stop_emissions[i].Stop(true, ParticleSystemStopBehavior.StopEmitting);
@@ -125,22 +129,6 @@ public class Decompositioner : MonoBehaviour {
                         to_be_faded_renderers[i].materials[y].SetColor("_TintColor", new Color(to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").r,to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").g, to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").b, a));
                 }
             }
-
         }
-    }
-
-    public void Disable(float time)
-    {
-        if (this.gameObject.activeSelf)
-            StartCoroutine(this.DisableAfterTime(time));
-    }
-    
-    // 这个函数一般情况下是纯粹关乎表现问题，所以我们认为游戏暂停的话这个不会造成太大影响。。但确实SetActive活动可能影响对象池
-    private IEnumerator DisableAfterTime(float time)
-    {
-        StopEmissions();
-        yield return new WaitForSeconds(time);
-        if (this._DecompositionerPool != null)
-            this._DecompositionerPool.Return(this);
     }
 }

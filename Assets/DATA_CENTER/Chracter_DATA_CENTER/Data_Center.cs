@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HittingDetection;
+using UniRx;
 using System.Linq;
 using Soul;
 
@@ -64,14 +64,15 @@ public partial class Data_Center : MonoBehaviour
     public bool onBattleGroundBundary = false;
     public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
 
-    bool dead = false;
-    public void setDeathState(bool dead)
+    public ReactiveProperty<bool> IsDead { get; private set; } = new ReactiveProperty<bool>(false);
+    
+    public void SetHp(float hp)
     {
-        this.dead = dead;
-    }
-    public bool getDeathState()
-    {
-        return dead;
+        if (hp <= 0f)
+        {
+            AIStateRunner.changeState("Death");
+            IsDead.Value = true;
+        }
     }
     
     public bool ifPreparedForBattle()
@@ -259,7 +260,6 @@ public partial class Data_Center : MonoBehaviour
     public void step3Initialize(TeamConfig _TeamConfig)//战斗必备
     {
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
-        BO_Health._health = 1000;
         BO_Health.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         BO_Health.changeLayerForAllSelfColliders(_TeamConfig.mylayer);
         BO_Health.enableAllHitBoxCollider(true);
@@ -378,7 +378,7 @@ public partial class Data_Center : MonoBehaviour
             animator.SetFloat("groundedCount", 10);
         }
         this.Sensor.Stop();
-        this.bO_Weapon_Animation_Events.DisableMarkers();
+        this.bO_Weapon_Animation_Events.clearMarkerManagers();
         this.buffsRunner.endAllCoroutines();
         this.pusher.clearHitCountForAttackStepping();  
     }

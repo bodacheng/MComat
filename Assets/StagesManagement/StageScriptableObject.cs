@@ -54,15 +54,11 @@ public class StageScriptableObject : ScriptableObject
     public List<string> getTeam1EnterRingLocalIds(LocalFight localFight)
     {
         List<string> enterRingLocalIDs = new List<string>();
-        foreach(KeyValuePair<int,List<int>> keys in localFight.HeroSets.getAllUnNullKeys())
+        foreach(CharacterDataInfo _one in localFight.HeroSets.values)
         {
-            foreach(int key in keys.Value)
-            {
-                CharacterDataInfo _one = localFight.HeroSets.Get(keys.Key,key);
-                if (!enterRingLocalIDs.Contains(_one.monsterOfPlayerId))
-                    enterRingLocalIDs.Add(_one.monsterOfPlayerId);
-            }
-        }       
+            if (!enterRingLocalIDs.Contains(_one.monsterOfPlayerId))
+                enterRingLocalIDs.Add(_one.monsterOfPlayerId);
+        }
         return enterRingLocalIDs;
     }
 }
@@ -72,7 +68,7 @@ public class StageScriptableObject : ScriptableObject
 // 系统会根据这个量来决定一场战斗结束后应该做什么。
 // 比如一个剧情战斗，他结束了后应该是播放某个动画片，
 // 再比如是自己打自己的一个战斗，结束后回到的应该是那个自己打自己的选人菜单。
-public enum fightEventType : int 
+public enum fightEventType
 {
     Tutorial_Basic = 0,
     Tutorial_Story_AdamVsGuards = 3,
@@ -81,13 +77,13 @@ public enum fightEventType : int
     Self = 4,
 }
 
-public enum fightModeType : int 
+public enum fightModeType
 {
     combat = 1,
     tower = 2,
 }
 
-public enum TeamMode : int 
+public enum TeamMode
 {
     multiraid = 1,
     rotation = 2,

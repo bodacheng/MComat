@@ -56,7 +56,6 @@ public class Death_State : AI_State
     {
         time_count = 0f;
         base.AI_State_enter();
-        _DATA_CENTER.setDeathState(true);
         _DATA_CENTER.deActiveObjects();
         _DATA_CENTER.deathInitialize();
 

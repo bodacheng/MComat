@@ -21,8 +21,24 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     
     protected override void OnBeforeReturn(Decompositioner instance)
     {
-        instance.gameObject.SetActive(false);
+        instance.StopEmissions();
+        if (instance._HitBox != null)
+            instance._HitBox.Local_OnDisable();
         instance.transform.SetParent(Marker.transform);
+    }
+
+    protected override void OnBeforeRent(Decompositioner instance)
+    {
+        instance.Local_OnEnable();
+        if (instance._HitBox != null)
+        {
+            instance._HitBox.Local_OnEnable();
+            if (instance.bullet_GPS != null)
+            {
+                instance.bullet_GPS.layerMask = instance._HitBox.getTeamConfig().enemyAndEnemyWeaponLayerMask;
+                instance.bullet_GPS.Local_OnEnable();
+            }
+        }  
     }
 
     // オブジェクトが空のときにInstantiateする関数
@@ -33,8 +49,18 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
         BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();
         Rigidbody rigidbody = a.GetComponent<Rigidbody>();
-        decompositioner.rigidbody = rigidbody;
+        DanMuTest danMuTest = a.GetComponent<DanMuTest>();
+        bullet_GPS bullet_GPS = a.GetComponent<bullet_GPS>();
+        if (bullet_GPS != null)
+        {
+            decompositioner.bullet_GPS = bullet_GPS;
+            bullet_GPS._Rigidbody = rigidbody;
+        }
+        decompositioner.Rigidbody = rigidbody;
+        if (decompositioner.Rigidbody != null)
+            decompositioner.Rigidbody.useGravity = false;
         decompositioner._HitBox = bO_Marker_Manager;
+        decompositioner.danMuTest = danMuTest;
         decompositioner.setPool(this);
         return decompositioner;
     }

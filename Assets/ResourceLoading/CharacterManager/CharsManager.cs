@@ -37,7 +37,7 @@ public partial class CharsManager : MonoBehaviour {
     public void ArrangeAllCharacterToPosition(MultiDictionary<int,int,Data_Center> heromultiDictionary,MultiDictionary<int,int,Data_Center> enemymultiDictionary,
                                                 Transform[] Team1StandPoints, Transform[] Team2StandPoints)
     {
-        foreach(KeyValuePair<int,List<int>> keys in heromultiDictionary.getAllUnNullKeys())
+        foreach(KeyValuePair<int,List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
         {
             foreach(int key in keys.Value)
             {
@@ -70,7 +70,7 @@ public partial class CharsManager : MonoBehaviour {
             }
         }
                 
-        foreach(KeyValuePair<int,List<int>> keys in enemymultiDictionary.getAllUnNullKeys())
+        foreach(KeyValuePair<int,List<int>> keys in enemymultiDictionary.GetAllUnNullKeys())
         {
             foreach(int key in keys.Value)
             {

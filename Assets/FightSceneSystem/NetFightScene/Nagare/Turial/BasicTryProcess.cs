@@ -91,7 +91,7 @@ public class BasicTryProcess : NagareProcess
     
     public override void localUpdate()
     {
-        _RealTimeGameProcessManager.fightGUIProcess();
+        _RealTimeGameProcessManager.FightGUIProcess();
 
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -159,7 +159,7 @@ public class BasicTryProcess : NagareProcess
             
         foreach (Data_Center _one in winners)
         {
-            if (_one.BO_Health._health > 0)
+            if (_one.BO_Health.CurrentHp.Value > 0)
             {
                 _one.AIStateRunner.changeState("Victory");
             }
@@ -175,18 +175,18 @@ public class BasicTryProcess : NagareProcess
             
         foreach (KeyValuePair<Team,List<Data_Center>> _KeyValuePair in fighters)
         {
-            foreach (Data_Center _char in _KeyValuePair.Value)
-            {
-                if (_char.BO_Health._health > 0)//字符串比较本身消耗比较大。。。这个环节如果我们愿意其实可以搞个death flag
-                {
-                }else{
-                    if (!TeamDeadMemberDictionary[_KeyValuePair.Key].Contains(_char))
-                    {
-                        _char.AIStateRunner.changeState("Death");
-                        TeamDeadMemberDictionary[_KeyValuePair.Key].Add(_char);
-                    }
-                }
-            }
+            //foreach (Data_Center _char in _KeyValuePair.Value)
+            //{
+            //    if (_char.IsDead.Value)//字符串比较本身消耗比较大。。。这个环节如果我们愿意其实可以搞个death flag
+            //    {
+            //    }else{
+            //        if (!TeamDeadMemberDictionary[_KeyValuePair.Key].Contains(_char))
+            //        {
+            //            _char.AIStateRunner.changeState("Death");
+            //            TeamDeadMemberDictionary[_KeyValuePair.Key].Add(_char);
+            //        }
+            //    }
+            //}
         }
         return TeamDeadMemberDictionary;
     }

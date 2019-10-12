@@ -55,7 +55,7 @@ public class BO_Ani_E : MonoBehaviour
         foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in EffectsOnBodyParts)
         {
             if (keyValuePair.Value != null)
-                keyValuePair.Value.Disable(0.1f);
+                keyValuePair.Value.StopEmissions();
         }
     }
 
@@ -137,31 +137,31 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + gameObject.transform.forward * e.floatParameter;
             processingHitBox.transform.rotation = transform.rotation;
             processingHitBox._HitBox.SetWeaponOwnerHealth(_DATA_CENTER.BO_Health);
+            processingHitBox._HitBox.SetHolderCenter(processingHitBox.transform);
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             if (processingHitBox._HitBox.onGroundMagic)
                 processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x,this.transform.position.y, processingHitBox.transform.position.z);
             magicFoward_shoot_direction = gameObject.transform.forward;
             magicFoward_shoot_direction.y = 0;
-            if (processingHitBox.GetComponent<Rigidbody>() != null)
+            if (processingHitBox.Rigidbody != null)
             {
-                processingHitBox.GetComponent<Rigidbody>().useGravity = false;
                 switch (e.intParameter)
                 {
                     case 1:
-                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 3f;
+                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 3f;
                         break;
                     case 2:
-                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 8f;
+                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 8f;
                         break;
                     case 3:
-                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 15f;
+                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 15f;
                         break;
                     case 0:
-                        processingHitBox.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        processingHitBox.Rigidbody.velocity = Vector3.zero;
                         break;
                     default:
-                        processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * 3f;
+                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 3f;
                         break;
                 }
             }
@@ -219,7 +219,7 @@ public class BO_Ani_E : MonoBehaviour
         }
         processingHitBox = target_pool.Rent();
         processingHitBox.transform.position = intPos;
-        processingHitBox.gameObject.SetActive(false);
+        processingHitBox._HitBox.SetHolderCenter(processingHitBox.transform);
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         if (_DATA_CENTER._TeamConfig != null)
         {
@@ -227,22 +227,17 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
         }
 
-        DanMuTest danMuTest = processingHitBox.gameObject.GetComponent<DanMuTest>();
-        if (danMuTest)
+        if (processingHitBox.danMuTest)
         {
             processingHitBox.transform.position = intPos;
-            danMuTest.startOff(intPos,this.transform.rotation);
-            processingHitBox.gameObject.SetActive(true);//这个时候我们已经是先把武器组件的敌人层设置好了，这样如果有bullet_GPS组件，它在OnEnable()中设置自身追踪层就没问题。
-        }
-        else{
-            processingHitBox.gameObject.SetActive(true);//这个时候我们已经是先把武器组件的敌人层设置好了，这样如果有bullet_GPS组件，它在OnEnable()中设置自身追踪层就没问题。
+            processingHitBox.danMuTest.startOff(intPos,this.transform.rotation);
+        } else {
             processingHitBox.gameObject.transform.position = intPos;
             magicFoward_shoot_direction = gameObject.transform.forward;
             magicFoward_shoot_direction.y = 0;
-            if (processingHitBox.GetComponent<Rigidbody>() != null)
+            if (processingHitBox.Rigidbody != null)
             {
-                processingHitBox.GetComponent<Rigidbody>().useGravity = false;
-                processingHitBox.GetComponent<Rigidbody>().velocity = magicFoward_shoot_direction.normalized * e.floatParameter;
+                processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * e.floatParameter;
             }
         }
     }
@@ -301,7 +296,7 @@ public class BO_Ani_E : MonoBehaviour
         if (EffectsOnBodyParts.ContainsKey(target))
         {
             if (EffectsOnBodyParts[target] != null)
-                EffectsOnBodyParts[target].Disable(0.1f);
+                EffectsOnBodyParts[target].StopEmissions();
             EffectsOnBodyParts[target] = effect; 
         }
 	}
