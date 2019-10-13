@@ -47,19 +47,14 @@ public partial class Data_Center : MonoBehaviour
     public ResistanceManager _ResistanceManager;
     public ShaderManager _ShaderManager;
     public BlendShapeProxy blendShapeProxy;
+    public Personality_events Personality_events;
     
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
 
-    [Header("剑")]
-    [Space(1)]
-    public ParticleSystem right_sword,left_sword;
-
     [Header("传统防御盾。可能真的用不到了")]
     [Space(1)]
     public BO_Shield Shield;
-
-    private List<ParticleSystem> deActiveObjects_List;
     
     public bool onBattleGroundBundary = false;
     public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
@@ -96,19 +91,7 @@ public partial class Data_Center : MonoBehaviour
             {
                 floorCheckers[i] = floorChecks.GetChild(i);
             }
-            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(BO_Health,geometryCenter,
-                left_sword,right_sword,
-                right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-
-            // 在第一级初始化中我们把两个角色武器先打开，又关闭，这起到了个非常邪门的效果：使得这两把武器的相关awake函数得以运行，在这里就是找到了相应武器的markers
-            if (right_sword != null)
-            {
-                right_sword.Stop(true);
-            }
-            if (left_sword != null)
-            {
-                left_sword.Stop(true);
-            }
+            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(BO_Health,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
 
             string personalEffectsPath;
             switch (this.Zokusei)
@@ -169,17 +152,6 @@ public partial class Data_Center : MonoBehaviour
         }else{
             gameObject.layer = 0;
             gameObject.tag = "Untagged";
-        }
-
-        deActiveObjects_List = new List<ParticleSystem>();
-
-        if (right_sword != null)
-        {
-            addToDeActiveObjects(right_sword);
-        }
-        if (left_sword != null)
-        {
-            addToDeActiveObjects(left_sword);
         }
 
         Sensor.setDectectLayerAndFrontDirection(_TeamConfig,this);
@@ -263,8 +235,6 @@ public partial class Data_Center : MonoBehaviour
         BO_Health.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         BO_Health.changeLayerForAllSelfColliders(_TeamConfig.mylayer);
         BO_Health.enableAllHitBoxCollider(true);
-
-        deActiveObjects();
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
@@ -272,25 +242,6 @@ public partial class Data_Center : MonoBehaviour
     {
         gameObject.layer = this._TeamConfig.deadLayer;
         this.BO_Health.changeLayerForAllSelfColliders(_TeamConfig.deadLayer);
-    }
-
-    public void addToDeActiveObjects(ParticleSystem p)
-    {
-        if (!deActiveObjects_List.Contains(p))
-        {
-            deActiveObjects_List.Add(p);
-        }
-    }
-
-    public void deActiveObjects()
-    {
-        if (deActiveObjects_List.Count > 0)
-        {
-            foreach (ParticleSystem o in deActiveObjects_List)
-            {
-                o.Stop(true);
-            }
-        }
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

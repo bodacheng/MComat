@@ -61,7 +61,7 @@ public class Move_State2 : AI_State
         if (this._AIStateRunner.getLastState() == this)
             return;
 
-        _DATA_CENTER.deActiveObjects();
+        personality_Events.CloseAllPersonalityEffects();
         //this.AI_DATA_CENTER.switchToMocaPhysicMaterial();
         this.time_counter = 0f;
         use_speed = speed;
@@ -76,7 +76,7 @@ public class Move_State2 : AI_State
     private int whereToGo;
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
         EnemiesByDistance = Sensor.getEnemiesByDistance(true);
         switch(_AIMoveStyle)

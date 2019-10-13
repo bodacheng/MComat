@@ -68,7 +68,7 @@ public class Knock_Off_State : AI_State
         this._Animator.SetFloat("speed", 0f);
         this._Weapon_Animation_Events.clearMarkerManagers();
         this.BS_Main_Health.enableAllHitBoxCollider(false);
-        this._DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
 
 		if (BS_Main_Health.returnDamageList(damageType.supper_damage).Count > 0)
         {

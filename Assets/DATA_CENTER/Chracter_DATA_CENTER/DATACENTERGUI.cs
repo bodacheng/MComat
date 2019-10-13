@@ -48,9 +48,6 @@ public class DATACENTERGUI : Editor {
         myScript.left_hand_t = EditorGUILayout.ObjectField("Left Hand", myScript.left_hand_t, typeof(Transform), true) as Transform;
         EditorGUILayout.EndVertical();
 
-        GUILayout.Space(5f);
-        EditorGUILayout.LabelField("左右两脚的位置具体是脚尖，系统会自动给脚踝附近也适配marker。", title);
-
         EditorGUILayout.BeginVertical();
         myScript.right_foot_t = EditorGUILayout.ObjectField("Right Foot", myScript.right_foot_t, typeof(Transform), true) as Transform;
         EditorGUILayout.EndVertical();
@@ -65,16 +62,6 @@ public class DATACENTERGUI : Editor {
 
         EditorGUILayout.BeginVertical();
         myScript.head_t = EditorGUILayout.ObjectField("Head", myScript.head_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        //双手武器你不得不亲自设置，因为这两个东西在手上的位置实在是主观的。在这里设置后接下来的construct会直接把他们加入到其他一些模块的相应参数上
-        GUILayout.Space(5f);
-        EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript.left_sword = EditorGUILayout.ObjectField("Left Weapon", myScript.left_sword, typeof(ParticleSystem), true) as ParticleSystem;
-        EditorGUILayout.EndVertical();
-        GUILayout.Space(5f);
-        EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript.right_sword = EditorGUILayout.ObjectField("Right Weapon", myScript.right_sword, typeof(ParticleSystem), true) as ParticleSystem;
         EditorGUILayout.EndVertical();
 
         GUILayout.Space(5f);
@@ -133,6 +120,7 @@ public class DATACENTERGUI : Editor {
             myScript.AIStateRunner._SkillCancelFlag = myScript._SkillCancelFlag;
             myScript.buffsRunner = myScript.gameObject.GetComponent<BuffsRunner>();
             myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();
+            
             myScript.Rigidbody = myScript.WholeT.GetComponent<Rigidbody>();//这个只在战斗模式需要
             myScript.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;//计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
             //设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
@@ -165,15 +153,17 @@ public class DATACENTERGUI : Editor {
             myScript._ResistanceManager = resistanceManager;
             myScript._ShaderManager = shaderManager;
             
+            myScript.Personality_events = myScript.WholeT.GetComponent<Personality_events>();
+            
             BO_Hitbox focusingHitBox = null;
             if (myScript.right_arm_hitbox_t != null)
             {
                 if (!myScript.right_arm_hitbox_t.GetComponent<BoxCollider>())
                 {
                     myScript.right_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Hitbox>();
                 if (focusingHitBox == null)
                     myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
@@ -185,9 +175,9 @@ public class DATACENTERGUI : Editor {
                 if (!myScript.left_arm_hitbox_t.GetComponent<BoxCollider>())
                 {
                     myScript.left_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Hitbox>();
                 if (focusingHitBox == null)
                     myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
@@ -199,9 +189,9 @@ public class DATACENTERGUI : Editor {
                 if (!myScript.right_leg_hitbox_t.GetComponent<BoxCollider>())
                 {
                     myScript.right_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Hitbox>();
                 if (focusingHitBox == null)
                     myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
@@ -213,9 +203,9 @@ public class DATACENTERGUI : Editor {
                 if (!myScript.left_leg_hitbox_t.GetComponent<BoxCollider>())
                 {
                     myScript.left_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Hitbox>();
                 if (focusingHitBox == null)
                     myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
@@ -227,10 +217,9 @@ public class DATACENTERGUI : Editor {
                 if (!myScript.spine_hitbox_t.GetComponent<BoxCollider>())
                 {
                     myScript.spine_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    myScript.spine_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
                 }
-                myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                myScript.spine_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
-
+                myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;                
                 focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Hitbox>();
                 if (focusingHitBox == null)
                     myScript.spine_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
@@ -238,50 +227,34 @@ public class DATACENTERGUI : Editor {
                 focusingHitBox.MainHealth = myScript.BO_Health;
             }
 
-            List<Transform> weaponPartsOnBody = new List<Transform>();
-            if (myScript.right_hand_t != null)
-                weaponPartsOnBody.Add(myScript.right_hand_t);
-            if (myScript.left_hand_t != null)
-                weaponPartsOnBody.Add(myScript.left_hand_t);
-            if (myScript.right_foot_t != null)
-                weaponPartsOnBody.Add(myScript.right_foot_t);
-            if (myScript.left_foot_t != null)
-                weaponPartsOnBody.Add(myScript.left_foot_t);
-            if (myScript.head_t != null)
-                weaponPartsOnBody.Add(myScript.head_t);
-            if (myScript.tail_t != null)
-                weaponPartsOnBody.Add(myScript.tail_t);
-
-            foreach (Transform _t in weaponPartsOnBody)
-            {
-                if (_t.GetComponent<BO_Marker_Manager>() == null)
-                {
-                    _t.gameObject.AddComponent<BO_Marker_Manager>();
-                    GameObject child_marker = new GameObject();
-                    child_marker.name = "WeaponMarker";
-                    child_marker.AddComponent<BO_Marker>();
-                    child_marker.GetComponent<BO_Marker>().radius = 0.5f;
-                    child_marker.transform.SetParent(_t);
-                    child_marker.transform.localPosition = Vector3.zero;
-                    _t.GetComponent<BO_Marker_Manager>().SetWeaponOwnerHealth(myScript.BO_Health);
-
-                    if (_t == myScript.left_foot_t || _t == myScript.right_foot_t)
-                    {
-                        GameObject child_marker2 = new GameObject();
-                        child_marker2.AddComponent<BO_Marker>();
-                        child_marker2.GetComponent<BO_Marker>().radius = 0.5f;
-                        child_marker2.transform.SetParent(_t);
-
-                        child_marker2.transform.localPosition = child_marker.transform.localPosition - new Vector3(0,0,0.5f);//脚踝
-                    }
-                }else{
-                    BO_Marker[] markers = _t.GetComponentsInChildren<BO_Marker>();
-                    foreach(BO_Marker marker in markers)
-                    {
-                        marker.radius = 0.5f;
-                    }
-                }
-            }
+            //foreach (Transform _t in weaponPartsOnBody)
+            //{
+            //    if (_t.GetComponent<BO_Marker_Manager>() == null)
+            //    {
+            //        _t.gameObject.AddComponent<BO_Marker_Manager>();
+            //        GameObject child_marker = new GameObject();
+            //        child_marker.name = "WeaponMarker";
+            //        child_marker.AddComponent<BO_Marker>();
+            //        child_marker.GetComponent<BO_Marker>().radius = 0.5f;
+            //        child_marker.transform.SetParent(_t);
+            //        child_marker.transform.localPosition = Vector3.zero;
+            //        _t.GetComponent<BO_Marker_Manager>().SetWeaponOwnerHealth(myScript.BO_Health);
+            //        if (_t == myScript.left_foot_t || _t == myScript.right_foot_t)
+            //        {
+            //            GameObject child_marker2 = new GameObject();
+            //            child_marker2.AddComponent<BO_Marker>();
+            //            child_marker2.GetComponent<BO_Marker>().radius = 0.5f;
+            //            child_marker2.transform.SetParent(_t);
+            //            child_marker2.transform.localPosition = child_marker.transform.localPosition - new Vector3(0,0,0.5f);//脚踝
+            //        }
+            //    }else{
+            //        BO_Marker[] markers = _t.GetComponentsInChildren<BO_Marker>();
+            //        foreach(BO_Marker marker in markers)
+            //        {
+            //            marker.radius = 0.5f;
+            //        }
+            //    }
+            //}
 
             string bladeName;
             //string shieldName;
@@ -312,24 +285,23 @@ public class DATACENTERGUI : Editor {
                     //shieldName = "blue_Shield";
                     break;
             }
-
-            if (myScript.right_sword == null)
+            if (myScript.Personality_events.right_sword == null)
             {
                 GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(myScript.right_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
                 enegryBlade.transform.localRotation = Quaternion.Euler(180, 0, 0);//这个事情非常不一定
-                myScript.right_sword = enegryBlade.GetComponent<ParticleSystem>();
+                myScript.Personality_events.right_sword = enegryBlade.GetComponent<ParticleSystem>();
             }
-            if (myScript.left_sword == null)
+            if (myScript.Personality_events.left_sword == null)
             {
                 GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(myScript.left_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
 				enegryBlade.transform.localRotation = Quaternion.identity;
-                myScript.left_sword = enegryBlade.GetComponent<ParticleSystem>();
+                myScript.Personality_events.left_sword = enegryBlade.GetComponent<ParticleSystem>();
             }
 
             if (myScript.floorChecks == null)

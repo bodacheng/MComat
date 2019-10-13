@@ -9736,7 +9736,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   _Center: {fileID: 5090883234602509498}
-  _health: 0
   AT: 10
 --- !u!114 &8563159649483002976
 MonoBehaviour:
@@ -9819,6 +9818,7 @@ MonoBehaviour:
   _ResistanceManager: {fileID: 8353772300179877686}
   _ShaderManager: {fileID: 708686150975484601}
   blendShapeProxy: {fileID: 1077883854756308730}
+  Personality_events: {fileID: 3370329225509523273}
   right_hand_t: {fileID: 5547279632300009864}
   left_hand_t: {fileID: 8277207795455881885}
   right_foot_t: {fileID: 2571460466046126301}
@@ -9830,8 +9830,6 @@ MonoBehaviour:
   left_leg_hitbox_t: {fileID: 0}
   right_leg_hitbox_t: {fileID: 0}
   spine_hitbox_t: {fileID: 6349297015890669104}
-  right_sword: {fileID: 3217012920109285032}
-  left_sword: {fileID: 1892869642741846335}
   Shield: {fileID: 0}
   onBattleGroundBundary: 0
   antiWallDirection: {x: 0, y: 0, z: 0}
@@ -24942,6 +24940,7 @@ GameObject:
   - component: {fileID: 4524982398699286260}
   - component: {fileID: 5781534655262093093}
   - component: {fileID: 8545384059943610286}
+  - component: {fileID: 3370329225509523273}
   m_Layer: 0
   m_Name: adam
   m_TagString: Untagged
@@ -25174,6 +25173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _C: {fileID: 5090883234602509498}
+--- !u!114 &3370329225509523273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890155015453887327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceccef47fb19347a88ae5f82f294ac74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  right_sword: {fileID: 3217012920109285032}
+  left_sword: {fileID: 1892869642741846335}
 --- !u!1 &4890650921791262542
 GameObject:
   m_ObjectHideFlags: 0

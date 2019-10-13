@@ -56,7 +56,7 @@ public class Death_State : AI_State
     {
         time_count = 0f;
         base.AI_State_enter();
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         _DATA_CENTER.deathInitialize();
 
         landedCal = 1;
@@ -83,7 +83,7 @@ public class Death_State : AI_State
             _Rigidbody.velocity = used_velcoity;
             this.BS_Main_Health.eatDamage(damageType.deathknockoff);
         }
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         this.BS_Main_Health.clearDamageLists();
     }
 

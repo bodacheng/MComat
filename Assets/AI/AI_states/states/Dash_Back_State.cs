@@ -62,7 +62,7 @@ public class Dash_Back_State : AI_State
         this._Animator.SetFloat("speed", 0f);
         this.Sensor.OneRoundDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         Vector3 threatsComingDirection = Vector3.zero;
         if (Sensor.getEnemiesByDistance(true).Count > 0)
             threatsComingDirection = Sensor.getEnemiesByDistance(false)[0].transform.position - gameObject.transform.position;

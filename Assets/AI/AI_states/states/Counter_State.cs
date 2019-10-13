@@ -119,7 +119,7 @@ public class Counter_State : AI_State {
         _SkillCancelFlag.turnRotationAdjustmentStartFlagWithoutstepfoward(1);
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.animationTrigger(clip_name);
         
         gotdamageamont = 0;

@@ -94,10 +94,10 @@ public class Move_State : AI_State
     public override void c_State_enter()
     {
         this.time_counter = 0f;
-        this._Weapon_Animation_Events.clearMarkerManagers();
-        _DATA_CENTER.deActiveObjects();
+        this._Weapon_Animation_Events.clearMarkerManagers();        
         this.mainCam = CameraManager._camera.transform;
         this.Animation_Manger.PlayLayerAnim(null);
+        this.personality_Events.CloseAllPersonalityEffects();
     }
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
@@ -112,7 +112,7 @@ public class Move_State : AI_State
         decideDirection();
         this.time_counter = 0f;
         this.mainCam = CameraManager._camera.transform;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
     }
 
     private void decideDirection()

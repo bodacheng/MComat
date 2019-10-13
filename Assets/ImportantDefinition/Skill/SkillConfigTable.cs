@@ -27,7 +27,7 @@ public class SkillConfigTable
 	{
 		public string RECORD_ID;
         public string REAL_NAME;
-		public string USEABLE_MONSTER_TYPE_CODE;
+		public string USEABLE_MONSTER_TYPE;
 		public string ATTACK_WEIGHT;
 		public string ATTACK_TYPE;
         public string SP_LEVEL;
@@ -215,7 +215,7 @@ public class SkillConfigTable
             {
                 grid[i][0] = rowList[i - 1].RECORD_ID;
                 grid[i][1] = rowList[i - 1].REAL_NAME;
-                grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE_CODE;
+                grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
                 grid[i][3] = rowList[i - 1].ATTACK_WEIGHT;
                 grid[i][4] = rowList[i - 1].ATTACK_TYPE;
                 grid[i][5] = rowList[i - 1].SP_LEVEL;
@@ -250,7 +250,7 @@ public class SkillConfigTable
                 Row row = new Row();
                 row.RECORD_ID = grid[i][0];
                 row.REAL_NAME = grid[i][1];
-                row.USEABLE_MONSTER_TYPE_CODE = grid[i][2];
+                row.USEABLE_MONSTER_TYPE = grid[i][2];
                 row.ATTACK_WEIGHT = grid[i][3];
                 row.ATTACK_TYPE = grid[i][4];
                 row.SP_LEVEL = grid[i][5];
@@ -288,8 +288,7 @@ public class SkillConfigTable
             return null;
         Row row = new Row();
         row.RECORD_ID = skillConfig.RECORD_ID;        
-        monsterTypeReferenceTable.Row typereference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_NAME(skillConfig.type);
-        row.USEABLE_MONSTER_TYPE_CODE = typereference.MONSTER_TYPE_CODE;
+        row.USEABLE_MONSTER_TYPE = skillConfig.type;
         row.REAL_NAME = skillConfig.REAL_NAME;
         row.ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString();
 
@@ -354,13 +353,8 @@ public class SkillConfigTable
 
     public SkillConfig RowToSkillConfig(Row row)
     {
-        if (row == null)
-            return null;
-        monsterTypeReferenceTable.Row typereference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_CODE(row.USEABLE_MONSTER_TYPE_CODE);
-        if (typereference == null)
-            return null;
         SkillConfig _SkillConfig = new SkillConfig();
-        _SkillConfig.type = typereference.MONSTER_TYPE_NAME;
+        _SkillConfig.type = row.USEABLE_MONSTER_TYPE;
         _SkillConfig.RECORD_ID = row.RECORD_ID;
         _SkillConfig.REAL_NAME = row.REAL_NAME;
         _SkillConfig.ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT);
@@ -423,7 +417,7 @@ public class SkillConfigTable
 
     public List<Row> FindAll_type_keyName(string type, string keyName)
     {
-        return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.USEABLE_MONSTER_TYPE_CODE == type))).ToList();
+        return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == type))).ToList();
     }
 
     public int NumRows()
@@ -448,11 +442,11 @@ public class SkillConfigTable
 	}    
 	public Row Find_MONSTER_TYPE_CODE(string find)
 	{
-		return rowList.Find(x => x.USEABLE_MONSTER_TYPE_CODE == find);
+		return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
 	}
-	public List<Row> FindAll_MONSTER_TYPE_CODE(string find)
+	public List<Row> FindAll_MONSTER_TYPE(string find)
 	{
-		return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE_CODE == find);
+		return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
 	}
 	public Row Find_keyName(string find)
 	{

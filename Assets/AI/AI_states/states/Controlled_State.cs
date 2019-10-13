@@ -24,7 +24,7 @@ public class Controlled_State : AI_State {
 
 	public override void AI_State_enter()
 	{		
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
 		base.AI_State_enter();
 		_Rigidbody.useGravity = false;
 		Animation_Manger.PlayLayerAnim (clip_name);

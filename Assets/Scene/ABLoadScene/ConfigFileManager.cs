@@ -45,13 +45,7 @@ public class ConfigFileManager : MonoBehaviour {
 
         foreach (string chartype in chartypes)
         {
-            monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_NAME(chartype);
-            if (reference == null)
-            {
-                Debug.Log("无法找到type定义： "+chartype);
-                continue;
-            }
-            List<SkillConfig> skillConfigsOfOldConfigFileOFtype = SkillConfigTable.Instance.RowsToSkillConfigList(SkillConfigTable.Instance.FindAll_MONSTER_TYPE_CODE(reference.MONSTER_TYPE_CODE));
+            List<SkillConfig> skillConfigsOfOldConfigFileOFtype = SkillConfigTable.Instance.RowsToSkillConfigList(SkillConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
             List<string> KisonnRecourdsOFRealNames = new List<string>(); //这个type的角色旧config文件中所有条目的keyname list。
             foreach (SkillConfig skillConfig in skillConfigsOfOldConfigFileOFtype)
             {
@@ -86,17 +80,19 @@ public class ConfigFileManager : MonoBehaviour {
                 }
                 if (!KisonnRecourdsOFRealNames.Contains(_anim.name))
                 {
-                    SkillConfig OneConfig = new SkillConfig();
-                    OneConfig.RECORD_ID = null;
-                    OneConfig.type = chartype;
-                    OneConfig.REAL_NAME = _anim.name;
-                    OneConfig.ATTACK_WEIGHT = 10;
-                    OneConfig.ShowName = "unknown";
-                    OneConfig.SP_LEVEL = 0;
-                    OneConfig.stateType = stateType.GR;
-                    OneConfig.ai_trigger_ranges = new behaviorEnterRange[1] { behaviorEnterRange.inner_range };
-                    OneConfig.AI_PRIORITY = "2";
-                    OneConfig.RARITY_LEVEL = 1;
+                    SkillConfig OneConfig = new SkillConfig
+                    {
+                        RECORD_ID = null,
+                        type = chartype,
+                        REAL_NAME = _anim.name,
+                        ATTACK_WEIGHT = 10,
+                        ShowName = "unknown",
+                        SP_LEVEL = 0,
+                        stateType = stateType.GR,
+                        ai_trigger_ranges = new behaviorEnterRange[1] { behaviorEnterRange.inner_range },
+                        AI_PRIORITY = "2",
+                        RARITY_LEVEL = 1
+                    };
                     newSkillConfigsOfType.Add(OneConfig);
                 }else{
                     //这个资源对应的条目已经在原先的config文件里已经有了，保留原先设定。
@@ -115,17 +111,19 @@ public class ConfigFileManager : MonoBehaviour {
                 }
                 if (!KisonnRecourdsOFRealNames.Contains(_anim.name))
                 {
-                    SkillConfig OneConfig = new SkillConfig();
-                    OneConfig.RECORD_ID = null;
-                    OneConfig.type = chartype;
-                    OneConfig.REAL_NAME = _anim.name;
-                    OneConfig.ATTACK_WEIGHT = 10;
-                    OneConfig.ShowName = "unknown";
-                    OneConfig.SP_LEVEL = 0;
-                    OneConfig.stateType = stateType.GI;
-                    OneConfig.ai_trigger_ranges = new behaviorEnterRange[3] { behaviorEnterRange.inner_range, behaviorEnterRange.mid_range, behaviorEnterRange.far_range};
-                    OneConfig.AI_PRIORITY = "2";
-                    OneConfig.RARITY_LEVEL = 1;
+                    SkillConfig OneConfig = new SkillConfig
+                    {
+                        RECORD_ID = null,
+                        type = chartype,
+                        REAL_NAME = _anim.name,
+                        ATTACK_WEIGHT = 10,
+                        ShowName = "unknown",
+                        SP_LEVEL = 0,
+                        stateType = stateType.GI,
+                        ai_trigger_ranges = new behaviorEnterRange[3] { behaviorEnterRange.inner_range, behaviorEnterRange.mid_range, behaviorEnterRange.far_range },
+                        AI_PRIORITY = "2",
+                        RARITY_LEVEL = 1
+                    };
                     newSkillConfigsOfType.Add(OneConfig);
                 }else{
                     //这个资源对应的条目已经在原先的config文件里已经有了，保留原先设定。
@@ -144,36 +142,38 @@ public class ConfigFileManager : MonoBehaviour {
                 }
                 if (!KisonnRecourdsOFRealNames.Contains(_anim.name))
                 {
-                    SkillConfig OneConfig = new SkillConfig();
-                    OneConfig.RECORD_ID = null;
-                    OneConfig.type = chartype;
-                    OneConfig.REAL_NAME = _anim.name;
-                    OneConfig.ATTACK_WEIGHT = 10;
-                    OneConfig.ShowName = "unknown";
-                    OneConfig.SP_LEVEL = 0;
-                    OneConfig.stateType = stateType.GM;
-                    OneConfig.ai_trigger_ranges = new behaviorEnterRange[2] { behaviorEnterRange.mid_range, behaviorEnterRange.inner_range };
-                    OneConfig.AI_PRIORITY = "2";
-                    OneConfig.RARITY_LEVEL = 1;
+                    SkillConfig OneConfig = new SkillConfig
+                    {
+                        RECORD_ID = null,
+                        type = chartype,
+                        REAL_NAME = _anim.name,
+                        ATTACK_WEIGHT = 10,
+                        ShowName = "unknown",
+                        SP_LEVEL = 0,
+                        stateType = stateType.GM,
+                        ai_trigger_ranges = new behaviorEnterRange[2] { behaviorEnterRange.mid_range, behaviorEnterRange.inner_range },
+                        AI_PRIORITY = "2",
+                        RARITY_LEVEL = 1
+                    };
                     newSkillConfigsOfType.Add(OneConfig);
                 }
             }
 
-            AllNewSkillConfigsOfAllTypes.AddRange(newSkillConfigsOfType);            
+            AllNewSkillConfigsOfAllTypes.AddRange(newSkillConfigsOfType);
             List<string> ShouldDeletedFromConfig = new List<string>();//旧版本有的keyname可是Resource文件夹下没有的
-            foreach(string realname in KisonnRecourdsOFRealNames)
+            foreach (string realname in KisonnRecourdsOFRealNames)
             {
                 if (!currentAllRealNamesOfResourceFolder.Contains(realname))
                     ShouldDeletedFromConfig.Add(realname);
             }
-            foreach(string realname in ShouldDeletedFromConfig)
+            foreach (string realname in ShouldDeletedFromConfig)
             {
                 List<SkillConfigTable.Row> toDeleteRows = SkillConfigTable.Instance.FindAll_type_keyName(chartype, realname);//注意看，同一个key名在数据库可能不止一个条目。比如一个发波动画定义了两种攻击
                 foreach (SkillConfigTable.Row row in toDeleteRows)
                 {
                     if (!AllDeletedRecordIDs.Contains(row.RECORD_ID))
                     {
-                        Debug.Log("这是一个要删除的ID"+ int.Parse(row.RECORD_ID));
+                        Debug.Log("这是一个要删除的ID" + int.Parse(row.RECORD_ID));
                         AllDeletedRecordIDs.Add(row.RECORD_ID);
                     }
                     else
@@ -204,93 +204,7 @@ public class ConfigFileManager : MonoBehaviour {
         SkillConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_skill");
     }
     
-    public void skillsAnalyzeByFrames(string type,float start_min,float start_max,float end_min,float end_max)
-    {
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
 
-        List<AnimationClip> AnimationClips = new List<AnimationClip>();
-        foreach (UnityEngine.Object _object in G_Attack_States)
-        {
-            AnimationClips.Add(_object as AnimationClip);
-        }
-        foreach (UnityEngine.Object _object in G_Attack_State_Stays)
-        {
-            AnimationClips.Add(_object as AnimationClip);
-        }
-        foreach (UnityEngine.Object _object in GMStatess)
-        {
-            AnimationClips.Add(_object as AnimationClip);
-        }
-        foreach (AnimationClip _clip in AnimationClips)
-        {
-            if (skillFrameAnalyze(_clip,start_min,start_max,end_min,end_max))
-            {
-                Debug.Log("符合："+_clip.name);
-            }
-        }
-    }
-
-    List<string> attackFrameStartMethodNames = new List<string>() {
-        "SetRightHandMarkerManager","SetLeftHandMarkerManager",
-        "SetRightFootMarkerManager","SetLeftFootMarkerManager",
-        "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
-        "SetHeadMarkerManager","SetTailMarkerManager",
-        "SetAllBodyMarkerManagersIn",
-    };
-    List<string> effectsAttackFrameStartMethodNames = new List<string>()
-    {
-        "MagicForward","bullet_shoot_from_body_part","blastAttack","releasePreparedMagic","releasePreparedMagicToAir"
-    };
-    
-    public bool skillFrameAnalyze(AnimationClip _clip,float start_min,float start_max,float end_min,float end_max)
-    {
-        float earlieststartframe = 0,latestendframe;
-        float cancelflagFrame = 0;
-        List<float> allAttackStartFrames = new List<float>();
-        foreach (AnimationEvent e in _clip.events)
-        {
-            if (e.functionName == "SetAllBodyMarkerManagersIn")
-            {
-                allAttackStartFrames.Add(e.time);
-            }
-            if (attackFrameStartMethodNames.Contains(e.functionName))
-            {
-                if (e.intParameter != 0)
-                    allAttackStartFrames.Add(e.time);
-            }
-            if (effectsAttackFrameStartMethodNames.Contains(e.functionName))
-            {
-                allAttackStartFrames.Add(e.time);
-            }
-            if (e.functionName == "turn_on_flag")
-            {
-                cancelflagFrame = e.time;
-            }
-        }
-        
-        if (allAttackStartFrames.Count == 0)
-        {
-            Debug.Log(_clip.name + "貌似缺乏有效攻击帧控制类函数，需检查");
-            return false;
-        }
-        
-        if (Mathf.Approximately(cancelflagFrame,0))
-        {
-            Debug.Log(_clip.name + "貌似没有取消flag,应做单独分析");
-            return false;
-        }
-        
-        earlieststartframe = allAttackStartFrames.Min();
-        latestendframe = allAttackStartFrames.Max();
-
-        float attackendtocancelstart = cancelflagFrame - latestendframe;
-        bool startfilteroutcome = (earlieststartframe > start_min) && (earlieststartframe <= start_max);
-        bool endfiltercoutcome = (attackendtocancelstart > end_min) && (attackendtocancelstart <= end_max);
-
-        return startfilteroutcome && endfiltercoutcome;
-    }
 
     public int MaxOfIntList(List<int> List)
     {
@@ -334,14 +248,8 @@ public class ConfigFileManager : MonoBehaviour {
         List<CharacterResourceInfo> AllNewCharacterConfigsOfAllTypes = new List<CharacterResourceInfo>();
         foreach (string chartype in chartypes)
         {
-            monsterTypeReferenceTable.Row type_reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_NAME(chartype);
-            if (type_reference == null)
-            {
-                Debug.Log("未找到角色type名" + chartype);
-                continue;
-            }
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharacterResourceInfo> CharConfigsOfOldConfigFileOFtype = monstersConfigTable.Instance.RowToCharacterResourceInfoList(monstersConfigTable.Instance.FindAll_MONSTER_TYPE_CODE(type_reference.MONSTER_TYPE_CODE));
+            List<CharacterResourceInfo> CharConfigsOfOldConfigFileOFtype = monstersConfigTable.Instance.RowToCharacterResourceInfoList(monstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
             List<string> keySonnCharacterRealNames = new List<string>();
             foreach (CharacterResourceInfo oneConfig in CharConfigsOfOldConfigFileOFtype)
             {
@@ -351,13 +259,7 @@ public class ConfigFileManager : MonoBehaviour {
                 }else{
                     //什么也不做。允许。
                 }
-                if (!kisoonCharacterResourceInfoRID.Contains(oneConfig.RECORD_ID))
-                {
-                    kisoonCharacterResourceInfoRID.Add(oneConfig.RECORD_ID);
-                }else{
-                    Debug.Log("致命错误，原COnfig设置中ID重复："+ oneConfig.RECORD_ID);
-                    return;
-                }
+                kisoonCharacterResourceInfoRID.Add(oneConfig.RECORD_ID);
             }
 
             UnityEngine.Object[] pretabResources = Resources.LoadAll("charPretabs/" + chartype);
@@ -378,13 +280,15 @@ public class ConfigFileManager : MonoBehaviour {
                     continue;
                 }
 
-                CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo();
-                _CharacterResourceInfo.RECORD_ID = "-1";
-                _CharacterResourceInfo.type = chartype;
-                _CharacterResourceInfo.REAL_NAME = charPretab.name;
-                _CharacterResourceInfo.showNameEN = null;
-                _CharacterResourceInfo.showNameCN = null;
-                _CharacterResourceInfo.showNameJP = null;
+                CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo
+                {
+                    RECORD_ID = "-1",
+                    type = chartype,
+                    REAL_NAME = charPretab.name,
+                    showNameEN = null,
+                    showNameCN = null,
+                    showNameJP = null
+                };
 
                 OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
                 switch (outsideDataLink._C.Zokusei)
@@ -428,7 +332,7 @@ public class ConfigFileManager : MonoBehaviour {
 
             foreach (string keyname in ResourceNamesShouldDeletedFromConfig)
             {
-                List<monstersConfigTable.Row> toDeleteRows = monstersConfigTable.Instance.FindAll_TYPECODE_REALNAME(type_reference.MONSTER_TYPE_CODE, keyname);
+                List<monstersConfigTable.Row> toDeleteRows = monstersConfigTable.Instance.FindAll_TYPE_REALNAME(chartype, keyname);
                 foreach (monstersConfigTable.Row row in toDeleteRows)
                 {
                     if (!AllDeletedRecordsIDs.Contains(int.Parse(row.RECORD_ID)))
@@ -466,9 +370,11 @@ public class ConfigFileManager : MonoBehaviour {
     
     public void GenerateTutorialCharacterFiles()
     {
-        GetMonsterOfPlayerDetailModel Adam = new GetMonsterOfPlayerDetailModel();
-        Adam.monsterOfPlayerId = 1.ToString();
-        Adam.monsterId = 1.ToString();
+        GetMonsterOfPlayerDetailModel Adam = new GetMonsterOfPlayerDetailModel
+        {
+            monsterOfPlayerId = 1.ToString(),
+            monsterId = 1.ToString()
+        };
         AccountCharsSet.Instance.generateStoryCharsIntoXMLFile(Adam);
     }
 }

@@ -116,7 +116,9 @@ public class Hurt_State : AI_State {
         }
         this.RotateToDirection(-force_direction,0.5f,true);
         this.time_counter = 0f;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
+
+        this.Animation_Manger.Animator.SetTrigger("hurt");
     }
 
 	public override bool capacity_exit_condition()

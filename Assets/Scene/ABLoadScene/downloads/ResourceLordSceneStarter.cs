@@ -104,7 +104,6 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                monsterTypeReferenceTable.Instance.loadLocalMonsterTypeReference();
                 yield return monstersConfigTable.Instance.loadMonstersConfig();
                 yield return SkillConfigTable.Instance.loadAllSkillConfigs();
                 _LoadingCanvas.nowProcess("正在加载资源",0.1f);
@@ -126,11 +125,11 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         // characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
         foreach (monstersConfigTable.Row row in monstersConfigTable.Instance.rowList)
         {
-            if (!characterTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE_CODE))
-                characterTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE_CODE,new List<string>());
-            if (!characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE_CODE].Contains(row.BASIC_MOVEMENT_PACK))
+            if (!characterTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE))
+                characterTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE,new List<string>());
+            if (!characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Contains(row.BASIC_MOVEMENT_PACK))
             {
-                characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE_CODE].Add(row.BASIC_MOVEMENT_PACK);
+                characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Add(row.BASIC_MOVEMENT_PACK);
             }
         }
 

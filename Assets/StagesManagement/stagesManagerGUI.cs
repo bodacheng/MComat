@@ -27,28 +27,22 @@ public class stagesManagerGUI : Editor {
     
     string pathAndNameForLocalSave = "/oneFight.xml";
     stagesManager _stagesManager;
-    string focusingMemberRecordID = null;    
-    CharacterDataInfo focusingCharInfo = null;
-    CharacterResourceInfo focusingCharResourceInfo = null;
+    string focusingMemberRecordID;    
+    CharacterDataInfo focusingCharInfo;
+    CharacterResourceInfo focusingCharResourceInfo;
     CharacterDataInfo freeEditCharInfo;
-    SkillConfig focusingSkillConfig = null;
+    SkillConfig focusingSkillConfig;
     
-    bool skillselectfilter = false;
+    bool skillselectfilter;
     bool filterallranges = true;
-    bool[] skillrangeselectfilter = new bool[4] { true, true, true,true };//close,near,far,out
-
-    int selectedskillindex, selectedmonsterindex;
-    int selectskillrarelevel = -1;
-    int[] skillrarelevels = {-1,0,1,2,3};
-    string[] skillrarelevelShow = {"ALL","0", "★", "★★", "★★★"};
+    private readonly bool[] skillrangeselectfilter = { true, true, true, true };//close,near,far,out
+    private int selectedskillindex, selectedmonsterindex;
+    private int selectskillrarelevel = -1;
+    readonly int[] skillrarelevels = {-1,0,1,2,3};
+    readonly string[] skillrarelevelShow = {"ALL","0", "★", "★★", "★★★"};
     string focusingtype;
-
-    int[] exoptions = new int[] { 0, 1, 2, 3 };
-    string[] exoptions_display = new string[] {"normal","ex1","ex2","ex3"};
-
-    void addOneCharToDebugLocalCoustomFile(GetMonsterOfPlayerDetailModel _CharInfo)
-    {
-    }
+    readonly int[] exoptions = { 0, 1, 2, 3 };
+    readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
 
     public override void OnInspectorGUI()
     {
@@ -89,16 +83,17 @@ public class stagesManagerGUI : Editor {
         ButtonStyle_NineAndTwo_Selected.normal.textColor = Color.yellow;
         ButtonStyle_NineAndTwo_Selected.fixedWidth = 80f;
         ButtonStyle_NineAndTwo_Selected.alignment = TextAnchor.MiddleCenter;
-    
-        attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle);
-        attackRangeToggleGUI.margin = new RectOffset(1, 1, 11, 11);
-        attackRangeToggleGUI.alignment = TextAnchor.MiddleCenter;
-        attackRangeToggleGUI.stretchWidth = false;
-    
+
+        attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
+        {
+            margin = new RectOffset(1, 1, 11, 11),
+            alignment = TextAnchor.MiddleCenter,
+            stretchWidth = false
+        };
+
         _stagesManager = (stagesManager)target;
 
         // 关卡编辑器下，技能配置文件定走resource文件夹，所以不需要走SkillsConfigInfos.loadAllSkillConfigs(), 同理角色配置文件也是
-        monsterTypeReferenceTable.Instance.loadLocalMonsterTypeReference();
         SkillConfigTable.loadAllSkillConfigFromLocalConfigFile();
         SkillConfigTable.refreshSkillConfigDicForReference();
         monstersConfigTable.loadMonstersConfigByResource();
@@ -228,15 +223,9 @@ public class stagesManagerGUI : Editor {
         if (focusingCharInfo != null)
         {
             focusingCharResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.monsterId));
-            if (focusingCharInfo.monsterId != "-1" && focusingCharResourceInfo != null)
-            {
-                focusingtype = EditorGUILayout.TextField("characerType", focusingCharResourceInfo.type);
-            }
-            else
-            {
-                focusingtype = EditorGUILayout.TextField("characerType", focusingtype);
-            }
-            // 角色type指定end //
+            focusingtype = focusingCharInfo.monsterId != "-1" && focusingCharResourceInfo != null
+                ? EditorGUILayout.TextField("characerType", focusingCharResourceInfo.type)
+                : EditorGUILayout.TextField("characerType", focusingtype);
 
             RecordIDsAndNames RecordIDsAndNames = monstersConfigTable.getMonsterRecordIDsAndNamesArray(focusingtype);
             if (RecordIDsAndNames == null)
@@ -275,28 +264,25 @@ public class stagesManagerGUI : Editor {
     
                 ButtonStyle_NineAndTwo.normal.textColor = Color.blue;
                 GUILayout.BeginHorizontal();
-                if (focusingCharInfo._NineAndTwo.getA1Config() == null || focusingCharInfo._NineAndTwo.getA1Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getA1Config() == null || focusingCharInfo._NineAndTwo.getA1Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA1Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getA2Config() == null || focusingCharInfo._NineAndTwo.getA2Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getA2Config() == null || focusingCharInfo._NineAndTwo.getA2Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA2Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getA3Config() == null || focusingCharInfo._NineAndTwo.getA3Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getA3Config() == null || focusingCharInfo._NineAndTwo.getA3Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getA3Config();
@@ -304,28 +290,25 @@ public class stagesManagerGUI : Editor {
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
     
-                if (focusingCharInfo._NineAndTwo.getB1Config() == null || focusingCharInfo._NineAndTwo.getB1Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getB1Config() == null || focusingCharInfo._NineAndTwo.getB1Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB1Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getB2Config() == null || focusingCharInfo._NineAndTwo.getB2Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getB2Config() == null || focusingCharInfo._NineAndTwo.getB2Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB2Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getB3Config() == null || focusingCharInfo._NineAndTwo.getB3Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getB3Config() == null || focusingCharInfo._NineAndTwo.getB3Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getB3Config();
@@ -333,28 +316,25 @@ public class stagesManagerGUI : Editor {
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
     
-                if (focusingCharInfo._NineAndTwo.getC1Config() == null || focusingCharInfo._NineAndTwo.getC1Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getC1Config() == null || focusingCharInfo._NineAndTwo.getC1Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC1Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getC2Config() == null || focusingCharInfo._NineAndTwo.getC2Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getC2Config() == null || focusingCharInfo._NineAndTwo.getC2Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC2Config();
                 }
     
-                if (focusingCharInfo._NineAndTwo.getC3Config() == null || focusingCharInfo._NineAndTwo.getC3Config().RECORD_ID == null)
-                    GUI.backgroundColor = Color.white;
-                else
-                    GUI.backgroundColor = Color.yellow;
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getC3Config() == null || focusingCharInfo._NineAndTwo.getC3Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
                 if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
                     focusingSkillConfig = focusingCharInfo._NineAndTwo.getC3Config();
@@ -501,8 +481,6 @@ public class stagesManagerGUI : Editor {
                 }
                 if (GUILayout.Button("AddToLocalDebugAccount(本功能已失效)", ButtonStyle))
                 {
-                    if (focusingCharInfo != null)
-                        addOneCharToDebugLocalCoustomFile(focusingCharInfo.getCharacterDataInfoJson());
                 }
                 GUILayout.EndHorizontal();
             }

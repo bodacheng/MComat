@@ -12,7 +12,6 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
     private Transform right_hand, left_hand, right_foot, left_foot, head, tail;    
     private Transform geometryCenter;
     private BO_Health myownheath;
-    private ParticleSystem left_sword, right_sword;
     private damageType damageType;
     private Decompositioner target_hitbox;
     static DecompositionerPool default_hitboxPool;
@@ -27,12 +26,10 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         }
     }
     
-    public void assignWeaponsFromDataCenter(BO_Health Ownheath,Transform geometryCenter,ParticleSystem left_sword, ParticleSystem right_sword, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
+    public void assignWeaponsFromDataCenter(BO_Health Ownheath,Transform geometryCenter, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
     {
         this.myownheath = Ownheath;
         this.geometryCenter = geometryCenter;
-        this.right_sword = right_sword;
-        this.left_sword = left_sword;
         this.right_hand = right_hand;
         this.left_hand = left_hand;
         this.right_foot = right_foot;
@@ -77,8 +74,6 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         {
             RemoveBodyPartWeapon(T);
         }
-        turn_off_Left_energy_blade();
-        turn_off_Right_energy_blade();
     }
     
 	public void EnableMarkers()
@@ -225,41 +220,5 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
     public void SetTailMarkerManager(int in_or_out = 1)
     {
         RegisterBodyPartWeapon(tail,in_or_out);
-    }
-
-    public void turn_on_Right_energy_blade()
-    {
-        turnRightEnergyBlade(true);
-    }
-    public void turn_off_Right_energy_blade()
-    {
-        turnRightEnergyBlade(false);
-    }
-    private void turnRightEnergyBlade(bool _on)
-    {
-        if (right_sword != null)
-        {
-            if (_on)
-                right_sword.Play(true);
-            else
-                right_sword.Stop(true);
-        }
-    }
-
-    public void turn_on_Left_energy_blade()
-    {
-    }
-    public void turn_off_Left_energy_blade()
-    {
-    }
-    private void turnLeftEnergyBlade(bool _on)
-    {
-        if (left_sword != null)
-        {
-            if (_on)
-                left_sword.Play(true);
-            else
-                left_sword.Stop(true);
-        }
     }
 }

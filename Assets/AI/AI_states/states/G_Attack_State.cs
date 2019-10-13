@@ -230,7 +230,7 @@ public partial class G_Attack_State : AI_State {
         this.rushingToTarget = null;
         this._Weapon_Animation_Events.clearMarkerManagers();
         _Animator.applyRootMotion = false;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         this._BuffsRunner.endSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
         this._BO_Ani_E.CloseEffectsOnBodyParts();
         if (isEventAttackLaunchState)

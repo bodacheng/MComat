@@ -86,7 +86,7 @@ public class Jump_State : AI_State
         this.Sensor.OneRoundDetectionStart(5);
 
         jumpSuccessed = false;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
 		_Rigidbody.useGravity = true;
         time_counter = 0;
         jumpDirection = Vector3.zero;
@@ -144,7 +144,7 @@ public class Jump_State : AI_State
         this.Sensor.OneRoundDetectionStart(5);
 
         jumpSuccessed = false;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
 		_Rigidbody.useGravity = true;
         time_counter = 0;
         this.mainCam = CameraManager._camera.transform;

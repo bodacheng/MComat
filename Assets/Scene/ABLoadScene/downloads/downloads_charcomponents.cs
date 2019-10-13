@@ -18,28 +18,24 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             ////////////    以上内容为实时动画片段的预备和个性化片段对他们的覆盖   /////////////
             
             //底下这一套有一个特别关键的逻辑：它在通过是不是有对应动画包的key来判断到底这个包的动画有没有load到内存。
-            monsterTypeReferenceTable.Row typereference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_CODE(keyValuePair.Key);
-            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(typereference.MONSTER_TYPE_NAME + "/basic_hurts"))
-                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL+ "/animClips/"+ typereference.MONSTER_TYPE_NAME + "/hurtAndKnockOff", 
-                                                                                typereference.MONSTER_TYPE_NAME + "/basic_hurts",
-                                                                                "basic_hurts"));
-                
-                
-            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(typereference.MONSTER_TYPE_NAME + "/basic_knockoffs"))
-                yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL +"/animClips/"+ typereference.MONSTER_TYPE_NAME + "/hurtAndKnockOff", 
-                                                                                typereference.MONSTER_TYPE_NAME + "/basic_knockoffs",
-                                                                                "basic_knockoffs"));
-            //上面这些就是说什么呢。。各个type的伤害动作包和基础动作包就不放进DownLoadMissionDic进行之后的集中下载了。上面的函数已经执行下载处理了。
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts"))
+                yield return (AnimationResourceLoader.Instance.
+                LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL+ "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts","basic_hurts"));
+                                                                                
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key  + "/basic_knockoffs"))
+                yield return (AnimationResourceLoader.Instance.
+                LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL +"/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key + "/basic_knockoffs","basic_knockoffs"));
+            // 上面这些就是说什么呢。。各个type的伤害动作包和基础动作包就不放进DownLoadMissionDic进行之后的集中下载了。上面的函数已经执行下载处理了。
             // 但上面这些存在一个比较大的坑就是这些下载过程直接把所有type角色的伤害动画和基础动画都载入了内存，如果这样做负担很大我们要研究对上面两个函数进行修改。
-            //这个地方还差个各个type的generic_controller包下载的问题。
+            // 这个地方还差个各个type的generic_controller包下载的问题。
             
             ////// 寻找对应type的animator //////////////////
             RuntimeAnimatorController _RuntimeAnimatorController;
-            AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.TryGetValue(typereference.MONSTER_TYPE_NAME, out _RuntimeAnimatorController);
+            AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.TryGetValue(keyValuePair.Key , out _RuntimeAnimatorController);
             if (_RuntimeAnimatorController == null)
             {
                 IEnumerator _loadingProcess = AnimationResourceLoader.Instance.
-                LoadAnimatorFromCache(ResourceLordSceneStarter.BundleURL + "/animClips/"+ typereference.MONSTER_TYPE_NAME + "/animator", typereference.MONSTER_TYPE_NAME, "generic_controller");
+                LoadAnimatorFromCache(ResourceLordSceneStarter.BundleURL + "/animClips/"+ keyValuePair.Key  + "/animator", keyValuePair.Key , "generic_controller");
                 yield return _loadingProcess;
             }
         }

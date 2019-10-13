@@ -28,6 +28,7 @@ namespace Soul
         public Animation_Manger Animation_Manger;
         public BuffsRunner _BuffsRunner;
         public BlendShapeProxy blendShapeProxy;
+        public Personality_events personality_Events;
 
         public float AT;//攻击力
 
@@ -58,6 +59,7 @@ namespace Soul
             this._ResistanceManager = _DATA_CENTER._ResistanceManager;
             this._BuffsRunner = _DATA_CENTER.buffsRunner;
             this.blendShapeProxy = _DATA_CENTER.blendShapeProxy;
+            this.personality_Events = _DATA_CENTER.Personality_events;
         }
 
         // On what condition can we exit this state 

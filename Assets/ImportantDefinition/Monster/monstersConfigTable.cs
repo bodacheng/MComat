@@ -26,7 +26,7 @@ public class monstersConfigTable
 	{
 		public string RECORD_ID;
         public string REAL_NAME;
-        public string MONSTER_TYPE_CODE;
+        public string MONSTER_TYPE;
 		public string ZOKUSEI;
 		public string SPECIAL_ZOKUSEI;
         public string RARITY_LEVEL;
@@ -38,10 +38,7 @@ public class monstersConfigTable
             
     public static CharacterResourceInfo getCharacterResourceInfo(string resourceId)
     {
-        if (CharacterResourceInfoDic.ContainsKey(resourceId))
-            return CharacterResourceInfoDic[resourceId];
-        else
-            return null;
+        return CharacterResourceInfoDic.ContainsKey(resourceId) ? CharacterResourceInfoDic[resourceId] : null;
     }
     public static void loadMonstersConfigByResource()
     {
@@ -105,7 +102,7 @@ public class monstersConfigTable
                 Row row = new Row();
                 row.RECORD_ID = grid[i][0];
                 row.REAL_NAME = grid[i][1];
-                row.MONSTER_TYPE_CODE = grid[i][2];
+                row.MONSTER_TYPE = grid[i][2];
                 row.ZOKUSEI = grid[i][3];
                 row.SPECIAL_ZOKUSEI = grid[i][4];
                 row.RARITY_LEVEL = grid[i][5];
@@ -128,7 +125,7 @@ public class monstersConfigTable
         List<Row> toDeleteList = new List<Row>();
         foreach (Row row in rowList)
         {
-            if (row.REAL_NAME == null || row.RECORD_ID == null || row.RECORD_ID == "" || int.Parse(row.RECORD_ID) < 0)
+            if (row.REAL_NAME == null)
                 toDeleteList.Add(row);
         }
         foreach (Row row in toDeleteList)
@@ -158,7 +155,7 @@ public class monstersConfigTable
             {
                 grid[i][0] = rowList[i - 1].RECORD_ID;
                 grid[i][1] = rowList[i - 1].REAL_NAME;
-                grid[i][2] = rowList[i - 1].MONSTER_TYPE_CODE;
+                grid[i][2] = rowList[i - 1].MONSTER_TYPE;
                 grid[i][3] = rowList[i - 1].ZOKUSEI;
                 grid[i][4] = rowList[i - 1].SPECIAL_ZOKUSEI;
                 grid[i][5] = rowList[i - 1].RARITY_LEVEL;
@@ -192,11 +189,9 @@ public class monstersConfigTable
             {
                 Debug.Log("尝试整理角色：" + characterResourceInfo.REAL_NAME);
                 Row row = new Row();
-                row.RECORD_ID = characterResourceInfo.RECORD_ID.ToString();
-                monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_NAME(characterResourceInfo.type);
-                row.MONSTER_TYPE_CODE = reference.MONSTER_TYPE_CODE;
+                row.RECORD_ID = characterResourceInfo.RECORD_ID;
+                row.MONSTER_TYPE = characterResourceInfo.type;
                 row.REAL_NAME = characterResourceInfo.REAL_NAME;
-                
                 row.ZOKUSEI = ((int)characterResourceInfo._zokusei).ToString();
                 row.SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI;
                 row.BASIC_MOVEMENT_PACK = characterResourceInfo.BASIC_MOVEMENT_PACK;
@@ -263,7 +258,7 @@ public class monstersConfigTable
                 {
                     grid[i][0] = rowList[i - 1].RECORD_ID;
                     grid[i][1] = rowList[i - 1].REAL_NAME;
-                    grid[i][2] = rowList[i - 1].MONSTER_TYPE_CODE;
+                    grid[i][2] = rowList[i - 1].MONSTER_TYPE;
                     grid[i][3] = rowList[i - 1].ZOKUSEI;
                     grid[i][4] = rowList[i - 1].SPECIAL_ZOKUSEI;
                     grid[i][5] = rowList[i - 1].RARITY_LEVEL;
@@ -309,9 +304,8 @@ public class monstersConfigTable
         if (characterResourceInfo == null)
             return null;
         Row row = new Row();
-        row.RECORD_ID = characterResourceInfo.RECORD_ID.ToString();
-        monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_NAME(characterResourceInfo.type);
-        row.MONSTER_TYPE_CODE = reference.MONSTER_TYPE_CODE;
+        row.RECORD_ID = characterResourceInfo.RECORD_ID;
+        row.MONSTER_TYPE = characterResourceInfo.type;
         row.REAL_NAME = characterResourceInfo.REAL_NAME;
         row.ZOKUSEI = ((int)characterResourceInfo._zokusei).ToString();
         row.SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI;
@@ -358,11 +352,8 @@ public class monstersConfigTable
         if (row == null)
             return null;
         CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo();
-        _CharacterResourceInfo.RECORD_ID = row.RECORD_ID;       
-        monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_CODE(row.MONSTER_TYPE_CODE);
-        if (reference == null)
-            return null;
-        _CharacterResourceInfo.type = reference.MONSTER_TYPE_NAME;
+        _CharacterResourceInfo.RECORD_ID = row.RECORD_ID;
+        _CharacterResourceInfo.type = row.MONSTER_TYPE;
         _CharacterResourceInfo.REAL_NAME = row.REAL_NAME;
 
         switch (row.ZOKUSEI)
@@ -443,13 +434,7 @@ public class monstersConfigTable
    
     public static RecordIDsAndNames getMonsterRecordIDsAndNamesArray(string type)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
-        monsterTypeReferenceTable.Row type_reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_NAME(type);
-        if (type_reference == null)
-        {
-            return null;
-        }
-        List<Row> references = Instance.FindAll_MONSTER_TYPE_CODE(type_reference.MONSTER_TYPE_CODE);
-
+        List<Row> references = Instance.FindAll_MONSTER_TYPE(type);
         List<string> RecordIDs = new List<string>();
         List<string> RealNames = new List<string>();
         foreach (Row one in references)
@@ -463,10 +448,10 @@ public class monstersConfigTable
         return _RecordIDsAndNames;
     }
 
-    public List<Row> FindAll_TYPECODE_REALNAME(string MONSTER_TYPE_CODE, string keyName)
+    public List<Row> FindAll_TYPE_REALNAME(string MONSTER_TYPE, string keyName)
     {
         //monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_CODE(row.MONSTER_TYPE_CODE);
-        return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.MONSTER_TYPE_CODE == MONSTER_TYPE_CODE))).ToList();
+        return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.MONSTER_TYPE == MONSTER_TYPE))).ToList();
     }
 
     public Row GetAt(int i)
@@ -484,10 +469,12 @@ public class monstersConfigTable
 	{
 		return rowList.Find(x => x.REAL_NAME == find);
 	}
-    public List<Row> FindAll_MONSTER_TYPE_CODE(string find)
+    
+    public List<Row> FindAll_MONSTER_TYPE(string find)
     {
-        return rowList.FindAll(x => x.MONSTER_TYPE_CODE == find);
+        return rowList.FindAll(x => x.MONSTER_TYPE == find);
     }
+    
 	public Row Find_Zokusei(string find)
 	{
 		return rowList.Find(x => x.ZOKUSEI == find);
@@ -550,10 +537,9 @@ public class monstersConfigTable
         List<string> typeList = new List<string>();
         foreach (Row row in rowList)
         {
-            monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_CODE(row.MONSTER_TYPE_CODE);
-            if (!typeList.Contains(reference.MONSTER_TYPE_NAME))
+            if (!typeList.Contains(row.MONSTER_TYPE))
             {
-                typeList.Add(reference.MONSTER_TYPE_NAME);
+                typeList.Add(row.MONSTER_TYPE);
             }
         }
         return typeList;

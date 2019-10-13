@@ -64,7 +64,7 @@ public class G_Ani_MoveEscape_State : AI_State {
         this._Animator.SetFloat("speed", 0f);
         this.Sensor.OneRoundDetectionStart(5);
         _SkillCancelFlag.turn_off_flag();
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         this._Animator.applyRootMotion = true;
         Animation_Manger.animationTrigger(clip_name);        
         facedirection = gameObject.transform.forward;
@@ -112,7 +112,7 @@ public class G_Ani_MoveEscape_State : AI_State {
         this._Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         this.Sensor.OneRoundDetectionStart(5);
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
         Animation_Manger.animationTrigger(clip_name);                      
         this.mainCam = CameraManager._camera.transform;

@@ -91,7 +91,7 @@ public class G_M_Attack_State : AI_State {
         _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
-        _DATA_CENTER.deActiveObjects();
+        this.personality_Events.CloseAllPersonalityEffects();
         this._Rigidbody.velocity = Vector3.zero;
         
         Collider C = Sensor.getClosestColliderInSensorRange(true,true,true);

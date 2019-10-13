@@ -24,10 +24,10 @@ public class Empty_State : AI_State
 		base.AI_State_enter();
         //if (Animation_Manger != null)
             Animation_Manger.PlayLayerAnim(null);
-        this._DATA_CENTER.deActiveObjects();
         this._DATA_CENTER.turnShield(false);
         this._Rigidbody.velocity = Vector3.zero;
         this._DATA_CENTER.cleanClear();
+        this.personality_Events.CloseAllPersonalityEffects();
     }
 
 	public override void _State_FixedUpdate1()
