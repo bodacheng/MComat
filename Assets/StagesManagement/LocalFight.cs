@@ -15,8 +15,6 @@ using System.IO;
 [System.Serializable]
 public class LocalFight
 {
-    public int BattleGroundID = 0;
-
     [System.NonSerialized]
     public MultiDictionary<int, int, CharacterDataInfo> HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
     public MultiDictionary<int, int, CharacterDataInfo> EnemySets = new MultiDictionary<int, int, CharacterDataInfo>();
@@ -31,14 +29,6 @@ public class LocalFight
     {
     }
 
-    //现在的localFight模块里包含了一个在localID不连续情况下强制将其扭转为从0开始连续自然数的过程。
-    public LocalFight(int BattleGroundID,CharacterDataInfo[] Enemies)
-    {
-        this.BattleGroundID = BattleGroundID;
-        this.HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
-        this.EnemySets = new MultiDictionary<int, int, CharacterDataInfo>();
-    }
-    
     public static LocalFight loadOneLocalFightByScript(TextAsset Script)
     {
         LocalFight _LocalFight;

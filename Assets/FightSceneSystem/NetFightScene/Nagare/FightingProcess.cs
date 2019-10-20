@@ -84,6 +84,7 @@ public class FightingProcess : NagareProcess
                 }
                 break;
         }
+        this.mobileInputsManager.RefreshButtonPattern();
     }
 
     IEnumerator finalMoment(Team winner)

@@ -17,13 +17,6 @@ public partial class CharsManager : MonoBehaviour
             yield break;
         }
         GameObject _TempModel = null;
-        RuntimeAnimatorController toLoadRuntimeAnimatorController = AnimationResourceLoader.Instance.getRuntimeAnimatorController(_TempCharacterResourceInfo.type);
-        if (toLoadRuntimeAnimatorController == null)
-        {
-            Debug.Log("角色控制器读取失败："+ _TempCharacterResourceInfo.type);
-            FightLoadError.Instance.FightLoadErrors.Add(_TempCharacterResourceInfo.type + "控制器读取失败");
-            yield break;
-        }
 
         /// ///////////////////////////////////////////////////////
         var resultObject = Resources.Load("charPretabs/" + _TempCharacterResourceInfo.type + "/" + _TempCharacterResourceInfo.REAL_NAME) as GameObject;
@@ -39,12 +32,7 @@ public partial class CharsManager : MonoBehaviour
             yield return null;
             yield break;
         }
-        _TempDATACENTER = _ODL._C;
-        if (_TempDATACENTER)
-        {
-            _TempModel.GetComponent<Animator>().runtimeAnimatorController = toLoadRuntimeAnimatorController;
-        }
-        
+        _TempDATACENTER = _ODL._C;        
         _TempModel.SetActive(true);
         // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
         _TempDATACENTER.Zokusei = _TempCharacterResourceInfo._zokusei;

@@ -30,15 +30,15 @@ public class frontPage : MainSceneProcess
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
 
-        yield return TeamSet.Instance.loadTeamSet(TeamSetGameMode.story);
+        yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
         
         if (TeamSet.Instance.storyModeTeamSet != null)
         {
-            string focusLocalid = TeamSet.Instance.storyModeTeamSet.getPositionMonsterOfPlayerId(PosNum.back);
+            string focusLocalid = TeamSet.Instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(0);
             if (focusLocalid != null)
             {
                  yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(focusLocalid);//确立focusing角色
-                yield return _modelShower.showThisCharacterModel(focusLocalid);
+                yield return _modelShower.ShowThisCharacterModel(focusLocalid);
             }
         }
         yield break;

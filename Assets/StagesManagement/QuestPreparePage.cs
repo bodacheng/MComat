@@ -70,10 +70,10 @@ namespace mainMenu
             }
 
             enterQuest.onClick.RemoveAllListeners();
-            UnityEngine.Events.UnityAction Go = () =>
+            void Go()
             {
                 _preparingScene.askIfLoadFight(sceneMode, _Stage);
-            };
+            }
             enterQuest.onClick.AddListener(Go);
 
             _preparingScene.trySwitchToStep(MainSceneStep.QuestInfo, true);
@@ -86,7 +86,7 @@ namespace mainMenu
         {
             QuestName.text = _StageScriptableObject.battleNameJPG;
             _StageScriptableObject.loadLocalFightFromScript();
-            IEnumerator getPlayerOne = TeamSet.Instance.myTeamMembersByEntryMemberNum(_StageScriptableObject.EntryMemberNum, TeamSet.Instance.storyModeTeamSet);
+            IEnumerator getPlayerOne = TeamSet.Instance.MyTeamMembersByEntryMemberNum(_StageScriptableObject.EntryMemberNum, TeamSet.Instance.storyModeTeamSet);
             yield return getPlayerOne;
             _StageScriptableObject.localFight.HeroSets = (MultiDictionary<int, int, CharacterDataInfo>)getPlayerOne.Current;
             if (_StageScriptableObject.localFight.HeroSets == null)

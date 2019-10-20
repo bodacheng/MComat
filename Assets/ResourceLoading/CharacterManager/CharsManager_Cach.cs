@@ -14,7 +14,6 @@ public partial class CharsManager : MonoBehaviour
             yield break;
         }
         //上面这个应该也是走异步，到时候是个连接数据库流程？
-        RuntimeAnimatorController toLoadRuntimeAnimatorController = AnimationResourceLoader.Instance.getRuntimeAnimatorController(_TempCharacterResourceInfo.type);
         GameObject _TempModel = null;
         AssetBundle modelAsset;
         _loadingProcess = CachManager.Instance.getABFromCach("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
@@ -48,7 +47,6 @@ public partial class CharsManager : MonoBehaviour
         // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
         OutsideDataLink _ODL = _TempModel.GetComponent<OutsideDataLink>();
         Data_Center _TempDATACENTER = _ODL._C;
-        _TempDATACENTER.animator.runtimeAnimatorController = toLoadRuntimeAnimatorController;
         _TempDATACENTER.Zokusei = _TempCharacterResourceInfo._zokusei;
         yield return (_TempDATACENTER.step1Initialize(_TempCharacterResourceInfo.type, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;

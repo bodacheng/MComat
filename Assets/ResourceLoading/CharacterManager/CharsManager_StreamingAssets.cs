@@ -17,12 +17,6 @@ public partial class CharsManager : MonoBehaviour
         GameObject _TempModel = null;
         OutsideDataLink ODL;
         Data_Center _TempDATACENTER;
-        RuntimeAnimatorController toLoadRuntimeAnimatorController = AnimationResourceLoader.Instance.getRuntimeAnimatorController(_TempCharacterResourceInfo.type);
-        if (toLoadRuntimeAnimatorController == null)
-        {
-            FightLoadError.Instance.FightLoadErrors.Add(_TempCharacterResourceInfo.type + "控制器读取失败");
-            yield break;
-        }
         AssetBundle modelAsset;
         IEnumerator enumerator = CachManager.Instance.getABFromStreamingAssets("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
         yield return enumerator;
@@ -56,8 +50,6 @@ public partial class CharsManager : MonoBehaviour
         _TempModel = Instantiate((GameObject)resultObject.asset, Vector3.zero, Quaternion.identity);
         ODL = _TempModel.GetComponent<OutsideDataLink>();
         _TempDATACENTER = ODL._C;
-        _TempDATACENTER.animator.runtimeAnimatorController = toLoadRuntimeAnimatorController;
-
         _TempModel.SetActive(true);
         ODL = _TempModel.GetComponent<OutsideDataLink>();
         _TempDATACENTER = ODL._C;

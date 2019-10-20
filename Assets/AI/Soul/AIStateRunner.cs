@@ -55,7 +55,7 @@ namespace Soul
         private AI_State commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         #endregion
         
-        public void setPlayerMode(bool result)
+        public void SetPlayerMode(bool result)
         {
             this.playerMode = result;
             this._inputManager.setPlayerIsInputting(false);

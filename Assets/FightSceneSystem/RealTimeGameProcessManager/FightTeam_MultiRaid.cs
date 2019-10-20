@@ -24,7 +24,7 @@ public partial class FightTeam : MonoBehaviour
             {
                 realTimeGameProcessManager.SwitchToCMode(a_char, RealTimeGameProcessManager.combatFightPlayerMode);
                 realTimeGameProcessManager.Refresh();
-            }//点角色icon是设置focusingChar，点icon旁边的C按钮才是进入控制
+            } //点角色icon是设置focusingChar，点icon旁边的C按钮才是进入控制
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(characterDataInfo.monsterId);
@@ -34,7 +34,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.transform.localScale = Vector3.one;
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             datacenterHitComboDic.Add(new KeyValuePair<Data_Center, TextMeshProUGUI>(a_char, hitCombo));
-            this._mobileInputsManager.zokuseiButtonRegister(a_char.Zokusei);
+            this._mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
     }
     

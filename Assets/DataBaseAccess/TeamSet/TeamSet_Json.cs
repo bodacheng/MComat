@@ -10,44 +10,44 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public IEnumerator loadMyTeamSetInfoViaJsonFile(string jsonFilename)
+        public IEnumerator LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
         {
             string wholepath = Application.persistentDataPath + "/" + jsonFilename;
-            positionLocalCharKeySet TeamSet;
+            PositionLocalCharKeySet TeamSet;
             if (File.Exists(wholepath))
             {
                 try 
                 {
                     string dataAsJson = File.ReadAllText(wholepath);
-                    TeamSet = JsonConvert.DeserializeObject<positionLocalCharKeySet>(dataAsJson);
+                    TeamSet = JsonConvert.DeserializeObject<PositionLocalCharKeySet>(dataAsJson);
                     List<PosNumWithLocalKey> posNumWithLocalKeys = TeamSet.PosNumsWithLocalKeys.ToList();
-                    List<PosNum> shouldhave = new List<PosNum>();
+                    List<int> shouldhave = new List<int>();
                     foreach(PosNumWithLocalKey posNumWithLocalKey in posNumWithLocalKeys)
                     {
                         if (!shouldhave.Contains(posNumWithLocalKey.posNum))
                             shouldhave.Add(posNumWithLocalKey.posNum);
                     }
-                    if (!shouldhave.Contains(PosNum.back))
+                    if (!shouldhave.Contains(0))
                     {
-                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.back,null));
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(0,null));
                     }
-                    if (!shouldhave.Contains(PosNum.front))
+                    if (!shouldhave.Contains(2))
                     {
-                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.front,null));
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(2,null));
                     }
-                    if (!shouldhave.Contains(PosNum.left))
+                    if (!shouldhave.Contains(1))
                     {
-                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.left,null));
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(1,null));
                     }
-                    if (!shouldhave.Contains(PosNum.right))
+                    if (!shouldhave.Contains(3))
                     {
-                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(PosNum.right,null));
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(3,null));
                     }
                     TeamSet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray(); 
                 }catch (Exception e)
                 {
                     Debug.Log("读取阵容配置文件："+jsonFilename+"发生异常"+ e);
-                    TeamSet = new positionLocalCharKeySet();
+                    TeamSet = new PositionLocalCharKeySet();
                 }
                 yield return TeamSet;
                 yield break;
@@ -55,12 +55,12 @@ namespace dataAccess
             else
             {
                 Debug.Log("读取阵容配置文件："+jsonFilename+"没有找到");
-                yield return new positionLocalCharKeySet();
+                yield return new PositionLocalCharKeySet();
                 yield break;
             }
         }
 
-        public void overrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
+        public void OverrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
         {
             switch (teamSetGameMode)
             {

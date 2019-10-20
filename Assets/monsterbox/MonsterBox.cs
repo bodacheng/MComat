@@ -118,7 +118,6 @@ namespace mainMenu
                 Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);
                 yield break;
             }
-
             if (targetingIcon != null)
             {
                 targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
@@ -128,7 +127,6 @@ namespace mainMenu
                 yield return targetingIcon;
                 yield break;
             }
-
             IEnumerator onecoroutine = null;
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
             {

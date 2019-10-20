@@ -81,7 +81,6 @@ public class Death_State : AI_State
 
             used_velcoity = force_direction.normalized * horizentalForce + Vector3.up * Upforce;
             _Rigidbody.velocity = used_velcoity;
-            this.BS_Main_Health.eatDamage(damageType.deathknockoff);
         }
         this.personality_Events.CloseAllPersonalityEffects();
         this.BS_Main_Health.clearDamageLists();

@@ -11,10 +11,12 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public IEnumerator loadTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
+        public IEnumerator LoadTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
         {
-            GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm();
-            form.sessionId = AccountSet.Instance.sessionId;
+            GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm
+            {
+                sessionId = AccountSet.Instance.sessionId
+            };
             switch (teamSetGameMode)
             {
                 case TeamSetGameMode.story:
@@ -31,12 +33,14 @@ namespace dataAccess
                      GetMonsterTeamOfPlayerModel _GetMonsterTeamOfPlayerModel = model.data;
                      foreach(MonsterTeamOfPlayerModel _monsterTeamOfPlayerModel  in _GetMonsterTeamOfPlayerModel.monsterTeamOfPlayerList)
                      {
-                        positionLocalCharKeySet positionLocalCharKeySet = new positionLocalCharKeySet();
-                        positionLocalCharKeySet.recordId = _monsterTeamOfPlayerModel.monsterTeamOfPlayerId;
-                         positionLocalCharKeySet.setPosMemInfoByLocalID(PosNum.back, _monsterTeamOfPlayerModel.bMonsterOfPlayerId);
-                         positionLocalCharKeySet.setPosMemInfoByLocalID(PosNum.left, _monsterTeamOfPlayerModel.lMonsterOfPlayerId);
-                         positionLocalCharKeySet.setPosMemInfoByLocalID(PosNum.front, _monsterTeamOfPlayerModel.fMonsterOfPlayerId);
-                         positionLocalCharKeySet.setPosMemInfoByLocalID(PosNum.right, _monsterTeamOfPlayerModel.rMonsterOfPlayerId);
+                         PositionLocalCharKeySet positionLocalCharKeySet = new PositionLocalCharKeySet
+                         {
+                             recordId = _monsterTeamOfPlayerModel.monsterTeamOfPlayerId
+                         };
+                         positionLocalCharKeySet.SetPosMemInfoByLocalID(0, _monsterTeamOfPlayerModel.bMonsterOfPlayerId);
+                         positionLocalCharKeySet.SetPosMemInfoByLocalID(1, _monsterTeamOfPlayerModel.lMonsterOfPlayerId);
+                         positionLocalCharKeySet.SetPosMemInfoByLocalID(2, _monsterTeamOfPlayerModel.fMonsterOfPlayerId);
+                         positionLocalCharKeySet.SetPosMemInfoByLocalID(3, _monsterTeamOfPlayerModel.rMonsterOfPlayerId);
                          switch (_monsterTeamOfPlayerModel.teamType)
                          {
                             case "00":
@@ -67,30 +71,32 @@ namespace dataAccess
             yield break;
         }
         
-        public IEnumerator saveTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
+        public IEnumerator SaveTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
         {
-            SetMonsterTeamOfPlayerForm form = new SetMonsterTeamOfPlayerForm();
-            form.sessionId = AccountSet.Instance.sessionId;
+            SetMonsterTeamOfPlayerForm form = new SetMonsterTeamOfPlayerForm
+            {
+                sessionId = AccountSet.Instance.sessionId
+            };
             switch (teamSetGameMode)
             {
                 case TeamSetGameMode.story:
                     form.monsterTeamOfPlayerId = this.storyModeTeamSet.recordId;
-                    string B = this.storyModeTeamSet.getPositionMonsterOfPlayerId(PosNum.back);
-                    string L = this.storyModeTeamSet.getPositionMonsterOfPlayerId(PosNum.left);
-                    string F = this.storyModeTeamSet.getPositionMonsterOfPlayerId(PosNum.front);
-                    string R = this.storyModeTeamSet.getPositionMonsterOfPlayerId(PosNum.right);
+                    string B = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(0);
+                    string L = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(1);
+                    string F = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(2);
+                    string R = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(3);
 
                     form.bMonsterOfPlayerId = (B != null && B.Length == 20) ? B : null;
-                    form.fMonsterOfPlayerId = (F != null && F.Length == 20) ? F : null;
                     form.lMonsterOfPlayerId = (L != null && L.Length == 20) ? L : null;
+                    form.fMonsterOfPlayerId = (F != null && F.Length == 20) ? F : null;
                     form.rMonsterOfPlayerId = (R != null && R.Length == 20) ? R : null;
                     break;
                 case TeamSetGameMode.arena3V3:
                     form.monsterTeamOfPlayerId = this.Arena3V3.recordId;
-                    form.bMonsterOfPlayerId = this.Arena3V3.getPositionMonsterOfPlayerId(PosNum.back);
-                    form.fMonsterOfPlayerId = this.Arena3V3.getPositionMonsterOfPlayerId(PosNum.front);
-                    form.lMonsterOfPlayerId = this.Arena3V3.getPositionMonsterOfPlayerId(PosNum.left);
-                    form.rMonsterOfPlayerId = this.Arena3V3.getPositionMonsterOfPlayerId(PosNum.right);
+                    form.bMonsterOfPlayerId = this.Arena3V3.GetPositionMonsterOfPlayerId(0);
+                    form.lMonsterOfPlayerId = this.Arena3V3.GetPositionMonsterOfPlayerId(1);
+                    form.fMonsterOfPlayerId = this.Arena3V3.GetPositionMonsterOfPlayerId(2);
+                    form.rMonsterOfPlayerId = this.Arena3V3.GetPositionMonsterOfPlayerId(3);
                     break;
             }
             yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel> , SetMonsterTeamOfPlayerForm> 

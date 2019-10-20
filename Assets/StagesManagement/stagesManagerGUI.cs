@@ -140,11 +140,7 @@ public class stagesManagerGUI : Editor {
         else
             Debug.Log("没能读取到角色数据库文件。");
         GUILayout.Space(10);
-        
-        EditorGUILayout.LabelField(" stage信息  ", big_title);
-        _stagesManager.editoringFight.BattleGroundID = EditorGUILayout.IntField("场景ID:", _stagesManager.editoringFight.BattleGroundID);
-        GUILayout.Space(5f);
-        
+                
         EditorGUILayout.LabelField(" 关卡敌人信息  ", title);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("FreeEdit", (focusingMemberRecordID != null) ? ButtonStyle : ButtonStyle_selected))

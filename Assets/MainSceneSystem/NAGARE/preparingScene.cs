@@ -177,7 +177,7 @@ namespace mainMenu
                     IEnumerator localMyChractersProcess = AccountCharsSet.Instance.loadMyOwnedAccountCharacterInfoList();
                     yield return (localMyChractersProcess);
                     //上面这些都缺response判断
-                    yield return TeamSet.Instance.loadTeamSet(TeamSetGameMode.story);
+                    yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
                     yield return (this._MonsterBox.myMonsterBox());//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
                     yield return loadMyStonesProcess;
@@ -207,9 +207,9 @@ namespace mainMenu
         public void LoadFight(SceneMode sceneMode, StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
         {
             FightSceneNote.Instance.nextBattle = stage;
-            _CharSetManager.preventTheseMyModelsFromDestroying(FightSceneNote.Instance.nextBattle.getTeam1EnterRingLocalIds(FightSceneNote.Instance.nextBattle.localFight));
+            _CharSetManager.PreventTheseMyModelsFromDestroying(FightSceneNote.Instance.nextBattle.getTeam1EnterRingLocalIds(FightSceneNote.Instance.nextBattle.localFight));
             FightSceneModeManager.Instance.setSceneMode(sceneMode);
-            SceneManager.LoadScene(stage.BattleGroundID);
+            SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
         }
 
         [EnumAction(typeof(MainSceneStep))]
@@ -241,7 +241,7 @@ namespace mainMenu
             switch (processesRunner.currentProcess.thisProcessStep)
             {
                 case MainSceneStep.SelfFightFront:
-                    yield return _SelfFightManager.monsterIConButton(localId);
+                    yield return _SelfFightManager.MonsterIConButton(localId);
                     break;
                 case MainSceneStep.MemberDetail:
                     yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(localId);//确立focusing角色

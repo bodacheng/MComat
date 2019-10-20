@@ -62,28 +62,29 @@ public class RealTimeGameProcessManager : MonoBehaviour
         
         if (focusingChar == null)
         {
-            _mobileInputsManager.turnOffButtons();
+            _mobileInputsManager.TurnOffButtons();
         }
         else
         {
-            _mobileInputsManager.focusCharInputs(focusingChar.AIStateRunner.getInputManager(),focusingChar.Zokusei);
-            _mobileInputsManager.turnOnButtons();
+            _mobileInputsManager.FocusCharInputs(focusingChar.AIStateRunner.getInputManager(),focusingChar.Zokusei);
+            _mobileInputsManager.TurnOnButtons();
         }
 	}
     
-	public void SwitchToCMode(Data_Center _char,bool playerControll)//要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
+	public void SwitchToCMode(Data_Center _char,bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
     {
         if (focusingChar != null)
-            focusingChar.AIStateRunner.setPlayerMode(false);
+            focusingChar.AIStateRunner.SetPlayerMode(false);
         focusingChar = _char;
         if (focusingChar != null)
-            focusingChar.AIStateRunner.setPlayerMode(playerControll);
+            focusingChar.AIStateRunner.SetPlayerMode(playerControll);
     }
 
     public void Clear()// 这个我们还没有添加在合理的地方。
     {
         FightTeam1.Clear();
         FightTeam2.Clear();
+        _mobileInputsManager.Clear();
     }
     
     private List<Transform> outter_watchetargets = new List<Transform>();

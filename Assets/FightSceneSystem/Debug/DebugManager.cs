@@ -457,24 +457,11 @@ public class DebugManager : MonoBehaviour {
 
         if (TeamConfig != null)
         {
-            RuntimeAnimatorController toLoadRuntimeAnimatorController = AnimationResourceLoader.Instance.getRuntimeAnimatorController(type);
-            //Debug.Log("角色"+ABResourceName+"读取了动画控制器"+ toLoadRuntimeAnimatorController);
-            //AssetBundle modelAsset = AssetBundle.LoadFromFile(Application.dataPath + "/StreamingAssets/charPretabs/" + type +"/" + ABResourceName);
-            if (toLoadRuntimeAnimatorController == null)
-            {
-                FightLoadError.Instance.FightLoadErrors.Add(type + "控制器读取失败");
-                yield break;
-            }
-
             Data_Center aI_DATA_CENTER;
             OutsideDataLink outsideDataLink = fightChar.GetComponent<OutsideDataLink>();
             if (fightChar != null && outsideDataLink != null)
             {
                 aI_DATA_CENTER = outsideDataLink._C;
-                if (aI_DATA_CENTER)
-                {
-                    aI_DATA_CENTER.animator.runtimeAnimatorController = toLoadRuntimeAnimatorController;
-                }
             }
             else
             {

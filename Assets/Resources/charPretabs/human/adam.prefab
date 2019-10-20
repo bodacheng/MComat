@@ -24975,12 +24975,18 @@ Animator:
   m_GameObject: {fileID: 4890155015453887327}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 90a222cf37e6c41b49d78c64be992ac1, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f6df8bfec5dac42c6a42e24e820cadb1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
+    'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tTransform 'Bip001 R Finger11'\n\tTransform
+    'Bip001 L Finger3'\n\tTransform 'Bip001 R Toe0'\n\tTransform 'Bip001 Spine1'\n\tTransform
+    'Bip001 L Finger2'\n\tTransform 'Bip001 L Finger12'\n\tand more ...\n\tFrom animation
+    clip 'hurt'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0

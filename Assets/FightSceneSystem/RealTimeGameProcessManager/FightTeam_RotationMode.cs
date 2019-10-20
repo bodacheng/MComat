@@ -44,7 +44,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.transform.localScale = Vector3.one;
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             datacenterHitComboDic.Add(new KeyValuePair<Data_Center, TextMeshProUGUI>(a_char, hitCombo));
-            this._mobileInputsManager.zokuseiButtonRegister(a_char.Zokusei);
+            this._mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
     }
     

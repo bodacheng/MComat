@@ -227,7 +227,7 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
         }
 
-        if (processingHitBox.danMuTest)
+        if (processingHitBox.danMuTest != null)
         {
             processingHitBox.transform.position = intPos;
             processingHitBox.danMuTest.startOff(intPos,this.transform.rotation);

@@ -130,12 +130,12 @@ namespace mainMenu
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 this._SkillsPrintOut.focusingCharacterData = null;
-                IEnumerator readshowmodel = _modelShower.showThisCharacterModel(null);
+                IEnumerator readshowmodel = _modelShower.ShowThisCharacterModel(null);
                 yield return readshowmodel;
                 yield break;
             }else{
                 this._SkillsPrintOut.focusingResourceNum = _focusingCharacterDataInfo.monsterId;
-                IEnumerator readshowmodel = _modelShower.showThisCharacterModel(_focusingCharacterDataInfo.monsterOfPlayerId);
+                IEnumerator readshowmodel = _modelShower.ShowThisCharacterModel(_focusingCharacterDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)

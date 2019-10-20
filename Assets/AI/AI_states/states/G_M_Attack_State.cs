@@ -85,6 +85,9 @@ public class G_M_Attack_State : AI_State {
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
+        this.Animation_Manger.Animator.SetTrigger("face_reset");
+        this.Animation_Manger.Animator.SetTrigger("confident");
+        
         this._DATA_CENTER.setGravitySwitch(true);
         this._Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();

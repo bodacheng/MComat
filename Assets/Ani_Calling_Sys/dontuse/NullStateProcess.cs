@@ -5,15 +5,6 @@ using UnityEngine.Animations;
 
 public class NullStateProcess : StateMachineBehaviour
 {
-    
-    bool start = true;
-    float offset = 0.0f;
-
-    void OnEnable()
-    {
-       
-    }
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         AnimatorTransitionInfo _AnimatorTransitionInfo = animator.GetAnimatorTransitionInfo(layerIndex);
@@ -34,12 +25,12 @@ public class NullStateProcess : StateMachineBehaviour
         }
     }
 
-    public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetLayerWeight(layerIndex, 1);
     }
 
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         AnimatorTransitionInfo _AnimatorTransitionInfo = animator.GetAnimatorTransitionInfo(layerIndex);
 

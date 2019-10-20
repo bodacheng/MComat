@@ -59,17 +59,8 @@ public partial class Data_Center : MonoBehaviour
     public bool onBattleGroundBundary = false;
     public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
 
-    public ReactiveProperty<bool> IsDead { get; private set; } = new ReactiveProperty<bool>(false);
-    
-    public void SetHp(float hp)
-    {
-        if (hp <= 0f)
-        {
-            AIStateRunner.changeState("Death");
-            IsDead.Value = true;
-        }
-    }
-    
+    public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
+        
     public bool ifPreparedForBattle()
     {
         if (phase1Initialized && phase2Initialized)

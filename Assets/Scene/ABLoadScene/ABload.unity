@@ -802,8 +802,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fightScriptPath: 
   FightScript: {fileID: 0}
-  editoringFight:
-    BattleGroundID: 0
   _FightReward:
     intell: 0
     diamond: 0

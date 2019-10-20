@@ -83,7 +83,8 @@ public class mobileInputsManager : MonoBehaviour {
     //2019.3.26 折腾了整整两天的移动端按键粒子特效。留下的唯一一点不足是，没有针对防御状态，rush状态的有无来决定防御键是否显示，也没有针对未来可能出现的耗气式防御或rush状态来刷新两个键的显示状态。
     public Camera fxCamera;
     public Transform effectsParent;
-    public IDictionary<zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<zokusei, zokuseiButtonEffectsGroup>();
+    static IDictionary<zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<zokusei, zokuseiButtonEffectsGroup>();
+    static private zokuseiButtonEffectsGroup _focusingButtonEffectsGroup;
     
     public Button Attack;
     public Button Fire1;
@@ -97,8 +98,7 @@ public class mobileInputsManager : MonoBehaviour {
     static Button s_Fire2;
     static Button s_Defend;
     static Button s_Dash;
-    static private zokuseiButtonEffectsGroup _focusingButtonEffectsGroup;
-    
+        
     private IDictionary<inputs_defined, int> lastSkillSPlevel = new Dictionary<inputs_defined, int>()
     {
         {inputs_defined.Attack,-1},
@@ -116,66 +116,53 @@ public class mobileInputsManager : MonoBehaviour {
         s_Defend = Defend;
         s_Dash = Dash;
     }
+    
+    public void Clear()
+    {
+        zokuseiButtonEffects.Clear();
+        _focusingButtonEffectsGroup = null;
+    }
 
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
-    void switchZokuseiButtons(zokusei zokusei)
+    void SwitchZokuseiButtons(zokusei zokusei)
     {
         if (_focusingButtonEffectsGroup != null)
-        {
-            _focusingButtonEffectsGroup.close();
-        }
+            _focusingButtonEffectsGroup.Close();
         if (zokuseiButtonEffects.ContainsKey(zokusei))
         {
             _focusingButtonEffectsGroup = zokuseiButtonEffects[zokusei];
-            _focusingButtonEffectsGroup.open(ButtonEffectInFxCameraWorldSpace(Defend,5),ButtonEffectInFxCameraWorldSpace(Dash,5));
+            _focusingButtonEffectsGroup.Open(ButtonEffectInFxCameraWorldSpace(Defend,5),ButtonEffectInFxCameraWorldSpace(Dash,5));
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
         }
     }
 
-    public void focusCharInputs(inputManager focusingCharInputManger,zokusei zokusei)
+    public void FocusCharInputs(inputManager focusingCharInputManger,zokusei zokusei)
     {
         mobileInputsManager.watchingInputManger = focusingCharInputManger;
         if (mobileInputsManager.watchingInputManger != null)
         {
-            switchZokuseiButtons(zokusei);
+            SwitchZokuseiButtons(zokusei);
         }else{
-            turnOffButtons();
+            TurnOffButtons();
         }
     }
 
-    public void zokuseiButtonRegister(zokusei zokusei)
+    public void ZokuseiButtonRegister(zokusei zokusei)
     {
+        zokuseiButtonEffectsGroup zokuseiButtons = new zokuseiButtonEffectsGroup();
+        zokuseiButtons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
+        zokuseiButtons.Close();
         if (!zokuseiButtonEffects.ContainsKey(zokusei))
         {
-            zokuseiButtonEffectsGroup zokuseiBUttons = new zokuseiButtonEffectsGroup();
-            zokuseiBUttons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
-            zokuseiBUttons.close();
-            zokuseiButtonEffects.Add(zokusei, zokuseiBUttons);
-        }
-        else { 
-            if (zokuseiButtonEffects[zokusei] == null)
-            {
-                zokuseiButtonEffectsGroup zokuseiBUttons = new zokuseiButtonEffectsGroup();
-                zokuseiBUttons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
-                zokuseiBUttons.close();
-                zokuseiButtonEffects[zokusei] = zokuseiBUttons;
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        if (watchingInputManger != null)
-        {
-            //_inputAdvance.update();
-            refreshButtonPattern();
+            zokuseiButtonEffects.Add(zokusei, zokuseiButtons);
+        } else {
+            zokuseiButtonEffects[zokusei] = zokuseiButtons;
         }
     }
 
     static ParticleSystem targetexplode;
-    public static void skillbuttonexplosion(inputs_defined inputs_Defined,int eX)
+    public static void Skillbuttonexplosion(inputs_defined inputs_Defined,int eX)
     {
         switch(eX)
         {
@@ -221,8 +208,7 @@ public class mobileInputsManager : MonoBehaviour {
     // 根据玩家的技能列表来决定防御，机动，三攻击键分别存在与否。
     // 然后，refresh button是要看情况的，攻击键要么是变成空按钮，要么应该是就没有按钮。。。？
     // 而防御与机动则是确定一直显示。
-
-    void startPressing(Button targetBUtton)
+    private void StartPressing(Button targetBUtton)
     {
         targetButtonPos = ButtonEffectInFxCameraWorldSpace(targetBUtton,7);
         if (_focusingButtonEffectsGroup != null)
@@ -232,27 +218,27 @@ public class mobileInputsManager : MonoBehaviour {
         }
     }
 
-    void stopPressing()
+    private void StopPressing()
     {
         if (_focusingButtonEffectsGroup != null)
             _focusingButtonEffectsGroup.pressingExplosion.Stop();
     }
 
-    public void attackButtonDown()
+    public void AttackButtonDown()
     {
         if (watchingInputManger != null)
         {
             watchingInputManger.Attack.input_state = true;
         }
-        startPressing(Attack);
+        StartPressing(Attack);
     }
-    public void attackButtonUp()
+    public void AttackButtonUp()
     {
         if (watchingInputManger != null)
         {
             watchingInputManger.Attack.input_state = false;
         }
-        stopPressing();
+        StopPressing();
     }
 
     public void Fire1ButtonDown()
@@ -261,7 +247,7 @@ public class mobileInputsManager : MonoBehaviour {
         {
             watchingInputManger.Fire1.input_state = true;
         }
-        startPressing(Fire1);
+        StartPressing(Fire1);
     }
     public void Fire1ButtonUp()
     {
@@ -269,7 +255,7 @@ public class mobileInputsManager : MonoBehaviour {
         {
             watchingInputManger.Fire1.input_state = false;
         }
-        stopPressing();
+        StopPressing();
     }
 
     public void Fire2ButtonDown()
@@ -278,7 +264,7 @@ public class mobileInputsManager : MonoBehaviour {
         {
             watchingInputManger.Fire2.input_state = true;
         }
-        startPressing(Fire2);
+        StartPressing(Fire2);
     }
     public void Fire2ButtonUp()
     {
@@ -286,7 +272,7 @@ public class mobileInputsManager : MonoBehaviour {
         {
             watchingInputManger.Fire2.input_state = false;
         }
-        stopPressing();
+        StopPressing();
     }
 
     public void DefendDown()
@@ -296,7 +282,7 @@ public class mobileInputsManager : MonoBehaviour {
             watchingInputManger.Defend.input_state = true;
             watchingInputManger.Defend_Cancel.input_state = false;
         }
-        startPressing(Defend);
+        StartPressing(Defend);
     }
 
     public void DefendUp()
@@ -306,7 +292,7 @@ public class mobileInputsManager : MonoBehaviour {
             watchingInputManger.Defend_Cancel.input_state = true;
             watchingInputManger.Defend.input_state = false;
         }
-        stopPressing();
+        StopPressing();
     }
 
     public void RushDown()
@@ -315,7 +301,7 @@ public class mobileInputsManager : MonoBehaviour {
         {
             watchingInputManger.Dash.input_state = true;
         }
-        startPressing(Dash);
+        StartPressing(Dash);
     }
 
     public void RushUp()
@@ -324,10 +310,10 @@ public class mobileInputsManager : MonoBehaviour {
         {
             watchingInputManger.Dash.input_state = false;
         }
-        stopPressing();
+        StopPressing();
     }
 
-    public void turnOnButtons()
+    public void TurnOnButtons()
     {
         Attack.gameObject.SetActive(true);
         Fire1.gameObject.SetActive(true);
@@ -351,7 +337,7 @@ public class mobileInputsManager : MonoBehaviour {
         };
     }
 
-    public void turnOffButtons()
+    public void TurnOffButtons()
     {
         Attack.gameObject.SetActive(false);
         Fire1.gameObject.SetActive(false);
@@ -371,11 +357,13 @@ public class mobileInputsManager : MonoBehaviour {
             watchingInputManger = null;
         }
         if (_focusingButtonEffectsGroup != null)
-            _focusingButtonEffectsGroup.close();
+            _focusingButtonEffectsGroup.Close();
     }
         
-    public void refreshButtonPattern()
+    public void RefreshButtonPattern()
     {
+        if (watchingInputManger == null)
+            return;
         //那么这里面就完全不包括对防御和机动键的处理了。。。去看nextSkillSPlevel这个东西里面也是只有三个攻击键。
         //如此一来我们是打算把防御和机动键给做成完全固定的。
         foreach (KeyValuePair<inputs_defined, int> _pair in watchingInputManger.nextSkillSPlevel)
@@ -384,16 +372,16 @@ public class mobileInputsManager : MonoBehaviour {
             {
                 case inputs_defined.Attack:
                     if (_pair.Value != lastSkillSPlevel[_pair.Key])
-                        changeButtonPatternNewTest(Attack, _pair.Value);
+                        ChangeButtonPatternNewTest(Attack, _pair.Value);
                     break;
                 case inputs_defined.Fire1:
                     if (_pair.Value != lastSkillSPlevel[_pair.Key])
-                        changeButtonPatternNewTest(Fire1, _pair.Value);
+                        ChangeButtonPatternNewTest(Fire1, _pair.Value);
                     break;
                 case inputs_defined.Fire2:
                     if (_pair.Value != lastSkillSPlevel[_pair.Key])
                     {
-                        changeButtonPatternNewTest(Fire2, _pair.Value);
+                        ChangeButtonPatternNewTest(Fire2, _pair.Value);
                     }
                     break;
             }
@@ -425,10 +413,10 @@ public class mobileInputsManager : MonoBehaviour {
     }
     
     Vector3 targetButtonPos;
-    private void changeButtonPatternNewTest(Button button,int sp_level)//按钮切换也可以在这里做文章
+    private void ChangeButtonPatternNewTest(Button button,int sp_level)//按钮切换也可以在这里做文章
     {
         targetButtonPos = ButtonEffectInFxCameraWorldSpace(button,5);
-        _focusingButtonEffectsGroup.refreshforbutton(button,sp_level,targetButtonPos);
+        _focusingButtonEffectsGroup.Refreshforbutton(button,sp_level,targetButtonPos);
     }
 
     //void changeButtonPatternParticleVer(Button button,EX sp_level)//按钮切换也可以在这里做文章

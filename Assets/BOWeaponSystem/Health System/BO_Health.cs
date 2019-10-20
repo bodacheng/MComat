@@ -220,6 +220,20 @@ public partial class BO_Health : MonoBehaviour
                 if (_dmg.fromWeapon.GetWeaponOwnerHealth() != null)
                     _dmg.fromWeapon.GetWeaponOwnerHealth().HitCountPlus();
                 CurrentHp.Value -= _dmg.AT;
+                if (CurrentHp.Value <= 0)
+                {
+                    v_Damage deathknockOff;
+                    deathknockOff = new v_Damage(
+                                  damageType.deathknockoff,
+                                  _dmg.force_direction,
+                                  _dmg.damageHappenPoint,
+                                  _dmg.toWho,
+                                  _dmg.fromWeapon);
+                    this.ApplyDamage(deathknockOff);
+                    _Center.IsDead.Value = true;
+                    this._Center.AIStateRunner.changeState("Death");
+                    break;//重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
+                }
             }
             
             switch(_dmg.specialApply)
@@ -238,7 +252,7 @@ public partial class BO_Health : MonoBehaviour
                     break;
                 default:
                     break;
-            }
+            }            
         }
         v_Damages.Clear();
     }

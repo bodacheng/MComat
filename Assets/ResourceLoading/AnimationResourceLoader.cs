@@ -20,7 +20,7 @@ public class AnimationResourceLoader
     
     public static IDictionary<string, AnimationClip> AnimationClipDic = new Dictionary<string, AnimationClip>();
     public static IDictionary<string, List<AnimationClip>> SeriesAnimationClipsDic = new Dictionary<string, List<AnimationClip>>();//这个是用来记录那些一个包里好几个动画的
-    public IDictionary<string, RuntimeAnimatorController> RuntimeAnimatorControllerIdic = new Dictionary<string, RuntimeAnimatorController>();
+    //public IDictionary<string, RuntimeAnimatorController> RuntimeAnimatorControllerIdic = new Dictionary<string, RuntimeAnimatorController>();
     
     //战斗场景下角色实时读取动作走的是这个，所以必然的我们有了getAnimationClip和ConstructAnimationClip
     public AnimationClip getAnimationClip(string key)
@@ -40,14 +40,7 @@ public class AnimationResourceLoader
         }
         return null;
     }
-    
-    public RuntimeAnimatorController getRuntimeAnimatorController(string type)
-    {
-        RuntimeAnimatorController toLoadRuntimeAnimatorController;
-        RuntimeAnimatorControllerIdic.TryGetValue(type,out toLoadRuntimeAnimatorController);
-        return toLoadRuntimeAnimatorController;
-    }
-    
+       
     public IEnumerator LoadAnimationPackFromCache(string url_withoutfilename,string dic_key, string packABName)
     {
         IEnumerator task = CachManager.Instance.DownloadAndCacheExactFile(url_withoutfilename,packABName);
@@ -276,65 +269,12 @@ public class AnimationResourceLoader
             Debug.Log("没从StreamingAssets里找到动画ab包：" + Application.dataPath + "/StreamingAssets/animClips/" + type + "/" + additionalPath + "/" + clip_name);
         }
     }
-    
-    public IEnumerator LoadAnimatorFromCache(string url_withoutfilename,string dic_key, string packABName)
-    {
-        IEnumerator task = CachManager.Instance.DownloadAndCacheExactFile(url_withoutfilename,packABName);
-        yield return task;
-        task = CachManager.Instance.getABFromCach(url_withoutfilename,packABName);
-        yield return task;
-
-        AssetBundle readingBundle = null;
         
-        if (task.Current != null)
-            readingBundle = (AssetBundle)task.Current;
-        else
-            readingBundle = null;
-
-        if (readingBundle != null)
-        {
-            Debug.Log("定位到animator："+dic_key);
-            RuntimeAnimatorController toLoadRuntimeAnimatorController = readingBundle.LoadAsset<RuntimeAnimatorController>(packABName);
-            readingBundle.Unload(false);
-            if (toLoadRuntimeAnimatorController != null)
-            {
-                Debug.Log("generic_controller"+dic_key+"貌似提取成功");
-                if (AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.ContainsKey(dic_key))
-                    AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic[dic_key] = toLoadRuntimeAnimatorController;
-                else
-                    AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.Add(dic_key, toLoadRuntimeAnimatorController);
-            }else{
-                Debug.Log("?");
-            }
-        }else{
-            Debug.Log("generic_controller"+dic_key+"包获取失败");
-        }
-        yield break;
-    }
-    
     // 这个函数的构造就是说，我们虽然正式版本游戏各个type角色的攻击动画都是ab包放一起，但开发环境下他们还是按着自身特点放在那几个文件夹下面，
     // 那么测试环境下我们就干脆把所有resource文件夹下的攻击类动画全load来方便提取。
     // 正式版本游戏是根据脚本决定load哪些包从而构成字典的，不会产生load不用动画的问题
     public IEnumerator prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(string type)
     {
-        if (!RuntimeAnimatorControllerIdic.ContainsKey(type))
-        {
-            RuntimeAnimatorController toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
-            if (toLoadRuntimeAnimatorController != null)
-                RuntimeAnimatorControllerIdic.Add(type, toLoadRuntimeAnimatorController);
-            else
-                Debug.Log("找不到动画控制器："+"Animations/" + type + "/generic_controller");
-        }else{
-            if (RuntimeAnimatorControllerIdic[type] == null)
-            {
-                RuntimeAnimatorController toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
-                if (toLoadRuntimeAnimatorController != null)
-                    RuntimeAnimatorControllerIdic[type] = toLoadRuntimeAnimatorController;
-                else
-                    Debug.Log("找不到动画控制器："+"Animations/" + type + "/generic_controller");
-            }
-        }
-               
         List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
@@ -386,21 +326,66 @@ public class AnimationResourceLoader
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
-        
-        foreach (KeyValuePair<string,AnimationClip> keyValuePair in AnimationClipDic)
-        {
-            foreach (AnimationEvent e in keyValuePair.Value.events)
-            {
-                if (e.functionName == "SetAllBodyMarkerManagersIn")
-                {
-                    //Debug.Log("SetAllBodyMarkerManagersIn:" + keyValuePair.Key);
-                }
-                if (e.functionName == "MagicForward" && e.stringParameter == "xuanfeng")
-                {
-                    //Debug.Log("MagicForward:" + keyValuePair.Key);
-                }
-            }
-        }
         yield break;
     }
 }
+
+    //public IEnumerator LoadAnimatorFromCache(string url_withoutfilename,string dic_key, string packABName)
+    //{
+    //    IEnumerator task = CachManager.Instance.DownloadAndCacheExactFile(url_withoutfilename,packABName);
+    //    yield return task;
+    //    task = CachManager.Instance.getABFromCach(url_withoutfilename,packABName);
+    //    yield return task;
+
+    //    AssetBundle readingBundle = null;
+        
+    //    if (task.Current != null)
+    //        readingBundle = (AssetBundle)task.Current;
+    //    else
+    //        readingBundle = null;
+
+    //    if (readingBundle != null)
+    //    {
+    //        Debug.Log("定位到animator："+dic_key);
+    //        RuntimeAnimatorController toLoadRuntimeAnimatorController = readingBundle.LoadAsset<RuntimeAnimatorController>(packABName);
+    //        readingBundle.Unload(false);
+    //        if (toLoadRuntimeAnimatorController != null)
+    //        {
+    //            Debug.Log("generic_controller"+dic_key+"貌似提取成功");
+    //            if (AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.ContainsKey(dic_key))
+    //                AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic[dic_key] = toLoadRuntimeAnimatorController;
+    //            else
+    //                AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.Add(dic_key, toLoadRuntimeAnimatorController);
+    //        }else{
+    //            Debug.Log("?");
+    //        }
+    //    }else{
+    //        Debug.Log("generic_controller"+dic_key+"包获取失败");
+    //    }
+    //    yield break;
+    //}
+    
+    //public RuntimeAnimatorController getRuntimeAnimatorController(string type)
+    //{
+    //    RuntimeAnimatorController toLoadRuntimeAnimatorController;
+    //    RuntimeAnimatorControllerIdic.TryGetValue(type,out toLoadRuntimeAnimatorController);
+    //    return toLoadRuntimeAnimatorController;
+    //}
+    
+        //if (!RuntimeAnimatorControllerIdic.ContainsKey(type))
+        //{
+        //    RuntimeAnimatorController toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+        //    if (toLoadRuntimeAnimatorController != null)
+        //        RuntimeAnimatorControllerIdic.Add(type, toLoadRuntimeAnimatorController);
+        //    else
+        //        Debug.Log("找不到动画控制器："+"Animations/" + type + "/generic_controller");
+        //}else{
+        //    if (RuntimeAnimatorControllerIdic[type] == null)
+        //    {
+        //        RuntimeAnimatorController toLoadRuntimeAnimatorController = Resources.Load("Animations/" + type + "/generic_controller", typeof(RuntimeAnimatorController)) as RuntimeAnimatorController;
+        //        if (toLoadRuntimeAnimatorController != null)
+        //            RuntimeAnimatorControllerIdic[type] = toLoadRuntimeAnimatorController;
+        //        else
+        //            Debug.Log("找不到动画控制器："+"Animations/" + type + "/generic_controller");
+        //    }
+        //}

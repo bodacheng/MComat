@@ -117,7 +117,7 @@ namespace Soul
                 if (playerMode || _inputManager.ifPlayerIsInputting())
                 {
                     if (mobileInputsManager.watchingInputManger == this._inputManager)
-                        mobileInputsManager.skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
+                        mobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
                     _SkillCancelFlag.turn_off_flag();
                     changeState(avaliable_casual_Transitions[0].AI_State_Number);
                     return;
@@ -170,7 +170,7 @@ namespace Soul
         {
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
             if (mobileInputsManager.watchingInputManger == this._inputManager)
-                 mobileInputsManager.skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].SPLevel);
+                 mobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].SPLevel);
             _SkillCancelFlag.turn_off_flag();
             changeState(TransitionsToRun[next].AI_State_Number);
         }
@@ -217,7 +217,7 @@ namespace Soul
                         if (this.checkInput(State_Rate_Set.enterInput))
                         {
                             if (mobileInputsManager.watchingInputManger == this._inputManager)
-                                 mobileInputsManager.skillbuttonexplosion(State_Rate_Set.enterInput, State_Rate_Set.splevel);
+                                 mobileInputsManager.Skillbuttonexplosion(State_Rate_Set.enterInput, State_Rate_Set.splevel);
                             changeState(State_Rate_Set.StateKey);
                             return;
                         }
@@ -256,7 +256,7 @@ namespace Soul
         {
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
             if (mobileInputsManager.watchingInputManger == this._inputManager)
-                 mobileInputsManager.skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].splevel);
+                 mobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].splevel);
             changeState(TransitionsToRun[next].StateKey);
         }
     }

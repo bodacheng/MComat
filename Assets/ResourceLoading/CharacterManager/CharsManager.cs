@@ -17,7 +17,7 @@ public partial class CharsManager : MonoBehaviour {
         DontDestroyOnLoad(dontDestroyOnLoadParent);
     }
     
-    public void preventTheseMyModelsFromDestroying(List<string> myCharLocalIDForNextBattle)
+    public void PreventTheseMyModelsFromDestroying(List<string> myCharLocalIDForNextBattle)
     {
         if (myCharLocalIDForNextBattle == null)
             return;
@@ -46,27 +46,15 @@ public partial class CharsManager : MonoBehaviour {
                 {
                     continue;
                 }
-                switch ((PosNum)key)
+                if (Team1StandPoints[key] != null)
                 {
-                    case PosNum.back:
-                        character_data_Center.WholeT.transform.position = Team1StandPoints[0].position;
-                        character_data_Center.WholeT.transform.rotation = Team1StandPoints[0].rotation;
-                        break;
-                    case PosNum.left:
-                        character_data_Center.WholeT.transform.position = Team1StandPoints[1].position;
-                        character_data_Center.WholeT.transform.rotation = Team1StandPoints[1].rotation;
-                        break;
-                    case PosNum.front:
-                        character_data_Center.WholeT.transform.position = Team1StandPoints[2].position;
-                        character_data_Center.WholeT.transform.rotation = Team1StandPoints[2].rotation;
-                        break;
-                    case PosNum.right:
-                        character_data_Center.WholeT.transform.position = Team1StandPoints[3].position;
-                        character_data_Center.WholeT.transform.rotation = Team1StandPoints[3].rotation;
-                        break;
+                    character_data_Center.WholeT.transform.position = Team1StandPoints[key].position;
+                    character_data_Center.WholeT.transform.rotation = Team1StandPoints[key].rotation;
+                    character_data_Center.WholeT.parent = null;
+                    character_data_Center.WholeT.gameObject.SetActive(true);
+                }else{
+                    Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
                 }
-                character_data_Center.WholeT.parent = null;
-                character_data_Center.WholeT.gameObject.SetActive(true);
             }
         }
                 
@@ -79,43 +67,31 @@ public partial class CharsManager : MonoBehaviour {
                 {
                     continue;
                 }
-                switch ((PosNum)key)
+                if (Team2StandPoints[key] != null)
                 {
-                    case PosNum.back:
-                        character_data_Center.WholeT.transform.position = Team2StandPoints[0].position;
-                        character_data_Center.WholeT.transform.rotation = Team2StandPoints[0].rotation;
-                        break;
-                    case PosNum.left:
-                        character_data_Center.WholeT.transform.position = Team2StandPoints[1].position;
-                        character_data_Center.WholeT.transform.rotation = Team2StandPoints[1].rotation;
-                        break;
-                    case PosNum.front:
-                        character_data_Center.WholeT.transform.position = Team2StandPoints[2].position;
-                        character_data_Center.WholeT.transform.rotation = Team2StandPoints[2].rotation;
-                        break;
-                    case PosNum.right:
-                        character_data_Center.WholeT.transform.position = Team2StandPoints[3].position;
-                        character_data_Center.WholeT.transform.rotation = Team2StandPoints[3].rotation;
-                        break;
+                    character_data_Center.WholeT.transform.position = Team2StandPoints[key].position;
+                    character_data_Center.WholeT.transform.rotation = Team2StandPoints[key].rotation;
+                    character_data_Center.WholeT.parent = null;
+                    character_data_Center.WholeT.gameObject.SetActive(true);
+                }else{
+                    Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
                 }
-                character_data_Center.WholeT.parent = null;
-                character_data_Center.WholeT.gameObject.SetActive(true);
             }
         }
     }
  
     //这个函数是建立在这样的前提下：我们认为从数据库获取的玩家拥有角色，localid是正常的(不重复)
     //如果localid产生重复的情况下这个函数被执行，将产生大量紊乱。
-    public IEnumerator buildTheseMyModels(GetMonsterOfPlayerDetailModel[] myChars)
+    public IEnumerator BuildTheseMyModels(GetMonsterOfPlayerDetailModel[] myChars)
     {
         foreach(GetMonsterOfPlayerDetailModel one in myChars)
         {
             if (one != null)
-                yield return (buildShowModel(one));
+                yield return (BuildShowModel(one));
         }
     }
 
-    public IEnumerator buildShowModel(GetMonsterOfPlayerDetailModel myChar)
+    public IEnumerator BuildShowModel(GetMonsterOfPlayerDetailModel myChar)
     {
         if (myChar == null)
         {

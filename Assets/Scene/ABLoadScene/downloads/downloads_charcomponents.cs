@@ -27,17 +27,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL +"/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key + "/basic_knockoffs","basic_knockoffs"));
             // 上面这些就是说什么呢。。各个type的伤害动作包和基础动作包就不放进DownLoadMissionDic进行之后的集中下载了。上面的函数已经执行下载处理了。
             // 但上面这些存在一个比较大的坑就是这些下载过程直接把所有type角色的伤害动画和基础动画都载入了内存，如果这样做负担很大我们要研究对上面两个函数进行修改。
-            // 这个地方还差个各个type的generic_controller包下载的问题。
-            
-            ////// 寻找对应type的animator //////////////////
-            RuntimeAnimatorController _RuntimeAnimatorController;
-            AnimationResourceLoader.Instance.RuntimeAnimatorControllerIdic.TryGetValue(keyValuePair.Key , out _RuntimeAnimatorController);
-            if (_RuntimeAnimatorController == null)
-            {
-                IEnumerator _loadingProcess = AnimationResourceLoader.Instance.
-                LoadAnimatorFromCache(ResourceLordSceneStarter.BundleURL + "/animClips/"+ keyValuePair.Key  + "/animator", keyValuePair.Key , "generic_controller");
-                yield return _loadingProcess;
-            }
+            // 这个地方还差个各个type的generic_controller包下载的问题。            
         }
         yield return downloadingProcess();
     }

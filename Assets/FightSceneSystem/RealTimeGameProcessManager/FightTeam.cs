@@ -61,7 +61,7 @@ public partial class FightTeam : MonoBehaviour
         foreach(Data_Center a_char in teamMembers.values)
         {
             a_char.BO_Health.CurrentHp.Value = 300f;
-            a_char.BO_Health.CurrentHp.Subscribe(x => {a_char.SetHp(x); RefreshHPBar(a_char,x);});            
+            a_char.BO_Health.CurrentHp.Subscribe(x => {RefreshHPBar(a_char,x);});            
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
             a_char.BO_Health._ComboHitCount.HitCount.Value = 0;

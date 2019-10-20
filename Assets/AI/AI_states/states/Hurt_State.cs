@@ -117,7 +117,7 @@ public class Hurt_State : AI_State {
         this.RotateToDirection(-force_direction,0.5f,true);
         this.time_counter = 0f;
         this.personality_Events.CloseAllPersonalityEffects();
-
+        this.Animation_Manger.Animator.SetTrigger("face_reset");
         this.Animation_Manger.Animator.SetTrigger("hurt");
     }
 

@@ -178,7 +178,7 @@ public class NetFightScene : MonoBehaviour {
             }
         }
         
-        _CharSetManager.preventTheseMyModelsFromDestroying(dontdestroy);
+        _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
         _RealTimeGameProcessManager.Clear();
         MainMenuNote.Instance.goingtostep = MainSceneStep.frontPage;
         SceneManager.LoadScene(1);

@@ -56,6 +56,6 @@ public class TeamEditFront : MainSceneProcess
         {
             Debug.Log("严重错误");yield break;
         }
-        yield return this._TeamEditManager.monsterIConButton(_AccountCharacterInfo.monsterOfPlayerId,TeamEditManager.focusingPosNum);
+        yield return this._TeamEditManager.MonsterIConButton(_AccountCharacterInfo.monsterOfPlayerId,TeamEditManager.focusingPosNum);
     }
 }
