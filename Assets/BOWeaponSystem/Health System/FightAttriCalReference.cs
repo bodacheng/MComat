@@ -102,11 +102,11 @@ public partial class FightAttriCalReference : MonoBehaviour
     public void EnableAllHitBoxCollider(bool _bool)
     {
         if (myBOHitBoxeComponent != null)
-            foreach (BO_Hitbox hitbox in myBOHitBoxeComponent)
-            {
-                if (hitbox.myColliderMustEquip != null)
-                    hitbox.myColliderMustEquip.isTrigger = !_bool;
-            }
+        foreach (BO_Hitbox hitbox in myBOHitBoxeComponent)
+        {
+            if (hitbox.myColliderMustEquip != null)
+                hitbox.myColliderMustEquip.isTrigger = !_bool;
+        }
     }
 
     public bool IfMyBody(Collider collider) => myColliders.Contains(collider);
@@ -217,19 +217,9 @@ public partial class FightAttriCalReference : MonoBehaviour
         _ComboHitCount.HitCountInterrupt();
     }
 
+    // 这个函数，是写的很丑陋，但如果纯粹是为了解决个人强迫症的话干脆别改了。其实这个产生的根本原因就是你非要把不同重量级的攻击给用枚举类型区分开
     public void ApplyDamage(V_Damage _dmg)
 	{
-		//if ((PhotonNetwork.connected && !photonView.isMine))
-		//	return;//同步系统中伤害判定最关键的一条逻辑
-
-		//colorTransition = ColorTransition.DoTransition(gameObject, new GradientColorKey[] { new GradientColorKey(Color.red, 0.2f), new GradientColorKey(Color.white, 0.2f) }, true, 0f);
-
-		//UnityEngine.Events.UnityAction resetColor = () => { colorTransition.ResetColors(); };
-		//      colorTransition.OnEnd.AddListener(resetColor);
-		////colorTransition.AfterTransition = AfterTransitionActions.DisableComponent;
-		//colorTransition.Duration = 0.2f;
-		//colorTransition.LoopMode = TransitionLoopModes.PlayOnce;
-
         _Center._ResistanceManager.Resistance.Value -= 1;
 		switch (_dmg.damage_type)
 		{
@@ -245,6 +235,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.heavy_damage;
                             DamagesDIC[DamageType.heavy_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -253,6 +244,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
@@ -262,6 +254,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.light_damage;
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else
                         {
                             DamagesDIC[DamageType.light_block].Add(_dmg);
@@ -271,6 +264,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
@@ -285,6 +279,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.supper_damage;
                             DamagesDIC[DamageType.supper_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -293,6 +288,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.heavy_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -302,6 +298,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.light_damage;
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
@@ -310,6 +307,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.heavy_damage].Add(_dmg);
+                            _Center.AIStateRunner.changeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -324,6 +322,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     {
                         _dmg.damage_type = DamageType.knockOff_damage;
                         DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
+                        _Center.AIStateRunner.changeState("KnockOff");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -332,6 +331,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         DamagesDIC[DamageType.supper_damage].Add(_dmg);
+                        _Center.AIStateRunner.changeState("Hit");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -341,6 +341,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     {
                         _dmg.damage_type = DamageType.heavy_damage;
                         DamagesDIC[DamageType.heavy_damage].Add(_dmg);
+                        _Center.AIStateRunner.changeState("Hit");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -349,6 +350,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         DamagesDIC[DamageType.supper_damage].Add(_dmg);
+                        _Center.AIStateRunner.changeState("Hit");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -357,6 +359,7 @@ public partial class FightAttriCalReference : MonoBehaviour
 				break;
 			case DamageType.knockOff_damage:
                 DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
+                _Center.AIStateRunner.changeState("KnockOff");
                 break;
             case DamageType.deathknockoff:
                 DamagesDIC[DamageType.deathknockoff].Add(_dmg);
@@ -370,9 +373,7 @@ public partial class FightAttriCalReference : MonoBehaviour
 			case DamageType.stagger:
                 DamagesDIC[DamageType.stagger].Add(_dmg);
                 break;
-			default:
-				break;
-		}
+        }
 	}
     
     public void HitCountPlus() => this._ComboHitCount.HitCountPlus();//打别人计数
@@ -418,10 +419,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
     public List<V_Damage> ReturnDamageList(DamageType type)
     {
-        if (DamagesDIC.ContainsKey(type))
-            return DamagesDIC[type];
-        else
-            return null;
+        return DamagesDIC.ContainsKey(type) ? DamagesDIC[type] : null;
     }
 
     Shader One_Shader;
@@ -532,3 +530,15 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
     }
 }
+
+// 下面这些原本在applydamage开头
+    //if ((PhotonNetwork.connected && !photonView.isMine))
+    //  return;//同步系统中伤害判定最关键的一条逻辑
+
+    //colorTransition = ColorTransition.DoTransition(gameObject, new GradientColorKey[] { new GradientColorKey(Color.red, 0.2f), new GradientColorKey(Color.white, 0.2f) }, true, 0f);
+
+    //UnityEngine.Events.UnityAction resetColor = () => { colorTransition.ResetColors(); };
+    //      colorTransition.OnEnd.AddListener(resetColor);
+    ////colorTransition.AfterTransition = AfterTransitionActions.DisableComponent;
+    //colorTransition.Duration = 0.2f;
+    //colorTransition.LoopMode = TransitionLoopModes.PlayOnce;

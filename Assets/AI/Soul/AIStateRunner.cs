@@ -192,18 +192,18 @@ namespace Soul
                 return;
             }
             this.readingNineAndTwo = nineAndTwo;
-            this.readingNineAndTwo.sortNineAndTwo();
+            this.readingNineAndTwo.SortNineAndTwo();
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
             this.state_Transition_Dictionary = this.readingNineAndTwo.GenerateBeheviourSets(100);
-            this.State_Transition_Set_List = this.readingNineAndTwo.returnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
+            this.State_Transition_Set_List = this.readingNineAndTwo.ReturnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
 
             States_for_AbsoluteInput.Clear();
             bool hasD, hasR;
-            if (this.readingNineAndTwo.getDConfig() != null)
+            if (this.readingNineAndTwo.GetDConfig() != null)
                 hasD = true;
             else
                 hasD = false;
-            if (this.readingNineAndTwo.getRConfig() != null)
+            if (this.readingNineAndTwo.GetRConfig() != null)
                 hasR = true;
             else
                 hasR = false;
@@ -239,12 +239,12 @@ namespace Soul
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getFire1Chuan()[1].StateKey]);
             if (this.readingNineAndTwo.getFire2Chuan()[1] != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getFire2Chuan()[1].StateKey]);
-            if (this.readingNineAndTwo.getD_STS() != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getD_STS().StateKey]);
-            if (this.readingNineAndTwo.getR_STS() != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getR_STS().StateKey]);
-            if (this.readingNineAndTwo.getM_STS() != null)
-                commandWaitingState = state_Dictionary[this.readingNineAndTwo.getM_STS().StateKey];
+            if (this.readingNineAndTwo.GetD_STS() != null)
+                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetD_STS().StateKey]);
+            if (this.readingNineAndTwo.GetR_STS() != null)
+                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetR_STS().StateKey]);
+            if (this.readingNineAndTwo.GetM_STS() != null)
+                commandWaitingState = state_Dictionary[this.readingNineAndTwo.GetM_STS().StateKey];
         }
 
         public void iniStates(Transform wholeT, Transform geoCenterT)

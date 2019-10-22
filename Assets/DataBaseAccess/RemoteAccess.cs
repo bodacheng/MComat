@@ -110,7 +110,7 @@ namespace dataAccess
                 nineAndTwo.canDefend = _TempCharacterResourceInfo.DEFENDABLE_FLAG;
 
                 characterDataInfo._NineAndTwo = nineAndTwo;
-                characterDataInfo._NineAndTwo.sortNineAndTwo();
+                characterDataInfo._NineAndTwo.SortNineAndTwo();
                 return characterDataInfo;
             }
             catch (Exception e)

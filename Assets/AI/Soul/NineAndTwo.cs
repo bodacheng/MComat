@@ -36,65 +36,65 @@ public class NineAndTwo {
     private State_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
     private List<State_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
 
-    public State_Transition_Set getD_STS()
+    public State_Transition_Set GetD_STS()
     {
         return D;
     }
-    public State_Transition_Set getM_STS()
+    public State_Transition_Set GetM_STS()
     {
         return M;
     }
-    public State_Transition_Set getR_STS()
+    public State_Transition_Set GetR_STS()
     {
         return R;
     }
 
-    public SkillConfig getA1Config()
+    public SkillConfig GetA1Config()
     {
         return AConfig1;
     }
-    public SkillConfig getA2Config()
+    public SkillConfig GetA2Config()
     {
         return AConfig2;
     }
-    public SkillConfig getA3Config()
+    public SkillConfig GetA3Config()
     {
         return AConfig3;
     }
-    public SkillConfig getB1Config()
+    public SkillConfig GetB1Config()
     {
         return BConfig1;
     }
-    public SkillConfig getB2Config()
+    public SkillConfig GetB2Config()
     {
         return BConfig2;
     }
-    public SkillConfig getB3Config()
+    public SkillConfig GetB3Config()
     {
         return BConfig3;
     }
 
-    public SkillConfig getC1Config()
+    public SkillConfig GetC1Config()
     {
         return CConfig1;
     }
-    public SkillConfig getC2Config()
+    public SkillConfig GetC2Config()
     {
         return CConfig2;
     }
-    public SkillConfig getC3Config()
+    public SkillConfig GetC3Config()
     {
         return CConfig3;
     }
-    public SkillConfig getDConfig()
+    public SkillConfig GetDConfig()
     {
         return DConfig;
     }
-    public SkillConfig getMConfig()
+    public SkillConfig GetMConfig()
     {
         return MConfig;
     }
-    public SkillConfig getRConfig()
+    public SkillConfig GetRConfig()
     {
         return RConfig;
     }
@@ -176,7 +176,7 @@ public class NineAndTwo {
         RConfig = new SkillConfig();
     }
 
-    public List<State_Transition_Set> returnSTSlist()
+    public List<State_Transition_Set> ReturnSTSlist()
     {
         return StateTransitionSetList;
     }
@@ -185,21 +185,18 @@ public class NineAndTwo {
     {
         if (skillid == null)
             return null;
-        SkillConfig referenceStandardSkillConfig;
-        SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(skillid, out referenceStandardSkillConfig);
+        SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(skillid, out SkillConfig referenceStandardSkillConfig);
         return referenceStandardSkillConfig;
     }
 
-    private State_Transition_Set fromConfigToSTS(SkillConfig _SkillConfig)
+    private State_Transition_Set FromConfigToSTS(SkillConfig _SkillConfig)
     {
         if (_SkillConfig == null)
             return null;
 
-        SkillConfig referenceStandardSkillConfig;
-
         if (_SkillConfig.RECORD_ID != null)
         {
-            SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(_SkillConfig.RECORD_ID,out referenceStandardSkillConfig);
+            SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(_SkillConfig.RECORD_ID, out SkillConfig referenceStandardSkillConfig);
             if (referenceStandardSkillConfig != null)
             {
                 _SkillConfig.REAL_NAME = referenceStandardSkillConfig.REAL_NAME;
@@ -208,7 +205,9 @@ public class NineAndTwo {
                 _SkillConfig.SP_LEVEL = referenceStandardSkillConfig.SP_LEVEL;
                 _SkillConfig.stateType = referenceStandardSkillConfig.stateType;
             }
-        }else{
+        }
+        else
+        {
             //防御，受伤等固定技能，他们没有id，直接放行来进行之后的处理。
         }
 
@@ -243,7 +242,7 @@ public class NineAndTwo {
     }
 
     // 为了正确表现DMR和其他状态的处理顺序，这个函数应该把DMR的config作为参数。表示这几个是被动，要附加在其他技能存档上执行。
-    public void sortNineAndTwo()
+    public void SortNineAndTwo()
     {
         // 如果本地配置文件没有加载正确上面这个环节就要出问题。D，M，R不需要进行上述操作，
         // 理由是这三者有固定性，而且所依靠的动画包是基础动画包而不是各type角色的攻击技能动画包，所以加载方式有不同的地方。
@@ -258,44 +257,17 @@ public class NineAndTwo {
         CConfig2 = C2skillid != null ? FixConfigByReference(C2skillid) : null;
         CConfig3 = C3skillid != null ? FixConfigByReference(C3skillid) : null;
 
-        if (AConfig1 != null)
-            A1 = fromConfigToSTS(AConfig1);
-        else
-            A1 = null;
-        if (AConfig2 != null)
-            A2 = fromConfigToSTS(AConfig2);
-        else
-            A2 = null;
-        if (AConfig3 != null)
-            A3 = fromConfigToSTS(AConfig3);
-        else
-            A3 = null;
+        A1 = AConfig1 != null ? FromConfigToSTS(AConfig1) : null;
+        A2 = AConfig2 != null ? FromConfigToSTS(AConfig2) : null;
+        A3 = AConfig3 != null ? FromConfigToSTS(AConfig3) : null;
 
-        if (BConfig1 != null)
-            B1 = fromConfigToSTS(BConfig1);
-        else
-            B1 = null;
-        if (BConfig2 != null)
-            B2 = fromConfigToSTS(BConfig2);
-        else
-            B2 = null;
-        if (BConfig3 != null)
-            B3 = fromConfigToSTS(BConfig3);
-        else
-            B3 = null;
+        B1 = BConfig1 != null ? FromConfigToSTS(BConfig1) : null;
+        B2 = BConfig2 != null ? FromConfigToSTS(BConfig2) : null;
+        B3 = BConfig3 != null ? FromConfigToSTS(BConfig3) : null;
 
-        if (CConfig1 != null)
-            C1 = fromConfigToSTS(CConfig1);
-        else
-            C1 = null;
-        if (CConfig2 != null)
-            C2 = fromConfigToSTS(CConfig2);
-        else
-            C2 = null;
-        if (CConfig3 != null)
-            C3 = fromConfigToSTS(CConfig3);
-        else
-            C3 = null;
+        C1 = CConfig1 != null ? FromConfigToSTS(CConfig1) : null;
+        C2 = CConfig2 != null ? FromConfigToSTS(CConfig2) : null;
+        C3 = CConfig3 != null ? FromConfigToSTS(CConfig3) : null;
 
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ///////////////////
 
@@ -307,7 +279,7 @@ public class NineAndTwo {
 
         if (this.DConfig != null)
         {
-            this.D = fromConfigToSTS(this.DConfig);
+            this.D = FromConfigToSTS(this.DConfig);
             this.D.enterInput = inputs_defined.Defend;
             this.D.exitInput = inputs_defined.Defend_Cancel;
         }else{
@@ -316,7 +288,7 @@ public class NineAndTwo {
 
         if (this.MConfig != null)
         {
-            this.M = fromConfigToSTS(this.MConfig);
+            this.M = FromConfigToSTS(this.MConfig);
         }
         else
         {
@@ -326,7 +298,7 @@ public class NineAndTwo {
 
         if (this.RConfig != null)
         {
-            this.R = fromConfigToSTS(this.RConfig);
+            this.R = FromConfigToSTS(this.RConfig);
             this.R.enterInput = inputs_defined.Dash;
         }
         else
@@ -342,7 +314,6 @@ public class NineAndTwo {
         List<State_Transition_Set> A_list = new List<State_Transition_Set>();
         List<State_Transition_Set> B_list = new List<State_Transition_Set>();
         List<State_Transition_Set> C_list = new List<State_Transition_Set>();
-
 
         if (A1 != null)
         {
@@ -778,8 +749,8 @@ public class NineAndTwo {
                                                                stateType.Def,
                                                                0,
                                                                 null,
-                                                              (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0], //chuanEndCasualT0.ToArray(), 
-                                                               (new List<string>() { "Hit", "KnockOff"}).ToArray(),
+                                                              (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0],
+                                                               null,
                                                                inputs_defined.Defend, inputs_defined.Defend_Cancel, 0,
                                                                0,
                                                                0);
@@ -789,7 +760,7 @@ public class NineAndTwo {
                                                              0,
                                                              null,
                                                              new State_Rate_Set[0], 
-                                                             (new List<string>() { "Hit", "KnockOff"}).ToArray(),
+                                                             null,
                                                              inputs_defined.Null, inputs_defined.Null, 0,
                                                              0,
                                                              0);
@@ -799,7 +770,7 @@ public class NineAndTwo {
                                                             0,
                                                             null,
                                                             new State_Rate_Set[0], 
-                                                            (new List<string>() { "Hit", "KnockOff"}).ToArray(), 
+                                                            null,
                                                             inputs_defined.Null, inputs_defined.Null, 0,
                                                             0,
                                                             0);
@@ -809,7 +780,7 @@ public class NineAndTwo {
                                                             0,
                                                             null,
                                                             new State_Rate_Set[0],
-                                                            (new List<string>() { "Hit", "KnockOff"}).ToArray(), 
+                                                            null,
                                                             inputs_defined.Null, inputs_defined.Null, 0,
                                                             0,
                                                             0);
@@ -823,11 +794,11 @@ public class NineAndTwo {
         StateTransitionSetList.Add(Hit);
         StateTransitionSetList.Add(getUp);
 
-        string[] regularforceTOSets = { "Hit", "KnockOff"};
+        //string[] regularforceTOSets = { "Hit", "KnockOff"};
 
         if (this.D != null)
         {
-            Defend.forced_to_state_nums = regularforceTOSets;
+            //Defend.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(Defend);//这里的逻辑是这样：如果在sortNineAndTwo执行后，this.D不是null，那说明角色有防御状态，而防御状态是固定的。
 
             knockOFFCasualTransitios.Add(Defend.GetStateRateSet());
@@ -835,7 +806,7 @@ public class NineAndTwo {
         if (this.M != null)
         {
             //下面这些就是怕数据库里九宫格里的M记载有错。
-            M.forced_to_state_nums = regularforceTOSets;
+            //M.forced_to_state_nums = regularforceTOSets;
             M.SPLevel = -1;
             M.casual_to_state_Sets = null;
             M.ai_trigger_ranges = null;
@@ -846,7 +817,7 @@ public class NineAndTwo {
 
         if (this.R != null)
         {
-            R.forced_to_state_nums = regularforceTOSets;
+            //R.forced_to_state_nums = regularforceTOSets;
             this.R.stateType = stateType.AC;
             StateTransitionSetList.Add(this.R);//这个是只能根据角色被动来。
 
@@ -855,70 +826,66 @@ public class NineAndTwo {
                     
         if(this.A1 != null)
         {
-            A1.forced_to_state_nums = regularforceTOSets;
+            //A1.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.A1);
 
             knockOFFCasualTransitios.Add(A1.GetStateRateSet());
         }
         if (this.A2 != null)
         {
-            A2.forced_to_state_nums = regularforceTOSets;
+            //A2.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.A2);
         }            
         if (this.A3 != null)
         {
-            A3.forced_to_state_nums = regularforceTOSets;
+            //A3.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.A3);
         }
         if (this.B1 != null)
         {
-            B1.forced_to_state_nums = regularforceTOSets;
+            //B1.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.B1);
 
             knockOFFCasualTransitios.Add(B1.GetStateRateSet());
         }            
         if (this.B2 != null)
         {
-            B2.forced_to_state_nums = regularforceTOSets;
+            //B2.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.B2);
         }
         if (this.B3 != null)
         {
-            B3.forced_to_state_nums = regularforceTOSets;
+            //B3.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.B3);
         }
         if (this.C1 != null)
         {
-            C1.forced_to_state_nums = regularforceTOSets;
+            //C1.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.C1);
 
             knockOFFCasualTransitios.Add(C1.GetStateRateSet());
         }                    
         if (this.C2 != null)
         {
-            C2.forced_to_state_nums = regularforceTOSets;
+            //C2.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.C2);
         }            
         if (this.C3 != null)
         {
-            C3.forced_to_state_nums = regularforceTOSets;
+            //C3.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.C3);
         }
 
         knockOFFCasualTransitios.Add(getUp.GetStateRateSet());
 
         /////////////////////
-        /// 
 
-            // KnockOff状态不能强制迁移进hit状态。如果那样设置的话倒地中的敌人可能因为又受了一击打而莫名其妙又站起来。
-            // 而knockoff状态内部应该可以对倒地期间受到的伤害进行击飞槽积累，从而可能再次被击飞。
-            // 并且knockoff可以以常规迁移来猛的释放A1，B1，C1，或M。
         State_Transition_Set KnockOff = new State_Transition_Set("KnockOff",
                                                                  stateType.KnockOff,
                                                                  0,
                                                                  null,
                                                                  knockOFFCasualTransitios.ToArray(),
-                                                                 (new List<string>() { "Hit","KnockOff"}).ToArray(),
+                                                                 null,
                                                                  inputs_defined.Null, inputs_defined.Null,
                                                                  0,
                                                                  0,
@@ -968,42 +935,48 @@ public class NineAndTwo {
     //下面的环节纯粹是针对SkillPrintOut的一些处理
     public IDictionary<int, State_Transition_Set> getAttackChuan()
     {
-        IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>();
-        attack_chuan.Add(1, A1);
-        attack_chuan.Add(2, A2);
-        attack_chuan.Add(3, A3);
+        IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>
+        {
+            { 1, A1 },
+            { 2, A2 },
+            { 3, A3 }
+        };
         return attack_chuan;
     }
     public IDictionary<int, State_Transition_Set> getFire1Chuan()
     {
-        IDictionary<int, State_Transition_Set> B_chuan = new Dictionary<int, State_Transition_Set>();
-        B_chuan.Add(1, B1);
-        B_chuan.Add(2, B2);
-        B_chuan.Add(3, B3);
+        IDictionary<int, State_Transition_Set> B_chuan = new Dictionary<int, State_Transition_Set>
+        {
+            { 1, B1 },
+            { 2, B2 },
+            { 3, B3 }
+        };
         return B_chuan;
     }
     public IDictionary<int, State_Transition_Set> getFire2Chuan()
     {
-        IDictionary<int, State_Transition_Set> C_chuan = new Dictionary<int, State_Transition_Set>();
-        C_chuan.Add(1, C1);
-        C_chuan.Add(2, C2);
-        C_chuan.Add(3, C3);
+        IDictionary<int, State_Transition_Set> C_chuan = new Dictionary<int, State_Transition_Set>
+        {
+            { 1, C1 },
+            { 2, C2 },
+            { 3, C3 }
+        };
         return C_chuan;
     }
 
     //这个函数是服务于stagesmanager。因为编辑关卡的时候是直接去编辑九宫格的config
-    public void refreshSkillNumsByConfigs()
+    public void RefreshSkillNumsByConfigs()
     {
-        A1skillid = AConfig1 != null ? AConfig1.RECORD_ID : null;
-        A2skillid = AConfig2 != null ? AConfig2.RECORD_ID : null;
-        A3skillid = AConfig3 != null ? AConfig3.RECORD_ID : null;
+        A1skillid = AConfig1?.RECORD_ID;
+        A2skillid = AConfig2?.RECORD_ID;
+        A3skillid = AConfig3?.RECORD_ID;
 
-        B1skillid = BConfig1 != null ? BConfig1.RECORD_ID : null;
-        B2skillid = BConfig2 != null ? BConfig2.RECORD_ID : null;
-        B3skillid = BConfig3 != null ? BConfig3.RECORD_ID : null;
+        B1skillid = BConfig1?.RECORD_ID;
+        B2skillid = BConfig2?.RECORD_ID;
+        B3skillid = BConfig3?.RECORD_ID;
 
-        C1skillid = CConfig1 != null ? CConfig1.RECORD_ID : null;
-        C2skillid = CConfig2 != null ? CConfig2.RECORD_ID : null;
-        C3skillid = CConfig3 != null ? CConfig3.RECORD_ID : null;
+        C1skillid = CConfig1?.RECORD_ID;
+        C2skillid = CConfig2?.RECORD_ID;
+        C3skillid = CConfig3?.RECORD_ID;
     }
 }

@@ -74,11 +74,8 @@ namespace HittingDetection
             this.damageHappenPoint = damageHappenPoint;
             this.toWho = toWho;
             this.fromWeapon = fromWeapon;
-            if (this.fromWeapon != null && this.fromWeapon.GetOwnerFightAttriCalReference() != null)
-                this.AT = this.fromWeapon.GetOwnerFightAttriCalReference().AT;
-            else
-                this.AT = 0;
-            specialApply = SpecialApply.none;   
+            this.AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
+            specialApply = SpecialApply.none;
         }
         public V_Damage(DamageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, FightAttriCalReference toWho, BO_Marker_Manager fromWeapon,SpecialApply specialApply)
         {
@@ -87,10 +84,7 @@ namespace HittingDetection
             this.damageHappenPoint = damageHappenPoint;
             this.toWho = toWho;
             this.fromWeapon = fromWeapon;
-            if (this.fromWeapon != null)
-                this.AT = this.fromWeapon.GetOwnerFightAttriCalReference().AT;
-            else
-                this.AT = 0;
+            this.AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             this.specialApply = specialApply;   
         }
     }

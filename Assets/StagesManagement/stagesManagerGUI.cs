@@ -121,7 +121,7 @@ public class stagesManagerGUI : Editor {
                             if (set._Value._NineAndTwo == null)
                                 set._Value._NineAndTwo = new NineAndTwo();
                             else
-                                set._Value._NineAndTwo.sortNineAndTwo();
+                                set._Value._NineAndTwo.SortNineAndTwo();
                         }
                     }
                 }
@@ -243,97 +243,97 @@ public class stagesManagerGUI : Editor {
                 GUI.backgroundColor = Color.gray;
                 if (focusingCharInfo._NineAndTwo == null)
                     focusingCharInfo._NineAndTwo = new NineAndTwo();
-                if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.getMConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.GetMConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getMConfig();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetMConfig();
                 }
-                if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.getDConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.GetDConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getDConfig();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetDConfig();
                 }
-                if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.getRConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.GetRConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getRConfig();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetRConfig();
                 }
                 GUI.backgroundColor = Color.white;
                 GUILayout.EndHorizontal();
     
                 ButtonStyle_NineAndTwo.normal.textColor = Color.blue;
                 GUILayout.BeginHorizontal();
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getA1Config() == null || focusingCharInfo._NineAndTwo.getA1Config().RECORD_ID == null
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA1Config() == null || focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID == null
                     ? Color.white
                     : Color.yellow;
-                if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getA1Config();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA1Config();
                 }
     
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getA2Config() == null || focusingCharInfo._NineAndTwo.getA2Config().RECORD_ID == null
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA2Config() == null || focusingCharInfo._NineAndTwo.GetA2Config().RECORD_ID == null
                     ? Color.white
                     : Color.yellow;
-                if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getA2Config();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA2Config();
                 }
     
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getA3Config() == null || focusingCharInfo._NineAndTwo.getA3Config().RECORD_ID == null
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA3Config() == null || focusingCharInfo._NineAndTwo.GetA3Config().RECORD_ID == null
                     ? Color.white
                     : Color.yellow;
-                if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getA3Config();
-                }
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-    
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getB1Config() == null || focusingCharInfo._NineAndTwo.getB1Config().RECORD_ID == null
-                    ? Color.white
-                    : Color.yellow;
-                if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-                {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getB1Config();
-                }
-    
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getB2Config() == null || focusingCharInfo._NineAndTwo.getB2Config().RECORD_ID == null
-                    ? Color.white
-                    : Color.yellow;
-                if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-                {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getB2Config();
-                }
-    
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getB3Config() == null || focusingCharInfo._NineAndTwo.getB3Config().RECORD_ID == null
-                    ? Color.white
-                    : Color.yellow;
-                if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-                {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getB3Config();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA3Config();
                 }
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
     
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getC1Config() == null || focusingCharInfo._NineAndTwo.getC1Config().RECORD_ID == null
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB1Config() == null || focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID == null
                     ? Color.white
                     : Color.yellow;
-                if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getC1Config();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB1Config();
                 }
     
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getC2Config() == null || focusingCharInfo._NineAndTwo.getC2Config().RECORD_ID == null
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB2Config() == null || focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID == null
                     ? Color.white
                     : Color.yellow;
-                if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getC2Config();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB2Config();
                 }
     
-                GUI.backgroundColor = focusingCharInfo._NineAndTwo.getC3Config() == null || focusingCharInfo._NineAndTwo.getC3Config().RECORD_ID == null
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB3Config() == null || focusingCharInfo._NineAndTwo.GetB3Config().RECORD_ID == null
                     ? Color.white
                     : Color.yellow;
-                if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.getC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
                 {
-                    focusingSkillConfig = focusingCharInfo._NineAndTwo.getC3Config();
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB3Config();
+                }
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+    
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC1Config() == null || focusingCharInfo._NineAndTwo.GetC1Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
+                if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                {
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC1Config();
+                }
+    
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC2Config() == null || focusingCharInfo._NineAndTwo.GetC2Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
+                if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                {
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC2Config();
+                }
+    
+                GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC3Config() == null || focusingCharInfo._NineAndTwo.GetC3Config().RECORD_ID == null
+                    ? Color.white
+                    : Color.yellow;
+                if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+                {
+                    focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC3Config();
                 }
                 GUI.backgroundColor = Color.white;
                 GUILayout.EndHorizontal();
@@ -342,17 +342,17 @@ public class stagesManagerGUI : Editor {
                 bool SanGong = false;
                 if (focusingSkillConfig != null)
                 {
-                    if (focusingSkillConfig == focusingCharInfo._NineAndTwo.getMConfig())
+                    if (focusingSkillConfig == focusingCharInfo._NineAndTwo.GetMConfig())
                     {
                         focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
                         SanGong = true;
                     }
-                    if (focusingSkillConfig == focusingCharInfo._NineAndTwo.getDConfig())
+                    if (focusingSkillConfig == focusingCharInfo._NineAndTwo.GetDConfig())
                     {
                         focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
                         SanGong = true;
                     }
-                    if (focusingSkillConfig == focusingCharInfo._NineAndTwo.getRConfig())
+                    if (focusingSkillConfig == focusingCharInfo._NineAndTwo.GetRConfig())
                     {
                         focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
                         SanGong = true;
@@ -449,7 +449,7 @@ public class stagesManagerGUI : Editor {
     
                 }
                 if (focusingCharInfo != null && focusingCharInfo._NineAndTwo != null)
-                    focusingCharInfo._NineAndTwo.refreshSkillNumsByConfigs();
+                    focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();
                 /////// 九宫格end //////////
                 /// 
                 EditorGUILayout.LabelField(" 可将当前编辑中的角色...:  ", big_title);

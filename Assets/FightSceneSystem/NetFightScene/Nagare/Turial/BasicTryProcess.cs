@@ -121,7 +121,7 @@ public class BasicTryProcess : NagareProcess
             
             break;
             case 2:
-            if (Adam.AIStateRunner.getCurrentStateNum() == adamInfo._NineAndTwo.getA3Config().REAL_NAME)
+            if (Adam.AIStateRunner.getCurrentStateNum() == adamInfo._NineAndTwo.GetA3Config().REAL_NAME)
             {
                 step = 3;
                     Debug.Log("Success3");
