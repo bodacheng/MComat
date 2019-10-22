@@ -237,9 +237,9 @@ public partial class G_Attack_State : AI_State {
         this._BO_Ani_E.CloseEffectsOnBodyParts();
         if (isEventAttackLaunchState)
         {
-			if (BS_Main_Health != null)
+			if (_FightAttriCalReference != null)
             {
-				BS_Main_Health.ReturnApprovedEventAttackAttempts().Clear();
+				_FightAttriCalReference.ReturnApprovedEventAttackAttempts().Clear();
             }
         }
         if (isEventAttackEndState)

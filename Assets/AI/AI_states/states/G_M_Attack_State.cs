@@ -101,7 +101,7 @@ public class G_M_Attack_State : AI_State {
         if (C != null)
             this.RotateToTarget(C.transform.position, 10000f, true);
  
-        BS_Main_Health.ReturnDamageList(DamageType.stagger).Clear();
+        _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
 		_Animator.applyRootMotion = true;
         //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
         Animation_Manger.animationTrigger(clip_name);
@@ -126,13 +126,13 @@ public class G_M_Attack_State : AI_State {
     private Vector3 rotateTarget;
 	public override void _State_FixedUpdate1() 
 	{
-        if (BS_Main_Health.ReturnDamageList(DamageType.stagger).Count > 0)
+        if (_FightAttriCalReference.ReturnDamageList(DamageType.stagger).Count > 0)
         {
             //this._Animator.applyRootMotion = false;
             //this._Rigidbody.velocity = BS_Main_Health.returnDamageList(damageType.stagger)[0].force_direction.normalized * 4f;
 
             //this.gameObject.transform.position += BS_Main_Health.returnDamageList(damageType.stagger)[0].force_direction.normalized * 1f;
-            BS_Main_Health.ReturnDamageList(DamageType.stagger).Clear();
+            _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
         }
 
         Collider C = Sensor.getClosestColliderInSensorRange(true,true,true);

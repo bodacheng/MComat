@@ -26,15 +26,14 @@ public class Hurt_State : AI_State {
 	public override void pre_process_before_enter()
 	{
 		base.pre_process_before_enter ();
-		BS_Main_Health.enabled = true;
     }
 
 	public override bool force_enter_condition()
 	{
-        return BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0
-            || BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0
-            || BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0
-            || BS_Main_Health.ReturnEventDamageList().Count > 0
+        return _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0
+            || _FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0
+            || _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Count > 0
+            || _FightAttriCalReference.ReturnEventDamageList().Count > 0
             ? true
             : false;
     }
@@ -57,60 +56,60 @@ public class Hurt_State : AI_State {
         //_SkillCancelFlag.turn_on_flag();//可以挣脱
         this._Animator.SetFloat("speed", 0f);
         this._DATA_CENTER.setGravitySwitch(true);//在之后的eatDamage环节可能被再次解放重力
-        this.BS_Main_Health.SetGettingDamageState(true);
+        this._FightAttriCalReference.SetGettingDamageState(true);
         this._Weapon_Animation_Events.clearMarkerManagers();
         this._BO_Ani_E.CloseEffectsOnBodyParts();
         this.hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
 
         int ranDom = (int)Random.Range(0,hurtclips.Count);
-		if (BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0)
+		if (_FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0)
 		{
             used_dizzy_time = heavy_dizzy_time;
-            force_direction = BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].force_direction;
+            force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0].force_direction;
             force_direction.y = 0;
             this._Rigidbody.velocity = force_direction.normalized * heavy_damage_force;
             Animation_Manger.animationTrigger(hurtclips[ranDom]);
-            BS_Main_Health.GetKnockOffCount().plusGauge(3f);
-			BS_Main_Health.GetKnockOffCount().plusTimeCounter(0.2f);            
-            BS_Main_Health.EatDamage(DamageType.heavy_damage);
-            BS_Main_Health.plusCriticalGauge(1);
+            _FightAttriCalReference.GetKnockOffCount().plusGauge(3f);
+			_FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);            
+            _FightAttriCalReference.EatDamage(DamageType.heavy_damage);
+            _FightAttriCalReference.plusCriticalGauge(1);
 		}
 
-		if (BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0) 
+		if (_FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0) 
         {
             used_dizzy_time = light_dizzy_time;
             //force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-            force_direction = BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].force_direction;
+            force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0].force_direction;
             force_direction.y = 0;
             _Rigidbody.velocity = force_direction.normalized * light_damage_force;
             Animation_Manger.animationTrigger(hurtclips[ranDom]);
-            BS_Main_Health.plusCriticalGauge(1);
-			BS_Main_Health.GetKnockOffCount().plusGauge(1f);
-            BS_Main_Health.GetKnockOffCount().plusTimeCounter(0.2f);
-            BS_Main_Health.EatDamage(DamageType.light_damage);    
+            _FightAttriCalReference.plusCriticalGauge(1);
+			_FightAttriCalReference.GetKnockOffCount().plusGauge(1f);
+            _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
+            _FightAttriCalReference.EatDamage(DamageType.light_damage);    
 			//为了让轻攻击带来的连击能保证持续，不在轻攻击处进行击飞积累
         }
 
-		if (BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0)
+		if (_FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Count > 0)
         {
             used_dizzy_time = heavy_dizzy_time;
             //force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-            force_direction = BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].force_direction;
+            force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].force_direction;
             force_direction.y = 0;
             _Rigidbody.velocity = force_direction.normalized * heavy_damage_force;
             Animation_Manger.animationTrigger(hurtclips[ranDom]);
-            BS_Main_Health.plusCriticalGauge(1);
-			BS_Main_Health.GetKnockOffCount().plusGauge(4f);
-            BS_Main_Health.GetKnockOffCount().plusTimeCounter(0.2f);
-            if (BS_Main_Health.GetKnockOffCount().getGauge() >= 10f)
+            _FightAttriCalReference.plusCriticalGauge(1);
+			_FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
+            _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
+            if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 10f)
             {
-                BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
-                                                        BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, 
-                                                        BS_Main_Health,
-                                                        BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].fromWeapon));
-                BS_Main_Health.GetKnockOffCount().setGauge(0f);
+                _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                                                        _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, 
+                                                        _FightAttriCalReference,
+                                                        _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].fromWeapon));
+                _FightAttriCalReference.GetKnockOffCount().setGauge(0f);
             }
-            BS_Main_Health.EatDamage(DamageType.supper_damage);
+            _FightAttriCalReference.EatDamage(DamageType.supper_damage);
         }
         this.RotateToDirection(-force_direction,0.5f,true);
         this.time_counter = 0f;
@@ -127,14 +126,14 @@ public class Hurt_State : AI_State {
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        this.BS_Main_Health.SetGettingDamageState(false);
+        this._FightAttriCalReference.SetGettingDamageState(false);
         //_SkillCancelFlag.turn_off_flag();//可以挣脱
         this.time_counter = 0f;
         this._Rigidbody.velocity = Vector3.zero;
         if (this._AIStateRunner.getTryState().StateType == stateType.AC || this._AIStateRunner.getTryState().StateType == stateType.GI ||
             this._AIStateRunner.getTryState().StateType == stateType.GM || this._AIStateRunner.getTryState().StateType == stateType.GR)
         {
-            this.BS_Main_Health.BeHitCountInterrupt();
+            this._FightAttriCalReference.BeHitCountInterrupt();
         }
     }
 }

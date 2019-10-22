@@ -113,10 +113,10 @@ public class DATACENTERGUI : Editor {
             myScript.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
             myScript.Animation_Manger = myScript.gameObject.GetComponent<Animation_Manger>();
             myScript.Animation_Manger.Animator = myScript.animator;
-            myScript.BO_Health = myScript.gameObject.GetComponent<FightAttriCalReference>();
-            myScript.BO_Health._Center = myScript;
+            myScript._FightAttriCalReference = myScript.gameObject.GetComponent<FightAttriCalReference>();
+            myScript._FightAttriCalReference._Center = myScript;
             myScript.AIStateRunner = myScript.gameObject.GetComponent<AIStateRunner>();            
-            myScript.AIStateRunner._BO_Health = myScript.BO_Health;
+            myScript.AIStateRunner._BO_Health = myScript._FightAttriCalReference;
             myScript.AIStateRunner._SkillCancelFlag = myScript._SkillCancelFlag;
             myScript.buffsRunner = myScript.gameObject.GetComponent<BuffsRunner>();
             myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();
@@ -168,7 +168,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
                 focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Hitbox>();
-                focusingHitBox.MainHealth = myScript.BO_Health;
+                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.left_arm_hitbox_t != null)
             {
@@ -182,7 +182,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
                 focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Hitbox>();
-                focusingHitBox.MainHealth = myScript.BO_Health;
+                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.right_leg_hitbox_t != null)
             {
@@ -196,7 +196,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
                 focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Hitbox>();
-                focusingHitBox.MainHealth = myScript.BO_Health;
+                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.left_leg_hitbox_t != null)
             {
@@ -210,7 +210,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
                 focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Hitbox>();
-                focusingHitBox.MainHealth = myScript.BO_Health;
+                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.spine_hitbox_t != null)
             {
@@ -224,7 +224,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.spine_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
                 focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Hitbox>();
-                focusingHitBox.MainHealth = myScript.BO_Health;
+                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
 
             //foreach (Transform _t in weaponPartsOnBody)

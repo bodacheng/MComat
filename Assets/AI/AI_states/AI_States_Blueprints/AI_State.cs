@@ -14,7 +14,7 @@ namespace Soul
         public AIStateRunner _AIStateRunner;
         public Data_Center _DATA_CENTER;
         public BO_Ani_E _BO_Ani_E;
-        public FightAttriCalReference BS_Main_Health;
+        public FightAttriCalReference _FightAttriCalReference;
         public ResistanceManager _ResistanceManager;
         public Pusher _Pusher;
         public Sensor Sensor;
@@ -45,7 +45,7 @@ namespace Soul
         {
             this._DATA_CENTER = GeoCenterT.GetComponent<Data_Center>();
             this.Sensor = _DATA_CENTER.Sensor;
-            this.BS_Main_Health = _DATA_CENTER.BO_Health;
+            this._FightAttriCalReference = _DATA_CENTER._FightAttriCalReference;
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER.AIStateRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
@@ -75,7 +75,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return this.BS_Main_Health.hasPlentyGauge(this.splevel);
+            return this._FightAttriCalReference.hasPlentyGauge(this.splevel);
         }
 
         //一个状态的决策性进入条件与决策性退出条件如果没有形成一个真正意义上一正一反的关系，那么就会产生“无限进入进出循环”
@@ -105,8 +105,8 @@ namespace Soul
         public virtual void AI_State_enter()
         {
             Animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.unstarted);
-            BS_Main_Health.AT = this.AT;
-            this.BS_Main_Health.costCriticalGaugeBySPlevel(this.splevel);
+            _FightAttriCalReference.AT = this.AT;
+            this._FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
         }
 
         public virtual void c_State_enter()

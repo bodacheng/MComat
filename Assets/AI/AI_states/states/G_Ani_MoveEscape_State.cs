@@ -42,8 +42,8 @@ public class G_Ani_MoveEscape_State : AI_State {
 
     public override bool enter_condition_priority2()
     {
-        if ((this.BS_Main_Health.IFgettingDamage() || Sensor.getNearbyDamagingWeaponColliders().Count > 0) 
-            && this.BS_Main_Health.CriticalGauge > 90)
+        if ((this._FightAttriCalReference.IFgettingDamage() || Sensor.getNearbyDamagingWeaponColliders().Count > 0) 
+            && this._FightAttriCalReference.CriticalGauge > 90)
             return true;
         else
             return false;
@@ -96,8 +96,8 @@ public class G_Ani_MoveEscape_State : AI_State {
             if (df.block_time_counter > 0)
             {
                 df.block_time_counter = 0;
-                this.BS_Main_Health.costCriticalGaugeBySPlevel(3);
-                BS_Main_Health.ClearDamageLists();
+                this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
+                _FightAttriCalReference.ClearDamageLists();
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
                 this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
             }

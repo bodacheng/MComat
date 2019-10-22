@@ -39,7 +39,7 @@ public partial class Data_Center : MonoBehaviour
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
     public Rigidbody Rigidbody;
-    public FightAttriCalReference BO_Health;
+    public FightAttriCalReference _FightAttriCalReference;
     public BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
     public Pusher pusher;
     public AIStateRunner AIStateRunner;
@@ -82,7 +82,7 @@ public partial class Data_Center : MonoBehaviour
             {
                 floorCheckers[i] = floorChecks.GetChild(i);
             }
-            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(BO_Health,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
+            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(_FightAttriCalReference,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
 
             string personalEffectsPath;
             switch (this.Zokusei)
@@ -182,9 +182,9 @@ public partial class Data_Center : MonoBehaviour
         if (Shield != null)
         {
             Shield.gameObject.SetActive(false);
-            if (BO_Health != null)
+            if (_FightAttriCalReference != null)
             {
-                Shield.iniShield(_TeamConfig, BO_Health);
+                Shield.iniShield(_TeamConfig, _FightAttriCalReference);
                 Shield._ShieldBackSpot = this.geometryCenter;
             }
         }
@@ -223,16 +223,16 @@ public partial class Data_Center : MonoBehaviour
     public void step3Initialize(TeamConfig _TeamConfig)//战斗必备
     {
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
-        BO_Health.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
-        BO_Health.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
-        BO_Health.EnableAllHitBoxCollider(true);
+        _FightAttriCalReference.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
+        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
+        _FightAttriCalReference.EnableAllHitBoxCollider(true);
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
     public void deathInitialize()
     {
         gameObject.layer = this._TeamConfig.deadLayer;
-        this.BO_Health.ChangeLayerForAllSelfColliders(_TeamConfig.deadLayer);
+        this._FightAttriCalReference.ChangeLayerForAllSelfColliders(_TeamConfig.deadLayer);
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。
@@ -269,7 +269,7 @@ public partial class Data_Center : MonoBehaviour
             }
             this.Sensor.SensorFixedUpdate();
             this.buffsRunner.BuffsRunnerFixedUpdate();
-            this.BO_Health.HealthBodyFixedUpdate();
+            this._FightAttriCalReference.HealthBodyFixedUpdate();
             this._SkillCancelFlag.SkillCancelFlagFixedUpdate();
         }
     }

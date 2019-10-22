@@ -60,12 +60,12 @@ public partial class FightTeam : MonoBehaviour
     {
         foreach(Data_Center a_char in teamMembers.values)
         {
-            a_char.BO_Health.CurrentHp.Value = 300f;
-            a_char.BO_Health.CurrentHp.Subscribe(x => {RefreshHPBar(a_char,x);});            
+            a_char._FightAttriCalReference.CurrentHp.Value = 300f;
+            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => {RefreshHPBar(a_char,x);});            
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
-            a_char.BO_Health._ComboHitCount.HitCount.Value = 0;
-            a_char.BO_Health._ComboHitCount.HitCount.Subscribe(x => { RefreshComboHit(a_char); });
+            a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
+            a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => { RefreshComboHit(a_char); });
         }
     }
     
@@ -85,10 +85,10 @@ public partial class FightTeam : MonoBehaviour
     public void RefreshComboHit(Data_Center _datacenter)
     {
         _hitcomboText = datacenterHitComboDic[_datacenter];
-        if (_datacenter.BO_Health._ComboHitCount.HitCount.Value > 1)
+        if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
         {
             _hitcomboText.color = Color.yellow;
-            _hitcomboText.text = _datacenter.BO_Health._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+            _hitcomboText.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
             _hitcomboText.transform.localScale = Vector3.one;
             _hitcomboText.fontSizeMax = 30f;
             _hitcomboText.transform.position = Vector3.Lerp(_hitcomboText.transform.position, CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 2.5f),Time.deltaTime * 20f);

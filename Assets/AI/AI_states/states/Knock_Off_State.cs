@@ -41,7 +41,7 @@ public class Knock_Off_State : AI_State
         return false;
     }
 
-    public override bool force_enter_condition() => BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
+    public override bool force_enter_condition() => _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
 
     Vector3 used_velcoity;
     Decompositioner processingBlood;
@@ -53,26 +53,26 @@ public class Knock_Off_State : AI_State
         base.AI_State_enter();
         this._DATA_CENTER.setGravitySwitch(false);
         this.time_counter = 0;
-        this.BS_Main_Health.SetGettingDamageState(true);
+        this._FightAttriCalReference.SetGettingDamageState(true);
         this._Animator.SetFloat("speed", 0f);
         this._Weapon_Animation_Events.clearMarkerManagers();
-        this.BS_Main_Health.EnableAllHitBoxCollider(false);
+        this._FightAttriCalReference.EnableAllHitBoxCollider(false);
         this.personality_Events.CloseAllPersonalityEffects();
 
-		if (BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0)
+		if (_FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Count > 0)
         {
-			BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Clear();
+			_FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Clear();
         }
-		if (BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0)
+		if (_FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0)
         {
-			BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Clear();
+			_FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Clear();
         }
-		if (BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0)
+		if (_FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0)
         {
-			BS_Main_Health.ReturnDamageList(DamageType.light_damage).Clear();
+			_FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Clear();
         }
 
-        this.BS_Main_Health.plusCriticalGauge(2);
+        this._FightAttriCalReference.plusCriticalGauge(2);
 
         _Rigidbody.velocity = Vector3.zero;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
@@ -83,21 +83,21 @@ public class Knock_Off_State : AI_State
                 
         Animation_Manger.animationTrigger(knockoffAnimations[ranDom]);
         
-        if (BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage) != null)
+        if (_FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage) != null)
         {
-			if (BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage).Count > 0)
+			if (_FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0)
             {
                 //if (BS_Main_Health.returnDamageList(damageType.supper_damage)[0].ifExplosion)
-				force_direction = BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].force_direction;
-                KnockOffSparkPersonalEffectPath = BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon != null
-                    ? BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon.personalEffectPath
+				force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].force_direction;
+                KnockOffSparkPersonalEffectPath = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon != null
+                    ? _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon.personalEffectPath
                     : null;
 
                 superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
                 if (superHitPool != null)
                 {
                     processingBlood = superHitPool.Rent();
-                    processingBlood.transform.position = BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].damageHappenPoint;
+                    processingBlood.transform.position = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].damageHappenPoint;
                     processingBlood.transform.rotation = Quaternion.identity;
                 }
                 
@@ -114,9 +114,9 @@ public class Knock_Off_State : AI_State
 
                 used_velcoity = force_direction.normalized * horizentalForce + Vector3.up * Upforce;
 			    _Rigidbody.velocity = used_velcoity;
-                BS_Main_Health.EatDamage(DamageType.knockOff_damage);
+                _FightAttriCalReference.EatDamage(DamageType.knockOff_damage);
             }
-            BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage).Clear();
+            _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Clear();
         }
     }
 
@@ -128,57 +128,57 @@ public class Knock_Off_State : AI_State
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        BS_Main_Health.SetGettingDamageState(false);
-        BS_Main_Health.EnableAllHitBoxCollider(true);
+        _FightAttriCalReference.SetGettingDamageState(false);
+        _FightAttriCalReference.EnableAllHitBoxCollider(true);
         _Rigidbody.velocity = Vector3.zero;
     }
 
     private void ClearOtherDamage()
 	{
-        if (BS_Main_Health.ReturnDamageList(DamageType.supper_damage) != null && BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0)
+        if (_FightAttriCalReference.ReturnDamageList(DamageType.supper_damage) != null && _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Count > 0)
         {
             //force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-            force_direction = BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].force_direction;
+            force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].force_direction;
             force_direction.y = 20f;
 
-            this.BS_Main_Health.plusCriticalGauge(2);
+            this._FightAttriCalReference.plusCriticalGauge(2);
 
-            BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
-                                    BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                    BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].fromWeapon));
+            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                                    _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, _FightAttriCalReference,
+                                                    _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].fromWeapon));
 
-            BS_Main_Health.EatDamage(DamageType.supper_damage);
+            _FightAttriCalReference.EatDamage(DamageType.supper_damage);
         }
 
-        if (BS_Main_Health.ReturnDamageList(DamageType.heavy_damage) != null && BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0)
+        if (_FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage) != null && _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0)
         {
             //force_direction = BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-            force_direction = BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].force_direction;
+            force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0].force_direction;
             force_direction.y = 10f;
 
-            this.BS_Main_Health.plusCriticalGauge(2);
+            this._FightAttriCalReference.plusCriticalGauge(2);
 
-            BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
-                    BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                    BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].fromWeapon));
-            BS_Main_Health.EatDamage(DamageType.heavy_damage);
+            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                    _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0].damageHappenPoint, _FightAttriCalReference,
+                                                    _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0].fromWeapon));
+            _FightAttriCalReference.EatDamage(DamageType.heavy_damage);
         }
         
-        if (BS_Main_Health.ReturnDamageList(DamageType.light_damage) != null)
+        if (_FightAttriCalReference.ReturnDamageList(DamageType.light_damage) != null)
         {
-            if (BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0)
+            if (_FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0)
             {
                 //force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-                force_direction = BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].force_direction;
+                force_direction = _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0].force_direction;
                 force_direction.y = 5f;
 
-                this.BS_Main_Health.plusCriticalGauge(2);
+                this._FightAttriCalReference.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
-                                                        BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].fromWeapon));
+                _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                                                        _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0].damageHappenPoint, _FightAttriCalReference,
+                                                        _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0].fromWeapon));
 
-                BS_Main_Health.EatDamage(DamageType.light_damage);
+                _FightAttriCalReference.EatDamage(DamageType.light_damage);
             }
         }
 	}

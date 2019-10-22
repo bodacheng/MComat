@@ -9551,12 +9551,12 @@ GameObject:
   - component: {fileID: 6196606117408441260}
   - component: {fileID: 4840639462965592182}
   - component: {fileID: 1727937447876611250}
-  - component: {fileID: 467587610060134973}
   - component: {fileID: 8563159649483002976}
   - component: {fileID: 708686150975484601}
   - component: {fileID: 7714745314327202155}
   - component: {fileID: 1077883854756308730}
   - component: {fileID: 5090883234602509498}
+  - component: {fileID: 7071161691451479458}
   m_Layer: 0
   m_Name: Bip001 Spine
   m_TagString: Untagged
@@ -9593,7 +9593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterType: 
   State_Transition_Set_List: []
-  _BO_Health: {fileID: 467587610060134973}
+  _BO_Health: {fileID: 7071161691451479458}
   _SkillCancelFlag: {fileID: 5781534655262093093}
   AI_States_path: 
   usingScript: {fileID: 0}
@@ -9614,21 +9614,6 @@ MonoBehaviour:
   Coroutine_Step: 1
   _toUse: {fileID: 0}
   animationcounter: 0
---- !u!114 &467587610060134973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471929277300103127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64302b6f1393d4489eb1b9772c82fd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  _Center: {fileID: 5090883234602509498}
-  AT: 10
 --- !u!114 &8563159649483002976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9702,7 +9687,7 @@ MonoBehaviour:
   _SkillCancelFlag: {fileID: 5781534655262093093}
   _BO_Ani_E: {fileID: 5917018132167247021}
   Rigidbody: {fileID: 6039594567023373191}
-  BO_Health: {fileID: 467587610060134973}
+  _FightAttriCalReference: {fileID: 7071161691451479458}
   bO_Weapon_Animation_Events: {fileID: 6125507241833871317}
   pusher: {fileID: 4524982398699286260}
   AIStateRunner: {fileID: 4840639462965592182}
@@ -9725,6 +9710,21 @@ MonoBehaviour:
   Shield: {fileID: 0}
   onBattleGroundBundary: 0
   antiWallDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &7071161691451479458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471929277300103127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64875388d5fcb4231ab05c2b5dfa741c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Center: {fileID: 5090883234602509498}
+  weight: 1
+  AT: 10
 --- !u!1 &1483218098297466947
 GameObject:
   m_ObjectHideFlags: 0
@@ -15304,7 +15304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHealth: {fileID: 467587610060134973}
+  MainHealth: {fileID: 7071161691451479458}
   myColliderMustEquip: {fileID: 0}
 --- !u!1 &4229746909885423208
 GameObject:
