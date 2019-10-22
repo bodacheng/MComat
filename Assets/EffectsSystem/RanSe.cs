@@ -26,12 +26,12 @@ public class RanSe : MonoBehaviour {
         sensorRate++;
     }
 
-    List<BO_Health> FocousingNearbyEnemyHealthBodies;
-    BO_Health studyingHealthBody;
+    List<FightAttriCalReference> FocousingNearbyEnemyHealthBodies;
+    FightAttriCalReference studyingHealthBody;
     BO_Hitbox studyingHitBox;
-    public List<BO_Health> getNearbyEnemyHealthBody(string[] enemy_tags)
+    public List<FightAttriCalReference> getNearbyEnemyHealthBody(string[] enemy_tags)
     {
-        FocousingNearbyEnemyHealthBodies = new List<BO_Health>();
+        FocousingNearbyEnemyHealthBodies = new List<FightAttriCalReference>();
         foreach (Collider hit in this._hits)
         {
             if (hit != null)
@@ -41,7 +41,7 @@ public class RanSe : MonoBehaviour {
                     studyingHealthBody = null;
                     continue;
                 }
-                studyingHealthBody = hit.GetComponent<BO_Health>();
+                studyingHealthBody = hit.GetComponent<FightAttriCalReference>();
                 if (studyingHealthBody != null)
                 {
                     if (!FocousingNearbyEnemyHealthBodies.Contains(studyingHealthBody))

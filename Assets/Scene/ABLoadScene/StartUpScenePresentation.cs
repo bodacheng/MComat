@@ -11,7 +11,7 @@ public class StartUpScenePresentation : MonoBehaviour
 
     [Space(7)]
     [Header("选择模式T")]
-    public RectTransform testmodeSelectT;
+    public Button LocalMode,NetMode;
     
     [Space(7)]
     [Header("ResourceLordSceneStarter")]
@@ -36,8 +36,11 @@ public class StartUpScenePresentation : MonoBehaviour
     
     void Update()
     {
-        if (pProcessFinished && _resourceLordSceneStarter.dProcessFinished)
-            testmodeSelectT.gameObject.SetActive(true);
+        if (pProcessFinished && _resourceLordSceneStarter.dProcessFinished && !LocalMode.gameObject.activeSelf)
+        {
+            LocalMode.gameObject.SetActive(true);
+            NetMode.gameObject.SetActive(true);
+        }
     }
     
     public IEnumerator presentationProcess()

@@ -63,17 +63,17 @@ public class Death_State : AI_State
         _Rigidbody.velocity = Vector3.zero;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         Animation_Manger.PlayLayerAnim(clip_name);
-        if (this.BS_Main_Health.returnDamageList(damageType.deathknockoff).Count > 0)
+        if (this.BS_Main_Health.ReturnDamageList(DamageType.deathknockoff).Count > 0)
         {
             //if (BS_Main_Health.returnDamageList(damageType.supper_damage)[0].ifExplosion)
-            force_direction = this.BS_Main_Health.returnDamageList(damageType.deathknockoff)[0].force_direction;
-            if (this.BS_Main_Health.returnDamageList(damageType.deathknockoff)[0].fromWeapon != null)
-                KnockOffSparkPersonalEffectPath = this.BS_Main_Health.returnDamageList(damageType.deathknockoff)[0].fromWeapon.personalEffectPath;
+            force_direction = this.BS_Main_Health.ReturnDamageList(DamageType.deathknockoff)[0].force_direction;
+            if (this.BS_Main_Health.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon != null)
+                KnockOffSparkPersonalEffectPath = this.BS_Main_Health.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.personalEffectPath;
             else
                 KnockOffSparkPersonalEffectPath = null;
 
             EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
-                                                 this.BS_Main_Health.returnDamageList(damageType.deathknockoff)[0].damageHappenPoint,this.gameObject.transform.rotation,
+                                                 this.BS_Main_Health.ReturnDamageList(DamageType.deathknockoff)[0].damageHappenPoint,this.gameObject.transform.rotation,
                                                  this.BS_Main_Health.transform);               
             force_direction.y = 0;
             if (if_r_rotation)
@@ -83,7 +83,7 @@ public class Death_State : AI_State
             _Rigidbody.velocity = used_velcoity;
         }
         this.personality_Events.CloseAllPersonalityEffects();
-        this.BS_Main_Health.clearDamageLists();
+        this.BS_Main_Health.ClearDamageLists();
     }
 
     public override void AI_State_exit()

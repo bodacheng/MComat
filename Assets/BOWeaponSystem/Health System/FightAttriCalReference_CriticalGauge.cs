@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class BO_Health : MonoBehaviour
+public partial class FightAttriCalReference : MonoBehaviour
 {
     private int critical_gauge = 100;//和skillcancelflag一样与角色的技能发动条件息息相关，所以放在这里
     private bool gauge_collecting = true;

@@ -6,58 +6,61 @@ using System.Linq;
 using HittingDetection;
 
 //整个脚本中有若干个量并没有在本脚本内进行任何计算，就是起了个作为属性被参考的作用，原因在于为了保持BO武器脚本只参考BO系列文件的状态。
-public partial class BO_Health : MonoBehaviour
+public partial class FightAttriCalReference : MonoBehaviour
 {
-	//[Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
-	//public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
+    [Tooltip("数据中心")]
+    public Data_Center _Center;
+    
 	[Tooltip("角色重量级")]
 	public weight weight = weight.normal;
     
-    [Tooltip("数据中心")]
-    public Data_Center _Center;
-
     [Tooltip("当前攻击力")]
     public float AT = 10;
 
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     
-    public static List<Collider> AllMeatColliders = new List<Collider>();    
+    public static List<Collider> AllMeatColliders = new List<Collider>();
+    
     private knockOffCount _knockOffCount = new knockOffCount();    
     private BeHitCount _BeHitCount= new BeHitCount();        
-    private bool gettingdamage = false;
+    private bool gettingdamage;
     private List<BO_Hitbox> myBOHitBoxeComponent = new List<BO_Hitbox>();//713添加
-    private List<e_Damage> Event_Damage_List = new List<e_Damage>();
-    private List<v_Damage> ICauseDamages = new List<v_Damage>();
+    private List<E_Damage> Event_Damage_List = new List<E_Damage>();
+    private List<V_Damage> ICauseDamages = new List<V_Damage>();
     private List<Collider> myColliders;
-    private e_Damage managingEventDamage = null;
-    private List<e_Damage> Event_Attack_Successed_List = new List<e_Damage>();
-    private BO_Shield _shield;  //it's referenced in other scripts 本地初期化值，向datacenter看齐
-    private IDictionary<damageType, List<v_Damage>> DamagesDIC = new Dictionary<damageType, List<v_Damage>>()
+    private E_Damage managingEventDamage;
+    private List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
+    private IDictionary<DamageType, List<V_Damage>> DamagesDIC = new Dictionary<DamageType, List<V_Damage>>()
     {
-        {damageType.slight_damage,new List<v_Damage>()},
-        {damageType.light_damage,new List<v_Damage>()},
-        {damageType.heavy_damage,new List<v_Damage>()},
-        {damageType.supper_damage,new List<v_Damage>()},
-        {damageType.heavy_block,new List<v_Damage>()},
-        {damageType.stagger,new List<v_Damage>()},
-        {damageType.light_block,new List<v_Damage>()},
-        {damageType.knockOff_damage,new List<v_Damage>()},
-        {damageType.deathknockoff,new List<v_Damage>()}
+        {DamageType.slight_damage,new List<V_Damage>()},
+        {DamageType.light_damage,new List<V_Damage>()},
+        {DamageType.heavy_damage,new List<V_Damage>()},
+        {DamageType.supper_damage,new List<V_Damage>()},
+        {DamageType.heavy_block,new List<V_Damage>()},
+        {DamageType.stagger,new List<V_Damage>()},
+        {DamageType.light_block,new List<V_Damage>()},
+        {DamageType.knockOff_damage,new List<V_Damage>()},
+        {DamageType.deathknockoff,new List<V_Damage>()}
     };
     
     UnityEngine.Events.UnityAction gravityloststart;
     UnityEngine.Events.UnityAction gravitylostend;
     customCoroutine burstCoroutine;
 
+    private BO_Shield _shield; //已几乎不再用
+
+    // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
+    // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
+        
     void Awake()
     {
         //registerMyDefaultMaterialsShaderDic();
     }
     
-    public void clearDamageLists()
+    public void ClearDamageLists()
     {
-        foreach (KeyValuePair<damageType, List<v_Damage>> _keyvaluepair in DamagesDIC)
+        foreach (KeyValuePair<DamageType, List<V_Damage>> _keyvaluepair in DamagesDIC)
         {
             _keyvaluepair.Value.Clear();
         }
@@ -74,9 +77,9 @@ public partial class BO_Health : MonoBehaviour
 
     public void HealthBodyFixedUpdate()
     {
-        if (DamagesDIC[damageType.slight_damage].Count > 0)//这里有无法理解的报错
+        if (DamagesDIC[DamageType.slight_damage].Count > 0)//这里有无法理解的报错
         {
-            eatDamage(damageType.slight_damage);
+            EatDamage(DamageType.slight_damage);
         }
         _knockOffCount.update();
         _ComboHitCount.update();
@@ -88,33 +91,25 @@ public partial class BO_Health : MonoBehaviour
         return _knockOffCount;
     }
 
-    public void addToBOHitBoxeComponent(BO_Hitbox bO_Hitbox)
+    public void AddToBOHitBoxeComponent(BO_Hitbox bO_Hitbox)
     {
         if (!myBOHitBoxeComponent.Contains(bO_Hitbox))
         {
             myBOHitBoxeComponent.Add(bO_Hitbox);
         }
     }
-
-    public void enableAllHitBoxCollider(bool _bool)
+    
+    public void EnableAllHitBoxCollider(bool _bool)
     {
         if (myBOHitBoxeComponent != null)
-        {
             foreach (BO_Hitbox hitbox in myBOHitBoxeComponent)
             {
                 if (hitbox.myColliderMustEquip != null)
                     hitbox.myColliderMustEquip.isTrigger = !_bool;
             }
-        }
     }
-    
-    public bool ifMyBody(Collider collider)
-    {
-        if (myColliders.Contains(collider))
-            return true;
-        else
-            return false;
-    }
+
+    public bool IfMyBody(Collider collider) => myColliders.Contains(collider);
 
     public void FindAllSelfCollidersAndIgnoreCollision()
     {
@@ -130,13 +125,11 @@ public partial class BO_Health : MonoBehaviour
                 }
             }
         }
-
         if (_shield != null)
         {
             if (_shield._shieldCollider != null)           
                 myColliders.Add(_shield._shieldCollider);
         }
-
         for (int i = 0; i < myColliders.Count; i++)
         {
             for (int y = i + 1; y < myColliders.Count; y++)
@@ -147,19 +140,20 @@ public partial class BO_Health : MonoBehaviour
         }
     }
 
-    public void changeLayerForAllSelfColliders(int layer)
+    public void ChangeLayerForAllSelfColliders(int layer)
     {
         if (myBOHitBoxeComponent != null)
         {
-            foreach (BO_Hitbox _BO_Hitbox in myBOHitBoxeComponent)
+            for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
             {
+                BO_Hitbox _BO_Hitbox = myBOHitBoxeComponent[i];
                 _BO_Hitbox.gameObject.layer = layer;
             }
         }
         this.gameObject.layer = layer;
     }
 
-    public void myDamageCount(v_Damage _dmg)
+    public void MyDamageCount(V_Damage _dmg)
     {
         if (this.ICauseDamages != null)
         {
@@ -167,78 +161,39 @@ public partial class BO_Health : MonoBehaviour
         }
     }
 
-	public void setManagingEventDamage(e_Damage e)
-	{
-		this.managingEventDamage = e;
-	}
-	public e_Damage getManagingEventDamage()
-	{
-		return this.managingEventDamage;
-	}
-	public void eventAttackHitApprove(e_Damage e)
-	{
-		this.Event_Attack_Successed_List.Add(e);
-	}
-	public void addEventDamageList(e_Damage e)
-	{
-		e.setDamagedHealthBody(this);
-		this.Event_Damage_List.Add(e);
-	}
-	public List<e_Damage> returnEventDamageList()
-	{
-		return this.Event_Damage_List;
-	}
-	public List<e_Damage> returnApprovedEventAttackAttempts()
-	{
-		return this.Event_Attack_Successed_List;
-	}
-	public List<v_Damage> returnDamageList(damageType type)
-	{
-        if (DamagesDIC.ContainsKey(type))
-            return DamagesDIC[type];
-        else
-            return null;
-	}
-
-    public void setShield(BO_Shield _shield)
-	{
-		this._shield = _shield;
-	}
-	public BO_Shield getShield()
-	{
-		return this._shield;
-	}
-
-    public void eatDamageProcess(List<v_Damage> v_Damages)
+    List<V_Damage> processingDlist;
+    V_Damage processingD;
+    private void EatDamageProcess(List<V_Damage> v_Damages)
     {
-        foreach(v_Damage _dmg in v_Damages.ToList())//这个ToList()不加的话可能报错：Collection was modified; enumeration operation may not execute
+        processingDlist = v_Damages.ToList();
+        for (int i = 0; i < processingDlist.Count; i++)//这个ToList()不加的话可能报错：Collection was modified; enumeration operation may not execute
         {
+            processingD = processingDlist[i];
             _BeHitCount.BeHitCountPlus();
-
-            if (_dmg.fromWeapon != null)
+            if (processingD.fromWeapon != null)
             {
-                if (_dmg.fromWeapon.GetWeaponOwnerHealth() != null)
-                    _dmg.fromWeapon.GetWeaponOwnerHealth().HitCountPlus();
-                CurrentHp.Value -= _dmg.AT;
+                if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
+                    processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
+                CurrentHp.Value -= processingD.AT;
                 if (CurrentHp.Value <= 0)
                 {
-                    v_Damage deathknockOff;
-                    deathknockOff = new v_Damage(
-                                  damageType.deathknockoff,
-                                  _dmg.force_direction,
-                                  _dmg.damageHappenPoint,
-                                  _dmg.toWho,
-                                  _dmg.fromWeapon);
-                    this.ApplyDamage(deathknockOff);
+                    V_Damage deathknockOff;
+                    deathknockOff = new V_Damage(
+                                   DamageType.deathknockoff,
+                                  processingD.force_direction,
+                                  processingD.damageHappenPoint,
+                                  processingD.toWho,
+                                  processingD.fromWeapon);
+                    ApplyDamage(deathknockOff);
                     _Center.IsDead.Value = true;
-                    this._Center.AIStateRunner.changeState("Death");
-                    break;//重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
+                    _Center.AIStateRunner.changeState("Death");
+                    break; //重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
                 }
             }
             
-            switch(_dmg.specialApply)
+            switch(processingD.specialApply)
             {
-                case specialApply.gravitylost:
+                case SpecialApply.gravitylost:
                     gravityloststart = () =>
                     {
                         _Center.setGravitySwitch(false);
@@ -250,27 +205,24 @@ public partial class BO_Health : MonoBehaviour
                     burstCoroutine = new customCoroutine(gravityloststart, 0.2f, gravitylostend);
                     _Center.buffsRunner.runSubCoroutineOfState(burstCoroutine);
                     break;
-                default:
-                    break;
-            }            
+            }
         }
         v_Damages.Clear();
     }
 
     // 消化伤害
-    public void eatDamage(damageType damageType)
+    public void EatDamage(DamageType damageType)
     {
-        eatDamageProcess(DamagesDIC[damageType]);
-        this._ComboHitCount.HitCountInterrupt();
+        EatDamageProcess(DamagesDIC[damageType]);
+        _ComboHitCount.HitCountInterrupt();
     }
 
-    public void ApplyDamage(v_Damage _dmg)
+    public void ApplyDamage(V_Damage _dmg)
 	{
 		//if ((PhotonNetwork.connected && !photonView.isMine))
 		//	return;//同步系统中伤害判定最关键的一条逻辑
 
-		//colorTransition =
-		//          ColorTransition.DoTransition(gameObject, new GradientColorKey[] { new GradientColorKey(Color.red, 0.2f), new GradientColorKey(Color.white, 0.2f) }, true, 0f);
+		//colorTransition = ColorTransition.DoTransition(gameObject, new GradientColorKey[] { new GradientColorKey(Color.red, 0.2f), new GradientColorKey(Color.white, 0.2f) }, true, 0f);
 
 		//UnityEngine.Events.UnityAction resetColor = () => { colorTransition.ResetColors(); };
 		//      colorTransition.OnEnd.AddListener(resetColor);
@@ -281,150 +233,199 @@ public partial class BO_Health : MonoBehaviour
         _Center._ResistanceManager.Resistance.Value -= 1;
 		switch (_dmg.damage_type)
 		{
-			case damageType.slight_damage:
+			case DamageType.slight_damage:
                 if (_Center._ResistanceManager.Resistance.Value == 0)
-                    DamagesDIC[damageType.slight_damage].Add(_dmg);
+                    DamagesDIC[DamageType.slight_damage].Add(_dmg);
                 break;
-			case damageType.light_damage:
+			case DamageType.light_damage:
                 switch (this.weight)
 				{
 					case weight.light:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            _dmg.damage_type = damageType.heavy_damage;
-                            DamagesDIC[damageType.heavy_damage].Add(_dmg);
+                            _dmg.damage_type = DamageType.heavy_damage;
+                            DamagesDIC[DamageType.heavy_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.heavy_block].Add(_dmg);
+                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
                         break;
 					case weight.normal:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            DamagesDIC[damageType.light_damage].Add(_dmg);
+                            DamagesDIC[DamageType.light_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.light_block].Add(_dmg);
+                            DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
                         break;
 					case weight.heavy:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            _dmg.damage_type = damageType.light_damage;
-                            DamagesDIC[damageType.light_damage].Add(_dmg);
+                            _dmg.damage_type = DamageType.light_damage;
+                            DamagesDIC[DamageType.light_damage].Add(_dmg);
                         }else
                         {
-                            DamagesDIC[damageType.light_block].Add(_dmg);
+                            DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
                         break;
 					default:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            DamagesDIC[damageType.light_damage].Add(_dmg);
+                            DamagesDIC[DamageType.light_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.light_block].Add(_dmg);
+                            DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
                         break;
 				}
 				break;
-			case damageType.heavy_damage:
+			case DamageType.heavy_damage:
                 switch (this.weight)
 				{
 					case weight.light:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            _dmg.damage_type = damageType.supper_damage;
-                            DamagesDIC[damageType.supper_damage].Add(_dmg);
+                            _dmg.damage_type = DamageType.supper_damage;
+                            DamagesDIC[DamageType.supper_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.heavy_block].Add(_dmg);
+                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
                         break;
 					case weight.normal:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            DamagesDIC[damageType.heavy_damage].Add(_dmg);
+                            DamagesDIC[DamageType.heavy_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.heavy_block].Add(_dmg);
+                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
                         break;
 					case weight.heavy:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            _dmg.damage_type = damageType.light_damage;
-                            DamagesDIC[damageType.light_damage].Add(_dmg);
+                            _dmg.damage_type = DamageType.light_damage;
+                            DamagesDIC[DamageType.light_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.light_block].Add(_dmg);
+                            DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
                         break;
 					default:
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
-                            DamagesDIC[damageType.heavy_damage].Add(_dmg);
+                            DamagesDIC[DamageType.heavy_damage].Add(_dmg);
                         }else{
-                            DamagesDIC[damageType.heavy_block].Add(_dmg);
+                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
                         break;
 				}
 				break;
-			case damageType.supper_damage:
+			case DamageType.supper_damage:
                 switch (this.weight)
 				{
 					case weight.light:
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
-                        _dmg.damage_type = damageType.knockOff_damage;
-                        DamagesDIC[damageType.knockOff_damage].Add(_dmg);
+                        _dmg.damage_type = DamageType.knockOff_damage;
+                        DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
                     }else{
-                        DamagesDIC[damageType.heavy_block].Add(_dmg);
+                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
                         break;
 					case weight.normal:
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
-                        DamagesDIC[damageType.supper_damage].Add(_dmg);
+                        DamagesDIC[DamageType.supper_damage].Add(_dmg);
                     }else{
-                        DamagesDIC[damageType.heavy_block].Add(_dmg);
+                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
                         break;
 					case weight.heavy:
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
-                        _dmg.damage_type = damageType.heavy_damage;
-                        DamagesDIC[damageType.heavy_damage].Add(_dmg);
+                        _dmg.damage_type = DamageType.heavy_damage;
+                        DamagesDIC[DamageType.heavy_damage].Add(_dmg);
                     }else{
-                        DamagesDIC[damageType.heavy_block].Add(_dmg);
+                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
                         break;
 					default:
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
-                        DamagesDIC[damageType.supper_damage].Add(_dmg);
+                        DamagesDIC[DamageType.supper_damage].Add(_dmg);
                     }else{
-                        DamagesDIC[damageType.heavy_block].Add(_dmg);
+                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
                     break;
 				}
 				break;
-			case damageType.knockOff_damage:
-                DamagesDIC[damageType.knockOff_damage].Add(_dmg);
+			case DamageType.knockOff_damage:
+                DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
                 break;
-            case damageType.deathknockoff:
-                DamagesDIC[damageType.deathknockoff].Add(_dmg);
+            case DamageType.deathknockoff:
+                DamagesDIC[DamageType.deathknockoff].Add(_dmg);
                 break;
-            case damageType.light_block:
-                DamagesDIC[damageType.light_block].Add(_dmg);
+            case DamageType.light_block:
+                DamagesDIC[DamageType.light_block].Add(_dmg);
                 break;
-			case damageType.heavy_block:
-                DamagesDIC[damageType.heavy_block].Add(_dmg);
+			case DamageType.heavy_block:
+                DamagesDIC[DamageType.heavy_block].Add(_dmg);
                 break;
-			case damageType.stagger:
-                DamagesDIC[damageType.stagger].Add(_dmg);
+			case DamageType.stagger:
+                DamagesDIC[DamageType.stagger].Add(_dmg);
                 break;
 			default:
 				break;
 		}
 	}
+    
+    public void HitCountPlus() => this._ComboHitCount.HitCountPlus();//打别人计数
+    public int GetBeHitCount() => this._BeHitCount.getBeHitCount(); //自己被揍计数
+    public void BeHitCountInterrupt() => this._BeHitCount.BeHitCountInterrupt();
 
-	private Shader One_Shader = null; //"ShurikenMagic/TransparentRim"   //
-    public void swapShader(string shaderName)
+    // 旧防御盾系列函数。已经基本不用
+    public void SetShield(BO_Shield _shield)
+    {
+        FightAttriCalReference fightAttriCalReference = this;
+        fightAttriCalReference._shield = _shield;
+    }
+    public BO_Shield GetShield()
+    {
+        return _shield;
+    }
+
+    // event 攻击系列。暂时不再使用
+    public void SetManagingEventDamage(E_Damage e)
+    {
+        this.managingEventDamage = e;
+    }
+    public E_Damage GetManagingEventDamage()
+    {
+        return managingEventDamage;
+    }
+    public void eventAttackHitApprove(E_Damage e)
+    {
+        this.Event_Attack_Successed_List.Add(e);
+    }
+    public void AddEventDamageList(E_Damage e)
+    {
+        e.SetDamagedHealthBody(this);
+        this.Event_Damage_List.Add(e);
+    }
+    public List<E_Damage> ReturnEventDamageList()
+    {
+        return this.Event_Damage_List;
+    }
+    public List<E_Damage> ReturnApprovedEventAttackAttempts()
+    {
+        return this.Event_Attack_Successed_List;
+    }
+    public List<V_Damage> ReturnDamageList(DamageType type)
+    {
+        if (DamagesDIC.ContainsKey(type))
+            return DamagesDIC[type];
+        else
+            return null;
+    }
+
+    Shader One_Shader;
+    public void SwapShader(string shaderName)
     {
         One_Shader = Shader.Find(shaderName);
         foreach (Renderer singleRenderer in GetComponentsInChildren<Renderer>())
@@ -442,7 +443,7 @@ public partial class BO_Health : MonoBehaviour
     }
 
     IDictionary<int, Shader> myDefaultMaterialsShaderDic;
-    void registerMyDefaultMaterialsShaderDic()
+    private void RegisterMyDefaultMaterialsShaderDic()
     {
         myDefaultMaterialsShaderDic = new Dictionary<int, Shader>();
         foreach (Renderer singleRenderer in GetComponentsInChildren<Renderer>())
@@ -452,16 +453,14 @@ public partial class BO_Health : MonoBehaviour
                 continue;
             }
             foreach (Material singleMaterial in singleRenderer.materials)
-            {
                 if (!myDefaultMaterialsShaderDic.ContainsKey(singleMaterial.GetHashCode()))
                 {
                     myDefaultMaterialsShaderDic.Add(new KeyValuePair<int, Shader>(singleMaterial.GetHashCode(), singleMaterial.shader));
                 }
-            }
         }
     }
 
-    public void restoreMyDefaultMaterialsShaders()
+    public void RestoreMyDefaultMaterialsShaders()
     {
         if (myDefaultMaterialsShaderDic == null)
             return;
@@ -480,10 +479,30 @@ public partial class BO_Health : MonoBehaviour
             }
         }
     }
-
-	public Coroutine process;
-    private Color damagecolor;
-    public void runShaderChangeProcess(string magicKind,float speed,float time)
+        
+    public IEnumerator ShaderChange(string magicKind,float time)
+    {
+        switch(magicKind)
+        {
+            case "redMagic":
+                SwapShader("Hurt/Red");
+                break;
+            case "blueMagic":
+                SwapShader("Hurt/Red");
+                break;
+            case "greenMagic":
+                SwapShader("Hurt/Red");
+                break;
+            default:
+                SwapShader("Hurt/Red");
+                break;
+        }
+        yield return new WaitForSeconds(time);
+        RestoreMyDefaultMaterialsShaders();
+    }
+    
+    Color damagecolor;
+    public void RunShaderChangeProcess(string magicKind,float speed,float time)
     {
         //process = StartCoroutine(shaderChange(magicKind,time));
         if (_Center._ShaderManager != null)
@@ -511,41 +530,5 @@ public partial class BO_Health : MonoBehaviour
             }
             _Center._ShaderManager.RimEffectsForAShortTime(0.8f, speed, time, damagecolor);
         }
-    }
-
-    public IEnumerator shaderChange(string magicKind,float time)
-    {
-		switch(magicKind)
-		{
-			case "redMagic":
-				swapShader("Hurt/Red");
-				break;
-			case "blueMagic":
-				swapShader("Hurt/Red");
-				break;
-			case "greenMagic":
-				swapShader("Hurt/Red");
-				break;
-			default:
-				swapShader("Hurt/Red");
-				break;
-		}
-		yield return new WaitForSeconds(time);
-        restoreMyDefaultMaterialsShaders();
-    }
-
-    public void HitCountPlus()//打别人计数
-    {
-        this._ComboHitCount.HitCountPlus();
-    }
-
-    public int getBeHitCount()//自己被揍计数
-    {
-        return this._BeHitCount.getBeHitCount();
-    }
-
-    public void BeHitCountInterrupt()//自己被揍计数
-    {
-        this._BeHitCount.BeHitCountInterrupt();
     }
 }

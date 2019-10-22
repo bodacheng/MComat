@@ -113,7 +113,7 @@ public class DATACENTERGUI : Editor {
             myScript.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
             myScript.Animation_Manger = myScript.gameObject.GetComponent<Animation_Manger>();
             myScript.Animation_Manger.Animator = myScript.animator;
-            myScript.BO_Health = myScript.gameObject.GetComponent<BO_Health>();
+            myScript.BO_Health = myScript.gameObject.GetComponent<FightAttriCalReference>();
             myScript.BO_Health._Center = myScript;
             myScript.AIStateRunner = myScript.gameObject.GetComponent<AIStateRunner>();            
             myScript.AIStateRunner._BO_Health = myScript.BO_Health;

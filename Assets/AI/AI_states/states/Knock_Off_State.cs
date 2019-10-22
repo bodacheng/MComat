@@ -6,12 +6,11 @@ using Soul;
 
 public class Knock_Off_State : AI_State
 {
-    private float knock_off_time;
-    private float time_counter;
-    private float Upforce;
-    private float horizentalForce;
-    bool if_r_rotation;
-
+    readonly float knock_off_time;
+    float time_counter;
+    readonly float Upforce;
+    readonly float horizentalForce;
+    readonly bool if_r_rotation;
     DecompositionerPool superHitPool;
 
     public Knock_Off_State(float knock_off_time, float Upforce,float horizentalForce)
@@ -42,17 +41,7 @@ public class Knock_Off_State : AI_State
         return false;
     }
 
-    public override bool force_enter_condition()
-    {
-		if (BS_Main_Health.returnDamageList(damageType.knockOff_damage).Count > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    public override bool force_enter_condition() => BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
 
     Vector3 used_velcoity;
     Decompositioner processingBlood;
@@ -67,20 +56,20 @@ public class Knock_Off_State : AI_State
         this.BS_Main_Health.SetGettingDamageState(true);
         this._Animator.SetFloat("speed", 0f);
         this._Weapon_Animation_Events.clearMarkerManagers();
-        this.BS_Main_Health.enableAllHitBoxCollider(false);
+        this.BS_Main_Health.EnableAllHitBoxCollider(false);
         this.personality_Events.CloseAllPersonalityEffects();
 
-		if (BS_Main_Health.returnDamageList(damageType.supper_damage).Count > 0)
+		if (BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0)
         {
-			BS_Main_Health.returnDamageList(damageType.supper_damage).Clear();
+			BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Clear();
         }
-		if (BS_Main_Health.returnDamageList(damageType.heavy_damage).Count > 0)
+		if (BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0)
         {
-			BS_Main_Health.returnDamageList(damageType.heavy_damage).Clear();
+			BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Clear();
         }
-		if (BS_Main_Health.returnDamageList(damageType.light_damage).Count > 0)
+		if (BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0)
         {
-			BS_Main_Health.returnDamageList(damageType.light_damage).Clear();
+			BS_Main_Health.ReturnDamageList(DamageType.light_damage).Clear();
         }
 
         this.BS_Main_Health.plusCriticalGauge(2);
@@ -94,22 +83,21 @@ public class Knock_Off_State : AI_State
                 
         Animation_Manger.animationTrigger(knockoffAnimations[ranDom]);
         
-        if (BS_Main_Health.returnDamageList(damageType.knockOff_damage) != null)
+        if (BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage) != null)
         {
-			if (BS_Main_Health.returnDamageList(damageType.knockOff_damage).Count > 0)
+			if (BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage).Count > 0)
             {
                 //if (BS_Main_Health.returnDamageList(damageType.supper_damage)[0].ifExplosion)
-				force_direction = BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].force_direction;
-                if (BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].fromWeapon != null)
-                    KnockOffSparkPersonalEffectPath = BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].fromWeapon.personalEffectPath;
-                else
-                    KnockOffSparkPersonalEffectPath = null;
+				force_direction = BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].force_direction;
+                KnockOffSparkPersonalEffectPath = BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon != null
+                    ? BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon.personalEffectPath
+                    : null;
 
                 superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
                 if (superHitPool != null)
                 {
                     processingBlood = superHitPool.Rent();
-                    processingBlood.transform.position = BS_Main_Health.returnDamageList(damageType.knockOff_damage)[0].damageHappenPoint;
+                    processingBlood.transform.position = BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage)[0].damageHappenPoint;
                     processingBlood.transform.rotation = Quaternion.identity;
                 }
                 
@@ -126,80 +114,71 @@ public class Knock_Off_State : AI_State
 
                 used_velcoity = force_direction.normalized * horizentalForce + Vector3.up * Upforce;
 			    _Rigidbody.velocity = used_velcoity;
-                BS_Main_Health.eatDamage(damageType.knockOff_damage);
+                BS_Main_Health.EatDamage(DamageType.knockOff_damage);
             }
-            BS_Main_Health.returnDamageList(damageType.knockOff_damage).Clear();
+            BS_Main_Health.ReturnDamageList(DamageType.knockOff_damage).Clear();
         }
     }
 
     public override bool capacity_exit_condition()
     {
-        if (this.time_counter > this.knock_off_time + 1f)
-            return true;
-        else
-            return false;
+        return this.time_counter > this.knock_off_time + 1f;
     }
 
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        this.BS_Main_Health.SetGettingDamageState(false);
-        this.BS_Main_Health.enableAllHitBoxCollider(true);
-        this._Rigidbody.velocity = Vector3.zero;
+        BS_Main_Health.SetGettingDamageState(false);
+        BS_Main_Health.EnableAllHitBoxCollider(true);
+        _Rigidbody.velocity = Vector3.zero;
     }
 
-	void clearOtherDamage()
+    private void ClearOtherDamage()
 	{
-		if (BS_Main_Health.returnDamageList(damageType.supper_damage) != null)
+        if (BS_Main_Health.ReturnDamageList(DamageType.supper_damage) != null && BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0)
         {
-            if (BS_Main_Health.returnDamageList(damageType.supper_damage).Count > 0)
-            {
-                //force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-                force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].force_direction;
-                force_direction.y = 20f;
+            //force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].testHurtGetFixPos - gameObject.transform.position;
+            force_direction = BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].force_direction;
+            force_direction.y = 20f;
 
-                this.BS_Main_Health.plusCriticalGauge(2);
+            this.BS_Main_Health.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
-                                        BS_Main_Health.returnDamageList(damageType.supper_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.supper_damage)[0].fromWeapon));
+            BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                                    BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, BS_Main_Health,
+                                                    BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].fromWeapon));
 
-                BS_Main_Health.eatDamage(damageType.supper_damage);
-            }
+            BS_Main_Health.EatDamage(DamageType.supper_damage);
         }
 
-        if (BS_Main_Health.returnDamageList(damageType.heavy_damage) != null)
+        if (BS_Main_Health.ReturnDamageList(DamageType.heavy_damage) != null && BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0)
         {
-            if (BS_Main_Health.returnDamageList(damageType.heavy_damage).Count > 0)
-            {
-                //force_direction = BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-                force_direction = BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].force_direction;
-                force_direction.y = 10f;
+            //force_direction = BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].testHurtGetFixPos - gameObject.transform.position;
+            force_direction = BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].force_direction;
+            force_direction.y = 10f;
 
-                this.BS_Main_Health.plusCriticalGauge(2);
+            this.BS_Main_Health.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
-                        BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].fromWeapon));
-                BS_Main_Health.eatDamage(damageType.heavy_damage);
-            }
+            BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                    BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].damageHappenPoint, BS_Main_Health,
+                                                    BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].fromWeapon));
+            BS_Main_Health.EatDamage(DamageType.heavy_damage);
         }
-
-        if (BS_Main_Health.returnDamageList(damageType.light_damage) != null)
+        
+        if (BS_Main_Health.ReturnDamageList(DamageType.light_damage) != null)
         {
-            if (BS_Main_Health.returnDamageList(damageType.light_damage).Count > 0)
+            if (BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0)
             {
                 //force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-                force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].force_direction;
+                force_direction = BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].force_direction;
                 force_direction.y = 5f;
 
                 this.BS_Main_Health.plusCriticalGauge(2);
 
-                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
-                                                        BS_Main_Health.returnDamageList(damageType.light_damage)[0].damageHappenPoint, BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.light_damage)[0].fromWeapon));
+                BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                                                        BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].damageHappenPoint, BS_Main_Health,
+                                                        BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].fromWeapon));
 
-                BS_Main_Health.eatDamage(damageType.light_damage);
+                BS_Main_Health.EatDamage(DamageType.light_damage);
             }
         }
 	}

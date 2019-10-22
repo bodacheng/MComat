@@ -7,9 +7,7 @@ namespace HittingDetection
     // Define what kind of thing will happen to characters depend on what kind of attack and shield crossed
     public class Attack_And_Shield_Specification
     {
-
         private static Attack_And_Shield_Specification instance;
-
         public static Attack_And_Shield_Specification Instance
         {
             get
@@ -23,100 +21,66 @@ namespace HittingDetection
         }
 
         // 攻撃方と防衛方にはそれぞれどいうダーメージを与えるのか
-        public attack_on_shield_result Attack_On_Shield_Cal(damageType weapon_damage_type, damageType shield_type)
+        public attack_on_shield_result Attack_On_Shield_Cal(DamageType weapon_damage_type, DamageType shield_type)
         {
-            if ((weapon_damage_type == damageType.light_damage || weapon_damage_type == damageType.slight_damage) &&
-                (shield_type == damageType.normal_shield || shield_type == damageType.hard_shield))
+            if ((weapon_damage_type == DamageType.light_damage || weapon_damage_type == DamageType.slight_damage) &&
+                (shield_type == DamageType.normal_shield || shield_type == DamageType.hard_shield))
             {
-                return new attack_on_shield_result(damageType.stagger, damageType.light_block);
+                return new attack_on_shield_result(DamageType.stagger, DamageType.light_block);
             }
-            if (weapon_damage_type == damageType.heavy_damage && shield_type == damageType.normal_shield)
+            if (weapon_damage_type == DamageType.heavy_damage && shield_type == DamageType.normal_shield)
             {
-                return new attack_on_shield_result(damageType.stagger, damageType.heavy_block);
+                return new attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
             }
-            if (weapon_damage_type == damageType.supper_damage && shield_type == damageType.hard_shield)
+            if (weapon_damage_type == DamageType.supper_damage && shield_type == DamageType.hard_shield)
             {
-                return new attack_on_shield_result(damageType.stagger, damageType.heavy_block);
+                return new attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
             }
-            if (weapon_damage_type == damageType.supper_damage && shield_type == damageType.normal_shield)
+            if (weapon_damage_type == DamageType.supper_damage && shield_type == DamageType.normal_shield)
             {
-                return new attack_on_shield_result(damageType.stagger, damageType.heavy_block);
+                return new attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
             }
-            return new attack_on_shield_result(damageType.stagger, damageType.none);
+            return new attack_on_shield_result(DamageType.stagger, DamageType.none);
         }
-
-        //public skillRangeReference SkillRange(behaviorEnterRange r)
-        //{
-        //    switch(r)
-        //    {
-        //        case behaviorEnterRange.faraway:
-        //            return new skillRangeReference(18f, 9999f);
-        //        case behaviorEnterRange.far:
-        //            return new skillRangeReference(9f, 18f);
-        //        case behaviorEnterRange.middle:
-        //            return new skillRangeReference(5f, 9f);
-        //        case behaviorEnterRange.near:
-        //            return new skillRangeReference(3f, 5f);
-        //        case behaviorEnterRange.close:
-        //            return new skillRangeReference(2f, 3f);
-        //        case behaviorEnterRange.too_close:
-        //            return new skillRangeReference(0f, 2f);
-        //        default:
-        //            return new skillRangeReference(-1f, 9999f);
-        //    }
-        //}
     }
-
-    //public class skillRangeReference
-    //{
-    //    public float near, far;
-    //	public float near2j, far2j;
-    //    public skillRangeReference(float near, float far)
-    //    {
-    //        this.near = near;
-    //        this.far = far;
-    //		near2j = Mathf.Pow (this.near, 2);
-    //		far2j = Mathf.Pow (this.far,2);
-    //    }
-    //}
 
     public class attack_on_shield_result
     {
-        public damageType on_shield_holder, on_weapon_holder;
-        public attack_on_shield_result(damageType on_weapon_holder, damageType on_shield_holder)
+        public DamageType on_shield_holder, on_weapon_holder;
+        public attack_on_shield_result(DamageType on_weapon_holder, DamageType on_shield_holder)
         {
             this.on_shield_holder = on_shield_holder;
             this.on_weapon_holder = on_weapon_holder;
         }
     }
 
-    public class v_Damage
+    public class V_Damage
     {
-        public damageType damage_type;
+        public DamageType damage_type;
         public Vector3 force_direction;
         public Vector3 damageHappenPoint;
-        public BO_Health toWho;
+        public FightAttriCalReference toWho;
         public BO_Marker_Manager fromWeapon;
         public float AT;
 
-        public specialApply specialApply = specialApply.none;
+        public SpecialApply specialApply = SpecialApply.none;
         //public Vector3 testHurtGetFixPos;//这个应该没什么用了。可能在将来删掉
 
-        public v_Damage() { }
-        public v_Damage(damageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, BO_Health toWho, BO_Marker_Manager fromWeapon)
+        public V_Damage() { }
+        public V_Damage(DamageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, FightAttriCalReference toWho, BO_Marker_Manager fromWeapon)
         {
             this.damage_type = damage_type;
             this.force_direction = force_direction;
             this.damageHappenPoint = damageHappenPoint;
             this.toWho = toWho;
             this.fromWeapon = fromWeapon;
-            if (this.fromWeapon != null)
-                this.AT = this.fromWeapon.GetWeaponOwnerHealth().AT;
+            if (this.fromWeapon != null && this.fromWeapon.GetOwnerFightAttriCalReference() != null)
+                this.AT = this.fromWeapon.GetOwnerFightAttriCalReference().AT;
             else
                 this.AT = 0;
-            specialApply = specialApply.none;   
+            specialApply = SpecialApply.none;   
         }
-        public v_Damage(damageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, BO_Health toWho, BO_Marker_Manager fromWeapon,specialApply specialApply)
+        public V_Damage(DamageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, FightAttriCalReference toWho, BO_Marker_Manager fromWeapon,SpecialApply specialApply)
         {
             this.damage_type = damage_type;
             this.force_direction = force_direction;
@@ -124,48 +88,14 @@ namespace HittingDetection
             this.toWho = toWho;
             this.fromWeapon = fromWeapon;
             if (this.fromWeapon != null)
-                this.AT = this.fromWeapon.GetWeaponOwnerHealth().AT;
+                this.AT = this.fromWeapon.GetOwnerFightAttriCalReference().AT;
             else
                 this.AT = 0;
             this.specialApply = specialApply;   
         }
     }
 
-    public class e_Damage
-    {
-        private BO_Health Attacker_Health;
-        private BO_Health Damaged_Health;
-        public Position_set Position_set;
-
-        public e_Damage() { }
-        public e_Damage(BO_Health Attacker_Health, Position_set Position_set)
-        {
-            this.Attacker_Health = Attacker_Health;
-            this.Position_set = Position_set;
-        }
-
-        public BO_Health getAttackerHealthBody()
-        {
-            return this.Attacker_Health;
-        }
-
-        public void setAttackerHealthBody(BO_Health BO_Health)
-        {
-            this.Attacker_Health = BO_Health;
-        }
-
-        public void setDamagedHealthBody(BO_Health b)
-        {
-            this.Damaged_Health = b;
-        }
-
-        public BO_Health getDamagedHealthBody()
-        {
-            return this.Damaged_Health;
-        }
-    }
-
-    public enum damageType : int
+    public enum DamageType
     {
         none = 0,
         slight_damage = 8,//不会对敌人动作产生任何影响
@@ -180,9 +110,44 @@ namespace HittingDetection
         hard_shield = 11,//强防御罩
         deathknockoff = 13
     }
-    public enum specialApply : int
+    
+    public enum SpecialApply
     {
         none = 0,
         gravitylost = 1,
+    }
+    
+    public class E_Damage
+    {
+        private FightAttriCalReference Attacker_Health;
+        private FightAttriCalReference Damaged_Health;
+        public Position_set Position_set;
+
+        public E_Damage() { }
+        public E_Damage(FightAttriCalReference Attacker_Health, Position_set Position_set)
+        {
+            this.Attacker_Health = Attacker_Health;
+            this.Position_set = Position_set;
+        }
+
+        public FightAttriCalReference GetAttackerHealthBody()
+        {
+            return this.Attacker_Health;
+        }
+
+        public void SetAttackerHealthBody(FightAttriCalReference BO_Health)
+        {
+            this.Attacker_Health = BO_Health;
+        }
+
+        public void SetDamagedHealthBody(FightAttriCalReference b)
+        {
+            this.Damaged_Health = b;
+        }
+
+        public FightAttriCalReference GetDamagedHealthBody()
+        {
+            return this.Damaged_Health;
+        }
     }
 }

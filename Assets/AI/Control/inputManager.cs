@@ -41,7 +41,7 @@ public class inputManager {
         return PlayerInputting;
     }
 
-    public void buttonRefreshForCasualTransition(List<State_Rate_Set> avaliable_casual_Transitions,BO_Health _BO_Health)
+    public void buttonRefreshForCasualTransition(List<State_Rate_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
     {
         WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
         foreach (State_Rate_Set transition_key_value in avaliable_casual_Transitions)
@@ -71,7 +71,7 @@ public class inputManager {
         }
     }
 
-    public void buttonRefreshFromStart(List<AI_State> States_for_AbsoluteInput,BO_Health _BO_Health)
+    public void buttonRefreshFromStart(List<AI_State> States_for_AbsoluteInput,FightAttriCalReference _BO_Health)
     {
         WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
         foreach (AI_State _AS in States_for_AbsoluteInput)

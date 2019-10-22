@@ -239,7 +239,7 @@ public partial class G_Attack_State : AI_State {
         {
 			if (BS_Main_Health != null)
             {
-				BS_Main_Health.returnApprovedEventAttackAttempts().Clear();
+				BS_Main_Health.ReturnApprovedEventAttackAttempts().Clear();
             }
         }
         if (isEventAttackEndState)

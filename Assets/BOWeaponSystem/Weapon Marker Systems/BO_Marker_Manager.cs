@@ -25,13 +25,13 @@ namespace HittingDetection
     public partial class BO_Marker_Manager : MonoBehaviour
     {
         [Tooltip("damageTypeOfTheWeapon")]
-        public damageType damage_type = damageType.light_damage;
+        public DamageType damage_type = DamageType.light_damage;
         [Tooltip("damageTypeOfTheWeapon")]
         public WeaponMode _WeaponMode;
         [Tooltip("击中时候靠受力调整敌人位置")]
         public WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
         [Tooltip("特殊施予")]
-        public specialApply _specialApply = specialApply.none;
+        public SpecialApply _specialApply = SpecialApply.none;
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         public bool _startActivated = true;
         [Tooltip("weaponHP, when below 0, is not an energy")]
@@ -69,7 +69,7 @@ namespace HittingDetection
         //[Tooltip("Will this weapon trigger a event?")]
         private bool is_E_weapon;
         //[Tooltip("Only if is_E_weapon is true you need to set a e_Damage to it?")]
-        private e_Damage e_Damage;
+        private E_Damage e_Damage;
         
         private int currentHP;
         public int CurrentHP
@@ -109,7 +109,7 @@ namespace HittingDetection
             }
             if (onEnableEffectT != null)
             {
-                if (ifVectorClean(onEnableEffectT.position))
+                if (IfVectorClean(onEnableEffectT.position))
                 {
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("on_enable_effect", this.personalEffectPath,onEnableEffectT.position, Quaternion.identity, onEnableEffectT);
                 }
@@ -127,13 +127,13 @@ namespace HittingDetection
         {
             _WeaponHolderCenter = T;
         }
-        public BO_Health GetWeaponOwnerHealth()
+        public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
-            return myOwnerHealth;
+            return _FightAttriCalReference;
         }
-        public void SetWeaponOwnerHealth(BO_Health _BO_Health)
+        public void SetOwnerFightAttriCalReference(FightAttriCalReference _BO_Health)
         {
-            myOwnerHealth = _BO_Health;
+            _FightAttriCalReference = _BO_Health;
         }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
@@ -145,14 +145,15 @@ namespace HittingDetection
             if (teamConfig == null)
                 teamConfig = TeamConfig.defaultSet;
             this.gameObject.layer = 0;//武器父节点为默认层，武器层的是marker
-            foreach (BO_Marker _Marker in _markers)
+            for (int i = 0; i < _markers.Length; i++)
             {
+                BO_Marker _Marker = _markers[i];
                 _Marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
                 _Marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
                 _Marker.gameObject.layer = teamConfig.myWeaponLayer;
             }
         }
-        public TeamConfig getTeamConfig()
+        public TeamConfig GetTeamConfig()
         {
             return teamConfig;
         }
@@ -217,7 +218,7 @@ namespace HittingDetection
             }
         }
 
-        public void SetDamageType(damageType damageType)
+        public void SetDamageType(DamageType damageType)
         {
             this.damage_type = damageType;
         }
@@ -229,7 +230,7 @@ namespace HittingDetection
                 HitFlesh = false;
                 HitShield = false;
                 DetectProcess();
-                treatProcess();
+                TreatProcess();
                 ClearMarkersDectections();
             }
         }
@@ -245,36 +246,29 @@ namespace HittingDetection
         void WeaponEnergyExaust(Vector3 Pos, Quaternion Qua)
         {
             if (weaponHP > 0)
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("energy_resolve", this.personalEffectPath, Pos, Qua, null);
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("energy_resolve", personalEffectPath, Pos, Qua, null);
             CurrentHP -= 1;
         }
 
-        public bool ifVectorClean(Vector3 rot)
+        public bool IfVectorClean(Vector3 rot)
         {
             if (rot == Vector3.zero)
                 return false;
 
-            if (float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z))
-            {
-                return false;
-            }
-            if (float.IsInfinity(rot.x) || float.IsInfinity(rot.y) || float.IsInfinity(rot.z))
-            {
-                return false;
-            }
-            return true;
+            return !float.IsNaN(rot.x) && !float.IsNaN(rot.y) && !float.IsNaN(rot.z)
+                && float.IsInfinity(rot.x) || float.IsInfinity(rot.y) || float.IsInfinity(rot.z) ? false : true;
         }
 
         class hitOnHealthBody
         {
-            public hitOnHealthBody(BO_Health _BO_Health, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
+            public hitOnHealthBody(FightAttriCalReference _BO_Health, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
             {
                 this._BO_Health = _BO_Health;
                 this._Startpoint = _Startpoint;
                 this._Direction = _Direction;
                 this.marker_point = marker_point;
             }
-            public BO_Health _BO_Health;
+            public FightAttriCalReference _BO_Health;
             public Vector3 _Startpoint, _Direction, marker_point;
         }
 

@@ -26,7 +26,7 @@ namespace Soul
         #endregion
 
         #region 辅助模块：查看当前EX槽
-        public BO_Health _BO_Health;
+        public FightAttriCalReference _BO_Health;
         #endregion
 
         #region 辅助模块：技能链接时机判断器

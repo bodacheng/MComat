@@ -35,7 +35,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             instance._HitBox.Local_OnEnable();
             if (instance.bullet_GPS != null)
             {
-                instance.bullet_GPS.layerMask = instance._HitBox.getTeamConfig().enemyAndEnemyWeaponLayerMask;
+                instance.bullet_GPS.layerMask = instance._HitBox.GetTeamConfig().enemyAndEnemyWeaponLayerMask;
                 instance.bullet_GPS.Local_OnEnable();
             }
         }  
@@ -48,20 +48,21 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         a.transform.SetParent(Marker.transform);
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
         BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();
-        Rigidbody rigidbody = a.GetComponent<Rigidbody>();
         DanMuTest danMuTest = a.GetComponent<DanMuTest>();
         bullet_GPS bullet_GPS = a.GetComponent<bullet_GPS>();
+        Rigidbody rigidbody = a.GetComponent<Rigidbody>();
+        if (rigidbody == null)
+            rigidbody = a.AddComponent<Rigidbody>();
+        rigidbody.mass = 1;rigidbody.useGravity = false;
         if (bullet_GPS != null)
         {
             decompositioner.bullet_GPS = bullet_GPS;
             bullet_GPS._Rigidbody = rigidbody;
         }
         decompositioner.Rigidbody = rigidbody;
-        if (decompositioner.Rigidbody != null)
-            decompositioner.Rigidbody.useGravity = false;
         decompositioner._HitBox = bO_Marker_Manager;
         decompositioner.danMuTest = danMuTest;
-        decompositioner.setPool(this);
+        decompositioner.SetPool(this);
         return decompositioner;
     }
 }

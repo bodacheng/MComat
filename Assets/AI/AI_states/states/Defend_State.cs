@@ -19,21 +19,21 @@ public class Defend_State : AI_State
         this.block_break_name = block_break_name;
     }
     
-    void defendHPfade(v_Damage damage)
+    void defendHPfade(V_Damage damage)
     {
         switch (damage.damage_type)
         {
-            case damageType.light_block:
+            case DamageType.light_block:
                 defendHP -= 1;
                 break;
-            case damageType.heavy_block:
+            case DamageType.heavy_block:
                 defendHP -= 2;
                 break;
         }
 
         if (defendHP <= 0)
         {
-            this.BS_Main_Health.ApplyDamage(new v_Damage(damageType.supper_damage, damage.force_direction, damage.damageHappenPoint, damage.toWho,null));
+            this.BS_Main_Health.ApplyDamage(new V_Damage(DamageType.supper_damage, damage.force_direction, damage.damageHappenPoint, damage.toWho,null));
             EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null,
                                                  damage.damageHappenPoint, Quaternion.identity,null);
         }
@@ -126,14 +126,14 @@ public class Defend_State : AI_State
         // 我们把defend状态exit中的PlayLayerAnim(_animator_layer_index, null)删除了后就不再产生对应bug。
         // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
         _Rigidbody.drag = 1f;
-        BS_Main_Health.returnDamageList(damageType.heavy_block).Clear();
-        BS_Main_Health.returnDamageList(damageType.light_block).Clear();
+        BS_Main_Health.ReturnDamageList(DamageType.heavy_block).Clear();
+        BS_Main_Health.ReturnDamageList(DamageType.light_block).Clear();
         _ResistanceManager.resistanceClear();
         //AI_DATA_CENTER.turnShield(false);
     }
 
     Vector3 force_direction;
-    v_Damage analyzingDamage;
+    V_Damage analyzingDamage;
     public override void _State_FixedUpdate1()
     {
         if (defendHP > 0)
@@ -158,11 +158,11 @@ public class Defend_State : AI_State
             }
         }
 
-        if (BS_Main_Health.returnDamageList(damageType.heavy_block).Count > 0)
+        if (BS_Main_Health.ReturnDamageList(DamageType.heavy_block).Count > 0)
         {
             this.Animation_Manger.PlayLayerAnim(block_break_name);
-            analyzingDamage = BS_Main_Health.returnDamageList(damageType.heavy_block)[0];
-            analyzingDamage.damage_type = damageType.heavy_block;
+            analyzingDamage = BS_Main_Health.ReturnDamageList(DamageType.heavy_block)[0];
+            analyzingDamage.damage_type = DamageType.heavy_block;
             force_direction = analyzingDamage.force_direction;
             force_direction.y = 0;
 
@@ -173,15 +173,15 @@ public class Defend_State : AI_State
             if (this.BS_Main_Health.hasPlentyGauge(3))
                 _SkillCancelFlag.turn_on_flag();
             defendHPfade(analyzingDamage);
-            BS_Main_Health.returnDamageList(damageType.heavy_block).RemoveAt(0);
+            BS_Main_Health.ReturnDamageList(DamageType.heavy_block).RemoveAt(0);
             this.BS_Main_Health.plusCriticalGauge(2);
         }
 
-        if (BS_Main_Health.returnDamageList(damageType.light_block).Count > 0)
+        if (BS_Main_Health.ReturnDamageList(DamageType.light_block).Count > 0)
         {
             this.Animation_Manger.PlayLayerAnim(block_break_name);
-            analyzingDamage = BS_Main_Health.returnDamageList(damageType.light_block)[0];
-            analyzingDamage.damage_type = damageType.light_block;
+            analyzingDamage = BS_Main_Health.ReturnDamageList(DamageType.light_block)[0];
+            analyzingDamage.damage_type = DamageType.light_block;
             force_direction = analyzingDamage.force_direction;
             force_direction.y = 0;
 
@@ -191,7 +191,7 @@ public class Defend_State : AI_State
                 _SkillCancelFlag.turn_on_flag();
             
             defendHPfade(analyzingDamage);
-            BS_Main_Health.returnDamageList(damageType.light_block).RemoveAt(0);
+            BS_Main_Health.ReturnDamageList(DamageType.light_block).RemoveAt(0);
             this.BS_Main_Health.plusCriticalGauge(2);
         }
         

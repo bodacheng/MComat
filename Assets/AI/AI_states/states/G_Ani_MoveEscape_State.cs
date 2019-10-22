@@ -97,7 +97,7 @@ public class G_Ani_MoveEscape_State : AI_State {
             {
                 df.block_time_counter = 0;
                 this.BS_Main_Health.costCriticalGaugeBySPlevel(3);
-                BS_Main_Health.clearDamageLists();
+                BS_Main_Health.ClearDamageLists();
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
                 this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
             }

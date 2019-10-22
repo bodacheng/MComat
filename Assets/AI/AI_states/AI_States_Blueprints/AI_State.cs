@@ -14,7 +14,7 @@ namespace Soul
         public AIStateRunner _AIStateRunner;
         public Data_Center _DATA_CENTER;
         public BO_Ani_E _BO_Ani_E;
-        public BO_Health BS_Main_Health;
+        public FightAttriCalReference BS_Main_Health;
         public ResistanceManager _ResistanceManager;
         public Pusher _Pusher;
         public Sensor Sensor;
@@ -30,7 +30,7 @@ namespace Soul
         public BlendShapeProxy blendShapeProxy;
         public Personality_events personality_Events;
 
-        public float AT;//攻击力
+        public float AT; //攻击力,或者说攻击力权重。这个设计的目的在于让所有技能的伤害可以在技能表里以一种形式直接设置。
 
         public string StateKey;
         public int splevel;
@@ -149,12 +149,12 @@ namespace Soul
         protected bool DetectApprovedEventAttack()
         {
 
-            BO_Health BO_Health = gameObject.GetComponent<BO_Health>();
-            if (BO_Health.returnApprovedEventAttackAttempts().Count > 0)
+            FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();
+            if (BO_Health.ReturnApprovedEventAttackAttempts().Count > 0)
             {
-                BO_Health.setManagingEventDamage(BO_Health.returnApprovedEventAttackAttempts()[0]);
-                BO_Health.returnApprovedEventAttackAttempts().Clear();
-                BO_Health.getManagingEventDamage().Position_set.run();
+                BO_Health.SetManagingEventDamage(BO_Health.ReturnApprovedEventAttackAttempts()[0]);
+                BO_Health.ReturnApprovedEventAttackAttempts().Clear();
+                BO_Health.GetManagingEventDamage().Position_set.run();
                 return true;
             }
             else
@@ -166,12 +166,12 @@ namespace Soul
         protected void eventAttackEnderProcess()
         {
 
-            BO_Health BO_Health = gameObject.GetComponent<BO_Health>();
-            if (BO_Health.getManagingEventDamage() != null)
+            FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();
+            if (BO_Health.GetManagingEventDamage() != null)
             {
-                BO_Health.getManagingEventDamage().Position_set.end();
+                BO_Health.GetManagingEventDamage().Position_set.end();
             }
-            BO_Health.setManagingEventDamage(null);
+            BO_Health.SetManagingEventDamage(null);
         }
 
         // If the state is based on the distance from the nearest enemy, check if the character is at the proper distance to enter the state

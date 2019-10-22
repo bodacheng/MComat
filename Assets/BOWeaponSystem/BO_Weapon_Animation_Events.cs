@@ -11,8 +11,8 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
     private List<Transform> bodyweaponParts;
     private Transform right_hand, left_hand, right_foot, left_foot, head, tail;    
     private Transform geometryCenter;
-    private BO_Health myownheath;
-    private damageType damageType;
+    private FightAttriCalReference myownheath;
+    private DamageType damageType;
     private Decompositioner target_hitbox;
     static DecompositionerPool default_hitboxPool;
 
@@ -26,7 +26,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         }
     }
     
-    public void assignWeaponsFromDataCenter(BO_Health Ownheath,Transform geometryCenter, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
+    public void assignWeaponsFromDataCenter(FightAttriCalReference Ownheath,Transform geometryCenter, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
     {
         this.myownheath = Ownheath;
         this.geometryCenter = geometryCenter;
@@ -90,19 +90,19 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         switch (e.intParameter)
         {
 			case 0:
-                damageType = damageType.slight_damage;
+                damageType = DamageType.slight_damage;
 				break;
             case 1 :
-                damageType = damageType.light_damage;
+                damageType = DamageType.light_damage;
                 break;
             case 2:
-                damageType = damageType.heavy_damage;
+                damageType = DamageType.heavy_damage;
                 break;
 			case 3:
-                damageType = damageType.supper_damage;
+                damageType = DamageType.supper_damage;
 				break;
             default:
-                damageType = damageType.light_damage;
+                damageType = DamageType.light_damage;
                 break;
         }
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
@@ -131,19 +131,19 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         switch (heavynum)
         {
             case -1:
-                damageType = damageType.slight_damage;
+                damageType = DamageType.slight_damage;
                 break;
             case 1:
-                damageType = damageType.light_damage;
+                damageType = DamageType.light_damage;
                 break;
             case 2:
-                damageType = damageType.heavy_damage;
+                damageType = DamageType.heavy_damage;
                 break;
             case 3:
-                damageType = damageType.supper_damage;
+                damageType = DamageType.supper_damage;
                 break;
             default:
-                damageType = damageType.light_damage;
+                damageType = DamageType.light_damage;
                 break;
         }
         theweapon.SetDamageType(damageType);
@@ -163,7 +163,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         bodyPartsWeaponRegisterDic[t].transform.localPosition = Vector3.zero;        
         bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(_TeamConfig);
         bodyPartsWeaponRegisterDic[t]._HitBox.SetHolderCenter(this.geometryCenter);
-        bodyPartsWeaponRegisterDic[t]._HitBox.SetWeaponOwnerHealth(myownheath);
+        bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(myownheath);
         bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(this._Used_Targets);
         bodyPartsWeaponRegisterDic[t]._HitBox.EnableMarkers();
     }
@@ -174,14 +174,14 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
             return;
         if (bodyPartsWeaponRegisterDic[t] != null)
         {
-            bodyPartsWeaponRegisterDic[t]._HitBox.SetWeaponOwnerHealth(null);
+            bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(null);
             bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(null);
-            default_hitboxPool.Return(bodyPartsWeaponRegisterDic[t]);//diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
+            default_hitboxPool.Return(bodyPartsWeaponRegisterDic[t]); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
             bodyPartsWeaponRegisterDic[t] = null;
         }
     }
     
-    private void RegisterBodyPartWeapon(Transform t,int hit_type)
+    private void RegisterBodyPartWeapon(Transform t,int hit_type) //hit_type == 0: clear ;hit_type != 0 : in
     {
         if (hit_type != 0)
         {

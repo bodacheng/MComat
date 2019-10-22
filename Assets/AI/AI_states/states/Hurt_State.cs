@@ -5,12 +5,14 @@ using HittingDetection;
 using Soul;
 
 public class Hurt_State : AI_State {
-
-    private float light_damage_force, heavy_damage_force;
-    private float light_dizzy_time,heavy_dizzy_time,used_dizzy_time;
+    private readonly float light_damage_force;
+    private readonly float heavy_damage_force;
+    private readonly float light_dizzy_time;
+    private readonly float heavy_dizzy_time;
+    private float used_dizzy_time;
     private Vector3 force_direction;
     private float time_counter;
-	private Coroutine shaderChangeProcess;
+	private readonly Coroutine shaderChangeProcess;
     private List<AnimationClip> hurtclips;
 
     public Hurt_State(float light_damage_force, float heavy_damage_force, float light_dizzy_time,float heavy_dizzy_time)
@@ -29,16 +31,13 @@ public class Hurt_State : AI_State {
 
 	public override bool force_enter_condition()
 	{
-		if (BS_Main_Health.returnDamageList(damageType.heavy_damage).Count > 0 
-			|| BS_Main_Health.returnDamageList(damageType.light_damage).Count > 0
-		    || BS_Main_Health.returnDamageList(damageType.supper_damage).Count > 0
-			|| BS_Main_Health.returnEventDamageList().Count > 0)
-        {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        return BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0
+            || BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0
+            || BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0
+            || BS_Main_Health.ReturnEventDamageList().Count > 0
+            ? true
+            : false;
+    }
 
 	public override void _State_FixedUpdate1()
 	{
@@ -59,60 +58,59 @@ public class Hurt_State : AI_State {
         this._Animator.SetFloat("speed", 0f);
         this._DATA_CENTER.setGravitySwitch(true);//在之后的eatDamage环节可能被再次解放重力
         this.BS_Main_Health.SetGettingDamageState(true);
-        _Weapon_Animation_Events.clearMarkerManagers();
+        this._Weapon_Animation_Events.clearMarkerManagers();
         this._BO_Ani_E.CloseEffectsOnBodyParts();
-        hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
+        this.hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
 
         int ranDom = (int)Random.Range(0,hurtclips.Count);
-
-		if (BS_Main_Health.returnDamageList(damageType.heavy_damage).Count > 0)
+		if (BS_Main_Health.ReturnDamageList(DamageType.heavy_damage).Count > 0)
 		{
             used_dizzy_time = heavy_dizzy_time;
-            force_direction = BS_Main_Health.returnDamageList(damageType.heavy_damage)[0].force_direction;
+            force_direction = BS_Main_Health.ReturnDamageList(DamageType.heavy_damage)[0].force_direction;
             force_direction.y = 0;
             this._Rigidbody.velocity = force_direction.normalized * heavy_damage_force;
             Animation_Manger.animationTrigger(hurtclips[ranDom]);
             BS_Main_Health.GetKnockOffCount().plusGauge(3f);
 			BS_Main_Health.GetKnockOffCount().plusTimeCounter(0.2f);            
-            BS_Main_Health.eatDamage(damageType.heavy_damage);
-            this.BS_Main_Health.plusCriticalGauge(1);
+            BS_Main_Health.EatDamage(DamageType.heavy_damage);
+            BS_Main_Health.plusCriticalGauge(1);
 		}
 
-		if (BS_Main_Health.returnDamageList(damageType.light_damage).Count > 0) 
+		if (BS_Main_Health.ReturnDamageList(DamageType.light_damage).Count > 0) 
         {
             used_dizzy_time = light_dizzy_time;
             //force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-            force_direction = BS_Main_Health.returnDamageList(damageType.light_damage)[0].force_direction;
+            force_direction = BS_Main_Health.ReturnDamageList(DamageType.light_damage)[0].force_direction;
             force_direction.y = 0;
-            this._Rigidbody.velocity = force_direction.normalized * light_damage_force;
+            _Rigidbody.velocity = force_direction.normalized * light_damage_force;
             Animation_Manger.animationTrigger(hurtclips[ranDom]);
-            this.BS_Main_Health.plusCriticalGauge(1);
+            BS_Main_Health.plusCriticalGauge(1);
 			BS_Main_Health.GetKnockOffCount().plusGauge(1f);
             BS_Main_Health.GetKnockOffCount().plusTimeCounter(0.2f);
-            BS_Main_Health.eatDamage(damageType.light_damage);    
+            BS_Main_Health.EatDamage(DamageType.light_damage);    
 			//为了让轻攻击带来的连击能保证持续，不在轻攻击处进行击飞积累
         }
 
-		if (BS_Main_Health.returnDamageList(damageType.supper_damage).Count > 0)
+		if (BS_Main_Health.ReturnDamageList(DamageType.supper_damage).Count > 0)
         {
             used_dizzy_time = heavy_dizzy_time;
             //force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].testHurtGetFixPos - gameObject.transform.position;
-            force_direction = BS_Main_Health.returnDamageList(damageType.supper_damage)[0].force_direction;
+            force_direction = BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].force_direction;
             force_direction.y = 0;
-            this._Rigidbody.velocity = force_direction.normalized * heavy_damage_force;
+            _Rigidbody.velocity = force_direction.normalized * heavy_damage_force;
             Animation_Manger.animationTrigger(hurtclips[ranDom]);
-            this.BS_Main_Health.plusCriticalGauge(1);
+            BS_Main_Health.plusCriticalGauge(1);
 			BS_Main_Health.GetKnockOffCount().plusGauge(4f);
             BS_Main_Health.GetKnockOffCount().plusTimeCounter(0.2f);
             if (BS_Main_Health.GetKnockOffCount().getGauge() >= 10f)
             {
-                BS_Main_Health.ApplyDamage(new v_Damage(damageType.knockOff_damage, force_direction,
-                                                        BS_Main_Health.returnDamageList(damageType.supper_damage)[0].damageHappenPoint, 
+                BS_Main_Health.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
+                                                        BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, 
                                                         BS_Main_Health,
-                                                        BS_Main_Health.returnDamageList(damageType.supper_damage)[0].fromWeapon));
+                                                        BS_Main_Health.ReturnDamageList(DamageType.supper_damage)[0].fromWeapon));
                 BS_Main_Health.GetKnockOffCount().setGauge(0f);
             }
-            BS_Main_Health.eatDamage(damageType.supper_damage);
+            BS_Main_Health.EatDamage(DamageType.supper_damage);
         }
         this.RotateToDirection(-force_direction,0.5f,true);
         this.time_counter = 0f;
@@ -123,13 +121,8 @@ public class Hurt_State : AI_State {
 
 	public override bool capacity_exit_condition()
 	{
-        if (this.time_counter > used_dizzy_time)
-        {
-			return true;
-        }else{
-            return false;
-        }
-	}
+        return this.time_counter > used_dizzy_time ? true : false;
+    }
 
 	public override void AI_State_exit()
 	{

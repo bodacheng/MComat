@@ -7,14 +7,14 @@ using System.Linq;
 public class BO_Hitbox : MonoBehaviour {
 
 	[Tooltip("What is this Limb attached to? Select the desired BS Health script which stores the Health of this Object (for example in one of the limb's parents.")]
-    public BO_Health MainHealth;
+    public FightAttriCalReference MainHealth;
     [Tooltip("ColliderOfThisHitBox.MUST HAVE")]
     public Collider myColliderMustEquip;
 
     void Awake()
 	{
         if (MainHealth != null)       
-            MainHealth.addToBOHitBoxeComponent(this);
+            MainHealth.AddToBOHitBoxeComponent(this);
 	}
 
     public void INI()

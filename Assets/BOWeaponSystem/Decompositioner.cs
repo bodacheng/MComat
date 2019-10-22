@@ -15,24 +15,27 @@ public class Decompositioner : MonoBehaviour {
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;
 
-    public List<ParticleSystem> to_be_stop_emissions;
     public List<MeshRenderer> to_be_faded_renderers;
-
     public AudioSource audioSource;
+    
+    private ParticleSystem to_be_stop_emissions;
     private float counter;
     private int phase;
 
-    public void setPool(DecompositionerPool _DecompositionerPool)
+    void Awake()
+    {
+        to_be_stop_emissions = gameObject.GetComponent<ParticleSystem>();
+    }
+
+    public void SetPool(DecompositionerPool _DecompositionerPool)
     {
         this._DecompositionerPool = _DecompositionerPool;
     }
 
     public void Local_OnEnable()
     {
-        for (int i = 0; i < to_be_stop_emissions.Count; i++)
-        {
-            to_be_stop_emissions[i].Play(true);
-        }
+        if (to_be_stop_emissions != null)
+            to_be_stop_emissions.Play(true);
         phase = 1;
         if (audioSource)
             audioSource.volume = AudioManager.effectsVolumn;
@@ -52,9 +55,9 @@ public class Decompositioner : MonoBehaviour {
                         _HitBox.DisableMarkers();
                         StopEmissions();
                     }
-                    if (_HitBox.GetWeaponOwnerHealth() != null)
+                    if (_HitBox.GetOwnerFightAttriCalReference() != null)
                     {
-                        if (_HitBox.GetWeaponOwnerHealth().IFgettingDamage())
+                        if (_HitBox.GetOwnerFightAttriCalReference().IFgettingDamage())
                         {
                             _HitBox.DisableMarkers();
                             StopEmissions();
@@ -103,15 +106,13 @@ public class Decompositioner : MonoBehaviour {
                     _DecompositionerPool.Return(this);
                 }
             break;
-        }   
+        }
     }
     
     public void StopEmissions()
     {
-        for (int i = 0; i < to_be_stop_emissions.Count; i++)
-        {
-            to_be_stop_emissions[i].Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        }
+        if (to_be_stop_emissions != null)
+            to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
     public void SetMaterialsAlpha(float a)

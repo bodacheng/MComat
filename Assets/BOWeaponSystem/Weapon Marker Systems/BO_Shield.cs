@@ -13,7 +13,7 @@ public class BO_Shield : MonoBehaviour {
     public bool _AdvancedShieldDetection = true;
 
 	[Tooltip("Before we start, if you plan on using this Shield with a character or object equiped with the BS_Main_Health system, please, assign it here. Otherwise the hit detection may not work properly")]
-    public BO_Health _ParentHealth; //it's referenced in other scripts.
+    public FightAttriCalReference _ParentHealth; //it's referenced in other scripts.
 
 	[Tooltip("This fancy named GameObject is used in Advanced Shield Detection. It is a point behind the center of the shield (from the safe side, behind the shield's collider (so it's simply a point near the center of the Shield's Wielder, if it's humantoid, for scale). It's used to calculate if the attack was coming from the front or the back of the shield. [INFO:] Simply create an empty GameObject, set it as a child of your shield and place it accordingly around the shield. Then put it's reference into this variable. [INFO 2:] If you're experiencing that the shild is being hit though the attack was clearly coming from the back (like if the shield is quite big or the attack swipe is large), don't be affraid to pull this spot a bit further behind the shield wielder")]
 	public Transform _ShieldBackSpot;
@@ -47,7 +47,7 @@ public class BO_Shield : MonoBehaviour {
     public zokusei zokusei;
 
     [Tooltip("盾牌伤害类型")]
-    public damageType damage_type = damageType.normal_shield;
+    public DamageType damage_type = DamageType.normal_shield;
 
     private int _hpCounter = 0;
     private DecompositionerPool _hitSparks,shieldBreakSpark;
@@ -110,16 +110,16 @@ public class BO_Shield : MonoBehaviour {
         }
         if (_ParentHealth != null)
         {
-            _ParentHealth.ApplyDamage(new v_Damage(damageType.heavy_damage, Vector3.zero, this._ShieldCenterSpot.position, _ParentHealth,null));
+            _ParentHealth.ApplyDamage(new V_Damage(DamageType.heavy_damage, Vector3.zero, this._ShieldCenterSpot.position, _ParentHealth,null));
         }
     }
 
-    public void iniShield(TeamConfig _TeamConfig,BO_Health bO_Health)
+    public void iniShield(TeamConfig _TeamConfig,FightAttriCalReference bO_Health)
     {
         if (_TeamConfig !=null)
             this.gameObject.layer = _TeamConfig.myShieldLayer;
         this._ParentHealth = bO_Health;
-        bO_Health.setShield(this);
+        bO_Health.SetShield(this);
     }
 
     public void passHitPointsFromWeaponToShiled(List<Vector3> _ShiledHitPositions)
