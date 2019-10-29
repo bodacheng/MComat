@@ -16,7 +16,7 @@ namespace HittingDetection
         // 由于BO_Marker_Manager现在全部都是对象池物件，如果我们认为一个instance返回对象池后就应该不再参与任何工作的话，
         // 原则上我们应该确保一切围绕BO_Marker_Manage的instance，最重要的是里面的myOwnerHealth进行的工作在instance返回对象池前结束
         private FightAttriCalReference _FightAttriCalReference;
-        private attack_on_shield_result collision;
+        private Attack_on_shield_result collision;
         private float _ContinuousDamage_Timer;
         //These DH and DS variables are Distances to the shield spots. Whie the shield is active, DH ("Distance to Health", distance to the back point of the shiled) has to be less than all the other shield edge spots (DS, "Distance to Shield")
         private float dh;
@@ -124,7 +124,7 @@ namespace HittingDetection
 
             if (HitFlesh)
             {
-                foreach (hitOnHealthBody _hitOnHealthBody in hitsOnHealthBody)
+                foreach (HitOnHealthBody _hitOnHealthBody in hitsOnHealthBody)
                 {
                     if (_hitOnHealthBody._BO_Health != null && _Used_Targets.Contains(_hitOnHealthBody._BO_Health.transform) == false)
                     {

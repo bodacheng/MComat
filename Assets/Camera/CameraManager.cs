@@ -18,9 +18,9 @@ public enum Camera_Mode_Num
 public class CameraManager : MonoBehaviour
 {
     public static Camera _camera;
-    public camera_mode current_Camera_Mode;
+    public CameraMode current_Camera_Mode;
     
-    private IDictionary<Camera_Mode_Num, camera_mode> camera_Mode_Dictionary = new Dictionary<Camera_Mode_Num, camera_mode>()
+    private readonly IDictionary<Camera_Mode_Num, CameraMode> camera_Mode_Dictionary = new Dictionary<Camera_Mode_Num, CameraMode>()
     {
         {Camera_Mode_Num.GodPlayerCertainYCamera,new GodPlayerCertainYCamera(5f, 5f, 2f)},
         {Camera_Mode_Num.CertainYAntiVibrationCamera, new CertainYAntiVibrationCamera(7f, 4f)},
@@ -61,7 +61,7 @@ public class CameraManager : MonoBehaviour
     {
         this.camera_Mode_Dictionary.TryGetValue(num, out current_Camera_Mode);
         this.current_Camera_Mode.targets = targets;//有些相机模式的enter函数内处理需要根据targets来
-        this.current_Camera_Mode.enter(_camera);
+        this.current_Camera_Mode.Enter(_camera);
     }
     
     public void Assign_StartToEndModeCamera(Vector3 p, float duration,float sizeoffield)
@@ -69,7 +69,7 @@ public class CameraManager : MonoBehaviour
         this.camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
         _LerpToCertainPlace.setObjPosAndRotAndSpeed(p, duration, sizeoffield);
-        this.current_Camera_Mode.enter(_camera);
+        this.current_Camera_Mode.Enter(_camera);
     }
     
     public void Assign_StartToEndModeCamera(Vector3 p,float duration)
@@ -77,11 +77,11 @@ public class CameraManager : MonoBehaviour
         this.camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
         _LerpToCertainPlace.setObjPosAndRotAndSpeed(p, duration);
-        this.current_Camera_Mode.enter(_camera);
+        this.current_Camera_Mode.Enter(_camera);
     }
 }
 
-public abstract class camera_mode
+public abstract class CameraMode
 {
     protected Transform meCenter;
     public Transform target;
@@ -94,19 +94,19 @@ public abstract class camera_mode
     protected float XZrosOffset, YrosOffset;
     public float duration,fieldOfView;
     
-    public void setMeCenter(Transform meCenter)
+    public void SetMeCenter(Transform meCenter)
     {
         this.meCenter = meCenter;
     }
 
-    public void setCertainYModeParameters(float XZDis, float YDis, Transform meCenter)
+    public void SetCertainYModeParameters(float XZDis, float YDis, Transform meCenter)
     {
         this.YDis = YDis;
         this.XZDis = XZDis;
         this.meCenter = meCenter;
     }
 
-    public void setWatchOverModeParas(float XZdis,float Ydis, float XZrosOffset, float YrosOffset, float speed)
+    public void SetWatchOverModeParas(float XZdis,float Ydis, float XZrosOffset, float YrosOffset, float speed)
     {
         this.XZDis = XZdis;
         this.YDis = Ydis;
@@ -115,7 +115,7 @@ public abstract class camera_mode
         this.speed = speed;
     }
     
-    public virtual void enter(Camera _camera)
+    public virtual void Enter(Camera _camera)
     {
     }
 

@@ -140,7 +140,7 @@ namespace HittingDetection
                                     _StartPoint = _markers[i]._hits[hit_target_index].point;
                                     _StartPoint = _StartPoint + (_markers[i]._hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
                                     //_StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
-                                    hitsOnHealthBody.Add(new hitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction,_markers[i].transform.position));
+                                    hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction,_markers[i].transform.position));
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
                                 {
@@ -272,7 +272,7 @@ namespace HittingDetection
                                                                                                                                                   // 2.
                                                                                                                                                   // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
                                                                                                                                                   // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new hitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction,_markers[i].transform.position));
+                                        hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction,_markers[i].transform.position));
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
                                     {

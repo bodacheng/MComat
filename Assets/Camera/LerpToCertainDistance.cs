@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LerpToCertainDistance : camera_mode
+public class LerpToCertainDistance : CameraMode
 {
     private float distancefromtarget;
     public LerpToCertainDistance(float distance,float speed)

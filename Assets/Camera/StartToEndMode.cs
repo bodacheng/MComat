@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class StartToEndMode : camera_mode
+public class StartToEndMode : CameraMode
 {
     protected Vector3 obj_position;
     protected Quaternion torotation;
@@ -22,7 +22,7 @@ public class StartToEndMode : camera_mode
         this.duration = duration;
     }
         
-    public override void enter(Camera _camera)
+    public override void Enter(Camera _camera)
     {
         _camera.DOFieldOfView(this.fieldOfView,this.duration);
     }

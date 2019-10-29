@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class GodplayerCamera : camera_mode
+class GodplayerCamera : CameraMode
 {
     float distance_use = 1f, distance, zoom_range;
     float x, y;

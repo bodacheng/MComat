@@ -99,7 +99,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         inner_watchetargets.Clear();
         if (focusingChar != null)
         {
-            _CameraManager.current_Camera_Mode.setMeCenter(focusingChar.WholeT);
+            _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
             foreach (Collider _G in focusingChar.Sensor.getInnerEnemiesColliders())
             {
                 inner_watchetargets.Add(_G.transform);

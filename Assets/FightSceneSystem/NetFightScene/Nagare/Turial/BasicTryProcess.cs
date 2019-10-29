@@ -112,7 +112,7 @@ public class BasicTryProcess : NagareProcess
         if (RealTimeGameProcessManager.focusingChar != null)
         {
             _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, watchetargets);
-            _NetFightScene._CameraManager.current_Camera_Mode.setMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
+            _NetFightScene._CameraManager.current_Camera_Mode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
         }
         
         switch (step)

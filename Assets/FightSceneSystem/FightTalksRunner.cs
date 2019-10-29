@@ -79,13 +79,13 @@ public class FightTalksRunner : MonoBehaviour
                     CountDown.text = step.ToString();
                     _CameraManager.Assign_Camera(Camera_Mode_Num.WatchOver, new List<Transform>() { myTeamTs[step].gameObject.transform });
                     allMuTs.Add(myTeamTs[step].gameObject.transform);
-                    _CameraManager.current_Camera_Mode.setWatchOverModeParas(7,5, xzrosoff[step], 0,5f);
+                    _CameraManager.current_Camera_Mode.SetWatchOverModeParas(7,5, xzrosoff[step], 0,5f);
                 }
                 step += 1;
                 if (step == myTeamTs.Count)
                 {
                     _CameraManager.Assign_Camera(Camera_Mode_Num.WatchOver, allMuTs);
-                    _CameraManager.current_Camera_Mode.setWatchOverModeParas(25,14, 0, 0, 5f);
+                    _CameraManager.current_Camera_Mode.SetWatchOverModeParas(25,14, 0, 0, 5f);
                     step += 1;
                 }
                 timeCounter = 0f;
@@ -99,7 +99,7 @@ public class FightTalksRunner : MonoBehaviour
                 allMuTs.Add(_one.transform);
             }
             _CameraManager.Assign_Camera(Camera_Mode_Num.WatchOver, allMuTs);
-            _CameraManager.current_Camera_Mode.setWatchOverModeParas(25, 14, -180, 0, 5f);
+            _CameraManager.current_Camera_Mode.SetWatchOverModeParas(25, 14, -180, 0, 5f);
             step += 1;
         }
 

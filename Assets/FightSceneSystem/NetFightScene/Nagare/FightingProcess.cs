@@ -50,7 +50,7 @@ public class FightingProcess : NagareProcess
         if (RealTimeGameProcessManager.focusingChar != null)
         {
             cameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.WholeT });
-            cameraManager.current_Camera_Mode.setMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
+            cameraManager.current_Camera_Mode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
         }
     }
     

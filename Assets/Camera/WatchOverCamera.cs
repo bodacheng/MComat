@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class WatchOverCamera : camera_mode
+class WatchOverCamera : CameraMode
 {
     private Vector3 direction = Vector3.zero;
     private Quaternion ToRotation;

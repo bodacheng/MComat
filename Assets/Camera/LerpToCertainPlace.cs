@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class LerpToCertainPlace : camera_mode
+public class LerpToCertainPlace : CameraMode
 {
     protected Vector3 obj_position;
     protected Quaternion obj_rotation;
@@ -22,7 +22,7 @@ public class LerpToCertainPlace : camera_mode
         this.obj_rotation = obj_rotation;
     }
     
-    public override void enter(Camera _camera)
+    public override void Enter(Camera _camera)
     {
         _camera.DOFieldOfView(this.fieldOfView,this.duration);
         _camera.transform.DOMoveX(this.obj_position.x,this.duration);

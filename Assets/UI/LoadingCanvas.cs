@@ -79,12 +79,11 @@ public class LoadingCanvas : MonoBehaviour {
     private IEnumerator darkOffCanvas(float toAlpha)
     {
         this.Loading_Canvas.gameObject.SetActive(true);
-        this.Loading_Canvas.transform.SetSiblingIndex(3);
         float a = 0;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
         while (a < toAlpha)
         {
-            a += 0.05f;
+            a += Time.deltaTime;
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
             yield return null;
         }
@@ -94,10 +93,7 @@ public class LoadingCanvas : MonoBehaviour {
     public void arrangeValiationWindow(UnityEngine.Events.UnityAction action, string intro)
     {
         this.Loading_Canvas.gameObject.SetActive(true);
-        this.Loading_Canvas.transform.SetSiblingIndex(3);
-
         this.ValidationWindow.gameObject.SetActive(true);
-        this.ValidationWindow.transform.SetSiblingIndex(4);
 
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0.5f);
 

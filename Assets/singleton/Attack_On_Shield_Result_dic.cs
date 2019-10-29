@@ -21,33 +21,33 @@ namespace HittingDetection
         }
 
         // 攻撃方と防衛方にはそれぞれどいうダーメージを与えるのか
-        public attack_on_shield_result Attack_On_Shield_Cal(DamageType weapon_damage_type, DamageType shield_type)
+        public Attack_on_shield_result Attack_On_Shield_Cal(DamageType weapon_damage_type, DamageType shield_type)
         {
             if ((weapon_damage_type == DamageType.light_damage || weapon_damage_type == DamageType.slight_damage) &&
                 (shield_type == DamageType.normal_shield || shield_type == DamageType.hard_shield))
             {
-                return new attack_on_shield_result(DamageType.stagger, DamageType.light_block);
+                return new Attack_on_shield_result(DamageType.stagger, DamageType.light_block);
             }
             if (weapon_damage_type == DamageType.heavy_damage && shield_type == DamageType.normal_shield)
             {
-                return new attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
+                return new Attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
             }
             if (weapon_damage_type == DamageType.supper_damage && shield_type == DamageType.hard_shield)
             {
-                return new attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
+                return new Attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
             }
             if (weapon_damage_type == DamageType.supper_damage && shield_type == DamageType.normal_shield)
             {
-                return new attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
+                return new Attack_on_shield_result(DamageType.stagger, DamageType.heavy_block);
             }
-            return new attack_on_shield_result(DamageType.stagger, DamageType.none);
+            return new Attack_on_shield_result(DamageType.stagger, DamageType.none);
         }
     }
 
-    public class attack_on_shield_result
+    public class Attack_on_shield_result
     {
         public DamageType on_shield_holder, on_weapon_holder;
-        public attack_on_shield_result(DamageType on_weapon_holder, DamageType on_shield_holder)
+        public Attack_on_shield_result(DamageType on_weapon_holder, DamageType on_shield_holder)
         {
             this.on_shield_holder = on_shield_holder;
             this.on_weapon_holder = on_weapon_holder;

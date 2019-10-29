@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-class keepTargetLeftCamera : camera_mode
+class keepTargetLeftCamera : CameraMode
 {
     Vector3 center = new Vector3(0, 0, 0);
     Quaternion torotation;
 
-    public override void enter(Camera _camera)
+    public override void Enter(Camera _camera)
     {
         _camera.DOOrthoSize(4f,3f);
     }

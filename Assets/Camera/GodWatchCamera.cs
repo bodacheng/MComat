@@ -6,7 +6,7 @@ using UnityEngine;
 // 2. 固定45度角俯视地面
 // 3. 可控制前后移动，可控制水平旋转
 // 思路是，控制相机位置，并且有一个由右遥杆决定的方向量是这个instance里的某固定量，代表相对相机看向的一个相对坐标值
-class GodWatchCamera : camera_mode
+class GodWatchCamera : CameraMode
 {
     public float distance, height;
 

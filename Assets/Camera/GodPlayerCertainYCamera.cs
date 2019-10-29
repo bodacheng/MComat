@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class GodPlayerCertainYCamera : camera_mode
+class GodPlayerCertainYCamera : CameraMode
 {
     Vector3 Xi;
     Vector3 center;
@@ -19,14 +19,12 @@ class GodPlayerCertainYCamera : camera_mode
     {
         if (this.targets == null)
         {
-            //Debug.Log ("GOdPlayer观看模式无目标");
             return;
         }
         else
         {
             if (this.targets.Count == 0)
             {
-                //Debug.Log ("GOdPlayer观看模式无目标");
                 return;
             }
         }

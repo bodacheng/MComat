@@ -123,6 +123,7 @@
     <Compile Include="Assets\Camera\CameraCtr.cs" />
     <Compile Include="Assets\Camera\CameraManager.cs" />
     <Compile Include="Assets\Camera\CertainYAntiVibrationCamera.cs" />
+    <Compile Include="Assets\Camera\FightStartsCamera.cs" />
     <Compile Include="Assets\Camera\GodplayerCamera.cs" />
     <Compile Include="Assets\Camera\GodPlayerCertainYCamera.cs" />
     <Compile Include="Assets\Camera\GodWatchCamera.cs" />

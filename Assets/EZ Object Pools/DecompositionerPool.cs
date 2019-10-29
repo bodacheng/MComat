@@ -24,11 +24,13 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         instance.StopEmissions();
         if (instance._HitBox != null)
             instance._HitBox.Local_OnDisable();
+        instance.gameObject.SetActive(false);
         instance.transform.SetParent(Marker.transform);
     }
 
     protected override void OnBeforeRent(Decompositioner instance)
     {
+        instance.gameObject.SetActive(true);
         instance.Local_OnEnable();
         if (instance._HitBox != null)
         {
@@ -38,7 +40,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
                 instance.bullet_GPS.layerMask = instance._HitBox.GetTeamConfig().enemyAndEnemyWeaponLayerMask;
                 instance.bullet_GPS.Local_OnEnable();
             }
-        }  
+        }
     }
 
     // オブジェクトが空のときにInstantiateする関数
@@ -51,9 +53,11 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         DanMuTest danMuTest = a.GetComponent<DanMuTest>();
         bullet_GPS bullet_GPS = a.GetComponent<bullet_GPS>();
         Rigidbody rigidbody = a.GetComponent<Rigidbody>();
-        if (rigidbody == null)
-            rigidbody = a.AddComponent<Rigidbody>();
-        rigidbody.mass = 1;rigidbody.useGravity = false;
+        if (rigidbody != null)
+        {
+            rigidbody.mass = 1;
+            rigidbody.useGravity = false;
+        }
         if (bullet_GPS != null)
         {
             decompositioner.bullet_GPS = bullet_GPS;

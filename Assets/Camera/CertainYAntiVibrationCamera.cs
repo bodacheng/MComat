@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class CertainYAntiVibrationCamera : camera_mode
+class CertainYAntiVibrationCamera : CameraMode
 {
     bool auto = false;
     Vector3 CameraTargetPos;

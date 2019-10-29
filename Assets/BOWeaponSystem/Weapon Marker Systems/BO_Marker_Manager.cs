@@ -60,7 +60,7 @@ namespace HittingDetection
         private List<Transform> _Shields_Hit = new List<Transform>();
         private List<Vector3> _wallHitPositions = new List<Vector3>();
         private List<Vector3> _ShiledHitPositions = new List<Vector3>();
-        private List<hitOnHealthBody> hitsOnHealthBody = new List<hitOnHealthBody>();
+        private List<HitOnHealthBody> hitsOnHealthBody = new List<HitOnHealthBody>();
         private Decompositioner processingBlood;
         private bool traditionalDefendMode;
         private BO_Shield TheS;
@@ -252,16 +252,14 @@ namespace HittingDetection
 
         public bool IfVectorClean(Vector3 rot)
         {
-            if (rot == Vector3.zero)
-                return false;
-
-            return !float.IsNaN(rot.x) && !float.IsNaN(rot.y) && !float.IsNaN(rot.z)
-                && float.IsInfinity(rot.x) || float.IsInfinity(rot.y) || float.IsInfinity(rot.z) ? false : true;
+            return rot == Vector3.zero
+            || float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z)
+            || !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
         }
 
-        class hitOnHealthBody
+        private class HitOnHealthBody
         {
-            public hitOnHealthBody(FightAttriCalReference _BO_Health, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
+            public HitOnHealthBody(FightAttriCalReference _BO_Health, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
             {
                 this._BO_Health = _BO_Health;
                 this._Startpoint = _Startpoint;

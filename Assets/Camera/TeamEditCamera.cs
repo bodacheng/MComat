@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class TeamEditCamera : camera_mode
+class TeamEditCamera : CameraMode
 {
     public float distance, height;
     Vector3 direction = Vector3.zero;
