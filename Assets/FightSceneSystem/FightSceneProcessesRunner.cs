@@ -1,42 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class FightSceneProcessesRunner
 {
-    public NagareProcess lastProcess;
-    public NagareProcess currentProcess;
-    IDictionary<SceneStep, NagareProcess> SceneProcessDictionary = new Dictionary<SceneStep, NagareProcess>();
-    
-    public void AddNewProcess(SceneStep step,NagareProcess _process)
+    public static NagareProcess lastProcess;
+    public static NagareProcess currentProcess;
+    private static readonly IDictionary<SceneStep, NagareProcess> SceneProcessDictionary = new Dictionary<SceneStep, NagareProcess>();
+
+    public static void Clear()
     {
-        SceneProcessDictionary.Add(step, _process);
+        SceneProcessDictionary.Clear();
     }
-    
-    public NagareProcess accessCertainFightSceneProcessObject(SceneStep step)
-    {
-        return SceneProcessDictionary[step];
-    }
-    
-    public void ProcessNagare()
+
+    public void LocalUpdate()
     {
         if (currentProcess != null)
         {
-            currentProcess.localUpdate();
-            if (currentProcess.canEnterNextProcess() && currentProcess.nextProcessStep != SceneStep.none)
-            {
-                changeProcess(currentProcess.nextProcessStep);
-            }
+            currentProcess.LocalUpdate();
         }
     }
+
+    public void AddNewProcess(SceneStep step, NagareProcess _process)
+    {
+        if (!SceneProcessDictionary.ContainsKey(step))
+            SceneProcessDictionary.Add(step, _process);
+        else {
+            SceneProcessDictionary[step] = _process;
+        }            
+    }
     
-    public void changeProcess(SceneStep sceneStep)
+    public NagareProcess AccessCertainFightSceneProcessObject(SceneStep step)
+    {
+        return SceneProcessDictionary[step];
+    }
+        
+    public static void ChangeProcess(SceneStep sceneStep)
     {
         if (currentProcess != null)
             currentProcess.ProcessEnd();
-        
-        lastProcess = currentProcess;        
-        SceneProcessDictionary.TryGetValue(sceneStep,out currentProcess);
+        lastProcess = currentProcess;
+        currentProcess = SceneProcessDictionary[sceneStep];
         if (currentProcess != null)
         {
             currentProcess.ProcessEnter();

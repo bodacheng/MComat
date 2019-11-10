@@ -10,15 +10,10 @@ public class FightLogger : MonoBehaviour
     Team winner = Team.none;
     Data_Center finalSurviver;
     int wholeteamCount = 0;
-    bool gameOver = false;
+    public ReactiveProperty<bool> gameOver{ get; set; } = new ReactiveProperty<bool>(false);
 
     public List<Team> deadTeam = new List<Team>();
-    
-    public bool ifGameOver()
-    {
-        return gameOver;
-    }
-    
+        
     public Team getWinner()
     {
         return winner;
@@ -44,7 +39,7 @@ public class FightLogger : MonoBehaviour
                     }
                     if (wholeteamCount == deadTeam.Count + 1)
                     {
-                        gameOver = true;
+                        gameOver.Value = true;
                         List<Team> allteams = TeamMembers.Keys.ToList();
                         List<Team> _winner = allteams.Except(deadTeam).ToList();
                         winner = _winner[0];
@@ -53,6 +48,6 @@ public class FightLogger : MonoBehaviour
             }
         }
         winner = Team.none;
-        gameOver = false;       
+        gameOver.Value = false;       
     }
 }

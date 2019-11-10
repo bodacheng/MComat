@@ -4,11 +4,36 @@ using UnityEngine;
 using System.Linq;
 using Api.Dto.Model;
 using dataAccess;
+using UniRx;
 
 // 这个就是FightingProcess的一个变种。
 public class BasicTryProcess : NagareProcess
 {
     int step = 2;// 1. 移动 2. 技能  3.防御  4. 闪避 
+    int Step
+    {
+        set
+        {
+            step = value;
+            switch (step)
+            {
+                case 1:
+                
+                break;
+                case 2:
+                break;
+                case 3:
+                break;
+                case 4:
+                    AutoMoveToNext = true;
+                break; 
+            }
+        }
+        get
+        {
+            return step;
+        }
+    }
     Team loser = Team.none;
     Data_Center finalSurviver;
     IDictionary<Team, List<Data_Center>> TeamDeadMemberDictionary = new Dictionary<Team, List<Data_Center>>();
@@ -25,14 +50,7 @@ public class BasicTryProcess : NagareProcess
         this.nextProcessStep = SceneStep.FightOver;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
     }
-    
-    public override bool canEnterNextProcess()
-    {
-        if (step == 4)
-            return true;
-        else return false;
-    }
-    
+        
     public IEnumerator enterProcess()
     {
         this.BoundaryControllByGod.AllMembers.Clear();
@@ -89,7 +107,7 @@ public class BasicTryProcess : NagareProcess
         mainProcessRunner.triggerMainProcess(finalMoment(finalSurviver, loser));
     }
     
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         _RealTimeGameProcessManager.FightGUIProcess();
 
@@ -108,14 +126,8 @@ public class BasicTryProcess : NagareProcess
                 //BoundaryControllByGod.RoundBattleFieldNormalControl(BoundaryControllByGod.battleRingCenter, 24);
                 break;
         }
-
-        if (RealTimeGameProcessManager.focusingChar != null)
-        {
-            _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, watchetargets);
-            _NetFightScene._CameraManager.current_Camera_Mode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
-        }
         
-        switch (step)
+        switch (Step)
         {
             case 1:
             
@@ -123,19 +135,27 @@ public class BasicTryProcess : NagareProcess
             case 2:
             if (Adam.AIStateRunner.getCurrentStateNum() == adamInfo._NineAndTwo.GetA3Config().REAL_NAME)
             {
-                step = 3;
+                Step = 3;
                     Debug.Log("Success3");
             }
             break;
             case 3:
             if (Adam.AIStateRunner.getCurrentStateNum() == "RushBack")
             {
-                step = 4;
+                Step = 4;
                 Debug.Log("Success4");
             }
-            break;        
+            break;
+            case 4:
+            break; 
         }
 
+        if (RealTimeGameProcessManager.focusingChar != null)
+        {
+            _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, watchetargets);
+            _NetFightScene._CameraManager.current_Camera_Mode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
+        }
+        
         this.TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);
         loser = getDeadTeamLocalGame(TeamDeadMemberDictionary);
     }

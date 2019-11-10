@@ -7,15 +7,15 @@ using Soul;
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
 public class Death_State : AI_State
 {
-    private string clip_name;
-    private float stopRunningTime;
+    private readonly string clip_name;
+    private readonly float stopRunningTime;    
+    private readonly float Upforce;
+    private readonly float horizentalForce;
+    private readonly bool if_r_rotation;
+    private readonly GameObject processingBlood;
+    
     private float time_count;
-
-    private float Upforce;
-    private float horizentalForce;
-    private bool if_r_rotation;
-    private Vector3 used_velcoity;
-    private GameObject processingBlood;
+    private Vector3 used_velcoity;    
     private Vector3 force_direction;
     private string KnockOffSparkPersonalEffectPath;
     private int landedCal;//1 还在地上 2 已经被打飞起来 3 落地
@@ -23,31 +23,29 @@ public class Death_State : AI_State
     public Death_State(float stopRunningTime, string clip_name, float Upforce, float horizentalForce)
     {
         this.stopRunningTime = stopRunningTime;
-
         this.clip_name = clip_name;
         this.Upforce = Upforce;
         this.horizentalForce = horizentalForce;
         if_r_rotation = false;
-
         StateType = stateType.KnockOff;
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
     {
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
     }
 
-    public override bool enter_condition_priority2()
-    {
-        return false;
-    }
-
-    public override bool capacity_exit_condition()
+    public override bool Enter_condition_priority2()
     {
         return false;
     }
 
-    public override bool force_enter_condition()
+    public override bool Capacity_exit_condition()
+    {
+        return false;
+    }
+
+    public override bool Force_enter_condition()
     {
         return false;
     }
@@ -57,17 +55,17 @@ public class Death_State : AI_State
         time_count = 0f;
         base.AI_State_enter();
         this.personality_Events.CloseAllPersonalityEffects();
-        _DATA_CENTER.deathInitialize();
+        _DATA_CENTER.DeathInitialize();
 
         landedCal = 1;
         _Rigidbody.velocity = Vector3.zero;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         Animation_Manger.PlayLayerAnim(clip_name);
-        if (this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff).Count > 0)
+        if (_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff).Count > 0)
         {
             //if (BS_Main_Health.returnDamageList(damageType.supper_damage)[0].ifExplosion)
             force_direction = this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].force_direction;
-            if (this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon != null)
+            if (_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon != null)
                 KnockOffSparkPersonalEffectPath = this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.personalEffectPath;
             else
                 KnockOffSparkPersonalEffectPath = null;
@@ -117,7 +115,7 @@ public class Death_State : AI_State
             }
             else
             {
-                _Rigidbody.velocity = used_velcoity;//一定让它飞起来
+                _Rigidbody.velocity = used_velcoity * 3/4;//一定让它飞起来
             }
         }
         if (landedCal == 2)

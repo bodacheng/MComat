@@ -440,7 +440,7 @@ public class Sensor : MonoBehaviour {
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, 1f);
+        Gizmos.DrawWireSphere(transform.position, sensor_radius);
         //Gizmos.DrawRay(transform.position,selfDataCenter.WholeT.forward * sensor_radius);
     }
 }

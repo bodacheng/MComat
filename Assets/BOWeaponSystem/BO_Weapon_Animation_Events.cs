@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using HittingDetection;
 using UniRx;
+using UnityEngine.Animations;
 
-public class BO_Weapon_Animation_Events : MonoBehaviour {
-
+public class BO_Weapon_Animation_Events : MonoBehaviour
+{
+    public HiddenMethods hiddenMethods;
+    
     private TeamConfig _TeamConfig;
-    private List<Transform> _Used_Targets = new List<Transform>();
-    private IDictionary<Transform,Decompositioner> bodyPartsWeaponRegisterDic;
+    private readonly List<Transform> _Used_Targets = new List<Transform>();
+    private IDictionary<Transform, Decompositioner> bodyPartsWeaponRegisterDic;
     private List<Transform> bodyweaponParts;
-    private Transform right_hand, left_hand, right_foot, left_foot, head, tail;    
+    private Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     private Transform geometryCenter;
     private FightAttriCalReference myownheath;
-    private DamageType damageType;
-    private Decompositioner target_hitbox;
     static DecompositionerPool default_hitboxPool;
 
     void Awake()
     {
+        hiddenMethods = new HiddenMethods(this);
         if (default_hitboxPool == null)
         {
             GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/d_hitbox") as GameObject;
@@ -25,35 +27,124 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
             default_hitboxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
         }
     }
-    
-    public void assignWeaponsFromDataCenter(FightAttriCalReference Ownheath,Transform geometryCenter, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
+
+    public class HiddenMethods
     {
-        this.myownheath = Ownheath;
-        this.geometryCenter = geometryCenter;
-        this.right_hand = right_hand;
-        this.left_hand = left_hand;
-        this.right_foot = right_foot;
-        this.left_foot = left_foot;
-        this.head = head;
-        this.tail = tail;
+        private readonly BO_Weapon_Animation_Events BEs;
+        public HiddenMethods(BO_Weapon_Animation_Events bO_Weapon_Animation_Events)
+        {
+            this.BEs = bO_Weapon_Animation_Events;
+        }
         
-        bodyPartsWeaponRegisterDic = new Dictionary<Transform,Decompositioner>();
-        bodyweaponParts = new List<Transform>();
+        public void AssignTeamFlag(TeamConfig teamConfig)
+        {
+            BEs._TeamConfig = teamConfig;
+        }
+        public void AssignWeaponsFromDataCenter(FightAttriCalReference Ownheath,Transform geometryCenter, Transform right_hand,Transform left_hand,Transform right_foot,Transform left_foot,Transform head,Transform tail)
+        {
+            BEs.myownheath = Ownheath;
+            BEs.geometryCenter = geometryCenter;
+            BEs.right_hand = right_hand;
+            BEs.left_hand = left_hand;
+            BEs.right_foot = right_foot;
+            BEs.left_foot = left_foot;
+            BEs.head = head;
+            BEs.tail = tail;
+            BEs.bodyPartsWeaponRegisterDic = new Dictionary<Transform,Decompositioner>();
+            BEs.bodyweaponParts = new List<Transform>();
+            if (BEs.right_hand != null)
+                BEs.bodyweaponParts.Add(BEs.right_hand);
+            if (BEs.left_hand != null)
+                BEs.bodyweaponParts.Add(BEs.left_hand);
+            if (BEs.left_foot != null)
+                BEs.bodyweaponParts.Add(BEs.left_foot);
+            if (BEs.right_foot != null)
+                BEs.bodyweaponParts.Add(BEs.right_foot);
+            if (BEs.head != null)
+                BEs.bodyweaponParts.Add(BEs.head);
+            if (BEs.tail != null)
+                BEs.bodyweaponParts.Add(BEs.tail);
+        }
+        
+        //注意看0被空出来是和添加 删除有效武器列表中的0参数有关
+        DamageType damageType;
+        Decompositioner target_hitbox;
+        void SetThisWeaponDamageTypeByNum(int heavynum, BO_Marker_Manager theweapon)
+        {
+            switch (heavynum)
+            {
+                case -1:
+                    damageType = DamageType.slight_damage;
+                    break;
+                case 1:
+                    damageType = DamageType.light_damage;
+                    break;
+                case 2:
+                    damageType = DamageType.heavy_damage;
+                    break;
+                case 3:
+                    damageType = DamageType.supper_damage;
+                    break;
+                default:
+                    damageType = DamageType.light_damage;
+                    break;
+            }
+            theweapon.SetDamageType(damageType);
+        }
 
-        if (this.right_hand != null)
-            bodyweaponParts.Add(this.right_hand);
-        if (this.left_hand != null)
-            bodyweaponParts.Add(this.left_hand);
-        if (this.left_foot != null)
-            bodyweaponParts.Add(this.left_foot);
-        if (this.right_foot != null)
-            bodyweaponParts.Add(this.right_foot);
-        if (this.head != null)
-            bodyweaponParts.Add(this.head);
-        if (this.tail != null)
-            bodyweaponParts.Add(this.tail);
+        readonly Decompositioner processingEffectObj;
+        ConstraintSource myConstraintSource;
+        private void RegisterBodyPartWeapon(Transform t)
+        {
+            if (t != null && !BEs.bodyPartsWeaponRegisterDic.ContainsKey(t))
+                BEs.bodyPartsWeaponRegisterDic.Add(t, null);
+
+            if (BEs.bodyPartsWeaponRegisterDic[t] == null)
+            {
+                target_hitbox = default_hitboxPool.Rent();
+                BEs.bodyPartsWeaponRegisterDic[t] = target_hitbox;
+            }
+            
+            myConstraintSource.sourceTransform = t;
+            myConstraintSource.weight = 1;
+            BEs.bodyPartsWeaponRegisterDic[t].transform.position = t.position;
+            BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
+            BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.constraintActive = true;
+            BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.locked = true;          
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(BEs._TeamConfig);
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetHolderCenter(BEs.geometryCenter);
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.EnableMarkers();
+        }
+        
+        public void RemoveBodyPartWeapon(Transform t)
+        {
+            if (!BEs.bodyPartsWeaponRegisterDic.ContainsKey(t))
+                return;
+            if (BEs.bodyPartsWeaponRegisterDic[t] != null)
+            {
+                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(null);
+                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(null);
+                BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.constraintActive = false;
+                default_hitboxPool.Return(BEs.bodyPartsWeaponRegisterDic[t]); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
+                BEs.bodyPartsWeaponRegisterDic[t] = null;
+            }
+        }
+        public void RegisterBodyPartWeapon(Transform t, int hit_type) //hit_type == 0: clear ;hit_type != 0 : in
+        {
+            if (hit_type != 0)
+            {
+                RegisterBodyPartWeapon(t);
+                SetThisWeaponDamageTypeByNum(hit_type, BEs.bodyPartsWeaponRegisterDic[t]._HitBox);
+            }
+            else
+            {
+                RemoveBodyPartWeapon(t);
+            }
+        }
     }
-
+    
     // 当前这个版本因为把“身体固化武器”的检测对象给联合化了。。其实关于_Used_Targets清理，
     // 在以下的ClearTargets()DisableMarkers ()EnableMarkers()
     // 三个函数中都存在重复执行，都把本模块内的_Used_Targets给多次执行clear操作了。
@@ -68,11 +159,11 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
         }
     }
     
-    public void clearMarkerManagers()
+    public void ClearMarkerManagers()
     {
         foreach (Transform T in bodyweaponParts) 
         {
-            RemoveBodyPartWeapon(T);
+            hiddenMethods.RemoveBodyPartWeapon(T);
         }
     }
     
@@ -84,7 +175,8 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
                 keyValuePair.Value._HitBox.EnableMarkers();
         }
 	}
-
+    
+    DamageType damageType;
     public void SetDamageType(AnimationEvent e)
     {
         switch (e.intParameter)
@@ -111,114 +203,42 @@ public class BO_Weapon_Animation_Events : MonoBehaviour {
                 keyValuePair.Value._HitBox.SetDamageType(damageType);
         }
     }
-    
-    public void assignTeamFlag(TeamConfig teamConfig)
-    {
-        this._TeamConfig = teamConfig;
-    }
-    
+        
     public void SetAllBodyMarkerManagersIn()
     {
         foreach (Transform T in bodyweaponParts)
         {
-            RegisterBodyPartWeapon(T,1);
+            hiddenMethods.RegisterBodyPartWeapon(T,1);
         }
     }
 
-    //注意看0被空出来是和添加 删除有效武器列表中的0参数有关
-    private void SetThisWeaponDamageTypeByNum(int heavynum, BO_Marker_Manager theweapon)
-    {
-        switch (heavynum)
-        {
-            case -1:
-                damageType = DamageType.slight_damage;
-                break;
-            case 1:
-                damageType = DamageType.light_damage;
-                break;
-            case 2:
-                damageType = DamageType.heavy_damage;
-                break;
-            case 3:
-                damageType = DamageType.supper_damage;
-                break;
-            default:
-                damageType = DamageType.light_damage;
-                break;
-        }
-        theweapon.SetDamageType(damageType);
-    }
-
-    private void RegisterBodyPartWeapon(Transform t)
-    {
-        if (t != null && !bodyPartsWeaponRegisterDic.ContainsKey(t))
-            bodyPartsWeaponRegisterDic.Add(t, null);
-            
-        if (bodyPartsWeaponRegisterDic[t] == null)
-        {
-            target_hitbox = default_hitboxPool.Rent();
-            bodyPartsWeaponRegisterDic[t] = target_hitbox;
-        }
-        bodyPartsWeaponRegisterDic[t].transform.SetParent(t);
-        bodyPartsWeaponRegisterDic[t].transform.localPosition = Vector3.zero;        
-        bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(_TeamConfig);
-        bodyPartsWeaponRegisterDic[t]._HitBox.SetHolderCenter(this.geometryCenter);
-        bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(myownheath);
-        bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(this._Used_Targets);
-        bodyPartsWeaponRegisterDic[t]._HitBox.EnableMarkers();
-    }
-    
-    private void RemoveBodyPartWeapon(Transform t)
-    {
-        if (!bodyPartsWeaponRegisterDic.ContainsKey(t))
-            return;
-        if (bodyPartsWeaponRegisterDic[t] != null)
-        {
-            bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(null);
-            bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(null);
-            default_hitboxPool.Return(bodyPartsWeaponRegisterDic[t]); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
-            bodyPartsWeaponRegisterDic[t] = null;
-        }
-    }
-    
-    private void RegisterBodyPartWeapon(Transform t,int hit_type) //hit_type == 0: clear ;hit_type != 0 : in
-    {
-        if (hit_type != 0)
-        {
-            RegisterBodyPartWeapon(t);
-            SetThisWeaponDamageTypeByNum(hit_type,bodyPartsWeaponRegisterDic[t]._HitBox);
-        }else{
-            RemoveBodyPartWeapon(t);
-        }
-    }
-
-	public void SetRightHandMarkerManager (int in_or_out = 1)
+    public void SetRightHandMarkerManager (int in_or_out = 1)
 	{
-        RegisterBodyPartWeapon(right_hand,in_or_out);
+        hiddenMethods.RegisterBodyPartWeapon(right_hand,in_or_out);
     }
 
     public void SetLeftHandMarkerManager(int in_or_out = 1)
     {
-        RegisterBodyPartWeapon(left_hand,in_or_out);
+        hiddenMethods.RegisterBodyPartWeapon(left_hand,in_or_out);
     }
 
     public void SetLeftFootMarkerManager(int in_or_out = 1)
     {
-        RegisterBodyPartWeapon(left_foot,in_or_out);
+        hiddenMethods.RegisterBodyPartWeapon(left_foot,in_or_out);
     }
 
     public void SetRightFootMarkerManager(int in_or_out = 1)
     {
-        RegisterBodyPartWeapon(right_foot,in_or_out);
+        hiddenMethods.RegisterBodyPartWeapon(right_foot,in_or_out);
     }
 
     public void SetHeadMarkerManager(int in_or_out = 1)
     {
-        RegisterBodyPartWeapon(head,in_or_out);
+        hiddenMethods.RegisterBodyPartWeapon(head,in_or_out);
     }
 
     public void SetTailMarkerManager(int in_or_out = 1)
     {
-        RegisterBodyPartWeapon(tail,in_or_out);
+        hiddenMethods.RegisterBodyPartWeapon(tail,in_or_out);
     }
 }

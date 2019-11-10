@@ -1,10 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class BO_Ani_E : MonoBehaviour
 {
+    public class HiddenMethods
+    {
+        readonly BO_Ani_E Ani_E;
+        public HiddenMethods(BO_Ani_E bae)
+        {
+            Ani_E = bae;
+        }
+        
+        public void SetBodyPartsTransform()
+        {
+            if (Ani_E._DATA_CENTER != null)
+            {
+                if (Ani_E._DATA_CENTER.right_hand_t != null)
+                {
+                    Ani_E.right_hand = Ani_E._DATA_CENTER.right_hand_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.right_hand,null);
+                }
+                if (Ani_E._DATA_CENTER.left_hand_t != null)
+                {
+                    Ani_E.left_hand = Ani_E._DATA_CENTER.left_hand_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.left_hand,null);
+                }
+                if (Ani_E._DATA_CENTER.right_foot_t != null)
+                {
+                    Ani_E.right_foot = Ani_E._DATA_CENTER.right_foot_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.right_foot,null);
+                }
+                if (Ani_E._DATA_CENTER.left_foot_t != null)
+                {
+                    Ani_E.left_foot = Ani_E._DATA_CENTER.left_foot_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.left_foot,null);
+                }
+                if (Ani_E._DATA_CENTER.head_t != null)
+                {
+                    Ani_E.head = Ani_E._DATA_CENTER.head_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.head,null);
+                }
+                if (Ani_E._DATA_CENTER.tail_t != null)
+                {
+                    Ani_E.tail = Ani_E._DATA_CENTER.tail_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.tail,null);
+                }
+            }
+        }
+        
+        public void CloseEffectsOnBodyParts()
+        {
+            foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in Ani_E.EffectsOnBodyParts)
+            {
+                if (keyValuePair.Value != null)
+                    keyValuePair.Value.StopEmissions();
+            }
+        }
+    }
+    
+    public HiddenMethods hiddenMethods;
     public Data_Center _DATA_CENTER;
+    
     private string personalEffectsPath;
     private string myMagicForwardPath;
     private string defaultMagicForwardPath;
@@ -12,82 +70,41 @@ public class BO_Ani_E : MonoBehaviour
     private DecompositionerPool target_pool;
     private IDictionary<Transform, Decompositioner> EffectsOnBodyParts = new Dictionary<Transform, Decompositioner>();
     private Decompositioner processingHitBox;
-    
-    private void SetBodyPartsTransform()
+
+    void Awake()
     {
-        if (_DATA_CENTER != null)
-        {
-            if (_DATA_CENTER.right_hand_t != null)
-            {
-                this.right_hand = _DATA_CENTER.right_hand_t.transform;
-                EffectsOnBodyParts.Add(this.right_hand,null);
-            }
-            if (_DATA_CENTER.left_hand_t != null)
-            {
-                this.left_hand = _DATA_CENTER.left_hand_t.transform;
-                EffectsOnBodyParts.Add(this.left_hand,null);
-            }
-            if (_DATA_CENTER.right_foot_t != null)
-            {
-                this.right_foot = _DATA_CENTER.right_foot_t.transform;
-                EffectsOnBodyParts.Add(this.right_foot,null);
-            }
-            if (_DATA_CENTER.left_foot_t != null)
-            {
-                this.left_foot = _DATA_CENTER.left_foot_t.transform;
-                EffectsOnBodyParts.Add(this.left_foot,null);
-            }
-            if (_DATA_CENTER.head_t != null)
-            {
-                this.head = _DATA_CENTER.head_t.transform;
-                EffectsOnBodyParts.Add(this.head,null);
-            }
-            if (_DATA_CENTER.tail_t != null)
-            {
-                this.tail = _DATA_CENTER.tail_t.transform;
-                EffectsOnBodyParts.Add(this.tail,null);
-            }
-        }
-    }
-    
-    public void CloseEffectsOnBodyParts()
-    {
-        foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in EffectsOnBodyParts)
-        {
-            if (keyValuePair.Value != null)
-                keyValuePair.Value.StopEmissions();
-        }
+        hiddenMethods = new HiddenMethods(this);
     }
 
     void Start()
     {
-        SetBodyPartsTransform();// 设置为private目的是减少出现在inpector里的函数数量
+        hiddenMethods.SetBodyPartsTransform();// 设置为private目的是减少出现在inpector里的函数数量
     }
 
     // 这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
-    public IEnumerator BasicMagicAndEffectsPathDefine(zokusei _zokusei, string personalMagic)
+    public IEnumerator BasicMagicAndEffectsPathDefine(Zokusei _zokusei, string personalMagic)
     {
         this.myMagicForwardPath = personalMagic;
         switch (_zokusei)
         {
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
                 personalEffectsPath = "darkMagic";
                 defaultMagicForwardPath = "darkmagic";
                 break;
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
                 personalEffectsPath = "blueMagic";
                 defaultMagicForwardPath = "bluemagic";
                 break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
                 personalEffectsPath = "greenMagic";
                 defaultMagicForwardPath = "greenmagic";
                 break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
                 personalEffectsPath = "lightMagic";
                 defaultMagicForwardPath = "lightmagic";
                 break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
                 personalEffectsPath = "redMagic";
                 defaultMagicForwardPath = "redmagic";
                 break;
@@ -117,7 +134,7 @@ public class BO_Ani_E : MonoBehaviour
     }
 
     private AudioClip audioClip;
-	public void playSoundOnce(string soundClipName)
+	public void PlaySoundOnce(string soundClipName)
 	{
         AudioResourceLoading.Instance.soundClipsDic.TryGetValue("Audios/effects/" + soundClipName, out audioClip);
         if (audioClip != null)
@@ -169,7 +186,7 @@ public class BO_Ani_E : MonoBehaviour
 	}
 
     private Vector3 intPos;
-    public void bullet_shoot_from_body_part(AnimationEvent e)
+    public void Bullet_shoot_from_body_part(AnimationEvent e)
 	{
         switch (e.stringParameter)
         {
@@ -244,64 +261,62 @@ public class BO_Ani_E : MonoBehaviour
 
     private Transform target;
     private Decompositioner effect;
-    public void effectOnBodyPart(AnimationEvent e)
+    ConstraintSource myConstraintSource;
+    public void EffectOnBodyPart(AnimationEvent e)
 	{
 		switch(e.stringParameter)
 		{
 			case "right_hand":
-			if (right_hand != null)
 				target = right_hand;
 			break;
 			case "left_hand":
-			if (left_hand != null)
 				target = left_hand;
 			break;
 			case "right_foot":
-			if (right_foot != null)
 				target = right_foot;
 			break;
 			case "left_foot":
-			if (left_foot != null)
 				target = left_foot;
 			break;
             case "head":
-                if (head != null)
-                    target = head;
-                break;
+                target = head;
+            break;
             case "tail":
-                if (tail != null)
-                    target = tail;
-                break;
+                target = tail;
+            break;
             default:
                 target = transform;
-                break;
+            break;
 		}
 		
 		switch (e.intParameter) 
 		{
 			case 3:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", personalEffectsPath, target.position, target.rotation, target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", personalEffectsPath, target.position, target.rotation,target);
 			    break;
 			case 1:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation, target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation,target);
                 break;
 			case 2:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("normal_effect", personalEffectsPath, target.position, target.rotation, target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("normal_effect", personalEffectsPath, target.position, target.rotation,target);
                 break;
 			default:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation, target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation,target);
                 break;
 		}
-
+           
         if (EffectsOnBodyParts.ContainsKey(target))
         {
             if (EffectsOnBodyParts[target] != null)
+            {
                 EffectsOnBodyParts[target].StopEmissions();
+                EffectsOnBodyParts[target].positionConstraint.constraintActive = false;
+            }
             EffectsOnBodyParts[target] = effect; 
         }
 	}
 
-    public void blastAttack(AnimationEvent e)
+    public void BlastAttack(AnimationEvent e)
 	{
         switch (e.intParameter)
         {
@@ -319,48 +334,38 @@ public class BO_Ani_E : MonoBehaviour
                 break;
         }
         		
+        processingHitBox = target_pool.Rent();
         switch (e.stringParameter)
 		{
 			case "right_hand":
-			    processingHitBox = target_pool.Rent();
-                processingHitBox.transform.position = this.right_hand.position;
-                processingHitBox.transform.rotation = this.right_hand.rotation;
-                processingHitBox.transform.SetParent(this.right_hand);
+                target = this.right_hand;
 			break;
 			case "left_hand":
-                processingHitBox = target_pool.Rent();
-                processingHitBox.transform.position = this.left_hand.position;
-                processingHitBox.transform.rotation = this.left_hand.rotation;
-                processingHitBox.transform.SetParent(this.left_hand);
+                target = this.left_hand;
                 break;
 			case "right_foot":
-                processingHitBox = target_pool.Rent();
-                processingHitBox.transform.position = this.right_foot.position;
-                processingHitBox.transform.rotation = this.right_foot.rotation;
-                processingHitBox.transform.SetParent(this.right_foot);
+                target = this.right_foot;
                 break;
 			case "left_foot":
-                processingHitBox = target_pool.Rent();
-                processingHitBox.transform.position = this.left_foot.position;
-                processingHitBox.transform.rotation = this.left_foot.rotation;
-                processingHitBox.transform.SetParent(this.left_foot);
+                target = this.left_foot;
                 break;
             case "head":
-                processingHitBox = target_pool.Rent();
-                processingHitBox.transform.position = this.head.position;
-                processingHitBox.transform.rotation = this.head.rotation;
-                processingHitBox.transform.SetParent(this.head);
+                target = this.head;
                 break;
             case "tail":
-                processingHitBox = target_pool.Rent();
-                processingHitBox.transform.position = this.tail.position;
-                processingHitBox.transform.rotation = this.tail.rotation;
-                processingHitBox.transform.SetParent(this.tail);
+                target = this.tail;
                 break;
 			default:
                 return;
 		}
-        
+        processingHitBox.transform.position = this.target.position;
+        processingHitBox.transform.rotation = this.target.rotation;
+        myConstraintSource.sourceTransform = target;
+        myConstraintSource.weight = 1;
+        processingHitBox.positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
+        processingHitBox.positionConstraint.constraintActive = true;
+        processingHitBox.positionConstraint.locked = true;
+        processingHitBox.positionConstraint.translationOffset = Vector3.zero;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
@@ -376,7 +381,8 @@ public class BO_Ani_E : MonoBehaviour
     {
         OnLoadMagic = magicname;
     }
-    public void releasePreparedMagic(string part)
+
+    public void ReleasePreparedMagic(string part)
     {
         if (OnLoadMagic == null)
             return;
@@ -387,52 +393,37 @@ public class BO_Ani_E : MonoBehaviour
         switch (part)
         {
             case "right_hand":
-                processingHitBox.transform.position = this.right_hand.position;
-                processingHitBox.transform.rotation = this.right_hand.rotation;
-                processingHitBox.transform.SetParent(this.right_hand);           
-                break;
+                target = this.right_hand;
+            break;
             case "left_hand":
-                processingHitBox.transform.position = this.left_hand.position;
-                processingHitBox.transform.rotation = this.left_hand.rotation;
-                processingHitBox.transform.SetParent(this.left_hand);
+                target = this.left_hand;
                 break;
             case "right_foot":
-                processingHitBox.transform.position = this.right_foot.position;
-                processingHitBox.transform.rotation = this.right_foot.rotation;
-                processingHitBox.transform.SetParent(this.right_foot);
+                target = this.right_foot;
                 break;
             case "left_foot":
-                processingHitBox.transform.position = this.left_foot.position;
-                processingHitBox.transform.rotation = this.left_foot.rotation;
-                processingHitBox.transform.SetParent(this.left_foot);     
+                target = this.left_foot;
                 break;
             case "head":
-                processingHitBox.transform.position = this.head.position;
-                processingHitBox.transform.rotation = this.head.rotation;
-                processingHitBox.transform.SetParent(this.head);                
+                target = this.head;
                 break;
             case "tail":
-                processingHitBox.transform.position = this.tail.position;
-                processingHitBox.transform.rotation = this.tail.rotation;
-                processingHitBox.transform.SetParent(this.tail);   
-                break;
-            case "center":
-                processingHitBox.transform.position = this._DATA_CENTER.geometryCenter.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                processingHitBox.transform.SetParent(this._DATA_CENTER.geometryCenter);
+                target = this.tail;
                 break;
             case null:
-                processingHitBox.transform.position = this._DATA_CENTER.WholeT.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                processingHitBox.transform.SetParent(this._DATA_CENTER.WholeT);
+                target = this._DATA_CENTER.WholeT;
                 break;
             default:
-                processingHitBox.transform.position = this._DATA_CENTER.WholeT.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                processingHitBox.transform.SetParent(this._DATA_CENTER.WholeT);
+                target = this._DATA_CENTER.WholeT;
                 break;
         }
-        
+        processingHitBox.transform.position = target.position;
+        processingHitBox.transform.rotation = target.rotation;
+        myConstraintSource.sourceTransform = target;
+        myConstraintSource.weight = 1;
+        processingHitBox.positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
+        processingHitBox.positionConstraint.constraintActive = true;
+        processingHitBox.positionConstraint.locked = true;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
@@ -444,7 +435,7 @@ public class BO_Ani_E : MonoBehaviour
         OnLoadMagic = null;
     }
     
-    public void releasePreparedMagicToAir(string part)
+    public void ReleasePreparedMagicToAir(string part)
     {
         if (OnLoadMagic == null)
             return;

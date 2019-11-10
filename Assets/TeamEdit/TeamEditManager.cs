@@ -72,9 +72,9 @@ public class TeamEditManager : MonoBehaviour
             _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
             characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_one.monsterId);
             tar.changeIcon(characterResourceInfo == null ? null: monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
-                characterResourceInfo == null ? zokusei.Null : characterResourceInfo._zokusei);
+                characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
         }else{
-            tar.changeIcon(null,zokusei.Null);
+            tar.changeIcon(null,Zokusei.Null);
         }
         yield break;
     }

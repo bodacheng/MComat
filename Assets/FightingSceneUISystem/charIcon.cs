@@ -13,10 +13,10 @@ public class charIcon : MonoBehaviour {
     public GetMonsterOfPlayerDetailModel AccountCharacterInfo;
     public CharacterResourceInfo _CharacterResourceInfo;
 
-    static IDictionary<zokusei, Sprite> frames;
+    static IDictionary<Zokusei, Sprite> frames;
     public static void iniFrames()
     {
-        frames = new Dictionary<zokusei, Sprite>();
+        frames = new Dictionary<Zokusei, Sprite>();
 
         Sprite frameobject_dark = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
         Sprite frameobject_blue = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
@@ -26,17 +26,17 @@ public class charIcon : MonoBehaviour {
         Sprite frameobject_null = Resources.Load("essentialUIElements/iconframes/0") as Sprite;
 
         if(frameobject_blue)
-            frames.Add(zokusei.blueMagic,frameobject_blue);
+            frames.Add(Zokusei.blueMagic,frameobject_blue);
         if(frameobject_red)
-            frames.Add(zokusei.redMagic,frameobject_red);
+            frames.Add(Zokusei.redMagic,frameobject_red);
         if(frameobject_green)
-            frames.Add(zokusei.greenMagic,frameobject_green);
+            frames.Add(Zokusei.greenMagic,frameobject_green);
         if(frameobject_light)
-            frames.Add(zokusei.lightMagic,frameobject_light);
+            frames.Add(Zokusei.lightMagic,frameobject_light);
         if(frameobject_dark)
-            frames.Add(zokusei.darkMagic,frameobject_dark);
+            frames.Add(Zokusei.darkMagic,frameobject_dark);
         if(frameobject_null)
-            frames.Add(zokusei.Null,frameobject_null);
+            frames.Add(Zokusei.Null,frameobject_null);
     }
     
     public static void Seletedfeature(charIcon _charIcon,GameObject selectedFrame)
@@ -48,7 +48,7 @@ public class charIcon : MonoBehaviour {
         selectedFrame.gameObject.SetActive(true);  
     }
     
-    public void changeIcon(Sprite _Sprite,zokusei zokusei)
+    public void changeIcon(Sprite _Sprite,Zokusei zokusei)
     {
         if (frame == null || Icon == null)
         {
@@ -64,27 +64,27 @@ public class charIcon : MonoBehaviour {
         var colors = iconButton.colors;
         switch (zokusei)
         {
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
                 frame.color = new Color(0,0,1,1);
                 colors.normalColor = new Color(0,0,1,1);
                 colors.highlightedColor = new Color(0,0.2f,1,1);
             break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
                 frame.color = new Color(1,0,0,1);
                 colors.normalColor = new Color(1,0,0,1);
                 colors.highlightedColor = new Color(1,0.2f,0,1);
             break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
                 frame.color = new Color(0,1,0,1);
                 colors.normalColor = new Color(0,1,0,1);
                 colors.highlightedColor = new Color(0,1,0.2f,1);
             break;
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
                 frame.color = new Color(1,0,1,1);
                 colors.normalColor = new Color(1,0,1,1);
                 colors.highlightedColor = new Color(1,0,0.8f,1);
             break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
                 frame.color = new Color(1,1,0,1);
                 colors.normalColor = new Color(1,1,0,1);
                 colors.highlightedColor = new Color(1f,1,0.2f,1);

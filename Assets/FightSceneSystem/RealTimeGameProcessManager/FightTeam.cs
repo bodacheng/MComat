@@ -150,7 +150,7 @@ public partial class FightTeam : MonoBehaviour
     {
         foreach (Data_Center oneMember in teamMembers.values)
         {
-            if (!oneMember.ifPreparedForBattle())
+            if (!oneMember.IfPreparedForBattle())
                 return false;
         }
         return true;
@@ -188,7 +188,7 @@ public partial class FightTeam : MonoBehaviour
                 IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
                 yield return character_datacenter;
                 Data_Center data_Center = (Data_Center)character_datacenter.Current;
-                data_Center.step3Initialize(teamConfig);
+                data_Center.Step3Initialize(teamConfig);
                 teamMembers.Set(keys.Key,key,data_Center);
                 CharacterDataInfoReference.Add(teamMembers.Get(keys.Key,key),_one);
             }

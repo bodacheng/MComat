@@ -293,20 +293,20 @@ public class ConfigFileManager : MonoBehaviour {
                 OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
                 switch (outsideDataLink._C.Zokusei)
                 {
-                    case zokusei.blueMagic:
-                        _CharacterResourceInfo._zokusei = zokusei.blueMagic;
+                    case Zokusei.blueMagic:
+                        _CharacterResourceInfo._zokusei = Zokusei.blueMagic;
                         break;
-                    case zokusei.redMagic:
-                        _CharacterResourceInfo._zokusei = zokusei.redMagic;
+                    case Zokusei.redMagic:
+                        _CharacterResourceInfo._zokusei = Zokusei.redMagic;
                         break;
-                    case zokusei.greenMagic:
-                        _CharacterResourceInfo._zokusei = zokusei.greenMagic;
+                    case Zokusei.greenMagic:
+                        _CharacterResourceInfo._zokusei = Zokusei.greenMagic;
                         break;
-                    case zokusei.darkMagic:
-                        _CharacterResourceInfo._zokusei = zokusei.darkMagic;
+                    case Zokusei.darkMagic:
+                        _CharacterResourceInfo._zokusei = Zokusei.darkMagic;
                         break;
-                    case zokusei.lightMagic:
-                        _CharacterResourceInfo._zokusei = zokusei.lightMagic;
+                    case Zokusei.lightMagic:
+                        _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
                         break;
                 }
                 _CharacterResourceInfo.SPECIAL_ZOKUSEI = null; //这个只能后加把。。

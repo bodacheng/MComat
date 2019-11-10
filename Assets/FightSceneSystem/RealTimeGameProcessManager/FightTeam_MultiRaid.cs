@@ -22,9 +22,8 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void Action1()
             {
-                realTimeGameProcessManager.SwitchToCMode(a_char, RealTimeGameProcessManager.combatFightPlayerMode);
-                realTimeGameProcessManager.Refresh();
-            } //点角色icon是设置focusingChar，点icon旁边的C按钮才是进入控制
+                realTimeGameProcessManager.SwitchToCMode(a_char, RealTimeGameProcessManager.Auto);
+            }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(characterDataInfo.monsterId);

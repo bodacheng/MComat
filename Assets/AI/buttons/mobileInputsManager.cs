@@ -83,7 +83,7 @@ public class mobileInputsManager : MonoBehaviour {
     //2019.3.26 折腾了整整两天的移动端按键粒子特效。留下的唯一一点不足是，没有针对防御状态，rush状态的有无来决定防御键是否显示，也没有针对未来可能出现的耗气式防御或rush状态来刷新两个键的显示状态。
     public Camera fxCamera;
     public Transform effectsParent;
-    static IDictionary<zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<zokusei, zokuseiButtonEffectsGroup>();
+    static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
     static private zokuseiButtonEffectsGroup _focusingButtonEffectsGroup;
     
     public Button Attack;
@@ -124,7 +124,7 @@ public class mobileInputsManager : MonoBehaviour {
     }
 
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
-    void SwitchZokuseiButtons(zokusei zokusei)
+    void SwitchZokuseiButtons(Zokusei zokusei)
     {
         if (_focusingButtonEffectsGroup != null)
             _focusingButtonEffectsGroup.Close();
@@ -137,7 +137,7 @@ public class mobileInputsManager : MonoBehaviour {
         }
     }
 
-    public void FocusCharInputs(inputManager focusingCharInputManger,zokusei zokusei)
+    public void FocusCharInputs(inputManager focusingCharInputManger,Zokusei zokusei)
     {
         mobileInputsManager.watchingInputManger = focusingCharInputManger;
         if (mobileInputsManager.watchingInputManger != null)
@@ -148,7 +148,7 @@ public class mobileInputsManager : MonoBehaviour {
         }
     }
 
-    public void ZokuseiButtonRegister(zokusei zokusei)
+    public void ZokuseiButtonRegister(Zokusei zokusei)
     {
         zokuseiButtonEffectsGroup zokuseiButtons = new zokuseiButtonEffectsGroup();
         zokuseiButtons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);

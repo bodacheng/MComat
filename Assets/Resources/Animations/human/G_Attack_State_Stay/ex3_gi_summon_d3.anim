@@ -58372,7 +58372,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.43333334
-    functionName: resistanceUp
+    functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -58386,7 +58386,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.1
-    functionName: resistanceClear
+    functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

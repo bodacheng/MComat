@@ -359,22 +359,22 @@ public class monstersConfigTable
         switch (row.ZOKUSEI)
         {
             case "4":
-                _CharacterResourceInfo._zokusei = zokusei.blueMagic;
+                _CharacterResourceInfo._zokusei = Zokusei.blueMagic;
                 break;
             case "3":
-                _CharacterResourceInfo._zokusei = zokusei.redMagic;
+                _CharacterResourceInfo._zokusei = Zokusei.redMagic;
                 break;
             case "5":
-                _CharacterResourceInfo._zokusei = zokusei.greenMagic;
+                _CharacterResourceInfo._zokusei = Zokusei.greenMagic;
                 break;
             case "1":
-                _CharacterResourceInfo._zokusei = zokusei.darkMagic;
+                _CharacterResourceInfo._zokusei = Zokusei.darkMagic;
                 break;
             case "2":
-                _CharacterResourceInfo._zokusei = zokusei.lightMagic;
+                _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
                 break;
             default:
-                _CharacterResourceInfo._zokusei = zokusei.lightMagic;
+                _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
                 break;
         }
 

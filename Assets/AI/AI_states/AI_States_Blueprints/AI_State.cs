@@ -24,7 +24,7 @@ namespace Soul
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
         public ShaderManager shaderManager;
         public stateType StateType;
-        public bool nextAttackStateCanRushFirst = false;
+        public bool nextAttackStateCanRushFirst;
         public Animation_Manger Animation_Manger;
         public BuffsRunner _BuffsRunner;
         public BlendShapeProxy blendShapeProxy;
@@ -38,12 +38,13 @@ namespace Soul
         public inputs_defined exitInput = inputs_defined.Null;
         public behaviorEnterRange[] behaviorEnterRanges;
 
-        protected behaviorEnterRange[] InnerAndMidAndFarRanges = new behaviorEnterRange[3] { behaviorEnterRange.inner_range, behaviorEnterRange.mid_range, behaviorEnterRange.far_range };
+        protected behaviorEnterRange[] InnerAndMidAndFarRanges = { behaviorEnterRange.inner_range, behaviorEnterRange.mid_range, behaviorEnterRange.far_range };
 
         // Prepare for basic parameters here
-        public virtual void pre_process_before_enter()
+        public virtual void Pre_process_before_enter()
         {
-            this._DATA_CENTER = GeoCenterT.GetComponent<Data_Center>();
+            this.gameObject = _DATA_CENTER.WholeT.gameObject;
+            this.GeoCenterT = _DATA_CENTER.geometryCenter;
             this.Sensor = _DATA_CENTER.Sensor;
             this._FightAttriCalReference = _DATA_CENTER._FightAttriCalReference;
             this.shaderManager = _DATA_CENTER._ShaderManager;
@@ -63,12 +64,12 @@ namespace Soul
         }
 
         // On what condition can we exit this state 
-        public virtual bool capacity_exit_condition()
+        public virtual bool Capacity_exit_condition()
         {
             return true;
         }
 
-        public virtual bool strategic_exit_condition()
+        public virtual bool Strategic_exit_condition()
         {
             return true;
         }
@@ -80,23 +81,23 @@ namespace Soul
 
         //一个状态的决策性进入条件与决策性退出条件如果没有形成一个真正意义上一正一反的关系，那么就会产生“无限进入进出循环”
         // 这个在移动状态和防御状态上我们都出现过。
-        public virtual bool enter_condition_priority1()
+        public virtual bool Enter_condition_priority1()
         {
             return false;
         }
 
-        public virtual bool enter_condition_priority2()
+        public virtual bool Enter_condition_priority2()
         {
             return false;
         }
 
-        public virtual bool enter_condition_priority3()
+        public virtual bool Enter_condition_priority3()
         {
             return false;
         }
 
         // On what condition we have to enter this state
-        public virtual bool force_enter_condition()
+        public virtual bool Force_enter_condition()
         {
             return false;
         }
@@ -109,7 +110,7 @@ namespace Soul
             this._FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
         }
 
-        public virtual void c_State_enter()
+        public virtual void C_State_enter()
         {
             this.AI_State_enter();
         }
@@ -165,7 +166,6 @@ namespace Soul
 
         protected void eventAttackEnderProcess()
         {
-
             FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();
             if (BO_Health.GetManagingEventDamage() != null)
             {

@@ -120,13 +120,12 @@
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager_treat.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Shield.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\zokusei.cs" />
-    <Compile Include="Assets\Camera\CameraCtr.cs" />
     <Compile Include="Assets\Camera\CameraManager.cs" />
+    <Compile Include="Assets\Camera\CenterSurroundCamera.cs" />
     <Compile Include="Assets\Camera\CertainYAntiVibrationCamera.cs" />
-    <Compile Include="Assets\Camera\FightStartsCamera.cs" />
+    <Compile Include="Assets\Camera\FPSCamera.cs" />
     <Compile Include="Assets\Camera\GodplayerCamera.cs" />
     <Compile Include="Assets\Camera\GodPlayerCertainYCamera.cs" />
-    <Compile Include="Assets\Camera\GodWatchCamera.cs" />
     <Compile Include="Assets\Camera\keepTargetLeftCamera.cs" />
     <Compile Include="Assets\Camera\LerpToCertainDistance.cs" />
     <Compile Include="Assets\Camera\LerpToCertainPlace.cs" />
@@ -134,6 +133,7 @@
     <Compile Include="Assets\Camera\PinchZoom\PinchZoom.cs" />
     <Compile Include="Assets\Camera\StartToEndMode.cs" />
     <Compile Include="Assets\Camera\TeamEditCamera.cs" />
+    <Compile Include="Assets\Camera\TopDownWatchCamera.cs" />
     <Compile Include="Assets\Camera\WatchOverCamera.cs" />
     <Compile Include="Assets\characterModelShower\modelShower.cs" />
     <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
@@ -539,6 +539,7 @@
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Resources\AIScripts\human\1118_atest.xml" />
+    <None Include="Assets\Particlecollection_Magic_ring\READ ME.txt" />
     <None Include="Assets\POFX\Shaders\Resources\ColorSwap.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
@@ -559,6 +560,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\FXAA3.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\effect_distortion_mask.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Documentation\Version 2.0.txt" />
     <None Include="Assets\Resources\AIScripts\tiger\tiger.xml" />
     <None Include="Assets\POFX\Shaders\Resources\Pixelate.shader" />
@@ -570,6 +572,7 @@
     <None Include="Assets\EasyTouchBundle\EasyTouch\_Documentation\How to migrate from EasyTouch 4.X.txt" />
     <None Include="Assets\EasyTouchBundle\Readme.txt" />
     <None Include="Assets\POFX\Shaders\Resources\Desaturate.shader" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleAddSoftEffect.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
@@ -582,8 +585,10 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.cginc" />
     <None Include="Assets\Resources\AIScripts\Rhino\Rhino.xml" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\Toon Blended Premmultiply.shader" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticlePremultiplyBlend.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.cginc" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\JsonSupport\UnityPackage\JsonNet.base.json" />
@@ -607,6 +612,7 @@
     <None Include="Assets\POFX\Shaders\Resources\Emboss.shader" />
     <None Include="Assets\Resources\AIScripts\human\71test.xml" />
     <None Include="Assets\POFX\Shaders\Resources\Refraction.shader" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleAddEffect.shader" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\EasyTouchBundle\EasyTouch\RealseNotes.txt" />
@@ -623,6 +629,7 @@
     <None Include="Assets\StreamingAssets\desc.txt" />
     <None Include="Assets\EasyTouchBundle\EasyTouch\How to migrate from EasyTouch 4.X.txt" />
     <None Include="Assets\POFX\Shaders\Resources\Outline.shader" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\Toon Additive.shader" />
     <None Include="Assets\Resources\stages\oneFight.xml" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
@@ -630,6 +637,7 @@
     <None Include="Assets\Resources\AIScripts\human\0614test.xml" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
+    <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleBlendEffect.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Blur.shader" />
     <None Include="Assets\Asstes\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\POFX\Shaders\Resources\POFX.cginc" />

@@ -80,20 +80,20 @@ namespace mainMenu
 
         private IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
         private string focusingtype;
-        private int focusingExType = 0;
+        private int focusingExType;
         private SkillStoneSlot DeleteSkillStoneSlot;
 
-        public IEnumerator startUp()
+        public IEnumerator StartUp()
         {
             MySkillStonesReader.SkillStonesBox = this;
-            yield return _SkillStoneBoxTabEffectsManager.startUp();
+            yield return _SkillStoneBoxTabEffectsManager.StartUp();
             // 玩家可能在什么时候会把Cell的数量进行扩充？cellsLimit从哪进行读取？
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(null, DeleteArea);
             generateCells(cellsLimit);
         }
         
-        public DragAndDropCell getFirstEmptyCell()
+        public DragAndDropCell GetFirstEmptyCell()
         {
             foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
             {
@@ -104,11 +104,11 @@ namespace mainMenu
             return null;
         }
 
-        public string getFocusingType()
+        public string GetFocusingType()
         {
             return focusingtype;
         }
-        public void setFocusingType(string type)
+        public void SetFocusingType(string type)
         {
             this.focusingtype = type;
         }
@@ -140,28 +140,28 @@ namespace mainMenu
         
         public void NormalTabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 0;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void EX1TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 1;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void EX2TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 2;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
 
         public void EX3TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             this.focusingExType = 3;
             this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
         }
@@ -244,7 +244,7 @@ namespace mainMenu
 
         public IEnumerator arrangeSkillStonesToBox()
         {
-            yield return arrangeSkillStonesToBox(getFocusingType(), getFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, _TheNineSlot.getUsingStonesId());
+            yield return arrangeSkillStonesToBox(GetFocusingType(), getFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, _TheNineSlot.getUsingStonesId());
         }
 
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
@@ -350,18 +350,22 @@ namespace mainMenu
         Vector2 buttonAnchorPosition;
         Vector2 true_buttonAnchorPosition;
         Vector3 buttonWorldPosition;
-        public Vector3 ButtonEffectInFxCameraWorldSpace(Camera fxcamera, GameObject UI_thing, float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
+        readonly int worldSpaceConvertMode = 1;// 1: canvas screen space 2: UI元素在左下角？忘了
+        public Vector3 ButtonEffectInFxCameraWorldSpace(Camera fxcamera, GameObject UI_thing, float z_offset)
         {
-            //buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().anchoredPosition;
-            //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x, buttonAnchorPosition.y);
-            //buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-            //buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
-            //return buttonWorldPosition;
-            
-            buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().transform.position;
-            true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
-            buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-            buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
+            switch (worldSpaceConvertMode)
+            {
+                case 1:
+                    buttonWorldPosition = UI_thing.transform.position;
+                    buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, buttonWorldPosition.z + z_offset);
+                break;
+                case 2:
+                    buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().transform.position;
+                    true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
+                    buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
+                    buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
+                break;
+            }
             return buttonWorldPosition;
         }
     }

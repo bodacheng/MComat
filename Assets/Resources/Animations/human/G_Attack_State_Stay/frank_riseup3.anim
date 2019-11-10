@@ -621294,14 +621294,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: resistanceUp
+    functionName: ResistanceUp
     data: resistup
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
   - time: 0.5
-    functionName: resistanceClear
+    functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

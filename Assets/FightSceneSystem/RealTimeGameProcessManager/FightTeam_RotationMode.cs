@@ -109,19 +109,19 @@ public partial class FightTeam : MonoBehaviour
                 string personalEffectsPath;
                 switch (characterResourceInfo._zokusei)
                 {
-                    case zokusei.darkMagic:
+                    case Zokusei.darkMagic:
                         personalEffectsPath = "darkMagic";
                         break;
-                    case zokusei.blueMagic:
+                    case Zokusei.blueMagic:
                         personalEffectsPath = "blueMagic";
                         break;
-                    case zokusei.greenMagic:
+                    case Zokusei.greenMagic:
                         personalEffectsPath = "greenMagic";
                         break;
-                    case zokusei.lightMagic:
+                    case Zokusei.lightMagic:
                         personalEffectsPath = "lightMagic";
                         break;
-                    case zokusei.redMagic:
+                    case Zokusei.redMagic:
                         personalEffectsPath = "redMagic";
                         break;
                     default:

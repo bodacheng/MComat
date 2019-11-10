@@ -178,7 +178,7 @@ public partial class Animation_Manger : MonoBehaviour
         ////////////    以上内容为个性化动画片段对base层基础动画的覆盖   /////////////
     }
 
-    public IEnumerator preloadPersonalAnimStreamingAssetMode(string animPath, string toLoadSkillAnimsName, string personalMagic, zokusei _zokusei)
+    public IEnumerator preloadPersonalAnimStreamingAssetMode(string animPath, string toLoadSkillAnimsName, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimsName))
         {
@@ -201,7 +201,7 @@ public partial class Animation_Manger : MonoBehaviour
                     {
                         yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
-                    if (e.functionName == "bullet_shoot_from_body_part")
+                    if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
@@ -219,7 +219,7 @@ public partial class Animation_Manger : MonoBehaviour
                                 break;
                         }
                     }
-                    if (e.functionName == "blastAttack")
+                    if (e.functionName == "BlastAttack")
                     {
                         switch (e.intParameter)
                         {
@@ -236,7 +236,7 @@ public partial class Animation_Manger : MonoBehaviour
                                 break;
                         }
                     }
-                    if (e.functionName == "playSoundOnce")
+                    if (e.functionName == "PlaySoundOnce")
                     {
                         //缺失
                     }
@@ -250,7 +250,7 @@ public partial class Animation_Manger : MonoBehaviour
         }
     }
 
-    public IEnumerator preloadPersonalAnimsStreamingAssetMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, zokusei _zokusei)
+    public IEnumerator preloadPersonalAnimsStreamingAssetMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadSkillAnimsNames != null)
         {

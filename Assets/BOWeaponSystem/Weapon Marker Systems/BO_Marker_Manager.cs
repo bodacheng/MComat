@@ -67,9 +67,9 @@ namespace HittingDetection
 
         //下面这个功能暂时不开启。以后真可能用估计也要大改
         //[Tooltip("Will this weapon trigger a event?")]
-        private bool is_E_weapon;
+        //private bool is_E_weapon;
         //[Tooltip("Only if is_E_weapon is true you need to set a e_Damage to it?")]
-        private E_Damage e_Damage;
+        //private E_Damage e_Damage;
         
         private int currentHP;
         public int CurrentHP

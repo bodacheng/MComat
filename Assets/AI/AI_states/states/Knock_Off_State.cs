@@ -31,17 +31,17 @@ public class Knock_Off_State : AI_State
         StateType = stateType.KnockOff;
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
     {
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
     {
         return false;
     }
 
-    public override bool force_enter_condition() => _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
+    public override bool Force_enter_condition() => _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
 
     Vector3 used_velcoity;
     Decompositioner processingBlood;
@@ -51,11 +51,11 @@ public class Knock_Off_State : AI_State
     public override void AI_State_enter()
     {
         base.AI_State_enter();
-        this._DATA_CENTER.setGravitySwitch(false);
+        this._DATA_CENTER.SetGravitySwitch(false);
         this.time_counter = 0;
         this._FightAttriCalReference.SetGettingDamageState(true);
         this._Animator.SetFloat("speed", 0f);
-        this._Weapon_Animation_Events.clearMarkerManagers();
+        this._Weapon_Animation_Events.ClearMarkerManagers();
         this._FightAttriCalReference.EnableAllHitBoxCollider(false);
         this.personality_Events.CloseAllPersonalityEffects();
 
@@ -120,7 +120,7 @@ public class Knock_Off_State : AI_State
         }
     }
 
-    public override bool capacity_exit_condition()
+    public override bool Capacity_exit_condition()
     {
         return this.time_counter > this.knock_off_time + 1f;
     }
@@ -192,12 +192,12 @@ public class Knock_Off_State : AI_State
             _SkillCancelFlag.turn_on_flag();
         }
 
-        if (!this._DATA_CENTER.getGravitySwitch())
+        if (!this._DATA_CENTER.GetGravitySwitch())
         {
             _Rigidbody.velocity = used_velcoity;//一定让它飞起来
             if (time_counter > 0.1)
             {
-                this._DATA_CENTER.setGravitySwitch(true);
+                this._DATA_CENTER.SetGravitySwitch(true);
             }
         }else{
             this._Rigidbody.velocity = Vector3.zero;

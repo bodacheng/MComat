@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.Animations;
 
 public class EffectAndHurtObjectLoading
 {
@@ -63,7 +64,7 @@ public class EffectAndHurtObjectLoading
         return null;
     }
     
-     public IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, zokusei zokusei)
+     public IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Zokusei zokusei)
      {
          switch(ResourceLoadingSetting.Instance.MagicLoadingMode)
          {
@@ -79,7 +80,7 @@ public class EffectAndHurtObjectLoading
         yield break;
      }
      
-    public IEnumerator ConstructHurtObjectPoolFromCach(string resource_name, string MagicForwardPath, zokusei zokusei)
+    public IEnumerator ConstructHurtObjectPoolFromCach(string resource_name, string MagicForwardPath, Zokusei zokusei)
     {
         DecompositionerPool poolToConstruct2;
         GameObject hurtObject;
@@ -123,19 +124,19 @@ public class EffectAndHurtObjectLoading
         string basicMagicForwardPath;
         switch (zokusei)
         {
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
                 basicMagicForwardPath = "darkmagic";
                 break;
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
                 basicMagicForwardPath = "bluemagic";
                 break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
                 basicMagicForwardPath = "greenmagic";
                 break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
                 basicMagicForwardPath = "lightmagic";
                 break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
                 basicMagicForwardPath = "redmagic";
                 break;
             default:
@@ -284,8 +285,9 @@ public class EffectAndHurtObjectLoading
         return EffectPool;
     }
 
-    private Decompositioner processingEffectObj;
-    public Decompositioner GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform _setParent)
+    Decompositioner processingEffectObj;
+    ConstraintSource myConstraintSource;
+    public Decompositioner GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform parentsetT)
     {
         EffectPool = IniEffectsPool(resource_name, EffectsPath,3);
         if (EffectPool == null)
@@ -293,16 +295,20 @@ public class EffectAndHurtObjectLoading
         processingEffectObj = EffectPool.Rent();
         processingEffectObj.transform.position = Pos;
         processingEffectObj.transform.rotation = Qua;
-        if (_setParent != null)
+        if (parentsetT != null)
         {
-            processingEffectObj.transform.SetParent(_setParent);
-            //processingEffectObj.transform.localScale = Vector3.one;
-            processingEffectObj.transform.localPosition = Vector3.zero;
+            myConstraintSource.sourceTransform = parentsetT;
+            myConstraintSource.weight = 1;
+            processingEffectObj.positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
+            processingEffectObj.positionConstraint.constraintActive = true;
+            processingEffectObj.positionConstraint.locked = true;
+            processingEffectObj.positionConstraint.translationAtRest = Pos;
+            processingEffectObj.positionConstraint.translationOffset = Vector3.zero;
         }
         return processingEffectObj;
     }
 
-    public IEnumerator ConstructHurtObjectPoolResourceMode(string resource_name, string MagicForwardPath, zokusei _zokusei)
+    public IEnumerator ConstructHurtObjectPoolResourceMode(string resource_name, string MagicForwardPath, Zokusei _zokusei)
     {
         DecompositionerPool poolToConstruct2;
         GameObject hurtObject;
@@ -328,19 +334,19 @@ public class EffectAndHurtObjectLoading
         string basicMagicForwardPath = "defaultmagic";
         switch (_zokusei)
         {
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
                 basicMagicForwardPath = "darkmagic";
                 break;
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
                 basicMagicForwardPath = "bluemagic";
                 break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
                 basicMagicForwardPath = "greenmagic";
                 break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
                 basicMagicForwardPath = "lightmagic";
                 break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
                 basicMagicForwardPath = "redmagic";
                 break;
             default:

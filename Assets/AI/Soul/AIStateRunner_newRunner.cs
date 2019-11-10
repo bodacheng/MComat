@@ -25,7 +25,7 @@ namespace Soul
                 foreach (string num in CurrentStateTransitionSet.forced_to_state_nums)
                 {
                     state_Dictionary.TryGetValue(num, out try_state);
-                    if (try_state.force_enter_condition())
+                    if (try_state.Force_enter_condition())
                     {
                         avaliable_forced_Transitions.Add(num);
                     }
@@ -69,30 +69,30 @@ namespace Soul
                     if (try_state.Capacity_enter_condition())
                     {
                         SRTListForCasualTransitionbuttonRefresh.Add(state_set);
-                        if (((state_set.can_be_cancelled_to && _SkillCancelFlag.getFlag()))||
-                            (now_state.capacity_exit_condition() && exitCommandFufilled))
+                        if (((state_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag))||
+                            (now_state.Capacity_exit_condition() && exitCommandFufilled))
                         {
                             if (playerMode || _inputManager.ifPlayerIsInputting())
                             {
                                 if ((state_set.enterInput != inputs_defined.Null && this.checkInput(state_set.enterInput)) ||
                                     state_set.enterInput == inputs_defined.Null)
                                 {
-                                    if (try_state.enter_condition_priority1())
+                                    if (try_state.Enter_condition_priority1())
                                         casual_TransitionsPriority1.Add(state_set);
-                                    if (try_state.enter_condition_priority2())
+                                    if (try_state.Enter_condition_priority2())
                                         casual_TransitionsPriority2.Add(state_set);
-                                    if (try_state.enter_condition_priority3())
+                                    if (try_state.Enter_condition_priority3())
                                         casual_TransitionsPriority3.Add(state_set);
                                     avaliable_casual_Transitions.Add(state_set);
                                 }
                             }
                             else
                             {
-                                if (try_state.enter_condition_priority1())
+                                if (try_state.Enter_condition_priority1())
                                     casual_TransitionsPriority1.Add(state_set);
-                                if (try_state.enter_condition_priority2())
+                                if (try_state.Enter_condition_priority2())
                                     casual_TransitionsPriority2.Add(state_set);
-                                if (try_state.enter_condition_priority3())
+                                if (try_state.Enter_condition_priority3())
                                     casual_TransitionsPriority3.Add(state_set);
 
                                 avaliable_casual_Transitions.Add(state_set);
@@ -142,7 +142,7 @@ namespace Soul
                 }
             }
 
-            if (!now_state.capacity_exit_condition())
+            if (!now_state.Capacity_exit_condition())
             {
                 return;
             }
@@ -156,7 +156,7 @@ namespace Soul
             }
             else
             {
-                if (!now_state.strategic_exit_condition())
+                if (!now_state.Strategic_exit_condition())
                 {
                     return;
                 } 
@@ -198,11 +198,11 @@ namespace Soul
             {
                 if (State_Rate_Set.Capacity_enter_condition())
                 {
-                    if (State_Rate_Set.enter_condition_priority1())
+                    if (State_Rate_Set.Enter_condition_priority1())
                         AINextPriority1.Add(State_Rate_Set);
-                    if (State_Rate_Set.enter_condition_priority2())
+                    if (State_Rate_Set.Enter_condition_priority2())
                         AINextPriority2.Add(State_Rate_Set);
-                    if (State_Rate_Set.enter_condition_priority3())
+                    if (State_Rate_Set.Enter_condition_priority3())
                         AINextPriority3.Add(State_Rate_Set);
                     AINext.Add(State_Rate_Set);
                 }

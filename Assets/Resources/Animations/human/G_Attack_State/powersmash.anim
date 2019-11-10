@@ -75685,14 +75685,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.083333336
-    functionName: resistanceUp
+    functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 5
     messageOptions: 0
   - time: 0.33333334
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -75713,14 +75713,14 @@ AnimationClip:
     intParameter: 3
     messageOptions: 0
   - time: 0.53333336
-    functionName: resistanceClear
+    functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6166667
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

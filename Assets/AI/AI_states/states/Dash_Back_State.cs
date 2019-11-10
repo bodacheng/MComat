@@ -25,9 +25,9 @@ public class Dash_Back_State : AI_State
         breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
     {
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
     }
 
     public override bool Capacity_enter_condition()
@@ -37,7 +37,7 @@ public class Dash_Back_State : AI_State
         return true;
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
     {
         if ((this._FightAttriCalReference.IFgettingDamage() && this._FightAttriCalReference.CriticalGauge > 95) || Sensor.getNearbyDamagingWeaponColliders().Count > 0)
             return true;
@@ -99,7 +99,7 @@ public class Dash_Back_State : AI_State
         //_Rigidbody.velocity = Vector3.zero;
     }
 
-    public override bool capacity_exit_condition()
+    public override bool Capacity_exit_condition()
     {
         if (this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
             return true;

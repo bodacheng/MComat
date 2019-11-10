@@ -13,7 +13,7 @@ public class PreparingProcess : NagareProcess
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
     }
     
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         loadingCanvas.DarkOff(1f);
         FightLoadError.Instance.FightLoadErrors.Clear();
@@ -22,33 +22,28 @@ public class PreparingProcess : NagareProcess
             case SceneMode.MyPetsFight:
                 if (FightSceneNote.Instance.nextBattle != null)
                 {
-                    mainProcessRunner.triggerMainProcess(_NetFightScene.loadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+                    mainProcessRunner.triggerMainProcess(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
                 }
             break;
             case SceneMode.QuestFight:
                 if (FightSceneNote.Instance.nextBattle != null)
                 {
-                    mainProcessRunner.triggerMainProcess(_NetFightScene.loadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+                    mainProcessRunner.triggerMainProcess(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
                 }
             break;
         }
         loadingCanvas.LightUp();
         yield break;
     }
-
-    public override bool canEnterNextProcess()
-    {
-        return _NetFightScene.ifLoadStageFinished() && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle();
-    }
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
-        _NetFightScene.resetLoadStageFinishedFlag();
+        _NetFightScene.LoadStageFinished.Value = false;
         if (FightLoadError.Instance.FightLoadErrors.Count > 0)
         {
             foreach (string error in FightLoadError.Instance.FightLoadErrors)
@@ -57,5 +52,11 @@ public class PreparingProcess : NagareProcess
             SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步呗？
         }
         FightLoadError.Instance.FightLoadErrors.Clear();
+    }
+    
+    public override void LocalUpdate()
+    {
+        AutoMoveToNext |= 
+        (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle());
     }
 }

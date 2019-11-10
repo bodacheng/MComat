@@ -165,19 +165,19 @@ namespace mainMenu
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
             {
-                case zokusei.darkMagic:
+                case Zokusei.darkMagic:
                     personalEffectsPath = "darkMagic";
                     break;
-                case zokusei.blueMagic:
+                case Zokusei.blueMagic:
                     personalEffectsPath = "blueMagic";
                     break;
-                case zokusei.greenMagic:
+                case Zokusei.greenMagic:
                     personalEffectsPath = "greenMagic";
                     break;
-                case zokusei.lightMagic:
+                case Zokusei.lightMagic:
                     personalEffectsPath = "lightMagic";
                     break;
-                case zokusei.redMagic:
+                case Zokusei.redMagic:
                     personalEffectsPath = "redMagic";
                     break;
                 default:
@@ -210,9 +210,9 @@ namespace mainMenu
 
                 CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(accountCharacterInfo.monsterId);
                 CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(accountCharacterInfo);
-                yield return (aI_DATA_CENTER.step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI));
+                yield return (aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI));
                 yield return (
-                    aI_DATA_CENTER.step2Initialize(
+                    aI_DATA_CENTER.Step2Initialize(
                         characterResourceInfo.type, characterDataInfo._NineAndTwo,
                         characterDataInfo._NineAndTwo.level, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI)
                 );

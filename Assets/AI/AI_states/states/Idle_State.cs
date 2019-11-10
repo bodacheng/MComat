@@ -12,9 +12,9 @@ public class Idle_State : AI_State
         this.clip_name = clip_name;
 	}
 
-	public override void pre_process_before_enter()
+	public override void Pre_process_before_enter()
 	{
-        base.pre_process_before_enter();
+        base.Pre_process_before_enter();
     }
 
 	public override void AI_State_enter()
@@ -25,7 +25,7 @@ public class Idle_State : AI_State
         this._Rigidbody.velocity = Vector3.zero;
 	}
 
-    public override bool capacity_exit_condition()
+    public override bool Capacity_exit_condition()
     {
         return false;
     }

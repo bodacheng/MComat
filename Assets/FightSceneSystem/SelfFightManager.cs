@@ -54,19 +54,19 @@ namespace mainMenu
         {
             foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_M)
             {
-                keyValuePair.Value.changeIcon(null, zokusei.Null);
+                keyValuePair.Value.changeIcon(null, Zokusei.Null);
             }
             foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_M)
             {
-                keyValuePair.Value.changeIcon(null, zokusei.Null);
+                keyValuePair.Value.changeIcon(null, Zokusei.Null);
             }
             foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_R)
             {
-                keyValuePair.Value.changeIcon(null, zokusei.Null);
+                keyValuePair.Value.changeIcon(null, Zokusei.Null);
             }
             foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_R)
             {
-                keyValuePair.Value.changeIcon(null, zokusei.Null);
+                keyValuePair.Value.changeIcon(null, Zokusei.Null);
             }
             _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
             _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
@@ -238,9 +238,9 @@ namespace mainMenu
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_one.monsterId);
                 tar.changeIcon(characterResourceInfo == null ? null: monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
-                    characterResourceInfo == null ? zokusei.Null : characterResourceInfo._zokusei);
+                    characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
             }else{
-                tar.changeIcon(null,zokusei.Null);
+                tar.changeIcon(null,Zokusei.Null);
             }
             yield break;
         }
@@ -265,7 +265,7 @@ namespace mainMenu
             for (int i = 0; i < icons.Count; i++)
             {
                 targetTeamIcons.Add(i,icons[i]);
-                icons[i].changeIcon(null, zokusei.Null);
+                icons[i].changeIcon(null, Zokusei.Null);
                 icons[i].iconButton.onClick.RemoveAllListeners();
                 string pos = i.ToString().Clone().ToString();
                 void A()
@@ -300,13 +300,13 @@ namespace mainMenu
             team2ButtonDic_R.Add(1, team22_R);
             team2ButtonDic_R.Add(2, team23_R);
   
-            team11_R.changeIcon(null, zokusei.Null);
-            team12_R.changeIcon(null, zokusei.Null);
-            team13_R.changeIcon(null, zokusei.Null);
+            team11_R.changeIcon(null, Zokusei.Null);
+            team12_R.changeIcon(null, Zokusei.Null);
+            team13_R.changeIcon(null, Zokusei.Null);
 
-            team21_R.changeIcon(null, zokusei.Null);
-            team22_R.changeIcon(null, zokusei.Null);
-            team23_R.changeIcon(null, zokusei.Null);
+            team21_R.changeIcon(null, Zokusei.Null);
+            team22_R.changeIcon(null, Zokusei.Null);
+            team23_R.changeIcon(null, Zokusei.Null);
 
             team11_R.iconButton.onClick.RemoveAllListeners();
             void pos11()

@@ -4,7 +4,8 @@
 AnimationClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: frank_aircombo1
   serializedVersion: 6
   m_Legacy: 0
@@ -176719,17 +176720,16 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_GenerateMotionCurves: 0
   m_Events:
   - time: 0.35
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
   - time: 0.35
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -176743,7 +176743,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.53333336
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -176757,7 +176757,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.71666664
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -176771,7 +176771,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.98333335
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -176799,7 +176799,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.1833333
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -39,7 +39,7 @@ public class SkillStoneSlot
         DragAndDropItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
         {
-            DragAndDropCell dragAndDropCell = MySkillStonesReader.SkillStonesBox.getFirstEmptyCell();
+            DragAndDropCell dragAndDropCell = MySkillStonesReader.SkillStonesBox.GetFirstEmptyCell();
             if (dragAndDropCell != null)
                 dragAndDropCell.AddItem(_DragAndDropItem);
             else

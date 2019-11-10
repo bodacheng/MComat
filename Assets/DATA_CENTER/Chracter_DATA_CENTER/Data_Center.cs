@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-using System.Linq;
 using Soul;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
@@ -17,21 +16,12 @@ using Soul;
 [RequireComponent(typeof(BlendShapeProxy))]
 public partial class Data_Center : MonoBehaviour
 {
-    protected bool phase1Initialized = false, phase2Initialized = false;
-    // 以下的这三个信息各有所用。首先队伍适配信息不光是角色本身，而且全身各个武器和hitbox的初始化也和这个量息息相关，
-    // 然后_CharacterDataInfo 事关GUI，角色信息啦浮动血跳什么的都和它相关，而_playerBattleInfo则是这场战斗为角色分配的攻击力和HP量
-    // 因为我们这个游戏不是靠角色等级决定HP等属性，往往一场战斗所有角色会分配固定血量，因此事关总体血量和攻击力分配。
     public TeamConfig _TeamConfig;
 
-    public zokusei Zokusei;
+    public Zokusei Zokusei;
     public Transform geometryCenter;
     public Transform WholeT;
     public Transform floorChecks;
-    private Transform[] floorCheckers;
-    private float groundedCount = 0f;
-    private float airCount = 0f;
-    private bool grounded;
-
     public AudioSource _AudioSource;
     public Animator animator;   
     public Sensor Sensor;   
@@ -52,26 +42,33 @@ public partial class Data_Center : MonoBehaviour
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
 
+    protected bool phase1Initialized, phase2Initialized;
+    private Transform[] floorCheckers;
+    private float groundedCount;
+    private float airCount;
+    private bool grounded;
+    
     [Header("传统防御盾。可能真的用不到了")]
     [Space(1)]
     public BO_Shield Shield;
     
-    public bool onBattleGroundBundary = false;
+    public bool onBattleGroundBundary;
     public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
 
     public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
-        
-    public bool ifPreparedForBattle()
+
+    public bool IfPreparedForBattle()
     {
-        if (phase1Initialized && phase2Initialized)
-        {
-            return true;
-        }else{
-            return false;
-        }
+        return phase1Initialized && phase2Initialized ? true : false;
     }
 
-    public IEnumerator step1Initialize(string type, string basicPackName,string personalMagicPath)
+    void Awake()
+    {
+        if (geometryCenter == null)
+            geometryCenter = gameObject.transform; 
+    }
+
+    public IEnumerator Step1Initialize(string type, string basicPackName,string personalMagicPath)
     {
         if (!phase1Initialized)
         {
@@ -82,24 +79,23 @@ public partial class Data_Center : MonoBehaviour
             {
                 floorCheckers[i] = floorChecks.GetChild(i);
             }
-            bO_Weapon_Animation_Events.assignWeaponsFromDataCenter(_FightAttriCalReference,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-
+            bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(_FightAttriCalReference,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             string personalEffectsPath;
             switch (this.Zokusei)
             {
-                case zokusei.darkMagic:
+                case Zokusei.darkMagic:
                     personalEffectsPath = "darkMagic";
                     break;
-                case zokusei.blueMagic:
+                case Zokusei.blueMagic:
                     personalEffectsPath = "blueMagic";
                     break;
-                case zokusei.greenMagic:
+                case Zokusei.greenMagic:
                     personalEffectsPath = "greenMagic";
                     break;
-                case zokusei.lightMagic:
+                case Zokusei.lightMagic:
                     personalEffectsPath = "lightMagic";
                     break;
-                case zokusei.redMagic:
+                case Zokusei.redMagic:
                     personalEffectsPath = "redMagic";
                     break;
                 default:
@@ -146,24 +142,24 @@ public partial class Data_Center : MonoBehaviour
         }
 
         Sensor.setDectectLayerAndFrontDirection(_TeamConfig,this);
-        this.bO_Weapon_Animation_Events.assignTeamFlag(_TeamConfig);
+        bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
 
         string effectPath;
         switch (Zokusei)
         {
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
                 effectPath = "darkMagic";
                 break;
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
                 effectPath = "blueMagic";
                 break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
                 effectPath = "greenMagic";
                 break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
                 effectPath = "lightMagic";
                 break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
                 effectPath = "redMagic";
                 break;
             default:
@@ -190,7 +186,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public IEnumerator step2Initialize(string type, NineAndTwo _NineAndTwo, int AI_level,zokusei _zokusei, string personalMagic)
+    public IEnumerator Step2Initialize(string type, NineAndTwo _NineAndTwo, int AI_level,Zokusei _zokusei, string personalMagic)
     {
         if (!phase2Initialized)
         {
@@ -201,7 +197,7 @@ public partial class Data_Center : MonoBehaviour
         if (AIStateRunner.getReadingNineAndTwo() != _NineAndTwo || AIStateRunner.usingScriptLevel != AI_level)
         {
             AIStateRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo, AI_level);
-            AIStateRunner.iniStates(this.WholeT,this.geometryCenter);
+            AIStateRunner.IniStates(this);
             //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
             // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
             List<string> toLoadSkillAnimsNames = AIStateRunner.passSkillTypeKeys();
@@ -220,7 +216,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
 
-    public void step3Initialize(TeamConfig _TeamConfig)//战斗必备
+    public void Step3Initialize(TeamConfig _TeamConfig)//战斗必备
     {
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
         _FightAttriCalReference.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
@@ -229,7 +225,7 @@ public partial class Data_Center : MonoBehaviour
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
-    public void deathInitialize()
+    public void DeathInitialize()
     {
         gameObject.layer = this._TeamConfig.deadLayer;
         this._FightAttriCalReference.ChangeLayerForAllSelfColliders(_TeamConfig.deadLayer);
@@ -239,7 +235,7 @@ public partial class Data_Center : MonoBehaviour
     //关于角色初始化，我们需要把所有进行初始化的内容都拿出来进行一个归类工作。其实当下我们的系统里最不稳的一个事情在于
     //很多靠字符串表达的地址。。这种东西我们在读取角色和读取脚本的地方已经修改了，但在读取动画文件和读取脚本的地方仍然存在。
     //这些地方有没有必要给想办法去掉呢。。
-    public void turnShield(bool isShieldActive)
+    public void TurnShield(bool isShieldActive)
     {
         //if (PhotonNetwork.offlineMode || !PhotonNetwork.connected) {
         //} else
@@ -261,32 +257,29 @@ public partial class Data_Center : MonoBehaviour
             animator.SetFloat("groundedCount", groundedCount);
             groundedCount = (grounded) ? groundedCount += Time.deltaTime : 0f;
             airCount = (!grounded) ? airCount += Time.deltaTime : 0f;
-            if (WholeT.position.y <= floorY) 
-            {
-                temp = WholeT.position;
-                temp.y = floorY;
-                WholeT.position = temp;
-            }
             this.Sensor.SensorFixedUpdate();
             this.buffsRunner.BuffsRunnerFixedUpdate();
             this._FightAttriCalReference.HealthBodyFixedUpdate();
-            this._SkillCancelFlag.SkillCancelFlagFixedUpdate();
+            this._SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
         }
     }
     
-    public void setGravitySwitch(bool _on)
+    public void SetGravitySwitch(bool _on)
     {
         GravitySwitch = _on;
     }
-    public bool getGravitySwitch()
+    public bool GetGravitySwitch()
     {
         return GravitySwitch;
     }
     
     private bool GravitySwitch = true;
-    private float floorY = 0f;
+    private float floorY;
     public void IfGrounded()
     {
+        temp = WholeT.position;
+        temp.y = floorY;
+        this.WholeT.transform.position = Vector3.Lerp(this.WholeT.transform.position,temp,10 * Time.fixedDeltaTime);
         if (floorCheckers == null)
         {
             this.grounded = false;
@@ -301,9 +294,6 @@ public partial class Data_Center : MonoBehaviour
             }
         }
         this.grounded = false;
-        temp = WholeT.position;
-        temp.y = floorY;
-        this.WholeT.transform.position = Vector3.Lerp(this.WholeT.transform.position,temp,10 * Time.fixedDeltaTime);
     }
 
     public bool IsGrounded()
@@ -311,7 +301,7 @@ public partial class Data_Center : MonoBehaviour
         return this.grounded;
     }
     
-    public void cleanClear()
+    public void CleanClear()
     {
         this.grounded = true;
         if (animator)
@@ -320,13 +310,13 @@ public partial class Data_Center : MonoBehaviour
             animator.SetFloat("groundedCount", 10);
         }
         this.Sensor.Stop();
-        this.bO_Weapon_Animation_Events.clearMarkerManagers();
+        this.bO_Weapon_Animation_Events.ClearMarkerManagers();
         this.buffsRunner.endAllCoroutines();
-        this.pusher.clearHitCountForAttackStepping();  
+        this.pusher.hiddenMethods.ClearHitCountForAttackStepping();  
     }
 
     private float p1_to_me,p2_to_me;
-    public int horizontalDistanceCompare(Vector3 p1, Vector3 p2)
+    public int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
     {
         p1.y = gameObject.transform.position.y;
         p1_to_me = (p1 - gameObject.transform.position).magnitude;
@@ -334,15 +324,7 @@ public partial class Data_Center : MonoBehaviour
         p2.y = gameObject.transform.position.y;
         p2_to_me = (p2 - gameObject.transform.position).magnitude;
 
-        if (p1_to_me > p2_to_me)
-        {
-            return 1;
-        }
-        if (p1_to_me < p2_to_me)
-        {
-            return -1;
-        }
-        return 0;
+        return p1_to_me > p2_to_me ? 1 : p1_to_me < p2_to_me ? -1 : 0;
     }
 
     public GameObject[] MergerGameObjectArray(GameObject[] First, GameObject[] Second) //合并两个数组。不光是gameobjects，任何类型变量都可以通用。
@@ -351,22 +333,6 @@ public partial class Data_Center : MonoBehaviour
         First.CopyTo(result, 0);
         Second.CopyTo(result, First.Length);
         return result;
-    }
-
-    public bool ifVectorClean(Vector3 rot)
-    {
-        if (rot == Vector3.zero)
-            return false;
-
-        if (float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z))
-        {
-            return false;
-        }
-        if (float.IsInfinity(rot.x) || float.IsInfinity(rot.y) || float.IsInfinity(rot.z))
-        {
-            return false;
-        }
-        return true;
     }
 }
 

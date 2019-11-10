@@ -6,13 +6,12 @@ namespace mainMenu
 {
     public class SkillStoneBoxTabEffectsManager : MonoBehaviour
     {
-        public SkillStonesBox skillStonesBox;
-        IDictionary<zokusei, zokuseiSkillStoneTagsGroup> zokuseiButtonEffects = new Dictionary<zokusei, zokuseiSkillStoneTagsGroup>();
+        IDictionary<Zokusei, zokuseiSkillStoneTagsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiSkillStoneTagsGroup>();
         zokuseiSkillStoneTagsGroup _focusingButtonEffectsGroup;
         GameObject triggerExplosionPretab0;
         ParticleSystem triggerExplosion0;
         
-        public IEnumerator startUp()
+        public IEnumerator StartUp()
         {
             zokuseiSkillStoneTagsGroup red = new zokuseiSkillStoneTagsGroup();
             zokuseiSkillStoneTagsGroup blue = new zokuseiSkillStoneTagsGroup();
@@ -20,29 +19,29 @@ namespace mainMenu
             zokuseiSkillStoneTagsGroup dark = new zokuseiSkillStoneTagsGroup();
             zokuseiSkillStoneTagsGroup _light = new zokuseiSkillStoneTagsGroup();
     
-            red.INI_forSkillStoneBox(zokusei.redMagic,transform);
-            blue.INI_forSkillStoneBox(zokusei.blueMagic,transform);
-            green.INI_forSkillStoneBox(zokusei.greenMagic,transform);
-            dark.INI_forSkillStoneBox(zokusei.darkMagic,transform);
-            _light.INI_forSkillStoneBox(zokusei.lightMagic,transform);
+            red.INI_forSkillStoneBox(Zokusei.redMagic,transform);
+            blue.INI_forSkillStoneBox(Zokusei.blueMagic,transform);
+            green.INI_forSkillStoneBox(Zokusei.greenMagic,transform);
+            dark.INI_forSkillStoneBox(Zokusei.darkMagic,transform);
+            _light.INI_forSkillStoneBox(Zokusei.lightMagic,transform);
     
-            zokuseiButtonEffects.Add(zokusei.redMagic,red);
-            zokuseiButtonEffects.Add(zokusei.blueMagic,blue);
-            zokuseiButtonEffects.Add(zokusei.greenMagic,green);
-            zokuseiButtonEffects.Add(zokusei.darkMagic,dark);
-            zokuseiButtonEffects.Add(zokusei.lightMagic,_light);
+            zokuseiButtonEffects.Add(Zokusei.redMagic,red);
+            zokuseiButtonEffects.Add(Zokusei.blueMagic,blue);
+            zokuseiButtonEffects.Add(Zokusei.greenMagic,green);
+            zokuseiButtonEffects.Add(Zokusei.darkMagic,dark);
+            zokuseiButtonEffects.Add(Zokusei.lightMagic,_light);
             triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/lightMagic/explosion0", typeof(GameObject)) as GameObject;
             triggerExplosion0 = Object.Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
             yield break;
         }
         
-        public void closeShowingZokuseiTagEffects()
+        public void CloseShowingZokuseiTagEffects()
         {
             if (_focusingButtonEffectsGroup != null)
                 _focusingButtonEffectsGroup.close_skillstoneboxtageffects();
         }
         
-        public void switchZokuseiButtons(Vector3 normaltagpos,Vector3 ex1tagpos,Vector3 ex2tagpos,Vector3 ex3tagpos, zokusei zokusei)
+        public void SwitchZokuseiButtons(Vector3 normaltagpos,Vector3 ex1tagpos,Vector3 ex2tagpos,Vector3 ex3tagpos, Zokusei zokusei)
         {
             if (_focusingButtonEffectsGroup != null)
                 _focusingButtonEffectsGroup.close_skillstoneboxtageffects();
@@ -64,7 +63,7 @@ namespace mainMenu
             _focusingButtonEffectsGroup.refreshforbuttonForSkillStoneBox(sp_level,pos);
         }
         
-        public void skillbuttonexplosion(Vector3 targetPOS)
+        public void Skillbuttonexplosion(Vector3 targetPOS)
         {
             triggerExplosion0.transform.position = targetPOS;
             triggerExplosion0.Play();            

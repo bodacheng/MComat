@@ -63895,7 +63895,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.25
-    functionName: blastAttack
+    functionName: BlastAttack
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

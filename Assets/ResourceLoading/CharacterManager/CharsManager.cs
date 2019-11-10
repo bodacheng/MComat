@@ -145,7 +145,7 @@ public partial class CharsManager : MonoBehaviour {
             yield break;
         }
         CharacterResourceInfo _TempCharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.monsterId.ToString()));
-        yield return (_TempDATACENTER.step2Initialize
+        yield return (_TempDATACENTER.Step2Initialize
             (_TempCharacterResourceInfo.type,
              _CharacterDataInfo._NineAndTwo,
              _CharacterDataInfo.level,

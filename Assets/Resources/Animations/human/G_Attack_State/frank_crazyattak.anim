@@ -282029,7 +282029,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.4
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -282043,7 +282043,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.6166667
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -282057,7 +282057,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.8833333
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -282085,7 +282085,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.2
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

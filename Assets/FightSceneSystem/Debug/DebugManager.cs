@@ -200,26 +200,26 @@ public class DebugManager : MonoBehaviour {
                                     teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
                                 }
 
-                                zokusei Zokusei;
+                                Zokusei Zokusei;
                                 switch (ZokuseiDropDown.options[ZokuseiDropDown.value].text)
                                 {
                                     case "red":
-                                        Zokusei = zokusei.redMagic;
+                                        Zokusei = Zokusei.redMagic;
                                         break;
                                     case "blue":
-                                        Zokusei = zokusei.blueMagic;
+                                        Zokusei = Zokusei.blueMagic;
                                         break;
                                     case "green":
-                                        Zokusei = zokusei.greenMagic;
+                                        Zokusei = Zokusei.greenMagic;
                                         break;
                                     case "dark":
-                                        Zokusei = zokusei.darkMagic;
+                                        Zokusei = Zokusei.darkMagic;
                                         break;
                                     case "light":
-                                        Zokusei = zokusei.lightMagic;
+                                        Zokusei = Zokusei.lightMagic;
                                         break;
                                     default:
-                                        Zokusei = zokusei.lightMagic;
+                                        Zokusei = Zokusei.lightMagic;
                                         break;
                                 }
 
@@ -328,26 +328,26 @@ public class DebugManager : MonoBehaviour {
                                 teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
                             }
 
-                            zokusei Zokusei;
+                            Zokusei Zokusei;
                             switch (ZokuseiDropDown.options[ZokuseiDropDown.value].text)
                             {
                                 case "red":
-                                    Zokusei = zokusei.redMagic;
+                                    Zokusei = Zokusei.redMagic;
                                     break;
                                 case "blue":
-                                    Zokusei = zokusei.blueMagic;
+                                    Zokusei = Zokusei.blueMagic;
                                     break;
                                 case "green":
-                                    Zokusei = zokusei.greenMagic;
+                                    Zokusei = Zokusei.greenMagic;
                                     break;
                                 case "dark":
-                                    Zokusei = zokusei.darkMagic;
+                                    Zokusei = Zokusei.darkMagic;
                                     break;
                                 case "light":
-                                    Zokusei = zokusei.lightMagic;
+                                    Zokusei = Zokusei.lightMagic;
                                     break;
                                 default:
-                                    Zokusei = zokusei.lightMagic;
+                                    Zokusei = Zokusei.lightMagic;
                                     break;
                             }
 
@@ -444,7 +444,7 @@ public class DebugManager : MonoBehaviour {
     //AI到player和从player到AI是完全不同的两个按钮
     //原则上jueSeLiebiao模块应该完全负责这一类功能。就是说改造的方向甚至是想法让本张脚本里的focusingchar变量消失
     public IEnumerator createCharByResourcePath(string type, string prefabName, string basicPackName,string AIScriptName, int AIlevel,
-                                                zokusei _zokusei,string personalMagicpath,
+                                                Zokusei _zokusei,string personalMagicpath,
                                                 TeamConfig TeamConfig, Vector3 position, Quaternion rotation)
     {
         GameObject fightChar = Resources.Load("charPretabs/" + type + "/" + prefabName) as GameObject;
@@ -472,9 +472,9 @@ public class DebugManager : MonoBehaviour {
             GameObject one_char = Instantiate(fightChar, position, new Quaternion(0, 0, 0, 0));
             one_char.transform.rotation = rotation;
             // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
-            yield return (aI_DATA_CENTER.step1Initialize(type, basicPackName,personalMagicpath));
+            yield return (aI_DATA_CENTER.Step1Initialize(type, basicPackName,personalMagicpath));
             yield return (aI_DATA_CENTER.step2InitializeByResourceFolder(type, AIScriptPrefab, AIlevel, _zokusei, personalMagicpath));
-            aI_DATA_CENTER.step3Initialize(TeamConfig);
+            aI_DATA_CENTER.Step3Initialize(TeamConfig);
         }
         else
         {

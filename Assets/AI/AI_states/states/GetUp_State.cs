@@ -14,9 +14,9 @@ public class GetUp : AI_State {
         this.length = length;
 	}
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
 	}
 
     public override bool Capacity_enter_condition()
@@ -26,7 +26,7 @@ public class GetUp : AI_State {
         return true;
     }
 
-    public override bool capacity_exit_condition()
+    public override bool Capacity_exit_condition()
     {
         if (this.counter >= length)
             return true;
@@ -43,7 +43,7 @@ public class GetUp : AI_State {
         this.Animation_Manger.animationTrigger(clip_name);
 	}
 
-    public override void c_State_enter()
+    public override void C_State_enter()
     {
         this.AI_State_enter();
     }

@@ -58,7 +58,7 @@ namespace dataAccess
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
-                    loadAccountCharacterInfoListObjectsViaJsonFile();
+                    LoadAccountCharacterInfoListObjectsViaJsonFile();
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     yield return loadAccountCharacterInfoListObjectsRemote(ApiLanguage.JaJp);

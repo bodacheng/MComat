@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
@@ -8,24 +9,20 @@ using System;
 
 public class FightingProcess : NagareProcess
 {
-    List<Transform> outter_watchetargets = new List<Transform>();
-    List<Transform> inner_watchetargets = new List<Transform>();
-    IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
-    
-    public FightingProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
+    private readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
+
+    public FightingProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
     {
         this.thisProcessStep = SceneStep.Fighting;
         this.nextProcessStep = SceneStep.FightOver;
-        EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
+        EelementsInherit(_NetFightScene, fightSceneProcessesRunner);
+        fightLogger.gameOver.Subscribe(x => 
+            {
+                AutoMoveToNext |= x == true;
+            }
+        );
     }
-    
-    public override bool canEnterNextProcess()
-    {
-        if (this.fightLogger.ifGameOver())
-            return true;
-        else return false;
-    }
-    
+        
     public override void ProcessEnter()
     {
         AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.teamMembers.values);
@@ -41,27 +38,20 @@ public class FightingProcess : NagareProcess
                 _char.Sensor.TeamMembers = AllMembers;
             }
         }
-
         _NetFightScene.pressedStartButton();
         _NetFightScene.FightCanvas.gameObject.SetActive(true);
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        
-        if (RealTimeGameProcessManager.focusingChar != null)
-        {
-            cameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.WholeT });
-            cameraManager.current_Camera_Mode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
-        }
     }
     
     public override void ProcessEnd()
     {
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        mainProcessRunner.triggerMainProcess(finalMoment(this.fightLogger.getWinner()));
+        mainProcessRunner.triggerMainProcess(FinalMoment(this.fightLogger.getWinner()));
     }
     
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -75,11 +65,9 @@ public class FightingProcess : NagareProcess
                 switch (BoundaryControllByGod.boundaryMode)
                 {
                     case BoundaryMode.Round:
-                        //_BoundaryControllByGod.SUOQUANER(alivemembercount);
-                        BoundaryControllByGod.RoundModeGodControll(BoundaryControllByGod.battleRingCenter, BoundaryControllByGod.BattleRingRadius);
+                        BoundaryControllByGod.RoundBattleFieldNormalControl(Vector3.zero);
                         break;
                     case BoundaryMode.None:
-                        BoundaryControllByGod.RoundBattleFieldNormalControl(BoundaryControllByGod.battleRingCenter, 24);
                         break;
                 }
                 break;
@@ -87,7 +75,7 @@ public class FightingProcess : NagareProcess
         this.mobileInputsManager.RefreshButtonPattern();
     }
 
-    IEnumerator finalMoment(Team winner)
+    private IEnumerator FinalMoment(Team winner)
     {
         Time.timeScale = 0.4f;
         yield return new WaitForSeconds(2f);

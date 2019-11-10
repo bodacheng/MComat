@@ -396724,21 +396724,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.2
-    functionName: blastAttack
+    functionName: BlastAttack
     data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 0.81666666
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
   - time: 0.9
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -396752,7 +396752,7 @@ AnimationClip:
     intParameter: 3
     messageOptions: 0
   - time: 1.1333333
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -39,17 +39,17 @@ public class Move_State : AI_State
 		this.time_limit = time_limit;		
 	}
 
-	public override void pre_process_before_enter()
+	public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
 	}
 
-    public override bool enter_condition_priority3()
+    public override bool Enter_condition_priority3()
     {
         return true;
     }
 
-    public override bool strategic_exit_condition()
+    public override bool Strategic_exit_condition()
     {
         if (Sensor.getInnerEnemiesColliders().Count > 0 ||
             Sensor.getNearbyDamagingWeaponColliders().Count > 0|| 
@@ -91,10 +91,10 @@ public class Move_State : AI_State
         return false;
     }
 
-    public override void c_State_enter()
+    public override void C_State_enter()
     {
         this.time_counter = 0f;
-        this._Weapon_Animation_Events.clearMarkerManagers();        
+        this._Weapon_Animation_Events.ClearMarkerManagers();        
         this.mainCam = CameraManager._camera.transform;
         this.Animation_Manger.PlayLayerAnim(null);
         this.personality_Events.CloseAllPersonalityEffects();
@@ -102,8 +102,8 @@ public class Move_State : AI_State
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
-        this._DATA_CENTER.setGravitySwitch(true);
-        this._Weapon_Animation_Events.clearMarkerManagers();
+        this._DATA_CENTER.SetGravitySwitch(true);
+        this._Weapon_Animation_Events.ClearMarkerManagers();
         this.Sensor.continuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
         this.Animation_Manger.PlayLayerAnim(null);
 

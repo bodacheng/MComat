@@ -87112,28 +87112,28 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.3
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
   - time: 0.3
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
   - time: 0.46666667
-    functionName: blastAttack
+    functionName: BlastAttack
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.46666667
-    functionName: blastAttack
+    functionName: BlastAttack
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

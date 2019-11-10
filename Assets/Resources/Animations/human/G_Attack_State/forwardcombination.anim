@@ -133411,7 +133411,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -133432,7 +133432,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.95
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -133453,7 +133453,7 @@ AnimationClip:
     intParameter: 3
     messageOptions: 0
   - time: 1.1833333
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

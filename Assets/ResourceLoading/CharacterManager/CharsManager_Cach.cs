@@ -48,12 +48,12 @@ public partial class CharsManager : MonoBehaviour
         OutsideDataLink _ODL = _TempModel.GetComponent<OutsideDataLink>();
         Data_Center _TempDATACENTER = _ODL._C;
         _TempDATACENTER.Zokusei = _TempCharacterResourceInfo._zokusei;
-        yield return (_TempDATACENTER.step1Initialize(_TempCharacterResourceInfo.type, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
+        yield return (_TempDATACENTER.Step1Initialize(_TempCharacterResourceInfo.type, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;
     }
 
     // 脚本信息式
-    public IEnumerator CreateCharacterFromABByCach(CharacterDataInfo _CharacterDataInfo,string AIScriptName,zokusei _zokusei,string personalMagic,Team team,Vector3 pos, Quaternion Q)
+    public IEnumerator CreateCharacterFromABByCach(CharacterDataInfo _CharacterDataInfo,string AIScriptName,Zokusei _zokusei,string personalMagic,Team team,Vector3 pos, Quaternion Q)
     {
         //yield return (this.CreateModelForShowingByCach(_CharacterDataInfo.monsterId));
         //GameObject IT;

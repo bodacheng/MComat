@@ -66,7 +66,7 @@ public class TryEditNineSlot : MainSceneProcess
         
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
-        _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
+        _SkillStonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
             this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
             this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
             this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
@@ -95,7 +95,7 @@ public class TryEditNineSlot : MainSceneProcess
         this._TheNineSlot.C3DragAndDropCell.gameObject.SetActive(true);
         
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
-        _SkillStonesBox.setFocusingType(_CharacterResourceInfo.type);
+        _SkillStonesBox.SetFocusingType(_CharacterResourceInfo.type);
         yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
         UnityEngine.Events.UnityAction SkillEditConfirm = () =>//这里可能还有一个执行内容，就是进入到测试战斗场景。
         {

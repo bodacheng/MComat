@@ -46,7 +46,7 @@ namespace HittingDetection
                         // 现在我们在讨论的其实是关于同步问题的一个核心的事情。。。什么时候两边都需要执行，什么时候只需要一个客户端执行。我们现在不熟悉处理这类问题的逻辑方式。
                         if (_FightAttriCalReference != null)
                         {
-                            this._FightAttriCalReference._Center.pusher.WhenIHitSomethingEnemy(1);
+                            this._FightAttriCalReference._Center.pusher.hiddenMethods.WhenIHitSomethingEnemy(1);
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
@@ -164,7 +164,7 @@ namespace HittingDetection
                         if (this._FightAttriCalReference != null)
                         {
                             this._FightAttriCalReference.MyDamageCount(new_damage);
-                            this._FightAttriCalReference._Center.pusher.WhenIHitSomethingEnemy(1);
+                            this._FightAttriCalReference._Center.pusher.hiddenMethods.WhenIHitSomethingEnemy(1);
                         }
 
                         if (IfVectorClean(_hitOnHealthBody._Startpoint))
@@ -229,16 +229,16 @@ namespace HittingDetection
                             Debug.Log("火花位置产生不干净值");
                         }
 
-                        if (is_E_weapon)
-                        {
-                            if (e_Damage != null)
-                            {
-                                if (!(e_Damage.Position_set.Parent == null && e_Damage.Position_set.Child == null) && !(e_Damage.Position_set.Parent != null && e_Damage.Position_set.Child != null))
-                                {
-                                    _hitOnHealthBody._BO_Health.AddEventDamageList(e_Damage);
-                                }
-                            }
-                        }
+                        //if (is_E_weapon)
+                        //{
+                        //    if (e_Damage != null)
+                        //    {
+                        //        if (!(e_Damage.Position_set.Parent == null && e_Damage.Position_set.Child == null) && !(e_Damage.Position_set.Parent != null && e_Damage.Position_set.Child != null))
+                        //        {
+                        //            _hitOnHealthBody._BO_Health.AddEventDamageList(e_Damage);
+                        //        }
+                        //    }
+                        //}
                         _Used_Targets.Add(_hitOnHealthBody._BO_Health.transform);
                     }
                 }

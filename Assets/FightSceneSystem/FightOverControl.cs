@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UniRx;
 
 public class FightOverControl : MonoBehaviour {
 
@@ -26,13 +27,8 @@ public class FightOverControl : MonoBehaviour {
     public Text goldrewards;
     public Text diamondrewards;
 
-    private bool canGotoSummary = false;
+    public ReactiveProperty<bool> canGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
     
-    public bool ifCanGotoSummary()
-    {
-        return canGotoSummary;
-    }
-
     UnityEngine.Events.UnityAction returnToMainMenu = () =>
     {
         SceneManager.LoadScene(1);
@@ -46,7 +42,7 @@ public class FightOverControl : MonoBehaviour {
 
     public IEnumerator WINProcess()
     {
-        canGotoSummary = false;
+        canGotoSummary.Value = false;
         FightOverCanvas.gameObject.SetActive(true);
         PlayAgain.onClick.RemoveAllListeners();
         PlayAgain.onClick.AddListener(restartGame);
@@ -62,13 +58,13 @@ public class FightOverControl : MonoBehaviour {
         win_textanimation.gameObject.SetActive(true);
         
         yield return new WaitForSeconds(2f);
-        canGotoSummary = true;
+        canGotoSummary.Value = true;
         yield break;
     }
 
     public IEnumerator LoseProcess()
     {
-        canGotoSummary = false;
+        canGotoSummary.Value = false;
         FightOverCanvas.gameObject.SetActive(true);
         TryAgain.onClick.RemoveAllListeners();
         TryAgain.onClick.AddListener(restartGame);
@@ -84,7 +80,7 @@ public class FightOverControl : MonoBehaviour {
         lose_textanimation.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2f);
-        canGotoSummary = true;
+        canGotoSummary.Value = true;
         yield break;
     }
 

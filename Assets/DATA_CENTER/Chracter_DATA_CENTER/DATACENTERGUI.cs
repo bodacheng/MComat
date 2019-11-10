@@ -23,18 +23,12 @@ public class DATACENTERGUI : Editor {
         EditorGUILayout.LabelField("以下项目在新角色构成时请按顺序填写，填写完毕后点击Construct Chracter按钮",title);
 
         GUILayout.Space(5f);
-        myScript.Zokusei = (zokusei)EditorGUILayout.EnumPopup("zokusei", myScript.Zokusei);
+        myScript.Zokusei = (Zokusei)EditorGUILayout.EnumPopup("zokusei", myScript.Zokusei);
 
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("WholeT", title);
         EditorGUILayout.BeginVertical();
         myScript.WholeT = EditorGUILayout.ObjectField("WholeT", myScript.WholeT, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        GUILayout.Space(5f);
-        EditorGUILayout.LabelField("Center", title);
-        EditorGUILayout.BeginVertical();
-        myScript.geometryCenter = EditorGUILayout.ObjectField("GeometryCenter", myScript.geometryCenter, typeof(Transform), true) as Transform;
         EditorGUILayout.EndVertical();
 
         GUILayout.Space(5f);
@@ -91,6 +85,7 @@ public class DATACENTERGUI : Editor {
         GUILayout.Space(5f);
         if (GUILayout.Button("Construct Chracter"))
         {
+            myScript.geometryCenter = myScript.transform;
             if (myScript.WholeT)
             {
                 //　WholeT上应该有以下组件：BO_Ani_E，BO_Weapon_Animation_Events，ResistanceManager，SkillCancelFlag，Animator，Rigidbody,AudioSource
@@ -98,7 +93,7 @@ public class DATACENTERGUI : Editor {
                 if (myScript.WholeT.GetComponent<OutsideDataLink>() == null)
                     myScript.WholeT.gameObject.AddComponent<OutsideDataLink>();
                 myScript.WholeT.GetComponent<OutsideDataLink>()._C = myScript;
-            }else{
+            } else {
                 Debug.Log(" 没有适配wholeT，返回");
                 return;
             }
@@ -260,23 +255,23 @@ public class DATACENTERGUI : Editor {
             //string shieldName;
             switch(myScript.Zokusei)
             {
-                case zokusei.darkMagic:
+                case Zokusei.darkMagic:
                     bladeName = "D_enegryBlade";
                     //shieldName = "dark_Shield"; 
                     break;
-                case zokusei.blueMagic:
+                case Zokusei.blueMagic:
                     bladeName = "B_enegryBlade";
                     //shieldName = "blue_Shield";
                     break;
-                case zokusei.greenMagic:
+                case Zokusei.greenMagic:
                     bladeName = "G_enegryBlade";
                     //shieldName = "green_Shield";
                     break;
-                case zokusei.lightMagic:
+                case Zokusei.lightMagic:
                     bladeName = "W_enegryBlade";
                     //shieldName = "light_Shield";
                     break;
-                case zokusei.redMagic:
+                case Zokusei.redMagic:
                     bladeName = "R_enegryBlade";
                     //shieldName = "red_Shield";
                     break;

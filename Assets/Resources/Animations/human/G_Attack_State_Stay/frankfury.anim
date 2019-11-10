@@ -291829,21 +291829,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.2
-    functionName: resistanceUp
+    functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 5
     messageOptions: 0
   - time: 1.1
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 1.15
-    functionName: resistanceClear
+    functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -291871,7 +291871,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.4666667
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -291885,7 +291885,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 1.6666666
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -291899,28 +291899,28 @@ AnimationClip:
     intParameter: 2
     messageOptions: 0
   - time: 1.85
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
   - time: 1.8666667
-    functionName: resistanceUp
+    functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 5
     messageOptions: 0
   - time: 1.8833333
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 1.95
-    functionName: resistanceClear
+    functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -291934,14 +291934,14 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 2.0166667
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 2.2666667
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -291969,14 +291969,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.65
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 2.6833334
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -291997,7 +291997,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.8666666
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -292011,28 +292011,28 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.9666667
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 3.0333333
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
   - time: 3.0666666
-    functionName: blastAttack
+    functionName: BlastAttack
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 3.15
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

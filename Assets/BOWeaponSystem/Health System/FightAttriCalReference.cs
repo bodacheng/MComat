@@ -196,11 +196,11 @@ public partial class FightAttriCalReference : MonoBehaviour
                 case SpecialApply.gravitylost:
                     gravityloststart = () =>
                     {
-                        _Center.setGravitySwitch(false);
+                        _Center.SetGravitySwitch(false);
                     };
                     gravitylostend = () =>
                     {
-                        _Center.setGravitySwitch(true);
+                        _Center.SetGravitySwitch(true);
                     };
                     burstCoroutine = new customCoroutine(gravityloststart, 0.2f, gravitylostend);
                     _Center.buffsRunner.runSubCoroutineOfState(burstCoroutine);

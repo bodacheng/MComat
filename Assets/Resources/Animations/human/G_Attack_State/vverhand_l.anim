@@ -73012,7 +73012,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.2
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -73033,7 +73033,7 @@ AnimationClip:
     intParameter: 2
     messageOptions: 0
   - time: 0.4
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

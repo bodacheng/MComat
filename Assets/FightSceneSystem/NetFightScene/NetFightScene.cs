@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UniRx;
 using UnityEngine.SceneManagement;
 using mainMenu;
 
@@ -53,24 +53,26 @@ public class NetFightScene : MonoBehaviour {
     [Space(11)]
     public RectTransform PauseMenu;
     
+    [Space(11)]
+    [Header("双方站位点")]
     public Transform[] Team1StandPoints,Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
-
-    private FightSceneProcessesRunner fightSceneProcessesRunner = new FightSceneProcessesRunner();
-    private bool loadStageFinished;
-
+       
     // 主进程
     [Space(7)]
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
     
+    public ReactiveProperty<bool> LoadStageFinished{ get; set; } = new ReactiveProperty<bool>(false);
+    private readonly FightSceneProcessesRunner fightSceneProcessesRunner = new FightSceneProcessesRunner();
+    
     void Start()
     {
         //QualitySettings.vSyncCount = 1;
-        Application.targetFrameRate = 60;
-        mainProcessRunner.triggerMainProcess(fightSceneStartUp());
+        //Application.targetFrameRate = 60;
+        mainProcessRunner.triggerMainProcess(FightSceneStartUp());
     }
-    
-    IEnumerator fightSceneStartUp()
+
+    private IEnumerator FightSceneStartUp()
     {
         Time.timeScale = 1f;
         //Position_Set_Executor.Instance.P_sets.Clear();
@@ -101,25 +103,21 @@ public class NetFightScene : MonoBehaviour {
             fightSceneProcessesRunner.AddNewProcess(SceneStep.Preparing,oldDebugPreparingProcess);
             fightSceneProcessesRunner.AddNewProcess(SceneStep.Fighting,oldDebugFightingProcess);
         }
-        fightSceneProcessesRunner.changeProcess(SceneStep.Preparing);
+        
+        FightSceneProcessesRunner.ChangeProcess(SceneStep.Preparing);
         yield break;
     }
-    
-    public bool ifLoadStageFinished()
+
+    void Update()
     {
-        return loadStageFinished;
-    }
-    public void resetLoadStageFinishedFlag()
-    {
-        loadStageFinished = false;
+        fightSceneProcessesRunner.LocalUpdate();
     }
 
-    public IEnumerator loadGame(StageScriptableObject stage)
+    public IEnumerator LoadGame(StageScriptableObject stage)
     {
         switch (FightSceneNote.Instance.nextBattle.fightModeType)
         {
             case fightModeType.combat:
-                _BoundaryControllByGod.battleRingCenter = Vector3.zero;// 这个逻辑有一定问题，不一定对不对？
                 _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;
                 _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
                 _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
@@ -129,10 +127,9 @@ public class NetFightScene : MonoBehaviour {
                 _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
                 _RealTimeGameProcessManager.FightTeam1.Instantiate ();
                 _RealTimeGameProcessManager.FightTeam2.Instantiate ();
-                _RealTimeGameProcessManager.Refresh();
                 break;
         }
-        loadStageFinished = true;
+        LoadStageFinished.Value = true;
     }
            
     // 本地系函数
@@ -152,13 +149,8 @@ public class NetFightScene : MonoBehaviour {
                         _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], false);
                         break;
                 }
-                _RealTimeGameProcessManager.Refresh();
                 break;
         }
-    }
-
-	void Update () {
-        fightSceneProcessesRunner.ProcessNagare();
     }
     
     // 这个函数应该包括一些更深层的考虑。
@@ -180,6 +172,7 @@ public class NetFightScene : MonoBehaviour {
         
         _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
         _RealTimeGameProcessManager.Clear();
+        FightSceneProcessesRunner.Clear();
         MainMenuNote.Instance.goingtostep = MainSceneStep.frontPage;
         SceneManager.LoadScene(1);
     }
@@ -187,7 +180,7 @@ public class NetFightScene : MonoBehaviour {
 	//本地系函数 
 	public void LocalGameRestart()
 	{
-        fightSceneProcessesRunner.changeProcess(SceneStep.Preparing);
+        FightSceneProcessesRunner.ChangeProcess(SceneStep.Preparing);
 		SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
 	}
 
@@ -207,8 +200,8 @@ public class NetFightScene : MonoBehaviour {
     
     public void passFightSummary()
     {
-        FightSummaryProcess process = (FightSummaryProcess)fightSceneProcessesRunner.accessCertainFightSceneProcessObject(SceneStep.FightSummary);
-        process.enternext = true;
+        FightSummaryProcess process = (FightSummaryProcess)fightSceneProcessesRunner.AccessCertainFightSceneProcessObject(SceneStep.FightSummary);
+        process.enternext.Value = true;
     }
 }
 

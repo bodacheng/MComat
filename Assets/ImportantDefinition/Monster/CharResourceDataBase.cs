@@ -20,7 +20,7 @@ public class CharacterResourceInfo
     public string showNameEN;//monsterTable showNameEN
     public string showNameCN;
     public string showNameJP;
-    public zokusei _zokusei = zokusei.lightMagic;
+    public Zokusei _zokusei = Zokusei.lightMagic;
     public string SPECIAL_ZOKUSEI;
     public string BASIC_MOVEMENT_PACK = "basic_anim";//monsterTable BasicMoveSet
     public MoveType moveType = MoveType.Mode1;//monsterTable moveType

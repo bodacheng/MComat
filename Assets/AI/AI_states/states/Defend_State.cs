@@ -39,9 +39,9 @@ public class Defend_State : AI_State
         }
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
     {
-        base.pre_process_before_enter();
+        base.Pre_process_before_enter();
     }
 
     public override bool Capacity_enter_condition()
@@ -49,7 +49,7 @@ public class Defend_State : AI_State
         return true;
     }
 
-    public override bool enter_condition_priority1()
+    public override bool Enter_condition_priority1()
     {
         if (this._FightAttriCalReference.IFgettingDamage())
             return true;
@@ -71,7 +71,7 @@ public class Defend_State : AI_State
         return false;
     }
 
-    public override bool enter_condition_priority3()
+    public override bool Enter_condition_priority3()
     {
         if (this._ResistanceManager.Resistance.Value > 0)
             return false;
@@ -82,16 +82,16 @@ public class Defend_State : AI_State
         return false;
     }
     
-    public override bool capacity_exit_condition() 
+    public override bool Capacity_exit_condition() 
     {
         if (block_time_counter > 0)
             return false;
         return true;
     }
     
-    public override bool strategic_exit_condition()
+    public override bool Strategic_exit_condition()
     {
-        if (!enter_condition_priority1() && !enter_condition_priority3() && this._AIStateRunner.haveFirstSkillToTrigger())
+        if (!Enter_condition_priority1() && !Enter_condition_priority3() && this._AIStateRunner.haveFirstSkillToTrigger())
             return true;
         return false;
     }
@@ -99,7 +99,7 @@ public class Defend_State : AI_State
     public override void AI_State_enter()
     {
         this.defendHP = 20;
-        _Weapon_Animation_Events.clearMarkerManagers();
+        _Weapon_Animation_Events.ClearMarkerManagers();
         this.Sensor.continuousDetectionStart(5);
         base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);
@@ -128,7 +128,7 @@ public class Defend_State : AI_State
         _Rigidbody.drag = 1f;
         _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block).Clear();
         _FightAttriCalReference.ReturnDamageList(DamageType.light_block).Clear();
-        _ResistanceManager.resistanceClear();
+        _ResistanceManager.ResistanceClear();
         //AI_DATA_CENTER.turnShield(false);
     }
 

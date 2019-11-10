@@ -5,7 +5,7 @@ using mainMenu;
 
 public class SelfFightFront : MainSceneProcess
 {
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
@@ -16,6 +16,7 @@ public class SelfFightFront : MainSceneProcess
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
         yield return (this._MonsterBox.myMonsterBox());
         this._SelfFightManager.selfFightUI.gameObject.SetActive(true);
+        yield return _modelShower.ShowThisCharacterModel(null);
     }
     
     public SelfFightFront(preparingScene _preparingScene)
@@ -32,7 +33,7 @@ public class SelfFightFront : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

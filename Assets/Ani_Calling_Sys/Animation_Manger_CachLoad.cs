@@ -165,7 +165,7 @@ public partial class Animation_Manger : MonoBehaviour
     //本函数的改造方向是所有基础类动作全部从某个包里读取。
     //主意看参数toLoadSkillAnimsNames，这些只是技能类key的名字
     //另外，本模块现在肩负起提前构建对象池的任务。就是所有的hurtobject。这样一来这个模块现在是和BO_E模块产生密切关系
-    public IEnumerator preloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, zokusei _zokusei)
+    public IEnumerator preloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadSkillAnimsNames != null)
         {
@@ -176,7 +176,7 @@ public partial class Animation_Manger : MonoBehaviour
         }
     }
 
-    public IEnumerator preloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, zokusei _zokusei)
+    public IEnumerator preloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
         {
@@ -200,7 +200,7 @@ public partial class Animation_Manger : MonoBehaviour
                     {
                         yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
-                    if (e.functionName == "bullet_shoot_from_body_part")
+                    if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
@@ -218,7 +218,7 @@ public partial class Animation_Manger : MonoBehaviour
                                 break;
                         }
                     }
-                    if (e.functionName == "blastAttack")
+                    if (e.functionName == "BlastAttack")
                     {
                         switch (e.intParameter)
                         {
@@ -235,7 +235,7 @@ public partial class Animation_Manger : MonoBehaviour
                                 break;
                         }
                     }
-                    if (e.functionName == "playSoundOnce")
+                    if (e.functionName == "PlaySoundOnce")
                     {
                         yield return (AudioResourceLoading.Instance.LoadAudioClipFromCachAndPutItIntoDic(url,"effects", e.stringParameter));
                     }

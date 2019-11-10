@@ -76,19 +76,19 @@ public class monsterboxFilter : MonoBehaviour
         {
             switch (origin_mainMenuIcons[i]._CharacterResourceInfo._zokusei)
             {
-                case zokusei.redMagic:
+                case Zokusei.redMagic:
                     Red.Add(origin_mainMenuIcons[i]);
                     break;
-                case zokusei.blueMagic:
+                case Zokusei.blueMagic:
                     Blue.Add(origin_mainMenuIcons[i]);
                     break;
-                case zokusei.greenMagic:
+                case Zokusei.greenMagic:
                     Green.Add(origin_mainMenuIcons[i]);
                     break;
-                case zokusei.lightMagic:
+                case Zokusei.lightMagic:
                     Light.Add(origin_mainMenuIcons[i]);
                     break;
-                case zokusei.darkMagic:
+                case Zokusei.darkMagic:
                     Dark.Add(origin_mainMenuIcons[i]);
                     break;
                 default:

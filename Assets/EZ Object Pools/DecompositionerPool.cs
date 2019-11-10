@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Animations;
 using UnityEngine;
 using UniRx.Toolkit;
 using HittingDetection;
@@ -24,8 +24,8 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         instance.StopEmissions();
         if (instance._HitBox != null)
             instance._HitBox.Local_OnDisable();
+
         instance.gameObject.SetActive(false);
-        instance.transform.SetParent(Marker.transform);
     }
 
     protected override void OnBeforeRent(Decompositioner instance)
@@ -53,6 +53,14 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         DanMuTest danMuTest = a.GetComponent<DanMuTest>();
         bullet_GPS bullet_GPS = a.GetComponent<bullet_GPS>();
         Rigidbody rigidbody = a.GetComponent<Rigidbody>();
+        PositionConstraint positionConstraint = a.GetComponent<PositionConstraint>();
+        if (positionConstraint == null)
+        {
+            positionConstraint = a.AddComponent<PositionConstraint>();
+            positionConstraint.translationOffset = Vector3.zero;
+            positionConstraint.weight = 1;
+        }
+        
         if (rigidbody != null)
         {
             rigidbody.mass = 1;
@@ -65,6 +73,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         decompositioner.Rigidbody = rigidbody;
         decompositioner._HitBox = bO_Marker_Manager;
+        decompositioner.positionConstraint = positionConstraint;
         decompositioner.danMuTest = danMuTest;
         decompositioner.SetPool(this);
         return decompositioner;

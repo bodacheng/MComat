@@ -28,9 +28,9 @@ public class G_Ani_MoveEscape_State : AI_State {
         breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
 	}
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
 	}
 
     public override bool Capacity_enter_condition()
@@ -40,7 +40,7 @@ public class G_Ani_MoveEscape_State : AI_State {
         return true;
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
     {
         if ((this._FightAttriCalReference.IFgettingDamage() || Sensor.getNearbyDamagingWeaponColliders().Count > 0) 
             && this._FightAttriCalReference.CriticalGauge > 90)
@@ -49,7 +49,7 @@ public class G_Ani_MoveEscape_State : AI_State {
             return false;
     }
 
-    public override bool capacity_exit_condition()
+    public override bool Capacity_exit_condition()
     {
         if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
             return true;
@@ -106,7 +106,7 @@ public class G_Ani_MoveEscape_State : AI_State {
 
     float h = 0f;
     float v = 0f;
-    public override void c_State_enter()
+    public override void C_State_enter()
     {
         base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);

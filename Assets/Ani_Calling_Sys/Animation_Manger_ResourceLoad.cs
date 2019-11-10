@@ -234,7 +234,7 @@ public partial class Animation_Manger : MonoBehaviour{
         yield break;
     }
 
-    public IEnumerator preloadPersonalAnimResourceMode(string animPath, string toLoadSkillAnimName, string personalMagic, zokusei _zokusei)
+    public IEnumerator preloadPersonalAnimResourceMode(string animPath, string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
         {
@@ -256,7 +256,7 @@ public partial class Animation_Manger : MonoBehaviour{
                     {
                         yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
-                    if (e.functionName == "bullet_shoot_from_body_part")
+                    if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
@@ -274,7 +274,7 @@ public partial class Animation_Manger : MonoBehaviour{
                                 break;
                         }
                     }
-                    if (e.functionName == "blastAttack")
+                    if (e.functionName == "BlastAttack")
                     {
                         switch (e.intParameter)
                         {
@@ -292,7 +292,7 @@ public partial class Animation_Manger : MonoBehaviour{
                                 break;
                         }
                     }
-                    if (e.functionName == "playSoundOnce")
+                    if (e.functionName == "PlaySoundOnce")
                     {
                         yield return (AudioResourceLoading.Instance.LoadAudioClipFromResourceAndPutItIntoDic("effects", e.stringParameter));
                     }
@@ -304,7 +304,7 @@ public partial class Animation_Manger : MonoBehaviour{
     }
 
     AnimationClip _clip;
-    public IEnumerator preloadPersonalAnimsResourceMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, zokusei _zokusei)
+    public IEnumerator preloadPersonalAnimsResourceMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadSkillAnimsNames != null)
         {

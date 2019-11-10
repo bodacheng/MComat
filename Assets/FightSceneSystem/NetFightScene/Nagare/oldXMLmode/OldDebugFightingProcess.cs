@@ -17,11 +17,6 @@ public class OldDebugFightingProcess : NagareProcess
         this._NetFightScene = _NetFightScene;
         this.debugManager = debugManager;
     }
-
-    public override bool canEnterNextProcess()
-    {
-        return _NetFightScene.ifLoadStageFinished() && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle();
-    }
     
     public override void ProcessEnter()
     {
@@ -46,22 +41,21 @@ public class OldDebugFightingProcess : NagareProcess
     
     public override void ProcessEnd()
     {
-        _NetFightScene.resetLoadStageFinishedFlag();
+        _NetFightScene.LoadStageFinished.Value = false;
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         mainProcessRunner.triggerMainProcess(_NetFightScene._FightOverControl.WINProcess());//这里是要根据情况的。。
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         switch (debugManager._BoundaryControllByGod.boundaryMode)
         {
             case BoundaryMode.Round:
                 //_BoundaryControllByGod.SUOQUANER(_NetFightScene.alivemembercount);
-                debugManager._BoundaryControllByGod.RoundModeGodControll(debugManager._BoundaryControllByGod.battleRingCenter, debugManager._BoundaryControllByGod.BattleRingRadius);
+                debugManager._BoundaryControllByGod.RoundBattleFieldNormalControl(Vector3.zero);
                 break;
             case BoundaryMode.None:
-                debugManager._BoundaryControllByGod.RoundBattleFieldNormalControl(debugManager._BoundaryControllByGod.battleRingCenter, 24);
                 break;
         }
 
@@ -123,8 +117,10 @@ public class OldDebugFightingProcess : NagareProcess
                 return;
             }
         }
-        else
+        
+        if (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
         {
+            AutoMoveToNext = true;
         }
     }
     

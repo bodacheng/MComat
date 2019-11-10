@@ -13,11 +13,6 @@ public class OldDebugPreparingProcess : NagareProcess
         this._NetFightScene = _NetFightScene;
         this.debugManager = debugManager;
     }
-
-    public override bool canEnterNextProcess()
-    {
-        return _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle();
-    }
     
     public override void ProcessEnter()
     {
@@ -27,8 +22,7 @@ public class OldDebugPreparingProcess : NagareProcess
         _NetFightScene.StartCoroutine(EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets("defaultmagic"));//我们姑且这样处理debug环境默认魔法问题
         debugManager.debugCharPlacer.SetActive(true);
         _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.approachToCertainDistance,null);//乱写的。原来的模式删除了。
-        debugManager.debugModePlayerPlacementStep = 0;        
-        debugManager._BoundaryControllByGod.battleRingCenter = Vector3.zero;// 这个逻辑有一定问题，不一定对不对？
+        debugManager.debugModePlayerPlacementStep = 0;
     
         if (debugManager.debugMode == DebugMode.ab_mode)
         {
@@ -58,7 +52,7 @@ public class OldDebugPreparingProcess : NagareProcess
         }
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (debugManager.debugModePlayerPlacementStep == 1 || debugManager.debugModePlayerPlacementStep == 2 || debugManager.debugModePlayerPlacementStep == 3)
         {
@@ -72,5 +66,9 @@ public class OldDebugPreparingProcess : NagareProcess
         //{
         //    _NetFightScene.gameStartButton.gameObject.SetActive(false);
         //}
+        if (_RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
+        {
+            this.AutoMoveToNext = true;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 public class SKillAnalyzer : MonoBehaviour
 {
@@ -42,8 +43,63 @@ public class SKillAnalyzer : MonoBehaviour
     };
     List<string> EffectsAttackFrameStartMethodNames = new List<string>()
     {
-        "MagicForward","bullet_shoot_from_body_part","blastAttack","releasePreparedMagic","releasePreparedMagicToAir"
+        "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
     };
+    
+    public void ReplaceAnimEventName(string type, string old_name,string new_name)
+    {
+        if (!(old_name != null && old_name != "" && new_name != null && new_name != ""))
+        {
+            return;
+        }
+        
+        List<UnityEngine.Object> BasicPack = Resources.LoadAll("Animations/"+ type + "/" + "BasicPack", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
+
+        List<UnityEngine.Object> AnimationClips = new List<UnityEngine.Object>();
+        foreach (UnityEngine.Object _object in BasicPack)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (UnityEngine.Object _object in G_Attack_States)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (UnityEngine.Object _object in G_Attack_State_Stays)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (UnityEngine.Object _object in GMStatess)
+        {
+            AnimationClips.Add(_object as AnimationClip);
+        }
+        foreach (UnityEngine.Object _clip in AnimationClips)
+        {
+            AnimationClip animationClip = _clip as AnimationClip;
+            bool changed = false;
+            List<AnimationEvent> evnets = new List<AnimationEvent>();
+            foreach (AnimationEvent e in animationClip.events)
+            {
+                AnimationEvent toSave = e;
+                if (e.functionName == old_name)
+                {
+                    toSave.functionName = new_name;
+                    changed = true;
+                    Debug.Log("讲动画片段：" + animationClip.name +"的函数"+old_name+"换了新名字"+new_name);
+                }
+                evnets.Add(toSave);
+            }
+            if (changed)
+            {
+                AnimationClip toSave = (AnimationClip)UnityEngine.Object.Instantiate(animationClip);
+                AnimationUtility.SetAnimationEvents(toSave,evnets.ToArray());
+                AssetDatabase.CreateAsset(toSave, AssetDatabase.GetAssetPath(_clip));
+                AssetDatabase.SaveAssets();
+            }
+        }    
+    }
     
     public bool SkillFrameAnalyze(AnimationClip _clip,string targetEventName,float start_min,float start_max,float end_min,float end_max)
     {

@@ -41,9 +41,9 @@ public class Jump_State : AI_State
         this.state_time = least_state_time;
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
     {
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
     }
 
     public override bool Capacity_enter_condition()
@@ -54,7 +54,7 @@ public class Jump_State : AI_State
         }return true;
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
 	{   
         if (Sensor.getNearbyDamagingWeaponColliders().Count > 0  && this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges))
         {
@@ -63,7 +63,7 @@ public class Jump_State : AI_State
         return false;
 	}
 
-    public override bool capacity_exit_condition()
+    public override bool Capacity_exit_condition()
     {
         if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
             return true;
@@ -137,7 +137,7 @@ public class Jump_State : AI_State
         Animation_Manger.animationTrigger(clip_name);
     }
 
-    public override void c_State_enter()
+    public override void C_State_enter()
     {
         base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);

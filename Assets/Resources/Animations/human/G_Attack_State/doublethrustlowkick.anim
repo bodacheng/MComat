@@ -343811,7 +343811,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.25
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -343825,21 +343825,21 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.48333332
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6333333
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 0.8
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -343853,7 +343853,7 @@ AnimationClip:
     intParameter: 3
     messageOptions: 0
   - time: 0.98333335
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

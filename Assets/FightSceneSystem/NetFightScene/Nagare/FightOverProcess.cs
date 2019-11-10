@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using UniRx;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +9,7 @@ public class FightOverProcess : NagareProcess
         this.thisProcessStep = SceneStep.FightOver;
         this.nextProcessStep = SceneStep.FightSummary;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
-    }
-
-    public override bool canEnterNextProcess()
-    {
-        return fightOverControl.ifCanGotoSummary();//想手动或fightOverControl模块把流程转向下一个环节。
+        fightOverControl.canGotoSummary.Subscribe(x => { if (x) AutoMoveToNext = true; });
     }
     
     public override void ProcessEnter()
@@ -35,7 +31,7 @@ public class FightOverProcess : NagareProcess
         
     }
     
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         
     }

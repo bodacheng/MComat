@@ -176722,14 +176722,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.083333336
-    functionName: turnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 0.33333334
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -176743,7 +176743,7 @@ AnimationClip:
     intParameter: 3
     messageOptions: 0
   - time: 0.6666667
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

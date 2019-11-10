@@ -37,12 +37,12 @@ public class G_M_Attack_State : AI_State {
         this._skillEmergentLevel = skillEmergentLevel;
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
 	}
 
-    public override bool enter_condition_priority1()
+    public override bool Enter_condition_priority1()
     {
         if (_skillEmergentLevel == 1)
         {
@@ -51,7 +51,7 @@ public class G_M_Attack_State : AI_State {
         return false;
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
     {
         if (_skillEmergentLevel == 2)
         {
@@ -60,7 +60,7 @@ public class G_M_Attack_State : AI_State {
         return false;
     }
 
-    public override bool enter_condition_priority3()
+    public override bool Enter_condition_priority3()
     {
         if (_skillEmergentLevel == 3)
         {
@@ -88,10 +88,10 @@ public class G_M_Attack_State : AI_State {
         this.Animation_Manger.Animator.SetTrigger("face_reset");
         this.Animation_Manger.Animator.SetTrigger("confident");
         
-        this._DATA_CENTER.setGravitySwitch(true);
+        this._DATA_CENTER.SetGravitySwitch(true);
         this._Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
-        _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
+        _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
         this.personality_Events.CloseAllPersonalityEffects();
@@ -107,7 +107,7 @@ public class G_M_Attack_State : AI_State {
         Animation_Manger.animationTrigger(clip_name);
 	}
 
-	public override bool capacity_exit_condition()
+	public override bool Capacity_exit_condition()
 	{
         if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
 			return true;
@@ -118,8 +118,8 @@ public class G_M_Attack_State : AI_State {
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        this._DATA_CENTER.setGravitySwitch(true);
-        this._BO_Ani_E.CloseEffectsOnBodyParts();
+        this._DATA_CENTER.SetGravitySwitch(true);
+        this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
 		_Animator.applyRootMotion = false;
 	}
 
@@ -150,7 +150,7 @@ public class G_M_Attack_State : AI_State {
     void singleDirectionRotateProcess(Vector3 P)
     {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
-        if (_SkillCancelFlag.getRotationAdjustmentStartFlag() || keepRotationAdjustment)
+        if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)
         {
             thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
@@ -160,7 +160,7 @@ public class G_M_Attack_State : AI_State {
             }
             else if (ji < 0)//反向
             {
-                _SkillCancelFlag.turnRotationAdjustmentStartFlag(0);
+                _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
             }
             else
             {//刚开始计

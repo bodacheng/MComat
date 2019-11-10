@@ -56,8 +56,8 @@ public class States_Incubator
 
         Idle_State victory = new Idle_State("victory");
         Idle_State zhuangbi = new Idle_State("zhuangbi");
-        Death_State death = new Death_State(2f, "death", 40f, 40f);
-               		
+        Death_State death = new Death_State(1f, "death", 40f, 40f);
+
         Num_State_List.Add(new AI_Num_With_State("Victory", victory));
         StateIndexList.Add("Victory");
         Num_State_List.Add(new AI_Num_With_State("zhuangbi", zhuangbi));

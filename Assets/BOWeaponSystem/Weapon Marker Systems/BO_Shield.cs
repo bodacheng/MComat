@@ -44,7 +44,7 @@ public class BO_Shield : MonoBehaviour {
 	public bool DisableShieldOnDeath;
 
     [Tooltip("属性")]
-    public zokusei zokusei;
+    public Zokusei zokusei;
 
     [Tooltip("盾牌伤害类型")]
     public DamageType damage_type = DamageType.normal_shield;
@@ -57,19 +57,19 @@ public class BO_Shield : MonoBehaviour {
     {
         switch (zokusei)
         {
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
                 personalEffectPath = "darkMagic";
                 break;
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
                 personalEffectPath = "blueMagic";
                 break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
                 personalEffectPath = "greenMagic";
                 break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
                 personalEffectPath = "lightMagic";
                 break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
                 personalEffectPath = "redMagic";
                 break;
             default:

@@ -73,24 +73,24 @@ public class zokuseiButtonEffectsGroup
         rushbutton.Play(true);
     }
                 
-    public void INI(Transform targetRectT, zokusei zokusei,Button Attack, Button Fire1, Button Fire2)
+    public void INI(Transform targetRectT, Zokusei zokusei,Button Attack, Button Fire1, Button Fire2)
     {
         string buttoneffectspath;
         switch(zokusei)
         {
-            case zokusei.blueMagic:
+            case Zokusei.blueMagic:
             buttoneffectspath = "blueMagic";
             break;
-            case zokusei.darkMagic:
+            case Zokusei.darkMagic:
             buttoneffectspath = "darkMagic";
             break;
-            case zokusei.greenMagic:
+            case Zokusei.greenMagic:
             buttoneffectspath = "greenMagic";
             break;
-            case zokusei.lightMagic:
+            case Zokusei.lightMagic:
             buttoneffectspath = "lightMagic";
             break;
-            case zokusei.redMagic:
+            case Zokusei.redMagic:
             buttoneffectspath = "redMagic";
             break;
             default:

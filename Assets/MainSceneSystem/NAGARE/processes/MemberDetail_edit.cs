@@ -18,7 +18,7 @@ public class MemberDetail_edit : MainSceneProcess
         
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
-        _SkillStonesBox._SkillStoneBoxTabEffectsManager.switchZokuseiButtons(
+        _SkillStonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
             _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
             _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
             _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
@@ -47,7 +47,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnd()
     {
-         this._SkillStonesBox._SkillStoneBoxTabEffectsManager.closeShowingZokuseiTagEffects();
+         this._SkillStonesBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
@@ -72,7 +72,7 @@ public class MemberDetail_edit : MainSceneProcess
         }
         yield return _TheNineSlot.readANineAndTwo(_AccountCharacterInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_AccountCharacterInfo.monsterId);
-        _SkillStonesBox.setFocusingType(_CharacterResourceInfo.type);
+        _SkillStonesBox.SetFocusingType(_CharacterResourceInfo.type);
         yield return this._SkillStonesBox.arrangeSkillStonesToBox();
         yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
         UnityEngine.Events.UnityAction SkillEditConfirm = () =>

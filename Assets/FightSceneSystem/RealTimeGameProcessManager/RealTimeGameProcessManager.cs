@@ -11,20 +11,24 @@ public class RealTimeGameProcessManager : MonoBehaviour
 	public CameraManager _CameraManager;
 	public mobileInputsManager _mobileInputsManager;
     
+    [Header("Watch Mode")]
+    [Space(6)]
+    public Button WatchModeButton;
+        
     [Header("Auto BUtton")]
     [Space(6)]
     public Button autoBUtton;
     public Image _C_button;
     public Image _AI_button;
 
-    [Header("Auto BUtton")]
+    [Header("Team Managers")]
     [Space(6)]
     public FightTeam FightTeam1, FightTeam2;
     
     public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
     public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
     
-    public static bool combatFightPlayerMode;
+    public static bool Auto;
     public static Data_Center focusingChar;
     public static Team playerTeam = Team.player1;
     
@@ -36,9 +40,14 @@ public class RealTimeGameProcessManager : MonoBehaviour
             FightTeam1.BarsPositionUpdate();
     }
     
+    public void SwitchToWatchMode() // button behaviour
+    {
+        SwitchToCMode(null, false);
+    }
+    
 	public void Refresh()//这个刷新是倾向于画面制御
 	{
-        if (combatFightPlayerMode && focusingChar != null)
+        if (!Auto && focusingChar != null)
         {
             _C_button.gameObject.SetActive(true);
             _AI_button.gameObject.SetActive(false);
@@ -50,13 +59,12 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }
         void SwitchAUtoMOde()
         {
-            combatFightPlayerMode = !combatFightPlayerMode;
-            SwitchToCMode(focusingChar, combatFightPlayerMode);
-            Refresh();
+            Auto = !Auto;
+            SwitchToCMode(focusingChar, Auto);
         }
         autoBUtton.onClick.RemoveAllListeners();
         autoBUtton.onClick.AddListener(SwitchAUtoMOde);
-
+        
         FightTeam1.Refresh();
         FightTeam2.Refresh();
         
@@ -77,7 +85,14 @@ public class RealTimeGameProcessManager : MonoBehaviour
             focusingChar.AIStateRunner.SetPlayerMode(false);
         focusingChar = _char;
         if (focusingChar != null)
+        {
             focusingChar.AIStateRunner.SetPlayerMode(playerControll);
+            _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { focusingChar.WholeT });
+            _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
+        }else{
+            _CameraManager.Assign_Camera(Camera_Mode_Num.RoundBoundary,null);
+        }
+        Refresh();
     }
 
     public void Clear()// 这个我们还没有添加在合理的地方。
@@ -123,14 +138,13 @@ public class RealTimeGameProcessManager : MonoBehaviour
             {
                 case Team.player1:
                     playerTeam = Team.player2;
-                    SwitchToCMode(null,combatFightPlayerMode);
+                    SwitchToCMode(null,Auto);
                 break;
                 case Team.player2:
                     playerTeam = Team.player1;
-                     SwitchToCMode(null,combatFightPlayerMode);
+                    SwitchToCMode(null,Auto);
                 break;
             }
-            Refresh();
         }
     }
 }

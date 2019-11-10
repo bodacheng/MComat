@@ -21,13 +21,13 @@ public partial class G_Attack_State : AI_State {
     private string dash_clip_name;
     private int _skillEmergentLevel;
 
-    private bool isEventAttackLaunchState = false;
-    private bool isEventAttackEndState = false;
+    private bool isEventAttackLaunchState;
+    private bool isEventAttackEndState;
     private float rushSpeed;
     private float approcahingSpeed;
 
-    private float lastFrameRotateAngle = 0;
-    private float thisFrameRotateAngle = 0;
+    private float lastFrameRotateAngle;
+    private float thisFrameRotateAngle;
 
     private float maxRushTime, rush_time_counter;
     private Transform rushingToTarget;
@@ -37,12 +37,12 @@ public partial class G_Attack_State : AI_State {
     private UnityEngine.Events.UnityAction rushend;
     private customCoroutine rushCoroutine;
 
-    enum phase : int
+    enum phase
     {
         noRushState = 0,
         farFromReach = 1,
         needToRush = 2,
-        reached =3,
+        reached = 3,
         reachedFromThebeginning = 4
     }
 
@@ -82,9 +82,9 @@ public partial class G_Attack_State : AI_State {
         this.isEventAttackEndState = !EventLauncher_Or_Ender;
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
         rushstart = () =>
         {
             this._ResistanceManager.Resistance.Value +=1;
@@ -96,31 +96,19 @@ public partial class G_Attack_State : AI_State {
         rushCoroutine = new customCoroutine(rushstart, 5f, rushend);
     }
 
-    public override bool enter_condition_priority1()
+    public override bool Enter_condition_priority1()
     {
-        if (_skillEmergentLevel == 1)
-        {
-            return strategic_enter_condition();
-        }
-        return false;
+        return _skillEmergentLevel == 1 ? strategic_enter_condition() : false;
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
 	{
-        if (_skillEmergentLevel == 2)
-        {
-            return strategic_enter_condition();
-        }
-        return false;
-	}
+        return _skillEmergentLevel == 2 ? strategic_enter_condition() : false;
+    }
 
-    public override bool enter_condition_priority3()
+    public override bool Enter_condition_priority3()
     {
-        if (_skillEmergentLevel == 3)
-        {
-            return strategic_enter_condition();
-        }
-        return false;
+        return _skillEmergentLevel == 3 ? strategic_enter_condition() : false;
     }
 
     public bool strategic_enter_condition()
@@ -147,12 +135,12 @@ public partial class G_Attack_State : AI_State {
         this.Animation_Manger.Animator.SetTrigger("face_reset");
         this.Animation_Manger.Animator.SetTrigger("confident");
         this._Animator.SetFloat("speed", 0f);
-        this._DATA_CENTER.setGravitySwitch(true);
+        this._DATA_CENTER.SetGravitySwitch(true);
         _SkillCancelFlag.turn_off_flag();
         if (this.StateType == stateType.GR)
-            _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
+            _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         if (this.StateType == stateType.GI)
-            _SkillCancelFlag.turnRotationAdjustmentStartFlagWithoutstepfoward(1);
+            _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
             
         this._Rigidbody.velocity = Vector3.zero;
         lastFrameRotateAngle = 0;
@@ -217,7 +205,7 @@ public partial class G_Attack_State : AI_State {
         }
     }
 
-	public override bool capacity_exit_condition()
+	public override bool Capacity_exit_condition()
 	{
         if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
             return true;
@@ -228,13 +216,13 @@ public partial class G_Attack_State : AI_State {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        this._DATA_CENTER.setGravitySwitch(true);
+        this._DATA_CENTER.SetGravitySwitch(true);
         this.rushingToTarget = null;
-        this._Weapon_Animation_Events.clearMarkerManagers();
+        this._Weapon_Animation_Events.ClearMarkerManagers();
         _Animator.applyRootMotion = false;
         this.personality_Events.CloseAllPersonalityEffects();
         this._BuffsRunner.endSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
-        this._BO_Ani_E.CloseEffectsOnBodyParts();
+        this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
         if (isEventAttackLaunchState)
         {
 			if (_FightAttriCalReference != null)
@@ -267,7 +255,7 @@ public partial class G_Attack_State : AI_State {
                 if (_phase == phase.reached)
                 {
                     Animation_Manger.animationTrigger(clip_name);
-                    _SkillCancelFlag.turnRotationAdjustmentStartFlag(1);
+                    _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                     lastFrameRotateAngle = 0;
                     thisFrameRotateAngle = 0;
                     this._Rigidbody.velocity = Vector3.zero;

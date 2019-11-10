@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using HittingDetection;
+using UnityEngine.Animations;
 
 public class Decompositioner : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class Decompositioner : MonoBehaviour {
 
     public Rigidbody Rigidbody;
     public BO_Marker_Manager _HitBox;
+    public PositionConstraint positionConstraint;
     public DanMuTest danMuTest;
     public bullet_GPS bullet_GPS;
     

@@ -58,7 +58,7 @@ public class Counter_State : AI_State {
                 burststart = () =>
                 {
                     this._SkillCancelFlag.turn_on_flag();
-                    this._BO_Ani_E.releasePreparedMagicToAir(null);
+                    this._BO_Ani_E.ReleasePreparedMagicToAir(null);
                     this._ResistanceManager.Resistance.Value +=10;
                 };
                 burstend = () =>
@@ -72,9 +72,9 @@ public class Counter_State : AI_State {
         }
     }
 
-    public override void pre_process_before_enter()
+    public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
         burststart = () =>
         {
             this._SkillCancelFlag.turn_on_flag();
@@ -90,21 +90,21 @@ public class Counter_State : AI_State {
         this.nextAttackStateCanRushFirst = true;
 	}
 
-    public override bool enter_condition_priority1()
+    public override bool Enter_condition_priority1()
     {
         if (Sensor.getNearbyDamagingWeaponColliders().Count > 0)
             return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
         return false;
     }
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
     {
         if (Sensor.getInnerEnemiesColliders().Count > 0)
             return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
         return false;
     }
 
-    public override bool enter_condition_priority3()
+    public override bool Enter_condition_priority3()
     {
         if (Sensor.getInnerEnemiesColliders().Count > 0)
             return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
@@ -116,7 +116,7 @@ public class Counter_State : AI_State {
 		base.AI_State_enter ();
         this._SkillCancelFlag.turn_off_flag();     
         this._Animator.SetFloat("speed", 0f);
-        _SkillCancelFlag.turnRotationAdjustmentStartFlagWithoutstepfoward(1);
+        _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
         this.personality_Events.CloseAllPersonalityEffects();
@@ -130,7 +130,7 @@ public class Counter_State : AI_State {
             rotateTarget = C.transform.position;
 	}
 
-	public override bool capacity_exit_condition()
+	public override bool Capacity_exit_condition()
 	{
         if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
 			return true;
@@ -141,19 +141,19 @@ public class Counter_State : AI_State {
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        this._ResistanceManager.setNextCounterEventName(null);
+        this._ResistanceManager.hiddenMethods.SetNextCounterEventName(null);
 	}
     
 	public override void _State_FixedUpdate1() 
 	{
         this._Rigidbody.velocity = Vector3.zero;
-        if (this._ResistanceManager.getNextCounterEventName() != null)//这个代表吸收伤害区间已经开始了
+        if (this._ResistanceManager.hiddenMethods.GetNextCounterEventName() != null)//这个代表吸收伤害区间已经开始了
         {
             if (lastframeResistent > this._ResistanceManager.Resistance.Value)
                 gotdamageamont++;
-            if (gotdamageamont >= this._ResistanceManager.getNextCounterEventDamageTriggerAmount() && this._ResistanceManager.Resistance.Value != 0)
+            if (gotdamageamont >= this._ResistanceManager.hiddenMethods.GetNextCounterEventDamageTriggerAmount() && this._ResistanceManager.Resistance.Value != 0)
             {
-                this.burstCoroutineConfig(this._ResistanceManager.getNextCounterEventName());
+                this.burstCoroutineConfig(this._ResistanceManager.hiddenMethods.GetNextCounterEventName());
                 this._BuffsRunner.runSubCoroutineOfState(burstCoroutine);
                 gotdamageamont = -100;//也就是说不再让角色有可能在本状态内再次爆发
             }
@@ -169,7 +169,7 @@ public class Counter_State : AI_State {
     void singleDirectionRotateProcess(Vector3 P)
     {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
-        if (_SkillCancelFlag.getRotationAdjustmentStartFlag() || keepRotationAdjustment)
+        if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)
         {
             thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
@@ -179,7 +179,7 @@ public class Counter_State : AI_State {
             }
             else if (ji < 0)//反向
             {
-                _SkillCancelFlag.turnRotationAdjustmentStartFlag(0);
+                _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
             }
             else
             {//刚开始计

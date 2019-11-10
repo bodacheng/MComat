@@ -38694,21 +38694,21 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.13333334
-    functionName: releasePreparedMagic
+    functionName: ReleasePreparedMagic
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.16666667
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
   - time: 0.16666667
-    functionName: effectOnBodyPart
+    functionName: EffectOnBodyPart
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -38743,7 +38743,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.73333335
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

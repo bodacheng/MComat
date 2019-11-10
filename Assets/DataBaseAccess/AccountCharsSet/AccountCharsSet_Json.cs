@@ -31,7 +31,7 @@ namespace dataAccess
             }
         }
 
-        public void loadAccountCharacterInfoListObjectsViaJsonFile()
+        public void LoadAccountCharacterInfoListObjectsViaJsonFile()
         {
             try
             {

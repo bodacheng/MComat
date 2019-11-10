@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum zokusei : int
+﻿public enum Zokusei
 {
     darkMagic = 1,
     lightMagic = 2,

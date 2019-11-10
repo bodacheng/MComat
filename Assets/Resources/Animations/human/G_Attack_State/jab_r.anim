@@ -58521,7 +58521,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.13333334
-    functionName: resistanceUp
+    functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -58535,7 +58535,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.31666666
-    functionName: resistanceClear
+    functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -58549,7 +58549,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.41666666
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

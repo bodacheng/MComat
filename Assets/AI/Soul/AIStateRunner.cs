@@ -164,7 +164,7 @@ namespace Soul
                 return;
             }
             if (playerMode || _inputManager.ifPlayerIsInputting())
-                now_state.c_State_enter();
+                now_state.C_State_enter();
             else
                 now_state.AI_State_enter();
         }
@@ -247,7 +247,7 @@ namespace Soul
                 commandWaitingState = state_Dictionary[this.readingNineAndTwo.GetM_STS().StateKey];
         }
 
-        public void iniStates(Transform wholeT, Transform geoCenterT)
+        public void IniStates(Data_Center data_Center)
         {
             if (state_Dictionary == null)
             {
@@ -256,15 +256,14 @@ namespace Soul
             }
             foreach (KeyValuePair<string, AI_State> s in state_Dictionary)
             {
-                s.Value.gameObject = wholeT.gameObject;
-                s.Value.GeoCenterT = geoCenterT;
-                s.Value.pre_process_before_enter();
+                s.Value._DATA_CENTER = data_Center;
+                s.Value.Pre_process_before_enter();
             }
 
             current_state_num = "Empty";
             state_Dictionary.TryGetValue(current_state_num, out now_state);
             if (playerMode)
-                now_state.c_State_enter();
+                now_state.C_State_enter();
             else
                 now_state.AI_State_enter();
         }

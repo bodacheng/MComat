@@ -8,7 +8,7 @@ public partial class Data_Center : MonoBehaviour{
     //实际上造成消耗最多的就是第二级初始。但我们内部包括动画，脚本，特效这些东西都是写了循环利用的逻辑。
     // 加载了进行了初始化后所产生的资源不会在跳出对角色的注目后被回收。
     // 另外，第二级初始化要分cach版本还是streamingasset版本
-    public IEnumerator step2InitializeByCach(string type, TextAsset Script, int AI_level, zokusei _zokusei, string personalMagic)
+    public IEnumerator step2InitializeByCach(string type, TextAsset Script, int AI_level, Zokusei _zokusei, string personalMagic)
     {
         if (!phase2Initialized)
         {
@@ -20,7 +20,7 @@ public partial class Data_Center : MonoBehaviour{
         {
             AIStateRunner.loadStatesTransition(type, Script, AI_level);//这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
                                                                        // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
-            AIStateRunner.iniStates(this.WholeT,this.geometryCenter);
+            AIStateRunner.IniStates(this);
             List<string> toLoadSkillAnimsNames = AIStateRunner.passSkillTypeKeys();
             yield return (
                 Animation_Manger.preloadPersonalAnims(ResourceLordSceneStarter.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));

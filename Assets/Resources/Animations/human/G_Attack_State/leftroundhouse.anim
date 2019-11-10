@@ -156827,7 +156827,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.31666666
-    functionName: clearMarkerManagers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

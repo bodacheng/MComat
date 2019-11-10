@@ -4,7 +4,7 @@ using UnityEngine;
 
 class CertainYAntiVibrationCamera : CameraMode
 {
-    bool auto = false;
+    readonly bool auto;
     Vector3 CameraTargetPos;
     Vector3 enemiescenter;//敌人的位置中心
     Vector3 focuscenter;//校准中心。是根据控制角色与敌人中心两个位置决定
@@ -20,13 +20,10 @@ class CertainYAntiVibrationCamera : CameraMode
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
     Vector3 xzOff_onstartrecord;
     float angele;//这个现在是用来计算场地原点（0，0，0）与敌人中心，控制角色连线的角度
-    
-    float h = 0f;
-    
+    float h;    
     Vector3 FirstPoint;
     Vector3 SecondPoint;
-    float xAngleTemp;
-
+    readonly float xAngleTemp;
     Vector3 rotateToDirection;
     public override void LocalLateUpdate(Camera _camera)
     {

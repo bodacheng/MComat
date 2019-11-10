@@ -35,19 +35,19 @@ public class Move_State2 : AI_State
 		this.time_limit = time_limit;		
 	}
 
-	public override void pre_process_before_enter()
+	public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
 	}
 
-    public override bool enter_condition_priority2()
+    public override bool Enter_condition_priority2()
     {
         //if (AI_DATA_CENTER.IsGrounded())
         return true;
         //return false;
     }
 
-    public override bool strategic_exit_condition()
+    public override bool Strategic_exit_condition()
     {
         if (Sensor.getMidEnemiesColliders().Count > 0 || this.time_counter >= this.time_limit)//|| Sensor.getInnerRangeWallColliders().Count > 0
         {
@@ -56,7 +56,7 @@ public class Move_State2 : AI_State
         return false;
     }
 
-    public override void c_State_enter()
+    public override void C_State_enter()
     {
         if (this._AIStateRunner.getLastState() == this)
             return;

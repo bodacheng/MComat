@@ -4,7 +4,9 @@ using UnityEngine;
 
 class GodplayerCamera : CameraMode
 {
-    float distance_use = 1f, distance, zoom_range;
+    private float distance_use = 1f;
+    private readonly float distance;
+    private readonly float zoom_range;
     float x, y;
     public float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
     public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode
@@ -12,12 +14,12 @@ class GodplayerCamera : CameraMode
 
     public GodplayerCamera(float distance, float zoom_range)
     {
-        targets = new List<Transform>();
         this.distance = distance;
         this.distance_use = distance;
         this.zoom_range = zoom_range;
     }
 
+    Vector3 center;
     public override void LocalLateUpdate(Camera _camera)
     {
         if (this.targets == null)
@@ -31,8 +33,7 @@ class GodplayerCamera : CameraMode
             return;
         }
 
-        Vector3 center = new Vector3(0, 0, 0);
-
+        center = Vector3.zero;
         foreach (Transform o in this.targets)
         {
             if (o != null)
@@ -55,12 +56,12 @@ class GodplayerCamera : CameraMode
                     distance_use += 0.1f;
             }
 
-            if (Input.GetAxis("Mouse X") != 0f)
+            if (System.Math.Abs(Input.GetAxis("Mouse X")) > 0)
             {
                 x = Input.GetAxis("Mouse X") * speed * Time.deltaTime;
                 direction = GetDirection(direction, x, 0);
             }
-            if (Input.GetAxis("Mouse Y") != 0f)
+            if (System.Math.Abs(Input.GetAxis("Mouse Y")) > 0)
             {
                 y = Input.GetAxis("Mouse Y") * speed * 30 * Time.deltaTime;
                 direction = GetDirection(direction, 0, -y);

@@ -23,12 +23,12 @@ public class Hurt_State : AI_State {
         this.heavy_dizzy_time = heavy_dizzy_time;
     }
 
-	public override void pre_process_before_enter()
+	public override void Pre_process_before_enter()
 	{
-		base.pre_process_before_enter ();
+		base.Pre_process_before_enter ();
     }
 
-	public override bool force_enter_condition()
+	public override bool Force_enter_condition()
 	{
         return _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0
             || _FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0
@@ -55,10 +55,10 @@ public class Hurt_State : AI_State {
 		base.AI_State_enter();
         //_SkillCancelFlag.turn_on_flag();//可以挣脱
         this._Animator.SetFloat("speed", 0f);
-        this._DATA_CENTER.setGravitySwitch(true);//在之后的eatDamage环节可能被再次解放重力
+        this._DATA_CENTER.SetGravitySwitch(true);//在之后的eatDamage环节可能被再次解放重力
         this._FightAttriCalReference.SetGettingDamageState(true);
-        this._Weapon_Animation_Events.clearMarkerManagers();
-        this._BO_Ani_E.CloseEffectsOnBodyParts();
+        this._Weapon_Animation_Events.ClearMarkerManagers();
+        this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
         this.hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
 
         int ranDom = (int)Random.Range(0,hurtclips.Count);
@@ -118,7 +118,7 @@ public class Hurt_State : AI_State {
         this.Animation_Manger.Animator.SetTrigger("hurt");
     }
 
-	public override bool capacity_exit_condition()
+	public override bool Capacity_exit_condition()
 	{
         return this.time_counter > used_dizzy_time ? true : false;
     }

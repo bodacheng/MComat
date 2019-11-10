@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class zokuseiSkillStoneTagsGroup
 {
-    public zokusei zokusei;
+    public Zokusei zokusei;
     
     //技能石盒分类系成员
     public IDictionary<int, ParticleSystem> buttonEffectsSetsForSkillStoneBox = new Dictionary<int, ParticleSystem>(); 
@@ -18,25 +18,25 @@ public class zokuseiSkillStoneTagsGroup
         }       
     }
  
-    public void INI_forSkillStoneBox(zokusei zokusei,Transform effectObjectParent)
+    public void INI_forSkillStoneBox(Zokusei zokusei,Transform effectObjectParent)
     {
         this.zokusei = zokusei;
         string buttoneffectspath;
         switch(zokusei)
         {
-                case zokusei.blueMagic:
+                case Zokusei.blueMagic:
                 buttoneffectspath = "blueMagic";
                 break;
-                case zokusei.darkMagic:
+                case Zokusei.darkMagic:
                 buttoneffectspath = "darkMagic";
                 break;
-                case zokusei.greenMagic:
+                case Zokusei.greenMagic:
                 buttoneffectspath = "greenMagic";
                 break;
-                case zokusei.lightMagic:
+                case Zokusei.lightMagic:
                 buttoneffectspath = "lightMagic";
                 break;
-                case zokusei.redMagic:
+                case Zokusei.redMagic:
                 buttoneffectspath = "redMagic";
                 break;
                 default:

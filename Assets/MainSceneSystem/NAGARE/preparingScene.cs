@@ -113,7 +113,7 @@ namespace mainMenu
         public IEnumerator StartUpProcess()
         {
             //QualitySettings.vSyncCount = 1;
-            Application.targetFrameRate = 60;
+            //Application.targetFrameRate = 60;
 
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.NineSlotT.gameObject.SetActive(false);
@@ -157,7 +157,7 @@ namespace mainMenu
 
             charIcon.iniFrames();
             _LoadingCanvas.nowProcess("正在启动技能石头背包", 0.6f);
-            yield return (_SkillStonesBox.startUp());
+            yield return (_SkillStonesBox.StartUp());
             _LoadingCanvas.nowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.startUp());
 
