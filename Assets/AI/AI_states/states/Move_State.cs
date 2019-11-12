@@ -102,7 +102,7 @@ public class Move_State : AI_State
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
-        this._DATA_CENTER.SetGravitySwitch(true);
+        this._DATA_CENTER.SetUsingGravity(true);
         this._Weapon_Animation_Events.ClearMarkerManagers();
         this.Sensor.continuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
         this.Animation_Manger.PlayLayerAnim(null);

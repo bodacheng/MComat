@@ -7,8 +7,9 @@ using Soul;
 
 public class Defend_State : AI_State
 {
-    private string defend_clip_name,block_break_name;
-    public float block_time_counter = 0;
+    private readonly string defend_clip_name;
+    private readonly string block_break_name;
+    public float block_time_counter;
     private int defendHP;
     private List<Collider> damagingweaponList;
     private List<Collider> nearbyenemymeat;
@@ -18,8 +19,8 @@ public class Defend_State : AI_State
         this.defend_clip_name = defend_clip_name;
         this.block_break_name = block_break_name;
     }
-    
-    void defendHPfade(V_Damage damage)
+
+    private void DefendHPfade(V_Damage damage)
     {
         switch (damage.damage_type)
         {
@@ -30,12 +31,10 @@ public class Defend_State : AI_State
                 defendHP -= 2;
                 break;
         }
-
         if (defendHP <= 0)
         {
             this._FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, damage.force_direction, damage.damageHappenPoint, damage.toWho,null));
-            EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null,
-                                                 damage.damageHappenPoint, Quaternion.identity,null);
+            EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null, damage.damageHappenPoint, Quaternion.identity,null);
         }
     }
 
@@ -73,27 +72,21 @@ public class Defend_State : AI_State
 
     public override bool Enter_condition_priority3()
     {
-        if (this._ResistanceManager.Resistance.Value > 0)
+        if (_ResistanceManager.Resistance.Value > 0)
             return false;
         if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             return false;
-        if (Sensor.getInnerEnemiesColliders().Count > 0)
-            return true;
-        return false;
+        return Sensor.getInnerEnemiesColliders().Count > 0 ? true : false;
     }
-    
+
     public override bool Capacity_exit_condition() 
     {
-        if (block_time_counter > 0)
-            return false;
-        return true;
+        return block_time_counter > 0 ? false : true;
     }
-    
+
     public override bool Strategic_exit_condition()
     {
-        if (!Enter_condition_priority1() && !Enter_condition_priority3() && this._AIStateRunner.haveFirstSkillToTrigger())
-            return true;
-        return false;
+        return !Enter_condition_priority1() && !Enter_condition_priority3() && this._AIStateRunner.haveFirstSkillToTrigger() ? true : false;
     }
 
     public override void AI_State_enter()
@@ -136,10 +129,7 @@ public class Defend_State : AI_State
     V_Damage analyzingDamage;
     public override void _State_FixedUpdate1()
     {
-        if (defendHP > 0)
-            _ResistanceManager.Resistance.Value = 5;//数字没别的意思就是希望让防御状态下维持一定抵抗，不下降
-        else
-            _ResistanceManager.Resistance.Value = 0;
+        _ResistanceManager.Resistance.Value = defendHP > 0 ? 5 : 0;
 
         damagingweaponList = Sensor.getNearbyDamagingWeaponColliders();
         nearbyenemymeat = Sensor.getInnerEnemiesColliders();
@@ -172,7 +162,7 @@ public class Defend_State : AI_State
             block_time_counter = 0.5f;
             if (this._FightAttriCalReference.hasPlentyGauge(3))
                 _SkillCancelFlag.turn_on_flag();
-            defendHPfade(analyzingDamage);
+            DefendHPfade(analyzingDamage);
             _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block).RemoveAt(0);
             this._FightAttriCalReference.plusCriticalGauge(2);
         }
@@ -190,7 +180,7 @@ public class Defend_State : AI_State
             if (this._FightAttriCalReference.hasPlentyGauge(3))
                 _SkillCancelFlag.turn_on_flag();
             
-            defendHPfade(analyzingDamage);
+            DefendHPfade(analyzingDamage);
             _FightAttriCalReference.ReturnDamageList(DamageType.light_block).RemoveAt(0);
             this._FightAttriCalReference.plusCriticalGauge(2);
         }

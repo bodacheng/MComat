@@ -88,7 +88,7 @@ public class G_M_Attack_State : AI_State {
         this.Animation_Manger.Animator.SetTrigger("face_reset");
         this.Animation_Manger.Animator.SetTrigger("confident");
         
-        this._DATA_CENTER.SetGravitySwitch(true);
+        this._DATA_CENTER.SetUsingGravity(true);
         this._Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
@@ -118,7 +118,7 @@ public class G_M_Attack_State : AI_State {
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        this._DATA_CENTER.SetGravitySwitch(true);
+        this._DATA_CENTER.SetUsingGravity(true);
         this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
 		_Animator.applyRootMotion = false;
 	}

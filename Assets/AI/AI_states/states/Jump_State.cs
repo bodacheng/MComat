@@ -24,7 +24,7 @@ public class Jump_State : AI_State
         this.state_time = least_state_time;
 	}
 
-    public Jump_State(string clip, float forward_force, float vertical_force, float least_state_time,bool onEnemyBounce, behaviorEnterRange[] behaviorEnterRanges)
+    public Jump_State(string clip, float forward_force, float vertical_force, float least_state_time,bool onEnemyBounce, BehaviorEnterRange[] behaviorEnterRanges)
     {
         this.clip_name = clip;
         this.forward_force = forward_force;

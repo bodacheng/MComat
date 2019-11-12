@@ -122,11 +122,9 @@ public class NetFightScene : MonoBehaviour {
                 _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
                 _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
                 _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
-                yield return this._RealTimeGameProcessManager.FightTeam1.CharacterResourceLoad(stage.localFight.HeroSets);
-                yield return this._RealTimeGameProcessManager.FightTeam2.CharacterResourceLoad(stage.localFight.EnemySets);
+                yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets);
+                yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets);
                 _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
-                _RealTimeGameProcessManager.FightTeam1.Instantiate ();
-                _RealTimeGameProcessManager.FightTeam2.Instantiate ();
                 break;
         }
         LoadStageFinished.Value = true;

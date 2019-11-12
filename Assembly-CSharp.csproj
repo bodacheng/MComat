@@ -476,6 +476,7 @@
     <Compile Include="Assets\Scene\ABLoadScene\SKillAnalyzerGUI.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\StartUpScenePresentation.cs" />
     <Compile Include="Assets\Scene\TITLE_SCENE\Intro.cs" />
+    <Compile Include="Assets\Setting\FightGlobalSetting.cs" />
     <Compile Include="Assets\Setting\ResourceSetting.cs" />
     <Compile Include="Assets\Setting\ResourceSettingGUI.cs" />
     <Compile Include="Assets\Setting\Setting.cs" />

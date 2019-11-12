@@ -87,4 +87,5 @@ public enum TeamMode
 {
     multiraid = 1,
     rotation = 2,
+    test = 3
 }

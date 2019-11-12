@@ -89,7 +89,7 @@ public class ConfigFileManager : MonoBehaviour {
                         ShowName = "unknown",
                         SP_LEVEL = 0,
                         stateType = stateType.GR,
-                        ai_trigger_ranges = new behaviorEnterRange[1] { behaviorEnterRange.inner_range },
+                        ai_trigger_ranges = new BehaviorEnterRange[1] { BehaviorEnterRange.inner_range },
                         AI_PRIORITY = "2",
                         RARITY_LEVEL = 1
                     };
@@ -120,7 +120,7 @@ public class ConfigFileManager : MonoBehaviour {
                         ShowName = "unknown",
                         SP_LEVEL = 0,
                         stateType = stateType.GI,
-                        ai_trigger_ranges = new behaviorEnterRange[3] { behaviorEnterRange.inner_range, behaviorEnterRange.mid_range, behaviorEnterRange.far_range },
+                        ai_trigger_ranges = new BehaviorEnterRange[3] { BehaviorEnterRange.inner_range, BehaviorEnterRange.mid_range, BehaviorEnterRange.far_range },
                         AI_PRIORITY = "2",
                         RARITY_LEVEL = 1
                     };
@@ -151,7 +151,7 @@ public class ConfigFileManager : MonoBehaviour {
                         ShowName = "unknown",
                         SP_LEVEL = 0,
                         stateType = stateType.GM,
-                        ai_trigger_ranges = new behaviorEnterRange[2] { behaviorEnterRange.mid_range, behaviorEnterRange.inner_range },
+                        ai_trigger_ranges = new BehaviorEnterRange[2] { BehaviorEnterRange.mid_range, BehaviorEnterRange.inner_range },
                         AI_PRIORITY = "2",
                         RARITY_LEVEL = 1
                     };

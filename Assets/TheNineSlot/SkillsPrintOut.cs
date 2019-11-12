@@ -130,23 +130,23 @@ namespace mainMenu
                 if (outRange != null)
                     outRange.text = "x";
 
-                foreach (behaviorEnterRange _range in _state_Transition_Set.ai_trigger_ranges)
+                foreach (BehaviorEnterRange _range in _state_Transition_Set.ai_trigger_ranges)
                 {
                     switch (_range)
                     {
-                        case behaviorEnterRange.inner_range:
+                        case BehaviorEnterRange.inner_range:
                             if (closeRange != null)
                                 closeRange.text = "●";
                             break;
-                        case behaviorEnterRange.mid_range:
+                        case BehaviorEnterRange.mid_range:
                             if (nearRange != null)
                                 nearRange.text = "●";
                             break;
-                        case behaviorEnterRange.far_range:
+                        case BehaviorEnterRange.far_range:
                             if (farRange != null)
                                 farRange.text = "●";
                             break;
-                        case behaviorEnterRange.out_of_range:
+                        case BehaviorEnterRange.out_of_range:
                             if (outRange != null)
                                 outRange.text = "●";
                             break;

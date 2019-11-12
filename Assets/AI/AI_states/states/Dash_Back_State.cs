@@ -5,10 +5,10 @@ using Soul;
 
 public class Dash_Back_State : AI_State
 {
-    private string clip_name;
-    private UnityEngine.Events.UnityAction breakfreestart;
-    private UnityEngine.Events.UnityAction breakfreeend;
-    private customCoroutine breakfreeCoroutine;
+    private readonly string clip_name;
+    private readonly UnityEngine.Events.UnityAction breakfreestart;
+    private readonly UnityEngine.Events.UnityAction breakfreeend;
+    private readonly customCoroutine breakfreeCoroutine;
     
     public Dash_Back_State()
     {
@@ -32,17 +32,12 @@ public class Dash_Back_State : AI_State
 
     public override bool Capacity_enter_condition()
     {
-        if (!_DATA_CENTER.IsGrounded())
-            return false;
-        return true;
+        return _DATA_CENTER.IsGrounded();
     }
 
     public override bool Enter_condition_priority2()
     {
-        if ((this._FightAttriCalReference.IFgettingDamage() && this._FightAttriCalReference.CriticalGauge > 95) || Sensor.getNearbyDamagingWeaponColliders().Count > 0)
-            return true;
-        else
-            return false;
+        return (_FightAttriCalReference.IFgettingDamage() && this._FightAttriCalReference.CriticalGauge > 95) || Sensor.getNearbyDamagingWeaponColliders().Count > 0;
     }
 
     //public override bool enter_condition_priority3()
@@ -101,10 +96,7 @@ public class Dash_Back_State : AI_State
 
     public override bool Capacity_exit_condition()
     {
-        if (this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
-            return true;
-        else
-            return false;
+        return this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over ? true : false;
     }
 
     public override void AI_State_exit()

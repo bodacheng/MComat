@@ -42,18 +42,25 @@ public partial class FightTeam : MonoBehaviour
     }
     
     // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-    public void Instantiate()
+    public IEnumerator Instantiate(MultiDictionary<int, int, CharacterDataInfo> ChracterSets)
     {
         switch (TeamMode)
         {
             case TeamMode.multiraid:
+                yield return CharacterResourceLoad(ChracterSets);
                 InstantiateCharsIconsAndFloatHPBar_multiRaid();
             break;
             case TeamMode.rotation:
+                yield return CharacterResourceLoad(ChracterSets);
                 InstantiateCharsIconsAndFloatHPBar_turnMode();
             break;
+            case TeamMode.test:
+                yield return CharacterResourceLoadTestMode(ChracterSets);
+                InstantiateCharsIconsAndFloatHPBar_turnMode();
+                break;
         }
         TeamsFightInitialize();
+        yield return null;
     }
     
     private void TeamsFightInitialize()
@@ -185,6 +192,25 @@ public partial class FightTeam : MonoBehaviour
             foreach (int key in keys.Value)
             {
                 CharacterDataInfo _one = MembersSets.Get(keys.Key,key);
+                IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
+                yield return character_datacenter;
+                Data_Center data_Center = (Data_Center)character_datacenter.Current;
+                data_Center.Step3Initialize(teamConfig);
+                teamMembers.Set(keys.Key,key,data_Center);
+                CharacterDataInfoReference.Add(teamMembers.Get(keys.Key,key),_one);
+            }
+        }
+    }
+    
+    public IEnumerator CharacterResourceLoadTestMode(MultiDictionary<int, int, CharacterDataInfo> MembersSets)
+    {
+        foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
+        {
+            foreach (int key in keys.Value)
+            {
+                CharacterDataInfo _one = MembersSets.Get(keys.Key,key);
+                _one._NineAndTwo = new NineAndTwo();
+                _one._NineAndTwo.moveType = MoveType.Test;
                 IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
                 yield return character_datacenter;
                 Data_Center data_Center = (Data_Center)character_datacenter.Current;

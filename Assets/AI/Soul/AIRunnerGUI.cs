@@ -122,16 +122,16 @@ public class AIRunnerGUI : Editor {
 
                 if (myScript.State_Transition_Set_List[i].stateType != stateType.NONE)
                 {
-                    List<behaviorEnterRange> _ranges;
+                    List<BehaviorEnterRange> _ranges;
                     if (myScript.State_Transition_Set_List[i].ai_trigger_ranges == null)
-                        _ranges = new List<behaviorEnterRange>();
+                        _ranges = new List<BehaviorEnterRange>();
                     else
                         _ranges = myScript.State_Transition_Set_List[i].ai_trigger_ranges.ToList();
                     bool outrange,far, near, close;
-                    outrange = _ranges.Contains(behaviorEnterRange.out_of_range) ? true : false;
-                    far = _ranges.Contains(behaviorEnterRange.far_range) ? true : false;
-                    near = _ranges.Contains(behaviorEnterRange.mid_range) ? true : false;
-                    close = _ranges.Contains(behaviorEnterRange.inner_range) ? true : false;
+                    outrange = _ranges.Contains(BehaviorEnterRange.out_of_range) ? true : false;
+                    far = _ranges.Contains(BehaviorEnterRange.far_range) ? true : false;
+                    near = _ranges.Contains(BehaviorEnterRange.mid_range) ? true : false;
+                    close = _ranges.Contains(BehaviorEnterRange.inner_range) ? true : false;
 
                     attackRangeToggleGUI.alignment = TextAnchor.MiddleLeft;
                     attackRangeToggleGUI.stretchWidth = false;
@@ -143,11 +143,11 @@ public class AIRunnerGUI : Editor {
                     close = EditorGUILayout.Toggle("近", close, attackRangeToggleGUI);
                     GUI.backgroundColor = Color.white;
 
-                    List<behaviorEnterRange> _finalranges = new List<behaviorEnterRange>();
-                    if (outrange) _finalranges.Add(behaviorEnterRange.out_of_range);
-                    if (far) _finalranges.Add(behaviorEnterRange.far_range);
-                    if (near) _finalranges.Add(behaviorEnterRange.mid_range);
-                    if (close) _finalranges.Add(behaviorEnterRange.inner_range);
+                    List<BehaviorEnterRange> _finalranges = new List<BehaviorEnterRange>();
+                    if (outrange) _finalranges.Add(BehaviorEnterRange.out_of_range);
+                    if (far) _finalranges.Add(BehaviorEnterRange.far_range);
+                    if (near) _finalranges.Add(BehaviorEnterRange.mid_range);
+                    if (close) _finalranges.Add(BehaviorEnterRange.inner_range);
                     myScript.State_Transition_Set_List[i].ai_trigger_ranges = _finalranges.ToArray();
                 }else{
                     myScript.State_Transition_Set_List[i].ai_trigger_ranges = null;

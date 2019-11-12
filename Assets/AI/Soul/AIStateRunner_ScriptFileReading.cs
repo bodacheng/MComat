@@ -233,7 +233,7 @@ namespace Soul
                     &&
                     !alreadyInList.Contains(_State_Transition_Set.StateKey)
                     &&
-                    _States_Incubator.ifContainsKey(_State_Transition_Set.StateKey))
+                    _States_Incubator.IfContainsKey(_State_Transition_Set.StateKey))
                 {
                     List<State_Rate_Set> new_casual_to = new List<State_Rate_Set>();
                     if (_State_Transition_Set.casual_to_state_Sets == null)
@@ -243,7 +243,7 @@ namespace Soul
                     }
                     foreach (State_Rate_Set _State_Rate_Set in _State_Transition_Set.casual_to_state_Sets)
                     {
-                        if (!_States_Incubator.ifContainsKey(_State_Rate_Set.AI_State_Number))
+                        if (!_States_Incubator.IfContainsKey(_State_Rate_Set.AI_State_Number))
                         {
                             Debug.Log(Script.name + "脚本中的状态" + _State_Transition_Set.StateKey +
                                       "下存在没有定义的自然迁移状态" + _State_Rate_Set.AI_State_Number + ",从而已经做强行删除处理。");
@@ -269,7 +269,7 @@ namespace Soul
                     }
                     else
                     {
-                        if (!_States_Incubator.ifContainsKey(_State_Transition_Set.StateKey))
+                        if (!_States_Incubator.IfContainsKey(_State_Transition_Set.StateKey))
                         {
                             Debug.Log("脚本中描写的状态的键值:" + _State_Transition_Set.StateKey + " 不存在于我们的定义");
                         };

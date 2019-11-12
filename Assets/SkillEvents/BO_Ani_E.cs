@@ -247,7 +247,7 @@ public class BO_Ani_E : MonoBehaviour
         if (processingHitBox.danMuTest != null)
         {
             processingHitBox.transform.position = intPos;
-            processingHitBox.danMuTest.startOff(intPos,this.transform.rotation);
+            processingHitBox.danMuTest.StartOff(intPos,this.transform.rotation);
         } else {
             processingHitBox.gameObject.transform.position = intPos;
             magicFoward_shoot_direction = gameObject.transform.forward;

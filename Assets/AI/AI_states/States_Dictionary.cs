@@ -43,14 +43,18 @@ public class States_Incubator
         Num_State_List.Add(new AI_Num_With_State("Test_Move", testmove));
         StateIndexList.Add("Test_Move");
 
-        moveTypeKeys = new List<string>();
-        moveTypeKeys.Add("Move_normal");
-        moveTypeKeys.Add("Move_slow");
-        moveTypeKeys.Add("Move_fast");
+        moveTypeKeys = new List<string>
+        {
+            "Move_normal",
+            "Move_slow",
+            "Move_fast"
+        };
 
-        Defend_State defend = new Defend_State("block","block_break");
-        defend.StateType = stateType.Def;
-        defend.nextAttackStateCanRushFirst = false;
+        Defend_State defend = new Defend_State("block", "block_break")
+        {
+            StateType = stateType.Def,
+            nextAttackStateCanRushFirst = false
+        };
         Num_State_List.Add(new AI_Num_With_State("Defend", defend));
         StateIndexList.Add("Defend");
 
@@ -65,36 +69,50 @@ public class States_Incubator
         Num_State_List.Add(new AI_Num_With_State("Death", death));
         StateIndexList.Add("Death");
 
-        Jump_State jump = new Jump_State("jump", 30f, 30f, 0.3f, true);
-        jump.nextAttackStateCanRushFirst = false;
+        Jump_State jump = new Jump_State("jump", 30f, 30f, 0.3f, true)
+        {
+            nextAttackStateCanRushFirst = false
+        };
         Num_State_List.Add(new AI_Num_With_State("Jump", jump));
         StateIndexList.Add("Jump");
 
-        Dash_Back_State RushBack = new Dash_Back_State();
-        RushBack.nextAttackStateCanRushFirst = false;
-        RushBack.StateType = stateType.AC;
+        Dash_Back_State RushBack = new Dash_Back_State
+        {
+            nextAttackStateCanRushFirst = false,
+            StateType = stateType.AC
+        };
         Num_State_List.Add(new AI_Num_With_State("RushBack", RushBack));
         StateIndexList.Add("RushBack");
 
-        G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush");
-        Rush.nextAttackStateCanRushFirst = true;
-        Rush.StateType = stateType.AC;
+        G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
+        {
+            nextAttackStateCanRushFirst = true,
+            StateType = stateType.AC
+        };
         Num_State_List.Add(new AI_Num_With_State("Rush", Rush));
         StateIndexList.Add("Rush");
 
-        Hurt_State hit = new Hurt_State(2f, 8f, 0.4f, 0.6f);
-        hit.nextAttackStateCanRushFirst = false;
-        hit.StateType = stateType.Hit;
+        Hurt_State hit = new Hurt_State(FightGlobalSetting._light_damage_force, FightGlobalSetting._heavy_damage_force, FightGlobalSetting._lighthit_lastingtime, FightGlobalSetting._heavyhit_lastingtime)
+        {
+            nextAttackStateCanRushFirst = false,
+            StateType = stateType.Hit
+        };
 
-        Controlled_State controlled = new Controlled_State("controlled");
-        controlled.nextAttackStateCanRushFirst = false;
+        Controlled_State controlled = new Controlled_State("controlled")
+        {
+            nextAttackStateCanRushFirst = false
+        };
 
-        GetUp getUp = new GetUp("getup",2f);
-        getUp.StateType = stateType.getUp;
+        GetUp getUp = new GetUp("getup", 2f)
+        {
+            StateType = stateType.getUp
+        };
 
-        Knock_Off_State knock_off = new Knock_Off_State(2f, 20f,40f);
-        knock_off.StateType = stateType.KnockOff;
-        knock_off.nextAttackStateCanRushFirst = true;
+        Knock_Off_State knock_off = new Knock_Off_State(FightGlobalSetting._knockoffMaxtime)
+        {
+            StateType = stateType.KnockOff,
+            nextAttackStateCanRushFirst = true
+        };
 
         Num_State_List.Add(new AI_Num_With_State("Hit", hit));
         StateIndexList.Add("Hit");
@@ -118,37 +136,45 @@ public class States_Incubator
                 switch (_attackType)
                 {
                     case stateType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey, _set.skillEmergentLevel);
-                        _GI_Attack.StateType = stateType.GI;
-                        _GI_Attack.AT = _set.AT;
-                        _GI_Attack.nextAttackStateCanRushFirst = false;
+                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey, _set.skillEmergentLevel)
+                        {
+                            StateType = stateType.GI,
+                            AT = _set.AT,
+                            nextAttackStateCanRushFirst = false
+                        };
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _GI_Attack));
                         StateIndexList.Add(_set.StateKey);
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case stateType.GM:
-                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey, 5f, 2f, _set.skillEmergentLevel);
-                        _GM_Attack.StateType = stateType.GM;
-                        _GM_Attack.AT = _set.AT;
-                        _GM_Attack.nextAttackStateCanRushFirst = false;
+                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey, 5f, 2f, _set.skillEmergentLevel)
+                        {
+                            StateType = stateType.GM,
+                            AT = _set.AT,
+                            nextAttackStateCanRushFirst = false
+                        };
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _GM_Attack));
                         StateIndexList.Add(_set.StateKey);
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case stateType.GR:
-                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f,20f, _set.StateKey, _set.skillEmergentLevel);
-                        _GR_Attack.StateType = stateType.GR;
-                        _GR_Attack.AT = _set.AT;
-                        _GR_Attack.nextAttackStateCanRushFirst = false;
+                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.StateKey, _set.skillEmergentLevel)
+                        {
+                            StateType = stateType.GR,
+                            AT = _set.AT,
+                            nextAttackStateCanRushFirst = false
+                        };
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _GR_Attack));
                         StateIndexList.Add(_set.StateKey);
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case stateType.CT:
-                        Counter_State _Counter = new Counter_State(_set.StateKey,1.4f, 2f, 1,_set.skillEmergentLevel);
-                        _Counter.StateType = stateType.CT;
-                        _Counter.AT = _set.AT;
-                        _Counter.nextAttackStateCanRushFirst = false;
+                        Counter_State _Counter = new Counter_State(_set.StateKey, 1.4f, 2f, 1, _set.skillEmergentLevel)
+                        {
+                            StateType = stateType.CT,
+                            AT = _set.AT,
+                            nextAttackStateCanRushFirst = false
+                        };
                         Num_State_List.Add(new AI_Num_With_State(_set.StateKey, _Counter));
                         StateIndexList.Add(_set.StateKey);
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
@@ -169,7 +195,7 @@ public class States_Incubator
         //        G_Attack_State G_super1 = new G_Attack_State("G_super1", false);                
 	}
 
-    public bool ifContainsKey(string key)
+    public bool IfContainsKey(string key)
     {
         foreach(string _key in StateIndexList)
         {
@@ -194,19 +220,21 @@ public class States_Incubator_ForLocalResourceCheck // 用于本地脚本做成�
             return;
         }
 
-        StateIndexList = new List<string>();
-
-        StateIndexList.Add("Empty");
-
-        StateIndexList.Add("Move_normal");
-        StateIndexList.Add("Move_slow");
-        StateIndexList.Add("Move_fast");
-        StateIndexList.Add("Test_Move");
-        moveTypeKeys = new List<string>();
-        moveTypeKeys.Add("Move_normal");
-        moveTypeKeys.Add("Move_slow");
-        moveTypeKeys.Add("Move_fast");
-        moveTypeKeys.Add("Test_Move");
+        StateIndexList = new List<string>
+        {
+            "Empty",
+            "Move_normal",
+            "Move_slow",
+            "Move_fast",
+            "Test_Move"
+        };
+        moveTypeKeys = new List<string>
+        {
+            "Move_normal",
+            "Move_slow",
+            "Move_fast",
+            "Test_Move"
+        };
 
         StateIndexList.Add("Defend");
 
@@ -271,18 +299,21 @@ public class States_Incubator_ForLocalResourceCheck // 用于本地脚本做成�
             return;
         }
 
-        StateIndexList = new List<string>();
-
-        StateIndexList.Add("Empty");
-        StateIndexList.Add("Move_normal");
-        StateIndexList.Add("Move_slow");
-        StateIndexList.Add("Move_fast");
-        StateIndexList.Add("Test_Move");
-        moveTypeKeys = new List<string>();
-        moveTypeKeys.Add("Move_normal");
-        moveTypeKeys.Add("Move_slow");
-        moveTypeKeys.Add("Move_fast");
-        moveTypeKeys.Add("Test_Move");
+        StateIndexList = new List<string>
+        {
+            "Empty",
+            "Move_normal",
+            "Move_slow",
+            "Move_fast",
+            "Test_Move"
+        };
+        moveTypeKeys = new List<string>
+        {
+            "Move_normal",
+            "Move_slow",
+            "Move_fast",
+            "Test_Move"
+        };
 
         StateIndexList.Add("Defend");
 
@@ -328,7 +359,7 @@ public class States_Incubator_ForLocalResourceCheck // 用于本地脚本做成�
         }             
     }
 
-    public bool ifContainsKey(string key)
+    public bool IfContainsKey(string key)
     {
         foreach (string _key in StateIndexList)
         {
@@ -341,7 +372,7 @@ public class States_Incubator_ForLocalResourceCheck // 用于本地脚本做成�
     }
 }
 
-public enum MoveType : int
+public enum MoveType
 {
     Mode1 = 1,
     Mode2 = 2,
@@ -349,7 +380,7 @@ public enum MoveType : int
     Test = 0
 }
 
-public enum RushType : int
+public enum RushType
 {
     None = -1,
     Jump = 1,
@@ -358,7 +389,7 @@ public enum RushType : int
 }
 
 [System.Serializable]
-public enum behaviorEnterRange : int
+public enum BehaviorEnterRange
 {
     out_of_range = 3,
     far_range = 2,

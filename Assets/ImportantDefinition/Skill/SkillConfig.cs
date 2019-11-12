@@ -29,7 +29,7 @@ public class SkillConfig
     public string ShowName;
     public float ATTACK_WEIGHT;
     public stateType stateType;
-    public behaviorEnterRange[] ai_trigger_ranges;
+    public BehaviorEnterRange[] ai_trigger_ranges;
     public int SP_LEVEL = 0;
     public string AI_PRIORITY;
     public int RARITY_LEVEL = 0;
@@ -47,11 +47,11 @@ public class SkillConfig
         ShowName = null;
         ATTACK_WEIGHT = 1;
         stateType = stateType.NONE;
-        ai_trigger_ranges = new behaviorEnterRange[] { };
+        ai_trigger_ranges = new BehaviorEnterRange[] { };
         SP_LEVEL = 0;
         AI_PRIORITY = "0";
     }
-    public SkillConfig(string id, string type, string keyName, string ShowName, int AT, stateType stateType, behaviorEnterRange[] ai_trigger_ranges, int SPLevel, int _skillEmergentLevel)
+    public SkillConfig(string id, string type, string keyName, string ShowName, int AT, stateType stateType, BehaviorEnterRange[] ai_trigger_ranges, int SPLevel, int _skillEmergentLevel)
     {
         this.RECORD_ID = id;//和Skills表id对应
         this.type = type;

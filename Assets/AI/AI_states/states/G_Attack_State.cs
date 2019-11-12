@@ -135,7 +135,7 @@ public partial class G_Attack_State : AI_State {
         this.Animation_Manger.Animator.SetTrigger("face_reset");
         this.Animation_Manger.Animator.SetTrigger("confident");
         this._Animator.SetFloat("speed", 0f);
-        this._DATA_CENTER.SetGravitySwitch(true);
+        this._DATA_CENTER.SetUsingGravity(true);
         _SkillCancelFlag.turn_off_flag();
         if (this.StateType == stateType.GR)
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
@@ -216,7 +216,7 @@ public partial class G_Attack_State : AI_State {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        this._DATA_CENTER.SetGravitySwitch(true);
+        this._DATA_CENTER.SetUsingGravity(true);
         this.rushingToTarget = null;
         this._Weapon_Animation_Events.ClearMarkerManagers();
         _Animator.applyRootMotion = false;

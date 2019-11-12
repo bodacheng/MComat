@@ -8,7 +8,7 @@ public class State_Transition_Set
     public string StateKey;
     public stateType stateType;
     public float AT;
-    public behaviorEnterRange[] ai_trigger_ranges;
+    public BehaviorEnterRange[] ai_trigger_ranges;
     public int skillEmergentLevel;
     public State_Rate_Set[] casual_to_state_Sets;
     [HideInInspector]
@@ -25,7 +25,7 @@ public class State_Transition_Set
     public State_Transition_Set(string num,
                                 stateType _attackType,
                                 float AT,
-                                behaviorEnterRange[] ai_trigger_ranges,
+                                BehaviorEnterRange[] ai_trigger_ranges,
                                 State_Rate_Set[] casual_to_state_nums, 
                                 string[] forced_to_state_nums, 
                                 inputs_defined enterInput,inputs_defined exitInput,
@@ -79,7 +79,7 @@ public class State_Rate_Set //This class defines how a state should transitate t
 	public string AI_State_Number;
     public stateType attackType;
     public float AT;
-    public behaviorEnterRange[] ai_trigger_ranges;
+    public BehaviorEnterRange[] ai_trigger_ranges;
     public bool can_be_cancelled_to;
     public inputs_defined enterInput = inputs_defined.Null;
     public inputs_defined exitInput = inputs_defined.Null;
@@ -92,7 +92,7 @@ public class State_Rate_Set //This class defines how a state should transitate t
 	public State_Rate_Set(string AI_State_Number,
                           stateType _attackType,
                           float AT,
-                          behaviorEnterRange[] ai_trigger_ranges,
+                          BehaviorEnterRange[] ai_trigger_ranges,
                           bool can_be_cancelled_to,
                           inputs_defined enterInput,inputs_defined exitInput,
                           int SPlevel, int skillEmergentLevel)

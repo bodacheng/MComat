@@ -44,8 +44,7 @@ public class Hurt_State : AI_State {
         if (this.time_counter > 0.05f)
         {
             _Rigidbody.velocity = Vector3.zero;
-        }else
-        {
+        }else{
             //this.gameObject.transform.Translate((this.gameObject.transform.position + force_direction)* Time.fixedDeltaTime);
         }
     }
@@ -55,7 +54,7 @@ public class Hurt_State : AI_State {
 		base.AI_State_enter();
         //_SkillCancelFlag.turn_on_flag();//可以挣脱
         this._Animator.SetFloat("speed", 0f);
-        this._DATA_CENTER.SetGravitySwitch(true);//在之后的eatDamage环节可能被再次解放重力
+        this._DATA_CENTER.SetUsingGravity(true);//在之后的eatDamage环节可能被再次解放重力
         this._FightAttriCalReference.SetGettingDamageState(true);
         this._Weapon_Animation_Events.ClearMarkerManagers();
         this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
@@ -101,7 +100,7 @@ public class Hurt_State : AI_State {
             _FightAttriCalReference.plusCriticalGauge(1);
 			_FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
             _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
-            if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 10f)
+            if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 5f)
             {
                 _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage, force_direction,
                                                         _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0].damageHappenPoint, 

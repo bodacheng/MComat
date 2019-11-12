@@ -250,36 +250,34 @@ public partial class Data_Center : MonoBehaviour
     {
         if (AIStateRunner.ifRunning())
         {
-            if (GravitySwitch)
-                IfGrounded();
+            if (usingGravity)
+                GravitySimulation();
+            GroundedCal();
             animator.SetBool("Grounded", grounded);
             animator.SetFloat("airCount", airCount);
             animator.SetFloat("groundedCount", groundedCount);
             groundedCount = (grounded) ? groundedCount += Time.deltaTime : 0f;
             airCount = (!grounded) ? airCount += Time.deltaTime : 0f;
-            this.Sensor.SensorFixedUpdate();
-            this.buffsRunner.BuffsRunnerFixedUpdate();
-            this._FightAttriCalReference.HealthBodyFixedUpdate();
-            this._SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
+            Sensor.SensorFixedUpdate();
+            buffsRunner.BuffsRunnerFixedUpdate();
+            _FightAttriCalReference.HealthBodyFixedUpdate();
+            _SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
         }
     }
     
-    public void SetGravitySwitch(bool _on)
+    public void SetUsingGravity(bool _on)
     {
-        GravitySwitch = _on;
+        usingGravity = _on;
     }
-    public bool GetGravitySwitch()
+    public bool IfUsingGravity()
     {
-        return GravitySwitch;
+        return usingGravity;
     }
     
-    private bool GravitySwitch = true;
-    private float floorY;
-    public void IfGrounded()
+    bool usingGravity = true;
+    float floorY = 0;
+    public void GroundedCal()
     {
-        temp = WholeT.position;
-        temp.y = floorY;
-        this.WholeT.transform.position = Vector3.Lerp(this.WholeT.transform.position,temp,10 * Time.fixedDeltaTime);
         if (floorCheckers == null)
         {
             this.grounded = false;
@@ -294,6 +292,13 @@ public partial class Data_Center : MonoBehaviour
             }
         }
         this.grounded = false;
+    }
+    
+    public void GravitySimulation()
+    {
+        temp = WholeT.position;
+        temp.y = floorY;
+        this.WholeT.transform.position = Vector3.Lerp(this.WholeT.transform.position,temp,10 * Time.fixedDeltaTime);
     }
 
     public bool IsGrounded()

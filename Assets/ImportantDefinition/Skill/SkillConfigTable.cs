@@ -126,25 +126,25 @@ public class SkillConfigTable
         return _SkillIDsAndNames;
     }
     
-    public static bool rangeLimit(List<behaviorEnterRange> behaviorEnterRangesList, bool close, bool near, bool far, bool outrange)
+    public static bool rangeLimit(List<BehaviorEnterRange> behaviorEnterRangesList, bool close, bool near, bool far, bool outrange)
     {
         for (int i = 0; i < behaviorEnterRangesList.Count;i++)
         {
             switch(behaviorEnterRangesList[i])
             {
-                case behaviorEnterRange.inner_range:
+                case BehaviorEnterRange.inner_range:
                     if (close)
                         return true;
                     break;
-                case behaviorEnterRange.mid_range:
+                case BehaviorEnterRange.mid_range:
                     if (near)
                         return true;
                     break;
-                case behaviorEnterRange.far_range:
+                case BehaviorEnterRange.far_range:
                     if (far)
                         return true;
                     break;
-                case behaviorEnterRange.out_of_range:
+                case BehaviorEnterRange.out_of_range:
                     if (outrange)
                         return true;
                     break;
@@ -311,19 +311,19 @@ public class SkillConfigTable
                 break;
         }
 
-        if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.inner_range))
+        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.inner_range))
             row.CR_SKILL_FLAG = "1";
         else
             row.CR_SKILL_FLAG = "0";
-        if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.mid_range))
+        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.mid_range))
             row.MR_SKILL_FLAG = "1";
         else
             row.MR_SKILL_FLAG = "0";
-        if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.far_range))
+        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.far_range))
             row.LR_SKILL_FLAG = "1";
         else
             row.LR_SKILL_FLAG = "0";
-        if (skillConfig.ai_trigger_ranges.Contains(behaviorEnterRange.out_of_range))
+        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.out_of_range))
             row.VL_SKILL_FLAG = "1";
         else
             row.VL_SKILL_FLAG = "0";
@@ -381,15 +381,15 @@ public class SkillConfigTable
                 break;
         }
         
-        List<behaviorEnterRange> ranges = new List<behaviorEnterRange>();
+        List<BehaviorEnterRange> ranges = new List<BehaviorEnterRange>();
         if (row.CR_SKILL_FLAG == "1")
-            ranges.Add(behaviorEnterRange.inner_range);
+            ranges.Add(BehaviorEnterRange.inner_range);
         if (row.MR_SKILL_FLAG == "1")
-            ranges.Add(behaviorEnterRange.mid_range);
+            ranges.Add(BehaviorEnterRange.mid_range);
         if (row.LR_SKILL_FLAG == "1")
-            ranges.Add(behaviorEnterRange.far_range);
+            ranges.Add(BehaviorEnterRange.far_range);
         if (row.VL_SKILL_FLAG == "1")
-            ranges.Add(behaviorEnterRange.out_of_range);
+            ranges.Add(BehaviorEnterRange.out_of_range);
         _SkillConfig.ai_trigger_ranges = ranges.ToArray();
 
         switch(row.SP_LEVEL)

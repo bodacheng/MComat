@@ -12,9 +12,9 @@ public class DanMuTest : MonoBehaviour {
     private Quaternion startquaternion;
 	
     private Matrix4x4 m;
-    private float time_counter = 0f;
+    private float time_counter;
 
-    public void startOff(Vector3 start,Quaternion startQ)
+    public void StartOff(Vector3 start,Quaternion startQ)
     {
         time_counter = 0;
         this.startPoint = start;
@@ -43,7 +43,7 @@ public class EventKeyframe
     public float time;
     public string functionName;
     
-    public void setValues( float _time, string _name )
+    public void SetValues( float _time, string _name )
     {
         time = _time;
         functionName = _name;

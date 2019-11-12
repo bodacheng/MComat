@@ -93,6 +93,16 @@ namespace mainMenu
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
         }
+        
+        public void SwitchToTestMode()
+        {
+            MuitiRaidModeIconsT.gameObject.SetActive(true);
+            RotationModeIconsT.gameObject.SetActive(false);
+            stage.fightModeType = fightModeType.combat;
+            stage._fightEventType = fightEventType.Self;
+            stage.Team1Mode = TeamMode.multiraid;
+            stage.Team2Mode = TeamMode.test;
+        }
 
         public IEnumerator FightStart()
         {

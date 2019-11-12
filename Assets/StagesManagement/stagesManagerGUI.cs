@@ -410,20 +410,20 @@ public class stagesManagerGUI : Editor {
                                                                                         exoptions_display,exoptions);
 
                             bool far = false, near = false, close = false, outrange = false;
-                            foreach (behaviorEnterRange _behaviorEnterRange in defaultSkillConfig.ai_trigger_ranges)
+                            foreach (BehaviorEnterRange _behaviorEnterRange in defaultSkillConfig.ai_trigger_ranges)
                             {
                                 switch (_behaviorEnterRange)
                                 {
-                                    case behaviorEnterRange.inner_range:
+                                    case BehaviorEnterRange.inner_range:
                                         close = true;
                                         break;
-                                    case behaviorEnterRange.mid_range:
+                                    case BehaviorEnterRange.mid_range:
                                         near = true;
                                         break;
-                                    case behaviorEnterRange.far_range:
+                                    case BehaviorEnterRange.far_range:
                                         far = true;
                                         break;
-                                    case behaviorEnterRange.out_of_range:
+                                    case BehaviorEnterRange.out_of_range:
                                         outrange = true;
                                         break;
                                 }
@@ -438,11 +438,11 @@ public class stagesManagerGUI : Editor {
                             GUILayout.Space(5f);
                             GUI.backgroundColor = Color.white;
     
-                            List<behaviorEnterRange> _finalranges = new List<behaviorEnterRange>();
-                            if (outrange) _finalranges.Add(behaviorEnterRange.out_of_range);
-                            if (far) _finalranges.Add(behaviorEnterRange.far_range);
-                            if (near) _finalranges.Add(behaviorEnterRange.mid_range);
-                            if (close) _finalranges.Add(behaviorEnterRange.inner_range);
+                            List<BehaviorEnterRange> _finalranges = new List<BehaviorEnterRange>();
+                            if (outrange) _finalranges.Add(BehaviorEnterRange.out_of_range);
+                            if (far) _finalranges.Add(BehaviorEnterRange.far_range);
+                            if (near) _finalranges.Add(BehaviorEnterRange.mid_range);
+                            if (close) _finalranges.Add(BehaviorEnterRange.inner_range);
                             focusingSkillConfig.ai_trigger_ranges = _finalranges.ToArray();
                         }
                     }
