@@ -6,7 +6,7 @@ using Api.Dto.Model;
 
 namespace mainMenu
 {
-    public class modelShower : MonoBehaviour
+    public class ModelShower : MonoBehaviour
     {
         [Space(11)]
         [Header("Essentials")]
@@ -21,9 +21,9 @@ namespace mainMenu
         public Transform Member2StandPoint;
         public Transform Member3StandPoint;
 
-        private IDictionary<int, Transform> myShowCharPositionDic = new Dictionary<int, Transform>();
-        private PinchZoom pinchZoom = new PinchZoom();
-        private GameObject showingChar;
+        IDictionary<int, Transform> myShowCharPositionDic = new Dictionary<int, Transform>();
+        PinchZoom pinchZoom = new PinchZoom();
+        GameObject showingChar;
         
         public IEnumerator StartUpProcess()
         {
@@ -43,54 +43,53 @@ namespace mainMenu
 
         public IEnumerator ShowThisCharacterModel(string localID)
         {
-            GameObject _char = myModelPool.Instance.getMyModel(localID);
+            GameObject _char = MyModelPool.Instance.GetMyModel(localID);
             if (_char == null)
             {
                 IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(localID);
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                yield return (this._CharSetManager.BuildShowModel(targetAccountCharacterInfo));
-                _char = myModelPool.Instance.getMyModel(localID);
+                yield return _CharSetManager.BuildShowModel(targetAccountCharacterInfo);
+                _char = MyModelPool.Instance.GetMyModel(localID);
             }
             
-            if (this.showingChar == _char)
+            if (showingChar == _char)
             {
                 if (showingChar != null)
-                    this.showingChar.SetActive(true);
+                    showingChar.SetActive(true);
             }else{
                 if (showingChar != null)
                     showingChar.SetActive(false);
-                this.showingChar = _char;
-                if (this.showingChar != null)
+                showingChar = _char;
+                if (showingChar != null)
                 {
-                    this.showingChar.SetActive(true);
-                    this.showingChar.transform.parent = null;
-                    this.showingChar.transform.position = this.CaculateShowModelPosition(new Vector3(0.2f, 0.4f,10f));//右
-                    this.showingChar.transform.localRotation = Quaternion.identity;
+                    showingChar.SetActive(true);
+                    showingChar.transform.parent = null;
+                    showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 10f));//右
+                    showingChar.transform.localRotation = Quaternion.identity;
                 }
                 else
                 {
                     Debug.Log("展示用模型加载严重错误. monsterOfPlayerId" + localID);
                 }
             }
-            yield return _char;
+            yield return showingChar;
         }
 
         Vector3 FirstPoint;
         Vector3 SecondPoint;
+        Vector3 modelPOnScreen;
         float xAngle;
         float xAngleTemp;
         float yAngle;
         float yAngleTemp;
-        Vector3 modelPOnScreen;
         float fingertoshowmodelx, fingertoshowmodely;
         public void TranslateShowingCharToDefaultPos(Vector3 screenPos)//new Vector3(0.23f, 0.3f, 3f)
         {
             if (showingChar != null)
             {
                 showingChar.transform.position = Vector3.Lerp(showingChar.transform.position, CaculateShowModelPosition(screenPos), Time.deltaTime * 10f);
-                if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor ||
-                    Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+                if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
                 {
                     //xAngle = Input.GetAxis("Mouse X");
                     //yAngle = Input.GetAxis("Mouse Y");
@@ -104,8 +103,8 @@ namespace mainMenu
                     else if (Input.GetMouseButton(0))
                     {
                         modelPOnScreen = CaculateShowModelViewportPoint(showingChar.transform.position);
-                        fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x)/ Screen.width;
-                        fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y)/Screen.height;
+                        fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x) / Screen.width;
+                        fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y) / Screen.height;
                         if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
                         {
                             SecondPoint = Input.mousePosition;
@@ -155,7 +154,7 @@ namespace mainMenu
         private void ArrangeShowModelOnTeam(string localID, int PositionNum)//所以这是个可能把某个阵容位置里加入null的函数。
         {
             myShowCharPositionDic.TryGetValue(PositionNum, out Transform t);
-            GameObject one = myModelPool.Instance.getMyModel(localID);
+            GameObject one = MyModelPool.Instance.GetMyModel(localID);
             if (one)
             {
                 one.SetActive(true);
@@ -213,7 +212,7 @@ namespace mainMenu
             yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
             List<GetMonsterOfPlayerDetailModel> onsetLocals = new List<GetMonsterOfPlayerDetailModel>();
             PositionLocalCharKeySet _positionLocalCharKeySet4V4Mode = TeamSet.Instance.storyModeTeamSet;
-            myModelPool.Instance.setAllMyCharactersModelActive(false);
+            MyModelPool.Instance.SetAllMyCharactersModelActive(false);
             GetMonsterOfPlayerDetailModel _one;
 
             IEnumerator getchar1 = AccountCharsSet.instance.getAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(0));

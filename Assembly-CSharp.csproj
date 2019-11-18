@@ -123,7 +123,6 @@
     <Compile Include="Assets\Camera\CameraManager.cs" />
     <Compile Include="Assets\Camera\CenterSurroundCamera.cs" />
     <Compile Include="Assets\Camera\CertainYAntiVibrationCamera.cs" />
-    <Compile Include="Assets\Camera\FPSCamera.cs" />
     <Compile Include="Assets\Camera\GodplayerCamera.cs" />
     <Compile Include="Assets\Camera\GodPlayerCertainYCamera.cs" />
     <Compile Include="Assets\Camera\keepTargetLeftCamera.cs" />
@@ -135,7 +134,7 @@
     <Compile Include="Assets\Camera\TeamEditCamera.cs" />
     <Compile Include="Assets\Camera\TopDownWatchCamera.cs" />
     <Compile Include="Assets\Camera\WatchOverCamera.cs" />
-    <Compile Include="Assets\characterModelShower\modelShower.cs" />
+    <Compile Include="Assets\characterModelShower\ModelShower.cs" />
     <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
     <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
     <Compile Include="Assets\CSV2Table\Scripts\CsvParser.cs" />
@@ -489,7 +488,7 @@
     <Compile Include="Assets\singleton\FightSceneModeManager.cs" />
     <Compile Include="Assets\singleton\levelExpDefine.cs" />
     <Compile Include="Assets\singleton\monsterIconsDic.cs" />
-    <Compile Include="Assets\singleton\myModelPool.cs" />
+    <Compile Include="Assets\singleton\MyModelPool.cs" />
     <Compile Include="Assets\singleton\skillIconsDic.cs" />
     <Compile Include="Assets\singleton\SystemNotes.cs" />
     <Compile Include="Assets\singleton\TeamConfig.cs" />

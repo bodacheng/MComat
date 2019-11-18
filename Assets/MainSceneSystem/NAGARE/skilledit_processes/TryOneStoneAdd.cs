@@ -63,7 +63,7 @@ public class TryOneStoneAdd : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         if (int.Parse(this._MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1)
             return true;
@@ -80,7 +80,7 @@ public class TryOneStoneAdd : MainSceneProcess
         this._LoadingCanvas.ClearHigtLight();
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (step == 1)
         {

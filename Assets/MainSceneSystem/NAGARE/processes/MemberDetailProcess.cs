@@ -15,40 +15,40 @@ public class MemberDetailProcess : MainSceneProcess
     
     public IEnumerator enterProcess()
     {
-        this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);      
+        _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position,3f,25f);
-        this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        yield return (this._MonsterBox.myMonsterBox());
+        _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position,3f,25f);
+        _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
+        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
+        yield return this._MonsterBox.myMonsterBox();
         //this._MonsterBox.adjustAllIconsSize(null);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
+        _MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
         yield return _MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
     }
     
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        mainProcessRunner.triggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
     {
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
-        this._MemberDetail.MemberInfoT.gameObject.SetActive(false);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
+        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
+        _MemberDetail.MemberInfoT.gameObject.SetActive(false);
+        _MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
     }
 
-    private readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
-    public override void localUpdate()
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
+        if (!_MemberDetail._SkillsPrintOut.ifShowingSkill())
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
 }

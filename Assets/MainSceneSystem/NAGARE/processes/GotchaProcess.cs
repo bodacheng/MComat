@@ -23,7 +23,7 @@ public class GotchaProcess : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -38,7 +38,7 @@ public class GotchaProcess : MainSceneProcess
         this._gotchaManager.gotchaCanvas.gameObject.SetActive(false);
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
     }
 }

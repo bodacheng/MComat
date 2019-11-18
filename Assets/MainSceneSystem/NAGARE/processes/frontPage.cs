@@ -13,7 +13,7 @@ public class frontPage : MainSceneProcess
         EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -56,7 +56,7 @@ public class frontPage : MainSceneProcess
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
         {

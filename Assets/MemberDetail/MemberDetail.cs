@@ -10,7 +10,7 @@ namespace mainMenu
     {
         [Space(11)]
         [Header("modelShower")]
-        public modelShower _modelShower;
+        public ModelShower _modelShower;
         
         [Space(7)]
         [Header("美术进程处理器")]
@@ -194,7 +194,7 @@ namespace mainMenu
         {
             if (accountCharacterInfo != null)
             {
-                GameObject focusingOneModel = myModelPool.Instance.getMyModel(accountCharacterInfo.monsterOfPlayerId);
+                GameObject focusingOneModel = MyModelPool.Instance.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");

@@ -23,7 +23,7 @@ public class SeasonsGamen : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -38,7 +38,7 @@ public class SeasonsGamen : MainSceneProcess
         this.T.gameObject.SetActive(false);
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
     }
 }

@@ -35,7 +35,7 @@ public class MemberDetail_edit : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -51,7 +51,7 @@ public class MemberDetail_edit : MainSceneProcess
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
         {

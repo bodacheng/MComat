@@ -26,7 +26,7 @@ public class SelfFightFront : MainSceneProcess
         EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -42,7 +42,7 @@ public class SelfFightFront : MainSceneProcess
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
     }
 }

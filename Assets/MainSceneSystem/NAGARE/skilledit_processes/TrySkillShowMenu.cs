@@ -30,7 +30,7 @@ public class TrySkillShowMenu : MainSceneProcess
         yield break;     
     }
     
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -47,7 +47,7 @@ public class TrySkillShowMenu : MainSceneProcess
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
         {

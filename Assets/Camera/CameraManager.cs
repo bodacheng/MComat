@@ -10,7 +10,6 @@ public enum Camera_Mode_Num
     WatchOver = 8,
     LerpToCertainPlace = 9,
     GodPlayerCertainYCamera = 10,
-    GodWatchCamera = 11,
     keepTargetLeft = 13,
     approachToCertainDistance = 14,
 }
@@ -19,19 +18,13 @@ public class CameraManager : MonoBehaviour
 {
     public static Camera _camera;
     public CameraMode current_Camera_Mode;
-
-    [Header("观战模式相机相关参数")]
-    [Space(6)]
-    public RectTransform FPSControllersCanvas;
-    public static RectTransform FPSControllersCanvas_static;
     
-    private readonly IDictionary<Camera_Mode_Num, CameraMode> camera_Mode_Dictionary = new Dictionary<Camera_Mode_Num, CameraMode>()
+    readonly IDictionary<Camera_Mode_Num, CameraMode> camera_Mode_Dictionary = new Dictionary<Camera_Mode_Num, CameraMode>()
     {
         {Camera_Mode_Num.GodPlayerCertainYCamera,new GodPlayerCertainYCamera(5f, 5f, 2f)},
         {Camera_Mode_Num.CertainYAntiVibrationCamera, new CertainYAntiVibrationCamera(7f, 4f)},
         {Camera_Mode_Num.LerpToCertainPlace, new LerpToCertainPlace()},
         {Camera_Mode_Num.approachToCertainDistance,  new LerpToCertainDistance(5f,1f)},
-        {Camera_Mode_Num.GodWatchCamera, new FPSCamera()},
         {Camera_Mode_Num.keepTargetLeft, new keepTargetLeftCamera()},
         {Camera_Mode_Num.WatchOver, new WatchOverCamera(7f,5f)},
         {Camera_Mode_Num.startAndEnd, new StartToEndMode()},
@@ -42,17 +35,11 @@ public class CameraManager : MonoBehaviour
     {
         _camera = this.gameObject.GetComponent<Camera>();
         _camera.depthTextureMode = DepthTextureMode.Depth;
-        FPSControllersCanvas_static = FPSControllersCanvas;
     }
 
     void Start()
     {
         Screen.SetResolution(1080, 720, true, 60);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void LateUpdate()

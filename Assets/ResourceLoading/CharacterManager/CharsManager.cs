@@ -24,11 +24,11 @@ public partial class CharsManager : MonoBehaviour {
 
         for (int i = 0; i < myCharLocalIDForNextBattle.Count;i++)
         {
-            if (myModelPool.Instance.ModelDicBasedOnPlayerLocalID.ContainsKey(myCharLocalIDForNextBattle[i])
+            if (MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.ContainsKey(myCharLocalIDForNextBattle[i])
                &&
-                myModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]] != null)
+                MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]] != null)
             {
-                myModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]].transform.parent = dontDestroyOnLoadParent;
+                MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]].transform.parent = dontDestroyOnLoadParent;
             }
         }
     }
@@ -118,7 +118,7 @@ public partial class CharsManager : MonoBehaviour {
         Data_Center targetmodel = (Data_Center)loadshowmodel.Current;
         if (targetmodel != null)
         {
-            myModelPool.Instance.addToDic(myChar.monsterOfPlayerId,targetmodel.WholeT.gameObject, myModelPool.Instance.ModelDicBasedOnPlayerLocalID);
+            MyModelPool.Instance.AddToDic(myChar.monsterOfPlayerId,targetmodel.WholeT.gameObject, MyModelPool.Instance.ModelDicBasedOnPlayerLocalID);
         }
     }
     

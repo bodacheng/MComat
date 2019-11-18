@@ -29,7 +29,7 @@ public class SkillStones : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -44,7 +44,7 @@ public class SkillStones : MainSceneProcess
         
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
     }
 }

@@ -27,7 +27,7 @@ namespace mainMenu
       
         [Space(11)]
         [Header("modelShower")]
-        public modelShower _modelShower;
+        public ModelShower _modelShower;
 
         [Space(11)]
         [Header("SkillStonesBox")]
@@ -165,7 +165,7 @@ namespace mainMenu
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
             _LoadingCanvas.turnOnProcessDescription(false);
-            yield return this._modelShower.StartUpProcess();
+            yield return _modelShower.StartUpProcess();
             
             // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
             switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)

@@ -18,7 +18,7 @@ public class TryEditNineSlot : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return false;
     }
@@ -32,7 +32,7 @@ public class TryEditNineSlot : MainSceneProcess
     {
     }
 
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (this._TheNineSlot.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
                 this._TheNineSlot.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 

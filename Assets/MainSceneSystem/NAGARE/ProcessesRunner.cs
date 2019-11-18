@@ -18,8 +18,8 @@ public class ProcessesRunner
     {
         if (currentProcess != null)
         {
-            currentProcess.localUpdate();
-            if (currentProcess.canEnterOtherProcess() && currentProcess.nextProcessStep != MainSceneStep.none)
+            currentProcess.LocalUpdate();
+            if (currentProcess.CanEnterOtherProcess() && currentProcess.nextProcessStep != MainSceneStep.none)
             {
                 changeProcess(currentProcess.nextProcessStep);
             }

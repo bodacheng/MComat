@@ -37,7 +37,7 @@ public class Tutorial_skillEdit : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
 
-    public override bool canEnterOtherProcess()//这个应该是有条件的，玩家应该给亚当装配多少个技能石才能进入战斗环节？  
+    public override bool CanEnterOtherProcess()//这个应该是有条件的，玩家应该给亚当装配多少个技能石才能进入战斗环节？  
     {
         return false;
     }
@@ -53,7 +53,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
-    public override void localUpdate()
+    public override void LocalUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
         {

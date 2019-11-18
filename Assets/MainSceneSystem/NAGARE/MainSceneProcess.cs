@@ -15,7 +15,7 @@ namespace mainMenu
         public preparingScene _preparingScene;
         public SingleThreadProcesser mainProcessRunner;
         public MemberDetail _MemberDetail;
-        public modelShower _modelShower;
+        public ModelShower _modelShower;
         public MonsterBox _MonsterBox;
         public SkillStonesBox _SkillStonesBox;
         public CharsManager _CharsManager;
@@ -57,17 +57,17 @@ namespace mainMenu
         {
         }
 
-        public virtual bool canEnterOtherProcess()
+        public virtual bool CanEnterOtherProcess()
         {
             return true;
         }
 
-        public virtual void localUpdate()
+        public virtual void LocalUpdate()
         {
         }
     }
 
-    public enum MainSceneStep : int
+    public enum MainSceneStep
     {
         none = 0,
         frontPage = 1,
@@ -89,7 +89,7 @@ namespace mainMenu
 
         Tutorial_skillEdit = 18,
         Tutorial_Story = 19,
-        
+
         Tutorial_skillEdit_sub1 = 20,
         Tutorial_skillEdit_sub2 = 21,
         // 前半 后半

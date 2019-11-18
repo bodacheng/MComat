@@ -26,7 +26,7 @@ public class MemberDetail_skillshow : MainSceneProcess
         yield break;
     }
     
-    public override bool canEnterOtherProcess()
+    public override bool CanEnterOtherProcess()
     {
         return true;
     }
@@ -43,8 +43,8 @@ public class MemberDetail_skillshow : MainSceneProcess
         this._MemberDetail.MemberSkillshowT.gameObject.SetActive(false);
     }
 
-    Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
-    public override void localUpdate()
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    public override void LocalUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
         {

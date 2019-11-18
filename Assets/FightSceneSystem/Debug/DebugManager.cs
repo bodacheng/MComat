@@ -229,8 +229,8 @@ public class DebugManager : MonoBehaviour {
                                     string localID = (-1).ToString();
                                     if (teamConfig == _RealTimeGameProcessManager.heroTeamConfig)
                                     {
-                                        localID = myModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count.ToString();
-                                        teamDic = myModelPool.Instance.ModelDicBasedOnPlayerLocalID;
+                                        localID = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count.ToString();
+                                        teamDic = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID;
                                     }
                                     if (teamConfig == _RealTimeGameProcessManager.EnemyTeamConfig)
                                     {
@@ -357,8 +357,8 @@ public class DebugManager : MonoBehaviour {
                                 string localID = (-1).ToString();
                                 if (teamConfig == _RealTimeGameProcessManager.heroTeamConfig)
                                 {
-                                    localID = myModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count.ToString();
-                                    teamDic = myModelPool.Instance.ModelDicBasedOnPlayerLocalID;
+                                    localID = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count.ToString();
+                                    teamDic = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID;
                                 }
                                 if (teamConfig == _RealTimeGameProcessManager.EnemyTeamConfig)
                                 {
