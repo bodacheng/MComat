@@ -132,7 +132,7 @@ public partial class FightTeam : MonoBehaviour
                 memberchanged = true;
             }
             else{
-                data_Center.AIStateRunner.changeState("Empty");
+                data_Center.AIStateRunner.ChangeState("Empty");
                 data_Center.WholeT.transform.position = new Vector3(0,200,0);
             }
         }

@@ -71,7 +71,7 @@ public class AIRunnerGUI : Editor {
         }//这个处理需要多个地方进行
         //DrawDefaultInspector();
 
-        EditorGUILayout.TextField("current: ", myScript.getCurrentStateNum());
+        EditorGUILayout.TextField("current: ", myScript.GetCurrentStateNum());
         EditorGUILayout.BeginVertical();
         myScript.AI_States_path = EditorGUILayout.TextField("AI_States_path", myScript.AI_States_path);
         EditorGUILayout.EndVertical();

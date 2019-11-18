@@ -1,21 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using System;
-using System.Linq;
+﻿using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine.UI;
 
 [Serializable]
 public class CharacterResourceInfo
 {
 	public string RECORD_ID;//monsterTable ID
-    public string type = null;
+    public string type;
     public string REAL_NAME;//monsterTable realName
     public string showNameEN;//monsterTable showNameEN
     public string showNameCN;
@@ -31,25 +23,27 @@ public class CharacterResourceInfo
     public string instructionJP;
     public int RARITY_LEVEL = 3;
 
-    public passiveSkillConfigs getPassiveSkillConfigs()
+    public PassiveSkillConfigs GetPassiveSkillConfigs()
     {
-        passiveSkillConfigs passiveSkillConfigs = new passiveSkillConfigs(this.moveType,this.DEFENDABLE_FLAG,this.rushType);
+        PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(this.moveType,this.DEFENDABLE_FLAG,this.rushType);
         return passiveSkillConfigs;
     }
 
-    public CharacterDataInfo getASampleCharacterDataInfo(string localID)
+    public CharacterDataInfo GetASampleCharacterDataInfo(string localID)
     {
-        CharacterDataInfo characterDataInfo = new CharacterDataInfo();
-        characterDataInfo.monsterOfPlayerId = localID;
-        characterDataInfo.monsterId = RECORD_ID; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
-        characterDataInfo.level = 1;
-        characterDataInfo.HP = 500; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
-        characterDataInfo._NineAndTwo = null;
+        CharacterDataInfo characterDataInfo = new CharacterDataInfo
+        {
+            monsterOfPlayerId = localID,
+            monsterId = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
+            level = 1,
+            HP = 500, //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
+            _NineAndTwo = null
+        };
         return characterDataInfo;
     }
 }
 
-public class passiveSkillConfigs
+public class PassiveSkillConfigs
 {
     public MoveType moveType;
     public bool hasDefend;
@@ -59,7 +53,7 @@ public class passiveSkillConfigs
     public SkillConfig DConfig;
     public SkillConfig RConfig;
 
-    public passiveSkillConfigs(MoveType moveType,bool hasDefend,RushType RStyle)
+    public PassiveSkillConfigs(MoveType moveType,bool hasDefend,RushType RStyle)
     {
         this.moveType = moveType;
         this.hasDefend = hasDefend;
@@ -99,15 +93,12 @@ public class passiveSkillConfigs
                 break;
         }
 
-        if (hasDefend)
-        {
-            this.DConfig = new SkillConfig
+        this.DConfig = hasDefend
+            ? new SkillConfig
                     (
                         null, null, "Defend", "防衛", 0, stateType.NONE, null, 0, 0
-                    );
-        }else{
-            this.DConfig = null;
-        }
+                    )
+            : null;
 
         switch (RStyle)
         {
@@ -136,8 +127,8 @@ public class passiveSkillConfigs
     }
 }
 
-namespace UnityEngine.UI
-{
+//namespace UnityEngine.UI
+//{
 	//public class CharResourceDataBase : ScriptableObject {
  //       public string type;
 	//	public CharacterResourceInfo[] chars;
@@ -217,7 +208,7 @@ namespace UnityEngine.UI
  //           return _nums;
  //       }
 	//}
-}
+//}
 	
 //public class CharDatabaseEditor
 //{

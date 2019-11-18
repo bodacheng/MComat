@@ -180,13 +180,13 @@ public partial class FightAttriCalReference : MonoBehaviour
                     V_Damage deathknockOff;
                     deathknockOff = new V_Damage(
                                    DamageType.deathknockoff,
-                                  processingD.force_direction,
+                                  processingD._WeaponPosAdjustMode,
                                   processingD.damageHappenPoint,
-                                  processingD.toWho,
+                                  processingD.AttackerT,
                                   processingD.fromWeapon);
                     ApplyDamage(deathknockOff);
                     _Center.IsDead.Value = true;
-                    _Center.AIStateRunner.changeState("Death");
+                    _Center.AIStateRunner.ChangeState("Death");
                     break; //重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
                 }
             }
@@ -235,7 +235,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.heavy_damage;
                             DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -244,7 +244,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
@@ -254,7 +254,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.light_damage;
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else
                         {
                             DamagesDIC[DamageType.light_block].Add(_dmg);
@@ -264,7 +264,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
@@ -279,7 +279,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.supper_damage;
                             DamagesDIC[DamageType.supper_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -288,7 +288,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -298,7 +298,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         {
                             _dmg.damage_type = DamageType.light_damage;
                             DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.light_block].Add(_dmg);
                         }
@@ -307,7 +307,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                         if (_Center._ResistanceManager.Resistance.Value == 0)
                         {
                             DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                            _Center.AIStateRunner.changeState("Hit");
+                            _Center.AIStateRunner.ChangeState("Hit");
                         }else{
                             DamagesDIC[DamageType.heavy_block].Add(_dmg);
                         }
@@ -322,7 +322,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     {
                         _dmg.damage_type = DamageType.knockOff_damage;
                         DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
-                        _Center.AIStateRunner.changeState("KnockOff");
+                        _Center.AIStateRunner.ChangeState("KnockOff");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -331,7 +331,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         DamagesDIC[DamageType.supper_damage].Add(_dmg);
-                        _Center.AIStateRunner.changeState("Hit");
+                        _Center.AIStateRunner.ChangeState("Hit");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -341,7 +341,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     {
                         _dmg.damage_type = DamageType.heavy_damage;
                         DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                        _Center.AIStateRunner.changeState("Hit");
+                        _Center.AIStateRunner.ChangeState("Hit");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -350,7 +350,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     if (_Center._ResistanceManager.Resistance.Value == 0)
                     {
                         DamagesDIC[DamageType.supper_damage].Add(_dmg);
-                        _Center.AIStateRunner.changeState("Hit");
+                        _Center.AIStateRunner.ChangeState("Hit");
                     }else{
                         DamagesDIC[DamageType.heavy_block].Add(_dmg);
                     }
@@ -359,7 +359,7 @@ public partial class FightAttriCalReference : MonoBehaviour
 				break;
 			case DamageType.knockOff_damage:
                 DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
-                _Center.AIStateRunner.changeState("KnockOff");
+                _Center.AIStateRunner.ChangeState("KnockOff");
                 break;
             case DamageType.deathknockoff:
                 DamagesDIC[DamageType.deathknockoff].Add(_dmg);
@@ -400,7 +400,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     {
         return managingEventDamage;
     }
-    public void eventAttackHitApprove(E_Damage e)
+    public void EventAttackHitApprove(E_Damage e)
     {
         this.Event_Attack_Successed_List.Add(e);
     }

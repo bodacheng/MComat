@@ -58,7 +58,7 @@ public class Move_State2 : AI_State
 
     public override void C_State_enter()
     {
-        if (this._AIStateRunner.getLastState() == this)
+        if (this._AIStateRunner.GetLastState() == this)
             return;
 
         personality_Events.CloseAllPersonalityEffects();
@@ -162,7 +162,7 @@ public class Move_State2 : AI_State
         if (!_DATA_CENTER.IsGrounded())
             use_direction.y = -1;
 
-        if (this._AIStateRunner.getLastState() == this)
+        if (this._AIStateRunner.GetLastState() == this)
             return;
         //this.AI_DATA_CENTER.switchToMocaPhysicMaterial();
         this.time_counter = 0f;
@@ -300,7 +300,7 @@ public class Move_State2 : AI_State
 
 	public override void AI_State_exit()
 	{
-        if (this._AIStateRunner.getNowState() == this)
+        if (this._AIStateRunner.GetNowState() == this)
             return;
         use_speed = speed;
 		time_counter = 0f;

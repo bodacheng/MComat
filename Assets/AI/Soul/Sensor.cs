@@ -225,7 +225,7 @@ public class Sensor : MonoBehaviour {
                         {
                             for (int k = 0; k < searchingMembers.Count; k++)
                             {
-                                if (searchingMembers[k].AIStateRunner.getCurrentStateNum() != "Death" && searchingMembers[k].AIStateRunner.getCurrentStateNum() != "Empty")
+                                if (searchingMembers[k].AIStateRunner.GetCurrentStateNum() != "Death" && searchingMembers[k].AIStateRunner.GetCurrentStateNum() != "Empty")
                                     target_list.Add(searchingMembers[k].WholeT.gameObject);
                             }
                         }

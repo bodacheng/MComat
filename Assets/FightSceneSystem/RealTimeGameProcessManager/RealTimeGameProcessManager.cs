@@ -74,7 +74,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }
         else
         {
-            _mobileInputsManager.FocusCharInputs(focusingChar.AIStateRunner.getInputManager(),focusingChar.Zokusei);
+            _mobileInputsManager.FocusCharInputs(focusingChar.AIStateRunner.GetInputManager(),focusingChar.Zokusei);
             _mobileInputsManager.TurnOnButtons();
         }
 	}

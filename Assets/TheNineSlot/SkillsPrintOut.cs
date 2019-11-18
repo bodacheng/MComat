@@ -70,7 +70,7 @@ namespace mainMenu
                     {
                         SkillShowT.gameObject.SetActive(true);
                         this.focusingCharacterData.Animation_Manger.PlayLayerAnim(null);
-                        this.focusingCharacterData.Animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.unstarted);
+                        this.focusingCharacterData.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
                         this.showingSkill = false;
                         //this.focusingCharacterData.blendShapeProxy.setBlendShapeGrdually(new BlendShapeKey("Angry"), 0f, 50);
                     }
@@ -178,7 +178,7 @@ namespace mainMenu
                 if (this.focusingCharacterData.Animation_Manger != null)
                 {
                     SkillShowT.gameObject.SetActive(false);
-                    this.focusingCharacterData.Animation_Manger.animationTrigger(_state_Transition_Set.StateKey);
+                    this.focusingCharacterData.Animation_Manger.AnimationTrigger(_state_Transition_Set.StateKey);
                 }
                 else
                 {
@@ -215,7 +215,7 @@ namespace mainMenu
                         break;
                 }
                 this.showingSkill = true;
-                this.focusingCharacterData.Animation_Manger.animationTrigger(keyname);
+                this.focusingCharacterData.Animation_Manger.AnimationTrigger(keyname);
                 //if (this.focusingCharacterData.blendShapeProxy)
                     //this.focusingCharacterData.blendShapeProxy.setBlendShapeGrdually(new BlendShapeKey("Angry"), 1f, 50);
             }
@@ -280,7 +280,7 @@ namespace mainMenu
             {
                 sKillScriptReader(_watchingCharacterResourceInfo.type,
                                   _watchingCharInfo._NineAndTwo,
-                                  _watchingCharacterResourceInfo.getPassiveSkillConfigs(),
+                                  _watchingCharacterResourceInfo.GetPassiveSkillConfigs(),
                                   _watchingCharInfo._NineAndTwo.level);
             }
 
@@ -293,7 +293,7 @@ namespace mainMenu
 
         //从这个环节看，只要AIStateRunner模块有一个把九宫格信息转成最终技能组的函数，就能和SkillsPrintOut模块接轨
         private Button newShow;
-        public void sKillScriptReader(string type, NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level)
+        public void sKillScriptReader(string type, NineAndTwo nineAndTwo, PassiveSkillConfigs passiveSkillConfigs, int AI_level)
         {
             skillName.text = "";
 

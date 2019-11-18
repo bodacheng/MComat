@@ -1378,15 +1378,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2.529982
-      outSlope: 2.529982
+      inSlope: 13.415237
+      outSlope: 13.415237
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.4877381
+      outWeight: 0.12366734
     - serializedVersion: 3
-      time: 0.49854308
-      value: 10.844487
+      time: 0.3237689
+      value: 2.454564
       inSlope: 0.3501904
       outSlope: 0.3501904
       tangentMode: 0
@@ -1394,13 +1394,22 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.4696136
     - serializedVersion: 3
-      time: 1.0071487
-      value: 0.04959351
-      inSlope: -1.903146
-      outSlope: -1.903146
-      tangentMode: 0
+      time: 0.66687775
+      value: 0
+      inSlope: -12.397257
+      outSlope: 0
+      tangentMode: 65
       weightedMode: 0
-      inWeight: 0.099697754
+      inWeight: 0.1025307
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1411,29 +1420,39 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 29.596102
+      outSlope: 29.596102
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.12171425
+    - serializedVersion: 3
+      time: 0.99380493
+      value: 15
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
+      time: 12.354809
+      value: 15
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
-  light_damage_force: 2
-  heavy_damage_force: 8
-  knockoffMaxtime: 4
+  knockoffMaxtime: 2
+  defendHP: 20
+  lightBlockLastingTime: 0.3
+  heavyBlockLastingTime: 0.5
 --- !u!4 &1558915669
 Transform:
   m_ObjectHideFlags: 0

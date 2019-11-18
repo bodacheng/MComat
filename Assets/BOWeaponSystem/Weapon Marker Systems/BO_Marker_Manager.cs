@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System;
-using UnityEngine.SceneManagement; // 考虑到生成对象池所用的大量时间从而加入这个以根据场景判断是不是进行对象池创建。
 
 // 18 年年初
 //该类不进行网络值同步，但个别值向其他组件看齐
@@ -11,7 +8,8 @@ using UnityEngine.SceneManagement; // 考虑到生成对象池所用的大量时
 public enum WeaponPosAdjustMode
 {
     pushToMidForward = 1,
-    draw = 2
+    draw = 2,
+    explosion = 3
 }
 
 public enum WeaponMode
@@ -49,6 +47,7 @@ namespace HittingDetection
 
         private bool _markersAreEnabled;
         private TeamConfig teamConfig;
+        private Transform attackerWholeTransform;
         private Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         private Transform _MarkersParent;
         private Transform onEnableEffectT;
@@ -123,9 +122,10 @@ namespace HittingDetection
             SetTeamConfig(null);
         }
 
-        public void SetHolderCenter(Transform T)
+        public void SetReferenceTransformInfo(Transform centerT,Transform WholeT)
         {
-            _WeaponHolderCenter = T;
+            _WeaponHolderCenter = centerT;
+            attackerWholeTransform = WholeT;           
         }
         public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
@@ -261,12 +261,12 @@ namespace HittingDetection
         {
             public HitOnHealthBody(FightAttriCalReference _BO_Health, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
             {
-                this._BO_Health = _BO_Health;
+                this._victimFightAttriCalReference = _BO_Health;
                 this._Startpoint = _Startpoint;
                 this._Direction = _Direction;
                 this.marker_point = marker_point;
             }
-            public FightAttriCalReference _BO_Health;
+            public FightAttriCalReference _victimFightAttriCalReference;
             public Vector3 _Startpoint, _Direction, marker_point;
         }
 

@@ -7,24 +7,17 @@ public class Knock_Off_State : AI_State
 {
     readonly float knock_off_time;
     float time_counter;
-    readonly bool if_r_rotation;
-    Vector3 startPoint;
-    Quaternion startquaternion;
-    private Matrix4x4 m;
     DecompositionerPool superHitPool;
-    bool Dropped;
+    Vector3 _xz;    
+    bool touchedBoundary;
+    
+    // 原先的MultiplyPoint3x4击飞曲线计划相关
+    //Quaternion startquaternion;
+    //Matrix4x4 Matrix;
     
     public Knock_Off_State(float knock_off_time)
     {
         this.knock_off_time = knock_off_time;
-        if_r_rotation = false;
-        StateType = stateType.KnockOff;
-    }
-
-    public Knock_Off_State(float knock_off_time,bool if_r_rotation)
-    {
-        this.knock_off_time = knock_off_time;
-        this.if_r_rotation = if_r_rotation;
         StateType = stateType.KnockOff;
     }
 
@@ -41,53 +34,54 @@ public class Knock_Off_State : AI_State
     public override bool Force_enter_condition() => _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
 
     Decompositioner processingBlood;
-    string KnockOffSparkPersonalEffectPath;    
-    List<AnimationClip> knockoffAnimations;    
+    string KnockOffSparkPersonalEffectPath;
+    List<AnimationClip> knockoffAnimations;
+    V_Damage processingD;
     public override void AI_State_enter()
     {
         base.AI_State_enter();
-        Dropped = false;
         time_counter = 0;
+        alreadyFinishedZTranslation = 0;
+        alreadyFinishedYTranslation = 0;
+        touchedBoundary = false;
         _DATA_CENTER.SetUsingGravity(false);
         _FightAttriCalReference.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _FightAttriCalReference.EnableAllHitBoxCollider(false);
         personality_Events.CloseAllPersonalityEffects();
-        _FightAttriCalReference.ClearDamageLists();
         _FightAttriCalReference.plusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
-        //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
-        
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);        
         int ranDom = (int)Random.Range(0,knockoffAnimations.Count);
-        Animation_Manger.animationTrigger(knockoffAnimations[ranDom]);
-        
+        Animation_Manger.AnimationTrigger(knockoffAnimations[ranDom]);
 		if (_FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0)
         {
-            KnockOffSparkPersonalEffectPath = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].fromWeapon?.personalEffectPath;
+            processingD = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0];
+            KnockOffSparkPersonalEffectPath = processingD.fromWeapon?.personalEffectPath;
             superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
             if (superHitPool != null)
             {
                 processingBlood = superHitPool.Rent();
-                processingBlood.transform.position = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].damageHappenPoint;
+                processingBlood.transform.position = processingD.damageHappenPoint;
                 processingBlood.transform.rotation = Quaternion.identity;
             }
-            startPoint = gameObject.transform.position;
-            startquaternion = Quaternion.Euler(_FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].force_direction);
-            m = Matrix4x4.TRS(startPoint, startquaternion, Vector3.one);
-            if (if_r_rotation)
-            {
-                this.RotateToDirection(_FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].force_direction, 20f, true);
-            }
+            _xz = processingD.AttackerT.forward;
+            
             _FightAttriCalReference.EatDamage(DamageType.knockOff_damage);
+            StartPoint = gameObject.transform.position;
+            
+            // 原先的MultiplyPoint3x4击飞曲线计划相关
+            //startquaternion =  Quaternion.LookRotation(processingD.AttackerT.forward, Vector3.up);
+            //Matrix = new Matrix4x4();
+            //Matrix = Matrix4x4.TRS(temp, startquaternion, Vector3.one * 1);
         }
-        _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Clear();
+        _FightAttriCalReference.ClearDamageLists();               
     }
 
     public override bool Capacity_exit_condition()
     {
-        return (this.time_counter > this.knock_off_time + 1f );
+        return (this.time_counter > this.knock_off_time);
     }
 
     public override void AI_State_exit()
@@ -99,25 +93,52 @@ public class Knock_Off_State : AI_State
         _Rigidbody.velocity = Vector3.zero;
     }
 
+    Vector3 StartPoint;
+    float alreadyFinishedZTranslation,alreadyFinishedYTranslation;
     public override void _State_FixedUpdate1()
     {
         time_counter += Time.fixedDeltaTime;
-        //if (time_counter > 0.6f)
-        //{
-        //    _SkillCancelFlag.turn_on_flag();
-        //}
-        if (!Dropped)
+        if (!touchedBoundary)
         {
-            RotateToVelocityNegative(3f, true);
-            Debug.Log("y"+ FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter) * 1f);
-            gameObject.transform.position = m.MultiplyPoint3x4(new Vector3(0, FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter) * 0.01f, 
-                                                                                FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter) * 0.01f));
-            //if (_DATA_CENTER.IsGrounded())
-                //Dropped = true;
+            if (_DATA_CENTER.onBattleGroundBundary)
+            {
+                touchedBoundary = true;
+                StartPoint = gameObject.transform.position;
+                _xz = Vector3.zero - StartPoint;_xz.y = 0;_xz = _xz.normalized;
+                alreadyFinishedZTranslation = FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter);
+                alreadyFinishedYTranslation = FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter);
+            }
+        }else{
+            touchedBoundary = _DATA_CENTER.onBattleGroundBundary;
         }
-        else{
-            _Rigidbody.velocity = Vector3.zero;
-        }
+
+        gameObject.transform.position = StartPoint + 
+        _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter) - alreadyFinishedZTranslation) +  
+        Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter) - alreadyFinishedYTranslation);
+        
+        // 原先的MultiplyPoint3x4击飞曲线计划相关
+        //if (!touchedBoundary)
+        //{
+        //    if (_DATA_CENTER.onBattleGroundBundary)
+        //    {
+        //        touchedBoundary = true;
+        //        temp = gameObject.transform.position;
+        //        temp.y = 0;
+        //        startquaternion = Quaternion.LookRotation(Vector3.zero - temp, Vector3.up);
+        //        temp = gameObject.transform.position;
+        //        Matrix = Matrix4x4.TRS(temp, startquaternion, Vector3.one * 1);
+        //        alreadyFinishedZTranslation = FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter);
+        //        alreadyFinishedYTranslation = gameObject.transform.position.y;
+        //    }
+        //}else{
+        //    touchedBoundary = _DATA_CENTER.onBattleGroundBundary;
+        //}
+        //gameObject.transform.position = Matrix.MultiplyPoint3x4(new Vector3(0, 
+        //FightGlobalSetting._knockOffyAnimationCurve.Evaluate( time_counter ) * 1f - alreadyFinishedYTranslation, 
+        //FightGlobalSetting._knockOffzAnimationCurve.Evaluate( time_counter ) * 1f - alreadyFinishedZTranslation));
+        
+        if (!_DATA_CENTER.IsGrounded())
+            RotateToVelocityNegative(3f, true);           
     }
 }
 

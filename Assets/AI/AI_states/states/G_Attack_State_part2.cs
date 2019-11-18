@@ -93,7 +93,7 @@ public partial class G_Attack_State : AI_State
                     this.Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
                     if (_phase == phase.reached)
                     {
-                        Animation_Manger.animationTrigger(clip_name);
+                        Animation_Manger.AnimationTrigger(clip_name);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         lastFrameRotateAngle = 0;
                         thisFrameRotateAngle = 0;

@@ -218,7 +218,7 @@ namespace mainMenu
                 );
 
                 if (aI_DATA_CENTER.AIStateRunner != null)
-                    aI_DATA_CENTER.AIStateRunner.changeState("Empty");
+                    aI_DATA_CENTER.AIStateRunner.ChangeState("Empty");
             }
             else
                 yield break;

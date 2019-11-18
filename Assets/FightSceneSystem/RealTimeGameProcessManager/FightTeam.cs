@@ -67,7 +67,7 @@ public partial class FightTeam : MonoBehaviour
     {
         foreach(Data_Center a_char in teamMembers.values)
         {
-            a_char._FightAttriCalReference.CurrentHp.Value = 300f;
+            a_char._FightAttriCalReference.CurrentHp.Value = 9900f;
             a_char._FightAttriCalReference.CurrentHp.Subscribe(x => {RefreshHPBar(a_char,x);});            
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
@@ -182,6 +182,9 @@ public partial class FightTeam : MonoBehaviour
             case TeamMode.rotation:
                 Rotation_mode_start();
             break;
+            case TeamMode.test:
+                MultiRaid_mode_start();
+            break;
         }
     }
     
@@ -210,7 +213,6 @@ public partial class FightTeam : MonoBehaviour
             {
                 CharacterDataInfo _one = MembersSets.Get(keys.Key,key);
                 _one._NineAndTwo = new NineAndTwo();
-                _one._NineAndTwo.moveType = MoveType.Test;
                 IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
                 yield return character_datacenter;
                 Data_Center data_Center = (Data_Center)character_datacenter.Current;

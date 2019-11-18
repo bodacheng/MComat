@@ -37,7 +37,7 @@ public class Dash_Back_State : AI_State
 
     public override bool Enter_condition_priority2()
     {
-        return (_FightAttriCalReference.IFgettingDamage() && this._FightAttriCalReference.CriticalGauge > 95) || Sensor.getNearbyDamagingWeaponColliders().Count > 0;
+        return Sensor.getNearbyDamagingWeaponColliders().Count > 0;
     }
 
     //public override bool enter_condition_priority3()
@@ -54,10 +54,10 @@ public class Dash_Back_State : AI_State
     {
         base.AI_State_enter();
         _Animator.applyRootMotion = true;
-        this._Animator.SetFloat("speed", 0f);
-        this.Sensor.OneRoundDetectionStart(2);
+        _Animator.SetFloat("speed", 0f);
+        Sensor.OneRoundDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
-        this.personality_Events.CloseAllPersonalityEffects();
+        personality_Events.CloseAllPersonalityEffects();
         Vector3 threatsComingDirection = Vector3.zero;
         if (Sensor.getEnemiesByDistance(true).Count > 0)
             threatsComingDirection = Sensor.getEnemiesByDistance(false)[0].transform.position - gameObject.transform.position;
@@ -72,21 +72,21 @@ public class Dash_Back_State : AI_State
                     threatsComingDirection = - gameObject.transform.position + Sensor.getInnerEnemiesColliders()[0].transform.position;
             }
         }
-        this.RotateToDirection(threatsComingDirection, 100000f, true);
-        this.Animation_Manger.animationTrigger(clip_name);
+        RotateToDirection(threatsComingDirection, 100000f, true);
+        Animation_Manger.AnimationTrigger(clip_name);
 		
-        if (this._AIStateRunner.getLastState().StateType == stateType.Def)
-        {
-            Defend_State df = (Defend_State)this._AIStateRunner.getLastState();
-            if (df.block_time_counter > 0)
-            {
-                df.block_time_counter = 0;
-                this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
-                _FightAttriCalReference.ClearDamageLists();
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
-                this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
-            }
-        }
+        //if (_AIStateRunner.getLastState().StateType == stateType.Def)
+        //{
+        //    Defend_State df = (Defend_State)this._AIStateRunner.getLastState();
+        //    if (df.block_time_counter > 0)
+        //    {
+        //        df.block_time_counter = 0;
+        //        this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
+        //        _FightAttriCalReference.ClearDamageLists();
+        //        EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
+        //        this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
+        //    }
+        //}
     }
 
     public override void _State_FixedUpdate1()

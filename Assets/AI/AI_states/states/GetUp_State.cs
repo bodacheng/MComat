@@ -40,7 +40,7 @@ public class GetUp : AI_State {
         this.counter = 0f;
         this._Animator.SetFloat("speed", 0f);
         this.Sensor.OneRoundDetectionStart(5);
-        this.Animation_Manger.animationTrigger(clip_name);
+        this.Animation_Manger.AnimationTrigger(clip_name);
 	}
 
     public override void C_State_enter()

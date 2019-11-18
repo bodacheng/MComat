@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -26,9 +25,15 @@ public class BoundaryControllByGod : MonoBehaviour {
     public List<ParticleSystem> BattleRingPSs;
     private ParticleSystem BattleRingPS;
     private float BattleRingRadius = 20f;
+    public static float _BattleRingRadius;
     
     public IDictionary<Team, List<Data_Center>> AllMembers;//双方队伍人员字典，和netfightscene模块里同名变量统一。
 
+    private void Awake()
+    {
+        _BattleRingRadius = BattleRingRadius;
+    }
+    
     void Start()
     {
         int choose = Random.Range(0,BattleRingPSs.Count);
@@ -47,6 +52,7 @@ public class BoundaryControllByGod : MonoBehaviour {
     public void ChangeMagicRingRadius(float targetradius)
     {
         BattleRingRadius = targetradius;
+        _BattleRingRadius = BattleRingRadius;
         var sh = BattleRingPS.shape;
         void changeRadius(float x)
         {

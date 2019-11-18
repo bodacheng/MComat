@@ -12,17 +12,18 @@ public enum AIMoveStyle
 
 public class Move_State : AI_State
 {
-	private float speed;
-	private float time_limit, time_counter;
+	private readonly float speed;
+    private readonly float time_limit;
+    private readonly AIMoveStyle _AIMoveStyle;
+    private float time_counter;
     private Vector3 use_direction;
     private AIMoveDirection moveDirection;
-    private AIMoveStyle _AIMoveStyle;
     private Transform mainCam;
     private Quaternion screenMovementSpace;
     private Vector3 screenMovementForward, screenMovementRight;
     private List<GameObject> EnemiesByDistance;
 
-    private enum AIMoveDirection : int
+    private enum AIMoveDirection
     {
         stay = 0,
         towardsEnemy = 1,
@@ -51,15 +52,14 @@ public class Move_State : AI_State
 
     public override bool Strategic_exit_condition()
     {
-        if (Sensor.getInnerEnemiesColliders().Count > 0 ||
-            Sensor.getNearbyDamagingWeaponColliders().Count > 0|| 
-            Sensor.getOutterDamagingWeaponColliders().Count > 0)//|| Sensor.getInnerRangeWallColliders().Count > 0
-        {
-            return true;
-        }return false;
+        return Sensor.getInnerEnemiesColliders().Count > 0 ||
+            Sensor.getNearbyDamagingWeaponColliders().Count > 0 ||
+            Sensor.getOutterDamagingWeaponColliders().Count > 0
+            ? true
+            : false;
     }
 
-    private bool timeup()
+    private bool Timeup()
     {
         switch(moveDirection)
         {
@@ -217,7 +217,7 @@ public class Move_State : AI_State
             return;
         }
 
-        if (timeup())
+        if (Timeup())
         {
             decideDirection();
             this.time_counter = 0f;

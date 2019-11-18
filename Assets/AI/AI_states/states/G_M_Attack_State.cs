@@ -71,14 +71,14 @@ public class G_M_Attack_State : AI_State {
 
     public bool strategic_enter_condition()
     {
-        if (this._AIStateRunner.getNowState() != null &&
-            (this._AIStateRunner.getNowState().StateType == stateType.GI || 
-            this._AIStateRunner.getNowState().StateType == stateType.GR || 
-            this._AIStateRunner.getNowState().StateType == stateType.GM || 
-            this._AIStateRunner.getNowState().StateType == stateType.AC) && this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
-            return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
+        if (this._AIStateRunner.GetNowState() != null &&
+            (this._AIStateRunner.GetNowState().StateType == stateType.GI || 
+            this._AIStateRunner.GetNowState().StateType == stateType.GR || 
+            this._AIStateRunner.GetNowState().StateType == stateType.GM || 
+            this._AIStateRunner.GetNowState().StateType == stateType.AC) && this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
+            return this.CheckToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
         if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
-            return (this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges));
+            return (this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges));
         return false;
     }
 
@@ -104,7 +104,7 @@ public class G_M_Attack_State : AI_State {
         _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
 		_Animator.applyRootMotion = true;
         //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
-        Animation_Manger.animationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name);
 	}
 
 	public override bool Capacity_exit_condition()

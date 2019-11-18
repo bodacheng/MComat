@@ -56,7 +56,7 @@ public class Jump_State : AI_State
 
     public override bool Enter_condition_priority2()
 	{   
-        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0  && this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges))
+        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0  && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges))
         {
             return true;
         }
@@ -132,9 +132,9 @@ public class Jump_State : AI_State
         jumpDirection = jumpDirection.normalized * forward_force;
         this.RotateToDirection(jumpDirection, 100000f, true);
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
-        if (ifVectorClean(jumpDirection))
+        if (IfVectorClean(jumpDirection))
             _Rigidbody.velocity = jumpDirection;
-        Animation_Manger.animationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name);
     }
 
     public override void C_State_enter()
@@ -172,9 +172,9 @@ public class Jump_State : AI_State
         jumpDirection = jumpDirection.normalized * forward_force;
         this.RotateToDirection(jumpDirection, 9999f, true);
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
-        if (ifVectorClean(jumpDirection))
+        if (IfVectorClean(jumpDirection))
 		    _Rigidbody.velocity = jumpDirection;
-        Animation_Manger.animationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name);
     }
 
 	public override void _State_FixedUpdate1()
@@ -183,7 +183,7 @@ public class Jump_State : AI_State
         {
             if (_DATA_CENTER.IsGrounded())
             {
-                if (ifVectorClean(jumpDirection))
+                if (IfVectorClean(jumpDirection))
                     _Rigidbody.velocity = jumpDirection;
                 jumpSuccessed = false;
             }else{

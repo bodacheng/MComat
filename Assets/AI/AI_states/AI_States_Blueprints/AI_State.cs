@@ -105,7 +105,7 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            Animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.unstarted);
+            Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             _FightAttriCalReference.AT = this.AT;
             this._FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
         }
@@ -118,7 +118,7 @@ namespace Soul
         // Process when exit the state 
         public virtual void AI_State_exit()
         {
-            Animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.unstarted);
+            Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             this.Sensor.OneRoundDetectionStart(5);
         }
         
@@ -144,7 +144,7 @@ namespace Soul
         {
             this._State_FixedUpdate2();
         }
-
+        
         #region state basic methods
 
         protected bool DetectApprovedEventAttack()
@@ -164,7 +164,7 @@ namespace Soul
             }
         }
 
-        protected void eventAttackEnderProcess()
+        protected void EventAttackEnderProcess()
         {
             FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();
             if (BO_Health.GetManagingEventDamage() != null)
@@ -178,7 +178,7 @@ namespace Soul
         bool inner;
         bool mid;
         bool far;
-        protected bool checkToEnemyDisEnterCondition(BehaviorEnterRange[] behaviorEnterRanges)
+        protected bool CheckToEnemyDisEnterCondition(BehaviorEnterRange[] behaviorEnterRanges)
         {
             if (behaviorEnterRanges != null)
             {
@@ -194,16 +194,13 @@ namespace Soul
                         switch (behaviorEnterRanges[i])
                         {
                             case BehaviorEnterRange.inner_range:
-                                if (this.Sensor.getInnerEnemiesColliders().Count > 0)
-                                    inner = true;
+                                inner |= this.Sensor.getInnerEnemiesColliders().Count > 0;
                                 break;
                             case BehaviorEnterRange.mid_range:
-                                if (this.Sensor.getMidEnemiesColliders().Count > 0)
-                                    mid = true;
+                                mid |= this.Sensor.getMidEnemiesColliders().Count > 0;
                                 break;
                             case BehaviorEnterRange.far_range:
-                                if (this.Sensor.getfarEnemiesColliders().Count > 0)
-                                    far = true;
+                                far |= this.Sensor.getfarEnemiesColliders().Count > 0;
                                 break;
                             case BehaviorEnterRange.out_of_range:
                                 if (this.Sensor.getInnerEnemiesColliders().Count == 0
@@ -288,7 +285,7 @@ namespace Soul
             return this._Rigidbody.velocity.magnitude;
         }
 
-        public float use_acc = 0;
+        public float use_acc;
         public float Move_AddForce(Vector3 forcedirection, float acceleration, bool ignoreY)//废函数。
         {
             if (this._Rigidbody == null)
@@ -331,7 +328,7 @@ namespace Soul
         }
 
         float current_speed;
-        public void clampVelocity(float max_speed)
+        public void ClampVelocity(float max_speed)
         {
             current_speed = this._Rigidbody.velocity.magnitude;
             if (current_speed > max_speed)
@@ -366,10 +363,7 @@ namespace Soul
         // RotateToVelocity in reverse
         public void RotateToVelocityNegative(float turnSpeed, bool ignoreY)
         {
-            if (ignoreY)
-                dir = -new Vector3(this._Rigidbody.velocity.x, 0f, this._Rigidbody.velocity.z);
-            else
-                dir = -this._Rigidbody.velocity;
+            dir = ignoreY ? -new Vector3(this._Rigidbody.velocity.x, 0f, this._Rigidbody.velocity.z) : -this._Rigidbody.velocity;
 
             if (dir.magnitude > 0.1)
             {
@@ -378,41 +372,44 @@ namespace Soul
                 this._Rigidbody.MoveRotation(slerp);
             }
         }
+        
+        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Transform attackerTransform ,Transform victimT, WeaponPosAdjustMode weaponPosAdjustMode)
+        {
+            damageHappenPoint.y = 0;
+            switch (weaponPosAdjustMode)
+            {
+                case WeaponPosAdjustMode.draw:
+                    return damageHappenPoint;
+                case WeaponPosAdjustMode.pushToMidForward:
+                    if (attackerTransform != null)
+                    {
+                        return (Vector3.Dot(damageHappenPoint - attackerTransform.position, attackerTransform.forward) * attackerTransform.forward + attackerTransform.position);
+                    }
+                    return (victimT.position - damageHappenPoint).normalized + victimT.position;
+                case WeaponPosAdjustMode.explosion:
+                    return (victimT.position - damageHappenPoint).normalized + victimT.position;
+                default:
+                    return (victimT.position - damageHappenPoint).normalized + victimT.position;
+            }
+        }
 
         // compare two Quaternions
-        public bool compareQuaternionApproximately(Quaternion A, Quaternion B)
+        public bool CompareQuaternionApproximately(Quaternion A, Quaternion B)
         {
-            if (Mathf.Approximately(A.x, B.x)
+            return Mathf.Approximately(A.x, B.x)
                 &&
                 Mathf.Approximately(A.y, B.y)
                 &&
                 Mathf.Approximately(A.z, B.z)
                 &&
                 Mathf.Approximately(A.w, B.w)
-               )
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                ? true
+                : false;
         }
 
-        public bool ifVectorClean(Vector3 rot)
+        public bool IfVectorClean(Vector3 rot)
         {
-            if (rot == Vector3.zero)
-                return false;
-
-            if (float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z))
-            {
-                return false;
-            }
-            if (float.IsInfinity(rot.x) || float.IsInfinity(rot.y) || float.IsInfinity(rot.z))
-            {
-                return false;
-            }
-            return true;
+            return rot != Vector3.zero && !float.IsNaN(rot.x) && !float.IsNaN(rot.y) && !float.IsNaN(rot.z) && !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
         }
         #endregion
     }

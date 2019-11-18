@@ -35,14 +35,14 @@ namespace HittingDetection
                                     !_Shields_Hit.Contains(_markers[i]._hits[hit_target_index].collider.transform))
                                 {
                                     TheS = _markers[i]._hits[hit_target_index].collider.gameObject.GetComponent<BO_Shield>();
-                                    if (TheS == null || TheS._ParentHealth == null)
+                                    if (TheS == null || TheS._ownerFightAttriCalReference == null)
                                     {
                                         Debug.Log("防御盾构造严重错误");
                                         break;
                                     }
                                     if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
                                         && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
-                                        && _Used_Targets.Contains(TheS._ParentHealth.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
+                                        && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
                                                                                                           //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
                                     {
                                         if (TheS._AdvancedShieldDetection)
@@ -74,11 +74,11 @@ namespace HittingDetection
                                             //就比如说一个弧形攻击，打中盾牌的瞬间这个弧形攻击动作还是会继续，那攻击点由于动画问题穿透了对方的盾牌打到对方身体话，就和我们对攻击防御演出的认识相违背了。
                                             _Shields_Hit.Add(TheS.transform);
                                             HitShield = true;
-                                            _Used_Targets.Add(TheS._ParentHealth.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
+                                            _Used_Targets.Add(TheS._ownerFightAttriCalReference.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
 
                                             _ShiledHitPositions.Add(_markers[i]._hits[hit_target_index].point);
                                             if (_ShiledHitPositions.Count > 0)
-                                                TheS.passHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
+                                                TheS.PassHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
                                             _ShiledHitPositions.Clear();
                                         }
                                     }
@@ -175,14 +175,14 @@ namespace HittingDetection
                                             break;
                                         }
 
-                                        if (TheS._ParentHealth == null)
+                                        if (TheS._ownerFightAttriCalReference == null)
                                         {
                                             break;
                                         }
 
                                         if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
                                             && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
-                                            && _Used_Targets.Contains(TheS._ParentHealth.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
+                                            && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
                                         {
                                             if (TheS._AdvancedShieldDetection)
                                             {
@@ -203,11 +203,11 @@ namespace HittingDetection
                                                 //就比如说一个弧形攻击，打中盾牌的瞬间这个弧形攻击动作还是会继续，那攻击点由于动画问题穿透了对方的盾牌打到对方身体话，就和我们对攻击防御演出的认识相违背了。
                                                 _Shields_Hit.Add(TheS.transform);
                                                 HitShield = true;
-                                                _Used_Targets.Add(TheS._ParentHealth.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
+                                                _Used_Targets.Add(TheS._ownerFightAttriCalReference.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
 
                                                 _ShiledHitPositions.Add(BallDetectHitPool[hit_target_index].ClosestPoint(_markers[i].transform.position));//ClosestPointOnBounds
                                                 if (_ShiledHitPositions.Count > 0)
-                                                    TheS.passHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
+                                                    TheS.PassHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
                                                 _ShiledHitPositions.Clear();
                                             }
                                         }

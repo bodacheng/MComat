@@ -4,22 +4,21 @@ using UnityEngine;
 using Soul;
 
 public class Counter_State : AI_State {
-	private string clip_name;
-    private bool keepRotationAdjustment;
-    private float RotationAdjustmentTime;
-    private float rotate_speed;
-    private int _skillEmergentLevel;    
-    private List<Collider> damagingweaponList;
+	private readonly string clip_name;
+    private readonly bool keepRotationAdjustment;
+    private readonly float RotationAdjustmentTime;
+    private readonly float rotate_speed;
+    private readonly int _skillEmergentLevel;    
+    private readonly List<Collider> damagingweaponList;
 
     private UnityEngine.Events.UnityAction burststart;
     private UnityEngine.Events.UnityAction burstend;
     private customCoroutine burstCoroutine;
 
-    private string burstEventKey;
-
-    private int burstTriggerDamageAmount;
+    private readonly string burstEventKey;
+    private readonly int burstTriggerDamageAmount;
     private int lastframeResistent;
-    private int gotdamageamont = 0;
+    private int gotdamageamont;
     
     public Counter_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, int burstTriggerDamageAmount,int skillEmergentLevel)
     {
@@ -31,7 +30,7 @@ public class Counter_State : AI_State {
         this._skillEmergentLevel = skillEmergentLevel;
     }
     
-    void burstCoroutineConfig(string key)
+    void BurstCoroutineConfig(string key)
     {
         if (key == null)
         {
@@ -92,23 +91,17 @@ public class Counter_State : AI_State {
 
     public override bool Enter_condition_priority1()
     {
-        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0)
-            return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
-        return false;
+        return Sensor.getNearbyDamagingWeaponColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override bool Enter_condition_priority2()
     {
-        if (Sensor.getInnerEnemiesColliders().Count > 0)
-            return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
-        return false;
+        return Sensor.getInnerEnemiesColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override bool Enter_condition_priority3()
     {
-        if (Sensor.getInnerEnemiesColliders().Count > 0)
-            return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
-        return false;
+        return Sensor.getInnerEnemiesColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override void AI_State_enter()
@@ -120,7 +113,7 @@ public class Counter_State : AI_State {
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
         this.personality_Events.CloseAllPersonalityEffects();
-        Animation_Manger.animationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name);
         
         gotdamageamont = 0;
         lastframeResistent = this._ResistanceManager.Resistance.Value;
@@ -132,11 +125,8 @@ public class Counter_State : AI_State {
 
 	public override bool Capacity_exit_condition()
 	{
-        if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
-			return true;
-		else
-			return false;
-	}
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over ? true : false;
+    }
 
 	public override void AI_State_exit()
 	{
@@ -153,20 +143,20 @@ public class Counter_State : AI_State {
                 gotdamageamont++;
             if (gotdamageamont >= this._ResistanceManager.hiddenMethods.GetNextCounterEventDamageTriggerAmount() && this._ResistanceManager.Resistance.Value != 0)
             {
-                this.burstCoroutineConfig(this._ResistanceManager.hiddenMethods.GetNextCounterEventName());
+                this.BurstCoroutineConfig(this._ResistanceManager.hiddenMethods.GetNextCounterEventName());
                 this._BuffsRunner.runSubCoroutineOfState(burstCoroutine);
                 gotdamageamont = -100;//也就是说不再让角色有可能在本状态内再次爆发
             }
         }
         lastframeResistent = this._ResistanceManager.Resistance.Value;
-        singleDirectionRotateProcess(rotateTarget);
+        SingleDirectionRotateProcess(rotateTarget);
 	}
     
     private Vector3 rotateTarget = Vector3.zero;
-    private float lastFrameRotateAngle = 0;
-    private float thisFrameRotateAngle = 0;
-    private float ji = 0f;    
-    void singleDirectionRotateProcess(Vector3 P)
+    private float lastFrameRotateAngle;
+    private float thisFrameRotateAngle;
+    private float ji;    
+    void SingleDirectionRotateProcess(Vector3 P)
     {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)

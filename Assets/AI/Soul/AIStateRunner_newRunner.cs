@@ -33,7 +33,7 @@ namespace Soul
             }
             if (avaliable_forced_Transitions.Count > 0)
             {
-                changeState(avaliable_forced_Transitions[0]);
+                ChangeState(avaliable_forced_Transitions[0]);
                 return; // Once a state is forced to trigger, there is no need for the rest of codes to run at this frame
             }
             #endregion
@@ -50,7 +50,7 @@ namespace Soul
             if (playerMode || _inputManager.ifPlayerIsInputting())
             {
                 if (CurrentStateTransitionSet.exitInput != inputs_defined.Null)
-                    exitCommandFufilled = this.checkInput(CurrentStateTransitionSet.exitInput);
+                    exitCommandFufilled = this.CheckInput(CurrentStateTransitionSet.exitInput);
                 else
                     exitCommandFufilled = true;
             }
@@ -74,7 +74,7 @@ namespace Soul
                         {
                             if (playerMode || _inputManager.ifPlayerIsInputting())
                             {
-                                if ((state_set.enterInput != inputs_defined.Null && this.checkInput(state_set.enterInput)) ||
+                                if ((state_set.enterInput != inputs_defined.Null && this.CheckInput(state_set.enterInput)) ||
                                     state_set.enterInput == inputs_defined.Null)
                                 {
                                     if (try_state.Enter_condition_priority1())
@@ -119,7 +119,7 @@ namespace Soul
                     if (mobileInputsManager.watchingInputManger == this._inputManager)
                         mobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
                     _SkillCancelFlag.turn_off_flag();
-                    changeState(avaliable_casual_Transitions[0].AI_State_Number);
+                    ChangeState(avaliable_casual_Transitions[0].AI_State_Number);
                     return;
                 }
                 else
@@ -172,7 +172,7 @@ namespace Soul
             if (mobileInputsManager.watchingInputManger == this._inputManager)
                  mobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].SPLevel);
             _SkillCancelFlag.turn_off_flag();
-            changeState(TransitionsToRun[next].AI_State_Number);
+            ChangeState(TransitionsToRun[next].AI_State_Number);
         }
 
         public bool haveFirstSkillToTrigger()
@@ -214,11 +214,11 @@ namespace Soul
                 {
                     foreach (AI_State State_Rate_Set in AINext)
                     {
-                        if (this.checkInput(State_Rate_Set.enterInput))
+                        if (this.CheckInput(State_Rate_Set.enterInput))
                         {
                             if (mobileInputsManager.watchingInputManger == this._inputManager)
                                  mobileInputsManager.Skillbuttonexplosion(State_Rate_Set.enterInput, State_Rate_Set.splevel);
-                            changeState(State_Rate_Set.StateKey);
+                            ChangeState(State_Rate_Set.StateKey);
                             return;
                         }
                     }
@@ -248,7 +248,7 @@ namespace Soul
             state_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_state);
             if (try_state != now_state)//避免战斗待机状态重复进入
             {
-                changeState(commandWaitingState.StateKey);
+                ChangeState(commandWaitingState.StateKey);
             }
         }
 
@@ -257,7 +257,7 @@ namespace Soul
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
             if (mobileInputsManager.watchingInputManger == this._inputManager)
                  mobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].splevel);
-            changeState(TransitionsToRun[next].StateKey);
+            ChangeState(TransitionsToRun[next].StateKey);
         }
     }
 }

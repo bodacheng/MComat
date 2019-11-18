@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HittingDetection
 {
@@ -57,9 +55,9 @@ namespace HittingDetection
     public class V_Damage
     {
         public DamageType damage_type;
-        public Vector3 force_direction;
+        public WeaponPosAdjustMode _WeaponPosAdjustMode;
         public Vector3 damageHappenPoint;
-        public FightAttriCalReference toWho;
+        public Transform AttackerT;
         public BO_Marker_Manager fromWeapon;
         public float AT;
 
@@ -67,23 +65,23 @@ namespace HittingDetection
         //public Vector3 testHurtGetFixPos;//这个应该没什么用了。可能在将来删掉
 
         public V_Damage() { }
-        public V_Damage(DamageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, FightAttriCalReference toWho, BO_Marker_Manager fromWeapon)
+        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Transform AttackerT, BO_Marker_Manager fromWeapon)
         {
             this.damage_type = damage_type;
-            this.force_direction = force_direction;
+            this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
             this.damageHappenPoint = damageHappenPoint;
-            this.toWho = toWho;
             this.fromWeapon = fromWeapon;
+            this.AttackerT = AttackerT;
             this.AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             specialApply = SpecialApply.none;
         }
-        public V_Damage(DamageType damage_type, Vector3 force_direction, Vector3 damageHappenPoint, FightAttriCalReference toWho, BO_Marker_Manager fromWeapon,SpecialApply specialApply)
+        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Transform AttackerT, BO_Marker_Manager fromWeapon,SpecialApply specialApply)
         {
             this.damage_type = damage_type;
-            this.force_direction = force_direction;
+            this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
             this.damageHappenPoint = damageHappenPoint;
-            this.toWho = toWho;
             this.fromWeapon = fromWeapon;
+            this.AttackerT = AttackerT;
             this.AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             this.specialApply = specialApply;   
         }

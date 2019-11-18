@@ -180,7 +180,7 @@ public partial class Data_Center : MonoBehaviour
             Shield.gameObject.SetActive(false);
             if (_FightAttriCalReference != null)
             {
-                Shield.iniShield(_TeamConfig, _FightAttriCalReference);
+                Shield.IniShield(_TeamConfig, _FightAttriCalReference);
                 Shield._ShieldBackSpot = this.geometryCenter;
             }
         }
@@ -194,7 +194,7 @@ public partial class Data_Center : MonoBehaviour
             phase2Initialized = true;
         }
         
-        if (AIStateRunner.getReadingNineAndTwo() != _NineAndTwo || AIStateRunner.usingScriptLevel != AI_level)
+        if (AIStateRunner.GetReadingNineAndTwo() != _NineAndTwo || AIStateRunner.usingScriptLevel != AI_level)
         {
             AIStateRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo, AI_level);
             AIStateRunner.IniStates(this);
@@ -245,10 +245,9 @@ public partial class Data_Center : MonoBehaviour
             //Shield.EnableShieldCollider();   
     }
 
-    Vector3 temp;
     void FixedUpdate()
     {
-        if (AIStateRunner.ifRunning())
+        if (AIStateRunner.IfRunning())
         {
             if (usingGravity)
                 GravitySimulation();
@@ -275,7 +274,7 @@ public partial class Data_Center : MonoBehaviour
     }
     
     bool usingGravity = true;
-    float floorY = 0;
+    float floorY;
     public void GroundedCal()
     {
         if (floorCheckers == null)
@@ -294,11 +293,21 @@ public partial class Data_Center : MonoBehaviour
         this.grounded = false;
     }
     
+    Vector3 temp;
     public void GravitySimulation()
     {
         temp = WholeT.position;
-        temp.y = floorY;
-        this.WholeT.transform.position = Vector3.Lerp(this.WholeT.transform.position,temp,10 * Time.fixedDeltaTime);
+        if (temp.y < floorY)
+        {
+            temp.y = floorY;
+            WholeT.transform.position = temp;
+        }
+        if (!this.grounded)
+        {
+            temp.y = floorY;
+            WholeT.transform.position = Vector3.Lerp(WholeT.transform.position,temp,Time.fixedDeltaTime * 10f);
+        }
+            
     }
 
     public bool IsGrounded()

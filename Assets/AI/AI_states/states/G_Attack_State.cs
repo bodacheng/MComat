@@ -116,17 +116,17 @@ public partial class G_Attack_State : AI_State {
         if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             return false;
 
-        if (this._AIStateRunner.getNowState() != null)
+        if (this._AIStateRunner.GetNowState() != null)
         {
-            if (this._AIStateRunner.getNowState().nextAttackStateCanRushFirst == true)
-                return this.checkToEnemyDisEnterCondition(this.InnerAndMidAndFarRanges);
+            if (this._AIStateRunner.GetNowState().nextAttackStateCanRushFirst == true)
+                return this.CheckToEnemyDisEnterCondition(this.InnerAndMidAndFarRanges);
 
             //if (this._AIStateRunner.getNowState().StateType == stateType.GR ||
                 //this._AIStateRunner.getNowState().StateType == stateType.GM ||
                 //this._AIStateRunner.getNowState().StateType == stateType.GI)
                 //return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
         }
-        return this.checkToEnemyDisEnterCondition(this.behaviorEnterRanges);
+        return this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override void AI_State_enter()
@@ -154,14 +154,14 @@ public partial class G_Attack_State : AI_State {
         {
             //一般来说下面这些情况不跑？
             _phase = phase.noRushState;
-            Animation_Manger.animationTrigger(clip_name);
+            Animation_Manger.AnimationTrigger(clip_name);
             return;
         }
 
         if (Sensor.getInnerEnemiesColliders().Count > 0)//内环检测结果
         {
             _phase = phase.reachedFromThebeginning;
-            Animation_Manger.animationTrigger(clip_name);
+            Animation_Manger.AnimationTrigger(clip_name);
             return;
         }
         
@@ -172,13 +172,13 @@ public partial class G_Attack_State : AI_State {
         if (rushingToTarget != null)
         {
             //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
-            if (this._AIStateRunner.getLastState() != null && this._AIStateRunner.getLastState().nextAttackStateCanRushFirst && this.StateType == stateType.GR)
+            if (this._AIStateRunner.GetLastState() != null && this._AIStateRunner.GetLastState().nextAttackStateCanRushFirst && this.StateType == stateType.GR)
             {
                 _phase = phase.needToRush;
                 lastFrameRotateAngle = 0;
                 thisFrameRotateAngle = 0;
                 //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
-                if (Animation_Manger.tryAnimationClip(dash_clip_name) != null)
+                if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)
                     Animation_Manger.PlayLayerAnim(dash_clip_name);
                 else
                 {
@@ -192,14 +192,14 @@ public partial class G_Attack_State : AI_State {
             else
             {
                 _phase = phase.reachedFromThebeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                Animation_Manger.animationTrigger(clip_name);
+                Animation_Manger.AnimationTrigger(clip_name);
                 return;
             }
         }
 
         if (Sensor.getClosestColliderInSensorRange(true,true,true) == null)//外环检测结果.走到这里就是说，如果内外环都没敌人
         {
-            Animation_Manger.animationTrigger(clip_name);
+            Animation_Manger.AnimationTrigger(clip_name);
             _phase = phase.farFromReach;
             return;
         }
@@ -231,7 +231,7 @@ public partial class G_Attack_State : AI_State {
             }
         }
         if (isEventAttackEndState)
-            this.eventAttackEnderProcess();
+            this.EventAttackEnderProcess();
 	}
 
     public override void _State_FixedUpdate1() 
@@ -254,7 +254,7 @@ public partial class G_Attack_State : AI_State {
                 }
                 if (_phase == phase.reached)
                 {
-                    Animation_Manger.animationTrigger(clip_name);
+                    Animation_Manger.AnimationTrigger(clip_name);
                     _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                     lastFrameRotateAngle = 0;
                     thisFrameRotateAngle = 0;

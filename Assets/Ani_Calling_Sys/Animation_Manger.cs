@@ -40,12 +40,11 @@ public partial class Animation_Manger : MonoBehaviour
     private string pre_overrided_anim_name;
     private IDictionary<string , AnimationClip> toLoadAnims;
     public AnimationClip _toUse;
-    public float animationcounter = 0f;
+    public float animationcounter;
     
-    public bool getOnAniTransitionFlag()
+    public bool GetOnAniTransitionFlag()
     {
-        return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") ||
-            Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
+        return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
     }
 
     void Update()
@@ -54,21 +53,21 @@ public partial class Animation_Manger : MonoBehaviour
             animationcounter += Time.deltaTime;
     }
 
-    public void setAnimationPlayingStep(AnimationPlaying_Step _step)
+    public void SetAnimationPlayingStep(AnimationPlaying_Step _step)
     {
         this.Coroutine_Step = _step;
     }
 
-    public void animationTrigger(AnimationClip clip)
+    public void AnimationTrigger(AnimationClip clip)
     {
         this.PlayLayerAnim_clip(clip);
-        this.setAnimationPlayingStep(AnimationPlaying_Step.running);
+        this.SetAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
-    public void animationTrigger(string clip_name)
+    public void AnimationTrigger(string clip_name)
     {
         this.PlayLayerAnim(clip_name);
-        this.setAnimationPlayingStep(AnimationPlaying_Step.running);
+        this.SetAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
     public AnimationPlaying_Step GetAnimationPlayingStep()
@@ -76,16 +75,12 @@ public partial class Animation_Manger : MonoBehaviour
         return Coroutine_Step;
     }
 
-	public AnimationClip tryAnimationClip(string clip_name)
+	public AnimationClip TryAnimationClip(string clip_name)
 	{
 		if (clip_name != null) {
 			toLoadAnims.TryGetValue (clip_name, out _toUse);
-			if (_toUse != null) {
-				return _toUse;
-			} else {
-                return null;
-			}
-		} else {
+            return _toUse ?? null;
+        } else {
 			return null;
 		}
 	}
@@ -103,7 +98,7 @@ public partial class Animation_Manger : MonoBehaviour
         {
             if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.null -> Full Body.full_body_state1"))
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
                     to_be_override_animation_name = "fullbody_empty2";
@@ -111,7 +106,7 @@ public partial class Animation_Manger : MonoBehaviour
                     trigger_name = "fullbody_trigger2";
                     fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
-                else if (clip_name == "" || clip_name == null)
+                else if (string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.full_body_state1 -> Full Body.null";
                     to_be_override_animation_name = null;
@@ -123,7 +118,7 @@ public partial class Animation_Manger : MonoBehaviour
             else
             {
                 //nextStateName = "Full Body.null -> Full Body.full_body_state1";
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
@@ -140,7 +135,7 @@ public partial class Animation_Manger : MonoBehaviour
         {
             if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2"))
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.full_body_state2 -> Full Body.full_body_state1";
                     to_be_override_animation_name = "fullbody_empty1";
@@ -159,7 +154,7 @@ public partial class Animation_Manger : MonoBehaviour
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null"))
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.null -> Full Body.full_body_state1";
                     to_be_override_animation_name = "fullbody_empty1";
@@ -174,7 +169,7 @@ public partial class Animation_Manger : MonoBehaviour
             }
             else
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
                     to_be_override_animation_name = "fullbody_empty2";
@@ -195,7 +190,7 @@ public partial class Animation_Manger : MonoBehaviour
         {
             if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1"))
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.full_body_state1 -> Full Body.full_body_state2";
                     to_be_override_animation_name = "fullbody_empty2";
@@ -214,7 +209,7 @@ public partial class Animation_Manger : MonoBehaviour
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null"))
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.null -> Full Body.full_body_state1";
                     to_be_override_animation_name = "fullbody_empty1";
@@ -229,7 +224,7 @@ public partial class Animation_Manger : MonoBehaviour
             }
             else
             {
-                if (clip_name != "" && clip_name != null)
+                if (!string.IsNullOrEmpty(clip_name))
                 {
                     //nextStateName = "Full Body.full_body_state2 -> Full Body.full_body_state1";
                     to_be_override_animation_name = "fullbody_empty1";
@@ -248,16 +243,16 @@ public partial class Animation_Manger : MonoBehaviour
         }
 
         this.toRunAniName = clip_name;
-        the_trigger(toRunAniName, this.doNothingFlag);
+        The_trigger(toRunAniName, this.doNothingFlag);
         doNothingFlag = false;
     }
 
-    void the_trigger(string clip_name,bool _doNothingFlag)
+    void The_trigger(string clip_name,bool _doNothingFlag)
     {
         if (_doNothingFlag)
             return;
 
-        if (clip_name != null && clip_name != "")
+        if (!string.IsNullOrEmpty(clip_name))
         {
             if (trigger_name != null)
             {
@@ -270,7 +265,7 @@ public partial class Animation_Manger : MonoBehaviour
                 
                 if (to_be_override_animation_name != null)
                 {
-                    animatorOverride[to_be_override_animation_name] = tryAnimationClip(clip_name);
+                    animatorOverride[to_be_override_animation_name] = TryAnimationClip(clip_name);
                 }
                 //Animator.runtimeAnimatorController = animatorOverride;
                 Animator.SetTrigger(trigger_name);

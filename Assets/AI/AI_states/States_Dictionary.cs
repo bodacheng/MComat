@@ -60,7 +60,7 @@ public class States_Incubator
 
         Idle_State victory = new Idle_State("victory");
         Idle_State zhuangbi = new Idle_State("zhuangbi");
-        Death_State death = new Death_State(1f, "death", 40f, 40f);
+        Death_State death = new Death_State(1f, "death");
 
         Num_State_List.Add(new AI_Num_With_State("Victory", victory));
         StateIndexList.Add("Victory");
@@ -92,7 +92,7 @@ public class States_Incubator
         Num_State_List.Add(new AI_Num_With_State("Rush", Rush));
         StateIndexList.Add("Rush");
 
-        Hurt_State hit = new Hurt_State(FightGlobalSetting._light_damage_force, FightGlobalSetting._heavy_damage_force, FightGlobalSetting._lighthit_lastingtime, FightGlobalSetting._heavyhit_lastingtime)
+        Hurt_State hit = new Hurt_State()
         {
             nextAttackStateCanRushFirst = false,
             StateType = stateType.Hit

@@ -35,7 +35,7 @@ public partial class FightTeam : MonoBehaviour
         characterDieCount[character] += 1;
         characterAliveDic[character] = false;
         turnCoolDownDic[character] = coolDownTime(characterDieCount[character]);
-        character.AIStateRunner.changeState("Empty");
+        character.AIStateRunner.ChangeState("Empty");
     }
     
     float coolDownTime(int deathCount)

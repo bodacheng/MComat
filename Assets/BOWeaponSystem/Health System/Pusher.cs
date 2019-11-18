@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Pusher : MonoBehaviour
@@ -73,7 +72,7 @@ public class Pusher : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (_DATA_CENTER.AIStateRunner.ifRunning())
+        if (_DATA_CENTER.AIStateRunner.IfRunning())
         {
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
@@ -82,6 +81,24 @@ public class Pusher : MonoBehaviour
                 hiddenMethods.WhenIHitSomethingEnemy(1);
             }
         }
+    }
+
+    Vector3 temp;
+    float dis_from_center;
+    void OnAnimatorMove()
+    {
+        _DATA_CENTER.animator.ApplyBuiltinRootMotion();
+        temp = transform.position;
+        temp.y = 0;
+        dis_from_center = transform.position.magnitude;
+        if (transform.position.magnitude > BoundaryControllByGod._BattleRingRadius)
+        {
+            transform.position = 20 * temp / dis_from_center;
+            _DATA_CENTER.onBattleGroundBundary = true;
+        }else
+        {
+            _DATA_CENTER.onBattleGroundBundary = System.Math.Abs(transform.position.magnitude - BoundaryControllByGod._BattleRingRadius) < 0.01f;
+        }            
     }
 }
 

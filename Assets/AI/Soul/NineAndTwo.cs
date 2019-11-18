@@ -132,9 +132,9 @@ public class NineAndTwo {
         B1skillid = null; B2skillid = null; B3skillid = null;
         C1skillid = null; C2skillid = null; C3skillid = null;
 
-        this.moveType = MoveType.Mode1;
-        this.canDefend = true;
-        this.rushType = RushType.RushBack;
+        this.moveType = MoveType.Test;
+        this.canDefend = false;
+        this.rushType = RushType.None;
 
         AConfig1 = new SkillConfig();
         AConfig2 = new SkillConfig();
@@ -271,7 +271,7 @@ public class NineAndTwo {
 
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ///////////////////
 
-        passiveSkillConfigs passiveSkillConfigs = new passiveSkillConfigs(this.moveType,this.canDefend,this.rushType);
+        PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(this.moveType,this.canDefend,this.rushType);
 
         this.DConfig = passiveSkillConfigs.DConfig;
         this.MConfig = passiveSkillConfigs.MConfig;

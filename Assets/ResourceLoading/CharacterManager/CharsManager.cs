@@ -128,15 +128,15 @@ public partial class CharsManager : MonoBehaviour {
         IEnumerator buildmodelproess = null;
         switch(ResourceLoadingSetting.Instance.ModelLoadingMode)
         {
-                case ResourceLoadMode.CachAB:
-                yield return buildmodelproess= (CreateModelForShowingByCach(_CharacterDataInfo.monsterId));
-                break;
-                case ResourceLoadMode.Resource:
-                yield return buildmodelproess = (CreateModelForShowingByResource(_CharacterDataInfo.monsterId));
-                break;
-                case ResourceLoadMode.StreamingAssetAB:
-                yield return buildmodelproess = (CreateModelForShowingByStreamingAssets(_CharacterDataInfo.monsterId));
-                break;
+            case ResourceLoadMode.CachAB:
+            yield return buildmodelproess= (CreateModelForShowingByCach(_CharacterDataInfo.monsterId));
+            break;
+            case ResourceLoadMode.Resource:
+            yield return buildmodelproess = (CreateModelForShowingByResource(_CharacterDataInfo.monsterId));
+            break;
+            case ResourceLoadMode.StreamingAssetAB:
+            yield return buildmodelproess = (CreateModelForShowingByStreamingAssets(_CharacterDataInfo.monsterId));
+            break;
         }
         Data_Center _TempDATACENTER = (Data_Center)buildmodelproess.Current;
         if (_TempDATACENTER == null)

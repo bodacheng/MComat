@@ -66,7 +66,7 @@ public class G_Ani_MoveEscape_State : AI_State {
         _SkillCancelFlag.turn_off_flag();
         this.personality_Events.CloseAllPersonalityEffects();
         this._Animator.applyRootMotion = true;
-        Animation_Manger.animationTrigger(clip_name);        
+        Animation_Manger.AnimationTrigger(clip_name);        
         facedirection = gameObject.transform.forward;
         if (Sensor.getNearbyDamagingWeaponColliders().Count > 0)
         {
@@ -90,12 +90,12 @@ public class G_Ani_MoveEscape_State : AI_State {
             }
         }
         this.RotateToDirection(-facedirection, 100f, true);
-        if (this._AIStateRunner.getLastState().StateType == stateType.Def)
+        if (this._AIStateRunner.GetLastState().StateType == stateType.Def)
         {
-            Defend_State df = (Defend_State)this._AIStateRunner.getLastState();
-            if (df.block_time_counter > 0)
+            Defend_State df = (Defend_State)this._AIStateRunner.GetLastState();
+            if (df.time_counter > 0)
             {
-                df.block_time_counter = 0;
+                df.time_counter = 0;
                 this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
                 _FightAttriCalReference.ClearDamageLists();
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
@@ -114,7 +114,7 @@ public class G_Ani_MoveEscape_State : AI_State {
         this.Sensor.OneRoundDetectionStart(5);
         this.personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
-        Animation_Manger.animationTrigger(clip_name);                      
+        Animation_Manger.AnimationTrigger(clip_name);                      
         this.mainCam = CameraManager._camera.transform;
         screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
         screenMovementForward = screenMovementSpace * Vector3.forward;

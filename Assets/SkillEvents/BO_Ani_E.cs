@@ -154,7 +154,7 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + gameObject.transform.forward * e.floatParameter;
             processingHitBox.transform.rotation = transform.rotation;
             processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-            processingHitBox._HitBox.SetHolderCenter(processingHitBox.transform);
+            processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             if (processingHitBox._HitBox.onGroundMagic)
@@ -236,7 +236,7 @@ public class BO_Ani_E : MonoBehaviour
         }
         processingHitBox = target_pool.Rent();
         processingHitBox.transform.position = intPos;
-        processingHitBox._HitBox.SetHolderCenter(processingHitBox.transform);
+        processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         if (_DATA_CENTER._TeamConfig != null)
         {
@@ -368,7 +368,7 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox.positionConstraint.translationOffset = Vector3.zero;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         if (_DATA_CENTER._TeamConfig != null)
         {
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
@@ -426,7 +426,7 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox.positionConstraint.locked = true;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         if (_DATA_CENTER._TeamConfig != null)
         {
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
@@ -486,7 +486,7 @@ public class BO_Ani_E : MonoBehaviour
         
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        processingHitBox._HitBox.SetHolderCenter(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
         processingHitBox._HitBox.EnableMarkers();
         OnLoadMagic = null;

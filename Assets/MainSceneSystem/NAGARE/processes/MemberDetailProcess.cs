@@ -43,7 +43,7 @@ public class MemberDetailProcess : MainSceneProcess
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
     }
 
-    Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    private readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
     public override void localUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())

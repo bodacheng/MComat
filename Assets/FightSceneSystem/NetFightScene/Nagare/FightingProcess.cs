@@ -65,7 +65,7 @@ public class FightingProcess : NagareProcess
                 switch (BoundaryControllByGod.boundaryMode)
                 {
                     case BoundaryMode.Round:
-                        BoundaryControllByGod.RoundBattleFieldNormalControl(Vector3.zero);
+                        //BoundaryControllByGod.RoundBattleFieldNormalControl(Vector3.zero);
                         break;
                     case BoundaryMode.None:
                         break;
@@ -90,7 +90,7 @@ public class FightingProcess : NagareProcess
         {
             if (!_one.IsDead.Value)
             {
-                _one.AIStateRunner.changeState("Victory");
+                _one.AIStateRunner.ChangeState("Victory");
             }
         }
         Time.timeScale = 1f;

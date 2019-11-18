@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkillCancelFlag : MonoBehaviour {
 
@@ -67,7 +65,7 @@ public class SkillCancelFlag : MonoBehaviour {
         if (this._C.Animation_Manger._toUse == null || 
             (this._C.Animation_Manger._toUse.name == e.stringParameter && this._C.Animation_Manger.animationcounter > 0.08f))
         {
-            this._C.Animation_Manger.setAnimationPlayingStep(AnimationPlaying_Step.over);
+            this._C.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.over);
         }
     }
 

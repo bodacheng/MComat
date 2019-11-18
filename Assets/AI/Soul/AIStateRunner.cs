@@ -12,7 +12,7 @@ namespace Soul
 {
     public partial class AIStateRunner : MonoBehaviour
     {
-        private bool playerMode = false;
+        private bool playerMode;
 
         #region 初始化相关
         public string characterType;
@@ -61,16 +61,13 @@ namespace Soul
             this._inputManager.setPlayerIsInputting(false);
         }
         
-        public bool ifRunning()
+        public bool IfRunning()
         {
-            if (empty_State == this.now_state)
-                return false;
-            else
-                return true;
+            return empty_State != this.now_state;
         }
 
         private input _input;
-        public bool checkInput(inputs_defined num)
+        public bool CheckInput(inputs_defined num)
         {
             _inputManager.inputStateDic.TryGetValue(num, out _input);
             if (_input != null)
@@ -81,30 +78,30 @@ namespace Soul
             }
         }
 
-        public AI_State getNowState()
+        public AI_State GetNowState()
         {
             return now_state;
         }
-        public AI_State getLastState()
+        public AI_State GetLastState()
         {
             return lastState;
         }
-        public AI_State getTryState()
+        public AI_State GetTryState()
         {
             return try_state;
         }
 
-        public NineAndTwo getReadingNineAndTwo()
+        public NineAndTwo GetReadingNineAndTwo()
         {
             return readingNineAndTwo;
         }
 
-        public string getCurrentStateNum()
+        public string GetCurrentStateNum()
         {
             return current_state_num;
         }
 
-        public inputManager getInputManager()
+        public inputManager GetInputManager()
         {
             return _inputManager;
         }
@@ -116,7 +113,7 @@ namespace Soul
 
         void FixedUpdate()
         {
-            if (ifRunning())
+            if (IfRunning())
             {
                 if (mobileInputsManager.watchingInputManger == this._inputManager)
                     _inputManager.Update();
@@ -137,7 +134,7 @@ namespace Soul
             }
         }
 
-        public void changeState(string num)
+        public void ChangeState(string num)
         {
             current_state_num = num;
             state_Dictionary.TryGetValue(current_state_num, out try_state);
@@ -171,14 +168,13 @@ namespace Soul
 
         public void StartToGo()
         {
-            State_Transition_Set _State_Transition;
-            string[] startOffState = new string[] { "Move_normal", "Move_slow", "Move_fast", "Test_Move" };
+            string[] startOffState = { "Move_normal", "Move_slow", "Move_fast", "Test_Move" };
             for (int i = 0; i < startOffState.Length; i++)
             {
-                state_Transition_Dictionary.TryGetValue(startOffState[i], out _State_Transition);
+                state_Transition_Dictionary.TryGetValue(startOffState[i], out State_Transition_Set _State_Transition);
                 if (_State_Transition != null)
                 {
-                    this.changeState(startOffState[i]);
+                    this.ChangeState(startOffState[i]);
                     break;
                 }
             }
@@ -199,11 +195,11 @@ namespace Soul
 
             States_for_AbsoluteInput.Clear();
             bool hasD, hasR;
-            if (this.readingNineAndTwo.GetDConfig() != null)
+            if (readingNineAndTwo.GetDConfig() != null)
                 hasD = true;
             else
                 hasD = false;
-            if (this.readingNineAndTwo.GetRConfig() != null)
+            if (readingNineAndTwo.GetRConfig() != null)
                 hasR = true;
             else
                 hasR = false;

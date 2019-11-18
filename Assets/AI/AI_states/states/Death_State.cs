@@ -9,23 +9,19 @@ public class Death_State : AI_State
 {
     private readonly string clip_name;
     private readonly float stopRunningTime;    
-    private readonly float Upforce;
-    private readonly float horizentalForce;
     private readonly bool if_r_rotation;
     private readonly GameObject processingBlood;
-    
     private float time_count;
-    private Vector3 used_velcoity;    
-    private Vector3 force_direction;
     private string KnockOffSparkPersonalEffectPath;
     private int landedCal;//1 还在地上 2 已经被打飞起来 3 落地
+    
+    private Quaternion startquaternion;
+    private Matrix4x4 Matrix;
 
-    public Death_State(float stopRunningTime, string clip_name, float Upforce, float horizentalForce)
+    public Death_State(float stopRunningTime, string clip_name)
     {
         this.stopRunningTime = stopRunningTime;
         this.clip_name = clip_name;
-        this.Upforce = Upforce;
-        this.horizentalForce = horizentalForce;
         if_r_rotation = false;
         StateType = stateType.KnockOff;
     }
@@ -52,9 +48,9 @@ public class Death_State : AI_State
 
     public override void AI_State_enter()
     {
-        time_count = 0f;
         base.AI_State_enter();
-        this.personality_Events.CloseAllPersonalityEffects();
+        time_count = 0f;
+        personality_Events.CloseAllPersonalityEffects();
         _DATA_CENTER.DeathInitialize();
 
         landedCal = 1;
@@ -63,22 +59,18 @@ public class Death_State : AI_State
         Animation_Manger.PlayLayerAnim(clip_name);
         if (_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff).Count > 0)
         {
-            //if (BS_Main_Health.returnDamageList(damageType.supper_damage)[0].ifExplosion)
-            force_direction = this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].force_direction;
-            if (_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon != null)
-                KnockOffSparkPersonalEffectPath = this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.personalEffectPath;
-            else
-                KnockOffSparkPersonalEffectPath = null;
+            startquaternion =  Quaternion.LookRotation(_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.GetOwnerFightAttriCalReference()._Center.WholeT.forward, Vector3.up);
+            KnockOffSparkPersonalEffectPath = _FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon != null
+                ? this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.personalEffectPath
+                : null;
 
             EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
                                                  this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].damageHappenPoint,this.gameObject.transform.rotation,
-                                                 this._FightAttriCalReference.transform);               
-            force_direction.y = 0;
+                                                 this._FightAttriCalReference.transform);
             if (if_r_rotation)
-                this.RotateToDirection(force_direction, 20f, true);
+                this.RotateToDirection(this.gameObject.transform.position - _FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.transform.position, 20f, true);
 
-            used_velcoity = force_direction.normalized * horizentalForce + Vector3.up * Upforce;
-            _Rigidbody.velocity = used_velcoity;
+            Matrix = Matrix4x4.TRS(gameObject.transform.position, startquaternion, Vector3.one * 1);
         }
         this.personality_Events.CloseAllPersonalityEffects();
         this._FightAttriCalReference.ClearDamageLists();
@@ -95,43 +87,12 @@ public class Death_State : AI_State
     public override void _State_FixedUpdate1()
     {
         time_count += Time.fixedDeltaTime;
-
-        if (time_count > stopRunningTime)
-        {
-			Sensor.enabled = false;
-            _Rigidbody.velocity = Vector3.zero;
-        }
-        if (time_count > stopRunningTime + 1f)
-        {
-            _AIStateRunner.enabled = false;
-            //this.gameObject.SetActive(false);
-        }
-
-        if (landedCal == 1)
-        {
-            if (!_DATA_CENTER.IsGrounded())
-            {
-                landedCal = 2;
-            }
-            else
-            {
-                _Rigidbody.velocity = used_velcoity * 3/4;//一定让它飞起来
-            }
-        }
-        if (landedCal == 2)
-        {
-            if (_DATA_CENTER.IsGrounded())
-            {
-                landedCal = 3;
-            }
-        }
-
-        if (landedCal == 3)
-        {
-            this._Rigidbody.velocity = Vector3.zero;
-        }
-
-        if (!_DATA_CENTER.IsGrounded())
-            this.RotateToVelocityNegative(3f, true);
+        Sensor.enabled &= time_count <= stopRunningTime;
+        _AIStateRunner.enabled &= time_count <= stopRunningTime + 1f;
+        time_count += Time.fixedDeltaTime;
+        gameObject.transform.position = Matrix.MultiplyPoint3x4(new Vector3(1,
+                                            FightGlobalSetting._knockOffyAnimationCurve.Evaluate( time_count ) * 1f,
+                                            FightGlobalSetting._knockOffzAnimationCurve.Evaluate( time_count ) * 1f ));        
+        RotateToVelocityNegative(3f, true);
     }
 }

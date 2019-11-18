@@ -6,7 +6,6 @@ namespace HittingDetection
 {
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        private Vector3 force_direction;
         private V_Damage new_damage;
         
         // 下面这个结构目前为止事关三大重要的索引作用
@@ -41,7 +40,7 @@ namespace HittingDetection
                         WeaponEnergyExaust(_Shields_Hit[i1].position, _Shields_Hit[i1].rotation);
                         TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
                         collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
-                        //在此向攻击方发送趔趄信号。这个地方是客户端对战时候逻辑困难的关键。
+                        // 在此向攻击方发送趔趄信号。这个地方是客户端对战时候逻辑困难的关键。
                         // 武器脚本虽然处理内容非常繁冗，但归结起来其实逻辑只有那几条，就是通过武器与hitbox以及盾牌的接触碰撞，来决定向健康体发送哪些信息。这些计算，原则上其实只需要一个客户端的逻辑去计算
                         // 现在我们在讨论的其实是关于同步问题的一个核心的事情。。。什么时候两边都需要执行，什么时候只需要一个客户端执行。我们现在不熟悉处理这类问题的逻辑方式。
                         if (_FightAttriCalReference != null)
@@ -50,8 +49,7 @@ namespace HittingDetection
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
-                                    force_direction = _WeaponHolderCenter.position - TheS._ParentHealth.transform.position;
-                                    new_damage = new V_Damage(DamageType.stagger, force_direction, Vector3.zero, _FightAttriCalReference, this);
+                                    new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, null, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
                                     _FightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -60,45 +58,24 @@ namespace HittingDetection
                         }
 
                         //在此向防御方发送防御信号
-                        if (TheS._ParentHealth != null)
+                        if (TheS._ownerFightAttriCalReference != null)
                         {
                             switch (collision.on_shield_holder)
                             {
                                 case DamageType.light_block:
                                     //Vector3 jiuzhengweizhi;
-                                    if (_FightAttriCalReference != null)
-                                    {
-                                        force_direction = TheS._ParentHealth.transform.position - _WeaponHolderCenter.position;
-                                        //jiuzhengweizhi = myOwnerHealth.transform.position + myOwnerHealth.transform.forward * 3f;
-                                    }
-                                    else
-                                    {
-                                        //jiuzhengweizhi = this.transform.position;
-                                        force_direction = TheS._ParentHealth.transform.position - _WeaponHolderCenter.position;
-                                    }
-                                    new_damage = new V_Damage(DamageType.light_block, force_direction, Vector3.zero, TheS._ParentHealth, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
-                                    TheS.plusHP(-1);
-                                    TheS._ParentHealth.ApplyDamage(new_damage);
+                                    new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    TheS.PlusHP(-1);
+                                    TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
-                                    if (_FightAttriCalReference != null)
-                                    {
-                                        //jiuzhengweizhi = myOwnerHealth.transform.position + myOwnerHealth.transform.forward * 3.5f;
-                                        force_direction = TheS._ParentHealth.transform.position - _WeaponHolderCenter.position;
-                                    }
-                                    else
-                                    {
-                                        //jiuzhengweizhi = this.transform.position;
-                                        force_direction = TheS._ParentHealth.transform.position;
-                                    }
-                                    new_damage = new V_Damage(DamageType.heavy_block, force_direction, Vector3.zero, TheS._ParentHealth, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
-                                    TheS.plusHP(-2);
-                                    TheS._ParentHealth.ApplyDamage(new_damage);
+                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    TheS.PlusHP(-2);
+                                    TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
-                                    force_direction = TheS._ParentHealth.transform.position - _WeaponHolderCenter.position;
-                                    new_damage = new V_Damage(DamageType.supper_damage, force_direction, Vector3.zero, TheS._ParentHealth, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
-                                    TheS._ParentHealth.ApplyDamage(new_damage);
+                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
                                     break;
@@ -126,40 +103,13 @@ namespace HittingDetection
             {
                 foreach (HitOnHealthBody _hitOnHealthBody in hitsOnHealthBody)
                 {
-                    if (_hitOnHealthBody._BO_Health != null && _Used_Targets.Contains(_hitOnHealthBody._BO_Health.transform) == false)
+                    if (_hitOnHealthBody._victimFightAttriCalReference != null && _Used_Targets.Contains(_hitOnHealthBody._victimFightAttriCalReference.transform) == false)
                     {
                         WeaponEnergyExaust(_hitOnHealthBody._Startpoint, Quaternion.identity);
-                        switch (_WeaponPosAdjustMode)
-                        {
-                            case WeaponPosAdjustMode.pushToMidForward:
-                                force_direction = _hitOnHealthBody._BO_Health.transform.position - _WeaponHolderCenter.position;
-                                //底下这个平行四边形学受力校准处理，效果比较微妙。待定吧。
-                                if (_FightAttriCalReference != null)
-                                {
-                                    //平行四边形。用以攻击校准。
-                                    force_direction = _FightAttriCalReference._Center.WholeT.transform.forward * 2f - force_direction.normalized;
-                                    //上面这个myOwnerHealth.transform.forward乘以的参数，其实就是平行四边形中间连线和一个边的比例，如果是正方形的话那不就是pai2？这个值其实越小的话，这种校准力越大
-                                    //但如果小于1的话逻辑就会发生些问题。
-                                }
-                                break;
-                            case WeaponPosAdjustMode.draw:
-                                force_direction = _hitOnHealthBody.marker_point - _hitOnHealthBody._BO_Health.transform.position;//transform.position
-                                force_direction = force_direction.normalized;
-                                break;
-                        }
-
-                        //Vector3 jiuzhengweizhi;
-                        //if (myOwnerHealth != null && _hitOnHealthBody._BO_Health.canBeDistanceManage)
-                        //{
-                        //jiuzhengweizhi = sensorPoint + myOwnerHealth.transform.forward * onHitRangeAdjustDis;//暂时这么处理
-                        //jiuzhengweizhi.y = 0;
-                        //}else{
-                        //jiuzhengweizhi = this.transform.position;
-                        //}
-                        new_damage = new V_Damage(damage_type, force_direction, _hitOnHealthBody._Startpoint, _hitOnHealthBody._BO_Health, this,_specialApply);
-                        if (effectSpreadOnBody && _hitOnHealthBody._BO_Health._Center._ResistanceManager.Resistance.Value == 0)
-                            _hitOnHealthBody._BO_Health.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
-                        _hitOnHealthBody._BO_Health.ApplyDamage(new_damage);
+                        new_damage = new V_Damage(damage_type, _WeaponPosAdjustMode, _hitOnHealthBody._Startpoint, attackerWholeTransform,this,_specialApply);
+                        if (effectSpreadOnBody && _hitOnHealthBody._victimFightAttriCalReference._Center._ResistanceManager.Resistance.Value == 0)
+                            _hitOnHealthBody._victimFightAttriCalReference.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
+                        _hitOnHealthBody._victimFightAttriCalReference.ApplyDamage(new_damage);
 
                         if (this._FightAttriCalReference != null)
                         {
@@ -169,13 +119,13 @@ namespace HittingDetection
 
                         if (IfVectorClean(_hitOnHealthBody._Startpoint))
                         {
-                            if (_hitOnHealthBody._BO_Health._Center._ResistanceManager.Resistance.Value > 0)
+                            if (_hitOnHealthBody._victimFightAttriCalReference._Center._ResistanceManager.Resistance.Value > 0)
                             {
                                 processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
                                                                                        this.personalEffectPath,
                                                                                        _hitOnHealthBody._Startpoint,
                                                                                        Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._BO_Health.transform : null);
+                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
                             }
                             else
                             {
@@ -186,7 +136,7 @@ namespace HittingDetection
                                                                                        this.personalEffectPath,
                                                                                        _hitOnHealthBody._Startpoint,
                                                                                        Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._BO_Health.transform : null);
+                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
                                         //PlayTargetHitSound("light_hit");
                                         break;
                                     case DamageType.light_damage:
@@ -194,7 +144,7 @@ namespace HittingDetection
                                                                                        this.personalEffectPath,
                                                                                        _hitOnHealthBody._Startpoint,
                                                                                        Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._BO_Health.transform : null);
+                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
                                         //PlayTargetHitSound("light_hit");
                                         break;
                                     case DamageType.heavy_damage:
@@ -202,7 +152,7 @@ namespace HittingDetection
                                                                                        this.personalEffectPath,
                                                                                        _hitOnHealthBody._Startpoint,
                                                                                        Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._BO_Health.transform : null);
+                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
                                         //PlayTargetHitSound("heavy_hit");
                                         break;
                                     case DamageType.supper_damage:
@@ -210,7 +160,7 @@ namespace HittingDetection
                                                                                        this.personalEffectPath,
                                                                                        _hitOnHealthBody._Startpoint,
                                                                                        Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._BO_Health.transform : null);
+                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
                                         //PlayTargetHitSound("super_hit");
                                         break;
                                     default:
@@ -218,7 +168,7 @@ namespace HittingDetection
                                                                                        this.personalEffectPath,
                                                                                        _hitOnHealthBody._Startpoint,
                                                                                        Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._BO_Health.transform : null);
+                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
                                         //PlayTargetHitSound("light_hit");
                                         break;
                                 }
@@ -239,7 +189,7 @@ namespace HittingDetection
                         //        }
                         //    }
                         //}
-                        _Used_Targets.Add(_hitOnHealthBody._BO_Health.transform);
+                        _Used_Targets.Add(_hitOnHealthBody._victimFightAttriCalReference.transform);
                     }
                 }
                 if (_FightAttriCalReference != null)
@@ -263,5 +213,15 @@ namespace HittingDetection
                 }
             }
         }
+        
+        Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Transform attackerTransform)
+        {
+            damageHappenPoint.y = 0;
+            return (Vector3.Dot(damageHappenPoint - attackerTransform.position,attackerTransform.forward) * attackerTransform.forward + attackerTransform.position);
+        }
+        
+        // 点积的计算方式为:  a·b=|a|·|b|cos<a,b>  其中|a|和|b|表示向量的模，<a,b>表示两个向量的夹角。另外在 点积 中，<a,b>和<b,a> 夹角是不分顺序的。 
+        // 所以通过点积，我们其实是可以计算两个向量的夹角的。 
+        // 另外通过点积的计算我们可以简单粗略的判断当前物体是否朝向另外一个物体: 只需要计算当前物体的transform.forward向量与 (otherObj.transform.position – transform.position)的点积即可， 大于0则面对，否则则背对着。当然这个计算也会有一点误差，但大致够用。 
     }
 }
