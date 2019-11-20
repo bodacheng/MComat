@@ -7,7 +7,7 @@ namespace HittingDetection
     public partial class BO_Marker_Manager : MonoBehaviour
     {
         private FightAttriCalReference _Raw_Target_Instance; //A single target which was hit.
-        private FightAttriCalReference _BO_Health;
+        private FightAttriCalReference calReference;
         private BO_Hitbox _BO_Hitbox;
         private Vector3 _Direction;
         private Vector3 _StartPoint;
@@ -106,7 +106,7 @@ namespace HittingDetection
                             //_Raw_Target_Instance这个里面全是mainhealth，就是mainhealth，不是含着mainhealth的transform
                             //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
                             //if (a_target.tag == _targetTag && _Targets_Raw_Hit.Contains(a_target) == false && _Used_Targets.Contains(a_target) == false)
-                            _BO_Health = _markers[i]._hits[hit_target_index].collider.GetComponent<FightAttriCalReference>();
+                            calReference = _markers[i]._hits[hit_target_index].collider.GetComponent<FightAttriCalReference>();
                             _BO_Hitbox = _markers[i]._hits[hit_target_index].collider.GetComponent<BO_Hitbox>();
 
                             if (_Targets_Raw_Hit.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false
@@ -231,7 +231,7 @@ namespace HittingDetection
                                     _wallHitPositions.Add(_wallHitPoint);
                                 }
 
-                                _BO_Health = BallDetectHitPool[hit_target_index].GetComponent<FightAttriCalReference>();
+                                calReference = BallDetectHitPool[hit_target_index].GetComponent<FightAttriCalReference>();
                                 _BO_Hitbox = BallDetectHitPool[hit_target_index].GetComponent<BO_Hitbox>();
 
                                 if (_Targets_Raw_Hit.Contains(BallDetectHitPool[hit_target_index].transform) == false &&

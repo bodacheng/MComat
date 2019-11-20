@@ -5,7 +5,7 @@ namespace HittingDetection
     // Define what kind of thing will happen to characters depend on what kind of attack and shield crossed
     public class Attack_And_Shield_Specification
     {
-        private static Attack_And_Shield_Specification instance;
+        static Attack_And_Shield_Specification instance;
         public static Attack_And_Shield_Specification Instance
         {
             get
@@ -60,9 +60,7 @@ namespace HittingDetection
         public Transform AttackerT;
         public BO_Marker_Manager fromWeapon;
         public float AT;
-
         public SpecialApply specialApply = SpecialApply.none;
-        //public Vector3 testHurtGetFixPos;//这个应该没什么用了。可能在将来删掉
 
         public V_Damage() { }
         public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Transform AttackerT, BO_Marker_Manager fromWeapon)
@@ -72,7 +70,7 @@ namespace HittingDetection
             this.damageHappenPoint = damageHappenPoint;
             this.fromWeapon = fromWeapon;
             this.AttackerT = AttackerT;
-            this.AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
+            AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             specialApply = SpecialApply.none;
         }
         public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Transform AttackerT, BO_Marker_Manager fromWeapon,SpecialApply specialApply)
@@ -82,8 +80,13 @@ namespace HittingDetection
             this.damageHappenPoint = damageHappenPoint;
             this.fromWeapon = fromWeapon;
             this.AttackerT = AttackerT;
-            this.AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
+            AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             this.specialApply = specialApply;   
+        }
+        
+        public V_Damage Clone()
+        {
+            return (V_Damage)MemberwiseClone();
         }
     }
 
@@ -111,8 +114,8 @@ namespace HittingDetection
     
     public class E_Damage
     {
-        private FightAttriCalReference Attacker_Health;
-        private FightAttriCalReference Damaged_Health;
+        FightAttriCalReference Attacker_Health;
+        FightAttriCalReference Damaged_Health;
         public Position_set Position_set;
 
         public E_Damage() { }

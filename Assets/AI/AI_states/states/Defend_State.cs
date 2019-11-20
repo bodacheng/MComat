@@ -21,7 +21,7 @@ public class Defend_State : AI_State
         this.block_break_name = block_break_name;
     }
 
-    private void DefendHPfade(V_Damage damage)
+    void DefendHPfade(V_Damage damage)
     {
         switch (damage.damage_type)
         {
@@ -35,7 +35,7 @@ public class Defend_State : AI_State
         if (defendHP <= 0)
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, damage.damageHappenPoint, damage.AttackerT, damage.fromWeapon));
-            EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null, damage.damageHappenPoint, Quaternion.identity,null);
+            EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null, damage.damageHappenPoint, Quaternion.identity, null);
         }
     }
 
@@ -146,7 +146,7 @@ public class Defend_State : AI_State
             analyzingDamage = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block)[0];
             analyzingDamage.damage_type = DamageType.heavy_block;
             fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint, analyzingDamage.AttackerT,this.gameObject.transform,analyzingDamage._WeaponPosAdjustMode);
-            fixpostween = this.gameObject.transform.DOMove(fixDesPos,1);
+            fixpostween = _Rigidbody.DOMove(fixDesPos,1);
             time_counter = FightGlobalSetting._heavyBlockLastingTime;
             DefendHPfade(analyzingDamage);
             _FightAttriCalReference.plusCriticalGauge(2);
@@ -158,7 +158,7 @@ public class Defend_State : AI_State
             analyzingDamage = _FightAttriCalReference.ReturnDamageList(DamageType.light_block)[0];
             analyzingDamage.damage_type = DamageType.light_block;
             fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint, analyzingDamage.AttackerT,this.gameObject.transform,analyzingDamage._WeaponPosAdjustMode);
-            fixpostween = this.gameObject.transform.DOMove(fixDesPos,1);
+            fixpostween = _Rigidbody.DOMove(fixDesPos,1);
             time_counter = FightGlobalSetting._lightBlockLastingTime;
             DefendHPfade(analyzingDamage);
             _FightAttriCalReference.plusCriticalGauge(2);

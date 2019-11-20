@@ -12,18 +12,18 @@ public enum AIMoveStyle
 
 public class Move_State : AI_State
 {
-	private readonly float speed;
-    private readonly float time_limit;
-    private readonly AIMoveStyle _AIMoveStyle;
-    private float time_counter;
-    private Vector3 use_direction;
-    private AIMoveDirection moveDirection;
-    private Transform mainCam;
-    private Quaternion screenMovementSpace;
-    private Vector3 screenMovementForward, screenMovementRight;
-    private List<GameObject> EnemiesByDistance;
+    readonly float speed;
+    readonly float time_limit;
+    readonly AIMoveStyle _AIMoveStyle;
+    float time_counter;
+    Vector3 use_direction;
+    AIMoveDirection moveDirection;
+    Transform mainCam;
+    Quaternion screenMovementSpace;
+    Vector3 screenMovementForward, screenMovementRight;
+    List<GameObject> EnemiesByDistance;
 
-    private enum AIMoveDirection
+    enum AIMoveDirection
     {
         stay = 0,
         towardsEnemy = 1,
@@ -35,7 +35,7 @@ public class Move_State : AI_State
 
     public Move_State(AIMoveStyle aiMoveStyle, float speed, float time_limit)
 	{
-        this._AIMoveStyle = aiMoveStyle;
+        _AIMoveStyle = aiMoveStyle;
         this.speed = speed;
 		this.time_limit = time_limit;		
 	}
@@ -52,39 +52,35 @@ public class Move_State : AI_State
 
     public override bool Strategic_exit_condition()
     {
-        return Sensor.getInnerEnemiesColliders().Count > 0 ||
-            Sensor.getNearbyDamagingWeaponColliders().Count > 0 ||
-            Sensor.getOutterDamagingWeaponColliders().Count > 0
-            ? true
-            : false;
+        return Sensor.getInnerEnemiesColliders().Count > 0 || Sensor.getNearbyDamagingWeaponColliders().Count > 0 || Sensor.getOutterDamagingWeaponColliders().Count > 0;
     }
 
-    private bool Timeup()
+    bool Timeup()
     {
-        switch(moveDirection)
+        switch (moveDirection)
         {
             case AIMoveDirection.backTowardsEnemy:
-                if (this.time_counter > time_limit/2)
+                if (time_counter > time_limit / 2)
                     return true;
                 break;
             case AIMoveDirection.RunAwayFromThreat:
-                if (this.time_counter > time_limit / 3)
+                if (time_counter > time_limit / 3)
                     return true;
-                    break;
+                break;
             case AIMoveDirection.stay:
-                if (this.time_counter > time_limit / 2)
+                if (time_counter > time_limit / 2)
                     return true;
                 break;
             case AIMoveDirection.towardsEnemy:
-                if (this.time_counter > time_limit)
+                if (time_counter > time_limit)
                     return true;
                 break;
             case AIMoveDirection.towardsEnemyLeft:
-                if (this.time_counter > time_limit/3)
+                if (time_counter > time_limit / 3)
                     return true;
                 break;
             case AIMoveDirection.towardsEnemyRight:
-                if (this.time_counter > time_limit/3)
+                if (time_counter > time_limit / 3)
                     return true;
                 break;
         }
@@ -109,13 +105,13 @@ public class Move_State : AI_State
 
         // 从这到底下那么也就是AI模式决定第一轮moveDirection和use_direction的
         // 而moveDirection是用来引导use_direction的
-        decideDirection();
+        DecideDirection();
         this.time_counter = 0f;
         this.mainCam = CameraManager._camera.transform;
         this.personality_Events.CloseAllPersonalityEffects();
     }
 
-    private void decideDirection()
+    void DecideDirection()
     {
         EnemiesByDistance = Sensor.getEnemiesByDistance(true);
         switch (_AIMoveStyle)
@@ -123,14 +119,7 @@ public class Move_State : AI_State
             case AIMoveStyle.normal:
                 if (EnemiesByDistance.Count > 0)
                 {
-                    if (Sensor.getNearbyDamagingWeaponColliders().Count > 0 && Sensor.getNearbyDamagingWeaponColliders()[0] != null)
-                    {
-                        whereToGo = 5;
-                    }
-                    else
-                    {
-                        whereToGo = (int)Random.Range(0, 5);
-                    }
+                    whereToGo = Sensor.getNearbyDamagingWeaponColliders().Count > 0 && Sensor.getNearbyDamagingWeaponColliders()[0] != null ? 5 : Random.Range(0, 5);
 
                     switch (whereToGo)
                     {
@@ -167,7 +156,6 @@ public class Move_State : AI_State
                             //    use_direction = Vector3.Angle(toTeammates, vertical) > Vector3.Angle(toTeammates, vertical_r) ? vertical : vertical_r;
                             //}
                             //else{
-
                             if (Sensor.getNearbyDamagingWeaponColliders().Count > 0 && Sensor.getNearbyDamagingWeaponColliders()[0] != null)
                             {
                                 Vector3 vertical = GetVerticalDir(Sensor.getNearbyDamagingWeaponColliders()[0].transform.position - this.gameObject.transform.position);
@@ -200,17 +188,17 @@ public class Move_State : AI_State
     }
 
     private int whereToGo;
-    private float current_speed;
     private float angle;
     private Vector3 newDir;
     public void _f_State_Update_SP()
     {
+        time_counter += Time.fixedDeltaTime;
+        
         if (!this.Sensor.IFContinuousDetectionStarted())
         {
             this.Sensor.continuousDetectionStart(-1);//这个的真正目的是把检测关闭
         }
 
-        time_counter += Time.fixedDeltaTime;
         if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
             use_direction = _DATA_CENTER.antiWallDirection;
@@ -219,7 +207,7 @@ public class Move_State : AI_State
 
         if (Timeup())
         {
-            decideDirection();
+            DecideDirection();
             this.time_counter = 0f;
         }
 
@@ -259,8 +247,8 @@ public class Move_State : AI_State
         }
     }
 
-    private float h = 0f;
-    private float v = 0f;
+    private float h;
+    private float v;
     private Vector3 vel;
     public void _c_State_Update_SP()
     {
@@ -345,14 +333,7 @@ public class Move_State : AI_State
     private Vector3 GetVerticalDir(Vector3 _dir)
     {
         //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
-        if (Mathf.Approximately(_dir.z,0))
-        {
-            return new Vector3(0, 0, -1);
-        }
-        else
-        {
-            return new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
-        }
+        return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
     }
 }
 

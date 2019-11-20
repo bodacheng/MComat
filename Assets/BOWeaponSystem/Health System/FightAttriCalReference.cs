@@ -48,11 +48,11 @@ public partial class FightAttriCalReference : MonoBehaviour
     UnityEngine.Events.UnityAction gravitylostend;
     customCoroutine burstCoroutine;
 
-    private BO_Shield _shield; //已几乎不再用
+    BO_Shield _shield; //已几乎不再用
 
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
-        
+
     void Awake()
     {
         //registerMyDefaultMaterialsShaderDic();
@@ -72,7 +72,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
     public bool IFgettingDamage()
     {
-        return this.gettingdamage;
+        return gettingdamage;
     }
 
     public void HealthBodyFixedUpdate()
@@ -163,7 +163,7 @@ public partial class FightAttriCalReference : MonoBehaviour
 
     List<V_Damage> processingDlist;
     V_Damage processingD;
-    private void EatDamageProcess(List<V_Damage> v_Damages)
+    void EatDamageProcess(List<V_Damage> v_Damages)
     {
         processingDlist = v_Damages.ToList();
         for (int i = 0; i < processingDlist.Count; i++)//这个ToList()不加的话可能报错：Collection was modified; enumeration operation may not execute
@@ -179,7 +179,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 {
                     V_Damage deathknockOff;
                     deathknockOff = new V_Damage(
-                                   DamageType.deathknockoff,
+                                  DamageType.deathknockoff,
                                   processingD._WeaponPosAdjustMode,
                                   processingD.damageHappenPoint,
                                   processingD.AttackerT,
@@ -190,8 +190,8 @@ public partial class FightAttriCalReference : MonoBehaviour
                     break; //重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
                 }
             }
-            
-            switch(processingD.specialApply)
+
+            switch (processingD.specialApply)
             {
                 case SpecialApply.gravitylost:
                     gravityloststart = () =>

@@ -8442,7 +8442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1742951682
 GameObject:
   m_ObjectHideFlags: 0
@@ -8460,7 +8460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1742951688
 GameObject:
   m_ObjectHideFlags: 0
@@ -8494,7 +8494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1742951692
 GameObject:
   m_ObjectHideFlags: 0
@@ -8512,7 +8512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1742951694
 GameObject:
   m_ObjectHideFlags: 0
@@ -8530,7 +8530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1743046944
 Transform:
   m_ObjectHideFlags: 0
@@ -24300,7 +24300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0612fbce5784de295e1e406144a6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPSControllersCanvas: {fileID: 851603480760650114}
 --- !u!1 &3000649885118306801
 GameObject:
   m_ObjectHideFlags: 0

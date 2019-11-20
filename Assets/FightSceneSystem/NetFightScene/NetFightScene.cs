@@ -68,7 +68,8 @@ public class NetFightScene : MonoBehaviour {
     void Start()
     {
         //QualitySettings.vSyncCount = 1;
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
+        FightGlobalSetting.scenestep = 1; 
         mainProcessRunner.triggerMainProcess(FightSceneStartUp());
     }
 

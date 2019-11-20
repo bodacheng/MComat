@@ -5,13 +5,13 @@ using Soul;
 
 public partial class G_Attack_State : AI_State
 {
-    private float ji = 0f;
+    float ji;Vector3 use_direction;
     void SingleDirectionRotateProcess(Vector3 P,float speed)
     {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
-        if ((_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag()))
+        if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag())
         {
-            thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
+            thisFrameRotateAngle = this.RotateToTarget(P, 0.5f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {
@@ -21,8 +21,8 @@ public partial class G_Attack_State : AI_State
             {
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
             }
-            else
-            {   //刚开始计
+            else //刚开始计
+            {   
                 lastFrameRotateAngle = thisFrameRotateAngle;
             }
         }
@@ -31,15 +31,14 @@ public partial class G_Attack_State : AI_State
             thisFrameRotateAngle = 0;
         }
 
-        if (this._SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
+        if (_SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
         {
-            Vector3 use_direction = P - gameObject.transform.position;
+            use_direction = P - gameObject.transform.position;
             use_direction.y = 0;
-            this.Move(use_direction, speed, true);
-            if (this._Pusher.hiddenMethods.IHitSomethingEnemy())
+            Move(use_direction, speed, true);
+            if (_Pusher.hiddenMethods.ITouchedEnemyBody())
             {
-                this._SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
-                _Rigidbody.velocity = Vector3.zero;
+                _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
             }
         }
     }
@@ -48,7 +47,7 @@ public partial class G_Attack_State : AI_State
     {
         switch (_phase)
         {
-            case phase.noRushState://其实现在压根不会进入。
+            case Phase.noRushState://其实现在压根不会进入。
                 if (Sensor.getEnemiesByDistance(false).Count > 0)
                 {
                     if (Sensor.getEnemiesByDistance(false)[0] != null)
@@ -57,7 +56,7 @@ public partial class G_Attack_State : AI_State
                     }
                 }
                 break;
-            case phase.farFromReach:
+            case Phase.farFromReach:
                 if (Sensor.getEnemiesByDistance(false).Count > 0)
                 {
                     if (Sensor.getEnemiesByDistance(false)[0] != null)
@@ -67,15 +66,15 @@ public partial class G_Attack_State : AI_State
                 }
                 //_Rigidbody.velocity = Vector3.zero;
                 break;
-            case phase.needToRush:
+            case Phase.needToRush:
                 if (rushingToTarget != null)
                 {
                     if (Vector3.Distance(gameObject.transform.position,rushingToTarget.position) < 2f)
-                        _phase = phase.reached;
+                        _phase = Phase.reached;
                     thisFrameRotateAngle = this.RotateToTarget(rushingToTarget.position, 1f, true);
 
                     if (thisFrameRotateAngle > 60)//就是说 ，转角太大代表出问题了，很可能在自转
-                    { _phase = phase.reached;}
+                    { _phase = Phase.reached;}
                     ji = thisFrameRotateAngle * lastFrameRotateAngle;
                     if (ji > 0)//同向
                     {
@@ -84,14 +83,14 @@ public partial class G_Attack_State : AI_State
                     else if (ji < 0)//反向
                     {
                         this._Rigidbody.velocity = Vector3.zero;
-                        _phase = phase.reached;
+                        _phase = Phase.reached;
                     }
                     else
                     {   //刚开始计
                         lastFrameRotateAngle = thisFrameRotateAngle;
                     }
                     this.Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
-                    if (_phase == phase.reached)
+                    if (_phase == Phase.reached)
                     {
                         Animation_Manger.AnimationTrigger(clip_name);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
@@ -108,7 +107,7 @@ public partial class G_Attack_State : AI_State
                 }
                 rush_time_counter += Time.fixedDeltaTime;
                 break;
-            case phase.reached:
+            case Phase.reached:
                 if (Sensor.getInnerEnemiesColliders().Count > 0)
                 {
                     if (Sensor.getInnerEnemiesColliders()[0] == null)
@@ -120,7 +119,7 @@ public partial class G_Attack_State : AI_State
                     SingleDirectionRotateProcess(Sensor.getInnerEnemiesColliders()[0].transform.position,approcahingSpeed);
                 }
                 break;
-            case phase.reachedFromThebeginning:
+            case Phase.reachedFromThebeginning:
                 if (Sensor.getInnerEnemiesColliders().Count > 0)
                 {
                     if (Sensor.getInnerEnemiesColliders()[0] == null)

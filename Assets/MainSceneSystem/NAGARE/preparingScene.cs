@@ -99,6 +99,7 @@ namespace mainMenu
         {
             //_stagesManager.loadAndRefresh();
             Time.timeScale = 1;
+            FightGlobalSetting.scenestep = 0;
             mainProcessRunner.triggerMainProcess(StartUpProcess());
         }
 
@@ -113,7 +114,7 @@ namespace mainMenu
         public IEnumerator StartUpProcess()
         {
             //QualitySettings.vSyncCount = 1;
-            //Application.targetFrameRate = 60;
+            Application.targetFrameRate = 60;
 
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.NineSlotT.gameObject.SetActive(false);

@@ -12,6 +12,7 @@ public class FightGlobalSetting : MonoBehaviour
     public int defendHP = 20;
     public float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     
+    public static int scenestep = 0;//0 :mainmenu 1: fightscene
     public static float _lighthit_lastingtime, _heavyhit_lastingtime;
     public static float _knockoffMaxtime;
     public static int _defendHP;

@@ -45,43 +45,26 @@ namespace HittingDetection
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
 
-        private bool _markersAreEnabled;
-        private TeamConfig teamConfig;
-        private Transform attackerWholeTransform;
-        private Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
-        private Transform _MarkersParent;
-        private Transform onEnableEffectT;
-        private bool HitFlesh;
-        private bool HitShield;
-        private BO_Marker[] _markers;
-        private List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
-        private List<Transform> _Used_Targets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
-        private List<Transform> _Shields_Hit = new List<Transform>();
-        private List<Vector3> _wallHitPositions = new List<Vector3>();
-        private List<Vector3> _ShiledHitPositions = new List<Vector3>();
-        private List<HitOnHealthBody> hitsOnHealthBody = new List<HitOnHealthBody>();
-        private Decompositioner processingBlood;
-        private bool traditionalDefendMode;
-        private BO_Shield TheS;
-
-        //下面这个功能暂时不开启。以后真可能用估计也要大改
-        //[Tooltip("Will this weapon trigger a event?")]
-        //private bool is_E_weapon;
-        //[Tooltip("Only if is_E_weapon is true you need to set a e_Damage to it?")]
-        //private E_Damage e_Damage;
-        
-        private int currentHP;
-        public int CurrentHP
-        {
-            get
-            {
-                return this.currentHP;
-            }
-            set
-            {
-                this.currentHP = value;
-            }
-        }
+        FightAttriCalReference _myOwnerCalReference;
+        bool _markersAreEnabled;
+        TeamConfig teamConfig;
+        Transform attackerWholeTransform;
+        Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
+        Transform _MarkersParent;
+        Transform onEnableEffectT;
+        bool HitFlesh;
+        bool HitShield;
+        BO_Marker[] _markers;
+        List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
+        List<Transform> _Used_Targets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
+        List<Transform> _Shields_Hit = new List<Transform>();
+        List<Vector3> _wallHitPositions = new List<Vector3>();
+        List<Vector3> _ShiledHitPositions = new List<Vector3>();
+        List<HitOnHealthBody> hitsOnHealthBody = new List<HitOnHealthBody>();
+        Decompositioner processingBlood;
+        bool traditionalDefendMode;
+        BO_Shield TheS;
+        public int CurrentHP { get; set; }
 
         void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         {
@@ -117,7 +100,7 @@ namespace HittingDetection
 
         public void Local_OnDisable()
         {
-            currentHP = weaponHP;
+            CurrentHP = weaponHP;
             DisableMarkers();
             SetTeamConfig(null);
         }
@@ -129,11 +112,11 @@ namespace HittingDetection
         }
         public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
-            return _FightAttriCalReference;
+            return _myOwnerCalReference;
         }
         public void SetOwnerFightAttriCalReference(FightAttriCalReference _BO_Health)
         {
-            _FightAttriCalReference = _BO_Health;
+            _myOwnerCalReference = _BO_Health;
         }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
@@ -257,11 +240,11 @@ namespace HittingDetection
             || !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
         }
 
-        private class HitOnHealthBody
+        class HitOnHealthBody
         {
-            public HitOnHealthBody(FightAttriCalReference _BO_Health, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
+            public HitOnHealthBody(FightAttriCalReference _victimFightAttriCalReference, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
             {
-                this._victimFightAttriCalReference = _BO_Health;
+                this._victimFightAttriCalReference = _victimFightAttriCalReference;
                 this._Startpoint = _Startpoint;
                 this._Direction = _Direction;
                 this.marker_point = marker_point;

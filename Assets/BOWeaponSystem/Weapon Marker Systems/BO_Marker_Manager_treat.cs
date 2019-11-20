@@ -14,7 +14,6 @@ namespace HittingDetection
         // 3. 武器击中敌人时，对攻击方的hit combo进行加算
         // 由于BO_Marker_Manager现在全部都是对象池物件，如果我们认为一个instance返回对象池后就应该不再参与任何工作的话，
         // 原则上我们应该确保一切围绕BO_Marker_Manage的instance，最重要的是里面的myOwnerHealth进行的工作在instance返回对象池前结束
-        private FightAttriCalReference _FightAttriCalReference;
         private Attack_on_shield_result collision;
         private float _ContinuousDamage_Timer;
         //These DH and DS variables are Distances to the shield spots. Whie the shield is active, DH ("Distance to Health", distance to the back point of the shiled) has to be less than all the other shield edge spots (DS, "Distance to Shield")
@@ -43,14 +42,14 @@ namespace HittingDetection
                         // 在此向攻击方发送趔趄信号。这个地方是客户端对战时候逻辑困难的关键。
                         // 武器脚本虽然处理内容非常繁冗，但归结起来其实逻辑只有那几条，就是通过武器与hitbox以及盾牌的接触碰撞，来决定向健康体发送哪些信息。这些计算，原则上其实只需要一个客户端的逻辑去计算
                         // 现在我们在讨论的其实是关于同步问题的一个核心的事情。。。什么时候两边都需要执行，什么时候只需要一个客户端执行。我们现在不熟悉处理这类问题的逻辑方式。
-                        if (_FightAttriCalReference != null)
+                        if (_myOwnerCalReference != null)
                         {
-                            this._FightAttriCalReference._Center.pusher.hiddenMethods.WhenIHitSomethingEnemy(1);
+                            this._myOwnerCalReference._Center.pusher.hiddenMethods.ITouchedThisCollider(1);
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
                                     new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, null, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
-                                    _FightAttriCalReference.ApplyDamage(new_damage);
+                                    _myOwnerCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
                                     break;
@@ -111,10 +110,10 @@ namespace HittingDetection
                             _hitOnHealthBody._victimFightAttriCalReference.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
                         _hitOnHealthBody._victimFightAttriCalReference.ApplyDamage(new_damage);
 
-                        if (this._FightAttriCalReference != null)
+                        if (this._myOwnerCalReference != null)
                         {
-                            this._FightAttriCalReference.MyDamageCount(new_damage);
-                            this._FightAttriCalReference._Center.pusher.hiddenMethods.WhenIHitSomethingEnemy(1);
+                            this._myOwnerCalReference.MyDamageCount(new_damage);
+                            this._myOwnerCalReference._Center.pusher.hiddenMethods.ITouchedThisCollider(1);
                         }
 
                         if (IfVectorClean(_hitOnHealthBody._Startpoint))
@@ -192,9 +191,9 @@ namespace HittingDetection
                         _Used_Targets.Add(_hitOnHealthBody._victimFightAttriCalReference.transform);
                     }
                 }
-                if (_FightAttriCalReference != null)
+                if (_myOwnerCalReference != null)
                 {
-                    _FightAttriCalReference.plusCriticalGauge(3);
+                    _myOwnerCalReference.plusCriticalGauge(3);
                 }
             }
 

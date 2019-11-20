@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -6,9 +7,9 @@ using UnityEditor;
 
 public class SKillAnalyzer : MonoBehaviour
 {
-    public void SkillsAnalyzeByFrames(string type,string targetEventName, float start_min,float start_max,float end_min,float end_max)
+    public void SkillsAnalyzeByFrames(string type, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
 
@@ -27,9 +28,9 @@ public class SKillAnalyzer : MonoBehaviour
         }
         foreach (AnimationClip _clip in AnimationClips)
         {
-            if (SkillFrameAnalyze(_clip, targetEventName,start_min,start_max,end_min,end_max))
+            if (SkillFrameAnalyze(_clip, targetEventName, start_min, start_max, end_min, end_max))
             {
-                Debug.Log("符合："+_clip.name);
+                Debug.Log("符合：" + _clip.name);
             }
         }
     }
@@ -45,16 +46,16 @@ public class SKillAnalyzer : MonoBehaviour
     {
         "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
     };
-    
-    public void ReplaceAnimEventName(string type, string old_name,string new_name)
+
+    public void ReplaceAnimEventName(string type, string old_name, string new_name)
     {
         if (!(old_name != null && old_name != "" && new_name != null && new_name != ""))
         {
             return;
         }
-        
-        List<UnityEngine.Object> BasicPack = Resources.LoadAll("Animations/"+ type + "/" + "BasicPack", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
+
+        List<UnityEngine.Object> BasicPack = Resources.LoadAll("Animations/" + type + "/" + "BasicPack", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
 
@@ -87,28 +88,28 @@ public class SKillAnalyzer : MonoBehaviour
                 {
                     toSave.functionName = new_name;
                     changed = true;
-                    Debug.Log("讲动画片段：" + animationClip.name +"的函数"+old_name+"换了新名字"+new_name);
+                    Debug.Log("讲动画片段：" + animationClip.name + "的函数" + old_name + "换了新名字" + new_name);
                 }
                 evnets.Add(toSave);
             }
             if (changed)
             {
                 AnimationClip toSave = (AnimationClip)UnityEngine.Object.Instantiate(animationClip);
-                AnimationUtility.SetAnimationEvents(toSave,evnets.ToArray());
+                AnimationUtility.SetAnimationEvents(toSave, evnets.ToArray());
                 AssetDatabase.CreateAsset(toSave, AssetDatabase.GetAssetPath(_clip));
                 AssetDatabase.SaveAssets();
             }
-        }    
+        }
     }
-    
-    public bool SkillFrameAnalyze(AnimationClip _clip,string targetEventName,float start_min,float start_max,float end_min,float end_max)
+
+    public bool SkillFrameAnalyze(AnimationClip _clip, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {
-        float earlieststartframe = 0,latestendframe;
+        float earlieststartframe = 0, latestendframe;
         float cancelflagFrame = 0;
         List<float> allAttackStartFrames = new List<float>();
 
         bool hasTargetEventName = false;
-        
+
         foreach (AnimationEvent e in _clip.events)
         {
             if (e.functionName == "SetAllBodyMarkerManagersIn")
@@ -128,29 +129,29 @@ public class SKillAnalyzer : MonoBehaviour
             {
                 cancelflagFrame = e.time;
             }
-            if ((targetEventName != null && targetEventName != "" && e.functionName  == targetEventName) || !(targetEventName != null && targetEventName != ""))
+            if ((targetEventName != null && targetEventName != "" && e.functionName == targetEventName) || !(targetEventName != null && targetEventName != ""))
             {
                 hasTargetEventName = true;
             }
         }
-        
+
         if (!hasTargetEventName)
         {
             return false;
         }
-        
+
         if (allAttackStartFrames.Count == 0)
         {
             Debug.Log(_clip.name + "貌似缺乏有效攻击帧控制类函数，需检查");
             return false;
         }
-        
-        if (Mathf.Approximately(cancelflagFrame,0))
+
+        if (Mathf.Approximately(cancelflagFrame, 0))
         {
             Debug.Log(_clip.name + "貌似没有取消flag,应做单独分析");
             return false;
         }
-        
+
         earlieststartframe = allAttackStartFrames.Min();
         latestendframe = allAttackStartFrames.Max();
 
@@ -161,3 +162,4 @@ public class SKillAnalyzer : MonoBehaviour
         return startfilteroutcome && endfiltercoutcome;
     }
 }
+#endif

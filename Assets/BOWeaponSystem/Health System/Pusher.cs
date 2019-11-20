@@ -6,9 +6,10 @@ public class Pusher : MonoBehaviour
     public class HiddenMethods
     {
         readonly Pusher pusher;
+        public bool meTouchingEnemyBody;
         public HiddenMethods(Pusher Pusher)
         {
-            this.pusher = Pusher;
+            pusher = Pusher;
         }
         public bool IfStepOnEnemyCharacter(Collider box)
         {
@@ -27,43 +28,33 @@ public class Pusher : MonoBehaviour
             //(AI_DATA_CENTER._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0)
             return pusher._DATA_CENTER._TeamConfig.enemyLayerMask == (pusher._DATA_CENTER._TeamConfig.enemyLayerMask | (1 << box.gameObject.layer))
                 ||
-                (pusher._DATA_CENTER._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0
-                ? true
-                : false;
+                (pusher._DATA_CENTER._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
         }
 
         public bool IfStepOnFriendCharacter(Collider box)
         {
-            return pusher._DATA_CENTER == null
-                || pusher._DATA_CENTER._TeamConfig != null
-                && (pusher._DATA_CENTER._TeamConfig.mylayer == box.gameObject.layer)
-               ||
-                pusher._DATA_CENTER._TeamConfig.myShieldLayer == box.gameObject.layer
-                ? true
-                : false;
+            return pusher._DATA_CENTER == null || pusher._DATA_CENTER._TeamConfig != null
+                && (pusher._DATA_CENTER._TeamConfig.mylayer == box.gameObject.layer) || pusher._DATA_CENTER._TeamConfig.myShieldLayer == box.gameObject.layer;
         }
 
-        public void WhenIHitSomethingEnemy(int _dmg)
+        public void ITouchedThisCollider(int _dmg)
         {
-            if (pusher.ICauseDamagersForAttackSteppingCommand != null)
-            {
-                pusher.ICauseDamagersForAttackSteppingCommand.Add(_dmg);
-            }
+            pusher.TheCollidersITouched.Add(_dmg);
         }
         
         public void ClearHitCountForAttackStepping()
         {
-            pusher.ICauseDamagersForAttackSteppingCommand.Clear();
+            pusher.TheCollidersITouched.Clear();
         }
-        public bool IHitSomethingEnemy()
+        public bool ITouchedEnemyBody()
         {
-            return pusher.ICauseDamagersForAttackSteppingCommand.Count > 0 ? true : false;
+            return pusher.TheCollidersITouched.Count > 0;
         }
     }
 
     public Data_Center _DATA_CENTER;
     public HiddenMethods hiddenMethods;
-    readonly List<int> ICauseDamagersForAttackSteppingCommand = new List<int>();
+    readonly List<int> TheCollidersITouched = new List<int>();
 
     void Awake()
     {
@@ -78,7 +69,22 @@ public class Pusher : MonoBehaviour
             {
                 if (_DATA_CENTER.Sensor != null)
                     _DATA_CENTER.Sensor.getInnerEnemiesColliders().Add(collision.collider);
-                hiddenMethods.WhenIHitSomethingEnemy(1);
+                hiddenMethods.ITouchedThisCollider(1);
+                hiddenMethods.meTouchingEnemyBody = true;
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (_DATA_CENTER.AIStateRunner.IfRunning())
+        {
+            if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
+            {
+                if (_DATA_CENTER.Sensor != null)
+                    _DATA_CENTER.Sensor.getInnerEnemiesColliders().Add(collision.collider);
+                hiddenMethods.ITouchedThisCollider(1);
+                hiddenMethods.meTouchingEnemyBody = false;
             }
         }
     }
@@ -88,17 +94,20 @@ public class Pusher : MonoBehaviour
     void OnAnimatorMove()
     {
         _DATA_CENTER.animator.ApplyBuiltinRootMotion();
-        temp = transform.position;
-        temp.y = 0;
-        dis_from_center = transform.position.magnitude;
-        if (transform.position.magnitude > BoundaryControllByGod._BattleRingRadius)
+        if (FightGlobalSetting.scenestep == 1)
         {
-            transform.position = 20 * temp / dis_from_center;
-            _DATA_CENTER.onBattleGroundBundary = true;
-        }else
-        {
-            _DATA_CENTER.onBattleGroundBundary = System.Math.Abs(transform.position.magnitude - BoundaryControllByGod._BattleRingRadius) < 0.01f;
-        }            
+            temp = transform.position;
+            temp.y = 0;
+            dis_from_center = transform.position.magnitude;
+            if (transform.position.magnitude > BoundaryControllByGod._BattleRingRadius)
+            {
+                transform.position = 20 * temp / dis_from_center;
+                _DATA_CENTER.onBattleGroundBundary = true;
+            }else
+            {
+                _DATA_CENTER.onBattleGroundBundary = System.Math.Abs(transform.position.magnitude - BoundaryControllByGod._BattleRingRadius) < 0.01f;
+            }
+        }
     }
 }
 

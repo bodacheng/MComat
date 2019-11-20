@@ -2,15 +2,17 @@
 using UnityEngine;
 using HittingDetection;
 using Soul;
+using DG.Tweening;
 
 public class Hurt_State : AI_State {
-    private float used_dizzy_time;
-    private float time_counter;
-    private Vector3 fixDesPos;
-	private readonly Coroutine shaderChangeProcess;
-    private List<AnimationClip> hurtclips;
+    float used_dizzy_time;
+    float time_counter;
+    Vector3 fixDesPos;
+    readonly Coroutine shaderChangeProcess;
+    List<AnimationClip> hurtclips;
+    Tween fixpostween;
 
-	public override void Pre_process_before_enter()
+    public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
     }
@@ -24,24 +26,26 @@ public class Hurt_State : AI_State {
     }
 
     V_Damage processingD;
+    bool touchingEnemyBody;
     public override void AI_State_enter()
 	{
 		base.AI_State_enter();
-        this._Rigidbody.mass = 50;
-        this._Animator.SetFloat("speed", 0f);
-        this._FightAttriCalReference.SetGettingDamageState(true);
-        this._Weapon_Animation_Events.ClearMarkerManagers();
-        this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
-        this.hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
-        
-        int ranDom = (int)Random.Range(0,hurtclips.Count);
+        _Animator.SetFloat("speed", 0f);
+        _FightAttriCalReference.SetGettingDamageState(true);
+        _Weapon_Animation_Events.ClearMarkerManagers();
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
+
+        touchingEnemyBody = _Pusher.hiddenMethods.meTouchingEnemyBody;//这个奇葩设定的逻辑是，如果守击的瞬间我角色贴着敌人的肉，那么攻击给我的推力就包括一个敌人前方的力。没错这个是个简化逻辑，其他敌人摸到我的话我也受到攻击方正前推力。
+        hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
+        int ranDom = Random.Range(0, hurtclips.Count);
         Animation_Manger.AnimationTrigger(hurtclips[ranDom]);
 		if (_FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0)
 		{
             processingD = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0];
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
             fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,processingD.AttackerT,this.gameObject.transform,processingD._WeaponPosAdjustMode);
-            this._Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+            //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
+            fixpostween = _Rigidbody.DOMove(fixDesPos + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero),0.5f);
             _FightAttriCalReference.GetKnockOffCount().plusGauge(3f);
 			_FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);            
             _FightAttriCalReference.EatDamage(DamageType.heavy_damage);
@@ -53,7 +57,8 @@ public class Hurt_State : AI_State {
             processingD = _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0];
             used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
             fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,processingD.AttackerT,this.gameObject.transform,processingD._WeaponPosAdjustMode);
-            this._Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+            //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
+            fixpostween = _Rigidbody.DOMove(fixDesPos + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero),0.5f);
             _FightAttriCalReference.plusCriticalGauge(1);
 			_FightAttriCalReference.GetKnockOffCount().plusGauge(1f);
             _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
@@ -66,13 +71,14 @@ public class Hurt_State : AI_State {
             processingD = _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0];
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
             fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,processingD.AttackerT,this.gameObject.transform,processingD._WeaponPosAdjustMode);
-            this._Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+            //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
+            fixpostween = _Rigidbody.DOMove(fixDesPos + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero),0.5f);
             _FightAttriCalReference.plusCriticalGauge(1);
 			_FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
             _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
             _FightAttriCalReference.EatDamage(DamageType.supper_damage);
         }
-        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 5f)
+        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 10f)
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,processingD._WeaponPosAdjustMode,processingD.damageHappenPoint, processingD.AttackerT, processingD.fromWeapon));
             _FightAttriCalReference.GetKnockOffCount().setGauge(0f);
@@ -97,9 +103,10 @@ public class Hurt_State : AI_State {
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        this._Rigidbody.mass = 100;
         _FightAttriCalReference.SetGettingDamageState(false);
         time_counter = 0f;
+        if (fixpostween != null)
+            fixpostween.Kill();
         _Rigidbody.velocity = Vector3.zero;
         if (_AIStateRunner.GetTryState().StateType == stateType.AC || _AIStateRunner.GetTryState().StateType == stateType.GI ||
             _AIStateRunner.GetTryState().StateType == stateType.GM || _AIStateRunner.GetTryState().StateType == stateType.GR)
