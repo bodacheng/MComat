@@ -10,11 +10,7 @@ public class Knock_Off_State : AI_State
     DecompositionerPool superHitPool;
     Vector3 _xz;    
     bool touchedBoundary;
-    
-    // 原先的MultiplyPoint3x4击飞曲线计划相关
-    //Quaternion startquaternion;
-    //Matrix4x4 Matrix;
-    
+     
     public Knock_Off_State(float knock_off_time)
     {
         this.knock_off_time = knock_off_time;
@@ -70,14 +66,8 @@ public class Knock_Off_State : AI_State
             processingBlood.transform.position = processingD.damageHappenPoint;
             processingBlood.transform.rotation = Quaternion.identity;
         }
-        _xz = processingD.AttackerT.forward;
+        _xz = processingD.AttackerT_foward;
         _FightAttriCalReference.EatDamage(DamageType.knockOff_damage);
-        
-        // 原先的MultiplyPoint3x4击飞曲线计划相关
-        //startquaternion =  Quaternion.LookRotation(processingD.AttackerT.forward, Vector3.up);
-        //Matrix = new Matrix4x4();
-        //Matrix = Matrix4x4.TRS(temp, startquaternion, Vector3.one * 1);
-
         _FightAttriCalReference.ClearDamageLists();               
     }
 
@@ -113,17 +103,16 @@ public class Knock_Off_State : AI_State
             touchedBoundary = _DATA_CENTER.onBattleGroundBundary;
         }
 
-        //gameObject.transform.position = StartPoint + 
-        //_xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter) - alreadyFinishedZTranslation) +  
-        //Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter) - alreadyFinishedYTranslation);
-
-        gameObject.transform.position +=
+        if (!(time_counter > 0.2f && _DATA_CENTER.IsGrounded()))
+        {
+            gameObject.transform.position +=
             (_xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter))
             +
             Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter)));
-        
+        }
+
         time_counter += Time.fixedDeltaTime;
-        //if (!_DATA_CENTER.IsGrounded())
+        //if (!_DATA_CENTER.IsGrounded()) // 貌似这个环节是导致knockoff途中瞬移的原因。去掉后修复。没有错上面的曲线逻辑基础上，有这个的话还是会瞬移
             //RotateToVelocityNegative(3f, true);
         
         // 原先的MultiplyPoint3x4击飞曲线计划相关

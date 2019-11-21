@@ -43,9 +43,14 @@ public class Hurt_State : AI_State {
 		{
             processingD = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0];
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,processingD.AttackerT,this.gameObject.transform,processingD._WeaponPosAdjustMode);
+            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,
+                                                processingD.AttackerT_foward,
+                                                    processingD.AttackerT_pos,
+                                                        gameObject.transform.position,
+                                                            processingD._WeaponPosAdjustMode,
+                                                                touchingEnemyBody);
             //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
-            fixpostween = _Rigidbody.DOMove(fixDesPos + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero),0.5f);
+            fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
             _FightAttriCalReference.GetKnockOffCount().plusGauge(3f);
 			_FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);            
             _FightAttriCalReference.EatDamage(DamageType.heavy_damage);
@@ -56,9 +61,14 @@ public class Hurt_State : AI_State {
         {
             processingD = _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0];
             used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
-            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,processingD.AttackerT,this.gameObject.transform,processingD._WeaponPosAdjustMode);
+            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,
+                                                processingD.AttackerT_foward,
+                                                    processingD.AttackerT_pos,
+                                                        gameObject.transform.position,
+                                                            processingD._WeaponPosAdjustMode,
+                                                                touchingEnemyBody);
             //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
-            fixpostween = _Rigidbody.DOMove(fixDesPos + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero),0.5f);
+            fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
             _FightAttriCalReference.plusCriticalGauge(1);
 			_FightAttriCalReference.GetKnockOffCount().plusGauge(1f);
             _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
@@ -70,9 +80,14 @@ public class Hurt_State : AI_State {
         {
             processingD = _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0];
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,processingD.AttackerT,this.gameObject.transform,processingD._WeaponPosAdjustMode);
+            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,
+                                                processingD.AttackerT_foward,
+                                                    processingD.AttackerT_pos,
+                                                        gameObject.transform.position,
+                                                            processingD._WeaponPosAdjustMode,
+                                                                touchingEnemyBody);
             //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
-            fixpostween = _Rigidbody.DOMove(fixDesPos + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero),0.5f);
+            fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
             _FightAttriCalReference.plusCriticalGauge(1);
 			_FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
             _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
@@ -80,7 +95,12 @@ public class Hurt_State : AI_State {
         }
         if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 10f)
         {
-            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,processingD._WeaponPosAdjustMode,processingD.damageHappenPoint, processingD.AttackerT, processingD.fromWeapon));
+            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
+                                                                processingD._WeaponPosAdjustMode,   
+                                                                    processingD.damageHappenPoint, 
+                                                                        processingD.AttackerT_foward,
+                                                                            processingD.AttackerT_pos, 
+                                                                                processingD.fromWeapon));
             _FightAttriCalReference.GetKnockOffCount().setGauge(0f);
         }
         this.RotateToDirection(-fixDesPos,0.5f,true);

@@ -48,7 +48,7 @@ namespace HittingDetection
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
-                                    new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, null, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, Vector3.zero,TheS.transform.position, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
                                     _myOwnerCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -63,17 +63,17 @@ namespace HittingDetection
                             {
                                 case DamageType.light_block:
                                     //Vector3 jiuzhengweizhi;
-                                    new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform.forward,attackerWholeTransform.position,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
-                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform.forward,attackerWholeTransform.position,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
-                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -105,7 +105,7 @@ namespace HittingDetection
                     if (_hitOnHealthBody._victimFightAttriCalReference != null && _Used_Targets.Contains(_hitOnHealthBody._victimFightAttriCalReference.transform) == false)
                     {
                         WeaponEnergyExaust(_hitOnHealthBody._Startpoint, Quaternion.identity);
-                        new_damage = new V_Damage(damage_type, _WeaponPosAdjustMode, _hitOnHealthBody._Startpoint, attackerWholeTransform,this,_specialApply);
+                        new_damage = new V_Damage(damage_type, _WeaponPosAdjustMode, _hitOnHealthBody._Startpoint, attackerWholeTransform.forward,attackerWholeTransform.position,this,_specialApply);
                         if (effectSpreadOnBody && _hitOnHealthBody._victimFightAttriCalReference._Center._ResistanceManager.Resistance.Value == 0)
                             _hitOnHealthBody._victimFightAttriCalReference.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
                         _hitOnHealthBody._victimFightAttriCalReference.ApplyDamage(new_damage);

@@ -11,7 +11,7 @@ public partial class G_Attack_State : AI_State
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag())
         {
-            thisFrameRotateAngle = this.RotateToTarget(P, 0.5f, true);
+            thisFrameRotateAngle = this.RotateToTarget(P, 10f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {
@@ -71,7 +71,7 @@ public partial class G_Attack_State : AI_State
                 {
                     if (Vector3.Distance(gameObject.transform.position,rushingToTarget.position) < 2f)
                         _phase = Phase.reached;
-                    thisFrameRotateAngle = this.RotateToTarget(rushingToTarget.position, 1f, true);
+                    thisFrameRotateAngle = this.RotateToTarget(rushingToTarget.position, 10f, true);
 
                     if (thisFrameRotateAngle > 60)//就是说 ，转角太大代表出问题了，很可能在自转
                     { _phase = Phase.reached;}

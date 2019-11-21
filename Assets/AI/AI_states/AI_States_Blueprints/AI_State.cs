@@ -107,19 +107,19 @@ namespace Soul
         {
             Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             _FightAttriCalReference.AT = this.AT;
-            this._FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
+            _FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
         }
 
         public virtual void C_State_enter()
         {
-            this.AI_State_enter();
+            AI_State_enter();
         }
 
         // Process when exit the state 
         public virtual void AI_State_exit()
         {
             Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
-            this.Sensor.OneRoundDetectionStart(5);
+            Sensor.OneRoundDetectionStart(5);
         }
         
         // Local update of the state 
@@ -130,7 +130,7 @@ namespace Soul
         // Local update of the state 
         public virtual void _c_State_FixedUpdate1()
         {
-            this._State_FixedUpdate1();
+            _State_FixedUpdate1();
         }
 
         // Local fixedupdate of the state 
@@ -142,7 +142,7 @@ namespace Soul
         // Local fixedupdate of the state 
         public virtual void _c_State_FixedUpdate2()
         {
-            this._State_FixedUpdate2();
+            _State_FixedUpdate2();
         }
         
         #region state basic methods
@@ -184,38 +184,35 @@ namespace Soul
             {
                 if (behaviorEnterRanges.Length == 0)
                     return true;
-                else
+                inner = false;
+                mid = false;
+                far = false;
+                for (int i = 0; i < behaviorEnterRanges.Length; i++)
                 {
-                    inner = false;
-                    mid = false;
-                    far = false;
-                    for (int i = 0; i < behaviorEnterRanges.Length; i++)
+                    switch (behaviorEnterRanges[i])
                     {
-                        switch (behaviorEnterRanges[i])
-                        {
-                            case BehaviorEnterRange.inner_range:
-                                inner |= this.Sensor.getInnerEnemiesColliders().Count > 0;
-                                break;
-                            case BehaviorEnterRange.mid_range:
-                                mid |= this.Sensor.getMidEnemiesColliders().Count > 0;
-                                break;
-                            case BehaviorEnterRange.far_range:
-                                far |= this.Sensor.getfarEnemiesColliders().Count > 0;
-                                break;
-                            case BehaviorEnterRange.out_of_range:
-                                if (this.Sensor.getInnerEnemiesColliders().Count == 0
-                                    &&
-                                    this.Sensor.getMidEnemiesColliders().Count == 0
-                                    &&
-                                    this.Sensor.getfarEnemiesColliders().Count == 0)
-                                    return true;
-                                break;
-                            default:
-                                break;
-                        }
+                        case BehaviorEnterRange.inner_range:
+                            inner |= this.Sensor.getInnerEnemiesColliders().Count > 0;
+                            break;
+                        case BehaviorEnterRange.mid_range:
+                            mid |= this.Sensor.getMidEnemiesColliders().Count > 0;
+                            break;
+                        case BehaviorEnterRange.far_range:
+                            far |= this.Sensor.getfarEnemiesColliders().Count > 0;
+                            break;
+                        case BehaviorEnterRange.out_of_range:
+                            if (this.Sensor.getInnerEnemiesColliders().Count == 0
+                                &&
+                                this.Sensor.getMidEnemiesColliders().Count == 0
+                                &&
+                                this.Sensor.getfarEnemiesColliders().Count == 0)
+                                return true;
+                            break;
+                        default:
+                            break;
                     }
-                    return inner || mid || far;
                 }
+                return inner || mid || far;
             }
             return true;
         }
@@ -245,8 +242,10 @@ namespace Soul
                 look_dir.y = 0;
             }
             dirQ = Quaternion.LookRotation(look_dir);
-            gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
-            return Vector3.SignedAngle(gameObject.transform.forward, look_dir, Vector3.up);
+            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(dirQ);           
+            //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            return Vector3.SignedAngle(_Rigidbody.transform.forward, look_dir, Vector3.up);
         }
 
         // Rotate to a direction
@@ -369,27 +368,39 @@ namespace Soul
             {
                 dirQ = Quaternion.LookRotation(dir);
                 slerp = Quaternion.Slerp(gameObject.transform.rotation, dirQ, dir.magnitude * turnSpeed * Time.deltaTime);
-                this._Rigidbody.MoveRotation(slerp);
+                _Rigidbody.MoveRotation(slerp);
             }
         }
-        
-        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Transform attackerTransform ,Transform victimT, WeaponPosAdjustMode weaponPosAdjustMode)
+
+        float f_temp;
+        Vector3 v_temp;
+        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, 
+                                                Vector3 attackerTransform_foward,
+                                                 Vector3 attackerTransform_pos, 
+                                                  Vector3 victimT_pos, WeaponPosAdjustMode weaponPosAdjustMode,bool touchingEnemyBody)
         {
-            damageHappenPoint.y = 0;
             switch (weaponPosAdjustMode)
             {
                 case WeaponPosAdjustMode.draw:
                     return damageHappenPoint;
                 case WeaponPosAdjustMode.pushToMidForward:
-                    if (attackerTransform != null)
+                    damageHappenPoint.y = 0;
+                    f_temp = Vector3.Dot(damageHappenPoint - attackerTransform_pos, attackerTransform_foward);
+                    if (f_temp > 0 && Vector3.Distance(attackerTransform_pos,victimT_pos) < FightGlobalSetting._attackDrawingDistance)
                     {
-                        return (Vector3.Dot(damageHappenPoint - attackerTransform.position, attackerTransform.forward) * attackerTransform.forward + attackerTransform.position);
+                        v_temp = f_temp * attackerTransform_foward + attackerTransform_pos + (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
+                        return v_temp;
                     }
-                    return (victimT.position - damageHappenPoint).normalized + victimT.position;
+                    else
+                    {
+                        return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, WeaponPosAdjustMode.explosion,touchingEnemyBody);
+                    }
                 case WeaponPosAdjustMode.explosion:
-                    return (victimT.position - damageHappenPoint).normalized + victimT.position;
+                    v_temp = (victimT_pos - damageHappenPoint).normalized + victimT_pos;
+                    v_temp.y = 0;
+                    return v_temp;
                 default:
-                    return (victimT.position - damageHappenPoint).normalized + victimT.position;
+                    return victimT_pos;
             }
         }
 

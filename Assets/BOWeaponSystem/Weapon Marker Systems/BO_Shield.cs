@@ -110,7 +110,12 @@ public class BO_Shield : MonoBehaviour {
         }
         if (_ownerFightAttriCalReference != null)
         {
-            _ownerFightAttriCalReference.ApplyDamage(new V_Damage(DamageType.heavy_damage, WeaponPosAdjustMode.explosion, this._ShieldCenterSpot.position,null,null));
+            _ownerFightAttriCalReference.ApplyDamage(new V_Damage(DamageType.heavy_damage, 
+                                                                    WeaponPosAdjustMode.explosion, 
+                                                                        this._ShieldCenterSpot.position,
+                                                                            Vector3.zero,
+                                                                                transform.position,
+                                                                                    null));
         }
     }
 

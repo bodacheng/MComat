@@ -99,7 +99,7 @@ public class G_M_Attack_State : AI_State {
         
         Collider C = Sensor.getClosestColliderInSensorRange(true,true,true);
         if (C != null)
-            this.RotateToTarget(C.transform.position, 10000f, true);
+            this.RotateToTarget(C.transform.position, 10f, true);
  
         _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
 		_Animator.applyRootMotion = true;
@@ -152,7 +152,7 @@ public class G_M_Attack_State : AI_State {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)
         {
-            thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
+            thisFrameRotateAngle = this.RotateToTarget(P, 10f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {

@@ -34,7 +34,7 @@ public class Defend_State : AI_State
         }
         if (defendHP <= 0)
         {
-            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, damage.damageHappenPoint, damage.AttackerT, damage.fromWeapon));
+            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, damage.damageHappenPoint, damage.AttackerT_foward,damage.AttackerT_pos, damage.fromWeapon));
             EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null, damage.damageHappenPoint, Quaternion.identity, null);
         }
     }
@@ -129,14 +129,14 @@ public class Defend_State : AI_State
         if (nearbyenemymeat.Count > 0)
         {
             if (nearbyenemymeat[0] != null)
-                RotateToTarget(nearbyenemymeat[0].transform.position, 1f, true);
+                RotateToTarget(nearbyenemymeat[0].transform.position, 10f, true);
         }
         else
         {
             if (damagingweaponList.Count > 0)
             {
                 if (damagingweaponList[0] != null)
-                    RotateToTarget(damagingweaponList[0].transform.position, 1f, true);
+                    RotateToTarget(damagingweaponList[0].transform.position, 10f, true);
             }
         }
 
@@ -145,7 +145,12 @@ public class Defend_State : AI_State
             Animation_Manger.PlayLayerAnim(block_break_name);
             analyzingDamage = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block)[0];
             analyzingDamage.damage_type = DamageType.heavy_block;
-            fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint, analyzingDamage.AttackerT,this.gameObject.transform,analyzingDamage._WeaponPosAdjustMode);
+            fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint,
+                                                analyzingDamage.AttackerT_foward,
+                                                    analyzingDamage.AttackerT_pos,
+                                                        gameObject.transform.position,
+                                                            analyzingDamage._WeaponPosAdjustMode,
+                                                                _Pusher.hiddenMethods.meTouchingEnemyBody);
             fixpostween = _Rigidbody.DOMove(fixDesPos,1);
             time_counter = FightGlobalSetting._heavyBlockLastingTime;
             DefendHPfade(analyzingDamage);
@@ -157,7 +162,12 @@ public class Defend_State : AI_State
             Animation_Manger.PlayLayerAnim(block_break_name);
             analyzingDamage = _FightAttriCalReference.ReturnDamageList(DamageType.light_block)[0];
             analyzingDamage.damage_type = DamageType.light_block;
-            fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint, analyzingDamage.AttackerT,this.gameObject.transform,analyzingDamage._WeaponPosAdjustMode);
+            fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint,
+                                                analyzingDamage.AttackerT_foward,
+                                                    analyzingDamage.AttackerT_pos,
+                                                        gameObject.transform.position,
+                                                            analyzingDamage._WeaponPosAdjustMode,
+                                                                _Pusher.hiddenMethods.meTouchingEnemyBody);
             fixpostween = _Rigidbody.DOMove(fixDesPos,1);
             time_counter = FightGlobalSetting._lightBlockLastingTime;
             DefendHPfade(analyzingDamage);

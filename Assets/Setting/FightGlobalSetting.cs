@@ -18,6 +18,8 @@ public class FightGlobalSetting : MonoBehaviour
     public static int _defendHP;
     public static float _lightBlockLastingTime, _heavyBlockLastingTime;
     public static AnimationCurve _knockOffyAnimationCurve,_knockOffzAnimationCurve;
+
+    public static float _attackDrawingDistance = 3f;
     
     void Awake()
     {

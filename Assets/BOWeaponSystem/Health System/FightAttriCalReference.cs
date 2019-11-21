@@ -182,7 +182,8 @@ public partial class FightAttriCalReference : MonoBehaviour
                                   DamageType.deathknockoff,
                                   processingD._WeaponPosAdjustMode,
                                   processingD.damageHappenPoint,
-                                  processingD.AttackerT,
+                                  processingD.AttackerT_foward,
+                                  processingD.AttackerT_pos,
                                   processingD.fromWeapon);
                     ApplyDamage(deathknockOff);
                     _Center.IsDead.Value = true;
