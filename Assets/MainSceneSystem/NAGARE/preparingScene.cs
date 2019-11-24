@@ -11,6 +11,8 @@ namespace mainMenu
 {
     public class preparingScene : MonoBehaviour
     {
+        public static preparingScene Instance;
+    
         [Space(7)]
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
@@ -94,7 +96,13 @@ namespace mainMenu
         public RectTransform SelfFightUIT;
         
         public ProcessesRunner processesRunner;
-                
+
+        void Awake()
+        {
+            Instance = this;
+            Screen.SetResolution(1920, 1080, true);
+        }
+        
         void Start()
         {
             //_stagesManager.loadAndRefresh();
@@ -175,11 +183,11 @@ namespace mainMenu
                     // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
                     // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
                     // 那这样的话势必我需要来看接下来这个请求工作的返回值。
-                    IEnumerator localMyChractersProcess = AccountCharsSet.Instance.loadMyOwnedAccountCharacterInfoList();
+                    IEnumerator localMyChractersProcess = AccountCharsSet.Instance.LoadMyOwnedAccountCharacterInfoList();
                     yield return (localMyChractersProcess);
                     //上面这些都缺response判断
                     yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
-                    yield return (this._MonsterBox.myMonsterBox());//这个进程会先找到所有角色的头像。
+                    yield return MonsterBox.MonsterIconsGenerate();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
                     yield return loadMyStonesProcess;
                     yield return _TeamEditManager.INITeamPosButtons();
@@ -199,8 +207,8 @@ namespace mainMenu
         {
             processesRunner.ProcessNagare();
         }
-     
-        public void askIfLoadFight(SceneMode sceneMode, StageScriptableObject stage)
+
+        public void AskIfLoadFight(SceneMode sceneMode, StageScriptableObject stage)
         {
             _LoadingCanvas.arrangeValiationWindow(delegate { LoadFight(sceneMode, stage); }, "开打？");
         }
@@ -216,7 +224,7 @@ namespace mainMenu
         [EnumAction(typeof(MainSceneStep))]
         public void trySwitchToStep(int next_step)
         {
-            this.trySwitchToStep((MainSceneStep)next_step, true);
+            trySwitchToStep((MainSceneStep)next_step, true);
         }
 
         [EnumAction(typeof(MainSceneStep))]
@@ -225,10 +233,10 @@ namespace mainMenu
             if (foward && processesRunner.currentProcess != null)
             {
                 MainSceneStep returnToStep = processesRunner.currentProcess.thisProcessStep;
-                UnityEngine.Events.UnityAction returnTOCurrent = () =>
+                void returnTOCurrent()
                 {
                     trySwitchToStep(returnToStep, false);
-                };
+                }
                 _ReturnButtonManager.PUSH(returnTOCurrent);
             }
 
@@ -236,7 +244,7 @@ namespace mainMenu
         }
 
         //看起来这个函数不应该在这个模块里，但其中的各种操作和整个mainmenu的乱七八糟东西相关性实在太多了，所以姑且放在这
-        public IEnumerator monsterIconButton(string localId)
+        public IEnumerator MonsterIconButton(string localId)
         {
             Debug.Log("于monsterbox点下了如下localid的头像：" + localId + ",Scenestep:" + processesRunner.currentProcess.thisProcessStep);
             switch (processesRunner.currentProcess.thisProcessStep)
@@ -246,13 +254,13 @@ namespace mainMenu
                     break;
                 case MainSceneStep.MemberDetail:
                     yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(localId);//确立focusing角色
-                    yield return _MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
+                    yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                     break;
                 case MainSceneStep.TeamEditFront:
                      yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(localId);//确立focusing角色
                     TeamEditFront process = (TeamEditFront)processesRunner.accessCertainMainSceneProcessObject(MainSceneStep.TeamEditFront);
                     yield return process.TeamEditMonsterDetailMonsterIconBehaviour();
-                    yield return _MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
+                    yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                     break;
             }
             //_MonsterBox.adjustAllIconsSize(localId);
@@ -265,7 +273,7 @@ namespace mainMenu
             {
                 if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
                 {
-                    mainProcessRunner.triggerMainProcess(AccountCharsSet.Instance.localSaveDataGetAllCharacters());
+                    mainProcessRunner.triggerMainProcess(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
                 }
                 if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
                 {
@@ -274,17 +282,19 @@ namespace mainMenu
                         yield return SkillConfigTable.Instance.loadAllSkillConfigs();
                         List<SkillStoneOfPlayerInfoModel> mystones = new List<SkillStoneOfPlayerInfoModel>();
                         int i = 1;
-                        foreach (KeyValuePair<string,SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigDicForReference)
+                        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigDicForReference)
                         {
-                            Debug.Log("尝试于本地存档追加石："+_pair.Value.REAL_NAME);
-                            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel();
-                            skillStoneOfPlayerInfoModel.skillStoneOfPlayerId = String.Format("{0:D20}", i);
-                            skillStoneOfPlayerInfoModel.skillId = _pair.Value.RECORD_ID;
+                            Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
+                            var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
+                            {
+                                skillStoneOfPlayerId = String.Format("{0:D20}", i),
+                                skillId = _pair.Value.RECORD_ID
+                            };
                             mystones.Add(skillStoneOfPlayerInfoModel);
                             i++;
                         }
                         MySkillStonesReader.Instance.overrideMySkillStoneInfosOnLocalFile(mystones);
-                    };
+                    }
                     mainProcessRunner.triggerMainProcess(getAllStones());
                 }
             }

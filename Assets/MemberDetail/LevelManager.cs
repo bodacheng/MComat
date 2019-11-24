@@ -78,7 +78,7 @@ namespace mainMenu
             UnityEngine.Events.UnityAction ConfirmlevelUp = () =>
              {
                  preparingScene.mainProcessRunner.triggerMainProcess
-                     (AccountCharsSet.instance.plusExpForAccountChar(focusingCharacterDataInfo.monsterOfPlayerId, focusingCharacterDataInfo.experience));
+                     (AccountCharsSet.instance.PlusExpForAccountChar(focusingCharacterDataInfo.monsterOfPlayerId, focusingCharacterDataInfo.experience));
              };
             UnityEngine.Events.UnityAction levelUpCancel = () =>
              {

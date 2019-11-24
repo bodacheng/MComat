@@ -63,8 +63,13 @@ public class NetFightScene : MonoBehaviour {
     public SingleThreadProcesser mainProcessRunner;
     
     public ReactiveProperty<bool> LoadStageFinished{ get; set; } = new ReactiveProperty<bool>(false);
-    private readonly FightSceneProcessesRunner fightSceneProcessesRunner = new FightSceneProcessesRunner();
-    
+    readonly FightSceneProcessesRunner fightSceneProcessesRunner = new FightSceneProcessesRunner();
+
+    void Awake()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
+
     void Start()
     {
         //QualitySettings.vSyncCount = 1;

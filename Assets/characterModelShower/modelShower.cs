@@ -46,7 +46,7 @@ namespace mainMenu
             GameObject _char = MyModelPool.Instance.GetMyModel(localID);
             if (_char == null)
             {
-                IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(localID);
+                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(localID);
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield return _CharSetManager.BuildShowModel(targetAccountCharacterInfo);
@@ -215,25 +215,25 @@ namespace mainMenu
             MyModelPool.Instance.SetAllMyCharactersModelActive(false);
             GetMonsterOfPlayerDetailModel _one;
 
-            IEnumerator getchar1 = AccountCharsSet.instance.getAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(0));
+            IEnumerator getchar1 = AccountCharsSet.instance.GetAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(0));
             yield return getchar1;
             _one = (GetMonsterOfPlayerDetailModel)getchar1.Current;
             if (_one != null)
                 onsetLocals.Add(_one);
 
-            IEnumerator getchar2 = AccountCharsSet.instance.getAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(1));
+            IEnumerator getchar2 = AccountCharsSet.instance.GetAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(1));
             yield return getchar2;
             _one = (GetMonsterOfPlayerDetailModel)getchar2.Current;
             if (_one != null)
                 onsetLocals.Add(_one);
 
-            IEnumerator getchar3 = AccountCharsSet.instance.getAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(2));
+            IEnumerator getchar3 = AccountCharsSet.instance.GetAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(2));
             yield return getchar3;
             _one = (GetMonsterOfPlayerDetailModel)getchar3.Current;
             if (_one != null)
                 onsetLocals.Add(_one);
 
-            IEnumerator getchar4 = AccountCharsSet.instance.getAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(3));
+            IEnumerator getchar4 = AccountCharsSet.instance.GetAccountCharacterInfo(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(3));
             yield return getchar4;
             _one = (GetMonsterOfPlayerDetailModel)getchar4.Current;
             if (_one != null)

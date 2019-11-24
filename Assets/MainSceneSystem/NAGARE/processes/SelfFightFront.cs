@@ -14,7 +14,7 @@ public class SelfFightFront : MainSceneProcess
         yield return this._SelfFightManager.INITeamPosButtons();
         this._MonsterBox.MonsterBoxContainer.gameObject.SetActive(true);
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
-        yield return (this._MonsterBox.myMonsterBox());
+        yield return MonsterBox.DisplayMonsterIcons();
         this._SelfFightManager.selfFightUI.gameObject.SetActive(true);
         yield return _modelShower.ShowThisCharacterModel(null);
     }

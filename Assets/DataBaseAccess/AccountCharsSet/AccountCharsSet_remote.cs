@@ -11,14 +11,16 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        public IEnumerator loadAccountCharacterInfoListObjectsRemote(ApiLanguage apiLanguage)
+        public IEnumerator LoadAccountCharacterInfoListObjectsRemote(ApiLanguage apiLanguage)
         {
             // ==============================
             // フォームの生成
             // ==============================
             // フォーム
-            CertificationForm form = new CertificationForm();
-            form.sessionId = AccountSet.Instance.sessionId;
+            CertificationForm form = new CertificationForm
+            {
+                sessionId = AccountSet.Instance.sessionId
+            };
 
             // ==============================
             // API送信
@@ -28,13 +30,13 @@ namespace dataAccess
             yield return ApiCaller.Instance.Post<BaseModel<GetMonsterOfPlayerListModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerList", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
                      getlist = model.data.monsterOfPlayerList;
-                     accountCharacterInfoListObjectsDictionary.Clear();
+                     AccountCharacterInfoListObjectsDictionary.Clear();
                     Debug.Log("以下是获得的角色列表信息：");
                     for (int i = 0; i < getlist.Count; i++)
                     {
                         Debug.Log("monsterOfPlayerId:"+ getlist[i].monsterOfPlayerId + " monsterid :" + getlist[i].monsterId);
-                        if (!accountCharacterInfoListObjectsDictionary.ContainsKey(getlist[i].monsterOfPlayerId))
-                            accountCharacterInfoListObjectsDictionary.Add(getlist[i].monsterOfPlayerId, getlist[i]);
+                        if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(getlist[i].monsterOfPlayerId))
+                            AccountCharacterInfoListObjectsDictionary.Add(getlist[i].monsterOfPlayerId, getlist[i]);
                         else
                             Debug.Log("巨大逻辑错误，重复的monsterOfPlayerId:" + getlist[i].monsterOfPlayerId);
                     }
@@ -43,17 +45,19 @@ namespace dataAccess
                 ,
                  model => {
                     Debug.Log("角色列表获取失败。");
-                    accountCharacterInfoListObjectsDictionary.Clear();
+                    AccountCharacterInfoListObjectsDictionary.Clear();
                  }
             );
             yield break;
         }
         
-        public IEnumerator loadAccountCharacterInfoRemote(string monsterlocalid,ApiLanguage apiLanguage)
+        public IEnumerator LoadAccountCharacterInfoRemote(string monsterlocalid,ApiLanguage apiLanguage)
         {
-            GetMonsterOfPlayerDetailForm form = new GetMonsterOfPlayerDetailForm();
-            form.sessionId = AccountSet.Instance.sessionId;
-            form.monsterOfPlayerId = monsterlocalid;
+            GetMonsterOfPlayerDetailForm form = new GetMonsterOfPlayerDetailForm
+            {
+                sessionId = AccountSet.Instance.sessionId,
+                monsterOfPlayerId = monsterlocalid
+            };
 
             GetMonsterOfPlayerDetailModel _GetMonsterOfPlayerDetailModel = null;
             yield return ApiCaller.Instance.Post<BaseModel<GetMonsterOfPlayerDetailModel>, GetMonsterOfPlayerDetailForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerDetail", form, ApiCaller.Instance.getHeader(apiLanguage),
@@ -68,20 +72,22 @@ namespace dataAccess
             yield return _GetMonsterOfPlayerDetailModel;
         }
         
-        public IEnumerator updateCharRemote(GetMonsterOfPlayerDetailModel accountCharsSet,ApiLanguage apiLanguage)
+        public IEnumerator UpdateCharRemote(GetMonsterOfPlayerDetailModel accountCharsSet,ApiLanguage apiLanguage)
         {
-            SetMonsterSkillStoneForm form = new SetMonsterSkillStoneForm();
-            form.sessionId = AccountSet.Instance.sessionId;
-            form.monsterOfPlayerId = accountCharsSet.monsterOfPlayerId;
-            form.a1SkillStoneOfPlayerId = accountCharsSet.a1_skill_stone_record_id;
-            form.a2SkillStoneOfPlayerId = accountCharsSet.a2_skill_stone_record_id;
-            form.a3SkillStoneOfPlayerId = accountCharsSet.a3_skill_stone_record_id;
-            form.b1SkillStoneOfPlayerId = accountCharsSet.b1_skill_stone_record_id;
-            form.b2SkillStoneOfPlayerId = accountCharsSet.b2_skill_stone_record_id;
-            form.b3SkillStoneOfPlayerId = accountCharsSet.b3_skill_stone_record_id;
-            form.c1SkillStoneOfPlayerId = accountCharsSet.c1_skill_stone_record_id;
-            form.c2SkillStoneOfPlayerId = accountCharsSet.c2_skill_stone_record_id;
-            form.c3SkillStoneOfPlayerId = accountCharsSet.c3_skill_stone_record_id;
+            SetMonsterSkillStoneForm form = new SetMonsterSkillStoneForm
+            {
+                sessionId = AccountSet.Instance.sessionId,
+                monsterOfPlayerId = accountCharsSet.monsterOfPlayerId,
+                a1SkillStoneOfPlayerId = accountCharsSet.a1_skill_stone_record_id,
+                a2SkillStoneOfPlayerId = accountCharsSet.a2_skill_stone_record_id,
+                a3SkillStoneOfPlayerId = accountCharsSet.a3_skill_stone_record_id,
+                b1SkillStoneOfPlayerId = accountCharsSet.b1_skill_stone_record_id,
+                b2SkillStoneOfPlayerId = accountCharsSet.b2_skill_stone_record_id,
+                b3SkillStoneOfPlayerId = accountCharsSet.b3_skill_stone_record_id,
+                c1SkillStoneOfPlayerId = accountCharsSet.c1_skill_stone_record_id,
+                c2SkillStoneOfPlayerId = accountCharsSet.c2_skill_stone_record_id,
+                c3SkillStoneOfPlayerId = accountCharsSet.c3_skill_stone_record_id
+            };
 
             yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel>, SetMonsterSkillStoneForm>("http://160.16.187.230/AssetStoreFight/monster/setMonsterSkillStone", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
@@ -95,12 +101,9 @@ namespace dataAccess
             yield break;
         }
 
-        public IEnumerator plusExpForAccountCharRemote(string charlocalID, int plusExp)
+        public IEnumerator PlusExpForAccountCharRemote(string charlocalID, int plusExp)
         {
-            if (AccountSet.instance._PlayerAccountInfo.Coin < plusExp)
-            {
-                yield break;
-            }
+            yield break;
         }
 
         // 针对玩家拥有角色的更新(monsters_of_player表的update操作),

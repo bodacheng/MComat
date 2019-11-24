@@ -32,12 +32,12 @@ public class Dash_Back_State : AI_State
 
     public override bool Capacity_enter_condition()
     {
-        return _DATA_CENTER.IsGrounded();
+        return _DATA_CENTER.Grounded;
     }
 
     public override bool Enter_condition_priority2()
     {
-        return Sensor.getNearbyDamagingWeaponColliders().Count > 0;
+        return Sensor.GetNearbyDamagingWeaponColliders().Count > 0;
     }
 
     //public override bool enter_condition_priority3()
@@ -59,17 +59,17 @@ public class Dash_Back_State : AI_State
         _SkillCancelFlag.turn_off_flag();
         personality_Events.CloseAllPersonalityEffects();
         Vector3 threatsComingDirection = Vector3.zero;
-        if (Sensor.getEnemiesByDistance(true).Count > 0)
-            threatsComingDirection = Sensor.getEnemiesByDistance(false)[0].transform.position - gameObject.transform.position;
+        if (Sensor.GetEnemiesByDistance(true).Count > 0)
+            threatsComingDirection = Sensor.GetEnemiesByDistance(false)[0].transform.position - gameObject.transform.position;
 
-        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0)
+        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
         {
-            threatsComingDirection = - gameObject.transform.position + Sensor.getNearbyDamagingWeaponColliders()[0].transform.position;
+            threatsComingDirection = - gameObject.transform.position + Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
         }else{
-            if (Sensor.getInnerEnemiesColliders().Count > 0)
+            if (Sensor.GetInnerEnemiesColliders().Count > 0)
             {
-                if (Sensor.getInnerEnemiesColliders()[0] != null)
-                    threatsComingDirection = - gameObject.transform.position + Sensor.getInnerEnemiesColliders()[0].transform.position;
+                if (Sensor.GetInnerEnemiesColliders()[0] != null)
+                    threatsComingDirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
             }
         }
         RotateToDirection(threatsComingDirection, 100000f, true);

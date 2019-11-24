@@ -10,81 +10,73 @@ public class Sensor : MonoBehaviour {
     public float sensor_radius = 15;//这个范围我们也就看作是普攻的冲击检测范围。
     public IDictionary<Team, List<Data_Center>> TeamMembers;
 
-    private LayerMask _layers;
-    private LayerMask meAndEnemyLayermask;
-    private Collider[] _hits; //What was hit in this frame?
-    private RaycastHit[] _spherecastHits;
-    private TeamConfig _TeamConfig;
+    LayerMask _layers;
+    LayerMask meAndEnemyLayermask;
+    Collider[] _hits; //What was hit in this frame?
+    RaycastHit[] _spherecastHits;
+    TeamConfig _TeamConfig;
 
-    private int DetectionInterval = 0;
-    private bool DetectionLoopStarted = false;
-    private int DetectionResultLastFrame = 0;
-    private bool continuousDetection = false;
+    int DetectionInterval;
+    bool DetectionLoopStarted;
+    int DetectionResultLastFrame;
+    bool continuousDetection;
 
-    private List<Collider> innerEnemies = new List<Collider>();
-    private List<Collider> midEnemies = new List<Collider>();
-    private List<Collider> farEnemies = new List<Collider>();
-    private List<Collider> OutterDamagingWeapon = new List<Collider>();
-    private List<Collider> NearbyDamagingWeapon = new List<Collider>();
+    List<Collider> innerEnemies = new List<Collider>();
+    List<Collider> midEnemies = new List<Collider>();
+    List<Collider> farEnemies = new List<Collider>();
+    List<Collider> OutterDamagingWeapon = new List<Collider>();
+    List<Collider> NearbyDamagingWeapon = new List<Collider>();
 
-    private Data_Center selfDataCenter;
+    Data_Center selfDataCenter;
 
     public bool IFContinuousDetectionStarted()
     {
         return continuousDetection;
     }
 
-    public void setDectectLayerAndFrontDirection(TeamConfig teamConfig,Data_Center _self)
+    public void SetDectectLayerAndFrontDirection(TeamConfig teamConfig,Data_Center _self)
     {
-        this._TeamConfig = teamConfig;
-        if (this._TeamConfig != null)
+        _TeamConfig = teamConfig;
+        if (_TeamConfig != null)
         {
             _layers = teamConfig.mySensorAndWeaponTargetLayerMask;
             meAndEnemyLayermask = teamConfig.myTeamAndMyEnemy;
         }
-        this.selfDataCenter = _self;
+        selfDataCenter = _self;
     }
 
-    public List<Collider> getInnerEnemiesColliders()
+    public List<Collider> GetInnerEnemiesColliders()
     {
         //innerEnemies.RemoveAll(item => item == null);
         return innerEnemies;
     }
-    public List<Collider> getMidEnemiesColliders()
+    public List<Collider> GetMidEnemiesColliders()
     {
         //innerEnemies.RemoveAll(item => item == null);
         return midEnemies;
     }
-    public List<Collider> getfarEnemiesColliders()
+    public List<Collider> GetfarEnemiesColliders()
     {
         //outterEnemies.RemoveAll(item => item == null);
         return farEnemies;
     }
-    public List<Collider> getNearbyDamagingWeaponColliders()
+    public List<Collider> GetNearbyDamagingWeaponColliders()
     {
         //NearbyDamagingWeapon.RemoveAll(item => item == null);
         return NearbyDamagingWeapon;
     }
-    public List<Collider> getOutterDamagingWeaponColliders()
+    public List<Collider> GetOutterDamagingWeaponColliders()
     {
         return OutterDamagingWeapon;
     }
     
-    public Collider getClosestColliderInSensorRange(bool near,bool mid,bool far)
+    public Collider GetClosestColliderInSensorRange(bool near,bool mid,bool far)
     {
-        if (near && innerEnemies.Count > 0)
-        {
-            return FindNearestCollider(innerEnemies);
-        }
-        if (mid && midEnemies.Count > 0)
-        {
-            return FindNearestCollider(midEnemies);
-        }
-        if (far && farEnemies.Count > 0)
-        {
-            return FindNearestCollider(farEnemies);
-        }
-        return null;
+        return near && innerEnemies.Count > 0
+            ? FindNearestCollider(innerEnemies)
+            : mid && midEnemies.Count > 0
+            ? FindNearestCollider(midEnemies)
+            : far && farEnemies.Count > 0 ? FindNearestCollider(farEnemies) : null;
     }
 
     public void SensorFixedUpdate()
@@ -125,16 +117,16 @@ public class Sensor : MonoBehaviour {
     // ... 循环
     // 结论： continuousDetectionStart(0) 让检测器隔一帧检测一次，continuousDetectionStart(-1)(任何负)，让检测器每帧检测一次
 
-    public void continuousDetectionStart(int _DetectionResultLastFrame)
+    public void ContinuousDetectionStart(int _DetectionResultLastFrame)
     {
         SensorDetectionResultClearProcess();
         SensorDetectProcess();//检测
         SensorDetectionResultSortProcess();//整理
 
-        this.continuousDetection = true;
-        this.DetectionResultLastFrame = _DetectionResultLastFrame;
-        this.DetectionLoopStarted = true;
-        this.DetectionInterval = 1;//这个设置是为了在启动本函数瞬间进行检测活动，但不会在update里立刻再进行一次，形成间隔
+        continuousDetection = true;
+        DetectionResultLastFrame = _DetectionResultLastFrame;
+        DetectionLoopStarted = true;
+        DetectionInterval = 1;//这个设置是为了在启动本函数瞬间进行检测活动，但不会在update里立刻再进行一次，形成间隔
     }
 
     public void OneRoundDetectionStart(int _DetectionResultLastFrame)
@@ -159,10 +151,7 @@ public class Sensor : MonoBehaviour {
     Collider jiamateammate; Collider nearestenemy;
     public Collider[] EnemyAndTeammateBetweenMeAndEnemy()
     {
-        if (jiamateammate != null && nearestenemy != null)
-            return new Collider[2] { jiamateammate, nearestenemy };
-        else
-            return null;
+        return jiamateammate != null && nearestenemy != null ? (new Collider[2] { jiamateammate, nearestenemy }) : null;
     }
 
     public void SensorDetectProcess()
@@ -181,7 +170,7 @@ public class Sensor : MonoBehaviour {
     }
 
     private List<GameObject> EnemiesByDistance = new List<GameObject>();
-    public List<GameObject> getEnemiesByDistance(bool refresh)
+    public List<GameObject> GetEnemiesByDistance(bool refresh)
     {
         if (this._TeamConfig == null)
         {
@@ -193,8 +182,8 @@ public class Sensor : MonoBehaviour {
         return EnemiesByDistance;
     }
 
-    private List<GameObject> AlliesByDistance = new List<GameObject>();
-    public List<GameObject> getAlliesAndSelfByDistance(bool refresh)
+    List<GameObject> AlliesByDistance = new List<GameObject>();
+    public List<GameObject> GetAlliesAndSelfByDistance(bool refresh)
     {
         if (this._TeamConfig == null)
         {
@@ -206,9 +195,7 @@ public class Sensor : MonoBehaviour {
         return AlliesByDistance;
     }
 
-    private List<Data_Center> searchingMembers;
-    private GameObject a;
-    private GameObject b;
+    List<Data_Center> searchingMembers;
     public List<GameObject> FindTargetsByDistance(Team[] tags) // 根据提供得目标标签获取一个以离自身距离为基准的gameobjects列表。有了这个显然FindClosestEnemy这个函数就很落后了
     {
         List<GameObject> target_list = new List<GameObject>();//貌似换成clear的话会减少GC,然而如果那样做，将产生一个极其严重的bug。你很可能在不知不觉中让两个使用了这个函数求列表的函数指向了同一地址。
@@ -238,7 +225,7 @@ public class Sensor : MonoBehaviour {
             }
             if (target_list.Count > 1)
             {
-                target_list.Sort((a, b) => horizontalDistanceCompare(a.transform.position, b.transform.position));
+                target_list.Sort((a, b) => HorizontalDistanceCompare(a.transform.position, b.transform.position));
                 return target_list;
             }
             else
@@ -250,7 +237,7 @@ public class Sensor : MonoBehaviour {
     }
 
     private Vector3 _ClosestPointOnBounds;
-    private Collider tempCForNearest =null;
+    private Collider tempCForNearest;
     public void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
     {
         if (_hits == null)
@@ -360,8 +347,8 @@ public class Sensor : MonoBehaviour {
         nearestenemy = null;
     }
 
-    private float p1_to_me, p2_to_me;
-    private int horizontalDistanceCompare(Vector3 p1, Vector3 p2)
+    float p1_to_me, p2_to_me;
+    int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
     {
         p1.y = gameObject.transform.position.y;
         p1_to_me = (p1 - gameObject.transform.position).magnitude;
@@ -369,18 +356,10 @@ public class Sensor : MonoBehaviour {
         p2.y = gameObject.transform.position.y;
         p2_to_me = (p2 - gameObject.transform.position).magnitude;
 
-        if (p1_to_me > p2_to_me)
-        {
-            return 1;
-        }
-        if (p1_to_me < p2_to_me)
-        {
-            return -1;
-        }
-        return 0;
+        return p1_to_me > p2_to_me ? 1 : p1_to_me < p2_to_me ? -1 : 0;
     }
 
-    private Collider FindNearestCollider(List<Collider> list)
+    Collider FindNearestCollider(List<Collider> list)
     {
         if (list == null || list.Count == 0)
             return null;
@@ -397,7 +376,7 @@ public class Sensor : MonoBehaviour {
         {
             if (list[i] == null)
                 continue;
-            if (horizontalDistanceCompare(target.transform.position, list[i].transform.position) == 1)
+            if (HorizontalDistanceCompare(target.transform.position, list[i].transform.position) == 1)
             {
                 target = list[i];
             }
@@ -405,36 +384,20 @@ public class Sensor : MonoBehaviour {
         return target;
     }
 
-    public bool allyBetweenSelfAndEnemy(float judgmentRange)
+    public bool AllyBetweenSelfAndEnemy(float judgmentRange)
     {
-        getEnemiesByDistance(true);
-        getAlliesAndSelfByDistance(true);
+        GetEnemiesByDistance(true);
+        GetAlliesAndSelfByDistance(true);
 
         if (EnemiesByDistance.Count > 0 && AlliesByDistance.Count > 1)
         {
             float disToNearestEnemy2j, disToNearestAlly2j;
-            disToNearestEnemy2j = horizontalDistanceCompare(EnemiesByDistance[0].transform.position, gameObject.transform.position);
-            disToNearestAlly2j = horizontalDistanceCompare(AlliesByDistance[1].transform.position, gameObject.transform.position);
-            if (disToNearestEnemy2j >= disToNearestAlly2j && disToNearestEnemy2j < Mathf.Pow(judgmentRange, 2))
-            {
-                if (Vector3.Angle((EnemiesByDistance[0].transform.position - gameObject.transform.position), (AlliesByDistance[1].transform.position - gameObject.transform.position)) < 40)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
+            disToNearestEnemy2j = HorizontalDistanceCompare(EnemiesByDistance[0].transform.position, gameObject.transform.position);
+            disToNearestAlly2j = HorizontalDistanceCompare(AlliesByDistance[1].transform.position, gameObject.transform.position);
+            return disToNearestEnemy2j >= disToNearestAlly2j && disToNearestEnemy2j < Mathf.Pow(judgmentRange, 2) && 
+            Vector3.Angle((EnemiesByDistance[0].transform.position - gameObject.transform.position), (AlliesByDistance[1].transform.position - gameObject.transform.position)) < 40;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     void OnDrawGizmosSelected()

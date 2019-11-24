@@ -68,7 +68,7 @@ public class Pusher : MonoBehaviour
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
                 if (_DATA_CENTER.Sensor != null)
-                    _DATA_CENTER.Sensor.getInnerEnemiesColliders().Add(collision.collider);
+                    _DATA_CENTER.Sensor.GetInnerEnemiesColliders().Add(collision.collider);
                 hiddenMethods.ITouchedThisCollider(1);
                 hiddenMethods.meTouchingEnemyBody = true;
             }
@@ -82,7 +82,7 @@ public class Pusher : MonoBehaviour
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
                 if (_DATA_CENTER.Sensor != null)
-                    _DATA_CENTER.Sensor.getInnerEnemiesColliders().Add(collision.collider);
+                    _DATA_CENTER.Sensor.GetInnerEnemiesColliders().Add(collision.collider);
                 hiddenMethods.ITouchedThisCollider(1);
                 hiddenMethods.meTouchingEnemyBody = false;
             }
@@ -94,18 +94,24 @@ public class Pusher : MonoBehaviour
     void OnAnimatorMove()
     {
         _DATA_CENTER.animator.ApplyBuiltinRootMotion();
+        
         if (FightGlobalSetting.scenestep == 1)
         {
             temp = transform.position;
+            if (temp.y < 0)
+            {
+                temp.y = 0f;
+                transform.position = temp;
+            }
             temp.y = 0;
-            dis_from_center = transform.position.magnitude;
+            dis_from_center = temp.magnitude;
             if (transform.position.magnitude > BoundaryControllByGod._BattleRingRadius)
             {
-                transform.position = 20 * temp / dis_from_center;
+                transform.position = BoundaryControllByGod._BattleRingRadius * temp / dis_from_center;
                 _DATA_CENTER.onBattleGroundBundary = true;
             }else
             {
-                _DATA_CENTER.onBattleGroundBundary = System.Math.Abs(transform.position.magnitude - BoundaryControllByGod._BattleRingRadius) < 0.01f;
+                _DATA_CENTER.onBattleGroundBundary = false;
             }
         }
     }

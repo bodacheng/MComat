@@ -329,7 +329,7 @@
     <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson-Example\JsonExample.cs" />
     <Compile Include="Assets\JsonSupport\UnityPackage\Assets\JsonNetSample.cs" />
-    <Compile Include="Assets\mailManager\MailManager.cs" />
+    <Compile Include="Assets\MailManager\MailManager.cs" />
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />
     <Compile Include="Assets\MainSceneSystem\HollowOutMask.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />

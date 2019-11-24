@@ -72,7 +72,7 @@ namespace mainMenu
             enterQuest.onClick.RemoveAllListeners();
             void Go()
             {
-                _preparingScene.askIfLoadFight(sceneMode, _Stage);
+                _preparingScene.AskIfLoadFight(sceneMode, _Stage);
             }
             enterQuest.onClick.AddListener(Go);
 

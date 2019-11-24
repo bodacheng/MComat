@@ -35,14 +35,14 @@ public class G_Ani_MoveEscape_State : AI_State {
 
     public override bool Capacity_enter_condition()
     {
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
             return false;
         return true;
     }
 
     public override bool Enter_condition_priority2()
     {
-        if ((this._FightAttriCalReference.IFgettingDamage() || Sensor.getNearbyDamagingWeaponColliders().Count > 0) 
+        if ((this._FightAttriCalReference.IFgettingDamage() || Sensor.GetNearbyDamagingWeaponColliders().Count > 0) 
             && this._FightAttriCalReference.CriticalGauge > 90)
             return true;
         else
@@ -68,9 +68,9 @@ public class G_Ani_MoveEscape_State : AI_State {
         this._Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name);        
         facedirection = gameObject.transform.forward;
-        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0)
+        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
         {
-            damagingWeaponComingDirection = gameObject.transform.position - Sensor.getNearbyDamagingWeaponColliders()[0].transform.position;
+            damagingWeaponComingDirection = gameObject.transform.position - Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
             switch ((int)Random.Range(0,2))
             {
                 case 0:
@@ -83,10 +83,10 @@ public class G_Ani_MoveEscape_State : AI_State {
                     break;
             }
         }else{
-            if (Sensor.getInnerEnemiesColliders().Count > 0)
+            if (Sensor.GetInnerEnemiesColliders().Count > 0)
             {
-                if (Sensor.getInnerEnemiesColliders()[0] != null)
-                    facedirection = - gameObject.transform.position + Sensor.getInnerEnemiesColliders()[0].transform.position;
+                if (Sensor.GetInnerEnemiesColliders()[0] != null)
+                    facedirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
             }
         }
         this.RotateToDirection(-facedirection, 100f, true);

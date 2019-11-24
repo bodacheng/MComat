@@ -15,7 +15,7 @@ public class TryOneStoneAdd : MainSceneProcess
         // 将角色锁定为剧情人物“亚当”；亚当的信息甚至可以新建。
         yield return AccountCharsSet.Instance.loadStoryCharsByXMLFile();
         
-        IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo("1");
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
         
@@ -136,7 +136,7 @@ public class TryOneStoneAdd : MainSceneProcess
     
     IEnumerator refreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion()
     {
-        IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo("1");
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
         if (focusingCharacterDataInfo == null)

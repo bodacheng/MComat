@@ -91,17 +91,17 @@ public class Counter_State : AI_State {
 
     public override bool Enter_condition_priority1()
     {
-        return Sensor.getNearbyDamagingWeaponColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
+        return Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override bool Enter_condition_priority2()
     {
-        return Sensor.getInnerEnemiesColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
+        return Sensor.GetInnerEnemiesColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override bool Enter_condition_priority3()
     {
-        return Sensor.getInnerEnemiesColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
+        return Sensor.GetInnerEnemiesColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override void AI_State_enter()
@@ -118,7 +118,7 @@ public class Counter_State : AI_State {
         gotdamageamont = 0;
         lastframeResistent = this._ResistanceManager.Resistance.Value;
         
-        Collider C = Sensor.getClosestColliderInSensorRange(true,false,false);
+        Collider C = Sensor.GetClosestColliderInSensorRange(true,false,false);
         if (C != null)
             rotateTarget = C.transform.position;
 	}
@@ -161,7 +161,7 @@ public class Counter_State : AI_State {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)
         {
-            thisFrameRotateAngle = RotateToTarget(P, 10f, true);
+            thisFrameRotateAngle = RotateToTarget(P, 1f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {

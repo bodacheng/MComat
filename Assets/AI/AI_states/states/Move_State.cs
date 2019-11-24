@@ -52,7 +52,7 @@ public class Move_State : AI_State
 
     public override bool Strategic_exit_condition()
     {
-        return Sensor.getInnerEnemiesColliders().Count > 0 || Sensor.getNearbyDamagingWeaponColliders().Count > 0 || Sensor.getOutterDamagingWeaponColliders().Count > 0;
+        return Sensor.GetInnerEnemiesColliders().Count > 0 || Sensor.GetNearbyDamagingWeaponColliders().Count > 0 || Sensor.GetOutterDamagingWeaponColliders().Count > 0;
     }
 
     bool Timeup()
@@ -98,9 +98,8 @@ public class Move_State : AI_State
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
-        this._DATA_CENTER.SetUsingGravity(true);
         this._Weapon_Animation_Events.ClearMarkerManagers();
-        this.Sensor.continuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
+        this.Sensor.ContinuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
         this.Animation_Manger.PlayLayerAnim(null);
 
         // 从这到底下那么也就是AI模式决定第一轮moveDirection和use_direction的
@@ -113,13 +112,13 @@ public class Move_State : AI_State
 
     void DecideDirection()
     {
-        EnemiesByDistance = Sensor.getEnemiesByDistance(true);
+        EnemiesByDistance = Sensor.GetEnemiesByDistance(true);
         switch (_AIMoveStyle)
         {
             case AIMoveStyle.normal:
                 if (EnemiesByDistance.Count > 0)
                 {
-                    whereToGo = Sensor.getNearbyDamagingWeaponColliders().Count > 0 && Sensor.getNearbyDamagingWeaponColliders()[0] != null ? 5 : Random.Range(0, 5);
+                    whereToGo = Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && Sensor.GetNearbyDamagingWeaponColliders()[0] != null ? 5 : Random.Range(0, 5);
 
                     switch (whereToGo)
                     {
@@ -156,9 +155,9 @@ public class Move_State : AI_State
                             //    use_direction = Vector3.Angle(toTeammates, vertical) > Vector3.Angle(toTeammates, vertical_r) ? vertical : vertical_r;
                             //}
                             //else{
-                            if (Sensor.getNearbyDamagingWeaponColliders().Count > 0 && Sensor.getNearbyDamagingWeaponColliders()[0] != null)
+                            if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && Sensor.GetNearbyDamagingWeaponColliders()[0] != null)
                             {
-                                Vector3 vertical = GetVerticalDir(Sensor.getNearbyDamagingWeaponColliders()[0].transform.position - this.gameObject.transform.position);
+                                Vector3 vertical = GetVerticalDir(Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position - this.gameObject.transform.position);
                                 use_direction = (int)Random.Range(0, 2) == 1 ? vertical : -vertical;
                             }
                             else
@@ -196,7 +195,7 @@ public class Move_State : AI_State
         
         if (!this.Sensor.IFContinuousDetectionStarted())
         {
-            this.Sensor.continuousDetectionStart(-1);//这个的真正目的是把检测关闭
+            this.Sensor.ContinuousDetectionStart(-1);//这个的真正目的是把检测关闭
         }
 
         if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
@@ -302,7 +301,7 @@ public class Move_State : AI_State
         {
             this._Animator.SetFloat("speed", 10f);
             this.Move(use_direction, speed, true);
-            this.RotateToVelocity(2f, true);
+            this.RotateToVelocity(1f, true);
         }
         else
         {

@@ -1397,10 +1397,19 @@ MonoBehaviour:
       time: 0.8253349
       value: -2.1682308
       inSlope: -12.397257
-      outSlope: 0
+      outSlope: -11.655904
       tangentMode: 65
       weightedMode: 0
       inWeight: 0.1025307
+      outWeight: 0
+    - serializedVersion: 3
+      time: 4.603703
+      value: -46.208527
+      inSlope: -11.655904
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1409,26 +1418,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 29.596102
-      outSlope: 29.596102
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.12171425
-    - serializedVersion: 3
-      time: 0.99380493
-      value: 15
+      time: -27.106495
+      value: -94.20214
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
-      time: 12.354809
-      value: 15
+      time: 15.361688
+      value: 783.7627
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1444,6 +1444,7 @@ MonoBehaviour:
   defendHP: 20
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.5
+  attackDrawingDistance: 1
 --- !u!4 &1558915669
 Transform:
   m_ObjectHideFlags: 0

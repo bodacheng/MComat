@@ -32,7 +32,7 @@ public class Empty_State : AI_State
 
 	public override void _State_FixedUpdate1()
 	{
-        if (_DATA_CENTER.IsGrounded() && this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.unstarted)
+        if (_DATA_CENTER.Grounded && this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.unstarted)
         {
             this._Rigidbody.velocity = Vector3.zero;
             //_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;

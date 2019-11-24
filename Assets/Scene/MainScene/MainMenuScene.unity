@@ -16164,7 +16164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0612fbce5784de295e1e406144a6a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPSControllersCanvas: {fileID: 0}
 --- !u!114 &317512014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28075,7 +28074,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2010895280}
-        m_MethodName: onTypeChangeMyMonsterBox
+        m_MethodName: OnTypeChangeMyMonsterBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

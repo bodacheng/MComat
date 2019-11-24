@@ -49,7 +49,7 @@ public class Move_State2 : AI_State
 
     public override bool Strategic_exit_condition()
     {
-        if (Sensor.getMidEnemiesColliders().Count > 0 || this.time_counter >= this.time_limit)//|| Sensor.getInnerRangeWallColliders().Count > 0
+        if (Sensor.GetMidEnemiesColliders().Count > 0 || this.time_counter >= this.time_limit)//|| Sensor.getInnerRangeWallColliders().Count > 0
         {
             return true;
         }
@@ -69,7 +69,7 @@ public class Move_State2 : AI_State
         _Rigidbody.useGravity = true;
         Animation_Manger.PlayLayerAnim(null);
 
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
             use_direction.y = -1;
     }
 
@@ -78,13 +78,13 @@ public class Move_State2 : AI_State
     {
         this.personality_Events.CloseAllPersonalityEffects();
         //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
-        EnemiesByDistance = Sensor.getEnemiesByDistance(true);
+        EnemiesByDistance = Sensor.GetEnemiesByDistance(true);
         switch(_AIMoveStyle)
         {
             case AIMoveStyle.normal:
                 if (EnemiesByDistance.Count > 0)
                 {
-                    if (Sensor.getInnerEnemiesColliders().Count > 0)
+                    if (Sensor.GetInnerEnemiesColliders().Count > 0)
                     {
                         whereToGo = (int)Random.Range(0, 4);
                         if (whereToGo > 1)
@@ -93,8 +93,8 @@ public class Move_State2 : AI_State
                             use_direction = Vector3.zero;
                         }else{
                             this.moveDirection = AIMoveDirection.backTowardsEnemy;
-                            if (Sensor.getInnerEnemiesColliders()[0] != null)
-                                use_direction = -Sensor.getInnerEnemiesColliders()[0].transform.position + gameObject.transform.position;
+                            if (Sensor.GetInnerEnemiesColliders()[0] != null)
+                                use_direction = -Sensor.GetInnerEnemiesColliders()[0].transform.position + gameObject.transform.position;
                             use_direction.y = 0;
                             if (x_direction_random_range > 0)
                             {
@@ -102,20 +102,20 @@ public class Move_State2 : AI_State
                             }
                         }
                     }
-                    else if (Sensor.getMidEnemiesColliders().Count > 0 && Sensor.getInnerEnemiesColliders().Count == 0)
+                    else if (Sensor.GetMidEnemiesColliders().Count > 0 && Sensor.GetInnerEnemiesColliders().Count == 0)
                     {
                         whereToGo = (int)Random.Range(0, 8);
                         switch (whereToGo)
                         {
                             case 1:
                                 this.moveDirection = AIMoveDirection.EnemynoLeft;
-                                if (Sensor.getMidEnemiesColliders()[0] != null)
-                                    use_direction = -Sensor.getMidEnemiesColliders()[0].transform.right;
+                                if (Sensor.GetMidEnemiesColliders()[0] != null)
+                                    use_direction = -Sensor.GetMidEnemiesColliders()[0].transform.right;
                                 break;
                             case 2:
                                 this.moveDirection = AIMoveDirection.EnemynoRight;
-                                if (Sensor.getMidEnemiesColliders()[0] != null)
-                                    use_direction = Sensor.getMidEnemiesColliders()[0].transform.right;
+                                if (Sensor.GetMidEnemiesColliders()[0] != null)
+                                    use_direction = Sensor.GetMidEnemiesColliders()[0].transform.right;
                                 break;
                             case 0:
                                 this.moveDirection = AIMoveDirection.towardsEnemy;
@@ -139,7 +139,7 @@ public class Move_State2 : AI_State
                                 break;
                         }
                     }
-                    else if (Sensor.getMidEnemiesColliders().Count == 0)
+                    else if (Sensor.GetMidEnemiesColliders().Count == 0)
                     {
                         this.moveDirection = AIMoveDirection.towardsEnemy;
                     }
@@ -159,7 +159,7 @@ public class Move_State2 : AI_State
         }
         use_direction = use_direction.normalized;
 
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
             use_direction.y = -1;
 
         if (this._AIStateRunner.GetLastState() == this)
@@ -208,7 +208,7 @@ public class Move_State2 : AI_State
         }
 
         use_direction = use_direction.normalized;
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
             use_direction.y = -1;
         //if (AI_DATA_CENTER.getAlliesAndSelfByDistance(true).Count > 1)
         //{
@@ -267,7 +267,7 @@ public class Move_State2 : AI_State
             _Animator.SetFloat("speed", 0f);
             Debug.Log("错误：角色处于控制模式却没有被适配相机。");
         }
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
             use_direction.y = -1;
 
         PositionUpdate();

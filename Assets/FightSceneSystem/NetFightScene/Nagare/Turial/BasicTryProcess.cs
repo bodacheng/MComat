@@ -79,15 +79,15 @@ public class BasicTryProcess : NagareProcess
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
         
         watchetargets.Clear();
-        if (RealTimeGameProcessManager.focusingChar.Sensor.getEnemiesByDistance(true).Count > 0)
+        if (RealTimeGameProcessManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
         {
-            foreach (GameObject _G in RealTimeGameProcessManager.focusingChar.Sensor.getEnemiesByDistance(false))
+            foreach (GameObject _G in RealTimeGameProcessManager.focusingChar.Sensor.GetEnemiesByDistance(false))
             {
                 watchetargets.Add(_G.transform);
             }
         }
         
-        IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo("1");
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
         CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(before);

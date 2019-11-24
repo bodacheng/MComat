@@ -9,12 +9,11 @@ using System;
 
 public class FightingProcess : NagareProcess
 {
-    private readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
-
+    readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
     public FightingProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
     {
-        this.thisProcessStep = SceneStep.Fighting;
-        this.nextProcessStep = SceneStep.FightOver;
+        thisProcessStep = SceneStep.Fighting;
+        nextProcessStep = SceneStep.FightOver;
         EelementsInherit(_NetFightScene, fightSceneProcessesRunner);
         fightLogger.gameOver.Subscribe(x => 
             {
@@ -28,8 +27,8 @@ public class FightingProcess : NagareProcess
         AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.teamMembers.values);
         AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.teamMembers.values);
 
-        this.BoundaryControllByGod.AllMembers = AllMembers;
-        this.fightLogger.ReadyToLog(AllMembers);
+        BoundaryControllByGod.AllMembers = AllMembers;
+        fightLogger.ReadyToLog(AllMembers);
         
         foreach (KeyValuePair<Team,List<Data_Center>> _set in AllMembers)
         {
@@ -62,17 +61,9 @@ public class FightingProcess : NagareProcess
         {
             case fightModeType.combat:
                 _RealTimeGameProcessManager.FightingStepProcess();
-                switch (BoundaryControllByGod.boundaryMode)
-                {
-                    case BoundaryMode.Round:
-                        //BoundaryControllByGod.RoundBattleFieldNormalControl(Vector3.zero);
-                        break;
-                    case BoundaryMode.None:
-                        break;
-                }
                 break;
         }
-        this.mobileInputsManager.RefreshButtonPattern();
+        mobileInputsManager.RefreshButtonPattern();
     }
 
     private IEnumerator FinalMoment(Team winner)

@@ -135,7 +135,7 @@ namespace mainMenu
         {
             if (this.focusingTeam == Team.none || this.focusingPosition < 0)
                 yield break;
-            IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(localID);
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(localID);
             yield return getchar;
             GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (myfighter == null)
@@ -241,7 +241,7 @@ namespace mainMenu
             {
                 GetMonsterOfPlayerDetailModel _one;
                 CharacterResourceInfo characterResourceInfo = null;
-                IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(PositionMonsterOfPlayerId);
+                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(PositionMonsterOfPlayerId);
                 yield return getchar;
                 if (getchar.Current == null)
                     yield break;

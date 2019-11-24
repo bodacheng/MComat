@@ -11,7 +11,7 @@ public partial class G_Attack_State : AI_State
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag())
         {
-            thisFrameRotateAngle = this.RotateToTarget(P, 10f, true);
+            thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {
@@ -48,20 +48,20 @@ public partial class G_Attack_State : AI_State
         switch (_phase)
         {
             case Phase.noRushState://其实现在压根不会进入。
-                if (Sensor.getEnemiesByDistance(false).Count > 0)
+                if (Sensor.GetEnemiesByDistance(false).Count > 0)
                 {
-                    if (Sensor.getEnemiesByDistance(false)[0] != null)
+                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
                     {
-                        SingleDirectionRotateProcess(Sensor.getEnemiesByDistance(false)[0].transform.position,approcahingSpeed);
+                        SingleDirectionRotateProcess(Sensor.GetEnemiesByDistance(false)[0].transform.position,approcahingSpeed);
                     }
                 }
                 break;
             case Phase.farFromReach:
-                if (Sensor.getEnemiesByDistance(false).Count > 0)
+                if (Sensor.GetEnemiesByDistance(false).Count > 0)
                 {
-                    if (Sensor.getEnemiesByDistance(false)[0] != null)
+                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
                     {
-                        SingleDirectionRotateProcess(Sensor.getEnemiesByDistance(false)[0].transform.position,approcahingSpeed);
+                        SingleDirectionRotateProcess(Sensor.GetEnemiesByDistance(false)[0].transform.position,approcahingSpeed);
                     }
                 }
                 //_Rigidbody.velocity = Vector3.zero;
@@ -71,7 +71,7 @@ public partial class G_Attack_State : AI_State
                 {
                     if (Vector3.Distance(gameObject.transform.position,rushingToTarget.position) < 2f)
                         _phase = Phase.reached;
-                    thisFrameRotateAngle = this.RotateToTarget(rushingToTarget.position, 10f, true);
+                    thisFrameRotateAngle = this.RotateToTarget(rushingToTarget.position, 1f, true);
 
                     if (thisFrameRotateAngle > 60)//就是说 ，转角太大代表出问题了，很可能在自转
                     { _phase = Phase.reached;}
@@ -108,29 +108,29 @@ public partial class G_Attack_State : AI_State
                 rush_time_counter += Time.fixedDeltaTime;
                 break;
             case Phase.reached:
-                if (Sensor.getInnerEnemiesColliders().Count > 0)
+                if (Sensor.GetInnerEnemiesColliders().Count > 0)
                 {
-                    if (Sensor.getInnerEnemiesColliders()[0] == null)
+                    if (Sensor.GetInnerEnemiesColliders()[0] == null)
                         break;
                     //如果角色是在扭转自身方向至一个敌人的hitbox，
                     //而武器校准是在把对方推向自身的transform.forward线上，那这样下来如果对方的hitbox t.p和整体t.p相差比较远，则并不是一种把两个角色并到一条线的趋势。
                     //其实，如果一个敌人可以被位置校准，那其实是如上所述要同时转向这个敌人的TP并靠攻击将对方的TP连到自己的前方；
                     //而如果一个敌人不可以被位置校准，也是两方面，一来武器不需要对对方进行校准处理，另一方面转向不是完全转至敌人的TP而是根据情况转向敌人的HItbox TP。
-                    SingleDirectionRotateProcess(Sensor.getInnerEnemiesColliders()[0].transform.position,approcahingSpeed);
+                    SingleDirectionRotateProcess(Sensor.GetInnerEnemiesColliders()[0].transform.position,approcahingSpeed);
                 }
                 break;
             case Phase.reachedFromThebeginning:
-                if (Sensor.getInnerEnemiesColliders().Count > 0)
+                if (Sensor.GetInnerEnemiesColliders().Count > 0)
                 {
-                    if (Sensor.getInnerEnemiesColliders()[0] == null)
+                    if (Sensor.GetInnerEnemiesColliders()[0] == null)
                         break;
-                    SingleDirectionRotateProcess(Sensor.getInnerEnemiesColliders()[0].transform.position,approcahingSpeed);
+                    SingleDirectionRotateProcess(Sensor.GetInnerEnemiesColliders()[0].transform.position,approcahingSpeed);
                 }
                 else
                 {
-                    if (Sensor.getClosestColliderInSensorRange(false,true,true)!=null)//也就是说，在你本状态内不冲刺但是外环有敌人的情况下，如果发动了这个攻击状态，还是会有朝向和迈步。
+                    if (Sensor.GetClosestColliderInSensorRange(false,true,true)!=null)//也就是说，在你本状态内不冲刺但是外环有敌人的情况下，如果发动了这个攻击状态，还是会有朝向和迈步。
                     {
-                        SingleDirectionRotateProcess(Sensor.getClosestColliderInSensorRange(false,true,true).transform.position,approcahingSpeed);
+                        SingleDirectionRotateProcess(Sensor.GetClosestColliderInSensorRange(false,true,true).transform.position,approcahingSpeed);
                     }
                 }
                 break;

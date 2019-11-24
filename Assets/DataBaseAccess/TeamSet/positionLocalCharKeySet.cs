@@ -35,7 +35,7 @@ public class PositionLocalCharKeySet
         {
             if (PosNumsWithLocalKeys[i].monsterOfPlayerId != null)
             {
-                IEnumerator getchar = AccountCharsSet.Instance.getAccountCharacterInfo(PosNumsWithLocalKeys[i].monsterOfPlayerId);
+                IEnumerator getchar = AccountCharsSet.Instance.GetAccountCharacterInfo(PosNumsWithLocalKeys[i].monsterOfPlayerId);
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (GetMonsterOfPlayerDetailModel != null)

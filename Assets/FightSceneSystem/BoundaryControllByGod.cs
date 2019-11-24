@@ -23,13 +23,13 @@ public class BoundaryControllByGod : MonoBehaviour {
     [Header("圆形模式参数")]
     [Space(6)]
     public List<ParticleSystem> BattleRingPSs;
-    private ParticleSystem BattleRingPS;
-    private float BattleRingRadius = 20f;
+    ParticleSystem BattleRingPS;
+    float BattleRingRadius = 20f;
     public static float _BattleRingRadius;
     
     public IDictionary<Team, List<Data_Center>> AllMembers;//双方队伍人员字典，和netfightscene模块里同名变量统一。
 
-    private void Awake()
+    void Awake()
     {
         _BattleRingRadius = BattleRingRadius;
     }
@@ -93,7 +93,6 @@ public class BoundaryControllByGod : MonoBehaviour {
         }
     }
 
-    // 下面这个不再是个每帧执行函数
     public void SUOQUANER(int aliveMemberCount)
     {
         float targetBattleGroundRingRadius = 30;

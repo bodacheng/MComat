@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using mainMenu;
 
 public class MemberDetailProcess : MainSceneProcess
@@ -13,17 +11,17 @@ public class MemberDetailProcess : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
     
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position,3f,25f);
         _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        yield return this._MonsterBox.myMonsterBox();
+        yield return MonsterBox.DisplayMonsterIcons();
         //this._MonsterBox.adjustAllIconsSize(null);
         _MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
-        yield return _MemberDetail.refreshMemberDetailGamenSystemBaseOnFocusingChar();
+        yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
     }
     
     public override bool CanEnterOtherProcess()
@@ -33,7 +31,7 @@ public class MemberDetailProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.triggerMainProcess(enterProcess());
+        mainProcessRunner.triggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

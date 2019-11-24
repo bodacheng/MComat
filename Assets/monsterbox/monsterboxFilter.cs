@@ -11,35 +11,33 @@ public class monsterboxFilter : MonoBehaviour
     public Toggle bylevel;
     public Dropdown typeDropDown;
     public InputField searchtag;
-    
-    // 等级升序降序？
-    int order = 0;//0:升序 1:降序 
-    //是否按type排序
-    
-    //关键词，貌似只是索引玩家对角色的自定义tag
-    string keyword;
 
+    // 等级升序降序？
+    readonly int order;//0:升序 1:降序 //是否按type排序
+
+    //关键词，貌似只是索引玩家对角色的自定义tag
+    readonly string keyword;
     List<charIcon> Red = new List<charIcon>(),
                    Blue = new List<charIcon>(),
                    Green = new List<charIcon>(),
                    Light = new List<charIcon>(),
                    Dark = new List<charIcon>();
 
-    public List<charIcon> orderIcons(List<charIcon> origin_mainMenuIcons)
+    public List<charIcon> OrderIcons(List<charIcon> origin_mainMenuIcons)
     {
-        origin_mainMenuIcons = typeFilter(origin_mainMenuIcons);    
+        origin_mainMenuIcons = TypeFilter(origin_mainMenuIcons);    
         if (bylevel.isOn)
-            origin_mainMenuIcons = orderIconsByLevel(origin_mainMenuIcons,order);
+            origin_mainMenuIcons = OrderIconsByLevel(origin_mainMenuIcons);
 
         if (byzokusei.isOn)
-            origin_mainMenuIcons = orderIconsByZokusei(origin_mainMenuIcons);
+            origin_mainMenuIcons = OrderIconsByZokusei(origin_mainMenuIcons);
 
         //origin_mainMenuIcons = putFavourateFirst(origin_mainMenuIcons);
-        origin_mainMenuIcons = searchByKeyword(origin_mainMenuIcons);
+        origin_mainMenuIcons = SearchByKeyword(origin_mainMenuIcons);
         return origin_mainMenuIcons;
     }
 
-    List<charIcon> typeFilter(List<charIcon> origin_mainMenuIcons)
+    List<charIcon> TypeFilter(List<charIcon> origin_mainMenuIcons)
     {
         List<charIcon> new_mainMenuIcons = new List<charIcon>();
         for (int i = 0; i < origin_mainMenuIcons.Count; i++)
@@ -50,7 +48,7 @@ public class monsterboxFilter : MonoBehaviour
         return new_mainMenuIcons;
     }
 
-    List<charIcon> orderIconsByLevel(List<charIcon> origin_mainMenuIcons,int order)
+    List<charIcon> OrderIconsByLevel(List<charIcon> origin_mainMenuIcons)
     {
         for (int i = 0; i < origin_mainMenuIcons.Count - 1; i++)
         {
@@ -69,7 +67,7 @@ public class monsterboxFilter : MonoBehaviour
         return origin_mainMenuIcons;
     }
     
-    List<charIcon> orderIconsByZokusei(List<charIcon> origin_mainMenuIcons)
+    List<charIcon> OrderIconsByZokusei(List<charIcon> origin_mainMenuIcons)
     {
         Red.Clear();Blue.Clear();Green.Clear();Light.Clear();Dark.Clear();
         for (int i = 0; i < origin_mainMenuIcons.Count; i++)
@@ -106,8 +104,8 @@ public class monsterboxFilter : MonoBehaviour
         newList.AddRange(Dark);
         return newList;
     }
-    
-    List<charIcon> putFavourateFirst(List<charIcon> origin_mainMenuIcons)
+
+    List<charIcon> PutFavourateFirst(List<charIcon> origin_mainMenuIcons)
     {
         List<charIcon> favorites = new List<charIcon>(); 
         for (int i = 0; i < origin_mainMenuIcons.Count; i++)
@@ -128,7 +126,7 @@ public class monsterboxFilter : MonoBehaviour
         return new_mainMenuIcons;
     }
     
-    List<charIcon> searchByKeyword(List<charIcon> origin_mainMenuIcons)
+    List<charIcon> SearchByKeyword(List<charIcon> origin_mainMenuIcons)
     {
         List<charIcon> targets = new List<charIcon>(); 
         //for (int i = 0; i < origin_mainMenuIcons.Count; i++)

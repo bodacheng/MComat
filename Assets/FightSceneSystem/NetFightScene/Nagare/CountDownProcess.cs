@@ -7,8 +7,8 @@ public class CountDownProcess : NagareProcess
 {    
     public CountDownProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
-        this.thisProcessStep = SceneStep.CountDown;
-        this.nextProcessStep = SceneStep.none;
+        thisProcessStep = SceneStep.CountDown;
+        nextProcessStep = SceneStep.none;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
         fightTalksRunner.playersStartOff.Subscribe(x => { if (x == true) MoveToFight();});
     }
@@ -16,7 +16,7 @@ public class CountDownProcess : NagareProcess
     public override void ProcessEnter()
     {
         fightTalksRunner.Step = 0;
-        this.BoundaryControllByGod.ChangeMagicRingRadius(20f);
+        BoundaryControllByGod.ChangeMagicRingRadius(20f);
     }
     
     public override void ProcessEnd()
@@ -24,7 +24,7 @@ public class CountDownProcess : NagareProcess
         fightTalksRunner.Step = -1;
     }
     
-    private void MoveToFight()
+    void MoveToFight()
     {
         switch(FightSceneNote.Instance.nextBattle._fightEventType)
         {

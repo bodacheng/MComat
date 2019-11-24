@@ -130,7 +130,7 @@ namespace mainMenu
                         _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.REAL_NAME;
                         _skillStoneDetail.Showname.text = _stone._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
-                        _skillStoneDetail.switchusingmonstericon(_stone.localID);
+                        _skillStoneDetail.Switchusingmonstericon(_stone.localID);
                     }
                 };
                 button.onClick.RemoveAllListeners();
@@ -282,7 +282,7 @@ namespace mainMenu
                         CellsDictionary.TryGetValue(cellindex, out _SkillStoneCell);
                         cellindex++;
                         _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
-                        if (!AccountCharsSet.checkifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId))
+                        if (!AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId))
                             _SkillStoneCell.image.color = Color.white;
                         else
                             _SkillStoneCell.image.color = Color.yellow;
@@ -297,7 +297,7 @@ namespace mainMenu
                     CellsDictionary.TryGetValue(cellindex, out _SkillStoneCell);
                     cellindex++;
                     _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);//！！！！！这个环节会销毁被覆盖的石头。
-                    if (!AccountCharsSet.checkifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId))
+                    if (!AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId))
                         _SkillStoneCell.image.color = Color.white;
                     else
                         _SkillStoneCell.image.color = Color.yellow;

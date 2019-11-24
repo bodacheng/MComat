@@ -23,10 +23,6 @@ namespace mainMenu
         public RectTransform MemberSkillshowT;
 
         [Space(11)]
-        [Header("Essentials")]
-        public preparingScene _preparingScene;
-
-        [Space(11)]
         [Header("LevelManager")]
         public LevelManager _LevelManager;
 
@@ -54,9 +50,9 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
 
-        public GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = null;
+        public GetMonsterOfPlayerDetailModel focusingCharacterDataInfo;
 
-        public IEnumerator refreshMemberDetailGamenSystemBaseOnFocusingChar()
+        public IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingChar()
         {
             if (focusingCharacterDataInfo == null || focusingCharacterDataInfo.monsterOfPlayerId == null || focusingCharacterDataInfo.monsterId == null)
             {
@@ -64,35 +60,34 @@ namespace mainMenu
                 sell.onClick.RemoveAllListeners();
                 favouriteButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
-                this.MemberInfoT.gameObject.SetActive(false);
-                this._LevelManager.turnOnUI(false);
-                Debug.Log(" 出现了一个有残缺的GetMonsterOfPlayerDetailModel对象。这不正常，请改修逻辑 ");
+                MemberInfoT.gameObject.SetActive(false);
+                _LevelManager.turnOnUI(false);
                 yield break;
             }
 
-            this.MemberInfoT.gameObject.SetActive(true);
-            this._LevelManager.turnOnUI(true);
-            this._LevelManager.exButtonFeaturesIni(focusingCharacterDataInfo, 999999);//AccountSet.Instance._PlayerAccountInfo.Coin
+            MemberInfoT.gameObject.SetActive(true);
+            _LevelManager.turnOnUI(true);
+            _LevelManager.exButtonFeaturesIni(focusingCharacterDataInfo, 999999);//AccountSet.Instance._PlayerAccountInfo.Coin
 
             // show按钮功能加载
             SkillShowButton.onClick.RemoveAllListeners();
-            UnityEngine.Events.UnityAction step2INI = () =>
+            void step2INI()
             {
-                _preparingScene.mainProcessRunner.triggerMainProcess(step2INIForUIRefresh(focusingCharacterDataInfo));
-            };
-            UnityEngine.Events.UnityAction SkillShow = () =>
+                preparingScene.Instance.mainProcessRunner.triggerMainProcess(Step2INIForUIRefresh(focusingCharacterDataInfo));
+            }
+            void SkillShow()
             {
-                _preparingScene.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
-            };
+                preparingScene.Instance.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
+            }
             SkillShowButton.onClick.AddListener(step2INI);
             SkillShowButton.onClick.AddListener(SkillShow);
 
             // edit按钮功能加载
             SkillEditButton.onClick.RemoveAllListeners();
-            UnityEngine.Events.UnityAction SkillEdit = () =>
+            void SkillEdit()
             {
-                this._preparingScene.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
-            };
+                preparingScene.Instance.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+            }
             SkillEditButton.onClick.AddListener(SkillEdit);
 
             //UnityEngine.Events.UnityAction exPlusAction = () => { this.EXplus(_choosingAIBeheviourInfo, 100); };
@@ -184,13 +179,13 @@ namespace mainMenu
                     personalEffectsPath = "defaultEffects";
                     break;
             }
-            EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, caculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
+            EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             yield return new WaitForSeconds(0.1f);
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator step2INIForUIRefresh(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+        public IEnumerator Step2INIForUIRefresh(GetMonsterOfPlayerDetailModel accountCharacterInfo)
         {
             if (accountCharacterInfo != null)
             {
@@ -227,14 +222,14 @@ namespace mainMenu
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public IEnumerator SetMemberDetailSystemFocusingCharacter(string localID)
         {
-            IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(localID);
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(localID);
             yield return getchar;
             focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
             yield break;
         }
 
         Vector3 tempV;
-        public Vector3 caculateShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
+        Vector3 CaculateShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
         {
             tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
             return tempV;

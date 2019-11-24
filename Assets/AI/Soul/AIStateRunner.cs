@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
+using HittingDetection;
 
 namespace Soul
 {
     public partial class AIStateRunner : MonoBehaviour
     {
-        private bool playerMode;
+        bool playerMode;
 
         #region 初始化相关
         public string characterType;
         public List<State_Transition_Set> State_Transition_Set_List;//
-        private NineAndTwo readingNineAndTwo;
-        private States_Incubator _States_Incubator;
+        NineAndTwo readingNineAndTwo;
+        States_Incubator _States_Incubator;
         #endregion
 
         #region 移动端输入器相关
@@ -111,6 +105,17 @@ namespace Soul
             now_state = empty_State;   
         }
 
+        void Update()
+        {
+            if (IfRunning())
+            {
+                if (now_state != null)
+                {
+                    now_state._State_Update();
+                }
+            }
+        }
+
         void FixedUpdate()
         {
             if (IfRunning())
@@ -165,6 +170,27 @@ namespace Soul
             else
                 now_state.AI_State_enter();
         }
+        
+        public void ChangeState(string num, V_Damage newvalue)
+        {
+            current_state_num = num;
+            state_Dictionary.TryGetValue(current_state_num, out try_state);
+            if (now_state != null)
+                now_state.AI_State_exit();
+
+            lastState = now_state;
+            now_state = try_state;
+
+            if (now_state == null)
+            {
+                Debug.Log("尝试读取未定义的状态" + current_state_num);
+                return;
+            }
+            if (playerMode || _inputManager.ifPlayerIsInputting())
+                now_state.C_State_enter(newvalue);
+            else
+                now_state.AI_State_enter(newvalue);
+        }
 
         public void StartToGo()
         {
@@ -195,14 +221,8 @@ namespace Soul
 
             States_for_AbsoluteInput.Clear();
             bool hasD, hasR;
-            if (readingNineAndTwo.GetDConfig() != null)
-                hasD = true;
-            else
-                hasD = false;
-            if (readingNineAndTwo.GetRConfig() != null)
-                hasR = true;
-            else
-                hasR = false;
+            hasD = readingNineAndTwo.GetDConfig() != null;
+            hasR = readingNineAndTwo.GetRConfig() != null;
 
             if (_inputManager == null)
                 _inputManager = new inputManager();

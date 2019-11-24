@@ -300,7 +300,7 @@ namespace mainMenu
                 yield break;
             }
 
-            yield return AccountCharsSet.instance.updateMyCharInfo(accountCharacterInfo);// 缺返回判断
+            yield return AccountCharsSet.instance.UpdateMyCharInfo(accountCharacterInfo);// 缺返回判断
             yield return readANineAndTwo(accountCharacterInfo);
             yield break;
         }

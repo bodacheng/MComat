@@ -58,12 +58,12 @@ namespace mainMenu
             }
         }
         
-        public void switchusingmonstericon(string stonemonsterOfPlayerId)
+        public void Switchusingmonstericon(string stonemonsterOfPlayerId)
         {
             SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(stonemonsterOfPlayerId);
             if (SkillStoneOfPlayerInfoModel != null)
             {
-                charIcon charIcon = _MonsterBox.getCharIcon(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
+                charIcon charIcon = MonsterBox.GetCharIcon(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
                 if (charIcon != null)
                 {
                     if (stoneusingcharIcon)

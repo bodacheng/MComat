@@ -28,7 +28,7 @@ public class TryChangeStonePos : MainSceneProcess
         {
             IEnumerator skilleditconfrim()
             {
-                IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo("1");
+                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield return _TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(myfighter);

@@ -16,25 +16,25 @@ using Soul;
 
 public partial class G_Attack_State : AI_State {
 
-	private string clip_name;
-    private string dash_clip_name;
-    private int _skillEmergentLevel;
+	string clip_name;
+    string dash_clip_name;
+    int _skillEmergentLevel;
 
-    private bool isEventAttackLaunchState;
-    private bool isEventAttackEndState;
-    private float rushSpeed;
-    private float approcahingSpeed;
+    bool isEventAttackLaunchState;
+    bool isEventAttackEndState;
+    float rushSpeed;
+    float approcahingSpeed;
 
-    private float lastFrameRotateAngle;
-    private float thisFrameRotateAngle;
+    float lastFrameRotateAngle;
+    float thisFrameRotateAngle;
 
-    private float maxRushTime, rush_time_counter;
-    private Transform rushingToTarget;
-    private Phase _phase;
+    float maxRushTime, rush_time_counter;
+    Transform rushingToTarget;
+    Phase _phase;
 
-    private UnityEngine.Events.UnityAction rushstart;
-    private UnityEngine.Events.UnityAction rushend;
-    private customCoroutine rushCoroutine;
+    UnityEngine.Events.UnityAction rushstart;
+    UnityEngine.Events.UnityAction rushend;
+    customCoroutine rushCoroutine;
 
     enum Phase
     {
@@ -48,7 +48,7 @@ public partial class G_Attack_State : AI_State {
     public G_Attack_State(string clip_name)
 	{
 		this.clip_name = clip_name;
-        this.behaviorEnterRanges = null;
+        behaviorEnterRanges = null;
     }
 
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime,
@@ -58,10 +58,10 @@ public partial class G_Attack_State : AI_State {
     {
         this.rushSpeed = rushSpeed;
         this.maxRushTime = maxRushTime;
-        this.approcahingSpeed = approachingSpeed;
+        approcahingSpeed = approachingSpeed;
         this.clip_name = clip_name;
         this.dash_clip_name = dash_clip_name;
-        this._skillEmergentLevel = skillEmergentLevel;
+        _skillEmergentLevel = skillEmergentLevel;
     }
 
     public G_Attack_State(string dash_clip_name,float rushSpeed, float maxRushTime, string clip_name, bool EventLauncher_Or_Ender)
@@ -70,15 +70,15 @@ public partial class G_Attack_State : AI_State {
         this.dash_clip_name = dash_clip_name;
         this.rushSpeed = rushSpeed;
 		this.clip_name = clip_name;
-        this.isEventAttackLaunchState = EventLauncher_Or_Ender;
-        this.isEventAttackEndState = !EventLauncher_Or_Ender;
+        isEventAttackLaunchState = EventLauncher_Or_Ender;
+        isEventAttackEndState = !EventLauncher_Or_Ender;
     }
 
     public G_Attack_State(string clip_name, bool EventLauncher_Or_Ender)
     {
         this.clip_name = clip_name;
-        this.isEventAttackLaunchState = EventLauncher_Or_Ender;
-        this.isEventAttackEndState = !EventLauncher_Or_Ender;
+        isEventAttackLaunchState = EventLauncher_Or_Ender;
+        isEventAttackEndState = !EventLauncher_Or_Ender;
     }
 
     public override void Pre_process_before_enter()
@@ -134,7 +134,6 @@ public partial class G_Attack_State : AI_State {
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
-        _DATA_CENTER.SetUsingGravity(true);
         _SkillCancelFlag.turn_off_flag();
         if (StateType == stateType.GR)
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
@@ -144,12 +143,11 @@ public partial class G_Attack_State : AI_State {
         _Rigidbody.velocity = Vector3.zero;
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
-
         rush_time_counter = 0f;
         _Animator.applyRootMotion = true;
 
-        Sensor.getEnemiesByDistance(true); //这里算一下，下面的全是false。但要注意中途这个结果变为null
-        if (Sensor.getEnemiesByDistance(false).Count == 0)
+        Sensor.GetEnemiesByDistance(true); //这里算一下，下面的全是false。但要注意中途这个结果变为null
+        if (Sensor.GetEnemiesByDistance(false).Count == 0)
         {
             //一般来说下面这些情况不跑？
             _phase = Phase.noRushState;
@@ -157,16 +155,16 @@ public partial class G_Attack_State : AI_State {
             return;
         }
 
-        if (Sensor.getInnerEnemiesColliders().Count > 0)//内环检测结果
+        if (Sensor.GetInnerEnemiesColliders().Count > 0)//内环检测结果
         {
             _phase = Phase.reachedFromThebeginning;
             Animation_Manger.AnimationTrigger(clip_name);
             return;
         }
         
-        if (Sensor.getClosestColliderInSensorRange(false,true,true) != null)
+        if (Sensor.GetClosestColliderInSensorRange(false,true,true) != null)
         {
-            rushingToTarget = Sensor.getClosestColliderInSensorRange(false, true, true).transform;
+            rushingToTarget = Sensor.GetClosestColliderInSensorRange(false, true, true).transform;
         }
         if (rushingToTarget != null)
         {
@@ -195,7 +193,7 @@ public partial class G_Attack_State : AI_State {
             }
         }
 
-        if (Sensor.getClosestColliderInSensorRange(true,true,true) == null)//外环检测结果.走到这里就是说，如果内外环都没敌人
+        if (Sensor.GetClosestColliderInSensorRange(true,true,true) == null)//外环检测结果.走到这里就是说，如果内外环都没敌人
         {
             Animation_Manger.AnimationTrigger(clip_name);
             _phase = Phase.farFromReach;
@@ -211,7 +209,6 @@ public partial class G_Attack_State : AI_State {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        _DATA_CENTER.SetUsingGravity(true);
         rushingToTarget = null;
         _Weapon_Animation_Events.ClearMarkerManagers();
         _Animator.applyRootMotion = false;
@@ -243,7 +240,7 @@ public partial class G_Attack_State : AI_State {
                     _Rigidbody.velocity = Vector3.zero;
                     _phase = Phase.reached;
                 }
-                if (Sensor.getInnerEnemiesColliders().Count > 0 || rush_time_counter > maxRushTime)
+                if (Sensor.GetInnerEnemiesColliders().Count > 0 || rush_time_counter > maxRushTime)
                 {
                     _phase = Phase.reached;
                 }

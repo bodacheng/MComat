@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.IO;
 using System;
-using System.Linq;
+using mainMenu;
 using Newtonsoft.Json;
 using System.Collections;
 using Api.Dto.Model;
@@ -11,7 +11,7 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        public GetMonsterOfPlayerDetailModel loadAccountCharacterInfoViaJsonFile(string monsterlocalid)
+        public GetMonsterOfPlayerDetailModel LoadAccountCharacterInfoViaJsonFile(string monsterlocalid)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace dataAccess
                 {
                     string dataAsJson = File.ReadAllText(wholepath);
                     info = JsonConvert.DeserializeObject<MonsterOfPlayerListModel[]>(dataAsJson);
-                    accountCharacterInfoListObjectsDictionary.Clear();
+                    AccountCharacterInfoListObjectsDictionary.Clear();
                     for (int i = 0; i < info.Length; i++)
                     {
                         CharacterResourceInfo targetingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(info[i].monsterId);
@@ -51,15 +51,15 @@ namespace dataAccess
                             continue;
                         }
                         
-                        if (!accountCharacterInfoListObjectsDictionary.ContainsKey(info[i].monsterOfPlayerId))
-                            accountCharacterInfoListObjectsDictionary.Add(info[i].monsterOfPlayerId, info[i]);
+                        if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(info[i].monsterOfPlayerId))
+                            AccountCharacterInfoListObjectsDictionary.Add(info[i].monsterOfPlayerId, info[i]);
                         else
                             Debug.Log("巨大逻辑错误，重复的monsterOfPlayerId:" + info[i].monsterOfPlayerId);
                     }
                 }
                 else
                 {
-                    accountCharacterInfoListObjectsDictionary.Clear();
+                    AccountCharacterInfoListObjectsDictionary.Clear();
                 }
             }
             catch (Exception e)
@@ -68,12 +68,12 @@ namespace dataAccess
             }
         }
 
-        public void overrideAccountCharacterInfoListObjectsViaJsonFile()
+        public void OverrideAccountCharacterInfoListObjectsViaJsonFile()
         {
             try
             {
                 List<MonsterOfPlayerListModel> accountCharacterInfoListObjects = new List<MonsterOfPlayerListModel>();
-                foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValue in accountCharacterInfoListObjectsDictionary)
+                foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValue in AccountCharacterInfoListObjectsDictionary)
                 {
                     accountCharacterInfoListObjects.Add(keyValue.Value);
                 }
@@ -86,47 +86,50 @@ namespace dataAccess
             }
         }
 
-        public IEnumerator localSaveDataGetAllCharacters()
+        public IEnumerator LocalSaveDataGetAllCharacters()
         {
             List<CharacterResourceInfo> characterList = monstersConfigTable.Instance.RowToCharacterResourceInfoList(monstersConfigTable.Instance.rowList);
             int i = 0;
             foreach (CharacterResourceInfo _CharacterResourceInfo in characterList)
             {
-                GetMonsterOfPlayerDetailModel _CharacterDataInfo = new GetMonsterOfPlayerDetailModel();
-                _CharacterDataInfo.monsterId = _CharacterResourceInfo.RECORD_ID.ToString();
-                _CharacterDataInfo.monsterOfPlayerId = i.ToString();
+                GetMonsterOfPlayerDetailModel _CharacterDataInfo = new GetMonsterOfPlayerDetailModel
+                {
+                    monsterId = _CharacterResourceInfo.RECORD_ID,
+                    monsterOfPlayerId = i.ToString()
+                };
                 Debug.Log("将角色" + _CharacterResourceInfo.REAL_NAME + "加入了存档");
-                yield return addNewCharToJsonSaveData(_CharacterDataInfo);
+                yield return AddOneCharacterToAccount(_CharacterDataInfo);
                 i++;
             }
-            overrideAccountCharacterInfoListObjectsViaJsonFile();
+            OverrideAccountCharacterInfoListObjectsViaJsonFile();
+            yield return MonsterBox.DisplayMonsterIcons();
             yield break;
         }
 
-        public IEnumerator addNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
+        public IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
         {
             List<int> currentLocalIDList = new List<int>();
-            foreach (KeyValuePair<string, MonsterOfPlayerListModel> one in accountCharacterInfoListObjectsDictionary)
+            foreach (KeyValuePair<string, MonsterOfPlayerListModel> one in AccountCharacterInfoListObjectsDictionary)
             {
                 if (!currentLocalIDList.Contains(int.Parse(one.Value.monsterOfPlayerId)))
                     currentLocalIDList.Add(int.Parse(one.Value.monsterOfPlayerId));
                 else
                     Debug.Log("本地存档有重复的monsterOfPlayerId：" + int.Parse(one.Value.monsterOfPlayerId));
             }
-            currentLocalIDList.Sort((a, b) => AccountCharsSet.Instance.intCompare(a, b));
-
-            MonsterOfPlayerListModel accountCharacterInfoListObject = new MonsterOfPlayerListModel();
-            accountCharacterInfoListObject.monsterId = _accountCharacterInfo.monsterId;
+            currentLocalIDList.Sort(Instance.IntCompare);
+            MonsterOfPlayerListModel accountCharacterInfoListObject = new MonsterOfPlayerListModel
+            {
+                monsterId = _accountCharacterInfo.monsterId
+            };
 
             if (currentLocalIDList.Contains(int.Parse(_accountCharacterInfo.monsterOfPlayerId)))
                 Debug.Log("本地存档产生角色信息覆盖行为，宠物的monsterOfPlayerId" + _accountCharacterInfo.monsterOfPlayerId + "但追加仍然继续");
 
             accountCharacterInfoListObject.monsterOfPlayerId = _accountCharacterInfo.monsterOfPlayerId;
-            if (!accountCharacterInfoListObjectsDictionary.ContainsKey(accountCharacterInfoListObject.monsterOfPlayerId))
-                accountCharacterInfoListObjectsDictionary.Add(accountCharacterInfoListObject.monsterOfPlayerId, accountCharacterInfoListObject);
+            if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(accountCharacterInfoListObject.monsterOfPlayerId))
+                AccountCharacterInfoListObjectsDictionary.Add(accountCharacterInfoListObject.monsterOfPlayerId, accountCharacterInfoListObject);
             else
-                accountCharacterInfoListObjectsDictionary[accountCharacterInfoListObject.monsterOfPlayerId] = accountCharacterInfoListObject;
-
+                AccountCharacterInfoListObjectsDictionary[accountCharacterInfoListObject.monsterOfPlayerId] = accountCharacterInfoListObject;
             if (!AccountCharacterInfoDictionary.ContainsKey(accountCharacterInfoListObject.monsterOfPlayerId))
                 AccountCharacterInfoDictionary.Add(accountCharacterInfoListObject.monsterOfPlayerId, _accountCharacterInfo);
             else
@@ -134,12 +137,12 @@ namespace dataAccess
 
             string json = JsonConvert.SerializeObject(_accountCharacterInfo);
             LocalJson.saveInfoToJsonFile("AccountCharacterInfos", accountCharacterInfoListObject.monsterOfPlayerId + ".json", json);
-            yield break;
+            yield return _accountCharacterInfo;
         }
 
-        public IEnumerator updateCharJsonSaveData(GetMonsterOfPlayerDetailModel _CharacterDataInfo)
+        public IEnumerator UpdateCharJsonSaveData(GetMonsterOfPlayerDetailModel _CharacterDataInfo)
         {
-            IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(_CharacterDataInfo.monsterOfPlayerId);
+            IEnumerator getchar = Instance.GetAccountCharacterInfo(_CharacterDataInfo.monsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (before == null)
@@ -149,9 +152,9 @@ namespace dataAccess
             yield break;
         }
 
-        public IEnumerator plusExpForAccountCharLocalSaveData(string charlocalID, int plusExp)
+        public IEnumerator PlusExpForAccountCharLocalSaveData(string charlocalID, int plusExp)
         {
-            IEnumerator getchar = AccountCharsSet.instance.getAccountCharacterInfo(charlocalID);
+            IEnumerator getchar = Instance.GetAccountCharacterInfo(charlocalID);
             yield return getchar;
             GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
 

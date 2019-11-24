@@ -7,17 +7,16 @@ using Soul;
 // This kind of state has to be triggerd on the ground, but doesnt need to be on ground wille running,
 // During the state ,colliders of the character heriachy is disabled, same with the gravity 
 public class G_M_Attack_State : AI_State {
-	private string clip_name;
-    private bool keepRotationAdjustment;
-    private float RotationAdjustmentTime;
-    private float rotate_speed;
-
-    private int _skillEmergentLevel;
+    readonly string clip_name;
+    readonly bool keepRotationAdjustment;
+    readonly float RotationAdjustmentTime;
+    readonly float rotate_speed;
+    readonly int _skillEmergentLevel;
 
     public G_M_Attack_State(string clip_name)
 	{
 		this.clip_name = clip_name;
-        this.behaviorEnterRanges = null;
+        behaviorEnterRanges = null;
     }
 
     public G_M_Attack_State(string clip_name, bool keepRotationAdjustment, float rotate_speed)
@@ -25,16 +24,16 @@ public class G_M_Attack_State : AI_State {
 		this.clip_name = clip_name;
         this.keepRotationAdjustment = keepRotationAdjustment;
         this.rotate_speed = rotate_speed;
-        this.RotationAdjustmentTime = -1;
+        RotationAdjustmentTime = -1;
     }
 
     public G_M_Attack_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, int skillEmergentLevel)
     {
         this.clip_name = clip_name;
-        this.keepRotationAdjustment = false;
+        keepRotationAdjustment = false;
         this.rotate_speed = rotate_speed;
         this.RotationAdjustmentTime = RotationAdjustmentTime;
-        this._skillEmergentLevel = skillEmergentLevel;
+        _skillEmergentLevel = skillEmergentLevel;
     }
 
     public override void Pre_process_before_enter()
@@ -44,62 +43,46 @@ public class G_M_Attack_State : AI_State {
 
     public override bool Enter_condition_priority1()
     {
-        if (_skillEmergentLevel == 1)
-        {
-            return strategic_enter_condition();
-        }
-        return false;
+        return _skillEmergentLevel == 1 && Strategic_enter_condition();
     }
 
     public override bool Enter_condition_priority2()
     {
-        if (_skillEmergentLevel == 2)
-        {
-            return strategic_enter_condition();
-        }
-        return false;
+        return _skillEmergentLevel == 2 && Strategic_enter_condition();
     }
 
     public override bool Enter_condition_priority3()
     {
-        if (_skillEmergentLevel == 3)
-        {
-            return strategic_enter_condition();
-        }
-        return false;
+        return _skillEmergentLevel == 3 && Strategic_enter_condition();
     }
 
-    public bool strategic_enter_condition()
+    public bool Strategic_enter_condition()
     {
-        if (this._AIStateRunner.GetNowState() != null &&
-            (this._AIStateRunner.GetNowState().StateType == stateType.GI || 
-            this._AIStateRunner.GetNowState().StateType == stateType.GR || 
-            this._AIStateRunner.GetNowState().StateType == stateType.GM || 
-            this._AIStateRunner.GetNowState().StateType == stateType.AC) && this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
-            return this.CheckToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
-        if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null)
-            return (this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges));
-        return false;
+        return _AIStateRunner.GetNowState() != null &&
+            (_AIStateRunner.GetNowState().StateType == stateType.GI ||
+            _AIStateRunner.GetNowState().StateType == stateType.GR ||
+            _AIStateRunner.GetNowState().StateType == stateType.GM ||
+            _AIStateRunner.GetNowState().StateType == stateType.AC) && Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null
+            ? CheckToEnemyDisEnterCondition(RangePlusOne(behaviorEnterRanges))
+            : Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
     }
 
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
-        this.Animation_Manger.Animator.SetTrigger("face_reset");
-        this.Animation_Manger.Animator.SetTrigger("confident");
-        
-        this._DATA_CENTER.SetUsingGravity(true);
-        this._Animator.SetFloat("speed", 0f);
+        Animation_Manger.Animator.SetTrigger("face_reset");
+        Animation_Manger.Animator.SetTrigger("confident");
+        _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         lastFrameRotateAngle = 0;
         thisFrameRotateAngle = 0;
-        this.personality_Events.CloseAllPersonalityEffects();
-        this._Rigidbody.velocity = Vector3.zero;
+        personality_Events.CloseAllPersonalityEffects();
+        _Rigidbody.velocity = Vector3.zero;
         
-        Collider C = Sensor.getClosestColliderInSensorRange(true,true,true);
+        Collider C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (C != null)
-            this.RotateToTarget(C.transform.position, 10f, true);
+            this.RotateToTarget(C.transform.position, 1f, true);
  
         _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
 		_Animator.applyRootMotion = true;
@@ -109,21 +92,17 @@ public class G_M_Attack_State : AI_State {
 
 	public override bool Capacity_exit_condition()
 	{
-        if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
-			return true;
-		else
-			return false;
-	}
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
+    }
 
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        this._DATA_CENTER.SetUsingGravity(true);
-        this._BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
 		_Animator.applyRootMotion = false;
 	}
 
-    private Vector3 rotateTarget;
+    Vector3 rotateTarget;
 	public override void _State_FixedUpdate1() 
 	{
         if (_FightAttriCalReference.ReturnDamageList(DamageType.stagger).Count > 0)
@@ -135,24 +114,24 @@ public class G_M_Attack_State : AI_State {
             _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
         }
 
-        Collider C = Sensor.getClosestColliderInSensorRange(true,true,true);
+        Collider C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (C!=null)
         {
             rotateTarget = C.transform.position;
-            singleDirectionRotateProcess(rotateTarget);                  
+            SingleDirectionRotateProcess(rotateTarget);                  
         }
         //_Rigidbody.velocity = new Vector3(0, 0, 0); //开启了的话相当于所向无敌
 	}
 
-    private float lastFrameRotateAngle = 0;
-    private float thisFrameRotateAngle = 0;
-    private float ji = 0f;
-    void singleDirectionRotateProcess(Vector3 P)
+    float lastFrameRotateAngle;
+    float thisFrameRotateAngle;
+    float ji;
+    void SingleDirectionRotateProcess(Vector3 P)
     {
         //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
         if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)
         {
-            thisFrameRotateAngle = this.RotateToTarget(P, 10f, true);
+            thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
             ji = thisFrameRotateAngle * lastFrameRotateAngle;
             if (ji > 0)//同向
             {

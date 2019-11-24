@@ -43,10 +43,10 @@ public partial class Data_Center : MonoBehaviour
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
 
     protected bool phase1Initialized, phase2Initialized;
-    private Transform[] floorCheckers;
-    private float groundedCount;
-    private float airCount;
-    private bool grounded;
+    Transform[] floorCheckers;
+    float groundedCount;
+    float airCount;
+    bool grounded;
     
     [Header("传统防御盾。可能真的用不到了")]
     [Space(1)]
@@ -141,7 +141,7 @@ public partial class Data_Center : MonoBehaviour
             gameObject.tag = "Untagged";
         }
 
-        Sensor.setDectectLayerAndFrontDirection(_TeamConfig,this);
+        Sensor.SetDectectLayerAndFrontDirection(_TeamConfig,this);
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
 
         string effectPath;
@@ -249,75 +249,57 @@ public partial class Data_Center : MonoBehaviour
     {
         if (AIStateRunner.IfRunning())
         {
-            if (usingGravity)
-                GravitySimulation();
             GroundedCal();
-            animator.SetBool("Grounded", grounded);
+            animator.SetBool("Grounded", Grounded);
             animator.SetFloat("airCount", airCount);
             animator.SetFloat("groundedCount", groundedCount);
-            groundedCount = (grounded) ? groundedCount += Time.deltaTime : 0f;
-            airCount = (!grounded) ? airCount += Time.deltaTime : 0f;
+            groundedCount = (Grounded) ? groundedCount += Time.deltaTime : 0f;
+            airCount = (!Grounded) ? airCount += Time.deltaTime : 0f;
             Sensor.SensorFixedUpdate();
             buffsRunner.BuffsRunnerFixedUpdate();
             _FightAttriCalReference.HealthBodyFixedUpdate();
             _SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
         }
     }
-    
+
+    public bool Grounded
+    {
+        get => grounded;
+        set { 
+            grounded = value;
+            Rigidbody.useGravity = UsingGravity && !grounded;
+        }
+    }
+
+    bool UsingGravity = true;
     public void SetUsingGravity(bool _on)
     {
-        usingGravity = _on;
-    }
-    public bool IfUsingGravity()
-    {
-        return usingGravity;
+        UsingGravity = _on;
+        Rigidbody.useGravity = _on;
     }
     
-    bool usingGravity = true;
     float floorY;
     public void GroundedCal()
     {
         if (floorCheckers == null)
         {
-            this.grounded = false;
+            Grounded = false;
             return;
         }
         foreach (Transform check in floorCheckers)
         {
-            if (this.floorY > check.transform.position.y)//Mathf.Abs(check.transform.position.y - this.floorY) < grounded_judgement_RayUpDis &&
+            if (floorY > check.transform.position.y)//Mathf.Abs(check.transform.position.y - this.floorY) < grounded_judgement_RayUpDis &&
             {
-                this.grounded = true;
+                Grounded = true;
                 return;
             }
         }
-        this.grounded = false;
+        Grounded = false;
     }
-    
-    Vector3 temp;
-    public void GravitySimulation()
-    {
-        temp = WholeT.position;
-        if (temp.y < floorY)
-        {
-            temp.y = floorY;
-            WholeT.transform.position = temp;
-        }
-        if (!this.grounded)
-        {
-            temp.y = floorY;
-            WholeT.transform.position = Vector3.Lerp(WholeT.transform.position,temp,Time.fixedDeltaTime * 10f);
-        }
-            
-    }
-
-    public bool IsGrounded()
-    {
-        return this.grounded;
-    }
-    
+        
     public void CleanClear()
     {
-        this.grounded = true;
+        this.Grounded = true;
         if (animator)
         {
             animator.SetBool("Grounded", true);

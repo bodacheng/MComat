@@ -12,7 +12,7 @@ public class TeamEditFront : MainSceneProcess
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
-        yield return this._preparingScene._MonsterBox.myMonsterBox();
+        yield return MonsterBox.DisplayMonsterIcons();
         this._TeamEditManager.OpenButtons(true);
         this._LoadingCanvas.LightUp();
         yield break;
@@ -20,7 +20,7 @@ public class TeamEditFront : MainSceneProcess
     
     public TeamEditFront(preparingScene _preparingScene)
     {
-        this.thisProcessStep = MainSceneStep.TeamEditFront;
+        thisProcessStep = MainSceneStep.TeamEditFront;
         this._preparingScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }

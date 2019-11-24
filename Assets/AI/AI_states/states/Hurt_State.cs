@@ -25,9 +25,8 @@ public class Hurt_State : AI_State {
             || _FightAttriCalReference.ReturnEventDamageList().Count > 0;
     }
 
-    V_Damage processingD;
     bool touchingEnemyBody;
-    public override void AI_State_enter()
+    public override void AI_State_enter(V_Damage newValue)
 	{
 		base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
@@ -39,85 +38,63 @@ public class Hurt_State : AI_State {
         hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
         int ranDom = Random.Range(0, hurtclips.Count);
         Animation_Manger.AnimationTrigger(hurtclips[ranDom]);
-		if (_FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0)
-		{
-            processingD = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage)[0];
-            used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,
-                                                processingD.AttackerT_foward,
-                                                    processingD.AttackerT_pos,
-                                                        gameObject.transform.position,
-                                                            processingD._WeaponPosAdjustMode,
-                                                                touchingEnemyBody);
-            //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
-            fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
-            _FightAttriCalReference.GetKnockOffCount().plusGauge(3f);
-			_FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);            
-            _FightAttriCalReference.EatDamage(DamageType.heavy_damage);
-            _FightAttriCalReference.plusCriticalGauge(1);
-		}
-
-		if (_FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0) 
+        
+        _FightAttriCalReference.plusCriticalGauge(1);
+        switch(newValue.damage_type)
         {
-            processingD = _FightAttriCalReference.ReturnDamageList(DamageType.light_damage)[0];
-            used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
-            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,
-                                                processingD.AttackerT_foward,
-                                                    processingD.AttackerT_pos,
-                                                        gameObject.transform.position,
-                                                            processingD._WeaponPosAdjustMode,
-                                                                touchingEnemyBody);
-            //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
-            fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
-            _FightAttriCalReference.plusCriticalGauge(1);
-			_FightAttriCalReference.GetKnockOffCount().plusGauge(1f);
-            _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
-            _FightAttriCalReference.EatDamage(DamageType.light_damage);
-			//为了让轻攻击带来的连击能保证持续，不在轻攻击处进行击飞积累
+                case DamageType.light_damage:
+                used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
+                _FightAttriCalReference.GetKnockOffCount().plusGauge(1f);
+                _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
+                _FightAttriCalReference.EatDamage(DamageType.light_damage);
+                break;
+                case DamageType.heavy_damage:
+                used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                _FightAttriCalReference.GetKnockOffCount().plusGauge(3f);
+                _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f); 
+                _FightAttriCalReference.EatDamage(DamageType.heavy_damage);    
+                break;
+                case DamageType.supper_damage:
+                used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                _FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
+                _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
+                _FightAttriCalReference.EatDamage(DamageType.supper_damage);
+                break;        
         }
+        
+        fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
+                                    newValue.AttackerT_foward,
+                                        newValue.AttackerT_pos,
+                                            gameObject.transform.position,
+                                                newValue._WeaponPosAdjustMode,
+                                                    touchingEnemyBody);
+        fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
 
-		if (_FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Count > 0)
-        {
-            processingD = _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage)[0];
-            used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-            fixDesPos = CalFixPosDestination(processingD.damageHappenPoint,
-                                                processingD.AttackerT_foward,
-                                                    processingD.AttackerT_pos,
-                                                        gameObject.transform.position,
-                                                            processingD._WeaponPosAdjustMode,
-                                                                touchingEnemyBody);
-            //_Rigidbody.velocity = fixDesPos - gameObject.transform.position + (touchingEnemyBody? processingD.AttackerT.forward : Vector3.zero);
-            fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
-            _FightAttriCalReference.plusCriticalGauge(1);
-			_FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
-            _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
-            _FightAttriCalReference.EatDamage(DamageType.supper_damage);
-        }
-        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 10f)
+        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 3f)
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
-                                                                processingD._WeaponPosAdjustMode,   
-                                                                    processingD.damageHappenPoint, 
-                                                                        processingD.AttackerT_foward,
-                                                                            processingD.AttackerT_pos, 
-                                                                                processingD.fromWeapon));
+                                                                newValue._WeaponPosAdjustMode,   
+                                                                    newValue.damageHappenPoint, 
+                                                                        newValue.AttackerT_foward,
+                                                                            newValue.AttackerT_pos, 
+                                                                                newValue.fromWeapon));
             _FightAttriCalReference.GetKnockOffCount().setGauge(0f);
         }
-        this.RotateToDirection(-fixDesPos,0.5f,true);
-        this.time_counter = 0f;
-        this.personality_Events.CloseAllPersonalityEffects();
-        this.Animation_Manger.Animator.SetTrigger("face_reset");
-        this.Animation_Manger.Animator.SetTrigger("hurt");
+        RotateToDirection(- fixDesPos, 0.5f, true);
+        time_counter = 0f;
+        personality_Events.CloseAllPersonalityEffects();
+        Animation_Manger.Animator.SetTrigger("face_reset");
+        Animation_Manger.Animator.SetTrigger("hurt");
     }
     
     public override void _State_FixedUpdate1()
     {
-        this.time_counter += Time.fixedDeltaTime;
+        time_counter += Time.fixedDeltaTime;
     }
 
 	public override bool Capacity_exit_condition()
 	{
-        return this.time_counter > used_dizzy_time;
+        return time_counter > used_dizzy_time;
     }
 
 	public override void AI_State_exit()
@@ -126,7 +103,8 @@ public class Hurt_State : AI_State {
         _FightAttriCalReference.SetGettingDamageState(false);
         time_counter = 0f;
         if (fixpostween != null)
-            fixpostween.Kill();
+            fixpostween.Kill(false);
+        fixpostween = null;
         _Rigidbody.velocity = Vector3.zero;
         if (_AIStateRunner.GetTryState().StateType == stateType.AC || _AIStateRunner.GetTryState().StateType == stateType.GI ||
             _AIStateRunner.GetTryState().StateType == stateType.GM || _AIStateRunner.GetTryState().StateType == stateType.GR)

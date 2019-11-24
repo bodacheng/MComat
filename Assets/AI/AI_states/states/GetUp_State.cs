@@ -21,7 +21,7 @@ public class GetUp : AI_State {
 
     public override bool Capacity_enter_condition()
     {
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
             return false;
         return true;
     }

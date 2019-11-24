@@ -48,7 +48,7 @@ public class Jump_State : AI_State
 
     public override bool Capacity_enter_condition()
     {
-        if (!_DATA_CENTER.IsGrounded())
+        if (!_DATA_CENTER.Grounded)
         {
             return false;
         }return true;
@@ -56,7 +56,7 @@ public class Jump_State : AI_State
 
     public override bool Enter_condition_priority2()
 	{   
-        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0  && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges))
+        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0  && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges))
         {
             return true;
         }
@@ -92,9 +92,9 @@ public class Jump_State : AI_State
         jumpDirection = Vector3.zero;
         enemy_to_me = Vector3.zero;
         damagingWeaponComingDirection = Vector3.zero;
-        if (Sensor.getNearbyDamagingWeaponColliders().Count > 0)
+        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
         {
-            damagingWeaponComingDirection = gameObject.transform.position - Sensor.getNearbyDamagingWeaponColliders()[0].transform.position;
+            damagingWeaponComingDirection = gameObject.transform.position - Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
             switch ((int)Random.Range(0, 2))
             {
                 case 0:
@@ -108,10 +108,10 @@ public class Jump_State : AI_State
             }
         }else{
 
-            if (Sensor.getInnerEnemiesColliders().Count > 0)
+            if (Sensor.GetInnerEnemiesColliders().Count > 0)
             {
-                if (Sensor.getInnerEnemiesColliders()[0] != null)
-                    enemy_to_me = gameObject.transform.position - Sensor.getInnerEnemiesColliders()[0].transform.position;
+                if (Sensor.GetInnerEnemiesColliders()[0] != null)
+                    enemy_to_me = gameObject.transform.position - Sensor.GetInnerEnemiesColliders()[0].transform.position;
                 enemy_to_me.y = 0;
             }
 
@@ -181,7 +181,7 @@ public class Jump_State : AI_State
 	{
         if (!jumpSuccessed)
         {
-            if (_DATA_CENTER.IsGrounded())
+            if (_DATA_CENTER.Grounded)
             {
                 if (IfVectorClean(jumpDirection))
                     _Rigidbody.velocity = jumpDirection;

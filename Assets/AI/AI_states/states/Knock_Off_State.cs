@@ -10,6 +10,7 @@ public class Knock_Off_State : AI_State
     DecompositionerPool superHitPool;
     Vector3 _xz;    
     bool touchedBoundary;
+    bool dropped;
      
     public Knock_Off_State(float knock_off_time)
     {
@@ -32,14 +33,12 @@ public class Knock_Off_State : AI_State
     Decompositioner processingBlood;
     string KnockOffSparkPersonalEffectPath;
     List<AnimationClip> knockoffAnimations;
-    V_Damage processingD;
-    public override void AI_State_enter()
+    public override void AI_State_enter(V_Damage newValue)
     {
         base.AI_State_enter();
         time_counter = 0;
-        alreadyFinishedZTranslation = 0;
-        alreadyFinishedYTranslation = 0;
         touchedBoundary = false;
+        dropped = false;
         _DATA_CENTER.SetUsingGravity(false);
         _FightAttriCalReference.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
@@ -49,26 +48,19 @@ public class Knock_Off_State : AI_State
         _FightAttriCalReference.plusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);        
-        int ranDom = (int)Random.Range(0,knockoffAnimations.Count);
+        int ranDom = Random.Range(0, knockoffAnimations.Count);
         Animation_Manger.AnimationTrigger(knockoffAnimations[ranDom]);
-        if (_FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0)
-        {
-            processingD = _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage)[0].Clone();
-        }else{
-            Debug.Log("崩溃");
-        }
-        
-        KnockOffSparkPersonalEffectPath = processingD.fromWeapon?.personalEffectPath;
-        superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit",KnockOffSparkPersonalEffectPath, 3);
+        KnockOffSparkPersonalEffectPath = newValue.fromWeapon?.personalEffectPath;
+        superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", KnockOffSparkPersonalEffectPath, 3);
         if (superHitPool != null)
         {
             processingBlood = superHitPool.Rent();
-            processingBlood.transform.position = processingD.damageHappenPoint;
+            processingBlood.transform.position = newValue.damageHappenPoint;
             processingBlood.transform.rotation = Quaternion.identity;
         }
-        _xz = processingD.AttackerT_foward;
+        _xz = newValue.AttackerT_foward;
         _FightAttriCalReference.EatDamage(DamageType.knockOff_damage);
-        _FightAttriCalReference.ClearDamageLists();               
+        _FightAttriCalReference.ClearDamageLists();
     }
 
     public override bool Capacity_exit_condition()
@@ -84,34 +76,37 @@ public class Knock_Off_State : AI_State
         _FightAttriCalReference.EnableAllHitBoxCollider(true);
         _Rigidbody.velocity = Vector3.zero;
     }
-
-    float alreadyFinishedZTranslation,alreadyFinishedYTranslation;
-    public override void _State_FixedUpdate1()
+    
+    public override void _State_Update()
     {
         if (!touchedBoundary)
         {
-            if (_DATA_CENTER.onBattleGroundBundary && !_DATA_CENTER.IsGrounded())
+            if (_DATA_CENTER.onBattleGroundBundary)
             {
                 touchedBoundary = true;
                 _xz = Vector3.zero - gameObject.transform.position;
                 _xz.y = 0;
                 _xz = _xz.normalized;
-                alreadyFinishedZTranslation = FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter);
-                alreadyFinishedYTranslation = FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter);
             }
-        }else{
-            touchedBoundary = _DATA_CENTER.onBattleGroundBundary;
         }
 
-        if (!(time_counter > 0.2f && _DATA_CENTER.IsGrounded()))
+        if (!dropped)
         {
-            gameObject.transform.position +=
-            (_xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter))
-            +
-            Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter)));
+            if (!(time_counter > 0.2f && _DATA_CENTER.Grounded))
+            {
+                gameObject.transform.position =  gameObject.transform.position +
+                _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.deltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
+                Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.deltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
+                //Debug.Log(this.gameObject+":"+ touchedBoundary+ _xz);
+            }else{
+                dropped = true;
+            }
         }
-
-        time_counter += Time.fixedDeltaTime;
+        
+        if (dropped)
+            _Rigidbody.velocity = Vector3.zero;
+            
+        time_counter += Time.deltaTime;
         //if (!_DATA_CENTER.IsGrounded()) // 貌似这个环节是导致knockoff途中瞬移的原因。去掉后修复。没有错上面的曲线逻辑基础上，有这个的话还是会瞬移
             //RotateToVelocityNegative(3f, true);
         

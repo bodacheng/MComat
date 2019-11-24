@@ -53,8 +53,8 @@ public class Defend_State : AI_State
     {
         if (_FightAttriCalReference.IFgettingDamage())
             return true;
-        damagingweaponList = Sensor.getNearbyDamagingWeaponColliders();
-        nearbyenemymeat = Sensor.getInnerEnemiesColliders();
+        damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
+        nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
         if (nearbyenemymeat.Count == 0)
         {
             if (damagingweaponList.Count > 0)
@@ -73,7 +73,7 @@ public class Defend_State : AI_State
 
     public override bool Enter_condition_priority3()
     {
-        return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.getInnerEnemiesColliders().Count > 0);
+        return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0);
     }
 
     public override bool Capacity_exit_condition() 
@@ -90,7 +90,7 @@ public class Defend_State : AI_State
     {
         this.defendHP = FightGlobalSetting._defendHP;
         _Weapon_Animation_Events.ClearMarkerManagers();
-        this.Sensor.continuousDetectionStart(5);
+        this.Sensor.ContinuousDetectionStart(5);
         base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);
         this.Animation_Manger.PlayLayerAnim(defend_clip_name);
@@ -123,20 +123,20 @@ public class Defend_State : AI_State
     public override void _State_FixedUpdate1()
     {
         _ResistanceManager.Resistance.Value = defendHP > 0 ? 5 : 0;
-        damagingweaponList = Sensor.getNearbyDamagingWeaponColliders();
-        nearbyenemymeat = Sensor.getInnerEnemiesColliders();
+        damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
+        nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
         
         if (nearbyenemymeat.Count > 0)
         {
             if (nearbyenemymeat[0] != null)
-                RotateToTarget(nearbyenemymeat[0].transform.position, 10f, true);
+                RotateToTarget(nearbyenemymeat[0].transform.position, 1f, true);
         }
         else
         {
             if (damagingweaponList.Count > 0)
             {
                 if (damagingweaponList[0] != null)
-                    RotateToTarget(damagingweaponList[0].transform.position, 10f, true);
+                    RotateToTarget(damagingweaponList[0].transform.position, 1f, true);
             }
         }
 

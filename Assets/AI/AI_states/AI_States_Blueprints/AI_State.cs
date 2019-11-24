@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using HittingDetection;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -109,10 +108,23 @@ namespace Soul
             _FightAttriCalReference.AT = this.AT;
             _FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
         }
+        
+        // Process when entering the state 
+        public virtual void AI_State_enter(V_Damage newValue)
+        {
+            Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
+            _FightAttriCalReference.AT = this.AT;
+            _FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
+        }
 
         public virtual void C_State_enter()
         {
             AI_State_enter();
+        }
+        
+        public virtual void C_State_enter(V_Damage newValue)
+        {
+            AI_State_enter(newValue);
         }
 
         // Process when exit the state 
@@ -120,6 +132,10 @@ namespace Soul
         {
             Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             Sensor.OneRoundDetectionStart(5);
+        }
+        
+        public virtual void _State_Update()
+        {
         }
         
         // Local update of the state 
@@ -192,20 +208,20 @@ namespace Soul
                     switch (behaviorEnterRanges[i])
                     {
                         case BehaviorEnterRange.inner_range:
-                            inner |= this.Sensor.getInnerEnemiesColliders().Count > 0;
+                            inner |= this.Sensor.GetInnerEnemiesColliders().Count > 0;
                             break;
                         case BehaviorEnterRange.mid_range:
-                            mid |= this.Sensor.getMidEnemiesColliders().Count > 0;
+                            mid |= this.Sensor.GetMidEnemiesColliders().Count > 0;
                             break;
                         case BehaviorEnterRange.far_range:
-                            far |= this.Sensor.getfarEnemiesColliders().Count > 0;
+                            far |= this.Sensor.GetfarEnemiesColliders().Count > 0;
                             break;
                         case BehaviorEnterRange.out_of_range:
-                            if (this.Sensor.getInnerEnemiesColliders().Count == 0
+                            if (this.Sensor.GetInnerEnemiesColliders().Count == 0
                                 &&
-                                this.Sensor.getMidEnemiesColliders().Count == 0
+                                this.Sensor.GetMidEnemiesColliders().Count == 0
                                 &&
-                                this.Sensor.getfarEnemiesColliders().Count == 0)
+                                this.Sensor.GetfarEnemiesColliders().Count == 0)
                                 return true;
                             break;
                         default:
@@ -242,8 +258,8 @@ namespace Soul
                 look_dir.y = 0;
             }
             dirQ = Quaternion.LookRotation(look_dir);
-            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Time.fixedDeltaTime);
-            _Rigidbody.MoveRotation(dirQ);           
+            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(dirQ);
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
             return Vector3.SignedAngle(_Rigidbody.transform.forward, look_dir, Vector3.up);
         }
@@ -256,8 +272,8 @@ namespace Soul
                 direction.y = 0;
             }
             dirQ = Quaternion.LookRotation(direction);
-            gameObject.transform.rotation = Quaternion.Slerp
-                (gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.deltaTime);
+            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(dirQ);
             return Mathf.Approximately(Quaternion.Angle(dirQ, gameObject.transform.rotation), 0f);
         }
 
@@ -280,7 +296,7 @@ namespace Soul
             }
             v = relativePos.normalized * acceleration;
             //gameObject.GetComponent<Rigidbody>().AddForce(relativePos.normalized * acceleration * Time.deltaTime, ForceMode.VelocityChange);
-            this._Rigidbody.velocity = v;
+            _Rigidbody.velocity = v;
             return this._Rigidbody.velocity.magnitude;
         }
 
@@ -329,11 +345,11 @@ namespace Soul
         float current_speed;
         public void ClampVelocity(float max_speed)
         {
-            current_speed = this._Rigidbody.velocity.magnitude;
+            current_speed = _Rigidbody.velocity.magnitude;
             if (current_speed > max_speed)
             {
-                v = (max_speed / current_speed) * this._Rigidbody.velocity;
-                this._Rigidbody.velocity = v;
+                v = (max_speed / current_speed) * _Rigidbody.velocity;
+                _Rigidbody.velocity = v;
             }
         }
 
@@ -344,19 +360,12 @@ namespace Soul
         Quaternion slerp;
         public void RotateToVelocity(float turnSpeed, bool ignoreY)
         {
-            dir = this._Rigidbody.velocity;
+            dir = _Rigidbody.velocity;
             if (ignoreY)
                 dir.y = 0;
-
-            if (dir.magnitude > 0.5f) //这个条件貌似是邪门了的起到一定的防抖动作用。
-            {
-                dirQ = Quaternion.LookRotation(dir);
-                gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ,
-                                                                 turnSpeed *
-                                                                 //Quaternion.Angle(gameObject.transform.rotation, dirQ) *
-                                                                 (Time.fixedDeltaTime / (Time.fixedDeltaTime + 0.1f)));
-                //gameObject.GetComponent<Rigidbody>().MoveRotation(slerp);
-            }
+            dirQ = Quaternion.LookRotation(dir);
+            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(dirQ);
         }
 
         // RotateToVelocity in reverse

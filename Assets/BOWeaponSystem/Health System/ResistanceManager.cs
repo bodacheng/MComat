@@ -7,10 +7,10 @@ public class ResistanceManager : MonoBehaviour
 
     public ShaderManager _ShaderManager;
     public ReactiveProperty<int> Resistance { get; set; } = new ReactiveProperty<int>(0);
-    
-    private int nextcountereventneeddamagecount;
-    private string nextcounterevent;
-    
+
+    int nextcountereventneeddamagecount;
+    string nextcounterevent;
+
     void Awake()
     {
         hiddenMethods = new HiddenMethods(this);
@@ -46,7 +46,7 @@ public class ResistanceManager : MonoBehaviour
         readonly ResistanceManager resistanceManager;
         public HiddenMethods(ResistanceManager _ResistanceManager)
         {
-            this.resistanceManager = _ResistanceManager;
+            resistanceManager = _ResistanceManager;
         }
 
         //那么这个函数现在有一个作用在于为反击触发事件做准备。

@@ -8,7 +8,7 @@ public class FightSummaryProcess : NagareProcess
     public ReactiveProperty<bool> enternext { get; set; } = new ReactiveProperty<bool>(false);
     public FightSummaryProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
-        this.thisProcessStep = SceneStep.FightSummary;
+        thisProcessStep = SceneStep.FightSummary;
         //this.nextProcessStep = 这个环节结束后应该是直接的产生条件判断分歧。
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
         enternext.Subscribe(x => {if (x) afterSummary(FightSceneNote.Instance.nextBattle._fightEventType);});
@@ -16,7 +16,7 @@ public class FightSummaryProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(fightOverControl.showRewards(999,999,new System.Collections.Generic.List<int>()));
+        mainProcessRunner.triggerMainProcess(fightOverControl.showRewards(999,999,new System.Collections.Generic.List<int>()));
     }
     
     public override void ProcessEnd()
