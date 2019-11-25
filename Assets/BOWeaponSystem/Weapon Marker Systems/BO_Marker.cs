@@ -22,11 +22,10 @@ namespace HittingDetection
         public LayerMask _layers;
         public LayerMask enemyShieldLayer;
         public float radius;
-        public hit_detection_mode mode = hit_detection_mode.ball_detect;
-
+        public Hit_detection_mode mode = Hit_detection_mode.ball_detect;
         SphereCollider myCollider;
         List<Collider> BallDetectHitPool = new List<Collider>();
-        public List<Collider> getBallDetectHitPool()
+        public List<Collider> GetBallDetectHitPool()
         {
             return BallDetectHitPool;
         }
@@ -39,7 +38,7 @@ namespace HittingDetection
             {
                 myCollider = this.gameObject.AddComponent<SphereCollider>();
             }
-            if (mode == hit_detection_mode.ball_detect)
+            if (mode == Hit_detection_mode.ball_detect)
             {
                 myCollider.radius = radius;
                 myCollider.isTrigger = true;
@@ -53,32 +52,22 @@ namespace HittingDetection
 
         public bool HitCheck()
         {
-            if (mode == hit_detection_mode.trail_detect)
+            if (mode == Hit_detection_mode.trail_detect)
             {
                 _dir = transform.position - _tempPos;
                 _dist = Vector3.Distance(transform.position, _tempPos);
                 //Debug.DrawRay(_tempPos, _dir, Color.white, 0.3f);
                 //为什么要raycastALl？说到底也是因为我们想让系统简单化，不给所有物体分层，从而这个轨道可能会停于自身武器上的collider
-                _hits = Physics.RaycastAll(_tempPos, _dir, _dist, _layers, QueryTriggerInteraction.Collide);
+                _hits = Physics.RaycastAll(_tempPos, _dir, _dist, _layers, QueryTriggerInteraction.Ignore);
                 if (_hits.Length == 0)
                 {
                     _tempPos = transform.position;
                 }
             }
-
-            if (BallDetectHitPool.Count > 0)
-            {
-                return true;
-            }
-
-            if (_hits.Length > 0)
-            {
-                return true;
-            }
-            return false;
+            return BallDetectHitPool.Count > 0 || _hits.Length > 0;
         }
 
-        public void clearDetection()
+        public void ClearDetection()
         {
             BallDetectHitPool.Clear();
             _hits = new RaycastHit[0];
@@ -86,17 +75,17 @@ namespace HittingDetection
 
         void OnTriggerEnter(Collider other)
         {
-            ballDetectModeDetection(other);
+            BallDetectModeDetection(other);
         }
 
         void OnTriggerStay(Collider other)
         {
-            ballDetectModeDetection(other);
+            BallDetectModeDetection(other);
         }
 
-        void ballDetectModeDetection(Collider other)
+        void BallDetectModeDetection(Collider other)
         {
-            if (mode == hit_detection_mode.ball_detect)
+            if (mode == Hit_detection_mode.ball_detect)
             {
                 //_hits = Physics.SphereCastAll(_tempPos, radius, _dir, _dist, _layers, QueryTriggerInteraction.Collide);// 如果有能力把这个句子去掉最好。会极大幅度提高整个程序速度，但对于相应的代价得有替代方案
                 //实际上吧，做到现在我们意识到一个问题：伤害判定系统这东西你不动用分层机制的话不可能保证程序效率。如果在上面这个地方引入层的话，起码我们可以用的了sphereCast而不是消耗巨大的SphereCastAll
@@ -115,7 +104,7 @@ namespace HittingDetection
 
         void OnDrawGizmosSelected()
         {
-            if (mode == hit_detection_mode.ball_detect)
+            if (mode == Hit_detection_mode.ball_detect)
             {
                 Gizmos.color = Color.white;
                 Gizmos.DrawWireSphere(transform.position, radius);
@@ -124,7 +113,7 @@ namespace HittingDetection
     }
 }
 
-public enum hit_detection_mode
+public enum Hit_detection_mode
 {
     trail_detect = 1,
     ball_detect = 2

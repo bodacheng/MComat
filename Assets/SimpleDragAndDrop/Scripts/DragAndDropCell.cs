@@ -46,7 +46,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 	[Tooltip("Sprite color for filled cell")]
     public Color full = new Color();                                        // Sprite color for filled cell
 	[Tooltip("This cell has unlimited amount of items")]
-    public bool unlimitedSource = false;                                    // Item from this cell will be cloned on drag start
+    public bool unlimitedSource;                                    // Item from this cell will be cloned on drag start
 
 	private DragAndDropItem myDadItem;										// Item of this DaD cell
 
@@ -107,10 +107,12 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
             if (myDadItem != null)            // If destination cell has item
             {
                 // Fill event descriptor
-                DropEventDescriptor descAutoswap = new DropEventDescriptor();
-                descAutoswap.item = myDadItem;
-                descAutoswap.sourceCell = this;
-                descAutoswap.destinationCell = sourceCell;                                                            
+                DropEventDescriptor descAutoswap = new DropEventDescriptor
+                {
+                    item = myDadItem,
+                    sourceCell = this,
+                    destinationCell = sourceCell
+                };
                 SendRequest(descAutoswap);                      // Send drop request
                 StartCoroutine(NotifyOnDragEnd(descAutoswap));  // Send notification after drop will be finished
                 if (descAutoswap.permission == true)            // If drop permitted by application
@@ -176,12 +178,12 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.NineSlotCell_empty://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
+                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
                                     {
                                         Debug.Log("其他玩家正在使用的石头不可拖入");
                                         return;
                                     }
-                                    if (!refreshWholePoint(item))
+                                    if (!RefreshWholePoint(item))
                                     {
                                         Debug.Log("Validation错误，不执行操作，返回");
                                         return;
@@ -197,12 +199,12 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     OnDropEvent_Override(desc,item,sourceCell);
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
+                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
                                     {
                                         Debug.Log("其他玩家正在使用的石头不可拖入");
                                         return;
                                     }
-                                    if (!refreshWholePoint(item))
+                                    if (!RefreshWholePoint(item))
                                     {
                                         Debug.Log("Validation错误，不执行操作，返回");
                                         return;
@@ -221,7 +223,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     {
                                         OnDropEvent_Override(desc,item,sourceCell);
                                     }else{
-                                        sourceCell._SkillStoneSlot.returnStoneToBox();
+                                        sourceCell._SkillStoneSlot.ReturnStoneToBox();
                                     }
                                 break;
                                 case CellPhase.NineSlotCell_empty:
@@ -242,7 +244,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     };
                                     UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
                                     {
-                                        TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox());
+                                        TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(SkillStonesBox.Instance.ArrangeSkillStonesToBox());
                                     };
                                     TheNineSlot._TheNineSlot._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
                                         "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.REAL_NAME + "?");
@@ -329,7 +331,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         {
             UpdateMyItem();
             if (myDadItem != null)
-                myDadItem.gameObject.transform.SetParent(MySkillStonesReader.SkillStonesBox.stonesTempContainer);
+                myDadItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);
             myDadItem = null;
             UpdateBackgroundState();
 
@@ -363,12 +365,14 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 		UpdateMyItem();
 		if (myDadItem != null)
         {
-            DropEventDescriptor desc = new DropEventDescriptor();
-            // Fill event descriptor
-            desc.triggerType = TriggerType.ItemWillBeDestroyed;
-			desc.item = myDadItem;
-            desc.sourceCell = this;
-            desc.destinationCell = this;
+            DropEventDescriptor desc = new DropEventDescriptor
+            {
+                // Fill event descriptor
+                triggerType = TriggerType.ItemWillBeDestroyed,
+                item = myDadItem,
+                sourceCell = this,
+                destinationCell = this
+            };
             SendNotification(desc);                                         // Notify application about item destruction
 			if (myDadItem != null)
 			{
@@ -380,7 +384,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         UpdateMyItem();
     }
     
-    bool refreshWholePoint(DragAndDropItem item)
+    bool RefreshWholePoint(DragAndDropItem item)
     {
         //这里就应该进行valiadation，因为如果出了问题还不断下来，那么底下的流程就会牵扯到各种的数值更新
         if (this._SkillStoneSlot != null && item._SkillConfigOfSkillStone != null)
@@ -426,7 +430,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                     nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
                 
-                int wholepint = MySkillStonesReader.skillsetValidation(nineskillids[0],nineskillids[1],nineskillids[2],
+                int wholepint = MySkillStonesReader.SkillSetValidation(nineskillids[0],nineskillids[1],nineskillids[2],
                                                                         nineskillids[3],nineskillids[4],nineskillids[5],
                                                                         nineskillids[6],nineskillids[7],nineskillids[8]);
                 if (wholepint < 0)
@@ -488,7 +492,6 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 	/// <summary>
 	/// Change cell's sprite color on item put/remove.
 	/// </summary>
-	/// <param name="condition"> true - filled, false - empty </param>
     /// 这个就是改个颜色，因为我们的特殊需求我们不用它的逻辑了。
 	public void UpdateBackgroundState()
 	{
@@ -527,12 +530,14 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         {
             newItem.gameObject.SetActive(true);
             PlaceItemNotDestroyOldItemVersion(newItem);//PlaceItem(newItem); 2018.10.9
-            DropEventDescriptor desc = new DropEventDescriptor();
-            // Fill event descriptor
-            desc.triggerType = TriggerType.ItemAdded;
-            desc.item = newItem;
-            desc.sourceCell = this;
-            desc.destinationCell = this;
+            DropEventDescriptor desc = new DropEventDescriptor
+            {
+                // Fill event descriptor
+                triggerType = TriggerType.ItemAdded,
+                item = newItem,
+                sourceCell = this,
+                destinationCell = this
+            };
             //UpdateMyItem();
             SendNotification(desc);
         }

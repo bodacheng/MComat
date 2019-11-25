@@ -50,9 +50,9 @@ public class TryEditNineSlot : MainSceneProcess
     
     public IEnumerator enterProcess()
     {
-        this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
+        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
-        this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
+        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;
@@ -66,12 +66,12 @@ public class TryEditNineSlot : MainSceneProcess
         
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
-        _SkillStonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
-            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
-            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
-            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
-            this._SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),_CharacterResourceInfo._zokusei);
-        yield return refreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion();
+        SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX2Tab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX3Tab.gameObject,5f),_CharacterResourceInfo._zokusei);
+        yield return RefreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion();
     }
     
     //里面的因数，是剧情人物“亚当”的角色信息。
@@ -95,24 +95,24 @@ public class TryEditNineSlot : MainSceneProcess
         this._TheNineSlot.C3DragAndDropCell.gameObject.SetActive(true);
         
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
-        _SkillStonesBox.SetFocusingType(_CharacterResourceInfo.type);
-        yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
-        UnityEngine.Events.UnityAction SkillEditConfirm = () =>//这里可能还有一个执行内容，就是进入到测试战斗场景。
+        SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
+        yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
+        void SkillEditConfirm()
         {
             mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
             this.processesRunner.changeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
-        };
+        }
 
-        UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
+        void SkillUpdateValidation()
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
-        };
+        }
         _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);               
     }
     
-    public IEnumerator refreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion()
+    public IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion()
     {        
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");

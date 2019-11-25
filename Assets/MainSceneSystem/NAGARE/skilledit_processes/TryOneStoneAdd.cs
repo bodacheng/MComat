@@ -21,12 +21,12 @@ public class TryOneStoneAdd : MainSceneProcess
         
         _MemberDetail.focusingCharacterDataInfo = myfighter;
         yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharacterDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
-        IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
+        IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
             yield return (loadMyStonesProcess);
 
-        this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
+        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
-        this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
+        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
         this._TheNineSlot.A2DragAndDropCell.gameObject.SetActive(false);
@@ -44,13 +44,13 @@ public class TryOneStoneAdd : MainSceneProcess
         
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_MemberDetail.focusingCharacterDataInfo.monsterId);
-        _SkillStonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
+        SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX2Tab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX3Tab.gameObject,5f),
             _CharacterResourceInfo._zokusei);
-        yield return refreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion();
+        yield return RefreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion();
         yield break;
     }
     
@@ -119,22 +119,22 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         yield return _TheNineSlot.readANineAndTwo(_CharacterDataInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
-        _SkillStonesBox.SetFocusingType(_CharacterResourceInfo.type);
-        yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
-        UnityEngine.Events.UnityAction SkillEditConfirm = () =>//这里可能还有一个执行内容，就是进入到测试战斗场景。
+        SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
+        yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
+        void SkillEditConfirm()
         {
             mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
-        };
-        UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
+        }
+        void SkillUpdateValidation()
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "编辑A1？");
-        };
+        }
         _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
     }
     
-    IEnumerator refreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion()
+    IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion()
     {
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;

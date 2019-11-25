@@ -13,7 +13,7 @@ public class MemberDetailProcess : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
+        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position,3f,25f);
         _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;

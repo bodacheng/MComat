@@ -12,18 +12,18 @@ namespace dataAccess
     public partial class MySkillStonesReader
     {
         //读取技能石操作以后必然都是协程，因为这个是直接访问数据库。我们现在并没有用这个。
-        public IEnumerator loadMySkillStonesViaLocalJsonFile()
+        public IEnumerator LoadMySkillStonesViaLocalJsonFile()
         {
-            List<SkillStoneOfPlayerInfoModel> mySkillStones = returnMySkillStonesViaLocalFile().ToList();
-            mySkillStonesDataDic = convertSKillStoneNumListToDic(mySkillStones);
+            List<SkillStoneOfPlayerInfoModel> mySkillStones = ReturnMySkillStonesViaLocalFile().ToList();
+            mySkillStonesDataDic = ConvertSKillStoneNumListToDic(mySkillStones);
             yield return mySkillStonesDataDic;
             yield break;
         }
 
-        public SkillStoneOfPlayerInfoModel[] returnMySkillStonesViaLocalFile()
+        public SkillStoneOfPlayerInfoModel[] ReturnMySkillStonesViaLocalFile()
         {
             FileStream FileStream = null;
-            SkillStoneOfPlayerInfoModel[] info = new SkillStoneOfPlayerInfoModel[] { };
+            SkillStoneOfPlayerInfoModel[] info = { };
             try
             {
                 info = new SkillStoneOfPlayerInfoModel[] { };
@@ -43,9 +43,11 @@ namespace dataAccess
                 int i = 1;
                 foreach (KeyValuePair<string, SkillConfig> _keyValuePair in SkillConfigTable.Instance.SkillConfigDicForReference)
                 {
-                    SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel();
-                    skillStoneOfPlayerInfoModel.skillStoneOfPlayerId = String.Format("{0:D20}", i);
-                    skillStoneOfPlayerInfoModel.skillId = _keyValuePair.Value.RECORD_ID;
+                    SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
+                    {
+                        skillStoneOfPlayerId = String.Format("{0:D20}", i),
+                        skillId = _keyValuePair.Value.RECORD_ID
+                    };
                     skillStonesForTest.Add(skillStoneOfPlayerInfoModel);
                     i++;
                 }
@@ -56,7 +58,7 @@ namespace dataAccess
             return info;
         }
 
-        public void overrideMySkillStoneInfosOnLocalFile(List<SkillStoneOfPlayerInfoModel> stones)
+        public void OverrideMySkillStoneInfosOnLocalFile(List<SkillStoneOfPlayerInfoModel> stones)
         {
             try
             {

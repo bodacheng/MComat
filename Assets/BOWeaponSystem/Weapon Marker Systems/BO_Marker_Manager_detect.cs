@@ -25,7 +25,7 @@ namespace HittingDetection
             {
                 if (_markers[i].HitCheck())
                 {
-                    if (_markers[i].mode == hit_detection_mode.trail_detect)
+                    if (_markers[i].mode == Hit_detection_mode.trail_detect)
                     {
                         if (traditionalDefendMode)
                         {
@@ -155,9 +155,9 @@ namespace HittingDetection
                         }
                     }
 
-                    if (_markers[i].mode == hit_detection_mode.ball_detect) //其实是针对球形检测的特殊形式把下面那个大for循环按照marker里的BallDetectHitPool重新循环跑了一次
+                    if (_markers[i].mode == Hit_detection_mode.ball_detect) //其实是针对球形检测的特殊形式把下面那个大for循环按照marker里的BallDetectHitPool重新循环跑了一次
                     {
-                        BallDetectHitPool = _markers[i].getBallDetectHitPool();
+                        BallDetectHitPool = _markers[i].GetBallDetectHitPool();
                         if (BallDetectHitPool != null)
                         {
                             if (traditionalDefendMode)

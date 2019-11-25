@@ -10,7 +10,7 @@ public class TryEditALines : MainSceneProcess
     StageScriptableObject _StageScriptableObject;
     LocalFight TuroialFight;
     int step = 1;
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         step = 1;
         this._TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(false);
@@ -44,16 +44,14 @@ public class TryEditALines : MainSceneProcess
 
     public override bool CanEnterOtherProcess()
     {
-        if (int.Parse(this._MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1 &&
-                int.Parse(this._MemberDetail.focusingCharacterDataInfo.a2_skill_stone_record_id) != -1 &&
-                    int.Parse(this._MemberDetail.focusingCharacterDataInfo.a3_skill_stone_record_id) != -1)
-            return true;
-        return false;
+        return int.Parse(_MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1 &&
+                int.Parse(_MemberDetail.focusingCharacterDataInfo.a2_skill_stone_record_id) != -1 &&
+                    int.Parse(_MemberDetail.focusingCharacterDataInfo.a3_skill_stone_record_id) != -1;
     }
-    
+
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -64,11 +62,11 @@ public class TryEditALines : MainSceneProcess
     {
         if (step == 1)
         {
-            if (this._TheNineSlot.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                this._TheNineSlot.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                    this._TheNineSlot.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
+            if (_TheNineSlot.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
+                _TheNineSlot.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
+                    _TheNineSlot.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
             {
-                this._TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(true);
+                _TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(true);
                 step = 2;
             }
         }
@@ -84,19 +82,21 @@ public class TryEditALines : MainSceneProcess
         }
         yield return _TheNineSlot.readANineAndTwo(_CharacterDataInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
-        _SkillStonesBox.SetFocusingType(_CharacterResourceInfo.type);
-        yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
-        UnityEngine.Events.UnityAction SkillEditConfirm = () =>//这里可能还有一个执行内容，就是进入到测试战斗场景。
+        SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
+        yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
+        void SkillEditConfirm()
         {
             mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
-            StageScriptableObject stage = new StageScriptableObject();
-            stage.battleNameCH = "亚当大战傻逼门卫";
+            StageScriptableObject stage = new StageScriptableObject
+            {
+                battleNameCH = "亚当大战傻逼门卫"
+            };
             if (this.TuroialFight != null)
             {
                 CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(_CharacterDataInfo);
                 this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
-                this.TuroialFight.HeroSets.Set(0,0,characterDataInfo);
+                this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
             }
             else
             {
@@ -106,14 +106,14 @@ public class TryEditALines : MainSceneProcess
             stage.localFight = this.TuroialFight;
             stage._fightEventType = fightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
-            _preparingScene.LoadFight(SceneMode.QuestFight,stage);
+            _preparingScene.LoadFight(SceneMode.QuestFight, stage);
             this.ProcessEnd();
-        };
+        }
 
-        UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
+        void SkillUpdateValidation()
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
-        };
+        }
         _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
     }

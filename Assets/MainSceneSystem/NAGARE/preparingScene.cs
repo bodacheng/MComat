@@ -188,7 +188,7 @@ namespace mainMenu
                     //上面这些都缺response判断
                     yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
                     yield return MonsterBox.MonsterIconsGenerate();//这个进程会先找到所有角色的头像。
-                    IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.loadMySkillStones();
+                    IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;
                     yield return _TeamEditManager.INITeamPosButtons();
                     trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
@@ -293,7 +293,7 @@ namespace mainMenu
                             mystones.Add(skillStoneOfPlayerInfoModel);
                             i++;
                         }
-                        MySkillStonesReader.Instance.overrideMySkillStoneInfosOnLocalFile(mystones);
+                        MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(mystones);
                     }
                     mainProcessRunner.triggerMainProcess(getAllStones());
                 }

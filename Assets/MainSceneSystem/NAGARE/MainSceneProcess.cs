@@ -17,7 +17,6 @@ namespace mainMenu
         public MemberDetail _MemberDetail;
         public ModelShower _modelShower;
         public MonsterBox _MonsterBox;
-        public SkillStonesBox _SkillStonesBox;
         public CharsManager _CharsManager;
         public TheNineSlot _TheNineSlot;
         public TeamEditManager _TeamEditManager;
@@ -33,7 +32,6 @@ namespace mainMenu
         {
             this._preparingScene = _preparingScene;
             _MemberDetail = _preparingScene._MemberDetail;
-            _SkillStonesBox = _preparingScene._SkillStonesBox;
             _CharsManager = _preparingScene._CharSetManager;
             _modelShower = _preparingScene._modelShower;
             _TheNineSlot = _preparingScene.TheNineSlot;

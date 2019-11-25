@@ -135,17 +135,17 @@ public class Sensor : MonoBehaviour {
         SensorDetectProcess();//检测
         SensorDetectionResultSortProcess();//整理
 
-        this.continuousDetection = false;
-        this.DetectionResultLastFrame = _DetectionResultLastFrame;
-        this.DetectionLoopStarted = false;
-        this.DetectionInterval = 1;
+        continuousDetection = false;
+        DetectionResultLastFrame = _DetectionResultLastFrame;
+        DetectionLoopStarted = false;
+        DetectionInterval = 1;
     }
 
     public void Stop()
     {
         SensorDetectionResultClearProcess();
-        this.DetectionLoopStarted = false;
-        this.continuousDetection = false;
+        DetectionLoopStarted = false;
+        continuousDetection = false;
     }
 
     Collider jiamateammate; Collider nearestenemy;
@@ -157,7 +157,7 @@ public class Sensor : MonoBehaviour {
     public void SensorDetectProcess()
     {
         _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(transform.position,1f,selfDataCenter.WholeT.forward,sensor_radius,meAndEnemyLayermask);
+        _spherecastHits = Physics.SphereCastAll(transform.position,1f,selfDataCenter.WholeT.forward,sensor_radius,meAndEnemyLayermask, QueryTriggerInteraction.Collide);
     }
 
     public void SensorDetectionResultClearProcess()

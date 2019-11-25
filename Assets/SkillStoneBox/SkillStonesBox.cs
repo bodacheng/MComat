@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
 
-//SkillStone首先是种什么东西，以什么形式存在。。。
+// SkillStone首先是种什么东西，以什么形式存在。。。
 // 这个东西应该就和“我的拥有角色一样处理方式”
 // 这个模块是针对SKillStonesBox的机能。。。它对各种...SKill石头的master table也好，T table 也好都是功能的使用者关系。
 
@@ -24,6 +24,8 @@ namespace mainMenu
 {
     public class SkillStonesBox : MonoBehaviour
     {
+        public static SkillStonesBox Instance;
+    
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
         public RectTransform BoxWholeT, BoxT, stonesTempContainer;
@@ -78,19 +80,23 @@ namespace mainMenu
         [Header("fxcamera")]
         public Camera fxCamera;
 
-        private IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
-        private string focusingtype;
-        private int focusingExType;
-        private SkillStoneSlot DeleteSkillStoneSlot;
+        IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        string focusingtype;
+        int focusingExType;
+        SkillStoneSlot DeleteSkillStoneSlot;
+
+        void Awake()
+        {
+            Instance = this;
+        }
 
         public IEnumerator StartUp()
         {
-            MySkillStonesReader.SkillStonesBox = this;
             yield return _SkillStoneBoxTabEffectsManager.StartUp();
             // 玩家可能在什么时候会把Cell的数量进行扩充？cellsLimit从哪进行读取？
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(null, DeleteArea);
-            generateCells(cellsLimit);
+            GenerateCells(cellsLimit);
         }
         
         public DragAndDropCell GetFirstEmptyCell()
@@ -112,7 +118,7 @@ namespace mainMenu
         {
             this.focusingtype = type;
         }
-        public int getFocusingExType()
+        public int GetFocusingExType()
         {
             return focusingExType;
         }
@@ -122,7 +128,7 @@ namespace mainMenu
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
             {
-                UnityEngine.Events.UnityAction buttonFeature = () =>
+                void buttonFeature()
                 {
                     DragAndDropItem _stone = _SkillStoneCell.GetItem();
                     if (_stone != null && _stone._SkillConfigOfSkillStone != null)
@@ -132,7 +138,7 @@ namespace mainMenu
                         _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
                         _skillStoneDetail.Switchusingmonstericon(_stone.localID);
                     }
-                };
+                }
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
             }
@@ -141,33 +147,33 @@ namespace mainMenu
         public void NormalTabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
-            this.focusingExType = 0;
-            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
+            focusingExType = 0;
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX1TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
-            this.focusingExType = 1;
-            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
+            focusingExType = 1;
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX2TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
-            this.focusingExType = 2;
-            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
+            focusingExType = 2;
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX3TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
-            this.focusingExType = 3;
-            this._TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
+            focusingExType = 3;
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
-        public IEnumerator EXTabsFeatureRefresh(String type, bool viewingMode)
+        public IEnumerator EXTabsFeatureRefresh(bool viewingMode)
         {
             List<string> typesOfStoneIhave = new List<string>();
             foreach (KeyValuePair<string, DragAndDropItem> keyValuePair in MySkillStonesReader.mySkillStonesObjectsDic)
@@ -183,8 +189,10 @@ namespace mainMenu
                 types.ClearOptions();
                 foreach (string Rname in typesOfStoneIhave)
                 {
-                    Dropdown.OptionData m_NewData = new Dropdown.OptionData();
-                    m_NewData.text = Rname;
+                    Dropdown.OptionData m_NewData = new Dropdown.OptionData
+                    {
+                        text = Rname
+                    };
                     types.options.Add(m_NewData);
                 }
             }
@@ -193,28 +201,28 @@ namespace mainMenu
                 types.gameObject.SetActive(false);
             }
             closeCheckBox.onValueChanged.RemoveAllListeners();
-            closeCheckBox.onValueChanged.AddListener(delegate { rangeCheckBoxOnValueChanged(); });
+            closeCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
             nearCheckBox.onValueChanged.RemoveAllListeners();
-            nearCheckBox.onValueChanged.AddListener(delegate { rangeCheckBoxOnValueChanged(); });
+            nearCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
             farCheckBox.onValueChanged.RemoveAllListeners();
-            farCheckBox.onValueChanged.AddListener(delegate { rangeCheckBoxOnValueChanged(); });
+            farCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
             yield break;
         }
 
-        void rangeCheckBoxOnValueChanged()
+        void RangeCheckBoxOnValueChanged()
         {
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(arrangeSkillStonesToBox());
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void typeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(EXTabsFeatureRefresh(targetType, true));
+            _TheNineSlot.mainProcessRunner.triggerMainProcess(EXTabsFeatureRefresh(true));
         }
 
         // 围绕这个环节的一个问题是玩家账户中格子数量的问题。
         // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
-        public void generateCells(int cellsLimit)
+        public void GenerateCells(int cellsLimit)
         {
             int hangshu = 1;
             Cellprefab.gameObject.GetComponent<Image>().sprite = Cell;
@@ -242,28 +250,28 @@ namespace mainMenu
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (100f + 7f) * hangshu - stoneviewScrollRect.gameObject.GetComponent<RectTransform>().sizeDelta.y);
         }
 
-        public IEnumerator arrangeSkillStonesToBox()
+        public IEnumerator ArrangeSkillStonesToBox()
         {
-            yield return arrangeSkillStonesToBox(GetFocusingType(), getFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, _TheNineSlot.getUsingStonesId());
+            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, _TheNineSlot.getUsingStonesId());
         }
 
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator arrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<String> usingStoneIDs)
+        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<String> usingStoneIDs)
         {
             foreach (KeyValuePair<int, DragAndDropCell> cellPair in CellsDictionary)
             {
                 // 下面第一行（UpdateMyItem）至关重要。技能石box往往和九宫格一起显示，readANineAndTwo函数如果和arrangeSkillStonesToBox配合运行，
                 // 都是前者在前，决定好在九宫格里显示的角色装备中石头是啥，先放在那里。这个时间点上技能石背包里的格子还没有断开和那几个石头的连接。如果你不UpdateMyItem一下，
-                //它会把已经放到九宫格里的石头给拔下来扔进stonesTempContainer。
+                // 它会把已经放到九宫格里的石头给拔下来扔进stonesTempContainer。
                 cellPair.Value.UpdateMyItem();
                 DragAndDropItem dragAndDropItem = cellPair.Value.GetItem();
                 if (dragAndDropItem != null)
                 {
                     dragAndDropItem.transform.SetParent(stonesTempContainer);
-                    cellPair.Value.UpdateMyItem();//单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
+                    cellPair.Value.UpdateMyItem(); //单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
                 }
             }
-            List<String> SkillStonesOfTypeAndExType = new List<String>();//localid
+            List<String> SkillStonesOfTypeAndExType = new List<String>(); //技能石本地id
             foreach (KeyValuePair<String, SkillStoneOfPlayerInfoModel> keyValuePair in MySkillStonesReader.mySkillStonesDataDic)
             {
                 SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(keyValuePair.Value.skillId);
@@ -278,42 +286,40 @@ namespace mainMenu
                 {
                     if (!usingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
                     {
-                        DragAndDropCell _SkillStoneCell;
-                        CellsDictionary.TryGetValue(cellindex, out _SkillStoneCell);
+                        CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                         cellindex++;
                         _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
-                        if (!AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId))
-                            _SkillStoneCell.image.color = Color.white;
-                        else
-                            _SkillStoneCell.image.color = Color.yellow;
+                        _SkillStoneCell.image.color = !AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
+                            ? Color.white
+                            : Color.yellow;
                     }
                     else
+                    {
                         Debug.Log("有使用中的技能石头，直接跳过这一格");
+                    }
                 }
                 else
                 {
                     MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
-                    DragAndDropCell _SkillStoneCell;
-                    CellsDictionary.TryGetValue(cellindex, out _SkillStoneCell);
+                    CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                     cellindex++;
-                    _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);//！！！！！这个环节会销毁被覆盖的石头。
-                    if (!AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId))
-                        _SkillStoneCell.image.color = Color.white;
-                    else
-                        _SkillStoneCell.image.color = Color.yellow;
+                    _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
+                    _SkillStoneCell.image.color = !AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
+                        ? Color.white
+                        : Color.yellow;
                 }
             }
             yield break;
         }
 
-        public IEnumerator generateOneStone(string stonelocalid)
+        public IEnumerator GenerateOneStoneModel(string stonelocalid)
         {
             if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(stonelocalid))
             {
                 if (MySkillStonesReader.mySkillStonesObjectsDic[stonelocalid] != null)
                     yield break;
             }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(stonelocalid);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(stonelocalid);
             SkillConfig skillConfig = SkillConfigTable.getSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             
             IEnumerator process = null;

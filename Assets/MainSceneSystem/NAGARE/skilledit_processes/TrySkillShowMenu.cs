@@ -16,13 +16,13 @@ public class TrySkillShowMenu : MainSceneProcess
         this.EelementsInherit(_preparingScene);
     }
     
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
         CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
         this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
-        this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-        this._SkillStonesBox.BoxWholeT.gameObject.SetActive(false);
+        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
+        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
         this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(false);
         this._MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
@@ -37,7 +37,7 @@ public class TrySkillShowMenu : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.triggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -46,7 +46,7 @@ public class TrySkillShowMenu : MainSceneProcess
         this._MemberDetail.MemberSkillshowT.gameObject.SetActive(false);
     }
 
-    Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
         if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())

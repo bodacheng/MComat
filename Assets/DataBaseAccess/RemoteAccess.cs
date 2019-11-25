@@ -77,15 +77,15 @@ namespace dataAccess
                 characterDataInfo.level = 100; //需要一个对应表
 
                 NineAndTwo nineAndTwo = new NineAndTwo();
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA1 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a1_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA2 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a2_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA3 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a3_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB1 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b1_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB2 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b2_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB3 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b3_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC1 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c1_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC2 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c2_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC3 = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c3_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA1 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a1_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA2 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a2_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA3 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a3_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB1 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b1_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB2 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b2_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB3 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b3_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC1 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c1_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC2 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c2_skill_stone_record_id);
+                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC3 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c3_skill_stone_record_id);
 
                 CharacterResourceInfo _TempCharacterResourceInfo = 
                 monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));

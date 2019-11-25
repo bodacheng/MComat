@@ -9,20 +9,20 @@ public class MemberDetail_edit : MainSceneProcess
     public IEnumerator enterProcess()
     {
         this._LoadingCanvas.DarkOff(0.5f);
-        this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
+        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
-        this._SkillStonesBox.BoxWholeT.gameObject.SetActive(true);
+        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         yield return SkillEditorButtonBehaviour(this._MemberDetail.focusingCharacterDataInfo);
         this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
-        _SkillStonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.NormalTab.gameObject,5f),
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX1Tab.gameObject,5f),
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX2Tab.gameObject,5f),
-            _SkillStonesBox.ButtonEffectInFxCameraWorldSpace(_SkillStonesBox.fxCamera,_SkillStonesBox.EX3Tab.gameObject,5f),
+        SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX2Tab.gameObject,5f),
+            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX3Tab.gameObject,5f),
             _CharacterResourceInfo._zokusei);
         this._LoadingCanvas.LightUp();
         yield break;
@@ -47,15 +47,15 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnd()
     {
-         this._SkillStonesBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+         SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
+        if (!_MemberDetail._SkillsPrintOut.ifShowingSkill())
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
     
@@ -72,19 +72,19 @@ public class MemberDetail_edit : MainSceneProcess
         }
         yield return _TheNineSlot.readANineAndTwo(_AccountCharacterInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_AccountCharacterInfo.monsterId);
-        _SkillStonesBox.SetFocusingType(_CharacterResourceInfo.type);
-        yield return this._SkillStonesBox.arrangeSkillStonesToBox();
-        yield return (_SkillStonesBox.EXTabsFeatureRefresh(_CharacterResourceInfo.type,false));
-        UnityEngine.Events.UnityAction SkillEditConfirm = () =>
+        SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
+        yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
+        yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
+        void SkillEditConfirm()
         {
             mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
-        };
+        }
 
-        UnityEngine.Events.UnityAction SkillUpdateValidation = () =>
+        void SkillUpdateValidation()
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
-        };
+        }
         _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
     }

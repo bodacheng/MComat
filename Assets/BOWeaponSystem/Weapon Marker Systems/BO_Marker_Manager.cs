@@ -175,7 +175,7 @@ namespace HittingDetection
                 for (int i2 = 0; i2 < _markers.Length; i2++)
                 {
                     _markers[i2]._tempPos = _markers[i2].transform.position;
-                    _markers[i2].clearDetection();
+                    _markers[i2].ClearDetection();
                     _markers[i2].gameObject.layer = 0;
                 }
             }
@@ -185,7 +185,7 @@ namespace HittingDetection
         {
             for (int i2 = 0; i2 < _markers.Length; i2++)
             {
-                _markers[i2].clearDetection();
+                _markers[i2].ClearDetection();
             }
         }
 
@@ -197,7 +197,7 @@ namespace HittingDetection
             for (int i2 = 0; i2 < _markers.Length; i2++)
             {
                 _markers[i2]._tempPos = _markers[i2].transform.position;
-                _markers[i2].clearDetection();
+                _markers[i2].ClearDetection();
             }
         }
 

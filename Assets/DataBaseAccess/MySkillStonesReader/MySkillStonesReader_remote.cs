@@ -32,7 +32,7 @@ namespace dataAccess
                         Debug.Log("skillStoneOfPlayerId:"+SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:"  + SkillStoneOfPlayerInfoModel.skillId);
                     }
                     Debug.Log("以上是查找到的玩家拥有的技能石");
-                    mySkillStonesDataDic = convertSKillStoneNumListToDic(infos.ToList());
+                    mySkillStonesDataDic = ConvertSKillStoneNumListToDic(infos.ToList());
                  }
                 ,
                  model => {

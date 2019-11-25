@@ -154,7 +154,7 @@ namespace dataAccess
                 case playerinfoReferenceMode.formalVersion:
                     break;
             }
-            yield return MySkillStonesReader.Instance.refreshAllMyStonesUsingMonsterInfo();
+            yield return MySkillStonesReader.Instance.VerifyAllMyStonesUsingMonsterInfo();
             yield break;
         }
 

@@ -60,7 +60,7 @@ namespace mainMenu
         
         public void Switchusingmonstericon(string stonemonsterOfPlayerId)
         {
-            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(stonemonsterOfPlayerId);
+            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(stonemonsterOfPlayerId);
             if (SkillStoneOfPlayerInfoModel != null)
             {
                 charIcon charIcon = MonsterBox.GetCharIcon(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);

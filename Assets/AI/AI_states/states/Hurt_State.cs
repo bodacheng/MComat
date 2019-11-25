@@ -70,7 +70,7 @@ public class Hurt_State : AI_State {
                                                     touchingEnemyBody);
         fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
 
-        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= 3f)
+        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= FightGlobalSetting._knockoffextent && newValue.damage_type == DamageType.supper_damage)
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
                                                                 newValue._WeaponPosAdjustMode,   

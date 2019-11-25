@@ -10,7 +10,7 @@ namespace dataAccess
 {
     public partial class MySkillStonesReader
     {
-        private static MySkillStonesReader instance;
+        static MySkillStonesReader instance;
         public static MySkillStonesReader Instance
         {
             get
@@ -24,39 +24,28 @@ namespace dataAccess
         }
         public static IDictionary<string, SkillStoneOfPlayerInfoModel> mySkillStonesDataDic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
         public static IDictionary<string, DragAndDropItem> mySkillStonesObjectsDic = new Dictionary<string, DragAndDropItem>();
-        public static SkillStonesBox SkillStonesBox;
 
-        public SkillStoneOfPlayerInfoModel getSkillStoneOfPlayerInfoModelByMyStoneId(string id)
+        public SkillStoneOfPlayerInfoModel GetSkillStoneOfPlayerInfoModelByMyStoneId(string id)
         {
             if (id == null)
             {
                 //Debug.Log("以null值索引了玩家拥有技能石。请检查问题根源");
                 return new SkillStoneOfPlayerInfoModel();
             }
-            if (mySkillStonesDataDic.ContainsKey(id))
-            {
-                return mySkillStonesDataDic[id];
-            }
-            else
-                return new SkillStoneOfPlayerInfoModel();
+            return mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : new SkillStoneOfPlayerInfoModel();
         }
 
-        public DragAndDropItem getOneStoneModel(string localStoneid)
+        public DragAndDropItem GetOneStoneModel(string localStoneid)
         {
-            if (mySkillStonesObjectsDic.ContainsKey(localStoneid))
-                return mySkillStonesObjectsDic[localStoneid];
-            else
-            {
-                return null;
-            }
+            return mySkillStonesObjectsDic.ContainsKey(localStoneid) ? mySkillStonesObjectsDic[localStoneid] : null;
         }
 
-        public IEnumerator loadMySkillStones()
+        public IEnumerator LoadMySkillStones()
         {
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
-                    yield return loadMySkillStonesViaLocalJsonFile();
+                    yield return LoadMySkillStonesViaLocalJsonFile();
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     yield return loadMySkillstonesRemote(ApiLanguage.JaJp);
@@ -74,13 +63,15 @@ namespace dataAccess
 
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in mySkillStonesDataDic)
             {
-                yield return SkillStonesBox.generateOneStone(pair.Value.skillStoneOfPlayerId);
+                yield return SkillStonesBox.Instance.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
             }
-            yield return refreshAllMyStonesUsingMonsterInfo();
+            yield return VerifyAllMyStonesUsingMonsterInfo();
             yield break;
         }
         
-        public IEnumerator refreshAllMyStonesUsingMonsterInfo()
+        // 这个函数的作用在于第一个英文单词：核实。 作用是根角色技能编辑存档和玩家技能石存档“相互”核实技能编辑信息。但不会造成技能石的丢失风险
+        // 另一方面可以看到一个问题在新石头加入的时候显然不需要运行本函数
+        public IEnumerator VerifyAllMyStonesUsingMonsterInfo()
         {
             IDictionary<string, string> usingstoneidandmonsterid = new Dictionary<string, string>();
             foreach(KeyValuePair<string, GetMonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharacterInfoDictionary)
@@ -88,7 +79,7 @@ namespace dataAccess
                 if (keyValuePair.Value.a1_skill_stone_record_id != null)
                 {
                     if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a1_skill_stone_record_id))
-                    usingstoneidandmonsterid.Add(keyValuePair.Value.a1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+                        usingstoneidandmonsterid.Add(keyValuePair.Value.a1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
                     else{
                         Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a1_skill_stone_record_id);
                         keyValuePair.Value.a1_skill_stone_record_id = "-1";
@@ -171,7 +162,7 @@ namespace dataAccess
             }
             foreach (KeyValuePair<string,string> keyValuePair in usingstoneidandmonsterid)
             {
-                SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.getSkillStoneOfPlayerInfoModelByMyStoneId(keyValuePair.Key);
+                SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(keyValuePair.Key);
                 skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = keyValuePair.Value;
             }
             yield break;
@@ -208,14 +199,14 @@ namespace dataAccess
             for (int i = 0; i < toRemove.Count; i++)
             {
                 if (mySkillStonesObjectsDic.ContainsKey(toRemove[i].skillStoneOfPlayerId))
-                    GameObject.Destroy(mySkillStonesObjectsDic[toRemove[i].skillStoneOfPlayerId].gameObject);
+                    Object.Destroy(mySkillStonesObjectsDic[toRemove[i].skillStoneOfPlayerId].gameObject);
                 mySkillStonesObjectsDic.Remove(toRemove[i].skillStoneOfPlayerId);
                 mySkillStonesDataDic.Remove(toRemove[i].skillStoneOfPlayerId);
             }
             yield break;
         }
 
-        private IDictionary<string, SkillStoneOfPlayerInfoModel> convertSKillStoneNumListToDic(List<SkillStoneOfPlayerInfoModel> mystones)
+        IDictionary<string, SkillStoneOfPlayerInfoModel> ConvertSKillStoneNumListToDic(List<SkillStoneOfPlayerInfoModel> mystones)
         {
             IDictionary<string, SkillStoneOfPlayerInfoModel> Dic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
             for (int i = 0; i < mystones.Count; i++)
@@ -231,15 +222,12 @@ namespace dataAccess
                     Debug.Log("巨大问题,重复的本地技能石id" + mystones[i].skillStoneOfPlayerId);
                     continue;
                 }
-                else
-                {
-                    Dic.Add(mystones[i].skillStoneOfPlayerId, mystones[i]);
-                }
+                Dic.Add(mystones[i].skillStoneOfPlayerId, mystones[i]);
             }
             return Dic;
         }
 
-        public static int skillsetValidation(string A1skillid, string A2skillid, string A3skillid,
+        public static int SkillSetValidation(string A1skillid, string A2skillid, string A3skillid,
                                                 string B1skillid, string B2skillid, string B3skillid,
                                                     string C1skillid, string C2skillid, string C3skillid)
         {
@@ -291,8 +279,6 @@ namespace dataAccess
                         wholeskillpoint -= 30;
                         break;
                     case -1:
-                        break;
-                    default:
                         break;
                 }
             }

@@ -29,10 +29,6 @@ namespace mainMenu
         public MemberDetail _MemberDetail;
 
         [Space(5)]
-        [Header("技能盒子要和九宫格本身联动")]
-        public SkillStonesBox _skillStonesBox;
-
-        [Space(5)]
         [Header("SKillPrintout")]
         public SkillsPrintOut _SkillsPrintOut;
 
@@ -69,7 +65,7 @@ namespace mainMenu
             Button button = skillStoneSlot._DragAndDropCell.gameObject.GetComponent<Button>();
             if (button != null)
             {
-                UnityEngine.Events.UnityAction buttonFeature = () =>
+                void buttonFeature()
                 {
                     skillStoneSlot._DragAndDropCell.UpdateMyItem();
                     DragAndDropItem _stoneOnCell = skillStoneSlot._DragAndDropCell.GetItem();
@@ -81,7 +77,7 @@ namespace mainMenu
                         _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SP_LEVEL);
                         mainProcessRunner.triggerMainProcess(_SkillsPrintOut.skillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
                     }
-                };
+                }
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
             }
@@ -193,7 +189,6 @@ namespace mainMenu
 
         private IEnumerator getNineSlotReady()
         {
-            MySkillStonesReader.SkillStonesBox = _skillStonesBox;
             _TheNineSlot = this;
 
             A1Slot = new SkillStoneSlot(null, A1DragAndDropCell);
@@ -232,7 +227,7 @@ namespace mainMenu
                 foreach (SkillStoneSlot _slot in allSlot)
                 {
                     _slot.OnSlotStonelocalID = null;
-                    _slot.removeStoneFromSlot();
+                    _slot.RemoveStoneFromSlot();
                     _slot._DragAndDropCell.cellPhase = DragAndDropCell.CellPhase.NineSlotCell_empty;
                 }
                 yield break;
@@ -244,7 +239,7 @@ namespace mainMenu
                 yield break;
             }
             NineAndTwo readingNineAndTwo = characterDataInfo._NineAndTwo;
-            int wholePoint = MySkillStonesReader.skillsetValidation(
+            int wholePoint = MySkillStonesReader.SkillSetValidation(
                 readingNineAndTwo.A1skillid, readingNineAndTwo.A2skillid, readingNineAndTwo.A3skillid,
                 readingNineAndTwo.B1skillid, readingNineAndTwo.B2skillid, readingNineAndTwo.B3skillid,
                 readingNineAndTwo.C1skillid, readingNineAndTwo.C2skillid, readingNineAndTwo.C3skillid);
@@ -262,7 +257,7 @@ namespace mainMenu
 
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                yield return _slot.showOrigin(Color.white);
+                yield return _slot.ShowOrigin(Color.white);
                 if (_slot._DragAndDropCell.GetItem() != null)
                     _slot._DragAndDropCell.cellPhase = DragAndDropCell.CellPhase.NineSlotCell_full;
                 else
@@ -291,7 +286,7 @@ namespace mainMenu
             NineAndTwo nineAndTwo = _dCharacterDataInfo._NineAndTwo;
 
             //这里先不进行保存，进行validation
-            int wholepoint = MySkillStonesReader.skillsetValidation(nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid,
+            int wholepoint = MySkillStonesReader.SkillSetValidation(nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid,
                                                                     nineAndTwo.B1skillid, nineAndTwo.B2skillid, nineAndTwo.B3skillid,
                                                                     nineAndTwo.C1skillid, nineAndTwo.C2skillid, nineAndTwo.C3skillid);
             if (wholepoint < 0)
@@ -323,7 +318,7 @@ namespace mainMenu
             }
             
             List<string> stonesOnNineSlots = getCurrentNineSlotAllSkillIds();
-            int wholePoint = MySkillStonesReader.skillsetValidation(
+            int wholePoint = MySkillStonesReader.SkillSetValidation(
                 stonesOnNineSlots[0], stonesOnNineSlots[1], stonesOnNineSlots[2],
                 stonesOnNineSlots[3], stonesOnNineSlots[4], stonesOnNineSlots[5],
                 stonesOnNineSlots[6], stonesOnNineSlots[7], stonesOnNineSlots[8]);
