@@ -22,22 +22,22 @@ public class TryOneStoneAdd : MainSceneProcess
         _MemberDetail.focusingCharacterDataInfo = myfighter;
         yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharacterDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
         IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
-            yield return (loadMyStonesProcess);
+        yield return (loadMyStonesProcess);
 
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
-        this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.A2DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.A3DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.B1DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.B2DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.B3DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.C1DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.C2DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.C3DragAndDropCell.gameObject.SetActive(false);
-        this._TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(false);
+        TheNineSlot.Instance.A2DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.A3DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.B1DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.B2DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.B3DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.C1DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.C2DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.C3DragAndDropCell.gameObject.SetActive(false);
+        TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(false);
 
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
@@ -65,11 +65,9 @@ public class TryOneStoneAdd : MainSceneProcess
 
     public override bool CanEnterOtherProcess()
     {
-        if (int.Parse(this._MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1)
-            return true;
-        return false;
+        return int.Parse(this._MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1;
     }
-    
+
     public override void ProcessEnter()
     {
         this.mainProcessRunner.triggerMainProcess(enterProcess());
@@ -84,10 +82,10 @@ public class TryOneStoneAdd : MainSceneProcess
     {
         if (step == 1)
         {
-            if (this._TheNineSlot.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
+            if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
             {
                 step = 2;
-                this._LoadingCanvas.HigtLightRect(this._TheNineSlot.A1DragAndDropCell.transform);
+                this._LoadingCanvas.HigtLightRect(TheNineSlot.Instance.A1DragAndDropCell.transform);
             }
         }
         if (step == 2)
@@ -100,11 +98,11 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         if (step == 3)
         {
-            if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
+            if (!_MemberDetail._SkillsPrintOut.ifShowingSkill())
             {
                 step = 4;
-                this._TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(true);
-                this._LoadingCanvas.HigtLightRect(this._TheNineSlot.ConfirmSkillChangeButton.gameObject.transform);
+                TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(true);
+                _LoadingCanvas.HigtLightRect(TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.transform);
             }
         }
     }
@@ -117,21 +115,21 @@ public class TryOneStoneAdd : MainSceneProcess
             Debug.Log("没有找到亚当的信息？程序严重错乱");
             yield break;
         }
-        yield return _TheNineSlot.readANineAndTwo(_CharacterDataInfo);
+        yield return TheNineSlot.Instance.ReadANineAndTwo(_CharacterDataInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
         SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
         }
         void SkillUpdateValidation()
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "编辑A1？");
         }
-        _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
-        _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
+        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
     }
     
     IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion()

@@ -12,10 +12,10 @@ public class SkillStones : MainSceneProcess
         this._LoadingCanvas.DarkOff(1f);
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineSlotT.gameObject.SetActive(false);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         
         IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
-            yield return (loadMyStonesProcess);
+        yield return (loadMyStonesProcess);
                 
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(true);//这一行因为牵扯到对玩家存档中技能石头的读取所以可能是(协程)

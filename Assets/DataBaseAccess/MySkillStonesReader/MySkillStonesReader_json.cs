@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System;
+using mainMenu;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Collections;
@@ -15,8 +16,10 @@ namespace dataAccess
         public IEnumerator LoadMySkillStonesViaLocalJsonFile()
         {
             List<SkillStoneOfPlayerInfoModel> mySkillStones = ReturnMySkillStonesViaLocalFile().ToList();
-            mySkillStonesDataDic = ConvertSKillStoneNumListToDic(mySkillStones);
-            yield return mySkillStonesDataDic;
+            for (int i = 0; i < mySkillStones.Count;i++)
+            {
+                yield return SkillStonesBox.Instance.GenerateOneStone(mySkillStones[i]);
+            }
             yield break;
         }
 

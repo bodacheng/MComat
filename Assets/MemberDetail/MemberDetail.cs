@@ -31,10 +31,6 @@ namespace mainMenu
         public SkillStonesBox _SkillStonesBox;
 
         [Space(7)]
-        [Header("TheNineSlot")]
-        public TheNineSlot _TheNineSlot;
-
-        [Space(7)]
         [Header("部下详细")]
         public Text focusingCharName;
         //public UIBulletBar ExpTiao;

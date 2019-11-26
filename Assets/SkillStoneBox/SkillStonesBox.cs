@@ -70,10 +70,6 @@ namespace mainMenu
         public DragAndDropCell Cellprefab;
 
         [Space(7)]
-        [Header("TheNineSlot")]
-        public TheNineSlot _TheNineSlot;
-
-        [Space(7)]
         [Header("技能石详细")]
         public skillStoneDetail _skillStoneDetail;
        
@@ -81,7 +77,7 @@ namespace mainMenu
         public Camera fxCamera;
 
         IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
-        string focusingtype;
+        string focusingtype = "human";
         int focusingExType;
         SkillStoneSlot DeleteSkillStoneSlot;
 
@@ -148,28 +144,28 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 0;
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX1TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 1;
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX2TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 2;
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX3TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 3;
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
@@ -211,13 +207,13 @@ namespace mainMenu
 
         void RangeCheckBoxOnValueChanged()
         {
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void typeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            _TheNineSlot.mainProcessRunner.triggerMainProcess(EXTabsFeatureRefresh(true));
+            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(EXTabsFeatureRefresh(true));
         }
 
         // 围绕这个环节的一个问题是玩家账户中格子数量的问题。
@@ -252,7 +248,7 @@ namespace mainMenu
 
         public IEnumerator ArrangeSkillStonesToBox()
         {
-            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, _TheNineSlot.getUsingStonesId());
+            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.Instance.GetUsingStonesId());
         }
 
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
@@ -311,25 +307,42 @@ namespace mainMenu
             }
             yield break;
         }
-
-        public IEnumerator GenerateOneStoneModel(string stonelocalid)
+        
+        public IEnumerator GenerateOneStone(SkillStoneOfPlayerInfoModel one)
         {
-            if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(stonelocalid))
+            SkillConfig _SkillConfig = SkillConfigTable.getSkillConfigByID(one.skillId);
+            if (_SkillConfig == null)
             {
-                if (MySkillStonesReader.mySkillStonesObjectsDic[stonelocalid] != null)
+                Debug.Log("巨大问题,技能id似乎未定义："+one.skillId);
+                yield break;
+            }
+            if (MySkillStonesReader.mySkillStonesDataDic.ContainsKey(one.skillStoneOfPlayerId))
+            {
+                MySkillStonesReader.mySkillStonesDataDic[one.skillStoneOfPlayerId] = one;
+            }else{
+                MySkillStonesReader.mySkillStonesDataDic.Add(one.skillStoneOfPlayerId, one);
+            }
+            yield return GenerateOneStoneModel(one.skillStoneOfPlayerId);
+        }
+
+        public IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
+        {
+            if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
+            {
+                if (MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] != null)
                     yield break;
             }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(stonelocalid);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
             SkillConfig skillConfig = SkillConfigTable.getSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             
             IEnumerator process = null;
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    process = (skillIconsDic.Instance.findSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[stonelocalid].skillId));
+                    process = (skillIconsDic.Instance.findSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.Resource:
-                    process = (skillIconsDic.Instance.findSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[stonelocalid].skillId));
+                    process = (skillIconsDic.Instance.findSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
@@ -342,14 +355,14 @@ namespace mainMenu
             if (item == null)
                 item = Icon.AddComponent<DragAndDropItem>();
 
-            if (!MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(stonelocalid))
-                MySkillStonesReader.mySkillStonesObjectsDic.Add(stonelocalid, item);
+            if (!MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
+                MySkillStonesReader.mySkillStonesObjectsDic.Add(skillStoneOfPlayerId, item);
             else
-                 MySkillStonesReader.mySkillStonesObjectsDic[stonelocalid] = item;
+                 MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] = item;
 
-            item._SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[stonelocalid].skillId);
+            item._SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
-            item.localID = stonelocalid;
+            item.localID = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(stonesTempContainer);           
         }
         

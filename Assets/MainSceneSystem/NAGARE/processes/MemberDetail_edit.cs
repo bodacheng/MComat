@@ -10,10 +10,10 @@ public class MemberDetail_edit : MainSceneProcess
     {
         this._LoadingCanvas.DarkOff(0.5f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
-        this._TheNineSlot.NineSlotT.gameObject.SetActive(true);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         yield return SkillEditorButtonBehaviour(this._MemberDetail.focusingCharacterDataInfo);
-        this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(true);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         
         // 表现系
@@ -70,14 +70,14 @@ public class MemberDetail_edit : MainSceneProcess
             Debug.Log("到达了没道理到达的地方");
             yield break;
         }
-        yield return _TheNineSlot.readANineAndTwo(_AccountCharacterInfo);
+        yield return TheNineSlot.Instance.ReadANineAndTwo(_AccountCharacterInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_AccountCharacterInfo.monsterId);
         SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
         yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
+            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
         }
 
@@ -85,7 +85,7 @@ public class MemberDetail_edit : MainSceneProcess
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
-        _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
-        _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
+        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
     }
 }

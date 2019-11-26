@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Linq;
 using UnityEngine.SceneManagement;
 using dataAccess;
 using Api.Dto.Model;
@@ -54,10 +55,6 @@ namespace mainMenu
         [Space(7)]
         [Header("MonsterBox")]
         public MonsterBox _MonsterBox;
-
-        [Space(7)]
-        [Header("九宫槽管理器")]
-        public TheNineSlot TheNineSlot;
 
         [Space(7)]
         [Header("队伍编辑器")]
@@ -125,7 +122,7 @@ namespace mainMenu
             Application.targetFrameRate = 60;
 
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            TheNineSlot.NineSlotT.gameObject.SetActive(false);
+            TheNineSlot.Instance.gameObject.SetActive(false);
             _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
             _MemberDetail._LevelManager.turnOnUI(false);
             MainMenuCanvas.gameObject.SetActive(false);
@@ -168,7 +165,7 @@ namespace mainMenu
             _LoadingCanvas.nowProcess("正在启动技能石头背包", 0.6f);
             yield return (_SkillStonesBox.StartUp());
             _LoadingCanvas.nowProcess("正在加载技能编辑器", 0.7f);
-            yield return (TheNineSlot.startUp());
+            yield return (TheNineSlot.Instance.StartUp());
 
             yield return AccountSet.Instance.loadCustomerInfo();
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
@@ -280,7 +277,6 @@ namespace mainMenu
                     IEnumerator getAllStones()
                     {
                         yield return SkillConfigTable.Instance.loadAllSkillConfigs();
-                        List<SkillStoneOfPlayerInfoModel> mystones = new List<SkillStoneOfPlayerInfoModel>();
                         int i = 1;
                         foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigDicForReference)
                         {
@@ -290,10 +286,11 @@ namespace mainMenu
                                 skillStoneOfPlayerId = String.Format("{0:D20}", i),
                                 skillId = _pair.Value.RECORD_ID
                             };
-                            mystones.Add(skillStoneOfPlayerInfoModel);
+                            yield return SkillStonesBox.Instance.GenerateOneStone(skillStoneOfPlayerInfoModel);
                             i++;
                         }
-                        MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(mystones);
+                        MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
+                        yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
                     }
                     mainProcessRunner.triggerMainProcess(getAllStones());
                 }

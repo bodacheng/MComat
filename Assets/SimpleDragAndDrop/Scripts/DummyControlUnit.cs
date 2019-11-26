@@ -30,10 +30,10 @@ public class DummyControlUnit : MonoBehaviour
                     Debug.Log("Successful drop " + desc.item.name + " from " + sourceSheet.name + " to " + destinationSheet.name);
                     IEnumerator process()
                     {
-                        yield return TheNineSlot._TheNineSlot.SeliWholeNineAndTwo();
+                        yield return TheNineSlot.Instance.SeliWholeNineAndTwo();
                         //yield return MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox();
                     };
-                    TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(process());
+                    TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(process());
                     //  上面的这行SeliWholeNineAndTwo还有一个相当大的重点在于处理了石头上面的inbox参数
                     //这里有个巨大疑问。为什么skillStoneIDs的获取有问题而这里就没问题？
                 }

@@ -16,12 +16,12 @@ public class MemberDetail_skillshow : MainSceneProcess
     public IEnumerator enterProcess()
     {
         CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
-        this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
+        _MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        this._MemberDetail._TheNineSlot.NineSlotT.gameObject.SetActive(false);
-        this._MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
+        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
+        _MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         yield break;
     }

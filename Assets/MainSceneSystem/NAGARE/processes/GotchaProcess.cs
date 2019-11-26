@@ -11,7 +11,7 @@ public class GotchaProcess : MainSceneProcess
     {
         this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        this._TheNineSlot.NineSlotT.gameObject.SetActive(false);
+        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         this._gotchaManager.gotchaCanvas.gameObject.SetActive(true);
         yield break;
     }

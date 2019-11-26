@@ -239,14 +239,14 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.SkillStoneBoxCell:
                                     UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
                                     {
-                                        TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().localID}));
+                                        TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().localID}));
                                         UpdateMyItem();
                                     };
                                     UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
                                     {
-                                        TheNineSlot._TheNineSlot.mainProcessRunner.triggerMainProcess(SkillStonesBox.Instance.ArrangeSkillStonesToBox());
+                                        TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(SkillStonesBox.Instance.ArrangeSkillStonesToBox());
                                     };
-                                    TheNineSlot._TheNineSlot._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
+                                    TheNineSlot.Instance._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
                                         "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.REAL_NAME + "?");
                                     break;
                             }
@@ -389,43 +389,43 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         //这里就应该进行valiadation，因为如果出了问题还不断下来，那么底下的流程就会牵扯到各种的数值更新
         if (this._SkillStoneSlot != null && item._SkillConfigOfSkillStone != null)
         {
-            if (TheNineSlot._TheNineSlot != null)
+            if (TheNineSlot.Instance != null)
             {
-                List<string> nineskillids = TheNineSlot._TheNineSlot.getCurrentNineSlotAllSkillIds();
+                List<string> nineskillids = TheNineSlot.Instance.GetCurrentNineSlotAllSkillIds();
                 
-                if (this == TheNineSlot._TheNineSlot.A1DragAndDropCell)
+                if (this == TheNineSlot.Instance.A1DragAndDropCell)
                 {
                     nineskillids[0] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.A2DragAndDropCell)
+                if (this == TheNineSlot.Instance.A2DragAndDropCell)
                 {
                     nineskillids[1] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.A3DragAndDropCell)
+                if (this == TheNineSlot.Instance.A3DragAndDropCell)
                 {
                     nineskillids[2] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.B1DragAndDropCell)
+                if (this == TheNineSlot.Instance.B1DragAndDropCell)
                 {
                     nineskillids[3] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.B2DragAndDropCell)
+                if (this == TheNineSlot.Instance.B2DragAndDropCell)
                 {
                     nineskillids[4] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.B3DragAndDropCell)
+                if (this == TheNineSlot.Instance.B3DragAndDropCell)
                 {
                     nineskillids[5] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.C1DragAndDropCell)
+                if (this == TheNineSlot.Instance.C1DragAndDropCell)
                 {
                     nineskillids[6] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.C2DragAndDropCell)
+                if (this == TheNineSlot.Instance.C2DragAndDropCell)
                 {
                     nineskillids[7] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }
-                if (this == TheNineSlot._TheNineSlot.C3DragAndDropCell)
+                if (this == TheNineSlot.Instance.C3DragAndDropCell)
                 {
                     nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
                 }

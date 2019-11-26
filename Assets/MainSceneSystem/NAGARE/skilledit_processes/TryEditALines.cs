@@ -13,9 +13,9 @@ public class TryEditALines : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         step = 1;
-        this._TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(false);
-        this._TheNineSlot.A2DragAndDropCell.gameObject.SetActive(true);
-        this._TheNineSlot.A3DragAndDropCell.gameObject.SetActive(true);
+        TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(false);
+        TheNineSlot.Instance.A2DragAndDropCell.gameObject.SetActive(true);
+        TheNineSlot.Instance.A3DragAndDropCell.gameObject.SetActive(true);
         //this._TheNineSlot.B1DragAndDropCell.gameObject.SetActive(true);
         //this._TheNineSlot.B2DragAndDropCell.gameObject.SetActive(true);
         //this._TheNineSlot.B3DragAndDropCell.gameObject.SetActive(true);
@@ -62,11 +62,11 @@ public class TryEditALines : MainSceneProcess
     {
         if (step == 1)
         {
-            if (_TheNineSlot.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
-                _TheNineSlot.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
-                    _TheNineSlot.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
+            if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
+                TheNineSlot.Instance.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
+                    TheNineSlot.Instance.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
             {
-                _TheNineSlot.ConfirmSkillChangeButton.gameObject.SetActive(true);
+                TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(true);
                 step = 2;
             }
         }
@@ -80,13 +80,13 @@ public class TryEditALines : MainSceneProcess
             Debug.Log("没有找到亚当的信息？程序严重错乱");
             yield break;
         }
-        yield return _TheNineSlot.readANineAndTwo(_CharacterDataInfo);
+        yield return TheNineSlot.Instance.ReadANineAndTwo(_CharacterDataInfo);
         CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
         SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(_TheNineSlot.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
             StageScriptableObject stage = new StageScriptableObject
             {
@@ -114,7 +114,7 @@ public class TryEditALines : MainSceneProcess
         {
             _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
-        _TheNineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
-        _TheNineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
+        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
     }
 }

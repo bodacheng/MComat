@@ -18,7 +18,6 @@ namespace mainMenu
         public ModelShower _modelShower;
         public MonsterBox _MonsterBox;
         public CharsManager _CharsManager;
-        public TheNineSlot _TheNineSlot;
         public TeamEditManager _TeamEditManager;
         public ReturnButtonManager _ReturnButtonManager;
         public SelfFightManager _SelfFightManager;
@@ -34,7 +33,6 @@ namespace mainMenu
             _MemberDetail = _preparingScene._MemberDetail;
             _CharsManager = _preparingScene._CharSetManager;
             _modelShower = _preparingScene._modelShower;
-            _TheNineSlot = _preparingScene.TheNineSlot;
             _ReturnButtonManager = _preparingScene._ReturnButtonManager;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;

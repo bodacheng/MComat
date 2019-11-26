@@ -48,7 +48,7 @@ namespace dataAccess
                     yield return LoadMySkillStonesViaLocalJsonFile();
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return loadMySkillstonesRemote(ApiLanguage.JaJp);
+                    yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
                 case playerinfoReferenceMode.formalVersion:
                     break;
@@ -175,8 +175,8 @@ namespace dataAccess
                 case playerinfoReferenceMode.localTestSaveData:
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return skillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
-                    yield return loadMySkillstonesRemote(ApiLanguage.JaJp);
+                    yield return SkillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
+                    yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
                 case playerinfoReferenceMode.formalVersion:
                     break;
@@ -204,27 +204,6 @@ namespace dataAccess
                 mySkillStonesDataDic.Remove(toRemove[i].skillStoneOfPlayerId);
             }
             yield break;
-        }
-
-        IDictionary<string, SkillStoneOfPlayerInfoModel> ConvertSKillStoneNumListToDic(List<SkillStoneOfPlayerInfoModel> mystones)
-        {
-            IDictionary<string, SkillStoneOfPlayerInfoModel> Dic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
-            for (int i = 0; i < mystones.Count; i++)
-            {
-                SkillConfig _SkillConfig = SkillConfigTable.getSkillConfigByID(mystones[i].skillId);
-                if (_SkillConfig == null)
-                {
-                    Debug.Log("巨大问题");
-                    continue;
-                }
-                if (Dic.ContainsKey(mystones[i].skillStoneOfPlayerId))
-                {
-                    Debug.Log("巨大问题,重复的本地技能石id" + mystones[i].skillStoneOfPlayerId);
-                    continue;
-                }
-                Dic.Add(mystones[i].skillStoneOfPlayerId, mystones[i]);
-            }
-            return Dic;
         }
 
         public static int SkillSetValidation(string A1skillid, string A2skillid, string A3skillid,
