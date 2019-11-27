@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Soul;
-using UnityEngine.Events;
 
 public partial class FightTeam : MonoBehaviour
 {
     public void InstantiateCharsIconsAndFloatHPBar_multiRaid()//这个环节应该能够同时把HP bar也适配好。
     {
         SideCharIcon _SideCharIcon;
-        TextMeshProUGUI hitCombo;
+        TextMesh hitCombo;
         foreach(Data_Center a_char in teamMembers.values)
         {
             hitCombo = Instantiate(HitCombo);
@@ -32,7 +28,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
             _SideCharIcon.transform.localScale = Vector3.one;
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
-            datacenterHitComboDic.Add(new KeyValuePair<Data_Center, TextMeshProUGUI>(a_char, hitCombo));
+            datacenterHitComboDic.Add(new KeyValuePair<Data_Center, TextMesh>(a_char, hitCombo));
             this._mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
     }

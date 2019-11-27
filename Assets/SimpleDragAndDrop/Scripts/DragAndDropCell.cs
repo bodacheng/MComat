@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
+using DG.Tweening;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -270,35 +271,35 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         sourceCell.UpdateBackgroundState();
     }
 
-	/// <summary>
-	/// Put item into this cell.
-	/// </summary>
-	/// <param name="item">Item.</param>
-	private void PlaceItem(DragAndDropItem item)
-	{
-		if (item != null)
-		{
-			DestroyItem();                                            	// Remove current item from this cell
-			myDadItem = null;
-			DragAndDropCell cell = item.GetComponentInParent<DragAndDropCell>();
-			if (cell != null)//那么这个cell也就是source cell
-			{
-				if (cell.unlimitedSource == true)
-				{
-					string itemName = item.name;
-					item = Instantiate(item);                               // Clone item from source cell
-					item.name = itemName;
-				}
-			}
-			item.transform.SetParent(transform, false);
-			item.transform.localPosition = Vector3.zero;
-			item.MakeRaycast(true);
-			myDadItem = item;
-		}
-		UpdateBackgroundState();
-	}
+    /// <summary>
+    /// Put item into this cell.
+    /// </summary>
+    /// <param name="item">Item.</param>
+    void PlaceItem(DragAndDropItem item)
+    {
+        if (item != null)
+        {
+            DestroyItem();                                              // Remove current item from this cell
+            myDadItem = null;
+            DragAndDropCell cell = item.GetComponentInParent<DragAndDropCell>();
+            if (cell != null)//那么这个cell也就是source cell
+            {
+                if (cell.unlimitedSource == true)
+                {
+                    string itemName = item.name;
+                    item = Instantiate(item);                               // Clone item from source cell
+                    item.name = itemName;
+                }
+            }
+            item.transform.SetParent(transform, false);
+            item.transform.localPosition = Vector3.zero;
+            item.MakeRaycast(true);
+            myDadItem = item;
+        }
+        UpdateBackgroundState();
+    }
 
-    private void PlaceItem(DragAndDropItem item,Color color)
+    void PlaceItem(DragAndDropItem item, Color color)
     {
         if (item != null)
         {
@@ -325,7 +326,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
     }
 
     ////////// haku ///////////
-    private void PlaceItemNotDestroyOldItemVersion(DragAndDropItem item)
+    void PlaceItemNotDestroyOldItemVersion(DragAndDropItem item)
     {
         if (item != null)
         {
@@ -347,7 +348,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                 }
             }
             //////////////////////////////
-            
+
             item.transform.SetParent(transform, false);
             item.transform.localScale = Vector3.one * 0.7f;
             item.transform.localPosition = Vector3.zero;
@@ -567,14 +568,16 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 			// Swap items
 			if (firstItem != null)
 			{
-				firstItem.transform.SetParent(secondCell.transform, false);
+                firstItem.transform.SetParent(secondCell.transform);
+                //firstItem.transform.DOMove(secondCell.transform.position,1f);
 				firstItem.transform.localPosition = Vector3.zero;
 				firstItem.MakeRaycast(true);
 			}
 			if (secondItem != null)
 			{
-				secondItem.transform.SetParent(firstCell.transform, false);
-				secondItem.transform.localPosition = Vector3.zero;
+                secondItem.transform.SetParent(firstCell.transform);
+                secondItem.transform.DOMove(firstCell.transform.position,0.5f);
+				//secondItem.transform.localPosition = Vector3.zero;
 				secondItem.MakeRaycast(true);
 			}
 			// Update states

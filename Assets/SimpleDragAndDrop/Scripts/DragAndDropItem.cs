@@ -56,22 +56,23 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 		if (dragDisabled == false)
 		{
 			sourceCell = GetCell();                       							// Remember source cell
-			draggedItem = this;                                             		// Set as dragged item
-			// Create item's icon
-            
+			draggedItem = this;                                                     // Set as dragged item
+                                                                                    // Create item's icon
+
             // version 1
-			//icon = new GameObject();
-			//icon.transform.SetParent(canvas.transform);
-			//icon.name = "Icon";
-			//Image myImage = GetComponent<Image>();
-			//myImage.raycastTarget = false;                                        	// Disable icon's raycast for correct drop handling
-			//Image iconImage = icon.AddComponent<Image>();
-			//iconImage.raycastTarget = false;
-			//iconImage.sprite = myImage.sprite;
+            //icon = new GameObject();
+            //icon.transform.SetParent(canvas.transform);
+            //icon.name = "Icon";
+            //Image myImage = GetComponent<Image>();
+            //myImage.raycastTarget = false;                                        	// Disable icon's raycast for correct drop handling
+            //Image iconImage = icon.AddComponent<Image>();
+            //iconImage.raycastTarget = false;
+            //iconImage.sprite = myImage.sprite;
             //iconImage.color = myImage.color;
 
             // version 2
             icon = Instantiate(this.gameObject) as GameObject;
+            transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,0);
             icon.transform.SetParent(canvas.transform);
             icon.name = "Icon";
             Image iconImage = icon.GetComponent<Image>();
@@ -83,12 +84,9 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 			iconRect.pivot = new Vector2(0.5f, 0.5f);
 			iconRect.anchorMin = new Vector2(0.5f, 0.5f);
 			iconRect.anchorMax = new Vector2(0.5f, 0.5f);
-			iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
-			if (OnItemDragStartEvent != null)
-			{
-				OnItemDragStartEvent(this);                                			// Notify all items about drag start for raycast disabling
-			}
-		}
+			iconRect.sizeDelta = new Vector2(2 * myRect.rect.width, 2 * myRect.rect.height);
+            OnItemDragStartEvent?.Invoke(this);                                         // Notify all items about drag start for raycast disabling
+        }
         Debug.Log("拖拽操作step1");
 	}
 
@@ -114,36 +112,33 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnEndDrag(PointerEventData eventData)
     {
 		ResetConditions();
+        transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,1);
     }
 
-	/// <summary>
-	/// Resets all temporary conditions.
-	/// </summary>
-	private void ResetConditions()
-	{
-		if (icon != null)
-		{
-			Destroy(icon);                                                          // Destroy icon on item drop
-		}
-		if (OnItemDragEndEvent != null)
-		{
-			OnItemDragEndEvent(this);                                       		// Notify all cells about item drag end
-		}
-		draggedItem = null;
-		icon = null;
-		sourceCell = null;
-	}
+    /// <summary>
+    /// Resets all temporary conditions.
+    /// </summary>
+    void ResetConditions()
+    {
+        if (icon != null)
+        {
+            Destroy(icon);                                                          // Destroy icon on item drop
+        }
+        OnItemDragEndEvent?.Invoke(this);                                               // Notify all cells about item drag end
+        draggedItem = null;
+        icon = null;
+        sourceCell = null;
+    }
 
-	/// <summary>
-	/// Enable item's raycast.
-	/// </summary>
-	/// <param name="condition"> true - enable, false - disable </param>
-	public void MakeRaycast(bool condition)
+    /// <summary>
+    /// Enable item's raycast.
+    /// </summary>
+    /// <param name="condition"> true - enable, false - disable </param>
+    public void MakeRaycast(bool condition)
 	{
-		Image image = GetComponent<Image>();
-		if (image != null)
+        if (GetComponent<Image>() != null)
 		{
-			image.raycastTarget = condition;
+            GetComponent<Image>().raycastTarget = condition;
 		}
 	}
 

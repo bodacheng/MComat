@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UniRx;
 
 public partial class FightTeam : MonoBehaviour
@@ -15,14 +14,14 @@ public partial class FightTeam : MonoBehaviour
     public RectTransform controllingCharT;
     
     public SideCharIcon button_prefab;
-    public TextMeshProUGUI HitCombo;
+    public TextMesh HitCombo;
     public RealTimeGameProcessManager realTimeGameProcessManager;
     public mobileInputsManager _mobileInputsManager;
     public CharsManager _CharSetManager;
     public TeamMode TeamMode;
     
     private IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-    private IDictionary<Data_Center, TextMeshProUGUI> datacenterHitComboDic = new Dictionary<Data_Center, TextMeshProUGUI>();
+    private IDictionary<Data_Center, TextMesh> datacenterHitComboDic = new Dictionary<Data_Center, TextMesh>();
     
     private SideCharIcon _tempSideCharIcon;
     
@@ -88,7 +87,7 @@ public partial class FightTeam : MonoBehaviour
         _tempSideCharIcon.HpBar.value = current_hp / 500; 
     }
 
-    private TextMeshProUGUI _hitcomboText;
+    private TextMesh _hitcomboText;
     public void RefreshComboHit(Data_Center _datacenter)
     {
         _hitcomboText = datacenterHitComboDic[_datacenter];
@@ -97,7 +96,7 @@ public partial class FightTeam : MonoBehaviour
             _hitcomboText.color = Color.yellow;
             _hitcomboText.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
             _hitcomboText.transform.localScale = Vector3.one;
-            _hitcomboText.fontSizeMax = 30f;
+            _hitcomboText.fontSize = 30;
             _hitcomboText.transform.position = Vector3.Lerp(_hitcomboText.transform.position, CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 2.5f),Time.deltaTime * 20f);
         }
         else
@@ -135,7 +134,7 @@ public partial class FightTeam : MonoBehaviour
                 if (datacenterHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
                     datacenterHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvas.transform);
                 datacenterHitComboDic[_datacenter].transform.localScale = Vector3.one;
-                datacenterHitComboDic[_datacenter].fontSizeMax = 30f;
+                datacenterHitComboDic[_datacenter].fontSize = 30;
             }
         }
     }
