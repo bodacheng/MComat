@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Soul;
 using UnityEngine.UI;
-using TMPro;
 
 //角色列表的职责现在不光是负责两侧菜单中角色的icon，也负责被控制角色又上角血条和ex条
 public class RealTimeGameProcessManager : MonoBehaviour
