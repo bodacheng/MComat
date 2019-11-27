@@ -158,10 +158,10 @@ public class FPSLabel : MonoBehaviour
 	private void CheckInputs()
 	{
 		// If both mouse buttons have been pressed, it toggles the label
-		if (Input.GetMouseButtonDown(0)&& Input.GetMouseButton(1)||
-			Input.GetMouseButtonDown(1)&& Input.GetMouseButton(0))
+		if (UnityEngine.Input.GetMouseButtonDown(0)&& UnityEngine.Input.GetMouseButton(1)||
+            UnityEngine.Input.GetMouseButtonDown(1)&& UnityEngine.Input.GetMouseButton(0))
 		{
-			m_ShowLabel = !m_ShowLabel;
+            m_ShowLabel = !m_ShowLabel;
 		}
 	}
 }

@@ -36,7 +36,7 @@ public class Death_State : AI_State
         return false;
     }
 
-    public override bool Capacity_exit_condition()
+    public override bool Naturally_exit_condition()
     {
         return false;
     }

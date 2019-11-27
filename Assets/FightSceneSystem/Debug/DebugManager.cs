@@ -156,18 +156,18 @@ public class DebugManager : MonoBehaviour {
     {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            if (Input.touchCount > 0)
+            if (UnityEngine.Input.touchCount > 0)
             {
                 if (this.debugModePlayerPlacementStep == 1)
                 {
-                    if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                    if (UnityEngine.Input.GetTouch(0).phase == TouchPhase.Ended)
                     {
                         this.debugModePlayerPlacementStep = 3;
                     }
                 }
                 if (this.debugModePlayerPlacementStep == 3)
                 {
-                    if (Input.GetTouch(0).phase == TouchPhase.Began)
+                    if (UnityEngine.Input.GetTouch(0).phase == TouchPhase.Began)
                     {
                         this.debugModePlayerPlacementStep = 2;
                     }
@@ -175,7 +175,7 @@ public class DebugManager : MonoBehaviour {
 
                 if (debugModePlayerPlacementStep == 2) // 其实这里面是没有包括按住屏幕但手指不滑动的情况 
                 {
-                    if (Input.GetTouch(0).phase == TouchPhase.Stationary || Input.GetTouch(0).phase == TouchPhase.Moved)
+                    if (UnityEngine.Input.GetTouch(0).phase == TouchPhase.Stationary || UnityEngine.Input.GetTouch(0).phase == TouchPhase.Moved)
                     {
                         if (create_chance)
                         {
@@ -225,7 +225,7 @@ public class DebugManager : MonoBehaviour {
 
                                 if (debugMode == DebugMode.ab_mode)
                                 {
-                                    IDictionary<string,GameObject> teamDic = null;
+                                    IDictionary<string, GameObject> teamDic = null;
                                     string localID = (-1).ToString();
                                     if (teamConfig == _RealTimeGameProcessManager.heroTeamConfig)
                                     {
@@ -281,7 +281,7 @@ public class DebugManager : MonoBehaviour {
 
                                 if (_CharacterResourceInfo == null)
                                 {
-                                  debugAddCharUIStateReset ();
+                                    debugAddCharUIStateReset();
                                   return;
                                 }
                             }
@@ -297,7 +297,7 @@ public class DebugManager : MonoBehaviour {
                             }
                         }
                     }
-                    else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                    else if (UnityEngine.Input.GetTouch(0).phase == TouchPhase.Ended)
                     {
                         debugAddCharUIStateReset();
                     }
@@ -308,7 +308,7 @@ public class DebugManager : MonoBehaviour {
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor ||
             Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
-            if (Input.GetMouseButton(0))
+            if (UnityEngine.Input.GetMouseButton(0))
             {
                 this.debugModePlayerPlacementStep = 2;
                 if (debugModePlayerPlacementStep == 2)
@@ -428,7 +428,7 @@ public class DebugManager : MonoBehaviour {
             }
             else
             {
-                if (!Input.GetMouseButton(0))
+                if (!UnityEngine.Input.GetMouseButton(0))
                 {
                     if (this.debugModePlayerPlacementStep == 2)
                     {
@@ -500,12 +500,12 @@ public class DebugManager : MonoBehaviour {
         Ray ray = new Ray();
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            ray = CameraManager._camera.ScreenPointToRay(Input.mousePosition);
+            ray = CameraManager._camera.ScreenPointToRay(UnityEngine.Input.mousePosition);
         }
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor ||
             Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
-            ray = CameraManager._camera.ScreenPointToRay(Input.mousePosition);
+            ray = CameraManager._camera.ScreenPointToRay(UnityEngine.Input.mousePosition);
         }
 
         if (Physics.Raycast(ray, out hit))

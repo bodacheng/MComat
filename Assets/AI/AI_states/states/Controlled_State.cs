@@ -30,7 +30,7 @@ public class Controlled_State : AI_State {
 		Animation_Manger.PlayLayerAnim (clip_name);
     }
 
-	public override bool Capacity_exit_condition()//如果受伤动画播放完的话状态就退出，如果时间过了规定的晕眩时间，也退出。
+	public override bool Naturally_exit_condition()//如果受伤动画播放完的话状态就退出，如果时间过了规定的晕眩时间，也退出。
 	{
         return false;
 	}

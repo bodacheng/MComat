@@ -111,7 +111,7 @@ public class BasicTryProcess : NagareProcess
     {
         _RealTimeGameProcessManager.FightGUIProcess();
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (UnityEngine.Input.GetKey(KeyCode.Escape))
         {
             _NetFightScene.PauseScene();
         }

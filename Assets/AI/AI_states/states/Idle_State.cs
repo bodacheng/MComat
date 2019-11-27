@@ -25,7 +25,7 @@ public class Idle_State : AI_State
         this._Rigidbody.velocity = Vector3.zero;
 	}
 
-    public override bool Capacity_exit_condition()
+    public override bool Naturally_exit_condition()
     {
         return false;
     }

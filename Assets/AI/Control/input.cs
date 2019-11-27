@@ -2,69 +2,70 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class input
+public class Input
 {
-    public inputs_defined input_num;
+    public Inputs_defined input_num;
     public string unity_axis_name;
     public bool input_state;
 
     public bool button_down;
 
-    public input()
+    public Input()
     {
     }
 
-    public input(inputs_defined input_num,string unity_axis_name)
+    public Input(Inputs_defined input_num,string unity_axis_name)
     {
         this.input_num = input_num;
         this.unity_axis_name = unity_axis_name;
-        this.input_state = false;
-        this.button_down = false;
+        input_state = false;
+        button_down = false;
     }
 
-    public virtual void updateInputState()
+    public virtual void UpdateInputState()
     {
     }
 
-    public virtual bool checkInputState()
+    public virtual bool CheckInputState()
     {
         return input_state;
     }
 }
 
-public class buttonTouchedTypeInput : input
+public class ButtonTouchedTypeInput : Input
 {
-    int frame_limit,frame_counter;
+    readonly int frame_limit;
+    int frame_counter;
 
-    public buttonTouchedTypeInput(inputs_defined input_num, string unity_axis_name) : base(input_num, unity_axis_name)
+    public ButtonTouchedTypeInput(Inputs_defined input_num, string unity_axis_name) : base(input_num, unity_axis_name)
     {
         frame_limit = -1;
     }
 
-    public buttonTouchedTypeInput(inputs_defined input_num, string unity_axis_name, int frame_limit)
+    public ButtonTouchedTypeInput(Inputs_defined input_num, string unity_axis_name, int frame_limit)
     {
         this.input_num = input_num;
         this.unity_axis_name = unity_axis_name;
         this.frame_limit = frame_limit;
         frame_limit = (int)Mathf.Clamp(frame_limit, 0, Mathf.Infinity);
-        this.input_state = false;
-        this.button_down = false;
+        input_state = false;
+        button_down = false;
     }
 
-    public override void updateInputState()
+    public override void UpdateInputState()
     {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
             if (frame_limit == -1)
             {
-                this.input_state = ETCInput.GetButtonDown(unity_axis_name);
+                input_state = ETCInput.GetButtonDown(unity_axis_name);
             }              
             else
             {
                 if (ETCInput.GetButtonDown(unity_axis_name))
                 {
                     frame_counter = 0;
-                    this.input_state = false;
+                    input_state = false;
                 }
                 if (ETCInput.GetButton(unity_axis_name))
                 {
@@ -72,10 +73,7 @@ public class buttonTouchedTypeInput : input
                 }
                 if (ETCInput.GetButtonUp(unity_axis_name))
                 {
-                    if (frame_counter <= frame_limit)
-                    {
-                        this.input_state = true;
-                    }
+                    input_state |= frame_counter <= frame_limit;
                     frame_counter = 0;
                 }
             }
@@ -84,36 +82,30 @@ public class buttonTouchedTypeInput : input
             || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
         {
             if (frame_limit == -1)
-                this.input_state = Input.GetButtonDown(unity_axis_name);
+                input_state = UnityEngine.Input.GetButtonDown(unity_axis_name);
             else
             {
-                if (Input.GetButtonDown(unity_axis_name))
+                if (UnityEngine.Input.GetButtonDown(unity_axis_name))
                 {
                     frame_counter = 0;
                     this.input_state = false;
                 }
-                if (Input.GetButton(unity_axis_name))
+                if (UnityEngine.Input.GetButton(unity_axis_name))
                 {
                     frame_counter++;
                 }
-                if (Input.GetButtonUp(unity_axis_name))
+                if (UnityEngine.Input.GetButtonUp(unity_axis_name))
                 {
-                    if (frame_counter <= frame_limit)
-                    {
-                        this.input_state = true;
-                    }
+                    this.input_state |= frame_counter <= frame_limit;
                     frame_counter = 0;
                 }
             }
         }
 
-        if (this.input_state)
-            this.button_down = true;
-        else
-            this.button_down = false;
+        this.button_down = this.input_state ? true : false;
     }
 
-    public override bool checkInputState()
+    public override bool CheckInputState()
     {
         if (input_state)
         {
@@ -125,17 +117,23 @@ public class buttonTouchedTypeInput : input
     }
 }
 
-public class buttonDownTypeInput:input
+public class ButtonDownTypeInput:Input
 {
-    public buttonDownTypeInput(inputs_defined input_num, string unity_axis_name) : base(input_num, unity_axis_name)
+    public ButtonDownTypeInput(Inputs_defined input_num, string unity_axis_name) : base(input_num, unity_axis_name)
     {
         //this.frame_limit = -1;
     }
 
-    public override void updateInputState()
+    public override void UpdateInputState()
     {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
+            if (unity_axis_name == "Any")
+                input_state = UnityEngine.Input.GetButton("Attack") || 
+                                UnityEngine.Input.GetButton("Fire1") || 
+                                    UnityEngine.Input.GetButton("Fire2") || 
+                                        UnityEngine.Input.GetButton("Rush") ||
+                                            UnityEngine.Input.GetButton("Defend");
             //if (frame_limit == -1)
             //{
             //    this.input_state = ETCInput.GetButton(unity_axis_name);
@@ -165,8 +163,16 @@ public class buttonDownTypeInput:input
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor
             || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
         {
-            this.input_state = Input.GetButton(unity_axis_name);//电脑测试的话就把这个打开。
-
+            
+            if (unity_axis_name == "Any")
+                input_state = UnityEngine.Input.GetButton("Attack") || 
+                                UnityEngine.Input.GetButton("Fire1") || 
+                                    UnityEngine.Input.GetButton("Fire2") || 
+                                        UnityEngine.Input.GetButton("Rush") ||
+                                            UnityEngine.Input.GetButton("Defend");
+            else
+                input_state = UnityEngine.Input.GetButton(unity_axis_name);//电脑测试的话就把这个打开。
+            
             //if (frame_limit == -1)
             //{
             //    this.input_state = Input.GetButton(unity_axis_name);
@@ -191,31 +197,27 @@ public class buttonDownTypeInput:input
             //    }
             //}
         }
-
-        if (this.input_state)
-            this.button_down = true;
-        else
-            this.button_down = false;
+        button_down = this.input_state;
     }
 
-    public override bool checkInputState()
+    public override bool CheckInputState()
     {
         return input_state;
     }
 }
 
-public class buttonOffTypeInput : input
+public class ButtonOffTypeInput : Input
 {
-    public buttonOffTypeInput(inputs_defined input_num, string unity_axis_name) : base(input_num, unity_axis_name)
+    public ButtonOffTypeInput(Inputs_defined input_num, string unity_axis_name) : base(input_num, unity_axis_name)
     {
     }
 
-    public override void updateInputState()
+    public override void UpdateInputState()
     {
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor
             || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
         {
-            this.input_state = !Input.GetButton(unity_axis_name);
+            this.input_state = !UnityEngine.Input.GetButton(unity_axis_name);
         }
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
@@ -225,7 +227,7 @@ public class buttonOffTypeInput : input
         this.button_down = false;
     }
 
-    public override bool checkInputState()
+    public override bool CheckInputState()
     {
         return input_state;
     }

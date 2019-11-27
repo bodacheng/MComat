@@ -42,26 +42,26 @@ public class MagicBeamScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-        if (Input.GetMouseButtonDown(0))
+        if (UnityEngine.Input.GetMouseButtonDown(0))
         {
             beamStart = Instantiate(beamStartPrefab[currentBeam], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             beamEnd = Instantiate(beamEndPrefab[currentBeam], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             beam = Instantiate(beamLineRendererPrefab[currentBeam], new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
             line = beam.GetComponent<LineRenderer>();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (UnityEngine.Input.GetMouseButtonUp(0))
         {
             Destroy(beamStart);
             Destroy(beamEnd);
             Destroy(beam);
         }
 
-        if (Input.GetMouseButton(0))
+        if (UnityEngine.Input.GetMouseButton(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray.origin, ray.direction, out hit))
             {
@@ -70,21 +70,21 @@ public class MagicBeamScript : MonoBehaviour {
             }
         }
 		
-		if (Input.GetKeyDown(KeyCode.RightArrow)) //4 next if commands are just hotkeys for cycling beams
+		if (UnityEngine.Input.GetKeyDown(KeyCode.RightArrow)) //4 next if commands are just hotkeys for cycling beams
         {
             nextBeam();
         }
 
-		if (Input.GetKeyDown(KeyCode.D))
+		if (UnityEngine.Input.GetKeyDown(KeyCode.D))
 		{
-			nextBeam();
+            nextBeam();
 		}
 
-		if (Input.GetKeyDown(KeyCode.A))
+		if (UnityEngine.Input.GetKeyDown(KeyCode.A))
 		{
-			previousBeam();
+            previousBeam();
 		}
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (UnityEngine.Input.GetKeyDown(KeyCode.LeftArrow))
         {
             previousBeam();
         }

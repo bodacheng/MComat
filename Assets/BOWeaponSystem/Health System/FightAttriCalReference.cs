@@ -108,6 +108,19 @@ public partial class FightAttriCalReference : MonoBehaviour
                 hitbox.myColliderMustEquip.isTrigger = !_bool;
         }
     }
+    
+    public void ChangeLayerForAllSelfColliders(int layer)
+    {
+        if (myBOHitBoxeComponent != null)
+        {
+            for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
+            {
+                BO_Hitbox _BO_Hitbox = myBOHitBoxeComponent[i];
+                _BO_Hitbox.gameObject.layer = layer;
+            }
+        }
+        gameObject.layer = layer;
+    }
 
     public bool IfMyBody(Collider collider) => myColliders.Contains(collider);
 
@@ -140,24 +153,11 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
     }
 
-    public void ChangeLayerForAllSelfColliders(int layer)
-    {
-        if (myBOHitBoxeComponent != null)
-        {
-            for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
-            {
-                BO_Hitbox _BO_Hitbox = myBOHitBoxeComponent[i];
-                _BO_Hitbox.gameObject.layer = layer;
-            }
-        }
-        this.gameObject.layer = layer;
-    }
-
     public void MyDamageCount(V_Damage _dmg)
     {
-        if (this.ICauseDamages != null)
+        if (ICauseDamages != null)
         {
-            this.ICauseDamages.Add(_dmg);
+            ICauseDamages.Add(_dmg);
         }
     }
 

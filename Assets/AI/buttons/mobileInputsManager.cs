@@ -99,13 +99,13 @@ public class mobileInputsManager : MonoBehaviour {
     static Button s_Defend;
     static Button s_Dash;
         
-    private IDictionary<inputs_defined, int> lastSkillSPlevel = new Dictionary<inputs_defined, int>()
+    private IDictionary<Inputs_defined, int> lastSkillSPlevel = new Dictionary<Inputs_defined, int>()
     {
-        {inputs_defined.Attack,-1},
-        {inputs_defined.Fire1,-1},
-        {inputs_defined.Fire2,-1}
+        {Inputs_defined.Attack,-1},
+        {Inputs_defined.Fire1,-1},
+        {Inputs_defined.Fire2,-1}
     };
-    public static inputManager watchingInputManger;
+    public static InputManager watchingInputManger;
 
     void Awake()
     {
@@ -137,7 +137,7 @@ public class mobileInputsManager : MonoBehaviour {
         }
     }
 
-    public void FocusCharInputs(inputManager focusingCharInputManger,Zokusei zokusei)
+    public void FocusCharInputs(InputManager focusingCharInputManger,Zokusei zokusei)
     {
         mobileInputsManager.watchingInputManger = focusingCharInputManger;
         if (mobileInputsManager.watchingInputManger != null)
@@ -162,7 +162,7 @@ public class mobileInputsManager : MonoBehaviour {
     }
 
     static ParticleSystem targetexplode;
-    public static void Skillbuttonexplosion(inputs_defined inputs_Defined,int eX)
+    public static void Skillbuttonexplosion(Inputs_defined inputs_Defined,int eX)
     {
         switch(eX)
         {
@@ -184,13 +184,13 @@ public class mobileInputsManager : MonoBehaviour {
     
         switch (inputs_Defined)
         {
-            case inputs_defined.Attack:
+            case Inputs_defined.Attack:
                 targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(s_Attack,3);
                 break;
-            case inputs_defined.Fire1:
+            case Inputs_defined.Fire1:
                 targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(s_Fire1,3);
                 break;
-            case inputs_defined.Fire2:
+            case Inputs_defined.Fire2:
                 targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(s_Fire2,3);
                 break;
         }
@@ -319,21 +319,21 @@ public class mobileInputsManager : MonoBehaviour {
         Fire1.gameObject.SetActive(true);
         Fire2.gameObject.SetActive(true);
 
-        if (watchingInputManger.inputStateDic.ContainsKey(inputs_defined.Defend))
+        if (watchingInputManger.inputStateDic.ContainsKey(Inputs_defined.Defend))
             Defend.gameObject.SetActive(true);
         else
             Defend.gameObject.SetActive(false);
 
-        if (watchingInputManger.inputStateDic.ContainsKey(inputs_defined.Dash))
+        if (watchingInputManger.inputStateDic.ContainsKey(Inputs_defined.Dash))
             Dash.gameObject.SetActive(true);
         else
             Dash.gameObject.SetActive(false);
 
-        lastSkillSPlevel = new Dictionary<inputs_defined, int>()
+        lastSkillSPlevel = new Dictionary<Inputs_defined, int>()
         {
-            {inputs_defined.Attack,-1},
-            {inputs_defined.Fire1,-1},
-            {inputs_defined.Fire2,-1}
+            {Inputs_defined.Attack,-1},
+            {Inputs_defined.Fire1,-1},
+            {Inputs_defined.Fire2,-1}
         };
     }
 
@@ -366,19 +366,19 @@ public class mobileInputsManager : MonoBehaviour {
             return;
         //那么这里面就完全不包括对防御和机动键的处理了。。。去看nextSkillSPlevel这个东西里面也是只有三个攻击键。
         //如此一来我们是打算把防御和机动键给做成完全固定的。
-        foreach (KeyValuePair<inputs_defined, int> _pair in watchingInputManger.nextSkillSPlevel)
+        foreach (KeyValuePair<Inputs_defined, int> _pair in watchingInputManger.nextSkillSPlevel)
         {
             switch (_pair.Key)
             {
-                case inputs_defined.Attack:
+                case Inputs_defined.Attack:
                     if (_pair.Value != lastSkillSPlevel[_pair.Key])
                         ChangeButtonPatternNewTest(Attack, _pair.Value);
                     break;
-                case inputs_defined.Fire1:
+                case Inputs_defined.Fire1:
                     if (_pair.Value != lastSkillSPlevel[_pair.Key])
                         ChangeButtonPatternNewTest(Fire1, _pair.Value);
                     break;
-                case inputs_defined.Fire2:
+                case Inputs_defined.Fire2:
                     if (_pair.Value != lastSkillSPlevel[_pair.Key])
                     {
                         ChangeButtonPatternNewTest(Fire2, _pair.Value);

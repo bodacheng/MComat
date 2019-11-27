@@ -58,7 +58,7 @@ namespace HittingDetection
                 _dist = Vector3.Distance(transform.position, _tempPos);
                 //Debug.DrawRay(_tempPos, _dir, Color.white, 0.3f);
                 //为什么要raycastALl？说到底也是因为我们想让系统简单化，不给所有物体分层，从而这个轨道可能会停于自身武器上的collider
-                _hits = Physics.RaycastAll(_tempPos, _dir, _dist, _layers, QueryTriggerInteraction.Ignore);
+                _hits = Physics.RaycastAll(_tempPos, _dir, _dist, _layers, QueryTriggerInteraction.Collide);
                 if (_hits.Length == 0)
                 {
                     _tempPos = transform.position;

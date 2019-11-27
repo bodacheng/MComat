@@ -63,7 +63,7 @@ public class Jump_State : AI_State
         return false;
 	}
 
-    public override bool Capacity_exit_condition()
+    public override bool Naturally_exit_condition()
     {
         if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
             return true;
@@ -158,8 +158,8 @@ public class Jump_State : AI_State
         float v = 0f;
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
+            h = UnityEngine.Input.GetAxis("Horizontal");
+            v = UnityEngine.Input.GetAxis("Vertical");
         }
         else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {

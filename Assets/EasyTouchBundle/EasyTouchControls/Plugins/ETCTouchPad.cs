@@ -265,8 +265,8 @@ public class ETCTouchPad : ETCBase,IBeginDragHandler, IDragHandler,IPointerEnter
 			isOnDrag = false;
 			tmpAxis = Vector2.zero;
 
-			float x = Input.GetAxis(axisX.unityAxis);
-			float y= Input.GetAxis(axisY.unityAxis);
+			float x = UnityEngine.Input.GetAxis(axisX.unityAxis);
+			float y= UnityEngine.Input.GetAxis(axisY.unityAxis);
 
 			if (x!=0){
 				isOnDrag = true;

@@ -103,12 +103,12 @@ public class States_Incubator
             nextAttackStateCanRushFirst = false
         };
 
-        GetUp getUp = new GetUp("getup", 2f)
+        GetUp getUp = new GetUp("getup")
         {
             StateType = stateType.getUp
         };
 
-        Knock_Off_State knock_off = new Knock_Off_State(FightGlobalSetting._knockoffMaxtime)
+        Knock_Off_State knock_off = new Knock_Off_State()
         {
             StateType = stateType.KnockOff,
             nextAttackStateCanRushFirst = true

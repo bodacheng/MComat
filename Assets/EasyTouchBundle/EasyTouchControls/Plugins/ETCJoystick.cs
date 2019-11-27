@@ -425,8 +425,8 @@ public class ETCJoystick : ETCBase,IPointerEnterHandler,IDragHandler, IBeginDrag
 		#region Unity axes
 		if (enableKeySimulation && !isOnTouch && _activated && _visible ){
 
-			float x = Input.GetAxis(axisX.unityAxis);
-			float y= Input.GetAxis(axisY.unityAxis);
+			float x = UnityEngine.Input.GetAxis(axisX.unityAxis);
+			float y= UnityEngine.Input.GetAxis(axisY.unityAxis);
 
 			if (!isNoReturnThumb){
 				thumb.localPosition = Vector2.zero;
@@ -592,8 +592,8 @@ public class ETCJoystick : ETCBase,IPointerEnterHandler,IDragHandler, IBeginDrag
 				doTest = true;
 			}
 			#else
-			if (Input.GetMouseButtonDown(0)){
-				screenPosition = Input.mousePosition;
+			if (UnityEngine.Input.GetMouseButtonDown(0)){
+				screenPosition = UnityEngine.Input.mousePosition;
 				doTest = true;
 
 			}
@@ -685,7 +685,7 @@ public class ETCJoystick : ETCBase,IPointerEnterHandler,IDragHandler, IBeginDrag
 		#if ((UNITY_ANDROID || UNITY_IOS || UNITY_WINRT || UNITY_BLACKBERRY) && !UNITY_EDITOR) 
 		return Input.touchCount;
 		#else
-		if (Input.GetMouseButton(0) || Input.GetMouseButtonUp(0)){
+		if (UnityEngine.Input.GetMouseButton(0) || UnityEngine.Input.GetMouseButtonUp(0)){
 			return 1;
 		}
 		else{

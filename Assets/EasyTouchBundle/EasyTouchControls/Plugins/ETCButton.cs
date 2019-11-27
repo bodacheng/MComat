@@ -177,17 +177,17 @@ public class ETCButton : ETCBase, IPointerEnterHandler, IPointerDownHandler, IPo
 
 		if (enableKeySimulation && _activated && _visible && !isOnTouch){
 
-			if (Input.GetButton( axis.unityAxis)&& axis.axisState ==ETCAxis.AxisState.None ){	
-				axis.ResetAxis();
-				onDown.Invoke();
-				axis.axisState = ETCAxis.AxisState.Down;
+			if (UnityEngine.Input.GetButton(axis.unityAxis)&& axis.axisState == ETCAxis.AxisState.None ){
+                axis.ResetAxis();
+                onDown.Invoke();
+                axis.axisState = ETCAxis.AxisState.Down;
 			}
 
-			if (!Input.GetButton(axis.unityAxis )&& axis.axisState == ETCAxis.AxisState.Press){
-				axis.axisState = ETCAxis.AxisState.Up;
-				axis.axisValue = 0;
-				
-				onUp.Invoke();
+			if (!UnityEngine.Input.GetButton(axis.unityAxis )&& axis.axisState == ETCAxis.AxisState.Press){
+                axis.axisState = ETCAxis.AxisState.Up;
+                axis.axisValue = 0;
+
+                onUp.Invoke();
 			}
 
 			axis.UpdateButton();

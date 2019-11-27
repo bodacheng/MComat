@@ -267,8 +267,8 @@ public class Move_State : AI_State
 			v = 0f;
 			if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
 			{
-				h = Input.GetAxis("Horizontal");
-				v = Input.GetAxis("Vertical");
+                h = UnityEngine.Input.GetAxis("Horizontal");
+                v = UnityEngine.Input.GetAxis("Vertical");
 				//h = ETCInput.GetAxis("Horizontal");
 				//v = ETCInput.GetAxis("Vertical");
 			}

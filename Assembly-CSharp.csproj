@@ -83,8 +83,8 @@
     <Compile Include="Assets\AI\buttons\mobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiSkillStoneTagsGroup.cs" />
-    <Compile Include="Assets\AI\Control\input.cs" />
-    <Compile Include="Assets\AI\Control\inputManager.cs" />
+    <Compile Include="Assets\AI\Control\Input.cs" />
+    <Compile Include="Assets\AI\Control\InputManager.cs" />
     <Compile Include="Assets\AI\Soul\AIRunnerGUI.cs" />
     <Compile Include="Assets\AI\Soul\AIStateRunner.cs" />
     <Compile Include="Assets\AI\Soul\AIStateRunner_newRunner.cs" />
@@ -327,7 +327,6 @@
     <Compile Include="Assets\JsonSupport\UnityLitJson\ParserToken.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Platform.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
-    <Compile Include="Assets\JsonSupport\UnityLitJson-Example\JsonExample.cs" />
     <Compile Include="Assets\JsonSupport\UnityPackage\Assets\JsonNetSample.cs" />
     <Compile Include="Assets\MailManager\MailManager.cs" />
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />

@@ -1440,7 +1440,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
-  knockoffMaxtime: 2
+  knockoffextent: 2
+  MaxKnockoffLaidGroundTime: 1
+  CanGetUpAfterKnockoffToGround: 0.5
+  LeastCommandTimeAfterGetup: 3
   defendHP: 20
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.5

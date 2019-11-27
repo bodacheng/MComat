@@ -201,7 +201,7 @@ public partial class G_Attack_State : AI_State {
         }
     }
 
-	public override bool Capacity_exit_condition()
+	public override bool Naturally_exit_condition()
 	{
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
     }

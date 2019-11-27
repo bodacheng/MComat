@@ -331,7 +331,7 @@ namespace mainMenu
 
             //////////////////////////
 
-            attack_chuan = nineAndTwo.getAttackChuan();
+            attack_chuan = nineAndTwo.GetAttackChuan();
 
             for (int i = 1; i < 4; i++)
             {
@@ -376,7 +376,7 @@ namespace mainMenu
             ///////////////////////
 
             unsualKeyConnects = new List<List<string>>();
-            Fire1_chuan = nineAndTwo.getFire1Chuan();
+            Fire1_chuan = nineAndTwo.GetFire1Chuan();
 
             for (int i = 1; i < 4; i++)
             {
@@ -418,7 +418,7 @@ namespace mainMenu
             }
 
             unsualKeyConnects = new List<List<string>>();
-            Fire2_chuan = nineAndTwo.getFire2Chuan();
+            Fire2_chuan = nineAndTwo.GetFire2Chuan();
 
             for (int i = 1; i < 4; i++)
             {
@@ -463,7 +463,7 @@ namespace mainMenu
         //首先三个基础按键的连按结果必须要显示出来，如果存在非连按键接续，那么只要把这个组给记录下来，在画出连按键后再画个线其实就可以。
         //那么考虑到这个东西还有这样丰富的功能，单纯一个返回值可能得不到所有我们需要的东西.我们从中引入了unsualKeyConnects来记录非寻常连接技能
         List<State_Transition_Set> searchChuanNextAlreadyUseless(State_Transition_Set _set,
-                                                   inputs_defined _inputKey,
+                                                   Inputs_defined _inputKey,
                                                    List<string> _keyChuan,
                                                    List<State_Transition_Set> chuan,
                                                    IDictionary<string, State_Transition_Set> stateTransitionSetDictionary)
@@ -488,8 +488,8 @@ namespace mainMenu
                 _keyChuan.Add(freshNew.StateKey);
             }
 
-            inputs_defined searching_inputKey = inputs_defined.Null;
-            if (_inputKey == inputs_defined.Null)
+            Inputs_defined searching_inputKey = Inputs_defined.Null;
+            if (_inputKey == Inputs_defined.Null)
             {
                 searching_inputKey = _set.enterInput;
             }
@@ -500,7 +500,7 @@ namespace mainMenu
 
             foreach (State_Rate_Set _rset in _set.casual_to_state_Sets)
             {
-                if (_rset.enterInput != inputs_defined.Null)
+                if (_rset.enterInput != Inputs_defined.Null)
                 {
                     if (_rset.enterInput == searching_inputKey)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                     {

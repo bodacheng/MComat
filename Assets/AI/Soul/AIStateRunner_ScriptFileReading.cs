@@ -77,7 +77,7 @@ namespace Soul
                                                                           0,
                                                                           null,
                                                                           new State_Rate_Set[0], new string[0],
-                                                                          inputs_defined.Null, inputs_defined.Null,
+                                                                          Inputs_defined.Null, Inputs_defined.Null,
                                                                           0,
                                                                           0,
                                                                           0);
@@ -92,7 +92,7 @@ namespace Soul
                                                                             0,
                                                                             null,
                                                                             new State_Rate_Set[0], new string[0],
-                                                                            inputs_defined.Null, inputs_defined.Null,
+                                                                            Inputs_defined.Null, Inputs_defined.Null,
                                                                             0,
                                                                             0,
                                                                             0);
@@ -107,7 +107,7 @@ namespace Soul
                                                                           0,
                                                                           null,
                                                                           new State_Rate_Set[0], new string[0],
-                                                                          inputs_defined.Null, inputs_defined.Null,
+                                                                          Inputs_defined.Null, Inputs_defined.Null,
                                                                           0,
                                                                           0,
                                                                           0);
@@ -123,7 +123,7 @@ namespace Soul
                                                                         null,
                                                                         new State_Rate_Set[0],
                                                                         (new List<string>() { "Hit", "KnockOff" }).ToArray(),
-                                                                        inputs_defined.Null, inputs_defined.Null,
+                                                                        Inputs_defined.Null, Inputs_defined.Null,
                                                                         0,
                                                                         0,
                                                                         0);
@@ -138,7 +138,7 @@ namespace Soul
                                                                              0,
                                                                              null,
                                                                              new State_Rate_Set[0], (new List<string>() { "Hit", "KnockOff" }).ToArray(),
-                                                                             inputs_defined.Null, inputs_defined.Null,
+                                                                             Inputs_defined.Null, Inputs_defined.Null,
                                                                              0,
                                                                              0,
                                                                              0);
@@ -300,11 +300,11 @@ namespace Soul
                     stateTransitionSetDictionary.Add(new KeyValuePair<string, State_Transition_Set>(_set.StateKey, _set));
                 }
 
-                if (_set.enterInput != inputs_defined.Null)
+                if (_set.enterInput != Inputs_defined.Null)
                 {
-                    if (_set.enterInput == inputs_defined.Dash)
+                    if (_set.enterInput == Inputs_defined.Dash)
                         hasR = true;
-                    if (_set.enterInput == inputs_defined.Defend)
+                    if (_set.enterInput == Inputs_defined.Defend)
                         hasD = true;
 
                     setsHaveInitialInput.Add(_set);
@@ -348,7 +348,7 @@ namespace Soul
             foreach (State_Transition_Set _set in setsHaveInitialInput)
             {
                 List<State_Transition_Set> chuan = new List<State_Transition_Set>();
-                chuan = searchChuanNext(_set, inputs_defined.Null, chuan, allChuans, stateTransitionSetDictionary);
+                chuan = searchChuanNext(_set, Inputs_defined.Null, chuan, allChuans, stateTransitionSetDictionary);
             }
 
             foreach (State_Transition_Set _set in list)
@@ -363,7 +363,7 @@ namespace Soul
             return regularStates;
         }
 
-        List<State_Transition_Set> searchChuanNext(State_Transition_Set _set, inputs_defined _inputKey,
+        List<State_Transition_Set> searchChuanNext(State_Transition_Set _set, Inputs_defined _inputKey,
                                                List<State_Transition_Set> chuan, List<State_Transition_Set> allChuans,
                                                IDictionary<string, State_Transition_Set> stateTransitionSetDictionary)
         {
@@ -373,8 +373,8 @@ namespace Soul
                 allChuans.Add(_set);
             }
 
-            inputs_defined searching_inputKey = inputs_defined.Null;
-            if (_inputKey == inputs_defined.Null)
+            Inputs_defined searching_inputKey = Inputs_defined.Null;
+            if (_inputKey == Inputs_defined.Null)
             {
                 searching_inputKey = _set.enterInput;
             }
@@ -385,7 +385,7 @@ namespace Soul
 
             foreach (State_Rate_Set _rset in _set.casual_to_state_Sets)
             {
-                if (_rset.enterInput == searching_inputKey && _rset.enterInput != inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
+                if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                 {
                     State_Transition_Set _new = null;
                     stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out _new);
@@ -423,15 +423,15 @@ namespace Soul
             return false;
         }
 
-        private List<string> searchAttackChuanKeyNext(State_Transition_Set _set, inputs_defined _inputKey, List<string> chuan, IDictionary<string, State_Transition_Set> stateTransitionSetDictionary, int chuanLimit)
+        private List<string> searchAttackChuanKeyNext(State_Transition_Set _set, Inputs_defined _inputKey, List<string> chuan, IDictionary<string, State_Transition_Set> stateTransitionSetDictionary, int chuanLimit)
         {
             if (!checkIfStringInList(_set.StateKey, chuan) && (chuan.Count + 1) <= chuanLimit)
             {
                 chuan.Add(_set.StateKey);
             }
 
-            inputs_defined searching_inputKey = inputs_defined.Null;
-            if (_inputKey == inputs_defined.Null)
+            Inputs_defined searching_inputKey = Inputs_defined.Null;
+            if (_inputKey == Inputs_defined.Null)
             {
                 searching_inputKey = _set.enterInput;
             }
@@ -441,7 +441,7 @@ namespace Soul
             }
             foreach (State_Rate_Set _rset in _set.casual_to_state_Sets)
             {
-                if (_rset.enterInput == searching_inputKey && _rset.enterInput != inputs_defined.Null)
+                if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)
                 {
                     State_Transition_Set _new = null;
                     stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out _new);
@@ -507,17 +507,17 @@ namespace Soul
                     myMoveStateKey = Transition.Key;
                 }
 
-                if (Transition.Value.enterInput == inputs_defined.Attack)
+                if (Transition.Value.enterInput == Inputs_defined.Attack)
                 {
-                    attackChuan = searchAttackChuanKeyNext(Transition.Value, inputs_defined.Null, attackChuan, final_dic, jiesuoLevel);
+                    attackChuan = searchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, attackChuan, final_dic, jiesuoLevel);
                 }
-                if (Transition.Value.enterInput == inputs_defined.Fire1)
+                if (Transition.Value.enterInput == Inputs_defined.Fire1)
                 {
-                    Fire1Chuan = searchAttackChuanKeyNext(Transition.Value, inputs_defined.Null, Fire1Chuan, final_dic, jiesuoLevel);
+                    Fire1Chuan = searchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire1Chuan, final_dic, jiesuoLevel);
                 }
-                if (Transition.Value.enterInput == inputs_defined.Fire2)
+                if (Transition.Value.enterInput == Inputs_defined.Fire2)
                 {
-                    Fire2Chuan = searchAttackChuanKeyNext(Transition.Value, inputs_defined.Null, Fire2Chuan, final_dic, jiesuoLevel);
+                    Fire2Chuan = searchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire2Chuan, final_dic, jiesuoLevel);
                 }
                 //在这里把三大攻击串给算出来，无非是说他们的主串包含的技能都有啥名字，这个信息不包括他们各自可能出现的首尾循环
             }
@@ -525,7 +525,7 @@ namespace Soul
             foreach (KeyValuePair<string, State_Transition_Set> Transition in final_dic)
             {
                 // 三大首发技能AI模式下概率
-                if (Transition.Value.enterInput == inputs_defined.Attack)
+                if (Transition.Value.enterInput == Inputs_defined.Attack)
                 {
                     List<State_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
                     List<State_Rate_Set> casual_to_states_after = new List<State_Rate_Set>();
@@ -554,7 +554,7 @@ namespace Soul
                     Transition.Value.casual_to_state_Sets = casual_to_states_after.ToArray();
                 }
 
-                if (Transition.Value.enterInput == inputs_defined.Fire1)
+                if (Transition.Value.enterInput == Inputs_defined.Fire1)
                 {
                     List<State_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
                     List<State_Rate_Set> casual_to_states_after = new List<State_Rate_Set>();
@@ -582,7 +582,7 @@ namespace Soul
                     Transition.Value.casual_to_state_Sets = casual_to_states_after.ToArray();
                 }
 
-                if (Transition.Value.enterInput == inputs_defined.Fire2)
+                if (Transition.Value.enterInput == Inputs_defined.Fire2)
                 {
                     List<State_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
                     List<State_Rate_Set> casual_to_states_after = new List<State_Rate_Set>();
@@ -612,10 +612,10 @@ namespace Soul
                 }
 
                 //非首发
-                if ((Transition.Value.enterInput != inputs_defined.Fire2
+                if ((Transition.Value.enterInput != Inputs_defined.Fire2
                      &&
-                     Transition.Value.enterInput != inputs_defined.Fire1
-                     && Transition.Value.enterInput != inputs_defined.Attack)
+                     Transition.Value.enterInput != Inputs_defined.Fire1
+                     && Transition.Value.enterInput != Inputs_defined.Attack)
                    &&
                     (attackChuan.Contains(Transition.Value.StateKey) || Fire1Chuan.Contains(Transition.Value.StateKey) || Fire2Chuan.Contains(Transition.Value.StateKey)))
                 {

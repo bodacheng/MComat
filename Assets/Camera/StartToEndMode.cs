@@ -36,13 +36,13 @@ public class StartToEndMode : CameraMode
         if (this.target == null)
             return;
 
-        if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
+        if (UnityEngine.Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
         {
-            FirstPoint = Input.mousePosition;
+            FirstPoint = UnityEngine.Input.mousePosition;
         }
-        else if (Input.GetMouseButton(0))
+        else if (UnityEngine.Input.GetMouseButton(0))
         {
-            SecondPoint = Input.mousePosition;
+            SecondPoint = UnityEngine.Input.mousePosition;
             touchZeroscreenposx = FirstPoint.x / Screen.width;
             touchZeroscreenposy = FirstPoint.y / Screen.height;
             if (touchZeroscreenposx < 0.1f || touchZeroscreenposx > 0.5f || touchZeroscreenposy < 0.1f || touchZeroscreenposy > 0.8f)
@@ -50,7 +50,7 @@ public class StartToEndMode : CameraMode
                 // 点击位置太靠近屏幕边缘。只有在画面左边的手指操作才能zoom相机。
             }else{
                 yOffset +=  (FirstPoint.y - SecondPoint.y) / Screen.height * 5;
-                yOffset = Mathf.Clamp(yOffset,0,5f);
+                yOffset = Mathf.Clamp(yOffset, 0,5f);
             }
         }
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, obj_position + new Vector3(0,yOffset,0), 2 * Time.deltaTime/(0.01f + Time.deltaTime));

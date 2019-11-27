@@ -76,7 +76,7 @@ public class Defend_State : AI_State
         return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0);
     }
 
-    public override bool Capacity_exit_condition() 
+    public override bool Naturally_exit_condition() 
     {
         return time_counter <= 0;
     }

@@ -197,8 +197,8 @@ public class ETCDPad : ETCBase, IDragHandler,  IPointerDownHandler, IPointerUpHa
 		#region Key simulation
 
 		if (enableKeySimulation && !isOnTouch && _activated && _visible){
-			float x = Input.GetAxis(axisX.unityAxis);
-			float y= Input.GetAxis(axisY.unityAxis);
+			float x = UnityEngine.Input.GetAxis(axisX.unityAxis);
+			float y= UnityEngine.Input.GetAxis(axisY.unityAxis);
 
 			isOnDrag = false;
 			tmpAxis = Vector2.zero;

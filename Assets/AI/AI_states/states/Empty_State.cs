@@ -14,7 +14,7 @@ public class Empty_State : AI_State
         base.Pre_process_before_enter();
     }
 
-	public override bool Capacity_exit_condition()
+	public override bool Naturally_exit_condition()
 	{
         return false;
 	}

@@ -45,21 +45,21 @@ public class EasyTouchInput{
 		int count=0;
 		
 		if (realTouch || EasyTouch.instance.enableRemote ){
-			count = Input.touchCount;
+			count = UnityEngine.Input.touchCount;
 		}
 		else{
-			if (Input.GetMouseButton(0) || Input.GetMouseButtonUp(0)){
+			if (UnityEngine.Input.GetMouseButton(0) || UnityEngine.Input.GetMouseButtonUp(0)){
 				count=1;
 				if (EasyTouch.GetSecondeFingerSimulation()){
-					if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(EasyTouch.instance.twistKey)|| Input.GetKey(KeyCode.LeftControl) ||Input.GetKey(EasyTouch.instance.swipeKey ))
+					if (UnityEngine.Input.GetKey(KeyCode.LeftAlt) || UnityEngine.Input.GetKey(EasyTouch.instance.twistKey)|| UnityEngine.Input.GetKey(KeyCode.LeftControl) || UnityEngine.Input.GetKey(EasyTouch.instance.swipeKey ))
 						count=2;
-					if (Input.GetKeyUp(KeyCode.LeftAlt)|| Input.GetKeyUp(EasyTouch.instance.twistKey)|| Input.GetKeyUp(KeyCode.LeftControl)|| Input.GetKeyUp(EasyTouch.instance.swipeKey))
+					if (UnityEngine.Input.GetKeyUp(KeyCode.LeftAlt)|| UnityEngine.Input.GetKeyUp(EasyTouch.instance.twistKey)|| UnityEngine.Input.GetKeyUp(KeyCode.LeftControl)|| UnityEngine.Input.GetKeyUp(EasyTouch.instance.swipeKey))
 						count=2;
 				}
-				if (count ==0){
-					complexCenter = Vector2.zero;
-					oldMousePosition[0] = new Vector2(-1,-1);
-					oldMousePosition[1] = new Vector2(-1,-1);
+				if (count == 0){
+                        complexCenter = Vector2.zero;
+                        oldMousePosition[0] = new Vector2(-1,-1);
+                        oldMousePosition[1] = new Vector2(-1,-1);
 				}
 			}		
 
@@ -84,49 +84,49 @@ public class EasyTouchInput{
 		}
 		
 		
-		if (fingerIndex==1 && (Input.GetKeyUp(KeyCode.LeftAlt)|| Input.GetKeyUp(EasyTouch.instance.twistKey)|| Input.GetKeyUp(KeyCode.LeftControl)|| Input.GetKeyUp(EasyTouch.instance.swipeKey))){
+		if (fingerIndex == 1 && (UnityEngine.Input.GetKeyUp(KeyCode.LeftAlt)|| UnityEngine.Input.GetKeyUp(EasyTouch.instance.twistKey)|| UnityEngine.Input.GetKeyUp(KeyCode.LeftControl)|| UnityEngine.Input.GetKeyUp(EasyTouch.instance.swipeKey))){
 			finger.fingerIndex = fingerIndex;
 			finger.position = oldFinger2Position; 
 			finger.deltaPosition = finger.position - oldFinger2Position;
 			finger.tapCount = tapCount[fingerIndex];
-			finger.deltaTime = Time.realtimeSinceStartup-deltaTime[fingerIndex];
+			finger.deltaTime = Time.realtimeSinceStartup - deltaTime[fingerIndex];
 			finger.phase = TouchPhase.Ended;
 			
 			return finger;			
 		}
 		
-		if (Input.GetMouseButton(0)){
+		if (UnityEngine.Input.GetMouseButton(0)){
 			
 			finger.fingerIndex = fingerIndex;
 			finger.position = GetPointerPosition(fingerIndex);
 			
-			if (Time.realtimeSinceStartup-tapeTime[fingerIndex]>0.5){
-				tapCount[fingerIndex]=0;
+			if (Time.realtimeSinceStartup - tapeTime[fingerIndex] >0.5){
+                    tapCount[fingerIndex] =0;
 			}
 			
-			if (Input.GetMouseButtonDown(0) || (fingerIndex==1 && (Input.GetKeyDown(KeyCode.LeftAlt)|| Input.GetKeyDown(EasyTouch.instance.twistKey)|| Input.GetKeyDown(KeyCode.LeftControl)|| Input.GetKeyDown(EasyTouch.instance.swipeKey)))){
+			if (UnityEngine.Input.GetMouseButtonDown(0) || (fingerIndex == 1 && (UnityEngine.Input.GetKeyDown(KeyCode.LeftAlt)|| UnityEngine.Input.GetKeyDown(EasyTouch.instance.twistKey)|| UnityEngine.Input.GetKeyDown(KeyCode.LeftControl)|| UnityEngine.Input.GetKeyDown(EasyTouch.instance.swipeKey)))){
 
 				// Began						
 				finger.position = GetPointerPosition(fingerIndex);
 				finger.deltaPosition = Vector2.zero;
-				tapCount[fingerIndex]=tapCount[fingerIndex]+1;
+                    tapCount[fingerIndex] = tapCount[fingerIndex] +1;
 				finger.tapCount = tapCount[fingerIndex];
-				startActionTime[fingerIndex] = Time.realtimeSinceStartup;
-				deltaTime[fingerIndex] = startActionTime[fingerIndex];
+                    startActionTime[fingerIndex] = Time.realtimeSinceStartup;
+                    deltaTime[fingerIndex] = startActionTime[fingerIndex];
 				finger.deltaTime = 0;
 				finger.phase = TouchPhase.Began;
 				
 				
-				if (fingerIndex==1){
-					oldFinger2Position = finger.position;
-					oldMousePosition[fingerIndex] = finger.position;
+				if (fingerIndex == 1){
+                        oldFinger2Position = finger.position;
+                        oldMousePosition[fingerIndex] = finger.position;
 				}
 				else{
-					oldMousePosition[fingerIndex] = finger.position;
+                        oldMousePosition[fingerIndex] = finger.position;
 				}
 				
-				if (tapCount[fingerIndex]==1){
-					tapeTime[fingerIndex] = Time.realtimeSinceStartup;
+				if (tapCount[fingerIndex] ==1){
+                        tapeTime[fingerIndex] = Time.realtimeSinceStartup;
 				}
 				
 				
@@ -136,28 +136,28 @@ public class EasyTouchInput{
 			finger.deltaPosition = finger.position - oldMousePosition[fingerIndex];
 
 			finger.tapCount = tapCount[fingerIndex];
-			finger.deltaTime = Time.realtimeSinceStartup-deltaTime[fingerIndex];
+			finger.deltaTime = Time.realtimeSinceStartup - deltaTime[fingerIndex];
 			if (finger.deltaPosition.sqrMagnitude <1){
 				finger.phase = TouchPhase.Stationary;
 			}
 			else{
 				finger.phase = TouchPhase.Moved;
 			}
-			
-			oldMousePosition[fingerIndex] = finger.position;
-			deltaTime[fingerIndex] = Time.realtimeSinceStartup;
+
+                oldMousePosition[fingerIndex] = finger.position;
+                deltaTime[fingerIndex] = Time.realtimeSinceStartup;
 			
 			return finger;
 		}
 		
-		else if (Input.GetMouseButtonUp(0)){
+		else if (UnityEngine.Input.GetMouseButtonUp(0)){
 			finger.fingerIndex = fingerIndex;
 			finger.position = GetPointerPosition(fingerIndex);
 			finger.deltaPosition = finger.position - oldMousePosition[fingerIndex];
 			finger.tapCount = tapCount[fingerIndex];
-			finger.deltaTime = Time.realtimeSinceStartup-deltaTime[fingerIndex];
+			finger.deltaTime = Time.realtimeSinceStartup - deltaTime[fingerIndex];
 			finger.phase = TouchPhase.Ended;
-			oldMousePosition[fingerIndex] = finger.position;
+                oldMousePosition[fingerIndex] = finger.position;
 			
 			return finger;
 		}
@@ -170,22 +170,23 @@ public class EasyTouchInput{
 
 		Vector2 pos = new Vector2(-1,-1);
 
-		if ((Input.GetKey(KeyCode.LeftAlt)|| Input.GetKey(EasyTouch.instance.twistKey)) && (Input.GetKey(KeyCode.LeftControl)|| Input.GetKey(EasyTouch.instance.swipeKey))){
-			if (!bComplex){
-				bComplex=true;
-				deltaFingerPosition = (Vector2)Input.mousePosition - oldFinger2Position;
+		if ((UnityEngine.Input.GetKey(KeyCode.LeftAlt)|| UnityEngine.Input.GetKey(EasyTouch.instance.twistKey)) && (UnityEngine.Input.GetKey(KeyCode.LeftControl)|| UnityEngine.Input.GetKey(EasyTouch.instance.swipeKey))){
+			if (!bComplex)
+                {
+                    bComplex = true;
+                    deltaFingerPosition = (Vector2)UnityEngine.Input.mousePosition - oldFinger2Position;
 			}
 			pos = GetComplex2finger();
 			return pos;
 		}
-		else if (Input.GetKey(KeyCode.LeftAlt)|| Input.GetKey(EasyTouch.instance.twistKey) ){	
-			pos =  GetPinchTwist2Finger();
-			bComplex = false;
+		else if (UnityEngine.Input.GetKey(KeyCode.LeftAlt)|| UnityEngine.Input.GetKey(EasyTouch.instance.twistKey) ){	
+			pos = GetPinchTwist2Finger();
+                bComplex = false;
 			return pos;
-		}else if (Input.GetKey(KeyCode.LeftControl)|| Input.GetKey(EasyTouch.instance.swipeKey) ){	
+		}else if (UnityEngine.Input.GetKey(KeyCode.LeftControl)|| UnityEngine.Input.GetKey(EasyTouch.instance.swipeKey) ){	
 			
-			pos =GetComplex2finger();
-			bComplex = false;
+			pos = GetComplex2finger();
+                bComplex = false;
 			return pos;
 		}
 		
@@ -200,7 +201,7 @@ public class EasyTouchInput{
 		Vector2 pos;
 		
 		if (index==0){
-			pos= Input.mousePosition;
+			pos= UnityEngine.Input.mousePosition;
 			return pos;
 		}
 		else{
@@ -215,12 +216,12 @@ public class EasyTouchInput{
 		Vector2 position;
 
 		if (complexCenter==Vector2.zero){
-			position.x = (Screen.width/2.0f) - (Input.mousePosition.x - (Screen.width/2.0f)) ;
-			position.y = (Screen.height/2.0f) - (Input.mousePosition.y - (Screen.height/2.0f));
+			position.x = (Screen.width/2.0f) - (UnityEngine.Input.mousePosition.x - (Screen.width/2.0f)) ;
+			position.y = (Screen.height/2.0f) - (UnityEngine.Input.mousePosition.y - (Screen.height/2.0f));
 		}
 		else{
-			position.x = (complexCenter.x) - (Input.mousePosition.x - (complexCenter.x)) ;
-			position.y = (complexCenter.y) - (Input.mousePosition.y - (complexCenter.y));
+			position.x = (complexCenter.x) - (UnityEngine.Input.mousePosition.x - (complexCenter.x)) ;
+			position.y = (complexCenter.y) - (UnityEngine.Input.mousePosition.y - (complexCenter.y));
 		}
 		oldFinger2Position = position;
 		
@@ -232,10 +233,10 @@ public class EasyTouchInput{
 		
 		Vector2 position;
 		
-		position.x = Input.mousePosition.x - deltaFingerPosition.x;
-		position.y = Input.mousePosition.y - deltaFingerPosition.y;
-		
-		complexCenter = new Vector2((Input.mousePosition.x+position.x)/2f, (Input.mousePosition.y+position.y)/2f);
+		position.x = UnityEngine.Input.mousePosition.x - deltaFingerPosition.x;
+		position.y = UnityEngine.Input.mousePosition.y - deltaFingerPosition.y;
+
+            complexCenter = new Vector2((UnityEngine.Input.mousePosition.x+ position.x)/2f, (UnityEngine.Input.mousePosition.y+ position.y)/2f);
 		oldFinger2Position = position;
 		
 		return position;

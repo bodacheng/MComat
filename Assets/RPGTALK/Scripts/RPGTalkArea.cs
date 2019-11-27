@@ -124,10 +124,10 @@ public class RPGTalkArea : MonoBehaviour {
 	/// </summary>
 	protected virtual void Update () {
 		if (shouldInteractWithButton && canInteract) {
-			if ((interactionKey != KeyCode.None && Input.GetKeyDown (interactionKey)) || 
-            (interactionButton != "" && Input.GetButtonDown(interactionButton)) || 
-                (interactWithMouse && Input.GetMouseButtonDown(0)) ) {
-				StartTalk ();
+			if ((interactionKey != KeyCode.None && UnityEngine.Input.GetKeyDown (interactionKey)) || 
+            (interactionButton != "" && UnityEngine.Input.GetButtonDown(interactionButton)) || 
+                (interactWithMouse && UnityEngine.Input.GetMouseButtonDown(0)) ) {
+                StartTalk();
 			}
 		}
 	}

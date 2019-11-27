@@ -13,8 +13,8 @@ public class State_Transition_Set
     public State_Rate_Set[] casual_to_state_Sets;
     [HideInInspector]
 	public string[] forced_to_state_nums;
-    public inputs_defined enterInput = inputs_defined.Null;
-    public inputs_defined exitInput = inputs_defined.Null;
+    public Inputs_defined enterInput = Inputs_defined.Null;
+    public Inputs_defined exitInput = Inputs_defined.Null;
     public int SPLevel;
     public int rarelevel;
 
@@ -28,7 +28,7 @@ public class State_Transition_Set
                                 BehaviorEnterRange[] ai_trigger_ranges,
                                 State_Rate_Set[] casual_to_state_nums, 
                                 string[] forced_to_state_nums, 
-                                inputs_defined enterInput,inputs_defined exitInput,
+                                Inputs_defined enterInput,Inputs_defined exitInput,
                                 int SPMove,
                                 int skillEmergentLevel,
                                 int rarelevel)
@@ -49,14 +49,14 @@ public class State_Transition_Set
     public State_Rate_Set GetStateRateSet()
     {
         State_Rate_Set state_Rate_Set = 
-            new State_Rate_Set(this.StateKey,
-                               this.stateType,
-                               this.AT,
-                               this.ai_trigger_ranges,
-                               true, 
-                               this.enterInput, this.exitInput, 
-                               this.SPLevel,
-                               this.skillEmergentLevel);
+            new State_Rate_Set(StateKey,
+                               stateType,
+                               AT,
+                               ai_trigger_ranges,
+                               true,
+                               enterInput, exitInput,
+                               SPLevel,
+                               skillEmergentLevel);
         return state_Rate_Set;
     }
 }
@@ -81,9 +81,9 @@ public class State_Rate_Set //This class defines how a state should transitate t
     public float AT;
     public BehaviorEnterRange[] ai_trigger_ranges;
     public bool can_be_cancelled_to;
-    public inputs_defined enterInput = inputs_defined.Null;
-    public inputs_defined exitInput = inputs_defined.Null;
-    public int SPLevel = 0;
+    public Inputs_defined enterInput = Inputs_defined.Null;
+    public Inputs_defined exitInput = Inputs_defined.Null;
+    public int SPLevel;
     public int skillEmergentLevel;
 
     public State_Rate_Set()
@@ -94,7 +94,7 @@ public class State_Rate_Set //This class defines how a state should transitate t
                           float AT,
                           BehaviorEnterRange[] ai_trigger_ranges,
                           bool can_be_cancelled_to,
-                          inputs_defined enterInput,inputs_defined exitInput,
+                          Inputs_defined enterInput,Inputs_defined exitInput,
                           int SPlevel, int skillEmergentLevel)
 	{
 		this.AI_State_Number = AI_State_Number;

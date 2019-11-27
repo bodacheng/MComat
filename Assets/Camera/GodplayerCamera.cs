@@ -45,35 +45,35 @@ class GodplayerCamera : CameraMode
         if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor ||
             Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
-            if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            if (UnityEngine.Input.GetAxis("Mouse ScrollWheel") < 0)
             {
                 if (distance_use > distance - zoom_range)
                     distance_use -= 0.1f;
             }
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            if (UnityEngine.Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 if (distance_use < distance + zoom_range)
                     distance_use += 0.1f;
             }
 
-            if (System.Math.Abs(Input.GetAxis("Mouse X")) > 0)
+            if (System.Math.Abs(UnityEngine.Input.GetAxis("Mouse X")) > 0)
             {
-                x = Input.GetAxis("Mouse X") * speed * Time.deltaTime;
+                x = UnityEngine.Input.GetAxis("Mouse X") * speed * Time.deltaTime;
                 direction = GetDirection(direction, x, 0);
             }
-            if (System.Math.Abs(Input.GetAxis("Mouse Y")) > 0)
+            if (System.Math.Abs(UnityEngine.Input.GetAxis("Mouse Y")) > 0)
             {
-                y = Input.GetAxis("Mouse Y") * speed * 30 * Time.deltaTime;
+                y = UnityEngine.Input.GetAxis("Mouse Y") * speed * 30 * Time.deltaTime;
                 direction = GetDirection(direction, 0, -y);
             }
         }
         else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            if (Input.touchCount == 2)
+            if (UnityEngine.Input.touchCount == 2)
             {
                 // Store both touches.
-                Touch touchZero = Input.GetTouch(0);
-                Touch touchOne = Input.GetTouch(1);
+                Touch touchZero = UnityEngine.Input.GetTouch(0);
+                Touch touchOne = UnityEngine.Input.GetTouch(1);
 
                 // Find the position in the previous frame of each touch.
                 Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
@@ -104,12 +104,12 @@ class GodplayerCamera : CameraMode
                     _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, 5f, 90.9f);
                 }
             }
-            if (Input.touchCount == 1)
+            if (UnityEngine.Input.touchCount == 1)
             {
                 //_camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation,Quaternion.LookRotation(center - _camera.transform.position,Vector3.up),Time.deltaTime);
-                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                if (UnityEngine.Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
-                    direction = GetDirection(direction, Input.GetTouch(0).deltaPosition.x * 60f / Screen.width, Input.GetTouch(0).deltaPosition.y * 50f / Screen.height);
+                    direction = GetDirection(direction, UnityEngine.Input.GetTouch(0).deltaPosition.x * 60f / Screen.width, UnityEngine.Input.GetTouch(0).deltaPosition.y * 50f / Screen.height);
                 }
             }
         }

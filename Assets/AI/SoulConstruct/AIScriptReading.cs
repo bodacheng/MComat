@@ -61,7 +61,7 @@ public class AIScriptReading {
                                         0,
                                         null,
                                         null, null,
-                                         enterInput: inputs_defined.Null, exitInput: inputs_defined.Null, 
+                                         enterInput: Inputs_defined.Null, exitInput: Inputs_defined.Null, 
                                          SPMove:0,
                                          0,
                                          rarelevel:0)
@@ -75,7 +75,7 @@ public class AIScriptReading {
                                    0,
                                    null,
                                    null, null,
-                                    enterInput: inputs_defined.Null, exitInput: inputs_defined.Null,
+                                    enterInput: Inputs_defined.Null, exitInput: Inputs_defined.Null,
                                     SPMove: 0,
                                     0, 
                                     rarelevel: 0));
@@ -93,8 +93,8 @@ public class AIScriptReading {
                                         0,
                                         null,
                                         null, null,
-                                        enterInput: inputs_defined.Null, 
-                                         exitInput: inputs_defined.Null, 
+                                        enterInput: Inputs_defined.Null, 
+                                         exitInput: Inputs_defined.Null, 
                                          SPMove:0,
                                          0,
                                          rarelevel:0)

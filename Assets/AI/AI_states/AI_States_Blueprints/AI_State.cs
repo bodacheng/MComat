@@ -17,7 +17,7 @@ namespace Soul
         public ResistanceManager _ResistanceManager;
         public Pusher _Pusher;
         public Sensor Sensor;
-        public inputManager _inputManager;
+        public InputManager _inputManager;
         public Animator _Animator;
         public SkillCancelFlag _SkillCancelFlag;
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
@@ -33,8 +33,8 @@ namespace Soul
 
         public string StateKey;
         public int splevel;
-        public inputs_defined enterInput = inputs_defined.Null;
-        public inputs_defined exitInput = inputs_defined.Null;
+        public Inputs_defined enterInput = Inputs_defined.Null;
+        public Inputs_defined exitInput = Inputs_defined.Null;
         public BehaviorEnterRange[] behaviorEnterRanges;
 
         protected BehaviorEnterRange[] InnerAndMidAndFarRanges = { BehaviorEnterRange.inner_range, BehaviorEnterRange.mid_range, BehaviorEnterRange.far_range };
@@ -63,7 +63,7 @@ namespace Soul
         }
 
         // On what condition can we exit this state 
-        public virtual bool Capacity_exit_condition()
+        public virtual bool Naturally_exit_condition()
         {
             return true;
         }
@@ -75,7 +75,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return this._FightAttriCalReference.hasPlentyGauge(this.splevel);
+            return this._FightAttriCalReference.hasPlentyGauge(splevel);
         }
 
         //一个状态的决策性进入条件与决策性退出条件如果没有形成一个真正意义上一正一反的关系，那么就会产生“无限进入进出循环”
@@ -132,10 +132,6 @@ namespace Soul
         {
             Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             Sensor.OneRoundDetectionStart(5);
-        }
-        
-        public virtual void _State_Update()
-        {
         }
         
         // Local update of the state 

@@ -123,7 +123,7 @@ public class Counter_State : AI_State {
             rotateTarget = C.transform.position;
 	}
 
-	public override bool Capacity_exit_condition()
+	public override bool Naturally_exit_condition()
 	{
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over ? true : false;
     }

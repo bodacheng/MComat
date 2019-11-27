@@ -19,11 +19,11 @@ public class PinchZoom
     public void localUpdate()
     {
         // If there are two touches on the device...
-        if (Input.touchCount == 2)
+        if (UnityEngine.Input.touchCount == 2)
         {
             // Store both touches.
-            touchZero = Input.GetTouch(0);
-            touchOne = Input.GetTouch(1);
+            touchZero = UnityEngine.Input.GetTouch(0);
+            touchOne = UnityEngine.Input.GetTouch(1);
             touchZeroscreenposx = touchZero.position.x / Screen.width;
             touchZeroscreenposy = touchZero.position.y / Screen.height;
             
@@ -31,7 +31,7 @@ public class PinchZoom
             {
                 return;// 点击位置太靠近屏幕边缘。只有在画面左边的手指操作才能zoom相机。
             }
-            
+
             // Find the position in the previous frame of each touch.
             touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
             touchOnePrevPos = touchOne.position - touchOne.deltaPosition;

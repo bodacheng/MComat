@@ -477,12 +477,12 @@ public class EasyTouch : MonoBehaviour {
 		if (enable && EasyTouch.instance==this){
 
 			//#if (UNITY_EDITOR )
-			if (Application.isPlaying && Input.touchCount>0){
-				enableRemote = true;
+			if (Application.isPlaying && UnityEngine.Input.touchCount>0){
+                    enableRemote = true;
 			}
 			
-			if (Application.isPlaying && Input.touchCount==0){
-				enableRemote = false;
+			if (Application.isPlaying && UnityEngine.Input.touchCount==0){
+                    enableRemote = false;
 			}
 			//#endif
 
@@ -548,7 +548,7 @@ public class EasyTouch : MonoBehaviour {
 		if (realTouch || enableRemote){
 			ResetTouches();
 			for (var i = 0; i < touchCount; ++i) {
-				Touch touch = Input.GetTouch(i);
+                    Touch touch = UnityEngine.Input.GetTouch(i);
 				
 				int t=0;
 				while (t < 100 && fingers[i]==null){	

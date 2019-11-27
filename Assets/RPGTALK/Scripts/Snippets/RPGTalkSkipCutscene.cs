@@ -39,9 +39,9 @@ namespace RPGTALK.Snippets
         {
             if (isTalking && canSkip && !delaying)
             {
-                if ((keyToSkip != KeyCode.None && Input.GetKeyDown(keyToSkip)) ||
-                (buttonToSkip != "" && Input.GetButtonDown(buttonToSkip)) ||
-                    (skipWithMouse && Input.GetMouseButtonDown(0)))
+                if ((keyToSkip != KeyCode.None && UnityEngine.Input.GetKeyDown(keyToSkip)) ||
+                (buttonToSkip != "" && UnityEngine.Input.GetButtonDown(buttonToSkip)) ||
+                    (skipWithMouse && UnityEngine.Input.GetMouseButtonDown(0)))
                 {
                     Skip();
                 }

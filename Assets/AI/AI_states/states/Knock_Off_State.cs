@@ -5,16 +5,14 @@ using Soul;
 
 public class Knock_Off_State : AI_State
 {
-    readonly float knock_off_time;
     float time_counter;
     DecompositionerPool superHitPool;
     Vector3 _xz;    
     bool touchedBoundary;
-    bool dropped;
+    bool dropped,canWakeUp;
      
-    public Knock_Off_State(float knock_off_time)
+    public Knock_Off_State()
     {
-        this.knock_off_time = knock_off_time;
         StateType = stateType.KnockOff;
     }
 
@@ -39,11 +37,13 @@ public class Knock_Off_State : AI_State
         time_counter = 0;
         touchedBoundary = false;
         dropped = false;
+        canWakeUp = false;
         _DATA_CENTER.SetUsingGravity(false);
         _FightAttriCalReference.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _FightAttriCalReference.EnableAllHitBoxCollider(false);
+        _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
         personality_Events.CloseAllPersonalityEffects();
         _FightAttriCalReference.plusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
@@ -63,21 +63,23 @@ public class Knock_Off_State : AI_State
         _FightAttriCalReference.ClearDamageLists();
     }
 
-    public override bool Capacity_exit_condition()
+    public override bool Naturally_exit_condition()
     {
-        return time_counter > knock_off_time;
+        return dropped && time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime;
     }
 
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _DATA_CENTER.SetUsingGravity(true);
+        this._SkillCancelFlag.turn_off_flag();
         _FightAttriCalReference.SetGettingDamageState(false);
         _FightAttriCalReference.EnableAllHitBoxCollider(true);
         _Rigidbody.velocity = Vector3.zero;
     }
     
-    public override void _State_Update()
+    public override void _State_FixedUpdate1()
     {
         if (!touchedBoundary)
         {
@@ -95,18 +97,28 @@ public class Knock_Off_State : AI_State
             if (!(time_counter > 0.2f && _DATA_CENTER.Grounded))
             {
                 gameObject.transform.position =  gameObject.transform.position +
-                _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.deltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
-                Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.deltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
-                //Debug.Log(this.gameObject+":"+ touchedBoundary+ _xz);
+                _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
+                Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
             }else{
                 dropped = true;
+                time_counter = 0;//开始针对躺地时间记时
             }
         }
         
         if (dropped)
             _Rigidbody.velocity = Vector3.zero;
-            
-        time_counter += Time.deltaTime;
+
+        if (!canWakeUp)
+        {
+            if (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
+            {
+                _SkillCancelFlag.turn_on_flag();
+                canWakeUp = true;
+            }
+        }
+
+        time_counter += Time.fixedDeltaTime;
+        
         //if (!_DATA_CENTER.IsGrounded()) // 貌似这个环节是导致knockoff途中瞬移的原因。去掉后修复。没有错上面的曲线逻辑基础上，有这个的话还是会瞬移
             //RotateToVelocityNegative(3f, true);
         

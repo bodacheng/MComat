@@ -98,7 +98,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 	{
 		if (icon != null)
 		{
-			icon.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
+            icon.transform.position = UnityEngine.Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
 		}
 	}
 

@@ -70,7 +70,7 @@ public class Hurt_State : AI_State {
                                                     touchingEnemyBody);
         fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
 
-        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= FightGlobalSetting._knockoffextent && newValue.damage_type == DamageType.supper_damage)
+        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= FightGlobalSetting._knockoffextent)//&& newValue.damage_type == DamageType.supper_damage
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
                                                                 newValue._WeaponPosAdjustMode,   
@@ -92,7 +92,7 @@ public class Hurt_State : AI_State {
         time_counter += Time.fixedDeltaTime;
     }
 
-	public override bool Capacity_exit_condition()
+	public override bool Naturally_exit_condition()
 	{
         return time_counter > used_dizzy_time;
     }

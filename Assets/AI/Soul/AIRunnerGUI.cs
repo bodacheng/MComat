@@ -180,8 +180,8 @@ public class AIRunnerGUI : Editor {
                                 }
                                 stateKeyGUI.normal.textColor = new Color(0.6f, 0.3f, 0.4f);
                                 myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].can_be_cancelled_to = EditorGUILayout.Toggle("superCancel", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].can_be_cancelled_to);
-                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].enterInput = (inputs_defined)EditorGUILayout.EnumPopup("enter Input", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].enterInput);
-                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].exitInput = (inputs_defined)EditorGUILayout.EnumPopup("exit Input", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].exitInput);
+                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].enterInput = (Inputs_defined)EditorGUILayout.EnumPopup("enter Input", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].enterInput);
+                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].exitInput = (Inputs_defined)EditorGUILayout.EnumPopup("exit Input", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].exitInput);
 
 
                                 //State_Transition temp_state_Transition = null;
@@ -213,7 +213,7 @@ public class AIRunnerGUI : Editor {
                                                                    0,
                                                                    null,
                                                                    false,
-                                                                   inputs_defined.Null,inputs_defined.Null,
+                                                                   Inputs_defined.Null,Inputs_defined.Null,
                                                                    0,
                                                                    0));
                             myScript.State_Transition_Set_List[i].casual_to_state_Sets = casualStateList.ToArray();
@@ -247,8 +247,8 @@ public class AIRunnerGUI : Editor {
                     }
                 }
                 EditorGUILayout.EndVertical();
-                myScript.State_Transition_Set_List[i].enterInput = (inputs_defined)EditorGUILayout.EnumPopup("enter input", myScript.State_Transition_Set_List[i].enterInput);
-                myScript.State_Transition_Set_List[i].exitInput = (inputs_defined)EditorGUILayout.EnumPopup("exit input", myScript.State_Transition_Set_List[i].exitInput);
+                myScript.State_Transition_Set_List[i].enterInput = (Inputs_defined)EditorGUILayout.EnumPopup("enter input", myScript.State_Transition_Set_List[i].enterInput);
+                myScript.State_Transition_Set_List[i].exitInput = (Inputs_defined)EditorGUILayout.EnumPopup("exit input", myScript.State_Transition_Set_List[i].exitInput);
                 myScript.State_Transition_Set_List[i].SPLevel = EditorGUILayout.IntPopup("SPLevel", myScript.State_Transition_Set_List[i].SPLevel,exoptions_display,exoptions);
                 GUI.backgroundColor = Color.blue; 
                 if (GUILayout.Button("Delete",ButtonStyle))
@@ -275,8 +275,8 @@ public class AIRunnerGUI : Editor {
                                              null,
                                              new State_Rate_Set[0], 
                                              new string[0], 
-                                             inputs_defined.Null, 
-                                             inputs_defined.Null,
+                                             Inputs_defined.Null, 
+                                             Inputs_defined.Null,
                                              0,
                                              0,
                                              0

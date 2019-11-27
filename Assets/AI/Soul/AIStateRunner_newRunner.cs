@@ -47,9 +47,9 @@ namespace Soul
             ////////////////////////////////////////////////////////////
 
             bool exitCommandFufilled = true;
-            if (playerMode || _inputManager.ifPlayerIsInputting())
+            if (playerMode || _inputManager.IfPlayerIsInputting())
             {
-                if (CurrentStateTransitionSet.exitInput != inputs_defined.Null)
+                if (CurrentStateTransitionSet.exitInput != Inputs_defined.Null)
                     exitCommandFufilled = this.CheckInput(CurrentStateTransitionSet.exitInput);
                 else
                     exitCommandFufilled = true;
@@ -70,12 +70,12 @@ namespace Soul
                     {
                         SRTListForCasualTransitionbuttonRefresh.Add(state_set);
                         if (((state_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag))||
-                            (now_state.Capacity_exit_condition() && exitCommandFufilled))
+                            (now_state.Naturally_exit_condition() && exitCommandFufilled))
                         {
-                            if (playerMode || _inputManager.ifPlayerIsInputting())
+                            if (playerMode || _inputManager.IfPlayerIsInputting())
                             {
-                                if ((state_set.enterInput != inputs_defined.Null && this.CheckInput(state_set.enterInput)) ||
-                                    state_set.enterInput == inputs_defined.Null)
+                                if ((state_set.enterInput != Inputs_defined.Null && this.CheckInput(state_set.enterInput)) ||
+                                    state_set.enterInput == Inputs_defined.Null)
                                 {
                                     if (try_state.Enter_condition_priority1())
                                         casual_TransitionsPriority1.Add(state_set);
@@ -101,20 +101,20 @@ namespace Soul
                     }
                 }
                 if (mobileInputsManager.watchingInputManger == this._inputManager)
-                    this._inputManager.buttonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
+                    this._inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
             }
 
             if (CurrentStateTransitionSet.casual_to_state_Sets == null || CurrentStateTransitionSet.casual_to_state_Sets.Length == 0)
             {
                 //if (now_state.casual_exit_condition())
                 if (mobileInputsManager.watchingInputManger == this._inputManager)
-                    this._inputManager.buttonRefreshFromStart(this.States_for_AbsoluteInput, _BO_Health);
+                    this._inputManager.ButtonRefreshFromStart(this.States_for_AbsoluteInput, _BO_Health);
             }
 
             #region 状态迁移判断
             if (avaliable_casual_Transitions.Count > 0)
             {
-                if (playerMode || _inputManager.ifPlayerIsInputting())
+                if (playerMode || _inputManager.IfPlayerIsInputting())
                 {
                     if (mobileInputsManager.watchingInputManger == this._inputManager)
                         mobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
@@ -142,12 +142,12 @@ namespace Soul
                 }
             }
 
-            if (!now_state.Capacity_exit_condition())
+            if (!now_state.Naturally_exit_condition())
             {
                 return;
             }
                 
-            if (playerMode || _inputManager.ifPlayerIsInputting())
+            if (playerMode || _inputManager.IfPlayerIsInputting())
             {
                 if (!exitCommandFufilled)
                 {
@@ -210,7 +210,7 @@ namespace Soul
 
             if (AINext.Count > 0)
             {
-                if (playerMode || _inputManager.ifPlayerIsInputting())
+                if (playerMode || _inputManager.IfPlayerIsInputting())
                 {
                     foreach (AI_State State_Rate_Set in AINext)
                     {

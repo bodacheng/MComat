@@ -16,7 +16,7 @@ namespace Soul
         #endregion
 
         #region 移动端输入器相关
-        public inputManager _inputManager = new inputManager();//_inputManager.refreshSPLevelButtonsInfo在本脚本中的两处出现，一个是在状态运行引擎函数的“next state”判断处，
+        public InputManager _inputManager = new InputManager();//_inputManager.refreshSPLevelButtonsInfo在本脚本中的两处出现，一个是在状态运行引擎函数的“next state”判断处，
         #endregion
 
         #region 辅助模块：查看当前EX槽
@@ -51,8 +51,8 @@ namespace Soul
         
         public void SetPlayerMode(bool result)
         {
-            this.playerMode = result;
-            this._inputManager.setPlayerIsInputting(false);
+            playerMode = result;
+            _inputManager.SetPlayerIsInputting(false);
         }
         
         public bool IfRunning()
@@ -60,16 +60,14 @@ namespace Soul
             return empty_State != this.now_state;
         }
 
-        private input _input;
-        public bool CheckInput(inputs_defined num)
+        Input _input;
+        public bool CheckInput(Inputs_defined num)
         {
             _inputManager.inputStateDic.TryGetValue(num, out _input);
             if (_input != null)
-                return _input.checkInputState();
-            else{
-                Debug.Log("卧槽什么情况："+ num);
-                return false;
-            }
+                return _input.CheckInputState();
+            Debug.Log("卧槽什么情况：" + num);
+            return false;
         }
 
         public AI_State GetNowState()
@@ -95,7 +93,7 @@ namespace Soul
             return current_state_num;
         }
 
-        public inputManager GetInputManager()
+        public InputManager GetInputManager()
         {
             return _inputManager;
         }
@@ -105,27 +103,16 @@ namespace Soul
             now_state = empty_State;   
         }
 
-        void Update()
-        {
-            if (IfRunning())
-            {
-                if (now_state != null)
-                {
-                    now_state._State_Update();
-                }
-            }
-        }
-
         void FixedUpdate()
         {
             if (IfRunning())
             {
-                if (mobileInputsManager.watchingInputManger == this._inputManager)
+                if (mobileInputsManager.watchingInputManger == _inputManager)
                     _inputManager.Update();
                 stateTransitionEngine_new(state_Transition_Dictionary);
                 if (now_state != null)
                 {
-                    if (playerMode || (!playerMode && _inputManager.ifPlayerIsInputting()))
+                    if (playerMode || (!playerMode && _inputManager.IfPlayerIsInputting()))
                     {
                         now_state._c_State_FixedUpdate1();
                         now_state._c_State_FixedUpdate2();
@@ -165,7 +152,7 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + current_state_num);
                 return;
             }
-            if (playerMode || _inputManager.ifPlayerIsInputting())
+            if (playerMode || _inputManager.IfPlayerIsInputting())
                 now_state.C_State_enter();
             else
                 now_state.AI_State_enter();
@@ -186,7 +173,7 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + current_state_num);
                 return;
             }
-            if (playerMode || _inputManager.ifPlayerIsInputting())
+            if (playerMode || _inputManager.IfPlayerIsInputting())
                 now_state.C_State_enter(newvalue);
             else
                 now_state.AI_State_enter(newvalue);
@@ -225,7 +212,7 @@ namespace Soul
             hasR = readingNineAndTwo.GetRConfig() != null;
 
             if (_inputManager == null)
-                _inputManager = new inputManager();
+                _inputManager = new InputManager();
             _inputManager.INI(hasD, hasR, this);
 
             _States_Incubator = new States_Incubator(type, empty_State,this.state_Transition_Dictionary);
@@ -249,12 +236,12 @@ namespace Soul
                 }
             }
 
-            if (this.readingNineAndTwo.getAttackChuan()[1] != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getAttackChuan()[1].StateKey]);
-            if (this.readingNineAndTwo.getFire1Chuan()[1] != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getFire1Chuan()[1].StateKey]);
-            if (this.readingNineAndTwo.getFire2Chuan()[1] != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.getFire2Chuan()[1].StateKey]);
+            if (this.readingNineAndTwo.GetAttackChuan()[1] != null)
+                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetAttackChuan()[1].StateKey]);
+            if (this.readingNineAndTwo.GetFire1Chuan()[1] != null)
+                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetFire1Chuan()[1].StateKey]);
+            if (this.readingNineAndTwo.GetFire2Chuan()[1] != null)
+                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetFire2Chuan()[1].StateKey]);
             if (this.readingNineAndTwo.GetD_STS() != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetD_STS().StateKey]);
             if (this.readingNineAndTwo.GetR_STS() != null)

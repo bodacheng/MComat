@@ -222,8 +222,8 @@ public class NineAndTwo {
                                                _SkillConfig.ai_trigger_ranges,
                                                 null,
                                                 null,
-                                               inputs_defined.Null, 
-                                               inputs_defined.Null,
+                                               Inputs_defined.Null, 
+                                               Inputs_defined.Null,
                                                _SkillConfig.SP_LEVEL,
                                                int.Parse(_SkillConfig.AI_PRIORITY),
                                                _SkillConfig.RARITY_LEVEL);
@@ -280,8 +280,8 @@ public class NineAndTwo {
         if (this.DConfig != null)
         {
             this.D = FromConfigToSTS(this.DConfig);
-            this.D.enterInput = inputs_defined.Defend;
-            this.D.exitInput = inputs_defined.Defend_Cancel;
+            this.D.enterInput = Inputs_defined.Defend;
+            this.D.exitInput = Inputs_defined.Defend_Cancel;
         }else{
             this.D = null;
         }
@@ -299,7 +299,7 @@ public class NineAndTwo {
         if (this.RConfig != null)
         {
             this.R = FromConfigToSTS(this.RConfig);
-            this.R.enterInput = inputs_defined.Dash;
+            this.R.enterInput = Inputs_defined.Dash;
         }
         else
         {
@@ -368,11 +368,11 @@ public class NineAndTwo {
             List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
             if (i == 0)
             {
-                A_list[i].enterInput = inputs_defined.Attack;
-                A_list[i].exitInput = inputs_defined.Null;
+                A_list[i].enterInput = Inputs_defined.Attack;
+                A_list[i].exitInput = Inputs_defined.Null;
             }else{
-                A_list[i].enterInput = inputs_defined.Null;
-                A_list[i].exitInput = inputs_defined.Null;
+                A_list[i].enterInput = Inputs_defined.Null;
+                A_list[i].exitInput = Inputs_defined.Null;
             }
 
             if (i + 1 < A_list.Count)
@@ -384,7 +384,7 @@ public class NineAndTwo {
                     A_list[i + 1].AT,
                     A_list[i + 1].ai_trigger_ranges,
                     true, 
-                    inputs_defined.Attack, inputs_defined.Null, A_list[i + 1].SPLevel,
+                    Inputs_defined.Attack, Inputs_defined.Null, A_list[i + 1].SPLevel,
                     A_list[i + 1].skillEmergentLevel);
                 casualT0.Add(State_Rate_Set);
             }
@@ -396,14 +396,14 @@ public class NineAndTwo {
                     {
                         if (!A_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
                         {
-                            inputs_defined casualtokey = inputs_defined.Null;
+                            Inputs_defined casualtokey = Inputs_defined.Null;
                             if (B_list.Contains(H2_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire1;
+                                casualtokey = Inputs_defined.Fire1;
                             }
                             if (C_list.Contains(H2_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire2;
+                                casualtokey = Inputs_defined.Fire2;
                             }
 
                             State_Rate_Set State_Rate_Set =
@@ -413,7 +413,7 @@ public class NineAndTwo {
                                 H2_list[y].AT,
                                 H2_list[y].ai_trigger_ranges,
                                 true,
-                                casualtokey, inputs_defined.Null, 
+                                casualtokey, Inputs_defined.Null, 
                                 H2_list[y].SPLevel,
                                 H2_list[y].skillEmergentLevel);
 
@@ -426,14 +426,14 @@ public class NineAndTwo {
                     {
                         if (!A_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
                         {
-                            inputs_defined casualtokey = inputs_defined.Null;
+                            Inputs_defined casualtokey = Inputs_defined.Null;
                             if (B_list.Contains(H3_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire1;
+                                casualtokey = Inputs_defined.Fire1;
                             }
                             if (C_list.Contains(H3_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire2;
+                                casualtokey = Inputs_defined.Fire2;
                             }
 
                             State_Rate_Set State_Rate_Set =
@@ -443,7 +443,7 @@ public class NineAndTwo {
                                 H3_list[y].AT,
                                 H3_list[y].ai_trigger_ranges,
                                 true,
-                                casualtokey, inputs_defined.Null,
+                                casualtokey, Inputs_defined.Null,
                                 H3_list[y].SPLevel,
                                 H3_list[y].skillEmergentLevel);
 
@@ -469,13 +469,13 @@ public class NineAndTwo {
             List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
             if (i == 0)
             {
-                B_list[i].enterInput = inputs_defined.Fire1;
-                B_list[i].exitInput = inputs_defined.Null;
+                B_list[i].enterInput = Inputs_defined.Fire1;
+                B_list[i].exitInput = Inputs_defined.Null;
             }
             else
             {
-                B_list[i].enterInput = inputs_defined.Null;
-                B_list[i].exitInput = inputs_defined.Null;
+                B_list[i].enterInput = Inputs_defined.Null;
+                B_list[i].exitInput = Inputs_defined.Null;
             }
 
             if (i + 1 < B_list.Count)
@@ -486,7 +486,7 @@ public class NineAndTwo {
                     B_list[i + 1].stateType,
                     B_list[i + 1].AT,
                     B_list[i + 1].ai_trigger_ranges,
-                    true, inputs_defined.Fire1, inputs_defined.Null, 
+                    true, Inputs_defined.Fire1, Inputs_defined.Null, 
                     B_list[i + 1].SPLevel,
                     B_list[i + 1].skillEmergentLevel);
                 casualT0.Add(State_Rate_Set);
@@ -499,14 +499,14 @@ public class NineAndTwo {
                     {
                         if (!B_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
                         {
-                            inputs_defined casualtokey = inputs_defined.Null;
+                            Inputs_defined casualtokey = Inputs_defined.Null;
                             if (A_list.Contains(H2_list[y]))
                             {
-                                casualtokey = inputs_defined.Attack;
+                                casualtokey = Inputs_defined.Attack;
                             }
                             if (C_list.Contains(H2_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire2;
+                                casualtokey = Inputs_defined.Fire2;
                             }
 
                             State_Rate_Set State_Rate_Set =
@@ -516,7 +516,7 @@ public class NineAndTwo {
                                 H2_list[y].AT,
                                 H2_list[y].ai_trigger_ranges,
                                 true,
-                                casualtokey, inputs_defined.Null,
+                                casualtokey, Inputs_defined.Null,
                                 H2_list[y].SPLevel,
                                 H2_list[y].skillEmergentLevel);
 
@@ -529,14 +529,14 @@ public class NineAndTwo {
                     {
                         if (!B_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
                         {
-                            inputs_defined casualtokey = inputs_defined.Null;
+                            Inputs_defined casualtokey = Inputs_defined.Null;
                             if (A_list.Contains(H3_list[y]))
                             {
-                                casualtokey = inputs_defined.Attack;
+                                casualtokey = Inputs_defined.Attack;
                             }
                             if (C_list.Contains(H3_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire2;
+                                casualtokey = Inputs_defined.Fire2;
                             }
 
                             State_Rate_Set State_Rate_Set =
@@ -546,7 +546,7 @@ public class NineAndTwo {
                                 H3_list[y].AT,
                                 H3_list[y].ai_trigger_ranges,
                                 true,
-                                casualtokey, inputs_defined.Null,
+                                casualtokey, Inputs_defined.Null,
                                 H3_list[y].SPLevel,
                                 H3_list[y].skillEmergentLevel);
 
@@ -572,13 +572,13 @@ public class NineAndTwo {
             List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
             if (i == 0)
             {
-                C_list[i].enterInput = inputs_defined.Fire2;
-                C_list[i].exitInput = inputs_defined.Null;
+                C_list[i].enterInput = Inputs_defined.Fire2;
+                C_list[i].exitInput = Inputs_defined.Null;
             }
             else
             {
-                C_list[i].enterInput = inputs_defined.Null;
-                C_list[i].exitInput = inputs_defined.Null;
+                C_list[i].enterInput = Inputs_defined.Null;
+                C_list[i].exitInput = Inputs_defined.Null;
             }
 
             if (i + 1 < C_list.Count)
@@ -589,7 +589,7 @@ public class NineAndTwo {
                     C_list[i + 1].stateType,
                     C_list[i + 1].AT,
                     C_list[i + 1].ai_trigger_ranges,
-                    true,inputs_defined.Fire2, inputs_defined.Null, 
+                    true,Inputs_defined.Fire2, Inputs_defined.Null, 
                     C_list[i + 1].SPLevel,
                     C_list[i + 1].skillEmergentLevel);
                 casualT0.Add(State_Rate_Set);
@@ -602,14 +602,14 @@ public class NineAndTwo {
                     {
                         if (!C_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
                         {
-                            inputs_defined casualtokey = inputs_defined.Null;
+                            Inputs_defined casualtokey = Inputs_defined.Null;
                             if (A_list.Contains(H2_list[y]))
                             {
-                                casualtokey = inputs_defined.Attack;
+                                casualtokey = Inputs_defined.Attack;
                             }
                             if (B_list.Contains(H2_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire1;
+                                casualtokey = Inputs_defined.Fire1;
                             }
 
                             State_Rate_Set State_Rate_Set =
@@ -619,7 +619,7 @@ public class NineAndTwo {
                                 H2_list[y].AT,
                                 H2_list[y].ai_trigger_ranges,
                                 true,
-                                casualtokey, inputs_defined.Null,
+                                casualtokey, Inputs_defined.Null,
                                 H2_list[y].SPLevel,
                                 H2_list[y].skillEmergentLevel);
 
@@ -632,14 +632,14 @@ public class NineAndTwo {
                     {
                         if (!C_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
                         {
-                            inputs_defined casualtokey = inputs_defined.Null;
+                            Inputs_defined casualtokey = Inputs_defined.Null;
                             if (A_list.Contains(H3_list[y]))
                             {
-                                casualtokey = inputs_defined.Attack;
+                                casualtokey = Inputs_defined.Attack;
                             }
                             if (B_list.Contains(H3_list[y]))
                             {
-                                casualtokey = inputs_defined.Fire1;
+                                casualtokey = Inputs_defined.Fire1;
                             }
 
                             State_Rate_Set State_Rate_Set =
@@ -649,7 +649,7 @@ public class NineAndTwo {
                                 H3_list[y].AT,
                                 H3_list[y].ai_trigger_ranges,
                                 true,
-                                casualtokey, inputs_defined.Null,
+                                casualtokey, Inputs_defined.Null,
                                 H3_list[y].SPLevel,
                                 H3_list[y].skillEmergentLevel);
                             casualT0.Add(State_Rate_Set);
@@ -719,7 +719,7 @@ public class NineAndTwo {
                                                               null,
                                                               new State_Rate_Set[0], 
                                                               new string[0], 
-                                                              inputs_defined.Null, inputs_defined.Null,
+                                                              Inputs_defined.Null, Inputs_defined.Null,
                                                               0,
                                                               0,
                                                               0);
@@ -730,7 +730,7 @@ public class NineAndTwo {
                                                                 null,
                                                                 new State_Rate_Set[0],
                                                                 new string[0],
-                                                                inputs_defined.Null, inputs_defined.Null,
+                                                                Inputs_defined.Null, Inputs_defined.Null,
                                                                 0,
                                                                 0,
                                                                 0);
@@ -741,7 +741,7 @@ public class NineAndTwo {
                                                               null,
                                                               new State_Rate_Set[0],
                                                               new string[0],
-                                                              inputs_defined.Null, inputs_defined.Null, 0,
+                                                              Inputs_defined.Null, Inputs_defined.Null, 0,
                                                               0,
                                                               0);
 
@@ -751,7 +751,7 @@ public class NineAndTwo {
                                                                 null,
                                                               (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0],
                                                                null,
-                                                               inputs_defined.Defend, inputs_defined.Defend_Cancel, 0,
+                                                               Inputs_defined.Defend, Inputs_defined.Defend_Cancel, 0,
                                                                0,
                                                                0);
         
@@ -761,7 +761,7 @@ public class NineAndTwo {
                                                              null,
                                                              new State_Rate_Set[0], 
                                                              null,
-                                                             inputs_defined.Null, inputs_defined.Null, 0,
+                                                             Inputs_defined.Null, Inputs_defined.Null, 0,
                                                              0,
                                                              0);
                        
@@ -771,37 +771,24 @@ public class NineAndTwo {
                                                             null,
                                                             new State_Rate_Set[0], 
                                                             null,
-                                                            inputs_defined.Null, inputs_defined.Null, 0,
+                                                            Inputs_defined.Null, Inputs_defined.Null, 0,
                                                             0,
                                                             0);
                                                             
-       State_Transition_Set getUp = new State_Transition_Set("getUp",
-                                                            stateType.getUp,
-                                                            0,
-                                                            null,
-                                                            new State_Rate_Set[0],
-                                                            null,
-                                                            inputs_defined.Null, inputs_defined.Null, 0,
-                                                            0,
-                                                            0);
-
-
-        List<State_Rate_Set> knockOFFCasualTransitios = new List<State_Rate_Set>();
-
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);
-        StateTransitionSetList.Add(getUp);
-
+        
         //string[] regularforceTOSets = { "Hit", "KnockOff"};
+
+        List<State_Rate_Set> GetUpCasualTransitions = new List<State_Rate_Set>();
 
         if (this.D != null)
         {
             //Defend.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(Defend);//这里的逻辑是这样：如果在sortNineAndTwo执行后，this.D不是null，那说明角色有防御状态，而防御状态是固定的。
-
-            knockOFFCasualTransitios.Add(Defend.GetStateRateSet());
+            GetUpCasualTransitions.Add(Defend.GetStateRateSet());
         }
         if (this.M != null)
         {
@@ -810,7 +797,7 @@ public class NineAndTwo {
             M.SPLevel = -1;
             M.casual_to_state_Sets = null;
             M.ai_trigger_ranges = null;
-            StateTransitionSetList.Add(this.M);
+            StateTransitionSetList.Add(M);
         }
         else
             StateTransitionSetList.Add(Move);// 这个地方是说，要么你自定义移动类状态，要么加默认移动状态。因为移动状态其实可能根据角色被动而不同。
@@ -819,17 +806,15 @@ public class NineAndTwo {
         {
             //R.forced_to_state_nums = regularforceTOSets;
             this.R.stateType = stateType.AC;
-            StateTransitionSetList.Add(this.R);//这个是只能根据角色被动来。
-
-            knockOFFCasualTransitios.Add(R.GetStateRateSet());
+            StateTransitionSetList.Add(R);//这个是只能根据角色被动来。
+            GetUpCasualTransitions.Add(R.GetStateRateSet());
         }
                     
         if(this.A1 != null)
         {
             //A1.forced_to_state_nums = regularforceTOSets;
-            StateTransitionSetList.Add(this.A1);
-
-            knockOFFCasualTransitios.Add(A1.GetStateRateSet());
+            StateTransitionSetList.Add(A1);
+            GetUpCasualTransitions.Add(A1.GetStateRateSet());
         }
         if (this.A2 != null)
         {
@@ -845,8 +830,7 @@ public class NineAndTwo {
         {
             //B1.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.B1);
-
-            knockOFFCasualTransitios.Add(B1.GetStateRateSet());
+            GetUpCasualTransitions.Add(B1.GetStateRateSet());
         }            
         if (this.B2 != null)
         {
@@ -862,8 +846,7 @@ public class NineAndTwo {
         {
             //C1.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.C1);
-
-            knockOFFCasualTransitios.Add(C1.GetStateRateSet());
+            GetUpCasualTransitions.Add(C1.GetStateRateSet());
         }                    
         if (this.C2 != null)
         {
@@ -875,22 +858,28 @@ public class NineAndTwo {
             //C3.forced_to_state_nums = regularforceTOSets;
             StateTransitionSetList.Add(this.C3);
         }
-
-        knockOFFCasualTransitios.Add(getUp.GetStateRateSet());
-
-        /////////////////////
+        
+       State_Transition_Set getUp = new State_Transition_Set("getUp",
+                                                    stateType.getUp,
+                                                    0,
+                                                    null,
+                                                    GetUpCasualTransitions.ToArray(),
+                                                    null,
+                                                    Inputs_defined.Any, Inputs_defined.Null, 0,
+                                                    0,
+                                                    0);
+        StateTransitionSetList.Add(getUp);
 
         State_Transition_Set KnockOff = new State_Transition_Set("KnockOff",
                                                                  stateType.KnockOff,
                                                                  0,
                                                                  null,
-                                                                 knockOFFCasualTransitios.ToArray(),
+                                                                 new State_Rate_Set[]{ getUp.GetStateRateSet() },
                                                                  null,
-                                                                 inputs_defined.Null, inputs_defined.Null,
+                                                                 Inputs_defined.Null, Inputs_defined.Null,
                                                                  0,
                                                                  0,
                                                                  0);
-
         StateTransitionSetList.Add(KnockOff);
 
         //从下面这个地方可以看到我们需要在sort阶段把RMD全部准备好，而且必须是要么为null要么是一个完整STS信息。
@@ -933,7 +922,7 @@ public class NineAndTwo {
     }
 
     //下面的环节纯粹是针对SkillPrintOut的一些处理
-    public IDictionary<int, State_Transition_Set> getAttackChuan()
+    public IDictionary<int, State_Transition_Set> GetAttackChuan()
     {
         IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>
         {
@@ -943,7 +932,7 @@ public class NineAndTwo {
         };
         return attack_chuan;
     }
-    public IDictionary<int, State_Transition_Set> getFire1Chuan()
+    public IDictionary<int, State_Transition_Set> GetFire1Chuan()
     {
         IDictionary<int, State_Transition_Set> B_chuan = new Dictionary<int, State_Transition_Set>
         {
@@ -953,7 +942,7 @@ public class NineAndTwo {
         };
         return B_chuan;
     }
-    public IDictionary<int, State_Transition_Set> getFire2Chuan()
+    public IDictionary<int, State_Transition_Set> GetFire2Chuan()
     {
         IDictionary<int, State_Transition_Set> C_chuan = new Dictionary<int, State_Transition_Set>
         {

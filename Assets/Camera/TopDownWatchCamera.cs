@@ -76,8 +76,8 @@ class TopDownWatchCamera : CameraMode
             float v = 0f;
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
+                h = UnityEngine.Input.GetAxis("Horizontal");
+                v = UnityEngine.Input.GetAxis("Vertical");
 
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
@@ -91,7 +91,7 @@ class TopDownWatchCamera : CameraMode
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
                 || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
-                k += Input.GetAxis("HorizontalCR") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
+                k += UnityEngine.Input.GetAxis("HorizontalCR") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
@@ -106,8 +106,8 @@ class TopDownWatchCamera : CameraMode
 
         //directionLook = Quaternion.AngleAxis(45, Vector3.up) * directionLook;
         //getting axis from Mouse
-        float horizontal = Input.GetAxis("Mouse X");
-        float vertical = Input.GetAxis("Mouse Y");
+        float horizontal = UnityEngine.Input.GetAxis("Mouse X");
+        float vertical = UnityEngine.Input.GetAxis("Mouse Y");
         RotateCamera(Time.deltaTime, vertical, horizontal, 2f, _camera);
     }
 

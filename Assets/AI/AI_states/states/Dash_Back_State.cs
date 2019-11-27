@@ -94,7 +94,7 @@ public class Dash_Back_State : AI_State
         //_Rigidbody.velocity = Vector3.zero;
     }
 
-    public override bool Capacity_exit_condition()
+    public override bool Naturally_exit_condition()
     {
         return this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over ? true : false;
     }

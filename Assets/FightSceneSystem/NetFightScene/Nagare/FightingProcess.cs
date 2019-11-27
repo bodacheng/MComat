@@ -52,7 +52,7 @@ public class FightingProcess : NagareProcess
     
     public override void LocalUpdate()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (UnityEngine.Input.GetKey(KeyCode.Escape))
         {
             _NetFightScene.PauseScene();
         }
