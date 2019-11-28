@@ -58,7 +58,7 @@ public class frontPage : MainSceneProcess
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
+        if (!this._MemberDetail._SkillsPrintOut.IfShowingSkill)
         {
             this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }

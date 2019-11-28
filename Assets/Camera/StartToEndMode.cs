@@ -7,16 +7,16 @@ public class StartToEndMode : CameraMode
 {
     protected Vector3 obj_position;
     protected Quaternion torotation;
-    float yOffset = 0f;
+    float yOffset;
     
-    public void setObjPosAndRotAndSpeed(Vector3 obj_position, float duration,float fieldOfView)
+    public void SetObjPosAndRotAndSpeed(Vector3 obj_position, float duration,float fieldOfView)
     {
         this.obj_position = obj_position;
         this.duration = duration;
         this.fieldOfView = fieldOfView;
     }
     
-    public void setObjPosAndRotAndSpeed(Vector3 obj_position, float duration)
+    public void SetObjPosAndRotAndSpeed(Vector3 obj_position, float duration)
     {
         this.obj_position = obj_position;
         this.duration = duration;
@@ -33,7 +33,7 @@ public class StartToEndMode : CameraMode
     float touchZeroscreenposy;
     public override void LocalLateUpdate(Camera _camera)
     {
-        if (this.target == null)
+        if (target == null)
             return;
 
         if (UnityEngine.Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
@@ -54,7 +54,7 @@ public class StartToEndMode : CameraMode
             }
         }
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, obj_position + new Vector3(0,yOffset,0), 2 * Time.deltaTime/(0.01f + Time.deltaTime));
-        torotation = Quaternion.LookRotation(this.target.position -  (obj_position + new Vector3(0, yOffset, 0)) , Vector3.up);
-        _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, torotation, 2 * Time.deltaTime / (0.01f + Time.deltaTime));       
+        torotation = Quaternion.LookRotation(target.position -  (obj_position + new Vector3(0, yOffset, 0)) , Vector3.up);
+        _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, torotation, 10 * Time.deltaTime / (0.01f + Time.deltaTime));       
     }
 }

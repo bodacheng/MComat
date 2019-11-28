@@ -3,9 +3,8 @@
 public class PinchZoom
 {
     public Camera camera;
-    
-    float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
-    float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.    
+    readonly float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
+    readonly float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.    
     Touch touchZero;
     Touch touchOne;
     float touchZeroscreenposx;
@@ -16,7 +15,7 @@ public class PinchZoom
     float touchDeltaMag;
     float deltaMagnitudeDiff;
     
-    public void localUpdate()
+    public void LocalUpdate()
     {
         // If there are two touches on the device...
         if (UnityEngine.Input.touchCount == 2)

@@ -243,7 +243,7 @@ namespace mainMenu
         //看起来这个函数不应该在这个模块里，但其中的各种操作和整个mainmenu的乱七八糟东西相关性实在太多了，所以姑且放在这
         public IEnumerator MonsterIconButton(string localId)
         {
-            Debug.Log("于monsterbox点下了如下localid的头像：" + localId + ",Scenestep:" + processesRunner.currentProcess.thisProcessStep);
+            Debug.Log("于monsterbox点下了如下localid的头像：" + localId);
             switch (processesRunner.currentProcess.thisProcessStep)
             {
                 case MainSceneStep.SelfFightFront:

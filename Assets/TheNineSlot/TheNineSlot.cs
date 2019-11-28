@@ -80,7 +80,7 @@ namespace mainMenu
                         _skillStoneDetail.Showname.text = _stoneOnCell._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.type.text = _stoneOnCell._SkillConfigOfSkillStone.type;
                         _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SP_LEVEL);
-                        mainProcessRunner.triggerMainProcess(_SkillsPrintOut.skillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
+                        mainProcessRunner.triggerMainProcess(_SkillsPrintOut.SkillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
                     }
                 }
                 button.onClick.RemoveAllListeners();

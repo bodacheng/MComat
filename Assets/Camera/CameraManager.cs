@@ -61,7 +61,7 @@ public class CameraManager : MonoBehaviour
     {
         this.camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
-        _LerpToCertainPlace.setObjPosAndRotAndSpeed(p, duration, sizeoffield);
+        _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration, sizeoffield);
         this.current_Camera_Mode.Enter(_camera);
     }
     
@@ -69,7 +69,7 @@ public class CameraManager : MonoBehaviour
     {
         this.camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
-        _LerpToCertainPlace.setObjPosAndRotAndSpeed(p, duration);
+        _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration);
         this.current_Camera_Mode.Enter(_camera);
     }
 }

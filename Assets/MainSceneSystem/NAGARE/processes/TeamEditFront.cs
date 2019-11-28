@@ -37,15 +37,15 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        this._preparingScene._TeamEditManager.OpenButtons(false);
+        _preparingScene._TeamEditManager.OpenButtons(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.ifShowingSkill())
+        if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
     

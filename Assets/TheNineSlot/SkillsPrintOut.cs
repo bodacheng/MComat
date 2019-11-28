@@ -14,7 +14,7 @@ namespace mainMenu
         public SkillShowLines skillShowLines;
         public Button skillInfoGamenBackGroundButton;
         public GameObject skillflowparticle;
-        private List<GameObject> DisplayingSkillflowparticle = new List<GameObject>();
+        List<GameObject> DisplayingSkillflowparticle = new List<GameObject>();
 
         public Button normalattackshowbutton, ex1showbutton, ex2showbutton, ex3showbutton;
         public RectTransform attacksT;
@@ -38,28 +38,21 @@ namespace mainMenu
         public string focusingResourceNum;
         public Data_Center focusingCharacterData;
 
-        private IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>();
-        private IDictionary<int, State_Transition_Set> Fire1_chuan = new Dictionary<int, State_Transition_Set>();
-        private IDictionary<int, State_Transition_Set> Fire2_chuan = new Dictionary<int, State_Transition_Set>();
-        private IDictionary<State_Transition_Set, Button> StateButtonDic = new Dictionary<State_Transition_Set, Button>();//按理说这个的key值靠skillid是没问题的。
-
-        private List<List<string>> unsualKeyConnects;
-
-        private IDictionary<string, State_Transition_Set> analysisStatesSetDic = new Dictionary<string, State_Transition_Set>();
-        private List<State_Transition_Set> analysisStatesList = new List<State_Transition_Set>();
-        private List<Vector3[]> _toDrawLines;
+        IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>();
+        IDictionary<int, State_Transition_Set> Fire1_chuan = new Dictionary<int, State_Transition_Set>();
+        IDictionary<int, State_Transition_Set> Fire2_chuan = new Dictionary<int, State_Transition_Set>();
+        IDictionary<State_Transition_Set, Button> StateButtonDic = new Dictionary<State_Transition_Set, Button>();//按理说这个的key值靠skillid是没问题的。
+        List<List<string>> unsualKeyConnects;
+        IDictionary<string, State_Transition_Set> analysisStatesSetDic = new Dictionary<string, State_Transition_Set>();
+        List<State_Transition_Set> analysisStatesList = new List<State_Transition_Set>();
+        List<Vector3[]> _toDrawLines;
 
         void LateUpdate()
         {
             SkillsPrintOutLateUpdate();
         }
-        
-        private bool showingSkill = false;
-        public bool ifShowingSkill()
-        {
-            return showingSkill;
-        }
-       
+        public bool IfShowingSkill { get; private set; } = false;
+
         public void SkillsPrintOutLateUpdate()
         {
             if (focusingCharacterData != null)
@@ -69,19 +62,19 @@ namespace mainMenu
                     if (focusingCharacterData.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
                     {
                         SkillShowT.gameObject.SetActive(true);
-                        this.focusingCharacterData.Animation_Manger.PlayLayerAnim(null);
-                        this.focusingCharacterData.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
-                        this.showingSkill = false;
+                        focusingCharacterData.Animation_Manger.PlayLayerAnim(null);
+                        focusingCharacterData.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
+                        IfShowingSkill = false;
                         //this.focusingCharacterData.blendShapeProxy.setBlendShapeGrdually(new BlendShapeKey("Angry"), 0f, 50);
                     }
                 }
             }
         }
 
-        private IDictionary<string, State_Transition_Set> convertStateSetsListToStateTransitionSetDic(List<State_Transition_Set> analysisStatesList)
+        IDictionary<string, State_Transition_Set> ConvertStateSetsListToStateTransitionSetDic(List<State_Transition_Set> _analysisStatesList)
         {
             analysisStatesSetDic.Clear();
-            foreach (State_Transition_Set _set in analysisStatesList)
+            foreach (State_Transition_Set _set in _analysisStatesList)
             {
                 if (!analysisStatesSetDic.ContainsKey(_set.StateKey))
                     analysisStatesSetDic.Add(new KeyValuePair<string, State_Transition_Set>(_set.StateKey, _set));
@@ -89,10 +82,10 @@ namespace mainMenu
             return analysisStatesSetDic;
         }
 
-        void addShowSkillInfoFeature(Button _button, State_Transition_Set _state_Transition_Set)
+        void AddShowSkillInfoFeature(Button _button, State_Transition_Set _state_Transition_Set)
         {
             _button.onClick.RemoveAllListeners();
-            UnityEngine.Events.UnityAction showSkillInfo = () =>
+            void showSkillInfo()
             {
                 foreach (GameObject _particle in DisplayingSkillflowparticle)
                 {
@@ -159,10 +152,8 @@ namespace mainMenu
                 //下面这些是逻辑核心
                 foreach (State_Rate_Set _set in _state_Transition_Set.casual_to_state_Sets)
                 {
-                    State_Transition_Set _oneCasualTo;
-                    analysisStatesSetDic.TryGetValue(_set.AI_State_Number, out _oneCasualTo);
-                    Button CasualToButton;
-                    StateButtonDic.TryGetValue(_oneCasualTo, out CasualToButton);
+                    analysisStatesSetDic.TryGetValue(_set.AI_State_Number, out State_Transition_Set _oneCasualTo);
+                    StateButtonDic.TryGetValue(_oneCasualTo, out Button CasualToButton);
 
                     if (_button != null && CasualToButton != null)
                     {
@@ -170,7 +161,7 @@ namespace mainMenu
                         Color color = buttonimage.color;
                         color.a = 1f;
                         buttonimage.color = color;
-                        buildSkillFlowParticle(_button.transform, CasualToButton.transform);
+                        BuildSkillFlowParticle(_button.transform, CasualToButton.transform);
                     }
                 }
 
@@ -184,12 +175,12 @@ namespace mainMenu
                 {
                     Debug.Log(" 没能锁定角色动画播放器？ ");
                 }
-                this.showingSkill = true;
-            };
+                this.IfShowingSkill = true;
+            }
             _button.onClick.AddListener(showSkillInfo);
         }
 
-        public IEnumerator skillShowRunWithPreparing(string keyname)
+        public IEnumerator SkillShowRunWithPreparing(string keyname)
         {
             CharacterResourceInfo _watchingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(focusingResourceNum);
             //下面这一大片，在资源存在的情况下压根不应该运行        
@@ -214,7 +205,7 @@ namespace mainMenu
                             (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                 }
-                this.showingSkill = true;
+                this.IfShowingSkill = true;
                 this.focusingCharacterData.Animation_Manger.AnimationTrigger(keyname);
                 //if (this.focusingCharacterData.blendShapeProxy)
                     //this.focusingCharacterData.blendShapeProxy.setBlendShapeGrdually(new BlendShapeKey("Angry"), 1f, 50);
@@ -222,7 +213,7 @@ namespace mainMenu
             yield break;
         }
 
-        void buildSkillFlowParticle(Transform startT, Transform endT)
+        private void BuildSkillFlowParticle(Transform startT, Transform endT)
         {
             UIParallelAnimation oneUIAnimation;
 
@@ -266,7 +257,7 @@ namespace mainMenu
 
             if (_toDrawLines != null)
             {
-                Vector3[] oneLineSet = new Vector3[] { oneUIAnimation.start[0], oneUIAnimation.final[0] };
+                Vector3[] oneLineSet = { oneUIAnimation.start[0], oneUIAnimation.final[0] };
                 _toDrawLines.Add(oneLineSet);
                 skillShowLines.drawlines(_toDrawLines);
             }
@@ -278,22 +269,21 @@ namespace mainMenu
             skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo._NineAndTwo != null)
             {
-                sKillScriptReader(_watchingCharacterResourceInfo.type,
+                SkillScriptReader(_watchingCharacterResourceInfo.type,
                                   _watchingCharInfo._NineAndTwo,
-                                  _watchingCharacterResourceInfo.GetPassiveSkillConfigs(),
                                   _watchingCharInfo._NineAndTwo.level);
             }
 
-            UnityEngine.Events.UnityAction backGroundButtonforRefresh = () =>
+            void backGroundButtonforRefresh()
             {
                 SkillsPrintGamenRefresh(_watchingCharInfo);
-            };
+            }
             skillInfoGamenBackGroundButton.onClick.AddListener(backGroundButtonforRefresh);
         }
 
         //从这个环节看，只要AIStateRunner模块有一个把九宫格信息转成最终技能组的函数，就能和SkillsPrintOut模块接轨
         private Button newShow;
-        public void sKillScriptReader(string type, NineAndTwo nineAndTwo, PassiveSkillConfigs passiveSkillConfigs, int AI_level)
+        public void SkillScriptReader(string type, NineAndTwo nineAndTwo, int AI_level)
         {
             skillName.text = "";
 
@@ -317,7 +307,7 @@ namespace mainMenu
             analysisStatesList.Clear();
             analysisStatesList = this.focusingCharacterData.AIStateRunner.State_Transition_Set_List;
             analysisStatesSetDic.Clear();
-            analysisStatesSetDic = this.convertStateSetsListToStateTransitionSetDic(analysisStatesList);
+            analysisStatesSetDic = this.ConvertStateSetsListToStateTransitionSetDic(analysisStatesList);
 
             StateButtonDic.Clear();
 
@@ -340,28 +330,27 @@ namespace mainMenu
                     continue;
                 }
 
-                if (attack_chuan[i].SPLevel == 1)
+                switch (attack_chuan[i].SPLevel)
                 {
-                    newShow = Instantiate(ex1showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.blue;
-                }
-                else if (attack_chuan[i].SPLevel == 2)
-                {
-                    newShow = Instantiate(ex2showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.red;
-                }
-                else if (attack_chuan[i].SPLevel == 3)
-                {
-                    newShow = Instantiate(ex3showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.white;
-                }
-                else
-                {
-                    newShow = Instantiate(normalattackshowbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.yellow;
+                    case 1:
+                        newShow = Instantiate(ex1showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.blue;
+                        break;
+                    case 2:
+                        newShow = Instantiate(ex2showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.red;
+                        break;
+                    case 3:
+                        newShow = Instantiate(ex3showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.white;
+                        break;
+                    default:
+                        newShow = Instantiate(normalattackshowbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.yellow;
+                        break;
                 }
 
-                addShowSkillInfoFeature(newShow, attack_chuan[i]);
+                AddShowSkillInfoFeature(newShow, attack_chuan[i]);
                 StateButtonDic.Add(new KeyValuePair<State_Transition_Set, Button>(attack_chuan[i], newShow));
 
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
@@ -385,28 +374,27 @@ namespace mainMenu
                     continue;
                 }
 
-                if (Fire1_chuan[i].SPLevel == 1)
+                switch (Fire1_chuan[i].SPLevel)
                 {
-                    newShow = Instantiate(ex1showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.blue;
-                }
-                else if (Fire1_chuan[i].SPLevel == 2)
-                {
-                    newShow = Instantiate(ex2showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.red;
-                }
-                else if (Fire1_chuan[i].SPLevel == 3)
-                {
-                    newShow = Instantiate(ex3showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.white;
-                }
-                else
-                {
-                    newShow = Instantiate(normalattackshowbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.yellow;
+                    case 1:
+                        newShow = Instantiate(ex1showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.blue;
+                        break;
+                    case 2:
+                        newShow = Instantiate(ex2showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.red;
+                        break;
+                    case 3:
+                        newShow = Instantiate(ex3showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.white;
+                        break;
+                    default:
+                        newShow = Instantiate(normalattackshowbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.yellow;
+                        break;
                 }
 
-                addShowSkillInfoFeature(newShow, Fire1_chuan[i]);
+                AddShowSkillInfoFeature(newShow, Fire1_chuan[i]);
                 StateButtonDic.Add(new KeyValuePair<State_Transition_Set, Button>(Fire1_chuan[i], newShow));
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
                 newShow.name = Fire1_chuan[i].StateKey;
@@ -427,28 +415,27 @@ namespace mainMenu
                     continue;
                 }
 
-                if (Fire2_chuan[i].SPLevel == 1)
+                switch (Fire2_chuan[i].SPLevel)
                 {
-                    newShow = Instantiate(ex1showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.blue;
-                }
-                else if (Fire2_chuan[i].SPLevel == 2)
-                {
-                    newShow = Instantiate(ex2showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.red;
-                }
-                else if (Fire2_chuan[i].SPLevel ==3)
-                {
-                    newShow = Instantiate(ex3showbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.white;
-                }
-                else
-                {
-                    newShow = Instantiate(normalattackshowbutton);
-                    newShow.GetComponentInChildren<Image>().color = Color.yellow;
+                    case 1:
+                        newShow = Instantiate(ex1showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.blue;
+                        break;
+                    case 2:
+                        newShow = Instantiate(ex2showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.red;
+                        break;
+                    case 3:
+                        newShow = Instantiate(ex3showbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.white;
+                        break;
+                    default:
+                        newShow = Instantiate(normalattackshowbutton);
+                        newShow.GetComponentInChildren<Image>().color = Color.yellow;
+                        break;
                 }
 
-                addShowSkillInfoFeature(newShow, Fire2_chuan[i]);
+                AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
                 StateButtonDic.Add(new KeyValuePair<State_Transition_Set, Button>(Fire2_chuan[i], newShow));
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
                 newShow.name = Fire2_chuan[i].StateKey;
@@ -462,7 +449,7 @@ namespace mainMenu
 
         //首先三个基础按键的连按结果必须要显示出来，如果存在非连按键接续，那么只要把这个组给记录下来，在画出连按键后再画个线其实就可以。
         //那么考虑到这个东西还有这样丰富的功能，单纯一个返回值可能得不到所有我们需要的东西.我们从中引入了unsualKeyConnects来记录非寻常连接技能
-        List<State_Transition_Set> searchChuanNextAlreadyUseless(State_Transition_Set _set,
+        List<State_Transition_Set> SearchChuanNextAlreadyUseless(State_Transition_Set _set,
                                                    Inputs_defined _inputKey,
                                                    List<string> _keyChuan,
                                                    List<State_Transition_Set> chuan,
@@ -489,14 +476,7 @@ namespace mainMenu
             }
 
             Inputs_defined searching_inputKey = Inputs_defined.Null;
-            if (_inputKey == Inputs_defined.Null)
-            {
-                searching_inputKey = _set.enterInput;
-            }
-            else
-            {
-                searching_inputKey = _inputKey;
-            }
+            searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
             foreach (State_Rate_Set _rset in _set.casual_to_state_Sets)
             {
@@ -504,13 +484,12 @@ namespace mainMenu
                 {
                     if (_rset.enterInput == searching_inputKey)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                     {
-                        State_Transition_Set _new = null;
-                        stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out _new);
+                        stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out State_Transition_Set _new);
                         if (_new != null)
                         {
                             if (!_keyChuan.Contains(_new.StateKey))
                             {
-                                if (searchChuanNextAlreadyUseless(_new, searching_inputKey, _keyChuan, chuan, stateTransitionSetDictionary) != null)
+                                if (SearchChuanNextAlreadyUseless(_new, searching_inputKey, _keyChuan, chuan, stateTransitionSetDictionary) != null)
                                 {
                                 }
                                 else

@@ -53,7 +53,7 @@ public class MemberDetail_edit : MainSceneProcess
     Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
     public override void LocalUpdate()
     {
-        if (!_MemberDetail._SkillsPrintOut.ifShowingSkill())
+        if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
         {
             _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }

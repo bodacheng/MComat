@@ -84,11 +84,12 @@ namespace mainMenu
         float yAngle;
         float yAngleTemp;
         float fingertoshowmodelx, fingertoshowmodely;
+        // 注意，整个模型的上下移动靠的是StartToEndMode相机
         public void TranslateShowingCharToDefaultPos(Vector3 screenPos)//new Vector3(0.23f, 0.3f, 3f)
         {
             if (showingChar != null)
             {
-                showingChar.transform.position = Vector3.Lerp(showingChar.transform.position, CaculateShowModelPosition(screenPos), Time.deltaTime * 10f);
+                showingChar.transform.position = Vector3.Lerp(showingChar.transform.position, CaculateShowModelPosition(screenPos), Time.deltaTime * 20f);
                 if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
                 {
                     //xAngle = Input.GetAxis("Mouse X");
@@ -112,7 +113,6 @@ namespace mainMenu
                             showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
                         }
                     }
-                    pinchZoom.localUpdate();
                 }
                 else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
                 {
@@ -133,12 +133,12 @@ namespace mainMenu
                             showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
                         }
                     }
-                    pinchZoom.localUpdate();
                 }
+                pinchZoom.LocalUpdate();
             }
         }
 
-        private Vector3 tempV;
+        Vector3 tempV;
         public Vector3 CaculateShowModelPosition(Vector3 screenP)
         {
             tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
@@ -150,8 +150,8 @@ namespace mainMenu
             tempV = CameraManager._camera.WorldToScreenPoint(now);
             return tempV;
         }
-        
-        private void ArrangeShowModelOnTeam(string localID, int PositionNum)//所以这是个可能把某个阵容位置里加入null的函数。
+
+        void ArrangeShowModelOnTeam(string localID, int PositionNum)//所以这是个可能把某个阵容位置里加入null的函数。
         {
             myShowCharPositionDic.TryGetValue(PositionNum, out Transform t);
             GameObject one = MyModelPool.Instance.GetMyModel(localID);
@@ -163,7 +163,7 @@ namespace mainMenu
                 one.transform.localRotation = Quaternion.identity;
             }
         }
-        
+
         public void FrontPageModelsRotateShow()
         {
             MembersStandCenterPoint.position = CaculateShowModelPosition(new Vector3(0.5f, 0.5f, 10));//后
@@ -239,16 +239,16 @@ namespace mainMenu
             if (_one != null)
                 onsetLocals.Add(_one);
 
-            yield return (this._CharSetManager.BuildTheseMyModels(onsetLocals.ToArray()));
+            yield return _CharSetManager.BuildTheseMyModels(onsetLocals.ToArray());
             ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(0), 0);
             ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(1), 1);
             ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(2), 2);
             ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetPositionMonsterOfPlayerId(3), 3);
         }
-        
+
         //这个函数有这样的风险：如果你角色由这个函数正在调整位置的过程中step忽然间变了，那角色会停留在途中。而且风险可能不止这些。
         //说到底这个东西无非是为了确保四个角色在画面的上下左右四边，这不是必要的，只是我们所设计的一个外观小花样，而且这么正的排布这些角色其实只有在队伍编辑模式才有些意义。
-        private Vector3 rotateTo;
+        Vector3 rotateTo;
         public void ShowModelPositionAdjusting()
         {
             Member0StandPoint.position = Vector3.Lerp(Member0StandPoint.position, CaculateShowModelPosition(new Vector3(0.5f, 0.7f, 10)), 2 * Time.deltaTime);//后

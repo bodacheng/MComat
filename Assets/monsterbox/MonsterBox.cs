@@ -35,7 +35,7 @@ namespace mainMenu
         public RectTransform MonsterBoxContainer;
         static RectTransform _MonsterBoxContainer;
 
-        static IDictionary<string, charIcon> mainMenuIcons = new Dictionary<string, charIcon>();
+        static readonly IDictionary<string, charIcon> mainMenuIcons = new Dictionary<string, charIcon>();
         static List<string> typeList = new List<string>();
 
         void Awake()
