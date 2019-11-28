@@ -200,7 +200,7 @@ public partial class Data_Center : MonoBehaviour
             AIStateRunner.IniStates(this);
             //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
             // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
-            List<string> toLoadSkillAnimsNames = AIStateRunner.passSkillTypeKeys();
+            List<string> toLoadSkillAnimsNames = AIStateRunner.PassSkillTypeKeys();
             switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:

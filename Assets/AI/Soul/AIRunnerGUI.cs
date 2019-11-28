@@ -288,7 +288,7 @@ public class AIRunnerGUI : Editor {
         GUI.backgroundColor = Color.green; 
 		if(GUILayout.Button("saveTrans"))
 		{
-			myScript.saveTrans();
+			myScript.SaveTrans();
 		}
         GUI.backgroundColor = Color.white; 
 	}

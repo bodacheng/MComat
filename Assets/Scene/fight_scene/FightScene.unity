@@ -22352,7 +22352,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 3000649885448912316}
-          m_MethodName: attackButtonDown
+          m_MethodName: AttackButtonDown
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -22367,7 +22367,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 3000649885448912316}
-          m_MethodName: attackButtonUp
+          m_MethodName: AttackButtonUp
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

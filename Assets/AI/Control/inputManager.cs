@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Soul;
 
-[System.Serializable]
 public enum Inputs_defined
 {
     Null = -1,
@@ -19,29 +17,18 @@ public enum Inputs_defined
 //这个模块的职责现在多了一个，就是像mobile按钮来汇报那些按钮应该开始闪灯。。
 public class InputManager {
 
-    bool PlayerInputting;
+    public IDictionary<Inputs_defined,Input> inputStateDic;
+    public Input Attack = new Input(Inputs_defined.Attack);
+    public Input Fire1 = new Input(Inputs_defined.Fire1);
+    public Input Fire2 = new Input(Inputs_defined.Fire2);
+    public Input Dash = new Input(Inputs_defined.Dash);
+    public Input Defend = new Input(Inputs_defined.Defend);
+    public Input Defend_Cancel = new Input(Inputs_defined.Defend_Cancel);
+    public IDictionary<Inputs_defined, int> nextSkillSPlevel = new Dictionary<Inputs_defined, int>();
+    public bool PlayerInputting { get; set;}
+    
     AIStateRunner myfocusingRunner;
     List<Inputs_defined> WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge = new List<Inputs_defined>();
-
-    public IDictionary<Inputs_defined,Input> inputStateDic;
-    public ButtonDownTypeInput Attack = new ButtonDownTypeInput(Inputs_defined.Attack, "Attack");
-    public ButtonDownTypeInput Fire1 = new ButtonDownTypeInput(Inputs_defined.Fire1, "Fire1");
-    public ButtonDownTypeInput Fire2 = new ButtonDownTypeInput(Inputs_defined.Fire2, "Fire2");
-    public ButtonDownTypeInput Dash = new ButtonDownTypeInput(Inputs_defined.Dash, "Rush");
-    public ButtonDownTypeInput Defend = new ButtonDownTypeInput(Inputs_defined.Defend, "Defend");
-    public ButtonDownTypeInput Any = new ButtonDownTypeInput(Inputs_defined.Any, "Any");
-    public ButtonOffTypeInput Defend_Cancel = new ButtonOffTypeInput(Inputs_defined.Defend_Cancel, "Defend");
-    public IDictionary<Inputs_defined, int> nextSkillSPlevel = new Dictionary<Inputs_defined, int>();
-
-    public void SetPlayerIsInputting(bool d)
-    {
-        PlayerInputting = d;
-    }
-
-    public bool IfPlayerIsInputting()
-    {
-        return PlayerInputting;
-    }
 
     public void ButtonRefreshForCasualTransition(List<State_Rate_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
     {
@@ -58,7 +45,7 @@ public class InputManager {
             }
         }
 
-        //首发技能中如果三个键位里有发动不了的，那键位也应该是灰色或半透明来表示无法发动。
+        // 首发技能中如果三个键位里有发动不了的，那键位也应该是灰色或半透明来表示无法发动。
         if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Attack))
         {
             RefreshSPLevelButtonsInfo(Inputs_defined.Attack, -1);
@@ -94,11 +81,11 @@ public class InputManager {
         }
         if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Fire1))
         {
-            RefreshSPLevelButtonsInfo(Inputs_defined.Fire1,-1);
+            RefreshSPLevelButtonsInfo(Inputs_defined.Fire1, -1);
         }
         if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Fire2))
         {
-            RefreshSPLevelButtonsInfo(Inputs_defined.Fire2,-1);
+            RefreshSPLevelButtonsInfo(Inputs_defined.Fire2, -1);
         }
     }
 
@@ -108,7 +95,6 @@ public class InputManager {
         inputStateDic = new Dictionary<Inputs_defined, Input>();
         nextSkillSPlevel = new Dictionary<Inputs_defined, int>
         {
-
             // 我们下面这个部分是和refreshSPLevelButtonsInfo函数内的处理进行呼应
             // 注意看那里面如果ContainsKey为非的话就不做任何处理，
             // 因为我们的这套按钮刷新机制只运用于Attack，Fire1，Fire2这三个攻击键。
@@ -129,7 +115,6 @@ public class InputManager {
             inputStateDic.Add(Defend.input_num, Defend);
             inputStateDic.Add(Defend_Cancel.input_num, Defend_Cancel);
         }
-        inputStateDic.Add(Any.input_num,Any);
     }
 	
     public void RefreshSPLevelButtonsInfo(Inputs_defined _input,int _spLevel)
@@ -140,40 +125,31 @@ public class InputManager {
         }
     }
 
-    // Update is called once per frame
-
     float h,v;
-    public void Update()
+    public void CheckIfPlayerIsInputting() // 如果不是对准角色，不会跑。
     {
         PlayerInputting = false;
-        if (inputStateDic != null)
+        foreach (KeyValuePair<Inputs_defined, Input> _set in inputStateDic)
         {
-            foreach (KeyValuePair<Inputs_defined, Input> _set in inputStateDic)
-            {
-                _set.Value.UpdateInputState();
-                if (_set.Value.button_down)
-                {
-                    PlayerInputting = true;
-                    return;
-                }  
-            }
-
-            h = 0f;
-            v = 0f;
-            if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
-            || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                h = UnityEngine.Input.GetAxis("Horizontal");
-                v = UnityEngine.Input.GetAxis("Vertical");
-                //h = ETCInput.GetAxis("Horizontal");
-                //v = ETCInput.GetAxis("Vertical");
-            }
-            else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                h = ETCInput.GetAxis("Horizontal");
-                v = ETCInput.GetAxis("Vertical");
-            }
-            PlayerInputting |= (h > 0f || h < 0 || v > 0f || v < 0f);
+            if (_set.Key == Inputs_defined.Defend_Cancel)
+                continue;// 一个特例。不这么处理的话会造成Defend_Cancel一直判断为true，导致角色不动
+            PlayerInputting |= _set.Value.input_state;
+            if (PlayerInputting)
+                return;
         }
+        h = 0f;
+        v = 0f;
+        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
+        || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            h = UnityEngine.Input.GetAxis("Horizontal");
+            v = UnityEngine.Input.GetAxis("Vertical");
+        }
+        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            h = ETCInput.GetAxis("Horizontal");
+            v = ETCInput.GetAxis("Vertical");
+        }
+        PlayerInputting |= (h > 0f || h < 0 || v > 0f || v < 0f);
     }
 }

@@ -83,7 +83,7 @@ public class Defend_State : AI_State
 
     public override bool Strategic_exit_condition()
     {
-        return !Enter_condition_priority1() && this._AIStateRunner.haveFirstSkillToTrigger();
+        return !Enter_condition_priority1() && this._AIStateRunner.HaveFirstSkillToTrigger();
     }
 
     public override void AI_State_enter()

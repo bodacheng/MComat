@@ -10,7 +10,8 @@ public class FightGlobalSetting : MonoBehaviour
     public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f;
     public float knockoffextent = 5f;
     public float MaxKnockoffLaidGroundTime = 2f;
-    public float CanGetUpAfterKnockoffToGround = 2f;
+    public float CanGetUpAfterKnockoffToGround = 0.5f;
+    public float GetupTime = 1f;
     public float LeastCommandTimeAfterGetup = 0.3f;
     public int defendHP = 20;
     public float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
@@ -21,7 +22,8 @@ public class FightGlobalSetting : MonoBehaviour
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
     public static float _CanGetUpAfterKnockoffToGround;
-    public static float _LeastCommandTimeAfterGetup = 0.3f;
+    public static float _GetupTime;
+    public static float _LeastCommandTimeAfterGetup;
     public static int _defendHP;
     public static float _lightBlockLastingTime, _heavyBlockLastingTime;
     public static AnimationCurve _knockOffyAnimationCurve,_knockOffzAnimationCurve;
@@ -34,6 +36,7 @@ public class FightGlobalSetting : MonoBehaviour
         _knockoffextent = knockoffextent;
         _CanGetUpAfterKnockoffToGround = CanGetUpAfterKnockoffToGround;
         _MaxKnockoffLaidGroundTime = MaxKnockoffLaidGroundTime;
+        _GetupTime = GetupTime;
         _LeastCommandTimeAfterGetup = LeastCommandTimeAfterGetup;
         
         _knockOffyAnimationCurve = knockOffyAnimationCurve;

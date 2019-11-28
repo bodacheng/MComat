@@ -7,7 +7,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
 {
     [Header("Basic Element")]
 	public CameraManager _CameraManager;
-	public mobileInputsManager _mobileInputsManager;
+	public MobileInputsManager _mobileInputsManager;
     
     [Header("Watch Mode")]
     [Space(6)]

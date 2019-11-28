@@ -80,7 +80,7 @@
     <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Move_State2.cs" />
     <Compile Include="Assets\AI\AI_states\States_Dictionary.cs" />
-    <Compile Include="Assets\AI\buttons\mobileInputsManager.cs" />
+    <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiSkillStoneTagsGroup.cs" />
     <Compile Include="Assets\AI\Control\Input.cs" />

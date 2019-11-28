@@ -65,7 +65,7 @@ public class Knock_Off_State : AI_State
 
     public override bool Naturally_exit_condition()
     {
-        return dropped && time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime;
+        return false;
     }
 
     public override void AI_State_exit()
@@ -73,7 +73,6 @@ public class Knock_Off_State : AI_State
         base.AI_State_exit();
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _DATA_CENTER.SetUsingGravity(true);
-        this._SkillCancelFlag.turn_off_flag();
         _FightAttriCalReference.SetGettingDamageState(false);
         _FightAttriCalReference.EnableAllHitBoxCollider(true);
         _Rigidbody.velocity = Vector3.zero;
@@ -103,18 +102,20 @@ public class Knock_Off_State : AI_State
                 dropped = true;
                 time_counter = 0;//开始针对躺地时间记时
             }
-        }
-        
-        if (dropped)
+        }else{
             _Rigidbody.velocity = Vector3.zero;
-
+            if (time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime)
+            {
+                _AIStateRunner.ChangeState("getUp");
+            }
+        }
+                   
         if (!canWakeUp)
         {
-            if (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
-            {
-                _SkillCancelFlag.turn_on_flag();
-                canWakeUp = true;
-            }
+            canWakeUp |= (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround);
+        }else{
+            if (_AIStateRunner._inputManager.PlayerInputting)
+                _AIStateRunner.ChangeState("getUp");
         }
 
         time_counter += Time.fixedDeltaTime;

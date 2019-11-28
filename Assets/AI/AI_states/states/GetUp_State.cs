@@ -25,12 +25,11 @@ public class GetUp : AI_State {
     // On what condition can we exit this state 
     public override bool Naturally_exit_condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
+        return counter > FightGlobalSetting._GetupTime;
     }
     
     public override void AI_State_enter()
 	{
-        Debug.Log("getup");
         base.AI_State_enter();
         counter = 0f;
         _Animator.SetFloat("speed", 0f);
@@ -48,8 +47,11 @@ public class GetUp : AI_State {
 	{
         counter += Time.fixedDeltaTime;
 		_Rigidbody.velocity = Vector3.zero;
-        if (counter > FightGlobalSetting._LeastCommandTimeAfterGetup)
-            _SkillCancelFlag.turn_on_flag();
+        if (!_SkillCancelFlag.Cancel_Flag)
+        {
+            if (counter > FightGlobalSetting._LeastCommandTimeAfterGetup)
+                _SkillCancelFlag.turn_on_flag();
+        }
 	}
 
     public override void AI_State_exit()

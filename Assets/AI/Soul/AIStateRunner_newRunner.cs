@@ -6,8 +6,8 @@ namespace Soul
 {
     public partial class AIStateRunner : MonoBehaviour
     {
-        private List<State_Rate_Set> SRTListForCasualTransitionbuttonRefresh = new List<State_Rate_Set>();
-        public void stateTransitionEngine_new(IDictionary<string, State_Transition_Set> state_Transition_Dictionary)
+        List<State_Rate_Set> SRTListForCasualTransitionbuttonRefresh = new List<State_Rate_Set>();
+        public void StateTransitionEngine_new(IDictionary<string, State_Transition_Set> state_Transition_Dictionary)
         {
             avaliable_casual_Transitions.Clear();
             casual_TransitionsPriority1.Clear();
@@ -47,12 +47,9 @@ namespace Soul
             ////////////////////////////////////////////////////////////
 
             bool exitCommandFufilled = true;
-            if (playerMode || _inputManager.IfPlayerIsInputting())
+            if (playerMode || _inputManager.PlayerInputting)
             {
-                if (CurrentStateTransitionSet.exitInput != Inputs_defined.Null)
-                    exitCommandFufilled = this.CheckInput(CurrentStateTransitionSet.exitInput);
-                else
-                    exitCommandFufilled = true;
+                exitCommandFufilled = CurrentStateTransitionSet.exitInput == Inputs_defined.Null || CheckInput(CurrentStateTransitionSet.exitInput);
             }
 
             if (CurrentStateTransitionSet.casual_to_state_Sets != null && CurrentStateTransitionSet.casual_to_state_Sets.Length > 0)
@@ -72,9 +69,9 @@ namespace Soul
                         if (((state_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag))||
                             (now_state.Naturally_exit_condition() && exitCommandFufilled))
                         {
-                            if (playerMode || _inputManager.IfPlayerIsInputting())
+                            if (playerMode || _inputManager.PlayerInputting)
                             {
-                                if ((state_set.enterInput != Inputs_defined.Null && this.CheckInput(state_set.enterInput)) ||
+                                if ((state_set.enterInput != Inputs_defined.Null && CheckInput(state_set.enterInput)) ||
                                     state_set.enterInput == Inputs_defined.Null)
                                 {
                                     if (try_state.Enter_condition_priority1())
@@ -100,24 +97,24 @@ namespace Soul
                         }
                     }
                 }
-                if (mobileInputsManager.watchingInputManger == this._inputManager)
-                    this._inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
+                if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+                    _inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
             }
 
             if (CurrentStateTransitionSet.casual_to_state_Sets == null || CurrentStateTransitionSet.casual_to_state_Sets.Length == 0)
             {
                 //if (now_state.casual_exit_condition())
-                if (mobileInputsManager.watchingInputManger == this._inputManager)
-                    this._inputManager.ButtonRefreshFromStart(this.States_for_AbsoluteInput, _BO_Health);
+                if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+                    _inputManager.ButtonRefreshFromStart(this.States_for_AbsoluteInput, _BO_Health);
             }
 
             #region 状态迁移判断
             if (avaliable_casual_Transitions.Count > 0)
             {
-                if (playerMode || _inputManager.IfPlayerIsInputting())
+                if (playerMode || _inputManager.PlayerInputting)
                 {
-                    if (mobileInputsManager.watchingInputManger == this._inputManager)
-                        mobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
+                    if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+                        MobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
                     _SkillCancelFlag.turn_off_flag();
                     ChangeState(avaliable_casual_Transitions[0].AI_State_Number);
                     return;
@@ -126,17 +123,17 @@ namespace Soul
                 {
                     if (casual_TransitionsPriority1.Count > 0)
                     {
-                        randomTransitionToRun(casual_TransitionsPriority1);
+                        RandomTransitionToRun(casual_TransitionsPriority1);
                         return;
                     }
                     if (casual_TransitionsPriority2.Count > 0)
                     {
-                        randomTransitionToRun(casual_TransitionsPriority2);
+                        RandomTransitionToRun(casual_TransitionsPriority2);
                         return;
                     }
                     if (casual_TransitionsPriority3.Count > 0)
                     {
-                        randomTransitionToRun(casual_TransitionsPriority3);
+                        RandomTransitionToRun(casual_TransitionsPriority3);
                         return;
                     }
                 }
@@ -147,7 +144,7 @@ namespace Soul
                 return;
             }
                 
-            if (playerMode || _inputManager.IfPlayerIsInputting())
+            if (playerMode || _inputManager.PlayerInputting)
             {
                 if (!exitCommandFufilled)
                 {
@@ -166,16 +163,16 @@ namespace Soul
             #endregion
         }
 
-        private void randomTransitionToRun(List<State_Rate_Set> TransitionsToRun)
+        void RandomTransitionToRun(List<State_Rate_Set> TransitionsToRun)
         {
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
-            if (mobileInputsManager.watchingInputManger == this._inputManager)
-                 mobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].SPLevel);
+            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+                MobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].SPLevel);
             _SkillCancelFlag.turn_off_flag();
             ChangeState(TransitionsToRun[next].AI_State_Number);
         }
 
-        public bool haveFirstSkillToTrigger()
+        public bool HaveFirstSkillToTrigger()
         {
             foreach (AI_State _AS in States_for_AbsoluteInput)
             {
@@ -210,14 +207,14 @@ namespace Soul
 
             if (AINext.Count > 0)
             {
-                if (playerMode || _inputManager.IfPlayerIsInputting())
+                if (playerMode || _inputManager.PlayerInputting)
                 {
                     foreach (AI_State State_Rate_Set in AINext)
                     {
-                        if (this.CheckInput(State_Rate_Set.enterInput))
+                        if (CheckInput(State_Rate_Set.enterInput))
                         {
-                            if (mobileInputsManager.watchingInputManger == this._inputManager)
-                                 mobileInputsManager.Skillbuttonexplosion(State_Rate_Set.enterInput, State_Rate_Set.splevel);
+                            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+                                 MobileInputsManager.Skillbuttonexplosion(State_Rate_Set.enterInput, State_Rate_Set.splevel);
                             ChangeState(State_Rate_Set.StateKey);
                             return;
                         }
@@ -227,17 +224,17 @@ namespace Soul
                 {
                     if (AINextPriority1.Count > 0)
                     {
-                        randomStateToStartOff(AINextPriority1);
+                        RandomStateToStartOff(AINextPriority1);
                         return;
                     }
                     if (AINextPriority2.Count > 0)
                     {
-                        randomStateToStartOff(AINextPriority2);
+                        RandomStateToStartOff(AINextPriority2);
                         return;
                     }
                     if (AINextPriority3.Count > 0)
                     {
-                        randomStateToStartOff(AINextPriority3);
+                        RandomStateToStartOff(AINextPriority3);
                         return;
                     }
                 }
@@ -252,11 +249,11 @@ namespace Soul
             }
         }
 
-        private void randomStateToStartOff(List<AI_State> TransitionsToRun)
+        void RandomStateToStartOff(List<AI_State> TransitionsToRun)
         {
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
-            if (mobileInputsManager.watchingInputManger == this._inputManager)
-                 mobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].splevel);
+            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+                MobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].splevel);
             ChangeState(TransitionsToRun[next].StateKey);
         }
     }

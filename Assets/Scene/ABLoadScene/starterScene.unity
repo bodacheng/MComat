@@ -1443,7 +1443,8 @@ MonoBehaviour:
   knockoffextent: 2
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
-  LeastCommandTimeAfterGetup: 3
+  GetupTime: 1
+  LeastCommandTimeAfterGetup: 0.5
   defendHP: 20
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.5

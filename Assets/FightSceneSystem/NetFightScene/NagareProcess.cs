@@ -26,7 +26,7 @@ public abstract class NagareProcess
 
     public NetFightScene _NetFightScene;
     public RealTimeGameProcessManager _RealTimeGameProcessManager;
-    public mobileInputsManager mobileInputsManager;
+    public MobileInputsManager mobileInputsManager;
     public FightTalksRunner fightTalksRunner;
     public BoundaryControllByGod BoundaryControllByGod;
     public DebugManager debugManager;

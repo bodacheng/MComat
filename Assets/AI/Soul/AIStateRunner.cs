@@ -52,7 +52,7 @@ namespace Soul
         public void SetPlayerMode(bool result)
         {
             playerMode = result;
-            _inputManager.SetPlayerIsInputting(false);
+            this._inputManager.PlayerInputting = false;
         }
         
         public bool IfRunning()
@@ -107,12 +107,12 @@ namespace Soul
         {
             if (IfRunning())
             {
-                if (mobileInputsManager.watchingInputManger == _inputManager)
-                    _inputManager.Update();
-                stateTransitionEngine_new(state_Transition_Dictionary);
+                if (MobileInputsManager.target.watchingInputManger == _inputManager)
+                    _inputManager.CheckIfPlayerIsInputting();
+                StateTransitionEngine_new(state_Transition_Dictionary);
                 if (now_state != null)
                 {
-                    if (playerMode || (!playerMode && _inputManager.IfPlayerIsInputting()))
+                    if (playerMode || (!playerMode && _inputManager.PlayerInputting))
                     {
                         now_state._c_State_FixedUpdate1();
                         now_state._c_State_FixedUpdate2();
@@ -152,7 +152,7 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + current_state_num);
                 return;
             }
-            if (playerMode || _inputManager.IfPlayerIsInputting())
+            if (playerMode || _inputManager.PlayerInputting)
                 now_state.C_State_enter();
             else
                 now_state.AI_State_enter();
@@ -173,7 +173,7 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + current_state_num);
                 return;
             }
-            if (playerMode || _inputManager.IfPlayerIsInputting())
+            if (playerMode || _inputManager.PlayerInputting)
                 now_state.C_State_enter(newvalue);
             else
                 now_state.AI_State_enter(newvalue);
@@ -200,11 +200,11 @@ namespace Soul
                 Debug.Log("九宫格为空，返回");
                 return;
             }
-            this.readingNineAndTwo = nineAndTwo;
-            this.readingNineAndTwo.SortNineAndTwo();
+            readingNineAndTwo = nineAndTwo;
+            readingNineAndTwo.SortNineAndTwo();
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
-            this.state_Transition_Dictionary = this.readingNineAndTwo.GenerateBeheviourSets(100);
-            this.State_Transition_Set_List = this.readingNineAndTwo.ReturnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
+            state_Transition_Dictionary = this.readingNineAndTwo.GenerateBeheviourSets(100);
+            State_Transition_Set_List = this.readingNineAndTwo.ReturnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
 
             States_for_AbsoluteInput.Clear();
             bool hasD, hasR;
@@ -221,7 +221,7 @@ namespace Soul
 
             foreach (AI_Num_With_State s in Num_State_List)
             {
-                if (this.state_Transition_Dictionary.ContainsKey(s.num))
+                if (state_Transition_Dictionary.ContainsKey(s.num))
                 {
                     s.state.StateKey = this.state_Transition_Dictionary[s.num].StateKey;
                     s.state.splevel = this.state_Transition_Dictionary[s.num].SPLevel;

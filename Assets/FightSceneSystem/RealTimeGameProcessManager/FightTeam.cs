@@ -16,7 +16,7 @@ public partial class FightTeam : MonoBehaviour
     public SideCharIcon button_prefab;
     public TextMesh HitCombo;
     public RealTimeGameProcessManager realTimeGameProcessManager;
-    public mobileInputsManager _mobileInputsManager;
+    public MobileInputsManager _mobileInputsManager;
     public CharsManager _CharSetManager;
     public TeamMode TeamMode;
     

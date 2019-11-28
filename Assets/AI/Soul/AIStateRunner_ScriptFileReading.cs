@@ -15,21 +15,17 @@ namespace Soul
         public TextAsset usingScript;
         public int usingScriptLevel;
 
-        public List<string> passSkillTypeKeys()//出于初始化的便利而存在的一个函数
+        public List<string> PassSkillTypeKeys()//出于初始化的便利而存在的一个函数
         {
-            if (_States_Incubator != null)
-            {
-                return _States_Incubator.SkillTypeKeys;
-            }
-            return null;
+            return _States_Incubator?.SkillTypeKeys;
         }
 
-        public void saveTrans()
+        public void SaveTrans()
         {
-            this.saveStateTransitionInfo(State_Transition_Set_List, AI_States_path, characterType);
+            this.SaveStateTransitionInfo(State_Transition_Set_List, AI_States_path, characterType);
         }
 
-        public string arrangeScriptPathForPlatfom(string PathInStringOrigin)
+        public string ArrangeScriptPathForPlatfom(string PathInStringOrigin)
         {
             string AI_selected = null;
             if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
@@ -47,7 +43,7 @@ namespace Soul
             return AI_selected;
         }
 
-        public bool saveStateTransitionInfo(List<State_Transition_Set> list, string pathAndFileName, string clip_path)
+        public bool SaveStateTransitionInfo(List<State_Transition_Set> list, string pathAndFileName, string clip_path)
         {
             try
             {
@@ -162,17 +158,8 @@ namespace Soul
                         }
                     }
 
-                    List<State_Rate_Set> casuals_t;
-                    if (s.casual_to_state_Sets != null)
-                    {
-                        casuals_t = s.casual_to_state_Sets.ToList();
-                    }
-                    else
-                    {
-                        casuals_t = new List<State_Rate_Set>();
-                    }
-
-                    if (undefined_CausalStateRateSet.Count() > 0)
+                    List<State_Rate_Set> casuals_t = s.casual_to_state_Sets != null ? s.casual_to_state_Sets.ToList() : new List<State_Rate_Set>();
+                    if (undefined_CausalStateRateSet.Any())
                     {
                         foreach (State_Rate_Set _set in undefined_CausalStateRateSet)
                         {
@@ -180,14 +167,7 @@ namespace Soul
                         }
                     }
                     s.casual_to_state_Sets = casuals_t.ToArray();
-                    if (s.StateKey != "Death")
-                    {
-                        s.forced_to_state_nums = DefaultForceToNums.ToArray();
-                    }
-                    else
-                    {
-                        s.forced_to_state_nums = new string[0];
-                    }
+                    s.forced_to_state_nums = s.StateKey != "Death" ? DefaultForceToNums.ToArray() : (new string[0]);
                 }
 
                 XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<State_Transition_Set>));
@@ -217,7 +197,7 @@ namespace Soul
                 now_state.AI_State_exit();
             }
 
-            this.State_Transition_Set_List = AIScriptReading.readKongfuBook(this, Script, type, AI_level);//这个是一个状态清单，生成状态的是States_Dictionary类。
+            State_Transition_Set_List = AIScriptReading.readKongfuBook(this, Script, type, AI_level);//这个是一个状态清单，生成状态的是States_Dictionary类。
                                                                                                           //_States_Dictionary = new States_Dictionary(type,this.State_Transition_Set_List);//这一行于7月20号commentout了
             List<AI_Num_With_State> Num_State_List = _States_Incubator.Num_State_List;// 理解整个系统的关键
             state_Dictionary = new Dictionary<string, AI_State>();
