@@ -11,7 +11,7 @@ public class TrySkillShowMenu : MainSceneProcess
     public TrySkillShowMenu(preparingScene _preparingScene,ProcessesRunner processesRunner)
     {
         //this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
-        this.processesRunner = processesRunner;
+        this.subProcessesRunner = processesRunner;
         this._preparingScene = _preparingScene;
         this.EelementsInherit(_preparingScene);
     }
@@ -37,7 +37,7 @@ public class TrySkillShowMenu : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

@@ -240,19 +240,17 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.SkillStoneBoxCell:
                                     UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
                                     {
-                                        TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().localID}));
+                                        TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().localID}));
                                         UpdateMyItem();
                                     };
                                     UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
                                     {
-                                        TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(SkillStonesBox.Instance.ArrangeSkillStonesToBox());
+                                        TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(SkillStonesBox.Instance.ArrangeSkillStonesToBox());
                                     };
-                                    TheNineSlot.Instance._LoadingCanvas.arrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
+                                    LoadingCanvas.target.ArrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, 
                                         "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.REAL_NAME + "?");
                                     break;
                             }
-                            break;
-                        default:
                             break;
                     }
                 }

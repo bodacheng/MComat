@@ -144,28 +144,28 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 0;
-            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX1TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 1;
-            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX2TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 2;
-            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void EX3TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 3;
-            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
@@ -207,13 +207,13 @@ namespace mainMenu
 
         void RangeCheckBoxOnValueChanged()
         {
-            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
         }
 
         public void typeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            TheNineSlot.Instance.mainProcessRunner.triggerMainProcess(EXTabsFeatureRefresh(true));
+            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(EXTabsFeatureRefresh(true));
         }
 
         // 围绕这个环节的一个问题是玩家账户中格子数量的问题。

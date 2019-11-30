@@ -20,6 +20,6 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         DownLoadMissionDic.Add("Magics/darkmagic", darkMagic);
         DownLoadMissionDic.Add("Magics/lightmagic", lightMagic);
 
-        yield return downloadingProcess();
+        yield return DownloadingProcess();
     }
 }

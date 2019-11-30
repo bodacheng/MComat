@@ -10,46 +10,35 @@ namespace mainMenu
 {
     public class MonsterBox : MonoBehaviour
     {
+        public static MonsterBox target;
+    
         [Space(7)]
         [Header("monsterboxFilter")]
         public monsterboxFilter _monsterboxFilter;
-        static monsterboxFilter monsterboxFilter;
 
         [Space(7)]
         [Header("角色属性框")]
         public charIcon noMagic;
-        static charIcon NoMagic;
 
         [Space(7)]
         [Header("选中框")]
         public GameObject selectedFrame;
-        static GameObject _selectedFrame;
 
         [Space(7)]
         [Header("宠物栏总RectTransform")]
         public RectTransform MonsterBoxWholeT;
-        static RectTransform _MonsterBoxWholeT;
         
         [Space(2)]
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
-        static RectTransform _MonsterBoxContainer;
 
         static readonly IDictionary<string, charIcon> mainMenuIcons = new Dictionary<string, charIcon>();
         static List<string> typeList = new List<string>();
 
-        void Awake()
-        {
-            _selectedFrame = selectedFrame;
-            monsterboxFilter = _monsterboxFilter;
-            _MonsterBoxWholeT = MonsterBoxWholeT;
-            NoMagic = noMagic;
-            _MonsterBoxContainer = MonsterBoxContainer;
-        }
-
         void Start()
         {
-            NoMagic.gameObject.SetActive(false);
+            noMagic.gameObject.SetActive(false);
+            target = this; //放在start是确保每次进入菜单场景都运行
         }
 
         public void AdjustAllIconsSize(string focusingLocalID)
@@ -89,7 +78,6 @@ namespace mainMenu
 
         public static IEnumerator AddOneNewIcon(string monsterOfPlayerId)
         {
-            charIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(monsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel targetingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
@@ -104,6 +92,7 @@ namespace mainMenu
                 Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);
                 yield break;
             }
+            charIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {
                 IEnumerator onecoroutine = null;
@@ -119,7 +108,7 @@ namespace mainMenu
                         break;
                 }
                 yield return onecoroutine;
-                targetingIcon = Instantiate(NoMagic);
+                targetingIcon = Instantiate(target.noMagic);
                 targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
                 targetingIcon.AccountCharacterInfo = targetingCharacterDataInfo;
                 targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
@@ -145,7 +134,7 @@ namespace mainMenu
                     {
                         text = keyValuePair.Value._CharacterResourceInfo.type
                     };
-                    monsterboxFilter.typeDropDown.options.Add(m_NewData);
+                    target._monsterboxFilter.typeDropDown.options.Add(m_NewData);
                 }
             }
             yield break;
@@ -153,15 +142,15 @@ namespace mainMenu
 
         public void OnTypeChangeMyMonsterBox()
         {
-            preparingScene.Instance.mainProcessRunner.triggerMainProcess(DisplayMonsterIcons());
+            preparingScene.Instance.mainProcessRunner.TriggerMainProcess(DisplayMonsterIcons());
         }
 
         //icon的排列，显示   
         public static IEnumerator DisplayMonsterIcons()
         {
-            Debug.Log("here");
-            _MonsterBoxContainer.gameObject.SetActive(true);
-            List<charIcon> nowcharIcons = monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
+            target.MonsterBoxContainer.gameObject.SetActive(true);
+            yield return MonsterIconsGenerate();
+            List<charIcon> nowcharIcons = target._monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
             int hangshu = 1;
             for (int i = 0; i < nowcharIcons.Count; i++)
             {
@@ -175,20 +164,20 @@ namespace mainMenu
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
                 void action1()
                 {
-                    charIcon.Seletedfeature(_targetingIcon, _selectedFrame);
-                    preparingScene.Instance.mainProcessRunner.triggerMainProcess(preparingScene.Instance.MonsterIconButton(monsterOfPlayerId));
+                    charIcon.Seletedfeature(_targetingIcon, target.selectedFrame);
+                    preparingScene.Instance.mainProcessRunner.TriggerMainProcess(preparingScene.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
                 _targetingIcon.iconButton.onClick.AddListener(action1);
                 Debug.Log(_targetingIcon.AccountCharacterInfo.monsterId);
                 _targetingIcon.gameObject.SetActive(true);
-                _targetingIcon.transform.SetParent(_MonsterBoxContainer);
+                _targetingIcon.transform.SetParent(target.MonsterBoxContainer);
                 _targetingIcon.transform.localScale = Vector3.one;
                 _targetingIcon.transform.localPosition = Vector3.zero;
             }
 
             //adjustAllIconsSize(null);
             hangshu = 1 + nowcharIcons.Count / 7;
-            _MonsterBoxContainer.sizeDelta = new Vector2(_MonsterBoxContainer.rect.width, NoMagic.GetComponent<RectTransform>().rect.height * hangshu);
+            target.MonsterBoxContainer.sizeDelta = new Vector2(target.MonsterBoxContainer.rect.width, target.noMagic.GetComponent<RectTransform>().rect.height * hangshu);
             yield break;
         }
     }

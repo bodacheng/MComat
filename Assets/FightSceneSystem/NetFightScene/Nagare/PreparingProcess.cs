@@ -15,30 +15,30 @@ public class PreparingProcess : NagareProcess
     
     public IEnumerator EnterProcess()
     {
-        loadingCanvas.DarkOff(1f);
+        LoadingCanvas.target.DarkOff(1f);
         FightLoadError.Instance.FightLoadErrors.Clear();
         switch (_NetFightScene._SceneMode)
         {
             case SceneMode.MyPetsFight:
                 if (FightSceneNote.Instance.nextBattle != null)
                 {
-                    mainProcessRunner.triggerMainProcess(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+                    mainProcessRunner.TriggerMainProcess(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
                 }
             break;
             case SceneMode.QuestFight:
                 if (FightSceneNote.Instance.nextBattle != null)
                 {
-                    mainProcessRunner.triggerMainProcess(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+                    mainProcessRunner.TriggerMainProcess(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
                 }
             break;
         }
-        loadingCanvas.LightUp();
+        LoadingCanvas.target.LightUp();
         yield break;
     }
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

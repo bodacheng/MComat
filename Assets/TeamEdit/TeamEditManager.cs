@@ -7,7 +7,6 @@ using dataAccess;
 
 public class TeamEditManager : MonoBehaviour
 {
-    public preparingScene _preparingScene;
     public RectTransform UIT;
     public charIcon team1back, team1front, team1left, team1right;
     
@@ -16,8 +15,8 @@ public class TeamEditManager : MonoBehaviour
     public GameObject selectedFrame;
     
     public static int focusingPosNum = -1;
-    private IDictionary<int, charIcon> team1ButtonDic = new Dictionary<int, charIcon>();
-    
+    readonly IDictionary<int, charIcon> team1ButtonDic = new Dictionary<int, charIcon>();
+
     public void OpenButtons(bool _on)
     {
         UIT.gameObject.SetActive(_on);
@@ -38,8 +37,8 @@ public class TeamEditManager : MonoBehaviour
             yield return ChangeIconOnPos(returns[i].posNum);
         yield return TeamSet.Instance.SaveTeamSet(TeamSetGameMode.story);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
     }
-    
-    private IEnumerator ChangeIconOnPos(int posNum)
+
+    IEnumerator ChangeIconOnPos(int posNum)
     {
         if (posNum == -1)
         {
@@ -47,13 +46,15 @@ public class TeamEditManager : MonoBehaviour
             yield break;
         }
         charIcon tar = null;
-        if (team1ButtonDic.ContainsKey((int)posNum))
+        if (team1ButtonDic.ContainsKey(posNum))
         {
-            team1ButtonDic.TryGetValue((int)posNum,out tar);
-        }else{
-            Debug.Log("错误的位置值："+posNum);
+            team1ButtonDic.TryGetValue(posNum, out tar);
+        }
+        else
+        {
+            Debug.Log("错误的位置值：" + posNum);
             yield break;
-        }        
+        }
         if (tar == null)
         {
             Debug.Log("严重错误");
@@ -71,21 +72,18 @@ public class TeamEditManager : MonoBehaviour
                 yield break;
             _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
             characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_one.monsterId);
-            tar.changeIcon(characterResourceInfo == null ? null: monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
+            tar.changeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
                 characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
-        }else{
-            tar.changeIcon(null,Zokusei.Null);
+        }
+        else
+        {
+            tar.changeIcon(null, Zokusei.Null);
         }
         yield break;
     }
-    
+
     public IEnumerator INITeamPosButtons()
     {
-        if (team1ButtonDic == null)
-        {
-            team1ButtonDic = new Dictionary<int, charIcon>();
-            Debug.Log("team1ButtonDic = new Dictionary<int, charIcon>();");
-        }
         team1ButtonDic.Clear();
         if (team1back == null || team1left == null || team1front == null || team1right == null) 
         {
@@ -107,13 +105,13 @@ public class TeamEditManager : MonoBehaviour
         {
             IEnumerator setPosB()
             {
-                TeamEditManager.focusingPosNum = 0;
-                yield return _preparingScene._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                focusingPosNum = 0;
+                yield return preparingScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 charIcon.Seletedfeature(team1back, selectedFrame);
-                yield return _preparingScene._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
+                yield return preparingScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.mainProcessRunner.triggerMainProcess(setPosB());
+            preparingScene.Instance.mainProcessRunner.TriggerMainProcess(setPosB());
         }
         team1back.iconButton.onClick.AddListener(pos1B);
 
@@ -122,13 +120,13 @@ public class TeamEditManager : MonoBehaviour
         {
             IEnumerator setPosL()
             {
-                TeamEditManager.focusingPosNum = 1;
-                yield return _preparingScene._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                focusingPosNum = 1;
+                yield return preparingScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 charIcon.Seletedfeature(team1left, selectedFrame);
-                yield return _preparingScene._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
+                yield return preparingScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.mainProcessRunner.triggerMainProcess(setPosL());
+            preparingScene.Instance.mainProcessRunner.TriggerMainProcess(setPosL());
         }
         team1left.iconButton.onClick.AddListener(pos1L);
 
@@ -137,13 +135,13 @@ public class TeamEditManager : MonoBehaviour
         {
             IEnumerator setPosF()
             {
-                TeamEditManager.focusingPosNum = 2;
-                yield return _preparingScene._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                focusingPosNum = 2;
+                yield return preparingScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 charIcon.Seletedfeature(team1front, selectedFrame);
-                yield return _preparingScene._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
+                yield return preparingScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.mainProcessRunner.triggerMainProcess(setPosF());
+            preparingScene.Instance.mainProcessRunner.TriggerMainProcess(setPosF());
         }
         team1front.iconButton.onClick.AddListener(pos1F);
 
@@ -152,13 +150,13 @@ public class TeamEditManager : MonoBehaviour
         {
             IEnumerator setPosR()
             {
-                TeamEditManager.focusingPosNum = 3;
-                yield return _preparingScene._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                focusingPosNum = 3;
+                yield return preparingScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 charIcon.Seletedfeature(team1right, selectedFrame);
-                yield return _preparingScene._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
+                yield return preparingScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            _preparingScene.mainProcessRunner.triggerMainProcess(setPosR());
+            preparingScene.Instance.mainProcessRunner.TriggerMainProcess(setPosR());
         }
         team1right.iconButton.onClick.AddListener(pos1R);
         yield break;

@@ -8,12 +8,12 @@ using Api.Dto.Model;
 // 先试着把石头添加到一个格子上。
 public class TryEditNineSlot : MainSceneProcess
 {
-    public TryEditNineSlot(preparingScene _preparingScene,ProcessesRunner processesRunner)
+    public TryEditNineSlot(preparingScene _preparingScene, ProcessesRunner processesRunner)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub3;
         this.nextProcessStep = MainSceneStep.none;
         
-        this.processesRunner = processesRunner;
+        this.subProcessesRunner = processesRunner;
         this._preparingScene = _preparingScene;
         this.EelementsInherit(_preparingScene);
     }
@@ -25,7 +25,7 @@ public class TryEditNineSlot : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -99,14 +99,14 @@ public class TryEditNineSlot : MainSceneProcess
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
-            this.processesRunner.changeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
+            this.subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
         }
 
         void SkillUpdateValidation()
         {
-            _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
+            LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);               
@@ -119,7 +119,7 @@ public class TryEditNineSlot : MainSceneProcess
         yield return getchar;
         GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
         CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo);
-        _MemberDetail.presentationProcessRunner.triggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(characterDataInfo));
+        _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(characterDataInfo));
         yield break;
     }
 }

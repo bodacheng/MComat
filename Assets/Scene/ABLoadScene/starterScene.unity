@@ -2381,7 +2381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa7dae6b85a54dc08293af5946ff112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _LoadingCanvas: {fileID: 709095713394522463}
   _ResourceSetting: {fileID: 144245842945334449}
   _ConfigFileManager: {fileID: 1428483490221249642}
   assetBundleURL: http://18.218.70.129/ios
@@ -2486,7 +2485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafbe9f53ee7d42cd91d396ff5b380fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _LoadingCanvas: {fileID: 709095713394522463}
   LocalMode: {fileID: 538625500}
   NetMode: {fileID: 1810613761}
   _resourceLordSceneStarter: {fileID: 2075428156307059468}

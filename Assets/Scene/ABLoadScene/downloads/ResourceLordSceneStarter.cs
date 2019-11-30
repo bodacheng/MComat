@@ -36,10 +36,6 @@ public class CachDownLoadMission
 
 public partial class ResourceLordSceneStarter : MonoBehaviour
 {
-    [Space(7)]
-    [Header("LoadingProcess")]
-    public LoadingCanvas _LoadingCanvas;
-
     [Header("资源读取设置")]
     public ResourceSetting _ResourceSetting;
     public ConfigFileManager _ConfigFileManager;
@@ -49,12 +45,12 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     public string assetBundleURL = "http://18.218.70.129/ios";
     public static string BundleURL = "http://18.218.70.129/ios";
     
-    public bool dProcessFinished = false;    
-    private IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
-    private IDictionary<string, List<string>> characterTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
-    private CachDownLoadMission modelConfigFileMission;
-    private CachDownLoadMission animationConfigFileMission;
-    
+    public bool dProcessFinished;
+    IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
+    IDictionary<string, List<string>> characterTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
+    CachDownLoadMission modelConfigFileMission;
+    CachDownLoadMission animationConfigFileMission;
+
     void Start()
     {
         BundleURL = assetBundleURL;
@@ -91,10 +87,10 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         ResourceLoadingSetting.Instance.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
         ResourceLoadingSetting.Instance.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
         ResourceLoadingSetting.Instance.IconLoadingMode = _ResourceSetting.IconLoadingMode;
-        
-        _LoadingCanvas.Loading_Canvas.gameObject.SetActive(true);
-        _LoadingCanvas.turnOnProcessDescription(true);
-        _LoadingCanvas.nowProcess("正在加载资源",0);
+
+        LoadingCanvas.target.DarkOff(0.5f);
+        LoadingCanvas.target.TurnOnProcessDescription(true);
+        LoadingCanvas.target.NowProcess("正在加载资源",0);
         
         switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
         {
@@ -106,7 +102,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             case ResourceLoadMode.Resource:
                 yield return monstersConfigTable.Instance.loadMonstersConfig();
                 yield return SkillConfigTable.Instance.loadAllSkillConfigs();
-                _LoadingCanvas.nowProcess("正在加载资源",0.1f);
+                LoadingCanvas.target.NowProcess("正在加载资源",0.1f);
                 break;
         }
 
@@ -148,7 +144,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 {
                     yield return AnimationResourceLoader.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
                     i++;
-                    _LoadingCanvas.nowProcess("正在加载资源", i/_ConfigFileManager.chartypes.Length);
+                    LoadingCanvas.target.NowProcess("正在加载资源", i/_ConfigFileManager.chartypes.Length);
                     yield return null;
                 }
                 break;
@@ -173,28 +169,26 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     // 3.下载进程显示。
     // 4.下载错误总结. 进入主程序文件审核。
     // 5.主程运行中文件检查，重下载。
-    IEnumerator downloadingProcess()
+    IEnumerator DownloadingProcess()
     {
         foreach (KeyValuePair<string, CachDownLoadMission> _keyvalue in DownLoadMissionDic)
         {
-            yield return letThisloadMissionBegin(_keyvalue.Value);
+            yield return LetThisloadMissionBegin(_keyvalue.Value);
         }
         DownLoadMissionDic.Clear();
         yield break;
     }
 
-    public IEnumerator letThisloadMissionBegin(CachDownLoadMission _CachDownLoadMission)
+    public IEnumerator LetThisloadMissionBegin(CachDownLoadMission _CachDownLoadMission)
     {
         IEnumerator task;
         if (_CachDownLoadMission != null)
         {
             task = CachManager.Instance.DownloadAndCacheExactFile(BundleURL + "/" +_CachDownLoadMission.subPath, _CachDownLoadMission.filename);
             yield return task;
-            if (task.Current != null)
-                _CachDownLoadMission.downloadfinished = true;
-            else
-                _CachDownLoadMission.downloadfinished = false;
-        }else{
+            _CachDownLoadMission.downloadfinished = task.Current != null;
+        }
+        else{
             Debug.Log("下载任务建立错误");
         }
     }

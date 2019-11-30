@@ -56,17 +56,19 @@ namespace dataAccess
 
         public IEnumerator SaveTeamSet(TeamSetGameMode teamSetGameMode)
         {
+            LoadingCanvas.target.DarkOff(0.5f);
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return TeamSet.Instance.SaveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
+                    yield return Instance.SaveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
                 case playerinfoReferenceMode.formalVersion:
                     break;
                 case playerinfoReferenceMode.localTestSaveData:
-                    TeamSet.Instance.OverrideTeamSetInfoOnJsonFile(teamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
+                    yield return Instance.OverrideTeamSetInfoOnJsonFile(teamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
             }
+            LoadingCanvas.target.LightUp();
             yield break;
         }
 

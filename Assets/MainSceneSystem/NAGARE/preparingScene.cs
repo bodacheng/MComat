@@ -53,10 +53,6 @@ namespace mainMenu
         public GUISkin CustomGUISkin;
 
         [Space(7)]
-        [Header("MonsterBox")]
-        public MonsterBox _MonsterBox;
-
-        [Space(7)]
         [Header("队伍编辑器")]
         public TeamEditManager _TeamEditManager;
 
@@ -72,10 +68,6 @@ namespace mainMenu
         [Header("抽奖管理模块")]
         public gotchaManager _gotchaManager;
         
-        [Space(7)]
-        [Header("LoadingProcess")]
-        public LoadingCanvas _LoadingCanvas;
-
         //preparingscene应该就是只有这些画布
         [Space(7)]
         [Header("Canvas")]
@@ -87,13 +79,10 @@ namespace mainMenu
         public RectTransform JiNengRongLian_selectT;
         public RectTransform RonglianConfirmGAMENT;
         public RectTransform FightModeChooseT;
-        
         public RectTransform SeasonsT;
         public RectTransform AllSeasonsGamensT;
         public RectTransform SelfFightUIT;
         
-        public ProcessesRunner processesRunner;
-
         void Awake()
         {
             Instance = this;
@@ -105,7 +94,7 @@ namespace mainMenu
             //_stagesManager.loadAndRefresh();
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
-            mainProcessRunner.triggerMainProcess(StartUpProcess());
+            mainProcessRunner.TriggerMainProcess(StartUpProcess());
         }
 
         // 这个应该是和热更新进程完全分开了。
@@ -120,6 +109,7 @@ namespace mainMenu
         {
             //QualitySettings.vSyncCount = 1;
             Application.targetFrameRate = 60;
+            yield return null; // 这一行的目的是为了让整个项目那些靠start（）里进行初始化工作的模块顺利完成初始化后在开始下面的各种加载 
 
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.Instance.gameObject.SetActive(false);
@@ -127,9 +117,9 @@ namespace mainMenu
             _MemberDetail._LevelManager.turnOnUI(false);
             MainMenuCanvas.gameObject.SetActive(false);
 
-            _LoadingCanvas.Loading_Canvas.gameObject.SetActive(true);
-            _LoadingCanvas.turnOnProcessDescription(true);
-            _LoadingCanvas.nowProcess("正在读取账户信息", 0);
+            LoadingCanvas.target.DarkOff(0.5f);
+            LoadingCanvas.target.TurnOnProcessDescription(true);
+            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
 
             //SceneProcessDictionary
             TeamEditFront teamEditFront = new TeamEditFront(this);
@@ -146,31 +136,31 @@ namespace mainMenu
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit(this);
             GotchaProcess gotchaProcess = new GotchaProcess(this);
 
-            processesRunner = new ProcessesRunner();
-            processesRunner.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
-            processesRunner.AddNewProcess(MainSceneStep.SkillStones, skillStones);
-            processesRunner.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
-            processesRunner.AddNewProcess(MainSceneStep.ChaptersOfOneSeason, _ShowOneSeasonChapters);
-            processesRunner.AddNewProcess(MainSceneStep.SeasonsGamen, seasonsGamen);
-            processesRunner.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
-            processesRunner.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
-            processesRunner.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
-            processesRunner.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
-            processesRunner.AddNewProcess(MainSceneStep.frontPage, frontPage);
-            processesRunner.AddNewProcess(MainSceneStep.Chapter, chapterProcess);
-            processesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
-            processesRunner.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
+            ProcessesRunner.Instance.Clear();
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones, skillStones);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ChaptersOfOneSeason, _ShowOneSeasonChapters);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SeasonsGamen, seasonsGamen);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.frontPage, frontPage);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Chapter, chapterProcess);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
 
             charIcon.iniFrames();
-            _LoadingCanvas.nowProcess("正在启动技能石头背包", 0.6f);
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             yield return (_SkillStonesBox.StartUp());
-            _LoadingCanvas.nowProcess("正在加载技能编辑器", 0.7f);
+            LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.Instance.StartUp());
 
             yield return AccountSet.Instance.loadCustomerInfo();
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
-            _LoadingCanvas.turnOnProcessDescription(false);
+            LoadingCanvas.target.TurnOnProcessDescription(false);
             yield return _modelShower.StartUpProcess();
             
             // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
@@ -184,7 +174,7 @@ namespace mainMenu
                     yield return (localMyChractersProcess);
                     //上面这些都缺response判断
                     yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
-                    yield return MonsterBox.MonsterIconsGenerate();//这个进程会先找到所有角色的头像。
+                    yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;
                     yield return _TeamEditManager.INITeamPosButtons();
@@ -197,17 +187,17 @@ namespace mainMenu
                     trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
                     break;
             }
-            _LoadingCanvas.LightUp();
+            LoadingCanvas.target.LightUp();
         }
 
         void Update()
         {
-            processesRunner.ProcessNagare();
+            ProcessesRunner.Instance.ProcessNagare();
         }
-
+        
         public void AskIfLoadFight(SceneMode sceneMode, StageScriptableObject stage)
         {
-            _LoadingCanvas.arrangeValiationWindow(delegate { LoadFight(sceneMode, stage); }, "开打？");
+            LoadingCanvas.target.ArrangeValiationWindow(delegate { LoadFight(sceneMode, stage); }, "开打？");
         }
 
         public void LoadFight(SceneMode sceneMode, StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
@@ -227,9 +217,9 @@ namespace mainMenu
         [EnumAction(typeof(MainSceneStep))]
         public void trySwitchToStep(MainSceneStep next_step, bool foward)//这个是试图进入某个step。另一个是根据一些东西的选择情况来在某个step内对GUI进行刷新。两个都需要。
         {
-            if (foward && processesRunner.currentProcess != null)
+            if (foward && ProcessesRunner.Instance.currentProcess != null)
             {
-                MainSceneStep returnToStep = processesRunner.currentProcess.thisProcessStep;
+                MainSceneStep returnToStep = ProcessesRunner.Instance.currentProcess.thisProcessStep;
                 void returnTOCurrent()
                 {
                     trySwitchToStep(returnToStep, false);
@@ -237,14 +227,14 @@ namespace mainMenu
                 _ReturnButtonManager.PUSH(returnTOCurrent);
             }
 
-            processesRunner.changeProcess(next_step);
+            ProcessesRunner.Instance.ChangeProcess(next_step);
         }
 
         //看起来这个函数不应该在这个模块里，但其中的各种操作和整个mainmenu的乱七八糟东西相关性实在太多了，所以姑且放在这
         public IEnumerator MonsterIconButton(string localId)
         {
             Debug.Log("于monsterbox点下了如下localid的头像：" + localId);
-            switch (processesRunner.currentProcess.thisProcessStep)
+            switch (ProcessesRunner.Instance.currentProcess.thisProcessStep)
             {
                 case MainSceneStep.SelfFightFront:
                     yield return _SelfFightManager.MonsterIConButton(localId);
@@ -255,7 +245,7 @@ namespace mainMenu
                     break;
                 case MainSceneStep.TeamEditFront:
                      yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(localId);//确立focusing角色
-                    TeamEditFront process = (TeamEditFront)processesRunner.accessCertainMainSceneProcessObject(MainSceneStep.TeamEditFront);
+                    TeamEditFront process = (TeamEditFront)ProcessesRunner.Instance.AccessCertainMainSceneProcessObject(MainSceneStep.TeamEditFront);
                     yield return process.TeamEditMonsterDetailMonsterIconBehaviour();
                     yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                     break;
@@ -270,7 +260,7 @@ namespace mainMenu
             {
                 if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
                 {
-                    mainProcessRunner.triggerMainProcess(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
+                    mainProcessRunner.TriggerMainProcess(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
                 }
                 if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
                 {
@@ -292,7 +282,7 @@ namespace mainMenu
                         MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
                         yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
                     }
-                    mainProcessRunner.triggerMainProcess(getAllStones());
+                    mainProcessRunner.TriggerMainProcess(getAllStones());
                 }
             }
         }

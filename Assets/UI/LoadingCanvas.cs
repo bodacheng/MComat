@@ -6,8 +6,9 @@ using UnityEngine.UI;
 // LoadingCanvas 可以存在很多别的丰富的功能，比如播放视频？用于loading画面？
 public class LoadingCanvas : MonoBehaviour {
 
-    public HollowOutMask hollowOutMask;
+    public static LoadingCanvas target;
 
+    public HollowOutMask hollowOutMask;
     public Canvas Loading_Canvas;
     public Slider loadingBar;
     public Text processingDescrition;
@@ -24,17 +25,22 @@ public class LoadingCanvas : MonoBehaviour {
     [Space(7)]
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
-    
-    public void nowProcess(string desription,float percent)
+
+    void Start()
     {
-        this.processingDescrition.text = desription;
-        this.loadingBar.value = percent;
+        target = this;
     }
 
-    public void turnOnProcessDescription(bool _b)
+    public void NowProcess(string desription,float percent)
     {
-        this.loadingBar.gameObject.SetActive(_b);
-        this.processingDescrition.gameObject.SetActive(_b);
+        processingDescrition.text = desription;
+        loadingBar.value = percent;
+    }
+
+    public void TurnOnProcessDescription(bool _b)
+    {
+        loadingBar.gameObject.SetActive(_b);
+        processingDescrition.gameObject.SetActive(_b);
     }
     
     public void HigtLightRect(Transform _Transform)
@@ -54,15 +60,15 @@ public class LoadingCanvas : MonoBehaviour {
 
     public void LightUp()
     {
-        mainProcessRunner.triggerMainProcess(lightUpCanvas());
+        mainProcessRunner.TriggerMainProcess(LightUpCanvas());
     }
 
     public void DarkOff(float darkness)
     {
-        mainProcessRunner.triggerMainProcess(darkOffCanvas(darkness));
+        mainProcessRunner.TriggerMainProcess(DarkOffCanvas(darkness));
     }
 
-    private IEnumerator lightUpCanvas()
+    IEnumerator LightUpCanvas()
     {
         float a = 1;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
@@ -76,9 +82,9 @@ public class LoadingCanvas : MonoBehaviour {
         yield break;
     }
 
-    private IEnumerator darkOffCanvas(float toAlpha)
+    IEnumerator DarkOffCanvas(float toAlpha)
     {
-        this.Loading_Canvas.gameObject.SetActive(true);
+        Loading_Canvas.gameObject.SetActive(true);
         float a = 0;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
         while (a < toAlpha)
@@ -90,14 +96,14 @@ public class LoadingCanvas : MonoBehaviour {
         yield break;
     }
 
-    public void arrangeValiationWindow(UnityEngine.Events.UnityAction action, string intro)
+    public void ArrangeValiationWindow(UnityEngine.Events.UnityAction action, string intro)
     {
         this.Loading_Canvas.gameObject.SetActive(true);
         this.ValidationWindow.gameObject.SetActive(true);
 
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0.5f);
 
-        UnityEngine.Events.UnityAction closeValidationWindow = () =>
+        void closeValidationWindow()
         {
             this.YesButton.onClick.RemoveAllListeners();
             this.NoButton.onClick.RemoveAllListeners();
@@ -105,7 +111,7 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
             this.ValidationWindow.gameObject.SetActive(false);
             this.Loading_Canvas.gameObject.SetActive(false);
-        };
+        }
 
         this.YesButton.onClick.RemoveAllListeners();
         this.YesButton.onClick.AddListener(action);
@@ -116,14 +122,14 @@ public class LoadingCanvas : MonoBehaviour {
         ValidationIntro.text = intro;
     }
 
-    public void arrangeValiationWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
+    public void ArrangeValiationWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
         this.Loading_Canvas.gameObject.SetActive(true);
         this.ValidationWindow.gameObject.SetActive(true);
 
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0.5f);
 
-        UnityEngine.Events.UnityAction closeValidationWindow = () =>
+        void closeValidationWindow()
         {
             this.YesButton.onClick.RemoveAllListeners();
             this.NoButton.onClick.RemoveAllListeners();
@@ -131,7 +137,7 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
             this.ValidationWindow.gameObject.SetActive(false);
             this.Loading_Canvas.gameObject.SetActive(false);
-        };
+        }
 
         this.YesButton.onClick.RemoveAllListeners();
         this.YesButton.onClick.AddListener(action);

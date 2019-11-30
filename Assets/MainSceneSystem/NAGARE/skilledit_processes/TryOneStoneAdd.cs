@@ -70,12 +70,12 @@ public class TryOneStoneAdd : MainSceneProcess
 
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
     {
-        this._LoadingCanvas.ClearHigtLight();
+        LoadingCanvas.target.ClearHigtLight();
     }
 
     public override void LocalUpdate()
@@ -85,7 +85,7 @@ public class TryOneStoneAdd : MainSceneProcess
             if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
             {
                 step = 2;
-                this._LoadingCanvas.HigtLightRect(TheNineSlot.Instance.A1DragAndDropCell.transform);
+                LoadingCanvas.target.HigtLightRect(TheNineSlot.Instance.A1DragAndDropCell.transform);
             }
         }
         if (step == 2)
@@ -93,7 +93,7 @@ public class TryOneStoneAdd : MainSceneProcess
             if (this._MemberDetail._SkillsPrintOut.IfShowingSkill)
             {
                 step = 3;
-                this._LoadingCanvas.ClearHigtLight();
+                LoadingCanvas.target.ClearHigtLight();
             }
         }
         if (step == 3)
@@ -102,7 +102,7 @@ public class TryOneStoneAdd : MainSceneProcess
             {
                 step = 4;
                 TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(true);
-                _LoadingCanvas.HigtLightRect(TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.transform);
+                LoadingCanvas.target.HigtLightRect(TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.transform);
             }
         }
     }
@@ -121,12 +121,12 @@ public class TryOneStoneAdd : MainSceneProcess
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
         }
         void SkillUpdateValidation()
         {
-            _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "编辑A1？");
+            LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "编辑A1？");
         }
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
@@ -144,6 +144,6 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
         CharacterDataInfo focusingData = RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo);
-        _MemberDetail.presentationProcessRunner.triggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
+        _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
     }
 }

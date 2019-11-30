@@ -5,10 +5,11 @@ public class FightSceneProcessesRunner
 {
     public static NagareProcess lastProcess;
     public static NagareProcess currentProcess;
-    private static readonly IDictionary<SceneStep, NagareProcess> SceneProcessDictionary = new Dictionary<SceneStep, NagareProcess>();
+    static readonly IDictionary<SceneStep, NagareProcess> SceneProcessDictionary = new Dictionary<SceneStep, NagareProcess>();
 
     public static void Clear()
     {
+        currentProcess = null;
         SceneProcessDictionary.Clear();
     }
 

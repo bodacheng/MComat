@@ -1,28 +1,33 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
-        // 主进程
-    private IEnumerator MenuProcess;
-    private bool processEnded = false;
-    private float processTime = 0;
-    private void setProcessStartEnd(bool a)
+    public static SingleThreadProcesser target;
+    IEnumerator MenuProcess;
+    bool processEnded;
+    float processTime;
+
+    void Start()
+    {
+        target = this;
+    }
+
+    void SetProcessStartEnd(bool a)
     {
         processEnded = a;
     }
-    public void triggerMainProcess(IEnumerator _process)
+    public void TriggerMainProcess(IEnumerator _process)
     {
         StartCoroutine(this.MainProcess(_process));
     }
-    private IEnumerator giveProcessStartEndFlag(IEnumerator _process)
+    IEnumerator GiveProcessStartEndFlag(IEnumerator _process)
     {
-        setProcessStartEnd(false);
+        SetProcessStartEnd(false);
         yield return _process;
-        setProcessStartEnd(true);
+        SetProcessStartEnd(true);
     }
-    private IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
+    IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
     {
         if (MenuProcess != null)
         {
@@ -36,10 +41,10 @@ public class SingleThreadProcesser : MonoBehaviour
                     break;
                 }
                 yield return null;
-            };
+            }
         }
         processTime = 0;
-        MenuProcess = giveProcessStartEndFlag(_process);
+        MenuProcess = GiveProcessStartEndFlag(_process);
         yield return MenuProcess;
     }
 }

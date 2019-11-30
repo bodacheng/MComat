@@ -12,8 +12,8 @@ public class SelfFightFront : MainSceneProcess
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         this._SelfFightManager.Clear();
         yield return this._SelfFightManager.INITeamPosButtons();
-        this._MonsterBox.MonsterBoxContainer.gameObject.SetActive(true);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
+        MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         yield return MonsterBox.DisplayMonsterIcons();
         this._SelfFightManager.selfFightUI.gameObject.SetActive(true);
         yield return _modelShower.ShowThisCharacterModel(null);
@@ -33,13 +33,13 @@ public class SelfFightFront : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
         this._SelfFightManager.selfFightUI.gameObject.SetActive(false);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()

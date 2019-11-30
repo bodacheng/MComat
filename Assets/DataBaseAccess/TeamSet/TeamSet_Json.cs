@@ -60,7 +60,7 @@ namespace dataAccess
             }
         }
 
-        public void OverrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
+        public IEnumerator OverrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
         {
             switch (teamSetGameMode)
             {
@@ -73,6 +73,7 @@ namespace dataAccess
                     LocalJson.saveInfoToJsonFile(null, "arena3V3TeamSet.json", json1);
                     break;
             }
+            yield break;
         }
     }
 }

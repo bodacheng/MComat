@@ -25,21 +25,21 @@ namespace mainMenu
 
         public QuestPreparePage _QuestPreparePage;
 
-        private readonly IDictionary<int, charIcon> team1ButtonDic_M = new Dictionary<int, charIcon>();
-        private readonly IDictionary<int, charIcon> team2ButtonDic_M = new Dictionary<int, charIcon>();
-        private IDictionary<int, charIcon> team1ButtonDic_R = new Dictionary<int, charIcon>();
-        private IDictionary<int, charIcon> team2ButtonDic_R = new Dictionary<int, charIcon>();
+        readonly IDictionary<int, charIcon> team1ButtonDic_M = new Dictionary<int, charIcon>();
+        readonly IDictionary<int, charIcon> team2ButtonDic_M = new Dictionary<int, charIcon>();
+        IDictionary<int, charIcon> team1ButtonDic_R = new Dictionary<int, charIcon>();
+        IDictionary<int, charIcon> team2ButtonDic_R = new Dictionary<int, charIcon>();
 
-        private LocalFight _selfFight= new LocalFight{ };
-        private StageScriptableObject stage;
-        private Team focusingTeam; //team1或者是team2
-        private int focusingPosition; // 0到3
-        private readonly charIcon focusingPosButton;
+        LocalFight _selfFight = new LocalFight { };
+        StageScriptableObject stage;
+        Team focusingTeam; //team1或者是team2
+        int focusingPosition; // 0到3
+        readonly charIcon focusingPosButton;
 
-        private PositionLocalCharKeySet _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
-        private PositionLocalCharKeySet _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
-        private PositionLocalCharKeySet _team1positionLocalCharKeySet_R = new PositionLocalCharKeySet();
-        private PositionLocalCharKeySet _team2positionLocalCharKeySet_R = new PositionLocalCharKeySet();
+        PositionLocalCharKeySet _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
+        PositionLocalCharKeySet _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
+        PositionLocalCharKeySet _team1positionLocalCharKeySet_R = new PositionLocalCharKeySet();
+        PositionLocalCharKeySet _team2positionLocalCharKeySet_R = new PositionLocalCharKeySet();
 
         void Start()
         {
@@ -106,7 +106,7 @@ namespace mainMenu
 
         public IEnumerator FightStart()
         {
-            _preparingScene._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
+            MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
@@ -127,7 +127,7 @@ namespace mainMenu
                     break;
             }
             stage.localFight = _selfFight;
-            yield return _QuestPreparePage.getReadyToBattle(stage, SceneMode.MyPetsFight);
+            yield return _QuestPreparePage.GetReadyToBattle(stage, SceneMode.MyPetsFight);
             yield break;
         }
 
@@ -359,7 +359,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                _preparingScene.mainProcessRunner.triggerMainProcess(FightStart());
+                _preparingScene.mainProcessRunner.TriggerMainProcess(FightStart());
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

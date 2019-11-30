@@ -77,7 +77,7 @@ namespace mainMenu
 
             UnityEngine.Events.UnityAction ConfirmlevelUp = () =>
              {
-                 preparingScene.mainProcessRunner.triggerMainProcess
+                 preparingScene.mainProcessRunner.TriggerMainProcess
                      (AccountCharsSet.instance.PlusExpForAccountChar(focusingCharacterDataInfo.monsterOfPlayerId, focusingCharacterDataInfo.experience));
              };
             UnityEngine.Events.UnityAction levelUpCancel = () =>
@@ -90,7 +90,7 @@ namespace mainMenu
 
             UnityEngine.Events.UnityAction Confirmfeature = () =>
             {
-                preparingScene._LoadingCanvas.arrangeValiationWindow(ConfirmlevelUp, levelUpCancel, "升级？");
+                LoadingCanvas.target.ArrangeValiationWindow(ConfirmlevelUp, levelUpCancel, "升级？");
             };
             confirmEX.onClick.RemoveAllListeners();
             confirmEX.onClick.AddListener(Confirmfeature);

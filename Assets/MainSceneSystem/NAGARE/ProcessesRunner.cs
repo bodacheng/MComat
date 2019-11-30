@@ -1,14 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 
+// 这个进程处理器写成单例模式，并不代表说它除了那一个单例外就没发生成其他instance。可能在一些情况下单独建立它的instance比如在一个进程的内部。
 public class ProcessesRunner
 {
+    static ProcessesRunner instance;
+    public static ProcessesRunner Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new ProcessesRunner();
+            }
+            return instance;
+        }
+    }
+
     public MainSceneProcess lastProcess;
     public MainSceneProcess currentProcess;
-    IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
-    
+    readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
+
+    public void Clear()
+    {
+        lastProcess = null;
+        currentProcess = null;
+        SceneProcessDictionary.Clear();
+    }
+
     public void AddNewProcess(MainSceneStep step,MainSceneProcess _process)
     {
         SceneProcessDictionary.Add(step, _process);
@@ -21,12 +41,12 @@ public class ProcessesRunner
             currentProcess.LocalUpdate();
             if (currentProcess.CanEnterOtherProcess() && currentProcess.nextProcessStep != MainSceneStep.none)
             {
-                changeProcess(currentProcess.nextProcessStep);
+                ChangeProcess(currentProcess.nextProcessStep);
             }
         }
     }
 
-    public void changeProcess(MainSceneStep sceneStep)
+    public void ChangeProcess(MainSceneStep sceneStep)
     {
         if (currentProcess != null)
             currentProcess.ProcessEnd();
@@ -47,7 +67,7 @@ public class ProcessesRunner
         }
     }
     
-    public MainSceneProcess accessCertainMainSceneProcessObject(MainSceneStep step)
+    public MainSceneProcess AccessCertainMainSceneProcessObject(MainSceneStep step)
     {
         return SceneProcessDictionary[step];
     }

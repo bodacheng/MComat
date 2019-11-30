@@ -51,7 +51,7 @@ public class TryEditALines : MainSceneProcess
 
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -86,8 +86,8 @@ public class TryEditALines : MainSceneProcess
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
             StageScriptableObject stage = new StageScriptableObject
             {
                 battleNameCH = "亚当大战傻逼门卫"
@@ -112,7 +112,7 @@ public class TryEditALines : MainSceneProcess
 
         void SkillUpdateValidation()
         {
-            _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
+            LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);

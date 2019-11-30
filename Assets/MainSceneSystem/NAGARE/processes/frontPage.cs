@@ -8,7 +8,7 @@ public class frontPage : MainSceneProcess
 {
     public frontPage(preparingScene _preparingScene)
     {
-        this.thisProcessStep = MainSceneStep.frontPage;
+        thisProcessStep = MainSceneStep.frontPage;
         this._preparingScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
@@ -20,15 +20,15 @@ public class frontPage : MainSceneProcess
     
     public IEnumerator enterProcess()
     {
-        this._preparingScene.MainMenuCanvas.gameObject.SetActive(true);
+        _preparingScene.MainMenuCanvas.gameObject.SetActive(true);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
-        this._preparingScene.FightModeChooseT.gameObject.SetActive(true);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+        _preparingScene.FightModeChooseT.gameObject.SetActive(true);
 
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
-        this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
+        _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
+        _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
+        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
 
         yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
         
@@ -47,7 +47,7 @@ public class frontPage : MainSceneProcess
         
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

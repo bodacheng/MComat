@@ -34,9 +34,9 @@ namespace mainMenu
         }
 
         //这个函数只考虑了队员的加载。。。
-        public IEnumerator getReadyToBattle(StageScriptableObject stage, SceneMode sceneMode)
+        public IEnumerator GetReadyToBattle(StageScriptableObject stage, SceneMode sceneMode)
         {
-            _preparingScene._LoadingCanvas.DarkOff(1f);
+            LoadingCanvas.target.DarkOff(1f);
             foreach (Transform _child in myTeamShowT)
             {
                 Destroy(_child.gameObject);
@@ -77,12 +77,12 @@ namespace mainMenu
             enterQuest.onClick.AddListener(Go);
 
             _preparingScene.trySwitchToStep(MainSceneStep.QuestInfo, true);
-            _preparingScene._LoadingCanvas.LightUp();
+            LoadingCanvas.target.LightUp();
             yield break;
         }
 
         // 这个函数目前是固定使用“默认队伍配置”
-        public IEnumerator loadStageByScriptThenGetReadyForIt(StageScriptableObject _StageScriptableObject)
+        public IEnumerator LoadStageByScriptThenGetReadyForIt(StageScriptableObject _StageScriptableObject)
         {
             QuestName.text = _StageScriptableObject.battleNameJPG;
             _StageScriptableObject.loadLocalFightFromScript();
@@ -93,10 +93,8 @@ namespace mainMenu
             {
                 Debug.Log("严重错误。get不到队员"); yield break;
             }
-            mainProcessRunner.triggerMainProcess(getReadyToBattle(_StageScriptableObject, SceneMode.QuestFight));
+            mainProcessRunner.TriggerMainProcess(GetReadyToBattle(_StageScriptableObject, SceneMode.QuestFight));
             yield break;
         }
-
-
     }
 }

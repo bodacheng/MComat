@@ -6,9 +6,7 @@ using dataAccess;
 namespace mainMenu
 {
     public abstract class MainSceneProcess
-    {
-        public ProcessesRunner processesRunner;//可能一般不需要。
-        
+    {        
         public MainSceneStep thisProcessStep;
         public MainSceneStep nextProcessStep = MainSceneStep.none;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
@@ -16,16 +14,16 @@ namespace mainMenu
         public SingleThreadProcesser mainProcessRunner;
         public MemberDetail _MemberDetail;
         public ModelShower _modelShower;
-        public MonsterBox _MonsterBox;
         public CharsManager _CharsManager;
         public TeamEditManager _TeamEditManager;
         public ReturnButtonManager _ReturnButtonManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
-        public LoadingCanvas _LoadingCanvas;
         public ChaptersManager _ChaptersManager;
         public QuestPreparePage _QuestPreparePage;
         public gotchaManager _gotchaManager;
+
+        public ProcessesRunner subProcessesRunner;
 
         public void EelementsInherit(preparingScene _preparingScene)
         {
@@ -36,8 +34,6 @@ namespace mainMenu
             _ReturnButtonManager = _preparingScene._ReturnButtonManager;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
-            _LoadingCanvas = _preparingScene._LoadingCanvas;
-            _MonsterBox = _preparingScene._MonsterBox;
             _QuestPreparePage = _preparingScene._QuestPreparePage;
             _ChaptersManager = _preparingScene._ChaptersManager;
             _TeamEditManager = _preparingScene._TeamEditManager;

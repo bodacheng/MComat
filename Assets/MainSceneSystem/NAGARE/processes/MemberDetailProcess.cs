@@ -20,7 +20,7 @@ public class MemberDetailProcess : MainSceneProcess
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
         yield return MonsterBox.DisplayMonsterIcons();
         //this._MonsterBox.adjustAllIconsSize(null);
-        _MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
     }
 
@@ -31,14 +31,14 @@ public class MemberDetailProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.triggerMainProcess(EnterProcess());
+        mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
         _MemberDetail.MemberInfoT.gameObject.SetActive(false);
-        _MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);

@@ -9,8 +9,8 @@ public class SkillStones : MainSceneProcess
     //enterProcess()绝不能出现triggerMainProcess
     public IEnumerator EnterProcess()
     {
-        this._LoadingCanvas.DarkOff(1f);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
+        LoadingCanvas.target.DarkOff(1f);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         
@@ -19,7 +19,7 @@ public class SkillStones : MainSceneProcess
                 
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(true);//这一行因为牵扯到对玩家存档中技能石头的读取所以可能是(协程)
-        this._LoadingCanvas.LightUp();
+        LoadingCanvas.target.LightUp();
     }
     
     public SkillStones(preparingScene _preparingScene)
@@ -36,7 +36,7 @@ public class SkillStones : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

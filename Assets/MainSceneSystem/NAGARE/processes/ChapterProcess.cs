@@ -8,10 +8,10 @@ public class ChapterProcess : MainSceneProcess
     RectTransform T;
     public IEnumerator enterProcess()
     {
-        this._LoadingCanvas.DarkOff(1f);
+        LoadingCanvas.target.DarkOff(1f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         this.T.gameObject.SetActive(true);
-        this._LoadingCanvas.LightUp();
+        LoadingCanvas.target.LightUp();
         yield break;
     }
     
@@ -30,7 +30,7 @@ public class ChapterProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

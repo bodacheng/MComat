@@ -55,12 +55,12 @@ public class TryChangeStonePos : MainSceneProcess
                 _preparingScene.LoadFight(SceneMode.QuestFight, stage);
                 this.ProcessEnd();
             }
-            mainProcessRunner.triggerMainProcess(skilleditconfrim());
+            mainProcessRunner.TriggerMainProcess(skilleditconfrim());
         }
 
         void SkillUpdateValidation()
         {
-            _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
+            LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
@@ -74,7 +74,7 @@ public class TryChangeStonePos : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

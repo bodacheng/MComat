@@ -9,7 +9,7 @@ public class GotchaProcess : MainSceneProcess
     //enterProcess()绝不能出现triggerMainProcess
     public IEnumerator enterProcess()
     {
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(false);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         this._gotchaManager.gotchaCanvas.gameObject.SetActive(true);
@@ -30,7 +30,7 @@ public class GotchaProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()

@@ -32,7 +32,6 @@ public abstract class NagareProcess
     public DebugManager debugManager;
     public CharsManager CharsManager;
     public CameraManager cameraManager;
-    public LoadingCanvas loadingCanvas;
     public FightLogger fightLogger;
     public FightOverControl fightOverControl;
     public SingleThreadProcesser mainProcessRunner;
@@ -46,7 +45,6 @@ public abstract class NagareProcess
         this.mobileInputsManager = this._RealTimeGameProcessManager._mobileInputsManager;
         this.CharsManager = this._NetFightScene._CharSetManager;
         this.cameraManager = this._RealTimeGameProcessManager._CameraManager;
-        this.loadingCanvas = this._NetFightScene._LoadingCanvas;
         this.fightOverControl = this._NetFightScene._FightOverControl;
         this.fightTalksRunner = this._NetFightScene._FightTalksRunner;
         this.debugManager = this._NetFightScene._DebugManager;

@@ -12,6 +12,6 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             CachDownLoadMission _oneMission = new CachDownLoadMission( "charPretabs/" + row.MONSTER_TYPE,row.REAL_NAME, 0f);
             DownLoadMissionDic.Add("charPretabs/" + row.MONSTER_TYPE + "/" + row.REAL_NAME, _oneMission);//这个key就是副地址，本地其他读取模型的地方也是用的这样的key
         }
-        yield return downloadingProcess();
+        yield return DownloadingProcess();
     }
 }

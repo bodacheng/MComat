@@ -10,7 +10,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         
         ////////////  下面开始下载并阅读角色配置文件 ////////////
         modelConfigFileMission = new CachDownLoadMission( "Configs","monstersconfig", 0f);
-        IEnumerator _loadingProcess = letThisloadMissionBegin(modelConfigFileMission);
+        IEnumerator _loadingProcess = LetThisloadMissionBegin(modelConfigFileMission);
         yield return _loadingProcess;
         if (!modelConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
         {
@@ -54,7 +54,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         
         ////////////  下面开始下载并阅读技能配置文件 ////////////
         animationConfigFileMission = new CachDownLoadMission( "Configs","mst_skill", 0f);
-        _loadingProcess = letThisloadMissionBegin(animationConfigFileMission);
+        _loadingProcess = LetThisloadMissionBegin(animationConfigFileMission);
         yield return _loadingProcess;
         if (!animationConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
         {

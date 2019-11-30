@@ -5,16 +5,16 @@ using Api.Dto.Model;
 
 public class TeamEditFront : MainSceneProcess
 {
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
-        this._LoadingCanvas.DarkOff(0.5f);
+        LoadingCanvas.target.DarkOff(0.5f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        this._MonsterBox.MonsterBoxWholeT.gameObject.SetActive(true);
-        this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
-        this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
+        _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
+        _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         yield return MonsterBox.DisplayMonsterIcons();
-        this._TeamEditManager.OpenButtons(true);
-        this._LoadingCanvas.LightUp();
+        _TeamEditManager.OpenButtons(true);
+        LoadingCanvas.target.LightUp();
         yield break;
     }
     
@@ -32,7 +32,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

@@ -16,7 +16,7 @@ public class FightSummaryProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.triggerMainProcess(fightOverControl.showRewards(999,999,new System.Collections.Generic.List<int>()));
+        mainProcessRunner.TriggerMainProcess(fightOverControl.showRewards(999,999,new System.Collections.Generic.List<int>()));
     }
     
     public override void ProcessEnd()

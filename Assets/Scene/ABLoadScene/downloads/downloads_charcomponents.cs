@@ -29,6 +29,6 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             // 但上面这些存在一个比较大的坑就是这些下载过程直接把所有type角色的伤害动画和基础动画都载入了内存，如果这样做负担很大我们要研究对上面两个函数进行修改。
             // 这个地方还差个各个type的generic_controller包下载的问题。            
         }
-        yield return downloadingProcess();
+        yield return DownloadingProcess();
     }
 }

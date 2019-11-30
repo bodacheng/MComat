@@ -7,7 +7,7 @@ using Api.Dto.Model;
 namespace mainMenu
 {
     public class MemberDetail : MonoBehaviour
-    {
+    {    
         [Space(11)]
         [Header("modelShower")]
         public ModelShower _modelShower;
@@ -69,7 +69,7 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                preparingScene.Instance.mainProcessRunner.triggerMainProcess(Step2INIForUIRefresh(focusingCharacterDataInfo));
+                preparingScene.Instance.mainProcessRunner.TriggerMainProcess(Step2INIForUIRefresh(focusingCharacterDataInfo));
             }
             void SkillShow()
             {
@@ -112,7 +112,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.triggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo)));
+            presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo)));
         }
 
         public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharacterDataInfo _focusingCharacterDataInfo)

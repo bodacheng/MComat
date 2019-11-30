@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Api.Dto.Model;
 
 public class monsterboxFilter : MonoBehaviour
 {
@@ -40,12 +38,24 @@ public class monsterboxFilter : MonoBehaviour
     List<charIcon> TypeFilter(List<charIcon> origin_mainMenuIcons)
     {
         List<charIcon> new_mainMenuIcons = new List<charIcon>();
-        for (int i = 0; i < origin_mainMenuIcons.Count; i++)
+        if (typeDropDown.options.Count > 0 && typeDropDown.options[typeDropDown.value] != null)
         {
-            if (origin_mainMenuIcons[i]._CharacterResourceInfo.type == typeDropDown.options[typeDropDown.value].text)
-                new_mainMenuIcons.Add(origin_mainMenuIcons[i]);
+            for (int i = 0; i < origin_mainMenuIcons.Count; i++)
+            {
+                if (origin_mainMenuIcons[i] != null)
+                {
+                    if (origin_mainMenuIcons[i]._CharacterResourceInfo.type == typeDropDown.options[typeDropDown.value].text)
+                        new_mainMenuIcons.Add(origin_mainMenuIcons[i]);
+                }
+                else
+                {
+                    Debug.Log("丢失角色头像");
+                }
+            }
+            return new_mainMenuIcons;
         }
-        return new_mainMenuIcons;
+        Debug.Log("typeDropDown错误。当前type 有：" + typeDropDown.options.Count + "个值");
+        return origin_mainMenuIcons;
     }
 
     List<charIcon> OrderIconsByLevel(List<charIcon> origin_mainMenuIcons)

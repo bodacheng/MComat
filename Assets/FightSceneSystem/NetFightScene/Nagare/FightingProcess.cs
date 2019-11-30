@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Linq;
-using System;
 
 public class FightingProcess : NagareProcess
 {
@@ -47,7 +43,7 @@ public class FightingProcess : NagareProcess
     {
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        mainProcessRunner.triggerMainProcess(FinalMoment(this.fightLogger.getWinner()));
+        mainProcessRunner.TriggerMainProcess(FinalMoment(this.fightLogger.getWinner()));
     }
     
     public override void LocalUpdate()
@@ -66,17 +62,17 @@ public class FightingProcess : NagareProcess
         mobileInputsManager.RefreshButtonPattern();
     }
 
-    private IEnumerator FinalMoment(Team winner)
+    IEnumerator FinalMoment(Team winner)
     {
         Time.timeScale = 0.4f;
         yield return new WaitForSeconds(2f);
-        
+
         List<Data_Center> winners = new List<Data_Center>();
         if (winner == Team.player1)
             winners = AllMembers[Team.player1];
         if (winner == Team.player2)
             winners = AllMembers[Team.player2];
-            
+
         foreach (Data_Center _one in winners)
         {
             if (!_one.IsDead.Value)

@@ -44,10 +44,6 @@ namespace mainMenu
         public Button ConfirmSkillChangeButton;
 
         [Space(7)]
-        [Header("LoadingProcess")]
-        public LoadingCanvas _LoadingCanvas;
-
-        [Space(7)]
         [Header("技能石详细")]
         public skillStoneDetail _skillStoneDetail;
 
@@ -80,7 +76,7 @@ namespace mainMenu
                         _skillStoneDetail.Showname.text = _stoneOnCell._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.type.text = _stoneOnCell._SkillConfigOfSkillStone.type;
                         _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SP_LEVEL);
-                        mainProcessRunner.triggerMainProcess(_SkillsPrintOut.SkillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
+                        mainProcessRunner.TriggerMainProcess(_SkillsPrintOut.SkillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
                     }
                 }
                 button.onClick.RemoveAllListeners();

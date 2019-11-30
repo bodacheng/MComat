@@ -99,9 +99,9 @@ public class RealTimeGameProcessManager : MonoBehaviour
         FightTeam2.Clear();
         _mobileInputsManager.Clear();
     }
-    
-    private List<Transform> outter_watchetargets = new List<Transform>();
-    private List<Transform> inner_watchetargets = new List<Transform>();
+
+    List<Transform> outter_watchetargets = new List<Transform>();
+    List<Transform> inner_watchetargets = new List<Transform>();
     public void FightingStepProcess()
     {
         FightTeam1.LocalFightingUpdate();

@@ -8,7 +8,7 @@ public class MemberDetail_edit : MainSceneProcess
 {
     public IEnumerator enterProcess()
     {
-        this._LoadingCanvas.DarkOff(0.5f);
+        LoadingCanvas.target.DarkOff(0.5f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
@@ -24,7 +24,7 @@ public class MemberDetail_edit : MainSceneProcess
             SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX2Tab.gameObject,5f),
             SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX3Tab.gameObject,5f),
             _CharacterResourceInfo._zokusei);
-        this._LoadingCanvas.LightUp();
+        LoadingCanvas.target.LightUp();
         yield break;
     }
     
@@ -42,7 +42,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
@@ -77,13 +77,13 @@ public class MemberDetail_edit : MainSceneProcess
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            mainProcessRunner.triggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
-            _MemberDetail.presentationProcessRunner.triggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_AccountCharacterInfo));
+            _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
         }
 
         void SkillUpdateValidation()
         {
-            _preparingScene._LoadingCanvas.arrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
+            LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);

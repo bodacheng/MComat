@@ -6,12 +6,12 @@ using mainMenu;
 public class ShowOneSeasonChapters : MainSceneProcess
 {
     RectTransform T;
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
-        this._LoadingCanvas.DarkOff(1f);
+        LoadingCanvas.target.DarkOff(1f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         this.T.gameObject.SetActive(true);
-        this._LoadingCanvas.LightUp();
+        LoadingCanvas.target.LightUp();
         yield break;
     }
     
@@ -31,7 +31,7 @@ public class ShowOneSeasonChapters : MainSceneProcess
     public override void ProcessEnter()
     {
         Debug.Log("ChaptersOfOneSeason " + this._preparingScene._ReturnButtonManager.returnMissionList.Count);
-        this.mainProcessRunner.triggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

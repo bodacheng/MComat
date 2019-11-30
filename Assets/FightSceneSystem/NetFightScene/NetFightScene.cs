@@ -20,10 +20,6 @@ public class NetFightScene : MonoBehaviour {
     [Header("Canvas")]
     public Canvas PreparingCanvas,FightCanvas;
     
-    [Space(7)]
-    [Header("LoadingProcess")]
-    public LoadingCanvas _LoadingCanvas;
-
     [Space(11)]
     [Header("Basic Essentials")]
     public CameraManager _CameraManager;
@@ -75,7 +71,7 @@ public class NetFightScene : MonoBehaviour {
         //QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = 60;
         FightGlobalSetting.scenestep = 1; 
-        mainProcessRunner.triggerMainProcess(FightSceneStartUp());
+        mainProcessRunner.TriggerMainProcess(FightSceneStartUp());
     }
 
     private IEnumerator FightSceneStartUp()
