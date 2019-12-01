@@ -65,7 +65,8 @@ public class TryOneStoneAdd : MainSceneProcess
 
     public override bool CanEnterOtherProcess()
     {
-        return int.Parse(this._MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1;
+        //return int.Parse(this._MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1;
+        return true;
     }
 
     public override void ProcessEnter()
@@ -121,7 +122,7 @@ public class TryOneStoneAdd : MainSceneProcess
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
         }
         void SkillUpdateValidation()
@@ -143,7 +144,7 @@ public class TryOneStoneAdd : MainSceneProcess
             yield break;
         }
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-        CharacterDataInfo focusingData = RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo);
+        CharacterDataInfo focusingData = RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo);
         _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
     }
 }

@@ -9,7 +9,7 @@ using System.Collections;
 /// </summary>
 public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	public static bool dragDisabled = false;										// Drag start global disable
+	public static bool dragDisabled;										// Drag start global disable
 
 	public static DragAndDropItem draggedItem;                                      // Item that is dragged now
 	public static GameObject icon;                                                  // Icon of dragged item
@@ -19,9 +19,9 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 	public static event DragEvent OnItemDragStartEvent;                             // Drag start event
 	public static event DragEvent OnItemDragEndEvent;                               // Drag end event
 
-	private static Canvas canvas;                                                   // Canvas for item drag operation
-	private static string canvasName = "DragAndDropCanvas";                   		// Name of canvas
-	private static int canvasSortOrder = 100;                                       // Sort order for canvas
+    static Canvas canvas;                                                   // Canvas for item drag operation
+    static readonly string canvasName = "DragAndDropCanvas";                        // Name of canvas
+    static readonly int canvasSortOrder = 100;                                       // Sort order for canvas
 
     public Image image;
     //自定义item属性
@@ -31,7 +31,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     // 这个量其实就相当于拥有技能石头的本地id，但是，这个本地id并不是像玩家拥有怪物的localdi那样相对固定，
     // 这个id仅仅是技能石头盒子每次依据检索条件展示所有石头的过程中临时给加的，因此实际的相关财产操作
     // 2019 5.19: 但是。。。其实如果我们真的需要一个不重复的值，那么，在数据库里起码有一个自增的主key不是吗。。
-    public string localID = null;
+    public string skillStoneOfPlayerId;
 
     /// <summary>
     /// Awake this instance.
@@ -84,7 +84,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 			iconRect.pivot = new Vector2(0.5f, 0.5f);
 			iconRect.anchorMin = new Vector2(0.5f, 0.5f);
 			iconRect.anchorMax = new Vector2(0.5f, 0.5f);
-			iconRect.sizeDelta = new Vector2(2 * myRect.rect.width, 2 * myRect.rect.height);
+			iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
             OnItemDragStartEvent?.Invoke(this);                                         // Notify all items about drag start for raycast disabling
         }
         Debug.Log("拖拽操作step1");

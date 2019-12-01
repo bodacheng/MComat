@@ -27,17 +27,31 @@ namespace dataAccess
 
         public SkillStoneOfPlayerInfoModel GetSkillStoneOfPlayerInfoModelByMyStoneId(string id)
         {
-            if (id == null)
-            {
-                //Debug.Log("以null值索引了玩家拥有技能石。请检查问题根源");
-                return new SkillStoneOfPlayerInfoModel();
-            }
-            return mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : new SkillStoneOfPlayerInfoModel();
+            return id == null ? null : mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : null;
         }
 
         public DragAndDropItem GetOneStoneModel(string localStoneid)
         {
             return mySkillStonesObjectsDic.ContainsKey(localStoneid) ? mySkillStonesObjectsDic[localStoneid] : null;
+        }
+        
+        // 待补充
+        public IEnumerator UpdateMySkillStone(SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel)
+        {
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    Instance.OverrideMySkillStoneInfosOnLocalFile(mySkillStonesDataDic.Values.ToList());//这个要改的。现在根本没有一个单独更新技能石的函数
+                // 本地的技能石存档是一个文件，所以只能整体存
+                break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                // 远程对技能石的更新操作是以技能石为单位的
+                break;
+                case playerinfoReferenceMode.formalVersion:
+                
+                break;
+            }
+            yield break;        
         }
 
         public IEnumerator LoadMySkillStones()
@@ -65,108 +79,122 @@ namespace dataAccess
             {
                 yield return SkillStonesBox.Instance.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
             }
-            yield return VerifyAllMyStonesUsingMonsterInfo();
+            //yield return VerifyAllMyStonesUsingMonsterInfo();
             yield break;
+        }
+        
+        // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
+        public List<SkillStoneOfPlayerInfoModel> GetMonsterEquipingStones(string monsterOfPlayerId)
+        {
+            List<SkillStoneOfPlayerInfoModel> targetStones = new List<SkillStoneOfPlayerInfoModel>();
+            foreach(KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in mySkillStonesDataDic)
+            {
+                if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId)
+                {
+                    targetStones.Add(keyValuePair.Value);
+                }
+            }
+            return targetStones;
         }
         
         // 这个函数的作用在于第一个英文单词：核实。 作用是根角色技能编辑存档和玩家技能石存档“相互”核实技能编辑信息。但不会造成技能石的丢失风险
         // 另一方面可以看到一个问题在新石头加入的时候显然不需要运行本函数
-        public IEnumerator VerifyAllMyStonesUsingMonsterInfo()
-        {
-            IDictionary<string, string> usingstoneidandmonsterid = new Dictionary<string, string>();
-            foreach(KeyValuePair<string, GetMonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharacterInfoDictionary)
-            {
-                if (keyValuePair.Value.a1_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a1_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.a1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a1_skill_stone_record_id);
-                        keyValuePair.Value.a1_skill_stone_record_id = "-1";
-                    }
-                }
-                if (keyValuePair.Value.a2_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a2_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.a2_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a2_skill_stone_record_id);
-                        keyValuePair.Value.a2_skill_stone_record_id = "-1";
-                    }
-                }
-                if (keyValuePair.Value.a3_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a3_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.a3_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a3_skill_stone_record_id);
-                        keyValuePair.Value.a3_skill_stone_record_id = "-1";
-                    }
-                }
+        //public IEnumerator VerifyAllMyStonesUsingMonsterInfo()
+        //{
+        //    IDictionary<string, string> usingstoneidandmonsterid = new Dictionary<string, string>();
+        //    foreach(KeyValuePair<string, GetMonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharacterInfoDictionary)
+        //    {
+        //        if (keyValuePair.Value.a1_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a1_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.a1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a1_skill_stone_record_id);
+        //                keyValuePair.Value.a1_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //        if (keyValuePair.Value.a2_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a2_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.a2_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a2_skill_stone_record_id);
+        //                keyValuePair.Value.a2_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //        if (keyValuePair.Value.a3_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.a3_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.a3_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.a3_skill_stone_record_id);
+        //                keyValuePair.Value.a3_skill_stone_record_id = "-1";
+        //            }
+        //        }
 
-                if (keyValuePair.Value.b1_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.b1_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.b1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.b1_skill_stone_record_id);
-                        keyValuePair.Value.b1_skill_stone_record_id = "-1";
-                    }
-                }
-                if (keyValuePair.Value.b2_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.b2_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.b2_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.b2_skill_stone_record_id);
-                        keyValuePair.Value.b2_skill_stone_record_id = "-1";
-                    }
-                }
-                if (keyValuePair.Value.b3_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.b3_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.b3_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.b3_skill_stone_record_id);
-                        keyValuePair.Value.b3_skill_stone_record_id = "-1";
-                    }
-                }
+        //        if (keyValuePair.Value.b1_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.b1_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.b1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.b1_skill_stone_record_id);
+        //                keyValuePair.Value.b1_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //        if (keyValuePair.Value.b2_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.b2_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.b2_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.b2_skill_stone_record_id);
+        //                keyValuePair.Value.b2_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //        if (keyValuePair.Value.b3_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.b3_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.b3_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.b3_skill_stone_record_id);
+        //                keyValuePair.Value.b3_skill_stone_record_id = "-1";
+        //            }
+        //        }
                 
-                if (keyValuePair.Value.c1_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c1_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.c1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.c1_skill_stone_record_id);
-                        keyValuePair.Value.c1_skill_stone_record_id = "-1";
-                    }
-                }
-                if (keyValuePair.Value.c2_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c2_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.c2_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.c2_skill_stone_record_id);
-                        keyValuePair.Value.c2_skill_stone_record_id = "-1";
-                    }
-                }
-                if (keyValuePair.Value.c3_skill_stone_record_id != null)
-                {
-                    if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c3_skill_stone_record_id))
-                        usingstoneidandmonsterid.Add(keyValuePair.Value.c3_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
-                    else{
-                        Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.c3_skill_stone_record_id);
-                        keyValuePair.Value.c3_skill_stone_record_id = "-1";
-                    }
-                }
-            }
-            foreach (KeyValuePair<string,string> keyValuePair in usingstoneidandmonsterid)
-            {
-                SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(keyValuePair.Key);
-                skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = keyValuePair.Value;
-            }
-            yield break;
-        }
+        //        if (keyValuePair.Value.c1_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c1_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.c1_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.c1_skill_stone_record_id);
+        //                keyValuePair.Value.c1_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //        if (keyValuePair.Value.c2_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c2_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.c2_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.c2_skill_stone_record_id);
+        //                keyValuePair.Value.c2_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //        if (keyValuePair.Value.c3_skill_stone_record_id != null)
+        //        {
+        //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c3_skill_stone_record_id))
+        //                usingstoneidandmonsterid.Add(keyValuePair.Value.c3_skill_stone_record_id,keyValuePair.Value.monsterOfPlayerId);
+        //            else{
+        //                Debug.Log("致命错误。要么出现了复数个角色装备同一个技能石，要么一个角色在不同技能槽装备了同一石头.石头的id："+keyValuePair.Value.c3_skill_stone_record_id);
+        //                keyValuePair.Value.c3_skill_stone_record_id = "-1";
+        //            }
+        //        }
+        //    }
+        //    foreach (KeyValuePair<string,string> keyValuePair in usingstoneidandmonsterid)
+        //    {
+        //        SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(keyValuePair.Key);
+        //        skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = keyValuePair.Value;
+        //    }
+        //    yield break;
+        //}
         
         public IEnumerator StoneGotcha()
         {

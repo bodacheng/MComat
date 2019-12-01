@@ -179,7 +179,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.NineSlotCell_empty://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
+                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                                     {
                                         Debug.Log("其他玩家正在使用的石头不可拖入");
                                         return;
@@ -200,7 +200,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     OnDropEvent_Override(desc,item,sourceCell);
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.localID).inUsingMonsterOfPlayerId))
+                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                                     {
                                         Debug.Log("其他玩家正在使用的石头不可拖入");
                                         return;
@@ -240,7 +240,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.SkillStoneBoxCell:
                                     UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
                                     {
-                                        TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().localID}));
+                                        TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().skillStoneOfPlayerId}));
                                         UpdateMyItem();
                                     };
                                     UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>

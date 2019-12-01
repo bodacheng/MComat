@@ -48,7 +48,7 @@ public class StageScriptableObject : ScriptableObject
     
     public void loadLocalFightFromScript()//这个函数的运行必须十分谨慎
     {
-        localFight = LocalFight.loadOneLocalFightByScript(Script);    
+        localFight = LocalFight.LoadOneLocalFightByScript(Script);    
     }
     
     public List<string> getTeam1EnterRingLocalIds(LocalFight localFight)

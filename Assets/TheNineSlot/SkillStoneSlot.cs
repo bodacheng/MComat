@@ -19,7 +19,7 @@ public class SkillStoneSlot
     
     public SkillStoneSlot(string OnSlotStonelocalid, DragAndDropCell _DragAndDropCell)
     {
-        this.OnSlotStonelocalID = OnSlotStonelocalid;
+        OnSlotStonelocalID = OnSlotStonelocalid;
         this._DragAndDropCell = _DragAndDropCell;
         this._DragAndDropCell._SkillStoneSlot = this;
     }
@@ -57,11 +57,11 @@ public class SkillStoneSlot
     public IEnumerator ShowOrigin(Color stoneColor)
     {
         RemoveStoneFromSlot();
-        if (this.OnSlotStonelocalID != null)
+        if (OnSlotStonelocalID != null)
         {
-            yield return TakeASkillStoneFromBoxToSlot(this.OnSlotStonelocalID,stoneColor);
+            yield return TakeASkillStoneFromBoxToSlot(OnSlotStonelocalID, stoneColor);
         }
-        this._DragAndDropCell.UpdateMyItem();
+        _DragAndDropCell.UpdateMyItem();
         _DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
         yield break;
     }
@@ -72,10 +72,13 @@ public class SkillStoneSlot
         DragAndDropItem _DragAndDropItem = MySkillStonesReader.Instance.GetOneStoneModel(OnSlotStonelocalID);
         if (_DragAndDropItem == null)
             yield break;
-        _DragAndDropItem.GetComponent<Image>().color = itemColor;
-        _DragAndDropCell.GetComponent<Image>().color = _DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
-        _DragAndDropCell.AddItem(_DragAndDropItem);
-        _DragAndDropCell.UpdateMyItem();
+        else
+        {
+            _DragAndDropItem.GetComponent<Image>().color = itemColor;
+            _DragAndDropCell.GetComponent<Image>().color = _DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
+            _DragAndDropCell.AddItem(_DragAndDropItem);
+            _DragAndDropCell.UpdateMyItem();
+        }
         yield break;
     }
 }

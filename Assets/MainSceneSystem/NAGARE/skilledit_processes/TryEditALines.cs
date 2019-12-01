@@ -25,7 +25,7 @@ public class TryEditALines : MainSceneProcess
     
         _StageScriptableObject = Resources.Load("Account/TuroialFight1") as StageScriptableObject;
         if (_StageScriptableObject != null)
-            TuroialFight = LocalFight.loadOneLocalFightByScript(_StageScriptableObject.Script);
+            TuroialFight = LocalFight.LoadOneLocalFightByScript(_StageScriptableObject.Script);
             
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;
@@ -44,9 +44,10 @@ public class TryEditALines : MainSceneProcess
 
     public override bool CanEnterOtherProcess()
     {
-        return int.Parse(_MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1 &&
-                int.Parse(_MemberDetail.focusingCharacterDataInfo.a2_skill_stone_record_id) != -1 &&
-                    int.Parse(_MemberDetail.focusingCharacterDataInfo.a3_skill_stone_record_id) != -1;
+        //return int.Parse(_MemberDetail.focusingCharacterDataInfo.a1_skill_stone_record_id) != -1 &&
+        //int.Parse(_MemberDetail.focusingCharacterDataInfo.a2_skill_stone_record_id) != -1 &&
+        //int.Parse(_MemberDetail.focusingCharacterDataInfo.a3_skill_stone_record_id) != -1;
+        return true;
     }
 
     public override void ProcessEnter()
@@ -86,7 +87,7 @@ public class TryEditALines : MainSceneProcess
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
             StageScriptableObject stage = new StageScriptableObject
             {
@@ -94,7 +95,7 @@ public class TryEditALines : MainSceneProcess
             };
             if (this.TuroialFight != null)
             {
-                CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(_CharacterDataInfo);
+                CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(_CharacterDataInfo);
                 this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
                 this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
             }

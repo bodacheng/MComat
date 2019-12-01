@@ -30,7 +30,7 @@ public class DummyControlUnit : MonoBehaviour
                     Debug.Log("Successful drop " + desc.item.name + " from " + sourceSheet.name + " to " + destinationSheet.name);
                     IEnumerator process()
                     {
-                        yield return TheNineSlot.Instance.SeliWholeNineAndTwo();
+                        yield return TheNineSlot.Instance.SeliAllNineSlots();
                         //yield return MySkillStonesReader.SkillStonesBox.arrangeSkillStonesToBox();
                     }
                     TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(process());

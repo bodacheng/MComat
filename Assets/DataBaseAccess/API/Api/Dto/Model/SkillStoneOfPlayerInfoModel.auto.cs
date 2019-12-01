@@ -24,5 +24,10 @@ namespace Api.Dto.Model {
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
         public string inUsingMonsterOfPlayerId { get; set; }
+        
+        /// <summary>
+        /// 使用中のプレーヤ所有モンスターID
+        /// </summary>
+        public string inUsingSkillSlot { get; set; }
     }
 }

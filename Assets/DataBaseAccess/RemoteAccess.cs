@@ -41,74 +41,63 @@ namespace dataAccess
                 }
             }
         }
-        
-        public static List<string> getUsingStoneIDsOfAccountCharacter(GetMonsterOfPlayerDetailModel accountCharacterInfo)
-        {
-            List<string> list = new List<string>();
-            if (accountCharacterInfo.a1_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.a1_skill_stone_record_id);
-            if (accountCharacterInfo.a2_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.a2_skill_stone_record_id);
-            if (accountCharacterInfo.a3_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.a3_skill_stone_record_id);
-            if (accountCharacterInfo.b1_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.b1_skill_stone_record_id);
-            if (accountCharacterInfo.b2_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.b2_skill_stone_record_id);
-            if (accountCharacterInfo.b3_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.b3_skill_stone_record_id);
-            if (accountCharacterInfo.c1_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.c1_skill_stone_record_id);
-            if (accountCharacterInfo.c2_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.c2_skill_stone_record_id);
-            if (accountCharacterInfo.c3_skill_stone_record_id != null)
-            list.Add(accountCharacterInfo.c3_skill_stone_record_id);
-
-            return list;
-        }
-        
-        public static CharacterDataInfo getCharacterDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+                
+        public static CharacterDataInfo GetCharacterDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
         {
             try
             {
-                CharacterDataInfo characterDataInfo = new CharacterDataInfo();
-                characterDataInfo.monsterId = accountCharacterInfo.monsterId;
-                characterDataInfo.monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
-                characterDataInfo.level = 100; //需要一个对应表
+                CharacterDataInfo characterDataInfo = new CharacterDataInfo
+                {
+                    monsterId = accountCharacterInfo.monsterId,
+                    monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId,
+                    level = 100 //需要一个对应表
+                };
 
+                List<SkillStoneOfPlayerInfoModel> targets = MySkillStonesReader.Instance.GetMonsterEquipingStones(accountCharacterInfo.monsterOfPlayerId);
                 NineAndTwo nineAndTwo = new NineAndTwo();
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA1 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a1_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA2 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a2_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelA3 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.a3_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB1 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b1_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB2 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b2_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelB3 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.b3_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC1 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c1_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC2 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c2_skill_stone_record_id);
-                SkillStoneOfPlayerInfoModel _SkillStoneOfPlayerInfoModelC3 = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(accountCharacterInfo.c3_skill_stone_record_id);
-
-                CharacterResourceInfo _TempCharacterResourceInfo = 
-                monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
+                CharacterResourceInfo _TempCharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
                 if (_TempCharacterResourceInfo == null)
                 {
                     Debug.Log("角色定义信息错误。monsterId：" + accountCharacterInfo.monsterId);
                     return null;
                 }
-
                 nineAndTwo.level = characterDataInfo.level;
-                nineAndTwo.A1skillid = _SkillStoneOfPlayerInfoModelA1.skillId;
-                nineAndTwo.A2skillid = _SkillStoneOfPlayerInfoModelA2.skillId;
-                nineAndTwo.A3skillid = _SkillStoneOfPlayerInfoModelA3.skillId;
-                nineAndTwo.B1skillid = _SkillStoneOfPlayerInfoModelB1.skillId;
-                nineAndTwo.B2skillid = _SkillStoneOfPlayerInfoModelB2.skillId;
-                nineAndTwo.B3skillid = _SkillStoneOfPlayerInfoModelB3.skillId;
-                nineAndTwo.C1skillid = _SkillStoneOfPlayerInfoModelC1.skillId;
-                nineAndTwo.C2skillid = _SkillStoneOfPlayerInfoModelC2.skillId;
-                nineAndTwo.C3skillid = _SkillStoneOfPlayerInfoModelC3.skillId;
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    switch(targets[i].inUsingSkillSlot)
+                    {
+                        case "1":
+                        nineAndTwo.A1skillid = targets[i].skillId;
+                            break;
+                        case "2":
+                        nineAndTwo.A2skillid = targets[i].skillId;
+                            break;
+                        case "3":
+                        nineAndTwo.A3skillid = targets[i].skillId;
+                            break;
+                        case "4":
+                        nineAndTwo.B1skillid = targets[i].skillId;
+                            break;
+                        case "5":
+                        nineAndTwo.B2skillid = targets[i].skillId;
+                            break;
+                        case "6":
+                        nineAndTwo.B3skillid = targets[i].skillId;
+                            break;
+                        case "7":
+                        nineAndTwo.C1skillid = targets[i].skillId;
+                            break;
+                        case "8":
+                        nineAndTwo.C2skillid = targets[i].skillId;
+                            break;
+                        case "9":
+                        nineAndTwo.C3skillid = targets[i].skillId;
+                            break;
+                    }
+                }
                 nineAndTwo.moveType = _TempCharacterResourceInfo.moveType;
                 nineAndTwo.rushType = _TempCharacterResourceInfo.rushType;
                 nineAndTwo.canDefend = _TempCharacterResourceInfo.DEFENDABLE_FLAG;
-
                 characterDataInfo._NineAndTwo = nineAndTwo;
                 characterDataInfo._NineAndTwo.SortNineAndTwo();
                 return characterDataInfo;

@@ -99,7 +99,7 @@ public class TryEditNineSlot : MainSceneProcess
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateEditingNineAndTwoBaseOnSlots(_CharacterDataInfo));
+            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
             _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
             this.subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
         }
@@ -118,7 +118,7 @@ public class TryEditNineSlot : MainSceneProcess
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo);
+        CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo);
         _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(characterDataInfo));
         yield break;
     }

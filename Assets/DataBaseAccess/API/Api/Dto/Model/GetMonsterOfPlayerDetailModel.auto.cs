@@ -34,50 +34,5 @@ namespace Api.Dto.Model {
 		/// 経験値
 		/// </summary>
 		public int experience { get; set; }
-
-		/// <summary>
-		/// スキールID(左上)
-		/// </summary>
-		public string a1_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(中上)
-		/// </summary>
-		public string a2_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(右上)
-		/// </summary>
-		public string a3_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(左中)
-		/// </summary>
-		public string b1_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(中中)
-		/// </summary>
-		public string b2_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(右中)
-		/// </summary>
-		public string b3_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(左下)
-		/// </summary>
-		public string c1_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(中下)
-		/// </summary>
-		public string c2_skill_stone_record_id { get; set; }
-
-		/// <summary>
-		/// スキールID(右下)
-		/// </summary>
-		public string c3_skill_stone_record_id { get; set; }
 	}
 }

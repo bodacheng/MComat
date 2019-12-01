@@ -214,8 +214,8 @@ namespace mainMenu
             //        break;
             //} 
         }
-        
-        private IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, charIcon> teamButtonDic, PositionLocalCharKeySet positionLocalCharKey)
+
+        IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, charIcon> teamButtonDic, PositionLocalCharKeySet positionLocalCharKey)
         {
             if (posNum == -1)
             {
@@ -225,17 +225,19 @@ namespace mainMenu
             charIcon tar = null;
             if (teamButtonDic.ContainsKey(posNum))
             {
-                teamButtonDic.TryGetValue(posNum,out tar);
-            }else{
+                teamButtonDic.TryGetValue(posNum, out tar);
+            }
+            else
+            {
                 Debug.Log("错误的位置值：" + posNum);
                 yield break;
-            }        
+            }
             if (tar == null)
             {
                 Debug.Log("严重错误");
                 yield break;
             }
-            
+
             string PositionMonsterOfPlayerId = positionLocalCharKey.GetPositionMonsterOfPlayerId(posNum);
             if (PositionMonsterOfPlayerId != null)
             {
@@ -247,14 +249,16 @@ namespace mainMenu
                     yield break;
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_one.monsterId);
-                tar.changeIcon(characterResourceInfo == null ? null: monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
+                tar.changeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
                     characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
-            }else{
-                tar.changeIcon(null,Zokusei.Null);
+            }
+            else
+            {
+                tar.changeIcon(null, Zokusei.Null);
             }
             yield break;
         }
-        
+
         public void IniMutiRaidModeCharIcons(List<charIcon> icons,Team team)
         {
             IDictionary<int, charIcon> targetTeamIcons;

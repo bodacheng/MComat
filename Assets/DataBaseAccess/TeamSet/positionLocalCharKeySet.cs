@@ -40,7 +40,7 @@ public class PositionLocalCharKeySet
                 GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
-                    CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(GetMonsterOfPlayerDetailModel);
+                    CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(GetMonsterOfPlayerDetailModel);
                     multiDictionary.Set(0,(int)PosNumsWithLocalKeys[i].posNum,characterDataInfo);
                 }
             }

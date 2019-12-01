@@ -78,15 +78,6 @@ namespace dataAccess
             {
                 sessionId = AccountSet.Instance.sessionId,
                 monsterOfPlayerId = accountCharsSet.monsterOfPlayerId,
-                a1SkillStoneOfPlayerId = accountCharsSet.a1_skill_stone_record_id,
-                a2SkillStoneOfPlayerId = accountCharsSet.a2_skill_stone_record_id,
-                a3SkillStoneOfPlayerId = accountCharsSet.a3_skill_stone_record_id,
-                b1SkillStoneOfPlayerId = accountCharsSet.b1_skill_stone_record_id,
-                b2SkillStoneOfPlayerId = accountCharsSet.b2_skill_stone_record_id,
-                b3SkillStoneOfPlayerId = accountCharsSet.b3_skill_stone_record_id,
-                c1SkillStoneOfPlayerId = accountCharsSet.c1_skill_stone_record_id,
-                c2SkillStoneOfPlayerId = accountCharsSet.c2_skill_stone_record_id,
-                c3SkillStoneOfPlayerId = accountCharsSet.c3_skill_stone_record_id
             };
 
             yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel>, SetMonsterSkillStoneForm>("http://160.16.187.230/AssetStoreFight/monster/setMonsterSkillStone", form, ApiCaller.Instance.getHeader(apiLanguage),

@@ -64,8 +64,8 @@ public class monsterboxFilter : MonoBehaviour
         {
             for (int j = 0; j< origin_mainMenuIcons.Count-1-i; j++)
             {
-                int expj = origin_mainMenuIcons[j].AccountCharacterInfo.experience;
-                int expj1 = origin_mainMenuIcons[j + 1].AccountCharacterInfo.experience;
+                int expj = origin_mainMenuIcons[j]._MonsterOfPlayerDetailModel.experience;
+                int expj1 = origin_mainMenuIcons[j + 1]._MonsterOfPlayerDetailModel.experience;
                 if (order == 1 ? expj > expj1 : expj < expj1)
                 {
                     charIcon temp = origin_mainMenuIcons[j];

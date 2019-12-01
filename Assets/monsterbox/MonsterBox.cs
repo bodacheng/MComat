@@ -110,7 +110,7 @@ namespace mainMenu
                 yield return onecoroutine;
                 targetingIcon = Instantiate(target.noMagic);
                 targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
-                targetingIcon.AccountCharacterInfo = targetingCharacterDataInfo;
+                targetingIcon._MonsterOfPlayerDetailModel = targetingCharacterDataInfo;
                 targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
                 targetingIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
                 if (mainMenuIcons.ContainsKey(monsterOfPlayerId))
@@ -160,7 +160,7 @@ namespace mainMenu
                     Debug.Log("严重错误");
                     yield break;
                 }
-                string monsterOfPlayerId = _targetingIcon.AccountCharacterInfo.monsterOfPlayerId;
+                string monsterOfPlayerId = _targetingIcon._MonsterOfPlayerDetailModel.monsterOfPlayerId;
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
                 void action1()
                 {
@@ -168,7 +168,7 @@ namespace mainMenu
                     preparingScene.Instance.mainProcessRunner.TriggerMainProcess(preparingScene.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
                 _targetingIcon.iconButton.onClick.AddListener(action1);
-                Debug.Log(_targetingIcon.AccountCharacterInfo.monsterId);
+                Debug.Log(_targetingIcon._MonsterOfPlayerDetailModel.monsterId);
                 _targetingIcon.gameObject.SetActive(true);
                 _targetingIcon.transform.SetParent(target.MonsterBoxContainer);
                 _targetingIcon.transform.localScale = Vector3.one;

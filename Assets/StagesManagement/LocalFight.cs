@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Xml.Serialization;
 using System;
 using System.IO;
@@ -29,7 +27,7 @@ public class LocalFight
     {
     }
 
-    public static LocalFight loadOneLocalFightByScript(TextAsset Script)
+    public static LocalFight LoadOneLocalFightByScript(TextAsset Script)
     {
         LocalFight _LocalFight;
         try

@@ -15,7 +15,7 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
+        CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
         _MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);

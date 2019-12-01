@@ -132,7 +132,7 @@ namespace mainMenu
                         _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.REAL_NAME;
                         _skillStoneDetail.Showname.text = _stone._SkillConfigOfSkillStone.ShowName;
                         _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
-                        _skillStoneDetail.Switchusingmonstericon(_stone.localID);
+                        _skillStoneDetail.Switchusingmonstericon(_stone.skillStoneOfPlayerId);
                     }
                 }
                 button.onClick.RemoveAllListeners();
@@ -362,7 +362,7 @@ namespace mainMenu
 
             item._SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
-            item.localID = skillStoneOfPlayerId;
+            item.skillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(stonesTempContainer);           
         }
         

@@ -38,10 +38,7 @@ namespace dataAccess
             if (targetAccountCharacterInfo == null)
                 yield break;
 
-            if (CheckCharDataUpateInfo(targetAccountCharacterInfo, characterDataInfo))
-            {
-                yield return ExecuteCharDataUpate(characterDataInfo);
-            }
+            yield return ExecuteCharDataUpate(characterDataInfo);
             yield break;
         }
         
@@ -88,43 +85,6 @@ namespace dataAccess
             yield break;
         }
 
-        // 这个地方就应该产生一个本地版本的更新核实。即所谓本地和远程双把关。
-        // 每次更新一个角色，包括的核实信息有以下：
-        // 1. 技能编辑格式自身没有问题(必杀与普工平衡)
-        // 2. 有对应的石头 
-        // 3. 如果更新需要消耗，有足够的钱
-        public bool CheckCharDataUpateInfo(GetMonsterOfPlayerDetailModel before, GetMonsterOfPlayerDetailModel after)
-        {
-            if (before.a1_skill_stone_record_id != after.a1_skill_stone_record_id)
-            {
-            }
-            if (before.a2_skill_stone_record_id != after.a2_skill_stone_record_id)
-            {
-            }
-            if (before.a3_skill_stone_record_id != after.a3_skill_stone_record_id)
-            {
-            }
-            if (before.b1_skill_stone_record_id != after.b1_skill_stone_record_id)
-            {
-            }
-            if (before.b2_skill_stone_record_id != after.b2_skill_stone_record_id)
-            {
-            }
-            if (before.b3_skill_stone_record_id != after.b3_skill_stone_record_id)
-            {
-            }
-            if (before.c1_skill_stone_record_id != after.c1_skill_stone_record_id)
-            {
-            }
-            if (before.c2_skill_stone_record_id != after.c2_skill_stone_record_id)
-            {
-            }
-            if (before.c3_skill_stone_record_id != after.c3_skill_stone_record_id)
-            {
-            }
-            return true;
-        }
-
         // 这一步的执行应该是毫不犹豫的因为上一步已经确定了数据无误可以更新
         // 所以在这里应该也是对应三个版本。
         public IEnumerator ExecuteCharDataUpate(GetMonsterOfPlayerDetailModel after)//再执行
@@ -154,7 +114,7 @@ namespace dataAccess
                 case playerinfoReferenceMode.formalVersion:
                     break;
             }
-            yield return MySkillStonesReader.Instance.VerifyAllMyStonesUsingMonsterInfo();
+            //yield return MySkillStonesReader.Instance.VerifyAllMyStonesUsingMonsterInfo();
             yield break;
         }
 

@@ -19,7 +19,7 @@ public class TrySkillShowMenu : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
+        CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(this._MemberDetail.focusingCharacterDataInfo);
         this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);

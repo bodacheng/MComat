@@ -112,7 +112,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.getCharacterDataInfo(focusingCharacterDataInfo)));
+            presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo)));
         }
 
         public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharacterDataInfo _focusingCharacterDataInfo)
@@ -200,7 +200,7 @@ namespace mainMenu
                 }
 
                 CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(accountCharacterInfo.monsterId);
-                CharacterDataInfo characterDataInfo = RemoteAccess.getCharacterDataInfo(accountCharacterInfo);
+                CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
                 yield return (aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI));
                 yield return (
                     aI_DATA_CENTER.Step2Initialize(

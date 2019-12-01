@@ -10,7 +10,7 @@ public class charIcon : MonoBehaviour {
     public Image Icon;
     public Image frame;
 
-    public GetMonsterOfPlayerDetailModel AccountCharacterInfo;
+    public GetMonsterOfPlayerDetailModel _MonsterOfPlayerDetailModel;
     public CharacterResourceInfo _CharacterResourceInfo;
 
     static IDictionary<Zokusei, Sprite> frames;
@@ -111,7 +111,7 @@ public class charIcon : MonoBehaviour {
 
     public void decideIconSize(string mainMenuFocusing)
     {
-        if (mainMenuFocusing != AccountCharacterInfo.monsterOfPlayerId)
+        if (mainMenuFocusing != _MonsterOfPlayerDetailModel.monsterOfPlayerId)
             gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         else
         {

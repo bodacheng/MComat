@@ -1,23 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using System.Xml;
-using System.Xml.Serialization;
 using System;
-using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 
 //这个模块也将扮演数据库和AI模块接口的作用。
 // 玩家存档中的各个角色信息最后会转化出这样一个类的实例。从而很重要一点————要看明白哪些信息是能保存数据库的。
 // 实际上D,M,R按照现在的企划看全是角色被动，那么原则上他们确实不应该和其他技能登陆在一个技能配置文件里，也不需要有对应ID
 // 既然D,M,R是被动，那按理说九宫格信息的各种处理应该是在角色读取前执行，先决定DMR,再批处理12宫技能。
 
-[System.Serializable]
 public class NineAndTwo {
 
     public int level;
