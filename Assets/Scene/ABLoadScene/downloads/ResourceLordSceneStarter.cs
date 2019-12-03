@@ -101,7 +101,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 break;
             case ResourceLoadMode.Resource:
                 yield return monstersConfigTable.Instance.loadMonstersConfig();
-                yield return SkillConfigTable.Instance.loadAllSkillConfigs();
+                yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
                 LoadingCanvas.target.NowProcess("正在加载资源",0.1f);
                 break;
         }
@@ -142,7 +142,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 int i = 0;
                 foreach (string type in _ConfigFileManager.chartypes)
                 {
-                    yield return AnimationResourceLoader.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
+                    yield return AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
                     i++;
                     LoadingCanvas.target.NowProcess("正在加载资源", i/_ConfigFileManager.chartypes.Length);
                     yield return null;

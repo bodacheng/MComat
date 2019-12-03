@@ -41,6 +41,7 @@ public class Knock_Off_State : AI_State
         _DATA_CENTER.SetUsingGravity(false);
         _FightAttriCalReference.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
+        _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
         _FightAttriCalReference.EnableAllHitBoxCollider(false);
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
@@ -75,7 +76,6 @@ public class Knock_Off_State : AI_State
         _DATA_CENTER.SetUsingGravity(true);
         _FightAttriCalReference.SetGettingDamageState(false);
         _FightAttriCalReference.EnableAllHitBoxCollider(true);
-        _Rigidbody.velocity = Vector3.zero;
     }
     
     public override void _State_FixedUpdate1()
@@ -95,11 +95,12 @@ public class Knock_Off_State : AI_State
         {
             if (!(time_counter > 0.2f && _DATA_CENTER.Grounded))
             {
-                gameObject.transform.position =  gameObject.transform.position +
+                gameObject.transform.position += 
                 _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
                 Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
             }else{
                 dropped = true;
+                _FightAttriCalReference.EnableAllHitBoxCollider(true);
                 time_counter = 0;//开始针对躺地时间记时
             }
         }else{

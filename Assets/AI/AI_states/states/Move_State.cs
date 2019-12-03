@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Soul;
-using System.Linq;
 
 public enum AIMoveStyle
 {
@@ -89,7 +87,7 @@ public class Move_State : AI_State
 
     public override void C_State_enter()
     {
-        this.time_counter = 0f;
+        time_counter = 0f;
         this._Weapon_Animation_Events.ClearMarkerManagers();        
         this.mainCam = CameraManager._camera.transform;
         this.Animation_Manger.PlayLayerAnim(null);
@@ -105,7 +103,7 @@ public class Move_State : AI_State
         // 从这到底下那么也就是AI模式决定第一轮moveDirection和use_direction的
         // 而moveDirection是用来引导use_direction的
         DecideDirection();
-        this.time_counter = 0f;
+        time_counter = 0f;
         this.mainCam = CameraManager._camera.transform;
         this.personality_Events.CloseAllPersonalityEffects();
     }
@@ -186,31 +184,28 @@ public class Move_State : AI_State
         }
     }
 
-    private int whereToGo;
-    private float angle;
-    private Vector3 newDir;
+    int whereToGo;
+    float angle;
+    Vector3 newDir;
     public void _f_State_Update_SP()
     {
         time_counter += Time.fixedDeltaTime;
         
-        if (!this.Sensor.IFContinuousDetectionStarted())
+        if (!Sensor.IFContinuousDetectionStarted())
         {
-            this.Sensor.ContinuousDetectionStart(-1);//这个的真正目的是把检测关闭
+            Sensor.ContinuousDetectionStart(-1);//这个的真正目的是把检测关闭
         }
-
         if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
             use_direction = _DATA_CENTER.antiWallDirection;
             return;
         }
-
         if (Timeup())
         {
             DecideDirection();
-            this.time_counter = 0f;
+            time_counter = 0f;
         }
-
-        switch (this.moveDirection)
+        switch (moveDirection)
         {
             case AIMoveDirection.stay:
                 use_direction = Vector3.zero;
@@ -223,7 +218,6 @@ public class Move_State : AI_State
                     newDir = use_direction += (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
                     angle = Vector3.Angle(use_direction, newDir);
                     use_direction = Vector3.Lerp(use_direction, newDir,angle / 45 * Time.deltaTime);
-
                     // 其实use_direction的计算非常恶心，因为实时算朝向特定敌人的话会产生个抖动问题，上面的结果效果差强人意，但比底下这些强。
                     // 底下这些是一些失败的例子
                     //use_direction = Quaternion.Euler(0, angle * Time.fixedDeltaTime / (Time.fixedDeltaTime + 1f), 0) * use_direction;
@@ -234,26 +228,25 @@ public class Move_State : AI_State
             case AIMoveDirection.RunAwayFromThreat:
                 break;
         }
-
         use_direction = use_direction.normalized;
         Collider[] EnemyAndTeammateBetweenMeAndEnemy = Sensor.EnemyAndTeammateBetweenMeAndEnemy();
         if (EnemyAndTeammateBetweenMeAndEnemy != null)
         {
             newDir = (EnemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
-            (this.gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized ;
+            (gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized ;
             newDir.y = 0;
             use_direction = Vector3.RotateTowards(use_direction, newDir, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
         }
     }
 
-    private float h;
-    private float v;
-    private Vector3 vel;
+    float h;
+    float v;
+    Vector3 vel;
     public void _c_State_Update_SP()
     {
-        if (this.Sensor.IFContinuousDetectionStarted())
+        if (Sensor.IFContinuousDetectionStarted())
         {
-            this.Sensor.OneRoundDetectionStart(1);
+            Sensor.OneRoundDetectionStart(1);
         }
 
         if (mainCam != null)
@@ -265,7 +258,8 @@ public class Move_State : AI_State
 			//get movement input, set direction to move in
 			h = 0f;
 			v = 0f;
-			if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+			if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
+            || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
 			{
                 h = UnityEngine.Input.GetAxis("Horizontal");
                 v = UnityEngine.Input.GetAxis("Vertical");
@@ -277,16 +271,6 @@ public class Move_State : AI_State
 				h = ETCInput.GetAxis("Horizontal");
 				v = ETCInput.GetAxis("Vertical");
 			}
-
-            if (Mathf.Approximately(h,0f) && Mathf.Approximately(v,0f))
-            {
-            }else{
-                // 下面部分不了解当初用意。清空Y轴加速度？有这个必要吗？
-                //vel = _Rigidbody.velocity;
-                //vel.y = 0;
-                //_Rigidbody.velocity = vel;
-            }
-
 			use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         }else{
             Debug.Log("错误：角色处于控制模式却没有被适配相机。");
@@ -299,13 +283,13 @@ public class Move_State : AI_State
         use_direction = use_direction.normalized;
         if (use_direction.magnitude > 0.1f)
         {
-            this._Animator.SetFloat("speed", 10f);
-            this.Move(use_direction, speed, true);
-            this.RotateToVelocity(1f, true);
+            _Animator.SetFloat("speed", 10f);
+            Move(use_direction, speed, true);
+            RotateToDirection(use_direction,10f, true);
         }
         else
         {
-            this._Animator.SetFloat("speed", 0f);
+            _Animator.SetFloat("speed", 0f);
             _Rigidbody.velocity = Vector3.zero;
         }
     }
@@ -317,10 +301,9 @@ public class Move_State : AI_State
         if (use_direction.magnitude > 0.1f)
         {
             _Animator.SetFloat("speed", 10f);
-            this.Move(use_direction, speed, true);
-            this.RotateToVelocity(1f, true);
-        }
-        else{
+            Move(use_direction, speed, true);
+            RotateToDirection(use_direction,10f, true);
+        }else{
             _Animator.SetFloat("speed", 0f);
             _Rigidbody.velocity = Vector3.zero;
         }
@@ -329,7 +312,7 @@ public class Move_State : AI_State
     /// <summary>
     /// 获取某向量的垂直向量
     /// </summary>
-    private Vector3 GetVerticalDir(Vector3 _dir)
+    Vector3 GetVerticalDir(Vector3 _dir)
     {
         //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
         return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
@@ -337,7 +320,6 @@ public class Move_State : AI_State
 }
 
 //以下评论所描述的企划我们18年12月已经放弃了。
-
 //关于受力移动，我们的逻辑是这样的：我们所设定的speed这个数值具体来说就是所期望的rigibody.velcoity.magitube，
 // 这个speed我们称之为期望速度，而物体从静止所需要的期望速度越大，则一上来所需要的力则越大（更大加速度）
 //因此在MoveTo函数里，我们直接把speed作为accelration参数给带入了其中。其实也许根据情况应该乘以个参数？但这里我们没有多想，总之表现出这个等比关系就点到为止了。

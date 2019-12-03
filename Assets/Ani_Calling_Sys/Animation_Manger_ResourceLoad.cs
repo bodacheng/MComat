@@ -240,7 +240,7 @@ public partial class Animation_Manger : MonoBehaviour{
         {
             yield break;
         }
-        _clip = AnimationResourceLoader.Instance.getAnimationClip(animPath + "/skill/" + toLoadSkillAnimName);
+        _clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + toLoadSkillAnimName);
         if (_clip != null)
         {
             if (!toLoadAnims.ContainsKey(toLoadSkillAnimName))

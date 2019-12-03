@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 //这个模块也将扮演数据库和AI模块接口的作用。
 // 玩家存档中的各个角色信息最后会转化出这样一个类的实例。从而很重要一点————要看明白哪些信息是能保存数据库的。
 // 实际上D,M,R按照现在的企划看全是角色被动，那么原则上他们确实不应该和其他技能登陆在一个技能配置文件里，也不需要有对应ID
 // 既然D,M,R是被动，那按理说九宫格信息的各种处理应该是在角色读取前执行，先决定DMR,再批处理12宫技能。
 
+[System.Serializable]
 public class NineAndTwo {
 
     public int level;
@@ -23,10 +21,10 @@ public class NineAndTwo {
     public MoveType moveType;
     public RushType rushType;
 
-    private SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
-    private SkillConfig DConfig, MConfig, RConfig;//这三个其实对应了monster表里定义的三个被动技能
-    private State_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
-    private List<State_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
+    SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
+    SkillConfig DConfig, MConfig, RConfig;//这三个其实对应了monster表里定义的三个被动技能
+    State_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
+    List<State_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
 
     public State_Transition_Set GetD_STS()
     {
@@ -65,7 +63,6 @@ public class NineAndTwo {
     {
         return BConfig3;
     }
-
     public SkillConfig GetC1Config()
     {
         return CConfig1;
@@ -124,9 +121,9 @@ public class NineAndTwo {
         B1skillid = null; B2skillid = null; B3skillid = null;
         C1skillid = null; C2skillid = null; C3skillid = null;
 
-        this.moveType = MoveType.Test;
-        this.canDefend = false;
-        this.rushType = RushType.None;
+        moveType = MoveType.Test;
+        canDefend = false;
+        rushType = RushType.None;
 
         AConfig1 = new SkillConfig();
         AConfig2 = new SkillConfig();
@@ -173,7 +170,7 @@ public class NineAndTwo {
         return StateTransitionSetList;
     }
 
-    private SkillConfig FixConfigByReference(string skillid)
+    SkillConfig FixConfigByReference(string skillid)
     {
         if (skillid == null)
             return null;
@@ -181,7 +178,7 @@ public class NineAndTwo {
         return referenceStandardSkillConfig;
     }
 
-    private State_Transition_Set FromConfigToSTS(SkillConfig _SkillConfig)
+    State_Transition_Set FromConfigToSTS(SkillConfig _SkillConfig)
     {
         if (_SkillConfig == null)
             return null;
@@ -214,14 +211,14 @@ public class NineAndTwo {
                                                _SkillConfig.ai_trigger_ranges,
                                                 null,
                                                 null,
-                                               Inputs_defined.Null, 
+                                               Inputs_defined.Null,
                                                Inputs_defined.Null,
                                                _SkillConfig.SP_LEVEL,
                                                int.Parse(_SkillConfig.AI_PRIORITY),
                                                _SkillConfig.RARITY_LEVEL);
                 return STS;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Log(e);
                 return null;
@@ -265,9 +262,9 @@ public class NineAndTwo {
 
         PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(this.moveType,this.canDefend,this.rushType);
 
-        this.DConfig = passiveSkillConfigs.DConfig;
-        this.MConfig = passiveSkillConfigs.MConfig;
-        this.RConfig = passiveSkillConfigs.RConfig;
+        DConfig = passiveSkillConfigs.DConfig;
+        MConfig = passiveSkillConfigs.MConfig;
+        RConfig = passiveSkillConfigs.RConfig;
 
         if (this.DConfig != null)
         {

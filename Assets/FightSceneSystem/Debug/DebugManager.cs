@@ -61,7 +61,7 @@ public class DebugManager : MonoBehaviour {
 
     public IEnumerator resouceModeOnTypeChanged()
     {
-        yield return AnimationResourceLoader.Instance.prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type.options[type.value].text);
+        yield return AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type.options[type.value].text);
 
         List<UnityEngine.Object> fightChars = Resources.LoadAll("charPretabs/"+ type.options[type.value].text).ToList();
         List<UnityEngine.Object> AIScripts = Resources.LoadAll("AIScripts/" + type.options[type.value].text).ToList();

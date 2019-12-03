@@ -40,14 +40,14 @@ public class SkillConfigTable
     }
 
 	public List<Row> rowList = new List<Row>();
-	bool isLoaded = false;
+	bool isLoaded;
 
 	public bool IsLoaded()
 	{
 		return isLoaded;
 	}
     
-    public IEnumerator loadAllSkillConfigs()
+    public IEnumerator LoadAllSkillConfigs()
     {
         switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
         {
@@ -56,14 +56,14 @@ public class SkillConfigTable
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                loadAllSkillConfigFromLocalConfigFile();
+                LoadAllSkillConfigFromLocalConfigFile();
                 break;
         }
-        refreshSkillConfigDicForReference();
+        RefreshSkillConfigDicForReference();
         yield break;
     }
     
-    public static void refreshSkillConfigDicForReference()
+    public static void RefreshSkillConfigDicForReference()
     {
         IDictionary<string, SkillConfig> Dic = new Dictionary<string, SkillConfig>();
         List<SkillConfig> ALL = Instance.RowsToSkillConfigList(Instance.rowList);
@@ -80,19 +80,18 @@ public class SkillConfigTable
         Instance.SkillConfigDicForReference = Dic;
     }
     
-    public static SkillConfig getSkillConfigByID(string ID)
+    public static SkillConfig GetSkillConfigByID(string ID)
     {
         if (ID != null)
         {
-            SkillConfig skillConfig = null;
-            Instance.SkillConfigDicForReference.TryGetValue(ID, out skillConfig);
+            Instance.SkillConfigDicForReference.TryGetValue(ID, out SkillConfig skillConfig);
             return skillConfig;
         }else{
             return null;
         }
     }
     
-    public static List<SkillConfig> getSkillConfigsOfType(string type)
+    public static List<SkillConfig> GetSkillConfigsOfType(string type)
     {
         List<SkillConfig> SkillConfigsOfType = new List<SkillConfig>();
         foreach (KeyValuePair<string, SkillConfig> one in Instance.SkillConfigDicForReference)
@@ -103,14 +102,14 @@ public class SkillConfigTable
         return SkillConfigsOfType;
     }
     
-    public static RecordIDsAndNames getSkillIDAndNameArray(string type, bool[] ranges, int rarelevel)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
+    public static RecordIDsAndNames GetSkillIDAndNameArray(string type, bool[] ranges, int rarelevel)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
-        List<SkillConfig> list = getSkillConfigsOfType(type);
+        List<SkillConfig> list = GetSkillConfigsOfType(type);
         List<string> RecordIDs = new List<string>();
         List<string> RealNames = new List<string>();
         foreach (SkillConfig one in list)
         {
-            if (rangeLimit(one.ai_trigger_ranges.ToList(), ranges[0], ranges[1], ranges[2],ranges[3]) 
+            if (RangeLimit(one.ai_trigger_ranges.ToList(), ranges[0], ranges[1], ranges[2],ranges[3]) 
                 && 
                 (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
@@ -126,7 +125,7 @@ public class SkillConfigTable
         return _SkillIDsAndNames;
     }
     
-    public static bool rangeLimit(List<BehaviorEnterRange> behaviorEnterRangesList, bool close, bool near, bool far, bool outrange)
+    public static bool RangeLimit(List<BehaviorEnterRange> behaviorEnterRangesList, bool close, bool near, bool far, bool outrange)
     {
         for (int i = 0; i < behaviorEnterRangesList.Count;i++)
         {
@@ -153,7 +152,7 @@ public class SkillConfigTable
         return false;
     }
     
-    public static void loadAllSkillConfigFromLocalConfigFile()//1
+    public static void LoadAllSkillConfigFromLocalConfigFile()//1
     {
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor
             ||
@@ -247,19 +246,21 @@ public class SkillConfigTable
         {
             for (int i = 1; i < grid.Length; i++)
             {
-                Row row = new Row();
-                row.RECORD_ID = grid[i][0];
-                row.REAL_NAME = grid[i][1];
-                row.USEABLE_MONSTER_TYPE = grid[i][2];
-                row.ATTACK_WEIGHT = grid[i][3];
-                row.ATTACK_TYPE = grid[i][4];
-                row.SP_LEVEL = grid[i][5];
-                row.CR_SKILL_FLAG = grid[i][6];
-                row.MR_SKILL_FLAG = grid[i][7];
-                row.LR_SKILL_FLAG = grid[i][8];
-                row.VL_SKILL_FLAG = grid[i][9];
-                row.AI_PRIORITY = grid[i][10];
-                row.RARITY_LEVEL = grid[i][11];
+                Row row = new Row
+                {
+                    RECORD_ID = grid[i][0],
+                    REAL_NAME = grid[i][1],
+                    USEABLE_MONSTER_TYPE = grid[i][2],
+                    ATTACK_WEIGHT = grid[i][3],
+                    ATTACK_TYPE = grid[i][4],
+                    SP_LEVEL = grid[i][5],
+                    CR_SKILL_FLAG = grid[i][6],
+                    MR_SKILL_FLAG = grid[i][7],
+                    LR_SKILL_FLAG = grid[i][8],
+                    VL_SKILL_FLAG = grid[i][9],
+                    AI_PRIORITY = grid[i][10],
+                    RARITY_LEVEL = grid[i][11]
+                };
                 rowList.Add(row);
             }
             isLoaded = true;
@@ -286,11 +287,13 @@ public class SkillConfigTable
     {
         if (skillConfig == null)
             return null;
-        Row row = new Row();
-        row.RECORD_ID = skillConfig.RECORD_ID;        
-        row.USEABLE_MONSTER_TYPE = skillConfig.type;
-        row.REAL_NAME = skillConfig.REAL_NAME;
-        row.ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString();
+        Row row = new Row
+        {
+            RECORD_ID = skillConfig.RECORD_ID,
+            USEABLE_MONSTER_TYPE = skillConfig.type,
+            REAL_NAME = skillConfig.REAL_NAME,
+            ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString()
+        };
 
         switch (skillConfig.stateType)
         {
@@ -311,22 +314,10 @@ public class SkillConfigTable
                 break;
         }
 
-        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.inner_range))
-            row.CR_SKILL_FLAG = "1";
-        else
-            row.CR_SKILL_FLAG = "0";
-        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.mid_range))
-            row.MR_SKILL_FLAG = "1";
-        else
-            row.MR_SKILL_FLAG = "0";
-        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.far_range))
-            row.LR_SKILL_FLAG = "1";
-        else
-            row.LR_SKILL_FLAG = "0";
-        if (skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.out_of_range))
-            row.VL_SKILL_FLAG = "1";
-        else
-            row.VL_SKILL_FLAG = "0";
+        row.CR_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.inner_range) ? "1" : "0";
+        row.MR_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.mid_range) ? "1" : "0";
+        row.LR_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.far_range) ? "1" : "0";
+        row.VL_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.out_of_range) ? "1" : "0";
 
         switch (skillConfig.SP_LEVEL)
         {
@@ -353,13 +344,15 @@ public class SkillConfigTable
 
     public SkillConfig RowToSkillConfig(Row row)
     {
-        SkillConfig _SkillConfig = new SkillConfig();
-        _SkillConfig.type = row.USEABLE_MONSTER_TYPE;
-        _SkillConfig.RECORD_ID = row.RECORD_ID;
-        _SkillConfig.REAL_NAME = row.REAL_NAME;
-        _SkillConfig.ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT);
+        SkillConfig _SkillConfig = new SkillConfig
+        {
+            type = row.USEABLE_MONSTER_TYPE,
+            RECORD_ID = row.RECORD_ID,
+            REAL_NAME = row.REAL_NAME,
+            ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT)
+        };
 
-        switch(row.ATTACK_TYPE)
+        switch (row.ATTACK_TYPE)
         {
             case "GR":
                 _SkillConfig.stateType = stateType.GR;
@@ -427,12 +420,10 @@ public class SkillConfigTable
 
 	public Row GetAt(int i)
 	{
-		if(rowList.Count <= i)
-			return null;
-		return rowList[i];
-	}
+        return rowList.Count <= i ? null : rowList[i];
+    }
 
-	public Row Find_ID(string find)
+    public Row Find_ID(string find)
 	{
 		return rowList.Find(x => x.RECORD_ID == find);
 	}

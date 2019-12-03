@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
 
 // 2019 6.1:
 // “动画的终结”现在我们改由动画片段末尾的“ThisIsEndOfAnimation”来判定。
@@ -31,14 +28,14 @@ public partial class Animation_Manger : MonoBehaviour
 
     public Animator Animator;
     public AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
-    private AnimatorOverrideController animatorOverride;
-    private bool doNothingFlag;
-    private string toRunAniName;
-    private string fullbodylayer_return_trigger_name;
-    private string to_be_override_animation_name;
-    private string trigger_name;
-    private string pre_overrided_anim_name;
-    private IDictionary<string , AnimationClip> toLoadAnims;
+    AnimatorOverrideController animatorOverride;
+    bool doNothingFlag;
+    string toRunAniName;
+    string fullbodylayer_return_trigger_name;
+    string to_be_override_animation_name;
+    string trigger_name;
+    string pre_overrided_anim_name;
+    IDictionary<string, AnimationClip> toLoadAnims;
     public AnimationClip _toUse;
     public float animationcounter;
     
@@ -55,7 +52,7 @@ public partial class Animation_Manger : MonoBehaviour
 
     public void SetAnimationPlayingStep(AnimationPlaying_Step _step)
     {
-        this.Coroutine_Step = _step;
+        Coroutine_Step = _step;
     }
 
     public void AnimationTrigger(AnimationClip clip)
@@ -77,17 +74,17 @@ public partial class Animation_Manger : MonoBehaviour
 
 	public AnimationClip TryAnimationClip(string clip_name)
 	{
-		if (clip_name != null) {
-			toLoadAnims.TryGetValue (clip_name, out _toUse);
+        if (clip_name != null)
+        {
+            toLoadAnims.TryGetValue(clip_name, out _toUse);
             return _toUse ?? null;
-        } else {
-			return null;
-		}
-	}
+        }
+        return null;
+    }
 
-    private AnimatorStateInfo _BaseAnimatorStateInfo;
-    private AnimatorStateInfo AnimatorStateInfo;
-    private AnimatorTransitionInfo _AnimatorTransitionInfo;
+    AnimatorStateInfo _BaseAnimatorStateInfo;
+    AnimatorStateInfo AnimatorStateInfo;
+    AnimatorTransitionInfo _AnimatorTransitionInfo;
     public void PlayLayerAnim(string clip_name)
     {
         animationcounter = 0;

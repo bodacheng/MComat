@@ -89,7 +89,7 @@ public class G_Ani_MoveEscape_State : AI_State {
                     facedirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
             }
         }
-        this.RotateToDirection(-facedirection, 100f, true);
+        this.RotateToDirection(-facedirection, 10f, true);
         if (this._AIStateRunner.GetLastState().StateType == stateType.Def)
         {
             Defend_State df = (Defend_State)this._AIStateRunner.GetLastState();
@@ -132,7 +132,7 @@ public class G_Ani_MoveEscape_State : AI_State {
             v = ETCInput.GetAxis("Vertical");
         }
         use_direction = (screenMovementForward * v) + (screenMovementRight * h);
-        this.RotateToDirection(use_direction, 100f, true);
+        this.RotateToDirection(use_direction, 10f, true);
     }
 
     public override void AI_State_exit()

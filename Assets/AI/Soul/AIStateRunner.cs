@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using HittingDetection;
+using Inputs;
 
 namespace Soul
 {
@@ -60,7 +61,7 @@ namespace Soul
             return empty_State != this.now_state;
         }
 
-        Input _input;
+        Inputs.Input _input;
         public bool CheckInput(Inputs_defined num)
         {
             _inputManager.inputStateDic.TryGetValue(num, out _input);

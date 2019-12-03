@@ -90,7 +90,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         if (SkillConfigTextFile != null)
         {
             SkillConfigTable.Instance.Load(SkillConfigTextFile);
-            SkillConfigTable.refreshSkillConfigDicForReference();
+            SkillConfigTable.RefreshSkillConfigDicForReference();
         }
         else
         {

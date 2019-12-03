@@ -68,8 +68,7 @@ public class Hurt_State : AI_State {
                                             gameObject.transform.position,
                                                 newValue._WeaponPosAdjustMode,
                                                     touchingEnemyBody);
-        fixpostween = _Rigidbody.DOMove(fixDesPos,0.5f);
-
+        fixpostween = _Rigidbody.DOMove(fixDesPos,1f);
         if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= FightGlobalSetting._knockoffextent)//&& newValue.damage_type == DamageType.supper_damage
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
@@ -80,7 +79,7 @@ public class Hurt_State : AI_State {
                                                                                 newValue.fromWeapon));
             _FightAttriCalReference.GetKnockOffCount().setGauge(0f);
         }
-        RotateToDirection(- fixDesPos, 0.5f, true);
+        RotateToDirection(- fixDesPos, 2f, true);
         time_counter = 0f;
         personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
@@ -104,7 +103,6 @@ public class Hurt_State : AI_State {
         time_counter = 0f;
         if (fixpostween != null)
             fixpostween.Kill(false);
-        fixpostween = null;
         _Rigidbody.velocity = Vector3.zero;
         if (_AIStateRunner.GetTryState().StateType == stateType.AC || _AIStateRunner.GetTryState().StateType == stateType.GI ||
             _AIStateRunner.GetTryState().StateType == stateType.GM || _AIStateRunner.GetTryState().StateType == stateType.GR)

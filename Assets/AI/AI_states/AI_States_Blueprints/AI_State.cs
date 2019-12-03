@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Inputs;
 
 namespace Soul
 {
@@ -259,7 +260,7 @@ namespace Soul
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
             return Vector3.SignedAngle(_Rigidbody.transform.forward, look_dir, Vector3.up);
         }
-
+        float angle;
         // Rotate to a direction
         protected bool RotateToDirection(Vector3 direction, float turnSpeed, bool ignoreY)
         {
@@ -268,7 +269,8 @@ namespace Soul
                 direction.y = 0;
             }
             dirQ = Quaternion.LookRotation(direction);
-            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            angle = Quaternion.Angle(dirQ, gameObject.transform.rotation);
+            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, angle*(360-angle)/(180*180/turnSpeed) * Time.fixedDeltaTime);
             _Rigidbody.MoveRotation(dirQ);
             return Mathf.Approximately(Quaternion.Angle(dirQ, gameObject.transform.rotation), 0f);
         }
@@ -284,7 +286,7 @@ namespace Soul
         Vector3 v;
         public float Move(Vector3 relativePos, float acceleration, bool ignoreY)
         {
-            if (this._Rigidbody == null)
+            if (_Rigidbody == null)
                 return 0;
             if (ignoreY)
             {
@@ -292,8 +294,9 @@ namespace Soul
             }
             v = relativePos.normalized * acceleration;
             //gameObject.GetComponent<Rigidbody>().AddForce(relativePos.normalized * acceleration * Time.deltaTime, ForceMode.VelocityChange);
-            _Rigidbody.velocity = v;
-            return this._Rigidbody.velocity.magnitude;
+            _Rigidbody.AddForce(v, ForceMode.VelocityChange);
+            //_Rigidbody.velocity = v;
+            return _Rigidbody.velocity.magnitude;
         }
 
         public float use_acc;
@@ -306,8 +309,7 @@ namespace Soul
 
             use_acc += (acceleration - _Rigidbody.velocity.magnitude) * 2;
             _Rigidbody.AddForce(use_acc * forcedirection.normalized);
-
-            return this._Rigidbody.velocity.magnitude;
+            return _Rigidbody.velocity.magnitude;
         }
 
         public void MoveByChangePosition(Vector3 relativePos, float acceleration, bool ignoreY)

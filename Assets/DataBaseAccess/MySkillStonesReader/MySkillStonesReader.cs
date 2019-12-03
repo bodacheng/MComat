@@ -238,15 +238,15 @@ namespace dataAccess
                                                 string B1skillid, string B2skillid, string B3skillid,
                                                     string C1skillid, string C2skillid, string C3skillid)
         {
-            SkillConfig _SkillConfigA1 = SkillConfigTable.getSkillConfigByID(A1skillid);
-            SkillConfig _SkillConfigA2 = SkillConfigTable.getSkillConfigByID(A2skillid);
-            SkillConfig _SkillConfigA3 = SkillConfigTable.getSkillConfigByID(A3skillid);
-            SkillConfig _SkillConfigB1 = SkillConfigTable.getSkillConfigByID(B1skillid);
-            SkillConfig _SkillConfigB2 = SkillConfigTable.getSkillConfigByID(B2skillid);
-            SkillConfig _SkillConfigB3 = SkillConfigTable.getSkillConfigByID(B3skillid);
-            SkillConfig _SkillConfigC1 = SkillConfigTable.getSkillConfigByID(C1skillid);
-            SkillConfig _SkillConfigC2 = SkillConfigTable.getSkillConfigByID(C2skillid);
-            SkillConfig _SkillConfigC3 = SkillConfigTable.getSkillConfigByID(C3skillid);
+            SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfigByID(A1skillid);
+            SkillConfig _SkillConfigA2 = SkillConfigTable.GetSkillConfigByID(A2skillid);
+            SkillConfig _SkillConfigA3 = SkillConfigTable.GetSkillConfigByID(A3skillid);
+            SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfigByID(B1skillid);
+            SkillConfig _SkillConfigB2 = SkillConfigTable.GetSkillConfigByID(B2skillid);
+            SkillConfig _SkillConfigB3 = SkillConfigTable.GetSkillConfigByID(B3skillid);
+            SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfigByID(C1skillid);
+            SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfigByID(C2skillid);
+            SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfigByID(C3skillid);
             List<SkillConfig> allnineskill = new List<SkillConfig>();
 
             if (_SkillConfigA1 != null)

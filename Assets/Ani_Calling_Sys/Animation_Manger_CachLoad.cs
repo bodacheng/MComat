@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
 
 public partial class Animation_Manger : MonoBehaviour
 {
@@ -10,15 +8,11 @@ public partial class Animation_Manger : MonoBehaviour
     /// CachVersion
     /// </summary>
     /// <returns>The basic personal anims.</returns>
-    /// <param name="animPath">Animation path.</param>
-    /// <param name="basicPackName">Basic pack name.</param>
-    /// <param name="hurtPackName">Hurt pack name.</param>
-    /// <param name="toLoadSkillAnimsNames">To load skill anims names.</param>
-    public IEnumerator preloadBasicPersonalAnims(string animPath, string basicPackName)
+    public IEnumerator PreloadBasicPersonalAnims(string animPath, string basicPackName)
     {
         string basicPackKey = "BasicPack/" + animPath + "/" + basicPackName;
         yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL + "/animClips/" + animPath, basicPackKey, basicPackName));
-        List<AnimationClip> basicAnims = AnimationResourceLoader.Instance.getAnimationPack(basicPackKey);
+        List<AnimationClip> basicAnims = AnimationResourceLoader.Instance.GetAnimationPack(basicPackKey);
 
         toLoadAnims = new Dictionary<string, AnimationClip>();
 
@@ -165,18 +159,18 @@ public partial class Animation_Manger : MonoBehaviour
     //本函数的改造方向是所有基础类动作全部从某个包里读取。
     //主意看参数toLoadSkillAnimsNames，这些只是技能类key的名字
     //另外，本模块现在肩负起提前构建对象池的任务。就是所有的hurtobject。这样一来这个模块现在是和BO_E模块产生密切关系
-    public IEnumerator preloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadSkillAnimsNames != null)
         {
             foreach (string anim_name in toLoadSkillAnimsNames)
             {
-                yield return preloadPersonalAnim(url,type, anim_name, personalMagic, _zokusei);
+                yield return PreloadPersonalAnim(url,type, anim_name, personalMagic, _zokusei);
             }
         }
     }
 
-    public IEnumerator preloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
         {
@@ -184,7 +178,7 @@ public partial class Animation_Manger : MonoBehaviour
         }
     
         yield return (AnimationResourceLoader.Instance.LoadAnimationClipFromCachAndPutItIntoDic(url, type + "/skill/" + toLoadSkillAnimName, toLoadSkillAnimName));
-        _clip = AnimationResourceLoader.Instance.getAnimationClip(type + "/skill/" + toLoadSkillAnimName);
+        _clip = AnimationResourceLoader.Instance.GetAnimationClip(type + "/skill/" + toLoadSkillAnimName);
         if (_clip != null)
         {
             if (!toLoadAnims.ContainsKey(toLoadSkillAnimName))

@@ -130,7 +130,7 @@ public class Jump_State : AI_State
         }
 
         jumpDirection = jumpDirection.normalized * forward_force;
-        this.RotateToDirection(jumpDirection, 100000f, true);
+        this.RotateToDirection(jumpDirection, 10f, true);
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
         if (IfVectorClean(jumpDirection))
             _Rigidbody.velocity = jumpDirection;
@@ -170,7 +170,7 @@ public class Jump_State : AI_State
 
         jumpDirection = (screenMovementForward * v) + (screenMovementRight * h);
         jumpDirection = jumpDirection.normalized * forward_force;
-        this.RotateToDirection(jumpDirection, 9999f, true);
+        this.RotateToDirection(jumpDirection, 10f, true);
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
         if (IfVectorClean(jumpDirection))
 		    _Rigidbody.velocity = jumpDirection;

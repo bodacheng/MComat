@@ -266,7 +266,7 @@ namespace mainMenu
                 {
                     IEnumerator getAllStones()
                     {
-                        yield return SkillConfigTable.Instance.loadAllSkillConfigs();
+                        yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
                         int i = 1;
                         foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigDicForReference)
                         {

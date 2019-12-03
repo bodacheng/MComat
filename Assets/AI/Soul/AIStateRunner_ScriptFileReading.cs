@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Xml;
+using Inputs;
 using System.Xml.Serialization;
 using System.Linq;
 using System.IO;
@@ -185,7 +184,7 @@ namespace Soul
             }
         }
 
-        public void loadStatesTransition(string type, TextAsset Script, int AI_level)
+        public void LoadStatesTransition(string type, TextAsset Script, int AI_level)
         {
             if (Script == null)
             {
@@ -252,13 +251,13 @@ namespace Soul
                         if (!_States_Incubator.IfContainsKey(_State_Transition_Set.StateKey))
                         {
                             Debug.Log("脚本中描写的状态的键值:" + _State_Transition_Set.StateKey + " 不存在于我们的定义");
-                        };
+                        }
                     }
                 }
             }
         }
 
-        public List<State_Transition_Set> sortStateTransitionSetList(List<State_Transition_Set> list, string clip_path, int AI_level)
+        public List<State_Transition_Set> SortStateTransitionSetList(List<State_Transition_Set> list, string clip_path, int AI_level)
         {
             IDictionary<string, State_Transition_Set> toFormAttackStateList = new Dictionary<string, State_Transition_Set>();
             for (int i = 0; i < list.Count; i++)
@@ -282,11 +281,8 @@ namespace Soul
 
                 if (_set.enterInput != Inputs_defined.Null)
                 {
-                    if (_set.enterInput == Inputs_defined.Dash)
-                        hasR = true;
-                    if (_set.enterInput == Inputs_defined.Defend)
-                        hasD = true;
-
+                    hasR |= _set.enterInput == Inputs_defined.Dash;
+                    hasD |= _set.enterInput == Inputs_defined.Defend;
                     setsHaveInitialInput.Add(_set);
                 }
 
@@ -322,13 +318,13 @@ namespace Soul
             }
 
             if (AI_level > 0)
-                this.setStateRatesByAILevel(stateTransitionSetDictionary, AI_level);
+                this.SetStateRatesByAILevel(stateTransitionSetDictionary, AI_level);
 
             List<State_Transition_Set> allChuans = new List<State_Transition_Set>();
             foreach (State_Transition_Set _set in setsHaveInitialInput)
             {
                 List<State_Transition_Set> chuan = new List<State_Transition_Set>();
-                chuan = searchChuanNext(_set, Inputs_defined.Null, chuan, allChuans, stateTransitionSetDictionary);
+                chuan = SearchChuanNext(_set, Inputs_defined.Null, chuan, allChuans, stateTransitionSetDictionary);
             }
 
             foreach (State_Transition_Set _set in list)
@@ -343,7 +339,7 @@ namespace Soul
             return regularStates;
         }
 
-        List<State_Transition_Set> searchChuanNext(State_Transition_Set _set, Inputs_defined _inputKey,
+        List<State_Transition_Set> SearchChuanNext(State_Transition_Set _set, Inputs_defined _inputKey,
                                                List<State_Transition_Set> chuan, List<State_Transition_Set> allChuans,
                                                IDictionary<string, State_Transition_Set> stateTransitionSetDictionary)
         {
@@ -354,26 +350,18 @@ namespace Soul
             }
 
             Inputs_defined searching_inputKey = Inputs_defined.Null;
-            if (_inputKey == Inputs_defined.Null)
-            {
-                searching_inputKey = _set.enterInput;
-            }
-            else
-            {
-                searching_inputKey = _inputKey;
-            }
+            searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
             foreach (State_Rate_Set _rset in _set.casual_to_state_Sets)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                 {
-                    State_Transition_Set _new = null;
-                    stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out _new);
+                    stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out State_Transition_Set _new);
                     if (_new != null)
                     {
                         if (!chuan.Contains(_new) && !allChuans.Contains(_new))
                         {
-                            if (searchChuanNext(_new, searching_inputKey, chuan, allChuans, stateTransitionSetDictionary) != null)
+                            if (SearchChuanNext(_new, searching_inputKey, chuan, allChuans, stateTransitionSetDictionary) != null)
                             {
                             }
                             else
@@ -387,7 +375,7 @@ namespace Soul
             return chuan;
         }
 
-        private bool checkIfStringInList(string toCheck, List<string> checklist)
+        bool CheckIfStringInList(string toCheck, List<string> checklist)
         {
             if (checklist == null || toCheck == null)
             {
@@ -403,33 +391,25 @@ namespace Soul
             return false;
         }
 
-        private List<string> searchAttackChuanKeyNext(State_Transition_Set _set, Inputs_defined _inputKey, List<string> chuan, IDictionary<string, State_Transition_Set> stateTransitionSetDictionary, int chuanLimit)
+        List<string> SearchAttackChuanKeyNext(State_Transition_Set _set, Inputs_defined _inputKey, List<string> chuan, IDictionary<string, State_Transition_Set> stateTransitionSetDictionary, int chuanLimit)
         {
-            if (!checkIfStringInList(_set.StateKey, chuan) && (chuan.Count + 1) <= chuanLimit)
+            if (!CheckIfStringInList(_set.StateKey, chuan) && (chuan.Count + 1) <= chuanLimit)
             {
                 chuan.Add(_set.StateKey);
             }
 
             Inputs_defined searching_inputKey = Inputs_defined.Null;
-            if (_inputKey == Inputs_defined.Null)
-            {
-                searching_inputKey = _set.enterInput;
-            }
-            else
-            {
-                searching_inputKey = _inputKey;
-            }
+            searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
             foreach (State_Rate_Set _rset in _set.casual_to_state_Sets)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)
                 {
-                    State_Transition_Set _new = null;
-                    stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out _new);
+                    stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out State_Transition_Set _new);
                     if (_new != null)
                     {
-                        if (!checkIfStringInList(_rset.AI_State_Number, chuan) && (chuan.Count + 1) <= chuanLimit)
+                        if (!CheckIfStringInList(_rset.AI_State_Number, chuan) && (chuan.Count + 1) <= chuanLimit)
                         {
-                            if (searchAttackChuanKeyNext(_new, searching_inputKey, chuan, stateTransitionSetDictionary, chuanLimit) != null)
+                            if (SearchAttackChuanKeyNext(_new, searching_inputKey, chuan, stateTransitionSetDictionary, chuanLimit) != null)
                             {
                             }
                             else
@@ -447,7 +427,7 @@ namespace Soul
             return chuan;
         }
 
-        public void setStateRatesByAILevel(IDictionary<string, State_Transition_Set> final_dic, int AIlevel)
+        public void SetStateRatesByAILevel(IDictionary<string, State_Transition_Set> final_dic, int AIlevel)
         {
             int jiesuoLevel = 0;
             if (AIlevel < 20)
@@ -489,15 +469,15 @@ namespace Soul
 
                 if (Transition.Value.enterInput == Inputs_defined.Attack)
                 {
-                    attackChuan = searchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, attackChuan, final_dic, jiesuoLevel);
+                    attackChuan = SearchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, attackChuan, final_dic, jiesuoLevel);
                 }
                 if (Transition.Value.enterInput == Inputs_defined.Fire1)
                 {
-                    Fire1Chuan = searchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire1Chuan, final_dic, jiesuoLevel);
+                    Fire1Chuan = SearchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire1Chuan, final_dic, jiesuoLevel);
                 }
                 if (Transition.Value.enterInput == Inputs_defined.Fire2)
                 {
-                    Fire2Chuan = searchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire2Chuan, final_dic, jiesuoLevel);
+                    Fire2Chuan = SearchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire2Chuan, final_dic, jiesuoLevel);
                 }
                 //在这里把三大攻击串给算出来，无非是说他们的主串包含的技能都有啥名字，这个信息不包括他们各自可能出现的首尾循环
             }

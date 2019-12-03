@@ -3,6 +3,7 @@
 // CharacterDataInfo 的各个成员在CharacterDataInfo做不同作用时候可能能用上的成员是不同的。
 // 这个类本身可以看作是AccountCharacterInfo的“实际体”，它也可以序列化，也可以保存。
 // GetMonsterOfPlayerDetailModel 更侧重玩家信息，以及与远程的交互，而这个类更侧重在游戏里代表一个角色系统性信息。
+[System.Serializable]
 public class CharacterDataInfo
 {
     public string monsterOfPlayerId = "-1";
@@ -29,8 +30,8 @@ public class CharacterDataInfo
 
     public CharacterDataInfo(string localID, string resource_num,NineAndTwo _NineAndTwo)
     {
-        this.monsterOfPlayerId = localID;
-        this.monsterId = resource_num;
+        monsterOfPlayerId = localID;
+        monsterId = resource_num;
         this._NineAndTwo = _NineAndTwo;
     }
 

@@ -50,7 +50,7 @@ public class AIScriptReading {
                 var reader = new System.IO.StringReader(Script.text);
                 list = serializer.Deserialize(reader) as List<State_Transition_Set>;
             }
-            list = _AIStateRunner.sortStateTransitionSetList(list, type,AI_level);
+            list = _AIStateRunner.SortStateTransitionSetList(list, type,AI_level);
             _AIStateRunner.usingScript = Script;
             _AIStateRunner.usingScriptLevel = AI_level;
             if (list == null)

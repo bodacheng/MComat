@@ -68,7 +68,7 @@ public class Death_State : AI_State
                                                  this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].damageHappenPoint,this.gameObject.transform.rotation,
                                                  this._FightAttriCalReference.transform);
             if (if_r_rotation)
-                this.RotateToDirection(this.gameObject.transform.position - _FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.transform.position, 20f, true);
+                this.RotateToDirection(this.gameObject.transform.position - _FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.transform.position, 10f, true);
 
             Matrix = Matrix4x4.TRS(gameObject.transform.position, startquaternion, Vector3.one * 1);
         }

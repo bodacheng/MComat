@@ -1,26 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Soul;
 
 public class Dash_Back_State : AI_State
 {
-    private readonly string clip_name;
-    private readonly UnityEngine.Events.UnityAction breakfreestart;
-    private readonly UnityEngine.Events.UnityAction breakfreeend;
-    private readonly customCoroutine breakfreeCoroutine;
-    
+    readonly string clip_name;
+    readonly UnityEngine.Events.UnityAction breakfreestart;
+    readonly UnityEngine.Events.UnityAction breakfreeend;
+    readonly customCoroutine breakfreeCoroutine;
+
     public Dash_Back_State()
     {
-        this.clip_name = "rushback";
-        this.behaviorEnterRanges = null;
+        clip_name = "rushback";
+        behaviorEnterRanges = null;
         breakfreestart = () =>
         {
-            this._ResistanceManager.Resistance.Value +=10;
+            _ResistanceManager.Resistance.Value +=10;
         };
         breakfreeend = () =>
         {
-            this._ResistanceManager.Resistance.Value -=10;
+            _ResistanceManager.Resistance.Value -=10;
         };
         breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
     }
@@ -53,6 +51,7 @@ public class Dash_Back_State : AI_State
     public override void AI_State_enter()
     {
         base.AI_State_enter();
+        _FightAttriCalReference.ClearDamageLists();
         _Animator.applyRootMotion = true;
         _Animator.SetFloat("speed", 0f);
         Sensor.OneRoundDetectionStart(2);
@@ -72,7 +71,7 @@ public class Dash_Back_State : AI_State
                     threatsComingDirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
             }
         }
-        RotateToDirection(threatsComingDirection, 100000f, true);
+        RotateToDirection(threatsComingDirection, 10f, true);
         Animation_Manger.AnimationTrigger(clip_name);
 		
         //if (_AIStateRunner.getLastState().StateType == stateType.Def)
@@ -96,7 +95,7 @@ public class Dash_Back_State : AI_State
 
     public override bool Naturally_exit_condition()
     {
-        return this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over ? true : false;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
     }
 
     public override void AI_State_exit()

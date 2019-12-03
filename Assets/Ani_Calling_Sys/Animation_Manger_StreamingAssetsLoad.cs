@@ -17,7 +17,7 @@ public partial class Animation_Manger : MonoBehaviour
     public IEnumerator preloadBasicPersonalAnimsStreamingAssetMode(string animPath, string basicPackName)
     {
         yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath,basicPackName));
-        List<AnimationClip> basicAnims = AnimationResourceLoader.Instance.getAnimationPack("BasicPack/"+ animPath+ "/"+ basicPackName);
+        List<AnimationClip> basicAnims = AnimationResourceLoader.Instance.GetAnimationPack("BasicPack/"+ animPath+ "/"+ basicPackName);
 
         toLoadAnims = new Dictionary<string, AnimationClip>();
         if (basicAnims != null)
@@ -185,7 +185,7 @@ public partial class Animation_Manger : MonoBehaviour
             yield break;
         }
         yield return (AnimationResourceLoader.Instance.LoadAnimationClipFromStreamingAssetsAndPutItIntoDic(animPath, "skill", toLoadSkillAnimsName));
-        _clip = AnimationResourceLoader.Instance.getAnimationClip(animPath + "/skill/" + toLoadSkillAnimsName);
+        _clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + toLoadSkillAnimsName);
         if (_clip != null)
         {
             if (!toLoadAnims.ContainsKey(toLoadSkillAnimsName))

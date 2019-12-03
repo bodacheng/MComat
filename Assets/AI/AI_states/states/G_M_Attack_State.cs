@@ -67,6 +67,7 @@ public class G_M_Attack_State : AI_State {
             : Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
     }
 
+    Collider C;
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
@@ -79,14 +80,11 @@ public class G_M_Attack_State : AI_State {
         thisFrameRotateAngle = 0;
         personality_Events.CloseAllPersonalityEffects();
         _Rigidbody.velocity = Vector3.zero;
-        
-        Collider C = Sensor.GetClosestColliderInSensorRange(true,true,true);
+        C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (C != null)
-            this.RotateToTarget(C.transform.position, 1f, true);
- 
+            RotateToTarget(C.transform.position, 1f, true);
         _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
 		_Animator.applyRootMotion = true;
-        //this.AI_DATA_CENTER.switchToSmoothPhysicMaterial();
         Animation_Manger.AnimationTrigger(clip_name);
 	}
 
@@ -113,8 +111,7 @@ public class G_M_Attack_State : AI_State {
             //this.gameObject.transform.position += BS_Main_Health.returnDamageList(damageType.stagger)[0].force_direction.normalized * 1f;
             _FightAttriCalReference.ReturnDamageList(DamageType.stagger).Clear();
         }
-
-        Collider C = Sensor.GetClosestColliderInSensorRange(true,true,true);
+        C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (C!=null)
         {
             rotateTarget = C.transform.position;

@@ -83,7 +83,6 @@
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiSkillStoneTagsGroup.cs" />
-    <Compile Include="Assets\AI\Control\Input.cs" />
     <Compile Include="Assets\AI\Control\InputManager.cs" />
     <Compile Include="Assets\AI\Soul\AIRunnerGUI.cs" />
     <Compile Include="Assets\AI\Soul\AIStateRunner.cs" />
@@ -500,8 +499,8 @@
     <Compile Include="Assets\StagesManagement\QuestPreparePage.cs" />
     <Compile Include="Assets\StagesManagement\stageButton.cs" />
     <Compile Include="Assets\StagesManagement\StageScriptableObject.cs" />
-    <Compile Include="Assets\StagesManagement\stagesManager.cs" />
-    <Compile Include="Assets\StagesManagement\stagesManagerGUI.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManager.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />

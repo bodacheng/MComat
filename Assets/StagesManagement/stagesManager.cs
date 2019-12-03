@@ -1,18 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
-using UnityEngine.UI;
-using System.Linq;
 using System;
-using System.Xml;
 using System.Xml.Serialization;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 //现在一场战斗的信息靠LocalFight去描述，而所谓的随机战斗其实就是根据玩家等级去生成一个LocalFight的实例
-public class stagesManager : MonoBehaviour //这个模块本身在正式版本游戏应该是只存在于prepareScene里，进入战斗时候只是带入一个RandomLocalFight的实例用以生成战斗。。。
+public class StagesManager : MonoBehaviour //这个模块本身在正式版本游戏应该是只存在于prepareScene里，进入战斗时候只是带入一个RandomLocalFight的实例用以生成战斗。。。
 {
     public string fightScriptPath;
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
@@ -21,7 +16,7 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
 
     //关键在于我们要确保这个存档信息在出错的情况下，在不存在的情况下都怎么样来处理。一个游戏中某存档在一个固定的文件夹下这没有什么问题，为了读取把握这个地址我们要有一些更稳定的策略。
     //这个任务我们在不完全把握Application.dataPath在不同平台运行方式的情况下很难处理好
-    public LocalFight loadOneLocalFight(TextAsset Script)
+    public LocalFight LoadOneLocalFight(TextAsset Script)
     {
         LocalFight _localFight;
         try
@@ -46,16 +41,9 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
 #if UNITY_EDITOR
             string _path = AssetDatabase.GetAssetPath(Script);
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
-            if (_path.Length > 1)
-            {
-                _path = pathsplit[1];
-            }
-            else
-            {
-                _path = pathsplit[0];
-            }
+            _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
             Debug.Log("4V4模式文件" + _path);
-            this.fightScriptPath = _path;
+            fightScriptPath = _path;
 #endif
             return _localFight;
         }
@@ -67,7 +55,7 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
         }
     }
 
-    public void saveFightAsXml(string path, LocalFight localFight)
+    public void SaveFightAsXml(string path, LocalFight localFight)
     {
         if (localFight == null)
         {
@@ -92,7 +80,7 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
         }
     }
 
-    public FightReward loadFightReward(TextAsset Script)
+    public FightReward LoadFightReward(TextAsset Script)
     {
         try
         {
@@ -116,14 +104,7 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
 #if UNITY_EDITOR
             string _path = AssetDatabase.GetAssetPath(Script);
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
-            if (_path.Length > 1)
-            {
-                _path = pathsplit[1];
-            }
-            else
-            {
-                _path = pathsplit[0];
-            }
+            _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
             Debug.Log("FightReward" + _path);
             this.fightScriptPath = _path;
 #endif
@@ -137,7 +118,7 @@ public class stagesManager : MonoBehaviour //这个模块本身在正式版本�
         }
     }
 
-    public void saveFightRwardAsXml(string path, FightReward _FightReward)
+    public void SaveFightRwardAsXml(string path, FightReward _FightReward)
     {
         if (_FightReward == null)
             return;

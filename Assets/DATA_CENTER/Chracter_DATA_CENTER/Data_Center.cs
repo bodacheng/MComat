@@ -108,7 +108,7 @@ public partial class Data_Center : MonoBehaviour
             switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    yield return (Animation_Manger.preloadBasicPersonalAnims(type,basicPackName));
+                    yield return (Animation_Manger.PreloadBasicPersonalAnims(type,basicPackName));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     yield return (Animation_Manger.preloadBasicPersonalAnimsStreamingAssetMode(type, basicPackName));
@@ -204,7 +204,7 @@ public partial class Data_Center : MonoBehaviour
             switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    yield return (Animation_Manger.preloadPersonalAnims(ResourceLordSceneStarter.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                    yield return (Animation_Manger.PreloadPersonalAnims(ResourceLordSceneStarter.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
                 break;
                 case ResourceLoadMode.Resource:
                     yield return (Animation_Manger.preloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));

@@ -270,8 +270,8 @@ namespace mainMenu
             List<String> SkillStonesOfTypeAndExType = new List<String>(); //技能石本地id
             foreach (KeyValuePair<String, SkillStoneOfPlayerInfoModel> keyValuePair in MySkillStonesReader.mySkillStonesDataDic)
             {
-                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(keyValuePair.Value.skillId);
-                if (_SkillConfigOfSkillStone.type == type && (_SkillConfigOfSkillStone.SP_LEVEL == exType || exType == -1) && SkillConfigTable.rangeLimit(_SkillConfigOfSkillStone.ai_trigger_ranges.ToList(),close, near, far, outrange))
+                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
+                if (_SkillConfigOfSkillStone.type == type && (_SkillConfigOfSkillStone.SP_LEVEL == exType || exType == -1) && SkillConfigTable.RangeLimit(_SkillConfigOfSkillStone.ai_trigger_ranges.ToList(),close, near, far, outrange))
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
             }
 
@@ -310,7 +310,7 @@ namespace mainMenu
         
         public IEnumerator GenerateOneStone(SkillStoneOfPlayerInfoModel one)
         {
-            SkillConfig _SkillConfig = SkillConfigTable.getSkillConfigByID(one.skillId);
+            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
             if (_SkillConfig == null)
             {
                 Debug.Log("巨大问题,技能id似乎未定义："+one.skillId);
@@ -333,7 +333,7 @@ namespace mainMenu
                     yield break;
             }
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
-            SkillConfig skillConfig = SkillConfigTable.getSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             
             IEnumerator process = null;
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
@@ -360,7 +360,7 @@ namespace mainMenu
             else
                  MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] = item;
 
-            item._SkillConfigOfSkillStone = SkillConfigTable.getSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
+            item._SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
             item.skillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(stonesTempContainer);           

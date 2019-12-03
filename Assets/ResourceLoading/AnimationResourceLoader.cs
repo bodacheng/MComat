@@ -5,7 +5,7 @@ using System.Linq;
 
 public class AnimationResourceLoader
 {
-    private static AnimationResourceLoader instance;
+    static AnimationResourceLoader instance;
     public static AnimationResourceLoader Instance
     {
         get
@@ -23,24 +23,18 @@ public class AnimationResourceLoader
     //public IDictionary<string, RuntimeAnimatorController> RuntimeAnimatorControllerIdic = new Dictionary<string, RuntimeAnimatorController>();
     
     //战斗场景下角色实时读取动作走的是这个，所以必然的我们有了getAnimationClip和ConstructAnimationClip
-    public AnimationClip getAnimationClip(string key)
+    public AnimationClip GetAnimationClip(string key)
     {
-        AnimationClip _AnimationClip = null;
-        AnimationClipDic.TryGetValue(key, out _AnimationClip);
+        AnimationClipDic.TryGetValue(key, out AnimationClip _AnimationClip);
         return _AnimationClip;
     }
 
-    public List<AnimationClip> getAnimationPack(string packkey)
+    public List<AnimationClip> GetAnimationPack(string packkey)
     {
-        List<AnimationClip> clips = null;
-        SeriesAnimationClipsDic.TryGetValue(packkey, out clips);
-        if (clips != null)
-        {
-            return clips;
-        }
-        return null;
+        SeriesAnimationClipsDic.TryGetValue(packkey, out List<AnimationClip> clips);
+        return clips ?? null;
     }
-       
+
     public IEnumerator LoadAnimationPackFromCache(string url_withoutfilename,string dic_key, string packABName)
     {
         IEnumerator task = CachManager.Instance.DownloadAndCacheExactFile(url_withoutfilename,packABName);
@@ -63,34 +57,42 @@ public class AnimationResourceLoader
             {
                 if (_AnimationClip.name == "rush")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "rush";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "rush",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "rushback")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "rushback";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "rushback",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "jump")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "jump";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "jump",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "getup")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "getup";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "getup",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 clipList.Add(_AnimationClip);
@@ -126,10 +128,12 @@ public class AnimationResourceLoader
             readingBundle.Unload(false);
             if (!AnimationClipDic.ContainsKey(dic_key))
             {
-                AnimationEvent endFlag = new AnimationEvent();
-                endFlag.functionName = "ThisIsEndOfAnimation";
-                endFlag.stringParameter = _AnimationClip.name;
-                endFlag.time = _AnimationClip.length;
+                AnimationEvent endFlag = new AnimationEvent
+                {
+                    functionName = "ThisIsEndOfAnimation",
+                    stringParameter = _AnimationClip.name,
+                    time = _AnimationClip.length
+                };
                 _AnimationClip.AddEvent(endFlag);
                 AnimationClipDic.Add(dic_key,_AnimationClip);
             }
@@ -151,8 +155,7 @@ public class AnimationResourceLoader
     {
         string packkey;
         packkey = type + "/"+ packABName;//这种时候additionalPath兼具动画包的名字
-        List<AnimationClip> clips = null;
-        SeriesAnimationClipsDic.TryGetValue(packkey, out clips);
+        SeriesAnimationClipsDic.TryGetValue(packkey, out List<AnimationClip> clips);
         if (clips != null)
         {
             yield break;
@@ -173,34 +176,42 @@ public class AnimationResourceLoader
                 {
                     if (_AnimationClip.name == "rush")
                     {
-                        AnimationEvent endFlag = new AnimationEvent();
-                        endFlag.functionName = "ThisIsEndOfAnimation";
-                        endFlag.stringParameter = _AnimationClip.name;
-                        endFlag.time = _AnimationClip.length;
+                        AnimationEvent endFlag = new AnimationEvent
+                        {
+                            functionName = "ThisIsEndOfAnimation",
+                            stringParameter = _AnimationClip.name,
+                            time = _AnimationClip.length
+                        };
                         _AnimationClip.AddEvent(endFlag);
                     }
                     if (_AnimationClip.name == "rushback")
                     {
-                        AnimationEvent endFlag = new AnimationEvent();
-                        endFlag.functionName = "ThisIsEndOfAnimation";
-                        endFlag.stringParameter = _AnimationClip.name;
-                        endFlag.time = _AnimationClip.length;
+                        AnimationEvent endFlag = new AnimationEvent
+                        {
+                            functionName = "ThisIsEndOfAnimation",
+                            stringParameter = _AnimationClip.name,
+                            time = _AnimationClip.length
+                        };
                         _AnimationClip.AddEvent(endFlag);
                     }
                     if (_AnimationClip.name == "jump")
                     {
-                        AnimationEvent endFlag = new AnimationEvent();
-                        endFlag.functionName = "ThisIsEndOfAnimation";
-                        endFlag.stringParameter = _AnimationClip.name;
-                        endFlag.time = _AnimationClip.length;
+                        AnimationEvent endFlag = new AnimationEvent
+                        {
+                            functionName = "ThisIsEndOfAnimation",
+                            stringParameter = _AnimationClip.name,
+                            time = _AnimationClip.length
+                        };
                         _AnimationClip.AddEvent(endFlag);
                     }
                     if (_AnimationClip.name == "getup")
                     {
-                        AnimationEvent endFlag = new AnimationEvent();
-                        endFlag.functionName = "ThisIsEndOfAnimation";
-                        endFlag.stringParameter = _AnimationClip.name;
-                        endFlag.time = _AnimationClip.length;
+                        AnimationEvent endFlag = new AnimationEvent
+                        {
+                            functionName = "ThisIsEndOfAnimation",
+                            stringParameter = _AnimationClip.name,
+                            time = _AnimationClip.length
+                        };
                         _AnimationClip.AddEvent(endFlag);
                     }
                     if (!clipList.Contains(_AnimationClip))
@@ -228,9 +239,8 @@ public class AnimationResourceLoader
         {
             yield break;//完全是为了思路清晰，否则我们看不明白各种针对这东西的分歧处理是些啥
         }
-        AnimationClip _AnimationClip = null;
         string clipkey = type + "/" + additionalPath + "/" + clip_name;
-        AnimationClipDic.TryGetValue(clipkey, out _AnimationClip);
+        AnimationClipDic.TryGetValue(clipkey, out AnimationClip _AnimationClip);
         if (_AnimationClip != null)
         {
             //Debug.Log("动画：" + clipkey + "已经存在");
@@ -249,10 +259,12 @@ public class AnimationResourceLoader
                 readingBundle.Unload(false);
                 if (!AnimationClipDic.ContainsKey(clipkey))
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = _AnimationClip.name;
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = _AnimationClip.name,
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                     AnimationClipDic.Add(clipkey, _AnimationClip);
                 }
@@ -273,7 +285,7 @@ public class AnimationResourceLoader
     // 这个函数的构造就是说，我们虽然正式版本游戏各个type角色的攻击动画都是ab包放一起，但开发环境下他们还是按着自身特点放在那几个文件夹下面，
     // 那么测试环境下我们就干脆把所有resource文件夹下的攻击类动画全load来方便提取。
     // 正式版本游戏是根据脚本决定load哪些包从而构成字典的，不会产生load不用动画的问题
-    public IEnumerator prepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(string type)
+    public IEnumerator PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(string type)
     {
         List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
         List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
@@ -288,10 +300,12 @@ public class AnimationResourceLoader
             else
             {
                 AnimationClip theclip = (AnimationClip)_object;
-                AnimationEvent endFlag = new AnimationEvent();
-                endFlag.functionName = "ThisIsEndOfAnimation";
-                endFlag.stringParameter = theclip.name;
-                endFlag.time = theclip.length;
+                AnimationEvent endFlag = new AnimationEvent
+                {
+                    functionName = "ThisIsEndOfAnimation",
+                    stringParameter = theclip.name,
+                    time = theclip.length
+                };
                 theclip.AddEvent(endFlag);
                 AnimationClipDic.Add(clipkey, theclip);
             }
@@ -303,10 +317,12 @@ public class AnimationResourceLoader
                 Debug.Log("严重错误 技能动画key重复："+clipkey);
             else{
                 AnimationClip theclip = (AnimationClip)_object;
-                AnimationEvent endFlag = new AnimationEvent();
-                endFlag.functionName = "ThisIsEndOfAnimation";
-                endFlag.stringParameter = theclip.name;
-                endFlag.time = theclip.length;
+                AnimationEvent endFlag = new AnimationEvent
+                {
+                    functionName = "ThisIsEndOfAnimation",
+                    stringParameter = theclip.name,
+                    time = theclip.length
+                };
                 theclip.AddEvent(endFlag);
                 AnimationClipDic.Add(clipkey, theclip);
             }
@@ -318,10 +334,12 @@ public class AnimationResourceLoader
                 Debug.Log("严重错误 技能动画key重复："+clipkey);
             else{
                 AnimationClip theclip = (AnimationClip)_object;
-                AnimationEvent endFlag = new AnimationEvent();
-                endFlag.functionName = "ThisIsEndOfAnimation";
-                endFlag.stringParameter = theclip.name;
-                endFlag.time = theclip.length;
+                AnimationEvent endFlag = new AnimationEvent
+                {
+                    functionName = "ThisIsEndOfAnimation",
+                    stringParameter = theclip.name,
+                    time = theclip.length
+                };
                 theclip.AddEvent(endFlag);
                 AnimationClipDic.Add(clipkey, theclip);
             }
