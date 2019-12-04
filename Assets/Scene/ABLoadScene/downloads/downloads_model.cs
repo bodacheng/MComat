@@ -6,7 +6,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
 {
     private IEnumerator ModelResourceDownLoad()
     {
-        foreach (monstersConfigTable.Row row in monstersConfigTable.Instance.rowList)
+        foreach (MonstersConfigTable.Row row in MonstersConfigTable.Instance.rowList)
         {            
             //模型下载任务
             CachDownLoadMission _oneMission = new CachDownLoadMission( "charPretabs/" + row.MONSTER_TYPE,row.REAL_NAME, 0f);

@@ -48,14 +48,14 @@ namespace dataAccess
             {
                 CharacterDataInfo characterDataInfo = new CharacterDataInfo
                 {
-                    monsterId = accountCharacterInfo.monsterId,
+                    ResourceName = accountCharacterInfo.monsterId,
                     monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId,
                     level = 100 //需要一个对应表
                 };
 
                 List<SkillStoneOfPlayerInfoModel> targets = MySkillStonesReader.Instance.GetMonsterEquipingStones(accountCharacterInfo.monsterOfPlayerId);
                 NineAndTwo nineAndTwo = new NineAndTwo();
-                CharacterResourceInfo _TempCharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
+                CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
                 if (_TempCharacterResourceInfo == null)
                 {
                     Debug.Log("角色定义信息错误。monsterId：" + accountCharacterInfo.monsterId);

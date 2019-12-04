@@ -50,7 +50,7 @@ namespace mainMenu
             foreach(CharacterDataInfo oneMember in _Stage.localFight.HeroSets.values)
             {
                 charIcon MyMemberIcon = Instantiate(FighterIcon);
-                CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
+                CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceName);
                 MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                 MyMemberIcon.transform.SetParent(myTeamShowT);
                 MyMemberIcon.transform.localPosition = Vector3.one;
@@ -61,7 +61,7 @@ namespace mainMenu
             foreach(CharacterDataInfo oneMember in _Stage.localFight.EnemySets.values)
             {
                 charIcon MyMemberIcon = Instantiate(FighterIcon);
-                CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(oneMember.monsterId);
+                CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceName);
                 MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                 MyMemberIcon.transform.SetParent(enemyTeamShowT);
                 MyMemberIcon.transform.localPosition = Vector3.one;

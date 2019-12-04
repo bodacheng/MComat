@@ -7,7 +7,7 @@ public partial class CharsManager : MonoBehaviour
     private IEnumerator _loadingProcess;
     public IEnumerator CreateModelForShowingByCach(string monsterId)
     {
-        CharacterResourceInfo _TempCharacterResourceInfo = monstersConfigTable.Instance.RowToCharacterResourceInfo(monstersConfigTable.Instance.Find_RECORD_ID(monsterId.ToString()));
+        CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId.ToString()));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");

@@ -22,8 +22,8 @@ public partial class FightTeam : MonoBehaviour
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
-            CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(characterDataInfo.monsterId);
-            _SideCharIcon.focusingCharIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(characterDataInfo.monsterId),characterResourceInfo._zokusei);
+            CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
+            _SideCharIcon.focusingCharIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
             _SideCharIcon.gameObject.SetActive(true);
             _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
             _SideCharIcon.transform.localScale = Vector3.one;

@@ -248,7 +248,7 @@ namespace mainMenu
                 if (getchar.Current == null)
                     yield break;
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_one.monsterId);
+                characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
                 tar.changeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
                     characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
             }

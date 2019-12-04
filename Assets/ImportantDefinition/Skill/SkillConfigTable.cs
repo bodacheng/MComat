@@ -102,27 +102,23 @@ public class SkillConfigTable
         return SkillConfigsOfType;
     }
     
-    public static RecordIDsAndNames GetSkillIDAndNameArray(string type, bool[] ranges, int rarelevel)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
+    public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, int rarelevel)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
+        Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>();
+        SkillIDAndNameDic.Add("-1","空");
         List<SkillConfig> list = GetSkillConfigsOfType(type);
-        List<string> RecordIDs = new List<string>();
-        List<string> RealNames = new List<string>();
         foreach (SkillConfig one in list)
         {
             if (RangeLimit(one.ai_trigger_ranges.ToList(), ranges[0], ranges[1], ranges[2],ranges[3]) 
                 && 
                 (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
-                RecordIDs.Add(one.RECORD_ID);
-                RealNames.Add(one.REAL_NAME);
+                SkillIDAndNameDic.Add( one.RECORD_ID, one.REAL_NAME );
             }else{
                 Debug.Log("因条件不符合为加入"+ one.REAL_NAME);
             }
         }
-        RecordIDs.Add("-1");
-        RealNames.Add("null");
-        RecordIDsAndNames _SkillIDsAndNames = new RecordIDsAndNames(RecordIDs.ToArray(), RealNames.ToArray());
-        return _SkillIDsAndNames;
+        return SkillIDAndNameDic;
     }
     
     public static bool RangeLimit(List<BehaviorEnterRange> behaviorEnterRangesList, bool close, bool near, bool far, bool outrange)
@@ -520,16 +516,4 @@ public class SkillConfigTable
         return rowList.FindAll(x => x.RARITY_LEVEL == find);
     }
 
-}
-
-public class RecordIDsAndNames
-{
-    public string[] RecordIDs;
-    public string[] Names;
-
-    public RecordIDsAndNames(string[] IDs, string[] SkillNames)
-    {
-        this.RecordIDs = IDs;
-        this.Names = SkillNames;
-    }
 }

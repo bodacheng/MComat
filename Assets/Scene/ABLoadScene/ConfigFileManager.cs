@@ -242,14 +242,14 @@ public class ConfigFileManager : MonoBehaviour {
     public void CharsConfigFileGenerate(string path, TextAsset textAsset)
     {
         if (textAsset != null)
-            monstersConfigTable.Instance.Load(textAsset);
+            MonstersConfigTable.Instance.Load(textAsset);
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
         List<CharacterResourceInfo> AllNewCharacterConfigsOfAllTypes = new List<CharacterResourceInfo>();
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharacterResourceInfo> CharConfigsOfOldConfigFileOFtype = monstersConfigTable.Instance.RowToCharacterResourceInfoList(monstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
+            List<CharacterResourceInfo> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
             List<string> keySonnCharacterRealNames = new List<string>();
             foreach (CharacterResourceInfo oneConfig in CharConfigsOfOldConfigFileOFtype)
             {
@@ -332,8 +332,8 @@ public class ConfigFileManager : MonoBehaviour {
 
             foreach (string keyname in ResourceNamesShouldDeletedFromConfig)
             {
-                List<monstersConfigTable.Row> toDeleteRows = monstersConfigTable.Instance.FindAll_TYPE_REALNAME(chartype, keyname);
-                foreach (monstersConfigTable.Row row in toDeleteRows)
+                List<MonstersConfigTable.Row> toDeleteRows = MonstersConfigTable.Instance.FindAll_TYPE_REALNAME(chartype, keyname);
+                foreach (MonstersConfigTable.Row row in toDeleteRows)
                 {
                     if (!AllDeletedRecordsIDs.Contains(int.Parse(row.RECORD_ID)))
                     {
@@ -342,7 +342,7 @@ public class ConfigFileManager : MonoBehaviour {
                     }
                     else
                         Debug.Log("原monstersConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
-                    monstersConfigTable.Instance.rowList.Remove(row);
+                    MonstersConfigTable.Instance.rowList.Remove(row);
                 }
             }
         }
@@ -361,11 +361,11 @@ public class ConfigFileManager : MonoBehaviour {
                 characterResourceInfo.RECORD_ID = "new";
                 kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
             }
-            monstersConfigTable.Row newRow = monstersConfigTable.Instance.CharacterResourceInfoToRow(characterResourceInfo);
+            MonstersConfigTable.Row newRow = MonstersConfigTable.Instance.CharacterResourceInfoToRow(characterResourceInfo);
             if (newRow != null && newRow.REAL_NAME != null)
-                monstersConfigTable.Instance.rowList.Add(newRow);
+                MonstersConfigTable.Instance.rowList.Add(newRow);
         }
-        monstersConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null? path : "mst_monster");
+        MonstersConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null? path : "mst_monster");
     }
     
     public void GenerateTutorialCharacterFiles()

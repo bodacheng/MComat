@@ -6,8 +6,8 @@
 [System.Serializable]
 public class CharacterDataInfo
 {
-    public string monsterOfPlayerId = "-1";
-    public string monsterId = "-1";
+    public string monsterOfPlayerId;
+    public string ResourceName;
     public int level = 1;
     public int HP = 500; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。    
     public NineAndTwo _NineAndTwo;//
@@ -31,14 +31,14 @@ public class CharacterDataInfo
     public CharacterDataInfo(string localID, string resource_num,NineAndTwo _NineAndTwo)
     {
         monsterOfPlayerId = localID;
-        monsterId = resource_num;
+        ResourceName = resource_num;
         this._NineAndTwo = _NineAndTwo;
     }
 
     public void Dissolve()
     {
         monsterOfPlayerId = (-1).ToString();
-        monsterId = "-1";
+        ResourceName = null;
         _NineAndTwo = null;
     }
 
@@ -47,10 +47,10 @@ public class CharacterDataInfo
         GetMonsterOfPlayerDetailModel characterDataInfoJson = new GetMonsterOfPlayerDetailModel
         {
             playerId = "1",
-            monsterId = this.monsterId.ToString(),
-            monsterOfPlayerId = this.monsterOfPlayerId,
+            monsterId = ResourceName,
+            monsterOfPlayerId = monsterOfPlayerId,
             //characterDataInfoJson.experience = 
-            level = this.level,
+            level = level,
         };
         return characterDataInfoJson;
     }

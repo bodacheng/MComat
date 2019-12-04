@@ -82,7 +82,7 @@ public class TryEditALines : MainSceneProcess
             yield break;
         }
         yield return TheNineSlot.Instance.ReadANineAndTwo(_CharacterDataInfo);
-        CharacterResourceInfo _CharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_CharacterDataInfo.monsterId);
+        CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_CharacterDataInfo.monsterId);
         SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
         yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()

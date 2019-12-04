@@ -44,8 +44,8 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         TextAsset CharacterConfigTextFile = (TextAsset)loadAsset.asset;
         if (CharacterConfigTextFile != null)
         {
-            monstersConfigTable.Instance.Load(CharacterConfigTextFile);
-            monstersConfigTable.refreshCharacterResourceInfoDic();
+            MonstersConfigTable.Instance.Load(CharacterConfigTextFile);
+            MonstersConfigTable.RefreshCharacterResourceInfoDic();
         }
         else{
             Debug.Log("角色配置文件错误。");

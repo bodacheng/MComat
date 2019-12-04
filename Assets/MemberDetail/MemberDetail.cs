@@ -125,7 +125,7 @@ namespace mainMenu
                 yield return readshowmodel;
                 yield break;
             }else{
-                this._SkillsPrintOut.focusingResourceNum = _focusingCharacterDataInfo.monsterId;
+                this._SkillsPrintOut.focusingResourceNum = _focusingCharacterDataInfo.ResourceName;
                 IEnumerator readshowmodel = _modelShower.ShowThisCharacterModel(_focusingCharacterDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
@@ -138,7 +138,7 @@ namespace mainMenu
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
                 if (outsideDataLink == null)
                 {
-                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _focusingCharacterDataInfo.monsterId);
+                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _focusingCharacterDataInfo.ResourceName);
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
@@ -152,7 +152,7 @@ namespace mainMenu
         public IEnumerator SkillEditConfirmAnimation()
         {
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
+            CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
             {
@@ -199,7 +199,7 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharacterResourceInfo characterResourceInfo = monstersConfigTable.getCharacterResourceInfo(accountCharacterInfo.monsterId);
+                CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
                 CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
                 yield return (aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI));
                 yield return (

@@ -182,7 +182,7 @@ namespace mainMenu
 
         public IEnumerator SkillShowRunWithPreparing(string keyname)
         {
-            CharacterResourceInfo _watchingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(focusingResourceNum);
+            CharacterResourceInfo _watchingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingResourceNum);
             //下面这一大片，在资源存在的情况下压根不应该运行        
 
             if (this.focusingCharacterData.Animation_Manger != null)
@@ -265,7 +265,7 @@ namespace mainMenu
 
         public void SkillsPrintGamenRefresh(CharacterDataInfo _watchingCharInfo)//根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
         {
-            CharacterResourceInfo _watchingCharacterResourceInfo = monstersConfigTable.getCharacterResourceInfo(_watchingCharInfo.monsterId);
+            CharacterResourceInfo _watchingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_watchingCharInfo.ResourceName);
             skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo._NineAndTwo != null)
             {
