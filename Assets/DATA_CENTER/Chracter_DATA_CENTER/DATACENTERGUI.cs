@@ -1,9 +1,7 @@
 ﻿#if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using HittingDetection;
 using Soul;
 
 [CustomEditor(typeof(Data_Center))]
@@ -15,81 +13,48 @@ public class DATACENTERGUI : Editor {
     public override void OnInspectorGUI()
     {
         myScript = (Data_Center)target;
+        
         title = new GUIStyle(GUI.skin.box);
         title.normal.textColor = Color.blue;
         title.fontSize = 11;
-        //title.fixedWidth = 100f;
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("以下项目在新角色构成时请按顺序填写，填写完毕后点击Construct Chracter按钮",title);
-
         GUILayout.Space(5f);
+        
         myScript.Zokusei = (Zokusei)EditorGUILayout.EnumPopup("zokusei", myScript.Zokusei);
-
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("WholeT", title);
-        EditorGUILayout.BeginVertical();
         myScript.WholeT = EditorGUILayout.ObjectField("WholeT", myScript.WholeT, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
 
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("各武器transform", title);
-
-        EditorGUILayout.BeginVertical();
         myScript.right_hand_t = EditorGUILayout.ObjectField("Right Hand", myScript.right_hand_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
         myScript.left_hand_t = EditorGUILayout.ObjectField("Left Hand", myScript.left_hand_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
         myScript.right_foot_t = EditorGUILayout.ObjectField("Right Foot", myScript.right_foot_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
         myScript.left_foot_t = EditorGUILayout.ObjectField("Left Foot", myScript.left_foot_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
         myScript.tail_t = EditorGUILayout.ObjectField("Tail", myScript.tail_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
         myScript.head_t = EditorGUILayout.ObjectField("Head", myScript.head_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
         GUILayout.Space(5f);
+        
         EditorGUILayout.LabelField("HitBox Transforms", title);
-        EditorGUILayout.BeginVertical();
         myScript.spine_hitbox_t = EditorGUILayout.ObjectField("SpineHitBox Transform", myScript.spine_hitbox_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.BeginVertical();
         myScript.left_arm_hitbox_t = EditorGUILayout.ObjectField("LeftArmHitBox Transform", myScript.left_arm_hitbox_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.BeginVertical();
         myScript.right_arm_hitbox_t = EditorGUILayout.ObjectField("RightArmHitBox Transform", myScript.right_arm_hitbox_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.BeginVertical();
         myScript.left_leg_hitbox_t = EditorGUILayout.ObjectField("LeftLegHitBox Transform", myScript.left_leg_hitbox_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.BeginVertical();
         myScript.right_leg_hitbox_t = EditorGUILayout.ObjectField("RightLegHitBox Transform", myScript.right_leg_hitbox_t, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
-
+        GUILayout.Space(5f);
+        
         //GUILayout.Space(5f);
         //EditorGUILayout.LabelField("盾牌设置（如果不设置，将生成默认盾牌）", title);
         //EditorGUILayout.BeginVertical();
         //myScript.Shield = EditorGUILayout.ObjectField("Shield", myScript.Shield, typeof(BO_Shield), true) as BO_Shield;
         //EditorGUILayout.EndVertical();
-
-        GUILayout.Space(5f);
+      
         if (GUILayout.Button("Construct Chracter"))
         {
             myScript.geometryCenter = myScript.transform;
             if (myScript.WholeT)
             {
-                //　WholeT上应该有以下组件：BO_Ani_E，BO_Weapon_Animation_Events，ResistanceManager，SkillCancelFlag，Animator，Rigidbody,AudioSource
-                // 以上这些我们靠SKillCancelFlag来加载
                 if (myScript.WholeT.GetComponent<OutsideDataLink>() == null)
                     myScript.WholeT.gameObject.AddComponent<OutsideDataLink>();
                 myScript.WholeT.GetComponent<OutsideDataLink>()._C = myScript;
@@ -97,57 +62,47 @@ public class DATACENTERGUI : Editor {
                 Debug.Log(" 没有适配wholeT，返回");
                 return;
             }
-
-            myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
-            myScript._SkillCancelFlag._C = myScript;
+            
+            // 关于collisionDetectionMode ，计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
+            // 设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
+            myScript._AudioSource = myScript.WholeT.GetComponent<AudioSource>();
+            myScript.Animation_Manger = myScript.gameObject.GetComponent<Animation_Manger>();
+            myScript.Animation_Manger.Animator = myScript.WholeT.GetComponent<Animator>();
             myScript.Sensor = myScript.gameObject.GetComponent<Sensor>();
             myScript.Sensor.sensor_radius = 15f;
-            myScript.animator = myScript.WholeT.GetComponent<Animator>();
-            myScript.animator.applyRootMotion = false;
-            myScript.animator.updateMode = AnimatorUpdateMode.Normal;
-            myScript.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
-            myScript.Animation_Manger = myScript.gameObject.GetComponent<Animation_Manger>();
-            myScript.Animation_Manger.Animator = myScript.animator;
+            myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
+            myScript._SkillCancelFlag._C = myScript;
             myScript._FightAttriCalReference = myScript.gameObject.GetComponent<FightAttriCalReference>();
             myScript._FightAttriCalReference._Center = myScript;
+            myScript._BO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
+            myScript._BO_Ani_E._DATA_CENTER = myScript;
             myScript.AIStateRunner = myScript.gameObject.GetComponent<AIStateRunner>();            
             myScript.AIStateRunner._BO_Health = myScript._FightAttriCalReference;
             myScript.AIStateRunner._SkillCancelFlag = myScript._SkillCancelFlag;
             myScript.buffsRunner = myScript.gameObject.GetComponent<BuffsRunner>();
-            myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();
-            
-            myScript.Rigidbody = myScript.WholeT.GetComponent<Rigidbody>();//这个只在战斗模式需要
-            myScript.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;//计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
-            //设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
-            myScript.Rigidbody.useGravity = false;
-            myScript.Rigidbody.mass = 100f;
-            myScript.Rigidbody.drag = 0f;
-            myScript.Rigidbody.angularDrag = 0.05f;
-            myScript.Rigidbody.isKinematic = false;
-            myScript.Rigidbody.interpolation = RigidbodyInterpolation.None;
-            myScript.Rigidbody.constraints = RigidbodyConstraints.None;
-            myScript.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            
-            AudioSource audioSource = myScript.WholeT.GetComponent<AudioSource>();
-            myScript._AudioSource = audioSource;
-            
-            BO_Ani_E bO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
-            myScript._BO_Ani_E = bO_Ani_E;
-            bO_Ani_E._DATA_CENTER = myScript;
-            
-            Pusher pusher =  myScript.WholeT.GetComponent<Pusher>();
-            myScript.pusher = pusher;
-            pusher._DATA_CENTER = myScript;
-            
-            BO_Weapon_Animation_Events bO_Weapon_Animation_Events = myScript.WholeT.GetComponent<BO_Weapon_Animation_Events>();
-            myScript.bO_Weapon_Animation_Events = bO_Weapon_Animation_Events;
-            
+            myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();                       
+            myScript._BasicPhysicSupport = myScript.WholeT.GetComponent<BasicPhysicSupport>();
+            myScript._BasicPhysicSupport._DATA_CENTER = myScript;
+            myScript._BasicPhysicSupport.animator = myScript.WholeT.GetComponent<Animator>();
+            myScript._BasicPhysicSupport.animator.applyRootMotion = false;
+            myScript._BasicPhysicSupport.animator.updateMode = AnimatorUpdateMode.Normal;
+            myScript._BasicPhysicSupport.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+            myScript._BasicPhysicSupport.Rigidbody = myScript.WholeT.GetComponent<Rigidbody>();//这个只在战斗模式需要
+            myScript._BasicPhysicSupport.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            myScript._BasicPhysicSupport.Rigidbody.useGravity = false;
+            myScript._BasicPhysicSupport.Rigidbody.mass = 100f;
+            myScript._BasicPhysicSupport.Rigidbody.drag = 0f;
+            myScript._BasicPhysicSupport.Rigidbody.angularDrag = 0.05f;
+            myScript._BasicPhysicSupport.Rigidbody.isKinematic = false;
+            myScript._BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
+            myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.None;
+            myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;            
+            myScript.bO_Weapon_Animation_Events = myScript.WholeT.GetComponent<BO_Weapon_Animation_Events>();
             ResistanceManager resistanceManager = myScript.WholeT.GetComponent<ResistanceManager>();
             ShaderManager shaderManager = myScript.transform.GetComponent<ShaderManager>();
             resistanceManager._ShaderManager = shaderManager;
             myScript._ResistanceManager = resistanceManager;
             myScript._ShaderManager = shaderManager;
-            
             myScript.Personality_events = myScript.WholeT.GetComponent<Personality_events>();
             
             BO_Hitbox focusingHitBox = null;
@@ -222,35 +177,6 @@ public class DATACENTERGUI : Editor {
                 focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
 
-            //foreach (Transform _t in weaponPartsOnBody)
-            //{
-            //    if (_t.GetComponent<BO_Marker_Manager>() == null)
-            //    {
-            //        _t.gameObject.AddComponent<BO_Marker_Manager>();
-            //        GameObject child_marker = new GameObject();
-            //        child_marker.name = "WeaponMarker";
-            //        child_marker.AddComponent<BO_Marker>();
-            //        child_marker.GetComponent<BO_Marker>().radius = 0.5f;
-            //        child_marker.transform.SetParent(_t);
-            //        child_marker.transform.localPosition = Vector3.zero;
-            //        _t.GetComponent<BO_Marker_Manager>().SetWeaponOwnerHealth(myScript.BO_Health);
-            //        if (_t == myScript.left_foot_t || _t == myScript.right_foot_t)
-            //        {
-            //            GameObject child_marker2 = new GameObject();
-            //            child_marker2.AddComponent<BO_Marker>();
-            //            child_marker2.GetComponent<BO_Marker>().radius = 0.5f;
-            //            child_marker2.transform.SetParent(_t);
-            //            child_marker2.transform.localPosition = child_marker.transform.localPosition - new Vector3(0,0,0.5f);//脚踝
-            //        }
-            //    }else{
-            //        BO_Marker[] markers = _t.GetComponentsInChildren<BO_Marker>();
-            //        foreach(BO_Marker marker in markers)
-            //        {
-            //            marker.radius = 0.5f;
-            //        }
-            //    }
-            //}
-
             string bladeName;
             //string shieldName;
             switch(myScript.Zokusei)
@@ -299,9 +225,9 @@ public class DATACENTERGUI : Editor {
                 myScript.Personality_events.left_sword = enegryBlade.GetComponent<ParticleSystem>();
             }
 
-            if (myScript.floorChecks == null)
+            if (myScript._BasicPhysicSupport.floorCheckersT == null)
             {
-                GameObject floorChecker = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + "FloorChecks") as GameObject);
+                GameObject floorChecker = Instantiate(Resources.Load("BasicCharComponent/FloorChecks") as GameObject);
                 if (floorChecker)
                 {
                     floorChecker.name = "FloorChecks";
@@ -310,7 +236,7 @@ public class DATACENTERGUI : Editor {
                     floorChecker.transform.localPosition = Vector3.zero;
                     floorChecker.transform.rotation = Quaternion.identity;
                 }
-                myScript.floorChecks = floorChecker.transform;
+                myScript._BasicPhysicSupport.floorCheckersT = floorChecker.transform;
             }
 
             //2019.3.29 我们基本放弃了传统防御盾逻辑。这让我们无比纠结但相关防御检测代码还在系统里只是没打开。
@@ -351,7 +277,7 @@ public class DATACENTERGUI : Editor {
 
         GUILayout.Space(5f);
         EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript.floorChecks = EditorGUILayout.ObjectField("Floor Checker", myScript.floorChecks, typeof(Transform), true) as Transform;
+        myScript._BasicPhysicSupport.floorCheckersT = EditorGUILayout.ObjectField("Floor Checker", myScript._BasicPhysicSupport.floorCheckersT, typeof(Transform), true) as Transform;
         EditorGUILayout.EndVertical();
 
         GUILayout.Space(5f);
@@ -380,7 +306,7 @@ public class DATACENTERGUI : Editor {
         }
     }
 
-    List<Collider> allCollider = new List<Collider>();
+    readonly List<Collider> allCollider = new List<Collider>();
     public void CleanAllChildrenFromRigidBody(Transform T)
     {
         foreach (Transform _t in T)
@@ -401,3 +327,32 @@ public class DATACENTERGUI : Editor {
     }
 }
 #endif
+
+            //foreach (Transform _t in weaponPartsOnBody)
+            //{
+            //    if (_t.GetComponent<BO_Marker_Manager>() == null)
+            //    {
+            //        _t.gameObject.AddComponent<BO_Marker_Manager>();
+            //        GameObject child_marker = new GameObject();
+            //        child_marker.name = "WeaponMarker";
+            //        child_marker.AddComponent<BO_Marker>();
+            //        child_marker.GetComponent<BO_Marker>().radius = 0.5f;
+            //        child_marker.transform.SetParent(_t);
+            //        child_marker.transform.localPosition = Vector3.zero;
+            //        _t.GetComponent<BO_Marker_Manager>().SetWeaponOwnerHealth(myScript.BO_Health);
+            //        if (_t == myScript.left_foot_t || _t == myScript.right_foot_t)
+            //        {
+            //            GameObject child_marker2 = new GameObject();
+            //            child_marker2.AddComponent<BO_Marker>();
+            //            child_marker2.GetComponent<BO_Marker>().radius = 0.5f;
+            //            child_marker2.transform.SetParent(_t);
+            //            child_marker2.transform.localPosition = child_marker.transform.localPosition - new Vector3(0,0,0.5f);//脚踝
+            //        }
+            //    }else{
+            //        BO_Marker[] markers = _t.GetComponentsInChildren<BO_Marker>();
+            //        foreach(BO_Marker marker in markers)
+            //        {
+            //            marker.radius = 0.5f;
+            //        }
+            //    }
+            //}

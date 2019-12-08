@@ -21,17 +21,14 @@ public partial class Data_Center : MonoBehaviour
     public Zokusei Zokusei;
     public Transform geometryCenter;
     public Transform WholeT;
-    public Transform floorChecks;
     public AudioSource _AudioSource;
-    public Animator animator;   
     public Sensor Sensor;   
     public Animation_Manger Animation_Manger;
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
-    public Rigidbody Rigidbody;
     public FightAttriCalReference _FightAttriCalReference;
     public BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
-    public Pusher pusher;
+    public BasicPhysicSupport _BasicPhysicSupport;
     public AIStateRunner AIStateRunner;
     public BuffsRunner buffsRunner;
     public ResistanceManager _ResistanceManager;
@@ -43,23 +40,16 @@ public partial class Data_Center : MonoBehaviour
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
 
     protected bool phase1Initialized, phase2Initialized;
-    Transform[] floorCheckers;
-    float groundedCount;
-    float airCount;
-    bool grounded;
     
     [Header("传统防御盾。可能真的用不到了")]
     [Space(1)]
     public BO_Shield Shield;
     
-    public bool onBattleGroundBundary;
-    public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
-
     public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
 
     public bool IfPreparedForBattle()
     {
-        return phase1Initialized && phase2Initialized ? true : false;
+        return phase1Initialized && phase2Initialized;
     }
 
     void Awake()
@@ -72,16 +62,11 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!phase1Initialized)
         {
-            this.Rigidbody.useGravity = false;
+            _BasicPhysicSupport.Rigidbody.useGravity = false;
             BodyElementTagAndLayerSet(null);
-            floorCheckers = new Transform[floorChecks.childCount];
-            for (int i = 0; i < floorCheckers.Length; i++)
-            {
-                floorCheckers[i] = floorChecks.GetChild(i);
-            }
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(_FightAttriCalReference,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             string personalEffectsPath;
-            switch (this.Zokusei)
+            switch (Zokusei)
             {
                 case Zokusei.darkMagic:
                     personalEffectsPath = "darkMagic";
@@ -227,8 +212,8 @@ public partial class Data_Center : MonoBehaviour
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
     public void DeathInitialize()
     {
-        gameObject.layer = this._TeamConfig.deadLayer;
-        this._FightAttriCalReference.ChangeLayerForAllSelfColliders(_TeamConfig.deadLayer);
+        gameObject.layer = _TeamConfig.deadLayer;
+        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_TeamConfig.deadLayer);
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。
@@ -249,69 +234,24 @@ public partial class Data_Center : MonoBehaviour
     {
         if (AIStateRunner.IfRunning())
         {
-            GroundedCal();
-            animator.SetBool("Grounded", Grounded);
-            animator.SetFloat("airCount", airCount);
-            animator.SetFloat("groundedCount", groundedCount);
-            groundedCount = (Grounded) ? groundedCount += Time.deltaTime : 0f;
-            airCount = (!Grounded) ? airCount += Time.deltaTime : 0f;
             Sensor.SensorFixedUpdate();
             buffsRunner.BuffsRunnerFixedUpdate();
             _FightAttriCalReference.HealthBodyFixedUpdate();
             _SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
         }
     }
-
-    public bool Grounded
-    {
-        get => grounded;
-        set { 
-            grounded = value;
-            Rigidbody.useGravity = UsingGravity && !grounded;
-        }
-    }
-
-    bool UsingGravity = true;
-    public void SetUsingGravity(bool _on)
-    {
-        UsingGravity = _on;
-        Rigidbody.useGravity = _on;
-    }
-    
-    float floorY;
-    public void GroundedCal()
-    {
-        if (floorCheckers == null)
-        {
-            Grounded = false;
-            return;
-        }
-        foreach (Transform check in floorCheckers)
-        {
-            if (floorY > check.transform.position.y)//Mathf.Abs(check.transform.position.y - this.floorY) < grounded_judgement_RayUpDis &&
-            {
-                Grounded = true;
-                return;
-            }
-        }
-        Grounded = false;
-    }
-        
+   
     public void CleanClear()
     {
-        this.Grounded = true;
-        if (animator)
-        {
-            animator.SetBool("Grounded", true);
-            animator.SetFloat("groundedCount", 10);
-        }
-        this.Sensor.Stop();
-        this.bO_Weapon_Animation_Events.ClearMarkerManagers();
-        this.buffsRunner.endAllCoroutines();
-        this.pusher.hiddenMethods.ClearHitCountForAttackStepping();  
+        _BasicPhysicSupport.hiddenMethods.Grounded = true;
+        Sensor.Stop();
+        bO_Weapon_Animation_Events.ClearMarkerManagers();
+        buffsRunner.endAllCoroutines();
+        _BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();
+        _BasicPhysicSupport.hiddenMethods.ResetAnimator();
     }
 
-    private float p1_to_me,p2_to_me;
+    float p1_to_me, p2_to_me;
     public int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
     {
         p1.y = gameObject.transform.position.y;

@@ -16,7 +16,7 @@ namespace Soul
         public BO_Ani_E _BO_Ani_E;
         public FightAttriCalReference _FightAttriCalReference;
         public ResistanceManager _ResistanceManager;
-        public Pusher _Pusher;
+        public BasicPhysicSupport _BasicPhysicSupport;
         public Sensor Sensor;
         public InputManager _inputManager;
         public Animator _Animator;
@@ -31,7 +31,6 @@ namespace Soul
         public Personality_events personality_Events;
 
         public float AT; //攻击力,或者说攻击力权重。这个设计的目的在于让所有技能的伤害可以在技能表里以一种形式直接设置。
-
         public string StateKey;
         public int splevel;
         public Inputs_defined enterInput = Inputs_defined.Null;
@@ -50,13 +49,13 @@ namespace Soul
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER.AIStateRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
-            this._inputManager = this._AIStateRunner._inputManager;
-            this._Animator = _DATA_CENTER.animator;
+            this._inputManager = _AIStateRunner._inputManager;
             this._SkillCancelFlag = _DATA_CENTER._SkillCancelFlag;
             this._BO_Ani_E = _DATA_CENTER._BO_Ani_E;
             this._Weapon_Animation_Events = _DATA_CENTER.bO_Weapon_Animation_Events;
-            this._Rigidbody = _DATA_CENTER.Rigidbody;
-            this._Pusher = _DATA_CENTER.pusher;
+            this._BasicPhysicSupport = _DATA_CENTER._BasicPhysicSupport;
+            this._Animator = _BasicPhysicSupport.animator;
+            this._Rigidbody = _BasicPhysicSupport.Rigidbody;
             this._ResistanceManager = _DATA_CENTER._ResistanceManager;
             this._BuffsRunner = _DATA_CENTER.buffsRunner;
             this.blendShapeProxy = _DATA_CENTER.blendShapeProxy;
@@ -293,9 +292,8 @@ namespace Soul
                 relativePos.y = 0;
             }
             v = relativePos.normalized * acceleration;
-            //gameObject.GetComponent<Rigidbody>().AddForce(relativePos.normalized * acceleration * Time.deltaTime, ForceMode.VelocityChange);
-            _Rigidbody.AddForce(v, ForceMode.VelocityChange);
-            //_Rigidbody.velocity = v;
+            //_Rigidbody.AddForce(v, ForceMode.VelocityChange);
+            _Rigidbody.velocity = v;
             return _Rigidbody.velocity.magnitude;
         }
 

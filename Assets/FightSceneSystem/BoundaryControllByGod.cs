@@ -72,22 +72,23 @@ public class BoundaryControllByGod : MonoBehaviour {
             {
                 if (!oneBoy.IsDead.Value)
                 {
+                    Debug.Log("fixing");
                     battleRingCenter.y = oneBoy.WholeT.position.y;
                     distanceFromCharToCenter = (oneBoy.WholeT.position - battleRingCenter).magnitude;
                     if (distanceFromCharToCenter > BattleRingRadius)
                     {
-                        oneBoy.onBattleGroundBundary = true;
+                        oneBoy._BasicPhysicSupport.hiddenMethods.onBattleGroundBundary = true;
                         oneBoy.WholeT.position = Vector3.Lerp(oneBoy.WholeT.position, battleRingCenter,Time.deltaTime); //Vector3.Lerp(oneBoy.WholeT.position, battleRingCenter,Time.deltaTime * (distanceFromCharToCenter - BattleRingRadius) * 0.4f);
-                        oneBoy.antiWallDirection = battleRingCenter - oneBoy.WholeT.position;
+                        oneBoy._BasicPhysicSupport.hiddenMethods.antiWallDirection = battleRingCenter - oneBoy.WholeT.position;
                     }
                     else
                     {
-                        oneBoy.onBattleGroundBundary = false;
+                        oneBoy._BasicPhysicSupport.hiddenMethods.onBattleGroundBundary = false;
                     }
                 }
                 else
                 {
-                    oneBoy.onBattleGroundBundary = false;
+                    oneBoy._BasicPhysicSupport.hiddenMethods.onBattleGroundBundary = false;
                 }
             }
         }

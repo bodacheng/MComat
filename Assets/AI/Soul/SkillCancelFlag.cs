@@ -46,7 +46,6 @@ public class SkillCancelFlag : MonoBehaviour {
 
     public Data_Center _C;
     public HiddenMethods hiddenMethods;
-    
     public bool Cancel_Flag;
     bool attackApproaching;
     bool rotationAdjustmentStartFlag = true;
@@ -91,7 +90,7 @@ public class SkillCancelFlag : MonoBehaviour {
             attackApproaching = false;//与校准方向一起 开始校准迈步
         }
         else rotationAdjustmentStartFlag &= i != 0;
-        _C.pusher.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
+        _C._BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 
     public void TurnRotationAdjustmentStartFlag(int i = 1)
@@ -104,6 +103,6 @@ public class SkillCancelFlag : MonoBehaviour {
             attackApproaching = true;//与校准方向一起 开始校准迈步
         }
         else rotationAdjustmentStartFlag &= i != 0;
-        _C.pusher.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
+        _C._BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 }

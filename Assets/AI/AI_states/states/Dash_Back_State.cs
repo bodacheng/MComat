@@ -30,7 +30,7 @@ public class Dash_Back_State : AI_State
 
     public override bool Capacity_enter_condition()
     {
-        return _DATA_CENTER.Grounded;
+        return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
 
     public override bool Enter_condition_priority2()

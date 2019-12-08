@@ -195,9 +195,9 @@ public class Move_State : AI_State
         {
             Sensor.ContinuousDetectionStart(-1);//这个的真正目的是把检测关闭
         }
-        if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
+        if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
-            use_direction = _DATA_CENTER.antiWallDirection;
+            use_direction = _BasicPhysicSupport.hiddenMethods.antiWallDirection;
             return;
         }
         if (Timeup())
@@ -285,7 +285,7 @@ public class Move_State : AI_State
         {
             _Animator.SetFloat("speed", 10f);
             Move(use_direction, speed, true);
-            RotateToDirection(use_direction,10f, true);
+            RotateToDirection(use_direction,20f, true);
         }
         else
         {
@@ -302,7 +302,7 @@ public class Move_State : AI_State
         {
             _Animator.SetFloat("speed", 10f);
             Move(use_direction, speed, true);
-            RotateToDirection(use_direction,10f, true);
+            RotateToDirection(use_direction,20f, true);
         }else{
             _Animator.SetFloat("speed", 0f);
             _Rigidbody.velocity = Vector3.zero;

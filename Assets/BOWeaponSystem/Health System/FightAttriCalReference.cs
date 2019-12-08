@@ -197,11 +197,11 @@ public partial class FightAttriCalReference : MonoBehaviour
                 case SpecialApply.gravitylost:
                     gravityloststart = () =>
                     {
-                        _Center.SetUsingGravity(false);
+                        _Center._BasicPhysicSupport.SetUsingGravity(false);
                     };
                     gravitylostend = () =>
                     {
-                        _Center.SetUsingGravity(true);
+                        _Center._BasicPhysicSupport.SetUsingGravity(true);
                     };
                     burstCoroutine = new customCoroutine(gravityloststart, 0.2f, gravitylostend);
                     _Center.buffsRunner.runSubCoroutineOfState(burstCoroutine);
@@ -377,9 +377,9 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
 	}
     
-    public void HitCountPlus() => this._ComboHitCount.HitCountPlus();//打别人计数
-    public int GetBeHitCount() => this._BeHitCount.getBeHitCount(); //自己被揍计数
-    public void BeHitCountInterrupt() => this._BeHitCount.BeHitCountInterrupt();
+    public void HitCountPlus() => _ComboHitCount.HitCountPlus();//打别人计数
+    public int GetBeHitCount() => _BeHitCount.getBeHitCount(); //自己被揍计数
+    public void BeHitCountInterrupt() => _BeHitCount.BeHitCountInterrupt();
 
     // 旧防御盾系列函数。已经基本不用
     public void SetShield(BO_Shield _shield)

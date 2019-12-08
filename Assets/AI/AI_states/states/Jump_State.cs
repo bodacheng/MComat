@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Soul;
 
 public class Jump_State : AI_State
 {	
-	private string clip_name;
-    private float forward_force;
-    private float vertical_force;
-    private float state_time;
+	private readonly string clip_name;
+    private readonly float forward_force;
+    private readonly float vertical_force;
+    private readonly float state_time;
     private float time_counter;
     private Vector3 jumpDirection;
     private Transform mainCam;
@@ -48,33 +46,17 @@ public class Jump_State : AI_State
 
     public override bool Capacity_enter_condition()
     {
-        if (!_DATA_CENTER.Grounded)
-        {
-            return false;
-        }return true;
+        return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
 
     public override bool Enter_condition_priority2()
-	{   
-        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0  && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges))
-        {
-            return true;
-        }
-        return false;
-	}
+	{
+        return Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
+    }
 
     public override bool Naturally_exit_condition()
     {
-        if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
-            return true;
-        if (time_counter > this.state_time)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || time_counter > this.state_time;
     }
 
     Vector3 damagingWeaponComingDirection;
@@ -181,7 +163,7 @@ public class Jump_State : AI_State
 	{
         if (!jumpSuccessed)
         {
-            if (_DATA_CENTER.Grounded)
+            if (_BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 if (IfVectorClean(jumpDirection))
                     _Rigidbody.velocity = jumpDirection;

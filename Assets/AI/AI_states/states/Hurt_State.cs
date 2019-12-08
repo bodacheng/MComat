@@ -34,7 +34,7 @@ public class Hurt_State : AI_State {
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
 
-        touchingEnemyBody = _Pusher.hiddenMethods.meTouchingEnemyBody;//这个奇葩设定的逻辑是，如果守击的瞬间我角色贴着敌人的肉，那么攻击给我的推力就包括一个敌人前方的力。没错这个是个简化逻辑，其他敌人摸到我的话我也受到攻击方正前推力。
+        touchingEnemyBody = _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody;//这个奇葩设定的逻辑是，如果守击的瞬间我角色贴着敌人的肉，那么攻击给我的推力就包括一个敌人前方的力。没错这个是个简化逻辑，其他敌人摸到我的话我也受到攻击方正前推力。
         hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
         int ranDom = Random.Range(0, hurtclips.Count);
         Animation_Manger.AnimationTrigger(hurtclips[ranDom]);
@@ -102,7 +102,9 @@ public class Hurt_State : AI_State {
         _FightAttriCalReference.SetGettingDamageState(false);
         time_counter = 0f;
         if (fixpostween != null)
+        {
             fixpostween.Kill(false);
+        }
         _Rigidbody.velocity = Vector3.zero;
         if (_AIStateRunner.GetTryState().StateType == stateType.AC || _AIStateRunner.GetTryState().StateType == stateType.GI ||
             _AIStateRunner.GetTryState().StateType == stateType.GM || _AIStateRunner.GetTryState().StateType == stateType.GR)

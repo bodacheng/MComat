@@ -29,27 +29,27 @@ namespace Soul
         #endregion
 
         #region 运行时活参数
-        private Empty_State empty_State = new Empty_State();
-        private AI_State now_state;
-        private AI_State lastState;
-        private AI_State try_state;
-        private string current_state_num;
-        private IDictionary<string, AI_State> state_Dictionary = new Dictionary<string, AI_State>();
-        private IDictionary<string, State_Transition_Set> state_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
-        private List<State_Rate_Set> avaliable_casual_Transitions = new List<State_Rate_Set>();
-        private List<State_Rate_Set> casual_TransitionsPriority1 = new List<State_Rate_Set>();
-        private List<State_Rate_Set> casual_TransitionsPriority2 = new List<State_Rate_Set>();
-        private List<State_Rate_Set> casual_TransitionsPriority3 = new List<State_Rate_Set>();
-        private List<string> avaliable_forced_Transitions = new List<string>();
-        private State_Transition_Set CurrentStateTransitionSet;
-        private List<AI_State> AINext = new List<AI_State>();
-        private List<AI_State> AINextPriority1 = new List<AI_State>();
-        private List<AI_State> AINextPriority2 = new List<AI_State>();
-        private List<AI_State> AINextPriority3 = new List<AI_State>();
-        private List<AI_State> States_for_AbsoluteInput = new List<AI_State>();//该列表在处理的时候不包括待机状态
-        private AI_State commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+        Empty_State empty_State = new Empty_State();
+        AI_State now_state;
+        AI_State lastState;
+        AI_State try_state;
+        string current_state_num;
+        IDictionary<string, AI_State> state_Dictionary = new Dictionary<string, AI_State>();
+        IDictionary<string, State_Transition_Set> state_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
+        List<State_Rate_Set> avaliable_casual_Transitions = new List<State_Rate_Set>();
+        List<State_Rate_Set> casual_TransitionsPriority1 = new List<State_Rate_Set>();
+        List<State_Rate_Set> casual_TransitionsPriority2 = new List<State_Rate_Set>();
+        List<State_Rate_Set> casual_TransitionsPriority3 = new List<State_Rate_Set>();
+        List<string> avaliable_forced_Transitions = new List<string>();
+        State_Transition_Set CurrentStateTransitionSet;
+        List<AI_State> AINext = new List<AI_State>();
+        List<AI_State> AINextPriority1 = new List<AI_State>();
+        List<AI_State> AINextPriority2 = new List<AI_State>();
+        List<AI_State> AINextPriority3 = new List<AI_State>();
+        List<AI_State> States_for_AbsoluteInput = new List<AI_State>();//该列表在处理的时候不包括待机状态
+        AI_State commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         #endregion
-        
+
         public void SetPlayerMode(bool result)
         {
             playerMode = result;

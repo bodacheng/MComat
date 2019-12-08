@@ -106,11 +106,11 @@
     <Compile Include="Assets\AudioManager\AudioManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
     <Compile Include="Assets\BOWeaponSystem\Decompositioner.cs" />
+    <Compile Include="Assets\BOWeaponSystem\Health System\BasicPhysicSupport.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BO_Hitbox.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference_CriticalGauge.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\Health_BasicClasses.cs" />
-    <Compile Include="Assets\BOWeaponSystem\Health System\Pusher.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\ResistanceManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\ShaderManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker.cs" />

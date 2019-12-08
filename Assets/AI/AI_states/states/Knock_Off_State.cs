@@ -38,7 +38,7 @@ public class Knock_Off_State : AI_State
         touchedBoundary = false;
         dropped = false;
         canWakeUp = false;
-        _DATA_CENTER.SetUsingGravity(false);
+        _BasicPhysicSupport.SetUsingGravity(false);
         _FightAttriCalReference.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
@@ -73,7 +73,7 @@ public class Knock_Off_State : AI_State
     {
         base.AI_State_exit();
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
-        _DATA_CENTER.SetUsingGravity(true);
+        _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalReference.SetGettingDamageState(false);
         _FightAttriCalReference.EnableAllHitBoxCollider(true);
     }
@@ -82,7 +82,7 @@ public class Knock_Off_State : AI_State
     {
         if (!touchedBoundary)
         {
-            if (_DATA_CENTER.onBattleGroundBundary)
+            if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
             {
                 touchedBoundary = true;
                 _xz = Vector3.zero - gameObject.transform.position;
@@ -93,17 +93,19 @@ public class Knock_Off_State : AI_State
 
         if (!dropped)
         {
-            if (!(time_counter > 0.2f && _DATA_CENTER.Grounded))
+            if (time_counter > 0.2f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
+                dropped = true;
+                Debug.Log(gameObject + "pos:"+ gameObject.transform.position + this._Rigidbody.useGravity);
+                _FightAttriCalReference.EnableAllHitBoxCollider(true);
+                time_counter = 0;//开始针对躺地时间记时
+            }else{
                 gameObject.transform.position += 
                 _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
                 Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
-            }else{
-                dropped = true;
-                _FightAttriCalReference.EnableAllHitBoxCollider(true);
-                time_counter = 0;//开始针对躺地时间记时
             }
         }else{
+            Debug.Log(gameObject + "thenpos:"+ gameObject.transform.position+ this._Rigidbody.useGravity);
             _Rigidbody.velocity = Vector3.zero;
             if (time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime)
             {

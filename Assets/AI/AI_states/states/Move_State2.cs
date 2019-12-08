@@ -6,19 +6,21 @@ using System.Linq;
 
 public class Move_State2 : AI_State
 {
-	private float speed,use_speed;
-    private float x_direction_random_range;
-	private float time_limit, time_counter;
+    private readonly float speed;
+    private float use_speed;
+    private readonly float x_direction_random_range;
+    private readonly float time_limit;
+    private float time_counter;
     private Vector3 use_direction;
     private AIMoveDirection moveDirection;
-    private AIMoveStyle _AIMoveStyle;
+    private readonly AIMoveStyle _AIMoveStyle;
     private Transform mainCam;
     private Quaternion screenMovementSpace;
     private Vector3 direction, screenMovementForward, screenMovementRight;
 
     private List<GameObject> EnemiesByDistance;
 
-    private enum AIMoveDirection : int
+    private enum AIMoveDirection
     {
         stay = 0,
         towardsEnemy = 1,
@@ -49,11 +51,7 @@ public class Move_State2 : AI_State
 
     public override bool Strategic_exit_condition()
     {
-        if (Sensor.GetMidEnemiesColliders().Count > 0 || this.time_counter >= this.time_limit)//|| Sensor.getInnerRangeWallColliders().Count > 0
-        {
-            return true;
-        }
-        return false;
+        return Sensor.GetMidEnemiesColliders().Count > 0 || this.time_counter >= this.time_limit;
     }
 
     public override void C_State_enter()
@@ -69,7 +67,7 @@ public class Move_State2 : AI_State
         _Rigidbody.useGravity = true;
         Animation_Manger.PlayLayerAnim(null);
 
-        if (!_DATA_CENTER.Grounded)
+        if (!_BasicPhysicSupport.hiddenMethods.Grounded)
             use_direction.y = -1;
     }
 
@@ -159,7 +157,7 @@ public class Move_State2 : AI_State
         }
         use_direction = use_direction.normalized;
 
-        if (!_DATA_CENTER.Grounded)
+        if (!_BasicPhysicSupport.hiddenMethods.Grounded)
             use_direction.y = -1;
 
         if (this._AIStateRunner.GetLastState() == this)
@@ -177,9 +175,9 @@ public class Move_State2 : AI_State
 	{
         _Rigidbody.velocity = Vector3.zero;
         time_counter += Time.deltaTime;
-        if (_DATA_CENTER.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
+        if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
-            use_direction = _DATA_CENTER.antiWallDirection;
+            use_direction = _BasicPhysicSupport.hiddenMethods.antiWallDirection;
             return;
         }
         switch (this.moveDirection)
@@ -208,7 +206,7 @@ public class Move_State2 : AI_State
         }
 
         use_direction = use_direction.normalized;
-        if (!_DATA_CENTER.Grounded)
+        if (!_BasicPhysicSupport.hiddenMethods.Grounded)
             use_direction.y = -1;
         //if (AI_DATA_CENTER.getAlliesAndSelfByDistance(true).Count > 1)
         //{
@@ -223,8 +221,8 @@ public class Move_State2 : AI_State
         PositionUpdate();
     }
 
-    private float h = 0f;
-    private float v = 0f;
+    private float h;
+    private float v;
     private Vector3 vel;
     public override void _c_State_FixedUpdate1()
     {
@@ -267,7 +265,7 @@ public class Move_State2 : AI_State
             _Animator.SetFloat("speed", 0f);
             Debug.Log("错误：角色处于控制模式却没有被适配相机。");
         }
-        if (!_DATA_CENTER.Grounded)
+        if (!_BasicPhysicSupport.hiddenMethods.Grounded)
             use_direction.y = -1;
 
         PositionUpdate();

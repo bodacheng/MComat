@@ -36,7 +36,7 @@ public partial class G_Attack_State : AI_State
             use_direction = P - gameObject.transform.position;
             use_direction.y = 0;
             Move(use_direction, speed, true);
-            if (_Pusher.hiddenMethods.ITouchedEnemyBody())
+            if (_BasicPhysicSupport.hiddenMethods.ITouchedEnemyBody())
             {
                 _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
             }

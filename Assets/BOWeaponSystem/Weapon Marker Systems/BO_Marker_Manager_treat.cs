@@ -44,7 +44,7 @@ namespace HittingDetection
                         // 现在我们在讨论的其实是关于同步问题的一个核心的事情。。。什么时候两边都需要执行，什么时候只需要一个客户端执行。我们现在不熟悉处理这类问题的逻辑方式。
                         if (_myOwnerCalReference != null)
                         {
-                            this._myOwnerCalReference._Center.pusher.hiddenMethods.ITouchedThisCollider(1);
+                            this._myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
@@ -113,7 +113,7 @@ namespace HittingDetection
                         if (this._myOwnerCalReference != null)
                         {
                             this._myOwnerCalReference.MyDamageCount(new_damage);
-                            this._myOwnerCalReference._Center.pusher.hiddenMethods.ITouchedThisCollider(1);
+                            this._myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         }
 
                         if (IfVectorClean(_hitOnHealthBody._Startpoint))

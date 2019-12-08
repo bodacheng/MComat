@@ -9679,17 +9679,14 @@ MonoBehaviour:
   Zokusei: 3
   geometryCenter: {fileID: 6196606117408441260}
   WholeT: {fileID: 8468469116883155276}
-  floorChecks: {fileID: 9114725514147367459}
   _AudioSource: {fileID: 8361700545313670643}
-  animator: {fileID: 1948941580223845430}
   Sensor: {fileID: 8563159649483002976}
   Animation_Manger: {fileID: 1727937447876611250}
   _SkillCancelFlag: {fileID: 5781534655262093093}
   _BO_Ani_E: {fileID: 5917018132167247021}
-  Rigidbody: {fileID: 6039594567023373191}
   _FightAttriCalReference: {fileID: 7071161691451479458}
   bO_Weapon_Animation_Events: {fileID: 6125507241833871317}
-  pusher: {fileID: 4524982398699286260}
+  _BasicPhysicSupport: {fileID: 102105882853051173}
   AIStateRunner: {fileID: 4840639462965592182}
   buffsRunner: {fileID: 7714745314327202155}
   _ResistanceManager: {fileID: 8353772300179877686}
@@ -9708,8 +9705,6 @@ MonoBehaviour:
   right_leg_hitbox_t: {fileID: 0}
   spine_hitbox_t: {fileID: 6349297015890669104}
   Shield: {fileID: 0}
-  onBattleGroundBundary: 0
-  antiWallDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &7071161691451479458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24667,10 +24662,10 @@ GameObject:
   - component: {fileID: 6125507241833871317}
   - component: {fileID: 8353772300179877686}
   - component: {fileID: 5917018132167247021}
-  - component: {fileID: 4524982398699286260}
   - component: {fileID: 5781534655262093093}
   - component: {fileID: 8545384059943610286}
   - component: {fileID: 3370329225509523273}
+  - component: {fileID: 102105882853051173}
   m_Layer: 0
   m_Name: adam
   m_TagString: Untagged
@@ -24870,19 +24865,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _DATA_CENTER: {fileID: 5090883234602509498}
---- !u!114 &4524982398699286260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4890155015453887327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe7224ea4251d422fb30462ce8466eff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _DATA_CENTER: {fileID: 5090883234602509498}
 --- !u!114 &5781534655262093093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24896,6 +24878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _C: {fileID: 5090883234602509498}
+  Cancel_Flag: 0
 --- !u!114 &8545384059943610286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24923,6 +24906,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   right_sword: {fileID: 3217012920109285032}
   left_sword: {fileID: 1892869642741846335}
+--- !u!114 &102105882853051173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890155015453887327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fafba2f023df42dab4dd5a8a2eaea1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _DATA_CENTER: {fileID: 5090883234602509498}
+  animator: {fileID: 1948941580223845430}
+  Rigidbody: {fileID: 6039594567023373191}
+  floorCheckersT: {fileID: 9114725514147367459}
 --- !u!1 &4890650921791262542
 GameObject:
   m_ObjectHideFlags: 0

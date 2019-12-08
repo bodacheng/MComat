@@ -4,13 +4,13 @@ using UnityEngine;
 using Soul;
 
 public class G_Ani_MoveEscape_State : AI_State {
-	private string clip_name;
-    private Transform mainCam;
-    private Quaternion screenMovementSpace;
-    private Vector3 screenMovementForward, screenMovementRight, use_direction;
-    private UnityEngine.Events.UnityAction breakfreestart;
-    private UnityEngine.Events.UnityAction breakfreeend;
-    private customCoroutine breakfreeCoroutine;
+    readonly string clip_name;
+    Transform mainCam;
+    Quaternion screenMovementSpace;
+    Vector3 screenMovementForward, screenMovementRight, use_direction;
+    readonly UnityEngine.Events.UnityAction breakfreestart;
+    readonly UnityEngine.Events.UnityAction breakfreeend;
+    customCoroutine breakfreeCoroutine;
     // This skill script is based on animation that has forward motion
 
     public G_Ani_MoveEscape_State(string _clip_name)
@@ -35,7 +35,7 @@ public class G_Ani_MoveEscape_State : AI_State {
 
     public override bool Capacity_enter_condition()
     {
-        if (!_DATA_CENTER.Grounded)
+        if (!_BasicPhysicSupport.hiddenMethods.Grounded)
             return false;
         return true;
     }

@@ -150,7 +150,7 @@ public class Defend_State : AI_State
                                                     analyzingDamage.AttackerT_pos,
                                                         gameObject.transform.position,
                                                             analyzingDamage._WeaponPosAdjustMode,
-                                                                _Pusher.hiddenMethods.meTouchingEnemyBody);
+                                                                _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody);
             fixpostween = _Rigidbody.DOMove(fixDesPos,1);
             time_counter = FightGlobalSetting._heavyBlockLastingTime;
             DefendHPfade(analyzingDamage);
@@ -167,7 +167,7 @@ public class Defend_State : AI_State
                                                     analyzingDamage.AttackerT_pos,
                                                         gameObject.transform.position,
                                                             analyzingDamage._WeaponPosAdjustMode,
-                                                                _Pusher.hiddenMethods.meTouchingEnemyBody);
+                                                                _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody);
             fixpostween = _Rigidbody.DOMove(fixDesPos,1);
             time_counter = FightGlobalSetting._lightBlockLastingTime;
             DefendHPfade(analyzingDamage);
