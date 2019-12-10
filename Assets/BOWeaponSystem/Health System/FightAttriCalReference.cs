@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
-using System.Linq;
 using HittingDetection;
 
 //整个脚本中有若干个量并没有在本脚本内进行任何计算，就是起了个作为属性被参考的作用，原因在于为了保持BO武器脚本只参考BO系列文件的状态。
@@ -10,10 +9,7 @@ public partial class FightAttriCalReference : MonoBehaviour
 {
     [Tooltip("数据中心")]
     public Data_Center _Center;
-    
-	[Tooltip("角色重量级")]
-	public weight weight = weight.normal;
-    
+        
     [Tooltip("当前攻击力")]
     public float AT = 10;
 
@@ -21,29 +17,29 @@ public partial class FightAttriCalReference : MonoBehaviour
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     
     public static List<Collider> AllMeatColliders = new List<Collider>();
-    
-    private knockOffCount _knockOffCount = new knockOffCount();    
-    private BeHitCount _BeHitCount= new BeHitCount();        
-    private bool gettingdamage;
-    private List<BO_Hitbox> myBOHitBoxeComponent = new List<BO_Hitbox>();//713添加
-    private List<E_Damage> Event_Damage_List = new List<E_Damage>();
-    private List<V_Damage> ICauseDamages = new List<V_Damage>();
-    private List<Collider> myColliders;
-    private E_Damage managingEventDamage;
-    private List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
-    private IDictionary<DamageType, List<V_Damage>> DamagesDIC = new Dictionary<DamageType, List<V_Damage>>()
-    {
-        {DamageType.slight_damage,new List<V_Damage>()},
-        {DamageType.light_damage,new List<V_Damage>()},
-        {DamageType.heavy_damage,new List<V_Damage>()},
-        {DamageType.supper_damage,new List<V_Damage>()},
-        {DamageType.heavy_block,new List<V_Damage>()},
-        {DamageType.stagger,new List<V_Damage>()},
-        {DamageType.light_block,new List<V_Damage>()},
-        {DamageType.knockOff_damage,new List<V_Damage>()},
-        {DamageType.deathknockoff,new List<V_Damage>()}
-    };
-    
+
+    KnockOffCount _knockOffCount = new KnockOffCount();
+    BeHitCount _BeHitCount = new BeHitCount();
+    bool gettingdamage;
+    List<BO_Hitbox> myBOHitBoxeComponent = new List<BO_Hitbox>();//713添加
+    List<E_Damage> Event_Damage_List = new List<E_Damage>();
+    List<V_Damage> ICauseDamages = new List<V_Damage>();
+    List<Collider> myColliders;
+    E_Damage managingEventDamage;
+    List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
+    //IDictionary<DamageType, List<V_Damage>> DamagesDIC = new Dictionary<DamageType, List<V_Damage>>()
+    //{
+    //    {DamageType.slight_damage,new List<V_Damage>()},
+    //    {DamageType.light_damage,new List<V_Damage>()},
+    //    {DamageType.heavy_damage,new List<V_Damage>()},
+    //    {DamageType.supper_damage,new List<V_Damage>()},
+    //    {DamageType.heavy_block,new List<V_Damage>()},
+    //    {DamageType.stagger,new List<V_Damage>()},
+    //    {DamageType.light_block,new List<V_Damage>()},
+    //    {DamageType.knockOff_damage,new List<V_Damage>()},
+    //    {DamageType.deathknockoff,new List<V_Damage>()}
+    //};
+
     UnityEngine.Events.UnityAction gravityloststart;
     UnityEngine.Events.UnityAction gravitylostend;
     customCoroutine burstCoroutine;
@@ -58,17 +54,9 @@ public partial class FightAttriCalReference : MonoBehaviour
         //registerMyDefaultMaterialsShaderDic();
     }
     
-    public void ClearDamageLists()
-    {
-        foreach (KeyValuePair<DamageType, List<V_Damage>> _keyvaluepair in DamagesDIC)
-        {
-            _keyvaluepair.Value.Clear();
-        }
-    }
-
     public void SetGettingDamageState(bool _state)
     {
-        this.gettingdamage = _state;
+        gettingdamage = _state;
     }
     public bool IFgettingDamage()
     {
@@ -77,16 +65,16 @@ public partial class FightAttriCalReference : MonoBehaviour
 
     public void HealthBodyFixedUpdate()
     {
-        if (DamagesDIC[DamageType.slight_damage].Count > 0)//这里有无法理解的报错
-        {
-            EatDamage(DamageType.slight_damage);
-        }
-        _knockOffCount.update();
-        _ComboHitCount.update();
-        _BeHitCount.update();
+        //if (DamagesDIC[DamageType.slight_damage].Count > 0)//这里有无法理解的报错
+        //{
+        //    EatDamage(DamageType.slight_damage);
+        //}
+        _knockOffCount.Update();
+        _ComboHitCount.Update();
+        _BeHitCount.Update();
     }
 
-    public knockOffCount GetKnockOffCount()
+    public KnockOffCount GetKnockOffCount()
     {
         return _knockOffCount;
     }
@@ -161,224 +149,87 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
     }
 
-    List<V_Damage> processingDlist;
-    V_Damage processingD;
-    void EatDamageProcess(List<V_Damage> v_Damages)
+    void EatDamageProcess(V_Damage processingD)
     {
-        processingDlist = v_Damages.ToList();
-        for (int i = 0; i < processingDlist.Count; i++)//这个ToList()不加的话可能报错：Collection was modified; enumeration operation may not execute
+        _BeHitCount.BeHitCountPlus();
+        if (processingD.fromWeapon != null)
         {
-            processingD = processingDlist[i];
-            _BeHitCount.BeHitCountPlus();
-            if (processingD.fromWeapon != null)
+            if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
+                processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
+            CurrentHp.Value -= processingD.AT;
+            if (CurrentHp.Value <= 0)
             {
-                if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
-                    processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
-                CurrentHp.Value -= processingD.AT;
-                if (CurrentHp.Value <= 0)
-                {
-                    V_Damage deathknockOff;
-                    deathknockOff = new V_Damage(
-                                  DamageType.deathknockoff,
-                                  processingD._WeaponPosAdjustMode,
-                                  processingD.damageHappenPoint,
-                                  processingD.AttackerT_foward,
-                                  processingD.AttackerT_pos,
-                                  processingD.fromWeapon);
-                    ApplyDamage(deathknockOff);
-                    _Center.IsDead.Value = true;
-                    _Center.AIStateRunner.ChangeState("Death");
-                    break; //重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
-                }
-            }
-
-            switch (processingD.specialApply)
-            {
-                case SpecialApply.gravitylost:
-                    gravityloststart = () =>
-                    {
-                        _Center._BasicPhysicSupport.SetUsingGravity(false);
-                    };
-                    gravitylostend = () =>
-                    {
-                        _Center._BasicPhysicSupport.SetUsingGravity(true);
-                    };
-                    burstCoroutine = new customCoroutine(gravityloststart, 0.2f, gravitylostend);
-                    _Center.buffsRunner.runSubCoroutineOfState(burstCoroutine);
-                    break;
+                V_Damage deathknockOff;
+                deathknockOff = new V_Damage(
+                              DamageType.deathknockoff,
+                              processingD._WeaponPosAdjustMode,
+                              processingD.damageHappenPoint,
+                              processingD.AttackerT_foward,
+                              processingD.AttackerT_pos,
+                              processingD.fromWeapon);
+                ApplyDamage(deathknockOff);
+                _Center.IsDead.Value = true;
+                _Center.AIStateRunner.ChangeState("Death");
+                return; //重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
             }
         }
-        v_Damages.Clear();
-    }
-
-    // 消化伤害
-    public void EatDamage(DamageType damageType)
-    {
-        EatDamageProcess(DamagesDIC[damageType]);
-        _ComboHitCount.HitCountInterrupt();
+        
+        switch (processingD.specialApply)
+        {
+            case SpecialApply.gravitylost:
+                gravityloststart = () =>
+                {
+                    _Center._BasicPhysicSupport.SetUsingGravity(false);
+                };
+                gravitylostend = () =>
+                {
+                    _Center._BasicPhysicSupport.SetUsingGravity(true);
+                };
+                burstCoroutine = new customCoroutine(gravityloststart, 0.2f, gravitylostend);
+                _Center.buffsRunner.runSubCoroutineOfState(burstCoroutine);
+                break;
+        }
     }
 
     // 这个函数，是写的很丑陋，但如果纯粹是为了解决个人强迫症的话干脆别改了。其实这个产生的根本原因就是你非要把不同重量级的攻击给用枚举类型区分开
     public void ApplyDamage(V_Damage _dmg)
 	{
         _Center._ResistanceManager.Resistance.Value -= 1;
-		switch (_dmg.damage_type)
-		{
-			case DamageType.slight_damage:
-                if (_Center._ResistanceManager.Resistance.Value == 0)
-                    DamagesDIC[DamageType.slight_damage].Add(_dmg);
-                break;
-			case DamageType.light_damage:
-                switch (this.weight)
-				{
-					case weight.light:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            _dmg.damage_type = DamageType.heavy_damage;
-                            DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                        }
-                        break;
-					case weight.normal:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.light_block].Add(_dmg);
-                        }
-                        break;
-					case weight.heavy:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            _dmg.damage_type = DamageType.light_damage;
-                            DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else
-                        {
-                            DamagesDIC[DamageType.light_block].Add(_dmg);
-                        }
-                        break;
-					default:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.light_block].Add(_dmg);
-                        }
-                        break;
-				}
-				break;
-			case DamageType.heavy_damage:
-                switch (this.weight)
-				{
-					case weight.light:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            _dmg.damage_type = DamageType.supper_damage;
-                            DamagesDIC[DamageType.supper_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                        }
-                        break;
-					case weight.normal:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                        }
-                        break;
-					case weight.heavy:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            _dmg.damage_type = DamageType.light_damage;
-                            DamagesDIC[DamageType.light_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.light_block].Add(_dmg);
-                        }
-                        break;
-					default:
-                        if (_Center._ResistanceManager.Resistance.Value == 0)
-                        {
-                            DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                            _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                        }else{
-                            DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                        }
-                        break;
-				}
-				break;
-			case DamageType.supper_damage:
-                switch (this.weight)
-				{
-					case weight.light:
-                    if (_Center._ResistanceManager.Resistance.Value == 0)
-                    {
-                        _dmg.damage_type = DamageType.knockOff_damage;
-                        DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
-                        _Center.AIStateRunner.ChangeState("KnockOff",_dmg);
-                    }else{
-                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                    }
-                        break;
-					case weight.normal:
-                    if (_Center._ResistanceManager.Resistance.Value == 0)
-                    {
-                        DamagesDIC[DamageType.supper_damage].Add(_dmg);
-                        _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                    }else{
-                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                    }
-                        break;
-					case weight.heavy:
-                    if (_Center._ResistanceManager.Resistance.Value == 0)
-                    {
-                        _dmg.damage_type = DamageType.heavy_damage;
-                        DamagesDIC[DamageType.heavy_damage].Add(_dmg);
-                        _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                    }else{
-                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                    }
-                        break;
-					default:
-                    if (_Center._ResistanceManager.Resistance.Value == 0)
-                    {
-                        DamagesDIC[DamageType.supper_damage].Add(_dmg);
-                        _Center.AIStateRunner.ChangeState("Hit",_dmg);
-                    }else{
-                        DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                    }
-                    break;
-				}
-				break;
-			case DamageType.knockOff_damage:
-                DamagesDIC[DamageType.knockOff_damage].Add(_dmg);
-                _Center.AIStateRunner.ChangeState("KnockOff",_dmg);
-                break;
-            case DamageType.deathknockoff:
-                DamagesDIC[DamageType.deathknockoff].Add(_dmg);
-                break;
+        if (_Center._ResistanceManager.Resistance.Value > 0)
+            return;
+        EatDamageProcess(_dmg);
+        _ComboHitCount.HitCountInterrupt();
+        
+        switch(_dmg.damage_type)
+        {
+            case DamageType.slight_damage:
+            break;
+            case DamageType.light_damage:
+            _Center.AIStateRunner.ChangeState("Hit",_dmg);
+            break;
+            case DamageType.heavy_damage:
+            _Center.AIStateRunner.ChangeState("Hit",_dmg);
+            break;
+            case DamageType.supper_damage:
+            _Center.AIStateRunner.ChangeState("Hit",_dmg);
+            break;
+            case DamageType.knockOff_damage:
+            _Center.AIStateRunner.ChangeState("KnockOff",_dmg);
+            break;
             case DamageType.light_block:
-                DamagesDIC[DamageType.light_block].Add(_dmg);
-                break;
-			case DamageType.heavy_block:
-                DamagesDIC[DamageType.heavy_block].Add(_dmg);
-                break;
-			case DamageType.stagger:
-                DamagesDIC[DamageType.stagger].Add(_dmg);
-                break;
-        }
+            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            break;
+            case DamageType.heavy_block:
+            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            break;
+            case DamageType.deathknockoff:
+            _Center.AIStateRunner.ChangeState("Death",_dmg);
+            break;
+        }        
 	}
     
     public void HitCountPlus() => _ComboHitCount.HitCountPlus();//打别人计数
-    public int GetBeHitCount() => _BeHitCount.getBeHitCount(); //自己被揍计数
+    public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     public void BeHitCountInterrupt() => _BeHitCount.BeHitCountInterrupt();
 
     // 旧防御盾系列函数。已经基本不用
@@ -417,10 +268,6 @@ public partial class FightAttriCalReference : MonoBehaviour
     public List<E_Damage> ReturnApprovedEventAttackAttempts()
     {
         return this.Event_Attack_Successed_List;
-    }
-    public List<V_Damage> ReturnDamageList(DamageType type)
-    {
-        return DamagesDIC.ContainsKey(type) ? DamagesDIC[type] : null;
     }
 
     Shader One_Shader;

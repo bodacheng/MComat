@@ -17,14 +17,6 @@ public class Hurt_State : AI_State {
 		base.Pre_process_before_enter ();
     }
 
-	public override bool Force_enter_condition()
-	{
-        return _FightAttriCalReference.ReturnDamageList(DamageType.heavy_damage).Count > 0
-            || _FightAttriCalReference.ReturnDamageList(DamageType.light_damage).Count > 0
-            || _FightAttriCalReference.ReturnDamageList(DamageType.supper_damage).Count > 0
-            || _FightAttriCalReference.ReturnEventDamageList().Count > 0;
-    }
-
     bool touchingEnemyBody;
     public override void AI_State_enter(V_Damage newValue)
 	{
@@ -44,21 +36,18 @@ public class Hurt_State : AI_State {
         {
                 case DamageType.light_damage:
                 used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
-                _FightAttriCalReference.GetKnockOffCount().plusGauge(1f);
-                _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
-                _FightAttriCalReference.EatDamage(DamageType.light_damage);
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(1f);
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;
                 case DamageType.heavy_damage:
                 used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-                _FightAttriCalReference.GetKnockOffCount().plusGauge(3f);
-                _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f); 
-                _FightAttriCalReference.EatDamage(DamageType.heavy_damage);    
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);    
                 break;
                 case DamageType.supper_damage:
                 used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-                _FightAttriCalReference.GetKnockOffCount().plusGauge(4f);
-                _FightAttriCalReference.GetKnockOffCount().plusTimeCounter(0.2f);
-                _FightAttriCalReference.EatDamage(DamageType.supper_damage);
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(4f);
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;        
         }
         
@@ -69,7 +58,7 @@ public class Hurt_State : AI_State {
                                                 newValue._WeaponPosAdjustMode,
                                                     touchingEnemyBody);
         fixpostween = _Rigidbody.DOMove(fixDesPos,1f);
-        if (_FightAttriCalReference.GetKnockOffCount().getGauge() >= FightGlobalSetting._knockoffextent)//&& newValue.damage_type == DamageType.supper_damage
+        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)//&& newValue.damage_type == DamageType.supper_damage
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
                                                                 newValue._WeaponPosAdjustMode,   
@@ -77,7 +66,7 @@ public class Hurt_State : AI_State {
                                                                         newValue.AttackerT_foward,
                                                                             newValue.AttackerT_pos, 
                                                                                 newValue.fromWeapon));
-            _FightAttriCalReference.GetKnockOffCount().setGauge(0f);
+            _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
         }
         RotateToDirection(- fixDesPos, 2f, true);
         time_counter = 0f;

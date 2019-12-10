@@ -46,7 +46,7 @@ public class Death_State : AI_State
         return false;
     }
 
-    public override void AI_State_enter()
+    public override void AI_State_enter(V_Damage newValue)
     {
         base.AI_State_enter();
         time_count = 0f;
@@ -57,23 +57,15 @@ public class Death_State : AI_State
         _Rigidbody.velocity = Vector3.zero;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         Animation_Manger.PlayLayerAnim(clip_name);
-        if (_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff).Count > 0)
-        {
-            startquaternion =  Quaternion.LookRotation(_FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.GetOwnerFightAttriCalReference()._Center.WholeT.forward, Vector3.up);
-            KnockOffSparkPersonalEffectPath = _FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon != null
-                ? this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.personalEffectPath
-                : null;
-
-            EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
-                                                 this._FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].damageHappenPoint,this.gameObject.transform.rotation,
-                                                 this._FightAttriCalReference.transform);
-            if (if_r_rotation)
-                this.RotateToDirection(this.gameObject.transform.position - _FightAttriCalReference.ReturnDamageList(DamageType.deathknockoff)[0].fromWeapon.transform.position, 10f, true);
-
-            Matrix = Matrix4x4.TRS(gameObject.transform.position, startquaternion, Vector3.one * 1);
-        }
-        this.personality_Events.CloseAllPersonalityEffects();
-        this._FightAttriCalReference.ClearDamageLists();
+        startquaternion =  Quaternion.LookRotation(newValue.fromWeapon.GetOwnerFightAttriCalReference()._Center.WholeT.forward, Vector3.up);
+        KnockOffSparkPersonalEffectPath = newValue.fromWeapon?.personalEffectPath;
+        EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
+                                             newValue.damageHappenPoint, gameObject.transform.rotation,
+                                             _FightAttriCalReference.transform);
+        if (if_r_rotation)
+            RotateToDirection(gameObject.transform.position - newValue.fromWeapon.transform.position, 10f, true);
+        Matrix = Matrix4x4.TRS(gameObject.transform.position, startquaternion, Vector3.one * 1);
+        personality_Events.CloseAllPersonalityEffects();
     }
 
     public override void AI_State_exit()
@@ -81,7 +73,7 @@ public class Death_State : AI_State
         base.AI_State_exit();
         time_count = 0f;
         landedCal = 1;
-        this._Rigidbody.velocity = Vector3.zero;
+        _Rigidbody.velocity = Vector3.zero;
     }
 
     public override void _State_FixedUpdate1()

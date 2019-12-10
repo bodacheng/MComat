@@ -224,11 +224,11 @@ namespace Soul
             {
                 if (state_Transition_Dictionary.ContainsKey(s.num))
                 {
-                    s.state.StateKey = this.state_Transition_Dictionary[s.num].StateKey;
-                    s.state.splevel = this.state_Transition_Dictionary[s.num].SPLevel;
-                    s.state.enterInput = this.state_Transition_Dictionary[s.num].enterInput;
-                    s.state.exitInput = this.state_Transition_Dictionary[s.num].exitInput;
-                    s.state.behaviorEnterRanges = this.state_Transition_Dictionary[s.num].ai_trigger_ranges;
+                    s.state.StateKey = state_Transition_Dictionary[s.num].StateKey;
+                    s.state.splevel = state_Transition_Dictionary[s.num].SPLevel;
+                    s.state.enterInput = state_Transition_Dictionary[s.num].enterInput;
+                    s.state.exitInput = state_Transition_Dictionary[s.num].exitInput;
+                    s.state.behaviorEnterRanges = state_Transition_Dictionary[s.num].ai_trigger_ranges;
                     state_Dictionary.Add(new KeyValuePair<string, AI_State>(s.num, s.state));
                 }
                 else
@@ -237,17 +237,17 @@ namespace Soul
                 }
             }
 
-            if (this.readingNineAndTwo.GetAttackChuan()[1] != null)
+            if (readingNineAndTwo.GetAttackChuan()[1] != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetAttackChuan()[1].StateKey]);
-            if (this.readingNineAndTwo.GetFire1Chuan()[1] != null)
+            if (readingNineAndTwo.GetFire1Chuan()[1] != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetFire1Chuan()[1].StateKey]);
-            if (this.readingNineAndTwo.GetFire2Chuan()[1] != null)
+            if (readingNineAndTwo.GetFire2Chuan()[1] != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetFire2Chuan()[1].StateKey]);
-            if (this.readingNineAndTwo.GetD_STS() != null)
+            if (readingNineAndTwo.GetD_STS() != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetD_STS().StateKey]);
-            if (this.readingNineAndTwo.GetR_STS() != null)
+            if (readingNineAndTwo.GetR_STS() != null)
                 States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetR_STS().StateKey]);
-            if (this.readingNineAndTwo.GetM_STS() != null)
+            if (readingNineAndTwo.GetM_STS() != null)
                 commandWaitingState = state_Dictionary[this.readingNineAndTwo.GetM_STS().StateKey];
         }
 

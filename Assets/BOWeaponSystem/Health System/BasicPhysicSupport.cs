@@ -155,13 +155,6 @@ public class BasicPhysicSupport : MonoBehaviour
                 airCount = (!hiddenMethods.Grounded) ? airCount += Time.deltaTime : 0f;
             }
             
-            temp = transform.position;
-            if (temp.y < 0)
-            {
-                temp.y = 0f;
-                transform.position = temp;
-            }
-                        
             temp2 = transform.position;
             temp2.y = 0;
             dis_from_center = temp2.magnitude;
@@ -175,6 +168,13 @@ public class BasicPhysicSupport : MonoBehaviour
             else
             {
                 hiddenMethods.onBattleGroundBundary = false;
+            }
+            
+            temp = transform.position;
+            if (temp.y < 0)
+            {
+                temp.y = 0f;
+                transform.position = temp;
             }
         }
         if (animator.applyRootMotion)

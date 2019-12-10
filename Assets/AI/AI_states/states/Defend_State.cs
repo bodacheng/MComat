@@ -62,9 +62,9 @@ public class Defend_State : AI_State
         }else{
             if (damagingweaponList.Count > 0)
             {
-                if (Vector3.Distance(nearbyenemymeat[0].transform.position, this._DATA_CENTER.geometryCenter.position)
+                if (Vector3.Distance(nearbyenemymeat[0].transform.position, _DATA_CENTER.geometryCenter.position)
                     >
-                    Vector3.Distance(damagingweaponList[0].transform.position, this._DATA_CENTER.geometryCenter.position))
+                    Vector3.Distance(damagingweaponList[0].transform.position, _DATA_CENTER.geometryCenter.position))
                     return true;
             }
         }
@@ -88,18 +88,57 @@ public class Defend_State : AI_State
 
     public override void AI_State_enter()
     {
-        this.defendHP = FightGlobalSetting._defendHP;
+        defendHP = FightGlobalSetting._defendHP;
         _Weapon_Animation_Events.ClearMarkerManagers();
-        this.Sensor.ContinuousDetectionStart(5);
+        Sensor.ContinuousDetectionStart(5);
         base.AI_State_enter();
-        this._Animator.SetFloat("speed", 0f);
-        this.Animation_Manger.PlayLayerAnim(defend_clip_name);
+        _Animator.SetFloat("speed", 0f);
+        Animation_Manger.PlayLayerAnim(defend_clip_name);
         _Rigidbody.velocity = Vector3.zero;
         time_counter = 0.3f;
-        if (this.shaderManager != null)
-            this.shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);      
+        if (shaderManager != null)
+            shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);      
         _SkillCancelFlag.turn_off_flag();
          //this.AI_DATA_CENTER.turnShield(true);
+    }
+    
+    public override void AI_State_enter(V_Damage newValue)
+    {
+        defendHP = FightGlobalSetting._defendHP;
+        _Weapon_Animation_Events.ClearMarkerManagers();
+        Sensor.ContinuousDetectionStart(5);
+        base.AI_State_enter();
+        _Animator.SetFloat("speed", 0f);
+        _Rigidbody.velocity = Vector3.zero;
+        time_counter = 0.3f;
+        if (shaderManager != null)
+            shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);      
+        _SkillCancelFlag.turn_off_flag();
+         //this.AI_DATA_CENTER.turnShield(true);
+         
+         fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
+                                    newValue.AttackerT_foward,
+                                        newValue.AttackerT_pos,
+                                            gameObject.transform.position,
+                                                newValue._WeaponPosAdjustMode,
+                                                    _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody);
+         switch(newValue.damage_type)
+         {
+            case DamageType.light_block:
+                Animation_Manger.PlayLayerAnim(block_break_name);
+                fixpostween = _Rigidbody.DOMove(fixDesPos,1);
+                time_counter = FightGlobalSetting._lightBlockLastingTime;
+                DefendHPfade(newValue);
+                _FightAttriCalReference.plusCriticalGauge(2);
+            break;
+            case DamageType.heavy_block:
+                Animation_Manger.PlayLayerAnim(block_break_name);
+                fixpostween = _Rigidbody.DOMove(fixDesPos,1);
+                time_counter = FightGlobalSetting._heavyBlockLastingTime;
+                DefendHPfade(newValue);
+                _FightAttriCalReference.plusCriticalGauge(2);
+            break;
+         }
     }
 
     public override void AI_State_exit()
@@ -113,13 +152,10 @@ public class Defend_State : AI_State
         //就会产生bug：动画器无法正常播放攻击动画，角色会立在那里。这是我们动画模块的一个性质。
         // 我们把defend状态exit中的PlayLayerAnim(_animator_layer_index, null)删除了后就不再产生对应bug。
         // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
-        _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block).Clear();
-        _FightAttriCalReference.ReturnDamageList(DamageType.light_block).Clear();
         _ResistanceManager.ResistanceClear();
         //AI_DATA_CENTER.turnShield(false);
     }
 
-    V_Damage analyzingDamage;
     public override void _State_FixedUpdate1()
     {
         _ResistanceManager.Resistance.Value = defendHP > 0 ? 5 : 0;
@@ -139,43 +175,6 @@ public class Defend_State : AI_State
                     RotateToTarget(damagingweaponList[0].transform.position, 1f, true);
             }
         }
-
-        if (_FightAttriCalReference.ReturnDamageList(DamageType.heavy_block).Count > 0)
-        {
-            Animation_Manger.PlayLayerAnim(block_break_name);
-            analyzingDamage = _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block)[0];
-            analyzingDamage.damage_type = DamageType.heavy_block;
-            fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint,
-                                                analyzingDamage.AttackerT_foward,
-                                                    analyzingDamage.AttackerT_pos,
-                                                        gameObject.transform.position,
-                                                            analyzingDamage._WeaponPosAdjustMode,
-                                                                _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody);
-            fixpostween = _Rigidbody.DOMove(fixDesPos,1);
-            time_counter = FightGlobalSetting._heavyBlockLastingTime;
-            DefendHPfade(analyzingDamage);
-            _FightAttriCalReference.plusCriticalGauge(2);
-        }
-
-        if (_FightAttriCalReference.ReturnDamageList(DamageType.light_block).Count > 0)
-        {
-            Animation_Manger.PlayLayerAnim(block_break_name);
-            analyzingDamage = _FightAttriCalReference.ReturnDamageList(DamageType.light_block)[0];
-            analyzingDamage.damage_type = DamageType.light_block;
-            fixDesPos = CalFixPosDestination(analyzingDamage.damageHappenPoint,
-                                                analyzingDamage.AttackerT_foward,
-                                                    analyzingDamage.AttackerT_pos,
-                                                        gameObject.transform.position,
-                                                            analyzingDamage._WeaponPosAdjustMode,
-                                                                _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody);
-            fixpostween = _Rigidbody.DOMove(fixDesPos,1);
-            time_counter = FightGlobalSetting._lightBlockLastingTime;
-            DefendHPfade(analyzingDamage);
-            _FightAttriCalReference.plusCriticalGauge(2);
-        }
-        
-        _FightAttriCalReference.ReturnDamageList(DamageType.heavy_block).Clear();
-        _FightAttriCalReference.ReturnDamageList(DamageType.light_block).Clear();
         
         if (time_counter >= 0f)
         {

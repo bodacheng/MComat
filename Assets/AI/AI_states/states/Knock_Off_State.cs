@@ -9,7 +9,7 @@ public class Knock_Off_State : AI_State
     DecompositionerPool superHitPool;
     Vector3 _xz;    
     bool touchedBoundary;
-    bool dropped,canWakeUp;
+    bool dropped,canWakeUp,canbeattack;
      
     public Knock_Off_State()
     {
@@ -26,8 +26,6 @@ public class Knock_Off_State : AI_State
         return false;
     }
 
-    public override bool Force_enter_condition() => _FightAttriCalReference.ReturnDamageList(DamageType.knockOff_damage).Count > 0;
-
     Decompositioner processingBlood;
     string KnockOffSparkPersonalEffectPath;
     List<AnimationClip> knockoffAnimations;
@@ -38,6 +36,7 @@ public class Knock_Off_State : AI_State
         touchedBoundary = false;
         dropped = false;
         canWakeUp = false;
+        canbeattack = false;
         _BasicPhysicSupport.SetUsingGravity(false);
         _FightAttriCalReference.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
@@ -60,22 +59,20 @@ public class Knock_Off_State : AI_State
             processingBlood.transform.rotation = Quaternion.identity;
         }
         _xz = newValue.AttackerT_foward;
-        _FightAttriCalReference.EatDamage(DamageType.knockOff_damage);
-        _FightAttriCalReference.ClearDamageLists();
     }
 
     public override bool Naturally_exit_condition()
     {
         return false;
     }
-
+    
     public override void AI_State_exit()
     {
         base.AI_State_exit();
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+        _FightAttriCalReference.EnableAllHitBoxCollider(true);
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalReference.SetGettingDamageState(false);
-        _FightAttriCalReference.EnableAllHitBoxCollider(true);
     }
     
     public override void _State_FixedUpdate1()
@@ -90,27 +87,27 @@ public class Knock_Off_State : AI_State
                 _xz = _xz.normalized;
             }
         }
-
+        
         if (!dropped)
         {
-            if (time_counter > 0.2f && _BasicPhysicSupport.hiddenMethods.Grounded)
+            if (time_counter > 0.1f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 dropped = true;
-                Debug.Log(gameObject + "pos:"+ gameObject.transform.position + this._Rigidbody.useGravity);
-                _FightAttriCalReference.EnableAllHitBoxCollider(true);
+                _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
+                _Rigidbody.velocity = Vector3.zero;
                 time_counter = 0;//开始针对躺地时间记时
+                //Debug.Log(gameObject + "pos:"+ gameObject.transform.position + this._Rigidbody.useGravity);
             }else{
                 gameObject.transform.position += 
                 _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
                 Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
             }
         }else{
-            Debug.Log(gameObject + "thenpos:"+ gameObject.transform.position+ this._Rigidbody.useGravity);
-            _Rigidbody.velocity = Vector3.zero;
             if (time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime)
             {
                 _AIStateRunner.ChangeState("getUp");
             }
+            //Debug.Log(gameObject + "thenpos:"+ gameObject.transform.position+ this._Rigidbody.useGravity);
         }
                    
         if (!canWakeUp)
@@ -121,11 +118,15 @@ public class Knock_Off_State : AI_State
                 _AIStateRunner.ChangeState("getUp");
         }
 
+        if (!canbeattack && time_counter > 0.1f)
+        {
+            _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+            _FightAttriCalReference.EnableAllHitBoxCollider(true);
+            canbeattack = true;
+        }
+        
         time_counter += Time.fixedDeltaTime;
-        
-        //if (!_DATA_CENTER.IsGrounded()) // 貌似这个环节是导致knockoff途中瞬移的原因。去掉后修复。没有错上面的曲线逻辑基础上，有这个的话还是会瞬移
-            //RotateToVelocityNegative(3f, true);
-        
+                
         // 原先的MultiplyPoint3x4击飞曲线计划相关
         //if (!touchedBoundary)
         //{

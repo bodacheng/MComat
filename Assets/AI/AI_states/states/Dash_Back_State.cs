@@ -51,7 +51,6 @@ public class Dash_Back_State : AI_State
     public override void AI_State_enter()
     {
         base.AI_State_enter();
-        _FightAttriCalReference.ClearDamageLists();
         _Animator.applyRootMotion = true;
         _Animator.SetFloat("speed", 0f);
         Sensor.OneRoundDetectionStart(2);

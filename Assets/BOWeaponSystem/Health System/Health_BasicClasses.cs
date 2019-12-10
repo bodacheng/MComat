@@ -1,40 +1,40 @@
 ﻿using UniRx;
 using UnityEngine;
 
-public class knockOffCount
+public class KnockOffCount
 {
     float knock_off_time_counter;
-    float knock_off_cooldown_infer;
+    readonly float knock_off_cooldown_infer;
     float knock_off_gauge;
 
-    public knockOffCount()
+    public KnockOffCount()
     {
         knock_off_time_counter = 1f;
         knock_off_cooldown_infer = 1f;
         knock_off_gauge = 0;
     }
 
-    public void setGauge(float amount)
+    public void SetGauge(float amount)
     {
         this.knock_off_gauge = amount;
     }
 
-    public void plusGauge(float amount)
+    public void PlusGauge(float amount)
     {
         knock_off_gauge += amount;
     }
 
-    public void plusTimeCounter(float timeamout)
+    public void PlusTimeCounter(float timeamout)
     {
         this.knock_off_time_counter += timeamout;
     }
 
-    public float getGauge()
+    public float GetGauge()
     {
         return knock_off_gauge;
     }
 
-    public void update()
+    public void Update()
     {
         //底下这些就是说，我每隔一段时间就让KockoFF槽冷却一些(降低2)
         if (knock_off_gauge > 0)
@@ -55,7 +55,7 @@ public class knockOffCount
 public class BeHitCount
 {
     int beHitCount;
-    float HitConnectTolerate;
+    readonly float HitConnectTolerate;
     float BeHItComboTimeCounter;
 
     public BeHitCount()
@@ -77,12 +77,12 @@ public class BeHitCount
         BeHItComboTimeCounter = 0;
     }
 
-    public int getBeHitCount()
+    public int GetBeHitCount()
     {
         return beHitCount;
     }
 
-    public void update()
+    public void Update()
     {
         if (BeHItComboTimeCounter > 0f)
         {
@@ -98,7 +98,7 @@ public class BeHitCount
 public class ComboHitCount
 {
     public ReactiveProperty<int> HitCount{ get; set; } = new ReactiveProperty<int>(0);
-    float HitConnectTolerate;
+    readonly float HitConnectTolerate;
     float HItComboTimeCounter;
 
     public ComboHitCount()
@@ -120,7 +120,7 @@ public class ComboHitCount
         HItComboTimeCounter = 0;
     }
 
-    public void update()
+    public void Update()
     {
         if (HItComboTimeCounter > 0f)
         {
@@ -131,11 +131,4 @@ public class ComboHitCount
             }
         }
     }
-}
-
-public enum weight : int
-{
-    normal = 1,
-    light = 2,
-    heavy = 3
 }

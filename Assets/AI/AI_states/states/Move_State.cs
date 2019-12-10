@@ -121,28 +121,26 @@ public class Move_State : AI_State
                     switch (whereToGo)
                     {
                         case 0:
-                            this.moveDirection = AIMoveDirection.towardsEnemyRight;
+                            moveDirection = AIMoveDirection.towardsEnemyRight;
                             if (EnemiesByDistance[0] != null)
-                                use_direction = GetVerticalDir(EnemiesByDistance[0].transform.position - this.gameObject.transform.position)
-                                    + (EnemiesByDistance[0].transform.position - this.gameObject.transform.position).normalized;
+                                use_direction = GetVerticalDir(EnemiesByDistance[0].transform.position - gameObject.transform.position) + (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
                             break;
                         case 1:
-                            this.moveDirection = AIMoveDirection.towardsEnemyLeft;
+                            moveDirection = AIMoveDirection.towardsEnemyLeft;
                             if (EnemiesByDistance[0] != null)
-                                use_direction = -GetVerticalDir(EnemiesByDistance[0].transform.position - this.gameObject.transform.position)
-                                     + (EnemiesByDistance[0].transform.position - this.gameObject.transform.position).normalized;
+                                use_direction = -GetVerticalDir(EnemiesByDistance[0].transform.position - gameObject.transform.position) + (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
                             break;
                         case 2:
-                            this.moveDirection = AIMoveDirection.towardsEnemy;
+                            moveDirection = AIMoveDirection.towardsEnemy;
                             break;
                         case 3:
-                            this.moveDirection = AIMoveDirection.towardsEnemy;
+                            moveDirection = AIMoveDirection.towardsEnemy;
                             break;
                         case 4:
-                            this.moveDirection = AIMoveDirection.towardsEnemy;
+                            moveDirection = AIMoveDirection.towardsEnemy;
                             break;
                         case 5:
-                            this.moveDirection = AIMoveDirection.RunAwayFromThreat;
+                            moveDirection = AIMoveDirection.RunAwayFromThreat;
                             //this.Sensor.SensorDetectMyTeam();
                             //List<Collider> myteamms = this.Sensor.getMyTeammatesNearby();
                             //if (myteamms.Count > 0)
@@ -155,8 +153,8 @@ public class Move_State : AI_State
                             //else{
                             if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && Sensor.GetNearbyDamagingWeaponColliders()[0] != null)
                             {
-                                Vector3 vertical = GetVerticalDir(Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position - this.gameObject.transform.position);
-                                use_direction = (int)Random.Range(0, 2) == 1 ? vertical : -vertical;
+                                Vector3 vertical = GetVerticalDir(Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position - gameObject.transform.position);
+                                use_direction = Random.Range(0, 2) == 1 ? vertical : -vertical;
                             }
                             else
                             {
@@ -164,22 +162,20 @@ public class Move_State : AI_State
                             }
                             break;
                         default:
-                            this.moveDirection = AIMoveDirection.stay;
+                            moveDirection = AIMoveDirection.stay;
                             use_direction = Vector3.zero;
                             break;
                     }
                 }
                 else
                 {
-                    this.moveDirection = AIMoveDirection.stay;
+                    moveDirection = AIMoveDirection.stay;
                     use_direction = Vector3.zero;
                 }
                 break;
             case AIMoveStyle.test:
-                this.moveDirection = AIMoveDirection.stay;
+                moveDirection = AIMoveDirection.stay;
                 use_direction = Vector3.zero;
-                break;
-            default:
                 break;
         }
     }
@@ -187,6 +183,7 @@ public class Move_State : AI_State
     int whereToGo;
     float angle;
     Vector3 newDir;
+    Transform closetEnemyT;
     public void _f_State_Update_SP()
     {
         time_counter += Time.fixedDeltaTime;
@@ -200,11 +197,20 @@ public class Move_State : AI_State
             use_direction = _BasicPhysicSupport.hiddenMethods.antiWallDirection;
             return;
         }
+        
         if (Timeup())
         {
             DecideDirection();
             time_counter = 0f;
         }
+        
+        if (EnemiesByDistance.Count > 0)
+        {
+            closetEnemyT = EnemiesByDistance[0].transform;
+            if (Vector3.Distance(closetEnemyT.position, gameObject.transform.position) < 0.3f)
+                moveDirection = AIMoveDirection.stay;
+        }
+        
         switch (moveDirection)
         {
             case AIMoveDirection.stay:
@@ -213,17 +219,14 @@ public class Move_State : AI_State
             case AIMoveDirection.backTowardsEnemy:
                 break;
             case AIMoveDirection.towardsEnemy:
-                if (EnemiesByDistance.Count > 0)
-                {
-                    newDir = use_direction += (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
-                    angle = Vector3.Angle(use_direction, newDir);
-                    use_direction = Vector3.Lerp(use_direction, newDir,angle / 45 * Time.deltaTime);
-                    // 其实use_direction的计算非常恶心，因为实时算朝向特定敌人的话会产生个抖动问题，上面的结果效果差强人意，但比底下这些强。
-                    // 底下这些是一些失败的例子
-                    //use_direction = Quaternion.Euler(0, angle * Time.fixedDeltaTime / (Time.fixedDeltaTime + 1f), 0) * use_direction;
-                    //use_direction = Vector3.Lerp(use_direction, newDir, (angle / 45) * Time.deltaTime / (Time.deltaTime + 1f));
-                    //use_direction = (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
-                }
+                newDir = use_direction += (closetEnemyT.position - gameObject.transform.position).normalized;
+                angle = Vector3.Angle(use_direction, newDir);
+                use_direction = Vector3.Lerp(use_direction, newDir,angle / 45 * Time.deltaTime);
+                // 其实use_direction的计算非常恶心，因为实时算朝向特定敌人的话会产生个抖动问题，上面的结果效果差强人意，但比底下这些强。
+                // 底下这些是一些失败的例子
+                //use_direction = Quaternion.Euler(0, angle * Time.fixedDeltaTime / (Time.fixedDeltaTime + 1f), 0) * use_direction;
+                //use_direction = Vector3.Lerp(use_direction, newDir, (angle / 45) * Time.deltaTime / (Time.deltaTime + 1f));
+                //use_direction = (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
                 break;
             case AIMoveDirection.RunAwayFromThreat:
                 break;

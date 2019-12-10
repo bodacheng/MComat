@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Soul;
 
 public class GetUp : AI_State {
@@ -17,10 +15,10 @@ public class GetUp : AI_State {
 		base.Pre_process_before_enter ();
 	}
     
-        public override bool Enter_condition_priority1()
-        {
-            return true;
-        }
+    public override bool Enter_condition_priority1()
+    {
+        return true;
+    }
     
     // On what condition can we exit this state 
     public override bool Naturally_exit_condition()

@@ -27,7 +27,7 @@ public class States_Incubator
         Num_State_List.Add(new AI_Num_With_State("Empty", empty_State));
         StateIndexList.Add("Empty");
 
-        Move_State move1 = new Move_State(AIMoveStyle.normal,10f, 2f);
+        Move_State move1 = new Move_State(AIMoveStyle.normal,10f, 1f);
         Move_State move2 = new Move_State(AIMoveStyle.normal,2f, 2f);
         Move_State move3 = new Move_State(AIMoveStyle.normal,3f, 2f);
         Move_State testmove = new Move_State(AIMoveStyle.test, 1f, 2f);

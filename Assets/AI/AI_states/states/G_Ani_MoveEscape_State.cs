@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Soul;
 
 public class G_Ani_MoveEscape_State : AI_State {
@@ -10,20 +8,20 @@ public class G_Ani_MoveEscape_State : AI_State {
     Vector3 screenMovementForward, screenMovementRight, use_direction;
     readonly UnityEngine.Events.UnityAction breakfreestart;
     readonly UnityEngine.Events.UnityAction breakfreeend;
-    customCoroutine breakfreeCoroutine;
+    readonly customCoroutine breakfreeCoroutine;
     // This skill script is based on animation that has forward motion
 
     public G_Ani_MoveEscape_State(string _clip_name)
 	{
-		this.clip_name = _clip_name;
-        this.behaviorEnterRanges = null;
+        clip_name = _clip_name;
+        behaviorEnterRanges = null;
         breakfreestart = () =>
         {
-            this._ResistanceManager.Resistance.Value +=10;
+            _ResistanceManager.Resistance.Value +=10;
         };
         breakfreeend = () =>
         {
-            this._ResistanceManager.Resistance.Value -=10;
+            _ResistanceManager.Resistance.Value -=10;
         };
         breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
 	}
@@ -35,26 +33,18 @@ public class G_Ani_MoveEscape_State : AI_State {
 
     public override bool Capacity_enter_condition()
     {
-        if (!_BasicPhysicSupport.hiddenMethods.Grounded)
-            return false;
-        return true;
+        return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
 
     public override bool Enter_condition_priority2()
     {
-        if ((this._FightAttriCalReference.IFgettingDamage() || Sensor.GetNearbyDamagingWeaponColliders().Count > 0) 
-            && this._FightAttriCalReference.CriticalGauge > 90)
-            return true;
-        else
-            return false;
+        return (_FightAttriCalReference.IFgettingDamage() || Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
+            && _FightAttriCalReference.CriticalGauge > 90;
     }
 
     public override bool Naturally_exit_condition()
     {
-        if (Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
-            return true;
-        else
-            return false;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
     }
     Vector3 damagingWeaponComingDirection;
     Vector3 facedirection;
@@ -97,25 +87,24 @@ public class G_Ani_MoveEscape_State : AI_State {
             {
                 df.time_counter = 0;
                 this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
-                _FightAttriCalReference.ClearDamageLists();
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
                 this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
             }
         }
 	}
 
-    float h = 0f;
-    float v = 0f;
+    float h;
+    float v;
     public override void C_State_enter()
     {
         base.AI_State_enter();
-        this._Animator.SetFloat("speed", 0f);
+        _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
-        this.Sensor.OneRoundDetectionStart(5);
-        this.personality_Events.CloseAllPersonalityEffects();
+        Sensor.OneRoundDetectionStart(5);
+        personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name);                      
-        this.mainCam = CameraManager._camera.transform;
+        Animation_Manger.AnimationTrigger(clip_name);
+        mainCam = CameraManager._camera.transform;
         screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
         screenMovementForward = screenMovementSpace * Vector3.forward;
         screenMovementRight = screenMovementSpace * Vector3.right;

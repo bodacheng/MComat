@@ -119,23 +119,20 @@ namespace Soul
                     ChangeState(avaliable_casual_Transitions[0].AI_State_Number);
                     return;
                 }
-                else
+                if (casual_TransitionsPriority1.Count > 0)
                 {
-                    if (casual_TransitionsPriority1.Count > 0)
-                    {
-                        RandomTransitionToRun(casual_TransitionsPriority1);
-                        return;
-                    }
-                    if (casual_TransitionsPriority2.Count > 0)
-                    {
-                        RandomTransitionToRun(casual_TransitionsPriority2);
-                        return;
-                    }
-                    if (casual_TransitionsPriority3.Count > 0)
-                    {
-                        RandomTransitionToRun(casual_TransitionsPriority3);
-                        return;
-                    }
+                    RandomTransitionToRun(casual_TransitionsPriority1);
+                    return;
+                }
+                if (casual_TransitionsPriority2.Count > 0)
+                {
+                    RandomTransitionToRun(casual_TransitionsPriority2);
+                    return;
+                }
+                if (casual_TransitionsPriority3.Count > 0)
+                {
+                    RandomTransitionToRun(casual_TransitionsPriority3);
+                    return;
                 }
             }
 
@@ -143,7 +140,7 @@ namespace Soul
             {
                 return;
             }
-                
+
             if (playerMode || _inputManager.PlayerInputting)
             {
                 if (!exitCommandFufilled)
