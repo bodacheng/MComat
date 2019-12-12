@@ -6,7 +6,6 @@ using Soul;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
 //Those paremeters are sent to all parts of character from here.
-
 [RequireComponent(typeof(AIStateRunner))]
 [RequireComponent(typeof(Animation_Manger))]
 [RequireComponent(typeof(FightAttriCalReference))]

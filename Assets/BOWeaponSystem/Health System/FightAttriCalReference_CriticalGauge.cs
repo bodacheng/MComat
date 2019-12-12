@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public partial class FightAttriCalReference : MonoBehaviour
 {
-    private int critical_gauge = 100;//和skillcancelflag一样与角色的技能发动条件息息相关，所以放在这里
-    private bool gauge_collecting = true;
+    int critical_gauge = 100;//和skillcancelflag一样与角色的技能发动条件息息相关，所以放在这里
+    bool gauge_collecting = true;
     public int CriticalGauge
     {
         get
@@ -19,35 +17,35 @@ public partial class FightAttriCalReference : MonoBehaviour
             critical_gauge = Mathf.Clamp(value, 0, 100);//就是说角色最大ex槽最大100呗。
         }
     }
-    public void plusCriticalGauge(int Gauge)
+    public void PlusCriticalGauge(int Gauge)
     {
         if (Gauge > 0 && !gauge_collecting)
             return;
         CriticalGauge = CriticalGauge + Gauge;
     }
-    public void costCriticalGaugeBySPlevel(int level)
+    public void CostCriticalGaugeBySPlevel(int level)
     {
         switch (level)
         {
             case 0:
-                setGaugeCollecting(true);
+                SetGaugeCollecting(true);
                 break;
             case 1:
-                plusCriticalGauge(-10);
-                setGaugeCollecting(false);
+                PlusCriticalGauge(-10);
+                SetGaugeCollecting(false);
                 break;
             case 2:
-                plusCriticalGauge(-20);
-                setGaugeCollecting(false);
+                PlusCriticalGauge(-20);
+                SetGaugeCollecting(false);
                 break;
             case 3:
-                plusCriticalGauge(-50);
-                setGaugeCollecting(false);
+                PlusCriticalGauge(-50);
+                SetGaugeCollecting(false);
                 break;
         }
     }
 
-    public bool hasPlentyGauge(int splevel)
+    public bool HasPlentyGauge(int splevel)
     {
         switch (splevel)
         {
@@ -71,11 +69,11 @@ public partial class FightAttriCalReference : MonoBehaviour
         return false;
     }
 
-    public void setGaugeCollecting(bool a)
+    public void SetGaugeCollecting(bool a)
     {
         gauge_collecting = a;
     }
-    public bool ifGaugeCollecting()
+    public bool IfGaugeCollecting()
     {
         return gauge_collecting;
     }

@@ -7,8 +7,8 @@ using HittingDetection;
 public class DecompositionerPool : ObjectPool<Decompositioner> {
     
     static GameObject Marker;
-    private readonly GameObject Prefab;
-        
+    readonly GameObject Prefab;
+
     public DecompositionerPool(GameObject prefab)
     {
         if (Marker == null)

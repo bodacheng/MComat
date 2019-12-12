@@ -45,7 +45,7 @@ public class Knock_Off_State : AI_State
         _FightAttriCalReference.EnableAllHitBoxCollider(false);
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
         personality_Events.CloseAllPersonalityEffects();
-        _FightAttriCalReference.plusCriticalGauge(2);
+        _FightAttriCalReference.PlusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);        
         int ranDom = Random.Range(0, knockoffAnimations.Count);

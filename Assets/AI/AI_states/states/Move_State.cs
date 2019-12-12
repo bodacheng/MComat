@@ -88,10 +88,10 @@ public class Move_State : AI_State
     public override void C_State_enter()
     {
         time_counter = 0f;
-        this._Weapon_Animation_Events.ClearMarkerManagers();        
-        this.mainCam = CameraManager._camera.transform;
-        this.Animation_Manger.PlayLayerAnim(null);
-        this.personality_Events.CloseAllPersonalityEffects();
+        _Weapon_Animation_Events.ClearMarkerManagers();
+        mainCam = CameraManager._camera.transform;
+        Animation_Manger.PlayLayerAnim(null);
+        personality_Events.CloseAllPersonalityEffects();
     }
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
@@ -117,7 +117,6 @@ public class Move_State : AI_State
                 if (EnemiesByDistance.Count > 0)
                 {
                     whereToGo = Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && Sensor.GetNearbyDamagingWeaponColliders()[0] != null ? 5 : Random.Range(0, 5);
-
                     switch (whereToGo)
                     {
                         case 0:
@@ -207,7 +206,7 @@ public class Move_State : AI_State
         if (EnemiesByDistance.Count > 0)
         {
             closetEnemyT = EnemiesByDistance[0].transform;
-            if (Vector3.Distance(closetEnemyT.position, gameObject.transform.position) < 0.3f)
+            if (Vector3.Distance(closetEnemyT.position, gameObject.transform.position) < 1f)
                 moveDirection = AIMoveDirection.stay;
         }
         

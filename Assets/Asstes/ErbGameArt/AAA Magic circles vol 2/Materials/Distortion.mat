@@ -31,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Distortionpower: 30
-    - _InvFade: 1
+    - _Distortionpower: 100
+    - _InvFade: 2
     m_Colors:
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}

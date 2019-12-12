@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage_type: 1
-  _WeaponMode: 1
+  _WeaponMode: 3
   _WeaponPosAdjustMode: 1
   _specialApply: 0
   _startActivated: 1
@@ -68,11 +68,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
+  Rigidbody: {fileID: 0}
   _HitBox: {fileID: 7007343582443700653}
+  positionConstraint: {fileID: 0}
+  danMuTest: {fileID: 0}
+  bullet_GPS: {fileID: 0}
   DestructionDelay: -1
   stop_emission_delay: 0
-  to_be_stop_emissions: []
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
 --- !u!1 &1420864978612344187

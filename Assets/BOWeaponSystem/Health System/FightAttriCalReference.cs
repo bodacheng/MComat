@@ -27,24 +27,9 @@ public partial class FightAttriCalReference : MonoBehaviour
     List<Collider> myColliders;
     E_Damage managingEventDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
-    //IDictionary<DamageType, List<V_Damage>> DamagesDIC = new Dictionary<DamageType, List<V_Damage>>()
-    //{
-    //    {DamageType.slight_damage,new List<V_Damage>()},
-    //    {DamageType.light_damage,new List<V_Damage>()},
-    //    {DamageType.heavy_damage,new List<V_Damage>()},
-    //    {DamageType.supper_damage,new List<V_Damage>()},
-    //    {DamageType.heavy_block,new List<V_Damage>()},
-    //    {DamageType.stagger,new List<V_Damage>()},
-    //    {DamageType.light_block,new List<V_Damage>()},
-    //    {DamageType.knockOff_damage,new List<V_Damage>()},
-    //    {DamageType.deathknockoff,new List<V_Damage>()}
-    //};
-
     UnityEngine.Events.UnityAction gravityloststart;
     UnityEngine.Events.UnityAction gravitylostend;
     customCoroutine burstCoroutine;
-
-    BO_Shield _shield; //已几乎不再用
 
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
@@ -65,10 +50,6 @@ public partial class FightAttriCalReference : MonoBehaviour
 
     public void HealthBodyFixedUpdate()
     {
-        //if (DamagesDIC[DamageType.slight_damage].Count > 0)//这里有无法理解的报错
-        //{
-        //    EatDamage(DamageType.slight_damage);
-        //}
         _knockOffCount.Update();
         _ComboHitCount.Update();
         _BeHitCount.Update();
@@ -155,7 +136,11 @@ public partial class FightAttriCalReference : MonoBehaviour
         if (processingD.fromWeapon != null)
         {
             if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
+            {
                 processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
+                if (processingD.fromWeapon._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
+                    processingD.fromWeapon.GetOwnerFightAttriCalReference()._Center.Animation_Manger.FrameFreeze();
+            }
             CurrentHp.Value -= processingD.AT;
             if (CurrentHp.Value <= 0)
             {
@@ -195,11 +180,18 @@ public partial class FightAttriCalReference : MonoBehaviour
     public void ApplyDamage(V_Damage _dmg)
 	{
         _Center._ResistanceManager.Resistance.Value -= 1;
-        if (_Center._ResistanceManager.Resistance.Value > 0)
-            return;
+        if (_Center.AIStateRunner.GetCurrentStateNum() == "Defend")
+        {
+            _dmg.damage_type = DamageType.heavy_block;
+            _dmg.AT = 0;
+            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+        }
         EatDamageProcess(_dmg);
+        if (_Center._ResistanceManager.Resistance.Value > 0)
+        {
+            return;
+        }        
         _ComboHitCount.HitCountInterrupt();
-        
         switch(_dmg.damage_type)
         {
             case DamageType.slight_damage:
@@ -231,17 +223,6 @@ public partial class FightAttriCalReference : MonoBehaviour
     public void HitCountPlus() => _ComboHitCount.HitCountPlus();//打别人计数
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     public void BeHitCountInterrupt() => _BeHitCount.BeHitCountInterrupt();
-
-    // 旧防御盾系列函数。已经基本不用
-    public void SetShield(BO_Shield _shield)
-    {
-        FightAttriCalReference fightAttriCalReference = this;
-        fightAttriCalReference._shield = _shield;
-    }
-    public BO_Shield GetShield()
-    {
-        return _shield;
-    }
 
     // event 攻击系列。暂时不再使用
     public void SetManagingEventDamage(E_Damage e)
@@ -376,6 +357,18 @@ public partial class FightAttriCalReference : MonoBehaviour
             }
             _Center._ShaderManager.RimEffectsForAShortTime(0.8f, speed, time, damagecolor);
         }
+    }
+    
+    BO_Shield _shield; //已几乎不再用
+    // 旧防御盾系列函数。已经基本不用
+    public void SetShield(BO_Shield _shield)
+    {
+        FightAttriCalReference fightAttriCalReference = this;
+        fightAttriCalReference._shield = _shield;
+    }
+    public BO_Shield GetShield()
+    {
+        return _shield;
     }
 }
 

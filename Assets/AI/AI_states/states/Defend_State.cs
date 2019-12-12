@@ -109,7 +109,6 @@ public class Defend_State : AI_State
         Sensor.ContinuousDetectionStart(5);
         base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
-        _Rigidbody.velocity = Vector3.zero;
         time_counter = 0.3f;
         if (shaderManager != null)
             shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);      
@@ -126,17 +125,20 @@ public class Defend_State : AI_State
          {
             case DamageType.light_block:
                 Animation_Manger.PlayLayerAnim(block_break_name);
-                fixpostween = _Rigidbody.DOMove(fixDesPos,1);
+                
+                //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 time_counter = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);
-                _FightAttriCalReference.plusCriticalGauge(2);
+                _FightAttriCalReference.PlusCriticalGauge(2);
             break;
             case DamageType.heavy_block:
                 Animation_Manger.PlayLayerAnim(block_break_name);
-                fixpostween = _Rigidbody.DOMove(fixDesPos,1);
+                //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 time_counter = FightGlobalSetting._heavyBlockLastingTime;
                 DefendHPfade(newValue);
-                _FightAttriCalReference.plusCriticalGauge(2);
+                _FightAttriCalReference.PlusCriticalGauge(2);
             break;
          }
     }

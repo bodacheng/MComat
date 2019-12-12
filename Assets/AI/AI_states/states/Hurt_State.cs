@@ -31,7 +31,7 @@ public class Hurt_State : AI_State {
         int ranDom = Random.Range(0, hurtclips.Count);
         Animation_Manger.AnimationTrigger(hurtclips[ranDom]);
         
-        _FightAttriCalReference.plusCriticalGauge(1);
+        _FightAttriCalReference.PlusCriticalGauge(1);
         switch(newValue.damage_type)
         {
                 case DamageType.light_damage:
@@ -57,7 +57,8 @@ public class Hurt_State : AI_State {
                                             gameObject.transform.position,
                                                 newValue._WeaponPosAdjustMode,
                                                     touchingEnemyBody);
-        fixpostween = _Rigidbody.DOMove(fixDesPos,1f);
+        _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+        //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);// 第二个参数是距离除以期望速度
         if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)//&& newValue.damage_type == DamageType.supper_damage
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,

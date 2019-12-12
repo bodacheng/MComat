@@ -86,7 +86,7 @@ public class G_Ani_MoveEscape_State : AI_State {
             if (df.time_counter > 0)
             {
                 df.time_counter = 0;
-                this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
+                this._FightAttriCalReference.CostCriticalGaugeBySPlevel(3);
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
                 this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
             }

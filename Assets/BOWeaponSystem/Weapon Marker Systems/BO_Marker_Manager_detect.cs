@@ -1,20 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace HittingDetection
 {
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        private FightAttriCalReference _Raw_Target_Instance; //A single target which was hit.
-        private FightAttriCalReference calReference;
-        private BO_Hitbox _BO_Hitbox;
-        private Vector3 _Direction;
-        private Vector3 _StartPoint;
-        private List<Collider> BallDetectHitPool;
-        private BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
+        FightAttriCalReference _Raw_Target_Instance; //A single target which was hit.
+        FightAttriCalReference calReference;
+        BO_Hitbox _BO_Hitbox;
+        Vector3 _Direction;
+        Vector3 _StartPoint;
+        List<Collider> BallDetectHitPool;
+        BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
 
-        private void DetectProcess()
+        void DetectProcess()
         {
             hitsOnHealthBody.Clear();
             if (_markers == null)
@@ -43,7 +42,7 @@ namespace HittingDetection
                                     if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
                                         && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
                                         && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
-                                                                                                          //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                                                                                                         //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
                                     {
                                         if (TheS._AdvancedShieldDetection)
                                         {
@@ -57,16 +56,16 @@ namespace HittingDetection
                                             ds7 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot6.transform.position), 2);  //Bottom Right
                                             ds8 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot7.transform.position), 2);  //Right
                                             ds9 = Mathf.Pow(Vector3.Distance(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot8.transform.position), 2);  //Left
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldBackSpot.transform.position - _WeaponHolderCenter.position, Color.green, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldCenterSpot.transform.position - _WeaponHolderCenter.position, Color.red, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot7.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot1.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot2.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot3.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot4.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot6.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot5.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
-                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot8.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldBackSpot.transform.position - _WeaponHolderCenter.position, Color.green, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldCenterSpot.transform.position - _WeaponHolderCenter.position, Color.red, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot7.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot1.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot2.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot3.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot4.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot6.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot5.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
+                                                                                                                                                           //Debug.DrawRay(_WeaponHolderCenter.position, TheS._ShieldEdgeSpot8.transform.position - _WeaponHolderCenter.position, Color.blue, 5);
                                         }
                                         if (((dh > ds1) || (dh > ds2) || (dh > ds3) || (dh > ds4) || (dh > ds5) || (dh > ds6) || (dh > ds7) || (dh > ds8) || (dh > ds9)) || (TheS._AdvancedShieldDetection == false))
                                         {
@@ -91,10 +90,10 @@ namespace HittingDetection
                         {
                             if (this.teamConfig != null)
                             {
-                                if (this.teamConfig.enemyWeaponLayerMask ==　(this.teamConfig.enemyWeaponLayerMask | 1 << _markers[i]._hits[hit_target_index].collider.gameObject.layer))
+                                if (this.teamConfig.enemyWeaponLayerMask == (this.teamConfig.enemyWeaponLayerMask | 1 << _markers[i]._hits[hit_target_index].collider.gameObject.layer))
                                     WeaponEnergyExaust(_markers[i]._hits[hit_target_index].point, _markers[i]._hits[hit_target_index].collider.transform.rotation);
                             }
-                        
+
                             if (_markers[i]._hits[hit_target_index].collider.gameObject.layer == 13
                                 && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
                             {
@@ -140,7 +139,7 @@ namespace HittingDetection
                                     _StartPoint = _markers[i]._hits[hit_target_index].point;
                                     _StartPoint = _StartPoint + (_markers[i]._hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
                                     //_StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
-                                    hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction,_markers[i].transform.position));
+                                    hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction, _markers[i].transform.position));
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
                                 {
@@ -222,7 +221,7 @@ namespace HittingDetection
                                     if (this.teamConfig.enemyWeaponLayerMask == (this.teamConfig.enemyWeaponLayerMask | 1 << BallDetectHitPool[hit_target_index].gameObject.layer))
                                         WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                 }
-                                
+
                                 if (BallDetectHitPool[hit_target_index].gameObject.layer == 13
                                     && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
                                 {
@@ -272,7 +271,7 @@ namespace HittingDetection
                                                                                                                                                   // 2.
                                                                                                                                                   // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
                                                                                                                                                   // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction,_markers[i].transform.position));
+                                        hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction, _markers[i].transform.position));
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
                                     {

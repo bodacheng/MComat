@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 // 2019 6.1:
 // “动画的终结”现在我们改由动画片段末尾的“ThisIsEndOfAnimation”来判定。
@@ -16,16 +17,16 @@ using UnityEngine;
 // 注意看所有的状态因动画终止而回归idle，都是从full_body_state1或full_body_state2往null回归的。
 // 只有在上面两种情况下ThisIsEndOfAnimation才应该起到应该有的作用。从而当下来看，理论上当前做法不会有什么问题。
 
+// 大体的image就是能够直接通过动画文件名来随时决定animator当中各个层动画的播放。而不再需要复杂的animator。。
+// 然而这和unity的这个animator系统的初衷产生矛盾
+// 整个系统建立在animator本身这样的前提下：
+//1. animator在状态迁移过程中，“当前状态”为迁移出发状态
+//2. 在迁移过程中，如果激发了迁移终点状态向另一状态（或返回至出发状态）迁移的条件，（起码我们知道trigger满足这点），则状态机会在按原节奏到达终点状态后，
+//再去向第三者状态迁移，之前的迁移过程并不会受干扰，后触发的迁移条件也并不会被遗忘，一切会按顺序进行
+//从而也就是说对最后要触发那个状态来说，从条件激活到开始进入会发生一点延迟。
+
 public partial class Animation_Manger : MonoBehaviour
 {
-    // 大体的image就是能够直接通过动画文件名来随时决定animator当中各个层动画的播放。而不再需要复杂的animator。。
-    // 然而这和unity的这个animator系统的初衷产生矛盾
-    // 整个系统建立在animator本身这样的前提下：
-    //1. animator在状态迁移过程中，“当前状态”为迁移出发状态
-    //2. 在迁移过程中，如果激发了迁移终点状态向另一状态（或返回至出发状态）迁移的条件，（起码我们知道trigger满足这点），则状态机会在按原节奏到达终点状态后，
-	//再去向第三者状态迁移，之前的迁移过程并不会受干扰，后触发的迁移条件也并不会被遗忘，一切会按顺序进行
-    //从而也就是说对最后要触发那个状态来说，从条件激活到开始进入会发生一点延迟。
-
     public Animator Animator;
     public AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
     AnimatorOverrideController animatorOverride;
@@ -42,6 +43,11 @@ public partial class Animation_Manger : MonoBehaviour
     public bool GetOnAniTransitionFlag()
     {
         return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
+    }
+    
+    public void FrameFreeze()
+    {
+        DOTween.To(() => Animator.speed, x => Animator.speed = x, 0f, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, 1f, 0.05f); });
     }
 
     void Update()

@@ -1,34 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HittingDetection
 {
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        private V_Damage new_damage;
-        
+        V_Damage new_damage;
+
         // 下面这个结构目前为止事关三大重要的索引作用
         // 1. 武器在击中敌人时，作为攻击力参考
         // 2. 武器击中敌人时，特效种类参考
         // 3. 武器击中敌人时，对攻击方的hit combo进行加算
         // 由于BO_Marker_Manager现在全部都是对象池物件，如果我们认为一个instance返回对象池后就应该不再参与任何工作的话，
         // 原则上我们应该确保一切围绕BO_Marker_Manage的instance，最重要的是里面的myOwnerHealth进行的工作在instance返回对象池前结束
-        private Attack_on_shield_result collision;
-        private float _ContinuousDamage_Timer;
+        Attack_on_shield_result collision;
+        float _ContinuousDamage_Timer;
         //These DH and DS variables are Distances to the shield spots. Whie the shield is active, DH ("Distance to Health", distance to the back point of the shiled) has to be less than all the other shield edge spots (DS, "Distance to Shield")
-        private float dh;
-        private float ds1;
-        private float ds2;
-        private float ds3;
-        private float ds4;
-        private float ds5;
-        private float ds6;
-        private float ds7;
-        private float ds8;
-        private float ds9;
-        
-        private void TreatProcess()
+        float dh;
+        float ds1;
+        float ds2;
+        float ds3;
+        float ds4;
+        float ds5;
+        float ds6;
+        float ds7;
+        float ds8;
+        float ds9;
+
+        void TreatProcess()
         {
             if (HitShield && traditionalDefendMode)//其实由上面的分析可以知道，对于来自一把武器的攻击，hitshield和hitflesh是不会同时为true的。但如果多把武器同时来攻击，如果被攻击方同时有被击中以及防御住的情况发生，肯定要先处理所受伤害，立刻转入受伤状态才对
             {
@@ -44,11 +42,11 @@ namespace HittingDetection
                         // 现在我们在讨论的其实是关于同步问题的一个核心的事情。。。什么时候两边都需要执行，什么时候只需要一个客户端执行。我们现在不熟悉处理这类问题的逻辑方式。
                         if (_myOwnerCalReference != null)
                         {
-                            this._myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                            _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
-                                    new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, Vector3.zero,TheS.transform.position, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, Vector3.zero, TheS.transform.position, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
                                     _myOwnerCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -63,17 +61,17 @@ namespace HittingDetection
                             {
                                 case DamageType.light_block:
                                     //Vector3 jiuzhengweizhi;
-                                    new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform.forward,attackerWholeTransform.position,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
-                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward ,_WeaponHolderCenter.position, attackerWholeTransform.forward,attackerWholeTransform.position,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
-                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position,this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -92,7 +90,7 @@ namespace HittingDetection
                         point = _wallHitPositions[temp];
                         if (IfVectorClean(point))
                         {
-                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", this.personalEffectPath,point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up),null);
+                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", this.personalEffectPath, point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up), null);
                         }
                     }
                 }
@@ -105,15 +103,15 @@ namespace HittingDetection
                     if (_hitOnHealthBody._victimFightAttriCalReference != null && _Used_Targets.Contains(_hitOnHealthBody._victimFightAttriCalReference.transform) == false)
                     {
                         WeaponEnergyExaust(_hitOnHealthBody._Startpoint, Quaternion.identity);
-                        new_damage = new V_Damage(damage_type, _WeaponPosAdjustMode, _hitOnHealthBody._Startpoint, attackerWholeTransform.forward,attackerWholeTransform.position,this,_specialApply);
+                        new_damage = new V_Damage(damage_type, _WeaponPosAdjustMode, _hitOnHealthBody._Startpoint, attackerWholeTransform.forward, attackerWholeTransform.position, this, _specialApply);
                         if (effectSpreadOnBody && _hitOnHealthBody._victimFightAttriCalReference._Center._ResistanceManager.Resistance.Value == 0)
                             _hitOnHealthBody._victimFightAttriCalReference.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
                         _hitOnHealthBody._victimFightAttriCalReference.ApplyDamage(new_damage);
 
-                        if (this._myOwnerCalReference != null)
+                        if (_myOwnerCalReference != null)
                         {
-                            this._myOwnerCalReference.MyDamageCount(new_damage);
-                            this._myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                            _myOwnerCalReference.MyDamageCount(new_damage);
+                            _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         }
 
                         if (IfVectorClean(_hitOnHealthBody._Startpoint))
@@ -193,7 +191,7 @@ namespace HittingDetection
                 }
                 if (_myOwnerCalReference != null)
                 {
-                    _myOwnerCalReference.plusCriticalGauge(3);
+                    _myOwnerCalReference.PlusCriticalGauge(3);
                 }
             }
 
@@ -212,7 +210,7 @@ namespace HittingDetection
                 }
             }
         }
-        
+
         Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Transform attackerTransform)
         {
             damageHappenPoint.y = 0;

@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -9,9 +8,9 @@ public class SKillAnalyzer : MonoBehaviour
 {
     public void SkillsAnalyzeByFrames(string type, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/G_Attack_State", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/G_Attack_State_Stay", typeof(AnimationClip)).ToList();
+        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
 
         List<AnimationClip> AnimationClips = new List<AnimationClip>();
         foreach (UnityEngine.Object _object in G_Attack_States)
@@ -35,21 +34,21 @@ public class SKillAnalyzer : MonoBehaviour
         }
     }
 
-    List<string> AttackFrameStartMethodNames = new List<string>() {
+    readonly List<string> AttackFrameStartMethodNames = new List<string>() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
         "SetHeadMarkerManager","SetTailMarkerManager",
         "SetAllBodyMarkerManagersIn",
     };
-    List<string> EffectsAttackFrameStartMethodNames = new List<string>()
+    readonly List<string> EffectsAttackFrameStartMethodNames = new List<string>()
     {
         "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
     };
 
     public void ReplaceAnimEventName(string type, string old_name, string new_name)
     {
-        if (!(old_name != null && old_name != "" && new_name != null && new_name != ""))
+        if (!(!string.IsNullOrEmpty(old_name)&& new_name != null && new_name != ""))
         {
             return;
         }
@@ -129,10 +128,7 @@ public class SKillAnalyzer : MonoBehaviour
             {
                 cancelflagFrame = e.time;
             }
-            if ((targetEventName != null && targetEventName != "" && e.functionName == targetEventName) || !(targetEventName != null && targetEventName != ""))
-            {
-                hasTargetEventName = true;
-            }
+            hasTargetEventName |= ((!string.IsNullOrEmpty(targetEventName)&& e.functionName == targetEventName) || string.IsNullOrEmpty(targetEventName));
         }
 
         if (!hasTargetEventName)
@@ -151,14 +147,12 @@ public class SKillAnalyzer : MonoBehaviour
             Debug.Log(_clip.name + "貌似没有取消flag,应做单独分析");
             return false;
         }
-
         earlieststartframe = allAttackStartFrames.Min();
         latestendframe = allAttackStartFrames.Max();
 
         float attackendtocancelstart = cancelflagFrame - latestendframe;
         bool startfilteroutcome = (earlieststartframe > start_min) && (earlieststartframe <= start_max);
         bool endfiltercoutcome = (attackendtocancelstart > end_min) && (attackendtocancelstart <= end_max);
-
         return startfilteroutcome && endfiltercoutcome;
     }
 }

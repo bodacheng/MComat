@@ -37,7 +37,7 @@ public class BasicPhysicSupport : MonoBehaviour
                 ||
                 (_BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
         }
-
+        
         public bool IfStepOnFriendCharacter(Collider box)
         {
             return _BasicPhysicSupport._DATA_CENTER == null || _BasicPhysicSupport._DATA_CENTER._TeamConfig != null

@@ -133,15 +133,15 @@ public class BO_Ani_E : MonoBehaviour
         }
     }
 
-    private AudioClip audioClip;
-	public void PlaySoundOnce(string soundClipName)
+    AudioClip audioClip;
+    public void PlaySoundOnce(string soundClipName)
 	{
         AudioResourceLoading.Instance.soundClipsDic.TryGetValue("Audios/effects/" + soundClipName, out audioClip);
         if (audioClip != null)
             _DATA_CENTER._AudioSource.PlayOneShot(audioClip);
 	}
 
-    private Vector3 magicFoward_shoot_direction;
+    Vector3 magicFoward_shoot_direction;
     public void MagicForward(AnimationEvent e)
 	{
         if (string.IsNullOrEmpty(e.stringParameter))

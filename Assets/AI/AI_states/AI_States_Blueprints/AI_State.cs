@@ -75,7 +75,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return this._FightAttriCalReference.hasPlentyGauge(splevel);
+            return this._FightAttriCalReference.HasPlentyGauge(splevel);
         }
 
         //一个状态的决策性进入条件与决策性退出条件如果没有形成一个真正意义上一正一反的关系，那么就会产生“无限进入进出循环”
@@ -106,7 +106,7 @@ namespace Soul
         {
             Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             _FightAttriCalReference.AT = this.AT;
-            _FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
+            _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
         }
         
         // Process when entering the state 
@@ -114,7 +114,7 @@ namespace Soul
         {
             Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             _FightAttriCalReference.AT = this.AT;
-            _FightAttriCalReference.costCriticalGaugeBySPlevel(this.splevel);
+            _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
         }
 
         public virtual void C_State_enter()
@@ -401,8 +401,9 @@ namespace Soul
                         return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, WeaponPosAdjustMode.explosion,touchingEnemyBody);
                     }
                 case WeaponPosAdjustMode.explosion:
-                    v_temp = (victimT_pos - damageHappenPoint).normalized + victimT_pos;
+                    v_temp = (victimT_pos - damageHappenPoint).normalized;
                     v_temp.y = 0;
+                    v_temp = v_temp + victimT_pos;
                     return v_temp;
                 default:
                     return victimT_pos;

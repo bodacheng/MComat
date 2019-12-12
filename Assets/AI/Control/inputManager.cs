@@ -46,7 +46,7 @@ namespace Inputs
             WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
             foreach (State_Rate_Set transition_key_value in avaliable_casual_Transitions)
             {
-                if (_BO_Health.hasPlentyGauge(transition_key_value.SPLevel))
+                if (_BO_Health.HasPlentyGauge(transition_key_value.SPLevel))
                 {
                     if (transition_key_value.enterInput != Inputs_defined.Null)
                     {
@@ -76,7 +76,7 @@ namespace Inputs
             WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
             foreach (AI_State _AS in States_for_AbsoluteInput)
             {
-                if (_BO_Health.hasPlentyGauge(_AS.splevel))
+                if (_BO_Health.HasPlentyGauge(_AS.splevel))
                 {
                     if (_AS.enterInput != Inputs_defined.Null)
                     {

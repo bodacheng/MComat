@@ -277,6 +277,7 @@
     <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
     <Compile Include="Assets\EffectsSystem\DanMuTest.cs" />
     <Compile Include="Assets\EffectsSystem\RanSe.cs" />
+    <Compile Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Demo magiс circles Vol 2\CameraHolder.cs" />
     <Compile Include="Assets\EZ Object Pools\DecompositionerPool.cs" />
     <Compile Include="Assets\FightingSceneUISystem\charIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
@@ -532,7 +533,9 @@
     <None Include="Assets\Resources\AIScripts\human\1118Test.xml" />
     <None Include="Assets\JsonSupport\UnityPackage\Assets\link.xml" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
+    <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Distortion.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
+    <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Resources\AIScripts\human\1118_atest.xml" />
     <None Include="Assets\Particlecollection_Magic_ring\READ ME.txt" />
     <None Include="Assets\POFX\Shaders\Resources\ColorSwap.shader" />
@@ -549,10 +552,12 @@
     <None Include="Assets\Resources\AIScripts\little_dragon\little_dragon.xml" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Blit.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformRender.shader" />
+    <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
     <None Include="Assets\Resources\Account\TuroialFight2.xml" />
     <None Include="Assets\PostProcessing\Resources\Shaders\FXAA3.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.shader" />
+    <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Electricity.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
     <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\effect_distortion_mask.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Documentation\Version 2.0.txt" />
@@ -578,6 +583,7 @@
     <None Include="Assets\Resources\AIScripts\Rhino\Rhino.xml" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\Toon Blended Premmultiply.shader" />
+    <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Demo magiс circles Vol 2\Readme.txt" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
     <None Include="Assets\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticlePremultiplyBlend.shader" />
@@ -590,6 +596,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\FXAA.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
+    <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Blend_TwoSides.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
     <None Include="Assets\POFX\Shaders\Resources\Eraser.shader" />
     <None Include="Assets\Resources\TimeLines\testdialog.txt" />

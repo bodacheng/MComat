@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
@@ -19,10 +18,10 @@ public class Decompositioner : MonoBehaviour {
 
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;
-    
-    private ParticleSystem to_be_stop_emissions;
-    private float counter;
-    private int phase;
+
+    ParticleSystem to_be_stop_emissions;
+    float counter;
+    int phase;
 
     void Awake()
     {
