@@ -175,6 +175,79 @@ public partial class FightAttriCalReference : MonoBehaviour
                 break;
         }
     }
+    
+    Decompositioner processingBlood;
+    void HitEffect(V_Damage v_Damage)
+    {
+        if (_Center._ResistanceManager.Resistance.Value > 0)
+        {
+            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+        }
+        else
+        {
+            switch (v_Damage.damage_type)
+            {
+                case DamageType.slight_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                    //PlayTargetHitSound("light_hit");
+                    break;
+                case DamageType.light_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                    //PlayTargetHitSound("light_hit");
+                    break;
+                case DamageType.heavy_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                    //PlayTargetHitSound("heavy_hit");
+                    break;
+                case DamageType.supper_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                    //PlayTargetHitSound("super_hit");
+                    break;
+                case DamageType.light_block:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
+                                                   v_Damage.effectPath,
+                                                   v_Damage.damageHappenPoint,
+                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                break;
+                case DamageType.heavy_block:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
+                                                   v_Damage.effectPath,
+                                                   v_Damage.damageHappenPoint,
+                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                break;
+                default:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
+                    //PlayTargetHitSound("light_hit");
+                    break;
+            }
+        }
+    }
 
     // 这个函数，是写的很丑陋，但如果纯粹是为了解决个人强迫症的话干脆别改了。其实这个产生的根本原因就是你非要把不同重量级的攻击给用枚举类型区分开
     public void ApplyDamage(V_Damage _dmg)
@@ -187,6 +260,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             _Center.AIStateRunner.ChangeState("Defend",_dmg);
         }
         EatDamageProcess(_dmg);
+        HitEffect(_dmg);
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
             return;

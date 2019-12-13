@@ -62,8 +62,19 @@ namespace HittingDetection
         public Vector3 AttackerT_pos;
         public BO_Marker_Manager fromWeapon;
         public SpecialApply specialApply = SpecialApply.none;
-
+        
         public V_Damage() { }
+
+        public string effectPath;
+        public FightAttriCalReference victim;
+        public Vector3 weaponsCutDirection;
+        public V_Damage(FightAttriCalReference _Raw_Target_Instance, Vector3 _StartPoint, Vector3 _Direction)
+        {
+            victim = _Raw_Target_Instance;
+            damageHappenPoint = _StartPoint;
+            weaponsCutDirection = _Direction;
+        }
+        
         public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon)
         {
             this.damage_type = damage_type;
@@ -75,7 +86,7 @@ namespace HittingDetection
             AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             specialApply = SpecialApply.none;
         }
-        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon, SpecialApply specialApply)
+        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon,string effectPath,SpecialApply specialApply)
         {
             this.damage_type = damage_type;
             this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
@@ -83,6 +94,7 @@ namespace HittingDetection
             this.fromWeapon = fromWeapon;
             this.AttackerT_foward = AttackerT_foward;
             this.AttackerT_pos = AttackerT_pos;
+            this.effectPath = effectPath;
             AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
             this.specialApply = specialApply;   
         }

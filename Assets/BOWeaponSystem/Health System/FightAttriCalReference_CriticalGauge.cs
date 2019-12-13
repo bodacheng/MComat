@@ -6,16 +6,8 @@ public partial class FightAttriCalReference : MonoBehaviour
     bool gauge_collecting = true;
     public int CriticalGauge
     {
-        get
-        {
-            //Some other code
-            return critical_gauge;
-        }
-        set
-        {
-            //Some other code
-            critical_gauge = Mathf.Clamp(value, 0, 100);//就是说角色最大ex槽最大100呗。
-        }
+        get => critical_gauge;
+        set => critical_gauge = Mathf.Clamp(value, 0, 100);//就是说角色最大ex槽最大100呗。
     }
     public void PlusCriticalGauge(int Gauge)
     {

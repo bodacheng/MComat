@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6695912966019525207, guid: 72570cb59e2284bbc92c40979d6a98ba,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.7652392
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695912966019525207, guid: 72570cb59e2284bbc92c40979d6a98ba,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.11764705
+      objectReference: {fileID: 0}
     - target: {fileID: 1577962161804176, guid: 72570cb59e2284bbc92c40979d6a98ba, type: 3}
       propertyPath: m_Name
       value: groundroundblast

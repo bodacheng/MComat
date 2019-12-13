@@ -4,8 +4,6 @@ namespace HittingDetection
 {
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        V_Damage new_damage;
-
         // 下面这个结构目前为止事关三大重要的索引作用
         // 1. 武器在击中敌人时，作为攻击力参考
         // 2. 武器击中敌人时，特效种类参考
@@ -46,7 +44,7 @@ namespace HittingDetection
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
-                                    new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, Vector3.zero, TheS.transform.position, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    V_Damage new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, Vector3.zero, TheS.transform.position, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
                                     _myOwnerCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -61,7 +59,7 @@ namespace HittingDetection
                             {
                                 case DamageType.light_block:
                                     //Vector3 jiuzhengweizhi;
-                                    new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    V_Damage new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
@@ -98,84 +96,29 @@ namespace HittingDetection
 
             if (HitFlesh)
             {
-                foreach (HitOnHealthBody _hitOnHealthBody in hitsOnHealthBody)
+                foreach (V_Damage _hitOnHealthBody in hitsOnHealthBody)
                 {
-                    if (_hitOnHealthBody._victimFightAttriCalReference != null && _Used_Targets.Contains(_hitOnHealthBody._victimFightAttriCalReference.transform) == false)
+                    if (_hitOnHealthBody.victim != null && _Used_Targets.Contains(_hitOnHealthBody.victim.transform) == false)
                     {
-                        WeaponEnergyExaust(_hitOnHealthBody._Startpoint, Quaternion.identity);
-                        new_damage = new V_Damage(damage_type, _WeaponPosAdjustMode, _hitOnHealthBody._Startpoint, attackerWholeTransform.forward, attackerWholeTransform.position, this, _specialApply);
-                        if (effectSpreadOnBody && _hitOnHealthBody._victimFightAttriCalReference._Center._ResistanceManager.Resistance.Value == 0)
-                            _hitOnHealthBody._victimFightAttriCalReference.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
-                        _hitOnHealthBody._victimFightAttriCalReference.ApplyDamage(new_damage);
+                        WeaponEnergyExaust(_hitOnHealthBody.damageHappenPoint, Quaternion.identity);
 
+                        _hitOnHealthBody.damage_type = damage_type;
+                        _hitOnHealthBody._WeaponPosAdjustMode = _WeaponPosAdjustMode;
+                        _hitOnHealthBody.AttackerT_foward = attackerWholeTransform.forward;
+                        _hitOnHealthBody.AttackerT_pos = attackerWholeTransform.position;
+                        _hitOnHealthBody.fromWeapon = this;
+                        _hitOnHealthBody.effectPath = personalEffectPath;
+                        _hitOnHealthBody.specialApply = _specialApply;
+
+                        if (effectSpreadOnBody && _hitOnHealthBody.victim._Center._ResistanceManager.Resistance.Value == 0)
+                            _hitOnHealthBody.victim.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
+                        _hitOnHealthBody.victim.ApplyDamage(_hitOnHealthBody);
                         if (_myOwnerCalReference != null)
                         {
-                            _myOwnerCalReference.MyDamageCount(new_damage);
+                            _myOwnerCalReference.MyDamageCount(_hitOnHealthBody);
                             _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         }
-
-                        if (IfVectorClean(_hitOnHealthBody._Startpoint))
-                        {
-                            if (_hitOnHealthBody._victimFightAttriCalReference._Center._ResistanceManager.Resistance.Value > 0)
-                            {
-                                processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
-                                                                                       this.personalEffectPath,
-                                                                                       _hitOnHealthBody._Startpoint,
-                                                                                       Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
-                            }
-                            else
-                            {
-                                switch (damage_type)
-                                {
-                                    case DamageType.slight_damage:
-                                        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                                       this.personalEffectPath,
-                                                                                       _hitOnHealthBody._Startpoint,
-                                                                                       Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
-                                        //PlayTargetHitSound("light_hit");
-                                        break;
-                                    case DamageType.light_damage:
-                                        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                                       this.personalEffectPath,
-                                                                                       _hitOnHealthBody._Startpoint,
-                                                                                       Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
-                                        //PlayTargetHitSound("light_hit");
-                                        break;
-                                    case DamageType.heavy_damage:
-                                        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
-                                                                                       this.personalEffectPath,
-                                                                                       _hitOnHealthBody._Startpoint,
-                                                                                       Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
-                                        //PlayTargetHitSound("heavy_hit");
-                                        break;
-                                    case DamageType.supper_damage:
-                                        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
-                                                                                       this.personalEffectPath,
-                                                                                       _hitOnHealthBody._Startpoint,
-                                                                                       Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
-                                        //PlayTargetHitSound("super_hit");
-                                        break;
-                                    default:
-                                        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                                       this.personalEffectPath,
-                                                                                       _hitOnHealthBody._Startpoint,
-                                                                                       Quaternion.LookRotation(_hitOnHealthBody._Direction, Vector3.up),
-                                                                                       effectSpreadOnBody ? _hitOnHealthBody._victimFightAttriCalReference.transform : null);
-                                        //PlayTargetHitSound("light_hit");
-                                        break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Debug.Log("火花位置产生不干净值");
-                        }
-
+                        
                         //if (is_E_weapon)
                         //{
                         //    if (e_Damage != null)
@@ -186,7 +129,7 @@ namespace HittingDetection
                         //        }
                         //    }
                         //}
-                        _Used_Targets.Add(_hitOnHealthBody._victimFightAttriCalReference.transform);
+                        _Used_Targets.Add(_hitOnHealthBody.victim.transform);
                     }
                 }
                 if (_myOwnerCalReference != null)

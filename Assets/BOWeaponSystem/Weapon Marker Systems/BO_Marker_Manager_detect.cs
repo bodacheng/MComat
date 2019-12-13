@@ -88,9 +88,9 @@ namespace HittingDetection
 
                         for (int hit_target_index = 0; hit_target_index < _markers[i]._hits.Length; hit_target_index++)
                         {
-                            if (this.teamConfig != null)
+                            if (teamConfig != null)
                             {
-                                if (this.teamConfig.enemyWeaponLayerMask == (this.teamConfig.enemyWeaponLayerMask | 1 << _markers[i]._hits[hit_target_index].collider.gameObject.layer))
+                                if (teamConfig.enemyWeaponLayerMask == (this.teamConfig.enemyWeaponLayerMask | 1 << _markers[i]._hits[hit_target_index].collider.gameObject.layer))
                                     WeaponEnergyExaust(_markers[i]._hits[hit_target_index].point, _markers[i]._hits[hit_target_index].collider.transform.rotation);
                             }
 
@@ -139,7 +139,7 @@ namespace HittingDetection
                                     _StartPoint = _markers[i]._hits[hit_target_index].point;
                                     _StartPoint = _StartPoint + (_markers[i]._hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
                                     //_StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
-                                    hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction, _markers[i].transform.position));
+                                    hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, _Direction));
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
                                 {
@@ -216,9 +216,9 @@ namespace HittingDetection
 
                             for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
                             {
-                                if (this.teamConfig != null)
+                                if (teamConfig != null)
                                 {
-                                    if (this.teamConfig.enemyWeaponLayerMask == (this.teamConfig.enemyWeaponLayerMask | 1 << BallDetectHitPool[hit_target_index].gameObject.layer))
+                                    if (teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | 1 << BallDetectHitPool[hit_target_index].gameObject.layer))
                                         WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                 }
 
@@ -271,7 +271,7 @@ namespace HittingDetection
                                                                                                                                                   // 2.
                                                                                                                                                   // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
                                                                                                                                                   // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new HitOnHealthBody(_Raw_Target_Instance, _StartPoint, _Direction, _markers[i].transform.position));
+                                        hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, _Direction));
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
                                     {

@@ -40,6 +40,8 @@ namespace HittingDetection
         public float ContinuousDamageInterval = 0.2f;
         [Tooltip("魔法特效路径(blueMagic redMagic)")]
         public string personalEffectPath;
+        [Tooltip("特殊爆炸特效")]
+        public string explosionEffect = "energy_resolve";
         [Tooltip("特效是否有粘身视效")]
         public bool effectSpreadOnBody;
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
@@ -60,7 +62,7 @@ namespace HittingDetection
         List<Transform> _Shields_Hit = new List<Transform>();
         List<Vector3> _wallHitPositions = new List<Vector3>();
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
-        List<HitOnHealthBody> hitsOnHealthBody = new List<HitOnHealthBody>();
+        List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         Decompositioner processingBlood;
         bool traditionalDefendMode;
         BO_Shield TheS;
@@ -229,8 +231,10 @@ namespace HittingDetection
         void WeaponEnergyExaust(Vector3 Pos, Quaternion Qua)
         {
             if (weaponHP > 0)
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("energy_resolve", personalEffectPath, Pos, Qua, null);
-            CurrentHP -= 1;
+            {
+                CurrentHP -= 1;
+            }
+            EffectAndHurtObjectLoading.Instance.GenerateEffect(explosionEffect, personalEffectPath, Pos, Qua, null);
         }
 
         public bool IfVectorClean(Vector3 rot)
@@ -238,19 +242,6 @@ namespace HittingDetection
             return rot == Vector3.zero
             || float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z)
             || !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
-        }
-
-        class HitOnHealthBody
-        {
-            public HitOnHealthBody(FightAttriCalReference _victimFightAttriCalReference, Vector3 _Startpoint, Vector3 _Direction,Vector3 marker_point)
-            {
-                this._victimFightAttriCalReference = _victimFightAttriCalReference;
-                this._Startpoint = _Startpoint;
-                this._Direction = _Direction;
-                this.marker_point = marker_point;
-            }
-            public FightAttriCalReference _victimFightAttriCalReference;
-            public Vector3 _Startpoint, _Direction, marker_point;
         }
 
         //AudioClip processingClip;

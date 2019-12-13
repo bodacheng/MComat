@@ -263,17 +263,17 @@ public class EffectAndHurtObjectLoading
         EffectPool = null;
         if (EffectsPath != null)
         {
-            if (EffectObjectPoolsDic.ContainsKey("Effects" + "/" + EffectsPath + "/" + resource_name))
+            if (EffectObjectPoolsDic.ContainsKey("Effects/" + EffectsPath + "/" + resource_name))
             {
-                EffectObjectPoolsDic.TryGetValue("Effects" + "/" + EffectsPath + "/" + resource_name, out EffectPool);
+                EffectObjectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out EffectPool);
                 if (EffectPool != null)
                     return EffectPool;
             }
 
-            EffectPrefab = Resources.Load("Effects" + "/" + EffectsPath + "/" + resource_name, typeof(GameObject)) as GameObject;
+            EffectPrefab = Resources.Load("Effects/" + EffectsPath + "/" + resource_name, typeof(GameObject)) as GameObject;
             if (EffectPrefab != null)
             {
-                EffectPool = constructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects" + "/" + EffectsPath + "/" + resource_name,object_count);
+                EffectPool = constructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
                 return EffectPool;
             }
             if (EffectsPath == "defaultEffects")
@@ -289,6 +289,8 @@ public class EffectAndHurtObjectLoading
     ConstraintSource myConstraintSource;
     public Decompositioner GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform parentsetT)
     {
+        if (string.IsNullOrEmpty(resource_name))
+            return null;
         EffectPool = IniEffectsPool(resource_name, EffectsPath,3);
         if (EffectPool == null)
             return null;

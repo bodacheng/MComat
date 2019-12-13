@@ -54,6 +54,7 @@ MonoBehaviour:
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
   personalEffectPath: 
+  explosionEffect: 
   effectSpreadOnBody: 0
   onGroundMagic: 0
 --- !u!114 &1062223919313163292
