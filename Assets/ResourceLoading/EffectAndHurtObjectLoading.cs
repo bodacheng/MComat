@@ -32,7 +32,7 @@ public class EffectAndHurtObjectLoading
     
     //其实上面那些特效啦什么的也应该把先查字典再决定是否load的函数写出来，但为什么没写呢？因为特效物体的来源其实存在些问题。一个是视效物体在本地，而伤害物体在包里，再一个还存在个属性文件夹问题，
     //而现在这两类东西你却安排在一个字典中。这就是为什么可能应该把字典分成两个
-    public DecompositionerPool constructHitBoxPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
+    public DecompositionerPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
     {
         if (prefab != null)
         {
@@ -48,7 +48,7 @@ public class EffectAndHurtObjectLoading
         return null;
     }
     
-    public DecompositionerPool constructEffectPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
+    public DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
     {
         if (prefab != null)
         {
@@ -114,7 +114,7 @@ public class EffectAndHurtObjectLoading
                 assetbundle.Unload(false);
                 if (hurtObject != null)
                 {
-                    poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
+                    poolToConstruct2 = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
                     yield break;
                 }
             }
@@ -168,7 +168,7 @@ public class EffectAndHurtObjectLoading
             assetbundle.Unload(false);
             if (hurtObject != null)
             {
-                poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+                poolToConstruct2 = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
                 yield break;
             }
         }
@@ -200,7 +200,7 @@ public class EffectAndHurtObjectLoading
                 assetbundle.Unload(false);
                 if (hurtObject != null)
                 {
-                    poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+                    poolToConstruct2 = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
                     yield break;
                 }
             }
@@ -273,7 +273,7 @@ public class EffectAndHurtObjectLoading
             EffectPrefab = Resources.Load("Effects/" + EffectsPath + "/" + resource_name, typeof(GameObject)) as GameObject;
             if (EffectPrefab != null)
             {
-                EffectPool = constructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
+                EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
                 return EffectPool;
             }
             if (EffectsPath == "defaultEffects")
@@ -301,11 +301,11 @@ public class EffectAndHurtObjectLoading
         {
             myConstraintSource.sourceTransform = parentsetT;
             myConstraintSource.weight = 1;
-            processingEffectObj.positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
-            processingEffectObj.positionConstraint.constraintActive = true;
-            processingEffectObj.positionConstraint.locked = true;
-            processingEffectObj.positionConstraint.translationAtRest = Pos;
-            processingEffectObj.positionConstraint.translationOffset = Vector3.zero;
+            processingEffectObj.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
+            processingEffectObj.GetPositionConstraint().constraintActive = true;
+            processingEffectObj.GetPositionConstraint().locked = true;
+            processingEffectObj.GetPositionConstraint().translationAtRest = Pos;
+            processingEffectObj.GetPositionConstraint().translationOffset = Vector3.zero;
         }
         return processingEffectObj;
     }
@@ -327,7 +327,7 @@ public class EffectAndHurtObjectLoading
             hurtObject = Resources.Load("HurtObjects/" + MagicForwardPath + "/" + resource_name) as GameObject;
             if (hurtObject != null)
             {
-                poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
+                poolToConstruct2 = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
                 yield break;
             }
         }
@@ -364,7 +364,7 @@ public class EffectAndHurtObjectLoading
         hurtObject = Resources.Load("HurtObjects/" + basicMagicForwardPath + "/" + resource_name) as GameObject;
         if (hurtObject != null)
         {
-            poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+            poolToConstruct2 = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
             yield break;
         }
 
@@ -381,7 +381,7 @@ public class EffectAndHurtObjectLoading
             hurtObject = Resources.Load("HurtObjects/" + basicMagicForwardPath + "/" + resource_name) as GameObject;
             if (hurtObject != null)
             {
-                poolToConstruct2 = constructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
+                poolToConstruct2 = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,2);
                 yield break;
             }
         }

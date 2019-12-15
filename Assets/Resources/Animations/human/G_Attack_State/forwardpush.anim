@@ -66776,7 +66776,7 @@ AnimationClip:
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 4
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0
   - time: 0.4
     functionName: turn_on_flag

@@ -85,7 +85,7 @@ public class BO_Ani_E : MonoBehaviour
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
     public IEnumerator BasicMagicAndEffectsPathDefine(Zokusei _zokusei, string personalMagic)
     {
-        this.myMagicForwardPath = personalMagic;
+        myMagicForwardPath = personalMagic;
         switch (_zokusei)
         {
             case Zokusei.darkMagic:
@@ -116,7 +116,7 @@ public class BO_Ani_E : MonoBehaviour
         switch(ResourceLoadingSetting.Instance.MagicLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                if (this.myMagicForwardPath != null)
+                if (myMagicForwardPath != null)
                     yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL,this.myMagicForwardPath));
                 yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", defaultMagicForwardPath));
                 yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics","defaultmagic"));
@@ -125,7 +125,7 @@ public class BO_Ani_E : MonoBehaviour
 
             break;
             case ResourceLoadMode.StreamingAssetAB:
-                if (this.myMagicForwardPath != null)
+                if (myMagicForwardPath != null)
                     yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));
                 yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(defaultMagicForwardPath));
                 yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets("defaultmagic"));
@@ -141,7 +141,6 @@ public class BO_Ani_E : MonoBehaviour
             _DATA_CENTER._AudioSource.PlayOneShot(audioClip);
 	}
 
-    Vector3 magicFoward_shoot_direction;
     public void MagicForward(AnimationEvent e)
 	{
         if (string.IsNullOrEmpty(e.stringParameter))
@@ -158,34 +157,32 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             if (processingHitBox._HitBox.onGroundMagic)
-                processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x,this.transform.position.y, processingHitBox.transform.position.z);
-            magicFoward_shoot_direction = gameObject.transform.forward;
-            magicFoward_shoot_direction.y = 0;
-            if (processingHitBox.Rigidbody != null)
+                processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
+            if (processingHitBox.TrackControl != null)
             {
                 switch (e.intParameter)
                 {
                     case 1:
-                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 3f;
+                        processingHitBox.TrackControl.StartOff(processingHitBox.transform.position,processingHitBox.transform.rotation,1f);
                         break;
                     case 2:
-                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 8f;
+                        processingHitBox.TrackControl.StartOff(processingHitBox.transform.position,processingHitBox.transform.rotation,1.2f);
                         break;
                     case 3:
-                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 15f;
+                        processingHitBox.TrackControl.StartOff(processingHitBox.transform.position,processingHitBox.transform.rotation,1.5f);
                         break;
                     case 0:
-                        processingHitBox.Rigidbody.velocity = Vector3.zero;
+                        processingHitBox.TrackControl.StartOff(processingHitBox.transform.position,processingHitBox.transform.rotation,1f);
                         break;
                     default:
-                        processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * 3f;
+                        processingHitBox.TrackControl.StartOff(processingHitBox.transform.position,processingHitBox.transform.rotation,1f);
                         break;
                 }
             }
         }
 	}
 
-    private Vector3 intPos;
+    Vector3 intPos;
     public void Bullet_shoot_from_body_part(AnimationEvent e)
 	{
         switch (e.stringParameter)
@@ -243,24 +240,19 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
         }
-
-        if (processingHitBox.danMuTest != null)
+        if (processingHitBox.TrackControl != null)
         {
-            processingHitBox.transform.position = intPos;
-            processingHitBox.danMuTest.StartOff(intPos,this.transform.rotation);
-        } else {
-            processingHitBox.gameObject.transform.position = intPos;
-            magicFoward_shoot_direction = gameObject.transform.forward;
-            magicFoward_shoot_direction.y = 0;
-            if (processingHitBox.Rigidbody != null)
-            {
-                processingHitBox.Rigidbody.velocity = magicFoward_shoot_direction.normalized * e.floatParameter;
-            }
+            processingHitBox.TrackControl.StartOff(intPos, transform.rotation, e.floatParameter);
+        }
+        if (processingHitBox.bullet_GPS != null)
+        {
+            processingHitBox.bullet_GPS.layerMask = processingHitBox._HitBox.GetTeamConfig().enemyAndEnemyWeaponLayerMask;
+            processingHitBox.bullet_GPS.Local_OnEnable();
         }
     }
 
-    private Transform target;
-    private Decompositioner effect;
+    Transform target;
+    Decompositioner effect;
     ConstraintSource myConstraintSource;
     public void EffectOnBodyPart(AnimationEvent e)
 	{
@@ -310,7 +302,7 @@ public class BO_Ani_E : MonoBehaviour
             if (EffectsOnBodyParts[target] != null)
             {
                 EffectsOnBodyParts[target].StopEmissions();
-                EffectsOnBodyParts[target].positionConstraint.constraintActive = false;
+                EffectsOnBodyParts[target].GetPositionConstraint().constraintActive = false;
             }
             EffectsOnBodyParts[target] = effect; 
         }
@@ -362,10 +354,10 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox.transform.rotation = this.target.rotation;
         myConstraintSource.sourceTransform = target;
         myConstraintSource.weight = 1;
-        processingHitBox.positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
-        processingHitBox.positionConstraint.constraintActive = true;
-        processingHitBox.positionConstraint.locked = true;
-        processingHitBox.positionConstraint.translationOffset = Vector3.zero;
+        processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
+        processingHitBox.GetPositionConstraint().constraintActive = true;
+        processingHitBox.GetPositionConstraint().locked = true;
+        processingHitBox.GetPositionConstraint().translationOffset = Vector3.zero;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
@@ -376,8 +368,8 @@ public class BO_Ani_E : MonoBehaviour
         }
     }
 
-    private string OnLoadMagic;
-    private void PrepareOneMagic(string magicname)
+    string OnLoadMagic;
+    void PrepareOneMagic(string magicname)
     {
         OnLoadMagic = magicname;
     }
@@ -421,9 +413,9 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox.transform.rotation = target.rotation;
         myConstraintSource.sourceTransform = target;
         myConstraintSource.weight = 1;
-        processingHitBox.positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
-        processingHitBox.positionConstraint.constraintActive = true;
-        processingHitBox.positionConstraint.locked = true;
+        processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
+        processingHitBox.GetPositionConstraint().constraintActive = true;
+        processingHitBox.GetPositionConstraint().locked = true;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);

@@ -396737,13 +396737,6 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.2
-    functionName: TurnRotationAdjustmentStartFlag
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
   - time: 0.33333334
     functionName: SetLeftFootMarkerManager
     data: 
@@ -396773,7 +396766,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.76666665
-    functionName: DisableMarkers
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -396800,7 +396793,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 1.15
+  - time: 1.1166667
     functionName: SetRightFootMarkerManager
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -396814,7 +396807,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2333333
+  - time: 1.4166666
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

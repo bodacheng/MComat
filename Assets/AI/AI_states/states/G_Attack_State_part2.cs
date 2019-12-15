@@ -82,28 +82,28 @@ public partial class G_Attack_State : AI_State
                     }
                     else if (ji < 0)//反向
                     {
-                        this._Rigidbody.velocity = Vector3.zero;
+                        _Rigidbody.velocity = Vector3.zero;
                         _phase = Phase.reached;
                     }
                     else
                     {   //刚开始计
                         lastFrameRotateAngle = thisFrameRotateAngle;
                     }
-                    this.Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
+                    Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
                     if (_phase == Phase.reached)
                     {
                         Animation_Manger.AnimationTrigger(clip_name);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         lastFrameRotateAngle = 0;
                         thisFrameRotateAngle = 0;
-                        this._Rigidbody.velocity = Vector3.zero;
-                        this.Sensor.OneRoundDetectionStart(5);
-                        this._BuffsRunner.endSubCoroutineOfState(rushCoroutine);
+                        _Rigidbody.velocity = Vector3.zero;
+                        Sensor.OneRoundDetectionStart(5);
+                        _BuffsRunner.endSubCoroutineOfState(rushCoroutine);
                     }
                 }
                 else
                 {
-                    this._Rigidbody.velocity = Vector3.zero;
+                    _Rigidbody.velocity = Vector3.zero;
                 }
                 rush_time_counter += Time.fixedDeltaTime;
                 break;
@@ -133,8 +133,6 @@ public partial class G_Attack_State : AI_State
                         SingleDirectionRotateProcess(Sensor.GetClosestColliderInSensorRange(false,true,true).transform.position,approcahingSpeed);
                     }
                 }
-                break;
-            default:
                 break;
         }
     }

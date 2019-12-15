@@ -7,21 +7,29 @@ public class Decompositioner : MonoBehaviour {
 
     DecompositionerPool _DecompositionerPool;
 
-    public Rigidbody Rigidbody;
-    public BO_Marker_Manager _HitBox;
-    public PositionConstraint positionConstraint;
-    public DanMuTest danMuTest;
-    public bullet_GPS bullet_GPS;
+    public BO_Marker_Manager _HitBox;    
+    public TrackControl TrackControl;
+    public Bullet_GPS bullet_GPS;
     
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;
 
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;
-
+    PositionConstraint positionConstraint;
     ParticleSystem to_be_stop_emissions;
     float counter;
     int phase;
+    
+    public void SetPositionConstraint(PositionConstraint positionConstraint)
+    {
+        this.positionConstraint = positionConstraint;
+    }
+    
+    public PositionConstraint GetPositionConstraint()
+    {
+        return this.positionConstraint;
+    }
 
     void Awake()
     {
@@ -84,8 +92,8 @@ public class Decompositioner : MonoBehaviour {
             MagicEffectLifeCircle();
         }
     }
-    
-    private void MagicEffectLifeCircle()
+
+    void MagicEffectLifeCircle()
     {
         switch (phase)
         {
@@ -95,7 +103,7 @@ public class Decompositioner : MonoBehaviour {
                     StopEmissions();
                     phase = 2;
                 }
-            break;
+                break;
             case 2:
                 if (DestructionDelay > stop_emission_delay)
                 {
@@ -106,14 +114,14 @@ public class Decompositioner : MonoBehaviour {
                     phase = 0;
                     _DecompositionerPool.Return(this);
                 }
-            break;
+                break;
         }
     }
-    
+
     public void StopEmissions()
     {
         if (to_be_stop_emissions != null)
-            to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     public void SetMaterialsAlpha(float a)

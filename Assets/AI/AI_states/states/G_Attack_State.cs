@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Linq;
+﻿using UnityEngine;
 using Soul;
 
 //本状态是最复杂的一个攻击种类状态，牵扯到攻击前冲刺
@@ -29,9 +25,9 @@ public partial class G_Attack_State : AI_State {
     float thisFrameRotateAngle;
 
     float maxRushTime, rush_time_counter;
+    
     Transform rushingToTarget;
     Phase _phase;
-
     UnityEngine.Events.UnityAction rushstart;
     UnityEngine.Events.UnityAction rushend;
     customCoroutine rushCoroutine;

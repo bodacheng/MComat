@@ -1,17 +1,18 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CustomEditor(typeof(SKillAnalyzer))]
 public class SKillAnalyzerGUI : Editor
 {
     SKillAnalyzer sKillAnalyzer;
-    string focusingType;
+    string focusingType = "human";
+    string targetSkillName;
     string targetEventName;
     float attackframestartat_max,attackframestartat_min,attackframeendtocancelframetime_max,attackframeendtocancelframetime_min;
-
+    string skilltypefoldername = "G_Attack_State";
+    readonly string[] skilltypefoldernames = { "G_Attack_State", "G_Attack_State_Stay", "GMStates"};
     string old_name, new_name;
     public override void OnInspectorGUI()
     {
@@ -27,7 +28,7 @@ public class SKillAnalyzerGUI : Editor
         {
             sKillAnalyzer.SkillsAnalyzeByFrames(focusingType, targetEventName,attackframestartat_min,attackframestartat_max, attackframeendtocancelframetime_min,attackframeendtocancelframetime_max);
         }
-        
+        //
         EditorGUILayout.LabelField(" 整体替换动画事件名(千万慎用。一般用不上此功能）");
         old_name = EditorGUILayout.TextField("寻找该动画事件名",old_name);
         new_name = EditorGUILayout.TextField("替换成以下动画事件名",new_name);
@@ -35,7 +36,18 @@ public class SKillAnalyzerGUI : Editor
         {
             sKillAnalyzer.ReplaceAnimEventName(focusingType,old_name,new_name);
         }
-        
+        // 
+        focusingType = EditorGUILayout.TextField("统计以下类型角色的技能信息",focusingType);
+        skilltypefoldername = skilltypefoldernames[EditorGUILayout.Popup("技能文件夹",Array.IndexOf(skilltypefoldernames, skilltypefoldername),skilltypefoldernames)];
+        targetSkillName = EditorGUILayout.TextField("技能名", targetSkillName);
+        if (GUILayout.Button("分析以下技能"))
+        {
+            UnityEngine.Object tartget = Resources.Load("Animations/" + focusingType + "/"+skilltypefoldername +"/"+ targetSkillName, typeof(AnimationClip));
+            if (tartget)
+                sKillAnalyzer.EvaluateSKill(tartget as AnimationClip);
+            else
+                Debug.Log("没找到对应技能文件");
+        }
     }
 }
 #endif

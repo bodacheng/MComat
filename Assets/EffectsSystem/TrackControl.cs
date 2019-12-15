@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 
-public class DanMuTest : MonoBehaviour {
+public class TrackControl : MonoBehaviour {
     //public List<EventKeyframe> listEventKeyframe = new List<EventKeyframe>();
     public AnimationCurve xAnimationCurve;
     public AnimationCurve zAnimationCurve;
-    public float scale = 1f;
-    
-    private Vector3 startPoint;
-    private Quaternion startquaternion;
-	
-    private Matrix4x4 m;
-    private float time_counter;
+    public float Z_scale = 1f;
 
-    public void StartOff(Vector3 start,Quaternion startQ)
+    Vector3 startPoint;
+    Quaternion startquaternion;
+    Matrix4x4 m;
+    float time_counter;
+
+    public void StartOff(Vector3 start,Quaternion startQ,float Z_scale)
     {
         time_counter = 0;
-        this.startPoint = start;
-        this.startquaternion = startQ;
+        this.Z_scale = Z_scale;
+        startPoint = start;
+        startquaternion = startQ;
         m = Matrix4x4.TRS(startPoint, startquaternion, Vector3.one * 1);
     }
     
 	void Update()
 	{
         time_counter += Time.deltaTime;
-        transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ) * scale, 0, zAnimationCurve.Evaluate( time_counter ) * scale ));
+        transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ), 0, zAnimationCurve.Evaluate( time_counter ) * Z_scale ));
 
 		//foreach( EventKeyframe ekf in listEventKeyframe )
 		//{

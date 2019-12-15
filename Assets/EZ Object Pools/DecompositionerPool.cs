@@ -35,11 +35,6 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         if (instance._HitBox != null)
         {
             instance._HitBox.Local_OnEnable();
-            if (instance.bullet_GPS != null)
-            {
-                instance.bullet_GPS.layerMask = instance._HitBox.GetTeamConfig().enemyAndEnemyWeaponLayerMask;
-                instance.bullet_GPS.Local_OnEnable();
-            }
         }
     }
 
@@ -50,9 +45,8 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         a.transform.SetParent(Marker.transform);
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
         BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();
-        DanMuTest danMuTest = a.GetComponent<DanMuTest>();
-        bullet_GPS bullet_GPS = a.GetComponent<bullet_GPS>();
-        Rigidbody rigidbody = a.GetComponent<Rigidbody>();
+        TrackControl danMuTest = a.GetComponent<TrackControl>();
+        Bullet_GPS bullet_GPS = a.GetComponent<Bullet_GPS>();
         PositionConstraint positionConstraint = a.GetComponent<PositionConstraint>();
         if (positionConstraint == null)
         {
@@ -60,21 +54,13 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             positionConstraint.translationOffset = Vector3.zero;
             positionConstraint.weight = 1;
         }
-        
-        if (rigidbody != null)
-        {
-            rigidbody.mass = 1;
-            rigidbody.useGravity = false;
-        }
         if (bullet_GPS != null)
         {
             decompositioner.bullet_GPS = bullet_GPS;
-            bullet_GPS._Rigidbody = rigidbody;
         }
-        decompositioner.Rigidbody = rigidbody;
         decompositioner._HitBox = bO_Marker_Manager;
-        decompositioner.positionConstraint = positionConstraint;
-        decompositioner.danMuTest = danMuTest;
+        decompositioner.SetPositionConstraint(positionConstraint);
+        decompositioner.TrackControl = danMuTest;
         decompositioner.SetPool(this);
         return decompositioner;
     }

@@ -108,9 +108,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             myConstraintSource.sourceTransform = t;
             myConstraintSource.weight = 1;
             BEs.bodyPartsWeaponRegisterDic[t].transform.position = t.position;
-            BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.SetSources(new List<ConstraintSource>{myConstraintSource});
-            BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.constraintActive = true;
-            BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.locked = true;          
+            BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
+            BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().constraintActive = true;
+            BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().locked = true;          
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(BEs._TeamConfig);
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter,BEs.transform);//第二个参数是因为BE本身就在wholeT上
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
@@ -126,7 +126,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             {
                 BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(null);
                 BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(null);
-                BEs.bodyPartsWeaponRegisterDic[t].positionConstraint.constraintActive = false;
+                BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().constraintActive = false;
                 default_hitboxPool.Return(BEs.bodyPartsWeaponRegisterDic[t]); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
                 BEs.bodyPartsWeaponRegisterDic[t] = null;
             }
@@ -175,6 +175,15 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
                 keyValuePair.Value._HitBox.EnableMarkers();
         }
 	}
+    
+    public void DisableMarkers()
+    {
+        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
+        {
+            if (keyValuePair.Value != null)
+                keyValuePair.Value._HitBox.DisableMarkers();
+        }
+    }
     
     DamageType damageType;
     public void SetDamageType(AnimationEvent e)

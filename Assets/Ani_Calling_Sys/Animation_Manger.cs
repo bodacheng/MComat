@@ -63,14 +63,14 @@ public partial class Animation_Manger : MonoBehaviour
 
     public void AnimationTrigger(AnimationClip clip)
     {
-        this.PlayLayerAnim_clip(clip);
-        this.SetAnimationPlayingStep(AnimationPlaying_Step.running);
+        PlayLayerAnim_clip(clip);
+        SetAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
     public void AnimationTrigger(string clip_name)
     {
-        this.PlayLayerAnim(clip_name);
-        this.SetAnimationPlayingStep(AnimationPlaying_Step.running);
+        PlayLayerAnim(clip_name);
+        SetAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
     public AnimationPlaying_Step GetAnimationPlayingStep()
@@ -245,7 +245,7 @@ public partial class Animation_Manger : MonoBehaviour
             }
         }
 
-        this.toRunAniName = clip_name;
+        toRunAniName = clip_name;
         The_trigger(toRunAniName, this.doNothingFlag);
         doNothingFlag = false;
     }

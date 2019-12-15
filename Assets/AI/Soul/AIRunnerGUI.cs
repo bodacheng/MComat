@@ -24,10 +24,9 @@ public class AIRunnerGUI : Editor {
     List<string> casualToStateKeyOptionsList;
 
     States_Incubator_ForLocalResourceCheck _States_Incubator_ForLocalResourceCheck;
-    bool LocalResourceReferenceMode = false;
-
-    int[] exoptions = new int[] { 0, 1, 2, 3 };
-    string[] exoptions_display = new string[] {"normal","ex1","ex2","ex3"};
+    bool LocalResourceReferenceMode;
+    readonly int[] exoptions = { 0, 1, 2, 3 };
+    readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
     
     //6.14 casual to states里，一个状态的豪气虽然可以设置为不同于首发，但attack种类和范围是不可做设置的，因为这两个信息决定了一个状态的质，一个角色在跑大状态机的时候是从一个固定的状态字典里找状态，
     // 同样名字的状态不会有两个。但是，耗气是另一码事，因为我们的大状态机引擎只是参照了这个信息在状态原本的进入条件外额外作为一个触发条件对其进行“是否气足够”的判断。
@@ -51,16 +50,17 @@ public class AIRunnerGUI : Editor {
         stateKeyGUI = new GUIStyle(GUI.skin.label);
         stateKeyGUI.normal.textColor = new Color(0.6f,0.3f,0.4f);
 
-        attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle);
-        attackRangeToggleGUI.margin = new RectOffset(50, 22, 11, 11);
+        attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
+        {
+            margin = new RectOffset(50, 22, 11, 11)
+        };
 
         LocalResourceReferenceMode = EditorGUILayout.Toggle("本地资源参照模式",LocalResourceReferenceMode);
 
 		myScript = (AIStateRunner)target;
-        if (LocalResourceReferenceMode)
-            _States_Incubator_ForLocalResourceCheck = new States_Incubator_ForLocalResourceCheck(myScript.characterType);
-        else
-            _States_Incubator_ForLocalResourceCheck = new States_Incubator_ForLocalResourceCheck(myScript.characterType,myScript.State_Transition_Set_List);
+        _States_Incubator_ForLocalResourceCheck = LocalResourceReferenceMode
+            ? new States_Incubator_ForLocalResourceCheck(myScript.characterType)
+            : new States_Incubator_ForLocalResourceCheck(myScript.characterType,myScript.State_Transition_Set_List);
         if (_States_Incubator_ForLocalResourceCheck.StateIndexList != null)
         {
             StateIndexListOptions = _States_Incubator_ForLocalResourceCheck.StateIndexList.ToArray();
@@ -100,33 +100,22 @@ public class AIRunnerGUI : Editor {
                     casualToStateKeyOptionsList.Add(myScript.State_Transition_Set_List[i].StateKey);
                 EditorGUI.indentLevel++;
 
-                if (StateIndexListOptions.Contains<string>(myScript.State_Transition_Set_List[i].StateKey))
-                {
-                    myScript.State_Transition_Set_List[i].StateKey =
-						        StateIndexListOptions[EditorGUILayout.Popup("State Key", 
-						                                                    Array.IndexOf(StateIndexListOptions, myScript.State_Transition_Set_List[i].StateKey), 
-						                                                    StateIndexListOptions, 
-						                                                    stateKeyGUI
-						                                                   )];
-                }
-                else
-                {
-                    if (StateIndexListOptions.Length > 0)
-                        myScript.State_Transition_Set_List[i].StateKey = StateIndexListOptions[0];
-                    else
-                        myScript.State_Transition_Set_List[i].StateKey = null;
-                }
+                myScript.State_Transition_Set_List[i].StateKey = StateIndexListOptions.Contains<string>(myScript.State_Transition_Set_List[i].StateKey)
+                    ? StateIndexListOptions[EditorGUILayout.Popup("State Key",
+                                                                            Array.IndexOf(StateIndexListOptions, myScript.State_Transition_Set_List[i].StateKey),
+                                                                            StateIndexListOptions,
+                                                                            stateKeyGUI
+                                                                           )]
+                    : StateIndexListOptions.Length > 0 ? StateIndexListOptions[0] : null;
 
                 myScript.State_Transition_Set_List[i].stateType = 
                     (stateType)EditorGUILayout.EnumPopup("Attack Type", myScript.State_Transition_Set_List[i].stateType);
 
                 if (myScript.State_Transition_Set_List[i].stateType != stateType.NONE)
                 {
-                    List<BehaviorEnterRange> _ranges;
-                    if (myScript.State_Transition_Set_List[i].ai_trigger_ranges == null)
-                        _ranges = new List<BehaviorEnterRange>();
-                    else
-                        _ranges = myScript.State_Transition_Set_List[i].ai_trigger_ranges.ToList();
+                    List<BehaviorEnterRange> _ranges = myScript.State_Transition_Set_List[i].ai_trigger_ranges == null
+                        ? new List<BehaviorEnterRange>()
+                        : myScript.State_Transition_Set_List[i].ai_trigger_ranges.ToList();
                     bool outrange,far, near, close;
                     outrange = _ranges.Contains(BehaviorEnterRange.out_of_range) ? true : false;
                     far = _ranges.Contains(BehaviorEnterRange.far_range) ? true : false;
@@ -171,8 +160,7 @@ public class AIRunnerGUI : Editor {
                                                     "Casual To State Key",
                                                     Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].AI_State_Number),
                                                     casualToStateKeyOptions,
-                                                    stateKeyGUI
-                                                   )];
+                                                    stateKeyGUI)];
                                 }
                                 else
                                 {
@@ -293,8 +281,8 @@ public class AIRunnerGUI : Editor {
         GUI.backgroundColor = Color.white; 
 	}
 
-    bool isInitialized = false;
-    bool state_folding_list = false;
+    bool isInitialized;
+    bool state_folding_list;
     bool[] casualToFoldings;
     bool[] forceToFoldings;
     bool[] foldings;
