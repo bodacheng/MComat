@@ -18398,9 +18398,10 @@ MonoBehaviour:
   weaponHP: -1
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.1
-  personalEffectPath: lightMagic
+  explosionEffect: energy_resolve
   effectSpreadOnBody: 1
   onGroundMagic: 0
+  zokusei: 2
 --- !u!114 &114362484245835682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18413,10 +18414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
   _HitBox: {fileID: 114603792153794768}
-  positionConstraint: {fileID: 0}
-  danMuTest: {fileID: 0}
+  TrackControl: {fileID: 0}
   bullet_GPS: {fileID: 0}
   DestructionDelay: 0.7
   stop_emission_delay: 0.4

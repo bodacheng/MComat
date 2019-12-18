@@ -98,7 +98,7 @@ public partial class G_Attack_State : AI_State
                         thisFrameRotateAngle = 0;
                         _Rigidbody.velocity = Vector3.zero;
                         Sensor.OneRoundDetectionStart(5);
-                        _BuffsRunner.endSubCoroutineOfState(rushCoroutine);
+                        _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);
                     }
                 }
                 else

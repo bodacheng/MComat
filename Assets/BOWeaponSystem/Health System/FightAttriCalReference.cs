@@ -29,7 +29,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
     UnityEngine.Events.UnityAction gravityloststart;
     UnityEngine.Events.UnityAction gravitylostend;
-    customCoroutine burstCoroutine;
+    CustomCoroutine burstCoroutine;
 
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
@@ -170,8 +170,8 @@ public partial class FightAttriCalReference : MonoBehaviour
                 {
                     _Center._BasicPhysicSupport.SetUsingGravity(true);
                 };
-                burstCoroutine = new customCoroutine(gravityloststart, 0.2f, gravitylostend);
-                _Center.buffsRunner.runSubCoroutineOfState(burstCoroutine);
+                burstCoroutine = new CustomCoroutine(gravityloststart, 0.2f, gravitylostend);
+                _Center.buffsRunner.RunSubCoroutineOfState(burstCoroutine);
                 break;
         }
     }

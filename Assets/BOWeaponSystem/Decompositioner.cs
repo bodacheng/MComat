@@ -121,7 +121,7 @@ public class Decompositioner : MonoBehaviour {
     public void StopEmissions()
     {
         if (to_be_stop_emissions != null)
-            to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
 
     public void SetMaterialsAlpha(float a)

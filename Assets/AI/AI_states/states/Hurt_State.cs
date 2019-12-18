@@ -2,7 +2,6 @@
 using UnityEngine;
 using HittingDetection;
 using Soul;
-using DG.Tweening;
 
 public class Hurt_State : AI_State {
     float used_dizzy_time;
@@ -10,7 +9,6 @@ public class Hurt_State : AI_State {
     Vector3 fixDesPos;
     readonly Coroutine shaderChangeProcess;
     List<AnimationClip> hurtclips;
-    Tween fixpostween;
 
     public override void Pre_process_before_enter()
 	{
@@ -22,6 +20,7 @@ public class Hurt_State : AI_State {
 	{
 		base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
+        _Animator.applyRootMotion = false;
         _FightAttriCalReference.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
@@ -55,8 +54,7 @@ public class Hurt_State : AI_State {
                                     newValue.AttackerT_foward,
                                         newValue.AttackerT_pos,
                                             gameObject.transform.position,
-                                                newValue._WeaponPosAdjustMode,
-                                                    touchingEnemyBody);
+                                                newValue._WeaponPosAdjustMode);
         _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
         //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);// 第二个参数是距离除以期望速度
         if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.damage_type == DamageType.supper_damage)//&& newValue.damage_type == DamageType.supper_damage
@@ -79,6 +77,8 @@ public class Hurt_State : AI_State {
     public override void _State_FixedUpdate1()
     {
         time_counter += Time.fixedDeltaTime;
+        if (time_counter > used_dizzy_time/2)
+            _Rigidbody.velocity = Vector3.zero;
     }
 
 	public override bool Naturally_exit_condition()
@@ -90,12 +90,6 @@ public class Hurt_State : AI_State {
 	{
         base.AI_State_exit();
         _FightAttriCalReference.SetGettingDamageState(false);
-        time_counter = 0f;
-        if (fixpostween != null)
-        {
-            fixpostween.Kill(false);
-        }
-        _Rigidbody.velocity = Vector3.zero;
         if (_AIStateRunner.GetTryState().StateType == stateType.AC || _AIStateRunner.GetTryState().StateType == stateType.GI ||
             _AIStateRunner.GetTryState().StateType == stateType.GM || _AIStateRunner.GetTryState().StateType == stateType.GR)
         {

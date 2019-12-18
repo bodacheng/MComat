@@ -88,7 +88,7 @@ namespace HittingDetection
                         point = _wallHitPositions[temp];
                         if (IfVectorClean(point))
                         {
-                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", this.personalEffectPath, point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up), null);
+                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", personalEffectPath, point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up), null);
                         }
                     }
                 }

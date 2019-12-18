@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 class CertainYAntiVibrationCamera : CameraMode
 {
@@ -105,7 +103,7 @@ class CertainYAntiVibrationCamera : CameraMode
         
         //下面的那个(meCenter.position + enemiescenter)，其实是说从0，0，0到他们
         CameraTargetPos = focuscenter + xzOff.normalized * XZDis;//focuscenter + xzOff.normalized * XZDis;
-        CameraTargetPos.y = Mathf.Clamp(YDis - angele / 180 * 10f, 6f,Mathf.Infinity);//夹角越大，相机越低。夹角小说明两个角色在画面里一上一下，更俯视一些会看的更方便。
+        CameraTargetPos.y = Mathf.Clamp(YDis - angele / 180 * 10f, 6f,7f);//夹角越大，相机越低。夹角小说明两个角色在画面里一上一下，更俯视一些会看的更方便。
 
         rotateToDirection = focuscenter - CameraTargetPos;
         rotateToDirection.y = 0;

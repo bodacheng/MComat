@@ -30,7 +30,7 @@ public partial class G_Attack_State : AI_State {
     Phase _phase;
     UnityEngine.Events.UnityAction rushstart;
     UnityEngine.Events.UnityAction rushend;
-    customCoroutine rushCoroutine;
+    CustomCoroutine rushCoroutine;
 
     enum Phase
     {
@@ -88,7 +88,7 @@ public partial class G_Attack_State : AI_State {
         {
             this._ResistanceManager.Resistance.Value -=1;
         };
-        rushCoroutine = new customCoroutine(rushstart, 5f, rushend);
+        rushCoroutine = new CustomCoroutine(rushstart, 5f, rushend);
     }
 
     public override bool Enter_condition_priority1()
@@ -178,7 +178,7 @@ public partial class G_Attack_State : AI_State {
                     Animation_Manger.PlayLayerAnim(null);
                 }
 
-                _BuffsRunner.runSubCoroutineOfState(rushCoroutine);
+                _BuffsRunner.RunSubCoroutineOfState(rushCoroutine);
                 return;
             }
             else
@@ -209,7 +209,7 @@ public partial class G_Attack_State : AI_State {
         _Weapon_Animation_Events.ClearMarkerManagers();
         _Animator.applyRootMotion = false;
         personality_Events.CloseAllPersonalityEffects();
-        _BuffsRunner.endSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
+        _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
         if (isEventAttackLaunchState)
         {
@@ -248,7 +248,7 @@ public partial class G_Attack_State : AI_State {
                     thisFrameRotateAngle = 0;
                     _Rigidbody.velocity = Vector3.zero;
                     Sensor.OneRoundDetectionStart(5);
-                    _BuffsRunner.endSubCoroutineOfState(rushCoroutine);
+                    _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);
                 }
                 break;
             case Phase.reached:

@@ -5,47 +5,69 @@ using System.Collections.Generic;
 //该类不进行网络值同步，但个别值向其他组件看齐
 //武器是用来伤害敌人的，而在我们的计划是把自身受伤害这个判断放在自身这一边的客户端上决定。
 
-public enum WeaponPosAdjustMode
-{
-    pushToMidForward = 1,
-    draw = 2,
-    explosion = 3
-}
-
-public enum WeaponMode
-{
-    FlyerWeapon = 2,
-    EnergyFromBodyWeapon = 3
-}
-
 namespace HittingDetection
 {
+    public enum WeaponPosAdjustMode
+    {
+        pushToMidForward = 1,
+        draw = 2,
+        explosion = 3
+    }
+    
+    public enum WeaponMode
+    {
+        FlyerWeapon = 2,
+        EnergyFromBodyWeapon = 3
+    }
+    
     public partial class BO_Marker_Manager : MonoBehaviour
     {
+        [Tooltip("Should the Markers be active upon the Start of this weapon?")]
+        [SerializeField]
+        bool _startActivated = true;
+    
         [Tooltip("damageTypeOfTheWeapon")]
-        public DamageType damage_type = DamageType.light_damage;
+        [SerializeField]
+        DamageType damage_type = DamageType.light_damage;
+        
         [Tooltip("damageTypeOfTheWeapon")]
         public WeaponMode _WeaponMode;
+        
         [Tooltip("击中时候靠受力调整敌人位置")]
-        public WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
-        [Tooltip("特殊施予")]
-        public SpecialApply _specialApply = SpecialApply.none;
-        [Tooltip("Should the Markers be active upon the Start of this weapon?")]
-        public bool _startActivated = true;
+        [SerializeField]
+        WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
+
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
-        [Tooltip("A weapon can work in two ways: Manual and Continuous. Manual bases on an idea that each attack (like a sword swing) can hit each target only once - it then needs to be manualy reloaded through a function call or an Animation Event (for example by ClearTargets() - explained in the Info Bool, at the bottom of this Inspector window). This method is very precise, as you can be certain that each Target will get damage and  Hurt animation (on BS_Main_Health script) triggered only once with each swing. Manual should be used in most situations, mostly for animation-driven combat (like Dark Souls or God of War). The Continuous mode deals damage constantly, in a given time interval, giving you a constant damage-dealing weapon. It's better for VR and games with free-moving weapons (like when the Player can swing his sword by moving his mouse in any desired direction) - the downside of Continuous damage is that it takes away the precise control of the damage dealt (as each Target may be hit more than once depending on how fast the weapon is being driven around). Continuous should be used with blades which can move freely, independent from animations. [INFO:] Continuous damage is not fit for working with shields (BS_Shield script objects).")]
-        public bool ContinuousDamage;
-        [Tooltip("If you choose the Continuous damage, what should the interval of damage dealing be? (In seconds)")]
-        public float ContinuousDamageInterval = 0.2f;
-        [Tooltip("魔法特效路径(blueMagic redMagic)")]
-        public string personalEffectPath;
-        [Tooltip("特殊爆炸特效")]
-        public string explosionEffect = "energy_resolve";
-        [Tooltip("特效是否有粘身视效")]
-        public bool effectSpreadOnBody;
+        
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
+        
+        [Tooltip("特效是否有粘身视效")]
+        public bool effectSpreadOnBody;
+
+        [Tooltip("特殊施予")]
+        [SerializeField]
+        SpecialApply _specialApply = SpecialApply.none;
+
+        [Tooltip("A weapon can work in two ways: Manual and Continuous. Manual bases on an idea that each attack (like a sword swing) can hit each target only once - it then needs to be manualy reloaded through a function call or an Animation Event (for example by ClearTargets() - explained in the Info Bool, at the bottom of this Inspector window). This method is very precise, as you can be certain that each Target will get damage and  Hurt animation (on BS_Main_Health script) triggered only once with each swing. Manual should be used in most situations, mostly for animation-driven combat (like Dark Souls or God of War). The Continuous mode deals damage constantly, in a given time interval, giving you a constant damage-dealing weapon. It's better for VR and games with free-moving weapons (like when the Player can swing his sword by moving his mouse in any desired direction) - the downside of Continuous damage is that it takes away the precise control of the damage dealt (as each Target may be hit more than once depending on how fast the weapon is being driven around). Continuous should be used with blades which can move freely, independent from animations. [INFO:] Continuous damage is not fit for working with shields (BS_Shield script objects).")]
+        [SerializeField]
+        bool ContinuousDamage;
+        [Tooltip("If you choose the Continuous damage, what should the interval of damage dealing be? (In seconds)")]
+        [SerializeField]
+        float ContinuousDamageInterval = 0.2f;
+
+        [Tooltip("启动特效")]
+        [SerializeField]
+        string muzzle;//"energy_resolve";
+        
+        [Tooltip("特殊爆炸特效")]
+        [SerializeField]
+        string explosionEffect = "on_enable_effect";
+        
+        [Tooltip("魔法特效路径(blueMagic redMagic)")]
+        [SerializeField]
+        Zokusei zokusei;
 
         FightAttriCalReference _myOwnerCalReference;
         bool _markersAreEnabled;
@@ -53,7 +75,6 @@ namespace HittingDetection
         Transform attackerWholeTransform;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         Transform _MarkersParent;
-        Transform onEnableEffectT;
         bool HitFlesh;
         bool HitShield;
         BO_Marker[] _markers;
@@ -67,9 +88,11 @@ namespace HittingDetection
         bool traditionalDefendMode;
         BO_Shield TheS;
         public int CurrentHP { get; set; }
+        string personalEffectPath;
 
         void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         {
+            personalEffectPath = FightGlobalSetting.EffectPathDefine(zokusei);
             if (_MarkersParent == null)
                 _MarkersParent = transform;
             Transform[] children = new Transform[_MarkersParent.childCount];
@@ -83,6 +106,11 @@ namespace HittingDetection
             }
             _markers = bms.ToArray();
         }
+        
+        public string GetEffectPath()
+        {
+            return personalEffectPath;
+        }
 
         //OnEnable函数当下所有的行动都是可以在自客户端和他客户端平等进行//onenable函数是你把一个物体从对象池取出来后立刻就会执行，这样你需要仔细看这个函数和其他一些初始化相关的函数存不存在什么顺序错误
         public void Local_OnEnable()
@@ -91,13 +119,7 @@ namespace HittingDetection
             {
                 EnableMarkers();
             }
-            if (onEnableEffectT != null)
-            {
-                if (IfVectorClean(onEnableEffectT.position))
-                {
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("on_enable_effect", this.personalEffectPath,onEnableEffectT.position, Quaternion.identity, onEnableEffectT);
-                }
-            }
+            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect(explosionEffect, personalEffectPath, transform.position, transform.rotation, null);
         }
 
         public void Local_OnDisable()
@@ -122,7 +144,7 @@ namespace HittingDetection
         }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
-            this._Used_Targets = Used_Targets;
+            _Used_Targets = Used_Targets;
         }
         public void SetTeamConfig(TeamConfig teamConfig)
         {
@@ -146,7 +168,7 @@ namespace HittingDetection
         // EnableMarkers的运行归根结底也都是建立在动画事件上，而动画片段的播放在双方客户端上是平等的，所以理论上说也没有必须针对主客客户端区别执行的操作
         public void EnableMarkers()
         {
-            if(_Used_Targets != null)
+            if (_Used_Targets != null)
                 _Used_Targets.Clear();
             _Shields_Hit.Clear();
             for (int i2 = 0; i2 < _markers.Length; i2++)
@@ -169,7 +191,7 @@ namespace HittingDetection
                     _markers[i2]._tempPos = _markers[i2].transform.position;
                 }
             }
-            if(_Used_Targets != null)
+            if (_Used_Targets != null)
                 _Used_Targets.Clear();
             _Shields_Hit.Clear();
             if (_markers != null)
@@ -205,7 +227,7 @@ namespace HittingDetection
 
         public void SetDamageType(DamageType damageType)
         {
-            this.damage_type = damageType;
+            damage_type = damageType;
         }
 
         void FixedUpdate()

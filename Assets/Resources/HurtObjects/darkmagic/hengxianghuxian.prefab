@@ -75,11 +75,26 @@ PrefabInstance:
       propertyPath: personalEffectPath
       value: darkMagic
       objectReference: {fileID: 0}
+    - target: {fileID: 114426976130592930, guid: 1c3a33f14237c48c1bf43148d377ad8b,
+        type: 3}
+      propertyPath: zokusei
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 23677967421838794, guid: 1c3a33f14237c48c1bf43148d377ad8b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d302f9b2319604e068df8f2e5322e73b, type: 2}
+    - target: {fileID: 198405619465726314, guid: 1c3a33f14237c48c1bf43148d377ad8b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.70421314
+      objectReference: {fileID: 0}
+    - target: {fileID: 198405619465726314, guid: 1c3a33f14237c48c1bf43148d377ad8b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 198308666983820742, guid: 1c3a33f14237c48c1bf43148d377ad8b,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r
@@ -104,16 +119,6 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.b
       value: 0.8534627
-      objectReference: {fileID: 0}
-    - target: {fileID: 198405619465726314, guid: 1c3a33f14237c48c1bf43148d377ad8b,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 0.70421314
-      objectReference: {fileID: 0}
-    - target: {fileID: 198405619465726314, guid: 1c3a33f14237c48c1bf43148d377ad8b,
-        type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.g
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c3a33f14237c48c1bf43148d377ad8b, type: 3}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using HittingDetection;
 
 public class BO_Ani_E : MonoBehaviour
 {
@@ -62,14 +63,13 @@ public class BO_Ani_E : MonoBehaviour
     
     public HiddenMethods hiddenMethods;
     public Data_Center _DATA_CENTER;
-    
-    private string personalEffectsPath;
-    private string myMagicForwardPath;
-    private string defaultMagicForwardPath;
-    private Transform right_hand, left_hand, right_foot, left_foot, head, tail;
-    private DecompositionerPool target_pool;
-    private IDictionary<Transform, Decompositioner> EffectsOnBodyParts = new Dictionary<Transform, Decompositioner>();
-    private Decompositioner processingHitBox;
+
+    string myMagicForwardPath;
+    string magic_path;
+    Transform right_hand, left_hand, right_foot, left_foot, head, tail;
+    DecompositionerPool target_pool;
+    IDictionary<Transform, Decompositioner> EffectsOnBodyParts = new Dictionary<Transform, Decompositioner>();
+    Decompositioner processingHitBox;
 
     void Awake()
     {
@@ -86,39 +86,13 @@ public class BO_Ani_E : MonoBehaviour
     public IEnumerator BasicMagicAndEffectsPathDefine(Zokusei _zokusei, string personalMagic)
     {
         myMagicForwardPath = personalMagic;
-        switch (_zokusei)
-        {
-            case Zokusei.darkMagic:
-                personalEffectsPath = "darkMagic";
-                defaultMagicForwardPath = "darkmagic";
-                break;
-            case Zokusei.blueMagic:
-                personalEffectsPath = "blueMagic";
-                defaultMagicForwardPath = "bluemagic";
-                break;
-            case Zokusei.greenMagic:
-                personalEffectsPath = "greenMagic";
-                defaultMagicForwardPath = "greenmagic";
-                break;
-            case Zokusei.lightMagic:
-                personalEffectsPath = "lightMagic";
-                defaultMagicForwardPath = "lightmagic";
-                break;
-            case Zokusei.redMagic:
-                personalEffectsPath = "redMagic";
-                defaultMagicForwardPath = "redmagic";
-                break;
-            default:
-                personalEffectsPath = "defaultEffects";
-                defaultMagicForwardPath = "defaultmagic";
-                break;
-        }
+        magic_path = FightGlobalSetting.EffectPathDefine(_zokusei);
         switch(ResourceLoadingSetting.Instance.MagicLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 if (myMagicForwardPath != null)
                     yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL,this.myMagicForwardPath));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", defaultMagicForwardPath));
+                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", magic_path));
                 yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics","defaultmagic"));
             break;
             case ResourceLoadMode.Resource:
@@ -127,7 +101,7 @@ public class BO_Ani_E : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 if (myMagicForwardPath != null)
                     yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(defaultMagicForwardPath));
+                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(magic_path));
                 yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets("defaultmagic"));
             break;
         }
@@ -146,7 +120,7 @@ public class BO_Ani_E : MonoBehaviour
         if (string.IsNullOrEmpty(e.stringParameter))
             return;
 
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(e.stringParameter, myMagicForwardPath, defaultMagicForwardPath);
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(e.stringParameter, myMagicForwardPath, magic_path);
         if (target_pool != null)
         {
             processingHitBox = target_pool.Rent();
@@ -219,16 +193,16 @@ public class BO_Ani_E : MonoBehaviour
         switch (e.intParameter)
         {
             case 1:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, magic_path);
                 break;
             case 2:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_bullet", myMagicForwardPath, magic_path);
                 break;
             case 3:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("super_bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("super_bullet", myMagicForwardPath, magic_path);
                 break;
             default:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, magic_path);
                 break;
         }
         processingHitBox = target_pool.Rent();
@@ -284,16 +258,16 @@ public class BO_Ani_E : MonoBehaviour
 		switch (e.intParameter) 
 		{
 			case 3:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", personalEffectsPath, target.position, target.rotation,target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
 			    break;
 			case 1:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation,target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
                 break;
 			case 2:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("normal_effect", personalEffectsPath, target.position, target.rotation,target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
                 break;
 			default:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", personalEffectsPath, target.position, target.rotation,target);
+                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
                 break;
 		}
            
@@ -313,16 +287,16 @@ public class BO_Ani_E : MonoBehaviour
         switch (e.intParameter)
         {
             case 0:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, magic_path);
                 break;
             case 1:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, magic_path);
                 break;
             case 2:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_blast", myMagicForwardPath, magic_path);
                 break;
             default:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, defaultMagicForwardPath);
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, magic_path);
                 break;
         }
         		
@@ -378,7 +352,7 @@ public class BO_Ani_E : MonoBehaviour
     {
         if (OnLoadMagic == null)
             return;
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, defaultMagicForwardPath);
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
         if (target_pool == null)
             return;
         processingHitBox = target_pool.Rent();
@@ -431,7 +405,7 @@ public class BO_Ani_E : MonoBehaviour
     {
         if (OnLoadMagic == null)
             return;
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, defaultMagicForwardPath);
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
         if (target_pool == null)
             return;
 

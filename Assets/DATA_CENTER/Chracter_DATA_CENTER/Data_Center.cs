@@ -245,7 +245,7 @@ public partial class Data_Center : MonoBehaviour
         _BasicPhysicSupport.hiddenMethods.Grounded = true;
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
-        buffsRunner.endAllCoroutines();
+        buffsRunner.EndAllCoroutines();
         _BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();
         _BasicPhysicSupport.hiddenMethods.ResetAnimator();
     }

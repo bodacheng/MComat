@@ -4625,7 +4625,7 @@ ParticleSystem:
 --- !u!199 &19990286
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9297,7 +9297,7 @@ ParticleSystem:
 --- !u!199 &19900462
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9370,14 +9370,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage_type: 1
   _WeaponMode: 2
-  _startActivated: 1
   _WeaponPosAdjustMode: 1
+  _specialApply: 0
+  _startActivated: 1
   weaponHP: -1
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
-  personalEffectPath: darkMagic
+  explosionEffect: energy_resolve
   effectSpreadOnBody: 1
   onGroundMagic: 0
+  zokusei: 1
 --- !u!111 &878431188352007391
 Animation:
   m_ObjectHideFlags: 0
@@ -9406,13 +9408,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HitBox: {fileID: 0}
+  TrackControl: {fileID: 0}
+  bullet_GPS: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
-  to_be_stop_emissions:
-  - {fileID: 19862902}
-  - {fileID: 19859504}
-  - {fileID: 19885192}
   to_be_faded_renderers: []
+  audioSource: {fileID: 0}
 --- !u!1 &183334
 GameObject:
   m_ObjectHideFlags: 0
@@ -14056,7 +14058,7 @@ ParticleSystem:
 --- !u!199 &19961108
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

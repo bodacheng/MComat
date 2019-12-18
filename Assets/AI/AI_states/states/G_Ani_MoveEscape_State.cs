@@ -8,7 +8,7 @@ public class G_Ani_MoveEscape_State : AI_State {
     Vector3 screenMovementForward, screenMovementRight, use_direction;
     readonly UnityEngine.Events.UnityAction breakfreestart;
     readonly UnityEngine.Events.UnityAction breakfreeend;
-    readonly customCoroutine breakfreeCoroutine;
+    readonly CustomCoroutine breakfreeCoroutine;
     // This skill script is based on animation that has forward motion
 
     public G_Ani_MoveEscape_State(string _clip_name)
@@ -23,7 +23,7 @@ public class G_Ani_MoveEscape_State : AI_State {
         {
             _ResistanceManager.Resistance.Value -=10;
         };
-        breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
+        breakfreeCoroutine = new CustomCoroutine(breakfreestart, 1f, breakfreeend);
 	}
 
     public override void Pre_process_before_enter()
@@ -88,7 +88,7 @@ public class G_Ani_MoveEscape_State : AI_State {
                 df.time_counter = 0;
                 this._FightAttriCalReference.CostCriticalGaugeBySPlevel(3);
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
-                this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
+                this._BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
             }
         }
 	}

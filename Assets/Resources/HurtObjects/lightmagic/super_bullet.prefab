@@ -18944,10 +18944,10 @@ MonoBehaviour:
   weaponHP: 4
   ContinuousDamage: 1
   ContinuousDamageInterval: 1
-  personalEffectPath: lightMagic
   explosionEffect: energy_resolve
   effectSpreadOnBody: 1
   onGroundMagic: 0
+  zokusei: 2
 --- !u!114 &114935333796897942
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -125,6 +125,7 @@
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager_detect.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager_treat.cs" />
+    <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_ManagerGUI.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Shield.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\zokusei.cs" />
     <Compile Include="Assets\Camera\CameraManager.cs" />

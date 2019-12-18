@@ -13,7 +13,7 @@ public class Counter_State : AI_State {
 
     private UnityEngine.Events.UnityAction burststart;
     private UnityEngine.Events.UnityAction burstend;
-    private customCoroutine burstCoroutine;
+    private CustomCoroutine burstCoroutine;
 
     private readonly string burstEventKey;
     private readonly int burstTriggerDamageAmount;
@@ -51,7 +51,7 @@ public class Counter_State : AI_State {
                 {
                     this._ResistanceManager.Resistance.Value -=10;
                 };
-                burstCoroutine = new customCoroutine(burststart, 1f, burstend);
+                burstCoroutine = new CustomCoroutine(burststart, 1f, burstend);
                 break;
             case "magic_release":
                 burststart = () =>
@@ -64,7 +64,7 @@ public class Counter_State : AI_State {
                 {
                     this._ResistanceManager.Resistance.Value -=10;
                 };
-                burstCoroutine = new customCoroutine(burststart, 0.2f, burstend);
+                burstCoroutine = new CustomCoroutine(burststart, 0.2f, burstend);
             break;
             default:
                 break;                
@@ -85,7 +85,7 @@ public class Counter_State : AI_State {
         {
             this._ResistanceManager.Resistance.Value -=10;
         };
-        burstCoroutine = new customCoroutine(burststart, 1f, burstend);
+        burstCoroutine = new CustomCoroutine(burststart, 1f, burstend);
         this.nextAttackStateCanRushFirst = true;
 	}
 
@@ -144,7 +144,7 @@ public class Counter_State : AI_State {
             if (gotdamageamont >= this._ResistanceManager.hiddenMethods.GetNextCounterEventDamageTriggerAmount() && this._ResistanceManager.Resistance.Value != 0)
             {
                 this.BurstCoroutineConfig(this._ResistanceManager.hiddenMethods.GetNextCounterEventName());
-                this._BuffsRunner.runSubCoroutineOfState(burstCoroutine);
+                this._BuffsRunner.RunSubCoroutineOfState(burstCoroutine);
                 gotdamageamont = -100;//也就是说不再让角色有可能在本状态内再次爆发
             }
         }

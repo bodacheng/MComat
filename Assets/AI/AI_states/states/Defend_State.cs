@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using HittingDetection;
 using Soul;
@@ -9,10 +8,10 @@ public class Defend_State : AI_State
     readonly string defend_clip_name;
     readonly string block_break_name;
     public float time_counter;
+    float used_block_least_time;
     int defendHP;
     List<Collider> damagingweaponList;
     List<Collider> nearbyenemymeat;
-    Tween fixpostween;
     Vector3 fixDesPos;
     
     public Defend_State(string defend_clip_name,string block_break_name)
@@ -95,7 +94,8 @@ public class Defend_State : AI_State
         _Animator.SetFloat("speed", 0f);
         Animation_Manger.PlayLayerAnim(defend_clip_name);
         _Rigidbody.velocity = Vector3.zero;
-        time_counter = 0.3f;
+        used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
+        time_counter = used_block_least_time;
         if (shaderManager != null)
             shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);      
         _SkillCancelFlag.turn_off_flag();
@@ -109,7 +109,6 @@ public class Defend_State : AI_State
         Sensor.ContinuousDetectionStart(5);
         base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
-        time_counter = 0.3f;
         if (shaderManager != null)
             shaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 0.7f, 0.05f);      
         _SkillCancelFlag.turn_off_flag();
@@ -119,24 +118,22 @@ public class Defend_State : AI_State
                                     newValue.AttackerT_foward,
                                         newValue.AttackerT_pos,
                                             gameObject.transform.position,
-                                                newValue._WeaponPosAdjustMode,
-                                                    _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody);
+                                                newValue._WeaponPosAdjustMode);
          switch(newValue.damage_type)
          {
             case DamageType.light_block:
                 Animation_Manger.PlayLayerAnim(block_break_name);
-                
-                //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
-                time_counter = FightGlobalSetting._lightBlockLastingTime;
+                used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
+                time_counter = used_block_least_time;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
             case DamageType.heavy_block:
                 Animation_Manger.PlayLayerAnim(block_break_name);
-                //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
-                time_counter = FightGlobalSetting._heavyBlockLastingTime;
+                used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
+                time_counter = used_block_least_time;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
@@ -177,17 +174,14 @@ public class Defend_State : AI_State
                     RotateToTarget(damagingweaponList[0].transform.position, 1f, true);
             }
         }
-        
         if (time_counter >= 0f)
         {
             time_counter -= Time.fixedDeltaTime;
             if (time_counter < 0f)
-                this.Animation_Manger.PlayLayerAnim(defend_clip_name);
+                Animation_Manger.PlayLayerAnim(defend_clip_name);
         }
-        else
+        if (time_counter < used_block_least_time/2)
         {
-            if (fixpostween != null)
-                fixpostween.Kill();
             _Rigidbody.velocity = Vector3.zero;
         }
     }

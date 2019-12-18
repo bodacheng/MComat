@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FightGlobalSetting : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class FightGlobalSetting : MonoBehaviour
     public float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     public float attackDrawingDistance = 1f;
     
-    public static int scenestep = 0;//0 :mainmenu 1: fightscene
+    public static int scenestep;//0 :mainmenu 1: fightscene
     public static float _lighthit_lastingtime, _heavyhit_lastingtime;
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
@@ -28,6 +26,36 @@ public class FightGlobalSetting : MonoBehaviour
     public static float _lightBlockLastingTime, _heavyBlockLastingTime;
     public static AnimationCurve _knockOffyAnimationCurve,_knockOffzAnimationCurve;
     public static float _attackDrawingDistance;
+    
+    public static string EffectPathDefine(Zokusei zokusei)
+    {
+        string personalEffectPath;
+        switch (zokusei)
+        {
+            case Zokusei.blueMagic:
+                personalEffectPath = "blueMagic";
+                break;
+            case Zokusei.redMagic:
+                personalEffectPath = "redMagic";
+                break;
+            case Zokusei.greenMagic:
+                personalEffectPath = "greenMagic";
+                break;
+            case Zokusei.lightMagic:
+                personalEffectPath = "lightMagic";
+                break;
+            case Zokusei.darkMagic:
+                personalEffectPath = "darkMagic";
+                break;
+            case Zokusei.Null:
+                personalEffectPath = "defaultmagic";
+                break;
+            default:
+                personalEffectPath = "defaultmagic";
+                break;
+        }
+        return personalEffectPath;
+    }
     
     void Awake()
     {

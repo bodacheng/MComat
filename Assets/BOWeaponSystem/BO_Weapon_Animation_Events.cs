@@ -7,14 +7,14 @@ using UnityEngine.Animations;
 public class BO_Weapon_Animation_Events : MonoBehaviour
 {
     public HiddenMethods hiddenMethods;
-    
-    private TeamConfig _TeamConfig;
-    private readonly List<Transform> _Used_Targets = new List<Transform>();
-    private IDictionary<Transform, Decompositioner> bodyPartsWeaponRegisterDic;
-    private List<Transform> bodyweaponParts;
-    private Transform right_hand, left_hand, right_foot, left_foot, head, tail;
-    private Transform geometryCenter;
-    private FightAttriCalReference myownheath;
+
+    TeamConfig _TeamConfig;
+    readonly List<Transform> _Used_Targets = new List<Transform>();
+    IDictionary<Transform, Decompositioner> bodyPartsWeaponRegisterDic;
+    List<Transform> bodyweaponParts;
+    Transform right_hand, left_hand, right_foot, left_foot, head, tail;
+    Transform geometryCenter;
+    FightAttriCalReference myownheath;
     static DecompositionerPool default_hitboxPool;
 
     void Awake()
@@ -30,10 +30,10 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
 
     public class HiddenMethods
     {
-        private readonly BO_Weapon_Animation_Events BEs;
+        readonly BO_Weapon_Animation_Events BEs;
         public HiddenMethods(BO_Weapon_Animation_Events bO_Weapon_Animation_Events)
         {
-            this.BEs = bO_Weapon_Animation_Events;
+            BEs = bO_Weapon_Animation_Events;
         }
         
         public void AssignTeamFlag(TeamConfig teamConfig)

@@ -83,7 +83,8 @@ public partial class Animation_Manger : MonoBehaviour
         if (clip_name != null)
         {
             toLoadAnims.TryGetValue(clip_name, out _toUse);
-            return _toUse ?? null;
+            if (_toUse != null)
+                return _toUse;
         }
         return null;
     }
@@ -244,7 +245,6 @@ public partial class Animation_Manger : MonoBehaviour
                 }
             }
         }
-
         toRunAniName = clip_name;
         The_trigger(toRunAniName, this.doNothingFlag);
         doNothingFlag = false;

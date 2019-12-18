@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using HittingDetection;
 using Soul;
 
@@ -58,7 +56,7 @@ public class Death_State : AI_State
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         Animation_Manger.PlayLayerAnim(clip_name);
         startquaternion =  Quaternion.LookRotation(newValue.fromWeapon.GetOwnerFightAttriCalReference()._Center.WholeT.forward, Vector3.up);
-        KnockOffSparkPersonalEffectPath = newValue.fromWeapon?.personalEffectPath;
+        KnockOffSparkPersonalEffectPath = newValue.fromWeapon?.GetEffectPath();
         EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
                                              newValue.damageHappenPoint, gameObject.transform.rotation,
                                              _FightAttriCalReference.transform);

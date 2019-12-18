@@ -6,7 +6,7 @@ public class Dash_Back_State : AI_State
     readonly string clip_name;
     readonly UnityEngine.Events.UnityAction breakfreestart;
     readonly UnityEngine.Events.UnityAction breakfreeend;
-    readonly customCoroutine breakfreeCoroutine;
+    readonly CustomCoroutine breakfreeCoroutine;
 
     public Dash_Back_State()
     {
@@ -20,7 +20,7 @@ public class Dash_Back_State : AI_State
         {
             _ResistanceManager.Resistance.Value -=10;
         };
-        breakfreeCoroutine = new customCoroutine(breakfreestart, 1f, breakfreeend);
+        breakfreeCoroutine = new CustomCoroutine(breakfreestart, 1f, breakfreeend);
     }
 
     public override void Pre_process_before_enter()

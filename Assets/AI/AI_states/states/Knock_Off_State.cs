@@ -50,7 +50,7 @@ public class Knock_Off_State : AI_State
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);        
         int ranDom = Random.Range(0, knockoffAnimations.Count);
         Animation_Manger.AnimationTrigger(knockoffAnimations[ranDom]);
-        KnockOffSparkPersonalEffectPath = newValue.fromWeapon?.personalEffectPath;
+        KnockOffSparkPersonalEffectPath = newValue.fromWeapon?.GetEffectPath();
         superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", KnockOffSparkPersonalEffectPath, 3);
         if (superHitPool != null)
         {
@@ -59,6 +59,7 @@ public class Knock_Off_State : AI_State
             processingBlood.transform.rotation = Quaternion.identity;
         }
         _xz = newValue.AttackerT_foward;
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
     }
 
     public override bool Naturally_exit_condition()

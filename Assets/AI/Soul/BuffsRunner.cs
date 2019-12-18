@@ -1,35 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BuffsRunner : MonoBehaviour
 {
     #region 自定义携程
-    private List<customCoroutine> mysubmissions = new List<customCoroutine>();
-    private List<customCoroutine> endedcustomCoroutines = new List<customCoroutine>();
+    readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
+    readonly List<CustomCoroutine> endedcustomCoroutines = new List<CustomCoroutine>();
     #endregion
 
-    public void runSubCoroutineOfState(customCoroutine _Coroutine)
+    public void RunSubCoroutineOfState(CustomCoroutine _Coroutine)
     {
-        _Coroutine.customCoroutineTrigger();
+        _Coroutine.CustomCoroutineTrigger();
         mysubmissions.Add(_Coroutine);
     }
 
-    public void endSubCoroutineOfState(customCoroutine _Coroutine)
+    public void EndSubCoroutineOfState(CustomCoroutine _Coroutine)
     {
-        if (_Coroutine.ifProcessing())
-            _Coroutine.endCustomCoroutine();
+        if (_Coroutine.IfProcessing())
+            _Coroutine.EndCustomCoroutine();
         if (mysubmissions.Contains(_Coroutine))
         {
             mysubmissions.Remove(_Coroutine);
         }
     }
     
-    public void endAllCoroutines()
+    public void EndAllCoroutines()
     {
-        foreach (customCoroutine customCoroutine in mysubmissions)
+        foreach (CustomCoroutine customCoroutine in mysubmissions)
         {
-            customCoroutine.endCustomCoroutine();
+            customCoroutine.EndCustomCoroutine();
         }
         mysubmissions.Clear();
     }
@@ -40,10 +39,10 @@ public class BuffsRunner : MonoBehaviour
         if (mysubmissions.Count > 0)
         {
             endedcustomCoroutines.Clear();
-            foreach (customCoroutine customCoroutine in mysubmissions)
+            foreach (CustomCoroutine customCoroutine in mysubmissions)
             {
-                customCoroutine.customCoroutineProcess();
-                if (!customCoroutine.ifProcessing())
+                customCoroutine.CustomCoroutineProcess();
+                if (!customCoroutine.IfProcessing())
                 {
                     endedcustomCoroutines.Add(customCoroutine);
                 }
@@ -56,14 +55,15 @@ public class BuffsRunner : MonoBehaviour
     }
 }
 
-public class customCoroutine
+public class CustomCoroutine
 {
-    bool processing = false;
+    bool processing;
     UnityEngine.Events.UnityAction startaction;
     UnityEngine.Events.UnityAction endaction;
-    float processtime,timecounter;
+    readonly float processtime;
+    float timecounter;
 
-    public customCoroutine(UnityEngine.Events.UnityAction startaction, 
+    public CustomCoroutine(UnityEngine.Events.UnityAction startaction, 
                            float processtime, 
                            UnityEngine.Events.UnityAction endaction)
     {
@@ -74,20 +74,20 @@ public class customCoroutine
         timecounter = 0;
     }
 
-    public void customCoroutineTrigger()
+    public void CustomCoroutineTrigger()
     {
         processing = true;
         timecounter = 0;
         startaction.Invoke();
     }
 
-    public void endCustomCoroutine()
+    public void EndCustomCoroutine()
     {
         endaction.Invoke();
         processing = false;
     }
 
-    public void customCoroutineProcess()
+    public void CustomCoroutineProcess()
     {
         if (processing && timecounter < processtime)
         {
@@ -99,7 +99,7 @@ public class customCoroutine
             }
         }
     }
-    public bool ifProcessing()
+    public bool IfProcessing()
     {
         return processing;
     }

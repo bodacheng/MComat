@@ -382,7 +382,7 @@ namespace Soul
         protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, 
                                                 Vector3 attackerTransform_foward,
                                                  Vector3 attackerTransform_pos, 
-                                                  Vector3 victimT_pos, WeaponPosAdjustMode weaponPosAdjustMode,bool touchingEnemyBody)
+                                                  Vector3 victimT_pos, WeaponPosAdjustMode weaponPosAdjustMode)
         {
             switch (weaponPosAdjustMode)
             {
@@ -393,12 +393,12 @@ namespace Soul
                     f_temp = Vector3.Dot(damageHappenPoint - attackerTransform_pos, attackerTransform_foward);
                     if (f_temp > 0 && Vector3.Distance(attackerTransform_pos,victimT_pos) < FightGlobalSetting._attackDrawingDistance)
                     {
-                        v_temp = f_temp * attackerTransform_foward + attackerTransform_pos + (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
+                        v_temp = f_temp * attackerTransform_foward + attackerTransform_pos;//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
                         return v_temp;
                     }
                     else
                     {
-                        return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, WeaponPosAdjustMode.explosion,touchingEnemyBody);
+                        return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, WeaponPosAdjustMode.explosion);
                     }
                 case WeaponPosAdjustMode.explosion:
                     v_temp = (victimT_pos - damageHappenPoint).normalized;
