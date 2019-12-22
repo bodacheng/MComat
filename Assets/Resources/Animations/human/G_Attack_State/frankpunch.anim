@@ -51092,7 +51092,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.35
+  - time: 0.45
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

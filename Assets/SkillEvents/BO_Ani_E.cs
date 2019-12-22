@@ -124,7 +124,7 @@ public class BO_Ani_E : MonoBehaviour
         if (target_pool != null)
         {
             processingHitBox = target_pool.Rent();
-            processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + gameObject.transform.forward * e.floatParameter;
+            processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter;
             processingHitBox.transform.rotation = transform.rotation;
             processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
             processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
@@ -207,6 +207,7 @@ public class BO_Ani_E : MonoBehaviour
         }
         processingHitBox = target_pool.Rent();
         processingHitBox.transform.position = intPos;
+        EffectAndHurtObjectLoading.Instance.GenerateEffect(processingHitBox._HitBox.muzzle, magic_path, processingHitBox.transform.position, transform.rotation, null);
         processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         if (_DATA_CENTER._TeamConfig != null)
@@ -217,11 +218,6 @@ public class BO_Ani_E : MonoBehaviour
         if (processingHitBox.TrackControl != null)
         {
             processingHitBox.TrackControl.StartOff(intPos, transform.rotation, e.floatParameter);
-        }
-        if (processingHitBox.bullet_GPS != null)
-        {
-            processingHitBox.bullet_GPS.layerMask = processingHitBox._HitBox.GetTeamConfig().enemyAndEnemyWeaponLayerMask;
-            processingHitBox.bullet_GPS.Local_OnEnable();
         }
     }
 

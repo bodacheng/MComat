@@ -9493,17 +9493,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startActivated: 1
   damage_type: 2
   _WeaponMode: 2
   _WeaponPosAdjustMode: 1
-  _specialApply: 0
-  _startActivated: 1
   weaponHP: 1
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  _specialApply: 0
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
+  muzzle: n_muzzle
   explosionEffect: s_hit
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
   zokusei: 1
 --- !u!114 &114203829288692986
 MonoBehaviour:

@@ -14135,8 +14135,6 @@ GameObject:
   - component: {fileID: 82146717560377232}
   - component: {fileID: 114187521424108902}
   - component: {fileID: 114241578739182100}
-  - component: {fileID: 114053795150801788}
-  - component: {fileID: 95676896912794486}
   m_Layer: 0
   m_Name: super_bullet
   m_TagString: fire
@@ -18937,17 +18935,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startActivated: 1
   damage_type: 6
   _WeaponMode: 2
   _WeaponPosAdjustMode: 1
-  _specialApply: 0
-  _startActivated: 1
   weaponHP: 4
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  _specialApply: 0
   ContinuousDamage: 1
   ContinuousDamageInterval: 1
-  personalEffectPath: greenMagic
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
+  muzzle: 
+  explosionEffect: 
+  zokusei: 0
 --- !u!114 &114241578739182100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18960,128 +18960,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  _HitBox: {fileID: 0}
-  positionConstraint: {fileID: 0}
-  danMuTest: {fileID: 0}
-  bullet_GPS: {fileID: 0}
+  _HitBox: {fileID: 114187521424108902}
+  TrackControl: {fileID: 0}
   DestructionDelay: 10
   stop_emission_delay: 2
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
---- !u!114 &114053795150801788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831799386159190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 894ee0d0b2df6460f86d91d3b0be64c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.12188721
-      value: 1.4957123
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.2935229
-      value: -1.4947422
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5798286
-      value: 1.8226506
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.82074445
-      value: -1.6857961
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.1070502
-      value: 1.4144897
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  zAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 14.596962
-      value: 52.57213
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  scale: 1
---- !u!95 &95676896912794486
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831799386159190}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

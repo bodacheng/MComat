@@ -110197,12 +110197,19 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.6333333
+    functionName: TurnRotationAdjustmentStartFlag
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.65
     functionName: SetRightFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 3
     messageOptions: 0
   - time: 0.71666664
     functionName: EffectOnBodyPart
@@ -110211,22 +110218,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.76666665
-    functionName: SetDamageType
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 3
-    messageOptions: 0
-  - time: 1.1
-    functionName: turn_on_flag
+  - time: 0.96666664
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1833333
-    functionName: ClearMarkerManagers
+  - time: 1.15
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

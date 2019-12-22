@@ -83,7 +83,7 @@ namespace HittingDetection
             this.fromWeapon = fromWeapon;
             this.AttackerT_foward = AttackerT_foward;
             this.AttackerT_pos = AttackerT_pos;
-            AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
+            AT = this.fromWeapon != null ? this.fromWeapon.GetFixedAT(): 0;
             specialApply = SpecialApply.none;
         }
         public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon,string effectPath,SpecialApply specialApply)
@@ -95,7 +95,7 @@ namespace HittingDetection
             this.AttackerT_foward = AttackerT_foward;
             this.AttackerT_pos = AttackerT_pos;
             this.effectPath = effectPath;
-            AT = this.fromWeapon != null ? this.fromWeapon.GetOwnerFightAttriCalReference().AT : 0;
+            AT = this.fromWeapon != null ? this.fromWeapon.GetFixedAT() : 0;
             this.specialApply = specialApply;   
         }
         
@@ -142,22 +142,22 @@ namespace HittingDetection
 
         public FightAttriCalReference GetAttackerHealthBody()
         {
-            return this.Attacker_Health;
+            return Attacker_Health;
         }
 
         public void SetAttackerHealthBody(FightAttriCalReference BO_Health)
         {
-            this.Attacker_Health = BO_Health;
+            Attacker_Health = BO_Health;
         }
 
         public void SetDamagedHealthBody(FightAttriCalReference b)
         {
-            this.Damaged_Health = b;
+            Damaged_Health = b;
         }
 
         public FightAttriCalReference GetDamagedHealthBody()
         {
-            return this.Damaged_Health;
+            return Damaged_Health;
         }
     }
 }

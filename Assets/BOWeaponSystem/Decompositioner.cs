@@ -7,9 +7,8 @@ public class Decompositioner : MonoBehaviour {
 
     DecompositionerPool _DecompositionerPool;
 
-    public BO_Marker_Manager _HitBox;    
+    public BO_Marker_Manager _HitBox;
     public TrackControl TrackControl;
-    public Bullet_GPS bullet_GPS;
     
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;

@@ -33,19 +33,19 @@ public class FightGlobalSetting : MonoBehaviour
         switch (zokusei)
         {
             case Zokusei.blueMagic:
-                personalEffectPath = "blueMagic";
+                personalEffectPath = "bluemagic";
                 break;
             case Zokusei.redMagic:
-                personalEffectPath = "redMagic";
+                personalEffectPath = "redmagic";
                 break;
             case Zokusei.greenMagic:
-                personalEffectPath = "greenMagic";
+                personalEffectPath = "greenmagic";
                 break;
             case Zokusei.lightMagic:
-                personalEffectPath = "lightMagic";
+                personalEffectPath = "lightmagic";
                 break;
             case Zokusei.darkMagic:
-                personalEffectPath = "darkMagic";
+                personalEffectPath = "darkmagic";
                 break;
             case Zokusei.Null:
                 personalEffectPath = "defaultmagic";

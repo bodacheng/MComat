@@ -46,17 +46,12 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
         BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();
         TrackControl danMuTest = a.GetComponent<TrackControl>();
-        Bullet_GPS bullet_GPS = a.GetComponent<Bullet_GPS>();
         PositionConstraint positionConstraint = a.GetComponent<PositionConstraint>();
         if (positionConstraint == null)
         {
             positionConstraint = a.AddComponent<PositionConstraint>();
             positionConstraint.translationOffset = Vector3.zero;
             positionConstraint.weight = 1;
-        }
-        if (bullet_GPS != null)
-        {
-            decompositioner.bullet_GPS = bullet_GPS;
         }
         decompositioner._HitBox = bO_Marker_Manager;
         decompositioner.SetPositionConstraint(positionConstraint);

@@ -144323,7 +144323,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
     messageOptions: 0
   - time: 0.21666667
     functionName: ClearMarkerManagers
@@ -144332,8 +144332,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.38333333
-    functionName: TurnRotationAdjustmentStartFlag
+  - time: 0.35
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -144361,7 +144361,7 @@ AnimationClip:
     intParameter: 2
     messageOptions: 0
   - time: 0.81666666
-    functionName: TurnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -144381,7 +144381,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2833333
+  - time: 1.3833333
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

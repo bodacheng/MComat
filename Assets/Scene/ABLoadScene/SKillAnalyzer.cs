@@ -246,7 +246,7 @@ public class SKillAnalyzer : MonoBehaviour
             Debug.Log("该技能最早的攻击事件是："+ mostquick.name + ", start at:" + mostquick.startframe);
             Debug.Log("最终攻击帧距离取消帧" + (cancelflagFrame-attackinglastframe).ToString());
             Debug.Log("攻击延迟与后摆的总和是："+ (mostquick.startframe + (cancelflagFrame-attackinglastframe)));
-            Debug.Log("本技能的时间评分是："+ (100- 100 * (mostquick.startframe + (cancelflagFrame-attackinglastframe))));
+            Debug.Log("本技能的时间评分是："+ (100- 100 * (mostquick.startframe + (cancelflagFrame-attackinglastframe) * 1/2)));// 加那个1/2是因为技能后摆没有出手速度重要。
         }
     }
 

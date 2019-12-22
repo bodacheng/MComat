@@ -58,12 +58,11 @@ namespace HittingDetection
         float ContinuousDamageInterval = 0.2f;
 
         [Tooltip("启动特效")]
-        [SerializeField]
-        string muzzle;//"energy_resolve";
+        public string muzzle;//"energy_resolve";
         
         [Tooltip("特殊爆炸特效")]
         [SerializeField]
-        string explosionEffect = "on_enable_effect";
+        string explosionEffect;
         
         [Tooltip("魔法特效路径(blueMagic redMagic)")]
         [SerializeField]
@@ -119,7 +118,6 @@ namespace HittingDetection
             {
                 EnableMarkers();
             }
-            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect(explosionEffect, personalEffectPath, transform.position, transform.rotation, null);
         }
 
         public void Local_OnDisable()
@@ -138,14 +136,24 @@ namespace HittingDetection
         {
             return _myOwnerCalReference;
         }
-        public void SetOwnerFightAttriCalReference(FightAttriCalReference _BO_Health)
+        public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
         {
-            _myOwnerCalReference = _BO_Health;
+            _myOwnerCalReference = myOwnerCalReference;
         }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
             _Used_Targets = Used_Targets;
         }
+        
+        public float GetFixedAT()
+        {
+            if (_myOwnerCalReference == null)
+                return 0;
+            if (weaponHP <= 0)
+                return _myOwnerCalReference.AT;
+            return _myOwnerCalReference.AT / weaponHP;
+        }
+        
         public void SetTeamConfig(TeamConfig teamConfig)
         {
             this.teamConfig = teamConfig;
