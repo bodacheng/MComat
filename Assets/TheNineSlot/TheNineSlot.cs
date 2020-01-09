@@ -46,7 +46,7 @@ namespace mainMenu
 
         [Space(7)]
         [Header("技能石详细")]
-        public skillStoneDetail _skillStoneDetail;
+        public SkillStoneDetail _skillStoneDetail;
 
         [Space(7)]
         [Header("EXRemain")]
@@ -70,14 +70,15 @@ namespace mainMenu
                 void buttonFeature()
                 {
                     skillStoneSlot._DragAndDropCell.UpdateMyItem();
-                    DragAndDropItem _stoneOnCell = skillStoneSlot._DragAndDropCell.GetItem();
-                    if (_stoneOnCell != null && _stoneOnCell._SkillConfigOfSkillStone != null)
+                    DragAndDropItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
+                    if (_SkillStone != null && _SkillStone._SkillConfigOfSkillStone != null)
                     {
-                        _skillStoneDetail.keyname.text = _stoneOnCell._SkillConfigOfSkillStone.REAL_NAME;
-                        _skillStoneDetail.Showname.text = _stoneOnCell._SkillConfigOfSkillStone.ShowName;
-                        _skillStoneDetail.type.text = _stoneOnCell._SkillConfigOfSkillStone.type;
-                        _skillStoneDetail.showSkillStoneExType(_stoneOnCell._SkillConfigOfSkillStone.SP_LEVEL);
-                        mainProcessRunner.TriggerMainProcess(_SkillsPrintOut.SkillShowRunWithPreparing(_stoneOnCell._SkillConfigOfSkillStone.REAL_NAME));
+                        _skillStoneDetail.keyname.text = _SkillStone._SkillConfigOfSkillStone.REAL_NAME;
+                        _skillStoneDetail.Showname.text = _SkillStone._SkillConfigOfSkillStone.ShowName;
+                        _skillStoneDetail.type.text = _SkillStone._SkillConfigOfSkillStone.type;
+                        _skillStoneDetail.ShowSkillStoneExType(_SkillStone._SkillConfigOfSkillStone.SP_LEVEL);
+                        _skillStoneDetail.SwitchUsingMonsterIcon(_SkillStone.skillStoneOfPlayerId);
+                        mainProcessRunner.TriggerMainProcess(_SkillsPrintOut.SkillShowRunWithPreparing(_SkillStone._SkillConfigOfSkillStone.REAL_NAME));
                     }
                 }
                 button.onClick.RemoveAllListeners();

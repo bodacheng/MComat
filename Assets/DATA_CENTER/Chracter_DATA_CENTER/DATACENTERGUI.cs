@@ -100,7 +100,7 @@ public class DATACENTERGUI : Editor {
             myScript.bO_Weapon_Animation_Events = myScript.WholeT.GetComponent<BO_Weapon_Animation_Events>();
             ResistanceManager resistanceManager = myScript.WholeT.GetComponent<ResistanceManager>();
             ShaderManager shaderManager = myScript.transform.GetComponent<ShaderManager>();
-            resistanceManager._ShaderManager = shaderManager;
+            resistanceManager.data_Center = myScript;
             myScript._ResistanceManager = resistanceManager;
             myScript._ShaderManager = shaderManager;
             myScript.Personality_events = myScript.WholeT.GetComponent<Personality_events>();
@@ -275,10 +275,13 @@ public class DATACENTERGUI : Editor {
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("以下项目在完成construct后应该会自动出现。如果事前手动适配，则construct操作不会更改他们",title);
 
-        GUILayout.Space(5f);
-        EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript._BasicPhysicSupport.floorCheckersT = EditorGUILayout.ObjectField("Floor Checker", myScript._BasicPhysicSupport.floorCheckersT, typeof(Transform), true) as Transform;
-        EditorGUILayout.EndVertical();
+        if (myScript._BasicPhysicSupport != null)
+        {
+            GUILayout.Space(5f);
+            EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
+            myScript._BasicPhysicSupport.floorCheckersT = EditorGUILayout.ObjectField("Floor Checker", myScript._BasicPhysicSupport.floorCheckersT, typeof(Transform), true) as Transform;
+            EditorGUILayout.EndVertical();
+        }
 
         GUILayout.Space(5f);
         EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置

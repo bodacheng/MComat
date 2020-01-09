@@ -179,10 +179,9 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.NineSlotCell_empty://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId))
+                                    if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                                     {
-                                        Debug.Log("其他玩家正在使用的石头不可拖入");
-                                        return;
+                                        Debug.Log("放入九宫格其他角色正在使用的石头.角色ID："+MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId);
                                     }
                                     if (!RefreshWholePoint(item))
                                     {
@@ -200,10 +199,9 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     OnDropEvent_Override(desc,item,sourceCell);
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    if (AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId))
+                                    if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                                     {
-                                        Debug.Log("其他玩家正在使用的石头不可拖入");
-                                        return;
+                                        Debug.Log("放入九宫格其他角色正在使用的石头.角色ID："+MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(item.skillStoneOfPlayerId).inUsingMonsterOfPlayerId);
                                     }
                                     if (!RefreshWholePoint(item))
                                     {

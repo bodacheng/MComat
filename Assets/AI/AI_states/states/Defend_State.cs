@@ -33,7 +33,10 @@ public class Defend_State : AI_State
         }
         if (defendHP <= 0)
         {
-            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, damage.damageHappenPoint, damage.AttackerT_foward,damage.AttackerT_pos, damage.fromWeapon));
+            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, 
+                                                                damage.damageHappenPoint, damage.CutRotation,
+                                                                    damage.AttackerT_foward,damage.AttackerT_pos, 
+                                                                        damage.fromWeapon));
             EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null, damage.damageHappenPoint, Quaternion.identity, null);
         }
     }

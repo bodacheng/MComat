@@ -8,7 +8,6 @@ namespace HittingDetection
         FightAttriCalReference _Raw_Target_Instance; //A single target which was hit.
         FightAttriCalReference calReference;
         BO_Hitbox _BO_Hitbox;
-        Vector3 _Direction;
         Vector3 _StartPoint;
         List<Collider> BallDetectHitPool;
         BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
@@ -135,11 +134,10 @@ namespace HittingDetection
                                 if (_Raw_Target_Instance != null)
                                 {
                                     _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
-                                    _Direction = _markers[i]._tempPos;
                                     _StartPoint = _markers[i]._hits[hit_target_index].point;
                                     _StartPoint = _StartPoint + (_markers[i]._hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
                                     //_StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
-                                    hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, _Direction));
+                                    hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up)));
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
                                 {
@@ -259,8 +257,6 @@ namespace HittingDetection
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
-                                        _Direction = _markers[i]._tempPos;
-
                                         _StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);//这个地方不能用ClosestPoint。这里存在unity官方bug。
                                         _StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;//为了打击特效看起来更接近肉体 向里切一下。
                                                                                                                                                   // 以下是几种 _StartPoint的其他算法
@@ -271,7 +267,7 @@ namespace HittingDetection
                                                                                                                                                   // 2.
                                                                                                                                                   // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
                                                                                                                                                   // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, _Direction));
+                                        hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up)));
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
                                     {

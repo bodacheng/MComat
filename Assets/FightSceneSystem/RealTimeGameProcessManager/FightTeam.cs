@@ -61,20 +61,20 @@ public partial class FightTeam : MonoBehaviour
         TeamsFightInitialize();
         yield return null;
     }
-    
-    private void TeamsFightInitialize()
+
+    void TeamsFightInitialize()
     {
-        foreach(Data_Center a_char in teamMembers.values)
+        foreach (Data_Center a_char in teamMembers.values)
         {
             a_char._FightAttriCalReference.CurrentHp.Value = 9900f;
-            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => {RefreshHPBar(a_char,x);});            
+            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => { RefreshHPBar(a_char, x); });
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => { RefreshComboHit(a_char); });
         }
     }
-    
+
     public void RefreshResistanceBar(Data_Center data_Center)
     {
         datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);

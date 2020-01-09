@@ -210,7 +210,7 @@ public partial class G_Attack_State : AI_State {
         _Animator.applyRootMotion = false;
         personality_Events.CloseAllPersonalityEffects();
         _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
-        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         if (isEventAttackLaunchState)
         {
 			if (_FightAttriCalReference != null)

@@ -169,7 +169,7 @@ public class States_Incubator
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case stateType.CT:
-                        Counter_State _Counter = new Counter_State(_set.StateKey, 1.4f, 2f, 1, _set.skillEmergentLevel)
+                        Counter_State _Counter = new Counter_State(_set.StateKey, 1.4f, 1, _set.skillEmergentLevel)
                         {
                             StateType = stateType.CT,
                             AT = _set.AT,

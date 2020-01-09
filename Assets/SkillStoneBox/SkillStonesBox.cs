@@ -25,7 +25,7 @@ namespace mainMenu
     public class SkillStonesBox : MonoBehaviour
     {
         public static SkillStonesBox Instance;
-    
+
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
         public RectTransform BoxWholeT, BoxT, stonesTempContainer;
@@ -71,7 +71,7 @@ namespace mainMenu
 
         [Space(7)]
         [Header("技能石详细")]
-        public skillStoneDetail _skillStoneDetail;
+        public SkillStoneDetail _skillStoneDetail;
        
         [Header("fxcamera")]
         public Camera fxCamera;
@@ -112,7 +112,7 @@ namespace mainMenu
         }
         public void SetFocusingType(string type)
         {
-            this.focusingtype = type;
+            focusingtype = type;
         }
         public int GetFocusingExType()
         {
@@ -131,8 +131,8 @@ namespace mainMenu
                     {
                         _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.REAL_NAME;
                         _skillStoneDetail.Showname.text = _stone._SkillConfigOfSkillStone.ShowName;
-                        _skillStoneDetail.showSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
-                        _skillStoneDetail.Switchusingmonstericon(_stone.skillStoneOfPlayerId);
+                        _skillStoneDetail.ShowSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
+                        _skillStoneDetail.SwitchUsingMonsterIcon(_stone.skillStoneOfPlayerId);
                     }
                 }
                 button.onClick.RemoveAllListeners();
@@ -285,7 +285,7 @@ namespace mainMenu
                         CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                         cellindex++;
                         _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
-                        _SkillStoneCell.image.color = !AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
+                        _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
                             ? Color.white
                             : Color.yellow;
                     }
@@ -300,7 +300,7 @@ namespace mainMenu
                     CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                     cellindex++;
                     _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
-                    _SkillStoneCell.image.color = !AccountCharsSet.CheckifContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
+                    _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
                         ? Color.white
                         : Color.yellow;
                 }

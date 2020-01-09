@@ -91,8 +91,8 @@ public class BO_Shield : MonoBehaviour {
         }
     }
 
-    private Decompositioner shieldbreaking;
-    private void ShieldBreak()
+    Decompositioner shieldbreaking;
+    void ShieldBreak()
     {
         if (this._ShieldCenterSpot != null)
         {
@@ -110,9 +110,10 @@ public class BO_Shield : MonoBehaviour {
         }
         if (_ownerFightAttriCalReference != null)
         {
-            _ownerFightAttriCalReference.ApplyDamage(new V_Damage(DamageType.heavy_damage, 
-                                                                    WeaponPosAdjustMode.explosion, 
-                                                                        this._ShieldCenterSpot.position,
+            // 下面这些都是瞎写的
+            _ownerFightAttriCalReference.ApplyDamage(new V_Damage(DamageType.heavy_damage,
+                                                                    WeaponPosAdjustMode.explosion,
+                                                                        this._ShieldCenterSpot.position,this._ShieldCenterSpot.rotation,
                                                                             Vector3.zero,
                                                                                 transform.position,
                                                                                     null));

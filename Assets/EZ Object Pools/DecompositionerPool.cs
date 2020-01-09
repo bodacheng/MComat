@@ -21,7 +21,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     
     protected override void OnBeforeReturn(Decompositioner instance)
     {
-        instance.StopEmissions();
+        instance.StopEmissions(true);
         if (instance._HitBox != null)
             instance._HitBox.Local_OnDisable();
 

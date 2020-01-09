@@ -25,7 +25,7 @@ namespace dataAccess
             }
         }
         
-        public static bool CheckifContainsAccountCharsSetKey(string key)
+        public static bool CheckIfContainsAccountCharsSetKey(string key)
         {
             return key != null && AccountCharacterInfoListObjectsDictionary.Keys.Contains(key);
         }

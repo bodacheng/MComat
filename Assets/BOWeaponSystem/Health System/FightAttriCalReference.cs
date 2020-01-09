@@ -7,6 +7,8 @@ using HittingDetection;
 //整个脚本中有若干个量并没有在本脚本内进行任何计算，就是起了个作为属性被参考的作用，原因在于为了保持BO武器脚本只参考BO系列文件的状态。
 public partial class FightAttriCalReference : MonoBehaviour
 {
+    public static List<Collider> AllMeatColliders = new List<Collider>();
+    
     [Tooltip("数据中心")]
     public Data_Center _Center;
         
@@ -15,9 +17,7 @@ public partial class FightAttriCalReference : MonoBehaviour
 
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     public ComboHitCount _ComboHitCount = new ComboHitCount();
-    
-    public static List<Collider> AllMeatColliders = new List<Collider>();
-
+        
     KnockOffCount _knockOffCount = new KnockOffCount();
     BeHitCount _BeHitCount = new BeHitCount();
     bool gettingdamage;
@@ -148,7 +148,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 deathknockOff = new V_Damage(
                               DamageType.deathknockoff,
                               processingD._WeaponPosAdjustMode,
-                              processingD.damageHappenPoint,
+                              processingD.damageHappenPoint,processingD.CutRotation,
                               processingD.AttackerT_foward,
                               processingD.AttackerT_pos,
                               processingD.fromWeapon);
@@ -181,10 +181,10 @@ public partial class FightAttriCalReference : MonoBehaviour
     {
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
-            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
+            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
                                                                    v_Damage.effectPath,
                                                                    v_Damage.damageHappenPoint,
-                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
         }
         else
@@ -195,7 +195,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
                                                                    v_Damage.effectPath,
                                                                    v_Damage.damageHappenPoint,
-                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                     //PlayTargetHitSound("light_hit");
                     break;
@@ -203,7 +203,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
                                                                    v_Damage.effectPath,
                                                                    v_Damage.damageHappenPoint,
-                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                     //PlayTargetHitSound("light_hit");
                     break;
@@ -211,7 +211,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
                                                                    v_Damage.effectPath,
                                                                    v_Damage.damageHappenPoint,
-                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                     //PlayTargetHitSound("heavy_hit");
                     break;
@@ -219,29 +219,29 @@ public partial class FightAttriCalReference : MonoBehaviour
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
                                                                    v_Damage.effectPath,
                                                                    v_Damage.damageHappenPoint,
-                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                     //PlayTargetHitSound("super_hit");
                     break;
                 case DamageType.light_block:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
                                                    v_Damage.effectPath,
                                                    v_Damage.damageHappenPoint,
-                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                   v_Damage.CutRotation,
                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                 break;
                 case DamageType.heavy_block:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks",
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
                                                    v_Damage.effectPath,
                                                    v_Damage.damageHappenPoint,
-                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                   v_Damage.CutRotation,
                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                 break;
                 default:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
                                                                    v_Damage.effectPath,
                                                                    v_Damage.damageHappenPoint,
-                                                                   Quaternion.LookRotation(v_Damage.weaponsCutDirection, Vector3.up),
+                                                                   v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
                     //PlayTargetHitSound("light_hit");
                     break;
@@ -264,7 +264,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
             return;
-        }        
+        }
         _ComboHitCount.HitCountInterrupt();
         switch(_dmg.damage_type)
         {

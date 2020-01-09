@@ -23,7 +23,7 @@ public class Hurt_State : AI_State {
         _Animator.applyRootMotion = false;
         _FightAttriCalReference.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
-        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
 
         touchingEnemyBody = _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody;//这个奇葩设定的逻辑是，如果守击的瞬间我角色贴着敌人的肉，那么攻击给我的推力就包括一个敌人前方的力。没错这个是个简化逻辑，其他敌人摸到我的话我也受到攻击方正前推力。
         hurtclips = AnimationResourceLoader.SeriesAnimationClipsDic[_AIStateRunner.characterType + "/basic_hurts"];
@@ -61,7 +61,7 @@ public class Hurt_State : AI_State {
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
                                                                 newValue._WeaponPosAdjustMode,   
-                                                                    newValue.damageHappenPoint, 
+                                                                    newValue.damageHappenPoint, newValue.CutRotation,
                                                                         newValue.AttackerT_foward,
                                                                             newValue.AttackerT_pos, 
                                                                                 newValue.fromWeapon));

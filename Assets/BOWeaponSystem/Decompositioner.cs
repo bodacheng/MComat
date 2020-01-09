@@ -61,14 +61,14 @@ public class Decompositioner : MonoBehaviour {
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
                         _HitBox.DisableMarkers();
-                        StopEmissions();
+                        StopEmissions(false);
                     }
                     if (_HitBox.GetOwnerFightAttriCalReference() != null)
                     {
                         if (_HitBox.GetOwnerFightAttriCalReference().IFgettingDamage())
                         {
                             _HitBox.DisableMarkers();
-                            StopEmissions();
+                            StopEmissions(false);
                         }
                     }
                     break;
@@ -76,7 +76,7 @@ public class Decompositioner : MonoBehaviour {
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
                         _HitBox.DisableMarkers();
-                        StopEmissions();
+                        StopEmissions(true);
                     }
                     break;
             }
@@ -99,7 +99,7 @@ public class Decompositioner : MonoBehaviour {
             case 1:
                 if (counter > stop_emission_delay)
                 {
-                    StopEmissions();
+                    StopEmissions(false);
                     phase = 2;
                 }
                 break;
@@ -117,10 +117,15 @@ public class Decompositioner : MonoBehaviour {
         }
     }
 
-    public void StopEmissions()
+    public void StopEmissions(bool clearParticles)
     {
         if (to_be_stop_emissions != null)
-            to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        {
+            if (clearParticles)
+                to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            else
+                to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
     }
 
     public void SetMaterialsAlpha(float a)

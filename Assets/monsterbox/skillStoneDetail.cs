@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace mainMenu
 {
-    public class skillStoneDetail : MonoBehaviour
+    public class SkillStoneDetail : MonoBehaviour
     {
         [Space(2)]
         [Header("技能信息")]
@@ -26,7 +26,7 @@ namespace mainMenu
         [Header("EXTypes")]
         public GameObject Ex1Icon,Ex2Icon,Ex3Icon;
         
-        public void showSkillStoneExType(int eX)
+        public void ShowSkillStoneExType(int eX)
         {
             switch (eX)
             {
@@ -58,7 +58,7 @@ namespace mainMenu
             }
         }
         
-        public void Switchusingmonstericon(string stonemonsterOfPlayerId)
+        public void SwitchUsingMonsterIcon(string stonemonsterOfPlayerId)
         {
             SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(stonemonsterOfPlayerId);
             if (SkillStoneOfPlayerInfoModel != null)

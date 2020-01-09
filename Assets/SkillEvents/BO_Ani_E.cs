@@ -51,12 +51,12 @@ public class BO_Ani_E : MonoBehaviour
             }
         }
         
-        public void CloseEffectsOnBodyParts()
+        public void CloseEffectsOnBodyParts(bool clearParticles)
         {
             foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in Ani_E.EffectsOnBodyParts)
             {
                 if (keyValuePair.Value != null)
-                    keyValuePair.Value.StopEmissions();
+                    keyValuePair.Value.StopEmissions(clearParticles);
             }
         }
     }
@@ -271,7 +271,7 @@ public class BO_Ani_E : MonoBehaviour
         {
             if (EffectsOnBodyParts[target] != null)
             {
-                EffectsOnBodyParts[target].StopEmissions();
+                EffectsOnBodyParts[target].StopEmissions(true);
                 EffectsOnBodyParts[target].GetPositionConstraint().constraintActive = false;
             }
             EffectsOnBodyParts[target] = effect; 
@@ -355,28 +355,31 @@ public class BO_Ani_E : MonoBehaviour
         switch (part)
         {
             case "right_hand":
-                target = this.right_hand;
+                target = right_hand;
             break;
             case "left_hand":
-                target = this.left_hand;
+                target = left_hand;
                 break;
             case "right_foot":
-                target = this.right_foot;
+                target = right_foot;
                 break;
             case "left_foot":
-                target = this.left_foot;
+                target = left_foot;
                 break;
             case "head":
-                target = this.head;
+                target = head;
                 break;
             case "tail":
-                target = this.tail;
+                target = tail;
+                break;
+            case "center":
+                target = _DATA_CENTER.geometryCenter;
                 break;
             case null:
-                target = this._DATA_CENTER.WholeT;
+                target = _DATA_CENTER.WholeT;
                 break;
             default:
-                target = this._DATA_CENTER.WholeT;
+                target = _DATA_CENTER.WholeT;
                 break;
         }
         processingHitBox.transform.position = target.position;

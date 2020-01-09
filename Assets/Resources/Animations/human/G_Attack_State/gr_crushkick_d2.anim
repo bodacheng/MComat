@@ -102815,28 +102815,14 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.36666667
-    functionName: SetRightFootMarkerManager
-    data: in
+    functionName: MagicForward
+    data: v_slash
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.38333333
-    functionName: SetDamageType
-    data: 2
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 2
+    floatParameter: 0.8
+    intParameter: 0
     messageOptions: 0
   - time: 0.46666667
     functionName: turn_on_flag
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.48333332
-    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

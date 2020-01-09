@@ -395,7 +395,6 @@ MonoBehaviour:
   C2DragAndDropCell: {fileID: 1031694323}
   C3DragAndDropCell: {fileID: 1697051136}
   ConfirmSkillChangeButton: {fileID: 244027357}
-  _LoadingCanvas: {fileID: 1278362472}
   _skillStoneDetail: {fileID: 1003711765}
   remainCharges:
   - {fileID: 2119374437}
@@ -45369,7 +45368,7 @@ GameObject:
   - component: {fileID: 1003711766}
   - component: {fileID: 1003711765}
   m_Layer: 0
-  m_Name: skillStoneDetail
+  m_Name: SkillStoneDetail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47069,7 +47068,6 @@ MonoBehaviour:
   _ChaptersManager: {fileID: 1270620268}
   _SelfFightManager: {fileID: 1058272045}
   _gotchaManager: {fileID: 6305337}
-  _LoadingCanvas: {fileID: 1278362472}
   MainMenuCanvas: {fileID: 1040811359}
   QuestInfoT: {fileID: 1632732601}
   JiNengRongLian_selectT: {fileID: 1611481828}
@@ -54349,12 +54347,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237879377}
   m_CullTransparentMesh: 0
---- !u!4 &1239128816 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4271324824425274, guid: b559dd800e2df4251b38f29559e28a25,
-    type: 3}
-  m_PrefabInstance: {fileID: 1443854674}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1241615571
 GameObject:
   m_ObjectHideFlags: 0
@@ -64602,10 +64594,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1941979242}
     m_Modifications:
-    - target: {fileID: 1901574844709672, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4271324824425274, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -64637,6 +64625,10 @@ PrefabInstance:
     - target: {fileID: 4271324824425274, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901574844709672, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 198289837646463472, guid: b559dd800e2df4251b38f29559e28a25,
         type: 3}
@@ -64674,6 +64666,11 @@ PrefabInstance:
     - {fileID: 114582061767031788, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
     - {fileID: 82873238966871808, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b559dd800e2df4251b38f29559e28a25, type: 3}
+--- !u!4 &1443854675 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1443854674}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445595802
 GameObject:
   m_ObjectHideFlags: 0
@@ -78708,7 +78705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b64822b218944cc8b599131a14206d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preparingScene: {fileID: 1042094261}
   UIT: {fileID: 1323591891}
   team1back: {fileID: 4599398633465206963}
   team1front: {fileID: 4599398632746346849}
@@ -84540,7 +84536,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1239128816}
+  - {fileID: 1443854675}
   m_Father: {fileID: 1040811360}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

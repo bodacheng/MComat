@@ -44,7 +44,9 @@ namespace HittingDetection
                             switch (collision.on_weapon_holder)
                             {
                                 case DamageType.stagger:
-                                    V_Damage new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, _Shields_Hit[i1].position, Vector3.zero, TheS.transform.position, null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    V_Damage new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, 
+                                                                        _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                                                            TheS.transform.position, _myOwnerCalReference.transform.position ,null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
                                     _myOwnerCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -59,17 +61,23 @@ namespace HittingDetection
                             {
                                 case DamageType.light_block:
                                     //Vector3 jiuzhengweizhi;
-                                    V_Damage new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    V_Damage new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, 
+                                                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                                                            attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
-                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward,
+                                                                 _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                                                    attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
-                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, _WeaponHolderCenter.position, attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, 
+                                                                _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                                                    attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:

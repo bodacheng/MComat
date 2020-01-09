@@ -62,35 +62,41 @@ namespace HittingDetection
         public Vector3 AttackerT_pos;
         public BO_Marker_Manager fromWeapon;
         public SpecialApply specialApply = SpecialApply.none;
-        
-        public V_Damage() { }
-
         public string effectPath;
         public FightAttriCalReference victim;
-        public Vector3 weaponsCutDirection;
-        public V_Damage(FightAttriCalReference _Raw_Target_Instance, Vector3 _StartPoint, Vector3 _Direction)
+        public Quaternion CutRotation;
+        
+        public V_Damage() { }
+        public V_Damage(FightAttriCalReference _Raw_Target_Instance, Vector3 _StartPoint, Quaternion _CutRotation)
         {
             victim = _Raw_Target_Instance;
             damageHappenPoint = _StartPoint;
-            weaponsCutDirection = _Direction;
+            CutRotation = _CutRotation;
         }
-        
-        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon)
+
+        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, 
+                        Vector3 damageHappenPoint, Quaternion _CutRotation,
+                            Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon)
         {
             this.damage_type = damage_type;
             this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
             this.damageHappenPoint = damageHappenPoint;
+            CutRotation = _CutRotation;
             this.fromWeapon = fromWeapon;
             this.AttackerT_foward = AttackerT_foward;
             this.AttackerT_pos = AttackerT_pos;
             AT = this.fromWeapon != null ? this.fromWeapon.GetFixedAT(): 0;
             specialApply = SpecialApply.none;
         }
-        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, Vector3 damageHappenPoint, Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon,string effectPath,SpecialApply specialApply)
+        public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, 
+                            Vector3 damageHappenPoint, Quaternion _CutRotation,
+                                Vector3 AttackerT_foward, Vector3 AttackerT_pos, 
+                                    BO_Marker_Manager fromWeapon,string effectPath,SpecialApply specialApply)
         {
             this.damage_type = damage_type;
             this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
             this.damageHappenPoint = damageHappenPoint;
+            CutRotation = _CutRotation;
             this.fromWeapon = fromWeapon;
             this.AttackerT_foward = AttackerT_foward;
             this.AttackerT_pos = AttackerT_pos;

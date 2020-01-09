@@ -1,66 +1,74 @@
 ﻿using UniRx;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ResistanceManager : MonoBehaviour
 {
-    public HiddenMethods hiddenMethods;
-
-    public ShaderManager _ShaderManager;
     public ReactiveProperty<int> Resistance { get; set; } = new ReactiveProperty<int>(0);
-
-    int nextcountereventneeddamagecount;
-    string nextcounterevent;
-
-    void Awake()
-    {
-        hiddenMethods = new HiddenMethods(this);
-    }
+    public Data_Center data_Center;
+    
+    int temp;
+    readonly List<SingleAssignmentDisposable> disposabletasks = new List<SingleAssignmentDisposable>();
     
     public void ResistanceUp(AnimationEvent R)
     {
-        //defaultPools.Instance.GenerateEffect("resistanceUp", null, _healthCenterTransform.position, _healthCenterTransform.rotation, null);
         Resistance.Value += R.intParameter;
         if (Resistance.Value > 0)
         {
-            if (_ShaderManager != null)
-                _ShaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), (float)Resistance.Value / 5, 0.05f);
+            if (data_Center._ShaderManager != null)
+                data_Center._ShaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), (float)Resistance.Value / 5, 0.05f);
         }
         else
         {
-            if (_ShaderManager != null)
-                _ShaderManager.RimEffectsClear();
+            if (data_Center._ShaderManager != null)
+                data_Center._ShaderManager.RimEffectsClear();
         }
-        nextcountereventneeddamagecount = R.intParameter - 1;
-        nextcounterevent = R.stringParameter;
+                      
+        switch (R.stringParameter)
+        {
+            case "resistup":
+                UnityEngine.Events.UnityAction eventStart = () =>
+                {
+                    Resistance.Value += 50;
+                    data_Center._SkillCancelFlag.turn_on_flag();
+                    EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter);
+                };
+                UnityEngine.Events.UnityAction eventEnd = () =>
+                {
+                    Resistance.Value = 0;
+                };
+                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 1f, eventEnd);
+                temp = Resistance.Value;
+                var disposable = new SingleAssignmentDisposable();
+                disposabletasks.Add(disposable);
+                disposable.Disposable = Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    if (Resistance.Value < temp)
+                    {
+                        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
+                        disposable.Dispose();
+                    }
+                });
+                break;
+        }
     }
-            
+    
     public void ResistanceClear()
     {
         Resistance.Value = 0;
-        if (_ShaderManager != null)
-            _ShaderManager.RimEffectsClear();
-    }
-    
-    public class HiddenMethods
-    {
-        readonly ResistanceManager resistanceManager;
-        public HiddenMethods(ResistanceManager _ResistanceManager)
+        if (data_Center._ShaderManager != null)
+            data_Center._ShaderManager.RimEffectsClear();
+        if (disposabletasks.Count>0)
         {
-            resistanceManager = _ResistanceManager;
-        }
-
-        //那么这个函数现在有一个作用在于为反击触发事件做准备。
-        public string GetNextCounterEventName()
-        {
-            return resistanceManager.nextcounterevent;
-        }
-        public void SetNextCounterEventName(string name)
-        {
-            resistanceManager.nextcounterevent = name;
-        }
-        public int GetNextCounterEventDamageTriggerAmount()
-        {
-            return resistanceManager.nextcountereventneeddamagecount;
+            foreach (SingleAssignmentDisposable _d in disposabletasks)
+            {
+                if (!_d.IsDisposed)
+                {
+                    _d.Dispose();
+                }
+            }
+            disposabletasks.Clear();
         }
     }
 }

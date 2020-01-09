@@ -46,7 +46,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 517a38c489bf17042a033bc233bdbebb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cecf0fbb3d560cc4dae3dfd6d02f762c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1.4
@@ -4742,11 +4742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
   _HitBox: {fileID: 0}
-  positionConstraint: {fileID: 0}
-  danMuTest: {fileID: 0}
-  bullet_GPS: {fileID: 0}
+  TrackControl: {fileID: 0}
   DestructionDelay: 0.5
   stop_emission_delay: 0.3
   to_be_faded_renderers: []
@@ -5051,7 +5048,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5104,7 +5101,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -5157,7 +5154,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -5210,7 +5207,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:

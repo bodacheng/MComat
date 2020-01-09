@@ -6,18 +6,18 @@ namespace mainMenu
 {
     public class SkillStoneBoxTabEffectsManager : MonoBehaviour
     {
-        IDictionary<Zokusei, zokuseiSkillStoneTagsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiSkillStoneTagsGroup>();
-        zokuseiSkillStoneTagsGroup _focusingButtonEffectsGroup;
+        IDictionary<Zokusei, ZokuseiSkillStoneTagsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, ZokuseiSkillStoneTagsGroup>();
+        ZokuseiSkillStoneTagsGroup _focusingButtonEffectsGroup;
         GameObject triggerExplosionPretab0;
         ParticleSystem triggerExplosion0;
         
         public IEnumerator StartUp()
         {
-            zokuseiSkillStoneTagsGroup red = new zokuseiSkillStoneTagsGroup();
-            zokuseiSkillStoneTagsGroup blue = new zokuseiSkillStoneTagsGroup();
-            zokuseiSkillStoneTagsGroup green = new zokuseiSkillStoneTagsGroup();
-            zokuseiSkillStoneTagsGroup dark = new zokuseiSkillStoneTagsGroup();
-            zokuseiSkillStoneTagsGroup _light = new zokuseiSkillStoneTagsGroup();
+            ZokuseiSkillStoneTagsGroup red = new ZokuseiSkillStoneTagsGroup();
+            ZokuseiSkillStoneTagsGroup blue = new ZokuseiSkillStoneTagsGroup();
+            ZokuseiSkillStoneTagsGroup green = new ZokuseiSkillStoneTagsGroup();
+            ZokuseiSkillStoneTagsGroup dark = new ZokuseiSkillStoneTagsGroup();
+            ZokuseiSkillStoneTagsGroup _light = new ZokuseiSkillStoneTagsGroup();
     
             red.INI_forSkillStoneBox(Zokusei.redMagic,transform);
             blue.INI_forSkillStoneBox(Zokusei.blueMagic,transform);
@@ -38,13 +38,13 @@ namespace mainMenu
         public void CloseShowingZokuseiTagEffects()
         {
             if (_focusingButtonEffectsGroup != null)
-                _focusingButtonEffectsGroup.close_skillstoneboxtageffects();
+                _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
         }
         
         public void SwitchZokuseiButtons(Vector3 normaltagpos,Vector3 ex1tagpos,Vector3 ex2tagpos,Vector3 ex3tagpos, Zokusei zokusei)
         {
             if (_focusingButtonEffectsGroup != null)
-                _focusingButtonEffectsGroup.close_skillstoneboxtageffects();
+                _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
             
             if (zokuseiButtonEffects.ContainsKey(zokusei))
             {

@@ -59,7 +59,7 @@ public class Knock_Off_State : AI_State
             processingBlood.transform.rotation = Quaternion.identity;
         }
         _xz = newValue.AttackerT_foward;
-        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
     }
 
     public override bool Naturally_exit_condition()

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Personality_events : MonoBehaviour
 {
@@ -35,14 +33,20 @@ public class Personality_events : MonoBehaviour
     {
         turnRightEnergyBlade(false);
     }
-    private void turnRightEnergyBlade(bool _on)
+    void turnRightEnergyBlade(bool _on)
     {
         if (right_sword != null)
         {
             if (_on)
+            {
+                right_sword.gameObject.SetActive(true);
                 right_sword.Play(true);
+            }
             else
+            {
+                right_sword.gameObject.SetActive(false);
                 right_sword.Stop(true);
+            }
         }
     }
     public void turn_on_Left_energy_blade()
@@ -53,14 +57,20 @@ public class Personality_events : MonoBehaviour
     {
         turnLeftEnergyBlade(false);
     }
-    private void turnLeftEnergyBlade(bool _on)
+    void turnLeftEnergyBlade(bool _on)
     {
         if (left_sword != null)
         {
             if (_on)
+            {
+                left_sword.gameObject.SetActive(true);
                 left_sword.Play(true);
+            }
             else
+            {
+                left_sword.gameObject.SetActive(false);
                 left_sword.Stop(true);
+            }
         }
     }
 }

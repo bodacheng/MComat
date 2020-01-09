@@ -95,7 +95,7 @@ public class G_M_Attack_State : AI_State {
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
-        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts();
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(false);
 		_Animator.applyRootMotion = false;
 	}
 

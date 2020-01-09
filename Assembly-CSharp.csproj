@@ -82,7 +82,7 @@
     <Compile Include="Assets\AI\AI_states\States_Dictionary.cs" />
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
-    <Compile Include="Assets\AI\buttons\zokuseiSkillStoneTagsGroup.cs" />
+    <Compile Include="Assets\AI\buttons\ZokuseiSkillStoneTagsGroup.cs" />
     <Compile Include="Assets\AI\Control\InputManager.cs" />
     <Compile Include="Assets\AI\Soul\AIRunnerGUI.cs" />
     <Compile Include="Assets\AI\Soul\AIStateRunner.cs" />
@@ -369,7 +369,7 @@
     <Compile Include="Assets\monsterbox\MonsterBox.cs" />
     <Compile Include="Assets\monsterbox\monsterboxFilter.cs" />
     <Compile Include="Assets\monsterbox\SkillStoneBoxTabEffectsManager.cs" />
-    <Compile Include="Assets\monsterbox\skillStoneDetail.cs" />
+    <Compile Include="Assets\monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
     <Compile Include="Assets\POFX\Scripts\FX\POFX_Blur.cs" />
@@ -545,6 +545,7 @@
     <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Distortion.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Blend_CenterGlow.shader" />
+    <None Include="Assets\ErbGameArt\Glowing orbs Vol 3\Demo scene\Add_CenterGlow.txt" />
     <None Include="Assets\Resources\AIScripts\human\1118_atest.xml" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\READ ME.txt" />
     <None Include="Assets\POFX\Shaders\Resources\ColorSwap.shader" />
@@ -552,6 +553,7 @@
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ACES.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
+    <None Include="Assets\ErbGameArt\Glowing orbs Vol 3\Demo scene\Blend_CenterGlow.txt" />
     <None Include="Assets\JsonSupport\UnityPackage\JsonNet.unitypackage.json" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Tonemapping.cginc" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
@@ -584,6 +586,7 @@
     <None Include="Assets\EasyTouchBundle\Readme.txt" />
     <None Include="Assets\POFX\Shaders\Resources\Desaturate.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_EdgeSoft.shader" />
+    <None Include="Assets\ErbGameArt\Glowing orbs Vol 3\Demo scene\Readme.txt" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleAddSoftEffect.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />

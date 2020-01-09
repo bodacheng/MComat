@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class zokuseiSkillStoneTagsGroup
+public class ZokuseiSkillStoneTagsGroup
 {
     public Zokusei zokusei;
     
     //技能石盒分类系成员
     public IDictionary<int, ParticleSystem> buttonEffectsSetsForSkillStoneBox = new Dictionary<int, ParticleSystem>(); 
 
-    public void close_skillstoneboxtageffects()
+    public void Close_skillstoneboxtageffects()
     {
         foreach(KeyValuePair<int, ParticleSystem> keyValuePair in buttonEffectsSetsForSkillStoneBox)
         {

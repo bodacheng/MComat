@@ -143974,23 +143974,23 @@ AnimationClip:
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0
   - time: 0.36666667
     functionName: SetLeftFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0
-  - time: 0.53333336
+  - time: 0.6
     functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5833333
+  - time: 0.68333334
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
