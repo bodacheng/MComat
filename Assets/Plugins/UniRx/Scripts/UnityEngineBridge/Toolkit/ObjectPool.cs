@@ -39,7 +39,7 @@ namespace UniRx.Toolkit
         {
             instance.gameObject.SetActive(true);
         }
-        
+                
         /// <summary>
         /// Called before return to pool, useful for set inactive object(it is default behavior).
         /// </summary>

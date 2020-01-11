@@ -25,7 +25,7 @@ namespace HittingDetection
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
         bool _startActivated = true;
-    
+
         [Tooltip("damageTypeOfTheWeapon")]
         [SerializeField]
         DamageType damage_type = DamageType.light_damage;
@@ -70,13 +70,13 @@ namespace HittingDetection
 
         FightAttriCalReference _myOwnerCalReference;
         bool _markersAreEnabled;
-        TeamConfig teamConfig;
+        TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform attackerWholeTransform;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         Transform _MarkersParent;
         bool HitFlesh;
         bool HitShield;
-        BO_Marker[] _markers;
+        Marker[] _markers;
         List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
         List<Transform> _Used_Targets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
         List<Transform> _Shields_Hit = new List<Transform>();
@@ -85,7 +85,6 @@ namespace HittingDetection
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         Decompositioner processingBlood;
         bool traditionalDefendMode;
-        BO_Shield TheS;
         public int CurrentHP { get; set; }
         string personalEffectPath;
 
@@ -110,9 +109,8 @@ namespace HittingDetection
         {
             return personalEffectPath;
         }
-
-        //OnEnable函数当下所有的行动都是可以在自客户端和他客户端平等进行//onenable函数是你把一个物体从对象池取出来后立刻就会执行，这样你需要仔细看这个函数和其他一些初始化相关的函数存不存在什么顺序错误
-        public void Local_OnEnable()
+        
+        public void MarkersEnablingStarts()
         {
             if (_startActivated)
             {
@@ -124,7 +122,7 @@ namespace HittingDetection
         {
             CurrentHP = weaponHP;
             DisableMarkers();
-            SetTeamConfig(null);
+            SetTeamConfig(TeamConfig.defaultSet);
         }
 
         public void SetReferenceTransformInfo(Transform centerT,Transform WholeT)
@@ -148,43 +146,33 @@ namespace HittingDetection
         public float GetFixedAT()
         {
             if (_myOwnerCalReference == null)
+            {
+                Debug.Log("here");
                 return 0;
-            if (weaponHP <= 0)
-                return _myOwnerCalReference.AT;
-            return _myOwnerCalReference.AT / weaponHP;
+            }
+            return weaponHP <= 0 ? _myOwnerCalReference.AT : _myOwnerCalReference.AT / weaponHP;
         }
-        
+
         public void SetTeamConfig(TeamConfig teamConfig)
         {
             this.teamConfig = teamConfig;
-            if (teamConfig == null)
-                teamConfig = TeamConfig.defaultSet;
-            this.gameObject.layer = 0;//武器父节点为默认层，武器层的是marker
             for (int i = 0; i < _markers.Length; i++)
             {
-                BO_Marker _Marker = _markers[i];
+                Marker _Marker = _markers[i];
                 _Marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
                 _Marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
                 _Marker.gameObject.layer = teamConfig.myWeaponLayer;
             }
         }
-        public TeamConfig GetTeamConfig()
-        {
-            return teamConfig;
-        }
 
         // EnableMarkers的运行归根结底也都是建立在动画事件上，而动画片段的播放在双方客户端上是平等的，所以理论上说也没有必须针对主客客户端区别执行的操作
         public void EnableMarkers()
         {
-            if (_Used_Targets != null)
-                _Used_Targets.Clear();
+            _Used_Targets.Clear();
             _Shields_Hit.Clear();
-            for (int i2 = 0; i2 < _markers.Length; i2++)
+            for (int i = 0; i < _markers.Length; i++)
             {
-                _markers[i2]._tempPos = _markers[i2].transform.position;
-                //_markers[i2].clearDetection();
-                if (teamConfig != null)
-                    _markers[i2].gameObject.layer = teamConfig.myWeaponLayer;
+                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer);
             }
             _markersAreEnabled = true;
         }
@@ -192,44 +180,32 @@ namespace HittingDetection
         public void DisableMarkers()
         {
             _markersAreEnabled = false;
-            if (_markers != null)
-            {
-                for (int i2 = 0; i2 < _markers.Length; i2++)
-                {
-                    _markers[i2]._tempPos = _markers[i2].transform.position;
-                }
-            }
-            if (_Used_Targets != null)
-                _Used_Targets.Clear();
+            _Used_Targets.Clear();
             _Shields_Hit.Clear();
             if (_markers != null)
             {
-                for (int i2 = 0; i2 < _markers.Length; i2++)
+                for (int i = 0; i < _markers.Length; i++)
                 {
-                    _markers[i2]._tempPos = _markers[i2].transform.position;
-                    _markers[i2].ClearDetection();
-                    _markers[i2].gameObject.layer = 0;
+                    _markers[i].DisableMarkerProcess();
                 }
             }
         }
 
-        public void ClearMarkersDectections()
+        void ClearMarkersDectections()
         {
             for (int i2 = 0; i2 < _markers.Length; i2++)
             {
-                _markers[i2].ClearDetection();
+                _markers[i2].ClearMarkerProcess();
             }
         }
 
         public void ClearTargets()
         {
-            if (_Used_Targets != null)
-                _Used_Targets.Clear();
+            _Used_Targets.Clear();
             _Shields_Hit.Clear();
-            for (int i2 = 0; i2 < _markers.Length; i2++)
+            for (int i = 0; i < _markers.Length; i++)
             {
-                _markers[i2]._tempPos = _markers[i2].transform.position;
-                _markers[i2].ClearDetection();
+                _markers[i].ClearMarkerProcess();
             }
         }
 

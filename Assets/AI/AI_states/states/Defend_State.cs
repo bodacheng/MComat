@@ -53,6 +53,8 @@ public class Defend_State : AI_State
 
     public override bool Enter_condition_priority1()
     {
+        if (_ResistanceManager.Resistance.Value > 0)
+            return false;
         if (_FightAttriCalReference.IFgettingDamage())
             return true;
         damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
@@ -75,7 +77,7 @@ public class Defend_State : AI_State
 
     public override bool Enter_condition_priority3()
     {
-        return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0);
+        return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
     }
 
     public override bool Naturally_exit_condition() 

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum Team : int
+public enum Team
 {
     none = 0,
     player1 = 1,
@@ -45,10 +44,10 @@ public class TeamConfig
     {
         this.myTeam = myTeam;
         this.myEnemies = myEnemies;
-        refreshMyLayers();
+        RefreshMyLayers();
     }
 
-    public void refreshMyLayers()
+    public void RefreshMyLayers()
     {
         myEnemyLayers = new List<int>();
         switch (myTeam)
@@ -120,7 +119,7 @@ public class TeamConfig
                     break;
             }
         }
-        this.myEnemyTags = EnemyTags.ToArray();
+        myEnemyTags = EnemyTags.ToArray();
         deadLayer = 14;
     }
 }

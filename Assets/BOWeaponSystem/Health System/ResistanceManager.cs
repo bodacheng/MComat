@@ -37,7 +37,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     Resistance.Value = 0;
                 };
-                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 1f, eventEnd);
+                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.5f, eventEnd);
                 temp = Resistance.Value;
                 var disposable = new SingleAssignmentDisposable();
                 disposabletasks.Add(disposable);
@@ -56,7 +56,6 @@ public class ResistanceManager : MonoBehaviour
     
     public void ResistanceClear()
     {
-        Resistance.Value = 0;
         if (data_Center._ShaderManager != null)
             data_Center._ShaderManager.RimEffectsClear();
         if (disposabletasks.Count>0)
@@ -70,5 +69,6 @@ public class ResistanceManager : MonoBehaviour
             }
             disposabletasks.Clear();
         }
+        Resistance.Value = 0;
     }
 }

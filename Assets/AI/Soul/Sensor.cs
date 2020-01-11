@@ -14,7 +14,7 @@ public class Sensor : MonoBehaviour {
     LayerMask meAndEnemyLayermask;
     Collider[] _hits; //What was hit in this frame?
     RaycastHit[] _spherecastHits;
-    TeamConfig _TeamConfig;
+    TeamConfig _TeamConfig = TeamConfig.defaultSet;
 
     int DetectionInterval;
     bool DetectionLoopStarted;

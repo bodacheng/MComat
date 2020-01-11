@@ -105,7 +105,7 @@ public class TryEditALines : MainSceneProcess
                 return;
             }
             stage.localFight = this.TuroialFight;
-            stage._fightEventType = fightEventType.Tutorial_Basic;
+            stage._fightEventType = FightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
             _preparingScene.LoadFight(SceneMode.QuestFight, stage);
             this.ProcessEnd();

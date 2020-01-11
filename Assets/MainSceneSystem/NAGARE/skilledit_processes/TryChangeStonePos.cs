@@ -50,7 +50,7 @@ public class TryChangeStonePos : MainSceneProcess
                     yield break;
                 }
                 stage.localFight = this.TuroialFight;
-                stage._fightEventType = fightEventType.Tutorial_Story_AdamVsGuards;
+                stage._fightEventType = FightEventType.Tutorial_Story_AdamVsGuards;
                 stage.BattleGroundID = 2;
                 _preparingScene.LoadFight(SceneMode.QuestFight, stage);
                 this.ProcessEnd();

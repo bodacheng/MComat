@@ -33,7 +33,7 @@ namespace HittingDetection
                     if (!_Used_Targets.Contains(_Shields_Hit[i1])) //无论对墙壁，盾牌，还是伤害对象，每一轮攻击只会造成一次影响
                     {
                         WeaponEnergyExaust(_Shields_Hit[i1].position, _Shields_Hit[i1].rotation);
-                        TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
+                        BO_Shield TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
                         collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
                         // 在此向攻击方发送趔趄信号。这个地方是客户端对战时候逻辑困难的关键。
                         // 武器脚本虽然处理内容非常繁冗，但归结起来其实逻辑只有那几条，就是通过武器与hitbox以及盾牌的接触碰撞，来决定向健康体发送哪些信息。这些计算，原则上其实只需要一个客户端的逻辑去计算
@@ -114,7 +114,6 @@ namespace HittingDetection
                         _hitOnHealthBody._WeaponPosAdjustMode = _WeaponPosAdjustMode;
                         _hitOnHealthBody.AttackerT_foward = attackerWholeTransform.forward;
                         _hitOnHealthBody.AttackerT_pos = attackerWholeTransform.position;
-                        _hitOnHealthBody.fromWeapon = this;
                         _hitOnHealthBody.effectPath = personalEffectPath;
                         _hitOnHealthBody.specialApply = _specialApply;
 

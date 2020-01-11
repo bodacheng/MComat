@@ -35,7 +35,7 @@ public class Dash_Back_State : AI_State
 
     public override bool Enter_condition_priority2()
     {
-        return Sensor.GetNearbyDamagingWeaponColliders().Count > 0;
+        return (_FightAttriCalReference.IFgettingDamage() || Sensor.GetNearbyDamagingWeaponColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
     }
 
     //public override bool enter_condition_priority3()

@@ -17,7 +17,8 @@ public partial class FightAttriCalReference : MonoBehaviour
 
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     public ComboHitCount _ComboHitCount = new ComboHitCount();
-        
+    
+    V_Damage deathknockOff;
     KnockOffCount _knockOffCount = new KnockOffCount();
     BeHitCount _BeHitCount = new BeHitCount();
     bool gettingdamage;
@@ -142,23 +143,8 @@ public partial class FightAttriCalReference : MonoBehaviour
                     processingD.fromWeapon.GetOwnerFightAttriCalReference()._Center.Animation_Manger.FrameFreeze();
             }
             CurrentHp.Value -= processingD.AT;
-            if (CurrentHp.Value <= 0)
-            {
-                V_Damage deathknockOff;
-                deathknockOff = new V_Damage(
-                              DamageType.deathknockoff,
-                              processingD._WeaponPosAdjustMode,
-                              processingD.damageHappenPoint,processingD.CutRotation,
-                              processingD.AttackerT_foward,
-                              processingD.AttackerT_pos,
-                              processingD.fromWeapon);
-                ApplyDamage(deathknockOff);
-                _Center.IsDead.Value = true;
-                _Center.AIStateRunner.ChangeState("Death");
-                return; //重点在于，不再继续接下来的清空伤害列表操作。由死亡状态清空伤害列表，因为死亡状态需要这个列表来进行最后的击飞演出
-            }
         }
-        
+
         switch (processingD.specialApply)
         {
             case SpecialApply.gravitylost:
@@ -249,7 +235,6 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
     }
 
-    // 这个函数，是写的很丑陋，但如果纯粹是为了解决个人强迫症的话干脆别改了。其实这个产生的根本原因就是你非要把不同重量级的攻击给用枚举类型区分开
     public void ApplyDamage(V_Damage _dmg)
 	{
         _Center._ResistanceManager.Resistance.Value -= 1;
@@ -266,6 +251,11 @@ public partial class FightAttriCalReference : MonoBehaviour
             return;
         }
         _ComboHitCount.HitCountInterrupt();
+        
+        if (_dmg.AT >= (CurrentHp.Value + _Center._ResistanceManager.Resistance.Value))
+        {
+            _dmg.damage_type = DamageType.DeathKnockoff;
+        }
         switch(_dmg.damage_type)
         {
             case DamageType.slight_damage:
@@ -288,7 +278,8 @@ public partial class FightAttriCalReference : MonoBehaviour
             case DamageType.heavy_block:
             _Center.AIStateRunner.ChangeState("Defend",_dmg);
             break;
-            case DamageType.deathknockoff:
+            case DamageType.DeathKnockoff:
+            // 目前死亡状态不能统合到这处理
             _Center.AIStateRunner.ChangeState("Death",_dmg);
             break;
         }        
@@ -344,7 +335,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
 
     IDictionary<int, Shader> myDefaultMaterialsShaderDic;
-    private void RegisterMyDefaultMaterialsShaderDic()
+    void RegisterMyDefaultMaterialsShaderDic()
     {
         myDefaultMaterialsShaderDic = new Dictionary<int, Shader>();
         foreach (Renderer singleRenderer in GetComponentsInChildren<Renderer>())

@@ -24,19 +24,19 @@ public class FightSummaryProcess : NagareProcess
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
     }
     
-    public void afterSummary(fightEventType _fightEventType)
+    public void afterSummary(FightEventType _fightEventType)
     {
         switch (_fightEventType)
         {
-            case fightEventType.Arena:
+            case FightEventType.Arena:
                 break;
-            case fightEventType.Quest:
+            case FightEventType.Quest:
                 break;
-            case fightEventType.Tutorial_Basic:
+            case FightEventType.Tutorial_Basic:
                 AccountSet.instance._PlayerAccountInfo.accountprogress = playerAccountProgressStep.Tutorial;
                 this._NetFightScene.returnToFront();
                 break;
-            case fightEventType.Tutorial_Story_AdamVsGuards:
+            case FightEventType.Tutorial_Story_AdamVsGuards:
                 AccountSet.instance._PlayerAccountInfo.accountprogress = playerAccountProgressStep.Freedom;
                 this._NetFightScene.returnToFront();
                 break;

@@ -13,6 +13,7 @@ namespace mainMenu
         public preparingScene _preparingScene;
 
         public Transform selfFightUI;
+        public InputField HPinput;
         public Button FightStartBUtton;
 
         public Transform MuitiRaidModeIconsT;
@@ -43,6 +44,7 @@ namespace mainMenu
 
         void Start()
         {
+            HPinput.text = "500";
             stage = new StageScriptableObject
             {
                 BattleGroundID = 2
@@ -78,8 +80,8 @@ namespace mainMenu
         {
             MuitiRaidModeIconsT.gameObject.SetActive(true);
             RotationModeIconsT.gameObject.SetActive(false);
-            stage.fightModeType = fightModeType.combat;
-            stage._fightEventType = fightEventType.Self;
+            stage.fightModeType = FightModeType.combat;
+            stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
         }
@@ -88,8 +90,8 @@ namespace mainMenu
         {
             RotationModeIconsT.gameObject.SetActive(true);
             MuitiRaidModeIconsT.gameObject.SetActive(false);
-            stage.fightModeType = fightModeType.combat;
-            stage._fightEventType = fightEventType.Self;
+            stage.fightModeType = FightModeType.combat;
+            stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
         }
@@ -98,13 +100,13 @@ namespace mainMenu
         {
             MuitiRaidModeIconsT.gameObject.SetActive(true);
             RotationModeIconsT.gameObject.SetActive(false);
-            stage.fightModeType = fightModeType.combat;
-            stage._fightEventType = fightEventType.Self;
+            stage.fightModeType = FightModeType.combat;
+            stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.test;
         }
 
-        public IEnumerator FightStart()
+        public IEnumerator FightStart(float HP)
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             switch (stage.Team1Mode)
@@ -126,6 +128,7 @@ namespace mainMenu
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharacterDataInfo>)enumerator4.Current;
                     break;
             }
+            stage.HP = HP;
             stage.localFight = _selfFight;
             yield return _QuestPreparePage.GetReadyToBattle(stage, SceneMode.MyPetsFight);
             yield break;
@@ -363,7 +366,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                _preparingScene.mainProcessRunner.TriggerMainProcess(FightStart());
+                _preparingScene.mainProcessRunner.TriggerMainProcess(FightStart(float.Parse(HPinput.text)));
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

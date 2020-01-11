@@ -41,7 +41,7 @@ public partial class FightTeam : MonoBehaviour
     }
     
     // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-    public IEnumerator Instantiate(MultiDictionary<int, int, CharacterDataInfo> ChracterSets)
+    public IEnumerator Instantiate(MultiDictionary<int, int, CharacterDataInfo> ChracterSets,float HP)
     {
         switch (TeamMode)
         {
@@ -58,16 +58,19 @@ public partial class FightTeam : MonoBehaviour
                 InstantiateCharsIconsAndFloatHPBar_turnMode();
                 break;
         }
-        TeamsFightInitialize();
+        TeamsFightInitialize(HP);
         yield return null;
     }
 
-    void TeamsFightInitialize()
+    void TeamsFightInitialize(float wholeHP)
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
-            a_char._FightAttriCalReference.CurrentHp.Value = 9900f;
-            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => { RefreshHPBar(a_char, x); });
+            a_char._FightAttriCalReference.CurrentHp.Value = wholeHP;
+            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => 
+            {
+                RefreshHPBar(a_char, x, wholeHP);
+            });
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
@@ -81,10 +84,10 @@ public partial class FightTeam : MonoBehaviour
         _tempSideCharIcon.ResistBar.value = (float)data_Center._ResistanceManager.Resistance.Value / 10f;//抵抗槽最大10格   
     }
   
-    public void RefreshHPBar(Data_Center data_Center,float current_hp)
+    public void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
     {
         datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
-        _tempSideCharIcon.HpBar.value = current_hp / 500; 
+        _tempSideCharIcon.HpBar.value = current_hp / wholeHP; 
     }
 
     private TextMesh _hitcomboText;

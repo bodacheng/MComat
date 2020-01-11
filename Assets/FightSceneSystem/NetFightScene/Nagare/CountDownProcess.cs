@@ -28,16 +28,16 @@ public class CountDownProcess : NagareProcess
     {
         switch(FightSceneNote.Instance.nextBattle._fightEventType)
         {
-            case fightEventType.Quest:
+            case FightEventType.Quest:
                 FightSceneProcessesRunner.ChangeProcess(SceneStep.Fighting);
                 break;
-            case fightEventType.Tutorial_Basic:
+            case FightEventType.Tutorial_Basic:
                 FightSceneProcessesRunner.ChangeProcess(SceneStep.BasicTryTutorial);
                 break;
-            case fightEventType.Tutorial_Story_AdamVsGuards:
+            case FightEventType.Tutorial_Story_AdamVsGuards:
                 FightSceneProcessesRunner.ChangeProcess(SceneStep.Fighting);
                 break;
-            case fightEventType.Self:
+            case FightEventType.Self:
                 FightSceneProcessesRunner.ChangeProcess(SceneStep.Fighting);
                 break;
         }

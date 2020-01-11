@@ -130,6 +130,7 @@ public class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.MarkersEnablingStarts();
             if (processingHitBox._HitBox.onGroundMagic)
                 processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
             if (processingHitBox.TrackControl != null)
@@ -214,6 +215,7 @@ public class BO_Ani_E : MonoBehaviour
         {
             processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.MarkersEnablingStarts();
         }
         if (processingHitBox.TrackControl != null)
         {
@@ -334,7 +336,7 @@ public class BO_Ani_E : MonoBehaviour
         if (_DATA_CENTER._TeamConfig != null)
         {
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-            processingHitBox._HitBox.EnableMarkers();
+            processingHitBox._HitBox.MarkersEnablingStarts();
         }
     }
 
@@ -395,7 +397,7 @@ public class BO_Ani_E : MonoBehaviour
         if (_DATA_CENTER._TeamConfig != null)
         {
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-            processingHitBox._HitBox.EnableMarkers();
+            processingHitBox._HitBox.MarkersEnablingStarts();
         }
         OnLoadMagic = null;
     }
@@ -453,7 +455,7 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-        processingHitBox._HitBox.EnableMarkers();
+        processingHitBox._HitBox.MarkersEnablingStarts();
         OnLoadMagic = null;
     }
 }

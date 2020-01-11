@@ -32,12 +32,8 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     {
         instance.gameObject.SetActive(true);
         instance.Local_OnEnable();
-        if (instance._HitBox != null)
-        {
-            instance._HitBox.Local_OnEnable();
-        }
     }
-
+    
     // オブジェクトが空のときにInstantiateする関数
     protected override Decompositioner CreateInstance() 
     {

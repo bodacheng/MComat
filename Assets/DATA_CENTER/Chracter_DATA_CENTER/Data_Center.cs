@@ -15,7 +15,7 @@ using Soul;
 [RequireComponent(typeof(BlendShapeProxy))]
 public partial class Data_Center : MonoBehaviour
 {
-    public TeamConfig _TeamConfig;
+    public TeamConfig _TeamConfig = TeamConfig.defaultSet;
 
     public Zokusei Zokusei;
     public Transform geometryCenter;
@@ -62,7 +62,7 @@ public partial class Data_Center : MonoBehaviour
         if (!phase1Initialized)
         {
             _BasicPhysicSupport.Rigidbody.useGravity = false;
-            BodyElementTagAndLayerSet(null);
+            BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(_FightAttriCalReference,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             string personalEffectsPath;
             switch (Zokusei)

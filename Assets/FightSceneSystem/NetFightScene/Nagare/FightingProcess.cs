@@ -55,7 +55,7 @@ public class FightingProcess : NagareProcess
         
         switch (FightSceneNote.Instance.nextBattle.fightModeType)
         {
-            case fightModeType.combat:
+            case FightModeType.combat:
                 _RealTimeGameProcessManager.FightingStepProcess();
                 break;
         }

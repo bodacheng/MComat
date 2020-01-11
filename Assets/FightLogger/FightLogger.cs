@@ -28,23 +28,45 @@ public class FightLogger : MonoBehaviour
             wholeteamCount += 1;
             foreach (Data_Center data_Center in pair.Value)
             {
-                data_Center.IsDead.Where(isDead => isDead == true)
+                var disposable = new SingleAssignmentDisposable();
+                disposable.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    TeamDeadMemberDictionary[pair.Key].Add(data_Center);
-                    if (pair.Value.Count == TeamDeadMemberDictionary[pair.Key].Count)
+                    if (data_Center.IsDead.Value == true)
                     {
-                        if (!deadTeam.Contains(pair.Key))
-                            deadTeam.Add(pair.Key);
-                    }
-                    if (wholeteamCount == deadTeam.Count + 1)
-                    {
-                        gameOver.Value = true;
-                        List<Team> allteams = TeamMembers.Keys.ToList();
-                        List<Team> _winner = allteams.Except(deadTeam).ToList();
-                        winner = _winner[0];
+                        TeamDeadMemberDictionary[pair.Key].Add(data_Center);
+                        if (pair.Value.Count == TeamDeadMemberDictionary[pair.Key].Count)
+                        {
+                            if (!deadTeam.Contains(pair.Key))
+                                deadTeam.Add(pair.Key);
+                        }
+                        if (wholeteamCount == deadTeam.Count + 1)
+                        {
+                            gameOver.Value = true;
+                            List<Team> allteams = TeamMembers.Keys.ToList();
+                            List<Team> _winner = allteams.Except(deadTeam).ToList();
+                            winner = _winner[0];
+                        }
+                        disposable.Dispose();
                     }
                 });
+                //data_Center.IsDead.Where(isDead => isDead == true)
+                //.Subscribe(_ =>
+                //{
+                //    TeamDeadMemberDictionary[pair.Key].Add(data_Center);
+                //    if (pair.Value.Count == TeamDeadMemberDictionary[pair.Key].Count)
+                //    {
+                //        if (!deadTeam.Contains(pair.Key))
+                //            deadTeam.Add(pair.Key);
+                //    }
+                //    if (wholeteamCount == deadTeam.Count + 1)
+                //    {
+                //        gameOver.Value = true;
+                //        List<Team> allteams = TeamMembers.Keys.ToList();
+                //        List<Team> _winner = allteams.Except(deadTeam).ToList();
+                //        winner = _winner[0];
+                //    }
+                //});
             }
         }
         winner = Team.none;

@@ -13,11 +13,11 @@ public class StageScriptableObject : ScriptableObject
     public int BattleGroundID;
     
     [SerializeField]
-    public string battleNameENG = null;
+    public string battleNameENG;
     [SerializeField]
-    public string battleNameJPG = null;
+    public string battleNameJPG;
     [SerializeField]
-    public string battleNameCH = null;
+    public string battleNameCH;
 
     [SerializeField]
     public PlayableAsset beforefightstory;
@@ -27,10 +27,11 @@ public class StageScriptableObject : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
 
+    public float HP;
     public LocalFight localFight;
     
-    public fightModeType fightModeType = fightModeType.combat;
-    public fightEventType _fightEventType = fightEventType.Arena;
+    public FightModeType fightModeType = FightModeType.combat;
+    public FightEventType _fightEventType = FightEventType.Arena;
 
     public TeamMode Team1Mode = TeamMode.multiraid;
     public TeamMode Team2Mode = TeamMode.multiraid;
@@ -46,12 +47,12 @@ public class StageScriptableObject : ScriptableObject
     }
 #endif
     
-    public void loadLocalFightFromScript()//这个函数的运行必须十分谨慎
+    public void LoadLocalFightFromScript()//这个函数的运行必须十分谨慎
     {
         localFight = LocalFight.LoadOneLocalFightByScript(Script);    
     }
     
-    public List<string> getTeam1EnterRingLocalIds(LocalFight localFight)
+    public List<string> GetTeam1EnterRingLocalIds(LocalFight localFight)
     {
         List<string> enterRingLocalIDs = new List<string>();
         foreach(CharacterDataInfo _one in localFight.HeroSets.values)
@@ -68,7 +69,7 @@ public class StageScriptableObject : ScriptableObject
 // 系统会根据这个量来决定一场战斗结束后应该做什么。
 // 比如一个剧情战斗，他结束了后应该是播放某个动画片，
 // 再比如是自己打自己的一个战斗，结束后回到的应该是那个自己打自己的选人菜单。
-public enum fightEventType
+public enum FightEventType
 {
     Tutorial_Basic = 0,
     Tutorial_Story_AdamVsGuards = 3,
@@ -77,7 +78,7 @@ public enum fightEventType
     Self = 4,
 }
 
-public enum fightModeType
+public enum FightModeType
 {
     combat = 1,
     tower = 2,

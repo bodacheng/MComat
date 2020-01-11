@@ -53,12 +53,12 @@ namespace Soul
         public void SetPlayerMode(bool result)
         {
             playerMode = result;
-            this._inputManager.PlayerInputting = false;
+            _inputManager.PlayerInputting = false;
         }
         
         public bool IfRunning()
         {
-            return empty_State != this.now_state;
+            return now_state != empty_State;
         }
 
         Inputs.Input _input;

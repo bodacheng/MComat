@@ -72,7 +72,6 @@ public class BoundaryControllByGod : MonoBehaviour {
             {
                 if (!oneBoy.IsDead.Value)
                 {
-                    Debug.Log("fixing");
                     battleRingCenter.y = oneBoy.WholeT.position.y;
                     distanceFromCharToCenter = (oneBoy.WholeT.position - battleRingCenter).magnitude;
                     if (distanceFromCharToCenter > BattleRingRadius)

@@ -67,16 +67,19 @@ namespace HittingDetection
         public Quaternion CutRotation;
         
         public V_Damage() { }
-        public V_Damage(FightAttriCalReference _Raw_Target_Instance, Vector3 _StartPoint, Quaternion _CutRotation)
+        public V_Damage(FightAttriCalReference _Raw_Target_Instance, Vector3 _StartPoint, Quaternion _CutRotation,BO_Marker_Manager fromWeapon)
         {
             victim = _Raw_Target_Instance;
             damageHappenPoint = _StartPoint;
             CutRotation = _CutRotation;
+            this.fromWeapon = fromWeapon;
+            AT = this.fromWeapon != null ? this.fromWeapon.GetFixedAT(): 0;
         }
 
         public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, 
                         Vector3 damageHappenPoint, Quaternion _CutRotation,
-                            Vector3 AttackerT_foward, Vector3 AttackerT_pos, BO_Marker_Manager fromWeapon)
+                            Vector3 AttackerT_foward, Vector3 AttackerT_pos, 
+                                BO_Marker_Manager fromWeapon)
         {
             this.damage_type = damage_type;
             this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
@@ -91,7 +94,8 @@ namespace HittingDetection
         public V_Damage(DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, 
                             Vector3 damageHappenPoint, Quaternion _CutRotation,
                                 Vector3 AttackerT_foward, Vector3 AttackerT_pos, 
-                                    BO_Marker_Manager fromWeapon,string effectPath,SpecialApply specialApply)
+                                    BO_Marker_Manager fromWeapon,
+                                        string effectPath,SpecialApply specialApply)
         {
             this.damage_type = damage_type;
             this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
@@ -124,7 +128,7 @@ namespace HittingDetection
         heavy_block = 5,//防御者受到较强攻击时所受到的较大震动
         normal_shield = 10,//普通防御罩
         hard_shield = 11,//强防御罩
-        deathknockoff = 13
+        DeathKnockoff = 13
     }
     
     public enum SpecialApply

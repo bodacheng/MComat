@@ -119,13 +119,13 @@ public class NetFightScene : MonoBehaviour {
     {
         switch (FightSceneNote.Instance.nextBattle.fightModeType)
         {
-            case fightModeType.combat:
+            case FightModeType.combat:
                 _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;
                 _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
                 _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
                 _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
-                yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets);
-                yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets);
+                yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.HP);
+                yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.HP);
                 _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
                 break;
         }
@@ -137,7 +137,7 @@ public class NetFightScene : MonoBehaviour {
     {
         switch (FightSceneNote.Instance.nextBattle.fightModeType)
         {
-            case fightModeType.combat:
+            case FightModeType.combat:
                 _RealTimeGameProcessManager.FightTeam1.ModeStart();
                 _RealTimeGameProcessManager.FightTeam2.ModeStart();
                 switch (RealTimeGameProcessManager.playerTeam)

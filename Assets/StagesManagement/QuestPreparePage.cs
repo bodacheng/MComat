@@ -85,7 +85,7 @@ namespace mainMenu
         public IEnumerator LoadStageByScriptThenGetReadyForIt(StageScriptableObject _StageScriptableObject)
         {
             QuestName.text = _StageScriptableObject.battleNameJPG;
-            _StageScriptableObject.loadLocalFightFromScript();
+            _StageScriptableObject.LoadLocalFightFromScript();
             IEnumerator getPlayerOne = TeamSet.Instance.MyTeamMembersByEntryMemberNum(_StageScriptableObject.EntryMemberNum, TeamSet.Instance.storyModeTeamSet);
             yield return getPlayerOne;
             _StageScriptableObject.localFight.HeroSets = (MultiDictionary<int, int, CharacterDataInfo>)getPlayerOne.Current;
