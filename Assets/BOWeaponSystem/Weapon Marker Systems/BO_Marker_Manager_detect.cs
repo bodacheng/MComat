@@ -10,15 +10,11 @@ namespace HittingDetection
         BO_Hitbox _BO_Hitbox;
         Vector3 _StartPoint;
         List<Collider> BallDetectHitPool;
-        BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
+        BO_Weapon_Animation_Events bO_Weapon_Animation_Events;　//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
 
         void DetectProcess()
         {
             hitsOnHealthBody.Clear();
-            if (_markers == null)
-            {
-                return;
-            }
             for (int i = 0; i < _markers.Length; i++)
             {
                 if (_markers[i].HitCheck())
@@ -155,9 +151,7 @@ namespace HittingDetection
                             {
                                 for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
                                 {
-                                    if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << BallDetectHitPool[hit_target_index].gameObject.layer)
-                                       &&
-                                        !_Shields_Hit.Contains(BallDetectHitPool[hit_target_index].transform))
+                                    if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << BallDetectHitPool[hit_target_index].gameObject.layer)　&&　!_Shields_Hit.Contains(BallDetectHitPool[hit_target_index].transform))
                                     {
                                         BO_Shield TheS = BallDetectHitPool[hit_target_index].gameObject.GetComponent<BO_Shield>();
                                         if (TheS == null)

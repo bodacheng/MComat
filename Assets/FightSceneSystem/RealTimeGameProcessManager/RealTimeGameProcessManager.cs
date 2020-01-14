@@ -88,7 +88,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
             _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { focusingChar.WholeT });
             _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
         }else{
-            _CameraManager.Assign_Camera(Camera_Mode_Num.RoundBoundary,null);
+            _CameraManager.Assign_Camera(Camera_Mode_Num.TopDown,null);
         }
         Refresh();
     }

@@ -67,7 +67,9 @@ namespace HittingDetection
         [Tooltip("魔法特效路径(blueMagic redMagic)")]
         [SerializeField]
         Zokusei zokusei;
-
+        
+        public int CurrentHP { get; set; }
+        
         FightAttriCalReference _myOwnerCalReference;
         bool _markersAreEnabled;
         TeamConfig teamConfig = TeamConfig.defaultSet;
@@ -84,8 +86,7 @@ namespace HittingDetection
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         Decompositioner processingBlood;
-        bool traditionalDefendMode;
-        public int CurrentHP { get; set; }
+        bool traditionalDefendMode = false;
         string personalEffectPath;
 
         void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
@@ -145,11 +146,6 @@ namespace HittingDetection
         
         public float GetFixedAT()
         {
-            if (_myOwnerCalReference == null)
-            {
-                Debug.Log("here");
-                return 0;
-            }
             return weaponHP <= 0 ? _myOwnerCalReference.AT : _myOwnerCalReference.AT / weaponHP;
         }
 

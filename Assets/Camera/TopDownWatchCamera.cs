@@ -1,39 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-// 1.固定高度
+// 1. 固定高度
 // 2. 固定45度角俯视地面
 // 3. 可控制前后移动，可控制水平旋转
 // 思路是，控制相机位置，并且有一个由右遥杆决定的方向量是这个instance里的某固定量，代表相对相机看向的一个相对坐标值
+
 class TopDownWatchCamera : CameraMode
 {
-    public float distance, height;
+    public float height;
 
-    #region Inspector Variables
     [Header("-- Camera Controller Properties --")]
-    [Tooltip("How fast camera follows player")]
-    public float followSpeed = 9;
-    [Tooltip("How fast camera moves with mouse")]
-    public float mouseSpeed = 2;
-    [Tooltip("How fast camera moves with controller")]
-    public float controllerSpeed = 7;
     [Tooltip("Minimum Rotation along X")]
     public float minRotation = -35f;
     [Tooltip("Maximum Rotation along X")]
     public float maxRotation = 35f;
-    #endregion
-
+    
     //smoothly rotating camera around player
     readonly float turnSmoothing = 0.1f;
     //smoothness along X
-    float smoothX= 0.1f;
+    float smoothX = 0.1f;
     //smoothness along Y
-    float smoothY= 0.1f;
+    float smoothY = 0.1f;
     //smoothness velocity along X
-    float smoothXVelocity= 0.1f;
+    float smoothXVelocity = 0.1f;
     //smoothness velocity along Y
-    float smoothYVelocity= 0.1f;
+    float smoothYVelocity = 0.1f;
 
     [HideInInspector]
     //Child transform which is parent of main camera
@@ -48,10 +40,9 @@ class TopDownWatchCamera : CameraMode
     //The tilt rotation of camera to player
     public float tiltRotation;
 
-    public TopDownWatchCamera(float distance, float height)
+    public TopDownWatchCamera(float height)
     {
         targets = new List<Transform>();
-        this.distance = distance;
         this.height = height;
     }
 
@@ -76,9 +67,8 @@ class TopDownWatchCamera : CameraMode
             float v = 0f;
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
-                h = UnityEngine.Input.GetAxis("Horizontal");
-                v = UnityEngine.Input.GetAxis("Vertical");
-
+                h = Input.GetAxis("Horizontal");
+                v = Input.GetAxis("Vertical");
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
@@ -87,11 +77,10 @@ class TopDownWatchCamera : CameraMode
             }
             use_direction = (screenMovementForward * v) + (screenMovementRight * h);
 
-
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
                 || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
-                k += UnityEngine.Input.GetAxis("HorizontalCR") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
+                k += Input.GetAxis("HorizontalCR") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
@@ -106,18 +95,17 @@ class TopDownWatchCamera : CameraMode
 
         //directionLook = Quaternion.AngleAxis(45, Vector3.up) * directionLook;
         //getting axis from Mouse
-        float horizontal = UnityEngine.Input.GetAxis("Mouse X");
-        float vertical = UnityEngine.Input.GetAxis("Mouse Y");
-        RotateCamera(Time.deltaTime, vertical, horizontal, 2f, _camera);
+        float horizontal = Input.GetAxis("Mouse X");
+        float vertical = Input.GetAxis("Mouse Y");
+        RotateCamera(vertical, horizontal, 2f, _camera);
     }
 
     //rotating AROUND player
-    void RotateCamera(float d, float vert, float horz, float camTargetSpeed, Camera _camera)
+    void RotateCamera(float vert, float horz, float camTargetSpeed, Camera _camera)
     {
         //if we have any smoothing
         if (turnSmoothing > 0)
         {
-
             //rotate smoothly
             smoothX = Mathf.SmoothDamp(smoothX, horz, ref smoothXVelocity, turnSmoothing);
             smoothY = Mathf.SmoothDamp(smoothY, vert, ref smoothYVelocity, turnSmoothing);
@@ -128,7 +116,6 @@ class TopDownWatchCamera : CameraMode
             //else just apply raw rotation
             smoothX = horz;
             smoothY = vert;
-
         }
 
         //now changing the tilt rotation

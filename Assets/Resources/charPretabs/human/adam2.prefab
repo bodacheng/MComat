@@ -23723,7 +23723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -23731,7 +23730,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &2113289919975160791
 GameObject:
   m_ObjectHideFlags: 0
@@ -23775,7 +23773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -23783,7 +23780,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &2279009262581531025
 GameObject:
   m_ObjectHideFlags: 0
@@ -24172,7 +24168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -24180,7 +24175,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &3086931114478285134
 GameObject:
   m_ObjectHideFlags: 0
@@ -24599,7 +24593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -24607,7 +24600,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &4857123384187866195
 GameObject:
   m_ObjectHideFlags: 0
@@ -25172,7 +25164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pOFXes: []
+  pOFXes:
+  - {fileID: 3997072810238635809}
 --- !u!114 &5613744654717735233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30253,6 +30246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2081810640009136050}
   - component: {fileID: 2336647351602078650}
+  - component: {fileID: 3997072810238635809}
   m_Layer: 0
   m_Name: polySurface111
   m_TagString: Untagged
@@ -30303,7 +30297,7 @@ SkinnedMeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -30396,6 +30390,23 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.008417606, y: -0.064956285, z: 0.00000008940697}
     m_Extent: {x: 0.893314, y: 0.200465, z: 0.6386255}
   m_DirtyAABB: 0
+--- !u!114 &3997072810238635809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6523672394065426671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_version: 1.2.1
+  m_layers: []
+  m_hideRenderer: 0
+  m_hideEditorSelection: 0
+  m_spriteRenderer: {fileID: 0}
 --- !u!1 &6570467777824220657
 GameObject:
   m_ObjectHideFlags: 0
@@ -30531,7 +30542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -30539,7 +30549,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7206964820214519575
 GameObject:
   m_ObjectHideFlags: 0
@@ -30614,7 +30623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -30622,7 +30630,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7315862223795425047
 GameObject:
   m_ObjectHideFlags: 0
@@ -40552,7 +40559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -40560,7 +40566,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8202751801184101851
 GameObject:
   m_ObjectHideFlags: 0
@@ -40636,7 +40641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -40644,7 +40648,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8640128046861019768
 GameObject:
   m_ObjectHideFlags: 0
@@ -40720,7 +40723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -40728,7 +40730,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8776800646885436134
 GameObject:
   m_ObjectHideFlags: 0
@@ -40833,7 +40834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -40841,7 +40841,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8907647988100006252
 GameObject:
   m_ObjectHideFlags: 0

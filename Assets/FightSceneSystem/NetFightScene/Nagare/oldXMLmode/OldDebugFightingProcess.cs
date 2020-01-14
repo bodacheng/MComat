@@ -104,7 +104,7 @@ public class OldDebugFightingProcess : NagareProcess
                 //_CameraManager.current_Camera_Mode.setCertainYModeParameters(16f, _NetFightScene.Icons.GetFocusingChar().getFloorY() + 10f);
                 return;
             }
-            if (RealTimeGameProcessManager.focusingChar.Sensor.GetfarEnemiesColliders().Count > 0)
+            if (RealTimeGameProcessManager.focusingChar.Sensor.GetFarEnemiesColliders().Count > 0)
             {
                 _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.GodPlayerCertainYCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.transform });
                 //_CameraManager.current_Camera_Mode.setCertainYModeParameters(16f, _NetFightScene.Icons.GetFocusingChar().getFloorY() + 10f);

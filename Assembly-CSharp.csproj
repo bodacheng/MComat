@@ -143,6 +143,7 @@
     <Compile Include="Assets\Camera\StartToEndMode.cs" />
     <Compile Include="Assets\Camera\TeamEditCamera.cs" />
     <Compile Include="Assets\Camera\TopDownWatchCamera.cs" />
+    <Compile Include="Assets\Camera\TouchTopDownCamera.cs" />
     <Compile Include="Assets\Camera\WatchOverCamera.cs" />
     <Compile Include="Assets\characterModelShower\ModelShower.cs" />
     <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />

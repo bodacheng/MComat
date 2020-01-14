@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public enum Camera_Mode_Num
@@ -8,6 +7,7 @@ public enum Camera_Mode_Num
     startAndEnd = 1,
     CertainYAntiVibrationCamera = 12,
     WatchOver = 8,
+    TopDown = 2,
     LerpToCertainPlace = 9,
     GodPlayerCertainYCamera = 10,
     keepTargetLeft = 13,
@@ -28,7 +28,8 @@ public class CameraManager : MonoBehaviour
         {Camera_Mode_Num.keepTargetLeft, new keepTargetLeftCamera()},
         {Camera_Mode_Num.WatchOver, new WatchOverCamera(7f,5f)},
         {Camera_Mode_Num.startAndEnd, new StartToEndMode()},
-        {Camera_Mode_Num.RoundBoundary, new CenterSurroundCamera(25f,10f)}
+        {Camera_Mode_Num.RoundBoundary, new CenterSurroundCamera(25f,10f)},
+        {Camera_Mode_Num.TopDown, new TouchTopDownCamera(12f,20f)}
     };
 
     void Awake()

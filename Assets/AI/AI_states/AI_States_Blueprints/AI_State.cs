@@ -210,14 +210,14 @@ namespace Soul
                             mid |= this.Sensor.GetMidEnemiesColliders().Count > 0;
                             break;
                         case BehaviorEnterRange.far_range:
-                            far |= this.Sensor.GetfarEnemiesColliders().Count > 0;
+                            far |= this.Sensor.GetFarEnemiesColliders().Count > 0;
                             break;
                         case BehaviorEnterRange.out_of_range:
                             if (this.Sensor.GetInnerEnemiesColliders().Count == 0
                                 &&
                                 this.Sensor.GetMidEnemiesColliders().Count == 0
                                 &&
-                                this.Sensor.GetfarEnemiesColliders().Count == 0)
+                                this.Sensor.GetFarEnemiesColliders().Count == 0)
                                 return true;
                             break;
                         default:

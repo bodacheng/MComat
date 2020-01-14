@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
-
 
 public class Sensor : MonoBehaviour {
 
@@ -55,7 +51,7 @@ public class Sensor : MonoBehaviour {
         //innerEnemies.RemoveAll(item => item == null);
         return midEnemies;
     }
-    public List<Collider> GetfarEnemiesColliders()
+    public List<Collider> GetFarEnemiesColliders()
     {
         //outterEnemies.RemoveAll(item => item == null);
         return farEnemies;
@@ -236,24 +232,23 @@ public class Sensor : MonoBehaviour {
         return target_list;
     }
 
-    private Vector3 _ClosestPointOnBounds;
-    private Collider tempCForNearest;
+    Vector3 _ClosestPointOnBounds;
+    Collider tempCForNearest;
     public void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
     {
         if (_hits == null)
         {
             return;
         }
-
-        foreach (Collider hit in this._hits)
+        foreach (Collider hit in _hits)
         {
             if (hit != null)
             {
-                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) 
-                    ||
-                    _TeamConfig.enemyShieldLayerMask == (_TeamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer))
-                   )
+                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) ||
+                    _TeamConfig.enemyShieldLayerMask == (_TeamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer)))
+                {
                     farEnemies.Add(hit);
+                }
                 if (_TeamConfig.enemyWeaponLayerMask == (_TeamConfig.enemyWeaponLayerMask | (1 << hit.gameObject.layer)))
                 {
                     OutterDamagingWeapon.Add(hit);
@@ -286,9 +281,14 @@ public class Sensor : MonoBehaviour {
         }
         
         for (int i = 0; i < innerEnemies.Count; i++)
+        {
             farEnemies.Remove(innerEnemies[i]);
+        }
+
         for (int i = 0; i < midEnemies.Count; i++)
+        {
             farEnemies.Remove(midEnemies[i]);
+        }
 
         for (int i = 0; i < OutterDamagingWeapon.Count; i++)
         {

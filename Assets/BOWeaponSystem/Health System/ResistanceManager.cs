@@ -9,21 +9,33 @@ public class ResistanceManager : MonoBehaviour
     
     int temp;
     readonly List<SingleAssignmentDisposable> disposabletasks = new List<SingleAssignmentDisposable>();
-    
+
+    void Awake()
+    {
+        Resistance.Subscribe(
+            x => 
+            {
+                if (x > 0)
+                {
+                    if (data_Center._ShaderManager != null)
+                    {
+                        data_Center._ShaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 1 , 0.2f);
+                    }
+                }
+                else
+                {
+                    if (data_Center._ShaderManager != null)
+                    {
+                        data_Center._ShaderManager.RimEffectsClear(0.3f);
+                    }
+                }
+            }
+        );
+    }
+
     public void ResistanceUp(AnimationEvent R)
     {
-        Resistance.Value += R.intParameter;
-        if (Resistance.Value > 0)
-        {
-            if (data_Center._ShaderManager != null)
-                data_Center._ShaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), (float)Resistance.Value / 5, 0.05f);
-        }
-        else
-        {
-            if (data_Center._ShaderManager != null)
-                data_Center._ShaderManager.RimEffectsClear();
-        }
-                      
+        Resistance.Value += R.intParameter;                      
         switch (R.stringParameter)
         {
             case "resistup":
@@ -56,9 +68,7 @@ public class ResistanceManager : MonoBehaviour
     
     public void ResistanceClear()
     {
-        if (data_Center._ShaderManager != null)
-            data_Center._ShaderManager.RimEffectsClear();
-        if (disposabletasks.Count>0)
+        if (disposabletasks.Count > 0)
         {
             foreach (SingleAssignmentDisposable _d in disposabletasks)
             {

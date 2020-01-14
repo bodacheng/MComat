@@ -96,19 +96,19 @@ namespace mainMenu
                     //yAngle = Input.GetAxis("Mouse Y");
                     //showingChar.transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
                     
-                    if (UnityEngine.Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
+                    if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
                     {
-                        FirstPoint = UnityEngine.Input.mousePosition;
+                        FirstPoint = Input.mousePosition;
                         xAngleTemp = xAngle;
                     }
-                    else if (UnityEngine.Input.GetMouseButton(0))
+                    else if (Input.GetMouseButton(0))
                     {
                         modelPOnScreen = CaculateShowModelViewportPoint(showingChar.transform.position);
                         fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x) / Screen.width;
                         fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y) / Screen.height;
                         if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
                         {
-                            SecondPoint = UnityEngine.Input.mousePosition;
+                            SecondPoint = Input.mousePosition;
                             xAngle = xAngleTemp + (FirstPoint.x - SecondPoint.x) * 180 / Screen.width;
                             showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
                         }
@@ -116,19 +116,19 @@ namespace mainMenu
                 }
                 else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
                 {
-                    if (UnityEngine.Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
+                    if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
                     {
-                        FirstPoint = UnityEngine.Input.mousePosition;
+                        FirstPoint = Input.mousePosition;
                         xAngleTemp = xAngle;
                     }
-                    else if (UnityEngine.Input.GetMouseButton(0))
+                    else if (Input.GetMouseButton(0))
                     {
                         modelPOnScreen = CaculateShowModelViewportPoint(showingChar.transform.position);
                         fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x)/ Screen.width;
                         fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y)/ Screen.height;
                         if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
                         {
-                            SecondPoint = UnityEngine.Input.mousePosition;
+                            SecondPoint = Input.mousePosition;
                             xAngle = xAngleTemp + (FirstPoint.x - SecondPoint.x) * 180 / Screen.width;
                             showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
                         }

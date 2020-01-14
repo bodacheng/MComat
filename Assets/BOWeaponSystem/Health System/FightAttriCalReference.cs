@@ -134,17 +134,13 @@ public partial class FightAttriCalReference : MonoBehaviour
     void EatDamageProcess(V_Damage processingD)
     {
         _BeHitCount.BeHitCountPlus();
-        if (processingD.fromWeapon != null)
+        if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
         {
-            if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
-            {
-                processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
-                if (processingD.fromWeapon._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
-                    processingD.fromWeapon.GetOwnerFightAttriCalReference()._Center.Animation_Manger.FrameFreeze();
-            }
-            CurrentHp.Value -= processingD.AT;
+            processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
+            if (processingD.fromWeapon._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
+                processingD.fromWeapon.GetOwnerFightAttriCalReference()._Center.Animation_Manger.FrameFreeze();
         }
-
+        CurrentHp.Value -= processingD.AT;
         switch (processingD.specialApply)
         {
             case SpecialApply.gravitylost:
@@ -183,7 +179,6 @@ public partial class FightAttriCalReference : MonoBehaviour
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    //PlayTargetHitSound("light_hit");
                     break;
                 case DamageType.light_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
@@ -191,7 +186,6 @@ public partial class FightAttriCalReference : MonoBehaviour
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    //PlayTargetHitSound("light_hit");
                     break;
                 case DamageType.heavy_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
@@ -199,7 +193,6 @@ public partial class FightAttriCalReference : MonoBehaviour
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    //PlayTargetHitSound("heavy_hit");
                     break;
                 case DamageType.supper_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
@@ -207,7 +200,6 @@ public partial class FightAttriCalReference : MonoBehaviour
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    //PlayTargetHitSound("super_hit");
                     break;
                 case DamageType.light_block:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
@@ -229,7 +221,6 @@ public partial class FightAttriCalReference : MonoBehaviour
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    //PlayTargetHitSound("light_hit");
                     break;
             }
         }
@@ -242,7 +233,9 @@ public partial class FightAttriCalReference : MonoBehaviour
         {
             _dmg.damage_type = DamageType.heavy_block;
             _dmg.AT = 0;
+            HitEffect(_dmg);
             _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            return;
         }
         EatDamageProcess(_dmg);
         HitEffect(_dmg);
@@ -279,7 +272,6 @@ public partial class FightAttriCalReference : MonoBehaviour
             _Center.AIStateRunner.ChangeState("Defend",_dmg);
             break;
             case DamageType.DeathKnockoff:
-            // 目前死亡状态不能统合到这处理
             _Center.AIStateRunner.ChangeState("Death",_dmg);
             break;
         }        
@@ -288,11 +280,11 @@ public partial class FightAttriCalReference : MonoBehaviour
     public void HitCountPlus() => _ComboHitCount.HitCountPlus();//打别人计数
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     public void BeHitCountInterrupt() => _BeHitCount.BeHitCountInterrupt();
-
+    
     // event 攻击系列。暂时不再使用
     public void SetManagingEventDamage(E_Damage e)
     {
-        this.managingEventDamage = e;
+        managingEventDamage = e;
     }
     public E_Damage GetManagingEventDamage()
     {
@@ -300,38 +292,20 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
     public void EventAttackHitApprove(E_Damage e)
     {
-        this.Event_Attack_Successed_List.Add(e);
+        Event_Attack_Successed_List.Add(e);
     }
     public void AddEventDamageList(E_Damage e)
     {
         e.SetDamagedHealthBody(this);
-        this.Event_Damage_List.Add(e);
+        Event_Damage_List.Add(e);
     }
     public List<E_Damage> ReturnEventDamageList()
     {
-        return this.Event_Damage_List;
+        return Event_Damage_List;
     }
     public List<E_Damage> ReturnApprovedEventAttackAttempts()
     {
-        return this.Event_Attack_Successed_List;
-    }
-
-    Shader One_Shader;
-    public void SwapShader(string shaderName)
-    {
-        One_Shader = Shader.Find(shaderName);
-        foreach (Renderer singleRenderer in GetComponentsInChildren<Renderer>())
-        {
-            if (singleRenderer is ParticleSystemRenderer)
-            {
-                continue;
-            }
-            foreach (Material singleMaterial in singleRenderer.materials)
-            {
-				singleMaterial.shader = One_Shader;
-                //SetAllMaterialProperties(singleMaterial);
-            }
-        }
+        return Event_Attack_Successed_List;
     }
 
     IDictionary<int, Shader> myDefaultMaterialsShaderDic;
@@ -351,52 +325,10 @@ public partial class FightAttriCalReference : MonoBehaviour
                 }
         }
     }
-
-    public void RestoreMyDefaultMaterialsShaders()
-    {
-        if (myDefaultMaterialsShaderDic == null)
-            return;
-
-        foreach (Renderer singleRenderer in GetComponentsInChildren<Renderer>())
-        {
-            if (singleRenderer is ParticleSystemRenderer)
-            {
-                continue;
-            }
-            foreach (Material singleMaterial in singleRenderer.materials)
-            {
-                myDefaultMaterialsShaderDic.TryGetValue(singleMaterial.GetHashCode(), out One_Shader);
-                if (One_Shader)
-                    singleMaterial.shader = One_Shader;
-            }
-        }
-    }
-        
-    public IEnumerator ShaderChange(string magicKind,float time)
-    {
-        switch(magicKind)
-        {
-            case "redMagic":
-                SwapShader("Hurt/Red");
-                break;
-            case "blueMagic":
-                SwapShader("Hurt/Red");
-                break;
-            case "greenMagic":
-                SwapShader("Hurt/Red");
-                break;
-            default:
-                SwapShader("Hurt/Red");
-                break;
-        }
-        yield return new WaitForSeconds(time);
-        RestoreMyDefaultMaterialsShaders();
-    }
     
     Color damagecolor;
-    public void RunShaderChangeProcess(string magicKind,float speed,float time)
+    public void RunShaderChangeProcess(string magicKind, float time)
     {
-        //process = StartCoroutine(shaderChange(magicKind,time));
         if (_Center._ShaderManager != null)
         {
             switch (magicKind)
@@ -420,12 +352,12 @@ public partial class FightAttriCalReference : MonoBehaviour
                     damagecolor = Color.white;
                     break;
             }
-            _Center._ShaderManager.RimEffectsForAShortTime(0.8f, speed, time, damagecolor);
+            _Center._ShaderManager.RimEffectsForAShortTime(1f, time, damagecolor);
         }
     }
     
-    BO_Shield _shield; //已几乎不再用
     // 旧防御盾系列函数。已经基本不用
+    BO_Shield _shield;
     public void SetShield(BO_Shield _shield)
     {
         FightAttriCalReference fightAttriCalReference = this;
@@ -436,15 +368,3 @@ public partial class FightAttriCalReference : MonoBehaviour
         return _shield;
     }
 }
-
-// 下面这些原本在applydamage开头
-    //if ((PhotonNetwork.connected && !photonView.isMine))
-    //  return;//同步系统中伤害判定最关键的一条逻辑
-
-    //colorTransition = ColorTransition.DoTransition(gameObject, new GradientColorKey[] { new GradientColorKey(Color.red, 0.2f), new GradientColorKey(Color.white, 0.2f) }, true, 0f);
-
-    //UnityEngine.Events.UnityAction resetColor = () => { colorTransition.ResetColors(); };
-    //      colorTransition.OnEnd.AddListener(resetColor);
-    ////colorTransition.AfterTransition = AfterTransitionActions.DisableComponent;
-    //colorTransition.Duration = 0.2f;
-    //colorTransition.LoopMode = TransitionLoopModes.PlayOnce;

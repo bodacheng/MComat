@@ -653,6 +653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4592948612463286}
   - component: {fileID: 137590716444639568}
+  - component: {fileID: 421998699773304076}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -703,7 +704,7 @@ SkinnedMeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -787,6 +788,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0002847314, y: 0.014390871, z: 0.06396937}
     m_Extent: {x: 0.49708265, y: 0.295484, z: 0.9537363}
   m_DirtyAABB: 0
+--- !u!114 &421998699773304076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235753358155386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_version: 1.2.1
+  m_layers: []
+  m_hideRenderer: 0
+  m_hideEditorSelection: 0
+  m_spriteRenderer: {fileID: 0}
 --- !u!1 &1244509038408280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,6 +2626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4363695272357600}
   - component: {fileID: 137249998521239376}
+  - component: {fileID: 2050274404349925928}
   m_Layer: 0
   m_Name: cloth
   m_TagString: Untagged
@@ -2680,6 +2699,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00009357929, y: -0.010415673, z: 0.1902453}
     m_Extent: {x: 0.32780463, y: 0.25163546, z: 0.38800105}
   m_DirtyAABB: 0
+--- !u!114 &2050274404349925928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752433549974552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_version: 1.2.1
+  m_layers: []
+  m_hideRenderer: 0
+  m_hideEditorSelection: 0
+  m_spriteRenderer: {fileID: 0}
 --- !u!1 &1776457652076566
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,7 +3243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3215,7 +3250,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &718867409643150022
 GameObject:
   m_ObjectHideFlags: 0
@@ -12602,7 +12636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -12610,7 +12643,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &1660885050546651745
 GameObject:
   m_ObjectHideFlags: 0
@@ -12654,7 +12686,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -12662,7 +12693,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &1986807535414590639
 GameObject:
   m_ObjectHideFlags: 0
@@ -12706,7 +12736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -12714,7 +12743,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &2277409037235198721
 GameObject:
   m_ObjectHideFlags: 0
@@ -12758,7 +12786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -12766,7 +12793,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &2370973313019564068
 GameObject:
   m_ObjectHideFlags: 0
@@ -22148,7 +22174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -22156,7 +22181,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &4525829244575564211
 GameObject:
   m_ObjectHideFlags: 0
@@ -31514,7 +31538,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pOFXes: []
+  pOFXes:
+  - {fileID: 421998699773304076}
+  - {fileID: 2050274404349925928}
 --- !u!114 &8961527007698607470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31653,7 +31679,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -31661,7 +31686,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7009538795293949865
 GameObject:
   m_ObjectHideFlags: 0
@@ -36444,7 +36468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -36452,7 +36475,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7162633539032305697
 GameObject:
   m_ObjectHideFlags: 0
@@ -41235,7 +41257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -41243,7 +41264,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8430707485209342744
 GameObject:
   m_ObjectHideFlags: 0
@@ -41317,7 +41337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -41325,4 +41344,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2

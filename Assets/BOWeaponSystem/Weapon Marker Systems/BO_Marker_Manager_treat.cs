@@ -10,6 +10,7 @@ namespace HittingDetection
         // 3. 武器击中敌人时，对攻击方的hit combo进行加算
         // 由于BO_Marker_Manager现在全部都是对象池物件，如果我们认为一个instance返回对象池后就应该不再参与任何工作的话，
         // 原则上我们应该确保一切围绕BO_Marker_Manage的instance，最重要的是里面的myOwnerHealth进行的工作在instance返回对象池前结束
+        
         Attack_on_shield_result collision;
         float _ContinuousDamage_Timer;
         //These DH and DS variables are Distances to the shield spots. Whie the shield is active, DH ("Distance to Health", distance to the back point of the shiled) has to be less than all the other shield edge spots (DS, "Distance to Shield")
@@ -23,7 +24,7 @@ namespace HittingDetection
         float ds7;
         float ds8;
         float ds9;
-
+        
         void TreatProcess()
         {
             if (HitShield && traditionalDefendMode)//其实由上面的分析可以知道，对于来自一把武器的攻击，hitshield和hitflesh是不会同时为true的。但如果多把武器同时来攻击，如果被攻击方同时有被击中以及防御住的情况发生，肯定要先处理所受伤害，立刻转入受伤状态才对
@@ -35,25 +36,24 @@ namespace HittingDetection
                         WeaponEnergyExaust(_Shields_Hit[i1].position, _Shields_Hit[i1].rotation);
                         BO_Shield TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
                         collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
-                        // 在此向攻击方发送趔趄信号。这个地方是客户端对战时候逻辑困难的关键。
-                        // 武器脚本虽然处理内容非常繁冗，但归结起来其实逻辑只有那几条，就是通过武器与hitbox以及盾牌的接触碰撞，来决定向健康体发送哪些信息。这些计算，原则上其实只需要一个客户端的逻辑去计算
-                        // 现在我们在讨论的其实是关于同步问题的一个核心的事情。。。什么时候两边都需要执行，什么时候只需要一个客户端执行。我们现在不熟悉处理这类问题的逻辑方式。
-                        if (_myOwnerCalReference != null)
+                        _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                        switch (collision.on_weapon_holder)
                         {
-                            _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
-                            switch (collision.on_weapon_holder)
-                            {
-                                case DamageType.stagger:
-                                    V_Damage new_damage = new V_Damage(DamageType.stagger, WeaponPosAdjustMode.explosion, 
-                                                                        _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                                                            TheS.transform.position, _myOwnerCalReference.transform.position ,null);//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
-                                    _myOwnerCalReference.ApplyDamage(new_damage);
-                                    break;
-                                case DamageType.none:
-                                    break;
-                            }
+                            case DamageType.stagger:
+                                V_Damage new_damage = new V_Damage(
+                                    DamageType.stagger, 
+                                    WeaponPosAdjustMode.explosion, 
+                                    _Shields_Hit[i1].position, 
+                                    Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                    TheS.transform.position, 
+                                    _myOwnerCalReference.transform.position ,
+                                    null);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                _myOwnerCalReference.ApplyDamage(new_damage);
+                                break;
+                            case DamageType.none:
+                                break;
                         }
-
+                        
                         //在此向防御方发送防御信号
                         if (TheS._ownerFightAttriCalReference != null)
                         {
@@ -109,23 +109,15 @@ namespace HittingDetection
                     if (_hitOnHealthBody.victim != null && _Used_Targets.Contains(_hitOnHealthBody.victim.transform) == false)
                     {
                         WeaponEnergyExaust(_hitOnHealthBody.damageHappenPoint, Quaternion.identity);
-
                         _hitOnHealthBody.damage_type = damage_type;
                         _hitOnHealthBody._WeaponPosAdjustMode = _WeaponPosAdjustMode;
                         _hitOnHealthBody.AttackerT_foward = attackerWholeTransform.forward;
                         _hitOnHealthBody.AttackerT_pos = attackerWholeTransform.position;
                         _hitOnHealthBody.effectPath = personalEffectPath;
                         _hitOnHealthBody.specialApply = _specialApply;
-
-                        if (effectSpreadOnBody && _hitOnHealthBody.victim._Center._ResistanceManager.Resistance.Value == 0)
-                            _hitOnHealthBody.victim.RunShaderChangeProcess(personalEffectPath, 0.3f, 0.4f);
                         _hitOnHealthBody.victim.ApplyDamage(_hitOnHealthBody);
-                        if (_myOwnerCalReference != null)
-                        {
-                            _myOwnerCalReference.MyDamageCount(_hitOnHealthBody);
-                            _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
-                        }
-                        
+                        _myOwnerCalReference.MyDamageCount(_hitOnHealthBody);
+                        _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         //if (is_E_weapon)
                         //{
                         //    if (e_Damage != null)
@@ -139,17 +131,13 @@ namespace HittingDetection
                         _Used_Targets.Add(_hitOnHealthBody.victim.transform);
                     }
                 }
-                if (_myOwnerCalReference != null)
-                {
-                    _myOwnerCalReference.PlusCriticalGauge(3);
-                }
+                _myOwnerCalReference.PlusCriticalGauge(3);
             }
 
             if (!ContinuousDamage && weaponHP > 0)
                 ClearTargets();
 
             _wallHitPositions.Clear();
-
             if (ContinuousDamage)
             {
                 _ContinuousDamage_Timer += Time.fixedDeltaTime;

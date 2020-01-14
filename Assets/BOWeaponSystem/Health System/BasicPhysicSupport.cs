@@ -68,7 +68,7 @@ public class BasicPhysicSupport : MonoBehaviour
             }
         }
         
-        readonly float floorY;
+        readonly float floorY = 0;
         public void GroundedCal()
         {
             foreach (Transform check in _BasicPhysicSupport.floorCheckers)

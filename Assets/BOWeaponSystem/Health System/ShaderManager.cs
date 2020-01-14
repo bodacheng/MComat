@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Kalagaan.POFX;
+using DG.Tweening;
 
 public class ShaderManager : MonoBehaviour
 {
-
     public List<POFX> pOFXes;
-    public List<IEnumerator> colorchangeprocesses = new List<IEnumerator>();
 
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < pOFXes.Count; i++)
         {
@@ -27,84 +25,34 @@ public class ShaderManager : MonoBehaviour
         }
     }
 
-    public void RimEffectsUp(Color color , float intensity,float lerpspeed)
+    public void RimEffectsUp(Color color , float intensity,float time)
     {
-        return;
-        for (int i = 0; i < colorchangeprocesses.Count; i++)
-        {
-            StopCoroutine(colorchangeprocesses[i]);
-        }
-        colorchangeprocesses.Clear();
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            IEnumerator process = this.rimUpGradually(pOFXes[i], intensity, lerpspeed, color);
-            StartCoroutine(process);
-            colorchangeprocesses.Add(process);
+            pOFXes[i].enabled = true;
+            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
+            RIMlayer.m_cParams.color = color;
+            DOTween.To(() => RIMlayer.m_cParams.intensity,x => RIMlayer.m_cParams.intensity = x, intensity, time);
         }
     }
 
-    public void RimEffectsClear()
+    public void RimEffectsClear(float cleartime)
     {
-        return;
-        //RimEffectsClear()的话就不再把其他颜色改变进程清理了，因为这样一个颜色清理进程可能会把其他颜色变化进程给阻断掉，最典型的例子是角色抵抗消失时候会把应该有的受伤变色给搞的不再有效果
-        for (int i = 0; i < colorchangeprocesses.Count; i++)
-        {
-            StopCoroutine(colorchangeprocesses[i]);
-        }
-        colorchangeprocesses.Clear();
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            IEnumerator process = this.rimClearGradually(pOFXes[i]);
-            StartCoroutine(process);
-            colorchangeprocesses.Add(process);
+            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
+            DOTween.To(() => RIMlayer.m_cParams.intensity,x => RIMlayer.m_cParams.intensity = x, 0, cleartime).OnComplete(() => { RIMlayer.enabled = false; });
         }
     }
 
-    public void RimEffectsForAShortTime(float tartget_intensity,float lerpspeed, float time, Color targetColor)
+    public void RimEffectsForAShortTime(float tartget_intensity, float time, Color targetColor)
     {
-        return;
-        for (int i = 0; i < colorchangeprocesses.Count; i++)
-        {
-            StopCoroutine(colorchangeprocesses[i]);
-        }
-        colorchangeprocesses.Clear();
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            IEnumerator process = this.changeRimColorForAShortTime(pOFXes[i], tartget_intensity, lerpspeed, time, targetColor);
-            StartCoroutine(process);
-            colorchangeprocesses.Add(process);
+            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
+            RIMlayer.m_cParams.color = targetColor;
+            DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, tartget_intensity, time).
+                OnComplete(() => { DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, time); });
         }
-    }
-
-    IEnumerator changeRimColorForAShortTime(POFX _POFX, float tartget_intensity, float lerpspeed, float time, Color targetColor)
-    {
-        yield return this.rimUpGradually(_POFX, tartget_intensity, lerpspeed, targetColor);
-        yield return new WaitForSeconds(time);
-        yield return this.rimClearGradually(_POFX);
-    }
-
-    IEnumerator rimUpGradually(POFX _POFX, float tartget_intensity,float lerpspeed,Color targetColor)
-    {
-        //_POFX.enabled = true;//一开一关在这个插件上会造成每帧重新编译问题 ——by 周宇
-        POFX_Rim RIMlayer = _POFX.GetLayer(0) as POFX_Rim;
-        RIMlayer.m_cParams.color = targetColor;
-        while (tartget_intensity - RIMlayer.m_cParams.intensity > 0)
-        {
-            RIMlayer.m_cParams.intensity += lerpspeed;
-            yield return null;
-        }
-        yield break;
-    }
-    IEnumerator rimClearGradually(POFX _POFX)
-    {
-        POFX_Rim RIMlayer = _POFX.GetLayer(0) as POFX_Rim;
-        while (RIMlayer.m_cParams.intensity > 0)
-        {
-            RIMlayer.m_cParams.intensity -= 0.15f;
-            yield return null;
-        }
-        RIMlayer.m_cParams.intensity = 0;
-        //_POFX.enabled = false;
-        yield break;
     }
 }

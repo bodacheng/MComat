@@ -7,24 +7,23 @@ public partial class FightTeam : MonoBehaviour
 {
     public MultiDictionary<int, int, Data_Center> teamMembers = new MultiDictionary<int, int, Data_Center>();
     public IDictionary<Data_Center, CharacterDataInfo> CharacterDataInfoReference = new Dictionary<Data_Center, CharacterDataInfo>();
-    
     public TeamConfig teamConfig;
+    
     public RectTransform sideIconsContainer;
     public Canvas _targetCanvas;
-    public RectTransform controllingCharT;
-    
+    public RectTransform controllingCharT;    
     public SideCharIcon button_prefab;
     public TextMesh HitCombo;
     public RealTimeGameProcessManager realTimeGameProcessManager;
     public MobileInputsManager _mobileInputsManager;
     public CharsManager _CharSetManager;
     public TeamMode TeamMode;
-    
-    private IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-    private IDictionary<Data_Center, TextMesh> datacenterHitComboDic = new Dictionary<Data_Center, TextMesh>();
-    
-    private SideCharIcon _tempSideCharIcon;
-    
+
+    IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
+    IDictionary<Data_Center, TextMesh> datacenterHitComboDic = new Dictionary<Data_Center, TextMesh>();
+
+    SideCharIcon _tempSideCharIcon;
+
     public void Clear()
     {
         datacenterCharIconDic.Clear();
@@ -61,7 +60,7 @@ public partial class FightTeam : MonoBehaviour
         TeamsFightInitialize(HP);
         yield return null;
     }
-
+    
     void TeamsFightInitialize(float wholeHP)
     {
         foreach (Data_Center a_char in teamMembers.values)
@@ -72,16 +71,23 @@ public partial class FightTeam : MonoBehaviour
                 RefreshHPBar(a_char, x, wholeHP);
             });
             a_char._ResistanceManager.Resistance.Value = 0;
-            a_char._ResistanceManager.Resistance.Subscribe(x => { a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); RefreshResistanceBar(a_char); });
+            a_char._ResistanceManager.Resistance.Subscribe(x => 
+            {
+                a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); 
+                RefreshResistanceBar(a_char); 
+            });
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
-            a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => { RefreshComboHit(a_char); });
+            a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => 
+            {
+                RefreshComboHit(a_char); 
+            });
         }
     }
 
     public void RefreshResistanceBar(Data_Center data_Center)
     {
-        datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
-        _tempSideCharIcon.ResistBar.value = (float)data_Center._ResistanceManager.Resistance.Value / 10f;//抵抗槽最大10格   
+        datacenterCharIconDic.TryGetValue(data_Center, out _tempSideCharIcon);
+        _tempSideCharIcon.ResistBar.value = data_Center._ResistanceManager.Resistance.Value / 10f;//抵抗槽最大10格   
     }
   
     public void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
@@ -90,7 +96,7 @@ public partial class FightTeam : MonoBehaviour
         _tempSideCharIcon.HpBar.value = current_hp / wholeHP; 
     }
 
-    private TextMesh _hitcomboText;
+    TextMesh _hitcomboText;
     public void RefreshComboHit(Data_Center _datacenter)
     {
         _hitcomboText = datacenterHitComboDic[_datacenter];
@@ -105,8 +111,9 @@ public partial class FightTeam : MonoBehaviour
         else
             _hitcomboText.color = Color.clear;
     }
-
-    public void Refresh()//这个刷新是倾向于画面制御
+    
+    //这个刷新是倾向于画面制御
+    public void Refresh()
     {
         foreach (Data_Center _datacenter in teamMembers.values)
         {
@@ -149,7 +156,7 @@ public partial class FightTeam : MonoBehaviour
             case TeamMode.multiraid:
             break;
             case TeamMode.rotation:
-                if (this.teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
                     TurnModeEnemySideAutoMemberShaft();
             break;
         }
