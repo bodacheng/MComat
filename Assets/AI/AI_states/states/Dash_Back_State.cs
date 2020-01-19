@@ -32,6 +32,11 @@ public class Dash_Back_State : AI_State
     {
         return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
+    
+    public override bool Enter_condition_priority1()
+    {
+        return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
+    }
 
     public override bool Enter_condition_priority2()
     {
@@ -53,7 +58,7 @@ public class Dash_Back_State : AI_State
         base.AI_State_enter();
         _Animator.applyRootMotion = true;
         _Animator.SetFloat("speed", 0f);
-        Sensor.OneRoundDetectionStart(2);
+        Sensor.ContinuousDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
         personality_Events.CloseAllPersonalityEffects();
         Vector3 threatsComingDirection = Vector3.zero;
@@ -94,7 +99,7 @@ public class Dash_Back_State : AI_State
 
     public override bool Naturally_exit_condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }
 
     public override void AI_State_exit()

@@ -276,12 +276,12 @@ public class EffectAndHurtObjectLoading
                 EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
                 return EffectPool;
             }
-            if (EffectsPath == "defaultEffects")
+            if (EffectsPath == "defaultmagic")
             {
                 return null;//防止无限循环
             }
         }
-        EffectPool = IniEffectsPool(resource_name, "defaultEffects", object_count);
+        EffectPool = IniEffectsPool(resource_name, "defaultmagic", object_count);
         return EffectPool;
     }
 
@@ -307,6 +307,18 @@ public class EffectAndHurtObjectLoading
             processingEffectObj.GetPositionConstraint().translationAtRest = Pos;
             processingEffectObj.GetPositionConstraint().translationOffset = Vector3.zero;
         }
+        return processingEffectObj;
+    }
+    
+    public Decompositioner GenerateEffect(string resource_name,string EffectsPath,Vector3 Pos)
+    {
+        if (string.IsNullOrEmpty(resource_name))
+            return null;
+        EffectPool = IniEffectsPool(resource_name, EffectsPath,3);
+        if (EffectPool == null)
+            return null;
+        processingEffectObj = EffectPool.Rent();
+        processingEffectObj.transform.position = Pos;
         return processingEffectObj;
     }
 

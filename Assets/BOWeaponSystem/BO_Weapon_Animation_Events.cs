@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 using HittingDetection;
 using UniRx;
@@ -11,7 +12,6 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     TeamConfig _TeamConfig = TeamConfig.defaultSet;
     readonly List<Transform> _Used_Targets = new List<Transform>();
     IDictionary<Transform, Decompositioner> bodyPartsWeaponRegisterDic;
-    List<Transform> bodyweaponParts;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     Transform geometryCenter;
     FightAttriCalReference myownheath;
@@ -51,19 +51,18 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs.head = head;
             BEs.tail = tail;
             BEs.bodyPartsWeaponRegisterDic = new Dictionary<Transform,Decompositioner>();
-            BEs.bodyweaponParts = new List<Transform>();
             if (BEs.right_hand != null)
-                BEs.bodyweaponParts.Add(BEs.right_hand);
+                BEs.bodyPartsWeaponRegisterDic.Add(BEs.right_hand,null);
             if (BEs.left_hand != null)
-                BEs.bodyweaponParts.Add(BEs.left_hand);
+                BEs.bodyPartsWeaponRegisterDic.Add(BEs.left_hand,null);
             if (BEs.left_foot != null)
-                BEs.bodyweaponParts.Add(BEs.left_foot);
+                BEs.bodyPartsWeaponRegisterDic.Add(BEs.left_foot,null);
             if (BEs.right_foot != null)
-                BEs.bodyweaponParts.Add(BEs.right_foot);
+                BEs.bodyPartsWeaponRegisterDic.Add(BEs.right_foot,null);
             if (BEs.head != null)
-                BEs.bodyweaponParts.Add(BEs.head);
+                BEs.bodyPartsWeaponRegisterDic.Add(BEs.head,null);
             if (BEs.tail != null)
-                BEs.bodyweaponParts.Add(BEs.tail);
+                BEs.bodyPartsWeaponRegisterDic.Add(BEs.tail,null);
         }
         
         //注意看0被空出来是和添加 删除有效武器列表中的0参数有关
@@ -97,14 +96,15 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         void RegisterBodyPartWeapon(Transform t)
         {
             if (t != null && !BEs.bodyPartsWeaponRegisterDic.ContainsKey(t))
+            {
                 BEs.bodyPartsWeaponRegisterDic.Add(t, null);
-
+            }
             if (BEs.bodyPartsWeaponRegisterDic[t] == null)
             {
                 target_hitbox = default_hitboxPool.Rent();
                 BEs.bodyPartsWeaponRegisterDic[t] = target_hitbox;
+                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);                
             }
-
             myConstraintSource.sourceTransform = t;
             myConstraintSource.weight = 1;
             BEs.bodyPartsWeaponRegisterDic[t].transform.position = t.position;
@@ -112,23 +112,24 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().constraintActive = true;
             BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().locked = true;
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(BEs._TeamConfig);
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter, BEs.transform);//第二个参数是因为BE本身就在wholeT上
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter,BEs.transform);//第二个参数是因为BE本身就在wholeT上
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.MarkersEnablingStarts();
         }
-
+        
         public void RemoveBodyPartWeapon(Transform t)
         {
             if (!BEs.bodyPartsWeaponRegisterDic.ContainsKey(t))
+            {
                 return;
+            }
             if (BEs.bodyPartsWeaponRegisterDic[t] != null)
             {
-                default_hitboxPool.Return(BEs.bodyPartsWeaponRegisterDic[t]); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
-                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(null);
-                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(null);//为什么要先把hitbox返回对象池内才执行SetDectionTargetsUnion(null)呢，因为disablemarker在返回对象池的操作里，如果不先disablemarker的话，会导致检测过程中找不到used_targets
-                BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().constraintActive = false;
+                target_hitbox = BEs.bodyPartsWeaponRegisterDic[t];
                 BEs.bodyPartsWeaponRegisterDic[t] = null;
+                target_hitbox.GetPositionConstraint().constraintActive = false;
+                default_hitboxPool.Return(target_hitbox); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
+                target_hitbox._HitBox.SetDectionTargetsUnion(null);//为什么要先把hitbox返回对象池内才执行SetDectionTargetsUnion(null)呢，因为disablemarker在返回对象池的操作里，如果不先disablemarker的话，会导致检测过程中找不到used_targets
             }
         }
         public void RegisterBodyPartWeapon(Transform t, int hit_type) //hit_type == 0: clear ;hit_type != 0 : in
@@ -155,15 +156,22 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
         {
             if (keyValuePair.Value != null)
+            {
                 keyValuePair.Value._HitBox.ClearTargets();
+            }
         }
     }
-    
+
+    List<Transform> bodyparts;
     public void ClearMarkerManagers()
     {
-        foreach (Transform T in bodyweaponParts) 
+        bodyparts = bodyPartsWeaponRegisterDic.Keys.ToList();
+        for (int i = 0; i < bodyparts.Count;i++)
         {
-            hiddenMethods.RemoveBodyPartWeapon(T);
+            if (bodyparts[i] !=null)
+            {
+                hiddenMethods.RemoveBodyPartWeapon(bodyparts[i]);
+            }
         }
     }
     
@@ -172,7 +180,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
         {
             if (keyValuePair.Value != null)
+            {
                 keyValuePair.Value._HitBox.EnableMarkers();
+            }
         }
 	}
     
@@ -181,7 +191,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
         {
             if (keyValuePair.Value != null)
+            {
                 keyValuePair.Value._HitBox.DisableMarkers();
+            }
         }
     }
     
@@ -215,9 +227,13 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         
     public void SetAllBodyMarkerManagersIn()
     {
-        foreach (Transform T in bodyweaponParts)
+        bodyparts = bodyPartsWeaponRegisterDic.Keys.ToList();
+        for (int i = 0; i < bodyparts.Count;i++)
         {
-            hiddenMethods.RegisterBodyPartWeapon(T,1);
+            if (bodyparts[i] !=null)
+            {
+                hiddenMethods.RegisterBodyPartWeapon(bodyparts[i],1);
+            }
         }
     }
 

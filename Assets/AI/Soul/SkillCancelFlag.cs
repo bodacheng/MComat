@@ -66,6 +66,11 @@ public class SkillCancelFlag : MonoBehaviour {
         if (_C.Animation_Manger._toUse == null ||  _C.Animation_Manger._toUse == e.animatorClipInfo.clip)
         {
             _C.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.over);
+        }else{
+            //if (_C.Animation_Manger._toUse != e.animatorClipInfo.clip)
+            //{
+            //    Debug.Log(_C.Animation_Manger._toUse + "and" + e.animatorClipInfo.clip + " and current state:" + _C.AIStateRunner.GetCurrentStateNum());
+            //}
         }
     }
 

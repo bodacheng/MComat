@@ -29,6 +29,9 @@ public partial class Animation_Manger : MonoBehaviour
 {
     public Animator Animator;
     public AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
+    public AnimationClip _toUse;
+    public Data_Center _C;
+    
     AnimatorOverrideController animatorOverride;
     bool doNothingFlag;
     string toRunAniName;
@@ -37,23 +40,27 @@ public partial class Animation_Manger : MonoBehaviour
     string trigger_name;
     string pre_overrided_anim_name;
     IDictionary<string, AnimationClip> toLoadAnims;
-    public AnimationClip _toUse;
-    public float animationcounter;
-    
+        
     public bool GetOnAniTransitionFlag()
     {
         return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
     }
     
+    public bool GetOnAniFinishingFlag()
+    {
+        return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null");
+    }
+    
+    public bool GetIfOnNull()//角色莫名其妙不动了的bug，目前怀疑是因为某种原因ThisIsEndOfAnimation根本没跑，并且动画层返回null state。于是为了抵消这种情况，技能结束判断里加了这个条件判断。
+    {
+        if (Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null"))
+            return true;
+        return false;
+    }
+    
     public void FrameFreeze()
     {
         DOTween.To(() => Animator.speed, x => Animator.speed = x, 0f, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, 1f, 0.05f).SetEase(Ease.InExpo); });
-    }
-
-    void Update()
-    {
-        if (_toUse != null)
-            animationcounter += Time.deltaTime;
     }
 
     public void SetAnimationPlayingStep(AnimationPlaying_Step _step)
@@ -84,7 +91,13 @@ public partial class Animation_Manger : MonoBehaviour
         {
             toLoadAnims.TryGetValue(clip_name, out _toUse);
             if (_toUse != null)
+            {
                 return _toUse;
+            }
+            else
+            {
+                Debug.Log("邪门了。："+clip_name);
+            }
         }
         return null;
     }
@@ -94,7 +107,6 @@ public partial class Animation_Manger : MonoBehaviour
     AnimatorTransitionInfo _AnimatorTransitionInfo;
     public void PlayLayerAnim(string clip_name)
     {
-        animationcounter = 0;
         if (clip_name == null)
             _toUse = null;
         AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(1);
@@ -246,14 +258,16 @@ public partial class Animation_Manger : MonoBehaviour
             }
         }
         toRunAniName = clip_name;
-        The_trigger(toRunAniName, this.doNothingFlag);
+        The_trigger(toRunAniName, doNothingFlag);
         doNothingFlag = false;
     }
 
     void The_trigger(string clip_name,bool _doNothingFlag)
     {
         if (_doNothingFlag)
+        {
             return;
+        }
 
         if (!string.IsNullOrEmpty(clip_name))
         {

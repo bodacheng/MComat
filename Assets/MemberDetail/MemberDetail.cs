@@ -172,7 +172,7 @@ namespace mainMenu
                     personalEffectsPath = "redMagic";
                     break;
                 default:
-                    personalEffectsPath = "defaultEffects";
+                    personalEffectsPath = "defaultmagic";
                     break;
             }
             EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);

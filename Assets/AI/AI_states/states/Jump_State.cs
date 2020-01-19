@@ -56,7 +56,7 @@ public class Jump_State : AI_State
 
     public override bool Naturally_exit_condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || time_counter > this.state_time;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull() || time_counter > this.state_time;
     }
 
     Vector3 damagingWeaponComingDirection;

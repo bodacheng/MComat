@@ -21,7 +21,7 @@ public class Idle_State : AI_State
 	{
 		base.AI_State_enter();
         this._Animator.SetFloat("speed", 0f);
-        Animation_Manger.PlayLayerAnim(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name);
         this._Rigidbody.velocity = Vector3.zero;
 	}
 

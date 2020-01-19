@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using HittingDetection;
@@ -34,11 +33,6 @@ public partial class FightAttriCalReference : MonoBehaviour
 
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
-
-    void Awake()
-    {
-        //registerMyDefaultMaterialsShaderDic();
-    }
     
     public void SetGettingDamageState(bool _state)
     {
@@ -130,18 +124,105 @@ public partial class FightAttriCalReference : MonoBehaviour
             ICauseDamages.Add(_dmg);
         }
     }
-
-    void EatDamageProcess(V_Damage processingD)
+    
+    Decompositioner processingBlood;
+    void HitEffect(V_Damage v_Damage)
     {
-        _BeHitCount.BeHitCountPlus();
-        if (processingD.fromWeapon.GetOwnerFightAttriCalReference() != null)
+        if (_Center._ResistanceManager.Resistance.Value > 0)
         {
-            processingD.fromWeapon.GetOwnerFightAttriCalReference().HitCountPlus();
-            if (processingD.fromWeapon._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
-                processingD.fromWeapon.GetOwnerFightAttriCalReference()._Center.Animation_Manger.FrameFreeze();
+            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   v_Damage.CutRotation,
+                                                                   null);
         }
-        CurrentHp.Value -= processingD.AT;
-        switch (processingD.specialApply)
+        else
+        {
+            switch (v_Damage.damage_type)
+            {
+                case DamageType.slight_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   v_Damage.CutRotation,
+                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                    break;
+                case DamageType.light_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   v_Damage.CutRotation,
+                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                    break;
+                case DamageType.heavy_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   v_Damage.CutRotation,
+                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                    break;
+                case DamageType.supper_damage:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   v_Damage.CutRotation,
+                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                    break;
+                case DamageType.light_block:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
+                                                   v_Damage.effectPath,
+                                                   v_Damage.damageHappenPoint,
+                                                   v_Damage.CutRotation,
+                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                break;
+                case DamageType.heavy_block:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
+                                                   v_Damage.effectPath,
+                                                   v_Damage.damageHappenPoint,
+                                                   v_Damage.CutRotation,
+                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                break;
+                default:
+                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                                                                   v_Damage.effectPath,
+                                                                   v_Damage.damageHappenPoint,
+                                                                   v_Damage.CutRotation,
+                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                    break;
+            }
+        }
+    }
+    
+    public void ApplyDamage(V_Damage _dmg)
+	{
+        if (_Center.AIStateRunner.GetCurrentStateNum() == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
+        {
+            _dmg.damage_type = DamageType.heavy_block;
+            HitEffect(_dmg);
+            _dmg.AT = 0;
+            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            return;
+        }
+        
+        if (_dmg._weaponMode == WeaponMode.EnergyFromBodyWeapon)
+        {
+            _dmg.attacker._Center.Animation_Manger.FrameFreeze();
+        }
+
+        HitEffect(_dmg);
+        if (_Center._ResistanceManager.Resistance.Value > 0)
+        {
+            _Center._ResistanceManager.Resistance.Value -= 1;
+            return;
+        }
+        
+        _dmg.attacker.HitCountPlus();
+        _ComboHitCount.HitCountInterrupt();
+        _BeHitCount.BeHitCountPlus();
+        
+        CurrentHp.Value -= _dmg.AT;
+        
+        switch (_dmg.specialApply)
         {
             case SpecialApply.gravitylost:
                 gravityloststart = () =>
@@ -156,96 +237,8 @@ public partial class FightAttriCalReference : MonoBehaviour
                 _Center.buffsRunner.RunSubCoroutineOfState(burstCoroutine);
                 break;
         }
-    }
-    
-    Decompositioner processingBlood;
-    void HitEffect(V_Damage v_Damage)
-    {
-        if (_Center._ResistanceManager.Resistance.Value > 0)
-        {
-            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                                   v_Damage.effectPath,
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-        }
-        else
-        {
-            switch (v_Damage.damage_type)
-            {
-                case DamageType.slight_damage:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                   v_Damage.effectPath,
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    break;
-                case DamageType.light_damage:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                   v_Damage.effectPath,
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    break;
-                case DamageType.heavy_damage:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
-                                                                   v_Damage.effectPath,
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    break;
-                case DamageType.supper_damage:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
-                                                                   v_Damage.effectPath,
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    break;
-                case DamageType.light_block:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                   v_Damage.effectPath,
-                                                   v_Damage.damageHappenPoint,
-                                                   v_Damage.CutRotation,
-                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                break;
-                case DamageType.heavy_block:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                   v_Damage.effectPath,
-                                                   v_Damage.damageHappenPoint,
-                                                   v_Damage.CutRotation,
-                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                break;
-                default:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                   v_Damage.effectPath,
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.fromWeapon.effectSpreadOnBody ? transform : null);
-                    break;
-            }
-        }
-    }
 
-    public void ApplyDamage(V_Damage _dmg)
-	{
-        _Center._ResistanceManager.Resistance.Value -= 1;
-        if (_Center.AIStateRunner.GetCurrentStateNum() == "Defend")
-        {
-            _dmg.damage_type = DamageType.heavy_block;
-            _dmg.AT = 0;
-            HitEffect(_dmg);
-            _Center.AIStateRunner.ChangeState("Defend",_dmg);
-            return;
-        }
-        EatDamageProcess(_dmg);
-        HitEffect(_dmg);
-        if (_Center._ResistanceManager.Resistance.Value > 0)
-        {
-            return;
-        }
-        _ComboHitCount.HitCountInterrupt();
-        
-        if (_dmg.AT >= (CurrentHp.Value + _Center._ResistanceManager.Resistance.Value))
+        if (_dmg.AT >= CurrentHp.Value)
         {
             _dmg.damage_type = DamageType.DeathKnockoff;
         }

@@ -22,6 +22,11 @@ public class G_Ani_MoveEscape_State : AI_State {
     {
         return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
+    
+    public override bool Enter_condition_priority1()
+    {
+        return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
+    }
 
     public override bool Enter_condition_priority2()
     {
@@ -30,7 +35,7 @@ public class G_Ani_MoveEscape_State : AI_State {
 
     public override bool Naturally_exit_condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }
     Vector3 damagingWeaponComingDirection;
     Vector3 facedirection;

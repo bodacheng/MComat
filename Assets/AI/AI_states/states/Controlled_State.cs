@@ -23,11 +23,11 @@ public class Controlled_State : AI_State {
 	}
 
 	public override void AI_State_enter()
-	{		
+	{
+        base.AI_State_enter();
         this.personality_Events.CloseAllPersonalityEffects();
-		base.AI_State_enter();
 		_Rigidbody.useGravity = false;
-		Animation_Manger.PlayLayerAnim (clip_name);
+		Animation_Manger.AnimationTrigger(clip_name);
     }
 
 	public override bool Naturally_exit_condition()//如果受伤动画播放完的话状态就退出，如果时间过了规定的晕眩时间，也退出。

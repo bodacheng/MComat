@@ -73,7 +73,7 @@ public class BO_Shield : MonoBehaviour {
                 personalEffectPath = "redMagic";
                 break;
             default:
-                personalEffectPath = "defaultEffects";
+                personalEffectPath = "defaultmagic";
                 break;
         }
     }
@@ -111,12 +111,12 @@ public class BO_Shield : MonoBehaviour {
         if (_ownerFightAttriCalReference != null)
         {
             // 下面这些都是瞎写的
-            _ownerFightAttriCalReference.ApplyDamage(new V_Damage(DamageType.heavy_damage,
-                                                                    WeaponPosAdjustMode.explosion,
-                                                                        this._ShieldCenterSpot.position,this._ShieldCenterSpot.rotation,
-                                                                            Vector3.zero,
-                                                                                transform.position,
-                                                                                    null));
+            _ownerFightAttriCalReference.ApplyDamage(new V_Damage(0,
+                                                                _ownerFightAttriCalReference, null,
+                                                                DamageType.heavy_damage, WeaponPosAdjustMode.explosion, WeaponMode.EnergyFromBodyWeapon,SpecialApply.none,
+                                                                _ShieldCenterSpot.position, _ShieldCenterSpot.rotation,
+                                                                Vector3.zero, transform.position,
+                                                                "defaultmagic",false));
         }
     }
 

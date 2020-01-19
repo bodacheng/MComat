@@ -122,7 +122,7 @@ public partial class FightTeam : MonoBehaviour
                         personalEffectsPath = "redMagic";
                         break;
                     default:
-                        personalEffectsPath = "defaultEffects";
+                        personalEffectsPath = "defaultmagic";
                         break;
                 }
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath,RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);

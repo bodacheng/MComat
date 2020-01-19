@@ -171,7 +171,7 @@ public partial class G_Attack_State : AI_State {
                 lastFrameRotateAngle = 0;
                 thisFrameRotateAngle = 0;
                 if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)
-                    Animation_Manger.PlayLayerAnim(dash_clip_name);
+                    Animation_Manger.AnimationTrigger(dash_clip_name);
                 else
                 {
                     Debug.Log("here:"+ clip_name);
@@ -199,7 +199,7 @@ public partial class G_Attack_State : AI_State {
 
 	public override bool Naturally_exit_condition()
 	{
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }
 
     public override void AI_State_exit()

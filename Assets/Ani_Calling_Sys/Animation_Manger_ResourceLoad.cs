@@ -50,6 +50,26 @@ public partial class Animation_Manger : MonoBehaviour{
                     endFlag.time = _AnimationClip.length;
                     _AnimationClip.AddEvent(endFlag);
                 }
+                if (_AnimationClip.name == "block")
+                {
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "block",
+                        time = _AnimationClip.length
+                    };
+                    _AnimationClip.AddEvent(endFlag);
+                }
+                if (_AnimationClip.name == "block_break")
+                {
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "block_break",
+                        time = _AnimationClip.length
+                    };
+                    _AnimationClip.AddEvent(endFlag);
+                }
                 basicAnims.Add(_AnimationClip);
             }
             AnimationResourceLoader.SeriesAnimationClipsDic.Add(basicPackKey, basicAnims);

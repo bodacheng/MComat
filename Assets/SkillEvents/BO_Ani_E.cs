@@ -56,7 +56,9 @@ public class BO_Ani_E : MonoBehaviour
             foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in Ani_E.EffectsOnBodyParts)
             {
                 if (keyValuePair.Value != null)
+                {
                     keyValuePair.Value.StopEmissions(clearParticles);
+                }
             }
         }
     }
@@ -118,21 +120,25 @@ public class BO_Ani_E : MonoBehaviour
     public void MagicForward(AnimationEvent e)
 	{
         if (string.IsNullOrEmpty(e.stringParameter))
+        {
             return;
-
+        }
+        
         target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(e.stringParameter, myMagicForwardPath, magic_path);
         if (target_pool != null)
         {
             processingHitBox = target_pool.Rent();
-            processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter;
-            processingHitBox.transform.rotation = transform.rotation;
             processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
+            processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter;
+            processingHitBox.transform.rotation = transform.rotation;            
             processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox._HitBox.MarkersEnablingStarts();
             if (processingHitBox._HitBox.onGroundMagic)
+            {
                 processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
+            }
             if (processingHitBox.TrackControl != null)
             {
                 switch (e.intParameter)
@@ -207,13 +213,13 @@ public class BO_Ani_E : MonoBehaviour
                 break;
         }
         processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox.transform.position = intPos;
         EffectAndHurtObjectLoading.Instance.GenerateEffect(processingHitBox._HitBox.muzzle, magic_path, processingHitBox.transform.position, transform.rotation, null);
         processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         if (_DATA_CENTER._TeamConfig != null)
         {
-            processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox._HitBox.MarkersEnablingStarts();
         }
@@ -221,6 +227,8 @@ public class BO_Ani_E : MonoBehaviour
         {
             processingHitBox.TrackControl.StartOff(intPos, transform.rotation, e.floatParameter);
         }
+        if (!processingHitBox._HitBox.enabled)
+            Debug.Log("奇怪");
     }
 
     Transform target;
@@ -299,31 +307,32 @@ public class BO_Ani_E : MonoBehaviour
         }
         		
         processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         switch (e.stringParameter)
 		{
 			case "right_hand":
-                target = this.right_hand;
+                target = right_hand;
 			break;
 			case "left_hand":
-                target = this.left_hand;
+                target = left_hand;
                 break;
 			case "right_foot":
-                target = this.right_foot;
+                target = right_foot;
                 break;
 			case "left_foot":
-                target = this.left_foot;
+                target = left_foot;
                 break;
             case "head":
-                target = this.head;
+                target = head;
                 break;
             case "tail":
-                target = this.tail;
+                target = tail;
                 break;
 			default:
                 return;
 		}
-        processingHitBox.transform.position = this.target.position;
-        processingHitBox.transform.rotation = this.target.rotation;
+        processingHitBox.transform.position = target.position;
+        processingHitBox.transform.rotation = target.rotation;
         myConstraintSource.sourceTransform = target;
         myConstraintSource.weight = 1;
         processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
@@ -331,7 +340,6 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox.GetPositionConstraint().locked = true;
         processingHitBox.GetPositionConstraint().translationOffset = Vector3.zero;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         if (_DATA_CENTER._TeamConfig != null)
         {
@@ -354,6 +362,7 @@ public class BO_Ani_E : MonoBehaviour
         if (target_pool == null)
             return;
         processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         switch (part)
         {
             case "right_hand":
@@ -392,7 +401,6 @@ public class BO_Ani_E : MonoBehaviour
         processingHitBox.GetPositionConstraint().constraintActive = true;
         processingHitBox.GetPositionConstraint().locked = true;
         processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         if (_DATA_CENTER._TeamConfig != null)
         {
@@ -411,48 +419,48 @@ public class BO_Ani_E : MonoBehaviour
             return;
 
         processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         switch (part)
         {
             case "right_hand":
-                processingHitBox.transform.position = this.right_hand.position;
-                processingHitBox.transform.rotation = this.right_hand.rotation;         
+                processingHitBox.transform.position = right_hand.position;
+                processingHitBox.transform.rotation = right_hand.rotation;         
                 break;
             case "left_hand":
-                processingHitBox.transform.position = this.left_hand.position;
-                processingHitBox.transform.rotation = this.left_hand.rotation;
+                processingHitBox.transform.position = left_hand.position;
+                processingHitBox.transform.rotation = left_hand.rotation;
                 break;
             case "right_foot":
-                processingHitBox.transform.position = this.right_foot.position;
-                processingHitBox.transform.rotation = this.right_foot.rotation;
+                processingHitBox.transform.position = right_foot.position;
+                processingHitBox.transform.rotation = right_foot.rotation;
                 break;
             case "left_foot":
-                processingHitBox.transform.position = this.left_foot.position;
-                processingHitBox.transform.rotation = this.left_foot.rotation;  
+                processingHitBox.transform.position = left_foot.position;
+                processingHitBox.transform.rotation = left_foot.rotation;  
                 break;
             case "head":
-                processingHitBox.transform.position = this.head.position;
-                processingHitBox.transform.rotation = this.head.rotation;            
+                processingHitBox.transform.position = head.position;
+                processingHitBox.transform.rotation = head.rotation;            
                 break;
             case "tail":
-                processingHitBox.transform.position = this.tail.position;
-                processingHitBox.transform.rotation = this.tail.rotation;
+                processingHitBox.transform.position = tail.position;
+                processingHitBox.transform.rotation = tail.rotation;
                 break;
             case "center":
-                processingHitBox.transform.position = this._DATA_CENTER.geometryCenter.position;
+                processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position;
                 processingHitBox.transform.rotation = Quaternion.identity;
                 break;
             case null:
-                processingHitBox.transform.position = this._DATA_CENTER.WholeT.position;
+                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
                 processingHitBox.transform.rotation = Quaternion.identity;
                 break;
             default:
-                processingHitBox.transform.position = this._DATA_CENTER.WholeT.position;
+                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
                 processingHitBox.transform.rotation = Quaternion.identity;
                 break;
         }
         
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter,transform);
         processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
         processingHitBox._HitBox.MarkersEnablingStarts();

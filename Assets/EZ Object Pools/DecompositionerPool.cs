@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine.Animations;
+﻿using UnityEngine.Animations;
 using UnityEngine;
 using UniRx.Toolkit;
 using HittingDetection;
@@ -21,10 +20,6 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     
     protected override void OnBeforeReturn(Decompositioner instance)
     {
-        instance.StopEmissions(true);
-        if (instance._HitBox != null)
-            instance._HitBox.Local_OnDisable();
-
         instance.gameObject.SetActive(false);
     }
 
@@ -48,6 +43,12 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             positionConstraint = a.AddComponent<PositionConstraint>();
             positionConstraint.translationOffset = Vector3.zero;
             positionConstraint.weight = 1;
+        }
+        Rigidbody rigidbody = a.GetComponent<Rigidbody>();//不加刚体的话很多情况下collider的检测类物理函数检测不到
+        if (rigidbody == null)
+        {
+            rigidbody = a.AddComponent<Rigidbody>();
+            rigidbody.isKinematic = true;//这个刚体不受物理影响
         }
         decompositioner._HitBox = bO_Marker_Manager;
         decompositioner.SetPositionConstraint(positionConstraint);

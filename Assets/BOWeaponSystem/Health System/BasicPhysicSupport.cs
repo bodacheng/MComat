@@ -141,7 +141,7 @@ public class BasicPhysicSupport : MonoBehaviour
     float dis_from_center;
     float groundedCount;
     float airCount;
-    void OnAnimatorMove()//千古bug和这个也没什么关系
+    void OnAnimatorMove()
     {
         if (FightGlobalSetting.scenestep == 1)
         {

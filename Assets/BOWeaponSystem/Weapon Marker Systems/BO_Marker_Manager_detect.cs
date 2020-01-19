@@ -82,13 +82,11 @@ namespace HittingDetection
 
                         for (int hit_target_index = 0; hit_target_index < _hits.Length; hit_target_index++)
                         {
-                            if (teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | 1 << _hits[hit_target_index].collider.gameObject.layer))
-                                WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
-                            
-                            if (_hits[hit_target_index].collider.gameObject.layer == 13 && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
+                            if (BallDetectHitPool[hit_target_index].gameObject.layer == teamConfig.enemyWeaponLayerMask
+                                && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
                             {
                                 _Used_Targets.Add(_hits[hit_target_index].collider.transform);
-                                _wallHitPositions.Add(_hits[hit_target_index].point);
+                                WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                             }
 
                             //  这个环节本来有个波对波的问题 但我们给删除了。因为感觉不必要 
@@ -98,9 +96,7 @@ namespace HittingDetection
                             calReference = _hits[hit_target_index].collider.GetComponent<FightAttriCalReference>();
                             _BO_Hitbox = _hits[hit_target_index].collider.GetComponent<BO_Hitbox>();
 
-                            if (_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) == false
-                                &&
-                                _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
+                            if (_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) == false && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
                             {
                                 //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
                                 //if (_BO_Health != null && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
@@ -111,6 +107,7 @@ namespace HittingDetection
                                 //        _Raw_Target_Instance = _BO_Health;
                                 //    }
                                 //}
+                                
                                 //方式2：hitbox模式
                                 if (_BO_Hitbox != null)
                                 {
@@ -127,7 +124,12 @@ namespace HittingDetection
                                     _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
                                     _StartPoint = _hits[hit_target_index].point;
                                     _StartPoint = _StartPoint + (_hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
-                                    hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up),this));
+                                    hitsOnHealthBody.Add(new V_Damage(weaponHP <= 0 ? _myOwnerCalReference.AT : _myOwnerCalReference.AT / weaponHP,
+                                                                        _Raw_Target_Instance, _myOwnerCalReference,
+                                                                        damage_type, _WeaponPosAdjustMode, _WeaponMode, _specialApply,
+                                                                        _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up),
+                                                                        attackerWholeTransform.forward, attackerWholeTransform.position,
+                                                                        personalEffectPath, effectSpreadOnBody));
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
                                 {
@@ -138,6 +140,7 @@ namespace HittingDetection
                                         //因此如果一轮攻击内敌人受伤了，也就再不用研究他能不能防御住所受攻击了。
                                     }
                                 }
+                                WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                             }
                         }
                     }
@@ -202,22 +205,16 @@ namespace HittingDetection
 
                             for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
                             {
-                                if (teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | 1 << BallDetectHitPool[hit_target_index].gameObject.layer))
-                                    WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
-
-                                if (BallDetectHitPool[hit_target_index].gameObject.layer == 13
-                                    && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
+                                if (BallDetectHitPool[hit_target_index].gameObject.layer == teamConfig.enemyWeaponLayerMask && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
                                 {
                                     _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
                                     Vector3 _wallHitPoint = BallDetectHitPool[hit_target_index].ClosestPoint(_markers[i].transform.position);//ClosestPointOnBounds
-                                    _wallHitPositions.Add(_wallHitPoint);
+                                    WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                 }
-
                                 calReference = BallDetectHitPool[hit_target_index].GetComponent<FightAttriCalReference>();
                                 _BO_Hitbox = BallDetectHitPool[hit_target_index].GetComponent<BO_Hitbox>();
 
-                                if (_Targets_Raw_Hit.Contains(BallDetectHitPool[hit_target_index].transform) == false &&
-                                    _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
+                                if (_Targets_Raw_Hit.Contains(BallDetectHitPool[hit_target_index].transform) == false && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
                                 {
                                     //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
                                     //if (_BO_Health != null && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
@@ -243,7 +240,7 @@ namespace HittingDetection
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
                                         _StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);//这个地方不能用ClosestPoint。这里存在unity官方bug。
-                                        _StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;//为了打击特效看起来更接近肉体 向里切一下。
+                                        //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;//为了打击特效看起来更接近肉体 向里切一下。
                                                                                                                                                   // 以下是几种 _StartPoint的其他算法
                                                                                                                                                   // 1.
                                                                                                                                                   // Vector3 fromMarkerToHit = BallDetectHitPool[hit_target_index].transform.position - _markers[i].transform.position;
@@ -252,7 +249,12 @@ namespace HittingDetection
                                                                                                                                                   // 2.
                                                                                                                                                   // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
                                                                                                                                                   // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new V_Damage(_Raw_Target_Instance, _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up),this));
+                                        hitsOnHealthBody.Add(new V_Damage(weaponHP <= 0 ? _Raw_Target_Instance.AT : _Raw_Target_Instance.AT / weaponHP,
+                                                                            _Raw_Target_Instance, _myOwnerCalReference,
+                                                                            damage_type, _WeaponPosAdjustMode, _WeaponMode, _specialApply,
+                                                                            _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up),
+                                                                            attackerWholeTransform.forward, attackerWholeTransform.position,
+                                                                            personalEffectPath, effectSpreadOnBody));
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
                                     {
@@ -263,6 +265,7 @@ namespace HittingDetection
                                             //因此如果一轮攻击内敌人受伤了，也就再不用研究他能不能防御住所受攻击了。
                                         }
                                     }
+                                    WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                 }
                             }
                         }

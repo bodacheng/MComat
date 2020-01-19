@@ -73,6 +73,8 @@ public class FightGlobalSetting : MonoBehaviour
         _defendHP = defendHP;
         _lighthit_lastingtime = lighthit_lastingtime;
         _heavyhit_lastingtime = heavyhit_lastingtime;
+        _lightBlockLastingTime = lightBlockLastingTime;
+        _heavyBlockLastingTime = heavyBlockLastingTime;
 
         _attackDrawingDistance = attackDrawingDistance;
     }

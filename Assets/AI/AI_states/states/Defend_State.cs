@@ -7,13 +7,16 @@ public class Defend_State : AI_State
 {
     readonly string defend_clip_name;
     readonly string block_break_name;
-    public float time_counter;
+    float time;
     float used_block_least_time;
-    //int defendHP;
+    int DefendHP = 10;
+    readonly float DefendHpRefreshTime = 5f;
+    float lastExitTime;
+    
     List<Collider> damagingweaponList;
     List<Collider> nearbyenemymeat;
     Vector3 fixDesPos;
-    
+
     public Defend_State(string defend_clip_name,string block_break_name)
     {
         this.defend_clip_name = defend_clip_name;
@@ -25,10 +28,10 @@ public class Defend_State : AI_State
         switch (damage.damage_type)
         {
             case DamageType.light_block:
-                //defendHP -= 1;
+                DefendHP -= 1;
                 break;
             case DamageType.heavy_block:
-                //defendHP -= 2;
+                DefendHP -= 2;
                 break;
         }
         //if (defendHP <= 0)
@@ -44,6 +47,7 @@ public class Defend_State : AI_State
     public override void Pre_process_before_enter()
     {
         base.Pre_process_before_enter();
+        DefendHP = 10;
     }
 
     public override bool Capacity_enter_condition()
@@ -53,11 +57,13 @@ public class Defend_State : AI_State
     
     public override bool Naturally_exit_condition() 
     {
-        return time_counter <= 0;
+        return time <= 0;
     }
 
     public override bool Enter_condition_priority1()
     {
+        if (((Time.time - lastExitTime) < DefendHpRefreshTime))
+            return false;
         if (_ResistanceManager.Resistance.Value > 0)
             return false;
         if (_FightAttriCalReference.IFgettingDamage())
@@ -67,12 +73,14 @@ public class Defend_State : AI_State
         if (nearbyenemymeat.Count == 0)
         {
             if (damagingweaponList.Count > 0)
+            {
                 return true;
-        }else{
+            }
+        }
+        else{
             if (damagingweaponList.Count > 0)
             {
-                if (Vector3.Distance(nearbyenemymeat[0].transform.position, _DATA_CENTER.geometryCenter.position)
-                    >
+                if (Vector3.Distance(nearbyenemymeat[0].transform.position, _DATA_CENTER.geometryCenter.position) >
                     Vector3.Distance(damagingweaponList[0].transform.position, _DATA_CENTER.geometryCenter.position))
                 {
                     return true;
@@ -84,6 +92,10 @@ public class Defend_State : AI_State
 
     public override bool Enter_condition_priority3()
     {
+        if (((Time.time - lastExitTime) < DefendHpRefreshTime))
+        {
+            return false;
+        }
         return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
     }
 
@@ -96,25 +108,29 @@ public class Defend_State : AI_State
     public override void AI_State_enter()
     {
         //defendHP = FightGlobalSetting._defendHP;
-        _ResistanceManager.Resistance.Value = 5;//defendHP > 0 ? 5 : 0;
+        base.AI_State_enter();
+        if ((Time.time - lastExitTime) > DefendHpRefreshTime)
+        {
+            DefendHP = 10;
+        }
+        _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
-        base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
-        Animation_Manger.PlayLayerAnim(defend_clip_name);
+        Animation_Manger.AnimationTrigger(defend_clip_name);
         _Rigidbody.velocity = Vector3.zero;
         used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
-        time_counter = used_block_least_time;     
+        time = used_block_least_time;
         _SkillCancelFlag.turn_off_flag();
          //this.AI_DATA_CENTER.turnShield(true);
     }
     
     public override void AI_State_enter(V_Damage newValue)
     {
-        _ResistanceManager.Resistance.Value = 5;//defendHP > 0 ? 5 : 0;
+        base.AI_State_enter();
+        _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
-        base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);   
         _SkillCancelFlag.turn_off_flag();
          //this.AI_DATA_CENTER.turnShield(true);
@@ -127,24 +143,23 @@ public class Defend_State : AI_State
          switch(newValue.damage_type)
          {
             case DamageType.light_block:
-                Animation_Manger.PlayLayerAnim(block_break_name);
+                Animation_Manger.AnimationTrigger(block_break_name);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
-                time_counter = used_block_least_time;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
             case DamageType.heavy_block:
-                Animation_Manger.PlayLayerAnim(block_break_name);
+                Animation_Manger.AnimationTrigger(block_break_name);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
-                time_counter = used_block_least_time;
+                time = used_block_least_time;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
          }
     }
-
+    
     public override void AI_State_exit()
     {
         //this.Animation_Manger.PlayLayerAnim(animator_layer_index.Full_Body,null);
@@ -156,16 +171,30 @@ public class Defend_State : AI_State
         // 我们把defend状态exit中的PlayLayerAnim(_animator_layer_index, null)删除了后就不再产生对应bug。
         // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
         base.AI_State_exit();
+        lastExitTime = Time.time;
         _ResistanceManager.ResistanceClear();
         //AI_DATA_CENTER.turnShield(false);
     }
 
     public override void _State_FixedUpdate1()
     {
-        _ResistanceManager.Resistance.Value = 5;//defendHP > 0 ? 5 : 0;
+        _ResistanceManager.Resistance.Value = DefendHP > 0 ? 5 : 0;
         damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
         nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
-
+        
+        if (time >= 0f)
+        {
+            time -= Time.fixedDeltaTime;
+            if (time < 0f)
+            {
+                Animation_Manger.AnimationTrigger(defend_clip_name);
+            }
+        }
+        if (time < used_block_least_time * 0.8f)
+        {
+            _Rigidbody.velocity = Vector3.zero;
+        }
+        
         if (nearbyenemymeat.Count > 0)
         {
             if (nearbyenemymeat[0] != null)
@@ -178,18 +207,6 @@ public class Defend_State : AI_State
                 if (damagingweaponList[0] != null)
                     RotateToTarget(damagingweaponList[0].transform.position, 0.5f, true);
             }
-        }
-        if (time_counter >= 0f)
-        {
-            time_counter -= Time.fixedDeltaTime;
-            if (time_counter < 0f)
-            {
-                Animation_Manger.PlayLayerAnim(defend_clip_name);
-            }
-        }
-        if (time_counter < used_block_least_time/2)
-        {
-            _Rigidbody.velocity = Vector3.zero;
         }
     }
 }

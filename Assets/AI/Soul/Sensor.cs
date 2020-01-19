@@ -23,14 +23,14 @@ public class Sensor : MonoBehaviour {
     List<Collider> OutterDamagingWeapon = new List<Collider>();
     List<Collider> NearbyDamagingWeapon = new List<Collider>();
 
-    Data_Center selfDataCenter;
+    Data_Center SelfDataCenter;
 
     public bool IFContinuousDetectionStarted()
     {
         return continuousDetection;
     }
 
-    public void SetDectectLayerAndFrontDirection(TeamConfig teamConfig,Data_Center _self)
+    public void SetDectectLayer(TeamConfig teamConfig,Data_Center _self)
     {
         _TeamConfig = teamConfig;
         if (_TeamConfig != null)
@@ -38,7 +38,7 @@ public class Sensor : MonoBehaviour {
             _layers = teamConfig.mySensorAndWeaponTargetLayerMask;
             meAndEnemyLayermask = teamConfig.myTeamAndMyEnemy;
         }
-        selfDataCenter = _self;
+        SelfDataCenter = _self;
     }
 
     public List<Collider> GetInnerEnemiesColliders()
@@ -68,11 +68,14 @@ public class Sensor : MonoBehaviour {
     
     public Collider GetClosestColliderInSensorRange(bool near,bool mid,bool far)
     {
-        return near && innerEnemies.Count > 0
-            ? FindNearestCollider(innerEnemies)
-            : mid && midEnemies.Count > 0
-            ? FindNearestCollider(midEnemies)
-            : far && farEnemies.Count > 0 ? FindNearestCollider(farEnemies) : null;
+        return near && innerEnemies.Count > 0 ? 
+            FindNearestCollider(innerEnemies) 
+            : 
+            (mid && midEnemies.Count > 0 ? 
+                FindNearestCollider(midEnemies) 
+                : 
+                (far && farEnemies.Count > 0 ? 
+                    FindNearestCollider(farEnemies) : null));
     }
 
     public void SensorFixedUpdate()
@@ -98,6 +101,7 @@ public class Sensor : MonoBehaviour {
             DetectionInterval++;
         }
 	}
+    
     // continuousDetectionStart(0) 的情况下。
     // round 0: (一次检测) this.DetectionResultLastFrame == 0, DetectionInterval = 1 
     // round 1: DetectionInterval = 0; (上次检测结果未被清空)
@@ -153,7 +157,7 @@ public class Sensor : MonoBehaviour {
     public void SensorDetectProcess()
     {
         _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(transform.position,1f,selfDataCenter.WholeT.forward,sensor_radius,meAndEnemyLayermask, QueryTriggerInteraction.Collide);
+        _spherecastHits = Physics.SphereCastAll(transform.position,1f,SelfDataCenter.WholeT.forward,sensor_radius,meAndEnemyLayermask, QueryTriggerInteraction.Collide);
     }
 
     public void SensorDetectionResultClearProcess()
@@ -316,7 +320,7 @@ public class Sensor : MonoBehaviour {
             {
                 if (_TeamConfig.myTeamLayerMask == (_TeamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
                 {
-                    if (!selfDataCenter._FightAttriCalReference.IfMyBody(raycastHit.collider))
+                    if (!SelfDataCenter._FightAttriCalReference.IfMyBody(raycastHit.collider))
                     {
                         float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
                         if (to_me < matetome)

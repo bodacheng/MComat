@@ -83,7 +83,7 @@ public partial class Data_Center : MonoBehaviour
                     personalEffectsPath = "redMagic";
                     break;
                 default:
-                    personalEffectsPath = "defaultEffects";
+                    personalEffectsPath = "defaultmagic";
                     break;
             }
             EffectAndHurtObjectLoading.Instance.IniEffectsPool("short_effect", personalEffectsPath, 3);
@@ -125,7 +125,7 @@ public partial class Data_Center : MonoBehaviour
             gameObject.tag = "Untagged";
         }
 
-        Sensor.SetDectectLayerAndFrontDirection(_TeamConfig,this);
+        Sensor.SetDectectLayer(_TeamConfig,this);
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
 
         string effectPath;
@@ -147,7 +147,7 @@ public partial class Data_Center : MonoBehaviour
                 effectPath = "redMagic";
                 break;
             default:
-                effectPath = "defaultEffects";
+                effectPath = "defaultmagic";
                 break;
         }
 

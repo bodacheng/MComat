@@ -22,6 +22,9 @@ namespace HittingDetection
     
     public partial class BO_Marker_Manager : MonoBehaviour
     {
+        [Tooltip("是否正在作用")]
+        public bool Enabled;
+    
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
         bool _startActivated = true;
@@ -58,11 +61,11 @@ namespace HittingDetection
         float ContinuousDamageInterval = 0.2f;
 
         [Tooltip("启动特效")]
-        public string muzzle;//"energy_resolve";
+        public string muzzle;
         
         [Tooltip("特殊爆炸特效")]
         [SerializeField]
-        string explosionEffect;
+        string ExplosionEffect = "energy_resolve";
         
         [Tooltip("魔法特效路径(blueMagic redMagic)")]
         [SerializeField]
@@ -71,7 +74,6 @@ namespace HittingDetection
         public int CurrentHP { get; set; }
         
         FightAttriCalReference _myOwnerCalReference;
-        bool _markersAreEnabled;
         TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform attackerWholeTransform;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
@@ -82,7 +84,6 @@ namespace HittingDetection
         List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
         List<Transform> _Used_Targets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
         List<Transform> _Shields_Hit = new List<Transform>();
-        List<Vector3> _wallHitPositions = new List<Vector3>();
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         Decompositioner processingBlood;
@@ -105,12 +106,7 @@ namespace HittingDetection
             }
             _markers = bms.ToArray();
         }
-        
-        public string GetEffectPath()
-        {
-            return personalEffectPath;
-        }
-        
+                
         public void MarkersEnablingStarts()
         {
             if (_startActivated)
@@ -121,32 +117,27 @@ namespace HittingDetection
 
         public void Local_OnDisable()
         {
-            CurrentHP = weaponHP;
             DisableMarkers();
             SetTeamConfig(TeamConfig.defaultSet);
         }
 
-        public void SetReferenceTransformInfo(Transform centerT,Transform WholeT)
+        public void SetReferenceTransformInfo(Transform centerT ,Transform WholeT)
         {
             _WeaponHolderCenter = centerT;
-            attackerWholeTransform = WholeT;           
+            attackerWholeTransform = WholeT;
+        }
+
+        public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
+        {
+            _myOwnerCalReference = myOwnerCalReference;
         }
         public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
             return _myOwnerCalReference;
         }
-        public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
-        {
-            _myOwnerCalReference = myOwnerCalReference;
-        }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
             _Used_Targets = Used_Targets;
-        }
-        
-        public float GetFixedAT()
-        {
-            return weaponHP <= 0 ? _myOwnerCalReference.AT : _myOwnerCalReference.AT / weaponHP;
         }
 
         public void SetTeamConfig(TeamConfig teamConfig)
@@ -164,19 +155,21 @@ namespace HittingDetection
         // EnableMarkers的运行归根结底也都是建立在动画事件上，而动画片段的播放在双方客户端上是平等的，所以理论上说也没有必须针对主客客户端区别执行的操作
         public void EnableMarkers()
         {
-            _Used_Targets.Clear();
+            if (_Used_Targets != null)// 20200119 :我们认为这个null判断理论上不需要，但的确这里不加的话会有bug。以后的测试可以考虑把它去掉试试
+                _Used_Targets.Clear();
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {
                 _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer);
             }
-            _markersAreEnabled = true;
+            Enabled = true;
         }
 
         public void DisableMarkers()
         {
-            _markersAreEnabled = false;
-            _Used_Targets.Clear();
+            Enabled = false;
+            if (_Used_Targets != null)
+                _Used_Targets.Clear();
             _Shields_Hit.Clear();
             if (_markers != null)
             {
@@ -197,7 +190,8 @@ namespace HittingDetection
 
         public void ClearTargets()
         {
-            _Used_Targets.Clear();
+            if (_Used_Targets != null)
+                _Used_Targets.Clear();
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {
@@ -210,14 +204,21 @@ namespace HittingDetection
             damage_type = damageType;
         }
 
-        void FixedUpdate()
+        public void LocalUpdate()
         {
-            if (_markersAreEnabled)
+            if (Enabled)
             {
                 HitFlesh = false;
                 HitShield = false;
                 DetectProcess();
                 TreatProcess();
+            }
+        }
+
+        void LateUpdate()
+        {
+            if (Enabled)
+            {
                 ClearMarkersDectections();
             }
         }
@@ -235,8 +236,8 @@ namespace HittingDetection
             if (weaponHP > 0)
             {
                 CurrentHP -= 1;
+                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, personalEffectPath, Pos, Qua, null);
             }
-            EffectAndHurtObjectLoading.Instance.GenerateEffect(explosionEffect, personalEffectPath, Pos, Qua, null);
         }
 
         public bool IfVectorClean(Vector3 rot)

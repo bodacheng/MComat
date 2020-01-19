@@ -4784,9 +4784,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  bullet_GPS: {fileID: 0}
   DestructionDelay: 6.2
   stop_emission_delay: 6
+  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
 --- !u!114 &4008500045756426116
@@ -4862,18 +4862,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enabled: 0
+  _startActivated: 1
   damage_type: 1
   _WeaponMode: 2
   _WeaponPosAdjustMode: 3
-  _specialApply: 0
-  _startActivated: 1
   weaponHP: 1
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  _specialApply: 0
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  personalEffectPath: lightMagic
-  explosionEffect: s_hit
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
+  muzzle: 
+  ExplosionEffect: energy_resolve
+  zokusei: 3
 --- !u!1 &1027070245102916380
 GameObject:
   m_ObjectHideFlags: 0
@@ -9615,7 +9617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 0
@@ -9623,4 +9624,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.5
-  mode: 2

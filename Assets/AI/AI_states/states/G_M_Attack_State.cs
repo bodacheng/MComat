@@ -89,7 +89,7 @@ public class G_M_Attack_State : AI_State {
 
 	public override bool Naturally_exit_condition()
 	{
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }
 
 	public override void AI_State_exit()

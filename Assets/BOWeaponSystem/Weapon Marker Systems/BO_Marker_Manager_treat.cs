@@ -33,22 +33,19 @@ namespace HittingDetection
                 {
                     if (!_Used_Targets.Contains(_Shields_Hit[i1])) //无论对墙壁，盾牌，还是伤害对象，每一轮攻击只会造成一次影响
                     {
-                        WeaponEnergyExaust(_Shields_Hit[i1].position, _Shields_Hit[i1].rotation);
                         BO_Shield TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
                         collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
                         _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         switch (collision.on_weapon_holder)
                         {
                             case DamageType.stagger:
-                                V_Damage new_damage = new V_Damage(
-                                    DamageType.stagger, 
-                                    WeaponPosAdjustMode.explosion, 
-                                    _Shields_Hit[i1].position, 
-                                    Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                    TheS.transform.position, 
-                                    _myOwnerCalReference.transform.position ,
-                                    null);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
-                                _myOwnerCalReference.ApplyDamage(new_damage);
+                                    V_Damage new_damage = new V_Damage(0,
+                                        _myOwnerCalReference,TheS._ownerFightAttriCalReference,
+                                        DamageType.stagger, WeaponPosAdjustMode.explosion, this._WeaponMode,SpecialApply.none,
+                                        _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                        TheS._ownerFightAttriCalReference._Center.WholeT.forward,TheS._ownerFightAttriCalReference._Center.WholeT.position,
+                                        personalEffectPath, this.effectSpreadOnBody);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    _myOwnerCalReference.ApplyDamage(new_damage);
                                 break;
                             case DamageType.none:
                                 break;
@@ -60,24 +57,32 @@ namespace HittingDetection
                             switch (collision.on_shield_holder)
                             {
                                 case DamageType.light_block:
-                                    //Vector3 jiuzhengweizhi;
-                                    V_Damage new_damage = new V_Damage(DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, 
-                                                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                                                            attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                    V_Damage new_damage = new V_Damage(0f,
+                                        TheS._ownerFightAttriCalReference, _myOwnerCalReference,
+                                        DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
+                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                        attackerWholeTransform.forward, attackerWholeTransform.position,
+                                        personalEffectPath, effectSpreadOnBody);
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
-                                    new_damage = new V_Damage(DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward,
-                                                                 _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                                                    attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                        new_damage = new V_Damage(0f,
+                                        TheS._ownerFightAttriCalReference, _myOwnerCalReference,
+                                        DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
+                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                        attackerWholeTransform.forward, attackerWholeTransform.position,
+                                        personalEffectPath, effectSpreadOnBody);
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
-                                    new_damage = new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, 
-                                                                _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                                                    attackerWholeTransform.forward, attackerWholeTransform.position, this); //这地方是因为我们不了解往同一个列表里加入相同变量两次到底是啥结果。。。所以保险起见
+                                        new_damage = new V_Damage(0f,
+                                        TheS._ownerFightAttriCalReference, _myOwnerCalReference,
+                                        DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
+                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
+                                        attackerWholeTransform.forward, attackerWholeTransform.position,
+                                        personalEffectPath,effectSpreadOnBody);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:
@@ -85,19 +90,6 @@ namespace HittingDetection
                             }
                         }
                         _Used_Targets.Add(_Shields_Hit[i1]);
-                    }
-                }
-
-                if (_wallHitPositions.Count > 0)
-                {
-                    Vector3 point;
-                    for (int temp = 0; temp < _wallHitPositions.Count; temp++)
-                    {
-                        point = _wallHitPositions[temp];
-                        if (IfVectorClean(point))
-                        {
-                            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("Sparks", personalEffectPath, point, Quaternion.LookRotation(_MarkersParent.transform.position - point, Vector3.up), null);
-                        }
                     }
                 }
             }
@@ -108,16 +100,10 @@ namespace HittingDetection
                 {
                     if (_hitOnHealthBody.victim != null && _Used_Targets.Contains(_hitOnHealthBody.victim.transform) == false)
                     {
-                        WeaponEnergyExaust(_hitOnHealthBody.damageHappenPoint, Quaternion.identity);
-                        _hitOnHealthBody.damage_type = damage_type;
-                        _hitOnHealthBody._WeaponPosAdjustMode = _WeaponPosAdjustMode;
-                        _hitOnHealthBody.AttackerT_foward = attackerWholeTransform.forward;
-                        _hitOnHealthBody.AttackerT_pos = attackerWholeTransform.position;
-                        _hitOnHealthBody.effectPath = personalEffectPath;
-                        _hitOnHealthBody.specialApply = _specialApply;
                         _hitOnHealthBody.victim.ApplyDamage(_hitOnHealthBody);
-                        _myOwnerCalReference.MyDamageCount(_hitOnHealthBody);
-                        _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                        _hitOnHealthBody.attacker.MyDamageCount(_hitOnHealthBody);
+                        _hitOnHealthBody.attacker._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                        _hitOnHealthBody.attacker.PlusCriticalGauge(1);
                         //if (is_E_weapon)
                         //{
                         //    if (e_Damage != null)
@@ -128,16 +114,22 @@ namespace HittingDetection
                         //        }
                         //    }
                         //}
-                        _Used_Targets.Add(_hitOnHealthBody.victim.transform);
+                        if (_Used_Targets != null)
+                        {
+                            _Used_Targets.Add(_hitOnHealthBody.victim.transform);
+                        }else{
+                            Debug.Log("邪门了："+gameObject);
+                        }
                     }
                 }
-                _myOwnerCalReference.PlusCriticalGauge(3);
             }
 
+            // 下面的环节对特效攻击的“能量消解”机制极端关键。如果非ContinuousDamage那么每帧一个能量特效只会被一个撞击对象消耗一格寿命
+            // 可以结合WeaponEnergyExaust的作用位置来理解
             if (!ContinuousDamage && weaponHP > 0)
+            {
                 ClearTargets();
-
-            _wallHitPositions.Clear();
+            }
             if (ContinuousDamage)
             {
                 _ContinuousDamage_Timer += Time.fixedDeltaTime;

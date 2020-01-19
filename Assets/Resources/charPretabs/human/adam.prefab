@@ -5294,6 +5294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enabled: 0
   _startActivated: 1
   damage_type: 0
   _WeaponMode: 1
@@ -5305,7 +5306,7 @@ MonoBehaviour:
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
   muzzle: 
-  explosionEffect: 
+  ExplosionEffect: energy_resolve
   zokusei: 0
 --- !u!1 &1288409059722162568
 GameObject:
@@ -11042,7 +11043,7 @@ MonoBehaviour:
   Animator: {fileID: 7449637348374639402}
   Coroutine_Step: 1
   _toUse: {fileID: 0}
-  animationcounter: 0
+  _C: {fileID: 3067775756000527400}
 --- !u!114 &6703646354402629311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40948,6 +40949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enabled: 0
   _startActivated: 1
   damage_type: 0
   _WeaponMode: 1
@@ -40959,5 +40961,5 @@ MonoBehaviour:
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
   muzzle: 
-  explosionEffect: 
+  ExplosionEffect: energy_resolve
   zokusei: 0

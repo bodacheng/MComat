@@ -58,12 +58,12 @@ public class Hurt_State : AI_State {
         //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);// 第二个参数是距离除以期望速度
         if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.damage_type == DamageType.supper_damage)//&& newValue.damage_type == DamageType.supper_damage
         {
-            _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.knockOff_damage,
-                                                                newValue._WeaponPosAdjustMode,   
-                                                                    newValue.damageHappenPoint, newValue.CutRotation,
-                                                                        newValue.AttackerT_foward,
-                                                                            newValue.AttackerT_pos, 
-                                                                                newValue.fromWeapon));
+            _FightAttriCalReference.ApplyDamage(new V_Damage(0,
+                                                            _FightAttriCalReference, newValue.attacker,
+                                                            DamageType.knockOff_damage, newValue._WeaponPosAdjustMode, newValue._weaponMode,SpecialApply.none,
+                                                            newValue.damageHappenPoint, newValue.CutRotation,
+                                                            newValue.AttackerT_foward,newValue.AttackerT_pos,
+                                                            newValue.effectPath,newValue.effectSpreadOnBody));
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
         }
         RotateToDirection(- fixDesPos, 2f, true);
@@ -71,8 +71,10 @@ public class Hurt_State : AI_State {
         personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
-        if (newValue.fromWeapon.effectSpreadOnBody)
-            _FightAttriCalReference.RunShaderChangeProcess(newValue.effectPath,0.1f);
+        if (newValue.effectSpreadOnBody)
+        {
+            _FightAttriCalReference.RunShaderChangeProcess(newValue.effectPath, 0.1f);
+        }
     }
     
     public override void _State_FixedUpdate1()
