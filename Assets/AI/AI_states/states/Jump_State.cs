@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Soul;
 
-public class Jump_State : AI_State
+public class Jump_State : Behavior
 {	
 	private readonly string clip_name;
     private readonly float forward_force;

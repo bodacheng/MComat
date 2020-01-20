@@ -201,13 +201,9 @@ namespace mainMenu
 
                 CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
                 CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
-                yield return (aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI));
-                yield return (
-                    aI_DATA_CENTER.Step2Initialize(
-                        characterResourceInfo.type, characterDataInfo._NineAndTwo,
-                        characterDataInfo._NineAndTwo.level, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI)
-                );
-
+                yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
+                yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.type, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
+                
                 if (aI_DATA_CENTER.AIStateRunner != null)
                     aI_DATA_CENTER.AIStateRunner.ChangeState("Empty");
             }

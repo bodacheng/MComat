@@ -11,9 +11,9 @@ namespace Soul
 
         #region 初始化相关
         public string characterType;
-        public List<State_Transition_Set> State_Transition_Set_List;//
+        public List<Behavior_Transition_Set> State_Transition_Set_List;//
         NineAndTwo readingNineAndTwo;
-        States_Incubator _States_Incubator;
+        Behaviors_Incubator _States_Incubator;
         #endregion
 
         #region 移动端输入器相关
@@ -30,24 +30,24 @@ namespace Soul
 
         #region 运行时活参数
         Empty_State empty_State = new Empty_State();
-        AI_State now_state;
-        AI_State lastState;
-        AI_State try_state;
+        Behavior now_state;
+        Behavior lastState;
+        Behavior try_state;
         string current_state_num;
-        IDictionary<string, AI_State> state_Dictionary = new Dictionary<string, AI_State>();
-        IDictionary<string, State_Transition_Set> state_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
-        List<State_Rate_Set> avaliable_casual_Transitions = new List<State_Rate_Set>();
-        List<State_Rate_Set> casual_TransitionsPriority1 = new List<State_Rate_Set>();
-        List<State_Rate_Set> casual_TransitionsPriority2 = new List<State_Rate_Set>();
-        List<State_Rate_Set> casual_TransitionsPriority3 = new List<State_Rate_Set>();
+        IDictionary<string, Behavior> state_Dictionary = new Dictionary<string, Behavior>();
+        IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
+        List<Behavior_Rate_Set> avaliable_casual_Transitions = new List<Behavior_Rate_Set>();
+        List<Behavior_Rate_Set> casual_TransitionsPriority1 = new List<Behavior_Rate_Set>();
+        List<Behavior_Rate_Set> casual_TransitionsPriority2 = new List<Behavior_Rate_Set>();
+        List<Behavior_Rate_Set> casual_TransitionsPriority3 = new List<Behavior_Rate_Set>();
         List<string> avaliable_forced_Transitions = new List<string>();
-        State_Transition_Set CurrentStateTransitionSet;
-        List<AI_State> AINext = new List<AI_State>();
-        List<AI_State> AINextPriority1 = new List<AI_State>();
-        List<AI_State> AINextPriority2 = new List<AI_State>();
-        List<AI_State> AINextPriority3 = new List<AI_State>();
-        List<AI_State> States_for_AbsoluteInput = new List<AI_State>();//该列表在处理的时候不包括待机状态
-        AI_State commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+        Behavior_Transition_Set CurrentStateTransitionSet;
+        List<Behavior> AINext = new List<Behavior>();
+        List<Behavior> AINextPriority1 = new List<Behavior>();
+        List<Behavior> AINextPriority2 = new List<Behavior>();
+        List<Behavior> AINextPriority3 = new List<Behavior>();
+        List<Behavior> States_for_AbsoluteInput = new List<Behavior>();//该列表在处理的时候不包括待机状态
+        Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         #endregion
 
         public void SetPlayerMode(bool result)
@@ -71,15 +71,15 @@ namespace Soul
             return false;
         }
 
-        public AI_State GetNowState()
+        public Behavior GetNowState()
         {
             return now_state;
         }
-        public AI_State GetLastState()
+        public Behavior GetLastState()
         {
             return lastState;
         }
-        public AI_State GetTryState()
+        public Behavior GetTryState()
         {
             return try_state;
         }
@@ -185,7 +185,7 @@ namespace Soul
             string[] startOffState = { "Move_normal", "Move_slow", "Move_fast", "Test_Move" };
             for (int i = 0; i < startOffState.Length; i++)
             {
-                state_Transition_Dictionary.TryGetValue(startOffState[i], out State_Transition_Set _State_Transition);
+                state_Transition_Dictionary.TryGetValue(startOffState[i], out Behavior_Transition_Set _State_Transition);
                 if (_State_Transition != null)
                 {
                     this.ChangeState(startOffState[i]);
@@ -194,7 +194,7 @@ namespace Soul
             }
         }
 
-        public void FormFightingSetsByNineAndTwo(string type, NineAndTwo nineAndTwo, int AI_level)
+        public void FormFightingSetsByNineAndTwo(string type, NineAndTwo nineAndTwo)
         {
             if (nineAndTwo == null)
             {
@@ -216,11 +216,11 @@ namespace Soul
                 _inputManager = new InputManager();
             _inputManager.INI(hasD, hasR, this);
 
-            _States_Incubator = new States_Incubator(type, empty_State,this.state_Transition_Dictionary);
-            List<AI_Num_With_State> Num_State_List = _States_Incubator.Num_State_List;// 理解整个系统的关键
-            state_Dictionary = new Dictionary<string, AI_State>();
+            _States_Incubator = new Behaviors_Incubator(type, empty_State,this.state_Transition_Dictionary);
+            List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
+            state_Dictionary = new Dictionary<string, Behavior>();
 
-            foreach (AI_Num_With_State s in Num_State_List)
+            foreach (BehaviorIndex_With_Behavior s in Num_State_List)
             {
                 if (state_Transition_Dictionary.ContainsKey(s.num))
                 {
@@ -229,7 +229,8 @@ namespace Soul
                     s.state.enterInput = state_Transition_Dictionary[s.num].enterInput;
                     s.state.exitInput = state_Transition_Dictionary[s.num].exitInput;
                     s.state.behaviorEnterRanges = state_Transition_Dictionary[s.num].ai_trigger_ranges;
-                    state_Dictionary.Add(new KeyValuePair<string, AI_State>(s.num, s.state));
+                    AddAITriggerConditionToBehavior(s.state);
+                    state_Dictionary.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
                 }
                 else
                 {
@@ -238,17 +239,50 @@ namespace Soul
             }
 
             if (readingNineAndTwo.GetAttackChuan()[1] != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetAttackChuan()[1].StateKey]);
+                States_for_AbsoluteInput.Add(state_Dictionary[readingNineAndTwo.GetAttackChuan()[1].StateKey]);
             if (readingNineAndTwo.GetFire1Chuan()[1] != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetFire1Chuan()[1].StateKey]);
+                States_for_AbsoluteInput.Add(state_Dictionary[readingNineAndTwo.GetFire1Chuan()[1].StateKey]);
             if (readingNineAndTwo.GetFire2Chuan()[1] != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetFire2Chuan()[1].StateKey]);
+                States_for_AbsoluteInput.Add(state_Dictionary[readingNineAndTwo.GetFire2Chuan()[1].StateKey]);
             if (readingNineAndTwo.GetD_STS() != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetD_STS().StateKey]);
+                States_for_AbsoluteInput.Add(state_Dictionary[readingNineAndTwo.GetD_STS().StateKey]);
             if (readingNineAndTwo.GetR_STS() != null)
-                States_for_AbsoluteInput.Add(state_Dictionary[this.readingNineAndTwo.GetR_STS().StateKey]);
+                States_for_AbsoluteInput.Add(state_Dictionary[readingNineAndTwo.GetR_STS().StateKey]);
             if (readingNineAndTwo.GetM_STS() != null)
-                commandWaitingState = state_Dictionary[this.readingNineAndTwo.GetM_STS().StateKey];
+                commandWaitingState = state_Dictionary[readingNineAndTwo.GetM_STS().StateKey];
+        }
+
+        void AddAITriggerConditionToBehavior(Behavior behavior)
+        {
+            behavior.priority1.Clear();
+            behavior.priority2.Clear();
+            behavior.priority3.Clear();
+            switch(behavior.StateType)
+            {
+                case BehaviorType.AC:
+                    behavior.priority1.Add("LosingDefendStrength");
+                    behavior.priority2.Add("DangerousNearby");
+                    break;
+                case BehaviorType.CT:
+                    behavior.priority1.Add("DangerousClose");
+                    behavior.priority2.Add("DangerousClose");
+                    behavior.priority3.Add("DangerousClose");
+                    break;
+                case BehaviorType.Def:
+                    
+                    break;
+                case BehaviorType.GR:
+                    behavior.priority2.Add("TimeToAttack");
+                    break;
+                case BehaviorType.GI:
+                    behavior.priority2.Add("TimeToAttack");
+                    break;
+                case BehaviorType.GM:
+                    behavior.priority2.Add("TimeToDashAttack");
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void IniStates(Data_Center data_Center)
@@ -258,7 +292,7 @@ namespace Soul
                 Debug.Log("严重错误");
                 return;
             }
-            foreach (KeyValuePair<string, AI_State> s in state_Dictionary)
+            foreach (KeyValuePair<string, Behavior> s in state_Dictionary)
             {
                 s.Value._DATA_CENTER = data_Center;
                 s.Value.Pre_process_before_enter();

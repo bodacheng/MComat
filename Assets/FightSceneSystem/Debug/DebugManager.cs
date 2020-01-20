@@ -473,7 +473,7 @@ public class DebugManager : MonoBehaviour {
             one_char.transform.rotation = rotation;
             // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
             yield return (aI_DATA_CENTER.Step1Initialize(type, basicPackName,personalMagicpath));
-            yield return (aI_DATA_CENTER.step2InitializeByResourceFolder(type, AIScriptPrefab, AIlevel, _zokusei, personalMagicpath));
+            yield return (aI_DATA_CENTER.step2InitializeByResourceFolder(type, AIScriptPrefab, _zokusei, personalMagicpath));
             aI_DATA_CENTER.Step3Initialize(TeamConfig);
         }
         else

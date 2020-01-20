@@ -293,19 +293,19 @@ public class SkillConfigTable
 
         switch (skillConfig.stateType)
         {
-            case stateType.GR:
+            case BehaviorType.GR:
                 row.ATTACK_TYPE = "GR";
                 break;
-            case stateType.GI:
+            case BehaviorType.GI:
                 row.ATTACK_TYPE = "GI";
                 break;
-            case stateType.GM:
+            case BehaviorType.GM:
                 row.ATTACK_TYPE = "GM";
                 break;
-            case stateType.CT:
+            case BehaviorType.CT:
                 row.ATTACK_TYPE = "CT";
                 break;
-            case stateType.NONE:
+            case BehaviorType.NONE:
                 row.ATTACK_TYPE = "NONE";
                 break;
         }
@@ -351,22 +351,22 @@ public class SkillConfigTable
         switch (row.ATTACK_TYPE)
         {
             case "GR":
-                _SkillConfig.stateType = stateType.GR;
+                _SkillConfig.stateType = BehaviorType.GR;
                 break;
             case "GI":
-                _SkillConfig.stateType = stateType.GI;
+                _SkillConfig.stateType = BehaviorType.GI;
                 break;
             case "GM":
-                _SkillConfig.stateType = stateType.GM;
+                _SkillConfig.stateType = BehaviorType.GM;
                 break;
             case "CT":
-                _SkillConfig.stateType = stateType.CT;
+                _SkillConfig.stateType = BehaviorType.CT;
                 break;
             case "NONE":
-                _SkillConfig.stateType = stateType.NONE;
+                _SkillConfig.stateType = BehaviorType.NONE;
                 break;
             default:
-                _SkillConfig.stateType = stateType.NONE;
+                _SkillConfig.stateType = BehaviorType.NONE;
                 break;
         }
         

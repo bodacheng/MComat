@@ -6,8 +6,8 @@ namespace Soul
 {
     public partial class AIStateRunner : MonoBehaviour
     {
-        List<State_Rate_Set> SRTListForCasualTransitionbuttonRefresh = new List<State_Rate_Set>();
-        public void StateTransitionEngine_new(IDictionary<string, State_Transition_Set> state_Transition_Dictionary)
+        List<Behavior_Rate_Set> SRTListForCasualTransitionbuttonRefresh = new List<Behavior_Rate_Set>();
+        public void StateTransitionEngine_new(IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary)
         {
             avaliable_casual_Transitions.Clear();
             casual_TransitionsPriority1.Clear();
@@ -54,7 +54,7 @@ namespace Soul
 
             if (CurrentStateTransitionSet.casual_to_state_Sets != null && CurrentStateTransitionSet.casual_to_state_Sets.Length > 0)
             {
-                foreach (State_Rate_Set state_set in CurrentStateTransitionSet.casual_to_state_Sets)
+                foreach (Behavior_Rate_Set state_set in CurrentStateTransitionSet.casual_to_state_Sets)
                 {
                     state_Dictionary.TryGetValue(state_set.AI_State_Number, out try_state);
                     if (try_state == null)
@@ -160,7 +160,7 @@ namespace Soul
             #endregion
         }
 
-        void RandomTransitionToRun(List<State_Rate_Set> TransitionsToRun)
+        void RandomTransitionToRun(List<Behavior_Rate_Set> TransitionsToRun)
         {
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
             if (MobileInputsManager.target.watchingInputManger == this._inputManager)
@@ -171,9 +171,9 @@ namespace Soul
 
         public bool HaveFirstSkillToTrigger()
         {
-            foreach (AI_State _AS in States_for_AbsoluteInput)
+            foreach (Behavior _AS in States_for_AbsoluteInput)
             {
-                if (_AS.StateType != stateType.Def && _AS.StateType != stateType.AC && _AS.StateType != stateType.NONE)
+                if (_AS.StateType != BehaviorType.Def && _AS.StateType != BehaviorType.AC && _AS.StateType != BehaviorType.NONE)
                 {
                     if (_AS.Capacity_enter_condition())
                         return true;
@@ -188,7 +188,7 @@ namespace Soul
             AINextPriority1.Clear();
             AINextPriority2.Clear();
             AINextPriority3.Clear();
-            foreach (AI_State State_Rate_Set in States_for_AbsoluteInput)
+            foreach (Behavior State_Rate_Set in States_for_AbsoluteInput)
             {
                 if (State_Rate_Set.Capacity_enter_condition())
                 {
@@ -206,7 +206,7 @@ namespace Soul
             {
                 if (playerMode || _inputManager.PlayerInputting)
                 {
-                    foreach (AI_State State_Rate_Set in AINext)
+                    foreach (Behavior State_Rate_Set in AINext)
                     {
                         if (CheckInput(State_Rate_Set.enterInput))
                         {
@@ -246,7 +246,7 @@ namespace Soul
             }
         }
 
-        void RandomStateToStartOff(List<AI_State> TransitionsToRun)
+        void RandomStateToStartOff(List<Behavior> TransitionsToRun)
         {
             int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
             if (MobileInputsManager.target.watchingInputManger == this._inputManager)

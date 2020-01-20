@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Soul;
 
-public class Empty_State : AI_State
+public class Empty_State : Behavior
 {
 	public override void Pre_process_before_enter()
 	{

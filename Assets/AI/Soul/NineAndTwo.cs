@@ -23,18 +23,18 @@ public class NineAndTwo {
 
     SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
     SkillConfig DConfig, MConfig, RConfig;//这三个其实对应了monster表里定义的三个被动技能
-    State_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
-    List<State_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
+    Behavior_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
+    List<Behavior_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
 
-    public State_Transition_Set GetD_STS()
+    public Behavior_Transition_Set GetD_STS()
     {
         return D;
     }
-    public State_Transition_Set GetM_STS()
+    public Behavior_Transition_Set GetM_STS()
     {
         return M;
     }
-    public State_Transition_Set GetR_STS()
+    public Behavior_Transition_Set GetR_STS()
     {
         return R;
     }
@@ -165,7 +165,7 @@ public class NineAndTwo {
         RConfig = new SkillConfig();
     }
 
-    public List<State_Transition_Set> ReturnSTSlist()
+    public List<Behavior_Transition_Set> ReturnSTSlist()
     {
         return StateTransitionSetList;
     }
@@ -178,7 +178,7 @@ public class NineAndTwo {
         return referenceStandardSkillConfig;
     }
 
-    State_Transition_Set FromConfigToSTS(SkillConfig _SkillConfig)
+    Behavior_Transition_Set FromConfigToSTS(SkillConfig _SkillConfig)
     {
         if (_SkillConfig == null)
             return null;
@@ -200,12 +200,12 @@ public class NineAndTwo {
             //防御，受伤等固定技能，他们没有id，直接放行来进行之后的处理。
         }
 
-        State_Transition_Set STS = null;
+        Behavior_Transition_Set STS = null;
         if (_SkillConfig != null && _SkillConfig.REAL_NAME != null && _SkillConfig.REAL_NAME != "")
         {
             try
             {
-                STS = new State_Transition_Set(_SkillConfig.REAL_NAME,
+                STS = new Behavior_Transition_Set(_SkillConfig.REAL_NAME,
                                                _SkillConfig.stateType,
                                                _SkillConfig.ATTACK_WEIGHT,
                                                _SkillConfig.ai_trigger_ranges,
@@ -296,13 +296,13 @@ public class NineAndTwo {
         }
 
         //////////////////////////////////////////////////////////////////////////////
-        List<State_Transition_Set> H1_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> H2_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> H3_list = new List<State_Transition_Set>();
+        List<Behavior_Transition_Set> H1_list = new List<Behavior_Transition_Set>();
+        List<Behavior_Transition_Set> H2_list = new List<Behavior_Transition_Set>();
+        List<Behavior_Transition_Set> H3_list = new List<Behavior_Transition_Set>();
 
-        List<State_Transition_Set> A_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> B_list = new List<State_Transition_Set>();
-        List<State_Transition_Set> C_list = new List<State_Transition_Set>();
+        List<Behavior_Transition_Set> A_list = new List<Behavior_Transition_Set>();
+        List<Behavior_Transition_Set> B_list = new List<Behavior_Transition_Set>();
+        List<Behavior_Transition_Set> C_list = new List<Behavior_Transition_Set>();
 
         if (A1 != null)
         {
@@ -354,7 +354,7 @@ public class NineAndTwo {
 
         for (int i = 0; i < A_list.Count; i++)
         {
-            List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
+            List<Behavior_Rate_Set> casualT0 = new List<Behavior_Rate_Set>();
             if (i == 0)
             {
                 A_list[i].enterInput = Inputs_defined.Attack;
@@ -366,8 +366,8 @@ public class NineAndTwo {
 
             if (i + 1 < A_list.Count)
             {
-                State_Rate_Set State_Rate_Set =
-                    new State_Rate_Set(
+                Behavior_Rate_Set State_Rate_Set =
+                    new Behavior_Rate_Set(
                     A_list[i + 1].StateKey,
                     A_list[i + 1].stateType,
                     A_list[i + 1].AT,
@@ -395,8 +395,8 @@ public class NineAndTwo {
                                 casualtokey = Inputs_defined.Fire2;
                             }
 
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
+                            Behavior_Rate_Set State_Rate_Set =
+                                new Behavior_Rate_Set(
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
                                 H2_list[y].AT,
@@ -425,8 +425,8 @@ public class NineAndTwo {
                                 casualtokey = Inputs_defined.Fire2;
                             }
 
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
+                            Behavior_Rate_Set State_Rate_Set =
+                                new Behavior_Rate_Set(
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
                                 H3_list[y].AT,
@@ -455,7 +455,7 @@ public class NineAndTwo {
         //////////////
         for (int i = 0; i < B_list.Count; i++)
         {
-            List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
+            List<Behavior_Rate_Set> casualT0 = new List<Behavior_Rate_Set>();
             if (i == 0)
             {
                 B_list[i].enterInput = Inputs_defined.Fire1;
@@ -469,8 +469,8 @@ public class NineAndTwo {
 
             if (i + 1 < B_list.Count)
             {
-                State_Rate_Set State_Rate_Set =
-                    new State_Rate_Set(
+                Behavior_Rate_Set State_Rate_Set =
+                    new Behavior_Rate_Set(
                     B_list[i + 1].StateKey,
                     B_list[i + 1].stateType,
                     B_list[i + 1].AT,
@@ -498,8 +498,8 @@ public class NineAndTwo {
                                 casualtokey = Inputs_defined.Fire2;
                             }
 
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
+                            Behavior_Rate_Set State_Rate_Set =
+                                new Behavior_Rate_Set(
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
                                 H2_list[y].AT,
@@ -528,8 +528,8 @@ public class NineAndTwo {
                                 casualtokey = Inputs_defined.Fire2;
                             }
 
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
+                            Behavior_Rate_Set State_Rate_Set =
+                                new Behavior_Rate_Set(
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
                                 H3_list[y].AT,
@@ -558,7 +558,7 @@ public class NineAndTwo {
 
         for (int i = 0; i < C_list.Count; i++)
         {
-            List<State_Rate_Set> casualT0 = new List<State_Rate_Set>();
+            List<Behavior_Rate_Set> casualT0 = new List<Behavior_Rate_Set>();
             if (i == 0)
             {
                 C_list[i].enterInput = Inputs_defined.Fire2;
@@ -572,8 +572,8 @@ public class NineAndTwo {
 
             if (i + 1 < C_list.Count)
             {
-                State_Rate_Set State_Rate_Set =
-                    new State_Rate_Set(
+                Behavior_Rate_Set State_Rate_Set =
+                    new Behavior_Rate_Set(
                     C_list[i + 1].StateKey,
                     C_list[i + 1].stateType,
                     C_list[i + 1].AT,
@@ -601,8 +601,8 @@ public class NineAndTwo {
                                 casualtokey = Inputs_defined.Fire1;
                             }
 
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
+                            Behavior_Rate_Set State_Rate_Set =
+                                new Behavior_Rate_Set(
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
                                 H2_list[y].AT,
@@ -631,8 +631,8 @@ public class NineAndTwo {
                                 casualtokey = Inputs_defined.Fire1;
                             }
 
-                            State_Rate_Set State_Rate_Set =
-                                new State_Rate_Set(
+                            Behavior_Rate_Set State_Rate_Set =
+                                new Behavior_Rate_Set(
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
                                 H3_list[y].AT,
@@ -657,7 +657,7 @@ public class NineAndTwo {
             C_list[i].casual_to_state_Sets = casualT0.ToArray();
         }
 
-        List<State_Rate_Set> chuanEndCasualT0 = new List<State_Rate_Set>();
+        List<Behavior_Rate_Set> chuanEndCasualT0 = new List<Behavior_Rate_Set>();
         if (A1 != null)
             chuanEndCasualT0.Add(A1.GetStateRateSet());
         if (B1 != null)
@@ -694,71 +694,71 @@ public class NineAndTwo {
     // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
     // 和以前的脚本读取方式相比，不再需要sortList函数(当时很多努力白费了呀。。)原因是现在几个技能都是按次序加入列表，保证了基础状态和技能状态的顺序是有调理的，不再需要整理
     // 包括连击排序那方面。
-    public IDictionary<string, State_Transition_Set> GenerateBeheviourSets(int level)// level : 1~100
+    public IDictionary<string, Behavior_Transition_Set> GenerateBeheviourSets(int level)// level : 1~100
     {
         if (level <= 0)
             level = 1;
 
-        IDictionary<string, State_Transition_Set> state_Transition_Dictionary = new Dictionary<string, State_Transition_Set>();
-        this.StateTransitionSetList = new List<State_Transition_Set>();
+        IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
+        this.StateTransitionSetList = new List<Behavior_Transition_Set>();
 
-        State_Transition_Set Empty = new State_Transition_Set("Empty",
-                                                              stateType.NONE,
+        Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty",
+                                                              BehaviorType.NONE,
                                                               0,
                                                               null,
-                                                              new State_Rate_Set[0], 
+                                                              new Behavior_Rate_Set[0], 
                                                               new string[0], 
                                                               Inputs_defined.Null, Inputs_defined.Null,
                                                               0,
                                                               0,
                                                               0);
 
-        State_Transition_Set Victory = new State_Transition_Set("Victory",
-                                                                stateType.NONE,
+        Behavior_Transition_Set Victory = new Behavior_Transition_Set("Victory",
+                                                                BehaviorType.NONE,
                                                                 0,
                                                                 null,
-                                                                new State_Rate_Set[0],
+                                                                new Behavior_Rate_Set[0],
                                                                 new string[0],
                                                                 Inputs_defined.Null, Inputs_defined.Null,
                                                                 0,
                                                                 0,
                                                                 0);
 
-        State_Transition_Set Death = new State_Transition_Set("Death",
-                                                              stateType.NONE,
+        Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",
+                                                              BehaviorType.NONE,
                                                               0,
                                                               null,
-                                                              new State_Rate_Set[0],
+                                                              new Behavior_Rate_Set[0],
                                                               new string[0],
                                                               Inputs_defined.Null, Inputs_defined.Null, 0,
                                                               0,
                                                               0);
 
-        State_Transition_Set Defend = new State_Transition_Set("Defend",
-                                                               stateType.Def,
+        Behavior_Transition_Set Defend = new Behavior_Transition_Set("Defend",
+                                                               BehaviorType.Def,
                                                                0,
                                                                 null,
-                                                              (this.R != null)? new State_Rate_Set[1]{this.R.GetStateRateSet()}:new State_Rate_Set[0],
+                                                              (this.R != null)? new Behavior_Rate_Set[1]{this.R.GetStateRateSet()}:new Behavior_Rate_Set[0],
                                                                null,
                                                                Inputs_defined.Defend, Inputs_defined.Defend_Cancel, 0,
                                                                0,
                                                                0);
         
-        State_Transition_Set Move = new State_Transition_Set("Move_normal",
-                                                             stateType.NONE,
+        Behavior_Transition_Set Move = new Behavior_Transition_Set("Move_normal",
+                                                             BehaviorType.NONE,
                                                              0,
                                                              null,
-                                                             new State_Rate_Set[0], 
+                                                             new Behavior_Rate_Set[0], 
                                                              null,
                                                              Inputs_defined.Null, Inputs_defined.Null, 0,
                                                              0,
                                                              0);
                        
-        State_Transition_Set Hit = new State_Transition_Set("Hit",
-                                                            stateType.Hit,
+        Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",
+                                                            BehaviorType.Hit,
                                                             0,
                                                             null,
-                                                            new State_Rate_Set[0], 
+                                                            new Behavior_Rate_Set[0], 
                                                             null,
                                                             Inputs_defined.Null, Inputs_defined.Null, 0,
                                                             0,
@@ -771,7 +771,7 @@ public class NineAndTwo {
         
         //string[] regularforceTOSets = { "Hit", "KnockOff"};
 
-        List<State_Rate_Set> GetUpCasualTransitions = new List<State_Rate_Set>();
+        List<Behavior_Rate_Set> GetUpCasualTransitions = new List<Behavior_Rate_Set>();
 
         if (this.D != null)
         {
@@ -794,7 +794,7 @@ public class NineAndTwo {
         if (this.R != null)
         {
             //R.forced_to_state_nums = regularforceTOSets;
-            this.R.stateType = stateType.AC;
+            this.R.stateType = BehaviorType.AC;
             StateTransitionSetList.Add(R);//这个是只能根据角色被动来。
             GetUpCasualTransitions.Add(R.GetStateRateSet());
         }
@@ -848,8 +848,8 @@ public class NineAndTwo {
             StateTransitionSetList.Add(this.C3);
         }
         
-       State_Transition_Set getUp = new State_Transition_Set("getUp",
-                                                    stateType.getUp,
+       Behavior_Transition_Set getUp = new Behavior_Transition_Set("getUp",
+                                                    BehaviorType.GetUp,
                                                     0,
                                                     null,
                                                     GetUpCasualTransitions.ToArray(),
@@ -859,11 +859,11 @@ public class NineAndTwo {
                                                     0);
         StateTransitionSetList.Add(getUp);
 
-        State_Transition_Set KnockOff = new State_Transition_Set("KnockOff",
-                                                                 stateType.KnockOff,
+        Behavior_Transition_Set KnockOff = new Behavior_Transition_Set("KnockOff",
+                                                                 BehaviorType.KnockOff,
                                                                  0,
                                                                  null,
-                                                                 new State_Rate_Set[]{ getUp.GetStateRateSet() },
+                                                                 new Behavior_Rate_Set[]{ getUp.GetStateRateSet() },
                                                                  null,
                                                                  Inputs_defined.Null, Inputs_defined.Null,
                                                                  0,
@@ -874,23 +874,23 @@ public class NineAndTwo {
         //从下面这个地方可以看到我们需要在sort阶段把RMD全部准备好，而且必须是要么为null要么是一个完整STS信息。
 
         /////////////////////
-        foreach (State_Transition_Set _State_Transition_Set in StateTransitionSetList)
+        foreach (Behavior_Transition_Set _State_Transition_Set in StateTransitionSetList)
         {
             if (_State_Transition_Set.StateKey != null 
                 &&
                 !state_Transition_Dictionary.ContainsKey(_State_Transition_Set.StateKey))//&& _States_Dictionary.ifContainsKey(_State_Transition_Set.StateKey)) //我们要研究以下这第二个条件                
             {
-                List<State_Rate_Set> new_casual_to = new List<State_Rate_Set>();
+                List<Behavior_Rate_Set> new_casual_to = new List<Behavior_Rate_Set>();
                 if (_State_Transition_Set.casual_to_state_Sets == null)
                 {
                     _State_Transition_Set.casual_to_state_Sets = new_casual_to.ToArray();
                 }
-                foreach (State_Rate_Set _State_Rate_Set in _State_Transition_Set.casual_to_state_Sets)
+                foreach (Behavior_Rate_Set _State_Rate_Set in _State_Transition_Set.casual_to_state_Sets)
                 {
                     new_casual_to.Add(_State_Rate_Set);
                 }
                 state_Transition_Dictionary.Add(
-                    new KeyValuePair<string, State_Transition_Set>(
+                    new KeyValuePair<string, Behavior_Transition_Set>(
                         _State_Transition_Set.StateKey,
                         _State_Transition_Set
                     )
@@ -911,9 +911,9 @@ public class NineAndTwo {
     }
 
     //下面的环节纯粹是针对SkillPrintOut的一些处理
-    public IDictionary<int, State_Transition_Set> GetAttackChuan()
+    public IDictionary<int, Behavior_Transition_Set> GetAttackChuan()
     {
-        IDictionary<int, State_Transition_Set> attack_chuan = new Dictionary<int, State_Transition_Set>
+        IDictionary<int, Behavior_Transition_Set> attack_chuan = new Dictionary<int, Behavior_Transition_Set>
         {
             { 1, A1 },
             { 2, A2 },
@@ -921,9 +921,9 @@ public class NineAndTwo {
         };
         return attack_chuan;
     }
-    public IDictionary<int, State_Transition_Set> GetFire1Chuan()
+    public IDictionary<int, Behavior_Transition_Set> GetFire1Chuan()
     {
-        IDictionary<int, State_Transition_Set> B_chuan = new Dictionary<int, State_Transition_Set>
+        IDictionary<int, Behavior_Transition_Set> B_chuan = new Dictionary<int, Behavior_Transition_Set>
         {
             { 1, B1 },
             { 2, B2 },
@@ -931,9 +931,9 @@ public class NineAndTwo {
         };
         return B_chuan;
     }
-    public IDictionary<int, State_Transition_Set> GetFire2Chuan()
+    public IDictionary<int, Behavior_Transition_Set> GetFire2Chuan()
     {
-        IDictionary<int, State_Transition_Set> C_chuan = new Dictionary<int, State_Transition_Set>
+        IDictionary<int, Behavior_Transition_Set> C_chuan = new Dictionary<int, Behavior_Transition_Set>
         {
             { 1, C1 },
             { 2, C2 },

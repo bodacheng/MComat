@@ -148,7 +148,6 @@ public partial class CharsManager : MonoBehaviour {
         yield return (_TempDATACENTER.Step2Initialize
             (_TempCharacterResourceInfo.type,
              _CharacterDataInfo._NineAndTwo,
-             _CharacterDataInfo.level,
              _TempCharacterResourceInfo._zokusei,
              _TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;

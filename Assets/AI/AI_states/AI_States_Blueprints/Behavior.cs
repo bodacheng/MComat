@@ -6,7 +6,7 @@ using Inputs;
 
 namespace Soul
 {
-    public abstract class AI_State
+    public abstract partial class Behavior
     {
         public GameObject gameObject;
         public Transform GeoCenterT;
@@ -23,7 +23,7 @@ namespace Soul
         public SkillCancelFlag _SkillCancelFlag;
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
         public ShaderManager shaderManager;
-        public stateType StateType;
+        public BehaviorType StateType;
         public bool nextAttackStateCanRushFirst;
         public Animation_Manger Animation_Manger;
         public BuffsRunner _BuffsRunner;
@@ -82,16 +82,31 @@ namespace Soul
         // 这个在移动状态和防御状态上我们都出现过。
         public virtual bool Enter_condition_priority1()
         {
+            for (int i = 0; i < priority1.Count;i++)
+            {
+                if (CheckTriggerCondition(priority1[i]))
+                    return true;
+            }
             return false;
         }
 
         public virtual bool Enter_condition_priority2()
         {
+            for (int i = 0; i < priority2.Count;i++)
+            {
+                if (CheckTriggerCondition(priority2[i]))
+                    return true;
+            }
             return false;
         }
 
         public virtual bool Enter_condition_priority3()
         {
+            for (int i = 0; i < priority3.Count;i++)
+            {
+                if (CheckTriggerCondition(priority3[i]))
+                    return true;
+            }
             return false;
         }
 

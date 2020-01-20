@@ -41,10 +41,10 @@ namespace Inputs
         AIStateRunner myfocusingRunner;
         List<Inputs_defined> WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge = new List<Inputs_defined>();
     
-        public void ButtonRefreshForCasualTransition(List<State_Rate_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
+        public void ButtonRefreshForCasualTransition(List<Behavior_Rate_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
         {
             WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
-            foreach (State_Rate_Set transition_key_value in avaliable_casual_Transitions)
+            foreach (Behavior_Rate_Set transition_key_value in avaliable_casual_Transitions)
             {
                 if (_BO_Health.HasPlentyGauge(transition_key_value.SPLevel))
                 {
@@ -71,10 +71,10 @@ namespace Inputs
             }
         }
     
-        public void ButtonRefreshFromStart(List<AI_State> States_for_AbsoluteInput,FightAttriCalReference _BO_Health)
+        public void ButtonRefreshFromStart(List<Behavior> States_for_AbsoluteInput,FightAttriCalReference _BO_Health)
         {
             WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
-            foreach (AI_State _AS in States_for_AbsoluteInput)
+            foreach (Behavior _AS in States_for_AbsoluteInput)
             {
                 if (_BO_Health.HasPlentyGauge(_AS.splevel))
                 {

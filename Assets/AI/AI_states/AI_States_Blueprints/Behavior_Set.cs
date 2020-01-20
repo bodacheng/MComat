@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
-public class State_Transition_Set
+public class Behavior_Transition_Set
 {
     public string StateKey;
-    public stateType stateType;
+    public BehaviorType stateType;
     public float AT;
     public BehaviorEnterRange[] ai_trigger_ranges;
     public int skillEmergentLevel;
-    public State_Rate_Set[] casual_to_state_Sets;
+    public Behavior_Rate_Set[] casual_to_state_Sets;
     [HideInInspector]
 	public string[] forced_to_state_nums;
     public Inputs_defined enterInput = Inputs_defined.Null;
@@ -18,15 +16,15 @@ public class State_Transition_Set
     public int SPLevel;
     public int rarelevel;
 
-    public State_Transition_Set()
+    public Behavior_Transition_Set()
     {
     }
 
-    public State_Transition_Set(string num,
-                                stateType _attackType,
+    public Behavior_Transition_Set(string num,
+                                BehaviorType _attackType,
                                 float AT,
                                 BehaviorEnterRange[] ai_trigger_ranges,
-                                State_Rate_Set[] casual_to_state_nums, 
+                                Behavior_Rate_Set[] casual_to_state_nums, 
                                 string[] forced_to_state_nums, 
                                 Inputs_defined enterInput,Inputs_defined exitInput,
                                 int SPMove,
@@ -46,10 +44,10 @@ public class State_Transition_Set
         this.rarelevel = rarelevel;
     }
 
-    public State_Rate_Set GetStateRateSet()
+    public Behavior_Rate_Set GetStateRateSet()
     {
-        State_Rate_Set state_Rate_Set = 
-            new State_Rate_Set(StateKey,
+        Behavior_Rate_Set state_Rate_Set = 
+            new Behavior_Rate_Set(StateKey,
                                stateType,
                                AT,
                                ai_trigger_ranges,
@@ -74,10 +72,10 @@ public class State_Transition_Set
 // 其他所有变量都不是一码事，State_Transition_Set形容的是状态本身的属性，偏向于对首发技能触发方式的形容
 // State_Rate_Set形容的是状态向另一个状态的迁移方式。
 [System.Serializable]
-public class State_Rate_Set //This class defines how a state should transitate to the next
+public class Behavior_Rate_Set //This class defines how a state should transitate to the next
 {
 	public string AI_State_Number;
-    public stateType attackType;
+    public BehaviorType attackType;
     public float AT;
     public BehaviorEnterRange[] ai_trigger_ranges;
     public bool can_be_cancelled_to;
@@ -86,11 +84,11 @@ public class State_Rate_Set //This class defines how a state should transitate t
     public int SPLevel;
     public int skillEmergentLevel;
 
-    public State_Rate_Set()
+    public Behavior_Rate_Set()
     {        
     }
-	public State_Rate_Set(string AI_State_Number,
-                          stateType _attackType,
+	public Behavior_Rate_Set(string AI_State_Number,
+                          BehaviorType _attackType,
                           float AT,
                           BehaviorEnterRange[] ai_trigger_ranges,
                           bool can_be_cancelled_to,

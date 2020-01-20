@@ -8,7 +8,7 @@ public enum AIMoveStyle
     normal = 1
 }
 
-public class Move_State : AI_State
+public class Move_State : Behavior
 {
     readonly float speed;
     readonly float time_limit;

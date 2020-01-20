@@ -10,7 +10,7 @@ using Soul;
 // AttackRangeMarker组件最好是细长的capsulecollider，并且可以依据角色的体型尽可能的贴身（细），从而被攻击时敌人会冲刺到尽可能近的位置，不至于一些短手技能打不到
 // 并且留下了一些问题：必须重新权衡此类攻击的AI进入范围，对整个系统的距离分段也要重新衡量，以及本状态的进入冲刺距离也都要重新仔细考虑。
 
-public partial class G_Attack_State : AI_State {
+public partial class G_Attack_State : Behavior {
 
 	string clip_name;
     string dash_clip_name;
@@ -91,21 +91,6 @@ public partial class G_Attack_State : AI_State {
         rushCoroutine = new CustomCoroutine(rushstart, 5f, rushend);
     }
 
-    public override bool Enter_condition_priority1()
-    {
-        return _skillEmergentLevel == 1 && Strategic_enter_condition();
-    }
-
-    public override bool Enter_condition_priority2()
-	{
-        return _skillEmergentLevel == 2 && Strategic_enter_condition();
-    }
-
-    public override bool Enter_condition_priority3()
-    {
-        return _skillEmergentLevel == 3 && Strategic_enter_condition();
-    }
-
     public bool Strategic_enter_condition()
     {
         if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
@@ -131,9 +116,9 @@ public partial class G_Attack_State : AI_State {
         Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
-        if (StateType == stateType.GR)
+        if (StateType == BehaviorType.GR)
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
-        if (StateType == stateType.GI)
+        if (StateType == BehaviorType.GI)
             _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
 
         _Rigidbody.velocity = Vector3.zero;
@@ -165,7 +150,7 @@ public partial class G_Attack_State : AI_State {
         if (rushingToTarget != null)
         {
             //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
-            if (_AIStateRunner.GetLastState() != null && _AIStateRunner.GetLastState().nextAttackStateCanRushFirst && StateType == stateType.GR)
+            if (_AIStateRunner.GetLastState() != null && _AIStateRunner.GetLastState().nextAttackStateCanRushFirst && StateType == BehaviorType.GR)
             {
                 _phase = Phase.needToRush;
                 lastFrameRotateAngle = 0;

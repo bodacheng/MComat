@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Soul;
 
-public class Idle_State : AI_State
+public class Idle_State : Behavior
 {
 	string clip_name;
 

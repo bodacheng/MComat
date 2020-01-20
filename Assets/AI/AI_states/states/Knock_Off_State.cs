@@ -3,7 +3,7 @@ using UnityEngine;
 using HittingDetection;
 using Soul;
 
-public class Knock_Off_State : AI_State
+public class Knock_Off_State : Behavior
 {
     float time_counter;
     DecompositionerPool superHitPool;
@@ -13,7 +13,7 @@ public class Knock_Off_State : AI_State
      
     public Knock_Off_State()
     {
-        StateType = stateType.KnockOff;
+        StateType = BehaviorType.KnockOff;
     }
 
     public override void Pre_process_before_enter()

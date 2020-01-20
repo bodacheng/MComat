@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Soul;
 
-public partial class G_Attack_State : AI_State
+public partial class G_Attack_State : Behavior
 {
     float ji;Vector3 use_direction;
     void SingleDirectionRotateProcess(Vector3 P,float speed)

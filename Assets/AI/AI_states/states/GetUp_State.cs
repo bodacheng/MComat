@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Soul;
 
-public class GetUp : AI_State {
+public class GetUp : Behavior {
     readonly string clip_name;
     float counter;
 

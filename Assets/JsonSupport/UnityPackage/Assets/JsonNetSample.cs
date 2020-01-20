@@ -68,7 +68,7 @@ public class JsonNetSample : MonoBehaviour
         skillConfig.REAL_NAME = "punch";
         skillConfig.ShowName = "拳头";
         skillConfig.ATTACK_WEIGHT = 1;
-        skillConfig.stateType = stateType.GM;
+        skillConfig.stateType = BehaviorType.GM;
         skillConfig.ai_trigger_ranges = new BehaviorEnterRange[1] {BehaviorEnterRange.inner_range };
         skillConfig.SP_LEVEL = 0;
 
@@ -78,7 +78,7 @@ public class JsonNetSample : MonoBehaviour
         skillConfig.REAL_NAME = "punch2";
         skillConfig.ShowName = "拳头";
         skillConfig.ATTACK_WEIGHT = 1;
-        skillConfig.stateType = stateType.GM;
+        skillConfig.stateType = BehaviorType.GM;
         skillConfig.ai_trigger_ranges = new BehaviorEnterRange[1] { BehaviorEnterRange.mid_range };
         skillConfig.SP_LEVEL = 0;
 

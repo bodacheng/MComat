@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public partial class Data_Center : MonoBehaviour{
 
@@ -16,10 +15,10 @@ public partial class Data_Center : MonoBehaviour{
             phase2Initialized = true;
         }
 
-        if (AIStateRunner.usingScript != Script || AIStateRunner.usingScriptLevel != AI_level)
+        if (AIStateRunner.usingScript != Script)
         {
-            AIStateRunner.LoadStatesTransition(type, Script, AI_level);//这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
-                                                                       // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
+            AIStateRunner.LoadStatesTransition(type, Script);//这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
+                                                             // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
             AIStateRunner.IniStates(this);
             List<string> toLoadSkillAnimsNames = AIStateRunner.PassSkillTypeKeys();
             yield return (

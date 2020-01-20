@@ -60,8 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\AI_State.cs" />
-    <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\State_Set.cs" />
+    <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\Behavior.cs" />
+    <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\Behavior_Set.cs" />
+    <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\TriggerConditions\BehaviorTriggerCondition.cs" />
+    <Compile Include="Assets\AI\AI_states\Behaviors_Dictionary.cs" />
     <Compile Include="Assets\AI\AI_states\states\Controlled_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Counter_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Dash_Back_State.cs" />
@@ -79,7 +81,6 @@
     <Compile Include="Assets\AI\AI_states\states\Knock_Off_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Move_State2.cs" />
-    <Compile Include="Assets\AI\AI_states\States_Dictionary.cs" />
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
     <Compile Include="Assets\AI\buttons\ZokuseiSkillStoneTagsGroup.cs" />

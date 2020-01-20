@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Soul;
 
-public class Dash_Back_State : AI_State
+public class Dash_Back_State : Behavior
 {
     readonly string clip_name;
     readonly UnityEngine.Events.UnityAction breakfreestart;
@@ -33,16 +33,6 @@ public class Dash_Back_State : AI_State
         return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
     
-    public override bool Enter_condition_priority1()
-    {
-        return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
-    }
-
-    public override bool Enter_condition_priority2()
-    {
-        return (_FightAttriCalReference.IFgettingDamage() || Sensor.GetNearbyDamagingWeaponColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
-    }
-
     //public override bool enter_condition_priority3()
     //{
     //    if (Sensor.getInnerEnemiesColliders().Count > 0)

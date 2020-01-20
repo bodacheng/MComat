@@ -64,31 +64,31 @@ public class PassiveSkillConfigs
             case MoveType.Mode1:
                 this.MConfig = new SkillConfig
                     (
-                        null, null, "Move_normal","normal move", 0, stateType.NONE, null, 0, 0
+                        null, null, "Move_normal","normal move", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             case MoveType.Mode2:
                 this.MConfig = new SkillConfig
                     (
-                        null, null, "Move_slow", "normal move", 0, stateType.NONE, null, 0, 0
+                        null, null, "Move_slow", "normal move", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             case MoveType.Mode3:
                 this.MConfig = new SkillConfig
                     (
-                        null, null, "Move_fast", "normal move", 0, stateType.NONE, null, 0, 0
+                        null, null, "Move_fast", "normal move", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             case MoveType.Test:
                 this.MConfig = new SkillConfig
                     (
-                        null, null, "Test_Move", "测试用移动状态(角色站着不动)", 0, stateType.NONE, null, 0, 0
+                        null, null, "Test_Move", "测试用移动状态(角色站着不动)", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             default:
                 this.MConfig = new SkillConfig
                     (
-                        null, null, "Move_normal", "normal move", 0, stateType.NONE, null, 0, 0
+                        null, null, "Move_normal", "normal move", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
         }
@@ -96,7 +96,7 @@ public class PassiveSkillConfigs
         this.DConfig = hasDefend
             ? new SkillConfig
                     (
-                        null, null, "Defend", "防衛", 0, stateType.NONE, null, 0, 0
+                        null, null, "Defend", "防衛", 0, BehaviorType.NONE, null, 0, 0
                     )
             : null;
 
@@ -105,19 +105,19 @@ public class PassiveSkillConfigs
             case RushType.Jump:
                 this.RConfig = new SkillConfig
                     (
-                        null, null, "Jump", "Jump", 0, stateType.NONE, null, 0, 0
+                        null, null, "Jump", "Jump", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             case RushType.Rush:
                 this.RConfig = new SkillConfig
                     (
-                        null, null, "Rush", "Rush", 0, stateType.NONE, null, 0, 0
+                        null, null, "Rush", "Rush", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             case RushType.RushBack:
                 this.RConfig = new SkillConfig
                     (
-                        null, null, "RushBack", "RushBack", 0, stateType.NONE, null, 0, 0
+                        null, null, "RushBack", "RushBack", 0, BehaviorType.NONE, null, 0, 0
                     );
                 break;
             case RushType.None:

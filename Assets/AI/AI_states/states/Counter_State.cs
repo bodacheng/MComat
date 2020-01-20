@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Soul;
 
-public class Counter_State : AI_State {
+public class Counter_State : Behavior {
     readonly string clip_name;
     readonly bool keepRotationAdjustment;
     readonly float RotationAdjustmentTime;
@@ -23,21 +23,6 @@ public class Counter_State : AI_State {
         nextAttackStateCanRushFirst = true;
 	}
     
-    public override bool Enter_condition_priority1()
-    {
-        return Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
-    }
-
-    public override bool Enter_condition_priority2()
-    {
-        return Sensor.GetInnerEnemiesColliders().Count > 0 && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
-    }
-
-    public override bool Enter_condition_priority3()
-    {
-        return Sensor.GetInnerEnemiesColliders().Count > 0 && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
-    }
-
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();

@@ -3,7 +3,7 @@ using HittingDetection;
 using Soul;
 
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
-public class Death_State : AI_State
+public class Death_State : Behavior
 {
     private readonly string clip_name;
     private readonly float stopRunningTime;    
@@ -18,7 +18,7 @@ public class Death_State : AI_State
     {
         this.stopRunningTime = stopRunningTime;
         this.clip_name = clip_name;
-        StateType = stateType.KnockOff;
+        StateType = BehaviorType.KnockOff;
     }
 
     public override void Pre_process_before_enter()

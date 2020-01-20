@@ -3,7 +3,7 @@ using UnityEngine;
 using HittingDetection;
 using Soul;
 
-public class Hurt_State : AI_State {
+public class Hurt_State : Behavior {
     float used_dizzy_time;
     float time_counter;
     Vector3 fixDesPos;
@@ -93,8 +93,8 @@ public class Hurt_State : AI_State {
 	{
         base.AI_State_exit();
         _FightAttriCalReference.SetGettingDamageState(false);
-        if (_AIStateRunner.GetTryState().StateType == stateType.AC || _AIStateRunner.GetTryState().StateType == stateType.GI ||
-            _AIStateRunner.GetTryState().StateType == stateType.GM || _AIStateRunner.GetTryState().StateType == stateType.GR)
+        if (_AIStateRunner.GetTryState().StateType == BehaviorType.AC || _AIStateRunner.GetTryState().StateType == BehaviorType.GI ||
+            _AIStateRunner.GetTryState().StateType == BehaviorType.GM || _AIStateRunner.GetTryState().StateType == BehaviorType.GR)
         {
             _FightAttriCalReference.BeHitCountInterrupt();
         }

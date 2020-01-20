@@ -3,7 +3,7 @@ using UnityEngine;
 using HittingDetection;
 using Soul;
 
-public class Defend_State : AI_State
+public class Defend_State : Behavior
 {
     readonly string defend_clip_name;
     readonly string block_break_name;

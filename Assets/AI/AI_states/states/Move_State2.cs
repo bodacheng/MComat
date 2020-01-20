@@ -4,7 +4,7 @@ using UnityEngine;
 using Soul;
 using System.Linq;
 
-public class Move_State2 : AI_State
+public class Move_State2 : Behavior
 {
     private readonly float speed;
     private float use_speed;

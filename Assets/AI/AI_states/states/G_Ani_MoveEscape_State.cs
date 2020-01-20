@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Soul;
 
-public class G_Ani_MoveEscape_State : AI_State {
+public class G_Ani_MoveEscape_State : Behavior {
     readonly string clip_name;
     Transform mainCam;
     Quaternion screenMovementSpace;
@@ -23,16 +23,6 @@ public class G_Ani_MoveEscape_State : AI_State {
         return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
     
-    public override bool Enter_condition_priority1()
-    {
-        return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
-    }
-
-    public override bool Enter_condition_priority2()
-    {
-        return (_FightAttriCalReference.IFgettingDamage() || Sensor.GetNearbyDamagingWeaponColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
-    }
-
     public override bool Naturally_exit_condition()
     {
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();

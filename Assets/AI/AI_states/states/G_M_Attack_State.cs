@@ -6,7 +6,7 @@ using Soul;
 
 // This kind of state has to be triggerd on the ground, but doesnt need to be on ground wille running,
 // During the state ,colliders of the character heriachy is disabled, same with the gravity 
-public class G_M_Attack_State : AI_State {
+public class G_M_Attack_State : Behavior {
     readonly string clip_name;
     readonly bool keepRotationAdjustment;
     readonly float RotationAdjustmentTime;
@@ -41,28 +41,13 @@ public class G_M_Attack_State : AI_State {
 		base.Pre_process_before_enter ();
 	}
 
-    public override bool Enter_condition_priority1()
-    {
-        return _skillEmergentLevel == 1 && Strategic_enter_condition();
-    }
-
-    public override bool Enter_condition_priority2()
-    {
-        return _skillEmergentLevel == 2 && Strategic_enter_condition();
-    }
-
-    public override bool Enter_condition_priority3()
-    {
-        return _skillEmergentLevel == 3 && Strategic_enter_condition();
-    }
-
     public bool Strategic_enter_condition()
     {
         return _AIStateRunner.GetNowState() != null &&
-            (_AIStateRunner.GetNowState().StateType == stateType.GI ||
-            _AIStateRunner.GetNowState().StateType == stateType.GR ||
-            _AIStateRunner.GetNowState().StateType == stateType.GM ||
-            _AIStateRunner.GetNowState().StateType == stateType.AC) && Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null
+            (_AIStateRunner.GetNowState().StateType == BehaviorType.GI ||
+            _AIStateRunner.GetNowState().StateType == BehaviorType.GR ||
+            _AIStateRunner.GetNowState().StateType == BehaviorType.GM ||
+            _AIStateRunner.GetNowState().StateType == BehaviorType.AC) && Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null
             ? CheckToEnemyDisEnterCondition(RangePlusOne(behaviorEnterRanges))
             : Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
     }

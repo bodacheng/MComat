@@ -14,12 +14,12 @@ using UnityEditor;
 
 public class AIScriptReading {
 
-    public static List<State_Transition_Set> readKongfuBook(AIStateRunner _AIStateRunner,TextAsset Script,string type,int AI_level)
+    public static List<Behavior_Transition_Set> readKongfuBook(AIStateRunner _AIStateRunner,TextAsset Script,string type)
     {
         try
         {
-            List<State_Transition_Set> list = new List<State_Transition_Set>();
-            XmlSerializer serializer = new XmlSerializer(typeof(List<State_Transition_Set>));
+            List<Behavior_Transition_Set> list = new List<Behavior_Transition_Set>();
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Behavior_Transition_Set>));
             
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
@@ -42,22 +42,21 @@ public class AIScriptReading {
                 
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    list = serializer.Deserialize(textReader) as List<State_Transition_Set>;
+                    list = serializer.Deserialize(textReader) as List<Behavior_Transition_Set>;
                 }
             }
             else if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
                 var reader = new System.IO.StringReader(Script.text);
-                list = serializer.Deserialize(reader) as List<State_Transition_Set>;
+                list = serializer.Deserialize(reader) as List<Behavior_Transition_Set>;
             }
-            list = _AIStateRunner.SortStateTransitionSetList(list, type,AI_level);
+            list = _AIStateRunner.SortStateTransitionSetList(list, type);
             _AIStateRunner.usingScript = Script;
-            _AIStateRunner.usingScriptLevel = AI_level;
             if (list == null)
             {
-                list = new List<State_Transition_Set>() {
-                new State_Transition_Set("Empty",
-                                        stateType.NONE,
+                list = new List<Behavior_Transition_Set>() {
+                new Behavior_Transition_Set("Empty",
+                                        BehaviorType.NONE,
                                         0,
                                         null,
                                         null, null,
@@ -69,9 +68,9 @@ public class AIScriptReading {
             }else{
                 if (list.Count == 0)
                 {
-                    list.Add(new State_Transition_Set(
+                    list.Add(new Behavior_Transition_Set(
                                    "Empty",
-                                   stateType.NONE,
+                                   BehaviorType.NONE,
                                    0,
                                    null,
                                    null, null,
@@ -87,9 +86,9 @@ public class AIScriptReading {
         {
             Debug.Log("状态迁移信息读取失败,返回只有空状态的列表");
             Debug.Log(e.ToString());
-            return new List<State_Transition_Set>() {
-                new State_Transition_Set("Empty",
-                                        stateType.NONE,
+            return new List<Behavior_Transition_Set>() {
+                new Behavior_Transition_Set("Empty",
+                                        BehaviorType.NONE,
                                         0,
                                         null,
                                         null, null,
