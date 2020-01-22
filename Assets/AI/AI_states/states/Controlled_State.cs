@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Soul;
+﻿using Soul;
 
 public class Controlled_State : Behavior {
 
-	private string clip_name;
+    string clip_name;
 
     public Controlled_State(string clip_name)
 	{
@@ -30,7 +27,7 @@ public class Controlled_State : Behavior {
 		Animation_Manger.AnimationTrigger(clip_name);
     }
 
-	public override bool Naturally_exit_condition()//如果受伤动画播放完的话状态就退出，如果时间过了规定的晕眩时间，也退出。
+	public override bool Capacity_Exit_Condition()//如果受伤动画播放完的话状态就退出，如果时间过了规定的晕眩时间，也退出。
 	{
         return false;
 	}

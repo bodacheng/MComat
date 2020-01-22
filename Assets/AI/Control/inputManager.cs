@@ -40,11 +40,11 @@ namespace Inputs
         
         AIStateRunner myfocusingRunner;
         List<Inputs_defined> WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge = new List<Inputs_defined>();
-    
-        public void ButtonRefreshForCasualTransition(List<Behavior_Rate_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
+            
+        public void ButtonRefreshForCasualTransition(List<Behavior_Transition_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
         {
             WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
-            foreach (Behavior_Rate_Set transition_key_value in avaliable_casual_Transitions)
+            foreach (Behavior_Transition_Set transition_key_value in avaliable_casual_Transitions)
             {
                 if (_BO_Health.HasPlentyGauge(transition_key_value.SPLevel))
                 {
@@ -70,36 +70,7 @@ namespace Inputs
                 RefreshSPLevelButtonsInfo(Inputs_defined.Fire2, -1);
             }
         }
-    
-        public void ButtonRefreshFromStart(List<Behavior> States_for_AbsoluteInput,FightAttriCalReference _BO_Health)
-        {
-            WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
-            foreach (Behavior _AS in States_for_AbsoluteInput)
-            {
-                if (_BO_Health.HasPlentyGauge(_AS.splevel))
-                {
-                    if (_AS.enterInput != Inputs_defined.Null)
-                    {
-                        WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Add(_AS.enterInput);
-                        RefreshSPLevelButtonsInfo(_AS.enterInput, _AS.splevel);
-                    }
-                }
-            }
-            //首发技能中如果三个键位里有发动不了的，那键位也应该是灰色或半透明来表示无法发动。
-            if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Attack))
-            {
-                RefreshSPLevelButtonsInfo(Inputs_defined.Attack, -1);
-            }
-            if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Fire1))
-            {
-                RefreshSPLevelButtonsInfo(Inputs_defined.Fire1, -1);
-            }
-            if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Fire2))
-            {
-                RefreshSPLevelButtonsInfo(Inputs_defined.Fire2, -1);
-            }
-        }
-    
+         
         public void INI(bool hasD,bool hasR, AIStateRunner myfocusingRunner) 
         {
             this.myfocusingRunner = myfocusingRunner;

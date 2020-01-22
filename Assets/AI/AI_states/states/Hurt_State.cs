@@ -84,7 +84,7 @@ public class Hurt_State : Behavior {
             _Rigidbody.velocity = Vector3.zero;
     }
 
-	public override bool Naturally_exit_condition()
+	public override bool Capacity_Exit_Condition()
 	{
         return time_counter > used_dizzy_time;
     }

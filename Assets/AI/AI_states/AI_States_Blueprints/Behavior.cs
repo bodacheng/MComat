@@ -63,51 +63,19 @@ namespace Soul
         }
 
         // On what condition can we exit this state 
-        public virtual bool Naturally_exit_condition()
+        public virtual bool Capacity_Exit_Condition()
         {
             return true;
         }
 
         public virtual bool Strategic_exit_condition()
         {
-            return true;
+            return CheckExitCondition(strategic_exit_condition_code);
         }
 
         public virtual bool Capacity_enter_condition()
         {
             return this._FightAttriCalReference.HasPlentyGauge(splevel);
-        }
-
-        //一个状态的决策性进入条件与决策性退出条件如果没有形成一个真正意义上一正一反的关系，那么就会产生“无限进入进出循环”
-        // 这个在移动状态和防御状态上我们都出现过。
-        public virtual bool Enter_condition_priority1()
-        {
-            for (int i = 0; i < priority1.Count;i++)
-            {
-                if (CheckTriggerCondition(priority1[i]))
-                    return true;
-            }
-            return false;
-        }
-
-        public virtual bool Enter_condition_priority2()
-        {
-            for (int i = 0; i < priority2.Count;i++)
-            {
-                if (CheckTriggerCondition(priority2[i]))
-                    return true;
-            }
-            return false;
-        }
-
-        public virtual bool Enter_condition_priority3()
-        {
-            for (int i = 0; i < priority3.Count;i++)
-            {
-                if (CheckTriggerCondition(priority3[i]))
-                    return true;
-            }
-            return false;
         }
 
         // On what condition we have to enter this state

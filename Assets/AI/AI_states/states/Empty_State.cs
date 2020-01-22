@@ -10,7 +10,7 @@ public class Empty_State : Behavior
         base.Pre_process_before_enter();
     }
 
-	public override bool Naturally_exit_condition()
+	public override bool Capacity_Exit_Condition()
 	{
         return false;
 	}

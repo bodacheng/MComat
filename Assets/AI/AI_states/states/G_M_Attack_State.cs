@@ -27,13 +27,12 @@ public class G_M_Attack_State : Behavior {
         RotationAdjustmentTime = -1;
     }
 
-    public G_M_Attack_State(string clip_name, float RotationAdjustmentTime, float rotate_speed, int skillEmergentLevel)
+    public G_M_Attack_State(string clip_name, float RotationAdjustmentTime, float rotate_speed)
     {
         this.clip_name = clip_name;
         keepRotationAdjustment = false;
         this.rotate_speed = rotate_speed;
         this.RotationAdjustmentTime = RotationAdjustmentTime;
-        _skillEmergentLevel = skillEmergentLevel;
     }
 
     public override void Pre_process_before_enter()
@@ -72,7 +71,7 @@ public class G_M_Attack_State : Behavior {
         Animation_Manger.AnimationTrigger(clip_name);
 	}
 
-	public override bool Naturally_exit_condition()
+	public override bool Capacity_Exit_Condition()
 	{
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }

@@ -42,18 +42,6 @@ public class Move_State2 : Behavior
 		base.Pre_process_before_enter ();
 	}
 
-    public override bool Enter_condition_priority2()
-    {
-        //if (AI_DATA_CENTER.IsGrounded())
-        return true;
-        //return false;
-    }
-
-    public override bool Strategic_exit_condition()
-    {
-        return Sensor.GetMidEnemiesColliders().Count > 0 || this.time_counter >= this.time_limit;
-    }
-
     public override void C_State_enter()
     {
         if (this._AIStateRunner.GetLastState() == this)

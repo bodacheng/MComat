@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +6,20 @@ namespace Soul
 {
     public partial class AIStateRunner : MonoBehaviour
     {
-        List<Behavior_Rate_Set> SRTListForCasualTransitionbuttonRefresh = new List<Behavior_Rate_Set>();
+        // 这个纯粹为了按钮效果
+        List<Behavior_Transition_Set> SRTListForCasualTransitionbuttonRefresh = new List<Behavior_Transition_Set>();        
+        // 满足了触发条件的情况对策因果组
+        IDictionary<KeyValuePair<string, string>, int> Triggerd = new Dictionary<KeyValuePair<string, string>, int>();// 果，因，优先级
+        // 上面当中优先度最高的情况对策因果组
+        IDictionary<KeyValuePair<string, string>, int> finalTriggerd = new Dictionary<KeyValuePair<string, string>, int>();// 果，因，优先级
+        
         public void StateTransitionEngine_new(IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary)
         {
             avaliable_casual_Transitions.Clear();
-            casual_TransitionsPriority1.Clear();
-            casual_TransitionsPriority2.Clear();
-            casual_TransitionsPriority3.Clear();
             avaliable_forced_Transitions.Clear();
             SRTListForCasualTransitionbuttonRefresh.Clear();
 
-            if (current_state_num != null && state_Transition_Dictionary != null)
+            if (current_state_num != null)
                 state_Transition_Dictionary.TryGetValue(current_state_num, out CurrentStateTransitionSet);
 
             #region Forced state transition 
@@ -24,8 +27,8 @@ namespace Soul
             {
                 foreach (string num in CurrentStateTransitionSet.forced_to_state_nums)
                 {
-                    state_Dictionary.TryGetValue(num, out try_state);
-                    if (try_state.Force_enter_condition())
+                    state_Dictionary.TryGetValue(num, out try_Behavior);
+                    if (try_Behavior.Force_enter_condition())
                     {
                         avaliable_forced_Transitions.Add(num);
                     }
@@ -51,61 +54,65 @@ namespace Soul
             {
                 exitCommandFufilled = CurrentStateTransitionSet.exitInput == Inputs_defined.Null || CheckInput(CurrentStateTransitionSet.exitInput);
             }
-
-            if (CurrentStateTransitionSet.casual_to_state_Sets != null && CurrentStateTransitionSet.casual_to_state_Sets.Length > 0)
+            
+            // 满足了触发条件的情况对策因果组
+            Triggerd.Clear();
+            // 上面当中有限度最高的情况对策因果组
+            finalTriggerd.Clear();
+            
+            foreach (Behavior_Transition_Set Behavior_set in CurrentStateTransitionSet.casual_to_state_Sets)
             {
-                foreach (Behavior_Rate_Set state_set in CurrentStateTransitionSet.casual_to_state_Sets)
+                state_Dictionary.TryGetValue(Behavior_set.StateKey, out try_Behavior);
+                if (!try_Behavior.Capacity_enter_condition())
                 {
-                    state_Dictionary.TryGetValue(state_set.AI_State_Number, out try_state);
-                    if (try_state == null)
+                    continue;
+                }
+                SRTListForCasualTransitionbuttonRefresh.Add(Behavior_set);//avaliable_casual_Transitions是真正可以启动的技能的列表，SRTListForCasualTransitionbuttonRefresh根据作用得有个预告作用
+                if ((Behavior_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag) || (now_Behavior.Capacity_Exit_Condition() && exitCommandFufilled))
+                {
+                    if (playerMode || _inputManager.PlayerInputting)
                     {
-                        Debug.Log("以下路径脚本运行器致命错误:" + this.AI_States_path + " 的状态： " + state_set.AI_State_Number);
-                        continue;
-                    }
-
-                    if (try_state.Capacity_enter_condition())
-                    {
-                        SRTListForCasualTransitionbuttonRefresh.Add(state_set);
-                        if (((state_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag))||
-                            (now_state.Naturally_exit_condition() && exitCommandFufilled))
+                        if ((Behavior_set.enterInput != Inputs_defined.Null && CheckInput(Behavior_set.enterInput)) || Behavior_set.enterInput == Inputs_defined.Null)
                         {
-                            if (playerMode || _inputManager.PlayerInputting)
-                            {
-                                if ((state_set.enterInput != Inputs_defined.Null && CheckInput(state_set.enterInput)) ||
-                                    state_set.enterInput == Inputs_defined.Null)
-                                {
-                                    if (try_state.Enter_condition_priority1())
-                                        casual_TransitionsPriority1.Add(state_set);
-                                    if (try_state.Enter_condition_priority2())
-                                        casual_TransitionsPriority2.Add(state_set);
-                                    if (try_state.Enter_condition_priority3())
-                                        casual_TransitionsPriority3.Add(state_set);
-                                    avaliable_casual_Transitions.Add(state_set);
-                                }
-                            }
-                            else
-                            {
-                                if (try_state.Enter_condition_priority1())
-                                    casual_TransitionsPriority1.Add(state_set);
-                                if (try_state.Enter_condition_priority2())
-                                    casual_TransitionsPriority2.Add(state_set);
-                                if (try_state.Enter_condition_priority3())
-                                    casual_TransitionsPriority3.Add(state_set);
-
-                                avaliable_casual_Transitions.Add(state_set);
-                            }
+                            avaliable_casual_Transitions.Add(Behavior_set);
                         }
                     }
+                    else
+                    {
+                        List<string> Conditions = RespondAndCondition[try_Behavior.StateKey];
+                        for (int i = 0; i < Conditions.Count; i++)
+                        {
+                            if (try_Behavior.CheckTriggerCondition(Conditions[i]))//条件满足
+                            {
+                                // 查看情况与行为反应的优先度
+                                foreach (KeyValuePair<KeyValuePair<string, string>, int> keyValuePair in RespondAndConditionPriority)
+                                {
+                                    if (keyValuePair.Key.Key == try_Behavior.StateKey && keyValuePair.Key.Value == Conditions[i])
+                                    {
+                                        Debug.Log("状态"+try_Behavior.StateKey + "遇到了情况："+Conditions[i] +"从而可能要触发");
+                                        Triggerd.Add(keyValuePair);
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                        avaliable_casual_Transitions.Add(Behavior_set);
+                    }
                 }
-                if (MobileInputsManager.target.watchingInputManger == this._inputManager)
-                    _inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
             }
-
-            if (CurrentStateTransitionSet.casual_to_state_Sets == null || CurrentStateTransitionSet.casual_to_state_Sets.Length == 0)
+            
+            if (Triggerd.Count > 0)
             {
-                //if (now_state.casual_exit_condition())
-                if (MobileInputsManager.target.watchingInputManger == this._inputManager)
-                    _inputManager.ButtonRefreshFromStart(this.States_for_AbsoluteInput, _BO_Health);
+                List<KeyValuePair<string,string>> minkeys = Triggerd.Keys.Select(x => new { x, y = Triggerd[x] }).GroupBy(x => x.y).OrderBy(x => x.Key).First().Select(x => x.x).ToList();
+                for (int i = 0; i < minkeys.Count;i++)
+                {
+                    finalTriggerd.Add(minkeys[i],Triggerd[minkeys[i]]);
+                }
+            }
+            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+            {
+                _inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
             }
 
             #region 状态迁移判断
@@ -116,27 +123,17 @@ namespace Soul
                     if (MobileInputsManager.target.watchingInputManger == this._inputManager)
                         MobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
                     _SkillCancelFlag.turn_off_flag();
-                    ChangeState(avaliable_casual_Transitions[0].AI_State_Number);
+                    ChangeState(avaliable_casual_Transitions[0].StateKey);
                     return;
                 }
-                if (casual_TransitionsPriority1.Count > 0)
+                if (finalTriggerd.Count >0) 
                 {
-                    RandomTransitionToRun(casual_TransitionsPriority1);
-                    return;
-                }
-                if (casual_TransitionsPriority2.Count > 0)
-                {
-                    RandomTransitionToRun(casual_TransitionsPriority2);
-                    return;
-                }
-                if (casual_TransitionsPriority3.Count > 0)
-                {
-                    RandomTransitionToRun(casual_TransitionsPriority3);
+                    ChangeState(finalTriggerd.First().Key.Key);
                     return;
                 }
             }
 
-            if (!now_state.Naturally_exit_condition())
+            if (!now_Behavior.Capacity_Exit_Condition())
             {
                 return;
             }
@@ -150,108 +147,18 @@ namespace Soul
             }
             else
             {
-                if (!now_state.Strategic_exit_condition())
+                if (!now_Behavior.Strategic_exit_condition())
                 {
                     return;
                 } 
             }
 
-            NewCommandWaiting();//没有当前状态没有自然迁移的情况，一般来说其实就是从奔跑行走到决定开始一个状态。
-            #endregion
-        }
-
-        void RandomTransitionToRun(List<Behavior_Rate_Set> TransitionsToRun)
-        {
-            int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
-            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
-                MobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].SPLevel);
-            _SkillCancelFlag.turn_off_flag();
-            ChangeState(TransitionsToRun[next].AI_State_Number);
-        }
-
-        public bool HaveFirstSkillToTrigger()
-        {
-            foreach (Behavior _AS in States_for_AbsoluteInput)
-            {
-                if (_AS.StateType != BehaviorType.Def && _AS.StateType != BehaviorType.AC && _AS.StateType != BehaviorType.NONE)
-                {
-                    if (_AS.Capacity_enter_condition())
-                        return true;
-                }
-            }
-            return false;
-        }
-
-        public void NewCommandWaiting()
-        {
-            AINext.Clear();
-            AINextPriority1.Clear();
-            AINextPriority2.Clear();
-            AINextPriority3.Clear();
-            foreach (Behavior State_Rate_Set in States_for_AbsoluteInput)
-            {
-                if (State_Rate_Set.Capacity_enter_condition())
-                {
-                    if (State_Rate_Set.Enter_condition_priority1())
-                        AINextPriority1.Add(State_Rate_Set);
-                    if (State_Rate_Set.Enter_condition_priority2())
-                        AINextPriority2.Add(State_Rate_Set);
-                    if (State_Rate_Set.Enter_condition_priority3())
-                        AINextPriority3.Add(State_Rate_Set);
-                    AINext.Add(State_Rate_Set);
-                }
-            }
-
-            if (AINext.Count > 0)
-            {
-                if (playerMode || _inputManager.PlayerInputting)
-                {
-                    foreach (Behavior State_Rate_Set in AINext)
-                    {
-                        if (CheckInput(State_Rate_Set.enterInput))
-                        {
-                            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
-                                 MobileInputsManager.Skillbuttonexplosion(State_Rate_Set.enterInput, State_Rate_Set.splevel);
-                            ChangeState(State_Rate_Set.StateKey);
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    if (AINextPriority1.Count > 0)
-                    {
-                        RandomStateToStartOff(AINextPriority1);
-                        return;
-                    }
-                    if (AINextPriority2.Count > 0)
-                    {
-                        RandomStateToStartOff(AINextPriority2);
-                        return;
-                    }
-                    if (AINextPriority3.Count > 0)
-                    {
-                        RandomStateToStartOff(AINextPriority3);
-                        return;
-                    }
-                }
-            }
-
-            if (commandWaitingState == null)
-                return;
-            state_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_state);
-            if (try_state != now_state)//避免战斗待机状态重复进入
+            state_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
+            if (try_Behavior != now_Behavior)//避免战斗待机状态重复进入
             {
                 ChangeState(commandWaitingState.StateKey);
             }
-        }
-
-        void RandomStateToStartOff(List<Behavior> TransitionsToRun)
-        {
-            int next = UnityEngine.Random.Range(0, TransitionsToRun.Count);
-            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
-                MobileInputsManager.Skillbuttonexplosion(TransitionsToRun[next].enterInput, TransitionsToRun[next].splevel);
-            ChangeState(TransitionsToRun[next].StateKey);
+            #endregion
         }
     }
 }

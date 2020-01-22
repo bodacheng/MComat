@@ -43,16 +43,6 @@ public class Move_State : Behavior
 		base.Pre_process_before_enter ();
 	}
 
-    public override bool Enter_condition_priority3()
-    {
-        return true;
-    }
-
-    public override bool Strategic_exit_condition()
-    {
-        return Sensor.GetInnerEnemiesColliders().Count > 0 || Sensor.GetNearbyDamagingWeaponColliders().Count > 0 || Sensor.GetOutterDamagingWeaponColliders().Count > 0;
-    }
-
     bool Timeup()
     {
         switch (moveDirection)

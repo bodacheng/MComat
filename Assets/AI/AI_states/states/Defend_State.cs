@@ -52,67 +52,22 @@ public class Defend_State : Behavior
 
     public override bool Capacity_enter_condition()
     {
-        return true;
-    }
-    
-    public override bool Naturally_exit_condition() 
-    {
-        return time <= 0;
-    }
-
-    public override bool Enter_condition_priority1()
-    {
-        if (((Time.time - lastExitTime) < DefendHpRefreshTime))
-            return false;
-        if (_ResistanceManager.Resistance.Value > 0)
-            return false;
-        if (_FightAttriCalReference.IFgettingDamage())
-            return true;
-        damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
-        nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
-        if (nearbyenemymeat.Count == 0)
-        {
-            if (damagingweaponList.Count > 0)
-            {
-                return true;
-            }
-        }
-        else{
-            if (damagingweaponList.Count > 0)
-            {
-                if (Vector3.Distance(nearbyenemymeat[0].transform.position, _DATA_CENTER.geometryCenter.position) >
-                    Vector3.Distance(damagingweaponList[0].transform.position, _DATA_CENTER.geometryCenter.position))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public override bool Enter_condition_priority3()
-    {
-        if (((Time.time - lastExitTime) < DefendHpRefreshTime))
-        {
-            return false;
-        }
-        return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
-    }
-
-    public override bool Strategic_exit_condition()
-    {
-        damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
-        return damagingweaponList.Count == 0;
-    }
-
-    public override void AI_State_enter()
-    {
-        //defendHP = FightGlobalSetting._defendHP;
-        base.AI_State_enter();
         if ((Time.time - lastExitTime) > DefendHpRefreshTime)
         {
             DefendHP = 10;
         }
+        return (DefendHP > 0);
+    }
+    
+    public override bool Capacity_Exit_Condition() 
+    {
+        return time <= 0;
+    }
+    
+    public override void AI_State_enter()
+    {
+        //defendHP = FightGlobalSetting._defendHP;
+        base.AI_State_enter();
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);

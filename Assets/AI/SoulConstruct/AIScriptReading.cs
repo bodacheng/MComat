@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
 using System.IO;
-using System.Xml;
 using System.Xml.Serialization;
 using Soul;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class AIScriptReading {
+public static class AIScriptReading {
 
-    public static List<Behavior_Transition_Set> readKongfuBook(AIStateRunner _AIStateRunner,TextAsset Script,string type)
+    public static List<Behavior_Transition_Set> ReadKongfuBook(AIStateRunner _AIStateRunner,TextAsset Script,string type)
     {
         try
         {
@@ -29,14 +25,7 @@ public class AIScriptReading {
                 #if UNITY_EDITOR
                 string _path = AssetDatabase.GetAssetPath(Script);
                 string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
-                if (_path.Length > 1)
-                {
-                    _path = pathsplit[1];
-                }
-                else
-                {
-                    _path = pathsplit[0];
-                }
+                _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
                 _AIStateRunner.AI_States_path = _path;
                 #endif
                 
@@ -54,30 +43,11 @@ public class AIScriptReading {
             _AIStateRunner.usingScript = Script;
             if (list == null)
             {
-                list = new List<Behavior_Transition_Set>() {
-                new Behavior_Transition_Set("Empty",
-                                        BehaviorType.NONE,
-                                        0,
-                                        null,
-                                        null, null,
-                                         enterInput: Inputs_defined.Null, exitInput: Inputs_defined.Null, 
-                                         SPMove:0,
-                                         0,
-                                         rarelevel:0)
-                };
+                list = new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",BehaviorType.NONE,0,null,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
             }else{
                 if (list.Count == 0)
                 {
-                    list.Add(new Behavior_Transition_Set(
-                                   "Empty",
-                                   BehaviorType.NONE,
-                                   0,
-                                   null,
-                                   null, null,
-                                    enterInput: Inputs_defined.Null, exitInput: Inputs_defined.Null,
-                                    SPMove: 0,
-                                    0, 
-                                    rarelevel: 0));
+                    list.Add(new Behavior_Transition_Set("Empty",BehaviorType.NONE,0,null,null, null,Inputs_defined.Null, Inputs_defined.Null,0,0));
                 }
             }
             return list;
@@ -86,18 +56,7 @@ public class AIScriptReading {
         {
             Debug.Log("状态迁移信息读取失败,返回只有空状态的列表");
             Debug.Log(e.ToString());
-            return new List<Behavior_Transition_Set>() {
-                new Behavior_Transition_Set("Empty",
-                                        BehaviorType.NONE,
-                                        0,
-                                        null,
-                                        null, null,
-                                        enterInput: Inputs_defined.Null, 
-                                         exitInput: Inputs_defined.Null, 
-                                         SPMove:0,
-                                         0,
-                                         rarelevel:0)
-                };
+            return new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",BehaviorType.NONE,0,null,null, null,Inputs_defined.Null,Inputs_defined.Null,0,0)};
         }
     }
 }

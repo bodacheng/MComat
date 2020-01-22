@@ -49,15 +49,13 @@ public partial class G_Attack_State : Behavior {
 
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime,
                           float approachingSpeed,
-                          string clip_name,
-                          int skillEmergentLevel)
+                          string clip_name)
     {
         this.rushSpeed = rushSpeed;
         this.maxRushTime = maxRushTime;
         approcahingSpeed = approachingSpeed;
         this.clip_name = clip_name;
         this.dash_clip_name = dash_clip_name;
-        _skillEmergentLevel = skillEmergentLevel;
     }
 
     public G_Attack_State(string dash_clip_name,float rushSpeed, float maxRushTime, string clip_name, bool EventLauncher_Or_Ender)
@@ -182,7 +180,7 @@ public partial class G_Attack_State : Behavior {
         }
     }
 
-	public override bool Naturally_exit_condition()
+	public override bool Capacity_Exit_Condition()
 	{
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }

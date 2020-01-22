@@ -8,13 +8,12 @@ public class Counter_State : Behavior {
     readonly float rotate_speed;
     readonly int skillEmergentLevel;
 
-    public Counter_State(string _clip_name, float _RotationAdjustmentTime, float _rotate_speed, int _skillEmergentLevel)
+    public Counter_State(string _clip_name, float _RotationAdjustmentTime, float _rotate_speed)
     {
         clip_name = _clip_name;
         keepRotationAdjustment = false;
         rotate_speed = _rotate_speed;
         RotationAdjustmentTime = _RotationAdjustmentTime;
-        skillEmergentLevel = _skillEmergentLevel;
     }
     
     public override void Pre_process_before_enter()
@@ -35,7 +34,7 @@ public class Counter_State : Behavior {
         _Animator.applyRootMotion = true;
 	}
 
-	public override bool Naturally_exit_condition()
+	public override bool Capacity_Exit_Condition()
 	{
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }

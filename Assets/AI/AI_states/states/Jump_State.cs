@@ -49,12 +49,7 @@ public class Jump_State : Behavior
         return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
 
-    public override bool Enter_condition_priority2()
-	{
-        return Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && this.CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
-    }
-
-    public override bool Naturally_exit_condition()
+    public override bool Capacity_Exit_Condition()
     {
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull() || time_counter > this.state_time;
     }

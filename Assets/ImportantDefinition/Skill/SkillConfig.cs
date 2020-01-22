@@ -2,6 +2,7 @@
 public enum BehaviorType
 {
     NONE = 0,
+    MV = 7,
     AC = 4,
     GR = 1,
     GM = 2,

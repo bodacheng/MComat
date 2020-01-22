@@ -38,6 +38,10 @@ public class Behaviors_Incubator
         Move_State move2 = new Move_State(AIMoveStyle.normal,2f, 2f);
         Move_State move3 = new Move_State(AIMoveStyle.normal,3f, 2f);
         Move_State testmove = new Move_State(AIMoveStyle.test, 1f, 2f);
+        move1.StateType = BehaviorType.MV;
+        move2.StateType = BehaviorType.MV;
+        move3.StateType = BehaviorType.MV;
+        testmove.StateType = BehaviorType.MV;
         move1.nextAttackStateCanRushFirst = false;
         move2.nextAttackStateCanRushFirst = false;
         move3.nextAttackStateCanRushFirst = false;
@@ -123,7 +127,7 @@ public class Behaviors_Incubator
                 switch (_attackType)
                 {
                     case BehaviorType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey, _set.skillEmergentLevel)
+                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey)
                         {
                             StateType = BehaviorType.GI,
                             AT = _set.AT,
@@ -134,7 +138,7 @@ public class Behaviors_Incubator
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case BehaviorType.GM:
-                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey, 5f, 2f, _set.skillEmergentLevel)
+                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey, 5f, 2f)
                         {
                             StateType = BehaviorType.GM,
                             AT = _set.AT,
@@ -145,7 +149,7 @@ public class Behaviors_Incubator
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case BehaviorType.GR:
-                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.StateKey, _set.skillEmergentLevel)
+                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.StateKey)
                         {
                             StateType = BehaviorType.GR,
                             AT = _set.AT,
@@ -156,7 +160,7 @@ public class Behaviors_Incubator
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case BehaviorType.CT:
-                        Counter_State _Counter = new Counter_State(_set.StateKey, 1.4f, 1, _set.skillEmergentLevel)
+                        Counter_State _Counter = new Counter_State(_set.StateKey, 1.4f, 1)
                         {
                             StateType = BehaviorType.CT,
                             AT = _set.AT,

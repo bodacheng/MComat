@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Soul
 {
     public abstract partial class Behavior
     {
-        public List<string> priority1 = new List<string>();
-        public List<string> priority2 = new List<string>();
-        public List<string> priority3 = new List<string>();
+        //public List<string> priority1 = new List<string>();
+        //public List<string> priority2 = new List<string>();
+        //public List<string> priority3 = new List<string>();
+        public string strategic_exit_condition_code;
         
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
@@ -21,6 +23,45 @@ namespace Soul
         public bool DangerousClose() //Counter_State 1 2 3
         {
             return Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
+        }
+        
+        List<Collider> damagingweaponList;
+        List<Collider> nearbyenemymeat;
+        public bool DangerousVeryClose() //Defend_State 1 
+        {
+            if (_ResistanceManager.Resistance.Value > 0)
+            {
+                return false;
+            }
+            if (_FightAttriCalReference.IFgettingDamage())
+            {
+                return true;
+            }
+            damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
+            nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
+            if (nearbyenemymeat.Count == 0)
+            {
+                if (damagingweaponList.Count > 0)
+                {
+                    return true;
+                }
+            }
+            else{
+                if (damagingweaponList.Count > 0)
+                {
+                    if (Vector3.Distance(nearbyenemymeat[0].transform.position, _DATA_CENTER.geometryCenter.position) >
+                        Vector3.Distance(damagingweaponList[0].transform.position, _DATA_CENTER.geometryCenter.position))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        public bool MayBeDefend() //Defend_State 3
+        {
+            return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
         }
         
         public bool TimeToAttack() //G_Attack_State 。。原本有个skillEmergentLevel的机制。。一般是2
@@ -52,6 +93,17 @@ namespace Soul
             : Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
         }
         
+        public bool TimeToRespond()
+        {
+            damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
+            return damagingweaponList.Count == 0;
+        }
+        
+        public bool TimeToStopRunning()
+        {
+            return Sensor.GetInnerEnemiesColliders().Count > 0 || Sensor.GetNearbyDamagingWeaponColliders().Count > 0 || Sensor.GetOutterDamagingWeaponColliders().Count > 0;
+        }
+        
         public bool CheckTriggerCondition(string conditionFunctionName)
         {
             switch(conditionFunctionName)
@@ -66,8 +118,25 @@ namespace Soul
                     return TimeToDashAttack();
                 case "DangerousClose":
                     return DangerousClose();
+                case "DangerousVeryClose":
+                    return DangerousVeryClose();
+                case "MayBeDefend":
+                    return MayBeDefend();
                 default:
                     return false;
+            }
+        }
+        
+        public bool CheckExitCondition(string exitFunctionName)
+        {
+            switch(exitFunctionName)
+            {
+                case "TimeToRespond":
+                    return TimeToRespond();
+                case "TimeToStopRunning":
+                    return TimeToStopRunning();
+                default:
+                    return true;
             }
         }
     }

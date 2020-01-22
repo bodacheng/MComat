@@ -70,9 +70,8 @@ namespace Soul
                                                                           BehaviorType.NONE,
                                                                           0,
                                                                           null,
-                                                                          new Behavior_Rate_Set[0], new string[0],
+                                                                          new Behavior_Transition_Set[0], new string[0],
                                                                           Inputs_defined.Null, Inputs_defined.Null,
-                                                                          0,
                                                                           0,
                                                                           0);
                     after_list.Add(Empty);
@@ -85,9 +84,8 @@ namespace Soul
                                                                             BehaviorType.NONE,
                                                                             0,
                                                                             null,
-                                                                            new Behavior_Rate_Set[0], new string[0],
+                                                                            new Behavior_Transition_Set[0], new string[0],
                                                                             Inputs_defined.Null, Inputs_defined.Null,
-                                                                            0,
                                                                             0,
                                                                             0);
                     after_list.Add(Victory);
@@ -100,9 +98,8 @@ namespace Soul
                                                                           BehaviorType.NONE,
                                                                           0,
                                                                           null,
-                                                                          new Behavior_Rate_Set[0], new string[0],
+                                                                          new Behavior_Transition_Set[0], new string[0],
                                                                           Inputs_defined.Null, Inputs_defined.Null,
-                                                                          0,
                                                                           0,
                                                                           0);
                     after_list.Add(Death);
@@ -115,10 +112,9 @@ namespace Soul
                                                                         BehaviorType.NONE,
                                                                         0,
                                                                         null,
-                                                                        new Behavior_Rate_Set[0],
+                                                                        new Behavior_Transition_Set[0],
                                                                         (new List<string>() { "Hit", "KnockOff" }).ToArray(),
                                                                         Inputs_defined.Null, Inputs_defined.Null,
-                                                                        0,
                                                                         0,
                                                                         0);
                     after_list.Add(Hit);
@@ -131,9 +127,8 @@ namespace Soul
                                                                              BehaviorType.NONE,
                                                                              0,
                                                                              null,
-                                                                             new Behavior_Rate_Set[0], (new List<string>() { "Hit", "KnockOff" }).ToArray(),
+                                                                             new Behavior_Transition_Set[0], (new List<string>() { "Hit", "KnockOff" }).ToArray(),
                                                                              Inputs_defined.Null, Inputs_defined.Null,
-                                                                             0,
                                                                              0,
                                                                              0);
                     after_list.Add(KnockOff);
@@ -144,22 +139,22 @@ namespace Soul
 
                 foreach (Behavior_Transition_Set s in after_list)
                 {
-                    List<Behavior_Rate_Set> undefined_CausalStateRateSet = new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> undefined_CausalStateRateSet = new List<Behavior_Transition_Set>();
                     if (s.casual_to_state_Sets != null)
                     {
-                        foreach (Behavior_Rate_Set rs in s.casual_to_state_Sets)
+                        foreach (Behavior_Transition_Set rs in s.casual_to_state_Sets)
                         {
-                            if (!alreadyInList.Contains(rs.AI_State_Number))
+                            if (!alreadyInList.Contains(rs.StateKey))
                             {
                                 undefined_CausalStateRateSet.Add(rs);
                             }
                         }
                     }
 
-                    List<Behavior_Rate_Set> casuals_t = s.casual_to_state_Sets != null ? s.casual_to_state_Sets.ToList() : new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> casuals_t = s.casual_to_state_Sets != null ? s.casual_to_state_Sets.ToList() : new List<Behavior_Transition_Set>();
                     if (undefined_CausalStateRateSet.Any())
                     {
-                        foreach (Behavior_Rate_Set _set in undefined_CausalStateRateSet)
+                        foreach (Behavior_Transition_Set _set in undefined_CausalStateRateSet)
                         {
                             casuals_t.Remove(_set);// 把连续状态串里出现的没有定义的状态给删除掉。
                         }
@@ -190,12 +185,12 @@ namespace Soul
                 Debug.Log("脚本为空，返回");
                 return;
             }
-            if (now_state != null)
+            if (now_Behavior != null)
             {
-                now_state.AI_State_exit();
+                now_Behavior.AI_State_exit();
             }
 
-            State_Transition_Set_List = AIScriptReading.readKongfuBook(this, Script, type);//这个是一个状态清单，生成状态的是States_Dictionary类。
+            State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script, type);//这个是一个状态清单，生成状态的是States_Dictionary类。
                                                                                                           //_States_Dictionary = new States_Dictionary(type,this.State_Transition_Set_List);//这一行于7月20号commentout了
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List;// 理解整个系统的关键
             state_Dictionary = new Dictionary<string, Behavior>();
@@ -213,18 +208,18 @@ namespace Soul
                     &&
                     _States_Incubator.IfContainsKey(_State_Transition_Set.StateKey))
                 {
-                    List<Behavior_Rate_Set> new_casual_to = new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> new_casual_to = new List<Behavior_Transition_Set>();
                     if (_State_Transition_Set.casual_to_state_Sets == null)
                     {
                         Debug.Log(Script.name + "脚本的" + _State_Transition_Set.StateKey + "状态自然迁移出错,尝试进行强加");
                         _State_Transition_Set.casual_to_state_Sets = new_casual_to.ToArray();
                     }
-                    foreach (Behavior_Rate_Set _State_Rate_Set in _State_Transition_Set.casual_to_state_Sets)
+                    foreach (Behavior_Transition_Set _State_Rate_Set in _State_Transition_Set.casual_to_state_Sets)
                     {
-                        if (!_States_Incubator.IfContainsKey(_State_Rate_Set.AI_State_Number))
+                        if (!_States_Incubator.IfContainsKey(_State_Rate_Set.StateKey))
                         {
                             Debug.Log(Script.name + "脚本中的状态" + _State_Transition_Set.StateKey +
-                                      "下存在没有定义的自然迁移状态" + _State_Rate_Set.AI_State_Number + ",从而已经做强行删除处理。");
+                                      "下存在没有定义的自然迁移状态" + _State_Rate_Set.StateKey + ",从而已经做强行删除处理。");
                         }
                         else
                         {
@@ -302,10 +297,10 @@ namespace Soul
             }
             _inputManager.INI(hasD, hasR, this);
 
-            List<Behavior_Rate_Set> knockOFFCasualTransitios = new List<Behavior_Rate_Set>();
+            List<Behavior_Transition_Set> knockOFFCasualTransitios = new List<Behavior_Transition_Set>();
             foreach (Behavior_Transition_Set _set in setsHaveInitialInput)
             {
-                knockOFFCasualTransitios.Add(_set.GetStateRateSet());
+                knockOFFCasualTransitios.Add(_set);
             }
 
             foreach (Behavior_Transition_Set _set in list)
@@ -350,11 +345,11 @@ namespace Soul
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
-            foreach (Behavior_Rate_Set _rset in _set.casual_to_state_Sets)
+            foreach (Behavior_Transition_Set _rset in _set.casual_to_state_Sets)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                 {
-                    stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out Behavior_Transition_Set _new);
+                    stateTransitionSetDictionary.TryGetValue(_rset.StateKey, out Behavior_Transition_Set _new);
                     if (_new != null)
                     {
                         if (!chuan.Contains(_new) && !allChuans.Contains(_new))
@@ -398,14 +393,14 @@ namespace Soul
 
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
-            foreach (Behavior_Rate_Set _rset in _set.casual_to_state_Sets)
+            foreach (Behavior_Transition_Set _rset in _set.casual_to_state_Sets)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)
                 {
-                    stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out Behavior_Transition_Set _new);
+                    stateTransitionSetDictionary.TryGetValue(_rset.StateKey, out Behavior_Transition_Set _new);
                     if (_new != null)
                     {
-                        if (!CheckIfStringInList(_rset.AI_State_Number, chuan))
+                        if (!CheckIfStringInList(_rset.StateKey, chuan))
                         {
                             if (SearchAttackChuanKeyNext(_new, searching_inputKey, chuan, stateTransitionSetDictionary) != null)
                             {
@@ -418,7 +413,7 @@ namespace Soul
                     }
                     else
                     {
-                        Debug.Log("字典中不存在：" + _rset.AI_State_Number);
+                        Debug.Log("字典中不存在：" + _rset.StateKey);
                     }
                 }
             }
@@ -463,26 +458,25 @@ namespace Soul
                 // 三大首发技能AI模式下概率
                 if (Transition.Value.enterInput == Inputs_defined.Attack)
                 {
-                    List<Behavior_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
-                    List<Behavior_Rate_Set> casual_to_states_after = new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
-                    foreach (Behavior_Rate_Set _set in casual_to_states_now)
+                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.AI_State_Number != myMoveStateKey)
+                        if (_set.StateKey != myMoveStateKey)
                         {
                             //然后？概率应该适配多少？
-                            if (attackChuan.Contains(_set.AI_State_Number) || Fire1Chuan.Contains(_set.AI_State_Number) || Fire2Chuan.Contains(_set.AI_State_Number))
+                            if (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                             {
-                                Behavior_Rate_Set _freshNew = new Behavior_Rate_Set(
-                                _set.AI_State_Number,
-                                _set.attackType,
+                                Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                _set.StateKey,
+                                _set.stateType,
                                 _set.AT,
                                 _set.ai_trigger_ranges,
                                 _set.can_be_cancelled_to,
                                 _set.enterInput, _set.exitInput,
-                                _set.SPLevel,
-                                _set.skillEmergentLevel);
+                                _set.SPLevel);
                                 casual_to_states_after.Add(_freshNew);
                             }
                         }
@@ -492,25 +486,24 @@ namespace Soul
 
                 if (Transition.Value.enterInput == Inputs_defined.Fire1)
                 {
-                    List<Behavior_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
-                    List<Behavior_Rate_Set> casual_to_states_after = new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
-                    foreach (Behavior_Rate_Set _set in casual_to_states_now)
+                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.AI_State_Number != myMoveStateKey)
+                        if (_set.StateKey != myMoveStateKey)
                         {
                             //然后？概率应该适配多少？
-                            if (attackChuan.Contains(_set.AI_State_Number) || Fire1Chuan.Contains(_set.AI_State_Number) || Fire2Chuan.Contains(_set.AI_State_Number))
+                            if (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                             {
-                                Behavior_Rate_Set _freshNew = new Behavior_Rate_Set(
-                                    _set.AI_State_Number,
-                                    _set.attackType,
+                                Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                    _set.StateKey,
+                                    _set.stateType,
                                     _set.AT,
                                     _set.ai_trigger_ranges,
                                     _set.can_be_cancelled_to,
-                                    _set.enterInput, _set.exitInput, _set.SPLevel,
-                                    _set.skillEmergentLevel);
+                                    _set.enterInput, _set.exitInput, _set.SPLevel);
                                 casual_to_states_after.Add(_freshNew);
                             }
                         }
@@ -520,26 +513,25 @@ namespace Soul
 
                 if (Transition.Value.enterInput == Inputs_defined.Fire2)
                 {
-                    List<Behavior_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
-                    List<Behavior_Rate_Set> casual_to_states_after = new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
-                    foreach (Behavior_Rate_Set _set in casual_to_states_now)
+                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.AI_State_Number != myMoveStateKey)
+                        if (_set.StateKey != myMoveStateKey)
                         {
                             //然后？概率应该适配多少？
-                            if (attackChuan.Contains(_set.AI_State_Number) || Fire1Chuan.Contains(_set.AI_State_Number) || Fire2Chuan.Contains(_set.AI_State_Number))
+                            if (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                             {
-                                Behavior_Rate_Set _freshNew = new Behavior_Rate_Set(
-                                    _set.AI_State_Number,
-                                    _set.attackType,
+                                Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                    _set.StateKey,
+                                    _set.stateType,
                                     _set.AT,
                                     _set.ai_trigger_ranges,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput,
-                                    _set.SPLevel,
-                                    _set.skillEmergentLevel);
+                                    _set.SPLevel);
                                 casual_to_states_after.Add(_freshNew);
                             }
                         }
@@ -555,15 +547,15 @@ namespace Soul
                    &&
                     (attackChuan.Contains(Transition.Value.StateKey) || Fire1Chuan.Contains(Transition.Value.StateKey) || Fire2Chuan.Contains(Transition.Value.StateKey)))
                 {
-                    List<Behavior_Rate_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
-                    List<Behavior_Rate_Set> casual_to_states_after = new List<Behavior_Rate_Set>();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
-                    foreach (Behavior_Rate_Set _set in casual_to_states_now)
+                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.AI_State_Number != myMoveStateKey
+                        if (_set.StateKey != myMoveStateKey
                            &&
-                            (attackChuan.Contains(_set.AI_State_Number) || Fire1Chuan.Contains(_set.AI_State_Number) || Fire2Chuan.Contains(_set.AI_State_Number))
+                            (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                            )//这个环节现在决定了第二次连击后如果有本串之外的选择概率也被修改为了allevel  .
                             //然而，这第二个条件给增加了一个非常明显的限制，那就是接续在任何一个技能后的续技能必须是attack，fire1，fire2主串上的，
                             //比如说角色如果第一招是发出一团火焰，第二招可能是把火焰踢出去或拿着这团火给前方一拳，如果火焰和踢火都是靠attack键发动，火焰圈是靠fire1键接续，那么火焰拳必须是fire1或fire2攻击串
@@ -571,15 +563,14 @@ namespace Soul
                             //如果把这第二个条件去掉将产生以下结果：玩家每在满一个20级周期时解锁了新技能后，如果这个新技能有后续技，那这个后续技也会发动出来，但无法首发（这个可改）
                             //并且任何一个技能的后续技能可以完全独立存在，比如点了attack后，点fire1或fire2可以接续出一个不在fire1，fire2主攻击串上的隐藏技能
                         {
-                            Behavior_Rate_Set _freshNew = new Behavior_Rate_Set(
-                                    _set.AI_State_Number,
-                                    _set.attackType,
+                            Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                    _set.StateKey,
+                                    _set.stateType,
                                     _set.AT,
                                     _set.ai_trigger_ranges,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput,
-                                    _set.SPLevel,
-                                    _set.skillEmergentLevel);
+                                    _set.SPLevel);
                             casual_to_states_after.Add(_freshNew);
                         }
                     }
@@ -595,7 +586,7 @@ namespace Soul
                     ||
                     Transition.Key == "Test_Move")
                 {
-                    Transition.Value.casual_to_state_Sets = new Behavior_Rate_Set[] { };
+                    Transition.Value.casual_to_state_Sets = new Behavior_Transition_Set[] { };
                 }
             }
         }

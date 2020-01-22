@@ -150,9 +150,9 @@ namespace mainMenu
                 skillShowLines.drawlines(_toDrawLines);
 
                 //下面这些是逻辑核心
-                foreach (Behavior_Rate_Set _set in _state_Transition_Set.casual_to_state_Sets)
+                foreach (Behavior_Transition_Set _set in _state_Transition_Set.casual_to_state_Sets)
                 {
-                    analysisStatesSetDic.TryGetValue(_set.AI_State_Number, out Behavior_Transition_Set _oneCasualTo);
+                    analysisStatesSetDic.TryGetValue(_set.StateKey, out Behavior_Transition_Set _oneCasualTo);
                     StateButtonDic.TryGetValue(_oneCasualTo, out Button CasualToButton);
 
                     if (_button != null && CasualToButton != null)
@@ -466,7 +466,6 @@ namespace mainMenu
                     _set.enterInput,
                     _set.exitInput,
                     _set.SPLevel,
-                    _set.skillEmergentLevel,
                     _set.rarelevel
                 );
                 chuan.Add(freshNew);
@@ -476,13 +475,13 @@ namespace mainMenu
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
-            foreach (Behavior_Rate_Set _rset in _set.casual_to_state_Sets)
+            foreach (Behavior_Transition_Set _Set in _set.casual_to_state_Sets)
             {
-                if (_rset.enterInput != Inputs_defined.Null)
+                if (_Set.enterInput != Inputs_defined.Null)
                 {
-                    if (_rset.enterInput == searching_inputKey)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
+                    if (_Set.enterInput == searching_inputKey)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                     {
-                        stateTransitionSetDictionary.TryGetValue(_rset.AI_State_Number, out Behavior_Transition_Set _new);
+                        stateTransitionSetDictionary.TryGetValue(_Set.StateKey, out Behavior_Transition_Set _new);
                         if (_new != null)
                         {
                             if (!_keyChuan.Contains(_new.StateKey))
@@ -498,7 +497,7 @@ namespace mainMenu
                             else
                             {
                                 Debug.Log(_set.StateKey + "状态后产生首尾循环");
-                                unsualKeyConnects.Add(new List<string> { _set.StateKey, _rset.AI_State_Number });//首尾循环我们看作是种特殊连接
+                                unsualKeyConnects.Add(new List<string> { _set.StateKey, _Set.StateKey });//首尾循环我们看作是种特殊连接
                             }
                         }
                     }
@@ -507,7 +506,7 @@ namespace mainMenu
                         //非寻常攻击串
                         if (unsualKeyConnects != null)
                         {
-                            unsualKeyConnects.Add(new List<string> { _set.StateKey, _rset.AI_State_Number });
+                            unsualKeyConnects.Add(new List<string> { _set.StateKey, _Set.StateKey });
                         }
                     }
                 }

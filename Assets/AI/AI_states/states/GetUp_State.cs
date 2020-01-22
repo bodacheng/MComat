@@ -15,13 +15,8 @@ public class GetUp : Behavior {
 		base.Pre_process_before_enter ();
 	}
     
-    public override bool Enter_condition_priority1()
-    {
-        return true;
-    }
-    
     // On what condition can we exit this state 
-    public override bool Naturally_exit_condition()
+    public override bool Capacity_Exit_Condition()
     {
         return counter > FightGlobalSetting._GetupTime;
     }

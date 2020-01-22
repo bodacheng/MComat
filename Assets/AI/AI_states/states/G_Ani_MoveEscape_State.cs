@@ -23,7 +23,7 @@ public class G_Ani_MoveEscape_State : Behavior {
         return _BasicPhysicSupport.hiddenMethods.Grounded;
     }
     
-    public override bool Naturally_exit_condition()
+    public override bool Capacity_Exit_Condition()
     {
         return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
     }

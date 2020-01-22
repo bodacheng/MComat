@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -152,19 +151,19 @@ public class AIRunnerGUI : Editor {
                             for (int y = 0; y < myScript.State_Transition_Set_List[i].casual_to_state_Sets.Length; y++)
                             {
                                 EditorGUI.indentLevel++;
-                                if (casualToStateKeyOptions.Contains<string>(myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].AI_State_Number))
+                                if (casualToStateKeyOptions.Contains<string>(myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey))
                                 {
                                     stateKeyGUI.normal.textColor = new Color(0.2f, 0.7f, 0.5f);
-                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].AI_State_Number =
+                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey =
                                         casualToStateKeyOptions[EditorGUILayout.Popup(
                                                     "Casual To State Key",
-                                                    Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].AI_State_Number),
+                                                    Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey),
                                                     casualToStateKeyOptions,
                                                     stateKeyGUI)];
                                 }
                                 else
                                 {
-                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].AI_State_Number = casualToStateKeyOptions[0];
+                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey = casualToStateKeyOptions[0];
                                 }
                                 stateKeyGUI.normal.textColor = new Color(0.6f, 0.3f, 0.4f);
                                 myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].can_be_cancelled_to = EditorGUILayout.Toggle("superCancel", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].can_be_cancelled_to);
@@ -181,7 +180,7 @@ public class AIRunnerGUI : Editor {
 								myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].SPLevel = EditorGUILayout.IntPopup("SPLevel", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].SPLevel,exoptions_display,exoptions);
                                 if (GUILayout.Button("DeleteThis", deleteCasualToButtonStyle))
                                 {
-                                    List<Behavior_Rate_Set> casualStateList = myScript.State_Transition_Set_List[i].casual_to_state_Sets.ToList();
+                                    List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].casual_to_state_Sets.ToList();
                                     casualStateList.RemoveAt(y);
                                     myScript.State_Transition_Set_List[i].casual_to_state_Sets = casualStateList.ToArray();
                                     EditorGUI.indentLevel--;
@@ -195,14 +194,13 @@ public class AIRunnerGUI : Editor {
 
                         if (GUILayout.Button("  +  ",addCasualToButtonStyle))
                         {
-                            List<Behavior_Rate_Set> casualStateList = myScript.State_Transition_Set_List[i].casual_to_state_Sets.ToList();
-                            casualStateList.Add(new Behavior_Rate_Set("Empty",
-                                                                   BehaviorType.NONE,
+                            List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].casual_to_state_Sets.ToList();
+                            casualStateList.Add(new Behavior_Transition_Set("Empty",
+                                                              BehaviorType.NONE,
                                                                    0,
                                                                    null,
                                                                    false,
                                                                    Inputs_defined.Null,Inputs_defined.Null,
-                                                                   0,
                                                                    0));
                             myScript.State_Transition_Set_List[i].casual_to_state_Sets = casualStateList.ToArray();
                         }
@@ -219,14 +217,11 @@ public class AIRunnerGUI : Editor {
                 if (forceToFoldings[i] = EditorGUILayout.Foldout(forceToFoldings[i], " !!! Force To States !!!"))
                 {
                     try {
-                        if (myScript.State_Transition_Set_List[i].forced_to_state_nums != null)
+                        for (int y = 0; y < myScript.State_Transition_Set_List[i].forced_to_state_nums.Length; y++)
                         {
-                            for (int y = 0; y < myScript.State_Transition_Set_List[i].forced_to_state_nums.Length; y++)
-                            {
-                                EditorGUI.indentLevel++;
-                                EditorGUILayout.TextField("forceTo: ", myScript.State_Transition_Set_List[i].forced_to_state_nums[y]);
-                                EditorGUI.indentLevel--;
-                            }
+                            EditorGUI.indentLevel++;
+                            EditorGUILayout.TextField("forceTo: ", myScript.State_Transition_Set_List[i].forced_to_state_nums[y]);
+                            EditorGUI.indentLevel--;
                         }
                     }
                     catch(Exception e)
@@ -261,14 +256,12 @@ public class AIRunnerGUI : Editor {
                                              BehaviorType.NONE,
                                              0,
                                              null,
-                                             new Behavior_Rate_Set[0], 
-                                             new string[0], 
+                                             new Behavior_Transition_Set[0], 
+                                        new string[0], 
                                              Inputs_defined.Null, 
                                              Inputs_defined.Null,
                                              0,
-                                             0,
-                                             0
-                                            ));
+                                             0));
                 InitializeList(-1, myScript.State_Transition_Set_List.Count);
             }                       
         }
