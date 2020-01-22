@@ -38,6 +38,8 @@ namespace Soul
         IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         List<Behavior_Transition_Set> avaliable_casual_Transitions = new List<Behavior_Transition_Set>();
         List<Behavior_Transition_Set> TransitionsPrioritys = new List<Behavior_Transition_Set>();
+        List<Behavior_Transition_Set> finalDecisions = new List<Behavior_Transition_Set>();
+        
         List<string> avaliable_forced_Transitions = new List<string>();
         Behavior_Transition_Set CurrentStateTransitionSet;
         Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。

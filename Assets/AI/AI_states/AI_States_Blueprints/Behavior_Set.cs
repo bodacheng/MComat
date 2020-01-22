@@ -8,7 +8,7 @@ public class Behavior_Transition_Set
     public float AT;
     public BehaviorEnterRange[] ai_trigger_ranges;
     public Behavior_Transition_Set[] casual_to_state_Sets = {};
-    public bool can_be_cancelled_to;
+    public bool can_be_cancelled_to = true;
     public Inputs_defined enterInput = Inputs_defined.Null;
     public Inputs_defined exitInput = Inputs_defined.Null;
     public int SPLevel;

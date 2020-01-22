@@ -10,18 +10,16 @@ namespace Soul
         List<Behavior_Transition_Set> SRTListForCasualTransitionbuttonRefresh = new List<Behavior_Transition_Set>();        
         // 满足了触发条件的情况对策因果组
         IDictionary<KeyValuePair<string, string>, int> Triggerd = new Dictionary<KeyValuePair<string, string>, int>();// 果，因，优先级
-        // 上面当中优先度最高的情况对策因果组
-        IDictionary<KeyValuePair<string, string>, int> finalTriggerd = new Dictionary<KeyValuePair<string, string>, int>();// 果，因，优先级
         
         public void StateTransitionEngine_new(IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary)
         {
             avaliable_casual_Transitions.Clear();
             avaliable_forced_Transitions.Clear();
             SRTListForCasualTransitionbuttonRefresh.Clear();
-
             if (current_state_num != null)
+            {
                 state_Transition_Dictionary.TryGetValue(current_state_num, out CurrentStateTransitionSet);
-
+            }
             #region Forced state transition 
             if (CurrentStateTransitionSet.forced_to_state_nums != null && CurrentStateTransitionSet.forced_to_state_nums.Length > 0)
             {
@@ -55,11 +53,6 @@ namespace Soul
                 exitCommandFufilled = CurrentStateTransitionSet.exitInput == Inputs_defined.Null || CheckInput(CurrentStateTransitionSet.exitInput);
             }
             
-            // 满足了触发条件的情况对策因果组
-            Triggerd.Clear();
-            // 上面当中有限度最高的情况对策因果组
-            finalTriggerd.Clear();
-            
             foreach (Behavior_Transition_Set Behavior_set in CurrentStateTransitionSet.casual_to_state_Sets)
             {
                 state_Dictionary.TryGetValue(Behavior_set.StateKey, out try_Behavior);
@@ -67,98 +60,102 @@ namespace Soul
                 {
                     continue;
                 }
+                //能走到这里说明 Capacity_enter_condition 已经通过
                 SRTListForCasualTransitionbuttonRefresh.Add(Behavior_set);//avaliable_casual_Transitions是真正可以启动的技能的列表，SRTListForCasualTransitionbuttonRefresh根据作用得有个预告作用
-                if ((Behavior_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag) || (now_Behavior.Capacity_Exit_Condition() && exitCommandFufilled))
+                if ((Behavior_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag) || now_Behavior.Capacity_Exit_Condition())
                 {
-                    if (playerMode || _inputManager.PlayerInputting)
-                    {
-                        if ((Behavior_set.enterInput != Inputs_defined.Null && CheckInput(Behavior_set.enterInput)) || Behavior_set.enterInput == Inputs_defined.Null)
-                        {
-                            avaliable_casual_Transitions.Add(Behavior_set);
-                        }
-                    }
-                    else
-                    {
-                        List<string> Conditions = RespondAndCondition[try_Behavior.StateKey];
-                        for (int i = 0; i < Conditions.Count; i++)
-                        {
-                            if (try_Behavior.CheckTriggerCondition(Conditions[i]))//条件满足
-                            {
-                                // 查看情况与行为反应的优先度
-                                foreach (KeyValuePair<KeyValuePair<string, string>, int> keyValuePair in RespondAndConditionPriority)
-                                {
-                                    if (keyValuePair.Key.Key == try_Behavior.StateKey && keyValuePair.Key.Value == Conditions[i])
-                                    {
-                                        Debug.Log("状态"+try_Behavior.StateKey + "遇到了情况："+Conditions[i] +"从而可能要触发");
-                                        Triggerd.Add(keyValuePair);
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                        avaliable_casual_Transitions.Add(Behavior_set);
-                    }
+                    avaliable_casual_Transitions.Add(Behavior_set);
                 }
             }
-            
-            if (Triggerd.Count > 0)
-            {
-                List<KeyValuePair<string,string>> minkeys = Triggerd.Keys.Select(x => new { x, y = Triggerd[x] }).GroupBy(x => x.y).OrderBy(x => x.Key).First().Select(x => x.x).ToList();
-                for (int i = 0; i < minkeys.Count;i++)
-                {
-                    finalTriggerd.Add(minkeys[i],Triggerd[minkeys[i]]);
-                }
-            }
+
             if (MobileInputsManager.target.watchingInputManger == this._inputManager)
             {
                 _inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
             }
 
-            #region 状态迁移判断
-            if (avaliable_casual_Transitions.Count > 0)
-            {
-                if (playerMode || _inputManager.PlayerInputting)
-                {
-                    if (MobileInputsManager.target.watchingInputManger == this._inputManager)
-                        MobileInputsManager.Skillbuttonexplosion(avaliable_casual_Transitions[0].enterInput, avaliable_casual_Transitions[0].SPLevel);
-                    _SkillCancelFlag.turn_off_flag();
-                    ChangeState(avaliable_casual_Transitions[0].StateKey);
-                    return;
-                }
-                if (finalTriggerd.Count >0) 
-                {
-                    ChangeState(finalTriggerd.First().Key.Key);
-                    return;
-                }
-            }
-
-            if (!now_Behavior.Capacity_Exit_Condition())
-            {
-                return;
-            }
-
+            #region 做决定
+            finalDecisions.Clear();
+            Triggerd.Clear();
+                        
             if (playerMode || _inputManager.PlayerInputting)
             {
                 if (!exitCommandFufilled)
-                {
                     return;
+                for (int i = 0; i < avaliable_casual_Transitions.Count; i++)
+                {
+                    if ((avaliable_casual_Transitions[i].enterInput != Inputs_defined.Null && CheckInput(avaliable_casual_Transitions[i].enterInput))|| avaliable_casual_Transitions[i].enterInput == Inputs_defined.Null)
+                    {
+                        finalDecisions.Add(avaliable_casual_Transitions[i]);
+                    }
                 }
-            }
-            else
-            {
+            }else{
                 if (!now_Behavior.Strategic_exit_condition())
                 {
                     return;
-                } 
+                }
+                for (int i = 0; i < avaliable_casual_Transitions.Count; i++)
+                {
+                    state_Dictionary.TryGetValue(avaliable_casual_Transitions[i].StateKey, out try_Behavior);
+                    List<string> Conditions = RespondAndCondition[avaliable_casual_Transitions[i].StateKey];
+                    for (int y = 0; y < Conditions.Count; y++)
+                    {
+                        if (try_Behavior.CheckTriggerCondition(Conditions[y]))//条件满足
+                        {
+                            // 查看情况与行为反应的优先度
+                            foreach (KeyValuePair<KeyValuePair<string, string>, int> keyValuePair in RespondAndConditionPriority)
+                            {
+                                if (keyValuePair.Key.Key == try_Behavior.StateKey && keyValuePair.Key.Value == Conditions[y])
+                                {
+                                    //Debug.Log("状态"+try_Behavior.StateKey + "遇到了情况："+Conditions[y] +"从而可能要触发");
+                                    Triggerd.Add(keyValuePair);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (Triggerd.Count > 0)
+                {
+                    List<KeyValuePair<string,string>> minkeys = Triggerd.Keys.Select(x => new { x, y = Triggerd[x] }).GroupBy(x => x.y).OrderBy(x => x.Key).First().Select(x => x.x).ToList();
+                    for (int x = 0; x < minkeys.Count;x++)
+                    {
+                        //Debug.Log("AI甄选的最佳决定："+minkeys[x].Key);
+                        finalDecisions.Add(state_Transition_Dictionary[minkeys[x].Key]);
+                    }
+                }
             }
 
+            if (finalDecisions.Count > 0)
+            {
+                if (playerMode || _inputManager.PlayerInputting)
+                {
+                    if (MobileInputsManager.target.watchingInputManger == _inputManager)
+                    {
+                        MobileInputsManager.Skillbuttonexplosion(finalDecisions[0].enterInput, finalDecisions[0].SPLevel);
+                    }
+                    _SkillCancelFlag.turn_off_flag();
+                    ChangeState(finalDecisions[0].StateKey);
+                }else{
+                    int random = Random.Range(0,finalDecisions.Count);
+                    if (MobileInputsManager.target.watchingInputManger == _inputManager)
+                    {
+                        MobileInputsManager.Skillbuttonexplosion(finalDecisions[random].enterInput, finalDecisions[random].SPLevel);
+                    }
+                    _SkillCancelFlag.turn_off_flag();
+                    ChangeState(finalDecisions[random].StateKey);
+                }
+                return;
+            }
+            #endregion
+
+            if (!now_Behavior.Capacity_Exit_Condition())
+                return;
+     
             state_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
             if (try_Behavior != now_Behavior)//避免战斗待机状态重复进入
             {
                 ChangeState(commandWaitingState.StateKey);
             }
-            #endregion
         }
     }
 }
