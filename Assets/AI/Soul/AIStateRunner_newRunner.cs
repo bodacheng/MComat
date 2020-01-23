@@ -16,7 +16,7 @@ namespace Soul
             avaliable_casual_Transitions.Clear();
             avaliable_forced_Transitions.Clear();
             SRTListForCasualTransitionbuttonRefresh.Clear();
-            if (current_state_num != null)
+            if (current_state_num != null)// current_state_num可以删除，靠now_state.statekey代替。
             {
                 state_Transition_Dictionary.TryGetValue(current_state_num, out CurrentStateTransitionSet);
             }
@@ -47,7 +47,7 @@ namespace Soul
             /// 另外详见refreshSPLevelButtonsInfo在NewCommandWaiting中的运行机制，那里也做了非常重要的修改
             ////////////////////////////////////////////////////////////
 
-            bool exitCommandFufilled = true;
+            bool exitCommandFufilled = true; //与输入相关的逻辑应该全部集中在输入判断环节。AI系统不需要使用exitCommandFufilled做任何判断
             if (playerMode || _inputManager.PlayerInputting)
             {
                 exitCommandFufilled = CurrentStateTransitionSet.exitInput == Inputs_defined.Null || CheckInput(CurrentStateTransitionSet.exitInput);
@@ -68,7 +68,7 @@ namespace Soul
                 }
             }
 
-            if (MobileInputsManager.target.watchingInputManger == this._inputManager)
+            if (MobileInputsManager.target.watchingInputManger == this._inputManager)//应该从AI系统本身彻底分离出去
             {
                 _inputManager.ButtonRefreshForCasualTransition(SRTListForCasualTransitionbuttonRefresh, _BO_Health);
             }
@@ -91,7 +91,7 @@ namespace Soul
             }else{
                 if (!now_Behavior.Strategic_exit_condition())
                 {
-                    return;
+                    return;// 有一个重大的逻辑问题我们忽略了。如果自然退出条件已经满足，是必须要换状态的。这里不可以返回
                 }
                 for (int i = 0; i < avaliable_casual_Transitions.Count; i++)
                 {
