@@ -25,9 +25,21 @@ namespace Inputs
         }
     }
     
+    public enum Inputs_defined
+    {
+        Null = -1,
+        Attack = 0,
+        Fire1 = 1,
+        Fire2 = 2,
+        Dash = 5,
+        Defend = 3,
+        Defend_Cancel = 4,
+        Any = 6
+    }
+    
     //这个模块的职责现在多了一个，就是像mobile按钮来汇报那些按钮应该开始闪灯。。
     public class InputManager {
-    
+
         public IDictionary<Inputs_defined,Input> inputStateDic;
         public Input Attack = new Input(Inputs_defined.Attack);
         public Input Fire1 = new Input(Inputs_defined.Fire1);
@@ -37,41 +49,21 @@ namespace Inputs
         public Input Defend_Cancel = new Input(Inputs_defined.Defend_Cancel);
         public IDictionary<Inputs_defined, int> nextSkillSPlevel = new Dictionary<Inputs_defined, int>();
         public bool PlayerInputting { get; set;}
+
+        BehaviorRunner myfocusingRunner;
         
-        AIStateRunner myfocusingRunner;
-        List<Inputs_defined> WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge = new List<Inputs_defined>();
-            
-        public void ButtonRefreshForCasualTransition(List<Behavior_Transition_Set> avaliable_casual_Transitions,FightAttriCalReference _BO_Health)
+        public void ButtonRefreshForCasualTransition()
         {
-            WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
-            foreach (Behavior_Transition_Set transition_key_value in avaliable_casual_Transitions)
+            foreach (Behavior_Transition_Set transition_key_value in myfocusingRunner.SRTListForCasualTransitionbuttonRefresh)
             {
-                if (_BO_Health.HasPlentyGauge(transition_key_value.SPLevel))//首先这里有判断重复
+                if (transition_key_value.enterInput != Inputs_defined.Null)
                 {
-                    if (transition_key_value.enterInput != Inputs_defined.Null)
-                    {
-                        WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Add(transition_key_value.enterInput);
-                        RefreshSPLevelButtonsInfo(transition_key_value.enterInput, transition_key_value.SPLevel);
-                    }
+                    RefreshSPLevelButtonsInfo(transition_key_value.enterInput, transition_key_value.SPLevel);
                 }
-            }
-    
-            // 首发技能中如果三个键位里有发动不了的，那键位也应该是灰色或半透明来表示无法发动。
-            if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Attack))
-            {
-                RefreshSPLevelButtonsInfo(Inputs_defined.Attack, -1);
-            }
-            if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Fire1))
-            {
-                RefreshSPLevelButtonsInfo(Inputs_defined.Fire1,-1);
-            }
-            if (!WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Contains(Inputs_defined.Fire2))
-            {
-                RefreshSPLevelButtonsInfo(Inputs_defined.Fire2, -1);
             }
         }
          
-        public void INI(bool hasD,bool hasR, AIStateRunner myfocusingRunner) 
+        public void INI(bool hasD,bool hasR, BehaviorRunner myfocusingRunner) 
         {
             this.myfocusingRunner = myfocusingRunner;
             inputStateDic = new Dictionary<Inputs_defined, Input>();
@@ -134,17 +126,7 @@ namespace Inputs
             }
             PlayerInputting |= (h > 0f || h < 0 || v > 0f || v < 0f);
         }
-    }    
+    }
 }
 
-public enum Inputs_defined
-{
-    Null = -1,
-    Attack = 0,
-    Fire1 = 1,
-    Fire2 = 2,
-    Dash = 5,
-    Defend = 3,
-    Defend_Cancel = 4,
-    Any = 6
-}
+

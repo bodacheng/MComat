@@ -111,7 +111,7 @@ public class BasicPhysicSupport : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (_DATA_CENTER.AIStateRunner.IfRunning())
+        if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
@@ -125,7 +125,7 @@ public class BasicPhysicSupport : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
-        if (_DATA_CENTER.AIStateRunner.IfRunning())
+        if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
@@ -145,7 +145,7 @@ public class BasicPhysicSupport : MonoBehaviour
     {
         if (FightGlobalSetting.scenestep == 1)
         {
-            if (_DATA_CENTER.AIStateRunner.IfRunning())
+            if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
             {
                 hiddenMethods.GroundedCal();
                 animator.SetBool("Grounded", hiddenMethods.Grounded);

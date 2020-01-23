@@ -131846,7 +131846,8 @@ MonoBehaviour:
   _FightAttriCalReference: {fileID: 2306586471761761409}
   bO_Weapon_Animation_Events: {fileID: 3565650822274592922}
   _BasicPhysicSupport: {fileID: 3435467231746086673}
-  AIStateRunner: {fileID: 8636415899118345164}
+  _MyBehaviorRunner: {fileID: 0}
+  controller: {fileID: 0}
   buffsRunner: {fileID: 5516034634015945827}
   _ResistanceManager: {fileID: 5460051597588262277}
   _ShaderManager: {fileID: 2223147540854011508}
@@ -170064,6 +170065,7 @@ MonoBehaviour:
   Animator: {fileID: 1903029543817212180}
   Coroutine_Step: 1
   _toUse: {fileID: 0}
+  _C: {fileID: 0}
 --- !u!4 &7290833504875884294
 Transform:
   m_ObjectHideFlags: 0
@@ -175306,13 +175308,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03493d0e00b7e4d4c853685b1c2754b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   characterType: 
   State_Transition_Set_List: []
-  _BO_Health: {fileID: 2306586471761761409}
   _SkillCancelFlag: {fileID: 1076773248106846678}
+  controller: {fileID: 0}
+  CurrentStateTransitionSet:
+    StateKey: 
+    stateType: 0
+    AT: 0
+    ai_trigger_ranges: 
+    casual_to_state_Sets: []
+    can_be_cancelled_to: 1
+    enterInput: -1
+    exitInput: -1
+    SPLevel: 0
+    rarelevel: 0
+    forced_to_state_nums: []
+  avaliable_casual_Transitions: []
+  avaliable_forced_Transitions: []
+  SRTListForCasualTransitionbuttonRefresh: []
   AI_States_path: 
   usingScript: {fileID: 0}
-  usingScriptLevel: 0
 --- !u!4 &8649081273797068995
 Transform:
   m_ObjectHideFlags: 0

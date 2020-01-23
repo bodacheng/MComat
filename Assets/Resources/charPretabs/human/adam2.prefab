@@ -4726,6 +4726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enabled: 0
   _startActivated: 1
   damage_type: 0
   _WeaponMode: 1
@@ -4737,7 +4738,7 @@ MonoBehaviour:
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
   muzzle: 
-  explosionEffect: 
+  ExplosionEffect: energy_resolve
   zokusei: 0
 --- !u!1 &306487190557347311
 GameObject:
@@ -25061,7 +25062,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5652316167905769829}
-  - component: {fileID: 8556370640776167150}
   - component: {fileID: 7223968294090444383}
   - component: {fileID: 2406689596573462947}
   - component: {fileID: 4126922216815244389}
@@ -25069,6 +25069,8 @@ GameObject:
   - component: {fileID: 5613744654717735233}
   - component: {fileID: 3303484763806985261}
   - component: {fileID: 6268034811119985460}
+  - component: {fileID: 8634819636267168531}
+  - component: {fileID: 6157405701193952741}
   m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
@@ -25090,25 +25092,6 @@ Transform:
   m_Father: {fileID: 6196606117408441260}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
---- !u!114 &8556370640776167150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5604508390589248702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03493d0e00b7e4d4c853685b1c2754b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterType: 
-  State_Transition_Set_List: []
-  _BO_Health: {fileID: 2406689596573462947}
-  _SkillCancelFlag: {fileID: 1122967317810658548}
-  AI_States_path: 
-  usingScript: {fileID: 0}
-  usingScriptLevel: 0
 --- !u!114 &7223968294090444383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25124,7 +25107,7 @@ MonoBehaviour:
   Animator: {fileID: 1948941580223845430}
   Coroutine_Step: 1
   _toUse: {fileID: 0}
-  animationcounter: 0
+  _C: {fileID: 0}
 --- !u!114 &2406689596573462947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25213,7 +25196,8 @@ MonoBehaviour:
   _FightAttriCalReference: {fileID: 2406689596573462947}
   bO_Weapon_Animation_Events: {fileID: 3467595537739863480}
   _BasicPhysicSupport: {fileID: 3371463831016387123}
-  AIStateRunner: {fileID: 8556370640776167150}
+  _MyBehaviorRunner: {fileID: 6157405701193952741}
+  controller: {fileID: 8634819636267168531}
   buffsRunner: {fileID: 5613744654717735233}
   _ResistanceManager: {fileID: 5377611027543885991}
   _ShaderManager: {fileID: 2287502793857405782}
@@ -25231,6 +25215,49 @@ MonoBehaviour:
   right_leg_hitbox_t: {fileID: 0}
   spine_hitbox_t: {fileID: 6349297015890669104}
   Shield: {fileID: 0}
+--- !u!114 &8634819636267168531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604508390589248702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69393890d808a4c7f9b5db8a3344cf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6157405701193952741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604508390589248702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2473a78b576b34f3b8e11c777317ac8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterType: 
+  State_Transition_Set_List: []
+  _SkillCancelFlag: {fileID: 1122967317810658548}
+  controller: {fileID: 8634819636267168531}
+  CurrentBehaviorTransitionSet:
+    StateKey: 
+    stateType: 0
+    AT: 0
+    AI_trigger_ranges: 
+    Casual_To_Behaviours: []
+    can_be_cancelled_to: 1
+    enterInput: -1
+    exitInput: -1
+    SPLevel: 0
+    rarelevel: 0
+    forced_to_state_nums: []
+  SRTListForCasualTransitionbuttonRefresh: []
+  AI_States_path: 
+  usingScript: {fileID: 0}
 --- !u!1 &5629862994124334322
 GameObject:
   m_ObjectHideFlags: 0
@@ -40286,6 +40313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Enabled: 0
   _startActivated: 1
   damage_type: 0
   _WeaponMode: 1
@@ -40297,7 +40325,7 @@ MonoBehaviour:
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
   muzzle: 
-  explosionEffect: 
+  ExplosionEffect: energy_resolve
   zokusei: 0
 --- !u!1 &7894595256484828820
 GameObject:

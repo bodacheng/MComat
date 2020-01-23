@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using Soul;
+using Inputs;
 
-[CustomEditor(typeof(AIStateRunner))]
-public class AIRunnerGUI : Editor {
+[CustomEditor(typeof(BehaviorRunner))]
+public class BehaviorRunnerGUI : Editor {
 
-    AIStateRunner myScript;
+    BehaviorRunner myScript;
 
     GUIStyle ButtonStyle;
     GUIStyle addCasualToButtonStyle,deleteCasualToButtonStyle;
@@ -56,7 +57,7 @@ public class AIRunnerGUI : Editor {
 
         LocalResourceReferenceMode = EditorGUILayout.Toggle("本地资源参照模式",LocalResourceReferenceMode);
 
-		myScript = (AIStateRunner)target;
+		myScript = (BehaviorRunner)target;
         _States_Incubator_ForLocalResourceCheck = LocalResourceReferenceMode
             ? new Behaviors_Incubator_ForLocalResourceCheck(myScript.characterType)
             : new Behaviors_Incubator_ForLocalResourceCheck(myScript.characterType,myScript.State_Transition_Set_List);
@@ -70,7 +71,8 @@ public class AIRunnerGUI : Editor {
         }//这个处理需要多个地方进行
         //DrawDefaultInspector();
 
-        EditorGUILayout.TextField("current: ", myScript.GetCurrentStateNum());
+        if (myScript.GetNowState() != null)
+            EditorGUILayout.TextField("current: ", myScript.GetNowState().StateKey);
         EditorGUILayout.BeginVertical();
         myScript.AI_States_path = EditorGUILayout.TextField("AI_States_path", myScript.AI_States_path);
         EditorGUILayout.EndVertical();
@@ -112,9 +114,9 @@ public class AIRunnerGUI : Editor {
 
                 if (myScript.State_Transition_Set_List[i].stateType != BehaviorType.NONE)
                 {
-                    List<BehaviorEnterRange> _ranges = myScript.State_Transition_Set_List[i].ai_trigger_ranges == null
+                    List<BehaviorEnterRange> _ranges = myScript.State_Transition_Set_List[i].AI_trigger_ranges == null
                         ? new List<BehaviorEnterRange>()
-                        : myScript.State_Transition_Set_List[i].ai_trigger_ranges.ToList();
+                        : myScript.State_Transition_Set_List[i].AI_trigger_ranges.ToList();
                     bool outrange,far, near, close;
                     outrange = _ranges.Contains(BehaviorEnterRange.out_of_range) ? true : false;
                     far = _ranges.Contains(BehaviorEnterRange.far_range) ? true : false;
@@ -136,9 +138,9 @@ public class AIRunnerGUI : Editor {
                     if (far) _finalranges.Add(BehaviorEnterRange.far_range);
                     if (near) _finalranges.Add(BehaviorEnterRange.mid_range);
                     if (close) _finalranges.Add(BehaviorEnterRange.inner_range);
-                    myScript.State_Transition_Set_List[i].ai_trigger_ranges = _finalranges.ToArray();
+                    myScript.State_Transition_Set_List[i].AI_trigger_ranges = _finalranges.ToArray();
                 }else{
-                    myScript.State_Transition_Set_List[i].ai_trigger_ranges = null;
+                    myScript.State_Transition_Set_List[i].AI_trigger_ranges = null;
                 }
 
                 EditorGUILayout.BeginVertical();
@@ -146,29 +148,29 @@ public class AIRunnerGUI : Editor {
                 {
                     try
                     {
-                        if (myScript.State_Transition_Set_List[i].casual_to_state_Sets != null)
+                        if (myScript.State_Transition_Set_List[i].Casual_To_Behaviours != null)
                         {
-                            for (int y = 0; y < myScript.State_Transition_Set_List[i].casual_to_state_Sets.Length; y++)
+                            for (int y = 0; y < myScript.State_Transition_Set_List[i].Casual_To_Behaviours.Length; y++)
                             {
                                 EditorGUI.indentLevel++;
-                                if (casualToStateKeyOptions.Contains<string>(myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey))
+                                if (casualToStateKeyOptions.Contains<string>(myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].StateKey))
                                 {
                                     stateKeyGUI.normal.textColor = new Color(0.2f, 0.7f, 0.5f);
-                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey =
+                                    myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].StateKey =
                                         casualToStateKeyOptions[EditorGUILayout.Popup(
                                                     "Casual To State Key",
-                                                    Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey),
+                                                    Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].StateKey),
                                                     casualToStateKeyOptions,
                                                     stateKeyGUI)];
                                 }
                                 else
                                 {
-                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].StateKey = casualToStateKeyOptions[0];
+                                    myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].StateKey = casualToStateKeyOptions[0];
                                 }
                                 stateKeyGUI.normal.textColor = new Color(0.6f, 0.3f, 0.4f);
-                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].can_be_cancelled_to = EditorGUILayout.Toggle("superCancel", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].can_be_cancelled_to);
-                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].enterInput = (Inputs_defined)EditorGUILayout.EnumPopup("enter Input", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].enterInput);
-                                myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].exitInput = (Inputs_defined)EditorGUILayout.EnumPopup("exit Input", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].exitInput);
+                                myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].can_be_cancelled_to = EditorGUILayout.Toggle("superCancel", myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].can_be_cancelled_to);
+                                myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].enterInput = (Inputs_defined)EditorGUILayout.EnumPopup("enter Input", myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].enterInput);
+                                myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].exitInput = (Inputs_defined)EditorGUILayout.EnumPopup("exit Input", myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].exitInput);
 
 
                                 //State_Transition temp_state_Transition = null;
@@ -177,12 +179,12 @@ public class AIRunnerGUI : Editor {
                                 //    state_Transition_Dictionary.TryGetValue(myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].AI_State_Number,out temp_state_Transition);
                                 //}
                                 //myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].SPLevel = (EX)EditorGUILayout.EnumPopup("SPLevel", (temp_state_Transition !=null)? temp_state_Transition.SPLevel : myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].SPLevel);
-								myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].SPLevel = EditorGUILayout.IntPopup("SPLevel", myScript.State_Transition_Set_List[i].casual_to_state_Sets[y].SPLevel,exoptions_display,exoptions);
+								myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].SPLevel = EditorGUILayout.IntPopup("SPLevel", myScript.State_Transition_Set_List[i].Casual_To_Behaviours[y].SPLevel,exoptions_display,exoptions);
                                 if (GUILayout.Button("DeleteThis", deleteCasualToButtonStyle))
                                 {
-                                    List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].casual_to_state_Sets.ToList();
+                                    List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].Casual_To_Behaviours.ToList();
                                     casualStateList.RemoveAt(y);
-                                    myScript.State_Transition_Set_List[i].casual_to_state_Sets = casualStateList.ToArray();
+                                    myScript.State_Transition_Set_List[i].Casual_To_Behaviours = casualStateList.ToArray();
                                     EditorGUI.indentLevel--;
                                     break;
                                 }
@@ -194,7 +196,7 @@ public class AIRunnerGUI : Editor {
 
                         if (GUILayout.Button("  +  ",addCasualToButtonStyle))
                         {
-                            List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].casual_to_state_Sets.ToList();
+                            List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].Casual_To_Behaviours.ToList();
                             casualStateList.Add(new Behavior_Transition_Set("Empty",
                                                               BehaviorType.NONE,
                                                                    0,
@@ -202,7 +204,7 @@ public class AIRunnerGUI : Editor {
                                                                    false,
                                                                    Inputs_defined.Null,Inputs_defined.Null,
                                                                    0));
-                            myScript.State_Transition_Set_List[i].casual_to_state_Sets = casualStateList.ToArray();
+                            myScript.State_Transition_Set_List[i].Casual_To_Behaviours = casualStateList.ToArray();
                         }
                     }
                     catch(Exception e)

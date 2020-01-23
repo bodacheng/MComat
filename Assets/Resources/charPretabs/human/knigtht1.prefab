@@ -4697,7 +4697,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7177333415381151223}
-  - component: {fileID: 1650520884802212777}
   - component: {fileID: 6154906126101573374}
   - component: {fileID: 9053680730080989343}
   - component: {fileID: 9116510862140702941}
@@ -4705,6 +4704,8 @@ GameObject:
   - component: {fileID: 3255192480517113982}
   - component: {fileID: 1857369817865452969}
   - component: {fileID: 6124386943309900318}
+  - component: {fileID: 5551575211266942115}
+  - component: {fileID: 4022559533225562208}
   m_Layer: 0
   m_Name: center
   m_TagString: Untagged
@@ -4726,25 +4727,6 @@ Transform:
   m_Father: {fileID: 5863696836462235196}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
---- !u!114 &1650520884802212777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654661000315289723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03493d0e00b7e4d4c853685b1c2754b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterType: 
-  State_Transition_Set_List: []
-  _BO_Health: {fileID: 9053680730080989343}
-  _SkillCancelFlag: {fileID: 7344811218737002361}
-  AI_States_path: 
-  usingScript: {fileID: 0}
-  usingScriptLevel: 0
 --- !u!114 &6154906126101573374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4850,7 +4832,8 @@ MonoBehaviour:
   _FightAttriCalReference: {fileID: 9053680730080989343}
   bO_Weapon_Animation_Events: {fileID: 3499137539533061316}
   _BasicPhysicSupport: {fileID: 8441311621802727751}
-  AIStateRunner: {fileID: 1650520884802212777}
+  _MyBehaviorRunner: {fileID: 5551575211266942115}
+  controller: {fileID: 4022559533225562208}
   buffsRunner: {fileID: 3255192480517113982}
   _ResistanceManager: {fileID: 4726742457030845685}
   _ShaderManager: {fileID: 1286402166230866886}
@@ -4868,6 +4851,49 @@ MonoBehaviour:
   right_leg_hitbox_t: {fileID: 0}
   spine_hitbox_t: {fileID: 5863696836462235196}
   Shield: {fileID: 0}
+--- !u!114 &5551575211266942115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654661000315289723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2473a78b576b34f3b8e11c777317ac8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterType: 
+  State_Transition_Set_List: []
+  _SkillCancelFlag: {fileID: 7344811218737002361}
+  controller: {fileID: 4022559533225562208}
+  CurrentBehaviorTransitionSet:
+    StateKey: 
+    stateType: 0
+    AT: 0
+    AI_trigger_ranges: 
+    Casual_To_Behaviours: []
+    can_be_cancelled_to: 1
+    enterInput: -1
+    exitInput: -1
+    SPLevel: 0
+    rarelevel: 0
+    forced_to_state_nums: []
+  SRTListForCasualTransitionbuttonRefresh: []
+  AI_States_path: 
+  usingScript: {fileID: 0}
+--- !u!114 &4022559533225562208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654661000315289723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69393890d808a4c7f9b5db8a3344cf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2166046644124693852
 GameObject:
   m_ObjectHideFlags: 0

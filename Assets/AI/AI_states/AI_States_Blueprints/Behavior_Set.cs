@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Inputs;
 
 [System.Serializable]
 public class Behavior_Transition_Set
@@ -6,8 +7,8 @@ public class Behavior_Transition_Set
     public string StateKey;
     public BehaviorType stateType;
     public float AT;
-    public BehaviorEnterRange[] ai_trigger_ranges;
-    public Behavior_Transition_Set[] casual_to_state_Sets = {};
+    public BehaviorEnterRange[] AI_trigger_ranges;
+    public Behavior_Transition_Set[] Casual_To_Behaviours = {};
     public bool can_be_cancelled_to = true;
     public Inputs_defined enterInput = Inputs_defined.Null;
     public Inputs_defined exitInput = Inputs_defined.Null;
@@ -15,11 +16,11 @@ public class Behavior_Transition_Set
     public int rarelevel;
     [HideInInspector]
     public string[] forced_to_state_nums = {};
-    
+
     public Behavior_Transition_Set()
     {
     }
-    
+
     public Behavior_Transition_Set( string _StateKey,
                                     BehaviorType _attackType,
                                     float _AT,
@@ -33,8 +34,8 @@ public class Behavior_Transition_Set
         this.StateKey = _StateKey;
         this.stateType = _attackType;
         this.AT = _AT;
-        this.ai_trigger_ranges = _ai_trigger_ranges;
-        this.casual_to_state_Sets = _casual_to_state_nums;
+        this.AI_trigger_ranges = _ai_trigger_ranges;
+        this.Casual_To_Behaviours = _casual_to_state_nums;
         this.forced_to_state_nums = _forced_to_state_nums;
         this.enterInput = _enterInput;
         this.exitInput = _exitInput;
@@ -54,7 +55,7 @@ public class Behavior_Transition_Set
         this.stateType = _attackType;
         this.AT = AT;
         this.can_be_cancelled_to = can_be_cancelled_to;
-        this.ai_trigger_ranges = ai_trigger_ranges;
+        this.AI_trigger_ranges = ai_trigger_ranges;
         this.enterInput = enterInput;
         this.exitInput = exitInput;
         this.SPLevel = SPMove;

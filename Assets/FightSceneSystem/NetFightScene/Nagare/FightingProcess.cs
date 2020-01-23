@@ -77,7 +77,7 @@ public class FightingProcess : NagareProcess
         {
             if (!_one.IsDead.Value)
             {
-                _one.AIStateRunner.ChangeState("Victory");
+                _one._MyBehaviorRunner.ChangeState("Victory");
             }
         }
         Time.timeScale = 1f;

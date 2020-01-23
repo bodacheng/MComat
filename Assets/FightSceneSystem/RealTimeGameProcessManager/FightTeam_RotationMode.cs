@@ -98,7 +98,7 @@ public partial class FightTeam : MonoBehaviour
             if (_changeTo == data_Center && !data_Center.IsDead.Value)
             {
                 RotationMode_fightingMember = _changeTo;
-                RotationMode_fightingMember.AIStateRunner.StartToGo();
+                RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
                 RotationMode_fightingMember.WholeT.transform.position = targetposition;
                 
                 CharacterDataInfo characterDataInfo = CharacterDataInfoReference[_changeTo];
@@ -129,7 +129,7 @@ public partial class FightTeam : MonoBehaviour
                 memberchanged = true;
             }
             else{
-                data_Center.AIStateRunner.ChangeState("Empty");
+                data_Center._MyBehaviorRunner.ChangeState("Empty");
                 data_Center.WholeT.transform.position = new Vector3(0,200,0);
             }
         }

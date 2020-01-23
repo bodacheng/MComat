@@ -6,8 +6,9 @@ using Soul;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
 //Those paremeters are sent to all parts of character from here.
-[RequireComponent(typeof(AIStateRunner))]
+[RequireComponent(typeof(BehaviorRunner))]
 [RequireComponent(typeof(Animation_Manger))]
+[RequireComponent(typeof(Controller))]
 [RequireComponent(typeof(FightAttriCalReference))]
 [RequireComponent(typeof(Sensor))]
 [RequireComponent(typeof(ShaderManager))]
@@ -21,14 +22,15 @@ public partial class Data_Center : MonoBehaviour
     public Transform geometryCenter;
     public Transform WholeT;
     public AudioSource _AudioSource;
-    public Sensor Sensor;   
+    public Sensor Sensor;
     public Animation_Manger Animation_Manger;
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
     public FightAttriCalReference _FightAttriCalReference;
     public BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
     public BasicPhysicSupport _BasicPhysicSupport;
-    public AIStateRunner AIStateRunner;
+    public BehaviorRunner _MyBehaviorRunner;
+    public Controller controller;
     public BuffsRunner buffsRunner;
     public ResistanceManager _ResistanceManager;
     public ShaderManager _ShaderManager;
@@ -174,29 +176,26 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!phase2Initialized)
         {
-            AIStateRunner.characterType = type;
+            _MyBehaviorRunner.characterType = type;
             phase2Initialized = true;
         }
         
-        if (AIStateRunner.GetReadingNineAndTwo() != _NineAndTwo)
+        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo);
+        _MyBehaviorRunner.INIStates(this);
+        //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
+        // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
+        List<string> toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
+        switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
         {
-            AIStateRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo);
-            AIStateRunner.IniStates(this);
-            //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
-            // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
-            List<string> toLoadSkillAnimsNames = AIStateRunner.PassSkillTypeKeys();
-            switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
-            {
-                case ResourceLoadMode.CachAB:
-                    yield return (Animation_Manger.PreloadPersonalAnims(ResourceLordSceneStarter.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
-                break;
-                case ResourceLoadMode.Resource:
-                    yield return (Animation_Manger.preloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
-                break;
-                case ResourceLoadMode.StreamingAssetAB:
-                    yield return (Animation_Manger.preloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
-                break;
-            }
+            case ResourceLoadMode.CachAB:
+                yield return (Animation_Manger.PreloadPersonalAnims(ResourceLordSceneStarter.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+            break;
+            case ResourceLoadMode.Resource:
+                yield return (Animation_Manger.preloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+            break;
+            case ResourceLoadMode.StreamingAssetAB:
+                yield return (Animation_Manger.preloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+            break;
         }
     }
 
@@ -231,7 +230,7 @@ public partial class Data_Center : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (AIStateRunner.IfRunning())
+        if (_MyBehaviorRunner.IfRunning())
         {
             Sensor.SensorFixedUpdate();
             buffsRunner.BuffsRunnerFixedUpdate();

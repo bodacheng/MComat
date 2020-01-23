@@ -176,7 +176,7 @@ public partial class FightTeam : MonoBehaviour
     {
         foreach (Data_Center oneMember in teamMembers.values)
         {
-            oneMember.AIStateRunner.StartToGo();
+            oneMember._MyBehaviorRunner.StartToGo();
         }
     }
     

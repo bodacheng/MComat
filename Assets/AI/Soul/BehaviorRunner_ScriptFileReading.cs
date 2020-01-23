@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Inputs;
 using System.Xml.Serialization;
 using System.Linq;
 using System.IO;
 using System;
+using Inputs;
 
 namespace Soul
 {
-    public partial class AIStateRunner : MonoBehaviour
+    public partial class BehaviorRunner : MonoBehaviour
     {
         public string AI_States_path; // 我们现在要做的这个游戏完全不牵扯到玩家保存脚本这个事情，但我们自己编辑脚本需要这东西
         public TextAsset usingScript;
@@ -140,9 +140,9 @@ namespace Soul
                 foreach (Behavior_Transition_Set s in after_list)
                 {
                     List<Behavior_Transition_Set> undefined_CausalStateRateSet = new List<Behavior_Transition_Set>();
-                    if (s.casual_to_state_Sets != null)
+                    if (s.Casual_To_Behaviours != null)
                     {
-                        foreach (Behavior_Transition_Set rs in s.casual_to_state_Sets)
+                        foreach (Behavior_Transition_Set rs in s.Casual_To_Behaviours)
                         {
                             if (!alreadyInList.Contains(rs.StateKey))
                             {
@@ -151,7 +151,7 @@ namespace Soul
                         }
                     }
 
-                    List<Behavior_Transition_Set> casuals_t = s.casual_to_state_Sets != null ? s.casual_to_state_Sets.ToList() : new List<Behavior_Transition_Set>();
+                    List<Behavior_Transition_Set> casuals_t = s.Casual_To_Behaviours != null ? s.Casual_To_Behaviours.ToList() : new List<Behavior_Transition_Set>();
                     if (undefined_CausalStateRateSet.Any())
                     {
                         foreach (Behavior_Transition_Set _set in undefined_CausalStateRateSet)
@@ -159,7 +159,7 @@ namespace Soul
                             casuals_t.Remove(_set);// 把连续状态串里出现的没有定义的状态给删除掉。
                         }
                     }
-                    s.casual_to_state_Sets = casuals_t.ToArray();
+                    s.Casual_To_Behaviours = casuals_t.ToArray();
                     s.forced_to_state_nums = s.StateKey != "Death" ? DefaultForceToNums.ToArray() : (new string[0]);
                 }
 
@@ -193,12 +193,12 @@ namespace Soul
             State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script, type);//这个是一个状态清单，生成状态的是States_Dictionary类。
                                                                                                           //_States_Dictionary = new States_Dictionary(type,this.State_Transition_Set_List);//这一行于7月20号commentout了
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List;// 理解整个系统的关键
-            state_Dictionary = new Dictionary<string, Behavior>();
+            Behaviour_Dictionary = new Dictionary<string, Behavior>();
             foreach (BehaviorIndex_With_Behavior s in Num_State_List)
             {
-                state_Dictionary.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
+                Behaviour_Dictionary.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
             }
-            state_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
+            Behaviour_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
             List<string> alreadyInList = new List<string>();//7.29 这个环节貌似是现在“同技能没法重复”bug的来源
             foreach (Behavior_Transition_Set _State_Transition_Set in State_Transition_Set_List)
             {
@@ -209,12 +209,12 @@ namespace Soul
                     _States_Incubator.IfContainsKey(_State_Transition_Set.StateKey))
                 {
                     List<Behavior_Transition_Set> new_casual_to = new List<Behavior_Transition_Set>();
-                    if (_State_Transition_Set.casual_to_state_Sets == null)
+                    if (_State_Transition_Set.Casual_To_Behaviours == null)
                     {
                         Debug.Log(Script.name + "脚本的" + _State_Transition_Set.StateKey + "状态自然迁移出错,尝试进行强加");
-                        _State_Transition_Set.casual_to_state_Sets = new_casual_to.ToArray();
+                        _State_Transition_Set.Casual_To_Behaviours = new_casual_to.ToArray();
                     }
-                    foreach (Behavior_Transition_Set _State_Rate_Set in _State_Transition_Set.casual_to_state_Sets)
+                    foreach (Behavior_Transition_Set _State_Rate_Set in _State_Transition_Set.Casual_To_Behaviours)
                     {
                         if (!_States_Incubator.IfContainsKey(_State_Rate_Set.StateKey))
                         {
@@ -226,7 +226,7 @@ namespace Soul
                             new_casual_to.Add(_State_Rate_Set);
                         }
                     }
-                    state_Transition_Dictionary.Add(
+                    Behaviour_Transition_Dictionary.Add(
                         new KeyValuePair<string, Behavior_Transition_Set>(
                             _State_Transition_Set.StateKey,
                             _State_Transition_Set
@@ -295,7 +295,6 @@ namespace Soul
                     _set.forced_to_state_nums = new string[] { "KnockOff" };
                 }
             }
-            _inputManager.INI(hasD, hasR, this);
 
             List<Behavior_Transition_Set> knockOFFCasualTransitios = new List<Behavior_Transition_Set>();
             foreach (Behavior_Transition_Set _set in setsHaveInitialInput)
@@ -307,7 +306,7 @@ namespace Soul
             {
                 if (_set.StateKey == "KnockOff")
                 {
-                    _set.casual_to_state_Sets = knockOFFCasualTransitios.ToArray();
+                    _set.Casual_To_Behaviours = knockOFFCasualTransitios.ToArray();
                 }
             }
 
@@ -345,7 +344,7 @@ namespace Soul
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
-            foreach (Behavior_Transition_Set _rset in _set.casual_to_state_Sets)
+            foreach (Behavior_Transition_Set _rset in _set.Casual_To_Behaviours)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                 {
@@ -393,7 +392,7 @@ namespace Soul
 
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
-            foreach (Behavior_Transition_Set _rset in _set.casual_to_state_Sets)
+            foreach (Behavior_Transition_Set _rset in _set.Casual_To_Behaviours)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)
                 {
@@ -458,7 +457,7 @@ namespace Soul
                 // 三大首发技能AI模式下概率
                 if (Transition.Value.enterInput == Inputs_defined.Attack)
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
                     List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
                     foreach (Behavior_Transition_Set _set in casual_to_states_now)
@@ -473,7 +472,7 @@ namespace Soul
                                 _set.StateKey,
                                 _set.stateType,
                                 _set.AT,
-                                _set.ai_trigger_ranges,
+                                _set.AI_trigger_ranges,
                                 _set.can_be_cancelled_to,
                                 _set.enterInput, _set.exitInput,
                                 _set.SPLevel);
@@ -481,12 +480,12 @@ namespace Soul
                             }
                         }
                     }
-                    Transition.Value.casual_to_state_Sets = casual_to_states_after.ToArray();
+                    Transition.Value.Casual_To_Behaviours = casual_to_states_after.ToArray();
                 }
 
                 if (Transition.Value.enterInput == Inputs_defined.Fire1)
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
                     List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
                     foreach (Behavior_Transition_Set _set in casual_to_states_now)
@@ -501,19 +500,19 @@ namespace Soul
                                     _set.StateKey,
                                     _set.stateType,
                                     _set.AT,
-                                    _set.ai_trigger_ranges,
+                                    _set.AI_trigger_ranges,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput, _set.SPLevel);
                                 casual_to_states_after.Add(_freshNew);
                             }
                         }
                     }
-                    Transition.Value.casual_to_state_Sets = casual_to_states_after.ToArray();
+                    Transition.Value.Casual_To_Behaviours = casual_to_states_after.ToArray();
                 }
 
                 if (Transition.Value.enterInput == Inputs_defined.Fire2)
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
                     List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
                     foreach (Behavior_Transition_Set _set in casual_to_states_now)
@@ -528,7 +527,7 @@ namespace Soul
                                     _set.StateKey,
                                     _set.stateType,
                                     _set.AT,
-                                    _set.ai_trigger_ranges,
+                                    _set.AI_trigger_ranges,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput,
                                     _set.SPLevel);
@@ -536,7 +535,7 @@ namespace Soul
                             }
                         }
                     }
-                    Transition.Value.casual_to_state_Sets = casual_to_states_after.ToArray();
+                    Transition.Value.Casual_To_Behaviours = casual_to_states_after.ToArray();
                 }
 
                 //非首发
@@ -547,7 +546,7 @@ namespace Soul
                    &&
                     (attackChuan.Contains(Transition.Value.StateKey) || Fire1Chuan.Contains(Transition.Value.StateKey) || Fire2Chuan.Contains(Transition.Value.StateKey)))
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.casual_to_state_Sets.ToList();
+                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
                     List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
 
                     foreach (Behavior_Transition_Set _set in casual_to_states_now)
@@ -567,14 +566,14 @@ namespace Soul
                                     _set.StateKey,
                                     _set.stateType,
                                     _set.AT,
-                                    _set.ai_trigger_ranges,
+                                    _set.AI_trigger_ranges,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput,
                                     _set.SPLevel);
                             casual_to_states_after.Add(_freshNew);
                         }
                     }
-                    Transition.Value.casual_to_state_Sets = casual_to_states_after.ToArray();
+                    Transition.Value.Casual_To_Behaviours = casual_to_states_after.ToArray();
                 }
 
                 // 移动概率
@@ -586,7 +585,7 @@ namespace Soul
                     ||
                     Transition.Key == "Test_Move")
                 {
-                    Transition.Value.casual_to_state_Sets = new Behavior_Transition_Set[] { };
+                    Transition.Value.Casual_To_Behaviours = new Behavior_Transition_Set[] { };
                 }
             }
         }

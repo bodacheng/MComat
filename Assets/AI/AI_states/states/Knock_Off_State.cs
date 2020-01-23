@@ -110,7 +110,7 @@ public class Knock_Off_State : Behavior
         {
             canWakeUp |= (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround);
         }else{
-            if (_AIStateRunner._inputManager.PlayerInputting)
+            if (_inputManager.PlayerInputting)
                 _AIStateRunner.ChangeState("getUp");
         }
 

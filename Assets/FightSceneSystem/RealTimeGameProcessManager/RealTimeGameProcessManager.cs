@@ -72,7 +72,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }
         else
         {
-            _mobileInputsManager.FocusCharInputs(focusingChar.AIStateRunner.GetInputManager(),focusingChar.Zokusei);
+            _mobileInputsManager.FocusCharInputs(focusingChar.controller._inputManager,focusingChar.Zokusei);
             _mobileInputsManager.TurnOnButtons();
         }
 	}
@@ -80,11 +80,11 @@ public class RealTimeGameProcessManager : MonoBehaviour
 	public void SwitchToCMode(Data_Center _char,bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
     {
         if (focusingChar != null)
-            focusingChar.AIStateRunner.SetPlayerMode(false);
+            focusingChar.controller.SetPlayerMode(false);
         focusingChar = _char;
         if (focusingChar != null)
         {
-            focusingChar.AIStateRunner.SetPlayerMode(playerControll);
+            focusingChar.controller.SetPlayerMode(playerControll);
             _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { focusingChar.WholeT });
             _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
         }else{

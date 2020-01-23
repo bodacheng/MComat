@@ -4,13 +4,14 @@ using UnityEngine;
 using System.IO;
 using System.Xml.Serialization;
 using Soul;
+using Inputs;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public static class AIScriptReading {
 
-    public static List<Behavior_Transition_Set> ReadKongfuBook(AIStateRunner _AIStateRunner,TextAsset Script,string type)
+    public static List<Behavior_Transition_Set> ReadKongfuBook(BehaviorRunner _AIStateRunner,TextAsset Script,string type)
     {
         try
         {

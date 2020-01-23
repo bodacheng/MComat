@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Inputs;
 
 //这个模块也将扮演数据库和AI模块接口的作用。
 // 玩家存档中的各个角色信息最后会转化出这样一个类的实例。从而很重要一点————要看明白哪些信息是能保存数据库的。
@@ -370,7 +371,7 @@ public class NineAndTwo {
                     A_list[i + 1].StateKey,
                     A_list[i + 1].stateType,
                     A_list[i + 1].AT,
-                    A_list[i + 1].ai_trigger_ranges,
+                    A_list[i + 1].AI_trigger_ranges,
                     true, 
                     Inputs_defined.Attack, Inputs_defined.Null, A_list[i + 1].SPLevel);
                 casualT0.Add(State_Rate_Set);
@@ -398,7 +399,7 @@ public class NineAndTwo {
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
                                 H2_list[y].AT,
-                                H2_list[y].ai_trigger_ranges,
+                                H2_list[y].AI_trigger_ranges,
                                 true,
                                 casualtokey, Inputs_defined.Null, 
                                 H2_list[y].SPLevel);
@@ -427,7 +428,7 @@ public class NineAndTwo {
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
                                 H3_list[y].AT,
-                                H3_list[y].ai_trigger_ranges,
+                                H3_list[y].AI_trigger_ranges,
                                 true,
                                 casualtokey, Inputs_defined.Null,
                                 H3_list[y].SPLevel);
@@ -445,7 +446,7 @@ public class NineAndTwo {
             if (this.D != null)
                 casualT0.Add(this.D);
 
-            A_list[i].casual_to_state_Sets = casualT0.ToArray();
+            A_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
 
         //////////////
@@ -470,7 +471,7 @@ public class NineAndTwo {
                     B_list[i + 1].StateKey,
                     B_list[i + 1].stateType,
                     B_list[i + 1].AT,
-                    B_list[i + 1].ai_trigger_ranges,
+                    B_list[i + 1].AI_trigger_ranges,
                     true, Inputs_defined.Fire1, Inputs_defined.Null, 
                     B_list[i + 1].SPLevel);
                 casualT0.Add(State_Rate_Set);
@@ -498,7 +499,7 @@ public class NineAndTwo {
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
                                 H2_list[y].AT,
-                                H2_list[y].ai_trigger_ranges,
+                                H2_list[y].AI_trigger_ranges,
                                 true,
                                 casualtokey, Inputs_defined.Null,
                                 H2_list[y].SPLevel);
@@ -527,7 +528,7 @@ public class NineAndTwo {
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
                                 H3_list[y].AT,
-                                H3_list[y].ai_trigger_ranges,
+                                H3_list[y].AI_trigger_ranges,
                                 true,
                                 casualtokey, Inputs_defined.Null,
                                 H3_list[y].SPLevel);
@@ -545,7 +546,7 @@ public class NineAndTwo {
             if (this.D != null)
                 casualT0.Add(this.D);
 
-            B_list[i].casual_to_state_Sets = casualT0.ToArray();
+            B_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
         //////////////////////////////////
 
@@ -570,7 +571,7 @@ public class NineAndTwo {
                     C_list[i + 1].StateKey,
                     C_list[i + 1].stateType,
                     C_list[i + 1].AT,
-                    C_list[i + 1].ai_trigger_ranges,
+                    C_list[i + 1].AI_trigger_ranges,
                     true,Inputs_defined.Fire2, Inputs_defined.Null, 
                     C_list[i + 1].SPLevel);
                 casualT0.Add(State_Rate_Set);
@@ -598,7 +599,7 @@ public class NineAndTwo {
                                 H2_list[y].StateKey,
                                 H2_list[y].stateType,
                                 H2_list[y].AT,
-                                H2_list[y].ai_trigger_ranges,
+                                H2_list[y].AI_trigger_ranges,
                                 true,
                                 casualtokey, Inputs_defined.Null,
                                 H2_list[y].SPLevel);
@@ -627,7 +628,7 @@ public class NineAndTwo {
                                 H3_list[y].StateKey,
                                 H3_list[y].stateType,
                                 H3_list[y].AT,
-                                H3_list[y].ai_trigger_ranges,
+                                H3_list[y].AI_trigger_ranges,
                                 true,
                                 casualtokey, Inputs_defined.Null,
                                 H3_list[y].SPLevel);
@@ -644,7 +645,7 @@ public class NineAndTwo {
             if (this.D != null)
                 casualT0.Add(this.D);
 
-            C_list[i].casual_to_state_Sets = casualT0.ToArray();
+            C_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
 
         List<Behavior_Transition_Set> chuanEndCasualT0 = new List<Behavior_Transition_Set>();
@@ -659,21 +660,21 @@ public class NineAndTwo {
 
         if (this.R != null)//意思就是说，机动类技能不再能取消迁移至机动类技能
         {
-            this.R.casual_to_state_Sets = chuanEndCasualT0.ToArray();
+            this.R.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
             chuanEndCasualT0.Add(R);
         }
 
         if (A3 != null)
         {
-            A3.casual_to_state_Sets = chuanEndCasualT0.ToArray();
+            A3.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
         }
         if (B3 != null)
         {
-            B3.casual_to_state_Sets = chuanEndCasualT0.ToArray();
+            B3.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
         }
         if (C3 != null)
         {
-            C3.casual_to_state_Sets = chuanEndCasualT0.ToArray();
+            C3.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
         }
     }
 
@@ -811,8 +812,8 @@ public class NineAndTwo {
         {
             //下面这些就是怕数据库里九宫格里的M记载有错。
             M.SPLevel = -1;
-            M.casual_to_state_Sets = StartUpTransitions.ToArray();
-            M.ai_trigger_ranges = null;
+            M.Casual_To_Behaviours = StartUpTransitions.ToArray();
+            M.AI_trigger_ranges = null;
             StateTransitionSetList.Add(M);
         }
         else

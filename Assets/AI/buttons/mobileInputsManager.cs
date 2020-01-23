@@ -33,6 +33,14 @@ public class MobileInputsManager : MonoBehaviour {
         target = this;
     }
 
+    void Update()
+    {
+        if (watchingInputManger != null)
+        {
+            watchingInputManger.ButtonRefreshForCasualTransition();
+        }
+    }
+
     public void Clear()
     {
         zokuseiButtonEffects.Clear();

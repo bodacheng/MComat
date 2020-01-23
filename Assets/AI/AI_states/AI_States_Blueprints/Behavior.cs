@@ -11,13 +11,14 @@ namespace Soul
         public GameObject gameObject;
         public Transform GeoCenterT;
         public Rigidbody _Rigidbody;
-        public AIStateRunner _AIStateRunner;
+        public BehaviorRunner _AIStateRunner;
         public Data_Center _DATA_CENTER;
         public BO_Ani_E _BO_Ani_E;
         public FightAttriCalReference _FightAttriCalReference;
         public ResistanceManager _ResistanceManager;
         public BasicPhysicSupport _BasicPhysicSupport;
         public Sensor Sensor;
+        public Controller controller;
         public InputManager _inputManager;
         public Animator _Animator;
         public SkillCancelFlag _SkillCancelFlag;
@@ -47,9 +48,10 @@ namespace Soul
             this.Sensor = _DATA_CENTER.Sensor;
             this._FightAttriCalReference = _DATA_CENTER._FightAttriCalReference;
             this.shaderManager = _DATA_CENTER._ShaderManager;
-            this._AIStateRunner = _DATA_CENTER.AIStateRunner;
+            this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
-            this._inputManager = _AIStateRunner._inputManager;
+            this.controller = _DATA_CENTER.controller;
+            this._inputManager = controller._inputManager;
             this._SkillCancelFlag = _DATA_CENTER._SkillCancelFlag;
             this._BO_Ani_E = _DATA_CENTER._BO_Ani_E;
             this._Weapon_Animation_Events = _DATA_CENTER.bO_Weapon_Animation_Events;

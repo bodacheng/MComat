@@ -195,12 +195,12 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     public void ApplyDamage(V_Damage _dmg)
 	{
-        if (_Center.AIStateRunner.GetCurrentStateNum() == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
+        if (_Center._MyBehaviorRunner.GetNowState().StateKey == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
         {
             _dmg.damage_type = DamageType.heavy_block;
             HitEffect(_dmg);
             _dmg.AT = 0;
-            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
             return;
         }
         
@@ -247,25 +247,25 @@ public partial class FightAttriCalReference : MonoBehaviour
             case DamageType.slight_damage:
             break;
             case DamageType.light_damage:
-            _Center.AIStateRunner.ChangeState("Hit",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Hit",_dmg);
             break;
             case DamageType.heavy_damage:
-            _Center.AIStateRunner.ChangeState("Hit",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Hit",_dmg);
             break;
             case DamageType.supper_damage:
-            _Center.AIStateRunner.ChangeState("Hit",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Hit",_dmg);
             break;
             case DamageType.knockOff_damage:
-            _Center.AIStateRunner.ChangeState("KnockOff",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("KnockOff",_dmg);
             break;
             case DamageType.light_block:
-            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
             break;
             case DamageType.heavy_block:
-            _Center.AIStateRunner.ChangeState("Defend",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
             break;
             case DamageType.DeathKnockoff:
-            _Center.AIStateRunner.ChangeState("Death",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Death",_dmg);
             break;
         }        
 	}

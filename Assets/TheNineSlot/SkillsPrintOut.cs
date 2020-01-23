@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Soul;
+using Inputs;
 using UnityEngine.UI;
 //using VRM;
 
@@ -123,7 +123,7 @@ namespace mainMenu
                 if (outRange != null)
                     outRange.text = "x";
 
-                foreach (BehaviorEnterRange _range in _state_Transition_Set.ai_trigger_ranges)
+                foreach (BehaviorEnterRange _range in _state_Transition_Set.AI_trigger_ranges)
                 {
                     switch (_range)
                     {
@@ -150,7 +150,7 @@ namespace mainMenu
                 skillShowLines.drawlines(_toDrawLines);
 
                 //下面这些是逻辑核心
-                foreach (Behavior_Transition_Set _set in _state_Transition_Set.casual_to_state_Sets)
+                foreach (Behavior_Transition_Set _set in _state_Transition_Set.Casual_To_Behaviours)
                 {
                     analysisStatesSetDic.TryGetValue(_set.StateKey, out Behavior_Transition_Set _oneCasualTo);
                     StateButtonDic.TryGetValue(_oneCasualTo, out Button CasualToButton);
@@ -301,9 +301,9 @@ namespace mainMenu
                 Destroy(child.gameObject);
             }
 
-            this.focusingCharacterData.AIStateRunner.FormFightingSetsByNineAndTwo(type, nineAndTwo);
+            this.focusingCharacterData._MyBehaviorRunner.FormFightingSetsByNineAndTwo(type, nineAndTwo);
             analysisStatesList.Clear();
-            analysisStatesList = this.focusingCharacterData.AIStateRunner.State_Transition_Set_List;
+            analysisStatesList = this.focusingCharacterData._MyBehaviorRunner.State_Transition_Set_List;
             analysisStatesSetDic.Clear();
             analysisStatesSetDic = this.ConvertStateSetsListToStateTransitionSetDic(analysisStatesList);
 
@@ -460,8 +460,8 @@ namespace mainMenu
                     _set.StateKey,
                     _set.stateType,
                     _set.AT,
-                    _set.ai_trigger_ranges,
-                    _set.casual_to_state_Sets,
+                    _set.AI_trigger_ranges,
+                    _set.Casual_To_Behaviours,
                     _set.forced_to_state_nums,
                     _set.enterInput,
                     _set.exitInput,
@@ -475,7 +475,7 @@ namespace mainMenu
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
-            foreach (Behavior_Transition_Set _Set in _set.casual_to_state_Sets)
+            foreach (Behavior_Transition_Set _Set in _set.Casual_To_Behaviours)
             {
                 if (_Set.enterInput != Inputs_defined.Null)
                 {

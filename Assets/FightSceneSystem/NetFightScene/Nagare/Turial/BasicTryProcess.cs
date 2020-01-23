@@ -133,14 +133,14 @@ public class BasicTryProcess : NagareProcess
             
             break;
             case 2:
-            if (Adam.AIStateRunner.GetCurrentStateNum() == adamInfo._NineAndTwo.GetA3Config().REAL_NAME)
+            if (Adam._MyBehaviorRunner.GetNowState().StateKey == adamInfo._NineAndTwo.GetA3Config().REAL_NAME)
             {
                 Step = 3;
                     Debug.Log("Success3");
             }
             break;
             case 3:
-            if (Adam.AIStateRunner.GetCurrentStateNum() == "RushBack")
+            if (Adam._MyBehaviorRunner.GetNowState().StateKey == "RushBack")
             {
                 Step = 4;
                 Debug.Log("Success4");
@@ -181,7 +181,7 @@ public class BasicTryProcess : NagareProcess
         {
             if (_one._FightAttriCalReference.CurrentHp.Value > 0)
             {
-                _one.AIStateRunner.ChangeState("Victory");
+                _one._MyBehaviorRunner.ChangeState("Victory");
             }
         }
         Time.timeScale = 1f;

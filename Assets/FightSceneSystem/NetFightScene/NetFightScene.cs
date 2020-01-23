@@ -163,7 +163,7 @@ public class NetFightScene : MonoBehaviour {
         {
             if (player1[i] != null)
             {
-                player1[i].AIStateRunner.ChangeState("Empty");
+                player1[i]._MyBehaviorRunner.ChangeState("Empty");
                 CharacterDataInfo characterDataInfo = _RealTimeGameProcessManager.FightTeam1.CharacterDataInfoReference[player1[i]];
                 if (characterDataInfo != null)
                     dontdestroy.Add(characterDataInfo.monsterOfPlayerId);

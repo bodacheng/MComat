@@ -76,9 +76,10 @@ public class DATACENTERGUI : Editor {
             myScript._FightAttriCalReference._Center = myScript;
             myScript._BO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
             myScript._BO_Ani_E._DATA_CENTER = myScript;
-            myScript.AIStateRunner = myScript.gameObject.GetComponent<AIStateRunner>();            
-            myScript.AIStateRunner._BO_Health = myScript._FightAttriCalReference;
-            myScript.AIStateRunner._SkillCancelFlag = myScript._SkillCancelFlag;
+            myScript.controller = myScript.gameObject.GetComponent<Controller>();
+            myScript._MyBehaviorRunner = myScript.gameObject.GetComponent<BehaviorRunner>();            
+            myScript._MyBehaviorRunner._SkillCancelFlag = myScript._SkillCancelFlag;
+            myScript._MyBehaviorRunner.controller = myScript.controller;
             myScript.buffsRunner = myScript.gameObject.GetComponent<BuffsRunner>();
             myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();                       
             myScript._BasicPhysicSupport = myScript.WholeT.GetComponent<BasicPhysicSupport>();

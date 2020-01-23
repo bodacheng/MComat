@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Soul
 {
-    public partial class AIStateRunner : MonoBehaviour
+    public partial class BehaviorRunner : MonoBehaviour
     {
         //List<int> transferList; //这个列表的意义在于传递这个信息：该角色是否从某个客户端进行了控制权传递，如何向这个列表里添加值待定。暂时想不出办法
         //一个是在playerModeNewCommandWaiting()当中，而这两个地方的重点在于，围绕refreshSPLevelButtonsInfo的外部逻辑其实不同。
