@@ -46,7 +46,7 @@ namespace Inputs
             WeUseThisToSeeIfNextWazaForInputHasPlentyOfGrauge.Clear();
             foreach (Behavior_Transition_Set transition_key_value in avaliable_casual_Transitions)
             {
-                if (_BO_Health.HasPlentyGauge(transition_key_value.SPLevel))
+                if (_BO_Health.HasPlentyGauge(transition_key_value.SPLevel))//首先这里有判断重复
                 {
                     if (transition_key_value.enterInput != Inputs_defined.Null)
                     {
