@@ -104,7 +104,7 @@ namespace Soul
                             // 查看情况与行为反应的优先度
                             foreach (KeyValuePair<KeyValuePair<string, string>, int> keyValuePair in RespondAndConditionPriority)
                             {
-                                if (keyValuePair.Key.Key == try_Behavior.StateKey && keyValuePair.Key.Value == Conditions[y])
+                                if (keyValuePair.Key.Key == try_Behavior.StateKey && keyValuePair.Key.Value == Conditions[y])//这个检索机制应该找点什么给取代掉
                                 {
                                     //Debug.Log("状态"+try_Behavior.StateKey + "遇到了情况："+Conditions[y] +"从而可能要触发");
                                     Triggerd.Add(keyValuePair);
@@ -125,7 +125,7 @@ namespace Soul
                 }
             }
 
-            if (finalDecisions.Count > 0)
+            if (finalDecisions.Count > 0)//本质上说控制模式下finalDecisions的长度基本只能是1或0，而AI模式下则在这里进一步牵扯到多个选项做选择的问题
             {
                 if (playerMode || _inputManager.PlayerInputting)
                 {
@@ -135,7 +135,7 @@ namespace Soul
                     }
                     _SkillCancelFlag.turn_off_flag();
                     ChangeState(finalDecisions[0].StateKey);
-                }else{
+                }else{//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
                     int random = Random.Range(0,finalDecisions.Count);
                     if (MobileInputsManager.target.watchingInputManger == _inputManager)
                     {
