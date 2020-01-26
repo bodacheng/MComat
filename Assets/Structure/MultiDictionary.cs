@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 /// <summary>
 /// 复合字典
@@ -11,10 +11,10 @@ public class MultiDictionary<Key1, Key2, Value>
     /// <summary>
     /// 字典结构
     /// </summary>
-    private Dictionary<Key1, Dictionary<Key2, Value>> mDict1 = new Dictionary<Key1, Dictionary<Key2, Value>>();
-    private Dictionary<Key1, List<Key2>> unnullkeys = new Dictionary<Key1, List<Key2>>();
+    public Dictionary<Key1, Dictionary<Key2, Value>> mDict1 = new Dictionary<Key1, Dictionary<Key2, Value>>();
+    public Dictionary<Key1, List<Key2>> unnullkeys = new Dictionary<Key1, List<Key2>>();
     public List<Value> values = new List<Value>();
-     
+
      /// <summary>
     /// 序列化对象
     /// </summary>
@@ -25,14 +25,18 @@ public class MultiDictionary<Key1, Key2, Value>
         List<SerializableSets> temp = new List<SerializableSets>();
         foreach (KeyValuePair<Key1,Dictionary<Key2, Value>> keyValuePair in mDict1)
         {
-            SerializableSets serializableSets = new SerializableSets();
-            serializableSets.key1 = keyValuePair.Key;
+            SerializableSets serializableSets = new SerializableSets
+            {
+                key1 = keyValuePair.Key
+            };
             List<SerializableSet> set = new List<SerializableSet>();
             foreach(KeyValuePair<Key2, Value> _KeyValuePair in keyValuePair.Value)
             {
-                SerializableSet serializableSet = new SerializableSet();
-                serializableSet._Key2 = _KeyValuePair.Key;
-                serializableSet._Value = _KeyValuePair.Value;
+                SerializableSet serializableSet = new SerializableSet
+                {
+                    _Key2 = _KeyValuePair.Key,
+                    _Value = _KeyValuePair.Value
+                };
                 set.Add(serializableSet);
             }
             serializableSets.value = set.ToArray();
@@ -82,8 +86,10 @@ public class MultiDictionary<Key1, Key2, Value>
         }
         else
         {
-            var dict2 = new Dictionary<Key2, Value>();
-            dict2.Add(key2, value);
+            var dict2 = new Dictionary<Key2, Value>
+            {
+                { key2, value }
+            };
             mDict1.Add(key1, dict2);
             values.Add(value);
             unnullkeys.Add(key1, new List<Key2>() { key2 });
@@ -93,7 +99,7 @@ public class MultiDictionary<Key1, Key2, Value>
     /// <summary>
     /// 取值
     /// </summary>
-    public Value Get(Key1 key1, Key2 key2, Value defaultValue = default(Value))
+    public Value Get(Key1 key1, Key2 key2, Value defaultValue = default)
     {
         if (mDict1.ContainsKey(key1))
         {
@@ -102,6 +108,14 @@ public class MultiDictionary<Key1, Key2, Value>
                 return dict2[key2];
         }
         return defaultValue;
+    }
+        
+    public void Clear()
+    {
+        mDict1.Clear();
+        values.Clear();
+        unnullkeys.Clear();
+        _SerializableSets = null;
     }
     
     public Dictionary<Key1, List<Key2>> GetAllUnNullKeys()
@@ -121,5 +135,55 @@ public class MultiDictionary<Key1, Key2, Value>
     {
         public Key2 _Key2;
         public Value _Value;       
+    }
+}
+
+public class SSIMultiDictionary
+{
+    public SSIMultiDictionary()
+    {
+        main = new MultiDictionary<string, string, int>();        
+    }
+    public MultiDictionary<string, string, int> main = new MultiDictionary<string, string, int>();
+    public List<KeyValuePair<string, string>> GiveOutMin()
+    {
+        List<KeyValuePair<string, List<string>>> temp = new List<KeyValuePair<string, List<string>>>();//各个大key所属的对应最终最小值的小key
+        foreach (KeyValuePair<string,Dictionary<string, int>> BigPair in main.mDict1)
+        {
+            Dictionary<string, int> LittleDic = BigPair.Value;
+            List<string> minkeys = LittleDic.Keys.Select(x => new { x, y = LittleDic[x] }).GroupBy(x => x.y).OrderBy(x => x.Key).First().Select(x => x.x).ToList();
+            if (minkeys.Count > 0)
+            {
+                temp.Add(new KeyValuePair<string, List<string>>(BigPair.Key,minkeys));
+            }
+        }
+
+        int Minimum = 9;
+        string minusBigKey;
+        List<KeyValuePair<string, List<string>>> allMinusBigKeys = new List<KeyValuePair<string, List<string>>>();
+        for (int i = 0; i < temp.Count; i++)
+        {
+            if (main.Get(temp[i].Key, temp[i].Value[0]) < Minimum)
+            {
+                Minimum = main.Get(temp[i].Key, temp[i].Value[0]);
+                minusBigKey = temp[i].Key;
+                allMinusBigKeys.Clear();
+                allMinusBigKeys.Add(new KeyValuePair<string, List<string>> (temp[i].Key, temp[i].Value));
+            }
+            else if (main.Get(temp[i].Key, temp[i].Value[0]) == Minimum)
+            {
+                allMinusBigKeys.Add(new KeyValuePair<string, List<string>> (temp[i].Key, temp[i].Value));
+            }
+        }
+        List<KeyValuePair<string, string>> final_minkeys = new List<KeyValuePair<string, string>>();
+        for (int i = 0; i < allMinusBigKeys.Count; i++)
+        {
+            for (int y = 0; y < allMinusBigKeys[i].Value.Count;y++)
+            {
+                final_minkeys.Add(new KeyValuePair<string, string>(allMinusBigKeys[i].Key,allMinusBigKeys[i].Value[y]));
+            }
+        }
+        
+        return final_minkeys;
     }
 }
