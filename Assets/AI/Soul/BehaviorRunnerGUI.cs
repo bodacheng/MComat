@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using Soul;
-using Inputs;
 
 [CustomEditor(typeof(BehaviorRunner))]
 public class BehaviorRunnerGUI : Editor {
@@ -58,10 +57,20 @@ public class BehaviorRunnerGUI : Editor {
         LocalResourceReferenceMode = EditorGUILayout.Toggle("本地资源参照模式",LocalResourceReferenceMode);
 
 		myScript = (BehaviorRunner)target;
-        _States_Incubator_ForLocalResourceCheck = LocalResourceReferenceMode
+        
+        if (myScript.GetNowState() != null)
+        {
+            EditorGUILayout.TextField("current: ", myScript.GetNowState().StateKey);
+        }
+        
+        if (GUILayout.Button("  refresh skill define "))
+        {
+            _States_Incubator_ForLocalResourceCheck = LocalResourceReferenceMode
             ? new Behaviors_Incubator_ForLocalResourceCheck(myScript.characterType)
             : new Behaviors_Incubator_ForLocalResourceCheck(myScript.characterType,myScript.State_Transition_Set_List);
-        if (_States_Incubator_ForLocalResourceCheck.BehaviorIndexList != null)
+        }
+        
+        if (_States_Incubator_ForLocalResourceCheck != null && _States_Incubator_ForLocalResourceCheck.BehaviorIndexList != null)
         {
             StateIndexListOptions = _States_Incubator_ForLocalResourceCheck.BehaviorIndexList.ToArray();
         }
@@ -71,8 +80,6 @@ public class BehaviorRunnerGUI : Editor {
         }//这个处理需要多个地方进行
         //DrawDefaultInspector();
 
-        if (myScript.GetNowState() != null)
-            EditorGUILayout.TextField("current: ", myScript.GetNowState().StateKey);
         EditorGUILayout.BeginVertical();
         myScript.AI_States_path = EditorGUILayout.TextField("AI_States_path", myScript.AI_States_path);
         EditorGUILayout.EndVertical();

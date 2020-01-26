@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Inputs;
 
 [System.Serializable]
 public class Behavior_Transition_Set

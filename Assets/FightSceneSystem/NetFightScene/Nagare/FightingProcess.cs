@@ -48,7 +48,7 @@ public class FightingProcess : NagareProcess
     
     public override void LocalUpdate()
     {
-        if (UnityEngine.Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             _NetFightScene.PauseScene();
         }
@@ -59,7 +59,6 @@ public class FightingProcess : NagareProcess
                 _RealTimeGameProcessManager.FightingStepProcess();
                 break;
         }
-        mobileInputsManager.RefreshButtonPattern();
     }
 
     IEnumerator FinalMoment(Team winner)

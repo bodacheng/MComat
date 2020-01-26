@@ -231,7 +231,7 @@ public class zokuseiButtonEffectsGroup
             }
             else
             {
-                pair.Value.Stop(true,ParticleSystemStopBehavior.StopEmitting);
+                pair.Value.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
                 //pair.Value.Clear(true);
             }
         }

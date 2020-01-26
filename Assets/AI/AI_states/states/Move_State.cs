@@ -89,7 +89,6 @@ public class Move_State : Behavior
         this._Weapon_Animation_Events.ClearMarkerManagers();
         this.Sensor.ContinuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
         this.Animation_Manger.PlayLayerAnim(null);
-
         // 从这到底下那么也就是AI模式决定第一轮moveDirection和use_direction的
         // 而moveDirection是用来引导use_direction的
         DecideDirection();

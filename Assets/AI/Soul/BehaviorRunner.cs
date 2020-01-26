@@ -54,17 +54,22 @@ namespace Soul
         {
             return try_Behavior;
         }
-        
+
+        void Update()
+        {
+            if (IfRunning())
+            {
+                BehaviourTransitionEngine();
+            }
+        }
+
         void FixedUpdate()
         {
             if (IfRunning())
             {
-                if (MobileInputsManager.target.watchingInputManger == controller._inputManager)
-                    controller._inputManager.CheckIfPlayerIsInputting();
-                BehaviourTransitionEngine();
                 if (now_Behavior != null)
                 {
-                    if (Controller.playerMode || (!Controller.playerMode && controller._inputManager.PlayerInputting))
+                    if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
                     {
                         now_Behavior._c_State_FixedUpdate1();
                         now_Behavior._c_State_FixedUpdate2();
@@ -87,10 +92,6 @@ namespace Soul
                 now_Behavior.AI_State_exit();
             }
 
-            //if(now_state == try_state)
-            //{
-            //    Debug.Log(current_state_num +"可能出现进入与退出条件的逻辑不相反问题");
-            //}
             //注意看changeState环节，上一个状态的exit和下一个状态的enter是同一个帧执行的。
             //从这里我们曾经发现了动画播放模块一个重要问题，就是在特定情况下，
             //比如defend状态的exit里有PlayLayerAnim(_animator_layer_index, null)，防御后接攻击，
@@ -106,7 +107,7 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + num);
                 return;
             }
-            if (Controller.playerMode || controller._inputManager.PlayerInputting)
+            if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
             {
                 now_Behavior.C_State_enter();
             }
@@ -130,10 +131,15 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + num);
                 return;
             }
-            if (Controller.playerMode || controller._inputManager.PlayerInputting)
+            if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
                 now_Behavior.C_State_enter(newvalue);
             else
                 now_Behavior.AI_State_enter(newvalue);
+        }
+        
+        public void ChangeToWaitingState()
+        {
+            ChangeState(commandWaitingState.StateKey);
         }
       
         public void INIStates(Data_Center data_Center)
@@ -150,7 +156,7 @@ namespace Soul
             }
 
             Behaviour_Dictionary.TryGetValue("Empty", out now_Behavior);
-            if (Controller.playerMode)
+            if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
             {
                 now_Behavior.C_State_enter();
             }

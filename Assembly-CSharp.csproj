@@ -84,7 +84,7 @@
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
     <Compile Include="Assets\AI\buttons\ZokuseiSkillStoneTagsGroup.cs" />
-    <Compile Include="Assets\AI\Control\inputManager.cs" />
+    <Compile Include="Assets\AI\Control\Controller.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_Form.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_newRunner.cs" />
@@ -92,7 +92,6 @@
     <Compile Include="Assets\AI\Soul\BehaviorRunner_unused.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunnerGUI.cs" />
     <Compile Include="Assets\AI\Soul\BuffsRunner.cs" />
-    <Compile Include="Assets\AI\Soul\Controller.cs" />
     <Compile Include="Assets\AI\Soul\NineAndTwo.cs" />
     <Compile Include="Assets\AI\Soul\Sensor.cs" />
     <Compile Include="Assets\AI\Soul\SkillCancelFlag.cs" />

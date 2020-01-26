@@ -72,7 +72,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }
         else
         {
-            _mobileInputsManager.FocusCharInputs(focusingChar.controller._inputManager,focusingChar.Zokusei);
+            _mobileInputsManager.FocusCharInputs(focusingChar._MyBehaviorRunner,focusingChar.Zokusei);
             _mobileInputsManager.TurnOnButtons();
         }
 	}
@@ -80,11 +80,11 @@ public class RealTimeGameProcessManager : MonoBehaviour
 	public void SwitchToCMode(Data_Center _char,bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
     {
         if (focusingChar != null)
-            focusingChar.controller.SetPlayerMode(false);
+            MobileInputsManager.SetPlayerMode(false);
         focusingChar = _char;
         if (focusingChar != null)
         {
-            focusingChar.controller.SetPlayerMode(playerControll);
+            MobileInputsManager.SetPlayerMode(playerControll);
             _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { focusingChar.WholeT });
             _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
         }else{
@@ -145,6 +145,18 @@ public class RealTimeGameProcessManager : MonoBehaviour
             }
         }
     }
+}
+
+public enum Inputs_defined
+{
+    Null = -1,
+    Attack = 0,
+    Fire1 = 1,
+    Fire2 = 2,
+    Dash = 5,
+    Defend = 3,
+    Defend_Cancel = 4,
+    Any = 6
 }
 
 //    switch (this.hPBarDisplayMode)

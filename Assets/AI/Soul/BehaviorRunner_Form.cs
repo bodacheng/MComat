@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Inputs;
 using System.Collections.Generic;
 
 namespace Soul
@@ -90,12 +89,6 @@ namespace Soul
             bool hasD, hasR;
             hasD = nineAndTwo.GetDConfig() != null;
             hasR = nineAndTwo.GetRConfig() != null;
-
-            if (controller._inputManager == null)
-            {
-                controller._inputManager = new InputManager();
-            }
-            controller._inputManager.INI(hasD, hasR, this);
 
             _States_Incubator = new Behaviors_Incubator(type, empty_State,this.Behaviour_Transition_Dictionary);
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键

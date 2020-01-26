@@ -53,14 +53,29 @@ namespace Soul
                     avaliable_casual_Transitions.Add(Behavior_set);
                 }
             }
+            
+            #region 主动退出当前状态的控制类条件是否激活
+            if (!controller.BehaviourExitInputTrigger(CurrentBehaviorTransitionSet))
+            {
+                return;
+            }
+            #endregion
 
-            #region 做决定
-            controller.Control(this, avaliable_casual_Transitions);
+            #region 按钮技能刷新
+            if (MobileInputsManager.target.Observing_Runner == this)
+                controller.ButtonFeatureRefresh(this, avaliable_casual_Transitions,SRTListForCasualTransitionbuttonRefresh);
+            #endregion
+            
+            #region AI模式决策制定
+            if (!((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this))
+                controller.AI_RUNs(this, avaliable_casual_Transitions);
             #endregion
 
             if (!now_Behavior.Capacity_Exit_Condition())
+            {
                 return;
-                
+            }
+            
             Behaviour_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
             if (try_Behavior != now_Behavior)//避免战斗待机状态重复进入
             {

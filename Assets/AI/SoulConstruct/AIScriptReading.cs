@@ -4,7 +4,6 @@ using UnityEngine;
 using System.IO;
 using System.Xml.Serialization;
 using Soul;
-using Inputs;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

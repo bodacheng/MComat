@@ -1,43 +1,47 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Inputs;
+using Soul;
 
 public class MobileInputsManager : MonoBehaviour {
 
-    public static MobileInputsManager target;
-    
-    //2019.3.26 折腾了整整两天的移动端按键粒子特效。留下的唯一一点不足是，没有针对防御状态，rush状态的有无来决定防御键是否显示，也没有针对未来可能出现的耗气式防御或rush状态来刷新两个键的显示状态。
-    public Camera fxCamera;
-    public Transform effectsParent;
-    static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
-    static zokuseiButtonEffectsGroup _focusingButtonEffectsGroup;
-    
     public Button Attack;
     public Button Fire1;
     public Button Fire2;
     public Button Defend;
     public Button Dash;
     
-    public InputManager watchingInputManger;
+    //2019.3.26 折腾了整整两天的移动端按键粒子特效。留下的唯一一点不足是，没有针对防御状态，rush状态的有无来决定防御键是否显示，也没有针对未来可能出现的耗气式防御或rush状态来刷新两个键的显示状态。
+    public Camera fxCamera;
+    public Transform effectsParent;
     
-    IDictionary<Inputs_defined, int> lastSkillSPlevel = new Dictionary<Inputs_defined, int>()
-    {
-        {Inputs_defined.Attack,-1},
-        {Inputs_defined.Fire1,-1},
-        {Inputs_defined.Fire2,-1}
-    };
+    public static MobileInputsManager target;
+    static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
+    static zokuseiButtonEffectsGroup _focusingButtonEffectsGroup;
+    public BehaviorRunner Observing_Runner;
+    
+    public static bool playerMode;
+    public static bool inputting;
     
     void Awake()
     {
         target = this;
     }
 
-    void Update()
+    public static void SetPlayerMode(bool result)
     {
-        if (watchingInputManger != null)
+        playerMode = result;
+        inputting = false;
+    }
+    
+    public void FocusCharInputs(BehaviorRunner focusingCharInputManger,Zokusei zokusei)
+    {
+        Observing_Runner = focusingCharInputManger;
+        if (Observing_Runner != null)
         {
-            watchingInputManger.ButtonRefreshForCasualTransition();
+            SwitchZokuseiButtons(zokusei);
+        }else{
+            TurnOffButtons();
         }
     }
 
@@ -46,7 +50,7 @@ public class MobileInputsManager : MonoBehaviour {
         zokuseiButtonEffects.Clear();
         _focusingButtonEffectsGroup = null;
     }
-
+    
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
     void SwitchZokuseiButtons(Zokusei zokusei)
     {
@@ -58,17 +62,6 @@ public class MobileInputsManager : MonoBehaviour {
             _focusingButtonEffectsGroup.Open(ButtonEffectInFxCameraWorldSpace(Defend,5),ButtonEffectInFxCameraWorldSpace(Dash,5));
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
-        }
-    }
-
-    public void FocusCharInputs(InputManager focusingCharInputManger,Zokusei zokusei)
-    {
-        watchingInputManger = focusingCharInputManger;
-        if (watchingInputManger != null)
-        {
-            SwitchZokuseiButtons(zokusei);
-        }else{
-            TurnOffButtons();
         }
     }
 
@@ -86,7 +79,7 @@ public class MobileInputsManager : MonoBehaviour {
     }
 
     static ParticleSystem targetexplode;
-    public static void Skillbuttonexplosion(Inputs_defined inputs_Defined,int eX)
+    public static void SkillButtonExplosion(Inputs_defined inputs_Defined,int eX)
     {
         switch(eX)
         {
@@ -147,91 +140,238 @@ public class MobileInputsManager : MonoBehaviour {
         if (_focusingButtonEffectsGroup != null)
             _focusingButtonEffectsGroup.pressingExplosion.Stop();
     }
-
-    public void AttackButtonDown()
+    
+    public static void CheckIfPlayerIsInputting() // 如果不是对准角色，不会跑。
     {
-        if (watchingInputManger != null)
+        inputting = defendButtonHover || attackButtonHover || fire1ButtonHover || fire2ButtonHover || accButtonHover;
+        if (inputting)
         {
-            watchingInputManger.Attack.input_state = true;
+            return;
         }
+        float h = 0f;
+        float v = 0f;
+        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
+        || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+        }
+        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            h = ETCInput.GetAxis("Horizontal");
+            v = ETCInput.GetAxis("Vertical");
+        }
+        inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
+    }
+
+    static bool defendButtonHover;
+    public bool DefendExitTrigger()
+    {
+        return !defendButtonHover;
+    }
+
+    readonly Dictionary<Inputs_defined, Behavior_Transition_Set> Options_lastframe = new Dictionary<Inputs_defined, Behavior_Transition_Set>()
+    {
+        {Inputs_defined.Attack,null},
+        {Inputs_defined.Fire1,null},
+        {Inputs_defined.Fire2,null}
+    };
+    
+    public delegate void SkillButtonAction();
+    SkillButtonAction _attack,fire1,fire2, defend, acc;
+    
+    Behavior_Transition_Set Behavior_Set_button1, Behavior_Set_button2, Behavior_Set_button3, Behavior_Set_acc_button, Behavior_Set_defend_button;
+    Behavior_Transition_Set Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
+    public void ButtonsFeatureLoad(BehaviorRunner behaviorRunner, List<Behavior_Transition_Set> Options,List<Behavior_Transition_Set> Options_preview)
+    {
+        Behavior_Set_button1 = null;
+        Behavior_Set_button2 = null;
+        Behavior_Set_button3 = null;
+        Behavior_Set_acc_button = null;
+        Behavior_Set_defend_button = null;
+        
+        for (int i = 0; i < Options.Count; i++)
+        {
+            switch (Options[i].enterInput)
+            {
+                case Inputs_defined.Attack:
+                    Behavior_Set_button1 = Options[i];
+                    break;
+                case Inputs_defined.Fire1:
+                    Behavior_Set_button2 = Options[i];
+                    break;
+                case Inputs_defined.Fire2:
+                    Behavior_Set_button3 = Options[i];
+                    break;
+                case Inputs_defined.Dash:
+                    Behavior_Set_acc_button = Options[i];
+                    break;
+                case Inputs_defined.Defend:
+                    Behavior_Set_defend_button = Options[i];
+                    break;
+            }
+        }
+        
+        void Defend()
+        {
+            if (Behavior_Set_defend_button != null)
+                behaviorRunner.ChangeState("Defend");
+        }
+        defend = Defend;
+
+        void Acc()
+        {
+            if (Behavior_Set_acc_button != null)
+                behaviorRunner.ChangeState(Behavior_Set_acc_button.StateKey);
+        }
+        acc = Acc;
+        
+        if (Options_lastframe[Inputs_defined.Attack] != Behavior_Set_button1)
+        {
+            void AttackTrigger()
+            {
+                if (Behavior_Set_button1 != null)
+                {
+                    MobileInputsManager.SkillButtonExplosion(Behavior_Set_button1.enterInput, Behavior_Set_button1.SPLevel);
+                    behaviorRunner.ChangeState(Behavior_Set_button1.StateKey);
+                }
+            }
+            _attack = AttackTrigger;
+        }
+        
+        if (Options_lastframe[Inputs_defined.Fire1] != Behavior_Set_button2)
+        {
+            void AttackTrigger()
+            {
+                if (Behavior_Set_button2 != null)
+                {
+                    MobileInputsManager.SkillButtonExplosion(Behavior_Set_button2.enterInput, Behavior_Set_button2.SPLevel);
+                    behaviorRunner.ChangeState(Behavior_Set_button2.StateKey);
+                }
+            }
+            fire1 = AttackTrigger;
+        }
+        
+        if (Options_lastframe[Inputs_defined.Fire2] != Behavior_Set_button3)
+        {
+            void AttackTrigger()
+            {
+                if (Behavior_Set_button3 != null)
+                {
+                    MobileInputsManager.SkillButtonExplosion(Behavior_Set_button3.enterInput, Behavior_Set_button3.SPLevel);
+                    behaviorRunner.ChangeState(Behavior_Set_button3.StateKey);
+                }
+            }
+            fire2 = AttackTrigger;
+        }
+        
+        //------------
+        
+        Behavior_preview_button1 = null; Behavior_preview_button2 = null; Behavior_preview_button3 = null;
+        for (int i = 0; i < Options_preview.Count; i++)
+        {
+            switch (Options_preview[i].enterInput)
+            {
+                case Inputs_defined.Attack:
+                    Behavior_preview_button1 = Options_preview[i];
+                    break;
+                case Inputs_defined.Fire1:
+                    Behavior_preview_button2 = Options_preview[i];
+                    break;
+                case Inputs_defined.Fire2:
+                    Behavior_preview_button3 = Options_preview[i];
+                    break;
+            }
+        }
+        if (Options_lastframe[Inputs_defined.Attack] != Behavior_preview_button1)
+        {
+            ChangeButtonPatternNewTest(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SPLevel : -1);
+        }
+        if (Options_lastframe[Inputs_defined.Fire1] != Behavior_preview_button2)
+        {
+            ChangeButtonPatternNewTest(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SPLevel : -1);
+        }
+        if (Options_lastframe[Inputs_defined.Fire2] != Behavior_preview_button3)
+        {
+            ChangeButtonPatternNewTest(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SPLevel : -1);
+        }
+        
+        Options_lastframe[Inputs_defined.Attack] = Behavior_Set_button1;
+        Options_lastframe[Inputs_defined.Fire1] = Behavior_Set_button2;
+        Options_lastframe[Inputs_defined.Fire2] = Behavior_Set_button3;
+    }
+
+    void Update()
+    {
+        CheckIfPlayerIsInputting();
+        if (attackButtonHover)
+            _attack();
+        if (fire1ButtonHover)
+            fire1();
+        if (fire2ButtonHover)
+            fire2();
+        if (accButtonHover)
+            acc();
+        if (defendButtonHover)
+            defend();
+    }
+
+    static bool attackButtonHover;
+    public void AttackDown()
+    {
+        attackButtonHover = true;
         StartPressing(Attack);
     }
-    public void AttackButtonUp()
+    public void AttackUp()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Attack.input_state = false;
-        }
+        attackButtonHover = false;
         StopPressing();
     }
-
-    public void Fire1ButtonDown()
+    
+    static bool fire1ButtonHover;
+    public void Fire1Down()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Fire1.input_state = true;
-        }
+        fire1ButtonHover = true;
         StartPressing(Fire1);
     }
-    public void Fire1ButtonUp()
+    public void Fire1Up()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Fire1.input_state = false;
-        }
+        fire1ButtonHover = false;
         StopPressing();
     }
-
-    public void Fire2ButtonDown()
+    
+    static bool fire2ButtonHover;
+    public void Fire2Down()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Fire2.input_state = true;
-        }
+        fire2ButtonHover = true;
         StartPressing(Fire2);
     }
-    public void Fire2ButtonUp()
+    public void Fire2Up()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Fire2.input_state = false;
-        }
+        fire2ButtonHover = false;
         StopPressing();
     }
 
     public void DefendDown()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Defend.input_state = true;
-            watchingInputManger.Defend_Cancel.input_state = false;
-        }
+        defendButtonHover = true;
         StartPressing(Defend);
     }
     public void DefendUp()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Defend_Cancel.input_state = true;
-            watchingInputManger.Defend.input_state = false;
-        }
+        defendButtonHover = false;
         StopPressing();
     }
 
+    static bool accButtonHover;
     public void RushDown()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Dash.input_state = true;
-        }
+        accButtonHover = true;
         StartPressing(Dash);
     }
     public void RushUp()
     {
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Dash.input_state = false;
-        }
+        accButtonHover = false;
         StopPressing();
     }
 
@@ -240,23 +380,8 @@ public class MobileInputsManager : MonoBehaviour {
         Attack.gameObject.SetActive(true);
         Fire1.gameObject.SetActive(true);
         Fire2.gameObject.SetActive(true);
-
-        if (watchingInputManger.inputStateDic.ContainsKey(Inputs_defined.Defend))
-            Defend.gameObject.SetActive(true);
-        else
-            Defend.gameObject.SetActive(false);
-
-        if (watchingInputManger.inputStateDic.ContainsKey(Inputs_defined.Dash))
-            Dash.gameObject.SetActive(true);
-        else
-            Dash.gameObject.SetActive(false);
-
-        lastSkillSPlevel = new Dictionary<Inputs_defined, int>()
-        {
-            {Inputs_defined.Attack,-1},
-            {Inputs_defined.Fire1,-1},
-            {Inputs_defined.Fire2,-1}
-        };
+        Defend.gameObject.SetActive(true);
+        Dash.gameObject.SetActive(true);
     }
 
     public void TurnOffButtons()
@@ -266,56 +391,11 @@ public class MobileInputsManager : MonoBehaviour {
         Fire2.gameObject.SetActive(false);
         Defend.gameObject.SetActive(false);
         Dash.gameObject.SetActive(false);
-
-        if (watchingInputManger != null)
-        {
-            watchingInputManger.Attack.input_state = false;
-            watchingInputManger.Fire1.input_state = false;
-            watchingInputManger.Fire2.input_state = false;
-            watchingInputManger.Defend.input_state = false;
-            watchingInputManger.Defend_Cancel.input_state = false;
-            watchingInputManger.Dash.input_state = false;
-
-            watchingInputManger = null;
-        }
+        Observing_Runner = null;
         if (_focusingButtonEffectsGroup != null)
             _focusingButtonEffectsGroup.Close();
     }
-        
-    public void RefreshButtonPattern()
-    {
-        if (watchingInputManger == null)
-            return;
-        //那么这里面就完全不包括对防御和机动键的处理了。。。去看nextSkillSPlevel这个东西里面也是只有三个攻击键。
-        //如此一来我们是打算把防御和机动键给做成完全固定的。
-        foreach (KeyValuePair<Inputs_defined, int> _pair in watchingInputManger.nextSkillSPlevel)
-        {
-            switch (_pair.Key)
-            {
-                case Inputs_defined.Attack:
-                    if (_pair.Value != lastSkillSPlevel[_pair.Key])
-                        ChangeButtonPatternNewTest(Attack, _pair.Value);
-                    break;
-                case Inputs_defined.Fire1:
-                    if (_pair.Value != lastSkillSPlevel[_pair.Key])
-                        ChangeButtonPatternNewTest(Fire1, _pair.Value);
-                    break;
-                case Inputs_defined.Fire2:
-                    if (_pair.Value != lastSkillSPlevel[_pair.Key])
-                    {
-                        ChangeButtonPatternNewTest(Fire2, _pair.Value);
-                    }
-                    break;
-            }
 
-            if (_pair.Value == -1)
-            {
-                watchingInputManger.inputStateDic[_pair.Key].input_state = false;
-            }
-            lastSkillSPlevel[_pair.Key] = _pair.Value;
-        }        
-    }
-    
     static Vector2 buttonAnchorPosition;
     static Vector2 true_buttonAnchorPosition;
     static Vector3 buttonWorldPosition;

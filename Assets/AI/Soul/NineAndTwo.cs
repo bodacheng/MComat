@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Inputs;
 
-//这个模块也将扮演数据库和AI模块接口的作用。
+// 这个模块也将扮演数据库和AI模块接口的作用。
 // 玩家存档中的各个角色信息最后会转化出这样一个类的实例。从而很重要一点————要看明白哪些信息是能保存数据库的。
 // 实际上D,M,R按照现在的企划看全是角色被动，那么原则上他们确实不应该和其他技能登陆在一个技能配置文件里，也不需要有对应ID
 // 既然D,M,R是被动，那按理说九宫格信息的各种处理应该是在角色读取前执行，先决定DMR,再批处理12宫技能。
@@ -308,144 +307,100 @@ public class NineAndTwo {
         {
             A_list.Add(A1);
             H1_list.Add(A1);
+            A1.enterInput = Inputs_defined.Attack;
+            A1.exitInput = Inputs_defined.Null;
         }
         if (A2 != null)
         {
             A_list.Add(A2);
             H2_list.Add(A2);
+            A2.enterInput = Inputs_defined.Attack;
+            A2.exitInput = Inputs_defined.Null;
         }
         if (A3 != null)
         {
             A_list.Add(A3);
             H3_list.Add(A3);
+            A3.enterInput = Inputs_defined.Attack;
+            A3.exitInput = Inputs_defined.Null;
         }
 
         if (B1 != null)
         {
             B_list.Add(B1);
             H1_list.Add(B1);
+            B1.enterInput = Inputs_defined.Fire1;
+            B1.exitInput = Inputs_defined.Null;
         }
         if (B2 != null)
         {
             B_list.Add(B2);
             H2_list.Add(B2);
+            B2.enterInput = Inputs_defined.Fire1;
+            B2.exitInput = Inputs_defined.Null;
         }
         if (B3 != null)
         {
             B_list.Add(B3);
             H3_list.Add(B3);
+            B3.enterInput = Inputs_defined.Fire1;
+            B3.exitInput = Inputs_defined.Null;
         }
 
         if (C1 != null)
         {
             C_list.Add(C1);
             H1_list.Add(C1);
+            C1.enterInput = Inputs_defined.Fire2;
+            C1.exitInput = Inputs_defined.Null;
         }
         if (C2 != null)
         {
             C_list.Add(C2);
             H2_list.Add(C2);
+            C2.enterInput = Inputs_defined.Fire2;
+            C2.exitInput = Inputs_defined.Null;
         }
         if (C3 != null)
         {
             C_list.Add(C3);
             H3_list.Add(C3);
+            C3.enterInput = Inputs_defined.Fire2;
+            C3.exitInput = Inputs_defined.Null;
         }
 
         for (int i = 0; i < A_list.Count; i++)
         {
             List<Behavior_Transition_Set> casualT0 = new List<Behavior_Transition_Set>();
-            if (i == 0)
-            {
-                A_list[i].enterInput = Inputs_defined.Attack;
-                A_list[i].exitInput = Inputs_defined.Null;
-            }else{
-                A_list[i].enterInput = Inputs_defined.Null;
-                A_list[i].exitInput = Inputs_defined.Null;
-            }
-
-            if (i + 1 < A_list.Count)
-            {
-                Behavior_Transition_Set State_Rate_Set =
-                    new Behavior_Transition_Set(
-                    A_list[i + 1].StateKey,
-                    A_list[i + 1].stateType,
-                    A_list[i + 1].AT,
-                    A_list[i + 1].AI_trigger_ranges,
-                    true, 
-                    Inputs_defined.Attack, Inputs_defined.Null, A_list[i + 1].SPLevel);
-                casualT0.Add(State_Rate_Set);
-            }
-
             switch (i)
             {
                 case 0://查H2
                     for (int y = 0; y < H2_list.Count; y++)
                     {
-                        if (!A_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
-                        {
-                            Inputs_defined casualtokey = Inputs_defined.Null;
-                            if (B_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire1;
-                            }
-                            if (C_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire2;
-                            }
-
-                            Behavior_Transition_Set State_Rate_Set =
-                                new Behavior_Transition_Set(
-                                H2_list[y].StateKey,
-                                H2_list[y].stateType,
-                                H2_list[y].AT,
-                                H2_list[y].AI_trigger_ranges,
-                                true,
-                                casualtokey, Inputs_defined.Null, 
-                                H2_list[y].SPLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
+                        casualT0.Add(H2_list[y]);
                     }
                     break;
                 case 1://查H3
                     for (int y = 0; y < H3_list.Count; y++)
                     {
-                        if (!A_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
-                        {
-                            Inputs_defined casualtokey = Inputs_defined.Null;
-                            if (B_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire1;
-                            }
-                            if (C_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire2;
-                            }
-
-                            Behavior_Transition_Set State_Rate_Set =
-                                new Behavior_Transition_Set(
-                                H3_list[y].StateKey,
-                                H3_list[y].stateType,
-                                H3_list[y].AT,
-                                H3_list[y].AI_trigger_ranges,
-                                true,
-                                casualtokey, Inputs_defined.Null,
-                                H3_list[y].SPLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
+                        casualT0.Add(H3_list[y]);
                     }
                     break;
-                case 2:
+                case 2://查H1
+                    for (int y = 0; y < H1_list.Count; y++)
+                    {
+                        casualT0.Add(H1_list[y]);
+                    }
                     break;
             }
-
-            if (this.R != null)
-                casualT0.Add(this.R);
-            if (this.D != null)
-                casualT0.Add(this.D);
-
+            if (R != null)
+            {
+                casualT0.Add(R);
+            }
+            if (D != null)
+            {
+                casualT0.Add(D);
+            }
             A_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
 
@@ -453,99 +408,35 @@ public class NineAndTwo {
         for (int i = 0; i < B_list.Count; i++)
         {
             List<Behavior_Transition_Set> casualT0 = new List<Behavior_Transition_Set>();
-            if (i == 0)
-            {
-                B_list[i].enterInput = Inputs_defined.Fire1;
-                B_list[i].exitInput = Inputs_defined.Null;
-            }
-            else
-            {
-                B_list[i].enterInput = Inputs_defined.Null;
-                B_list[i].exitInput = Inputs_defined.Null;
-            }
-
-            if (i + 1 < B_list.Count)
-            {
-                Behavior_Transition_Set State_Rate_Set =
-                    new Behavior_Transition_Set(
-                    B_list[i + 1].StateKey,
-                    B_list[i + 1].stateType,
-                    B_list[i + 1].AT,
-                    B_list[i + 1].AI_trigger_ranges,
-                    true, Inputs_defined.Fire1, Inputs_defined.Null, 
-                    B_list[i + 1].SPLevel);
-                casualT0.Add(State_Rate_Set);
-            }
-
             switch (i)
             {
                 case 0://查H2
                     for (int y = 0; y < H2_list.Count; y++)
                     {
-                        if (!B_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
-                        {
-                            Inputs_defined casualtokey = Inputs_defined.Null;
-                            if (A_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Attack;
-                            }
-                            if (C_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire2;
-                            }
-
-                            Behavior_Transition_Set State_Rate_Set =
-                                new Behavior_Transition_Set(
-                                H2_list[y].StateKey,
-                                H2_list[y].stateType,
-                                H2_list[y].AT,
-                                H2_list[y].AI_trigger_ranges,
-                                true,
-                                casualtokey, Inputs_defined.Null,
-                                H2_list[y].SPLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
+                        casualT0.Add(H2_list[y]);
                     }
                     break;
                 case 1://查H3
                     for (int y = 0; y < H3_list.Count; y++)
                     {
-                        if (!B_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
-                        {
-                            Inputs_defined casualtokey = Inputs_defined.Null;
-                            if (A_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Attack;
-                            }
-                            if (C_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire2;
-                            }
-
-                            Behavior_Transition_Set State_Rate_Set =
-                                new Behavior_Transition_Set(
-                                H3_list[y].StateKey,
-                                H3_list[y].stateType,
-                                H3_list[y].AT,
-                                H3_list[y].AI_trigger_ranges,
-                                true,
-                                casualtokey, Inputs_defined.Null,
-                                H3_list[y].SPLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
+                        casualT0.Add(H3_list[y]);
                     }
                     break;
-                case 2:
+                case 2://查H1
+                    for (int y = 0; y < H1_list.Count; y++)
+                    {
+                        casualT0.Add(H1_list[y]);
+                    }
                     break;
             }
-
-            if (this.R != null)
-                casualT0.Add(this.R);
-            if (this.D != null)
-                casualT0.Add(this.D);
-
+            if (R != null)
+            {
+                casualT0.Add(R);
+            }
+            if (D != null)
+            {
+                casualT0.Add(D);
+            }
             B_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
         //////////////////////////////////
@@ -553,98 +444,35 @@ public class NineAndTwo {
         for (int i = 0; i < C_list.Count; i++)
         {
             List<Behavior_Transition_Set> casualT0 = new List<Behavior_Transition_Set>();
-            if (i == 0)
-            {
-                C_list[i].enterInput = Inputs_defined.Fire2;
-                C_list[i].exitInput = Inputs_defined.Null;
-            }
-            else
-            {
-                C_list[i].enterInput = Inputs_defined.Null;
-                C_list[i].exitInput = Inputs_defined.Null;
-            }
-
-            if (i + 1 < C_list.Count)
-            {
-                Behavior_Transition_Set State_Rate_Set =
-                    new Behavior_Transition_Set(
-                    C_list[i + 1].StateKey,
-                    C_list[i + 1].stateType,
-                    C_list[i + 1].AT,
-                    C_list[i + 1].AI_trigger_ranges,
-                    true,Inputs_defined.Fire2, Inputs_defined.Null, 
-                    C_list[i + 1].SPLevel);
-                casualT0.Add(State_Rate_Set);
-            }
-
             switch (i)
             {
                 case 0://查H2
                     for (int y = 0; y < H2_list.Count; y++)
                     {
-                        if (!C_list.Contains(H2_list[y]))//每个横行由上面的代码处理。
-                        {
-                            Inputs_defined casualtokey = Inputs_defined.Null;
-                            if (A_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Attack;
-                            }
-                            if (B_list.Contains(H2_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire1;
-                            }
-
-                            Behavior_Transition_Set State_Rate_Set =
-                                new Behavior_Transition_Set(
-                                H2_list[y].StateKey,
-                                H2_list[y].stateType,
-                                H2_list[y].AT,
-                                H2_list[y].AI_trigger_ranges,
-                                true,
-                                casualtokey, Inputs_defined.Null,
-                                H2_list[y].SPLevel);
-
-                            casualT0.Add(State_Rate_Set);
-                        }
+                        casualT0.Add(H2_list[y]);
                     }
                     break;
                 case 1://查H3
                     for (int y = 0; y < H3_list.Count; y++)
                     {
-                        if (!C_list.Contains(H3_list[y]))//每个横行由上面的代码处理。
-                        {
-                            Inputs_defined casualtokey = Inputs_defined.Null;
-                            if (A_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Attack;
-                            }
-                            if (B_list.Contains(H3_list[y]))
-                            {
-                                casualtokey = Inputs_defined.Fire1;
-                            }
-
-                            Behavior_Transition_Set State_Rate_Set =
-                                new Behavior_Transition_Set(
-                                H3_list[y].StateKey,
-                                H3_list[y].stateType,
-                                H3_list[y].AT,
-                                H3_list[y].AI_trigger_ranges,
-                                true,
-                                casualtokey, Inputs_defined.Null,
-                                H3_list[y].SPLevel);
-                            casualT0.Add(State_Rate_Set);
-                        }
+                        casualT0.Add(H3_list[y]);
                     }
                     break;
-                case 2:
+                case 2://查H1
+                    for (int y = 0; y < H1_list.Count; y++)
+                    {
+                        casualT0.Add(H1_list[y]);
+                    }
                     break;
             }
-
-            if (this.R != null)
-                casualT0.Add(this.R);
-            if (this.D != null)
-                casualT0.Add(this.D);
-
+            if (R != null)
+            {
+                casualT0.Add(R);
+            }
+            if (D != null)
+            {
+                casualT0.Add(D);
+            }
             C_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
 
@@ -657,24 +485,11 @@ public class NineAndTwo {
             chuanEndCasualT0.Add(C1);
         if (D != null)
             chuanEndCasualT0.Add(D);
-
-        if (this.R != null)//意思就是说，机动类技能不再能取消迁移至机动类技能
-        {
+        
+        if (this.R != null)
             this.R.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
-            chuanEndCasualT0.Add(R);
-        }
-
-        if (A3 != null)
-        {
-            A3.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
-        }
-        if (B3 != null)
-        {
-            B3.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
-        }
-        if (C3 != null)
-        {
-            C3.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
+        else{
+            Debug.Log("?");
         }
     }
 

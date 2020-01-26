@@ -31,7 +31,6 @@ public partial class Animation_Manger : MonoBehaviour
     public AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
     public AnimationClip _toUse;
     public Data_Center _C;
-    
     AnimatorOverrideController animatorOverride;
     bool doNothingFlag;
     string toRunAniName;
@@ -108,7 +107,10 @@ public partial class Animation_Manger : MonoBehaviour
     public void PlayLayerAnim(string clip_name)
     {
         if (clip_name == null)
+        {
             _toUse = null;
+        }
+
         AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(1);
         if (AnimatorStateInfo.IsName("Full Body.null"))
         {

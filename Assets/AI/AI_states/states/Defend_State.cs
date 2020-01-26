@@ -10,9 +10,9 @@ public class Defend_State : Behavior
     float time;
     float used_block_least_time;
     int DefendHP = 10;
-    readonly float DefendHpRefreshTime = 5f;
     float lastExitTime;
     
+    readonly float DefendHpRefreshTime = 5f;    
     List<Collider> damagingweaponList;
     List<Collider> nearbyenemymeat;
     Vector3 fixDesPos;
@@ -79,7 +79,7 @@ public class Defend_State : Behavior
         _SkillCancelFlag.turn_off_flag();
          //this.AI_DATA_CENTER.turnShield(true);
     }
-    
+
     public override void AI_State_enter(V_Damage newValue)
     {
         base.AI_State_enter();

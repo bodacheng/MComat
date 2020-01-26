@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Inputs;
 
 namespace Soul
 {
@@ -19,7 +18,6 @@ namespace Soul
         public BasicPhysicSupport _BasicPhysicSupport;
         public Sensor Sensor;
         public Controller controller;
-        public InputManager _inputManager;
         public Animator _Animator;
         public SkillCancelFlag _SkillCancelFlag;
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
@@ -51,7 +49,6 @@ namespace Soul
             this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
             this.controller = _DATA_CENTER.controller;
-            this._inputManager = controller._inputManager;
             this._SkillCancelFlag = _DATA_CENTER._SkillCancelFlag;
             this._BO_Ani_E = _DATA_CENTER._BO_Ani_E;
             this._Weapon_Animation_Events = _DATA_CENTER.bO_Weapon_Animation_Events;
