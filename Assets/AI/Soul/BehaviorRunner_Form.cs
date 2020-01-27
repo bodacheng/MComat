@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Soul
 {
     public partial class BehaviorRunner : MonoBehaviour
     {
-        public IDictionary<string, List<string>> RespondAndCondition = new Dictionary<string, List<string>>();
-        public MultiDictionary<string, string, int> RespondAndConditionPriority = new MultiDictionary<string, string, int>();
-        //public IDictionary<KeyValuePair<string, string>, int> RespondAndConditionPriority = new Dictionary<KeyValuePair<string, string>, int>();
+        public IDictionary<string, List<string>> ConditionAndRespond = new Dictionary<string, List<string>>();
+        public List<string> AllConditionCodes;
+        public MultiDictionary<string, string, int> ConditionAndRespondPriority = new MultiDictionary<string, string, int>();
         
-        void RegisterConditionToRespond(KeyValuePair<string, string> BeheviourAndConditioncode)//string target_beheviour,string condition_code
+        void RegisterConditionToRespond(KeyValuePair<string, string> ConditionAndBeheviourcode)//string target_beheviour,string condition_code
         {
-            if (RespondAndCondition.ContainsKey(BeheviourAndConditioncode.Key))
+            if (ConditionAndRespond.ContainsKey(ConditionAndBeheviourcode.Key))
             {
-                RespondAndCondition[BeheviourAndConditioncode.Key].Add(BeheviourAndConditioncode.Value);
+                ConditionAndRespond[ConditionAndBeheviourcode.Key].Add(ConditionAndBeheviourcode.Value);
             }
             else{
-                RespondAndCondition.Add(BeheviourAndConditioncode.Key,new List<string>() { BeheviourAndConditioncode.Value});
+                ConditionAndRespond.Add(ConditionAndBeheviourcode.Key,new List<string>() { ConditionAndBeheviourcode.Value});
             }
         }
-               
+
         void AddAITriggerConditionToBehavior(Behavior behavior)
         {
             switch(behavior.StateType)
@@ -28,53 +29,51 @@ namespace Soul
                     behavior.strategic_exit_condition_code = "TimeToStopRunning";
                     break;
                 case BehaviorType.AC:
-                    KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>(behavior.StateKey, "LosingDefendStrength");
-                    KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>(behavior.StateKey, "DangerousNearby");
+                    KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior.StateKey);
+                    KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>("DangerousNearby", behavior.StateKey);
                     RegisterConditionToRespond(keyValuePair1);
                     RegisterConditionToRespond(keyValuePair2);
-                    RespondAndConditionPriority.Set(keyValuePair1.Key,keyValuePair1.Value,1);
-                    RespondAndConditionPriority.Set(keyValuePair2.Key,keyValuePair2.Value,2);
-                    //RespondAndConditionPriority.Add(keyValuePair1,1);
-                    //RespondAndConditionPriority.Add(keyValuePair2,2);          
+                    ConditionAndRespondPriority.Set(keyValuePair1.Key,keyValuePair1.Value,1);
+                    ConditionAndRespondPriority.Set(keyValuePair2.Key,keyValuePair2.Value,2);
+                    
                     behavior.strategic_exit_condition_code = null;
                     break;
                 case BehaviorType.CT:                    
-                    KeyValuePair<string, string> keyValuePair_ct = new KeyValuePair<string, string>(behavior.StateKey, "DangerousClose");
+                    KeyValuePair<string, string> keyValuePair_ct = new KeyValuePair<string, string>("DangerousClose", behavior.StateKey);
                     RegisterConditionToRespond(keyValuePair_ct);
-                    //RespondAndConditionPriority.Add(keyValuePair_ct,1);
-                    RespondAndConditionPriority.Set(keyValuePair_ct.Key,keyValuePair_ct.Value,1);
+                    ConditionAndRespondPriority.Set(keyValuePair_ct.Key,keyValuePair_ct.Value,1);
+                    
                     behavior.strategic_exit_condition_code = null;
                     break;
                 case BehaviorType.Def:
-                    KeyValuePair<string, string> keyValuePair_def1 = new KeyValuePair<string, string>(behavior.StateKey, "DangerousVeryClose");
-                    KeyValuePair<string, string> keyValuePair_def2 = new KeyValuePair<string, string>(behavior.StateKey, "MayBeDefend");
+                    KeyValuePair<string, string> keyValuePair_def1 = new KeyValuePair<string, string>("DangerousVeryClose", behavior.StateKey);
+                    KeyValuePair<string, string> keyValuePair_def2 = new KeyValuePair<string, string>("MayBeDefend", behavior.StateKey);
                     RegisterConditionToRespond(keyValuePair_def1);
                     RegisterConditionToRespond(keyValuePair_def2);
-                    //RespondAndConditionPriority.Add(keyValuePair_def1,2);
-                    //RespondAndConditionPriority.Add(keyValuePair_def2,3);
-                    RespondAndConditionPriority.Set(keyValuePair_def1.Key,keyValuePair_def1.Value,2);
-                    RespondAndConditionPriority.Set(keyValuePair_def2.Key,keyValuePair_def2.Value,3);
+                    ConditionAndRespondPriority.Set(keyValuePair_def1.Key,keyValuePair_def1.Value,2);
+                    ConditionAndRespondPriority.Set(keyValuePair_def2.Key,keyValuePair_def2.Value,3);
+                    
                     behavior.strategic_exit_condition_code = "TimeToRespond";
                     break;
                 case BehaviorType.GR:
-                    KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>(behavior.StateKey, "TimeToAttack");
+                    KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack", behavior.StateKey);
                     RegisterConditionToRespond(keyValuePair_gr);
-                    //RespondAndConditionPriority.Add(keyValuePair_gr,2);
-                    RespondAndConditionPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+                    ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+                    
                     behavior.strategic_exit_condition_code = null;
                     break;
                 case BehaviorType.GI:
-                    KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>(behavior.StateKey, "TimeToAttack");
+                    KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("TimeToAttack", behavior.StateKey);
                     RegisterConditionToRespond(keyValuePair_gi);
-                    //RespondAndConditionPriority.Add(keyValuePair_gi,2);
-                    RespondAndConditionPriority.Set(keyValuePair_gi.Key,keyValuePair_gi.Value,2);
+                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key,keyValuePair_gi.Value,2);
+                    
                     behavior.strategic_exit_condition_code = null;
                     break;
                 case BehaviorType.GM:
-                    KeyValuePair<string, string> keyValuePair_gm = new KeyValuePair<string, string>(behavior.StateKey, "TimeToDashAttack");
+                    KeyValuePair<string, string> keyValuePair_gm = new KeyValuePair<string, string>("TimeToDashAttack", behavior.StateKey);
                     RegisterConditionToRespond(keyValuePair_gm);
-                    //RespondAndConditionPriority.Add(keyValuePair_gm,2);
-                    RespondAndConditionPriority.Set(keyValuePair_gm.Key,keyValuePair_gm.Value,2);
+                    ConditionAndRespondPriority.Set(keyValuePair_gm.Key,keyValuePair_gm.Value,2);
+                    
                     behavior.strategic_exit_condition_code = null;                  
                     break;
                 default:
@@ -96,7 +95,8 @@ namespace Soul
             _States_Incubator = new Behaviors_Incubator(type, empty_State,this.Behaviour_Transition_Dictionary);
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
             Behaviour_Dictionary = new Dictionary<string, Behavior>();
-
+            ConditionAndRespondPriority = new MultiDictionary<string, string, int>();
+            
             foreach (BehaviorIndex_With_Behavior s in Num_State_List)
             {
                 if (Behaviour_Transition_Dictionary.ContainsKey(s.num))
@@ -114,6 +114,7 @@ namespace Soul
                     Debug.Log("没用上的key？：" + s.num);
                 }
             }
+            AllConditionCodes = ConditionAndRespond.Keys.ToList();
             if (nineAndTwo.GetM_STS() != null)
             {
                 commandWaitingState = Behaviour_Dictionary[nineAndTwo.GetM_STS().StateKey];
