@@ -225,7 +225,7 @@ public class MobileInputsManager : MonoBehaviour {
                 behaviorRunner.ChangeState(Behavior_Set_acc_button.StateKey);
         }
         acc = Acc;
-        
+                       
         if (Options_lastframe[Inputs_defined.Attack] != Behavior_Set_button1)
         {
             void AttackTrigger()

@@ -25,7 +25,7 @@ public class G_Ani_MoveEscape_State : Behavior {
     
     public override bool Capacity_Exit_Condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetAbnormalOnNull();
     }
     Vector3 damagingWeaponComingDirection;
     Vector3 facedirection;

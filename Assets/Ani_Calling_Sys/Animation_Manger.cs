@@ -25,15 +25,23 @@ using DG.Tweening;
 //再去向第三者状态迁移，之前的迁移过程并不会受干扰，后触发的迁移条件也并不会被遗忘，一切会按顺序进行
 //从而也就是说对最后要触发那个状态来说，从条件激活到开始进入会发生一点延迟。
 
+// The process state of the corotine of a AI_State
+public enum AnimationPlaying_Step
+{
+    unstarted = 1,
+    started = 2,
+    running = 3,
+    over = 4
+}
+
 public partial class Animation_Manger : MonoBehaviour
 {
     public Animator Animator;
     public AnimationPlaying_Step Coroutine_Step = AnimationPlaying_Step.unstarted;
     public AnimationClip _toUse;
     public Data_Center _C;
-    AnimatorOverrideController animatorOverride;
+    
     bool doNothingFlag;
-    string toRunAniName;
     string fullbodylayer_return_trigger_name;
     string to_be_override_animation_name;
     string trigger_name;
@@ -49,34 +57,35 @@ public partial class Animation_Manger : MonoBehaviour
     {
         return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null");
     }
-    
-    public bool GetIfOnNull()//角色莫名其妙不动了的bug，目前怀疑是因为某种原因ThisIsEndOfAnimation根本没跑，并且动画层返回null state。于是为了抵消这种情况，技能结束判断里加了这个条件判断。
+
+    int avoid_newAnimStartChaos = 0;
+    public bool GetAbnormalOnNull()//角色莫名其妙不动了的bug，目前怀疑是因为某种原因ThisIsEndOfAnimation根本没跑，并且动画层返回null state。于是为了抵消这种情况，技能结束判断里加了这个条件判断。
     {
-        if (Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null"))
+        if (Coroutine_Step == AnimationPlaying_Step.started) //刚刚才开始触发一个动画，条件里的后者还不为真
+        {
+            avoid_newAnimStartChaos++;
+            if (avoid_newAnimStartChaos == 7)
+            {
+                Coroutine_Step = AnimationPlaying_Step.running;
+                avoid_newAnimStartChaos = 0;
+            }
+            return false;
+        }
+        if (Coroutine_Step == AnimationPlaying_Step.running && Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")) //动画在应该结束的时候却不正常的出于running，虽然本身已经至0
+        {
             return true;
+        }
         return false;
     }
-    
+
     public void FrameFreeze()
     {
         DOTween.To(() => Animator.speed, x => Animator.speed = x, 0f, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, 1f, 0.05f).SetEase(Ease.InExpo); });
     }
-
+    
     public void SetAnimationPlayingStep(AnimationPlaying_Step _step)
     {
         Coroutine_Step = _step;
-    }
-
-    public void AnimationTrigger(AnimationClip clip)
-    {
-        PlayLayerAnim_clip(clip);
-        SetAnimationPlayingStep(AnimationPlaying_Step.running);
-    }
-
-    public void AnimationTrigger(string clip_name)
-    {
-        PlayLayerAnim(clip_name);
-        SetAnimationPlayingStep(AnimationPlaying_Step.running);
     }
 
     public AnimationPlaying_Step GetAnimationPlayingStep()
@@ -99,6 +108,18 @@ public partial class Animation_Manger : MonoBehaviour
             }
         }
         return null;
+    }
+    
+    public void AnimationTrigger(string clip)
+    {
+        SetAnimationPlayingStep(AnimationPlaying_Step.started);
+        PlayLayerAnim(clip);
+    }
+    
+    public void AnimationTrigger(AnimationClip clip)
+    {
+        SetAnimationPlayingStep(AnimationPlaying_Step.started);
+        PlayLayerAnim_clip(clip);
     }
 
     AnimatorStateInfo _BaseAnimatorStateInfo;
@@ -259,11 +280,11 @@ public partial class Animation_Manger : MonoBehaviour
                 }
             }
         }
-        toRunAniName = clip_name;
-        The_trigger(toRunAniName, doNothingFlag);
+        The_trigger(clip_name, doNothingFlag);
         doNothingFlag = false;
     }
-
+    
+    AnimatorOverrideController animatorOverride;
     void The_trigger(string clip_name,bool _doNothingFlag)
     {
         if (_doNothingFlag)
@@ -313,10 +334,12 @@ public partial class Animation_Manger : MonoBehaviour
         }
         else
         {
-            if (fullbodylayer_return_trigger_name != null)
-            {
-                Animator.SetTrigger(fullbodylayer_return_trigger_name);
-            }
+            //if (fullbodylayer_return_trigger_name != null)
+            //{
+            //    Animator.SetTrigger(fullbodylayer_return_trigger_name); 20200128 comment out. 因为发现动画切换速度过快时候return trigger判定机制也不可靠。干脆把两个return trigger都运行。
+            //}
+            Animator.SetTrigger("fullbody_return1");
+            Animator.SetTrigger("fullbody_return2");
         }
     }
 }

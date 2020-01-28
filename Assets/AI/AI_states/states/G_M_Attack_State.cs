@@ -73,7 +73,7 @@ public class G_M_Attack_State : Behavior {
 
 	public override bool Capacity_Exit_Condition()
 	{
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetAbnormalOnNull();
     }
 
 	public override void AI_State_exit()

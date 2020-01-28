@@ -32,7 +32,7 @@ public class ShaderManager : MonoBehaviour
             pOFXes[i].enabled = true;
             POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
             RIMlayer.m_cParams.color = color;
-            //DOTween.To(() => RIMlayer.m_cParams.intensity,x => RIMlayer.m_cParams.intensity = x, intensity, time);
+            DOTween.To(() => RIMlayer.m_cParams.intensity,x => RIMlayer.m_cParams.intensity = x, intensity, time);
         }
     }
 
@@ -41,7 +41,7 @@ public class ShaderManager : MonoBehaviour
         for (int i = 0; i < pOFXes.Count; i++)
         {
             POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
-            //DOTween.To(() => RIMlayer.m_cParams.intensity,x => RIMlayer.m_cParams.intensity = x, 0, cleartime).OnComplete(() => { RIMlayer.enabled = false; });
+            DOTween.To(() => RIMlayer.m_cParams.intensity,x => RIMlayer.m_cParams.intensity = x, 0, cleartime).OnComplete(() => { RIMlayer.enabled = false; });
         }
     }
 
@@ -51,7 +51,7 @@ public class ShaderManager : MonoBehaviour
         {
             POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
             RIMlayer.m_cParams.color = targetColor;
-            //DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, tartget_intensity, time).OnComplete(() => { DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, time); });
+            DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, tartget_intensity, time).OnComplete(() => { DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, time); });
         }
     }
 }

@@ -228,7 +228,7 @@ public partial class Data_Center : MonoBehaviour
             //Shield.EnableShieldCollider();   
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (_MyBehaviorRunner.IfRunning())
         {

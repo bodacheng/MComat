@@ -150851,7 +150851,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.41460454, g: 0.18382353, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.6397566, b: 0.18382353, a: 1}
+      maxColor: {r: 0.43867922, g: 0.81895304, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -175308,31 +175308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03493d0e00b7e4d4c853685b1c2754b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterType: 
-  State_Transition_Set_List: []
-  _SkillCancelFlag: {fileID: 1076773248106846678}
-  controller: {fileID: 0}
-  CurrentStateTransitionSet:
-    StateKey: 
-    stateType: 0
-    AT: 0
-    ai_trigger_ranges: 
-    casual_to_state_Sets: []
-    can_be_cancelled_to: 1
-    enterInput: -1
-    exitInput: -1
-    SPLevel: 0
-    rarelevel: 0
-    forced_to_state_nums: []
-  avaliable_casual_Transitions: []
-  avaliable_forced_Transitions: []
-  SRTListForCasualTransitionbuttonRefresh: []
-  AI_States_path: 
-  usingScript: {fileID: 0}
 --- !u!4 &8649081273797068995
 Transform:
   m_ObjectHideFlags: 0

@@ -7,16 +7,17 @@ public class Defend_State : Behavior
 {
     readonly string defend_clip_name;
     readonly string block_break_name;
+    readonly float DefendHpRefreshTime = 5f;
+    
     float time;
     float used_block_least_time;
     int DefendHP = 10;
     float lastExitTime;
-    
-    readonly float DefendHpRefreshTime = 5f;    
+        
     List<Collider> damagingweaponList;
     List<Collider> nearbyenemymeat;
     Vector3 fixDesPos;
-
+    
     public Defend_State(string defend_clip_name,string block_break_name)
     {
         this.defend_clip_name = defend_clip_name;

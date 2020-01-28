@@ -413,11 +413,3 @@ namespace Soul
         #endregion
     }
 }
-
-// The process state of the corotine of a AI_State
-public enum AnimationPlaying_Step
-{
-    unstarted = 1,
-    running = 2,
-    over = 3
-}

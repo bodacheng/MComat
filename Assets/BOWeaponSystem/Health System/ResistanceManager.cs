@@ -10,8 +10,11 @@ public class ResistanceManager : MonoBehaviour
     int temp;
     readonly List<SingleAssignmentDisposable> disposabletasks = new List<SingleAssignmentDisposable>();
 
+    Color ResistColor;
+    
     void Awake()
     {
+        ColorUtility.TryParseHtmlString("70D1FF",out ResistColor);
         Resistance.Subscribe(
             x => 
             {
@@ -19,7 +22,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     if (data_Center._ShaderManager != null)
                     {
-                        data_Center._ShaderManager.RimEffectsUp(new Color(1f, 1f, 0.8f), 1 , 0.2f);
+                        data_Center._ShaderManager.RimEffectsUp(ResistColor, 1 , 0.2f);
                     }
                 }
                 else

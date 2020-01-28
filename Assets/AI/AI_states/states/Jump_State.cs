@@ -51,7 +51,7 @@ public class Jump_State : Behavior
 
     public override bool Capacity_Exit_Condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull() || time_counter > this.state_time;
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetAbnormalOnNull() || time_counter > this.state_time;
     }
 
     Vector3 damagingWeaponComingDirection;

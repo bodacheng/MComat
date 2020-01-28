@@ -36,7 +36,7 @@ public class Counter_State : Behavior {
 
 	public override bool Capacity_Exit_Condition()
 	{
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetIfOnNull();
+        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetAbnormalOnNull();
     }
 
 	public override void _State_FixedUpdate1() 
