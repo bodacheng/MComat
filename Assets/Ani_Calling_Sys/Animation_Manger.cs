@@ -162,11 +162,11 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;
+                    fullbodylayer_return_trigger_name = null;//20200129这个地方有点值得怀疑。。。我感觉也可能应该是"fullbody_return1"？
                 }
                 else
                 {
-                    doNothingFlag = true;
+                    doNothingFlag = true;//这个应该的确没有错误
                 }
             }
         }
@@ -180,7 +180,7 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
+                    fullbodylayer_return_trigger_name = "fullbody_return2";//20200130这个地方有点值得怀疑。。。我感觉也可能应该是"fullbody_return1"？但真相可能是压根不会用到
                 }
                 else
                 {
@@ -188,7 +188,7 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
+                    fullbodylayer_return_trigger_name = "fullbody_return2";//这个应该没错。。。
                 }
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null"))
