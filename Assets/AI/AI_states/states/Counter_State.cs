@@ -7,7 +7,7 @@ public class Counter_State : Behavior {
     readonly float RotationAdjustmentTime;
     readonly float rotate_speed;
     readonly int skillEmergentLevel;
-
+    
     public Counter_State(string _clip_name, float _RotationAdjustmentTime, float _rotate_speed)
     {
         clip_name = _clip_name;
@@ -36,7 +36,9 @@ public class Counter_State : Behavior {
 
 	public override bool Capacity_Exit_Condition()
 	{
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetAbnormalOnNull();
+        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
+            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
+            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
     }
 
 	public override void _State_FixedUpdate1() 

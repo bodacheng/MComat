@@ -30,7 +30,7 @@ public class Dash_Back_State : Behavior
 
     public override bool Capacity_enter_condition()
     {
-        return _BasicPhysicSupport.hiddenMethods.Grounded;
+        return _BasicPhysicSupport.hiddenMethods.Grounded && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
     }
     
     //public override bool enter_condition_priority3()
@@ -89,7 +89,9 @@ public class Dash_Back_State : Behavior
 
     public override bool Capacity_Exit_Condition()
     {
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over|| Animation_Manger.GetAbnormalOnNull();
+        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
+            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
+            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
     }
 
     public override void AI_State_exit()

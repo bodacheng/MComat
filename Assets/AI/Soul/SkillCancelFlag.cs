@@ -63,15 +63,10 @@ public class SkillCancelFlag : MonoBehaviour {
         // animationcounter那块就是说，，如果真是两个连续相同状态，如果迁移状态太短了代表那啥，肯定是迁移区间里ThisIsEndOfAnimation被激活了
         // 目前底下这套逻辑决定了，整个游戏不能同样的技能动画迁移至同样的技能动画。
         // 这样的话某一个横行就一个技能，以及闪避技能的自身迁移，都需要注意了。。。可能都要重新设计
-        if (_C.Animation_Manger._toUse == null ||  _C.Animation_Manger._toUse == e.animatorClipInfo.clip)
-        {
-            _C.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.over);
-        }else{
-            //if (_C.Animation_Manger._toUse != e.animatorClipInfo.clip)
-            //{
-            //    Debug.Log(_C.Animation_Manger._toUse + "and" + e.animatorClipInfo.clip + " and current state:" + _C.AIStateRunner.GetCurrentStateNum());
-            //}
-        }
+        //if (_C.Animation_Manger._toUse == null ||  _C.Animation_Manger._toUse == e.animatorClipInfo.clip)
+        //{
+        //    _C.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.over);
+        //}
     }
 
     public void turn_on_flag()

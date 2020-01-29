@@ -58,7 +58,9 @@ namespace mainMenu
             {
                 if (focusingCharacterData.Animation_Manger != null && focusingCharacterData.Animation_Manger.Animator != null && focusingCharacterData.Animation_Manger.gameObject.activeSelf)
                 {
-                    if (focusingCharacterData.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over)
+                    if (!focusingCharacterData.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
+                        && focusingCharacterData.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
+                        && focusingCharacterData.Animation_Manger.Animator.GetNextAnimatorClipInfoCount(1) == 0)
                     {
                         SkillShowT.gameObject.SetActive(true);
                         focusingCharacterData.Animation_Manger.PlayLayerAnim(null);

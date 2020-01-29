@@ -29,9 +29,7 @@ using DG.Tweening;
 public enum AnimationPlaying_Step
 {
     unstarted = 1,
-    started = 2,
-    running = 3,
-    over = 4
+    running = 2
 }
 
 public partial class Animation_Manger : MonoBehaviour
@@ -42,7 +40,6 @@ public partial class Animation_Manger : MonoBehaviour
     public Data_Center _C;
     
     bool doNothingFlag;
-    string fullbodylayer_return_trigger_name;
     string to_be_override_animation_name;
     string trigger_name;
     string pre_overrided_anim_name;
@@ -50,7 +47,15 @@ public partial class Animation_Manger : MonoBehaviour
         
     public bool GetOnAniTransitionFlag()
     {
-        return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
+        return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") 
+                || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
+    }
+    
+    public bool GetOnAniTransitionFlag2()
+    {
+            return !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") 
+                && !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1")
+                && !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.null -> Full Body.full_body_state1");
     }
     
     public bool GetOnAniFinishingFlag()
@@ -58,24 +63,12 @@ public partial class Animation_Manger : MonoBehaviour
         return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null");
     }
 
-    int avoid_newAnimStartChaos = 0;
-    public bool GetAbnormalOnNull()//角色莫名其妙不动了的bug，目前怀疑是因为某种原因ThisIsEndOfAnimation根本没跑，并且动画层返回null state。于是为了抵消这种情况，技能结束判断里加了这个条件判断。
+    void Update()
     {
-        if (Coroutine_Step == AnimationPlaying_Step.started) //刚刚才开始触发一个动画，条件里的后者还不为真
+        if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null") || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null"))
         {
-            avoid_newAnimStartChaos++;
-            if (avoid_newAnimStartChaos == 7)
-            {
-                Coroutine_Step = AnimationPlaying_Step.running;
-                avoid_newAnimStartChaos = 0;
-            }
-            return false;
+            Debug.Log(" dferfe ");
         }
-        if (Coroutine_Step == AnimationPlaying_Step.running && Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")) //动画在应该结束的时候却不正常的出于running，虽然本身已经至0
-        {
-            return true;
-        }
-        return false;
     }
 
     public void FrameFreeze()
@@ -112,19 +105,17 @@ public partial class Animation_Manger : MonoBehaviour
     
     public void AnimationTrigger(string clip)
     {
-        SetAnimationPlayingStep(AnimationPlaying_Step.started);
+        SetAnimationPlayingStep(AnimationPlaying_Step.running);
         PlayLayerAnim(clip);
     }
     
     public void AnimationTrigger(AnimationClip clip)
     {
-        SetAnimationPlayingStep(AnimationPlaying_Step.started);
+        SetAnimationPlayingStep(AnimationPlaying_Step.running);
         PlayLayerAnim_clip(clip);
     }
 
-    AnimatorStateInfo _BaseAnimatorStateInfo;
     AnimatorStateInfo AnimatorStateInfo;
-    AnimatorTransitionInfo _AnimatorTransitionInfo;
     public void PlayLayerAnim(string clip_name)
     {
         if (clip_name == null)
@@ -143,7 +134,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty2";
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = "fullbody_trigger2";
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
                 else if (string.IsNullOrEmpty(clip_name))
                 {
@@ -151,7 +141,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
             }
             else
@@ -162,7 +151,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;//20200129这个地方有点值得怀疑。。。我感觉也可能应该是"fullbody_return1"？
                 }
                 else
                 {
@@ -180,7 +168,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = "fullbody_return2";//20200130这个地方有点值得怀疑。。。我感觉也可能应该是"fullbody_return1"？但真相可能是压根不会用到
                 }
                 else
                 {
@@ -188,7 +175,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return2";//这个应该没错。。。
                 }
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null"))
@@ -199,7 +185,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;
                 }
                 else
                 {
@@ -214,14 +199,12 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty2";
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = "fullbody_trigger2";
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }else{
                     // 0623重大修改！！！！！！
                     //nextStateName = "Full Body.full_body_state1 -> Full Body.null";
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
             }
         }
@@ -235,7 +218,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty2";
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = "fullbody_trigger2";
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
                 else
                 {
@@ -243,7 +225,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null"))
@@ -254,7 +235,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;
                 }
                 else
                 {
@@ -269,14 +249,12 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
                 }else{
                     // 0623重大修改！！！！！！
                     //nextStateName = "Full Body.full_body_state2 -> Full Body.null";
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
                 }
             }
         }
@@ -291,45 +269,21 @@ public partial class Animation_Manger : MonoBehaviour
         {
             return;
         }
-
         if (!string.IsNullOrEmpty(clip_name))
         {
             if (trigger_name != null)
-            {
-                 // 2019.6.1重大修改。
-                //if (pre_overrided_anim_name != null)
-                    //animatorOverride[pre_overrided_anim_name] = currentAnimation;
-                //else
-                    // 0623重大修改！！！！！！把底下这行给comment out了
-                    //myOverrideController[pre_overrided_anim_name] = null;//也就是说从null状态出发的时候
-                
+            {                
                 if (to_be_override_animation_name != null)
                 {
                     animatorOverride[to_be_override_animation_name] = TryAnimationClip(clip_name);
                 }
                 //Animator.runtimeAnimatorController = animatorOverride;
-                Animator.SetTrigger(trigger_name);
-
-//                if (trigger_name == "fullbody_trigger1" && 
-//                    (nextStateName == "Full Body.full_body_state1 -> Full Body.null" || nextStateName == "Full Body.full_body_state1 -> Full Body.full_body_state2" || nextStateName == "Full Body.full_body_state2 -> Full Body.null"))
-//                {
-//                    Debug.Log("!!!!!!!!!!!!!!");
-//                }
-//                if (trigger_name == "fullbody_trigger2" && 
-//                    (nextStateName == "Full Body.full_body_state2 -> Full Body.null" || nextStateName == "Full Body.full_body_state2 -> Full Body.full_body_state1" || nextStateName == "Full Body.full_body_state2 -> Full Body.full_body_state1"))
-//                {
-//                    Debug.Log("!??!?!?!?!?!?!?!");
-//                }
-//                if (nextStateName == "Full Body.full_body_state2 -> Full Body.null" || nextStateName == "Full Body.full_body_state1 -> Full Body.null")
-//                {
-//                    Debug.Log("卧槽啊！！！！！");
-//                }
-
-                //if (myOverrideController[to_be_override_animation_name].name.GetHashCode() != clip_name.GetHashCode())
-                //{
-                    //Debug.Log(myOverrideController[to_be_override_animation_name].name);
-                    //this.bugEmergerd = true;
-                //}
+                if (to_be_override_animation_name == "fullbody_empty2")
+                    Animator.CrossFade("full_body_state2", 0.1f);
+                if (to_be_override_animation_name == "fullbody_empty1")
+                    Animator.CrossFade("full_body_state1", 0.1f);
+                //Animator.SetTrigger(trigger_name);
+                return;
             }
         }
         else
@@ -338,8 +292,9 @@ public partial class Animation_Manger : MonoBehaviour
             //{
             //    Animator.SetTrigger(fullbodylayer_return_trigger_name); 20200128 comment out. 因为发现动画切换速度过快时候return trigger判定机制也不可靠。干脆把两个return trigger都运行。
             //}
-            Animator.SetTrigger("fullbody_return1");
-            Animator.SetTrigger("fullbody_return2");
+            Animator.CrossFade("null", 0.15f);
+            //Animator.SetTrigger("fullbody_return1");
+            //Animator.SetTrigger("fullbody_return2");
         }
     }
 }

@@ -19,7 +19,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty2";
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = "fullbody_trigger2";
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
                 else if (clip == null)
                 {                            
@@ -27,7 +26,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
             }
             else
@@ -38,7 +36,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;
                 }
                 else
                 {
@@ -56,7 +53,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
                 }
                 else
                 {
@@ -64,7 +60,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
                 }
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.null"))
@@ -75,7 +70,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;
                 }
                 else
                 {
@@ -90,14 +84,12 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty2";
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = "fullbody_trigger2";
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }else{
                     // 0623重大修改！！！！！！
                     //nextStateName = "Full Body.full_body_state1 -> Full Body.null";
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
             }
         }
@@ -111,7 +103,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty2";
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = "fullbody_trigger2";
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
                 else
                 {
@@ -119,7 +110,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty1";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return1";
                 }
             }
             else if (Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.null"))
@@ -130,7 +120,6 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = null;
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = null;
                 }
                 else
                 {
@@ -145,14 +134,12 @@ public partial class Animation_Manger : MonoBehaviour
                     to_be_override_animation_name = "fullbody_empty1";
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = "fullbody_trigger1";
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
                 }else{
                     // 0623重大修改！！！！！！
                     //nextStateName = "Full Body.full_body_state2 -> Full Body.null";
                     to_be_override_animation_name = null;
                     pre_overrided_anim_name = "fullbody_empty2";
                     trigger_name = null;
-                    fullbodylayer_return_trigger_name = "fullbody_return2";
                 }
             }
         }
@@ -182,15 +169,15 @@ public partial class Animation_Manger : MonoBehaviour
                     animatorOverride[to_be_override_animation_name] = clip;
                 }
                 //Animator.runtimeAnimatorController = animatorOverride;
-                Animator.SetTrigger(trigger_name);                                    
+                if (to_be_override_animation_name == "fullbody_empty2")
+                    Animator.CrossFade("full_body_state2", 0.1f);
+                if (to_be_override_animation_name == "fullbody_empty1")
+                    Animator.CrossFade("full_body_state1", 0.1f);
             }
         }
         else
         {
-            if (fullbodylayer_return_trigger_name != null)
-            {
-                Animator.SetTrigger(fullbodylayer_return_trigger_name);
-            }
+            Animator.CrossFade("null", 0.15f);
         }
     }
 }

@@ -110,6 +110,7 @@ public partial class G_Attack_State : Behavior {
     public override void AI_State_enter()
 	{
         base.AI_State_enter();
+        nextstateget = false;
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
@@ -180,9 +181,13 @@ public partial class G_Attack_State : Behavior {
         }
     }
 
+    bool nextstateget;
+    AnimatorStateInfo animatorState;
 	public override bool Capacity_Exit_Condition()
-	{       
-        return Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.over || Animation_Manger.GetAbnormalOnNull();
+	{
+        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
+            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
+            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
     }
 
     public override void AI_State_exit()
