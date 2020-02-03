@@ -11,9 +11,9 @@ public class BehaviorRunnerGUI : Editor {
 
     BehaviorRunner myScript;
 
+    bool GUIIniDone;
     GUIStyle ButtonStyle;
     GUIStyle addCasualToButtonStyle,deleteCasualToButtonStyle;
-
     GUIStyle stateKeyGUI;
     GUIStyle attackRangeToggleGUI;
 
@@ -26,44 +26,46 @@ public class BehaviorRunnerGUI : Editor {
     bool LocalResourceReferenceMode;
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
-    
-    //6.14 casual to states里，一个状态的豪气虽然可以设置为不同于首发，但attack种类和范围是不可做设置的，因为这两个信息决定了一个状态的质，一个角色在跑大状态机的时候是从一个固定的状态字典里找状态，
-    // 同样名字的状态不会有两个。但是，耗气是另一码事，因为我们的大状态机引擎只是参照了这个信息在状态原本的进入条件外额外作为一个触发条件对其进行“是否气足够”的判断。
-    //首发时候我们用的耗气标准是状态首发时候的标准，而接续时候用的则是casual to states里的值，因此可以不一样。另外，牢记inspector上这个大列表无非是用以直观保存脚本，真正在战斗时候运行的是一个字典
+
 	public override void OnInspectorGUI()
 	{
-        ButtonStyle = new GUIStyle(GUI.skin.button);
-        ButtonStyle.normal.textColor = Color.white;
-        ButtonStyle.fixedWidth = 100f;
-
-        addCasualToButtonStyle = new GUIStyle(GUI.skin.box);
-        addCasualToButtonStyle.normal.textColor = Color.red;
-        addCasualToButtonStyle.alignment = TextAnchor.MiddleCenter;
-        addCasualToButtonStyle.margin = new RectOffset(100, 22, 11, 11);
-
-        deleteCasualToButtonStyle = new GUIStyle(GUI.skin.box);
-        deleteCasualToButtonStyle.normal.textColor = Color.blue;
-        deleteCasualToButtonStyle.alignment = TextAnchor.MiddleCenter;
-        deleteCasualToButtonStyle.margin = new RectOffset(50, 22, 11, 11);
-
-        stateKeyGUI = new GUIStyle(GUI.skin.label);
-        stateKeyGUI.normal.textColor = new Color(0.6f,0.3f,0.4f);
-
-        attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
+        if (GUIIniDone)
         {
-            margin = new RectOffset(50, 22, 11, 11)
-        };
-
+            ButtonStyle = new GUIStyle(GUI.skin.button);
+            ButtonStyle.normal.textColor = Color.white;
+            ButtonStyle.fixedWidth = 100f;
+            
+            addCasualToButtonStyle = new GUIStyle(GUI.skin.box);
+            addCasualToButtonStyle.normal.textColor = Color.red;
+            addCasualToButtonStyle.alignment = TextAnchor.MiddleCenter;
+            addCasualToButtonStyle.margin = new RectOffset(100, 22, 11, 11);
+            
+            deleteCasualToButtonStyle = new GUIStyle(GUI.skin.box);
+            deleteCasualToButtonStyle.normal.textColor = Color.blue;
+            deleteCasualToButtonStyle.alignment = TextAnchor.MiddleCenter;
+            deleteCasualToButtonStyle.margin = new RectOffset(50, 22, 11, 11);
+            
+            stateKeyGUI = new GUIStyle(GUI.skin.label);
+            stateKeyGUI.normal.textColor = new Color(0.6f,0.3f,0.4f);
+            
+            attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
+            {
+                margin = new RectOffset(50, 22, 11, 11)
+            };
+            attackRangeToggleGUI.alignment = TextAnchor.MiddleLeft;
+            attackRangeToggleGUI.stretchWidth = false;
+            GUIIniDone = true;
+        }
+      
         LocalResourceReferenceMode = EditorGUILayout.Toggle("本地资源参照模式",LocalResourceReferenceMode);
 
 		myScript = (BehaviorRunner)target;
-        
         if (myScript.GetNowState() != null)
         {
             EditorGUILayout.TextField("current: ", myScript.GetNowState().StateKey);
         }
         
-        if (GUILayout.Button("  refresh skill define "))
+        if (GUILayout.Button(" refresh skill define "))
         {
             _States_Incubator_ForLocalResourceCheck = LocalResourceReferenceMode
             ? new Behaviors_Incubator_ForLocalResourceCheck(myScript.characterType)
@@ -108,13 +110,13 @@ public class BehaviorRunnerGUI : Editor {
                     casualToStateKeyOptionsList.Add(myScript.State_Transition_Set_List[i].StateKey);
                 EditorGUI.indentLevel++;
 
-                myScript.State_Transition_Set_List[i].StateKey = StateIndexListOptions.Contains<string>(myScript.State_Transition_Set_List[i].StateKey)
-                    ? StateIndexListOptions[EditorGUILayout.Popup("State Key",
+                myScript.State_Transition_Set_List[i].StateKey = StateIndexListOptions.Contains<string>(myScript.State_Transition_Set_List[i].StateKey)? 
+                                                                            StateIndexListOptions[EditorGUILayout.Popup("State Key",
                                                                             Array.IndexOf(StateIndexListOptions, myScript.State_Transition_Set_List[i].StateKey),
                                                                             StateIndexListOptions,
                                                                             stateKeyGUI
                                                                            )]
-                    : StateIndexListOptions.Length > 0 ? StateIndexListOptions[0] : null;
+                                                                            : StateIndexListOptions.Length > 0 ? StateIndexListOptions[0] : null;
 
                 myScript.State_Transition_Set_List[i].stateType = 
                     (BehaviorType)EditorGUILayout.EnumPopup("Attack Type", myScript.State_Transition_Set_List[i].stateType);
@@ -125,13 +127,11 @@ public class BehaviorRunnerGUI : Editor {
                         ? new List<BehaviorEnterRange>()
                         : myScript.State_Transition_Set_List[i].AI_trigger_ranges.ToList();
                     bool outrange,far, near, close;
-                    outrange = _ranges.Contains(BehaviorEnterRange.out_of_range) ? true : false;
-                    far = _ranges.Contains(BehaviorEnterRange.far_range) ? true : false;
-                    near = _ranges.Contains(BehaviorEnterRange.mid_range) ? true : false;
-                    close = _ranges.Contains(BehaviorEnterRange.inner_range) ? true : false;
+                    outrange = _ranges.Contains(BehaviorEnterRange.out_of_range);
+                    far = _ranges.Contains(BehaviorEnterRange.far_range);
+                    near = _ranges.Contains(BehaviorEnterRange.mid_range);
+                    close = _ranges.Contains(BehaviorEnterRange.inner_range);
 
-                    attackRangeToggleGUI.alignment = TextAnchor.MiddleLeft;
-                    attackRangeToggleGUI.stretchWidth = false;
                     GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
                     
                     outrange = EditorGUILayout.Toggle("超", outrange, attackRangeToggleGUI);
@@ -197,8 +197,6 @@ public class BehaviorRunnerGUI : Editor {
                                 }
                                 EditorGUI.indentLevel--;
                             }
-                        }else{
-                            
                         }
 
                         if (GUILayout.Button("  +  ",addCasualToButtonStyle))

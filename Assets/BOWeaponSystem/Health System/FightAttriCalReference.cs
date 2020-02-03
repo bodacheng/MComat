@@ -15,11 +15,12 @@ public partial class FightAttriCalReference : MonoBehaviour
     public float AT = 10;
 
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
+    
     public ComboHitCount _ComboHitCount = new ComboHitCount();
+    KnockOffCount _knockOffCount = new KnockOffCount();
+    BeHitCount _BeHitCount = new BeHitCount();    
     
     V_Damage deathknockOff;
-    KnockOffCount _knockOffCount = new KnockOffCount();
-    BeHitCount _BeHitCount = new BeHitCount();
     bool gettingdamage;
     List<BO_Hitbox> myBOHitBoxeComponent = new List<BO_Hitbox>();//713添加
     List<E_Damage> Event_Damage_List = new List<E_Damage>();
@@ -193,6 +194,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
     }
     
+    // 受攻击方运行
     public void ApplyDamage(V_Damage _dmg)
 	{
         if (_Center._MyBehaviorRunner.GetNowState().StateKey == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
@@ -270,9 +272,8 @@ public partial class FightAttriCalReference : MonoBehaviour
         }        
 	}
     
-    public void HitCountPlus() => _ComboHitCount.HitCountPlus();//打别人计数
+    public void HitCountPlus() => _ComboHitCount.HitCountPlus(_BeHitCount);//打别人计数
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
-    public void BeHitCountInterrupt() => _BeHitCount.BeHitCountInterrupt();
     
     // event 攻击系列。暂时不再使用
     public void SetManagingEventDamage(E_Damage e)

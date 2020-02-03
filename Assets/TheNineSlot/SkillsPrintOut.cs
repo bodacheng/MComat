@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace mainMenu
 {
-    //这个模块首先要有对脚本进行分析的能力。
+    // 这个模块首先要有对脚本进行分析的能力。
     // 有这样一点：如果一个九宫格存在相同技能重复登陆，本脚本的功能会出现问题，具体是因为analysisStatesSetDic的机制(以技能key寻找状态从而寻找按钮。)
     public class SkillsPrintOut : MonoBehaviour
     {
@@ -58,13 +58,11 @@ namespace mainMenu
             {
                 if (focusingCharacterData.Animation_Manger != null && focusingCharacterData.Animation_Manger.Animator != null && focusingCharacterData.Animation_Manger.gameObject.activeSelf)
                 {
-                    if (!focusingCharacterData.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
-                        && focusingCharacterData.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
-                        && focusingCharacterData.Animation_Manger.Animator.GetNextAnimatorClipInfoCount(1) == 0)
+                    if (focusingCharacterData.Animation_Manger.Animator.GetBool("in_transition") == false 
+                            && focusingCharacterData.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                     {
                         SkillShowT.gameObject.SetActive(true);
-                        focusingCharacterData.Animation_Manger.PlayLayerAnim(null);
-                        focusingCharacterData.Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
+                        focusingCharacterData.Animation_Manger.PlayLayerAnim(null,true,0.05f);
                         IfShowingSkill = false;
                         //this.focusingCharacterData.blendShapeProxy.setBlendShapeGrdually(new BlendShapeKey("Angry"), 0f, 50);
                     }
@@ -170,7 +168,7 @@ namespace mainMenu
                 if (this.focusingCharacterData.Animation_Manger != null)
                 {
                     SkillShowT.gameObject.SetActive(false);
-                    this.focusingCharacterData.Animation_Manger.AnimationTrigger(_state_Transition_Set.StateKey);
+                    this.focusingCharacterData.Animation_Manger.AnimationTrigger(_state_Transition_Set.StateKey,true,0.05f);
                 }
                 else
                 {
@@ -207,7 +205,7 @@ namespace mainMenu
                         break;
                 }
                 this.IfShowingSkill = true;
-                this.focusingCharacterData.Animation_Manger.AnimationTrigger(keyname);
+                this.focusingCharacterData.Animation_Manger.AnimationTrigger(keyname,true,0.05f);
                 //if (this.focusingCharacterData.blendShapeProxy)
                     //this.focusingCharacterData.blendShapeProxy.setBlendShapeGrdually(new BlendShapeKey("Angry"), 1f, 50);
             }

@@ -27,26 +27,12 @@ public class Dash_Back_State : Behavior
     {
 		base.Pre_process_before_enter ();
     }
-
-    public override bool Capacity_enter_condition()
-    {
-        return _BasicPhysicSupport.hiddenMethods.Grounded && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
-    }
     
-    //public override bool enter_condition_priority3()
-    //{
-    //    if (Sensor.getInnerEnemiesColliders().Count > 0)
-    //    {
-    //        return true; 
-    //    }
-    //    else
-    //        return false;
-    //}
-
     public override void AI_State_enter()
     {
         base.AI_State_enter();
         _Animator.applyRootMotion = true;
+        
         _Animator.SetFloat("speed", 0f);
         Sensor.ContinuousDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
@@ -66,8 +52,7 @@ public class Dash_Back_State : Behavior
             }
         }
         RotateToDirection(threatsComingDirection, 10f, true);
-        Animation_Manger.AnimationTrigger(clip_name);
-		
+        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         //if (_AIStateRunner.getLastState().StateType == stateType.Def)
         //{
         //    Defend_State df = (Defend_State)this._AIStateRunner.getLastState();
@@ -81,17 +66,15 @@ public class Dash_Back_State : Behavior
         //    }
         //}
     }
-
-    public override void _State_FixedUpdate1()
-    {
-        //_Rigidbody.velocity = Vector3.zero;
-    }
+    
+    //public override bool Capacity_enter_condition()
+    //{
+    //    return base.Capacity_enter_condition() && !_Animator.GetBool("in_transition");
+    //}
 
     public override bool Capacity_Exit_Condition()
     {
-        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
-            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
-            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
+        return AnimationCasualFinishedFlag();
     }
 
     public override void AI_State_exit()

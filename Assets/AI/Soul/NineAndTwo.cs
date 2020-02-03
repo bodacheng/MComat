@@ -229,6 +229,7 @@ public class NineAndTwo {
         }
     }
 
+    List<Behavior_Transition_Set> chuanEndCasualT0 = new List<Behavior_Transition_Set>();
     // 为了正确表现DMR和其他状态的处理顺序，这个函数应该把DMR的config作为参数。表示这几个是被动，要附加在其他技能存档上执行。
     public void SortNineAndTwo()
     {
@@ -476,7 +477,8 @@ public class NineAndTwo {
             C_list[i].Casual_To_Behaviours = casualT0.ToArray();
         }
 
-        List<Behavior_Transition_Set> chuanEndCasualT0 = new List<Behavior_Transition_Set>();
+        chuanEndCasualT0.Clear();
+
         if (A1 != null)
             chuanEndCasualT0.Add(A1);
         if (B1 != null)
@@ -485,23 +487,22 @@ public class NineAndTwo {
             chuanEndCasualT0.Add(C1);
         if (D != null)
             chuanEndCasualT0.Add(D);
+        if (R != null)
+            chuanEndCasualT0.Add(R);
         
-        if (this.R != null)
-            this.R.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
-        else{
-            Debug.Log("?");
-        }
+        if (D != null)
+            D.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
+        if (R != null)
+            R.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
     }
 
     //FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
     // 1.sortNineAndTwo(passiveSkillConfigs):整理三连击的连续关系。根据数据库配置好相应技能的属性。
     // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
-    // 和以前的脚本读取方式相比，不再需要sortList函数(当时很多努力白费了呀。。)原因是现在几个技能都是按次序加入列表，保证了基础状态和技能状态的顺序是有调理的，不再需要整理
-    // 包括连击排序那方面。
-    public IDictionary<string, Behavior_Transition_Set> GenerateBeheviourSets()// level : 1~100
+    public IDictionary<string, Behavior_Transition_Set> GenerateBeheviourSets()
     {
         IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
-        this.StateTransitionSetList = new List<Behavior_Transition_Set>();
+        StateTransitionSetList = new List<Behavior_Transition_Set>();
 
         Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty",
                                                               BehaviorType.NONE,
@@ -537,7 +538,7 @@ public class NineAndTwo {
                                                                BehaviorType.Def,
                                                                0,
                                                                 null,
-                                                              (this.R != null)? new Behavior_Transition_Set[1]{this.R}:new Behavior_Transition_Set[0],
+                                                              chuanEndCasualT0.ToArray(),
                                                                null,
                                                                Inputs_defined.Defend, Inputs_defined.Defend_Cancel,
                                                                0,
@@ -547,7 +548,7 @@ public class NineAndTwo {
                                                              BehaviorType.NONE,
                                                              0,
                                                              null,
-                                                             new Behavior_Transition_Set[0], 
+                                                             chuanEndCasualT0.ToArray(),
                                                              null,
                                                              Inputs_defined.Null, Inputs_defined.Null,
                                                              0,
@@ -557,7 +558,7 @@ public class NineAndTwo {
                                                             BehaviorType.Hit,
                                                             0,
                                                             null,
-                                                            new Behavior_Transition_Set[0], 
+                                                            chuanEndCasualT0.ToArray(),
                                                             null,
                                                             Inputs_defined.Null, Inputs_defined.Null,
                                                             0,
@@ -568,25 +569,20 @@ public class NineAndTwo {
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);
         
-        List<Behavior_Transition_Set> StartUpTransitions = new List<Behavior_Transition_Set>();
-
         if (this.D != null)
         {
             StateTransitionSetList.Add(Defend);//这里的逻辑是这样：如果在sortNineAndTwo执行后，this.D不是null，那说明角色有防御状态，而防御状态是固定的。
-            StartUpTransitions.Add(Defend);
         }
         
         if (this.R != null)
         {
             this.R.stateType = BehaviorType.AC;
             StateTransitionSetList.Add(R);//这个是只能根据角色被动来。
-            StartUpTransitions.Add(R);
         }
                     
         if(this.A1 != null)
         {
             StateTransitionSetList.Add(A1);
-            StartUpTransitions.Add(A1);
         }
         if (this.A2 != null)
         {
@@ -599,7 +595,6 @@ public class NineAndTwo {
         if (this.B1 != null)
         {
             StateTransitionSetList.Add(this.B1);
-            StartUpTransitions.Add(B1);
         }            
         if (this.B2 != null)
         {
@@ -612,7 +607,6 @@ public class NineAndTwo {
         if (this.C1 != null)
         {
             StateTransitionSetList.Add(this.C1);
-            StartUpTransitions.Add(C1);
         }                    
         if (this.C2 != null)
         {
@@ -627,7 +621,7 @@ public class NineAndTwo {
         {
             //下面这些就是怕数据库里九宫格里的M记载有错。
             M.SPLevel = -1;
-            M.Casual_To_Behaviours = StartUpTransitions.ToArray();
+            M.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
             M.AI_trigger_ranges = null;
             StateTransitionSetList.Add(M);
         }
@@ -638,7 +632,7 @@ public class NineAndTwo {
                                                                     BehaviorType.GetUp,
                                                                     0,
                                                                     null,
-                                                                    StartUpTransitions.ToArray(),
+                                                                    chuanEndCasualT0.ToArray(),
                                                                     null,
                                                                     Inputs_defined.Any, Inputs_defined.Null,
                                                                     0,

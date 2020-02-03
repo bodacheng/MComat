@@ -43,7 +43,7 @@ public class Jump_State : Behavior
     {
 		base.Pre_process_before_enter ();
     }
-
+    
     public override bool Capacity_enter_condition()
     {
         return _BasicPhysicSupport.hiddenMethods.Grounded;
@@ -51,9 +51,7 @@ public class Jump_State : Behavior
 
     public override bool Capacity_Exit_Condition()
     {
-        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
-            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
-            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
+        return AnimationCasualFinishedFlag();
     }
 
     Vector3 damagingWeaponComingDirection;
@@ -113,7 +111,7 @@ public class Jump_State : Behavior
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
         if (IfVectorClean(jumpDirection))
             _Rigidbody.velocity = jumpDirection;
-        Animation_Manger.AnimationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
     }
 
     public override void C_State_enter()
@@ -153,7 +151,7 @@ public class Jump_State : Behavior
         jumpDirection = jumpDirection + Vector3.up * vertical_force;
         if (IfVectorClean(jumpDirection))
 		    _Rigidbody.velocity = jumpDirection;
-        Animation_Manger.AnimationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
     }
 
 	public override void _State_FixedUpdate1()

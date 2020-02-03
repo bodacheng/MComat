@@ -19,7 +19,7 @@ public class Empty_State : Behavior
 	{
 		base.AI_State_enter();
         //if (Animation_Manger != null)
-            Animation_Manger.PlayLayerAnim(null);
+            Animation_Manger.PlayLayerAnim(null,false,0f);
         _DATA_CENTER.TurnShield(false);
         _Rigidbody.velocity = Vector3.zero;
         _DATA_CENTER.CleanClear();
@@ -28,7 +28,7 @@ public class Empty_State : Behavior
 
 	public override void _State_FixedUpdate1()
 	{
-        if (_BasicPhysicSupport.hiddenMethods.Grounded && this.Animation_Manger.GetAnimationPlayingStep() == AnimationPlaying_Step.unstarted)
+        if (_BasicPhysicSupport.hiddenMethods.Grounded)
         {
             _Rigidbody.velocity = Vector3.zero;
             //_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;

@@ -35,7 +35,6 @@ namespace Soul
         public Inputs_defined enterInput = Inputs_defined.Null;
         public Inputs_defined exitInput = Inputs_defined.Null;
         public BehaviorEnterRange[] behaviorEnterRanges;
-
         protected BehaviorEnterRange[] InnerAndMidAndFarRanges = { BehaviorEnterRange.inner_range, BehaviorEnterRange.mid_range, BehaviorEnterRange.far_range };
 
         // Prepare for basic parameters here
@@ -74,7 +73,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return this._FightAttriCalReference.HasPlentyGauge(splevel);
+            return _FightAttriCalReference.HasPlentyGauge(splevel);
         }
 
         // On what condition we have to enter this state
@@ -86,7 +85,6 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             _FightAttriCalReference.AT = this.AT;
             _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
         }
@@ -94,7 +92,6 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter(V_Damage newValue)
         {
-            Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             _FightAttriCalReference.AT = this.AT;
             _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
         }
@@ -112,10 +109,9 @@ namespace Soul
         // Process when exit the state 
         public virtual void AI_State_exit()
         {
-            Animation_Manger.SetAnimationPlayingStep(AnimationPlaying_Step.unstarted);
             Sensor.OneRoundDetectionStart(5);
         }
-        
+                
         // Local update of the state 
         public virtual void _State_FixedUpdate1()
         {
@@ -157,7 +153,12 @@ namespace Soul
                 return false;
             }
         }
-
+        
+        protected bool AnimationCasualFinishedFlag()
+        {
+            return _Animator.GetBool("in_transition") == false && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f;
+        }
+        
         protected void EventAttackEnderProcess()
         {
             FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();

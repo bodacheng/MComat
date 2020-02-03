@@ -104,6 +104,7 @@
     <Compile Include="Assets\Ani_Calling_Sys\dontuse\Animation_Manger_old.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\dontuse\NullStateProcess.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\readMe.cs" />
+    <Compile Include="Assets\Ani_Calling_Sys\StateEnterd.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\StateStartsRandom.cs" />
     <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />

@@ -1,57 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using HittingDetection;
+﻿using UnityEngine;
 using Soul;
 
-// This kind of state has to be triggerd on the ground, but doesnt need to be on ground wille running,
-// During the state ,colliders of the character heriachy is disabled, same with the gravity 
 public class G_M_Attack_State : Behavior {
     readonly string clip_name;
     readonly bool keepRotationAdjustment;
-    readonly float RotationAdjustmentTime;
-    readonly float rotate_speed;
-    readonly int _skillEmergentLevel;
 
-    public G_M_Attack_State(string clip_name)
-	{
-		this.clip_name = clip_name;
-        behaviorEnterRanges = null;
-    }
-
-    public G_M_Attack_State(string clip_name, bool keepRotationAdjustment, float rotate_speed)
+    #region Constructor
+    public G_M_Attack_State(string clip_name, bool keepRotationAdjustment)
 	{
 		this.clip_name = clip_name;
         this.keepRotationAdjustment = keepRotationAdjustment;
-        this.rotate_speed = rotate_speed;
-        RotationAdjustmentTime = -1;
     }
-
-    public G_M_Attack_State(string clip_name, float RotationAdjustmentTime, float rotate_speed)
+    
+    public G_M_Attack_State(string clip_name)
     {
         this.clip_name = clip_name;
         keepRotationAdjustment = false;
-        this.rotate_speed = rotate_speed;
-        this.RotationAdjustmentTime = RotationAdjustmentTime;
     }
+    #endregion
 
     public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
 	}
-
-    public bool Strategic_enter_condition()
-    {
-        return _AIStateRunner.GetNowState() != null &&
-            (_AIStateRunner.GetNowState().StateType == BehaviorType.GI ||
-            _AIStateRunner.GetNowState().StateType == BehaviorType.GR ||
-            _AIStateRunner.GetNowState().StateType == BehaviorType.GM ||
-            _AIStateRunner.GetNowState().StateType == BehaviorType.AC) && Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null
-            ? CheckToEnemyDisEnterCondition(RangePlusOne(behaviorEnterRanges))
-            : Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
-    }
-
-    Collider C;
+  
+    #region Capacity Enter Exit
+    Collider temp_C;  
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
@@ -64,37 +38,37 @@ public class G_M_Attack_State : Behavior {
         thisFrameRotateAngle = 0;
         personality_Events.CloseAllPersonalityEffects();
         _Rigidbody.velocity = Vector3.zero;
-        C = Sensor.GetClosestColliderInSensorRange(true,true,true);
-        if (C != null)
-            RotateToTarget(C.transform.position, 1f, true);
+        temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
+        if (temp_C != null)
+            RotateToTarget(temp_C.transform.position, 1f, true);
 		_Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
 	}
-
-	public override bool Capacity_Exit_Condition()
-	{
-        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
-            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
-            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
-    }
-
-	public override void AI_State_exit()
-	{
+    
+    public override void AI_State_exit()
+    {
         base.AI_State_exit();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(false);
-		_Animator.applyRootMotion = false;
-	}
+        _Animator.applyRootMotion = false;
+    }
+    #endregion
+
+    #region Capacity Enter Exit
+    public override bool Capacity_Exit_Condition()
+	{
+        return AnimationCasualFinishedFlag();
+    }
+    #endregion
 
     Vector3 rotateTarget;
 	public override void _State_FixedUpdate1() 
 	{
-        C = Sensor.GetClosestColliderInSensorRange(true,true,true);
-        if (C!=null)
+        temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
+        if (temp_C!=null)
         {
-            rotateTarget = C.transform.position;
+            rotateTarget = temp_C.transform.position;
             SingleDirectionRotateProcess(rotateTarget);                  
         }
-        //_Rigidbody.velocity = new Vector3(0, 0, 0); //开启了的话相当于所向无敌
 	}
 
     float lastFrameRotateAngle;
@@ -115,8 +89,8 @@ public class G_M_Attack_State : Behavior {
             {
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
             }
-            else
-            {//刚开始计
+            else //刚开始计
+            {
                 lastFrameRotateAngle = thisFrameRotateAngle;
             }
         }

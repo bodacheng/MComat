@@ -52,29 +52,31 @@ public class KnockOffCount
     }
 }
 
+// instance主被攻击的计数。如果能够反击一次敌人的话该计数会被立刻清零
 public class BeHitCount
 {
     int beHitCount;
+    float BeHitComboTimeCounter;
     readonly float HitConnectTolerate;
-    float BeHItComboTimeCounter;
-
+    
     public BeHitCount()
     {
         beHitCount = 0;
         HitConnectTolerate = 1.5f;
-        BeHItComboTimeCounter = 0f;
+        BeHitComboTimeCounter = 0f;
     }
 
     public void BeHitCountPlus()
     {
-        BeHItComboTimeCounter = HitConnectTolerate;
+        BeHitComboTimeCounter = HitConnectTolerate;
         beHitCount += 1;
     }
 
+    // 成功反击别人一次的话，自己被连续揍的次数清零。
     public void BeHitCountInterrupt()
     {
         beHitCount = 0;
-        BeHItComboTimeCounter = 0;
+        BeHitComboTimeCounter = 0;
     }
 
     public int GetBeHitCount()
@@ -84,10 +86,10 @@ public class BeHitCount
 
     public void Update()
     {
-        if (BeHItComboTimeCounter > 0f)
+        if (BeHitComboTimeCounter > 0f)
         {
-            BeHItComboTimeCounter -= Time.fixedDeltaTime;
-            if (BeHItComboTimeCounter <= 0f)
+            BeHitComboTimeCounter -= Time.fixedDeltaTime;
+            if (BeHitComboTimeCounter <= 0f)
             {
                 beHitCount = 0;
             }
@@ -108,10 +110,11 @@ public class ComboHitCount
         HItComboTimeCounter = 0f;
     }
 
-    public void HitCountPlus()
+    public void HitCountPlus(BeHitCount beHitCount)
     {
         HItComboTimeCounter = HitConnectTolerate;
         HitCount.Value += 1;
+        beHitCount.BeHitCountInterrupt();
     }
 
     public void HitCountInterrupt()

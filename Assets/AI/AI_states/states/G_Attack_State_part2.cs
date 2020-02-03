@@ -92,7 +92,7 @@ public partial class G_Attack_State : Behavior
                     Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
                     if (_phase == Phase.reached)
                     {
-                        Animation_Manger.AnimationTrigger(clip_name);
+                        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         lastFrameRotateAngle = 0;
                         thisFrameRotateAngle = 0;

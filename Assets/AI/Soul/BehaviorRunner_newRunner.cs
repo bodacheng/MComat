@@ -39,6 +39,7 @@ namespace Soul
             }
             #endregion
 
+            #region 查找已经可以触发的后续技能
             foreach (Behavior_Transition_Set Behavior_set in CurrentBehaviorTransitionSet.Casual_To_Behaviours)
             {
                 Behaviour_Dictionary.TryGetValue(Behavior_set.StateKey, out try_Behavior);
@@ -53,34 +54,16 @@ namespace Soul
                     avaliable_casual_Transitions.Add(Behavior_set);
                 }
             }
-            
-            #region 主动退出当前状态的控制类条件是否激活
-            if (!controller.BehaviourExitInputTrigger(CurrentBehaviorTransitionSet))
-            {
-                return;
-            }
             #endregion
-
+            
             #region 按钮技能刷新
             if (MobileInputsManager.target.Observing_Runner == this)
-                controller.ButtonFeatureRefresh(this, avaliable_casual_Transitions,SRTListForCasualTransitionbuttonRefresh);
-            #endregion
-            
-            #region AI模式决策制定
-            if (!((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this))
-                controller.AI_RUNs(this, avaliable_casual_Transitions);
+                MobileInputsManager.target.ButtonsFeatureLoad(SRTListForCasualTransitionbuttonRefresh);
             #endregion
 
-            if (!now_Behavior.Capacity_Exit_Condition())
-            {
-                return;
-            }
-            
-            Behaviour_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
-            if (try_Behavior != now_Behavior)//避免战斗待机状态重复进入
-            {
-                ChangeState(commandWaitingState.StateKey);
-            }
+            #region 决策制定
+            controller.PlayerControll(this,avaliable_casual_Transitions,!((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
+            #endregion
         }
     }
 }

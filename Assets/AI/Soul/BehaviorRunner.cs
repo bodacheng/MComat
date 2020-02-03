@@ -29,7 +29,7 @@ namespace Soul
         Behavior now_Behavior;
         Behavior last_Behavior;
         Behavior try_Behavior;
-        Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+        public Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         #endregion
 
         void Awake()
@@ -49,10 +49,6 @@ namespace Soul
         public Behavior GetLastState()
         {
             return last_Behavior;
-        }
-        public Behavior GetTryState()
-        {
-            return try_Behavior;
         }
 
         void Update()
@@ -82,7 +78,7 @@ namespace Soul
                 }
             }
         }
-
+        
         public void ChangeState(string num)
         {
             _SkillCancelFlag.turn_off_flag();
@@ -136,10 +132,14 @@ namespace Soul
             else
                 now_Behavior.AI_State_enter(newvalue);
         }
-        
+
         public void ChangeToWaitingState()
         {
-            ChangeState(commandWaitingState.StateKey);
+            Behaviour_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
+            if (try_Behavior != GetNowState())//避免战斗待机状态重复进入
+            {
+                ChangeState(commandWaitingState.StateKey);
+            }
         }
       
         public void INIStates(Data_Center data_Center)

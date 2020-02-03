@@ -41,15 +41,14 @@ public partial class G_Attack_State : Behavior {
         reachedFromThebeginning = 4
     }
 
+    #region Constructor
     public G_Attack_State(string clip_name)
 	{
 		this.clip_name = clip_name;
         behaviorEnterRanges = null;
     }
 
-    public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime,
-                          float approachingSpeed,
-                          string clip_name)
+    public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, float approachingSpeed, string clip_name)
     {
         this.rushSpeed = rushSpeed;
         this.maxRushTime = maxRushTime;
@@ -74,43 +73,37 @@ public partial class G_Attack_State : Behavior {
         isEventAttackLaunchState = EventLauncher_Or_Ender;
         isEventAttackEndState = !EventLauncher_Or_Ender;
     }
-
+    #endregion
+    
+    #region Capacity Enter Exit
+    public override bool Capacity_Exit_Condition()
+    {
+        return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == clip_name;
+    }
+    
+    //public override bool Capacity_enter_condition()
+    //{
+    //    return base.Capacity_enter_condition() && !_Animator.GetBool("in_transition");
+    //}
+    #endregion
+    
     public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
         rushstart = () =>
         {
-            this._ResistanceManager.Resistance.Value +=1;
+            _ResistanceManager.Resistance.Value +=1;
         };
         rushend = () =>
         {
-            this._ResistanceManager.Resistance.Value -=1;
+            _ResistanceManager.Resistance.Value -=1;
         };
         rushCoroutine = new CustomCoroutine(rushstart, 5f, rushend);
-    }
-
-    public bool Strategic_enter_condition()
-    {
-        if (this.Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
-            return false;
-
-        if (this._AIStateRunner.GetNowState() != null)
-        {
-            if (this._AIStateRunner.GetNowState().nextAttackStateCanRushFirst == true)
-                return this.CheckToEnemyDisEnterCondition(this.InnerAndMidAndFarRanges);
-
-            //if (this._AIStateRunner.getNowState().StateType == stateType.GR ||
-                //this._AIStateRunner.getNowState().StateType == stateType.GM ||
-                //this._AIStateRunner.getNowState().StateType == stateType.GI)
-                //return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
-        }
-        return CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
     }
 
     public override void AI_State_enter()
 	{
         base.AI_State_enter();
-        nextstateget = false;
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
@@ -131,14 +124,14 @@ public partial class G_Attack_State : Behavior {
         {
             //一般来说下面这些情况不跑？
             _phase = Phase.noRushState;
-            Animation_Manger.AnimationTrigger(clip_name);
+            Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
             return;
         }
 
         if (Sensor.GetInnerEnemiesColliders().Count > 0)//内环检测结果
         {
             _phase = Phase.reachedFromThebeginning;
-            Animation_Manger.AnimationTrigger(clip_name);
+            Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
             return;
         }
         
@@ -155,11 +148,11 @@ public partial class G_Attack_State : Behavior {
                 lastFrameRotateAngle = 0;
                 thisFrameRotateAngle = 0;
                 if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)
-                    Animation_Manger.AnimationTrigger(dash_clip_name);
+                    Animation_Manger.AnimationTrigger(dash_clip_name,true,0.05f);
                 else
                 {
                     Debug.Log("here:"+ clip_name);
-                    Animation_Manger.PlayLayerAnim(null);
+                    Animation_Manger.PlayLayerAnim(null,true,0f);
                 }
 
                 _BuffsRunner.RunSubCoroutineOfState(rushCoroutine);
@@ -168,28 +161,19 @@ public partial class G_Attack_State : Behavior {
             else
             {
                 _phase = Phase.reachedFromThebeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                Animation_Manger.AnimationTrigger(clip_name);
+                Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
                 return;
             }
         }
 
         if (Sensor.GetClosestColliderInSensorRange(true,true,true) == null)//外环检测结果.走到这里就是说，如果内外环都没敌人
         {
-            Animation_Manger.AnimationTrigger(clip_name);
+            Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
             _phase = Phase.farFromReach;
             return;
         }
     }
-
-    bool nextstateget;
-    AnimatorStateInfo animatorState;
-	public override bool Capacity_Exit_Condition()
-	{
-        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
-            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
-            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
-    }
-
+    
     public override void AI_State_exit()
     {
         base.AI_State_exit();
@@ -209,7 +193,7 @@ public partial class G_Attack_State : Behavior {
         if (isEventAttackEndState)
             EventAttackEnderProcess();
 	}
-
+    
     public override void _State_FixedUpdate1() 
 	{
         switch (_phase)
@@ -230,7 +214,7 @@ public partial class G_Attack_State : Behavior {
                 }
                 if (_phase == Phase.reached)
                 {
-                    Animation_Manger.AnimationTrigger(clip_name);
+                    Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
                     _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                     lastFrameRotateAngle = 0;
                     thisFrameRotateAngle = 0;

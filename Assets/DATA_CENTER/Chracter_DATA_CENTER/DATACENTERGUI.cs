@@ -13,6 +13,9 @@ public class DATACENTERGUI : Editor {
     public override void OnInspectorGUI()
     {
         myScript = (Data_Center)target;
+
+        if (Application.isPlaying)
+            return;
         
         title = new GUIStyle(GUI.skin.box);
         title.normal.textColor = Color.blue;

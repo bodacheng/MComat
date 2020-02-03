@@ -7,11 +7,79 @@ namespace Soul
     {
         readonly List<Behavior_Transition_Set> finalDecisions = new List<Behavior_Transition_Set>();
         readonly SSIMultiDictionary Triggerd = new SSIMultiDictionary();
-        
-        // 动态刷新按键机能
-        public void ButtonFeatureRefresh(BehaviorRunner runner,List<Behavior_Transition_Set> avaliable_casual_Transitions,List<Behavior_Transition_Set> preview)
+                
+        public void PlayerControll(BehaviorRunner behaviorRunner, List<Behavior_Transition_Set> Options, bool AI_Active)
         {
-            MobileInputsManager.target.ButtonsFeatureLoad(runner, avaliable_casual_Transitions, preview);
+            if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
+            {
+                #region 主动退出当前状态的控制类条件是否激活
+                if (!BehaviourExitInputTrigger(behaviorRunner.CurrentBehaviorTransitionSet))
+                {
+                    return;
+                }
+                #endregion
+
+                #region 按键触发
+                for (int i = 0; i < Options.Count; i++)
+                {
+                    switch (Options[i].enterInput)
+                    {
+                        case Inputs_defined.Attack:
+                            if (MobileInputsManager.attack)
+                            {
+                                MobileInputsManager.SkillButtonExplosion(Options[i].enterInput, Options[i].SPLevel);
+                                behaviorRunner.ChangeState(Options[i].StateKey);
+                                return;
+                            }
+                            break;
+                        case Inputs_defined.Fire1:
+                            if (MobileInputsManager.fire1)
+                            {
+                                MobileInputsManager.SkillButtonExplosion(Options[i].enterInput, Options[i].SPLevel);
+                                behaviorRunner.ChangeState(Options[i].StateKey);
+                                return;
+                            }
+                            break;
+                        case Inputs_defined.Fire2:
+                            if (MobileInputsManager.fire2)
+                            {
+                                MobileInputsManager.SkillButtonExplosion(Options[i].enterInput, Options[i].SPLevel);
+                                behaviorRunner.ChangeState(Options[i].StateKey);
+                                return;
+                            }
+                            break;
+                        case Inputs_defined.Dash:
+                            if (MobileInputsManager.acc)
+                            {
+                                behaviorRunner.ChangeState(Options[i].StateKey);
+                                return;
+                            }
+                            break;
+                        case Inputs_defined.Defend:
+                            if (MobileInputsManager.defendButtonHover)
+                            {
+                                behaviorRunner.ChangeState(Options[i].StateKey);
+                                return;
+                            }
+                            break;
+                    }
+                }
+                #endregion
+            }
+
+            #region AI决策
+            if (AI_Active)
+            {
+                AI_RUNs(behaviorRunner,Options);
+            }
+            #endregion
+            
+            #region 当前状态可自然退出了却没有任何后续行为被触发的话，回复起始状态
+            if (behaviorRunner.GetNowState().Capacity_Exit_Condition())
+            {
+                behaviorRunner.ChangeToWaitingState();
+            }
+            #endregion
         }
         
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
@@ -26,10 +94,9 @@ namespace Soul
             }
         }
 
-        Behavior try_Behavior;
-        List<string> allAvaliableKeyCodes = new List<string>();
+        readonly List<string> allAvaliableKeyCodes = new List<string>();
         string Condition, BehaviourCode;
-        public void AI_RUNs(BehaviorRunner runner,List<Behavior_Transition_Set> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
+        void AI_RUNs(BehaviorRunner runner,List<Behavior_Transition_Set> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
         {
             finalDecisions.Clear();
             Triggerd.main.Clear();

@@ -138,7 +138,7 @@ public class Behaviors_Incubator
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case BehaviorType.GM:
-                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey, 5f, 2f)
+                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey)
                         {
                             StateType = BehaviorType.GM,
                             AT = _set.AT,
@@ -160,7 +160,7 @@ public class Behaviors_Incubator
                         if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
                         break;
                     case BehaviorType.CT:
-                        Counter_State _Counter = new Counter_State(_set.StateKey, 1.4f, 1)
+                        Counter_State _Counter = new Counter_State(_set.StateKey)
                         {
                             StateType = BehaviorType.CT,
                             AT = _set.AT,

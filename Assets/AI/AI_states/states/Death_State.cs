@@ -48,7 +48,7 @@ public class Death_State : Behavior
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
-        Animation_Manger.AnimationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         KnockOffSparkPersonalEffectPath = newValue.effectPath;
         EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
                                              newValue.damageHappenPoint, gameObject.transform.rotation,

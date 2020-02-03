@@ -13,7 +13,7 @@ public class Defend_State : Behavior
     float used_block_least_time;
     int DefendHP = 10;
     float lastExitTime;
-        
+
     List<Collider> damagingweaponList;
     List<Collider> nearbyenemymeat;
     Vector3 fixDesPos;
@@ -44,7 +44,7 @@ public class Defend_State : Behavior
         //    EffectAndHurtObjectLoading.Instance.GenerateEffect("onEnableShieldSpark", null, damage.damageHappenPoint, Quaternion.identity, null);
         //}
     }
-
+    
     public override void Pre_process_before_enter()
     {
         base.Pre_process_before_enter();
@@ -53,6 +53,8 @@ public class Defend_State : Behavior
 
     public override bool Capacity_enter_condition()
     {
+        //if (_Animator.GetBool("in_transition"))
+            //return false;
         if ((Time.time - lastExitTime) > DefendHpRefreshTime)
         {
             DefendHP = 10;
@@ -73,7 +75,7 @@ public class Defend_State : Behavior
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
         _Animator.SetFloat("speed", 0f);
-        Animation_Manger.AnimationTrigger(defend_clip_name);
+        Animation_Manger.AnimationTrigger(defend_clip_name,false,0.1f);
         _Rigidbody.velocity = Vector3.zero;
         used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
         time = used_block_least_time;
@@ -99,14 +101,14 @@ public class Defend_State : Behavior
          switch(newValue.damage_type)
          {
             case DamageType.light_block:
-                Animation_Manger.AnimationTrigger(block_break_name);
+                Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
             case DamageType.heavy_block:
-                Animation_Manger.AnimationTrigger(block_break_name);
+                Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                 time = used_block_least_time;
@@ -143,7 +145,7 @@ public class Defend_State : Behavior
             time -= Time.fixedDeltaTime;
             if (time < 0f)
             {
-                Animation_Manger.AnimationTrigger(defend_clip_name);
+                Animation_Manger.AnimationTrigger(defend_clip_name,true,0.1f);
             }
         }
         if (time < used_block_least_time * 0.8f)

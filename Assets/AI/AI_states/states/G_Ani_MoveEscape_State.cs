@@ -17,17 +17,15 @@ public class G_Ani_MoveEscape_State : Behavior {
 	{
 		base.Pre_process_before_enter ();
 	}
-
+    
     public override bool Capacity_enter_condition()
     {
-        return _BasicPhysicSupport.hiddenMethods.Grounded && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
+        return _BasicPhysicSupport.hiddenMethods.Grounded && base.Capacity_enter_condition();
     }
-    
+        
     public override bool Capacity_Exit_Condition()
     {
-        return !_Animator.GetCurrentAnimatorStateInfo(1).IsName("Full Body.null")
-            && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f
-            && _Animator.GetNextAnimatorClipInfoCount(1) == 0;
+        return AnimationCasualFinishedFlag();
     }
     
     Vector3 damagingWeaponComingDirection;
@@ -40,7 +38,7 @@ public class G_Ani_MoveEscape_State : Behavior {
         _SkillCancelFlag.turn_off_flag();
         personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name);        
+        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         facedirection = gameObject.transform.forward;
         if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
         {
@@ -74,7 +72,7 @@ public class G_Ani_MoveEscape_State : Behavior {
         Sensor.OneRoundDetectionStart(5);
         personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         mainCam = CameraManager._camera.transform;
         screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
         screenMovementForward = screenMovementSpace * Vector3.forward;

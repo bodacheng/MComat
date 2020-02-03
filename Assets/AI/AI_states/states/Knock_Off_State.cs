@@ -44,7 +44,7 @@ public class Knock_Off_State : Behavior
         _Rigidbody.velocity = Vector3.zero;
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);        
         int ranDom = Random.Range(0, knockoffAnimations.Count);
-        Animation_Manger.AnimationTrigger(knockoffAnimations[ranDom]);
+        Animation_Manger.AnimationTrigger(knockoffAnimations[ranDom],true,0.05f);
         KnockOffSparkPersonalEffectPath = newValue.effectPath;
         superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", KnockOffSparkPersonalEffectPath, 3);
         if (superHitPool != null)

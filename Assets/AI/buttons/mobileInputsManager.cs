@@ -143,7 +143,7 @@ public class MobileInputsManager : MonoBehaviour {
     
     public static void CheckIfPlayerIsInputting() // 如果不是对准角色，不会跑。
     {
-        inputting = defendButtonHover || attackButtonHover || fire1ButtonHover || fire2ButtonHover || accButtonHover;
+        inputting = defendButtonHover;
         if (inputting)
         {
             return;
@@ -164,7 +164,7 @@ public class MobileInputsManager : MonoBehaviour {
         inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
 
-    static bool defendButtonHover;
+    public static bool defendButtonHover;
     public bool DefendExitTrigger()
     {
         return !defendButtonHover;
@@ -177,96 +177,9 @@ public class MobileInputsManager : MonoBehaviour {
         {Inputs_defined.Fire2,null}
     };
     
-    public delegate void SkillButtonAction();
-    SkillButtonAction _attack,fire1,fire2, defend, acc;
-    
-    Behavior_Transition_Set Behavior_Set_button1, Behavior_Set_button2, Behavior_Set_button3, Behavior_Set_acc_button, Behavior_Set_defend_button;
     Behavior_Transition_Set Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
-    public void ButtonsFeatureLoad(BehaviorRunner behaviorRunner, List<Behavior_Transition_Set> Options,List<Behavior_Transition_Set> Options_preview)
-    {
-        Behavior_Set_button1 = null;
-        Behavior_Set_button2 = null;
-        Behavior_Set_button3 = null;
-        Behavior_Set_acc_button = null;
-        Behavior_Set_defend_button = null;
-        
-        for (int i = 0; i < Options.Count; i++)
-        {
-            switch (Options[i].enterInput)
-            {
-                case Inputs_defined.Attack:
-                    Behavior_Set_button1 = Options[i];
-                    break;
-                case Inputs_defined.Fire1:
-                    Behavior_Set_button2 = Options[i];
-                    break;
-                case Inputs_defined.Fire2:
-                    Behavior_Set_button3 = Options[i];
-                    break;
-                case Inputs_defined.Dash:
-                    Behavior_Set_acc_button = Options[i];
-                    break;
-                case Inputs_defined.Defend:
-                    Behavior_Set_defend_button = Options[i];
-                    break;
-            }
-        }
-        
-        void Defend()
-        {
-            if (Behavior_Set_defend_button != null)
-                behaviorRunner.ChangeState("Defend");
-        }
-        defend = Defend;
-
-        void Acc()
-        {
-            if (Behavior_Set_acc_button != null)
-                behaviorRunner.ChangeState(Behavior_Set_acc_button.StateKey);
-        }
-        acc = Acc;
-                       
-        if (Options_lastframe[Inputs_defined.Attack] != Behavior_Set_button1)
-        {
-            void AttackTrigger()
-            {
-                if (Behavior_Set_button1 != null)
-                {
-                    MobileInputsManager.SkillButtonExplosion(Behavior_Set_button1.enterInput, Behavior_Set_button1.SPLevel);
-                    behaviorRunner.ChangeState(Behavior_Set_button1.StateKey);
-                }
-            }
-            _attack = AttackTrigger;
-        }
-        
-        if (Options_lastframe[Inputs_defined.Fire1] != Behavior_Set_button2)
-        {
-            void AttackTrigger()
-            {
-                if (Behavior_Set_button2 != null)
-                {
-                    MobileInputsManager.SkillButtonExplosion(Behavior_Set_button2.enterInput, Behavior_Set_button2.SPLevel);
-                    behaviorRunner.ChangeState(Behavior_Set_button2.StateKey);
-                }
-            }
-            fire1 = AttackTrigger;
-        }
-        
-        if (Options_lastframe[Inputs_defined.Fire2] != Behavior_Set_button3)
-        {
-            void AttackTrigger()
-            {
-                if (Behavior_Set_button3 != null)
-                {
-                    MobileInputsManager.SkillButtonExplosion(Behavior_Set_button3.enterInput, Behavior_Set_button3.SPLevel);
-                    behaviorRunner.ChangeState(Behavior_Set_button3.StateKey);
-                }
-            }
-            fire2 = AttackTrigger;
-        }
-        
-        //------------
-        
+    public void ButtonsFeatureLoad(List<Behavior_Transition_Set> Options_preview)
+    {        
         Behavior_preview_button1 = null; Behavior_preview_button2 = null; Behavior_preview_button3 = null;
         for (int i = 0; i < Options_preview.Count; i++)
         {
@@ -296,59 +209,49 @@ public class MobileInputsManager : MonoBehaviour {
             ChangeButtonPatternNewTest(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SPLevel : -1);
         }
         
-        Options_lastframe[Inputs_defined.Attack] = Behavior_Set_button1;
-        Options_lastframe[Inputs_defined.Fire1] = Behavior_Set_button2;
-        Options_lastframe[Inputs_defined.Fire2] = Behavior_Set_button3;
+        Options_lastframe[Inputs_defined.Attack] = Behavior_preview_button1;
+        Options_lastframe[Inputs_defined.Fire1] = Behavior_preview_button2;
+        Options_lastframe[Inputs_defined.Fire2] = Behavior_preview_button3;
     }
 
     void Update()
     {
         CheckIfPlayerIsInputting();
-        if (attackButtonHover)
-            _attack();
-        if (fire1ButtonHover)
-            fire1();
-        if (fire2ButtonHover)
-            fire2();
-        if (accButtonHover)
-            acc();
-        if (defendButtonHover)
-            defend();
     }
 
-    static bool attackButtonHover;
+    public static bool attack;
     public void AttackDown()
     {
-        attackButtonHover = true;
         StartPressing(Attack);
+        attack = true;
     }
     public void AttackUp()
     {
-        attackButtonHover = false;
         StopPressing();
+        attack = false;
     }
     
-    static bool fire1ButtonHover;
+    public static bool fire1;
     public void Fire1Down()
     {
-        fire1ButtonHover = true;
+        fire1 = true;
         StartPressing(Fire1);
     }
     public void Fire1Up()
     {
-        fire1ButtonHover = false;
+        fire1 = false;
         StopPressing();
     }
     
-    static bool fire2ButtonHover;
+    public static bool fire2;
     public void Fire2Down()
     {
-        fire2ButtonHover = true;
+        fire2 = true;
         StartPressing(Fire2);
     }
     public void Fire2Up()
     {
-        fire2ButtonHover = false;
+        fire2 = false;
         StopPressing();
     }
 
@@ -363,15 +266,15 @@ public class MobileInputsManager : MonoBehaviour {
         StopPressing();
     }
 
-    static bool accButtonHover;
+    public static bool acc;
     public void RushDown()
     {
-        accButtonHover = true;
+        acc = true;
         StartPressing(Dash);
     }
     public void RushUp()
     {
-        accButtonHover = false;
+        acc = false;
         StopPressing();
     }
 

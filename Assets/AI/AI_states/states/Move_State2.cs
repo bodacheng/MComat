@@ -53,8 +53,7 @@ public class Move_State2 : Behavior
         use_speed = speed;
         this.mainCam = CameraManager._camera.transform;
         _Rigidbody.useGravity = true;
-        Animation_Manger.PlayLayerAnim(null);
-
+        Animation_Manger.PlayLayerAnim(null,true,0.05f);
         if (!_BasicPhysicSupport.hiddenMethods.Grounded)
             use_direction.y = -1;
     }
@@ -155,7 +154,7 @@ public class Move_State2 : Behavior
         use_speed = speed;
         this.mainCam = CameraManager._camera.transform;
         _Rigidbody.useGravity = true;
-        Animation_Manger.PlayLayerAnim(null);
+        Animation_Manger.PlayLayerAnim(null,true,0.05f);
     }
 
     private float angle;

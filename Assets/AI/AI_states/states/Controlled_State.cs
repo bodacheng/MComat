@@ -23,9 +23,9 @@ public class Controlled_State : Behavior {
         base.AI_State_enter();
         personality_Events.CloseAllPersonalityEffects();
 		_Rigidbody.useGravity = false;
-        Animation_Manger.AnimationTrigger(clip_name);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
     }
-
+    
 	public override bool Capacity_Exit_Condition()//如果受伤动画播放完的话状态就退出，如果时间过了规定的晕眩时间，也退出。
 	{
         return false;
