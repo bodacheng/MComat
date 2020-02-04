@@ -26,6 +26,10 @@ public class NineAndTwo {
     Behavior_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
     List<Behavior_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
 
+    List<Behavior_Transition_Set> H1_list = new List<Behavior_Transition_Set>();
+    List<Behavior_Transition_Set> H2_list = new List<Behavior_Transition_Set>();
+    List<Behavior_Transition_Set> H3_list = new List<Behavior_Transition_Set>();
+
     public Behavior_Transition_Set GetD_STS()
     {
         return D;
@@ -229,7 +233,6 @@ public class NineAndTwo {
         }
     }
 
-    List<Behavior_Transition_Set> chuanEndCasualT0 = new List<Behavior_Transition_Set>();
     // 为了正确表现DMR和其他状态的处理顺序，这个函数应该把DMR的config作为参数。表示这几个是被动，要附加在其他技能存档上执行。
     public void SortNineAndTwo()
     {
@@ -296,31 +299,24 @@ public class NineAndTwo {
         }
 
         //////////////////////////////////////////////////////////////////////////////
-        List<Behavior_Transition_Set> H1_list = new List<Behavior_Transition_Set>();
-        List<Behavior_Transition_Set> H2_list = new List<Behavior_Transition_Set>();
-        List<Behavior_Transition_Set> H3_list = new List<Behavior_Transition_Set>();
-
-        List<Behavior_Transition_Set> A_list = new List<Behavior_Transition_Set>();
-        List<Behavior_Transition_Set> B_list = new List<Behavior_Transition_Set>();
-        List<Behavior_Transition_Set> C_list = new List<Behavior_Transition_Set>();
+        H1_list.Clear();
+        H2_list.Clear();
+        H3_list.Clear();
 
         if (A1 != null)
         {
-            A_list.Add(A1);
             H1_list.Add(A1);
             A1.enterInput = Inputs_defined.Attack;
             A1.exitInput = Inputs_defined.Null;
         }
         if (A2 != null)
         {
-            A_list.Add(A2);
             H2_list.Add(A2);
             A2.enterInput = Inputs_defined.Attack;
             A2.exitInput = Inputs_defined.Null;
         }
         if (A3 != null)
         {
-            A_list.Add(A3);
             H3_list.Add(A3);
             A3.enterInput = Inputs_defined.Attack;
             A3.exitInput = Inputs_defined.Null;
@@ -328,21 +324,18 @@ public class NineAndTwo {
 
         if (B1 != null)
         {
-            B_list.Add(B1);
             H1_list.Add(B1);
             B1.enterInput = Inputs_defined.Fire1;
             B1.exitInput = Inputs_defined.Null;
         }
         if (B2 != null)
         {
-            B_list.Add(B2);
             H2_list.Add(B2);
             B2.enterInput = Inputs_defined.Fire1;
             B2.exitInput = Inputs_defined.Null;
         }
         if (B3 != null)
         {
-            B_list.Add(B3);
             H3_list.Add(B3);
             B3.enterInput = Inputs_defined.Fire1;
             B3.exitInput = Inputs_defined.Null;
@@ -350,150 +343,56 @@ public class NineAndTwo {
 
         if (C1 != null)
         {
-            C_list.Add(C1);
             H1_list.Add(C1);
             C1.enterInput = Inputs_defined.Fire2;
             C1.exitInput = Inputs_defined.Null;
         }
         if (C2 != null)
         {
-            C_list.Add(C2);
             H2_list.Add(C2);
             C2.enterInput = Inputs_defined.Fire2;
             C2.exitInput = Inputs_defined.Null;
         }
         if (C3 != null)
         {
-            C_list.Add(C3);
             H3_list.Add(C3);
             C3.enterInput = Inputs_defined.Fire2;
             C3.exitInput = Inputs_defined.Null;
         }
-
-        for (int i = 0; i < A_list.Count; i++)
-        {
-            List<Behavior_Transition_Set> casualT0 = new List<Behavior_Transition_Set>();
-            switch (i)
-            {
-                case 0://查H2
-                    for (int y = 0; y < H2_list.Count; y++)
-                    {
-                        casualT0.Add(H2_list[y]);
-                    }
-                    break;
-                case 1://查H3
-                    for (int y = 0; y < H3_list.Count; y++)
-                    {
-                        casualT0.Add(H3_list[y]);
-                    }
-                    break;
-                case 2://查H1
-                    for (int y = 0; y < H1_list.Count; y++)
-                    {
-                        casualT0.Add(H1_list[y]);
-                    }
-                    break;
-            }
-            if (R != null)
-            {
-                casualT0.Add(R);
-            }
-            if (D != null)
-            {
-                casualT0.Add(D);
-            }
-            A_list[i].Casual_To_Behaviours = casualT0.ToArray();
-        }
-
-        //////////////
-        for (int i = 0; i < B_list.Count; i++)
-        {
-            List<Behavior_Transition_Set> casualT0 = new List<Behavior_Transition_Set>();
-            switch (i)
-            {
-                case 0://查H2
-                    for (int y = 0; y < H2_list.Count; y++)
-                    {
-                        casualT0.Add(H2_list[y]);
-                    }
-                    break;
-                case 1://查H3
-                    for (int y = 0; y < H3_list.Count; y++)
-                    {
-                        casualT0.Add(H3_list[y]);
-                    }
-                    break;
-                case 2://查H1
-                    for (int y = 0; y < H1_list.Count; y++)
-                    {
-                        casualT0.Add(H1_list[y]);
-                    }
-                    break;
-            }
-            if (R != null)
-            {
-                casualT0.Add(R);
-            }
-            if (D != null)
-            {
-                casualT0.Add(D);
-            }
-            B_list[i].Casual_To_Behaviours = casualT0.ToArray();
-        }
-        //////////////////////////////////
-
-        for (int i = 0; i < C_list.Count; i++)
-        {
-            List<Behavior_Transition_Set> casualT0 = new List<Behavior_Transition_Set>();
-            switch (i)
-            {
-                case 0://查H2
-                    for (int y = 0; y < H2_list.Count; y++)
-                    {
-                        casualT0.Add(H2_list[y]);
-                    }
-                    break;
-                case 1://查H3
-                    for (int y = 0; y < H3_list.Count; y++)
-                    {
-                        casualT0.Add(H3_list[y]);
-                    }
-                    break;
-                case 2://查H1
-                    for (int y = 0; y < H1_list.Count; y++)
-                    {
-                        casualT0.Add(H1_list[y]);
-                    }
-                    break;
-            }
-            if (R != null)
-            {
-                casualT0.Add(R);
-            }
-            if (D != null)
-            {
-                casualT0.Add(D);
-            }
-            C_list[i].Casual_To_Behaviours = casualT0.ToArray();
-        }
-
-        chuanEndCasualT0.Clear();
-
-        if (A1 != null)
-            chuanEndCasualT0.Add(A1);
-        if (B1 != null)
-            chuanEndCasualT0.Add(B1);
-        if (C1 != null)
-            chuanEndCasualT0.Add(C1);
-        if (D != null)
-            chuanEndCasualT0.Add(D);
+        
+        // --
         if (R != null)
-            chuanEndCasualT0.Add(R);
+        {
+            H1_list.Add(R);
+            H2_list.Add(R);
+            H3_list.Add(R);
+        }
+        if (D != null)
+        {
+            H1_list.Add(D);
+            H2_list.Add(D);
+            H3_list.Add(D);
+        }
+
+        for (int i = 0; i < H1_list.Count; i++)
+        {
+            H1_list[i].Casual_To_Behaviours = H2_list.ToArray();
+        }
+        
+        for (int i = 0; i < H2_list.Count; i++)
+        {
+            H2_list[i].Casual_To_Behaviours = H3_list.ToArray();
+        }
+        
+        for (int i = 0; i < H3_list.Count; i++)
+        {
+            H3_list[i].Casual_To_Behaviours = H1_list.ToArray();
+        }
         
         if (D != null)
-            D.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
+            D.Casual_To_Behaviours = H1_list.ToArray();
         if (R != null)
-            R.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
+            R.Casual_To_Behaviours = H1_list.ToArray();
     }
 
     //FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
@@ -538,7 +437,7 @@ public class NineAndTwo {
                                                                BehaviorType.Def,
                                                                0,
                                                                 null,
-                                                              chuanEndCasualT0.ToArray(),
+                                                              H1_list.ToArray(),
                                                                null,
                                                                Inputs_defined.Defend, Inputs_defined.Defend_Cancel,
                                                                0,
@@ -548,7 +447,7 @@ public class NineAndTwo {
                                                              BehaviorType.NONE,
                                                              0,
                                                              null,
-                                                             chuanEndCasualT0.ToArray(),
+                                                             H1_list.ToArray(),
                                                              null,
                                                              Inputs_defined.Null, Inputs_defined.Null,
                                                              0,
@@ -558,7 +457,7 @@ public class NineAndTwo {
                                                             BehaviorType.Hit,
                                                             0,
                                                             null,
-                                                            chuanEndCasualT0.ToArray(),
+                                                            H1_list.ToArray(),
                                                             null,
                                                             Inputs_defined.Null, Inputs_defined.Null,
                                                             0,
@@ -586,42 +485,42 @@ public class NineAndTwo {
         }
         if (this.A2 != null)
         {
-            StateTransitionSetList.Add(this.A2);
+            StateTransitionSetList.Add(A2);
         }            
         if (this.A3 != null)
         {
-            StateTransitionSetList.Add(this.A3);
+            StateTransitionSetList.Add(A3);
         }
         if (this.B1 != null)
         {
-            StateTransitionSetList.Add(this.B1);
+            StateTransitionSetList.Add(B1);
         }            
         if (this.B2 != null)
         {
-            StateTransitionSetList.Add(this.B2);
+            StateTransitionSetList.Add(B2);
         }
         if (this.B3 != null)
         {
-            StateTransitionSetList.Add(this.B3);
+            StateTransitionSetList.Add(B3);
         }
         if (this.C1 != null)
         {
-            StateTransitionSetList.Add(this.C1);
+            StateTransitionSetList.Add(C1);
         }                    
         if (this.C2 != null)
         {
-            StateTransitionSetList.Add(this.C2);
+            StateTransitionSetList.Add(C2);
         }            
         if (this.C3 != null)
         {
-            StateTransitionSetList.Add(this.C3);
+            StateTransitionSetList.Add(C3);
         }
         
         if (this.M != null)
         {
             //下面这些就是怕数据库里九宫格里的M记载有错。
             M.SPLevel = -1;
-            M.Casual_To_Behaviours = chuanEndCasualT0.ToArray();
+            M.Casual_To_Behaviours = H1_list.ToArray();
             M.AI_trigger_ranges = null;
             StateTransitionSetList.Add(M);
         }
@@ -632,7 +531,7 @@ public class NineAndTwo {
                                                                     BehaviorType.GetUp,
                                                                     0,
                                                                     null,
-                                                                    chuanEndCasualT0.ToArray(),
+                                                                    H1_list.ToArray(),
                                                                     null,
                                                                     Inputs_defined.Any, Inputs_defined.Null,
                                                                     0,
