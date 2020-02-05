@@ -72,7 +72,8 @@ namespace Soul
                 #region AI决策
                 if (AI_RUNs(behaviorRunner,Options))
                 {
-                    return;
+                    return;//20200205的bug怀疑是卡在这个部位。原因在于bug明显受AI模式影响，并且角色后跳后“定住”的时候只要输入方向，就会开始走动。
+                    //基本说明输入行为让AI_Active为false从而放行至接下来的归idle判断，从而让角色直接进入move state
                 }
                 #endregion
             }
