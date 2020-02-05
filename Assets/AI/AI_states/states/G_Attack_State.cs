@@ -45,7 +45,6 @@ public partial class G_Attack_State : Behavior {
     public G_Attack_State(string clip_name)
 	{
 		this.clip_name = clip_name;
-        behaviorEnterRanges = null;
     }
 
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, float approachingSpeed, string clip_name)
@@ -154,9 +153,7 @@ public partial class G_Attack_State : Behavior {
                     Debug.Log("here:"+ clip_name);
                     Animation_Manger.PlayLayerAnim(null,true,0f);
                 }
-
                 _BuffsRunner.RunSubCoroutineOfState(rushCoroutine);
-                return;
             }
             else
             {

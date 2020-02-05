@@ -98,6 +98,12 @@ namespace HittingDetection
             {
                 foreach (V_Damage _hitOnHealthBody in hitsOnHealthBody)
                 {
+                    if (_Used_Targets == null)
+                    {
+                        Debug.Log("邪门了："+gameObject);
+                        break;
+                    }
+                    
                     if (_hitOnHealthBody.victim != null && _Used_Targets.Contains(_hitOnHealthBody.victim.transform) == false)
                     {
                         _hitOnHealthBody.victim.ApplyDamage(_hitOnHealthBody);
@@ -115,11 +121,9 @@ namespace HittingDetection
                         //    }
                         //}
                         if (_Used_Targets != null)
-                        {
                             _Used_Targets.Add(_hitOnHealthBody.victim.transform);
-                        }else{
+                        else
                             Debug.Log("邪门了："+gameObject);
-                        }
                     }
                 }
             }

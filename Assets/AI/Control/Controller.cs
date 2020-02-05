@@ -100,6 +100,7 @@ namespace Soul
 
         readonly List<string> allAvaliableKeyCodes = new List<string>();
         string Condition, BehaviourCode;
+        Behavior temp;
         bool AI_RUNs(BehaviorRunner behaviorRunner,List<Behavior_Transition_Set> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
         {
             finalDecisions.Clear();
@@ -138,6 +139,12 @@ namespace Soul
                 }
                 if (finalDecisions.Count > 0)
                 {
+                    //Debug.Log("---------------");
+                    //for (int i = 0; i < finalDecisions.Count; i++)
+                    //{
+                    //    Debug.Log("we here"+ finalDecisions[i].StateKey);
+                    //}
+                    //Debug.Log("---------------");
                     int random = Random.Range(0,finalDecisions.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
                     if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
                         MobileInputsManager.SkillButtonExplosion(finalDecisions[random].enterInput, finalDecisions[random].SPLevel);

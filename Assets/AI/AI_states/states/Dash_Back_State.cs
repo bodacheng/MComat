@@ -11,7 +11,6 @@ public class Dash_Back_State : Behavior
     public Dash_Back_State()
     {
         clip_name = "rushback";
-        behaviorEnterRanges = null;
         breakfreestart = () =>
         {
             _ResistanceManager.Resistance.Value +=10;

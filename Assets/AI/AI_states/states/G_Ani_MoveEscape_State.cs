@@ -10,7 +10,6 @@ public class G_Ani_MoveEscape_State : Behavior {
     public G_Ani_MoveEscape_State(string _clip_name)
 	{
         clip_name = _clip_name;
-        behaviorEnterRanges = null;
 	}
 
     public override void Pre_process_before_enter()

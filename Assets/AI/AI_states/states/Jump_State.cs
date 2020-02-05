@@ -22,16 +22,7 @@ public class Jump_State : Behavior
         this.state_time = least_state_time;
 	}
 
-    public Jump_State(string clip, float forward_force, float vertical_force, float least_state_time,bool onEnemyBounce, BehaviorEnterRange[] behaviorEnterRanges)
-    {
-        this.clip_name = clip;
-        this.forward_force = forward_force;
-        this.vertical_force = vertical_force;
-        this.state_time = least_state_time;
-        this.behaviorEnterRanges = behaviorEnterRanges;
-    }
-
-    public Jump_State(string clip, float forward_force, float vertical_force, float least_state_time, bool onEnemyBounce)
+    public Jump_State(string clip, float forward_force, float vertical_force, float least_state_time,bool onEnemyBounce)
     {
         this.clip_name = clip;
         this.forward_force = forward_force;

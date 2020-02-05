@@ -34,8 +34,6 @@ namespace Soul
         public int splevel;
         public Inputs_defined enterInput = Inputs_defined.Null;
         public Inputs_defined exitInput = Inputs_defined.Null;
-        public BehaviorEnterRange[] behaviorEnterRanges;
-        protected BehaviorEnterRange[] InnerAndMidAndFarRanges = { BehaviorEnterRange.inner_range, BehaviorEnterRange.mid_range, BehaviorEnterRange.far_range };
 
         // Prepare for basic parameters here
         public virtual void Pre_process_before_enter()
@@ -68,7 +66,7 @@ namespace Soul
 
         public virtual bool Strategic_exit_condition()
         {
-            return CheckExitCondition(strategic_exit_condition_code);
+            return CheckExitCondition(StateKey);
         }
 
         public virtual bool Capacity_enter_condition()
@@ -173,18 +171,18 @@ namespace Soul
         bool inner;
         bool mid;
         bool far;
-        protected bool CheckToEnemyDisEnterCondition(BehaviorEnterRange[] behaviorEnterRanges)
+        bool CheckToEnemyDisEnterCondition(BehaviorEnterRange[] _behaviorEnterRanges)
         {
-            if (behaviorEnterRanges != null)
+            if (_behaviorEnterRanges != null)
             {
-                if (behaviorEnterRanges.Length == 0)
+                if (_behaviorEnterRanges.Length == 0)
                     return true;
                 inner = false;
                 mid = false;
                 far = false;
-                for (int i = 0; i < behaviorEnterRanges.Length; i++)
+                for (int i = 0; i < _behaviorEnterRanges.Length; i++)
                 {
-                    switch (behaviorEnterRanges[i])
+                    switch (_behaviorEnterRanges[i])
                     {
                         case BehaviorEnterRange.inner_range:
                             inner |= this.Sensor.GetInnerEnemiesColliders().Count > 0;
@@ -202,8 +200,6 @@ namespace Soul
                                 &&
                                 this.Sensor.GetFarEnemiesColliders().Count == 0)
                                 return true;
-                            break;
-                        default:
                             break;
                     }
                 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
 
 namespace Soul
 {
@@ -8,7 +9,7 @@ namespace Soul
         //public List<string> priority1 = new List<string>();
         //public List<string> priority2 = new List<string>();
         //public List<string> priority3 = new List<string>();
-        public string strategic_exit_condition_code;
+        //public string strategic_exit_condition_code;
         
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
@@ -22,7 +23,7 @@ namespace Soul
         
         public bool DangerousClose() //Counter_State 1 2 3
         {
-            return Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
+            return Sensor.GetNearbyDamagingWeaponColliders().Count > 0;
         }
         
         List<Collider> damagingweaponList;
@@ -64,35 +65,42 @@ namespace Soul
             return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
         }
         
-        public bool TimeToAttack() //G_Attack_State 。。原本有个skillEmergentLevel的机制。。一般是2
+        public bool TimeToAttack_Close()
         {
             if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
-                return false;
-            if (_AIStateRunner.GetNowState() != null)
             {
-                if (_AIStateRunner.GetNowState().nextAttackStateCanRushFirst == true)
-                    return CheckToEnemyDisEnterCondition(this.InnerAndMidAndFarRanges);
-    
-                //if (this._AIStateRunner.getNowState().StateType == stateType.GR ||
-                    //this._AIStateRunner.getNowState().StateType == stateType.GM ||
-                    //this._AIStateRunner.getNowState().StateType == stateType.GI)
-                    //return this.checkToEnemyDisEnterCondition(RangePlusOne(this.behaviorEnterRanges));
+                return false;
             }
-            return CheckToEnemyDisEnterCondition(this.behaviorEnterRanges);
+            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.inner_range });
         }
         
-        public bool TimeToDashAttack()
+        public bool TimeToAttack_Near()
         {
-            return _AIStateRunner.GetNowState() != null &&
-            (_AIStateRunner.GetNowState().StateType == BehaviorType.GI ||
-            _AIStateRunner.GetNowState().StateType == BehaviorType.GR ||
-            _AIStateRunner.GetNowState().StateType == BehaviorType.GM ||
-            _AIStateRunner.GetNowState().StateType == BehaviorType.AC) 
-            && Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null
-            ? CheckToEnemyDisEnterCondition(RangePlusOne(behaviorEnterRanges))
-            : Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && CheckToEnemyDisEnterCondition(behaviorEnterRanges);
+            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
+            {
+                return false;
+            }
+            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.mid_range });
         }
         
+        public bool TimeToAttack_Far()
+        {
+            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
+            {
+                return false;
+            }
+            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.far_range });
+        }
+        
+        public bool TimeToAttack_OutterRange()
+        {
+            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
+            {
+                return false;
+            }
+            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.out_of_range });
+        }
+    
         public bool TimeToRespond()
         {
             damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
@@ -106,30 +114,20 @@ namespace Soul
         
         public bool CheckTriggerCondition(string conditionFunctionName)
         {
-            switch(conditionFunctionName)
-            {
-                case "LosingDefendStrength":
-                    return LosingDefendStrength();
-                case "DangerousNearby":
-                    return DangerousNearby();
-                case "TimeToAttack":
-                    return TimeToAttack();
-                case "TimeToDashAttack":
-                    return TimeToDashAttack();
-                case "DangerousClose":
-                    return DangerousClose();
-                case "DangerousVeryClose":
-                    return DangerousVeryClose();
-                case "MayBeDefend":
-                    return MayBeDefend();
-                default:
-                    return false;
+            System.Type T = typeof(Behavior);
+            MethodInfo theMethod = T.GetMethod(conditionFunctionName); //激活同名函数
+            if (theMethod != null)
+            {   
+                return (bool)theMethod.Invoke(this, null);
             }
+            return false;
         }
         
-        public bool CheckExitCondition(string exitFunctionName)
+        public bool CheckExitCondition(string stateKey)
         {
-            switch(exitFunctionName)
+            string exitCondition;
+            _AIStateRunner.BehaviourAndStrategicExitCondition.TryGetValue(stateKey,out exitCondition);
+            switch(exitCondition)
             {
                 case "TimeToRespond":
                     return TimeToRespond();
