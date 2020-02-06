@@ -23,7 +23,7 @@ public class Knock_Off_State : Behavior
 
     Decompositioner processingBlood;
     string KnockOffSparkPersonalEffectPath;
-    List<AnimationClip> knockoffAnimations;
+
     public override void AI_State_enter(V_Damage newValue)
     {
         base.AI_State_enter();
@@ -42,9 +42,7 @@ public class Knock_Off_State : Behavior
         personality_Events.CloseAllPersonalityEffects();
         _FightAttriCalReference.PlusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(this._AIStateRunner.characterType + "/basic_knockoffs", out knockoffAnimations);        
-        int ranDom = Random.Range(0, knockoffAnimations.Count);
-        Animation_Manger.AnimationTrigger(knockoffAnimations[ranDom],true,0.05f);
+        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
         KnockOffSparkPersonalEffectPath = newValue.effectPath;
         superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", KnockOffSparkPersonalEffectPath, 3);
         if (superHitPool != null)

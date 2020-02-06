@@ -268,7 +268,7 @@ namespace mainMenu
             skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo._NineAndTwo != null)
             {
-                SkillScriptReader(_watchingCharacterResourceInfo.type, _watchingCharInfo._NineAndTwo);
+                SkillScriptReader(_watchingCharInfo._NineAndTwo);
             }
 
             void backGroundButtonforRefresh()
@@ -279,8 +279,8 @@ namespace mainMenu
         }
 
         //从这个环节看，只要AIStateRunner模块有一个把九宫格信息转成最终技能组的函数，就能和SkillsPrintOut模块接轨
-        private Button newShow;
-        public void SkillScriptReader(string type, NineAndTwo nineAndTwo)
+        Button newShow;
+        public void SkillScriptReader(NineAndTwo nineAndTwo)
         {
             skillName.text = "";
 
@@ -300,7 +300,7 @@ namespace mainMenu
                 Destroy(child.gameObject);
             }
 
-            this.focusingCharacterData._MyBehaviorRunner.FormFightingSetsByNineAndTwo(type, nineAndTwo);
+            this.focusingCharacterData._MyBehaviorRunner.FormFightingSetsByNineAndTwo(nineAndTwo);
             analysisStatesList.Clear();
             analysisStatesList = this.focusingCharacterData._MyBehaviorRunner.State_Transition_Set_List;
             analysisStatesSetDic.Clear();

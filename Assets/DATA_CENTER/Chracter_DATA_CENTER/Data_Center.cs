@@ -103,7 +103,8 @@ public partial class Data_Center : MonoBehaviour
                     yield return (Animation_Manger.preloadBasicPersonalAnimsResourceMode(type, basicPackName));
                     break;
             }
-            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(this.Zokusei, personalMagicPath);
+            Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
+            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(Zokusei, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else
@@ -176,11 +177,10 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!phase2Initialized)
         {
-            _MyBehaviorRunner.characterType = type;
             phase2Initialized = true;
         }
         
-        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(type, _NineAndTwo);
+        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo);
         _MyBehaviorRunner.INIStates(this);
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表

@@ -10,7 +10,7 @@ using UnityEditor;
 
 public static class AIScriptReading {
 
-    public static List<Behavior_Transition_Set> ReadKongfuBook(BehaviorRunner _AIStateRunner,TextAsset Script,string type)
+    public static List<Behavior_Transition_Set> ReadKongfuBook(BehaviorRunner _AIStateRunner,TextAsset Script)
     {
         try
         {
@@ -39,7 +39,7 @@ public static class AIScriptReading {
                 var reader = new System.IO.StringReader(Script.text);
                 list = serializer.Deserialize(reader) as List<Behavior_Transition_Set>;
             }
-            list = _AIStateRunner.SortStateTransitionSetList(list, type);
+            list = _AIStateRunner.SortStateTransitionSetList(list);
             _AIStateRunner.usingScript = Script;
             if (list == null)
             {

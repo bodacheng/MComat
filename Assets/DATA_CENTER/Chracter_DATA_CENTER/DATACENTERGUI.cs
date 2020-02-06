@@ -11,12 +11,12 @@ public class DATACENTERGUI : Editor {
     Data_Center myScript;
 
     public override void OnInspectorGUI()
-    {
+    {        
         myScript = (Data_Center)target;
 
         if (Application.isPlaying)
             return;
-        
+
         title = new GUIStyle(GUI.skin.box);
         title.normal.textColor = Color.blue;
         title.fontSize = 11;

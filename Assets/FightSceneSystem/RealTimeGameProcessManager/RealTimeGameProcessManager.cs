@@ -153,7 +153,7 @@ public enum Inputs_defined
     Attack = 0,
     Fire1 = 1,
     Fire2 = 2,
-    Dash = 5,
+    Acc = 5,
     Defend = 3,
     Defend_Cancel = 4,
     Any = 6

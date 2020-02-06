@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public partial class Animation_Manger : MonoBehaviour
 {
@@ -58,5 +59,25 @@ public partial class Animation_Manger : MonoBehaviour
                 Animator.CrossFade("null", Duration);
             }       
         }
+    }
+    
+    List<AnimationClip> hurtclips;
+    List<AnimationClip> knockoffAnimations;
+    public void PrepareHurtAndKnockOffAnimations(string type)
+    {
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts", out hurtclips);
+    }
+    
+    public AnimationClip GetRandomHurtAnim()
+    {
+        int ranDom = Random.Range(0, hurtclips.Count);
+        return hurtclips[ranDom];
+    }
+    
+    public AnimationClip GetRandomKnockOffAnim()
+    {
+        int ranDom = Random.Range(0, knockoffAnimations.Count);
+        return knockoffAnimations[ranDom];
     }
 }

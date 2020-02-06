@@ -9,7 +9,7 @@ using System.Text;
 
 public class SkillConfigTable
 {
-    private static SkillConfigTable instance;
+    static SkillConfigTable instance;
     public static SkillConfigTable Instance
     {
         get
@@ -104,8 +104,10 @@ public class SkillConfigTable
     
     public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, int rarelevel)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
-        Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>();
-        SkillIDAndNameDic.Add("-1","空");
+        Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>
+        {
+            { "-1", "空" }
+        };
         List<SkillConfig> list = GetSkillConfigsOfType(type);
         foreach (SkillConfig one in list)
         {

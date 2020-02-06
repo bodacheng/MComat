@@ -48,7 +48,7 @@ namespace Soul
                                 return;
                             }
                             break;
-                        case Inputs_defined.Dash:
+                        case Inputs_defined.Acc:
                             if (MobileInputsManager.acc)
                             {
                                 behaviorRunner.ChangeState(Options[i].StateKey);

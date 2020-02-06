@@ -146,7 +146,7 @@ namespace Soul
             }
         }
     
-        public void FormFightingSetsByNineAndTwo(string type, NineAndTwo nineAndTwo)
+        public void FormFightingSetsByNineAndTwo(NineAndTwo nineAndTwo)
         {
             nineAndTwo.SortNineAndTwo();
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
@@ -157,7 +157,7 @@ namespace Soul
             hasD = nineAndTwo.GetDConfig() != null;
             hasR = nineAndTwo.GetRConfig() != null;
 
-            _States_Incubator = new Behaviors_Incubator(type, empty_State,this.Behaviour_Transition_Dictionary);
+            _States_Incubator = new Behaviors_Incubator(empty_State,this.Behaviour_Transition_Dictionary);
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
             Behaviour_Dictionary = new Dictionary<string, Behavior>();
             ConditionAndRespondPriority = new MultiDictionary<string, string, int>();

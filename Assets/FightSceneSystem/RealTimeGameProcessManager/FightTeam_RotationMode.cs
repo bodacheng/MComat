@@ -24,7 +24,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void action1()
             {
-                this.ChangeFightingMember(a_char);
+                ChangeFightingMember(a_char);
                 realTimeGameProcessManager.Refresh();
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);

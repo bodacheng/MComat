@@ -291,7 +291,7 @@ public class NineAndTwo {
         if (this.RConfig != null)
         {
             this.R = FromConfigToSTS(this.RConfig);
-            this.R.enterInput = Inputs_defined.Dash;
+            this.R.enterInput = Inputs_defined.Acc;
         }
         else
         {

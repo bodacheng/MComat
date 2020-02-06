@@ -31478,9 +31478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 95090415720798536}
-  Coroutine_Step: 1
   _toUse: {fileID: 0}
-  _C: {fileID: 400618592917913358}
 --- !u!114 &3230307588168598927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31617,6 +31615,7 @@ MonoBehaviour:
     SPLevel: 0
     rarelevel: 0
     forced_to_state_nums: []
+  AllConditionCodes: []
   SRTListForCasualTransitionbuttonRefresh: []
   AI_States_path: 
   usingScript: {fileID: 0}

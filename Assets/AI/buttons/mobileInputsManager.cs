@@ -285,6 +285,12 @@ public class MobileInputsManager : MonoBehaviour {
         Fire2.gameObject.SetActive(true);
         Defend.gameObject.SetActive(true);
         Dash.gameObject.SetActive(true);
+        
+        attack = false;
+        fire1 = false;
+        fire2 = false;
+        acc = false;
+        defendButtonHover = false;
     }
 
     public void TurnOffButtons()
@@ -294,9 +300,18 @@ public class MobileInputsManager : MonoBehaviour {
         Fire2.gameObject.SetActive(false);
         Defend.gameObject.SetActive(false);
         Dash.gameObject.SetActive(false);
+        
+        attack = false;
+        fire1 = false;
+        fire2 = false;
+        acc = false;
+        defendButtonHover = false;
+
         Observing_Runner = null;
         if (_focusingButtonEffectsGroup != null)
+        {
             _focusingButtonEffectsGroup.Close();
+        }
     }
 
     static Vector2 buttonAnchorPosition;

@@ -17,9 +17,9 @@ namespace Soul
             return _States_Incubator?.SkillTypeKeys;
         }
 
-        public void SaveTrans()
+        public void SaveTrans(string chracterType)
         {
-            this.SaveStateTransitionInfo(State_Transition_Set_List, AI_States_path, characterType);
+            this.SaveStateTransitionInfo(State_Transition_Set_List, AI_States_path, chracterType);
         }
 
         public string ArrangeScriptPathForPlatfom(string PathInStringOrigin)
@@ -49,7 +49,7 @@ namespace Soul
                 {
                     toFormAttackStateList.Add(list[i].StateKey, list[i]);
                 }
-                _States_Incubator = new Behaviors_Incubator(clip_path, empty_State,toFormAttackStateList);
+                _States_Incubator = new Behaviors_Incubator(empty_State,toFormAttackStateList);
 
                 List<Behavior_Transition_Set> after_list = new List<Behavior_Transition_Set>();
                 List<string> alreadyInList = new List<string>();
@@ -177,7 +177,7 @@ namespace Soul
             }
         }
 
-        public void LoadStatesTransition(string type, TextAsset Script)
+        public void LoadStatesTransition(TextAsset Script)
         {
             if (Script == null)
             {
@@ -189,7 +189,7 @@ namespace Soul
                 now_Behavior.AI_State_exit();
             }
 
-            State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script, type);//这个是一个状态清单，生成状态的是States_Dictionary类。
+            State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script);//这个是一个状态清单，生成状态的是States_Dictionary类。
                                                                                                           //_States_Dictionary = new States_Dictionary(type,this.State_Transition_Set_List);//这一行于7月20号commentout了
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List;// 理解整个系统的关键
             Behaviour_Dictionary = new Dictionary<string, Behavior>();
@@ -250,14 +250,14 @@ namespace Soul
             }
         }
 
-        public List<Behavior_Transition_Set> SortStateTransitionSetList(List<Behavior_Transition_Set> list, string clip_path)
+        public List<Behavior_Transition_Set> SortStateTransitionSetList(List<Behavior_Transition_Set> list)
         {
             IDictionary<string, Behavior_Transition_Set> toFormAttackStateList = new Dictionary<string, Behavior_Transition_Set>();
             for (int i = 0; i < list.Count; i++)
             {
                 toFormAttackStateList.Add(list[i].StateKey, list[i]);
             }
-            _States_Incubator = new Behaviors_Incubator(clip_path, empty_State,toFormAttackStateList);
+            _States_Incubator = new Behaviors_Incubator(empty_State,toFormAttackStateList);
             IDictionary<string, Behavior_Transition_Set> stateTransitionSetDictionary = new Dictionary<string, Behavior_Transition_Set>();
             List<Behavior_Transition_Set> setsHaveInitialInput = new List<Behavior_Transition_Set>();
             List<Behavior_Transition_Set> regularStates = new List<Behavior_Transition_Set>();
@@ -274,7 +274,7 @@ namespace Soul
 
                 if (_set.enterInput != Inputs_defined.Null)
                 {
-                    hasR |= _set.enterInput == Inputs_defined.Dash;
+                    hasR |= _set.enterInput == Inputs_defined.Acc;
                     hasD |= _set.enterInput == Inputs_defined.Defend;
                     setsHaveInitialInput.Add(_set);
                 }

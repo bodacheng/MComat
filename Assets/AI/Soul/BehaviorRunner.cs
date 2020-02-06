@@ -7,7 +7,6 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         #region 初始化相关
-        public string characterType;
         public List<Behavior_Transition_Set> State_Transition_Set_List;
         Behaviors_Incubator _States_Incubator;
         #endregion

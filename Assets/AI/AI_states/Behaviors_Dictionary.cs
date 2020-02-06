@@ -14,11 +14,8 @@ public class Behaviors_Incubator
     public List<string> StateIndexList;
     public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
-    public Behaviors_Incubator(string anim_path, Empty_State empty_State,IDictionary<string, Behavior_Transition_Set> toFormAttackStateList)
+    public Behaviors_Incubator(Empty_State empty_State,IDictionary<string, Behavior_Transition_Set> toFormAttackStateList)
     {
-        if (anim_path == null)
-            return;
-
         Num_State_List = new List<BehaviorIndex_With_Behavior>();
         StateIndexList = new List<string>();
 
@@ -179,11 +176,7 @@ public class Behaviors_Incubator
             }else{
                 Debug.Log("正在回避状态重复定义："+ _set.StateKey);
             }
-        }
-
-        //G_Attack_State e1_launcher = new G_Attack_State("G_Shoot_3", true, false, new behaviorEnterRange[2] { (behaviorEnterRange)3, (behaviorEnterRange)4 },true);
-        //G_Attack_State e1_ender = new G_Attack_State("SpecialAttack1", true, false, null, false);
-        //G_Attack_State G_super1 = new G_Attack_State("G_super1", false);                
+        }             
 	}
 
     public bool IfContainsKey(string key)
@@ -202,6 +195,7 @@ public class Behaviors_Incubator
 public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做成。我们姑且认为在开发环境下所有动画片段都是放在resource下
 {
     public List<string> BehaviorIndexList;
+    List<SkillConfig> SkillConfigs;
 
     public Behaviors_Incubator_ForLocalResourceCheck(string anim_path)
     {
@@ -209,7 +203,10 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         {
             return;
         }
-
+        SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
+        SkillConfigTable.RefreshSkillConfigDicForReference();
+        
+        SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(anim_path);
         BehaviorIndexList = new List<string>
         {
             "Empty",
@@ -233,48 +230,12 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
 
-        Object[] GAttackStateResources = Resources.LoadAll("Animations/" + anim_path + "/G_Attack_State", typeof(AnimationClip));//这个系列的状态角色必须有个叫做“dash”的冲刺动作
-        foreach (Object _anim in GAttackStateResources)
+        foreach (SkillConfig skillConfig in SkillConfigs)
         {
-            if (!BehaviorIndexList.Contains(_anim.name))
-                BehaviorIndexList.Add(_anim.name);
+            if (!BehaviorIndexList.Contains(skillConfig.REAL_NAME))
+                BehaviorIndexList.Add(skillConfig.REAL_NAME);
             else
                 Debug.Log("重复的片段名，请检查资源");
-        }
-
-        Object[] GAttackStateStayResources = Resources.LoadAll("Animations/" + anim_path + "/G_Attack_State_Stay", typeof(AnimationClip));//这个系列的状态角色必须有个叫做“Rush”的冲刺动作
-        foreach (Object _anim in GAttackStateStayResources)
-        {
-            if (!BehaviorIndexList.Contains(_anim.name))
-                BehaviorIndexList.Add(_anim.name);
-            else
-                Debug.Log("重复的片段名，请检查资源");
-        }
-
-        Object[] GShootResources = Resources.LoadAll("Animations/" + anim_path + "/Gshoot", typeof(AnimationClip));
-        foreach (Object _anim in GShootResources)
-        {
-            if (!BehaviorIndexList.Contains(_anim.name))
-                BehaviorIndexList.Add(_anim.name);
-            else
-                Debug.Log("重复的片段名，请检查资源");
-        }
-
-        //G_Attack_State e1_launcher = new G_Attack_State("G_Shoot_3", true, false, new behaviorEnterRange[2] { (behaviorEnterRange)3, (behaviorEnterRange)4 },true);
-        //G_Attack_State e1_ender = new G_Attack_State("SpecialAttack1", true, false, null, false);
-        //G_Attack_State G_super1 = new G_Attack_State("G_super1", false);
-
-        Object[] GMResources = Resources.LoadAll("Animations/" + anim_path + "/GMStates", typeof(AnimationClip));
-        foreach (Object _anim in GMResources)
-        {
-            if (!BehaviorIndexList.Contains(_anim.name))
-            {
-                BehaviorIndexList.Add(_anim.name);
-            }
-            else
-            {
-                Debug.Log("重复的片段名，请检查资源");
-            }
         }
     }
 
@@ -284,7 +245,7 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         {
             return;
         }
-
+        
         BehaviorIndexList = new List<string>
         {
             "Empty",
