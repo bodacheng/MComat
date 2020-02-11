@@ -26,6 +26,10 @@ namespace mainMenu
     {
         public static SkillStonesBox Instance;
 
+        [Space(5)]
+        [Header("进程器")]
+        public SingleThreadProcesser mainProcessRunner;
+
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
         public RectTransform BoxWholeT, BoxT, stonesTempContainer;
@@ -119,6 +123,7 @@ namespace mainMenu
             return focusingExType;
         }
 
+        float lastclicktime;
         public void CellButtonBeheviour(DragAndDropCell _SkillStoneCell)
         {
             Button button = _SkillStoneCell.GetComponent<Button>();
@@ -126,13 +131,18 @@ namespace mainMenu
             {
                 void buttonFeature()
                 {
+                    if (Time.time - lastclicktime < 0.25f) // double click
+                    {
+                        if (TheNineSlot.Instance.GetFocusingStoneSlot() != null)
+                        {
+                            _SkillStoneCell.DragStoneFromSKillStoneBoxToNineSlot(_SkillStoneCell,TheNineSlot.Instance.GetFocusingStoneSlot());
+                        }
+                    }
+                    lastclicktime = Time.time;
                     DragAndDropItem _stone = _SkillStoneCell.GetItem();
                     if (_stone != null && _stone._SkillConfigOfSkillStone != null)
                     {
-                        _skillStoneDetail.keyname.text = _stone._SkillConfigOfSkillStone.REAL_NAME;
-                        _skillStoneDetail.Showname.text = _stone._SkillConfigOfSkillStone.ShowName;
-                        _skillStoneDetail.ShowSkillStoneExType(_stone._SkillConfigOfSkillStone.SP_LEVEL);
-                        _skillStoneDetail.SwitchUsingMonsterIcon(_stone.skillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfigOfSkillStone);
                     }
                 }
                 button.onClick.RemoveAllListeners();
@@ -304,6 +314,7 @@ namespace mainMenu
                         ? Color.white
                         : Color.yellow;
                 }
+                CellsDictionary[i].UpdateMyItem();
             }
             yield break;
         }
@@ -362,7 +373,7 @@ namespace mainMenu
 
             item._SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.type + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
-            item.skillStoneOfPlayerId = skillStoneOfPlayerId;
+            item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(stonesTempContainer);           
         }
         
@@ -386,6 +397,29 @@ namespace mainMenu
                 break;
             }
             return buttonWorldPosition;
+        }
+        
+        IEnumerator ShowUsingStoneCharacter(string SkillStoneOfPlayerId,charIcon targetIcon)
+        {
+            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStoneOfPlayerId);
+            CharacterResourceInfo characterResourceInfo = null;
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
+            yield return getchar;
+            GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            if (_one == null)
+            {
+                targetIcon.gameObject.SetActive(false);
+                yield break;
+            }
+            characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
+            targetIcon.ChangeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
+            characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
+            yield break;
+        }
+        
+        public void ShowUsingCharIcon(string SkillStoneOfPlayerId,charIcon targetIcon)
+        {
+            Instance.mainProcessRunner.StartCoroutine(ShowUsingStoneCharacter(SkillStoneOfPlayerId,targetIcon));
         }
     }
 }

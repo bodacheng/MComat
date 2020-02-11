@@ -1,23 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
-using System.Collections;
 
 /// <summary>
 /// Drag and Drop item.
 /// </summary>
 public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	public static bool dragDisabled;										// Drag start global disable
-
 	public static DragAndDropItem draggedItem;                                      // Item that is dragged now
 	public static GameObject icon;                                                  // Icon of dragged item
 	public static DragAndDropCell sourceCell;                                       // From this cell dragged item is
-
-	public delegate void DragEvent(DragAndDropItem item);
-	public static event DragEvent OnItemDragStartEvent;                             // Drag start event
-	public static event DragEvent OnItemDragEndEvent;                               // Drag end event
 
     static Canvas canvas;                                                   // Canvas for item drag operation
     static readonly string canvasName = "DragAndDropCanvas";                        // Name of canvas
@@ -31,7 +23,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     // 这个量其实就相当于拥有技能石头的本地id，但是，这个本地id并不是像玩家拥有怪物的localdi那样相对固定，
     // 这个id仅仅是技能石头盒子每次依据检索条件展示所有石头的过程中临时给加的，因此实际的相关财产操作
     // 2019 5.19: 但是。。。其实如果我们真的需要一个不重复的值，那么，在数据库里起码有一个自增的主key不是吗。。
-    public string skillStoneOfPlayerId;
+    public string SkillStoneOfPlayerId;
 
     /// <summary>
     /// Awake this instance.
@@ -53,40 +45,36 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 	/// <param name="eventData"></param>
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		if (dragDisabled == false)
-		{
-			sourceCell = GetCell();                       							// Remember source cell
-			draggedItem = this;                                                     // Set as dragged item
-                                                                                    // Create item's icon
-
-            // version 1
-            //icon = new GameObject();
-            //icon.transform.SetParent(canvas.transform);
-            //icon.name = "Icon";
-            //Image myImage = GetComponent<Image>();
-            //myImage.raycastTarget = false;                                        	// Disable icon's raycast for correct drop handling
-            //Image iconImage = icon.AddComponent<Image>();
-            //iconImage.raycastTarget = false;
-            //iconImage.sprite = myImage.sprite;
-            //iconImage.color = myImage.color;
-
-            // version 2
-            icon = Instantiate(this.gameObject) as GameObject;
-            transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,0);
-            icon.transform.SetParent(canvas.transform);
-            icon.name = "Icon";
-            Image iconImage = icon.GetComponent<Image>();
-            iconImage.raycastTarget = false;
-
-			RectTransform iconRect = icon.GetComponent<RectTransform>();
-			// Set icon's dimensions
-			RectTransform myRect = GetComponent<RectTransform>();
-			iconRect.pivot = new Vector2(0.5f, 0.5f);
-			iconRect.anchorMin = new Vector2(0.5f, 0.5f);
-			iconRect.anchorMax = new Vector2(0.5f, 0.5f);
-			iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
-            OnItemDragStartEvent?.Invoke(this);                                         // Notify all items about drag start for raycast disabling
-        }
+        sourceCell = GetCell();                       							// Remember source cell
+        draggedItem = this;                                                     // Set as dragged item
+                                                                                // Create item's icon
+        // version 1
+        //icon = new GameObject();
+        //icon.transform.SetParent(canvas.transform);
+        //icon.name = "Icon";
+        //Image myImage = GetComponent<Image>();
+        //myImage.raycastTarget = false;                                        	// Disable icon's raycast for correct drop handling
+        //Image iconImage = icon.AddComponent<Image>();
+        //iconImage.raycastTarget = false;
+        //iconImage.sprite = myImage.sprite;
+        //iconImage.color = myImage.color;
+        
+        // version 2
+        icon = Instantiate(this.gameObject) as GameObject;
+        transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,0);
+        icon.transform.SetParent(canvas.transform);
+        icon.name = "Icon";
+        Image iconImage = icon.GetComponent<Image>();
+        iconImage.raycastTarget = false;
+        
+        RectTransform iconRect = icon.GetComponent<RectTransform>();
+        // Set icon's dimensions
+        RectTransform myRect = GetComponent<RectTransform>();
+        iconRect.pivot = new Vector2(0.5f, 0.5f);
+        iconRect.anchorMin = new Vector2(0.5f, 0.5f);
+        iconRect.anchorMax = new Vector2(0.5f, 0.5f);
+        iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
+        //OnItemDragStartEvent?.Invoke(this);                                         // Notify all items about drag start for raycast disabling
         Debug.Log("拖拽操作step1");
 	}
 
@@ -98,7 +86,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 	{
 		if (icon != null)
 		{
-            icon.transform.position = UnityEngine.Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
+            icon.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
 		}
 	}
 
@@ -124,7 +112,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             Destroy(icon);                                                          // Destroy icon on item drop
         }
-        OnItemDragEndEvent?.Invoke(this);                                               // Notify all cells about item drag end
+        //OnItemDragEndEvent?.Invoke(this);                                               // Notify all cells about item drag end
         draggedItem = null;
         icon = null;
         sourceCell = null;

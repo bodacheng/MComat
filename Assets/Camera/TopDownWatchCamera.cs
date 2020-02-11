@@ -47,7 +47,7 @@ class TopDownWatchCamera : CameraMode
     }
 
     Vector3 pos;
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         pos = new Vector3(_camera.transform.position.x, height, _camera.transform.position.z);
 

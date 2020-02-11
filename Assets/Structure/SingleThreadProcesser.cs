@@ -1,50 +1,53 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
-    public static SingleThreadProcesser target;
     IEnumerator MenuProcess;
-    bool processEnded;
-    float processTime;
 
-    void Start()
+    List<Task> Tasks = new List<Task>();
+    
+    class Task
     {
-        target = this;
-    }
-
-    void SetProcessStartEnd(bool a)
-    {
-        processEnded = a;
-    }
-    public void TriggerMainProcess(IEnumerator _process)
-    {
-        StartCoroutine(this.MainProcess(_process));
-    }
-    IEnumerator GiveProcessStartEndFlag(IEnumerator _process)
-    {
-        SetProcessStartEnd(false);
-        yield return _process;
-        SetProcessStartEnd(true);
-    }
-    IEnumerator MainProcess(IEnumerator _process)//这个函数是供外界调用的。
-    {
-        if (MenuProcess != null)
+        public int phase = 0;
+        public float processTime;
+        public IEnumerator process;
+        public int test = 0;
+        void SetPhase(int a)
         {
-            while (!processEnded)
+            phase = a;
+        }
+
+        public IEnumerator GiveProcessStartEndFlag()
+        {
+            SetPhase(1);
+            yield return process;
+            SetPhase(2);
+        }
+    }
+    
+    void Update()
+    {
+        if (Tasks.Count > 0)
+        {
+            switch (Tasks[0].phase)
             {
-                processTime += 0.01f;
-                if (processTime > 5f)
-                {
-                    Debug.Log("进程超时.");
-                    StopCoroutine(MenuProcess);
-                    break;
-                }
-                yield return null;
+                case 0:
+                    Tasks[0].test += 1;
+                    StartCoroutine(Tasks[0].GiveProcessStartEndFlag());
+                break;
+                case 1:
+                break;
+                case 2:
+                    Tasks.Remove(Tasks[0]);
+                break;
             }
         }
-        processTime = 0;
-        MenuProcess = GiveProcessStartEndFlag(_process);
-        yield return MenuProcess;
+    }
+
+    public void TriggerMainProcess(IEnumerator _process)
+    {
+        Tasks.Add(new Task{ process = _process });
     }
 }

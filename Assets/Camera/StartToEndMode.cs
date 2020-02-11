@@ -29,7 +29,7 @@ public class StartToEndMode : CameraMode
     Vector3 SecondPoint;
     float touchZeroscreenposx;
     float touchZeroscreenposy;
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (target == null)
             return;

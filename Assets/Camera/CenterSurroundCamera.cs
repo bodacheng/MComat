@@ -19,7 +19,7 @@ public class CenterSurroundCamera : CameraMode
         this.YDis = YDis;
     }
     
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         h =  ETCInput.GetAxis("HorizontalCR");
         xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;                

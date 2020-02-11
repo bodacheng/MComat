@@ -15,7 +15,7 @@ class GodPlayerCertainYCamera : CameraMode
         this.speed = speed;
     }
 
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (this.targets == null)
         {

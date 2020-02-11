@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SideCharIcon : MonoBehaviour {
@@ -13,20 +11,21 @@ public class SideCharIcon : MonoBehaviour {
     [Header("浮动抵抗pretab")]
     [Space(6)]
     public Slider ResistBar;
+    public Image ResistBarFillImage;
 
 	public charIcon focusingCharIcon;
 
-	float maxHp = 0;
-	float currentHp = 0;
+	float maxHp;
+	float currentHp;
 
-	public void iniHPShow(Data_Center watching)
+	public void IniHPShow(Data_Center watching)
 	{
 		_charDataCenter = watching;
 		maxHp = 500;
 		currentHp = maxHp;
 	}
-    
-    public void recallBars()
+
+    public void RecallBars()
     {
         HpBar.transform.SetParent(transform);
         HpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,20,0);

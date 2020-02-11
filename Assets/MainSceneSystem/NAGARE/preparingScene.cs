@@ -13,11 +13,11 @@ namespace mainMenu
     public class preparingScene : MonoBehaviour
     {
         public static preparingScene Instance;
-    
+
         [Space(7)]
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
-            
+        
         [Header("ReturnButtonManager")]
         public ReturnButtonManager _ReturnButtonManager;
 
@@ -31,15 +31,15 @@ namespace mainMenu
         [Space(11)]
         [Header("modelShower")]
         public ModelShower _modelShower;
-
+        
         [Space(11)]
         [Header("SkillStonesBox")]
         public SkillStonesBox _SkillStonesBox;
-
+        
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
-
+        
         [Space(7)]
         [Header("MemberDetail")]
         public MemberDetail _MemberDetail;
@@ -47,15 +47,15 @@ namespace mainMenu
         [Space(7)]
         [Header("QuestPreparePage")]
         public QuestPreparePage _QuestPreparePage;
-
+        
         [Space(7)]
         [Header("CustomGUISkin")]
         public GUISkin CustomGUISkin;
-
+        
         [Space(7)]
         [Header("队伍编辑器")]
         public TeamEditManager _TeamEditManager;
-
+        
         [Space(7)]
         [Header("章节编辑器")]
         public ChaptersManager _ChaptersManager;
@@ -75,6 +75,7 @@ namespace mainMenu
 
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
+        public RectTransform MainMenuBottonsT;
         public RectTransform QuestInfoT;
         public RectTransform JiNengRongLian_selectT;
         public RectTransform RonglianConfirmGAMENT;
@@ -151,7 +152,7 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
 
-            charIcon.iniFrames();
+            charIcon.IniFrames();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             yield return (_SkillStonesBox.StartUp());
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);

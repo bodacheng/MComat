@@ -13,6 +13,7 @@ public class QuestInfo : MainSceneProcess
     {
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         this.T.gameObject.SetActive(true);
+        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;
     }

@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using mainMenu;
 using dataAccess;
 
@@ -10,6 +8,7 @@ public class SkillStones : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(1f);
+        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
@@ -24,9 +23,9 @@ public class SkillStones : MainSceneProcess
     
     public SkillStones(preparingScene _preparingScene)
     {
-        this.thisProcessStep = MainSceneStep.SkillStones;
+        thisProcessStep = MainSceneStep.SkillStones;
         this._preparingScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        EelementsInherit(_preparingScene);
     }
 
     public override bool CanEnterOtherProcess()

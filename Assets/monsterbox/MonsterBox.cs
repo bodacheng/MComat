@@ -45,7 +45,7 @@ namespace mainMenu
         {
             foreach (KeyValuePair<string, charIcon> icon in mainMenuIcons)
             {
-                icon.Value.decideIconSize(focusingLocalID);
+                icon.Value.DecideIconSize(focusingLocalID);
             }
         }
         
@@ -112,7 +112,7 @@ namespace mainMenu
                 targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
                 targetingIcon._MonsterOfPlayerDetailModel = targetingCharacterDataInfo;
                 targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
-                targetingIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
+                targetingIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
                 if (mainMenuIcons.ContainsKey(monsterOfPlayerId))
                 {
                     mainMenuIcons[monsterOfPlayerId] = targetingIcon;
@@ -164,11 +164,10 @@ namespace mainMenu
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
                 void action1()
                 {
-                    charIcon.Seletedfeature(_targetingIcon, target.selectedFrame);
+                    charIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
                     preparingScene.Instance.mainProcessRunner.TriggerMainProcess(preparingScene.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
                 _targetingIcon.iconButton.onClick.AddListener(action1);
-                Debug.Log(_targetingIcon._MonsterOfPlayerDetailModel.monsterId);
                 _targetingIcon.gameObject.SetActive(true);
                 _targetingIcon.transform.SetParent(target.MonsterBoxContainer);
                 _targetingIcon.transform.localScale = Vector3.one;

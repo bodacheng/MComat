@@ -12,6 +12,7 @@ public class TouchTopDownCamera : CameraMode
     readonly float battlefieldRadius;
     Vector3 FirstPoint;
     Vector3 SecondPoint;
+    Sequence mainSequence;
     bool canTouch;
 
     public TouchTopDownCamera(float height,float battlefieldRadius)
@@ -20,15 +21,21 @@ public class TouchTopDownCamera : CameraMode
         this.battlefieldRadius = battlefieldRadius;
     }
     
+    Vector3 temp;
     public override void Enter(Camera _camera)
     {
-        canTouch = false;
-        _camera.transform.DOMoveY(height,0.2f);
-        _camera.transform.DOLookAt(Vector3.forward - Vector3.up * 2.5f, 0.5f, AxisConstraint.None, Vector3.up).OnComplete(() => { canTouch = true; });
-        sameHeightCenter = new Vector3(0,height,0);
+        mainSequence = DOTween.Sequence().OnStart(() =>
+        {
+            canTouch = false;
+            sameHeightCenter = new Vector3(0,height,0);
+            temp = _camera.transform.forward;
+            temp.y = 0;
+        }).Append(_camera.transform.DOMoveY(height, 0.2f)).
+        Join(_camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).AppendCallback(() => { canTouch = true; });
+        mainSequence.Play();        
     }
     
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (!canTouch)
         {

@@ -44,7 +44,7 @@ public class ResistanceManager : MonoBehaviour
             case "resistup":
                 UnityEngine.Events.UnityAction eventStart = () =>
                 {
-                    Resistance.Value += 50;
+                    Resistance.Value += 1;
                     data_Center._SkillCancelFlag.turn_on_flag();
                     EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter);
                 };
@@ -52,7 +52,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     Resistance.Value = 0;
                 };
-                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.5f, eventEnd);
+                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.2f, eventEnd);
                 temp = Resistance.Value;
                 var disposable = new SingleAssignmentDisposable();
                 disposabletasks.Add(disposable);

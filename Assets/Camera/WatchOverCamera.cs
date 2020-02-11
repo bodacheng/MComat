@@ -14,7 +14,7 @@ class WatchOverCamera : CameraMode
         this.YDis = height;
     }
 
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (this.targets == null || this.targets.Count == 0)
             return;

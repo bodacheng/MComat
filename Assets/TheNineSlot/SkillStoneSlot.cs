@@ -12,6 +12,7 @@ using Api.Dto.Model;
 // 这个是把两个新石头拖入九宫后不停对两者进行位置移动所造成的。一旦这个现象出现就可能产生随之而来的一系列bug。
 // 但这个bug我们是以showOrigin()函数内强制清空所有石头的方法解决的。
 // 如果showOrigin()没给解决这个事情那那个bug还是会出现，说明这个环节某个部分还是存在些逻辑问题。
+
 public class SkillStoneSlot
 {
     public string OnSlotStonelocalID;
@@ -39,11 +40,21 @@ public class SkillStoneSlot
         DragAndDropItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
         {
-            DragAndDropCell dragAndDropCell = SkillStonesBox.Instance.GetFirstEmptyCell();
-            if (dragAndDropCell != null)
-                dragAndDropCell.AddItem(_DragAndDropItem);
-            else
-                _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);
+            if (_DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == SkillStonesBox.Instance.GetFocusingExType())//如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
+            {
+                DragAndDropCell dragAndDropCell = SkillStonesBox.Instance.GetFirstEmptyCell();
+                if (dragAndDropCell != null)
+                {
+                    dragAndDropCell.AddItem(_DragAndDropItem);
+                }
+                else
+                {
+                    _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);
+                }
+            }
+            else{
+                _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);//如果尝试归还背包的技能石必杀等级与显示中的不一致，则直接使其非显示。
+            }
         }
         _DragAndDropCell.UpdateMyItem();
     }
@@ -77,8 +88,7 @@ public class SkillStoneSlot
             _DragAndDropItem.GetComponent<Image>().color = itemColor;
             _DragAndDropCell.GetComponent<Image>().color = _DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
             _DragAndDropCell.AddItem(_DragAndDropItem);
-            _DragAndDropCell.UpdateMyItem();
         }
         yield break;
-    }
+    }    
 }

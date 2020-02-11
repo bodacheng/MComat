@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public partial class FightTeam : MonoBehaviour
 {
@@ -13,14 +15,14 @@ public partial class FightTeam : MonoBehaviour
     public Canvas _targetCanvas;
     public RectTransform controllingCharT;    
     public SideCharIcon button_prefab;
-    public TextMesh HitCombo;
+    public Text HitCombo;
     public RealTimeGameProcessManager realTimeGameProcessManager;
     public MobileInputsManager _mobileInputsManager;
     public CharsManager _CharSetManager;
     public TeamMode TeamMode;
 
     IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-    IDictionary<Data_Center, TextMesh> datacenterHitComboDic = new Dictionary<Data_Center, TextMesh>();
+    IDictionary<Data_Center, Text> datacenterHitComboDic = new Dictionary<Data_Center, Text>();
 
     SideCharIcon _tempSideCharIcon;
 
@@ -40,7 +42,7 @@ public partial class FightTeam : MonoBehaviour
     }
     
     // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-    public IEnumerator Instantiate(MultiDictionary<int, int, CharacterDataInfo> ChracterSets,float HP)
+    public IEnumerator Instantiate(MultiDictionary<int, int, CharacterDataInfo> ChracterSets,float HP,Color combohitcolor)
     {
         switch (TeamMode)
         {
@@ -57,11 +59,11 @@ public partial class FightTeam : MonoBehaviour
                 InstantiateCharsIconsAndFloatHPBar_turnMode();
                 break;
         }
-        TeamsFightInitialize(HP);
+        TeamsFightInitialize(HP,combohitcolor);
         yield return null;
     }
     
-    void TeamsFightInitialize(float wholeHP)
+    void TeamsFightInitialize(float wholeHP,Color comboTextColor)
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
@@ -79,37 +81,43 @@ public partial class FightTeam : MonoBehaviour
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => 
             {
-                RefreshComboHit(a_char); 
+                RefreshComboHit(a_char,comboTextColor);
             });
         }
     }
 
-    public void RefreshResistanceBar(Data_Center data_Center)
+    void RefreshResistanceBar(Data_Center data_Center)
     {
         datacenterCharIconDic.TryGetValue(data_Center, out _tempSideCharIcon);
-        _tempSideCharIcon.ResistBar.value = data_Center._ResistanceManager.Resistance.Value / 10f;//抵抗槽最大10格   
+        DOTween.To(() => _tempSideCharIcon.ResistBar.value, (x) => _tempSideCharIcon.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
+        if (data_Center._ResistanceManager.Resistance.Value > 0)
+            _tempSideCharIcon.ResistBarFillImage.color = Color.yellow;
+        else
+            _tempSideCharIcon.ResistBarFillImage.color = Color.clear;
     }
   
-    public void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
+    void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
     {
         datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
-        _tempSideCharIcon.HpBar.value = current_hp / wholeHP; 
+        DOTween.To(() => _tempSideCharIcon.HpBar.value, (x) => _tempSideCharIcon.HpBar.value = x, current_hp / wholeHP, 0.2f);
     }
 
-    TextMesh _hitcomboText;
-    public void RefreshComboHit(Data_Center _datacenter)
+    Text _hitcomboText;
+    void RefreshComboHit(Data_Center _datacenter,Color comboTextColor)
     {
         _hitcomboText = datacenterHitComboDic[_datacenter];
         if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
         {
-            _hitcomboText.color = Color.yellow;
             _hitcomboText.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+            _hitcomboText.color = comboTextColor;
             _hitcomboText.transform.localScale = Vector3.one;
             _hitcomboText.fontSize = 30;
-            _hitcomboText.transform.position = Vector3.Lerp(_hitcomboText.transform.position, CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 2.5f),Time.deltaTime * 20f);
+            _hitcomboText.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f),0.2f);
         }
         else
+        {
             _hitcomboText.color = Color.clear;
+        }
     }
     
     //这个刷新是倾向于画面制御
@@ -131,7 +139,7 @@ public partial class FightTeam : MonoBehaviour
                     _tempSideCharIcon.transform.localScale = Vector3.one;
                 }
                 _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(true);
-                _tempSideCharIcon.recallBars();
+                _tempSideCharIcon.RecallBars();
             }else{
                 _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(false);
                 _tempSideCharIcon.transform.SetParent(_targetCanvas.transform);
@@ -142,7 +150,9 @@ public partial class FightTeam : MonoBehaviour
                 datacenterHitComboDic[_datacenter].color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
                 datacenterHitComboDic[_datacenter].gameObject.SetActive(true);
                 if (datacenterHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
+                {
                     datacenterHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvas.transform);
+                }
                 datacenterHitComboDic[_datacenter].transform.localScale = Vector3.one;
                 datacenterHitComboDic[_datacenter].fontSize = 30;
             }

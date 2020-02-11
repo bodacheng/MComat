@@ -63,9 +63,7 @@ public class CustomCoroutine
     readonly float processtime;
     float timecounter;
 
-    public CustomCoroutine(UnityEngine.Events.UnityAction startaction, 
-                           float processtime, 
-                           UnityEngine.Events.UnityAction endaction)
+    public CustomCoroutine(UnityEngine.Events.UnityAction startaction,float processtime,UnityEngine.Events.UnityAction endaction)
     {
         this.startaction = startaction;
         this.processtime = processtime;

@@ -12,31 +12,43 @@ namespace mainMenu
     {
         public preparingScene _preparingScene;
 
+        [Space(7)]
+        [Header("基本UI元素")]
         public Transform selfFightUI;
         public InputField HPinput;
         public Button FightStartBUtton;
-
+        
+        [Space(7)]
+        [Header("选中框")]
+        public GameObject selectedFrame;
+        
+        [Space(7)]
+        [Header("共同战斗式按钮")]
         public Transform MuitiRaidModeIconsT;
         public charIcon team1back, team1front, team1left, team1right, team1_1, team1_2,team1_3,team1_4,team1_5,team1_6;
         public charIcon team2back, team2front, team2left, team2right, team2_1, team2_2,team2_3,team2_4,team2_5,team2_6;
         
+        [Space(7)]
+        [Header("轮番战斗式按钮")]
         public Transform RotationModeIconsT;
         public charIcon team11_R, team12_R, team13_R;
         public charIcon team21_R, team22_R, team23_R;
 
+        [Space(7)]
+        [Header("准备关卡")]
         public QuestPreparePage _QuestPreparePage;
 
         readonly IDictionary<int, charIcon> team1ButtonDic_M = new Dictionary<int, charIcon>();
         readonly IDictionary<int, charIcon> team2ButtonDic_M = new Dictionary<int, charIcon>();
         IDictionary<int, charIcon> team1ButtonDic_R = new Dictionary<int, charIcon>();
         IDictionary<int, charIcon> team2ButtonDic_R = new Dictionary<int, charIcon>();
-
+        
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
         Team focusingTeam; //team1或者是team2
         int focusingPosition; // 0到3
         readonly charIcon focusingPosButton;
-
+        
         PositionLocalCharKeySet _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
         PositionLocalCharKeySet _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
         PositionLocalCharKeySet _team1positionLocalCharKeySet_R = new PositionLocalCharKeySet();
@@ -56,19 +68,19 @@ namespace mainMenu
         {
             foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_M)
             {
-                keyValuePair.Value.changeIcon(null, Zokusei.Null);
+                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
             foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_M)
             {
-                keyValuePair.Value.changeIcon(null, Zokusei.Null);
+                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
             foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_R)
             {
-                keyValuePair.Value.changeIcon(null, Zokusei.Null);
+                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
             foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_R)
             {
-                keyValuePair.Value.changeIcon(null, Zokusei.Null);
+                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
             _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
             _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
@@ -252,12 +264,12 @@ namespace mainMenu
                     yield break;
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
-                tar.changeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.getMonsterIconSyn(characterResourceInfo.RECORD_ID),
+                tar.ChangeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
                     characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
             }
             else
             {
-                tar.changeIcon(null, Zokusei.Null);
+                tar.ChangeIcon(null, Zokusei.Null);
             }
             yield break;
         }
@@ -281,15 +293,23 @@ namespace mainMenu
             else targetTeamIcons.Clear();
             for (int i = 0; i < icons.Count; i++)
             {
-                targetTeamIcons.Add(i,icons[i]);
-                icons[i].changeIcon(null, Zokusei.Null);
-                icons[i].iconButton.onClick.RemoveAllListeners();
+                charIcon charIcon = icons[i];
+                targetTeamIcons.Add(i,charIcon);
+                charIcon.ChangeIcon(null, Zokusei.Null);
+                charIcon.iconButton.onClick.RemoveAllListeners();
+                
+                void SelectedRender()
+                {
+                    charIcon.Seletedfeature(charIcon,selectedFrame,110f);
+                }
+
                 string pos = i.ToString().Clone().ToString();
                 void A()
                 {
                     OneTeamPosButtonBehaviour(team,pos);
                 }
-                icons[i].iconButton.onClick.AddListener(A);
+                charIcon.iconButton.onClick.AddListener(A);
+                charIcon.iconButton.onClick.AddListener(SelectedRender);
             }
         }
 
@@ -317,13 +337,13 @@ namespace mainMenu
             team2ButtonDic_R.Add(1, team22_R);
             team2ButtonDic_R.Add(2, team23_R);
   
-            team11_R.changeIcon(null, Zokusei.Null);
-            team12_R.changeIcon(null, Zokusei.Null);
-            team13_R.changeIcon(null, Zokusei.Null);
+            team11_R.ChangeIcon(null, Zokusei.Null);
+            team12_R.ChangeIcon(null, Zokusei.Null);
+            team13_R.ChangeIcon(null, Zokusei.Null);
 
-            team21_R.changeIcon(null, Zokusei.Null);
-            team22_R.changeIcon(null, Zokusei.Null);
-            team23_R.changeIcon(null, Zokusei.Null);
+            team21_R.ChangeIcon(null, Zokusei.Null);
+            team22_R.ChangeIcon(null, Zokusei.Null);
+            team23_R.ChangeIcon(null, Zokusei.Null);
 
             team11_R.iconButton.onClick.RemoveAllListeners();
             void pos11()
@@ -372,11 +392,11 @@ namespace mainMenu
             yield break;
         }
 
-        private void OneTeamPosButtonBehaviour(Team team, string pos)
+        void OneTeamPosButtonBehaviour(Team team, string pos)
         {
-            this.focusingTeam = team;
-            this.focusingPosition = int.Parse(pos);
-            Debug.Log("点击了队伍"+team+"的位置"+pos);
+            focusingTeam = team;
+            focusingPosition = int.Parse(pos);
+            //Debug.Log("点击了队伍" + team + "的位置" + pos);
         }
     }
 }

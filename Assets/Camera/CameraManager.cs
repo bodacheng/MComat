@@ -43,11 +43,11 @@ public class CameraManager : MonoBehaviour
         Screen.SetResolution(1080, 720, true, 60);
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (current_Camera_Mode != null)
         {
-            current_Camera_Mode.LocalLateUpdate(_camera);
+            current_Camera_Mode.LocalUpdate(_camera);
         }
     }
 
@@ -60,7 +60,7 @@ public class CameraManager : MonoBehaviour
     
     public void Assign_StartToEndModeCamera(Vector3 p, float duration,float sizeoffield)
     {
-        this.camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
+        camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
         _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration, sizeoffield);
         this.current_Camera_Mode.Enter(_camera);
@@ -113,7 +113,7 @@ public abstract class CameraMode
     {
     }
 
-    public virtual void LocalLateUpdate(Camera _camera)
+    public virtual void LocalUpdate(Camera _camera)
     {
     }
 

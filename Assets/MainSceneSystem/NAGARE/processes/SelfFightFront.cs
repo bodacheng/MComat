@@ -7,6 +7,7 @@ public class SelfFightFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
+        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);

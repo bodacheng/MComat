@@ -36,6 +36,7 @@ namespace mainMenu
         //这个函数只考虑了队员的加载。。。
         public IEnumerator GetReadyToBattle(StageScriptableObject stage, SceneMode sceneMode)
         {
+            enterQuest.gameObject.SetActive(false);
             LoadingCanvas.target.DarkOff(1f);
             foreach (Transform _child in myTeamShowT)
             {
@@ -51,7 +52,7 @@ namespace mainMenu
             {
                 charIcon MyMemberIcon = Instantiate(FighterIcon);
                 CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceName);
-                MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
+                MyMemberIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                 MyMemberIcon.transform.SetParent(myTeamShowT);
                 MyMemberIcon.transform.localPosition = Vector3.one;
                 MyMemberIcon.transform.localScale = Vector3.one;
@@ -62,7 +63,7 @@ namespace mainMenu
             {
                 charIcon MyMemberIcon = Instantiate(FighterIcon);
                 CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceName);
-                MyMemberIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
+                MyMemberIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                 MyMemberIcon.transform.SetParent(enemyTeamShowT);
                 MyMemberIcon.transform.localPosition = Vector3.one;
                 MyMemberIcon.transform.localScale = Vector3.one;
@@ -75,7 +76,7 @@ namespace mainMenu
                 _preparingScene.AskIfLoadFight(sceneMode, _Stage);
             }
             enterQuest.onClick.AddListener(Go);
-
+            enterQuest.gameObject.SetActive(true);
             _preparingScene.trySwitchToStep(MainSceneStep.QuestInfo, true);
             LoadingCanvas.target.LightUp();
             yield break;

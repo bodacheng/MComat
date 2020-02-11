@@ -18,6 +18,7 @@ public class MemberDetailProcess : MainSceneProcess
         _CameraManager.Assign_StartToEndModeCamera(_MemberDetail.MemDetailWatchPos.position,3f,25f);
         _CameraManager.current_Camera_Mode.target = _MemberDetail.MemDetailTargetPos;
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
+        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         yield return MonsterBox.DisplayMonsterIcons();
         //this._MonsterBox.adjustAllIconsSize(null);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);

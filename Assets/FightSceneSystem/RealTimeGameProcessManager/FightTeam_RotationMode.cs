@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public partial class FightTeam : MonoBehaviour
 {
@@ -13,14 +14,14 @@ public partial class FightTeam : MonoBehaviour
     public void InstantiateCharsIconsAndFloatHPBar_turnMode()//这个环节应该能够同时把HP bar也适配好。
     {
         SideCharIcon _SideCharIcon;
-        TextMesh hitCombo;
+        Text hitCombo;
         foreach(Data_Center a_char in teamMembers.values)
         {
             hitCombo = Instantiate(HitCombo);
             hitCombo.name = a_char.name + "HitCombo";
             _SideCharIcon = Instantiate(button_prefab);
             _SideCharIcon.name = a_char.name + " ICon";
-            _SideCharIcon.iniHPShow(a_char);
+            _SideCharIcon.IniHPShow(a_char);
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void action1()
             {
@@ -35,12 +36,12 @@ public partial class FightTeam : MonoBehaviour
                 Debug.Log("角色信息字典严重错误");continue;
             }
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
-            _SideCharIcon.focusingCharIcon.changeIcon(monsterIconsDic.Instance.getMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
+            _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
             _SideCharIcon.gameObject.SetActive(true);
             _SideCharIcon.transform.SetParent(sideIconsContainer);
             _SideCharIcon.transform.localScale = Vector3.one;
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
-            datacenterHitComboDic.Add(new KeyValuePair<Data_Center, TextMesh>(a_char, hitCombo));
+            datacenterHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
             this._mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
     }

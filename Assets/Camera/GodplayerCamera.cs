@@ -20,7 +20,7 @@ class GodplayerCamera : CameraMode
     }
 
     Vector3 center;
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (this.targets == null)
         {

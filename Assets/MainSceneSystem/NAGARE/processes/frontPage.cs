@@ -21,6 +21,7 @@ public class frontPage : MainSceneProcess
     public IEnumerator enterProcess()
     {
         _preparingScene.MainMenuCanvas.gameObject.SetActive(true);
+        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(true);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         _preparingScene.FightModeChooseT.gameObject.SetActive(true);

@@ -23,7 +23,7 @@ class CertainYAntiVibrationCamera : CameraMode
     Vector3 SecondPoint;
     readonly float xAngleTemp;
     Vector3 rotateToDirection;
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         screenpos = _camera.WorldToViewportPoint(meCenter.position);
         if ((screenpos.x < 0.3 || screenpos.x > 0.7) && YDis < 9)

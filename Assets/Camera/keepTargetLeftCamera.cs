@@ -11,7 +11,7 @@ class keepTargetLeftCamera : CameraMode
         _camera.DOOrthoSize(4f,3f);
     }
 
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (this.targets == null || this.targets.Count == 0)
             return;

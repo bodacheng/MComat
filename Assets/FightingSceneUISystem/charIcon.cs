@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
+using dataAccess;
+using System.Collections;
+using mainMenu;
 
 public class charIcon : MonoBehaviour {
 
@@ -14,7 +16,7 @@ public class charIcon : MonoBehaviour {
     public CharacterResourceInfo _CharacterResourceInfo;
 
     static IDictionary<Zokusei, Sprite> frames;
-    public static void iniFrames()
+    public static void IniFrames()
     {
         frames = new Dictionary<Zokusei, Sprite>();
 
@@ -39,16 +41,18 @@ public class charIcon : MonoBehaviour {
             frames.Add(Zokusei.Null,frameobject_null);
     }
     
-    public static void Seletedfeature(charIcon _charIcon,GameObject selectedFrame)
+    public static void Seletedfeature(charIcon _charIcon,GameObject selectedFrame, float size)
     {
-        selectedFrame.transform.SetParent(_charIcon.frame.transform);
+        selectedFrame.transform.SetParent(_charIcon.transform);
         selectedFrame.transform.localPosition = Vector3.zero;
         selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        selectedFrame.gameObject.SetActive(true);  
+        selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        selectedFrame.GetComponent<RectTransform>().sizeDelta = new Vector2(size,size);
+        selectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        selectedFrame.gameObject.SetActive(true);
     }
     
-    public void changeIcon(Sprite _Sprite,Zokusei zokusei)
+    public void ChangeIcon(Sprite _Sprite,Zokusei zokusei)
     {
         if (frame == null || Icon == null)
         {
@@ -58,7 +62,7 @@ public class charIcon : MonoBehaviour {
 
         frame.transform.localScale = Vector3.one;
         Icon.transform.localScale = Vector3.one * 0.75f;
-        frame.transform.SetSiblingIndex(3);
+        frame.transform.SetSiblingIndex(4);
         Icon.transform.SetSiblingIndex(4);
 
         var colors = iconButton.colors;
@@ -98,24 +102,14 @@ public class charIcon : MonoBehaviour {
         iconButton.colors = colors;
 
         Icon.sprite = _Sprite;
-        if (Icon.sprite == null)
-        {
-            Icon.color = new Color(1,1,1,0f);
-        }
-        else
-            Icon.color = Color.white;
-            
+        Icon.color = Icon.sprite == null ? new Color(1, 1, 1, 0f) : Color.white;
+        
         if (frames.ContainsKey(zokusei))
             frame.sprite = frames[zokusei];                
     }
-
-    public void decideIconSize(string mainMenuFocusing)
+    
+    public void DecideIconSize(string mainMenuFocusing)
     {
-        if (mainMenuFocusing != _MonsterOfPlayerDetailModel.monsterOfPlayerId)
-            gameObject.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        else
-        {
-            gameObject.GetComponent<RectTransform>().localScale = new Vector3(1.1f, 1.1f, 1.1f);
-        }
+        gameObject.GetComponent<RectTransform>().localScale = mainMenuFocusing != _MonsterOfPlayerDetailModel.monsterOfPlayerId ? new Vector3(1, 1, 1) : new Vector3(1.1f, 1.1f, 1.1f);
     }
 }

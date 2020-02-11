@@ -12,7 +12,7 @@ public class LerpToCertainDistance : CameraMode
     }
 
     private Vector3 targetcenter;
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         targetcenter = Vector3.zero;
         for (int i = 0; i < targets.Count;i++)

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using System;
 
 public class monsterIconsDic {
 
-    private static monsterIconsDic instance;
+    static monsterIconsDic instance;
     public static monsterIconsDic Instance
     {
         get
@@ -21,10 +19,10 @@ public class monsterIconsDic {
     }
 
     public Sprite readingSprite;
-    private AssetBundle readingBundle;
-    private IDictionary<string, Sprite> characterIconDic = new Dictionary<string, Sprite>();
+    AssetBundle readingBundle;
+    readonly IDictionary<string, Sprite> characterIconDic = new Dictionary<string, Sprite>();
 
-    public Sprite getMonsterIconSyn(string monsterid)
+    public Sprite GetMonsterIconSyn(string monsterid)
     {
         readingSprite = null;
         characterIconDic.TryGetValue(monsterid,out readingSprite);

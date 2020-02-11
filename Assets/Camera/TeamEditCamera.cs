@@ -14,7 +14,7 @@ class TeamEditCamera : CameraMode
         this.height = height;
     }
 
-    public override void LocalLateUpdate(Camera _camera)
+    public override void LocalUpdate(Camera _camera)
     {
         if (this.targets == null)
         {
