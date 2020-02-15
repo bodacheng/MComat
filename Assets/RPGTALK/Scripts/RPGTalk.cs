@@ -1518,7 +1518,7 @@ public class RPGTalk : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         //We don't want to do nothing if the text isn't even showing
-        if (!textUIObj.activeInHierarchy || rpgtalkElements == null) {
+        if (!textUIObj.activeInHierarchy) {
             return;
         }
 
@@ -1529,8 +1529,8 @@ public class RPGTalk : MonoBehaviour {
             //but if we have a callback, he can click on it once more.
             if (cutscenePosition >= rpgtalkElements.Count && shouldStayOnScreen) {
                 if(lookForClick && (
-                    (passWithMouse && UnityEngine.Input.GetMouseButtonDown (0)) ||
-                    (passWithInputButton != "" && UnityEngine.Input.GetButtonDown(passWithInputButton)) || (passWithKey != KeyCode.None && UnityEngine.Input.GetKeyDown(passWithKey))
+                    (passWithMouse && Input.GetMouseButtonDown (0)) ||
+                    (passWithInputButton != "" && Input.GetButtonDown(passWithInputButton)) || (passWithKey != KeyCode.None && Input.GetKeyDown(passWithKey))
                 )){
                     //if have an audio... playit
                     if (passAudio != null && !rpgAudioSorce.isPlaying) {
@@ -1554,8 +1554,8 @@ public class RPGTalk : MonoBehaviour {
             //if we reached the end of the line and click on the screen...
             if (
                 enablePass && (
-                (passWithMouse && UnityEngine.Input.GetMouseButtonDown (0)) ||
-                (passWithInputButton != "" && UnityEngine.Input.GetButtonDown(passWithInputButton)) || (passWithKey != KeyCode.None && UnityEngine.Input.GetKeyDown(passWithKey))
+                (passWithMouse && Input.GetMouseButtonDown (0)) ||
+                (passWithInputButton != "" && Input.GetButtonDown(passWithInputButton)) || (passWithKey != KeyCode.None && Input.GetKeyDown(passWithKey))
 
             ) ){//if have an audio... playit
                 if (passAudio != null) {
@@ -1563,7 +1563,7 @@ public class RPGTalk : MonoBehaviour {
                     rpgAudioSorce.Play ();
                 }
                 textUI.Enabled(false);
-                PlayNext();
+                PlayNext ();
 
             }
             return;
@@ -1594,12 +1594,12 @@ public class RPGTalk : MonoBehaviour {
             
             if(enableQuickSkip == true &&
                 (
-                    (passWithMouse && UnityEngine.Input.GetMouseButtonDown (0)) ||
-                    (passWithInputButton != "" && UnityEngine.Input.GetButtonDown(passWithInputButton)) || (passWithKey != KeyCode.None && UnityEngine.Input.GetKeyDown(passWithKey))
+                    (passWithMouse && Input.GetMouseButtonDown (0)) ||
+                    (passWithInputButton != "" && Input.GetButtonDown(passWithInputButton)) || (passWithKey != KeyCode.None && Input.GetKeyDown(passWithKey))
                 && currentChar > 3)) {
 
                 currentChar = rpgtalkElements[cutscenePosition - 1].dialogText.Length;
-                PutRightTextToShow();
+                PutRightTextToShow ();
                 //Do what we have to do if the the text just ended
                 TextEnded();
             }
