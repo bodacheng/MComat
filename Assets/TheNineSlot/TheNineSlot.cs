@@ -109,7 +109,7 @@ namespace mainMenu
                     DragAndDropItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
                     if (_SkillStone != null && _SkillStone._SkillConfigOfSkillStone != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_SkillStone._SkillConfigOfSkillStone);
+                        _skillStoneDetail.RefreshSkillDetail(_SkillStone._SkillConfigOfSkillStone, _SkillStone.SkillStoneOfPlayerId);
                         mainProcessRunner.TriggerMainProcess(_SkillsPrintOut.SkillShowRunWithPreparing(_SkillStone._SkillConfigOfSkillStone.REAL_NAME));
                     }
                 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
 // 18 年年初
 //该类不进行网络值同步，但个别值向其他组件看齐
 //武器是用来伤害敌人的，而在我们的计划是把自身受伤害这个判断放在自身这一边的客户端上决定。
@@ -18,6 +17,13 @@ namespace HittingDetection
     {
         FlyerWeapon = 2,
         EnergyFromBodyWeapon = 3
+    }
+    
+    public enum SpecificTarget
+    {
+        both = 0,
+        flesh = 1,
+        energy = 2
     }
     
     public partial class BO_Marker_Manager : MonoBehaviour
@@ -49,6 +55,9 @@ namespace HittingDetection
         [Tooltip("特效是否有粘身视效")]
         public bool effectSpreadOnBody;
 
+        [Tooltip("特定针对")]
+        public SpecificTarget SpecificTarget = SpecificTarget.both; 
+
         [Tooltip("特殊施予")]
         [SerializeField]
         SpecialApply _specialApply = SpecialApply.none;
@@ -72,10 +81,10 @@ namespace HittingDetection
         Zokusei zokusei;
         
         public int CurrentHP { get; set; }
-        
-        FightAttriCalReference _myOwnerCalReference;
-        TeamConfig teamConfig = TeamConfig.defaultSet;
-        Transform attackerWholeTransform;
+
+        FightAttriCalReference _MyOwnerCalReference;
+        public TeamConfig teamConfig = TeamConfig.defaultSet;
+        Transform AttackerWholeTransform;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         Transform _MarkersParent;
         bool HitFlesh;
@@ -87,14 +96,16 @@ namespace HittingDetection
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         Decompositioner processingBlood;
-        bool traditionalDefendMode = false;
-        string personalEffectPath;
-
+        bool TraditionalDefendMode;
+        string PersonalEffectPath;
+        
         void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         {
-            personalEffectPath = FightGlobalSetting.EffectPathDefine(zokusei);
+            PersonalEffectPath = FightGlobalSetting.EffectPathDefine(zokusei);
             if (_MarkersParent == null)
+            {
                 _MarkersParent = transform;
+            }
             Transform[] children = new Transform[_MarkersParent.childCount];
             List<BO_Marker> bms = new List<BO_Marker>();
             for (int i = 0; i < children.Length; i++)
@@ -124,16 +135,16 @@ namespace HittingDetection
         public void SetReferenceTransformInfo(Transform centerT ,Transform WholeT)
         {
             _WeaponHolderCenter = centerT;
-            attackerWholeTransform = WholeT;
+            AttackerWholeTransform = WholeT;
         }
 
         public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
         {
-            _myOwnerCalReference = myOwnerCalReference;
+            _MyOwnerCalReference = myOwnerCalReference;
         }
         public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
-            return _myOwnerCalReference;
+            return _MyOwnerCalReference;
         }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {
@@ -180,11 +191,11 @@ namespace HittingDetection
             }
         }
 
-        void ClearMarkersDectections()
+        public void ClearMarkersDectections()
         {
-            for (int i2 = 0; i2 < _markers.Length; i2++)
+            for (int i = 0; i < _markers.Length; i++)
             {
-                _markers[i2].ClearMarkerProcess();
+                _markers[i].ClearMarkerProcess();
             }
         }
 
@@ -211,14 +222,14 @@ namespace HittingDetection
                 HitFlesh = false;
                 HitShield = false;
                 DetectProcess();
-                TreatProcess();
             }
         }
 
-        void LateUpdate()
+        public void LocalLateUpdate()
         {
             if (Enabled)
             {
+                TreatProcess();
                 ClearMarkersDectections();
             }
         }
@@ -236,7 +247,7 @@ namespace HittingDetection
             if (weaponHP > 0)
             {
                 CurrentHP -= 1;
-                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, personalEffectPath, Pos, Qua, null);
+                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, PersonalEffectPath, Pos, Qua, null);
             }
         }
 

@@ -391,10 +391,10 @@ public class StagesManagerGUI : Editor {
 
                     if (focusingSkillConfig.RECORD_ID != null)
                     {
-                        focusingSkillConfig.stateType = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",
-                                                                                     (focusingSkillConfig.stateType == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.stateType != BehaviorType.NONE)
+                        focusingSkillConfig.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",
+                                                                                     (focusingSkillConfig.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE)
                                                                                      ?
-                                                                                     defaultSkillConfig.stateType : focusingSkillConfig.stateType);
+                                                                                     defaultSkillConfig.STATE_TYPE : focusingSkillConfig.STATE_TYPE);
 
                         focusingSkillConfig.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT",
                                                                           (defaultSkillConfig != null)

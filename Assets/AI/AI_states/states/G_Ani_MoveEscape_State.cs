@@ -8,20 +8,20 @@ public class G_Ani_MoveEscape_State : Behavior {
     Vector3 screenMovementForward, screenMovementRight, use_direction;
 
     public G_Ani_MoveEscape_State(string _clip_name)
-	{
+    {
         clip_name = _clip_name;
-	}
-
+    }
+    
     public override void Pre_process_before_enter()
-	{
-		base.Pre_process_before_enter ();
-	}
+    {
+        base.Pre_process_before_enter ();
+    }
     
     public override bool Capacity_enter_condition()
     {
         return _BasicPhysicSupport.hiddenMethods.Grounded && base.Capacity_enter_condition();
     }
-        
+
     public override bool Capacity_Exit_Condition()
     {
         return AnimationCasualFinishedFlag();
@@ -33,7 +33,6 @@ public class G_Ani_MoveEscape_State : Behavior {
 	{
         base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
-        Sensor.OneRoundDetectionStart(5);
         _SkillCancelFlag.turn_off_flag();
         personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
@@ -56,9 +55,18 @@ public class G_Ani_MoveEscape_State : Behavior {
             {
                 if (Sensor.GetInnerEnemiesColliders()[0] != null)
                     facedirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        facedirection = Quaternion.Euler(0, -90, 0) * facedirection;
+                        break;
+                    case 1:
+                        facedirection = Quaternion.Euler(0, 90, 0) * facedirection;
+                        break;
+                }
             }
         }
-        RotateToDirection(-facedirection, 10f, true);
+        RotateToDirection(-facedirection, 100f, true);
 	}
 
     float h;
@@ -68,7 +76,6 @@ public class G_Ani_MoveEscape_State : Behavior {
         base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
-        Sensor.OneRoundDetectionStart(5);
         personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
@@ -91,10 +98,11 @@ public class G_Ani_MoveEscape_State : Behavior {
         use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         RotateToDirection(use_direction, 10f, true);
     }
-
+    
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        Sensor.OneRoundDetectionStart(5);
         _Animator.applyRootMotion = false;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
 using dataAccess;
 using Api.Dto.Model;
 
@@ -83,14 +81,14 @@ public class ConfigFileManager : MonoBehaviour {
                     SkillConfig OneConfig = new SkillConfig
                     {
                         RECORD_ID = null,
-                        type = chartype,
+                        TYPE = chartype,
                         REAL_NAME = _anim.name,
                         ATTACK_WEIGHT = 10,
-                        ShowName = "unknown",
+                        SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
-                        stateType = BehaviorType.GR,
+                        STATE_TYPE = BehaviorType.GR,
                         ai_trigger_ranges = new BehaviorEnterRange[1] { BehaviorEnterRange.inner_range },
-                        AI_PRIORITY = "2",
+                        CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -114,14 +112,14 @@ public class ConfigFileManager : MonoBehaviour {
                     SkillConfig OneConfig = new SkillConfig
                     {
                         RECORD_ID = null,
-                        type = chartype,
+                        TYPE = chartype,
                         REAL_NAME = _anim.name,
                         ATTACK_WEIGHT = 10,
-                        ShowName = "unknown",
+                        SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
-                        stateType = BehaviorType.GI,
+                        STATE_TYPE = BehaviorType.GI,
                         ai_trigger_ranges = new BehaviorEnterRange[3] { BehaviorEnterRange.inner_range, BehaviorEnterRange.mid_range, BehaviorEnterRange.far_range },
-                        AI_PRIORITY = "2",
+                        CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -145,14 +143,14 @@ public class ConfigFileManager : MonoBehaviour {
                     SkillConfig OneConfig = new SkillConfig
                     {
                         RECORD_ID = null,
-                        type = chartype,
+                        TYPE = chartype,
                         REAL_NAME = _anim.name,
                         ATTACK_WEIGHT = 10,
-                        ShowName = "unknown",
+                        SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
-                        stateType = BehaviorType.GM,
+                        STATE_TYPE = BehaviorType.GM,
                         ai_trigger_ranges = new BehaviorEnterRange[2] { BehaviorEnterRange.mid_range, BehaviorEnterRange.inner_range },
-                        AI_PRIORITY = "2",
+                        CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);

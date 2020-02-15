@@ -1059,6 +1059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1053097006}
+  - component: {fileID: 1053097007}
   m_Layer: 0
   m_Name: Effects
   m_TagString: Untagged
@@ -1083,6 +1084,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1053097007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053097005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd312948ca02642349f8545a488607e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  processingDecompositioners: []
 --- !u!1 &1181238545
 GameObject:
   m_ObjectHideFlags: 0
@@ -31036,6 +31050,7 @@ MonoBehaviour:
   weaponHP: -1
   onGroundMagic: 0
   effectSpreadOnBody: 0
+  SpecificTarget: 0
   _specialApply: 0
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
@@ -143605,6 +143620,7 @@ MonoBehaviour:
   weaponHP: -1
   onGroundMagic: 0
   effectSpreadOnBody: 0
+  SpecificTarget: 0
   _specialApply: 0
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
@@ -143660,6 +143676,7 @@ MonoBehaviour:
   weaponHP: -1
   onGroundMagic: 0
   effectSpreadOnBody: 0
+  SpecificTarget: 0
   _specialApply: 0
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
@@ -148688,6 +148705,7 @@ MonoBehaviour:
   energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
+  _HitTriggerEvent: 
 --- !u!4 &8555482635732643729
 Transform:
   m_ObjectHideFlags: 0

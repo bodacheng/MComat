@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 
 public class EffectAndHurtObjectLoading
 {
-    private static EffectAndHurtObjectLoading instance;
+    static EffectAndHurtObjectLoading instance;
     public static EffectAndHurtObjectLoading Instance
     {
         get
@@ -37,12 +37,12 @@ public class EffectAndHurtObjectLoading
         if (prefab != null)
         {
             DecompositionerPool poolToConstruct = new DecompositionerPool(prefab);
-            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件"));
+            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
 
             if (HurtObjectPoolsDic.ContainsKey(key))
-                this.HurtObjectPoolsDic[key] = poolToConstruct;
+                HurtObjectPoolsDic[key] = poolToConstruct;
             else
-                this.HurtObjectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
+                HurtObjectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
             return poolToConstruct;
         }
         return null;
@@ -53,12 +53,12 @@ public class EffectAndHurtObjectLoading
         if (prefab != null)
         {
             DecompositionerPool poolToConstruct = new DecompositionerPool(prefab);
-            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件"));
+            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
 
             if (EffectObjectPoolsDic.ContainsKey(key))
-                this.EffectObjectPoolsDic[key] = poolToConstruct;
+                EffectObjectPoolsDic[key] = poolToConstruct;
             else
-                this.EffectObjectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
+                EffectObjectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
             return poolToConstruct;
         }
         return null;
@@ -295,8 +295,6 @@ public class EffectAndHurtObjectLoading
         if (EffectPool == null)
             return null;
         processingEffectObj = EffectPool.Rent();
-        processingEffectObj.transform.position = Pos;
-        processingEffectObj.transform.rotation = Qua;
         if (parentsetT != null)
         {
             myConstraintSource.sourceTransform = parentsetT;
@@ -304,9 +302,10 @@ public class EffectAndHurtObjectLoading
             processingEffectObj.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
             processingEffectObj.GetPositionConstraint().constraintActive = true;
             processingEffectObj.GetPositionConstraint().locked = true;
-            processingEffectObj.GetPositionConstraint().translationAtRest = Pos;
             processingEffectObj.GetPositionConstraint().translationOffset = Vector3.zero;
         }
+        processingEffectObj.transform.position = Pos;
+        processingEffectObj.transform.rotation = Qua;
         return processingEffectObj;
     }
     

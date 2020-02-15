@@ -62,9 +62,10 @@ MonoBehaviour:
   damage_type: 2
   _WeaponMode: 2
   _WeaponPosAdjustMode: 2
-  weaponHP: 10
+  weaponHP: 3
   onGroundMagic: 1
   effectSpreadOnBody: 1
+  SpecificTarget: 0
   _specialApply: 0
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
@@ -90,6 +91,7 @@ MonoBehaviour:
   energyDissolveSlowly: 1
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
+  _HitTriggerEvent: 
 --- !u!114 &6719295242509315404
 MonoBehaviour:
   m_ObjectHideFlags: 0

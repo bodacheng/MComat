@@ -17,8 +17,8 @@ namespace mainMenu
         public Text levelText;
         public Slider EXbar;
 
-        private int focusingCharCurrentEx;
-        private int focusingCharCurrentLevel;
+        int focusingCharCurrentEx;
+        int focusingCharCurrentLevel;
 
         public void turnOnUI(bool _on)
         {

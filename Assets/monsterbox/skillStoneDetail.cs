@@ -2,13 +2,15 @@
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using Api.Dto.Model;
+using dataAccess;
 
 namespace mainMenu
 {
     public class SkillStoneDetail : MonoBehaviour
     {
         [Space(2)]
-        [Header("技能信息")]
+        [Header("技能名字")]
         public Text keyname;
         public Text Showname;
 
@@ -19,13 +21,27 @@ namespace mainMenu
         [Space(7)]
         [Header("EXTypes")]
         public GameObject close,near,far,outter;
+
+        [Space(7)]
+        [Header("当前技能等级")]
+        public Text skill_level_info;
+        public Text skill_level_levelup;
         
-        public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone)
+        [Space(7)]
+        [Header("升级按钮系列")]
+        public Button plusLevel;
+        public Button minusLevel;
+        public Button confirmLevelUp;
+        
+        public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone, string skillStoneOfPlayerId)
         {
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
-            Showname.text = _SkillConfigOfSkillStone.ShowName;
+            Showname.text = _SkillConfigOfSkillStone.SHOW_NAME;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.ai_trigger_ranges);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
+            skill_level_levelup.text = "LV:" + (skillStoneOfPlayerInfoModel.level ?? "1");
+            skill_level_info.text = "LV:" + (skillStoneOfPlayerInfoModel.level ?? "1");
         }
         
         void ShowSKillRanges(BehaviorEnterRange[] ranges)

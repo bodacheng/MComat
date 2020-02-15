@@ -27,7 +27,7 @@ namespace HittingDetection
         
         void TreatProcess()
         {
-            if (HitShield && traditionalDefendMode)//其实由上面的分析可以知道，对于来自一把武器的攻击，hitshield和hitflesh是不会同时为true的。但如果多把武器同时来攻击，如果被攻击方同时有被击中以及防御住的情况发生，肯定要先处理所受伤害，立刻转入受伤状态才对
+            if (HitShield && TraditionalDefendMode)//其实由上面的分析可以知道，对于来自一把武器的攻击，hitshield和hitflesh是不会同时为true的。但如果多把武器同时来攻击，如果被攻击方同时有被击中以及防御住的情况发生，肯定要先处理所受伤害，立刻转入受伤状态才对
             {
                 for (int i1 = 0; i1 < _Shields_Hit.Count; i1++)
                 {
@@ -35,17 +35,17 @@ namespace HittingDetection
                     {
                         BO_Shield TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
                         collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
-                        _myOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                        _MyOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         switch (collision.on_weapon_holder)
                         {
                             case DamageType.stagger:
                                     V_Damage new_damage = new V_Damage(0,
-                                        _myOwnerCalReference,TheS._ownerFightAttriCalReference,
+                                        _MyOwnerCalReference,TheS._ownerFightAttriCalReference,
                                         DamageType.stagger, WeaponPosAdjustMode.explosion, this._WeaponMode,SpecialApply.none,
                                         _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
                                         TheS._ownerFightAttriCalReference._Center.WholeT.forward,TheS._ownerFightAttriCalReference._Center.WholeT.position,
-                                        personalEffectPath, this.effectSpreadOnBody);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
-                                    _myOwnerCalReference.ApplyDamage(new_damage);
+                                        PersonalEffectPath, this.effectSpreadOnBody);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    _MyOwnerCalReference.ApplyDamage(new_damage);
                                 break;
                             case DamageType.none:
                                 break;
@@ -58,31 +58,31 @@ namespace HittingDetection
                             {
                                 case DamageType.light_block:
                                     V_Damage new_damage = new V_Damage(0f,
-                                        TheS._ownerFightAttriCalReference, _myOwnerCalReference,
+                                        TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
                                         DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
                                         _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        attackerWholeTransform.forward, attackerWholeTransform.position,
-                                        personalEffectPath, effectSpreadOnBody);
+                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                        PersonalEffectPath, effectSpreadOnBody);
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
                                         new_damage = new V_Damage(0f,
-                                        TheS._ownerFightAttriCalReference, _myOwnerCalReference,
+                                        TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
                                         DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
                                         _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        attackerWholeTransform.forward, attackerWholeTransform.position,
-                                        personalEffectPath, effectSpreadOnBody);
+                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                        PersonalEffectPath, effectSpreadOnBody);
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
                                         new_damage = new V_Damage(0f,
-                                        TheS._ownerFightAttriCalReference, _myOwnerCalReference,
+                                        TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
                                         DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
                                         _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        attackerWholeTransform.forward, attackerWholeTransform.position,
-                                        personalEffectPath,effectSpreadOnBody);
+                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                        PersonalEffectPath,effectSpreadOnBody);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:

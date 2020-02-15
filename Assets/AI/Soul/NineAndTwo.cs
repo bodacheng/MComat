@@ -193,10 +193,10 @@ public class NineAndTwo {
             if (referenceStandardSkillConfig != null)
             {
                 _SkillConfig.REAL_NAME = referenceStandardSkillConfig.REAL_NAME;
-                _SkillConfig.ShowName = referenceStandardSkillConfig.ShowName;
+                _SkillConfig.SHOW_NAME = referenceStandardSkillConfig.SHOW_NAME;
                 _SkillConfig.ai_trigger_ranges = referenceStandardSkillConfig.ai_trigger_ranges;
                 _SkillConfig.SP_LEVEL = referenceStandardSkillConfig.SP_LEVEL;
-                _SkillConfig.stateType = referenceStandardSkillConfig.stateType;
+                _SkillConfig.STATE_TYPE = referenceStandardSkillConfig.STATE_TYPE;
             }
         }
         else
@@ -210,7 +210,7 @@ public class NineAndTwo {
             try
             {
                 STS = new Behavior_Transition_Set(_SkillConfig.REAL_NAME,
-                                               _SkillConfig.stateType,
+                                               _SkillConfig.STATE_TYPE,
                                                _SkillConfig.ATTACK_WEIGHT,
                                                _SkillConfig.ai_trigger_ranges,
                                                 null,

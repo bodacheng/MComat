@@ -1,0 +1,55 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+public class HitBoxesProcesser : MonoBehaviour
+{
+    public static HitBoxesProcesser Instance;
+    public List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    public static void AddToDecompositionerProcesserList(Decompositioner _poolObject)
+    {
+        if (Instance != null)
+            Instance.AddToHitBoxesProcesserList(_poolObject);
+    }
+
+    void Update()
+    {
+        if (processingDecompositioners.Count > 0)
+        {
+            for (int i = 0; i < processingDecompositioners.Count; i++)
+            {
+                processingDecompositioners[i].Step1();
+            }
+        }
+        if (processingDecompositioners.Count > 0)
+        {
+            for (int i = 0; i < processingDecompositioners.Count; i++)
+            {
+                processingDecompositioners[i].Step2();
+            }
+        }
+        if (processingDecompositioners.Count > 0)
+        {
+            for (int i = 0; i < processingDecompositioners.Count; i++)
+            {
+                processingDecompositioners[i].Life();
+            }
+        }
+    }
+
+    void LateUpdate()
+    {
+        processingDecompositioners.Clear();
+    }
+
+    void AddToHitBoxesProcesserList(Decompositioner _poolObject)
+    {
+        if (!processingDecompositioners.Contains(_poolObject))
+            processingDecompositioners.Add(_poolObject);
+    }
+}

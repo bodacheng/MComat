@@ -124,7 +124,7 @@ public class Behaviors_Incubator
                 switch (_attackType)
                 {
                     case BehaviorType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 30f, 1.4f, 0f, _set.StateKey)
+                        G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 0f, _set.StateKey)
                         {
                             StateType = BehaviorType.GI,
                             AT = _set.AT,

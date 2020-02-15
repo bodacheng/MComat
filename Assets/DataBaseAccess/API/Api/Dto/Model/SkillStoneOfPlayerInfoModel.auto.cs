@@ -8,8 +8,8 @@ namespace Api.Dto.Model {
     /// バージョン：1.00 2019/07/01
     /// </summary>
     [Serializable]
-    public class SkillStoneOfPlayerInfoModel {
-
+    public class SkillStoneOfPlayerInfoModel
+    {
         /// <summary>
         /// プレーヤ所有スキルストーンID
         /// </summary>
@@ -21,10 +21,15 @@ namespace Api.Dto.Model {
         public string skillId { get; set; }
 
         /// <summary>
+        /// 等级，限制为1到100
+        /// </summary>
+        public string level { get; set; }
+
+        /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
         public string inUsingMonsterOfPlayerId { get; set; }
-        
+
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>

@@ -35,7 +35,7 @@ public class SkillConfigTable
 		public string MR_SKILL_FLAG;
 		public string LR_SKILL_FLAG;
         public string VL_SKILL_FLAG;
-        public string AI_PRIORITY;
+        public string CAN_LEVELUP;
         public string RARITY_LEVEL;
     }
 
@@ -96,7 +96,7 @@ public class SkillConfigTable
         List<SkillConfig> SkillConfigsOfType = new List<SkillConfig>();
         foreach (KeyValuePair<string, SkillConfig> one in Instance.SkillConfigDicForReference)
         {
-            if (one.Value.type == type)
+            if (one.Value.TYPE == type)
                 SkillConfigsOfType.Add(one.Value);
         }
         return SkillConfigsOfType;
@@ -220,7 +220,7 @@ public class SkillConfigTable
                 grid[i][7] = rowList[i - 1].MR_SKILL_FLAG;
                 grid[i][8] = rowList[i - 1].LR_SKILL_FLAG;
                 grid[i][9] = rowList[i - 1].VL_SKILL_FLAG;
-                grid[i][10] = rowList[i - 1].AI_PRIORITY;
+                grid[i][10] = rowList[i - 1].CAN_LEVELUP;
                 grid[i][11] = rowList[i - 1].RARITY_LEVEL;
             }
         }
@@ -256,7 +256,7 @@ public class SkillConfigTable
                     MR_SKILL_FLAG = grid[i][7],
                     LR_SKILL_FLAG = grid[i][8],
                     VL_SKILL_FLAG = grid[i][9],
-                    AI_PRIORITY = grid[i][10],
+                    CAN_LEVELUP = grid[i][10],
                     RARITY_LEVEL = grid[i][11]
                 };
                 rowList.Add(row);
@@ -288,12 +288,12 @@ public class SkillConfigTable
         Row row = new Row
         {
             RECORD_ID = skillConfig.RECORD_ID,
-            USEABLE_MONSTER_TYPE = skillConfig.type,
+            USEABLE_MONSTER_TYPE = skillConfig.TYPE,
             REAL_NAME = skillConfig.REAL_NAME,
             ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString()
         };
 
-        switch (skillConfig.stateType)
+        switch (skillConfig.STATE_TYPE)
         {
             case BehaviorType.GR:
                 row.ATTACK_TYPE = "GR";
@@ -335,7 +335,7 @@ public class SkillConfigTable
                 row.SP_LEVEL = "-1";
                 break;
         }
-        row.AI_PRIORITY = skillConfig.AI_PRIORITY;
+        row.CAN_LEVELUP = skillConfig.CAN_LEVELUP;
         row.RARITY_LEVEL = skillConfig.RARITY_LEVEL.ToString();
         return row;
     }
@@ -344,7 +344,7 @@ public class SkillConfigTable
     {
         SkillConfig _SkillConfig = new SkillConfig
         {
-            type = row.USEABLE_MONSTER_TYPE,
+            TYPE = row.USEABLE_MONSTER_TYPE,
             RECORD_ID = row.RECORD_ID,
             REAL_NAME = row.REAL_NAME,
             ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT)
@@ -353,22 +353,22 @@ public class SkillConfigTable
         switch (row.ATTACK_TYPE)
         {
             case "GR":
-                _SkillConfig.stateType = BehaviorType.GR;
+                _SkillConfig.STATE_TYPE = BehaviorType.GR;
                 break;
             case "GI":
-                _SkillConfig.stateType = BehaviorType.GI;
+                _SkillConfig.STATE_TYPE = BehaviorType.GI;
                 break;
             case "GM":
-                _SkillConfig.stateType = BehaviorType.GM;
+                _SkillConfig.STATE_TYPE = BehaviorType.GM;
                 break;
             case "CT":
-                _SkillConfig.stateType = BehaviorType.CT;
+                _SkillConfig.STATE_TYPE = BehaviorType.CT;
                 break;
             case "NONE":
-                _SkillConfig.stateType = BehaviorType.NONE;
+                _SkillConfig.STATE_TYPE = BehaviorType.NONE;
                 break;
             default:
-                _SkillConfig.stateType = BehaviorType.NONE;
+                _SkillConfig.STATE_TYPE = BehaviorType.NONE;
                 break;
         }
         
@@ -401,7 +401,7 @@ public class SkillConfigTable
                 _SkillConfig.SP_LEVEL = -1;
                 break;
         }
-        _SkillConfig.AI_PRIORITY = row.AI_PRIORITY;
+        _SkillConfig.CAN_LEVELUP = row.CAN_LEVELUP;
         _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
         return _SkillConfig;
     }
@@ -501,14 +501,6 @@ public class SkillConfigTable
 	{
 		return rowList.FindAll(x => x.SP_LEVEL == find);
 	}
-    public Row Find_skillEmergentLevel(string find)
-    {
-        return rowList.Find(x => x.AI_PRIORITY == find);
-    }
-    public List<Row> FindAll_skillEmergentLevel(string find)
-    {
-        return rowList.FindAll(x => x.AI_PRIORITY == find);
-    }
     public Row Find_rarelevel(string find)
     {
         return rowList.Find(x => x.RARITY_LEVEL == find);

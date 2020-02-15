@@ -16,11 +16,8 @@ public class TeamConfig
     public List<Team> myEnemies;
 
     public string my_tag;
-    public string[] myEnemyTags;
 
     public int mylayer;
-    public List<int> myEnemyLayers;
-
     public int myWeaponLayer;
     public int myShieldLayer;
 
@@ -49,7 +46,6 @@ public class TeamConfig
 
     public void RefreshMyLayers()
     {
-        myEnemyLayers = new List<int>();
         switch (myTeam)
         {
             case Team.player1:
@@ -79,13 +75,12 @@ public class TeamConfig
                 myShieldLayer = 0;
                 break;
         }
-        List<string> EnemyTags = new List<string>();
+
         foreach (Team one in myEnemies)
         {
             switch (one)
             {
                 case Team.player1:
-                    EnemyTags.Add("Player1");
                     enemyLayerMask = (1 << 9);
                     enemyWeaponLayerMask = (1 << 11);
                     enemyShieldLayerMask = (1 << 15);
@@ -95,7 +90,6 @@ public class TeamConfig
                     //myTeamAndMyEnemy |=(1 << 9);
                     break;
                 case Team.player2:
-                    EnemyTags.Add("Player2");
                     enemyLayerMask = (1 << 10);
                     enemyWeaponLayerMask = (1 << 12);
                     enemyShieldLayerMask = (1 << 16);
@@ -105,10 +99,8 @@ public class TeamConfig
                     //myTeamAndMyEnemy |=(1 << 10);
                     break;
                 case Team.player3:
-                    EnemyTags.Add("Player3");
                     break;
                 case Team.player4:
-                    EnemyTags.Add("Player4");
                     break;
                 default:
                     enemyLayerMask = 31;
@@ -119,7 +111,6 @@ public class TeamConfig
                     break;
             }
         }
-        myEnemyTags = EnemyTags.ToArray();
         deadLayer = 14;
     }
 }

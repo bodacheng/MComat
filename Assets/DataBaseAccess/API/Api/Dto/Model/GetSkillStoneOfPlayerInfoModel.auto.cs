@@ -1,5 +1,4 @@
-﻿using Api.Dto.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Api.Dto.Model {

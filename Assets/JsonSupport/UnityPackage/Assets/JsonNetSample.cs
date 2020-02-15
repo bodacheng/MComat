@@ -64,21 +64,21 @@ public class JsonNetSample : MonoBehaviour
 
         SkillConfig skillConfig = new SkillConfig();
         skillConfig.RECORD_ID = null;//和Skills表id对应
-        skillConfig.type = "human";
+        skillConfig.TYPE = "human";
         skillConfig.REAL_NAME = "punch";
-        skillConfig.ShowName = "拳头";
+        skillConfig.SHOW_NAME = "拳头";
         skillConfig.ATTACK_WEIGHT = 1;
-        skillConfig.stateType = BehaviorType.GM;
+        skillConfig.STATE_TYPE = BehaviorType.GM;
         skillConfig.ai_trigger_ranges = new BehaviorEnterRange[1] {BehaviorEnterRange.inner_range };
         skillConfig.SP_LEVEL = 0;
 
         SkillConfig skillConfig2 = new SkillConfig();
         skillConfig.RECORD_ID = null;//和Skills表id对应
-        skillConfig.type = "human";
+        skillConfig.TYPE = "human";
         skillConfig.REAL_NAME = "punch2";
-        skillConfig.ShowName = "拳头";
+        skillConfig.SHOW_NAME = "拳头";
         skillConfig.ATTACK_WEIGHT = 1;
-        skillConfig.stateType = BehaviorType.GM;
+        skillConfig.STATE_TYPE = BehaviorType.GM;
         skillConfig.ai_trigger_ranges = new BehaviorEnterRange[1] { BehaviorEnterRange.mid_range };
         skillConfig.SP_LEVEL = 0;
 

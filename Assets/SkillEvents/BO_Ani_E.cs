@@ -60,7 +60,7 @@ public class BO_Ani_E : MonoBehaviour
                     keyValuePair.Value.StopEmissions(clearParticles);
                 }
             }
-        }
+        }               
     }
     
     public HiddenMethods hiddenMethods;
@@ -123,16 +123,17 @@ public class BO_Ani_E : MonoBehaviour
         {
             return;
         }
-        
+
         target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(e.stringParameter, myMagicForwardPath, magic_path);
         if (target_pool != null)
         {
             processingHitBox = target_pool.Rent();
             processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
             processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter;
-            processingHitBox.transform.rotation = transform.rotation;            
+            processingHitBox.transform.rotation = transform.rotation;
             processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform,transform);
             processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+            processingHitBox.SetBOAniE(this);
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox._HitBox.MarkersEnablingStarts();
             if (processingHitBox._HitBox.onGroundMagic)
@@ -344,6 +345,37 @@ public class BO_Ani_E : MonoBehaviour
         if (_DATA_CENTER._TeamConfig != null)
         {
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.MarkersEnablingStarts();
+        }
+    }
+    
+    public void BlastAttack(int grade, Vector3 pos, Quaternion quaternion)
+    {
+        switch (grade)
+        {
+            case 0:
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, magic_path);
+                break;
+            case 1:
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, magic_path);
+                break;
+            case 2:
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_blast", myMagicForwardPath, magic_path);
+                break;
+            default:
+                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", myMagicForwardPath, magic_path);
+                break;
+        }
+        
+        processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
+        processingHitBox.transform.position = pos;
+        processingHitBox.transform.rotation = quaternion;
+        processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+        if (_DATA_CENTER._TeamConfig != null)
+        {
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox.SetBOAniE(this);
             processingHitBox._HitBox.MarkersEnablingStarts();
         }
     }

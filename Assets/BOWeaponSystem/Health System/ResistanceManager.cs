@@ -66,6 +66,30 @@ public class ResistanceManager : MonoBehaviour
                     }
                 });
                 break;
+            case "magic_release":
+                UnityEngine.Events.UnityAction eventStart2 = () =>
+                {
+                    data_Center._BO_Ani_E.ReleasePreparedMagicToAir("T");
+                };
+                UnityEngine.Events.UnityAction eventEnd2 = () =>
+                {
+                    data_Center._SkillCancelFlag.turn_on_flag();
+                    Resistance.Value = 0;
+                };
+                CustomCoroutine eventCoroutine2 = new CustomCoroutine(eventStart2, 0.2f, eventEnd2);
+                temp = Resistance.Value;
+                var disposable2 = new SingleAssignmentDisposable();
+                disposabletasks.Add(disposable2);
+                disposable2.Disposable = Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    if (Resistance.Value < temp)
+                    {
+                        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine2);
+                        disposable2.Dispose();
+                    }
+                });
+                break;
         }
     }
     

@@ -14,12 +14,14 @@ public class Decompositioner : MonoBehaviour {
     
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;
-    
-    ParticleSystem to_be_stop_emissions;
-    
+
+    public string _HitTriggerEvent;
+
     #region realtime
     DecompositionerPool _DecompositionerPool;
     PositionConstraint positionConstraint;
+    BO_Ani_E BO_Ani_E;
+    ParticleSystem to_be_stop_emissions;
     int phase;
     float Counter;
     #endregion
@@ -44,6 +46,16 @@ public class Decompositioner : MonoBehaviour {
         return positionConstraint;
     }
     
+    public void SetBOAniE(BO_Ani_E _Ani_E)
+    {
+        BO_Ani_E = _Ani_E;
+    }
+    
+    public BO_Ani_E GetBOAniE()
+    {
+        return BO_Ani_E;
+    }
+
     // Local_OnEnable和Local_OnDisable，最大的一个区别是，
     // 前者没有打开marker的处理，marker的开启由各个与攻击相关的模块自行处理，因为在那之前涉及一些不太统一的参数设置
     // 而Local_OnDisable进行了关闭marker的处理（目前好像就干了这一件事）
@@ -70,6 +82,11 @@ public class Decompositioner : MonoBehaviour {
         }
     }
 
+    void Update()
+    {
+        HitBoxesProcesser.AddToDecompositionerProcesserList(this);
+    }
+
     void EnergyRessolve()
     {
         StopEmissions(true);
@@ -84,12 +101,36 @@ public class Decompositioner : MonoBehaviour {
             _HitBox.SetOwnerFightAttriCalReference(null);
         }
     }
-
-    void Update()
+    
+    void HitBoxFadedEvent()//这个就只能在这自定义了
+    {
+        switch (_HitTriggerEvent)
+        {
+            case "expolosion":
+                BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
+                break;
+        }
+    }
+    
+    public void Step1()
     {
         if (phase == 1 && _HitBox != null)
         {
             _HitBox.LocalUpdate();
+        }
+    }
+    public void Step2()
+    {
+        if (phase == 1 && _HitBox != null)
+        {
+            _HitBox.LocalLateUpdate();
+        }
+    }
+    
+    public void Life()
+    {
+        if (phase == 1 && _HitBox != null)
+        {
             switch (_HitBox._WeaponMode)
             {
                 case WeaponMode.EnergyFromBodyWeapon:
@@ -107,6 +148,7 @@ public class Decompositioner : MonoBehaviour {
                         }
                         Counter = stop_emission_delay;
                         phase = 2;
+                        HitBoxFadedEvent();
                     }
                     if (_HitBox.GetOwnerFightAttriCalReference() != null)
                     {
@@ -126,7 +168,7 @@ public class Decompositioner : MonoBehaviour {
                             phase = 2;
                         }
                     }
-                break;
+                    break;
                 case WeaponMode.FlyerWeapon:
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
@@ -142,10 +184,12 @@ public class Decompositioner : MonoBehaviour {
                         }
                         Counter = stop_emission_delay;
                         phase = 2;
+                        HitBoxFadedEvent();
                     }
-                break;
+                    break;
             }
         }
+        
         if (DestructionDelay > 0 && stop_emission_delay > 0)//如果能量自身有寿命
         {
             switch (phase)
@@ -171,7 +215,6 @@ public class Decompositioner : MonoBehaviour {
                 break;
             }
         }
-
         if (gameObject.activeSelf)
         {
             Counter += Time.deltaTime;

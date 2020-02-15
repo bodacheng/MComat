@@ -18,14 +18,14 @@ public enum BehaviorType
 public class SkillConfig
 {
     public string RECORD_ID;//和Skills表id对应
-    public string type;
+    public string TYPE;
     public string REAL_NAME;
-    public string ShowName;
+    public string SHOW_NAME;
     public float ATTACK_WEIGHT;
-    public BehaviorType stateType;
+    public BehaviorType STATE_TYPE;
     public BehaviorEnterRange[] ai_trigger_ranges;
     public int SP_LEVEL;
-    public string AI_PRIORITY;
+    public string CAN_LEVELUP;
     public int RARITY_LEVEL;
 
     public SkillConfig Clone()
@@ -36,26 +36,26 @@ public class SkillConfig
     public SkillConfig()
     {
         RECORD_ID = null;
-        type = null;
+        TYPE = null;
         REAL_NAME = null;
-        ShowName = null;
+        SHOW_NAME = null;
         ATTACK_WEIGHT = 1;
-        stateType = BehaviorType.NONE;
+        STATE_TYPE = BehaviorType.NONE;
         ai_trigger_ranges = new BehaviorEnterRange[] { };
-        SP_LEVEL = 0;
-        AI_PRIORITY = "0";
+        SP_LEVEL = 1;
+        CAN_LEVELUP = "0";
     }
-    public SkillConfig(string id, string type, string keyName, string ShowName, int AT, BehaviorType stateType, BehaviorEnterRange[] ai_trigger_ranges, int SPLevel, int _skillEmergentLevel)
+    public SkillConfig(string id, string type, string keyName, string ShowName, int AT, BehaviorType stateType, BehaviorEnterRange[] ai_trigger_ranges, int SPLevel, int CAN_LEVELUP)
     {
         this.RECORD_ID = id;//和Skills表id对应
-        this.type = type;
+        this.TYPE = type;
         this.REAL_NAME = keyName;
-        this.ShowName = ShowName;
+        this.SHOW_NAME = ShowName;
         this.ATTACK_WEIGHT = AT;
-        this.stateType = stateType;
+        this.STATE_TYPE = stateType;
         this.ai_trigger_ranges = ai_trigger_ranges;
         this.SP_LEVEL = SPLevel;
-        this.AI_PRIORITY = _skillEmergentLevel.ToString();
+        this.CAN_LEVELUP = CAN_LEVELUP.ToString();
         this.RARITY_LEVEL = 0;
     }
 }
