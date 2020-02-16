@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Linq;
+﻿using UnityEngine;
 
 //这个类在远程更新的过程中需要被json化。
 [System.Serializable]
@@ -10,7 +6,7 @@ public class PlayerAccountInfo
 {
     private int coin;//智慧果实
     private int diamond;
-    public playerAccountProgressStep accountprogress = playerAccountProgressStep.Freedom;
+    public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
 
     public PlayerAccountInfo()
     {
@@ -46,13 +42,13 @@ public class PlayerAccountInfo
         }
     }
 
-    public void plusCoin(int plus)
+    public void PlusCoin(int plus)
     {
         this.Coin = Coin + plus;
     }
 }
 
-public enum playerAccountProgressStep : int
+public enum PlayerAccountProgressStep : int
 {
     justCreated = 1,
     Tutorial = 2,

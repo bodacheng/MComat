@@ -89,7 +89,7 @@ namespace dataAccess
         // 所以在这里应该也是对应三个版本。
         public IEnumerator ExecuteCharDataUpate(GetMonsterOfPlayerDetailModel after)//再执行
         {
-            if (AccountSet.instance._PlayerAccountInfo.accountprogress != playerAccountProgressStep.Freedom)//教程 阶段不保存
+            if (AccountSet.instance._PlayerAccountInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
             {
                 IEnumerator getchar = GetAccountCharacterInfo(after.monsterOfPlayerId);
                 yield return getchar;

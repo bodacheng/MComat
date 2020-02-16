@@ -15,11 +15,13 @@ using Api.Dto.Model;
 
 public class SkillStoneSlot
 {
+    public int number;
     public string OnSlotStonelocalID;
     public DragAndDropCell _DragAndDropCell;
     
-    public SkillStoneSlot(string OnSlotStonelocalid, DragAndDropCell _DragAndDropCell)
+    public SkillStoneSlot(int num,string OnSlotStonelocalid, DragAndDropCell _DragAndDropCell)
     {
+        number = num;
         OnSlotStonelocalID = OnSlotStonelocalid;
         this._DragAndDropCell = _DragAndDropCell;
         this._DragAndDropCell._SkillStoneSlot = this;

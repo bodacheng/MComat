@@ -1,13 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using LitJson;
 using System.Text.RegularExpressions;
-
-using System.Text;
 using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Form.Common;

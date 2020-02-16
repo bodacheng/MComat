@@ -42,7 +42,13 @@ namespace dataAccess
             }
             yield break;
         }
-        
+
+        public IEnumerator LevelUpMySkillStone(string skillstoneid, string targetLevel, ApiLanguage apiLanguage)
+        {
+            // 最后可能也是个form提交的格式。。。但这个先放这儿吧。。
+            yield return true; // 代表请求成功
+        }
+
         private IEnumerator SkillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
         {
             List<SkillStoneGotchaInfoModel> infos;

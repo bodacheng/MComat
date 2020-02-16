@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.UI;
 using Api.Dto.Model;
 using dataAccess;
+using System.Collections;
 
 namespace mainMenu
 {
@@ -29,10 +30,32 @@ namespace mainMenu
         
         [Space(7)]
         [Header("升级按钮系列")]
-        public Button plusLevel;
+        public Button plusLevel; // 这个按钮的有效与否应该是取决于有没有足够的经验值币来满足升级请求。
         public Button minusLevel;
         public Button confirmLevelUp;
-        
+
+        SkillStoneOfPlayerInfoModel currentstone;
+        string targetSkillLevel;
+
+        IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
+        {
+            IEnumerator up = MySkillStonesReader.Instance.LevelUpMySkillStone(PlayerSkillStoneID, targetSkillLevel, ApiLanguage.EnUs);
+            yield return up;
+            if ((bool)up.Current)
+            {
+                Debug.Log("升级操作成功");
+            }
+            else
+            {
+                Debug.Log("升级操作失败");
+            }
+        }
+
+        public void ConfirmSkillStoneLevelUp(string PlayerSkillStoneID)
+        {
+            StartCoroutine(SkillStoneLevelUp(PlayerSkillStoneID));
+        }
+
         public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone, string skillStoneOfPlayerId)
         {
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;

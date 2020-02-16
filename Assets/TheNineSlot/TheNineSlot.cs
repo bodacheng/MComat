@@ -38,7 +38,7 @@ namespace mainMenu
         A1DragAndDropCell, A2DragAndDropCell, A3DragAndDropCell,
         B1DragAndDropCell, B2DragAndDropCell, B3DragAndDropCell,
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
-        
+
         [Space(5)]
         [Header("选中框")]
         public GameObject Selected;
@@ -62,17 +62,17 @@ namespace mainMenu
         readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
 
         float last_clickTime;
-        
+
         void Awake()
         {
             Instance = this;
         }
-        
+
         public SkillStoneSlot GetFocusingStoneSlot()
         {
             return focusingSlot;
         }
-        
+
         void SeletedRender(RectTransform T)
         {
             if (T == null)
@@ -100,7 +100,7 @@ namespace mainMenu
                     {
                         focusingSlot = null;
                         SeletedRender(null);
-                    }else{
+                    } else {
                         focusingSlot = skillStoneSlot;
                         SeletedRender(focusingSlot._DragAndDropCell.GetComponent<RectTransform>());
                     }
@@ -117,7 +117,7 @@ namespace mainMenu
                 button.onClick.AddListener(buttonFeature);
             }
         }
-        
+
         void ShowNineSlotExSurplus(int wholePoint)
         {
             int pointremain = wholePoint / 10;
@@ -126,7 +126,7 @@ namespace mainMenu
                 if (i + 1 <= pointremain)
                 {
                     remainCharges[i].SetActive(true);
-                }else
+                } else
                     remainCharges[i].SetActive(false);
             }
         }
@@ -199,58 +199,58 @@ namespace mainMenu
             NineSkillIDs.Add(C3);
             return NineSkillIDs;
         }
-        
-        public bool RefreshWholePoint(DragAndDropItem item,DragAndDropCell replacePosition)
+
+        public bool RefreshWholePointBasedOnCurrentNineSlots(DragAndDropItem item, DragAndDropCell replacePosition)
         {
-            //这里就应该进行valiadation，因为如果出了问题还不断下来，那么底下的流程就会牵扯到各种的数值更新
-            if (item._SkillConfigOfSkillStone != null)
+            List<string> nineskillids = Instance.GetCurrentNineSlotAllSkillIds();
+
+            if (item == null)
             {
-                List<string> nineskillids = Instance.GetCurrentNineSlotAllSkillIds();
-                
-                if (replacePosition == Instance.A1DragAndDropCell)
-                {
-                    nineskillids[0] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.A2DragAndDropCell)
-                {
-                    nineskillids[1] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.A3DragAndDropCell)
-                {
-                    nineskillids[2] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.B1DragAndDropCell)
-                {
-                    nineskillids[3] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.B2DragAndDropCell)
-                {
-                    nineskillids[4] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.B3DragAndDropCell)
-                {
-                    nineskillids[5] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.C1DragAndDropCell)
-                {
-                    nineskillids[6] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.C2DragAndDropCell)
-                {
-                    nineskillids[7] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                if (replacePosition == Instance.C3DragAndDropCell)
-                {
-                    nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
-                }
-                
-                int wholepint = MySkillStonesReader.SkillSetValidation(nineskillids[0],nineskillids[1],nineskillids[2],
-                                                                        nineskillids[3],nineskillids[4],nineskillids[5],
-                                                                        nineskillids[6],nineskillids[7],nineskillids[8]);
-                if (wholepint < 0)
-                {
-                    return false;
-                }
+                item = new DragAndDropItem();
+                item._SkillConfigOfSkillStone = new SkillConfig();
+            }
+
+            if (replacePosition == Instance.A1DragAndDropCell)
+            {
+                nineskillids[0] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.A2DragAndDropCell)
+            {
+                nineskillids[1] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.A3DragAndDropCell)
+            {
+                nineskillids[2] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.B1DragAndDropCell)
+            {
+                nineskillids[3] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.B2DragAndDropCell)
+            {
+                nineskillids[4] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.B3DragAndDropCell)
+            {
+                nineskillids[5] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.C1DragAndDropCell)
+            {
+                nineskillids[6] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.C2DragAndDropCell)
+            {
+                nineskillids[7] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+            if (replacePosition == Instance.C3DragAndDropCell)
+            {
+                nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
+            }
+
+            int wholepint = MySkillStonesReader.SkillSetValidation(nineskillids[0], nineskillids[1], nineskillids[2], nineskillids[3], nineskillids[4], nineskillids[5], nineskillids[6], nineskillids[7], nineskillids[8]);
+            if (wholepint < 0)
+            {
+                return false;
             }
             return true;
         }
@@ -276,16 +276,16 @@ namespace mainMenu
         IEnumerator GetNineSlotReady()
         {
             SeletedRender(null);
-            
-            A1Slot = new SkillStoneSlot(null, A1DragAndDropCell);
-            A2Slot = new SkillStoneSlot(null, A2DragAndDropCell);
-            A3Slot = new SkillStoneSlot(null, A3DragAndDropCell);
-            B1Slot = new SkillStoneSlot(null, B1DragAndDropCell);
-            B2Slot = new SkillStoneSlot(null, B2DragAndDropCell);
-            B3Slot = new SkillStoneSlot(null, B3DragAndDropCell);
-            C1Slot = new SkillStoneSlot(null, C1DragAndDropCell);
-            C2Slot = new SkillStoneSlot(null, C2DragAndDropCell);
-            C3Slot = new SkillStoneSlot(null, C3DragAndDropCell);
+
+            A1Slot = new SkillStoneSlot(1,null, A1DragAndDropCell);
+            A2Slot = new SkillStoneSlot(2,null, A2DragAndDropCell);
+            A3Slot = new SkillStoneSlot(3,null, A3DragAndDropCell);
+            B1Slot = new SkillStoneSlot(4,null, B1DragAndDropCell);
+            B2Slot = new SkillStoneSlot(5,null, B2DragAndDropCell);
+            B3Slot = new SkillStoneSlot(6,null, B3DragAndDropCell);
+            C1Slot = new SkillStoneSlot(7,null, C1DragAndDropCell);
+            C2Slot = new SkillStoneSlot(8,null, C2DragAndDropCell);
+            C3Slot = new SkillStoneSlot(9,null, C3DragAndDropCell);
 
             allSlot.Clear();
             allSlot.Add(A1Slot);
@@ -317,84 +317,136 @@ namespace mainMenu
             {
                 yield break;
             }
-            CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(_AccountCharacterInfo);
-            if (characterDataInfo == null)
-            {
-                Debug.Log("获取CharacterDataInfo信息错误：monsterlocalid" + _AccountCharacterInfo.monsterOfPlayerId);
-                yield break;
-            }
-            NineAndTwo readingNineAndTwo = characterDataInfo._NineAndTwo;
-            int wholePoint = MySkillStonesReader.SkillSetValidation(
-                readingNineAndTwo.A1skillid, readingNineAndTwo.A2skillid, readingNineAndTwo.A3skillid,
-                readingNineAndTwo.B1skillid, readingNineAndTwo.B2skillid, readingNineAndTwo.B3skillid,
-                readingNineAndTwo.C1skillid, readingNineAndTwo.C2skillid, readingNineAndTwo.C3skillid
-            );
-            ShowNineSlotExSurplus(wholePoint);
-
             List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
             for (int i = 0; i < equipingstones.Count; i++)
             {
-                switch(equipingstones[i].inUsingSkillSlot)
+                switch (equipingstones[i].inUsingSkillSlot)
                 {
                     case "1":
-                    A1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        A1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "2":
-                    A2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        A2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "3":
-                    A3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        A3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "4":
-                    B1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        B1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "5":
-                    B2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        B2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "6":
-                    B3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        B3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "7":
-                    C1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        C1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "8":
-                    C2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        C2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                     case "9":
-                    C3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
-                    break;
+                        C3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        break;
                 }
             }
-
+            int wholePoint = MySkillStonesReader.SkillSetValidation(
+                A1Slot.OnSlotStonelocalID, A2Slot.OnSlotStonelocalID, A3Slot.OnSlotStonelocalID,
+                B1Slot.OnSlotStonelocalID, B2Slot.OnSlotStonelocalID, B3Slot.OnSlotStonelocalID,
+                C1Slot.OnSlotStonelocalID, C2Slot.OnSlotStonelocalID, C3Slot.OnSlotStonelocalID
+            );
+            ShowNineSlotExSurplus(wholePoint);
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 yield return _slot.ShowOrigin(Color.white);
-                _slot._DragAndDropCell.cellPhase = _slot._DragAndDropCell.GetItem() != null? DragAndDropCell.CellPhase.NineSlotCell_full : DragAndDropCell.CellPhase.NineSlotCell_empty;
+                _slot._DragAndDropCell.cellPhase = _slot._DragAndDropCell.GetItem() != null ? DragAndDropCell.CellPhase.NineSlotCell_full : DragAndDropCell.CellPhase.NineSlotCell_empty;
             }
         }
-        
-        int SlotNum(SkillStoneSlot stoneSlot)
+
+        public int GetNineSlotWholePointOfMonster(GetMonsterOfPlayerDetailModel _AccountCharacterInfo)
         {
-            if (stoneSlot == A1Slot)
-            return 1;
-            if (stoneSlot == A2Slot)
-            return 2;
-            if (stoneSlot == A3Slot)
-            return 3;
-            if (stoneSlot == B1Slot)
-            return 4;
-            if (stoneSlot == B2Slot)
-            return 5;
-            if (stoneSlot == B3Slot)
-            return 6;
-            if (stoneSlot == C1Slot)
-            return 7;
-            if (stoneSlot == C2Slot)
-            return 8;
-            if (stoneSlot == C3Slot)
-            return 9;
-            
-            return -1;
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
+            string A1=null, A2=null, A3=null, B1=null, B2=null, B3=null, C1=null, C2=null, C3=null;
+            for (int i = 0; i < equipingstones.Count; i++)
+            {
+                switch (equipingstones[i].inUsingSkillSlot)
+                {
+                    case "1":
+                        A1 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "2":
+                        A2 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "3":
+                        A3 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "4":
+                        B1 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "5":
+                        B2 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "6":
+                        B3 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "7":
+                        C1 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "8":
+                        C2 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                    case "9":
+                        C3 = equipingstones[i].skillStoneOfPlayerId;
+                        break;
+                }
+            }
+            int wholePoint = MySkillStonesReader.SkillSetValidation(A1,A2,A3,B1,B2,B3,C1,C2,C3);
+            return wholePoint;
+        }
+
+        public int CheckNineSlotPointsAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
+        {
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(monsterOfPlayerId);
+            string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
+            for (int i = 0; i < equipingstones.Count; i++)
+            {
+                if (equipingstones[i].skillId == SkillID)
+                    equipingstones[i].skillId = "-1";
+
+                switch (equipingstones[i].inUsingSkillSlot)
+                {
+                    case "1":
+                        A1 = equipingstones[i].skillId;
+                        break;
+                    case "2":
+                        A2 = equipingstones[i].skillId;
+                        break;
+                    case "3":
+                        A3 = equipingstones[i].skillId;
+                        break;
+                    case "4":
+                        B1 = equipingstones[i].skillId;
+                        break;
+                    case "5":
+                        B2 = equipingstones[i].skillId;
+                        break;
+                    case "6":
+                        B3 = equipingstones[i].skillId;
+                        break;
+                    case "7":
+                        C1 = equipingstones[i].skillId;
+                        break;
+                    case "8":
+                        C2 = equipingstones[i].skillId;
+                        break;
+                    case "9":
+                        C3 = equipingstones[i].skillId;
+                        break;
+                }
+            }
+            int wholePoint = MySkillStonesReader.SkillSetValidation(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+            return wholePoint;
         }
 
         // 这个函数应该能够被用于Tutorial模式下亚当的技能编辑。
@@ -426,7 +478,7 @@ namespace mainMenu
                         if (new_skillStoneOfPlayerInfoModel != null)
                         {
                             new_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
-                            new_skillStoneOfPlayerInfoModel.inUsingSkillSlot = SlotNum(allSlot[i]).ToString();
+                            new_skillStoneOfPlayerInfoModel.inUsingSkillSlot = allSlot[i].number.ToString();
                             yield return MySkillStonesReader.Instance.UpdateMySkillStone(new_skillStoneOfPlayerInfoModel);
                         }
                     }

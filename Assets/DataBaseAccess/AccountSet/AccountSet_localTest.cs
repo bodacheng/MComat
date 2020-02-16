@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
 using System;
-using System.Linq;
 using Newtonsoft.Json;
 using System.Collections;
 
@@ -9,7 +8,7 @@ namespace dataAccess
 {
     public partial class AccountSet
     {
-        public IEnumerator loadCustomerInfoViaLocalFile()
+        public IEnumerator LoadCustomerInfoViaLocalFile()
         {
             try
             {
@@ -32,17 +31,17 @@ namespace dataAccess
                 Debug.Log(e.ToString());
                 this._PlayerAccountInfo = new PlayerAccountInfo();
             }
-            yield return overrideAccountOnLocalFile();
+            yield return OverrideAccountOnLocalFile();
             yield break;
         }
 
-        public IEnumerator overrideAccountOnLocalFile()
+        public IEnumerator OverrideAccountOnLocalFile()
         {
-            overrideLocalCustomerInfoOnLocalFile(this._PlayerAccountInfo);
+            OverrideLocalCustomerInfoOnLocalFile(this._PlayerAccountInfo);
             yield break;
         }
 
-        public bool overrideLocalCustomerInfoOnLocalFile(PlayerAccountInfo refreshedPlayerAccountInfo)
+        public bool OverrideLocalCustomerInfoOnLocalFile(PlayerAccountInfo refreshedPlayerAccountInfo)
         {
             try
             {

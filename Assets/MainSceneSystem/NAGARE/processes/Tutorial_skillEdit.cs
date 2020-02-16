@@ -11,7 +11,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         subProcessesRunner = new ProcessesRunner();
-        if (AccountSet.instance._PlayerAccountInfo.accountprogress == playerAccountProgressStep.justCreated)
+        if (AccountSet.instance._PlayerAccountInfo.accountprogress == PlayerAccountProgressStep.justCreated)
         {
             TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd(_preparingScene);
             TryEditALines tryEditALines = new TryEditALines(_preparingScene);
@@ -19,7 +19,7 @@ public class Tutorial_skillEdit : MainSceneProcess
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
             subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
         }
-        if (AccountSet.instance._PlayerAccountInfo.accountprogress == playerAccountProgressStep.Tutorial)
+        if (AccountSet.instance._PlayerAccountInfo.accountprogress == PlayerAccountProgressStep.Tutorial)
         {
             TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(_preparingScene, subProcessesRunner);
             TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos(_preparingScene);
@@ -49,7 +49,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        AccountSet.Instance._PlayerAccountInfo.accountprogress = playerAccountProgressStep.Freedom;
+        AccountSet.Instance._PlayerAccountInfo.accountprogress = PlayerAccountProgressStep.Freedom;
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);

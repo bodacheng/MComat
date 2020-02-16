@@ -1,11 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using System;
-using System.Linq;
 
 namespace dataAccess
 {
@@ -32,14 +25,14 @@ namespace dataAccess
             }
         }
 
-        public IEnumerator loadCustomerInfo()
+        public IEnumerator LoadCustomerInfo()
         {
             switch (_playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.formalVersion:
                     break;
                 case playerinfoReferenceMode.localTestSaveData:
-                    yield return loadCustomerInfoViaLocalFile();
+                    yield return LoadCustomerInfoViaLocalFile();
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     //yield return loadCustomerInfoFromRemoteServer();
@@ -48,14 +41,14 @@ namespace dataAccess
             }
         }
 
-        public IEnumerator saveCustomerInfo()
+        public IEnumerator SaveCustomerInfo()
         {
             switch (_playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.formalVersion:
                     break;
                 case playerinfoReferenceMode.localTestSaveData:
-                    yield return overrideAccountOnLocalFile();
+                    yield return OverrideAccountOnLocalFile();
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     break;

@@ -37,8 +37,8 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 
     // 自定义成员
     public SkillStoneSlot _SkillStoneSlot;//这个看起来比较古怪，目的是和这个cell对应的SkillStoneSlot形成一个互相链接。只针对9宫设置画面，和SkillStoneBox无关。
-        
-    public void DragStoneFromSKillStoneBoxToNineSlot(DragAndDropCell cellInSkillStoneBox, SkillStoneSlot skillStoneSlot)
+
+    public void DragStoneFromSKillStoneBoxToNineSlot(DragAndDropCell cellInSkillStoneBox, SkillStoneSlot targetSlot)
     {
         DragAndDropItem itemFromStoneBox = cellInSkillStoneBox.GetItem();
         if (itemFromStoneBox == null)
@@ -46,32 +46,42 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
             return;
         }
 
-        switch(skillStoneSlot._DragAndDropCell.cellPhase)
+        switch(targetSlot._DragAndDropCell.cellPhase)//drag目标slot的phase
         {
             case CellPhase.NineSlotCell_empty:
                 if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                 {
-                    Debug.Log("放入九宫格其他角色正在使用的石头.角色ID："+MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId);
+                    string monsterID = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+                    if (TheNineSlot.Instance.CheckNineSlotPointsAfterOneStoneRemoved(monsterID, itemFromStoneBox._SkillConfigOfSkillStone.RECORD_ID) < 0)
+                    {
+                        Debug.Log("其他角色卸载此技能石会导致点数失衡，不予操作");
+                        return;
+                    }
                 }
-                if (!TheNineSlot.Instance.RefreshWholePoint(itemFromStoneBox,skillStoneSlot._DragAndDropCell))
+                if (!TheNineSlot.Instance.RefreshWholePointBasedOnCurrentNineSlots(itemFromStoneBox, targetSlot._DragAndDropCell))
                 {
                     Debug.Log("Validation错误，不执行操作，返回");
                     return;
                 }
-                skillStoneSlot._DragAndDropCell.AddItem(itemFromStoneBox);
+                targetSlot._DragAndDropCell.AddItem(itemFromStoneBox);
                 cellInSkillStoneBox.UpdateMyItem();
             break;
             case CellPhase.NineSlotCell_full:
                 if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                 {
-                    Debug.Log("放入九宫格其他角色正在使用的石头.角色ID："+MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId);
+                    string monsterID = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+                    if (TheNineSlot.Instance.CheckNineSlotPointsAfterOneStoneRemoved(monsterID, itemFromStoneBox._SkillConfigOfSkillStone.RECORD_ID) < 0)
+                    {
+                        Debug.Log("其他角色卸载此技能石会导致点数失衡，不予操作");
+                        return;
+                    }
                 }
-                if (!TheNineSlot.Instance.RefreshWholePoint(itemFromStoneBox,skillStoneSlot._DragAndDropCell))
+                if (!TheNineSlot.Instance.RefreshWholePointBasedOnCurrentNineSlots(itemFromStoneBox, targetSlot._DragAndDropCell))
                 {
                     Debug.Log("Validation错误，不执行操作，返回");
                     return;
                 }
-                SwapItems(cellInSkillStoneBox,skillStoneSlot._DragAndDropCell);
+                SwapItems(cellInSkillStoneBox, targetSlot._DragAndDropCell);
             break;
         }
         TheNineSlot.Instance.NineSlotsStatusRefresh();
@@ -81,7 +91,6 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
     /// Item is dropped in this cell
     /// </summary>
     /// <param name="data"></param>
-    //  这个函数的很早阶段就应该进行关于9宫技能配置的valiadation，一旦拖入的石头不符合标准，不允许进行任何操作才是。
     public void OnDrop(PointerEventData data)
     {
         DragAndDropItem item;
@@ -110,7 +119,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.NineSlotCell_empty://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                     break;
                                 case CellPhase.SkillStoneBoxCell:
-                                    DragStoneFromSKillStoneBoxToNineSlot(sourceCell, _SkillStoneSlot);
+                                    DragStoneFromSKillStoneBoxToNineSlot(sourceCell,_SkillStoneSlot);
                                     break;
                             }
                             break;
@@ -131,6 +140,11 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                             switch (sourceCell.cellPhase)
                             {
                                 case CellPhase.NineSlotCell_full:// 已装备石头的卸载功能。
+                                    if (!TheNineSlot.Instance.RefreshWholePointBasedOnCurrentNineSlots(null, sourceCell))
+                                    {
+                                        Debug.Log("Validation错误，不执行操作，返回");
+                                        return;
+                                    }
                                     if (GetItem() != null) // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
                                     {
                                         sourceCell._SkillStoneSlot.ReturnStoneToBox();
@@ -144,7 +158,6 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                     }
                                     break;
                                 case CellPhase.NineSlotCell_empty:
-                                    AddItem(item);
                                 break;
                                 case CellPhase.SkillStoneBoxCell:
                                 break;

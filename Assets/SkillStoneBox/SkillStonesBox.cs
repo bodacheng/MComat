@@ -95,7 +95,7 @@ namespace mainMenu
             yield return _SkillStoneBoxTabEffectsManager.StartUp();
             // 玩家可能在什么时候会把Cell的数量进行扩充？cellsLimit从哪进行读取？
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
-            DeleteSkillStoneSlot = new SkillStoneSlot(null, DeleteArea);
+            DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
             GenerateCells(cellsLimit);
         }
         

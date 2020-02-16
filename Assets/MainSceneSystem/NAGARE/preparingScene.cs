@@ -158,7 +158,7 @@ namespace mainMenu
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.Instance.StartUp());
 
-            yield return AccountSet.Instance.loadCustomerInfo();
+            yield return AccountSet.Instance.LoadCustomerInfo();
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
@@ -167,7 +167,7 @@ namespace mainMenu
             // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
             switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
             {
-                case playerAccountProgressStep.Freedom:
+                case PlayerAccountProgressStep.Freedom:
                     // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
                     // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
                     // 那这样的话势必我需要来看接下来这个请求工作的返回值。
@@ -181,10 +181,10 @@ namespace mainMenu
                     yield return _TeamEditManager.INITeamPosButtons();
                     trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
                     break;
-                case playerAccountProgressStep.justCreated:
+                case PlayerAccountProgressStep.justCreated:
                     trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
                     break;
-                case playerAccountProgressStep.Tutorial:
+                case PlayerAccountProgressStep.Tutorial:
                     trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
                     break;
             }
