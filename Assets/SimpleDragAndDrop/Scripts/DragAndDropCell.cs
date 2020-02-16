@@ -184,14 +184,13 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                 }
             }
         }
-                
+        
+        UpdateMyItem();
         if (sourceCell == null)
         {
             Debug.Log("按理说不应该经过这里");
             return;
         }
-        
-        UpdateMyItem();
         sourceCell.UpdateMyItem();
         if (_SkillStoneSlot != null)
         {

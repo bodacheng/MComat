@@ -2,9 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
-using dataAccess;
-using System.Collections;
-using mainMenu;
 
 public class charIcon : MonoBehaviour {
 
@@ -27,17 +24,17 @@ public class charIcon : MonoBehaviour {
         Sprite frameobject_green = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
         Sprite frameobject_null = Resources.Load("essentialUIElements/iconframes/0") as Sprite;
 
-        if(frameobject_blue)
+        if (frameobject_blue)
             frames.Add(Zokusei.blueMagic,frameobject_blue);
-        if(frameobject_red)
+        if (frameobject_red)
             frames.Add(Zokusei.redMagic,frameobject_red);
-        if(frameobject_green)
+        if (frameobject_green)
             frames.Add(Zokusei.greenMagic,frameobject_green);
-        if(frameobject_light)
+        if (frameobject_light)
             frames.Add(Zokusei.lightMagic,frameobject_light);
-        if(frameobject_dark)
+        if (frameobject_dark)
             frames.Add(Zokusei.darkMagic,frameobject_dark);
-        if(frameobject_null)
+        if (frameobject_null)
             frames.Add(Zokusei.Null,frameobject_null);
     }
     

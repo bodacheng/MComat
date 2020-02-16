@@ -351,12 +351,9 @@ namespace mainMenu
                         break;
                 }
             }
-            int wholePoint = MySkillStonesReader.SkillSetValidation(
-                A1Slot.OnSlotStonelocalID, A2Slot.OnSlotStonelocalID, A3Slot.OnSlotStonelocalID,
-                B1Slot.OnSlotStonelocalID, B2Slot.OnSlotStonelocalID, B3Slot.OnSlotStonelocalID,
-                C1Slot.OnSlotStonelocalID, C2Slot.OnSlotStonelocalID, C3Slot.OnSlotStonelocalID
-            );
-            ShowNineSlotExSurplus(wholePoint);
+
+            int wholepoint = GetNineSlotWholePointOfMonster(_AccountCharacterInfo);
+            ShowNineSlotExSurplus(wholepoint);
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 yield return _slot.ShowOrigin(Color.white);
@@ -370,50 +367,6 @@ namespace mainMenu
             string A1=null, A2=null, A3=null, B1=null, B2=null, B3=null, C1=null, C2=null, C3=null;
             for (int i = 0; i < equipingstones.Count; i++)
             {
-                switch (equipingstones[i].inUsingSkillSlot)
-                {
-                    case "1":
-                        A1 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "2":
-                        A2 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "3":
-                        A3 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "4":
-                        B1 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "5":
-                        B2 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "6":
-                        B3 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "7":
-                        C1 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "8":
-                        C2 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                    case "9":
-                        C3 = equipingstones[i].skillStoneOfPlayerId;
-                        break;
-                }
-            }
-            int wholePoint = MySkillStonesReader.SkillSetValidation(A1,A2,A3,B1,B2,B3,C1,C2,C3);
-            return wholePoint;
-        }
-
-        public int CheckNineSlotPointsAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
-        {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(monsterOfPlayerId);
-            string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
-            for (int i = 0; i < equipingstones.Count; i++)
-            {
-                if (equipingstones[i].skillId == SkillID)
-                    equipingstones[i].skillId = "-1";
-
                 switch (equipingstones[i].inUsingSkillSlot)
                 {
                     case "1":
@@ -442,6 +395,47 @@ namespace mainMenu
                         break;
                     case "9":
                         C3 = equipingstones[i].skillId;
+                        break;
+                }
+            }
+            int wholePoint = MySkillStonesReader.SkillSetValidation(A1,A2,A3,B1,B2,B3,C1,C2,C3);
+            return wholePoint;
+        }
+
+        public int CheckNineSlotPointsAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
+        {
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(monsterOfPlayerId);
+            string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
+            for (int i = 0; i < equipingstones.Count; i++)
+            {
+                switch (equipingstones[i].inUsingSkillSlot)
+                {
+                    case "1":
+                        A1 = (equipingstones[i].skillId != SkillID)? equipingstones[i].skillId : "-1";
+                        break;
+                    case "2":
+                        A2 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "3":
+                        A3 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "4":
+                        B1 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "5":
+                        B2 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "6":
+                        B3 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "7":
+                        C1 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "8":
+                        C2 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
+                        break;
+                    case "9":
+                        C3 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
                         break;
                 }
             }
@@ -511,11 +505,11 @@ namespace mainMenu
                 _slot._DragAndDropCell.cellPhase = _slot._DragAndDropCell.GetItem() != null ? DragAndDropCell.CellPhase.NineSlotCell_full : DragAndDropCell.CellPhase.NineSlotCell_empty;
                 SlotButtonBeheviour(_slot);
             }
-            List<string> stonesOnNineSlots = GetCurrentNineSlotAllSkillIds();
+            List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
             int wholePoint = MySkillStonesReader.SkillSetValidation(
-                stonesOnNineSlots[0], stonesOnNineSlots[1], stonesOnNineSlots[2],
-                stonesOnNineSlots[3], stonesOnNineSlots[4], stonesOnNineSlots[5],
-                stonesOnNineSlots[6], stonesOnNineSlots[7], stonesOnNineSlots[8]);
+                skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
+                skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
+                skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]);
             ShowNineSlotExSurplus(wholePoint);
         }
     }

@@ -281,6 +281,11 @@ namespace mainMenu
             foreach (KeyValuePair<String, SkillStoneOfPlayerInfoModel> keyValuePair in MySkillStonesReader.mySkillStonesDataDic)
             {
                 SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
+                if (_SkillConfigOfSkillStone == null)
+                {
+                    Debug.Log("????"+ keyValuePair.Value.skillId);
+                    continue;
+                }
                 if (_SkillConfigOfSkillStone.TYPE == type && (_SkillConfigOfSkillStone.SP_LEVEL == exType || exType == -1) && SkillConfigTable.RangeLimit(_SkillConfigOfSkillStone.ai_trigger_ranges.ToList(),close, near, far, outrange))
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
             }
