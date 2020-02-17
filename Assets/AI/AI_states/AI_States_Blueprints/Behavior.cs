@@ -85,6 +85,7 @@ namespace Soul
         {
             _FightAttriCalReference.AT = this.AT;
             _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
+            BeheviourFrameCounter = 0;
         }
         
         // Process when entering the state 
@@ -109,7 +110,14 @@ namespace Soul
         {
             Sensor.OneRoundDetectionStart(5);
         }
-                
+
+        // Process when exit the state
+        protected int BeheviourFrameCounter;
+        public virtual void _State_Update()
+        {
+            BeheviourFrameCounter++;
+        }
+
         // Local update of the state 
         public virtual void _State_FixedUpdate1()
         {

@@ -55,6 +55,10 @@ namespace Soul
             if (IfRunning())
             {
                 BehaviourTransitionEngine();
+                if (now_Behavior != null)
+                {
+                    now_Behavior._State_Update();
+                }
             }
         }
 

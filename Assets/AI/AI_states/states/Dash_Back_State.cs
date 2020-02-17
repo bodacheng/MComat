@@ -26,12 +26,18 @@ public class Dash_Back_State : Behavior
     {
 		base.Pre_process_before_enter ();
     }
-    
+
+    public override void _State_Update()
+    {
+        base._State_Update();
+        if (BeheviourFrameCounter == 5f)
+            _BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
+    }
+
     public override void AI_State_enter()
     {
         base.AI_State_enter();
         _Animator.applyRootMotion = true;
-        
         _Animator.SetFloat("speed", 0f);
         Sensor.ContinuousDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();

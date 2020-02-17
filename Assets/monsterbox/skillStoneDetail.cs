@@ -51,24 +51,38 @@ namespace mainMenu
         int currentlevel;
         public void RefreshSkillLevelUpModule()
         {
-            currentlevel = int.Parse(currentstone.level);
+            if (currentstone == null)
+                return;
+            currentlevel = currentstone.level != null ? int.Parse(currentstone.level) : 1;
+            selectedTargetLevel = currentlevel;
             if (IfCanLevelUp(selectedTargetLevel, currentstone))
             {
                 plusLevel.gameObject.SetActive(true);
                 plusLevel.onClick.RemoveAllListeners();
                 plusLevel.onClick.AddListener(PlusTargetLevel);
+                plusLevel.onClick.AddListener(RefreshSkillLevelUpModule);
+            }
+            else
+            {
+                plusLevel.gameObject.SetActive(false);
             }
             if (selectedTargetLevel > currentlevel)
             {
                 minusLevel.gameObject.SetActive(true);
                 minusLevel.onClick.RemoveAllListeners();
                 minusLevel.onClick.AddListener(MinusTargetLevel);
+                minusLevel.onClick.AddListener(RefreshSkillLevelUpModule);
             }
+            else
+            {
+                minusLevel.gameObject.SetActive(false);
+            }
+            skill_level_levelup.text = selectedTargetLevel.ToString();
         }
 
         bool IfCanLevelUp(int tartgetlevel, SkillStoneOfPlayerInfoModel currentStone)
         {
-            int currentlevel = int.Parse(currentStone.level);
+            int currentlevel = currentStone.level != null ? int.Parse(currentStone.level) : 1;
             if (AccountSet.Instance._PlayerAccountInfo.Coin > (tartgetlevel - currentlevel))
                 return true;
             return false;
@@ -99,9 +113,10 @@ namespace mainMenu
             Showname.text = _SkillConfigOfSkillStone.SHOW_NAME;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.ai_trigger_ranges);
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
-            skill_level_levelup.text = "LV:" + (skillStoneOfPlayerInfoModel.level ?? "1");
-            skill_level_info.text = "LV:" + (skillStoneOfPlayerInfoModel.level ?? "1");
+            currentstone = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
+            skill_level_levelup.text = "LV:" + (currentstone.level ?? "1");
+            skill_level_info.text = "LV:" + (currentstone.level ?? "1");
+            RefreshSkillLevelUpModule();
         }
         
         void ShowSKillRanges(BehaviorEnterRange[] ranges)
