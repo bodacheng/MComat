@@ -7,11 +7,32 @@ public class G_Ani_MoveEscape_State : Behavior {
     Quaternion screenMovementSpace;
     Vector3 screenMovementForward, screenMovementRight, use_direction;
 
+    readonly UnityEngine.Events.UnityAction breakfreestart;
+    readonly UnityEngine.Events.UnityAction breakfreeend;
+    readonly CustomCoroutine breakfreeCoroutine;
+
     public G_Ani_MoveEscape_State(string _clip_name)
     {
         clip_name = _clip_name;
+
+        breakfreestart = () =>
+        {
+            _ResistanceManager.Resistance.Value += 10;
+        };
+        breakfreeend = () =>
+        {
+            _ResistanceManager.Resistance.Value -= 10;
+        };
+        breakfreeCoroutine = new CustomCoroutine(breakfreestart, 1f, breakfreeend);
     }
-    
+
+    public override void _State_Update()
+    {
+        base._State_Update();
+        if (BeheviourFrameCounter == 5f)
+            _BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
+    }
+
     public override void Pre_process_before_enter()
     {
         base.Pre_process_before_enter ();

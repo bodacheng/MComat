@@ -288,6 +288,9 @@
     <Reference Include="DOTween">
       <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="POFX_Runtime">
       <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
     </Reference>
@@ -299,9 +302,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.17f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
