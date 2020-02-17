@@ -35,11 +35,48 @@ namespace mainMenu
         public Button confirmLevelUp;
 
         SkillStoneOfPlayerInfoModel currentstone;
-        string targetSkillLevel;
+
+        void PlusTargetLevel()
+        {
+            selectedTargetLevel += 1;
+            // 消耗coin的显示？
+        }
+        void MinusTargetLevel()
+        {
+            selectedTargetLevel -= 1;
+            // 消耗coin的显示？
+        }
+
+        int selectedTargetLevel;
+        int currentlevel;
+        public void RefreshSkillLevelUpModule()
+        {
+            currentlevel = int.Parse(currentstone.level);
+            if (IfCanLevelUp(selectedTargetLevel, currentstone))
+            {
+                plusLevel.gameObject.SetActive(true);
+                plusLevel.onClick.RemoveAllListeners();
+                plusLevel.onClick.AddListener(PlusTargetLevel);
+            }
+            if (selectedTargetLevel > currentlevel)
+            {
+                minusLevel.gameObject.SetActive(true);
+                minusLevel.onClick.RemoveAllListeners();
+                minusLevel.onClick.AddListener(MinusTargetLevel);
+            }
+        }
+
+        bool IfCanLevelUp(int tartgetlevel, SkillStoneOfPlayerInfoModel currentStone)
+        {
+            int currentlevel = int.Parse(currentStone.level);
+            if (AccountSet.Instance._PlayerAccountInfo.Coin > (tartgetlevel - currentlevel))
+                return true;
+            return false;
+        }
 
         IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
         {
-            IEnumerator up = MySkillStonesReader.Instance.LevelUpMySkillStone(PlayerSkillStoneID, targetSkillLevel, ApiLanguage.EnUs);
+            IEnumerator up = MySkillStonesReader.Instance.LevelUpMySkillStone(PlayerSkillStoneID, selectedTargetLevel.ToString(), ApiLanguage.EnUs);
             yield return up;
             if ((bool)up.Current)
             {
