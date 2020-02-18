@@ -87,7 +87,7 @@ public class G_Ani_MoveEscape_State : Behavior {
                 }
             }
         }
-        RotateToDirection(-facedirection, 100f, true);
+        RotateToDirection_Tween(-facedirection, 0.2f, true);
 	}
 
     float h;
@@ -117,7 +117,7 @@ public class G_Ani_MoveEscape_State : Behavior {
             v = ETCInput.GetAxis("Vertical");
         }
         use_direction = (screenMovementForward * v) + (screenMovementRight * h);
-        RotateToDirection(use_direction, 10f, true);
+        RotateToDirection_Tween(use_direction, 0.1f, true);
     }
     
     public override void AI_State_exit()

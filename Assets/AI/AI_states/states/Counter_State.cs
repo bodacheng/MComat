@@ -26,9 +26,7 @@ public class Counter_State : Behavior {
         Animation_Manger.AnimationTrigger(clip_name,true,0.08f);
         _Rigidbody.velocity = Vector3.zero;
         _Animator.applyRootMotion = true;
-
         near = Sensor.GetNearbyDamagingWeaponColliders();
-
         if (near != null && near.Count > 0)
         {
             if (near[0] != null)

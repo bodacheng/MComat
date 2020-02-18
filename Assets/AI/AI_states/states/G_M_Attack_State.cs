@@ -38,7 +38,7 @@ public class G_M_Attack_State : Behavior {
         _Rigidbody.velocity = Vector3.zero;
         temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (temp_C != null)
-            RotateToTarget_Tween(temp_C.transform.position, 0.2f, true);
+            RotateToTarget_Tween(temp_C.transform.position, 0.1f, true);
 		_Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
 	}

@@ -42,21 +42,21 @@ public class Dash_Back_State : Behavior
         Sensor.ContinuousDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
         personality_Events.CloseAllPersonalityEffects();
-        Vector3 threatsComingDirection = Vector3.zero;
+        Vector3 threatsComingPosition = Vector3.zero;
         if (Sensor.GetEnemiesByDistance(true).Count > 0)
-            threatsComingDirection = Sensor.GetEnemiesByDistance(false)[0].transform.position - gameObject.transform.position;
+            threatsComingPosition = Sensor.GetEnemiesByDistance(false)[0].transform.position;
 
         if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
         {
-            threatsComingDirection = - gameObject.transform.position + Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
+            threatsComingPosition = Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
         }else{
             if (Sensor.GetInnerEnemiesColliders().Count > 0)
             {
                 if (Sensor.GetInnerEnemiesColliders()[0] != null)
-                    threatsComingDirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
+                    threatsComingPosition = Sensor.GetInnerEnemiesColliders()[0].transform.position;
             }
         }
-        RotateToDirection(threatsComingDirection, 10f, true);
+        RotateToTarget_Tween(threatsComingPosition, 0.1f, true);
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         //if (_AIStateRunner.getLastState().StateType == stateType.Def)
         //{

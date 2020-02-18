@@ -259,7 +259,7 @@ namespace Soul
             {
                 direction.y = 0;
             }
-            _Rigidbody.DORotate(direction, duration, RotateMode.Fast);
+            _DATA_CENTER.WholeT.DORotate(direction, duration, RotateMode.Fast);
         }
 
         float angle;
