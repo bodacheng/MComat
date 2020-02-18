@@ -21,8 +21,7 @@ public partial class G_Attack_State : Behavior {
     float rushSpeed;
     float approcahingSpeed;
 
-    float lastFrameRotateAngle;
-    float thisFrameRotateAngle;
+
 
     float maxRushTime, rush_time_counter;
     
@@ -111,10 +110,7 @@ public partial class G_Attack_State : Behavior {
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         if (StateType == BehaviorType.GI)
             _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
-
         _Rigidbody.velocity = Vector3.zero;
-        lastFrameRotateAngle = 0;
-        thisFrameRotateAngle = 0;
         rush_time_counter = 0f;
         _Animator.applyRootMotion = true;
 
@@ -131,6 +127,13 @@ public partial class G_Attack_State : Behavior {
         {
             _phase = Phase.reachedFromThebeginning;
             Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+            if (Sensor.GetEnemiesByDistance(false).Count > 0)
+            {
+                if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                {
+                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.2f,true);
+                }
+            }
             return;
         }
         
@@ -140,12 +143,17 @@ public partial class G_Attack_State : Behavior {
         }
         if (rushingToTarget != null)
         {
+            if (Sensor.GetEnemiesByDistance(false).Count > 0)
+            {
+                if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                {
+                    RotateToTarget_Tween(rushingToTarget.position, 0.2f, true);
+                }
+            }
             //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
             if (_AIStateRunner.GetLastState() != null && _AIStateRunner.GetLastState().nextAttackStateCanRushFirst && StateType == BehaviorType.GR)
             {
                 _phase = Phase.needToRush;
-                lastFrameRotateAngle = 0;
-                thisFrameRotateAngle = 0;
                 if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)
                     Animation_Manger.AnimationTrigger(dash_clip_name,true,0.05f);
                 else
@@ -213,8 +221,6 @@ public partial class G_Attack_State : Behavior {
                 {
                     Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
                     _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
-                    lastFrameRotateAngle = 0;
-                    thisFrameRotateAngle = 0;
                     _Rigidbody.velocity = Vector3.zero;
                     Sensor.OneRoundDetectionStart(5);
                     _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);

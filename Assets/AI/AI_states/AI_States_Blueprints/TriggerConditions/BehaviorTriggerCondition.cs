@@ -6,11 +6,6 @@ namespace Soul
 {
     public abstract partial class Behavior
     {
-        //public List<string> priority1 = new List<string>();
-        //public List<string> priority2 = new List<string>();
-        //public List<string> priority3 = new List<string>();
-        //public string strategic_exit_condition_code;
-        
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
             return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;

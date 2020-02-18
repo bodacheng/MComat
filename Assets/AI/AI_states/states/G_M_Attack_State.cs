@@ -34,13 +34,11 @@ public class G_M_Attack_State : Behavior {
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
-        lastFrameRotateAngle = 0;
-        thisFrameRotateAngle = 0;
         personality_Events.CloseAllPersonalityEffects();
         _Rigidbody.velocity = Vector3.zero;
         temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (temp_C != null)
-            RotateToTarget(temp_C.transform.position, 1f, true);
+            RotateToTarget_Tween(temp_C.transform.position, 0.2f, true);
 		_Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
 	}
@@ -59,40 +57,4 @@ public class G_M_Attack_State : Behavior {
         return AnimationCasualFinishedFlag();
     }
     #endregion
-
-    Vector3 rotateTarget;
-	public override void _State_FixedUpdate1() 
-	{
-        temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
-        if (temp_C!=null)
-        {
-            rotateTarget = temp_C.transform.position;
-            SingleDirectionRotateProcess(rotateTarget);                  
-        }
-	}
-
-    float lastFrameRotateAngle;
-    float thisFrameRotateAngle;
-    float ji;
-    void SingleDirectionRotateProcess(Vector3 P)
-    {
-        //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
-        if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag() || keepRotationAdjustment)
-        {
-            thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
-            ji = thisFrameRotateAngle * lastFrameRotateAngle;
-            if (ji > 0)//同向
-            {
-                lastFrameRotateAngle = thisFrameRotateAngle;
-            }
-            else if (ji < 0)//反向
-            {
-                _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
-            }
-            else //刚开始计
-            {
-                lastFrameRotateAngle = thisFrameRotateAngle;
-            }
-        }
-    }
 }
