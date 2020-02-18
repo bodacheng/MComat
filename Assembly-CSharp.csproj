@@ -149,7 +149,7 @@
     <Compile Include="Assets\Camera\TopDownWatchCamera.cs" />
     <Compile Include="Assets\Camera\TouchTopDownCamera.cs" />
     <Compile Include="Assets\Camera\WatchOverCamera.cs" />
-    <Compile Include="Assets\characterModelShower\ModelShower1.cs" />
+    <Compile Include="Assets\characterModelShower\ModelShower.cs" />
     <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
     <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
     <Compile Include="Assets\CSV2Table\Scripts\CsvParser.cs" />
@@ -375,7 +375,7 @@
     <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
     <Compile Include="Assets\Monsterbox\monsterboxFilter.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
-    <Compile Include="Assets\Monsterbox\skillStoneDetail.cs" />
+    <Compile Include="Assets\Monsterbox\skillStoneDetail1.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
     <Compile Include="Assets\POFX\Scripts\FX\POFX_Blur.cs" />
