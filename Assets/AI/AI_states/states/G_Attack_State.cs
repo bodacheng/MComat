@@ -113,7 +113,7 @@ public partial class G_Attack_State : Behavior {
         _Rigidbody.velocity = Vector3.zero;
         rush_time_counter = 0f;
         _Animator.applyRootMotion = true;
-
+        Sensor.ContinuousDetectionStart(2);
         Sensor.GetEnemiesByDistance(true); //这里算一下，下面的全是false。但要注意中途这个结果变为null
         if (Sensor.GetEnemiesByDistance(false).Count == 0)
         {
@@ -131,7 +131,7 @@ public partial class G_Attack_State : Behavior {
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
                 {
-                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.2f,true);
+                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f,true);
                 }
             }
             return;
@@ -147,7 +147,7 @@ public partial class G_Attack_State : Behavior {
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
                 {
-                    RotateToTarget_Tween(rushingToTarget.position, 0.2f, true);
+                    RotateToTarget_Tween(rushingToTarget.position, 0.01f, true);
                 }
             }
             //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行

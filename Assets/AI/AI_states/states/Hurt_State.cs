@@ -62,7 +62,7 @@ public class Hurt_State : Behavior {
                                                             newValue.effectPath,newValue.effectSpreadOnBody));
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
         }
-        RotateToTarget_Tween(newValue.damageHappenPoint, 2f, true);
+        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
         time_counter = 0f;
         personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");

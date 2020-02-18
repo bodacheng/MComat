@@ -29,16 +29,17 @@ public class G_M_Attack_State : Behavior {
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
+        _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         personality_Events.CloseAllPersonalityEffects();
-        _Rigidbody.velocity = Vector3.zero;
+        Sensor.ContinuousDetectionStart(2);
         temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
         if (temp_C != null)
-            RotateToTarget_Tween(temp_C.transform.position, 0.1f, true);
+            RotateToTarget_Tween(temp_C.transform.position, 0.01f, true);
 		_Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
 	}

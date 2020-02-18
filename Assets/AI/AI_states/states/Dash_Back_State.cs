@@ -56,7 +56,7 @@ public class Dash_Back_State : Behavior
                     threatsComingPosition = Sensor.GetInnerEnemiesColliders()[0].transform.position;
             }
         }
-        RotateToTarget_Tween(threatsComingPosition, 0.1f, true);
+        RotateToTarget_Tween(threatsComingPosition, 0.01f, true);
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         //if (_AIStateRunner.getLastState().StateType == stateType.Def)
         //{

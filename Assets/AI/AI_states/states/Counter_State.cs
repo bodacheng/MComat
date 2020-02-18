@@ -30,7 +30,7 @@ public class Counter_State : Behavior {
         if (near != null && near.Count > 0)
         {
             if (near[0] != null)
-                RotateToTarget_Tween(near[0].transform.position, 0.5f, true);
+                RotateToTarget_Tween(near[0].transform.position, 0.02f, true);
         }
     }
         
