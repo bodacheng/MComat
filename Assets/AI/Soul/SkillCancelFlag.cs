@@ -12,28 +12,16 @@ public class SkillCancelFlag : MonoBehaviour {
         
         public void SkillCancelFlagFixedUpdate()
         {
-            if (skillCancelFlag.rotationAdjustmentStartFlag || skillCancelFlag.attackApproaching)
-                skillCancelFlag.rotateLoopCounter += Time.fixedDeltaTime;
+            if (skillCancelFlag.attackApproaching)
+                skillCancelFlag.AttackApproachLoopCounter += Time.fixedDeltaTime;
             
-            if (skillCancelFlag.rotationAdjustmentStartFlag)
-            {
-                if (skillCancelFlag.rotateLoopCounter > 0.1f)
-                {
-                    skillCancelFlag.rotationAdjustmentStartFlag = false;
-                }
-            }
             if (skillCancelFlag.attackApproaching)
             {
-                if (skillCancelFlag.rotateLoopCounter > 0.08f)
+                if (skillCancelFlag.AttackApproachLoopCounter > 0.08f)
                     skillCancelFlag.attackApproaching = false;
             }
         }
         
-        public bool GetRotationAdjustmentStartFlag()
-        {
-            return skillCancelFlag.rotationAdjustmentStartFlag;
-        }
-    
         public void SetAttackApproachingFlag(bool startorend)
         {
             skillCancelFlag.attackApproaching = startorend;
@@ -48,8 +36,7 @@ public class SkillCancelFlag : MonoBehaviour {
     public HiddenMethods hiddenMethods;
     public bool Cancel_Flag;
     bool attackApproaching;
-    bool rotationAdjustmentStartFlag = true;
-    float rotateLoopCounter;
+    float AttackApproachLoopCounter;
 
     void Awake()
     {
@@ -86,12 +73,17 @@ public class SkillCancelFlag : MonoBehaviour {
     {
         if (i == 1)
         {
-            _C.Sensor.OneRoundDetectionStart(10);
-            rotateLoopCounter = 0f;
-            rotationAdjustmentStartFlag = true;
+            _C.Sensor.GetEnemiesByDistance(true);
+            if (_C.Sensor.GetEnemiesByDistance(false).Count > 0)
+            {
+                if (_C.Sensor.GetEnemiesByDistance(false)[0] != null)
+                {
+                    _C._MyBehaviorRunner.GetNowState().RotateToTarget_Tween(_C.Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                }
+            }
+            AttackApproachLoopCounter = 0f;
             attackApproaching = false;//与校准方向一起 开始校准迈步
         }
-        else rotationAdjustmentStartFlag &= i != 0;
         _C._BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 
@@ -99,12 +91,17 @@ public class SkillCancelFlag : MonoBehaviour {
     {
         if (i == 1)
         {
-            _C.Sensor.OneRoundDetectionStart(10);
-            rotateLoopCounter = 0f;
-            rotationAdjustmentStartFlag = true;
+            _C.Sensor.GetEnemiesByDistance(true);
+            if (_C.Sensor.GetEnemiesByDistance(false).Count > 0)
+            {
+                if (_C.Sensor.GetEnemiesByDistance(false)[0] != null)
+                {
+                    _C._MyBehaviorRunner.GetNowState().RotateToTarget_Tween(_C.Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                }
+            }
+            AttackApproachLoopCounter = 0f;
             attackApproaching = true;//与校准方向一起 开始校准迈步
         }
-        else rotationAdjustmentStartFlag &= i != 0;
         _C._BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 }

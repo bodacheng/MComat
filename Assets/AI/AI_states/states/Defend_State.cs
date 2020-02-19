@@ -9,7 +9,37 @@ public class Defend_State : Behavior
     readonly string block_break_name;
     readonly float DefendHpRefreshTime = 5f;
     
-    float time;
+    float time_counter;
+    bool freezed = false;
+    bool temp;
+    float TimeCounter
+    {
+        set
+        {
+            temp = time_counter >= 0f;
+            time_counter = value;
+            if (!freezed)
+            {
+                if (time_counter < used_block_least_time * 0.8f)
+                {
+                    _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+                    freezed = true;
+                }
+            }
+            if (temp)
+            {
+                if (time_counter < 0f)
+                {
+                    Animation_Manger.AnimationTrigger(defend_clip_name, true, 0.1f);
+                }
+            }
+        }
+        get
+        {
+            return time_counter;
+        }
+    }
+
     float used_block_least_time;
     int DefendHP = 10;
     float lastExitTime;
@@ -29,11 +59,11 @@ public class Defend_State : Behavior
         switch (damage.damage_type)
         {
             case DamageType.light_block:
-                DefendHP -= 1;
-                break;
+            DefendHP -= 1;
+            break;
             case DamageType.heavy_block:
-                DefendHP -= 2;
-                break;
+            DefendHP -= 2;
+            break;
         }
         //if (defendHP <= 0)
         //{
@@ -64,13 +94,14 @@ public class Defend_State : Behavior
     
     public override bool Capacity_Exit_Condition() 
     {
-        return time <= 0;
+        return TimeCounter <= 0;
     }
     
     public override void AI_State_enter()
     {
         //defendHP = FightGlobalSetting._defendHP;
         base.AI_State_enter();
+        freezed = false;
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
@@ -78,7 +109,7 @@ public class Defend_State : Behavior
         Animation_Manger.AnimationTrigger(defend_clip_name,false,0.1f);
         _Rigidbody.velocity = Vector3.zero;
         used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
-        time = used_block_least_time;
+        TimeCounter = used_block_least_time;
         _SkillCancelFlag.turn_off_flag();
          //this.AI_DATA_CENTER.turnShield(true);
     }
@@ -86,6 +117,7 @@ public class Defend_State : Behavior
     public override void AI_State_enter(V_Damage newValue)
     {
         base.AI_State_enter();
+        freezed = false;
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
@@ -111,11 +143,11 @@ public class Defend_State : Behavior
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
-                time = used_block_least_time;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
          }
+        TimeCounter = used_block_least_time;
     }
     
     public override void AI_State_exit()
@@ -129,6 +161,7 @@ public class Defend_State : Behavior
         // 我们把defend状态exit中的PlayLayerAnim(_animator_layer_index, null)删除了后就不再产生对应bug。
         // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
         base.AI_State_exit();
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         lastExitTime = Time.time;
         _ResistanceManager.ResistanceClear();
         //AI_DATA_CENTER.turnShield(false);
@@ -140,19 +173,11 @@ public class Defend_State : Behavior
         damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
         nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
         
-        if (time >= 0f)
+        if (TimeCounter >= 0f)
         {
-            time -= Time.fixedDeltaTime;
-            if (time < 0f)
-            {
-                Animation_Manger.AnimationTrigger(defend_clip_name,true,0.1f);
-            }
+            TimeCounter -= Time.fixedDeltaTime;
         }
-        if (time < used_block_least_time * 0.8f)
-        {
-            _Rigidbody.velocity = Vector3.zero;
-        }
-        
+
         if (nearbyenemymeat.Count > 0)
         {
             if (nearbyenemymeat[0] != null)

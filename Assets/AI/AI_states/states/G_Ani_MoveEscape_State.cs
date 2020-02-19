@@ -54,6 +54,7 @@ public class G_Ani_MoveEscape_State : Behavior {
 	{
         base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
+        Sensor.ContinuousDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
         personality_Events.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
@@ -87,7 +88,7 @@ public class G_Ani_MoveEscape_State : Behavior {
                 }
             }
         }
-        RotateToDirection(-facedirection, 100f, true);
+        RotateToTarget_Tween(gameObject.transform.position + facedirection, 0.01f, true);
 	}
 
     float h;
@@ -117,7 +118,7 @@ public class G_Ani_MoveEscape_State : Behavior {
             v = ETCInput.GetAxis("Vertical");
         }
         use_direction = (screenMovementForward * v) + (screenMovementRight * h);
-        RotateToDirection(use_direction, 10f, true);
+        RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f, true);
     }
     
     public override void AI_State_exit()

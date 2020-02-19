@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DG.Tweening;
 
 namespace Soul
 {
@@ -246,6 +247,21 @@ namespace Soul
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
             return Vector3.SignedAngle(_Rigidbody.transform.forward, look_dir, Vector3.up);
         }
+
+        public void RotateToTarget_Tween(Vector3 target, float duration, bool ignoreY)
+        {
+            _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y,Vector3.up);
+        }
+
+        //protected void RotateToDirection_Tween(Vector3 direction, float duration, bool ignoreY)
+        //{
+        //    if (ignoreY)
+        //    {
+        //        direction.y = 0;
+        //    }
+        //    _DATA_CENTER.WholeT.DORotate(direction, duration, RotateMode.Fast);
+        //}
+
         float angle;
         // Rotate to a direction
         protected bool RotateToDirection(Vector3 direction, float turnSpeed, bool ignoreY)
@@ -409,6 +425,62 @@ namespace Soul
                 Mathf.Approximately(A.w, B.w)
                 ? true
                 : false;
+        }
+
+        //float ji;
+        //float lastFrameRotateAngle;
+        //float thisFrameRotateAngle;
+        //void SingleDirectionRotateProcess(Vector3 P, float speed)
+        //{
+        //    //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
+        //    if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag())
+        //    {
+        //        thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
+        //        ji = thisFrameRotateAngle * lastFrameRotateAngle;
+        //        if (ji > 0)//同向
+        //        {
+        //            lastFrameRotateAngle = thisFrameRotateAngle;
+        //        }
+        //        else if (ji < 0)//反向
+        //        {
+        //            _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
+        //        }
+        //        else //刚开始计
+        //        {
+        //            lastFrameRotateAngle = thisFrameRotateAngle;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        lastFrameRotateAngle = 0;
+        //        thisFrameRotateAngle = 0;
+        //    }
+
+        //    if (_SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
+        //    {
+        //        use_direction = P - gameObject.transform.position;
+        //        use_direction.y = 0;
+        //        Move(use_direction, speed, true);
+        //        if (_BasicPhysicSupport.hiddenMethods.ITouchedEnemyBody())
+        //        {
+        //            _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
+        //        }
+        //    }
+        //}
+
+        Vector3 use_direction;
+        protected void AttackApprocach(Vector3 P, float speed)
+        {
+            if (_SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
+            {
+                use_direction = P - gameObject.transform.position;
+                use_direction.y = 0;
+                Move(use_direction, speed, true);
+                if (_BasicPhysicSupport.hiddenMethods.ITouchedEnemyBody())
+                {
+                    _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
+                }
+            }
         }
 
         public bool IfVectorClean(Vector3 rot)
