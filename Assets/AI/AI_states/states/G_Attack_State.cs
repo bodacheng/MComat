@@ -10,7 +10,7 @@ using Soul;
 // AttackRangeMarker组件最好是细长的capsulecollider，并且可以依据角色的体型尽可能的贴身（细），从而被攻击时敌人会冲刺到尽可能近的位置，不至于一些短手技能打不到
 // 并且留下了一些问题：必须重新权衡此类攻击的AI进入范围，对整个系统的距离分段也要重新衡量，以及本状态的进入冲刺距离也都要重新仔细考虑。
 
-public partial class G_Attack_State : Behavior {
+public class G_Attack_State : Behavior {
 
 	string clip_name;
     string dash_clip_name;
@@ -20,9 +20,6 @@ public partial class G_Attack_State : Behavior {
     bool isEventAttackEndState;
     float rushSpeed;
     float approcahingSpeed;
-
-
-
     float maxRushTime, rush_time_counter;
     
     Transform rushingToTarget;
@@ -99,6 +96,26 @@ public partial class G_Attack_State : Behavior {
         rushCoroutine = new CustomCoroutine(rushstart, 5f, rushend);
     }
 
+    public override void AI_State_exit()
+    {
+        base.AI_State_exit();
+        rushingToTarget = null;
+        _Weapon_Animation_Events.ClearMarkerManagers();
+        _Animator.applyRootMotion = false;
+        personality_Events.CloseAllPersonalityEffects();
+        _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
+        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
+        if (isEventAttackLaunchState)
+        {
+            if (_FightAttriCalReference != null)
+            {
+                _FightAttriCalReference.ReturnApprovedEventAttackAttempts().Clear();
+            }
+        }
+        if (isEventAttackEndState)
+            EventAttackEnderProcess();
+    }
+
     public override void AI_State_enter()
 	{
         base.AI_State_enter();
@@ -114,7 +131,7 @@ public partial class G_Attack_State : Behavior {
         rush_time_counter = 0f;
         _Animator.applyRootMotion = true;
         Sensor.ContinuousDetectionStart(2);
-        Sensor.GetEnemiesByDistance(true); //这里算一下，下面的全是false。但要注意中途这个结果变为null
+        Sensor.GetEnemiesByDistance(true);
         if (Sensor.GetEnemiesByDistance(false).Count == 0)
         {
             //一般来说下面这些情况不跑？
@@ -147,7 +164,7 @@ public partial class G_Attack_State : Behavior {
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
                 {
-                    RotateToTarget_Tween(rushingToTarget.position, 0.01f, true);
+                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
                 }
             }
             //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
@@ -178,27 +195,7 @@ public partial class G_Attack_State : Behavior {
             return;
         }
     }
-    
-    public override void AI_State_exit()
-    {
-        base.AI_State_exit();
-        rushingToTarget = null;
-        _Weapon_Animation_Events.ClearMarkerManagers();
-        _Animator.applyRootMotion = false;
-        personality_Events.CloseAllPersonalityEffects();
-        _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
-        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-        if (isEventAttackLaunchState)
-        {
-			if (_FightAttriCalReference != null)
-            {
-				_FightAttriCalReference.ReturnApprovedEventAttackAttempts().Clear();
-            }
-        }
-        if (isEventAttackEndState)
-            EventAttackEnderProcess();
-	}
-    
+       
     public override void _State_FixedUpdate1() 
 	{
         switch (_phase)
@@ -207,11 +204,32 @@ public partial class G_Attack_State : Behavior {
                 break;
             case Phase.farFromReach:
                 break;
-            case Phase.needToRush://也就是说冲刺中。在这个环节我们之所以没看到扭转方向的处理是因为在fixedUpdate里针对这个阶段使用this.RotateToVelocity(10f, true);
+            case Phase.needToRush://也就是说冲刺中。
                 if (rushingToTarget == null)
                 {
                     _Rigidbody.velocity = Vector3.zero;
                     _phase = Phase.reached;
+                }
+                else
+                {
+                    Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
+                    if (Vector3.Distance(gameObject.transform.position, rushingToTarget.position) < 2f)
+                        _phase = Phase.reached;
+                    if (_phase == Phase.reached)
+                    {
+                        Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
+                        _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
+                        _Rigidbody.velocity = Vector3.zero;
+                        Sensor.GetEnemiesByDistance(true);
+                        _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);
+                        if (Sensor.GetEnemiesByDistance(false).Count > 0)
+                        {
+                            if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                            {
+                                RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                            }
+                        }
+                    }
                 }
                 if (Sensor.GetInnerEnemiesColliders().Count > 0 || rush_time_counter > maxRushTime)
                 {
@@ -227,8 +245,18 @@ public partial class G_Attack_State : Behavior {
                 }
                 break;
             case Phase.reached:
+                if (Sensor.GetInnerEnemiesColliders().Count > 0)
+                {
+                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                        AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
+                }
                 break;
             case Phase.reachedFromThebeginning://reachedFromThebeginning现在其实是两种情况：1. 冲刺状态一开始内环就有敌人 2.非冲刺状态一开始外环有敌人
+                if (Sensor.GetInnerEnemiesColliders().Count > 0)
+                {
+                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                        AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
+                }
                 break;
             default:
                 break;

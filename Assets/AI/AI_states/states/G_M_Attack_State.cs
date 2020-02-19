@@ -25,7 +25,6 @@ public class G_M_Attack_State : Behavior {
 	}
   
     #region Capacity Enter Exit
-    Collider temp_C;  
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
@@ -36,10 +35,9 @@ public class G_M_Attack_State : Behavior {
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         personality_Events.CloseAllPersonalityEffects();
-        Sensor.ContinuousDetectionStart(2);
-        temp_C = Sensor.GetClosestColliderInSensorRange(true,true,true);
-        if (temp_C != null)
-            RotateToTarget_Tween(temp_C.transform.position, 0.01f, true);
+        Sensor.GetEnemiesByDistance(true);
+        if (Sensor.GetEnemiesByDistance(false)[0] != null)
+            RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
 		_Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
 	}

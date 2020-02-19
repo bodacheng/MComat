@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using HittingDetection;
 using Soul;
 
@@ -8,7 +7,26 @@ public class Hurt_State : Behavior {
     float time_counter;
     Vector3 fixDesPos;
     readonly Coroutine shaderChangeProcess;
-    
+
+    bool freezed = false;
+    float TimeCounter
+    {
+        set {
+            time_counter = value;
+            if (!freezed)
+            {
+                if (time_counter > 2 * used_dizzy_time / 3)
+                {
+                    _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+                    freezed = true;
+                }
+            }
+        }
+        get {
+            return time_counter;
+        }
+    }
+
     public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
@@ -19,6 +37,7 @@ public class Hurt_State : Behavior {
 	{
 		base.AI_State_enter();
         _Animator.SetFloat("speed", 0f);
+        freezed = false;
         _Animator.applyRootMotion = false;
         _FightAttriCalReference.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
@@ -63,7 +82,7 @@ public class Hurt_State : Behavior {
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
         }
         RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
-        time_counter = 0f;
+        TimeCounter = 0f;
         personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
@@ -75,19 +94,18 @@ public class Hurt_State : Behavior {
     
     public override void _State_FixedUpdate1()
     {
-        time_counter += Time.fixedDeltaTime;
-        if (time_counter > used_dizzy_time/2)
-            _Rigidbody.velocity = Vector3.zero;
+        TimeCounter += Time.fixedDeltaTime;
     }
 
 	public override bool Capacity_Exit_Condition()
 	{
-        return time_counter > used_dizzy_time;
+        return TimeCounter > used_dizzy_time;
     }
 
 	public override void AI_State_exit()
 	{
         base.AI_State_exit();
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _FightAttriCalReference.SetGettingDamageState(false);
     }
 }

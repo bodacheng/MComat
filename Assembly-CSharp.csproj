@@ -72,7 +72,6 @@
     <Compile Include="Assets\AI\AI_states\states\Empty_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\G_Ani_MoveEscape_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\G_Attack_State.cs" />
-    <Compile Include="Assets\AI\AI_states\states\G_Attack_State_part2.cs" />
     <Compile Include="Assets\AI\AI_states\states\G_M_Attack_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\GetUp_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurt_State.cs" />
