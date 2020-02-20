@@ -47,7 +47,7 @@ SKIL0000000000000045,gr_doublekick_d3,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000046,gr_downspherekick_d1,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000047,gr_fangentou_d2,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000048,gr_forwardblade_d3,human,10,GR,0,1,0,0,0,2,1
-SKIL0000000000000049,gr_highkick_d1,human,10,GR,0,1,0,0,0,2,1
+SKIL0000000000000049,gr_highkick_d1,human,10,GR,0,0,1,1,0,2,1
 SKIL0000000000000050,gr_highpuch_d3,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000051,gr_horiblade_d3,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000052,gr_jiancepunch_d3,human,10,GR,0,1,0,0,0,2,1

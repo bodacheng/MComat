@@ -19,7 +19,7 @@ public class Dash_Back_State : Behavior
         {
             _ResistanceManager.Resistance.Value -=10;
         };
-        breakfreeCoroutine = new CustomCoroutine(breakfreestart, 1f, breakfreeend);
+        breakfreeCoroutine = new CustomCoroutine(breakfreestart, 0.6f, breakfreeend);
     }
 
     public override void Pre_process_before_enter()
