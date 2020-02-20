@@ -81909,21 +81909,21 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.2
-    functionName: SetRightFootMarkerManager
-    data: in
+  - time: 0.15
+    functionName: EffectOnBodyPart
+    data: right_foot
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 2
+    messageOptions: 0
+  - time: 0.18333334
+    functionName: MagicForward
+    data: g_lightning
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.33333334
-    functionName: ClearMarkerManagers
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.43333334
+  - time: 0.48333332
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

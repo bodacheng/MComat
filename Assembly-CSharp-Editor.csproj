@@ -74,6 +74,11 @@
     <Compile Include="Assets\AssetBundleBrowser\UnityEngine.AssetBundles\Editor\AssetBundleBrowser\BundleDetailList.cs" />
     <Compile Include="Assets\AssetBundleBrowser\UnityEngine.AssetBundles\Editor\AssetBundleBrowser\MessageList.cs" />
     <Compile Include="Assets\AssetBundleBrowser\UnityEngine.AssetBundles\Editor\AssetBundleBrowser\MessageSystem.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Editor\EffectControllerInspector.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Editor\EffectToolBar.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Editor\RenderEffectInspector.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Editor\ShaderCustomEditor\ShaderMaterialsEditor.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Editor\XUIUtils.cs" />
     <Compile Include="Assets\CSV2Table\Editor\CSV2Table.cs" />
     <Compile Include="Assets\CSV2Table\Editor\CSVView.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouch\Plugins\Editor\EasytouchHierachyCallBack.cs" />

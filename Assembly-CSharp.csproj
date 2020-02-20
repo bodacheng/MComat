@@ -113,6 +113,12 @@
     <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
     <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
     <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\CameraTarget.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\EffectController.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\EffectDemo.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\EffectShaderPropertyStr.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\RenderEffect.cs" />
+    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\TransformExtension.cs" />
     <Compile Include="Assets\AudioManager\AudioManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
     <Compile Include="Assets\BOWeaponSystem\Decompositioner.cs" />
@@ -557,6 +563,7 @@
     <None Include="Assets\POFX\Shaders\Resources\ColorSwap.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
+    <None Include="Assets\Particlecollection_Cleave\READ ME.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ACES.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\UberSecondPass.cginc" />
     <None Include="Assets\ErbGameArt\Glowing orbs Vol 3\Demo scene\Blend_CenterGlow.txt" />
