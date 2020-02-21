@@ -31105,8 +31105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enabled: 0
-  _startActivated: 1
+  ActivateAfterTime: 0
   damage_type: 0
   _WeaponMode: 1
   _WeaponPosAdjustMode: 1
@@ -143675,8 +143674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enabled: 0
-  _startActivated: 1
+  ActivateAfterTime: 0
   damage_type: 0
   _WeaponMode: 1
   _WeaponPosAdjustMode: 1
@@ -143731,8 +143729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enabled: 0
-  _startActivated: 1
+  ActivateAfterTime: 0
   damage_type: 1
   _WeaponMode: 2
   _WeaponPosAdjustMode: 1

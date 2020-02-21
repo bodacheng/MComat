@@ -28,12 +28,11 @@ namespace HittingDetection
     
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        [Tooltip("是否正在作用")]
-        public bool Enabled;
-    
+        bool Enabled;
+
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
-        bool _startActivated = true;
+        float ActivateAfterTime;
 
         [Tooltip("damageTypeOfTheWeapon")]
         [SerializeField]
@@ -120,10 +119,10 @@ namespace HittingDetection
                 
         public void MarkersEnablingStarts()
         {
-            if (_startActivated)
-            {
+            if (ActivateAfterTime == 0)
                 EnableMarkers();
-            }
+            else
+                Invoke("EnableMarkers", ActivateAfterTime);
         }
 
         public void Local_OnDisable()

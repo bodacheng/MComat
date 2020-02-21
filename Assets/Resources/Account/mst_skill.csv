@@ -193,3 +193,4 @@ SKIL0000000000000190,ninja_attack,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000191,rotatepunches,human,10,GR,0,1,0,0,0,2,1
 SKIL0000000000000192,rotatepunchesforward,human,10,GM,0,1,1,0,0,2,1
 SKIL0000000000000193,risingp,human,10,GR,0,1,0,0,0,2,1
+SKIL0000000000000195,timeexposion_mid,human,10,GR,0,0,1,1,0,2,1
