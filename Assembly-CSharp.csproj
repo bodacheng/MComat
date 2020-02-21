@@ -327,16 +327,12 @@
     <Compile Include="Assets\FightSceneSystem\SelfFightManager.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
-<<<<<<< HEAD
     <Compile Include="Assets\Gotcha\gotchaManager.cs" />
-=======
-    <Compile Include="Assets\gotcha\gotchaManager.cs" />
     <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
     <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
     <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\ParticleCollisionInstance.cs" />
     <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\TargetProjectile.cs" />
->>>>>>> c70a34ee67a33124b9eebea207db1d50ecf23b53
     <Compile Include="Assets\ImportantDefinition\Monster\CharacterDataInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharResourceDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\monstersConfigTable.cs" />
