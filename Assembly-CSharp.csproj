@@ -327,7 +327,16 @@
     <Compile Include="Assets\FightSceneSystem\SelfFightManager.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Gotcha\gotchaManager.cs" />
+=======
+    <Compile Include="Assets\gotcha\gotchaManager.cs" />
+    <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
+    <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
+    <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
+    <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\ParticleCollisionInstance.cs" />
+    <Compile Include="Assets\Hovl Studio\Wizard spells pack\Scripts\TargetProjectile.cs" />
+>>>>>>> c70a34ee67a33124b9eebea207db1d50ecf23b53
     <Compile Include="Assets\ImportantDefinition\Monster\CharacterDataInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharResourceDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\monstersConfigTable.cs" />
@@ -569,6 +578,7 @@
     <None Include="Assets\ErbGameArt\Glowing orbs Vol 3\Demo scene\Blend_CenterGlow.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Tonemapping.cginc" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\Lightning.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\ReleaseNotes.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
@@ -584,6 +594,7 @@
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlended_Scroll01.shader" />
     <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Shaders\Electricity.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.shader" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\DissolveNoise.shader" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\effect_distortion_mask.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Documentation\Version 2.0.txt" />
     <None Include="Assets\Resources\AIScripts\tiger\tiger.xml" />
@@ -601,8 +612,10 @@
     <None Include="Assets\ErbGameArt\Glowing orbs Vol 3\Demo scene\Readme.txt" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleAddSoftEffect.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Common.cginc" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\Lit_CenterGlow.shader" />
     <None Include="Assets\PostProcessing\Resources\Bluenoise64\COPYING.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\LightGlow.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\Trackball.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -617,6 +630,7 @@
     <None Include="Assets\ErbGameArt\AAA Magic circles Vol 2\Demo magiс circles Vol 2\Readme.txt" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\EyeHistogram.compute" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\Blend_LinePath.shader" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticlePremultiplyBlend.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_Scroll01.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\TAA.cginc" />
@@ -641,6 +655,7 @@
     <None Include="Assets\POFX\Shaders\Resources\Matcap.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Issues in button behavior (MAC).txt" />
     <None Include="Assets\POFX\Shaders\Resources\Emboss.shader" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\Ice.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlended_EdgeSoft.shader" />
     <None Include="Assets\Resources\AIScripts\human\71test.xml" />
     <None Include="Assets\POFX\Shaders\Resources\Refraction.shader" />
@@ -655,6 +670,7 @@
     <None Include="Assets\Resources\Account\TuroialFight1.xml" />
     <None Include="Assets\Resources\AIScripts\human\831Test.xml" />
     <None Include="Assets\Resources\AIScripts\little_dragon\little_dragonFast.xml" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\Add_Fresnel.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\SpecialShader\HurtRed.shader" />
@@ -666,6 +682,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
     <None Include="Assets\Resources\AIScripts\Insectoid\Insectoid.xml" />
     <None Include="Assets\Resources\AIScripts\human\0614test.xml" />
+    <None Include="Assets\Hovl Studio\Wizard spells pack\Shaders\Fire.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleBlendEffect.shader" />

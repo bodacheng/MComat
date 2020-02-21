@@ -31,12 +31,21 @@ namespace Soul
                     break;
                 case BehaviorType.AC:
                     KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.StateKey);
-                    KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>("DangerousNearby", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair1);
+                    ConditionAndRespondPriority.Set(keyValuePair1.Key, keyValuePair1.Value, 1);
+
+                    KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>("DangerousNearby", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair2);
-                    ConditionAndRespondPriority.Set(keyValuePair1.Key,keyValuePair1.Value,1);
                     ConditionAndRespondPriority.Set(keyValuePair2.Key,keyValuePair2.Value,2);
-                    
+
+                    KeyValuePair<string, string> keyValuePair3 = new KeyValuePair<string, string>("DangerousClose", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePair3);
+                    ConditionAndRespondPriority.Set(keyValuePair3.Key, keyValuePair3.Value, 2);
+
+                    KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePair4);
+                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 2);
+
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;
                 case BehaviorType.CT:                    
@@ -48,10 +57,11 @@ namespace Soul
                     break;
                 case BehaviorType.Def:
                     KeyValuePair<string, string> keyValuePair_def1 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.StateKey);
-                    KeyValuePair<string, string> keyValuePair_def2 = new KeyValuePair<string, string>("MayBeDefend", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair_def1);
+                    ConditionAndRespondPriority.Set(keyValuePair_def1.Key, keyValuePair_def1.Value, 2);
+
+                    KeyValuePair<string, string> keyValuePair_def2 = new KeyValuePair<string, string>("MayBeDefend", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair_def2);
-                    ConditionAndRespondPriority.Set(keyValuePair_def1.Key,keyValuePair_def1.Value,2);
                     ConditionAndRespondPriority.Set(keyValuePair_def2.Key,keyValuePair_def2.Value,3);
                     
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, "TimeToRespond");
@@ -98,18 +108,30 @@ namespace Soul
                         KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Near", behavior_define.StateKey);
                         RegisterConditionToRespond(keyValuePair_gr);
                         ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+
+                        KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
+                        RegisterConditionToRespond(keyValuePair_gi);
+                        ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
                     }
                     if (behaviorEnterRanges2.Contains(BehaviorEnterRange.far_range))
                     {
                         KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Far", behavior_define.StateKey);
                         RegisterConditionToRespond(keyValuePair_gr);
                         ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+
+                        KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
+                        RegisterConditionToRespond(keyValuePair_gi);
+                        ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
                     }
                     if (behaviorEnterRanges2.Contains(BehaviorEnterRange.out_of_range))
                     {
                         KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_OutterRange", behavior_define.StateKey);
                         RegisterConditionToRespond(keyValuePair_gr);
                         ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+
+                        KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
+                        RegisterConditionToRespond(keyValuePair_gi);
+                        ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
                     }
                     
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);

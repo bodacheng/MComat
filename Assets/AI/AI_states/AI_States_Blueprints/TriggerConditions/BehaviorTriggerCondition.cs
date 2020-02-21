@@ -20,9 +20,20 @@ namespace Soul
         {
             return Sensor.GetNearbyDamagingWeaponColliders().Count > 0;
         }
+
+        public bool DangerousNearButEnemyFar()
+        {
+            nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
+            farenemymeat = Sensor.GetFarEnemiesColliders();
+            midenemymeat = Sensor.GetMidEnemiesColliders();
+            damagingweaponList = Sensor.GetOutterDamagingWeaponColliders();
+            return nearbyenemymeat.Count == 0 && damagingweaponList.Count > 0 && (farenemymeat.Count > 0 && midenemymeat.Count > 0);
+        }
         
         List<Collider> damagingweaponList;
         List<Collider> nearbyenemymeat;
+        List<Collider> farenemymeat;
+        List<Collider> midenemymeat;
         public bool DangerousVeryClose() //Defend_State 1 
         {
             if (_ResistanceManager.Resistance.Value > 0)
