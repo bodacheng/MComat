@@ -525,7 +525,7 @@
     <Compile Include="Assets\StagesManagement\stageButton.cs" />
     <Compile Include="Assets\StagesManagement\StageScriptableObject.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager.cs" />
-    <Compile Include="Assets\StagesManagement\stagesManagerGUI.cs" />
+    <Compile Include="Assets\StagesManagement\stagesManagerGUI2.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
