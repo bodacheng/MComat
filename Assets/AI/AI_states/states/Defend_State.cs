@@ -128,7 +128,7 @@ public class Defend_State : Behavior
          fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
                                     newValue.AttackerT_foward,
                                         newValue.AttackerT_pos,
-                                            gameObject.transform.position,
+                                            gameObject.transform.position, newValue.WeaponMarkerPos,
                                                 newValue._WeaponPosAdjustMode);
          switch(newValue.damage_type)
          {

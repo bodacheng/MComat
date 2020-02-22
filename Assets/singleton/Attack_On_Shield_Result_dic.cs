@@ -62,6 +62,7 @@ namespace HittingDetection
         public Vector3 damageHappenPoint;
         public Vector3 AttackerT_foward;
         public Vector3 AttackerT_pos;
+        public Vector3 WeaponMarkerPos;
         public FightAttriCalReference attacker;
         public FightAttriCalReference victim;
         public Quaternion CutRotation;
@@ -75,7 +76,7 @@ namespace HittingDetection
                         FightAttriCalReference _victim, FightAttriCalReference _attacker,
                         DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, WeaponMode weaponMode,SpecialApply specialApply,
                         Vector3 damageHappenPoint, Quaternion _CutRotation,
-                        Vector3 AttackerT_foward, Vector3 AttackerT_pos, 
+                        Vector3 AttackerT_foward, Vector3 AttackerT_pos, Vector3 WeaponMarker,
                         string effectPath,bool _effectSpreadOnBody)
         {
             victim = _victim;
@@ -87,6 +88,7 @@ namespace HittingDetection
             CutRotation = _CutRotation;
             this.AttackerT_foward = AttackerT_foward;
             this.AttackerT_pos = AttackerT_pos;
+            this.WeaponMarkerPos = WeaponMarker;
             this.effectPath = effectPath;
             AT = _AT;
             this.specialApply = specialApply;

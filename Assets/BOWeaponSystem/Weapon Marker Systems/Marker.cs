@@ -17,8 +17,8 @@ namespace HittingDetection
         {
             return false;
         }
-        
-        protected virtual void Awake() 
+
+        public virtual void LocalAwake()
         {
             myCollider = gameObject.GetComponent<SphereCollider>();
             if (myCollider == null)

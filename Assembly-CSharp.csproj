@@ -123,7 +123,7 @@
     <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
     <Compile Include="Assets\BOWeaponSystem\Decompositioner.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BasicPhysicSupport.cs" />
-    <Compile Include="Assets\BOWeaponSystem\Health System\BO_Hitbox.cs" />
+    <Compile Include="Assets\BOWeaponSystem\Health System\BO_Limb.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference_CriticalGauge.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\Health_BasicClasses.cs" />
@@ -524,7 +524,7 @@
     <Compile Include="Assets\StagesManagement\QuestPreparePage.cs" />
     <Compile Include="Assets\StagesManagement\stageButton.cs" />
     <Compile Include="Assets\StagesManagement\StageScriptableObject.cs" />
-    <Compile Include="Assets\StagesManagement\stagesManager.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManager.cs" />
     <Compile Include="Assets\StagesManagement\stagesManagerGUI.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />

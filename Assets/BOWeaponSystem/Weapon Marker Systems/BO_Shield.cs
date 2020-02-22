@@ -115,7 +115,7 @@ public class BO_Shield : MonoBehaviour {
                                                                 _ownerFightAttriCalReference, null,
                                                                 DamageType.heavy_damage, WeaponPosAdjustMode.explosion, WeaponMode.EnergyFromBodyWeapon,SpecialApply.none,
                                                                 _ShieldCenterSpot.position, _ShieldCenterSpot.rotation,
-                                                                Vector3.zero, transform.position,
+                                                                Vector3.zero, transform.position,Vector3.zero,
                                                                 "defaultmagic",false));
         }
     }

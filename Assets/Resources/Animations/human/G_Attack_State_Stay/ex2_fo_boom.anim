@@ -153875,17 +153875,87 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.68333334
+  - time: 0.96666664
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 2
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 2.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.2333333
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 3
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.3666667
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 3.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 4
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.6333333
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 4.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.7666667
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.9
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.0333333
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 6
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.1666667
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 6.5
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.3
+    functionName: MagicForward
+    data: spikes
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 7
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.65
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
-    messageOptions: 0
-  - time: 0.96666664
-    functionName: Bullet_shoot_from_body_part
-    data: right_hand
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 14
-    intParameter: 2
     messageOptions: 0

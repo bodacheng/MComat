@@ -40031,7 +40031,7 @@ AnimationClip:
   m_Events:
   - time: 0.36666667
     functionName: MagicForward
-    data: touchExpolsionBall
+    data: lightningstrike
     objectReferenceParameter: {fileID: 0}
     floatParameter: 2
     intParameter: 0

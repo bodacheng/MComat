@@ -28,7 +28,7 @@ public class RanSe : MonoBehaviour {
 
     List<FightAttriCalReference> FocousingNearbyEnemyHealthBodies;
     FightAttriCalReference studyingHealthBody;
-    BO_Hitbox studyingHitBox;
+    BO_Limb studyingHitBox;
     public List<FightAttriCalReference> getNearbyEnemyHealthBody(string[] enemy_tags)
     {
         FocousingNearbyEnemyHealthBodies = new List<FightAttriCalReference>();
@@ -47,7 +47,7 @@ public class RanSe : MonoBehaviour {
                     if (!FocousingNearbyEnemyHealthBodies.Contains(studyingHealthBody))
                         FocousingNearbyEnemyHealthBodies.Add(studyingHealthBody);
                 }
-                studyingHitBox = hit.GetComponent<BO_Hitbox>();
+                studyingHitBox = hit.GetComponent<BO_Limb>();
                 if (studyingHitBox != null)
                 {
                     if (studyingHitBox.MainHealth != null)

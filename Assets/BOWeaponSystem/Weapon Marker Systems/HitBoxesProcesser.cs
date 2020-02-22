@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using HittingDetection;
 
 public class HitBoxesProcesser : MonoBehaviour
 {
     public static HitBoxesProcesser Instance;
+    public static Dictionary<Collider, BO_Marker_Manager> ColliderHitBox = new Dictionary<Collider, BO_Marker_Manager>();
     public List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
 
     void Awake()
@@ -15,6 +17,14 @@ public class HitBoxesProcesser : MonoBehaviour
     {
         if (Instance != null)
             Instance.AddToHitBoxesProcesserList(_poolObject);
+    }
+
+    public static void AddToColliderHitBoxDic(Collider collider,BO_Marker_Manager bo_hitbox)
+    {
+        if (!ColliderHitBox.ContainsKey(collider))
+        {
+            ColliderHitBox.Add(collider, bo_hitbox);
+        }
     }
 
     void Update()

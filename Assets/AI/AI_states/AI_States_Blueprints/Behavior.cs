@@ -382,15 +382,12 @@ namespace Soul
 
         float f_temp;
         Vector3 v_temp;
-        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, 
-                                                Vector3 attackerTransform_foward,
-                                                 Vector3 attackerTransform_pos, 
-                                                  Vector3 victimT_pos, WeaponPosAdjustMode weaponPosAdjustMode)
+        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Vector3 attackerTransform_foward, Vector3 attackerTransform_pos, Vector3 victimT_pos, Vector3 markerPos,WeaponPosAdjustMode weaponPosAdjustMode)
         {
             switch (weaponPosAdjustMode)
             {
                 case WeaponPosAdjustMode.draw:
-                    return damageHappenPoint;
+                    return markerPos;
                 case WeaponPosAdjustMode.pushToMidForward:
                     damageHappenPoint.y = 0;
                     f_temp = Vector3.Dot(damageHappenPoint - attackerTransform_pos, attackerTransform_foward);
@@ -401,7 +398,7 @@ namespace Soul
                     }
                     else
                     {
-                        return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, WeaponPosAdjustMode.explosion);
+                        return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, markerPos, WeaponPosAdjustMode.explosion);
                     }
                 case WeaponPosAdjustMode.explosion:
                     v_temp = (victimT_pos - damageHappenPoint).normalized;

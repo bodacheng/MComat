@@ -111,7 +111,10 @@ namespace HittingDetection
             {
                 if (_MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>() != null)
                 {
+                    _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>().LocalAwake();
                     bms.Add(_MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>());
+                    Collider colliderofmarker = _MarkersParent.GetChild(i).gameObject.GetComponent<Collider>();
+                    HitBoxesProcesser.AddToColliderHitBoxDic(colliderofmarker,this);
                 }
             }
             _markers = bms.ToArray();

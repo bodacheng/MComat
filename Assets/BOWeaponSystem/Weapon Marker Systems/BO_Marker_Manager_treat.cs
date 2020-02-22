@@ -43,7 +43,7 @@ namespace HittingDetection
                                         _MyOwnerCalReference,TheS._ownerFightAttriCalReference,
                                         DamageType.stagger, WeaponPosAdjustMode.explosion, this._WeaponMode,SpecialApply.none,
                                         _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        TheS._ownerFightAttriCalReference._Center.WholeT.forward,TheS._ownerFightAttriCalReference._Center.WholeT.position,
+                                        TheS._ownerFightAttriCalReference._Center.WholeT.forward,TheS._ownerFightAttriCalReference._Center.WholeT.position,Vector3.zero,
                                         PersonalEffectPath, this.effectSpreadOnBody);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
                                     _MyOwnerCalReference.ApplyDamage(new_damage);
                                 break;
@@ -61,7 +61,7 @@ namespace HittingDetection
                                         TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
                                         DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
                                         _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                        AttackerWholeTransform.forward, AttackerWholeTransform.position, Vector3.zero,
                                         PersonalEffectPath, effectSpreadOnBody);
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
@@ -71,7 +71,7 @@ namespace HittingDetection
                                         TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
                                         DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
                                         _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,Vector3.zero,
                                         PersonalEffectPath, effectSpreadOnBody);
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
@@ -81,7 +81,7 @@ namespace HittingDetection
                                         TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
                                         DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
                                         _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                        AttackerWholeTransform.forward, AttackerWholeTransform.position, Vector3.zero,
                                         PersonalEffectPath,effectSpreadOnBody);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;

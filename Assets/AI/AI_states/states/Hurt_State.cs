@@ -63,12 +63,7 @@ public class Hurt_State : Behavior {
                 _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;        
         }
-        
-        fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
-                                    newValue.AttackerT_foward,
-                                        newValue.AttackerT_pos,
-                                            gameObject.transform.position,
-                                                newValue._WeaponPosAdjustMode);
+        fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.AttackerT_foward, newValue.AttackerT_pos,gameObject.transform.position, newValue.WeaponMarkerPos, newValue._WeaponPosAdjustMode);
         _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
         //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);// 第二个参数是距离除以期望速度
         if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.damage_type == DamageType.supper_damage)//&& newValue.damage_type == DamageType.supper_damage
@@ -77,7 +72,7 @@ public class Hurt_State : Behavior {
                                                             _FightAttriCalReference, newValue.attacker,
                                                             DamageType.knockOff_damage, newValue._WeaponPosAdjustMode, newValue._weaponMode,SpecialApply.none,
                                                             newValue.damageHappenPoint, newValue.CutRotation,
-                                                            newValue.AttackerT_foward,newValue.AttackerT_pos,
+                                                            newValue.AttackerT_foward,newValue.AttackerT_pos, newValue.WeaponMarkerPos,
                                                             newValue.effectPath,newValue.effectSpreadOnBody));
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
         }

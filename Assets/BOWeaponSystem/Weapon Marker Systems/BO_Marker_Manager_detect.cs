@@ -7,7 +7,7 @@ namespace HittingDetection
     {
         FightAttriCalReference _Raw_Target_Instance; //A single target which was hit.
         FightAttriCalReference CalReference;
-        BO_Hitbox _BO_Hitbox;
+        BO_Limb _BO_Hitbox;
         Vector3 _StartPoint;
         List<Collider> BallDetectHitPool;
         BO_Weapon_Animation_Events bO_Weapon_Animation_Events;　//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
@@ -84,16 +84,19 @@ namespace HittingDetection
                         {
                             if (SpecificTarget != SpecificTarget.flesh)
                             {
-                                if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer)))
-                                    && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
+                                if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer))) && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
                                 {
-                                    _Used_Targets.Add(_hits[hit_target_index].collider.transform);
-                                    WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
-                                    if (weaponHP > 0 && CurrentHP <= 0)
+                                    HitBoxesProcesser.ColliderHitBox.TryGetValue(_hits[hit_target_index].collider, out BO_Marker_Manager hit_hitbox);
+                                    if (hit_hitbox != null && hit_hitbox.Enabled)
                                     {
-                                        break;
+                                        _Used_Targets.Add(_hits[hit_target_index].collider.transform);
+                                        WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
+                                        if (weaponHP > 0 && CurrentHP <= 0)
+                                        {
+                                            break;
+                                        }
+                                        continue;//这里不退出循环的话就可能造成一个HP只有1的能量球既打碎了敌人的一个同血量能量球，又对敌人产生一点伤害。
                                     }
-                                    continue;
                                 }
                             }
 
@@ -101,11 +104,11 @@ namespace HittingDetection
                             {
                                 continue;
                             }
-                            
+ 
                             //_Raw_Target_Instance这个里面全是mainhealth，就是mainhealth，不是含着mainhealth的transform
                             //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
                             CalReference = _hits[hit_target_index].collider.GetComponent<FightAttriCalReference>();
-                            _BO_Hitbox = _hits[hit_target_index].collider.GetComponent<BO_Hitbox>();
+                            _BO_Hitbox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
                             if (_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) == false && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
                             {
                                 //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
@@ -138,7 +141,7 @@ namespace HittingDetection
                                                                         _Raw_Target_Instance, _MyOwnerCalReference,
                                                                         damage_type, _WeaponPosAdjustMode, _WeaponMode, _specialApply,
                                                                         _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up),
-                                                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                                                        AttackerWholeTransform.forward, AttackerWholeTransform.position, _markers[i].transform.position,
                                                                         PersonalEffectPath, effectSpreadOnBody));
                                     WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                                 }
@@ -224,13 +227,17 @@ namespace HittingDetection
                                     if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << BallDetectHitPool[hit_target_index].gameObject.layer)))
                                         && !_Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform))
                                     {
-                                        _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
-                                        WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
-                                        if (weaponHP > 0 && CurrentHP <= 0)
+                                        HitBoxesProcesser.ColliderHitBox.TryGetValue(BallDetectHitPool[hit_target_index], out BO_Marker_Manager hit_hitbox);
+                                        if (hit_hitbox != null && hit_hitbox.Enabled)
                                         {
-                                            break;
+                                            _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
+                                            WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
+                                            if (weaponHP > 0 && CurrentHP <= 0)
+                                            {
+                                                break;
+                                            }
+                                            continue;
                                         }
-                                        continue;
                                     }
                                 }
                                 
@@ -240,7 +247,7 @@ namespace HittingDetection
                                 }
 
                                 CalReference = BallDetectHitPool[hit_target_index].GetComponent<FightAttriCalReference>();
-                                _BO_Hitbox = BallDetectHitPool[hit_target_index].GetComponent<BO_Hitbox>();
+                                _BO_Hitbox = BallDetectHitPool[hit_target_index].GetComponent<BO_Limb>();
                                 if (!_Targets_Raw_Hit.Contains(BallDetectHitPool[hit_target_index].transform) && !_Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform))
                                 {
                                     //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
@@ -280,7 +287,7 @@ namespace HittingDetection
                                                                             _Raw_Target_Instance, _MyOwnerCalReference,
                                                                             damage_type, _WeaponPosAdjustMode, _WeaponMode, _specialApply,
                                                                             _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up),
-                                                                            AttackerWholeTransform.forward, AttackerWholeTransform.position,
+                                                                            AttackerWholeTransform.forward, AttackerWholeTransform.position, _markers[i].transform.position,
                                                                             PersonalEffectPath, effectSpreadOnBody));
                                         WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                     }

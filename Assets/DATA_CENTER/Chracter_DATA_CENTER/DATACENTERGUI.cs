@@ -109,7 +109,7 @@ public class DATACENTERGUI : Editor {
             myScript._ShaderManager = shaderManager;
             myScript.Personality_events = myScript.WholeT.GetComponent<Personality_events>();
             
-            BO_Hitbox focusingHitBox = null;
+            BO_Limb focusingHitBox = null;
             if (myScript.right_arm_hitbox_t != null)
             {
                 if (!myScript.right_arm_hitbox_t.GetComponent<BoxCollider>())
@@ -118,10 +118,10 @@ public class DATACENTERGUI : Editor {
                     myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Hitbox>();
+                focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
-                focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Hitbox>();
+                    myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.left_arm_hitbox_t != null)
@@ -132,10 +132,10 @@ public class DATACENTERGUI : Editor {
                     myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Hitbox>();
+                focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
-                focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Hitbox>();
+                    myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.right_leg_hitbox_t != null)
@@ -146,10 +146,10 @@ public class DATACENTERGUI : Editor {
                     myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Hitbox>();
+                focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
-                focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Hitbox>();
+                    myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.left_leg_hitbox_t != null)
@@ -160,10 +160,10 @@ public class DATACENTERGUI : Editor {
                     myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
                 myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Hitbox>();
+                focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
-                focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Hitbox>();
+                    myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
             if (myScript.spine_hitbox_t != null)
@@ -174,10 +174,10 @@ public class DATACENTERGUI : Editor {
                     myScript.spine_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
                 }
                 myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;                
-                focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Hitbox>();
+                focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.spine_hitbox_t.gameObject.AddComponent<BO_Hitbox>();
-                focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Hitbox>();
+                    myScript.spine_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.MainHealth = myScript._FightAttriCalReference;
             }
 

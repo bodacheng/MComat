@@ -22,7 +22,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     V_Damage deathknockOff;
     bool gettingdamage;
-    List<BO_Hitbox> myBOHitBoxeComponent = new List<BO_Hitbox>();//713添加
+    List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();//713添加
     List<E_Damage> Event_Damage_List = new List<E_Damage>();
     List<V_Damage> ICauseDamages = new List<V_Damage>();
     List<Collider> myColliders;
@@ -56,7 +56,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         return _knockOffCount;
     }
 
-    public void AddToBOHitBoxeComponent(BO_Hitbox bO_Hitbox)
+    public void AddToBOHitBoxeComponent(BO_Limb bO_Hitbox)
     {
         if (!myBOHitBoxeComponent.Contains(bO_Hitbox))
         {
@@ -67,7 +67,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     public void EnableAllHitBoxCollider(bool _bool)
     {
         if (myBOHitBoxeComponent != null)
-        foreach (BO_Hitbox hitbox in myBOHitBoxeComponent)
+        foreach (BO_Limb hitbox in myBOHitBoxeComponent)
         {
             if (hitbox.myColliderMustEquip != null)
                 hitbox.myColliderMustEquip.isTrigger = !_bool;
@@ -80,7 +80,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         {
             for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
             {
-                BO_Hitbox _BO_Hitbox = myBOHitBoxeComponent[i];
+                BO_Limb _BO_Hitbox = myBOHitBoxeComponent[i];
                 _BO_Hitbox.gameObject.layer = layer;
             }
         }
@@ -94,7 +94,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         myColliders = new List<Collider>();
         if (myBOHitBoxeComponent != null)
         {
-            foreach (BO_Hitbox _BO_Hitbox in myBOHitBoxeComponent)
+            foreach (BO_Limb _BO_Hitbox in myBOHitBoxeComponent)
             {
                 _BO_Hitbox.INI();
                 if (_BO_Hitbox.myColliderMustEquip != null && !myColliders.Contains(_BO_Hitbox.myColliderMustEquip))

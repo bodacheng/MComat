@@ -40031,7 +40031,7 @@ AnimationClip:
   m_Events:
   - time: 0.36666667
     functionName: MagicForward
-    data: timeexplosion
+    data: lightningstrike
     objectReferenceParameter: {fileID: 0}
     floatParameter: 5
     intParameter: 0

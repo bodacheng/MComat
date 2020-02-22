@@ -10,9 +10,9 @@ namespace HittingDetection
         float _dist; //distance between temp and actual marker position
         Vector3 _dir; //Direction of the above.
 
-        protected override void Awake()
+        public override void LocalAwake()
         {
-            base.Awake();
+            base.LocalAwake();
             _lastFramePos = transform.position;
             myCollider.radius = 0.1f;//这个是为了什么呢。。比如剑，它如果没有一个小collider的话那不是不好被其他角色检测来躲闪吗？
             myCollider.isTrigger = true;

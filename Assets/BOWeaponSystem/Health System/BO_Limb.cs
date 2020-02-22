@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.Linq;
 
-public class BO_Hitbox : MonoBehaviour {
-
-	[Tooltip("What is this Limb attached to? Select the desired BS Health script which stores the Health of this Object (for example in one of the limb's parents.")]
+public class BO_Limb : MonoBehaviour
+{
+    [Tooltip("What is this Limb attached to? Select the desired BS Health script which stores the Health of this Object (for example in one of the limb's parents.")]
     public FightAttriCalReference MainHealth;
     [Tooltip("ColliderOfThisHitBox.MUST HAVE")]
     public Collider myColliderMustEquip;
 
     void Awake()
-	{
-        if (MainHealth != null)       
+    {
+        if (MainHealth != null)
             MainHealth.AddToBOHitBoxeComponent(this);
-	}
+    }
 
     public void INI()
     {
@@ -37,7 +33,7 @@ public class BO_Hitbox : MonoBehaviour {
             return;
         }
     }
-
+}
     //void OnCollisionEnter(Collision collision)
     //{
         //if (enable)
@@ -108,4 +104,3 @@ public class BO_Hitbox : MonoBehaviour {
         //    }
         //}
     //}
-}

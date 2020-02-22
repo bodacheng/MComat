@@ -5,7 +5,7 @@ namespace HittingDetection
 {
     public class BO_Marker : Marker
     {
-        public float radius;        
+        public float radius;
         List<Collider> BallDetectHitPool = new List<Collider>();
         
         public List<Collider> GetBallDetectHitPool()
@@ -13,9 +13,9 @@ namespace HittingDetection
             return BallDetectHitPool;
         }
 
-        protected override void Awake()
+        public override void LocalAwake()
         {
-            base.Awake();
+            base.LocalAwake();
             myCollider.radius = radius;
             myCollider.isTrigger = true;
         }
