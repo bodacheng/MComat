@@ -4,9 +4,9 @@ using System;
 
 namespace dataAccess
 {
-    public class LocalJson
+    public static class LocalJson
     {
-        public static void saveInfoToJsonFile(string subpath, string filename, string json)
+        public static void SaveInfoToJsonFile(string subpath, string filename, string json)
         {
             //string wholepath = Path.Combine(Application.persistentDataPath, subpath);
             string wholepath;

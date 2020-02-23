@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
@@ -12,10 +11,10 @@ public class MemberDetail_edit : MainSceneProcess
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
-        yield return SkillEditorButtonBehaviour(this._MemberDetail.focusingCharacterDataInfo);
+        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharacterDataInfo);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
-        
+
         // 表现系
         CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
         SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
@@ -30,9 +29,9 @@ public class MemberDetail_edit : MainSceneProcess
     
     public MemberDetail_edit(preparingScene _preparingScene)
     {
-        this.thisProcessStep = MainSceneStep.MemberDetail_edit;
+        thisProcessStep = MainSceneStep.MemberDetail_edit;
         this._preparingScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        EelementsInherit(_preparingScene);
     }
 
     public override bool CanEnterOtherProcess()
@@ -42,12 +41,12 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(enterProcess());
+        mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
     {
-         SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);

@@ -46,12 +46,9 @@ public class BO_Shield : MonoBehaviour {
     [Tooltip("属性")]
     public Zokusei zokusei;
 
-    [Tooltip("盾牌伤害类型")]
-    public DamageType damage_type = DamageType.normal_shield;
-
-    private int _hpCounter;
-    private DecompositionerPool _hitSparks,shieldBreakSpark;
-    private string personalEffectPath;
+    int _hpCounter;
+    DecompositionerPool _hitSparks, shieldBreakSpark;
+    string personalEffectPath;
 
     void Awake()
     {

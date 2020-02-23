@@ -56,15 +56,7 @@ public class Defend_State : Behavior
 
     void DefendHPfade(V_Damage damage)
     {
-        switch (damage.from_weapon.damage_type)
-        {
-            case DamageType.light_block:
-            DefendHP -= 1;
-            break;
-            case DamageType.heavy_block:
-            DefendHP -= 2;
-            break;
-        }
+        DefendHP -= 1;
         //if (defendHP <= 0)
         //{
         //    _FightAttriCalReference.ApplyDamage(new V_Damage(DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, 
@@ -83,8 +75,6 @@ public class Defend_State : Behavior
 
     public override bool Capacity_enter_condition()
     {
-        //if (_Animator.GetBool("in_transition"))
-            //return false;
         if ((Time.time - lastExitTime) > DefendHpRefreshTime)
         {
             DefendHP = 10;
@@ -128,18 +118,25 @@ public class Defend_State : Behavior
          fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
                                     newValue.attacker._Center.WholeT.forward,
                                         newValue.attacker._Center.WholeT.position,
-                                            gameObject.transform.position, newValue.from_weapon_marker.transform.position,
-                                                newValue.from_weapon._WeaponPosAdjustMode);
+                                            gameObject.transform.position,
+                                                newValue.from_weapon.damage_type);
          switch(newValue.from_weapon.damage_type)
          {
-            case DamageType.light_block:
+            case DamageType.light_damage_forward:
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
-            case DamageType.heavy_block:
+            case DamageType.heavy_damage_forward:
+                Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
+                DefendHPfade(newValue);
+                _FightAttriCalReference.PlusCriticalGauge(2);
+            break;
+            case DamageType.supper_damage_forward:
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;

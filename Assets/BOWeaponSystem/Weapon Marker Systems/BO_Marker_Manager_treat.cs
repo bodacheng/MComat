@@ -11,7 +11,6 @@ namespace HittingDetection
         // 由于BO_Marker_Manager现在全部都是对象池物件，如果我们认为一个instance返回对象池后就应该不再参与任何工作的话，
         // 原则上我们应该确保一切围绕BO_Marker_Manage的instance，最重要的是里面的myOwnerHealth进行的工作在instance返回对象池前结束
         
-        Attack_on_shield_result collision;
         float _ContinuousDamage_Timer;
         //These DH and DS variables are Distances to the shield spots. Whie the shield is active, DH ("Distance to Health", distance to the back point of the shiled) has to be less than all the other shield edge spots (DS, "Distance to Shield")
         float dh;
@@ -33,42 +32,42 @@ namespace HittingDetection
                 {
                     if (!_Used_Targets.Contains(_Shields_Hit[i1])) //无论对墙壁，盾牌，还是伤害对象，每一轮攻击只会造成一次影响
                     {
-                        BO_Shield TheS = _Shields_Hit[i1].GetComponent<BO_Shield>();
-                        collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
-                        _MyOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
-                        switch (collision.on_weapon_holder)
-                        {
-                            case DamageType.stagger:
-                                    V_Damage new_damage = new V_Damage(this,null,_MyOwnerCalReference,TheS._ownerFightAttriCalReference, _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
-                                    _MyOwnerCalReference.ApplyDamage(new_damage);
-                                break;
-                            case DamageType.none:
-                                break;
-                        }
+
+                        //collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
+                        //_MyOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
+                        //switch (collision.on_weapon_holder)
+                        //{
+                        //    case DamageType.stagger:
+                        //            V_Damage new_damage = new V_Damage(this,null,_MyOwnerCalReference,TheS._ownerFightAttriCalReference, _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
+                        //            _MyOwnerCalReference.ApplyDamage(new_damage);
+                        //        break;
+                        //    case DamageType.none:
+                        //        break;
+                        //}
                         
-                        //在此向防御方发送防御信号
-                        if (TheS._ownerFightAttriCalReference != null)
-                        {
-                            switch (collision.on_shield_holder)
-                            {
-                                case DamageType.light_block:
-                                    V_Damage new_damage = new V_Damage(this,null,TheS._ownerFightAttriCalReference, _MyOwnerCalReference,_WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
-                                    TheS.PlusHP(-1);
-                                    TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
-                                    break;
-                                case DamageType.heavy_block:
-                                        new_damage = new V_Damage(this, null, TheS._ownerFightAttriCalReference, _MyOwnerCalReference, _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
-                                    TheS.PlusHP(-2);
-                                    TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
-                                    break;
-                                case DamageType.supper_damage:
-                                        new_damage = new V_Damage(this, null, TheS._ownerFightAttriCalReference, _MyOwnerCalReference, _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
-                                    TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
-                                    break;
-                                case DamageType.none:
-                                    break;
-                            }
-                        }
+                        ////在此向防御方发送防御信号
+                        //if (TheS._ownerFightAttriCalReference != null)
+                        //{
+                        //    switch (collision.on_shield_holder)
+                        //    {
+                        //        case DamageType.light_block:
+                        //            V_Damage new_damage = new V_Damage(this,null,TheS._ownerFightAttriCalReference, _MyOwnerCalReference,_WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
+                        //            TheS.PlusHP(-1);
+                        //            TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
+                        //            break;
+                        //        case DamageType.heavy_block:
+                        //                new_damage = new V_Damage(this, null, TheS._ownerFightAttriCalReference, _MyOwnerCalReference, _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
+                        //            TheS.PlusHP(-2);
+                        //            TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
+                        //            break;
+                        //        case DamageType.supper_damage:
+                        //                new_damage = new V_Damage(this, null, TheS._ownerFightAttriCalReference, _MyOwnerCalReference, _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
+                        //            TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
+                        //            break;
+                        //        case DamageType.none:
+                        //            break;
+                        //    }
+                        //}
                         _Used_Targets.Add(_Shields_Hit[i1]);
                     }
                 }

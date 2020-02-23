@@ -141,48 +141,34 @@ public partial class FightAttriCalReference : MonoBehaviour
         {
             switch (v_Damage.from_weapon.damage_type)
             {
-                case DamageType.slight_damage:
+                case DamageType.slight_damage_forward:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
-                case DamageType.light_damage:
+                case DamageType.light_damage_forward:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
-                case DamageType.heavy_damage:
+                case DamageType.heavy_damage_forward:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
-                case DamageType.supper_damage:
+                case DamageType.supper_damage_forward:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
-                case DamageType.light_block:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                   v_Damage.damageHappenPoint,
-                                                   v_Damage.CutRotation,
-                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
-                break;
-                case DamageType.heavy_block:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                   v_Damage.damageHappenPoint,
-                                                   v_Damage.CutRotation,
-                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
-                break;
                 default:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
@@ -199,9 +185,8 @@ public partial class FightAttriCalReference : MonoBehaviour
 	{
         if (_Center._MyBehaviorRunner.GetNowState().StateKey == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
         {
-            _dmg.from_weapon.damage_type = DamageType.heavy_block;
-            HitEffect(_dmg);
             _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
+            HitEffect(_dmg);
             return;
         }
         
@@ -224,54 +209,25 @@ public partial class FightAttriCalReference : MonoBehaviour
         float finalDamage = _dmg.from_weapon.weaponHP <= 0 ? _dmg.attacker.AT : _dmg.attacker.AT / _dmg.from_weapon.weaponHP;
         CurrentHp.Value -= finalDamage;
 
-        switch (_dmg.from_weapon._specialApply)
-        {
-            case SpecialApply.gravitylost:
-                gravityloststart = () =>
-                {
-                    _Center._BasicPhysicSupport.SetUsingGravity(false);
-                };
-                gravitylostend = () =>
-                {
-                    _Center._BasicPhysicSupport.SetUsingGravity(true);
-                };
-                burstCoroutine = new CustomCoroutine(gravityloststart, 0.2f, gravitylostend);
-                _Center.buffsRunner.RunSubCoroutineOfState(burstCoroutine);
-                break;
-        }
-
         if (CurrentHp.Value <= 0)
         {
             _dmg.from_weapon.damage_type = DamageType.DeathKnockoff;
         }
-        switch(_dmg.from_weapon.damage_type)
+        
+        if (_dmg.from_weapon.damage_type == DamageType.DeathKnockoff)
         {
-            case DamageType.slight_damage:
-            break;
-            case DamageType.light_damage:
-            _Center._MyBehaviorRunner.ChangeState("Hit",_dmg);
-            break;
-            case DamageType.heavy_damage:
-            _Center._MyBehaviorRunner.ChangeState("Hit",_dmg);
-            break;
-            case DamageType.supper_damage:
-            _Center._MyBehaviorRunner.ChangeState("Hit",_dmg);
-            break;
-            case DamageType.knockOff_damage:
-            _Center._MyBehaviorRunner.ChangeState("KnockOff",_dmg);
-            break;
-            case DamageType.light_block:
-            _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
-            break;
-            case DamageType.heavy_block:
-            _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
-            break;
-            case DamageType.DeathKnockoff:
-            _Center._MyBehaviorRunner.ChangeState("Death",_dmg);
-            break;
+            _Center._MyBehaviorRunner.ChangeState("Death", _dmg);
+            return;
+        }
+        else if (_dmg.from_weapon.damage_type == DamageType.knockOff_damage)
+        {
+            _Center._MyBehaviorRunner.ChangeState("KnockOff", _dmg);
+            return;
+        }else{
+            _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
         }        
-	}
-    
+    }
+
     public void HitCountPlus() => _ComboHitCount.HitCountPlus(_BeHitCount);//打别人计数
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     

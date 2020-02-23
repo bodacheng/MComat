@@ -66,11 +66,11 @@ namespace dataAccess
             {
                 case TeamSetGameMode.story:
                     string json = JsonConvert.SerializeObject(storyModeTeamSet);
-                    LocalJson.saveInfoToJsonFile(null, "TeamSet.json", json);
+                    LocalJson.SaveInfoToJsonFile(null, "TeamSet.json", json);
                     break;
                 case TeamSetGameMode.arena3V3:
                     string json1 = JsonConvert.SerializeObject(Arena3V3);
-                    LocalJson.saveInfoToJsonFile(null, "arena3V3TeamSet.json", json1);
+                    LocalJson.SaveInfoToJsonFile(null, "arena3V3TeamSet.json", json1);
                     break;
             }
             yield break;

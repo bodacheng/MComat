@@ -382,32 +382,24 @@ namespace Soul
 
         float f_temp;
         Vector3 v_temp;
-        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Vector3 attackerTransform_foward, Vector3 attackerTransform_pos, Vector3 victimT_pos, Vector3 markerPos,WeaponPosAdjustMode weaponPosAdjustMode)
+        protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Vector3 attackerTransform_foward, Vector3 attackerTransform_pos, Vector3 victimT_pos, DamageType _DamageType)
         {
-            switch (weaponPosAdjustMode)
+            if (_DamageType == DamageType.explosion)
             {
-                case WeaponPosAdjustMode.draw:
-                    return markerPos;
-                case WeaponPosAdjustMode.pushToMidForward:
-                    damageHappenPoint.y = 0;
-                    f_temp = Vector3.Dot(damageHappenPoint - attackerTransform_pos, attackerTransform_foward);
-                    if (f_temp > 0 && Vector3.Distance(attackerTransform_pos,victimT_pos) < FightGlobalSetting._attackDrawingDistance)
-                    {
-                        v_temp = f_temp * attackerTransform_foward + attackerTransform_pos;//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
-                        return v_temp;
-                    }
-                    else
-                    {
-                        return CalFixPosDestination(damageHappenPoint,attackerTransform_foward,attackerTransform_pos,victimT_pos, markerPos, WeaponPosAdjustMode.explosion);
-                    }
-                case WeaponPosAdjustMode.explosion:
-                    v_temp = (victimT_pos - damageHappenPoint).normalized;
-                    v_temp.y = 0;
-                    v_temp = v_temp + victimT_pos;
-                    return v_temp;
-                default:
-                    return victimT_pos;
+                v_temp = (victimT_pos - damageHappenPoint).normalized;
+                v_temp.y = 0;
+                v_temp = v_temp + victimT_pos;
+                return v_temp;
             }
+            
+            damageHappenPoint.y = 0;
+            f_temp = Vector3.Dot(damageHappenPoint - attackerTransform_pos, attackerTransform_foward);
+            if (f_temp > 0 && Vector3.Distance(attackerTransform_pos, victimT_pos) < FightGlobalSetting._attackDrawingDistance)
+            {
+                v_temp = f_temp * attackerTransform_foward + attackerTransform_pos;//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
+                return v_temp;
+            }
+            return CalFixPosDestination(damageHappenPoint, attackerTransform_foward, attackerTransform_pos, victimT_pos, DamageType.explosion);                
         }
 
         // compare two Quaternions

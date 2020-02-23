@@ -20,16 +20,13 @@ namespace dataAccess
                     info = JsonConvert.DeserializeObject<PlayerAccountInfo>(dataAsJson);
                     Debug.Log("玩家账户信息读取成功");
                 }
-                else
-                {
-                }
-                this._PlayerAccountInfo = info;
+                _PlayerAccountInfo = info;
             }
             catch (Exception e)
             {
                 Debug.Log("玩家账户信息读取失败");
                 Debug.Log(e.ToString());
-                this._PlayerAccountInfo = new PlayerAccountInfo();
+                _PlayerAccountInfo = new PlayerAccountInfo();
             }
             yield return OverrideAccountOnLocalFile();
             yield break;
@@ -37,7 +34,7 @@ namespace dataAccess
 
         public IEnumerator OverrideAccountOnLocalFile()
         {
-            OverrideLocalCustomerInfoOnLocalFile(this._PlayerAccountInfo);
+            OverrideLocalCustomerInfoOnLocalFile(_PlayerAccountInfo);
             yield break;
         }
 
@@ -46,7 +43,7 @@ namespace dataAccess
             try
             {
                 string json = JsonConvert.SerializeObject(refreshedPlayerAccountInfo);
-                LocalJson.saveInfoToJsonFile(null, "localAccountInfo.json", json);
+                LocalJson.SaveInfoToJsonFile(null, "localAccountInfo.json", json);
                 return true;
             }
             catch (Exception e)

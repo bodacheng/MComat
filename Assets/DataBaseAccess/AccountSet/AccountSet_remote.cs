@@ -25,34 +25,39 @@ namespace dataAccess
                 string response = System.Text.Encoding.UTF8.GetString(downloadHandler.data);
                 Debug.Log("login返回:" + response);
                 JsonData jsonvale = JsonMapper.ToObject(downloadHandler.text);
-                this.sessionId = jsonvale["data"]["sessionId"].ToJson();
-                this.sessionId = Regex.Replace(this.sessionId, @"[^a-zA-Z0-9\u4e00-\u9fa5\s]", "");
+                sessionId = jsonvale["data"]["sessionId"].ToJson();
+                sessionId = Regex.Replace(this.sessionId, @"[^a-zA-Z0-9\u4e00-\u9fa5\s]", "");
             }else{
                 Debug.Log("login失败.按理说应该返回大厅终止程序进行");
             }
             yield break;
         }
-        
-        private IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage) {
+
+        IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage)
+        {
 
             // ==============================
             // フォームの生成
             // ==============================
             // フォーム
-            CertificationForm form = new CertificationForm();
-            form.sessionId = this.sessionId;
+            CertificationForm form = new CertificationForm
+            {
+                sessionId = this.sessionId
+            };
 
             // ==============================
             // API送信
             // ==============================
             // 送信
             yield return ApiCaller.Instance.Post<BaseModel<GetPlayerInfoModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/player/getPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
-                 model => {
+                 model =>
+                 {
                      _PlayerAccountInfo.Coin = model.data.coinCount;
                      _PlayerAccountInfo.Diamond = model.data.diamondCount;
                  }
                 ,
-                 model => {
+                 model =>
+                 {
                      _PlayerAccountInfo.Coin = model.data.coinCount;
                      _PlayerAccountInfo.Diamond = model.data.diamondCount;
                  }

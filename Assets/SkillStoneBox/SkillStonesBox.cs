@@ -287,7 +287,9 @@ namespace mainMenu
                     continue;
                 }
                 if (_SkillConfigOfSkillStone.TYPE == type && (_SkillConfigOfSkillStone.SP_LEVEL == exType || exType == -1) && SkillConfigTable.RangeLimit(_SkillConfigOfSkillStone.ai_trigger_ranges.ToList(),close, near, far, outrange))
+                {
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
+                }
             }
 
             int cellindex = 0;
@@ -319,7 +321,7 @@ namespace mainMenu
                         ? Color.white
                         : Color.yellow;
                 }
-                CellsDictionary[i].UpdateMyItem();
+                CellsDictionary[cellindex].UpdateMyItem();
             }
             yield break;
         }

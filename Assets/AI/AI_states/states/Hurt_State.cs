@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using HittingDetection;
 using Soul;
+using DG.Tweening;
 
 public class Hurt_State : Behavior {
     float used_dizzy_time;
     float time_counter;
     Vector3 fixDesPos;
-    readonly Coroutine shaderChangeProcess;
-
     bool freezed = false;
     float TimeCounter
     {
@@ -26,7 +25,7 @@ public class Hurt_State : Behavior {
             return time_counter;
         }
     }
-
+    
     public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
@@ -36,8 +35,6 @@ public class Hurt_State : Behavior {
     public override void AI_State_enter(V_Damage newValue)
 	{
 		base.AI_State_enter();
-        _Animator.SetFloat("speed", 0f);
-        freezed = false;
         _Animator.applyRootMotion = false;
         _FightAttriCalReference.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
@@ -45,28 +42,60 @@ public class Hurt_State : Behavior {
         touchingEnemyBody = _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody;//这个奇葩设定的逻辑是，如果守击的瞬间我角色贴着敌人的肉，那么攻击给我的推力就包括一个敌人前方的力。没错这个是个简化逻辑，其他敌人摸到我的话我也受到攻击方正前推力。
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(),true,0.05f);      
         _FightAttriCalReference.PlusCriticalGauge(1);
-        switch(newValue.from_weapon.damage_type)
+        switch (newValue.from_weapon.damage_type)
         {
-                case DamageType.light_damage:
+            case DamageType.light_damage_forward:
+                freezed = false;
                 used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
+                fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position,newValue.from_weapon.damage_type);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 _FightAttriCalReference.GetKnockOffCount().PlusGauge(1f);
                 _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;
-                case DamageType.heavy_damage:
+            case DamageType.heavy_damage_forward:
+                freezed = false;
                 used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
-                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);    
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;
-                case DamageType.supper_damage:
+            case DamageType.supper_damage_forward:
+                freezed = false;
                 used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 _FightAttriCalReference.GetKnockOffCount().PlusGauge(4f);
                 _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
-                break;        
+                break;
+            case DamageType.slight_damage_forward:
+                freezed = false;
+                used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
+                break;
+            case DamageType.draw:
+                used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                Vector3 vector3 = newValue.from_weapon_marker.transform.position;
+                vector3.y = gameObject.transform.position.y;
+                gameObject.transform.DOMove(vector3,0.1f).
+                OnComplete(() =>{_Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;freezed = true; });
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
+                break;
+            case DamageType.explosion:
+                freezed = false;
+                used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
+                _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
+                break;
         }
-        fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon_marker.transform.position, newValue.from_weapon._WeaponPosAdjustMode);
-        _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
-        //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);// 第二个参数是距离除以期望速度
-        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.from_weapon.damage_type == DamageType.supper_damage)//&& newValue.damage_type == DamageType.supper_damage
+
+        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.from_weapon.damage_type == DamageType.supper_damage_forward)//&& newValue.damage_type == DamageType.supper_damage
         {
             _FightAttriCalReference.ApplyDamage(new V_Damage(newValue.from_weapon, newValue.from_weapon_marker,_FightAttriCalReference, newValue.attacker, newValue.damageHappenPoint, newValue.CutRotation));
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
@@ -81,7 +110,7 @@ public class Hurt_State : Behavior {
             _FightAttriCalReference.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
         }
     }
-    
+        
     public override void _State_FixedUpdate1()
     {
         TimeCounter += Time.fixedDeltaTime;

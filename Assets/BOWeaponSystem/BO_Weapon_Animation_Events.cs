@@ -73,19 +73,19 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             switch (heavynum)
             {
                 case -1:
-                    damageType = DamageType.slight_damage;
+                    damageType = DamageType.slight_damage_forward;
                     break;
                 case 1:
-                    damageType = DamageType.light_damage;
+                    damageType = DamageType.light_damage_forward;
                     break;
                 case 2:
-                    damageType = DamageType.heavy_damage;
+                    damageType = DamageType.heavy_damage_forward;
                     break;
                 case 3:
-                    damageType = DamageType.supper_damage;
+                    damageType = DamageType.supper_damage_forward;
                     break;
                 default:
-                    damageType = DamageType.light_damage;
+                    damageType = DamageType.light_damage_forward;
                     break;
             }
             theweapon.SetDamageType(damageType);
@@ -203,19 +203,19 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         switch (e.intParameter)
         {
 			case 0:
-                damageType = DamageType.slight_damage;
+                damageType = DamageType.slight_damage_forward;
 				break;
             case 1 :
-                damageType = DamageType.light_damage;
+                damageType = DamageType.light_damage_forward;
                 break;
             case 2:
-                damageType = DamageType.heavy_damage;
+                damageType = DamageType.heavy_damage_forward;
                 break;
 			case 3:
-                damageType = DamageType.supper_damage;
+                damageType = DamageType.supper_damage_forward;
 				break;
             default:
-                damageType = DamageType.light_damage;
+                damageType = DamageType.light_damage_forward;
                 break;
         }
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 

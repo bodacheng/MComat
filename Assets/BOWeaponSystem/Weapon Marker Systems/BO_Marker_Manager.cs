@@ -17,13 +17,9 @@ namespace HittingDetection
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
-        public DamageType damage_type = DamageType.light_damage;
+        public DamageType damage_type = DamageType.light_damage_forward;
         [Tooltip("damageTypeOfTheWeapon")]
         public WeaponMode _WeaponMode;
-        [Tooltip("击中时候靠受力调整敌人位置")]
-        public WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
-        [Tooltip("特殊施予")]
-        public SpecialApply _specialApply = SpecialApply.none;
 
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;

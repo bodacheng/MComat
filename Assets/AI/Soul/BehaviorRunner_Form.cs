@@ -36,11 +36,11 @@ namespace Soul
 
                     KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>("DangerousNearby", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair2);
-                    ConditionAndRespondPriority.Set(keyValuePair2.Key,keyValuePair2.Value,2);
+                    ConditionAndRespondPriority.Set(keyValuePair2.Key,keyValuePair2.Value,3);
 
                     KeyValuePair<string, string> keyValuePair3 = new KeyValuePair<string, string>("DangerousClose", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair3);
-                    ConditionAndRespondPriority.Set(keyValuePair3.Key, keyValuePair3.Value, 2);
+                    ConditionAndRespondPriority.Set(keyValuePair3.Key, keyValuePair3.Value, 3);
 
                     KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair4);
