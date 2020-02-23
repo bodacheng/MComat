@@ -5,27 +5,7 @@ using System.Collections.Generic;
 //武器是用来伤害敌人的，而在我们的计划是把自身受伤害这个判断放在自身这一边的客户端上决定。
 
 namespace HittingDetection
-{
-    public enum WeaponPosAdjustMode
-    {
-        pushToMidForward = 1,
-        draw = 2,
-        explosion = 3
-    }
-    
-    public enum WeaponMode
-    {
-        FlyerWeapon = 2,
-        EnergyFromBodyWeapon = 3
-    }
-    
-    public enum SpecificTarget
-    {
-        both = 0,
-        flesh = 1,
-        energy = 2
-    }
-    
+{   
     public partial class BO_Marker_Manager : MonoBehaviour
     {
         bool Enabled;

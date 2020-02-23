@@ -72,6 +72,11 @@ namespace HittingDetection
         
         public V_Damage() { }
 
+        public V_Damage(BO_Marker_Manager weapon, Marker weapon_marker)
+        {
+
+        }
+
         public V_Damage(float _AT,
                         FightAttriCalReference _victim, FightAttriCalReference _attacker,
                         DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, WeaponMode weaponMode,SpecialApply specialApply,
@@ -116,7 +121,27 @@ namespace HittingDetection
         hard_shield = 11,//强防御罩
         DeathKnockoff = 13
     }
-    
+
+    public enum WeaponPosAdjustMode
+    {
+        pushToMidForward = 1,
+        draw = 2,
+        explosion = 3
+    }
+
+    public enum WeaponMode
+    {
+        FlyerWeapon = 2,
+        EnergyFromBodyWeapon = 3
+    }
+
+    public enum SpecificTarget
+    {
+        both = 0,
+        flesh = 1,
+        energy = 2
+    }
+
     public enum SpecialApply
     {
         none = 0,
