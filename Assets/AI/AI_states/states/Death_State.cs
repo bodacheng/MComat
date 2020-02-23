@@ -9,7 +9,6 @@ public class Death_State : Behavior
     private readonly float stopRunningTime;    
     private readonly GameObject processingBlood;
     private float time_count;
-    private string KnockOffSparkPersonalEffectPath;
     Vector3 _xz;    
     bool touchedBoundary;
     bool dropped;
@@ -49,13 +48,12 @@ public class Death_State : Behavior
         _Animator.applyRootMotion = false;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
-        KnockOffSparkPersonalEffectPath = newValue.effectPath;
-        EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", KnockOffSparkPersonalEffectPath,
+        EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
                                              newValue.damageHappenPoint, gameObject.transform.rotation,
                                              _FightAttriCalReference.transform);
         touchedBoundary = false;
         dropped = false;
-        _xz = newValue.AttackerT_foward;
+        _xz = newValue.attacker._Center.WholeT.forward;
         personality_Events.CloseAllPersonalityEffects();
     }
 

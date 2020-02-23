@@ -112,7 +112,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().constraintActive = true;
             BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().locked = true;
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(BEs._TeamConfig);
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter,BEs.transform);//第二个参数是因为BE本身就在wholeT上
+            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.MarkersEnablingStarts();
         }

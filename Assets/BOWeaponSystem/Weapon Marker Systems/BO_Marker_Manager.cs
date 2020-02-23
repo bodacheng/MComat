@@ -14,32 +14,31 @@ namespace HittingDetection
         [SerializeField]
         float ActivateAfterTime;
 
+        [Tooltip("特定针对")]
+        public SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
-        [SerializeField]
-        DamageType damage_type = DamageType.light_damage;
-        
+        public DamageType damage_type = DamageType.light_damage;
         [Tooltip("damageTypeOfTheWeapon")]
         public WeaponMode _WeaponMode;
-        
         [Tooltip("击中时候靠受力调整敌人位置")]
-        [SerializeField]
-        WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
+        public WeaponPosAdjustMode _WeaponPosAdjustMode = WeaponPosAdjustMode.pushToMidForward;
+        [Tooltip("特殊施予")]
+        public SpecialApply _specialApply = SpecialApply.none;
 
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
         
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
-        
         [Tooltip("特效是否有粘身视效")]
         public bool effectSpreadOnBody;
-
-        [Tooltip("特定针对")]
-        public SpecificTarget SpecificTarget = SpecificTarget.both; 
-
-        [Tooltip("特殊施予")]
+        [Tooltip("魔法特效路径(blueMagic redMagic)")]
+        public Zokusei zokusei;
+        [Tooltip("启动特效")]
+        public string muzzle;
+        [Tooltip("特殊爆炸特效")]
         [SerializeField]
-        SpecialApply _specialApply = SpecialApply.none;
+        string ExplosionEffect = "energy_resolve";
 
         [Tooltip("A weapon can work in two ways: Manual and Continuous. Manual bases on an idea that each attack (like a sword swing) can hit each target only once - it then needs to be manualy reloaded through a function call or an Animation Event (for example by ClearTargets() - explained in the Info Bool, at the bottom of this Inspector window). This method is very precise, as you can be certain that each Target will get damage and  Hurt animation (on BS_Main_Health script) triggered only once with each swing. Manual should be used in most situations, mostly for animation-driven combat (like Dark Souls or God of War). The Continuous mode deals damage constantly, in a given time interval, giving you a constant damage-dealing weapon. It's better for VR and games with free-moving weapons (like when the Player can swing his sword by moving his mouse in any desired direction) - the downside of Continuous damage is that it takes away the precise control of the damage dealt (as each Target may be hit more than once depending on how fast the weapon is being driven around). Continuous should be used with blades which can move freely, independent from animations. [INFO:] Continuous damage is not fit for working with shields (BS_Shield script objects).")]
         [SerializeField]
@@ -48,24 +47,11 @@ namespace HittingDetection
         [SerializeField]
         float ContinuousDamageInterval = 0.2f;
 
-        [Tooltip("启动特效")]
-        public string muzzle;
-        
-        [Tooltip("特殊爆炸特效")]
-        [SerializeField]
-        string ExplosionEffect = "energy_resolve";
-        
-        [Tooltip("魔法特效路径(blueMagic redMagic)")]
-        [SerializeField]
-        Zokusei zokusei;
-        
         public int CurrentHP { get; set; }
 
         FightAttriCalReference _MyOwnerCalReference;
-        public TeamConfig teamConfig = TeamConfig.defaultSet;
-        Transform AttackerWholeTransform;
+        TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
-        Transform _MarkersParent;
         bool HitFlesh;
         bool HitShield;
         Marker[] _markers;
@@ -74,17 +60,11 @@ namespace HittingDetection
         List<Transform> _Shields_Hit = new List<Transform>();
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
-        Decompositioner processingBlood;
         bool TraditionalDefendMode;
-        string PersonalEffectPath;
         
         void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         {
-            PersonalEffectPath = FightGlobalSetting.EffectPathDefine(zokusei);
-            if (_MarkersParent == null)
-            {
-                _MarkersParent = transform;
-            }
+            Transform _MarkersParent = transform;
             Transform[] children = new Transform[_MarkersParent.childCount];
             List<BO_Marker> bms = new List<BO_Marker>();
             for (int i = 0; i < children.Length; i++)
@@ -114,10 +94,9 @@ namespace HittingDetection
             SetTeamConfig(TeamConfig.defaultSet);
         }
 
-        public void SetReferenceTransformInfo(Transform centerT ,Transform WholeT)
+        public void SetReferenceTransformInfo(Transform centerT)
         {
             _WeaponHolderCenter = centerT;
-            AttackerWholeTransform = WholeT;
         }
 
         public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
@@ -229,7 +208,7 @@ namespace HittingDetection
             if (weaponHP > 0)
             {
                 CurrentHP -= 1;
-                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, PersonalEffectPath, Pos, Qua, null);
+                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
             }
         }
 
@@ -239,42 +218,40 @@ namespace HittingDetection
             || float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z)
             || !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
         }
-
-        //AudioClip processingClip;
-        //void PlayTargetHitSound(string soundName)
-        //{
-        //    if (SoundSource == null)
-        //    {
-        //        Debug.Log("武器音效无法找到音源");
-        //        return;
-        //    }
-        //    soundEffectDic.TryGetValue(soundName.GetHashCode(),out processingClip);
-        //    if (processingClip != null)
-        //    {
-        //        SoundSource.PlayOneShot(processingClip);
-        //    }else{
-        //        Debug.Log("找不到武器音效");
-        //    }
-        //}
-
-        //void iniSoundDic(string resource_name)
-        //{
-        //    if (personalSoundResourcePath != null)
-        //    {
-        //        if ((Resources.Load(defaultSoundResourcePath + "/" + personalSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip) != null)
-        //        {
-        //            soundEffectDic.Add(new KeyValuePair<int, AudioClip>(resource_name.GetHashCode(),Resources.Load(defaultSoundResourcePath + "/" + personalSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip));
-        //            return;
-        //        }
-        //    }
-        //    if (Resources.Load(defaultSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip != null)
-        //    {
-        //        soundEffectDic.Add(new KeyValuePair<int,AudioClip>(resource_name.GetHashCode(),Resources.Load(defaultSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip));
-        //        return;
-        //    }
-        //    Debug.Log("无法找到音源：" + resource_name);
-        //}
     }
 }
+//AudioClip processingClip;
+//void PlayTargetHitSound(string soundName)
+//{
+//    if (SoundSource == null)
+//    {
+//        Debug.Log("武器音效无法找到音源");
+//        return;
+//    }
+//    soundEffectDic.TryGetValue(soundName.GetHashCode(),out processingClip);
+//    if (processingClip != null)
+//    {
+//        SoundSource.PlayOneShot(processingClip);
+//    }else{
+//        Debug.Log("找不到武器音效");
+//    }
+//}
 
+//void iniSoundDic(string resource_name)
+//{
+//    if (personalSoundResourcePath != null)
+//    {
+//        if ((Resources.Load(defaultSoundResourcePath + "/" + personalSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip) != null)
+//        {
+//            soundEffectDic.Add(new KeyValuePair<int, AudioClip>(resource_name.GetHashCode(),Resources.Load(defaultSoundResourcePath + "/" + personalSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip));
+//            return;
+//        }
+//    }
+//    if (Resources.Load(defaultSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip != null)
+//    {
+//        soundEffectDic.Add(new KeyValuePair<int,AudioClip>(resource_name.GetHashCode(),Resources.Load(defaultSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip));
+//        return;
+//    }
+//    Debug.Log("无法找到音源：" + resource_name);
+//}
 

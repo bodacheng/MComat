@@ -39,12 +39,7 @@ namespace HittingDetection
                         switch (collision.on_weapon_holder)
                         {
                             case DamageType.stagger:
-                                    V_Damage new_damage = new V_Damage(0,
-                                        _MyOwnerCalReference,TheS._ownerFightAttriCalReference,
-                                        DamageType.stagger, WeaponPosAdjustMode.explosion, this._WeaponMode,SpecialApply.none,
-                                        _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        TheS._ownerFightAttriCalReference._Center.WholeT.forward,TheS._ownerFightAttriCalReference._Center.WholeT.position,Vector3.zero,
-                                        PersonalEffectPath, this.effectSpreadOnBody);　//盾牌主人的wholeT在当前系统下获得不了，攻击的施加方是那个盾牌，不需要写fromweapon了
+                                    V_Damage new_damage = new V_Damage(this,null,_MyOwnerCalReference,TheS._ownerFightAttriCalReference, _Shields_Hit[i1].position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
                                     _MyOwnerCalReference.ApplyDamage(new_damage);
                                 break;
                             case DamageType.none:
@@ -57,32 +52,17 @@ namespace HittingDetection
                             switch (collision.on_shield_holder)
                             {
                                 case DamageType.light_block:
-                                    V_Damage new_damage = new V_Damage(0f,
-                                        TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
-                                        DamageType.light_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
-                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        AttackerWholeTransform.forward, AttackerWholeTransform.position, Vector3.zero,
-                                        PersonalEffectPath, effectSpreadOnBody);
+                                    V_Damage new_damage = new V_Damage(this,null,TheS._ownerFightAttriCalReference, _MyOwnerCalReference,_WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
                                     TheS.PlusHP(-1);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.heavy_block:
-                                        new_damage = new V_Damage(0f,
-                                        TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
-                                        DamageType.heavy_block, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
-                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        AttackerWholeTransform.forward, AttackerWholeTransform.position,Vector3.zero,
-                                        PersonalEffectPath, effectSpreadOnBody);
+                                        new_damage = new V_Damage(this, null, TheS._ownerFightAttriCalReference, _MyOwnerCalReference, _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
                                     TheS.PlusHP(-2);
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.supper_damage:
-                                        new_damage = new V_Damage(0f,
-                                        TheS._ownerFightAttriCalReference, _MyOwnerCalReference,
-                                        DamageType.supper_damage, WeaponPosAdjustMode.pushToMidForward, this._WeaponMode,SpecialApply.none,
-                                        _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position), 
-                                        AttackerWholeTransform.forward, AttackerWholeTransform.position, Vector3.zero,
-                                        PersonalEffectPath,effectSpreadOnBody);
+                                        new_damage = new V_Damage(this, null, TheS._ownerFightAttriCalReference, _MyOwnerCalReference, _WeaponHolderCenter.position, Quaternion.LookRotation(_Shields_Hit[i1].position - TheS._ShieldBackSpot.transform.position));
                                     TheS._ownerFightAttriCalReference.ApplyDamage(new_damage);
                                     break;
                                 case DamageType.none:

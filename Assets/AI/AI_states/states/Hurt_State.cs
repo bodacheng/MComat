@@ -45,7 +45,7 @@ public class Hurt_State : Behavior {
         touchingEnemyBody = _BasicPhysicSupport.hiddenMethods.meTouchingEnemyBody;//这个奇葩设定的逻辑是，如果守击的瞬间我角色贴着敌人的肉，那么攻击给我的推力就包括一个敌人前方的力。没错这个是个简化逻辑，其他敌人摸到我的话我也受到攻击方正前推力。
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(),true,0.05f);      
         _FightAttriCalReference.PlusCriticalGauge(1);
-        switch(newValue.damage_type)
+        switch(newValue.from_weapon.damage_type)
         {
                 case DamageType.light_damage:
                 used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
@@ -63,17 +63,12 @@ public class Hurt_State : Behavior {
                 _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;        
         }
-        fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.AttackerT_foward, newValue.AttackerT_pos,gameObject.transform.position, newValue.WeaponMarkerPos, newValue._WeaponPosAdjustMode);
+        fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon_marker.transform.position, newValue.from_weapon._WeaponPosAdjustMode);
         _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
         //fixpostween = _Rigidbody.DOMove(fixDesPos,Vector3.Distance(gameObject.transform.position,fixDesPos)/0.25f);// 第二个参数是距离除以期望速度
-        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.damage_type == DamageType.supper_damage)//&& newValue.damage_type == DamageType.supper_damage
+        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.from_weapon.damage_type == DamageType.supper_damage)//&& newValue.damage_type == DamageType.supper_damage
         {
-            _FightAttriCalReference.ApplyDamage(new V_Damage(0,
-                                                            _FightAttriCalReference, newValue.attacker,
-                                                            DamageType.knockOff_damage, newValue._WeaponPosAdjustMode, newValue._weaponMode,SpecialApply.none,
-                                                            newValue.damageHappenPoint, newValue.CutRotation,
-                                                            newValue.AttackerT_foward,newValue.AttackerT_pos, newValue.WeaponMarkerPos,
-                                                            newValue.effectPath,newValue.effectSpreadOnBody));
+            _FightAttriCalReference.ApplyDamage(new V_Damage(newValue.from_weapon, newValue.from_weapon_marker,_FightAttriCalReference, newValue.attacker, newValue.damageHappenPoint, newValue.CutRotation));
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
         }
         RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
@@ -81,9 +76,9 @@ public class Hurt_State : Behavior {
         personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
-        if (newValue.effectSpreadOnBody)
+        if (newValue.from_weapon.effectSpreadOnBody)
         {
-            _FightAttriCalReference.RunShaderChangeProcess(newValue.effectPath, 0.1f);
+            _FightAttriCalReference.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
         }
     }
     

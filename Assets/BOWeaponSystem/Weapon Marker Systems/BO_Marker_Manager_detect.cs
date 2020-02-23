@@ -36,8 +36,7 @@ namespace HittingDetection
                                     }
                                     if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
                                         && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
-                                        && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
-                                                                                                                         //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                        && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算 一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
                                     {
                                         if (TheS._AdvancedShieldDetection)
                                         {
@@ -137,12 +136,7 @@ namespace HittingDetection
                                     _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
                                     _StartPoint = _hits[hit_target_index].point;
                                     _StartPoint = _StartPoint + (_hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
-                                    hitsOnHealthBody.Add(new V_Damage(weaponHP <= 0 ? _MyOwnerCalReference.AT : _MyOwnerCalReference.AT / weaponHP,
-                                                                        _Raw_Target_Instance, _MyOwnerCalReference,
-                                                                        damage_type, _WeaponPosAdjustMode, _WeaponMode, _specialApply,
-                                                                        _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up),
-                                                                        AttackerWholeTransform.forward, AttackerWholeTransform.position, _markers[i].transform.position,
-                                                                        PersonalEffectPath, effectSpreadOnBody));
+                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up)));
                                     WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
@@ -283,12 +277,7 @@ namespace HittingDetection
                                                                                                                                                   // 2.
                                                                                                                                                   // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
                                                                                                                                                   // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new V_Damage(weaponHP <= 0 ? _Raw_Target_Instance.AT : _Raw_Target_Instance.AT / weaponHP,
-                                                                            _Raw_Target_Instance, _MyOwnerCalReference,
-                                                                            damage_type, _WeaponPosAdjustMode, _WeaponMode, _specialApply,
-                                                                            _StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up),
-                                                                            AttackerWholeTransform.forward, AttackerWholeTransform.position, _markers[i].transform.position,
-                                                                            PersonalEffectPath, effectSpreadOnBody));
+                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up)));
                                         WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)

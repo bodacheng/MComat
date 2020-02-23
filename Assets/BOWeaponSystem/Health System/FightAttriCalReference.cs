@@ -132,63 +132,63 @@ public partial class FightAttriCalReference : MonoBehaviour
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
             processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                                   v_Damage.effectPath,
+                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    null);
         }
         else
         {
-            switch (v_Damage.damage_type)
+            switch (v_Damage.from_weapon.damage_type)
             {
                 case DamageType.slight_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                   v_Damage.effectPath,
+                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
-                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.light_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                   v_Damage.effectPath,
+                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
-                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.heavy_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
-                                                                   v_Damage.effectPath,
+                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
-                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.supper_damage:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
-                                                                   v_Damage.effectPath,
+                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
-                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.light_block:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                   v_Damage.effectPath,
+                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                    v_Damage.damageHappenPoint,
                                                    v_Damage.CutRotation,
-                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                 break;
                 case DamageType.heavy_block:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
-                                                   v_Damage.effectPath,
+                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                    v_Damage.damageHappenPoint,
                                                    v_Damage.CutRotation,
-                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                 break;
                 default:
                     processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
-                                                                   v_Damage.effectPath,
+                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
-                                                                   v_Damage.effectSpreadOnBody ? transform : null);
+                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
             }
         }
@@ -199,14 +199,13 @@ public partial class FightAttriCalReference : MonoBehaviour
 	{
         if (_Center._MyBehaviorRunner.GetNowState().StateKey == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
         {
-            _dmg.damage_type = DamageType.heavy_block;
+            _dmg.from_weapon.damage_type = DamageType.heavy_block;
             HitEffect(_dmg);
-            _dmg.AT = 0;
             _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
             return;
         }
         
-        if (_dmg._weaponMode == WeaponMode.EnergyFromBodyWeapon)
+        if (_dmg.from_weapon._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
         {
             _dmg.attacker._Center.Animation_Manger.FrameFreeze();
         }
@@ -221,10 +220,11 @@ public partial class FightAttriCalReference : MonoBehaviour
         _dmg.attacker.HitCountPlus();
         _ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
-        
-        CurrentHp.Value -= _dmg.AT;
-        
-        switch (_dmg.specialApply)
+
+        float finalDamage = _dmg.from_weapon.weaponHP <= 0 ? _dmg.attacker.AT : _dmg.attacker.AT / _dmg.from_weapon.weaponHP;
+        CurrentHp.Value -= finalDamage;
+
+        switch (_dmg.from_weapon._specialApply)
         {
             case SpecialApply.gravitylost:
                 gravityloststart = () =>
@@ -240,11 +240,11 @@ public partial class FightAttriCalReference : MonoBehaviour
                 break;
         }
 
-        if (_dmg.AT >= CurrentHp.Value)
+        if (CurrentHp.Value <= 0)
         {
-            _dmg.damage_type = DamageType.DeathKnockoff;
+            _dmg.from_weapon.damage_type = DamageType.DeathKnockoff;
         }
-        switch(_dmg.damage_type)
+        switch(_dmg.from_weapon.damage_type)
         {
             case DamageType.slight_damage:
             break;

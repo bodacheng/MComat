@@ -56,7 +56,7 @@ public class Defend_State : Behavior
 
     void DefendHPfade(V_Damage damage)
     {
-        switch (damage.damage_type)
+        switch (damage.from_weapon.damage_type)
         {
             case DamageType.light_block:
             DefendHP -= 1;
@@ -126,11 +126,11 @@ public class Defend_State : Behavior
          //this.AI_DATA_CENTER.turnShield(true);
          
          fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
-                                    newValue.AttackerT_foward,
-                                        newValue.AttackerT_pos,
-                                            gameObject.transform.position, newValue.WeaponMarkerPos,
-                                                newValue._WeaponPosAdjustMode);
-         switch(newValue.damage_type)
+                                    newValue.attacker._Center.WholeT.forward,
+                                        newValue.attacker._Center.WholeT.position,
+                                            gameObject.transform.position, newValue.from_weapon_marker.transform.position,
+                                                newValue.from_weapon._WeaponPosAdjustMode);
+         switch(newValue.from_weapon.damage_type)
          {
             case DamageType.light_block:
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);

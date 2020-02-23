@@ -54,52 +54,24 @@ namespace HittingDetection
 
     public class V_Damage
     {
-        public float AT;
-        public DamageType damage_type;
-        public WeaponPosAdjustMode _WeaponPosAdjustMode;
-        public WeaponMode _weaponMode;
-        public SpecialApply specialApply = SpecialApply.none;
-        public Vector3 damageHappenPoint;
-        public Vector3 AttackerT_foward;
-        public Vector3 AttackerT_pos;
-        public Vector3 WeaponMarkerPos;
         public FightAttriCalReference attacker;
         public FightAttriCalReference victim;
+        public BO_Marker_Manager from_weapon;
+        public Marker from_weapon_marker;
+        public Vector3 damageHappenPoint;
         public Quaternion CutRotation;
-        
-        public bool effectSpreadOnBody;
-        public string effectPath;
-        
+
         public V_Damage() { }
-
-        public V_Damage(BO_Marker_Manager weapon, Marker weapon_marker)
+        public V_Damage(BO_Marker_Manager weapon, Marker weapon_marker, FightAttriCalReference _victim, FightAttriCalReference _attacker, Vector3 damageHappenPoint, Quaternion _CutRotation)
         {
-
-        }
-
-        public V_Damage(float _AT,
-                        FightAttriCalReference _victim, FightAttriCalReference _attacker,
-                        DamageType damage_type, WeaponPosAdjustMode _WeaponPosAdjustMode, WeaponMode weaponMode,SpecialApply specialApply,
-                        Vector3 damageHappenPoint, Quaternion _CutRotation,
-                        Vector3 AttackerT_foward, Vector3 AttackerT_pos, Vector3 WeaponMarker,
-                        string effectPath,bool _effectSpreadOnBody)
-        {
-            victim = _victim;
-            attacker = _attacker;
-            this.damage_type = damage_type;
-            this._WeaponPosAdjustMode = _WeaponPosAdjustMode;
-            this._weaponMode = weaponMode;
+            this.from_weapon = weapon;
+            this.from_weapon_marker = weapon_marker;
+            this.attacker = _attacker;
+            this.victim = _victim;
             this.damageHappenPoint = damageHappenPoint;
             CutRotation = _CutRotation;
-            this.AttackerT_foward = AttackerT_foward;
-            this.AttackerT_pos = AttackerT_pos;
-            this.WeaponMarkerPos = WeaponMarker;
-            this.effectPath = effectPath;
-            AT = _AT;
-            this.specialApply = specialApply;
-            this.effectSpreadOnBody = _effectSpreadOnBody;
         }
-        
+
         public V_Damage Clone()
         {
             return (V_Damage)MemberwiseClone();

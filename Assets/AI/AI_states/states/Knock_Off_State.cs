@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using HittingDetection;
 using Soul;
 
@@ -22,8 +21,6 @@ public class Knock_Off_State : Behavior
     }
 
     Decompositioner processingBlood;
-    string KnockOffSparkPersonalEffectPath;
-
     public override void AI_State_enter(V_Damage newValue)
     {
         base.AI_State_enter();
@@ -43,15 +40,14 @@ public class Knock_Off_State : Behavior
         _FightAttriCalReference.PlusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
-        KnockOffSparkPersonalEffectPath = newValue.effectPath;
-        superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", KnockOffSparkPersonalEffectPath, 3);
+        superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 3);
         if (superHitPool != null)
         {
             processingBlood = superHitPool.Rent();
             processingBlood.transform.position = newValue.damageHappenPoint;
             processingBlood.transform.rotation = Quaternion.identity;
         }
-        _xz = newValue.AttackerT_foward;
+        _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
     }
 
