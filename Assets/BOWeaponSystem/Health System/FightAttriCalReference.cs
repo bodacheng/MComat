@@ -213,7 +213,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         {
             _dmg.from_weapon.damage_type = DamageType.DeathKnockoff;
         }
-        
+
         if (_dmg.from_weapon.damage_type == DamageType.DeathKnockoff)
         {
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);
@@ -222,13 +222,28 @@ public partial class FightAttriCalReference : MonoBehaviour
         else if (_dmg.from_weapon.damage_type == DamageType.knockOff_damage)
         {
             _Center._MyBehaviorRunner.ChangeState("KnockOff", _dmg);
-            return;
         }else{
             _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
-        }        
+        }
+
+        _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
+            new Soul.SingleFightLog.BenefitRecord
+            {
+                plus = false //被打了，属于负面效益
+            }
+        );
     }
 
-    public void HitCountPlus() => _ComboHitCount.HitCountPlus(_BeHitCount);//打别人计数
+    public void HitCountPlus()
+    {
+        _ComboHitCount.HitCountPlus(_BeHitCount);
+        _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
+            new Soul.SingleFightLog.BenefitRecord
+            {
+                plus = true //打了别人，属于正面效益
+            }
+        );
+    }//打别人计数
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     
     // event 攻击系列。暂时不再使用

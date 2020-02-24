@@ -18,8 +18,9 @@ namespace Soul
         #region 辅助模块：控制器
         public Controller controller;
         #endregion
-        
+
         #region 运行时活参数
+        public SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> Behaviour_Dictionary = new Dictionary<string, Behavior>();
         public IDictionary<string, Behavior_Transition_Set> Behaviour_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public Behavior_Transition_Set CurrentBehaviorTransitionSet;

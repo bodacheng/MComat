@@ -50,13 +50,13 @@ public class Behavior_Transition_Set
                                     Inputs_defined enterInput,Inputs_defined exitInput,
                                     int SPMove)
     {
-        this.StateKey = _StateKey;
-        this.stateType = _attackType;
+        StateKey = _StateKey;
+        stateType = _attackType;
         this.AT = AT;
         this.can_be_cancelled_to = can_be_cancelled_to;
-        this.AI_trigger_ranges = ai_trigger_ranges;
+        AI_trigger_ranges = ai_trigger_ranges;
         this.enterInput = enterInput;
         this.exitInput = exitInput;
-        this.SPLevel = SPMove;
+        SPLevel = SPMove;
     }
 }

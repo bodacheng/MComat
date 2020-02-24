@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using dataAccess;
@@ -265,7 +265,8 @@ namespace mainMenu
                 }
                 if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
                 {
-                    IEnumerator getAllStones()
+                    Directory.Delete(Application.persistentDataPath + "/" + "MySkillStones.json");
+                    IEnumerator GetAllStones()
                     {
                         yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
                         int i = 1;
@@ -274,7 +275,7 @@ namespace mainMenu
                             Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
                             var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
                             {
-                                skillStoneOfPlayerId = String.Format("{0:D20}", i),
+                                skillStoneOfPlayerId = string.Format("{0:D20}", i),
                                 skillId = _pair.Value.RECORD_ID
                             };
                             yield return SkillStonesBox.Instance.GenerateOneStone(skillStoneOfPlayerInfoModel);
@@ -283,7 +284,7 @@ namespace mainMenu
                         MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
                         yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
                     }
-                    mainProcessRunner.TriggerMainProcess(getAllStones());
+                    mainProcessRunner.TriggerMainProcess(GetAllStones());
                 }
             }
         }

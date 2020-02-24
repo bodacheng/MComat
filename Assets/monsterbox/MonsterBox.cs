@@ -14,7 +14,7 @@ namespace mainMenu
     
         [Space(7)]
         [Header("monsterboxFilter")]
-        public monsterboxFilter _monsterboxFilter;
+        public MonsterboxFilter _monsterboxFilter;
 
         [Space(7)]
         [Header("角色属性框")]

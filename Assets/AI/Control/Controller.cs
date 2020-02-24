@@ -10,9 +10,8 @@ namespace Soul
 {
     public class Controller : MonoBehaviour
     {
-        readonly List<Behavior_Transition_Set> finalDecisions = new List<Behavior_Transition_Set>();
         readonly SSIMultiDictionary Triggerd = new SSIMultiDictionary();
-                
+
         public void PlayerControll(BehaviorRunner behaviorRunner, List<Behavior_Transition_Set> Options, bool AI_Active)
         {
             if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
@@ -33,6 +32,14 @@ namespace Soul
                             if (MobileInputsManager.attack)
                             {
                                 MobileInputsManager.SkillButtonExplosion(Options[i].enterInput, Options[i].SPLevel);
+                                behaviorRunner.SingleFightLog.WriteLog(
+                                    new SingleFightLog.BehaviourFightRecord
+                                    {
+                                        AI_Decided = false,
+                                        stateKey = Options[i].StateKey,
+                                        whyIDidThis = null
+                                    }
+                                );
                                 behaviorRunner.ChangeState(Options[i].StateKey);
                                 return;
                             }
@@ -41,6 +48,14 @@ namespace Soul
                             if (MobileInputsManager.fire1)
                             {
                                 MobileInputsManager.SkillButtonExplosion(Options[i].enterInput, Options[i].SPLevel);
+                                behaviorRunner.SingleFightLog.WriteLog(
+                                    new SingleFightLog.BehaviourFightRecord
+                                    {
+                                        AI_Decided = false,
+                                        stateKey = Options[i].StateKey,
+                                        whyIDidThis = null
+                                    }
+                                );
                                 behaviorRunner.ChangeState(Options[i].StateKey);
                                 return;
                             }
@@ -49,6 +64,14 @@ namespace Soul
                             if (MobileInputsManager.fire2)
                             {
                                 MobileInputsManager.SkillButtonExplosion(Options[i].enterInput, Options[i].SPLevel);
+                                behaviorRunner.SingleFightLog.WriteLog(
+                                    new SingleFightLog.BehaviourFightRecord
+                                    {
+                                        AI_Decided = false,
+                                        stateKey = Options[i].StateKey,
+                                        whyIDidThis = null
+                                    }
+                                );
                                 behaviorRunner.ChangeState(Options[i].StateKey);
                                 return;
                             }
@@ -56,6 +79,14 @@ namespace Soul
                         case Inputs_defined.Acc:
                             if (MobileInputsManager.acc)
                             {
+                                behaviorRunner.SingleFightLog.WriteLog(
+                                    new SingleFightLog.BehaviourFightRecord
+                                    {
+                                        AI_Decided = false,
+                                        stateKey = Options[i].StateKey,
+                                        whyIDidThis = null
+                                    }
+                                );
                                 behaviorRunner.ChangeState(Options[i].StateKey);
                                 return;
                             }
@@ -63,6 +94,14 @@ namespace Soul
                         case Inputs_defined.Defend:
                             if (MobileInputsManager.defendButtonHover)
                             {
+                                behaviorRunner.SingleFightLog.WriteLog(
+                                    new SingleFightLog.BehaviourFightRecord
+                                    {
+                                        AI_Decided = false,
+                                        stateKey = Options[i].StateKey,
+                                        whyIDidThis = null
+                                    }
+                                );
                                 behaviorRunner.ChangeState(Options[i].StateKey);
                                 return;
                             }
@@ -82,10 +121,18 @@ namespace Soul
                 }
                 #endregion
             }
-            
+
             #region 当前状态可自然退出了却没有任何后续行为被触发的话，回复起始状态
             if (behaviorRunner.GetNowState().Capacity_Exit_Condition())
             {
+                behaviorRunner.SingleFightLog.WriteLog(
+                    new SingleFightLog.BehaviourFightRecord
+                    {
+                        AI_Decided = false,
+                        stateKey = behaviorRunner.commandWaitingState.StateKey,
+                        whyIDidThis = "Reset"
+                    }
+                );
                 behaviorRunner.ChangeToWaitingState();
             }
             #endregion
@@ -106,9 +153,10 @@ namespace Soul
         readonly List<string> allAvaliableKeyCodes = new List<string>();
         string Condition, BehaviourCode;
         Behavior temp;
+        List<KeyValuePair<string, string>> minkeys;
+        List<KeyValuePair<string, string>> finalConditionStakeKeySet = new List<KeyValuePair<string, string>>();
         bool AI_RUNs(BehaviorRunner behaviorRunner,List<Behavior_Transition_Set> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
         {
-            finalDecisions.Clear();
             Triggerd.main.Clear();
             allAvaliableKeyCodes.Clear();
             for (int i = 0; i < avaliable_casual_Transitions.Count; i++)
@@ -137,23 +185,26 @@ namespace Soul
             
             if (Triggerd.main.values.Count > 0)
             {
-                List<KeyValuePair<string, string>> minkeys = Triggerd.GiveOutMin();
+                minkeys = Triggerd.GiveOutMin();
                 for (int x = 0; x < minkeys.Count; x++)
                 {
-                    finalDecisions.Add(behaviorRunner.Behaviour_Transition_Dictionary[minkeys[x].Value]); // Debug.Log("AI甄选的最佳决定："+minkeys[x].Value);
+                    finalConditionStakeKeySet.Add(minkeys[x]);
                 }
-                if (finalDecisions.Count > 0)
+                if (finalConditionStakeKeySet.Count > 0)
                 {
-                    //Debug.Log("---------------");
-                    //for (int i = 0; i < finalDecisions.Count; i++)
-                    //{
-                    //    Debug.Log("we here"+ finalDecisions[i].StateKey);
-                    //}
-                    //Debug.Log("---------------");
-                    int random = Random.Range(0,finalDecisions.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
+                    int random = Random.Range(0, finalConditionStakeKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
+                    Behavior_Transition_Set behavior_Transition_Set = behaviorRunner.Behaviour_Transition_Dictionary[minkeys[random].Value];
                     if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
-                        MobileInputsManager.SkillButtonExplosion(finalDecisions[random].enterInput, finalDecisions[random].SPLevel);
-                    behaviorRunner.ChangeState(finalDecisions[random].StateKey);
+                        MobileInputsManager.SkillButtonExplosion(behavior_Transition_Set.enterInput, behavior_Transition_Set.SPLevel);
+                    behaviorRunner.SingleFightLog.WriteLog(
+                        new SingleFightLog.BehaviourFightRecord
+                        {
+                            AI_Decided = true,
+                            stateKey = behavior_Transition_Set.StateKey,
+                            whyIDidThis = finalConditionStakeKeySet[random].Key
+                        }
+                    );
+                    behaviorRunner.ChangeState(behavior_Transition_Set.StateKey);
                     return true;
                 }
             }

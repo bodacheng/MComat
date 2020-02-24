@@ -7,10 +7,10 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         public IDictionary<string, List<string>> ConditionAndRespond = new Dictionary<string, List<string>>();
+        public MultiDictionary<string, string, int> ConditionAndRespondPriority = new MultiDictionary<string, string, int>();
         public IDictionary<string, string> BehaviourAndStrategicExitCondition = new Dictionary<string, string>();
         public List<string> AllConditionCodes;
-        public MultiDictionary<string, string, int> ConditionAndRespondPriority = new MultiDictionary<string, string, int>();
-        
+
         void RegisterConditionToRespond(KeyValuePair<string, string> ConditionAndBeheviourcode)//string target_beheviour,string condition_code
         {
             if (ConditionAndRespond.ContainsKey(ConditionAndBeheviourcode.Key))

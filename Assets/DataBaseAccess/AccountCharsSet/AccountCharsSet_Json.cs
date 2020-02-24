@@ -108,35 +108,50 @@ namespace dataAccess
 
         public IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
         {
-            List<int> currentLocalIDList = new List<int>();
+            List<int> CurrentLocalIDList = new List<int>();
             foreach (KeyValuePair<string, MonsterOfPlayerListModel> one in AccountCharacterInfoListObjectsDictionary)
             {
-                if (!currentLocalIDList.Contains(int.Parse(one.Value.monsterOfPlayerId)))
-                    currentLocalIDList.Add(int.Parse(one.Value.monsterOfPlayerId));
+                if (!CurrentLocalIDList.Contains(int.Parse(one.Value.monsterOfPlayerId)))
+                {
+                    CurrentLocalIDList.Add(int.Parse(one.Value.monsterOfPlayerId));
+                }
                 else
+                {
                     Debug.Log("本地存档有重复的monsterOfPlayerId：" + int.Parse(one.Value.monsterOfPlayerId));
+                }
             }
-            currentLocalIDList.Sort(Instance.IntCompare);
-            MonsterOfPlayerListModel accountCharacterInfoListObject = new MonsterOfPlayerListModel
+            CurrentLocalIDList.Sort(Instance.IntCompare);
+            MonsterOfPlayerListModel AccountCharacterInfoListObject = new MonsterOfPlayerListModel
             {
                 monsterId = _accountCharacterInfo.monsterId
             };
 
-            if (currentLocalIDList.Contains(int.Parse(_accountCharacterInfo.monsterOfPlayerId)))
+            if (CurrentLocalIDList.Contains(int.Parse(_accountCharacterInfo.monsterOfPlayerId)))
+            {
                 Debug.Log("本地存档产生角色信息覆盖行为，宠物的monsterOfPlayerId" + _accountCharacterInfo.monsterOfPlayerId + "但追加仍然继续");
+            }
 
-            accountCharacterInfoListObject.monsterOfPlayerId = _accountCharacterInfo.monsterOfPlayerId;
-            if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(accountCharacterInfoListObject.monsterOfPlayerId))
-                AccountCharacterInfoListObjectsDictionary.Add(accountCharacterInfoListObject.monsterOfPlayerId, accountCharacterInfoListObject);
+            AccountCharacterInfoListObject.monsterOfPlayerId = _accountCharacterInfo.monsterOfPlayerId;
+            if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(AccountCharacterInfoListObject.monsterOfPlayerId))
+            {
+                AccountCharacterInfoListObjectsDictionary.Add(AccountCharacterInfoListObject.monsterOfPlayerId, AccountCharacterInfoListObject);
+            }
             else
-                AccountCharacterInfoListObjectsDictionary[accountCharacterInfoListObject.monsterOfPlayerId] = accountCharacterInfoListObject;
-            if (!AccountCharacterInfoDictionary.ContainsKey(accountCharacterInfoListObject.monsterOfPlayerId))
-                AccountCharacterInfoDictionary.Add(accountCharacterInfoListObject.monsterOfPlayerId, _accountCharacterInfo);
+            {
+                AccountCharacterInfoListObjectsDictionary[AccountCharacterInfoListObject.monsterOfPlayerId] = AccountCharacterInfoListObject;
+            }
+
+            if (!AccountCharacterInfoDictionary.ContainsKey(AccountCharacterInfoListObject.monsterOfPlayerId))
+            {
+                AccountCharacterInfoDictionary.Add(AccountCharacterInfoListObject.monsterOfPlayerId, _accountCharacterInfo);
+            }
             else
-                AccountCharacterInfoDictionary[accountCharacterInfoListObject.monsterOfPlayerId] = _accountCharacterInfo;
+            {
+                AccountCharacterInfoDictionary[AccountCharacterInfoListObject.monsterOfPlayerId] = _accountCharacterInfo;
+            }
 
             string json = JsonConvert.SerializeObject(_accountCharacterInfo);
-            LocalJson.SaveInfoToJsonFile("AccountCharacterInfos", accountCharacterInfoListObject.monsterOfPlayerId + ".json", json);
+            LocalJson.SaveInfoToJsonFile("AccountCharacterInfos", AccountCharacterInfoListObject.monsterOfPlayerId + ".json", json);
             yield return _accountCharacterInfo;
         }
 

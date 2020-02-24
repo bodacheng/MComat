@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class monsterboxFilter : MonoBehaviour
+public class MonsterboxFilter : MonoBehaviour
 {
     //public LoadingCanvas loadingCanvas;
     public Toggle byzokusei;
