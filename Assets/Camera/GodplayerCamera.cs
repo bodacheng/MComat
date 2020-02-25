@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 class GodplayerCamera : CameraMode
 {
@@ -22,12 +20,12 @@ class GodplayerCamera : CameraMode
     Vector3 center;
     public override void LocalUpdate(Camera _camera)
     {
-        if (this.targets == null)
+        if (targets == null)
         {
             //Debug.Log ("GOdPlayer观看模式无目标");
             return;
         }
-        if (this.targets.Count == 0)
+        if (targets.Count == 0)
         {
             //Debug.Log ("GOdPlayer观看模式无目标");
             return;

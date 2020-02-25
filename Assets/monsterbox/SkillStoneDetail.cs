@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Api.Dto.Model;
 using dataAccess;
 using System.Collections;
+using Soul;
 
 namespace mainMenu
 {
@@ -110,7 +111,7 @@ namespace mainMenu
         public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone, string skillStoneOfPlayerId)
         {
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
-            Showname.text = _SkillConfigOfSkillStone.SHOW_NAME;
+            Showname.text = _SkillConfigOfSkillStone.RECORD_ID;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.ai_trigger_ranges);
             currentstone = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);

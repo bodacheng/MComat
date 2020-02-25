@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Soul;
 
 [System.Serializable]
 public class Behavior_Transition_Set

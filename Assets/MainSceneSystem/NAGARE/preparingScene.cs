@@ -87,7 +87,6 @@ namespace mainMenu
         void Awake()
         {
             Instance = this;
-            Screen.SetResolution(1920, 1080, true);
         }
         
         void Start()
@@ -265,7 +264,10 @@ namespace mainMenu
                 }
                 if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
                 {
-                    Directory.Delete(Application.persistentDataPath + "/" + "MySkillStones.json");
+                    if (Directory.Exists(Application.persistentDataPath) && File.Exists(Application.persistentDataPath + "/MySkillStones.json"))
+                    {
+                        File.Delete(Application.persistentDataPath + "/MySkillStones.json");
+                    }
                     IEnumerator GetAllStones()
                     {
                         yield return SkillConfigTable.Instance.LoadAllSkillConfigs();

@@ -2,6 +2,7 @@
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using Soul;
 
 [Serializable]
 public class CharacterResourceInfo

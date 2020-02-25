@@ -899,7 +899,7 @@
       <HintPath>C:/Users/bodacheng/Documents/Win_Work/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/bodacheng/Documents/Win_Work/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:/Users/bodacheng/Documents/Win_Work/Assets/JsonSupport/JsonDotNet/Assemblies/Windows/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="POFX_Runtime">
       <HintPath>C:/Users/bodacheng/Documents/Win_Work/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>

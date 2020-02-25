@@ -248,8 +248,7 @@ public class Sensor : MonoBehaviour {
         {
             if (hit != null)
             {
-                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) ||
-                    _TeamConfig.enemyShieldLayerMask == (_TeamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer)))
+                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) || _TeamConfig.enemyShieldLayerMask == (_TeamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer)))
                 {
                     farEnemies.Add(hit);
                 }
@@ -258,6 +257,31 @@ public class Sensor : MonoBehaviour {
                     OutterDamagingWeapon.Add(hit);
                 }
             }
+        }
+
+        for (int i = 0; i < farEnemies.Count; i++)
+        {
+            if (farEnemies[i] != null)
+            {
+                //_ClosestPointOnBounds = outterEnemies[i].ClosestPointOnBounds(transform.position);
+                float dis = Vector3.Distance(farEnemies[i].transform.position, gameObject.transform.position);
+                if (dis <= sensor_radius*2/3 && dis > sensor_radius*1/3)
+                {
+                    midEnemies.Add(farEnemies[i]);
+                }
+                if (dis <= sensor_radius * 1 / 3)
+                {
+                    innerEnemies.Add(farEnemies[i]);
+                }
+            }
+        }
+        for (int i = 0; i < innerEnemies.Count; i++)
+        {
+            farEnemies.Remove(innerEnemies[i]);
+        }
+        for (int i = 0; i < midEnemies.Count; i++)
+        {
+            farEnemies.Remove(midEnemies[i]);
         }
 
         if (OutterDamagingWeapon.Count > 1)
@@ -269,29 +293,6 @@ public class Sensor : MonoBehaviour {
                 OutterDamagingWeapon.Remove(tempCForNearest);
                 OutterDamagingWeapon.Insert(0, tempCForNearest);
             }
-        }
-        
-        for (int i = 0; i < farEnemies.Count; i++)
-        {
-            if (farEnemies[i] != null)
-            {
-                //_ClosestPointOnBounds = outterEnemies[i].ClosestPointOnBounds(transform.position);
-                float dis = Vector3.Distance(farEnemies[i].transform.position, gameObject.transform.position);
-                if (dis <= sensor_radius*2/3 && dis > sensor_radius*1/3)
-                    midEnemies.Add(farEnemies[i]);
-                if (dis <= sensor_radius * 1 / 3)
-                    innerEnemies.Add(farEnemies[i]);
-            }
-        }
-        
-        for (int i = 0; i < innerEnemies.Count; i++)
-        {
-            farEnemies.Remove(innerEnemies[i]);
-        }
-
-        for (int i = 0; i < midEnemies.Count; i++)
-        {
-            farEnemies.Remove(midEnemies[i]);
         }
 
         for (int i = 0; i < OutterDamagingWeapon.Count; i++)

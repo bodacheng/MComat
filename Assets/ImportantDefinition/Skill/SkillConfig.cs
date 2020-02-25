@@ -1,4 +1,6 @@
-﻿[System.Serializable]
+﻿using Soul;
+
+[System.Serializable]
 public enum BehaviorType
 {
     NONE = 0,

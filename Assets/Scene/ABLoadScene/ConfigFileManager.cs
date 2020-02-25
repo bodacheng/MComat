@@ -2,6 +2,7 @@
 using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
+using Soul;
 
 // 功能：
 // 1.读取所有攻击类型文件进行配置文件生成。
