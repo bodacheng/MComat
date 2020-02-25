@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Soul;
+using Skill;
 
 public class MobileInputsManager : MonoBehaviour {
 

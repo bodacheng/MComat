@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using Skill;
 
 namespace Soul
 {

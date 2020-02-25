@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Soul;
+using Skill;
 
 public class MonstersConfigTable
 {

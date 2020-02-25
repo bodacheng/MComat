@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using Soul;
+using Skill;
 
 [CustomEditor(typeof(BehaviorRunner))]
 public class BehaviorRunnerGUI : Editor {

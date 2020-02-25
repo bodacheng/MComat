@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
+using Skill;
 
 //这个模块应该具备能力去读取一个角色的九宫信息。
 namespace mainMenu

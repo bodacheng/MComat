@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Soul;
+using Skill;
 
 //记住我们AI系统的机制是这样：在任何时候，如果之前的状态已经可以退出，那么进入的是一个所有状态之间抽签的环节。
 //比方说一个角色现在和一个敌人处于近距离，他技能组中所有的近距离攻击的absolutely rate总和与move状态的比例可能是体现出他攻击性的关键。
@@ -300,7 +301,7 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
     }
 }
 
-namespace Soul
+namespace Skill
 {
     public enum MoveType
     {

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using Api.Dto.Model;
+using Skill;
 
 namespace dataAccess
 {

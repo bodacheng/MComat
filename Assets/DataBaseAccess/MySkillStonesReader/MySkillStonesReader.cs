@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using mainMenu;
 using Api.Dto.Model;
+using Skill;
 
 // 配置文件属于资源信息，不是账户信息，应该分离开处理。
 namespace dataAccess

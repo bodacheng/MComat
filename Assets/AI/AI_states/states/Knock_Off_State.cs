@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HittingDetection;
 using Soul;
+using Skill;
 
 public class Knock_Off_State : Behavior
 {

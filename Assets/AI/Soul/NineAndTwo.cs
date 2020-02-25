@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Soul;
+using Skill;
 
 // 这个模块也将扮演数据库和AI模块接口的作用。
 // 玩家存档中的各个角色信息最后会转化出这样一个类的实例。从而很重要一点————要看明白哪些信息是能保存数据库的。

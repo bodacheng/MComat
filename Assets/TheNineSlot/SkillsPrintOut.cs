@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Soul;
+using Skill;
 //using VRM;
 
 namespace mainMenu

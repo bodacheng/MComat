@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HittingDetection;
 using Soul;
+using Skill;
 
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
 public class Death_State : Behavior

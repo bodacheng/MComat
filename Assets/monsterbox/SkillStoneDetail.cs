@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Api.Dto.Model;
 using dataAccess;
 using System.Collections;
-using Soul;
+using Skill;
 
 namespace mainMenu
 {
