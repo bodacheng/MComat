@@ -17,11 +17,10 @@ public class Sensor : MonoBehaviour {
     int DetectionResultLastFrame;
     bool continuousDetection;
 
-    List<Collider> innerEnemies = new List<Collider>();
-    List<Collider> midEnemies = new List<Collider>();
-    List<Collider> farEnemies = new List<Collider>();
+    List<Collider> detectedEnemies = new List<Collider>();
     List<Collider> OutterDamagingWeapon = new List<Collider>();
     List<Collider> NearbyDamagingWeapon = new List<Collider>();
+    Collider nearestCollider;
 
     Data_Center SelfDataCenter;
 
@@ -41,21 +40,6 @@ public class Sensor : MonoBehaviour {
         SelfDataCenter = _self;
     }
 
-    public List<Collider> GetInnerEnemiesColliders()
-    {
-        //innerEnemies.RemoveAll(item => item == null);
-        return innerEnemies;
-    }
-    public List<Collider> GetMidEnemiesColliders()
-    {
-        //innerEnemies.RemoveAll(item => item == null);
-        return midEnemies;
-    }
-    public List<Collider> GetFarEnemiesColliders()
-    {
-        //outterEnemies.RemoveAll(item => item == null);
-        return farEnemies;
-    }
     public List<Collider> GetNearbyDamagingWeaponColliders()
     {
         //NearbyDamagingWeapon.RemoveAll(item => item == null);
@@ -65,17 +49,23 @@ public class Sensor : MonoBehaviour {
     {
         return OutterDamagingWeapon;
     }
-    
-    public Collider GetClosestColliderInSensorRange(bool near,bool mid,bool far)
+
+    public Collider GetTargetRangeEnemyCollider(float min,float max)
     {
-        return near && innerEnemies.Count > 0 ? 
-            FindNearestCollider(innerEnemies) 
-            : 
-            (mid && midEnemies.Count > 0 ? 
-                FindNearestCollider(midEnemies) 
-                : 
-                (far && farEnemies.Count > 0 ? 
-                    FindNearestCollider(farEnemies) : null));
+        for (int i = 0; i < detectedEnemies.Count; i++)
+        {
+            float to_me = Vector3.Distance(transform.position, detectedEnemies[i].transform.position);
+            if (to_me >= min && to_me <= max)
+            {
+                return detectedEnemies[i];
+            }
+        }
+        return null;
+    }
+    
+    public Collider GetClosestEnemyColliderInSensorRange()
+    {
+        return nearestCollider;
     }
 
     public void SensorFixedUpdate()
@@ -87,6 +77,7 @@ public class Sensor : MonoBehaviour {
                 SensorDetectionResultClearProcess();
                 SensorDetectProcess();//检测
                 SensorDetectionResultSortProcess();//整理
+                SphereCastSortProcess();
             }
             if (DetectionInterval > DetectionResultLastFrame)
             {
@@ -122,6 +113,7 @@ public class Sensor : MonoBehaviour {
         SensorDetectionResultClearProcess();
         SensorDetectProcess();//检测
         SensorDetectionResultSortProcess();//整理
+        SphereCastSortProcess();
 
         continuousDetection = true;
         DetectionResultLastFrame = _DetectionResultLastFrame;
@@ -134,6 +126,7 @@ public class Sensor : MonoBehaviour {
         SensorDetectionResultClearProcess();
         SensorDetectProcess();//检测
         SensorDetectionResultSortProcess();//整理
+        SphereCastSortProcess();
 
         continuousDetection = false;
         DetectionResultLastFrame = _DetectionResultLastFrame;
@@ -157,14 +150,12 @@ public class Sensor : MonoBehaviour {
     public void SensorDetectProcess()
     {
         _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(transform.position,1f,SelfDataCenter.WholeT.forward,sensor_radius,meAndEnemyLayermask, QueryTriggerInteraction.Collide);
+        _spherecastHits = Physics.SphereCastAll(transform.position,1f,SelfDataCenter.WholeT.forward, sensor_radius, meAndEnemyLayermask, QueryTriggerInteraction.Collide);
     }
 
     public void SensorDetectionResultClearProcess()
     {
-        farEnemies.Clear();
-        innerEnemies.Clear();
-        midEnemies.Clear();
+        detectedEnemies.Clear();
         OutterDamagingWeapon.Clear();
         NearbyDamagingWeapon.Clear();
     }
@@ -236,7 +227,49 @@ public class Sensor : MonoBehaviour {
         return target_list;
     }
 
-    Vector3 _ClosestPointOnBounds;
+    public void SphereCastSortProcess()
+    {
+        if (_spherecastHits == null)
+            return;
+
+        float matetome = sensor_radius, enemytome = sensor_radius;
+        foreach (RaycastHit raycastHit in _spherecastHits)
+        {
+            if (FightAttriCalReference.AllMeatColliders.Contains(raycastHit.collider))
+            {
+                if (_TeamConfig.myTeamLayerMask == (_TeamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
+                {
+                    if (!SelfDataCenter._FightAttriCalReference.IfMyBody(raycastHit.collider))
+                    {
+                        float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
+                        if (to_me < matetome)
+                        {
+                            jiamateammate = raycastHit.collider;
+                            matetome = to_me;
+                        }
+                    }
+                }
+                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << raycastHit.collider.gameObject.layer)))
+                {
+                    float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
+                    if (to_me < enemytome)
+                    {
+                        nearestenemy = raycastHit.collider;
+                        enemytome = to_me;
+                    }
+                }
+            }
+        }
+
+        if (jiamateammate != null && nearestenemy != null)
+        {
+            if (Vector3.Distance(transform.position, jiamateammate.transform.position) < Vector3.Distance(transform.position, nearestenemy.transform.position))
+                return;//意思就是说让jiamateammate和nearestenemy不为空
+        }
+        jiamateammate = null;
+        nearestenemy = null;
+    }
+
     Collider tempCForNearest;
     public void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
     {
@@ -250,7 +283,7 @@ public class Sensor : MonoBehaviour {
             {
                 if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) || _TeamConfig.enemyShieldLayerMask == (_TeamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer)))
                 {
-                    farEnemies.Add(hit);
+                    detectedEnemies.Add(hit);
                 }
                 if (_TeamConfig.enemyWeaponLayerMask == (_TeamConfig.enemyWeaponLayerMask | (1 << hit.gameObject.layer)))
                 {
@@ -259,30 +292,7 @@ public class Sensor : MonoBehaviour {
             }
         }
 
-        for (int i = 0; i < farEnemies.Count; i++)
-        {
-            if (farEnemies[i] != null)
-            {
-                //_ClosestPointOnBounds = outterEnemies[i].ClosestPointOnBounds(transform.position);
-                float dis = Vector3.Distance(farEnemies[i].transform.position, gameObject.transform.position);
-                if (dis <= sensor_radius*2/3 && dis > sensor_radius*1/3)
-                {
-                    midEnemies.Add(farEnemies[i]);
-                }
-                if (dis <= sensor_radius * 1 / 3)
-                {
-                    innerEnemies.Add(farEnemies[i]);
-                }
-            }
-        }
-        for (int i = 0; i < innerEnemies.Count; i++)
-        {
-            farEnemies.Remove(innerEnemies[i]);
-        }
-        for (int i = 0; i < midEnemies.Count; i++)
-        {
-            farEnemies.Remove(midEnemies[i]);
-        }
+        nearestCollider = FindNearestCollider(detectedEnemies);
 
         if (OutterDamagingWeapon.Count > 1)
         {
@@ -310,46 +320,6 @@ public class Sensor : MonoBehaviour {
         {
             OutterDamagingWeapon.Remove(NearbyDamagingWeapon[i]);
         }
-
-        if (_spherecastHits == null)
-            return;
-
-        float matetome = sensor_radius, enemytome = sensor_radius;
-        foreach (RaycastHit raycastHit in _spherecastHits)
-        {
-            if (FightAttriCalReference.AllMeatColliders.Contains(raycastHit.collider))
-            {
-                if (_TeamConfig.myTeamLayerMask == (_TeamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
-                {
-                    if (!SelfDataCenter._FightAttriCalReference.IfMyBody(raycastHit.collider))
-                    {
-                        float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
-                        if (to_me < matetome)
-                        {
-                            jiamateammate = raycastHit.collider;
-                            matetome = to_me;
-                        }
-                    }
-                }               
-                if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << raycastHit.collider.gameObject.layer)) )
-                {
-                    float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
-                    if (to_me < enemytome)
-                    {
-                        nearestenemy = raycastHit.collider;
-                        enemytome = to_me;
-                    }
-                }
-            }       
-        }
-        
-        if (jiamateammate != null && nearestenemy != null)
-        {
-            if (Vector3.Distance(transform.position,jiamateammate.transform.position) < Vector3.Distance(transform.position,nearestenemy.transform.position))
-                return;//意思就是说让jiamateammate和nearestenemy不为空
-        }
-        jiamateammate = null;
-        nearestenemy = null;
     }
 
     float p1_to_me, p2_to_me;
@@ -364,6 +334,7 @@ public class Sensor : MonoBehaviour {
         return p1_to_me > p2_to_me ? 1 : p1_to_me < p2_to_me ? -1 : 0;
     }
 
+    Collider target;
     Collider FindNearestCollider(List<Collider> list)
     {
         if (list == null || list.Count == 0)
@@ -376,7 +347,7 @@ public class Sensor : MonoBehaviour {
         if (list.Count == 1)
             return list[0];
 
-        Collider target = list[0];
+        target = list[0];
         for (int i = 1; i < list.Count; i++)
         {
             if (list[i] == null)

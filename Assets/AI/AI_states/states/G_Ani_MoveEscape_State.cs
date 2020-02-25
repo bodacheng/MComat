@@ -73,19 +73,17 @@ public class G_Ani_MoveEscape_State : Behavior {
                     break;
             }
         }else{
-            if (Sensor.GetInnerEnemiesColliders().Count > 0)
+            Collider collider = Sensor.GetClosestEnemyColliderInSensorRange();
+            if (collider != null)
+                facedirection = - gameObject.transform.position + collider.transform.position;
+            switch (Random.Range(0, 2))
             {
-                if (Sensor.GetInnerEnemiesColliders()[0] != null)
-                    facedirection = - gameObject.transform.position + Sensor.GetInnerEnemiesColliders()[0].transform.position;
-                switch (Random.Range(0, 2))
-                {
-                    case 0:
-                        facedirection = Quaternion.Euler(0, -90, 0) * facedirection;
-                        break;
-                    case 1:
-                        facedirection = Quaternion.Euler(0, 90, 0) * facedirection;
-                        break;
-                }
+                case 0:
+                    facedirection = Quaternion.Euler(0, -90, 0) * facedirection;
+                    break;
+                case 1:
+                    facedirection = Quaternion.Euler(0, 90, 0) * facedirection;
+                    break;
             }
         }
         RotateToTarget_Tween(gameObject.transform.position + facedirection, 0.01f, true);

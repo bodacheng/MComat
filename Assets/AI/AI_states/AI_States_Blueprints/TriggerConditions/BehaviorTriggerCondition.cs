@@ -24,17 +24,13 @@ namespace Soul
 
         public bool DangerousNearButEnemyFar()
         {
-            nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
-            farenemymeat = Sensor.GetFarEnemiesColliders();
-            midenemymeat = Sensor.GetMidEnemiesColliders();
+            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
             damagingweaponList = Sensor.GetOutterDamagingWeaponColliders();
-            return nearbyenemymeat.Count == 0 && damagingweaponList.Count > 0 && (farenemymeat.Count > 0 && midenemymeat.Count > 0);
+            return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position,this._DATA_CENTER.WholeT.position) > 10f) && damagingweaponList.Count > 0;
         }
         
         List<Collider> damagingweaponList;
-        List<Collider> nearbyenemymeat;
-        List<Collider> farenemymeat;
-        List<Collider> midenemymeat;
+        Collider nearestEnemyMeat;
         public bool DangerousVeryClose() //Defend_State 1 
         {
             if (_ResistanceManager.Resistance.Value > 0)
@@ -46,68 +42,50 @@ namespace Soul
                 return true;
             }
             damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
-            nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
-            if (nearbyenemymeat.Count == 0)
+            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
+
+            if (nearestEnemyMeat != null)
             {
                 if (damagingweaponList.Count > 0)
                 {
-                    return true;
-                }
-            }
-            else{
-                if (damagingweaponList.Count > 0)
-                {
-                    if (Vector3.Distance(nearbyenemymeat[0].transform.position, _DATA_CENTER.geometryCenter.position) >
+                    if (Vector3.Distance(nearestEnemyMeat.transform.position, _DATA_CENTER.geometryCenter.position) >
                         Vector3.Distance(damagingweaponList[0].transform.position, _DATA_CENTER.geometryCenter.position))
                     {
                         return true;
                     }
                 }
             }
+            else
+            {
+                if (damagingweaponList.Count > 0)
+                    return Vector3.Distance(damagingweaponList[0].transform.position, _DATA_CENTER.geometryCenter.position) < 5f;
+            }
             return false;
         }
         
         public bool MayBeDefend() //Defend_State 3
         {
-            return (Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && Sensor.GetInnerEnemiesColliders().Count > 0) && _ResistanceManager.Resistance.Value == 0;
+            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
+            return Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) && _ResistanceManager.Resistance.Value == 0;
         }
-        
-        public bool TimeToAttack_Close()
+
+        public bool TimeToAttack()
         {
             if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             {
                 return false;
             }
-            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.inner_range });
-        }
-        
-        public bool TimeToAttack_Near()
-        {
-            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
+            Collider tar = this.Sensor.GetTargetRangeEnemyCollider(this.triggerAtttackRangeMin,this.triggerAtttackRangeMax);
+            if (tar == null)
             {
                 return false;
             }
-            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.mid_range });
-        }
-        
-        public bool TimeToAttack_Far()
-        {
-            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
+            else
             {
-                return false;
+                return true;
             }
-            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.far_range });
         }
-        
-        public bool TimeToAttack_OutterRange()
-        {
-            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
-            {
-                return false;
-            }
-            return CheckToEnemyDisEnterCondition(new BehaviorEnterRange[1]{ BehaviorEnterRange.out_of_range });
-        }
-    
+
         public bool TimeToRespond()
         {
             damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
@@ -116,7 +94,7 @@ namespace Soul
         
         public bool TimeToStopRunning()
         {
-            return Sensor.GetInnerEnemiesColliders().Count > 0 || Sensor.GetNearbyDamagingWeaponColliders().Count > 0 || Sensor.GetOutterDamagingWeaponColliders().Count > 0;
+            return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) || Sensor.GetNearbyDamagingWeaponColliders().Count > 0 || Sensor.GetOutterDamagingWeaponColliders().Count > 0;
         }
         
         public bool CheckTriggerCondition(string conditionFunctionName)

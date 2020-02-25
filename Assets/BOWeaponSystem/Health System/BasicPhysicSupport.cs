@@ -115,8 +115,6 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
-                if (_DATA_CENTER.Sensor != null)
-                    _DATA_CENTER.Sensor.GetInnerEnemiesColliders().Add(collision.collider);
                 hiddenMethods.ITouchedThisCollider(1);
                 hiddenMethods.meTouchingEnemyBody = true;
             }
@@ -129,8 +127,6 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
             {
-                if (_DATA_CENTER.Sensor != null)
-                    _DATA_CENTER.Sensor.GetInnerEnemiesColliders().Add(collision.collider);
                 hiddenMethods.ITouchedThisCollider(1);
                 hiddenMethods.meTouchingEnemyBody = false;
             }

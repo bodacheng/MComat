@@ -45,7 +45,7 @@ public class Defend_State : Behavior
     float lastExitTime;
 
     List<Collider> damagingweaponList;
-    List<Collider> nearbyenemymeat;
+    Collider nearbyenemymeat;
     Vector3 fixDesPos;
     
     public Defend_State(string defend_clip_name,string block_break_name)
@@ -168,18 +168,15 @@ public class Defend_State : Behavior
     {
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 5 : 0;
         damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
-        nearbyenemymeat = Sensor.GetInnerEnemiesColliders();
+        nearbyenemymeat = Sensor.GetClosestEnemyColliderInSensorRange();
         
         if (TimeCounter >= 0f)
         {
             TimeCounter -= Time.fixedDeltaTime;
         }
 
-        if (nearbyenemymeat.Count > 0)
-        {
-            if (nearbyenemymeat[0] != null)
-                RotateToTarget(nearbyenemymeat[0].transform.position, 0.5f, true);
-        }
+        if (nearbyenemymeat != null)
+            RotateToTarget(nearbyenemymeat.transform.position, 0.5f, true);
         else
         {
             if (damagingweaponList.Count > 0)

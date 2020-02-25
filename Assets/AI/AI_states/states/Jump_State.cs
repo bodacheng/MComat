@@ -75,13 +75,10 @@ public class Jump_State : Behavior
                     break;
             }
         }else{
-
-            if (Sensor.GetInnerEnemiesColliders().Count > 0)
-            {
-                if (Sensor.GetInnerEnemiesColliders()[0] != null)
-                    enemy_to_me = gameObject.transform.position - Sensor.GetInnerEnemiesColliders()[0].transform.position;
-                enemy_to_me.y = 0;
-            }
+            Collider collider = Sensor.GetClosestEnemyColliderInSensorRange();
+            if (collider != null)
+                enemy_to_me = gameObject.transform.position - collider.transform.position;
+            enemy_to_me.y = 0;
 
             switch ((int)Random.Range(0, 3))
             {

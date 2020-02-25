@@ -68,107 +68,33 @@ namespace Soul
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, "TimeToRespond");
                     break;
                 case BehaviorType.GR:
-                    List<BehaviorEnterRange> behaviorEnterRanges = behavior_define.AI_trigger_ranges.ToList();
-                    if (behaviorEnterRanges.Contains(BehaviorEnterRange.inner_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Close", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges.Contains(BehaviorEnterRange.mid_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Near", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Far", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges.Contains(BehaviorEnterRange.out_of_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_OutterRange", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                                        
+                    KeyValuePair<string, string> keyValuePair = new KeyValuePair<string, string>("TimeToAttack", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePair);
+                    ConditionAndRespondPriority.Set(keyValuePair.Key, keyValuePair.Value, 2);
+
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;
                 case BehaviorType.GI:
-                    List<BehaviorEnterRange> behaviorEnterRanges2 = behavior_define.AI_trigger_ranges.ToList();
-                    if (behaviorEnterRanges2.Contains(BehaviorEnterRange.inner_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Close", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges2.Contains(BehaviorEnterRange.mid_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Near", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+                    KeyValuePair<string, string> keyValuePairuu = new KeyValuePair<string, string>("TimeToAttack", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePairuu);
+                    ConditionAndRespondPriority.Set(keyValuePairuu.Key, keyValuePairuu.Value, 2);
 
-                        KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gi);
-                        ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
-                    }
-                    if (behaviorEnterRanges2.Contains(BehaviorEnterRange.far_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Far", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
+                    KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePair_gi);
+                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
 
-                        KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gi);
-                        ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
-                    }
-                    if (behaviorEnterRanges2.Contains(BehaviorEnterRange.out_of_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_OutterRange", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-
-                        KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gi);
-                        ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
-                    }
-                    
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;
                 case BehaviorType.GM:
-                    List<BehaviorEnterRange> behaviorEnterRanges3 = behavior_define.AI_trigger_ranges.ToList();
-                    if (behaviorEnterRanges3.Contains(BehaviorEnterRange.inner_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Close", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges3.Contains(BehaviorEnterRange.mid_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Near", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges3.Contains(BehaviorEnterRange.far_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_Far", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    if (behaviorEnterRanges3.Contains(BehaviorEnterRange.out_of_range))
-                    {
-                        KeyValuePair<string, string> keyValuePair_gr = new KeyValuePair<string, string>("TimeToAttack_OutterRange", behavior_define.StateKey);
-                        RegisterConditionToRespond(keyValuePair_gr);
-                        ConditionAndRespondPriority.Set(keyValuePair_gr.Key,keyValuePair_gr.Value,2);
-                    }
-                    
+                    KeyValuePair<string, string> keyValuePairqq = new KeyValuePair<string, string>("TimeToAttack", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePairqq);
+                    ConditionAndRespondPriority.Set(keyValuePairqq.Key, keyValuePairqq.Value, 2);
+
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;
             }
         }
-    
+
         public void FormFightingSetsByNineAndTwo(NineAndTwo nineAndTwo)
         {
             nineAndTwo.SortNineAndTwo();
@@ -193,6 +119,9 @@ namespace Soul
                     s.state.splevel = Behaviour_Transition_Dictionary[s.num].SPLevel;
                     s.state.enterInput = Behaviour_Transition_Dictionary[s.num].enterInput;
                     s.state.exitInput = Behaviour_Transition_Dictionary[s.num].exitInput;
+                    float[] triggerRange = SkillTriggerDistance(Behaviour_Transition_Dictionary[s.num].AI_trigger_ranges);
+                    s.state.triggerAtttackRangeMin = triggerRange[0];
+                    s.state.triggerAtttackRangeMax = triggerRange[1];
                     AddAITriggerConditionToBehavior(Behaviour_Transition_Dictionary[s.num]);
                     Behaviour_Dictionary.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
                 }
@@ -206,6 +135,48 @@ namespace Soul
             {
                 commandWaitingState = Behaviour_Dictionary[nineAndTwo.GetM_STS().StateKey];
             }
+        }
+
+        public float[] SkillTriggerDistance(BehaviorEnterRange[] AI_trigger_ranges)
+        {
+            float min = 100, max = 0f;
+            if (AI_trigger_ranges != null)
+            {
+                List<BehaviorEnterRange> behaviorEnterRanges = AI_trigger_ranges.ToList();
+                if (behaviorEnterRanges.Contains(BehaviorEnterRange.inner_range))
+                {
+                    if (min > 0)
+                        min = 0;
+                    if (max <= 5)
+                        max = 5;
+                }
+                if (behaviorEnterRanges.Contains(BehaviorEnterRange.mid_range))
+                {
+                    if (min > 5)
+                        min = 5;
+                    if (max <= 10)
+                        max = 10;
+                }
+                if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
+                {
+                    if (min > 10)
+                        min = 10;
+                    if (max <= 15)
+                        max = 15;
+                }
+                if (behaviorEnterRanges.Contains(BehaviorEnterRange.out_of_range))
+                {
+                    if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
+                    {
+                        if (min > 15)
+                            min = 15;
+                        if (max <= 30)
+                            max = 30;
+                    }
+                }
+            }
+            Debug.Log("min:"+ min + "  max:"+max);
+            return new float[2] { min, max };
         }
     }
 }

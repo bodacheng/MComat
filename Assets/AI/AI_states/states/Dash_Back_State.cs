@@ -50,11 +50,9 @@ public class Dash_Back_State : Behavior
         {
             threatsComingPosition = Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
         }else{
-            if (Sensor.GetInnerEnemiesColliders().Count > 0)
-            {
-                if (Sensor.GetInnerEnemiesColliders()[0] != null)
-                    threatsComingPosition = Sensor.GetInnerEnemiesColliders()[0].transform.position;
-            }
+            Collider temp = Sensor.GetClosestEnemyColliderInSensorRange();
+            if (temp != null)
+                threatsComingPosition = temp.transform.position;
         }
         RotateToTarget_Tween(threatsComingPosition, 0.01f, true);
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);

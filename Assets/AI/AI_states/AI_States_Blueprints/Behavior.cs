@@ -37,6 +37,8 @@ namespace Soul
         public Inputs_defined enterInput = Inputs_defined.Null;
         public Inputs_defined exitInput = Inputs_defined.Null;
 
+        public float triggerAtttackRangeMin, triggerAtttackRangeMax;
+
         // Prepare for basic parameters here
         public virtual void Pre_process_before_enter()
         {
@@ -178,45 +180,45 @@ namespace Soul
         }
 
         // If the state is based on the distance from the nearest enemy, check if the character is at the proper distance to enter the state
-        bool inner;
-        bool mid;
-        bool far;
-        bool CheckToEnemyDisEnterCondition(BehaviorEnterRange[] _behaviorEnterRanges)
-        {
-            if (_behaviorEnterRanges != null)
-            {
-                if (_behaviorEnterRanges.Length == 0)
-                    return true;
-                inner = false;
-                mid = false;
-                far = false;
-                for (int i = 0; i < _behaviorEnterRanges.Length; i++)
-                {
-                    switch (_behaviorEnterRanges[i])
-                    {
-                        case BehaviorEnterRange.inner_range:
-                            inner |= this.Sensor.GetInnerEnemiesColliders().Count > 0;
-                            break;
-                        case BehaviorEnterRange.mid_range:
-                            mid |= this.Sensor.GetMidEnemiesColliders().Count > 0;
-                            break;
-                        case BehaviorEnterRange.far_range:
-                            far |= this.Sensor.GetFarEnemiesColliders().Count > 0;
-                            break;
-                        case BehaviorEnterRange.out_of_range:
-                            if (this.Sensor.GetInnerEnemiesColliders().Count == 0
-                                &&
-                                this.Sensor.GetMidEnemiesColliders().Count == 0
-                                &&
-                                this.Sensor.GetFarEnemiesColliders().Count == 0)
-                                return true;
-                            break;
-                    }
-                }
-                return inner || mid || far;
-            }
-            return true;
-        }
+        //bool inner;
+        //bool mid;
+        //bool far;
+        //bool CheckToEnemyDisEnterCondition(BehaviorEnterRange[] _behaviorEnterRanges)
+        //{
+        //    if (_behaviorEnterRanges != null)
+        //    {
+        //        if (_behaviorEnterRanges.Length == 0)
+        //            return true;
+        //        inner = false;
+        //        mid = false;
+        //        far = false;
+        //        for (int i = 0; i < _behaviorEnterRanges.Length; i++)
+        //        {
+        //            switch (_behaviorEnterRanges[i])
+        //            {
+        //                case BehaviorEnterRange.inner_range:
+        //                    inner |= this.Sensor.GetInnerEnemiesColliders().Count > 0;
+        //                    break;
+        //                case BehaviorEnterRange.mid_range:
+        //                    mid |= this.Sensor.GetMidEnemiesColliders().Count > 0;
+        //                    break;
+        //                case BehaviorEnterRange.far_range:
+        //                    far |= this.Sensor.GetFarEnemiesColliders().Count > 0;
+        //                    break;
+        //                case BehaviorEnterRange.out_of_range:
+        //                    if (this.Sensor.GetInnerEnemiesColliders().Count == 0
+        //                        &&
+        //                        this.Sensor.GetMidEnemiesColliders().Count == 0
+        //                        &&
+        //                        this.Sensor.GetFarEnemiesColliders().Count == 0)
+        //                        return true;
+        //                    break;
+        //            }
+        //        }
+        //        return inner || mid || far;
+        //    }
+        //    return true;
+        //}
 
         List<BehaviorEnterRange> temp;
         protected BehaviorEnterRange[] RangePlusOne(BehaviorEnterRange[] old)//这个东西的意思是，假设是连击情况下，那所有技能的触发范围可能有个修正，比如原本一个中程技能，连击情况下AI在近距离也可触发。

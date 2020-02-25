@@ -61,5 +61,89 @@
             this.RARITY_LEVEL = 0;
         }
     }
+
+    public class PassiveSkillConfigs
+    {
+        public MoveType moveType;
+        public bool hasDefend;
+        public RushType rushType;
+
+        public SkillConfig MConfig;
+        public SkillConfig DConfig;
+        public SkillConfig RConfig;
+
+        public PassiveSkillConfigs(MoveType moveType, bool hasDefend, RushType RStyle)
+        {
+            this.moveType = moveType;
+            this.hasDefend = hasDefend;
+            this.rushType = RStyle;
+
+            switch (moveType)
+            {
+                case MoveType.Mode1:
+                    this.MConfig = new SkillConfig
+                        (
+                            null, null, "Move_normal", "normal move", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                case MoveType.Mode2:
+                    this.MConfig = new SkillConfig
+                        (
+                            null, null, "Move_slow", "normal move", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                case MoveType.Mode3:
+                    this.MConfig = new SkillConfig
+                        (
+                            null, null, "Move_fast", "normal move", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                case MoveType.Test:
+                    this.MConfig = new SkillConfig
+                        (
+                            null, null, "Test_Move", "测试用移动状态(角色站着不动)", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                default:
+                    this.MConfig = new SkillConfig
+                        (
+                            null, null, "Move_normal", "normal move", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+            }
+
+            this.DConfig = hasDefend
+                ? new SkillConfig
+                        (
+                            null, null, "Defend", "防衛", 0, BehaviorType.NONE, null, 0, 0
+                        )
+                : null;
+
+            switch (RStyle)
+            {
+                case RushType.Jump:
+                    this.RConfig = new SkillConfig
+                        (
+                            null, null, "Jump", "Jump", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                case RushType.Rush:
+                    this.RConfig = new SkillConfig
+                        (
+                            null, null, "Rush", "Rush", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                case RushType.RushBack:
+                    this.RConfig = new SkillConfig
+                        (
+                            null, null, "RushBack", "RushBack", 0, BehaviorType.NONE, null, 0, 0
+                        );
+                    break;
+                case RushType.None:
+                    this.RConfig = null;
+                    break;
+            }
+        }
+    }
 }
 

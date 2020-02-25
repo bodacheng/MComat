@@ -90,34 +90,6 @@ public class OldDebugFightingProcess : NagareProcess
             mainProcessRunner.TriggerMainProcess(finalMoment(finalSurviver, winner)) ;
         }
 
-        if (RealTimeGameProcessManager.focusingChar != null)
-        {
-            if (RealTimeGameProcessManager.focusingChar.Sensor.GetInnerEnemiesColliders().Count > 0)
-            {
-                _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.GodPlayerCertainYCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.transform });
-                //_CameraManager.current_Camera_Mode.setCertainYModeParameters(13f, _NetFightScene.Icons.GetFocusingChar().getFloorY() + 10f);
-                return;
-            }
-            if (RealTimeGameProcessManager.focusingChar.Sensor.GetMidEnemiesColliders().Count > 0)
-            {
-                _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.GodPlayerCertainYCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.transform });
-                //_CameraManager.current_Camera_Mode.setCertainYModeParameters(16f, _NetFightScene.Icons.GetFocusingChar().getFloorY() + 10f);
-                return;
-            }
-            if (RealTimeGameProcessManager.focusingChar.Sensor.GetFarEnemiesColliders().Count > 0)
-            {
-                _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.GodPlayerCertainYCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.transform });
-                //_CameraManager.current_Camera_Mode.setCertainYModeParameters(16f, _NetFightScene.Icons.GetFocusingChar().getFloorY() + 10f);
-                return;
-            }
-            else
-            {
-                _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.GodPlayerCertainYCamera, new List<Transform>() { RealTimeGameProcessManager.focusingChar.transform });
-                //_CameraManager.current_Camera_Mode.setCertainYModeParameters(18f, _NetFightScene.Icons.GetFocusingChar().getFloorY() + 10f);
-                return;
-            }
-        }
-        
         if (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
         {
             AutoMoveToNext = true;

@@ -23,7 +23,6 @@ public class G_Attack_State : Behavior {
     float approcahingSpeed;
     float maxRushTime, rush_time_counter;
     
-    Transform rushingToTarget;
     Phase _phase;
     UnityEngine.Events.UnityAction rushstart;
     UnityEngine.Events.UnityAction rushend;
@@ -100,7 +99,6 @@ public class G_Attack_State : Behavior {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        rushingToTarget = null;
         _Weapon_Animation_Events.ClearMarkerManagers();
         _Animator.applyRootMotion = false;
         personality_Events.CloseAllPersonalityEffects();
@@ -117,9 +115,11 @@ public class G_Attack_State : Behavior {
             EventAttackEnderProcess();
     }
 
+    Collider collider;
     public override void AI_State_enter()
 	{
         base.AI_State_enter();
+        collider = null;
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
@@ -141,7 +141,15 @@ public class G_Attack_State : Behavior {
             return;
         }
 
-        if (Sensor.GetInnerEnemiesColliders().Count > 0)//内环检测结果
+        collider = Sensor.GetClosestEnemyColliderInSensorRange();
+        if (collider == null)
+        {
+            Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
+            _phase = Phase.farFromReach;
+            return;
+        }
+        float distance = Vector3.Distance(gameObject.transform.position, collider.transform.position);
+        if (distance < 5f)//内环检测结果
         {
             _phase = Phase.reachedFromThebeginning;
             Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
@@ -155,11 +163,7 @@ public class G_Attack_State : Behavior {
             return;
         }
         
-        if (Sensor.GetClosestColliderInSensorRange(false,true,true) != null)
-        {
-            rushingToTarget = Sensor.GetClosestColliderInSensorRange(false, true, true).transform;
-        }
-        if (rushingToTarget != null)
+        if (distance < 10f)
         {
             if (Sensor.GetEnemiesByDistance(false).Count > 0)
             {
@@ -189,12 +193,9 @@ public class G_Attack_State : Behavior {
             }
         }
 
-        if (Sensor.GetClosestColliderInSensorRange(true,true,true) == null)//外环检测结果.走到这里就是说，如果内外环都没敌人
-        {
-            Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
-            _phase = Phase.farFromReach;
-            return;
-        }
+        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+        _phase = Phase.farFromReach;
+        return;
     }
        
     public override void _State_FixedUpdate1() 
@@ -206,16 +207,18 @@ public class G_Attack_State : Behavior {
             case Phase.farFromReach:
                 break;
             case Phase.needToRush://也就是说冲刺中。
-                if (rushingToTarget == null)
+                if (collider == null)
                 {
                     _Rigidbody.velocity = Vector3.zero;
                     _phase = Phase.reached;
                 }
                 else
                 {
-                    Move(rushingToTarget.position - gameObject.transform.position, rushSpeed, true);
-                    if (Vector3.Distance(gameObject.transform.position, rushingToTarget.position) < 2f)
+                    Move(collider.transform.position - gameObject.transform.position, rushSpeed, true);
+                    if (Vector3.Distance(gameObject.transform.position, collider.transform.position) < 2f)
+                    {
                         _phase = Phase.reached;
+                    }
                     if (_phase == Phase.reached)
                     {
                         Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
@@ -232,7 +235,7 @@ public class G_Attack_State : Behavior {
                         }
                     }
                 }
-                if (Sensor.GetInnerEnemiesColliders().Count > 0 || rush_time_counter > maxRushTime)
+                if (rush_time_counter > maxRushTime)
                 {
                     _phase = Phase.reached;
                 }
@@ -246,18 +249,12 @@ public class G_Attack_State : Behavior {
                 }
                 break;
             case Phase.reached:
-                if (Sensor.GetInnerEnemiesColliders().Count > 0)
-                {
-                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
-                        AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
-                }
+                if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                    AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
                 break;
             case Phase.reachedFromThebeginning://reachedFromThebeginning现在其实是两种情况：1. 冲刺状态一开始内环就有敌人 2.非冲刺状态一开始外环有敌人
-                if (Sensor.GetInnerEnemiesColliders().Count > 0)
-                {
-                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
-                        AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
-                }
+                if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                    AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
                 break;
             default:
                 break;

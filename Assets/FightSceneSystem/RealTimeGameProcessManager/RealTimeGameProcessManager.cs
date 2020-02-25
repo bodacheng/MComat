@@ -100,31 +100,15 @@ public class RealTimeGameProcessManager : MonoBehaviour
         _mobileInputsManager.Clear();
     }
 
-    List<Transform> outter_watchetargets = new List<Transform>();
-    List<Transform> inner_watchetargets = new List<Transform>();
     public void FightingStepProcess()
     {
         FightTeam1.LocalFightingUpdate();
         FightTeam2.LocalFightingUpdate();
         FightGUIProcess();
         
-        outter_watchetargets.Clear();
-        inner_watchetargets.Clear();
         if (focusingChar != null)
         {
-            _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
-            foreach (Collider _G in focusingChar.Sensor.GetInnerEnemiesColliders())
-            {
-                inner_watchetargets.Add(_G.transform);
-            }
-            foreach (Collider _G in focusingChar.Sensor.GetMidEnemiesColliders())
-            {
-                outter_watchetargets.Add(_G.transform);
-            }
-            if (inner_watchetargets.Count == 0 && outter_watchetargets.Count > 0)
-                _CameraManager.current_Camera_Mode.targets = outter_watchetargets;
-            if (inner_watchetargets.Count > 0)
-                _CameraManager.current_Camera_Mode.targets = inner_watchetargets;
+            _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);//!>>!>!>!!??!
         }        
     }
     

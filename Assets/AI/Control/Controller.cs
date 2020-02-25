@@ -154,7 +154,6 @@ namespace Soul
         readonly List<string> allAvaliableKeyCodes = new List<string>();
         string Condition, BehaviourCode;
         Behavior temp;
-        List<KeyValuePair<string, string>> minkeys;
         List<KeyValuePair<string, string>> finalConditionStakeKeySet = new List<KeyValuePair<string, string>>();
         bool AI_RUNs(BehaviorRunner behaviorRunner,List<Behavior_Transition_Set> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
         {
@@ -169,34 +168,33 @@ namespace Soul
             {
                 for (int y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)
                 {
-                    if (behaviorRunner.GetNowState().CheckTriggerCondition(behaviorRunner.AllConditionCodes[y]))
+                    Condition = behaviorRunner.AllConditionCodes[y];
+                    for (int x = 0; x < allAvaliableKeyCodes.Count; x++)
                     {
-                        for (int x = 0; x < allAvaliableKeyCodes.Count; x++)
+                        BehaviourCode = allAvaliableKeyCodes[x];
+                        if (behaviorRunner.ConditionAndRespond[Condition].Contains(BehaviourCode))
                         {
-                            Condition = behaviorRunner.AllConditionCodes[y];
-                            BehaviourCode = allAvaliableKeyCodes[x];
-                            if (behaviorRunner.ConditionAndRespond[Condition].Contains(BehaviourCode))
+                            behaviorRunner.Behaviour_Dictionary.TryGetValue(BehaviourCode, out Behavior try_behavior);
+                            if (try_behavior.CheckTriggerCondition(Condition))
                             {
-                                Triggerd.main.Set(Condition, BehaviourCode, behaviorRunner.ConditionAndRespondPriority.Get(Condition,BehaviourCode));
+                                Triggerd.main.Set(Condition, BehaviourCode, behaviorRunner.ConditionAndRespondPriority.Get(Condition, BehaviourCode));
                             }
                         }
                     }
-                }            
+                }
             }
             
             if (Triggerd.main.values.Count > 0)
             {
-                minkeys = Triggerd.GiveOutMin();
-                for (int x = 0; x < minkeys.Count; x++)
-                {
-                    finalConditionStakeKeySet.Add(minkeys[x]);
-                }
+                finalConditionStakeKeySet = Triggerd.GiveOutMin();
                 if (finalConditionStakeKeySet.Count > 0)
                 {
                     int random = Random.Range(0, finalConditionStakeKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
-                    Behavior_Transition_Set behavior_Transition_Set = behaviorRunner.Behaviour_Transition_Dictionary[minkeys[random].Value];
+                    Behavior_Transition_Set behavior_Transition_Set = behaviorRunner.Behaviour_Transition_Dictionary[finalConditionStakeKeySet[random].Value];
                     if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
+                    {
                         MobileInputsManager.SkillButtonExplosion(behavior_Transition_Set.enterInput, behavior_Transition_Set.SPLevel);
+                    }
                     behaviorRunner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
                         {
