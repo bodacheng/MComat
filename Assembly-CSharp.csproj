@@ -376,7 +376,7 @@
     <Compile Include="Assets\MemberDetail\LevelManager.cs" />
     <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
     <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
-    <Compile Include="Assets\Monsterbox\monsterboxFilter2.cs" />
+    <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
