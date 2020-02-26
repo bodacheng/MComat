@@ -126,14 +126,14 @@ namespace Soul
             #region 当前状态可自然退出了却没有任何后续行为被触发的话，回复起始状态
             if (behaviorRunner.GetNowState().Capacity_Exit_Condition())
             {
-                behaviorRunner.SingleFightLog.WriteLog(
-                    new SingleFightLog.BehaviourFightRecord
-                    {
-                        AI_Decided = false,
-                        stateKey = behaviorRunner.commandWaitingState.StateKey,
-                        whyIDidThis = "Reset"
-                    }
-                );
+                //behaviorRunner.SingleFightLog.WriteLog(
+                //    new SingleFightLog.BehaviourFightRecord
+                //    {
+                //        AI_Decided = false,
+                //        stateKey = behaviorRunner.commandWaitingState.StateKey,
+                //        whyIDidThis = "Reset"
+                //    }
+                //);
                 behaviorRunner.ChangeToWaitingState();
             }
             #endregion

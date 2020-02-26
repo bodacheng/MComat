@@ -227,9 +227,9 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
 
         _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
-            new Soul.SingleFightLog.BenefitRecord
+            new Soul.SingleFightLog.NegativeRecord
             {
-                plus = false //被打了，属于负面效益
+                //被打了，属于负面效益
             }
         );
     }
@@ -238,9 +238,9 @@ public partial class FightAttriCalReference : MonoBehaviour
     {
         _ComboHitCount.HitCountPlus(_BeHitCount);
         _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
-            new Soul.SingleFightLog.BenefitRecord
+            new Soul.SingleFightLog.PositiveRecord
             {
-                plus = true //打了别人，属于正面效益
+                //打了别人，属于正面效益
             }
         );
     }//打别人计数

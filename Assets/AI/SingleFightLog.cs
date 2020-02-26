@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Skill;
+using UnityEngine;
 
 namespace Soul
 {
@@ -14,6 +16,7 @@ namespace Soul
         public class FightRecord
         {
             public string stateKey;
+            public BehaviorType behaviorType;
         }
 
         public class BehaviourFightRecord : FightRecord
@@ -22,9 +25,53 @@ namespace Soul
             public string whyIDidThis;
         }
 
-        public class BenefitRecord : FightRecord
+        public class PositiveRecord : FightRecord
         {
-            public bool plus;
+        }
+        public class NegativeRecord : FightRecord
+        {
+        }
+
+        IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
+        int CalTime = 0;
+        public void AnalysisLog(IDictionary<string, Behavior> Behaviour_Dictionary)
+        {
+            if (MyBehaviourHistory.Count < 10 || CalTime % 10 != 0)
+            {
+                return;
+            }
+            skillnobenefitlog.Clear();
+            int Count = MyBehaviourHistory.Count;
+            for (int i = MyBehaviourHistory.Count - 8; i < MyBehaviourHistory.Count; i++)
+            {
+                FightRecord fightRecord = MyBehaviourHistory[i];
+                if (fightRecord is BehaviourFightRecord)
+                {
+                    if ((MyBehaviourHistory[i-2] is BehaviourFightRecord) && (MyBehaviourHistory[i - 1] is BehaviourFightRecord))// 发招两次没有获得正面效益
+                    {
+                        if (skillnobenefitlog.ContainsKey(MyBehaviourHistory[i - 2].stateKey))
+                        {
+                            skillnobenefitlog[MyBehaviourHistory[i - 2].stateKey] += 1;
+                        }
+                        else
+                        {
+                            skillnobenefitlog.Add(MyBehaviourHistory[i - 2].stateKey, 1);
+                        }
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<string,int> keyValuePair in skillnobenefitlog)
+            {
+                if (keyValuePair.Value > 2)
+                {
+                    Behavior behavior = Behaviour_Dictionary[keyValuePair.Key];
+                    behavior.triggerAtttackRangeMin = Mathf.Clamp(behavior.triggerAtttackRangeMin -1 ,0, 5);
+                    behavior.triggerAtttackRangeMax = Mathf.Clamp(behavior.triggerAtttackRangeMax - 1, 5, 10);
+                    Debug.Log("触发距离调整:"+ keyValuePair.Key);
+                }
+            }
+            CalTime++;
         }
     }
 }

@@ -61,6 +61,7 @@ namespace Soul
                 {
                     now_Behavior._State_Update();
                 }
+                SingleFightLog.AnalysisLog(this.Behaviour_Dictionary);
             }
         }
 

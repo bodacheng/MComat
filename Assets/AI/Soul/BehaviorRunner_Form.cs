@@ -61,10 +61,6 @@ namespace Soul
                     RegisterConditionToRespond(keyValuePair_def1);
                     ConditionAndRespondPriority.Set(keyValuePair_def1.Key, keyValuePair_def1.Value, 2);
 
-                    KeyValuePair<string, string> keyValuePair_def2 = new KeyValuePair<string, string>("MayBeDefend", behavior_define.StateKey);
-                    RegisterConditionToRespond(keyValuePair_def2);
-                    ConditionAndRespondPriority.Set(keyValuePair_def2.Key,keyValuePair_def2.Value,3);
-                    
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, "TimeToRespond");
                     break;
                 case BehaviorType.GR:

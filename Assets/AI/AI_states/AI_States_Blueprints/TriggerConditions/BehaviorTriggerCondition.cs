@@ -63,12 +63,6 @@ namespace Soul
             return false;
         }
         
-        public bool MayBeDefend() //Defend_State 3
-        {
-            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
-            return Sensor.EnemyAndTeammateBetweenMeAndEnemy() == null && (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) && _ResistanceManager.Resistance.Value == 0;
-        }
-
         public bool TimeToAttack()
         {
             if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
