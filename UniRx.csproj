@@ -522,9 +522,6 @@
     <Reference Include="DOTweenEditor">
       <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/JsonSupport/JsonDotNet/Assemblies/Windows/Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="POFX_Runtime">
       <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
     </Reference>
@@ -545,6 +542,9 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:/Users/bodacheng/Documents/AssetStoreFight_Client/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.4.17f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
