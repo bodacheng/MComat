@@ -6,7 +6,7 @@ namespace Soul
 {
     public class SingleFightLog
     {
-        List<FightRecord> MyBehaviourHistory = new List<FightRecord>();
+        readonly List<FightRecord> MyBehaviourHistory = new List<FightRecord>();
 
         public void WriteLog(FightRecord behaviourHistory)
         {
@@ -32,7 +32,7 @@ namespace Soul
         {
         }
 
-        IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
+        readonly IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
         int CalTime = 0;
         public void AnalysisLog(IDictionary<string, Behavior> Behaviour_Dictionary)
         {
@@ -47,7 +47,7 @@ namespace Soul
                 FightRecord fightRecord = MyBehaviourHistory[i];
                 if (fightRecord is BehaviourFightRecord)
                 {
-                    if ((MyBehaviourHistory[i-2] is BehaviourFightRecord) && (MyBehaviourHistory[i - 1] is BehaviourFightRecord))// 发招两次没有获得正面效益
+                    if ((MyBehaviourHistory[i - 2] is BehaviourFightRecord) && (MyBehaviourHistory[i - 1] is BehaviourFightRecord))// 发招两次没有获得正面效益
                     {
                         if (skillnobenefitlog.ContainsKey(MyBehaviourHistory[i - 2].stateKey))
                         {
@@ -67,7 +67,7 @@ namespace Soul
                 {
                     Behavior behavior = Behaviour_Dictionary[keyValuePair.Key];
                     behavior.triggerAtttackRangeMin = Mathf.Clamp(behavior.triggerAtttackRangeMin -1 ,0, 5);
-                    behavior.triggerAtttackRangeMax = Mathf.Clamp(behavior.triggerAtttackRangeMax - 1, 5, 10);
+                    behavior.triggerAtttackRangeMax = Mathf.Clamp(behavior.triggerAtttackRangeMax - 1, 4, 10);
                     Debug.Log("触发距离调整:"+ keyValuePair.Key);
                 }
             }

@@ -87,7 +87,7 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            _FightAttriCalReference.AT = this.AT;
+            _FightAttriCalReference.AT = AT;
             _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
             BeheviourFrameCounter = 0;
         }
@@ -95,7 +95,7 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter(V_Damage newValue)
         {
-            _FightAttriCalReference.AT = this.AT;
+            _FightAttriCalReference.AT = AT;
             _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
         }
 

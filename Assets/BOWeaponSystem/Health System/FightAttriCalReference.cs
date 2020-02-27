@@ -194,21 +194,21 @@ public partial class FightAttriCalReference : MonoBehaviour
         {
             _dmg.attacker._Center.Animation_Manger.FrameFreeze();
         }
-
+        
         HitEffect(_dmg);
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
             _Center._ResistanceManager.Resistance.Value -= 1;
             return;
         }
-        
+                
         _dmg.attacker.HitCountPlus();
         _ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
 
         float finalDamage = _dmg.from_weapon.weaponHP <= 0 ? _dmg.attacker.AT : _dmg.attacker.AT / _dmg.from_weapon.weaponHP;
         CurrentHp.Value -= finalDamage;
-
+        
         if (CurrentHp.Value <= 0)
         {
             _dmg.from_weapon.damage_type = DamageType.DeathKnockoff;
@@ -219,10 +219,12 @@ public partial class FightAttriCalReference : MonoBehaviour
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);
             return;
         }
-        else if (_dmg.from_weapon.damage_type == DamageType.knockOff_damage)
+        if (_dmg.from_weapon.damage_type == DamageType.knockOff_damage)
         {
             _Center._MyBehaviorRunner.ChangeState("KnockOff", _dmg);
-        }else{
+        }
+        else
+        {
             _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
         }
 
