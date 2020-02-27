@@ -160,7 +160,7 @@ public class Sensor : MonoBehaviour {
         NearbyDamagingWeapon.Clear();
     }
 
-    private List<GameObject> EnemiesByDistance = new List<GameObject>();
+    List<GameObject> EnemiesByDistance = new List<GameObject>();
     public List<GameObject> GetEnemiesByDistance(bool refresh)
     {
         if (this._TeamConfig == null)

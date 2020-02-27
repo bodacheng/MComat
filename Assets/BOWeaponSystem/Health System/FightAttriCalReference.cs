@@ -205,29 +205,16 @@ public partial class FightAttriCalReference : MonoBehaviour
         _dmg.attacker.HitCountPlus();
         _ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
-
-        float finalDamage = _dmg.from_weapon.weaponHP <= 0 ? _dmg.attacker.AT : _dmg.attacker.AT / _dmg.from_weapon.weaponHP;
-        CurrentHp.Value -= finalDamage;
+        
+        CurrentHp.Value -= _dmg.from_weapon.GetDamageAmount();
         
         if (CurrentHp.Value <= 0)
-        {
-            _dmg.from_weapon.damage_type = DamageType.DeathKnockoff;
-        }
-
-        if (_dmg.from_weapon.damage_type == DamageType.DeathKnockoff)
         {
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);
             return;
         }
-        if (_dmg.from_weapon.damage_type == DamageType.knockOff_damage)
-        {
-            _Center._MyBehaviorRunner.ChangeState("KnockOff", _dmg);
-        }
-        else
-        {
-            _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
-        }
-
+        
+        _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
         _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
             new Soul.SingleFightLog.NegativeRecord
             {
@@ -235,7 +222,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             }
         );
     }
-
+    
     public void HitCountPlus()
     {
         _ComboHitCount.HitCountPlus(_BeHitCount);

@@ -221,7 +221,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsWeaponRegisterDic) 
         {
             if (keyValuePair.Value != null)
+            {
                 keyValuePair.Value._HitBox.SetDamageType(damageType);
+            }
         }
     }
         

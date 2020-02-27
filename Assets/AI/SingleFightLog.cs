@@ -33,16 +33,15 @@ namespace Soul
         }
 
         readonly IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
-        int CalTime = 0;
         public void AnalysisLog(IDictionary<string, Behavior> Behaviour_Dictionary)
         {
-            if (MyBehaviourHistory.Count < 10 || CalTime % 10 != 0)
+            if (MyBehaviourHistory.Count < 5)
             {
                 return;
             }
             skillnobenefitlog.Clear();
             int Count = MyBehaviourHistory.Count;
-            for (int i = MyBehaviourHistory.Count - 8; i < MyBehaviourHistory.Count; i++)
+            for (int i = 2; i < MyBehaviourHistory.Count; i++)
             {
                 FightRecord fightRecord = MyBehaviourHistory[i];
                 if (fightRecord is BehaviourFightRecord)
@@ -60,7 +59,7 @@ namespace Soul
                     }
                 }
             }
-
+            
             foreach (KeyValuePair<string,int> keyValuePair in skillnobenefitlog)
             {
                 if (keyValuePair.Value > 2)
@@ -71,7 +70,7 @@ namespace Soul
                     Debug.Log("触发距离调整:"+ keyValuePair.Key);
                 }
             }
-            CalTime++;
+            MyBehaviourHistory.Clear();
         }
     }
 }

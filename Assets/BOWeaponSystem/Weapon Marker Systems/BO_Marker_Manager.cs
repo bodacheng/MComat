@@ -5,15 +5,15 @@ using System.Collections.Generic;
 //武器是用来伤害敌人的，而在我们的计划是把自身受伤害这个判断放在自身这一边的客户端上决定。
 
 namespace HittingDetection
-{   
+{
     public partial class BO_Marker_Manager : MonoBehaviour
     {
         bool Enabled;
-
+        
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
         float ActivateAfterTime;
-
+        
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
@@ -57,7 +57,13 @@ namespace HittingDetection
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         bool TraditionalDefendMode;
-        
+        float AT;
+                
+        public float GetDamageAmount()
+        {
+            return weaponHP > 0 ? AT/weaponHP : AT;
+        }
+
         void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
         {
             Transform _MarkersParent = transform;
@@ -78,10 +84,14 @@ namespace HittingDetection
                 
         public void MarkersEnablingStarts()
         {
-            if (ActivateAfterTime == 0)
+            if (System.Math.Abs(ActivateAfterTime) < 0.01f)
+            {
                 EnableMarkers();
+            }
             else
+            {
                 Invoke("EnableMarkers", ActivateAfterTime);
+            }
         }
 
         public void Local_OnDisable()
@@ -98,6 +108,7 @@ namespace HittingDetection
         public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
         {
             _MyOwnerCalReference = myOwnerCalReference;
+            AT = _MyOwnerCalReference == null ? 0 : _MyOwnerCalReference.AT;
         }
         public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
@@ -120,11 +131,12 @@ namespace HittingDetection
             }
         }
 
-        // EnableMarkers的运行归根结底也都是建立在动画事件上，而动画片段的播放在双方客户端上是平等的，所以理论上说也没有必须针对主客客户端区别执行的操作
         public void EnableMarkers()
         {
-            if (_Used_Targets != null)// 20200119 :我们认为这个null判断理论上不需要，但的确这里不加的话会有bug。以后的测试可以考虑把它去掉试试
+            if (_Used_Targets != null)
+            {
                 _Used_Targets.Clear();
+            }
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {
@@ -137,7 +149,9 @@ namespace HittingDetection
         {
             Enabled = false;
             if (_Used_Targets != null)
+            {
                 _Used_Targets.Clear();
+            }
             _Shields_Hit.Clear();
             if (_markers != null)
             {
@@ -159,7 +173,9 @@ namespace HittingDetection
         public void ClearTargets()
         {
             if (_Used_Targets != null)
+            {
                 _Used_Targets.Clear();
+            }
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {

@@ -5,12 +5,12 @@ namespace HittingDetection
 {
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        FightAttriCalReference _Raw_Target_Instance; //A single target which was hit.
+        FightAttriCalReference _Raw_Target_Instance;//A single target which was hit.
         FightAttriCalReference CalReference;
         BO_Limb _BO_Hitbox;
         Vector3 _StartPoint;
         List<Collider> BallDetectHitPool;
-        BO_Weapon_Animation_Events bO_Weapon_Animation_Events;　//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
+        BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
 
         void DetectProcess()
         {
@@ -83,7 +83,7 @@ namespace HittingDetection
                         {
                             if (SpecificTarget != SpecificTarget.flesh)
                             {
-                                if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer))) && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
+                                if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer))) && !_Used_Targets.Contains(_hits[hit_target_index].collider.transform))
                                 {
                                     HitBoxesProcesser.ColliderHitBox.TryGetValue(_hits[hit_target_index].collider, out BO_Marker_Manager hit_hitbox);
                                     if (hit_hitbox != null && hit_hitbox.Enabled)
@@ -108,7 +108,7 @@ namespace HittingDetection
                             //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
                             CalReference = _hits[hit_target_index].collider.GetComponent<FightAttriCalReference>();
                             _BO_Hitbox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
-                            if (_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) == false && _Used_Targets.Contains(_hits[hit_target_index].collider.transform) == false)
+                            if (!_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) && !_Used_Targets.Contains(_hits[hit_target_index].collider.transform))
                             {
                                 //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
                                 //if (_BO_Health != null && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
@@ -123,7 +123,7 @@ namespace HittingDetection
                                 //方式2：hitbox模式
                                 if (_BO_Hitbox != null)
                                 {
-                                    if (_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform) == false) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                    if (!_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform)) //注意看这行条件，主要就是考虑到防御问题 （* *）
                                     {
                                         HitFlesh = true;
                                         _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
@@ -179,9 +179,9 @@ namespace HittingDetection
                                             break;
                                         }
 
-                                        if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
-                                            && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
-                                            && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
+                                        if (!_Shields_Hit.Contains(TheS.transform) // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
+                                            && !_Used_Targets.Contains(TheS.transform) //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
+                                            && !_Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform)) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
                                         {
                                             if (TheS._AdvancedShieldDetection)
                                             {
@@ -256,7 +256,7 @@ namespace HittingDetection
                                     //方式2：hitbox模式
                                     if (_BO_Hitbox != null)
                                     {
-                                        if (_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform) == false) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                        if (!_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform)) //注意看这行条件，主要就是考虑到防御问题 （* *）
                                         {
                                             HitFlesh = true;
                                             _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害

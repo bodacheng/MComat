@@ -36,9 +36,7 @@ namespace HittingDetection
         heavy_damage_forward = 3,//dizzy时间较长的攻击
         supper_damage_forward = 4,//能够打飞敌人的攻击 
         draw = 5,
-        explosion = 6,
-        knockOff_damage = 10,
-        DeathKnockoff = 11
+        explosion = 6
     }
     
     public enum WeaponMode

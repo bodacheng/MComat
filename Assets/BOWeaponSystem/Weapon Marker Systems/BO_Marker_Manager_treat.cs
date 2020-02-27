@@ -32,7 +32,6 @@ namespace HittingDetection
                 {
                     if (!_Used_Targets.Contains(_Shields_Hit[i1])) //无论对墙壁，盾牌，还是伤害对象，每一轮攻击只会造成一次影响
                     {
-
                         //collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
                         //_MyOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         //switch (collision.on_weapon_holder)
@@ -82,23 +81,12 @@ namespace HittingDetection
                         Debug.Log("邪门了："+gameObject);
                         break;
                     }
-                    
-                    if (_hitOnHealthBody.victim != null && _Used_Targets.Contains(_hitOnHealthBody.victim.transform) == false)
+                    if (_hitOnHealthBody.victim != null && !_Used_Targets.Contains(_hitOnHealthBody.victim.transform))
                     {
                         _hitOnHealthBody.victim.ApplyDamage(_hitOnHealthBody);
                         _hitOnHealthBody.attacker.MyDamageCount(_hitOnHealthBody);
                         _hitOnHealthBody.attacker._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
                         _hitOnHealthBody.attacker.PlusCriticalGauge(1);
-                        //if (is_E_weapon)
-                        //{
-                        //    if (e_Damage != null)
-                        //    {
-                        //        if (!(e_Damage.Position_set.Parent == null && e_Damage.Position_set.Child == null) && !(e_Damage.Position_set.Parent != null && e_Damage.Position_set.Child != null))
-                        //        {
-                        //            _hitOnHealthBody._BO_Health.AddEventDamageList(e_Damage);
-                        //        }
-                        //    }
-                        //}
                         if (_Used_Targets != null)
                             _Used_Targets.Add(_hitOnHealthBody.victim.transform);
                         else

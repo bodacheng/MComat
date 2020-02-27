@@ -7,7 +7,7 @@ public class Hurt_State : Behavior {
     float used_dizzy_time;
     float time_counter;
     Vector3 fixDesPos;
-    bool freezed = false;
+    bool freezed;
     float TimeCounter
     {
         set {
@@ -94,21 +94,21 @@ public class Hurt_State : Behavior {
                 _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
                 break;
         }
-
+        if (newValue.from_weapon.effectSpreadOnBody)
+        {
+            _FightAttriCalReference.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
+        }
         if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.from_weapon.damage_type == DamageType.supper_damage_forward)//&& newValue.damage_type == DamageType.supper_damage
         {
-            _FightAttriCalReference.ApplyDamage(new V_Damage(newValue.from_weapon, newValue.from_weapon_marker,_FightAttriCalReference, newValue.attacker, newValue.damageHappenPoint, newValue.CutRotation));
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
+            _AIStateRunner.ChangeState("KnockOff", newValue);
+            return;
         }
         RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
         TimeCounter = 0f;
         personality_Events.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
-        if (newValue.from_weapon.effectSpreadOnBody)
-        {
-            _FightAttriCalReference.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
-        }
     }
         
     public override void _State_FixedUpdate1()

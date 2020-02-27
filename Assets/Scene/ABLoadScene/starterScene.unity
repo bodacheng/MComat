@@ -1424,7 +1424,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
-  knockoffextent: 18
+  knockoffextent: 8
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 1
@@ -83737,17 +83737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
-  accuracy: 95
-  fireRate: 1
-  muzzlePrefab: {fileID: 1237854105968354, guid: 04a5cfcd62a83c8438ec4daafe366eab,
-    type: 3}
-  hitPrefab: {fileID: 1351045683517926, guid: 5437767f5f3dd5a45aee00470cff8171, type: 3}
-  shotSFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  trails:
-  - {fileID: 4390340532925881919}
-  - {fileID: 4389898418153057839}
 --- !u!96 &4448736624160268559
 TrailRenderer:
   serializedVersion: 2
@@ -146094,17 +146083,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
-  accuracy: 95
-  fireRate: 1
-  muzzlePrefab: {fileID: 1237854105968354, guid: 12b58a1f6f2b018428a22d5fcc5294d6,
-    type: 3}
-  hitPrefab: {fileID: 1351045683517926, guid: 9d441dfa12fa7e944aac5fc07972d9fd, type: 3}
-  shotSFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  trails:
-  - {fileID: 6819115130846054563}
-  - {fileID: 6819522115001530547}
 --- !u!114 &6885027140479993720
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public class Knock_Off_State : Behavior
                 _AIStateRunner.ChangeState("getUp");
         }
 
-        if (!canbeattack && time_counter > 0.1f)
+        if (!canbeattack && time_counter > 0.02f)
         {
             _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
             _FightAttriCalReference.EnableAllHitBoxCollider(true);
