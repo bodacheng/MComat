@@ -220,19 +220,6 @@ namespace Soul
         //    return true;
         //}
 
-        List<BehaviorEnterRange> temp;
-        protected BehaviorEnterRange[] RangePlusOne(BehaviorEnterRange[] old)//这个东西的意思是，假设是连击情况下，那所有技能的触发范围可能有个修正，比如原本一个中程技能，连击情况下AI在近距离也可触发。
-        {
-            temp = old.ToList();
-            if (temp.Contains(BehaviorEnterRange.inner_range) && !temp.Contains(BehaviorEnterRange.mid_range))
-                temp.Add(BehaviorEnterRange.mid_range);
-            if (temp.Contains(BehaviorEnterRange.mid_range) && !temp.Contains(BehaviorEnterRange.inner_range))
-                temp.Add(BehaviorEnterRange.inner_range);
-            if (temp.Contains(BehaviorEnterRange.far_range) && !temp.Contains(BehaviorEnterRange.mid_range))
-                temp.Add(BehaviorEnterRange.mid_range);
-            return temp.ToArray();
-        }
-
         // Rotate to a target
         Vector3 look_dir;
         Quaternion dirQ;

@@ -16,7 +16,7 @@ public class ConfigFileManager : MonoBehaviour {
     public string MonstersConfigFilePath;
     public TextAsset SkillConfigTextFile;
     public string SkillConfigFilePath;
-
+    
     // 以下这个函数对技能表的更新机制企划如下：
     // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
     // 配置文件允许在一个type下存在相同realname的复数个条目(同一个动画不同攻击类型)，
@@ -67,8 +67,8 @@ public class ConfigFileManager : MonoBehaviour {
             // 并且如果旧的config文件中已经有针对一个动画资源的技能状态定义，那么以旧定义为准，不会去动它，即便你换了某个动画片段的Resource文件夹位置。
             // 你如果真换了某个动画片段的Resource文件夹位置，那意味着你可能本来觉得它是个GR类攻击，那后来觉得做GM攻击更合适，那你只能手动去数据库文件做相应更改，这个更新操作不会替你做这个事情。
             // GR系列的状态角色必须有个叫做“dash”的冲刺动作
-            UnityEngine.Object[] GAttackStateResources = Resources.LoadAll("Animations/" + chartype + "/G_Attack_State", typeof(AnimationClip));
-            foreach (UnityEngine.Object _anim in GAttackStateResources)
+            Object[] GAttackStateResources = Resources.LoadAll("Animations/" + chartype + "/G_Attack_State", typeof(AnimationClip));
+            foreach (Object _anim in GAttackStateResources)
             {
                 if (!currentAllRealNamesOfResourceFolder.Contains(_anim.name))
                     currentAllRealNamesOfResourceFolder.Add(_anim.name);
@@ -88,7 +88,8 @@ public class ConfigFileManager : MonoBehaviour {
                         SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
                         STATE_TYPE = BehaviorType.GR,
-                        ai_trigger_ranges = new BehaviorEnterRange[1] { BehaviorEnterRange.inner_range },
+                        AI_MIN_DIS = 0.2f,
+                        AI_MAX_DIS = 5f,
                         CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
@@ -98,8 +99,8 @@ public class ConfigFileManager : MonoBehaviour {
                 }
             }
 
-            UnityEngine.Object[] GAttackStateStayResources = Resources.LoadAll("Animations/" + chartype + "/G_Attack_State_Stay", typeof(AnimationClip));
-            foreach (UnityEngine.Object _anim in GAttackStateStayResources)
+            Object[] GAttackStateStayResources = Resources.LoadAll("Animations/" + chartype + "/G_Attack_State_Stay", typeof(AnimationClip));
+            foreach (Object _anim in GAttackStateStayResources)
             {
                 if (!currentAllRealNamesOfResourceFolder.Contains(_anim.name))
                     currentAllRealNamesOfResourceFolder.Add(_anim.name);
@@ -119,7 +120,8 @@ public class ConfigFileManager : MonoBehaviour {
                         SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
                         STATE_TYPE = BehaviorType.GI,
-                        ai_trigger_ranges = new BehaviorEnterRange[3] { BehaviorEnterRange.inner_range, BehaviorEnterRange.mid_range, BehaviorEnterRange.far_range },
+                        AI_MIN_DIS = 3f,
+                        AI_MAX_DIS = 10f,
                         CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
@@ -128,9 +130,9 @@ public class ConfigFileManager : MonoBehaviour {
                     //这个资源对应的条目已经在原先的config文件里已经有了，保留原先设定。
                 }
             }
-
-            UnityEngine.Object[] GMResources = Resources.LoadAll("Animations/" + chartype + "/GMStates", typeof(AnimationClip));
-            foreach (UnityEngine.Object _anim in GMResources)
+            
+            Object[] GMResources = Resources.LoadAll("Animations/" + chartype + "/GMStates", typeof(AnimationClip));
+            foreach (Object _anim in GMResources)
             {
                 if (!currentAllRealNamesOfResourceFolder.Contains(_anim.name))
                     currentAllRealNamesOfResourceFolder.Add(_anim.name);
@@ -150,7 +152,8 @@ public class ConfigFileManager : MonoBehaviour {
                         SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
                         STATE_TYPE = BehaviorType.GM,
-                        ai_trigger_ranges = new BehaviorEnterRange[2] { BehaviorEnterRange.mid_range, BehaviorEnterRange.inner_range },
+                        AI_MIN_DIS = 3f,
+                        AI_MAX_DIS = 8f,
                         CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
@@ -241,7 +244,9 @@ public class ConfigFileManager : MonoBehaviour {
     public void CharsConfigFileGenerate(string path, TextAsset textAsset)
     {
         if (textAsset != null)
+        {
             MonstersConfigTable.Instance.Load(textAsset);
+        }
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
         List<CharacterResourceInfo> AllNewCharacterConfigsOfAllTypes = new List<CharacterResourceInfo>();
@@ -255,7 +260,9 @@ public class ConfigFileManager : MonoBehaviour {
                 if (!keySonnCharacterRealNames.Contains(oneConfig.REAL_NAME))
                 {
                     keySonnCharacterRealNames.Add(oneConfig.REAL_NAME);
-                }else{
+                }
+                else
+                {
                     //什么也不做。允许。
                 }
                 kisoonCharacterResourceInfoRID.Add(oneConfig.RECORD_ID);
@@ -275,7 +282,7 @@ public class ConfigFileManager : MonoBehaviour {
                 GameObject character = charPretab as GameObject;
                 if (character.GetComponent<OutsideDataLink>() == null)
                 {
-                    Debug.Log(chartype+"资源"+ charPretab.name + "丢失必要组件，不是一个正常角色资源");
+                    Debug.Log(chartype + "资源" + charPretab.name + "丢失必要组件，不是一个正常角色资源");
                     continue;
                 }
 

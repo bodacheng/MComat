@@ -32,7 +32,8 @@ public class SkillConfigTable
 		public string ATTACK_WEIGHT;
 		public string ATTACK_TYPE;
         public string SP_LEVEL;
-		public string CR_SKILL_FLAG;
+		public string TRIGGER_DIS_MIN;
+        public string TRIGGER_DIS_MAX;
 		public string MR_SKILL_FLAG;
 		public string LR_SKILL_FLAG;
         public string VL_SKILL_FLAG;
@@ -111,41 +112,34 @@ public class SkillConfigTable
         };
         List<SkillConfig> list = GetSkillConfigsOfType(type);
         foreach (SkillConfig one in list)
-        {
-            if (RangeLimit(one.ai_trigger_ranges.ToList(), ranges[0], ranges[1], ranges[2],ranges[3]) 
-                && 
-                (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
+        {    
+            if (RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2],ranges[3]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
-                SkillIDAndNameDic.Add( one.RECORD_ID, one.REAL_NAME );
-            }else{
-                Debug.Log("因条件不符合为加入"+ one.REAL_NAME);
+                SkillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
             }
         }
         return SkillIDAndNameDic;
     }
-    
-    public static bool RangeLimit(List<BehaviorEnterRange> behaviorEnterRangesList, bool close, bool near, bool far, bool outrange)
+        
+    public static bool RangeLimit(float dis_min ,float dis_max, bool close, bool near, bool far, bool outrange) // 待修 
     {
-        for (int i = 0; i < behaviorEnterRangesList.Count;i++)
+        if (dis_max > dis_min)
         {
-            switch(behaviorEnterRangesList[i])
+            if ((dis_min <= 5 && dis_max >= 0f) && close)
             {
-                case BehaviorEnterRange.inner_range:
-                    if (close)
-                        return true;
-                    break;
-                case BehaviorEnterRange.mid_range:
-                    if (near)
-                        return true;
-                    break;
-                case BehaviorEnterRange.far_range:
-                    if (far)
-                        return true;
-                    break;
-                case BehaviorEnterRange.out_of_range:
-                    if (outrange)
-                        return true;
-                    break;
+                return true;
+            }
+            if ((dis_min <= 10f && dis_max >= 5f) && near)
+            {
+                return true;
+            }
+            if ((dis_min <= 15f && dis_max >= 10f) && far)
+            {
+                return true;
+            }
+            if ((dis_min <= 20f && dis_max >= 15f) && outrange)
+            {
+                return true;
             }
         }
         return false;
@@ -202,12 +196,10 @@ public class SkillConfigTable
                 grid[i][3] = "ATTACK_WEIGHT";
                 grid[i][4] = "ATTACK_TYPE";
                 grid[i][5] = "SP_LEVEL";
-                grid[i][6] = "CR_SKILL_FLAG";
-                grid[i][7] = "MR_SKILL_FLAG";
-                grid[i][8] = "LR_SKILL_FLAG";
-                grid[i][9] = "VL_SKILL_FLAG";
-                grid[i][10] = "AI_PRIORITY";
-                grid[i][11] = "RARITY_LEVEL";
+                grid[i][6] = "TRIGGER_DIS_MIN";
+                grid[i][7] = "TRIGGER_DIS_MAX";
+                grid[i][8] = "AI_PRIORITY";
+                grid[i][9] = "RARITY_LEVEL";
             }
             else
             {
@@ -217,12 +209,10 @@ public class SkillConfigTable
                 grid[i][3] = rowList[i - 1].ATTACK_WEIGHT;
                 grid[i][4] = rowList[i - 1].ATTACK_TYPE;
                 grid[i][5] = rowList[i - 1].SP_LEVEL;
-                grid[i][6] = rowList[i - 1].CR_SKILL_FLAG;
-                grid[i][7] = rowList[i - 1].MR_SKILL_FLAG;
-                grid[i][8] = rowList[i - 1].LR_SKILL_FLAG;
-                grid[i][9] = rowList[i - 1].VL_SKILL_FLAG;
-                grid[i][10] = rowList[i - 1].CAN_LEVELUP;
-                grid[i][11] = rowList[i - 1].RARITY_LEVEL;
+                grid[i][6] = rowList[i - 1].TRIGGER_DIS_MIN;
+                grid[i][7] = rowList[i - 1].TRIGGER_DIS_MAX;
+                grid[i][8] = rowList[i - 1].CAN_LEVELUP;
+                grid[i][9] = rowList[i - 1].RARITY_LEVEL;
             }
         }
         string delimiter = ",";
@@ -253,12 +243,10 @@ public class SkillConfigTable
                     ATTACK_WEIGHT = grid[i][3],
                     ATTACK_TYPE = grid[i][4],
                     SP_LEVEL = grid[i][5],
-                    CR_SKILL_FLAG = grid[i][6],
-                    MR_SKILL_FLAG = grid[i][7],
-                    LR_SKILL_FLAG = grid[i][8],
-                    VL_SKILL_FLAG = grid[i][9],
-                    CAN_LEVELUP = grid[i][10],
-                    RARITY_LEVEL = grid[i][11]
+                    TRIGGER_DIS_MIN = grid[i][6],
+                    TRIGGER_DIS_MAX = grid[i][7],
+                    CAN_LEVELUP = grid[i][8],
+                    RARITY_LEVEL = grid[i][9]
                 };
                 rowList.Add(row);
             }
@@ -312,12 +300,10 @@ public class SkillConfigTable
                 row.ATTACK_TYPE = "NONE";
                 break;
         }
-
-        row.CR_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.inner_range) ? "1" : "0";
-        row.MR_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.mid_range) ? "1" : "0";
-        row.LR_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.far_range) ? "1" : "0";
-        row.VL_SKILL_FLAG = skillConfig.ai_trigger_ranges.Contains(BehaviorEnterRange.out_of_range) ? "1" : "0";
-
+        
+        row.TRIGGER_DIS_MIN = skillConfig.AI_MIN_DIS.ToString();
+        row.TRIGGER_DIS_MAX = skillConfig.AI_MAX_DIS.ToString();
+                
         switch (skillConfig.SP_LEVEL)
         {
             case 0:
@@ -372,17 +358,9 @@ public class SkillConfigTable
                 _SkillConfig.STATE_TYPE = BehaviorType.NONE;
                 break;
         }
-        
-        List<BehaviorEnterRange> ranges = new List<BehaviorEnterRange>();
-        if (row.CR_SKILL_FLAG == "1")
-            ranges.Add(BehaviorEnterRange.inner_range);
-        if (row.MR_SKILL_FLAG == "1")
-            ranges.Add(BehaviorEnterRange.mid_range);
-        if (row.LR_SKILL_FLAG == "1")
-            ranges.Add(BehaviorEnterRange.far_range);
-        if (row.VL_SKILL_FLAG == "1")
-            ranges.Add(BehaviorEnterRange.out_of_range);
-        _SkillConfig.ai_trigger_ranges = ranges.ToArray();
+
+        _SkillConfig.AI_MIN_DIS = float.Parse(row.TRIGGER_DIS_MIN);
+        _SkillConfig.AI_MAX_DIS = float.Parse(row.TRIGGER_DIS_MAX);
 
         switch(row.SP_LEVEL)
         {
@@ -462,38 +440,6 @@ public class SkillConfigTable
 	{
 		return rowList.FindAll(x => x.ATTACK_TYPE == find);
 	}
-	public Row Find_AI_close(string find)
-	{
-		return rowList.Find(x => x.CR_SKILL_FLAG == find);
-	}
-	public List<Row> FindAll_AI_close(string find)
-	{
-		return rowList.FindAll(x => x.CR_SKILL_FLAG == find);
-	}
-	public Row Find_AI_near(string find)
-	{
-		return rowList.Find(x => x.MR_SKILL_FLAG == find);
-	}
-	public List<Row> FindAll_AI_near(string find)
-	{
-		return rowList.FindAll(x => x.MR_SKILL_FLAG == find);
-	}
-	public Row Find_AI_far(string find)
-	{
-		return rowList.Find(x => x.LR_SKILL_FLAG == find);
-	}
-	public List<Row> FindAll_AI_far(string find)
-	{
-		return rowList.FindAll(x => x.LR_SKILL_FLAG == find);
-	}
-    public Row Find_AI_out(string find)
-    {
-        return rowList.Find(x => x.VL_SKILL_FLAG == find);
-    }
-    public List<Row> FindAll_AI_out(string find)
-    {
-        return rowList.FindAll(x => x.VL_SKILL_FLAG == find);
-    }
 	public Row Find_SPLevel(string find)
 	{
 		return rowList.Find(x => x.SP_LEVEL == find);

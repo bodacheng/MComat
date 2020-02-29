@@ -8,7 +8,8 @@ namespace Skill
         public string StateKey;
         public BehaviorType stateType;
         public float AT;
-        public BehaviorEnterRange[] AI_trigger_ranges;
+        public float AITriggerDistanceMin;
+        public float AITriggerDistanceMax;
         public Behavior_Transition_Set[] Casual_To_Behaviours = { };
         public bool can_be_cancelled_to = true;
         public Inputs_defined enterInput = Inputs_defined.Null;
@@ -25,7 +26,7 @@ namespace Skill
         public Behavior_Transition_Set(string _StateKey,
                                         BehaviorType _attackType,
                                         float _AT,
-                                        BehaviorEnterRange[] _ai_trigger_ranges,
+                                        float AITriggerDistanceMin,float AITriggerDistanceMax,
                                         Behavior_Transition_Set[] _casual_to_state_nums,
                                         string[] _forced_to_state_nums,
                                         Inputs_defined _enterInput, Inputs_defined _exitInput,
@@ -35,7 +36,8 @@ namespace Skill
             this.StateKey = _StateKey;
             this.stateType = _attackType;
             this.AT = _AT;
-            this.AI_trigger_ranges = _ai_trigger_ranges;
+            this.AITriggerDistanceMin = AITriggerDistanceMin;
+            this.AITriggerDistanceMax = AITriggerDistanceMax;
             this.Casual_To_Behaviours = _casual_to_state_nums;
             this.forced_to_state_nums = _forced_to_state_nums;
             this.enterInput = _enterInput;
@@ -47,7 +49,7 @@ namespace Skill
         public Behavior_Transition_Set(string _StateKey,
                                         BehaviorType _attackType,
                                         float AT,
-                                        BehaviorEnterRange[] ai_trigger_ranges,
+                                        float AITriggerDistanceMin,float AITriggerDistanceMax,
                                         bool can_be_cancelled_to,
                                         Inputs_defined enterInput, Inputs_defined exitInput,
                                         int SPMove)
@@ -56,7 +58,8 @@ namespace Skill
             stateType = _attackType;
             this.AT = AT;
             this.can_be_cancelled_to = can_be_cancelled_to;
-            AI_trigger_ranges = ai_trigger_ranges;
+            this.AITriggerDistanceMin = AITriggerDistanceMin;
+            this.AITriggerDistanceMax = AITriggerDistanceMax;
             this.enterInput = enterInput;
             this.exitInput = exitInput;
             SPLevel = SPMove;
@@ -77,13 +80,5 @@ namespace Skill
         Jump = 1,
         RushBack = 2,
         Rush = 3
-    }
-    
-    public enum BehaviorEnterRange
-    {
-        out_of_range = 3,
-        far_range = 2,
-        mid_range = 1,
-        inner_range = 0
     }
 }

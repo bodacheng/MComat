@@ -11,7 +11,6 @@ public class SingleThreadProcesser : MonoBehaviour
     class Task
     {
         public int phase = 0;
-        public float processTime;
         public IEnumerator process;
         public int test = 0;
         void SetPhase(int a)

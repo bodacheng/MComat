@@ -195,7 +195,8 @@ public class NineAndTwo {
             {
                 _SkillConfig.REAL_NAME = referenceStandardSkillConfig.REAL_NAME;
                 _SkillConfig.SHOW_NAME = referenceStandardSkillConfig.SHOW_NAME;
-                _SkillConfig.ai_trigger_ranges = referenceStandardSkillConfig.ai_trigger_ranges;
+                _SkillConfig.AI_MIN_DIS = referenceStandardSkillConfig.AI_MIN_DIS;
+                _SkillConfig.AI_MAX_DIS = referenceStandardSkillConfig.AI_MAX_DIS;
                 _SkillConfig.SP_LEVEL = referenceStandardSkillConfig.SP_LEVEL;
                 _SkillConfig.STATE_TYPE = referenceStandardSkillConfig.STATE_TYPE;
             }
@@ -213,7 +214,8 @@ public class NineAndTwo {
                 STS = new Behavior_Transition_Set(_SkillConfig.REAL_NAME,
                                                _SkillConfig.STATE_TYPE,
                                                _SkillConfig.ATTACK_WEIGHT,
-                                               _SkillConfig.ai_trigger_ranges,
+                                               _SkillConfig.AI_MIN_DIS,
+                                               _SkillConfig.AI_MAX_DIS,
                                                 null,
                                                 null,
                                                Inputs_defined.Null,
@@ -404,65 +406,17 @@ public class NineAndTwo {
         IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
         StateTransitionSetList = new List<Behavior_Transition_Set>();
 
-        Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty",
-                                                              BehaviorType.NONE,
-                                                              0,
-                                                              null,
-                                                              new Behavior_Transition_Set[0], 
-                                                              new string[0], 
-                                                              Inputs_defined.Null, Inputs_defined.Null,
-                                                              0,
-                                                              0);
+        Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty", 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
 
-        Behavior_Transition_Set Victory = new Behavior_Transition_Set("Victory",
-                                                                BehaviorType.NONE,
-                                                                0,
-                                                                null,
-                                                                new Behavior_Transition_Set[0],
-                                                                new string[0],
-                                                                Inputs_defined.Null, Inputs_defined.Null,
-                                                                0,
-                                                                0);
+        Behavior_Transition_Set Victory = new Behavior_Transition_Set("Victory",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
 
-        Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",
-                                                              BehaviorType.NONE,
-                                                              0,
-                                                              null,
-                                                              new Behavior_Transition_Set[0],
-                                                              new string[0],
-                                                              Inputs_defined.Null, Inputs_defined.Null,
-                                                              0,
-                                                              0);
+        Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
 
-        Behavior_Transition_Set Defend = new Behavior_Transition_Set("Defend",
-                                                               BehaviorType.Def,
-                                                               0,
-                                                                null,
-                                                              H1_list.ToArray(),
-                                                               null,
-                                                               Inputs_defined.Defend, Inputs_defined.Defend_Cancel,
-                                                               0,
-                                                               0);
+        Behavior_Transition_Set Defend = new Behavior_Transition_Set("Defend",BehaviorType.Def,0,0,0,H1_list.ToArray(),null,Inputs_defined.Defend, Inputs_defined.Defend_Cancel,0,0);
         
-        Behavior_Transition_Set Move = new Behavior_Transition_Set("Move_normal",
-                                                             BehaviorType.NONE,
-                                                             0,
-                                                             null,
-                                                             H1_list.ToArray(),
-                                                             null,
-                                                             Inputs_defined.Null, Inputs_defined.Null,
-                                                             0,
-                                                             0);
-                       
-        Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",
-                                                            BehaviorType.Hit,
-                                                            0,
-                                                            null,
-                                                            H1_list.ToArray(),
-                                                            null,
-                                                            Inputs_defined.Null, Inputs_defined.Null,
-                                                            0,
-                                                            0);
+        Behavior_Transition_Set Move = new Behavior_Transition_Set("Move_normal",BehaviorType.NONE,0,0,0,H1_list.ToArray(),null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+
+        Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",BehaviorType.Hit,0,0,0,H1_list.ToArray(),null,Inputs_defined.Null, Inputs_defined.Null,0,0);
                                                             
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
@@ -522,37 +476,20 @@ public class NineAndTwo {
             //下面这些就是怕数据库里九宫格里的M记载有错。
             M.SPLevel = -1;
             M.Casual_To_Behaviours = H1_list.ToArray();
-            M.AI_trigger_ranges = null;
             StateTransitionSetList.Add(M);
         }
         else
+        {
             StateTransitionSetList.Add(Move);// 这个地方是说，要么你自定义移动类状态，要么加默认移动状态。因为移动状态其实可能根据角色被动而不同。
+        }
         
-        Behavior_Transition_Set getUp = new Behavior_Transition_Set("getUp",
-                                                                    BehaviorType.GetUp,
-                                                                    0,
-                                                                    null,
-                                                                    H1_list.ToArray(),
-                                                                    null,
-                                                                    Inputs_defined.Any, Inputs_defined.Null,
-                                                                    0,
-                                                                    0);
+        Behavior_Transition_Set getUp = new Behavior_Transition_Set("getUp",BehaviorType.GetUp,0,0,0,H1_list.ToArray(),null,Inputs_defined.Any, Inputs_defined.Null,0,0);
+        Behavior_Transition_Set KnockOff = new Behavior_Transition_Set("KnockOff",BehaviorType.KnockOff,0,0,0,new Behavior_Transition_Set[]{ getUp },null,Inputs_defined.Null, Inputs_defined.Null,0,0);
         StateTransitionSetList.Add(getUp);
-
-        Behavior_Transition_Set KnockOff = new Behavior_Transition_Set( "KnockOff",
-                                                                        BehaviorType.KnockOff,
-                                                                        0,
-                                                                        null,
-                                                                        new Behavior_Transition_Set[]{ getUp },
-                                                                        null,
-                                                                        Inputs_defined.Null, Inputs_defined.Null,
-                                                                        0,
-                                                                        0);
         StateTransitionSetList.Add(KnockOff);
-
+        
         //从下面这个地方可以看到我们需要在sort阶段把RMD全部准备好，而且必须是要么为null要么是一个完整STS信息。
 
-        /////////////////////
         foreach (Behavior_Transition_Set _State_Transition_Set in StateTransitionSetList)
         {
             if (_State_Transition_Set.StateKey != null && !state_Transition_Dictionary.ContainsKey(_State_Transition_Set.StateKey))
@@ -571,7 +508,7 @@ public class NineAndTwo {
         }
         return state_Transition_Dictionary;
     }
-
+    
     //下面的环节纯粹是针对SkillPrintOut的一些处理
     public IDictionary<int, Behavior_Transition_Set> GetAttackChuan()
     {

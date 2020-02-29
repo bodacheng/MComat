@@ -115,9 +115,8 @@ namespace Soul
                     s.state.splevel = Behaviour_Transition_Dictionary[s.num].SPLevel;
                     s.state.enterInput = Behaviour_Transition_Dictionary[s.num].enterInput;
                     s.state.exitInput = Behaviour_Transition_Dictionary[s.num].exitInput;
-                    float[] triggerRange = SkillTriggerDistance(Behaviour_Transition_Dictionary[s.num].AI_trigger_ranges);
-                    s.state.triggerAtttackRangeMin = triggerRange[0];
-                    s.state.triggerAtttackRangeMax = triggerRange[1];
+                    s.state.triggerAtttackRangeMin = Behaviour_Transition_Dictionary[s.num].AITriggerDistanceMin;
+                    s.state.triggerAtttackRangeMax = Behaviour_Transition_Dictionary[s.num].AITriggerDistanceMax;
                     AddAITriggerConditionToBehavior(Behaviour_Transition_Dictionary[s.num]);
                     Behaviour_Dictionary.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
                 }
@@ -131,48 +130,6 @@ namespace Soul
             {
                 commandWaitingState = Behaviour_Dictionary[nineAndTwo.GetM_STS().StateKey];
             }
-        }
-
-        public float[] SkillTriggerDistance(BehaviorEnterRange[] AI_trigger_ranges)
-        {
-            float min = 100, max = 0f;
-            if (AI_trigger_ranges != null)
-            {
-                List<BehaviorEnterRange> behaviorEnterRanges = AI_trigger_ranges.ToList();
-                if (behaviorEnterRanges.Contains(BehaviorEnterRange.inner_range))
-                {
-                    if (min > 0)
-                        min = 0;
-                    if (max <= 5)
-                        max = 5;
-                }
-                if (behaviorEnterRanges.Contains(BehaviorEnterRange.mid_range))
-                {
-                    if (min > 5)
-                        min = 5;
-                    if (max <= 10)
-                        max = 10;
-                }
-                if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
-                {
-                    if (min > 10)
-                        min = 10;
-                    if (max <= 15)
-                        max = 15;
-                }
-                if (behaviorEnterRanges.Contains(BehaviorEnterRange.out_of_range))
-                {
-                    if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
-                    {
-                        if (min > 15)
-                            min = 15;
-                        if (max <= 30)
-                            max = 30;
-                    }
-                }
-            }
-            Debug.Log("min:"+ min + "  max:"+max);
-            return new float[2] { min, max };
         }
     }
 }

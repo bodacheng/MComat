@@ -44,11 +44,11 @@ public static class AIScriptReading {
             _AIStateRunner.usingScript = Script;
             if (list == null)
             {
-                list = new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",BehaviorType.NONE,0,null,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
+                list = new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
             }else{
                 if (list.Count == 0)
                 {
-                    list.Add(new Behavior_Transition_Set("Empty",BehaviorType.NONE,0,null,null, null,Inputs_defined.Null, Inputs_defined.Null,0,0));
+                    list.Add(new Behavior_Transition_Set("Empty",0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0));
                 }
             }
             return list;
@@ -57,7 +57,7 @@ public static class AIScriptReading {
         {
             Debug.Log("状态迁移信息读取失败,返回只有空状态的列表");
             Debug.Log(e.ToString());
-            return new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",BehaviorType.NONE,0,null,null, null,Inputs_defined.Null,Inputs_defined.Null,0,0)};
+            return new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
         }
     }
 }

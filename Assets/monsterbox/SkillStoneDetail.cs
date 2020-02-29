@@ -113,35 +113,34 @@ namespace mainMenu
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
             Showname.text = _SkillConfigOfSkillStone.RECORD_ID;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
-            ShowSKillRanges(_SkillConfigOfSkillStone.ai_trigger_ranges);
+            ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
             currentstone = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
             skill_level_levelup.text = "LV:" + (currentstone.level ?? "1");
             skill_level_info.text = "LV:" + (currentstone.level ?? "1");
             RefreshSkillLevelUpModule();
         }
         
-        void ShowSKillRanges(BehaviorEnterRange[] ranges)
+        void ShowSKillRanges(float dis_min, float float_max)
         {
-            List<BehaviorEnterRange> behaviorEnterRanges = ranges.ToList();
-            if (behaviorEnterRanges.Contains(BehaviorEnterRange.inner_range))
-                close.SetActive(true);
-            else
-                close.SetActive(false);
+            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.inner_range))
+            //    close.SetActive(true);
+            //else
+            //    close.SetActive(false);
                 
-            if (behaviorEnterRanges.Contains(BehaviorEnterRange.mid_range))
-                near.SetActive(true);
-            else
-                near.SetActive(false);
+            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.mid_range))
+            //    near.SetActive(true);
+            //else
+            //    near.SetActive(false);
                 
-            if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
-                far.SetActive(true);
-            else
-                far.SetActive(false);
+            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
+            //    far.SetActive(true);
+            //else
+            //    far.SetActive(false);
                 
-            if (behaviorEnterRanges.Contains(BehaviorEnterRange.out_of_range))
-                outter.SetActive(true);
-            else
-                outter.SetActive(false);
+            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.out_of_range))
+            //    outter.SetActive(true);
+            //else
+                //outter.SetActive(false);
         }
         
         void ShowSkillStoneExType(int eX)

@@ -21706,7 +21706,7 @@ MonoBehaviour:
   CharacterConfigTextFile: {fileID: 4900000, guid: a8dfd9feec637466989cc8c3dc8b20b2,
     type: 3}
   MonstersConfigFilePath: Assets/MonstersConfig.csv
-  SkillConfigTextFile: {fileID: 4900000, guid: 5a19fd83fdddd4659b53cdf270a57bdf, type: 3}
+  SkillConfigTextFile: {fileID: 0}
   SkillConfigFilePath: Assets/mst_skill.csv
 --- !u!4 &1443528597493275783
 Transform:
@@ -103240,7 +103240,8 @@ MonoBehaviour:
     StateKey: 
     stateType: 0
     AT: 0
-    AI_trigger_ranges: 
+    AITriggerDistanceMin: 0
+    AITriggerDistanceMax: 0
     Casual_To_Behaviours: []
     can_be_cancelled_to: 1
     enterInput: -1
@@ -151452,7 +151453,8 @@ MonoBehaviour:
     SHOW_NAME: 
     ATTACK_WEIGHT: 1
     STATE_TYPE: 0
-    ai_trigger_ranges: 
+    AITriggerDistanceMin: 0
+    AITriggerDistanceMax: 0
     SP_LEVEL: 1
     CAN_LEVELUP: 0
     RARITY_LEVEL: 0

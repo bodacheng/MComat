@@ -114,17 +114,11 @@ public class BehaviorRunnerGUI : Editor {
                 myScript.State_Transition_Set_List[i].stateType =
                 (BehaviorType)EditorGUILayout.EnumPopup("Attack Type", myScript.State_Transition_Set_List[i].stateType);
 
-                if (myScript.State_Transition_Set_List[i].stateType != BehaviorType.NONE)
+                if (myScript.State_Transition_Set_List[i].stateType != BehaviorType.NONE || myScript.State_Transition_Set_List[i].stateType != BehaviorType.MV ||
+                        myScript.State_Transition_Set_List[i].stateType != BehaviorType.Def || myScript.State_Transition_Set_List[i].stateType != BehaviorType.Hit ||
+                            myScript.State_Transition_Set_List[i].stateType != BehaviorType.KnockOff)
                 {
-                    List<BehaviorEnterRange> _ranges = myScript.State_Transition_Set_List[i].AI_trigger_ranges == null ? new List<BehaviorEnterRange>() : myScript.State_Transition_Set_List[i].AI_trigger_ranges.ToList();
-                    bool outrange, far, near, close;
-                    outrange = _ranges.Contains(BehaviorEnterRange.out_of_range);
-                    far = _ranges.Contains(BehaviorEnterRange.far_range);
-                    near = _ranges.Contains(BehaviorEnterRange.mid_range);
-                    close = _ranges.Contains(BehaviorEnterRange.inner_range);
-
                     GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
-
                     if (attackRangeToggleGUI == null)
                     {
                         attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
@@ -134,22 +128,12 @@ public class BehaviorRunnerGUI : Editor {
                         attackRangeToggleGUI.alignment = TextAnchor.MiddleLeft;
                         attackRangeToggleGUI.stretchWidth = false;
                     }
-                    outrange = EditorGUILayout.Toggle("超", outrange, attackRangeToggleGUI);
-                    far = EditorGUILayout.Toggle("远", far, attackRangeToggleGUI);
-                    near = EditorGUILayout.Toggle("中", near, attackRangeToggleGUI);
-                    close = EditorGUILayout.Toggle("近", close, attackRangeToggleGUI);
-                    GUI.backgroundColor = Color.white;
+
+                    myScript.State_Transition_Set_List[i].AITriggerDistanceMin = EditorGUILayout.FloatField("Distance Min",myScript.State_Transition_Set_List[i].AITriggerDistanceMin);
+                    myScript.State_Transition_Set_List[i].AITriggerDistanceMax = EditorGUILayout.FloatField("Distance Max",myScript.State_Transition_Set_List[i].AITriggerDistanceMax);
                     
-                    List<BehaviorEnterRange> _finalranges = new List<BehaviorEnterRange>();
-                    if (outrange) _finalranges.Add(BehaviorEnterRange.out_of_range);
-                    if (far) _finalranges.Add(BehaviorEnterRange.far_range);
-                    if (near) _finalranges.Add(BehaviorEnterRange.mid_range);
-                    if (close) _finalranges.Add(BehaviorEnterRange.inner_range);
-                    myScript.State_Transition_Set_List[i].AI_trigger_ranges = _finalranges.ToArray();
-                }else{
-                    myScript.State_Transition_Set_List[i].AI_trigger_ranges = null;
+                    GUI.backgroundColor = Color.white;
                 }
-                
                 EditorGUILayout.BeginVertical();
                 if (casualToFoldings[i] = EditorGUILayout.Foldout(casualToFoldings[i], " ****************** Casual To States ******************"))
                 {
@@ -258,17 +242,7 @@ public class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.State_Transition_Set_List.Add(
-                new Behavior_Transition_Set("Empty",
-                BehaviorType.NONE,
-                0,
-                null,
-                new Behavior_Transition_Set[0], 
-                new string[0], 
-                Inputs_defined.Null, 
-                Inputs_defined.Null,
-                0,
-                0));
+                myScript.State_Transition_Set_List.Add(new Behavior_Transition_Set("Empty", 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0));
                 InitializeList(-1, myScript.State_Transition_Set_List.Count);
             }
         }

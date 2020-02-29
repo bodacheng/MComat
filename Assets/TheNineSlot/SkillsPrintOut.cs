@@ -113,37 +113,24 @@ namespace mainMenu
                 }
 
                 if (skillName != null)
-                    skillName.text = _state_Transition_Set.StateKey;
-                if (closeRange != null)
-                    closeRange.text = "x";
-                if (nearRange != null)
-                    nearRange.text = "x";
-                if (farRange != null)
-                    farRange.text = "x";
-                if (outRange != null)
-                    outRange.text = "x";
-
-                foreach (BehaviorEnterRange _range in _state_Transition_Set.AI_trigger_ranges)
                 {
-                    switch (_range)
-                    {
-                        case BehaviorEnterRange.inner_range:
-                            if (closeRange != null)
-                                closeRange.text = "●";
-                            break;
-                        case BehaviorEnterRange.mid_range:
-                            if (nearRange != null)
-                                nearRange.text = "●";
-                            break;
-                        case BehaviorEnterRange.far_range:
-                            if (farRange != null)
-                                farRange.text = "●";
-                            break;
-                        case BehaviorEnterRange.out_of_range:
-                            if (outRange != null)
-                                outRange.text = "●";
-                            break;
-                    }
+                    skillName.text = _state_Transition_Set.StateKey;
+                }
+                if (closeRange != null)
+                {
+                    closeRange.text = "x";
+                }
+                if (nearRange != null)
+                {
+                    nearRange.text = "x";
+                }
+                if (farRange != null)
+                {
+                    farRange.text = "x";
+                }
+                if (outRange != null)
+                {
+                    outRange.text = "x";
                 }
 
                 _toDrawLines = new List<Vector3[]>();
@@ -460,7 +447,8 @@ namespace mainMenu
                     _set.StateKey,
                     _set.stateType,
                     _set.AT,
-                    _set.AI_trigger_ranges,
+                    _set.AITriggerDistanceMin,
+                    _set.AITriggerDistanceMax,
                     _set.Casual_To_Behaviours,
                     _set.forced_to_state_nums,
                     _set.enterInput,

@@ -66,71 +66,35 @@ namespace Soul
 
                 if (!alreadyInList.Contains("Empty"))
                 {
-                    Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty",
-                                                                          BehaviorType.NONE,
-                                                                          0,
-                                                                          null,
-                                                                          new Behavior_Transition_Set[0], new string[0],
-                                                                          Inputs_defined.Null, Inputs_defined.Null,
-                                                                          0,
-                                                                          0);
+                    Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty", 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
                     after_list.Add(Empty);
                     alreadyInList.Add("Empty");
                 }
 
                 if (!alreadyInList.Contains("Victory"))
                 {
-                    Behavior_Transition_Set Victory = new Behavior_Transition_Set("Victory",
-                                                                            BehaviorType.NONE,
-                                                                            0,
-                                                                            null,
-                                                                            new Behavior_Transition_Set[0], new string[0],
-                                                                            Inputs_defined.Null, Inputs_defined.Null,
-                                                                            0,
-                                                                            0);
+                    Behavior_Transition_Set Victory =  new Behavior_Transition_Set("Victory",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
                     after_list.Add(Victory);
                     alreadyInList.Add("Victory");
                 }
 
                 if (!alreadyInList.Contains("Death"))
                 {
-                    Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",
-                                                                          BehaviorType.NONE,
-                                                                          0,
-                                                                          null,
-                                                                          new Behavior_Transition_Set[0], new string[0],
-                                                                          Inputs_defined.Null, Inputs_defined.Null,
-                                                                          0,
-                                                                          0);
+                    Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
                     after_list.Add(Death);
                     alreadyInList.Add("Death");
                 }
 
                 if (!alreadyInList.Contains("Hit"))
                 {
-                    Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",
-                                                                        BehaviorType.NONE,
-                                                                        0,
-                                                                        null,
-                                                                        new Behavior_Transition_Set[0],
-                                                                        (new List<string>() { "Hit", "KnockOff" }).ToArray(),
-                                                                        Inputs_defined.Null, Inputs_defined.Null,
-                                                                        0,
-                                                                        0);
+                    Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
                     after_list.Add(Hit);
                     alreadyInList.Add("Hit");
                 }
 
                 if (!alreadyInList.Contains("KnockOff"))
                 {
-                    Behavior_Transition_Set KnockOff = new Behavior_Transition_Set("KnockOff",
-                                                                             BehaviorType.NONE,
-                                                                             0,
-                                                                             null,
-                                                                             new Behavior_Transition_Set[0], (new List<string>() { "Hit", "KnockOff" }).ToArray(),
-                                                                             Inputs_defined.Null, Inputs_defined.Null,
-                                                                             0,
-                                                                             0);
+                    Behavior_Transition_Set KnockOff = new Behavior_Transition_Set("KnockOff",BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
                     after_list.Add(KnockOff);
                     alreadyInList.Add("KnockOff");
                 }
@@ -472,7 +436,7 @@ namespace Soul
                                 _set.StateKey,
                                 _set.stateType,
                                 _set.AT,
-                                _set.AI_trigger_ranges,
+                                _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
                                 _set.can_be_cancelled_to,
                                 _set.enterInput, _set.exitInput,
                                 _set.SPLevel);
@@ -500,7 +464,7 @@ namespace Soul
                                     _set.StateKey,
                                     _set.stateType,
                                     _set.AT,
-                                    _set.AI_trigger_ranges,
+                                    _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput, _set.SPLevel);
                                 casual_to_states_after.Add(_freshNew);
@@ -527,7 +491,7 @@ namespace Soul
                                     _set.StateKey,
                                     _set.stateType,
                                     _set.AT,
-                                    _set.AI_trigger_ranges,
+                                    _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput,
                                     _set.SPLevel);
@@ -566,7 +530,7 @@ namespace Soul
                                     _set.StateKey,
                                     _set.stateType,
                                     _set.AT,
-                                    _set.AI_trigger_ranges,
+                                    _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
                                     _set.can_be_cancelled_to,
                                     _set.enterInput, _set.exitInput,
                                     _set.SPLevel);

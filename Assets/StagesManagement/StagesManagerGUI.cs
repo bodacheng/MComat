@@ -360,7 +360,9 @@ public class StagesManagerGUI : Editor {
                         EditorGUILayout.LabelField(" &&&&&&&  限制技能条件  &&&&&&& ", title);
                         filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
                         if (!filterallranges) 
-                            { skillrangeselectfilter[0] = true; skillrangeselectfilter[1] = true; skillrangeselectfilter[2] = true; skillrangeselectfilter[3] = true;}
+                        { 
+                            skillrangeselectfilter[0] = true; skillrangeselectfilter[1] = true; skillrangeselectfilter[2] = true; skillrangeselectfilter[3] = true;
+                        }
                         skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], attackRangeToggleGUI);
                         skillrangeselectfilter[1] = EditorGUILayout.Toggle("中", skillrangeselectfilter[1], attackRangeToggleGUI);
                         skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], attackRangeToggleGUI);
@@ -390,7 +392,7 @@ public class StagesManagerGUI : Editor {
                         return;
                     }
                     GUILayout.Space(10f);
-
+                    
                     if (focusingSkillConfig.RECORD_ID != null)
                     {
                         focusingSkillConfig.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",
@@ -408,45 +410,15 @@ public class StagesManagerGUI : Editor {
                                                                                     ?
                                                                                     defaultSkillConfig.SP_LEVEL : focusingSkillConfig.SP_LEVEL,
                                                                                     exoptions_display,exoptions);
-
-                        bool far = false, near = false, close = false, outrange = false;
-                        foreach (BehaviorEnterRange _behaviorEnterRange in defaultSkillConfig.ai_trigger_ranges)
-                        {
-                            switch (_behaviorEnterRange)
-                            {
-                                case BehaviorEnterRange.inner_range:
-                                    close = true;
-                                    break;
-                                case BehaviorEnterRange.mid_range:
-                                    near = true;
-                                    break;
-                                case BehaviorEnterRange.far_range:
-                                    far = true;
-                                    break;
-                                case BehaviorEnterRange.out_of_range:
-                                    outrange = true;
-                                    break;
-                            }
-                        }
-
                         GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
                         GUILayout.Space(5f);
                         EditorGUILayout.LabelField("AI模式技能触发范围");
-                        close = EditorGUILayout.Toggle("近", close, attackRangeToggleGUI);
-                        near = EditorGUILayout.Toggle("中", near, attackRangeToggleGUI);
-                        far = EditorGUILayout.Toggle("远", far, attackRangeToggleGUI);
+                        defaultSkillConfig.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MIN_DIS);
+                        defaultSkillConfig.AI_MAX_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MAX_DIS);
                         GUILayout.Space(5f);
                         GUI.backgroundColor = Color.white;
-
-                        List<BehaviorEnterRange> _finalranges = new List<BehaviorEnterRange>();
-                        if (outrange) _finalranges.Add(BehaviorEnterRange.out_of_range);
-                        if (far) _finalranges.Add(BehaviorEnterRange.far_range);
-                        if (near) _finalranges.Add(BehaviorEnterRange.mid_range);
-                        if (close) _finalranges.Add(BehaviorEnterRange.inner_range);
-                        focusingSkillConfig.ai_trigger_ranges = _finalranges.ToArray();
                     }
                 }
-
             }
             if (focusingCharInfo != null && focusingCharInfo._NineAndTwo != null)
                 focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();
