@@ -267,16 +267,18 @@ namespace HittingDetection
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
-                                        _StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);//这个地方不能用ClosestPoint。这里存在unity官方bug。
-                                        //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;//为了打击特效看起来更接近肉体 向里切一下。
-                                                                                                                                                  // 以下是几种 _StartPoint的其他算法
-                                                                                                                                                  // 1.
-                                                                                                                                                  // Vector3 fromMarkerToHit = BallDetectHitPool[hit_target_index].transform.position - _markers[i].transform.position;
-                                                                                                                                                  // _StartPoint = _markers[i].transform.position + fromMarkerToHit / 2;//我是觉得离攻击体近更稳健些
-                                                                                                                                                  // _StartPoint = BallDetectHitPool[hit_target_index].transform.position;
-                                                                                                                                                  // 2.
-                                                                                                                                                  // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
-                                                                                                                                                  // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
+                                        _StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);
+                                        //这个地方不能用ClosestPoint。这里存在unity官方bug。
+                                        //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;
+                                        //为了打击特效看起来更接近肉体 向里切一下。
+                                        // 以下是几种 _StartPoint的其他算法
+                                        // 1.
+                                        // Vector3 fromMarkerToHit = BallDetectHitPool[hit_target_index].transform.position - _markers[i].transform.position;
+                                        // _StartPoint = _markers[i].transform.position + fromMarkerToHit / 2;//我是觉得离攻击体近更稳健些
+                                        // _StartPoint = BallDetectHitPool[hit_target_index].transform.position;
+                                        // 2.
+                                        // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
+                                        // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
                                         hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up)));
                                         WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
                                     }

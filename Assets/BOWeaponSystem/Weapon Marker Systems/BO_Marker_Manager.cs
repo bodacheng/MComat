@@ -12,7 +12,7 @@ namespace HittingDetection
         
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
-        float ActivateAfterTime;
+        float ActivateAfterTime = 0;
         
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;
@@ -56,7 +56,7 @@ namespace HittingDetection
         List<Transform> _Shields_Hit = new List<Transform>();
         List<Vector3> _ShiledHitPositions = new List<Vector3>();
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
-        bool TraditionalDefendMode;
+        bool TraditionalDefendMode = false;
         float AT;
                 
         public float GetDamageAmount()

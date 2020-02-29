@@ -172,7 +172,7 @@ public class ConfigFileManager : MonoBehaviour {
                 {
                     if (!AllDeletedRecordIDs.Contains(row.RECORD_ID))
                     {
-                        Debug.Log("这是一个要删除的ID" + int.Parse(row.RECORD_ID));
+                        Debug.Log("这是一个要删除的ID" + row.RECORD_ID);
                         AllDeletedRecordIDs.Add(row.RECORD_ID);
                     }
                     else

@@ -303,31 +303,6 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
 
 namespace Skill
 {
-    public enum MoveType
-    {
-        Mode1 = 1,
-        Mode2 = 2,
-        Mode3 = 3,
-        Test = 0
-    }
-
-    public enum RushType
-    {
-        None = -1,
-        Jump = 1,
-        RushBack = 2,
-        Rush = 3
-    }
-
-    [System.Serializable]
-    public enum BehaviorEnterRange
-    {
-        out_of_range = 3,
-        far_range = 2,
-        mid_range = 1,
-        inner_range = 0
-    }
-
     public class BehaviorIndex_With_Behavior
     {
         public BehaviorIndex_With_Behavior(string num, Behavior state)

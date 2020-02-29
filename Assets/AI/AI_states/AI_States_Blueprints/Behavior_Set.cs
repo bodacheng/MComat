@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Soul;
 
 namespace Skill
 {
@@ -22,7 +21,7 @@ namespace Skill
         public Behavior_Transition_Set()
         {
         }
-
+        
         public Behavior_Transition_Set(string _StateKey,
                                         BehaviorType _attackType,
                                         float _AT,
@@ -62,5 +61,29 @@ namespace Skill
             this.exitInput = exitInput;
             SPLevel = SPMove;
         }
+    }
+    
+    public enum MoveType
+    {
+        Mode1 = 1,
+        Mode2 = 2,
+        Mode3 = 3,
+        Test = 0
+    }
+    
+    public enum RushType
+    {
+        None = -1,
+        Jump = 1,
+        RushBack = 2,
+        Rush = 3
+    }
+    
+    public enum BehaviorEnterRange
+    {
+        out_of_range = 3,
+        far_range = 2,
+        mid_range = 1,
+        inner_range = 0
     }
 }
