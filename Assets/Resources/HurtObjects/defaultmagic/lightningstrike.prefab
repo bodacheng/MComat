@@ -273,7 +273,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.20392156, g: 0.4819044, b: 1, a: 0.14117648}
+      maxColor: {r: 0.20392156, g: 0.4819044, b: 1, a: 0.8392157}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -71776,19 +71776,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivateAfterTime: 1
+  SpecificTarget: 0
   damage_type: 6
   _WeaponMode: 2
-  _WeaponPosAdjustMode: 3
   weaponHP: -1
   onGroundMagic: 1
   effectSpreadOnBody: 1
-  SpecificTarget: 0
-  _specialApply: 0
-  ContinuousDamage: 0
-  ContinuousDamageInterval: 0.2
+  zokusei: 4
   muzzle: 
   ExplosionEffect: energy_resolve
-  zokusei: 4
+  ContinuousDamage: 0
+  ContinuousDamageInterval: 0.2
 --- !u!114 &8554431029063623610
 MonoBehaviour:
   m_ObjectHideFlags: 0

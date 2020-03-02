@@ -34,9 +34,6 @@ public class SkillConfigTable
         public string SP_LEVEL;
 		public string TRIGGER_DIS_MIN;
         public string TRIGGER_DIS_MAX;
-		public string MR_SKILL_FLAG;
-		public string LR_SKILL_FLAG;
-        public string VL_SKILL_FLAG;
         public string CAN_LEVELUP;
         public string RARITY_LEVEL;
     }
@@ -192,13 +189,13 @@ public class SkillConfigTable
             {
                 grid[i][0] = "RECORD_ID";
                 grid[i][1] = "REAL_NAME";
-                grid[i][2] = "USEABLE_MONSTER_TYPE_CODE";
+                grid[i][2] = "USEABLE_MONSTER_TYPE";
                 grid[i][3] = "ATTACK_WEIGHT";
                 grid[i][4] = "ATTACK_TYPE";
                 grid[i][5] = "SP_LEVEL";
                 grid[i][6] = "TRIGGER_DIS_MIN";
                 grid[i][7] = "TRIGGER_DIS_MAX";
-                grid[i][8] = "AI_PRIORITY";
+                grid[i][8] = "CAN_LEVELUP";
                 grid[i][9] = "RARITY_LEVEL";
             }
             else
