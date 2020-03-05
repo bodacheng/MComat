@@ -143,10 +143,10 @@ public class NetFightScene : MonoBehaviour {
                 switch (RealTimeGameProcessManager.playerTeam)
                 {
                     case Team.player1:
-                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], false);
+                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
                         break;
                     case Team.player2:
-                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], false);
+                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
                         break;
                 }
                 break;

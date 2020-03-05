@@ -254,9 +254,9 @@ public class G_Attack_State : Behavior {
                 break;
             case Phase.reachedFromThebeginning://reachedFromThebeginning现在其实是两种情况：1. 冲刺状态一开始内环就有敌人 2.非冲刺状态一开始外环有敌人
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                {
                     AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
-                break;
-            default:
+                }
                 break;
         }
         //if (isEventAttackLaunchState)

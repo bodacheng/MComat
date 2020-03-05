@@ -44,6 +44,15 @@ namespace Skill
             this.exitInput = _exitInput;
             this.SPLevel = _SPMove;
             this.rarelevel = _rarelevel;
+
+            if (this.Casual_To_Behaviours == null)
+            {
+                this.Casual_To_Behaviours = new Behavior_Transition_Set[] { };
+            }
+            if (this.forced_to_state_nums == null)
+            {
+                this.forced_to_state_nums = new string[] { };
+            }
         }
 
         public Behavior_Transition_Set(string _StateKey,

@@ -104,17 +104,13 @@ namespace Soul
                 foreach (Behavior_Transition_Set s in after_list)
                 {
                     List<Behavior_Transition_Set> undefined_CausalStateRateSet = new List<Behavior_Transition_Set>();
-                    if (s.Casual_To_Behaviours != null)
+                    foreach (Behavior_Transition_Set rs in s.Casual_To_Behaviours)
                     {
-                        foreach (Behavior_Transition_Set rs in s.Casual_To_Behaviours)
+                        if (!alreadyInList.Contains(rs.StateKey))
                         {
-                            if (!alreadyInList.Contains(rs.StateKey))
-                            {
-                                undefined_CausalStateRateSet.Add(rs);
-                            }
+                            undefined_CausalStateRateSet.Add(rs);
                         }
                     }
-
                     List<Behavior_Transition_Set> casuals_t = s.Casual_To_Behaviours != null ? s.Casual_To_Behaviours.ToList() : new List<Behavior_Transition_Set>();
                     if (undefined_CausalStateRateSet.Any())
                     {

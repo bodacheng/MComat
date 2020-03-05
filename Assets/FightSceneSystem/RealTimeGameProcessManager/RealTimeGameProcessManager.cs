@@ -40,7 +40,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
     
     public void SwitchToWatchMode() // button behaviour
     {
-        SwitchToCMode(null, false);
+        SwitchToCMode(null, playerTeam, false);
     }
     
 	public void Refresh()//这个刷新是倾向于画面制御
@@ -58,7 +58,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         void SwitchAUtoMOde()
         {
             Auto = !Auto;
-            SwitchToCMode(focusingChar, Auto);
+            SwitchToCMode(focusingChar, playerTeam, Auto);
         }
         autoBUtton.onClick.RemoveAllListeners();
         autoBUtton.onClick.AddListener(SwitchAUtoMOde);
@@ -77,7 +77,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }
 	}
     
-	public void SwitchToCMode(Data_Center _char,bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
+	public void SwitchToCMode(Data_Center _char, Team team, bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
     {
         if (focusingChar != null)
             MobileInputsManager.SetPlayerMode(false);
@@ -85,7 +85,16 @@ public class RealTimeGameProcessManager : MonoBehaviour
         if (focusingChar != null)
         {
             MobileInputsManager.SetPlayerMode(playerControll);
-            _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, new List<Transform>() { focusingChar.WholeT });
+            
+            if (team == Team.player1)
+            {
+                _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam2.TeamMemberTransforms());
+            }
+            else
+            {
+                _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam1.TeamMemberTransforms());
+            }
+
             _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
         }else{
             _CameraManager.Assign_Camera(Camera_Mode_Num.TopDown,null);
@@ -120,11 +129,11 @@ public class RealTimeGameProcessManager : MonoBehaviour
             {
                 case Team.player1:
                     playerTeam = Team.player2;
-                    SwitchToCMode(null,Auto);
+                    SwitchToCMode(null,playerTeam,Auto);
                 break;
                 case Team.player2:
                     playerTeam = Team.player1;
-                    SwitchToCMode(null,Auto);
+                    SwitchToCMode(null,playerTeam,Auto);
                 break;
             }
         }

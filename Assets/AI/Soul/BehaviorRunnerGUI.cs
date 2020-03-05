@@ -136,12 +136,7 @@ public class BehaviorRunnerGUI : Editor {
                 }
                 EditorGUILayout.BeginVertical();
                 if (casualToFoldings[i] = EditorGUILayout.Foldout(casualToFoldings[i], " ****************** Casual To States ******************"))
-                {
-                    if (myScript.State_Transition_Set_List[i].Casual_To_Behaviours == null)
-                    {
-                        myScript.State_Transition_Set_List[i].Casual_To_Behaviours = new Behavior_Transition_Set[]{};
-                    }
-                    
+                {                    
                     for (int y = 0; y < myScript.State_Transition_Set_List[i].Casual_To_Behaviours.Length; y++)
                     {
                         EditorGUI.indentLevel++;

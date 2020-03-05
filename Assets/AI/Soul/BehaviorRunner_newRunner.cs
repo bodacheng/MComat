@@ -21,6 +21,12 @@ namespace Soul
                 Behaviour_Transition_Dictionary.TryGetValue(now_Behavior.StateKey, out CurrentBehaviorTransitionSet);
             }
             
+            if (CurrentBehaviorTransitionSet == null)
+            {
+                Debug.Log("???" + now_Behavior.StateKey);
+                return;
+            }
+            
             #region Forced state transition 
             if (CurrentBehaviorTransitionSet.forced_to_state_nums != null && CurrentBehaviorTransitionSet.forced_to_state_nums.Length > 0)
             {
@@ -39,7 +45,7 @@ namespace Soul
                 return; // Once a state is forced to trigger, there is no need for the rest of codes to run at this frame
             }
             #endregion
-
+            
             #region 查找已经可以触发的后续技能
             foreach (Behavior_Transition_Set Behavior_set in CurrentBehaviorTransitionSet.Casual_To_Behaviours)
             {

@@ -18,7 +18,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void Action1()
             {
-                realTimeGameProcessManager.SwitchToCMode(a_char, RealTimeGameProcessManager.Auto);
+                realTimeGameProcessManager.SwitchToCMode(a_char, teamConfig.myTeam, RealTimeGameProcessManager.Auto);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];

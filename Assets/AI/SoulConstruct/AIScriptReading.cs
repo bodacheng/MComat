@@ -44,7 +44,7 @@ public static class AIScriptReading {
             _AIStateRunner.usingScript = Script;
             if (list == null)
             {
-                list = new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
+                list = new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",0,0,0,0,null ,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
             }else{
                 if (list.Count == 0)
                 {

@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour
     readonly IDictionary<Camera_Mode_Num, CameraMode> camera_Mode_Dictionary = new Dictionary<Camera_Mode_Num, CameraMode>()
     {
         {Camera_Mode_Num.GodPlayerCertainYCamera,new GodPlayerCertainYCamera(5f, 5f, 2f)},
-        {Camera_Mode_Num.CertainYAntiVibrationCamera, new CertainYAntiVibrationCamera(7f, 4f)},
+        {Camera_Mode_Num.CertainYAntiVibrationCamera, new TestCameraMode(10f, 7f)},
         {Camera_Mode_Num.LerpToCertainPlace, new LerpToCertainPlace()},
         {Camera_Mode_Num.approachToCertainDistance,  new LerpToCertainDistance(5f,1f)},
         {Camera_Mode_Num.keepTargetLeft, new keepTargetLeftCamera()},

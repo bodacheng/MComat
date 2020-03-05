@@ -32,6 +32,16 @@ public partial class FightTeam : MonoBehaviour
         datacenterHitComboDic.Clear();
     }
     
+    public List<Transform> TeamMemberTransforms()
+    {
+        List<Transform> transforms = new List<Transform>();
+        foreach(Data_Center _one in teamMembers.values)
+        {
+            transforms.Add(_one.WholeT);
+        }
+        return transforms;
+    }
+    
     public void BarsPositionUpdate()
     {
         foreach(Data_Center _one in teamMembers.values)
