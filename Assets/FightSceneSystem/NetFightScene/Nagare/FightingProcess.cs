@@ -17,7 +17,7 @@ public class FightingProcess : NagareProcess
             }
         );
     }
-        
+    
     public override void ProcessEnter()
     {
         AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.teamMembers.values);

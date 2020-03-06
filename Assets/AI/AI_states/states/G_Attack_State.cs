@@ -12,17 +12,15 @@ using Skill;
 // 并且留下了一些问题：必须重新权衡此类攻击的AI进入范围，对整个系统的距离分段也要重新衡量，以及本状态的进入冲刺距离也都要重新仔细考虑。
 
 public class G_Attack_State : Behavior {
-
-	string clip_name;
-    string dash_clip_name;
-    int _skillEmergentLevel;
-
-    bool isEventAttackLaunchState;
-    bool isEventAttackEndState;
-    float rushSpeed;
-    float approcahingSpeed;
-    float maxRushTime, rush_time_counter;
-    
+    readonly string clip_name;
+    readonly string dash_clip_name;
+    readonly int _skillEmergentLevel;
+    readonly bool isEventAttackLaunchState;
+    readonly bool isEventAttackEndState;
+    readonly float rushSpeed;
+    readonly float approcahingSpeed;
+    readonly float maxRushTime;
+    float rush_time_counter;
     Phase _phase;
     UnityEngine.Events.UnityAction rushstart;
     UnityEngine.Events.UnityAction rushend;

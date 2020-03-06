@@ -34,7 +34,7 @@ public class CameraManager : MonoBehaviour
 
     void Awake()
     {
-        _camera = this.gameObject.GetComponent<Camera>();
+        _camera = gameObject.GetComponent<Camera>();
         _camera.depthTextureMode = DepthTextureMode.Depth;
     }
 
@@ -42,7 +42,7 @@ public class CameraManager : MonoBehaviour
     {
         Screen.SetResolution(1080, 720, true, 60);
     }
-
+    
     void Update()
     {
         if (current_Camera_Mode != null)
@@ -53,9 +53,9 @@ public class CameraManager : MonoBehaviour
 
     public void Assign_Camera(Camera_Mode_Num num, List<Transform> targets)
     {
-        this.camera_Mode_Dictionary.TryGetValue(num, out current_Camera_Mode);
-        this.current_Camera_Mode.targets = targets;//有些相机模式的enter函数内处理需要根据targets来
-        this.current_Camera_Mode.Enter(_camera);
+        camera_Mode_Dictionary.TryGetValue(num, out current_Camera_Mode);
+        current_Camera_Mode.targets = targets;//有些相机模式的enter函数内处理需要根据targets来
+        current_Camera_Mode.Enter(_camera);
     }
     
     public void Assign_StartToEndModeCamera(Vector3 p, float duration,float sizeoffield)
@@ -63,16 +63,8 @@ public class CameraManager : MonoBehaviour
         camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
         _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration, sizeoffield);
-        this.current_Camera_Mode.Enter(_camera);
-    }
-    
-    public void Assign_StartToEndModeCamera(Vector3 p,float duration)
-    {
-        this.camera_Mode_Dictionary.TryGetValue(Camera_Mode_Num.startAndEnd, out current_Camera_Mode);
-        StartToEndMode _LerpToCertainPlace = (StartToEndMode)current_Camera_Mode;
-        _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration);
-        this.current_Camera_Mode.Enter(_camera);
-    }
+        current_Camera_Mode.Enter(_camera);
+    }    
 }
 
 public abstract class CameraMode
@@ -92,23 +84,7 @@ public abstract class CameraMode
     {
         this.meCenter = meCenter;
     }
-
-    public void SetCertainYModeParameters(float XZDis, float YDis, Transform meCenter)
-    {
-        this.YDis = YDis;
-        this.XZDis = XZDis;
-        this.meCenter = meCenter;
-    }
-
-    public void SetWatchOverModeParas(float XZdis,float Ydis, float XZrosOffset, float YrosOffset, float speed)
-    {
-        this.XZDis = XZdis;
-        this.YDis = Ydis;
-        this.XZrosOffset = XZrosOffset;
-        this.YrosOffset = YrosOffset;
-        this.speed = speed;
-    }
-    
+        
     public virtual void Enter(Camera _camera)
     {
     }

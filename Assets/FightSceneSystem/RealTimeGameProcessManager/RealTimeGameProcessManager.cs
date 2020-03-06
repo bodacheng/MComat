@@ -151,20 +151,3 @@ public enum Inputs_defined
     Defend_Cancel = 4,
     Any = 6
 }
-
-//    switch (this.hPBarDisplayMode)
-//{
-//    case HPBarDisplayMode.allEnemies:
-//        break;
-//    case HPBarDisplayMode.onlyNearEnemies:
-//        if (focusingChar == null)
-//            continue;
-//        if (Vector3.Distance(_one.transform.position, focusingChar.gameObject.transform.position) > 11f)
-//        {
-//            oneHpBar.gameObject.SetActive(false);// 试着变颜色
-//            continue;
-//        }else{
-//            oneHpBar.gameObject.SetActive(true);// 试着变颜色
-//        }
-//        break;                    
-//}

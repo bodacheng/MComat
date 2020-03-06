@@ -9,7 +9,8 @@ class TestCameraMode : CameraMode
     Vector2 enemyscreenpos;
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
     float h;
-        
+    bool auto = true;
+    
     public TestCameraMode(float XZDis, float YDis)
     {
         this.XZDis = XZDis;
@@ -44,11 +45,15 @@ class TestCameraMode : CameraMode
         }
         xzOff.y = 0;
         enemyscreenpos = _camera.WorldToViewportPoint(enemiescenter);
-        if (enemyscreenpos.x < 0.2 || enemyscreenpos.x > 0.8 ||  enemyscreenpos.y < 0.2)
+        
+        if (auto)
         {
-            xzOff = Vector3.Lerp(xzOff, (meCenter.position - enemiescenter), Time.deltaTime);
+            if (enemyscreenpos.x < 0.2 || enemyscreenpos.x > 0.8 ||  enemyscreenpos.y < 0.2)
+            {
+                xzOff = Vector3.Lerp(xzOff, (meCenter.position - enemiescenter), Time.deltaTime);
+            }
         }
-
+        
         //下面的那个(meCenter.position + enemiescenter)，其实是说从0，0，0到他们
         CameraTargetPos = meCenter.position + xzOff.normalized * XZDis;//focuscenter + xzOff.normalized * XZDis;
         CameraTargetPos += Vector3.up * YDis;
