@@ -30,7 +30,6 @@ public class StageScriptableObject : ScriptableObject
     public float HP;
     public LocalFight localFight;
     
-    public FightModeType fightModeType = FightModeType.combat;
     public FightEventType _fightEventType = FightEventType.Arena;
 
     public TeamMode Team1Mode = TeamMode.multiraid;
@@ -76,12 +75,6 @@ public enum FightEventType
     Quest = 1,
     Arena = 2,
     Self = 4,
-}
-
-public enum FightModeType
-{
-    combat = 1,
-    tower = 2,
 }
 
 public enum TeamMode

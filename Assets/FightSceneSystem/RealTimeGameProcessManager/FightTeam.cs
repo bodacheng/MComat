@@ -13,8 +13,8 @@ public partial class FightTeam : MonoBehaviour
     
     public RectTransform sideIconsContainer;
     public Canvas _targetCanvas;
-    public RectTransform controllingCharT;    
     public SideCharIcon button_prefab;
+    public GameObject selectedFrame;
     public Text HitCombo;
     public RealTimeGameProcessManager realTimeGameProcessManager;
     public MobileInputsManager _mobileInputsManager;
@@ -100,12 +100,9 @@ public partial class FightTeam : MonoBehaviour
     {
         datacenterCharIconDic.TryGetValue(data_Center, out _tempSideCharIcon);
         DOTween.To(() => _tempSideCharIcon.ResistBar.value, (x) => _tempSideCharIcon.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
-        if (data_Center._ResistanceManager.Resistance.Value > 0)
-            _tempSideCharIcon.ResistBarFillImage.color = Color.yellow;
-        else
-            _tempSideCharIcon.ResistBarFillImage.color = Color.clear;
+        _tempSideCharIcon.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
     }
-  
+      
     void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
     {
         datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
@@ -138,23 +135,16 @@ public partial class FightTeam : MonoBehaviour
             datacenterCharIconDic.TryGetValue(_datacenter, out _tempSideCharIcon);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
             {
-                if (_datacenter != RealTimeGameProcessManager.focusingChar)
-                {
-                    _tempSideCharIcon.transform.SetParent(sideIconsContainer);
-                }
-                else
-                {
-                    _tempSideCharIcon.transform.SetParent(controllingCharT);
-                    _tempSideCharIcon.transform.localPosition = Vector3.zero;
-                    _tempSideCharIcon.transform.localScale = Vector3.one;
-                }
+                _tempSideCharIcon.transform.localScale = 
+                _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                _tempSideCharIcon.transform.SetParent(sideIconsContainer.transform);
                 _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(true);
                 _tempSideCharIcon.RecallBars();
             }else{
                 _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(false);
                 _tempSideCharIcon.transform.SetParent(_targetCanvas.transform);
             }
-            
+
             if (datacenterHitComboDic.ContainsKey(_datacenter))
             {
                 datacenterHitComboDic[_datacenter].color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
@@ -178,8 +168,10 @@ public partial class FightTeam : MonoBehaviour
             case TeamMode.rotation:
                 WaitToTriggerMemberChange();
                 if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                {
                     TurnModeEnemySideAutoMemberShaft();
-            break;
+                }
+                break;
         }
     }
 

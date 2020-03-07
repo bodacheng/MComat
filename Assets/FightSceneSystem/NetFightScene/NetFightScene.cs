@@ -117,38 +117,28 @@ public class NetFightScene : MonoBehaviour {
 
     public IEnumerator LoadGame(StageScriptableObject stage)
     {
-        switch (FightSceneNote.Instance.nextBattle.fightModeType)
-        {
-            case FightModeType.combat:
-                _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;
-                _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
-                _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
-                _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
-                yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.HP,Color.yellow);
-                yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.HP,Color.red);
-                _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
-                break;
-        }
+        _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;
+        _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
+        _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
+        _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
+        yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.HP,Color.yellow);
+        yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.HP,Color.red);
+        _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
         LoadStageFinished.Value = true;
     }
            
     // 本地系函数
     public void pressedStartButton()
     {
-        switch (FightSceneNote.Instance.nextBattle.fightModeType)
+        _RealTimeGameProcessManager.FightTeam1.ModeStart();
+        _RealTimeGameProcessManager.FightTeam2.ModeStart();
+        switch (RealTimeGameProcessManager.playerTeam)
         {
-            case FightModeType.combat:
-                _RealTimeGameProcessManager.FightTeam1.ModeStart();
-                _RealTimeGameProcessManager.FightTeam2.ModeStart();
-                switch (RealTimeGameProcessManager.playerTeam)
-                {
-                    case Team.player1:
-                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
-                        break;
-                    case Team.player2:
-                        _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
-                        break;
-                }
+            case Team.player1:
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
+                break;
+            case Team.player2:
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
                 break;
         }
     }

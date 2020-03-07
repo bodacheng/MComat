@@ -85,7 +85,6 @@ public class RealTimeGameProcessManager : MonoBehaviour
         if (focusingChar != null)
         {
             MobileInputsManager.SetPlayerMode(playerControll);
-            
             if (team == Team.player1)
             {
                 _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam2.TeamMemberTransforms());
@@ -94,7 +93,6 @@ public class RealTimeGameProcessManager : MonoBehaviour
             {
                 _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam1.TeamMemberTransforms());
             }
-
             _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
         }else{
             _CameraManager.Assign_Camera(Camera_Mode_Num.TopDown,null);

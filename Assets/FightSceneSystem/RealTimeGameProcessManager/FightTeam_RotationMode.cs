@@ -12,16 +12,18 @@ public partial class FightTeam : MonoBehaviour
     {
         ChangeFightingMember(teamMembers.values[0]);
     }
-
-    public void WaitToTriggerMemberChange()
+    
+    void WaitToTriggerMemberChange()
     {
-        foreach (KeyValuePair<Data_Center, float> keyValuePair in RefreshTimeDic)
+        for (int i = 0; i < teamMembers.values.Count; i++)
         {
-            if (keyValuePair.Value > 0)
+            if (RefreshTimeDic[teamMembers.values[i]] > 0)
             {
-                RefreshTimeDic[keyValuePair.Key] -= Time.deltaTime; // 角色切换倒计时
+                RefreshTimeDic[teamMembers.values[i]] -= Time.deltaTime; // 角色切换倒计时;
+                datacenterCharIconDic[teamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[teamMembers.values[i]]/20);
             }
         }
+        
         if (waitingToChangeMember != null && CanChangeToThisMember(waitingToChangeMember))
         {
             RefreshTimeDic[RotationMode_fightingMember] = 20f;
@@ -33,7 +35,9 @@ public partial class FightTeam : MonoBehaviour
     bool CanChangeToThisMember(Data_Center targetMember)
     {
         if (RefreshTimeDic[targetMember] > 0)
+        {
             return false;
+        }
         if (targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.KnockOff)
         {
             return false;
@@ -44,6 +48,25 @@ public partial class FightTeam : MonoBehaviour
                 return true;           
         }
         return true;
+    }
+    
+    void ReadyForNextMemberOnTheShow(Data_Center nextOne)
+    {
+        if (waitingToChangeMember != nextOne)
+        {
+            waitingToChangeMember = nextOne;
+        }
+        else
+        {
+            waitingToChangeMember = null;
+        }
+        if (waitingToChangeMember == null)
+        {
+            charIcon.Seletedfeature(null,selectedFrame,100f);
+        }else{
+            datacenterCharIconDic.TryGetValue(waitingToChangeMember,out _tempSideCharIcon);
+            charIcon.Seletedfeature(_tempSideCharIcon != null ? _tempSideCharIcon.focusingCharIcon:null,selectedFrame,100f);
+        }
     }
 
     public void InstantiateCharsIconsAndFloatHPBar_turnMode()//这个环节应该能够同时把HP bar也适配好。
@@ -64,7 +87,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void action1()
             {
-                waitingToChangeMember = a_char;
+                ReadyForNextMemberOnTheShow(a_char);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);           
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
@@ -75,19 +98,27 @@ public partial class FightTeam : MonoBehaviour
             }
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
             _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
-            _SideCharIcon.gameObject.SetActive(true);
-            _SideCharIcon.transform.SetParent(sideIconsContainer);
-            _SideCharIcon.transform.localScale = Vector3.one;
+            _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+            if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+            {
+                _SideCharIcon.gameObject.SetActive(true);
+                _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
+                _SideCharIcon.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                _SideCharIcon.gameObject.SetActive(false);
+            }
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             datacenterHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
             _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
     }
-    
+
     /// <summary>
     /// 本质上这个函数是AI。。。而AI按理说应该和其他东西是分层的。。
     /// </summary>
-    private float time_counter;
+    float time_counter;
     public void TurnModeEnemySideAutoMemberShaft()
     {
         time_counter += Time.deltaTime;
@@ -97,10 +128,7 @@ public partial class FightTeam : MonoBehaviour
             {
                 for (int i = 0; i < teamMembers.values.Count; i++)
                 {
-                    if (ChangeFightingMember(teamMembers.values[i]))
-                    {
-                        break;
-                    }
+                    ReadyForNextMemberOnTheShow(teamMembers.values[i]);
                 }
             }
         }
@@ -110,17 +138,17 @@ public partial class FightTeam : MonoBehaviour
             {
                 for (int i = 0; i < teamMembers.values.Count; i++)
                 {
-                    if (ChangeFightingMember(teamMembers.values[i]))
+                    if (RefreshTimeDic[teamMembers.values[i]] <= 0)
                     {
-                        time_counter = 0f;
-                        break;
+                        ReadyForNextMemberOnTheShow(teamMembers.values[i]);
                     }
+                    time_counter = 0f;
                 }
             }
             time_counter = 0f;
         }
     }
-
+    
     public bool ChangeFightingMember(Data_Center _changeTo)
     {
         if (!(teamMembers.values.Count > 1))
@@ -131,7 +159,9 @@ public partial class FightTeam : MonoBehaviour
         bool memberchanged = false;
         Vector3 targetposition = Vector3.zero;
         if (RotationMode_fightingMember != null)
+        {
             targetposition = RotationMode_fightingMember.transform.position;
+        }
         foreach (Data_Center data_Center in teamMembers.values)
         {
             if (_changeTo == data_Center && !data_Center.IsDead.Value)
@@ -145,15 +175,14 @@ public partial class FightTeam : MonoBehaviour
                 string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);
                 memberchanged = true;
-            }
-            else {
+            } else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");
-                data_Center.WholeT.transform.position = new Vector3(0, 200, 0);
+                data_Center.WholeT.transform.position = new Vector3(400, 200, 400);
             }
         }
         if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
         {
-            this.realTimeGameProcessManager.SwitchToCMode(RotationMode_fightingMember, teamConfig.myTeam, MobileInputsManager.playerMode);
+            realTimeGameProcessManager.SwitchToCMode(RotationMode_fightingMember, teamConfig.myTeam, MobileInputsManager.playerMode);
         }
         realTimeGameProcessManager.Refresh();
         return memberchanged;

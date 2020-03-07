@@ -34,8 +34,7 @@ public partial class CharsManager : MonoBehaviour {
     }
 
     //这个的目的是把加载好的各个角色给放到预定的位置上去。从而把安排角色位置这个工作给从角色生成环节给分离出去。
-    public void ArrangeAllCharacterToPosition(MultiDictionary<int,int,Data_Center> heromultiDictionary,MultiDictionary<int,int,Data_Center> enemymultiDictionary,
-                                                Transform[] Team1StandPoints, Transform[] Team2StandPoints)
+    public void ArrangeAllCharacterToPosition(MultiDictionary<int,int,Data_Center> heromultiDictionary,MultiDictionary<int,int,Data_Center> enemymultiDictionary, Transform[] Team1StandPoints, Transform[] Team2StandPoints)
     {
         foreach(KeyValuePair<int,List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
         {

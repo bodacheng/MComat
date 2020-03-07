@@ -8,6 +8,7 @@ public class charIcon : MonoBehaviour {
     public Button iconButton;
     public Image Icon;
     public Image frame;
+    public Image cooldownCurtain;
 
     public GetMonsterOfPlayerDetailModel _MonsterOfPlayerDetailModel;
     public CharacterResourceInfo _CharacterResourceInfo;
@@ -16,7 +17,7 @@ public class charIcon : MonoBehaviour {
     public static void IniFrames()
     {
         frames = new Dictionary<Zokusei, Sprite>();
-
+        
         Sprite frameobject_dark = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
         Sprite frameobject_blue = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
         Sprite frameobject_red = Resources.Load("essentialUIElements/iconframes/2") as Sprite;
@@ -38,8 +39,18 @@ public class charIcon : MonoBehaviour {
             frames.Add(Zokusei.Null,frameobject_null);
     }
     
+    public void CooldownCurtainUpdate(float proportion)
+    {
+        cooldownCurtain.fillAmount = proportion;
+    }
+    
     public static void Seletedfeature(charIcon _charIcon,GameObject selectedFrame, float size)
     {
+        if (_charIcon == null)
+        {
+            selectedFrame.SetActive(false);
+            return;
+        }
         selectedFrame.transform.SetParent(_charIcon.transform);
         selectedFrame.transform.localPosition = Vector3.zero;
         selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
@@ -61,7 +72,10 @@ public class charIcon : MonoBehaviour {
         Icon.transform.localScale = Vector3.one * 0.75f;
         frame.transform.SetSiblingIndex(4);
         Icon.transform.SetSiblingIndex(4);
-
+        if (cooldownCurtain != null)
+        {
+            cooldownCurtain.transform.SetSiblingIndex(3);
+        }
         var colors = iconButton.colors;
         switch (zokusei)
         {

@@ -92,7 +92,6 @@ namespace mainMenu
         {
             MuitiRaidModeIconsT.gameObject.SetActive(true);
             RotationModeIconsT.gameObject.SetActive(false);
-            stage.fightModeType = FightModeType.combat;
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
@@ -102,7 +101,6 @@ namespace mainMenu
         {
             RotationModeIconsT.gameObject.SetActive(true);
             MuitiRaidModeIconsT.gameObject.SetActive(false);
-            stage.fightModeType = FightModeType.combat;
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
@@ -112,7 +110,6 @@ namespace mainMenu
         {
             MuitiRaidModeIconsT.gameObject.SetActive(true);
             RotationModeIconsT.gameObject.SetActive(false);
-            stage.fightModeType = FightModeType.combat;
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.test;

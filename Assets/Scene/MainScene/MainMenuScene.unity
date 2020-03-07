@@ -6398,6 +6398,7 @@ MonoBehaviour:
   iconButton: {fileID: 135786291}
   Icon: {fileID: 1584737420}
   frame: {fileID: 441734910}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -9385,6 +9386,78 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218889354}
+  m_CullTransparentMesh: 0
+--- !u!1 &220932627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 220932628}
+  - component: {fileID: 220932630}
+  - component: {fileID: 220932629}
+  m_Layer: 5
+  m_Name: SwiftCooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &220932628
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220932627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5989985070316835027}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &220932629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220932627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.2784314}
+  m_RaycastTarget: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 0.91
+  m_FillClockwise: 0
+  m_FillOrigin: 1
+  m_UseSpriteMesh: 0
+--- !u!222 &220932630
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220932627}
   m_CullTransparentMesh: 0
 --- !u!1 &228510441
 GameObject:
@@ -61996,7 +62069,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1497885428}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999774
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -62813,7 +62886,8 @@ MonoBehaviour:
     SHOW_NAME: 
     ATTACK_WEIGHT: 1
     STATE_TYPE: 0
-    ai_trigger_ranges: 
+    AI_MIN_DIS: 0
+    AI_MAX_DIS: 0
     SP_LEVEL: 0
     CAN_LEVELUP: 0
     RARITY_LEVEL: 0
@@ -71493,6 +71567,7 @@ MonoBehaviour:
   iconButton: {fileID: 1608617214}
   Icon: {fileID: 1501644836}
   frame: {fileID: 977557011}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -76529,6 +76604,7 @@ MonoBehaviour:
   iconButton: {fileID: 1737655804}
   Icon: {fileID: 680501112}
   frame: {fileID: 1359689026}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -90681,6 +90757,7 @@ MonoBehaviour:
   iconButton: {fileID: 2049084339}
   Icon: {fileID: 50010705}
   frame: {fileID: 1313364279}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -91701,6 +91778,7 @@ MonoBehaviour:
   iconButton: {fileID: 2070474827}
   Icon: {fileID: 279785317}
   frame: {fileID: 786439928}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -100672,6 +100750,7 @@ MonoBehaviour:
   iconButton: {fileID: 4599398632746346850}
   Icon: {fileID: 4599398633759516196}
   frame: {fileID: 7186568800032184035}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -100824,6 +100903,7 @@ MonoBehaviour:
   iconButton: {fileID: 4599398632804233304}
   Icon: {fileID: 4599398633938550558}
   frame: {fileID: 7186568799802822617}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -101008,6 +101088,7 @@ MonoBehaviour:
   iconButton: {fileID: 4599398633465206960}
   Icon: {fileID: 4599398632472975350}
   frame: {fileID: 7186568798601602865}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -101224,6 +101305,7 @@ MonoBehaviour:
   iconButton: {fileID: 4599398634173831939}
   Icon: {fileID: 4599398633173767237}
   frame: {fileID: 7186568798974551170}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 
@@ -101369,12 +101451,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1a56609055c8b4decb05ef2a1df531f1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -101400,7 +101482,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 145, y: 145}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5989985069186719727
 GameObject:
@@ -101452,6 +101534,7 @@ RectTransform:
   m_Children:
   - {fileID: 5989985069186719726}
   - {fileID: 3923220858428397083}
+  - {fileID: 220932628}
   m_Father: {fileID: 914642780}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101475,6 +101558,7 @@ MonoBehaviour:
   iconButton: {fileID: 5989985070316835031}
   Icon: {fileID: 5989985069186719633}
   frame: {fileID: 1103163244080623446}
+  cooldownCurtain: {fileID: 0}
   _CharacterResourceInfo:
     RECORD_ID: 
     type: 

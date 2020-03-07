@@ -25,7 +25,6 @@ public class FightingProcess : NagareProcess
 
         BoundaryControllByGod.AllMembers = AllMembers;
         fightLogger.ReadyToLog(AllMembers);
-        
         foreach (KeyValuePair<Team,List<Data_Center>> _set in AllMembers)
         {
             foreach (Data_Center _char in _set.Value)
@@ -52,13 +51,7 @@ public class FightingProcess : NagareProcess
         {
             _NetFightScene.PauseScene();
         }
-        
-        switch (FightSceneNote.Instance.nextBattle.fightModeType)
-        {
-            case FightModeType.combat:
-                _RealTimeGameProcessManager.FightingStepProcess();
-                break;
-        }
+        _RealTimeGameProcessManager.FightingStepProcess();
     }
 
     IEnumerator FinalMoment(Team winner)

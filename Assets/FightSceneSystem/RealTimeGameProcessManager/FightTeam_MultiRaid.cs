@@ -24,9 +24,17 @@ public partial class FightTeam : MonoBehaviour
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
             _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
-            _SideCharIcon.gameObject.SetActive(true);
-            _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
-            _SideCharIcon.transform.localScale = Vector3.one;
+            _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+            if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+            {
+                _SideCharIcon.gameObject.SetActive(true);
+                _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
+                _SideCharIcon.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                _SideCharIcon.gameObject.SetActive(false);
+            }
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             datacenterHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
             _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
