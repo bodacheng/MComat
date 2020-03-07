@@ -176,6 +176,7 @@ public partial class FightTeam : MonoBehaviour
             case TeamMode.multiraid:
             break;
             case TeamMode.rotation:
+                WaitToTriggerMemberChange();
                 if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
                     TurnModeEnemySideAutoMemberShaft();
             break;

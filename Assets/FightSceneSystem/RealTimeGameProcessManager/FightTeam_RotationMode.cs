@@ -5,10 +5,45 @@ using UnityEngine.UI;
 public partial class FightTeam : MonoBehaviour
 {
     Data_Center RotationMode_fightingMember;
-    
+    Data_Center waitingToChangeMember; // 不能任何时候点击切换角色按钮都切换，那样就乱了。
+    IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
+
     public void Rotation_mode_start()
     {
         ChangeFightingMember(teamMembers.values[0]);
+    }
+
+    public void WaitToTriggerMemberChange()
+    {
+        foreach (KeyValuePair<Data_Center, float> keyValuePair in RefreshTimeDic)
+        {
+            if (keyValuePair.Value > 0)
+            {
+                RefreshTimeDic[keyValuePair.Key] -= Time.deltaTime; // 角色切换倒计时
+            }
+        }
+        if (waitingToChangeMember != null && CanChangeToThisMember(waitingToChangeMember))
+        {
+            RefreshTimeDic[RotationMode_fightingMember] = 20f;
+            ChangeFightingMember(waitingToChangeMember);
+            waitingToChangeMember = null;
+        }
+    }
+
+    bool CanChangeToThisMember(Data_Center targetMember)
+    {
+        if (RefreshTimeDic[targetMember] > 0)
+            return false;
+        if (targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.KnockOff)
+        {
+            return false;
+        }
+        if (targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GI || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GM || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GR)
+        {
+            if (!targetMember._SkillCancelFlag.Cancel_Flag)
+                return true;           
+        }
+        return true;
     }
 
     public void InstantiateCharsIconsAndFloatHPBar_turnMode()//这个环节应该能够同时把HP bar也适配好。
@@ -17,6 +52,10 @@ public partial class FightTeam : MonoBehaviour
         Text hitCombo;
         foreach(Data_Center a_char in teamMembers.values)
         {
+            if (!RefreshTimeDic.ContainsKey(a_char))
+            {
+                RefreshTimeDic.Add(a_char,0);
+            }
             hitCombo = Instantiate(HitCombo);
             hitCombo.name = a_char.name + "HitCombo";
             _SideCharIcon = Instantiate(button_prefab);
@@ -25,15 +64,14 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void action1()
             {
-                ChangeFightingMember(a_char);
-                realTimeGameProcessManager.Refresh();
+                waitingToChangeMember = a_char;
             }
-            _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
-            
+            _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);           
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             if (characterDataInfo == null)
             {
-                Debug.Log("角色信息字典严重错误");continue;
+                Debug.Log("角色信息字典严重错误");
+                continue;
             }
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
             _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
@@ -42,7 +80,7 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.transform.localScale = Vector3.one;
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             datacenterHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
-            this._mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
+            _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
     }
     
@@ -82,7 +120,7 @@ public partial class FightTeam : MonoBehaviour
             time_counter = 0f;
         }
     }
-        
+
     public bool ChangeFightingMember(Data_Center _changeTo)
     {
         if (!(teamMembers.values.Count > 1))
@@ -101,39 +139,23 @@ public partial class FightTeam : MonoBehaviour
                 RotationMode_fightingMember = _changeTo;
                 RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
                 RotationMode_fightingMember.WholeT.transform.position = targetposition;
-                
+
                 CharacterDataInfo characterDataInfo = CharacterDataInfoReference[_changeTo];
                 CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
-                string personalEffectsPath;
-                switch (characterResourceInfo._zokusei)
-                {
-                    case Zokusei.darkMagic:
-                        personalEffectsPath = "darkMagic";
-                        break;
-                    case Zokusei.blueMagic:
-                        personalEffectsPath = "blueMagic";
-                        break;
-                    case Zokusei.greenMagic:
-                        personalEffectsPath = "greenMagic";
-                        break;
-                    case Zokusei.lightMagic:
-                        personalEffectsPath = "lightMagic";
-                        break;
-                    case Zokusei.redMagic:
-                        personalEffectsPath = "redMagic";
-                        break;
-                    default:
-                        personalEffectsPath = "defaultmagic";
-                        break;
-                }
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath,RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);
+                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);
                 memberchanged = true;
             }
-            else{
+            else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");
-                data_Center.WholeT.transform.position = new Vector3(0,200,0);
+                data_Center.WholeT.transform.position = new Vector3(0, 200, 0);
             }
         }
+        if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+        {
+            this.realTimeGameProcessManager.SwitchToCMode(RotationMode_fightingMember, teamConfig.myTeam, MobileInputsManager.playerMode);
+        }
+        realTimeGameProcessManager.Refresh();
         return memberchanged;
     }
 }
