@@ -1,12 +1,53 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using UniRx;
 
 public partial class FightTeam : MonoBehaviour
 {
     Data_Center RotationMode_fightingMember;
     Data_Center waitingToChangeMember; // 不能任何时候点击切换角色按钮都切换，那样就乱了。
     IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
+    Text rotationModeHitCombo;
+    
+    void RefreshComboHitRotationMode(Data_Center _datacenter,Color comboTextColor)
+    {
+        if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
+        {
+            rotationModeHitCombo.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+            rotationModeHitCombo.color = comboTextColor;
+            rotationModeHitCombo.transform.localScale = Vector3.one;
+            rotationModeHitCombo.fontSize = 30;
+            rotationModeHitCombo.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f),0.2f);
+        }
+        else
+        {
+            rotationModeHitCombo.color = Color.clear;
+        }
+    }
+    
+    void TeamsFightRotationModeInitialize(float wholeHP,Color comboTextColor)
+    {
+        foreach (Data_Center a_char in teamMembers.values)
+        {
+            a_char._FightAttriCalReference.CurrentHp.Value = wholeHP;
+            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => 
+            {
+                RefreshHPBar(a_char, x, wholeHP);
+            });
+            a_char._ResistanceManager.Resistance.Value = 0;
+            a_char._ResistanceManager.Resistance.Subscribe(x => 
+            {
+                a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); 
+                RefreshResistanceBar(a_char); 
+            });            
+        }
+        RotationMode_fightingMember._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => 
+        {
+            RefreshComboHitRotationMode(RotationMode_fightingMember,comboTextColor);
+        });
+    }
 
     public void Rotation_mode_start()
     {
@@ -52,35 +93,25 @@ public partial class FightTeam : MonoBehaviour
     
     void ReadyForNextMemberOnTheShow(Data_Center nextOne)
     {
-        if (waitingToChangeMember != nextOne)
-        {
-            waitingToChangeMember = nextOne;
-        }
-        else
-        {
-            waitingToChangeMember = null;
-        }
+        waitingToChangeMember = waitingToChangeMember != nextOne ? nextOne : null;
         if (waitingToChangeMember == null)
         {
             charIcon.Seletedfeature(null,selectedFrame,100f);
         }else{
             datacenterCharIconDic.TryGetValue(waitingToChangeMember,out _tempSideCharIcon);
-            charIcon.Seletedfeature(_tempSideCharIcon != null ? _tempSideCharIcon.focusingCharIcon:null,selectedFrame,100f);
+            charIcon.Seletedfeature(_tempSideCharIcon?.focusingCharIcon,selectedFrame,100f);
         }
     }
 
     public void InstantiateCharsIconsAndFloatHPBar_turnMode()//这个环节应该能够同时把HP bar也适配好。
     {
-        SideCharIcon _SideCharIcon;
-        Text hitCombo;
+        SideCharIcon _SideCharIcon;    
         foreach(Data_Center a_char in teamMembers.values)
         {
             if (!RefreshTimeDic.ContainsKey(a_char))
             {
                 RefreshTimeDic.Add(a_char,0);
             }
-            hitCombo = Instantiate(HitCombo);
-            hitCombo.name = a_char.name + "HitCombo";
             _SideCharIcon = Instantiate(button_prefab);
             _SideCharIcon.name = a_char.name + " ICon";
             _SideCharIcon.IniHPShow(a_char);
@@ -110,9 +141,10 @@ public partial class FightTeam : MonoBehaviour
                 _SideCharIcon.gameObject.SetActive(false);
             }
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
-            datacenterHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
             _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
+        rotationModeHitCombo = Instantiate(HitCombo);
+        rotationModeHitCombo.name = teamConfig.myTeam + "HitCombo";
     }
 
     /// <summary>
