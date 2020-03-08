@@ -9,8 +9,7 @@ class TestCameraMode : CameraMode
     Vector2 enemyscreenpos;
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
     float h;
-    bool auto = true;
-    
+   
     public TestCameraMode(float XZDis, float YDis)
     {
         this.XZDis = XZDis;
@@ -19,20 +18,6 @@ class TestCameraMode : CameraMode
     
     public override void LocalUpdate(Camera _camera)
     {
-        if (targets.Count > 0)
-        {
-            enemiescenter = Vector3.zero;
-            foreach (Transform o in targets)
-            {
-                if (o != null)
-                {
-                    enemiescenter += o.transform.position;
-                }
-            }
-            enemiescenter /= targets.Count;
-        }
-        enemiescenter.y = 0;
-        
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
             h =  ETCInput.GetAxis("HorizontalCR");
@@ -44,13 +29,26 @@ class TestCameraMode : CameraMode
             xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
         }
         xzOff.y = 0;
-        enemyscreenpos = _camera.WorldToViewportPoint(enemiescenter);
         
         if (auto)
         {
-            if (enemyscreenpos.x < 0.2 || enemyscreenpos.x > 0.8 ||  enemyscreenpos.y < 0.2)
+            if (targets != null && targets.Count > 0)
             {
-                xzOff = Vector3.Lerp(xzOff, (meCenter.position - enemiescenter), Time.deltaTime);
+                enemiescenter = Vector3.zero;
+                foreach (Transform o in targets)
+                {
+                    if (o != null)
+                    {
+                        enemiescenter += o.transform.position;
+                    }
+                }
+                enemiescenter /= targets.Count;
+                enemiescenter.y = 0;
+                enemyscreenpos = _camera.WorldToViewportPoint(enemiescenter);
+                if (enemyscreenpos.x < 0.2 || enemyscreenpos.x > 0.8 ||  enemyscreenpos.y < 0.2)
+                {
+                    xzOff = Vector3.Lerp(xzOff, (meCenter.position - enemiescenter), Time.deltaTime);
+                }
             }
         }
         

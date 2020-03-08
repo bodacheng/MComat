@@ -100,13 +100,13 @@ public class FightTeam_MultiRaid : FightTeam
             switch (teamConfig.myTeam)
             {
                 case Team.player1:
-                    _hitcomboText.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,0,0)),0.2f);
+                    _hitcomboText.rectTransform.DOAnchorPos(new Vector2(-200,Screen.height + 100), 0.2f);
                     break;
                 case Team.player2:
-                    _hitcomboText.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(Screen.width + 100,0,0)) ,0.2f);
+                    _hitcomboText.rectTransform.DOAnchorPos(new Vector2(Screen.width + 200, Screen.height + 100),0.2f);
                     break;
                 default:
-                    _hitcomboText.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,-100,0)) ,0.2f);
+                    _hitcomboText.rectTransform.DOAnchorPos(new Vector2(-100,-100) ,0.2f);
                     break;
             }
         }
@@ -155,14 +155,9 @@ public class FightTeam_MultiRaid : FightTeam
     {
         LetAllCharactersStartOff();
     }
-    
+
     public override List<Transform> TeamMemberTransforms()
     {
-        List<Transform> transforms = new List<Transform>();
-        foreach(Data_Center _one in teamMembers.values)
-        {
-            transforms.Add(_one.WholeT);
-        }
-        return transforms;
+        return null;
     }
 }

@@ -13,8 +13,10 @@ public class FightTeam_RotationMode : FightTeam
 
     public override List<Transform> TeamMemberTransforms()
     {
-        List<Transform> transforms = new List<Transform>();
-        transforms.Add(RotationMode_fightingMember.transform);
+        List<Transform> transforms = new List<Transform>
+        {
+            RotationMode_fightingMember.transform
+        };
         return transforms;
     }
 
@@ -67,13 +69,13 @@ public class FightTeam_RotationMode : FightTeam
             switch (teamConfig.myTeam)
             {
                 case Team.player1:
-                    rotationModeHitCombo.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,100,0)) ,0.2f);
+                    rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(-200,Screen.height + 100), 0.2f);
                     break;
                 case Team.player2:
-                    rotationModeHitCombo.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(Screen.width + 100,100,0)) ,0.2f);
+                    rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(Screen.width + 200, Screen.height + 100),0.2f);
                     break;
                 default:
-                    rotationModeHitCombo.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,-100,0)) ,0.2f);
+                    rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(-100,-100) ,0.2f);
                     break;
             }
         }
@@ -88,7 +90,7 @@ public class FightTeam_RotationMode : FightTeam
         }
         if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
         {
-            TurnModeEnemySideAutoMemberShaft();
+            //TurnModeEnemySideAutoMemberShaft();
         }
     }
     
@@ -268,13 +270,10 @@ public class FightTeam_RotationMode : FightTeam
                     _changeTo._FightAttriCalReference._ComboHitCount.HitCount.Value = RotationMode_fightingMember._FightAttriCalReference._ComboHitCount.HitCount.Value;
                 }
                 RotationMode_fightingMember = _changeTo;
+                RotationMode_fightingMember.IsDead.Subscribe( x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); }});
                 RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
-                RotationMode_fightingMember.WholeT.transform.position = targetposition;
-                
-                CharacterDataInfo characterDataInfo = CharacterDataInfoReference[_changeTo];
-                CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
-                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);
+                RotationMode_fightingMember.WholeT.transform.position = targetposition;                
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                 memberchanged = true;
             } else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");
@@ -290,6 +289,31 @@ public class FightTeam_RotationMode : FightTeam
         return memberchanged;
     }
     
+    public bool RandomChangeAliveFightingMember()
+    {
+        if (waitingToChangeMember != null && waitingToChangeMember._FightAttriCalReference.CurrentHp.Value > 0)
+        {
+            if (!waitingToChangeMember.IsDead.Value)
+            {
+                if (ChangeFightingMember(waitingToChangeMember))
+                {
+                    return true;
+                }
+            }
+        }
+        foreach (Data_Center data_Center in teamMembers.values)
+        {
+            if (!data_Center.IsDead.Value)
+            {
+                if (ChangeFightingMember(data_Center))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo,Transform IniStandPoint)
     {
         bool memberchanged = false;
@@ -298,13 +322,10 @@ public class FightTeam_RotationMode : FightTeam
             if (_changeTo == data_Center)
             {
                 RotationMode_fightingMember = _changeTo;
+                RotationMode_fightingMember.IsDead.Subscribe( x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); }});
                 RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
-                RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
-                
-                CharacterDataInfo characterDataInfo = CharacterDataInfoReference[_changeTo];
-                CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
-                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);
+                RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;                
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                 memberchanged = true;
             } else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");

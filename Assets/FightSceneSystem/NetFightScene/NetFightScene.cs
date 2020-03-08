@@ -130,7 +130,7 @@ public class NetFightScene : MonoBehaviour {
             _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_multi;
             break;
         }
-        
+
         _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
         switch (_RealTimeGameProcessManager.FightTeam2.TeamMode)
         {
