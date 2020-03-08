@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public partial class FightTeam : MonoBehaviour
+public class FightTeam_TowerMode : FightTeam
 {
     public IDictionary<Data_Center, bool> characterAliveDic = new Dictionary<Data_Center, bool>();
     public IDictionary<Data_Center, int> characterDieCount = new Dictionary<Data_Center, int>();

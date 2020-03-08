@@ -40,7 +40,7 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
-        Screen.SetResolution(1080, 720, true, 60);
+        //Screen.SetResolution(1080, 720, true, 60);
     }
     
     void Update()

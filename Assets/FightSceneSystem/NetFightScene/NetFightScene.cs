@@ -117,13 +117,56 @@ public class NetFightScene : MonoBehaviour {
 
     public IEnumerator LoadGame(StageScriptableObject stage)
     {
-        _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;
+        _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;        
+        switch (_RealTimeGameProcessManager.FightTeam1.TeamMode)
+        {
+            case TeamMode.multiraid:
+            _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_multi;
+            break;
+            case TeamMode.rotation:
+            _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_rotation;
+            break;
+            case TeamMode.test:
+            _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_multi;
+            break;
+        }
+        
         _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
+        switch (_RealTimeGameProcessManager.FightTeam2.TeamMode)
+        {
+            case TeamMode.multiraid:
+            _RealTimeGameProcessManager.FightTeam2 = _RealTimeGameProcessManager.FightTeam2_multi;
+            break;
+            case TeamMode.rotation:
+            _RealTimeGameProcessManager.FightTeam2 = _RealTimeGameProcessManager.FightTeam2_rotation;
+            break;
+            case TeamMode.test:
+            _RealTimeGameProcessManager.FightTeam2 = _RealTimeGameProcessManager.FightTeam2_multi;
+            break;
+        }
+
+        _RealTimeGameProcessManager.FightTeam1.TeamStandPoints = Team1StandPoints;
+        _RealTimeGameProcessManager.FightTeam2.TeamStandPoints = Team2StandPoints;
+        
         _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
         _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
-        yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.HP,Color.yellow);
-        yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.HP,Color.red);
-        _CharSetManager.ArrangeAllCharacterToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers, _RealTimeGameProcessManager.FightTeam2.teamMembers, Team1StandPoints, Team2StandPoints);
+        
+        yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.HP);
+        yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.HP);
+        
+        _RealTimeGameProcessManager.FightTeam1.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers);
+        _RealTimeGameProcessManager.FightTeam2.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam2.teamMembers);
+
+        switch (RealTimeGameProcessManager.playerTeam)
+        {
+            case Team.player1:
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0],false);
+                break;
+            case Team.player2:
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0],false);
+                break;
+        }
+                
         LoadStageFinished.Value = true;
     }
            
@@ -135,12 +178,13 @@ public class NetFightScene : MonoBehaviour {
         switch (RealTimeGameProcessManager.playerTeam)
         {
             case Team.player1:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], false);
                 break;
             case Team.player2:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], RealTimeGameProcessManager.playerTeam,false);
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], false);
                 break;
         }
+        _RealTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
     }
     
     // 这个函数应该包括一些更深层的考虑。

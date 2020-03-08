@@ -4,30 +4,95 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
 
-public partial class FightTeam : MonoBehaviour
+public class FightTeam_RotationMode : FightTeam
 {
     Data_Center RotationMode_fightingMember;
     Data_Center waitingToChangeMember; // 不能任何时候点击切换角色按钮都切换，那样就乱了。
     IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
     Text rotationModeHitCombo;
+
+    public override List<Transform> TeamMemberTransforms()
+    {
+        List<Transform> transforms = new List<Transform>();
+        transforms.Add(RotationMode_fightingMember.transform);
+        return transforms;
+    }
+
+    public override void Refresh()
+    {
+        base.Refresh();
+        rotationModeHitCombo.color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
+        rotationModeHitCombo.gameObject.SetActive(true);
+        if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvas)
+        {
+            rotationModeHitCombo.gameObject.transform.SetParent(_targetCanvas.transform);
+        }
+        rotationModeHitCombo.transform.localScale = Vector3.one;
+        rotationModeHitCombo.fontSize = 30;
+    }
     
-    void RefreshComboHitRotationMode(Data_Center _datacenter,Color comboTextColor)
+    public override void Clear()
+    {
+        datacenterCharIconDic.Clear();
+        rotationModeHitCombo.text = "";
+    }
+    
+    public override void ArrangeAllTeamMembersToPosition(MultiDictionary<int,int,Data_Center> heromultiDictionary)
+    {
+        foreach(KeyValuePair<int,List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
+        {
+            foreach(int key in keys.Value)
+            {
+                Data_Center character_data_Center = heromultiDictionary.Get(keys.Key,key);
+                if (character_data_Center == null)
+                {
+                    continue;
+                }
+                character_data_Center.WholeT.parent = null;
+                character_data_Center.WholeT.gameObject.SetActive(true);
+            }
+        }
+        ChangeFightingMember_ReadyToGo(heromultiDictionary.values[0],TeamStandPoints[0]);
+    }
+    
+    void RefreshComboHitRotationMode(Data_Center _datacenter)
     {
         if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
         {
             rotationModeHitCombo.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
-            rotationModeHitCombo.color = comboTextColor;
-            rotationModeHitCombo.transform.localScale = Vector3.one;
-            rotationModeHitCombo.fontSize = 30;
             rotationModeHitCombo.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f),0.2f);
         }
         else
         {
-            rotationModeHitCombo.color = Color.clear;
+            switch (teamConfig.myTeam)
+            {
+                case Team.player1:
+                    rotationModeHitCombo.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,100,0)) ,0.2f);
+                    break;
+                case Team.player2:
+                    rotationModeHitCombo.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(Screen.width + 100,100,0)) ,0.2f);
+                    break;
+                default:
+                    rotationModeHitCombo.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,-100,0)) ,0.2f);
+                    break;
+            }
         }
     }
     
-    void TeamsFightRotationModeInitialize(float wholeHP,Color comboTextColor)
+    public override void LocalFightingUpdate()
+    {
+        WaitToTriggerMemberChange();
+        if (RotationMode_fightingMember != null)
+        {
+            RefreshComboHitRotationMode(RotationMode_fightingMember);
+        }
+        if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+        {
+            TurnModeEnemySideAutoMemberShaft();
+        }
+    }
+    
+    protected override void TeamsFightInitialize(float wholeHP)
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
@@ -43,15 +108,11 @@ public partial class FightTeam : MonoBehaviour
                 RefreshResistanceBar(a_char); 
             });            
         }
-        RotationMode_fightingMember._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => 
-        {
-            RefreshComboHitRotationMode(RotationMode_fightingMember,comboTextColor);
-        });
     }
 
-    public void Rotation_mode_start()
+    public override void ModeStart()
     {
-        ChangeFightingMember(teamMembers.values[0]);
+        RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
     }
     
     void WaitToTriggerMemberChange()
@@ -61,13 +122,13 @@ public partial class FightTeam : MonoBehaviour
             if (RefreshTimeDic[teamMembers.values[i]] > 0)
             {
                 RefreshTimeDic[teamMembers.values[i]] -= Time.deltaTime; // 角色切换倒计时;
-                datacenterCharIconDic[teamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[teamMembers.values[i]]/20);
+                datacenterCharIconDic[teamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[teamMembers.values[i]]/10);
             }
         }
         
         if (waitingToChangeMember != null && CanChangeToThisMember(waitingToChangeMember))
         {
-            RefreshTimeDic[RotationMode_fightingMember] = 20f;
+            RefreshTimeDic[RotationMode_fightingMember] = 10f;
             ChangeFightingMember(waitingToChangeMember);
             waitingToChangeMember = null;
         }
@@ -103,7 +164,7 @@ public partial class FightTeam : MonoBehaviour
         }
     }
 
-    public void InstantiateCharsIconsAndFloatHPBar_turnMode()//这个环节应该能够同时把HP bar也适配好。
+    protected override void InstantiateCharsIconsAndFloatHPBar()//这个环节应该能够同时把HP bar也适配好。
     {
         SideCharIcon _SideCharIcon;    
         foreach(Data_Center a_char in teamMembers.values)
@@ -130,15 +191,16 @@ public partial class FightTeam : MonoBehaviour
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
             _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+            _SideCharIcon.gameObject.SetActive(true);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
             {
-                _SideCharIcon.gameObject.SetActive(true);
                 _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
                 _SideCharIcon.transform.localScale = Vector3.one;
             }
             else
             {
-                _SideCharIcon.gameObject.SetActive(false);
+                _SideCharIcon.transform.SetParent(_targetCanvas.transform);
+                _SideCharIcon.transform.localScale = Vector3.one;
             }
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
@@ -183,11 +245,14 @@ public partial class FightTeam : MonoBehaviour
     
     public bool ChangeFightingMember(Data_Center _changeTo)
     {
-        if (!(teamMembers.values.Count > 1))
+        if (!(teamMembers.values.Count > 1) || RotationMode_fightingMember == _changeTo)
+        {
             return false;
-        if (RotationMode_fightingMember == _changeTo)
+        }
+        if (_changeTo.IsDead.Value)
+        {
             return false;
-
+        }
         bool memberchanged = false;
         Vector3 targetposition = Vector3.zero;
         if (RotationMode_fightingMember != null)
@@ -196,12 +261,16 @@ public partial class FightTeam : MonoBehaviour
         }
         foreach (Data_Center data_Center in teamMembers.values)
         {
-            if (_changeTo == data_Center && !data_Center.IsDead.Value)
+            if (_changeTo == data_Center)
             {
+                if (RotationMode_fightingMember != null && _changeTo != null)//继承hit数
+                {
+                    _changeTo._FightAttriCalReference._ComboHitCount.HitCount.Value = RotationMode_fightingMember._FightAttriCalReference._ComboHitCount.HitCount.Value;
+                }
                 RotationMode_fightingMember = _changeTo;
                 RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
                 RotationMode_fightingMember.WholeT.transform.position = targetposition;
-
+                
                 CharacterDataInfo characterDataInfo = CharacterDataInfoReference[_changeTo];
                 CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
                 string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
@@ -209,13 +278,40 @@ public partial class FightTeam : MonoBehaviour
                 memberchanged = true;
             } else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");
-                data_Center.WholeT.transform.position = new Vector3(400, 200, 400);
+                data_Center.WholeT.transform.position = new Vector3(9999, -200, 9999);
             }
         }
         if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
         {
-            realTimeGameProcessManager.SwitchToCMode(RotationMode_fightingMember, teamConfig.myTeam, MobileInputsManager.playerMode);
+            realTimeGameProcessManager.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
         }
+        realTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        realTimeGameProcessManager.Refresh();
+        return memberchanged;
+    }
+    
+    public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo,Transform IniStandPoint)
+    {
+        bool memberchanged = false;
+        foreach (Data_Center data_Center in teamMembers.values)
+        {
+            if (_changeTo == data_Center)
+            {
+                RotationMode_fightingMember = _changeTo;
+                RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
+                RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
+                
+                CharacterDataInfo characterDataInfo = CharacterDataInfoReference[_changeTo];
+                CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
+                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, null);
+                memberchanged = true;
+            } else {
+                data_Center._MyBehaviorRunner.ChangeState("Empty");
+                data_Center.WholeT.transform.position = new Vector3(9999, -200, 9999);
+            }
+        }
+        realTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         realTimeGameProcessManager.Refresh();
         return memberchanged;
     }

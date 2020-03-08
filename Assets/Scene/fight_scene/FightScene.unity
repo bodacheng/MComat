@@ -745,6 +745,8 @@ GameObject:
   m_Component:
   - component: {fileID: 101819575}
   - component: {fileID: 101819574}
+  - component: {fileID: 101819577}
+  - component: {fileID: 101819576}
   m_Layer: 5
   m_Name: FightMembers2
   m_TagString: Untagged
@@ -764,6 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe32e1c97a604b14ab4a4fbf2df6582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamMode: 0
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 3000649885712063301}
@@ -772,7 +775,6 @@ MonoBehaviour:
   realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
-  TeamMode: 0
 --- !u!224 &101819575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -792,6 +794,48 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &101819576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101819573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6e8a34d995c40f38cfad700fb050ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeamMode: 0
+  sideIconsContainer: {fileID: 3000649884906219656}
+  _targetCanvas: {fileID: 3000649885478218883}
+  button_prefab: {fileID: 3000649885712063301}
+  selectedFrame: {fileID: 130171117}
+  HitCombo: {fileID: 3000649885977066916}
+  realTimeGameProcessManager: {fileID: 3000649885613694109}
+  _mobileInputsManager: {fileID: 3000649885448912316}
+  _CharSetManager: {fileID: 3000649885530816838}
+--- !u!114 &101819577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101819573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34f8122c903e42da90f54435f29eb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeamMode: 0
+  sideIconsContainer: {fileID: 3000649884906219656}
+  _targetCanvas: {fileID: 3000649885478218883}
+  button_prefab: {fileID: 3000649885712063301}
+  selectedFrame: {fileID: 130171117}
+  HitCombo: {fileID: 3000649885977066916}
+  realTimeGameProcessManager: {fileID: 3000649885613694109}
+  _mobileInputsManager: {fileID: 3000649885448912316}
+  _CharSetManager: {fileID: 3000649885530816838}
 --- !u!1 &130171117
 GameObject:
   m_ObjectHideFlags: 0
@@ -7072,6 +7116,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1118366191}
   - component: {fileID: 1118366190}
+  - component: {fileID: 1118366193}
+  - component: {fileID: 1118366192}
   m_Layer: 5
   m_Name: FightMembers1
   m_TagString: Untagged
@@ -7091,6 +7137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe32e1c97a604b14ab4a4fbf2df6582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamMode: 0
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 3000649885712063301}
@@ -7099,7 +7146,6 @@ MonoBehaviour:
   realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
-  TeamMode: 0
 --- !u!224 &1118366191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7119,6 +7165,48 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1118366192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118366189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6e8a34d995c40f38cfad700fb050ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeamMode: 0
+  sideIconsContainer: {fileID: 3000649884906219656}
+  _targetCanvas: {fileID: 3000649885478218883}
+  button_prefab: {fileID: 3000649885712063301}
+  selectedFrame: {fileID: 130171117}
+  HitCombo: {fileID: 3000649885977066916}
+  realTimeGameProcessManager: {fileID: 3000649885613694109}
+  _mobileInputsManager: {fileID: 3000649885448912316}
+  _CharSetManager: {fileID: 3000649885530816838}
+--- !u!114 &1118366193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118366189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34f8122c903e42da90f54435f29eb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeamMode: 0
+  sideIconsContainer: {fileID: 3000649884906219656}
+  _targetCanvas: {fileID: 3000649885478218883}
+  button_prefab: {fileID: 3000649885712063301}
+  selectedFrame: {fileID: 130171117}
+  HitCombo: {fileID: 3000649885977066916}
+  realTimeGameProcessManager: {fileID: 3000649885613694109}
+  _mobileInputsManager: {fileID: 3000649885448912316}
+  _CharSetManager: {fileID: 3000649885530816838}
 --- !u!1 &1132959643
 GameObject:
   m_ObjectHideFlags: 0
@@ -32662,6 +32750,10 @@ MonoBehaviour:
   _AI_button: {fileID: 3000649885826334861}
   FightTeam1: {fileID: 1118366190}
   FightTeam2: {fileID: 101819574}
+  FightTeam1_multi: {fileID: 1118366193}
+  FightTeam2_multi: {fileID: 101819577}
+  FightTeam1_rotation: {fileID: 1118366192}
+  FightTeam2_rotation: {fileID: 101819576}
 --- !u!222 &3000649885628145496
 CanvasRenderer:
   m_ObjectHideFlags: 0

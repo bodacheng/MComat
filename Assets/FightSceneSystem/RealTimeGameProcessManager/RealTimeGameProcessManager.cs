@@ -22,6 +22,8 @@ public class RealTimeGameProcessManager : MonoBehaviour
     [Header("Team Managers")]
     [Space(6)]
     public FightTeam FightTeam1, FightTeam2;
+    public FightTeam_MultiRaid FightTeam1_multi, FightTeam2_multi;
+    public FightTeam_RotationMode FightTeam1_rotation, FightTeam2_rotation;
     
     public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
     public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
@@ -40,7 +42,8 @@ public class RealTimeGameProcessManager : MonoBehaviour
     
     public void SwitchToWatchMode() // button behaviour
     {
-        SwitchToCMode(null, playerTeam, false);
+        SwitchToCMode(null, false);
+        CameraParaAdjustment(playerTeam);
     }
     
 	public void Refresh()//这个刷新是倾向于画面制御
@@ -55,13 +58,13 @@ public class RealTimeGameProcessManager : MonoBehaviour
             _C_button.gameObject.SetActive(false);
             _AI_button.gameObject.SetActive(true);
         }
-        void SwitchAUtoMOde()
+        void SwitchAutoMode()
         {
             Auto = !Auto;
-            SwitchToCMode(focusingChar, playerTeam, Auto);
+            SwitchToCMode(focusingChar, Auto);
         }
         autoBUtton.onClick.RemoveAllListeners();
-        autoBUtton.onClick.AddListener(SwitchAUtoMOde);
+        autoBUtton.onClick.AddListener(SwitchAutoMode);
         
         FightTeam1.Refresh();
         FightTeam2.Refresh();
@@ -77,14 +80,24 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }
 	}
     
-	public void SwitchToCMode(Data_Center _char, Team team, bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
+	public void SwitchToCMode(Data_Center _char, bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
     {
-        if (focusingChar != null)
-            MobileInputsManager.SetPlayerMode(false);
-        focusingChar = _char;
-        if (focusingChar != null)
+        if (_char != null)
         {
             MobileInputsManager.SetPlayerMode(playerControll);
+        }
+        else
+        {
+            MobileInputsManager.SetPlayerMode(false);
+        }
+        focusingChar = _char;
+        Refresh();
+    }
+    
+    public void CameraParaAdjustment(Team team)
+    {
+        if (focusingChar != null)
+        {
             if (team == Team.player1)
             {
                 _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam2.TeamMemberTransforms());
@@ -97,9 +110,8 @@ public class RealTimeGameProcessManager : MonoBehaviour
         }else{
             _CameraManager.Assign_Camera(Camera_Mode_Num.TopDown,null);
         }
-        Refresh();
     }
-
+               
     public void Clear()// 这个我们还没有添加在合理的地方。
     {
         FightTeam1.Clear();
@@ -127,13 +139,15 @@ public class RealTimeGameProcessManager : MonoBehaviour
             {
                 case Team.player1:
                     playerTeam = Team.player2;
-                    SwitchToCMode(null,playerTeam,Auto);
+                    SwitchToCMode(null,Auto);
+                    
                 break;
                 case Team.player2:
                     playerTeam = Team.player1;
-                    SwitchToCMode(null,playerTeam,Auto);
+                    SwitchToCMode(null,Auto);
                 break;
             }
+            CameraParaAdjustment(playerTeam);
         }
     }
 }

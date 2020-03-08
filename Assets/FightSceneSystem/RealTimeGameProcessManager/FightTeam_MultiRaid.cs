@@ -4,11 +4,64 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
 
-public partial class FightTeam : MonoBehaviour
+public class FightTeam_MultiRaid : FightTeam
 {
-    IDictionary<Data_Center, Text> multiRaidHitComboDic = new Dictionary<Data_Center, Text>();//这个应该是多人模式的ComboHit，每个角色分属一个。轮流上场式应该是另一种
+    IDictionary<Data_Center, Text> multiRaidHitComboDic = new Dictionary<Data_Center, Text>();
+    
+    public override void Refresh()
+    {
+        base.Refresh();
+        foreach (Data_Center _datacenter in teamMembers.values)
+        {
+            if (multiRaidHitComboDic.ContainsKey(_datacenter))
+            {
+                multiRaidHitComboDic[_datacenter].color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
+                multiRaidHitComboDic[_datacenter].gameObject.SetActive(true);
+                if (multiRaidHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
+                {
+                    multiRaidHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvas.transform);
+                }
+                multiRaidHitComboDic[_datacenter].transform.localScale = Vector3.one;
+                multiRaidHitComboDic[_datacenter].fontSize = 30;
+            }
+        }
+    }
+    
+    public override void ArrangeAllTeamMembersToPosition(MultiDictionary<int,int,Data_Center> heromultiDictionary)
+    {
+        foreach(KeyValuePair<int,List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
+        {
+            foreach(int key in keys.Value)
+            {
+                Data_Center character_data_Center = heromultiDictionary.Get(keys.Key,key);
+                if (character_data_Center == null)
+                {
+                    continue;
+                }
+                if (TeamStandPoints[key] != null)
+                {
+                    character_data_Center.WholeT.transform.position = TeamStandPoints[key].position;
+                    character_data_Center.WholeT.transform.rotation = TeamStandPoints[key].rotation;
+                    character_data_Center.WholeT.parent = null;
+                    character_data_Center.WholeT.gameObject.SetActive(true);
+                }else{
+                    Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
+                }
+            }
+        }
+    }
+    
+    public override void Clear()
+    {
+        datacenterCharIconDic.Clear();
+        multiRaidHitComboDic.Clear();
+    }
+    
+    public override void LocalFightingUpdate()
+    { 
+    }
 
-    void TeamsFightMultiRaidInitialize(float wholeHP,Color comboTextColor)
+    protected override void TeamsFightInitialize(float wholeHP)
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
@@ -17,39 +70,49 @@ public partial class FightTeam : MonoBehaviour
             {
                 RefreshHPBar(a_char, x, wholeHP);
             });
+            
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => 
             {
                 a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10); 
                 RefreshResistanceBar(a_char); 
             });
+            
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
             a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => 
             {
-                RefreshComboHitMultiRaid(a_char,comboTextColor);
+                RefreshComboHitMultiRaid(a_char);
             });
         }
     }
     
     Text _hitcomboText;
-    void RefreshComboHitMultiRaid(Data_Center _datacenter,Color comboTextColor)
+    void RefreshComboHitMultiRaid(Data_Center _datacenter)
     {
         _hitcomboText = multiRaidHitComboDic[_datacenter];
         if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
         {
             _hitcomboText.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
-            _hitcomboText.color = comboTextColor;
-            _hitcomboText.transform.localScale = Vector3.one;
-            _hitcomboText.fontSize = 30;
             _hitcomboText.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f),0.2f);
         }
         else
         {
-            _hitcomboText.color = Color.clear;
+            switch (teamConfig.myTeam)
+            {
+                case Team.player1:
+                    _hitcomboText.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,0,0)),0.2f);
+                    break;
+                case Team.player2:
+                    _hitcomboText.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(Screen.width + 100,0,0)) ,0.2f);
+                    break;
+                default:
+                    _hitcomboText.transform.DOMove(CameraManager._camera.ScreenToWorldPoint(new Vector3(-100,-100,0)) ,0.2f);
+                    break;
+            }
         }
     }
 
-    public void InstantiateCharsIconsAndFloatHPBar_multiRaid()//这个环节应该能够同时把HP bar也适配好。
+    protected override void InstantiateCharsIconsAndFloatHPBar()//这个环节应该能够同时把HP bar也适配好。
     {
         SideCharIcon _SideCharIcon;
         Text hitCombo;
@@ -63,22 +126,24 @@ public partial class FightTeam : MonoBehaviour
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void Action1()
             {
-                realTimeGameProcessManager.SwitchToCMode(a_char, teamConfig.myTeam, RealTimeGameProcessManager.Auto);
+                realTimeGameProcessManager.SwitchToCMode(a_char, RealTimeGameProcessManager.Auto);
+                realTimeGameProcessManager.CameraParaAdjustment(teamConfig.myTeam);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceName);
             _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceName),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+            _SideCharIcon.gameObject.SetActive(true);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
             {
-                _SideCharIcon.gameObject.SetActive(true);
                 _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
                 _SideCharIcon.transform.localScale = Vector3.one;
             }
             else
             {
-                _SideCharIcon.gameObject.SetActive(false);
+                _SideCharIcon.transform.SetParent(_targetCanvas.transform);
+                _SideCharIcon.transform.localScale = Vector3.one;
             }
             datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             multiRaidHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
@@ -86,8 +151,18 @@ public partial class FightTeam : MonoBehaviour
         }
     }
     
-    public void MultiRaid_mode_start()
+    public override void ModeStart()
     {
         LetAllCharactersStartOff();
+    }
+    
+    public override List<Transform> TeamMemberTransforms()
+    {
+        List<Transform> transforms = new List<Transform>();
+        foreach(Data_Center _one in teamMembers.values)
+        {
+            transforms.Add(_one.WholeT);
+        }
+        return transforms;
     }
 }

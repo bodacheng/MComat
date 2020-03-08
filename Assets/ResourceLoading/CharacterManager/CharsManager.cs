@@ -32,53 +32,7 @@ public partial class CharsManager : MonoBehaviour {
             }
         }
     }
-
-    //这个的目的是把加载好的各个角色给放到预定的位置上去。从而把安排角色位置这个工作给从角色生成环节给分离出去。
-    public void ArrangeAllCharacterToPosition(MultiDictionary<int,int,Data_Center> heromultiDictionary,MultiDictionary<int,int,Data_Center> enemymultiDictionary, Transform[] Team1StandPoints, Transform[] Team2StandPoints)
-    {
-        foreach(KeyValuePair<int,List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
-        {
-            foreach(int key in keys.Value)
-            {
-                Data_Center character_data_Center = heromultiDictionary.Get(keys.Key,key);
-                if (character_data_Center == null)
-                {
-                    continue;
-                }
-                if (Team1StandPoints[key] != null)
-                {
-                    character_data_Center.WholeT.transform.position = Team1StandPoints[key].position;
-                    character_data_Center.WholeT.transform.rotation = Team1StandPoints[key].rotation;
-                    character_data_Center.WholeT.parent = null;
-                    character_data_Center.WholeT.gameObject.SetActive(true);
-                }else{
-                    Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
-                }
-            }
-        }
-                
-        foreach(KeyValuePair<int,List<int>> keys in enemymultiDictionary.GetAllUnNullKeys())
-        {
-            foreach(int key in keys.Value)
-            {
-                Data_Center character_data_Center = enemymultiDictionary.Get(keys.Key,key);
-                if (character_data_Center == null)
-                {
-                    continue;
-                }
-                if (Team2StandPoints[key] != null)
-                {
-                    character_data_Center.WholeT.transform.position = Team2StandPoints[key].position;
-                    character_data_Center.WholeT.transform.rotation = Team2StandPoints[key].rotation;
-                    character_data_Center.WholeT.parent = null;
-                    character_data_Center.WholeT.gameObject.SetActive(true);
-                }else{
-                    Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
-                }
-            }
-        }
-    }
- 
+    
     //这个函数是建立在这样的前提下：我们认为从数据库获取的玩家拥有角色，localid是正常的(不重复)
     //如果localid产生重复的情况下这个函数被执行，将产生大量紊乱。
     public IEnumerator BuildTheseMyModels(GetMonsterOfPlayerDetailModel[] myChars)

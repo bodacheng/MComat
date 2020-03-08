@@ -20,6 +20,7 @@ public class Empty_State : Behavior
             Animation_Manger.PlayLayerAnim(null,false,0f);
         _DATA_CENTER.TurnShield(false);
         _Rigidbody.velocity = Vector3.zero;
+        _BasicPhysicSupport.enabled = false;
         _DATA_CENTER.CleanClear();
         personality_Events.CloseAllPersonalityEffects();
     }
@@ -35,6 +36,7 @@ public class Empty_State : Behavior
 
 	public override void AI_State_exit()
 	{
+        _BasicPhysicSupport.enabled = true;
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 }
