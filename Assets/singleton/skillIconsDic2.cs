@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class skillIconsDic2 {
+public class SkillIconsDic {
 
-    static skillIconsDic instance;
-    public static skillIconsDic Instance
+    static SkillIconsDic instance;
+    public static SkillIconsDic Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new skillIconsDic();
+                instance = new SkillIconsDic();
             }
             return instance;
         }

@@ -510,7 +510,7 @@
     <Compile Include="Assets\singleton\levelExpDefine.cs" />
     <Compile Include="Assets\singleton\monsterIconsDic.cs" />
     <Compile Include="Assets\singleton\myModelPool.cs" />
-    <Compile Include="Assets\singleton\skillIconsDic.cs" />
+    <Compile Include="Assets\singleton\skillIconsDic2.cs" />
     <Compile Include="Assets\singleton\SystemNotes.cs" />
     <Compile Include="Assets\singleton\TeamConfig.cs" />
     <Compile Include="Assets\singleton\TutorialNotes.cs" />

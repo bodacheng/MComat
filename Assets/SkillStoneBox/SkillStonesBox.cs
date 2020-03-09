@@ -356,10 +356,10 @@ namespace mainMenu
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    process = (skillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
+                    process = (SkillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.Resource:
-                    process = (skillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
+                    process = (SkillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
@@ -367,7 +367,7 @@ namespace mainMenu
             yield return (process);
             GameObject Icon = (GameObject)process.Current;
             if (Icon == null)
-                Icon = Instantiate(skillIconsDic.Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL));
+                Icon = Instantiate(SkillIconsDic.Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL));
             DragAndDropItem item = Icon.GetComponent<DragAndDropItem>();
             if (item == null)
             {
