@@ -2035,10 +2035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fightScriptPath: 
   FightScript: {fileID: 0}
-  _FightReward:
-    intell: 0
-    diamond: 0
-    _CharacterDataInfos: []
 --- !u!4 &1848167670
 Transform:
   m_ObjectHideFlags: 0
