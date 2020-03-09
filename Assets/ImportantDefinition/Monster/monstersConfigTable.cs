@@ -172,10 +172,12 @@ public class MonstersConfigTable
         StringBuilder sb = new StringBuilder();
 
         for (int index = 0; index < grid.Length; index++)
+        {
             sb.AppendLine(string.Join(delimiter, grid[index]));
-
+        }
+        
         Debug.Log("尝试最终保存文件" + filePath);
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
+        StreamWriter outStream = File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();
     }
@@ -274,10 +276,12 @@ public class MonstersConfigTable
             StringBuilder sb = new StringBuilder();
 
             for (int index = 0; index < grid.Length; index++)
+            {
                 sb.AppendLine(string.Join(delimiter, grid[index]));
-
+            }
+            
             Debug.Log("尝试最终保存文件" + filePath);
-            StreamWriter outStream = System.IO.File.CreateText(filePath);
+            StreamWriter outStream = File.CreateText(filePath);
             outStream.WriteLine(sb);
             outStream.Close();
         }

@@ -15,7 +15,7 @@ public class LocalFight
     [System.NonSerialized]
     public MultiDictionary<int, int, CharacterDataInfo> HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
     public MultiDictionary<int, int, CharacterDataInfo> EnemySets = new MultiDictionary<int, int, CharacterDataInfo>();
-        
+    
     //public positionLocalCharKeySet4V4Mode _positionLocalCharKeySet4V4Mode;// 这个变量的另外一个存在地点是玩家存档，用以代表，保存所设置的角色在战斗中的站位信息，
     //在敌人队伍的战斗适配信息中这个东西和玩家那边是保持一致。为了保证站位正确，首先LocalFight中Enemies的localid要保证不重复，并且要求_positionLocalCharKeySet4V4Mode也不出错
     //其实这个东西可能有点。。让未来战斗编辑器的编写麻烦了些，但这个信息存在的形式本身没什么问题。必须走一个先决定有哪些角色再摆位置的过程。
@@ -44,7 +44,7 @@ public class LocalFight
             }
             else
             {
-                var reader = new System.IO.StringReader(Script.text);
+                var reader = new StringReader(Script.text);
                 _LocalFight = serializer.Deserialize(reader) as LocalFight;
             }
             _LocalFight.EnemySets.ConvertSerializableArrayToDictionary();
@@ -57,60 +57,4 @@ public class LocalFight
             return null;
         }
     }
-
-    //public void generate4V4FightPosSet()
-    //{
-    //    List<PosNumWithLocalKey> PosNumsWithLocalKeyList = new List<PosNumWithLocalKey>();
-    //    for (int i = 0; i < Enemies.Length; i++)
-    //    {
-    //        Enemies[i].localID = i;
-    //        PosNumsWithLocalKeyList.Add(new PosNumWithLocalKey(i, Enemies[i].localID));
-    //    }
-    //    _positionLocalCharKeySet4V4Mode = new positionLocalCharKeySet4V4Mode(PosNumsWithLocalKeyList.ToArray());
-    //}
-
-    //_positionLocalCharKeySet4V4Mode的内容和本地各个角色的localid是不是匹配非常重要，我们建立一个检查兼自我修复的函数
-    //public void checkAndFixLocalFight4V4ModePosInfo()
-    //{
-    //    List<int> localIDs = new List<int>();
-    //    foreach (CharacterDataInfo _CharacterDataInfo in Enemies)
-    //    {
-    //        if (!localIDs.Contains(_CharacterDataInfo.localID))
-    //        {
-    //            localIDs.Add(_CharacterDataInfo.localID);
-    //        }else{
-    //            Debug.Log("localfight信息存在严重问，角色出现重复的localid，尝试进行修复");
-    //            int newLocalID = _CharacterDataInfo.localID;
-    //            while (!localIDs.Contains(newLocalID))
-    //            {
-    //                newLocalID += 1;
-    //            }
-    //            _CharacterDataInfo.localID = newLocalID;
-    //            localIDs.Add(_CharacterDataInfo.localID);
-    //            Debug.Log("角色新id为："+ _CharacterDataInfo.localID);
-    //        }
-    //    }
-
-    //    bool hasBug = false;
-    //    _positionLocalCharKeySet4V4Mode.refreshDic();
-    //    List<int> PosNums = new List<int>(){0,1,2,3};//4v4模式默认就是这四个编码
-    //    foreach (PosNumWithLocalKey _PosNumWithLocalKey in _positionLocalCharKeySet4V4Mode.PosNumsWithLocalKey)
-    //    {
-    //        if (PosNums.Contains(_PosNumWithLocalKey.posNum))
-    //        {
-    //            if(!localIDs.Contains(_PosNumWithLocalKey.LocalID))
-    //            {
-    //                Debug.Log("localfight信息存在严重问题，队伍阵容出现了不存在的localid");
-    //                hasBug = true;
-    //            }
-    //        }else{
-    //            Debug.Log("localfight信息存在严重问题，出现了0，1，2，3之外的位置号码");
-    //            hasBug = true;
-    //        }
-    //    }
-    //    if (hasBug)//这个地方如果有bug的存在那说明的这个队伍配置需要的是直接基于队伍人员而重新生成
-    //    {
-    //        generate4V4FightPosSet();
-    //    }
-    //}
 }

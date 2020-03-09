@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using System;
 
-public class skillIconsDic {
+public class skillIconsDic2 {
 
-    private static skillIconsDic instance;
+    static skillIconsDic instance;
     public static skillIconsDic Instance
     {
         get
@@ -20,18 +18,18 @@ public class skillIconsDic {
         }
     }
 
-    private GameObject readingSprite;
-    private IDictionary<string, GameObject> skillIconDic = new Dictionary<string, GameObject>();
-
-    public GameObject getSkillIconSyn(string skillID)
+    GameObject readingSprite;
+    IDictionary<string, GameObject> SkillIconDic = new Dictionary<string, GameObject>();
+    
+    public GameObject GetSkillIconSyn(string skillID)
     {
-        skillIconDic.TryGetValue(skillID, out readingSprite);
+        SkillIconDic.TryGetValue(skillID, out readingSprite);
         return readingSprite;
     }
 
-    public IEnumerator findSkillIconByCach(string skillID)
+    public IEnumerator FindSkillIconByCach(string skillID)
     {
-        skillIconDic.TryGetValue(skillID, out readingSprite);
+        SkillIconDic.TryGetValue(skillID, out readingSprite);
         if (readingSprite == null)
         {
             IEnumerator ienObj = CachManager.Instance.getABFromCach("skillIcons", skillID.ToString());
@@ -57,15 +55,15 @@ public class skillIconsDic {
             {
                 GameObject pretab = (GameObject)resultObject.asset;
                 if (pretab != null)
-                    readingSprite = GameObject.Instantiate(pretab) as GameObject;
+                    readingSprite = UnityEngine.Object.Instantiate(pretab) as GameObject;
                 else
                 {
                     yield return null; yield break;
                 }
-                if (skillIconDic.ContainsKey(skillID))
-                    skillIconDic[skillID] = readingSprite;
+                if (SkillIconDic.ContainsKey(skillID))
+                    SkillIconDic[skillID] = readingSprite;
                 else
-                    skillIconDic.Add(skillID, readingSprite);
+                    SkillIconDic.Add(skillID, readingSprite);
                 Debug.Log("成功从缓存读取了以下图标：" + skillID);
                 readingBundle.Unload(false);
             }
@@ -79,26 +77,47 @@ public class skillIconsDic {
         yield return readingSprite;
     }
 
-    public IEnumerator findSkillIconByResource(string skillID)
+    public IEnumerator FindSkillIconByResource(string skillID)
     {
-        skillIconDic.TryGetValue(skillID, out readingSprite);
+        SkillIconDic.TryGetValue(skillID, out readingSprite);
         if (readingSprite != null)
+        {
             yield return readingSprite;
-           
-        GameObject pretab = Resources.Load("Sprites/skillIcons/" + skillID.ToString()) as GameObject;
-        if (pretab != null)
-            readingSprite = GameObject.Instantiate(pretab) as GameObject;
-        else{
-            yield return null;yield break;
         }
-        if (skillIconDic.ContainsKey(skillID))
-            skillIconDic[skillID] = readingSprite;
+        
+        Sprite sprite = Resources.Load<Sprite>("Sprites/skillIcons/" + skillID);
+        if (sprite != null)
+        {
+            GameObject _base = Instance.GetDefaultSkillIconByResource(0);
+            readingSprite = Object.Instantiate(_base);
+            readingSprite.GetComponent<Image>().sprite = sprite;
+        }
         else
-            skillIconDic.Add(skillID, readingSprite);
+        {
+            GameObject ICON = Resources.Load("Sprites/skillIcons/" + skillID) as GameObject;
+            if (ICON != null)
+            {
+                readingSprite = Object.Instantiate(ICON);
+            }
+            else
+            {
+                GameObject _base = Instance.GetDefaultSkillIconByResource(0);
+                readingSprite = Object.Instantiate(_base);
+            }
+        }
+        
+        if (SkillIconDic.ContainsKey(skillID))
+        {
+            SkillIconDic[skillID] = readingSprite;
+        }
+        else
+        {
+            SkillIconDic.Add(skillID, readingSprite);
+        }
         yield return readingSprite;
     }
-
-    public GameObject getDefaultSkillIconByResource(int spLevel)
+    
+    public GameObject GetDefaultSkillIconByResource(int spLevel)
     {
         switch (spLevel)
         {

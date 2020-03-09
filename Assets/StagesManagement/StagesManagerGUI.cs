@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using UniRx;
-using Soul;
 using Skill;
 
-//后排敌人——〉角色ID，localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
+// 后排敌人——〉角色ID，localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
 [CustomEditor(typeof(StagesManager))]
 public class StagesManagerGUI : Editor {
 
@@ -269,19 +268,19 @@ public class StagesManagerGUI : Editor {
             ButtonStyle_NineAndTwo.normal.textColor = Color.blue;
             
             GUILayout.BeginHorizontal();
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA1Config() != null && focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA1Config() != null && focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
                 focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA1Config();
             }
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA2Config() != null && focusingCharInfo._NineAndTwo.GetA2Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA2Config() != null && focusingCharInfo._NineAndTwo.GetA2Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
                 focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA2Config();
             }
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA3Config() != null && focusingCharInfo._NineAndTwo.GetA3Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetA3Config() != null && focusingCharInfo._NineAndTwo.GetA3Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
@@ -290,19 +289,19 @@ public class StagesManagerGUI : Editor {
             GUILayout.EndHorizontal();
             
             GUILayout.BeginHorizontal();
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB1Config() != null && focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB1Config() != null && focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
                 focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB1Config();
             }
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB2Config() != null && focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB2Config() != null && focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
                 focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB2Config();
             }
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB3Config() != null && focusingCharInfo._NineAndTwo.GetB3Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetB3Config() != null && focusingCharInfo._NineAndTwo.GetB3Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
@@ -311,19 +310,19 @@ public class StagesManagerGUI : Editor {
             GUILayout.EndHorizontal();
             
             GUILayout.BeginHorizontal();    
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC1Config() != null && focusingCharInfo._NineAndTwo.GetC1Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC1Config() != null && focusingCharInfo._NineAndTwo.GetC1Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
                 focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC1Config();
             }
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC2Config() != null && focusingCharInfo._NineAndTwo.GetC2Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC2Config() != null && focusingCharInfo._NineAndTwo.GetC2Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
                 focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC2Config();
             }
-            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC3Config() != null && focusingCharInfo._NineAndTwo.GetC3Config().RECORD_ID != null ? Color.white : Color.yellow;
+            GUI.backgroundColor = focusingCharInfo._NineAndTwo.GetC3Config() != null && focusingCharInfo._NineAndTwo.GetC3Config().RECORD_ID != null ? Color.yellow : Color.white;
             if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
             {
                 selectedskillindex = 0;
@@ -423,87 +422,19 @@ public class StagesManagerGUI : Editor {
             if (focusingCharInfo != null && focusingCharInfo._NineAndTwo != null)
                 focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();
             /////// 九宫格end //////////
-            EditorGUILayout.LabelField(" 可将当前编辑中的角色...:  ", big_title);
-            GUILayout.BeginHorizontal();
-            ButtonStyle.fixedWidth = 150f;
-            ButtonStyle.normal.textColor = Color.black;
-            if (GUILayout.Button("AddToReward", ButtonStyle))
-            {
-                if (_stagesManager._FightReward._CharacterDataInfos == null)
-                    _stagesManager._FightReward._CharacterDataInfos = new CharacterDataInfo[] { };
-
-                if (focusingCharInfo != null)
-                {
-                    CharacterDataInfo award = new CharacterDataInfo
-                        (
-                            focusingCharInfo.monsterOfPlayerId,
-                            focusingCharInfo.ResourceName,
-                            focusingCharInfo._NineAndTwo.DeepCopy()
-                        );
-
-                    List<CharacterDataInfo> toList = _stagesManager._FightReward._CharacterDataInfos.ToList();
-                    toList.Add(award);
-                    _stagesManager._FightReward._CharacterDataInfos = toList.ToArray();
-                }
-            }
-            if (GUILayout.Button("AddToLocalDebugAccount(本功能已失效)", ButtonStyle))
-            {
-            }
-            GUILayout.EndHorizontal();
         }
-        
-        GUILayout.Space(5f);
-        GUI.backgroundColor = new Color(0.7f,0.8f,0.8f);
-        EditorGUILayout.LabelField(" 胜利报酬信息  ",big_title);
-        _stagesManager._FightReward.diamond = EditorGUILayout.IntField("钻石", _stagesManager._FightReward.diamond);
-        _stagesManager._FightReward.intell = EditorGUILayout.IntField("智慧果实", _stagesManager._FightReward.intell);
-        GUILayout.Space(20);
-        EditorGUILayout.LabelField(" 人员类奖励 (代码里存在一个关于传递值和传递地址的基本编程问题没解决，我们暂时不管他) ", title);
-        if (_stagesManager._FightReward._CharacterDataInfos != null)
-        {
-            CharacterDataInfo toDelete = null;
-            foreach (CharacterDataInfo _one in _stagesManager._FightReward._CharacterDataInfos)
-            {
-                CharacterResourceInfo _CharacterResourceInfo =
-                MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_one.ResourceName.ToString()));
-                if (_CharacterResourceInfo != null)
-                {
-                    GUILayout.BeginHorizontal();
-                    if (GUILayout.Button(_CharacterResourceInfo.REAL_NAME, ButtonStyle))
-                    {
-                        focusingCharInfo = _one;
-                    }
-                    if (GUILayout.Button("delete", addDeleteMember))
-                    {
-                        toDelete = _one;
-                    }
-                    GUILayout.EndHorizontal();
-                    GUILayout.Space(5);
-                }else{
-                    toDelete = _one;
-                    continue;
-                }
-    
-            }
-            if (toDelete != null)
-            {
-                List<CharacterDataInfo> list = _stagesManager._FightReward._CharacterDataInfos.ToList();
-                list.Remove(toDelete);
-                _stagesManager._FightReward._CharacterDataInfos = list.ToArray();
-            }
-        }
-    
+            
         GUILayout.Space(10f);
         EditorGUILayout.LabelField(" 如何处理当前编辑中的战斗关卡信息  ", big_title);
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("保存战斗关卡至本地文档",ButtonStyle_save))
+        if (GUILayout.Button("保存战斗关卡至本地文档xml",ButtonStyle_save))
         {
             _stagesManager.SaveFightAsXml(pathAndNameForLocalSave,_stagesManager.editoringFight);
         }
-        if (GUILayout.Button("保存战斗报酬至本地文档",ButtonStyle_save))
+        if (GUILayout.Button("保存战斗关卡至本地文档json",ButtonStyle_save))
         {
-            _stagesManager.SaveFightRwardAsXml(pathAndNameForLocalSave,_stagesManager._FightReward);
+            _stagesManager.SaveFightAsJson(pathAndNameForLocalSave,_stagesManager.editoringFight);
         }
         GUILayout.EndHorizontal();
     }

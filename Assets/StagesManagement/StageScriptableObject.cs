@@ -31,7 +31,7 @@ public class StageScriptableObject : ScriptableObject
     public LocalFight localFight;
     
     public FightEventType _fightEventType = FightEventType.Arena;
-
+    
     public TeamMode Team1Mode = TeamMode.multiraid;
     public TeamMode Team2Mode = TeamMode.multiraid;
 

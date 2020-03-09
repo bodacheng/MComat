@@ -517,7 +517,6 @@
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
     <Compile Include="Assets\StagesManagement\ChaptersManager.cs" />
-    <Compile Include="Assets\StagesManagement\FightReward.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />
     <Compile Include="Assets\StagesManagement\QuestPreparePage.cs" />
     <Compile Include="Assets\StagesManagement\stageButton.cs" />

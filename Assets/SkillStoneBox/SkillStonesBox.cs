@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
 using Skill;
-
-// SkillStone首先是种什么东西，以什么形式存在。。。
-// 这个东西应该就和“我的拥有角色一样处理方式”
-// 这个模块是针对SKillStonesBox的机能。。。它对各种...SKill石头的master table也好，T table 也好都是功能的使用者关系。
 
 // 11.13号思考这样几个问题：
 // 1.玩家的等级与CellLimit之间的制约关系怎么实现
@@ -345,25 +340,26 @@ namespace mainMenu
             }
             yield return GenerateOneStoneModel(one.skillStoneOfPlayerId);
         }
-
+        
         public IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
         {
             if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
             {
                 if (MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] != null)
+                {
                     yield break;
+                }
             }
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
-            
             IEnumerator process = null;
             switch (ResourceLoadingSetting.Instance.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    process = (skillIconsDic.Instance.findSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
+                    process = (skillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.Resource:
-                    process = (skillIconsDic.Instance.findSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
+                    process = (skillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
@@ -371,10 +367,12 @@ namespace mainMenu
             yield return (process);
             GameObject Icon = (GameObject)process.Current;
             if (Icon == null)
-                Icon = Instantiate(skillIconsDic.Instance.getDefaultSkillIconByResource(skillConfig.SP_LEVEL));
+                Icon = Instantiate(skillIconsDic.Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL));
             DragAndDropItem item = Icon.GetComponent<DragAndDropItem>();
             if (item == null)
+            {
                 item = Icon.AddComponent<DragAndDropItem>();
+            }
 
             if (!MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
                 MySkillStonesReader.mySkillStonesObjectsDic.Add(skillStoneOfPlayerId, item);
