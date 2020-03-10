@@ -47,7 +47,7 @@ class TestCameraMode : CameraMode
                 enemyscreenpos = _camera.WorldToViewportPoint(enemiescenter);
                 if (enemyscreenpos.x < 0.2 || enemyscreenpos.x > 0.8 ||  enemyscreenpos.y < 0.2)
                 {
-                    xzOff = Vector3.Lerp(xzOff, (meCenter.position - enemiescenter), Time.deltaTime);
+                    xzOff = Vector3.RotateTowards(xzOff, meCenter.position - enemiescenter, 3 * Time.deltaTime, 0.0f);
                 }
             }
         }
