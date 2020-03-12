@@ -258,7 +258,7 @@ namespace mainMenu
         }
 
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<String> usingStoneIDs)
+        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<String> UsingStoneIDs)
         {
             foreach (KeyValuePair<int, DragAndDropCell> cellPair in CellsDictionary)
             {
@@ -293,9 +293,9 @@ namespace mainMenu
             int cellindex = 0;
             for (int i = 0; i < SkillStonesOfTypeAndExType.Count; i++)
             {
-                if (usingStoneIDs != null)
+                if (UsingStoneIDs != null)
                 {
-                    if (!usingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
+                    if (!UsingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
                     {
                         CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                         cellindex++;

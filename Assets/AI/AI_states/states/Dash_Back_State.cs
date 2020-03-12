@@ -30,8 +30,10 @@ public class Dash_Back_State : Behavior
     public override void _State_Update()
     {
         base._State_Update();
-        if (BeheviourFrameCounter == 5f)
+        if (System.Math.Abs(BeheviourFrameCounter - 5f) < 0.01f)
+        {
             _BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
+        }
     }
 
     public override void AI_State_enter()
@@ -46,9 +48,10 @@ public class Dash_Back_State : Behavior
         if (Sensor.GetEnemiesByDistance(true).Count > 0)
             threatsComingPosition = Sensor.GetEnemiesByDistance(false)[0].transform.position;
 
-        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
+        Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
+        if (threat != null)
         {
-            threatsComingPosition = Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
+            threatsComingPosition = threat.transform.position;
         }else{
             Collider temp = Sensor.GetClosestEnemyColliderInSensorRange();
             if (temp != null)

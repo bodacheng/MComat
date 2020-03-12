@@ -69,7 +69,7 @@ public class ResistanceManager : MonoBehaviour
             case "magic_release":
                 UnityEngine.Events.UnityAction eventStart2 = () =>
                 {
-                    data_Center._BO_Ani_E.ReleasePreparedMagicToAir("T");
+                    data_Center._BO_Ani_E.ReleasePreparedMagicToAir_Special("T");
                 };
                 UnityEngine.Events.UnityAction eventEnd2 = () =>
                 {

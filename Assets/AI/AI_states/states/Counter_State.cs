@@ -15,7 +15,7 @@ public class Counter_State : Behavior {
         nextAttackStateCanRushFirst = true;
 	}
 
-    List<Collider> near;
+    Collider threat;
     public override void AI_State_enter()
 	{
 		base.AI_State_enter ();
@@ -26,11 +26,9 @@ public class Counter_State : Behavior {
         Animation_Manger.AnimationTrigger(clip_name,true,0.08f);
         _Rigidbody.velocity = Vector3.zero;
         _Animator.applyRootMotion = true;
-        near = Sensor.GetNearbyDamagingWeaponColliders();
-        if (near != null && near.Count > 0)
+        if (threat != null)
         {
-            if (near[0] != null)
-                RotateToTarget_Tween(near[0].transform.position, 0.02f, true);
+            RotateToTarget_Tween(threat.transform.position, 0.02f, true);
         }
     }
         

@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -51,7 +50,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &1391753283938768
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -103,7 +100,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &1529457457828006
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -251,7 +246,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &1656032910190230
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -303,7 +296,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &1657706652984566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4884,7 +4876,7 @@ ParticleSystem:
 --- !u!199 &199105848708949902
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9478,7 +9470,7 @@ ParticleSystem:
 --- !u!199 &199413088618672226
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9564,7 +9556,7 @@ Transform:
   m_GameObject: {fileID: 1830798315940826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 531.28577, y: 115.64707, z: 218.38316}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_Children:
   - {fileID: 4281147093281516}
   - {fileID: 4883225960512962}
@@ -9587,13 +9579,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HitBox: {fileID: 0}
+  TrackControl: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.4
-  to_be_stop_emissions:
-  - {fileID: 198057795105955078}
-  - {fileID: 198008873186344240}
+  energyDissolveSlowly: 0
   to_be_faded_renderers:
   - {fileID: 23687574172743952}
+  audioSource: {fileID: 0}
+  _HitTriggerEvent: 
 --- !u!114 &114045718433863570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9606,16 +9600,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
+  SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 1
-  _startActivated: 1
-  _WeaponPosAdjustMode: 1
   weaponHP: -1
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  zokusei: 0
+  muzzle: 
+  ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  personalEffectPath: blueMagic
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
 --- !u!1 &1903602738399856
 GameObject:
   m_ObjectHideFlags: 0
@@ -9690,7 +9686,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9698,4 +9693,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2

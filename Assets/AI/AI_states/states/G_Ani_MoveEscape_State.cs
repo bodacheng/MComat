@@ -60,9 +60,10 @@ public class G_Ani_MoveEscape_State : Behavior {
         _Animator.applyRootMotion = true;
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         facedirection = gameObject.transform.forward;
-        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
+        Collider threat = Sensor.GetSuddenThreatInRange(0,5);
+        if (threat != null)
         {
-            damagingWeaponComingDirection = gameObject.transform.position - Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
+            damagingWeaponComingDirection = gameObject.transform.position - threat.transform.position;
             switch (Random.Range(0, 2))
             {
                 case 0:

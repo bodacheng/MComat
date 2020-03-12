@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -51,7 +50,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7507970169852826345
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 7508038651524969283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 381.98032, y: 204.09695, z: 289.48654}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_Children:
   - {fileID: 7509855630072705653}
   - {fileID: 7504739715999950171}
@@ -135,12 +133,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  bullet_GPS: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.4
+  energyDissolveSlowly: 0
   to_be_faded_renderers:
   - {fileID: 7521943759398019465}
   audioSource: {fileID: 0}
+  _HitTriggerEvent: 
 --- !u!114 &7611720795549404939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,18 +152,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
+  SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 1
-  _WeaponPosAdjustMode: 1
-  _specialApply: 0
-  _startActivated: 1
   weaponHP: -1
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  zokusei: 1
+  muzzle: 
+  ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  explosionEffect: energy_resolve
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
-  zokusei: 1
 --- !u!1 &7508071563375380543
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d302f9b2319604e068df8f2e5322e73b, type: 2}
+  - {fileID: 2100000, guid: cc185cd37c64b4618a4a468aa8aee640, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,7 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -312,7 +310,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7508205668726561541
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +496,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0, b: 0.7093229, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4950,7 +4947,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4958,7 +4954,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7508217369332546671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,7 +5140,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.776351, g: 0, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9641,7 +9636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9649,7 +9643,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7508560959970876637
 GameObject:
   m_ObjectHideFlags: 0
@@ -9693,7 +9686,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9701,4 +9693,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2

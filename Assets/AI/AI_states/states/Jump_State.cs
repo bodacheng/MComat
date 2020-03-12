@@ -60,10 +60,11 @@ public class Jump_State : Behavior
         jumpDirection = Vector3.zero;
         enemy_to_me = Vector3.zero;
         damagingWeaponComingDirection = Vector3.zero;
-        if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0)
+        Collider threat = Sensor.GetSuddenThreatInRange(0,5);
+        if (threat != null)
         {
-            damagingWeaponComingDirection = gameObject.transform.position - Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position;
-            switch ((int)Random.Range(0, 2))
+            damagingWeaponComingDirection = gameObject.transform.position - threat.transform.position;
+            switch (Random.Range(0, 2))
             {
                 case 0:
                     jumpDirection = Quaternion.Euler(0, -50, 0) * damagingWeaponComingDirection;

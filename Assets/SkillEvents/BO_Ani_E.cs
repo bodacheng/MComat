@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using HittingDetection;
 
-public class BO_Ani_E : MonoBehaviour
+public partial class BO_Ani_E : MonoBehaviour
 {
     public class HiddenMethods
     {
@@ -163,6 +163,117 @@ public class BO_Ani_E : MonoBehaviour
             }
         }
 	}
+    
+    public void ReleasePreparedMagic(string part)
+    {
+        if (OnLoadMagic == null)
+            return;
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
+        if (target_pool == null)
+            return;
+        processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
+        switch (part)
+        {
+            case "right_hand":
+                target = right_hand;
+            break;
+            case "left_hand":
+                target = left_hand;
+                break;
+            case "right_foot":
+                target = right_foot;
+                break;
+            case "left_foot":
+                target = left_foot;
+                break;
+            case "head":
+                target = head;
+                break;
+            case "tail":
+                target = tail;
+                break;
+            case "center":
+                target = _DATA_CENTER.geometryCenter;
+                break;
+            case null:
+                target = _DATA_CENTER.WholeT;
+                break;
+            default:
+                target = _DATA_CENTER.WholeT;
+                break;
+        }
+        processingHitBox.transform.position = target.position;
+        processingHitBox.transform.rotation = target.rotation;
+        myConstraintSource.sourceTransform = target;
+        myConstraintSource.weight = 1;
+        processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
+        processingHitBox.GetPositionConstraint().constraintActive = true;
+        processingHitBox.GetPositionConstraint().locked = true;
+        processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
+        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter);
+        processingHitBox.SetBOAniE(this);
+        if (_DATA_CENTER._TeamConfig != null)
+        {
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.MarkersEnablingStarts();
+        }
+        OnLoadMagic = null;
+    }
+    
+    public void ReleasePreparedMagicToAir(AnimationEvent e)
+    {
+        if (OnLoadMagic == null)
+            return;
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
+        if (target_pool == null)
+            return;
+
+        processingHitBox = target_pool.Rent();
+        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
+        switch (e.stringParameter)
+        {
+            case "right_hand":
+                processingHitBox.transform.position = right_hand.position;
+                break;
+            case "left_hand":
+                processingHitBox.transform.position = left_hand.position;
+                break;
+            case "right_foot":
+                processingHitBox.transform.position = right_foot.position;
+                break;
+            case "left_foot":
+                processingHitBox.transform.position = left_foot.position; 
+                break;
+            case "head":
+                processingHitBox.transform.position = head.position;           
+                break;
+            case "tail":
+                processingHitBox.transform.position = tail.position;
+                break;
+            case "center":
+                processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position;
+                break;
+            case null:
+                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
+                break;
+            default:
+                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
+                break;
+        }
+        processingHitBox.transform.rotation = _DATA_CENTER.WholeT.rotation;
+        
+        processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter);
+        processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+        processingHitBox.SetBOAniE(this);
+        processingHitBox._HitBox.MarkersEnablingStarts();
+        if (processingHitBox.TrackControl != null)
+        {
+            processingHitBox.TrackControl.StartOff(processingHitBox.transform.position, transform.rotation, e.floatParameter);
+        }
+        OnLoadMagic = null;
+    }
 
     Vector3 intPos;
     public void Bullet_shoot_from_body_part(AnimationEvent e)
@@ -384,118 +495,5 @@ public class BO_Ani_E : MonoBehaviour
     void PrepareOneMagic(string magicname)
     {
         OnLoadMagic = magicname;
-    }
-
-    public void ReleasePreparedMagic(string part)
-    {
-        if (OnLoadMagic == null)
-            return;
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
-        if (target_pool == null)
-            return;
-        processingHitBox = target_pool.Rent();
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        switch (part)
-        {
-            case "right_hand":
-                target = right_hand;
-            break;
-            case "left_hand":
-                target = left_hand;
-                break;
-            case "right_foot":
-                target = right_foot;
-                break;
-            case "left_foot":
-                target = left_foot;
-                break;
-            case "head":
-                target = head;
-                break;
-            case "tail":
-                target = tail;
-                break;
-            case "center":
-                target = _DATA_CENTER.geometryCenter;
-                break;
-            case null:
-                target = _DATA_CENTER.WholeT;
-                break;
-            default:
-                target = _DATA_CENTER.WholeT;
-                break;
-        }
-        processingHitBox.transform.position = target.position;
-        processingHitBox.transform.rotation = target.rotation;
-        myConstraintSource.sourceTransform = target;
-        myConstraintSource.weight = 1;
-        processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
-        processingHitBox.GetPositionConstraint().constraintActive = true;
-        processingHitBox.GetPositionConstraint().locked = true;
-        processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
-        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter);
-        if (_DATA_CENTER._TeamConfig != null)
-        {
-            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-            processingHitBox._HitBox.MarkersEnablingStarts();
-        }
-        OnLoadMagic = null;
-    }
-    
-    public void ReleasePreparedMagicToAir(string part)
-    {
-        if (OnLoadMagic == null)
-            return;
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
-        if (target_pool == null)
-            return;
-
-        processingHitBox = target_pool.Rent();
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        switch (part)
-        {
-            case "right_hand":
-                processingHitBox.transform.position = right_hand.position;
-                processingHitBox.transform.rotation = right_hand.rotation;         
-                break;
-            case "left_hand":
-                processingHitBox.transform.position = left_hand.position;
-                processingHitBox.transform.rotation = left_hand.rotation;
-                break;
-            case "right_foot":
-                processingHitBox.transform.position = right_foot.position;
-                processingHitBox.transform.rotation = right_foot.rotation;
-                break;
-            case "left_foot":
-                processingHitBox.transform.position = left_foot.position;
-                processingHitBox.transform.rotation = left_foot.rotation;  
-                break;
-            case "head":
-                processingHitBox.transform.position = head.position;
-                processingHitBox.transform.rotation = head.rotation;            
-                break;
-            case "tail":
-                processingHitBox.transform.position = tail.position;
-                processingHitBox.transform.rotation = tail.rotation;
-                break;
-            case "center":
-                processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                break;
-            case null:
-                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                break;
-            default:
-                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                break;
-        }
-        
-        processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter);
-        processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-        processingHitBox._HitBox.MarkersEnablingStarts();
-        OnLoadMagic = null;
     }
 }

@@ -44,7 +44,7 @@ public class Defend_State : Behavior
     int DefendHP = 10;
     float lastExitTime;
 
-    List<Collider> damagingweaponList;
+    Collider threat;
     Collider nearbyenemymeat;
     Vector3 fixDesPos;
     
@@ -167,22 +167,23 @@ public class Defend_State : Behavior
     public override void _State_FixedUpdate1()
     {
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 5 : 0;
-        damagingweaponList = Sensor.GetNearbyDamagingWeaponColliders();
+        threat = Sensor.GetSuddenThreatInRange(0,5f);
         nearbyenemymeat = Sensor.GetClosestEnemyColliderInSensorRange();
         
         if (TimeCounter >= 0f)
         {
             TimeCounter -= Time.fixedDeltaTime;
         }
-
+        
         if (nearbyenemymeat != null)
+        {
             RotateToTarget(nearbyenemymeat.transform.position, 0.5f, true);
+        }
         else
         {
-            if (damagingweaponList.Count > 0)
+            if (threat != null)
             {
-                if (damagingweaponList[0] != null)
-                    RotateToTarget(damagingweaponList[0].transform.position, 0.5f, true);
+                RotateToTarget(threat.transform.position, 0.5f, true);
             }
         }
     }

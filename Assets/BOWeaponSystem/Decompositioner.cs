@@ -15,6 +15,8 @@ public class Decompositioner : MonoBehaviour {
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;
 
+    [Tooltip("附属物体。这个只能自己把握。")]
+    public string[] Attachments;
     public string _HitTriggerEvent;
 
     #region realtime
@@ -101,17 +103,7 @@ public class Decompositioner : MonoBehaviour {
             _HitBox.SetOwnerFightAttriCalReference(null);
         }
     }
-    
-    void HitBoxFadedEvent()//这个就只能在这自定义了
-    {
-        switch (_HitTriggerEvent)
-        {
-            case "expolosion":
-                BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
-                break;
-        }
-    }
-    
+       
     public void Step1()
     {
         if (phase == 1 && _HitBox != null)
@@ -247,6 +239,29 @@ public class Decompositioner : MonoBehaviour {
                         to_be_faded_renderers[i].materials[y].SetColor("_TintColor", new Color(to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").r,to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").g, to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").b, a));
                 }
             }
+        }
+    }
+    
+    void HitBoxFadedEvent()//这个就只能在这自定义了
+    {
+        switch (_HitTriggerEvent)
+        {
+            case "expolosion":
+                BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
+                break;
+        }
+    }
+    
+    public void SpecialTriggerEvent(string defined_event_code, HitBoxSubEventManger hitBoxSubEventManger)//这个就只能在这自定义了
+    {
+        switch (defined_event_code)
+        {
+            case "expolosion":
+                BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
+                break;
+            case "bulletForward":
+                BO_Ani_E.Bullet_shoot_from_Transform(hitBoxSubEventManger.transform, 1,10);
+                break;
         }
     }
 }

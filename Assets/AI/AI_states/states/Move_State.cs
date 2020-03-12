@@ -105,7 +105,8 @@ public class Move_State : Behavior
             case AIMoveStyle.normal:
                 if (EnemiesByDistance.Count > 0)
                 {
-                    whereToGo = Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && Sensor.GetNearbyDamagingWeaponColliders()[0] != null ? 5 : Random.Range(0, 5);
+                    Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
+                    whereToGo = threat != null ? 5 : Random.Range(0, 5);
                     switch (whereToGo)
                     {
                         case 0:
@@ -139,9 +140,9 @@ public class Move_State : Behavior
                             //    use_direction = Vector3.Angle(toTeammates, vertical) > Vector3.Angle(toTeammates, vertical_r) ? vertical : vertical_r;
                             //}
                             //else{
-                            if (Sensor.GetNearbyDamagingWeaponColliders().Count > 0 && Sensor.GetNearbyDamagingWeaponColliders()[0] != null)
+                            if (threat != null)
                             {
-                                Vector3 vertical = GetVerticalDir(Sensor.GetNearbyDamagingWeaponColliders()[0].transform.position - gameObject.transform.position);
+                                Vector3 vertical = GetVerticalDir(threat.transform.position - gameObject.transform.position);
                                 use_direction = Random.Range(0, 2) == 1 ? vertical : -vertical;
                             }
                             else

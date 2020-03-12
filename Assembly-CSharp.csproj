@@ -294,6 +294,7 @@
     <Compile Include="Assets\EasyUIAnimator\Scripts\UIParallelAnimation.cs" />
     <Compile Include="Assets\EasyUIAnimator\Scripts\Utils\EasyUIAnimatorUtils.cs" />
     <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
+    <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
     <Compile Include="Assets\EffectsSystem\HitBoxVarityEvents.cs" />
     <Compile Include="Assets\EffectsSystem\RanSe.cs" />
     <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
@@ -458,7 +459,8 @@
     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager_Cach.cs" />
     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager_Resource.cs" />
     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager_StreamingAssets.cs" />
-    <Compile Include="Assets\ResourceLoading\EffectAndHurtObjectLoading.cs" />
+    <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectAndHurtObjectLoading.cs" />
+    <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectAndHurtObjectLoading_part2.cs" />
     <Compile Include="Assets\ResourceLoading\ResourceLoadingSetting.cs" />
     <Compile Include="Assets\Resources\effectsresource\Effect3FromJapanNet\eff_magiccircle_sample\UvScroll.cs" />
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
@@ -515,6 +517,7 @@
     <Compile Include="Assets\Singleton\TeamConfig.cs" />
     <Compile Include="Assets\Singleton\TutorialNotes.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
+    <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
     <Compile Include="Assets\StagesManagement\ChaptersManager.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />

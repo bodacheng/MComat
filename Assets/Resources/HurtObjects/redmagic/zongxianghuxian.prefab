@@ -4611,7 +4611,7 @@ ParticleSystem:
 --- !u!199 &6050081030896405631
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4697,7 +4697,7 @@ Transform:
   m_GameObject: {fileID: 2425543879957106526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 381.98032, y: 204.09695, z: 289.48654}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_Children:
   - {fileID: 8756999521249806549}
   - {fileID: 3208975687277821373}
@@ -4720,13 +4720,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HitBox: {fileID: 0}
+  TrackControl: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.4
-  to_be_stop_emissions:
-  - {fileID: 7394309239707761084}
-  - {fileID: 7915064399757022654}
+  energyDissolveSlowly: 0
   to_be_faded_renderers:
   - {fileID: 2529102924134839453}
+  audioSource: {fileID: 0}
+  _HitTriggerEvent: 
 --- !u!114 &3149120204650922789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4739,16 +4741,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
+  SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 1
-  _startActivated: 1
-  _WeaponPosAdjustMode: 1
   weaponHP: -1
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  zokusei: 0
+  muzzle: 
+  ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  personalEffectPath: blueMagic
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
 --- !u!1 &3053197209571032042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,7 +4796,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4800,7 +4803,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &3054991196628815561
 GameObject:
   m_ObjectHideFlags: 0
@@ -4844,7 +4846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4852,7 +4853,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &3267402840398725854
 GameObject:
   m_ObjectHideFlags: 0
@@ -4896,7 +4896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4904,7 +4903,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &5387644027980977643
 GameObject:
   m_ObjectHideFlags: 0
@@ -9440,7 +9438,7 @@ ParticleSystem:
 --- !u!199 &6787383999363691125
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9542,7 +9540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9550,7 +9547,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8385020487645510230
 GameObject:
   m_ObjectHideFlags: 0
@@ -9594,7 +9590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9602,7 +9597,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &8774126647067027206
 GameObject:
   m_ObjectHideFlags: 0

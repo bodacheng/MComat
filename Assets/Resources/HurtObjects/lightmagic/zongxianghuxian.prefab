@@ -9307,7 +9307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9315,7 +9314,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &2315256487270064388
 GameObject:
   m_ObjectHideFlags: 0
@@ -9359,7 +9357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9367,7 +9364,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &3565283867699482212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9395,7 +9391,7 @@ Transform:
   m_GameObject: {fileID: 3565283867699482212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 381.98032, y: 204.09695, z: 289.48654}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_Children:
   - {fileID: 1710087686387403338}
   - {fileID: 6889941918254560326}
@@ -9420,12 +9416,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  bullet_GPS: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.4
+  energyDissolveSlowly: 0
   to_be_faded_renderers:
   - {fileID: 5650169488122991976}
   audioSource: {fileID: 0}
+  _HitTriggerEvent: 
 --- !u!114 &1565559712385446535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9438,18 +9435,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
+  SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 1
-  _WeaponPosAdjustMode: 1
-  _specialApply: 0
-  _startActivated: 1
   weaponHP: -1
+  onGroundMagic: 0
+  effectSpreadOnBody: 1
+  zokusei: 2
+  muzzle: 
+  ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  explosionEffect: energy_resolve
-  effectSpreadOnBody: 1
-  onGroundMagic: 0
-  zokusei: 2
 --- !u!1 &3841636525596524462
 GameObject:
   m_ObjectHideFlags: 0
@@ -9493,7 +9490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9501,7 +9497,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &6750768510732736893
 GameObject:
   m_ObjectHideFlags: 0
@@ -9545,7 +9540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9553,7 +9547,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &7271378780752274563
 GameObject:
   m_ObjectHideFlags: 0
@@ -9597,7 +9590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -9605,7 +9597,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.3
-  mode: 2
 --- !u!1 &9008148626761777847
 GameObject:
   m_ObjectHideFlags: 0

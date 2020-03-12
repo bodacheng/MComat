@@ -18,10 +18,11 @@ public class Sensor : MonoBehaviour {
     bool continuousDetection;
 
     List<Collider> detectedEnemies = new List<Collider>();
-    List<Collider> OutterDamagingWeapon = new List<Collider>();
-    List<Collider> NearbyDamagingWeapon = new List<Collider>();
-    Collider nearestCollider;
-
+    Collider nearestEnemyCollider;
+        
+    List<Collider> DamagingWeaponAround = new List<Collider>();
+    Collider NearestDamagingWeapon;
+        
     Data_Center SelfDataCenter;
 
     public bool IFContinuousDetectionStarted()
@@ -40,16 +41,6 @@ public class Sensor : MonoBehaviour {
         SelfDataCenter = _self;
     }
 
-    public List<Collider> GetNearbyDamagingWeaponColliders()
-    {
-        //NearbyDamagingWeapon.RemoveAll(item => item == null);
-        return NearbyDamagingWeapon;
-    }
-    public List<Collider> GetOutterDamagingWeaponColliders()
-    {
-        return OutterDamagingWeapon;
-    }
-
     public Collider GetTargetRangeEnemyCollider(float min,float max)
     {
         for (int i = 0; i < detectedEnemies.Count; i++)
@@ -62,10 +53,30 @@ public class Sensor : MonoBehaviour {
         }
         return null;
     }
-    
+        
     public Collider GetClosestEnemyColliderInSensorRange()
     {
-        return nearestCollider;
+        return nearestEnemyCollider;
+    }
+    
+    public Collider GetSuddenThreatInRange(float min,float max)
+    {
+        Collider threat = GetClosestEnemyHitBoxColliderInSensorRange();
+        if (threat == null)
+        {
+            return null;
+        }
+        float to_me = Vector3.Distance(transform.position, threat.transform.position);
+        if (to_me >= min && to_me <= max)
+        {
+            return threat;
+        }
+        return null;
+    }
+    
+    Collider GetClosestEnemyHitBoxColliderInSensorRange()
+    {
+        return NearestDamagingWeapon;
     }
 
     public void SensorFixedUpdate()
@@ -156,8 +167,7 @@ public class Sensor : MonoBehaviour {
     public void SensorDetectionResultClearProcess()
     {
         detectedEnemies.Clear();
-        OutterDamagingWeapon.Clear();
-        NearbyDamagingWeapon.Clear();
+        DamagingWeaponAround.Clear();
     }
 
     List<GameObject> EnemiesByDistance = new List<GameObject>();
@@ -270,7 +280,6 @@ public class Sensor : MonoBehaviour {
         nearestenemy = null;
     }
 
-    Collider tempCForNearest;
     public void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
     {
         if (_hits == null)
@@ -287,39 +296,12 @@ public class Sensor : MonoBehaviour {
                 }
                 if (_TeamConfig.enemyWeaponLayerMask == (_TeamConfig.enemyWeaponLayerMask | (1 << hit.gameObject.layer)))
                 {
-                    OutterDamagingWeapon.Add(hit);
+                    DamagingWeaponAround.Add(hit);
                 }
             }
         }
-
-        nearestCollider = FindNearestCollider(detectedEnemies);
-
-        if (OutterDamagingWeapon.Count > 1)
-        {
-            //OutterDamagingWeapon.Sort((a, b) => horizontalDistanceCompare(a.transform.position, b.transform.position));
-            tempCForNearest = FindNearestCollider(OutterDamagingWeapon);
-            if (tempCForNearest != null)
-            {
-                OutterDamagingWeapon.Remove(tempCForNearest);
-                OutterDamagingWeapon.Insert(0, tempCForNearest);
-            }
-        }
-
-        for (int i = 0; i < OutterDamagingWeapon.Count; i++)
-        {
-            if (OutterDamagingWeapon[i] != null)
-            {
-                //_ClosestPointOnBounds = outterEnemies[i].ClosestPointOnBounds(transform.position);
-                if (Vector3.Distance(OutterDamagingWeapon[i].transform.position,gameObject.transform.position) < sensor_radius/3)//主观值。指近距离检测威胁是内环半径再加1
-                {
-                    NearbyDamagingWeapon.Add(OutterDamagingWeapon[i]);
-                }
-            }
-        }
-        for (int i = 0; i < NearbyDamagingWeapon.Count; i++)
-        {
-            OutterDamagingWeapon.Remove(NearbyDamagingWeapon[i]);
-        }
+        nearestEnemyCollider = FindNearestCollider(detectedEnemies);
+        NearestDamagingWeapon = FindNearestCollider(DamagingWeaponAround);
     }
 
     float p1_to_me, p2_to_me;
@@ -338,12 +320,13 @@ public class Sensor : MonoBehaviour {
     Collider FindNearestCollider(List<Collider> list)
     {
         if (list == null || list.Count == 0)
-            return null;
-        else if (list[0] == null)
         {
             return null;
         }
-        
+        if (list[0] == null)
+        {
+            return null;
+        }
         if (list.Count == 1)
             return list[0];
 

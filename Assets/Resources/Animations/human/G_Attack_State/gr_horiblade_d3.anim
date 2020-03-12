@@ -53655,22 +53655,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.35
-    functionName: SetRightHandWeaponMarkerManager
-    data: in
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
   - time: 0.36666667
-    functionName: SetDamageType
-    data: heavy
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 3
-    messageOptions: 0
-  - time: 0.43333334
-    functionName: turn_off_Right_energy_blade
+    functionName: turn_on_Right_energy_blade
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -53683,14 +53669,14 @@ AnimationClip:
     floatParameter: 1.8
     intParameter: 0
     messageOptions: 0
-  - time: 0.48333332
-    functionName: ClearMarkerManagers
+  - time: 0.46666667
+    functionName: turn_off_Right_energy_blade
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
+  - time: 0.56666666
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
