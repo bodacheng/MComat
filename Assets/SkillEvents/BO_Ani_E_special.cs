@@ -99,4 +99,30 @@ public partial class BO_Ani_E : MonoBehaviour
         }
         OnLoadMagic = null;
     }
+    
+    public void MagicForward_Special(string objectname ,Transform T)
+    {
+        if (string.IsNullOrEmpty(objectname))
+        {
+            return;
+        }
+
+        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(objectname, myMagicForwardPath, magic_path);
+        if (target_pool != null)
+        {
+            processingHitBox = target_pool.Rent();
+            processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
+            processingHitBox.transform.position = T.position;
+            processingHitBox.transform.rotation = T.rotation;
+            processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform);
+            processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+            processingHitBox.SetBOAniE(this);
+            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
+            processingHitBox._HitBox.MarkersEnablingStarts();
+            if (processingHitBox._HitBox.onGroundMagic)
+            {
+                processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
+            }
+        }
+    }
 }

@@ -158,3 +158,4 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 158,screwk,human,10,GM,0,3,8,1,1
 159,thunder_near,human,10,GI,1,4,6,1,1
 160,darkfirework,human,10,GI,1,6,15,1,1
+161,explosionlighteningball,human,10,GI,1,4,8,1,1

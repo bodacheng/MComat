@@ -262,6 +262,9 @@ public class Decompositioner : MonoBehaviour {
             case "bulletForward":
                 BO_Ani_E.Bullet_shoot_from_Transform(hitBoxSubEventManger.transform, 1,10);
                 break;
+            case "groundroundblast":
+                BO_Ani_E.MagicForward_Special("groundroundblast", hitBoxSubEventManger.transform);
+                break;
         }
     }
 }
