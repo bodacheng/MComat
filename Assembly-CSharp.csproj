@@ -335,7 +335,7 @@
     <Compile Include="Assets\Gotcha\gotchaManager.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharacterDataInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharResourceDataBase.cs" />
-    <Compile Include="Assets\ImportantDefinition\Monster\monstersConfigTable2.cs" />
+    <Compile Include="Assets\ImportantDefinition\Monster\MonstersConfigTable.cs" />
     <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\AIDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig.cs" />
