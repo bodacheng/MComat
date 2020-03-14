@@ -178,7 +178,7 @@ public class NineAndTwo {
     SkillConfig FixConfigByReference(string skillid)
     {
         if (skillid == null)
-            return null;
+            return new SkillConfig();
         SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(skillid, out SkillConfig referenceStandardSkillConfig);
         return referenceStandardSkillConfig;
     }
@@ -242,15 +242,15 @@ public class NineAndTwo {
         // 如果本地配置文件没有加载正确上面这个环节就要出问题。D，M，R不需要进行上述操作，
         // 理由是这三者有固定性，而且所依靠的动画包是基础动画包而不是各type角色的攻击技能动画包，所以加载方式有不同的地方。
 
-        AConfig1 = A1skillid != null ? FixConfigByReference(A1skillid) : null;
-        AConfig2 = A2skillid != null ? FixConfigByReference(A2skillid) : null;
-        AConfig3 = A3skillid != null ? FixConfigByReference(A3skillid) : null;
-        BConfig1 = B1skillid != null ? FixConfigByReference(B1skillid) : null;
-        BConfig2 = B2skillid != null ? FixConfigByReference(B2skillid) : null;
-        BConfig3 = B3skillid != null ? FixConfigByReference(B3skillid) : null;
-        CConfig1 = C1skillid != null ? FixConfigByReference(C1skillid) : null;
-        CConfig2 = C2skillid != null ? FixConfigByReference(C2skillid) : null;
-        CConfig3 = C3skillid != null ? FixConfigByReference(C3skillid) : null;
+        AConfig1 = A1skillid != null ? FixConfigByReference(A1skillid) : new SkillConfig();
+        AConfig2 = A2skillid != null ? FixConfigByReference(A2skillid) : new SkillConfig();
+        AConfig3 = A3skillid != null ? FixConfigByReference(A3skillid) : new SkillConfig();
+        BConfig1 = B1skillid != null ? FixConfigByReference(B1skillid) : new SkillConfig();
+        BConfig2 = B2skillid != null ? FixConfigByReference(B2skillid) : new SkillConfig();
+        BConfig3 = B3skillid != null ? FixConfigByReference(B3skillid) : new SkillConfig();
+        CConfig1 = C1skillid != null ? FixConfigByReference(C1skillid) : new SkillConfig();
+        CConfig2 = C2skillid != null ? FixConfigByReference(C2skillid) : new SkillConfig();
+        CConfig3 = C3skillid != null ? FixConfigByReference(C3skillid) : new SkillConfig();
 
         A1 = AConfig1 != null ? FromConfigToSTS(AConfig1) : null;
         A2 = AConfig2 != null ? FromConfigToSTS(AConfig2) : null;

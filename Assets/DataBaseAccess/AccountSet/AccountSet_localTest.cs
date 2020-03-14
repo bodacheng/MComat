@@ -43,7 +43,7 @@ namespace dataAccess
             try
             {
                 string json = JsonConvert.SerializeObject(refreshedPlayerAccountInfo);
-                LocalJson.SaveInfoToJsonFile(null, "localAccountInfo.json", json);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);
                 return true;
             }
             catch (Exception e)

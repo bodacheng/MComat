@@ -78,7 +78,7 @@ namespace dataAccess
                     accountCharacterInfoListObjects.Add(keyValue.Value);
                 }
                 string json = JsonConvert.SerializeObject(accountCharacterInfoListObjects);
-                LocalJson.SaveInfoToJsonFile(null, "AccountCharacterInfoList.json", json);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "AccountCharacterInfoList.json", json);
             }
             catch (Exception e)
             {
@@ -151,7 +151,7 @@ namespace dataAccess
             }
 
             string json = JsonConvert.SerializeObject(_accountCharacterInfo);
-            LocalJson.SaveInfoToJsonFile("AccountCharacterInfos", AccountCharacterInfoListObject.monsterOfPlayerId + ".json", json);
+            LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", AccountCharacterInfoListObject.monsterOfPlayerId + ".json", json);
             yield return _accountCharacterInfo;
         }
 
@@ -163,7 +163,7 @@ namespace dataAccess
             if (before == null)
                 yield break;
             string json = JsonConvert.SerializeObject(_CharacterDataInfo);
-            LocalJson.SaveInfoToJsonFile("AccountCharacterInfos", _CharacterDataInfo.monsterOfPlayerId + ".json", json);
+            LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _CharacterDataInfo.monsterOfPlayerId + ".json", json);
             yield break;
         }
 

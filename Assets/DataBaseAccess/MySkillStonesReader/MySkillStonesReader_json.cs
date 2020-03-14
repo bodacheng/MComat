@@ -67,7 +67,7 @@ namespace dataAccess
             try
             {
                 string json = JsonConvert.SerializeObject(stones.ToArray());
-                LocalJson.SaveInfoToJsonFile(null, "MySkillStones.json", json);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "MySkillStones.json", json);
                 return;
             }
             catch (Exception e)

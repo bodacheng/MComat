@@ -13,7 +13,7 @@ public class StagesManager : MonoBehaviour
 {
     public string fightScriptPath;
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
-    public LocalFight editoringFight;
+    public LocalFight EditoringFight;
 
     public LocalFight LoadOneLocalFight_XML(TextAsset Script)
     {
@@ -109,7 +109,7 @@ public class StagesManager : MonoBehaviour
             string _path = AssetDatabase.GetAssetPath(Script);
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
             _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
-            Debug.Log("4V4模式文件" + _path);
+            Debug.Log("文件已读取" + _path);
             fightScriptPath = _path;
             #endif
             
@@ -149,7 +149,7 @@ public class StagesManager : MonoBehaviour
         try
         {
             string json = JsonConvert.SerializeObject(UnNullDic._SerializableSets);
-            LocalJson.SaveInfoToJsonFile(null, path, json);
+            LocalJson.SaveInfoToJsonFile_dataPath(null, path, json);
         }
         catch (Exception e)
         {
