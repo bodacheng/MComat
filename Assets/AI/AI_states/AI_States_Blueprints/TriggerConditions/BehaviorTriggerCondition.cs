@@ -24,12 +24,12 @@ namespace Soul
         {
             return Sensor.GetSuddenThreatInRange(0,5) != null;
         }
-
-        public bool DangerousNearButEnemyFar()
+        
+        public bool CounterComingEnergy()
         {
-            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
-            threat = Sensor.GetSuddenThreatInRange(0, 5);
-            return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position,this._DATA_CENTER.WholeT.position) > 10f) && threat != null;
+            nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0,5);
+            threat = Sensor.GetSuddenThreatInRange(5, 15);
+            return nearestEnemyMeat == null && (threat != null);
         }
         
         public bool DangerousVeryClose() //Defend_State 1 

@@ -125,7 +125,7 @@ namespace mainMenu
                 yield return readshowmodel;
                 yield break;
             }else{
-                this._SkillsPrintOut.focusingResourceNum = _focusingCharacterDataInfo.ResourceName;
+                this._SkillsPrintOut.focusingResourceID = _focusingCharacterDataInfo.ResourceID;
                 IEnumerator readshowmodel = _modelShower.ShowThisCharacterModel(_focusingCharacterDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
@@ -138,7 +138,7 @@ namespace mainMenu
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
                 if (outsideDataLink == null)
                 {
-                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _focusingCharacterDataInfo.ResourceName);
+                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _focusingCharacterDataInfo.ResourceID);
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;

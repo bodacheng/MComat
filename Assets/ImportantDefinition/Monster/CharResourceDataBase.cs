@@ -35,7 +35,7 @@ public class CharacterResourceInfo
         CharacterDataInfo characterDataInfo = new CharacterDataInfo
         {
             monsterOfPlayerId = localID,
-            ResourceName = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
+            ResourceID = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
             level = 1,
             HP = 500, //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
             _NineAndTwo = null

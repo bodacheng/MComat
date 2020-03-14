@@ -87,9 +87,8 @@ public class StagesManagerGUI : Editor {
             alignment = TextAnchor.MiddleCenter,
             stretchWidth = false
         };
-
         _stagesManager = (StagesManager)target;
-
+        
         // 关卡编辑器下，技能配置文件定走resource文件夹，所以不需要走SkillsConfigInfos.loadAllSkillConfigs(), 同理角色配置文件也是
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
         SkillConfigTable.RefreshSkillConfigDicForReference();
@@ -104,7 +103,7 @@ public class StagesManagerGUI : Editor {
         {
             if (_stagesManager.FightScript != null)
             {
-                LocalFight one = _stagesManager.LoadOneLocalFight(_stagesManager.FightScript);
+                LocalFight one = _stagesManager.LoadOneLocalFight_Json(_stagesManager.FightScript);
                 if (one != null)
                 {
                     _stagesManager.editoringFight = one;
@@ -112,13 +111,27 @@ public class StagesManagerGUI : Editor {
                     {
                         foreach (MultiDictionary<int,int,CharacterDataInfo>.SerializableSet set in _one.value)
                         {
-                            CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceName.ToString()));
-                            if (_CharacterResourceInfo == null)
-                                continue;
-                            if (set._Value._NineAndTwo == null)
-                                set._Value._NineAndTwo = new NineAndTwo();
-                            else
-                                set._Value._NineAndTwo.SortNineAndTwo();
+                            if (set._Value != null)
+                            {
+                                CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceID));
+                                if (_CharacterResourceInfo == null)
+                                {
+                                    Debug.Log("一个不正常的角色："+set._Value.ResourceID);
+                                    continue;
+                                }
+                                if (set._Value._NineAndTwo == null)
+                                {
+                                    Debug.Log("一个不正常的角色："+set._Value.ResourceID);
+                                    set._Value._NineAndTwo = new NineAndTwo();
+                                }
+                                else
+                                {
+                                    Debug.Log("一个正常的角色："+set._Value.ResourceID);
+                                    set._Value._NineAndTwo.SortNineAndTwo();
+                                }
+                            }else{
+                                Debug.Log("??"+ set._Key2);
+                            }
                         }
                     }
                 }
@@ -137,7 +150,7 @@ public class StagesManagerGUI : Editor {
         else
             Debug.Log("没能读取到角色数据库文件。");
         GUILayout.Space(10);
-
+        
         EditorGUILayout.LabelField(" 关卡敌人信息  ", title);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("FreeEdit", (focusingMemberRecordID != null) ? ButtonStyle : ButtonStyle_selected))
@@ -154,7 +167,7 @@ public class StagesManagerGUI : Editor {
             focusingCharInfo = freeEditCharInfo;
         }
         GUILayout.EndHorizontal();
-    
+        
         // 四站位 //
         GUILayout.BeginHorizontal();
         GUILayout.Space(100);
@@ -163,6 +176,7 @@ public class StagesManagerGUI : Editor {
             selectedmonsterindex = 0;
             focusingMemberRecordID = 0.ToString();
             focusingCharInfo = _stagesManager.editoringFight.EnemySets.Get(0, 0);
+            Debug.Log(focusingCharInfo == null ? "没找到":"找到了");
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
@@ -219,25 +233,25 @@ public class StagesManagerGUI : Editor {
     
         if (focusingCharInfo != null)
         {
-            focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceName));
-            focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("characerType", focusingCharResourceInfo.type) : EditorGUILayout.TextField("characerType", focusingtype);
+            focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
+            focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("CharacerType", focusingCharResourceInfo.type) : EditorGUILayout.TextField("CharacerType", focusingtype);
             RecordIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
             if (RecordIDsAndNames.Count == 0)
             {
                 return;
             }
-            int index1 = 0;
+            int index = 0;
             foreach (KeyValuePair<string, string> keyValuePair in RecordIDsAndNames)
             {
-                if (keyValuePair.Value == focusingCharInfo.ResourceName)
+                if (keyValuePair.Key == focusingCharInfo.ResourceID)
                 {
-                    selectedmonsterindex = index1;
+                    selectedmonsterindex = index;
                     break;
                 }
-                index1++;
+                index++;
             }
             selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, RecordIDsAndNames.Values.ToArray());
-            focusingCharInfo.ResourceName = selectedmonsterindex == 0 ? null : RecordIDsAndNames.ElementAt(selectedmonsterindex).Value;
+            focusingCharInfo.ResourceID = selectedmonsterindex == 0 ? null : RecordIDsAndNames.ElementAt(selectedmonsterindex).Key;
             if (selectedmonsterindex == 0)
             {
                 return;
@@ -373,15 +387,15 @@ public class StagesManagerGUI : Editor {
                     }
 
                     IDictionary<string,string> _SkillRecordIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
-                    int index = 0;
+                    int index2 = 0;
                     foreach (KeyValuePair<string, string> keyValuePair in _SkillRecordIDsAndNames)
                     {
                         if (keyValuePair.Key == focusingSkillConfig.RECORD_ID)
                         {
-                            selectedskillindex = index;
+                            selectedskillindex = index2;
                             break;
                         }
-                        index++;
+                        index2++;
                     }
                     selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillRecordIDsAndNames.Values.ToArray());
                     focusingSkillConfig.RECORD_ID = selectedskillindex == 0 ? null : _SkillRecordIDsAndNames.ElementAt(selectedskillindex).Key;

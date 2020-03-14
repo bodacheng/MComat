@@ -249,6 +249,9 @@ public class Decompositioner : MonoBehaviour {
             case "expolosion":
                 BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
                 break;
+            case "explosionlighteningball_big":
+                BO_Ani_E.MagicForward_Special("explosionlighteningball_big", transform);
+                break;
         }
     }
     
@@ -264,6 +267,9 @@ public class Decompositioner : MonoBehaviour {
                 break;
             case "groundroundblast":
                 BO_Ani_E.MagicForward_Special("groundroundblast", hitBoxSubEventManger.transform);
+                break;
+            case "explosionlighteningball_big":
+                BO_Ani_E.MagicForward_Special("explosionlighteningball_big", hitBoxSubEventManger.transform);
                 break;
         }
     }

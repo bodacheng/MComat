@@ -11,7 +11,7 @@ public class MultiDictionary<Key1, Key2, Value>
     /// <summary>
     /// 字典结构
     /// </summary>
-    public Dictionary<Key1, Dictionary<Key2, Value>> mDict1 = new Dictionary<Key1, Dictionary<Key2, Value>>();
+    public Dictionary<Key1, Dictionary<Key2, Value>> mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
     public Dictionary<Key1, List<Key2>> unnullkeys = new Dictionary<Key1, List<Key2>>();
     public List<Value> values = new List<Value>();
 
@@ -23,7 +23,7 @@ public class MultiDictionary<Key1, Key2, Value>
     public void ConvertDictionaryToSerializableArray()
     {
         List<SerializableSets> temp = new List<SerializableSets>();
-        foreach (KeyValuePair<Key1,Dictionary<Key2, Value>> keyValuePair in mDict1)
+        foreach (KeyValuePair<Key1,Dictionary<Key2, Value>> keyValuePair in mDict)
         {
             SerializableSets serializableSets = new SerializableSets
             {
@@ -47,7 +47,7 @@ public class MultiDictionary<Key1, Key2, Value>
     
     public void ConvertSerializableArrayToDictionary()
     {
-        mDict1 = new Dictionary<Key1, Dictionary<Key2, Value>>();
+        mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
         unnullkeys = new Dictionary<Key1, List<Key2>>();
         values.Clear();
         foreach(SerializableSets _oneSerializableSets in _SerializableSets)
@@ -55,11 +55,8 @@ public class MultiDictionary<Key1, Key2, Value>
             Dictionary<Key2, Value> childDic = new Dictionary<Key2, Value>();
             foreach(SerializableSet set in _oneSerializableSets.value)
             {
-                childDic.Add(set._Key2,set._Value);
-                values.Add(set._Value);
+                Set(_oneSerializableSets.key1, set._Key2,set._Value);
             }
-            mDict1.Add(_oneSerializableSets.key1,childDic);
-            unnullkeys.Add(_oneSerializableSets.key1,childDic.Keys.ToList());
         }
     }
     
@@ -68,9 +65,9 @@ public class MultiDictionary<Key1, Key2, Value>
     /// </summary>
     public void Set(Key1 key1, Key2 key2, Value value)
     {
-        if (mDict1.ContainsKey(key1))
+        if (mDict.ContainsKey(key1))
         {
-            var dict2 = mDict1[key1];
+            var dict2 = mDict[key1];
             if (dict2.ContainsKey(key2))
             {
                 values.Remove(dict2[key2]);
@@ -90,7 +87,7 @@ public class MultiDictionary<Key1, Key2, Value>
             {
                 { key2, value }
             };
-            mDict1.Add(key1, dict2);
+            mDict.Add(key1, dict2);
             values.Add(value);
             unnullkeys.Add(key1, new List<Key2>() { key2 });
         }
@@ -101,9 +98,9 @@ public class MultiDictionary<Key1, Key2, Value>
     /// </summary>
     public Value Get(Key1 key1, Key2 key2, Value defaultValue = default)
     {
-        if (mDict1.ContainsKey(key1))
+        if (mDict.ContainsKey(key1))
         {
-            var dict2 = mDict1[key1];
+            var dict2 = mDict[key1];
             if (dict2.ContainsKey(key2))
                 return dict2[key2];
         }
@@ -112,7 +109,7 @@ public class MultiDictionary<Key1, Key2, Value>
         
     public void Clear()
     {
-        mDict1.Clear();
+        mDict.Clear();
         values.Clear();
         unnullkeys.Clear();
         _SerializableSets = null;
@@ -134,7 +131,7 @@ public class MultiDictionary<Key1, Key2, Value>
     public struct SerializableSet
     {
         public Key2 _Key2;
-        public Value _Value;       
+        public Value _Value;
     }
 }
 
@@ -148,7 +145,7 @@ public class SSIMultiDictionary
     public List<KeyValuePair<string, string>> GiveOutMin()
     {
         List<KeyValuePair<string, List<string>>> temp = new List<KeyValuePair<string, List<string>>>();//各个大key所属的对应最终最小值的小key
-        foreach (KeyValuePair<string,Dictionary<string, int>> BigPair in main.mDict1)
+        foreach (KeyValuePair<string,Dictionary<string, int>> BigPair in main.mDict)
         {
             Dictionary<string, int> LittleDic = BigPair.Value;
             List<string> minkeys = LittleDic.Keys.Select(x => new { x, y = LittleDic[x] }).GroupBy(x => x.y).OrderBy(x => x.Key).First().Select(x => x.x).ToList();

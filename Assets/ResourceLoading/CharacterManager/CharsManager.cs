@@ -82,13 +82,13 @@ public partial class CharsManager : MonoBehaviour {
         switch(ResourceLoadingSetting.Instance.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-            yield return buildmodelproess= (CreateModelForShowingByCach(_CharacterDataInfo.ResourceName));
+            yield return buildmodelproess= (CreateModelForShowingByCach(_CharacterDataInfo.ResourceID));
             break;
             case ResourceLoadMode.Resource:
-            yield return buildmodelproess = (CreateModelForShowingByResource(_CharacterDataInfo.ResourceName));
+            yield return buildmodelproess = (CreateModelForShowingByResource(_CharacterDataInfo.ResourceID));
             break;
             case ResourceLoadMode.StreamingAssetAB:
-            yield return buildmodelproess = (CreateModelForShowingByStreamingAssets(_CharacterDataInfo.ResourceName));
+            yield return buildmodelproess = (CreateModelForShowingByStreamingAssets(_CharacterDataInfo.ResourceID));
             break;
         }
         Data_Center _TempDATACENTER = (Data_Center)buildmodelproess.Current;
@@ -97,7 +97,7 @@ public partial class CharsManager : MonoBehaviour {
             Debug.Log("严重资源类错误");
             yield break;
         }
-        CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.ResourceName.ToString()));
+        CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.ResourceID.ToString()));
         yield return (_TempDATACENTER.Step2Initialize
             (_TempCharacterResourceInfo.type,
              _CharacterDataInfo._NineAndTwo,

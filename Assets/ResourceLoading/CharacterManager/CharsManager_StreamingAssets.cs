@@ -7,7 +7,7 @@ public partial class CharsManager : MonoBehaviour
     public IEnumerator CreateModelForShowingByStreamingAssets(string monsterId)
     {
         //主要就是上面这个环节不太舒服，考虑如果换成scriptableobject能不能简单些。如果换成那东西...比方说这个信息都是作为textasset保存在CharacterDataInfo里。。。这样就不会出现各种混乱的各平台地址写法问题                                                            
-        CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId.ToString()));
+        CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");

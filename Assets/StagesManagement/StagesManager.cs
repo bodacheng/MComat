@@ -2,27 +2,27 @@
 using System.IO;
 using System;
 using dataAccess;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-//现在一场战斗的信息靠LocalFight去描述，而所谓的随机战斗其实就是根据玩家等级去生成一个LocalFight的实例
-public class StagesManager : MonoBehaviour //这个模块本身在正式版本游戏应该是只存在于prepareScene里，进入战斗时候只是带入一个RandomLocalFight的实例用以生成战斗。。。
+public class StagesManager : MonoBehaviour
 {
     public string fightScriptPath;
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
     public LocalFight editoringFight;
 
-    //关键在于我们要确保这个存档信息在出错的情况下，在不存在的情况下都怎么样来处理。一个游戏中某存档在一个固定的文件夹下这没有什么问题，为了读取把握这个地址我们要有一些更稳定的策略。
-    //这个任务我们在不完全把握Application.dataPath在不同平台运行方式的情况下很难处理好
-    public LocalFight LoadOneLocalFight(TextAsset Script)
+    public LocalFight LoadOneLocalFight_XML(TextAsset Script)
     {
-        LocalFight _localFight;
+        LocalFight _localFight = new LocalFight();
+        
+        MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[] targetValue;
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(LocalFight));
+            XmlSerializer serializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[]));
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 //FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Open);
@@ -30,27 +30,31 @@ public class StagesManager : MonoBehaviour //这个模块本身在正式版本�
                 //FileStream.Close();
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    _localFight = serializer.Deserialize(textReader) as LocalFight;
+                    targetValue = serializer.Deserialize(textReader) as MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[];
                 }
+                Debug.Log("读取了敌人战斗信息");
             }
             else
             {
-                var reader = new System.IO.StringReader(Script.text);
-                _localFight = serializer.Deserialize(reader) as LocalFight;
-                Debug.Log("貌似已经成功读取了4V4模式随机战斗信息");
+                var reader = new StringReader(Script.text);
+                targetValue = serializer.Deserialize(reader) as MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[];
+                Debug.Log("读取了敌人战斗信息");
             }
-#if UNITY_EDITOR
+            
+            #if UNITY_EDITOR
             string _path = AssetDatabase.GetAssetPath(Script);
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
             _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
             Debug.Log("4V4模式文件" + _path);
             fightScriptPath = _path;
-#endif
+            #endif
+            
+            _localFight.EnemySets._SerializableSets = targetValue;
+            _localFight.EnemySets.ConvertSerializableArrayToDictionary();
             return _localFight;
         }
         catch (Exception e)
         {
-            Debug.Log("4V4战斗信息读取失败");
             Debug.Log(e.ToString());
             return null;
         }
@@ -64,13 +68,25 @@ public class StagesManager : MonoBehaviour //这个模块本身在正式版本�
         }
 
         localFight.EnemySets.ConvertDictionaryToSerializableArray();
-        
+        MultiDictionary<int, int, CharacterDataInfo> UnNullDic = new MultiDictionary<int, int, CharacterDataInfo>();
+        foreach (MultiDictionary<int, int, CharacterDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
+        {
+            for (int i = 0; i < sets.value.Length;i++)
+            {
+                List<CharacterDataInfo> unNullValues = new List<CharacterDataInfo>();
+                if (!String.IsNullOrEmpty(sets.value[i]._Value.ResourceID))
+                {
+                    UnNullDic.Set(sets.key1,sets.value[i]._Key2,sets.value[i]._Value);
+                }
+            }
+        }
+        UnNullDic.ConvertDictionaryToSerializableArray();
         try
         {
             XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[]));
             FileStream FileStream;
             FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
-            XmlSerializer.Serialize(FileStream, localFight.EnemySets._SerializableSets);
+            XmlSerializer.Serialize(FileStream, UnNullDic._SerializableSets);
             Debug.Log(Application.dataPath + path + " 尝试进行关卡存储");
             FileStream.Close();
         }
@@ -81,18 +97,58 @@ public class StagesManager : MonoBehaviour //这个模块本身在正式版本�
         }
     }
     
+    public LocalFight LoadOneLocalFight_Json(TextAsset Script)
+    {
+        LocalFight _localFight = new LocalFight();
+        
+        MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[] targetValue;
+        try
+        {
+            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[]>(Script.text);
+            #if UNITY_EDITOR
+            string _path = AssetDatabase.GetAssetPath(Script);
+            string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
+            _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
+            Debug.Log("4V4模式文件" + _path);
+            fightScriptPath = _path;
+            #endif
+            
+            _localFight.EnemySets._SerializableSets = targetValue;
+            _localFight.EnemySets.ConvertSerializableArrayToDictionary();
+            return _localFight;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+            return null;
+        }
+    }
+    
     public void SaveFightAsJson(string path, LocalFight localFight)
     {
         if (localFight == null)
         {
             return;
         }
-
+        
         localFight.EnemySets.ConvertDictionaryToSerializableArray();
         
+        MultiDictionary<int, int, CharacterDataInfo> UnNullDic = new MultiDictionary<int, int, CharacterDataInfo>();
+        foreach (MultiDictionary<int, int, CharacterDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
+        {
+            for (int i = 0; i < sets.value.Length;i++)
+            {
+                List<CharacterDataInfo> unNullValues = new List<CharacterDataInfo>();
+                if (!String.IsNullOrEmpty(sets.value[i]._Value.ResourceID))
+                {
+                    UnNullDic.Set(sets.key1,sets.value[i]._Key2,sets.value[i]._Value);
+                }
+            }
+        }
+        UnNullDic.ConvertDictionaryToSerializableArray();
         try
         {
-            string json = JsonConvert.SerializeObject(localFight.EnemySets._SerializableSets);
+            string json = JsonConvert.SerializeObject(UnNullDic._SerializableSets);
             LocalJson.SaveInfoToJsonFile(null, path, json);
         }
         catch (Exception e)

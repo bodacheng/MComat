@@ -48,7 +48,7 @@ namespace dataAccess
             {
                 CharacterDataInfo characterDataInfo = new CharacterDataInfo
                 {
-                    ResourceName = accountCharacterInfo.monsterId,
+                    ResourceID = accountCharacterInfo.monsterId,
                     monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId,
                     level = 100 //需要一个对应表
                 };

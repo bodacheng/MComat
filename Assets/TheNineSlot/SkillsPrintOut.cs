@@ -35,7 +35,7 @@ namespace mainMenu
         public Transform MemDetailWatchPos;
         public RectTransform SkillShowT;
 
-        public string focusingResourceNum;
+        public string focusingResourceID;
         public Data_Center focusingCharacterData;
 
         IDictionary<int, Behavior_Transition_Set> attack_chuan = new Dictionary<int, Behavior_Transition_Set>();
@@ -169,7 +169,7 @@ namespace mainMenu
 
         public IEnumerator SkillShowRunWithPreparing(string keyname)
         {
-            CharacterResourceInfo _watchingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingResourceNum);
+            CharacterResourceInfo _watchingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingResourceID);
             //下面这一大片，在资源存在的情况下压根不应该运行        
 
             if (this.focusingCharacterData.Animation_Manger != null)
@@ -252,7 +252,7 @@ namespace mainMenu
 
         public void SkillsPrintGamenRefresh(CharacterDataInfo _watchingCharInfo)//根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
         {
-            CharacterResourceInfo _watchingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_watchingCharInfo.ResourceName);
+            CharacterResourceInfo _watchingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_watchingCharInfo.ResourceID);
             skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo._NineAndTwo != null)
             {

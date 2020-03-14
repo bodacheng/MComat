@@ -165,7 +165,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.25
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4834,7 +4834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3769923449850341601}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 368.26007, y: 1.32, z: 1698.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4931,7 +4931,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.25
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -9586,14 +9586,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 4692008214712184246}
   TrackControl: {fileID: 4206099239167434891}
-  DestructionDelay: 1.4
-  stop_emission_delay: 1
-  energyDissolveSlowly: 1
+  DestructionDelay: 2.1
+  stop_emission_delay: 2
+  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments:
-  - groundroundblast
-  _HitTriggerEvent: 
+  - explosionlighteningball_big
+  _HitTriggerEvent: explosionlighteningball_big
 --- !u!114 &4692008214712184246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9608,9 +9608,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 2
+  damage_type: 3
   _WeaponMode: 2
-  weaponHP: 2
+  weaponHP: 4
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 4
@@ -14532,7 +14532,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 2
       minScalar: 0.9
       maxCurve:
         serializedVersion: 2
@@ -19288,7 +19288,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.25
+      scalar: 2
       minScalar: 0.9
       maxCurve:
         serializedVersion: 2
@@ -24044,7 +24044,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.2
+      scalar: 2
       minScalar: 0.9
       maxCurve:
         serializedVersion: 2
@@ -24794,7 +24794,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -24955,7 +24955,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
       cycleCount: 1
-      repeatInterval: 0.01
+      repeatInterval: 0.3
       probability: 1
   SizeModule:
     enabled: 1
@@ -28955,5 +28955,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Decompositioner: {fileID: 6672627024804372310}
   _event:
-    time: 0.9
-    event_name: groundroundblast
+    time: 1.9
+    event_name: explosionlighteningball_big

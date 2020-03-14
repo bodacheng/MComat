@@ -46,6 +46,10 @@ namespace Soul
                     KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair4);
                     ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 2);
+                    
+                    KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("CounterComingEnergy", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePair_gi);
+                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
 
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;
@@ -75,10 +79,10 @@ namespace Soul
                     RegisterConditionToRespond(keyValuePairuu);
                     ConditionAndRespondPriority.Set(keyValuePairuu.Key, keyValuePairuu.Value, 2);
 
-                    KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("DangerousNearButEnemyFar", behavior_define.StateKey);
-                    RegisterConditionToRespond(keyValuePair_gi);
-                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
-
+                    KeyValuePair<string, string> keyValuePair_gi2 = new KeyValuePair<string, string>("CounterComingEnergy", behavior_define.StateKey);
+                    RegisterConditionToRespond(keyValuePair_gi2);
+                    ConditionAndRespondPriority.Set(keyValuePair_gi2.Key, keyValuePair_gi2.Value, 2);
+                    
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;
                 case BehaviorType.GM:
