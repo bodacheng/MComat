@@ -15,7 +15,7 @@ namespace mainMenu
 
         [Space(5)]
         [Header("preparingScene")]
-        public preparingScene2 _preparingScene;
+        public PreScene _preparingScene;
 
         [Space(5)]
         [Header("进程器")]

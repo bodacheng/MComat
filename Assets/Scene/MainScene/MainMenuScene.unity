@@ -47430,7 +47430,7 @@ GameObject:
   - component: {fileID: 1042094258}
   - component: {fileID: 1042094261}
   m_Layer: 0
-  m_Name: preparingScene
+  m_Name: PreScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47459,7 +47459,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1042094257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c77e2397e9f4efa8ed35678dd59d22, type: 3}
+  m_Script: {fileID: 11500000, guid: b51209ccf427a4fa2a6e0256a6bb609f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainProcessRunner: {fileID: 428076404}

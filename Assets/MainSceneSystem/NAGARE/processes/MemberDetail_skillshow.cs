@@ -6,7 +6,7 @@ using dataAccess;
 
 public class MemberDetail_skillshow : MainSceneProcess
 {
-    public MemberDetail_skillshow(preparingScene2 _preparingScene)
+    public MemberDetail_skillshow(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.MemberDetail_show;
         this._preparingScene = _preparingScene;

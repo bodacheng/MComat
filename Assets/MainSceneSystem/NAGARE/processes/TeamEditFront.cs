@@ -8,7 +8,7 @@ public class TeamEditFront : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(0.5f);
-        preparingScene2.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
@@ -19,7 +19,7 @@ public class TeamEditFront : MainSceneProcess
         yield break;
     }
     
-    public TeamEditFront(preparingScene2 _preparingScene)
+    public TeamEditFront(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.TeamEditFront;
         this._preparingScene = _preparingScene;

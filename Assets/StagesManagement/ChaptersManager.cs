@@ -10,7 +10,7 @@ namespace mainMenu
     {
         [Space(7)]
         [Header("preparingScene")]
-        public preparingScene2 _preparingScene;
+        public PreScene _preparingScene;
         public SingleThreadProcesser mainProcessRunner;
 
         [Space(7)]

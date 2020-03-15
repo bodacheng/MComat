@@ -7,7 +7,7 @@ public class SelfFightFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        preparingScene2.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
@@ -20,7 +20,7 @@ public class SelfFightFront : MainSceneProcess
         yield return _modelShower.ShowThisCharacterModel(null);
     }
     
-    public SelfFightFront(preparingScene2 _preparingScene)
+    public SelfFightFront(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.SelfFightFront;
         this._preparingScene = _preparingScene;

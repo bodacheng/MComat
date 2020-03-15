@@ -69,11 +69,11 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                preparingScene2.Instance.mainProcessRunner.TriggerMainProcess(Step2INIForUIRefresh(focusingCharacterDataInfo));
+                PreScene.Instance.mainProcessRunner.TriggerMainProcess(Step2INIForUIRefresh(focusingCharacterDataInfo));
             }
             void SkillShow()
             {
-                preparingScene2.Instance.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
+                PreScene.Instance.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
             SkillShowButton.onClick.AddListener(SkillShow);
@@ -82,7 +82,7 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                preparingScene2.Instance.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+                PreScene.Instance.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
 

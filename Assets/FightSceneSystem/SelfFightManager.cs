@@ -10,7 +10,7 @@ namespace mainMenu
 {
     public class SelfFightManager : MonoBehaviour
     {
-        public preparingScene2 _preparingScene;
+        public PreScene _preparingScene;
 
         [Space(7)]
         [Header("基本UI元素")]

@@ -11,9 +11,9 @@ using Skill;
 
 namespace mainMenu
 {
-    public class preparingScene2 : MonoBehaviour
+    public class PreScene : MonoBehaviour
     {
-        public static preparingScene2 Instance;
+        public static PreScene Instance;
 
         [Space(7)]
         [Header("主进程处理器")]

@@ -15,7 +15,7 @@ public class ChapterProcess : MainSceneProcess
         yield break;
     }
     
-    public ChapterProcess(preparingScene2 _preparingScene,RectTransform T)
+    public ChapterProcess(PreScene _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.Chapter;
         this._preparingScene = _preparingScene;

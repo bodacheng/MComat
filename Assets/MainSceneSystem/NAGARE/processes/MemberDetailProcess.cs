@@ -4,7 +4,7 @@ using mainMenu;
 
 public class MemberDetailProcess : MainSceneProcess
 {    
-    public MemberDetailProcess(preparingScene2 _preparingScene)
+    public MemberDetailProcess(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.MemberDetail;
         this._preparingScene = _preparingScene;
@@ -18,7 +18,7 @@ public class MemberDetailProcess : MainSceneProcess
         _CameraManager.Assign_StartToEndModeCamera(_MemberDetail.MemDetailWatchPos.position,3f,25f);
         _CameraManager.current_Camera_Mode.target = _MemberDetail.MemDetailTargetPos;
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        preparingScene2.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         yield return MonsterBox.DisplayMonsterIcons();
         //this._MonsterBox.adjustAllIconsSize(null);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);

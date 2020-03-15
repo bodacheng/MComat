@@ -54,7 +54,7 @@ public class TryOneStoneAdd : MainSceneProcess
         yield break;
     }
     
-    public TryOneStoneAdd(preparingScene2 _preparingScene)
+    public TryOneStoneAdd(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub1;
         this.nextProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;

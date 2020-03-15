@@ -30,7 +30,7 @@ public class Tutorial_skillEdit : MainSceneProcess
         yield break;
     }
     
-    public Tutorial_skillEdit(preparingScene2 _preparingScene)
+    public Tutorial_skillEdit(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit;
         this.nextProcessStep = MainSceneStep.Tutorial_Story;
