@@ -20,11 +20,10 @@ public class SelfFightFront : MainSceneProcess
         yield return _modelShower.ShowThisCharacterModel(null);
     }
     
-    public SelfFightFront(PreScene _preparingScene)
+    public SelfFightFront()
     {
         this.thisProcessStep = MainSceneStep.SelfFightFront;
-        this._PreScene = _preparingScene;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

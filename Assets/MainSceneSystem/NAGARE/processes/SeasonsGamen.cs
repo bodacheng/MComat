@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 
@@ -15,12 +14,11 @@ public class SeasonsGamen : MainSceneProcess
         yield break;
     }
     
-    public SeasonsGamen(PreScene _preparingScene,RectTransform T)
+    public SeasonsGamen(RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.SeasonsGamen;
-        this._PreScene = _preparingScene;
         this.T = T;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

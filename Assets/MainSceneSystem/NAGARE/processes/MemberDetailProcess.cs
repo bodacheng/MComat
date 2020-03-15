@@ -4,11 +4,10 @@ using mainMenu;
 
 public class MemberDetailProcess : MainSceneProcess
 {    
-    public MemberDetailProcess(PreScene _preparingScene)
+    public MemberDetailProcess()
     {
         thisProcessStep = MainSceneStep.MemberDetail;
-        this._PreScene = _preparingScene;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
     
     public IEnumerator EnterProcess()

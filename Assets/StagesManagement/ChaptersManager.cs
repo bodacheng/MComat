@@ -53,19 +53,19 @@ namespace mainMenu
                     Debug.Log("没找到关卡信息：" + stageid);
                     continue;
                 }
-                stageButton stageBUtton = Instantiate(StageButton);
-                stageBUtton.gameObject.SetActive(true);
-                stageBUtton.title.text = stageScriptableObject.battleNameJPG;
-                stageBUtton.transform.SetParent(ChaptersT);
-                stageBUtton.transform.localScale = new Vector3(1f, 1f, 1f);
+                stageButton stageButton = Instantiate(StageButton);
+                stageButton.gameObject.SetActive(true);
+                stageButton.title.text = stageScriptableObject.battleNameJPG;
+                stageButton.transform.SetParent(ChaptersT);
+                stageButton.transform.localScale = new Vector3(1f, 1f, 1f);
                 void StageBUttonFeature()
                 {
                     mainProcessRunner.TriggerMainProcess(_preparingScene._QuestPreparePage.LoadStageByScriptThenGetReadyForIt(stageScriptableObject));
                 }
-                stageBUtton.button.onClick.AddListener(StageBUttonFeature);
+                stageButton.button.onClick.AddListener(StageBUttonFeature);
                 if (stageScriptableObject.StageButtonSprite)
                 {
-                    stageBUtton.buttonImage.sprite = stageScriptableObject.StageButtonSprite;
+                    stageButton.buttonImage.sprite = stageScriptableObject.StageButtonSprite;
                 }
             }
             yield break;

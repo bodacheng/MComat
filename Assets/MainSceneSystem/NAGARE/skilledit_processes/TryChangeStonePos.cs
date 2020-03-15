@@ -11,11 +11,10 @@ public class TryChangeStonePos : MainSceneProcess
     TextAsset TuroialFightScript;
     LocalFight TuroialFight;
     
-    public TryChangeStonePos(PreScene _preparingScene)
+    public TryChangeStonePos()
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
-        this._PreScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
     
     public IEnumerator EnterProcess()
@@ -52,7 +51,7 @@ public class TryChangeStonePos : MainSceneProcess
                 stage.localFight = this.TuroialFight;
                 stage._fightEventType = FightEventType.Tutorial_Story_AdamVsGuards;
                 stage.BattleGroundID = 2;
-                _PreScene.LoadFight(SceneMode.QuestFight, stage);
+                PreScene.Instance.LoadFight(SceneMode.QuestFight, stage);
                 this.ProcessEnd();
             }
             mainProcessRunner.TriggerMainProcess(skilleditconfrim());

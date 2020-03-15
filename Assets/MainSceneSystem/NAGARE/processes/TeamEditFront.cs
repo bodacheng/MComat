@@ -19,11 +19,10 @@ public class TeamEditFront : MainSceneProcess
         yield break;
     }
     
-    public TeamEditFront(PreScene _preparingScene)
+    public TeamEditFront()
     {
         thisProcessStep = MainSceneStep.TeamEditFront;
-        this._PreScene = _preparingScene;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()
@@ -38,7 +37,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        _PreScene._TeamEditManager.OpenButtons(false);
+        PreScene.Instance._TeamEditManager.OpenButtons(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);

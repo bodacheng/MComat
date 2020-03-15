@@ -21,11 +21,10 @@ public class SkillStones : MainSceneProcess
         LoadingCanvas.target.LightUp();
     }
     
-    public SkillStones(PreScene _preparingScene)
+    public SkillStones()
     {
         thisProcessStep = MainSceneStep.SkillStones;
-        this._PreScene = _preparingScene;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

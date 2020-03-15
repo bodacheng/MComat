@@ -15,12 +15,11 @@ public class ChapterProcess : MainSceneProcess
         yield break;
     }
     
-    public ChapterProcess(PreScene _preparingScene,RectTransform T)
+    public ChapterProcess(RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.Chapter;
-        this._PreScene = _preparingScene;
         this.T = T;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

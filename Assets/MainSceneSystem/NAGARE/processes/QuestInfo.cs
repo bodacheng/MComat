@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using System;
 using mainMenu;
 
 public class QuestInfo : MainSceneProcess
@@ -12,18 +11,17 @@ public class QuestInfo : MainSceneProcess
     public IEnumerator enterProcess()
     {
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        this.T.gameObject.SetActive(true);
+        T.gameObject.SetActive(true);
         PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;
     }
     
-    public QuestInfo(PreScene _preparingScene,RectTransform T)
+    public QuestInfo(RectTransform T)
     {
-        this.thisProcessStep = MainSceneStep.QuestInfo;
-        this._PreScene = _preparingScene;
+        thisProcessStep = MainSceneStep.QuestInfo;
         this.T = T;
-        this.EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

@@ -35,11 +35,10 @@ public class TryEditALines : MainSceneProcess
         yield break;
     }
     
-    public TryEditALines(PreScene _preparingScene)
+    public TryEditALines()
     {
-        this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
-        this._PreScene = _preparingScene;       
-        this.EelementsInherit(_preparingScene);
+        this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;    
+        this.EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()
@@ -107,7 +106,7 @@ public class TryEditALines : MainSceneProcess
             stage.localFight = this.TuroialFight;
             stage._fightEventType = FightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
-            _PreScene.LoadFight(SceneMode.QuestFight, stage);
+            PreScene.Instance.LoadFight(SceneMode.QuestFight, stage);
             this.ProcessEnd();
         }
 

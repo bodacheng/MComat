@@ -27,11 +27,10 @@ public class MemberDetail_edit : MainSceneProcess
         yield break;
     }
     
-    public MemberDetail_edit(PreScene _preparingScene)
+    public MemberDetail_edit()
     {
         thisProcessStep = MainSceneStep.MemberDetail_edit;
-        this._PreScene = _preparingScene;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

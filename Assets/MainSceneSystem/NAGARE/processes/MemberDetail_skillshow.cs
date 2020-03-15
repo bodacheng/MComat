@@ -6,11 +6,10 @@ using dataAccess;
 
 public class MemberDetail_skillshow : MainSceneProcess
 {
-    public MemberDetail_skillshow(PreScene _preparingScene)
+    public MemberDetail_skillshow()
     {
         thisProcessStep = MainSceneStep.MemberDetail_show;
-        this._PreScene = _preparingScene;
-        EelementsInherit(_preparingScene);
+        EelementsInherit(PreScene.Instance);
     }
     
     public IEnumerator EnterProcess()

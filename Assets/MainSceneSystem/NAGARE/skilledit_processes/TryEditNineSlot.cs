@@ -8,14 +8,13 @@ using Api.Dto.Model;
 // 先试着把石头添加到一个格子上。
 public class TryEditNineSlot : MainSceneProcess
 {
-    public TryEditNineSlot(PreScene _preparingScene, ProcessesRunner processesRunner)
+    public TryEditNineSlot(ProcessesRunner processesRunner)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub3;
         this.nextProcessStep = MainSceneStep.none;
         
         this.subProcessesRunner = processesRunner;
-        this._PreScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()
@@ -25,7 +24,7 @@ public class TryEditNineSlot : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

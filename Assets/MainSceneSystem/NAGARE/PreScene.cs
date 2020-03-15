@@ -123,19 +123,19 @@ namespace mainMenu
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
 
             //SceneProcessDictionary
-            TeamEditFront teamEditFront = new TeamEditFront(this);
-            SkillStones skillStones = new SkillStones(this);
-            SelfFightFront selfFightFront = new SelfFightFront(this);
-            SeasonsGamen seasonsGamen = new SeasonsGamen(this, SeasonsT);
-            ShowOneSeasonChapters _ShowOneSeasonChapters = new ShowOneSeasonChapters(this, AllSeasonsGamensT);
-            QuestInfo questInfo = new QuestInfo(this, QuestInfoT);
-            MemberDetailProcess memberDetail = new MemberDetailProcess(this);
-            MemberDetail_edit memberDetail_edit = new MemberDetail_edit(this);
-            MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow(this);
-            frontPage frontPage = new frontPage(this);
-            ChapterProcess chapterProcess = new ChapterProcess(this, _ChaptersManager.ChapterInfoT);
-            Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit(this);
-            GotchaProcess gotchaProcess = new GotchaProcess(this);
+            TeamEditFront teamEditFront = new TeamEditFront();
+            SkillStones skillStones = new SkillStones();
+            SelfFightFront selfFightFront = new SelfFightFront();
+            SeasonsGamen seasonsGamen = new SeasonsGamen(SeasonsT);
+            ShowOneSeasonChapters _ShowOneSeasonChapters = new ShowOneSeasonChapters(AllSeasonsGamensT);
+            QuestInfo questInfo = new QuestInfo(QuestInfoT);
+            MemberDetailProcess memberDetail = new MemberDetailProcess();
+            MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
+            MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
+            frontPage frontPage = new frontPage();
+            ChapterProcess chapterProcess = new ChapterProcess(_ChaptersManager.ChapterInfoT);
+            Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
+            GotchaProcess gotchaProcess = new GotchaProcess();
 
             ProcessesRunner.Instance.Clear();
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);

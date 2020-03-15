@@ -54,13 +54,12 @@ public class TryOneStoneAdd : MainSceneProcess
         yield break;
     }
     
-    public TryOneStoneAdd(PreScene _preparingScene)
+    public TryOneStoneAdd()
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub1;
         this.nextProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
         
-        this._PreScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()

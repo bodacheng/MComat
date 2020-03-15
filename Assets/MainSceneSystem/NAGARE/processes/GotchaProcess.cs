@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
-using dataAccess;
 
 public class GotchaProcess : MainSceneProcess
 {
     //enterProcess()绝不能出现triggerMainProcess
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
@@ -16,11 +15,10 @@ public class GotchaProcess : MainSceneProcess
         yield break;
     }
     
-    public GotchaProcess(PreScene _preparingScene)
+    public GotchaProcess()
     {
         this.thisProcessStep = MainSceneStep.Gotcha;
-        this._PreScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()
@@ -30,7 +28,7 @@ public class GotchaProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(enterProcess());
+        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

@@ -8,12 +8,11 @@ using dataAccess;
 // 先试着把石头添加到一个格子上。
 public class TrySkillShowMenu : MainSceneProcess
 {
-    public TrySkillShowMenu(PreScene _preparingScene,ProcessesRunner processesRunner)
+    public TrySkillShowMenu(ProcessesRunner processesRunner)
     {
         //this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
         this.subProcessesRunner = processesRunner;
-        this._PreScene = _preparingScene;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
     
     public IEnumerator EnterProcess()

@@ -13,16 +13,16 @@ public class Tutorial_skillEdit : MainSceneProcess
         subProcessesRunner = new ProcessesRunner();
         if (AccountSet.instance._PlayerAccountInfo.accountprogress == PlayerAccountProgressStep.justCreated)
         {
-            TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd(_PreScene);
-            TryEditALines tryEditALines = new TryEditALines(_PreScene);
+            TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd();
+            TryEditALines tryEditALines = new TryEditALines();
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub1,tryOneStoneAdd);
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
             subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
         }
         if (AccountSet.instance._PlayerAccountInfo.accountprogress == PlayerAccountProgressStep.Tutorial)
         {
-            TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(_PreScene, subProcessesRunner);
-            TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos(_PreScene);
+            TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(subProcessesRunner);
+            TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos();
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub3,tryEditNineSlot);
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub4,_TryChangeStonePos);
             subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub3);
@@ -30,11 +30,11 @@ public class Tutorial_skillEdit : MainSceneProcess
         yield break;
     }
     
-    public Tutorial_skillEdit(PreScene _preparingScene)
+    public Tutorial_skillEdit()
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit;
         this.nextProcessStep = MainSceneStep.Tutorial_Story;
-        this.EelementsInherit(_preparingScene);
+        this.EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()//这个应该是有条件的，玩家应该给亚当装配多少个技能石才能进入战斗环节？  
