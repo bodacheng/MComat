@@ -76886,7 +76886,7 @@ MonoBehaviour:
   closeRange: {fileID: 1811366811}
   MemDetailWatchPos: {fileID: 580008789}
   SkillShowT: {fileID: 1308281250}
-  focusingResourceNum: 0
+  focusingResourceID: 
   focusingCharacterData: {fileID: 0}
 --- !u!4 &1747971330
 Transform:
@@ -101515,7 +101515,7 @@ GameObject:
   - component: {fileID: 5989985070316835031}
   - component: {fileID: 7996283687157798191}
   m_Layer: 5
-  m_Name: chariconpretab
+  m_Name: Chariconpretab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

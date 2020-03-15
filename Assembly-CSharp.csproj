@@ -357,7 +357,7 @@
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />
     <Compile Include="Assets\MainSceneSystem\HollowOutMask.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\preparingScene.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\preparingScene2.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ChapterProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\frontPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\GotchaProcess.cs" />

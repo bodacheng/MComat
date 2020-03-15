@@ -8,7 +8,7 @@ public class SkillStones : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(1f);
-        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        preparingScene2.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
@@ -21,7 +21,7 @@ public class SkillStones : MainSceneProcess
         LoadingCanvas.target.LightUp();
     }
     
-    public SkillStones(preparingScene _preparingScene)
+    public SkillStones(preparingScene2 _preparingScene)
     {
         thisProcessStep = MainSceneStep.SkillStones;
         this._preparingScene = _preparingScene;

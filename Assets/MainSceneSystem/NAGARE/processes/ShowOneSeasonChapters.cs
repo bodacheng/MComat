@@ -15,7 +15,7 @@ public class ShowOneSeasonChapters : MainSceneProcess
         yield break;
     }
     
-    public ShowOneSeasonChapters(preparingScene _preparingScene,RectTransform T)
+    public ShowOneSeasonChapters(preparingScene2 _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.ChaptersOfOneSeason;
         this._preparingScene = _preparingScene;

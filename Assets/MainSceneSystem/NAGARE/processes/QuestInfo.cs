@@ -13,12 +13,12 @@ public class QuestInfo : MainSceneProcess
     {
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         this.T.gameObject.SetActive(true);
-        preparingScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        preparingScene2.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;
     }
     
-    public QuestInfo(preparingScene _preparingScene,RectTransform T)
+    public QuestInfo(preparingScene2 _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.QuestInfo;
         this._preparingScene = _preparingScene;

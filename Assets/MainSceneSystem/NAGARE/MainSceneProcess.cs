@@ -6,7 +6,7 @@ namespace mainMenu
         public MainSceneStep thisProcessStep;
         public MainSceneStep nextProcessStep = MainSceneStep.none;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
-        public preparingScene _preparingScene;
+        public preparingScene2 _preparingScene;
         public SingleThreadProcesser mainProcessRunner;
         public MemberDetail _MemberDetail;
         public ModelShower _modelShower;
@@ -21,7 +21,7 @@ namespace mainMenu
 
         public ProcessesRunner subProcessesRunner;
 
-        public void EelementsInherit(preparingScene _preparingScene)
+        public void EelementsInherit(preparingScene2 _preparingScene)
         {
             this._preparingScene = _preparingScene;
             _MemberDetail = _preparingScene._MemberDetail;

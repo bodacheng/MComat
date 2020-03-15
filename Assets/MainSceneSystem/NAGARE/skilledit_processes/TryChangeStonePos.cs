@@ -11,7 +11,7 @@ public class TryChangeStonePos : MainSceneProcess
     TextAsset TuroialFightScript;
     LocalFight TuroialFight;
     
-    public TryChangeStonePos(preparingScene _preparingScene)
+    public TryChangeStonePos(preparingScene2 _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
         this._preparingScene = _preparingScene;

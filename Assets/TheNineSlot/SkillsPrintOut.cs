@@ -23,7 +23,7 @@ namespace mainMenu
 
         [Space(11)]
         [Header("主界面核心模块")]
-        public preparingScene _preparingScene;
+        public preparingScene2 _preparingScene;
 
         [Space(11)]
         [Header("Skill Info")]

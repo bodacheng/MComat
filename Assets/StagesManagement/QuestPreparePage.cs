@@ -13,7 +13,7 @@ namespace mainMenu
     //进入关卡前的读取工作。因为要有一个简单的加载角色信息列表所以需要和数据库，本地config文档等等连接在一块。
     public class QuestPreparePage : MonoBehaviour
     {
-        public preparingScene _preparingScene;//准备由这个模块来切换关卡。
+        public preparingScene2 _preparingScene;//准备由这个模块来切换关卡。
         public CharsManager _CharsManager;
         public SingleThreadProcesser mainProcessRunner;
 

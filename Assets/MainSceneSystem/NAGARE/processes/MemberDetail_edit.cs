@@ -27,7 +27,7 @@ public class MemberDetail_edit : MainSceneProcess
         yield break;
     }
     
-    public MemberDetail_edit(preparingScene _preparingScene)
+    public MemberDetail_edit(preparingScene2 _preparingScene)
     {
         thisProcessStep = MainSceneStep.MemberDetail_edit;
         this._preparingScene = _preparingScene;

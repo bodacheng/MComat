@@ -6,7 +6,7 @@ using dataAccess;
 
 public class gotchaManager : MonoBehaviour
 {
-    public preparingScene preparingScene;
+    public preparingScene2 preparingScene;
     public RectTransform gotchaCanvas;
     
     public void gotchaButtonFeature()

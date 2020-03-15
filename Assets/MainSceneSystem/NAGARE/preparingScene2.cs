@@ -11,9 +11,9 @@ using Skill;
 
 namespace mainMenu
 {
-    public class preparingScene : MonoBehaviour
+    public class preparingScene2 : MonoBehaviour
     {
-        public static preparingScene Instance;
+        public static preparingScene2 Instance;
 
         [Space(7)]
         [Header("主进程处理器")]
@@ -214,7 +214,7 @@ namespace mainMenu
         {
             trySwitchToStep((MainSceneStep)next_step, true);
         }
-
+        
         [EnumAction(typeof(MainSceneStep))]
         public void trySwitchToStep(MainSceneStep next_step, bool foward)//这个是试图进入某个step。另一个是根据一些东西的选择情况来在某个step内对GUI进行刷新。两个都需要。
         {

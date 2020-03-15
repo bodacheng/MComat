@@ -15,7 +15,7 @@ public class SeasonsGamen : MainSceneProcess
         yield break;
     }
     
-    public SeasonsGamen(preparingScene _preparingScene,RectTransform T)
+    public SeasonsGamen(preparingScene2 _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.SeasonsGamen;
         this._preparingScene = _preparingScene;

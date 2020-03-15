@@ -8,7 +8,7 @@ namespace mainMenu
 {
     public class LevelManager : MonoBehaviour
     {
-        public preparingScene preparingScene;
+        public preparingScene2 preparingScene;
 
         public Button plusEX;
         public Button minusEX;

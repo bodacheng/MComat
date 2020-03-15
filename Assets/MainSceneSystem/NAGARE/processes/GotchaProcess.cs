@@ -16,7 +16,7 @@ public class GotchaProcess : MainSceneProcess
         yield break;
     }
     
-    public GotchaProcess(preparingScene _preparingScene)
+    public GotchaProcess(preparingScene2 _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Gotcha;
         this._preparingScene = _preparingScene;

@@ -35,7 +35,7 @@ public class TryEditALines : MainSceneProcess
         yield break;
     }
     
-    public TryEditALines(preparingScene _preparingScene)
+    public TryEditALines(preparingScene2 _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
         this._preparingScene = _preparingScene;       

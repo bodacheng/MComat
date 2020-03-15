@@ -142,7 +142,7 @@ namespace mainMenu
 
         public void OnTypeChangeMyMonsterBox()
         {
-            preparingScene.Instance.mainProcessRunner.TriggerMainProcess(DisplayMonsterIcons());
+            preparingScene2.Instance.mainProcessRunner.TriggerMainProcess(DisplayMonsterIcons());
         }
 
         //icon的排列，显示   
@@ -165,7 +165,7 @@ namespace mainMenu
                 void action1()
                 {
                     charIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
-                    preparingScene.Instance.mainProcessRunner.TriggerMainProcess(preparingScene.Instance.MonsterIconButton(monsterOfPlayerId));
+                    preparingScene2.Instance.mainProcessRunner.TriggerMainProcess(preparingScene2.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
                 _targetingIcon.iconButton.onClick.AddListener(action1);
                 _targetingIcon.gameObject.SetActive(true);

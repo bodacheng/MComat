@@ -8,7 +8,7 @@ using Api.Dto.Model;
 // 先试着把石头添加到一个格子上。
 public class TryEditNineSlot : MainSceneProcess
 {
-    public TryEditNineSlot(preparingScene _preparingScene, ProcessesRunner processesRunner)
+    public TryEditNineSlot(preparingScene2 _preparingScene, ProcessesRunner processesRunner)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub3;
         this.nextProcessStep = MainSceneStep.none;
