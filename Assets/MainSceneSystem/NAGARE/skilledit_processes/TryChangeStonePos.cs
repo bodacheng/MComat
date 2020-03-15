@@ -14,7 +14,7 @@ public class TryChangeStonePos : MainSceneProcess
     public TryChangeStonePos(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.EelementsInherit(_preparingScene);
     }
     
@@ -52,7 +52,7 @@ public class TryChangeStonePos : MainSceneProcess
                 stage.localFight = this.TuroialFight;
                 stage._fightEventType = FightEventType.Tutorial_Story_AdamVsGuards;
                 stage.BattleGroundID = 2;
-                _preparingScene.LoadFight(SceneMode.QuestFight, stage);
+                _PreScene.LoadFight(SceneMode.QuestFight, stage);
                 this.ProcessEnd();
             }
             mainProcessRunner.TriggerMainProcess(skilleditconfrim());

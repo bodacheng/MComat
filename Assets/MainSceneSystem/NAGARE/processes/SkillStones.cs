@@ -24,7 +24,7 @@ public class SkillStones : MainSceneProcess
     public SkillStones(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.SkillStones;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
 

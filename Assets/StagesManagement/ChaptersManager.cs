@@ -33,24 +33,24 @@ namespace mainMenu
         public void OpenChapter1()
         {
             title.text = "第一章：蘑菇大冒险";
-            mainProcessRunner.TriggerMainProcess(loadChapterPage(Chapter1stageIds));
+            mainProcessRunner.TriggerMainProcess(LoadChapterPage(Chapter1stageIds));
         }
 
-        public void clearStagesButtons()
+        public void ClearStagesButtons()
         {
             foreach (Transform _chapterT in ChaptersT)
                 Destroy(_chapterT.gameObject);
         }
 
-        public IEnumerator loadChapterPage(List<string> stagesIDs)
+        public IEnumerator LoadChapterPage(List<string> stagesIDs)
         {
-            clearStagesButtons();
+            ClearStagesButtons();
             foreach (string stageid in stagesIDs)
             {
                 StageScriptableObject stageScriptableObject = Resources.Load("stages/" + stageid, typeof(ScriptableObject)) as StageScriptableObject;
                 if (stageScriptableObject == null)
                 {
-                    Debug.Log("没找到关卡信息：" + stageid.ToString());
+                    Debug.Log("没找到关卡信息：" + stageid);
                     continue;
                 }
                 stageButton stageBUtton = Instantiate(StageButton);
@@ -58,14 +58,15 @@ namespace mainMenu
                 stageBUtton.title.text = stageScriptableObject.battleNameJPG;
                 stageBUtton.transform.SetParent(ChaptersT);
                 stageBUtton.transform.localScale = new Vector3(1f, 1f, 1f);
-
-                UnityEngine.Events.UnityAction stageBUttonFeature = () =>
+                void StageBUttonFeature()
                 {
                     mainProcessRunner.TriggerMainProcess(_preparingScene._QuestPreparePage.LoadStageByScriptThenGetReadyForIt(stageScriptableObject));
-                };
-                stageBUtton.button.onClick.AddListener(stageBUttonFeature);
+                }
+                stageBUtton.button.onClick.AddListener(StageBUttonFeature);
                 if (stageScriptableObject.StageButtonSprite)
+                {
                     stageBUtton.buttonImage.sprite = stageScriptableObject.StageButtonSprite;
+                }
             }
             yield break;
         }

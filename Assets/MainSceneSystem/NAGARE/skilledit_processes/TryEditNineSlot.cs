@@ -14,7 +14,7 @@ public class TryEditNineSlot : MainSceneProcess
         this.nextProcessStep = MainSceneStep.none;
         
         this.subProcessesRunner = processesRunner;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.EelementsInherit(_preparingScene);
     }
 

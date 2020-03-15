@@ -18,7 +18,7 @@ public class ShowOneSeasonChapters : MainSceneProcess
     public ShowOneSeasonChapters(PreScene _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.ChaptersOfOneSeason;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.T = T;
         this.EelementsInherit(_preparingScene);
     }
@@ -30,7 +30,7 @@ public class ShowOneSeasonChapters : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        Debug.Log("ChaptersOfOneSeason " + this._preparingScene._ReturnButtonManager.returnMissionList.Count);
+        Debug.Log("ChaptersOfOneSeason " + this._PreScene._ReturnButtonManager.returnMissionList.Count);
         this.mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     

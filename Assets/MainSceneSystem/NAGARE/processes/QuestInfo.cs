@@ -21,7 +21,7 @@ public class QuestInfo : MainSceneProcess
     public QuestInfo(PreScene _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.QuestInfo;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.T = T;
         this.EelementsInherit(_preparingScene);
     }

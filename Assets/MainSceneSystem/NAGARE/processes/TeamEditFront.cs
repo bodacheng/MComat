@@ -22,7 +22,7 @@ public class TeamEditFront : MainSceneProcess
     public TeamEditFront(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.TeamEditFront;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
 
@@ -38,7 +38,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        _preparingScene._TeamEditManager.OpenButtons(false);
+        _PreScene._TeamEditManager.OpenButtons(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);

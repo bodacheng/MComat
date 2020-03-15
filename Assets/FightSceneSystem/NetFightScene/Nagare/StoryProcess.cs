@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Playables;
+﻿using UnityEngine.Playables;
 
 public class StoryProcess : NagareProcess
-{    
+{
     public StoryProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
         this._NetFightScene = _NetFightScene;

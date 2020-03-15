@@ -18,7 +18,7 @@ public class ChapterProcess : MainSceneProcess
     public ChapterProcess(PreScene _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.Chapter;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.T = T;
         EelementsInherit(_preparingScene);
     }

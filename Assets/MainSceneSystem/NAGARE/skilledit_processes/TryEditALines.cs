@@ -38,7 +38,7 @@ public class TryEditALines : MainSceneProcess
     public TryEditALines(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
-        this._preparingScene = _preparingScene;       
+        this._PreScene = _preparingScene;       
         this.EelementsInherit(_preparingScene);
     }
 
@@ -107,7 +107,7 @@ public class TryEditALines : MainSceneProcess
             stage.localFight = this.TuroialFight;
             stage._fightEventType = FightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
-            _preparingScene.LoadFight(SceneMode.QuestFight, stage);
+            _PreScene.LoadFight(SceneMode.QuestFight, stage);
             this.ProcessEnd();
         }
 

@@ -9,7 +9,7 @@ public class MemberDetail_skillshow : MainSceneProcess
     public MemberDetail_skillshow(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.MemberDetail_show;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
     

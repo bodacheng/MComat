@@ -30,7 +30,7 @@ public class MemberDetail_edit : MainSceneProcess
     public MemberDetail_edit(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.MemberDetail_edit;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
 

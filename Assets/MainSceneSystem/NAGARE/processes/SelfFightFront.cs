@@ -23,7 +23,7 @@ public class SelfFightFront : MainSceneProcess
     public SelfFightFront(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.SelfFightFront;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
 

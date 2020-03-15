@@ -562,7 +562,6 @@
     <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Distortion.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Blend_CenterGlow.shader" />
-    <None Include="Assets\oneFight.json" />
     <None Include="Assets\Asstes\ErbGameArt\Glowing orbs Vol 3\Demo scene\Add_CenterGlow.txt" />
     <None Include="Assets\Resources\AIScripts\human\1118_atest.xml" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\READ ME.txt" />

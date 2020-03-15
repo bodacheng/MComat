@@ -7,7 +7,7 @@ public class MemberDetailProcess : MainSceneProcess
     public MemberDetailProcess(PreScene _preparingScene)
     {
         thisProcessStep = MainSceneStep.MemberDetail;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         EelementsInherit(_preparingScene);
     }
     

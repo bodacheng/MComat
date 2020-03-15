@@ -1,19 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Linq;
-using System.Xml.Serialization;
-using System.IO;
 using dataAccess;
-using System.Collections.Generic;
 
 namespace mainMenu
 {
     //进入关卡前的读取工作。因为要有一个简单的加载角色信息列表所以需要和数据库，本地config文档等等连接在一块。
     public class QuestPreparePage : MonoBehaviour
     {
-        public PreScene _preparingScene;//准备由这个模块来切换关卡。
         public CharsManager _CharsManager;
         public SingleThreadProcesser mainProcessRunner;
 
@@ -22,21 +16,21 @@ namespace mainMenu
         public Text QuestName;
         public charIcon FighterIcon;//多种属性框？
         public Button EditTeam;
-        public Button enterQuest;
+        public Button EnterQuest;
         public RectTransform myTeamShowT;
         public RectTransform enemyTeamShowT;
 
         public StageScriptableObject _Stage;
-
+        
         public void EditTeamButtonBehaviour()
         {
-            _preparingScene.trySwitchToStep(MainSceneStep.TeamEditFront, true);
+            PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront, true);
         }
 
         //这个函数只考虑了队员的加载。。。
         public IEnumerator GetReadyToBattle(StageScriptableObject stage, SceneMode sceneMode)
         {
-            enterQuest.gameObject.SetActive(false);
+            EnterQuest.gameObject.SetActive(false);
             LoadingCanvas.target.DarkOff(1f);
             foreach (Transform _child in myTeamShowT)
             {
@@ -46,7 +40,7 @@ namespace mainMenu
             {
                 Destroy(_child.gameObject);
             }
-
+            
             _Stage = stage;
             foreach(CharacterDataInfo oneMember in _Stage.localFight.HeroSets.values)
             {
@@ -69,15 +63,15 @@ namespace mainMenu
                 MyMemberIcon.transform.localScale = Vector3.one;
                 MyMemberIcon.gameObject.SetActive(true);
             }
-
-            enterQuest.onClick.RemoveAllListeners();
+            
+            EnterQuest.onClick.RemoveAllListeners();
             void Go()
             {
-                _preparingScene.AskIfLoadFight(sceneMode, _Stage);
+                PreScene.Instance.AskIfLoadFight(sceneMode, _Stage);
             }
-            enterQuest.onClick.AddListener(Go);
-            enterQuest.gameObject.SetActive(true);
-            _preparingScene.trySwitchToStep(MainSceneStep.QuestInfo, true);
+            EnterQuest.onClick.AddListener(Go);
+            EnterQuest.gameObject.SetActive(true);
+            PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo, true);
             LoadingCanvas.target.LightUp();
             yield break;
         }

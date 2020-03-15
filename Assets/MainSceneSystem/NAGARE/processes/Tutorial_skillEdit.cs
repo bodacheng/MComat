@@ -13,16 +13,16 @@ public class Tutorial_skillEdit : MainSceneProcess
         subProcessesRunner = new ProcessesRunner();
         if (AccountSet.instance._PlayerAccountInfo.accountprogress == PlayerAccountProgressStep.justCreated)
         {
-            TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd(_preparingScene);
-            TryEditALines tryEditALines = new TryEditALines(_preparingScene);
+            TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd(_PreScene);
+            TryEditALines tryEditALines = new TryEditALines(_PreScene);
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub1,tryOneStoneAdd);
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
             subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
         }
         if (AccountSet.instance._PlayerAccountInfo.accountprogress == PlayerAccountProgressStep.Tutorial)
         {
-            TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(_preparingScene, subProcessesRunner);
-            TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos(_preparingScene);
+            TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(_PreScene, subProcessesRunner);
+            TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos(_PreScene);
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub3,tryEditNineSlot);
             subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub4,_TryChangeStonePos);
             subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub3);

@@ -59,7 +59,7 @@ public class TryOneStoneAdd : MainSceneProcess
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub1;
         this.nextProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
         
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.EelementsInherit(_preparingScene);
     }
 

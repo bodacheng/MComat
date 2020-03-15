@@ -19,7 +19,7 @@ public class GotchaProcess : MainSceneProcess
     public GotchaProcess(PreScene _preparingScene)
     {
         this.thisProcessStep = MainSceneStep.Gotcha;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.EelementsInherit(_preparingScene);
     }
 

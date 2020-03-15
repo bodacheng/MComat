@@ -18,7 +18,7 @@ public class SeasonsGamen : MainSceneProcess
     public SeasonsGamen(PreScene _preparingScene,RectTransform T)
     {
         this.thisProcessStep = MainSceneStep.SeasonsGamen;
-        this._preparingScene = _preparingScene;
+        this._PreScene = _preparingScene;
         this.T = T;
         this.EelementsInherit(_preparingScene);
     }
