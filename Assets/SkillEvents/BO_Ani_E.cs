@@ -82,6 +82,19 @@ public partial class BO_Ani_E : MonoBehaviour
     {
         hiddenMethods.SetBodyPartsTransform();// 设置为private目的是减少出现在inpector里的函数数量
     }
+    
+    Quaternion SlightRotateToEnemy(Transform startT)
+    {
+        if (_DATA_CENTER.Sensor.GetEnemiesByDistance(true).Count > 0)
+        {
+            Vector3 relativePos = _DATA_CENTER.Sensor.GetEnemiesByDistance(false)[0].transform.position - startT.position;
+            relativePos.y = 0;
+            // the second argument, upwards, defaults to Vector3.up
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            return Quaternion.RotateTowards(transform.rotation, rotation, 1f);
+        }
+        return transform.rotation;
+    }
 
     // 这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
@@ -277,36 +290,30 @@ public partial class BO_Ani_E : MonoBehaviour
 
     Vector3 intPos;
     public void Bullet_shoot_from_body_part(AnimationEvent e)
-	{
-        switch (e.stringParameter)
+	{        
+        switch(e.stringParameter)
         {
             case "right_hand":
-                intPos = right_hand.transform.position;
-                //intRot = right_hand.transform.rotation;
-                break;
+                target = right_hand;
+            break;
             case "left_hand":
-                intPos = left_hand.transform.position;
-                //intRot = left_hand.transform.rotation;
-                break;
+                target = left_hand;
+            break;
             case "right_foot":
-                intPos = right_foot.transform.position;
-                //intRot = right_foot.transform.rotation;
-                break;
+                target = right_foot;
+            break;
             case "left_foot":
-                intPos = left_foot.transform.position;
-                //intRot = left_foot.transform.rotation;
-                break;
+                target = left_foot;
+            break;
             case "head":
-                intPos = head.transform.position;
-                //intRot = head.transform.rotation;
-                break;
+                target = head;
+            break;
             case "tail":
-                intPos = tail.transform.position;
-                //intRot = tail.transform.rotation;
-                break;
+                target = tail;
+            break;
             default:
-                intPos = _DATA_CENTER.geometryCenter.position + gameObject.transform.forward * 0.5f;
-                break;
+                target = _DATA_CENTER.geometryCenter;
+            break;
         }
 
         switch (e.intParameter)
@@ -326,8 +333,8 @@ public partial class BO_Ani_E : MonoBehaviour
         }
         processingHitBox = target_pool.Rent();
         processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        processingHitBox.transform.position = intPos;
-        EffectAndHurtObjectLoading.Instance.GenerateEffect(processingHitBox._HitBox.muzzle, magic_path, processingHitBox.transform.position, transform.rotation, null);
+        processingHitBox.transform.position = target.position;
+        EffectAndHurtObjectLoading.Instance.GenerateEffect(processingHitBox._HitBox.muzzle, magic_path, target.position, transform.rotation, null);
         processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform);
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         if (_DATA_CENTER._TeamConfig != null)
@@ -337,12 +344,12 @@ public partial class BO_Ani_E : MonoBehaviour
         }
         if (processingHitBox.TrackControl != null)
         {
-            processingHitBox.TrackControl.StartOff(intPos, transform.rotation, e.floatParameter);
+            processingHitBox.TrackControl.StartOff(target.position, SlightRotateToEnemy(target), e.floatParameter);
         }
         if (!processingHitBox._HitBox.enabled)
             Debug.Log("奇怪");
     }
-
+    
     Transform target;
     Decompositioner effect;
     ConstraintSource myConstraintSource;
