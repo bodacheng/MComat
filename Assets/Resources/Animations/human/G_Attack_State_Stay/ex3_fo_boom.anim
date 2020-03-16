@@ -124614,7 +124614,7 @@ AnimationClip:
     functionName: Bullet_shoot_from_body_part
     data: right_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 10
+    floatParameter: 15
     intParameter: 3
     messageOptions: 0
   - time: 1.1666666

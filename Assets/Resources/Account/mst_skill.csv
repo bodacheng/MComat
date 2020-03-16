@@ -161,3 +161,4 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 161,explosionlighteningball,human,10,GI,1,4,8,1,1
 162,midlevelbo,human,10,GI,0,4,10,1,1
 163,highlevelbo,human,10,GI,0,6,10,1,1
+164,consistentbo,human,10,GI,0,4,10,1,1
