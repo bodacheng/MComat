@@ -275,7 +275,10 @@ public partial class BO_Ani_E : MonoBehaviour
                 break;
         }
         processingHitBox.transform.rotation = _DATA_CENTER.WholeT.rotation;
-        
+        if (processingHitBox._HitBox.onGroundMagic)
+        {
+            processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
+        }
         processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
         processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter);
         processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
