@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Electricity1be
-  m_Shader: {fileID: 4800000, guid: 86b3f0465bcb0c941893722f46ef6eeb, type: 3}
+  m_Shader: {fileID: 4800000, guid: d890af244f7f1ee499b7b772b784d572, type: 3}
   m_ShaderKeywords: _EMISSION _USEDEPTH_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -74,7 +74,6 @@ Material:
     - _2Uspeed: -0.2
     - _2Vspeed: -0.05
     - _BumpScale: 1
-    - _CullMode: 2
     - _Cutoff: 0.5
     - _Cutted: 0
     - _Cutvalue: 0.8
