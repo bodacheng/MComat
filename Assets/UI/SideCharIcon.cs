@@ -13,7 +13,7 @@ public class SideCharIcon : MonoBehaviour {
     public Slider ResistBar;
     public Image ResistBarFillImage;
 
-	public charIcon focusingCharIcon;
+	public HeroIcon focusingCharIcon;
 
 	float maxHp;
 	float currentHp;

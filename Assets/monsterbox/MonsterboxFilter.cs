@@ -15,13 +15,13 @@ public class MonsterboxFilter : MonoBehaviour
 
     //关键词，貌似只是索引玩家对角色的自定义tag
     readonly string keyword;
-    List<charIcon> Red = new List<charIcon>(),
-                   Blue = new List<charIcon>(),
-                   Green = new List<charIcon>(),
-                   Light = new List<charIcon>(),
-                   Dark = new List<charIcon>();
+    List<HeroIcon> Red = new List<HeroIcon>(),
+                   Blue = new List<HeroIcon>(),
+                   Green = new List<HeroIcon>(),
+                   Light = new List<HeroIcon>(),
+                   Dark = new List<HeroIcon>();
 
-    public List<charIcon> OrderIcons(List<charIcon> origin_mainMenuIcons)
+    public List<HeroIcon> OrderIcons(List<HeroIcon> origin_mainMenuIcons)
     {
         origin_mainMenuIcons = TypeFilter(origin_mainMenuIcons);    
         if (bylevel.isOn)
@@ -35,9 +35,9 @@ public class MonsterboxFilter : MonoBehaviour
         return origin_mainMenuIcons;
     }
 
-    List<charIcon> TypeFilter(List<charIcon> origin_mainMenuIcons)
+    List<HeroIcon> TypeFilter(List<HeroIcon> origin_mainMenuIcons)
     {
-        List<charIcon> new_mainMenuIcons = new List<charIcon>();
+        List<HeroIcon> new_mainMenuIcons = new List<HeroIcon>();
         if (typeDropDown.options.Count > 0 && typeDropDown.options[typeDropDown.value] != null)
         {
             for (int i = 0; i < origin_mainMenuIcons.Count; i++)
@@ -58,7 +58,7 @@ public class MonsterboxFilter : MonoBehaviour
         return origin_mainMenuIcons;
     }
 
-    List<charIcon> OrderIconsByLevel(List<charIcon> origin_mainMenuIcons)
+    List<HeroIcon> OrderIconsByLevel(List<HeroIcon> origin_mainMenuIcons)
     {
         for (int i = 0; i < origin_mainMenuIcons.Count - 1; i++)
         {
@@ -68,7 +68,7 @@ public class MonsterboxFilter : MonoBehaviour
                 int expj1 = origin_mainMenuIcons[j + 1]._MonsterOfPlayerDetailModel.experience;
                 if (order == 1 ? expj > expj1 : expj < expj1)
                 {
-                    charIcon temp = origin_mainMenuIcons[j];
+                    HeroIcon temp = origin_mainMenuIcons[j];
                     origin_mainMenuIcons[j]=origin_mainMenuIcons[j+1];
                     origin_mainMenuIcons[j + 1] = temp;
                 }
@@ -77,7 +77,7 @@ public class MonsterboxFilter : MonoBehaviour
         return origin_mainMenuIcons;
     }
     
-    List<charIcon> OrderIconsByZokusei(List<charIcon> origin_mainMenuIcons)
+    List<HeroIcon> OrderIconsByZokusei(List<HeroIcon> origin_mainMenuIcons)
     {
         Red.Clear();Blue.Clear();Green.Clear();Light.Clear();Dark.Clear();
         for (int i = 0; i < origin_mainMenuIcons.Count; i++)
@@ -105,7 +105,7 @@ public class MonsterboxFilter : MonoBehaviour
                 break;
             }
         }
-        List<charIcon> newList = new List<charIcon>();
+        List<HeroIcon> newList = new List<HeroIcon>();
         
         newList.AddRange(Red);
         newList.AddRange(Blue);
@@ -115,15 +115,15 @@ public class MonsterboxFilter : MonoBehaviour
         return newList;
     }
 
-    List<charIcon> PutFavourateFirst(List<charIcon> origin_mainMenuIcons)
+    List<HeroIcon> PutFavourateFirst(List<HeroIcon> origin_mainMenuIcons)
     {
-        List<charIcon> favorites = new List<charIcon>(); 
+        List<HeroIcon> favorites = new List<HeroIcon>(); 
         for (int i = 0; i < origin_mainMenuIcons.Count; i++)
         {
             //if (origin_mainMenuIcons[i]._CharacterDataInfo.favorite)
                 //favorites.Add(origin_mainMenuIcons[i]);
         }
-        List<charIcon> new_mainMenuIcons = new List<charIcon>();
+        List<HeroIcon> new_mainMenuIcons = new List<HeroIcon>();
         for (int i = 0; i < favorites.Count;i++)
         {
             new_mainMenuIcons.Add(favorites[i]);
@@ -136,9 +136,9 @@ public class MonsterboxFilter : MonoBehaviour
         return new_mainMenuIcons;
     }
     
-    List<charIcon> SearchByKeyword(List<charIcon> origin_mainMenuIcons)
+    List<HeroIcon> SearchByKeyword(List<HeroIcon> origin_mainMenuIcons)
     {
-        List<charIcon> targets = new List<charIcon>(); 
+        List<HeroIcon> targets = new List<HeroIcon>(); 
         //for (int i = 0; i < origin_mainMenuIcons.Count; i++)
         //{
         //    if (origin_mainMenuIcons[i].AccountCharacterInfo.userd_efined_name != null 
@@ -146,7 +146,7 @@ public class MonsterboxFilter : MonoBehaviour
         //        origin_mainMenuIcons[i].AccountCharacterInfo.userd_efined_name.Contains(searchtag.text))
         //        targets.Add(origin_mainMenuIcons[i]);
         //}
-        List<charIcon> new_mainMenuIcons = new List<charIcon>();
+        List<HeroIcon> new_mainMenuIcons = new List<HeroIcon>();
         for (int i = 0; i < targets.Count;i++)
         {
             new_mainMenuIcons.Add(targets[i]);

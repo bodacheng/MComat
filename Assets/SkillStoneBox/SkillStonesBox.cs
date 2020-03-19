@@ -298,14 +298,14 @@ namespace mainMenu
                     if (!UsingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
                     {
                         CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
-                        cellindex++;
                         _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
-                        _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
-                            ? Color.white
-                            : Color.yellow;
+                        _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                        cellindex++;
                     }
                     else
                     {
+                        CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
+                        _SkillStoneCell.UpdateMyItem();
                         Debug.Log("有使用中的技能石头，直接跳过这一格");
                     }
                 }
@@ -313,13 +313,10 @@ namespace mainMenu
                 {
                     MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
                     CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
-                    cellindex++;
                     _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
-                    _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId)
-                        ? Color.white
-                        : Color.yellow;
+                    _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                    cellindex++;
                 }
-                CellsDictionary[cellindex].UpdateMyItem();
             }
             yield break;
         }
@@ -406,10 +403,15 @@ namespace mainMenu
             }
             return buttonWorldPosition;
         }
-        
-        IEnumerator ShowUsingStoneCharacter(string SkillStoneOfPlayerId,charIcon targetIcon)
+
+        public IEnumerator ShowUsingStoneCharacter(string SkillStoneOfPlayerId, HeroIcon targetIcon)
         {
             SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStoneOfPlayerId);
+            if (SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId == null)
+            {
+                targetIcon.gameObject.SetActive(false);
+                yield break;
+            }
             CharacterResourceInfo characterResourceInfo = null;
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
             yield return getchar;
@@ -419,15 +421,14 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
+            else
+            {
+                targetIcon.gameObject.SetActive(true);
+            }
             characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
             targetIcon.ChangeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
             characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
             yield break;
-        }
-        
-        public void ShowUsingCharIcon(string SkillStoneOfPlayerId,charIcon targetIcon)
-        {
-            Instance.mainProcessRunner.StartCoroutine(ShowUsingStoneCharacter(SkillStoneOfPlayerId,targetIcon));
         }
     }
 }

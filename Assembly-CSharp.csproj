@@ -155,6 +155,9 @@
     <Compile Include="Assets\Camera\TouchTopDownCamera.cs" />
     <Compile Include="Assets\Camera\WatchOverCamera.cs" />
     <Compile Include="Assets\characterModelShower\ModelShower.cs" />
+    <Compile Include="Assets\CircularScrollingList\ListBank.cs" />
+    <Compile Include="Assets\CircularScrollingList\ListBox.cs" />
+    <Compile Include="Assets\CircularScrollingList\ListPositionCtrl.cs" />
     <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
     <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
     <Compile Include="Assets\CSV2Table\Scripts\CsvParser.cs" />
@@ -305,7 +308,7 @@
     <Compile Include="Assets\EffectsSystem\RanSe.cs" />
     <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
     <Compile Include="Assets\EZ Object Pools\DecompositionerPool.cs" />
-    <Compile Include="Assets\FightingSceneUISystem\charIcon.cs" />
+    <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
     <Compile Include="Assets\FightLogger\FightLogger.cs" />
     <Compile Include="Assets\FightSceneSystem\BoundaryControllByGod.cs" />
@@ -358,7 +361,7 @@
     <Compile Include="Assets\MainSceneSystem\HollowOutMask.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ChapterProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ArcadeFrontProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\frontPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\GotchaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\JiNengRongLian_selectBaseMonster.cs" />
@@ -368,9 +371,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\MemberDetail_skillshow.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\MemberDetailProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\QuestInfo.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\processes\SeasonsGamen.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\SelfFightFront.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ShowOneSeasonChapters.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\SkillStones.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\TeamEditFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\Tutorial_skillEdit.cs" />
@@ -519,7 +520,7 @@
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
-    <Compile Include="Assets\StagesManagement\ChaptersManager.cs" />
+    <Compile Include="Assets\StagesManagement\ArcadeManager.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />
     <Compile Include="Assets\StagesManagement\QuestPreparePage.cs" />
     <Compile Include="Assets\StagesManagement\stageButton.cs" />

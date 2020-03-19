@@ -18,7 +18,7 @@ namespace mainMenu
 
         [Space(7)]
         [Header("角色属性框")]
-        public charIcon noMagic;
+        public HeroIcon noMagic;
 
         [Space(7)]
         [Header("选中框")]
@@ -32,7 +32,7 @@ namespace mainMenu
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
 
-        static readonly IDictionary<string, charIcon> mainMenuIcons = new Dictionary<string, charIcon>();
+        static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
         static List<string> typeList = new List<string>();
 
         void Start()
@@ -43,17 +43,17 @@ namespace mainMenu
 
         public void AdjustAllIconsSize(string focusingLocalID)
         {
-            foreach (KeyValuePair<string, charIcon> icon in mainMenuIcons)
+            foreach (KeyValuePair<string, HeroIcon> icon in mainMenuIcons)
             {
                 icon.Value.DecideIconSize(focusingLocalID);
             }
         }
         
-        public static charIcon GetCharIcon(string monsterofplayid)
+        public static HeroIcon GetCharIcon(string monsterofplayid)
         {
             if (monsterofplayid == null)
                 return null;
-            mainMenuIcons.TryGetValue(monsterofplayid, out charIcon charIcon);
+            mainMenuIcons.TryGetValue(monsterofplayid, out HeroIcon charIcon);
             return charIcon;
         }
 
@@ -92,7 +92,7 @@ namespace mainMenu
                 Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);
                 yield break;
             }
-            charIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
+            HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {
                 IEnumerator onecoroutine = null;
@@ -125,7 +125,7 @@ namespace mainMenu
             }
             
             // 下面的环节重新加载type下拉表
-            foreach (KeyValuePair<string, charIcon> keyValuePair in mainMenuIcons)
+            foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
                 if (!typeList.Contains(keyValuePair.Value._CharacterResourceInfo.type))
                 {
@@ -150,11 +150,11 @@ namespace mainMenu
         {
             target.MonsterBoxContainer.gameObject.SetActive(true);
             yield return MonsterIconsGenerate();
-            List<charIcon> nowcharIcons = target._monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
+            List<HeroIcon> nowcharIcons = target._monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
             int hangshu = 1;
             for (int i = 0; i < nowcharIcons.Count; i++)
             {
-                charIcon _targetingIcon = nowcharIcons[i];
+                HeroIcon _targetingIcon = nowcharIcons[i];
                 if (_targetingIcon == null)
                 {
                     Debug.Log("严重错误");
@@ -164,7 +164,7 @@ namespace mainMenu
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
                 void action1()
                 {
-                    charIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
+                    HeroIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
                     PreScene.Instance.mainProcessRunner.TriggerMainProcess(PreScene.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
                 _targetingIcon.iconButton.onClick.AddListener(action1);

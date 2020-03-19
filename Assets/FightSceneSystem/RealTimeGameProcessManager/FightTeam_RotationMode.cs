@@ -159,10 +159,10 @@ public class FightTeam_RotationMode : FightTeam
         waitingToChangeMember = waitingToChangeMember != nextOne ? nextOne : null;
         if (waitingToChangeMember == null)
         {
-            charIcon.Seletedfeature(null,selectedFrame,100f);
+            HeroIcon.Seletedfeature(null,selectedFrame,100f);
         }else{
             datacenterCharIconDic.TryGetValue(waitingToChangeMember,out _tempSideCharIcon);
-            charIcon.Seletedfeature(_tempSideCharIcon?.focusingCharIcon,selectedFrame,100f);
+            HeroIcon.Seletedfeature(_tempSideCharIcon?.focusingCharIcon,selectedFrame,100f);
         }
     }
 

@@ -44,11 +44,7 @@ namespace mainMenu
         [Space(7)]
         [Header("MemberDetail")]
         public MemberDetail _MemberDetail;
-        
-        [Space(7)]
-        [Header("QuestPreparePage")]
-        public QuestPreparePage _QuestPreparePage;
-        
+                
         [Space(7)]
         [Header("CustomGUISkin")]
         public GUISkin CustomGUISkin;
@@ -56,11 +52,7 @@ namespace mainMenu
         [Space(7)]
         [Header("队伍编辑器")]
         public TeamEditManager _TeamEditManager;
-        
-        [Space(7)]
-        [Header("章节编辑器")]
-        public ChaptersManager _ChaptersManager;
-        
+                
         [Space(7)]
         [Header("自我战斗管理模块")]
         public SelfFightManager _SelfFightManager;
@@ -81,7 +73,6 @@ namespace mainMenu
         public RectTransform JiNengRongLian_selectT;
         public RectTransform RonglianConfirmGAMENT;
         public RectTransform FightModeChooseT;
-        public RectTransform SeasonsT;
         public RectTransform AllSeasonsGamensT;
         public RectTransform SelfFightUIT;
         
@@ -126,14 +117,12 @@ namespace mainMenu
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
             SelfFightFront selfFightFront = new SelfFightFront();
-            SeasonsGamen seasonsGamen = new SeasonsGamen(SeasonsT);
-            ShowOneSeasonChapters _ShowOneSeasonChapters = new ShowOneSeasonChapters(AllSeasonsGamensT);
             QuestInfo questInfo = new QuestInfo(QuestInfoT);
             MemberDetailProcess memberDetail = new MemberDetailProcess();
             MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
             frontPage frontPage = new frontPage();
-            ChapterProcess chapterProcess = new ChapterProcess(_ChaptersManager.ChapterInfoT);
+            ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess(ArcadeManager.Instance._T);
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
 
@@ -141,18 +130,16 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones, skillStones);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ChaptersOfOneSeason, _ShowOneSeasonChapters);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SeasonsGamen, seasonsGamen);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.frontPage, frontPage);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Chapter, chapterProcess);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
 
-            charIcon.IniFrames();
+            HeroIcon.IniFrames();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             yield return (_SkillStonesBox.StartUp());
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);

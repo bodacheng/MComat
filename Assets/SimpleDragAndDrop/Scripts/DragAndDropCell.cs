@@ -21,7 +21,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
     }
 
     [Tooltip("using Stone Character Icon")]
-    public charIcon _charIcon;
+    public HeroIcon _charIcon;
 	[Tooltip("Functional type of this cell")]
     public CellPhase cellPhase = CellPhase.SkillStoneBoxCell;
     [Tooltip("Image of this cell")]
@@ -37,6 +37,14 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 
     // 自定义成员
     public SkillStoneSlot _SkillStoneSlot;//这个看起来比较古怪，目的是和这个cell对应的SkillStoneSlot形成一个互相链接。只针对9宫设置画面，和SkillStoneBox无关。
+    SingleThreadProcesser _SingleThreadProcesser;
+
+    void Awake()
+    {
+        _SingleThreadProcesser = transform.GetComponent<SingleThreadProcesser>();
+        if (_SingleThreadProcesser == null)
+            _SingleThreadProcesser = gameObject.AddComponent<SingleThreadProcesser>();
+    }
 
     public void DragStoneFromSKillStoneBoxToNineSlot(DragAndDropCell cellInSkillStoneBox, SkillStoneSlot targetSlot)
     {
@@ -308,7 +316,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                 if (myDadItem != null && myDadItem.SkillStoneOfPlayerId != null)
                 {
                     _charIcon.gameObject.SetActive(true);
-                    SkillStonesBox.Instance.ShowUsingCharIcon(myDadItem.SkillStoneOfPlayerId,_charIcon);
+                    ShowUsingCharIcon(myDadItem.SkillStoneOfPlayerId,_charIcon);
                 }else{
                     _charIcon.gameObject.SetActive(false);
                 }
@@ -316,11 +324,16 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         }
     }
 
-	/// <summary>
-	/// Get item from this cell
-	/// </summary>
-	/// <returns> Item </returns>
-	public DragAndDropItem GetItem()
+    void ShowUsingCharIcon(string SkillStoneOfPlayerId, HeroIcon targetIcon)
+    {
+        _SingleThreadProcesser.TriggerMainProcess(SkillStonesBox.Instance.ShowUsingStoneCharacter(SkillStoneOfPlayerId, targetIcon));
+    }
+
+    /// <summary>
+    /// Get item from this cell
+    /// </summary>
+    /// <returns> Item </returns>
+    public DragAndDropItem GetItem()
 	{
         //UpdateMyItem();
 		return myDadItem;
@@ -345,7 +358,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         DragAndDropItem _DragAndDropItem = GetItem();
         if (_DragAndDropItem != null)
         {
-            _DragAndDropItem.gameObject.SetActive(false);
+            _DragAndDropItem.gameObject.SetActive(true);
             _DragAndDropItem.gameObject.transform.parent = null;
         }
         UpdateMyItem();

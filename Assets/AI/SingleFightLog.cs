@@ -32,6 +32,15 @@ namespace Soul
         {
         }
 
+        // 这个函数待写。我们设想可以每次战斗结束后进行个总的报告，来分析各个技能有没有取得正面效应。
+        public void Summary()
+        {
+            foreach (FightRecord fightRecord in MyBehaviourHistory)
+            {
+
+            }
+        }
+
         readonly IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
         public void AnalysisLog(IDictionary<string, Behavior> Behaviour_Dictionary)
         {

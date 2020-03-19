@@ -24,7 +24,7 @@ namespace dataAccess
                 return instance;
             }
         }
-        
+
         public static bool CheckIfContainsAccountCharsSetKey(string key)
         {
             return key != null && AccountCharacterInfoListObjectsDictionary.Keys.Contains(key);
@@ -81,6 +81,11 @@ namespace dataAccess
                     break;
                 case playerinfoReferenceMode.formalVersion:
                     break;
+            }
+            foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValuePair in AccountCharacterInfoListObjectsDictionary)
+            {
+                IEnumerator getchar = Instance.GetAccountCharacterInfo(keyValuePair.Value.monsterOfPlayerId);
+                yield return getchar;
             }
             yield break;
         }
@@ -139,52 +144,54 @@ namespace dataAccess
             if (monsterlocalid == null)
             {
                 yield return null;
-                yield break;
             }
-            if (AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
+            else
             {
-                if (AccountCharacterInfoDictionary[monsterlocalid] != null)
+                if (AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
                 {
-                    yield return AccountCharacterInfoDictionary[monsterlocalid];
-                    yield break;
+                    if (AccountCharacterInfoDictionary[monsterlocalid] != null)
+                    {
+                        yield return AccountCharacterInfoDictionary[monsterlocalid];
+                    }
+                    else
+                    {
+                        Debug.Log("角色字典内存丢失？？localid:" + monsterlocalid);
+                        yield return null;
+                    }
                 }
                 else
                 {
-                    Debug.Log("角色字典内存丢失？？localid:" + monsterlocalid);
-                }
-            }
+                    Debug.Log("开始新注册角色信息：" + monsterlocalid);
+                    GetMonsterOfPlayerDetailModel accountCharacterInfo = null;
+                    switch (AccountSet.Instance._playerinfoReferenceMode)
+                    {
+                        case playerinfoReferenceMode.localTestSaveData:
+                            accountCharacterInfo = LoadAccountCharacterInfoViaJsonFile(monsterlocalid);
+                            break;
+                        case playerinfoReferenceMode.remoteTestPlayer:
+                            IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid, ApiLanguage.JaJp);
+                            yield return load;
+                            accountCharacterInfo = (GetMonsterOfPlayerDetailModel)load.Current;
+                            break;
+                        case playerinfoReferenceMode.formalVersion:
+                            break;
+                    }
 
-            GetMonsterOfPlayerDetailModel accountCharacterInfo = null;
-            switch (AccountSet.Instance._playerinfoReferenceMode)
-            {
-                case playerinfoReferenceMode.localTestSaveData:
-                    accountCharacterInfo = LoadAccountCharacterInfoViaJsonFile(monsterlocalid);
-                    break;
-                case playerinfoReferenceMode.remoteTestPlayer:
-                    IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid,ApiLanguage.JaJp);
-                    yield return load;
-                    accountCharacterInfo = (GetMonsterOfPlayerDetailModel)load.Current;
-                    break;
-                case playerinfoReferenceMode.formalVersion:
-                    break;
-            }
-
-            if (accountCharacterInfo != null)
-            {
-                if (!AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
-                {
-                    AccountCharacterInfoDictionary.Add(monsterlocalid, accountCharacterInfo);
+                    if (accountCharacterInfo != null)
+                    {
+                        if (!AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
+                        {
+                            AccountCharacterInfoDictionary.Add(monsterlocalid, accountCharacterInfo);
+                        }
+                        else
+                        {
+                            Debug.Log("错误?localid重复:" + monsterlocalid);
+                            AccountCharacterInfoDictionary[monsterlocalid] = accountCharacterInfo;
+                        }
+                        yield return accountCharacterInfo;
+                    }
                 }
-                else
-                {
-                    Debug.Log("错误?localid重复:" + monsterlocalid);
-                    AccountCharacterInfoDictionary[monsterlocalid] = accountCharacterInfo;
-                }
-                yield return accountCharacterInfo;
-                yield break;
             }
-            yield return null;
-            yield break;
         }
 
         int IntCompare(int i1, int i2)

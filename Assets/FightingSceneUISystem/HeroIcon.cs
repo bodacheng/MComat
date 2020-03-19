@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
 
-public class charIcon : MonoBehaviour {
+public class HeroIcon : MonoBehaviour {
 
     public Button iconButton;
     public Image Icon;
@@ -44,7 +44,7 @@ public class charIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
     
-    public static void Seletedfeature(charIcon _charIcon,GameObject selectedFrame, float size)
+    public static void Seletedfeature(HeroIcon _charIcon,GameObject selectedFrame, float size)
     {
         if (_charIcon == null)
         {

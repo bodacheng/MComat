@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 
-public class ShowOneSeasonChapters : MainSceneProcess
+public class ArcadeFrontProcess : MainSceneProcess
 {
     RectTransform T;
-    public IEnumerator EnterProcess()
+    public IEnumerator enterProcess()
     {
         LoadingCanvas.target.DarkOff(1f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
@@ -15,11 +15,11 @@ public class ShowOneSeasonChapters : MainSceneProcess
         yield break;
     }
     
-    public ShowOneSeasonChapters(RectTransform T)
+    public ArcadeFrontProcess(RectTransform T)
     {
-        this.thisProcessStep = MainSceneStep.ChaptersOfOneSeason;
+        this.thisProcessStep = MainSceneStep.ArcadeFront;
         this.T = T;
-        this.EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.Instance);
     }
 
     public override bool CanEnterOtherProcess()
@@ -29,17 +29,15 @@ public class ShowOneSeasonChapters : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        Debug.Log("ChaptersOfOneSeason " + PreScene.Instance._ReturnButtonManager.returnMissionList.Count);
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.TriggerMainProcess(enterProcess());
     }
     
     public override void ProcessEnd()
     {
-         this.T.gameObject.SetActive(false);
+        this.T.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()
     {
     }
 }
-

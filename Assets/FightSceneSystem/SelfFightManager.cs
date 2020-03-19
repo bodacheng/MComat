@@ -25,29 +25,29 @@ namespace mainMenu
         [Space(7)]
         [Header("共同战斗式按钮")]
         public Transform MuitiRaidModeIconsT;
-        public charIcon team1back, team1front, team1left, team1right, team1_1, team1_2,team1_3,team1_4,team1_5,team1_6;
-        public charIcon team2back, team2front, team2left, team2right, team2_1, team2_2,team2_3,team2_4,team2_5,team2_6;
+        public HeroIcon team1back, team1front, team1left, team1right, team1_1, team1_2,team1_3,team1_4,team1_5,team1_6;
+        public HeroIcon team2back, team2front, team2left, team2right, team2_1, team2_2,team2_3,team2_4,team2_5,team2_6;
         
         [Space(7)]
         [Header("轮番战斗式按钮")]
         public Transform RotationModeIconsT;
-        public charIcon team11_R, team12_R, team13_R;
-        public charIcon team21_R, team22_R, team23_R;
+        public HeroIcon team11_R, team12_R, team13_R;
+        public HeroIcon team21_R, team22_R, team23_R;
 
         [Space(7)]
         [Header("准备关卡")]
         public QuestPreparePage _QuestPreparePage;
 
-        readonly IDictionary<int, charIcon> team1ButtonDic_M = new Dictionary<int, charIcon>();
-        readonly IDictionary<int, charIcon> team2ButtonDic_M = new Dictionary<int, charIcon>();
-        IDictionary<int, charIcon> team1ButtonDic_R = new Dictionary<int, charIcon>();
-        IDictionary<int, charIcon> team2ButtonDic_R = new Dictionary<int, charIcon>();
+        readonly IDictionary<int, HeroIcon> team1ButtonDic_M = new Dictionary<int, HeroIcon>();
+        readonly IDictionary<int, HeroIcon> team2ButtonDic_M = new Dictionary<int, HeroIcon>();
+        IDictionary<int, HeroIcon> team1ButtonDic_R = new Dictionary<int, HeroIcon>();
+        IDictionary<int, HeroIcon> team2ButtonDic_R = new Dictionary<int, HeroIcon>();
         
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
         Team focusingTeam; //team1或者是team2
         int focusingPosition; // 0到3
-        readonly charIcon focusingPosButton;
+        readonly HeroIcon focusingPosButton;
         
         PositionLocalCharKeySet _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
         PositionLocalCharKeySet _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
@@ -66,19 +66,19 @@ namespace mainMenu
 
         public void Clear()
         {
-            foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_M)
+            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team1ButtonDic_M)
             {
                 keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_M)
+            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team2ButtonDic_M)
             {
                 keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (KeyValuePair<int, charIcon> keyValuePair in team1ButtonDic_R)
+            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team1ButtonDic_R)
             {
                 keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (KeyValuePair<int, charIcon> keyValuePair in team2ButtonDic_R)
+            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team2ButtonDic_R)
             {
                 keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
@@ -227,14 +227,14 @@ namespace mainMenu
             //} 
         }
 
-        IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, charIcon> teamButtonDic, PositionLocalCharKeySet positionLocalCharKey)
+        IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, HeroIcon> teamButtonDic, PositionLocalCharKeySet positionLocalCharKey)
         {
             if (posNum == -1)
             {
                 Debug.Log("请检查changeIconOnPos函数执行顺序");
                 yield break;
             }
-            charIcon tar = null;
+            HeroIcon tar = null;
             if (teamButtonDic.ContainsKey(posNum))
             {
                 teamButtonDic.TryGetValue(posNum, out tar);
@@ -271,9 +271,9 @@ namespace mainMenu
             yield break;
         }
 
-        public void IniMutiRaidModeCharIcons(List<charIcon> icons,Team team)
+        public void IniMutiRaidModeCharIcons(List<HeroIcon> icons,Team team)
         {
-            IDictionary<int, charIcon> targetTeamIcons;
+            IDictionary<int, HeroIcon> targetTeamIcons;
             switch (team)
             {
                 case Team.player1:
@@ -286,18 +286,18 @@ namespace mainMenu
                     Debug.Log("logic error");
                     return;
             }
-            if (targetTeamIcons == null) targetTeamIcons = new Dictionary<int, charIcon>();
+            if (targetTeamIcons == null) targetTeamIcons = new Dictionary<int, HeroIcon>();
             else targetTeamIcons.Clear();
             for (int i = 0; i < icons.Count; i++)
             {
-                charIcon charIcon = icons[i];
+                HeroIcon charIcon = icons[i];
                 targetTeamIcons.Add(i,charIcon);
                 charIcon.ChangeIcon(null, Zokusei.Null);
                 charIcon.iconButton.onClick.RemoveAllListeners();
                 
                 void SelectedRender()
                 {
-                    charIcon.Seletedfeature(charIcon,selectedFrame,110f);
+                    HeroIcon.Seletedfeature(charIcon,selectedFrame,110f);
                 }
 
                 string pos = i.ToString().Clone().ToString();
@@ -313,11 +313,11 @@ namespace mainMenu
         public IEnumerator INITeamPosButtons()
         {
             IniMutiRaidModeCharIcons(
-                new List<charIcon> { team1back, team1left,team1front,team1right,team1_1,team1_2,team1_3,team1_4,team1_5,team1_6},
+                new List<HeroIcon> { team1back, team1left,team1front,team1right,team1_1,team1_2,team1_3,team1_4,team1_5,team1_6},
                 Team.player1
             );
             IniMutiRaidModeCharIcons(
-                new List<charIcon> { team2back, team2left,team2front,team2right,team2_1,team2_2,team2_3,team2_4,team2_5,team2_6},
+                new List<HeroIcon> { team2back, team2left,team2front,team2right,team2_1,team2_2,team2_3,team2_4,team2_5,team2_6},
                 Team.player2
             );
             

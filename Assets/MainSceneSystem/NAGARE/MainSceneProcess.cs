@@ -14,8 +14,6 @@ namespace mainMenu
         public ReturnButtonManager _ReturnButtonManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
-        public ChaptersManager _ChaptersManager;
-        public QuestPreparePage _QuestPreparePage;
         public gotchaManager _gotchaManager;
 
         public ProcessesRunner subProcessesRunner;
@@ -28,8 +26,6 @@ namespace mainMenu
             _ReturnButtonManager = _preparingScene._ReturnButtonManager;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
-            _QuestPreparePage = _preparingScene._QuestPreparePage;
-            _ChaptersManager = _preparingScene._ChaptersManager;
             _TeamEditManager = _preparingScene._TeamEditManager;
             _gotchaManager = _preparingScene._gotchaManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
@@ -65,9 +61,7 @@ namespace mainMenu
         SkillStones = 15,
         Gotcha = 7,
         QuestInfo = 8,
-        Chapter = 9,
-        ChaptersOfOneSeason = 10,
-        SeasonsGamen = 11,
+        ArcadeFront = 9,
         
         JiNengRongLian_selectMaterialMonster = 12,
         JiNengRongLian_selectBaseMonster = 13,

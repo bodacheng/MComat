@@ -8,14 +8,14 @@ using dataAccess;
 public class TeamEditManager : MonoBehaviour
 {
     public RectTransform UIT;
-    public charIcon team1back, team1front, team1left, team1right;
+    public HeroIcon team1back, team1front, team1left, team1right;
     
     [Space(7)]
     [Header("选中框")]
     public GameObject selectedFrame;
     
     public static int focusingPosNum = -1;
-    readonly IDictionary<int, charIcon> team1ButtonDic = new Dictionary<int, charIcon>();
+    readonly IDictionary<int, HeroIcon> team1ButtonDic = new Dictionary<int, HeroIcon>();
 
     public void OpenButtons(bool _on)
     {
@@ -45,7 +45,7 @@ public class TeamEditManager : MonoBehaviour
             Debug.Log("请检查changeIconOnPos函数执行顺序");
             yield break;
         }
-        charIcon tar = null;
+        HeroIcon tar = null;
         if (team1ButtonDic.ContainsKey(posNum))
         {
             team1ButtonDic.TryGetValue(posNum, out tar);
@@ -107,7 +107,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 0;
                 yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
-                charIcon.Seletedfeature(team1back, selectedFrame,200f);
+                HeroIcon.Seletedfeature(team1back, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
@@ -122,7 +122,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 1;
                 yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
-                charIcon.Seletedfeature(team1left, selectedFrame,200f);
+                HeroIcon.Seletedfeature(team1left, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
@@ -137,7 +137,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 2;
                 yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
-                charIcon.Seletedfeature(team1front, selectedFrame,200f);
+                HeroIcon.Seletedfeature(team1front, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
@@ -152,7 +152,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 3;
                 yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
-                charIcon.Seletedfeature(team1right, selectedFrame,200f);
+                HeroIcon.Seletedfeature(team1right, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }

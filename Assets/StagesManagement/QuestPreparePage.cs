@@ -14,14 +14,21 @@ namespace mainMenu
         [Space(7)]
         [Header("UI elements")]
         public Text QuestName;
-        public charIcon FighterIcon;//多种属性框？
+        public HeroIcon FighterIcon;//多种属性框？
         public Button EditTeam;
         public Button EnterQuest;
         public RectTransform myTeamShowT;
         public RectTransform enemyTeamShowT;
 
         public StageScriptableObject _Stage;
-        
+
+        public static QuestPreparePage Instance;
+
+        void Awake()
+        {
+            Instance = this;
+        }
+
         public void EditTeamButtonBehaviour()
         {
             PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront, true);
@@ -44,7 +51,7 @@ namespace mainMenu
             _Stage = stage;
             foreach(CharacterDataInfo oneMember in _Stage.localFight.HeroSets.values)
             {
-                charIcon MyMemberIcon = Instantiate(FighterIcon);
+                HeroIcon MyMemberIcon = Instantiate(FighterIcon);
                 CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceID);
                 MyMemberIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                 MyMemberIcon.transform.SetParent(myTeamShowT);
@@ -55,7 +62,7 @@ namespace mainMenu
 
             foreach(CharacterDataInfo oneMember in _Stage.localFight.EnemySets.values)
             {
-                charIcon EnemyMemberIcon = Instantiate(FighterIcon);
+                HeroIcon EnemyMemberIcon = Instantiate(FighterIcon);
                 CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceID);
                 EnemyMemberIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
                 EnemyMemberIcon.transform.SetParent(enemyTeamShowT);
