@@ -1,6 +1,8 @@
 ﻿/* Store the contents for ListBoxes to display.
  */
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /* The base class of the list content container
  *
@@ -16,11 +18,11 @@ public abstract class BaseListBank: MonoBehaviour
  */
 public class ListBank : BaseListBank
 {
-	private int[] contents = {
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-	};
+    int[] contents = {
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    };
 
-	public override string GetListContent(int index)
+    public override string GetListContent(int index)
 	{
 		return contents[index].ToString();
 	}

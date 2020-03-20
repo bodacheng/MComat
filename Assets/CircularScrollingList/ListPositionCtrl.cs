@@ -41,6 +41,9 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
 	public bool alignMiddle = false;
 	public Direction direction = Direction.Vertical;
 
+    // The canvas plane which the scrolling list is at.
+    public Canvas _parentCanvas;
+
 	/* Containers */
 	public BaseListBank listBank;
 	// Specify the centered content ID
@@ -73,9 +76,6 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
 	// Set the scale ratio of the center listBox.
 	public float centerBoxScaleRatio = 0.32f;
 	/*===============================*/
-
-	// The canvas plane which the scrolling list is at.
-	private Canvas _parentCanvas;
 
 	// The constrains of position in the local space of the canvas plane.
 	public Vector2 canvasMaxPos_L { get; private set; }
@@ -114,7 +114,7 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
 	/* Notice: ListBox will initialize its variables from here, so ListPositionCtrl
 	 * must be executed before ListBox. You have to set the execution order in the inspector.
 	 */
-	void Start()
+	public void Initialize()
 	{
 		InitializePositionVars();
 		InitializeInputFunction();
@@ -124,9 +124,6 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
 
 	void InitializePositionVars()
 	{
-		/* The the reference of canvas plane */
-		_parentCanvas = GetComponentInParent<Canvas>();
-
 		/* Get the max position of canvas plane in the canvas space.
 		 * Assume that the origin of the canvas space is at the center of canvas plane. */
 		RectTransform rectTransform = _parentCanvas.GetComponent<RectTransform>();

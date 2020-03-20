@@ -59,9 +59,9 @@ public class ListBox : MonoBehaviour
 	 * Make sure that the execution order of script ListPositionCtrl is prior to
 	 * ListBox.
 	 */
-	void Start()
+	public void Initialize(ListPositionCtrl listPositionCtrl)
 	{
-		_positionCtrl = transform.GetComponentInParent<ListPositionCtrl>();
+        _positionCtrl = listPositionCtrl;
 		_listBank = _positionCtrl.listBank;
 
 		_maxCurvePos = _positionCtrl.canvasMaxPos_L * _positionCtrl.listCurvature;

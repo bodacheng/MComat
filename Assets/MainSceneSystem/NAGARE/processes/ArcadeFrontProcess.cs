@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 
@@ -9,19 +8,19 @@ public class ArcadeFrontProcess : MainSceneProcess
     public IEnumerator enterProcess()
     {
         LoadingCanvas.target.DarkOff(1f);
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        this.T.gameObject.SetActive(true);
+        ArcadeManager.Instance._ArcadeCanvas.gameObject.SetActive(true);
+        ArcadeManager.Instance.LocalTest();
         LoadingCanvas.target.LightUp();
         yield break;
     }
     
     public ArcadeFrontProcess(RectTransform T)
     {
-        this.thisProcessStep = MainSceneStep.ArcadeFront;
+        thisProcessStep = MainSceneStep.ArcadeFront;
         this.T = T;
         EelementsInherit(PreScene.Instance);
     }
-
+    
     public override bool CanEnterOtherProcess()
     {
         return true;
@@ -34,7 +33,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        this.T.gameObject.SetActive(false);
+        ArcadeManager.Instance._ArcadeCanvas.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()

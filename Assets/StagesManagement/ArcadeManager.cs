@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,29 +8,65 @@ namespace mainMenu
 {
     public class ArcadeManager : MonoBehaviour
     {
-        [Space(7)]
-        [Header("T")]
-        public RectTransform _T;
+        public Canvas _ArcadeCanvas;
+        public RectTransform ButtonsContainer;
 
         [Space(7)]
         [Header("preparingScene")]
         public SingleThreadProcesser mainProcessRunner;
 
         [Space(7)]
-        [Header("这个章节对应关卡号码的列表")]
-        public List<string> Chapter1stageIds;
-
+        [Header("StagesButtonManager")]
+        public ListPositionCtrl ListPositionCtrl;
         [Space(7)]
-        [Header("StageButton")]
-        public stageButton StageButton;
-
+        [Header("StagesButtonManager")]
+        public StageIconObjectBank StageIconObjectBank;
+        
+        [Space(7)]
+        [Header("StageButtonPretab")]
+        public ListBox StageButtonPretab;
+        
         public static ArcadeManager Instance;
 
         void Awake()
         {
             Instance = this;
         }
-
+        
+        public void LocalTest()
+        {
+            List<Object> stageScriptableObjects = Resources.LoadAll("stages", typeof(StageScriptableObject)).ToList();
+            List<StageScriptableObject> temp = new List<StageScriptableObject>();
+            List<ListBox> buttons = new List<ListBox>();
+            foreach (Object @object in stageScriptableObjects)
+            {
+                StageScriptableObject one = (StageScriptableObject)@object;
+                temp.Add(one);
+                ListBox listBox = Instantiate(StageButtonPretab);
+                listBox.listBoxID = one.LocalFightID;
+                listBox.transform.SetParent(ButtonsContainer);
+                listBox.transform.localScale = new Vector3(1, 1, 1);
+                buttons.Add(listBox);
+            }
+            ListPositionCtrl.listBoxes = buttons.ToArray();
+            ListPositionCtrl.Initialize();
+            StageIconObjectBank.Initialize(temp);
+            foreach (ListBox _ListBox in ListPositionCtrl.listBoxes)
+            {
+                _ListBox.Initialize(ListPositionCtrl);
+            }
+        }
+        
+        public void Clear()
+        {
+            ListPositionCtrl.listBoxes = null;
+            StageIconObjectBank.Clear();
+            foreach (Transform child in ButtonsContainer) 
+            {
+                Destroy(child.gameObject);
+            }
+        }
+        
         //public IEnumerator LoadChapterPage(List<string> stagesIDs)
         //{
         //    foreach (string stageid in stagesIDs)

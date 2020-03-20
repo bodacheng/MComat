@@ -8,13 +8,12 @@ public class TeamEditFront : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(0.5f);
-        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         yield return MonsterBox.DisplayMonsterIcons();
-        _TeamEditManager.OpenButtons(true);
+        TeamEditManager.Instance._Canvas.gameObject.SetActive(true);
         LoadingCanvas.target.LightUp();
         yield break;
     }
@@ -37,7 +36,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.Instance._TeamEditManager.OpenButtons(false);
+        TeamEditManager.Instance._Canvas.gameObject.SetActive(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);
@@ -56,6 +55,6 @@ public class TeamEditFront : MainSceneProcess
         {
             Debug.Log("严重错误");yield break;
         }
-        yield return this._TeamEditManager.MonsterIConButton(_AccountCharacterInfo.monsterOfPlayerId,TeamEditManager.focusingPosNum);
+        yield return TeamEditManager.Instance.MonsterIConButton(_AccountCharacterInfo.monsterOfPlayerId,TeamEditManager.focusingPosNum);
     }
 }

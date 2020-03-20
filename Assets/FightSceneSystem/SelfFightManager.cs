@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
-using System.Linq;
 
 namespace mainMenu
 {
     public class SelfFightManager : MonoBehaviour
     {
-        public PreScene _preparingScene;
-
+        [Space(7)]
+        [Header("SelfFightCanvas")]
+        public Canvas SelfFightCanvas;
+        
         [Space(7)]
         [Header("基本UI元素")]
-        public Transform selfFightUI;
         public InputField HPinput;
         public Button FightStartBUtton;
         
@@ -33,10 +33,6 @@ namespace mainMenu
         public Transform RotationModeIconsT;
         public HeroIcon team11_R, team12_R, team13_R;
         public HeroIcon team21_R, team22_R, team23_R;
-
-        [Space(7)]
-        [Header("准备关卡")]
-        public QuestPreparePage _QuestPreparePage;
 
         readonly IDictionary<int, HeroIcon> team1ButtonDic_M = new Dictionary<int, HeroIcon>();
         readonly IDictionary<int, HeroIcon> team2ButtonDic_M = new Dictionary<int, HeroIcon>();
@@ -139,7 +135,7 @@ namespace mainMenu
             }
             stage.HP = HP;
             stage.localFight = _selfFight;
-            yield return _QuestPreparePage.GetReadyToBattle(stage, SceneMode.MyPetsFight);
+            yield return QuestPreparePage.Instance.GetReadyToBattle(stage, SceneMode.MyPetsFight);
             yield break;
         }
 
@@ -383,7 +379,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                _preparingScene.mainProcessRunner.TriggerMainProcess(FightStart(float.Parse(HPinput.text)));
+                PreScene.Instance.mainProcessRunner.TriggerMainProcess(FightStart(float.Parse(HPinput.text)));
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

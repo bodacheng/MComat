@@ -23,7 +23,6 @@ public class frontPage : MainSceneProcess
         PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(true);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-        PreScene.Instance.FightModeChooseT.gameObject.SetActive(true);
 
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
@@ -52,7 +51,7 @@ public class frontPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.Instance.FightModeChooseT.gameObject.SetActive(false);
+        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);

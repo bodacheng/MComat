@@ -48,11 +48,7 @@ namespace mainMenu
         [Space(7)]
         [Header("CustomGUISkin")]
         public GUISkin CustomGUISkin;
-        
-        [Space(7)]
-        [Header("队伍编辑器")]
-        public TeamEditManager _TeamEditManager;
-                
+                        
         [Space(7)]
         [Header("自我战斗管理模块")]
         public SelfFightManager _SelfFightManager;
@@ -69,10 +65,8 @@ namespace mainMenu
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform MainMenuBottonsT;
-        public RectTransform QuestInfoT;
         public RectTransform JiNengRongLian_selectT;
         public RectTransform RonglianConfirmGAMENT;
-        public RectTransform FightModeChooseT;
         public RectTransform AllSeasonsGamensT;
         public RectTransform SelfFightUIT;
         
@@ -117,12 +111,12 @@ namespace mainMenu
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
             SelfFightFront selfFightFront = new SelfFightFront();
-            QuestInfo questInfo = new QuestInfo(QuestInfoT);
+            QuestInfo questInfo = new QuestInfo();
             MemberDetailProcess memberDetail = new MemberDetailProcess();
             MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
             frontPage frontPage = new frontPage();
-            ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess(ArcadeManager.Instance._T);
+            ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess(ArcadeManager.Instance.ButtonsContainer);
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
 
@@ -165,7 +159,7 @@ namespace mainMenu
                     yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;
-                    yield return _TeamEditManager.INITeamPosButtons();
+                    yield return TeamEditManager.Instance.INITeamPosButtons();
                     trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
                     break;
                 case PlayerAccountProgressStep.justCreated:

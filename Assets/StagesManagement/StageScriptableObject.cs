@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class StageScriptableObject : ScriptableObject
 {
     [SerializeField]
-    public string LocalFightID;
+    public int LocalFightID;
     [SerializeField]
     public int EntryMemberNum;
     [SerializeField]

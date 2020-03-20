@@ -13,6 +13,7 @@ namespace mainMenu
 
         [Space(7)]
         [Header("UI elements")]
+        public Canvas QuestPreparePageCanvas;
         public Text QuestName;
         public HeroIcon FighterIcon;//多种属性框？
         public Button EditTeam;
@@ -37,6 +38,7 @@ namespace mainMenu
         //这个函数只考虑了队员的加载。。。
         public IEnumerator GetReadyToBattle(StageScriptableObject stage, SceneMode sceneMode)
         {
+            Instance.QuestPreparePageCanvas.gameObject.SetActive(true);
             EnterQuest.gameObject.SetActive(false);
             LoadingCanvas.target.DarkOff(1f);
             foreach (Transform _child in myTeamShowT)

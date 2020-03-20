@@ -165,3 +165,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 165,xuanfeng_s,human,10,GI,0,4,10,1,1
 166,xuanfeng_big,human,10,GI,0,6,10,1,1
 167,highspeedbo,human,10,GI,0,4,10,1,1
+168,vtl_slash,human,10,GR,0,4,5,1,1
+169,enegery_explosion,human,10,GI,0,4,7,1,1

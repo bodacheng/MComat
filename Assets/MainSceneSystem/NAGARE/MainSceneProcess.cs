@@ -10,7 +10,6 @@ namespace mainMenu
         public MemberDetail _MemberDetail;
         public ModelShower _modelShower;
         public CharsManager _CharsManager;
-        public TeamEditManager _TeamEditManager;
         public ReturnButtonManager _ReturnButtonManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
@@ -26,7 +25,6 @@ namespace mainMenu
             _ReturnButtonManager = _preparingScene._ReturnButtonManager;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
-            _TeamEditManager = _preparingScene._TeamEditManager;
             _gotchaManager = _preparingScene._gotchaManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
         }

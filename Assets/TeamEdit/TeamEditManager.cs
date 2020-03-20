@@ -7,7 +7,7 @@ using dataAccess;
 
 public class TeamEditManager : MonoBehaviour
 {
-    public RectTransform UIT;
+    public Canvas _Canvas;
     public HeroIcon team1back, team1front, team1left, team1right;
     
     [Space(7)]
@@ -17,9 +17,11 @@ public class TeamEditManager : MonoBehaviour
     public static int focusingPosNum = -1;
     readonly IDictionary<int, HeroIcon> team1ButtonDic = new Dictionary<int, HeroIcon>();
 
-    public void OpenButtons(bool _on)
+    public static TeamEditManager Instance;
+
+    void Awake()
     {
-        UIT.gameObject.SetActive(_on);
+        Instance = this;
     }
 
     public IEnumerator MonsterIConButton(string monsterlocalID,int targetPos)

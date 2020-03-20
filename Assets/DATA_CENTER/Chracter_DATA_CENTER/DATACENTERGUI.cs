@@ -217,7 +217,7 @@ public class DATACENTERGUI : Editor {
                 enegryBlade.transform.SetParent(myScript.right_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
                 enegryBlade.transform.localRotation = Quaternion.Euler(180, 0, 0);//这个事情非常不一定
-                myScript.Personality_events.right_sword = enegryBlade.GetComponent<ParticleSystem>();
+                myScript.Personality_events.right_sword = enegryBlade;
             }
             if (myScript.Personality_events.left_sword == null)
             {
@@ -226,7 +226,7 @@ public class DATACENTERGUI : Editor {
                 enegryBlade.transform.SetParent(myScript.left_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
 				enegryBlade.transform.localRotation = Quaternion.identity;
-                myScript.Personality_events.left_sword = enegryBlade.GetComponent<ParticleSystem>();
+                myScript.Personality_events.left_sword = enegryBlade;
             }
 
             if (myScript._BasicPhysicSupport.floorCheckersT == null)

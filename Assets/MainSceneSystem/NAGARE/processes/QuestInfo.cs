@@ -4,20 +4,17 @@ using mainMenu;
 
 public class QuestInfo : MainSceneProcess
 {
-    RectTransform T;
     public IEnumerator enterProcess()
     {
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        T.gameObject.SetActive(true);
-        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        QuestPreparePage.Instance.QuestPreparePageCanvas.gameObject.SetActive(true);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;
     }
     
-    public QuestInfo(RectTransform T)
+    public QuestInfo()
     {
         thisProcessStep = MainSceneStep.QuestInfo;
-        this.T = T;
         EelementsInherit(PreScene.Instance);
     }
 
@@ -33,7 +30,7 @@ public class QuestInfo : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        this.T.gameObject.SetActive(false);
+        QuestPreparePage.Instance.QuestPreparePageCanvas.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()
