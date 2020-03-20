@@ -1044,6 +1044,7 @@ MonoBehaviour:
   controlMode: 0
   alignMiddle: 1
   direction: 0
+  _parentCanvas: {fileID: 0}
   listBank: {fileID: 766385412}
   centeredContentID: 0
   listBoxes:
