@@ -154,7 +154,7 @@
     <Compile Include="Assets\Camera\TopDownWatchCamera.cs" />
     <Compile Include="Assets\Camera\TouchTopDownCamera.cs" />
     <Compile Include="Assets\Camera\WatchOverCamera.cs" />
-    <Compile Include="Assets\characterModelShower\ModelShower.cs" />
+    <Compile Include="Assets\CharacterModelShower\ModelShower.cs" />
     <Compile Include="Assets\CircularScrollingList\ListBank.cs" />
     <Compile Include="Assets\CircularScrollingList\ListBox.cs" />
     <Compile Include="Assets\CircularScrollingList\ListPositionCtrl.cs" />
@@ -388,10 +388,10 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\skilledit_processes\TrySkillShowMenu.cs" />
     <Compile Include="Assets\MemberDetail\LevelManager.cs" />
     <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
-    <Compile Include="Assets\monsterbox\MonsterBox.cs" />
-    <Compile Include="Assets\monsterbox\MonsterboxFilter.cs" />
-    <Compile Include="Assets\monsterbox\SkillStoneBoxTabEffectsManager.cs" />
-    <Compile Include="Assets\monsterbox\SkillStoneDetail.cs" />
+    <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
+    <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
+    <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
+    <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
     <Compile Include="Assets\POFX\Scripts\FX\POFX_Blur.cs" />
