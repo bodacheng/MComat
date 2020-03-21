@@ -501,5 +501,66 @@ namespace mainMenu
             }
             return chuan;
         }
+        
+        // 表情测试相关
+        public void Face_CloseEye()
+        {
+            if (focusingCharacterData != null)
+            {
+                if (focusingCharacterData != null)
+                {
+                    focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                    focusingCharacterData.Animation_Manger.Animator.SetTrigger("close_eye");
+                }
+            }
+        }
+        public void Face_Suprise()
+        {
+            if (focusingCharacterData != null)
+            {
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("suprise");
+            }
+        }
+        public void Face_Angry()
+        {
+            if (focusingCharacterData != null)
+            {
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("angry");
+            }
+        }
+        public void Face_Pain()
+        {
+            if (focusingCharacterData != null)
+            {
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("hurt");
+            }
+        }
+        public void Face_Smile()
+        {
+            if (focusingCharacterData != null)
+            {
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("smile");
+            }
+        }
+        public void Face_Evil()
+        {
+            if (focusingCharacterData != null)
+            {
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("evil");
+            }
+        }
+        public void Face_Ferocious()
+        {
+            if (focusingCharacterData != null)
+            {
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("face_reset");
+                focusingCharacterData.Animation_Manger.Animator.SetTrigger("ferocious");
+            }
+        }
     }
 }
