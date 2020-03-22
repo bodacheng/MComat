@@ -36794,9 +36794,6 @@ MonoBehaviour:
   listBank: {fileID: 1028870880}
   centeredContentID: 0
   listBoxes: []
-  onBoxClick:
-    m_PersistentCalls:
-      m_Calls: []
   controlButtons: []
   boxGapFactor: 2
   boxSlidingFrames: 35
@@ -61931,6 +61928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f82349393cf7049b5c43a50712d0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1845824406}
   content: {fileID: 1515272839}
   listBoxID: 0
   lastListBox: {fileID: 0}

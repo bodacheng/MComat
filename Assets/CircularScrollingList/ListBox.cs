@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ListBox : MonoBehaviour
 {
+    public Button button;
+
 	public Text content;    // The display text for the content of the list box
 
 	// These public variables will be initialized
@@ -76,17 +78,6 @@ public class ListBox : MonoBehaviour
 
 		InitialPosition();
 		InitialContent();
-		AddClickEvent();
-	}
-
-	/* Add an additional listener to Button.onClick event for passing the content ID
-	 * of the clicked box to the event handlers registered at ListPositionCtrl.onBoxClick
-	 */
-	void AddClickEvent()
-	{
-		Button button = transform.GetComponent<Button>();
-		if (button != null)
-			button.onClick.AddListener(() => _positionCtrl.onBoxClick.Invoke(_contentID));
 	}
 
 	/* Initialize the content of ListBox.

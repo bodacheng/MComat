@@ -17,7 +17,7 @@ MonoBehaviour:
   BattleGroundID: 2
   battleNameENG: 
   battleNameJPG: "\u5218\u607A\u5A01\u7F13\u89E3\u6CD5\u4EE4\u7EB9\u653E\u5047\u4E86\u53D1\u6211"
-  battleNameCH: 
+  battleNameCH: "\u70ED\u571F\u4ED63"
   beforefightstory: {fileID: 0}
   Script: {fileID: 4900000, guid: 775e27cee2a8741fbbe58ba6b356fca5, type: 3}
   StageButtonSprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}

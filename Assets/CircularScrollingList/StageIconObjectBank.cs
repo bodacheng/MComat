@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageIconObjectBank : BaseListBank
-{
+{    
     public void Initialize(List<StageScriptableObject> stages)
     {
         List<string> titles = new List<string>();
@@ -20,13 +21,13 @@ public class StageIconObjectBank : BaseListBank
         contents.Clear();
     }
 
-    IDictionary<int, string> contents = new Dictionary<int, string>();
+    readonly IDictionary<int, string> contents = new Dictionary<int, string>();
 
     public override string GetListContent(int index)
     {
         if (contents.ContainsKey(index))
             return contents[index];
-        else return null;
+        return null;
     }
 
     public override int GetListLength()

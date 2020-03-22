@@ -18,6 +18,7 @@ namespace mainMenu
         [Space(7)]
         [Header("StagesButtonManager")]
         public ListPositionCtrl ListPositionCtrl;
+        
         [Space(7)]
         [Header("StagesButtonManager")]
         public StageIconObjectBank StageIconObjectBank;
@@ -46,6 +47,12 @@ namespace mainMenu
                 listBox.listBoxID = one.LocalFightID;
                 listBox.transform.SetParent(ButtonsContainer);
                 listBox.transform.localScale = new Vector3(1, 1, 1);
+                
+                void testbutton()
+                {
+                    Debug.Log("关卡："+ one.battleNameCH);
+                }
+                listBox.button.onClick.AddListener(testbutton);
                 buttons.Add(listBox);
             }
             ListPositionCtrl.listBoxes = buttons.ToArray();
