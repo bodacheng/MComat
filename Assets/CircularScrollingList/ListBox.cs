@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class ListBox : MonoBehaviour
 {
     public Button button;
-
-	public Text content;    // The display text for the content of the list box
+	public Text title;    // The display text for the content of the list box
 
 	// These public variables will be initialized
 	// in ListPositionCtrl.InitializeBoxDependency().
@@ -41,14 +40,6 @@ public class ListBox : MonoBehaviour
 
 	private Vector3 _initialLocalScale;
 
-	/* Output the information of the box to the Debug.Log
-	 */
-	public void ShowBoxInfo()
-	{
-		Debug.Log("Box ID: " + listBoxID.ToString() +
-			", Content ID: " + _contentID.ToString() +
-			", Content: " + _listBank.GetListContent(_contentID));
-	}
 
 	/* Get the content ID of the box
 	 */
@@ -110,16 +101,6 @@ public class ListBox : MonoBehaviour
 		while (_contentID < 0)
 			_contentID += _listBank.GetListLength();
 		_contentID = _contentID % _listBank.GetListLength();
-
-		UpdateDisplayContent();
-	}
-
-	/* Update the dispalying content on the ListBox.
-	 */
-	void UpdateDisplayContent()
-	{
-		// Update the content accroding to its contentID.
-		content.text = _listBank.GetListContent(_contentID);
 	}
 
 	/* Initialize the local position of the list box accroding to its ID
@@ -264,7 +245,7 @@ public class ListBox : MonoBehaviour
 			(1.0f + _positionCtrl.centerBoxScaleRatio *
 			 Mathf.InverseLerp(smallest_at, 0.0f, Mathf.Abs(target_value)));
 	}
-
+    
 	public int GetCurrentContentID()
 	{
 		return _contentID;
@@ -295,8 +276,6 @@ public class ListBox : MonoBehaviour
 				--_positionCtrl.numOfLowerDisabledBoxes;
 			}
 		}
-
-		UpdateDisplayContent();
 	}
 
 	/* Update the content to the next content of the last ListBox
@@ -310,7 +289,7 @@ public class ListBox : MonoBehaviour
 			if (_contentID == 0 || !lastListBox.isActiveAndEnabled) {
 				if (!isActiveAndEnabled)
 					--_positionCtrl.numOfUpperDisabledBoxes;
-
+                    
 				// In linear mode, don't display the content of the other end
 				gameObject.SetActive(false);
 				++_positionCtrl.numOfLowerDisabledBoxes;
@@ -319,7 +298,5 @@ public class ListBox : MonoBehaviour
 				--_positionCtrl.numOfUpperDisabledBoxes;
 			}
 		}
-
-		UpdateDisplayContent();
 	}
 }

@@ -152,30 +152,26 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
 	 */
 	void InitializeInputFunction()
 	{
-		switch (controlMode) {
-			case ControlMode.Drag:
-				_inputPositionHandler = DragPositionHandler;
-
-				_scrollHandler = delegate (Vector2 v) { };
-				foreach (Button button in controlButtons)
-					button.gameObject.SetActive(false);
-				break;
-
-			case ControlMode.Button:
-				_inputPositionHandler =
-					delegate (PointerEventData pointer, TouchPhase phase) { };
-				_scrollHandler = delegate (Vector2 v) { };
-				break;
-
-			case ControlMode.MouseWheel:
-				_scrollHandler = ScrollDeltaHandler;
-
-				_inputPositionHandler =
-					delegate (PointerEventData pointer, TouchPhase phase) { };
-				foreach (Button button in controlButtons)
-					button.gameObject.SetActive(false);
-				break;
-		}
+        switch (controlMode) {
+            case ControlMode.Drag:
+                _inputPositionHandler = DragPositionHandler;
+                _scrollHandler = delegate (Vector2 v) { };
+                foreach (Button button in controlButtons)
+                    button.gameObject.SetActive(false);
+            break;
+                case ControlMode.Button:
+                _inputPositionHandler =
+                delegate (PointerEventData pointer, TouchPhase phase) { };
+                _scrollHandler = delegate (Vector2 v) { };
+            break;
+                case ControlMode.MouseWheel:
+                _scrollHandler = ScrollDeltaHandler;
+                _inputPositionHandler =
+                delegate (PointerEventData pointer, TouchPhase phase) { };
+                foreach (Button button in controlButtons)
+                    button.gameObject.SetActive(false);
+            break;
+        }
 	}
 
 	/* ====== Callback functions for the unity event system ====== */

@@ -347,7 +347,6 @@ public class Sensor : MonoBehaviour {
     {
         GetEnemiesByDistance(true);
         GetAlliesAndSelfByDistance(true);
-
         if (EnemiesByDistance.Count > 0 && AlliesByDistance.Count > 1)
         {
             float disToNearestEnemy2j, disToNearestAlly2j;

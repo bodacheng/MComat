@@ -150,4 +150,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 167,highspeedbo,human,10,GI,0,4,10,1,1
 168,vtl_slash,human,10,GR,0,4,5,1,1
 169,enegery_explosion,human,10,GI,0,4,7,1,1
-SKILplsAddNewIDhere,magic_spikes,human,10,GI,0,3,10,2,1
+170,magic_spikes,human,10,GI,0,3,10,1,1
+171,p_ring_slash,human,10,GR,0,2,5,1,1
