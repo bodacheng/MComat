@@ -25,7 +25,27 @@ namespace dataAccess
         }
         public static IDictionary<string, SkillStoneOfPlayerInfoModel> mySkillStonesDataDic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
         public static IDictionary<string, DragAndDropItem> mySkillStonesObjectsDic = new Dictionary<string, DragAndDropItem>();
-
+        
+        public static List<string> TargetStonesFromOfAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
+        {
+            List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
+            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in mySkillStonesDataDic)
+            {
+                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
+                if (_SkillConfigOfSkillStone == null)
+                {
+                    Debug.Log("????"+ keyValuePair.Value.skillId);
+                    continue;
+                }
+                if (_SkillConfigOfSkillStone.TYPE == type && (_SkillConfigOfSkillStone.SP_LEVEL == ExType || ExType == -1) &&
+                    SkillConfigTable.RangeLimit(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS,close, near, far, outrange))
+                {
+                    SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
+                }
+            }
+            return SkillStonesOfTypeAndExType;
+        }
+        
         public SkillStoneOfPlayerInfoModel GetSkillStoneOfPlayerInfoModelByMyStoneId(string id)
         {
             return id == null ? null : mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : null;
@@ -37,7 +57,7 @@ namespace dataAccess
         }
         
         // 待补充
-        public IEnumerator UpdateMySkillStone(SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel)
+        public IEnumerator UpdateMySkillStone()
         {
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {

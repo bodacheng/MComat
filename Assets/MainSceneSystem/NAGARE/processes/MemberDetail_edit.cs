@@ -5,7 +5,7 @@ using Api.Dto.Model;
 
 public class MemberDetail_edit : MainSceneProcess
 {
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(0.5f);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
@@ -40,7 +40,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.TriggerMainProcess(enterProcess());
+        mainProcessRunner.TriggerMainProcess(EnterProcess());
     }
     
     public override void ProcessEnd()

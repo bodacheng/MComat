@@ -207,8 +207,10 @@ namespace mainMenu
 
             if (item == null)
             {
-                item = new DragAndDropItem();
-                item._SkillConfigOfSkillStone = new SkillConfig();
+                item = new DragAndDropItem
+                {
+                    _SkillConfigOfSkillStone = new SkillConfig()
+                };
             }
 
             if (replacePosition == Instance.A1DragAndDropCell)
@@ -249,11 +251,7 @@ namespace mainMenu
             }
 
             int wholepint = MySkillStonesReader.SkillSetValidation(nineskillids[0], nineskillids[1], nineskillids[2], nineskillids[3], nineskillids[4], nineskillids[5], nineskillids[6], nineskillids[7], nineskillids[8]);
-            if (wholepint < 0)
-            {
-                return false;
-            }
-            return true;
+            return wholepint < 0 ? false : true;
         }
 
         GameObject SkillStonePrefab;
@@ -463,7 +461,7 @@ namespace mainMenu
                                 Debug.Log("技能石头："+ old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId + "被卸下");
                                 old_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = null;
                                 old_skillStoneOfPlayerInfoModel.inUsingSkillSlot = null;
-                                yield return MySkillStonesReader.Instance.UpdateMySkillStone(old_skillStoneOfPlayerInfoModel);
+                                yield return MySkillStonesReader.Instance.UpdateMySkillStone();
                             }else{
                                 // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。
                             }
@@ -474,7 +472,7 @@ namespace mainMenu
                         {
                             new_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
                             new_skillStoneOfPlayerInfoModel.inUsingSkillSlot = allSlot[i].number.ToString();
-                            yield return MySkillStonesReader.Instance.UpdateMySkillStone(new_skillStoneOfPlayerInfoModel);
+                            yield return MySkillStonesReader.Instance.UpdateMySkillStone();
                         }
                     }
                 }else{
@@ -486,7 +484,7 @@ namespace mainMenu
                             Debug.Log("技能石头："+ old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId + "被卸下");
                             old_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = null;
                             old_skillStoneOfPlayerInfoModel.inUsingSkillSlot = null;
-                            yield return MySkillStonesReader.Instance.UpdateMySkillStone(old_skillStoneOfPlayerInfoModel);
+                            yield return MySkillStonesReader.Instance.UpdateMySkillStone();
                         }else{
                             // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。
                         }

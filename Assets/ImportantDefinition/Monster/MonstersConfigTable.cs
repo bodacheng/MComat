@@ -10,7 +10,7 @@ using Skill;
 
 public class MonstersConfigTable
 {
-    private static MonstersConfigTable instance;
+    static MonstersConfigTable instance;
     public static MonstersConfigTable Instance
     {
         get
@@ -530,16 +530,14 @@ public class MonstersConfigTable
 		return rowList.FindAll(x => x.RARITY_LEVEL == find);
 	}
     
+    // 20200322 新追加。角色type的追加按说不应该那么麻烦，事前定义好就可以
     public List<string> GetTypeList()
     {
-        List<string> typeList = new List<string>();
-        foreach (Row row in rowList)
+        List<string> typeList = new List<string>
         {
-            if (!typeList.Contains(row.MONSTER_TYPE))
-            {
-                typeList.Add(row.MONSTER_TYPE);
-            }
-        }
+            "human",
+            "dog"
+        };
         return typeList;
     }
 }

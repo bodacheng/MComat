@@ -74,7 +74,7 @@ public class TeamEditManager : MonoBehaviour
                 yield break;
             _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
             characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
-            tar.ChangeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
+            tar.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
                 characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
         }
         else

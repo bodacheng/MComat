@@ -4,26 +4,27 @@
 [System.Serializable]
 public class PlayerAccountInfo
 {
-    private int coin;//智慧果实
-    private int diamond;
+    int coin;//智慧果实
+    int diamond;
+    int stoneboxsize;
     public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
 
     public PlayerAccountInfo()
     {
     }
-
-    public PlayerAccountInfo(int diamond, int intelliCoin)//第二个参数去掉？
+    
+    public int Stoneboxsize
     {
-        this.diamond = diamond;
-        this.coin = intelliCoin;
+        get => stoneboxsize;
+        set
+        {
+            stoneboxsize = Mathf.Clamp(value, 0, value);
+        }
     }
     
     public int Diamond
     {
-        get
-        {
-            return diamond;
-        }
+        get => diamond;
         set
         {
             diamond = Mathf.Clamp(value, 0, value);
@@ -32,10 +33,7 @@ public class PlayerAccountInfo
 
     public int Coin
     {
-        get
-        {
-            return coin;
-        }
+        get => coin;
         set
         {
             coin = Mathf.Clamp(value, 0, value);
@@ -44,7 +42,7 @@ public class PlayerAccountInfo
 
     public void PlusCoin(int plus)
     {
-        this.Coin = Coin + plus;
+        Coin = Coin + plus;
     }
 }
 

@@ -28,7 +28,6 @@ namespace dataAccess
                 Debug.Log(e.ToString());
                 _PlayerAccountInfo = new PlayerAccountInfo();
             }
-            yield return OverrideAccountOnLocalFile();
             yield break;
         }
 

@@ -132,17 +132,17 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
 
-            HeroIcon.IniFrames();
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
-            yield return (_SkillStonesBox.StartUp());
-            LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
-            yield return (TheNineSlot.Instance.StartUp());
-
             yield return AccountSet.Instance.LoadCustomerInfo();
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
             yield return _modelShower.StartUpProcess();
+            
+            HeroIcon.IniFrames();
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
+            yield return (_SkillStonesBox.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize));
+            LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
+            yield return (TheNineSlot.Instance.StartUp());
             
             // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
             switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)

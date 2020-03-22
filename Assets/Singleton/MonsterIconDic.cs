@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class monsterIconsDic {
+public class MonsterIconDic {
 
-    static monsterIconsDic instance;
-    public static monsterIconsDic Instance
+    static MonsterIconDic instance;
+    public static MonsterIconDic Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new monsterIconsDic();
+                instance = new MonsterIconDic();
             }
             return instance;
         }
@@ -21,7 +21,7 @@ public class monsterIconsDic {
     public Sprite readingSprite;
     AssetBundle readingBundle;
     readonly IDictionary<string, Sprite> characterIconDic = new Dictionary<string, Sprite>();
-
+    
     public Sprite GetMonsterIconSyn(string monsterid)
     {
         readingSprite = null;
@@ -31,7 +31,7 @@ public class monsterIconsDic {
         return readingSprite;
     }
 
-    public IEnumerator findMonsterIconByCach(string resource_id)
+    public IEnumerator FindMonsterIconByCach(string resource_id)
     {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
@@ -75,11 +75,11 @@ public class monsterIconsDic {
         yield return readingSprite;
     }
 
-    public IEnumerator findMonsterIconByResource(string resource_id)
+    public IEnumerator FindMonsterIconByResource(string resource_id)
     {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
-            readingSprite = Resources.Load<Sprite>("Sprites/monsterIcons/" + resource_id.ToString()) as Sprite;
+            readingSprite = Resources.Load<Sprite>("Sprites/monsterIcons/" + resource_id) as Sprite;
         else
             yield return readingSprite;
 

@@ -8,20 +8,20 @@ public class SKillAnalyzer : MonoBehaviour
 {
     public void SkillsAnalyzeByFrames(string type, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/G_Attack_State", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
+        List<Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/G_Attack_State", typeof(AnimationClip)).ToList();
+        List<Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/G_Attack_State_Stay", typeof(AnimationClip)).ToList();
+        List<Object> GMStatess = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
 
         List<AnimationClip> AnimationClips = new List<AnimationClip>();
-        foreach (UnityEngine.Object _object in G_Attack_States)
+        foreach (Object _object in G_Attack_States)
         {
             AnimationClips.Add(_object as AnimationClip);
         }
-        foreach (UnityEngine.Object _object in G_Attack_State_Stays)
+        foreach (Object _object in G_Attack_State_Stays)
         {
             AnimationClips.Add(_object as AnimationClip);
         }
-        foreach (UnityEngine.Object _object in GMStatess)
+        foreach (Object _object in GMStatess)
         {
             AnimationClips.Add(_object as AnimationClip);
         }

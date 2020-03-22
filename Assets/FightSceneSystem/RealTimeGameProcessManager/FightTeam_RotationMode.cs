@@ -191,7 +191,7 @@ public class FightTeam_RotationMode : FightTeam
                 continue;
             }
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceID);
-            _SideCharIcon.focusingCharIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID),characterResourceInfo._zokusei);
+            _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
             _SideCharIcon.gameObject.SetActive(true);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)

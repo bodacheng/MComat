@@ -517,7 +517,7 @@
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\FightSceneModeManager.cs" />
     <Compile Include="Assets\Singleton\levelExpDefine.cs" />
-    <Compile Include="Assets\Singleton\monsterIconsDic.cs" />
+    <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\myModelPool.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
     <Compile Include="Assets\Singleton\SystemNotes.cs" />
@@ -526,6 +526,7 @@
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
+    <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
     <Compile Include="Assets\StagesManagement\ArcadeManager.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />
     <Compile Include="Assets\StagesManagement\QuestPreparePage.cs" />
@@ -545,7 +546,6 @@
     <Compile Include="Assets\UI\oldscripts\Debug_Char_Set.cs" />
     <Compile Include="Assets\UI\oldscripts\FloatOnHead.cs" />
     <Compile Include="Assets\UI\oldscripts\NetWork\fightingSceneNetworkManager.cs" />
-    <Compile Include="Assets\UI\oldscripts\NetWork\playerNetInfo.cs" />
     <Compile Include="Assets\UI\oldscripts\PUNMenu.cs" />
     <Compile Include="Assets\UI\oldscripts\RongLianGamen.cs" />
     <Compile Include="Assets\UI\oldscripts\Save_Trans.cs" />

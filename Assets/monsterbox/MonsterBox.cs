@@ -33,7 +33,6 @@ namespace mainMenu
         public RectTransform MonsterBoxContainer;
 
         static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
-        static List<string> typeList = new List<string>();
 
         void Start()
         {
@@ -99,10 +98,10 @@ namespace mainMenu
                 switch (ResourceLoadingSetting.Instance.IconLoadingMode)
                 {
                     case ResourceLoadMode.CachAB:
-                        onecoroutine = (monsterIconsDic.Instance.findMonsterIconByCach(targetingCharacterDataInfo.monsterId));
+                        onecoroutine = MonsterIconDic.Instance.FindMonsterIconByCach(targetingCharacterDataInfo.monsterId);
                         break;
                     case ResourceLoadMode.Resource:
-                        onecoroutine = (monsterIconsDic.Instance.findMonsterIconByResource(targetingCharacterDataInfo.monsterId));
+                        onecoroutine = MonsterIconDic.Instance.FindMonsterIconByResource(targetingCharacterDataInfo.monsterId);
                         break;
                     case ResourceLoadMode.StreamingAssetAB:
                         break;
@@ -112,7 +111,7 @@ namespace mainMenu
                 targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
                 targetingIcon._MonsterOfPlayerDetailModel = targetingCharacterDataInfo;
                 targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
-                targetingIcon.ChangeIcon(monsterIconsDic.Instance.GetMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
+                targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
                 if (mainMenuIcons.ContainsKey(monsterOfPlayerId))
                 {
                     mainMenuIcons[monsterOfPlayerId] = targetingIcon;
@@ -123,8 +122,9 @@ namespace mainMenu
                     mainMenuIcons.Add(monsterOfPlayerId, targetingIcon);
                 }
             }
-            
+
             // 下面的环节重新加载type下拉表
+            List<string> typeList = new List<string>();
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
                 if (!typeList.Contains(keyValuePair.Value._CharacterResourceInfo.type))

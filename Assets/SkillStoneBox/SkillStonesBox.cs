@@ -16,12 +16,13 @@ using Skill;
 // 18.1.6
 // 这个模块缺乏这些函数：添加新技能石头(与技能石头盒子的画面配合？)
 // 消耗某技能石头
+
 namespace mainMenu
 {
-    public class SkillStonesBox : MonoBehaviour
+    public partial class SkillStonesBox : MonoBehaviour
     {
         public static SkillStonesBox Instance;
-
+        
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
@@ -39,10 +40,6 @@ namespace mainMenu
         public Button EX3Tab;
 
         [Space(7)]
-        [Header("石头滚动视窗")]
-        public ScrollRect stoneviewScrollRect;
-
-        [Space(7)]
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _SkillStoneBoxTabEffectsManager;
 
@@ -56,18 +53,6 @@ namespace mainMenu
         public Toggle nearCheckBox;
         public Toggle farCheckBox;
         public Toggle outRangeCheckBox;
-
-        [Space(7)]
-        [Header("格子图标")]
-        public Sprite Cell;
-
-        [Space(7)]
-        [Header("格子数量，将改为玩家账户决定")]
-        public int cellsLimit;// 哪怕因为某些原因技能石头的总数量超过了背包大小，也绝对不应该去删除石头，只是做一些限制逼玩家去进行处理。
-
-        [Space(7)]
-        [Header("技能石与格子pretab")]
-        public DragAndDropCell Cellprefab;
 
         [Space(7)]
         [Header("技能石详细")]
@@ -85,27 +70,16 @@ namespace mainMenu
         {
             Instance = this;
         }
-
-        public IEnumerator StartUp()
+        
+        public IEnumerator StartUp(int stoneboxsize)
         {
             yield return _SkillStoneBoxTabEffectsManager.StartUp();
-            // 玩家可能在什么时候会把Cell的数量进行扩充？cellsLimit从哪进行读取？
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
-            GenerateCells(cellsLimit);
+            Debug.Log("技能石盒子容量为"+stoneboxsize);
+            GenerateCells(stoneboxsize);
         }
         
-        public DragAndDropCell GetFirstEmptyCell()
-        {
-            foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
-            {
-                if (keyValuePair.Value.GetItem() != null)
-                    continue;
-                return keyValuePair.Value;
-            }
-            return null;
-        }
-
         public string GetFocusingType()
         {
             return focusingtype;
@@ -119,33 +93,6 @@ namespace mainMenu
             return focusingExType;
         }
 
-        float lastclicktime;
-        public void CellButtonBeheviour(DragAndDropCell _SkillStoneCell)
-        {
-            Button button = _SkillStoneCell.GetComponent<Button>();
-            if (button != null)
-            {
-                void buttonFeature()
-                {
-                    if (Time.time - lastclicktime < 0.25f) // double click
-                    {
-                        if (TheNineSlot.Instance.GetFocusingStoneSlot() != null)
-                        {
-                            _SkillStoneCell.DragStoneFromSKillStoneBoxToNineSlot(_SkillStoneCell,TheNineSlot.Instance.GetFocusingStoneSlot());
-                        }
-                    }
-                    lastclicktime = Time.time;
-                    DragAndDropItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfigOfSkillStone != null)
-                    {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfigOfSkillStone, _stone.SkillStoneOfPlayerId);
-                    }
-                }
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(buttonFeature);
-            }
-        }
-        
         public void NormalTabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
@@ -177,19 +124,11 @@ namespace mainMenu
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
         public IEnumerator EXTabsFeatureRefresh(bool viewingMode)
         {
-            List<string> typesOfStoneIhave = new List<string>();
-            foreach (KeyValuePair<string, DragAndDropItem> keyValuePair in MySkillStonesReader.mySkillStonesObjectsDic)
-            {
-                if (!typesOfStoneIhave.Contains(keyValuePair.Value._SkillConfigOfSkillStone.TYPE))
-                {
-                    typesOfStoneIhave.Add(keyValuePair.Value._SkillConfigOfSkillStone.TYPE);
-                }
-            }
             if (viewingMode)
             {
                 types.gameObject.SetActive(true);
                 types.ClearOptions();
-                foreach (string Rname in typesOfStoneIhave)
+                foreach (string Rname in MonstersConfigTable.Instance.GetTypeList())
                 {
                     Dropdown.OptionData m_NewData = new Dropdown.OptionData
                     {
@@ -216,49 +155,19 @@ namespace mainMenu
             TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
         }
 
-        public void typeDropDownBehaviour()// 直接放在type下拉按钮上的功能
+        public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
             TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(EXTabsFeatureRefresh(true));
-        }
-
-        // 围绕这个环节的一个问题是玩家账户中格子数量的问题。
-        // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
-        public void GenerateCells(int cellsLimit)
-        {
-            int hangshu = 1;
-            Cellprefab.gameObject.GetComponent<Image>().sprite = Cell;
-            for (int i = 0; i < cellsLimit; i++)
-            {
-                if (CellsDictionary.ContainsKey(i))//我姑且认为该字典里每个key值对应的SkillStoneCell对象不会凭空消失
-                {
-                }
-                else
-                {
-                    DragAndDropCell cell = Instantiate(Cellprefab);
-                    cell.empty = new Color(1, 1, 1, 0.6f);
-                    cell.full = new Color(1, 1, 1, 1);
-                    cell.cellPhase = DragAndDropCell.CellPhase.SkillStoneBoxCell;
-                    cell._SkillStoneSlot = null;//技能石box里用不到这个
-                    cell.RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
-                    cell.gameObject.SetActive(true);
-                    cell.transform.SetParent(BoxT);
-                    cell.transform.localScale = Vector3.one;
-                    CellsDictionary.Add(i, cell);
-                    CellButtonBeheviour(CellsDictionary[i]);
-                }
-            }
-            hangshu = cellsLimit / 5;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (100f + 7f) * hangshu - stoneviewScrollRect.gameObject.GetComponent<RectTransform>().sizeDelta.y);
         }
 
         public IEnumerator ArrangeSkillStonesToBox()
         {
             yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.Instance.GetUsingStonesId());
         }
-
+        
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<String> UsingStoneIDs)
+        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<string> UsingStoneIDs)
         {
             foreach (KeyValuePair<int, DragAndDropCell> cellPair in CellsDictionary)
             {
@@ -273,23 +182,15 @@ namespace mainMenu
                     cellPair.Value.UpdateMyItem(); //单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
                 }
             }
-            List<String> SkillStonesOfTypeAndExType = new List<String>(); //技能石本地id
-            foreach (KeyValuePair<String, SkillStoneOfPlayerInfoModel> keyValuePair in MySkillStonesReader.mySkillStonesDataDic)
-            {
-                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
-                if (_SkillConfigOfSkillStone == null)
-                {
-                    Debug.Log("????"+ keyValuePair.Value.skillId);
-                    continue;
-                }
-                if (_SkillConfigOfSkillStone.TYPE == type && (_SkillConfigOfSkillStone.SP_LEVEL == exType || exType == -1) 
-                    && 
-                    SkillConfigTable.RangeLimit(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS,close, near, far, outrange))
-                {
-                    SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
-                }
-            }
+            List<String> SkillStonesOfTypeAndExType = MySkillStonesReader.TargetStonesFromOfAccount(type, exType, close, near, far, outrange);
 
+            if (SkillStonesOfTypeAndExType.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
+            {
+                Debug.Log("错误：待显示技能石数量超过了盒子容量");
+                yield break;
+            }
+            Debug.Log("本次显示技能石的总数量（包括九宫格内）：" + SkillStonesOfTypeAndExType.Count);
+            
             int cellindex = 0;
             for (int i = 0; i < SkillStonesOfTypeAndExType.Count; i++)
             {
@@ -402,33 +303,6 @@ namespace mainMenu
                 break;
             }
             return buttonWorldPosition;
-        }
-
-        public IEnumerator ShowUsingStoneCharacter(string SkillStoneOfPlayerId, HeroIcon targetIcon)
-        {
-            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStoneOfPlayerId);
-            if (SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId == null)
-            {
-                targetIcon.gameObject.SetActive(false);
-                yield break;
-            }
-            CharacterResourceInfo characterResourceInfo = null;
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            if (_one == null)
-            {
-                targetIcon.gameObject.SetActive(false);
-                yield break;
-            }
-            else
-            {
-                targetIcon.gameObject.SetActive(true);
-            }
-            characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
-            targetIcon.ChangeIcon(characterResourceInfo == null ? null : monsterIconsDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
-            characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
-            yield break;
         }
     }
 }
