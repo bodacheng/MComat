@@ -63,7 +63,7 @@ public class DebugManager : MonoBehaviour {
     {
         yield return AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type.options[type.value].text);
 
-        List<UnityEngine.Object> fightChars = Resources.LoadAll("charPretabs/"+ type.options[type.value].text).ToList();
+        List<UnityEngine.Object> fightChars = Resources.LoadAll("CharPretabs/"+ type.options[type.value].text).ToList();
         List<UnityEngine.Object> AIScripts = Resources.LoadAll("AIScripts/" + type.options[type.value].text).ToList();
 
         List<string> resourceNames = new List<string>();
@@ -447,7 +447,7 @@ public class DebugManager : MonoBehaviour {
                                                 Zokusei _zokusei,string personalMagicpath,
                                                 TeamConfig TeamConfig, Vector3 position, Quaternion rotation)
     {
-        GameObject fightChar = Resources.Load("charPretabs/" + type + "/" + prefabName) as GameObject;
+        GameObject fightChar = Resources.Load("CharPretabs/" + type + "/" + prefabName) as GameObject;
         if (fightChar == null)
             yield break;
 

@@ -30998,37 +30998,30 @@ AnimationClip:
     data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
     messageOptions: 0
   - time: 0
     functionName: EffectOnBodyPart
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
     messageOptions: 0
-  - time: 0.16666667
+  - time: 0.1
     functionName: SetRightFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.16666667
+  - time: 0.1
     functionName: SetLeftFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.2
-    functionName: SetDamageType
-    data: 2
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.23333333
+  - time: 0.16666667
     functionName: ClearTargets
     data: 
     objectReferenceParameter: {fileID: 0}

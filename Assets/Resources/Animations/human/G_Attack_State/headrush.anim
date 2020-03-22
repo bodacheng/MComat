@@ -94532,17 +94532,17 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 3
     messageOptions: 0
-  - time: 0.6333333
-    functionName: turn_on_flag
+  - time: 0.6166667
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
-    functionName: ClearMarkerManagers
+  - time: 0.6333333
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -312,6 +312,7 @@
     <Compile Include="Assets\ErbGameArt\AAA Projectiles\LWRP\ShaderChanger.cs" />
     <Compile Include="Assets\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
+    <Compile Include="Assets\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
     <Compile Include="Assets\EZ Object Pools\DecompositionerPool.cs" />
     <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
@@ -558,6 +559,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
     <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Shaders\FadeSlash.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
     <None Include="Assets\Resources\BasicCharComponent\Shield\saonian\FieldShield.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />
@@ -565,6 +567,7 @@
     <None Include="Assets\Resources\AIScripts\human\1118Test.xml" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Distortion.shader" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Prefabs\Readme.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Asstes\ErbGameArt\Glowing orbs Vol 3\Demo scene\Add_CenterGlow.txt" />
@@ -573,6 +576,7 @@
     <None Include="Assets\ErbGameArt\AAA Projectiles\Prefabs\Readme.txt" />
     <None Include="Assets\POFX\Shaders\Resources\ColorSwap.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Shaders\Slash.shader" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\Particlecollection_Cleave\READ ME.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ACES.cginc" />
@@ -583,6 +587,7 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\Tonemapping.cginc" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lightning.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Shaders\SlashOld.shader" />
     <None Include="Assets\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\ReleaseNotes.txt" />
     <None Include="Assets\PostProcessing\Resources\Shaders\Uber.shader" />
@@ -656,7 +661,9 @@
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
     <None Include="Assets\POFX\Shaders\Resources\Eraser.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Demo scene\Readme.txt" />
     <None Include="Assets\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_CenterGlow.shader" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AdditiveMobile_Scroll01.shader" />
     <None Include="Assets\Resources\TimeLines\testdialog.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -676,6 +683,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\EasyTouchBundle\EasyTouch\RealseNotes.txt" />
+    <None Include="Assets\ErbGameArt\Sword slash FX\Readme.txt" />
     <None Include="Assets\Resources\Account\StoryChars.xml" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
     <None Include="Assets\Resources\AIScripts\human\1222Test.xml" />

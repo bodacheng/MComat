@@ -19,10 +19,10 @@ public partial class CharsManager : MonoBehaviour
         GameObject _TempModel = null;
 
         /// ///////////////////////////////////////////////////////
-        var resultObject = Resources.Load("charPretabs/" + _TempCharacterResourceInfo.type + "/" + _TempCharacterResourceInfo.REAL_NAME) as GameObject;
+        var resultObject = Resources.Load("CharPretabs/" + _TempCharacterResourceInfo.type + "/" + _TempCharacterResourceInfo.REAL_NAME) as GameObject;
         if (resultObject == null)
         {
-            Debug.Log("资源错误："+"charPretabs/" + _TempCharacterResourceInfo.type + "/" + _TempCharacterResourceInfo.REAL_NAME);
+            Debug.Log("资源错误："+"CharPretabs/" + _TempCharacterResourceInfo.type + "/" + _TempCharacterResourceInfo.REAL_NAME);
             yield break;
         }
         _TempModel = Instantiate((GameObject)resultObject, Vector3.zero, Quaternion.identity);

@@ -67,7 +67,6 @@ namespace mainMenu
         public RectTransform MainMenuBottonsT;
         public RectTransform JiNengRongLian_selectT;
         public RectTransform RonglianConfirmGAMENT;
-        public RectTransform AllSeasonsGamensT;
         public RectTransform SelfFightUIT;
         
         void Awake()

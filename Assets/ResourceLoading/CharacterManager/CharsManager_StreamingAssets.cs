@@ -18,7 +18,7 @@ public partial class CharsManager : MonoBehaviour
         OutsideDataLink ODL;
         Data_Center _TempDATACENTER;
         AssetBundle modelAsset;
-        IEnumerator enumerator = CachManager.Instance.getABFromStreamingAssets("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
+        IEnumerator enumerator = CachManager.Instance.getABFromStreamingAssets("CharPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
         yield return enumerator;
         modelAsset = (AssetBundle)enumerator.Current;
         if (modelAsset == null)

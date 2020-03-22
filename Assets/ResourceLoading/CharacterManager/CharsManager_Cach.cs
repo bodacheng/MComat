@@ -16,7 +16,7 @@ public partial class CharsManager : MonoBehaviour
         //上面这个应该也是走异步，到时候是个连接数据库流程？
         GameObject _TempModel = null;
         AssetBundle modelAsset;
-        _loadingProcess = CachManager.Instance.getABFromCach("charPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
+        _loadingProcess = CachManager.Instance.getABFromCach("CharPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
         yield return _loadingProcess;
         if (_loadingProcess.Current != null)
         {

@@ -158,7 +158,9 @@ public class SkillConfigTable
         {
             TextAsset csv = Resources.Load("Account/mst_skill") as TextAsset;//未定，这个瞎写的。
             if (csv != null)
+            {
                 Instance.Load(csv);
+            }
         }
     }
 
@@ -232,6 +234,8 @@ public class SkillConfigTable
         {
             for (int i = 1; i < grid.Length; i++)
             {
+                if (grid[i].Length < 10)
+                    continue;
                 Row row = new Row
                 {
                     RECORD_ID = grid[i][0],
