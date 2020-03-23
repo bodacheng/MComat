@@ -2,6 +2,8 @@
  */
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
@@ -134,12 +136,14 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
 
 	void InitializeBoxDependency()
 	{
-		// Set the box ID according to the order in the container `listBoxes`
-		for (int i = 0; i < listBoxes.Length; ++i)
-			listBoxes[i].listBoxID = i;
+        // Set the box ID according to the order in the container `listBoxes`
+        //for (int i = 0; i < listBoxes.Length; ++i)
+        //	listBoxes[i].listBoxID = i;
 
-		// Set the neighbor boxes
-		for (int i = 0; i < listBoxes.Length; ++i) {
+        listBoxes = OrderStagesButtonByNo(listBoxes.ToList()).ToArray();
+
+        // Set the neighbor boxes
+        for (int i = 0; i < listBoxes.Length; ++i) {
 			listBoxes[i].lastListBox = listBoxes[(i - 1 >= 0) ? i - 1 : listBoxes.Length - 1];
 			listBoxes[i].nextListBox = listBoxes[(i + 1 < listBoxes.Length) ? i + 1 : 0];
 		}
@@ -174,8 +178,29 @@ public class ListPositionCtrl : MonoBehaviour, IControlEventHandler
         }
 	}
 
-	/* ====== Callback functions for the unity event system ====== */
-	public void OnBeginDrag(PointerEventData pointer)
+    // 等级升序降序？
+    readonly int order = 1;//0:升序 1:降序 //是否按type排序
+    List<ListBox> OrderStagesButtonByNo(List<ListBox> originBoxes)
+    {
+        for (int i = 0; i < originBoxes.Count - 1; i++)
+        {
+            for (int j = 0; j < originBoxes.Count - 1 - i; j++)
+            {
+                int no1 = originBoxes[j].listBoxID;
+                int no2 = originBoxes[j + 1].listBoxID;
+                if (order == 1 ? no1 > no2 : no1 < no2)
+                {
+                    ListBox temp = originBoxes[j];
+                    originBoxes[j] = originBoxes[j + 1];
+                    originBoxes[j + 1] = temp;
+                }
+            }
+        }
+        return originBoxes;
+    }
+
+    /* ====== Callback functions for the unity event system ====== */
+    public void OnBeginDrag(PointerEventData pointer)
 	{
 		_inputPositionHandler(pointer, TouchPhase.Began);
 	}

@@ -55,8 +55,6 @@ namespace mainMenu
                 listBox.button.onClick.AddListener(testbutton);
                 buttons.Add(listBox);
             }
-
-            buttons = OrderStagesButtonByNo(buttons);
             
             for (int i = 0; i < buttons.Count; i++)
             {
@@ -70,28 +68,7 @@ namespace mainMenu
                 _ListBox.Initialize(ListPositionCtrl);
             }
         }
-        
-        // 等级升序降序？
-        readonly int order = 1;//0:升序 1:降序 //是否按type排序
-        List<ListBox> OrderStagesButtonByNo(List<ListBox> originBoxes)
-        {
-            for (int i = 0; i < originBoxes.Count - 1; i++)
-            {
-                for (int j = 0; j< originBoxes.Count-1-i; j++)
-                {
-                    int no1 = originBoxes[j].listBoxID;
-                    int no2 = originBoxes[j + 1].listBoxID;
-                    if (order == 1 ? no1 > no2 : no1 < no2)
-                    {
-                        ListBox temp = originBoxes[j];
-                        originBoxes[j]=originBoxes[j+1];
-                        originBoxes[j + 1] = temp;
-                    }
-                }
-            }
-            return originBoxes;
-        }
-        
+               
         public void Clear()
         {
             ListPositionCtrl.listBoxes = null;

@@ -36786,8 +36786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ab33e509db87d4bb1dd27b561cdb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listType: 0
-  controlMode: 0
+  listType: 1
+  controlMode: 2
   alignMiddle: 1
   direction: 0
   _parentCanvas: {fileID: 763678635}
