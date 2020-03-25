@@ -9,11 +9,11 @@ namespace HittingDetection
     public partial class BO_Marker_Manager : MonoBehaviour
     {
         bool Enabled;
-        
+
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
         float ActivateAfterTime = 0;
-        
+
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
@@ -23,7 +23,7 @@ namespace HittingDetection
 
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
-        
+
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
         [Tooltip("特效是否有粘身视效")]
@@ -58,6 +58,30 @@ namespace HittingDetection
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         bool TraditionalDefendMode = false;
         float AT;
+        
+        public string GeneratedByStateKey { get; set; }
+        HitBoxLifeEnding hitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        public HitBoxLifeEnding HitBoxLifeEnding
+        {
+            get
+            {
+                return hitBoxLifeEnding;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case HitBoxLifeEnding.untouched:
+                    case HitBoxLifeEnding.successed:
+                        hitBoxLifeEnding = value;
+                        break;
+                    case HitBoxLifeEnding.touched:
+                        if (value != HitBoxLifeEnding.successed)
+                            hitBoxLifeEnding = value;
+                        break;
+                }                
+            }
+        }
                 
         public float GetDamageAmount()
         {

@@ -5,9 +5,9 @@ using UnityEngine;
 namespace Soul
 {
     public class SingleFightLog
-    {
+    {        
         readonly List<FightRecord> MyBehaviourHistory = new List<FightRecord>();
-
+        
         public void WriteLog(FightRecord behaviourHistory)
         {
             MyBehaviourHistory.Add(behaviourHistory);

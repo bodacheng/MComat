@@ -37,6 +37,12 @@ public partial class BO_Ani_E : MonoBehaviour
         {
             processingHitBox.TrackControl.StartOff(processingHitBox.transform.position, processingHitBox.transform.rotation, speed);
         }
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        }
     }
     
     public void ReleasePreparedMagicToAir_Special(string part)
@@ -98,6 +104,12 @@ public partial class BO_Ani_E : MonoBehaviour
             processingHitBox.TrackControl.StartOff(intPos, transform.rotation, 1);
         }
         OnLoadMagic = null;
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        }
     }
     
     public void MagicForward_Special(string objectname ,Transform T)
@@ -122,6 +134,12 @@ public partial class BO_Ani_E : MonoBehaviour
             if (processingHitBox._HitBox.onGroundMagic)
             {
                 processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
+            }
+            
+            if (FightGlobalSetting.HitBoxLogger)
+            {
+                processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+                processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }
     }

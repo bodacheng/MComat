@@ -221,6 +221,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 //被打了，属于负面效益
             }
         );
+        _dmg.from_weapon.HitBoxLifeEnding = HitBoxLifeEnding.successed;
     }
     
     public void HitCountPlus()

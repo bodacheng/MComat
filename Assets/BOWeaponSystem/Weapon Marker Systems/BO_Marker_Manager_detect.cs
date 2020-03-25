@@ -90,6 +90,7 @@ namespace HittingDetection
                                     {
                                         _Used_Targets.Add(_hits[hit_target_index].collider.transform);
                                         WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
+                                        HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                         if (weaponHP > 0 && CurrentHP <= 0)
                                         {
                                             break;
@@ -138,6 +139,7 @@ namespace HittingDetection
                                     _StartPoint = _StartPoint + (_hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
                                     hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up)));
                                     WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
+                                    HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
                                 {
@@ -226,6 +228,7 @@ namespace HittingDetection
                                         {
                                             _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
                                             WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
+                                            HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                             if (weaponHP > 0 && CurrentHP <= 0)
                                             {
                                                 break;
@@ -281,6 +284,7 @@ namespace HittingDetection
                                         // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
                                         hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up)));
                                         WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
+                                        HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
                                     {

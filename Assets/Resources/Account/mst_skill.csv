@@ -152,3 +152,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 169,enegery_explosion,human,10,GI,0,4,7,1,1
 170,magic_spikes,human,10,GI,0,3,10,1,1
 171,p_ring_slash,human,10,GR,0,2,5,1,1
+172,jump_ring_slash,human,10,GR,0,0.2,5,2,1
+173,stab,human,10,GR,0,0.2,5,2,1

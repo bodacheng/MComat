@@ -58,22 +58,22 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
 
     public void BeginRemoteTestMode()
     {
-        StartCoroutine(beginRemoteTestMode());
+        StartCoroutine(_BeginRemoteTestMode());
     }
     
     public void BeginLocalTestMode()
     {
-        StartCoroutine(beginLocalTestMode());
+        StartCoroutine(_BeginLocalTestMode());
     }
     
-    public IEnumerator beginRemoteTestMode()
+    public IEnumerator _BeginRemoteTestMode()
     {
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.remoteTestPlayer;
         yield return AccountSet.Instance.login();
         SceneManager.LoadScene(1);       
     }
     
-    public IEnumerator beginLocalTestMode()
+    public IEnumerator _BeginLocalTestMode()
     {
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
         SceneManager.LoadScene(1);
@@ -81,18 +81,18 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     }
         
     public IEnumerator ResourcePrepareProcess()
-    {       
-        ResourceLoadingSetting.Instance.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
-        ResourceLoadingSetting.Instance.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
-        ResourceLoadingSetting.Instance.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
-        ResourceLoadingSetting.Instance.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
-        ResourceLoadingSetting.Instance.IconLoadingMode = _ResourceSetting.IconLoadingMode;
+    {
+        ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
+        ResourceLoadingSetting.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
+        ResourceLoadingSetting.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
+        ResourceLoadingSetting.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
+        ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
 
         LoadingCanvas.target.DarkOff(0.5f);
         LoadingCanvas.target.TurnOnProcessDescription(true);
         LoadingCanvas.target.NowProcess("正在加载资源",0);
         
-        switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
+        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 yield return ConfigFilesDownLoad();
@@ -106,7 +106,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 break;
         }
 
-        switch (ResourceLoadingSetting.Instance.ModelLoadingMode)
+        switch (ResourceLoadingSetting.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 yield return ModelResourceDownLoad();
@@ -129,7 +129,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             }
         }
 
-        switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
+        switch (ResourceLoadingSetting.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 yield return characterComponentsDownload();
@@ -150,7 +150,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 break;
         }
 
-        switch (ResourceLoadingSetting.Instance.MagicLoadingMode)
+        switch (ResourceLoadingSetting.MagicLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 EffectsDownLoadByCach();

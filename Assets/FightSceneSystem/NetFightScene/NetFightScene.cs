@@ -206,11 +206,20 @@ public class NetFightScene : MonoBehaviour {
         
         _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
         _RealTimeGameProcessManager.Clear();
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
+            HitBoxLogger.Instance.LogSummit();
+            HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv",HitBoxLogger.Instance);
+            HitBoxLogger.Instance.Clear();
+        }
+
         FightSceneProcessesRunner.Clear();
         MainMenuNote.Instance.goingtostep = MainSceneStep.frontPage;
         SceneManager.LoadScene(1);
     }
-
+    
 	//本地系函数 
 	public void LocalGameRestart()
 	{

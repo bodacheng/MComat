@@ -20,6 +20,13 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     
     protected override void OnBeforeReturn(Decompositioner instance)
     {
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            if (instance._HitBox != null)
+            {
+                HitBoxLogger.Instance.AddLog(instance._HitBox.GeneratedByStateKey,instance._HitBox.HitBoxLifeEnding);
+            }
+        }
         instance.gameObject.SetActive(false);
     }
 

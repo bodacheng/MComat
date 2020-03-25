@@ -21,7 +21,7 @@ public class SkillConfigTable
             }
             return instance;
         }
-    }    
+    }
     public IDictionary<string, SkillConfig> SkillConfigDicForReference = new Dictionary<string, SkillConfig>();
     
 	public class Row
@@ -48,7 +48,7 @@ public class SkillConfigTable
     
     public IEnumerator LoadAllSkillConfigs()
     {
-        switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
+        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 break;
@@ -225,7 +225,7 @@ public class SkillConfigTable
         outStream.WriteLine(sb);
         outStream.Close();
     }
-
+    
 	public void Load(TextAsset csv)
 	{
 		rowList.Clear();

@@ -26,6 +26,7 @@ public class FightGlobalSetting : MonoBehaviour
     public static float _lightBlockLastingTime, _heavyBlockLastingTime;
     public static AnimationCurve _knockOffyAnimationCurve,_knockOffzAnimationCurve;
     public static float _attackDrawingDistance;
+    public static bool HitBoxLogger = true;
     
     public static string EffectPathDefine(Zokusei zokusei)
     {

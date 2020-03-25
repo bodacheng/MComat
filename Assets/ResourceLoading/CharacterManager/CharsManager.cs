@@ -52,7 +52,7 @@ public partial class CharsManager : MonoBehaviour {
             yield break;
         }
         IEnumerator loadshowmodel;
-        switch (ResourceLoadingSetting.Instance.ModelLoadingMode)
+        switch (ResourceLoadingSetting.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 loadshowmodel = CreateModelForShowingByCach(myChar.monsterId);
@@ -79,7 +79,7 @@ public partial class CharsManager : MonoBehaviour {
     public IEnumerator CreateCharacter(CharacterDataInfo _CharacterDataInfo)
     {
         IEnumerator buildmodelproess = null;
-        switch(ResourceLoadingSetting.Instance.ModelLoadingMode)
+        switch(ResourceLoadingSetting.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
             yield return buildmodelproess= (CreateModelForShowingByCach(_CharacterDataInfo.ResourceID));

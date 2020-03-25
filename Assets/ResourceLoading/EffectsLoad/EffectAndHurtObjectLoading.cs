@@ -32,7 +32,7 @@ public partial class EffectAndHurtObjectLoading
     
     public IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Zokusei zokusei)
     {
-         switch(ResourceLoadingSetting.Instance.MagicLoadingMode)
+         switch(ResourceLoadingSetting.MagicLoadingMode)
          {
             case ResourceLoadMode.CachAB:
             yield return ConstructHurtObjectPoolFromCach(resource_name, MagicForwardPath, zokusei);

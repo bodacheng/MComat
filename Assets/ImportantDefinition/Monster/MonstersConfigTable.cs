@@ -65,7 +65,7 @@ public class MonstersConfigTable
     
     public IEnumerator LoadMonstersConfig()
     {
-        switch (ResourceLoadingSetting.Instance.ConfigFileLoadingMode)
+        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 break;

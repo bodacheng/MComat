@@ -238,7 +238,7 @@ public class DebugManager : MonoBehaviour {
                                         //teamDic = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID;
                                     }
 
-                                    switch (ResourceLoadingSetting.Instance.ModelLoadingMode)
+                                    switch (ResourceLoadingSetting.ModelLoadingMode)
                                     {
                                         case ResourceLoadMode.CachAB:
                                             StartCoroutine(
@@ -373,7 +373,7 @@ public class DebugManager : MonoBehaviour {
                                 _CharacterDataInfo.HP = 30; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
                                 _CharacterDataInfo._NineAndTwo = null;
 
-                                if (ResourceLoadingSetting.Instance.ModelLoadingMode == ResourceLoadMode.StreamingAssetAB)
+                                if (ResourceLoadingSetting.ModelLoadingMode == ResourceLoadMode.StreamingAssetAB)
                                 {
                                     StartCoroutine(
                                         _CharSetManager.CreateCharacterFromABByStreamingAssets(
@@ -385,7 +385,7 @@ public class DebugManager : MonoBehaviour {
                                             decidePlace(), Quaternion.identity
                                     ));
                                 }
-                                else if (ResourceLoadingSetting.Instance.ModelLoadingMode == ResourceLoadMode.CachAB)
+                                else if (ResourceLoadingSetting.ModelLoadingMode == ResourceLoadMode.CachAB)
                                 {
                                     StartCoroutine(
                                         _CharSetManager.CreateCharacterFromABByCach(

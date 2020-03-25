@@ -174,7 +174,7 @@ namespace mainMenu
 
             if (this.focusingCharacterData.Animation_Manger != null)
             {
-                switch (ResourceLoadingSetting.Instance.AnimationLoadingMode)
+                switch (ResourceLoadingSetting.AnimationLoadingMode)
                 {
                     case ResourceLoadMode.CachAB:
                         yield return

@@ -83,6 +83,7 @@
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiSkillStoneTagsGroup.cs" />
     <Compile Include="Assets\AI\Control\Controller.cs" />
+    <Compile Include="Assets\AI\HitBoxLogger.cs" />
     <Compile Include="Assets\AI\SingleFightLog.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_Form.cs" />
@@ -341,6 +342,7 @@
     <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
     <Compile Include="Assets\Gotcha\gotchaManager.cs" />
+    <Compile Include="Assets\HitBoxLogTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharacterDataInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharResourceDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\MonstersConfigTable.cs" />

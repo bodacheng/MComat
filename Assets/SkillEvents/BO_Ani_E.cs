@@ -102,7 +102,7 @@ public partial class BO_Ani_E : MonoBehaviour
     {
         myMagicForwardPath = personalMagic;
         magic_path = FightGlobalSetting.EffectPathDefine(_zokusei);
-        switch(ResourceLoadingSetting.Instance.MagicLoadingMode)
+        switch(ResourceLoadingSetting.MagicLoadingMode)
         {
             case ResourceLoadMode.CachAB:
                 if (myMagicForwardPath != null)
@@ -174,6 +174,11 @@ public partial class BO_Ani_E : MonoBehaviour
                         break;
                 }
             }
+            if (FightGlobalSetting.HitBoxLogger)
+            {
+                processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+                processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+            }
         }
 	}
     
@@ -232,6 +237,12 @@ public partial class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.MarkersEnablingStarts();
         }
         OnLoadMagic = null;
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        }
     }
     
     public void ReleasePreparedMagicToAir(AnimationEvent e)
@@ -289,6 +300,12 @@ public partial class BO_Ani_E : MonoBehaviour
             processingHitBox.TrackControl.StartOff(processingHitBox.transform.position, transform.rotation, e.floatParameter);
         }
         OnLoadMagic = null;
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        }
     }
 
     Vector3 intPos;
@@ -351,6 +368,12 @@ public partial class BO_Ani_E : MonoBehaviour
         }
         if (!processingHitBox._HitBox.enabled)
             Debug.Log("奇怪");
+            
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        }
     }
     
     Transform target;
@@ -468,6 +491,12 @@ public partial class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox._HitBox.MarkersEnablingStarts();
         }
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+        }
     }
     
     public void BlastAttack(int grade, Vector3 pos, Quaternion quaternion)
@@ -498,6 +527,12 @@ public partial class BO_Ani_E : MonoBehaviour
             processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
             processingHitBox.SetBOAniE(this);
             processingHitBox._HitBox.MarkersEnablingStarts();
+        }
+        
+        if (FightGlobalSetting.HitBoxLogger)
+        {
+            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
         }
     }
 

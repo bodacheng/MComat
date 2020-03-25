@@ -103,7 +103,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             {
                 target_hitbox = default_hitboxPool.Rent();
                 BEs.bodyPartsWeaponRegisterDic[t] = target_hitbox;
-                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);                
+                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
+                
+                
             }
             myConstraintSource.sourceTransform = t;
             myConstraintSource.weight = 1;
@@ -115,6 +117,12 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
             BEs.bodyPartsWeaponRegisterDic[t]._HitBox.MarkersEnablingStarts();
+            
+            if (FightGlobalSetting.HitBoxLogger)
+            {
+                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.GeneratedByStateKey = BEs.myownheath._Center._MyBehaviorRunner.GetNowState().StateKey;
+                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+            }
         }
         
         public void RemoveBodyPartWeapon(Transform t)

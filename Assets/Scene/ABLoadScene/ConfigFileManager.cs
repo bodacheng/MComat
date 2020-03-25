@@ -227,8 +227,20 @@ public class ConfigFileManager : MonoBehaviour {
             {
                 SkillConfigTable.Instance.rowList.Add(newRow);
             }
+
+            HitBoxLogTable.Row row = new HitBoxLogTable.Row
+            {
+                RECORD_ID = newSkillConfig.RECORD_ID,
+                REAL_NAME = newSkillConfig.REAL_NAME,
+                USEABLE_MONSTER_TYPE = newSkillConfig.TYPE,
+                Untouched = "0",
+                Touched = "0",
+                Successed = "0"
+            };
+            HitBoxLogTable.Instance.rowList.Add(row);
         }
         SkillConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_skill");
+        HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv",null);
     }
     
     public int MaxOfIntList(List<int> List)

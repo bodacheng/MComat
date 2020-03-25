@@ -95,7 +95,7 @@ namespace mainMenu
             if (targetingIcon == null)
             {
                 IEnumerator onecoroutine = null;
-                switch (ResourceLoadingSetting.Instance.IconLoadingMode)
+                switch (ResourceLoadingSetting.IconLoadingMode)
                 {
                     case ResourceLoadMode.CachAB:
                         onecoroutine = MonsterIconDic.Instance.FindMonsterIconByCach(targetingCharacterDataInfo.monsterId);

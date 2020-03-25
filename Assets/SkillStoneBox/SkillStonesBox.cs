@@ -251,7 +251,7 @@ namespace mainMenu
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             IEnumerator process = null;
-            switch (ResourceLoadingSetting.Instance.IconLoadingMode)
+            switch (ResourceLoadingSetting.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
                     process = (SkillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
