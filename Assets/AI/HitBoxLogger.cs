@@ -40,7 +40,27 @@ public class HitBoxLogger
             string level = File.ReadAllText(Application.persistentDataPath + "/HitBoxLog.csv");
             return level;
         }
-        Debug.Log("hitboxlog文件缺失");
+        else
+        {
+            HitBoxLogTable.Instance.rowList = new List<HitBoxLogTable.Row>();
+            for (int i = 0;i < SkillConfigTable.Instance.rowList.Count; i++)
+            {
+                if (string.IsNullOrEmpty(SkillConfigTable.Instance.rowList[i].RECORD_ID))
+                    continue;
+                HitBoxLogTable.Row row = new HitBoxLogTable.Row
+                {
+                    RECORD_ID = SkillConfigTable.Instance.rowList[i].RECORD_ID,
+                    REAL_NAME = SkillConfigTable.Instance.rowList[i].REAL_NAME,
+                    USEABLE_MONSTER_TYPE = SkillConfigTable.Instance.rowList[i].USEABLE_MONSTER_TYPE,
+                    Untouched = "0",
+                    Touched = "0",
+                    Successed = "0"
+                };
+                HitBoxLogTable.Instance.rowList.Add(row);
+            }
+            Debug.Log("尝试新建hitboxlog");
+            HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", null);
+        }
         return null;
     }
 
