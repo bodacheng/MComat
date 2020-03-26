@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.SceneManagement;
 using mainMenu;
+using Soul;
 
 public enum SceneMode
 {
@@ -193,14 +194,28 @@ public class NetFightScene : MonoBehaviour {
         //Position_Set_Executor.Instance.P_sets.Clear();
         List<Data_Center> player1 = _RealTimeGameProcessManager.FightTeam1.teamMembers.values;
         List<string> dontdestroy = new List<string>();
+
+        List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
         for (int i = 0; i < player1.Count; i++)
         {
             if (player1[i] != null)
             {
+                singleFightLogs.Add(player1[i]._MyBehaviorRunner.SingleFightLog);
                 player1[i]._MyBehaviorRunner.ChangeState("Empty");
                 CharacterDataInfo characterDataInfo = _RealTimeGameProcessManager.FightTeam1.CharacterDataInfoReference[player1[i]];
                 if (characterDataInfo != null)
+                {
                     dontdestroy.Add(characterDataInfo.monsterOfPlayerId);
+                }
+            }
+        }
+        
+        List<Data_Center> player2 = _RealTimeGameProcessManager.FightTeam2.teamMembers.values;
+        for (int i = 0; i < player2.Count; i++)
+        {
+            if (player2[i] != null)
+            {
+                singleFightLogs.Add(player2[i]._MyBehaviorRunner.SingleFightLog);
             }
         }
         
@@ -211,7 +226,15 @@ public class NetFightScene : MonoBehaviour {
         {
             HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
             HitBoxLogger.Instance.LogSummit();
-            HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv",HitBoxLogger.Instance);
+            for (int i = 0; i < singleFightLogs.Count; i++)
+            {
+                singleFightLogs[i].Summary();
+            }
+            HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv",HitBoxLogger.Instance,singleFightLogs);
+            for (int i = 0; i < singleFightLogs.Count; i++)
+            {
+                singleFightLogs[i].Clear();
+            }
             HitBoxLogger.Instance.Clear();
         }
 

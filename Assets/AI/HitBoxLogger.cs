@@ -54,14 +54,17 @@ public class HitBoxLogger
                     USEABLE_MONSTER_TYPE = SkillConfigTable.Instance.rowList[i].USEABLE_MONSTER_TYPE,
                     Untouched = "0",
                     Touched = "0",
-                    Successed = "0"
+                    Successed = "0",
+                    TriggerdTimes = "0",
+                    InteruptedTimes = "0"
                 };
                 HitBoxLogTable.Instance.rowList.Add(row);
             }
             Debug.Log("尝试新建hitboxlog");
-            HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", null);
+            HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", null, null);
+            string level = File.ReadAllText(Application.persistentDataPath + "/HitBoxLog.csv");
+            return level;
         }
-        return null;
     }
 
     public void LogSummit()

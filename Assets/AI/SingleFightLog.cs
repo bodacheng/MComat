@@ -7,6 +7,8 @@ namespace Soul
     public class SingleFightLog
     {        
         readonly List<FightRecord> MyBehaviourHistory = new List<FightRecord>();
+        public IDictionary<string, int> StateTriggerTimes = new Dictionary<string, int>();
+        public IDictionary<string, int> StateInterruptedTimes = new Dictionary<string, int>();
         
         public void WriteLog(FightRecord behaviourHistory)
         {
@@ -35,10 +37,42 @@ namespace Soul
         // 这个函数待写。我们设想可以每次战斗结束后进行个总的报告，来分析各个技能有没有取得正面效应。
         public void Summary()
         {
-            foreach (FightRecord fightRecord in MyBehaviourHistory)
+            for (int i = 0; i < MyBehaviourHistory.Count; i++)
             {
-
+                if (MyBehaviourHistory[i] is BehaviourFightRecord)
+                {
+                    if (StateTriggerTimes.ContainsKey(MyBehaviourHistory[i].stateKey))
+                    {
+                        StateTriggerTimes[MyBehaviourHistory[i].stateKey] += 1;
+                    }
+                    else
+                    {
+                        StateTriggerTimes.Add(MyBehaviourHistory[i].stateKey, 1);
+                    }
+                    
+                    if (i != MyBehaviourHistory.Count - 1)
+                    {
+                        if (MyBehaviourHistory[i+1] is NegativeRecord)
+                        {
+                            if (StateInterruptedTimes.ContainsKey(MyBehaviourHistory[i].stateKey))
+                            {
+                                StateInterruptedTimes[MyBehaviourHistory[i].stateKey] += 1;
+                            }
+                            else
+                            {
+                                StateInterruptedTimes.Add(MyBehaviourHistory[i].stateKey, 1);
+                            }
+                        }
+                    }
+                }
             }
+        }
+        
+        public void Clear()
+        {
+            MyBehaviourHistory.Clear();
+            StateTriggerTimes.Clear();
+            StateInterruptedTimes.Clear();
         }
 
         readonly IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
