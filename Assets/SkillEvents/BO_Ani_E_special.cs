@@ -1,146 +1,248 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using HittingDetection;
+using UnityEngine.Animations;
 
 public partial class BO_Ani_E : MonoBehaviour
 {
-    public void Bullet_shoot_from_Transform(Transform startPoint,int grade,float speed)
+    public class HiddenMethods
     {
-        switch (grade)
+        readonly BO_Ani_E Ani_E;
+        public HiddenMethods(BO_Ani_E bae)
         {
-            case 1:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, magic_path);
-                break;
-            case 2:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_bullet", myMagicForwardPath, magic_path);
-                break;
-            case 3:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("super_bullet", myMagicForwardPath, magic_path);
-                break;
-            default:
-                target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", myMagicForwardPath, magic_path);
-                break;
-        }
-        processingHitBox = target_pool.Rent();
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        processingHitBox.transform.position = startPoint.position;
-        processingHitBox.transform.rotation = startPoint.rotation;
-        EffectAndHurtObjectLoading.Instance.GenerateEffect(processingHitBox._HitBox.muzzle, magic_path, processingHitBox.transform.position, transform.rotation, null);
-        processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform);
-        processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-        if (_DATA_CENTER._TeamConfig != null)
-        {
-            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-            processingHitBox._HitBox.MarkersEnablingStarts();
-        }
-        if (processingHitBox.TrackControl != null)
-        {
-            processingHitBox.TrackControl.StartOff(processingHitBox.transform.position, processingHitBox.transform.rotation, speed);
+            Ani_E = bae;
         }
         
-        if (FightGlobalSetting.HitBoxLogger)
+        public void SetBodyPartsTransform()
         {
-            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
-            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
-        }
-    }
-    
-    public void ReleasePreparedMagicToAir_Special(string part)
-    {
-        if (OnLoadMagic == null)
-            return;
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(OnLoadMagic, myMagicForwardPath, magic_path);
-        if (target_pool == null)
-            return;
-
-        processingHitBox = target_pool.Rent();
-        processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-        switch (part)
-        {
-            case "right_hand":
-                processingHitBox.transform.position = right_hand.position;
-                processingHitBox.transform.rotation = right_hand.rotation;
-                break;
-            case "left_hand":
-                processingHitBox.transform.position = left_hand.position;
-                processingHitBox.transform.rotation = left_hand.rotation;
-                break;
-            case "right_foot":
-                processingHitBox.transform.position = right_foot.position;
-                processingHitBox.transform.rotation = right_foot.rotation;
-                break;
-            case "left_foot":
-                processingHitBox.transform.position = left_foot.position;
-                processingHitBox.transform.rotation = left_foot.rotation;  
-                break;
-            case "head":
-                processingHitBox.transform.position = head.position;
-                processingHitBox.transform.rotation = head.rotation;            
-                break;
-            case "tail":
-                processingHitBox.transform.position = tail.position;
-                processingHitBox.transform.rotation = tail.rotation;
-                break;
-            case "center":
-                processingHitBox.transform.position = _DATA_CENTER.geometryCenter.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                break;
-            case null:
-                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                break;
-            default:
-                processingHitBox.transform.position = _DATA_CENTER.WholeT.position;
-                processingHitBox.transform.rotation = Quaternion.identity;
-                break;
-        }
-        
-        processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-        processingHitBox._HitBox.SetReferenceTransformInfo(_DATA_CENTER.geometryCenter);
-        processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-        processingHitBox._HitBox.MarkersEnablingStarts();
-        if (processingHitBox.TrackControl != null)
-        {
-            processingHitBox.TrackControl.StartOff(intPos, transform.rotation, 1);
-        }
-        OnLoadMagic = null;
-        
-        if (FightGlobalSetting.HitBoxLogger)
-        {
-            processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
-            processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
-        }
-    }
-    
-    public void MagicForward_Special(string objectname ,Transform T)
-    {
-        if (string.IsNullOrEmpty(objectname))
-        {
-            return;
-        }
-
-        target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(objectname, myMagicForwardPath, magic_path);
-        if (target_pool != null)
-        {
-            processingHitBox = target_pool.Rent();
-            processingHitBox._HitBox.SetOwnerFightAttriCalReference(_DATA_CENTER._FightAttriCalReference);
-            processingHitBox.transform.position = T.position;
-            processingHitBox.transform.rotation = T.rotation;
-            processingHitBox._HitBox.SetReferenceTransformInfo(processingHitBox.transform);
-            processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
-            processingHitBox.SetBOAniE(this);
-            processingHitBox._HitBox.SetTeamConfig(_DATA_CENTER._TeamConfig);
-            processingHitBox._HitBox.MarkersEnablingStarts();
-            if (processingHitBox._HitBox.onGroundMagic)
+            if (Ani_E._DATA_CENTER != null)
             {
-                processingHitBox.transform.position = new Vector3(processingHitBox.transform.position.x, transform.position.y, processingHitBox.transform.position.z);
+                if (Ani_E._DATA_CENTER.right_hand_t != null)
+                {
+                    Ani_E.right_hand = Ani_E._DATA_CENTER.right_hand_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.right_hand,null);
+                }
+                if (Ani_E._DATA_CENTER.left_hand_t != null)
+                {
+                    Ani_E.left_hand = Ani_E._DATA_CENTER.left_hand_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.left_hand,null);
+                }
+                if (Ani_E._DATA_CENTER.right_foot_t != null)
+                {
+                    Ani_E.right_foot = Ani_E._DATA_CENTER.right_foot_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.right_foot,null);
+                }
+                if (Ani_E._DATA_CENTER.left_foot_t != null)
+                {
+                    Ani_E.left_foot = Ani_E._DATA_CENTER.left_foot_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.left_foot,null);
+                }
+                if (Ani_E._DATA_CENTER.head_t != null)
+                {
+                    Ani_E.head = Ani_E._DATA_CENTER.head_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.head,null);
+                }
+                if (Ani_E._DATA_CENTER.tail_t != null)
+                {
+                    Ani_E.tail = Ani_E._DATA_CENTER.tail_t.transform;
+                    Ani_E.EffectsOnBodyParts.Add(Ani_E.tail,null);
+                }
+            }
+        }
+               
+        public void BlastAttack_core(Vector3 pos, Quaternion qua , Transform parentTarget, int grade,string logForStateKey)
+        {
+            switch (grade)
+            {
+                case 0:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+                case 1:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+                case 2:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+                default:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+            }
+                    
+            Ani_E.processingHitBox = Ani_E.target_pool.Rent();
+            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+            Ani_E.processingHitBox.transform.position = pos;
+            Ani_E.processingHitBox.transform.rotation = qua;
+            if (parentTarget != null)
+            {
+                Ani_E.myConstraintSource.sourceTransform = parentTarget;
+                Ani_E.myConstraintSource.weight = 1;
+                Ani_E.processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{Ani_E.myConstraintSource});
+                Ani_E.processingHitBox.GetPositionConstraint().constraintActive = true;
+                Ani_E.processingHitBox.GetPositionConstraint().locked = true;
+                Ani_E.processingHitBox.GetPositionConstraint().translationOffset = Vector3.zero;
+                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
+            }else{
+                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+            }
+            Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E._DATA_CENTER.geometryCenter);
+            if (Ani_E._DATA_CENTER._TeamConfig != null)
+            {
+                Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
+                Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
             }
             
             if (FightGlobalSetting.HitBoxLogger)
             {
-                processingHitBox._HitBox.GeneratedByStateKey = _DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
-                processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+                Ani_E.processingHitBox._HitBox.GeneratedByStateKey = logForStateKey ?? Ani_E._DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+                Ani_E.processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }
+        
+        public void Bullet_shoot_from_Core(Vector3 pos, Quaternion qua, int grade, float speed, string logForStateKey)
+        {
+            switch (grade)
+            {
+                case 1:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+                case 2:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+                case 3:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("super_bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+                default:
+                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    break;
+            }
+            Ani_E.processingHitBox = Ani_E.target_pool.Rent();
+            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+            Ani_E.processingHitBox.transform.position = pos;
+            Ani_E.processingHitBox.transform.rotation = qua;
+            EffectAndHurtObjectLoading.Instance.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null);
+            Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
+            Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+            Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            if (Ani_E._DATA_CENTER._TeamConfig != null)
+            {
+                Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
+                Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
+            }
+            if (Ani_E.processingHitBox.TrackControl != null)
+            {
+                Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position, Ani_E.processingHitBox.transform.rotation, speed);
+            }
+            
+            if (FightGlobalSetting.HitBoxLogger)
+            {
+                Ani_E.processingHitBox._HitBox.GeneratedByStateKey = logForStateKey ?? Ani_E._DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+                Ani_E.processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+            }
+        }
+        
+        public void MagicForward_core(string objectname, Vector3 pos, Quaternion qua, int speedGrade,string logForStateKey)
+        {
+            if (string.IsNullOrEmpty(objectname))
+            {
+                return;
+            }
+    
+            Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(objectname, Ani_E.myMagicForwardPath, Ani_E.magic_path);
+            if (Ani_E.target_pool != null)
+            {
+                Ani_E.processingHitBox = Ani_E.target_pool.Rent();
+                Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+                Ani_E.processingHitBox.transform.position = pos;
+                Ani_E.processingHitBox.transform.rotation = qua;
+                Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
+                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+                Ani_E.processingHitBox.SetBOAniE(Ani_E);
+                Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
+                Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
+                if (Ani_E.processingHitBox._HitBox.onGroundMagic)
+                {
+                    Ani_E.processingHitBox.transform.position = new Vector3(Ani_E.processingHitBox.transform.position.x, Ani_E.transform.position.y, Ani_E.processingHitBox.transform.position.z);
+                }
+                if (Ani_E.processingHitBox.TrackControl != null)
+                {
+                    switch (speedGrade)
+                    {
+                        case 1:
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,1f);
+                            break;
+                        case 2:
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,1.2f);
+                            break;
+                        case 3:
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,1.5f);
+                            break;
+                        case 0:
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,0f);
+                            break;
+                        default:
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,0f);
+                            break;
+                    }
+                }
+                
+                if (FightGlobalSetting.HitBoxLogger)
+                {
+                    Ani_E.processingHitBox._HitBox.GeneratedByStateKey = logForStateKey ?? Ani_E._DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+                    Ani_E.processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+                }
+            }
+        }
+        
+        public void ReleasePreparedMagic_core(Vector3 pos,Quaternion qua, Transform parentT,string logForStateKey)
+        {
+            if (Ani_E.OnLoadMagic == null)
+                return;
+            Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(Ani_E.OnLoadMagic, Ani_E.myMagicForwardPath, Ani_E.magic_path);
+            if (Ani_E.target_pool == null)
+                return;
+        
+            Ani_E.processingHitBox = Ani_E.target_pool.Rent();
+            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+            Ani_E.processingHitBox.transform.position = pos;
+            Ani_E.processingHitBox.transform.rotation = qua;
+            if (parentT != null)
+            {
+                Ani_E.myConstraintSource.sourceTransform = parentT;
+                Ani_E.myConstraintSource.weight = 1;
+                Ani_E.processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{Ani_E.myConstraintSource});
+                Ani_E.processingHitBox.GetPositionConstraint().constraintActive = true;
+                Ani_E.processingHitBox.GetPositionConstraint().locked = true;
+                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
+            }else{
+                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+            }
+            Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E._DATA_CENTER.geometryCenter);
+            Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
+            Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
+            if (Ani_E.processingHitBox.TrackControl != null)
+            {
+                Ani_E.processingHitBox.TrackControl.StartOff(pos, qua, 1);
+            }
+            Ani_E.OnLoadMagic = null;
+                        
+            if (FightGlobalSetting.HitBoxLogger)
+            {
+                Ani_E.processingHitBox._HitBox.GeneratedByStateKey = logForStateKey ?? Ani_E._DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
+                Ani_E.processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+            }
+        }
+        
+        public void CloseEffectsOnBodyParts(bool clearParticles)
+        {
+            foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in Ani_E.EffectsOnBodyParts)
+            {
+                if (keyValuePair.Value != null)
+                {
+                    keyValuePair.Value.StopEmissions(clearParticles);
+                }
+            }
+        }               
     }
 }

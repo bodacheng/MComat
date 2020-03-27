@@ -25,6 +25,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             if (instance._HitBox != null)
             {
                 HitBoxLogger.Instance.AddLog(instance._HitBox.GeneratedByStateKey,instance._HitBox.HitBoxLifeEnding);
+                instance._HitBox.GeneratedByStateKey = null;
             }
         }
         instance.gameObject.SetActive(false);

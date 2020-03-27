@@ -87,7 +87,6 @@ public class Decompositioner : MonoBehaviour {
         if (DestructionDelay >= 0)
         {
             Counter = 0;
-
         }
     }
 
@@ -254,10 +253,11 @@ public class Decompositioner : MonoBehaviour {
         switch (_HitTriggerEvent)
         {
             case "expolosion":
-                BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
+                BO_Ani_E.hiddenMethods.BlastAttack_core(transform.position,transform.rotation,null,2, _HitBox.GeneratedByStateKey);
                 break;
             case "explosionlighteningball_big":
-                BO_Ani_E.MagicForward_Special("explosionlighteningball_big", transform);
+                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big", 
+                    transform.position,transform.rotation,0,_HitBox.GeneratedByStateKey);
                 break;
         }
     }
@@ -267,16 +267,18 @@ public class Decompositioner : MonoBehaviour {
         switch (defined_event_code)
         {
             case "expolosion":
-                BO_Ani_E.BlastAttack(2,transform.position,transform.rotation);
+                BO_Ani_E.hiddenMethods.BlastAttack_core(transform.position,transform.rotation,null,2,_HitBox.GeneratedByStateKey);
                 break;
             case "bulletForward":
-                BO_Ani_E.Bullet_shoot_from_Transform(hitBoxSubEventManger.transform, 1,10);
+                BO_Ani_E.hiddenMethods.Bullet_shoot_from_Core(hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation, 1,10,_HitBox.GeneratedByStateKey);
                 break;
             case "groundroundblast":
-                BO_Ani_E.MagicForward_Special("groundroundblast", hitBoxSubEventManger.transform);
+                BO_Ani_E.hiddenMethods.MagicForward_core("groundroundblast", 
+                hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
                 break;
             case "explosionlighteningball_big":
-                BO_Ani_E.MagicForward_Special("explosionlighteningball_big", hitBoxSubEventManger.transform);
+                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big",
+                hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
                 break;
         }
     }
