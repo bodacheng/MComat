@@ -50,10 +50,6 @@ public class HitBoxesProcesser : MonoBehaviour
                 processingDecompositioners[i].Life();
             }
         }
-    }
-
-    void LateUpdate()
-    {
         processingDecompositioners.Clear();
     }
 

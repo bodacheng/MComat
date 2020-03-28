@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 //章节这个概念并不存在。这个模块是你提供那么几个关卡的序号，然后它把那几个关卡给读出来。
 namespace mainMenu
@@ -10,25 +11,27 @@ namespace mainMenu
     {
         public Canvas _ArcadeCanvas;
         public RectTransform ButtonsContainer;
+        
+        [Space(7)]
+        [Header("Stage no input")]
+        public InputField _StageNoInput;
+        
+        [Space(7)]
+        [Header("ViewScroll")]
+        public Scrollbar _Scrollbar;
+
+        [Space(7)]
+        [Header("StageButtonPretab")]
+        public StageButton pretab;
 
         [Space(7)]
         [Header("preparingScene")]
         public SingleThreadProcesser mainProcessRunner;
-
-        [Space(7)]
-        [Header("StagesButtonManager")]
-        public ListPositionCtrl ListPositionCtrl;
-        
-        [Space(7)]
-        [Header("StagesButtonManager")]
-        public StageIconObjectBank StageIconObjectBank;
-        
-        [Space(7)]
-        [Header("StageButtonPretab")]
-        public ListBox StageButtonPretab;
-        
+                        
         public static ArcadeManager Instance;
 
+        List<StageButton> stageButtons = new List<StageButton>();
+        
         void Awake()
         {
             Instance = this;
@@ -37,46 +40,58 @@ namespace mainMenu
         public void LocalTest()
         {
             List<Object> stageScriptableObjects = Resources.LoadAll("stages", typeof(StageScriptableObject)).ToList();
-            List<StageScriptableObject> temp = new List<StageScriptableObject>();
-            List<ListBox> buttons = new List<ListBox>();
             foreach (Object _object in stageScriptableObjects)
             {
                 StageScriptableObject one = (StageScriptableObject)_object;
-                temp.Add(one);
-                ListBox listBox = Instantiate(StageButtonPretab);
-                listBox.listBoxID = one.LocalFightID;
-                listBox.transform.SetParent(ButtonsContainer);
-                listBox.transform.localScale = new Vector3(1, 1, 1);
-                listBox.title.text = one.battleNameCH;
-                void testbutton()
-                {
-                    Debug.Log("关卡："+ one.battleNameCH);
-                }
-                listBox.button.onClick.AddListener(testbutton);
-                buttons.Add(listBox);
+                StageButton newButton = Instantiate(pretab);
+                newButton.ID = one.LocalFightID;
+                stageButtons.Add(newButton);
+                newButton.text.text = "Stage" + one.LocalFightID.ToString();
             }
-            
-            for (int i = 0; i < buttons.Count; i++)
+            stageButtons = OrderStagesButtonByNo(stageButtons);
+            for (int i = 0; i < stageButtons.Count; i++)
             {
-                Debug.Log(buttons[i].listBoxID+ " hehe ");
+                stageButtons[i].transform.SetParent(ButtonsContainer);
             }
-            ListPositionCtrl.listBoxes = buttons.ToArray();
-            ListPositionCtrl.Initialize();
-            StageIconObjectBank.Initialize(temp);
-            foreach (ListBox _ListBox in ListPositionCtrl.listBoxes)
-            {
-                _ListBox.Initialize(ListPositionCtrl);
-            }
+            VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
+            ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x,
+            (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * stageButtons.Count);
         }
-               
+        
+        public void JumpTo()
+        {
+            float value = (float)(int.Parse(_StageNoInput.text)) / (float)stageButtons.Count;
+            Debug.Log("to value:"+value);
+            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x,value,1f);
+        }
+        
         public void Clear()
         {
-            ListPositionCtrl.listBoxes = null;
-            StageIconObjectBank.Clear();
             foreach (Transform child in ButtonsContainer) 
             {
                 Destroy(child.gameObject);
             }
+        }
+        
+        // 等级升序降序？
+        readonly int order = 0;//0:升序 1:降序 //是否按type排序
+        List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
+        {
+            for (int i = 0; i < originBoxes.Count - 1; i++)
+            {
+                for (int j = 0; j < originBoxes.Count - 1 - i; j++)
+                {
+                    int no1 = originBoxes[j].ID;
+                    int no2 = originBoxes[j + 1].ID;
+                    if (order == 1 ? no1 > no2 : no1 < no2)
+                    {
+                        StageButton temp = originBoxes[j];
+                        originBoxes[j] = originBoxes[j + 1];
+                        originBoxes[j + 1] = temp;
+                    }
+                }
+            }
+            return originBoxes;
         }
         
         //public IEnumerator LoadChapterPage(List<string> stagesIDs)

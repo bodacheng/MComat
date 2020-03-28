@@ -10,7 +10,7 @@ namespace Soul
         public List<Behavior_Transition_Set> SRTListForCasualTransitionbuttonRefresh = new List<Behavior_Transition_Set>();        
         List<Behavior_Transition_Set> avaliable_casual_Transitions = new List<Behavior_Transition_Set>();
         List<string> avaliable_forced_Transitions = new List<string>();
-        
+                      
         public void BehaviourTransitionEngine()
         {
             avaliable_casual_Transitions.Clear();
@@ -71,6 +71,27 @@ namespace Soul
             #region 决策制定
             controller.PlayerControll(this,avaliable_casual_Transitions,!((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
             #endregion
+            
+            CalAdviceDistanceFromEnemy();
+        }
+
+        float min,max;
+        private void CalAdviceDistanceFromEnemy()
+        {
+            min = 9999f;
+            max = 0f;
+            for (int index = 0; index < avaliable_casual_Transitions.Count; index++)
+            {
+                if (min > avaliable_casual_Transitions[index].AITriggerDistanceMin)
+                    min = avaliable_casual_Transitions[index].AITriggerDistanceMin;
+                if (max < avaliable_casual_Transitions[index].AITriggerDistanceMax)
+                    max = avaliable_casual_Transitions[index].AITriggerDistanceMax;
+            }
+        }
+        
+        public float Test()
+        {
+            return (min + max) / 2;
         }
     }
 }

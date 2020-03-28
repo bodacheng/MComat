@@ -20,7 +20,7 @@ public class Move_State : Behavior
     Quaternion screenMovementSpace;
     Vector3 screenMovementForward, screenMovementRight;
     List<GameObject> EnemiesByDistance;
-
+    
     enum AIMoveDirection
     {
         stay = 0,
@@ -30,19 +30,19 @@ public class Move_State : Behavior
         towardsEnemyLeft = 7,
         RunAwayFromThreat = 5
     }
-
+    
     public Move_State(AIMoveStyle aiMoveStyle, float speed, float time_limit)
 	{
         _AIMoveStyle = aiMoveStyle;
         this.speed = speed;
 		this.time_limit = time_limit;		
 	}
-
+    
 	public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
 	}
-
+    
     bool Timeup()
     {
         switch (moveDirection)
@@ -86,15 +86,15 @@ public class Move_State : Behavior
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
     {
-        this._Weapon_Animation_Events.ClearMarkerManagers();
-        this.Sensor.ContinuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
+        _Weapon_Animation_Events.ClearMarkerManagers();
+        Sensor.ContinuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
         Animation_Manger.PlayLayerAnim(null,true,0.05f);
-        // 从这到底下那么也就是AI模式决定第一轮moveDirection和use_direction的
-        // 而moveDirection是用来引导use_direction的
+        // AI模式决定第一轮moveDirection和use_direction的
+        // moveDirection是用来引导use_direction的
         DecideDirection();
         time_counter = 0f;
-        this.mainCam = CameraManager._camera.transform;
-        this.personality_Events.CloseAllPersonalityEffects();
+        mainCam = CameraManager._camera.transform;
+        personality_Events.CloseAllPersonalityEffects();
     }
 
     void DecideDirection()
@@ -170,8 +170,7 @@ public class Move_State : Behavior
     }
 
     int whereToGo;
-    float angle;
-    Vector3 newDir;
+    Vector3 targetPos;
     Transform closetEnemyT;
     public void _f_State_Update_SP()
     {
@@ -208,9 +207,9 @@ public class Move_State : Behavior
             case AIMoveDirection.backTowardsEnemy:
                 break;
             case AIMoveDirection.towardsEnemy:
-                newDir = use_direction += (closetEnemyT.position - gameObject.transform.position).normalized;
-                angle = Vector3.Angle(use_direction, newDir);
-                use_direction = Vector3.Lerp(use_direction, newDir,angle / 45 * Time.deltaTime);
+                targetPos = closetEnemyT.position + (gameObject.transform.position - closetEnemyT.position).normalized * _AIStateRunner.Test();
+                targetPos.y = 0;
+                use_direction = targetPos - gameObject.transform.position;                
                 // 其实use_direction的计算非常恶心，因为实时算朝向特定敌人的话会产生个抖动问题，上面的结果效果差强人意，但比底下这些强。
                 // 底下这些是一些失败的例子
                 //use_direction = Quaternion.Euler(0, angle * Time.fixedDeltaTime / (Time.fixedDeltaTime + 1f), 0) * use_direction;
@@ -224,13 +223,13 @@ public class Move_State : Behavior
         Collider[] EnemyAndTeammateBetweenMeAndEnemy = Sensor.EnemyAndTeammateBetweenMeAndEnemy();
         if (EnemyAndTeammateBetweenMeAndEnemy != null)
         {
-            newDir = (EnemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
+            Vector3 temp = (EnemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
             (gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized ;
-            newDir.y = 0;
-            use_direction = Vector3.RotateTowards(use_direction, newDir, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
+            temp.y = 0;
+            use_direction = Vector3.RotateTowards(use_direction, temp, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
         }
     }
-
+    
     float h;
     float v;
     Vector3 vel;

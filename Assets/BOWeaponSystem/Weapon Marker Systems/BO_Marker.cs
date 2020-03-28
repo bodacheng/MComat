@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace HittingDetection
 {
@@ -66,6 +67,13 @@ namespace HittingDetection
             }
         }
 
+        float temp;
+        public Vector3 HitPointCal(Vector3 colliderCenterPosition)
+        {
+            temp = Mathf.Clamp((colliderCenterPosition - transform.position).magnitude,0,radius);
+            return transform.position + (colliderCenterPosition - transform.position).normalized * temp;
+        }
+        
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.white;

@@ -70,7 +70,9 @@ namespace HittingDetection
                                             _Used_Targets.Add(TheS._ownerFightAttriCalReference.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
                                             _ShiledHitPositions.Add(_hits[hit_target_index].point);
                                             if (_ShiledHitPositions.Count > 0)
+                                            {
                                                 TheS.PassHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
+                                            }
                                             _ShiledHitPositions.Clear();
                                         }
                                     }
@@ -270,7 +272,8 @@ namespace HittingDetection
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
-                                        _StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);
+                                        _StartPoint = ((BO_Marker)_markers[i]).HitPointCal(BallDetectHitPool[hit_target_index].transform.position);
+                                        //_StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);
                                         //这个地方不能用ClosestPoint。这里存在unity官方bug。
                                         //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;
                                         //为了打击特效看起来更接近肉体 向里切一下。

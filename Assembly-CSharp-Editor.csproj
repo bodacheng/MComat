@@ -105,12 +105,6 @@
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCTouchPadInspector.cs" />
     <Compile Include="Assets\EasyUIAnimator\Scripts\Editor\UIFixedAnimationEditor.cs" />
     <Compile Include="Assets\EasyUIAnimator\Scripts\Editor\UIParallelAnimationEditor.cs" />
-    <Compile Include="Assets\OSA\Scripts\Editor\BaseOSAWindow.cs" />
-    <Compile Include="Assets\OSA\Scripts\Editor\CEditor.cs" />
-    <Compile Include="Assets\OSA\Scripts\Editor\CreateOSAWindow.cs" />
-    <Compile Include="Assets\OSA\Scripts\Editor\CWiz.cs" />
-    <Compile Include="Assets\OSA\Scripts\Editor\InitOSAWindow.cs" />
-    <Compile Include="Assets\OSA\Scripts\Editor\MenuItems.cs" />
     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_BlurEditor.cs" />
     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_ColorSwapEditor.cs" />
     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_DesaturateEditor.cs" />

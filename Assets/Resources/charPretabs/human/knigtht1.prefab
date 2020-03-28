@@ -9217,12 +9217,20 @@ Animator:
   m_GameObject: {fileID: 693592055122505705}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4455a8655fb16432ea8bb27341648f40, type: 3}
-  m_Controller: {fileID: 9100000, guid: f6df8bfec5dac42c6a42e24e820cadb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2d7761215ca3d48c289a83579d70a537, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'Bip001 Spine1'\n\tTransform 'Bip001 Head'\n\tTransform
+    'Bip001 Neck'\n\tTransform 'Bip001 Spine'\n\tTransform 'Bip001'\n\tTransform 'Bip001
+    Spine2'\n\tTransform 'Bip001 Pelvis'\n\tTransform 'Bip001 Spine1'\n\tTransform
+    'Bip001 Head'\n\tTransform 'Bip001 Neck'\n\tand more ...\n\tFrom animation clip
+    '\u75DB\u82E6'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip '\u95ED\u773C'\n\tFrom
+    animation clip '\u5403\u60CA'\n\tFrom animation clip '\u6124\u6012'\n\tFrom animation
+    clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
