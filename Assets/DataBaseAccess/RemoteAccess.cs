@@ -61,7 +61,6 @@ namespace dataAccess
                     Debug.Log("角色定义信息错误。monsterId：" + accountCharacterInfo.monsterId);
                     return null;
                 }
-                nineAndTwo.level = characterDataInfo.level;
                 for (int i = 0; i < targets.Count; i++)
                 {
                     switch(targets[i].inUsingSkillSlot)

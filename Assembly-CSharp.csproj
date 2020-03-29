@@ -92,9 +92,11 @@
     <Compile Include="Assets\AI\Soul\BehaviorRunner_unused.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunnerGUI.cs" />
     <Compile Include="Assets\AI\Soul\BuffsRunner.cs" />
-    <Compile Include="Assets\AI\Soul\NineAndTwo.cs" />
     <Compile Include="Assets\AI\Soul\Sensor.cs" />
     <Compile Include="Assets\AI\Soul\SkillCancelFlag.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_INI.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_Tools.cs" />
     <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\Animation_Manger.cs" />
     <Compile Include="Assets\Ani_Calling_Sys\Animation_Manger_CachLoad.cs" />
