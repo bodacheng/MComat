@@ -22,17 +22,17 @@ public partial class NineAndTwo
         CConfig2 = C2skillid != null ? FixConfigByReference(C2skillid) : new SkillConfig();
         CConfig3 = C3skillid != null ? FixConfigByReference(C3skillid) : new SkillConfig();
 
-        A1 = AConfig1 != null ? FromConfigToSTS(AConfig1) : null;
-        A2 = AConfig2 != null ? FromConfigToSTS(AConfig2) : null;
-        A3 = AConfig3 != null ? FromConfigToSTS(AConfig3) : null;
+        A1 = AConfig1 != null ? FromConfigToSTS(AConfig1, A1level) : null;
+        A2 = AConfig2 != null ? FromConfigToSTS(AConfig2, A2level) : null;
+        A3 = AConfig3 != null ? FromConfigToSTS(AConfig3, A3level) : null;
 
-        B1 = BConfig1 != null ? FromConfigToSTS(BConfig1) : null;
-        B2 = BConfig2 != null ? FromConfigToSTS(BConfig2) : null;
-        B3 = BConfig3 != null ? FromConfigToSTS(BConfig3) : null;
+        B1 = BConfig1 != null ? FromConfigToSTS(BConfig1, B1level) : null;
+        B2 = BConfig2 != null ? FromConfigToSTS(BConfig2, B2level) : null;
+        B3 = BConfig3 != null ? FromConfigToSTS(BConfig3, B3level) : null;
 
-        C1 = CConfig1 != null ? FromConfigToSTS(CConfig1) : null;
-        C2 = CConfig2 != null ? FromConfigToSTS(CConfig2) : null;
-        C3 = CConfig3 != null ? FromConfigToSTS(CConfig3) : null;
+        C1 = CConfig1 != null ? FromConfigToSTS(CConfig1, C1level) : null;
+        C2 = CConfig2 != null ? FromConfigToSTS(CConfig2, C2level) : null;
+        C3 = CConfig3 != null ? FromConfigToSTS(CConfig3, C3level) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(moveType,canDefend,rushType);
@@ -276,7 +276,7 @@ public partial class NineAndTwo
     }
     
     // 这个应该是所谓技能等级的着手点
-    Behavior_Transition_Set FromConfigToSTS(SkillConfig _SC)
+    Behavior_Transition_Set FromConfigToSTS(SkillConfig _SC, int level)
     {
         if (_SC.RECORD_ID != null)
         {
@@ -301,7 +301,7 @@ public partial class NineAndTwo
         {
             STS = new Behavior_Transition_Set(_SC.REAL_NAME,
                                            _SC.STATE_TYPE,
-                                           _SC.ATTACK_WEIGHT,
+                                           ATCal(_SC.ATTACK_WEIGHT,level),
                                            _SC.AI_MIN_DIS,
                                            _SC.AI_MAX_DIS,
                                             null,
@@ -313,6 +313,12 @@ public partial class NineAndTwo
             return STS;
         }
         return STS;
+    }
+    
+    // 这个的计算方式真的有点粗暴。。。按理说这种数值工作在游戏公司里是有专门的人一个技能一个技能专门制定
+    float ATCal(float originAT,int level)
+    {
+        return originAT * level;
     }
     
     SkillConfig FixConfigByReference(string skillid)
