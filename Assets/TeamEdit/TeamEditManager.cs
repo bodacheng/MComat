@@ -26,7 +26,7 @@ public class TeamEditManager : MonoBehaviour
 
     public IEnumerator MonsterIConButton(string monsterlocalID,int targetPos)
     {
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(monsterlocalID);
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(monsterlocalID);
         yield return getchar;
         GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
         if (_one == null)
@@ -68,7 +68,7 @@ public class TeamEditManager : MonoBehaviour
         {
             GetMonsterOfPlayerDetailModel _one;
             CharacterResourceInfo characterResourceInfo = null;
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(PositionMonsterOfPlayerId);
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PositionMonsterOfPlayerId);
             yield return getchar;
             if (getchar.Current == null)
                 yield break;

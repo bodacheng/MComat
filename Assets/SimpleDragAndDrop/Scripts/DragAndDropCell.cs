@@ -57,9 +57,9 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         switch(targetSlot._DragAndDropCell.cellPhase)//drag目标slot的phase
         {
             case CellPhase.NineSlotCell_empty:
-                if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
+                if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                 {
-                    string monsterID = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+                    string monsterID = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
                     if (TheNineSlot.Instance.CheckNineSlotPointsAfterOneStoneRemoved(monsterID, itemFromStoneBox._SkillConfigOfSkillStone.RECORD_ID) < 0)
                     {
                         Debug.Log("其他角色卸载此技能石会导致点数失衡，不予操作");
@@ -75,9 +75,9 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                 cellInSkillStoneBox.UpdateMyItem();
             break;
             case CellPhase.NineSlotCell_full:
-                if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
+                if (AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                 {
-                    string monsterID = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+                    string monsterID = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
                     if (TheNineSlot.Instance.CheckNineSlotPointsAfterOneStoneRemoved(monsterID, itemFromStoneBox._SkillConfigOfSkillStone.RECORD_ID) < 0)
                     {
                         Debug.Log("其他角色卸载此技能石会导致点数失衡，不予操作");
@@ -313,20 +313,14 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         {
             if (gameObject.activeSelf)
             {
-                if (myDadItem != null && myDadItem.SkillStoneOfPlayerId != null)
-                {
-                    _charIcon.gameObject.SetActive(true);
-                    ShowUsingCharIcon(myDadItem.SkillStoneOfPlayerId,_charIcon);
-                }else{
-                    _charIcon.gameObject.SetActive(false);
-                }
+                ShowUsingCharIcon(myDadItem,_charIcon);
             }
         }
     }
 
-    void ShowUsingCharIcon(string SkillStoneOfPlayerId, HeroIcon targetIcon)
+    void ShowUsingCharIcon(DragAndDropItem dragAndDropItem, HeroIcon targetIcon)
     {
-        _SingleThreadProcesser.TriggerMainProcess(SkillStonesBox.Instance.ShowUsingStoneCharacter(SkillStoneOfPlayerId, targetIcon));
+        _SingleThreadProcesser.TriggerMainProcess(SkillStonesBox.Instance.ShowUsingChar(dragAndDropItem, targetIcon));
     }
 
     /// <summary>

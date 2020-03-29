@@ -157,7 +157,7 @@ namespace dataAccess
 
         public IEnumerator UpdateCharJsonSaveData(GetMonsterOfPlayerDetailModel _CharacterDataInfo)
         {
-            IEnumerator getchar = Instance.GetAccountCharacterInfo(_CharacterDataInfo.monsterOfPlayerId);
+            IEnumerator getchar = Instance.GetAccountCharInfo(_CharacterDataInfo.monsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (before == null)
@@ -169,7 +169,7 @@ namespace dataAccess
 
         public IEnumerator PlusExpForAccountCharLocalSaveData(string charlocalID, int plusExp)
         {
-            IEnumerator getchar = Instance.GetAccountCharacterInfo(charlocalID);
+            IEnumerator getchar = Instance.GetAccountCharInfo(charlocalID);
             yield return getchar;
             GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
 

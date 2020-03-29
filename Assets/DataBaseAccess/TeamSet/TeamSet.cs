@@ -79,7 +79,7 @@ namespace dataAccess
             int membercount = 0;
             for (int i = 0; i < 4; i++)
             {
-                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(positionLocalCharKeySet.GetPositionMonsterOfPlayerId(i));
+                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(positionLocalCharKeySet.GetPositionMonsterOfPlayerId(i));
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (myfighter != null)

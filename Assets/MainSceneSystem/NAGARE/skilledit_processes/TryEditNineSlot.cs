@@ -53,7 +53,7 @@ public class TryEditNineSlot : MainSceneProcess
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         this._MemberDetail.focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
         yield return SkillEditorButtonBehaviour(this._MemberDetail.focusingCharacterDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
@@ -114,7 +114,7 @@ public class TryEditNineSlot : MainSceneProcess
     public IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion()
     {        
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
         CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo);

@@ -77,7 +77,7 @@ namespace mainMenu
 
         public static IEnumerator AddOneNewIcon(string monsterOfPlayerId)
         {
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(monsterOfPlayerId);
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(monsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel targetingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (targetingCharacterDataInfo == null)

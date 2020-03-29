@@ -179,11 +179,10 @@ namespace mainMenu
                 if (dragAndDropItem != null)
                 {
                     dragAndDropItem.transform.SetParent(stonesTempContainer);
-                    cellPair.Value.UpdateMyItem(); //单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
                 }
+                cellPair.Value.UpdateMyItem(); // 被拔下石头的格子需要把使用中角色头像关闭。单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
             }
             List<String> SkillStonesOfTypeAndExType = MySkillStonesReader.TargetStonesFromOfAccount(type, exType, close, near, far, outrange);
-
             if (SkillStonesOfTypeAndExType.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
             {
                 Debug.Log("错误：待显示技能石数量超过了盒子容量");
@@ -200,7 +199,7 @@ namespace mainMenu
                     {
                         CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                         _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
-                        _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                        _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                         cellindex++;
                     }
                     else
@@ -215,7 +214,7 @@ namespace mainMenu
                     MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
                     CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
                     _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
-                    _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                    _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }
             }
@@ -248,7 +247,7 @@ namespace mainMenu
                     yield break;
                 }
             }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             IEnumerator process = null;
             switch (ResourceLoadingSetting.IconLoadingMode)

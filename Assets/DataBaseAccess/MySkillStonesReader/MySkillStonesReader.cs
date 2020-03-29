@@ -46,7 +46,7 @@ namespace dataAccess
             return SkillStonesOfTypeAndExType;
         }
         
-        public SkillStoneOfPlayerInfoModel GetSkillStoneOfPlayerInfoModelByMyStoneId(string id)
+        public SkillStoneOfPlayerInfoModel GetStoneOfPlayerInfoModelByMyStoneId(string id)
         {
             return id == null ? null : mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : null;
         }

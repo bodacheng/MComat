@@ -87,16 +87,21 @@ namespace mainMenu
             }
         }
         
-        public IEnumerator ShowUsingStoneCharacter(string SkillStoneOfPlayerId, HeroIcon targetIcon)
+        public IEnumerator ShowUsingChar(DragAndDropItem dragAndDropItem, HeroIcon targetIcon)
         {
-            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(SkillStoneOfPlayerId);
+            if (dragAndDropItem == null || dragAndDropItem.SkillStoneOfPlayerId == null)
+            {
+                targetIcon.gameObject.SetActive(false);
+                yield break;
+            }
+            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(dragAndDropItem.SkillStoneOfPlayerId);
             if (SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId == null)
             {
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
             CharacterResourceInfo characterResourceInfo = null;
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (_one == null)
@@ -104,10 +109,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            else
-            {
-                targetIcon.gameObject.SetActive(true);
-            }
+            targetIcon.gameObject.SetActive(true);
             characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
             targetIcon.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
             characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);

@@ -15,9 +15,13 @@ namespace mainMenu
         [Space(7)]
         [Header("Stage no input")]
         public InputField _StageNoInput;
-        
+
         [Space(7)]
-        [Header("ViewScroll")]
+        [Header("ScrollRect")]
+        public ScrollRect _ScrollRect;
+           
+        [Space(7)]
+        [Header("ViewScrollBar")]
         public Scrollbar _Scrollbar;
 
         [Space(7)]
@@ -60,9 +64,20 @@ namespace mainMenu
         
         public void JumpTo()
         {
-            float value = (float)(int.Parse(_StageNoInput.text)) / (float)stageButtons.Count;
-            Debug.Log("to value:"+value);
-            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x,value,1f);
+            int targetNum = int.Parse(_StageNoInput.text);
+            float targetScrollbarValue;
+            if (targetNum <= 3)//5 是现在scrollview里所最多能显示的关卡按钮数量
+            {
+                targetScrollbarValue = 0;
+            }else{
+                VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
+                // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
+                
+                targetScrollbarValue = 
+                ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (targetNum - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
+                / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
+            }
+            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x,targetScrollbarValue,0.5f);
         }
         
         public void Clear()

@@ -27,7 +27,7 @@ public class TryEditALines : MainSceneProcess
         if (_StageScriptableObject != null)
             TuroialFight = LocalFight.LoadOneLocalFightByScript(_StageScriptableObject.Script);
             
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo("1");
+        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
         _MemberDetail.focusingCharacterDataInfo = myfighter;

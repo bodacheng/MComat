@@ -214,7 +214,7 @@ namespace mainMenu
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public IEnumerator SetMemberDetailSystemFocusingCharacter(string localID)
         {
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharacterInfo(localID);
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
             yield return getchar;
             focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
             yield break;

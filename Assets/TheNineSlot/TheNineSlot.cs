@@ -453,7 +453,7 @@ namespace mainMenu
                     if (allSlot[i].OnSlotStonelocalID != allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId) 
                     {
                         // 将原先九宫格对应位置的技能石卸载。即将其inUsingMonsterOfPlayerId变为null。
-                        SkillStoneOfPlayerInfoModel old_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(allSlot[i].OnSlotStonelocalID);
+                        SkillStoneOfPlayerInfoModel old_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(allSlot[i].OnSlotStonelocalID);
                         if (old_skillStoneOfPlayerInfoModel != null)
                         {
                             if (!usingStones.Contains(old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId)) // 代表原来那个位置上有个技能石，但现在它在技能背包，这轮技能编辑它是要被卸载到背包里去。
@@ -467,7 +467,7 @@ namespace mainMenu
                             }
                         }
                         // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
-                        SkillStoneOfPlayerInfoModel new_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
+                        SkillStoneOfPlayerInfoModel new_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
                         if (new_skillStoneOfPlayerInfoModel != null)
                         {
                             new_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
@@ -476,7 +476,7 @@ namespace mainMenu
                         }
                     }
                 }else{
-                    SkillStoneOfPlayerInfoModel old_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(allSlot[i].OnSlotStonelocalID);
+                    SkillStoneOfPlayerInfoModel old_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(allSlot[i].OnSlotStonelocalID);
                     if (old_skillStoneOfPlayerInfoModel != null)// 旧技能石被卸下
                     {
                         if (!usingStones.Contains(old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId))// 代表卸载的技能石头

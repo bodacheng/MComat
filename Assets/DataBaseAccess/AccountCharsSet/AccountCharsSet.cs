@@ -32,7 +32,7 @@ namespace dataAccess
 
         public IEnumerator UpdateMyCharInfo(GetMonsterOfPlayerDetailModel characterDataInfo)
         {
-            IEnumerator getchar = GetAccountCharacterInfo(characterDataInfo.monsterOfPlayerId);
+            IEnumerator getchar = GetAccountCharInfo(characterDataInfo.monsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (targetAccountCharacterInfo == null)
@@ -84,7 +84,7 @@ namespace dataAccess
             }
             foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValuePair in AccountCharacterInfoListObjectsDictionary)
             {
-                IEnumerator getchar = Instance.GetAccountCharacterInfo(keyValuePair.Value.monsterOfPlayerId);
+                IEnumerator getchar = Instance.GetAccountCharInfo(keyValuePair.Value.monsterOfPlayerId);
                 yield return getchar;
             }
             yield break;
@@ -96,7 +96,7 @@ namespace dataAccess
         {
             if (AccountSet.instance._PlayerAccountInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
             {
-                IEnumerator getchar = GetAccountCharacterInfo(after.monsterOfPlayerId);
+                IEnumerator getchar = GetAccountCharInfo(after.monsterOfPlayerId);
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
 
@@ -139,7 +139,7 @@ namespace dataAccess
             }
         }
 
-        public IEnumerator GetAccountCharacterInfo(string monsterlocalid)
+        public IEnumerator GetAccountCharInfo(string monsterlocalid)
         {
             if (monsterlocalid == null)
             {

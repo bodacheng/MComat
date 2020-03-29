@@ -114,7 +114,7 @@ namespace mainMenu
             Showname.text = _SkillConfigOfSkillStone.RECORD_ID;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
-            currentstone = MySkillStonesReader.Instance.GetSkillStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
+            currentstone = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
             skill_level_levelup.text = "LV:" + (currentstone.level ?? "1");
             skill_level_info.text = "LV:" + (currentstone.level ?? "1");
             RefreshSkillLevelUpModule();
