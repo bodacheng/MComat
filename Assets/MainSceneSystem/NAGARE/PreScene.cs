@@ -259,7 +259,8 @@ namespace mainMenu
                             var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
                             {
                                 skillStoneOfPlayerId = string.Format("{0:D20}", i),
-                                skillId = _pair.Value.RECORD_ID
+                                skillId = _pair.Value.RECORD_ID,
+                                level = 1.ToString()
                             };
                             yield return SkillStonesBox.Instance.GenerateOneStone(skillStoneOfPlayerInfoModel);
                             i++;

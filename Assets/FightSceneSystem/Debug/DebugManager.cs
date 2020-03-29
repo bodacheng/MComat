@@ -243,7 +243,7 @@ public class DebugManager : MonoBehaviour {
                                         case ResourceLoadMode.CachAB:
                                             StartCoroutine(
                                                 _CharSetManager.CreateCharacterFromABByCach(
-                                                    _CharacterResourceInfo.GetASampleCharacterDataInfo(localID),
+                                                    _CharacterResourceInfo.GetTestCharConfig(localID),
                                                     AIScriptName.text,
                                                     Zokusei,
                                                     _CharacterResourceInfo.SPECIAL_ZOKUSEI,
@@ -254,7 +254,7 @@ public class DebugManager : MonoBehaviour {
                                         case ResourceLoadMode.StreamingAssetAB:
                                             StartCoroutine(
                                                 _CharSetManager.CreateCharacterFromABByStreamingAssets(
-                                                    _CharacterResourceInfo.GetASampleCharacterDataInfo(localID),
+                                                    _CharacterResourceInfo.GetTestCharConfig(localID),
                                                     AIScriptName.text,
                                                     Zokusei,
                                                     _CharacterResourceInfo.SPECIAL_ZOKUSEI,

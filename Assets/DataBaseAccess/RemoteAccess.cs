@@ -66,32 +66,41 @@ namespace dataAccess
                     switch(targets[i].inUsingSkillSlot)
                     {
                         case "1":
-                        nineAndTwo.A1skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.A1skillid = targets[i].skillId;
+                            nineAndTwo.A1level = int.Parse(targets[i].level);
+                        break;
                         case "2":
-                        nineAndTwo.A2skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.A2skillid = targets[i].skillId;
+                            nineAndTwo.A2level = int.Parse(targets[i].level);
+                        break;
                         case "3":
-                        nineAndTwo.A3skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.A3skillid = targets[i].skillId;
+                            nineAndTwo.A3level = int.Parse(targets[i].level);
+                        break;
                         case "4":
-                        nineAndTwo.B1skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.B1skillid = targets[i].skillId;
+                            nineAndTwo.B1level = int.Parse(targets[i].level);
+                        break;
                         case "5":
-                        nineAndTwo.B2skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.B2skillid = targets[i].skillId;
+                            nineAndTwo.B2level = int.Parse(targets[i].level);
+                        break;
                         case "6":
-                        nineAndTwo.B3skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.B3skillid = targets[i].skillId;
+                            nineAndTwo.B3level = int.Parse(targets[i].level);
+                        break;
                         case "7":
-                        nineAndTwo.C1skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.C1skillid = targets[i].skillId;
+                            nineAndTwo.C1level = int.Parse(targets[i].level);
+                        break;
                         case "8":
-                        nineAndTwo.C2skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.C2skillid = targets[i].skillId;
+                            nineAndTwo.C2level = int.Parse(targets[i].level);
+                        break;
                         case "9":
-                        nineAndTwo.C3skillid = targets[i].skillId;
-                            break;
+                            nineAndTwo.C3skillid = targets[i].skillId;
+                            nineAndTwo.C3level = int.Parse(targets[i].level);
+                        break;
                     }
                 }
                 nineAndTwo.moveType = _TempCharacterResourceInfo.moveType;
