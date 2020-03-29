@@ -13,8 +13,8 @@ using System.IO;
 public class LocalFight
 {
     [System.NonSerialized]
-    public MultiDictionary<int, int, CharacterDataInfo> HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
-    public MultiDictionary<int, int, CharacterDataInfo> EnemySets = new MultiDictionary<int, int, CharacterDataInfo>();
+    public MultiDictionary<int, int, CharDataInfo> HeroSets = new MultiDictionary<int, int, CharDataInfo>();
+    public MultiDictionary<int, int, CharDataInfo> EnemySets = new MultiDictionary<int, int, CharDataInfo>();
     
     //public positionLocalCharKeySet4V4Mode _positionLocalCharKeySet4V4Mode;// 这个变量的另外一个存在地点是玩家存档，用以代表，保存所设置的角色在战斗中的站位信息，
     //在敌人队伍的战斗适配信息中这个东西和玩家那边是保持一致。为了保证站位正确，首先LocalFight中Enemies的localid要保证不重复，并且要求_positionLocalCharKeySet4V4Mode也不出错

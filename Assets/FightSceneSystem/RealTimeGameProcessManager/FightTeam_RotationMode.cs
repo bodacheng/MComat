@@ -184,7 +184,7 @@ public class FightTeam_RotationMode : FightTeam
                 ReadyForNextMemberOnTheShow(a_char);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);           
-            CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
+            CharDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             if (characterDataInfo == null)
             {
                 Debug.Log("角色信息字典严重错误");

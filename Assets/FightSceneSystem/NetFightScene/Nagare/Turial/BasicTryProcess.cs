@@ -39,7 +39,7 @@ public class BasicTryProcess : NagareProcess
     IDictionary<Team, List<Data_Center>> TeamDeadMemberDictionary = new Dictionary<Team, List<Data_Center>>();
     List<Transform> watchetargets = new List<Transform>();
 
-    CharacterDataInfo adamInfo;
+    CharDataInfo adamInfo;
     Data_Center Adam, Guard;
     
     IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
@@ -90,7 +90,7 @@ public class BasicTryProcess : NagareProcess
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(before);
+        CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(before);
         adamInfo = characterDataInfo;
         yield break;
     }

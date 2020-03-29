@@ -94,8 +94,8 @@ public class TryEditALines : MainSceneProcess
             };
             if (this.TuroialFight != null)
             {
-                CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(_CharacterDataInfo);
-                this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharacterDataInfo>();
+                CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(_CharacterDataInfo);
+                this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
                 this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
             }
             else

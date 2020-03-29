@@ -9,7 +9,7 @@ public class FightTeam : MonoBehaviour
     public TeamMode TeamMode;
     
     public MultiDictionary<int, int, Data_Center> teamMembers = new MultiDictionary<int, int, Data_Center>();
-    public IDictionary<Data_Center, CharacterDataInfo> CharacterDataInfoReference = new Dictionary<Data_Center, CharacterDataInfo>();
+    public IDictionary<Data_Center, CharDataInfo> CharacterDataInfoReference = new Dictionary<Data_Center, CharDataInfo>();
     public TeamConfig teamConfig;
     
     public RectTransform sideIconsContainer;
@@ -59,7 +59,7 @@ public class FightTeam : MonoBehaviour
     }
         
     // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-    public IEnumerator Instantiate(MultiDictionary<int, int, CharacterDataInfo> ChracterSets,float HP)
+    public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> ChracterSets,float HP)
     {
         yield return CharacterResourceLoad(ChracterSets);
         InstantiateCharsIconsAndFloatHPBar();
@@ -125,13 +125,13 @@ public class FightTeam : MonoBehaviour
     {
     }
     
-    public IEnumerator CharacterResourceLoad(MultiDictionary<int, int, CharacterDataInfo> MembersSets)
+    public IEnumerator CharacterResourceLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
     {
         foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
         {
             foreach (int key in keys.Value)
             {
-                CharacterDataInfo _one = MembersSets.Get(keys.Key,key);
+                CharDataInfo _one = MembersSets.Get(keys.Key,key);
                 IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
                 yield return character_datacenter;
                 Data_Center data_Center = (Data_Center)character_datacenter.Current;
@@ -142,13 +142,13 @@ public class FightTeam : MonoBehaviour
         }
     }
     
-    public IEnumerator CharacterResourceLoadTestMode(MultiDictionary<int, int, CharacterDataInfo> MembersSets)
+    public IEnumerator CharacterResourceLoadTestMode(MultiDictionary<int, int, CharDataInfo> MembersSets)
     {
         foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
         {
             foreach (int key in keys.Value)
             {
-                CharacterDataInfo _one = MembersSets.Get(keys.Key,key);
+                CharDataInfo _one = MembersSets.Get(keys.Key,key);
                 _one._NineAndTwo = new NineAndTwo();
                 IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
                 yield return character_datacenter;

@@ -42,11 +42,11 @@ namespace dataAccess
             }
         }
                 
-        public static CharacterDataInfo GetCharacterDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+        public static CharDataInfo GetCharacterDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
         {
             try
             {
-                CharacterDataInfo characterDataInfo = new CharacterDataInfo
+                CharDataInfo characterDataInfo = new CharDataInfo
                 {
                     ResourceID = accountCharacterInfo.monsterId,
                     monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId,

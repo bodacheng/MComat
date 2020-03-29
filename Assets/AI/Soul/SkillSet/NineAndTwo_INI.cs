@@ -41,7 +41,7 @@ public partial class NineAndTwo
         RConfig = passiveSkillConfigs.RConfig;
         if (DConfig != null)
         {
-            D = FromConfigToSTS(DConfig);
+            D = FromConfigToSTS(DConfig,0);
             D.enterInput = Inputs_defined.Defend;
             D.exitInput = Inputs_defined.Defend_Cancel;
         }else{
@@ -50,7 +50,7 @@ public partial class NineAndTwo
 
         if (MConfig != null)
         {
-            M = FromConfigToSTS(MConfig);
+            M = FromConfigToSTS(MConfig,0);
         }
         else
         {
@@ -59,7 +59,7 @@ public partial class NineAndTwo
         }
         if (RConfig != null)
         {
-            R = FromConfigToSTS(RConfig);
+            R = FromConfigToSTS(RConfig,0);
             R.enterInput = Inputs_defined.Acc;
         }
         else

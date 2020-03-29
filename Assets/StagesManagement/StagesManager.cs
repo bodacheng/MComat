@@ -19,10 +19,10 @@ public class StagesManager : MonoBehaviour
     {
         LocalFight _localFight = new LocalFight();
         
-        MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[] targetValue;
+        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[]));
+            XmlSerializer serializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharDataInfo>.SerializableSets[]));
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 //FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Open);
@@ -30,14 +30,14 @@ public class StagesManager : MonoBehaviour
                 //FileStream.Close();
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    targetValue = serializer.Deserialize(textReader) as MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[];
+                    targetValue = serializer.Deserialize(textReader) as MultiDictionary<int, int, CharDataInfo>.SerializableSets[];
                 }
                 Debug.Log("读取了敌人战斗信息");
             }
             else
             {
                 var reader = new StringReader(Script.text);
-                targetValue = serializer.Deserialize(reader) as MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[];
+                targetValue = serializer.Deserialize(reader) as MultiDictionary<int, int, CharDataInfo>.SerializableSets[];
                 Debug.Log("读取了敌人战斗信息");
             }
             
@@ -68,12 +68,12 @@ public class StagesManager : MonoBehaviour
         }
 
         localFight.EnemySets.ConvertDictionaryToSerializableArray();
-        MultiDictionary<int, int, CharacterDataInfo> UnNullDic = new MultiDictionary<int, int, CharacterDataInfo>();
-        foreach (MultiDictionary<int, int, CharacterDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
+        MultiDictionary<int, int, CharDataInfo> UnNullDic = new MultiDictionary<int, int, CharDataInfo>();
+        foreach (MultiDictionary<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
         {
             for (int i = 0; i < sets.value.Length;i++)
             {
-                List<CharacterDataInfo> unNullValues = new List<CharacterDataInfo>();
+                List<CharDataInfo> unNullValues = new List<CharDataInfo>();
                 if (!String.IsNullOrEmpty(sets.value[i]._Value.ResourceID))
                 {
                     UnNullDic.Set(sets.key1,sets.value[i]._Key2,sets.value[i]._Value);
@@ -83,7 +83,7 @@ public class StagesManager : MonoBehaviour
         UnNullDic.ConvertDictionaryToSerializableArray();
         try
         {
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[]));
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharDataInfo>.SerializableSets[]));
             FileStream FileStream;
             FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
             XmlSerializer.Serialize(FileStream, UnNullDic._SerializableSets);
@@ -101,10 +101,10 @@ public class StagesManager : MonoBehaviour
     {
         LocalFight _localFight = new LocalFight();
         
-        MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[] targetValue;
+        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
-            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharacterDataInfo>.SerializableSets[]>(Script.text);
+            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
             #if UNITY_EDITOR
             string _path = AssetDatabase.GetAssetPath(Script);
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
@@ -133,12 +133,12 @@ public class StagesManager : MonoBehaviour
         
         localFight.EnemySets.ConvertDictionaryToSerializableArray();
         
-        MultiDictionary<int, int, CharacterDataInfo> UnNullDic = new MultiDictionary<int, int, CharacterDataInfo>();
-        foreach (MultiDictionary<int, int, CharacterDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
+        MultiDictionary<int, int, CharDataInfo> UnNullDic = new MultiDictionary<int, int, CharDataInfo>();
+        foreach (MultiDictionary<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
         {
             for (int i = 0; i < sets.value.Length;i++)
             {
-                List<CharacterDataInfo> unNullValues = new List<CharacterDataInfo>();
+                List<CharDataInfo> unNullValues = new List<CharDataInfo>();
                 if (!String.IsNullOrEmpty(sets.value[i]._Value.ResourceID))
                 {
                     UnNullDic.Set(sets.key1,sets.value[i]._Key2,sets.value[i]._Value);

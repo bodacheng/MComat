@@ -75,7 +75,7 @@ namespace dataAccess
         // 下面的函数让阵容配置可以跳格。比方说一个游戏只能入场2人，那么现在在back和right位置有人，其他位置为空，也可顺利以此两人入场。
         public IEnumerator MyTeamMembersByEntryMemberNum(int playerEntryNum, PositionLocalCharKeySet positionLocalCharKeySet)
         {
-            MultiDictionary<int, int, CharacterDataInfo> teamMembers = new MultiDictionary<int, int, CharacterDataInfo>();
+            MultiDictionary<int, int, CharDataInfo> teamMembers = new MultiDictionary<int, int, CharDataInfo>();
             int membercount = 0;
             for (int i = 0; i < 4; i++)
             {
@@ -84,7 +84,7 @@ namespace dataAccess
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (myfighter != null)
                 {
-                    CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(myfighter);
+                    CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(myfighter);
                     teamMembers.Set(0,i,characterDataInfo);
                     membercount += 1;
                     if (membercount == playerEntryNum)

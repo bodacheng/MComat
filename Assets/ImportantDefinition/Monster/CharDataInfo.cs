@@ -4,7 +4,7 @@
 // 这个类本身可以看作是AccountCharacterInfo的“实际体”，它也可以序列化，也可以保存。
 // GetMonsterOfPlayerDetailModel 更侧重玩家信息，以及与远程的交互，而这个类更侧重在游戏里代表一个角色系统性信息。
 [System.Serializable]
-public class CharacterDataInfo
+public class CharDataInfo
 {
     public string monsterOfPlayerId;
     public string ResourceID;
@@ -12,23 +12,23 @@ public class CharacterDataInfo
     public int HP = 500; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。    
     public NineAndTwo _NineAndTwo;//
 
-    public CharacterDataInfo Clone()
+    public CharDataInfo Clone()
     {
-        return (CharacterDataInfo)MemberwiseClone();
+        return (CharDataInfo)MemberwiseClone();
     }
 
-    public CharacterDataInfo DeepCopy()
+    public CharDataInfo DeepCopy()
     {
-        CharacterDataInfo Copy = this.Clone();
+        CharDataInfo Copy = this.Clone();
         Copy._NineAndTwo = Copy._NineAndTwo.DeepCopy();
         return Copy;
     }
 
-    public CharacterDataInfo()
+    public CharDataInfo()
     {
     }
 
-    public CharacterDataInfo(string localID, string ResourceID,NineAndTwo _NineAndTwo)
+    public CharDataInfo(string localID, string ResourceID,NineAndTwo _NineAndTwo)
     {
         monsterOfPlayerId = localID;
         this.ResourceID = ResourceID;

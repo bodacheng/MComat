@@ -366,7 +366,7 @@ public class DebugManager : MonoBehaviour {
                                     //teamDic = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID;
                                 }
 
-                                CharacterDataInfo _CharacterDataInfo = new CharacterDataInfo();
+                                CharDataInfo _CharacterDataInfo = new CharDataInfo();
                                 _CharacterDataInfo.monsterOfPlayerId = localID;
                                 _CharacterDataInfo.ResourceID = charsOfType.options[charsOfType.value].text; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
                                 _CharacterDataInfo.level = level;

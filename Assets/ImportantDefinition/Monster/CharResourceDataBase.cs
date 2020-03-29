@@ -30,9 +30,9 @@ public class CharacterResourceInfo
         return passiveSkillConfigs;
     }
 
-    public CharacterDataInfo GetASampleCharacterDataInfo(string localID)
+    public CharDataInfo GetASampleCharacterDataInfo(string localID)
     {
-        CharacterDataInfo characterDataInfo = new CharacterDataInfo
+        CharDataInfo characterDataInfo = new CharDataInfo
         {
             monsterOfPlayerId = localID,
             ResourceID = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。

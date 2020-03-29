@@ -54,7 +54,7 @@ public class StageScriptableObject : ScriptableObject
     public List<string> GetTeam1EnterRingLocalIds(LocalFight localFight)
     {
         List<string> enterRingLocalIDs = new List<string>();
-        foreach(CharacterDataInfo _one in localFight.HeroSets.values)
+        foreach(CharDataInfo _one in localFight.HeroSets.values)
         {
             if (!enterRingLocalIDs.Contains(_one.monsterOfPlayerId))
                 enterRingLocalIDs.Add(_one.monsterOfPlayerId);

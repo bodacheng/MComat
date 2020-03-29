@@ -130,7 +130,7 @@ public class FightTeam_MultiRaid : FightTeam
                 realTimeGameProcessManager.CameraParaAdjustment(teamConfig.myTeam);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
-            CharacterDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
+            CharDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
             CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceID);
             _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);

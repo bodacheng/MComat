@@ -24,7 +24,7 @@ public class StagesManagerGUI : Editor {
     string pathAndNameForLocalSave = "oneFight.json";    
     string focusingMemberRecordID;
     IDictionary<string, string> RecordIDsAndNames;
-    CharacterDataInfo focusingCharInfo;
+    CharDataInfo focusingCharInfo;
     CharacterResourceInfo focusingCharResourceInfo;
     SkillConfig focusingSkillConfig;
     
@@ -112,9 +112,9 @@ public class StagesManagerGUI : Editor {
                 if (one != null)
                 {
                     _stagesManager.EditoringFight = one;
-                    foreach (MultiDictionary<int,int,CharacterDataInfo>.SerializableSets _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
+                    foreach (MultiDictionary<int,int,CharDataInfo>.SerializableSets _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
                     {
-                        foreach (MultiDictionary<int,int,CharacterDataInfo>.SerializableSet set in _one.value)
+                        foreach (MultiDictionary<int,int,CharDataInfo>.SerializableSet set in _one.value)
                         {
                             if (set._Value != null)
                             {
@@ -178,7 +178,7 @@ public class StagesManagerGUI : Editor {
         {
             if (GUILayout.Button("Add", AddDeleteMember))
             {
-                focusingCharInfo = new CharacterDataInfo
+                focusingCharInfo = new CharDataInfo
                 {
                     monsterOfPlayerId = focusingMemberRecordID
                 };

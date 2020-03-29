@@ -51,7 +51,7 @@ namespace mainMenu
             }
             
             _Stage = stage;
-            foreach(CharacterDataInfo oneMember in _Stage.localFight.HeroSets.values)
+            foreach(CharDataInfo oneMember in _Stage.localFight.HeroSets.values)
             {
                 HeroIcon MyMemberIcon = Instantiate(FighterIcon);
                 CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceID);
@@ -62,7 +62,7 @@ namespace mainMenu
                 MyMemberIcon.gameObject.SetActive(true);
             }
 
-            foreach(CharacterDataInfo oneMember in _Stage.localFight.EnemySets.values)
+            foreach(CharDataInfo oneMember in _Stage.localFight.EnemySets.values)
             {
                 HeroIcon EnemyMemberIcon = Instantiate(FighterIcon);
                 CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(oneMember.ResourceID);
@@ -92,7 +92,7 @@ namespace mainMenu
             _StageScriptableObject.LoadLocalFightFromScript();
             IEnumerator getPlayerOne = TeamSet.Instance.MyTeamMembersByEntryMemberNum(_StageScriptableObject.EntryMemberNum, TeamSet.Instance.storyModeTeamSet);
             yield return getPlayerOne;
-            _StageScriptableObject.localFight.HeroSets = (MultiDictionary<int, int, CharacterDataInfo>)getPlayerOne.Current;
+            _StageScriptableObject.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getPlayerOne.Current;
             if (_StageScriptableObject.localFight.HeroSets == null)
             {
                 Debug.Log("严重错误。get不到队员"); yield break;

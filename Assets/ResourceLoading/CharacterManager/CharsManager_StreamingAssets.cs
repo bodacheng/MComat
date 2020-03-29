@@ -60,7 +60,7 @@ public partial class CharsManager : MonoBehaviour
     }
 
     /////////////// For Debug  //////////////
-    public IEnumerator CreateCharacterFromABByStreamingAssets(CharacterDataInfo _CharacterDataInfo,
+    public IEnumerator CreateCharacterFromABByStreamingAssets(CharDataInfo _CharacterDataInfo,
                                                               string AIScriptName,
                                                               Zokusei _zokusei,
                                                               string personalMagic,

@@ -30,7 +30,7 @@ public class PositionLocalCharKeySet
     
     public IEnumerator ConvertToMultiDictionary()
     {
-        MultiDictionary<int, int, CharacterDataInfo> multiDictionary = new MultiDictionary<int, int, CharacterDataInfo>();
+        MultiDictionary<int, int, CharDataInfo> multiDictionary = new MultiDictionary<int, int, CharDataInfo>();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             if (PosNumsWithLocalKeys[i].monsterOfPlayerId != null)
@@ -40,7 +40,7 @@ public class PositionLocalCharKeySet
                 GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
-                    CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(GetMonsterOfPlayerDetailModel);
+                    CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(GetMonsterOfPlayerDetailModel);
                     multiDictionary.Set(0,(int)PosNumsWithLocalKeys[i].posNum,characterDataInfo);
                 }
             }

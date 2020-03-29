@@ -76,7 +76,7 @@ public partial class CharsManager : MonoBehaviour {
     }
     
     //这些都是中间变量
-    public IEnumerator CreateCharacter(CharacterDataInfo _CharacterDataInfo)
+    public IEnumerator CreateCharacter(CharDataInfo _CharacterDataInfo)
     {
         IEnumerator buildmodelproess = null;
         switch(ResourceLoadingSetting.ModelLoadingMode)

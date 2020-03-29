@@ -115,7 +115,7 @@ namespace mainMenu
             presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo)));
         }
 
-        public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharacterDataInfo _focusingCharacterDataInfo)
+        public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharDataInfo _focusingCharacterDataInfo)
         {
             if (_focusingCharacterDataInfo == null)
             {
@@ -200,7 +200,7 @@ namespace mainMenu
                 }
 
                 CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
-                CharacterDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
+                CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.type, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 
