@@ -16,7 +16,7 @@ public class MemberDetail_edit : MainSceneProcess
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
 
         // 表现系
-        CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
         SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
             SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
             SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
@@ -69,7 +69,7 @@ public class MemberDetail_edit : MainSceneProcess
             yield break;
         }
         yield return TheNineSlot.Instance.ReadANineAndTwo(_AccountCharacterInfo);
-        CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_AccountCharacterInfo.monsterId);
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_AccountCharacterInfo.monsterId);
         SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
         yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);

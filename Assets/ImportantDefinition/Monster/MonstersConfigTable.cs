@@ -20,7 +20,7 @@ public class MonstersConfigTable
             return instance;
         }
     }
-    public static IDictionary<string, CharacterResourceInfo> CharacterResourceInfoDic = new Dictionary<string, CharacterResourceInfo>();
+    public static IDictionary<string, CharConfig> CharacterResourceInfoDic = new Dictionary<string, CharConfig>();
 
     [Serializable]
     public class Row
@@ -37,7 +37,7 @@ public class MonstersConfigTable
 		public string DEFENDABLE_FLAG;
 	}
             
-    public static CharacterResourceInfo GetCharacterResourceInfo(string resourceId)
+    public static CharConfig GetCharacterResourceInfo(string resourceId)
     {
         return CharacterResourceInfoDic.ContainsKey(resourceId) ? CharacterResourceInfoDic[resourceId] : null;
     }
@@ -56,8 +56,8 @@ public class MonstersConfigTable
     public static void RefreshCharacterResourceInfoDic()
     {
         CharacterResourceInfoDic.Clear();
-        List<CharacterResourceInfo> characterResourceInfos = Instance.RowToCharacterResourceInfoList(Instance.rowList);
-        foreach (CharacterResourceInfo one in characterResourceInfos)            
+        List<CharConfig> characterResourceInfos = Instance.RowToCharacterResourceInfoList(Instance.rowList);
+        foreach (CharConfig one in characterResourceInfos)            
         {
             CharacterResourceInfoDic.Add(one.RECORD_ID,one);
         }
@@ -184,13 +184,13 @@ public class MonstersConfigTable
 
     // by haku 9.12
     // filePath的后面记得包括文件名和CSV后缀？
-    public void Save(string filePath, List<CharacterResourceInfo> characterResourceList)
+    public void Save(string filePath, List<CharConfig> characterResourceList)
     {
         try
         {
             rowList.Clear();
 
-            foreach (CharacterResourceInfo characterResourceInfo in characterResourceList)
+            foreach (CharConfig characterResourceInfo in characterResourceList)
             {
                 Debug.Log("尝试整理角色：" + characterResourceInfo.REAL_NAME);
                 Row row = new Row
@@ -291,12 +291,12 @@ public class MonstersConfigTable
         }
     }
 
-    public List<CharacterResourceInfo> RowToCharacterResourceInfoList(List<Row> List)
+    public List<CharConfig> RowToCharacterResourceInfoList(List<Row> List)
     {
-        List<CharacterResourceInfo> ToReturn = new List<CharacterResourceInfo>();
+        List<CharConfig> ToReturn = new List<CharConfig>();
         foreach (Row row in List)
         {
-            CharacterResourceInfo _CharacterResourceInfo = RowToCharacterResourceInfo(row);
+            CharConfig _CharacterResourceInfo = RowToCharacterResourceInfo(row);
             if (_CharacterResourceInfo != null)
                 ToReturn.Add(_CharacterResourceInfo);
             else
@@ -305,7 +305,7 @@ public class MonstersConfigTable
         return ToReturn;
     }
 
-    public Row CharacterResourceInfoToRow(CharacterResourceInfo characterResourceInfo)
+    public Row CharacterResourceInfoToRow(CharConfig characterResourceInfo)
     {
         if (characterResourceInfo == null)
             return null;
@@ -351,11 +351,11 @@ public class MonstersConfigTable
         return row;
     }
 
-    public CharacterResourceInfo RowToCharacterResourceInfo(Row row)
+    public CharConfig RowToCharacterResourceInfo(Row row)
     {
         if (row == null)
             return null;
-        CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo
+        CharConfig _CharacterResourceInfo = new CharConfig
         {
             RECORD_ID = row.RECORD_ID,
             type = row.MONSTER_TYPE,

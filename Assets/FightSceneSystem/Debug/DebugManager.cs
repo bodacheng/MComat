@@ -181,7 +181,7 @@ public class DebugManager : MonoBehaviour {
                         {
                             int level = int.Parse(AIlevelNum.text);
                             level = Mathf.Clamp(level, 1, 100);
-                            CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_REAL_NAME(pretabName.text));
+                            CharConfig _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_REAL_NAME(pretabName.text));
                             if (_CharacterResourceInfo == null)
                             {
                                 debugAddCharUIStateReset();

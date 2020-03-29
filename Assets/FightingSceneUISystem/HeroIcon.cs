@@ -11,7 +11,7 @@ public class HeroIcon : MonoBehaviour {
     public Image cooldownCurtain;
 
     public GetMonsterOfPlayerDetailModel _MonsterOfPlayerDetailModel;
-    public CharacterResourceInfo _CharacterResourceInfo;
+    public CharConfig _CharacterResourceInfo;
 
     static IDictionary<Zokusei, Sprite> frames;
     public static void IniFrames()

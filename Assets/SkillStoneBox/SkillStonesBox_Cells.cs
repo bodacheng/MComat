@@ -100,7 +100,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            CharacterResourceInfo characterResourceInfo = null;
+            CharConfig characterResourceInfo = null;
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;

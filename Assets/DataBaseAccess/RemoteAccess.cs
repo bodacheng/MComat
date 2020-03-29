@@ -55,7 +55,7 @@ namespace dataAccess
 
                 List<SkillStoneOfPlayerInfoModel> targets = MySkillStonesReader.Instance.GetMonsterEquipingStones(accountCharacterInfo.monsterOfPlayerId);
                 NineAndTwo nineAndTwo = new NineAndTwo();
-                CharacterResourceInfo _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
+                CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
                 if (_TempCharacterResourceInfo == null)
                 {
                     Debug.Log("角色定义信息错误。monsterId：" + accountCharacterInfo.monsterId);

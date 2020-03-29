@@ -341,8 +341,8 @@
     <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
     <Compile Include="Assets\Gotcha\gotchaManager.cs" />
     <Compile Include="Assets\HitBoxLogTable.cs" />
+    <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharDataInfo.cs" />
-    <Compile Include="Assets\ImportantDefinition\Monster\CharResourceDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\MonstersConfigTable.cs" />
     <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\AIDataBase.cs" />

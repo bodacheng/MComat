@@ -25,7 +25,7 @@ public class StagesManagerGUI : Editor {
     string focusingMemberRecordID;
     IDictionary<string, string> RecordIDsAndNames;
     CharDataInfo focusingCharInfo;
-    CharacterResourceInfo focusingCharResourceInfo;
+    CharConfig focusingCharResourceInfo;
     SkillConfig focusingSkillConfig;
     
     bool skillselectfilter;
@@ -118,7 +118,7 @@ public class StagesManagerGUI : Editor {
                         {
                             if (set._Value != null)
                             {
-                                CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceID));
+                                CharConfig _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceID));
                                 if (_CharacterResourceInfo == null)
                                 {
                                     Debug.Log("检测到存档错误：ResourceID");

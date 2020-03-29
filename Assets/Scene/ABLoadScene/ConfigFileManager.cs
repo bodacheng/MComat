@@ -284,13 +284,13 @@ public class ConfigFileManager : MonoBehaviour {
         }
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
-        List<CharacterResourceInfo> AllNewCharacterConfigsOfAllTypes = new List<CharacterResourceInfo>();
+        List<CharConfig> AllNewCharacterConfigsOfAllTypes = new List<CharConfig>();
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharacterResourceInfo> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
+            List<CharConfig> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
             List<string> keySonnCharacterRealNames = new List<string>();
-            foreach (CharacterResourceInfo oneConfig in CharConfigsOfOldConfigFileOFtype)
+            foreach (CharConfig oneConfig in CharConfigsOfOldConfigFileOFtype)
             {
                 if (!keySonnCharacterRealNames.Contains(oneConfig.REAL_NAME))
                 {
@@ -321,7 +321,7 @@ public class ConfigFileManager : MonoBehaviour {
                     continue;
                 }
 
-                CharacterResourceInfo _CharacterResourceInfo = new CharacterResourceInfo
+                CharConfig _CharacterResourceInfo = new CharConfig
                 {
                     RECORD_ID = "-1",
                     type = chartype,
@@ -388,7 +388,7 @@ public class ConfigFileManager : MonoBehaviour {
             }
         }
 
-        foreach (CharacterResourceInfo characterResourceInfo in AllNewCharacterConfigsOfAllTypes)
+        foreach (CharConfig characterResourceInfo in AllNewCharacterConfigsOfAllTypes)
         {
             if (AllDeletedRecordsIDs.Count > 0)
             {

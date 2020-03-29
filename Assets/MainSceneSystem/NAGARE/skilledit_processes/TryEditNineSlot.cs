@@ -64,7 +64,7 @@ public class TryEditNineSlot : MainSceneProcess
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         
         // 表现系
-        CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(this._MemberDetail.focusingCharacterDataInfo.monsterId);
         SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
             SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
             SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
@@ -93,7 +93,7 @@ public class TryEditNineSlot : MainSceneProcess
         TheNineSlot.Instance.C2DragAndDropCell.gameObject.SetActive(true);
         TheNineSlot.Instance.C3DragAndDropCell.gameObject.SetActive(true);
         
-        CharacterResourceInfo _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_CharacterDataInfo.monsterId);
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_CharacterDataInfo.monsterId);
         SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
         yield return SkillStonesBox.Instance.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()

@@ -152,7 +152,7 @@ namespace mainMenu
         public IEnumerator SkillEditConfirmAnimation()
         {
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
+            CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
             {
@@ -199,7 +199,7 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharacterResourceInfo characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
+                CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
                 CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.type, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);

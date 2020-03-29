@@ -85,7 +85,7 @@ namespace mainMenu
                 Debug.Log("读取角色信息严重错误monsterOfPlayerId:" + monsterOfPlayerId);
                 yield break;
             }
-            CharacterResourceInfo targetingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(targetingCharacterDataInfo.monsterId);
+            CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(targetingCharacterDataInfo.monsterId);
             if (targetingCharacterResourceInfo == null)
             {
                 Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);

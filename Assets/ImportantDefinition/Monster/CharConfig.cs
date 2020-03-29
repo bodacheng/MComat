@@ -5,7 +5,7 @@ using UnityEditor;
 using Skill;
 
 [Serializable]
-public class CharacterResourceInfo
+public class CharConfig
 {
 	public string RECORD_ID;//monsterTable ID
     public string type;

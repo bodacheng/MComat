@@ -67,7 +67,7 @@ public class TeamEditManager : MonoBehaviour
         if (PositionMonsterOfPlayerId != null)
         {
             GetMonsterOfPlayerDetailModel _one;
-            CharacterResourceInfo characterResourceInfo = null;
+            CharConfig characterResourceInfo = null;
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PositionMonsterOfPlayerId);
             yield return getchar;
             if (getchar.Current == null)

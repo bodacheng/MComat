@@ -44,7 +44,7 @@ namespace dataAccess
                     AccountCharacterInfoListObjectsDictionary.Clear();
                     for (int i = 0; i < info.Length; i++)
                     {
-                        CharacterResourceInfo targetingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(info[i].monsterId);
+                        CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(info[i].monsterId);
                         if (targetingCharacterResourceInfo == null)
                         {
                             Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + info[i].monsterId);
@@ -88,9 +88,9 @@ namespace dataAccess
 
         public IEnumerator LocalSaveDataGetAllCharacters()
         {
-            List<CharacterResourceInfo> characterList = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.rowList);
+            List<CharConfig> characterList = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.rowList);
             int i = 0;
-            foreach (CharacterResourceInfo _CharacterResourceInfo in characterList)
+            foreach (CharConfig _CharacterResourceInfo in characterList)
             {
                 GetMonsterOfPlayerDetailModel _CharacterDataInfo = new GetMonsterOfPlayerDetailModel
                 {
