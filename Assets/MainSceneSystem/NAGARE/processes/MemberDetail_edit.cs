@@ -8,6 +8,7 @@ public class MemberDetail_edit : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(0.5f);
+        PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
@@ -45,6 +46,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        PreScene.Instance.MainMenuCanvas.gameObject.SetActive(true);
         SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
