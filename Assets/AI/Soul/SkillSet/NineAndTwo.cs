@@ -1,10 +1,5 @@
 ﻿using Skill;
 
-// 这个模块也将扮演数据库和AI模块接口的作用。
-// 玩家存档中的各个角色信息最后会转化出这样一个类的实例。从而很重要一点————要看明白哪些信息是能保存数据库的。
-// 实际上D,M,R按照现在的企划看全是角色被动，那么原则上他们确实不应该和其他技能登陆在一个技能配置文件里，也不需要有对应ID
-// 既然D,M,R是被动，那按理说九宫格信息的各种处理应该是在角色读取前执行，先决定DMR,再批处理12宫技能。
-
 [System.Serializable]
 public partial class NineAndTwo {
 
@@ -14,7 +9,6 @@ public partial class NineAndTwo {
     
     public int A1level = 0, A2level = 0, A3level = 0, B1level = 0, B2level = 0, B3level = 0, C1level = 0, C2level = 0, C3level = 0;
 
-    // 以下这三条，出于本地关卡信息的考虑，也放在这里。但是一般来说这些是由角色自身被动决定。所以存在索引角色被动和依据九宫格固有信息这两种读取方式。
     public bool canDefend;
     public MoveType moveType;
     public RushType rushType;

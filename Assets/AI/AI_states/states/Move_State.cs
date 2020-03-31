@@ -43,7 +43,7 @@ public class Move_State : Behavior
 		base.Pre_process_before_enter ();
 	}
     
-    bool Timeup()
+    bool Finished()
     {
         switch (moveDirection)
         {
@@ -62,6 +62,10 @@ public class Move_State : Behavior
             case AIMoveDirection.towardsEnemy:
                 if (time_counter > time_limit)
                     return true;
+                if (Vector3.Distance(gameObject.transform.position, targetPos) < 0.2f)
+                {
+                    return true;
+                }
                 break;
             case AIMoveDirection.towardsEnemyLeft:
                 if (time_counter > time_limit / 3)
@@ -186,12 +190,12 @@ public class Move_State : Behavior
             return;
         }
         
-        if (Timeup())
+        if (Finished())
         {
             DecideDirection();
             time_counter = 0f;
         }
-        
+
         if (EnemiesByDistance.Count > 0)
         {
             closetEnemyT = EnemiesByDistance[0].transform;
@@ -273,7 +277,7 @@ public class Move_State : Behavior
         _c_State_Update_SP();
         use_direction = use_direction.normalized;
         if (use_direction.magnitude > 0.1f)
-        {
+        {          
             _Animator.SetFloat("speed", 10f);
             Move(use_direction, speed, true);
             RotateToDirection(use_direction,20f, true);
@@ -309,12 +313,3 @@ public class Move_State : Behavior
         return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
     }
 }
-
-//以下评论所描述的企划我们18年12月已经放弃了。
-//关于受力移动，我们的逻辑是这样的：我们所设定的speed这个数值具体来说就是所期望的rigibody.velcoity.magitube，
-// 这个speed我们称之为期望速度，而物体从静止所需要的期望速度越大，则一上来所需要的力则越大（更大加速度）
-//因此在MoveTo函数里，我们直接把speed作为accelration参数给带入了其中。其实也许根据情况应该乘以个参数？但这里我们没有多想，总之表现出这个等比关系就点到为止了。
-//而一旦物体达到了期望速度，我们做了件什么事情呢。。。那就是立刻给物体一个相反的，同样大小的力，与所施加的目标方向力达到个平衡，
-//并且这个反向力中有个currentSpeed/maxSpeed参数，就是说越是超过期望速度，给的方向力就越大那么一点，从而确保两个方向的力完全一样，这就符合了初中时候所学习过的力学原理。
-//所以总的来说，我们现在整套逻辑符合了“提速至期望速度，达到期望速度后施加反向力来与以平衡，期望速度越大，开始给的加速度就越大”这些我们所需要的逻辑，
-//但可能在施予力大小等方面，需要根据整个场景尺寸比例等情况乘以一些固定参数，这个只要我们的游戏运行看着没大的问题也就不需要过多考虑

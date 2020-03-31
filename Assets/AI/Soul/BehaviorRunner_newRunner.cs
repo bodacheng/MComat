@@ -71,7 +71,7 @@ namespace Soul
             #region 决策制定
             controller.PlayerControll(this,avaliable_casual_Transitions,!((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
             #endregion
-            
+
             CalAdviceDistanceFromEnemy();
         }
 
