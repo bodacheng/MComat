@@ -12,7 +12,7 @@ public partial class NineAndTwo {
     public string B1skillid, B2skillid, B3skillid;
     public string C1skillid, C2skillid, C3skillid;
     
-    public int A1level = 1, A2level = 1, A3level = 1, B1level = 1, B2level = 1, B3level = 1, C1level = 1, C2level = 1, C3level = 1;
+    public int A1level = 0, A2level = 0, A3level = 0, B1level = 0, B2level = 0, B3level = 0, C1level = 0, C2level = 0, C3level = 0;
 
     // 以下这三条，出于本地关卡信息的考虑，也放在这里。但是一般来说这些是由角色自身被动决定。所以存在索引角色被动和依据九宫格固有信息这两种读取方式。
     public bool canDefend;
@@ -27,11 +27,11 @@ public partial class NineAndTwo {
         A1skillid = null; A2skillid = null; A3skillid = null;
         B1skillid = null; B2skillid = null; B3skillid = null;
         C1skillid = null; C2skillid = null; C3skillid = null;
-
+        
         moveType = MoveType.Test;
         canDefend = false;
         rushType = RushType.None;
-
+        
         AConfig1 = new SkillConfig();
         AConfig2 = new SkillConfig();
         AConfig3 = new SkillConfig();
@@ -44,6 +44,16 @@ public partial class NineAndTwo {
         DConfig = new SkillConfig();
         MConfig = new SkillConfig();
         RConfig = new SkillConfig();
+        
+        A1level = 0; 
+        A2level = 0;
+        A3level = 0;
+        B1level = 0;
+        B2level = 0;
+        B3level = 0;
+        C1level = 0;
+        C2level = 0; 
+        C3level = 0;
     }
     
     public NineAndTwo(MoveType moveType,bool canDefend, RushType rushType)
@@ -91,7 +101,7 @@ public partial class NineAndTwo {
         Copy.DConfig = Copy.DConfig != null ? Copy.DConfig.Clone() : new SkillConfig();
         Copy.MConfig = Copy.MConfig != null ? Copy.MConfig.Clone() : new SkillConfig();
         Copy.RConfig = Copy.RConfig != null ? Copy.RConfig.Clone() : new SkillConfig();
-
+        
         return Copy;
     }
 }

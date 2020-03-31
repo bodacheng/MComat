@@ -369,8 +369,6 @@ public class DebugManager : MonoBehaviour {
                                 CharDataInfo _CharacterDataInfo = new CharDataInfo();
                                 _CharacterDataInfo.monsterOfPlayerId = localID;
                                 _CharacterDataInfo.ResourceID = charsOfType.options[charsOfType.value].text; // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
-                                _CharacterDataInfo.level = level;
-                                _CharacterDataInfo.HP = 30; //通常来说玩家的角色HP和角色level应该有一个清晰的对应关系，而关卡敌人的HP应该是可以自由设置，这个HP必然不会出现在数据库的任何部位。
                                 _CharacterDataInfo._NineAndTwo = null;
 
                                 if (ResourceLoadingSetting.ModelLoadingMode == ResourceLoadMode.StreamingAssetAB)
@@ -474,7 +472,7 @@ public class DebugManager : MonoBehaviour {
             // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
             yield return (aI_DATA_CENTER.Step1Initialize(type, basicPackName,personalMagicpath));
             yield return (aI_DATA_CENTER.step2InitializeByResourceFolder(type, AIScriptPrefab, _zokusei, personalMagicpath));
-            aI_DATA_CENTER.Step3Initialize(TeamConfig);
+            aI_DATA_CENTER.Step3Initialize(TeamConfig,2000);
         }
         else
         {

@@ -6,11 +6,11 @@
 
 public class FightSceneNote
 {
-    private static FightSceneNote instance;
+    static FightSceneNote instance;
 
     public StageScriptableObject nextBattle;
 
-    private FightSceneNote()
+    FightSceneNote()
     {
         nextBattle = new StageScriptableObject();//这个地方无非是意思意思
     }

@@ -92,11 +92,6 @@ namespace dataAccess
             yield break;
         }
 
-        public IEnumerator PlusExpForAccountCharRemote(string charlocalID, int plusExp)
-        {
-            yield break;
-        }
-
         // 针对玩家拥有角色的更新(monsters_of_player表的update操作),
         // 服务端需要有审核,下面是角色更新操作的一些要点
         // 1.monsterId，playerid 不可能变

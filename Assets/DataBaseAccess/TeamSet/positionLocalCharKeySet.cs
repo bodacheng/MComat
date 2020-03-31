@@ -12,7 +12,7 @@ public class PositionLocalCharKeySet
     
     public PositionLocalCharKeySet(PosNumWithLocalKey[] PosNumsWithLocalKey)
     {
-        this.PosNumsWithLocalKeys = PosNumsWithLocalKey;
+        PosNumsWithLocalKeys = PosNumsWithLocalKey;
     }
     public PositionLocalCharKeySet()
     {
@@ -40,7 +40,7 @@ public class PositionLocalCharKeySet
                 GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
-                    CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(GetMonsterOfPlayerDetailModel);
+                    CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
                     multiDictionary.Set(0,(int)PosNumsWithLocalKeys[i].posNum,characterDataInfo);
                 }
             }

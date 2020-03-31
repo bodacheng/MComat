@@ -22,10 +22,6 @@ namespace mainMenu
         public RectTransform MemberInfoT;
         public RectTransform MemberSkillshowT;
 
-        [Space(11)]
-        [Header("LevelManager")]
-        public LevelManager _LevelManager;
-
         [Space(7)]
         [Header("SkillStoneManager")]
         public SkillStonesBox _SkillStonesBox;
@@ -57,13 +53,10 @@ namespace mainMenu
                 favouriteButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
                 MemberInfoT.gameObject.SetActive(false);
-                _LevelManager.turnOnUI(false);
                 yield break;
             }
 
             MemberInfoT.gameObject.SetActive(true);
-            _LevelManager.turnOnUI(true);
-            _LevelManager.exButtonFeaturesIni(focusingCharacterDataInfo, 999999);//AccountSet.Instance._PlayerAccountInfo.Coin
 
             // show按钮功能加载
             SkillShowButton.onClick.RemoveAllListeners();
@@ -112,7 +105,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo)));
+            presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo)));
         }
 
         public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharDataInfo _focusingCharacterDataInfo)
@@ -200,7 +193,7 @@ namespace mainMenu
                 }
 
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
-                CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(accountCharacterInfo);
+                CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.type, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 

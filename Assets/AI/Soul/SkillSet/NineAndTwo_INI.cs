@@ -321,10 +321,17 @@ public partial class NineAndTwo
         return originAT * level;
     }
     
+    public static float StoneHpCal(int level)
+    {
+        return 50f + 50 * (level/100);
+    }
+        
     SkillConfig FixConfigByReference(string skillid)
     {
         if (skillid == null)
+        {
             return new SkillConfig();
+        }
         SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(skillid, out SkillConfig referenceStandardSkillConfig);
         return referenceStandardSkillConfig;
     }

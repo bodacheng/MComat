@@ -117,7 +117,7 @@ public class TryEditNineSlot : MainSceneProcess
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo);
+        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo);
         _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(characterDataInfo));
         yield break;
     }

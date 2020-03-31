@@ -199,12 +199,13 @@ public partial class Data_Center : MonoBehaviour
         }
     }
 
-    public void Step3Initialize(TeamConfig _TeamConfig)//战斗必备
+    public void Step3Initialize(TeamConfig _TeamConfig,float nineSkillHp)//战斗必备
     {
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
         _FightAttriCalReference.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
         _FightAttriCalReference.EnableAllHitBoxCollider(true);
+        _FightAttriCalReference.CurrentHp.Value = nineSkillHp;
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰

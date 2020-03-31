@@ -61,14 +61,14 @@ public class FightTeam_MultiRaid : FightTeam
     { 
     }
 
-    protected override void TeamsFightInitialize(float wholeHP)
+    protected override void TeamsFightInitialize(float extraHP)
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
-            a_char._FightAttriCalReference.CurrentHp.Value = wholeHP;
+            a_char._FightAttriCalReference.CurrentHp.Value += extraHP;
             a_char._FightAttriCalReference.CurrentHp.Subscribe(x => 
             {
-                RefreshHPBar(a_char, x, wholeHP);
+                RefreshHPBar(a_char, x, a_char._FightAttriCalReference.CurrentHp.Value);
             });
             
             a_char._ResistanceManager.Resistance.Value = 0;
@@ -130,7 +130,7 @@ public class FightTeam_MultiRaid : FightTeam
                 realTimeGameProcessManager.CameraParaAdjustment(teamConfig.myTeam);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
-            CharDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
+            CharDataInfo characterDataInfo = CharDataInfoRef[a_char];
             CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceID);
             _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);

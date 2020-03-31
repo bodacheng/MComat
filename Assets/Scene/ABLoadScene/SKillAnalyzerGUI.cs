@@ -28,7 +28,6 @@ public class SKillAnalyzerGUI : Editor
         {
             sKillAnalyzer.SkillsAnalyzeByFrames(focusingType, targetEventName,attackframestartat_min,attackframestartat_max, attackframeendtocancelframetime_min,attackframeendtocancelframetime_max);
         }
-        //
         EditorGUILayout.LabelField(" 整体替换动画事件名(千万慎用。一般用不上此功能）");
         old_name = EditorGUILayout.TextField("寻找该动画事件名",old_name);
         new_name = EditorGUILayout.TextField("替换成以下动画事件名",new_name);

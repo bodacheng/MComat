@@ -152,8 +152,8 @@ public class NetFightScene : MonoBehaviour {
         _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
         _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
         
-        yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.HP);
-        yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.HP);
+        yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.team1_ExtraHP);
+        yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.team2_ExtraHP);
         
         _RealTimeGameProcessManager.FightTeam1.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers);
         _RealTimeGameProcessManager.FightTeam2.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam2.teamMembers);
@@ -202,7 +202,7 @@ public class NetFightScene : MonoBehaviour {
             {
                 singleFightLogs.Add(player1[i]._MyBehaviorRunner.SingleFightLog);
                 player1[i]._MyBehaviorRunner.ChangeState("Empty");
-                CharDataInfo characterDataInfo = _RealTimeGameProcessManager.FightTeam1.CharacterDataInfoReference[player1[i]];
+                CharDataInfo characterDataInfo = _RealTimeGameProcessManager.FightTeam1.CharDataInfoRef[player1[i]];
                 if (characterDataInfo != null)
                 {
                     dontdestroy.Add(characterDataInfo.monsterOfPlayerId);

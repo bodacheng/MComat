@@ -42,15 +42,14 @@ namespace dataAccess
             }
         }
                 
-        public static CharDataInfo GetCharacterDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+        public static CharDataInfo GetCharDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
         {
             try
             {
                 CharDataInfo characterDataInfo = new CharDataInfo
                 {
                     ResourceID = accountCharacterInfo.monsterId,
-                    monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId,
-                    level = 100 //需要一个对应表
+                    monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId
                 };
 
                 List<SkillStoneOfPlayerInfoModel> targets = MySkillStonesReader.Instance.GetMonsterEquipingStones(accountCharacterInfo.monsterOfPlayerId);

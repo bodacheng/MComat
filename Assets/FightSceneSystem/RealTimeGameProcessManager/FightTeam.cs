@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using Api.Dto.Model;
+using dataAccess;
+using mainMenu;
 
 public class FightTeam : MonoBehaviour
 {
     public TeamMode TeamMode;
-    
     public MultiDictionary<int, int, Data_Center> teamMembers = new MultiDictionary<int, int, Data_Center>();
-    public IDictionary<Data_Center, CharDataInfo> CharacterDataInfoReference = new Dictionary<Data_Center, CharDataInfo>();
+    public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
     public TeamConfig teamConfig;
-    
     public RectTransform sideIconsContainer;
     public Canvas _targetCanvas;
     public SideCharIcon button_prefab;
@@ -24,6 +25,26 @@ public class FightTeam : MonoBehaviour
     [HideInInspector]
     public Transform[] TeamStandPoints;
     protected IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
+
+    public IEnumerator CharResourceLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
+    {
+        foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
+        {
+            foreach (int key in keys.Value)
+            {
+                CharDataInfo _one = MembersSets.Get(keys.Key,key);
+                IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
+                yield return character_datacenter;
+                Data_Center data_Center = (Data_Center)character_datacenter.Current;
+                
+                List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_one.monsterOfPlayerId);
+                data_Center.Step3Initialize(teamConfig,TheNineSlot.CurrentHp(equipingstones));
+                
+                teamMembers.Set(keys.Key,key,data_Center);
+                CharDataInfoRef.Add(teamMembers.Get(keys.Key,key),_one);
+            }
+        }
+    }
 
     public virtual void Clear()
     {
@@ -49,7 +70,7 @@ public class FightTeam : MonoBehaviour
     {
     }
     
-    protected virtual void TeamsFightInitialize(float wholeHP)
+    protected virtual void TeamsFightInitialize(float extraHP)
     {
     }
     
@@ -59,11 +80,11 @@ public class FightTeam : MonoBehaviour
     }
         
     // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-    public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> ChracterSets,float HP)
+    public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> ChracterSets,float extraHP)
     {
-        yield return CharacterResourceLoad(ChracterSets);
+        yield return CharResourceLoad(ChracterSets);
         InstantiateCharsIconsAndFloatHPBar();
-        TeamsFightInitialize(HP);
+        TeamsFightInitialize(extraHP);
     }
     
     protected void RefreshResistanceBar(Data_Center data_Center)
@@ -123,40 +144,5 @@ public class FightTeam : MonoBehaviour
     // 队伍模式对应行为运行第一步。
     public virtual void ModeStart()
     {
-    }
-    
-    public IEnumerator CharacterResourceLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
-    {
-        foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
-        {
-            foreach (int key in keys.Value)
-            {
-                CharDataInfo _one = MembersSets.Get(keys.Key,key);
-                IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
-                yield return character_datacenter;
-                Data_Center data_Center = (Data_Center)character_datacenter.Current;
-                data_Center.Step3Initialize(teamConfig);
-                teamMembers.Set(keys.Key,key,data_Center);
-                CharacterDataInfoReference.Add(teamMembers.Get(keys.Key,key),_one);
-            }
-        }
-    }
-    
-    public IEnumerator CharacterResourceLoadTestMode(MultiDictionary<int, int, CharDataInfo> MembersSets)
-    {
-        foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
-        {
-            foreach (int key in keys.Value)
-            {
-                CharDataInfo _one = MembersSets.Get(keys.Key,key);
-                _one._NineAndTwo = new NineAndTwo();
-                IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
-                yield return character_datacenter;
-                Data_Center data_Center = (Data_Center)character_datacenter.Current;
-                data_Center.Step3Initialize(teamConfig);
-                teamMembers.Set(keys.Key,key,data_Center);
-                CharacterDataInfoReference.Add(teamMembers.Get(keys.Key,key),_one);
-            }
-        }
     }
 }

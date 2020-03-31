@@ -255,7 +255,7 @@ namespace dataAccess
             yield break;
         }
 
-        public static int SkillSetValidation(string A1skillid, string A2skillid, string A3skillid,
+        public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid,
                                                 string B1skillid, string B2skillid, string B3skillid,
                                                     string C1skillid, string C2skillid, string C3skillid)
         {

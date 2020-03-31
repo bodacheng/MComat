@@ -94,14 +94,14 @@ public class FightTeam_RotationMode : FightTeam
         }
     }
     
-    protected override void TeamsFightInitialize(float wholeHP)
+    protected override void TeamsFightInitialize(float extraHP)
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
-            a_char._FightAttriCalReference.CurrentHp.Value = wholeHP;
+            a_char._FightAttriCalReference.CurrentHp.Value += extraHP;
             a_char._FightAttriCalReference.CurrentHp.Subscribe(x => 
             {
-                RefreshHPBar(a_char, x, wholeHP);
+                RefreshHPBar(a_char, x, a_char._FightAttriCalReference.CurrentHp.Value);
             });
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => 
@@ -184,7 +184,7 @@ public class FightTeam_RotationMode : FightTeam
                 ReadyForNextMemberOnTheShow(a_char);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);           
-            CharDataInfo characterDataInfo = CharacterDataInfoReference[a_char];
+            CharDataInfo characterDataInfo = CharDataInfoRef[a_char];
             if (characterDataInfo == null)
             {
                 Debug.Log("角色信息字典严重错误");

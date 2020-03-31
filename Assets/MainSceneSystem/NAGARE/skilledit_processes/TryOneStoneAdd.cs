@@ -143,7 +143,7 @@ public class TryOneStoneAdd : MainSceneProcess
             yield break;
         }
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-        CharDataInfo focusingData = RemoteAccess.GetCharacterDataInfo(focusingCharacterDataInfo);
+        CharDataInfo focusingData = RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo);
         _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
     }
 }

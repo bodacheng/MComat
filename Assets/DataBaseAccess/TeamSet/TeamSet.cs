@@ -84,7 +84,7 @@ namespace dataAccess
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (myfighter != null)
                 {
-                    CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(myfighter);
+                    CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(myfighter);
                     teamMembers.Set(0,i,characterDataInfo);
                     membercount += 1;
                     if (membercount == playerEntryNum)

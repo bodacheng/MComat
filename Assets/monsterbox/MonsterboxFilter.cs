@@ -6,7 +6,6 @@ public class MonsterboxFilter : MonoBehaviour
 {
     //public LoadingCanvas loadingCanvas;
     public Toggle byzokusei;
-    public Toggle bylevel;
     public Dropdown typeDropDown;
     public InputField searchtag;
 
@@ -24,8 +23,6 @@ public class MonsterboxFilter : MonoBehaviour
     public List<HeroIcon> OrderIcons(List<HeroIcon> origin_mainMenuIcons)
     {
         origin_mainMenuIcons = TypeFilter(origin_mainMenuIcons);    
-        if (bylevel.isOn)
-            origin_mainMenuIcons = OrderIconsByLevel(origin_mainMenuIcons);
 
         if (byzokusei.isOn)
             origin_mainMenuIcons = OrderIconsByZokusei(origin_mainMenuIcons);
@@ -55,25 +52,6 @@ public class MonsterboxFilter : MonoBehaviour
             return new_mainMenuIcons;
         }
         Debug.Log("typeDropDown错误。当前type 有：" + typeDropDown.options.Count + "个值");
-        return origin_mainMenuIcons;
-    }
-
-    List<HeroIcon> OrderIconsByLevel(List<HeroIcon> origin_mainMenuIcons)
-    {
-        for (int i = 0; i < origin_mainMenuIcons.Count - 1; i++)
-        {
-            for (int j = 0; j< origin_mainMenuIcons.Count-1-i; j++)
-            {
-                int expj = origin_mainMenuIcons[j]._MonsterOfPlayerDetailModel.experience;
-                int expj1 = origin_mainMenuIcons[j + 1]._MonsterOfPlayerDetailModel.experience;
-                if (order == 1 ? expj > expj1 : expj < expj1)
-                {
-                    HeroIcon temp = origin_mainMenuIcons[j];
-                    origin_mainMenuIcons[j]=origin_mainMenuIcons[j+1];
-                    origin_mainMenuIcons[j + 1] = temp;
-                }
-            }
-        }
         return origin_mainMenuIcons;
     }
     

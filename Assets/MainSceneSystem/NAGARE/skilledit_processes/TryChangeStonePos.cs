@@ -39,7 +39,7 @@ public class TryChangeStonePos : MainSceneProcess
                 };
                 if (this.TuroialFight != null)
                 {
-                    CharDataInfo characterDataInfo = RemoteAccess.GetCharacterDataInfo(myfighter);
+                    CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(myfighter);
                     this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
                     this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
                 }

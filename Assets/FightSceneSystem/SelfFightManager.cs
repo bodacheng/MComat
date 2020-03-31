@@ -24,13 +24,13 @@ namespace mainMenu
         
         [Space(7)]
         [Header("共同战斗式按钮")]
-        public Transform MuitiRaidModeIconsT;
+        public RectTransform MuitiRaidTeam1T,MuitiRaidTeam2T;
         public HeroIcon team1back, team1front, team1left, team1right, team1_1, team1_2,team1_3,team1_4,team1_5,team1_6;
         public HeroIcon team2back, team2front, team2left, team2right, team2_1, team2_2,team2_3,team2_4,team2_5,team2_6;
         
         [Space(7)]
         [Header("轮番战斗式按钮")]
-        public Transform RotationModeIconsT;
+        public Transform RotationTeam1T,RotationTeam2T;
         public HeroIcon team11_R, team12_R, team13_R;
         public HeroIcon team21_R, team22_R, team23_R;
 
@@ -38,11 +38,11 @@ namespace mainMenu
         readonly IDictionary<int, HeroIcon> team2ButtonDic_M = new Dictionary<int, HeroIcon>();
         IDictionary<int, HeroIcon> team1ButtonDic_R = new Dictionary<int, HeroIcon>();
         IDictionary<int, HeroIcon> team2ButtonDic_R = new Dictionary<int, HeroIcon>();
-        
+
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
-        Team focusingTeam; //team1或者是team2
-        int focusingPosition; // 0到3
+        Team focusingTeam;
+        int focusingPosition;
         readonly HeroIcon focusingPosButton;
         
         PositionLocalCharKeySet _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
@@ -86,8 +86,10 @@ namespace mainMenu
         
         public void SwitchToMultiRaidMode()
         {
-            MuitiRaidModeIconsT.gameObject.SetActive(true);
-            RotationModeIconsT.gameObject.SetActive(false);
+            MuitiRaidTeam1T.gameObject.SetActive(true);
+            MuitiRaidTeam2T.gameObject.SetActive(true);
+            RotationTeam1T.gameObject.SetActive(false);
+            RotationTeam2T.gameObject.SetActive(false);
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
@@ -95,8 +97,10 @@ namespace mainMenu
         
         public void SwitchToRotationMode()
         {
-            RotationModeIconsT.gameObject.SetActive(true);
-            MuitiRaidModeIconsT.gameObject.SetActive(false);
+            MuitiRaidTeam1T.gameObject.SetActive(false);
+            MuitiRaidTeam2T.gameObject.SetActive(false);
+            RotationTeam1T.gameObject.SetActive(true);
+            RotationTeam2T.gameObject.SetActive(true);
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
@@ -104,8 +108,10 @@ namespace mainMenu
         
         public void SwitchToTestMode()
         {
-            MuitiRaidModeIconsT.gameObject.SetActive(true);
-            RotationModeIconsT.gameObject.SetActive(false);
+            MuitiRaidTeam1T.gameObject.SetActive(true);
+            MuitiRaidTeam2T.gameObject.SetActive(true);
+            RotationTeam1T.gameObject.SetActive(false);
+            RotationTeam2T.gameObject.SetActive(false);
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.test;
@@ -133,7 +139,8 @@ namespace mainMenu
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator4.Current;
                     break;
             }
-            stage.HP = HP;
+            stage.team1_ExtraHP = HP;
+            stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
             yield return QuestPreparePage.Instance.GetReadyToBattle(stage, SceneMode.MyPetsFight);
             yield break;
@@ -141,9 +148,9 @@ namespace mainMenu
 
         public IEnumerator MonsterIConButton(string localID)
         {
-            if (this.focusingTeam == Team.none || this.focusingPosition < 0)
+            if (focusingTeam == Team.none || focusingPosition < 0)
                 yield break;
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
+            IEnumerator getchar = AccountCharsSet.Instance.GetAccountCharInfo(localID);
             yield return getchar;
             GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
             if (myfighter == null)
@@ -151,32 +158,32 @@ namespace mainMenu
                 Debug.Log("角色存档问题。localid：" + localID);
                 yield break;
             }
-            
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
-                    switch (this.focusingTeam)
+                    Debug.Log("dsadaf");
+                    switch (focusingTeam)
                     {
                         case Team.player1:
-                            _team1positionLocalCharKeySet_M.SetPosMemInfoByLocalID(this.focusingPosition,localID);
-                            yield return ChangeIconOnPos(this.focusingPosition,team1ButtonDic_M,_team1positionLocalCharKeySet_M);
+                            _team1positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosition, localID);
+                            yield return ChangeIconOnPos(focusingPosition, team1ButtonDic_M,_team1positionLocalCharKeySet_M);
                             break;
                         case Team.player2:
-                            _team2positionLocalCharKeySet_M.SetPosMemInfoByLocalID(this.focusingPosition,localID);
-                            yield return ChangeIconOnPos(this.focusingPosition,team2ButtonDic_M,_team2positionLocalCharKeySet_M);
+                            _team2positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosition, localID);
+                            yield return ChangeIconOnPos(focusingPosition, team2ButtonDic_M,_team2positionLocalCharKeySet_M);
                             break;
                     }
                     break;
                 case TeamMode.rotation:
-                    switch (this.focusingTeam)
+                    switch (focusingTeam)
                     {
                         case Team.player1:
-                            _team1positionLocalCharKeySet_R.SetPosMemInfoByLocalID(this.focusingPosition,localID);
-                            yield return ChangeIconOnPos(this.focusingPosition,team1ButtonDic_R,_team1positionLocalCharKeySet_R);
+                            _team1positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosition, localID);
+                            yield return ChangeIconOnPos(focusingPosition, team1ButtonDic_R,_team1positionLocalCharKeySet_R);
                             break;
                         case Team.player2:
-                            _team2positionLocalCharKeySet_R.SetPosMemInfoByLocalID(this.focusingPosition,localID);
-                            yield return ChangeIconOnPos(this.focusingPosition,team2ButtonDic_R,_team2positionLocalCharKeySet_R);
+                            _team2positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosition, localID);
+                            yield return ChangeIconOnPos(focusingPosition, team2ButtonDic_R,_team2positionLocalCharKeySet_R);
                             break;
                     }
                     break;

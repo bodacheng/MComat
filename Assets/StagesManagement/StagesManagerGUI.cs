@@ -39,7 +39,7 @@ public class StagesManagerGUI : Editor {
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
     IDictionary<string, string> _SkillRecordIDsAndNames;
-    bool Initialized = false;
+    bool Initialized;
 
     public override void OnInspectorGUI()
     {
@@ -223,10 +223,6 @@ public class StagesManagerGUI : Editor {
         {
             goto A;
         }
-        
-        GUILayout.Space(10f);
-        focusingCharInfo.HP = EditorGUILayout.IntField("HP :", focusingCharInfo.HP);    
-        GUILayout.Space(10f);
         
         /////// 九宫格 //////////
         GUILayout.BeginHorizontal();

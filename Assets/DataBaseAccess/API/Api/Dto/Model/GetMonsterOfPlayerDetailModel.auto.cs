@@ -24,15 +24,5 @@ namespace Api.Dto.Model {
 		/// モンスターID
 		/// </summary>
 		public string monsterId { get; set; }
-
-		/// <summary>
-		/// レベル
-		/// </summary>
-		public int level { get; set; }
-
-		/// <summary>
-		/// 経験値
-		/// </summary>
-		public int experience { get; set; }
 	}
 }

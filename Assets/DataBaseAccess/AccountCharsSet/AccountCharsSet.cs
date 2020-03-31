@@ -123,22 +123,6 @@ namespace dataAccess
             yield break;
         }
 
-        public IEnumerator PlusExpForAccountChar(string charlocalID, int plusExp)
-        {
-            switch (AccountSet.Instance._playerinfoReferenceMode)
-            {
-                case playerinfoReferenceMode.localTestSaveData:
-                    yield return PlusExpForAccountCharLocalSaveData(charlocalID, plusExp);
-                    break;
-                case playerinfoReferenceMode.remoteTestPlayer:
-
-                    break;
-                case playerinfoReferenceMode.formalVersion:
-                    yield return PlusExpForAccountCharRemote(charlocalID, plusExp);
-                    break;
-            }
-        }
-
         public IEnumerator GetAccountCharInfo(string monsterlocalid)
         {
             if (monsterlocalid == null)

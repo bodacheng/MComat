@@ -27,7 +27,7 @@ public class StageScriptableObject : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
 
-    public float HP;
+    public float team1_ExtraHP,team2_ExtraHP;
     public LocalFight localFight;
     
     public FightEventType _fightEventType = FightEventType.Arena;

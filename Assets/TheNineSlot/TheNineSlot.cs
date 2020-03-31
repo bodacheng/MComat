@@ -4,18 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
-using Skill;
 
 //这个模块应该具备能力去读取一个角色的九宫信息。
 namespace mainMenu
 {
-    public class TheNineSlot : MonoBehaviour
+    public partial class TheNineSlot : MonoBehaviour
     {
         public static TheNineSlot Instance;
-
-        [Space(5)]
-        [Header("preparingScene")]
-        public PreScene _preparingScene;
 
         [Space(5)]
         [Header("进程器")]
@@ -24,7 +19,7 @@ namespace mainMenu
         [Space(5)]
         [Header("几个重要RectTransform")]
         public RectTransform NineSlotT;
-
+        
         [Space(5)]
         [Header("成员详细")]
         public MemberDetail _MemberDetail;
@@ -32,6 +27,10 @@ namespace mainMenu
         [Space(5)]
         [Header("SKillPrintout")]
         public SkillsPrintOut _SkillsPrintOut;
+
+        [Space(5)]
+        [Header("CurrentHp")]
+        public Text _HP;
 
         [Space(5)]
         [Header("九格")]
@@ -61,9 +60,8 @@ namespace mainMenu
         SkillStoneSlot C1Slot, C2Slot, C3Slot;
         SkillStoneSlot focusingSlot;
         readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
-
         float last_clickTime;
-
+        
         void Awake()
         {
             Instance = this;
@@ -118,142 +116,7 @@ namespace mainMenu
                 button.onClick.AddListener(buttonFeature);
             }
         }
-
-        void ShowNineSlotExSurplus(int wholePoint)
-        {
-            int pointremain = wholePoint / 10;
-            for (int i = 0; i < remainCharges.Count; i++)
-            {
-                if (i + 1 <= pointremain)
-                {
-                    remainCharges[i].SetActive(true);
-                } else
-                    remainCharges[i].SetActive(false);
-            }
-        }
-
-        public List<string> GetUsingStonesId()//这个id列表其实是指的盒子为玩家拥有的技能石所赋予的临时id。
-        {
-            A1DragAndDropCell.UpdateMyItem();
-            A2DragAndDropCell.UpdateMyItem();
-            A3DragAndDropCell.UpdateMyItem();
-            B1DragAndDropCell.UpdateMyItem();
-            B2DragAndDropCell.UpdateMyItem();
-            B3DragAndDropCell.UpdateMyItem();
-            C1DragAndDropCell.UpdateMyItem();
-            C2DragAndDropCell.UpdateMyItem();
-            C3DragAndDropCell.UpdateMyItem();
-
-            List<string> IDs = new List<string>();
-
-            string A1 = A1DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string A2 = A2DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string A3 = A3DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string B1 = B1DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string B2 = B2DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string B3 = B3DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string C1 = C1DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string C2 = C2DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string C3 = C3DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-
-            if (A1 != null)
-                IDs.Add(A1);
-            if (A2 != null)
-                IDs.Add(A2);
-            if (A3 != null)
-                IDs.Add(A3);
-            if (B1 != null)
-                IDs.Add(B1);
-            if (B2 != null)
-                IDs.Add(B2);
-            if (B3 != null)
-                IDs.Add(B3);
-            if (C1 != null)
-                IDs.Add(C1);
-            if (C2 != null)
-                IDs.Add(C2);
-            if (C3 != null)
-                IDs.Add(C3);
-            return IDs;
-        }
-
-        public List<string> GetCurrentNineSlotAllSkillIds()//注意这个函数和上面的意义完全不一样，这个返回的是技能定义ID， 长度固定为9    
-        {
-            List<string> NineSkillIDs = new List<string>();
-            string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string B1 = B1DragAndDropCell.GetItem() != null ? B1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string B2 = B2DragAndDropCell.GetItem() != null ? B2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string B3 = B3DragAndDropCell.GetItem() != null ? B3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            NineSkillIDs.Add(A1);
-            NineSkillIDs.Add(A2);
-            NineSkillIDs.Add(A3);
-            NineSkillIDs.Add(B1);
-            NineSkillIDs.Add(B2);
-            NineSkillIDs.Add(B3);
-            NineSkillIDs.Add(C1);
-            NineSkillIDs.Add(C2);
-            NineSkillIDs.Add(C3);
-            return NineSkillIDs;
-        }
-
-        public bool RefreshWholePointBasedOnCurrentNineSlots(DragAndDropItem item, DragAndDropCell replacePosition)
-        {
-            List<string> nineskillids = Instance.GetCurrentNineSlotAllSkillIds();
-
-            if (item == null)
-            {
-                item = new DragAndDropItem
-                {
-                    _SkillConfigOfSkillStone = new SkillConfig()
-                };
-            }
-
-            if (replacePosition == Instance.A1DragAndDropCell)
-            {
-                nineskillids[0] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.A2DragAndDropCell)
-            {
-                nineskillids[1] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.A3DragAndDropCell)
-            {
-                nineskillids[2] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.B1DragAndDropCell)
-            {
-                nineskillids[3] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.B2DragAndDropCell)
-            {
-                nineskillids[4] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.B3DragAndDropCell)
-            {
-                nineskillids[5] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.C1DragAndDropCell)
-            {
-                nineskillids[6] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.C2DragAndDropCell)
-            {
-                nineskillids[7] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-            if (replacePosition == Instance.C3DragAndDropCell)
-            {
-                nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
-            }
-
-            int wholepint = MySkillStonesReader.SkillSetValidation(nineskillids[0], nineskillids[1], nineskillids[2], nineskillids[3], nineskillids[4], nineskillids[5], nineskillids[6], nineskillids[7], nineskillids[8]);
-            return wholepint < 0 ? false : true;
-        }
-
+        
         GameObject SkillStonePrefab;
         public DragAndDropItem GenerateOneDragAndDropItem()
         {
@@ -351,54 +214,11 @@ namespace mainMenu
                 }
             }
 
-            int wholepoint = GetNineSlotWholePointOfMonster(_AccountCharacterInfo);
-            ShowNineSlotExSurplus(wholepoint);
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 yield return _slot.ShowOrigin(Color.white);
-                _slot._DragAndDropCell.cellPhase = _slot._DragAndDropCell.GetItem() != null ? DragAndDropCell.CellPhase.NineSlotCell_full : DragAndDropCell.CellPhase.NineSlotCell_empty;
             }
-        }
-
-        public int GetNineSlotWholePointOfMonster(GetMonsterOfPlayerDetailModel _AccountCharacterInfo)
-        {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
-            string A1=null, A2=null, A3=null, B1=null, B2=null, B3=null, C1=null, C2=null, C3=null;
-            for (int i = 0; i < equipingstones.Count; i++)
-            {
-                switch (equipingstones[i].inUsingSkillSlot)
-                {
-                    case "1":
-                        A1 = equipingstones[i].skillId;
-                        break;
-                    case "2":
-                        A2 = equipingstones[i].skillId;
-                        break;
-                    case "3":
-                        A3 = equipingstones[i].skillId;
-                        break;
-                    case "4":
-                        B1 = equipingstones[i].skillId;
-                        break;
-                    case "5":
-                        B2 = equipingstones[i].skillId;
-                        break;
-                    case "6":
-                        B3 = equipingstones[i].skillId;
-                        break;
-                    case "7":
-                        C1 = equipingstones[i].skillId;
-                        break;
-                    case "8":
-                        C2 = equipingstones[i].skillId;
-                        break;
-                    case "9":
-                        C3 = equipingstones[i].skillId;
-                        break;
-                }
-            }
-            int wholePoint = MySkillStonesReader.SkillSetValidation(A1,A2,A3,B1,B2,B3,C1,C2,C3);
-            return wholePoint;
+            NineSlotsStatusRefresh();
         }
 
         public int CheckNineSlotPointsAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
@@ -438,7 +258,7 @@ namespace mainMenu
                         break;
                 }
             }
-            int wholePoint = MySkillStonesReader.SkillSetValidation(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+            int wholePoint = MySkillStonesReader.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
             return wholePoint;
         }
 
@@ -495,7 +315,7 @@ namespace mainMenu
             SeletedRender(null);
             yield break;
         }
-
+        
         public void NineSlotsStatusRefresh()//这个的核心作用在于即使调整cell的phase
         {
             foreach (SkillStoneSlot _slot in allSlot)
@@ -505,11 +325,12 @@ namespace mainMenu
                 SlotButtonBeheviour(_slot);
             }
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
-            int wholePoint = MySkillStonesReader.SkillSetValidation(
-                skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
-                skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
-                skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]);
+            int wholePoint = MySkillStonesReader.SkillBalancePoint(
+            skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
+            skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
+            skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]);
             ShowNineSlotExSurplus(wholePoint);
+            RefreshCurrentHpBasedOnNineSlots();
         }
     }
 }

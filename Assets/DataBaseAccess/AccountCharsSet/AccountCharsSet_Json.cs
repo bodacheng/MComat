@@ -166,22 +166,5 @@ namespace dataAccess
             LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _CharacterDataInfo.monsterOfPlayerId + ".json", json);
             yield break;
         }
-
-        public IEnumerator PlusExpForAccountCharLocalSaveData(string charlocalID, int plusExp)
-        {
-            IEnumerator getchar = Instance.GetAccountCharInfo(charlocalID);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
-
-            if (AccountSet.instance._PlayerAccountInfo.Coin < plusExp || before == null)
-            {
-                yield break;
-            }
-            AccountSet.instance._PlayerAccountInfo.Coin -= plusExp;
-            int currentExp = before.experience;
-            currentExp += plusExp;
-            before.experience = currentExp;
-            yield break;
-        }
     }
 }
