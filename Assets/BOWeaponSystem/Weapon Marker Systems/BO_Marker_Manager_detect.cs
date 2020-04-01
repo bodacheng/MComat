@@ -326,6 +326,11 @@ namespace HittingDetection
             {
                 CurrentHP -= 1;
                 EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
+            }else{
+                if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
+                {
+                    _MyOwnerCalReference._Center.Animation_Manger.FrameFreeze();
+                }
             }
         }
     }

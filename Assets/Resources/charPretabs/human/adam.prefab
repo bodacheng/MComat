@@ -16261,7 +16261,7 @@ Animator:
     'Bip001 Pelvis'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
     'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tand more ...\n\tFrom animation
     clip '\u75BC\u75DB'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip
-    '\u95ED\u773C'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip '\u6124\u6012'\n\tFrom
+    '\u5927\u7B11'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip '\u6124\u6012'\n\tFrom
     animation clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -21273,7 +21273,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 0.6, z: 0.6}
+  m_Size: {x: 1.8, y: 0.8, z: 0.8}
   m_Center: {x: 0.2, y: 0, z: 0}
 --- !u!114 &6781816903078174022
 MonoBehaviour:
