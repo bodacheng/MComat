@@ -30,6 +30,7 @@ public class PreparingProcess : NagareProcess
                 }
             break;
         }
+        EffectAndHurtObjectLoading.Instance.IniEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
         yield break;
     }

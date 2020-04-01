@@ -43,11 +43,18 @@ namespace mainMenu
         
         public void LocalTest()
         {
-            List<Object> stageScriptableObjects = Resources.LoadAll("stages", typeof(StageScriptableObject)).ToList();
+            List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(StageScriptableObject)).ToList();
             foreach (Object _object in stageScriptableObjects)
             {
                 StageScriptableObject one = (StageScriptableObject)_object;
                 StageButton newButton = Instantiate(pretab);
+
+                void LoadThisStage()
+                {
+                    mainProcessRunner.TriggerMainProcess(QuestPreparePage.Instance.LoadStageByScriptThenGetReadyForIt(one));
+                }
+
+                newButton.button.onClick.AddListener(LoadThisStage);
                 newButton.ID = one.LocalFightID;
                 stageButtons.Add(newButton);
                 newButton.text.text = "Stage" + one.LocalFightID.ToString();

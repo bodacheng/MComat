@@ -76,6 +76,11 @@ public class Knock_Off_State : Behavior
                 _xz = Vector3.zero - gameObject.transform.position;
                 _xz.y = 0;
                 _xz = _xz.normalized;
+                Vector3 effectT = gameObject.transform.position.normalized * BoundaryControllByGod._BattleRingRadius;
+                effectT.y = gameObject.transform.position.y;
+                Vector3 quaV = -gameObject.transform.position.normalized;
+                quaV.y = 0;
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("wallCrack",null,effectT, Quaternion.Euler(quaV),null);
             }
         }
         

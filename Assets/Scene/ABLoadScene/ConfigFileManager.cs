@@ -97,7 +97,6 @@ public class ConfigFileManager : MonoBehaviour {
                         STATE_TYPE = BehaviorType.GR,
                         AI_MIN_DIS = 0.2f,
                         AI_MAX_DIS = 5f,
-                        CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -134,7 +133,6 @@ public class ConfigFileManager : MonoBehaviour {
                         STATE_TYPE = BehaviorType.GI,
                         AI_MIN_DIS = 3f,
                         AI_MAX_DIS = 10f,
-                        CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -171,7 +169,6 @@ public class ConfigFileManager : MonoBehaviour {
                         STATE_TYPE = BehaviorType.GM,
                         AI_MIN_DIS = 3f,
                         AI_MAX_DIS = 8f,
-                        CAN_LEVELUP = "2",
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);

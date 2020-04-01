@@ -231,23 +231,6 @@ namespace HittingDetection
             }
         }
 
-        // 3月24日新企划，围绕ContinuousDamage以及能量类攻击的新改动
-        // 我们把原先的isHitDestroyEnergy参数给去掉，取而代之换成一个weaponhealth的int参数，如果这个参数大于0，系统会考虑其撞击毁灭的问题。
-        // 而这个参数将和ContinuousDamage形成一个相互权衡的关系。如果武器不是ContinuousDamage，则一个能量系武器在打击到对象后应该立刻hp-1，并且直接cleartargets。
-        // 直到hp为0时自身消灭。这样比如一个hp为2的波动技能就形成了一个类似kof99中boss那样的2连击飞行道具，这个道具打到人身上基本是形成一个很快的2连击。
-        // 而如果这个武器是ContinuousDamage，事情将另当别论。ContinuousDamage类武器的cleartargets周期应该符合ContinuousDamageInterval。
-        // 它在攻击到一个对象后不会立刻随着自身hp的减少而cleartargets，但如果它有着大于0的hp，它依然会随着打击到对象而掉血，并随着寿命结束而消失
-        // 设想有一个地上火焰技能是ContinuousDamage，它可能有两种消失方式，一种是打击了不少对象hp为0了，一种是随着自身BO_destroyer的设置而时间已经尽。        
-        // WeaponEnergyExaust 这个函数在“与敌人武器发生接触”和“与敌人肉体产生接触”的时候是不同的处理逻辑，这个可以更细致分析来探讨有没有其他方式处理
-        void WeaponEnergyExaust(Vector3 Pos, Quaternion Qua)
-        {
-            if (weaponHP > 0)
-            {
-                CurrentHP -= 1;
-                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
-            }
-        }
-
         public bool IfVectorClean(Vector3 rot)
         {
             return rot == Vector3.zero

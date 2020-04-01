@@ -28,7 +28,6 @@
         public float AI_MIN_DIS;
         public float AI_MAX_DIS;
         public int SP_LEVEL;
-        public string CAN_LEVELUP;
         public int RARITY_LEVEL;
 
         public SkillConfig Clone()
@@ -45,9 +44,8 @@
             ATTACK_WEIGHT = 1;
             STATE_TYPE = BehaviorType.NONE;
             SP_LEVEL = 1;
-            CAN_LEVELUP = "0";
         }
-        public SkillConfig(string id, string type, string keyName, string ShowName, int AT, BehaviorType stateType, float AITriggerDistanceMin,float AITriggerDistanceMax, int SPLevel, int CAN_LEVELUP)
+        public SkillConfig(string id, string type, string keyName, string ShowName, int AT, BehaviorType stateType, float AITriggerDistanceMin,float AITriggerDistanceMax, int SPLevel)
         {
             this.RECORD_ID = id;//和Skills表id对应
             this.TYPE = type;
@@ -58,7 +56,6 @@
             this.AI_MIN_DIS = AITriggerDistanceMin;
             this.AI_MAX_DIS = AITriggerDistanceMax;
             this.SP_LEVEL = SPLevel;
-            this.CAN_LEVELUP = CAN_LEVELUP.ToString();
             this.RARITY_LEVEL = 0;
         }
     }
@@ -84,31 +81,31 @@
                 case MoveType.Mode1:
                     this.MConfig = new SkillConfig
                         (
-                            null, null, "Move_normal", "normal move", 0, 0,0, 0, 0, 0
+                            null, null, "Move_normal", "normal move", 0, 0,0, 0, 0
                         );
                     break;
                 case MoveType.Mode2:
                     this.MConfig = new SkillConfig
                         (
-                            null, null, "Move_slow", "normal move", 0, 0, 0, 0, 0, 0
+                            null, null, "Move_slow", "normal move", 0, 0, 0, 0, 0
                         );
                     break;
                 case MoveType.Mode3:
                     this.MConfig = new SkillConfig
                         (
-                            null, null, "Move_fast", "normal move",  0, 0, 0, 0, 0, 0
+                            null, null, "Move_fast", "normal move",  0, 0, 0, 0, 0
                         );
                     break;
                 case MoveType.Test:
                     this.MConfig = new SkillConfig
                         (
-                            null, null, "Test_Move", "测试用移动状态(角色站着不动)",  0, 0, 0, 0, 0, 0
+                            null, null, "Test_Move", "测试用移动状态(角色站着不动)",  0, 0, 0, 0, 0
                         );
                     break;
                 default:
                     this.MConfig = new SkillConfig
                         (
-                            null, null, "Move_normal", "normal move",  0, 0, 0, 0, 0, 0
+                            null, null, "Move_normal", "normal move",  0, 0, 0, 0, 0
                         );
                     break;
             }
@@ -116,7 +113,7 @@
             this.DConfig = hasDefend
                 ? new SkillConfig
                         (
-                            null, null, "Defend", "防衛",  0, 0, 0, 0, 0, 0
+                            null, null, "Defend", "防衛",  0, 0, 0, 0, 0
                         )
                 : null;
 
@@ -125,19 +122,19 @@
                 case RushType.Jump:
                     this.RConfig = new SkillConfig
                         (
-                            null, null, "Jump", "Jump", 0, 0, 0, 0, 0, 0
+                            null, null, "Jump", "Jump", 0, 0, 0, 0, 0
                         );
                     break;
                 case RushType.Rush:
                     this.RConfig = new SkillConfig
                         (
-                            null, null, "Rush", "Rush", 0, 0, 0, 0, 0, 0
+                            null, null, "Rush", "Rush", 0, 0, 0, 0, 0
                         );
                     break;
                 case RushType.RushBack:
                     this.RConfig = new SkillConfig
                         (
-                            null, null, "RushBack", "RushBack",0, 0, 0, 0, 0, 0
+                            null, null, "RushBack", "RushBack",0, 0, 0, 0, 0
                         );
                     break;
                 case RushType.None:

@@ -34,7 +34,6 @@ public class SkillConfigTable
         public string SP_LEVEL;
 		public string TRIGGER_DIS_MIN;
         public string TRIGGER_DIS_MAX;
-        public string CAN_LEVELUP;
         public string RARITY_LEVEL;
     }
 
@@ -197,8 +196,7 @@ public class SkillConfigTable
                 grid[i][5] = "SP_LEVEL";
                 grid[i][6] = "TRIGGER_DIS_MIN";
                 grid[i][7] = "TRIGGER_DIS_MAX";
-                grid[i][8] = "CAN_LEVELUP";
-                grid[i][9] = "RARITY_LEVEL";
+                grid[i][8] = "RARITY_LEVEL";
             }
             else
             {
@@ -210,8 +208,7 @@ public class SkillConfigTable
                 grid[i][5] = rowList[i - 1].SP_LEVEL;
                 grid[i][6] = rowList[i - 1].TRIGGER_DIS_MIN;
                 grid[i][7] = rowList[i - 1].TRIGGER_DIS_MAX;
-                grid[i][8] = rowList[i - 1].CAN_LEVELUP;
-                grid[i][9] = rowList[i - 1].RARITY_LEVEL;
+                grid[i][8] = rowList[i - 1].RARITY_LEVEL;
             }
         }
         string delimiter = ",";
@@ -246,8 +243,7 @@ public class SkillConfigTable
                     SP_LEVEL = grid[i][5],
                     TRIGGER_DIS_MIN = grid[i][6],
                     TRIGGER_DIS_MAX = grid[i][7],
-                    CAN_LEVELUP = grid[i][8],
-                    RARITY_LEVEL = grid[i][9]
+                    RARITY_LEVEL = grid[i][8]
                 };
                 rowList.Add(row);
             }
@@ -323,7 +319,6 @@ public class SkillConfigTable
                 row.SP_LEVEL = "-1";
                 break;
         }
-        row.CAN_LEVELUP = skillConfig.CAN_LEVELUP;
         row.RARITY_LEVEL = skillConfig.RARITY_LEVEL.ToString();
         return row;
     }
@@ -381,7 +376,6 @@ public class SkillConfigTable
                 _SkillConfig.SP_LEVEL = -1;
                 break;
         }
-        _SkillConfig.CAN_LEVELUP = row.CAN_LEVELUP;
         _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
         return _SkillConfig;
     }
