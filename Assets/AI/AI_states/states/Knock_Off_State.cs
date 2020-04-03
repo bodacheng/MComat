@@ -41,15 +41,16 @@ public class Knock_Off_State : Behavior
         _FightAttriCalReference.PlusCriticalGauge(2);
         _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
-        superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 3);
-        if (superHitPool != null)
-        {
-            processingBlood = superHitPool.Rent();
-            processingBlood.transform.position = newValue.damageHappenPoint;
-            processingBlood.transform.rotation = Quaternion.identity;
-        }
         _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
+        
+        //superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 3);
+        //if (superHitPool != null)
+        //{
+        //    processingBlood = superHitPool.Rent();
+        //    processingBlood.transform.position = newValue.damageHappenPoint;
+        //    processingBlood.transform.rotation = Quaternion.identity;
+        //}
     }
 
     public override bool Capacity_Exit_Condition()
@@ -92,7 +93,6 @@ public class Knock_Off_State : Behavior
                 _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.velocity = Vector3.zero;
                 time_counter = 0;//开始针对躺地时间记时
-                //Debug.Log(gameObject + "pos:"+ gameObject.transform.position + this._Rigidbody.useGravity);
             }else{
                 gameObject.transform.position += 
                 _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
@@ -103,7 +103,6 @@ public class Knock_Off_State : Behavior
             {
                 _AIStateRunner.ChangeState("getUp");
             }
-            //Debug.Log(gameObject + "thenpos:"+ gameObject.transform.position+ this._Rigidbody.useGravity);
         }
                    
         if (!canWakeUp)
@@ -122,7 +121,7 @@ public class Knock_Off_State : Behavior
         }
         
         time_counter += Time.fixedDeltaTime;
-                
+        
         // 原先的MultiplyPoint3x4击飞曲线计划相关
         //if (!touchedBoundary)
         //{
