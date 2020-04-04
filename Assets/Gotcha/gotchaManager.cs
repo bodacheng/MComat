@@ -11,6 +11,6 @@ public class gotchaManager : MonoBehaviour
     
     public void gotchaButtonFeature()
     {
-        preparingScene.mainProcessRunner.TriggerMainProcess(MySkillStonesReader.Instance.StoneGotcha());        
+        preparingScene.mainProcessRunner.Run(MySkillStonesReader.Instance.StoneGotcha());        
     }
 }

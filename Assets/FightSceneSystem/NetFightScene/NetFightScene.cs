@@ -72,7 +72,7 @@ public class NetFightScene : MonoBehaviour {
         //QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = 60;
         FightGlobalSetting.scenestep = 1; 
-        mainProcessRunner.TriggerMainProcess(FightSceneStartUp());
+        mainProcessRunner.Run(FightSceneStartUp());
     }
 
     private IEnumerator FightSceneStartUp()

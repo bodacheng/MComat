@@ -44,7 +44,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()

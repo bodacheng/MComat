@@ -30,8 +30,8 @@ public class TryEditALines : MainSceneProcess
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        _MemberDetail.focusingCharacterDataInfo = myfighter;
-        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharacterDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。        
+        _MemberDetail.focusingCharDataInfo = myfighter;
+        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。        
         yield break;
     }
     
@@ -51,7 +51,7 @@ public class TryEditALines : MainSceneProcess
 
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -81,13 +81,13 @@ public class TryEditALines : MainSceneProcess
             yield break;
         }
         yield return TheNineSlot.Instance.ReadANineAndTwo(_CharacterDataInfo);
-        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_CharacterDataInfo.monsterId);
-        SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
-        yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(_CharacterDataInfo.monsterId);
+        //SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
+        //yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.Run(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
+            _MemberDetail.presentationProcessRunner.Run(_MemberDetail.SkillEditConfirmAnimation());
             StageScriptableObject stage = new StageScriptableObject
             {
                 battleNameCH = "亚当大战傻逼门卫"

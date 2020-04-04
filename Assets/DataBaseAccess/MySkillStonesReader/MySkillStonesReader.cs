@@ -98,7 +98,7 @@ namespace dataAccess
 
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in mySkillStonesDataDic)
             {
-                yield return SkillStonesBox.Instance.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
+                yield return SkillStonesBox.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
             }
             //yield return VerifyAllMyStonesUsingMonsterInfo();
             yield break;

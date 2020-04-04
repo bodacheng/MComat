@@ -51,7 +51,7 @@ namespace mainMenu
 
                 void LoadThisStage()
                 {
-                    mainProcessRunner.TriggerMainProcess(QuestPreparePage.Instance.LoadStageByScriptThenGetReadyForIt(one));
+                    mainProcessRunner.Run(QuestPreparePage.Instance.LoadStageByScriptThenGetReadyForIt(one));
                 }
 
                 newButton.button.onClick.AddListener(LoadThisStage);

@@ -37,7 +37,7 @@ public class MonstersConfigTable
 		public string DEFENDABLE_FLAG;
 	}
             
-    public static CharConfig GetCharacterResourceInfo(string resourceId)
+    public static CharConfig GetCharConfig(string resourceId)
     {
         return CharacterResourceInfoDic.ContainsKey(resourceId) ? CharacterResourceInfoDic[resourceId] : null;
     }

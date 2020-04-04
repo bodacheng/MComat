@@ -32,7 +32,7 @@ public class SkillStoneSlot
         _DragAndDropCell.UpdateMyItem();
         DragAndDropItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
-            _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);
+            _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
         _DragAndDropCell.UpdateMyItem();
     }
     
@@ -42,20 +42,20 @@ public class SkillStoneSlot
         DragAndDropItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
         {
-            if (_DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == SkillStonesBox.Instance.GetFocusingExType())//如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
+            if (_DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == SkillStonesBox.target.GetFocusingExType())//如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
             {
-                DragAndDropCell dragAndDropCell = SkillStonesBox.Instance.GetFirstEmptyCell();
+                DragAndDropCell dragAndDropCell = SkillStonesBox.target.GetFirstEmptyCell();
                 if (dragAndDropCell != null)
                 {
                     dragAndDropCell.AddItem(_DragAndDropItem);
                 }
                 else
                 {
-                    _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);
+                    _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
                 }
             }
             else{
-                _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);//如果尝试归还背包的技能石必杀等级与显示中的不一致，则直接使其非显示。
+                _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);//如果尝试归还背包的技能石必杀等级与显示中的不一致，则直接使其非显示。
             }
         }
         _DragAndDropCell.UpdateMyItem();

@@ -60,12 +60,12 @@ public class LoadingCanvas : MonoBehaviour {
 
     public void LightUp()
     {
-        mainProcessRunner.TriggerMainProcess(LightUpCanvas());
+        mainProcessRunner.Run(LightUpCanvas());
     }
 
     public void DarkOff(float darkness)
     {
-        mainProcessRunner.TriggerMainProcess(DarkOffCanvas(darkness));
+        mainProcessRunner.Run(DarkOffCanvas(darkness));
     }
 
     IEnumerator LightUpCanvas()

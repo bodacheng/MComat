@@ -38,7 +38,7 @@ public class ZokuseiSkillStoneTagsGroup
                 buttoneffectspath = "redMagic";
                 break;
                 default:
-                buttoneffectspath = "darkMagic";
+                buttoneffectspath = "defaultMagic";
                 break;
         }
         
@@ -69,7 +69,7 @@ public class ZokuseiSkillStoneTagsGroup
             buttonEffectsSetsForSkillStoneBox.Add(3,ex3tab.GetComponent<ParticleSystem>());
     }
     
-    public void refreshforbuttonForSkillStoneBox(int eX,Vector3 pos)
+    public void RefreshSTBoxEffects(int eX,Vector3 pos)
     {
         ParticleSystem p = buttonEffectsSetsForSkillStoneBox[eX];
         p.gameObject.transform.position = pos;

@@ -28,7 +28,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(enterProcess());
+        this.mainProcessRunner.Run(enterProcess());
     }
     
     public override void ProcessEnd()

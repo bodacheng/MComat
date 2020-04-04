@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
-    IEnumerator MenuProcess;
+    readonly IEnumerator MenuProcess;
+    readonly List<Task> Tasks = new List<Task>();
 
-    List<Task> Tasks = new List<Task>();
-    
     class Task
     {
         public int phase = 0;
@@ -45,7 +44,7 @@ public class SingleThreadProcesser : MonoBehaviour
         }
     }
 
-    public void TriggerMainProcess(IEnumerator _process)
+    public void Run(IEnumerator _process)
     {
         Tasks.Add(new Task{ process = _process });
     }

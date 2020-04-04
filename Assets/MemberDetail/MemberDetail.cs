@@ -42,11 +42,11 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
 
-        public GetMonsterOfPlayerDetailModel focusingCharacterDataInfo;
+        public GetMonsterOfPlayerDetailModel focusingCharDataInfo;
 
         public IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingChar()
         {
-            if (focusingCharacterDataInfo == null || focusingCharacterDataInfo.monsterOfPlayerId == null || focusingCharacterDataInfo.monsterId == null)
+            if (focusingCharDataInfo == null || focusingCharDataInfo.monsterOfPlayerId == null || focusingCharDataInfo.monsterId == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 sell.onClick.RemoveAllListeners();
@@ -62,7 +62,7 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                PreScene.Instance.mainProcessRunner.TriggerMainProcess(Step2INIForUIRefresh(focusingCharacterDataInfo));
+                PreScene.Instance.mainProcessRunner.Run(Step2INIForUIRefresh(focusingCharDataInfo));
             }
             void SkillShow()
             {
@@ -105,7 +105,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.TriggerMainProcess(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo)));
+            presentationProcessRunner.Run(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharDataInfo(focusingCharDataInfo)));
         }
 
         public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharDataInfo _focusingCharacterDataInfo)
@@ -145,7 +145,7 @@ namespace mainMenu
         public IEnumerator SkillEditConfirmAnimation()
         {
             this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(focusingCharacterDataInfo.monsterId);
+            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
             {
@@ -192,7 +192,7 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(accountCharacterInfo.monsterId);
+                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accountCharacterInfo.monsterId);
                 CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.type, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.type, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
@@ -209,7 +209,7 @@ namespace mainMenu
         {
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
             yield return getchar;
-            focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            focusingCharDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
             yield break;
         }
 

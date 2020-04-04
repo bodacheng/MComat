@@ -48,7 +48,7 @@ namespace mainMenu
             hangshu = cellsLimit / gridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hangshu);
         }
-    
+        
         public DragAndDropCell GetFirstEmptyCell()
         {
             foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
@@ -110,7 +110,7 @@ namespace mainMenu
                 yield break;
             }
             targetIcon.gameObject.SetActive(true);
-            characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
+            characterResourceInfo = MonstersConfigTable.GetCharConfig(_one.monsterId);
             targetIcon.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
             characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
             yield break;

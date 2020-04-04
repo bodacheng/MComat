@@ -14,10 +14,10 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(this._MemberDetail.focusingCharacterDataInfo);
+        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(this._MemberDetail.focusingCharDataInfo);
         _MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         _MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
@@ -32,7 +32,7 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()

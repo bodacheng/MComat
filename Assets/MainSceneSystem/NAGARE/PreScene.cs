@@ -35,7 +35,11 @@ namespace mainMenu
         
         [Space(11)]
         [Header("SkillStonesBox")]
-        public SkillStonesBox _SkillStonesBox;
+        public SkillStonesBox _SkillStonesBox_NineSlot;
+        
+        [Space(11)]
+        [Header("SkillStonesBox 技能石单独画面")]
+        public SkillStonesBox _SkillStonesBox_Show;
         
         [Space(7)]
         [Header("Shader转换器")]
@@ -79,7 +83,7 @@ namespace mainMenu
             //_stagesManager.loadAndRefresh();
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
-            mainProcessRunner.TriggerMainProcess(StartUpProcess());
+            mainProcessRunner.Run(StartUpProcess());
         }
 
         // 这个应该是和热更新进程完全分开了。
@@ -96,7 +100,8 @@ namespace mainMenu
             Application.targetFrameRate = 60;
             yield return null; // 这一行的目的是为了让整个项目那些靠start（）里进行初始化工作的模块顺利完成初始化后在开始下面的各种加载 
 
-            _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
+            _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+            _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.Instance.gameObject.SetActive(false);
             _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
             MainMenuCanvas.gameObject.SetActive(false);
@@ -139,7 +144,9 @@ namespace mainMenu
             
             HeroIcon.IniFrames();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
-            yield return (_SkillStonesBox.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize));
+            yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
+            yield return (_SkillStonesBox_NineSlot.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize));
+            yield return (_SkillStonesBox_Show.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize));
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.Instance.StartUp());
             
@@ -239,7 +246,7 @@ namespace mainMenu
             {
                 if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
                 {
-                    mainProcessRunner.TriggerMainProcess(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
+                    mainProcessRunner.Run(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
                 }
                 if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
                 {
@@ -260,13 +267,13 @@ namespace mainMenu
                                 skillId = _pair.Value.RECORD_ID,
                                 level = 1.ToString()
                             };
-                            yield return SkillStonesBox.Instance.GenerateOneStone(skillStoneOfPlayerInfoModel);
+                            yield return SkillStonesBox.GenerateOneStone(skillStoneOfPlayerInfoModel);
                             i++;
                         }
                         MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
-                        yield return SkillStonesBox.Instance.ArrangeSkillStonesToBox();
+                        yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
                     }
-                    mainProcessRunner.TriggerMainProcess(GetAllStones());
+                    mainProcessRunner.Run(GetAllStones());
                 }
             }
         }

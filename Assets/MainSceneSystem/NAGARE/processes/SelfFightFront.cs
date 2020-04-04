@@ -7,7 +7,8 @@ public class SelfFightFront : MainSceneProcess
     {
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         this._SelfFightManager.Clear();
         yield return this._SelfFightManager.INITeamPosButtons();
         MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
@@ -30,7 +31,7 @@ public class SelfFightFront : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()

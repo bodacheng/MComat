@@ -21,7 +21,8 @@ public class frontPage : MainSceneProcess
     {
         PreScene.Instance.MainMenuCanvas.gameObject.SetActive(true);
         PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(true);
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
 
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -46,7 +47,7 @@ public class frontPage : MainSceneProcess
         
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(enterProcess());
+        this.mainProcessRunner.Run(enterProcess());
     }
     
     public override void ProcessEnd()

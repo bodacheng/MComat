@@ -20,9 +20,7 @@ using Skill;
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
-    {
-        public static SkillStonesBox Instance;
-        
+    {        
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
@@ -65,19 +63,22 @@ namespace mainMenu
         string focusingtype = "human";
         int focusingExType;
         SkillStoneSlot DeleteSkillStoneSlot;
+        static RectTransform _stonesTempContainer;
 
+        public static SkillStonesBox target;
+        
         void Awake()
         {
-            Instance = this;
+            _stonesTempContainer = stonesTempContainer;
         }
         
         public IEnumerator StartUp(int stoneboxsize)
         {
-            yield return _SkillStoneBoxTabEffectsManager.StartUp();
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
             Debug.Log("技能石盒子容量为"+stoneboxsize);
             GenerateCells(stoneboxsize);
+            yield break;
         }
         
         public string GetFocusingType()
@@ -97,28 +98,28 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 0;
-            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
 
         public void EX1TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 1;
-            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
 
         public void EX2TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 2;
-            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
 
         public void EX3TabFeature(GameObject self)
         {
             _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 3;
-            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
@@ -152,13 +153,13 @@ namespace mainMenu
 
         void RangeCheckBoxOnValueChanged()
         {
-            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(ArrangeSkillStonesToBox());
+            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
 
         public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(EXTabsFeatureRefresh(true));
+            TheNineSlot.Instance.mainProcessRunner.Run(EXTabsFeatureRefresh(true));
         }
 
         public IEnumerator ArrangeSkillStonesToBox()
@@ -221,7 +222,7 @@ namespace mainMenu
             yield break;
         }
         
-        public IEnumerator GenerateOneStone(SkillStoneOfPlayerInfoModel one)
+        public static IEnumerator GenerateOneStone(SkillStoneOfPlayerInfoModel one)
         {
             SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
             if (_SkillConfig == null)
@@ -238,7 +239,7 @@ namespace mainMenu
             yield return GenerateOneStoneModel(one.skillStoneOfPlayerId);
         }
         
-        public IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
+        public static IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
         {
             if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
             {
@@ -279,7 +280,7 @@ namespace mainMenu
             item._SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.TYPE + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
             item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
-            item.gameObject.transform.SetParent(stonesTempContainer);           
+            item.gameObject.transform.SetParent(_stonesTempContainer);           
         }
         
         Vector2 buttonAnchorPosition;

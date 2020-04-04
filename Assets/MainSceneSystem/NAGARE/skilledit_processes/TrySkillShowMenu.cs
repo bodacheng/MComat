@@ -18,10 +18,10 @@ public class TrySkillShowMenu : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(this._MemberDetail.focusingCharacterDataInfo);
+        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(this._MemberDetail.focusingCharDataInfo);
         this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
-        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
+        //SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
+        //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         this._MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
@@ -36,7 +36,7 @@ public class TrySkillShowMenu : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()

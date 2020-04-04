@@ -73,7 +73,7 @@ public class TeamEditManager : MonoBehaviour
             if (getchar.Current == null)
                 yield break;
             _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
+            characterResourceInfo = MonstersConfigTable.GetCharConfig(_one.monsterId);
             tar.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
                 characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
         }
@@ -113,7 +113,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            PreScene.Instance.mainProcessRunner.TriggerMainProcess(setPosB());
+            PreScene.Instance.mainProcessRunner.Run(setPosB());
         }
         team1back.iconButton.onClick.AddListener(pos1B);
 
@@ -128,7 +128,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            PreScene.Instance.mainProcessRunner.TriggerMainProcess(setPosL());
+            PreScene.Instance.mainProcessRunner.Run(setPosL());
         }
         team1left.iconButton.onClick.AddListener(pos1L);
 
@@ -143,7 +143,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            PreScene.Instance.mainProcessRunner.TriggerMainProcess(setPosF());
+            PreScene.Instance.mainProcessRunner.Run(setPosF());
         }
         team1front.iconButton.onClick.AddListener(pos1F);
 
@@ -158,7 +158,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
             }
-            PreScene.Instance.mainProcessRunner.TriggerMainProcess(setPosR());
+            PreScene.Instance.mainProcessRunner.Run(setPosR());
         }
         team1right.iconButton.onClick.AddListener(pos1R);
         yield break;

@@ -177,12 +177,12 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                                 case CellPhase.SkillStoneBoxCell:
                                     UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
                                     {
-                                        TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().SkillStoneOfPlayerId}));
+                                        TheNineSlot.Instance.mainProcessRunner.Run(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().SkillStoneOfPlayerId}));
                                         UpdateMyItem();
                                     };
                                     UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
                                     {
-                                        TheNineSlot.Instance.mainProcessRunner.TriggerMainProcess(SkillStonesBox.Instance.ArrangeSkillStonesToBox());
+                                        TheNineSlot.Instance.mainProcessRunner.Run(SkillStonesBox.target.ArrangeSkillStonesToBox());
                                     };
                                     LoadingCanvas.target.ArrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, "确实要删除技能石头：" + GetItem()._SkillConfigOfSkillStone.REAL_NAME + "?");
                                     break;
@@ -265,7 +265,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         {
             UpdateMyItem();
             if (myDadItem != null)
-                myDadItem.gameObject.transform.SetParent(SkillStonesBox.Instance.stonesTempContainer);
+                myDadItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
             myDadItem = null;
             // 以下功能本游戏用不上。即所谓的无限道具格
             DragAndDropCell SourceCell = item.GetComponentInParent<DragAndDropCell>();
@@ -320,7 +320,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 
     void ShowUsingCharIcon(DragAndDropItem dragAndDropItem, HeroIcon targetIcon)
     {
-        _SingleThreadProcesser.TriggerMainProcess(SkillStonesBox.Instance.ShowUsingChar(dragAndDropItem, targetIcon));
+        _SingleThreadProcesser.Run(SkillStonesBox.target.ShowUsingChar(dragAndDropItem, targetIcon));
     }
 
     /// <summary>

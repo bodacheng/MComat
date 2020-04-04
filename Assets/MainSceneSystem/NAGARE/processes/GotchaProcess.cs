@@ -9,7 +9,6 @@ public class GotchaProcess : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         this._gotchaManager.gotchaCanvas.gameObject.SetActive(true);
         yield break;
@@ -28,7 +27,7 @@ public class GotchaProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(EnterProcess());
+        this.mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()

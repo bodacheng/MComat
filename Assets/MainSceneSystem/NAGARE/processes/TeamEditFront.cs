@@ -8,7 +8,8 @@ public class TeamEditFront : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(0.5f);
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
@@ -31,7 +32,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.TriggerMainProcess(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -50,7 +51,7 @@ public class TeamEditFront : MainSceneProcess
     
     public IEnumerator TeamEditMonsterDetailMonsterIconBehaviour()
     {
-        GetMonsterOfPlayerDetailModel _AccountCharacterInfo = this._MemberDetail.focusingCharacterDataInfo;
+        GetMonsterOfPlayerDetailModel _AccountCharacterInfo = this._MemberDetail.focusingCharDataInfo;
         if (_AccountCharacterInfo == null)
         {
             Debug.Log("严重错误");yield break;

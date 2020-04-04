@@ -85,7 +85,7 @@ namespace mainMenu
                 Debug.Log("读取角色信息严重错误monsterOfPlayerId:" + monsterOfPlayerId);
                 yield break;
             }
-            CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(targetingCharacterDataInfo.monsterId);
+            CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(targetingCharacterDataInfo.monsterId);
             if (targetingCharacterResourceInfo == null)
             {
                 Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);
@@ -142,7 +142,7 @@ namespace mainMenu
 
         public void OnTypeChangeMyMonsterBox()
         {
-            PreScene.Instance.mainProcessRunner.TriggerMainProcess(DisplayMonsterIcons());
+            PreScene.Instance.mainProcessRunner.Run(DisplayMonsterIcons());
         }
 
         //icon的排列，显示   
@@ -165,7 +165,7 @@ namespace mainMenu
                 void action1()
                 {
                     HeroIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
-                    PreScene.Instance.mainProcessRunner.TriggerMainProcess(PreScene.Instance.MonsterIconButton(monsterOfPlayerId));
+                    PreScene.Instance.mainProcessRunner.Run(PreScene.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
                 _targetingIcon.iconButton.onClick.AddListener(action1);
                 _targetingIcon.gameObject.SetActive(true);

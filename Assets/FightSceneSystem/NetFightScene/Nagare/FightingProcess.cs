@@ -42,7 +42,7 @@ public class FightingProcess : NagareProcess
     {
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        mainProcessRunner.TriggerMainProcess(FinalMoment(this.fightLogger.getWinner()));
+        mainProcessRunner.Run(FinalMoment(this.fightLogger.getWinner()));
     }
     
     public override void LocalUpdate()

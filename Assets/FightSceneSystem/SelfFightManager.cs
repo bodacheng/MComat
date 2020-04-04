@@ -263,7 +263,7 @@ namespace mainMenu
                 if (getchar.Current == null)
                     yield break;
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_one.monsterId);
+                characterResourceInfo = MonstersConfigTable.GetCharConfig(_one.monsterId);
                 tar.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
                     characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
             }
@@ -386,7 +386,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                PreScene.Instance.mainProcessRunner.TriggerMainProcess(FightStart(float.Parse(HPinput.text)));
+                PreScene.Instance.mainProcessRunner.Run(FightStart(float.Parse(HPinput.text)));
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

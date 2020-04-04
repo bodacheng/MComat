@@ -190,7 +190,7 @@ public class FightTeam_RotationMode : FightTeam
                 Debug.Log("角色信息字典严重错误");
                 continue;
             }
-            CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceID);
+            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(characterDataInfo.ResourceID);
             _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
             _SideCharIcon.gameObject.SetActive(true);

@@ -44,7 +44,7 @@ namespace dataAccess
                     AccountCharacterInfoListObjectsDictionary.Clear();
                     for (int i = 0; i < info.Length; i++)
                     {
-                        CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(info[i].monsterId);
+                        CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(info[i].monsterId);
                         if (targetingCharacterResourceInfo == null)
                         {
                             Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + info[i].monsterId);

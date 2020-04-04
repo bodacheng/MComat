@@ -19,14 +19,14 @@ public class TryOneStoneAdd : MainSceneProcess
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
         
-        _MemberDetail.focusingCharacterDataInfo = myfighter;
-        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharacterDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
+        _MemberDetail.focusingCharDataInfo = myfighter;
+        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
         IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
         yield return (loadMyStonesProcess);
 
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
-        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
-        SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
+        //SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
+        //TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
+        //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
         TheNineSlot.Instance.A2DragAndDropCell.gameObject.SetActive(false);
@@ -43,13 +43,13 @@ public class TryOneStoneAdd : MainSceneProcess
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         
         // 表现系
-        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_MemberDetail.focusingCharacterDataInfo.monsterId);
-        SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
-            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
-            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
-            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX2Tab.gameObject,5f),
-            SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX3Tab.gameObject,5f),
-            _CharacterResourceInfo._zokusei);
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(_MemberDetail.focusingCharDataInfo.monsterId);
+        //SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
+            //SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
+            //SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
+            //SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX2Tab.gameObject,5f),
+            //SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX3Tab.gameObject,5f),
+            //_CharacterResourceInfo._zokusei);
         yield return RefreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion();
         yield break;
     }
@@ -70,7 +70,7 @@ public class TryOneStoneAdd : MainSceneProcess
 
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(enterProcess());
+        this.mainProcessRunner.Run(enterProcess());
     }
     
     public override void ProcessEnd()
@@ -116,13 +116,13 @@ public class TryOneStoneAdd : MainSceneProcess
             yield break;
         }
         yield return TheNineSlot.Instance.ReadANineAndTwo(_CharacterDataInfo);
-        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(_CharacterDataInfo.monsterId);
-        SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
-        yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(_CharacterDataInfo.monsterId);
+        //SkillStonesBox.Instance.SetFocusingType(_CharacterResourceInfo.type);
+        //yield return (SkillStonesBox.Instance.EXTabsFeatureRefresh(false));
         void SkillEditConfirm()
         {
-            mainProcessRunner.TriggerMainProcess(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.TriggerMainProcess(_MemberDetail.SkillEditConfirmAnimation());
+            mainProcessRunner.Run(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
+            _MemberDetail.presentationProcessRunner.Run(_MemberDetail.SkillEditConfirmAnimation());
         }
         void SkillUpdateValidation()
         {
@@ -144,6 +144,6 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
         CharDataInfo focusingData = RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo);
-        _MemberDetail.presentationProcessRunner.TriggerMainProcess(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
+        _MemberDetail.presentationProcessRunner.Run(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
     }
 }

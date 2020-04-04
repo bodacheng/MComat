@@ -44,7 +44,7 @@ public class OldDebugFightingProcess : NagareProcess
         _NetFightScene.LoadStageFinished.Value = false;
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
-        mainProcessRunner.TriggerMainProcess(_NetFightScene._FightOverControl.WINProcess());//这里是要根据情况的。。
+        mainProcessRunner.Run(_NetFightScene._FightOverControl.WINProcess());//这里是要根据情况的。。
     }
 
     public override void LocalUpdate()
@@ -87,7 +87,7 @@ public class OldDebugFightingProcess : NagareProcess
             winner = Team.player1;
         if (winner != Team.none)
         {
-            mainProcessRunner.TriggerMainProcess(finalMoment(finalSurviver, winner)) ;
+            mainProcessRunner.Run(finalMoment(finalSurviver, winner)) ;
         }
 
         if (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())

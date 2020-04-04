@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using UnityEngine;
 using mainMenu;
 
 public class QuestInfo : MainSceneProcess
 {
     public IEnumerator enterProcess()
     {
-        SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         QuestPreparePage.Instance.QuestPreparePageCanvas.gameObject.SetActive(true);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;
@@ -25,7 +25,7 @@ public class QuestInfo : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.TriggerMainProcess(enterProcess());
+        this.mainProcessRunner.Run(enterProcess());
     }
     
     public override void ProcessEnd()

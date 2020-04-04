@@ -18,18 +18,22 @@ namespace mainMenu
             ZokuseiSkillStoneTagsGroup green = new ZokuseiSkillStoneTagsGroup();
             ZokuseiSkillStoneTagsGroup dark = new ZokuseiSkillStoneTagsGroup();
             ZokuseiSkillStoneTagsGroup _light = new ZokuseiSkillStoneTagsGroup();
+            ZokuseiSkillStoneTagsGroup _default = new ZokuseiSkillStoneTagsGroup();
     
             red.INI_forSkillStoneBox(Zokusei.redMagic,transform);
             blue.INI_forSkillStoneBox(Zokusei.blueMagic,transform);
             green.INI_forSkillStoneBox(Zokusei.greenMagic,transform);
             dark.INI_forSkillStoneBox(Zokusei.darkMagic,transform);
             _light.INI_forSkillStoneBox(Zokusei.lightMagic,transform);
+            _default.INI_forSkillStoneBox(Zokusei.Null,transform);
     
             zokuseiButtonEffects.Add(Zokusei.redMagic,red);
             zokuseiButtonEffects.Add(Zokusei.blueMagic,blue);
             zokuseiButtonEffects.Add(Zokusei.greenMagic,green);
             zokuseiButtonEffects.Add(Zokusei.darkMagic,dark);
             zokuseiButtonEffects.Add(Zokusei.lightMagic,_light);
+            zokuseiButtonEffects.Add(Zokusei.Null,_default);
+            
             triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/lightMagic/explosion0", typeof(GameObject)) as GameObject;
             triggerExplosion0 = Object.Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
             yield break;
@@ -57,12 +61,12 @@ namespace mainMenu
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }
         }
-        
-        private void RefreshTagEffect(Vector3 pos,int sp_level)//按钮切换也可以在这里做文章
+
+        void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
         {
-            _focusingButtonEffectsGroup.refreshforbuttonForSkillStoneBox(sp_level,pos);
+            _focusingButtonEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
-        
+
         public void Skillbuttonexplosion(Vector3 targetPOS)
         {
             triggerExplosion0.transform.position = targetPOS;

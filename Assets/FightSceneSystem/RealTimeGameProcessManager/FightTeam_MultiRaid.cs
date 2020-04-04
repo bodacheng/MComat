@@ -131,7 +131,7 @@ public class FightTeam_MultiRaid : FightTeam
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharDataInfo characterDataInfo = CharDataInfoRef[a_char];
-            CharConfig characterResourceInfo = MonstersConfigTable.GetCharacterResourceInfo(characterDataInfo.ResourceID);
+            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(characterDataInfo.ResourceID);
             _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID),characterResourceInfo._zokusei);
             _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
             _SideCharIcon.gameObject.SetActive(true);
