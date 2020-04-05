@@ -114,7 +114,7 @@ public partial class BO_Ani_E : MonoBehaviour
     public void ReleasePreparedMagic(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
-        hiddenMethods.ReleasePreparedMagic_core(target.position,target.rotation,target,e.floatParameter,null);
+        hiddenMethods.ReleasePreparedMagic_core(target.position,transform.rotation,target,e.floatParameter,null);
     }
     
     public void ReleasePreparedMagicToAir(AnimationEvent e)

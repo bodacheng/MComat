@@ -64,7 +64,7 @@ public class Decompositioner : MonoBehaviour {
     {
         return BO_Ani_E;
     }
-
+    
     // Local_OnEnable和Local_OnDisable，最大的一个区别是，
     // 前者没有打开marker的处理，marker的开启由各个与攻击相关的模块自行处理，因为在那之前涉及一些不太统一的参数设置
     // 而Local_OnDisable进行了关闭marker的处理（目前好像就干了这一件事）

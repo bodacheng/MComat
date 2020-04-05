@@ -85,6 +85,10 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             }
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
+            {
+                Ani_E.processingHitBox.TrackControl.Sensor = Ani_E._DATA_CENTER.Sensor;
+            }
             Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E._DATA_CENTER.geometryCenter);
             if (Ani_E._DATA_CENTER._TeamConfig != null)
             {
@@ -124,6 +128,10 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
             Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
+            {
+                Ani_E.processingHitBox.TrackControl.Sensor = Ani_E._DATA_CENTER.Sensor;
+            }
             if (Ani_E._DATA_CENTER._TeamConfig != null)
             {
                 Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
@@ -158,6 +166,10 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
                 Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
                 Ani_E.processingHitBox.SetBOAniE(Ani_E);
+                if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
+                {
+                    Ani_E.processingHitBox.TrackControl.Sensor = Ani_E._DATA_CENTER.Sensor;
+                }
                 Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
                 Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
                 if (Ani_E.processingHitBox._HitBox.onGroundMagic)
@@ -218,6 +230,10 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             }
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
+            {
+                Ani_E.processingHitBox.TrackControl.Sensor = Ani_E._DATA_CENTER.Sensor;
+            }
             Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E._DATA_CENTER.geometryCenter);
             Ani_E.processingHitBox._HitBox.SetTeamConfig(Ani_E._DATA_CENTER._TeamConfig);
             Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
