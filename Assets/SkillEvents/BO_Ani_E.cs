@@ -111,16 +111,16 @@ public partial class BO_Ani_E : MonoBehaviour
             null);
     }
 
-    public void ReleasePreparedMagic(string part)
+    public void ReleasePreparedMagic(AnimationEvent e)
     {
-        DecideTarget(part);
-        hiddenMethods.ReleasePreparedMagic_core(target.position,target.rotation,target,null);
+        DecideTarget(e.stringParameter);
+        hiddenMethods.ReleasePreparedMagic_core(target.position,target.rotation,target,e.floatParameter,null);
     }
     
     public void ReleasePreparedMagicToAir(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
-        hiddenMethods.ReleasePreparedMagic_core(target.position,transform.rotation,null,null);
+        hiddenMethods.ReleasePreparedMagic_core(target.position,transform.rotation,null,e.floatParameter,null);
     }
 
     Vector3 intPos;

@@ -124577,14 +124577,14 @@ AnimationClip:
   m_Events:
   - time: 0.033333335
     functionName: EffectOnBodyPart
-    data: right_hand
+    data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
   - time: 0.033333335
     functionName: EffectOnBodyPart
-    data: left_hand
+    data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
@@ -124602,6 +124602,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
+    messageOptions: 0
+  - time: 0.85
+    functionName: PrepareOneMagic
+    data: curvedarkball
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 0.95
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
@@ -124611,11 +124618,11 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 1
-    functionName: Bullet_shoot_from_body_part
+    functionName: ReleasePreparedMagicToAir
     data: right_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 15
-    intParameter: 3
+    floatParameter: 5
+    intParameter: 0
     messageOptions: 0
   - time: 1.1666666
     functionName: turn_on_flag

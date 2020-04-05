@@ -194,7 +194,7 @@ public partial class BO_Ani_E : MonoBehaviour
             }
         }
         
-        public void ReleasePreparedMagic_core(Vector3 pos,Quaternion qua, Transform parentT,string logForStateKey)
+        public void ReleasePreparedMagic_core(Vector3 pos,Quaternion qua, Transform parentT, float trackSpeed, string logForStateKey)
         {
             if (Ani_E.OnLoadMagic == null)
                 return;
@@ -223,7 +223,7 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
             if (Ani_E.processingHitBox.TrackControl != null)
             {
-                Ani_E.processingHitBox.TrackControl.StartOff(pos, qua, 1);
+                Ani_E.processingHitBox.TrackControl.StartOff(pos, qua, trackSpeed);
             }
             Ani_E.OnLoadMagic = null;
                         

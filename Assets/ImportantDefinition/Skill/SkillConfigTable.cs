@@ -70,10 +70,12 @@ public class SkillConfigTable
             if (!Dic.ContainsKey(keyValuePair.RECORD_ID))
             {
                 Dic.Add(new KeyValuePair<string, SkillConfig>(keyValuePair.RECORD_ID, keyValuePair));
-                //Debug.Log("以下技能加入字典： RECORDID:"+keyValuePair.RECORD_ID + "  realname:"+ keyValuePair.REAL_NAME);
+                Debug.Log("以下技能加入字典： RECORDID:"+keyValuePair.RECORD_ID + "  realname:"+ keyValuePair.REAL_NAME);
             }
             else
-                Debug.Log("致命错误「技能配置文件」技能ID重复："+ keyValuePair .RECORD_ID);
+            {
+                Debug.Log("致命错误「技能配置文件」技能ID重复：" + keyValuePair.RECORD_ID);
+            }
         }
         Instance.SkillConfigDicForReference = Dic;
     }
