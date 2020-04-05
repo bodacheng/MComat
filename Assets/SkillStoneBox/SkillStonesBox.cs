@@ -58,17 +58,20 @@ namespace mainMenu
        
         [Header("fxcamera")]
         public Camera fxCamera;
-
-        IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        
+        [Header("DeleteManger")]
+        public StoneDeleteManger _StoneDeleteManger;
+        
         string focusingtype = "human";
         int focusingExType;
         SkillStoneSlot DeleteSkillStoneSlot;
         static RectTransform _stonesTempContainer;
-
+        
         public static SkillStonesBox target;
         
         void Awake()
         {
+            _Selected = SelectedFrame;
             _stonesTempContainer = stonesTempContainer;
         }
         
@@ -77,7 +80,7 @@ namespace mainMenu
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
             Debug.Log("技能石盒子容量为"+stoneboxsize);
-            GenerateCells(stoneboxsize);
+            GenerateCells(stoneboxsize,1);
             yield break;
         }
         
@@ -165,6 +168,7 @@ namespace mainMenu
         public IEnumerator ArrangeSkillStonesToBox()
         {
             yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.Instance.GetUsingStonesId());
+            _StoneDeleteManger.RefreshSelectedRender();
         }
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。

@@ -17,13 +17,42 @@ namespace mainMenu
         [Header("格子pretab")]
         public DragAndDropCell Cellprefab;
         
+        [Space(5)]
+        [Header("选中框")]
+        public GameObject SelectedFrame;
+        public static GameObject _Selected;
+
         [Space(7)]
         [Header("石头滚动视窗")]
         public ScrollRect stoneviewScrollRect;
         
-        // 围绕这个环节的一个问题是玩家账户中格子数量的问题。
+        public IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        
+        public static void SeletedRender(DragAndDropCell cell)
+        {
+            if (cell == null)
+            {
+                _Selected.SetActive(false);
+                return;
+            }
+            
+            if (cell._SelectMode == DragAndDropCell.SelectMode.single)
+            {
+                _Selected.SetActive(true);
+                _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
+                _Selected.transform.localPosition = Vector3.zero;
+                _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+                _Selected.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+                _Selected.gameObject.SetActive(true);
+            }
+            else if (cell._SelectMode == DragAndDropCell.SelectMode.multi)
+            {
+            }
+        }
+        
         // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
-        public void GenerateCells(int cellsLimit)
+        public void GenerateCells(int cellsLimit, int mode)// 1 : showMode 2: skilledit
         {
             int hangshu = 1;
             Cellprefab.gameObject.GetComponent<Image>().sprite = Cell;
@@ -40,15 +69,24 @@ namespace mainMenu
                     cell.gameObject.SetActive(true);
                     cell.transform.SetParent(BoxT);
                     cell.transform.localScale = Vector3.one;
-                    CellsDictionary.Add(i, cell);
-                    CellButtonBeheviour(CellsDictionary[i]);
+                    CellsDictionary.Add(i, cell);                    
                 }
+                if (mode == 1)
+                {
+                    CellButtonBeheviour_STStoneShow(CellsDictionary[i]);
+                }
+                if (mode == 2)
+                {
+                    CellButtonBeheviour_EditCharSkill(CellsDictionary[i]);
+                }
+                CellsDictionary[i]._selected.SetActive(false);
+                CellsDictionary[i]._SelectMode = DragAndDropCell.SelectMode.single;
             }
             GridLayoutGroup gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             hangshu = cellsLimit / gridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hangshu);
         }
-        
+                
         public DragAndDropCell GetFirstEmptyCell()
         {
             foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
@@ -61,7 +99,7 @@ namespace mainMenu
         }
         
         float lastclicktime;
-        public void CellButtonBeheviour(DragAndDropCell _SkillStoneCell)
+        public void CellButtonBeheviour_EditCharSkill(DragAndDropCell _SkillStoneCell)
         {
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
@@ -84,6 +122,26 @@ namespace mainMenu
                 }
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
+                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
+            }
+        }
+        
+        public void CellButtonBeheviour_STStoneShow(DragAndDropCell _SkillStoneCell)
+        {
+            Button button = _SkillStoneCell.GetComponent<Button>();
+            if (button != null)
+            {
+                void buttonFeature()
+                {
+                    DragAndDropItem _stone = _SkillStoneCell.GetItem();
+                    if (_stone != null && _stone._SkillConfigOfSkillStone != null)
+                    {
+                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfigOfSkillStone, _stone.SkillStoneOfPlayerId);
+                    }
+                }
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(buttonFeature);
+                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
             }
         }
         

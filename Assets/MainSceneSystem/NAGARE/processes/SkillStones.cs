@@ -9,11 +9,13 @@ public class SkillStones : MainSceneProcess
     {
         LoadingCanvas.target.DarkOff(1f);
         SkillStonesBox.target = PreScene.Instance._SkillStonesBox_Show;
+        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
+        SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize, 1);
+        
         PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
-        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(true);
-
+        
         IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
         yield return (loadMyStonesProcess);
         PreScene.Instance._SkillStonesBox_Show.BoxWholeT.gameObject.SetActive(true);
@@ -28,6 +30,7 @@ public class SkillStones : MainSceneProcess
         SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX3Tab.gameObject,5f),
         Zokusei.Null);
         
+        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         LoadingCanvas.target.LightUp();
     }
     

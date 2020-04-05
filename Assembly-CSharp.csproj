@@ -400,6 +400,7 @@
     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
+    <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
     <Compile Include="Assets\POFX\Scripts\FX\POFX_Blur.cs" />

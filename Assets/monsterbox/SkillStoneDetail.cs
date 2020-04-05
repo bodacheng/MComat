@@ -122,25 +122,25 @@ namespace mainMenu
         
         void ShowSKillRanges(float dis_min, float float_max)
         {
-            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.inner_range))
-            //    close.SetActive(true);
-            //else
-            //    close.SetActive(false);
+            if (SkillConfigTable.RangeLimit(dis_min,float_max,true, false, false, false))
+                close.SetActive(true);
+            else
+                close.SetActive(false);
                 
-            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.mid_range))
-            //    near.SetActive(true);
-            //else
-            //    near.SetActive(false);
+            if (SkillConfigTable.RangeLimit(dis_min,float_max,false, true, false, false))
+                near.SetActive(true);
+            else
+                near.SetActive(false);
                 
-            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.far_range))
-            //    far.SetActive(true);
-            //else
-            //    far.SetActive(false);
+            if (SkillConfigTable.RangeLimit(dis_min,float_max,false, false, true, false))
+                far.SetActive(true);
+            else
+                far.SetActive(false);
                 
-            //if (behaviorEnterRanges.Contains(BehaviorEnterRange.out_of_range))
-            //    outter.SetActive(true);
-            //else
-                //outter.SetActive(false);
+            if (SkillConfigTable.RangeLimit(dis_min,float_max,false, false, false, true))
+                outter.SetActive(true);
+            else
+                outter.SetActive(false);
         }
         
         void ShowSkillStoneExType(int eX)

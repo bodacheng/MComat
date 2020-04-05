@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using DG.Tweening;
 
 public class TrackControl : MonoBehaviour {
     //public List<EventKeyframe> listEventKeyframe = new List<EventKeyframe>();
 
-    public TrackMode _TrackMode;
+    public TrackMode _TrackMode = TrackMode.DefinedTrack;
     float time_counter;
     
     [Space(11)]

@@ -144,9 +144,10 @@ namespace mainMenu
             
             HeroIcon.IniFrames();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
+            SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
-            yield return (_SkillStonesBox_NineSlot.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize));
-            yield return (_SkillStonesBox_Show.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize));
+            yield return _SkillStonesBox_NineSlot.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
+            yield return _SkillStonesBox_Show.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.Instance.StartUp());
             

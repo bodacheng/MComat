@@ -39,10 +39,6 @@ namespace mainMenu
         B1DragAndDropCell, B2DragAndDropCell, B3DragAndDropCell,
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
 
-        [Space(5)]
-        [Header("选中框")]
-        public GameObject Selected;
-
         [Space(1)]
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;
@@ -72,22 +68,6 @@ namespace mainMenu
             return focusingSlot;
         }
 
-        void SeletedRender(RectTransform T)
-        {
-            if (T == null)
-            {
-                Selected.SetActive(false);
-                return;
-            }
-            Selected.SetActive(true);
-            Selected.transform.SetParent(T);
-            Selected.transform.localPosition = Vector3.zero;
-            Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-            Selected.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-            Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            Selected.gameObject.SetActive(true);
-        }
-
         public void SlotButtonBeheviour(SkillStoneSlot skillStoneSlot)
         {
             Button button = skillStoneSlot._DragAndDropCell.gameObject.GetComponent<Button>();
@@ -98,10 +78,10 @@ namespace mainMenu
                     if (Time.time - last_clickTime < 0.25f)
                     {
                         focusingSlot = null;
-                        SeletedRender(null);
+                        SkillStonesBox.SeletedRender(null);
                     } else {
                         focusingSlot = skillStoneSlot;
-                        SeletedRender(focusingSlot._DragAndDropCell.GetComponent<RectTransform>());
+                        SkillStonesBox.SeletedRender(focusingSlot._DragAndDropCell);
                     }
                     last_clickTime = Time.time;
                     skillStoneSlot._DragAndDropCell.UpdateMyItem();
@@ -137,8 +117,8 @@ namespace mainMenu
 
         IEnumerator GetNineSlotReady()
         {
-            SeletedRender(null);
-
+            SkillStonesBox.SeletedRender(null);
+            
             A1Slot = new SkillStoneSlot(1,null, A1DragAndDropCell);
             A2Slot = new SkillStoneSlot(2,null, A2DragAndDropCell);
             A3Slot = new SkillStoneSlot(3,null, A3DragAndDropCell);
@@ -312,7 +292,7 @@ namespace mainMenu
                 }
             }
             yield return ReadANineAndTwo(accountCharacterInfo);
-            SeletedRender(null);
+            SkillStonesBox.SeletedRender(null);
             yield break;
         }
         

@@ -19,9 +19,19 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         NineSlotCell_empty,
         DeleteArea,
     }
+    
+    public enum SelectMode
+    {
+        single = 1,
+        multi = 2
+    }
+    
+    public SelectMode _SelectMode = SelectMode.single;
 
     [Tooltip("using Stone Character Icon")]
     public HeroIcon _charIcon;
+    [Tooltip("选中框，用来确保有一个选中框选中这个格子的时候不会有其他选中框选中他。")]
+    public GameObject _selected;
 	[Tooltip("Functional type of this cell")]
     public CellPhase cellPhase = CellPhase.SkillStoneBoxCell;
     [Tooltip("Image of this cell")]

@@ -4,7 +4,7 @@ using UniRx.Toolkit;
 using HittingDetection;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
-    
+
     static GameObject Marker;
     readonly GameObject Prefab;
 

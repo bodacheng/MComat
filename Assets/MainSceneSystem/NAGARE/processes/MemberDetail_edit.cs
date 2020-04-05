@@ -2,6 +2,7 @@
 using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
+using dataAccess;
 
 public class MemberDetail_edit : MainSceneProcess
 {
@@ -11,6 +12,7 @@ public class MemberDetail_edit : MainSceneProcess
         LoadingCanvas.target.DarkOff(0.5f);
         PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+        SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize,2);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         yield return SkillEditButtonFeature(_MemberDetail.focusingCharDataInfo);
