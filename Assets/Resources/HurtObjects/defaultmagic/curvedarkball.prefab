@@ -51952,7 +51952,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: -0.061203003
+      value: 0
       inSlope: 1
       outSlope: 1
       tangentMode: 0
@@ -51960,8 +51960,17 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.89564914
-      value: 10
+      time: 1.2037308
+      value: 0.12902427
+      inSlope: 1.9228044
+      outSlope: 1.9228044
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.9350382
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.8108666
+      value: 10.217978
       inSlope: 1
       outSlope: 1
       tangentMode: 0
@@ -51969,8 +51978,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2
-      value: -10
+      time: 2.9152174
+      value: -9.782022
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -51978,8 +51987,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 3.2726688
-      value: 9.917364
+      time: 4.187886
+      value: 10.135342
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -51987,8 +51996,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 4.4544373
-      value: -9.986221
+      time: 5.3696547
+      value: -9.768244
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -51996,8 +52005,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 5.555557
-      value: 9.866771
+      time: 6.470774
+      value: 10.084748
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -52005,8 +52014,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 6.3348155
-      value: -9.961229
+      time: 7.250033
+      value: -9.743252
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -52014,8 +52023,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 7.3717413
-      value: 9.866771
+      time: 8.286959
+      value: 10.084748
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -52023,8 +52032,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 8.130851
-      value: -10.098917
+      time: 9.046068
+      value: -9.8809395
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -52032,8 +52041,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 9.075799
-      value: 0.10384226
+      time: 9.991016
+      value: 0.32181978
       inSlope: 10.797162
       outSlope: 0
       tangentMode: 5
@@ -52090,7 +52099,7 @@ MonoBehaviour:
   zokusei: 1
   muzzle: 
   ExplosionEffect: energy_resolve
-  ContinuousDamage: 0
+  ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
 --- !u!114 &1543134919556754503
 MonoBehaviour:
