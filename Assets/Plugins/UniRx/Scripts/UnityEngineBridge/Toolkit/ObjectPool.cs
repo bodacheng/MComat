@@ -13,9 +13,9 @@ namespace UniRx.Toolkit
     public abstract class ObjectPool<T> : IDisposable
         where T : UnityEngine.Component
     {
-        bool isDisposed = false;
-        Queue<T> q;
-
+        protected bool isDisposed = false;
+        protected List<T> q = new List<T>();
+        
         /// <summary>
         /// Limit of instace count.
         /// </summary>
@@ -75,15 +75,17 @@ namespace UniRx.Toolkit
         /// <summary>
         /// Get instance from pool.
         /// </summary>
-        public T Rent()
+        public virtual T Rent()
         {
             if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
-            if (q == null) q = new Queue<T>();
+            if (q == null) q = new List<T>();
 
-            var instance = (q.Count > 0)
-                ? q.Dequeue()
-                : CreateInstance();
-
+            var instance = q.Count > 0 ? q[0] : CreateInstance();
+            if (q.Count > 0)
+            {
+                q.Remove(instance);
+            }
+            
             OnBeforeRent(instance);
             return instance;
         }
@@ -96,15 +98,14 @@ namespace UniRx.Toolkit
             if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
             if (instance == null) throw new ArgumentNullException("instance");
 
-            if (q == null) q = new Queue<T>();
+            if (q == null) q = new List<T>();
 
             if ((q.Count + 1) == MaxPoolCount)
             {
                 throw new InvalidOperationException("Reached Max PoolSize");
             }
-
             OnBeforeReturn(instance);
-            q.Enqueue(instance);
+            q.Add(instance);
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace UniRx.Toolkit
             if (q == null) return;
             while (q.Count != 0)
             {
-                var instance = q.Dequeue();
+                var instance = q[0];
                 if (callOnBeforeRent)
                 {
                     OnBeforeRent(instance);
@@ -142,7 +143,7 @@ namespace UniRx.Toolkit
 
             while (q.Count > size)
             {
-                var instance = q.Dequeue();
+                var instance = q[0];
                 if (callOnBeforeRent)
                 {
                     OnBeforeRent(instance);
@@ -175,7 +176,7 @@ namespace UniRx.Toolkit
         /// <param name="threshold">Create count per frame.</param>
         public IObservable<Unit> PreloadAsync(int preloadCount, int threshold)
         {
-            if (q == null) q = new Queue<T>(preloadCount);
+            if (q == null) q = new List<T>(preloadCount);
 
             return Observable.FromMicroCoroutine<Unit>((observer, cancel) => PreloadCore(preloadCount, threshold, observer, cancel));
         }

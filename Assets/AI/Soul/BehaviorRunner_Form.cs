@@ -45,11 +45,11 @@ namespace Soul
 
                     KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair4);
-                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 2);
+                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 3);
                     
                     KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("CounterComingEnergy", behavior_define.StateKey);
                     RegisterConditionToRespond(keyValuePair_gi);
-                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 2);
+                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 3);
 
                     BehaviourAndStrategicExitCondition.Add(behavior_define.StateKey, null);
                     break;

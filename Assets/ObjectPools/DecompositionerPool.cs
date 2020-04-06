@@ -2,6 +2,8 @@
 using UnityEngine;
 using UniRx.Toolkit;
 using HittingDetection;
+using System;
+using System.Collections.Generic;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
 
@@ -13,11 +15,44 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         if (Marker == null)
         {
             Marker = new GameObject("Object Pools Container");
-            Object.DontDestroyOnLoad(Marker);
+            UnityEngine.Object.DontDestroyOnLoad(Marker);
         }
         Prefab = prefab;
     }
-            
+
+    /// <summary>
+    /// Get instance from pool.
+    /// </summary>
+    public override Decompositioner Rent()
+    {
+        if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
+
+        Decompositioner instance = null;
+        if (q.Count > 0)
+        {
+            for (int index = 0; index < q.Count; index++)
+            {
+                if (q[index] != null && !q[index].gameObject.activeSelf)
+                {
+                    instance = q[index];
+                    break;
+                }
+                if (q[index].gameObject.activeSelf)
+                {
+                    Debug.Log("h変ですね" + q[index].gameObject);
+                }
+            }
+        }
+        if (instance == null)
+        {
+            instance = CreateInstance();
+        }else{
+            q.Remove(instance);
+        }
+        OnBeforeRent(instance);
+        return instance;
+    }
+        
     protected override void OnBeforeReturn(Decompositioner instance)
     {
         if (FightGlobalSetting.HitBoxLogger)
@@ -28,6 +63,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
                 instance._HitBox.GeneratedByStateKey = null;
             }
         }
+        instance.Phase = 0;
         base.OnBeforeReturn(instance);
     }
 
@@ -40,7 +76,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     // オブジェクトが空のときにInstantiateする関数
     protected override Decompositioner CreateInstance()
     {
-        GameObject a = Object.Instantiate(Prefab);
+        GameObject a = UnityEngine.Object.Instantiate(Prefab);
         a.transform.SetParent(Marker.transform);
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
         BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();

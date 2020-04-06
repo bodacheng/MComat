@@ -131,6 +131,7 @@
     <Compile Include="Assets\AudioManager\AudioManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
     <Compile Include="Assets\BOWeaponSystem\Decompositioner.cs" />
+    <Compile Include="Assets\BOWeaponSystem\Decompositioner_Life.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BasicPhysicSupport.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\BO_Limb.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference.cs" />

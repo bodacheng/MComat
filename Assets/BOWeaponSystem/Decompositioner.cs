@@ -10,14 +10,14 @@ public enum HitBoxLifeEnding
     successed = 3
 }
 
-public class Decompositioner : MonoBehaviour {
+public partial class Decompositioner : MonoBehaviour {
     
     public BO_Marker_Manager _HitBox;
     public TrackControl TrackControl;
     
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;
-    public bool energyDissolveSlowly;
+    //public bool energyDissolveSlowly;
     
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;
@@ -31,8 +31,8 @@ public class Decompositioner : MonoBehaviour {
     PositionConstraint positionConstraint;
     BO_Ani_E BO_Ani_E;
     ParticleSystem to_be_stop_emissions;
-    int phase;
     float Counter;
+    public int Phase { get; set; }
     #endregion
 
     void Awake()
@@ -70,6 +70,15 @@ public class Decompositioner : MonoBehaviour {
     // 而Local_OnDisable进行了关闭marker的处理（目前好像就干了这一件事）
     public void Local_OnEnable()
     {
+        Phase = 1;
+        if (DestructionDelay >= 0)
+        {
+            Counter = 0;
+        }
+        if (_HitBox != null)
+        {
+            _HitBox.CurrentHP = _HitBox.weaponHP;
+        }
         if (to_be_stop_emissions != null)
         {
             to_be_stop_emissions.Play(true);
@@ -79,15 +88,6 @@ public class Decompositioner : MonoBehaviour {
             audioSource.volume = AudioManager.effectsVolumn;
         }
         SetMaterialsAlpha(1f);
-        if (_HitBox != null)
-        {
-            _HitBox.CurrentHP = _HitBox.weaponHP;
-        }
-        phase = 1;
-        if (DestructionDelay >= 0)
-        {
-            Counter = 0;
-        }
     }
 
     void Update()
@@ -112,113 +112,19 @@ public class Decompositioner : MonoBehaviour {
        
     public void Step1()
     {
-        if (phase == 1 && _HitBox != null)
+        if (Phase == 1 && _HitBox != null)
         {
             _HitBox.LocalUpdate();
         }
     }
     public void Step2()
     {
-        if (phase == 1 && _HitBox != null)
+        if (Phase == 1 && _HitBox != null)
         {
             _HitBox.LocalLateUpdate();
         }
     }
     
-    public void Life()
-    {
-        if (phase == 1 && _HitBox != null)
-        {
-            switch (_HitBox._WeaponMode)
-            {
-                case WeaponMode.EnergyFromBodyWeapon:
-                    if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
-                    {
-                        CloseMarkers();
-                        if (energyDissolveSlowly)
-                        {
-                            StopEmissions(false);
-                            Invoke("EnergyRessolve", 0.7f);
-                        }
-                        else
-                        {
-                            EnergyRessolve();
-                        }
-                        Counter = stop_emission_delay;
-                        phase = 2;
-                        HitBoxFadedEvent();
-                    }
-                    if (_HitBox.GetOwnerFightAttriCalReference() != null)
-                    {
-                        if (_HitBox.GetOwnerFightAttriCalReference().IFgettingDamage())
-                        {
-                            CloseMarkers();
-                            if (energyDissolveSlowly)
-                            {
-                                StopEmissions(false);
-                                Invoke("EnergyRessolve", 0.7f);
-                            }
-                            else
-                            {
-                                EnergyRessolve();
-                            }
-                            Counter = stop_emission_delay;
-                            phase = 2;
-                        }
-                    }
-                    break;
-                case WeaponMode.FlyerWeapon:
-                    if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
-                    {
-                        CloseMarkers();
-                        if (energyDissolveSlowly)
-                        {
-                            StopEmissions(false);
-                            Invoke("EnergyRessolve", 0.7f);
-                        }
-                        else
-                        {
-                            EnergyRessolve();
-                        }
-                        Counter = stop_emission_delay;
-                        phase = 2;
-                        HitBoxFadedEvent();
-                    }
-                    break;
-            }
-        }
-        
-        if (DestructionDelay > 0 && stop_emission_delay > 0)//如果能量自身有寿命
-        {
-            switch (phase)
-            {
-                case 1:
-                    if (Counter > stop_emission_delay)
-                    {
-                        CloseMarkers();
-                        StopEmissions(false);
-                        phase = 2;
-                    }
-                break;
-                case 2:
-                    if (DestructionDelay > stop_emission_delay)
-                    {
-                        SetMaterialsAlpha((DestructionDelay - Counter) / (DestructionDelay - stop_emission_delay));
-                    }
-                    if (Counter > DestructionDelay)
-                    {
-                        phase = 0;
-                        EnergyRessolve();
-                    }
-                break;
-            }
-        }
-        if (gameObject.activeSelf)
-        {
-            Counter += Time.deltaTime;
-        }
-    }
-
     public void StopEmissions(bool clearParticles)
     {
         if (to_be_stop_emissions != null && to_be_stop_emissions.isPlaying)
