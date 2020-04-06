@@ -318,7 +318,6 @@
     <Compile Include="Assets\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
-    <Compile Include="Assets\EZ Object Pools\DecompositionerPool.cs" />
     <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
     <Compile Include="Assets\FightLogger\FightLogger.cs" />
@@ -401,6 +400,7 @@
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
+    <Compile Include="Assets\ObjectPools\DecompositionerPool.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
     <Compile Include="Assets\POFX\Scripts\FX\POFX_Blur.cs" />
