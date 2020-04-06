@@ -17,7 +17,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         Prefab = prefab;
     }
-    
+            
     protected override void OnBeforeReturn(Decompositioner instance)
     {
         if (FightGlobalSetting.HitBoxLogger)
@@ -28,17 +28,17 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
                 instance._HitBox.GeneratedByStateKey = null;
             }
         }
-        instance.gameObject.SetActive(false);
+        base.OnBeforeReturn(instance);
     }
 
     protected override void OnBeforeRent(Decompositioner instance)
     {
-        instance.gameObject.SetActive(true);
+        base.OnBeforeRent(instance);
         instance.Local_OnEnable();
     }
     
     // オブジェクトが空のときにInstantiateする関数
-    protected override Decompositioner CreateInstance() 
+    protected override Decompositioner CreateInstance()
     {
         GameObject a = Object.Instantiate(Prefab);
         a.transform.SetParent(Marker.transform);
