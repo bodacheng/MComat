@@ -4,7 +4,8 @@ namespace HittingDetection
 {
     public class Trail_Marker : Marker
     {
-        public RaycastHit[] _hits = new RaycastHit[0]; //What was hit in this frame?
+        public RaycastHit[] _hits = new RaycastHit[0];
+        
         // trail detect
         Vector3 _lastFramePos; //Temporary position of the marker from the last frame
         float _dist; //distance between temp and actual marker position

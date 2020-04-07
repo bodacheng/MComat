@@ -7,9 +7,9 @@ namespace HittingDetection
     public class BO_Marker : Marker
     {
         public float radius;
-        List<Collider> BallDetectHitPool = new List<Collider>();
-        
-        public List<Collider> GetBallDetectHitPool()
+        IDictionary<Collider, HitPointPara> BallDetectHitPool = new Dictionary<Collider, HitPointPara>();
+                
+        public IDictionary<Collider, HitPointPara> GetBallDetectHitPool()
         {
             return BallDetectHitPool;
         }
@@ -63,7 +63,15 @@ namespace HittingDetection
             //BallDetectHitPool = Physics.OverlapSphere(this.transform.position, radius, _layers, QueryTriggerInteraction.Collide);
             if (_layers == (_layers | (1 << other.gameObject.layer)))
             {
-                BallDetectHitPool.Add(other);
+                if (!BallDetectHitPool.Keys.Contains(other))
+                {
+                    HitPointPara hitPointPara = new HitPointPara()
+                    {
+                        pos = HitPointCal(transform.position),
+                        qua = Quaternion.LookRotation(other.transform.position - HitPointCal(transform.position), Vector3.up)
+                    };
+                    BallDetectHitPool.Add(other,hitPointPara);
+                }
             }
         }
 
@@ -82,3 +90,15 @@ namespace HittingDetection
     }
 }
 
+    //_StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);
+    //这个地方不能用ClosestPoint。这里存在unity官方bug。
+    //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;
+    //为了打击特效看起来更接近肉体 向里切一下。
+    // 以下是几种 _StartPoint的其他算法
+    // 1.
+    // Vector3 fromMarkerToHit = BallDetectHitPool[hit_target_index].transform.position - _markers[i].transform.position;
+    // _StartPoint = _markers[i].transform.position + fromMarkerToHit / 2;//我是觉得离攻击体近更稳健些
+    // _StartPoint = BallDetectHitPool[hit_target_index].transform.position;
+    // 2.
+    // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
+    // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错

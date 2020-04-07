@@ -5,6 +5,12 @@ using UnityEngine;
 
 namespace HittingDetection
 {
+    public class HitPointPara
+    {
+        public Vector3 pos;
+        public Quaternion qua;
+    }
+    
     public class Marker : MonoBehaviour
     {
         [Tooltip("Choose which Layers should be affected by this marker's hit check.")]

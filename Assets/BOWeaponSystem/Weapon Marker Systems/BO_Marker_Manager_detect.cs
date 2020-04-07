@@ -8,8 +8,8 @@ namespace HittingDetection
         FightAttriCalReference _Raw_Target_Instance;//A single target which was hit.
         FightAttriCalReference CalReference;
         BO_Limb _BO_Hitbox;
-        Vector3 _StartPoint;
-        List<Collider> BallDetectHitPool;
+        Vector3 _TrailModeStartPoint;
+        IDictionary<Collider, HitPointPara> BallDetectHitPool;
         BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
 
         void DetectProcess()
@@ -137,9 +137,9 @@ namespace HittingDetection
                                 if (_Raw_Target_Instance != null)
                                 {
                                     _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
-                                    _StartPoint = _hits[hit_target_index].point;
-                                    _StartPoint = _StartPoint + (_hits[hit_target_index].transform.position - _StartPoint) * 0.3f;
-                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_StartPoint,Vector3.up)));
+                                    _TrailModeStartPoint = _hits[hit_target_index].point;
+                                    _TrailModeStartPoint = _TrailModeStartPoint + (_hits[hit_target_index].transform.position - _TrailModeStartPoint) * 0.3f;
+                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_TrailModeStartPoint,Vector3.up)));
                                     WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                                     HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                 }
@@ -167,11 +167,11 @@ namespace HittingDetection
                         {
                             if (TraditionalDefendMode)
                             {
-                                for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
+                                foreach (KeyValuePair<Collider,HitPointPara> Hit_C in BallDetectHitPool)
                                 {
-                                    if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << BallDetectHitPool[hit_target_index].gameObject.layer)　&&　!_Shields_Hit.Contains(BallDetectHitPool[hit_target_index].transform))
+                                    if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << Hit_C.Key.gameObject.layer)　&&　!_Shields_Hit.Contains(Hit_C.Key.transform))
                                     {
-                                        BO_Shield TheS = BallDetectHitPool[hit_target_index].gameObject.GetComponent<BO_Shield>();
+                                        BO_Shield TheS = Hit_C.Key.gameObject.GetComponent<BO_Shield>();
                                         if (TheS == null)
                                         {
                                             Debug.Log("防御盾构造严重错误");
@@ -208,7 +208,7 @@ namespace HittingDetection
                                                 HitShield = true;
                                                 _Used_Targets.Add(TheS._ownerFightAttriCalReference.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
 
-                                                _ShiledHitPositions.Add(BallDetectHitPool[hit_target_index].ClosestPoint(_markers[i].transform.position));//ClosestPointOnBounds
+                                                _ShiledHitPositions.Add(Hit_C.Key.ClosestPoint(_markers[i].transform.position));//ClosestPointOnBounds
                                                 if (_ShiledHitPositions.Count > 0)
                                                     TheS.PassHitPointsFromWeaponToShiled(_ShiledHitPositions);//hit points on the shiled
                                                 _ShiledHitPositions.Clear();
@@ -218,18 +218,18 @@ namespace HittingDetection
                                 }
                             }
 
-                            for (int hit_target_index = 0; hit_target_index < BallDetectHitPool.Count; hit_target_index++)
+                            foreach (KeyValuePair<Collider,HitPointPara> Hit_C in BallDetectHitPool)
                             {
                                 if (SpecificTarget != SpecificTarget.flesh)
                                 {
-                                    if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << BallDetectHitPool[hit_target_index].gameObject.layer)))
-                                        && !_Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform))
+                                    if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << Hit_C.Key.gameObject.layer)))
+                                        && !_Used_Targets.Contains(Hit_C.Key.transform))
                                     {
-                                        HitBoxesProcesser.ColliderHitBox.TryGetValue(BallDetectHitPool[hit_target_index], out BO_Marker_Manager hit_hitbox);
+                                        HitBoxesProcesser.ColliderHitBox.TryGetValue(Hit_C.Key, out BO_Marker_Manager hit_hitbox);
                                         if (hit_hitbox != null && hit_hitbox.Enabled)
                                         {
-                                            _Used_Targets.Add(BallDetectHitPool[hit_target_index].transform);
-                                            WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
+                                            _Used_Targets.Add(Hit_C.Key.transform);
+                                            WeaponEnergyExaust(Hit_C.Key.transform.position, Hit_C.Key.transform.rotation);
                                             HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                             if (weaponHP > 0 && CurrentHP <= 0)
                                             {
@@ -245,9 +245,9 @@ namespace HittingDetection
                                     continue;
                                 }
 
-                                CalReference = BallDetectHitPool[hit_target_index].GetComponent<FightAttriCalReference>();
-                                _BO_Hitbox = BallDetectHitPool[hit_target_index].GetComponent<BO_Limb>();
-                                if (!_Targets_Raw_Hit.Contains(BallDetectHitPool[hit_target_index].transform) && !_Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform))
+                                CalReference = Hit_C.Key.GetComponent<FightAttriCalReference>();
+                                _BO_Hitbox = Hit_C.Key.GetComponent<BO_Limb>();
+                                if (!_Targets_Raw_Hit.Contains(Hit_C.Key.transform) && !_Used_Targets.Contains(Hit_C.Key.transform))
                                 {
                                     //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
                                     //if (_BO_Health != null && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
@@ -272,21 +272,8 @@ namespace HittingDetection
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
-                                        _StartPoint = ((BO_Marker)_markers[i]).HitPointCal(BallDetectHitPool[hit_target_index].transform.position);
-                                        //_StartPoint = BallDetectHitPool[hit_target_index].ClosestPointOnBounds(_markers[i].transform.position);
-                                        //这个地方不能用ClosestPoint。这里存在unity官方bug。
-                                        //_StartPoint = _StartPoint + (BallDetectHitPool[hit_target_index].transform.position - _StartPoint) * 0.3f;
-                                        //为了打击特效看起来更接近肉体 向里切一下。
-                                        // 以下是几种 _StartPoint的其他算法
-                                        // 1.
-                                        // Vector3 fromMarkerToHit = BallDetectHitPool[hit_target_index].transform.position - _markers[i].transform.position;
-                                        // _StartPoint = _markers[i].transform.position + fromMarkerToHit / 2;//我是觉得离攻击体近更稳健些
-                                        // _StartPoint = BallDetectHitPool[hit_target_index].transform.position;
-                                        // 2.
-                                        // _StartPoint = _Raw_Target_Instance.getHealthBodyCenterTransform().position;// TEST
-                                        // 如果计算的某个点和collider的closetPoint，这个collider在场景里和其他collider有位置上的重合，那这个函数会出错
-                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_StartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position - _StartPoint,Vector3.up)));
-                                        WeaponEnergyExaust(BallDetectHitPool[hit_target_index].transform.position, BallDetectHitPool[hit_target_index].transform.rotation);
+                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,Hit_C.Value.pos, Hit_C.Value.qua));
+                                        WeaponEnergyExaust(Hit_C.Key.transform.position, Hit_C.Key.transform.rotation);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
