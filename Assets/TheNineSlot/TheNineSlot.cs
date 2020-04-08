@@ -50,6 +50,11 @@ namespace mainMenu
         [Space(7)]
         [Header("EXRemain")]
         public List<GameObject> remainCharges;//固定是9个长度
+        
+        [Space(5)]
+        [Header("选中框")]
+        public GameObject SelectedFrame;
+        public static GameObject _Selected;
 
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
@@ -60,9 +65,34 @@ namespace mainMenu
         
         void Awake()
         {
+            _Selected = SelectedFrame;
             Instance = this;
         }
-
+        
+        public static void SeletedRender(DragAndDropCell cell)
+        {
+            if (cell == null)
+            {
+                _Selected.SetActive(false);
+                return;
+            }
+        
+            if (cell._SelectMode == DragAndDropCell.SelectMode.single)
+            {
+                _Selected.SetActive(true);
+                _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
+                _Selected.transform.localPosition = Vector3.zero;
+                _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+                _Selected.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+                _Selected.gameObject.SetActive(true);
+            }
+            else if (cell._SelectMode == DragAndDropCell.SelectMode.multi)
+            {
+            
+            }
+        }
+        
         public SkillStoneSlot GetFocusingStoneSlot()
         {
             return focusingSlot;
@@ -78,10 +108,10 @@ namespace mainMenu
                     if (Time.time - last_clickTime < 0.25f)
                     {
                         focusingSlot = null;
-                        SkillStonesBox.SeletedRender(null);
+                        TheNineSlot.SeletedRender(null);
                     } else {
                         focusingSlot = skillStoneSlot;
-                        SkillStonesBox.SeletedRender(focusingSlot._DragAndDropCell);
+                        TheNineSlot.SeletedRender(focusingSlot._DragAndDropCell);
                     }
                     last_clickTime = Time.time;
                     skillStoneSlot._DragAndDropCell.UpdateMyItem();
@@ -117,7 +147,7 @@ namespace mainMenu
 
         IEnumerator GetNineSlotReady()
         {
-            SkillStonesBox.SeletedRender(null);
+            TheNineSlot.SeletedRender(null);
             
             A1Slot = new SkillStoneSlot(1,null, A1DragAndDropCell);
             A2Slot = new SkillStoneSlot(2,null, A2DragAndDropCell);
@@ -292,7 +322,7 @@ namespace mainMenu
                 }
             }
             yield return ReadANineAndTwo(accountCharacterInfo);
-            SkillStonesBox.SeletedRender(null);
+            TheNineSlot.SeletedRender(null);
             yield break;
         }
         

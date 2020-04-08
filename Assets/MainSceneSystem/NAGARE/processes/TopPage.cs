@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 using dataAccess;
 
-public class frontPage : MainSceneProcess
+public class TopPage : MainSceneProcess
 {
-    public frontPage()
+    public TopPage()
     {
         thisProcessStep = MainSceneStep.frontPage;
         EelementsInherit(PreScene.Instance);

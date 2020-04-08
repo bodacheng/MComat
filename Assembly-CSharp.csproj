@@ -374,7 +374,6 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ArcadeFrontProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\processes\frontPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\GotchaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\JiNengRongLian_selectBaseMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\JiNengRongLian_selectMaterialMonster.cs" />
@@ -386,6 +385,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\SelfFightFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\SkillStones.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\TeamEditFront.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\processes\TopPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\Tutorial_skillEdit.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\skilledit_processes\TryChangeStonePos.cs" />

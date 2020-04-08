@@ -37677,7 +37677,6 @@ MonoBehaviour:
   TrackControl: {fileID: 4637616128743306633}
   DestructionDelay: 8.3
   stop_emission_delay: 8
-  energyDissolveSlowly: 1
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
@@ -37708,6 +37707,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Z_scale: 1
+  navi_time: 5
+  DegreeOfControl: 0.5
+  Sensor: {fileID: 0}
 --- !u!114 &5028979957007248462
 MonoBehaviour:
   m_ObjectHideFlags: 0

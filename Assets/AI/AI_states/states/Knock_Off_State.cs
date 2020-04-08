@@ -35,7 +35,6 @@ public class Knock_Off_State : Behavior
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
-        _FightAttriCalReference.EnableAllHitBoxCollider(false);
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
         personality_Events.CloseAllPersonalityEffects();
         _FightAttriCalReference.PlusCriticalGauge(2);
@@ -44,13 +43,11 @@ public class Knock_Off_State : Behavior
         _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         
-        //superHitPool = EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 3);
-        //if (superHitPool != null)
-        //{
-        //    processingBlood = superHitPool.Rent();
-        //    processingBlood.transform.position = newValue.damageHappenPoint;
-        //    processingBlood.transform.rotation = Quaternion.identity;
-        //}
+        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
+                                                       FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
+                                                       newValue.damageHappenPoint,
+                                                       newValue.CutRotation,
+                                                       null);        
     }
 
     public override bool Capacity_Exit_Condition()
@@ -62,7 +59,6 @@ public class Knock_Off_State : Behavior
     {
         base.AI_State_exit();
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
-        _FightAttriCalReference.EnableAllHitBoxCollider(true);
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalReference.SetGettingDamageState(false);
     }
@@ -116,7 +112,6 @@ public class Knock_Off_State : Behavior
         if (!canbeattack && time_counter > 0.02f)
         {
             _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
-            _FightAttriCalReference.EnableAllHitBoxCollider(true);
             canbeattack = true;
         }
         

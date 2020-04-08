@@ -73,7 +73,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 hitbox.myColliderMustEquip.isTrigger = !_bool;
         }
     }
-    
+        
     public void ChangeLayerForAllSelfColliders(int layer)
     {
         if (myBOHitBoxeComponent != null)

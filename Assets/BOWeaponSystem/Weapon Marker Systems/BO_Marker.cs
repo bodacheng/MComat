@@ -67,8 +67,8 @@ namespace HittingDetection
                 {
                     HitPointPara hitPointPara = new HitPointPara()
                     {
-                        pos = HitPointCal(transform.position),
-                        qua = Quaternion.LookRotation(other.transform.position - HitPointCal(transform.position), Vector3.up)
+                        pos = HitPointCal(other.transform.position),
+                        qua = Quaternion.LookRotation(other.transform.position - HitPointCal(other.transform.position), Vector3.up)
                     };
                     BallDetectHitPool.Add(other,hitPointPara);
                 }

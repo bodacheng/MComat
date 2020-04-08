@@ -118,7 +118,7 @@ namespace mainMenu
             MemberDetailProcess memberDetail = new MemberDetailProcess();
             MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
-            frontPage frontPage = new frontPage();
+            TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess(ArcadeManager.Instance.ButtonsContainer);
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
@@ -150,6 +150,8 @@ namespace mainMenu
             yield return _SkillStonesBox_Show.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.Instance.StartUp());
+            
+            yield return _SelfFightManager.INITeamPosButtons();
             
             // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
             switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)

@@ -126,13 +126,9 @@ public class StagesManager : MonoBehaviour
     
     public void SaveFightAsJson(string path, LocalFight localFight)
     {
-        if (localFight == null)
-        {
+        if (localFight == null || localFight.EnemySets == null)
             return;
-        }
-        
-        localFight.EnemySets.ConvertDictionaryToSerializableArray();
-        
+        localFight.EnemySets.ConvertDictionaryToSerializableArray();       
         MultiDictionary<int, int, CharDataInfo> UnNullDic = new MultiDictionary<int, int, CharDataInfo>();
         foreach (MultiDictionary<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
         {

@@ -36,8 +36,8 @@ namespace mainMenu
 
         readonly IDictionary<int, HeroIcon> team1ButtonDic_M = new Dictionary<int, HeroIcon>();
         readonly IDictionary<int, HeroIcon> team2ButtonDic_M = new Dictionary<int, HeroIcon>();
-        IDictionary<int, HeroIcon> team1ButtonDic_R = new Dictionary<int, HeroIcon>();
-        IDictionary<int, HeroIcon> team2ButtonDic_R = new Dictionary<int, HeroIcon>();
+        readonly IDictionary<int, HeroIcon> team1ButtonDic_R = new Dictionary<int, HeroIcon>();
+        readonly IDictionary<int, HeroIcon> team2ButtonDic_R = new Dictionary<int, HeroIcon>();
 
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
@@ -312,6 +312,45 @@ namespace mainMenu
                 charIcon.iconButton.onClick.AddListener(SelectedRender);
             }
         }
+        
+        void IniRotationModeCharIcons(List<HeroIcon> icons,Team team)
+        {
+            IDictionary<int, HeroIcon> targetTeamIcons;
+            switch (team)
+            {
+                case Team.player1:
+                    targetTeamIcons = team1ButtonDic_R;
+                break;
+                case Team.player2:
+                    targetTeamIcons = team2ButtonDic_R;
+                break;
+                default:
+                    Debug.Log("logic error");
+                    return;
+            }
+            if (targetTeamIcons == null) targetTeamIcons = new Dictionary<int, HeroIcon>();
+            else targetTeamIcons.Clear();
+            for (int i = 0; i < icons.Count; i++)
+            {
+                HeroIcon charIcon = icons[i];
+                targetTeamIcons.Add(i,charIcon);
+                charIcon.ChangeIcon(null, Zokusei.Null);
+                charIcon.iconButton.onClick.RemoveAllListeners();
+                
+                void SelectedRender()
+                {
+                    HeroIcon.Seletedfeature(charIcon,selectedFrame,110f);
+                }
+                
+                string pos = i.ToString().Clone().ToString();
+                void A()
+                {
+                    OneTeamPosButtonBehaviour(team,pos);
+                }
+                charIcon.iconButton.onClick.AddListener(A);
+                charIcon.iconButton.onClick.AddListener(SelectedRender);
+            }
+        }
 
         public IEnumerator INITeamPosButtons()
         {
@@ -324,65 +363,16 @@ namespace mainMenu
                 Team.player2
             );
             
-            /////////////////////
+            IniRotationModeCharIcons(
+                new List<HeroIcon> { team11_R, team12_R, team13_R },
+                Team.player1
+            );
             
-            team1ButtonDic_R.Clear();
-            team2ButtonDic_R.Clear();
-
-            team1ButtonDic_R.Add(0, team11_R);
-            team1ButtonDic_R.Add(1, team12_R);
-            team1ButtonDic_R.Add(2, team13_R);
-
-            team2ButtonDic_R.Add(0, team21_R);
-            team2ButtonDic_R.Add(1, team22_R);
-            team2ButtonDic_R.Add(2, team23_R);
-  
-            team11_R.ChangeIcon(null, Zokusei.Null);
-            team12_R.ChangeIcon(null, Zokusei.Null);
-            team13_R.ChangeIcon(null, Zokusei.Null);
-
-            team21_R.ChangeIcon(null, Zokusei.Null);
-            team22_R.ChangeIcon(null, Zokusei.Null);
-            team23_R.ChangeIcon(null, Zokusei.Null);
-
-            team11_R.iconButton.onClick.RemoveAllListeners();
-            void pos11()
-            {
-                OneTeamPosButtonBehaviour(Team.player1, "0");
-            }
-            team11_R.iconButton.onClick.AddListener(pos11);
-            team12_R.iconButton.onClick.RemoveAllListeners();
-            void pos12()
-            {
-                OneTeamPosButtonBehaviour(Team.player1, "1");
-            }
-            team12_R.iconButton.onClick.AddListener(pos12);
-            team13_R.iconButton.onClick.RemoveAllListeners();
-            void pos13()
-            {
-                OneTeamPosButtonBehaviour(Team.player1, "2");
-            }
-            team13_R.iconButton.onClick.AddListener(pos13);
-
-            team21_R.iconButton.onClick.RemoveAllListeners();
-            void pos21()
-            {
-                OneTeamPosButtonBehaviour(Team.player2, "0");
-            }
-            team21_R.iconButton.onClick.AddListener(pos21);
-            team22_R.iconButton.onClick.RemoveAllListeners();
-            void pos22()
-            {
-                OneTeamPosButtonBehaviour(Team.player2, "1");
-            }
-            team22_R.iconButton.onClick.AddListener(pos22);
-            team23_R.iconButton.onClick.RemoveAllListeners();
-            void pos23()
-            {
-                OneTeamPosButtonBehaviour(Team.player2, "2");
-            }
-            team23_R.iconButton.onClick.AddListener(pos23);
-            
+            IniRotationModeCharIcons(
+                new List<HeroIcon> { team21_R, team22_R, team23_R },
+                Team.player2
+            );
+                       
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {

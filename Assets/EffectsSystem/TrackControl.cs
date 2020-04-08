@@ -15,6 +15,9 @@ public class TrackControl : MonoBehaviour {
 
     [Space(11)]
     [Header("Navigation")]
+    public float navi_time = 5f;
+    public float DegreeOfControl = 1;
+    
     public Sensor Sensor;
     Vector3 direction;
     Transform navTarget;
@@ -37,7 +40,8 @@ public class TrackControl : MonoBehaviour {
             break;
         }
     }
-    
+
+    Transform nav_target;
 	void Update()
 	{
         time_counter += Time.deltaTime;
@@ -47,13 +51,26 @@ public class TrackControl : MonoBehaviour {
             transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ), 0, zAnimationCurve.Evaluate( time_counter ) * Z_scale ));
             break;
             case TrackMode.Navigation:
-                if (Sensor != null)
+                if (time_counter < navi_time)
                 {
-                    if (Sensor.GetClosestEnemyColliderInSensorRange() != null)
+                    if (Sensor != null)
                     {
-                        direction += (Sensor.GetClosestEnemyColliderInSensorRange().transform.position - transform.position).normalized;
+                        if (Sensor.GetClosestEnemyColliderInSensorRange() != null)
+                        {
+                            nav_target = Sensor.GetClosestEnemyColliderInSensorRange().transform;
+                        }
+                        else if (Sensor.GetEnemiesByDistance(false).Count > 0)
+                        {
+                            nav_target = Sensor.GetEnemiesByDistance(false)[0].transform;
+                        }
+                        
+                        if (nav_target != null)
+                        {
+                            direction += (nav_target.position - transform.position).normalized * Time.deltaTime * DegreeOfControl;
+                        }
                     }
                 }
+                
                 direction.y = 0;
                 direction = direction.normalized;
                 transform.position = Vector3.Lerp(transform.position,transform.position + direction * navRunSpeed,Time.deltaTime);

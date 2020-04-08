@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -25,13 +26,31 @@ public class LocalFight
     public LocalFight()
     {
     }
-
+    
     public static LocalFight LoadOneLocalFightByScript(TextAsset Script)
-    {
-        LocalFight _LocalFight;
+    {        
+        LocalFight _localFight = new LocalFight();
+        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(LocalFight));
+            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
+            _localFight.EnemySets._SerializableSets = targetValue;
+            _localFight.EnemySets.ConvertSerializableArrayToDictionary();
+            return _localFight;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+            return null;
+        }
+    }
+
+    public static LocalFight LoadOneLocalFightByScript_XML(TextAsset Script)
+    {
+        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] enemySets;
+        try
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharDataInfo>.SerializableSets[]));
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 //FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Open);
@@ -39,17 +58,18 @@ public class LocalFight
                 //FileStream.Close();
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    _LocalFight = serializer.Deserialize(textReader) as LocalFight;
+                    enemySets = serializer.Deserialize(textReader) as MultiDictionary<int, int, CharDataInfo>.SerializableSets[];
                 }
             }
             else
             {
                 var reader = new StringReader(Script.text);
-                _LocalFight = serializer.Deserialize(reader) as LocalFight;
+                enemySets = serializer.Deserialize(reader) as MultiDictionary<int, int, CharDataInfo>.SerializableSets[];
             }
-            _LocalFight.EnemySets.ConvertSerializableArrayToDictionary();
-            _LocalFight.HeroSets.ConvertSerializableArrayToDictionary();
-            return _LocalFight;
+            LocalFight fight = new LocalFight();
+            fight.EnemySets._SerializableSets = enemySets;
+            fight.EnemySets.ConvertSerializableArrayToDictionary();
+            return fight;
         }
         catch (Exception e)
         {

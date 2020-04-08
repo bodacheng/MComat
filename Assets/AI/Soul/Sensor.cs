@@ -173,7 +173,7 @@ public class Sensor : MonoBehaviour {
     List<GameObject> EnemiesByDistance = new List<GameObject>();
     public List<GameObject> GetEnemiesByDistance(bool refresh)
     {
-        if (this._TeamConfig == null)
+        if (_TeamConfig == null)
         {
             EnemiesByDistance.Clear();
             return EnemiesByDistance;
@@ -186,7 +186,7 @@ public class Sensor : MonoBehaviour {
     List<GameObject> AlliesByDistance = new List<GameObject>();
     public List<GameObject> GetAlliesAndSelfByDistance(bool refresh)
     {
-        if (this._TeamConfig == null)
+        if (_TeamConfig == null)
         {
             AlliesByDistance.Clear();
             return AlliesByDistance;
