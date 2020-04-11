@@ -11146,26 +11146,19 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.18333334
+  - time: 0.033333335
     functionName: SetLeftFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.18333334
+  - time: 0.13333334
     functionName: EffectOnBodyPart
     data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
-    messageOptions: 0
-  - time: 0.21666667
-    functionName: SetDamageType
-    data: 3
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 2
     messageOptions: 0
   - time: 0.25
     functionName: ClearTargets
@@ -11209,15 +11202,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.96666664
-    functionName: turn_on_flag
+  - time: 1.0666667
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1
-    functionName: ClearMarkerManagers
+  - time: 1.0833334
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

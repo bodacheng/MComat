@@ -61615,12 +61615,12 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.31666666
+  - time: 0.28333333
     functionName: SetRightFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0
   - time: 0.4
     functionName: ClearMarkerManagers
@@ -61629,7 +61629,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.56666666
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

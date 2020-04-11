@@ -290897,6 +290897,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.33333334
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.36666667
     functionName: SetRightHandMarkerManager
     data: 
@@ -290918,7 +290925,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.6333333
+  - time: 0.6166667
     functionName: EffectOnBodyPart
     data: left_foot
     objectReferenceParameter: {fileID: 0}
@@ -290939,7 +290946,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0833334
+  - time: 0.96666664
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

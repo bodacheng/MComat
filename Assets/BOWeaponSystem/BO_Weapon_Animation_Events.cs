@@ -279,4 +279,17 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     {
         hiddenMethods.RegisterBodyPartWeapon(tail,in_or_out);
     }
+    
+    // 需要非常谨慎使用。如果这里改变的不是角色一切collider那么就可能产生无敌无法恢复等问题。
+    public void Invincible(AnimationEvent e)
+    {
+        if (e.intParameter == 1)
+        {
+            myownheath.ChangeLayerForAllSelfColliders(0);
+        }
+        else if (e.intParameter == 0)
+        {
+            myownheath.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
+        }         
+    }
 }

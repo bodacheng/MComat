@@ -42,7 +42,7 @@ public class Knock_Off_State : Behavior
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
         _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-        
+
         processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
                                                        FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
                                                        newValue.damageHappenPoint,
