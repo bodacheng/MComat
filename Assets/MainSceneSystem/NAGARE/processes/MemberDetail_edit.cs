@@ -9,6 +9,8 @@ public class MemberDetail_edit : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         SkillStonesBox.target = PreScene.Instance._SkillStonesBox_NineSlot;
+        SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
+        
         LoadingCanvas.target.DarkOff(0.5f);
         PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);

@@ -45,11 +45,24 @@ namespace dataAccess
 
         public IEnumerator LevelUpMySkillStone(string skillstoneid, string targetLevel, ApiLanguage apiLanguage)
         {
-            // 最后可能也是个form提交的格式。。。但这个先放这儿吧。。
-            yield return true; // 代表请求成功
+            IEnumerator up;
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    up = Instance.LevelUpMySkillStone_LocalJson(skillstoneid, targetLevel);
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    up = Instance.LevelUpMySkillStone_Remote(skillstoneid, targetLevel, ApiLanguage.EnUs);
+                    yield return up;
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    up = Instance.LevelUpMySkillStone_Remote(skillstoneid, targetLevel, ApiLanguage.EnUs);
+                    yield return up;
+                    break;
+            }
         }
 
-        private IEnumerator SkillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
+        IEnumerator SkillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
         {
             List<SkillStoneGotchaInfoModel> infos;
             SkillStoneGotchaForm form = new SkillStoneGotchaForm
@@ -58,24 +71,29 @@ namespace dataAccess
                 gotchaPolicyKey = gotchaPolicyKey
             };
 
-            yield return ApiCaller.Instance.Post<BaseModel<SkillStoneGotchaModel>, SkillStoneGotchaForm> 
+            yield return ApiCaller.Instance.Post<BaseModel<SkillStoneGotchaModel>, SkillStoneGotchaForm>
             ("http://160.16.187.230/AssetStoreFight/skillStone/skillStoneGotcha", form, ApiCaller.Instance.getHeader(apiLanguage),
-                 model => {
+                 model =>
+                 {
                      infos = model.data.skillStoneGotchaInfoList;
                      Debug.Log("以下是gotcha到的技能石");
-                    foreach (SkillStoneGotchaInfoModel _SkillStoneGotchaInfoModel in infos)
-                    {
-                        Debug.Log("skillId:"+_SkillStoneGotchaInfoModel.skillId + ",rare:"  + _SkillStoneGotchaInfoModel.rarityLevel);
-                    }
+                     foreach (SkillStoneGotchaInfoModel _SkillStoneGotchaInfoModel in infos)
+                     {
+                         Debug.Log("skillId:" + _SkillStoneGotchaInfoModel.skillId + ",rare:" + _SkillStoneGotchaInfoModel.rarityLevel);
+                     }
                  }
                 ,
-                 model => {
-                    
+                 model =>
+                 {
+
                  }
             );
             yield break;
         }
         
-        
+        public IEnumerator LevelUpMySkillStone_Remote(string skillstoneid, string targetLevel, ApiLanguage apiLanguage)
+        {
+            yield break;
+        }
     }
 }

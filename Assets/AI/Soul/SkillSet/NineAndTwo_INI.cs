@@ -164,7 +164,7 @@ public partial class NineAndTwo
             R.Casual_To_Behaviours = H1_list.ToArray();
     }
     
-    //FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
+    // FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
     // 1.sortNineAndTwo(passiveSkillConfigs):整理三连击的连续关系。根据数据库配置好相应技能的属性。
     // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
     public IDictionary<string, Behavior_Transition_Set> GenerateBeheviourSets()
@@ -255,7 +255,6 @@ public partial class NineAndTwo
         StateTransitionSetList.Add(KnockOff);
         
         //从下面这个地方可以看到我们需要在sort阶段把RMD全部准备好，而且必须是要么为null要么是一个完整STS信息。
-
         foreach (Behavior_Transition_Set _State_Transition_Set in StateTransitionSetList)
         {
             if (_State_Transition_Set.StateKey != null && !state_Transition_Dictionary.ContainsKey(_State_Transition_Set.StateKey))
@@ -315,17 +314,6 @@ public partial class NineAndTwo
         return STS;
     }
     
-    // 这个的计算方式真的有点粗暴。。。按理说这种数值工作在游戏公司里是有专门的人一个技能一个技能专门制定
-    float ATCal(float originAT,int level)
-    {
-        return originAT * level;
-    }
-    
-    public static float StoneHpCal(int level)
-    {
-        return 50f + 50 * (level/100);
-    }
-        
     SkillConfig FixConfigByReference(string skillid)
     {
         if (skillid == null)
@@ -334,5 +322,19 @@ public partial class NineAndTwo
         }
         SkillConfigTable.Instance.SkillConfigDicForReference.TryGetValue(skillid, out SkillConfig referenceStandardSkillConfig);
         return referenceStandardSkillConfig;
+    }
+    
+    // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。
+    // 那么level 是1的情况下，攻击力是1
+    // 从而在技能定义表里，技能标准攻击值应该是1，存在超迅速多连击的情况多半应该少于1，而一些比较赌的重攻击则是大于1
+    public static float ATCal(float originAT,int level)
+    {
+        return originAT * (10 + level) / 11;
+    }
+    
+    // HP和攻击力等比缩放。攻击是从1涨到10，HP是从10涨到100
+    public static float StoneHpCal(int level)
+    {
+        return 10 * (10 + level) / 11;
     }
 }

@@ -49,12 +49,14 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = Color.clear;
         //Loading_Canvas.sortingOrder = 1;
         hollowOutMask.SetTarget(_Transform.GetComponent<RectTransform>());
+        hollowOutMask.color = new Color(0, 0, 0, 0.6f);
     }
     
     public void ClearHigtLight()
     {
         hollowOutMask.SetTarget(null);
         Loading_Canvas.gameObject.SetActive(false);
+        hollowOutMask.color = Color.clear;
     }
 
     public void LightUp()

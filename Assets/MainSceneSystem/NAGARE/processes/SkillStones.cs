@@ -9,6 +9,8 @@ public class SkillStones : MainSceneProcess
     {
         LoadingCanvas.target.DarkOff(1f);
         SkillStonesBox.target = PreScene.Instance._SkillStonesBox_Show;
+        SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
+        
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize, 1);
         
