@@ -396751,14 +396751,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
-  - time: 1.1333333
+  - time: 1.1
     functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4
+  - time: 1.35
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

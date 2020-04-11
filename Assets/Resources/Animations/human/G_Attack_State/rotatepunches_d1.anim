@@ -105553,19 +105553,12 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.43333334
+  - time: 0.41666666
     functionName: ClearTargets
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
-    messageOptions: 0
-  - time: 0.45
-    functionName: SetDamageType
-    data: heavy
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 2
     messageOptions: 0
   - time: 0.51666665
     functionName: ClearMarkerManagers
@@ -105574,7 +105567,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.76666665
+  - time: 0.7
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

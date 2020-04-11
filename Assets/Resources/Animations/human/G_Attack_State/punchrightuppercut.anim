@@ -61163,21 +61163,7 @@ AnimationClip:
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.083333336
-    functionName: EffectOnBodyPart
-    data: right_hand
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.18333334
-    functionName: BlastAttack
-    data: right_hand
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
+    intParameter: 2
     messageOptions: 0
   - time: 0.2
     functionName: MagicForward
@@ -61186,15 +61172,8 @@ AnimationClip:
     floatParameter: 0.5
     intParameter: 1
     messageOptions: 0
-  - time: 0.26666668
-    functionName: turn_on_flag
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.3
-    functionName: ClearMarkerManagers
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

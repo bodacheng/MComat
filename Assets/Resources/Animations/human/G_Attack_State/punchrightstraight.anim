@@ -54794,14 +54794,14 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.23333333
-    functionName: turn_on_flag
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.25
-    functionName: ClearMarkerManagers
+  - time: 0.3
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

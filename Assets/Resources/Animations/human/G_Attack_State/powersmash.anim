@@ -75689,28 +75689,21 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 5
+    intParameter: 2
     messageOptions: 0
   - time: 0.33333334
     functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
     messageOptions: 0
   - time: 0.4
     functionName: SetRightHandMarkerManager
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.46666667
-    functionName: SetDamageType
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 3
+    intParameter: 2
     messageOptions: 0
   - time: 0.53333336
     functionName: ResistanceClear
@@ -75726,7 +75719,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1833333
+  - time: 0.75
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

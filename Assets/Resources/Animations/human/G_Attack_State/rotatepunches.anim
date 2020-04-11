@@ -38687,13 +38687,6 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.13333334
-    functionName: SetRightHandMarkerManager
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.13333334
     functionName: ReleasePreparedMagic
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -38713,41 +38706,6 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
-    messageOptions: 0
-  - time: 0.26666668
-    functionName: SetLeftHandMarkerManager
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.36666667
-    functionName: ClearTargets
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5
-    functionName: ClearTargets
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6333333
-    functionName: ClearTargets
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.73333335
-    functionName: ClearMarkerManagers
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
     messageOptions: 0
   - time: 0.93333334
     functionName: turn_on_flag
