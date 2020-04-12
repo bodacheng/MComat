@@ -26,7 +26,7 @@ public class StagesManagerGUI : Editor {
     IDictionary<string, string> RecordIDsAndNames;
     CharDataInfo focusingCharInfo;
     CharConfig focusingCharResourceInfo;
-    SkillConfig focusingSkillConfig;
+    SkillConfig targetSC;
     
     bool skillselectfilter;
     bool filterallranges = true;
@@ -40,7 +40,63 @@ public class StagesManagerGUI : Editor {
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
     IDictionary<string, string> _SkillRecordIDsAndNames;
     bool Initialized;
-
+    
+    IDictionary<string,SkillConfig> GetFocusingCharSkillList()
+    {
+        IDictionary<string, SkillConfig> list = new Dictionary<string, SkillConfig>();
+        
+        SkillConfig A1 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig A2 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig A3 = focusingCharInfo._NineAndTwo.GetA1Config();
+        
+        SkillConfig B1 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig B2 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig B3 = focusingCharInfo._NineAndTwo.GetA1Config();
+        
+        SkillConfig C1 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig C2 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig C3 = focusingCharInfo._NineAndTwo.GetA1Config();
+        
+        if (A1 != null && A1.RECORD_ID != null)
+        {
+            list.Add(A1.RECORD_ID,A1);
+        }
+        if (A2 != null && A2.RECORD_ID != null)
+        {
+            list.Add(A2.RECORD_ID,A2);
+        }
+        if (A3 != null && A3.RECORD_ID != null)
+        {
+            list.Add(A3.RECORD_ID,A3);
+        }
+        if (B1 != null && B1.RECORD_ID != null)
+        {
+            list.Add(B1.RECORD_ID,B1);
+        }
+        if (B2 != null && B2.RECORD_ID != null)
+        {
+            list.Add(B2.RECORD_ID,B2);
+        }
+        if (B3 != null && B3.RECORD_ID != null)
+        {
+            list.Add(B3.RECORD_ID,B3);
+        }
+        if (C1 != null && C1.RECORD_ID != null)
+        {
+            list.Add(C1.RECORD_ID,C1);
+        }
+        if (C2 != null && C2.RECORD_ID != null)
+        {
+            list.Add(C2.RECORD_ID,C2);
+        }
+        if (C3 != null && C3.RECORD_ID != null)
+        {
+            list.Add(C3.RECORD_ID,C3);
+        }
+        
+        return list;
+    }
+    
     int level = 1;// 参考等级。角色自身不存在等级，但为了设置方便所有技能等级可以一致
     public override void OnInspectorGUI()
     {
@@ -248,76 +304,76 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
 
         /////// 九宫格 //////////
-        GUILayout.BeginHorizontal();        
+        GUILayout.BeginHorizontal();
         GUI.backgroundColor = Color.gray;
-        if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.GetMConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.GetMConfig() != targetSC ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetMConfig();
+            targetSC = focusingCharInfo._NineAndTwo.GetMConfig();
         }
-        if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.GetDConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.GetDConfig() != targetSC ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetDConfig();
+            targetSC = focusingCharInfo._NineAndTwo.GetDConfig();
         }
-        if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.GetRConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.GetRConfig() != targetSC ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetRConfig();
+            targetSC = focusingCharInfo._NineAndTwo.GetRConfig();
         }
         GUI.backgroundColor = Color.white;
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("A1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("A1", targetSC != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA1Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetA1Config();
         }        
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetA2Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("A2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("A2", targetSC != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA2Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetA2Config();
         }
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetA3Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("A3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("A3", targetSC != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetA3Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetA3Config();
         }
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("B1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("B1", targetSC != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB1Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetB1Config();
         }
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("B2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("B2", targetSC != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB2Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetB2Config();
         }
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetB3Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("B3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("B3", targetSC != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetB3Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetB3Config();
         }
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();    
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetC1Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("C1", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("C1", targetSC != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC1Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetC1Config();
         }
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetC2Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("C2", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("C2", targetSC != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC2Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetC2Config();
         }
         GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetC3Config().RECORD_ID) ? Color.yellow : Color.white;
-        if (GUILayout.Button("C3", focusingSkillConfig != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        if (GUILayout.Button("C3", targetSC != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
-            focusingSkillConfig = focusingCharInfo._NineAndTwo.GetC3Config();
+            targetSC = focusingCharInfo._NineAndTwo.GetC3Config();
         }
-        if (focusingSkillConfig == null)
+        if (targetSC == null)
         {
             goto A;
         }
@@ -326,17 +382,17 @@ public class StagesManagerGUI : Editor {
 
         GUILayout.Space(10f);
         bool SanGong = false;
-        if (focusingSkillConfig == focusingCharInfo._NineAndTwo.GetMConfig())
+        if (targetSC == focusingCharInfo._NineAndTwo.GetMConfig())
         {
             focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
             SanGong = true;
         }
-        if (focusingSkillConfig == focusingCharInfo._NineAndTwo.GetDConfig())
+        if (targetSC == focusingCharInfo._NineAndTwo.GetDConfig())
         {
             focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
             SanGong = true;
         }
-        if (focusingSkillConfig == focusingCharInfo._NineAndTwo.GetRConfig())
+        if (targetSC == focusingCharInfo._NineAndTwo.GetRConfig())
         {
             focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
             SanGong = true;
@@ -376,7 +432,7 @@ public class StagesManagerGUI : Editor {
 
             foreach (KeyValuePair<string, string> keyValuePair in _SkillRecordIDsAndNames)
             {
-                if (keyValuePair.Key == focusingSkillConfig.RECORD_ID)
+                if (keyValuePair.Key == targetSC.RECORD_ID)
                 {
                     selectedskillindex = index2;
                     break;
@@ -384,19 +440,33 @@ public class StagesManagerGUI : Editor {
                 index2++;
             }
             selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillRecordIDsAndNames.Values.ToArray());
-            focusingSkillConfig.RECORD_ID = selectedskillindex == 0 ? "-1" : _SkillRecordIDsAndNames.ElementAt(selectedskillindex).Key;
-            SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(focusingSkillConfig.RECORD_ID);
+            string RECORD_ID = selectedskillindex == 0 ? null : _SkillRecordIDsAndNames.ElementAt(selectedskillindex).Key;
+            if (selectedskillindex == 0)
+                return;
+            targetSC.RECORD_ID = RECORD_ID;
+            
+            // 底下这些还不是很理解。。。现在还没发解决九宫格技能重复问题。
+            //if (!GetFocusingCharSkillList().ContainsKey(RECORD_ID))
+            //{
+            //    targetSC.RECORD_ID = RECORD_ID;
+            //}else{
+            //    if (GetFocusingCharSkillList()[RECORD_ID] != targetSC)
+            //    {
+            //        selectedskillindex = 0;
+            //        Debug.Log("九宫格技能不可重复");
+            //        return;
+            //    }
+            //}
+            
+            SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(targetSC.RECORD_ID);
             if (defaultSkillConfig == null)
             {
                 goto A;
             }
             
-            focusingSkillConfig.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",
-                                                                         (focusingSkillConfig.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE)
-                                                                         ? defaultSkillConfig.STATE_TYPE : focusingSkillConfig.STATE_TYPE);
-                                                                         
-            focusingSkillConfig.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", (defaultSkillConfig != null) ? defaultSkillConfig.ATTACK_WEIGHT : focusingSkillConfig.ATTACK_WEIGHT);
-            focusingSkillConfig.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel",(focusingSkillConfig.SP_LEVEL == -1 && defaultSkillConfig != null) ? defaultSkillConfig.SP_LEVEL : focusingSkillConfig.SP_LEVEL, exoptions_display,exoptions);
+            targetSC.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",(targetSC.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE) ? defaultSkillConfig.STATE_TYPE : targetSC.STATE_TYPE);                                                    
+            targetSC.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", (defaultSkillConfig != null) ? defaultSkillConfig.ATTACK_WEIGHT : targetSC.ATTACK_WEIGHT);
+            targetSC.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel",(targetSC.SP_LEVEL == -1 && defaultSkillConfig != null) ? defaultSkillConfig.SP_LEVEL : targetSC.SP_LEVEL, exoptions_display,exoptions);
             GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
             GUILayout.Space(5f);
             

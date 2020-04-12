@@ -45,7 +45,7 @@ namespace dataAccess
                 Debug.Log(e.ToString());
                 List<SkillStoneOfPlayerInfoModel> skillStonesForTest = new List<SkillStoneOfPlayerInfoModel>();
                 int i = 1;
-                foreach (KeyValuePair<string, SkillConfig> _keyValuePair in SkillConfigTable.Instance.SkillConfigDicForReference)
+                foreach (KeyValuePair<string, SkillConfig> _keyValuePair in SkillConfigTable.Instance.SkillConfigRefDic)
                 {
                     SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
                     {

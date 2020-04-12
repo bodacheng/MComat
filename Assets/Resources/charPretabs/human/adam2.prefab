@@ -15780,8 +15780,8 @@ Animator:
     'Bip001 Pelvis'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
     'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tand more ...\n\tFrom animation
     clip '\u75BC\u75DB'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip
-    '\u5927\u7B11'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip '\u6124\u6012'\n\tFrom
-    animation clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
+    '\u5927\u7B110408'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip
+    '\u6124\u6012'\n\tFrom animation clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -16283,7 +16283,7 @@ MonoBehaviour:
   Animation_Manger: {fileID: 7223968294090444383}
   _SkillCancelFlag: {fileID: 1122967317810658548}
   _BO_Ani_E: {fileID: 1644250934282781172}
-  _FightAttriCalReference: {fileID: 2406689596573462947}
+  FightDataRef: {fileID: 2406689596573462947}
   bO_Weapon_Animation_Events: {fileID: 3467595537739863480}
   _BasicPhysicSupport: {fileID: 3371463831016387123}
   _MyBehaviorRunner: {fileID: 6157405701193952741}
@@ -21431,7 +21431,6 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
-  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
@@ -50615,7 +50614,6 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
-  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []

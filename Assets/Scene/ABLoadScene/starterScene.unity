@@ -730,7 +730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347991900266770, guid: 3e3b09205b1f12348a2be9e46d0582c9, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4347991900266770, guid: 3e3b09205b1f12348a2be9e46d0582c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5536,7 +5536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4808105918042418, guid: 00fbe62cd9178f44f8cb51f188f823ca, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4808105918042418, guid: 00fbe62cd9178f44f8cb51f188f823ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10419,7 +10419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4464143883885318, guid: d103bbce0ce899f4d9314c72f1bae860, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4464143883885318, guid: d103bbce0ce899f4d9314c72f1bae860, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15148,7 +15148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4347991900266770, guid: f8fd3c42bacd94041a04cbf1860d7ee1, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4347991900266770, guid: f8fd3c42bacd94041a04cbf1860d7ee1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19954,7 +19954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4853727352629400, guid: 8475331b77383a540b02bdd7fe29661f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4853727352629400, guid: 8475331b77383a540b02bdd7fe29661f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30223,8 +30223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ad8823b6018414bb72aea2fadf9547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fightScriptPath: 
-  FightScript: {fileID: 0}
+  fightScriptPath: /Resources/StageConfigFiles/oneFight.json
+  FightScript: {fileID: 4900000, guid: ef1cd552d263e4fda9311c22057a6367, type: 3}
 --- !u!4 &1848167670
 Transform:
   m_ObjectHideFlags: 0
@@ -30318,7 +30318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4101115229808044, guid: 76ba1e91fea186346bb2eff50c83fd05, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4101115229808044, guid: 76ba1e91fea186346bb2eff50c83fd05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -35047,7 +35047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4798262068606230, guid: b077b8f66a284634cb92797eb3bc985b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4798262068606230, guid: b077b8f66a284634cb92797eb3bc985b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -40182,7 +40182,7 @@ MonoBehaviour:
   CharacterConfigTextFile: {fileID: 4900000, guid: a8dfd9feec637466989cc8c3dc8b20b2,
     type: 3}
   MonstersConfigFilePath: Assets/MonstersConfig.csv
-  SkillConfigTextFile: {fileID: 4900000, guid: 621d94acbb6b9420a8fdf401cff2afaf, type: 3}
+  SkillConfigTextFile: {fileID: 4900000, guid: 53ed3203dc2ee49d590ba3df54cac81d, type: 3}
   SkillConfigFilePath: Assets/mst_skill.csv
 --- !u!114 &2075428156307059468
 MonoBehaviour:

@@ -18,7 +18,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
     public Button autoBUtton;
     public Image _C_button;
     public Image _AI_button;
-
+    
     public FightTeam FightTeam1, FightTeam2;
     public FightTeam_MultiRaid FightTeam1_multi, FightTeam2_multi;
     public FightTeam_RotationMode FightTeam1_rotation, FightTeam2_rotation;

@@ -22,7 +22,7 @@ public class SkillConfigTable
             return instance;
         }
     }
-    public IDictionary<string, SkillConfig> SkillConfigDicForReference = new Dictionary<string, SkillConfig>();
+    public IDictionary<string, SkillConfig> SkillConfigRefDic = new Dictionary<string, SkillConfig>();
     
 	public class Row
 	{
@@ -77,14 +77,14 @@ public class SkillConfigTable
                 Debug.Log("致命错误「技能配置文件」技能ID重复：" + keyValuePair.RECORD_ID);
             }
         }
-        Instance.SkillConfigDicForReference = Dic;
+        Instance.SkillConfigRefDic = Dic;
     }
     
     public static SkillConfig GetSkillConfigByID(string ID)
     {
         if (ID != null)
         {
-            Instance.SkillConfigDicForReference.TryGetValue(ID, out SkillConfig skillConfig);
+            Instance.SkillConfigRefDic.TryGetValue(ID, out SkillConfig skillConfig);
             return skillConfig;
         }else{
             return null;
@@ -94,7 +94,7 @@ public class SkillConfigTable
     public static List<SkillConfig> GetSkillConfigsOfType(string type)
     {
         List<SkillConfig> SkillConfigsOfType = new List<SkillConfig>();
-        foreach (KeyValuePair<string, SkillConfig> one in Instance.SkillConfigDicForReference)
+        foreach (KeyValuePair<string, SkillConfig> one in Instance.SkillConfigRefDic)
         {
             if (one.Value.TYPE == type)
                 SkillConfigsOfType.Add(one.Value);
@@ -113,7 +113,10 @@ public class SkillConfigTable
         {    
             if (RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2],ranges[3]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
-                SkillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
+                if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
+                    SkillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
+                else
+                    Debug.Log("重复的技能ID？？："+one.RECORD_ID);
             }
         }
         return SkillIDAndNameDic;
@@ -145,23 +148,10 @@ public class SkillConfigTable
     
     public static void LoadAllSkillConfigFromLocalConfigFile()//1
     {
-        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor
-            ||
-            Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+        TextAsset csv = Resources.Load("Account/mst_skill") as TextAsset;
+        if (csv != null)
         {
-            TextAsset csv = Resources.Load("Account/mst_skill") as TextAsset;
-            if (csv != null)
-            {
-                Instance.Load(csv);
-            }
-        }
-        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            TextAsset csv = Resources.Load("Account/mst_skill") as TextAsset;//未定，这个瞎写的。
-            if (csv != null)
-            {
-                Instance.Load(csv);
-            }
+            Instance.Load(csv);
         }
     }
 
@@ -233,8 +223,6 @@ public class SkillConfigTable
         {
             for (int i = 1; i < grid.Length; i++)
             {
-                if (grid[i].Length < 10)
-                    continue;
                 Row row = new Row
                 {
                     RECORD_ID = grid[i][0],

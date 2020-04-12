@@ -187,6 +187,3 @@ namespace Soul
         }
     }
 }
-
-
-

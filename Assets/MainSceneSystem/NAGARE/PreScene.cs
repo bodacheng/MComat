@@ -260,7 +260,7 @@ namespace mainMenu
                     {
                         yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
                         int i = 1;
-                        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigDicForReference)
+                        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
                         {
                             Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
                             var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel

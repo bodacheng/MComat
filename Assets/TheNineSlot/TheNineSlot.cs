@@ -147,7 +147,7 @@ namespace mainMenu
 
         IEnumerator GetNineSlotReady()
         {
-            TheNineSlot.SeletedRender(null);
+            SeletedRender(null);
             
             A1Slot = new SkillStoneSlot(1,null, A1DragAndDropCell);
             A2Slot = new SkillStoneSlot(2,null, A2DragAndDropCell);

@@ -161,10 +161,10 @@ namespace mainMenu
         public void RefreshCurrentHpBasedOnNineSlots()
         {
             List<SkillStoneOfPlayerInfoModel> stonelist = GetMyStonesOnNineSlot();
-            _HP.text = "HP:" + CurrentHp(stonelist).ToString();
+            _HP.text = "HP:" + INI_Hp(stonelist).ToString();
         }
         
-        public static float CurrentHp(List<SkillStoneOfPlayerInfoModel> stonelist)
+        public static float INI_Hp(List<SkillStoneOfPlayerInfoModel> stonelist)
         {
             float WholeHP = 0;
             for (int index = 0; index < stonelist.Count; index++)

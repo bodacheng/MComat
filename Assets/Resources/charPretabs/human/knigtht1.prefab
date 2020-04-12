@@ -8996,7 +8996,7 @@ MonoBehaviour:
   Animation_Manger: {fileID: 7500249067823041031}
   _SkillCancelFlag: {fileID: 6349201981073002713}
   _BO_Ani_E: {fileID: 1585409815846927262}
-  _FightAttriCalReference: {fileID: 6652660706177456661}
+  FightDataRef: {fileID: 6652660706177456661}
   bO_Weapon_Animation_Events: {fileID: 3105496323629152170}
   _BasicPhysicSupport: {fileID: 854061759957367573}
   _MyBehaviorRunner: {fileID: 3086620227581601197}
@@ -29080,7 +29080,6 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
-  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
@@ -48358,7 +48357,6 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
-  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []

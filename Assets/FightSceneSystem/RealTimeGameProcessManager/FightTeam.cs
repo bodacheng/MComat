@@ -37,7 +37,7 @@ public class FightTeam : MonoBehaviour
                 yield return character_datacenter;
                 Data_Center data_Center = (Data_Center)character_datacenter.Current;
                 List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_one.monsterOfPlayerId);
-                data_Center.Step3Initialize(teamConfig, TheNineSlot.CurrentHp(equipingstones));
+                data_Center.Step3Initialize(teamConfig, TheNineSlot.INI_Hp(equipingstones));
                 teamMembers.Set(keys.Key,key,data_Center);
                 CharDataInfoRef.Add(teamMembers.Get(keys.Key,key),_one);
             }
