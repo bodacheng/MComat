@@ -108,10 +108,10 @@ namespace mainMenu
                     if (Time.time - last_clickTime < 0.25f)
                     {
                         focusingSlot = null;
-                        TheNineSlot.SeletedRender(null);
+                        SeletedRender(null);
                     } else {
                         focusingSlot = skillStoneSlot;
-                        TheNineSlot.SeletedRender(focusingSlot._DragAndDropCell);
+                        SeletedRender(focusingSlot._DragAndDropCell);
                     }
                     last_clickTime = Time.time;
                     skillStoneSlot._DragAndDropCell.UpdateMyItem();

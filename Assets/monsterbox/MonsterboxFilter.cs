@@ -41,7 +41,7 @@ public class MonsterboxFilter : MonoBehaviour
             {
                 if (origin_mainMenuIcons[i] != null)
                 {
-                    if (origin_mainMenuIcons[i]._CharacterResourceInfo.type == typeDropDown.options[typeDropDown.value].text)
+                    if (origin_mainMenuIcons[i]._CharacterResourceInfo.TYPE == typeDropDown.options[typeDropDown.value].text)
                         new_mainMenuIcons.Add(origin_mainMenuIcons[i]);
                 }
                 else

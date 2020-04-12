@@ -78,25 +78,25 @@
 
             switch (moveType)
             {
-                case MoveType.Mode1:
+                case MoveType.Move_normal:
                     this.MConfig = new SkillConfig
                         (
                             null, null, "Move_normal", "normal move", 0, 0,0, 0, 0
                         );
                     break;
-                case MoveType.Mode2:
+                case MoveType.Move_slow:
                     this.MConfig = new SkillConfig
                         (
                             null, null, "Move_slow", "normal move", 0, 0, 0, 0, 0
                         );
                     break;
-                case MoveType.Mode3:
+                case MoveType.Move_fast:
                     this.MConfig = new SkillConfig
                         (
                             null, null, "Move_fast", "normal move",  0, 0, 0, 0, 0
                         );
                     break;
-                case MoveType.Test:
+                case MoveType.Test_Move:
                     this.MConfig = new SkillConfig
                         (
                             null, null, "Test_Move", "测试用移动状态(角色站着不动)",  0, 0, 0, 0, 0

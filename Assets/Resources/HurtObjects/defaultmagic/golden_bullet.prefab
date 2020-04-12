@@ -37933,10 +37933,10 @@ MonoBehaviour:
   _WeaponMode: 2
   weaponHP: 5
   onGroundMagic: 0
-  effectSpreadOnBody: 0
+  effectSpreadOnBody: 1
   zokusei: 2
   muzzle: electric_s_e
-  ExplosionEffect: electric_s_e
+  ExplosionEffect: dark_hit
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.1
 --- !u!114 &7183177203232057296

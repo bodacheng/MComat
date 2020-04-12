@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Api.Dto.Model;
 
 //站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
@@ -8,8 +7,8 @@ namespace dataAccess
     public partial class TeamSet
     {
         public static TeamSet instance;
-        public PositionLocalCharKeySet storyModeTeamSet = new PositionLocalCharKeySet();
-        public PositionLocalCharKeySet Arena3V3 = new PositionLocalCharKeySet();
+        public PosKeySet Default = new PosKeySet();
+        public PosKeySet Arena3V3 = new PosKeySet();
 
         private TeamSet()
         {
@@ -42,12 +41,12 @@ namespace dataAccess
                         case TeamSetGameMode.story:
                             IEnumerator enumerator = TeamSet.Instance.LoadMyTeamSetInfoViaJsonFile("TeamSet.json");
                             yield return enumerator;
-                            storyModeTeamSet = (PositionLocalCharKeySet)enumerator.Current;
+                            Default = (PosKeySet)enumerator.Current;
                             break;
                         case TeamSetGameMode.arena3V3:
                             IEnumerator enumerator1 = TeamSet.Instance.LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json");
                             yield return enumerator1;
-                            Arena3V3 = (PositionLocalCharKeySet)enumerator1.Current;
+                            Arena3V3 = (PosKeySet)enumerator1.Current;
                             break;
                     }
                     break;
@@ -71,9 +70,9 @@ namespace dataAccess
             LoadingCanvas.target.LightUp();
             yield break;
         }
-
+        
         // 下面的函数让阵容配置可以跳格。比方说一个游戏只能入场2人，那么现在在back和right位置有人，其他位置为空，也可顺利以此两人入场。
-        public IEnumerator MyTeamMembersByEntryMemberNum(int playerEntryNum, PositionLocalCharKeySet positionLocalCharKeySet)
+        public IEnumerator MyTeamMembersByEntryMemberNum(int playerEntryNum, PosKeySet positionLocalCharKeySet)
         {
             MultiDictionary<int, int, CharDataInfo> teamMembers = new MultiDictionary<int, int, CharDataInfo>();
             int membercount = 0;
@@ -97,7 +96,7 @@ namespace dataAccess
                     continue;
                 }
             }
-            yield return teamMembers;
+        yield return teamMembers;
         }
     }
 

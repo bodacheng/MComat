@@ -31,9 +31,9 @@ public class TopPage : MainSceneProcess
 
         yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
         
-        if (TeamSet.Instance.storyModeTeamSet != null)
+        if (TeamSet.Instance.Default != null)
         {
-            string focusLocalid = TeamSet.Instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(0);
+            string focusLocalid = TeamSet.Instance.Default.GetPositionMonsterOfPlayerId(0);
             if (focusLocalid != null)
             {
                  yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(focusLocalid);//确立focusing角色

@@ -81,7 +81,7 @@ namespace dataAccess
         public IEnumerator LevelUpMySkillStone_LocalJson(string skillstoneid, string targetLevel)
         {
             SkillStoneOfPlayerInfoModel st = GetStoneOfPlayerInfoModelByMyStoneId(skillstoneid);
-            st.level = (int.Parse(st.level) + 1).ToString();
+            st.level = targetLevel;
             yield return UpdateMySkillStone();
             yield return true;
         }

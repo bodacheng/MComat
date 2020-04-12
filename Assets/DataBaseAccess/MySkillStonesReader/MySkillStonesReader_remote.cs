@@ -50,6 +50,7 @@ namespace dataAccess
             {
                 case playerinfoReferenceMode.localTestSaveData:
                     up = Instance.LevelUpMySkillStone_LocalJson(skillstoneid, targetLevel);
+                    yield return up;
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     up = Instance.LevelUpMySkillStone_Remote(skillstoneid, targetLevel, ApiLanguage.EnUs);

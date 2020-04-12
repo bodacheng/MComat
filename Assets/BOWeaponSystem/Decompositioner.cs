@@ -100,7 +100,7 @@ public partial class Decompositioner : MonoBehaviour {
         StopEmissions(true);
         _DecompositionerPool.Return(this);
     }
-
+    
     public void CloseMarkers()
     {
         if (_HitBox != null)

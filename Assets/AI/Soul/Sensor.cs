@@ -249,7 +249,7 @@ public class Sensor : MonoBehaviour {
             {
                 if (_TeamConfig.myTeamLayerMask == (_TeamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
                 {
-                    if (!SelfDataCenter._FightAttriCalReference.IfMyBody(raycastHit.collider))
+                    if (!SelfDataCenter.FightDataRef.IfMyBody(raycastHit.collider))
                     {
                         float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
                         if (to_me < matetome)

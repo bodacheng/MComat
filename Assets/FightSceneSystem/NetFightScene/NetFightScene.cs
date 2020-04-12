@@ -6,16 +6,7 @@ using UnityEngine.SceneManagement;
 using mainMenu;
 using Soul;
 
-public enum SceneMode
-{
-    localDebug = 1,
-    QuestFight = 3,
-    MyPetsFight = 6,
-}
-
 public class NetFightScene : MonoBehaviour {
-
-	public SceneMode _SceneMode = SceneMode.localDebug;
 
     [Space(11)]
     [Header("Canvas")]
@@ -79,33 +70,22 @@ public class NetFightScene : MonoBehaviour {
     {
         Time.timeScale = 1f;
         //Position_Set_Executor.Instance.P_sets.Clear();
-        _SceneMode = FightSceneModeManager.Instance.getSceneMode();
-        if (this._SceneMode == SceneMode.QuestFight || this._SceneMode == SceneMode.MyPetsFight)
-        {
-            PreparingProcess preparingProcess = new PreparingProcess(this,fightSceneProcessesRunner);
-            FightingProcess fightingProcess = new FightingProcess(this,fightSceneProcessesRunner);
-            CountDownProcess countDownProcess = new CountDownProcess(this,fightSceneProcessesRunner);
-            StoryProcess storyProcess = new StoryProcess(this,fightSceneProcessesRunner);
-            FightOverProcess fightOverProcess = new FightOverProcess(this,fightSceneProcessesRunner);
-            FightSummaryProcess fightSummaryProcess = new FightSummaryProcess(this,fightSceneProcessesRunner);
-            
-            BasicTryProcess basicTryProcess = new BasicTryProcess(this,fightSceneProcessesRunner);
-            
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.Preparing, preparingProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.CountDown, countDownProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.Fighting, fightingProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.FightOver, fightOverProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.FightSummary, fightSummaryProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.BasicTryTutorial,basicTryProcess);
-        }
-        if (this._SceneMode == SceneMode.localDebug)// 基本上用不到的xml 测试进程
-        {
-            OldDebugPreparingProcess oldDebugPreparingProcess = new OldDebugPreparingProcess(this,_DebugManager);
-            OldDebugFightingProcess oldDebugFightingProcess = new OldDebugFightingProcess(this,_DebugManager);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.Preparing,oldDebugPreparingProcess);
-            fightSceneProcessesRunner.AddNewProcess(SceneStep.Fighting,oldDebugFightingProcess);
-        }
+        PreparingProcess preparingProcess = new PreparingProcess(this,fightSceneProcessesRunner);
+        FightingProcess fightingProcess = new FightingProcess(this,fightSceneProcessesRunner);
+        CountDownProcess countDownProcess = new CountDownProcess(this,fightSceneProcessesRunner);
+        StoryProcess storyProcess = new StoryProcess(this,fightSceneProcessesRunner);
+        FightOverProcess fightOverProcess = new FightOverProcess(this,fightSceneProcessesRunner);
+        FightSummaryProcess fightSummaryProcess = new FightSummaryProcess(this,fightSceneProcessesRunner);
+        
+        BasicTryProcess basicTryProcess = new BasicTryProcess(this,fightSceneProcessesRunner);
+        
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.Preparing, preparingProcess);
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.CountDown, countDownProcess);
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.Fighting, fightingProcess);
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.FightOver, fightOverProcess);
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.FightSummary, fightSummaryProcess);
+        fightSceneProcessesRunner.AddNewProcess(SceneStep.BasicTryTutorial,basicTryProcess);
         
         FightSceneProcessesRunner.ChangeProcess(SceneStep.Preparing);
         yield break;

@@ -45,10 +45,10 @@ namespace mainMenu
         int focusingPosition;
         readonly HeroIcon focusingPosButton;
         
-        PositionLocalCharKeySet _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
-        PositionLocalCharKeySet _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
-        PositionLocalCharKeySet _team1positionLocalCharKeySet_R = new PositionLocalCharKeySet();
-        PositionLocalCharKeySet _team2positionLocalCharKeySet_R = new PositionLocalCharKeySet();
+        PosKeySet _team1positionLocalCharKeySet_M = new PosKeySet();
+        PosKeySet _team2positionLocalCharKeySet_M = new PosKeySet();
+        PosKeySet _team1positionLocalCharKeySet_R = new PosKeySet();
+        PosKeySet _team2positionLocalCharKeySet_R = new PosKeySet();
 
         void Start()
         {
@@ -78,10 +78,10 @@ namespace mainMenu
             {
                 keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
             }
-            _team1positionLocalCharKeySet_M = new PositionLocalCharKeySet();
-            _team2positionLocalCharKeySet_M = new PositionLocalCharKeySet();
-            _team1positionLocalCharKeySet_R = new PositionLocalCharKeySet();
-            _team2positionLocalCharKeySet_R = new PositionLocalCharKeySet();
+            _team1positionLocalCharKeySet_M = new PosKeySet();
+            _team2positionLocalCharKeySet_M = new PosKeySet();
+            _team1positionLocalCharKeySet_R = new PosKeySet();
+            _team2positionLocalCharKeySet_R = new PosKeySet();
         }
         
         public void SwitchToMultiRaidMode()
@@ -142,7 +142,7 @@ namespace mainMenu
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
-            yield return QuestPreparePage.Instance.GetReadyToBattle(stage, SceneMode.MyPetsFight);
+            yield return QuestPreparePage.Instance.GetReadyToBattle(stage);
             yield break;
         }
 
@@ -161,7 +161,6 @@ namespace mainMenu
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
-                    Debug.Log("dsadaf");
                     switch (focusingTeam)
                     {
                         case Team.player1:
@@ -230,7 +229,7 @@ namespace mainMenu
             //} 
         }
 
-        IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, HeroIcon> teamButtonDic, PositionLocalCharKeySet positionLocalCharKey)
+        IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, HeroIcon> teamButtonDic, PosKeySet positionLocalCharKey)
         {
             if (posNum == -1)
             {

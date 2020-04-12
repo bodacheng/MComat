@@ -127,12 +127,12 @@ namespace mainMenu
             List<string> typeList = new List<string>();
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
-                if (!typeList.Contains(keyValuePair.Value._CharacterResourceInfo.type))
+                if (!typeList.Contains(keyValuePair.Value._CharacterResourceInfo.TYPE))
                 {
-                    typeList.Add(keyValuePair.Value._CharacterResourceInfo.type);
+                    typeList.Add(keyValuePair.Value._CharacterResourceInfo.TYPE);
                     Dropdown.OptionData m_NewData = new Dropdown.OptionData
                     {
-                        text = keyValuePair.Value._CharacterResourceInfo.type
+                        text = keyValuePair.Value._CharacterResourceInfo.TYPE
                     };
                     target._monsterboxFilter.typeDropDown.options.Add(m_NewData);
                 }

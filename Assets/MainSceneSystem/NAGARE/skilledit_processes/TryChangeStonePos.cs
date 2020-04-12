@@ -51,7 +51,7 @@ public class TryChangeStonePos : MainSceneProcess
                 stage.localFight = this.TuroialFight;
                 stage._fightEventType = FightEventType.Tutorial_Story_AdamVsGuards;
                 stage.BattleGroundID = 2;
-                PreScene.Instance.LoadFight(SceneMode.QuestFight, stage);
+                PreScene.Instance.LoadFight(stage);
                 this.ProcessEnd();
             }
             mainProcessRunner.Run(skilleditconfrim());

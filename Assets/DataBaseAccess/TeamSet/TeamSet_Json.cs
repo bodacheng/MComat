@@ -13,13 +13,13 @@ namespace dataAccess
         public IEnumerator LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
         {
             string wholepath = Application.persistentDataPath + "/" + jsonFilename;
-            PositionLocalCharKeySet TeamSet;
+            PosKeySet TeamSet;
             if (File.Exists(wholepath))
             {
                 try 
                 {
                     string dataAsJson = File.ReadAllText(wholepath);
-                    TeamSet = JsonConvert.DeserializeObject<PositionLocalCharKeySet>(dataAsJson);
+                    TeamSet = JsonConvert.DeserializeObject<PosKeySet>(dataAsJson);
                     List<PosNumWithLocalKey> posNumWithLocalKeys = TeamSet.PosNumsWithLocalKeys.ToList();
                     List<int> shouldhave = new List<int>();
                     foreach(PosNumWithLocalKey posNumWithLocalKey in posNumWithLocalKeys)
@@ -47,7 +47,7 @@ namespace dataAccess
                 }catch (Exception e)
                 {
                     Debug.Log("读取阵容配置文件："+jsonFilename+"发生异常"+ e);
-                    TeamSet = new PositionLocalCharKeySet();
+                    TeamSet = new PosKeySet();
                 }
                 yield return TeamSet;
                 yield break;
@@ -55,7 +55,7 @@ namespace dataAccess
             else
             {
                 Debug.Log("读取阵容配置文件："+jsonFilename+"没有找到");
-                yield return new PositionLocalCharKeySet();
+                yield return new PosKeySet();
                 yield break;
             }
         }
@@ -65,7 +65,7 @@ namespace dataAccess
             switch (teamSetGameMode)
             {
                 case TeamSetGameMode.story:
-                    string json = JsonConvert.SerializeObject(storyModeTeamSet);
+                    string json = JsonConvert.SerializeObject(Default);
                     LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "TeamSet.json", json);
                     break;
                 case TeamSetGameMode.arena3V3:

@@ -12,7 +12,7 @@ public partial class NineAndTwo {
     public bool canDefend;
     public MoveType moveType;
     public RushType rushType;
-
+    
     SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
     SkillConfig DConfig, MConfig, RConfig;
 
@@ -22,9 +22,9 @@ public partial class NineAndTwo {
         B1skillid = null; B2skillid = null; B3skillid = null;
         C1skillid = null; C2skillid = null; C3skillid = null;
         
-        moveType = MoveType.Test;
+        moveType = MoveType.Move_normal;
         canDefend = false;
-        rushType = RushType.None;
+        rushType = RushType.Rush;
         
         AConfig1 = new SkillConfig();
         AConfig2 = new SkillConfig();

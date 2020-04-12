@@ -185,16 +185,15 @@ namespace mainMenu
             ProcessesRunner.Instance.ProcessNagare();
         }
         
-        public void AskIfLoadFight(SceneMode sceneMode, StageScriptableObject stage)
+        public void AskIfLoadFight(StageScriptableObject stage)
         {
-            LoadingCanvas.target.ArrangeValiationWindow(delegate { LoadFight(sceneMode, stage); }, "开打？");
+            LoadingCanvas.target.ArrangeValiationWindow(delegate { LoadFight(stage); }, "开打？");
         }
 
-        public void LoadFight(SceneMode sceneMode, StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
+        public void LoadFight(StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
         {
             FightSceneNote.Instance.nextBattle = stage;
             _CharSetManager.PreventTheseMyModelsFromDestroying(FightSceneNote.Instance.nextBattle.GetTeam1EnterRingLocalIds(FightSceneNote.Instance.nextBattle.localFight));
-            FightSceneModeManager.Instance.setSceneMode(sceneMode);
             SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
         }
 

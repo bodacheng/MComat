@@ -209,7 +209,7 @@ public class ModelShower : MonoBehaviour
     {
         yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
         List<GetMonsterOfPlayerDetailModel> onsetLocals = new List<GetMonsterOfPlayerDetailModel>();
-        PositionLocalCharKeySet _positionLocalCharKeySet4V4Mode = TeamSet.Instance.storyModeTeamSet;
+        PosKeySet _positionLocalCharKeySet4V4Mode = TeamSet.Instance.Default;
         MyModelPool.Instance.SetAllMyCharactersModelActive(false);
         GetMonsterOfPlayerDetailModel _one;
 

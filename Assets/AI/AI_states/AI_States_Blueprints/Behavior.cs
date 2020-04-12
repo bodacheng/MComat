@@ -45,7 +45,7 @@ namespace Soul
             this.gameObject = _DATA_CENTER.WholeT.gameObject;
             this.GeoCenterT = _DATA_CENTER.geometryCenter;
             this.Sensor = _DATA_CENTER.Sensor;
-            this._FightAttriCalReference = _DATA_CENTER._FightAttriCalReference;
+            this._FightAttriCalReference = _DATA_CENTER.FightDataRef;
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;

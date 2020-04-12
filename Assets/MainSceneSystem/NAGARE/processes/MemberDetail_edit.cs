@@ -76,7 +76,7 @@ public class MemberDetail_edit : MainSceneProcess
         }
         yield return TheNineSlot.Instance.ReadANineAndTwo(_AccountCharacterInfo);
         CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(_AccountCharacterInfo.monsterId);
-        SkillStonesBox.target.SetFocusingType(_CharacterResourceInfo.type);
+        SkillStonesBox.target.SetFocusingType(_CharacterResourceInfo.TYPE);
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()

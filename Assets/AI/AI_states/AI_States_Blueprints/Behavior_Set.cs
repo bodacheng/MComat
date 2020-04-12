@@ -77,10 +77,10 @@ namespace Skill
     
     public enum MoveType
     {
-        Mode1 = 1,
-        Mode2 = 2,
-        Mode3 = 3,
-        Test = 0
+        Move_normal = 1,
+        Move_slow = 2,
+        Move_fast = 3,
+        Test_Move = 0
     }
     
     public enum RushType

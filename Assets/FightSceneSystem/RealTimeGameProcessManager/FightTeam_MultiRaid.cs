@@ -65,10 +65,11 @@ public class FightTeam_MultiRaid : FightTeam
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
-            a_char._FightAttriCalReference.CurrentHp.Value += extraHP;
-            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => 
+            a_char.FightDataRef.CurrentHp.Value += extraHP;
+            float maxHp = a_char.FightDataRef.CurrentHp.Value;
+            a_char.FightDataRef.CurrentHp.Subscribe(x => 
             {
-                RefreshHPBar(a_char, x, a_char._FightAttriCalReference.CurrentHp.Value);
+                RefreshHPBar(a_char, x, maxHp);
             });
             
             a_char._ResistanceManager.Resistance.Value = 0;
@@ -78,8 +79,8 @@ public class FightTeam_MultiRaid : FightTeam
                 RefreshResistanceBar(a_char); 
             });
             
-            a_char._FightAttriCalReference._ComboHitCount.HitCount.Value = 0;
-            a_char._FightAttriCalReference._ComboHitCount.HitCount.Subscribe(x => 
+            a_char.FightDataRef._ComboHitCount.HitCount.Value = 0;
+            a_char.FightDataRef._ComboHitCount.HitCount.Subscribe(x => 
             {
                 RefreshComboHitMultiRaid(a_char);
             });
@@ -90,9 +91,9 @@ public class FightTeam_MultiRaid : FightTeam
     void RefreshComboHitMultiRaid(Data_Center _datacenter)
     {
         _hitcomboText = multiRaidHitComboDic[_datacenter];
-        if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
+        if (_datacenter.FightDataRef._ComboHitCount.HitCount.Value > 1)
         {
-            _hitcomboText.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+            _hitcomboText.text = _datacenter.FightDataRef._ComboHitCount.HitCount.Value.ToString() + "Hits!";
             _hitcomboText.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f),0.2f);
         }
         else
@@ -122,7 +123,7 @@ public class FightTeam_MultiRaid : FightTeam
             hitCombo.name = a_char.WholeT.name + "HitCombo";
             _SideCharIcon = Instantiate(button_prefab);
             _SideCharIcon.name = a_char.name + " ICon";            
-            _SideCharIcon.IniHPShow(a_char);
+            _SideCharIcon.IniHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void Action1()
             {

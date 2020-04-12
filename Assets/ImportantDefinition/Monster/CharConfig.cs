@@ -8,7 +8,7 @@ using Skill;
 public class CharConfig
 {
     public string RECORD_ID;//monsterTable ID
-    public string type;
+    public string TYPE;
     public string REAL_NAME;//monsterTable realName
     public string showNameEN;//monsterTable showNameEN
     public string showNameCN;
@@ -16,7 +16,7 @@ public class CharConfig
     public Zokusei _zokusei = Zokusei.lightMagic;
     public string SPECIAL_ZOKUSEI;
     public string BASIC_MOVEMENT_PACK = "basic_anim";//monsterTable BasicMoveSet
-    public MoveType moveType = MoveType.Mode1;//monsterTable moveType
+    public MoveType moveType = MoveType.Move_normal;//monsterTable moveType
     public RushType rushType = RushType.RushBack;//monsterTable accSKill
     public bool DEFENDABLE_FLAG = true;
     public string instructionEN;

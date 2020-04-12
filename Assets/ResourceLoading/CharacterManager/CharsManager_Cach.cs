@@ -16,7 +16,7 @@ public partial class CharsManager : MonoBehaviour
         //上面这个应该也是走异步，到时候是个连接数据库流程？
         GameObject _TempModel = null;
         AssetBundle modelAsset;
-        _loadingProcess = CachManager.Instance.getABFromCach("CharPretabs/" + _TempCharacterResourceInfo.type, _TempCharacterResourceInfo.REAL_NAME);
+        _loadingProcess = CachManager.Instance.getABFromCach("CharPretabs/" + _TempCharacterResourceInfo.TYPE, _TempCharacterResourceInfo.REAL_NAME);
         yield return _loadingProcess;
         if (_loadingProcess.Current != null)
         {
@@ -48,7 +48,7 @@ public partial class CharsManager : MonoBehaviour
         OutsideDataLink _ODL = _TempModel.GetComponent<OutsideDataLink>();
         Data_Center _TempDATACENTER = _ODL._C;
         _TempDATACENTER.Zokusei = _TempCharacterResourceInfo._zokusei;
-        yield return (_TempDATACENTER.Step1Initialize(_TempCharacterResourceInfo.type, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
+        yield return (_TempDATACENTER.Step1Initialize(_TempCharacterResourceInfo.TYPE, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;
     }
 

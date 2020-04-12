@@ -321,7 +321,7 @@ public class ConfigFileManager : MonoBehaviour {
                 CharConfig _CharacterResourceInfo = new CharConfig
                 {
                     RECORD_ID = "-1",
-                    type = chartype,
+                    TYPE = chartype,
                     REAL_NAME = charPretab.name,
                     showNameEN = null,
                     showNameCN = null,
@@ -349,7 +349,7 @@ public class ConfigFileManager : MonoBehaviour {
                 }
                 _CharacterResourceInfo.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
                 _CharacterResourceInfo.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
-                _CharacterResourceInfo.moveType = MoveType.Mode1;
+                _CharacterResourceInfo.moveType = MoveType.Move_normal;
                 _CharacterResourceInfo.rushType = RushType.RushBack;
                 _CharacterResourceInfo.DEFENDABLE_FLAG = true;
                 _CharacterResourceInfo.instructionCH = null;

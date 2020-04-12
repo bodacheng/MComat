@@ -34,7 +34,7 @@ public class TeamEditManager : MonoBehaviour
             Debug.Log("角色存档问题。localid："+ monsterlocalID);
             yield break;
         }
-        List<PosNumWithLocalKey> returns = TeamSet.Instance.storyModeTeamSet.SetPosMemInfoByLocalIDConservationMode(targetPos,monsterlocalID);
+        List<PosNumWithLocalKey> returns = TeamSet.Instance.Default.SetPosMemInfoByLocalIDConservationMode(targetPos,monsterlocalID);
         for (int i = 0; i < returns.Count;i++)
             yield return ChangeIconOnPos(returns[i].posNum);
         yield return TeamSet.Instance.SaveTeamSet(TeamSetGameMode.story);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
@@ -63,7 +63,7 @@ public class TeamEditManager : MonoBehaviour
             yield break;
         }
 
-        string PositionMonsterOfPlayerId = TeamSet.Instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(posNum);
+        string PositionMonsterOfPlayerId = TeamSet.Instance.Default.GetPositionMonsterOfPlayerId(posNum);
         if (PositionMonsterOfPlayerId != null)
         {
             GetMonsterOfPlayerDetailModel _one;
@@ -108,7 +108,7 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosB()
             {
                 focusingPosNum = 0;
-                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.Default.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1back, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
@@ -123,7 +123,7 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosL()
             {
                 focusingPosNum = 1;
-                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.Default.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1left, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
@@ -138,7 +138,7 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosF()
             {
                 focusingPosNum = 2;
-                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.Default.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1front, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;
@@ -153,7 +153,7 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosR()
             {
                 focusingPosNum = 3;
-                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.storyModeTeamSet.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
+                yield return PreScene.Instance._MemberDetail.SetMemberDetailSystemFocusingCharacter(TeamSet.instance.Default.GetPositionMonsterOfPlayerId(TeamEditManager.focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1right, selectedFrame,200f);
                 yield return PreScene.Instance._MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
                 yield break;

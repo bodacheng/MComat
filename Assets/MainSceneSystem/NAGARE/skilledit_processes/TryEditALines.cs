@@ -106,7 +106,7 @@ public class TryEditALines : MainSceneProcess
             stage.localFight = this.TuroialFight;
             stage._fightEventType = FightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
-            PreScene.Instance.LoadFight(SceneMode.QuestFight, stage);
+            PreScene.Instance.LoadFight(stage);
             this.ProcessEnd();
         }
 

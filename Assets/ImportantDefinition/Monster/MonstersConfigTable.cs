@@ -196,7 +196,7 @@ public class MonstersConfigTable
                 Row row = new Row
                 {
                     RECORD_ID = characterResourceInfo.RECORD_ID,
-                    MONSTER_TYPE = characterResourceInfo.type,
+                    MONSTER_TYPE = characterResourceInfo.TYPE,
                     REAL_NAME = characterResourceInfo.REAL_NAME,
                     ZOKUSEI = ((int)characterResourceInfo._zokusei).ToString(),
                     SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI,
@@ -204,13 +204,13 @@ public class MonstersConfigTable
                 };
                 switch (characterResourceInfo.moveType)
                 {
-                    case MoveType.Mode1:
+                    case MoveType.Move_normal:
                         row.MOVE_TYPE = "Move1";
                         break;
-                    case MoveType.Mode2:
+                    case MoveType.Move_slow:
                         row.MOVE_TYPE = "Move2";
                         break;
-                    case MoveType.Mode3:
+                    case MoveType.Move_fast:
                         row.MOVE_TYPE = "Move3";
                         break;
                     default:
@@ -312,7 +312,7 @@ public class MonstersConfigTable
         Row row = new Row
         {
             RECORD_ID = characterResourceInfo.RECORD_ID,
-            MONSTER_TYPE = characterResourceInfo.type,
+            MONSTER_TYPE = characterResourceInfo.TYPE,
             REAL_NAME = characterResourceInfo.REAL_NAME,
             ZOKUSEI = ((int)characterResourceInfo._zokusei).ToString(),
             SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI,
@@ -320,13 +320,13 @@ public class MonstersConfigTable
         };
         switch (characterResourceInfo.moveType)
         {
-            case MoveType.Mode1:
+            case MoveType.Move_normal:
                 row.MOVE_TYPE = "Move1";
                 break;
-            case MoveType.Mode2:
+            case MoveType.Move_slow:
                 row.MOVE_TYPE = "Move2";
                 break;
-            case MoveType.Mode3:
+            case MoveType.Move_fast:
                 row.MOVE_TYPE = "Move3";
                 break;
         }
@@ -358,7 +358,7 @@ public class MonstersConfigTable
         CharConfig _CharacterResourceInfo = new CharConfig
         {
             RECORD_ID = row.RECORD_ID,
-            type = row.MONSTER_TYPE,
+            TYPE = row.MONSTER_TYPE,
             REAL_NAME = row.REAL_NAME
         };
 
@@ -389,19 +389,19 @@ public class MonstersConfigTable
         switch (row.MOVE_TYPE)
         {
             case "Move1":
-                _CharacterResourceInfo.moveType = MoveType.Mode1;
+                _CharacterResourceInfo.moveType = MoveType.Move_normal;
                 break;
             case "Move2":
-                _CharacterResourceInfo.moveType = MoveType.Mode2;
+                _CharacterResourceInfo.moveType = MoveType.Move_slow;
                 break;
             case "Move3":
-                _CharacterResourceInfo.moveType = MoveType.Mode3;
+                _CharacterResourceInfo.moveType = MoveType.Move_fast;
                 break;
             case "Test":
-                _CharacterResourceInfo.moveType = MoveType.Test;
+                _CharacterResourceInfo.moveType = MoveType.Test_Move;
                 break;
             default:
-                _CharacterResourceInfo.moveType = MoveType.Mode1;
+                _CharacterResourceInfo.moveType = MoveType.Move_normal;
                 break;
         }
 

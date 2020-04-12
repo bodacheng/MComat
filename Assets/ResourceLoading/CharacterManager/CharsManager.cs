@@ -99,7 +99,7 @@ public partial class CharsManager : MonoBehaviour {
         }
         CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.ResourceID.ToString()));
         yield return (_TempDATACENTER.Step2Initialize
-            (_TempCharacterResourceInfo.type,
+            (_TempCharacterResourceInfo.TYPE,
              _CharacterDataInfo._NineAndTwo,
              _TempCharacterResourceInfo._zokusei,
              _TempCharacterResourceInfo.SPECIAL_ZOKUSEI));

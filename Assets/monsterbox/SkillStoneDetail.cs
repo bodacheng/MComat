@@ -7,7 +7,7 @@ using Skill;
 namespace mainMenu
 {
     public class SkillStoneDetail : MonoBehaviour
-    {    
+    {
         [Space(2)]
         [Header("技能名字")]
         public Text keyname;

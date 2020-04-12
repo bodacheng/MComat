@@ -97,7 +97,7 @@ public class SSLevelUpManager : MonoBehaviour
         {
             minusLevel.gameObject.SetActive(false);
         }
-        TargetLevel.text = "Level " + selectedTargetLevel.ToString();
+        TargetLevel.text = "Level " + currentlevel + "->" + selectedTargetLevel.ToString();
     }
     #endregion
     
@@ -121,14 +121,6 @@ public class SSLevelUpManager : MonoBehaviour
     {
         IEnumerator up = MySkillStonesReader.Instance.LevelUpMySkillStone(PlayerSkillStoneID, selectedTargetLevel.ToString(), ApiLanguage.EnUs);
         yield return up;
-        if ((bool)up.Current)
-        {
-            RefreshSkillLevelUpModule();
-            Debug.Log("升级操作成功");
-        }
-        else
-        {
-            Debug.Log("升级操作失败");
-        }
+        RefreshSkillLevelUpModule();
     }
 }

@@ -188,8 +188,6 @@ public class DebugManager : MonoBehaviour {
                                 return;
                             }
 
-                            if (_NetFightScene._SceneMode == SceneMode.localDebug)
-                            {
                                 TeamConfig teamConfig;
                                 if (tag_dropdown.options[tag_dropdown.value].text == "Player1")
                                 {
@@ -284,7 +282,6 @@ public class DebugManager : MonoBehaviour {
                                     debugAddCharUIStateReset();
                                   return;
                                 }
-                            }
                             create_chance = false;
                         }
                         else
@@ -316,8 +313,6 @@ public class DebugManager : MonoBehaviour {
                     if (create_chance)
                     {
                         int level = int.Parse(AIlevelNum.text);
-                        if (_NetFightScene._SceneMode == SceneMode.localDebug)
-                        {
                             TeamConfig teamConfig;
                             if (tag_dropdown.options[tag_dropdown.value].text == "Player1")
                             {
@@ -410,7 +405,6 @@ public class DebugManager : MonoBehaviour {
                                     new Quaternion(0, 0, 0, 0)
                                 ));
                             }
-                        }
                         create_chance = false;
                     }
                     else

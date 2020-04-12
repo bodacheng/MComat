@@ -26,7 +26,7 @@ public class FightTeam : MonoBehaviour
     public Transform[] TeamStandPoints;
     protected IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
 
-    public IEnumerator CharResourceLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
+    public IEnumerator CharsLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
     {
         foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())
         {
@@ -36,10 +36,8 @@ public class FightTeam : MonoBehaviour
                 IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
                 yield return character_datacenter;
                 Data_Center data_Center = (Data_Center)character_datacenter.Current;
-                
                 List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_one.monsterOfPlayerId);
-                data_Center.Step3Initialize(teamConfig,TheNineSlot.CurrentHp(equipingstones));
-                
+                data_Center.Step3Initialize(teamConfig, TheNineSlot.CurrentHp(equipingstones));
                 teamMembers.Set(keys.Key,key,data_Center);
                 CharDataInfoRef.Add(teamMembers.Get(keys.Key,key),_one);
             }
@@ -56,13 +54,13 @@ public class FightTeam : MonoBehaviour
         return null;
     }
 
-    protected SideCharIcon _tempSideCharIcon;
+    protected SideCharIcon _tempSI;
     public void BarsPositionUpdate()
     {
         foreach(Data_Center _one in teamMembers.values)
         {
-            datacenterCharIconDic.TryGetValue(_one,out _tempSideCharIcon);
-            _tempSideCharIcon.transform.position = Vector3.Lerp(_tempSideCharIcon.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f),Time.deltaTime * 20f);
+            datacenterCharIconDic.TryGetValue(_one,out _tempSI);
+            _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f),Time.deltaTime * 20f);
         }
     }
     
@@ -82,39 +80,40 @@ public class FightTeam : MonoBehaviour
     // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
     public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> ChracterSets,float extraHP)
     {
-        yield return CharResourceLoad(ChracterSets);
+        yield return CharsLoad(ChracterSets);
         InstantiateCharsIconsAndFloatHPBar();
         TeamsFightInitialize(extraHP);
     }
     
     protected void RefreshResistanceBar(Data_Center data_Center)
     {
-        datacenterCharIconDic.TryGetValue(data_Center, out _tempSideCharIcon);
-        DOTween.To(() => _tempSideCharIcon.ResistBar.value, (x) => _tempSideCharIcon.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
-        _tempSideCharIcon.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
+        datacenterCharIconDic.TryGetValue(data_Center, out _tempSI);
+        DOTween.To(() => _tempSI.ResistBar.value, (x) => _tempSI.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
+        _tempSI.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
     }
-      
+    
     protected void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
     {
-        datacenterCharIconDic.TryGetValue(data_Center,out _tempSideCharIcon);
-        DOTween.To(() => _tempSideCharIcon.HpBar.value, (x) => _tempSideCharIcon.HpBar.value = x, current_hp / wholeHP, 0.2f);
+        datacenterCharIconDic.TryGetValue(data_Center,out _tempSI);
+        _tempSI.HpText.text = current_hp.ToString();
+        DOTween.To(() => _tempSI.HpBar.value, (x) => _tempSI.HpBar.value = x, current_hp / wholeHP, 0.2f);
     }
-   
+    
     //这个刷新是倾向于画面制御
     public virtual void Refresh()
     {
         foreach (Data_Center _datacenter in teamMembers.values)
         {
-            datacenterCharIconDic.TryGetValue(_datacenter, out _tempSideCharIcon);
+            datacenterCharIconDic.TryGetValue(_datacenter, out _tempSI);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
             {
-                _tempSideCharIcon.transform.localScale = _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
-                _tempSideCharIcon.transform.SetParent(sideIconsContainer.transform);
-                _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(true);
-                _tempSideCharIcon.RecallBars();
+                _tempSI.transform.localScale = _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                _tempSI.transform.SetParent(sideIconsContainer.transform);
+                _tempSI.focusingCharIcon.gameObject.SetActive(true);
+                _tempSI.RecallBars();
             }else{
-                _tempSideCharIcon.focusingCharIcon.gameObject.SetActive(false);
-                _tempSideCharIcon.transform.SetParent(_targetCanvas.transform);
+                _tempSI.focusingCharIcon.gameObject.SetActive(false);
+                _tempSI.transform.SetParent(_targetCanvas.transform);
             }
         }
     }

@@ -41,7 +41,7 @@ namespace dataAccess
                 }
             }
         }
-                
+        
         public static CharDataInfo GetCharDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
         {
             try

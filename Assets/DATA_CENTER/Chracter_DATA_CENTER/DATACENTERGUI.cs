@@ -75,8 +75,8 @@ public class DATACENTERGUI : Editor {
             myScript.Sensor.sensor_radius = 15f;
             myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
             myScript._SkillCancelFlag._C = myScript;
-            myScript._FightAttriCalReference = myScript.gameObject.GetComponent<FightAttriCalReference>();
-            myScript._FightAttriCalReference._Center = myScript;
+            myScript.FightDataRef = myScript.gameObject.GetComponent<FightAttriCalReference>();
+            myScript.FightDataRef._Center = myScript;
             myScript._BO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
             myScript._BO_Ani_E._DATA_CENTER = myScript;
             myScript.controller = myScript.gameObject.GetComponent<Controller>();
@@ -122,7 +122,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
+                focusingHitBox.MainHealth = myScript.FightDataRef;
             }
             if (myScript.left_arm_hitbox_t != null)
             {
@@ -136,7 +136,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
+                focusingHitBox.MainHealth = myScript.FightDataRef;
             }
             if (myScript.right_leg_hitbox_t != null)
             {
@@ -150,7 +150,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
+                focusingHitBox.MainHealth = myScript.FightDataRef;
             }
             if (myScript.left_leg_hitbox_t != null)
             {
@@ -164,7 +164,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
+                focusingHitBox.MainHealth = myScript.FightDataRef;
             }
             if (myScript.spine_hitbox_t != null)
             {
@@ -178,7 +178,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.spine_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript._FightAttriCalReference;
+                focusingHitBox.MainHealth = myScript.FightDataRef;
             }
 
             string bladeName;

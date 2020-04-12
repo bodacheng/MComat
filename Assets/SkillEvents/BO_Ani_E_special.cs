@@ -69,7 +69,7 @@ public partial class BO_Ani_E : MonoBehaviour
             }
                     
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
             if (parentTarget != null)
@@ -121,7 +121,7 @@ public partial class BO_Ani_E : MonoBehaviour
                     break;
             }
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
             EffectAndHurtObjectLoading.Instance.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null);
@@ -160,7 +160,7 @@ public partial class BO_Ani_E : MonoBehaviour
             if (Ani_E.target_pool != null)
             {
                 Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-                Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+                Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
                 Ani_E.processingHitBox.transform.position = pos;
                 Ani_E.processingHitBox.transform.rotation = qua;
                 Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
@@ -215,8 +215,12 @@ public partial class BO_Ani_E : MonoBehaviour
                 return;
         
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER._FightAttriCalReference);
+            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
+            if (Ani_E.processingHitBox._HitBox.onGroundMagic)
+            {
+                Ani_E.processingHitBox.transform.position = new Vector3(Ani_E.processingHitBox.transform.position.x, Ani_E.transform.position.y, Ani_E.processingHitBox.transform.position.z);
+            }
             Ani_E.processingHitBox.transform.rotation = qua;
             if (parentT != null)
             {
@@ -239,7 +243,7 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
             if (Ani_E.processingHitBox.TrackControl != null)
             {
-                Ani_E.processingHitBox.TrackControl.StartOff(pos, qua, trackSpeed);
+                Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position, Ani_E.processingHitBox.transform.rotation, trackSpeed);
             }
             Ani_E.OnLoadMagic = null;
                         

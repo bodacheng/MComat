@@ -59,9 +59,9 @@ public class FightTeam_RotationMode : FightTeam
     
     void RefreshComboHitRotationMode(Data_Center _datacenter)
     {
-        if (_datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value > 1)
+        if (_datacenter.FightDataRef._ComboHitCount.HitCount.Value > 1)
         {
-            rotationModeHitCombo.text = _datacenter._FightAttriCalReference._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+            rotationModeHitCombo.text = _datacenter.FightDataRef._ComboHitCount.HitCount.Value.ToString() + "Hits!";
             rotationModeHitCombo.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f),0.2f);
         }
         else
@@ -98,10 +98,11 @@ public class FightTeam_RotationMode : FightTeam
     {
         foreach (Data_Center a_char in teamMembers.values)
         {
-            a_char._FightAttriCalReference.CurrentHp.Value += extraHP;
-            a_char._FightAttriCalReference.CurrentHp.Subscribe(x => 
+            a_char.FightDataRef.CurrentHp.Value += extraHP;
+            float maxHp = a_char.FightDataRef.CurrentHp.Value;
+            a_char.FightDataRef.CurrentHp.Subscribe(x => 
             {
-                RefreshHPBar(a_char, x, a_char._FightAttriCalReference.CurrentHp.Value);
+                RefreshHPBar(a_char, x, maxHp);
             });
             a_char._ResistanceManager.Resistance.Value = 0;
             a_char._ResistanceManager.Resistance.Subscribe(x => 
@@ -161,8 +162,8 @@ public class FightTeam_RotationMode : FightTeam
         {
             HeroIcon.Seletedfeature(null,selectedFrame,100f);
         }else{
-            datacenterCharIconDic.TryGetValue(waitingToChangeMember,out _tempSideCharIcon);
-            HeroIcon.Seletedfeature(_tempSideCharIcon?.focusingCharIcon,selectedFrame,100f);
+            datacenterCharIconDic.TryGetValue(waitingToChangeMember,out _tempSI);
+            HeroIcon.Seletedfeature(_tempSI?.focusingCharIcon,selectedFrame,100f);
         }
     }
 
@@ -177,7 +178,7 @@ public class FightTeam_RotationMode : FightTeam
             }
             _SideCharIcon = Instantiate(button_prefab);
             _SideCharIcon.name = a_char.name + " ICon";
-            _SideCharIcon.IniHPShow(a_char);
+            _SideCharIcon.IniHPShow(a_char,a_char.FightDataRef.CurrentHp.Value);
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void action1()
             {
@@ -267,7 +268,7 @@ public class FightTeam_RotationMode : FightTeam
             {
                 if (RotationMode_fightingMember != null && _changeTo != null)//继承hit数
                 {
-                    _changeTo._FightAttriCalReference._ComboHitCount.HitCount.Value = RotationMode_fightingMember._FightAttriCalReference._ComboHitCount.HitCount.Value;
+                    _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RotationMode_fightingMember.FightDataRef._ComboHitCount.HitCount.Value;
                 }
                 RotationMode_fightingMember = _changeTo;
                 RotationMode_fightingMember.IsDead.Subscribe( x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); }});
@@ -291,7 +292,7 @@ public class FightTeam_RotationMode : FightTeam
     
     public bool RandomChangeAliveFightingMember()
     {
-        if (waitingToChangeMember != null && waitingToChangeMember._FightAttriCalReference.CurrentHp.Value > 0)
+        if (waitingToChangeMember != null && waitingToChangeMember.FightDataRef.CurrentHp.Value > 0)
         {
             if (!waitingToChangeMember.IsDead.Value)
             {

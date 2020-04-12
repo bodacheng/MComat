@@ -51947,6 +51947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TrackMode: 1
   xAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -52077,6 +52078,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Z_scale: 1
+  navi_time: 5
+  DegreeOfControl: 1
+  Sensor: {fileID: 0}
 --- !u!114 &784774995269956937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52098,7 +52102,7 @@ MonoBehaviour:
   effectSpreadOnBody: 1
   zokusei: 1
   muzzle: 
-  ExplosionEffect: energy_resolve
+  ExplosionEffect: dark_hit
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
 --- !u!114 &1543134919556754503
@@ -52117,7 +52121,6 @@ MonoBehaviour:
   TrackControl: {fileID: 7225614447206829580}
   DestructionDelay: 9.5
   stop_emission_delay: 9
-  energyDissolveSlowly: 1
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []

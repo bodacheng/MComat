@@ -41,6 +41,7 @@ public class StagesManagerGUI : Editor {
     IDictionary<string, string> _SkillRecordIDsAndNames;
     bool Initialized;
 
+    int level = 1;// 参考等级。角色自身不存在等级，但为了设置方便所有技能等级可以一致
     public override void OnInspectorGUI()
     {
         if (!Initialized)
@@ -201,7 +202,7 @@ public class StagesManagerGUI : Editor {
         }
         
         focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
-        focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("CharacerType", focusingCharResourceInfo.type) : EditorGUILayout.TextField("CharacerType", focusingtype);
+        focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("CharacerType", focusingCharResourceInfo.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         RecordIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
         if (RecordIDsAndNames.Count == 0)
         {
@@ -224,14 +225,31 @@ public class StagesManagerGUI : Editor {
             goto A;
         }
         
-        /////// 九宫格 //////////
-        GUILayout.BeginHorizontal();
-        GUI.backgroundColor = Color.gray;
         if (focusingCharInfo._NineAndTwo == null)
         {
             Debug.Log("九宫格信息读取错误？");
             focusingCharInfo._NineAndTwo = new NineAndTwo();
         }
+        
+        GUILayout.BeginHorizontal();
+        level = EditorGUILayout.IntField("参考等级",level);
+        if (GUILayout.Button("设置角色所有技能等级为参考等级"))
+        {
+            focusingCharInfo._NineAndTwo.A1level = level;
+            focusingCharInfo._NineAndTwo.A2level = level;
+            focusingCharInfo._NineAndTwo.A3level = level;
+            focusingCharInfo._NineAndTwo.B1level = level;
+            focusingCharInfo._NineAndTwo.B2level = level;
+            focusingCharInfo._NineAndTwo.B3level = level;
+            focusingCharInfo._NineAndTwo.C1level = level;
+            focusingCharInfo._NineAndTwo.C2level = level;
+            focusingCharInfo._NineAndTwo.C3level = level;
+        }
+        GUILayout.EndHorizontal();
+
+        /////// 九宫格 //////////
+        GUILayout.BeginHorizontal();        
+        GUI.backgroundColor = Color.gray;
         if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.GetMConfig() != focusingSkillConfig ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             focusingSkillConfig = focusingCharInfo._NineAndTwo.GetMConfig();
@@ -328,17 +346,16 @@ public class StagesManagerGUI : Editor {
         if (!SanGong)
         {
             skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, AttackRangeToggleGUI);
-            
             if (skillselectfilter)
             {
                 EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
-
+                
                 filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
                 if (!filterallranges) 
-                { 
-                    skillrangeselectfilter[0] = true; 
-                    skillrangeselectfilter[1] = true; 
-                    skillrangeselectfilter[2] = true; 
+                {
+                    skillrangeselectfilter[0] = true;
+                    skillrangeselectfilter[1] = true;
+                    skillrangeselectfilter[2] = true;
                     skillrangeselectfilter[3] = true;
                 }
                 skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], AttackRangeToggleGUI);
@@ -346,7 +363,7 @@ public class StagesManagerGUI : Editor {
                 skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
                 skillrangeselectfilter[3] = EditorGUILayout.Toggle("超", skillrangeselectfilter[3], AttackRangeToggleGUI);
                 EditorGUILayout.EndToggleGroup();
-
+                
                 selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, skillrarelevelShow, skillrarelevels);
                 EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
                 GUILayout.Space(20f);
@@ -373,7 +390,6 @@ public class StagesManagerGUI : Editor {
             {
                 goto A;
             }
-            GUILayout.Space(10f);
             
             focusingSkillConfig.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",
                                                                          (focusingSkillConfig.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE)

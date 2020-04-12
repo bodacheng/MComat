@@ -15,21 +15,7 @@ public class PreparingProcess : NagareProcess
     {
         LoadingCanvas.target.DarkOff(1f);
         FightLoadError.Instance.FightLoadErrors.Clear();
-        switch (_NetFightScene._SceneMode)
-        {
-            case SceneMode.MyPetsFight:
-                if (FightSceneNote.Instance.nextBattle != null)
-                {
-                    mainProcessRunner.Run(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
-                }
-            break;
-            case SceneMode.QuestFight:
-                if (FightSceneNote.Instance.nextBattle != null)
-                {
-                    mainProcessRunner.Run(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
-                }
-            break;
-        }
+        mainProcessRunner.Run(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
         EffectAndHurtObjectLoading.Instance.IniEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
         yield break;

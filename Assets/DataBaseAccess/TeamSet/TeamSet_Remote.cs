@@ -33,7 +33,7 @@ namespace dataAccess
                      GetMonsterTeamOfPlayerModel _GetMonsterTeamOfPlayerModel = model.data;
                      foreach(MonsterTeamOfPlayerModel _monsterTeamOfPlayerModel  in _GetMonsterTeamOfPlayerModel.monsterTeamOfPlayerList)
                      {
-                         PositionLocalCharKeySet positionLocalCharKeySet = new PositionLocalCharKeySet
+                         PosKeySet positionLocalCharKeySet = new PosKeySet
                          {
                              recordId = _monsterTeamOfPlayerModel.monsterTeamOfPlayerId
                          };
@@ -44,7 +44,7 @@ namespace dataAccess
                          switch (_monsterTeamOfPlayerModel.teamType)
                          {
                             case "00":
-                                 storyModeTeamSet = positionLocalCharKeySet;
+                                 Default = positionLocalCharKeySet;
                                  Debug.Log("quest模式阵型已经读取");
                                 break;
                             case "11":
@@ -80,11 +80,11 @@ namespace dataAccess
             switch (teamSetGameMode)
             {
                 case TeamSetGameMode.story:
-                    form.monsterTeamOfPlayerId = this.storyModeTeamSet.recordId;
-                    string B = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(0);
-                    string L = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(1);
-                    string F = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(2);
-                    string R = this.storyModeTeamSet.GetPositionMonsterOfPlayerId(3);
+                    form.monsterTeamOfPlayerId = this.Default.recordId;
+                    string B = this.Default.GetPositionMonsterOfPlayerId(0);
+                    string L = this.Default.GetPositionMonsterOfPlayerId(1);
+                    string F = this.Default.GetPositionMonsterOfPlayerId(2);
+                    string R = this.Default.GetPositionMonsterOfPlayerId(3);
 
                     form.bMonsterOfPlayerId = (B != null && B.Length == 20) ? B : null;
                     form.lMonsterOfPlayerId = (L != null && L.Length == 20) ? L : null;

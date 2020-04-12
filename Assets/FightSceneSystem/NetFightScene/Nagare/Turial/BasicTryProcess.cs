@@ -179,7 +179,7 @@ public class BasicTryProcess : NagareProcess
             
         foreach (Data_Center _one in winners)
         {
-            if (_one._FightAttriCalReference.CurrentHp.Value > 0)
+            if (_one.FightDataRef.CurrentHp.Value > 0)
             {
                 _one._MyBehaviorRunner.ChangeState("Victory");
             }

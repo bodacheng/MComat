@@ -179,17 +179,17 @@ namespace mainMenu
                     case ResourceLoadMode.CachAB:
                         yield return
                             this.focusingCharacterData.Animation_Manger.PreloadPersonalAnim
-                            (ResourceLordSceneStarter.BundleURL, _watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
+                            (ResourceLordSceneStarter.BundleURL, _watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.StreamingAssetAB:
                         yield return
                             this.focusingCharacterData.Animation_Manger.preloadPersonalAnimStreamingAssetMode
-                            (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
+                            (_watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.Resource:
                         yield return
                             this.focusingCharacterData.Animation_Manger.preloadPersonalAnimResourceMode
-                            (_watchingCharacterResourceInfo.type, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
+                            (_watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                 }
                 this.IfShowingSkill = true;
