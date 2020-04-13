@@ -3,14 +3,15 @@
 namespace Skill
 {
     [System.Serializable]
-    public class Behavior_Transition_Set
+    public class SkillEntity
     {
         public string StateKey;
+        public int LEVEL;
         public BehaviorType stateType;
         public float AT;
         public float AITriggerDistanceMin;
         public float AITriggerDistanceMax;
-        public Behavior_Transition_Set[] Casual_To_Behaviours = { };
+        public SkillEntity[] Casual_To_Behaviours = { };
         public bool can_be_cancelled_to = true;
         public Inputs_defined enterInput = Inputs_defined.Null;
         public Inputs_defined exitInput = Inputs_defined.Null;
@@ -19,21 +20,23 @@ namespace Skill
         [HideInInspector]
         public string[] forced_to_state_nums = { };
 
-        public Behavior_Transition_Set()
+        public SkillEntity()
         {
         }
         
-        public Behavior_Transition_Set(string _StateKey,
-                                        BehaviorType _attackType,
-                                        float _AT,
-                                        float AITriggerDistanceMin,float AITriggerDistanceMax,
-                                        Behavior_Transition_Set[] _casual_to_state_nums,
-                                        string[] _forced_to_state_nums,
-                                        Inputs_defined _enterInput, Inputs_defined _exitInput,
-                                        int _SPMove,
-                                        int _rarelevel)
+        public SkillEntity(string _StateKey,
+                            int LEVEL,
+                            BehaviorType _attackType,
+                            float _AT,
+                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            SkillEntity[] _casual_to_state_nums,
+                            string[] _forced_to_state_nums,
+                            Inputs_defined _enterInput, Inputs_defined _exitInput,
+                            int _SPMove,
+                            int _rarelevel)
         {
             this.StateKey = _StateKey;
+            this.LEVEL = LEVEL;
             this.stateType = _attackType;
             this.AT = _AT;
             this.AITriggerDistanceMin = AITriggerDistanceMin;
@@ -47,7 +50,7 @@ namespace Skill
 
             if (this.Casual_To_Behaviours == null)
             {
-                this.Casual_To_Behaviours = new Behavior_Transition_Set[] { };
+                this.Casual_To_Behaviours = new SkillEntity[] { };
             }
             if (this.forced_to_state_nums == null)
             {
@@ -55,15 +58,17 @@ namespace Skill
             }
         }
 
-        public Behavior_Transition_Set(string _StateKey,
-                                        BehaviorType _attackType,
-                                        float AT,
-                                        float AITriggerDistanceMin,float AITriggerDistanceMax,
-                                        bool can_be_cancelled_to,
-                                        Inputs_defined enterInput, Inputs_defined exitInput,
-                                        int SPMove)
+        public SkillEntity(string _StateKey,
+                                    int level,
+                                    BehaviorType _attackType,
+                                    float AT,
+                                    float AITriggerDistanceMin,float AITriggerDistanceMax,
+                                    bool can_be_cancelled_to,
+                                    Inputs_defined enterInput, Inputs_defined exitInput,
+                                    int SPMove)
         {
             StateKey = _StateKey;
+            this.LEVEL = level;
             stateType = _attackType;
             this.AT = AT;
             this.can_be_cancelled_to = can_be_cancelled_to;

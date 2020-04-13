@@ -15,7 +15,7 @@ public class Behaviors_Incubator
     public List<string> StateIndexList;
     public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
-    public Behaviors_Incubator(Empty_State empty_State,IDictionary<string, Behavior_Transition_Set> toFormAttackStateList)
+    public Behaviors_Incubator(Empty_State empty_State,IDictionary<string, SkillEntity> toFormAttackStateList)
     {
         Num_State_List = new List<BehaviorIndex_With_Behavior>();
         StateIndexList = new List<string>();
@@ -113,9 +113,9 @@ public class Behaviors_Incubator
         StateIndexList.Add("getUp");
 
         SkillTypeKeys = new List<string>();
-        foreach (KeyValuePair<string, Behavior_Transition_Set> valuePair in toFormAttackStateList)
+        foreach (KeyValuePair<string, SkillEntity> valuePair in toFormAttackStateList)
         {
-            Behavior_Transition_Set _set = valuePair.Value;
+            SkillEntity _set = valuePair.Value;
             if (_set == null)
                 continue;
                 
@@ -240,7 +240,7 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         }
     }
 
-    public Behaviors_Incubator_ForLocalResourceCheck(string anim_path, List<Behavior_Transition_Set> toFormAttackStateList)
+    public Behaviors_Incubator_ForLocalResourceCheck(string anim_path, List<SkillEntity> toFormAttackStateList)
     {
         if (anim_path == null)
         {
@@ -270,7 +270,7 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
 
-        foreach (Behavior_Transition_Set _set in toFormAttackStateList)
+        foreach (SkillEntity _set in toFormAttackStateList)
         {
             if (!BehaviorIndexList.Contains(_set.StateKey))
             {

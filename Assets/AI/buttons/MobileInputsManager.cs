@@ -171,15 +171,15 @@ public class MobileInputsManager : MonoBehaviour {
         return !defendButtonHover;
     }
 
-    readonly Dictionary<Inputs_defined, Behavior_Transition_Set> Options_lastframe = new Dictionary<Inputs_defined, Behavior_Transition_Set>()
+    readonly Dictionary<Inputs_defined, SkillEntity> Options_lastframe = new Dictionary<Inputs_defined, SkillEntity>()
     {
         {Inputs_defined.Attack,null},
         {Inputs_defined.Fire1,null},
         {Inputs_defined.Fire2,null}
     };
     
-    Behavior_Transition_Set Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
-    public void ButtonsFeatureLoad(List<Behavior_Transition_Set> Options_preview)
+    SkillEntity Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
+    public void ButtonsFeatureLoad(List<SkillEntity> Options_preview)
     {        
         Behavior_preview_button1 = null; Behavior_preview_button2 = null; Behavior_preview_button3 = null;
         for (int i = 0; i < Options_preview.Count; i++)

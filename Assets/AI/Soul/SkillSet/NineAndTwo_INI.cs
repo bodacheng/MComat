@@ -4,11 +4,11 @@ using Skill;
 
 public partial class NineAndTwo
 {
-    Behavior_Transition_Set A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
-    List<Behavior_Transition_Set> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
-    List<Behavior_Transition_Set> H1_list = new List<Behavior_Transition_Set>();
-    List<Behavior_Transition_Set> H2_list = new List<Behavior_Transition_Set>();
-    List<Behavior_Transition_Set> H3_list = new List<Behavior_Transition_Set>();
+    SkillEntity A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
+    List<SkillEntity> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
+    List<SkillEntity> H1_list = new List<SkillEntity>();
+    List<SkillEntity> H2_list = new List<SkillEntity>();
+    List<SkillEntity> H3_list = new List<SkillEntity>();
     
     public void SortNineAndTwo()
     {
@@ -167,22 +167,22 @@ public partial class NineAndTwo
     // FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
     // 1.sortNineAndTwo(passiveSkillConfigs):整理三连击的连续关系。根据数据库配置好相应技能的属性。
     // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
-    public IDictionary<string, Behavior_Transition_Set> GenerateBeheviourSets()
+    public IDictionary<string, SkillEntity> GenerateBeheviourSets()
     {
-        IDictionary<string, Behavior_Transition_Set> state_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
-        StateTransitionSetList = new List<Behavior_Transition_Set>();
+        IDictionary<string, SkillEntity> state_Transition_Dictionary = new Dictionary<string, SkillEntity>();
+        StateTransitionSetList = new List<SkillEntity>();
 
-        Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty", 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+        SkillEntity Empty = new SkillEntity("Empty", 0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
 
-        Behavior_Transition_Set Victory = new Behavior_Transition_Set("Victory",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+        SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
 
-        Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+        SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
 
-        Behavior_Transition_Set Defend = new Behavior_Transition_Set("Defend",BehaviorType.Def,0,0,0,H1_list.ToArray(),null,Inputs_defined.Defend, Inputs_defined.Defend_Cancel,0,0);
+        SkillEntity Defend = new SkillEntity("Defend", 0,BehaviorType.Def,0,0,0,H1_list.ToArray(),null,Inputs_defined.Defend, Inputs_defined.Defend_Cancel,0,0);
         
-        Behavior_Transition_Set Move = new Behavior_Transition_Set("Move_normal",BehaviorType.NONE,0,0,0,H1_list.ToArray(),null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+        SkillEntity Move = new SkillEntity("Move_normal", 0, BehaviorType.NONE,0,0,0,H1_list.ToArray(),null,Inputs_defined.Null, Inputs_defined.Null,0,0);
 
-        Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",BehaviorType.Hit,0,0,0,H1_list.ToArray(),null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+        SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit,0,0,0,H1_list.ToArray(),null,Inputs_defined.Null, Inputs_defined.Null,0,0);
                                                             
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
@@ -249,17 +249,17 @@ public partial class NineAndTwo
             StateTransitionSetList.Add(Move);// 这个地方是说，要么你自定义移动类状态，要么加默认移动状态。因为移动状态其实可能根据角色被动而不同。
         }
         
-        Behavior_Transition_Set getUp = new Behavior_Transition_Set("getUp",BehaviorType.GetUp,0,0,0,H1_list.ToArray(),null,Inputs_defined.Any, Inputs_defined.Null,0,0);
-        Behavior_Transition_Set KnockOff = new Behavior_Transition_Set("KnockOff",BehaviorType.KnockOff,0,0,0,new Behavior_Transition_Set[]{ getUp },null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp,0,0,0,H1_list.ToArray(),null,Inputs_defined.Any, Inputs_defined.Null,0,0);
+        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff,0,0,0,new SkillEntity[]{ getUp },null,Inputs_defined.Null, Inputs_defined.Null,0,0);
         StateTransitionSetList.Add(getUp);
         StateTransitionSetList.Add(KnockOff);
         
         //从下面这个地方可以看到我们需要在sort阶段把RMD全部准备好，而且必须是要么为null要么是一个完整STS信息。
-        foreach (Behavior_Transition_Set _State_Transition_Set in StateTransitionSetList)
+        foreach (SkillEntity _State_Transition_Set in StateTransitionSetList)
         {
             if (_State_Transition_Set.StateKey != null && !state_Transition_Dictionary.ContainsKey(_State_Transition_Set.StateKey))
             {
-                state_Transition_Dictionary.Add(new KeyValuePair<string, Behavior_Transition_Set>(_State_Transition_Set.StateKey,_State_Transition_Set));
+                state_Transition_Dictionary.Add(new KeyValuePair<string, SkillEntity>(_State_Transition_Set.StateKey,_State_Transition_Set));
             }
             else
             {
@@ -275,7 +275,7 @@ public partial class NineAndTwo
     }
     
     // 这个应该是所谓技能等级的着手点
-    Behavior_Transition_Set FromConfigToSTS(SkillConfig _SC, int level)
+    SkillEntity FromConfigToSTS(SkillConfig _SC, int level)
     {
         if (_SC.RECORD_ID != null)
         {
@@ -295,10 +295,11 @@ public partial class NineAndTwo
             //防御，受伤等固定技能，他们没有id，直接放行来进行之后的处理。
         }
 
-        Behavior_Transition_Set STS = null;
+        SkillEntity STS = null;
         if (_SC != null && !string.IsNullOrEmpty(_SC.REAL_NAME))
         {
-            STS = new Behavior_Transition_Set(_SC.REAL_NAME,
+            STS = new SkillEntity(_SC.REAL_NAME,
+                                            0,
                                            _SC.STATE_TYPE,
                                            ATCal(_SC.ATTACK_WEIGHT,level),
                                            _SC.AI_MIN_DIS,

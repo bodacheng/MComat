@@ -28,7 +28,7 @@ public class PosKeySet
                                                             new PosNumWithLocalKey(9, null) };
     }
     
-    public IEnumerator ConvertToMultiDictionary()
+    public IEnumerator LoadTeamBasedOnAccountInfo()
     {
         MultiDictionary<int, int, CharDataInfo> multiDictionary = new MultiDictionary<int, int, CharDataInfo>();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)

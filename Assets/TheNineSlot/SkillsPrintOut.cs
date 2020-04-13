@@ -38,13 +38,13 @@ namespace mainMenu
         public string focusingResourceID;
         public Data_Center focusingCharacterData;
 
-        IDictionary<int, Behavior_Transition_Set> attack_chuan = new Dictionary<int, Behavior_Transition_Set>();
-        IDictionary<int, Behavior_Transition_Set> Fire1_chuan = new Dictionary<int, Behavior_Transition_Set>();
-        IDictionary<int, Behavior_Transition_Set> Fire2_chuan = new Dictionary<int, Behavior_Transition_Set>();
-        IDictionary<Behavior_Transition_Set, Button> StateButtonDic = new Dictionary<Behavior_Transition_Set, Button>();//按理说这个的key值靠skillid是没问题的。
+        IDictionary<int, SkillEntity> attack_chuan = new Dictionary<int, SkillEntity>();
+        IDictionary<int, SkillEntity> Fire1_chuan = new Dictionary<int, SkillEntity>();
+        IDictionary<int, SkillEntity> Fire2_chuan = new Dictionary<int, SkillEntity>();
+        IDictionary<SkillEntity, Button> StateButtonDic = new Dictionary<SkillEntity, Button>();//按理说这个的key值靠skillid是没问题的。
         List<List<string>> unsualKeyConnects;
-        IDictionary<string, Behavior_Transition_Set> analysisStatesSetDic = new Dictionary<string, Behavior_Transition_Set>();
-        List<Behavior_Transition_Set> analysisStatesList = new List<Behavior_Transition_Set>();
+        IDictionary<string, SkillEntity> analysisStatesSetDic = new Dictionary<string, SkillEntity>();
+        List<SkillEntity> analysisStatesList = new List<SkillEntity>();
         List<Vector3[]> _toDrawLines;
 
         void LateUpdate()
@@ -71,18 +71,18 @@ namespace mainMenu
             }
         }
 
-        IDictionary<string, Behavior_Transition_Set> ConvertStateSetsListToStateTransitionSetDic(List<Behavior_Transition_Set> _analysisStatesList)
+        IDictionary<string, SkillEntity> ConvertStateSetsListToStateTransitionSetDic(List<SkillEntity> _analysisStatesList)
         {
             analysisStatesSetDic.Clear();
-            foreach (Behavior_Transition_Set _set in _analysisStatesList)
+            foreach (SkillEntity _set in _analysisStatesList)
             {
                 if (!analysisStatesSetDic.ContainsKey(_set.StateKey))
-                    analysisStatesSetDic.Add(new KeyValuePair<string, Behavior_Transition_Set>(_set.StateKey, _set));
+                    analysisStatesSetDic.Add(new KeyValuePair<string, SkillEntity>(_set.StateKey, _set));
             }
             return analysisStatesSetDic;
         }
 
-        void AddShowSkillInfoFeature(Button _button, Behavior_Transition_Set _state_Transition_Set)
+        void AddShowSkillInfoFeature(Button _button, SkillEntity _state_Transition_Set)
         {
             _button.onClick.RemoveAllListeners();
             void showSkillInfo()
@@ -92,7 +92,7 @@ namespace mainMenu
                     Destroy(_particle);
                 }
 
-                foreach (KeyValuePair<Behavior_Transition_Set, Button> keyValuePair in StateButtonDic)
+                foreach (KeyValuePair<SkillEntity, Button> keyValuePair in StateButtonDic)
                 {
                     if (keyValuePair.Value == _button)
                     {
@@ -137,9 +137,9 @@ namespace mainMenu
                 skillShowLines.drawlines(_toDrawLines);
 
                 //下面这些是逻辑核心
-                foreach (Behavior_Transition_Set _set in _state_Transition_Set.Casual_To_Behaviours)
+                foreach (SkillEntity _set in _state_Transition_Set.Casual_To_Behaviours)
                 {
-                    analysisStatesSetDic.TryGetValue(_set.StateKey, out Behavior_Transition_Set _oneCasualTo);
+                    analysisStatesSetDic.TryGetValue(_set.StateKey, out SkillEntity _oneCasualTo);
                     StateButtonDic.TryGetValue(_oneCasualTo, out Button CasualToButton);
 
                     if (_button != null && CasualToButton != null)
@@ -336,7 +336,7 @@ namespace mainMenu
                 }
 
                 AddShowSkillInfoFeature(newShow, attack_chuan[i]);
-                StateButtonDic.Add(new KeyValuePair<Behavior_Transition_Set, Button>(attack_chuan[i], newShow));
+                StateButtonDic.Add(new KeyValuePair<SkillEntity, Button>(attack_chuan[i], newShow));
 
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
                 newShow.name = attack_chuan[i].StateKey;
@@ -380,7 +380,7 @@ namespace mainMenu
                 }
 
                 AddShowSkillInfoFeature(newShow, Fire1_chuan[i]);
-                StateButtonDic.Add(new KeyValuePair<Behavior_Transition_Set, Button>(Fire1_chuan[i], newShow));
+                StateButtonDic.Add(new KeyValuePair<SkillEntity, Button>(Fire1_chuan[i], newShow));
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
                 newShow.name = Fire1_chuan[i].StateKey;
                 newShow.transform.SetParent(fire1T);
@@ -421,7 +421,7 @@ namespace mainMenu
                 }
 
                 AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
-                StateButtonDic.Add(new KeyValuePair<Behavior_Transition_Set, Button>(Fire2_chuan[i], newShow));
+                StateButtonDic.Add(new KeyValuePair<SkillEntity, Button>(Fire2_chuan[i], newShow));
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
                 newShow.name = Fire2_chuan[i].StateKey;
                 newShow.transform.SetParent(fire2T);
@@ -434,17 +434,18 @@ namespace mainMenu
 
         //首先三个基础按键的连按结果必须要显示出来，如果存在非连按键接续，那么只要把这个组给记录下来，在画出连按键后再画个线其实就可以。
         //那么考虑到这个东西还有这样丰富的功能，单纯一个返回值可能得不到所有我们需要的东西.我们从中引入了unsualKeyConnects来记录非寻常连接技能
-        List<Behavior_Transition_Set> SearchChuanNextAlreadyUseless(Behavior_Transition_Set _set,
+        List<SkillEntity> SearchChuanNextAlreadyUseless(SkillEntity _set,
                                                    Inputs_defined _inputKey,
                                                    List<string> _keyChuan,
-                                                   List<Behavior_Transition_Set> chuan,
-                                                   IDictionary<string, Behavior_Transition_Set> stateTransitionSetDictionary)
+                                                   List<SkillEntity> chuan,
+                                                   IDictionary<string, SkillEntity> stateTransitionSetDictionary)
         {
             if (!_keyChuan.Contains(_set.StateKey))
             {
-                Behavior_Transition_Set freshNew =
-                new Behavior_Transition_Set(
+                SkillEntity freshNew =
+                new SkillEntity(
                     _set.StateKey,
+                    _set.LEVEL,
                     _set.stateType,
                     _set.AT,
                     _set.AITriggerDistanceMin,
@@ -463,13 +464,13 @@ namespace mainMenu
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
-            foreach (Behavior_Transition_Set _Set in _set.Casual_To_Behaviours)
+            foreach (SkillEntity _Set in _set.Casual_To_Behaviours)
             {
                 if (_Set.enterInput != Inputs_defined.Null)
                 {
                     if (_Set.enterInput == searching_inputKey)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                     {
-                        stateTransitionSetDictionary.TryGetValue(_Set.StateKey, out Behavior_Transition_Set _new);
+                        stateTransitionSetDictionary.TryGetValue(_Set.StateKey, out SkillEntity _new);
                         if (_new != null)
                         {
                             if (!_keyChuan.Contains(_new.StateKey))

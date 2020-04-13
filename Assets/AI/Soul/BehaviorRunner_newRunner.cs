@@ -7,8 +7,8 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         // 这个纯粹为了按钮效果
-        public List<Behavior_Transition_Set> SRTListForCasualTransitionbuttonRefresh = new List<Behavior_Transition_Set>();        
-        List<Behavior_Transition_Set> avaliable_casual_Transitions = new List<Behavior_Transition_Set>();
+        public List<SkillEntity> SRTListForCasualTransitionbuttonRefresh = new List<SkillEntity>();        
+        List<SkillEntity> avaliable_casual_Transitions = new List<SkillEntity>();
         List<string> avaliable_forced_Transitions = new List<string>();
                       
         public void BehaviourTransitionEngine()
@@ -47,7 +47,7 @@ namespace Soul
             #endregion
             
             #region 查找已经可以触发的后续技能
-            foreach (Behavior_Transition_Set Behavior_set in CurrentBehaviorTransitionSet.Casual_To_Behaviours)
+            foreach (SkillEntity Behavior_set in CurrentBehaviorTransitionSet.Casual_To_Behaviours)
             {
                 Behaviour_Dictionary.TryGetValue(Behavior_set.StateKey, out try_Behavior);
                 if (!try_Behavior.Capacity_enter_condition())

@@ -4719,7 +4719,6 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 0.42
   stop_emission_delay: 0.4
-  energyDissolveSlowly: 0
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
@@ -4745,7 +4744,7 @@ MonoBehaviour:
   effectSpreadOnBody: 0
   zokusei: 0
   muzzle: 
-  ExplosionEffect: energy_resolve
+  ExplosionEffect: slash_hit
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!198 &2076650240433689073

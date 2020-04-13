@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 0
@@ -51,7 +50,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.5
-  mode: 2
 --- !u!1 &2895238560737926872
 GameObject:
   m_ObjectHideFlags: 0
@@ -14030,7 +14028,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 0
@@ -14038,7 +14035,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.5
-  mode: 2
 --- !u!1 &8487240888517229303
 GameObject:
   m_ObjectHideFlags: 0
@@ -14082,7 +14078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 0
@@ -14090,7 +14085,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.5
-  mode: 2
 --- !u!1 &8487367947774284773
 GameObject:
   m_ObjectHideFlags: 0
@@ -18816,6 +18810,8 @@ MonoBehaviour:
   stop_emission_delay: 0.4
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
+  Attachments: []
+  _HitTriggerEvent: 
 --- !u!114 &1028424177883537950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18828,19 +18824,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startActivated: 1
+  ActivateAfterTime: 0
+  SpecificTarget: 0
   damage_type: 1
   _WeaponMode: 0
-  _WeaponPosAdjustMode: 1
   weaponHP: -1
   onGroundMagic: 0
   effectSpreadOnBody: 0
-  _specialApply: 0
+  zokusei: 0
+  muzzle: 
+  ExplosionEffect: slash_hit
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  muzzle: 
-  explosionEffect: 
-  zokusei: 0
 --- !u!82 &82822634857008426
 AudioSource:
   m_ObjectHideFlags: 0

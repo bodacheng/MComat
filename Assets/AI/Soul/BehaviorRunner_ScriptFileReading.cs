@@ -41,21 +41,21 @@ namespace Soul
             return AI_selected;
         }
 
-        public bool SaveStateTransitionInfo(List<Behavior_Transition_Set> list, string pathAndFileName, string clip_path)
+        public bool SaveStateTransitionInfo(List<SkillEntity> list, string pathAndFileName, string clip_path)
         {
             try
             {
-                IDictionary<string, Behavior_Transition_Set> toFormAttackStateList = new Dictionary<string, Behavior_Transition_Set>();
+                IDictionary<string, SkillEntity> toFormAttackStateList = new Dictionary<string, SkillEntity>();
                 for (int i = 0; i < list.Count; i++)
                 {
                     toFormAttackStateList.Add(list[i].StateKey, list[i]);
                 }
                 _States_Incubator = new Behaviors_Incubator(empty_State,toFormAttackStateList);
 
-                List<Behavior_Transition_Set> after_list = new List<Behavior_Transition_Set>();
+                List<SkillEntity> after_list = new List<SkillEntity>();
                 List<string> alreadyInList = new List<string>();
 
-                foreach (Behavior_Transition_Set s in list)
+                foreach (SkillEntity s in list)
                 {
                     if (!alreadyInList.Contains(s.StateKey) && _States_Incubator.StateIndexList.Contains(s.StateKey))
                     {
@@ -66,55 +66,55 @@ namespace Soul
 
                 if (!alreadyInList.Contains("Empty"))
                 {
-                    Behavior_Transition_Set Empty = new Behavior_Transition_Set("Empty", 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+                    SkillEntity Empty = new SkillEntity("Empty",0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
                     after_list.Add(Empty);
                     alreadyInList.Add("Empty");
                 }
 
                 if (!alreadyInList.Contains("Victory"))
                 {
-                    Behavior_Transition_Set Victory =  new Behavior_Transition_Set("Victory",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+                    SkillEntity Victory =  new SkillEntity("Victory",0,0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
                     after_list.Add(Victory);
                     alreadyInList.Add("Victory");
                 }
 
                 if (!alreadyInList.Contains("Death"))
                 {
-                    Behavior_Transition_Set Death = new Behavior_Transition_Set("Death",0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+                    SkillEntity Death = new SkillEntity("Death",0,0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
                     after_list.Add(Death);
                     alreadyInList.Add("Death");
                 }
 
                 if (!alreadyInList.Contains("Hit"))
                 {
-                    Behavior_Transition_Set Hit = new Behavior_Transition_Set("Hit",BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+                    SkillEntity Hit = new SkillEntity("Hit",0,BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
                     after_list.Add(Hit);
                     alreadyInList.Add("Hit");
                 }
 
                 if (!alreadyInList.Contains("KnockOff"))
                 {
-                    Behavior_Transition_Set KnockOff = new Behavior_Transition_Set("KnockOff",BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+                    SkillEntity KnockOff = new SkillEntity("KnockOff",0,BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
                     after_list.Add(KnockOff);
                     alreadyInList.Add("KnockOff");
                 }
 
                 List<string> DefaultForceToNums = new List<string>() { "Hit", "KnockOff" };
 
-                foreach (Behavior_Transition_Set s in after_list)
+                foreach (SkillEntity s in after_list)
                 {
-                    List<Behavior_Transition_Set> undefined_CausalStateRateSet = new List<Behavior_Transition_Set>();
-                    foreach (Behavior_Transition_Set rs in s.Casual_To_Behaviours)
+                    List<SkillEntity> undefined_CausalStateRateSet = new List<SkillEntity>();
+                    foreach (SkillEntity rs in s.Casual_To_Behaviours)
                     {
                         if (!alreadyInList.Contains(rs.StateKey))
                         {
                             undefined_CausalStateRateSet.Add(rs);
                         }
                     }
-                    List<Behavior_Transition_Set> casuals_t = s.Casual_To_Behaviours != null ? s.Casual_To_Behaviours.ToList() : new List<Behavior_Transition_Set>();
+                    List<SkillEntity> casuals_t = s.Casual_To_Behaviours != null ? s.Casual_To_Behaviours.ToList() : new List<SkillEntity>();
                     if (undefined_CausalStateRateSet.Any())
                     {
-                        foreach (Behavior_Transition_Set _set in undefined_CausalStateRateSet)
+                        foreach (SkillEntity _set in undefined_CausalStateRateSet)
                         {
                             casuals_t.Remove(_set);// 把连续状态串里出现的没有定义的状态给删除掉。
                         }
@@ -123,7 +123,7 @@ namespace Soul
                     s.forced_to_state_nums = s.StateKey != "Death" ? DefaultForceToNums.ToArray() : (new string[0]);
                 }
 
-                XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<Behavior_Transition_Set>));
+                XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<SkillEntity>));
                 FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Create);
                 XmlSerializer.Serialize(FileStream, after_list);
                 Debug.Log(Application.dataPath + pathAndFileName + " 尝试进行存储");
@@ -158,9 +158,9 @@ namespace Soul
             {
                 Behaviour_Dictionary.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
             }
-            Behaviour_Transition_Dictionary = new Dictionary<string, Behavior_Transition_Set>();
+            Behaviour_Transition_Dictionary = new Dictionary<string, SkillEntity>();
             List<string> alreadyInList = new List<string>();//7.29 这个环节貌似是现在“同技能没法重复”bug的来源
-            foreach (Behavior_Transition_Set _State_Transition_Set in State_Transition_Set_List)
+            foreach (SkillEntity _State_Transition_Set in State_Transition_Set_List)
             {
                 if (_State_Transition_Set.StateKey != null
                     &&
@@ -168,13 +168,13 @@ namespace Soul
                     &&
                     _States_Incubator.IfContainsKey(_State_Transition_Set.StateKey))
                 {
-                    List<Behavior_Transition_Set> new_casual_to = new List<Behavior_Transition_Set>();
+                    List<SkillEntity> new_casual_to = new List<SkillEntity>();
                     if (_State_Transition_Set.Casual_To_Behaviours == null)
                     {
                         Debug.Log(Script.name + "脚本的" + _State_Transition_Set.StateKey + "状态自然迁移出错,尝试进行强加");
                         _State_Transition_Set.Casual_To_Behaviours = new_casual_to.ToArray();
                     }
-                    foreach (Behavior_Transition_Set _State_Rate_Set in _State_Transition_Set.Casual_To_Behaviours)
+                    foreach (SkillEntity _State_Rate_Set in _State_Transition_Set.Casual_To_Behaviours)
                     {
                         if (!_States_Incubator.IfContainsKey(_State_Rate_Set.StateKey))
                         {
@@ -187,7 +187,7 @@ namespace Soul
                         }
                     }
                     Behaviour_Transition_Dictionary.Add(
-                        new KeyValuePair<string, Behavior_Transition_Set>(
+                        new KeyValuePair<string, SkillEntity>(
                             _State_Transition_Set.StateKey,
                             _State_Transition_Set
                         )
@@ -211,26 +211,26 @@ namespace Soul
             }
         }
 
-        public List<Behavior_Transition_Set> SortStateTransitionSetList(List<Behavior_Transition_Set> list)
+        public List<SkillEntity> SortStateTransitionSetList(List<SkillEntity> list)
         {
-            IDictionary<string, Behavior_Transition_Set> toFormAttackStateList = new Dictionary<string, Behavior_Transition_Set>();
+            IDictionary<string, SkillEntity> toFormAttackStateList = new Dictionary<string, SkillEntity>();
             for (int i = 0; i < list.Count; i++)
             {
                 toFormAttackStateList.Add(list[i].StateKey, list[i]);
             }
             _States_Incubator = new Behaviors_Incubator(empty_State,toFormAttackStateList);
-            IDictionary<string, Behavior_Transition_Set> stateTransitionSetDictionary = new Dictionary<string, Behavior_Transition_Set>();
-            List<Behavior_Transition_Set> setsHaveInitialInput = new List<Behavior_Transition_Set>();
-            List<Behavior_Transition_Set> regularStates = new List<Behavior_Transition_Set>();
+            IDictionary<string, SkillEntity> stateTransitionSetDictionary = new Dictionary<string, SkillEntity>();
+            List<SkillEntity> setsHaveInitialInput = new List<SkillEntity>();
+            List<SkillEntity> regularStates = new List<SkillEntity>();
 
             bool hasD = false, hasR = false;
 
-            foreach (Behavior_Transition_Set _set in list)
+            foreach (SkillEntity _set in list)
             {
 
                 if (_States_Incubator.StateIndexList.Contains(_set.StateKey))
                 {
-                    stateTransitionSetDictionary.Add(new KeyValuePair<string, Behavior_Transition_Set>(_set.StateKey, _set));
+                    stateTransitionSetDictionary.Add(new KeyValuePair<string, SkillEntity>(_set.StateKey, _set));
                 }
 
                 if (_set.enterInput != Inputs_defined.Null)
@@ -256,13 +256,13 @@ namespace Soul
                 }
             }
 
-            List<Behavior_Transition_Set> knockOFFCasualTransitios = new List<Behavior_Transition_Set>();
-            foreach (Behavior_Transition_Set _set in setsHaveInitialInput)
+            List<SkillEntity> knockOFFCasualTransitios = new List<SkillEntity>();
+            foreach (SkillEntity _set in setsHaveInitialInput)
             {
                 knockOFFCasualTransitios.Add(_set);
             }
 
-            foreach (Behavior_Transition_Set _set in list)
+            foreach (SkillEntity _set in list)
             {
                 if (_set.StateKey == "KnockOff")
                 {
@@ -272,14 +272,14 @@ namespace Soul
 
             SetStateRatesByAILevel(stateTransitionSetDictionary);
 
-            List<Behavior_Transition_Set> allChuans = new List<Behavior_Transition_Set>();
-            foreach (Behavior_Transition_Set _set in setsHaveInitialInput)
+            List<SkillEntity> allChuans = new List<SkillEntity>();
+            foreach (SkillEntity _set in setsHaveInitialInput)
             {
-                List<Behavior_Transition_Set> chuan = new List<Behavior_Transition_Set>();
+                List<SkillEntity> chuan = new List<SkillEntity>();
                 chuan = SearchChuanNext(_set, Inputs_defined.Null, chuan, allChuans, stateTransitionSetDictionary);
             }
 
-            foreach (Behavior_Transition_Set _set in list)
+            foreach (SkillEntity _set in list)
             {
                 if (!allChuans.Contains(_set) && !regularStates.Contains(_set) && _set.StateKey != null && _States_Incubator.StateIndexList.Contains(_set.StateKey))
                 {
@@ -291,9 +291,9 @@ namespace Soul
             return regularStates;
         }
 
-        List<Behavior_Transition_Set> SearchChuanNext(Behavior_Transition_Set _set, Inputs_defined _inputKey,
-                                               List<Behavior_Transition_Set> chuan, List<Behavior_Transition_Set> allChuans,
-                                               IDictionary<string, Behavior_Transition_Set> stateTransitionSetDictionary)
+        List<SkillEntity> SearchChuanNext(SkillEntity _set, Inputs_defined _inputKey,
+                                               List<SkillEntity> chuan, List<SkillEntity> allChuans,
+                                               IDictionary<string, SkillEntity> stateTransitionSetDictionary)
         {
             if (!chuan.Contains(_set) && !allChuans.Contains(_set))
             {
@@ -304,11 +304,11 @@ namespace Soul
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
 
-            foreach (Behavior_Transition_Set _rset in _set.Casual_To_Behaviours)
+            foreach (SkillEntity _rset in _set.Casual_To_Behaviours)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                 {
-                    stateTransitionSetDictionary.TryGetValue(_rset.StateKey, out Behavior_Transition_Set _new);
+                    stateTransitionSetDictionary.TryGetValue(_rset.StateKey, out SkillEntity _new);
                     if (_new != null)
                     {
                         if (!chuan.Contains(_new) && !allChuans.Contains(_new))
@@ -343,7 +343,7 @@ namespace Soul
             return false;
         }
 
-        List<string> SearchAttackChuanKeyNext(Behavior_Transition_Set _set, Inputs_defined _inputKey, List<string> chuan, IDictionary<string, Behavior_Transition_Set> stateTransitionSetDictionary)
+        List<string> SearchAttackChuanKeyNext(SkillEntity _set, Inputs_defined _inputKey, List<string> chuan, IDictionary<string, SkillEntity> stateTransitionSetDictionary)
         {
             if (!CheckIfStringInList(_set.StateKey, chuan))
             {
@@ -352,11 +352,11 @@ namespace Soul
 
             Inputs_defined searching_inputKey = Inputs_defined.Null;
             searching_inputKey = _inputKey == Inputs_defined.Null ? _set.enterInput : _inputKey;
-            foreach (Behavior_Transition_Set _rset in _set.Casual_To_Behaviours)
+            foreach (SkillEntity _rset in _set.Casual_To_Behaviours)
             {
                 if (_rset.enterInput == searching_inputKey && _rset.enterInput != Inputs_defined.Null)
                 {
-                    stateTransitionSetDictionary.TryGetValue(_rset.StateKey, out Behavior_Transition_Set _new);
+                    stateTransitionSetDictionary.TryGetValue(_rset.StateKey, out SkillEntity _new);
                     if (_new != null)
                     {
                         if (!CheckIfStringInList(_rset.StateKey, chuan))
@@ -379,7 +379,7 @@ namespace Soul
             return chuan;
         }
 
-        public void SetStateRatesByAILevel(IDictionary<string, Behavior_Transition_Set> final_dic)
+        public void SetStateRatesByAILevel(IDictionary<string, SkillEntity> final_dic)
         {
             string myMoveStateKey = null;
             //为什么一定要把这些技能串给提前搜出来？事关随着等级提升“解锁技能的处理”。在我们的系统当中技能的首发概率和连段概率是不一样的
@@ -390,7 +390,7 @@ namespace Soul
             List<string> Fire2Chuan = new List<string>();
 
             //第一轮循环所应该做的就是把Attack，Fire1，Fire2这三个系列的技能串儿搜出来。
-            foreach (KeyValuePair<string, Behavior_Transition_Set> Transition in final_dic)
+            foreach (KeyValuePair<string, SkillEntity> Transition in final_dic)
             {
                 if (Transition.Key == "Move_normal" || Transition.Key == "Move_slow" || Transition.Key == "Move_fast" || Transition.Key == "Test_Move")
                 {
@@ -412,15 +412,15 @@ namespace Soul
                 //在这里把三大攻击串给算出来，无非是说他们的主串包含的技能都有啥名字，这个信息不包括他们各自可能出现的首尾循环
             }
 
-            foreach (KeyValuePair<string, Behavior_Transition_Set> Transition in final_dic)
+            foreach (KeyValuePair<string, SkillEntity> Transition in final_dic)
             {
                 // 三大首发技能AI模式下概率
                 if (Transition.Value.enterInput == Inputs_defined.Attack)
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
-                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
+                    List<SkillEntity> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
+                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
 
-                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
+                    foreach (SkillEntity _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
                         if (_set.StateKey != myMoveStateKey)
@@ -428,8 +428,9 @@ namespace Soul
                             //然后？概率应该适配多少？
                             if (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                             {
-                                Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                SkillEntity _freshNew = new SkillEntity(
                                 _set.StateKey,
+                                _set.LEVEL,
                                 _set.stateType,
                                 _set.AT,
                                 _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
@@ -445,10 +446,10 @@ namespace Soul
 
                 if (Transition.Value.enterInput == Inputs_defined.Fire1)
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
-                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
+                    List<SkillEntity> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
+                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
 
-                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
+                    foreach (SkillEntity _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
                         if (_set.StateKey != myMoveStateKey)
@@ -456,8 +457,9 @@ namespace Soul
                             //然后？概率应该适配多少？
                             if (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                             {
-                                Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                SkillEntity _freshNew = new SkillEntity(
                                     _set.StateKey,
+                                    _set.LEVEL,
                                     _set.stateType,
                                     _set.AT,
                                     _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
@@ -472,10 +474,10 @@ namespace Soul
 
                 if (Transition.Value.enterInput == Inputs_defined.Fire2)
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
-                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
+                    List<SkillEntity> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
+                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
 
-                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
+                    foreach (SkillEntity _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
                         if (_set.StateKey != myMoveStateKey)
@@ -483,8 +485,9 @@ namespace Soul
                             //然后？概率应该适配多少？
                             if (attackChuan.Contains(_set.StateKey) || Fire1Chuan.Contains(_set.StateKey) || Fire2Chuan.Contains(_set.StateKey))
                             {
-                                Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                                SkillEntity _freshNew = new SkillEntity(
                                     _set.StateKey,
+                                    _set.LEVEL,
                                     _set.stateType,
                                     _set.AT,
                                     _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
@@ -506,10 +509,10 @@ namespace Soul
                    &&
                     (attackChuan.Contains(Transition.Value.StateKey) || Fire1Chuan.Contains(Transition.Value.StateKey) || Fire2Chuan.Contains(Transition.Value.StateKey)))
                 {
-                    List<Behavior_Transition_Set> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
-                    List<Behavior_Transition_Set> casual_to_states_after = new List<Behavior_Transition_Set>();
+                    List<SkillEntity> casual_to_states_now = Transition.Value.Casual_To_Behaviours.ToList();
+                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
 
-                    foreach (Behavior_Transition_Set _set in casual_to_states_now)
+                    foreach (SkillEntity _set in casual_to_states_now)
                     {
                         //接下来这轮分析是整个概率适配系统的关键
                         if (_set.StateKey != myMoveStateKey
@@ -522,8 +525,9 @@ namespace Soul
                             //如果把这第二个条件去掉将产生以下结果：玩家每在满一个20级周期时解锁了新技能后，如果这个新技能有后续技，那这个后续技也会发动出来，但无法首发（这个可改）
                             //并且任何一个技能的后续技能可以完全独立存在，比如点了attack后，点fire1或fire2可以接续出一个不在fire1，fire2主攻击串上的隐藏技能
                         {
-                            Behavior_Transition_Set _freshNew = new Behavior_Transition_Set(
+                            SkillEntity _freshNew = new SkillEntity(
                                     _set.StateKey,
+                                    _set.LEVEL,
                                     _set.stateType,
                                     _set.AT,
                                     _set.AITriggerDistanceMin,_set.AITriggerDistanceMax,
@@ -545,7 +549,7 @@ namespace Soul
                     ||
                     Transition.Key == "Test_Move")
                 {
-                    Transition.Value.Casual_To_Behaviours = new Behavior_Transition_Set[] { };
+                    Transition.Value.Casual_To_Behaviours = new SkillEntity[] { };
                 }
             }
         }

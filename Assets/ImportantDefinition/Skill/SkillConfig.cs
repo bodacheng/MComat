@@ -59,7 +59,7 @@
             this.RARITY_LEVEL = 0;
         }
     }
-
+    
     public class PassiveSkillConfigs
     {
         public MoveType moveType;

@@ -11,12 +11,12 @@ using UnityEditor;
 
 public static class AIScriptReading {
 
-    public static List<Behavior_Transition_Set> ReadKongfuBook(BehaviorRunner _AIStateRunner,TextAsset Script)
+    public static List<SkillEntity> ReadKongfuBook(BehaviorRunner _AIStateRunner,TextAsset Script)
     {
         try
         {
-            List<Behavior_Transition_Set> list = new List<Behavior_Transition_Set>();
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Behavior_Transition_Set>));
+            List<SkillEntity> list = new List<SkillEntity>();
+            XmlSerializer serializer = new XmlSerializer(typeof(List<SkillEntity>));
             
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
@@ -32,23 +32,23 @@ public static class AIScriptReading {
                 
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    list = serializer.Deserialize(textReader) as List<Behavior_Transition_Set>;
+                    list = serializer.Deserialize(textReader) as List<SkillEntity>;
                 }
             }
             else if (Application.platform == RuntimePlatform.IPhonePlayer)
             {
                 var reader = new System.IO.StringReader(Script.text);
-                list = serializer.Deserialize(reader) as List<Behavior_Transition_Set>;
+                list = serializer.Deserialize(reader) as List<SkillEntity>;
             }
             list = _AIStateRunner.SortStateTransitionSetList(list);
             _AIStateRunner.usingScript = Script;
             if (list == null)
             {
-                list = new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",0,0,0,0,null ,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
+                list = new List<SkillEntity>() {new SkillEntity("Empty",0,0,0,0,0,null ,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
             }else{
                 if (list.Count == 0)
                 {
-                    list.Add(new Behavior_Transition_Set("Empty",0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0));
+                    list.Add(new SkillEntity("Empty",0,0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0));
                 }
             }
             return list;
@@ -57,7 +57,7 @@ public static class AIScriptReading {
         {
             Debug.Log("状态迁移信息读取失败,返回只有空状态的列表");
             Debug.Log(e.ToString());
-            return new List<Behavior_Transition_Set>() {new Behavior_Transition_Set("Empty",0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
+            return new List<SkillEntity>() {new SkillEntity("Empty",0,0,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0)};
         }
     }
 }

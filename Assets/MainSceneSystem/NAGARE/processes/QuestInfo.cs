@@ -5,6 +5,7 @@ public class QuestInfo : MainSceneProcess
 {
     public IEnumerator enterProcess()
     {
+        yield return _modelShower.ShowThisCharacterModel(null);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         QuestPreparePage.Instance.QuestPreparePageCanvas.gameObject.SetActive(true);

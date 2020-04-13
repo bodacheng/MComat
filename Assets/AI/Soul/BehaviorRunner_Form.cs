@@ -23,7 +23,7 @@ namespace Soul
             }
         }
 
-        void AddAITriggerConditionToBehavior(Behavior_Transition_Set behavior_define)
+        void AddAITriggerConditionToBehavior(SkillEntity behavior_define)
         {
             switch(behavior_define.stateType)
             {

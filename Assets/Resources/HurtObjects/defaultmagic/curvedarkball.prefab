@@ -52102,7 +52102,7 @@ MonoBehaviour:
   effectSpreadOnBody: 1
   zokusei: 1
   muzzle: 
-  ExplosionEffect: dark_hit
+  ExplosionEffect: dark_boom
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
 --- !u!114 &1543134919556754503

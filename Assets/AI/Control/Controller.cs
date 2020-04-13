@@ -13,7 +13,7 @@ namespace Soul
     {
         readonly SSIMultiDictionary Triggerd = new SSIMultiDictionary();
 
-        public void PlayerControll(BehaviorRunner behaviorRunner, List<Behavior_Transition_Set> Options, bool AI_Active)
+        public void PlayerControll(BehaviorRunner behaviorRunner, List<SkillEntity> Options, bool AI_Active)
         {
             if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
             {
@@ -140,7 +140,7 @@ namespace Soul
         }
         
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
-        bool BehaviourExitInputTrigger(Behavior_Transition_Set current_Behavior_Set)
+        bool BehaviourExitInputTrigger(SkillEntity current_Behavior_Set)
         {
             switch(current_Behavior_Set.exitInput)
             {
@@ -155,7 +155,7 @@ namespace Soul
         string Condition, BehaviourCode;
         Behavior temp;
         List<KeyValuePair<string, string>> finalConditionStakeKeySet = new List<KeyValuePair<string, string>>();
-        bool AI_RUNs(BehaviorRunner behaviorRunner,List<Behavior_Transition_Set> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
+        bool AI_RUNs(BehaviorRunner behaviorRunner,List<SkillEntity> avaliable_casual_Transitions) // AI根据目前可作出的行为作出选择
         {
             Triggerd.main.Clear();
             allAvaliableKeyCodes.Clear();
@@ -190,7 +190,7 @@ namespace Soul
                 if (finalConditionStakeKeySet.Count > 0)
                 {
                     int random = Random.Range(0, finalConditionStakeKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
-                    Behavior_Transition_Set behavior_Transition_Set = behaviorRunner.Behaviour_Transition_Dictionary[finalConditionStakeKeySet[random].Value];
+                    SkillEntity behavior_Transition_Set = behaviorRunner.Behaviour_Transition_Dictionary[finalConditionStakeKeySet[random].Value];
                     if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
                     {
                         MobileInputsManager.SkillButtonExplosion(behavior_Transition_Set.enterInput, behavior_Transition_Set.SPLevel);

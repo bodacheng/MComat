@@ -8,7 +8,7 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         #region 初始化相关
-        public List<Behavior_Transition_Set> State_Transition_Set_List;
+        public List<SkillEntity> State_Transition_Set_List;
         Behaviors_Incubator _States_Incubator;
         #endregion
 
@@ -23,8 +23,8 @@ namespace Soul
         #region 运行时活参数
         public SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> Behaviour_Dictionary = new Dictionary<string, Behavior>();
-        public IDictionary<string, Behavior_Transition_Set> Behaviour_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
-        public Behavior_Transition_Set CurrentBehaviorTransitionSet;
+        public IDictionary<string, SkillEntity> Behaviour_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
+        public SkillEntity CurrentBehaviorTransitionSet;
         
         Empty_State empty_State = new Empty_State();
         Behavior now_Behavior;
@@ -177,7 +177,7 @@ namespace Soul
             string[] startOffState = { "Move_normal", "Move_slow", "Move_fast", "Test_Move" };
             for (int i = 0; i < startOffState.Length; i++)
             {
-                Behaviour_Transition_Dictionary.TryGetValue(startOffState[i], out Behavior_Transition_Set _State_Transition);
+                Behaviour_Transition_Dictionary.TryGetValue(startOffState[i], out SkillEntity _State_Transition);
                 if (_State_Transition != null)
                 {
                     ChangeState(startOffState[i]);

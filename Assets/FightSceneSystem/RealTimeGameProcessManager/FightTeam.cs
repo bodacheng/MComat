@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using Api.Dto.Model;
-using dataAccess;
 using mainMenu;
+using Skill;
 
 public class FightTeam : MonoBehaviour
 {
@@ -33,11 +32,10 @@ public class FightTeam : MonoBehaviour
             foreach (int key in keys.Value)
             {
                 CharDataInfo _one = MembersSets.Get(keys.Key,key);
-                IEnumerator character_datacenter = _CharSetManager.CreateCharacter(_one);
-                yield return character_datacenter;
-                Data_Center data_Center = (Data_Center)character_datacenter.Current;
-                List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_one.monsterOfPlayerId);
-                data_Center.Step3Initialize(teamConfig, TheNineSlot.INI_Hp(equipingstones));
+                IEnumerator char_DC = _CharSetManager.CreateCharacter(_one);
+                yield return char_DC;
+                Data_Center data_Center = (Data_Center)char_DC.Current;
+                data_Center.Step3Initialize(teamConfig, TheNineSlot.INI_Hp(_one._NineAndTwo.SkillLevelList()));
                 teamMembers.Set(keys.Key,key,data_Center);
                 CharDataInfoRef.Add(teamMembers.Get(keys.Key,key),_one);
             }

@@ -86,7 +86,7 @@ public class BehaviorRunnerGUI : Editor {
         {
             if (!isInitialized) InitializeList(myScript.State_Transition_Set_List.Count);
         }else{
-            myScript.State_Transition_Set_List = new List<Behavior_Transition_Set>();
+            myScript.State_Transition_Set_List = new List<SkillEntity>();
             if (!isInitialized) InitializeList(myScript.State_Transition_Set_List.Count);
         }
         // --ここまで--
@@ -162,7 +162,7 @@ public class BehaviorRunnerGUI : Editor {
                         deleteCasualToButtonStyle.margin = new RectOffset(50, 22, 11, 11);
                         if (GUILayout.Button("DeleteThis", deleteCasualToButtonStyle))
                         {
-                            List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].Casual_To_Behaviours.ToList();
+                            List<SkillEntity> casualStateList = myScript.State_Transition_Set_List[i].Casual_To_Behaviours.ToList();
                             casualStateList.RemoveAt(y);
                             myScript.State_Transition_Set_List[i].Casual_To_Behaviours = casualStateList.ToArray();
                             EditorGUI.indentLevel--;
@@ -183,7 +183,7 @@ public class BehaviorRunnerGUI : Editor {
                             EditorGUI.indentLevel++;
                             if (GUILayout.Button("  +  " + myScript.State_Transition_Set_List[z].StateKey, addCasualToButtonStyle))
                             {
-                                List<Behavior_Transition_Set> casualStateList = myScript.State_Transition_Set_List[i].Casual_To_Behaviours.ToList();
+                                List<SkillEntity> casualStateList = myScript.State_Transition_Set_List[i].Casual_To_Behaviours.ToList();
                                 casualStateList.Add(myScript.State_Transition_Set_List[z]);
                                 myScript.State_Transition_Set_List[i].Casual_To_Behaviours = casualStateList.ToArray();
                             }
@@ -237,11 +237,11 @@ public class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.State_Transition_Set_List.Add(new Behavior_Transition_Set("Empty", 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0));
+                myScript.State_Transition_Set_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0));
                 InitializeList(-1, myScript.State_Transition_Set_List.Count);
             }
         }
-
+        
         GUI.backgroundColor = Color.green; 
 		if(GUILayout.Button("saveTrans"))
 		{

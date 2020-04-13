@@ -161,15 +161,20 @@ namespace mainMenu
         public void RefreshCurrentHpBasedOnNineSlots()
         {
             List<SkillStoneOfPlayerInfoModel> stonelist = GetMyStonesOnNineSlot();
-            _HP.text = "HP:" + INI_Hp(stonelist).ToString();
-        }
-        
-        public static float INI_Hp(List<SkillStoneOfPlayerInfoModel> stonelist)
-        {
-            float WholeHP = 0;
+            List<int> levels = new List<int>();
             for (int index = 0; index < stonelist.Count; index++)
             {
-                WholeHP += NineAndTwo.StoneHpCal(int.Parse(stonelist[index].level));
+                levels.Add(int.Parse(stonelist[index].level));
+            }
+            _HP.text = "HP:" + INI_Hp(levels).ToString();
+        }
+        
+        public static float INI_Hp(List<int> StoneLevelList)
+        {
+            float WholeHP = 0;
+            for (int index = 0; index < StoneLevelList.Count; index++)
+            {
+                WholeHP += NineAndTwo.StoneHpCal(StoneLevelList[index]);
             }
             return WholeHP;
         }

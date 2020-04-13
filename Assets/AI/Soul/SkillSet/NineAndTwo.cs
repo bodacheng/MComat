@@ -8,7 +8,7 @@ public partial class NineAndTwo {
     public string C1skillid, C2skillid, C3skillid;
     
     public int A1level = 0, A2level = 0, A3level = 0, B1level = 0, B2level = 0, B3level = 0, C1level = 0, C2level = 0, C3level = 0;
-
+    
     public bool canDefend;
     public MoveType moveType;
     public RushType rushType;

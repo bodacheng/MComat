@@ -3,10 +3,48 @@ using Skill;
 
 public partial class NineAndTwo
 {
-    //下面的环节纯粹是针对SkillPrintOut的一些处理
-    public IDictionary<int, Behavior_Transition_Set> GetAttackChuan()
+    public List<int> SkillLevelList()
     {
-        IDictionary<int, Behavior_Transition_Set> attack_chuan = new Dictionary<int, Behavior_Transition_Set>
+        List<SkillEntity> sklist = SkillEntityList();
+        List<int> levels = new List<int>();
+        for (int i = 0; i < sklist.Count; i++)
+        {
+            levels.Add(sklist[i].LEVEL);
+        }
+        return levels;
+    }
+    
+    List<SkillEntity> SkillEntityList()
+    {
+        List<SkillEntity> behavior_Transition_Sets = new List<SkillEntity>();
+        if (A1 != null)
+            behavior_Transition_Sets.Add(A1);
+        if (A2 != null)
+            behavior_Transition_Sets.Add(A2);
+        if (A3 != null)
+            behavior_Transition_Sets.Add(A3);
+        
+        if (B1 != null)
+            behavior_Transition_Sets.Add(B1);
+        if (B2 != null)
+            behavior_Transition_Sets.Add(B2);
+        if (B3 != null)
+            behavior_Transition_Sets.Add(B3);
+        
+        if (C1 != null)
+            behavior_Transition_Sets.Add(C1);
+        if (C2 != null)
+            behavior_Transition_Sets.Add(C2);
+        if (C3 != null)
+            behavior_Transition_Sets.Add(C3);
+    
+        return behavior_Transition_Sets;
+    }
+
+    //下面的环节纯粹是针对SkillPrintOut的一些处理
+    public IDictionary<int, SkillEntity> GetAttackChuan()
+    {
+        IDictionary<int, SkillEntity> attack_chuan = new Dictionary<int, SkillEntity>
         {
             { 1, A1 },
             { 2, A2 },
@@ -14,9 +52,9 @@ public partial class NineAndTwo
         };
         return attack_chuan;
     }
-    public IDictionary<int, Behavior_Transition_Set> GetFire1Chuan()
+    public IDictionary<int, SkillEntity> GetFire1Chuan()
     {
-        IDictionary<int, Behavior_Transition_Set> B_chuan = new Dictionary<int, Behavior_Transition_Set>
+        IDictionary<int, SkillEntity> B_chuan = new Dictionary<int, SkillEntity>
         {
             { 1, B1 },
             { 2, B2 },
@@ -24,9 +62,9 @@ public partial class NineAndTwo
         };
         return B_chuan;
     }
-    public IDictionary<int, Behavior_Transition_Set> GetFire2Chuan()
+    public IDictionary<int, SkillEntity> GetFire2Chuan()
     {
-        IDictionary<int, Behavior_Transition_Set> C_chuan = new Dictionary<int, Behavior_Transition_Set>
+        IDictionary<int, SkillEntity> C_chuan = new Dictionary<int, SkillEntity>
         {
             { 1, C1 },
             { 2, C2 },
@@ -100,20 +138,20 @@ public partial class NineAndTwo
         C3skillid = CConfig3?.RECORD_ID;
     }
     
-    public List<Behavior_Transition_Set> ReturnSTSlist()
+    public List<SkillEntity> ReturnSTSlist()
     {
         return StateTransitionSetList;
     }
     
-    public Behavior_Transition_Set GetD_STS()
+    public SkillEntity GetD_STS()
     {
         return D;
     }
-    public Behavior_Transition_Set GetM_STS()
+    public SkillEntity GetM_STS()
     {
         return M;
     }
-    public Behavior_Transition_Set GetR_STS()
+    public SkillEntity GetR_STS()
     {
         return R;
     }

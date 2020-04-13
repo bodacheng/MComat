@@ -123,18 +123,18 @@ namespace mainMenu
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
-                    IEnumerator enumerator1 = _team1positionLocalCharKeySet_M.ConvertToMultiDictionary();
+                    IEnumerator enumerator1 = _team1positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
                     yield return enumerator1;
                     _selfFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)enumerator1.Current;
-                    IEnumerator enumerator2 = _team2positionLocalCharKeySet_M.ConvertToMultiDictionary();
+                    IEnumerator enumerator2 = _team2positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
                     yield return enumerator2;
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator2.Current;
                     break;
                 case TeamMode.rotation:
-                    IEnumerator enumerator3 = _team1positionLocalCharKeySet_R.ConvertToMultiDictionary();
+                    IEnumerator enumerator3 = _team1positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
                     yield return enumerator3;
                     _selfFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)enumerator3.Current;
-                    IEnumerator enumerator4 = _team2positionLocalCharKeySet_R.ConvertToMultiDictionary();
+                    IEnumerator enumerator4 = _team2positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
                     yield return enumerator4;
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator4.Current;
                     break;
