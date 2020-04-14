@@ -13,8 +13,6 @@ namespace mainMenu
         public ReturnButtonManager _ReturnButtonManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
-        public gotchaManager _gotchaManager;
-
         public ProcessesRunner subProcessesRunner;
 
         public void EelementsInherit(PreScene _preparingScene)
@@ -25,7 +23,6 @@ namespace mainMenu
             _ReturnButtonManager = _preparingScene._ReturnButtonManager;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
-            _gotchaManager = _preparingScene._gotchaManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
         }
 
@@ -50,6 +47,7 @@ namespace mainMenu
     public enum MainSceneStep
     {
         none = 0,
+        setting = -1,
         frontPage = 1,
         SelfFightFront = 4,
         TeamEditFront = 2,

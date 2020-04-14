@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-//主界面那里应该通过这些指标来决定defaultPools里的设置信息。
 public class Setting : MonoBehaviour {
 
-    // 上面这些除了初始界面外应该都是没用的。
+    public Button OpenSetting,CloseSetting;
+    public Canvas SettingCanvas;
+    public RectTransform SettingMenuT;
     public AudioSource bgmSource;
     public Slider bgmSLider,CVSlider,effectsSoundsSlider;
     
+    public static Setting target;
+    
     void Awake()
     {
+        target = this;
         //牵扯到一个初始值问题。
         if (bgmSLider)
             onBgmChange();
@@ -19,6 +21,22 @@ public class Setting : MonoBehaviour {
             onCVsChange();
         if (effectsSoundsSlider)
             onEffectsSoundChange();
+
+        void Open()
+        {
+            SettingCanvas.gameObject.SetActive(true);
+            SettingCanvas.sortingOrder = 1;
+            LoadingCanvas.target.HigtLightRect(SettingMenuT);
+        }
+        OpenSetting.onClick.AddListener(Open);
+        
+        void Close()
+        {
+            SettingCanvas.sortingOrder = 0;
+            LoadingCanvas.target.ClearHigtLight();
+            SettingCanvas.gameObject.SetActive(false);
+        }
+        CloseSetting.onClick.AddListener(Close);
     }
 
     public void onBgmChange()

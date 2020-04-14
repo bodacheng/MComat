@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager
@@ -10,7 +9,7 @@ public class AudioManager
     public static IDictionary<string, AudioClip> Bgms = new Dictionary<string, AudioClip>();
     public static IDictionary<int, IDictionary<string, AudioClip>> Cvs = new Dictionary<int, IDictionary<string, AudioClip>>();
     
-    public AudioClip loadCharacterCVByResource(int charID, string clipname)
+    public AudioClip LoadCharacterCVByResource(int charID, string clipname)
     {
         if (CvDicGetSafe(charID,clipname) != null)
             return CvDicGetSafe(charID, clipname);
@@ -43,8 +42,10 @@ public class AudioManager
                     Cvs[charID].Add(clipname,_clip);
                 }
             }else{
-                Cvs[charID] = new Dictionary<string, AudioClip>();
-                Cvs[charID].Add(clipname,_clip);
+                Cvs[charID] = new Dictionary<string, AudioClip>
+                {
+                    { clipname, _clip }
+                };
             }
         }else{
             Cvs.Add(charID,new Dictionary<string, AudioClip>());
@@ -52,7 +53,7 @@ public class AudioManager
         }
     }
     
-    public AudioClip loadBgmByResource(string clipname)
+    public AudioClip LoadBgmByResource(string clipname)
     {
         if (Bgms.ContainsKey(clipname))
             return Bgms[clipname];

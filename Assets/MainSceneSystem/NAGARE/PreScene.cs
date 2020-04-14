@@ -56,11 +56,7 @@ namespace mainMenu
         [Space(7)]
         [Header("自我战斗管理模块")]
         public SelfFightManager _SelfFightManager;
-        
-        [Space(7)]
-        [Header("抽奖管理模块")]
-        public gotchaManager _gotchaManager;
-        
+                
         //preparingscene应该就是只有这些画布
         [Space(7)]
         [Header("Canvas")]

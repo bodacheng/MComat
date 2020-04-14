@@ -4586,7 +4586,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9da3fe4943c9434385db152bf635fa4, type: 2}
+  - {fileID: 2100000, guid: bafdb712bebb28d40988e5644ed9bf5b, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4878,8 +4878,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.6
+      scalar: 0.8
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -23263,7 +23263,7 @@ GameObject:
   - component: {fileID: 9120464173298673582}
   - component: {fileID: 8749708886017313616}
   m_Layer: 0
-  m_Name: PillarBlast 2
+  m_Name: PillarBlast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

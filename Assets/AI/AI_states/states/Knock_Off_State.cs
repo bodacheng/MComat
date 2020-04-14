@@ -5,8 +5,8 @@ using Skill;
 
 public class Knock_Off_State : Behavior
 {
+    readonly DecompositionerPool superHitPool;
     float time_counter;
-    DecompositionerPool superHitPool;
     Vector3 _xz;    
     bool touchedBoundary;
     bool dropped,canWakeUp,canbeattack;
@@ -75,9 +75,9 @@ public class Knock_Off_State : Behavior
                 _xz = _xz.normalized;
                 Vector3 effectT = gameObject.transform.position.normalized * BoundaryControllByGod._BattleRingRadius;
                 effectT.y = gameObject.transform.position.y;
-                Vector3 quaV = -gameObject.transform.position.normalized;
+                Vector3 quaV = Vector3.zero - gameObject.transform.position.normalized;
                 quaV.y = 0;
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("wallCrack",null,effectT, Quaternion.Euler(quaV),null);
+                EffectAndHurtObjectLoading.Instance.GenerateEffect("wallCrack",null,effectT,  Quaternion.LookRotation(quaV, Vector3.up),null);
             }
         }
         
@@ -109,7 +109,7 @@ public class Knock_Off_State : Behavior
                 _AIStateRunner.ChangeState("getUp");
         }
 
-        if (!canbeattack && time_counter > 0.02f)
+        if (!canbeattack && time_counter > 0.01f)
         {
             _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
             canbeattack = true;

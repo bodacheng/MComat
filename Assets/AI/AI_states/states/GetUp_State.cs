@@ -43,7 +43,10 @@ public class GetUp : Behavior {
         if (!_SkillCancelFlag.Cancel_Flag)
         {
             if (counter > FightGlobalSetting._LeastCommandTimeAfterGetup)
+            {
+                _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
                 _SkillCancelFlag.turn_on_flag();
+            }
         }
 	}
 
