@@ -289,7 +289,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                 }
             }
             item.transform.SetParent(transform, false);
-            item.transform.localScale = Vector3.one * 0.7f;
+            item.transform.localScale = Vector3.one;
             item.transform.localPosition = Vector3.zero;
             item.MakeRaycast(true);
             myDadItem = item;
@@ -384,21 +384,23 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
 			// Swap items
 			if (firstItem != null)
 			{
-                firstItem.transform.SetParent(secondCell.transform);
-                //firstItem.transform.DOMove(secondCell.transform.position,1f);
-				firstItem.transform.localPosition = Vector3.zero;
-				firstItem.MakeRaycast(true);
+
+    //            //firstItem.transform.DOMove(secondCell.transform.position,1f);
+				//firstItem.transform.localPosition = Vector3.zero;
+				//firstItem.MakeRaycast(true);
+                secondCell.AddItem(firstItem);
 			}
 			if (secondItem != null)
 			{
-                secondItem.transform.SetParent(firstCell.transform);
-                secondItem.transform.DOMove(firstCell.transform.position,0.5f);
-				//secondItem.transform.localPosition = Vector3.zero;
-				secondItem.MakeRaycast(true);
+    //            secondItem.transform.SetParent(firstCell.transform);
+    //            secondItem.transform.DOMove(firstCell.transform.position,0.5f);
+				////secondItem.transform.localPosition = Vector3.zero;
+				//secondItem.MakeRaycast(true);
+                firstCell.AddItem(secondItem);
 			}
 			// Update states
-			firstCell.UpdateMyItem();
-			secondCell.UpdateMyItem();
+			//firstCell.UpdateMyItem();
+			//secondCell.UpdateMyItem();
 		}
 	}
 }

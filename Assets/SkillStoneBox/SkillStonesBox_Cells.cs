@@ -8,11 +8,7 @@ using Api.Dto.Model;
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
-    {
-        [Space(7)]
-        [Header("格子图标")]
-        public Sprite Cell;
-        
+    {        
         [Space(7)]
         [Header("格子pretab")]
         public DragAndDropCell Cellprefab;
@@ -42,7 +38,7 @@ namespace mainMenu
                 _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
                 _Selected.transform.localPosition = Vector3.zero;
                 _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-                _Selected.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                _Selected.GetComponent<RectTransform>().localScale = Vector3.one;
                 _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                 _Selected.gameObject.SetActive(true);
             }
@@ -55,7 +51,6 @@ namespace mainMenu
         public void GenerateCells(int cellsLimit, int mode)// 1 : showMode 2: skilledit
         {
             int hangshu = 1;
-            Cellprefab.gameObject.GetComponent<Image>().sprite = Cell;
             for (int i = 0; i < cellsLimit; i++)
             {
                 if (!CellsDictionary.ContainsKey(i))//我姑且认为该字典里每个key值对应的SkillStoneCell对象不会凭空消失

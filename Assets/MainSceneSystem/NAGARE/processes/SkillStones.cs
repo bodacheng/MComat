@@ -50,12 +50,12 @@ public class SkillStones : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
-        
+        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
     public override void LocalUpdate()
