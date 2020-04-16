@@ -7,6 +7,9 @@ public class PlayerAccountInfo
     int coin;//智慧果实
     int diamond;
     int stoneboxsize;
+
+    int arcadeProcess;
+    
     public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
 
     public PlayerAccountInfo()
@@ -14,6 +17,15 @@ public class PlayerAccountInfo
         Coin = 2000;
         Diamond = 99999;
         Stoneboxsize = 200;
+    }
+    
+    public int ArcadeProcess
+    {
+        get => arcadeProcess;
+        set
+        {
+            arcadeProcess = Mathf.Clamp(value, 1, 100);
+        }
     }
     
     public int Stoneboxsize

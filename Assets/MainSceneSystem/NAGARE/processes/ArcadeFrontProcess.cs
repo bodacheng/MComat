@@ -1,23 +1,19 @@
 ﻿using System.Collections;
-using UnityEngine;
 using mainMenu;
 
 public class ArcadeFrontProcess : MainSceneProcess
-{
-    RectTransform T;
-    public IEnumerator enterProcess()
+{    
+    public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(1f);
         ArcadeManager.Instance._ArcadeCanvas.gameObject.SetActive(true);
-        ArcadeManager.Instance.LocalTest();
         LoadingCanvas.target.LightUp();
         yield break;
     }
     
-    public ArcadeFrontProcess(RectTransform T)
+    public ArcadeFrontProcess()
     {
         thisProcessStep = MainSceneStep.ArcadeFront;
-        this.T = T;
         EelementsInherit(PreScene.Instance);
     }
     
@@ -28,7 +24,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(enterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()

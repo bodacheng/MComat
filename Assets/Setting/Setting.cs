@@ -39,6 +39,13 @@ public class Setting : MonoBehaviour {
         CloseSetting.onClick.AddListener(Close);
     }
 
+    void Start()
+    {
+        onBgmChange();
+        onCVsChange();
+        onEffectsSoundChange();
+    }
+
     public void onBgmChange()
     {
         bgmSource.volume = bgmSLider.value;

@@ -115,7 +115,7 @@ namespace mainMenu
             MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
             TopPage frontPage = new TopPage();
-            ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess(ArcadeManager.Instance.ButtonsContainer);
+            ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
 
