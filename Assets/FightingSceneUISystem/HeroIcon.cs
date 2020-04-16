@@ -18,12 +18,12 @@ public class HeroIcon : MonoBehaviour {
     {
         frames = new Dictionary<Zokusei, Sprite>();
         
-        Sprite frameobject_dark = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
-        Sprite frameobject_blue = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
-        Sprite frameobject_red = Resources.Load("essentialUIElements/iconframes/2") as Sprite;
-        Sprite frameobject_light = Resources.Load("essentialUIElements/iconframes/2") as Sprite;
-        Sprite frameobject_green = Resources.Load("essentialUIElements/iconframes/1") as Sprite;
-        Sprite frameobject_null = Resources.Load("essentialUIElements/iconframes/0") as Sprite;
+        Sprite frameobject_dark = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
+        Sprite frameobject_blue = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
+        Sprite frameobject_red = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
+        Sprite frameobject_light = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
+        Sprite frameobject_green = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
+        Sprite frameobject_null = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
 
         if (frameobject_blue)
             frames.Add(Zokusei.blueMagic,frameobject_blue);
@@ -69,7 +69,7 @@ public class HeroIcon : MonoBehaviour {
         }
 
         frame.transform.localScale = Vector3.one;
-        Icon.transform.localScale = Vector3.one * 0.75f;
+        Icon.transform.localScale = Vector3.one * 0.8f;
         frame.transform.SetSiblingIndex(4);
         Icon.transform.SetSiblingIndex(4);
         if (cooldownCurtain != null)

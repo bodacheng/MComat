@@ -55,9 +55,11 @@ namespace mainMenu
                 MemberInfoT.gameObject.SetActive(false);
                 yield break;
             }
+            
+            CharConfig Ref = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
+            BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
 
             MemberInfoT.gameObject.SetActive(true);
-
             // show按钮功能加载
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
@@ -114,12 +116,12 @@ namespace mainMenu
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 this._SkillsPrintOut.focusingCharacterData = null;
-                IEnumerator readshowmodel = _modelShower.ShowThisCharacterModel(null);
+                IEnumerator readshowmodel = _modelShower.ShowModel(null);
                 yield return readshowmodel;
                 yield break;
             }else{
                 this._SkillsPrintOut.focusingResourceID = _focusingCharacterDataInfo.ResourceID;
-                IEnumerator readshowmodel = _modelShower.ShowThisCharacterModel(_focusingCharacterDataInfo.monsterOfPlayerId);
+                IEnumerator readshowmodel = _modelShower.ShowModel(_focusingCharacterDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)

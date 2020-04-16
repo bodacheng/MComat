@@ -16,7 +16,7 @@ public class SelfFightFront : MainSceneProcess
         yield return MonsterBox.DisplayMonsterIcons();
         
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);
-        yield return _modelShower.ShowThisCharacterModel(null);
+        yield return _modelShower.ShowModel(null);
     }
     
     public SelfFightFront()

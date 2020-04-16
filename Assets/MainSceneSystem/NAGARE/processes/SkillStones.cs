@@ -8,7 +8,7 @@ public class SkillStones : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOff(1f);
-        yield return _modelShower.ShowThisCharacterModel(null);
+        yield return _modelShower.ShowModel(null);
         SkillStonesBox.target = PreScene.Instance._SkillStonesBox_Show;
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         

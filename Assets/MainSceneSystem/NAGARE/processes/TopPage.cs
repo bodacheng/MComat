@@ -37,7 +37,7 @@ public class TopPage : MainSceneProcess
             if (focusLocalid != null)
             {
                  yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(focusLocalid);//确立focusing角色
-                yield return _modelShower.ShowThisCharacterModel(focusLocalid);
+                yield return _modelShower.ShowModel(focusLocalid);
             }
         }
         yield break;

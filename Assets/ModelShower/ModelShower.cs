@@ -36,10 +36,10 @@ public class ModelShower : MonoBehaviour
     
     void Awake()
     {
-        pinchZoom.camera = this._CameraManager.GetComponent<Camera>();
+        pinchZoom.camera = _CameraManager.GetComponent<Camera>();
     }
 
-    public IEnumerator ShowThisCharacterModel(string localID)
+    public IEnumerator ShowModel(string localID)
     {
         GameObject _char = MyModelPool.Instance.GetMyModel(localID);
         if (_char == null)
@@ -64,7 +64,7 @@ public class ModelShower : MonoBehaviour
                 showingChar.SetActive(true);
                 showingChar.transform.parent = null;
                 showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 10f));//右
-                showingChar.transform.localRotation = Quaternion.identity;
+                showingChar.transform.LookAt(_CameraManager.transform,Vector3.up);
             }
             else
             {
