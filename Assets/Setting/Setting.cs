@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using dataAccess;
+using mainMenu;
 
 public class Setting : MonoBehaviour {
 
@@ -14,24 +16,21 @@ public class Setting : MonoBehaviour {
     void Awake()
     {
         target = this;
-        //牵扯到一个初始值问题。
-        if (bgmSLider)
-            onBgmChange();
-        if (CVSlider)
-            onCVsChange();
-        if (effectsSoundsSlider)
-            onEffectsSoundChange();
-
+        
         void Open()
         {
+            LoadProgrameSettingFromAccount();
+            
             SettingCanvas.gameObject.SetActive(true);
             SettingCanvas.sortingOrder = 1;
             LoadingCanvas.target.HigtLightRect(SettingMenuT);
         }
         OpenSetting.onClick.AddListener(Open);
-        
+
         void Close()
         {
+            SaveProgrameSettingToAccount();
+                        
             SettingCanvas.sortingOrder = 0;
             LoadingCanvas.target.ClearHigtLight();
             SettingCanvas.gameObject.SetActive(false);
@@ -45,6 +44,22 @@ public class Setting : MonoBehaviour {
         onCVsChange();
         onEffectsSoundChange();
     }
+    
+    public void LoadProgrameSettingFromAccount()
+    {
+        bgmSLider.value = AccountSet.Instance._PlayerAccountInfo.BgmVolumn;
+        effectsSoundsSlider.value = AccountSet.Instance._PlayerAccountInfo.EffectsVolumn;
+        
+        bgmSource.volume = bgmSLider.value;
+        AudioManager.effectsVolumn = effectsSoundsSlider.value;
+    }
+    
+    public void SaveProgrameSettingToAccount()
+    {
+        AccountSet.Instance._PlayerAccountInfo.BgmVolumn = bgmSLider.value;
+        AccountSet.Instance._PlayerAccountInfo.EffectsVolumn = effectsSoundsSlider.value;
+        PreScene.Instance.mainProcessRunner.Run(AccountSet.Instance.SaveCustomerInfo());
+    }
 
     public void onBgmChange()
     {
@@ -56,6 +71,6 @@ public class Setting : MonoBehaviour {
     }
     public void onEffectsSoundChange()
     {
-        AudioManager.effectsVolumn = effectsSoundsSlider.value;        
+        AudioManager.effectsVolumn = effectsSoundsSlider.value;
     }
 }

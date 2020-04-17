@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 using dataAccess;
@@ -20,7 +19,7 @@ public class MemberDetail_skillshow : MainSceneProcess
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
-        _MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
+        _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         yield break;
     }
@@ -32,22 +31,22 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
-        this._MemberDetail._SkillsPrintOut.skillShowLines.ClearDrawingLines();
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
-        this._MemberDetail.MemberSkillshowT.gameObject.SetActive(false);
+        _MemberDetail._SkillsPrintOut.ClearRenderPs();
+        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
+        _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.IfShowingSkill)
+        if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
 }

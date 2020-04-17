@@ -5,9 +5,7 @@ public class ArcadeFrontProcess : MainSceneProcess
 {    
     public IEnumerator EnterProcess()
     {
-        LoadingCanvas.target.DarkOff(1f);
         ArcadeManager.Instance._ArcadeCanvas.gameObject.SetActive(true);
-        LoadingCanvas.target.LightUp();
         yield break;
     }
     

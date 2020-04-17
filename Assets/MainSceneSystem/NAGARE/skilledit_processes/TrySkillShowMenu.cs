@@ -23,7 +23,7 @@ public class TrySkillShowMenu : MainSceneProcess
         //SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
-        this._MemberDetail.MemberSkillshowT.gameObject.SetActive(true);
+        _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
         this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         yield break;     
@@ -42,7 +42,6 @@ public class TrySkillShowMenu : MainSceneProcess
     public override void ProcessEnd()
     {
         this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
-        this._MemberDetail.MemberSkillshowT.gameObject.SetActive(false);
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);

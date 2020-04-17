@@ -9,6 +9,8 @@ public class PlayerAccountInfo
     int stoneboxsize;
 
     int arcadeProcess;
+
+    float bgmVolumn, effectsVolumn;
     
     public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
 
@@ -17,6 +19,24 @@ public class PlayerAccountInfo
         Coin = 2000;
         Diamond = 99999;
         Stoneboxsize = 200;
+    }
+    
+    public float BgmVolumn
+    {
+        get => bgmVolumn;
+        set 
+        {
+            bgmVolumn = Mathf.Clamp(value, 0, 1);
+        }
+    }
+    
+    public float EffectsVolumn
+    {
+        get => effectsVolumn;
+        set 
+        {
+            effectsVolumn = Mathf.Clamp(value, 0, 1);
+        }
     }
     
     public int ArcadeProcess

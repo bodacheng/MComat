@@ -133,6 +133,7 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
 
             yield return AccountSet.Instance.LoadCustomerInfo();
+            Setting.target.LoadProgrameSettingFromAccount();
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);

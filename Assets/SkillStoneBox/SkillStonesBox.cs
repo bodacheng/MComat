@@ -20,7 +20,7 @@ using Skill;
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
-    {        
+    {
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;

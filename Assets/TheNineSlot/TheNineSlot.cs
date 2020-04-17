@@ -119,7 +119,7 @@ namespace mainMenu
                     if (_SkillStone != null && _SkillStone._SkillConfigOfSkillStone != null)
                     {
                         _skillStoneDetail.RefreshSkillDetail(_SkillStone._SkillConfigOfSkillStone, _SkillStone.SkillStoneOfPlayerId);
-                        mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPreparing(_SkillStone._SkillConfigOfSkillStone.REAL_NAME));
+                        mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfigOfSkillStone.REAL_NAME));
                     }
                 }
                 button.onClick.RemoveAllListeners();

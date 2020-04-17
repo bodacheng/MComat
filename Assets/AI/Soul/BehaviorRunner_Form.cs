@@ -108,9 +108,9 @@ namespace Soul
 
             _States_Incubator = new Behaviors_Incubator(empty_State,this.Behaviour_Transition_Dictionary);
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
-            Behaviour_Dictionary = new Dictionary<string, Behavior>();
-            ConditionAndRespondPriority = new MultiDictionary<string, string, int>();
-            
+            Behaviour_Dictionary.Clear();
+            ConditionAndRespondPriority.Clear();
+            BehaviourAndStrategicExitCondition.Clear();
             foreach (BehaviorIndex_With_Behavior s in Num_State_List)
             {
                 if (Behaviour_Transition_Dictionary.ContainsKey(s.num))

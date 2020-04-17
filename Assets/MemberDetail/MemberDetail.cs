@@ -20,7 +20,6 @@ namespace mainMenu
         [Header("角色明细T，技能显示T")]
         public RectTransform MemberDetailCanvas;
         public RectTransform MemberInfoT;
-        public RectTransform MemberSkillshowT;
 
         [Space(7)]
         [Header("SkillStoneManager")]
@@ -115,19 +114,19 @@ namespace mainMenu
             if (_focusingCharacterDataInfo == null)
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
-                this._SkillsPrintOut.focusingCharacterData = null;
+                _SkillsPrintOut.focusingC = null;
                 IEnumerator readshowmodel = _modelShower.ShowModel(null);
                 yield return readshowmodel;
                 yield break;
             }else{
-                this._SkillsPrintOut.focusingResourceID = _focusingCharacterDataInfo.ResourceID;
+                _SkillsPrintOut.focusingResourceID = _focusingCharacterDataInfo.ResourceID;
                 IEnumerator readshowmodel = _modelShower.ShowModel(_focusingCharacterDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");
-                    this._SkillsPrintOut.focusingCharacterData = null;
+                    this._SkillsPrintOut.focusingC = null;
                     yield break;
                 }
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
@@ -137,8 +136,8 @@ namespace mainMenu
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
-                this._SkillsPrintOut.focusingCharacterData = aI_DATA_CENTER;
-                this._SkillsPrintOut.focusingCharacterData.Animation_Manger.Animator.applyRootMotion = true;
+                this._SkillsPrintOut.focusingC = aI_DATA_CENTER;
+                this._SkillsPrintOut.focusingC.Animation_Manger.Animator.applyRootMotion = true;
             }
             yield break;
         }

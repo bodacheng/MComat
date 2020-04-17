@@ -7,7 +7,6 @@ public class TeamEditFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        LoadingCanvas.target.DarkOff(0.5f);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
@@ -15,7 +14,6 @@ public class TeamEditFront : MainSceneProcess
         _CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
         yield return MonsterBox.DisplayMonsterIcons();
         TeamEditManager.Instance._Canvas.gameObject.SetActive(true);
-        LoadingCanvas.target.LightUp();
         yield break;
     }
     

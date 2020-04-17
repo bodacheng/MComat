@@ -35,7 +35,7 @@ namespace mainMenu
             zokuseiButtonEffects.Add(Zokusei.Null,_default);
             
             triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/lightMagic/explosion0", typeof(GameObject)) as GameObject;
-            triggerExplosion0 = Object.Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
+            triggerExplosion0 = Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
             yield break;
         }
         
@@ -48,7 +48,9 @@ namespace mainMenu
         public void SwitchZokuseiButtons(Vector3 normaltagpos,Vector3 ex1tagpos,Vector3 ex2tagpos,Vector3 ex3tagpos, Zokusei zokusei)
         {
             if (_focusingButtonEffectsGroup != null)
+            {
                 _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
+            }
             
             if (zokuseiButtonEffects.ContainsKey(zokusei))
             {

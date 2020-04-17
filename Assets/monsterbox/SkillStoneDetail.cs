@@ -43,6 +43,21 @@ namespace mainMenu
             skill_level_info.text = "LV:" + (currentstone.level ?? "1");
         }
         
+        // 技能画面展示用
+        public void RefreshSkillDetail_SkillEntity(SkillEntity _SkillConfigOfSkillStone)
+        {
+            if (_SkillConfigOfSkillStone == null)
+            {
+                keyname.text = "";
+                ShowSkillStoneExType(0);
+                ShowSKillRanges(-10,-10);//即清空
+                return;
+            }
+            keyname.text = _SkillConfigOfSkillStone.StateKey;
+            ShowSkillStoneExType(_SkillConfigOfSkillStone.SPLevel);
+            ShowSKillRanges(_SkillConfigOfSkillStone.AITriggerDistanceMin,_SkillConfigOfSkillStone.AITriggerDistanceMax);
+        }
+        
         void ShowSKillRanges(float dis_min, float float_max)
         {
             if (SkillConfigTable.RangeLimit(dis_min,float_max,true, false, false, false))

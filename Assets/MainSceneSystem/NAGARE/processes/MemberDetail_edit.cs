@@ -10,7 +10,6 @@ public class MemberDetail_edit : MainSceneProcess
     {
         SkillStonesBox.target = PreScene.Instance._SkillStonesBox_NineSlot;
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
-        LoadingCanvas.target.DarkOff(0.5f);
         PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize,2);
@@ -25,10 +24,8 @@ public class MemberDetail_edit : MainSceneProcess
             SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.NormalTab.gameObject,5f),
             SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX1Tab.gameObject,5f),
             SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX2Tab.gameObject,5f),
-            SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX3Tab.gameObject,5f),
-            _CharConfig._zokusei);
-        
-        LoadingCanvas.target.LightUp();
+            SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX3Tab.gameObject,5f),_CharConfig._zokusei);
+            
         yield break;
     }
     
