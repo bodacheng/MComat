@@ -35,7 +35,7 @@ namespace mainMenu
         public Button favouriteButton;
         public Button sell;
         public InputField selfdefindtag;
-
+        
         [Space(7)]
         [Header("Positions For Show")]
         public Transform MemDetailTargetPos;

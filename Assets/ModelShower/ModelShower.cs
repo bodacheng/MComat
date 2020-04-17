@@ -73,7 +73,7 @@ public class ModelShower : MonoBehaviour
         }
         yield return showingChar;
     }
-
+    
     Vector3 FirstPoint;
     Vector3 SecondPoint;
     Vector3 modelPOnScreen;

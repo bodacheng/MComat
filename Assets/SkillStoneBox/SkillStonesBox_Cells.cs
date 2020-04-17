@@ -81,7 +81,7 @@ namespace mainMenu
             hangshu = cellsLimit / gridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hangshu);
         }
-                
+        
         public DragAndDropCell GetFirstEmptyCell()
         {
             foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)

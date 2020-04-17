@@ -69,7 +69,7 @@ namespace mainMenu
             _focusingButtonEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
 
-        public void Skillbuttonexplosion(Vector3 targetPOS)
+        public void SkillButtonExplosion(Vector3 targetPOS)
         {
             triggerExplosion0.transform.position = targetPOS;
             triggerExplosion0.Play();            

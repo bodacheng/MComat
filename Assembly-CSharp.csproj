@@ -678,7 +678,6 @@
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticlePremultiplyBlend.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\Toon Additive.shader" />
-    <None Include="Assets\Resources\StageConfigFiles\oneFight.json" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

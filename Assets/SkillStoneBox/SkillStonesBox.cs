@@ -97,30 +97,34 @@ namespace mainMenu
             return focusingExType;
         }
 
+        // Button feature
         public void NormalTabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 0;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
-
+        
+        // Button feature
         public void EX1TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 1;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
-
+        
+        // Button feature
         public void EX2TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 2;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
-
+        
+        // Button feature
         public void EX3TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.Skillbuttonexplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 3;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }

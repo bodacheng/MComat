@@ -114,6 +114,9 @@ namespace mainMenu
                     Debug.Log(" 没能锁定角色动画播放器？ ");
                 }
                 IfShowingSkill = true;
+                
+                // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
+                SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_button.transform.position);
             }
             _button.onClick.AddListener(showSkillInfo);
         }

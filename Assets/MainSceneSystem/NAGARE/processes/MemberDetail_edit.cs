@@ -51,7 +51,7 @@ public class MemberDetail_edit : MainSceneProcess
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
-    Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
         if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)

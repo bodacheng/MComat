@@ -41,7 +41,7 @@ public class MemberDetail_skillshow : MainSceneProcess
         _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
     }
 
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
         if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
