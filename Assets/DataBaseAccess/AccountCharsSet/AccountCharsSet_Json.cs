@@ -102,7 +102,7 @@ namespace dataAccess
                 i++;
             }
             OverrideAccountCharacterInfoListObjectsViaJsonFile();
-            yield return MonsterBox.DisplayMonsterIcons();
+            //yield return MonsterBox.DisplayMonsterIcons();
             yield break;
         }
 

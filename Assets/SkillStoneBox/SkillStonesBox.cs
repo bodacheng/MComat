@@ -229,24 +229,7 @@ namespace mainMenu
             }
             yield break;
         }
-        
-        public static IEnumerator GenerateOneStone(SkillStoneOfPlayerInfoModel one)
-        {
-            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
-            if (_SkillConfig == null)
-            {
-                Debug.Log("巨大问题,技能id似乎未定义："+one.skillId);
-                yield break;
-            }
-            if (MySkillStonesReader.mySkillStonesDataDic.ContainsKey(one.skillStoneOfPlayerId))
-            {
-                MySkillStonesReader.mySkillStonesDataDic[one.skillStoneOfPlayerId] = one;
-            }else{
-                MySkillStonesReader.mySkillStonesDataDic.Add(one.skillStoneOfPlayerId, one);
-            }
-            yield return GenerateOneStoneModel(one.skillStoneOfPlayerId);
-        }
-        
+
         public static IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
         {
             if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))

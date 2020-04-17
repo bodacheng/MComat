@@ -575,12 +575,14 @@
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_Scroll01.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_CenterGlow.shader" />
+    <None Include="Assets\Resources\StageConfigFiles\stage1.json" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Asstes\ErbGameArt\Glowing orbs Vol 3\Demo scene\Readme.txt" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Issues in button behavior (MAC).txt" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Readme.txt" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Readme.txt" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Prefabs\Readme.txt" />
+    <None Include="Assets\Resources\StageConfigFiles\stage2.json" />
     <None Include="Assets\POFX\Shaders\Resources\Refraction.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Outline.shader" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lit_CenterGlow.shader" />

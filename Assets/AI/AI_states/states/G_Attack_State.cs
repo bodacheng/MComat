@@ -118,8 +118,8 @@ public class G_Attack_State : Behavior {
 	{
         base.AI_State_enter();
         collider = null;
-        Animation_Manger.Animator.SetTrigger("face_reset");
-        Animation_Manger.Animator.SetTrigger("confident");
+        //Animation_Manger.Animator.SetTrigger("face_reset");
+        //Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         if (StateType == BehaviorType.GR)

@@ -6,7 +6,7 @@ public class StartUpScenePresentation : MonoBehaviour
 {
     [Space(7)]
     [Header("选择模式T")]
-    public Button LocalMode,NetMode;
+    public Button StartNewLocalMode,LocalMode,NetMode;
     
     [Space(7)]
     [Header("ResourceLordSceneStarter")]
@@ -33,6 +33,7 @@ public class StartUpScenePresentation : MonoBehaviour
     {
         if (pProcessFinished && _resourceLordSceneStarter.dProcessFinished && !LocalMode.gameObject.activeSelf)
         {
+            StartNewLocalMode.gameObject.SetActive(true);
             LocalMode.gameObject.SetActive(true);
             NetMode.gameObject.SetActive(true);
         }

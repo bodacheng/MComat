@@ -117,7 +117,25 @@ namespace dataAccess
             }
             return targetStones;
         }
-        
+
+        public IEnumerator GenerateOneStoneInfo(SkillStoneOfPlayerInfoModel one)
+        {
+            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
+            if (_SkillConfig == null)
+            {
+                Debug.Log("巨大问题,技能id似乎未定义：" + one.skillId);
+                yield break;
+            }
+            if (MySkillStonesReader.mySkillStonesDataDic.ContainsKey(one.skillStoneOfPlayerId))
+            {
+                MySkillStonesReader.mySkillStonesDataDic[one.skillStoneOfPlayerId] = one;
+            }
+            else
+            {
+                MySkillStonesReader.mySkillStonesDataDic.Add(one.skillStoneOfPlayerId, one);
+            }
+        }
+
         // 这个函数的作用在于第一个英文单词：核实。 作用是根角色技能编辑存档和玩家技能石存档“相互”核实技能编辑信息。但不会造成技能石的丢失风险
         // 另一方面可以看到一个问题在新石头加入的时候显然不需要运行本函数
         //public IEnumerator VerifyAllMyStonesUsingMonsterInfo()
@@ -180,7 +198,7 @@ namespace dataAccess
         //                keyValuePair.Value.b3_skill_stone_record_id = "-1";
         //            }
         //        }
-                
+
         //        if (keyValuePair.Value.c1_skill_stone_record_id != null)
         //        {
         //            if (!usingstoneidandmonsterid.ContainsKey(keyValuePair.Value.c1_skill_stone_record_id))
@@ -216,7 +234,7 @@ namespace dataAccess
         //    }
         //    yield break;
         //}
-        
+
         public IEnumerator StoneGotcha()
         {
             switch (AccountSet.Instance._playerinfoReferenceMode)
