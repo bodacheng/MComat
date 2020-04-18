@@ -38,7 +38,8 @@ namespace dataAccess
             );
             foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
             {
-                yield return SkillStonesBox.GenerateOneStone(SkillStoneOfPlayerInfoModel);
+                yield return MySkillStonesReader.Instance.GenerateOneStoneInfo(SkillStoneOfPlayerInfoModel);
+                yield return SkillStonesBox.GenerateOneStoneModel(SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId);
             }
             yield break;
         }

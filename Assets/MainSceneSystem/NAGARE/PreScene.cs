@@ -80,6 +80,7 @@ namespace mainMenu
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
             mainProcessRunner.Run(StartUpProcess());
+            Screen.SetResolution(1920,1080,true);
         }
 
         // 这个应该是和热更新进程完全分开了。
@@ -241,40 +242,40 @@ namespace mainMenu
 
         void OnGUI()
         {
-            if (AccountSet.Instance._playerinfoReferenceMode == playerinfoReferenceMode.localTestSaveData)
-            {
-                if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
-                {
-                    mainProcessRunner.Run(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
-                }
-                if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
-                {
-                    if (Directory.Exists(Application.persistentDataPath) && File.Exists(Application.persistentDataPath + "/MySkillStones.json"))
-                    {
-                        File.Delete(Application.persistentDataPath + "/MySkillStones.json");
-                    }
-                    IEnumerator GetAllStones()
-                    {
-                        yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
-                        int i = 1;
-                        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
-                        {
-                            Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-                            var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
-                            {
-                                skillStoneOfPlayerId = string.Format("{0:D20}", i),
-                                skillId = _pair.Value.RECORD_ID,
-                                level = 1.ToString()
-                            };
-                            yield return SkillStonesBox.GenerateOneStone(skillStoneOfPlayerInfoModel);
-                            i++;
-                        }
-                        MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
-                        yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
-                    }
-                    mainProcessRunner.Run(GetAllStones());
-                }
-            }
+            //if (AccountSet.Instance._playerinfoReferenceMode == playerinfoReferenceMode.localTestSaveData)
+            //{
+            //    if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
+            //    {
+            //        mainProcessRunner.Run(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
+            //    }
+            //    if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
+            //    {
+            //        if (Directory.Exists(Application.persistentDataPath) && File.Exists(Application.persistentDataPath + "/MySkillStones.json"))
+            //        {
+            //            File.Delete(Application.persistentDataPath + "/MySkillStones.json");
+            //        }
+            //        IEnumerator GetAllStones()
+            //        {
+            //            yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
+            //            int i = 1;
+            //            foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
+            //            {
+            //                Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
+            //                var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
+            //                {
+            //                    skillStoneOfPlayerId = string.Format("{0:D20}", i),
+            //                    skillId = _pair.Value.RECORD_ID,
+            //                    level = 1.ToString()
+            //                };
+            //                yield return SkillStonesBox.GenerateOneStone(skillStoneOfPlayerInfoModel);
+            //                i++;
+            //            }
+            //            MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
+            //            yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
+            //        }
+            //        mainProcessRunner.Run(GetAllStones());
+            //    }
+            //}
         }
     }
 }

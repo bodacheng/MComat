@@ -61,6 +61,7 @@ public class NetFightScene : MonoBehaviour {
     void Start()
     {
         //QualitySettings.vSyncCount = 1;
+        Screen.SetResolution(1920, 1080, true);
         Application.targetFrameRate = 60;
         FightGlobalSetting.scenestep = 1; 
         mainProcessRunner.Run(FightSceneStartUp());

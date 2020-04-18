@@ -63,7 +63,7 @@ namespace dataAccess
                 result = (GetMonsterOfPlayerDetailModel)temp_enumerator.Current;
             if (result != null)
             {
-                yield return MonsterBox.AddOneNewIcon(result.monsterOfPlayerId);
+                //yield return MonsterBox.AddOneNewIcon(result.monsterOfPlayerId);
             }else{
                 Debug.Log("角色添加失败");
             }

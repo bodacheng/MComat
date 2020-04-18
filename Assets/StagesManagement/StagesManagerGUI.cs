@@ -106,7 +106,8 @@ public class StagesManagerGUI : Editor {
         }
         return list;
     }
-    
+
+    bool SanGong = false;
     int level = 1;// 参考等级。角色自身不存在等级，但为了设置方便所有技能等级可以一致
     public override void OnInspectorGUI()
     {
@@ -191,13 +192,7 @@ public class StagesManagerGUI : Editor {
                                     Debug.Log("检测到存档错误：ResourceID");
                                     continue;
                                 }
-                                if (set._Value._NineAndTwo == null)
-                                {
-                                    Debug.Log("检测到存档错误：9宫格");
-                                    set._Value._NineAndTwo = new NineAndTwo();
-                                }else{
-                                    set._Value._NineAndTwo.SortNineAndTwo();
-                                }
+                                set._Value._NineAndTwo.SortNineAndTwo();
                             }
                         }
                     }
@@ -238,7 +233,8 @@ public class StagesManagerGUI : Editor {
             focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 3);
         }
         GUILayout.EndHorizontal();
-    
+        GUILayout.Space(10);
+
         // 指定站位人员的添加与删除 //
         GUILayout.BeginHorizontal();
         if (focusingCharInfo == null)
@@ -260,8 +256,9 @@ public class StagesManagerGUI : Editor {
             }
         }
         GUILayout.EndHorizontal();
+        GUILayout.Space(10);
         // 指定站位人员的添加与删除end //
-    
+
         if (focusingCharInfo == null)
         {
             goto A;
@@ -290,13 +287,7 @@ public class StagesManagerGUI : Editor {
         {
             goto A;
         }
-        
-        if (focusingCharInfo._NineAndTwo == null)
-        {
-            Debug.Log("九宫格信息读取错误？");
-            focusingCharInfo._NineAndTwo = new NineAndTwo();
-        }
-        
+
         GUILayout.BeginHorizontal();
         level = EditorGUILayout.IntField("参考等级",level);
         if (GUILayout.Button("设置角色所有技能等级为参考等级"))
@@ -332,7 +323,6 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        
         if (Repeated(focusingCharInfo._NineAndTwo.GetA1Config(),focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID))
             GUI.backgroundColor = Color.red;
         else
@@ -360,9 +350,8 @@ public class StagesManagerGUI : Editor {
             targetSC = focusingCharInfo._NineAndTwo.GetA3Config();
         }
         GUILayout.EndHorizontal();
-        
+
         GUILayout.BeginHorizontal();
-        
         if (Repeated(focusingCharInfo._NineAndTwo.GetB1Config(),focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID))
             GUI.backgroundColor = Color.red;
         else
@@ -371,7 +360,7 @@ public class StagesManagerGUI : Editor {
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB1Config();
         }
-        
+
         if (Repeated(focusingCharInfo._NineAndTwo.GetB2Config(),focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID))
             GUI.backgroundColor = Color.red;
         else
@@ -419,16 +408,16 @@ public class StagesManagerGUI : Editor {
         {
             targetSC = focusingCharInfo._NineAndTwo.GetC3Config();
         }
-        
+        GUILayout.EndHorizontal();
+
         if (targetSC == null)
         {
             goto A;
         }
         GUI.backgroundColor = Color.white;
-        GUILayout.EndHorizontal();
 
-        GUILayout.Space(10f);
-        bool SanGong = false;
+        GUILayout.BeginHorizontal();
+        SanGong = false;
         if (targetSC == focusingCharInfo._NineAndTwo.GetMConfig())
         {
             focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
@@ -444,6 +433,7 @@ public class StagesManagerGUI : Editor {
             focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
             SanGong = true;
         }
+        GUILayout.EndHorizontal();
         GUILayout.Space(10f);
         
         if (!SanGong)

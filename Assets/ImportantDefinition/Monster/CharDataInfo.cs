@@ -8,7 +8,7 @@ public class CharDataInfo
 {
     public string monsterOfPlayerId;
     public string ResourceID;
-    public NineAndTwo _NineAndTwo;
+    public NineAndTwo _NineAndTwo = new NineAndTwo();
 
     public CharDataInfo Clone()
     {

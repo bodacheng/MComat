@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using dataAccess;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using Api.Dto.Model;
+using Skill;
+using mainMenu;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -65,17 +68,47 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     {
         StartCoroutine(_BeginLocalTestMode());
     }
-    
+
+    public void StartNewLocalTestMode()
+    {
+        StartCoroutine(_StartNewLocalTestMode());
+    }
+
     public IEnumerator _BeginRemoteTestMode()
     {
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.remoteTestPlayer;
         yield return AccountSet.Instance.login();
         SceneManager.LoadScene(1);       
     }
-    
+
+    public IEnumerator _StartNewLocalTestMode()
+    {
+        AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
+        yield return AccountCharsSet.Instance.LocalSaveDataGetAllCharacters();
+
+        yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
+        int i = 1;
+        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
+        {
+            Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
+            var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
+            {
+                skillStoneOfPlayerId = string.Format("{0:D20}", i),
+                skillId = _pair.Value.RECORD_ID,
+                level = 1.ToString()
+            };
+            yield return MySkillStonesReader.Instance.GenerateOneStoneInfo(skillStoneOfPlayerInfoModel);
+            i++;
+        }
+        MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
+        SceneManager.LoadScene(1);
+        yield break;
+    }
+
     public IEnumerator _BeginLocalTestMode()
     {
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
+
         SceneManager.LoadScene(1);
         yield break;
     }
