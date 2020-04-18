@@ -31,7 +31,7 @@ namespace mainMenu
         {
             return currentstone;
         }
-               
+        
         public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone, string skillStoneOfPlayerId)
         {
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
@@ -53,9 +53,9 @@ namespace mainMenu
                 ShowSKillRanges(-10,-10);//即清空
                 return;
             }
-            keyname.text = _SkillConfigOfSkillStone.StateKey;
-            ShowSkillStoneExType(_SkillConfigOfSkillStone.SPLevel);
-            ShowSKillRanges(_SkillConfigOfSkillStone.AITriggerDistanceMin,_SkillConfigOfSkillStone.AITriggerDistanceMax);
+            keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
+            ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
+            ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
         }
         
         void ShowSKillRanges(float dis_min, float float_max)

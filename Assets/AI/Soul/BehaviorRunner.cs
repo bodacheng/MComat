@@ -22,9 +22,9 @@ namespace Soul
 
         #region 运行时活参数
         public SingleFightLog SingleFightLog = new SingleFightLog();
-        public IDictionary<string, Behavior> Behaviour_Dictionary = new Dictionary<string, Behavior>();
-        public IDictionary<string, SkillEntity> Behaviour_Transition_Dictionary;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
-        public SkillEntity CurrentBehaviorTransitionSet;
+        public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
+        public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
+        public SkillEntity CurrentSKillEntity;
         
         Empty_State empty_State = new Empty_State();
         Behavior now_Behavior;
@@ -88,7 +88,7 @@ namespace Soul
         public void ChangeState(string num)
         {
             _SkillCancelFlag.turn_off_flag();
-            Behaviour_Dictionary.TryGetValue(num, out try_Behavior);
+            BehaviourDic.TryGetValue(num, out try_Behavior);
             if (now_Behavior != null)
             {
                 now_Behavior.AI_State_exit();
@@ -121,7 +121,7 @@ namespace Soul
         
         public void ChangeState(string num, V_Damage newvalue)
         {
-            Behaviour_Dictionary.TryGetValue(num, out try_Behavior);
+            BehaviourDic.TryGetValue(num, out try_Behavior);
             if (now_Behavior != null)
                 now_Behavior.AI_State_exit();
 
@@ -141,7 +141,7 @@ namespace Soul
 
         public void ChangeToWaitingState()
         {
-            Behaviour_Dictionary.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
+            BehaviourDic.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
             if (try_Behavior != GetNowState())//避免战斗待机状态重复进入
             {
                 ChangeState(commandWaitingState.StateKey);
@@ -150,18 +150,18 @@ namespace Soul
       
         public void INIStates(Data_Center data_Center)
         {
-            if (Behaviour_Dictionary == null)
+            if (BehaviourDic == null)
             {
                 Debug.Log("严重错误");
                 return;
             }
-            foreach (KeyValuePair<string, Behavior> s in Behaviour_Dictionary)
+            foreach (KeyValuePair<string, Behavior> s in BehaviourDic)
             {
                 s.Value._DATA_CENTER = data_Center;
                 s.Value.Pre_process_before_enter();
             }
 
-            Behaviour_Dictionary.TryGetValue("Empty", out now_Behavior);
+            BehaviourDic.TryGetValue("Empty", out now_Behavior);
             if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
             {
                 now_Behavior.C_State_enter();
@@ -177,7 +177,7 @@ namespace Soul
             string[] startOffState = { "Move_normal", "Move_slow", "Move_fast", "Test_Move" };
             for (int i = 0; i < startOffState.Length; i++)
             {
-                Behaviour_Transition_Dictionary.TryGetValue(startOffState[i], out SkillEntity _State_Transition);
+                SkillEntityDic.TryGetValue(startOffState[i], out SkillEntity _State_Transition);
                 if (_State_Transition != null)
                 {
                     ChangeState(startOffState[i]);

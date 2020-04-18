@@ -119,54 +119,54 @@ public class Behaviors_Incubator
             if (_set == null)
                 continue;
                 
-            if (!StateIndexList.Contains(_set.StateKey))
+            if (!StateIndexList.Contains(_set.REAL_NAME))
             {
-                BehaviorType _attackType = _set.stateType;
+                BehaviorType _attackType = _set.StateType;
                 switch (_attackType)
                 {
                     case BehaviorType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 0f, _set.StateKey)
+                        G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 0f, _set.REAL_NAME)
                         {
                             StateType = BehaviorType.GI,
                             AT = _set.AT,
                             nextAttackStateCanRushFirst = false
                         };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.StateKey, _GI_Attack));
-                        StateIndexList.Add(_set.StateKey);
-                        if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
+                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GI_Attack));
+                        StateIndexList.Add(_set.REAL_NAME);
+                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.GM:
-                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.StateKey)
+                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.REAL_NAME)
                         {
                             StateType = BehaviorType.GM,
                             AT = _set.AT,
                             nextAttackStateCanRushFirst = false
                         };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.StateKey, _GM_Attack));
-                        StateIndexList.Add(_set.StateKey);
-                        if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
+                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GM_Attack));
+                        StateIndexList.Add(_set.REAL_NAME);
+                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.GR:
-                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.StateKey)
+                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.REAL_NAME)
                         {
                             StateType = BehaviorType.GR,
                             AT = _set.AT,
                             nextAttackStateCanRushFirst = false
                         };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.StateKey, _GR_Attack));
-                        StateIndexList.Add(_set.StateKey);
-                        if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
+                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GR_Attack));
+                        StateIndexList.Add(_set.REAL_NAME);
+                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.CT:
-                        Counter_State _Counter = new Counter_State(_set.StateKey)
+                        Counter_State _Counter = new Counter_State(_set.REAL_NAME)
                         {
                             StateType = BehaviorType.CT,
                             AT = _set.AT,
                             nextAttackStateCanRushFirst = false
                         };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.StateKey, _Counter));
-                        StateIndexList.Add(_set.StateKey);
-                        if (!SkillTypeKeys.Contains(_set.StateKey)) SkillTypeKeys.Add(_set.StateKey);
+                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _Counter));
+                        StateIndexList.Add(_set.REAL_NAME);
+                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.NONE:
                         // 除了我们特别例举出来的那些基础状态外按说都是攻击性状
@@ -175,7 +175,7 @@ public class Behaviors_Incubator
                         break;
                 }
             }else{
-                Debug.Log("正在回避状态重复定义："+ _set.StateKey);
+                Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
             }
         }             
 	}
@@ -272,19 +272,19 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
 
         foreach (SkillEntity _set in toFormAttackStateList)
         {
-            if (!BehaviorIndexList.Contains(_set.StateKey))
+            if (!BehaviorIndexList.Contains(_set.REAL_NAME))
             {
-                BehaviorType _attackType = _set.stateType;
+                BehaviorType _attackType = _set.StateType;
                 switch (_attackType)
                 {
                     case BehaviorType.GI:
-                        BehaviorIndexList.Add(_set.StateKey);
+                        BehaviorIndexList.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.GM:
-                        BehaviorIndexList.Add(_set.StateKey);
+                        BehaviorIndexList.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.GR:
-                        BehaviorIndexList.Add(_set.StateKey);
+                        BehaviorIndexList.Add(_set.REAL_NAME);
                         break;
                     case BehaviorType.NONE:
                         // 除了我们特别例举出来的那些基础状态外按说都是攻击性状
@@ -295,7 +295,7 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
             }
             else
             {
-                Debug.Log("正在回避状态重复定义："+ _set.StateKey);
+                Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
             }
         }             
     }

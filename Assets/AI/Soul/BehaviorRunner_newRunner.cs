@@ -18,21 +18,21 @@ namespace Soul
             SRTListForCasualTransitionbuttonRefresh.Clear();
             if (now_Behavior != null)
             {
-                Behaviour_Transition_Dictionary.TryGetValue(now_Behavior.StateKey, out CurrentBehaviorTransitionSet);
+                SkillEntityDic.TryGetValue(now_Behavior.StateKey, out CurrentSKillEntity);
             }
             
-            if (CurrentBehaviorTransitionSet == null)
+            if (CurrentSKillEntity == null)
             {
                 Debug.Log("???" + now_Behavior.StateKey);
                 return;
             }
             
             #region Forced state transition 
-            if (CurrentBehaviorTransitionSet.forced_to_state_nums != null && CurrentBehaviorTransitionSet.forced_to_state_nums.Length > 0)
+            if (CurrentSKillEntity.ForcedTransitions != null && CurrentSKillEntity.ForcedTransitions.Length > 0)
             {
-                foreach (string num in CurrentBehaviorTransitionSet.forced_to_state_nums)
+                foreach (string num in CurrentSKillEntity.ForcedTransitions)
                 {
-                    Behaviour_Dictionary.TryGetValue(num, out try_Behavior);
+                    BehaviourDic.TryGetValue(num, out try_Behavior);
                     if (try_Behavior.Force_enter_condition())
                     {
                         avaliable_forced_Transitions.Add(num);
@@ -47,16 +47,16 @@ namespace Soul
             #endregion
             
             #region 查找已经可以触发的后续技能
-            foreach (SkillEntity Behavior_set in CurrentBehaviorTransitionSet.Casual_To_Behaviours)
+            foreach (SkillEntity Behavior_set in CurrentSKillEntity.CasualTo)
             {
-                Behaviour_Dictionary.TryGetValue(Behavior_set.StateKey, out try_Behavior);
+                BehaviourDic.TryGetValue(Behavior_set.REAL_NAME, out try_Behavior);
                 if (!try_Behavior.Capacity_enter_condition())
                 {
                     continue;
                 }
                 //能走到这里说明 Capacity_enter_condition 已经通过
                 SRTListForCasualTransitionbuttonRefresh.Add(Behavior_set);//avaliable_casual_Transitions是真正可以启动的技能的列表，SRTListForCasualTransitionbuttonRefresh根据作用得有个预告作用
-                if ((Behavior_set.can_be_cancelled_to && _SkillCancelFlag.Cancel_Flag) || now_Behavior.Capacity_Exit_Condition())
+                if ((Behavior_set.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || now_Behavior.Capacity_Exit_Condition())
                 {
                     avaliable_casual_Transitions.Add(Behavior_set);
                 }
@@ -76,19 +76,19 @@ namespace Soul
         }
 
         float min,max;
-        private void CalAdviceDistanceFromEnemy()
+        void CalAdviceDistanceFromEnemy()
         {
             min = 9999f;
             max = 0f;
             for (int index = 0; index < avaliable_casual_Transitions.Count; index++)
             {
-                if (min > avaliable_casual_Transitions[index].AITriggerDistanceMin)
-                    min = avaliable_casual_Transitions[index].AITriggerDistanceMin;
-                if (max < avaliable_casual_Transitions[index].AITriggerDistanceMax)
-                    max = avaliable_casual_Transitions[index].AITriggerDistanceMax;
+                if (min > avaliable_casual_Transitions[index].AI_MIN_DIS)
+                    min = avaliable_casual_Transitions[index].AI_MIN_DIS;
+                if (max < avaliable_casual_Transitions[index].AI_MAX_DIS)
+                    max = avaliable_casual_Transitions[index].AI_MAX_DIS;
             }
         }
-        
+
         public float Test()
         {
             return (min + max) / 2;

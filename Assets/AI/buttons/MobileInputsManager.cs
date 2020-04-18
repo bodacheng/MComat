@@ -184,7 +184,7 @@ public class MobileInputsManager : MonoBehaviour {
         Behavior_preview_button1 = null; Behavior_preview_button2 = null; Behavior_preview_button3 = null;
         for (int i = 0; i < Options_preview.Count; i++)
         {
-            switch (Options_preview[i].enterInput)
+            switch (Options_preview[i].EnterInput)
             {
                 case Inputs_defined.Attack:
                     Behavior_preview_button1 = Options_preview[i];
@@ -199,15 +199,15 @@ public class MobileInputsManager : MonoBehaviour {
         }
         if (Options_lastframe[Inputs_defined.Attack] != Behavior_preview_button1)
         {
-            ChangeButtonPatternNewTest(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SPLevel : -1);
+            ChangeButtonPatternNewTest(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SP_LEVEL : -1);
         }
         if (Options_lastframe[Inputs_defined.Fire1] != Behavior_preview_button2)
         {
-            ChangeButtonPatternNewTest(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SPLevel : -1);
+            ChangeButtonPatternNewTest(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SP_LEVEL : -1);
         }
         if (Options_lastframe[Inputs_defined.Fire2] != Behavior_preview_button3)
         {
-            ChangeButtonPatternNewTest(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SPLevel : -1);
+            ChangeButtonPatternNewTest(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SP_LEVEL : -1);
         }
         
         Options_lastframe[Inputs_defined.Attack] = Behavior_preview_button1;

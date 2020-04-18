@@ -22,17 +22,17 @@ public partial class NineAndTwo
         CConfig2 = C2skillid != null ? FixConfigByReference(C2skillid) : new SkillConfig();
         CConfig3 = C3skillid != null ? FixConfigByReference(C3skillid) : new SkillConfig();
 
-        A1 = AConfig1 != null ? FromConfigToSTS(AConfig1, A1level) : null;
-        A2 = AConfig2 != null ? FromConfigToSTS(AConfig2, A2level) : null;
-        A3 = AConfig3 != null ? FromConfigToSTS(AConfig3, A3level) : null;
+        A1 = AConfig1 != null ? FromConfigToEntity(AConfig1, A1level) : null;
+        A2 = AConfig2 != null ? FromConfigToEntity(AConfig2, A2level) : null;
+        A3 = AConfig3 != null ? FromConfigToEntity(AConfig3, A3level) : null;
 
-        B1 = BConfig1 != null ? FromConfigToSTS(BConfig1, B1level) : null;
-        B2 = BConfig2 != null ? FromConfigToSTS(BConfig2, B2level) : null;
-        B3 = BConfig3 != null ? FromConfigToSTS(BConfig3, B3level) : null;
+        B1 = BConfig1 != null ? FromConfigToEntity(BConfig1, B1level) : null;
+        B2 = BConfig2 != null ? FromConfigToEntity(BConfig2, B2level) : null;
+        B3 = BConfig3 != null ? FromConfigToEntity(BConfig3, B3level) : null;
 
-        C1 = CConfig1 != null ? FromConfigToSTS(CConfig1, C1level) : null;
-        C2 = CConfig2 != null ? FromConfigToSTS(CConfig2, C2level) : null;
-        C3 = CConfig3 != null ? FromConfigToSTS(CConfig3, C3level) : null;
+        C1 = CConfig1 != null ? FromConfigToEntity(CConfig1, C1level) : null;
+        C2 = CConfig2 != null ? FromConfigToEntity(CConfig2, C2level) : null;
+        C3 = CConfig3 != null ? FromConfigToEntity(CConfig3, C3level) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(moveType,canDefend,rushType);
@@ -41,16 +41,16 @@ public partial class NineAndTwo
         RConfig = passiveSkillConfigs.RConfig;
         if (DConfig != null)
         {
-            D = FromConfigToSTS(DConfig,0);
-            D.enterInput = Inputs_defined.Defend;
-            D.exitInput = Inputs_defined.Defend_Cancel;
+            D = FromConfigToEntity(DConfig,0);
+            D.EnterInput = Inputs_defined.Defend;
+            D.ExitInput = Inputs_defined.Defend_Cancel;
         }else{
             D = null;
         }
 
         if (MConfig != null)
         {
-            M = FromConfigToSTS(MConfig,0);
+            M = FromConfigToEntity(MConfig,0);
         }
         else
         {
@@ -59,8 +59,8 @@ public partial class NineAndTwo
         }
         if (RConfig != null)
         {
-            R = FromConfigToSTS(RConfig,0);
-            R.enterInput = Inputs_defined.Acc;
+            R = FromConfigToEntity(RConfig,0);
+            R.EnterInput = Inputs_defined.Acc;
         }
         else
         {
@@ -75,58 +75,58 @@ public partial class NineAndTwo
         if (A1 != null)
         {
             H1_list.Add(A1);
-            A1.enterInput = Inputs_defined.Attack;
-            A1.exitInput = Inputs_defined.Null;
+            A1.EnterInput = Inputs_defined.Attack;
+            A1.ExitInput = Inputs_defined.Null;
         }
         if (A2 != null)
         {
             H2_list.Add(A2);
-            A2.enterInput = Inputs_defined.Attack;
-            A2.exitInput = Inputs_defined.Null;
+            A2.EnterInput = Inputs_defined.Attack;
+            A2.ExitInput = Inputs_defined.Null;
         }
         if (A3 != null)
         {
             H3_list.Add(A3);
-            A3.enterInput = Inputs_defined.Attack;
-            A3.exitInput = Inputs_defined.Null;
+            A3.EnterInput = Inputs_defined.Attack;
+            A3.ExitInput = Inputs_defined.Null;
         }
 
         if (B1 != null)
         {
             H1_list.Add(B1);
-            B1.enterInput = Inputs_defined.Fire1;
-            B1.exitInput = Inputs_defined.Null;
+            B1.EnterInput = Inputs_defined.Fire1;
+            B1.ExitInput = Inputs_defined.Null;
         }
         if (B2 != null)
         {
             H2_list.Add(B2);
-            B2.enterInput = Inputs_defined.Fire1;
-            B2.exitInput = Inputs_defined.Null;
+            B2.EnterInput = Inputs_defined.Fire1;
+            B2.ExitInput = Inputs_defined.Null;
         }
         if (B3 != null)
         {
             H3_list.Add(B3);
-            B3.enterInput = Inputs_defined.Fire1;
-            B3.exitInput = Inputs_defined.Null;
+            B3.EnterInput = Inputs_defined.Fire1;
+            B3.ExitInput = Inputs_defined.Null;
         }
 
         if (C1 != null)
         {
             H1_list.Add(C1);
-            C1.enterInput = Inputs_defined.Fire2;
-            C1.exitInput = Inputs_defined.Null;
+            C1.EnterInput = Inputs_defined.Fire2;
+            C1.ExitInput = Inputs_defined.Null;
         }
         if (C2 != null)
         {
             H2_list.Add(C2);
-            C2.enterInput = Inputs_defined.Fire2;
-            C2.exitInput = Inputs_defined.Null;
+            C2.EnterInput = Inputs_defined.Fire2;
+            C2.ExitInput = Inputs_defined.Null;
         }
         if (C3 != null)
         {
             H3_list.Add(C3);
-            C3.enterInput = Inputs_defined.Fire2;
-            C3.exitInput = Inputs_defined.Null;
+            C3.EnterInput = Inputs_defined.Fire2;
+            C3.ExitInput = Inputs_defined.Null;
         }
         
         // --
@@ -145,23 +145,23 @@ public partial class NineAndTwo
 
         for (int i = 0; i < H1_list.Count; i++)
         {
-            H1_list[i].Casual_To_Behaviours = H2_list.ToArray();
+            H1_list[i].CasualTo = H2_list.ToArray();
         }
         
         for (int i = 0; i < H2_list.Count; i++)
         {
-            H2_list[i].Casual_To_Behaviours = H3_list.ToArray();
+            H2_list[i].CasualTo = H3_list.ToArray();
         }
         
         for (int i = 0; i < H3_list.Count; i++)
         {
-            H3_list[i].Casual_To_Behaviours = H1_list.ToArray();
+            H3_list[i].CasualTo = H1_list.ToArray();
         }
         
         if (D != null)
-            D.Casual_To_Behaviours = H1_list.ToArray();
+            D.CasualTo = H1_list.ToArray();
         if (R != null)
-            R.Casual_To_Behaviours = H1_list.ToArray();
+            R.CasualTo = H1_list.ToArray();
     }
     
     // FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
@@ -196,7 +196,7 @@ public partial class NineAndTwo
         
         if (this.R != null)
         {
-            this.R.stateType = BehaviorType.AC;
+            this.R.StateType = BehaviorType.AC;
             StateTransitionSetList.Add(R);//这个是只能根据角色被动来。
         }
                     
@@ -240,8 +240,8 @@ public partial class NineAndTwo
         if (this.M != null)
         {
             //下面这些就是怕数据库里九宫格里的M记载有错。
-            M.SPLevel = -1;
-            M.Casual_To_Behaviours = H1_list.ToArray();
+            M.SP_LEVEL = -1;
+            M.CasualTo = H1_list.ToArray();
             StateTransitionSetList.Add(M);
         }
         else
@@ -257,17 +257,17 @@ public partial class NineAndTwo
         //从下面这个地方可以看到我们需要在sort阶段把RMD全部准备好，而且必须是要么为null要么是一个完整STS信息。
         foreach (SkillEntity _State_Transition_Set in StateTransitionSetList)
         {
-            if (_State_Transition_Set.StateKey != null && !state_Transition_Dictionary.ContainsKey(_State_Transition_Set.StateKey))
+            if (_State_Transition_Set.REAL_NAME != null && !state_Transition_Dictionary.ContainsKey(_State_Transition_Set.REAL_NAME))
             {
-                state_Transition_Dictionary.Add(new KeyValuePair<string, SkillEntity>(_State_Transition_Set.StateKey,_State_Transition_Set));
+                state_Transition_Dictionary.Add(new KeyValuePair<string, SkillEntity>(_State_Transition_Set.REAL_NAME,_State_Transition_Set));
             }
             else
             {
-                if (_State_Transition_Set.StateKey == null)
+                if (_State_Transition_Set.REAL_NAME == null)
                 {
                     Debug.Log("键值为空？？");
                 }else{
-                    Debug.Log("角色自身技能产生键值重复："+_State_Transition_Set.StateKey);
+                    Debug.Log("角色自身技能产生键值重复："+_State_Transition_Set.REAL_NAME);
                 }
             }
         }
@@ -275,7 +275,7 @@ public partial class NineAndTwo
     }
     
     // 这个应该是所谓技能等级的着手点
-    SkillEntity FromConfigToSTS(SkillConfig _SC, int level)
+    SkillEntity FromConfigToEntity(SkillConfig _SC, int level)
     {
         if (_SC.RECORD_ID != null)
         {

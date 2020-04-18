@@ -78,8 +78,8 @@ namespace mainMenu
             analysisSKList.Clear();
             foreach (SkillEntity _set in _analysisStatesList)
             {
-                if (!analysisSKList.ContainsKey(_set.StateKey))
-                    analysisSKList.Add(_set.StateKey, _set);
+                if (!analysisSKList.ContainsKey(_set.REAL_NAME))
+                    analysisSKList.Add(_set.REAL_NAME, _set);
             }
             return analysisSKList;
         }
@@ -93,10 +93,10 @@ namespace mainMenu
                 DestroyFloatingMarks();
                 _skillStoneDetail.RefreshSkillDetail_SkillEntity(_state_Transition_Set);
                 //下面这些是逻辑核心
-                foreach (SkillEntity _set in _state_Transition_Set.Casual_To_Behaviours)
+                foreach (SkillEntity _set in _state_Transition_Set.CasualTo)
                 {
-                    analysisSKList.TryGetValue(_set.StateKey, out SkillEntity _oneCasualTo);
-                    StateButtonDic.TryGetValue(_oneCasualTo.StateKey, out Button CasualToButton);
+                    analysisSKList.TryGetValue(_set.REAL_NAME, out SkillEntity _oneCasualTo);
+                    StateButtonDic.TryGetValue(_oneCasualTo.REAL_NAME, out Button CasualToButton);
                     if (_button != null && CasualToButton != null)
                     {
                         BuildSkillFlowParticle(_button.transform, CasualToButton.transform);
@@ -107,7 +107,7 @@ namespace mainMenu
                 if (focusingC.Animation_Manger != null)
                 {
                     //SkillShowT.gameObject.SetActive(false);
-                    focusingC.Animation_Manger.AnimationTrigger(_state_Transition_Set.StateKey,true,0.05f);
+                    focusingC.Animation_Manger.AnimationTrigger(_state_Transition_Set.REAL_NAME,true,0.05f);
                 }
                 else
                 {
@@ -244,14 +244,14 @@ namespace mainMenu
                 }
                 newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, attack_chuan[i]);
-                StateButtonDic.Add(attack_chuan[i].StateKey, newShow);
-                newShow.name = attack_chuan[i].StateKey;
+                StateButtonDic.Add(attack_chuan[i].REAL_NAME, newShow);
+                newShow.name = attack_chuan[i].REAL_NAME;
                 newShow.transform.SetParent(attacksT);
                 newShow.transform.localScale = new Vector3(1, 1, 1);
                 newShow.transform.localPosition = Vector3.zero;
                 newShow.transform.localPosition = Vector3.zero + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(zokusei,newShow.gameObject,attack_chuan[i].SPLevel);
+                RenderButton(zokusei,newShow.gameObject,attack_chuan[i].SP_LEVEL);
             }
             ///////////////////////
 
@@ -265,14 +265,14 @@ namespace mainMenu
                 
                 newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, Fire1_chuan[i]);
-                StateButtonDic.Add(Fire1_chuan[i].StateKey, newShow);
-                newShow.name = Fire1_chuan[i].StateKey;
+                StateButtonDic.Add(Fire1_chuan[i].REAL_NAME, newShow);
+                newShow.name = Fire1_chuan[i].REAL_NAME;
                 newShow.transform.SetParent(fire1T);
                 newShow.transform.localScale = new Vector3(1, 1, 1);
                 newShow.transform.localPosition = Vector3.zero;
                 newShow.transform.localPosition = Vector3.zero + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(zokusei,newShow.gameObject,Fire1_chuan[i].SPLevel);
+                RenderButton(zokusei,newShow.gameObject,Fire1_chuan[i].SP_LEVEL);
             }
             ///////////////////////
             
@@ -285,15 +285,15 @@ namespace mainMenu
                 }
                 newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
-                StateButtonDic.Add(Fire2_chuan[i].StateKey, newShow);
+                StateButtonDic.Add(Fire2_chuan[i].REAL_NAME, newShow);
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
-                newShow.name = Fire2_chuan[i].StateKey;
+                newShow.name = Fire2_chuan[i].REAL_NAME;
                 newShow.transform.SetParent(fire2T);
                 newShow.transform.localScale = new Vector3(1, 1, 1);
                 newShow.transform.localPosition = Vector3.zero;
                 newShow.transform.localPosition = Vector3.zero + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(zokusei,newShow.gameObject,Fire2_chuan[i].SPLevel);
+                RenderButton(zokusei,newShow.gameObject,Fire2_chuan[i].SP_LEVEL);
             }
         }
                 

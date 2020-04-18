@@ -138,7 +138,7 @@ public class SkillConfigTable
             {
                 return true;
             }
-            if ((dis_min <= 20f && dis_max >= 15f) && outrange)
+            if ((dis_min <= 50f && dis_max >= 15f) && outrange)
             {
                 return true;
             }

@@ -5,20 +5,20 @@ namespace Skill
     [System.Serializable]
     public class SkillEntity
     {
-        public string StateKey;
+        public string REAL_NAME;
         public int LEVEL;
-        public BehaviorType stateType;
+        public BehaviorType StateType;
         public float AT;
-        public float AITriggerDistanceMin;
-        public float AITriggerDistanceMax;
-        public SkillEntity[] Casual_To_Behaviours = { };
-        public bool can_be_cancelled_to = true;
-        public Inputs_defined enterInput = Inputs_defined.Null;
-        public Inputs_defined exitInput = Inputs_defined.Null;
-        public int SPLevel;
-        public int rarelevel;
+        public float AI_MIN_DIS;
+        public float AI_MAX_DIS;
+        public SkillEntity[] CasualTo = { };
+        public bool CANBECANCELLEDTO = true;
+        public Inputs_defined EnterInput = Inputs_defined.Null;
+        public Inputs_defined ExitInput = Inputs_defined.Null;
+        public int SP_LEVEL;
+        public int RARITY_LEVEL;
         [HideInInspector]
-        public string[] forced_to_state_nums = { };
+        public string[] ForcedTransitions = { };
 
         public SkillEntity()
         {
@@ -35,48 +35,48 @@ namespace Skill
                             int _SPMove,
                             int _rarelevel)
         {
-            this.StateKey = _StateKey;
+            this.REAL_NAME = _StateKey;
             this.LEVEL = LEVEL;
-            this.stateType = _attackType;
+            this.StateType = _attackType;
             this.AT = _AT;
-            this.AITriggerDistanceMin = AITriggerDistanceMin;
-            this.AITriggerDistanceMax = AITriggerDistanceMax;
-            this.Casual_To_Behaviours = _casual_to_state_nums;
-            this.forced_to_state_nums = _forced_to_state_nums;
-            this.enterInput = _enterInput;
-            this.exitInput = _exitInput;
-            this.SPLevel = _SPMove;
-            this.rarelevel = _rarelevel;
+            this.AI_MIN_DIS = AITriggerDistanceMin;
+            this.AI_MAX_DIS = AITriggerDistanceMax;
+            this.CasualTo = _casual_to_state_nums;
+            this.ForcedTransitions = _forced_to_state_nums;
+            this.EnterInput = _enterInput;
+            this.ExitInput = _exitInput;
+            this.SP_LEVEL = _SPMove;
+            this.RARITY_LEVEL = _rarelevel;
 
-            if (this.Casual_To_Behaviours == null)
+            if (this.CasualTo == null)
             {
-                this.Casual_To_Behaviours = new SkillEntity[] { };
+                this.CasualTo = new SkillEntity[] { };
             }
-            if (this.forced_to_state_nums == null)
+            if (this.ForcedTransitions == null)
             {
-                this.forced_to_state_nums = new string[] { };
+                this.ForcedTransitions = new string[] { };
             }
         }
 
         public SkillEntity(string _StateKey,
                                     int level,
-                                    BehaviorType _attackType,
-                                    float AT,
+                                    BehaviorType _BType,
+                                    float _AT,
                                     float AITriggerDistanceMin,float AITriggerDistanceMax,
                                     bool can_be_cancelled_to,
                                     Inputs_defined enterInput, Inputs_defined exitInput,
                                     int SPMove)
         {
-            StateKey = _StateKey;
-            this.LEVEL = level;
-            stateType = _attackType;
-            this.AT = AT;
-            this.can_be_cancelled_to = can_be_cancelled_to;
-            this.AITriggerDistanceMin = AITriggerDistanceMin;
-            this.AITriggerDistanceMax = AITriggerDistanceMax;
-            this.enterInput = enterInput;
-            this.exitInput = exitInput;
-            SPLevel = SPMove;
+            REAL_NAME = _StateKey;
+            LEVEL = level;
+            StateType = _BType;
+            AT = _AT;
+            CANBECANCELLEDTO = can_be_cancelled_to;
+            AI_MIN_DIS = AITriggerDistanceMin;
+            AI_MAX_DIS = AITriggerDistanceMax;
+            EnterInput = enterInput;
+            ExitInput = exitInput;
+            SP_LEVEL = SPMove;
         }
     }
     
