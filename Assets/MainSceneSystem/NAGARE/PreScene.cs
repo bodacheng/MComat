@@ -80,6 +80,7 @@ namespace mainMenu
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
             mainProcessRunner.Run(StartUpProcess());
+            Screen.SetResolution(1920,1080,true);
         }
 
         // 这个应该是和热更新进程完全分开了。
