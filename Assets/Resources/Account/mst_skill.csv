@@ -107,9 +107,9 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 123,upanddown,human,1,GR,0,0.2,5,1
 126,cleavekick,human,1,GI,0,3,10,1
 127,ex1_fo_shouqiang,human,1,GI,0,3,10,1
-128,ex1_gi_kof992_d3,human,1,GI,0,3,10,1
+128,ex1_gi_kof992_d3,human,1,GI,0,2,4,1
 130,ex2_gi_doublebo_d1,human,1,GI,1,3,6,1
-131,ex2_gi_kof991_d3,human,1,GI,0,3,10,1
+131,ex2_gi_kof991_d3,human,1,GI,0,2,4,1
 132,ex2_gi_zhaohuan,human,1,GI,0,3,10,1
 133,ex3_fo_boom,human,1,GI,0,7,14,1
 134,ex3_gi_summon_d3,human,1,GI,0,3,10,1

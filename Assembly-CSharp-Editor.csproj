@@ -105,6 +105,7 @@
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCJoystickInspector.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCMenu.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\Editor\ETCTouchPadInspector.cs" />
+    <Compile Include="Assets\ImagineVR\Editor\ApplyPixelation.cs" />
     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_BlurEditor.cs" />
     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_ColorSwapEditor.cs" />
     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_DesaturateEditor.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\Editor\RPGTalkCinematicDrawer.cs" />
     <None Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\link.xml" />
     <None Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Resources\Shader\LineShader.shader" />
+    <None Include="Assets\ImagineVR\Editor\Resources\Pixel.shader" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

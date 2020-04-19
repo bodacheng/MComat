@@ -47,10 +47,6 @@ namespace Soul
                     RegisterConditionToRespond(keyValuePair4);
                     ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 3);
                     
-                    KeyValuePair<string, string> keyValuePair_gi = new KeyValuePair<string, string>("CounterComingEnergy", behavior_define.REAL_NAME);
-                    RegisterConditionToRespond(keyValuePair_gi);
-                    ConditionAndRespondPriority.Set(keyValuePair_gi.Key, keyValuePair_gi.Value, 3);
-
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;
                 case BehaviorType.CT:                    
@@ -78,10 +74,6 @@ namespace Soul
                     KeyValuePair<string, string> keyValuePairuu = new KeyValuePair<string, string>("TimeToAttack", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairuu);
                     ConditionAndRespondPriority.Set(keyValuePairuu.Key, keyValuePairuu.Value, 2);
-
-                    KeyValuePair<string, string> keyValuePair_gi2 = new KeyValuePair<string, string>("CounterComingEnergy", behavior_define.REAL_NAME);
-                    RegisterConditionToRespond(keyValuePair_gi2);
-                    ConditionAndRespondPriority.Set(keyValuePair_gi2.Key, keyValuePair_gi2.Value, 2);
                     
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;

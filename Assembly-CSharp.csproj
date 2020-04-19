@@ -346,6 +346,7 @@
     <Compile Include="Assets\FightSceneSystem\SelfFightManager.cs" />
     <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
+    <Compile Include="Assets\ImagineVR\CameraCensorship.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharDataInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\MonstersConfigTable.cs" />
