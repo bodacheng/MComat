@@ -119,6 +119,7 @@ namespace mainMenu
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
+            AreanaProcess areanaProcess = new AreanaProcess();
 
             ProcessesRunner.Instance.Clear();
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
@@ -130,6 +131,7 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.frontPage, frontPage);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Arena,areanaProcess);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
 

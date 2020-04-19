@@ -52,7 +52,7 @@ namespace mainMenu
                 StageButton newButton = Instantiate(pretab);
                 void LoadThisStage()
                 {
-                    mainProcessRunner.Run(QuestPreparePage.Instance.LoadStageByScriptThenGetReadyForIt(one));
+                    mainProcessRunner.Run(QuestPreparePage.target.LoadStageByScriptThenGetReadyForIt(one));
                 }
                 newButton.button.onClick.AddListener(LoadThisStage);
                 newButton.ID = one.LocalFightID;

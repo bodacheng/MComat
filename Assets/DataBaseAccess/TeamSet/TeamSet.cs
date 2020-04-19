@@ -70,7 +70,7 @@ namespace dataAccess
         }
         
         // 下面的函数让阵容配置可以跳格。比方说一个游戏只能入场2人，那么现在在back和right位置有人，其他位置为空，也可顺利以此两人入场。
-        public IEnumerator MyTeamMembersByEntryMemberNum(int playerEntryNum, PosKeySet positionLocalCharKeySet)
+        public IEnumerator MyTeamByEntryLimit(int playerEntryNum, PosKeySet positionLocalCharKeySet)
         {
             MultiDictionary<int, int, CharDataInfo> teamMembers = new MultiDictionary<int, int, CharDataInfo>();
             int membercount = 0;
@@ -94,7 +94,7 @@ namespace dataAccess
                     continue;
                 }
             }
-        yield return teamMembers;
+            yield return teamMembers;
         }
     }
 

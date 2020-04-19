@@ -58,7 +58,8 @@ namespace mainMenu
         Gotcha = 7,
         QuestInfo = 8,
         ArcadeFront = 9,
-        
+        Arena = 3,
+                
         JiNengRongLian_selectMaterialMonster = 12,
         JiNengRongLian_selectBaseMonster = 13,
         JiNengRongLian_waitForConfirm = 14,

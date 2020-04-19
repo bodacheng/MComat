@@ -8,7 +8,7 @@ public class QuestInfo : MainSceneProcess
         yield return _modelShower.ShowModel(null);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-        QuestPreparePage.Instance.QuestPreparePageCanvas.gameObject.SetActive(true);
+        QuestPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
         //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
         yield break;
     }
@@ -31,7 +31,7 @@ public class QuestInfo : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        QuestPreparePage.Instance.QuestPreparePageCanvas.gameObject.SetActive(false);
+        QuestPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()

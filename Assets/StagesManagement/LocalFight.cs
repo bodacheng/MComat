@@ -28,7 +28,7 @@ public class LocalFight
     }
     
     public static LocalFight LoadOneLocalFightByScript(TextAsset Script)
-    {        
+    {
         LocalFight _localFight = new LocalFight();
         MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try

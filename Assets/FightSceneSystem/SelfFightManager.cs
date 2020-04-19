@@ -142,7 +142,7 @@ namespace mainMenu
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
-            yield return QuestPreparePage.Instance.GetReadyToBattle(stage);
+            yield return QuestPreparePage.target.GetReadyToBattle(stage);
             yield break;
         }
 

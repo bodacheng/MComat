@@ -43,23 +43,7 @@ public class HeroIcon : MonoBehaviour {
     {
         cooldownCurtain.fillAmount = proportion;
     }
-    
-    public static void Seletedfeature(HeroIcon _charIcon,GameObject selectedFrame, float size)
-    {
-        if (_charIcon == null)
-        {
-            selectedFrame.SetActive(false);
-            return;
-        }
-        selectedFrame.transform.SetParent(_charIcon.transform);
-        selectedFrame.transform.localPosition = Vector3.zero;
-        selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-        selectedFrame.GetComponent<RectTransform>().sizeDelta = new Vector2(size,size);
-        selectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        selectedFrame.gameObject.SetActive(true);
-    }
-    
+        
     public void ChangeIcon(Sprite _Sprite,Zokusei zokusei)
     {
         if (frame == null || Icon == null)
@@ -122,5 +106,32 @@ public class HeroIcon : MonoBehaviour {
     public void DecideIconSize(string mainMenuFocusing)
     {
         gameObject.GetComponent<RectTransform>().localScale = mainMenuFocusing != _MonsterOfPlayerDetailModel.monsterOfPlayerId ? new Vector3(1, 1, 1) : new Vector3(1.1f, 1.1f, 1.1f);
+    }
+    
+    public static void Seletedfeature(HeroIcon _charIcon,GameObject selectedFrame, float size)
+    {
+        if (_charIcon == null)
+        {
+            selectedFrame.SetActive(false);
+            return;
+        }
+        selectedFrame.transform.SetParent(_charIcon.transform);
+        selectedFrame.transform.localPosition = Vector3.zero;
+        selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        selectedFrame.GetComponent<RectTransform>().sizeDelta = new Vector2(size,size);
+        selectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        selectedFrame.gameObject.SetActive(true);
+    }
+    
+    public static void ArrangeHeroIconToT(HeroIcon heroIconPretab, CharDataInfo CharDataInfo, RectTransform T)
+    {
+        HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
+        CharConfig charConfig = MonstersConfigTable.GetCharConfig(CharDataInfo.ResourceID);
+        MyMemberIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig._zokusei);
+        MyMemberIcon.transform.SetParent(T);
+        MyMemberIcon.transform.localPosition = Vector3.one;
+        MyMemberIcon.transform.localScale = Vector3.one;
+        MyMemberIcon.gameObject.SetActive(true);
     }
 }

@@ -28,7 +28,7 @@ public class StageScriptableObject : ScriptableObject
     public Sprite StageButtonSprite;
 
     public float team1_ExtraHP,team2_ExtraHP;
-    public LocalFight localFight;
+    public LocalFight localFight = new LocalFight();
     
     public FightEventType _fightEventType = FightEventType.Arena;
     

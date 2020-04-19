@@ -18,11 +18,11 @@ namespace mainMenu
         public RectTransform myTeamShowT;
         public RectTransform enemyTeamShowT;
 
-        public static QuestPreparePage Instance;
+        public static QuestPreparePage target;
 
         void Awake()
         {
-            Instance = this;
+            target = this;
         }
 
         // 队伍编辑按钮功能 放在按钮上。
@@ -30,14 +30,24 @@ namespace mainMenu
         {
             PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront, true);
         }
-        
+                
         // 这个函数目前是固定使用“默认队伍配置”
         public IEnumerator LoadStageByScriptThenGetReadyForIt(StageScriptableObject _SO)
         {
             QuestName.text = _SO.battleNameJPG;
             _SO.LoadLocalFightFromScript(_SO.Script);
-            IEnumerator getPlayerOne = TeamSet.Instance.MyTeamMembersByEntryMemberNum(_SO.EntryMemberNum, TeamSet.Instance.Default);
+            IEnumerator getPlayerOne = TeamSet.Instance.MyTeamByEntryLimit(_SO.EntryMemberNum, TeamSet.Instance.Default);
             yield return getPlayerOne;
+            if (getPlayerOne.Current == null)
+            {
+                Debug.Log("获取我方人员错误");
+                yield break;
+            }
+            if (_SO.localFight == null)
+            {
+                                Debug.Log("あれ？");
+                yield break;
+            }
             _SO.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getPlayerOne.Current;
             if (_SO.localFight.HeroSets == null)
             {
@@ -50,7 +60,7 @@ namespace mainMenu
         //这个函数只考虑了队员的加载。。。
         public IEnumerator GetReadyToBattle(StageScriptableObject stage)
         {
-            Instance.QuestPreparePageCanvas.gameObject.SetActive(true);
+            target.QuestPreparePageCanvas.gameObject.SetActive(true);
             EnterQuest.gameObject.SetActive(false);
             LoadingCanvas.target.DarkOff(1f);
             StageMembersInfoShow(stage);
@@ -66,6 +76,7 @@ namespace mainMenu
             yield break;
         }
         
+        //
         void StageMembersInfoShow(StageScriptableObject stage)
         {
             foreach (Transform _child in myTeamShowT)
@@ -75,28 +86,16 @@ namespace mainMenu
             foreach (Transform _child in enemyTeamShowT)
             {
                 Destroy(_child.gameObject);
-            }           
+            }
             foreach(CharDataInfo oneMember in stage.localFight.HeroSets.values)
             {
-                HeroIcon MyMemberIcon = Instantiate(FighterIcon);
-                CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(oneMember.ResourceID);
-                MyMemberIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
-                MyMemberIcon.transform.SetParent(myTeamShowT);
-                MyMemberIcon.transform.localPosition = Vector3.one;
-                MyMemberIcon.transform.localScale = Vector3.one;
-                MyMemberIcon.gameObject.SetActive(true);
+                HeroIcon.ArrangeHeroIconToT(FighterIcon,oneMember,myTeamShowT);
             }
             
             foreach(CharDataInfo oneMember in stage.localFight.EnemySets.values)
             {
-                HeroIcon EnemyMemberIcon = Instantiate(FighterIcon);
-                CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(oneMember.ResourceID);
-                EnemyMemberIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharacterResourceInfo.RECORD_ID), _CharacterResourceInfo._zokusei);
-                EnemyMemberIcon.transform.SetParent(enemyTeamShowT);
-                EnemyMemberIcon.transform.localPosition = Vector3.one;
-                EnemyMemberIcon.transform.localScale = Vector3.one;
-                EnemyMemberIcon.gameObject.SetActive(true);
-            }        
+                HeroIcon.ArrangeHeroIconToT(FighterIcon,oneMember,enemyTeamShowT);
+            }
         }
     }
 }

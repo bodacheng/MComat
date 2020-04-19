@@ -110,6 +110,8 @@
     <Compile Include="Assets\AnimControl\dontuse\Animation_Manger_old.cs" />
     <Compile Include="Assets\AnimControl\dontuse\NullStateProcess.cs" />
     <Compile Include="Assets\AnimControl\readMe.cs" />
+    <Compile Include="Assets\Arena\AreanaSetDisplay.cs" />
+    <Compile Include="Assets\Arena\ArenaManager.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Demo magiс circles Vol 2\CameraHolder.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Demo scene with projectiles\DemoShooting.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
@@ -371,6 +373,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\AreanaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\GotchaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_selectBaseMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_selectMaterialMonster.cs" />
@@ -539,6 +542,7 @@
     <Compile Include="Assets\StagesManagement\StageScriptableObject.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_XML.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
@@ -586,7 +590,7 @@
     <None Include="Assets\POFX\Shaders\Resources\Refraction.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Outline.shader" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lit_CenterGlow.shader" />
-    <None Include="Assets\specialShader\Mobile Particles Additive Culled.shader" />
+    <None Include="Assets\Shader\Mobile Particles Additive Culled.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_DistortTexture.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Sobel.shader" />
     <None Include="Assets\Resources\Account\TuroialFight1.xml" />
@@ -629,7 +633,7 @@
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lightning.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Shaders\Electricity.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\specialShader\HurtRed.shader" />
+    <None Include="Assets\Shader\HurtRed.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\EasyTouchBundle\EasyTouch\How to migrate from EasyTouch 4.X.txt" />
     <None Include="Assets\POFX\Shaders\Resources\Hsl.shader" />

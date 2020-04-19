@@ -15,7 +15,7 @@ public partial class NineAndTwo {
     
     SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
     SkillConfig DConfig, MConfig, RConfig;
-
+    
     public NineAndTwo()
     {
         A1skillid = null; A2skillid = null; A3skillid = null;
