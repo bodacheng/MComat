@@ -436,10 +436,7 @@ public class MonstersConfigTable
    
     public static IDictionary<string,string> GetMonsterRecordIDsAndNamesArrayDic(string type)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
-        IDictionary<string, string> Mdic = new Dictionary<string, string>
-        {
-            { "-1", "空" }
-        };
+        IDictionary<string, string> Mdic = new Dictionary<string, string>();
         List<Row> references = Instance.FindAll_MONSTER_TYPE(type);
         foreach (Row one in references)
         {

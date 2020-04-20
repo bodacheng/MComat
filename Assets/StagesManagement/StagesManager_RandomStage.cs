@@ -7,27 +7,29 @@ public partial class StagesManager : MonoBehaviour
     public static LocalFight RandomFight()
     {
         string focusingtype = "human";
-    
+        
         // 这几个东西用不用执行待定
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
         SkillConfigTable.RefreshSkillConfigDicForReference();
         MonstersConfigTable.LoadMonstersConfigByResource();
         MonstersConfigTable.RefreshCharacterResourceInfoDic();
-    
+        
         IDictionary<string, string> CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
+        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count -1 , 3);
+        List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
         
         LocalFight target = new LocalFight();
 
         CharDataInfo char1 = new CharDataInfo();
-        char1.ResourceID = "1";
+        char1.ResourceID = charRecordIds[Indexes[0]];
         char1._NineAndTwo = BalanceStyle("human",1);
         
         CharDataInfo char2 = new CharDataInfo();
-        char2.ResourceID = "2";
+        char2.ResourceID = charRecordIds[Indexes[1]];
         char2._NineAndTwo = BalanceStyle("human",1);
                
         CharDataInfo char3 = new CharDataInfo();
-        char3.ResourceID = "3";
+        char3.ResourceID = charRecordIds[Indexes[2]];
         char3._NineAndTwo = BalanceStyle("human",1);
 
         target.EnemySets.Set(0, 1, char1);

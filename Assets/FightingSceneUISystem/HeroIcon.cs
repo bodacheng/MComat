@@ -128,6 +128,11 @@ public class HeroIcon : MonoBehaviour {
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
         CharConfig charConfig = MonstersConfigTable.GetCharConfig(CharDataInfo.ResourceID);
+        if (charConfig == null)
+        {
+            Debug.Log("?? : " + CharDataInfo.ResourceID);
+            return;
+        }
         MyMemberIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig._zokusei);
         MyMemberIcon.transform.SetParent(T);
         MyMemberIcon.transform.localPosition = Vector3.one;

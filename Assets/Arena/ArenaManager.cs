@@ -20,7 +20,7 @@ public class ArenaManager : MonoBehaviour
     {
         target = this;
     }
-
+    
     public StageScriptableObject RandomStage()
     {
         StageScriptableObject stage = ScriptableObject.CreateInstance<StageScriptableObject>();
