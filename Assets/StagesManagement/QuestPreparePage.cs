@@ -35,7 +35,6 @@ namespace mainMenu
         public IEnumerator LoadStageByScriptThenGetReadyForIt(StageScriptableObject _SO)
         {
             QuestName.text = _SO.battleNameJPG;
-            _SO.LoadLocalFightFromScript(_SO.Script);
             IEnumerator getPlayerOne = TeamSet.Instance.MyTeamByEntryLimit(_SO.EntryMemberNum, TeamSet.Instance.Default);
             yield return getPlayerOne;
             if (getPlayerOne.Current == null)

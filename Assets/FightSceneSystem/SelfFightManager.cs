@@ -57,7 +57,7 @@ namespace mainMenu
             {
                 BattleGroundID = 2
             };
-            SwitchToMultiRaidMode();
+            SwitchToRotationMode();
         }
 
         public void Clear()

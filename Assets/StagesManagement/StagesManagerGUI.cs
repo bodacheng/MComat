@@ -6,7 +6,8 @@ using System.Linq;
 using UniRx;
 using Skill;
 
-// 后排敌人——〉角色ID，localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
+// 后排敌人——〉角色ID，
+// localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
 [CustomEditor(typeof(StagesManager))]
 public class StagesManagerGUI : Editor {
 
@@ -23,7 +24,7 @@ public class StagesManagerGUI : Editor {
     StagesManager _stagesManager;
     string pathAndNameForLocalSave = "oneFight.json";    
     string focusingMemberRecordID;
-    IDictionary<string, string> RecordIDsAndNames;
+    IDictionary<string, string> CharIDsAndNames;
     CharDataInfo focusingCharInfo;
     CharConfig focusingCharResourceInfo;
     SkillConfig targetSC;
@@ -38,7 +39,7 @@ public class StagesManagerGUI : Editor {
     string focusingtype;
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
-    IDictionary<string, string> _SkillRecordIDsAndNames;
+    IDictionary<string, string> _SkillIDsAndNames;
     bool Initialized;
     
     bool Repeated(SkillConfig _target,string recordID)
@@ -266,13 +267,13 @@ public class StagesManagerGUI : Editor {
         
         focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
         focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("CharacerType", focusingCharResourceInfo.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
-        RecordIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
-        if (RecordIDsAndNames.Count == 0)
+        CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
+        if (CharIDsAndNames.Count == 0)
         {
             goto A;
         }
         int index = 0;
-        foreach (KeyValuePair<string, string> keyValuePair in RecordIDsAndNames)
+        foreach (KeyValuePair<string, string> keyValuePair in CharIDsAndNames)
         {
             if (keyValuePair.Key == focusingCharInfo.ResourceID)
             {
@@ -281,8 +282,8 @@ public class StagesManagerGUI : Editor {
             }
             index++;
         }
-        selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, RecordIDsAndNames.Values.ToArray());
-        focusingCharInfo.ResourceID = selectedmonsterindex == 0 ? null : RecordIDsAndNames.ElementAt(selectedmonsterindex).Key;
+        selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, CharIDsAndNames.Values.ToArray());
+        focusingCharInfo.ResourceID = selectedmonsterindex == 0 ? null : CharIDsAndNames.ElementAt(selectedmonsterindex).Key;
         if (selectedmonsterindex == 0)
         {
             goto A;
@@ -323,28 +324,24 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        if (Repeated(focusingCharInfo._NineAndTwo.GetA1Config(),focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetA1Config().RECORD_ID) ? Color.yellow : Color.white;
+        void SlotColorCal(SkillConfig targetC)
+        {
+            GUI.backgroundColor = Repeated(targetC, targetC.RECORD_ID) ? Color.red : SlotHasSkill(targetC.RECORD_ID) ? Color.yellow : Color.white;
+        }
+
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetA1Config());
         if (GUILayout.Button("A1", targetSC != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetA1Config();
         }
         
-        if (Repeated(focusingCharInfo._NineAndTwo.GetA2Config(),focusingCharInfo._NineAndTwo.GetA2Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetA2Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetA2Config());
         if (GUILayout.Button("A2", targetSC != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetA2Config();
         }
         
-        if (Repeated(focusingCharInfo._NineAndTwo.GetA3Config(),focusingCharInfo._NineAndTwo.GetA3Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetA3Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetA3Config());
         if (GUILayout.Button("A3", targetSC != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetA3Config();
@@ -352,28 +349,19 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-        if (Repeated(focusingCharInfo._NineAndTwo.GetB1Config(),focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetB1Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetB1Config());
         if (GUILayout.Button("B1", targetSC != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB1Config();
         }
 
-        if (Repeated(focusingCharInfo._NineAndTwo.GetB2Config(),focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetB2Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetB2Config());
         if (GUILayout.Button("B2", targetSC != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB2Config();
         }
         
-        if (Repeated(focusingCharInfo._NineAndTwo.GetB3Config(),focusingCharInfo._NineAndTwo.GetB3Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetB3Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetB3Config());
         if (GUILayout.Button("B3", targetSC != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB3Config();
@@ -382,28 +370,19 @@ public class StagesManagerGUI : Editor {
         
         GUILayout.BeginHorizontal();
         
-        if (Repeated(focusingCharInfo._NineAndTwo.GetC1Config(),focusingCharInfo._NineAndTwo.GetC1Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetC1Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetC1Config());
         if (GUILayout.Button("C1", targetSC != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetC1Config();
         }
         
-        if (Repeated(focusingCharInfo._NineAndTwo.GetC2Config(),focusingCharInfo._NineAndTwo.GetC2Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetC2Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetC2Config());
         if (GUILayout.Button("C2", targetSC != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetC2Config();
         }
         
-        if (Repeated(focusingCharInfo._NineAndTwo.GetC3Config(),focusingCharInfo._NineAndTwo.GetC3Config().RECORD_ID))
-            GUI.backgroundColor = Color.red;
-        else
-            GUI.backgroundColor = SlotHasSkill(focusingCharInfo._NineAndTwo.GetC3Config().RECORD_ID) ? Color.yellow : Color.white;
+        SlotColorCal(focusingCharInfo._NineAndTwo.GetC3Config());
         if (GUILayout.Button("C3", targetSC != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetC3Config();
@@ -462,11 +441,11 @@ public class StagesManagerGUI : Editor {
                 GUILayout.Space(20f);
             }
             
-            _SkillRecordIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
+            _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
             
             int index2 = 0;
             selectedskillindex = 0;
-            foreach (KeyValuePair<string, string> keyValuePair in _SkillRecordIDsAndNames)
+            foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)
             {
                 if (keyValuePair.Key == targetSC.RECORD_ID)
                 {
@@ -475,8 +454,8 @@ public class StagesManagerGUI : Editor {
                 }
                 index2++;
             }
-            selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillRecordIDsAndNames.Values.ToArray());
-            targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillRecordIDsAndNames.ElementAt(selectedskillindex).Key;                        
+            selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
+            targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;                        
             SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(targetSC.RECORD_ID);
             if (defaultSkillConfig == null)
             {

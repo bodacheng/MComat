@@ -117,14 +117,6 @@
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\ParticleSystemController\ParticleSystemController.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\ParticleSystemController\Serializables.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
-    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
@@ -546,6 +538,7 @@
     <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_XML.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
+    <Compile Include="Assets\Structure\RandomSelect.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />

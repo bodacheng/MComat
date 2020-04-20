@@ -7,7 +7,7 @@ public class AreanaSetDisplay : MonoBehaviour
     public Text RanKInfo;
     public Button PrepareFightButton;
     public RectTransform iconsT;
-        
+    
     public void AddFightToList(HeroIcon FighterIcon, StageScriptableObject _SO)
     {
         foreach(CharDataInfo oneMember in _SO.localFight.EnemySets.values)

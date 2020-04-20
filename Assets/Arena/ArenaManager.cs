@@ -23,7 +23,12 @@ public class ArenaManager : MonoBehaviour
 
     public StageScriptableObject RandomStage()
     {
-        StageScriptableObject stage = new StageScriptableObject{};
+        StageScriptableObject stage = ScriptableObject.CreateInstance<StageScriptableObject>();
+        stage.localFight = StagesManager.RandomFight();
+        stage.BattleGroundID = 2;
+        stage.Team1Mode = TeamMode.rotation;
+        stage.Team2Mode = TeamMode.rotation;
+        stage._fightEventType = FightEventType.Arena;
         return stage;
     }
     
@@ -34,7 +39,7 @@ public class ArenaManager : MonoBehaviour
         FightList.Add(RandomStage());
         FightList.Add(RandomStage());
         FightList.Add(RandomStage());
-
+        
         for (int i = 0; i < 4; i++)
         {
             switch(i)

@@ -2,7 +2,6 @@
 
 class CertainYAntiVibrationCamera : CameraMode
 {
-    readonly bool auto = false;
     Vector3 CameraTargetPos;
     Vector3 enemiescenter;//敌人的位置中心
     Vector3 focuscenter;//校准中心。是根据控制角色与敌人中心两个位置决定

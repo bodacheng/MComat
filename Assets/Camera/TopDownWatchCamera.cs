@@ -31,9 +31,6 @@ class TopDownWatchCamera : CameraMode
     //Child transform which is parent of main camera
     public Transform pivot;
     [HideInInspector]
-    //the camera transform
-    public Transform camTrans;
-    [HideInInspector]
     //The look rotation of camera to player
     public float lookRotation;
     [HideInInspector]

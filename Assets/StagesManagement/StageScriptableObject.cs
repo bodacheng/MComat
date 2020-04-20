@@ -40,7 +40,7 @@ public class StageScriptableObject : ScriptableObject
     static void CreateExampleAsset ()
     {
         var exampleAsset = CreateInstance<StageScriptableObject> ();
-    
+        
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
         AssetDatabase.Refresh ();
     }

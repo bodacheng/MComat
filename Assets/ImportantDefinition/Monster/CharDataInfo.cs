@@ -33,13 +33,6 @@ public class CharDataInfo
         this._NineAndTwo = _NineAndTwo;
     }
 
-    public void Dissolve()
-    {
-        monsterOfPlayerId = (-1).ToString();
-        ResourceID = null;
-        _NineAndTwo = null;
-    }
-
     public GetMonsterOfPlayerDetailModel GetCharacterDataInfoJson()
     {
         GetMonsterOfPlayerDetailModel characterDataInfoJson = new GetMonsterOfPlayerDetailModel

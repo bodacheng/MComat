@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Soul;
-using System.Collections.Generic;
 
 public class Counter_State : Behavior {
     readonly string clip_name;
