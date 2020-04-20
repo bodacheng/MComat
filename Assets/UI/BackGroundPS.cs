@@ -71,7 +71,7 @@ public class BackGroundPS : MonoBehaviour
     
     void Light()
     {
-        SwitchBG(16);
+        SwitchBG(12);
     }
     
     void Dark()
