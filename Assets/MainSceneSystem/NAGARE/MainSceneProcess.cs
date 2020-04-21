@@ -7,7 +7,6 @@ namespace mainMenu
         public MainSceneStep nextProcessStep = MainSceneStep.none;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
         public SingleThreadProcesser mainProcessRunner;
-        public MemberDetail _MemberDetail;
         public ModelShower _modelShower;
         public CharsManager _CharsManager;
         public ReturnButtonManager _ReturnButtonManager;
@@ -17,7 +16,6 @@ namespace mainMenu
 
         public void EelementsInherit(PreScene _preparingScene)
         {
-            _MemberDetail = _preparingScene._MemberDetail;
             _CharsManager = _preparingScene._CharSetManager;
             _modelShower = _preparingScene._modelShower;
             _ReturnButtonManager = _preparingScene._ReturnButtonManager;

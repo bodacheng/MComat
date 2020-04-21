@@ -69,7 +69,7 @@ public class PosKeySet
                 
         foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
         {
-            if (_Set.monsterOfPlayerId == monsterlocalID)
+            if (_Set.monsterOfPlayerId == monsterlocalID && _Set.monsterOfPlayerId != null)
             {
                 if (_Set.posNum != targetPos)
                 {
@@ -87,7 +87,8 @@ public class PosKeySet
         {
             SetPosMemInfoByLocalID(targetPos, monsterlocalID);
             return new List<PosNumWithLocalKey> {GetPosMemInfo(targetPos)};
-        }return new List<PosNumWithLocalKey>();
+        }
+        return new List<PosNumWithLocalKey>();
     }
     
     public PosNumWithLocalKey GetPosMemInfoByLocalID(string localID)

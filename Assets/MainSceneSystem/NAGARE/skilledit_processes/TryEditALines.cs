@@ -30,8 +30,8 @@ public class TryEditALines : MainSceneProcess
         IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        _MemberDetail.focusingCharDataInfo = myfighter;
-        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。        
+        MemberDetail.target.focusingCharDataInfo = myfighter;
+        yield return SkillEditorButtonBehaviour(MemberDetail.target.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。        
         yield break;
     }
     
@@ -87,7 +87,7 @@ public class TryEditALines : MainSceneProcess
         void SkillEditConfirm()
         {
             mainProcessRunner.Run(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.Run(_MemberDetail.SkillEditConfirmAnimation());
+            MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
             StageScriptableObject stage = new StageScriptableObject
             {
                 battleNameCH = "亚当大战傻逼门卫"

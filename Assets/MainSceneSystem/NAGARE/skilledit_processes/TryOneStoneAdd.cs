@@ -19,8 +19,8 @@ public class TryOneStoneAdd : MainSceneProcess
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
         
-        _MemberDetail.focusingCharDataInfo = myfighter;
-        yield return SkillEditorButtonBehaviour(_MemberDetail.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
+        MemberDetail.target.focusingCharDataInfo = myfighter;
+        yield return SkillEditorButtonBehaviour(MemberDetail.target.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
         IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
         yield return (loadMyStonesProcess);
 
@@ -28,7 +28,7 @@ public class TryOneStoneAdd : MainSceneProcess
         //TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
+        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
         TheNineSlot.Instance.A2DragAndDropCell.gameObject.SetActive(false);
         TheNineSlot.Instance.A3DragAndDropCell.gameObject.SetActive(false);
         TheNineSlot.Instance.B1DragAndDropCell.gameObject.SetActive(false);
@@ -39,11 +39,11 @@ public class TryOneStoneAdd : MainSceneProcess
         TheNineSlot.Instance.C3DragAndDropCell.gameObject.SetActive(false);
         TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(false);
 
-        this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
-        this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
+        this._CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
+        this._CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
         
         // 表现系
-        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(_MemberDetail.focusingCharDataInfo.monsterId);
+        CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(MemberDetail.target.focusingCharDataInfo.monsterId);
         //SkillStonesBox.Instance._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
             //SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.NormalTab.gameObject,5f),
             //SkillStonesBox.Instance.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.Instance.fxCamera,SkillStonesBox.Instance.EX1Tab.gameObject,5f),
@@ -90,7 +90,7 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         if (step == 2)
         {
-            if (this._MemberDetail._SkillsPrintOut.IfShowingSkill)
+            if (MemberDetail.target._SkillsPrintOut.IfShowingSkill)
             {
                 step = 3;
                 LoadingCanvas.target.ClearHigtLight();
@@ -98,7 +98,7 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         if (step == 3)
         {
-            if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
+            if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
             {
                 step = 4;
                 TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(true);
@@ -122,7 +122,7 @@ public class TryOneStoneAdd : MainSceneProcess
         void SkillEditConfirm()
         {
             mainProcessRunner.Run(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
-            _MemberDetail.presentationProcessRunner.Run(_MemberDetail.SkillEditConfirmAnimation());
+            MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
         }
         void SkillUpdateValidation()
         {
@@ -144,6 +144,6 @@ public class TryOneStoneAdd : MainSceneProcess
         }
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
         CharDataInfo focusingData = RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo);
-        _MemberDetail.presentationProcessRunner.Run(this._MemberDetail.SkillsPrintOutFocusingCharChangeProcess(focusingData));
+        MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillsPrintOutFocusingCharChangeProcess(focusingData));
     }
 }

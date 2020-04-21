@@ -43,7 +43,14 @@ namespace mainMenu
 
         public GetMonsterOfPlayerDetailModel focusingCharDataInfo;
 
-        public IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingChar()
+        public static MemberDetail target;
+
+        void Awake()
+        {
+            target = this;
+        }
+
+        public IEnumerator RefreshMemberDetailPageByFocusingChar()
         {
             if (focusingCharDataInfo == null || focusingCharDataInfo.monsterOfPlayerId == null || focusingCharDataInfo.monsterId == null)
             {
@@ -206,7 +213,7 @@ namespace mainMenu
         }
 
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
-        public IEnumerator SetMemberDetailSystemFocusingCharacter(string localID)
+        public IEnumerator SetMemberDetailFocusingChar(string localID)
         {
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
             yield return getchar;

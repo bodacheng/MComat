@@ -55,7 +55,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.IfShowingSkill)
+        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }

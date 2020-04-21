@@ -44,11 +44,7 @@ namespace mainMenu
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
-        
-        [Space(7)]
-        [Header("MemberDetail")]
-        public MemberDetail _MemberDetail;
-                
+                        
         [Space(7)]
         [Header("CustomGUISkin")]
         public GUISkin CustomGUISkin;
@@ -100,7 +96,7 @@ namespace mainMenu
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.Instance.gameObject.SetActive(false);
-            _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
+            MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
             MainMenuCanvas.gameObject.SetActive(false);
 
             LoadingCanvas.target.DarkOff(0.5f);
@@ -228,14 +224,14 @@ namespace mainMenu
                     yield return _SelfFightManager.MonsterIConButton(localId);
                     break;
                 case MainSceneStep.MemberDetail:
-                    yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(localId);//确立focusing角色
-                    yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
+                    yield return MemberDetail.target.SetMemberDetailFocusingChar(localId);//确立focusing角色
+                    yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                     break;
                 case MainSceneStep.TeamEditFront:
-                     yield return _MemberDetail.SetMemberDetailSystemFocusingCharacter(localId);//确立focusing角色
+                     yield return MemberDetail.target.SetMemberDetailFocusingChar(localId);//确立focusing角色
                     TeamEditFront process = (TeamEditFront)ProcessesRunner.Instance.AccessCertainMainSceneProcessObject(MainSceneStep.TeamEditFront);
                     yield return process.TeamEditMonsterDetailMonsterIconBehaviour();
-                    yield return _MemberDetail.RefreshMemberDetailGamenSystemBaseOnFocusingChar();
+                    yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                     break;
             }
             //_MonsterBox.adjustAllIconsSize(localId);

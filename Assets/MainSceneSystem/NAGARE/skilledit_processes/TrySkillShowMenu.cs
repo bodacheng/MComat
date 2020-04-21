@@ -17,15 +17,15 @@ public class TrySkillShowMenu : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(this._MemberDetail.focusingCharDataInfo);
-        this._MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
+        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
+        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(MemberDetail.target.focusingCharDataInfo);
+        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
         //SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
-        _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
-        this._CameraManager.Assign_StartToEndModeCamera(this._MemberDetail.MemDetailWatchPos.position, 3f,15f);
-        this._CameraManager.current_Camera_Mode.target = this._MemberDetail.MemDetailTargetPos;
+        MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
+        this._CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
+        this._CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
         yield break;     
     }
     
@@ -41,13 +41,13 @@ public class TrySkillShowMenu : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        this._MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
+        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.IfShowingSkill)
+        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }

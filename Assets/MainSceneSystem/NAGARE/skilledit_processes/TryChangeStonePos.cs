@@ -31,7 +31,7 @@ public class TryChangeStonePos : MainSceneProcess
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield return TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(myfighter);
-                yield return _MemberDetail.SkillEditConfirmAnimation();
+                yield return MemberDetail.target.SkillEditConfirmAnimation();
 
                 StageScriptableObject stage = new StageScriptableObject
                 {
@@ -83,7 +83,7 @@ public class TryChangeStonePos : MainSceneProcess
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
-        if (!this._MemberDetail._SkillsPrintOut.IfShowingSkill)
+        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }

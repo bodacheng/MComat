@@ -21,10 +21,6 @@ namespace mainMenu
         public RectTransform NineSlotT;
         
         [Space(5)]
-        [Header("成员详细")]
-        public MemberDetail _MemberDetail;
-
-        [Space(5)]
         [Header("SKillPrintout")]
         public SkillsPrintOut _SkillsPrintOut;
 

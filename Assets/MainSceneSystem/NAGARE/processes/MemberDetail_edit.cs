@@ -15,11 +15,11 @@ public class MemberDetail_edit : MainSceneProcess
         SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize,2);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
-        yield return SkillEditButtonFeature(_MemberDetail.focusingCharDataInfo);
+        yield return SkillEditButtonFeature(MemberDetail.target.focusingCharDataInfo);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(true);
         
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(this._MemberDetail.focusingCharDataInfo.monsterId);
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target.focusingCharDataInfo.monsterId);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons(
             SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.NormalTab.gameObject,5f),
             SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX1Tab.gameObject,5f),
@@ -54,7 +54,7 @@ public class MemberDetail_edit : MainSceneProcess
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
-        if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
+        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
@@ -79,7 +79,7 @@ public class MemberDetail_edit : MainSceneProcess
         void SkillEditConfirm()
         {
             mainProcessRunner.Run(TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(_AccountCharacterInfo));
-            _MemberDetail.presentationProcessRunner.Run(_MemberDetail.SkillEditConfirmAnimation());
+            MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
         }
         
         void SkillUpdateValidation()

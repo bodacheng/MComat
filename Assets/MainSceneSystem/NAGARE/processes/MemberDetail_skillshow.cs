@@ -13,13 +13,13 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(this._MemberDetail.focusingCharDataInfo);
-        _MemberDetail._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
+        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(MemberDetail.target.focusingCharDataInfo);
+        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(true);
+        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
-        _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
+        MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         yield break;
     }
@@ -36,15 +36,15 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        _MemberDetail._SkillsPrintOut.ClearRenderPs();
-        _MemberDetail.MemberDetailCanvas.gameObject.SetActive(false);
-        _MemberDetail._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
+        MemberDetail.target._SkillsPrintOut.ClearRenderPs();
+        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
+        MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
     public override void LocalUpdate()
     {
-        if (!_MemberDetail._SkillsPrintOut.IfShowingSkill)
+        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
