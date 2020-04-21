@@ -19,6 +19,7 @@ public class MemberDetailProcess : MainSceneProcess
         _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
         yield return MonsterBox.DisplayMonsterIcons();
+        MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         //this._MonsterBox.adjustAllIconsSize(null);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();

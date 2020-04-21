@@ -13,7 +13,8 @@ public class TeamEditFront : MainSceneProcess
         _CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
         yield return MonsterBox.DisplayMonsterIcons();
-        TeamEditManager.Instance._Canvas.gameObject.SetActive(true);
+        TeamEditManager.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        TeamEditManager.target._Canvas.gameObject.SetActive(true);
         yield break;
     }
     
@@ -35,7 +36,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        TeamEditManager.Instance._Canvas.gameObject.SetActive(false);
+        TeamEditManager.target._Canvas.gameObject.SetActive(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);
@@ -45,15 +46,5 @@ public class TeamEditFront : MainSceneProcess
         {
             _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
-    }
-    
-    public IEnumerator TeamEditMonsterDetailMonsterIconBehaviour()
-    {
-        GetMonsterOfPlayerDetailModel _AccountCharacterInfo = MemberDetail.target.focusingCharDataInfo;
-        if (_AccountCharacterInfo == null)
-        {
-            Debug.Log("严重错误");yield break;
-        }
-        yield return TeamEditManager.Instance.MonsterIConButton(_AccountCharacterInfo.monsterOfPlayerId,TeamEditManager.focusingPosNum);
     }
 }

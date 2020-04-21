@@ -163,7 +163,7 @@ namespace mainMenu
                     yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;
-                    yield return TeamEditManager.Instance.INITeamPosButtons();
+                    yield return TeamEditManager.target.INITeamPosButtons();
                     trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
                     break;
                 case PlayerAccountProgressStep.justCreated:
@@ -214,30 +214,7 @@ namespace mainMenu
 
             ProcessesRunner.Instance.ChangeProcess(next_step);
         }
-
-        //看起来这个函数不应该在这个模块里，但其中的各种操作和整个mainmenu的乱七八糟东西相关性实在太多了，所以姑且放在这
-        public IEnumerator MonsterIconButton(string localId)
-        {
-            switch (ProcessesRunner.Instance.currentProcess.thisProcessStep)
-            {
-                case MainSceneStep.SelfFightFront:
-                    yield return _SelfFightManager.MonsterIConButton(localId);
-                    break;
-                case MainSceneStep.MemberDetail:
-                    yield return MemberDetail.target.SetMemberDetailFocusingChar(localId);//确立focusing角色
-                    yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-                    break;
-                case MainSceneStep.TeamEditFront:
-                     yield return MemberDetail.target.SetMemberDetailFocusingChar(localId);//确立focusing角色
-                    TeamEditFront process = (TeamEditFront)ProcessesRunner.Instance.AccessCertainMainSceneProcessObject(MainSceneStep.TeamEditFront);
-                    yield return process.TeamEditMonsterDetailMonsterIconBehaviour();
-                    yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-                    break;
-            }
-            //_MonsterBox.adjustAllIconsSize(localId);
-            yield break;
-        }
-
+        
         void OnGUI()
         {
             //if (AccountSet.Instance._playerinfoReferenceMode == playerinfoReferenceMode.localTestSaveData)

@@ -145,7 +145,30 @@ namespace mainMenu
             yield return QuestPreparePage.target.GetReadyToBattle(stage);
             yield break;
         }
-
+        
+        #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
+        public void AddHeroIconFeaturesToMonsterBox()
+        {
+            foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
+            {
+                AddHeroIconFeatureToMonsterBox(keyValuePair.Key,keyValuePair.Value.iconButton);
+            }
+        }
+        
+        void AddHeroIconFeatureToMonsterBox(string CharRecordId, Button targetButton)
+        {
+            IEnumerator MonsterIconButton()
+            {
+                yield return MonsterIConButton(CharRecordId);
+            }
+            void Trigger()
+            {
+                PreScene.Instance.mainProcessRunner.Run(MonsterIconButton());
+            }
+            targetButton.onClick.AddListener(Trigger);
+        }
+        #endregion
+        
         public IEnumerator MonsterIConButton(string localID)
         {
             if (focusingTeam == Team.none || focusingPosition < 0)

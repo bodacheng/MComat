@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
+using System.Collections.Generic;
 
 namespace mainMenu
 {
@@ -49,7 +50,31 @@ namespace mainMenu
         {
             target = this;
         }
-
+        
+        #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
+        public void AddHeroIconFeaturesToMonsterBox()
+        {
+            foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
+            {
+                AddHeroIconFeatureToMonsterBox(keyValuePair.Key,keyValuePair.Value.iconButton);
+            }
+        }
+        
+        void AddHeroIconFeatureToMonsterBox(string CharRecordId, Button targetButton)
+        {
+            IEnumerator MonsterIconButton()
+            {
+                yield return target.SetMemberDetailFocusingChar(CharRecordId);//确立focusing角色
+                yield return target.RefreshMemberDetailPageByFocusingChar();
+            }
+            void Trigger()
+            {
+                PreScene.Instance.mainProcessRunner.Run(MonsterIconButton());
+            }
+            targetButton.onClick.AddListener(Trigger);
+        }
+        #endregion
+        
         public IEnumerator RefreshMemberDetailPageByFocusingChar()
         {
             if (focusingCharDataInfo == null || focusingCharDataInfo.monsterOfPlayerId == null || focusingCharDataInfo.monsterId == null)
@@ -152,7 +177,7 @@ namespace mainMenu
         // 纯表现系
         public IEnumerator SkillEditConfirmAnimation()
         {
-            this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
+            _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
             CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
             string personalEffectsPath;
             switch (characterResourceInfo._zokusei)
@@ -178,7 +203,7 @@ namespace mainMenu
             }
             EffectAndHurtObjectLoading.Instance.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             yield return new WaitForSeconds(0.1f);
-            this._SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
+            _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化

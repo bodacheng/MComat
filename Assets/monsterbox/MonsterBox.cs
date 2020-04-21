@@ -32,7 +32,7 @@ namespace mainMenu
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
 
-        static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
+        public static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
 
         void Start()
         {
@@ -162,12 +162,11 @@ namespace mainMenu
                 }
                 string monsterOfPlayerId = _targetingIcon._MonsterOfPlayerDetailModel.monsterOfPlayerId;
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
-                void action1()
+                void Select()
                 {
                     HeroIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
-                    PreScene.Instance.mainProcessRunner.Run(PreScene.Instance.MonsterIconButton(monsterOfPlayerId));
                 }
-                _targetingIcon.iconButton.onClick.AddListener(action1);
+                _targetingIcon.iconButton.onClick.AddListener(Select);
                 _targetingIcon.gameObject.SetActive(true);
                 _targetingIcon.transform.SetParent(target.MonsterBoxContainer);
                 _targetingIcon.transform.localScale = Vector3.one;
