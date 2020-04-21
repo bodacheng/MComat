@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using dataAccess;
+using mainMenu;
 
 // 其他模块很多东西应该给拿过来用。。
 // 1.战斗图标生成 
@@ -12,9 +13,7 @@ public class ArenaManager : MonoBehaviour
     public static ArenaManager target;
     
     public RectTransform ArenaCanvas;
-    public HeroIcon member1, member2, member3;
-    
-    public HeroIcon FighterIcon;
+    public ArenaFightTeamDisplay myTeam;
     public ArenaFightTeamDisplay Fight1, Fight2, Fight3, Fight4;
     // 提供一个战斗列表供玩家选择
     List<StageScriptableObject> FightList = new List<StageScriptableObject>();
@@ -28,13 +27,21 @@ public class ArenaManager : MonoBehaviour
     
     public IEnumerator ShowMyTeam()
     {
-        string Pos1MonsterOfPlayerId = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(0);
-        string Pos2MonsterOfPlayerId = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(1);
-        string Pos3MonsterOfPlayerId = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(2);
-
-        yield return TeamEditManager.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId,member1);
-        yield return TeamEditManager.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId,member2);
-        yield return TeamEditManager.ChangeHeroIconByMonsterOfPlayerId(Pos3MonsterOfPlayerId,member3);
+        string Pos1MonsterOfPlayerId = TeamSet.Instance.Arena3V3.GetPosMonsterOfPlayerId(0);
+        string Pos2MonsterOfPlayerId = TeamSet.Instance.Arena3V3.GetPosMonsterOfPlayerId(1);
+        string Pos3MonsterOfPlayerId = TeamSet.Instance.Arena3V3.GetPosMonsterOfPlayerId(2);
+        
+        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId,myTeam.member1);
+        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId,myTeam.member2);
+        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos3MonsterOfPlayerId,myTeam.member3);
+        
+        void GoToTeamEdit()
+        {
+            PreScene.Instance.arcadeTeamManager.SwitchTargetTeam(TeamSetGameMode.arena3V3);
+            PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+        }
+        myTeam.PrepareFightButton.onClick.RemoveAllListeners();
+        myTeam.PrepareFightButton.onClick.AddListener(GoToTeamEdit);
     }
     
     public StageScriptableObject RandomStage()
@@ -61,19 +68,18 @@ public class ArenaManager : MonoBehaviour
             switch(i)
             {
                 case 0:
-                    Fight1.AddFightToList(FighterIcon,FightList[0]);
+                    yield return Fight1.AddFightToList(FightList[0]);
                 break;
                 case 1:
-                    Fight2.AddFightToList(FighterIcon,FightList[1]);
+                    yield return Fight2.AddFightToList(FightList[1]);
                 break;
                 case 2:
-                    Fight3.AddFightToList(FighterIcon,FightList[2]);
+                    yield return Fight3.AddFightToList(FightList[2]);
                 break;
                 case 3:
-                    Fight4.AddFightToList(FighterIcon,FightList[3]);
+                    yield return Fight4.AddFightToList(FightList[3]);
                 break;
             }
         }
-        yield break;
     }
 }

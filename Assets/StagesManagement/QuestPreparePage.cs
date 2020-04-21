@@ -30,12 +30,12 @@ namespace mainMenu
         {
             PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront, true);
         }
-                
+        
         // 这个函数目前是固定使用“默认队伍配置”
-        public IEnumerator LoadStageByScriptThenGetReadyForIt(StageScriptableObject _SO)
+        public IEnumerator GetReadyForStageASTeam(StageScriptableObject _SO,PosKeySet set)
         {
             QuestName.text = _SO.battleNameJPG;
-            IEnumerator getPlayerOne = TeamSet.Instance.MyTeamByEntryLimit(_SO.EntryMemberNum, TeamSet.Instance.Default);
+            IEnumerator getPlayerOne = TeamSet.Instance.MyTeamByEntryLimit(_SO.EntryMemberNum, set);
             yield return getPlayerOne;
             if (getPlayerOne.Current == null)
             {
@@ -43,10 +43,6 @@ namespace mainMenu
                 yield break;
             }
             _SO.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getPlayerOne.Current;
-            if (_SO.localFight.HeroSets == null)
-            {
-                Debug.Log("严重错误。get不到队员"); yield break;
-            }
             mainProcessRunner.Run(GetReadyToBattle(_SO));
             yield break;
         }

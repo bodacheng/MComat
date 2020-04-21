@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
+using System.Collections;
+using dataAccess;
 
 public class HeroIcon : MonoBehaviour {
 
@@ -101,6 +103,30 @@ public class HeroIcon : MonoBehaviour {
         
         if (frames.ContainsKey(zokusei))
             frame.sprite = frames[zokusei];                
+    }
+    
+    public static IEnumerator ChangeHeroIconByMonsterOfPlayerId(string PosMonsterOfPlayerId, HeroIcon Icon)
+    {
+        if (PosMonsterOfPlayerId != null)
+        {
+            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PosMonsterOfPlayerId);
+            yield return getchar;
+            if (getchar.Current == null)
+                yield break;
+            GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
+            ChangeHeroIconByMonsterID(charConfig.RECORD_ID,Icon);
+        }
+        else
+        {
+            Icon.ChangeIcon(null, Zokusei.Null);
+        }
+    }
+    
+    public static void ChangeHeroIconByMonsterID(string monsterRecordID, HeroIcon Icon)
+    {
+        CharConfig charConfig = MonstersConfigTable.GetCharConfig(monsterRecordID);
+        Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
     }
     
     public void DecideIconSize(string mainMenuFocusing)

@@ -37,6 +37,7 @@ public class TeamEditFront : MainSceneProcess
     public override void ProcessEnd()
     {
         PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(false);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);

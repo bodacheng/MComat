@@ -61,10 +61,10 @@ namespace mainMenu
         JiNengRongLian_selectMaterialMonster = 12,
         JiNengRongLian_selectBaseMonster = 13,
         JiNengRongLian_waitForConfirm = 14,
-
+        
         Tutorial_skillEdit = 18,
         Tutorial_Story = 19,
-
+        
         Tutorial_skillEdit_sub1 = 20,
         Tutorial_skillEdit_sub2 = 21,
         // 前半 后半
