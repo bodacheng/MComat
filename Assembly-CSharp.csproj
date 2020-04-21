@@ -110,7 +110,7 @@
     <Compile Include="Assets\AnimControl\dontuse\Animation_Manger_old.cs" />
     <Compile Include="Assets\AnimControl\dontuse\NullStateProcess.cs" />
     <Compile Include="Assets\AnimControl\readMe.cs" />
-    <Compile Include="Assets\Arena\AreanaSetDisplay.cs" />
+    <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
     <Compile Include="Assets\Arena\ArenaManager.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Demo magiс circles Vol 2\CameraHolder.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Demo scene with projectiles\DemoShooting.cs" />
@@ -366,7 +366,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\AreanaProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\GotchaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_selectBaseMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_selectMaterialMonster.cs" />

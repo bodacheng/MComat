@@ -14,7 +14,7 @@ namespace mainMenu
     public class PreScene : MonoBehaviour
     {
         public static PreScene Instance;
-
+        
         [Space(7)]
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
@@ -28,7 +28,11 @@ namespace mainMenu
         public CharsManager _CharSetManager;
         public Text accountDiamondCoin;
         public Text accountIntelliCoin;
-      
+        
+        [Space(11)]
+        [Header("modelShower")]
+        public TeamEditManager arcadeTeamManager;
+        
         [Space(11)]
         [Header("modelShower")]
         public ModelShower _modelShower;
@@ -64,6 +68,7 @@ namespace mainMenu
         public RectTransform JiNengRongLian_selectT;
         public RectTransform RonglianConfirmGAMENT;
         public RectTransform SelfFightUIT;
+        public RectTransform ArcadeTeamEditT;
         
         void Awake()
         {
@@ -115,7 +120,7 @@ namespace mainMenu
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
-            AreanaProcess areanaProcess = new AreanaProcess();
+            ArenaProcess areanaProcess = new ArenaProcess();
 
             ProcessesRunner.Instance.Clear();
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
@@ -163,7 +168,6 @@ namespace mainMenu
                     yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;
-                    yield return TeamEditManager.target.INITeamPosButtons();
                     trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
                     break;
                 case PlayerAccountProgressStep.justCreated:

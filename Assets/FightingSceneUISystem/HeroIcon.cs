@@ -124,6 +124,7 @@ public class HeroIcon : MonoBehaviour {
         selectedFrame.gameObject.SetActive(true);
     }
     
+    // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
     public static void ArrangeHeroIconToT(HeroIcon heroIconPretab, CharDataInfo CharDataInfo, RectTransform T)
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);

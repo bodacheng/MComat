@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using mainMenu;
-using Api.Dto.Model;
 
 public class TeamEditFront : MainSceneProcess
 {
@@ -12,9 +11,10 @@ public class TeamEditFront : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
+        yield return PreScene.Instance.arcadeTeamManager.INITeamPosButtons();
         yield return MonsterBox.DisplayMonsterIcons();
-        TeamEditManager.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
-        TeamEditManager.target._Canvas.gameObject.SetActive(true);
+        PreScene.Instance.arcadeTeamManager.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(true);
         yield break;
     }
     
@@ -36,7 +36,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        TeamEditManager.target._Canvas.gameObject.SetActive(false);
+        PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(false);
     }
     
     Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);

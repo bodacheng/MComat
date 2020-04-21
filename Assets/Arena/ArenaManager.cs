@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using dataAccess;
 
 // 其他模块很多东西应该给拿过来用。。
 // 1.战斗图标生成 
@@ -11,14 +12,29 @@ public class ArenaManager : MonoBehaviour
     public static ArenaManager target;
     
     public RectTransform ArenaCanvas;
-    public HeroIcon FighterIcon;//多种属性框？
-    public AreanaSetDisplay Fight1, Fight2, Fight3, Fight4;
+    public HeroIcon member1, member2, member3;
+    
+    public HeroIcon FighterIcon;
+    public ArenaFightTeamDisplay Fight1, Fight2, Fight3, Fight4;
     // 提供一个战斗列表供玩家选择
     List<StageScriptableObject> FightList = new List<StageScriptableObject>();
+
+    public object ChangeHeroIconByMonsterOfPlayerId { get; private set; }
 
     void Awake()
     {
         target = this;
+    }
+    
+    public IEnumerator ShowMyTeam()
+    {
+        string Pos1MonsterOfPlayerId = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(0);
+        string Pos2MonsterOfPlayerId = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(1);
+        string Pos3MonsterOfPlayerId = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(2);
+
+        yield return TeamEditManager.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId,member1);
+        yield return TeamEditManager.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId,member2);
+        yield return TeamEditManager.ChangeHeroIconByMonsterOfPlayerId(Pos3MonsterOfPlayerId,member3);
     }
     
     public StageScriptableObject RandomStage()
@@ -58,7 +74,6 @@ public class ArenaManager : MonoBehaviour
                 break;
             }
         }
-        
         yield break;
     }
 }

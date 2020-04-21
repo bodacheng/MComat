@@ -42,11 +42,6 @@ namespace mainMenu
                 Debug.Log("获取我方人员错误");
                 yield break;
             }
-            if (_SO.localFight == null)
-            {
-                                Debug.Log("あれ？");
-                yield break;
-            }
             _SO.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getPlayerOne.Current;
             if (_SO.localFight.HeroSets == null)
             {

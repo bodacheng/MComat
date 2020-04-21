@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using mainMenu;
 
-public class AreanaProcess : MainSceneProcess
+public class ArenaProcess : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
+        PreScene.Instance.mainProcessRunner.Run(ArenaManager.target.ShowMyTeam());
         PreScene.Instance.mainProcessRunner.Run(ArenaManager.target.LoadFourChallenge());
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
         yield break;
     }
     
-    public AreanaProcess()
+    public ArenaProcess()
     {
         thisProcessStep = MainSceneStep.Arena;
         EelementsInherit(PreScene.Instance);

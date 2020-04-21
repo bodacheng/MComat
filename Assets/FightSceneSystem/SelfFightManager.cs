@@ -275,7 +275,7 @@ namespace mainMenu
                 yield break;
             }
 
-            string PositionMonsterOfPlayerId = positionLocalCharKey.GetPositionMonsterOfPlayerId(posNum);
+            string PositionMonsterOfPlayerId = positionLocalCharKey.GetPosMonsterOfPlayerId(posNum);
             if (PositionMonsterOfPlayerId != null)
             {
                 GetMonsterOfPlayerDetailModel _one;

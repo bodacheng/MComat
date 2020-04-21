@@ -116,7 +116,7 @@ public class PosKeySet
         return null;
     }
 
-    public string GetPositionMonsterOfPlayerId(int PosNum)
+    public string GetPosMonsterOfPlayerId(int PosNum)
     {
         return GetPosMemInfo(PosNum) != null
             ? GetPosMemInfo(PosNum).monsterOfPlayerId ?? null

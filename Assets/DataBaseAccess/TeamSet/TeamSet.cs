@@ -10,9 +10,10 @@ namespace dataAccess
         public PosKeySet Default = new PosKeySet();
         public PosKeySet Arena3V3 = new PosKeySet();
 
-        private TeamSet()
+        TeamSet()
         {
         }
+        
         public static TeamSet Instance
         {
             get
@@ -76,7 +77,7 @@ namespace dataAccess
             int membercount = 0;
             for (int i = 0; i < 4; i++)
             {
-                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(positionLocalCharKeySet.GetPositionMonsterOfPlayerId(i));
+                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(positionLocalCharKeySet.GetPosMonsterOfPlayerId(i));
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (myfighter != null)
