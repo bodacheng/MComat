@@ -19,7 +19,7 @@ public partial class StagesManager : MonoBehaviour
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
         
         LocalFight target = new LocalFight();
-
+        
         CharDataInfo char1 = new CharDataInfo();
         char1.ResourceID = charRecordIds[Indexes[0]];
         char1._NineAndTwo = BalanceStyle("human",1);
@@ -31,11 +31,11 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char3 = new CharDataInfo();
         char3.ResourceID = charRecordIds[Indexes[2]];
         char3._NineAndTwo = BalanceStyle("human",1);
-
-        target.EnemySets.Set(0, 1, char1);
-        target.EnemySets.Set(0, 2, char2);
-        target.EnemySets.Set(0, 3, char3);
         
+        target.EnemySets.Set(0, 0, char1);
+        target.EnemySets.Set(0, 1, char2);
+        target.EnemySets.Set(0, 2, char3);
+               
         return target;
     }
     

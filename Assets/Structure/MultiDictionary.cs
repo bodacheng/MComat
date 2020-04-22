@@ -19,7 +19,8 @@ public class MultiDictionary<Key1, Key2, Value>
     /// </summary>
     public SerializableSets[] _SerializableSets;
     
-    public void ConvertDictionaryToSerializableArray()
+    // 该函数设置为private，成为Set函数内部处理，为了是简化程序
+    private SerializableSets[] ConvertDictionaryToSerializableArray()
     {
         List<SerializableSets> temp = new List<SerializableSets>();
         foreach (KeyValuePair<Key1,Dictionary<Key2, Value>> keyValuePair in mDict)
@@ -42,9 +43,10 @@ public class MultiDictionary<Key1, Key2, Value>
             temp.Add(serializableSets);
         }
         _SerializableSets = temp.ToArray();
+        return _SerializableSets;
     }
     
-    public void ConvertSerializableArrayToDictionary()
+    public Dictionary<Key1, Dictionary<Key2, Value>> ConvertSerializableArrayToDictionary()
     {
         mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
         unnullkeys = new Dictionary<Key1, List<Key2>>();
@@ -57,6 +59,7 @@ public class MultiDictionary<Key1, Key2, Value>
                 Set(_oneSerializableSets.key1, set._Key2,set._Value);
             }
         }
+        return mDict;
     }
     
     /// <summary>
@@ -90,6 +93,7 @@ public class MultiDictionary<Key1, Key2, Value>
             values.Add(value);
             unnullkeys.Add(key1, new List<Key2>() { key2 });
         }
+        ConvertDictionaryToSerializableArray();
     }
  
     /// <summary>

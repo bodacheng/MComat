@@ -52,7 +52,8 @@ namespace mainMenu
                 StageButton newButton = Instantiate(pretab);
                 void LoadThisStage()
                 {
-                    mainProcessRunner.Run(QuestPreparePage.target.GetReadyForStageASTeam(one,TeamSet.Instance.Default));
+                    QuestPreparePage.target.PreLoad(one, TeamSetGameMode.story);
+                    PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo,true);
                 }
                 newButton.button.onClick.AddListener(LoadThisStage);
                 newButton.ID = one.LocalFightID;

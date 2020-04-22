@@ -11,9 +11,9 @@ public class TeamEditFront : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
-        yield return PreScene.Instance.arcadeTeamManager.INITeamPosButtons();
+        yield return PreScene.Instance.TeamEditor.INITeamPosButtons();
         yield return MonsterBox.DisplayMonsterIcons();
-        PreScene.Instance.arcadeTeamManager.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        PreScene.Instance.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(true);
         yield break;
     }
@@ -23,7 +23,7 @@ public class TeamEditFront : MainSceneProcess
         thisProcessStep = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.Instance);
     }
-
+    
     public override bool CanEnterOtherProcess()
     {
         return true;

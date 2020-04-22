@@ -41,7 +41,7 @@ public class PosKeySet
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
                     CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
-                    multiDictionary.Set(0,(int)PosNumsWithLocalKeys[i].posNum,characterDataInfo);
+                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, characterDataInfo);
                 }
             }
         }
@@ -93,7 +93,7 @@ public class PosKeySet
     
     public PosNumWithLocalKey GetPosMemInfoByLocalID(string localID)
     {
-        if (this.PosNumsWithLocalKeys == null)
+        if (PosNumsWithLocalKeys == null)
             return null;
         foreach (PosNumWithLocalKey _set in this.PosNumsWithLocalKeys)
         {

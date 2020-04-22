@@ -17,56 +17,88 @@ namespace mainMenu
         public Button EnterQuest;
         public RectTransform myTeamShowT;
         public RectTransform enemyTeamShowT;
-
+        public Button EditTeamButton; // 根据进入战斗模式决定是否显示
         public static QuestPreparePage target;
+
+        #region 待加载战斗信息
+        StageScriptableObject ToBeLoad;
+        TeamSetGameMode ToBeLoadMode;
+        #endregion
 
         void Awake()
         {
             target = this;
         }
+        
+        public void PreLoad(StageScriptableObject stageScriptableObject, TeamSetGameMode teamSetGameMode)
+        {
+            ToBeLoad = stageScriptableObject;
+            ToBeLoadMode = teamSetGameMode;
+        }
 
-        // 队伍编辑按钮功能 放在按钮上。
-        public void EditTeamButtonBehaviour()
-        {
-            PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront, true);
-        }
-        
         // 这个函数目前是固定使用“默认队伍配置”
-        public IEnumerator GetReadyForStageASTeam(StageScriptableObject _SO,PosKeySet set)
+        public IEnumerator GetReadyForStageASTeam()
         {
-            QuestName.text = _SO.battleNameJPG;
-            IEnumerator getPlayerOne = TeamSet.Instance.MyTeamByEntryLimit(_SO.EntryMemberNum, set);
-            yield return getPlayerOne;
-            if (getPlayerOne.Current == null)
+            QuestName.text = ToBeLoad.battleNameJPG;
+            PosKeySet set = null;
+            switch(ToBeLoadMode)
             {
-                Debug.Log("获取我方人员错误");
-                yield break;
+                case TeamSetGameMode.arena3V3:
+                    void GoToTeamEdit_Arena()
+                    {
+                        PreScene.Instance.TeamEditor.SwitchTargetTeam(TeamSetGameMode.arena3V3);
+                        PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+                    }
+                    EditTeamButton.gameObject.SetActive(true);
+                    EditTeamButton.onClick.RemoveAllListeners();
+                    EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
+                    set = TeamSet.Instance.Arena3V3;
+                    IEnumerator getArenaTeam = TeamSet.Instance.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
+                    yield return getArenaTeam;
+                    if (getArenaTeam.Current == null)
+                    {
+                        Debug.Log("获取我方人员错误");
+                        yield break;
+                    }
+                    ToBeLoad.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getArenaTeam.Current;
+                    break;
+                case TeamSetGameMode.story:
+                    void GoToTeamEdit_Arcade()
+                    {
+                        PreScene.Instance.TeamEditor.SwitchTargetTeam(TeamSetGameMode.story);
+                        PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+                    }
+                    EditTeamButton.gameObject.SetActive(true);
+                    EditTeamButton.onClick.RemoveAllListeners();
+                    EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
+                    set = TeamSet.Instance.Default;
+                    IEnumerator getDefaultTeamSet = TeamSet.Instance.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
+                    yield return getDefaultTeamSet;
+                    if (getDefaultTeamSet.Current == null)
+                    {
+                        Debug.Log("获取我方人员错误");
+                        yield break;
+                    }
+                    ToBeLoad.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getDefaultTeamSet.Current;
+                    break;
+                case TeamSetGameMode.selfFight:
+                    EditTeamButton.gameObject.SetActive(false);
+                break;
             }
-            _SO.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getPlayerOne.Current;
-            mainProcessRunner.Run(GetReadyToBattle(_SO));
-            yield break;
-        }
-        
-        //这个函数只考虑了队员的加载。。。
-        public IEnumerator GetReadyToBattle(StageScriptableObject stage)
-        {
+            
             target.QuestPreparePageCanvas.gameObject.SetActive(true);
             EnterQuest.gameObject.SetActive(false);
-            LoadingCanvas.target.DarkOff(1f);
-            StageMembersInfoShow(stage);
+            StageMembersInfoShow(ToBeLoad);
             EnterQuest.onClick.RemoveAllListeners();
             void Go()
             {
-                PreScene.Instance.AskIfLoadFight(stage);
+                PreScene.Instance.AskIfLoadFight(ToBeLoad);
             }
             EnterQuest.onClick.AddListener(Go);
             EnterQuest.gameObject.SetActive(true);
-            PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo, true);
-            LoadingCanvas.target.LightUp();
             yield break;
         }
         
-        //
         void StageMembersInfoShow(StageScriptableObject stage)
         {
             foreach (Transform _child in myTeamShowT)

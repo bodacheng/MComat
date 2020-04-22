@@ -3,13 +3,14 @@ using mainMenu;
 
 public class QuestInfo : MainSceneProcess
 {
-    public IEnumerator enterProcess()
+    // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
+    public IEnumerator EnterProcess()
     {
         yield return _modelShower.ShowModel(null);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         QuestPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
-        //_QuestPreparePage.QuestName.text = _QuestPreparePage._Stage.battleNameENG;
+        yield return QuestPreparePage.target.GetReadyForStageASTeam();
         yield break;
     }
     
@@ -18,7 +19,7 @@ public class QuestInfo : MainSceneProcess
         thisProcessStep = MainSceneStep.QuestInfo;
         EelementsInherit(PreScene.Instance);
     }
-
+    
     public override bool CanEnterOtherProcess()
     {
         return true;
@@ -26,14 +27,14 @@ public class QuestInfo : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(enterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
         QuestPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
     }
-
+    
     public override void LocalUpdate()
     {
     }

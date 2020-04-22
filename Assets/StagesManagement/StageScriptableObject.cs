@@ -61,6 +61,17 @@ public class StageScriptableObject : ScriptableObject
         }
         return enterRingLocalIDs;
     }
+    
+    public static StageScriptableObject RandomStage()
+    {
+        StageScriptableObject stage = CreateInstance<StageScriptableObject>();
+        stage.localFight = StagesManager.RandomFight();
+        stage.BattleGroundID = 2;
+        stage.Team1Mode = TeamMode.rotation;
+        stage.Team2Mode = TeamMode.rotation;
+        stage._fightEventType = FightEventType.Arena;
+        return stage;
+    }
 }
 
 // 这个东西是用来规定我每一场战斗结束之后所自动加载的事件

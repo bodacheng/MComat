@@ -5,11 +5,10 @@ using mainMenu;
 using dataAccess;
 using UnityEngine.UI;
 
-// 一个TeamEditManager应该只能应用到一组队伍编辑上。
 public class TeamEditManager : MonoBehaviour
 {
     public Button RemoveButton;
-    public HeroIcon team1back, team1front, team1left, team1right; // 可能允许部分为null。。。来对应不同人数制的队伍编辑
+    public HeroIcon team1front, team1left, team1right; // 可能允许部分为null。。。来对应不同人数制的队伍编辑
 
     [Space(7)]
     [Header("对象队伍")]
@@ -19,21 +18,16 @@ public class TeamEditManager : MonoBehaviour
     [Header("选中框")]
     public GameObject selectedFrame;
     
-    public static int focusingPosNum = -1;
+    static int focusingPosNum = -1;
     readonly IDictionary<int, HeroIcon> teamButtonDic = new Dictionary<int, HeroIcon>();
-
     PosKeySet target;
-
+    
     void Awake()
     {
         SwitchTargetTeam(TeamSetGameMode);
     }
-    
-    public void SwitchToDefaultTeam()
-    {
-        SwitchTargetTeam(TeamSetGameMode.story);
-    }
-    
+        
+    // 决定本模块将处理哪一组玩家队伍的编辑。竞技场还是arcade
     public void SwitchTargetTeam(TeamSetGameMode mode)
     {
         TeamSetGameMode = mode;
@@ -96,20 +90,20 @@ public class TeamEditManager : MonoBehaviour
     public IEnumerator INITeamPosButtons()
     {
         teamButtonDic.Clear();
-        if (team1back == null || team1left == null || team1front == null || team1right == null) 
+        if (team1left == null || team1front == null || team1right == null) 
         {
             Debug.Log("队伍编辑器按钮没适配？？");
         }
-        teamButtonDic.Add(0, team1back);
+
+        teamButtonDic.Add(0, team1front);
         teamButtonDic.Add(1, team1left);
-        teamButtonDic.Add(2, team1front);
-        teamButtonDic.Add(3, team1right);
+        teamButtonDic.Add(2, team1right);
         
         Debug.Log("开始适配队伍编辑器各个位置初始头像");
+        
         yield return ChangeIconOnPos(0);
         yield return ChangeIconOnPos(1);
         yield return ChangeIconOnPos(2);
-        yield return ChangeIconOnPos(3);
         
         RemoveButton.onClick.RemoveAllListeners();
         void Remove()
@@ -121,21 +115,21 @@ public class TeamEditManager : MonoBehaviour
             PreScene.Instance.mainProcessRunner.Run(RemoveSelected());
         }
         RemoveButton.onClick.AddListener(Remove);
-        
-        team1back.iconButton.onClick.RemoveAllListeners();
-        void pos1B()
+
+        team1front.iconButton.onClick.RemoveAllListeners();
+        void pos1F()
         {
-            IEnumerator setPosB()
+            IEnumerator setPosF()
             {
                 focusingPosNum = 0;
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(target.GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
-                HeroIcon.Seletedfeature(team1back, selectedFrame,200f);
+                HeroIcon.Seletedfeature(team1front, selectedFrame,200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
-            PreScene.Instance.mainProcessRunner.Run(setPosB());
+            PreScene.Instance.mainProcessRunner.Run(setPosF());
         }
-        team1back.iconButton.onClick.AddListener(pos1B);
-
+        team1front.iconButton.onClick.AddListener(pos1F);
+        
         team1left.iconButton.onClick.RemoveAllListeners();
         void pos1L()
         {
@@ -149,27 +143,13 @@ public class TeamEditManager : MonoBehaviour
             PreScene.Instance.mainProcessRunner.Run(setPosL());
         }
         team1left.iconButton.onClick.AddListener(pos1L);
-
-        team1front.iconButton.onClick.RemoveAllListeners();
-        void pos1F()
-        {
-            IEnumerator setPosF()
-            {
-                focusingPosNum = 2;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(target.GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
-                HeroIcon.Seletedfeature(team1front, selectedFrame,200f);
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-            }
-            PreScene.Instance.mainProcessRunner.Run(setPosF());
-        }
-        team1front.iconButton.onClick.AddListener(pos1F);
         
         team1right.iconButton.onClick.RemoveAllListeners();
         void pos1R()
         {
             IEnumerator setPosR()
             {
-                focusingPosNum = 3;
+                focusingPosNum = 2;
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(target.GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1right, selectedFrame,200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();

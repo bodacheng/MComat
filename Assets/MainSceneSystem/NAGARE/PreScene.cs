@@ -1,13 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using System.Linq;
 using UnityEngine.SceneManagement;
 using dataAccess;
-using Api.Dto.Model;
-using Skill;
 
 namespace mainMenu
 {
@@ -30,8 +25,8 @@ namespace mainMenu
         public Text accountIntelliCoin;
         
         [Space(11)]
-        [Header("modelShower")]
-        public TeamEditManager arcadeTeamManager;
+        [Header("TeamEdit")]
+        public TeamEditManager TeamEditor;
         
         [Space(11)]
         [Header("modelShower")]

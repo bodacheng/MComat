@@ -60,8 +60,6 @@ public partial class StagesManager : MonoBehaviour
         {
             return;
         }
-
-        localFight.EnemySets.ConvertDictionaryToSerializableArray();
         MultiDictionary<int, int, CharDataInfo> UnNullDic = new MultiDictionary<int, int, CharDataInfo>();
         foreach (MultiDictionary<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
         {
@@ -74,7 +72,7 @@ public partial class StagesManager : MonoBehaviour
                 }
             }
         }
-        UnNullDic.ConvertDictionaryToSerializableArray();
+
         try
         {
             XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDictionary<int, int, CharDataInfo>.SerializableSets[]));

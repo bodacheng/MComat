@@ -10,10 +10,10 @@ using System.IO;
 // 和一个比较直观的关卡编辑器进行联动什么的。这样的话尤其像脚本等级这种东西，可能需要在这个类里需要一个脚本等级的值，然后由一些别的环节负责把等级转成
 // 相应经验值，因为我们现在AI信息里对脚本等级这个东西的设置比较隐晦
 // 另外这个。。。锁死了游戏只有这样一种模式。如果要搞一些敌人会不停出现的模式的话这个类就需要大改。
-[System.Serializable]
+[Serializable]
 public class LocalFight
 {
-    [System.NonSerialized]
+    [NonSerialized]
     public MultiDictionary<int, int, CharDataInfo> HeroSets = new MultiDictionary<int, int, CharDataInfo>();
     public MultiDictionary<int, int, CharDataInfo> EnemySets = new MultiDictionary<int, int, CharDataInfo>();
     

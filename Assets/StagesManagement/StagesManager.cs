@@ -43,7 +43,7 @@ public partial class StagesManager : MonoBehaviour
     {
         if (localFight == null || localFight.EnemySets == null)
             return;
-        localFight.EnemySets.ConvertDictionaryToSerializableArray();       
+               
         MultiDictionary<int, int, CharDataInfo> UnNullDic = new MultiDictionary<int, int, CharDataInfo>();
         foreach (MultiDictionary<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
         {
@@ -56,7 +56,7 @@ public partial class StagesManager : MonoBehaviour
                 }
             }
         }
-        UnNullDic.ConvertDictionaryToSerializableArray();
+        
         try
         {
             string json = JsonConvert.SerializeObject(UnNullDic._SerializableSets);

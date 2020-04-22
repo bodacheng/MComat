@@ -142,8 +142,8 @@ namespace mainMenu
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
-            yield return QuestPreparePage.target.GetReadyToBattle(stage);
-            yield break;
+            QuestPreparePage.target.PreLoad(stage, TeamSetGameMode.selfFight);
+            PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo, true);
         }
         
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行

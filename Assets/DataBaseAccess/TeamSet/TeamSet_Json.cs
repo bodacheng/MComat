@@ -31,17 +31,13 @@ namespace dataAccess
                     {
                         posNumWithLocalKeys.Add(new PosNumWithLocalKey(0,null));
                     }
-                    if (!shouldhave.Contains(2))
-                    {
-                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(2,null));
-                    }
                     if (!shouldhave.Contains(1))
                     {
                         posNumWithLocalKeys.Add(new PosNumWithLocalKey(1,null));
                     }
-                    if (!shouldhave.Contains(3))
+                    if (!shouldhave.Contains(2))
                     {
-                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(3,null));
+                        posNumWithLocalKeys.Add(new PosNumWithLocalKey(2,null));
                     }
                     TeamSet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray(); 
                 }catch (Exception e)
@@ -67,11 +63,11 @@ namespace dataAccess
                 case TeamSetGameMode.story:
                     string json = JsonConvert.SerializeObject(Default);
                     LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "TeamSet.json", json);
-                    break;
+                break;
                 case TeamSetGameMode.arena3V3:
                     string json1 = JsonConvert.SerializeObject(Arena3V3);
                     LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", json1);
-                    break;
+                break;
             }
             yield break;
         }
