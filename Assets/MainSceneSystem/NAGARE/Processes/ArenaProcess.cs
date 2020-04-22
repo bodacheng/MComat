@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using mainMenu;
+using UnityEngine;
 
 public class ArenaProcess : MainSceneProcess
 {

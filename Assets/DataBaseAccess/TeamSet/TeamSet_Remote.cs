@@ -11,7 +11,7 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public IEnumerator LoadTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
+        public static IEnumerator LoadTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
         {
             GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm
             {
@@ -71,7 +71,7 @@ namespace dataAccess
             yield break;
         }
         
-        public IEnumerator SaveTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
+        public static IEnumerator SaveTeamSetsRemote(TeamSetGameMode teamSetGameMode, ApiLanguage apiLanguage)
         {
             SetMonsterTeamOfPlayerForm form = new SetMonsterTeamOfPlayerForm
             {
@@ -80,11 +80,11 @@ namespace dataAccess
             switch (teamSetGameMode)
             {
                 case TeamSetGameMode.story:
-                    form.monsterTeamOfPlayerId = this.Default.recordId;
-                    string B = this.Default.GetPosMonsterOfPlayerId(0);
-                    string L = this.Default.GetPosMonsterOfPlayerId(1);
-                    string F = this.Default.GetPosMonsterOfPlayerId(2);
-                    string R = this.Default.GetPosMonsterOfPlayerId(3);
+                    form.monsterTeamOfPlayerId = Default.recordId;
+                    string B = Default.GetPosMonsterOfPlayerId(0);
+                    string L = Default.GetPosMonsterOfPlayerId(1);
+                    string F = Default.GetPosMonsterOfPlayerId(2);
+                    string R = Default.GetPosMonsterOfPlayerId(3);
 
                     form.bMonsterOfPlayerId = (B != null && B.Length == 20) ? B : null;
                     form.lMonsterOfPlayerId = (L != null && L.Length == 20) ? L : null;
@@ -92,11 +92,11 @@ namespace dataAccess
                     form.rMonsterOfPlayerId = (R != null && R.Length == 20) ? R : null;
                     break;
                 case TeamSetGameMode.arena3V3:
-                    form.monsterTeamOfPlayerId = this.Arena3V3.recordId;
-                    form.bMonsterOfPlayerId = this.Arena3V3.GetPosMonsterOfPlayerId(0);
-                    form.lMonsterOfPlayerId = this.Arena3V3.GetPosMonsterOfPlayerId(1);
-                    form.fMonsterOfPlayerId = this.Arena3V3.GetPosMonsterOfPlayerId(2);
-                    form.rMonsterOfPlayerId = this.Arena3V3.GetPosMonsterOfPlayerId(3);
+                    form.monsterTeamOfPlayerId = Arena3V3.recordId;
+                    form.bMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(0);
+                    form.lMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(1);
+                    form.fMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(2);
+                    form.rMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(3);
                     break;
             }
             yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel> , SetMonsterTeamOfPlayerForm> 

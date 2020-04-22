@@ -9,10 +9,6 @@ public class TeamEditManager : MonoBehaviour
 {
     public Button RemoveButton;
     public HeroIcon team1front, team1left, team1right; // 可能允许部分为null。。。来对应不同人数制的队伍编辑
-
-    [Space(7)]
-    [Header("对象队伍")]
-    public TeamSetGameMode TeamSetGameMode = TeamSetGameMode.story;
     
     [Space(7)]
     [Header("选中框")]
@@ -20,28 +16,12 @@ public class TeamEditManager : MonoBehaviour
     
     static int focusingPosNum = -1;
     readonly IDictionary<int, HeroIcon> teamButtonDic = new Dictionary<int, HeroIcon>();
-    PosKeySet target;
     
     void Awake()
     {
-        SwitchTargetTeam(TeamSetGameMode);
+        TeamSet.SwitchTargetTeam(TeamSet.targetTeamMode);
     }
-        
-    // 决定本模块将处理哪一组玩家队伍的编辑。竞技场还是arcade
-    public void SwitchTargetTeam(TeamSetGameMode mode)
-    {
-        TeamSetGameMode = mode;
-        switch(TeamSetGameMode)
-        {
-            case TeamSetGameMode.story:
-                target = TeamSet.Instance.Default;
-                break;
-            case TeamSetGameMode.arena3V3:
-                target = TeamSet.Instance.Arena3V3;
-                break;
-        }
-    }
-
+    
     #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
     public void AddHeroIconFeaturesToMonsterBox()
     {
@@ -70,19 +50,18 @@ public class TeamEditManager : MonoBehaviour
     // 实际修改队伍编辑存档
     public IEnumerator ChangeTeamPos(string monsterlocalID,int targetPos)
     {
-        List<PosNumWithLocalKey> returns = target.SetPosMemInfoByLocalIDConservationMode(targetPos, monsterlocalID);
+        List<PosNumWithLocalKey> returns = TeamSet.GetTargetSet().SetPosMemInfoByLocalIDConservationMode(targetPos, monsterlocalID);
         for (int i = 0; i < returns.Count;i++)
         {
             yield return ChangeIconOnPos(returns[i].posNum);
         }
-        yield return TeamSet.Instance.SaveTeamSet(TeamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
     }
         
     // 纯渲染函数
     IEnumerator ChangeIconOnPos(int posNum)
     {
         HeroIcon tar = teamButtonDic[posNum];
-        string PosMonsterOfPlayerId = target.GetPosMonsterOfPlayerId(posNum);
+        string PosMonsterOfPlayerId = TeamSet.GetTargetSet().GetPosMonsterOfPlayerId(posNum);
         yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(PosMonsterOfPlayerId, tar);
     }
 
@@ -122,8 +101,8 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosF()
             {
                 focusingPosNum = 0;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(target.GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
-                HeroIcon.Seletedfeature(team1front, selectedFrame,200f);
+                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
+                HeroIcon.Seletedfeature(team1front, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
             PreScene.Instance.mainProcessRunner.Run(setPosF());
@@ -136,7 +115,7 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosL()
             {
                 focusingPosNum = 1;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(target.GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
+                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1left, selectedFrame,200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
@@ -150,7 +129,7 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator setPosR()
             {
                 focusingPosNum = 2;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(target.GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
+                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetPosMonsterOfPlayerId(focusingPosNum));//确立focusing角色
                 HeroIcon.Seletedfeature(team1right, selectedFrame,200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }

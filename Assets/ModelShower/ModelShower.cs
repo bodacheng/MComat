@@ -207,9 +207,9 @@ public class ModelShower : MonoBehaviour
     // 那也就是说这里的refresh_from_database，false的话其实才是最新情报，true的话反而可能是旧情报
     public IEnumerator DisplayMy4V4Team()
     {
-        yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
+        yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
         List<GetMonsterOfPlayerDetailModel> onsetLocals = new List<GetMonsterOfPlayerDetailModel>();
-        PosKeySet _positionLocalCharKeySet4V4Mode = TeamSet.Instance.Default;
+        PosKeySet _positionLocalCharKeySet4V4Mode = TeamSet.Default;
         MyModelPool.Instance.SetAllMyCharactersModelActive(false);
         GetMonsterOfPlayerDetailModel _one;
 

@@ -10,7 +10,7 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public IEnumerator LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
+        public static IEnumerator LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
         {
             string wholepath = Application.persistentDataPath + "/" + jsonFilename;
             PosKeySet TeamSet;
@@ -56,7 +56,7 @@ namespace dataAccess
             }
         }
 
-        public IEnumerator OverrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
+        public static IEnumerator OverrideTeamSetInfoOnJsonFile(TeamSetGameMode teamSetGameMode)
         {
             switch (teamSetGameMode)
             {
@@ -65,8 +65,10 @@ namespace dataAccess
                     LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "TeamSet.json", json);
                 break;
                 case TeamSetGameMode.arena3V3:
+                    Debug.Log("at pos 0 :"+ Arena3V3.PosNumsWithLocalKeys[0].monsterOfPlayerId);
                     string json1 = JsonConvert.SerializeObject(Arena3V3);
                     LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", json1);
+                    Debug.Log("saved?");
                 break;
             }
             yield break;

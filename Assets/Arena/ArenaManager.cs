@@ -19,9 +19,9 @@ public class ArenaManager : MonoBehaviour
     // myTeam 机能加载
     public IEnumerator ShowMyTeam()
     {
-        string Pos1MonsterOfPlayerId = TeamSet.Instance.Arena3V3.GetPosMonsterOfPlayerId(0);
-        string Pos2MonsterOfPlayerId = TeamSet.Instance.Arena3V3.GetPosMonsterOfPlayerId(1);
-        string Pos3MonsterOfPlayerId = TeamSet.Instance.Arena3V3.GetPosMonsterOfPlayerId(2);
+        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetPosMonsterOfPlayerId(0);
+        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetPosMonsterOfPlayerId(1);
+        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetPosMonsterOfPlayerId(2);
         
         yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId,myTeam.member1);
         yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId,myTeam.member2);
@@ -29,7 +29,7 @@ public class ArenaManager : MonoBehaviour
         
         void GoToTeamEdit()
         {
-            PreScene.Instance.TeamEditor.SwitchTargetTeam(TeamSetGameMode.arena3V3);
+            TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
             PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
         }
         myTeam.BigButton.onClick.RemoveAllListeners();

@@ -159,7 +159,8 @@ namespace mainMenu
                     IEnumerator localMyChractersProcess = AccountCharsSet.Instance.LoadMyOwnedAccountCharacterInfoList();
                     yield return (localMyChractersProcess);
                     //上面这些都缺response判断
-                    yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
+                    yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
+                    yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
                     yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;

@@ -16,16 +16,7 @@ public class PosKeySet
     }
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new PosNumWithLocalKey[10] { new PosNumWithLocalKey(0, null), 
-                                                            new PosNumWithLocalKey(1, null), 
-                                                            new PosNumWithLocalKey(2, null),
-                                                            new PosNumWithLocalKey(3, null),
-                                                            new PosNumWithLocalKey(4, null),
-                                                            new PosNumWithLocalKey(5, null),
-                                                            new PosNumWithLocalKey(6, null),
-                                                            new PosNumWithLocalKey(7, null),
-                                                            new PosNumWithLocalKey(8, null),
-                                                            new PosNumWithLocalKey(9, null) };
+        PosNumsWithLocalKeys = new PosNumWithLocalKey[3] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
     }
     
     public IEnumerator LoadTeamBasedOnAccountInfo()
@@ -54,6 +45,7 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].posNum == posNum)
             {
+                Debug.Log(this + ":" + monsterofplayerid);
                 PosNumsWithLocalKeys[i].monsterOfPlayerId = monsterofplayerid;
                 return;
             }
@@ -66,7 +58,7 @@ public class PosKeySet
         if (targetPos == -1)
             return new List<PosNumWithLocalKey>();
         bool inTeamMemberChange = false;
-                
+        
         foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
         {
             if (_Set.monsterOfPlayerId == monsterlocalID && _Set.monsterOfPlayerId != null)

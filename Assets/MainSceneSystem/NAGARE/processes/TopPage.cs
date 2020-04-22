@@ -29,11 +29,11 @@ public class TopPage : MainSceneProcess
         _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
 
-        yield return TeamSet.Instance.LoadTeamSet(TeamSetGameMode.story);
+        yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
         
-        if (TeamSet.Instance.Default != null)
+        if (TeamSet.Default != null)
         {
-            string focusLocalid = TeamSet.Instance.Default.GetPosMonsterOfPlayerId(0);
+            string focusLocalid = TeamSet.Default.GetPosMonsterOfPlayerId(0);
             if (focusLocalid != null)
             {
                  yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色

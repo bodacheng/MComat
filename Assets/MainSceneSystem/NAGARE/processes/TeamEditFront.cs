@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using mainMenu;
+using dataAccess;
 
 public class TeamEditFront : MainSceneProcess
 {
@@ -10,7 +11,8 @@ public class TeamEditFront : MainSceneProcess
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
-        _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
+        _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;        
+        yield return TeamSet.LoadTeamSet(TeamSet.targetTeamMode);
         yield return PreScene.Instance.TeamEditor.INITeamPosButtons();
         yield return MonsterBox.DisplayMonsterIcons();
         PreScene.Instance.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
@@ -38,9 +40,10 @@ public class TeamEditFront : MainSceneProcess
     {
         PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+        mainProcessRunner.Run(TeamSet.SaveTeamSet(TeamSet.targetTeamMode));// 退出队伍编辑画面即保存
     }
     
-    Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)

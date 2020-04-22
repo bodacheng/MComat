@@ -46,14 +46,14 @@ namespace mainMenu
                 case TeamSetGameMode.arena3V3:
                     void GoToTeamEdit_Arena()
                     {
-                        PreScene.Instance.TeamEditor.SwitchTargetTeam(TeamSetGameMode.arena3V3);
+                        TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
                         PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
                     }
                     EditTeamButton.gameObject.SetActive(true);
                     EditTeamButton.onClick.RemoveAllListeners();
                     EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
-                    set = TeamSet.Instance.Arena3V3;
-                    IEnumerator getArenaTeam = TeamSet.Instance.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
+                    set = TeamSet.Arena3V3;
+                    IEnumerator getArenaTeam = TeamSet.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
                     yield return getArenaTeam;
                     if (getArenaTeam.Current == null)
                     {
@@ -65,14 +65,14 @@ namespace mainMenu
                 case TeamSetGameMode.story:
                     void GoToTeamEdit_Arcade()
                     {
-                        PreScene.Instance.TeamEditor.SwitchTargetTeam(TeamSetGameMode.story);
+                        TeamSet.SwitchTargetTeam(TeamSetGameMode.story);
                         PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
                     }
                     EditTeamButton.gameObject.SetActive(true);
                     EditTeamButton.onClick.RemoveAllListeners();
                     EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
-                    set = TeamSet.Instance.Default;
-                    IEnumerator getDefaultTeamSet = TeamSet.Instance.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
+                    set = TeamSet.Default;
+                    IEnumerator getDefaultTeamSet = TeamSet.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
                     yield return getDefaultTeamSet;
                     if (getDefaultTeamSet.Current == null)
                     {
