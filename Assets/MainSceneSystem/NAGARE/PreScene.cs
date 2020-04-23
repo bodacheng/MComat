@@ -14,9 +14,6 @@ namespace mainMenu
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
         
-        [Header("ReturnButtonManager")]
-        public ReturnButtonManager _ReturnButtonManager;
-
         [Space(11)]
         [Header("Essentials")]
         public CameraManager _CameraManager;
@@ -161,17 +158,33 @@ namespace mainMenu
                     yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
                     yield return loadMyStonesProcess;
-                    trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
                     break;
                 case PlayerAccountProgressStep.justCreated:
-                    trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
                     break;
                 case PlayerAccountProgressStep.Tutorial:
-                    trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
                     break;
             }
             LoadingCanvas.target.LightUp();
-            MainMenuCanvas.gameObject.SetActive(true);
+            
+            if (ReturnButtonManager.returnMissionList.Count > 0)
+            {
+                ReturnButtonManager.AddFeatureToReturnButton();
+                ReturnButtonManager.POP(); //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
+            }else{
+                // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
+                switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
+                {
+                    case PlayerAccountProgressStep.Freedom:
+                        trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
+                        break;
+                    case PlayerAccountProgressStep.justCreated:
+                        trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
+                        break;
+                    case PlayerAccountProgressStep.Tutorial:
+                        trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
+                        break;
+                }
+            }            
         }
 
         void Update()
@@ -209,48 +222,47 @@ namespace mainMenu
                 {
                     trySwitchToStep(returnToStep, false);
                 }
-                _ReturnButtonManager.PUSH(returnTOCurrent);
+                ReturnButtonManager.PUSH(returnTOCurrent);
             }
-
             ProcessesRunner.Instance.ChangeProcess(next_step);
         }
         
-        void OnGUI()
-        {
-            //if (AccountSet.Instance._playerinfoReferenceMode == playerinfoReferenceMode.localTestSaveData)
-            //{
-            //    if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
-            //    {
-            //        mainProcessRunner.Run(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
-            //    }
-            //    if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
-            //    {
-            //        if (Directory.Exists(Application.persistentDataPath) && File.Exists(Application.persistentDataPath + "/MySkillStones.json"))
-            //        {
-            //            File.Delete(Application.persistentDataPath + "/MySkillStones.json");
-            //        }
-            //        IEnumerator GetAllStones()
-            //        {
-            //            yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
-            //            int i = 1;
-            //            foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
-            //            {
-            //                Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-            //                var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
-            //                {
-            //                    skillStoneOfPlayerId = string.Format("{0:D20}", i),
-            //                    skillId = _pair.Value.RECORD_ID,
-            //                    level = 1.ToString()
-            //                };
-            //                yield return SkillStonesBox.GenerateOneStone(skillStoneOfPlayerInfoModel);
-            //                i++;
-            //            }
-            //            MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
-            //            yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
-            //        }
-            //        mainProcessRunner.Run(GetAllStones());
-            //    }
-            //}
-        }
+        //void OnGUI()
+        //{
+        //    if (AccountSet.Instance._playerinfoReferenceMode == playerinfoReferenceMode.localTestSaveData)
+        //    {
+        //        if (GUI.Button(new Rect(0, 0, 100, 50), "All Characters"))
+        //        {
+        //            mainProcessRunner.Run(AccountCharsSet.Instance.LocalSaveDataGetAllCharacters());
+        //        }
+        //        if (GUI.Button(new Rect(0, 50, 100, 50), "All stones"))
+        //        {
+        //            if (Directory.Exists(Application.persistentDataPath) && File.Exists(Application.persistentDataPath + "/MySkillStones.json"))
+        //            {
+        //                File.Delete(Application.persistentDataPath + "/MySkillStones.json");
+        //            }
+        //            IEnumerator GetAllStones()
+        //            {
+        //                yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
+        //                int i = 1;
+        //                foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
+        //                {
+        //                    Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
+        //                    var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
+        //                    {
+        //                        skillStoneOfPlayerId = string.Format("{0:D20}", i),
+        //                        skillId = _pair.Value.RECORD_ID,
+        //                        level = 1.ToString()
+        //                    };
+        //                    yield return SkillStonesBox.GenerateOneStone(skillStoneOfPlayerInfoModel);
+        //                    i++;
+        //                }
+        //                MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
+        //                yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
+        //            }
+        //            mainProcessRunner.Run(GetAllStones());
+        //        }
+        //    }
+        //}
     }
 }

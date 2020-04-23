@@ -9,7 +9,6 @@ namespace mainMenu
         public SingleThreadProcesser mainProcessRunner;
         public ModelShower _modelShower;
         public CharsManager _CharsManager;
-        public ReturnButtonManager _ReturnButtonManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
         public ProcessesRunner subProcessesRunner;
@@ -18,12 +17,11 @@ namespace mainMenu
         {
             _CharsManager = _preparingScene._CharSetManager;
             _modelShower = _preparingScene._modelShower;
-            _ReturnButtonManager = _preparingScene._ReturnButtonManager;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
         }
-
+        
         public virtual void ProcessEnter()
         {
         }

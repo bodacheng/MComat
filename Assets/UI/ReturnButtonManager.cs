@@ -8,29 +8,44 @@ namespace mainMenu
     public class ReturnButtonManager : MonoBehaviour
     {
         public Button ReturnButton;
-        UnityEvent unityEvent = new UnityEvent();
-        public List<UnityAction> returnMissionList = new List<UnityEngine.Events.UnityAction>();
-
-        public void PUSH(UnityAction onemission)
+        static Button ToUseReturnButton;
+        static UnityEvent unityEvent = new UnityEvent();
+        public static readonly List<UnityAction> returnMissionList = new List<UnityAction>();
+        
+        void Awake()
         {
-            returnMissionList.Add(onemission);
-            Debug.Log("返回菜单深度" + returnMissionList.Count);
-            UnityAction onemissionAndPop = () =>
+            ToUseReturnButton = ReturnButton;
+        }
+        
+        public static void POP()
+        {
+            if (returnMissionList.Count == 0)
+                return;
+            unityEvent.RemoveAllListeners();
+            unityEvent.AddListener(returnMissionList[returnMissionList.Count - 1]);
+            unityEvent.Invoke();
+            returnMissionList.RemoveAt(returnMissionList.Count - 1);
+            if (returnMissionList.Count == 0)
             {
-                unityEvent.RemoveAllListeners();
-                unityEvent.AddListener(returnMissionList[returnMissionList.Count - 1]);
-                unityEvent.Invoke();
-                returnMissionList.RemoveAt(returnMissionList.Count - 1);
-                if (returnMissionList.Count == 0)
-                    ReturnButton.gameObject.SetActive(false);
-            };
-
-            ReturnButton.onClick.RemoveAllListeners();
-            ReturnButton.onClick.AddListener(onemissionAndPop);
-
-            ReturnButton.gameObject.SetActive(true);
+                ToUseReturnButton.gameObject.SetActive(false);
+            }else{
+                ToUseReturnButton.gameObject.SetActive(true);
+            }
+        }
+        
+        public static void AddFeatureToReturnButton()
+        {
+            ToUseReturnButton.onClick.RemoveAllListeners();
+            ToUseReturnButton.onClick.AddListener(POP);
+            ToUseReturnButton.gameObject.SetActive(true);
         }
 
+        public static void PUSH(UnityAction onemission)
+        {
+            returnMissionList.Add(onemission);
+            AddFeatureToReturnButton();
+        }
+        
         public void Clear()
         {
             ReturnButton.gameObject.SetActive(false);
