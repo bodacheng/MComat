@@ -19,8 +19,7 @@ namespace dataAccess
             List<SkillStoneOfPlayerInfoModel> mySkillStones = ReturnMySkillStonesViaLocalFile().ToList();
             for (int i = 0; i < mySkillStones.Count;i++)
             {
-                yield return MySkillStonesReader.Instance.GenerateOneStoneInfo(mySkillStones[i]);
-                yield return SkillStonesBox.GenerateOneStoneModel(mySkillStones[i].skillStoneOfPlayerId);
+                yield return Instance.GenerateOneStoneInfo(mySkillStones[i]);
             }
             yield break;
         }

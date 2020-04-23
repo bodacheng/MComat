@@ -22,7 +22,15 @@ namespace mainMenu
         [Header("石头滚动视窗")]
         public ScrollRect stoneviewScrollRect;
         
-        public IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        public static IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        
+        public static void PreventCellsFromDestroy()
+        {
+            foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
+            {
+                keyValuePair.Value.transform.SetParent( ResourceKeeper.dontDestroyOnLoadParent);
+            }
+        }
         
         public static void SeletedRender(DragAndDropCell cell)
         {
@@ -60,12 +68,15 @@ namespace mainMenu
                     cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = DragAndDropCell.CellPhase.SkillStoneBoxCell;
                     cell._SkillStoneSlot = null;//技能石box里用不到这个
-                    cell.RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
-                    cell.gameObject.SetActive(true);
-                    cell.transform.SetParent(BoxT);
-                    cell.transform.localScale = Vector3.one;
-                    CellsDictionary.Add(i, cell);                    
+                    CellsDictionary.Add(i, cell);
                 }
+                
+                CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
+                CellsDictionary[i].gameObject.SetActive(true);
+                CellsDictionary[i].transform.SetParent(BoxT);
+                CellsDictionary[i].transform.localPosition = Vector3.zero;
+                CellsDictionary[i].transform.localScale = Vector3.one;
+                                
                 if (mode == 1)
                 {
                     CellButtonBeheviour_STStoneShow(CellsDictionary[i]);

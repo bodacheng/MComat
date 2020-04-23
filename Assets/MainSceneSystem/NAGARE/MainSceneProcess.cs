@@ -4,7 +4,7 @@ namespace mainMenu
     public abstract class MainSceneProcess
     {
         public MainSceneStep thisProcessStep;
-        public MainSceneStep nextProcessStep = MainSceneStep.none;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
+        public MainSceneStep nextProcessStep = MainSceneStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
         public SingleThreadProcesser mainProcessRunner;
         public ModelShower _modelShower;
@@ -44,9 +44,9 @@ namespace mainMenu
 
     public enum MainSceneStep
     {
-        none = 0,
-        setting = -1,
-        frontPage = 1,
+        None = 0,
+        Setting = -1,
+        FrontPage = 1,
         SelfFightFront = 4,
         TeamEditFront = 2,
         MemberDetail = 5,

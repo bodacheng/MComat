@@ -483,6 +483,7 @@
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSimpleAnimation.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSkipCutscene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
+    <Compile Include="Assets\ResourceKeeper.cs" />
     <Compile Include="Assets\ResourceLoading\AnimationResourceLoader.cs" />
     <Compile Include="Assets\ResourceLoading\AudioResourceLoading.cs" />
     <Compile Include="Assets\ResourceLoading\CachManager.cs" />

@@ -11,34 +11,26 @@ public class HeroIcon : MonoBehaviour {
     public Image Icon;
     public Image frame;
     public Image cooldownCurtain;
-
+    
     public GetMonsterOfPlayerDetailModel _MonsterOfPlayerDetailModel;
-    public CharConfig _CharacterResourceInfo;
+    public CharConfig _CharConfig;
 
-    static IDictionary<Zokusei, Sprite> frames;
-    public static void IniFrames()
+    static IDictionary<Zokusei, Sprite> frames = new Dictionary<Zokusei, Sprite>();
+    
+    public static void INIFrames()
     {
-        frames = new Dictionary<Zokusei, Sprite>();
-        
-        Sprite frameobject_dark = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
-        Sprite frameobject_blue = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
-        Sprite frameobject_red = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
-        Sprite frameobject_light = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
-        Sprite frameobject_green = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
-        Sprite frameobject_null = Resources.Load("essentialUIElements/iconframes/4") as Sprite;
-
-        if (frameobject_blue)
-            frames.Add(Zokusei.blueMagic,frameobject_blue);
-        if (frameobject_red)
-            frames.Add(Zokusei.redMagic,frameobject_red);
-        if (frameobject_green)
-            frames.Add(Zokusei.greenMagic,frameobject_green);
-        if (frameobject_light)
-            frames.Add(Zokusei.lightMagic,frameobject_light);
-        if (frameobject_dark)
-            frames.Add(Zokusei.darkMagic,frameobject_dark);
-        if (frameobject_null)
-            frames.Add(Zokusei.Null,frameobject_null);
+        if (!frames.ContainsKey(Zokusei.blueMagic))
+            frames.Add(Zokusei.blueMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+        if (!frames.ContainsKey(Zokusei.redMagic))
+            frames.Add(Zokusei.redMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+        if (!frames.ContainsKey(Zokusei.greenMagic))
+            frames.Add(Zokusei.greenMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+        if (!frames.ContainsKey(Zokusei.lightMagic))
+            frames.Add(Zokusei.lightMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+        if (!frames.ContainsKey(Zokusei.darkMagic))
+            frames.Add(Zokusei.darkMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+        if (!frames.ContainsKey(Zokusei.Null))
+            frames.Add(Zokusei.Null, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
     }
     
     public void CooldownCurtainUpdate(float proportion)

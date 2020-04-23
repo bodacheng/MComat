@@ -22,21 +22,15 @@ public class ModelShower : MonoBehaviour
     IDictionary<int, Transform> myShowCharPositionDic = new Dictionary<int, Transform>();
     PinchZoom pinchZoom = new PinchZoom();
     GameObject showingChar;
-    
-    public IEnumerator StartUpProcess()
+        
+    void Awake()
     {
-        Dictionary<int, Transform> dictionary = new Dictionary<int, Transform>();
-        myShowCharPositionDic = dictionary;
+        pinchZoom.camera = _CameraManager.GetComponent<Camera>();
+        
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(0, Member0StandPoint));
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(1, Member1StandPoint));
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(2, Member2StandPoint));
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(3, Member3StandPoint));
-        yield break;
-    }
-    
-    void Awake()
-    {
-        pinchZoom.camera = _CameraManager.GetComponent<Camera>();
     }
 
     public IEnumerator ShowModel(string localID)

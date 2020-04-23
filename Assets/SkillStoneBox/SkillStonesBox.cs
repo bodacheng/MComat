@@ -79,8 +79,8 @@ namespace mainMenu
         {
             DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
-            Debug.Log("技能石盒子容量为"+stoneboxsize);
-            GenerateCells(stoneboxsize,1);
+            Debug.Log("技能石盒子容量为" + stoneboxsize);
+            GenerateCells(stoneboxsize, 1);
             yield break;
         }
         
@@ -168,7 +168,7 @@ namespace mainMenu
             string targetType = types.options[types.value].text.Clone() as string;
             TheNineSlot.Instance.mainProcessRunner.Run(EXTabsFeatureRefresh(true));
         }
-
+        
         public IEnumerator ArrangeSkillStonesToBox()
         {
             yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.Instance.GetUsingStonesId());
@@ -197,8 +197,7 @@ namespace mainMenu
                 Debug.Log("错误：待显示技能石数量超过了盒子容量");
                 yield break;
             }
-            Debug.Log("本次显示技能石的总数量（包括九宫格内）：" + SkillStonesOfTypeAndExType.Count);
-            
+                        
             int cellindex = 0;
             for (int i = 0; i < SkillStonesOfTypeAndExType.Count; i++)
             {

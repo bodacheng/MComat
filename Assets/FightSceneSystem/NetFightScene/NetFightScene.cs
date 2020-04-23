@@ -220,7 +220,7 @@ public class NetFightScene : MonoBehaviour {
         }
 
         FightSceneProcessesRunner.Clear();
-        MainMenuNote.Instance.goingtostep = MainSceneStep.frontPage;
+        MainMenuNote.Instance.goingtostep = MainSceneStep.FrontPage;
         SceneManager.LoadScene(1);
     }
     

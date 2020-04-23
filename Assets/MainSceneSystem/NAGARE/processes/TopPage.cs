@@ -7,7 +7,7 @@ public class TopPage : MainSceneProcess
 {
     public TopPage()
     {
-        thisProcessStep = MainSceneStep.frontPage;
+        thisProcessStep = MainSceneStep.FrontPage;
         EelementsInherit(PreScene.Instance);
     }
 

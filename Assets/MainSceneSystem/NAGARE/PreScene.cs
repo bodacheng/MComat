@@ -43,15 +43,15 @@ namespace mainMenu
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
-                        
+        
         [Space(7)]
         [Header("CustomGUISkin")]
         public GUISkin CustomGUISkin;
-                        
+        
         [Space(7)]
         [Header("自我战斗管理模块")]
         public SelfFightManager _SelfFightManager;
-                
+        
         //preparingscene应该就是只有这些画布
         [Space(7)]
         [Header("Canvas")]
@@ -89,21 +89,15 @@ namespace mainMenu
         // 围绕这个进程画面应该有相应配合
         public IEnumerator StartUpProcess()
         {
-            //QualitySettings.vSyncCount = 1;
+            LoadingCanvas.target.DarkOff(0.5f);
             Application.targetFrameRate = 60;
-            yield return null; // 这一行的目的是为了让整个项目那些靠start（）里进行初始化工作的模块顺利完成初始化后在开始下面的各种加载 
-
+            
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.Instance.gameObject.SetActive(false);
             MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
             MainMenuCanvas.gameObject.SetActive(false);
-
-            LoadingCanvas.target.DarkOff(0.5f);
-            LoadingCanvas.target.TurnOnProcessDescription(true);
-            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
-
-            //SceneProcessDictionary
+            
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
             SelfFightFront selfFightFront = new SelfFightFront();
@@ -116,7 +110,7 @@ namespace mainMenu
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             GotchaProcess gotchaProcess = new GotchaProcess();
             ArenaProcess areanaProcess = new ArenaProcess();
-
+            
             ProcessesRunner.Instance.Clear();
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones, skillStones);
@@ -125,20 +119,23 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.frontPage, frontPage);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Arena,areanaProcess);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit,tutorial_SkillEdit);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha,gotchaProcess);
-
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Arena, areanaProcess);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha, gotchaProcess);
+            
+            LoadingCanvas.target.TurnOnProcessDescription(true);
+            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
+            
             yield return AccountSet.Instance.LoadCustomerInfo();
             Setting.target.LoadProgrameSettingFromAccount();
             accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
-            yield return _modelShower.StartUpProcess();
-            
-            HeroIcon.IniFrames();
+
+            HeroIcon.INIFrames();
+
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
@@ -174,6 +171,7 @@ namespace mainMenu
                     break;
             }
             LoadingCanvas.target.LightUp();
+            MainMenuCanvas.gameObject.SetActive(true);
         }
 
         void Update()
@@ -190,6 +188,8 @@ namespace mainMenu
         {
             FightSceneNote.Instance.nextBattle = stage;
             _CharSetManager.PreventTheseMyModelsFromDestroying(FightSceneNote.Instance.nextBattle.GetTeam1EnterRingLocalIds(FightSceneNote.Instance.nextBattle.localFight));
+            SkillStonesBox.PreventCellsFromDestroy();
+            MySkillStonesReader.PreventStonesFromDestroy();
             SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
         }
 

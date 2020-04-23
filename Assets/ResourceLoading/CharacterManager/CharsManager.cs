@@ -5,18 +5,6 @@ using Api.Dto.Model;
 
 public partial class CharsManager : MonoBehaviour {
 
-    public Transform _dontDestroyOnLoadParent;
-    public static Transform dontDestroyOnLoadParent;
-    
-    void Awake()
-    {
-        if (dontDestroyOnLoadParent == null)
-            dontDestroyOnLoadParent = _dontDestroyOnLoadParent;
-        else
-            Debug.Log("已经找到非销毁对象parent");
-        DontDestroyOnLoad(dontDestroyOnLoadParent);
-    }
-    
     public void PreventTheseMyModelsFromDestroying(List<string> myCharLocalIDForNextBattle)
     {
         if (myCharLocalIDForNextBattle == null)
@@ -28,7 +16,7 @@ public partial class CharsManager : MonoBehaviour {
                &&
                 MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]] != null)
             {
-                MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]].transform.parent = dontDestroyOnLoadParent;
+                MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]].transform.parent = ResourceKeeper.dontDestroyOnLoadParent;
             }
         }
     }

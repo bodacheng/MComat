@@ -110,7 +110,7 @@ namespace mainMenu
                 targetingIcon = Instantiate(target.noMagic);
                 targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
                 targetingIcon._MonsterOfPlayerDetailModel = targetingCharacterDataInfo;
-                targetingIcon._CharacterResourceInfo = targetingCharacterResourceInfo;
+                targetingIcon._CharConfig = targetingCharacterResourceInfo;
                 targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
                 if (mainMenuIcons.ContainsKey(monsterOfPlayerId))
                 {
@@ -127,12 +127,12 @@ namespace mainMenu
             List<string> typeList = new List<string>();
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
-                if (!typeList.Contains(keyValuePair.Value._CharacterResourceInfo.TYPE))
+                if (!typeList.Contains(keyValuePair.Value._CharConfig.TYPE))
                 {
-                    typeList.Add(keyValuePair.Value._CharacterResourceInfo.TYPE);
+                    typeList.Add(keyValuePair.Value._CharConfig.TYPE);
                     Dropdown.OptionData m_NewData = new Dropdown.OptionData
                     {
-                        text = keyValuePair.Value._CharacterResourceInfo.TYPE
+                        text = keyValuePair.Value._CharConfig.TYPE
                     };
                     target._monsterboxFilter.typeDropDown.options.Add(m_NewData);
                 }

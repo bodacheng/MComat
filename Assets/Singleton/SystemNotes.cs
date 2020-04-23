@@ -31,7 +31,7 @@ public class FightSceneNote
 public class MainMenuNote
 {
     private static MainMenuNote instance;
-    public MainSceneStep goingtostep = MainSceneStep.frontPage;
+    public MainSceneStep goingtostep = MainSceneStep.FrontPage;
 
     private MainMenuNote()
     {

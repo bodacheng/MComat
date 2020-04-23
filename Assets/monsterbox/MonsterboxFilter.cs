@@ -41,7 +41,7 @@ public class MonsterboxFilter : MonoBehaviour
             {
                 if (origin_mainMenuIcons[i] != null)
                 {
-                    if (origin_mainMenuIcons[i]._CharacterResourceInfo.TYPE == typeDropDown.options[typeDropDown.value].text)
+                    if (origin_mainMenuIcons[i]._CharConfig.TYPE == typeDropDown.options[typeDropDown.value].text)
                         new_mainMenuIcons.Add(origin_mainMenuIcons[i]);
                 }
                 else
@@ -60,7 +60,7 @@ public class MonsterboxFilter : MonoBehaviour
         Red.Clear();Blue.Clear();Green.Clear();Light.Clear();Dark.Clear();
         for (int i = 0; i < origin_mainMenuIcons.Count; i++)
         {
-            switch (origin_mainMenuIcons[i]._CharacterResourceInfo._zokusei)
+            switch (origin_mainMenuIcons[i]._CharConfig._zokusei)
             {
                 case Zokusei.redMagic:
                     Red.Add(origin_mainMenuIcons[i]);
@@ -78,7 +78,7 @@ public class MonsterboxFilter : MonoBehaviour
                     Dark.Add(origin_mainMenuIcons[i]);
                     break;
                 default:
-                    Debug.Log("角色属性信息错误："+origin_mainMenuIcons[i]._CharacterResourceInfo.REAL_NAME);
+                    Debug.Log("角色属性信息错误："+origin_mainMenuIcons[i]._CharConfig.REAL_NAME);
                     Red.Add(origin_mainMenuIcons[i]);
                 break;
             }

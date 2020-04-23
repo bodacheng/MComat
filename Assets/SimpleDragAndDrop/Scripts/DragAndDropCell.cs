@@ -363,7 +363,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
         if (_DragAndDropItem != null)
         {
             _DragAndDropItem.gameObject.SetActive(true);
-            _DragAndDropItem.gameObject.transform.parent = null;
+            _DragAndDropItem.gameObject.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
         }
         UpdateMyItem();
     }

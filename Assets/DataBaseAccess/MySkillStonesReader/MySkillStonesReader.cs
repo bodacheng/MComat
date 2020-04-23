@@ -26,6 +26,14 @@ namespace dataAccess
         public static IDictionary<string, SkillStoneOfPlayerInfoModel> mySkillStonesDataDic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
         public static IDictionary<string, DragAndDropItem> mySkillStonesObjectsDic = new Dictionary<string, DragAndDropItem>();
         
+        public static void PreventStonesFromDestroy()
+        {
+            foreach (KeyValuePair<string, DragAndDropItem> keyValuePair in mySkillStonesObjectsDic)
+            {
+                keyValuePair.Value.transform.SetParent( ResourceKeeper.dontDestroyOnLoadParent);
+            }
+        }
+        
         public static List<string> TargetStonesFromOfAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
         {
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id

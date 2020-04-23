@@ -2,7 +2,7 @@
 using UnityEngine;
 using mainMenu;
 
-// 这个进程处理器写成单例模式，并不代表说它除了那一个单例外就没发生成其他instance。可能在一些情况下单独建立它的instance比如在一个进程的内部。
+// 这个进程处理器写成单例模式，并不代表除了那一个单例外就没发生成其他instance。可能在一些情况下单独建立它的instance比如在一个进程的内部。
 public class ProcessesRunner
 {
     static ProcessesRunner instance;
@@ -17,7 +17,7 @@ public class ProcessesRunner
             return instance;
         }
     }
-
+    
     public MainSceneProcess lastProcess;
     public MainSceneProcess currentProcess;
     readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
@@ -29,7 +29,7 @@ public class ProcessesRunner
         SceneProcessDictionary.Clear();
     }
 
-    public void AddNewProcess(MainSceneStep step,MainSceneProcess _process)
+    public void AddNewProcess(MainSceneStep step, MainSceneProcess _process)
     {
         SceneProcessDictionary.Add(step, _process);
     }
@@ -39,7 +39,7 @@ public class ProcessesRunner
         if (currentProcess != null)
         {
             currentProcess.LocalUpdate();
-            if (currentProcess.CanEnterOtherProcess() && currentProcess.nextProcessStep != MainSceneStep.none)
+            if (currentProcess.CanEnterOtherProcess() && currentProcess.nextProcessStep != MainSceneStep.None)
             {
                 ChangeProcess(currentProcess.nextProcessStep);
             }
