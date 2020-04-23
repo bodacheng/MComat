@@ -10,7 +10,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public Text RanKInfo;
     public HeroIcon member1, member2, member3;
     public Button BigButton;
-    
+        
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
     public IEnumerator AddFightToList(StageScriptableObject _SO)
     {
@@ -46,5 +46,25 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         }
         BigButton.onClick.AddListener(PrepareForIt);
         yield break;
+    }
+    
+    // myTeam 机能加载
+    public IEnumerator ShowMyTeam()
+    {
+        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(0);
+        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(1);
+        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(2);
+        
+        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId, member1);
+        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId, member2);
+        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos3MonsterOfPlayerId, member3);
+        
+        void GoToTeamEdit()
+        {
+            TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
+            PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+        }
+        BigButton.onClick.RemoveAllListeners();
+        BigButton.onClick.AddListener(GoToTeamEdit);
     }
 }

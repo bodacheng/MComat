@@ -81,10 +81,10 @@ namespace dataAccess
             {
                 case TeamSetGameMode.story:
                     form.monsterTeamOfPlayerId = Default.recordId;
-                    string B = Default.GetPosMonsterOfPlayerId(0);
-                    string L = Default.GetPosMonsterOfPlayerId(1);
-                    string F = Default.GetPosMonsterOfPlayerId(2);
-                    string R = Default.GetPosMonsterOfPlayerId(3);
+                    string B = Default.GetMonsterOfPlayerIdOnPos(0);
+                    string L = Default.GetMonsterOfPlayerIdOnPos(1);
+                    string F = Default.GetMonsterOfPlayerIdOnPos(2);
+                    string R = Default.GetMonsterOfPlayerIdOnPos(3);
 
                     form.bMonsterOfPlayerId = (B != null && B.Length == 20) ? B : null;
                     form.lMonsterOfPlayerId = (L != null && L.Length == 20) ? L : null;
@@ -93,10 +93,10 @@ namespace dataAccess
                     break;
                 case TeamSetGameMode.arena3V3:
                     form.monsterTeamOfPlayerId = Arena3V3.recordId;
-                    form.bMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(0);
-                    form.lMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(1);
-                    form.fMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(2);
-                    form.rMonsterOfPlayerId = Arena3V3.GetPosMonsterOfPlayerId(3);
+                    form.bMonsterOfPlayerId = Arena3V3.GetMonsterOfPlayerIdOnPos(0);
+                    form.lMonsterOfPlayerId = Arena3V3.GetMonsterOfPlayerIdOnPos(1);
+                    form.fMonsterOfPlayerId = Arena3V3.GetMonsterOfPlayerIdOnPos(2);
+                    form.rMonsterOfPlayerId = Arena3V3.GetMonsterOfPlayerIdOnPos(3);
                     break;
             }
             yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel> , SetMonsterTeamOfPlayerForm> 

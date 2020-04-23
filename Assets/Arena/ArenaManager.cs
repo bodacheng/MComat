@@ -15,30 +15,11 @@ public class ArenaManager : MonoBehaviour
     {
         target = this;
     }
-    
-    // myTeam 机能加载
-    public IEnumerator ShowMyTeam()
-    {
-        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetPosMonsterOfPlayerId(0);
-        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetPosMonsterOfPlayerId(1);
-        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetPosMonsterOfPlayerId(2);
         
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId,myTeam.member1);
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId,myTeam.member2);
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos3MonsterOfPlayerId,myTeam.member3);
-        
-        void GoToTeamEdit()
-        {
-            TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
-            PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
-        }
-        myTeam.BigButton.onClick.RemoveAllListeners();
-        myTeam.BigButton.onClick.AddListener(GoToTeamEdit);
-    }
-    
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
-    public IEnumerator LoadFourChallenge()
+    public IEnumerator LoadArena()
     {
+        yield return myTeam.ShowMyTeam();
         yield return Fight1.AddFightToList(StageScriptableObject.RandomStage());
         yield return Fight2.AddFightToList(StageScriptableObject.RandomStage());
         yield return Fight3.AddFightToList(StageScriptableObject.RandomStage());

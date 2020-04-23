@@ -33,7 +33,7 @@ public class TopPage : MainSceneProcess
         
         if (TeamSet.Default != null)
         {
-            string focusLocalid = TeamSet.Default.GetPosMonsterOfPlayerId(0);
+            string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
             if (focusLocalid != null)
             {
                  yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色

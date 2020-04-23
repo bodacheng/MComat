@@ -81,7 +81,7 @@ namespace dataAccess
             int membercount = 0;
             for (int i = 0; i < 3; i++)
             {
-                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PosKeySet.GetPosMonsterOfPlayerId(i));
+                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 if (myfighter != null)

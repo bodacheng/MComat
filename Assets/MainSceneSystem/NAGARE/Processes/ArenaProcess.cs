@@ -6,8 +6,7 @@ public class ArenaProcess : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        PreScene.Instance.mainProcessRunner.Run(ArenaManager.target.ShowMyTeam());
-        PreScene.Instance.mainProcessRunner.Run(ArenaManager.target.LoadFourChallenge());
+        PreScene.Instance.mainProcessRunner.Run(ArenaManager.target.LoadArena());
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
         yield break;
     }
@@ -32,7 +31,7 @@ public class ArenaProcess : MainSceneProcess
     {
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(false);
     }
-
+    
     public override void LocalUpdate()
     {
     }

@@ -10,10 +10,6 @@ public class PosKeySet
     public string recordId;
     public PosNumWithLocalKey[] PosNumsWithLocalKeys = {};
     
-    public PosKeySet(PosNumWithLocalKey[] PosNumsWithLocalKey)
-    {
-        PosNumsWithLocalKeys = PosNumsWithLocalKey;
-    }
     public PosKeySet()
     {
         PosNumsWithLocalKeys = new PosNumWithLocalKey[3] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
@@ -53,7 +49,7 @@ public class PosKeySet
         Debug.Log("没找着对应的位置键："+posNum);
     }
     
-    public List<PosNumWithLocalKey> SetPosMemInfoByLocalIDConservationMode(int targetPos,string monsterlocalID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
+    public List<PosNumWithLocalKey> SetPosMemByMonsterOfPlayerID(int targetPos,string monsterlocalID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
     {
         if (targetPos == -1)
             return new List<PosNumWithLocalKey>();
@@ -83,6 +79,54 @@ public class PosKeySet
         return new List<PosNumWithLocalKey>();
     }
     
+    public PosNumWithLocalKey GetPosMemInfo(int PosNum)
+    {
+        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
+        {
+            if (PosNumsWithLocalKeys[i].posNum == PosNum)
+                return PosNumsWithLocalKeys[i];
+        }
+        return null;
+    }
+    
+    public string GetMonsterOfPlayerIdOnPos(int PosNum)
+    {
+        return GetPosMemInfo(PosNum) != null ? GetPosMemInfo(PosNum).monsterOfPlayerId ?? null : null;
+    }
+    
+    public void ChangePosition(int position1, int position2)
+    {
+        PosNumWithLocalKey PosNumWithLocalKey1 = GetPosMemInfo(position1);
+        PosNumWithLocalKey PosNumWithLocalKey2 = GetPosMemInfo(position2);
+        
+        string temp = PosNumWithLocalKey2.monsterOfPlayerId;
+        PosNumWithLocalKey2.monsterOfPlayerId = PosNumWithLocalKey1.monsterOfPlayerId;
+        PosNumWithLocalKey1.monsterOfPlayerId = temp;
+    }
+    
+    // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
+    public static void ChangePositionBetweenDifferentTeamSets(int position1, PosKeySet team1, int position2, PosKeySet team2)
+    {
+        PosNumWithLocalKey PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
+        PosNumWithLocalKey PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
+        string temp = PosNumWithLocalKey2.monsterOfPlayerId;
+        PosNumWithLocalKey2.monsterOfPlayerId = PosNumWithLocalKey1.monsterOfPlayerId;
+        PosNumWithLocalKey1.monsterOfPlayerId = temp;
+    }
+    
+    // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
+    public List<string> GetAllOnSetMonsterOfPlayerIds()
+    {
+        List<string> onsetMonsterOfPlayerIds = new List<string>();
+        foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
+        {
+            if (_Set.monsterOfPlayerId != null)
+                onsetMonsterOfPlayerIds.Add(_Set.monsterOfPlayerId);
+        }
+        return onsetMonsterOfPlayerIds;
+    }
+    
+    // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
     public PosNumWithLocalKey GetPosMemInfoByLocalID(string localID)
     {
         if (PosNumsWithLocalKeys == null)
@@ -96,55 +140,6 @@ public class PosKeySet
             }
         }
         return null;
-    }
-
-    public PosNumWithLocalKey GetPosMemInfo(int PosNum)
-    {
-        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
-        {
-            if (PosNumsWithLocalKeys[i].posNum == PosNum)
-                return PosNumsWithLocalKeys[i];
-        }
-        return null;
-    }
-
-    public string GetPosMonsterOfPlayerId(int PosNum)
-    {
-        return GetPosMemInfo(PosNum) != null
-            ? GetPosMemInfo(PosNum).monsterOfPlayerId ?? null
-            : null;
-    }
-    
-    public List<string> GetAllOnSetMonsterOfPlayerIds()
-    {
-        List<string> onsetMonsterOfPlayerIds = new List<string>();
-        foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
-        {
-            if (_Set.monsterOfPlayerId != null)
-                onsetMonsterOfPlayerIds.Add(_Set.monsterOfPlayerId);
-        }
-        return onsetMonsterOfPlayerIds;
-    }
-
-    public void ChangePosition(int position1, int position2)
-    {
-        PosNumWithLocalKey PosNumWithLocalKey1 = GetPosMemInfo(position1);
-        PosNumWithLocalKey PosNumWithLocalKey2 = GetPosMemInfo(position2);
-
-        string temp = PosNumWithLocalKey2.monsterOfPlayerId;
-        PosNumWithLocalKey2.monsterOfPlayerId = PosNumWithLocalKey1.monsterOfPlayerId;
-        PosNumWithLocalKey1.monsterOfPlayerId = temp;
-    }
-    
-    public static void ChangePositionBetweenDifferentTeamSets(int position1,PosKeySet team1, int position2,PosKeySet team2)
-    {
-        PosNumWithLocalKey PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
-        PosNumWithLocalKey PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
-        string temp = PosNumWithLocalKey2.monsterOfPlayerId;
-        PosNumWithLocalKey2.monsterOfPlayerId = PosNumWithLocalKey1.monsterOfPlayerId;
-        PosNumWithLocalKey1.monsterOfPlayerId = temp;
-
-        Debug.Log(PosNumWithLocalKey1.monsterOfPlayerId+"and "+ PosNumWithLocalKey2.monsterOfPlayerId);
     }
 }
 
