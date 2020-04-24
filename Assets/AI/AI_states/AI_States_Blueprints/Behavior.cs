@@ -34,8 +34,8 @@ namespace Soul
         public float AT; //攻击力,或者说攻击力权重。这个设计的目的在于让所有技能的伤害可以在技能表里以一种形式直接设置。
         public string StateKey;
         public int splevel;
-        public Inputs_defined enterInput = Inputs_defined.Null;
-        public Inputs_defined exitInput = Inputs_defined.Null;
+        public InputKey enterInput = InputKey.Null;
+        public InputKey exitInput = InputKey.Null;
 
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
 

@@ -150,12 +150,12 @@ public class RealTimeGameProcessManager : MonoBehaviour
     }
 }
 
-public enum Inputs_defined
+public enum InputKey
 {
     Null = -1,
-    Attack = 0,
-    Fire1 = 1,
-    Fire2 = 2,
+    Attack1 = 0,
+    Attack2 = 1,
+    Attack3 = 2,
     Acc = 5,
     Defend = 3,
     Defend_Cancel = 4,

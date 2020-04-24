@@ -29,7 +29,7 @@ namespace Soul
                 {
                     switch (Options[i].EnterInput)
                     {
-                        case Inputs_defined.Attack:
+                        case InputKey.Attack1:
                             if (MobileInputsManager.attack)
                             {
                                 MobileInputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
@@ -45,7 +45,7 @@ namespace Soul
                                 return;
                             }
                             break;
-                        case Inputs_defined.Fire1:
+                        case InputKey.Attack2:
                             if (MobileInputsManager.fire1)
                             {
                                 MobileInputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
@@ -61,7 +61,7 @@ namespace Soul
                                 return;
                             }
                             break;
-                        case Inputs_defined.Fire2:
+                        case InputKey.Attack3:
                             if (MobileInputsManager.fire2)
                             {
                                 MobileInputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
@@ -77,7 +77,7 @@ namespace Soul
                                 return;
                             }
                             break;
-                        case Inputs_defined.Acc:
+                        case InputKey.Acc:
                             if (MobileInputsManager.acc)
                             {
                                 behaviorRunner.SingleFightLog.WriteLog(
@@ -92,7 +92,7 @@ namespace Soul
                                 return;
                             }
                             break;
-                        case Inputs_defined.Defend:
+                        case InputKey.Defend:
                             if (MobileInputsManager.defendButtonHover)
                             {
                                 behaviorRunner.SingleFightLog.WriteLog(
@@ -117,8 +117,7 @@ namespace Soul
                 #region AI决策
                 if (AI_RUNs(behaviorRunner,Options))
                 {
-                    return;//20200205的bug怀疑是卡在这个部位。原因在于bug明显受AI模式影响，并且角色后跳后“定住”的时候只要输入方向，就会开始走动。
-                    //基本说明输入行为让AI_Active为false从而放行至接下来的归idle判断，从而让角色直接进入move state
+                    return;//基本说明输入行为让AI_Active为false从而放行至接下来的归idle判断，从而让角色直接进入move state
                 }
                 #endregion
             }
@@ -144,7 +143,7 @@ namespace Soul
         {
             switch(current_Behavior_Set.ExitInput)
             {
-                case Inputs_defined.Defend_Cancel:
+                case InputKey.Defend_Cancel:
                     return MobileInputsManager.target.DefendExitTrigger();
                 default:
                     return true;
@@ -190,20 +189,20 @@ namespace Soul
                 if (finalConditionStakeKeySet.Count > 0)
                 {
                     int random = Random.Range(0, finalConditionStakeKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
-                    SkillEntity behavior_Transition_Set = behaviorRunner.SkillEntityDic[finalConditionStakeKeySet[random].Value];
+                    SkillEntity _SE = behaviorRunner.SkillEntityDic[finalConditionStakeKeySet[random].Value];
                     if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
                     {
-                        MobileInputsManager.SkillButtonExplosion(behavior_Transition_Set.EnterInput, behavior_Transition_Set.SP_LEVEL);
+                        MobileInputsManager.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
                     }
                     behaviorRunner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
                         {
                             AI_Decided = true,
-                            stateKey = behavior_Transition_Set.REAL_NAME,
+                            stateKey = _SE.REAL_NAME,
                             whyIDidThis = finalConditionStakeKeySet[random].Key
                         }
                     );
-                    behaviorRunner.ChangeState(behavior_Transition_Set.REAL_NAME);
+                    behaviorRunner.ChangeState(_SE.REAL_NAME);
                     return true;
                 }
             }

@@ -11,10 +11,10 @@ namespace Skill
         public float AT;
         public float AI_MIN_DIS;
         public float AI_MAX_DIS;
-        public SkillEntity[] CasualTo = { };
+        public string[] CasualTo = { };
         public bool CANBECANCELLEDTO = true;
-        public Inputs_defined EnterInput = Inputs_defined.Null;
-        public Inputs_defined ExitInput = Inputs_defined.Null;
+        public InputKey EnterInput = InputKey.Null;
+        public InputKey ExitInput = InputKey.Null;
         public int SP_LEVEL;
         public int RARITY_LEVEL;
         [HideInInspector]
@@ -29,9 +29,9 @@ namespace Skill
                             BehaviorType _attackType,
                             float _AT,
                             float AITriggerDistanceMin,float AITriggerDistanceMax,
-                            SkillEntity[] _casual_to_state_nums,
+                            string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
-                            Inputs_defined _enterInput, Inputs_defined _exitInput,
+                            InputKey _enterInput, InputKey _exitInput,
                             int _SPMove,
                             int _rarelevel)
         {
@@ -50,7 +50,7 @@ namespace Skill
 
             if (this.CasualTo == null)
             {
-                this.CasualTo = new SkillEntity[] { };
+                this.CasualTo = new string[] { };
             }
             if (this.ForcedTransitions == null)
             {
@@ -59,13 +59,13 @@ namespace Skill
         }
 
         public SkillEntity(string _StateKey,
-                                    int level,
-                                    BehaviorType _BType,
-                                    float _AT,
-                                    float AITriggerDistanceMin,float AITriggerDistanceMax,
-                                    bool can_be_cancelled_to,
-                                    Inputs_defined enterInput, Inputs_defined exitInput,
-                                    int SPMove)
+                            int level,
+                            BehaviorType _BType,
+                            float _AT,
+                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            bool can_be_cancelled_to,
+                            InputKey enterInput, InputKey exitInput,
+                            int SPMove)
         {
             REAL_NAME = _StateKey;
             LEVEL = level;

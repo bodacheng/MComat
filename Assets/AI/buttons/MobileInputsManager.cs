@@ -80,7 +80,7 @@ public class MobileInputsManager : MonoBehaviour {
     }
 
     static ParticleSystem targetexplode;
-    public static void SkillButtonExplosion(Inputs_defined inputs_Defined,int eX)
+    public static void SkillButtonExplosion(InputKey inputs_Defined,int eX)
     {
         switch(eX)
         {
@@ -102,13 +102,13 @@ public class MobileInputsManager : MonoBehaviour {
     
         switch (inputs_Defined)
         {
-            case Inputs_defined.Attack:
+            case InputKey.Attack1:
                 targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(target.Attack,3);
                 break;
-            case Inputs_defined.Fire1:
+            case InputKey.Attack2:
                 targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(target.Fire1,3);
                 break;
-            case Inputs_defined.Fire2:
+            case InputKey.Attack3:
                 targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(target.Fire2,3);
                 break;
         }
@@ -171,11 +171,11 @@ public class MobileInputsManager : MonoBehaviour {
         return !defendButtonHover;
     }
 
-    readonly Dictionary<Inputs_defined, SkillEntity> Options_lastframe = new Dictionary<Inputs_defined, SkillEntity>()
+    readonly Dictionary<InputKey, SkillEntity> Options_lastframe = new Dictionary<InputKey, SkillEntity>()
     {
-        {Inputs_defined.Attack,null},
-        {Inputs_defined.Fire1,null},
-        {Inputs_defined.Fire2,null}
+        {InputKey.Attack1,null},
+        {InputKey.Attack2,null},
+        {InputKey.Attack3,null}
     };
     
     SkillEntity Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
@@ -186,33 +186,33 @@ public class MobileInputsManager : MonoBehaviour {
         {
             switch (Options_preview[i].EnterInput)
             {
-                case Inputs_defined.Attack:
+                case InputKey.Attack1:
                     Behavior_preview_button1 = Options_preview[i];
                     break;
-                case Inputs_defined.Fire1:
+                case InputKey.Attack2:
                     Behavior_preview_button2 = Options_preview[i];
                     break;
-                case Inputs_defined.Fire2:
+                case InputKey.Attack3:
                     Behavior_preview_button3 = Options_preview[i];
                     break;
             }
         }
-        if (Options_lastframe[Inputs_defined.Attack] != Behavior_preview_button1)
+        if (Options_lastframe[InputKey.Attack1] != Behavior_preview_button1)
         {
             ChangeButtonPatternNewTest(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SP_LEVEL : -1);
         }
-        if (Options_lastframe[Inputs_defined.Fire1] != Behavior_preview_button2)
+        if (Options_lastframe[InputKey.Attack2] != Behavior_preview_button2)
         {
             ChangeButtonPatternNewTest(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SP_LEVEL : -1);
         }
-        if (Options_lastframe[Inputs_defined.Fire2] != Behavior_preview_button3)
+        if (Options_lastframe[InputKey.Attack3] != Behavior_preview_button3)
         {
             ChangeButtonPatternNewTest(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SP_LEVEL : -1);
         }
         
-        Options_lastframe[Inputs_defined.Attack] = Behavior_preview_button1;
-        Options_lastframe[Inputs_defined.Fire1] = Behavior_preview_button2;
-        Options_lastframe[Inputs_defined.Fire2] = Behavior_preview_button3;
+        Options_lastframe[InputKey.Attack1] = Behavior_preview_button1;
+        Options_lastframe[InputKey.Attack2] = Behavior_preview_button2;
+        Options_lastframe[InputKey.Attack3] = Behavior_preview_button3;
     }
 
     void Update()

@@ -93,9 +93,9 @@ namespace mainMenu
                 DestroyFloatingMarks();
                 _skillStoneDetail.RefreshSkillDetail_SkillEntity(_state_Transition_Set);
                 //下面这些是逻辑核心
-                foreach (SkillEntity _set in _state_Transition_Set.CasualTo)
+                foreach (string _set in _state_Transition_Set.CasualTo)
                 {
-                    analysisSKList.TryGetValue(_set.REAL_NAME, out SkillEntity _oneCasualTo);
+                    analysisSKList.TryGetValue(_set, out SkillEntity _oneCasualTo);
                     StateButtonDic.TryGetValue(_oneCasualTo.REAL_NAME, out Button CasualToButton);
                     if (_button != null && CasualToButton != null)
                     {

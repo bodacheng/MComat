@@ -6,6 +6,8 @@ using System.IO;
 using System;
 using Skill;
 
+// 这整张代码也就是暂时摆在这提供个“保存技能组”的概念。如果真的以后有需要保存技能组那太多东西需要修。
+
 namespace Soul
 {
     public partial class BehaviorRunner : MonoBehaviour
@@ -50,71 +52,75 @@ namespace Soul
                 {
                     toFormAttackStateList.Add(list[i].REAL_NAME, list[i]);
                 }
-                _States_Incubator = new Behaviors_Incubator(empty_State,toFormAttackStateList);
-
+                _States_Incubator = new Behaviors_Incubator(empty_State, toFormAttackStateList);
                 List<SkillEntity> after_list = new List<SkillEntity>();
                 List<string> alreadyInList = new List<string>();
-
                 foreach (SkillEntity s in list)
                 {
                     if (!alreadyInList.Contains(s.REAL_NAME) && _States_Incubator.StateIndexList.Contains(s.REAL_NAME))
                     {
                         after_list.Add(s);
-                        alreadyInList.Add(s.REAL_NAME);//在保存阶段确保了状态定义不会重复
+                        alreadyInList.Add(s.REAL_NAME);
                     }
                 }
-
+                
                 if (!alreadyInList.Contains("Empty"))
                 {
-                    SkillEntity Empty = new SkillEntity("Empty",0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+                    SkillEntity Empty = new SkillEntity("Empty",0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
                     after_list.Add(Empty);
                     alreadyInList.Add("Empty");
                 }
-
+                
                 if (!alreadyInList.Contains("Victory"))
                 {
-                    SkillEntity Victory =  new SkillEntity("Victory",0,0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+                    SkillEntity Victory =  new SkillEntity("Victory",0,0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
                     after_list.Add(Victory);
                     alreadyInList.Add("Victory");
                 }
-
+                
                 if (!alreadyInList.Contains("Death"))
                 {
-                    SkillEntity Death = new SkillEntity("Death",0,0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0);
+                    SkillEntity Death = new SkillEntity("Death",0,0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
                     after_list.Add(Death);
                     alreadyInList.Add("Death");
                 }
-
+                
                 if (!alreadyInList.Contains("Hit"))
                 {
-                    SkillEntity Hit = new SkillEntity("Hit",0,BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+                    SkillEntity Hit = new SkillEntity("Hit",0,BehaviorType.Hit,0,0,0,null,null,InputKey.Null, InputKey.Null,0,0);
                     after_list.Add(Hit);
                     alreadyInList.Add("Hit");
                 }
-
+                
                 if (!alreadyInList.Contains("KnockOff"))
                 {
-                    SkillEntity KnockOff = new SkillEntity("KnockOff",0,BehaviorType.Hit,0,0,0,null,null,Inputs_defined.Null, Inputs_defined.Null,0,0);
+                    SkillEntity KnockOff = new SkillEntity("KnockOff",0,BehaviorType.Hit,0,0,0,null,null,InputKey.Null, InputKey.Null,0,0);
                     after_list.Add(KnockOff);
                     alreadyInList.Add("KnockOff");
                 }
-
+                
+                if (!alreadyInList.Contains("getUp"))
+                {
+                    SkillEntity getUp = new SkillEntity("getUp",0,BehaviorType.GetUp,0,0,0,null,null,InputKey.Null, InputKey.Null,0,0);
+                    after_list.Add(getUp);
+                    alreadyInList.Add("getUp");
+                }
                 List<string> DefaultForceToNums = new List<string>() { "Hit", "KnockOff" };
 
                 foreach (SkillEntity s in after_list)
                 {
-                    List<SkillEntity> undefined_CausalStateRateSet = new List<SkillEntity>();
-                    foreach (SkillEntity rs in s.CasualTo)
+                    List<string> undefined_CausalStateRateSet = new List<string>();
+                    foreach (string rs in s.CasualTo)
                     {
-                        if (!alreadyInList.Contains(rs.REAL_NAME))
+                        if (!alreadyInList.Contains(rs))
                         {
                             undefined_CausalStateRateSet.Add(rs);
                         }
                     }
-                    List<SkillEntity> casuals_t = s.CasualTo != null ? s.CasualTo.ToList() : new List<SkillEntity>();
+                    List<string> casuals_t = s.CasualTo != null ? s.CasualTo.ToList() : new List<string>();
                     if (undefined_CausalStateRateSet.Any())
                     {
-                        foreach (SkillEntity _set in undefined_CausalStateRateSet)
+                        foreach (string _set in undefined_CausalStateRateSet)
                         {
                             casuals_t.Remove(_set);// 把连续状态串里出现的没有定义的状态给删除掉。
                         }
@@ -122,7 +128,7 @@ namespace Soul
                     s.CasualTo = casuals_t.ToArray();
                     s.ForcedTransitions = s.REAL_NAME != "Death" ? DefaultForceToNums.ToArray() : (new string[0]);
                 }
-
+                
                 XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<SkillEntity>));
                 FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Create);
                 XmlSerializer.Serialize(FileStream, after_list);
@@ -149,10 +155,8 @@ namespace Soul
             {
                 now_Behavior.AI_State_exit();
             }
-
-            State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script);//这个是一个状态清单，生成状态的是States_Dictionary类。
-                                                                                                          //_States_Dictionary = new States_Dictionary(type,this.State_Transition_Set_List);//这一行于7月20号commentout了
-            List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List;// 理解整个系统的关键
+            State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
+            List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; //理解整个系统的关键
             BehaviourDic = new Dictionary<string, Behavior>();
             foreach (BehaviorIndex_With_Behavior s in Num_State_List)
             {
@@ -160,59 +164,54 @@ namespace Soul
             }
             SkillEntityDic = new Dictionary<string, SkillEntity>();
             List<string> alreadyInList = new List<string>();//7.29 这个环节貌似是现在“同技能没法重复”bug的来源
-            foreach (SkillEntity _State_Transition_Set in State_Transition_Set_List)
+            foreach (SkillEntity _SE in State_Transition_Set_List)
             {
-                if (_State_Transition_Set.REAL_NAME != null
+                if (_SE.REAL_NAME != null
                     &&
-                    !alreadyInList.Contains(_State_Transition_Set.REAL_NAME)
+                    !alreadyInList.Contains(_SE.REAL_NAME)
                     &&
-                    _States_Incubator.IfContainsKey(_State_Transition_Set.REAL_NAME))
+                    _States_Incubator.IfContainsKey(_SE.REAL_NAME))
                 {
-                    List<SkillEntity> new_casual_to = new List<SkillEntity>();
-                    if (_State_Transition_Set.CasualTo == null)
+                    List<string> new_casual_to = new List<string>();
+                    if (_SE.CasualTo == null)
                     {
-                        Debug.Log(Script.name + "脚本的" + _State_Transition_Set.REAL_NAME + "状态自然迁移出错,尝试进行强加");
-                        _State_Transition_Set.CasualTo = new_casual_to.ToArray();
+                        Debug.Log(Script.name + "脚本的" + _SE.REAL_NAME + "状态自然迁移出错,尝试进行强加");
+                        _SE.CasualTo = new_casual_to.ToArray();
                     }
-                    foreach (SkillEntity _State_Rate_Set in _State_Transition_Set.CasualTo)
+                    foreach (string _State_Rate_Set in _SE.CasualTo)
                     {
-                        if (!_States_Incubator.IfContainsKey(_State_Rate_Set.REAL_NAME))
+                        if (!_States_Incubator.IfContainsKey(_State_Rate_Set))
                         {
-                            Debug.Log(Script.name + "脚本中的状态" + _State_Transition_Set.REAL_NAME +
-                                      "下存在没有定义的自然迁移状态" + _State_Rate_Set.REAL_NAME + ",从而已经做强行删除处理。");
+                            Debug.Log(Script.name + "脚本中的状态" + _SE.REAL_NAME + "下存在没有定义的自然迁移状态" + _State_Rate_Set + ",从而已经做强行删除处理。");
                         }
                         else
                         {
                             new_casual_to.Add(_State_Rate_Set);
                         }
                     }
-                    SkillEntityDic.Add(
-                        new KeyValuePair<string, SkillEntity>(
-                            _State_Transition_Set.REAL_NAME,
-                            _State_Transition_Set
-                        )
-                    );
-                    alreadyInList.Add(_State_Transition_Set.REAL_NAME);
+                    SkillEntityDic.Add(new KeyValuePair<string, SkillEntity>(_SE.REAL_NAME,_SE));
+                    alreadyInList.Add(_SE.REAL_NAME);
                 }
                 else
                 {
-                    if (_State_Transition_Set.REAL_NAME == null)
+                    if (_SE.REAL_NAME == null)
                     {
                         Debug.Log("脚本中有的状态没有键值");
                     }
                     else
                     {
-                        if (!_States_Incubator.IfContainsKey(_State_Transition_Set.REAL_NAME))
+                        if (!_States_Incubator.IfContainsKey(_SE.REAL_NAME))
                         {
-                            Debug.Log("脚本中描写的状态的键值:" + _State_Transition_Set.REAL_NAME + " 不存在于我们的定义");
+                            Debug.Log("脚本中描写的状态的键值:" + _SE.REAL_NAME + " 不存在于我们的定义");
                         }
                     }
                 }
             }
         }
-
+        
         public List<SkillEntity> SortStateTransitionSetList(List<SkillEntity> list)
         {
+            List<SkillEntity> regularStates = new List<SkillEntity>();
             IDictionary<string, SkillEntity> toFormAttackStateList = new Dictionary<string, SkillEntity>();
             for (int i = 0; i < list.Count; i++)
             {
@@ -221,25 +220,23 @@ namespace Soul
             _States_Incubator = new Behaviors_Incubator(empty_State,toFormAttackStateList);
             IDictionary<string, SkillEntity> stateTransitionSetDictionary = new Dictionary<string, SkillEntity>();
             List<SkillEntity> setsHaveInitialInput = new List<SkillEntity>();
-            List<SkillEntity> regularStates = new List<SkillEntity>();
-
+            
             bool hasD = false, hasR = false;
-
+            
             foreach (SkillEntity _set in list)
             {
-
                 if (_States_Incubator.StateIndexList.Contains(_set.REAL_NAME))
                 {
                     stateTransitionSetDictionary.Add(new KeyValuePair<string, SkillEntity>(_set.REAL_NAME, _set));
                 }
-
-                if (_set.EnterInput != Inputs_defined.Null)
+            
+                if (_set.EnterInput != InputKey.Null)
                 {
-                    hasR |= _set.EnterInput == Inputs_defined.Acc;
-                    hasD |= _set.EnterInput == Inputs_defined.Defend;
+                    hasR |= _set.EnterInput == InputKey.Acc;
+                    hasD |= _set.EnterInput == InputKey.Defend;
                     setsHaveInitialInput.Add(_set);
                 }
-
+            
                 if (_set.REAL_NAME == "Controlled" || _set.REAL_NAME == "Hit" || _set.REAL_NAME == "Move")
                 {
                     _set.ForcedTransitions = new string[2] { "Hit", "KnockOff" };
@@ -255,30 +252,30 @@ namespace Soul
                     _set.ForcedTransitions = new string[] { "KnockOff" };
                 }
             }
-
-            List<SkillEntity> knockOFFCasualTransitios = new List<SkillEntity>();
+            
+            List<string> knockOffCasualTrans = new List<string>();
             foreach (SkillEntity _set in setsHaveInitialInput)
             {
-                knockOFFCasualTransitios.Add(_set);
+                knockOffCasualTrans.Add(_set.REAL_NAME);
             }
-
+            
             foreach (SkillEntity _set in list)
             {
                 if (_set.REAL_NAME == "KnockOff")
                 {
-                    _set.CasualTo = knockOFFCasualTransitios.ToArray();
+                    _set.CasualTo = knockOffCasualTrans.ToArray();
                 }
             }
-
+            
             SetStateRatesByAILevel(stateTransitionSetDictionary);
-
+            
             List<SkillEntity> allChuans = new List<SkillEntity>();
             foreach (SkillEntity _set in setsHaveInitialInput)
             {
                 List<SkillEntity> chuan = new List<SkillEntity>();
-                chuan = SearchChuanNext(_set, Inputs_defined.Null, chuan, allChuans, stateTransitionSetDictionary);
+                chuan = SearchChuanNext(_set, InputKey.Null, chuan, allChuans, stateTransitionSetDictionary);
             }
-
+            
             foreach (SkillEntity _set in list)
             {
                 if (!allChuans.Contains(_set) && !regularStates.Contains(_set) && _set.REAL_NAME != null && _States_Incubator.StateIndexList.Contains(_set.REAL_NAME))
@@ -287,39 +284,31 @@ namespace Soul
                 }
             }
             regularStates.AddRange(allChuans);
-            //allChuans.AddRange(regularStates);
+            allChuans.AddRange(regularStates);
             return regularStates;
         }
 
-        List<SkillEntity> SearchChuanNext(SkillEntity _set, Inputs_defined _inputKey,
-                                               List<SkillEntity> chuan, List<SkillEntity> allChuans,
-                                               IDictionary<string, SkillEntity> stateTransitionSetDictionary)
+        List<SkillEntity> SearchChuanNext(SkillEntity _set, InputKey _inputKey, List<SkillEntity> chuan, List<SkillEntity> allChuans, IDictionary<string, SkillEntity> SEDic)
         {
             if (!chuan.Contains(_set) && !allChuans.Contains(_set))
             {
                 chuan.Add(_set);
                 allChuans.Add(_set);
             }
-
-            Inputs_defined searching_inputKey = Inputs_defined.Null;
-            searching_inputKey = _inputKey == Inputs_defined.Null ? _set.EnterInput : _inputKey;
-
-            foreach (SkillEntity _rset in _set.CasualTo)
+            
+            InputKey searching_inputKey = InputKey.Null;
+            searching_inputKey = _inputKey == InputKey.Null ? _set.EnterInput : _inputKey;
+            
+            foreach (string _rset in _set.CasualTo)
             {
-                if (_rset.EnterInput == searching_inputKey && _rset.EnterInput != Inputs_defined.Null)//也就是说这种“chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
+                SkillEntity _SE = SEDic[_rset];
+                if (_SE.EnterInput == searching_inputKey && _SE.EnterInput != InputKey.Null)// “chuan”的逻辑其实是说针对有连续输入命令的，自动迁移逻辑不算。并且在这里并不强调一定是同一输入键的攻击串
                 {
-                    stateTransitionSetDictionary.TryGetValue(_rset.REAL_NAME, out SkillEntity _new);
-                    if (_new != null)
+                    if (!chuan.Contains(_SE) && !allChuans.Contains(_SE))
                     {
-                        if (!chuan.Contains(_new) && !allChuans.Contains(_new))
+                        if (SearchChuanNext(_SE, searching_inputKey, chuan, allChuans, SEDic) == null)
                         {
-                            if (SearchChuanNext(_new, searching_inputKey, chuan, allChuans, stateTransitionSetDictionary) != null)
-                            {
-                            }
-                            else
-                            {
-                                return null;
-                            }
+                            return null;
                         }
                     }
                 }
@@ -343,43 +332,33 @@ namespace Soul
             return false;
         }
 
-        List<string> SearchAttackChuanKeyNext(SkillEntity _set, Inputs_defined _inputKey, List<string> chuan, IDictionary<string, SkillEntity> stateTransitionSetDictionary)
+        List<string> SearchAttackChuanKeyNext(SkillEntity _set, InputKey _inputKey, List<string> chuan, IDictionary<string, SkillEntity> SEDic)
         {
             if (!CheckIfStringInList(_set.REAL_NAME, chuan))
             {
                 chuan.Add(_set.REAL_NAME);
             }
 
-            Inputs_defined searching_inputKey = Inputs_defined.Null;
-            searching_inputKey = _inputKey == Inputs_defined.Null ? _set.EnterInput : _inputKey;
-            foreach (SkillEntity _rset in _set.CasualTo)
+            InputKey searching_inputKey = InputKey.Null;
+            searching_inputKey = _inputKey == InputKey.Null ? _set.EnterInput : _inputKey;
+            foreach (string _rset in _set.CasualTo)
             {
-                if (_rset.EnterInput == searching_inputKey && _rset.EnterInput != Inputs_defined.Null)
+                SkillEntity _SE = SEDic[_rset];
+                if (_SE.EnterInput == searching_inputKey && _SE.EnterInput != InputKey.Null)
                 {
-                    stateTransitionSetDictionary.TryGetValue(_rset.REAL_NAME, out SkillEntity _new);
-                    if (_new != null)
+                    if (!CheckIfStringInList(_SE.REAL_NAME, chuan))
                     {
-                        if (!CheckIfStringInList(_rset.REAL_NAME, chuan))
+                        if (SearchAttackChuanKeyNext(_SE, searching_inputKey, chuan, SEDic) == null)
                         {
-                            if (SearchAttackChuanKeyNext(_new, searching_inputKey, chuan, stateTransitionSetDictionary) != null)
-                            {
-                            }
-                            else
-                            {
-                                return null;
-                            }
+                            return null;
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("字典中不存在：" + _rset.REAL_NAME);
                     }
                 }
             }
             return chuan;
         }
 
-        public void SetStateRatesByAILevel(IDictionary<string, SkillEntity> final_dic)
+        public void SetStateRatesByAILevel(IDictionary<string, SkillEntity> SEDic)
         {
             string myMoveStateKey = null;
             //为什么一定要把这些技能串给提前搜出来？事关随着等级提升“解锁技能的处理”。在我们的系统当中技能的首发概率和连段概率是不一样的
@@ -390,111 +369,88 @@ namespace Soul
             List<string> Fire2Chuan = new List<string>();
 
             //第一轮循环所应该做的就是把Attack，Fire1，Fire2这三个系列的技能串儿搜出来。
-            foreach (KeyValuePair<string, SkillEntity> Transition in final_dic)
+            foreach (KeyValuePair<string, SkillEntity> Transition in SEDic)
             {
                 if (Transition.Key == "Move_normal" || Transition.Key == "Move_slow" || Transition.Key == "Move_fast" || Transition.Key == "Test_Move")
                 {
                     myMoveStateKey = Transition.Key;
                 }
 
-                if (Transition.Value.EnterInput == Inputs_defined.Attack)
+                if (Transition.Value.EnterInput == InputKey.Attack1)
                 {
-                    attackChuan = SearchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, attackChuan, final_dic);
+                    attackChuan = SearchAttackChuanKeyNext(Transition.Value, InputKey.Null, attackChuan, SEDic);
                 }
-                if (Transition.Value.EnterInput == Inputs_defined.Fire1)
+                if (Transition.Value.EnterInput == InputKey.Attack2)
                 {
-                    Fire1Chuan = SearchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire1Chuan, final_dic);
+                    Fire1Chuan = SearchAttackChuanKeyNext(Transition.Value, InputKey.Null, Fire1Chuan, SEDic);
                 }
-                if (Transition.Value.EnterInput == Inputs_defined.Fire2)
+                if (Transition.Value.EnterInput == InputKey.Attack3)
                 {
-                    Fire2Chuan = SearchAttackChuanKeyNext(Transition.Value, Inputs_defined.Null, Fire2Chuan, final_dic);
+                    Fire2Chuan = SearchAttackChuanKeyNext(Transition.Value, InputKey.Null, Fire2Chuan, SEDic);
                 }
                 //在这里把三大攻击串给算出来，无非是说他们的主串包含的技能都有啥名字，这个信息不包括他们各自可能出现的首尾循环
             }
 
-            foreach (KeyValuePair<string, SkillEntity> Transition in final_dic)
+            foreach (KeyValuePair<string, SkillEntity> Transition in SEDic)
             {
                 // 三大首发技能AI模式下概率
-                if (Transition.Value.EnterInput == Inputs_defined.Attack)
+                if (Transition.Value.EnterInput == InputKey.Attack1)
                 {
-                    List<SkillEntity> casual_to_states_now = Transition.Value.CasualTo.ToList();
-                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
+                    List<string> casuals_now = Transition.Value.CasualTo.ToList();
+                    List<string> casual_to_states_after = new List<string>();
 
-                    foreach (SkillEntity _set in casual_to_states_now)
+                    foreach (string _set in casuals_now)
                     {
+                        SkillEntity _SE = SEDic[_set];
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.REAL_NAME != myMoveStateKey)
+                        if (_SE.REAL_NAME != myMoveStateKey)
                         {
                             //然后？概率应该适配多少？
-                            if (attackChuan.Contains(_set.REAL_NAME) || Fire1Chuan.Contains(_set.REAL_NAME) || Fire2Chuan.Contains(_set.REAL_NAME))
+                            if (attackChuan.Contains(_SE.REAL_NAME) || Fire1Chuan.Contains(_SE.REAL_NAME) || Fire2Chuan.Contains(_SE.REAL_NAME))
                             {
-                                SkillEntity _freshNew = new SkillEntity(
-                                _set.REAL_NAME,
-                                _set.LEVEL,
-                                _set.StateType,
-                                _set.AT,
-                                _set.AI_MIN_DIS,_set.AI_MAX_DIS,
-                                _set.CANBECANCELLEDTO,
-                                _set.EnterInput, _set.ExitInput,
-                                _set.SP_LEVEL);
-                                casual_to_states_after.Add(_freshNew);
+                                casual_to_states_after.Add(_set);
                             }
                         }
                     }
                     Transition.Value.CasualTo = casual_to_states_after.ToArray();
                 }
 
-                if (Transition.Value.EnterInput == Inputs_defined.Fire1)
+                if (Transition.Value.EnterInput == InputKey.Attack2)
                 {
-                    List<SkillEntity> casual_to_states_now = Transition.Value.CasualTo.ToList();
-                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
+                    List<string> casual_to_states_now = Transition.Value.CasualTo.ToList();
+                    List<string> casual_to_states_after = new List<string>();
 
-                    foreach (SkillEntity _set in casual_to_states_now)
+                    foreach (string _set in casual_to_states_now)
                     {
+                        SkillEntity _SE = SEDic[_set];
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.REAL_NAME != myMoveStateKey)
+                        if (_SE.REAL_NAME != myMoveStateKey)
                         {
                             //然后？概率应该适配多少？
-                            if (attackChuan.Contains(_set.REAL_NAME) || Fire1Chuan.Contains(_set.REAL_NAME) || Fire2Chuan.Contains(_set.REAL_NAME))
+                            if (attackChuan.Contains(_SE.REAL_NAME) || Fire1Chuan.Contains(_SE.REAL_NAME) || Fire2Chuan.Contains(_SE.REAL_NAME))
                             {
-                                SkillEntity _freshNew = new SkillEntity(
-                                    _set.REAL_NAME,
-                                    _set.LEVEL,
-                                    _set.StateType,
-                                    _set.AT,
-                                    _set.AI_MIN_DIS,_set.AI_MAX_DIS,
-                                    _set.CANBECANCELLEDTO,
-                                    _set.EnterInput, _set.ExitInput, _set.SP_LEVEL);
-                                casual_to_states_after.Add(_freshNew);
+                                casual_to_states_after.Add(_set);
                             }
                         }
                     }
                     Transition.Value.CasualTo = casual_to_states_after.ToArray();
                 }
 
-                if (Transition.Value.EnterInput == Inputs_defined.Fire2)
+                if (Transition.Value.EnterInput == InputKey.Attack3)
                 {
-                    List<SkillEntity> casual_to_states_now = Transition.Value.CasualTo.ToList();
-                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
-
-                    foreach (SkillEntity _set in casual_to_states_now)
+                    List<string> casual_to_states_now = Transition.Value.CasualTo.ToList();
+                    List<string> casual_to_states_after = new List<string>();
+                    
+                    foreach (string _set in casual_to_states_now)
                     {
+                        SkillEntity _SE = SEDic[_set];
                         //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.REAL_NAME != myMoveStateKey)
+                        if (_SE.REAL_NAME != myMoveStateKey)
                         {
                             //然后？概率应该适配多少？
-                            if (attackChuan.Contains(_set.REAL_NAME) || Fire1Chuan.Contains(_set.REAL_NAME) || Fire2Chuan.Contains(_set.REAL_NAME))
+                            if (attackChuan.Contains(_SE.REAL_NAME) || Fire1Chuan.Contains(_SE.REAL_NAME) || Fire2Chuan.Contains(_SE.REAL_NAME))
                             {
-                                SkillEntity _freshNew = new SkillEntity(
-                                    _set.REAL_NAME,
-                                    _set.LEVEL,
-                                    _set.StateType,
-                                    _set.AT,
-                                    _set.AI_MIN_DIS,_set.AI_MAX_DIS,
-                                    _set.CANBECANCELLEDTO,
-                                    _set.EnterInput, _set.ExitInput,
-                                    _set.SP_LEVEL);
-                                casual_to_states_after.Add(_freshNew);
+                                casual_to_states_after.Add(_set);
                             }
                         }
                     }
@@ -502,39 +458,20 @@ namespace Soul
                 }
 
                 //非首发
-                if ((Transition.Value.EnterInput != Inputs_defined.Fire2
-                     &&
-                     Transition.Value.EnterInput != Inputs_defined.Fire1
-                     && Transition.Value.EnterInput != Inputs_defined.Attack)
-                   &&
+                if ((Transition.Value.EnterInput != InputKey.Attack3 &&
+                    Transition.Value.EnterInput != InputKey.Attack2 && 
+                    Transition.Value.EnterInput != InputKey.Attack1) &&
                     (attackChuan.Contains(Transition.Value.REAL_NAME) || Fire1Chuan.Contains(Transition.Value.REAL_NAME) || Fire2Chuan.Contains(Transition.Value.REAL_NAME)))
                 {
-                    List<SkillEntity> casual_to_states_now = Transition.Value.CasualTo.ToList();
-                    List<SkillEntity> casual_to_states_after = new List<SkillEntity>();
+                    List<string> casual_to_states_now = Transition.Value.CasualTo.ToList();
+                    List<string> casual_to_states_after = new List<string>();
 
-                    foreach (SkillEntity _set in casual_to_states_now)
+                    foreach (string _set in casual_to_states_now)
                     {
-                        //接下来这轮分析是整个概率适配系统的关键
-                        if (_set.REAL_NAME != myMoveStateKey
-                           &&
-                            (attackChuan.Contains(_set.REAL_NAME) || Fire1Chuan.Contains(_set.REAL_NAME) || Fire2Chuan.Contains(_set.REAL_NAME))
-                           )//这个环节现在决定了第二次连击后如果有本串之外的选择概率也被修改为了allevel  .
-                            //然而，这第二个条件给增加了一个非常明显的限制，那就是接续在任何一个技能后的续技能必须是attack，fire1，fire2主串上的，
-                            //比如说角色如果第一招是发出一团火焰，第二招可能是把火焰踢出去或拿着这团火给前方一拳，如果火焰和踢火都是靠attack键发动，火焰圈是靠fire1键接续，那么火焰拳必须是fire1或fire2攻击串
-                            //里的一个环节。
-                            //如果把这第二个条件去掉将产生以下结果：玩家每在满一个20级周期时解锁了新技能后，如果这个新技能有后续技，那这个后续技也会发动出来，但无法首发（这个可改）
-                            //并且任何一个技能的后续技能可以完全独立存在，比如点了attack后，点fire1或fire2可以接续出一个不在fire1，fire2主攻击串上的隐藏技能
+                        SkillEntity _SE = SEDic[_set];
+                        if (_SE.REAL_NAME != myMoveStateKey && (attackChuan.Contains(_SE.REAL_NAME) || Fire1Chuan.Contains(_SE.REAL_NAME) || Fire2Chuan.Contains(_SE.REAL_NAME)))
                         {
-                            SkillEntity _freshNew = new SkillEntity(
-                                    _set.REAL_NAME,
-                                    _set.LEVEL,
-                                    _set.StateType,
-                                    _set.AT,
-                                    _set.AI_MIN_DIS,_set.AI_MAX_DIS,
-                                    _set.CANBECANCELLEDTO,
-                                    _set.EnterInput, _set.ExitInput,
-                                    _set.SP_LEVEL);
-                            casual_to_states_after.Add(_freshNew);
+                            casual_to_states_after.Add(_set);
                         }
                     }
                     Transition.Value.CasualTo = casual_to_states_after.ToArray();
@@ -549,7 +486,7 @@ namespace Soul
                     ||
                     Transition.Key == "Test_Move")
                 {
-                    Transition.Value.CasualTo = new SkillEntity[] { };
+                    Transition.Value.CasualTo = new string[] { };
                 }
             }
         }

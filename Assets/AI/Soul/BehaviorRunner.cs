@@ -25,6 +25,7 @@ namespace Soul
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity CurrentSKillEntity;
+        private SkillEntity tempSKillEntity;
         
         Empty_State empty_State = new Empty_State();
         Behavior now_Behavior;

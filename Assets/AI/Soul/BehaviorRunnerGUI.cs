@@ -136,23 +136,23 @@ public class BehaviorRunnerGUI : Editor {
                 }
                 EditorGUILayout.BeginVertical();
                 if (casualToFoldings[i] = EditorGUILayout.Foldout(casualToFoldings[i], " ****************** Casual To States ******************"))
-                {                    
+                {
                     for (int y = 0; y < myScript.State_Transition_Set_List[i].CasualTo.Length; y++)
                     {
                         EditorGUI.indentLevel++;
-                        if (casualToStateKeyOptions.Contains(myScript.State_Transition_Set_List[i].CasualTo[y].REAL_NAME))
+                        if (casualToStateKeyOptions.Contains(myScript.State_Transition_Set_List[i].CasualTo[y]))
                         {
                             stateKeyGUI.normal.textColor = new Color(0.2f, 0.7f, 0.5f);                        
-                            myScript.State_Transition_Set_List[i].CasualTo[y].REAL_NAME =
+                            myScript.State_Transition_Set_List[i].CasualTo[y] =
                             casualToStateKeyOptions[EditorGUILayout.Popup(
                             "Casual To State Key",
-                            Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].CasualTo[y].REAL_NAME),
+                            Array.IndexOf(casualToStateKeyOptions, myScript.State_Transition_Set_List[i].CasualTo[y]),
                             casualToStateKeyOptions,
                             stateKeyGUI)];
                         }
                         else
                         {
-                            myScript.State_Transition_Set_List[i].CasualTo[y].REAL_NAME = casualToStateKeyOptions[0];
+                            myScript.State_Transition_Set_List[i].CasualTo[y] = casualToStateKeyOptions[0];
                         }
                         
                         stateKeyGUI.normal.textColor = new Color(0.6f, 0.3f, 0.4f);
@@ -162,7 +162,7 @@ public class BehaviorRunnerGUI : Editor {
                         deleteCasualToButtonStyle.margin = new RectOffset(50, 22, 11, 11);
                         if (GUILayout.Button("DeleteThis", deleteCasualToButtonStyle))
                         {
-                            List<SkillEntity> casualStateList = myScript.State_Transition_Set_List[i].CasualTo.ToList();
+                            List<string> casualStateList = myScript.State_Transition_Set_List[i].CasualTo.ToList();
                             casualStateList.RemoveAt(y);
                             myScript.State_Transition_Set_List[i].CasualTo = casualStateList.ToArray();
                             EditorGUI.indentLevel--;
@@ -183,8 +183,8 @@ public class BehaviorRunnerGUI : Editor {
                             EditorGUI.indentLevel++;
                             if (GUILayout.Button("  +  " + myScript.State_Transition_Set_List[z].REAL_NAME, addCasualToButtonStyle))
                             {
-                                List<SkillEntity> casualStateList = myScript.State_Transition_Set_List[i].CasualTo.ToList();
-                                casualStateList.Add(myScript.State_Transition_Set_List[z]);
+                                List<string> casualStateList = myScript.State_Transition_Set_List[i].CasualTo.ToList();
+                                casualStateList.Add(myScript.State_Transition_Set_List[z].REAL_NAME);
                                 myScript.State_Transition_Set_List[i].CasualTo = casualStateList.ToArray();
                             }
                             EditorGUI.indentLevel--;
@@ -213,8 +213,8 @@ public class BehaviorRunnerGUI : Editor {
                 EditorGUILayout.EndVertical();
                 
                 myScript.State_Transition_Set_List[i].CANBECANCELLEDTO = EditorGUILayout.Toggle("superCancel", myScript.State_Transition_Set_List[i].CANBECANCELLEDTO);
-                myScript.State_Transition_Set_List[i].EnterInput = (Inputs_defined)EditorGUILayout.EnumPopup("enter input", myScript.State_Transition_Set_List[i].EnterInput);
-                myScript.State_Transition_Set_List[i].ExitInput = (Inputs_defined)EditorGUILayout.EnumPopup("exit input", myScript.State_Transition_Set_List[i].ExitInput);
+                myScript.State_Transition_Set_List[i].EnterInput = (InputKey)EditorGUILayout.EnumPopup("enter input", myScript.State_Transition_Set_List[i].EnterInput);
+                myScript.State_Transition_Set_List[i].ExitInput = (InputKey)EditorGUILayout.EnumPopup("exit input", myScript.State_Transition_Set_List[i].ExitInput);
                 myScript.State_Transition_Set_List[i].SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", myScript.State_Transition_Set_List[i].SP_LEVEL,exoptions_display,exoptions);
                 GUI.backgroundColor = Color.blue;
                 
@@ -237,7 +237,7 @@ public class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.State_Transition_Set_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, 0, null, null, Inputs_defined.Null, Inputs_defined.Null, 0, 0));
+                myScript.State_Transition_Set_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0));
                 InitializeList(-1, myScript.State_Transition_Set_List.Count);
             }
         }
