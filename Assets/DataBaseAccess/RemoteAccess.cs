@@ -102,8 +102,8 @@ namespace dataAccess
                         break;
                     }
                 }
-                nineAndTwo.moveType = _TempCharacterResourceInfo.moveType;
-                nineAndTwo.rushType = _TempCharacterResourceInfo.rushType;
+                nineAndTwo.moveType = _TempCharacterResourceInfo.MoveType;
+                nineAndTwo.rushType = _TempCharacterResourceInfo.RushType;
                 nineAndTwo.canDefend = _TempCharacterResourceInfo.DEFENDABLE_FLAG;
                 characterDataInfo._NineAndTwo = nineAndTwo;
                 characterDataInfo._NineAndTwo.SortNineAndTwo();

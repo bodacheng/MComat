@@ -4,26 +4,26 @@ using Skill;
 [Serializable]
 public class CharConfig
 {
-    public string RECORD_ID;//monsterTable ID
+    public string RECORD_ID;
     public string TYPE;
-    public string REAL_NAME;//monsterTable realName
-    public string showNameEN;//monsterTable showNameEN
+    public string REAL_NAME;
+    public string showNameEN;
     public string showNameCN;
     public string showNameJP;
     public Zokusei _zokusei = Zokusei.lightMagic;
     public string SPECIAL_ZOKUSEI;
     public string BASIC_MOVEMENT_PACK = "basic_anim";//monsterTable BasicMoveSet
-    public MoveType moveType = MoveType.Move_normal;//monsterTable moveType
-    public RushType rushType = RushType.RushBack;//monsterTable accSKill
+    public MoveType MoveType = MoveType.Move_normal;//monsterTable moveType
+    public RushType RushType = RushType.RushBack;//monsterTable accSKill
     public bool DEFENDABLE_FLAG = true;
-    public string instructionEN;
-    public string instructionCH;
-    public string instructionJP;
+    public string InstructionEN;
+    public string InstructionCH;
+    public string InstructionJP;
     public int RARITY_LEVEL = 3;
 
     public PassiveSkillConfigs GetPassiveSkillConfigs()
     {
-        PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(moveType, DEFENDABLE_FLAG, rushType);
+        PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(MoveType, DEFENDABLE_FLAG, RushType);
         return passiveSkillConfigs;
     }
 

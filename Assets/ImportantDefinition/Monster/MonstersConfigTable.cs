@@ -202,7 +202,7 @@ public class MonstersConfigTable
                     SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI,
                     BASIC_MOVEMENT_PACK = characterResourceInfo.BASIC_MOVEMENT_PACK
                 };
-                switch (characterResourceInfo.moveType)
+                switch (characterResourceInfo.MoveType)
                 {
                     case MoveType.Move_normal:
                         row.MOVE_TYPE = "Move1";
@@ -217,7 +217,7 @@ public class MonstersConfigTable
                         row.MOVE_TYPE = "Move1";
                         break;
                 }
-                switch (characterResourceInfo.rushType)
+                switch (characterResourceInfo.RushType)
                 {
                     case RushType.Jump:
                         row.MOTILITY_SKILL_PACK = "Jump";
@@ -318,7 +318,7 @@ public class MonstersConfigTable
             SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI,
             BASIC_MOVEMENT_PACK = characterResourceInfo.BASIC_MOVEMENT_PACK
         };
-        switch (characterResourceInfo.moveType)
+        switch (characterResourceInfo.MoveType)
         {
             case MoveType.Move_normal:
                 row.MOVE_TYPE = "Move1";
@@ -330,7 +330,7 @@ public class MonstersConfigTable
                 row.MOVE_TYPE = "Move3";
                 break;
         }
-        switch(characterResourceInfo.rushType)
+        switch(characterResourceInfo.RushType)
         {
             case RushType.None:
                 row.MOTILITY_SKILL_PACK = "None";
@@ -389,38 +389,38 @@ public class MonstersConfigTable
         switch (row.MOVE_TYPE)
         {
             case "Move1":
-                _CharacterResourceInfo.moveType = MoveType.Move_normal;
+                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
                 break;
             case "Move2":
-                _CharacterResourceInfo.moveType = MoveType.Move_slow;
+                _CharacterResourceInfo.MoveType = MoveType.Move_slow;
                 break;
             case "Move3":
-                _CharacterResourceInfo.moveType = MoveType.Move_fast;
+                _CharacterResourceInfo.MoveType = MoveType.Move_fast;
                 break;
             case "Test":
-                _CharacterResourceInfo.moveType = MoveType.Test_Move;
+                _CharacterResourceInfo.MoveType = MoveType.Test_Move;
                 break;
             default:
-                _CharacterResourceInfo.moveType = MoveType.Move_normal;
+                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
                 break;
         }
 
         switch (row.MOTILITY_SKILL_PACK)
         {
             case "Jump":
-                _CharacterResourceInfo.rushType = RushType.Jump;
+                _CharacterResourceInfo.RushType = RushType.Jump;
                 break;
             case "Rush":
-                _CharacterResourceInfo.rushType = RushType.Rush;
+                _CharacterResourceInfo.RushType = RushType.Rush;
                 break;
             case "RushBack":
-                _CharacterResourceInfo.rushType = RushType.RushBack;
+                _CharacterResourceInfo.RushType = RushType.RushBack;
                 break;
             case "None":
-                _CharacterResourceInfo.rushType = RushType.None;
+                _CharacterResourceInfo.RushType = RushType.None;
                 break;
             default:
-                _CharacterResourceInfo.rushType = RushType.RushBack;
+                _CharacterResourceInfo.RushType = RushType.RushBack;
                 break;
         }
 

@@ -349,12 +349,12 @@ public class ConfigFileManager : MonoBehaviour {
                 }
                 _CharacterResourceInfo.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
                 _CharacterResourceInfo.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
-                _CharacterResourceInfo.moveType = MoveType.Move_normal;
-                _CharacterResourceInfo.rushType = RushType.RushBack;
+                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
+                _CharacterResourceInfo.RushType = RushType.RushBack;
                 _CharacterResourceInfo.DEFENDABLE_FLAG = true;
-                _CharacterResourceInfo.instructionCH = null;
-                _CharacterResourceInfo.instructionEN = null;
-                _CharacterResourceInfo.instructionJP = null;
+                _CharacterResourceInfo.InstructionCH = null;
+                _CharacterResourceInfo.InstructionEN = null;
+                _CharacterResourceInfo.InstructionJP = null;
                 _CharacterResourceInfo.RARITY_LEVEL = 1;
 
                 AllNewCharacterConfigsOfAllTypes.Add(_CharacterResourceInfo);
