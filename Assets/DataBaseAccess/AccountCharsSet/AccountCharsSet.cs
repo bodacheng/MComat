@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Model;
-using mainMenu;
 
 namespace dataAccess
 {
@@ -10,8 +9,8 @@ namespace dataAccess
     public partial class AccountCharsSet
     {
         public static AccountCharsSet instance;
-        public static IDictionary<string, MonsterOfPlayerListModel> AccountCharacterInfoListObjectsDictionary = new Dictionary<string, MonsterOfPlayerListModel>();
-        public static IDictionary<string, GetMonsterOfPlayerDetailModel> AccountCharacterInfoDictionary = new Dictionary<string, GetMonsterOfPlayerDetailModel>();
+        public static IDictionary<string, MonsterOfPlayerListModel> AccountCharListObjectsDic = new Dictionary<string, MonsterOfPlayerListModel>();
+        public static IDictionary<string, GetMonsterOfPlayerDetailModel> AccountCharInfoDic = new Dictionary<string, GetMonsterOfPlayerDetailModel>();
 
         public static AccountCharsSet Instance
         {
@@ -25,28 +24,21 @@ namespace dataAccess
             }
         }
 
-        public static bool CheckIfContainsAccountCharsSetKey(string key)
+        public IEnumerator UpdateMyCharInfo(GetMonsterOfPlayerDetailModel target)
         {
-            return key != null && AccountCharacterInfoListObjectsDictionary.Keys.Contains(key);
-        }
-
-        public IEnumerator UpdateMyCharInfo(GetMonsterOfPlayerDetailModel characterDataInfo)
-        {
-            IEnumerator getchar = GetAccountCharInfo(characterDataInfo.monsterOfPlayerId);
+            IEnumerator getchar = GetAccountCharInfo(target.monsterOfPlayerId);
             yield return getchar;
-            GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            if (targetAccountCharacterInfo == null)
+            GetMonsterOfPlayerDetailModel targetAccountCharInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            if (targetAccountCharInfo == null)
                 yield break;
 
-            yield return ExecuteCharDataUpate(characterDataInfo);
+            yield return ExecuteCharDataUpate(target);
             yield break;
         }
         
-        IEnumerator temp_enumerator;
-        GetMonsterOfPlayerDetailModel result;
         public IEnumerator AddOneCharacterToAccount(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
         {
-            temp_enumerator = null;
+            IEnumerator temp_enumerator = null;
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
@@ -58,36 +50,13 @@ namespace dataAccess
                     break;
             }
             yield return temp_enumerator;
-            result = null;
+            GetMonsterOfPlayerDetailModel result = null;
             if (temp_enumerator.Current != null)
                 result = (GetMonsterOfPlayerDetailModel)temp_enumerator.Current;
-            if (result != null)
+            if (result == null)
             {
-                //yield return MonsterBox.AddOneNewIcon(result.monsterOfPlayerId);
-            }else{
                 Debug.Log("角色添加失败");
             }
-        }
-
-        public IEnumerator LoadMyOwnedAccountCharacterInfoList()
-        {
-            switch (AccountSet.Instance._playerinfoReferenceMode)
-            {
-                case playerinfoReferenceMode.localTestSaveData:
-                    LoadAccountCharacterInfoListObjectsViaJsonFile();
-                    break;
-                case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return LoadAccountCharacterInfoListObjectsRemote(ApiLanguage.JaJp);
-                    break;
-                case playerinfoReferenceMode.formalVersion:
-                    break;
-            }
-            foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValuePair in AccountCharacterInfoListObjectsDictionary)
-            {
-                IEnumerator getchar = Instance.GetAccountCharInfo(keyValuePair.Value.monsterOfPlayerId);
-                yield return getchar;
-            }
-            yield break;
         }
 
         // 这一步的执行应该是毫不犹豫的因为上一步已经确定了数据无误可以更新
@@ -99,15 +68,8 @@ namespace dataAccess
                 IEnumerator getchar = GetAccountCharInfo(after.monsterOfPlayerId);
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-
-                if (targetAccountCharacterInfo == null)
-                {
-                    Debug.Log("欲更新角色不存在。");
-                    yield break;
-                }
                 yield break;
             }
-            Debug.Log("开始尝试更新角色信息。monsterOfPlayerId:"+after.monsterOfPlayerId);
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
@@ -125,62 +87,22 @@ namespace dataAccess
 
         public IEnumerator GetAccountCharInfo(string monsterlocalid)
         {
-            if (monsterlocalid == null)
+            GetMonsterOfPlayerDetailModel accountCharInfo = null;
+            switch (AccountSet.Instance._playerinfoReferenceMode)
             {
-                yield return null;
+                case playerinfoReferenceMode.localTestSaveData:
+                    accountCharInfo = LoadAccountCharacterInfoViaJsonFile(monsterlocalid);
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid, ApiLanguage.JaJp);
+                    yield return load;
+                    accountCharInfo = (GetMonsterOfPlayerDetailModel)load.Current;
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
             }
-            else
-            {
-                if (AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
-                {
-                    if (AccountCharacterInfoDictionary[monsterlocalid] != null)
-                    {
-                        yield return AccountCharacterInfoDictionary[monsterlocalid];
-                    }
-                    else
-                    {
-                        Debug.Log("角色字典内存丢失？？localid:" + monsterlocalid);
-                        yield return null;
-                    }
-                }
-                else
-                {
-                    Debug.Log("开始新注册角色信息：" + monsterlocalid);
-                    GetMonsterOfPlayerDetailModel accountCharacterInfo = null;
-                    switch (AccountSet.Instance._playerinfoReferenceMode)
-                    {
-                        case playerinfoReferenceMode.localTestSaveData:
-                            accountCharacterInfo = LoadAccountCharacterInfoViaJsonFile(monsterlocalid);
-                            break;
-                        case playerinfoReferenceMode.remoteTestPlayer:
-                            IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid, ApiLanguage.JaJp);
-                            yield return load;
-                            accountCharacterInfo = (GetMonsterOfPlayerDetailModel)load.Current;
-                            break;
-                        case playerinfoReferenceMode.formalVersion:
-                            break;
-                    }
-
-                    if (accountCharacterInfo != null)
-                    {
-                        if (!AccountCharacterInfoDictionary.ContainsKey(monsterlocalid))
-                        {
-                            AccountCharacterInfoDictionary.Add(monsterlocalid, accountCharacterInfo);
-                        }
-                        else
-                        {
-                            Debug.Log("错误?localid重复:" + monsterlocalid);
-                            AccountCharacterInfoDictionary[monsterlocalid] = accountCharacterInfo;
-                        }
-                        yield return accountCharacterInfo;
-                    }
-                }
-            }
-        }
-
-        int IntCompare(int i1, int i2)
-        {
-            return i1 > i2 ? 1 : i1 < i2 ? -1 : 0;
+            DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
+            yield return accountCharInfo;            
         }
     }
 }

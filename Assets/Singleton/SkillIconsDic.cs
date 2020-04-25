@@ -122,13 +122,13 @@ public class SkillIconsDic {
         switch (spLevel)
         {
             case 0:
-                return Resources.Load<GameObject>("Sprites/skillIcons/" + "normal_default") as GameObject;
+                return Resources.Load<GameObject>("Sprites/skillIcons/normal_default") as GameObject;
             case 1:
-                return Resources.Load<GameObject>("Sprites/skillIcons/" + "ex1_default") as GameObject;
+                return Resources.Load<GameObject>("Sprites/skillIcons/ex1_default") as GameObject;
             case 2:
-                return Resources.Load<GameObject>("Sprites/skillIcons/" + "ex2_default") as GameObject;
+                return Resources.Load<GameObject>("Sprites/skillIcons/ex2_default") as GameObject;
             case 3:
-                return Resources.Load<GameObject>("Sprites/skillIcons/" + "ex3_default") as GameObject;
+                return Resources.Load<GameObject>("Sprites/skillIcons/ex3_default") as GameObject;
         }
         return null;
     }

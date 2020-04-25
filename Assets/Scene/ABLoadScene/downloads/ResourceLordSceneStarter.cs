@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using UnityEngine.SceneManagement;
-using System.Linq;
 using Api.Dto.Model;
 using Skill;
 using mainMenu;
@@ -100,7 +99,10 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             yield return MySkillStonesReader.Instance.GenerateOneStoneInfo(skillStoneOfPlayerInfoModel);
             i++;
         }
-        MySkillStonesReader.Instance.OverrideMySkillStoneInfosOnLocalFile(MySkillStonesReader.mySkillStonesDataDic.Values.ToList());
+        foreach (SkillStoneOfPlayerInfoModel value in MySkillStonesReader.mySkillStonesDataDic.Values)
+        {
+            MySkillStonesReader.Instance.OverrideMySkillStone(value);
+        }
         SceneManager.LoadScene(1);
         yield break;
     }

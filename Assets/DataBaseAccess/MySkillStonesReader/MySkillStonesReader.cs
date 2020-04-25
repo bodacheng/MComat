@@ -24,11 +24,11 @@ namespace dataAccess
             }
         }
         public static IDictionary<string, SkillStoneOfPlayerInfoModel> mySkillStonesDataDic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
-        public static IDictionary<string, DragAndDropItem> mySkillStonesObjectsDic = new Dictionary<string, DragAndDropItem>();
+        public static IDictionary<string, SKStoneItem> mySkillStonesObjectsDic = new Dictionary<string, SKStoneItem>();
         
         public static void PreventStonesFromDestroy()
         {
-            foreach (KeyValuePair<string, DragAndDropItem> keyValuePair in mySkillStonesObjectsDic)
+            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in mySkillStonesObjectsDic)
             {
                 keyValuePair.Value.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
             }
@@ -59,19 +59,17 @@ namespace dataAccess
             return id == null ? null : mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : null;
         }
         
-        public DragAndDropItem GetOneStoneModel(string localStoneid)
+        public SKStoneItem GetOneStoneModel(string localStoneid)
         {
             return mySkillStonesObjectsDic.ContainsKey(localStoneid) ? mySkillStonesObjectsDic[localStoneid] : null;
         }
         
-        // 待补充
-        public IEnumerator UpdateMySkillStone()
+        public IEnumerator UpdateMySkillStone(string stoneOfPlayerID)
         {
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
-                    // 本地的技能石存档是一个文件，所以只能整体存
-                    Instance.OverrideMySkillStoneInfosOnLocalFile(mySkillStonesDataDic.Values.ToList());//这个要改的。现在根本没有一个单独更新技能石的函数
+                    Instance.OverrideMySkillStone(mySkillStonesDataDic[stoneOfPlayerID]);
                 break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     // 远程对技能石的更新操作是以技能石为单位的
@@ -81,7 +79,7 @@ namespace dataAccess
             }
             yield break;        
         }
-
+        
         public IEnumerator LoadMySkillStones()
         {
             switch (AccountSet.Instance._playerinfoReferenceMode)
@@ -187,26 +185,26 @@ namespace dataAccess
             SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfigByID(C2skillid);
             SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfigByID(C3skillid);
             List<SkillConfig> allnineskill = new List<SkillConfig>();
-
-            if (_SkillConfigA1 != null)
+            
+            if (_SkillConfigA1 != null && string.IsNullOrEmpty(_SkillConfigA1.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigA1);
-            if (_SkillConfigA2 != null)
+            if (_SkillConfigA2 != null && string.IsNullOrEmpty(_SkillConfigA2.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigA2);
-            if (_SkillConfigA3 != null)
+            if (_SkillConfigA3 != null && string.IsNullOrEmpty(_SkillConfigA3.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigA3);
-            if (_SkillConfigB1 != null)
+            if (_SkillConfigB1 != null && string.IsNullOrEmpty(_SkillConfigB1.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigB1);
-            if (_SkillConfigB2 != null)
+            if (_SkillConfigB2 != null && string.IsNullOrEmpty(_SkillConfigB2.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigB2);
-            if (_SkillConfigB3 != null)
+            if (_SkillConfigB3 != null && string.IsNullOrEmpty(_SkillConfigB3.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigB3);
-            if (_SkillConfigC1 != null)
+            if (_SkillConfigC1 != null && string.IsNullOrEmpty(_SkillConfigC1.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigC1);
-            if (_SkillConfigC2 != null)
+            if (_SkillConfigC2 != null && string.IsNullOrEmpty(_SkillConfigC2.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigC2);
-            if (_SkillConfigC3 != null)
+            if (_SkillConfigC3 != null && string.IsNullOrEmpty(_SkillConfigC3.CONNATE_CODE))
                 allnineskill.Add(_SkillConfigC3);
-
+                
             int wholeskillpoint = 0;
             for (int i = 0; i < allnineskill.Count; i++)
             {

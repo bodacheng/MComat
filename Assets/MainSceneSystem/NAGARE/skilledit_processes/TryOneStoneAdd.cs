@@ -82,7 +82,7 @@ public class TryOneStoneAdd : MainSceneProcess
     {
         if (step == 1)
         {
-            if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
+            if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>())
             {
                 step = 2;
                 LoadingCanvas.target.HigtLightRect(TheNineSlot.Instance.A1DragAndDropCell.transform);

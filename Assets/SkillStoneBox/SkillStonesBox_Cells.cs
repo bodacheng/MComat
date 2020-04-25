@@ -11,7 +11,7 @@ namespace mainMenu
     {        
         [Space(7)]
         [Header("格子pretab")]
-        public DragAndDropCell Cellprefab;
+        public StoneCell Cellprefab;
         
         [Space(5)]
         [Header("选中框")]
@@ -22,17 +22,17 @@ namespace mainMenu
         [Header("石头滚动视窗")]
         public ScrollRect stoneviewScrollRect;
         
-        public static IDictionary<int, DragAndDropCell> CellsDictionary = new Dictionary<int, DragAndDropCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        public static IDictionary<int, StoneCell> CellsDictionary = new Dictionary<int, StoneCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
         
         public static void PreventCellsFromDestroy()
         {
-            foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
+            foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDictionary)
             {
                 keyValuePair.Value.transform.SetParent( ResourceKeeper.dontDestroyOnLoadParent);
             }
         }
         
-        public static void SeletedRender(DragAndDropCell cell)
+        public static void SeletedRender(StoneCell cell)
         {
             if (cell == null)
             {
@@ -40,7 +40,7 @@ namespace mainMenu
                 return;
             }
             
-            if (cell._SelectMode == DragAndDropCell.SelectMode.single)
+            if (cell._SelectMode == StoneCell.SelectMode.single)
             {
                 _Selected.SetActive(true);
                 _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
@@ -50,7 +50,7 @@ namespace mainMenu
                 _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                 _Selected.gameObject.SetActive(true);
             }
-            else if (cell._SelectMode == DragAndDropCell.SelectMode.multi)
+            else if (cell._SelectMode == StoneCell.SelectMode.multi)
             {
             }
         }
@@ -63,10 +63,10 @@ namespace mainMenu
             {
                 if (!CellsDictionary.ContainsKey(i))//我姑且认为该字典里每个key值对应的SkillStoneCell对象不会凭空消失
                 {
-                    DragAndDropCell cell = Instantiate(Cellprefab);
+                    StoneCell cell = Instantiate(Cellprefab);
                     cell.empty = new Color(1, 1, 1, 0.6f);
                     cell.full = new Color(1, 1, 1, 1);
-                    cell.cellPhase = DragAndDropCell.CellPhase.SkillStoneBoxCell;
+                    cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
                     cell._SkillStoneSlot = null;//技能石box里用不到这个
                     CellsDictionary.Add(i, cell);
                 }
@@ -86,16 +86,16 @@ namespace mainMenu
                     CellButtonBeheviour_EditCharSkill(CellsDictionary[i]);
                 }
                 CellsDictionary[i]._selected.SetActive(false);
-                CellsDictionary[i]._SelectMode = DragAndDropCell.SelectMode.single;
+                CellsDictionary[i]._SelectMode = StoneCell.SelectMode.single;
             }
             GridLayoutGroup gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             hangshu = cellsLimit / gridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hangshu);
         }
         
-        public DragAndDropCell GetFirstEmptyCell()
+        public StoneCell GetFirstEmptyCell()
         {
-            foreach (KeyValuePair<int, DragAndDropCell> keyValuePair in CellsDictionary)
+            foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDictionary)
             {
                 if (keyValuePair.Value.GetItem() != null)
                     continue;
@@ -105,7 +105,7 @@ namespace mainMenu
         }
         
         float lastclicktime;
-        public void CellButtonBeheviour_EditCharSkill(DragAndDropCell _SkillStoneCell)
+        public void CellButtonBeheviour_EditCharSkill(StoneCell _SkillStoneCell)
         {
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
@@ -116,14 +116,14 @@ namespace mainMenu
                     {
                         if (TheNineSlot.Instance.GetFocusingStoneSlot() != null)
                         {
-                            _SkillStoneCell.DragStoneFromSKillStoneBoxToNineSlot(_SkillStoneCell,TheNineSlot.Instance.GetFocusingStoneSlot());
+                            _SkillStoneCell.Install(_SkillStoneCell,TheNineSlot.Instance.GetFocusingStoneSlot());
                         }
                     }
                     lastclicktime = Time.time;
-                    DragAndDropItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfigOfSkillStone != null)
+                    SKStoneItem _stone = _SkillStoneCell.GetItem();
+                    if (_stone != null && _stone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfigOfSkillStone, _stone.SkillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
                     }
                 }
                 button.onClick.RemoveAllListeners();
@@ -132,17 +132,17 @@ namespace mainMenu
             }
         }
         
-        public void CellButtonBeheviour_STStoneShow(DragAndDropCell _SkillStoneCell)
+        public void CellButtonBeheviour_STStoneShow(StoneCell _SkillStoneCell)
         {
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
             {
                 void buttonFeature()
                 {
-                    DragAndDropItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfigOfSkillStone != null)
+                    SKStoneItem _stone = _SkillStoneCell.GetItem();
+                    if (_stone != null && _stone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfigOfSkillStone, _stone.SkillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
                     }
                 }
                 button.onClick.RemoveAllListeners();
@@ -151,7 +151,7 @@ namespace mainMenu
             }
         }
         
-        public IEnumerator ShowUsingChar(DragAndDropItem dragAndDropItem, HeroIcon targetIcon)
+        public IEnumerator ShowUsingChar(SKStoneItem dragAndDropItem, HeroIcon targetIcon)
         {
             if (dragAndDropItem == null || dragAndDropItem.SkillStoneOfPlayerId == null)
             {

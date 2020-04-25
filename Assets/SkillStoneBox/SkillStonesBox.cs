@@ -43,7 +43,7 @@ namespace mainMenu
 
         [Space(7)]
         [Header("技能石头删除区域")]
-        public DragAndDropCell DeleteArea;
+        public StoneCell DeleteArea;
 
         [Space(7)]
         [Header("攻击范围限定")]
@@ -77,7 +77,7 @@ namespace mainMenu
         
         public IEnumerator StartUp(int stoneboxsize)
         {
-            DeleteArea.cellPhase = DragAndDropCell.CellPhase.DeleteArea;
+            DeleteArea.cellPhase = StoneCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
             Debug.Log("技能石盒子容量为" + stoneboxsize);
             GenerateCells(stoneboxsize, 1);
@@ -178,13 +178,13 @@ namespace mainMenu
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<string> UsingStoneIDs)
         {
-            foreach (KeyValuePair<int, DragAndDropCell> cellPair in CellsDictionary)
+            foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
             {
                 // 下面第一行（UpdateMyItem）至关重要。技能石box往往和九宫格一起显示，readANineAndTwo函数如果和arrangeSkillStonesToBox配合运行，
                 // 都是前者在前，决定好在九宫格里显示的角色装备中石头是啥，先放在那里。这个时间点上技能石背包里的格子还没有断开和那几个石头的连接。如果你不UpdateMyItem一下，
                 // 它会把已经放到九宫格里的石头给拔下来扔进stonesTempContainer。
                 cellPair.Value.UpdateMyItem();
-                DragAndDropItem dragAndDropItem = cellPair.Value.GetItem();
+                SKStoneItem dragAndDropItem = cellPair.Value.GetItem();
                 if (dragAndDropItem != null)
                 {
                     dragAndDropItem.transform.SetParent(stonesTempContainer);
@@ -205,14 +205,14 @@ namespace mainMenu
                 {
                     if (!UsingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
                     {
-                        CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
+                        CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
                         _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
                         _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                         cellindex++;
                     }
                     else
                     {
-                        CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
+                        CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
                         _SkillStoneCell.UpdateMyItem();
                         Debug.Log("有使用中的技能石头，直接跳过这一格");
                     }
@@ -220,7 +220,7 @@ namespace mainMenu
                 else
                 {
                     MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
-                    CellsDictionary.TryGetValue(cellindex, out DragAndDropCell _SkillStoneCell);
+                    CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
                     _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
                     _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
@@ -256,10 +256,10 @@ namespace mainMenu
             GameObject Icon = (GameObject)process.Current;
             if (Icon == null)
                 Icon = Instantiate(SkillIconsDic.Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL));
-            DragAndDropItem item = Icon.GetComponent<DragAndDropItem>();
+            SKStoneItem item = Icon.GetComponent<SKStoneItem>();
             if (item == null)
             {
-                item = Icon.AddComponent<DragAndDropItem>();
+                item = Icon.AddComponent<SKStoneItem>();
             }
 
             if (!MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
@@ -267,8 +267,8 @@ namespace mainMenu
             else
                  MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] = item;
 
-            item._SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
-            item.gameObject.name = "stone_" + item._SkillConfigOfSkillStone.TYPE + "_" + item._SkillConfigOfSkillStone.REAL_NAME;
+            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
+            item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(_stonesTempContainer);           
         }

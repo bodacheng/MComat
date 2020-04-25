@@ -28,13 +28,14 @@
         public float AI_MIN_DIS;
         public float AI_MAX_DIS;
         public int SP_LEVEL;
+        public string CONNATE_CODE;
         public int RARITY_LEVEL;
 
         public SkillConfig Clone()
         {
             return (SkillConfig)MemberwiseClone();
         }
-
+        
         public SkillConfig()
         {
             RECORD_ID = null;
@@ -44,6 +45,7 @@
             ATTACK_WEIGHT = 1;
             STATE_TYPE = BehaviorType.NONE;
             SP_LEVEL = 1;
+            CONNATE_CODE = null;
         }
         public SkillConfig(string id, string type, string keyName, string ShowName, int AT, BehaviorType stateType, float AITriggerDistanceMin,float AITriggerDistanceMax, int SPLevel)
         {
@@ -57,6 +59,7 @@
             this.AI_MAX_DIS = AITriggerDistanceMax;
             this.SP_LEVEL = SPLevel;
             this.RARITY_LEVEL = 0;
+            CONNATE_CODE = null;
         }
     }
     
@@ -74,7 +77,7 @@
         {
             this.moveType = moveType;
             this.hasDefend = hasDefend;
-            this.rushType = RStyle;
+            rushType = RStyle;
 
             switch (moveType)
             {

@@ -62,9 +62,9 @@ public class TryEditALines : MainSceneProcess
     {
         if (step == 1)
         {
-            if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
-                TheNineSlot.Instance.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
-                    TheNineSlot.Instance.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
+            if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() &&
+                TheNineSlot.Instance.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() &&
+                    TheNineSlot.Instance.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>())
             {
                 TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(true);
                 step = 2;

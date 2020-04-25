@@ -55,22 +55,23 @@ MonoBehaviour:
   iconButton: {fileID: 4599398632650404794}
   Icon: {fileID: 4599398633655188732}
   frame: {fileID: 7186568799583915067}
-  _CharacterResourceInfo:
+  cooldownCurtain: {fileID: 0}
+  _CharConfig:
     RECORD_ID: 
-    type: 
+    TYPE: 
     REAL_NAME: 
     showNameEN: 
     showNameCN: 
     showNameJP: 
-    _zokusei: 6
+    _zokusei: 2
     SPECIAL_ZOKUSEI: 
     BASIC_MOVEMENT_PACK: basic_anim
-    moveType: 1
-    rushType: 2
+    MoveType: 1
+    RushType: 2
     DEFENDABLE_FLAG: 1
-    instructionEN: 
-    instructionCH: 
-    instructionJP: 
+    InstructionEN: 
+    InstructionCH: 
+    InstructionJP: 
     RARITY_LEVEL: 3
 --- !u!114 &4599398632650404794
 MonoBehaviour:
@@ -81,7 +82,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4599398632650404797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -95,17 +96,20 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 7186568799583915067}
@@ -174,7 +178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4599398633655188610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -192,6 +196,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9000079156772387632
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,10 +251,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9000079156772387632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 114f321c86931e748a754d8eecc01b8d, type: 2}
+  m_Material: {fileID: 2100000, guid: fbaa37cd5f9454710a0fdef876aefeff, type: 2}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -264,3 +269,4 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1

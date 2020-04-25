@@ -30,13 +30,13 @@ namespace dataAccess
             yield return ApiCaller.Instance.Post<BaseModel<GetMonsterOfPlayerListModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerList", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
                      getlist = model.data.monsterOfPlayerList;
-                     AccountCharacterInfoListObjectsDictionary.Clear();
+                     AccountCharListObjectsDic.Clear();
                     Debug.Log("以下是获得的角色列表信息：");
                     for (int i = 0; i < getlist.Count; i++)
                     {
                         Debug.Log("monsterOfPlayerId:"+ getlist[i].monsterOfPlayerId + " monsterid :" + getlist[i].monsterId);
-                        if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(getlist[i].monsterOfPlayerId))
-                            AccountCharacterInfoListObjectsDictionary.Add(getlist[i].monsterOfPlayerId, getlist[i]);
+                        if (!AccountCharListObjectsDic.ContainsKey(getlist[i].monsterOfPlayerId))
+                            AccountCharListObjectsDic.Add(getlist[i].monsterOfPlayerId, getlist[i]);
                         else
                             Debug.Log("巨大逻辑错误，重复的monsterOfPlayerId:" + getlist[i].monsterOfPlayerId);
                     }
@@ -45,7 +45,7 @@ namespace dataAccess
                 ,
                  model => {
                     Debug.Log("角色列表获取失败。");
-                    AccountCharacterInfoListObjectsDictionary.Clear();
+                    AccountCharListObjectsDic.Clear();
                  }
             );
             yield break;

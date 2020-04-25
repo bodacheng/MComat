@@ -208,6 +208,7 @@
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Json.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_XMLLoad.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_remote.cs" />
+    <Compile Include="Assets\DataBaseAccess\AccountCharsSet\ListObject\AccountCharsSet_ListObject.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_localTest.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />
@@ -515,8 +516,10 @@
     <Compile Include="Assets\Setting\ResourceSetting.cs" />
     <Compile Include="Assets\Setting\ResourceSettingGUI.cs" />
     <Compile Include="Assets\Setting\Setting.cs" />
-    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
-    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_OnDrop.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
@@ -527,6 +530,7 @@
     <Compile Include="Assets\Singleton\myModelPool.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
+    <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
     <Compile Include="Assets\StagesManagement\ArcadeManager.cs" />
@@ -538,13 +542,14 @@
     <Compile Include="Assets\StagesManagement\StagesManagerGUI.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_XML.cs" />
+    <Compile Include="Assets\Structure\DicAdd.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\RandomSelect.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
-    <Compile Include="Assets\TheNineSlot\SkillsPrintOut.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
+    <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
     <Compile Include="Assets\UI\BackGroundPS.cs" />
     <Compile Include="Assets\UI\LoadingCanvas.cs" />

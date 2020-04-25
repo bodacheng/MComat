@@ -43,21 +43,21 @@ namespace dataAccess
             yield break;
         }
 
-        public IEnumerator LevelUpMySkillStone(string skillstoneid, string targetLevel, ApiLanguage apiLanguage)
+        public IEnumerator LevelUpMySkillStone(string skillstoneofplayerid, string targetLevel, ApiLanguage apiLanguage)
         {
             IEnumerator up;
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
-                    up = Instance.LevelUpMySkillStone_LocalJson(skillstoneid, targetLevel);
+                    up = Instance.LevelUpMySkillStone_LocalJson(skillstoneofplayerid, targetLevel);
                     yield return up;
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
-                    up = Instance.LevelUpMySkillStone_Remote(skillstoneid, targetLevel, ApiLanguage.EnUs);
+                    up = Instance.LevelUpMySkillStone_Remote(skillstoneofplayerid, targetLevel, ApiLanguage.EnUs);
                     yield return up;
                     break;
                 case playerinfoReferenceMode.formalVersion:
-                    up = Instance.LevelUpMySkillStone_Remote(skillstoneid, targetLevel, ApiLanguage.EnUs);
+                    up = Instance.LevelUpMySkillStone_Remote(skillstoneofplayerid, targetLevel, ApiLanguage.EnUs);
                     yield return up;
                     break;
             }

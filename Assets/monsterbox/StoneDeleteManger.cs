@@ -16,9 +16,9 @@ public class StoneDeleteManger : MonoBehaviour
     public void EnterDeleteMode()
     {
         SkillStonesBox._Selected.SetActive(false);
-        foreach (KeyValuePair<int, DragAndDropCell> KV in SkillStonesBox.CellsDictionary)
+        foreach (KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDictionary)
         {
-            KV.Value._SelectMode = DragAndDropCell.SelectMode.multi;
+            KV.Value._SelectMode = StoneCell.SelectMode.multi;
             Button button = KV.Value.GetComponent<Button>();
             button.onClick.AddListener(delegate { SelectForDelete(KV.Value); });
         }
@@ -41,9 +41,9 @@ public class StoneDeleteManger : MonoBehaviour
     
     public void RefreshSelectedRender()
     {
-        foreach(KeyValuePair<int,DragAndDropCell> KV in SkillStonesBox.CellsDictionary)
+        foreach(KeyValuePair<int,StoneCell> KV in SkillStonesBox.CellsDictionary)
         {
-            DragAndDropCell cell = KV.Value;
+            StoneCell cell = KV.Value;
             if (cell.GetItem() == null)
             {
                 cell._selected.SetActive(false);
@@ -62,7 +62,7 @@ public class StoneDeleteManger : MonoBehaviour
         }
     }
     
-    void SelectForDelete(DragAndDropCell cell)
+    void SelectForDelete(StoneCell cell)
     {
         if (cell.GetItem() != null)
         {
@@ -79,7 +79,7 @@ public class StoneDeleteManger : MonoBehaviour
         }
     }
     
-    void SelectStoneForDelete(DragAndDropCell cell)
+    void SelectStoneForDelete(StoneCell cell)
     {
         if (cell.GetItem() != null)
         {
@@ -93,7 +93,7 @@ public class StoneDeleteManger : MonoBehaviour
         }
     }
     
-    void RemoveStoneForDelete(DragAndDropCell cell)
+    void RemoveStoneForDelete(StoneCell cell)
     {
         if (cell.GetItem() != null)
         {

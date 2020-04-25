@@ -35,13 +35,20 @@ public class ModelShower : MonoBehaviour
 
     public IEnumerator ShowModel(string localID)
     {
+        if (localID == null)
+        {
+            if (showingChar != null)
+                showingChar.SetActive(false);
+            yield break;
+        }
+        
         GameObject _char = MyModelPool.Instance.GetMyModel(localID);
         if (_char == null)
         {
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
             yield return getchar;
-            GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            yield return _CharSetManager.BuildShowModel(targetAccountCharacterInfo);
+            GetMonsterOfPlayerDetailModel targetInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            yield return _CharSetManager.BuildShowModel(targetInfo);
             _char = MyModelPool.Instance.GetMyModel(localID);
         }
         
@@ -53,17 +60,10 @@ public class ModelShower : MonoBehaviour
             if (showingChar != null)
                 showingChar.SetActive(false);
             showingChar = _char;
-            if (showingChar != null)
-            {
-                showingChar.SetActive(true);
-                showingChar.transform.parent = null;
-                showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 10f));//右
-                showingChar.transform.LookAt(_CameraManager.transform,Vector3.up);
-            }
-            else
-            {
-                Debug.Log("展示用模型加载严重错误. monsterOfPlayerId" + localID);
-            }
+            showingChar.SetActive(true);
+            showingChar.transform.parent = null;
+            showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 10f));//右
+            showingChar.transform.LookAt(_CameraManager.transform,Vector3.up);
         }
         yield return showingChar;
     }

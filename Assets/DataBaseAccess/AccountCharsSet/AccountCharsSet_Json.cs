@@ -41,7 +41,7 @@ namespace dataAccess
                 {
                     string dataAsJson = File.ReadAllText(wholepath);
                     info = JsonConvert.DeserializeObject<MonsterOfPlayerListModel[]>(dataAsJson);
-                    AccountCharacterInfoListObjectsDictionary.Clear();
+                    AccountCharListObjectsDic.Clear();
                     for (int i = 0; i < info.Length; i++)
                     {
                         CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(info[i].monsterId);
@@ -51,15 +51,15 @@ namespace dataAccess
                             continue;
                         }
                         
-                        if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(info[i].monsterOfPlayerId))
-                            AccountCharacterInfoListObjectsDictionary.Add(info[i].monsterOfPlayerId, info[i]);
+                        if (!AccountCharListObjectsDic.ContainsKey(info[i].monsterOfPlayerId))
+                            AccountCharListObjectsDic.Add(info[i].monsterOfPlayerId, info[i]);
                         else
                             Debug.Log("巨大逻辑错误，重复的monsterOfPlayerId:" + info[i].monsterOfPlayerId);
                     }
                 }
                 else
                 {
-                    AccountCharacterInfoListObjectsDictionary.Clear();
+                    AccountCharListObjectsDic.Clear();
                 }
             }
             catch (Exception e)
@@ -72,12 +72,12 @@ namespace dataAccess
         {
             try
             {
-                List<MonsterOfPlayerListModel> accountCharacterInfoListObjects = new List<MonsterOfPlayerListModel>();
-                foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValue in AccountCharacterInfoListObjectsDictionary)
+                List<MonsterOfPlayerListModel> accountCharInfoListObjects = new List<MonsterOfPlayerListModel>();
+                foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValue in AccountCharListObjectsDic)
                 {
-                    accountCharacterInfoListObjects.Add(keyValue.Value);
+                    accountCharInfoListObjects.Add(keyValue.Value);
                 }
-                string json = JsonConvert.SerializeObject(accountCharacterInfoListObjects);
+                string json = JsonConvert.SerializeObject(accountCharInfoListObjects);
                 LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "AccountCharacterInfoList.json", json);
             }
             catch (Exception e)
@@ -106,53 +106,32 @@ namespace dataAccess
             yield break;
         }
 
-        public IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
+        public IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _AccCharInfo)
         {
-            List<int> CurrentLocalIDList = new List<int>();
-            foreach (KeyValuePair<string, MonsterOfPlayerListModel> one in AccountCharacterInfoListObjectsDictionary)
+            List<string> CurrentLocalIDList = new List<string>();
+            foreach (KeyValuePair<string, MonsterOfPlayerListModel> one in AccountCharListObjectsDic)
             {
-                if (!CurrentLocalIDList.Contains(int.Parse(one.Value.monsterOfPlayerId)))
+                if (!CurrentLocalIDList.Contains(one.Value.monsterOfPlayerId))
                 {
-                    CurrentLocalIDList.Add(int.Parse(one.Value.monsterOfPlayerId));
+                    CurrentLocalIDList.Add(one.Value.monsterOfPlayerId);
                 }
                 else
                 {
                     Debug.Log("本地存档有重复的monsterOfPlayerId：" + int.Parse(one.Value.monsterOfPlayerId));
                 }
             }
-            CurrentLocalIDList.Sort(Instance.IntCompare);
-            MonsterOfPlayerListModel AccountCharacterInfoListObject = new MonsterOfPlayerListModel
+            
+            MonsterOfPlayerListModel newListObject = new MonsterOfPlayerListModel
             {
-                monsterId = _accountCharacterInfo.monsterId
+                monsterId = _AccCharInfo.monsterId
             };
-
-            if (CurrentLocalIDList.Contains(int.Parse(_accountCharacterInfo.monsterOfPlayerId)))
-            {
-                Debug.Log("本地存档产生角色信息覆盖行为，宠物的monsterOfPlayerId" + _accountCharacterInfo.monsterOfPlayerId + "但追加仍然继续");
-            }
-
-            AccountCharacterInfoListObject.monsterOfPlayerId = _accountCharacterInfo.monsterOfPlayerId;
-            if (!AccountCharacterInfoListObjectsDictionary.ContainsKey(AccountCharacterInfoListObject.monsterOfPlayerId))
-            {
-                AccountCharacterInfoListObjectsDictionary.Add(AccountCharacterInfoListObject.monsterOfPlayerId, AccountCharacterInfoListObject);
-            }
-            else
-            {
-                AccountCharacterInfoListObjectsDictionary[AccountCharacterInfoListObject.monsterOfPlayerId] = AccountCharacterInfoListObject;
-            }
-
-            if (!AccountCharacterInfoDictionary.ContainsKey(AccountCharacterInfoListObject.monsterOfPlayerId))
-            {
-                AccountCharacterInfoDictionary.Add(AccountCharacterInfoListObject.monsterOfPlayerId, _accountCharacterInfo);
-            }
-            else
-            {
-                AccountCharacterInfoDictionary[AccountCharacterInfoListObject.monsterOfPlayerId] = _accountCharacterInfo;
-            }
-
-            string json = JsonConvert.SerializeObject(_accountCharacterInfo);
-            LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", AccountCharacterInfoListObject.monsterOfPlayerId + ".json", json);
-            yield return _accountCharacterInfo;
+                        
+            newListObject.monsterOfPlayerId = _AccCharInfo.monsterOfPlayerId;
+            DicAdd<string, MonsterOfPlayerListModel>.Add(AccountCharListObjectsDic, newListObject.monsterOfPlayerId, newListObject);
+            DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, newListObject.monsterOfPlayerId, _AccCharInfo);            
+            string json = JsonConvert.SerializeObject(_AccCharInfo);
+            LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", newListObject.monsterOfPlayerId + ".json", json);
+            yield return _AccCharInfo;
         }
 
         public IEnumerator UpdateCharJsonSaveData(GetMonsterOfPlayerDetailModel _CharacterDataInfo)

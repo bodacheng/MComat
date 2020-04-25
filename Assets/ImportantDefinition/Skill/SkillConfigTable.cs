@@ -24,16 +24,17 @@ public class SkillConfigTable
     }
     public IDictionary<string, SkillConfig> SkillConfigRefDic = new Dictionary<string, SkillConfig>();
     
-	public class Row
-	{
-		public string RECORD_ID;
+    public class Row
+    {
+        public string RECORD_ID;
         public string REAL_NAME;
-		public string USEABLE_MONSTER_TYPE;
-		public string ATTACK_WEIGHT;
-		public string ATTACK_TYPE;
+        public string USEABLE_MONSTER_TYPE;
+        public string ATTACK_WEIGHT;
+        public string ATTACK_TYPE;
         public string SP_LEVEL;
-		public string TRIGGER_DIS_MIN;
+        public string TRIGGER_DIS_MIN;
         public string TRIGGER_DIS_MAX;
+        public string CONNATE_CODE;
         public string RARITY_LEVEL;
     }
 
@@ -188,7 +189,8 @@ public class SkillConfigTable
                 grid[i][5] = "SP_LEVEL";
                 grid[i][6] = "TRIGGER_DIS_MIN";
                 grid[i][7] = "TRIGGER_DIS_MAX";
-                grid[i][8] = "RARITY_LEVEL";
+                grid[i][8] = "CONNATE_CODE";
+                grid[i][9] = "RARITY_LEVEL";
             }
             else
             {
@@ -200,7 +202,8 @@ public class SkillConfigTable
                 grid[i][5] = rowList[i - 1].SP_LEVEL;
                 grid[i][6] = rowList[i - 1].TRIGGER_DIS_MIN;
                 grid[i][7] = rowList[i - 1].TRIGGER_DIS_MAX;
-                grid[i][8] = rowList[i - 1].RARITY_LEVEL;
+                grid[i][8] = rowList[i - 1].CONNATE_CODE;
+                grid[i][9] = rowList[i - 1].RARITY_LEVEL;
             }
         }
         string delimiter = ",";
@@ -210,7 +213,7 @@ public class SkillConfigTable
             sb.AppendLine(string.Join(delimiter, grid[index]));
 
         Debug.Log("尝试最终保存文件" + filePath);
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
+        StreamWriter outStream = File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();
     }
@@ -233,7 +236,8 @@ public class SkillConfigTable
                     SP_LEVEL = grid[i][5],
                     TRIGGER_DIS_MIN = grid[i][6],
                     TRIGGER_DIS_MAX = grid[i][7],
-                    RARITY_LEVEL = grid[i][8]
+                    CONNATE_CODE = grid[i][8],
+                    RARITY_LEVEL = grid[i][9]
                 };
                 rowList.Add(row);
             }
@@ -309,6 +313,7 @@ public class SkillConfigTable
                 row.SP_LEVEL = "-1";
                 break;
         }
+        row.CONNATE_CODE = skillConfig.CONNATE_CODE;
         row.RARITY_LEVEL = skillConfig.RARITY_LEVEL.ToString();
         return row;
     }
@@ -344,10 +349,10 @@ public class SkillConfigTable
                 _SkillConfig.STATE_TYPE = BehaviorType.NONE;
                 break;
         }
-
+        
         _SkillConfig.AI_MIN_DIS = float.Parse(row.TRIGGER_DIS_MIN);
         _SkillConfig.AI_MAX_DIS = float.Parse(row.TRIGGER_DIS_MAX);
-
+        
         switch(row.SP_LEVEL)
         {
             case "0":
@@ -366,6 +371,7 @@ public class SkillConfigTable
                 _SkillConfig.SP_LEVEL = -1;
                 break;
         }
+        _SkillConfig.CONNATE_CODE = row.CONNATE_CODE;
         _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
         return _SkillConfig;
     }
@@ -384,7 +390,7 @@ public class SkillConfigTable
 	{
         return rowList.Count <= i ? null : rowList[i];
     }
-
+    
     public Row Find_ID(string find)
 	{
 		return rowList.Find(x => x.RECORD_ID == find);
@@ -392,54 +398,53 @@ public class SkillConfigTable
 	public List<Row> FindAll_ID(string find)
 	{
 		return rowList.FindAll(x => x.RECORD_ID == find);
-	}    
-	public Row Find_MONSTER_TYPE_CODE(string find)
-	{
-		return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
 	}
-	public List<Row> FindAll_MONSTER_TYPE(string find)
-	{
-		return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
-	}
-	public Row Find_keyName(string find)
-	{
-		return rowList.Find(x => x.REAL_NAME == find);
-	}
-	public List<Row> FindAll_keyName(string find)
-	{
-		return rowList.FindAll(x => x.REAL_NAME == find);
-	}
-	public Row Find_AT(string find)
-	{
-		return rowList.Find(x => x.ATTACK_WEIGHT == find);
-	}
-	public List<Row> FindAll_AT(string find)
-	{
-		return rowList.FindAll(x => x.ATTACK_WEIGHT == find);
-	}
-	public Row Find_attackType(string find)
-	{
-		return rowList.Find(x => x.ATTACK_TYPE == find);
-	}
-	public List<Row> FindAll_attackType(string find)
-	{
-		return rowList.FindAll(x => x.ATTACK_TYPE == find);
-	}
-	public Row Find_SPLevel(string find)
-	{
-		return rowList.Find(x => x.SP_LEVEL == find);
-	}
-	public List<Row> FindAll_SPLevel(string find)
-	{
-		return rowList.FindAll(x => x.SP_LEVEL == find);
-	}
-    public Row Find_rarelevel(string find)
+    public Row Find_MONSTER_TYPE_CODE(string find)
+    {
+    	return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
+    }
+    public List<Row> FindAll_MONSTER_TYPE(string find)
+    {
+    	return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
+    }
+    public Row Find_keyName(string find)
+    {
+    	return rowList.Find(x => x.REAL_NAME == find);
+    }
+    public List<Row> FindAll_keyName(string find)
+    {
+    	return rowList.FindAll(x => x.REAL_NAME == find);
+    }
+    public Row Find_AT(string find)
+    {
+    	return rowList.Find(x => x.ATTACK_WEIGHT == find);
+    }
+    public List<Row> FindAll_AT(string find)
+    {
+    	return rowList.FindAll(x => x.ATTACK_WEIGHT == find);
+    }
+    public Row Find_attackType(string find)
+    {
+    	return rowList.Find(x => x.ATTACK_TYPE == find);
+    }
+    public List<Row> FindAll_attackType(string find)
+    {
+    	return rowList.FindAll(x => x.ATTACK_TYPE == find);
+    }
+    public Row Find_SPLevel(string find)
+    {
+    	return rowList.Find(x => x.SP_LEVEL == find);
+    }
+    public List<Row> FindAll_SPLevel(string find)
+    {
+    	return rowList.FindAll(x => x.SP_LEVEL == find);
+    }
+    public Row Find_Rarelevel(string find)
     {
         return rowList.Find(x => x.RARITY_LEVEL == find);
     }
-    public List<Row> FindAll_rarelevel(string find)
+    public List<Row> FindAll_Rarelevel(string find)
     {
         return rowList.FindAll(x => x.RARITY_LEVEL == find);
     }
-
 }

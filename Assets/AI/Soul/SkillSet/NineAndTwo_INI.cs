@@ -306,6 +306,7 @@ public partial class NineAndTwo
                 _SC.AI_MAX_DIS = refSkillConfig.AI_MAX_DIS;
                 _SC.SP_LEVEL = refSkillConfig.SP_LEVEL;
                 _SC.STATE_TYPE = refSkillConfig.STATE_TYPE;
+                _SC.CONNATE_CODE = refSkillConfig.CONNATE_CODE;
             }
         }
         else

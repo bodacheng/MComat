@@ -64,14 +64,9 @@ namespace mainMenu
         // 这个函数的生成本随着“type”选项卡的整理。
         public static IEnumerator MonsterIconsGenerate()
         {
-            foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValuePair in AccountCharsSet.AccountCharacterInfoListObjectsDictionary)
+            foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValuePair in AccountCharsSet.AccountCharListObjectsDic)
             {
-                if (keyValuePair.Value.monsterOfPlayerId != null)
-                    yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId);
-                else
-                {
-                    Debug.Log("角色列表中存在奇怪数据。monsterid" + keyValuePair.Value.monsterId + ", monsterOfPlayerId为null");
-                }
+                yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId);
             }
         }
 
@@ -80,17 +75,7 @@ namespace mainMenu
             IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(monsterOfPlayerId);
             yield return getchar;
             GetMonsterOfPlayerDetailModel targetingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            if (targetingCharacterDataInfo == null)
-            {
-                Debug.Log("读取角色信息严重错误monsterOfPlayerId:" + monsterOfPlayerId);
-                yield break;
-            }
             CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(targetingCharacterDataInfo.monsterId);
-            if (targetingCharacterResourceInfo == null)
-            {
-                Debug.Log("严重错误，无法找到对应角色信息。monsterid:" + targetingCharacterDataInfo.monsterId);
-                yield break;
-            }
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {
@@ -112,15 +97,7 @@ namespace mainMenu
                 targetingIcon._MonsterOfPlayerDetailModel = targetingCharacterDataInfo;
                 targetingIcon._CharConfig = targetingCharacterResourceInfo;
                 targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
-                if (mainMenuIcons.ContainsKey(monsterOfPlayerId))
-                {
-                    mainMenuIcons[monsterOfPlayerId] = targetingIcon;
-                    Debug.Log("重复出现的角色id？"+monsterOfPlayerId);
-                }
-                else
-                {
-                    mainMenuIcons.Add(monsterOfPlayerId, targetingIcon);
-                }
+                DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);
             }
 
             // 下面的环节重新加载type下拉表

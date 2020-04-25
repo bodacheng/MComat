@@ -22,51 +22,38 @@ namespace dataAccess
             }
             yield break;
         }
-
+        
         public SkillStoneOfPlayerInfoModel[] ReturnMySkillStonesViaLocalFile()
         {
-            FileStream FileStream = null;
-            SkillStoneOfPlayerInfoModel[] info = { };
+            List<SkillStoneOfPlayerInfoModel> skillStonesForTest = new List<SkillStoneOfPlayerInfoModel>();
             try
             {
-                info = new SkillStoneOfPlayerInfoModel[] { };
-                string wholepath = Application.persistentDataPath + "/MySkillStones.json";
-                if (File.Exists(wholepath))
+                SkillStoneOfPlayerInfoModel info;
+                string filePath = Application.persistentDataPath + "/MyStones";
+                if (Directory.Exists(filePath))
                 {
-                    string dataAsJson = File.ReadAllText(wholepath);
-                    info = JsonConvert.DeserializeObject<SkillStoneOfPlayerInfoModel[]>(dataAsJson);
-                    Debug.Log("玩家技能石信息读取成功");
+                    foreach (string file in Directory.GetFiles(filePath))
+                    {
+                        string dataAsJson = File.ReadAllText(file);
+                        info = JsonConvert.DeserializeObject<SkillStoneOfPlayerInfoModel>(dataAsJson);
+                        skillStonesForTest.Add(info);
+                    }
                 }
             }
             catch (Exception e)
             {
-                Debug.Log("玩家拥有技能石信息读取失败，建立新技能石头本地测试文件");
                 Debug.Log(e.ToString());
-                List<SkillStoneOfPlayerInfoModel> skillStonesForTest = new List<SkillStoneOfPlayerInfoModel>();
-                int i = 1;
-                foreach (KeyValuePair<string, SkillConfig> _keyValuePair in SkillConfigTable.Instance.SkillConfigRefDic)
-                {
-                    SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
-                    {
-                        skillStoneOfPlayerId = String.Format("{0:D20}", i),
-                        skillId = _keyValuePair.Value.RECORD_ID
-                    };
-                    skillStonesForTest.Add(skillStoneOfPlayerInfoModel);
-                    i++;
-                }
-                if (FileStream != null)
-                    FileStream.Close();
-                return info;
             }
-            return info;
+            return skillStonesForTest.ToArray();
         }
-
-        public void OverrideMySkillStoneInfosOnLocalFile(List<SkillStoneOfPlayerInfoModel> stones)
+        
+        //新
+        public void OverrideMySkillStone(SkillStoneOfPlayerInfoModel stone)
         {
             try
             {
-                string json = JsonConvert.SerializeObject(stones.ToArray());
-                LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "MySkillStones.json", json);
+                string json = JsonConvert.SerializeObject(stone);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stone.skillStoneOfPlayerId + ".json", json);
                 return;
             }
             catch (Exception e)
@@ -77,11 +64,11 @@ namespace dataAccess
             }
         }
         
-        public IEnumerator LevelUpMySkillStone_LocalJson(string skillstoneid, string targetLevel)
+        public IEnumerator LevelUpMySkillStone_LocalJson(string skillstoneofPlayerid, string targetLevel)
         {
-            SkillStoneOfPlayerInfoModel st = GetStoneOfPlayerInfoModelByMyStoneId(skillstoneid);
+            SkillStoneOfPlayerInfoModel st = GetStoneOfPlayerInfoModelByMyStoneId(skillstoneofPlayerid);
             st.level = targetLevel;
-            yield return UpdateMySkillStone();
+            yield return UpdateMySkillStone(skillstoneofPlayerid);
             yield return true;
         }
     }

@@ -16,13 +16,13 @@ using Api.Dto.Model;
 public class SkillStoneSlot
 {
     public int number;
-    public string OnSlotStonelocalID;
-    public DragAndDropCell _DragAndDropCell;
+    public string OnSlotStoneID; // stone of player id
+    public StoneCell _DragAndDropCell;
     
-    public SkillStoneSlot(int num,string OnSlotStonelocalid, DragAndDropCell _DragAndDropCell)
+    public SkillStoneSlot(int num,string OnSlotStonelocalid, StoneCell _DragAndDropCell)
     {
         number = num;
-        OnSlotStonelocalID = OnSlotStonelocalid;
+        OnSlotStoneID = OnSlotStonelocalid;
         this._DragAndDropCell = _DragAndDropCell;
         this._DragAndDropCell._SkillStoneSlot = this;
     }
@@ -30,7 +30,7 @@ public class SkillStoneSlot
     public void RemoveStoneFromSlot()
     {
         _DragAndDropCell.UpdateMyItem();
-        DragAndDropItem _DragAndDropItem = _DragAndDropCell.GetItem();
+        SKStoneItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
             _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
         _DragAndDropCell.UpdateMyItem();
@@ -39,12 +39,12 @@ public class SkillStoneSlot
     public void ReturnStoneToBox()
     {
         _DragAndDropCell.UpdateMyItem();
-        DragAndDropItem _DragAndDropItem = _DragAndDropCell.GetItem();
+        SKStoneItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
         {
-            if (_DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == SkillStonesBox.target.GetFocusingExType())//如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
+            if (_DragAndDropItem._SkillConfig.SP_LEVEL == SkillStonesBox.target.GetFocusingExType())//如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
             {
-                DragAndDropCell dragAndDropCell = SkillStonesBox.target.GetFirstEmptyCell();
+                StoneCell dragAndDropCell = SkillStonesBox.target.GetFirstEmptyCell();
                 if (dragAndDropCell != null)
                 {
                     dragAndDropCell.AddItem(_DragAndDropItem);
@@ -70,9 +70,9 @@ public class SkillStoneSlot
     public IEnumerator ShowOrigin(Color stoneColor)
     {
         RemoveStoneFromSlot();
-        if (OnSlotStonelocalID != null)
+        if (OnSlotStoneID != null)
         {
-            yield return TakeASkillStoneFromBoxToSlot(OnSlotStonelocalID, stoneColor);
+            yield return TakeASkillStoneFromBoxToSlot(OnSlotStoneID, stoneColor);
         }
         _DragAndDropCell.UpdateMyItem();
         _DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
@@ -82,13 +82,13 @@ public class SkillStoneSlot
     public IEnumerator TakeASkillStoneFromBoxToSlot(string OnSlotStonelocalID, Color itemColor)
     {
         SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(OnSlotStonelocalID);
-        DragAndDropItem _DragAndDropItem = MySkillStonesReader.Instance.GetOneStoneModel(OnSlotStonelocalID);
+        SKStoneItem _DragAndDropItem = MySkillStonesReader.Instance.GetOneStoneModel(OnSlotStonelocalID);
         if (_DragAndDropItem == null)
             yield break;
         else
         {
             _DragAndDropItem.GetComponent<Image>().color = itemColor;
-            _DragAndDropCell.GetComponent<Image>().color = _DragAndDropItem._SkillConfigOfSkillStone.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
+            _DragAndDropCell.GetComponent<Image>().color = _DragAndDropItem._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
             _DragAndDropCell.AddItem(_DragAndDropItem);
         }
         yield break;

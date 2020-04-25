@@ -30,7 +30,7 @@ namespace mainMenu
 
         [Space(5)]
         [Header("九格")]
-        public DragAndDropCell
+        public StoneCell
         A1DragAndDropCell, A2DragAndDropCell, A3DragAndDropCell,
         B1DragAndDropCell, B2DragAndDropCell, B3DragAndDropCell,
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
@@ -65,7 +65,7 @@ namespace mainMenu
             Instance = this;
         }
         
-        public static void SeletedRender(DragAndDropCell cell)
+        public static void SeletedRender(StoneCell cell)
         {
             if (cell == null)
             {
@@ -73,7 +73,7 @@ namespace mainMenu
                 return;
             }
         
-            if (cell._SelectMode == DragAndDropCell.SelectMode.single)
+            if (cell._SelectMode == StoneCell.SelectMode.single)
             {
                 _Selected.SetActive(true);
                 _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
@@ -83,7 +83,7 @@ namespace mainMenu
                 _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
                 _Selected.gameObject.SetActive(true);
             }
-            else if (cell._SelectMode == DragAndDropCell.SelectMode.multi)
+            else if (cell._SelectMode == StoneCell.SelectMode.multi)
             {
             
             }
@@ -111,11 +111,11 @@ namespace mainMenu
                     }
                     last_clickTime = Time.time;
                     skillStoneSlot._DragAndDropCell.UpdateMyItem();
-                    DragAndDropItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
-                    if (_SkillStone != null && _SkillStone._SkillConfigOfSkillStone != null)
+                    SKStoneItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
+                    if (_SkillStone != null && _SkillStone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_SkillStone._SkillConfigOfSkillStone, _SkillStone.SkillStoneOfPlayerId);
-                        mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfigOfSkillStone.REAL_NAME));
+                        _skillStoneDetail.RefreshSkillDetail(_SkillStone._SkillConfig, _SkillStone.SkillStoneOfPlayerId);
+                        mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                     }
                 }
                 button.onClick.RemoveAllListeners();
@@ -124,17 +124,17 @@ namespace mainMenu
         }
         
         GameObject SkillStonePrefab;
-        public DragAndDropItem GenerateOneDragAndDropItem()
+        public SKStoneItem GenerateOneDragAndDropItem()
         {
             GameObject SkillStone = Instantiate(SkillStonePrefab);
             SkillStone.SetActive(true);
-            return SkillStone.GetComponent<DragAndDropItem>();
+            return SkillStone.GetComponent<SKStoneItem>();
         }
 
         public IEnumerator StartUp()
         {
             SkillStonePrefab = new GameObject("SkillStone");
-            SkillStonePrefab.AddComponent<DragAndDropItem>();
+            SkillStonePrefab.AddComponent<SKStoneItem>();
             SkillStonePrefab.AddComponent<Image>();
             NineSlotT.gameObject.SetActive(false);
             yield return GetNineSlotReady();
@@ -165,7 +165,7 @@ namespace mainMenu
             allSlot.Add(C1Slot);
             allSlot.Add(C2Slot);
             allSlot.Add(C3Slot);
-
+            
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 SlotButtonBeheviour(_slot);
@@ -177,8 +177,8 @@ namespace mainMenu
         {
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                _slot.OnSlotStonelocalID = null;
-                _slot._DragAndDropCell.cellPhase = DragAndDropCell.CellPhase.NineSlotCell_empty;
+                _slot.OnSlotStoneID = null;
+                _slot._DragAndDropCell.cellPhase = StoneCell.CellPhase.NineSlotCell_empty;
                 _slot.RemoveStoneFromSlot();
             }
             if (_AccountCharacterInfo == null)
@@ -191,31 +191,31 @@ namespace mainMenu
                 switch (equipingstones[i].inUsingSkillSlot)
                 {
                     case "1":
-                        A1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        A1Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "2":
-                        A2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        A2Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "3":
-                        A3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        A3Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "4":
-                        B1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        B1Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "5":
-                        B2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        B2Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "6":
-                        B3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        B3Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "7":
-                        C1Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        C1Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "8":
-                        C2Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        C2Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                     case "9":
-                        C3Slot.OnSlotStonelocalID = equipingstones[i].skillStoneOfPlayerId;
+                        C3Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
                 }
             }
@@ -236,7 +236,7 @@ namespace mainMenu
                 switch (equipingstones[i].inUsingSkillSlot)
                 {
                     case "1":
-                        A1 = (equipingstones[i].skillId != SkillID)? equipingstones[i].skillId : "-1";
+                        A1 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
                         break;
                     case "2":
                         A2 = (equipingstones[i].skillId != SkillID) ? equipingstones[i].skillId : "-1";
@@ -267,67 +267,13 @@ namespace mainMenu
             int wholePoint = MySkillStonesReader.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
             return wholePoint;
         }
-
-        // 这个函数应该能够被用于Tutorial模式下亚当的技能编辑。
-        public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accountCharacterInfo)
-        {
-            List<string> usingStones = GetUsingStonesId();// 代表现在9宫格里放着的石头里的id们。与石头有没有正式装备到角色身上无关
-            for (int i = 0; i < allSlot.Count; i++)
-            {
-                if (allSlot[i]._DragAndDropCell.GetItem() != null)
-                {
-                    if (allSlot[i].OnSlotStonelocalID != allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId) 
-                    {
-                        // 将原先九宫格对应位置的技能石卸载。即将其inUsingMonsterOfPlayerId变为null。
-                        SkillStoneOfPlayerInfoModel old_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(allSlot[i].OnSlotStonelocalID);
-                        if (old_skillStoneOfPlayerInfoModel != null)
-                        {
-                            if (!usingStones.Contains(old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId)) // 代表原来那个位置上有个技能石，但现在它在技能背包，这轮技能编辑它是要被卸载到背包里去。
-                            {
-                                Debug.Log("技能石头："+ old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId + "被卸下");
-                                old_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = null;
-                                old_skillStoneOfPlayerInfoModel.inUsingSkillSlot = null;
-                                yield return MySkillStonesReader.Instance.UpdateMySkillStone();
-                            }else{
-                                // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。
-                            }
-                        }
-                        // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
-                        SkillStoneOfPlayerInfoModel new_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
-                        if (new_skillStoneOfPlayerInfoModel != null)
-                        {
-                            new_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
-                            new_skillStoneOfPlayerInfoModel.inUsingSkillSlot = allSlot[i].number.ToString();
-                            yield return MySkillStonesReader.Instance.UpdateMySkillStone();
-                        }
-                    }
-                }else{
-                    SkillStoneOfPlayerInfoModel old_skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(allSlot[i].OnSlotStonelocalID);
-                    if (old_skillStoneOfPlayerInfoModel != null)// 旧技能石被卸下
-                    {
-                        if (!usingStones.Contains(old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId))// 代表卸载的技能石头
-                        {
-                            Debug.Log("技能石头："+ old_skillStoneOfPlayerInfoModel.skillStoneOfPlayerId + "被卸下");
-                            old_skillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId = null;
-                            old_skillStoneOfPlayerInfoModel.inUsingSkillSlot = null;
-                            yield return MySkillStonesReader.Instance.UpdateMySkillStone();
-                        }else{
-                            // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。
-                        }
-                    }
-                }
-            }
-            yield return ReadANineAndTwo(accountCharacterInfo);
-            TheNineSlot.SeletedRender(null);
-            yield break;
-        }
-        
+       
         public void NineSlotsStatusRefresh()//这个的核心作用在于即使调整cell的phase
         {
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 _slot._DragAndDropCell.UpdateMyItem();
-                _slot._DragAndDropCell.cellPhase = _slot._DragAndDropCell.GetItem() != null ? DragAndDropCell.CellPhase.NineSlotCell_full : DragAndDropCell.CellPhase.NineSlotCell_empty;
+                _slot._DragAndDropCell.cellPhase = _slot._DragAndDropCell.GetItem() != null ? StoneCell.CellPhase.NineSlotCell_full : StoneCell.CellPhase.NineSlotCell_empty;
                 SlotButtonBeheviour(_slot);
             }
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();

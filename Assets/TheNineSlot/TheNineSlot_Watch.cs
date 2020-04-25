@@ -69,15 +69,15 @@ namespace mainMenu
         public List<string> GetCurrentNineSlotAllSkillIds()
         {
             List<string> NineSkillIDs = new List<string>();
-            string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string B1 = B1DragAndDropCell.GetItem() != null ? B1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string B2 = B2DragAndDropCell.GetItem() != null ? B2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string B3 = B3DragAndDropCell.GetItem() != null ? B3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
-            string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfigOfSkillStone.RECORD_ID : "-1";
+            string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string B1 = B1DragAndDropCell.GetItem() != null ? B1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string B2 = B2DragAndDropCell.GetItem() != null ? B2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string B3 = B3DragAndDropCell.GetItem() != null ? B3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             NineSkillIDs.Add(A1);
             NineSkillIDs.Add(A2);
             NineSkillIDs.Add(A3);
@@ -106,53 +106,53 @@ namespace mainMenu
             }
         }
         
-        public bool RefreshWholePointBasedOnCurrentNineSlots(DragAndDropItem item, DragAndDropCell replacePosition)
+        public bool RefreshWholePointBasedOnCurrentNineSlots(SKStoneItem item, StoneCell replacePosition)
         {
             List<string> nineskillids = Instance.GetCurrentNineSlotAllSkillIds();
 
             if (item == null)
             {
-                item = new DragAndDropItem
+                item = new SKStoneItem
                 {
-                    _SkillConfigOfSkillStone = new SkillConfig()
+                    _SkillConfig = new SkillConfig()
                 };
             }
 
             if (replacePosition == Instance.A1DragAndDropCell)
             {
-                nineskillids[0] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[0] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.A2DragAndDropCell)
             {
-                nineskillids[1] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[1] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.A3DragAndDropCell)
             {
-                nineskillids[2] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[2] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.B1DragAndDropCell)
             {
-                nineskillids[3] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[3] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.B2DragAndDropCell)
             {
-                nineskillids[4] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[4] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.B3DragAndDropCell)
             {
-                nineskillids[5] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[5] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.C1DragAndDropCell)
             {
-                nineskillids[6] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[6] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.C2DragAndDropCell)
             {
-                nineskillids[7] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[7] = item._SkillConfig.RECORD_ID;
             }
             if (replacePosition == Instance.C3DragAndDropCell)
             {
-                nineskillids[8] = item._SkillConfigOfSkillStone.RECORD_ID;
+                nineskillids[8] = item._SkillConfig.RECORD_ID;
             }
             int wholepint = MySkillStonesReader.SkillBalancePoint(nineskillids[0], nineskillids[1], nineskillids[2], nineskillids[3], nineskillids[4], nineskillids[5], nineskillids[6], nineskillids[7], nineskillids[8]);
             return wholepint >= 0;
@@ -180,9 +180,9 @@ namespace mainMenu
         }
         
         // 这个是从角色存档来读取
-        public int GetNineSlotWholePointOfMonster(GetMonsterOfPlayerDetailModel _AccountCharacterInfo)
+        public int GetNineSlotWholePointOfMonster(GetMonsterOfPlayerDetailModel _AccountCharInfo)
         {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharInfo.monsterOfPlayerId);
             string A1=null, A2=null, A3=null, B1=null, B2=null, B3=null, C1=null, C2=null, C3=null;
             for (int i = 0; i < equipingstones.Count; i++)
             {

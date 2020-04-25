@@ -6,11 +6,11 @@ using Skill;
 /// <summary>
 /// Drag and Drop item.
 /// </summary>
-public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-	public static DragAndDropItem draggedItem;                                      // Item that is dragged now
+	public static SKStoneItem draggedItem;                                      // Item that is dragged now
 	public static GameObject icon;                                                  // Icon of dragged item
-	public static DragAndDropCell sourceCell;                                       // From this cell dragged item is
+	public static StoneCell sourceCell;                                       // From this cell dragged item is
 
     static Canvas canvas;                                                   // Canvas for item drag operation
     static readonly string canvasName = "DragAndDropCanvas";                        // Name of canvas
@@ -18,7 +18,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public Image image;
     //自定义item属性
-    public SkillConfig _SkillConfigOfSkillStone;
+    public SkillConfig _SkillConfig;
 
     // 用来记忆他们在SKillStoneBox里的位置。从而来保证他们可以返回盒子里正确位置。
     // 这个量其实就相当于拥有技能石头的本地id，但是，这个本地id并不是像玩家拥有怪物的localdi那样相对固定，
@@ -135,9 +135,9 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 	/// Gets DaD cell which contains this item.
 	/// </summary>
 	/// <returns>The cell.</returns>
-	public DragAndDropCell GetCell()
+	public StoneCell GetCell()
 	{
-		return GetComponentInParent<DragAndDropCell>();
+		return GetComponentInParent<StoneCell>();
 	}
 
 	/// <summary>

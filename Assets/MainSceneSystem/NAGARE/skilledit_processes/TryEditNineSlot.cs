@@ -33,15 +33,15 @@ public class TryEditNineSlot : MainSceneProcess
 
     public override void LocalUpdate()
     {
-        if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                TheNineSlot.Instance.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                    TheNineSlot.Instance.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
-                        TheNineSlot.Instance.B1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                            TheNineSlot.Instance.B2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                                TheNineSlot.Instance.B3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() &&
-                                    TheNineSlot.Instance.C1DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                                        TheNineSlot.Instance.C2DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>() && 
-                                            TheNineSlot.Instance.C3DragAndDropCell.gameObject.transform.GetComponentInChildren<DragAndDropItem>())
+        if (TheNineSlot.Instance.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() && 
+                TheNineSlot.Instance.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() && 
+                    TheNineSlot.Instance.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() &&
+                        TheNineSlot.Instance.B1DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() && 
+                            TheNineSlot.Instance.B2DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() && 
+                                TheNineSlot.Instance.B3DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() &&
+                                    TheNineSlot.Instance.C1DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() && 
+                                        TheNineSlot.Instance.C2DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() && 
+                                            TheNineSlot.Instance.C3DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>())
         {
             TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(true);
         }

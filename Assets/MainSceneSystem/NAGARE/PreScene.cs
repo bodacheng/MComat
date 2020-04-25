@@ -150,7 +150,7 @@ namespace mainMenu
                     // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
                     // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
                     // 那这样的话势必我需要来看接下来这个请求工作的返回值。
-                    IEnumerator localMyChractersProcess = AccountCharsSet.Instance.LoadMyOwnedAccountCharacterInfoList();
+                    IEnumerator localMyChractersProcess = AccountCharsSet.Instance.LoadMyOwnedAccountCharInfoList();
                     yield return (localMyChractersProcess);
                     //上面这些都缺response判断
                     yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);

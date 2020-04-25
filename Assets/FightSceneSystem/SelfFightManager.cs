@@ -176,11 +176,6 @@ namespace mainMenu
             IEnumerator getchar = AccountCharsSet.Instance.GetAccountCharInfo(localID);
             yield return getchar;
             GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            if (myfighter == null)
-            {
-                Debug.Log("角色存档问题。localid：" + localID);
-                yield break;
-            }
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
@@ -282,8 +277,6 @@ namespace mainMenu
                 CharConfig characterResourceInfo = null;
                 IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PositionMonsterOfPlayerId);
                 yield return getchar;
-                if (getchar.Current == null)
-                    yield break;
                 _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 characterResourceInfo = MonstersConfigTable.GetCharConfig(_one.monsterId);
                 tar.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
