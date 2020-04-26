@@ -5,7 +5,7 @@ using dataAccess;
 using UnityEngine.SceneManagement;
 using Api.Dto.Model;
 using Skill;
-using mainMenu;
+using System.IO;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -85,6 +85,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         yield return SkillConfigTable.LoadAllSkillConfigs();
+        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
         int i = 1;
         foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
         {

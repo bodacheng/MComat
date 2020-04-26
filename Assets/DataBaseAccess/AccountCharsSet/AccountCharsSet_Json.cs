@@ -80,6 +80,7 @@ namespace dataAccess
         
         public static IEnumerator LocalSaveDataGetAllCharacters()
         {
+            LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/AccountCharacterInfos");
             List<CharConfig> characterList = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.rowList);
             int i = 0;
             foreach (CharConfig _CharacterResourceInfo in characterList)

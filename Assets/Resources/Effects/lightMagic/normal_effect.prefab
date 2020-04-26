@@ -50,6 +50,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -62,6 +63,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1492,6 +1494,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
+    serializedVersion: 2
     enabled: 0
     mode: 0
     timeMode: 0
@@ -1609,7 +1612,7 @@ ParticleSystem:
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
-    randomRow: 1
+    rowMode: 1
     sprites:
     - sprite: {fileID: 0}
     flipU: 0
@@ -2420,8 +2423,61 @@ ParticleSystem:
     inWorldSpace: 0
     randomizePerFrame: 0
   ExternalForcesModule:
+    serializedVersion: 2
     enabled: 0
-    multiplier: 1
+    multiplierCurve:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
@@ -4782,10 +4838,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 0.35
+  DestructionDelay: 0.4
   stop_emission_delay: 0.3
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
+  Attachments: []
+  _HitTriggerEvent: 
 --- !u!1 &1158360904951972965
 GameObject:
   m_ObjectHideFlags: 0
@@ -4797,7 +4855,6 @@ GameObject:
   - component: {fileID: 1159925335635396583}
   - component: {fileID: 1357471968744628527}
   - component: {fileID: 1356446030014928273}
-  - component: {fileID: 1261331720574365675}
   m_Layer: 0
   m_Name: normal_effect
   m_TagString: Untagged
@@ -6075,6 +6132,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 3
   UVModule:
+    serializedVersion: 2
     enabled: 0
     mode: 0
     timeMode: 0
@@ -6192,7 +6250,7 @@ ParticleSystem:
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
-    randomRow: 1
+    rowMode: 1
     sprites:
     - sprite: {fileID: 0}
     flipU: 0
@@ -6895,8 +6953,61 @@ ParticleSystem:
     inWorldSpace: 1
     randomizePerFrame: 0
   ExternalForcesModule:
+    serializedVersion: 2
     enabled: 0
-    multiplier: 1
+    multiplierCurve:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
@@ -9258,6 +9369,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -9270,6 +9382,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -9305,24 +9418,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1261331720574365675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158360904951972965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _HitBox: {fileID: 0}
-  TrackControl: {fileID: 0}
-  DestructionDelay: 1
-  stop_emission_delay: 0.8
-  to_be_faded_renderers: []
-  audioSource: {fileID: 0}
 --- !u!1 &7712302521392082360
 GameObject:
   m_ObjectHideFlags: 0
@@ -10683,6 +10778,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
+    serializedVersion: 2
     enabled: 1
     mode: 0
     timeMode: 0
@@ -10800,7 +10896,7 @@ ParticleSystem:
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
-    randomRow: 1
+    rowMode: 1
     sprites:
     - sprite: {fileID: 0}
     flipU: 0
@@ -11611,8 +11707,61 @@ ParticleSystem:
     inWorldSpace: 0
     randomizePerFrame: 0
   ExternalForcesModule:
+    serializedVersion: 2
     enabled: 0
-    multiplier: 1
+    multiplierCurve:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
@@ -13974,6 +14123,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -13986,6 +14136,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

@@ -6,12 +6,11 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using Api.Dto.Model;
-using Skill;
 
 namespace dataAccess
 {
     public partial class MySkillStonesReader
-    {        
+    {    
         public static void LoadAll_Json()
         {
             try
@@ -47,6 +46,6 @@ namespace dataAccess
                 Debug.Log("玩家技能石信息保存失败");
                 Debug.Log(e.ToString());
             }
-        }
+        }       
     }
 }

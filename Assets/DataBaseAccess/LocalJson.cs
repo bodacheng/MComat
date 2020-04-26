@@ -70,6 +70,24 @@ namespace dataAccess
                 Debug.Log(e);
             }
         }
+        
+        public static void DeleteAllUnderFolder(string filePath)
+        {
+            try
+            {
+                if (Directory.Exists(filePath))
+                {
+                    foreach (string file in Directory.GetFiles(filePath))
+                    {
+                        File.Delete(file);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.ToString());
+            }
+        }
     }
 }
 
