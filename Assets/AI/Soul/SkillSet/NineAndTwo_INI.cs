@@ -297,7 +297,7 @@ public partial class NineAndTwo
     {
         if (_SC.RECORD_ID != null)
         {
-            SkillConfigTable.Instance.SkillConfigRefDic.TryGetValue(_SC.RECORD_ID, out SkillConfig refSkillConfig);
+            SkillConfigTable.SkillConfigRefDic.TryGetValue(_SC.RECORD_ID, out SkillConfig refSkillConfig);
             if (refSkillConfig != null)
             {
                 _SC.REAL_NAME = refSkillConfig.REAL_NAME;
@@ -341,7 +341,7 @@ public partial class NineAndTwo
         {
             return new SkillConfig();
         }
-        SkillConfigTable.Instance.SkillConfigRefDic.TryGetValue(skillid, out SkillConfig REF);
+        SkillConfigTable.SkillConfigRefDic.TryGetValue(skillid, out SkillConfig REF);
         return REF;
     }
     

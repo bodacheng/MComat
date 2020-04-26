@@ -101,11 +101,7 @@ public class HeroIcon : MonoBehaviour {
     {
         if (PosMonsterOfPlayerId != null)
         {
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PosMonsterOfPlayerId);
-            yield return getchar;
-            if (getchar.Current == null)
-                yield break;
-            GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(PosMonsterOfPlayerId);
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
             ChangeHeroIconByMonsterID(charConfig.RECORD_ID,Icon);
         }
@@ -113,6 +109,7 @@ public class HeroIcon : MonoBehaviour {
         {
             Icon.ChangeIcon(null, Zokusei.Null);
         }
+        yield break;
     }
     
     public static void ChangeHeroIconByMonsterID(string monsterRecordID, HeroIcon Icon)

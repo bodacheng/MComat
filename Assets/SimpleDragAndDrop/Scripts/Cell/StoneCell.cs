@@ -118,10 +118,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             case CellPhase.NineSlotCell_empty:
             case CellPhase.NineSlotCell_full:
-                if (myDadItem != null && !string.IsNullOrEmpty(myDadItem._SkillConfig.CONNATE_CODE))
-                    transform.GetComponent<Image>().color = Color.red;
-                else
-                    transform.GetComponent<Image>().color = Color.white;
                 break;
             case CellPhase.SkillStoneBoxCell:
                 if (gameObject.activeSelf)
@@ -129,7 +125,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                     ShowUsingCharIcon(myDadItem,_charIcon);
                 }
                 break;
-        }       
+        }
     }
     
     void ShowUsingCharIcon(SKStoneItem dragAndDropItem, HeroIcon targetIcon)

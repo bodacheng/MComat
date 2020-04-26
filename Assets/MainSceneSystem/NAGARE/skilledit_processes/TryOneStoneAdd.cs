@@ -13,15 +13,15 @@ public class TryOneStoneAdd : MainSceneProcess
     {
         step = 1;
         // 将角色锁定为剧情人物“亚当”；亚当的信息甚至可以新建。
-        yield return AccountCharsSet.Instance.loadStoryCharsByXMLFile();
+        yield return AccountCharsSet.loadStoryCharsByXMLFile();
         
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
+        IEnumerator getchar = AccountCharsSet.Load("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
         
         MemberDetail.target.focusingCharDataInfo = myfighter;
         yield return SkillEditorButtonBehaviour(MemberDetail.target.focusingCharDataInfo);//比如亚当在这个版本的角色存档里localid是1。。。
-        IEnumerator loadMyStonesProcess = MySkillStonesReader.Instance.LoadMySkillStones();
+        IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
         yield return (loadMyStonesProcess);
 
         //SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(true);
@@ -134,16 +134,14 @@ public class TryOneStoneAdd : MainSceneProcess
     
     IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingCharSpVersion()
     {
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
-        yield return getchar;
-        GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+        GetMonsterOfPlayerDetailModel focusingCharacterDataInfo = AccountCharsSet.Get("1");
         if (focusingCharacterDataInfo == null)
         {
             Debug.Log("严重错误");
             yield break;
         }
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-        CharDataInfo focusingData = RemoteAccess.GetCharDataInfo(focusingCharacterDataInfo);
+        CharDataInfo focusingData = GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharacterDataInfo);
         MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillsPrintOutFocusingCharChangeProcess(focusingData));
     }
 }

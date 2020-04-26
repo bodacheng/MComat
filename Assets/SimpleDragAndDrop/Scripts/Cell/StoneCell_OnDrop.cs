@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using dataAccess;
@@ -61,7 +60,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                             {
                                 case CellPhase.NineSlotCell_full:// 已装备石头的卸载功能。
                                     SKStoneItem stone = sourceCell.GetItem();
-                                    if (stone != null && !string.IsNullOrEmpty(stone._SkillConfig.CONNATE_CODE))
+                                    if (stone != null && stone.Inherent)
                                     {
                                         Debug.Log("固有技能无法移出，返回");
                                         return;

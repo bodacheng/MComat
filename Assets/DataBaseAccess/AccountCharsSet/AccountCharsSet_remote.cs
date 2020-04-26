@@ -11,7 +11,7 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        public IEnumerator LoadAccountCharacterInfoListObjectsRemote(ApiLanguage apiLanguage)
+        public static IEnumerator LoadAccountCharacterInfoListObjectsRemote(ApiLanguage apiLanguage)
         {
             // ==============================
             // フォームの生成
@@ -26,32 +26,32 @@ namespace dataAccess
             // API送信
             // ==============================
             // 送信
-            List<MonsterOfPlayerListModel> getlist = new List<MonsterOfPlayerListModel>();
-            yield return ApiCaller.Instance.Post<BaseModel<GetMonsterOfPlayerListModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerList", form, ApiCaller.Instance.getHeader(apiLanguage),
-                 model => {
-                     getlist = model.data.monsterOfPlayerList;
-                     AccountCharListObjectsDic.Clear();
-                    Debug.Log("以下是获得的角色列表信息：");
-                    for (int i = 0; i < getlist.Count; i++)
-                    {
-                        Debug.Log("monsterOfPlayerId:"+ getlist[i].monsterOfPlayerId + " monsterid :" + getlist[i].monsterId);
-                        if (!AccountCharListObjectsDic.ContainsKey(getlist[i].monsterOfPlayerId))
-                            AccountCharListObjectsDic.Add(getlist[i].monsterOfPlayerId, getlist[i]);
-                        else
-                            Debug.Log("巨大逻辑错误，重复的monsterOfPlayerId:" + getlist[i].monsterOfPlayerId);
-                    }
-                    Debug.Log("角色列表信息报告结束。");
-                 }
-                ,
-                 model => {
-                    Debug.Log("角色列表获取失败。");
-                    AccountCharListObjectsDic.Clear();
-                 }
-            );
+            //List<MonsterOfPlayerListModel> getlist = new List<MonsterOfPlayerListModel>();
+            //yield return ApiCaller.Instance.Post<BaseModel<GetMonsterOfPlayerListModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerList", form, ApiCaller.Instance.getHeader(apiLanguage),
+            //     model => {
+            //         getlist = model.data.monsterOfPlayerList;
+            //         AccountCharListObjectsDic.Clear();
+            //        Debug.Log("以下是获得的角色列表信息：");
+            //        for (int i = 0; i < getlist.Count; i++)
+            //        {
+            //            Debug.Log("monsterOfPlayerId:"+ getlist[i].monsterOfPlayerId + " monsterid :" + getlist[i].monsterId);
+            //            if (!AccountCharListObjectsDic.ContainsKey(getlist[i].monsterOfPlayerId))
+            //                AccountCharListObjectsDic.Add(getlist[i].monsterOfPlayerId, getlist[i]);
+            //            else
+            //                Debug.Log("巨大逻辑错误，重复的monsterOfPlayerId:" + getlist[i].monsterOfPlayerId);
+            //        }
+            //        Debug.Log("角色列表信息报告结束。");
+            //     }
+            //    ,
+            //     model => {
+            //        Debug.Log("角色列表获取失败。");
+            //        AccountCharListObjectsDic.Clear();
+            //     }
+            //);
             yield break;
         }
         
-        public IEnumerator LoadAccountCharacterInfoRemote(string monsterlocalid,ApiLanguage apiLanguage)
+        public static IEnumerator LoadAccountCharacterInfoRemote(string monsterlocalid,ApiLanguage apiLanguage)
         {
             GetMonsterOfPlayerDetailForm form = new GetMonsterOfPlayerDetailForm
             {
@@ -72,7 +72,7 @@ namespace dataAccess
             yield return _GetMonsterOfPlayerDetailModel;
         }
         
-        public IEnumerator UpdateCharRemote(GetMonsterOfPlayerDetailModel accountCharsSet,ApiLanguage apiLanguage)
+        public static IEnumerator UpdateCharRemote(GetMonsterOfPlayerDetailModel accountCharsSet,ApiLanguage apiLanguage)
         {
             SetMonsterSkillStoneForm form = new SetMonsterSkillStoneForm
             {

@@ -81,8 +81,8 @@ public class SkillStoneSlot
 
     public IEnumerator TakeASkillStoneFromBoxToSlot(string OnSlotStonelocalID, Color itemColor)
     {
-        SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(OnSlotStonelocalID);
-        SKStoneItem _DragAndDropItem = MySkillStonesReader.Instance.GetOneStoneModel(OnSlotStonelocalID);
+        SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Get(OnSlotStonelocalID);
+        SKStoneItem _DragAndDropItem = MySkillStonesReader.GetRenderModel(OnSlotStonelocalID);
         if (_DragAndDropItem == null)
             yield break;
         else

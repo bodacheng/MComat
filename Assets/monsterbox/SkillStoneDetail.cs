@@ -38,7 +38,7 @@ namespace mainMenu
             Showname.text = _SkillConfigOfSkillStone.RECORD_ID;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
-            currentstone = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
+            currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
             skill_level_levelup.text = "LV:" + (currentstone.level ?? "1");
             skill_level_info.text = "LV:" + (currentstone.level ?? "1");
         }
@@ -60,22 +60,22 @@ namespace mainMenu
         
         void ShowSKillRanges(float dis_min, float float_max)
         {
-            if (SkillConfigTable.RangeLimit(dis_min,float_max,true, false, false, false))
+            if (SkillConfig.RangeLimit(dis_min,float_max,true, false, false, false))
                 close.SetActive(true);
             else
                 close.SetActive(false);
                 
-            if (SkillConfigTable.RangeLimit(dis_min,float_max,false, true, false, false))
+            if (SkillConfig.RangeLimit(dis_min,float_max,false, true, false, false))
                 near.SetActive(true);
             else
                 near.SetActive(false);
                 
-            if (SkillConfigTable.RangeLimit(dis_min,float_max,false, false, true, false))
+            if (SkillConfig.RangeLimit(dis_min,float_max,false, false, true, false))
                 far.SetActive(true);
             else
                 far.SetActive(false);
                 
-            if (SkillConfigTable.RangeLimit(dis_min,float_max,false, false, false, true))
+            if (SkillConfig.RangeLimit(dis_min,float_max,false, false, false, true))
                 outter.SetActive(true);
             else
                 outter.SetActive(false);

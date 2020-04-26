@@ -33,7 +33,7 @@ public class ConfigFileManager : MonoBehaviour {
     {
         if (textAsset != null)
         {
-            SkillConfigTable.Instance.Load(textAsset);
+            SkillConfigTable.Load(textAsset);
         }
         
         List<string> KisoonRecordIDs = new List<string>();
@@ -42,7 +42,7 @@ public class ConfigFileManager : MonoBehaviour {
 
         foreach (string chartype in chartypes)
         {
-            List<SkillConfig> SkillConfigsOfOldConfigFileOFtype = SkillConfigTable.Instance.RowsToSkillConfigList(SkillConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
+            List<SkillConfig> SkillConfigsOfOldConfigFileOFtype = SkillConfigTable.RowsToSkillConfigList(SkillConfigTable.FindAll_MONSTER_TYPE(chartype));
             List<string> KisonnRecourdsOFRealNames = new List<string>(); //这个type的角色旧config文件中所有条目的keyname list。
             foreach (SkillConfig skillConfig in SkillConfigsOfOldConfigFileOFtype)
             {
@@ -186,7 +186,7 @@ public class ConfigFileManager : MonoBehaviour {
             }
             foreach (string realname in ShouldDeletedFromConfig)
             {
-                List<SkillConfigTable.Row> toDeleteRows = SkillConfigTable.Instance.FindAll_type_keyName(chartype, realname);//注意看，同一个key名在数据库可能不止一个条目。比如一个发波动画定义了两种攻击
+                List<SkillConfigTable.Row> toDeleteRows = SkillConfigTable.FindAll_type_keyName(chartype, realname);//注意看，同一个key名在数据库可能不止一个条目。比如一个发波动画定义了两种攻击
                 foreach (SkillConfigTable.Row row in toDeleteRows)
                 {
                     if (!AllDeletedRecordIDs.Contains(row.RECORD_ID))
@@ -199,7 +199,7 @@ public class ConfigFileManager : MonoBehaviour {
                         Debug.Log("原SkillConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
                     }
                     
-                    SkillConfigTable.Instance.rowList.Remove(row);
+                    SkillConfigTable.rowList.Remove(row);
                 }
             }
         }
@@ -219,10 +219,10 @@ public class ConfigFileManager : MonoBehaviour {
             //} //没有必要用什么旧ID去补，这个本来工作本来就不能交给自动化，所以上面这些我们给commentout了
             
             newSkillConfig.RECORD_ID = "plsAddNewIDHere";// RecordId应该开发者自行安排 String.Format("{0:D20}",newid);
-            SkillConfigTable.Row newRow = SkillConfigTable.Instance.SkillConfigToRow(newSkillConfig);
+            SkillConfigTable.Row newRow = SkillConfigTable.SkillConfigToRow(newSkillConfig);
             if (newRow != null && newRow.REAL_NAME != null)
             {
-                SkillConfigTable.Instance.rowList.Add(newRow);
+                SkillConfigTable.rowList.Add(newRow);
             }
 
             HitBoxLogTable.Row row = new HitBoxLogTable.Row
@@ -236,7 +236,7 @@ public class ConfigFileManager : MonoBehaviour {
             };
             HitBoxLogTable.Instance.rowList.Add(row);
         }
-        SkillConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_skill");
+        SkillConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_skill");
         HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv",null,null);
     }
     
@@ -413,6 +413,6 @@ public class ConfigFileManager : MonoBehaviour {
             monsterOfPlayerId = 1.ToString(),
             monsterId = 1.ToString()
         };
-        AccountCharsSet.Instance.generateStoryCharsIntoXMLFile(Adam);
+        AccountCharsSet.generateStoryCharsIntoXMLFile(Adam);
     }
 }

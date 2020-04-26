@@ -12,58 +12,41 @@ namespace dataAccess
 {
     public partial class MySkillStonesReader
     {
-        private IEnumerator LoadMySkillstonesRemote(ApiLanguage apiLanguage) {
+        static IEnumerator LoadMySkillstonesRemote(ApiLanguage apiLanguage)
+        {
             List<SkillStoneOfPlayerInfoModel> infos = new List<SkillStoneOfPlayerInfoModel>();
             GetSkillStoneOfPlayerInfoForm form = new GetSkillStoneOfPlayerInfoForm
             {
                 sessionId = AccountSet.Instance.sessionId
             };
-            yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm> 
-            (   
-                "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo", 
-                form, 
+            yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm>
+            (
+                "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo",
+                form,
                 ApiCaller.Instance.getHeader(apiLanguage),
-                model => {
+                model =>
+                {
                     infos = model.data.skillStoneOfPlayerInfoList;
-                    Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");                   
+                    Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");
                     foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
                     {
-                        Debug.Log("skillStoneOfPlayerId:"+SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:"  + SkillStoneOfPlayerInfoModel.skillId);
+                        Debug.Log("skillStoneOfPlayerId:" + SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:" + SkillStoneOfPlayerInfoModel.skillId);
                     }
-                 }
+                }
                 ,
-                 model => {
-                    mySkillStonesDataDic.Clear();
+                 model =>
+                 {
+                     Dic.Clear();
                  }
             );
-            foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
+            foreach (SkillStoneOfPlayerInfoModel one in infos)
             {
-                yield return Instance.GenerateOneStoneInfo(SkillStoneOfPlayerInfoModel);
+                DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
             }
             yield break;
         }
 
-        public IEnumerator LevelUpMySkillStone(string skillstoneofplayerid, string targetLevel, ApiLanguage apiLanguage)
-        {
-            IEnumerator up;
-            switch (AccountSet.Instance._playerinfoReferenceMode)
-            {
-                case playerinfoReferenceMode.localTestSaveData:
-                    up = Instance.LevelUpMySkillStone_LocalJson(skillstoneofplayerid, targetLevel);
-                    yield return up;
-                    break;
-                case playerinfoReferenceMode.remoteTestPlayer:
-                    up = Instance.LevelUpMySkillStone_Remote(skillstoneofplayerid, targetLevel, ApiLanguage.EnUs);
-                    yield return up;
-                    break;
-                case playerinfoReferenceMode.formalVersion:
-                    up = Instance.LevelUpMySkillStone_Remote(skillstoneofplayerid, targetLevel, ApiLanguage.EnUs);
-                    yield return up;
-                    break;
-            }
-        }
-
-        IEnumerator SkillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
+        static IEnumerator SkillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
         {
             List<SkillStoneGotchaInfoModel> infos;
             SkillStoneGotchaForm form = new SkillStoneGotchaForm

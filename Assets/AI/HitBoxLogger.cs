@@ -35,7 +35,7 @@ public class HitBoxLogger
     
     public string LoadCurrentToString()
     {
-        if (System.IO.File.Exists(Application.persistentDataPath + "/HitBoxLog.csv"))
+        if (File.Exists(Application.persistentDataPath + "/HitBoxLog.csv"))
         {
             string level = File.ReadAllText(Application.persistentDataPath + "/HitBoxLog.csv");
             return level;
@@ -43,15 +43,15 @@ public class HitBoxLogger
         else
         {
             HitBoxLogTable.Instance.rowList = new List<HitBoxLogTable.Row>();
-            for (int i = 0;i < SkillConfigTable.Instance.rowList.Count; i++)
+            for (int i = 0;i < SkillConfigTable.rowList.Count; i++)
             {
-                if (string.IsNullOrEmpty(SkillConfigTable.Instance.rowList[i].RECORD_ID))
+                if (string.IsNullOrEmpty(SkillConfigTable.rowList[i].RECORD_ID))
                     continue;
                 HitBoxLogTable.Row row = new HitBoxLogTable.Row
                 {
-                    RECORD_ID = SkillConfigTable.Instance.rowList[i].RECORD_ID,
-                    REAL_NAME = SkillConfigTable.Instance.rowList[i].REAL_NAME,
-                    USEABLE_MONSTER_TYPE = SkillConfigTable.Instance.rowList[i].USEABLE_MONSTER_TYPE,
+                    RECORD_ID = SkillConfigTable.rowList[i].RECORD_ID,
+                    REAL_NAME = SkillConfigTable.rowList[i].REAL_NAME,
+                    USEABLE_MONSTER_TYPE = SkillConfigTable.rowList[i].USEABLE_MONSTER_TYPE,
                     Untouched = "0",
                     Touched = "0",
                     Successed = "0",

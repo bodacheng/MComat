@@ -4,13 +4,13 @@ using System.Linq;
 
 public partial class StagesManager : MonoBehaviour
 {
+    // 编辑关卡都是本地工作。所以里面应用的函数基本都是走本地。
     public static LocalFight RandomFight()
     {
         string focusingtype = "human";
         
         // 这几个东西用不用执行待定
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
-        SkillConfigTable.RefreshSkillConfigDicForReference();
         MonstersConfigTable.LoadMonstersConfigByResource();
         MonstersConfigTable.RefreshCharacterResourceInfoDic();
         

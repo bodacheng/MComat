@@ -14,7 +14,7 @@ namespace mainMenu
             List<string> IDlist = GetUsingStonesId();
             for (int i = 0; i < IDlist.Count; i++)
             {
-                returnValue.Add(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(IDlist[i]));
+                returnValue.Add(MySkillStonesReader.Get(IDlist[i]));
             }
             return returnValue;
         }
@@ -182,7 +182,7 @@ namespace mainMenu
         // 这个是从角色存档来读取
         public int GetNineSlotWholePointOfMonster(GetMonsterOfPlayerDetailModel _AccountCharInfo)
         {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetMonsterEquipingStones(_AccountCharInfo.monsterOfPlayerId);
             string A1=null, A2=null, A3=null, B1=null, B2=null, B3=null, C1=null, C2=null, C3=null;
             for (int i = 0; i < equipingstones.Count; i++)
             {

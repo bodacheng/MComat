@@ -20,6 +20,6 @@ namespace Api.Dto.Model {
 		/// <summary>
 		/// プレーヤ所有モンスター情報リスト
 		/// </summary>
-		public List<MonsterOfPlayerListModel> monsterOfPlayerList { get; set; }
+		public List<GetMonsterOfPlayerDetailModel> monsterOfPlayerList { get; set; }
 	}
 }

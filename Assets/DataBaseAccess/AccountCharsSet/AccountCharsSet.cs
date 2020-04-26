@@ -8,35 +8,46 @@ namespace dataAccess
     //这个函数应该是个一上来就从本地。。。或数据库读取的东西，应该存在很多协程类函数，因为到时候牵扯到从数据库直接读取信息。
     public partial class AccountCharsSet
     {
-        public static AccountCharsSet instance;
-        public static IDictionary<string, MonsterOfPlayerListModel> AccountCharListObjectsDic = new Dictionary<string, MonsterOfPlayerListModel>();
         public static IDictionary<string, GetMonsterOfPlayerDetailModel> AccountCharInfoDic = new Dictionary<string, GetMonsterOfPlayerDetailModel>();
-
-        public static AccountCharsSet Instance
+        
+        public static bool CheckExist(string key)
         {
-            get
+            if (key == null)
             {
-                if (instance == null)
-                {
-                    instance = new AccountCharsSet();
-                }
-                return instance;
+                return false;
             }
+            if (AccountCharInfoDic.ContainsKey(key))
+            {
+                if (AccountCharInfoDic[key] != null)
+                    return true;
+            }
+            return false;
         }
-
-        public IEnumerator UpdateMyCharInfo(GetMonsterOfPlayerDetailModel target)
+        
+        public static IEnumerator Update(GetMonsterOfPlayerDetailModel target)
         {
-            IEnumerator getchar = GetAccountCharInfo(target.monsterOfPlayerId);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel targetAccountCharInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            if (targetAccountCharInfo == null)
+            if (AccountSet.instance._PlayerAccountInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
+            {
+                IEnumerator getchar = Load(target.monsterOfPlayerId);
+                yield return getchar;
+                GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield break;
-
-            yield return ExecuteCharDataUpate(target);
+            }
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    yield return UpdateCharJsonSaveData(target);
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    yield return UpdateCharRemote(target,ApiLanguage.EnUs);
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
+            }
             yield break;
         }
         
-        public IEnumerator AddOneCharacterToAccount(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
+        public static IEnumerator AddToAccount(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
         {
             IEnumerator temp_enumerator = null;
             switch (AccountSet.Instance._playerinfoReferenceMode)
@@ -58,40 +69,24 @@ namespace dataAccess
                 Debug.Log("角色添加失败");
             }
         }
-
-        // 这一步的执行应该是毫不犹豫的因为上一步已经确定了数据无误可以更新
-        // 所以在这里应该也是对应三个版本。
-        public IEnumerator ExecuteCharDataUpate(GetMonsterOfPlayerDetailModel after)//再执行
+        
+        public static GetMonsterOfPlayerDetailModel Get(string monsterlocalid)
         {
-            if (AccountSet.instance._PlayerAccountInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
+            if (AccountCharInfoDic.ContainsKey(monsterlocalid))
             {
-                IEnumerator getchar = GetAccountCharInfo(after.monsterOfPlayerId);
-                yield return getchar;
-                GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                yield break;
+                if (AccountCharInfoDic[monsterlocalid] != null)
+                    return AccountCharInfoDic[monsterlocalid];
             }
-            switch (AccountSet.Instance._playerinfoReferenceMode)
-            {
-                case playerinfoReferenceMode.localTestSaveData:
-                    yield return UpdateCharJsonSaveData(after);
-                    break;
-                case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return UpdateCharRemote(after,ApiLanguage.EnUs);
-                    break;
-                case playerinfoReferenceMode.formalVersion:
-                    break;
-            }
-            //yield return MySkillStonesReader.Instance.VerifyAllMyStonesUsingMonsterInfo();
-            yield break;
+            return null;
         }
-
-        public IEnumerator GetAccountCharInfo(string monsterlocalid)
+        
+        public static IEnumerator Load(string monsterlocalid)
         {
             GetMonsterOfPlayerDetailModel accountCharInfo = null;
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
-                    accountCharInfo = LoadAccountCharacterInfoViaJsonFile(monsterlocalid);
+                    accountCharInfo = LoadAccCharInfoViaJsonFile(monsterlocalid);
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
                     IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid, ApiLanguage.JaJp);
@@ -103,6 +98,30 @@ namespace dataAccess
             }
             DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
             yield return accountCharInfo;            
+        }
+        
+        public static IEnumerator LoadAll()
+        {
+            List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
+            switch (AccountSet.Instance._playerinfoReferenceMode)
+            {
+                case playerinfoReferenceMode.localTestSaveData:
+                    charList = LoadAll_Json();
+                    break;
+                case playerinfoReferenceMode.remoteTestPlayer:
+                    break;
+                case playerinfoReferenceMode.formalVersion:
+                    break;
+            }
+            AccountCharInfoDic.Clear();
+            foreach (GetMonsterOfPlayerDetailModel one in charList)
+            {
+                if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
+                    AccountCharInfoDic.Add(one.monsterOfPlayerId, one);
+                else
+                    Debug.Log("重复的角色存档id："+ one.monsterOfPlayerId);
+            }
+            yield break;
         }
     }
 }

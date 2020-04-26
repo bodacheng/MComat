@@ -173,9 +173,7 @@ namespace mainMenu
         {
             if (focusingTeam == Team.none || focusingPosition < 0)
                 yield break;
-            IEnumerator getchar = AccountCharsSet.Instance.GetAccountCharInfo(localID);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            GetMonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(localID);
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
@@ -273,14 +271,11 @@ namespace mainMenu
             string PositionMonsterOfPlayerId = positionLocalCharKey.GetMonsterOfPlayerIdOnPos(posNum);
             if (PositionMonsterOfPlayerId != null)
             {
-                GetMonsterOfPlayerDetailModel _one;
-                CharConfig characterResourceInfo = null;
-                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PositionMonsterOfPlayerId);
-                yield return getchar;
-                _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                characterResourceInfo = MonstersConfigTable.GetCharConfig(_one.monsterId);
-                tar.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
-                    characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
+                CharConfig charConfig = null;
+                GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(PositionMonsterOfPlayerId);
+                charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
+                tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
+                    charConfig == null ? Zokusei.Null : charConfig._zokusei);
             }
             else
             {

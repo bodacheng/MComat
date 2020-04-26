@@ -87,10 +87,10 @@ public class BasicTryProcess : NagareProcess
             }
         }
         
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
+        IEnumerator getchar = AccountCharsSet.Load("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(before);
+        CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(before);
         adamInfo = characterDataInfo;
         yield break;
     }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using mainMenu;
 using Api.Dto.Model;
 using Skill;
@@ -11,141 +10,80 @@ namespace dataAccess
 {
     public partial class MySkillStonesReader
     {
-        static MySkillStonesReader instance;
-        public static MySkillStonesReader Instance
+        public static IDictionary<string, SkillStoneOfPlayerInfoModel> Dic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
+        public static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
+        
+        public static SkillStoneOfPlayerInfoModel Get(string id)
         {
-            get
+            return Dic.ContainsKey(id) ? Dic[id] : null;
+        }
+        
+        public static SKStoneItem GetRenderModel(string localStoneid)
+        {
+            return RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
+        }
+        
+        public static IEnumerator Add(SkillStoneOfPlayerInfoModel one)
+        {
+            DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
+            yield return Update(one.skillStoneOfPlayerId);
+        }
+        
+        public static IEnumerator Update(string stoneOfPlayerID)
+        {
+            if (!Dic.ContainsKey(stoneOfPlayerID) || Dic[stoneOfPlayerID] == null)
             {
-                if (instance == null)
-                {
-                    instance = new MySkillStonesReader();
-                }
-                return instance;
+                Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + stoneOfPlayerID);
+                yield break;
             }
-        }
-        public static IDictionary<string, SkillStoneOfPlayerInfoModel> mySkillStonesDataDic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
-        public static IDictionary<string, SKStoneItem> mySkillStonesObjectsDic = new Dictionary<string, SKStoneItem>();
-        
-        public static void PreventStonesFromDestroy()
-        {
-            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in mySkillStonesObjectsDic)
-            {
-                keyValuePair.Value.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
-            }
-        }
-        
-        public static List<string> TargetStonesFromOfAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
-        {
-            List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in mySkillStonesDataDic)
-            {
-                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
-                if (_SkillConfigOfSkillStone == null)
-                {
-                    Debug.Log("????"+ keyValuePair.Value.skillId);
-                    continue;
-                }
-                if (_SkillConfigOfSkillStone.TYPE == type && (_SkillConfigOfSkillStone.SP_LEVEL == ExType || ExType == -1) &&
-                    SkillConfigTable.RangeLimit(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS,close, near, far, outrange))
-                {
-                    SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
-                }
-            }
-            return SkillStonesOfTypeAndExType;
-        }
-        
-        public SkillStoneOfPlayerInfoModel GetStoneOfPlayerInfoModelByMyStoneId(string id)
-        {
-            return id == null ? null : mySkillStonesDataDic.ContainsKey(id) ? mySkillStonesDataDic[id] : null;
-        }
-        
-        public SKStoneItem GetOneStoneModel(string localStoneid)
-        {
-            return mySkillStonesObjectsDic.ContainsKey(localStoneid) ? mySkillStonesObjectsDic[localStoneid] : null;
-        }
-        
-        public IEnumerator UpdateMySkillStone(string stoneOfPlayerID)
-        {
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
-                    Instance.OverrideMySkillStone(mySkillStonesDataDic[stoneOfPlayerID]);
+                    Update_Json(Dic[stoneOfPlayerID]);
                 break;
                 case playerinfoReferenceMode.remoteTestPlayer:
-                    // 远程对技能石的更新操作是以技能石为单位的
                 break;
                 case playerinfoReferenceMode.formalVersion:
                 break;
-            }
-            yield break;        
-        }
-        
-        public IEnumerator LoadMySkillStones()
-        {
-            switch (AccountSet.Instance._playerinfoReferenceMode)
-            {
-                case playerinfoReferenceMode.localTestSaveData:
-                    yield return LoadMySkillStonesViaLocalJsonFile();
-                    break;
-                case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
-                    break;
-                case playerinfoReferenceMode.formalVersion:
-                    break;
-            }
-            
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in mySkillStonesDataDic)
-            {
-                yield return SkillStonesBox.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
             }
             yield break;
         }
         
-        // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
-        public List<SkillStoneOfPlayerInfoModel> GetMonsterEquipingStones(string monsterOfPlayerId)
+        public static IEnumerator Update_Level(string skillstoneofplayerid, string targetLevel, ApiLanguage apiLanguage)
         {
-            List<SkillStoneOfPlayerInfoModel> targetStones = new List<SkillStoneOfPlayerInfoModel>();
-            foreach(KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in mySkillStonesDataDic)
-            {
-                if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId)
-                {
-                    targetStones.Add(keyValuePair.Value);
-                }
-            }
-            return targetStones;
+            SkillStoneOfPlayerInfoModel st = Get(skillstoneofplayerid);
+            st.level = targetLevel;
+            IEnumerator up = Update(skillstoneofplayerid);
+            yield return up;
         }
-
-        public IEnumerator GenerateOneStoneInfo(SkillStoneOfPlayerInfoModel one)
+        
+        public static IEnumerator LoadAll()
         {
-            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
-            if (_SkillConfig == null)
-            {
-                Debug.Log("巨大问题,技能id似乎未定义：" + one.skillId);
-                yield break;
-            }
-            if (mySkillStonesDataDic.ContainsKey(one.skillStoneOfPlayerId))
-            {
-                mySkillStonesDataDic[one.skillStoneOfPlayerId] = one;
-            }
-            else
-            {
-                mySkillStonesDataDic.Add(one.skillStoneOfPlayerId, one);
-            }
-        }
-
-        public IEnumerator StoneGotcha()
-        {
+            Dic.Clear();
             switch (AccountSet.Instance._playerinfoReferenceMode)
             {
                 case playerinfoReferenceMode.localTestSaveData:
+                    LoadAll_Json();
                     break;
                 case playerinfoReferenceMode.remoteTestPlayer:
-                    yield return SkillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
                     yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
                 case playerinfoReferenceMode.formalVersion:
                     break;
             }
+            // 上面的步骤已经完成了Dic的适配
+            RenderModelDic.Clear();
+            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)
+            {
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
+                if (_SkillConfig == null)
+                {
+                    Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
+                    yield break;
+                }
+                yield return SkillStonesBox.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
+            }
+            yield break;
         }
         
         // 真正删除技能石头是要通过服务器的API
@@ -154,7 +92,7 @@ namespace dataAccess
         public static IEnumerator RemoveTheseStonesFromLocalDic(List<string> stoneSkillIDs)// 如此一来的话，参数里的这个列表是石头localid的列表。
         {
             List<SkillStoneOfPlayerInfoModel> toRemove = new List<SkillStoneOfPlayerInfoModel>();
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in mySkillStonesDataDic)
+            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
             {
                 if (stoneSkillIDs.Contains(keyValuePair.Value.skillStoneOfPlayerId))
                 {
@@ -163,70 +101,12 @@ namespace dataAccess
             }
             for (int i = 0; i < toRemove.Count; i++)
             {
-                if (mySkillStonesObjectsDic.ContainsKey(toRemove[i].skillStoneOfPlayerId))
-                    Object.Destroy(mySkillStonesObjectsDic[toRemove[i].skillStoneOfPlayerId].gameObject);
-                mySkillStonesObjectsDic.Remove(toRemove[i].skillStoneOfPlayerId);
-                mySkillStonesDataDic.Remove(toRemove[i].skillStoneOfPlayerId);
+                if (RenderModelDic.ContainsKey(toRemove[i].skillStoneOfPlayerId))
+                    Object.Destroy(RenderModelDic[toRemove[i].skillStoneOfPlayerId].gameObject);
+                RenderModelDic.Remove(toRemove[i].skillStoneOfPlayerId);
+                Dic.Remove(toRemove[i].skillStoneOfPlayerId);
             }
             yield break;
-        }
-
-        public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid,
-                                                string B1skillid, string B2skillid, string B3skillid,
-                                                    string C1skillid, string C2skillid, string C3skillid)
-        {
-            SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfigByID(A1skillid);
-            SkillConfig _SkillConfigA2 = SkillConfigTable.GetSkillConfigByID(A2skillid);
-            SkillConfig _SkillConfigA3 = SkillConfigTable.GetSkillConfigByID(A3skillid);
-            SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfigByID(B1skillid);
-            SkillConfig _SkillConfigB2 = SkillConfigTable.GetSkillConfigByID(B2skillid);
-            SkillConfig _SkillConfigB3 = SkillConfigTable.GetSkillConfigByID(B3skillid);
-            SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfigByID(C1skillid);
-            SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfigByID(C2skillid);
-            SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfigByID(C3skillid);
-            List<SkillConfig> allnineskill = new List<SkillConfig>();
-            
-            if (_SkillConfigA1 != null && string.IsNullOrEmpty(_SkillConfigA1.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigA1);
-            if (_SkillConfigA2 != null && string.IsNullOrEmpty(_SkillConfigA2.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigA2);
-            if (_SkillConfigA3 != null && string.IsNullOrEmpty(_SkillConfigA3.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigA3);
-            if (_SkillConfigB1 != null && string.IsNullOrEmpty(_SkillConfigB1.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigB1);
-            if (_SkillConfigB2 != null && string.IsNullOrEmpty(_SkillConfigB2.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigB2);
-            if (_SkillConfigB3 != null && string.IsNullOrEmpty(_SkillConfigB3.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigB3);
-            if (_SkillConfigC1 != null && string.IsNullOrEmpty(_SkillConfigC1.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigC1);
-            if (_SkillConfigC2 != null && string.IsNullOrEmpty(_SkillConfigC2.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigC2);
-            if (_SkillConfigC3 != null && string.IsNullOrEmpty(_SkillConfigC3.CONNATE_CODE))
-                allnineskill.Add(_SkillConfigC3);
-                
-            int wholeskillpoint = 0;
-            for (int i = 0; i < allnineskill.Count; i++)
-            {
-                switch (allnineskill[i].SP_LEVEL)
-                {
-                    case 0:
-                        wholeskillpoint += 10;
-                        break;
-                    case 1:
-                        wholeskillpoint -= 10;
-                        break;
-                    case 2:
-                        wholeskillpoint -= 20;
-                        break;
-                    case 3:
-                        wholeskillpoint -= 30;
-                        break;
-                    case -1:
-                        break;
-                }
-            }
-            return wholeskillpoint;
         }
     }
 }

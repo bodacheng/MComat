@@ -119,7 +119,7 @@ public class SSLevelUpManager : MonoBehaviour
     // 实际将技能石提升等级的执行函数
     IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
     {
-        IEnumerator up = MySkillStonesReader.Instance.LevelUpMySkillStone(PlayerSkillStoneID, selectedTargetLevel.ToString(), ApiLanguage.EnUs);
+        IEnumerator up = MySkillStonesReader.Update_Level(PlayerSkillStoneID, selectedTargetLevel.ToString(), ApiLanguage.EnUs);
         yield return up;
         RefreshSkillLevelUpModule();
     }

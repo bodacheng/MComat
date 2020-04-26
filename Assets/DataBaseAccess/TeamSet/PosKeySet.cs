@@ -22,12 +22,10 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].monsterOfPlayerId != null)
             {
-                IEnumerator getchar = AccountCharsSet.Instance.GetAccountCharInfo(PosNumsWithLocalKeys[i].monsterOfPlayerId);
-                yield return getchar;
-                GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = (GetMonsterOfPlayerDetailModel)getchar.Current;
+                GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = AccountCharsSet.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
-                    CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
+                    CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
                     multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, characterDataInfo);
                 }
             }

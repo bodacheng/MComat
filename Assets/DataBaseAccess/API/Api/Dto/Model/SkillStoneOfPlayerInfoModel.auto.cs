@@ -24,7 +24,7 @@ namespace Api.Dto.Model {
         /// 等级，限制为1到100
         /// </summary>
         public string level { get; set; }
-
+        
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
@@ -34,5 +34,10 @@ namespace Api.Dto.Model {
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
         public string inUsingSkillSlot { get; set; }
+        
+        /// <summary>
+        /// 是否为角色原生技能
+        /// </summary>
+        public string Inherent { get; set; }
     }
 }

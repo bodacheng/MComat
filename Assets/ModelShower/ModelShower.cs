@@ -45,9 +45,7 @@ public class ModelShower : MonoBehaviour
         GameObject _char = MyModelPool.Instance.GetMyModel(localID);
         if (_char == null)
         {
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel targetInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            GetMonsterOfPlayerDetailModel targetInfo = AccountCharsSet.Get(localID);
             yield return _CharSetManager.BuildShowModel(targetInfo);
             _char = MyModelPool.Instance.GetMyModel(localID);
         }
@@ -207,35 +205,22 @@ public class ModelShower : MonoBehaviour
         MyModelPool.Instance.SetAllMyCharactersModelActive(false);
         GetMonsterOfPlayerDetailModel _one;
 
-        IEnumerator getchar1 = AccountCharsSet.instance.GetAccountCharInfo(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(0));
-        yield return getchar1;
-        _one = (GetMonsterOfPlayerDetailModel)getchar1.Current;
+        _one = AccountCharsSet.Get(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(0));
         if (_one != null)
             onsetLocals.Add(_one);
 
-        IEnumerator getchar2 = AccountCharsSet.instance.GetAccountCharInfo(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(1));
-        yield return getchar2;
-        _one = (GetMonsterOfPlayerDetailModel)getchar2.Current;
+        _one = AccountCharsSet.Get(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(1));
         if (_one != null)
             onsetLocals.Add(_one);
 
-        IEnumerator getchar3 = AccountCharsSet.instance.GetAccountCharInfo(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(2));
-        yield return getchar3;
-        _one = (GetMonsterOfPlayerDetailModel)getchar3.Current;
+        _one = AccountCharsSet.Get(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(2));
         if (_one != null)
             onsetLocals.Add(_one);
-
-        IEnumerator getchar4 = AccountCharsSet.instance.GetAccountCharInfo(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(3));
-        yield return getchar4;
-        _one = (GetMonsterOfPlayerDetailModel)getchar4.Current;
-        if (_one != null)
-            onsetLocals.Add(_one);
-
+            
         yield return _CharSetManager.BuildTheseMyModels(onsetLocals.ToArray());
         ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(0), 0);
         ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(1), 1);
         ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(2), 2);
-        ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(3), 3);
     }
 
     //这个函数有这样的风险：如果你角色由这个函数正在调整位置的过程中step忽然间变了，那角色会停留在途中。而且风险可能不止这些。

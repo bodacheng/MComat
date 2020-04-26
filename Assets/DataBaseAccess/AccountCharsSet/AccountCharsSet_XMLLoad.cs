@@ -12,8 +12,7 @@ namespace dataAccess
     //Resource模式读取应该是可以用于一些临时剧情人物的读取？最典型的，教学模式角色读取。
     public partial class AccountCharsSet
     {
-
-        public GetMonsterOfPlayerDetailModel loadMyCharsByXMLFile(string Path)
+        public static GetMonsterOfPlayerDetailModel loadMyCharsByXMLFile(string Path)
         {
             FileStream FileStream = null;
             try
@@ -47,7 +46,7 @@ namespace dataAccess
         }
 
         // 请参考generateStoryCharsIntoXMLFile函数来安排文件路径，是否包括文件后缀等问题
-        public bool overrideMyOwnedCharsInfoXML(string Path, GetMonsterOfPlayerDetailModel _ownedChars)
+        public static bool overrideMyOwnedCharsInfoXML(string Path, GetMonsterOfPlayerDetailModel _ownedChars)
         {
             try
             {
@@ -77,7 +76,7 @@ namespace dataAccess
         }
 
         // 获取临时剧情用角色，比如用在Tutorial
-        public IEnumerator loadStoryCharsByXMLFile()
+        public static IEnumerator loadStoryCharsByXMLFile()
         {
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
                 yield return loadMyCharsByXMLFile(Application.dataPath + "/Resources/Account/StoryChars.xml");
@@ -90,7 +89,7 @@ namespace dataAccess
         }
 
         // 存储一套角色信息到StoryChars.xml文件
-        public void generateStoryCharsIntoXMLFile(GetMonsterOfPlayerDetailModel _Chars)
+        public static void generateStoryCharsIntoXMLFile(GetMonsterOfPlayerDetailModel _Chars)
         {
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
                 overrideMyOwnedCharsInfoXML(Application.dataPath + "/Resources/Account/StoryChars.xml", _Chars);

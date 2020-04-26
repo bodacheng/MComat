@@ -61,6 +61,30 @@
             this.RARITY_LEVEL = 0;
             CONNATE_CODE = null;
         }
+        
+        public static bool RangeLimit(float dis_min ,float dis_max, bool close, bool near, bool far, bool outrange) // 待修 
+        {
+            if (dis_max > dis_min)
+            {
+                if ((dis_min <= 5 && dis_max >= 0f) && close)
+                {
+                    return true;
+                }
+                if ((dis_min <= 10f && dis_max >= 5f) && near)
+                {
+                    return true;
+                }
+                if ((dis_min <= 15f && dis_max >= 10f) && far)
+                {
+                    return true;
+                }
+                if ((dis_min <= 50f && dis_max >= 15f) && outrange)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
     
     public class PassiveSkillConfigs

@@ -206,8 +206,8 @@ namespace mainMenu
                     if (!UsingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
                     {
                         CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                        _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]);
-                        _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                        _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[SkillStonesOfTypeAndExType[i]]);
+                        _SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                         cellindex++;
                     }
                     else
@@ -219,10 +219,10 @@ namespace mainMenu
                 }
                 else
                 {
-                    MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
+                    MySkillStonesReader.RenderModelDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
                     CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                    _SkillStoneCell.AddItem(MySkillStonesReader.mySkillStonesObjectsDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
-                    _SkillStoneCell.image.color = !AccountCharsSet.CheckIfContainsAccountCharsSetKey(MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                    _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
+                    _SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }
             }
@@ -231,23 +231,23 @@ namespace mainMenu
 
         public static IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
         {
-            if (MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
+            if (MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
             {
-                if (MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] != null)
+                if (MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] != null)
                 {
                     yield break;
                 }
             }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(skillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(skillStoneOfPlayerId);
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
             IEnumerator process = null;
             switch (ResourceLoadingSetting.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    process = (SkillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
+                    process = (SkillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.Resource:
-                    process = (SkillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId));
+                    process = (SkillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
@@ -262,12 +262,12 @@ namespace mainMenu
                 item = Icon.AddComponent<SKStoneItem>();
             }
 
-            if (!MySkillStonesReader.mySkillStonesObjectsDic.ContainsKey(skillStoneOfPlayerId))
-                MySkillStonesReader.mySkillStonesObjectsDic.Add(skillStoneOfPlayerId, item);
+            if (!MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
+                MySkillStonesReader.RenderModelDic.Add(skillStoneOfPlayerId, item);
             else
-                 MySkillStonesReader.mySkillStonesObjectsDic[skillStoneOfPlayerId] = item;
+                 MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] = item;
 
-            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.mySkillStonesDataDic[skillStoneOfPlayerId].skillId);
+            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(_stonesTempContainer);           

@@ -81,12 +81,10 @@ namespace dataAccess
             int membercount = 0;
             for (int i = 0; i < 3; i++)
             {
-                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
-                yield return getchar;
-                GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
+                GetMonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 if (myfighter != null)
                 {
-                    CharDataInfo CharDataInfo = RemoteAccess.GetCharDataInfo(myfighter);
+                    CharDataInfo CharDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(myfighter);
                     teamMembers.Set(0, i, CharDataInfo);
                     membercount += 1;
                     if (membercount == playerEntryNum)

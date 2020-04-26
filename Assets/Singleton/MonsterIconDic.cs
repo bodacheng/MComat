@@ -30,8 +30,25 @@ public class MonsterIconDic {
             Debug.Log("没有找到对应角色的icon，monsterid："+monsterid);
         return readingSprite;
     }
-
-    public IEnumerator FindMonsterIconByCach(string resource_id)
+    
+    public IEnumerator LoadAndGet(string resource_id)
+    {
+        IEnumerator onecoroutine = null;
+        switch (ResourceLoadingSetting.IconLoadingMode)
+        {
+            case ResourceLoadMode.CachAB:
+                onecoroutine = MonsterIconDic.Instance.FindMonsterIconByCach(resource_id);
+                break;
+            case ResourceLoadMode.Resource:
+                onecoroutine = MonsterIconDic.Instance.FindMonsterIconByResource(resource_id);
+                break;
+            case ResourceLoadMode.StreamingAssetAB:
+                break;
+        }
+        yield return onecoroutine;
+    }
+    
+    IEnumerator FindMonsterIconByCach(string resource_id)
     {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
@@ -74,8 +91,8 @@ public class MonsterIconDic {
         }
         yield return readingSprite;
     }
-
-    public IEnumerator FindMonsterIconByResource(string resource_id)
+    
+    IEnumerator FindMonsterIconByResource(string resource_id)
     {
         characterIconDic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)

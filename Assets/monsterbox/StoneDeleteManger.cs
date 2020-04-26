@@ -49,7 +49,7 @@ public class StoneDeleteManger : MonoBehaviour
                 cell._selected.SetActive(false);
                 continue;
             }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(cell.GetItem().SkillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
                 if (selected.Contains(skillStoneOfPlayerInfoModel))
@@ -66,7 +66,7 @@ public class StoneDeleteManger : MonoBehaviour
     {
         if (cell.GetItem() != null)
         {
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(cell.GetItem().SkillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
                 if (selected.Contains(skillStoneOfPlayerInfoModel))
@@ -83,7 +83,7 @@ public class StoneDeleteManger : MonoBehaviour
     {
         if (cell.GetItem() != null)
         {
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(cell.GetItem().SkillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
                 selected.Add(skillStoneOfPlayerInfoModel);
@@ -97,7 +97,7 @@ public class StoneDeleteManger : MonoBehaviour
     {
         if (cell.GetItem() != null)
         {
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(cell.GetItem().SkillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
                 selected.Remove(skillStoneOfPlayerInfoModel);

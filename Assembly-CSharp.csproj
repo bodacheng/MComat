@@ -197,7 +197,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetSkillStoneOfPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\LoginModel.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\MonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\MonsterTeamOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\SkillStoneGotchaInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\SkillStoneGotchaModel.auto.cs" />
@@ -208,12 +207,12 @@
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Json.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_XMLLoad.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_remote.cs" />
-    <Compile Include="Assets\DataBaseAccess\AccountCharsSet\ListObject\AccountCharsSet_ListObject.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_localTest.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\LocalJson.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader.cs" />
+    <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Util.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_json.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\RemoteAccess.cs" />
@@ -346,8 +345,10 @@
     <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\AIDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\HitBoxLogTable.cs" />
-    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig.cs" />
-    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfigTable.cs" />
+    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\INHERENT_SKILLTable.cs" />
+    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
+    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
+    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\JsonAttribute.cs" />

@@ -83,25 +83,21 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     public IEnumerator _StartNewLocalTestMode()
     {
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
-        yield return AccountCharsSet.Instance.LocalSaveDataGetAllCharacters();
-
-        yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
+        yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
+        yield return SkillConfigTable.LoadAllSkillConfigs();
         int i = 1;
-        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.Instance.SkillConfigRefDic)
+        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
         {
             Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-            var skillStoneOfPlayerInfoModel = new SkillStoneOfPlayerInfoModel
+            SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
             {
                 skillStoneOfPlayerId = string.Format("{0:D20}", i),
                 skillId = _pair.Value.RECORD_ID,
-                level = 1.ToString()
+                level = 1.ToString(),
+                Inherent = "false"
             };
-            yield return MySkillStonesReader.Instance.GenerateOneStoneInfo(skillStoneOfPlayerInfoModel);
+            yield return MySkillStonesReader.Add(stoneInfo);
             i++;
-        }
-        foreach (SkillStoneOfPlayerInfoModel value in MySkillStonesReader.mySkillStonesDataDic.Values)
-        {
-            MySkillStonesReader.Instance.OverrideMySkillStone(value);
         }
         SceneManager.LoadScene(1);
         yield break;
@@ -136,7 +132,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 break;
             case ResourceLoadMode.Resource:
                 yield return MonstersConfigTable.Instance.LoadMonstersConfig();
-                yield return SkillConfigTable.Instance.LoadAllSkillConfigs();
+                yield return SkillConfigTable.LoadAllSkillConfigs();
                 LoadingCanvas.target.NowProcess("正在加载资源",0.1f);
                 break;
         }

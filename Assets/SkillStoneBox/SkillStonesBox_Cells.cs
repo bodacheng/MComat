@@ -158,25 +158,23 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Instance.GetStoneOfPlayerInfoModelByMyStoneId(dragAndDropItem.SkillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Get(dragAndDropItem.SkillStoneOfPlayerId);
             if (SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId == null)
             {
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            CharConfig characterResourceInfo = null;
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel _one = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            CharConfig charConfig = null;
+            GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
             targetIcon.gameObject.SetActive(true);
-            characterResourceInfo = MonstersConfigTable.GetCharConfig(_one.monsterId);
-            targetIcon.ChangeIcon(characterResourceInfo == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(characterResourceInfo.RECORD_ID),
-            characterResourceInfo == null ? Zokusei.Null : characterResourceInfo._zokusei);
+            charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
+            targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
+            charConfig == null ? Zokusei.Null : charConfig._zokusei);
             yield break;
         }
                 

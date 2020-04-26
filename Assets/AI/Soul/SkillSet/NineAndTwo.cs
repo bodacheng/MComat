@@ -1,6 +1,7 @@
 ﻿using Skill;
+using System;
 
-[System.Serializable]
+[Serializable]
 public partial class NineAndTwo {
 
     public string A1skillid, A2skillid, A3skillid;

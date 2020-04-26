@@ -138,7 +138,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.Run(SkillsPrintOutFocusingCharChangeProcess(RemoteAccess.GetCharDataInfo(focusingCharDataInfo)));
+            presentationProcessRunner.Run(SkillsPrintOutFocusingCharChangeProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharDataInfo)));
         }
 
         public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharDataInfo _focusingCharacterDataInfo)
@@ -226,7 +226,7 @@ namespace mainMenu
                 }
 
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accountCharacterInfo.monsterId);
-                CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(accountCharacterInfo);
+                CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 
@@ -240,9 +240,7 @@ namespace mainMenu
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public IEnumerator SetMemberDetailFocusingChar(string localID)
         {
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(localID);
-            yield return getchar;
-            focusingCharDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
+            focusingCharDataInfo = AccountCharsSet.Get(localID);
             yield break;
         }
 

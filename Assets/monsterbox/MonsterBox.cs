@@ -64,7 +64,7 @@ namespace mainMenu
         // 这个函数的生成本随着“type”选项卡的整理。
         public static IEnumerator MonsterIconsGenerate()
         {
-            foreach (KeyValuePair<string, MonsterOfPlayerListModel> keyValuePair in AccountCharsSet.AccountCharListObjectsDic)
+            foreach (KeyValuePair<string, GetMonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
             {
                 yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId);
             }
@@ -72,34 +72,21 @@ namespace mainMenu
 
         public static IEnumerator AddOneNewIcon(string monsterOfPlayerId)
         {
-            IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo(monsterOfPlayerId);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel targetingCharacterDataInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            CharConfig targetingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(targetingCharacterDataInfo.monsterId);
+            GetMonsterOfPlayerDetailModel targetingCharInfo = AccountCharsSet.Get(monsterOfPlayerId);
+            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {
-                IEnumerator onecoroutine = null;
-                switch (ResourceLoadingSetting.IconLoadingMode)
-                {
-                    case ResourceLoadMode.CachAB:
-                        onecoroutine = MonsterIconDic.Instance.FindMonsterIconByCach(targetingCharacterDataInfo.monsterId);
-                        break;
-                    case ResourceLoadMode.Resource:
-                        onecoroutine = MonsterIconDic.Instance.FindMonsterIconByResource(targetingCharacterDataInfo.monsterId);
-                        break;
-                    case ResourceLoadMode.StreamingAssetAB:
-                        break;
-                }
+                IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(targetingCharInfo.monsterId);
                 yield return onecoroutine;
                 targetingIcon = Instantiate(target.noMagic);
-                targetingIcon.name = targetingCharacterResourceInfo.REAL_NAME + "_icon";
-                targetingIcon._MonsterOfPlayerDetailModel = targetingCharacterDataInfo;
-                targetingIcon._CharConfig = targetingCharacterResourceInfo;
-                targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(targetingCharacterResourceInfo.RECORD_ID), targetingCharacterResourceInfo._zokusei);
+                targetingIcon.name = _CharConfig.REAL_NAME + "_icon";
+                targetingIcon._MonsterOfPlayerDetailModel = targetingCharInfo;
+                targetingIcon._CharConfig = _CharConfig;
+                targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);
             }
-
+            
             // 下面的环节重新加载type下拉表
             List<string> typeList = new List<string>();
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)

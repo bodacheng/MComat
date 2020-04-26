@@ -185,7 +185,7 @@ namespace mainMenu
             {
                 yield break;
             }
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
             for (int i = 0; i < equipingstones.Count; i++)
             {
                 switch (equipingstones[i].inUsingSkillSlot)
@@ -229,7 +229,7 @@ namespace mainMenu
 
         public int CheckNineSlotPointsAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
         {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.Instance.GetMonsterEquipingStones(monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetMonsterEquipingStones(monsterOfPlayerId);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
             for (int i = 0; i < equipingstones.Count; i++)
             {

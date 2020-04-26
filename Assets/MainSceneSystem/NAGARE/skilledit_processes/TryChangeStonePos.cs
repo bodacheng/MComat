@@ -27,7 +27,7 @@ public class TryChangeStonePos : MainSceneProcess
         {
             IEnumerator skilleditconfrim()
             {
-                IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
+                IEnumerator getchar = AccountCharsSet.Load("1");
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield return TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(myfighter);
@@ -39,7 +39,7 @@ public class TryChangeStonePos : MainSceneProcess
                 };
                 if (this.TuroialFight != null)
                 {
-                    CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(myfighter);
+                    CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(myfighter);
                     this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
                     this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
                 }

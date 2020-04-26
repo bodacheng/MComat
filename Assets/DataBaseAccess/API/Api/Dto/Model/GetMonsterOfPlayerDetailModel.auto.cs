@@ -1,4 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
 using System;
+using dataAccess;
 
 namespace Api.Dto.Model {
 
@@ -24,5 +29,80 @@ namespace Api.Dto.Model {
 		/// モンスターID
 		/// </summary>
 		public string monsterId { get; set; }
+        
+        
+        public static CharDataInfo GetCharDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+        {
+            try
+            {
+                CharDataInfo characterDataInfo = new CharDataInfo
+                {
+                    ResourceID = accountCharacterInfo.monsterId,
+                    monsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId
+                };
+
+                List<SkillStoneOfPlayerInfoModel> targets = MySkillStonesReader.GetMonsterEquipingStones(accountCharacterInfo.monsterOfPlayerId);
+                NineAndTwo nineAndTwo = new NineAndTwo();
+                CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(accountCharacterInfo.monsterId));
+                if (_TempCharacterResourceInfo == null)
+                {
+                    Debug.Log("角色定义信息错误。monsterId：" + accountCharacterInfo.monsterId);
+                    return null;
+                }
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    switch(targets[i].inUsingSkillSlot)
+                    {
+                        case "1":
+                            nineAndTwo.A1skillid = targets[i].skillId;
+                            nineAndTwo.A1level = int.Parse(targets[i].level);
+                        break;
+                        case "2":
+                            nineAndTwo.A2skillid = targets[i].skillId;
+                            nineAndTwo.A2level = int.Parse(targets[i].level);
+                        break;
+                        case "3":
+                            nineAndTwo.A3skillid = targets[i].skillId;
+                            nineAndTwo.A3level = int.Parse(targets[i].level);
+                        break;
+                        case "4":
+                            nineAndTwo.B1skillid = targets[i].skillId;
+                            nineAndTwo.B1level = int.Parse(targets[i].level);
+                        break;
+                        case "5":
+                            nineAndTwo.B2skillid = targets[i].skillId;
+                            nineAndTwo.B2level = int.Parse(targets[i].level);
+                        break;
+                        case "6":
+                            nineAndTwo.B3skillid = targets[i].skillId;
+                            nineAndTwo.B3level = int.Parse(targets[i].level);
+                        break;
+                        case "7":
+                            nineAndTwo.C1skillid = targets[i].skillId;
+                            nineAndTwo.C1level = int.Parse(targets[i].level);
+                        break;
+                        case "8":
+                            nineAndTwo.C2skillid = targets[i].skillId;
+                            nineAndTwo.C2level = int.Parse(targets[i].level);
+                        break;
+                        case "9":
+                            nineAndTwo.C3skillid = targets[i].skillId;
+                            nineAndTwo.C3level = int.Parse(targets[i].level);
+                        break;
+                    }
+                }
+                nineAndTwo.moveType = _TempCharacterResourceInfo.MoveType;
+                nineAndTwo.rushType = _TempCharacterResourceInfo.RushType;
+                nineAndTwo.canDefend = _TempCharacterResourceInfo.DEFENDABLE_FLAG;
+                characterDataInfo._NineAndTwo = nineAndTwo;
+                characterDataInfo._NineAndTwo.SortNineAndTwo();
+                return characterDataInfo;
+            }
+            catch (Exception e)
+            {
+                Debug.Log("数据库信息有错误:" + e);
+                return null;
+            }
+        }
 	}
 }

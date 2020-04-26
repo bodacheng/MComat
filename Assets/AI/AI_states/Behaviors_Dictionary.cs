@@ -205,7 +205,6 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
             return;
         }
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
-        SkillConfigTable.RefreshSkillConfigDicForReference();
         
         SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(anim_path);
         BehaviorIndexList = new List<string>

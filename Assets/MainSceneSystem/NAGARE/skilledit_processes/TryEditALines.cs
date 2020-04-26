@@ -27,7 +27,7 @@ public class TryEditALines : MainSceneProcess
         if (_StageScriptableObject != null)
             TuroialFight = LocalFight.LoadOneLocalFightByScript(_StageScriptableObject.Script);
             
-        IEnumerator getchar = AccountCharsSet.instance.GetAccountCharInfo("1");
+        IEnumerator getchar = AccountCharsSet.Load("1");
         yield return getchar;
         GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
         MemberDetail.target.focusingCharDataInfo = myfighter;
@@ -94,7 +94,7 @@ public class TryEditALines : MainSceneProcess
             };
             if (this.TuroialFight != null)
             {
-                CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(_CharacterDataInfo);
+                CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(_CharacterDataInfo);
                 this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
                 this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
             }

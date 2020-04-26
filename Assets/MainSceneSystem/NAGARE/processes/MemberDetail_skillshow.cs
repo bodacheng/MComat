@@ -2,6 +2,7 @@
 using UnityEngine;
 using mainMenu;
 using dataAccess;
+using Api.Dto.Model;
 
 public class MemberDetail_skillshow : MainSceneProcess
 {
@@ -13,7 +14,7 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharDataInfo characterDataInfo = RemoteAccess.GetCharDataInfo(MemberDetail.target.focusingCharDataInfo);
+        CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target.focusingCharDataInfo);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);

@@ -12,18 +12,14 @@ public class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public static GameObject icon;                                                  // Icon of dragged item
 	public static StoneCell sourceCell;                                       // From this cell dragged item is
 
-    static Canvas canvas;                                                   // Canvas for item drag operation
-    static readonly string canvasName = "DragAndDropCanvas";                        // Name of canvas
+    static Canvas canvas;                                                       // Canvas for item drag operation
+    static readonly string canvasName = "DragAndDropCanvas";                    // Name of canvas
     static readonly int canvasSortOrder = 100;                                       // Sort order for canvas
 
     public Image image;
     //自定义item属性
     public SkillConfig _SkillConfig;
-
-    // 用来记忆他们在SKillStoneBox里的位置。从而来保证他们可以返回盒子里正确位置。
-    // 这个量其实就相当于拥有技能石头的本地id，但是，这个本地id并不是像玩家拥有怪物的localdi那样相对固定，
-    // 这个id仅仅是技能石头盒子每次依据检索条件展示所有石头的过程中临时给加的，因此实际的相关财产操作
-    // 2019 5.19: 但是。。。其实如果我们真的需要一个不重复的值，那么，在数据库里起码有一个自增的主key不是吗。。
+    public bool Inherent;
     public string SkillStoneOfPlayerId;
 
     /// <summary>

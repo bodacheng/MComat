@@ -1,15 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public partial class ResourceLordSceneStarter : MonoBehaviour
 {
-    private IEnumerator ConfigFilesDownLoad()
+    IEnumerator ConfigFilesDownLoad()
     {
         AssetBundle readingbundle;
         
         ////////////  下面开始下载并阅读角色配置文件 ////////////
-        modelConfigFileMission = new CachDownLoadMission( "Configs","monstersconfig", 0f);
+        modelConfigFileMission = new CachDownLoadMission("Configs", "monstersconfig", 0f);
         IEnumerator _loadingProcess = LetThisloadMissionBegin(modelConfigFileMission);
         yield return _loadingProcess;
         if (!modelConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
@@ -19,7 +18,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         }
         _loadingProcess = CachManager.Instance.getABFromCach(modelConfigFileMission.subPath, modelConfigFileMission.filename);
         yield return _loadingProcess;
-        if (_loadingProcess .Current != null)
+        if (_loadingProcess.Current != null)
         {
             readingbundle = (AssetBundle)_loadingProcess.Current;
         }
@@ -47,13 +46,14 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             MonstersConfigTable.Instance.Load(CharacterConfigTextFile);
             MonstersConfigTable.RefreshCharacterResourceInfoDic();
         }
-        else{
+        else
+        {
             Debug.Log("角色配置文件错误。");
             yield break;
         }
         
         ////////////  下面开始下载并阅读技能配置文件 ////////////
-        animationConfigFileMission = new CachDownLoadMission( "Configs","mst_skill", 0f);
+        animationConfigFileMission = new CachDownLoadMission("Configs", "mst_skill", 0f);
         _loadingProcess = LetThisloadMissionBegin(animationConfigFileMission);
         yield return _loadingProcess;
         if (!animationConfigFileMission.downloadfinished)//downloadfinished的赋值机制非常棘手
@@ -86,11 +86,9 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             yield break;
         }
         TextAsset SkillConfigTextFile = (TextAsset)loadAsset.asset;
-
         if (SkillConfigTextFile != null)
         {
-            SkillConfigTable.Instance.Load(SkillConfigTextFile);
-            SkillConfigTable.RefreshSkillConfigDicForReference();
+            SkillConfigTable.Load(SkillConfigTextFile);
         }
         else
         {
