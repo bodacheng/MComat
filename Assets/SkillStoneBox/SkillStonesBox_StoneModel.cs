@@ -45,7 +45,8 @@ namespace mainMenu
                 MySkillStonesReader.RenderModelDic.Add(skillStoneOfPlayerId, item);
             else
                  MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] = item;
-            
+
+            item.Inherent = skillStoneOfPlayerInfoModel.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
