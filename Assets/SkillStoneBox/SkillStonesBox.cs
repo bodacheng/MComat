@@ -1,18 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.UI;
-using dataAccess;
-using Api.Dto.Model;
-using Skill;
 
 // 11.13号思考这样几个问题：
 // 1.玩家的等级与CellLimit之间的制约关系怎么实现
 // 2.从数据库阅读拥有技能石的函数在哪
 // 3.当石头的数量超过了格子数量时候所进行的validation在哪。
 // 4.有财产类的安全隐患吗。
-
 // 18.1.6
 // 这个模块缺乏这些函数：添加新技能石头(与技能石头盒子的画面配合？)
 // 消耗某技能石头
@@ -167,110 +161,6 @@ namespace mainMenu
         {
             string targetType = types.options[types.value].text.Clone() as string;
             TheNineSlot.Instance.mainProcessRunner.Run(EXTabsFeatureRefresh(true));
-        }
-        
-        public IEnumerator ArrangeSkillStonesToBox()
-        {
-            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.Instance.GetUsingStonesId());
-            _StoneDeleteManger.RefreshSelectedRender();
-        }
-        
-        // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<string> UsingStoneIDs)
-        {
-            foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
-            {
-                // 下面第一行（UpdateMyItem）至关重要。技能石box往往和九宫格一起显示，readANineAndTwo函数如果和arrangeSkillStonesToBox配合运行，
-                // 都是前者在前，决定好在九宫格里显示的角色装备中石头是啥，先放在那里。这个时间点上技能石背包里的格子还没有断开和那几个石头的连接。如果你不UpdateMyItem一下，
-                // 它会把已经放到九宫格里的石头给拔下来扔进stonesTempContainer。
-                cellPair.Value.UpdateMyItem();
-                SKStoneItem dragAndDropItem = cellPair.Value.GetItem();
-                if (dragAndDropItem != null)
-                {
-                    dragAndDropItem.transform.SetParent(stonesTempContainer);
-                }
-                cellPair.Value.UpdateMyItem(); // 被拔下石头的格子需要把使用中角色头像关闭。单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
-            }
-            List<String> SkillStonesOfTypeAndExType = MySkillStonesReader.TargetStonesFromOfAccount(type, exType, close, near, far, outrange);
-            if (SkillStonesOfTypeAndExType.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
-            {
-                Debug.Log("错误：待显示技能石数量超过了盒子容量");
-                yield break;
-            }
-                        
-            int cellindex = 0;
-            for (int i = 0; i < SkillStonesOfTypeAndExType.Count; i++)
-            {
-                if (UsingStoneIDs != null)
-                {
-                    if (!UsingStoneIDs.Contains(SkillStonesOfTypeAndExType[i]))
-                    {
-                        CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                        _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[SkillStonesOfTypeAndExType[i]]);
-                        _SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
-                        cellindex++;
-                    }
-                    else
-                    {
-                        CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                        _SkillStoneCell.UpdateMyItem();
-                        Debug.Log("有使用中的技能石头，直接跳过这一格");
-                    }
-                }
-                else
-                {
-                    MySkillStonesReader.RenderModelDic[SkillStonesOfTypeAndExType[i]].GetComponent<Image>().color = Color.white;
-                    CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                    _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[SkillStonesOfTypeAndExType[i]]); //！！！！！这个环节会销毁被覆盖的石头。
-                    _SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(SkillStonesOfTypeAndExType[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
-                    cellindex++;
-                }
-            }
-            yield break;
-        }
-
-        public static IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
-        {
-            if (MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
-            {
-                if (MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] != null)
-                {
-                    yield break;
-                }
-            }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(skillStoneOfPlayerId);
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
-            IEnumerator process = null;
-            switch (ResourceLoadingSetting.IconLoadingMode)
-            {
-                case ResourceLoadMode.CachAB:
-                    process = (SkillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId));
-                    break;
-                case ResourceLoadMode.Resource:
-                    process = (SkillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId));
-                    break;
-                case ResourceLoadMode.StreamingAssetAB:
-                    break;
-            }
-            yield return (process);
-            GameObject Icon = (GameObject)process.Current;
-            if (Icon == null)
-                Icon = Instantiate(SkillIconsDic.Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL));
-            SKStoneItem item = Icon.GetComponent<SKStoneItem>();
-            if (item == null)
-            {
-                item = Icon.AddComponent<SKStoneItem>();
-            }
-
-            if (!MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
-                MySkillStonesReader.RenderModelDic.Add(skillStoneOfPlayerId, item);
-            else
-                 MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] = item;
-
-            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId);
-            item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
-            item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
-            item.gameObject.transform.SetParent(_stonesTempContainer);           
         }
         
         Vector2 buttonAnchorPosition;

@@ -1,0 +1,104 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Api.Dto.Model;
+using dataAccess;
+using Skill;
+using UnityEngine.UI;
+
+namespace mainMenu
+{
+    public partial class SkillStonesBox : MonoBehaviour
+    {
+        [Space(7)]
+        [Header("Order Button")]
+        public Text orderButtonText;
+
+        int ordertype = 0;
+        
+        // 功能本身直接放按钮上，但text要适配到SkillStonesBox上。
+        public void SwitchOrder()
+        {
+            ordertype++;
+            if (ordertype == 4)
+            {
+                ordertype = 0;
+            }
+            switch (ordertype)
+            {
+                case 0:// 等级降序
+                    orderButtonText.text = "Level ASC";
+                break;
+                case 1:// 等级升序
+                    orderButtonText.text = "Level DES";
+                break;
+                case 2:// 稀有度降序
+                    orderButtonText.text = "Rarity ASC";
+                break;
+                case 3:// 稀有度升序
+                    orderButtonText.text = "Rarity DES";
+                break;
+            }
+            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+        }
+        
+        List<string> Order(List<string> targets)
+        {
+            switch (ordertype)
+            {
+                case 0:// 等级降序
+                return ByLevel(targets,1);
+                case 1:// 等级升序
+                return ByLevel(targets,0);
+                case 2:// 稀有度降序
+                return ByRareLevel(targets,1);
+                case 3:// 稀有度升序
+                return ByRareLevel(targets,0);
+            }
+            return targets;
+        }
+           
+        // 等级升序降序
+        List<string> ByLevel(List<string> targets, int order) //0:升序 1:降序 //是否按type排序
+        {
+            for (int i = 0; i < targets.Count - 1; i++)
+            {
+                for (int j = 0; j < targets.Count - 1 - i; j++)
+                {
+                    SkillStoneOfPlayerInfoModel myStone1 = MySkillStonesReader.Get(targets[j]);
+                    SkillStoneOfPlayerInfoModel myStone2 = MySkillStonesReader.Get(targets[j+1]);
+                    
+                    if (order == 1 ? int.Parse(myStone1.level) > int.Parse(myStone2.level) : int.Parse(myStone1.level) < int.Parse(myStone2.level))
+                    {
+                        string temp = targets[j];
+                        targets[j] = targets[j + 1];
+                        targets[j + 1] = temp;
+                    }
+                }
+            }
+            return targets;
+        }
+        
+        List<string> ByRareLevel(List<string> targets, int order) //0:升序 1:降序 //是否按type排序
+        {
+            targets = ByLevel(targets,1);
+            for (int i = 0; i < targets.Count - 1; i++)
+            {
+                for (int j = 0; j < targets.Count - 1 - i; j++)
+                {
+                    SkillStoneOfPlayerInfoModel myStone1 = MySkillStonesReader.Get(targets[j]);
+                    SkillStoneOfPlayerInfoModel myStone2 = MySkillStonesReader.Get(targets[j+1]);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
+                    
+                    if (order == 1 ? skillConfig1.RARITY_LEVEL > skillConfig2.RARITY_LEVEL : skillConfig2.RARITY_LEVEL > skillConfig1.RARITY_LEVEL)
+                    {
+                        string temp = targets[j];
+                        targets[j] = targets[j + 1];
+                        targets[j + 1] = temp;
+                    }
+                }
+            }
+            return targets;
+        }
+    }
+}

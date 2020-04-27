@@ -267,7 +267,7 @@ namespace mainMenu
             int wholePoint = MySkillStonesReader.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
             return wholePoint;
         }
-       
+        
         public void NineSlotsStatusRefresh()//这个的核心作用在于即使调整cell的phase
         {
             foreach (SkillStoneSlot _slot in allSlot)

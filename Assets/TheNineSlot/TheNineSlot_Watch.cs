@@ -19,7 +19,7 @@ namespace mainMenu
             return returnValue;
         }
         
-        // 获取九宫格内玩家存档id,长度为装在中技能石数量
+        // 获取当前九宫格内技能石存档id, 长度为当前九宫格内技能石数量
         public List<string> GetUsingStonesId()
         {
             A1DragAndDropCell.UpdateMyItem();

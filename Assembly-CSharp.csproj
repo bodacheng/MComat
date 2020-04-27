@@ -534,6 +534,9 @@
     <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
+    <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Fill.cs" />
+    <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Order.cs" />
+    <Compile Include="Assets\SkillStoneBox\SkillStonesBox_StoneModel.cs" />
     <Compile Include="Assets\StagesManagement\ArcadeManager.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />
     <Compile Include="Assets\StagesManagement\QuestPreparePage.cs" />

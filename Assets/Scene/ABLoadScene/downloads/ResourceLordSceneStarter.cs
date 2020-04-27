@@ -3,9 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using UnityEngine.SceneManagement;
-using Api.Dto.Model;
-using Skill;
-using System.IO;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -83,23 +80,8 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     public IEnumerator _StartNewLocalTestMode()
     {
         AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
+        yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
-        yield return SkillConfigTable.LoadAllSkillConfigs();
-        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
-        int i = 1;
-        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
-        {
-            Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-            SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
-            {
-                skillStoneOfPlayerId = string.Format("{0:D20}", i),
-                skillId = _pair.Value.RECORD_ID,
-                level = 1.ToString(),
-                Inherent = "false"
-            };
-            yield return MySkillStonesReader.Add(stoneInfo);
-            i++;
-        }
         SceneManager.LoadScene(1);
         yield break;
     }

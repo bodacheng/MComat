@@ -12,8 +12,6 @@ public class INHERENT_SkillTable
 		public string SKILL_ID;
 	}
     
-    public static IDictionary<string, string> InherentSkillDic = new Dictionary<string, string>();
-
     static readonly List<Row> rowList = new List<Row>();
     static bool isLoaded = false;
     
@@ -21,7 +19,21 @@ public class INHERENT_SkillTable
 	{
 		return isLoaded;
 	}
-
+    
+    public static List<string> GetINHERENTSKIDList(string monsterID)
+    {
+        List<Row> rows = FindAll_MONSTER_ID(monsterID);
+        List<string> skillIds = new List<string>();
+        for (int i = 0; i < rows.Count; i++)
+        {
+            if (!skillIds.Contains(rows[i].SKILL_ID))
+            {
+                skillIds.Add(rows[i].SKILL_ID);
+            }
+        }
+        return skillIds;
+    }
+    
 	public List<Row> GetRowList()
 	{
 		return rowList;
@@ -54,7 +66,6 @@ public class INHERENT_SkillTable
 	public static void Load(TextAsset csv)
 	{
 		rowList.Clear();
-        InherentSkillDic.Clear();
 		string[][] grid = CsvParser2.Parse(csv.text);
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
@@ -64,7 +75,6 @@ public class INHERENT_SkillTable
                 row.RECORD_ID = grid[i][0];
                 row.MONSTER_ID = grid[i][1];
                 row.SKILL_ID = grid[i][2];
-                InherentSkillDic.Add(row.MONSTER_ID, row.SKILL_ID);
                 rowList.Add(row);
             }
 		}
@@ -95,7 +105,7 @@ public class INHERENT_SkillTable
 	{
 		return rowList.Find(x => x.MONSTER_ID == find);
 	}
-	public List<Row> FindAll_MONSTER_ID(string find)
+	public static List<Row> FindAll_MONSTER_ID(string find)
 	{
 		return rowList.FindAll(x => x.MONSTER_ID == find);
 	}

@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.IO;
 using System;
-using mainMenu;
 using Newtonsoft.Json;
 using System.Collections;
 using Api.Dto.Model;
@@ -81,17 +80,33 @@ namespace dataAccess
         public static IEnumerator LocalSaveDataGetAllCharacters()
         {
             LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/AccountCharacterInfos");
-            List<CharConfig> characterList = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.rowList);
+            List<CharConfig> charList = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.rowList);
             int i = 0;
-            foreach (CharConfig _CharacterResourceInfo in characterList)
+            foreach (CharConfig _CharConfig in charList)
             {
-                GetMonsterOfPlayerDetailModel _CharacterDataInfo = new GetMonsterOfPlayerDetailModel
+                GetMonsterOfPlayerDetailModel _Char = new GetMonsterOfPlayerDetailModel
                 {
-                    monsterId = _CharacterResourceInfo.RECORD_ID,
+                    monsterId = _CharConfig.RECORD_ID,
                     monsterOfPlayerId = i.ToString()
                 };
-                Debug.Log("将角色" + _CharacterResourceInfo.REAL_NAME + "加入了存档");
-                yield return AddToAccount(_CharacterDataInfo);
+                
+                List<string> INHERENTSKs = INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID);
+                for (int index = 0; index < INHERENTSKs.Count; index++)
+                {
+                    SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+                    {
+                        skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
+                        skillId = INHERENTSKs[index],
+                        level = 1.ToString(),
+                        Inherent = "false",
+                        inUsingMonsterOfPlayerId = i.ToString(),
+                        inUsingSkillSlot = index.ToString()
+                    };
+                    yield return MySkillStonesReader.Add(stoneInfo);
+                }
+                
+                Debug.Log("将角色" + _CharConfig.REAL_NAME + "加入存档");
+                yield return AddToAccount(_Char);
                 i++;
             }
             //yield return MonsterBox.DisplayMonsterIcons();
