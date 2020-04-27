@@ -24,7 +24,7 @@ namespace dataAccess
             {
                 if (keyValuePair.Value.Inherent == "true")
                 {
-                    continue;
+                    continue;//原生技能不显示在技能石盒子内
                 }
                 SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
                 if (_SkillConfigOfSkillStone == null)

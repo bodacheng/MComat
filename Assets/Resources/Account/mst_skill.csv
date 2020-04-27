@@ -141,7 +141,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIG
 140,xuanfeng_big,human,10,GI,0,3,10,,1
 141,xuanfeng_s,human,10,GI,0,3,10,,1
 142,ex2_gm_crusher_d3,human,10,GM,0,3,8,,1
-143,ex3_gm_crusher_d3,human,10,GM,0,3,8,,1
+143,ex3_gm_crusher_d3,human,10,GM,1,3,8,,1
 144,forwardtwohandpush_long,human,10,GM,0,3,8,,1
 145,frank_super,human,10,GM,0,3,8,,1
 146,gm_rushcrush_d3,human,10,GM,0,3,8,,1

@@ -6,7 +6,7 @@ public class SingleThreadProcesser : MonoBehaviour
 {
     readonly IEnumerator MenuProcess;
     readonly List<Task> Tasks = new List<Task>();
-
+    
     class Task
     {
         public int phase = 0;
@@ -16,7 +16,7 @@ public class SingleThreadProcesser : MonoBehaviour
         {
             phase = a;
         }
-
+    
         public IEnumerator GiveProcessStartEndFlag()
         {
             SetPhase(1);
@@ -43,7 +43,7 @@ public class SingleThreadProcesser : MonoBehaviour
             }
         }
     }
-
+    
     public void Run(IEnumerator _process)
     {
         Tasks.Add(new Task{ process = _process });

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SideCharIcon : MonoBehaviour {
 
-	public Data_Center _charDataCenter;
+    public Data_Center _charDataCenter;
     
     [Header("浮动血条pretab")]
     [Space(6)]
@@ -18,18 +18,18 @@ public class SideCharIcon : MonoBehaviour {
     public Slider ResistBar;
     public Image ResistBarFillImage;
     
-	public HeroIcon focusingCharIcon;
+    public HeroIcon focusingCharIcon;
     
-	float maxHp;
-	float currentHp;
-
-	public void IniHPShow(Data_Center watching, float MaxHp)
-	{
-		_charDataCenter = watching;
+    float maxHp;
+    float currentHp;
+    
+    public void IniHPShow(Data_Center watching, float MaxHp)
+    {
+    	_charDataCenter = watching;
         maxHp = MaxHp;
-		currentHp = maxHp;
-	}
-
+    	currentHp = maxHp;
+    }
+    
     public void RecallBars()
     {
         HpBar.transform.SetParent(transform);
