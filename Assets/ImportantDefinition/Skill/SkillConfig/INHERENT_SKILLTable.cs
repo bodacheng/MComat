@@ -69,12 +69,14 @@ public class INHERENT_SkillTable
 		string[][] grid = CsvParser2.Parse(csv.text);
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
-			Row row = new Row();
-            if (!string.IsNullOrEmpty(row.MONSTER_ID) && !string.IsNullOrEmpty(row.SKILL_ID))
+            if (!string.IsNullOrEmpty(grid[i][1]) && !string.IsNullOrEmpty(grid[i][2]))
             {
-                row.RECORD_ID = grid[i][0];
-                row.MONSTER_ID = grid[i][1];
-                row.SKILL_ID = grid[i][2];
+                Row row = new Row
+                {
+                    RECORD_ID = grid[i][0],
+                    MONSTER_ID = grid[i][1],
+                    SKILL_ID = grid[i][2]
+                };
                 rowList.Add(row);
             }
 		}

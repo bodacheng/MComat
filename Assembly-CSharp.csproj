@@ -597,7 +597,6 @@
     <None Include="Assets\Shader\Mobile Particles Additive Culled.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_DistortTexture.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Sobel.shader" />
-    <None Include="Assets\Resources\Account\TuroialFight1.xml" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\FadeSlash.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouch\_Documentation\How to migrate from EasyTouch 4.X.txt" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\DissolveNoise.shader" />
@@ -633,7 +632,6 @@
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\LightGlow.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Documentation\Version 2.0.txt" />
-    <None Include="Assets\Resources\Account\TuroialFight2.xml" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lightning.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Shaders\Electricity.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

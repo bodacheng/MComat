@@ -22,6 +22,10 @@ namespace dataAccess
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
             {
+                if (keyValuePair.Value.Inherent == "true")
+                {
+                    continue;
+                }
                 SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
                 if (_SkillConfigOfSkillStone == null)
                 {

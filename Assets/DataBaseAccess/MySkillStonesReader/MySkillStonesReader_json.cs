@@ -68,7 +68,7 @@ namespace dataAccess
             LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
             {
-                Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
+                //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
                 SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
                 {
                     skillStoneOfPlayerId = GetNonRepeatID_LocalSave(),

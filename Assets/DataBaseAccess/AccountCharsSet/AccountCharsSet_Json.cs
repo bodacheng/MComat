@@ -93,6 +93,7 @@ namespace dataAccess
                 List<string> INHERENTSKs = INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID);
                 for (int index = 0; index < INHERENTSKs.Count; index++)
                 {
+                    Debug.Log("角色"+ _CharConfig.RECORD_ID + "的原生技能："+ INHERENTSKs[index]);
                     SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
                     {
                         skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
@@ -100,7 +101,7 @@ namespace dataAccess
                         level = 1.ToString(),
                         Inherent = "false",
                         inUsingMonsterOfPlayerId = i.ToString(),
-                        inUsingSkillSlot = index.ToString()
+                        inUsingSkillSlot = (index + 1).ToString()
                     };
                     yield return MySkillStonesReader.Add(stoneInfo);
                 }
