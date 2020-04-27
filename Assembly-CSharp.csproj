@@ -485,7 +485,7 @@
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSimpleAnimation.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSkipCutscene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
-    <Compile Include="Assets\ResourceKeeper.cs" />
+    <Compile Include="Assets\ResourceKeeper\ResourceKeeper.cs" />
     <Compile Include="Assets\ResourceLoading\AnimationResourceLoader.cs" />
     <Compile Include="Assets\ResourceLoading\AudioResourceLoading.cs" />
     <Compile Include="Assets\ResourceLoading\CachManager.cs" />
@@ -641,7 +641,7 @@
     <None Include="Assets\POFX\Shaders\Resources\Hsl.shader" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Blend_LinePath.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\Particlecollection_Cleave\READ ME.txt" />
+    <None Include="Assets\Asstes\Particlecollection_Cleave\READ ME.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />
     <None Include="Assets\POFX\Shaders\Resources\Emboss.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Demo magiс circles Vol 2\Readme.txt" />
