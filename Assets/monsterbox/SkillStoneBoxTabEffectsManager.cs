@@ -70,10 +70,12 @@ namespace mainMenu
             _focusingButtonEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
 
-        public void SkillButtonExplosion(Vector3 targetPOS)
+        public void SkillButtonExplosion(int splevel, Vector3 targetPOS)
         {
-            triggerExplosion0.transform.position = targetPOS;
-            triggerExplosion0.Play();            
+            ParticleSystem pressedExplosion = _focusingButtonEffectsGroup.buttonPressedEffects.ContainsKey(splevel) ?
+            _focusingButtonEffectsGroup.buttonPressedEffects[splevel] : triggerExplosion0;
+            pressedExplosion.transform.position = targetPOS;
+            pressedExplosion.Play();
         }
     }
 }

@@ -26,7 +26,7 @@ public partial class SkillConfigTable
         public string EVENT_CODE;
         public string RARITY_LEVEL;
     }
-
+    
     public static List<Row> rowList = new List<Row>();
     
     static bool isLoaded;
@@ -40,14 +40,15 @@ public partial class SkillConfigTable
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                break;
+            break;
             case ResourceLoadMode.StreamingAssetAB:
-                break;
+            break;
             case ResourceLoadMode.Resource:
                 LoadAllSkillConfigFromLocalConfigFile();
-                break;
+            break;
         }
         yield return INHERENT_SkillTable.LoadAllINHERENTSkillConfigs();// 角色原生技能的load和技能表load同步进行。
+        yield return SkillNameTable.LoadSkillNames();
         yield break;
     }
     

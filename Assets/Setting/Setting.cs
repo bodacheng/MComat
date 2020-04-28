@@ -10,7 +10,8 @@ public class Setting : MonoBehaviour {
     public RectTransform SettingMenuT;
     public AudioSource bgmSource;
     public Slider bgmSLider,CVSlider,effectsSoundsSlider;
-    
+
+    public static ApiLanguage Language = ApiLanguage.EnUs;
     public static Setting target;
     
     void Awake()

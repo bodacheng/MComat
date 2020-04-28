@@ -18,11 +18,11 @@ namespace mainMenu
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
-
+        
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
         public RectTransform BoxWholeT, BoxT, stonesTempContainer;
-
+        
         [Space(7)]
         [Header("type按钮")]
         public Dropdown types;
@@ -30,26 +30,26 @@ namespace mainMenu
         public Button EX1Tab;
         public Button EX2Tab;
         public Button EX3Tab;
-
+        
         [Space(7)]
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _SkillStoneBoxTabEffectsManager;
-
+        
         [Space(7)]
         [Header("技能石头删除区域")]
         public StoneCell DeleteArea;
-
+        
         [Space(7)]
         [Header("攻击范围限定")]
         public Toggle closeCheckBox;
         public Toggle nearCheckBox;
         public Toggle farCheckBox;
         public Toggle outRangeCheckBox;
-
+        
         [Space(7)]
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
-       
+        
         [Header("fxcamera")]
         public Camera fxCamera;
         
@@ -94,7 +94,7 @@ namespace mainMenu
         // Button feature
         public void NormalTabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 0;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -102,7 +102,7 @@ namespace mainMenu
         // Button feature
         public void EX1TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 1;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -110,7 +110,7 @@ namespace mainMenu
         // Button feature
         public void EX2TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 2;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -118,7 +118,7 @@ namespace mainMenu
         // Button feature
         public void EX3TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 3;
             TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }

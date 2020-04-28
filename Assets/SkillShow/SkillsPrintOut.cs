@@ -85,15 +85,15 @@ namespace mainMenu
         }
         
         // 为打印出的技能按钮添加功能
-        void AddShowSkillInfoFeature(Button _button, SkillEntity _state_Transition_Set)
+        void AddShowSkillInfoFeature(Button _button, SkillEntity _SE)
         {
             _button.onClick.RemoveAllListeners();
             void showSkillInfo()
             {
                 DestroyFloatingMarks();
-                _skillStoneDetail.RefreshSkillDetail_SkillEntity(_state_Transition_Set);
+                _skillStoneDetail.RefreshSkillDetail_SkillEntity(_SE);
                 //下面这些是逻辑核心
-                foreach (string _set in _state_Transition_Set.CasualTo)
+                foreach (string _set in _SE.CasualTo)
                 {
                     analysisSKList.TryGetValue(_set, out SkillEntity _oneCasualTo);
                     StateButtonDic.TryGetValue(_oneCasualTo.REAL_NAME, out Button CasualToButton);
@@ -107,7 +107,7 @@ namespace mainMenu
                 if (focusingC.Animation_Manger != null)
                 {
                     //SkillShowT.gameObject.SetActive(false);
-                    focusingC.Animation_Manger.AnimationTrigger(_state_Transition_Set.REAL_NAME,true,0.05f);
+                    focusingC.Animation_Manger.AnimationTrigger(_SE.REAL_NAME,true,0.05f);
                 }
                 else
                 {
@@ -116,7 +116,7 @@ namespace mainMenu
                 IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
-                SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_button.transform.position);
+                SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position);
             }
             _button.onClick.AddListener(showSkillInfo);
         }

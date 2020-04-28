@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace mainMenu
 {
     public class MemberDetail : MonoBehaviour
-    {    
+    {
         [Space(11)]
         [Header("modelShower")]
         public ModelShower _modelShower;
@@ -16,16 +16,16 @@ namespace mainMenu
         [Space(7)]
         [Header("美术进程处理器")]
         public SingleThreadProcesser presentationProcessRunner;
-
+        
         [Space(11)]
         [Header("角色明细T，技能显示T")]
         public RectTransform MemberDetailCanvas;
         public RectTransform MemberInfoT;
-
+        
         [Space(7)]
         [Header("SkillStoneManager")]
         public SkillStonesBox _SkillStonesBox;
-
+        
         [Space(7)]
         [Header("部下详细")]
         public Text focusingCharName;
@@ -41,11 +41,11 @@ namespace mainMenu
         [Header("Positions For Show")]
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
-
+        
         public GetMonsterOfPlayerDetailModel focusingCharDataInfo;
-
+        
         public static MemberDetail target;
-
+        
         void Awake()
         {
             target = this;

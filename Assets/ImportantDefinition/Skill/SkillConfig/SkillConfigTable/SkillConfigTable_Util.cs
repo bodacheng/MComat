@@ -74,7 +74,7 @@ public partial class SkillConfigTable
                 row.SP_LEVEL = "-1";
                 break;
         }
-        row.EVENT_CODE = skillConfig.CONNATE_CODE;
+        row.EVENT_CODE = skillConfig.EVENT_CODE;
         row.RARITY_LEVEL = skillConfig.RARITY_LEVEL.ToString();
         return row;
     }
@@ -133,7 +133,8 @@ public partial class SkillConfigTable
                 _SkillConfig.SP_LEVEL = -1;
                 break;
         }
-        _SkillConfig.CONNATE_CODE = row.EVENT_CODE;
+        _SkillConfig.SHOW_NAME = SkillNameTable.GetSkillName(row.RECORD_ID);
+        _SkillConfig.EVENT_CODE = row.EVENT_CODE;
         _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
         return _SkillConfig;
     }

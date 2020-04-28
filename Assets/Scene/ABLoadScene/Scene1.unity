@@ -2614,7 +2614,7 @@ MonoBehaviour:
   CharacterConfigTextFile: {fileID: 4900000, guid: a8dfd9feec637466989cc8c3dc8b20b2,
     type: 3}
   MonstersConfigFilePath: Assets/MonstersConfig.csv
-  SkillConfigTextFile: {fileID: 4900000, guid: 53ed3203dc2ee49d590ba3df54cac81d, type: 3}
+  SkillConfigTextFile: {fileID: 4900000, guid: 1c9054f9937bf4d358a40ad7b949fcac, type: 3}
   SkillConfigFilePath: Assets/mst_skill.csv
 --- !u!114 &2075428156307059468
 MonoBehaviour:

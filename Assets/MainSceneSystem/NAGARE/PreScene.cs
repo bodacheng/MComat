@@ -53,7 +53,7 @@ namespace mainMenu
         [Space(7)]
         [Header("Canvas")]
         public Canvas MainMenuCanvas;
-
+        
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform MainMenuBottonsT;
@@ -158,11 +158,11 @@ namespace mainMenu
                     yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
                     IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
                     yield return loadMyStonesProcess;
-                    break;
+                break;
                 case PlayerAccountProgressStep.justCreated:
-                    break;
+                break;
                 case PlayerAccountProgressStep.Tutorial:
-                    break;
+                break;
             }
             LoadingCanvas.target.LightUp();
             

@@ -12,7 +12,7 @@ namespace mainMenu
         [Header("技能名字")]
         public Text keyname;
         public Text Showname;
-
+        
         [Space(7)]
         [Header("EXTypes")]
         public GameObject Ex1Icon,Ex2Icon,Ex3Icon;
@@ -20,7 +20,7 @@ namespace mainMenu
         [Space(7)]
         [Header("EXTypes")]
         public GameObject close,near,far,outter;
-
+        
         [Space(7)]
         [Header("当前技能等级")]
         public Text skill_level_info;
@@ -35,7 +35,7 @@ namespace mainMenu
         public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone, string skillStoneOfPlayerId)
         {
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
-            Showname.text = _SkillConfigOfSkillStone.RECORD_ID;
+            Showname.text = _SkillConfigOfSkillStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_SkillConfigOfSkillStone.RECORD_ID);
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
             currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
@@ -111,6 +111,6 @@ namespace mainMenu
                     Ex3Icon.SetActive(false);
                 break;
             }
-        }        
+        }
     }
 }

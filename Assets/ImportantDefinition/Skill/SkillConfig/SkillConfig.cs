@@ -29,7 +29,7 @@
         public float AI_MIN_DIS;
         public float AI_MAX_DIS;
         public int SP_LEVEL;
-        public string CONNATE_CODE;
+        public string EVENT_CODE;
         public int RARITY_LEVEL;
 
         public SkillConfig Clone()
@@ -47,24 +47,9 @@
             HP_WEIGHT = 1;
             STATE_TYPE = BehaviorType.NONE;
             SP_LEVEL = 1;
-            CONNATE_CODE = null;
+            EVENT_CODE = null;
         }
-        public SkillConfig(string id, string type, string keyName, string ShowName, float AT, float HP, BehaviorType stateType, float AITriggerDistanceMin,float AITriggerDistanceMax, int SPLevel)
-        {
-            this.RECORD_ID = id;//和Skills表id对应
-            this.TYPE = type;
-            this.REAL_NAME = keyName;
-            this.SHOW_NAME = ShowName;
-            this.ATTACK_WEIGHT = AT;
-            this.HP_WEIGHT = HP;
-            this.STATE_TYPE = stateType;
-            this.AI_MIN_DIS = AITriggerDistanceMin;
-            this.AI_MAX_DIS = AITriggerDistanceMax;
-            this.SP_LEVEL = SPLevel;
-            this.RARITY_LEVEL = 0;
-            CONNATE_CODE = null;
-        }
-        
+                
         public static bool RangeLimit(float dis_min ,float dis_max, bool close, bool near, bool far, bool outrange) // 待修 
         {
             if (dis_max > dis_min)

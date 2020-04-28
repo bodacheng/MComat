@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class zokuseiButtonEffectsGroup
-{    
+{
     //攻击键系成员
     public IDictionary<Button, IDictionary<int, ParticleSystem>> buttonEffectsSets = new Dictionary<Button, IDictionary<int, ParticleSystem>>(); 
     public IDictionary<int, ParticleSystem> Attack1ButtonEffects;
@@ -15,15 +15,16 @@ public class zokuseiButtonEffectsGroup
     public ParticleSystem triggerExplosion2;
     public ParticleSystem triggerExplosion3;
     public ParticleSystem pressingExplosion;//这个不需要对象池子。
-    private ParticleSystem defendbutton;
-    private ParticleSystem rushbutton;
-    private ParticleSystem attackbuttonslot;
-    private ParticleSystem fire1buttonslot;
-    private ParticleSystem fire2buttonslot;
-    private ParticleSystem arefresh;
-    private ParticleSystem fire1refresh;
-    private ParticleSystem fire2refresh;
     
+    ParticleSystem defendbutton;
+    ParticleSystem rushbutton;
+    ParticleSystem attackbuttonslot;
+    ParticleSystem fire1buttonslot;
+    ParticleSystem fire2buttonslot;
+    ParticleSystem arefresh;
+    ParticleSystem fire1refresh;
+    ParticleSystem fire2refresh;
+
     public void Close()
     {
         foreach(KeyValuePair<Button, IDictionary<int, ParticleSystem>> keyValuePair in buttonEffectsSets)
@@ -75,29 +76,8 @@ public class zokuseiButtonEffectsGroup
                 
     public void INI(Transform targetRectT, Zokusei zokusei,Button Attack, Button Fire1, Button Fire2)
     {
-        string buttoneffectspath;
-        switch(zokusei)
-        {
-            case Zokusei.blueMagic:
-            buttoneffectspath = "blueMagic";
-            break;
-            case Zokusei.darkMagic:
-            buttoneffectspath = "darkMagic";
-            break;
-            case Zokusei.greenMagic:
-            buttoneffectspath = "greenMagic";
-            break;
-            case Zokusei.lightMagic:
-            buttoneffectspath = "lightMagic";
-            break;
-            case Zokusei.redMagic:
-            buttoneffectspath = "redMagic";
-            break;
-            default:
-            buttoneffectspath = "darkMagic";
-            break;
-        }
-        
+        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
+                
         GameObject buttonslot = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
         GameObject normal = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;
         GameObject EX1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX1", typeof(GameObject)) as GameObject;
