@@ -21,9 +21,9 @@ public class CharConfig
     public string InstructionJP;
     public int RARITY_LEVEL = 3;
 
-    public PassiveSkillConfigs GetPassiveSkillConfigs()
+    public PassiveSkillEntitys GetPassiveSkillConfigs()
     {
-        PassiveSkillConfigs passiveSkillConfigs = new PassiveSkillConfigs(MoveType, DEFENDABLE_FLAG, RushType);
+        PassiveSkillEntitys passiveSkillConfigs = new PassiveSkillEntitys(MoveType, DEFENDABLE_FLAG, RushType);
         return passiveSkillConfigs;
     }
 

@@ -15,7 +15,6 @@ public partial class NineAndTwo {
     public RushType rushType;
     
     SkillConfig AConfig1, AConfig2, AConfig3, BConfig1, BConfig2, BConfig3, CConfig1, CConfig2, CConfig3;
-    SkillConfig DConfig, MConfig, RConfig;
     
     public NineAndTwo()
     {
@@ -36,9 +35,6 @@ public partial class NineAndTwo {
         CConfig1 = new SkillConfig();
         CConfig2 = new SkillConfig();
         CConfig3 = new SkillConfig();
-        DConfig = new SkillConfig();
-        MConfig = new SkillConfig();
-        RConfig = new SkillConfig();
         
         A1level = 0; 
         A2level = 0;
@@ -70,9 +66,6 @@ public partial class NineAndTwo {
         CConfig1 = new SkillConfig();
         CConfig2 = new SkillConfig();
         CConfig3 = new SkillConfig();
-        DConfig = new SkillConfig();
-        MConfig = new SkillConfig();
-        RConfig = new SkillConfig();
     }
     
     NineAndTwo Clone()
@@ -93,9 +86,6 @@ public partial class NineAndTwo {
         Copy.CConfig1 = Copy.CConfig1 != null ? Copy.CConfig1.Clone() : new SkillConfig();
         Copy.CConfig2 = Copy.CConfig2 != null ? Copy.CConfig2.Clone() : new SkillConfig();
         Copy.CConfig3 = Copy.CConfig3 != null ? Copy.CConfig3.Clone() : new SkillConfig();
-        Copy.DConfig = Copy.DConfig != null ? Copy.DConfig.Clone() : new SkillConfig();
-        Copy.MConfig = Copy.MConfig != null ? Copy.MConfig.Clone() : new SkillConfig();
-        Copy.RConfig = Copy.RConfig != null ? Copy.RConfig.Clone() : new SkillConfig();
         
         return Copy;
     }

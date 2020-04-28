@@ -39,5 +39,7 @@ namespace Api.Dto.Model {
         /// 是否为角色原生技能
         /// </summary>
         public string Inherent { get; set; }
+        
+        
     }
 }

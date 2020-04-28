@@ -3,6 +3,17 @@ using Skill;
 
 public partial class NineAndTwo
 {
+    public List<string> SkillIDList()
+    {
+        List<SkillEntity> sklist = SkillEntityList();
+        List<string> IDs = new List<string>();
+        for (int i = 0; i < sklist.Count; i++)
+        {
+            IDs.Add(sklist[i].REAL_NAME);
+        }
+        return IDs;
+    }
+
     public List<int> SkillLevelList()
     {
         List<SkillEntity> sklist = SkillEntityList();
@@ -14,9 +25,20 @@ public partial class NineAndTwo
         return levels;
     }
     
-    List<SkillEntity> SkillEntityList()
+    public static float INI_Hp(List<SkillEntity> sklist)
+    {
+        float WholeHP = 0;
+        for (int index = 0; index < sklist.Count; index++)
+        {
+            WholeHP += sklist[index].HP;
+        }
+        return WholeHP;
+    }
+    
+    public List<SkillEntity> SkillEntityList()
     {
         List<SkillEntity> behavior_Transition_Sets = new List<SkillEntity>();
+        
         if (A1 != null)
             behavior_Transition_Sets.Add(A1);
         if (A2 != null)
@@ -37,7 +59,7 @@ public partial class NineAndTwo
             behavior_Transition_Sets.Add(C2);
         if (C3 != null)
             behavior_Transition_Sets.Add(C3);
-    
+        
         return behavior_Transition_Sets;
     }
 
@@ -108,18 +130,6 @@ public partial class NineAndTwo
     public SkillConfig GetC3Config()
     {
         return CConfig3;
-    }
-    public SkillConfig GetDConfig()
-    {
-        return DConfig;
-    }
-    public SkillConfig GetMConfig()
-    {
-        return MConfig;
-    }
-    public SkillConfig GetRConfig()
-    {
-        return RConfig;
     }
     
     //这个函数是服务于stagesmanager。因为编辑关卡的时候是直接去编辑九宫格的config

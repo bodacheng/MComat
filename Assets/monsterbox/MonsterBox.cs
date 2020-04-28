@@ -11,19 +11,19 @@ namespace mainMenu
     public class MonsterBox : MonoBehaviour
     {
         public static MonsterBox target;
-    
+        
         [Space(7)]
         [Header("monsterboxFilter")]
         public MonsterboxFilter _monsterboxFilter;
-
+        
         [Space(7)]
         [Header("角色属性框")]
         public HeroIcon noMagic;
-
+        
         [Space(7)]
         [Header("选中框")]
         public GameObject selectedFrame;
-
+        
         [Space(7)]
         [Header("宠物栏总RectTransform")]
         public RectTransform MonsterBoxWholeT;
@@ -31,9 +31,9 @@ namespace mainMenu
         [Space(2)]
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
-
+        
         public static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
-
+        
         void Start()
         {
             noMagic.gameObject.SetActive(false);

@@ -30,7 +30,8 @@ public partial class SkillConfigTable
             RECORD_ID = skillConfig.RECORD_ID,
             USEABLE_MONSTER_TYPE = skillConfig.TYPE,
             REAL_NAME = skillConfig.REAL_NAME,
-            ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString()
+            ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString(),
+            HP_WEIGHT = skillConfig.HP_WEIGHT.ToString()
         };
         
         switch (skillConfig.STATE_TYPE)
@@ -73,7 +74,7 @@ public partial class SkillConfigTable
                 row.SP_LEVEL = "-1";
                 break;
         }
-        row.CONNATE_CODE = skillConfig.CONNATE_CODE;
+        row.EVENT_CODE = skillConfig.CONNATE_CODE;
         row.RARITY_LEVEL = skillConfig.RARITY_LEVEL.ToString();
         return row;
     }
@@ -85,9 +86,10 @@ public partial class SkillConfigTable
             TYPE = row.USEABLE_MONSTER_TYPE,
             RECORD_ID = row.RECORD_ID,
             REAL_NAME = row.REAL_NAME,
-            ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT)
+            ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT),
+            HP_WEIGHT = float.Parse(row.HP_WEIGHT)
         };
-    
+        
         switch (row.ATTACK_TYPE)
         {
             case "GR":
@@ -131,7 +133,7 @@ public partial class SkillConfigTable
                 _SkillConfig.SP_LEVEL = -1;
                 break;
         }
-        _SkillConfig.CONNATE_CODE = row.CONNATE_CODE;
+        _SkillConfig.CONNATE_CODE = row.EVENT_CODE;
         _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
         return _SkillConfig;
     }

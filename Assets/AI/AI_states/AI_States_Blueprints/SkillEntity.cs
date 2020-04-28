@@ -9,6 +9,7 @@ namespace Skill
         public int LEVEL;
         public BehaviorType StateType;
         public float AT;
+        public float HP;
         public float AI_MIN_DIS;
         public float AI_MAX_DIS;
         public string[] CasualTo = { };
@@ -19,7 +20,7 @@ namespace Skill
         public int RARITY_LEVEL;
         [HideInInspector]
         public string[] ForcedTransitions = { };
-
+    
         public SkillEntity()
         {
         }
@@ -28,6 +29,7 @@ namespace Skill
                             int LEVEL,
                             BehaviorType _attackType,
                             float _AT,
+                            float _HP,
                             float AITriggerDistanceMin,float AITriggerDistanceMax,
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
@@ -39,6 +41,7 @@ namespace Skill
             this.LEVEL = LEVEL;
             this.StateType = _attackType;
             this.AT = _AT;
+            this.HP = _HP;
             this.AI_MIN_DIS = AITriggerDistanceMin;
             this.AI_MAX_DIS = AITriggerDistanceMax;
             this.CasualTo = _casual_to_state_nums;
@@ -47,7 +50,7 @@ namespace Skill
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
             this.RARITY_LEVEL = _rarelevel;
-
+            
             if (this.CasualTo == null)
             {
                 this.CasualTo = new string[] { };
@@ -57,11 +60,12 @@ namespace Skill
                 this.ForcedTransitions = new string[] { };
             }
         }
-
+        
         public SkillEntity(string _StateKey,
                             int level,
                             BehaviorType _BType,
                             float _AT,
+                            float _HP,
                             float AITriggerDistanceMin,float AITriggerDistanceMax,
                             bool can_be_cancelled_to,
                             InputKey enterInput, InputKey exitInput,
@@ -71,12 +75,26 @@ namespace Skill
             LEVEL = level;
             StateType = _BType;
             AT = _AT;
+            HP = _HP;
             CANBECANCELLEDTO = can_be_cancelled_to;
             AI_MIN_DIS = AITriggerDistanceMin;
             AI_MAX_DIS = AITriggerDistanceMax;
             EnterInput = enterInput;
             ExitInput = exitInput;
             SP_LEVEL = SPMove;
+        }
+        
+        // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。
+        // 那么level 是1的情况下，攻击力是1
+        // 从而在技能定义表里，技能标准攻击值应该是1，存在超迅速多连击的情况多半应该少于1，而一些比较赌的重攻击则是大于1
+        // HP和攻击力等比缩放。攻击是从1涨到10，HP是从10涨到100
+        public static float ATCal(float originAT,int level)
+        {
+            return originAT * (10 + level) / 11;
+        }
+        public static float StoneHpCal(float originHP, int level)
+        {
+            return originHP * (10 + level) / 11;
         }
     }
     

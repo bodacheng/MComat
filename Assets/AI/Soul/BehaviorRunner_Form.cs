@@ -94,10 +94,6 @@ namespace Soul
             SkillEntityDic = nineAndTwo.GenerateBeheviourSets();
             State_Transition_Set_List = nineAndTwo.ReturnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
             
-            bool hasD, hasR;
-            hasD = nineAndTwo.GetDConfig() != null;
-            hasR = nineAndTwo.GetRConfig() != null;
-
             _States_Incubator = new Behaviors_Incubator(empty_State,this.SkillEntityDic);
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
             BehaviourDic.Clear();

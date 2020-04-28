@@ -15,10 +15,10 @@ public class INHERENT_SkillTable
     static readonly List<Row> rowList = new List<Row>();
     static bool isLoaded = false;
     
-	public static bool IsLoaded()
-	{
-		return isLoaded;
-	}
+    public static bool IsLoaded()
+    {
+        return isLoaded;
+    }
     
     public static List<string> GetINHERENTSKIDList(string monsterID)
     {
@@ -34,10 +34,10 @@ public class INHERENT_SkillTable
         return skillIds;
     }
     
-	public List<Row> GetRowList()
-	{
-		return rowList;
-	}
+    public List<Row> GetRowList()
+    {
+        return rowList;
+    }
     
     public static IEnumerator LoadAllINHERENTSkillConfigs()
     {

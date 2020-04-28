@@ -161,20 +161,25 @@ namespace mainMenu
         public void RefreshCurrentHpBasedOnNineSlots()
         {
             List<SkillStoneOfPlayerInfoModel> stonelist = GetMyStonesOnNineSlot();
-            List<int> levels = new List<int>();
-            for (int index = 0; index < stonelist.Count; index++)
+            List<int> level = new List<int>();
+            List<string> skillIDs = new List<string>();
+            
+            foreach(SkillStoneOfPlayerInfoModel one in stonelist)
             {
-                levels.Add(int.Parse(stonelist[index].level));
+                level.Add(int.Parse(one.level));
+                skillIDs.Add(one.skillId);
             }
-            _HP.text = "HP:" + INI_Hp(levels).ToString();
+            
+            _HP.text = "HP:" + INI_Hp(skillIDs, level).ToString();
         }
         
-        public static float INI_Hp(List<int> StoneLevelList)
+        public static float INI_Hp(List<string> skillIDs, List<int> level)
         {
             float WholeHP = 0;
-            for (int index = 0; index < StoneLevelList.Count; index++)
+            for (int index = 0; index < skillIDs.Count; index++)
             {
-                WholeHP += NineAndTwo.StoneHpCal(StoneLevelList[index]);
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(skillIDs[index]);
+                WholeHP += SkillEntity.StoneHpCal(_SkillConfig.HP_WEIGHT, level[index]);
             }
             return WholeHP;
         }

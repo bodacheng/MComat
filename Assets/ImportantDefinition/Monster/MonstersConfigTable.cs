@@ -33,7 +33,7 @@ public class MonstersConfigTable
         public string RARITY_LEVEL;
 		public string BASIC_MOVEMENT_PACK;
 		public string MOVE_TYPE;
-		public string MOTILITY_SKILL_PACK;
+		public string DODGE_SKILL;
 		public string DEFENDABLE_FLAG;
 	}
             
@@ -110,7 +110,7 @@ public class MonstersConfigTable
                     RARITY_LEVEL = grid[i][5],
                     BASIC_MOVEMENT_PACK = grid[i][6],
                     MOVE_TYPE = grid[i][7],
-                    MOTILITY_SKILL_PACK = grid[i][8],
+                    DODGE_SKILL = grid[i][8],
                     DEFENDABLE_FLAG = grid[i][9]
                 };
                 rowList.Add(row);
@@ -164,7 +164,7 @@ public class MonstersConfigTable
                 grid[i][5] = rowList[i - 1].RARITY_LEVEL;
                 grid[i][6] = rowList[i - 1].BASIC_MOVEMENT_PACK;
                 grid[i][7] = rowList[i - 1].MOVE_TYPE;
-                grid[i][8] = rowList[i - 1].MOTILITY_SKILL_PACK;
+                grid[i][8] = rowList[i - 1].DODGE_SKILL;
                 grid[i][9] = rowList[i - 1].DEFENDABLE_FLAG;
             }
         }
@@ -220,19 +220,19 @@ public class MonstersConfigTable
                 switch (characterResourceInfo.RushType)
                 {
                     case RushType.Jump:
-                        row.MOTILITY_SKILL_PACK = "Jump";
+                        row.DODGE_SKILL = "Jump";
                         break;
                     case RushType.Rush:
-                        row.MOTILITY_SKILL_PACK = "Rush";
+                        row.DODGE_SKILL = "Rush";
                         break;
                     case RushType.RushBack:
-                        row.MOTILITY_SKILL_PACK = "RushBack";
+                        row.DODGE_SKILL = "RushBack";
                         break;
                     case RushType.None:
-                        row.MOTILITY_SKILL_PACK = "None";
+                        row.DODGE_SKILL = "None";
                         break;
                     default:
-                        row.MOTILITY_SKILL_PACK = "RushBack";
+                        row.DODGE_SKILL = "RushBack";
                         break;
                 }
                 row.DEFENDABLE_FLAG = characterResourceInfo.DEFENDABLE_FLAG ? "1" : "0";
@@ -268,7 +268,7 @@ public class MonstersConfigTable
                     grid[i][5] = rowList[i - 1].RARITY_LEVEL;
                     grid[i][6] = rowList[i - 1].BASIC_MOVEMENT_PACK;
                     grid[i][7] = rowList[i - 1].MOVE_TYPE;
-                    grid[i][8] = rowList[i - 1].MOTILITY_SKILL_PACK;
+                    grid[i][8] = rowList[i - 1].DODGE_SKILL;
                     grid[i][9] = rowList[i - 1].DEFENDABLE_FLAG;
                 }
             }
@@ -333,16 +333,16 @@ public class MonstersConfigTable
         switch(characterResourceInfo.RushType)
         {
             case RushType.None:
-                row.MOTILITY_SKILL_PACK = "None";
+                row.DODGE_SKILL = "None";
                 break;
             case RushType.Jump:
-                row.MOTILITY_SKILL_PACK = "Jump";
+                row.DODGE_SKILL = "Jump";
                 break;
             case RushType.Rush:
-                row.MOTILITY_SKILL_PACK = "Rush";
+                row.DODGE_SKILL = "Rush";
                 break;
             case RushType.RushBack:
-                row.MOTILITY_SKILL_PACK = "RushBack";
+                row.DODGE_SKILL = "RushBack";
                 break;
         }
 
@@ -405,7 +405,7 @@ public class MonstersConfigTable
                 break;
         }
 
-        switch (row.MOTILITY_SKILL_PACK)
+        switch (row.DODGE_SKILL)
         {
             case "Jump":
                 _CharacterResourceInfo.RushType = RushType.Jump;
@@ -504,11 +504,11 @@ public class MonstersConfigTable
 	}
 	public Row Find_accSkill(string find)
 	{
-		return rowList.Find(x => x.MOTILITY_SKILL_PACK == find);
+		return rowList.Find(x => x.DODGE_SKILL == find);
 	}
 	public List<Row> FindAll_accSkill(string find)
 	{
-		return rowList.FindAll(x => x.MOTILITY_SKILL_PACK == find);
+		return rowList.FindAll(x => x.DODGE_SKILL == find);
 	}
 	public Row Find_canDefend(string find)
 	{

@@ -35,7 +35,7 @@ public class FightTeam : MonoBehaviour
                 IEnumerator char_DC = _CharSetManager.CreateCharacter(_one);
                 yield return char_DC;
                 Data_Center data_Center = (Data_Center)char_DC.Current;
-                data_Center.Step3Initialize(teamConfig, TheNineSlot.INI_Hp(_one._NineAndTwo.SkillLevelList()));
+                data_Center.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(_one._NineAndTwo.SkillEntityList()));
                 teamMembers.Set(keys.Key,key,data_Center);
                 CharDataInfoRef.Add(teamMembers.Get(keys.Key,key),_one);
             }

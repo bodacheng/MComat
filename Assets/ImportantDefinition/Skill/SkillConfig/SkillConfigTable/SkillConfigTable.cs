@@ -18,11 +18,12 @@ public partial class SkillConfigTable
         public string REAL_NAME;
         public string USEABLE_MONSTER_TYPE;
         public string ATTACK_WEIGHT;
+        public string HP_WEIGHT;
         public string ATTACK_TYPE;
         public string SP_LEVEL;
         public string TRIGGER_DIS_MIN;
         public string TRIGGER_DIS_MAX;
-        public string CONNATE_CODE;
+        public string EVENT_CODE;
         public string RARITY_LEVEL;
     }
 
@@ -66,6 +67,7 @@ public partial class SkillConfigTable
                 Debug.Log("致命错误「技能配置文件」技能ID重复：" + keyValuePair.RECORD_ID);
             }
         }
+        Debug.Log("已读取共"+ Dic.Count + "个技能");
         SkillConfigRefDic = Dic;
     }
     
@@ -124,12 +126,13 @@ public partial class SkillConfigTable
                 grid[i][1] = "REAL_NAME";
                 grid[i][2] = "USEABLE_MONSTER_TYPE";
                 grid[i][3] = "ATTACK_WEIGHT";
-                grid[i][4] = "ATTACK_TYPE";
-                grid[i][5] = "SP_LEVEL";
-                grid[i][6] = "TRIGGER_DIS_MIN";
-                grid[i][7] = "TRIGGER_DIS_MAX";
-                grid[i][8] = "CONNATE_CODE";
-                grid[i][9] = "RARITY_LEVEL";
+                grid[i][4] = "HP_WEIGHT";
+                grid[i][5] = "ATTACK_TYPE";
+                grid[i][6] = "SP_LEVEL";
+                grid[i][7] = "TRIGGER_DIS_MIN";
+                grid[i][8] = "TRIGGER_DIS_MAX";
+                grid[i][9] = "CONNATE_CODE";
+                grid[i][10] = "RARITY_LEVEL";
             }
             else
             {
@@ -137,12 +140,13 @@ public partial class SkillConfigTable
                 grid[i][1] = rowList[i - 1].REAL_NAME;
                 grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
                 grid[i][3] = rowList[i - 1].ATTACK_WEIGHT;
-                grid[i][4] = rowList[i - 1].ATTACK_TYPE;
-                grid[i][5] = rowList[i - 1].SP_LEVEL;
-                grid[i][6] = rowList[i - 1].TRIGGER_DIS_MIN;
-                grid[i][7] = rowList[i - 1].TRIGGER_DIS_MAX;
-                grid[i][8] = rowList[i - 1].CONNATE_CODE;
-                grid[i][9] = rowList[i - 1].RARITY_LEVEL;
+                grid[i][4] = rowList[i - 1].HP_WEIGHT;
+                grid[i][5] = rowList[i - 1].ATTACK_TYPE;
+                grid[i][6] = rowList[i - 1].SP_LEVEL;
+                grid[i][7] = rowList[i - 1].TRIGGER_DIS_MIN;
+                grid[i][8] = rowList[i - 1].TRIGGER_DIS_MAX;
+                grid[i][9] = rowList[i - 1].EVENT_CODE;
+                grid[i][10] = rowList[i - 1].RARITY_LEVEL;
             }
         }
         string delimiter = ",";
@@ -171,12 +175,13 @@ public partial class SkillConfigTable
                     REAL_NAME = grid[i][1],
                     USEABLE_MONSTER_TYPE = grid[i][2],
                     ATTACK_WEIGHT = grid[i][3],
-                    ATTACK_TYPE = grid[i][4],
-                    SP_LEVEL = grid[i][5],
-                    TRIGGER_DIS_MIN = grid[i][6],
-                    TRIGGER_DIS_MAX = grid[i][7],
-                    CONNATE_CODE = grid[i][8],
-                    RARITY_LEVEL = grid[i][9]
+                    HP_WEIGHT = grid[i][4],
+                    ATTACK_TYPE = grid[i][5],
+                    SP_LEVEL = grid[i][6],
+                    TRIGGER_DIS_MIN = grid[i][7],
+                    TRIGGER_DIS_MAX = grid[i][8],
+                    EVENT_CODE = grid[i][9],
+                    RARITY_LEVEL = grid[i][10]
                 };
                 rowList.Add(row);
             }

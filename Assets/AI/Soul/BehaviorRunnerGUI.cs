@@ -237,7 +237,7 @@ public class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.State_Transition_Set_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0));
+                myScript.State_Transition_Set_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0));
                 InitializeList(-1, myScript.State_Transition_Set_List.Count);
             }
         }

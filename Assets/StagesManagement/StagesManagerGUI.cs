@@ -108,7 +108,6 @@ public class StagesManagerGUI : Editor {
         return list;
     }
 
-    bool SanGong = false;
     int level = 1;// 参考等级。角色自身不存在等级，但为了设置方便所有技能等级可以一致
     public override void OnInspectorGUI()
     {
@@ -271,6 +270,7 @@ public class StagesManagerGUI : Editor {
         {
             goto A;
         }
+        
         int index = 0;
         foreach (KeyValuePair<string, string> keyValuePair in CharIDsAndNames)
         {
@@ -282,12 +282,8 @@ public class StagesManagerGUI : Editor {
             index++;
         }
         selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, CharIDsAndNames.Values.ToArray());
-        focusingCharInfo.ResourceID = selectedmonsterindex == 0 ? null : CharIDsAndNames.ElementAt(selectedmonsterindex).Key;
-        if (selectedmonsterindex == 0)
-        {
-            goto A;
-        }
-
+        focusingCharInfo.ResourceID = CharIDsAndNames.ElementAt(selectedmonsterindex).Key;
+        
         GUILayout.BeginHorizontal();
         level = EditorGUILayout.IntField("参考等级",level);
         if (GUILayout.Button("设置角色所有技能等级为参考等级"))
@@ -305,22 +301,6 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
 
         /////// 九宫格 //////////
-        GUILayout.BeginHorizontal();
-        GUI.backgroundColor = Color.gray;
-        if (GUILayout.Button("M", focusingCharInfo._NineAndTwo.GetMConfig() != targetSC ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-        {
-            targetSC = focusingCharInfo._NineAndTwo.GetMConfig();
-        }
-        if (GUILayout.Button("D", focusingCharInfo._NineAndTwo.GetDConfig() != targetSC ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-        {
-            targetSC = focusingCharInfo._NineAndTwo.GetDConfig();
-        }
-        if (GUILayout.Button("R", focusingCharInfo._NineAndTwo.GetRConfig() != targetSC ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-        {
-            targetSC = focusingCharInfo._NineAndTwo.GetRConfig();
-        }
-        GUI.backgroundColor = Color.white;
-        GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         void SlotColorCal(SkillConfig targetC)
@@ -388,89 +368,72 @@ public class StagesManagerGUI : Editor {
         }
         GUILayout.EndHorizontal();
 
+        GUI.backgroundColor = Color.white;
+        focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
+        focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
+        focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
+        GUILayout.Space(10f);
+        
         if (targetSC == null)
         {
             goto A;
         }
-        GUI.backgroundColor = Color.white;
-
-        GUILayout.BeginHorizontal();
-        SanGong = false;
-        if (targetSC == focusingCharInfo._NineAndTwo.GetMConfig())
-        {
-            focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
-            SanGong = true;
-        }
-        if (targetSC == focusingCharInfo._NineAndTwo.GetDConfig())
-        {
-            focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
-            SanGong = true;
-        }
-        if (targetSC == focusingCharInfo._NineAndTwo.GetRConfig())
-        {
-            focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
-            SanGong = true;
-        }
-        GUILayout.EndHorizontal();
-        GUILayout.Space(10f);
         
-        if (!SanGong)
+        skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, AttackRangeToggleGUI);
+        if (skillselectfilter)
         {
-            skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, AttackRangeToggleGUI);
-            if (skillselectfilter)
-            {
-                EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
-                
-                filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
-                if (!filterallranges) 
-                {
-                    skillrangeselectfilter[0] = true;
-                    skillrangeselectfilter[1] = true;
-                    skillrangeselectfilter[2] = true;
-                    skillrangeselectfilter[3] = true;
-                }
-                skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], AttackRangeToggleGUI);
-                skillrangeselectfilter[1] = EditorGUILayout.Toggle("中", skillrangeselectfilter[1], AttackRangeToggleGUI);
-                skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
-                skillrangeselectfilter[3] = EditorGUILayout.Toggle("超", skillrangeselectfilter[3], AttackRangeToggleGUI);
-                EditorGUILayout.EndToggleGroup();
-                
-                selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, skillrarelevelShow, skillrarelevels);
-                EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
-                GUILayout.Space(20f);
-            }
+            EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
             
-            _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
-            
-            int index2 = 0;
-            selectedskillindex = 0;
-            foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)
+            filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
+            if (!filterallranges) 
             {
-                if (keyValuePair.Key == targetSC.RECORD_ID)
-                {
-                    selectedskillindex = index2;
-                    break;
-                }
-                index2++;
+                skillrangeselectfilter[0] = true;
+                skillrangeselectfilter[1] = true;
+                skillrangeselectfilter[2] = true;
+                skillrangeselectfilter[3] = true;
             }
-            selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
-            targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;                        
-            SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(targetSC.RECORD_ID);
-            if (defaultSkillConfig == null)
-            {
-                goto A;
-            }
-            targetSC.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",(targetSC.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE) ? defaultSkillConfig.STATE_TYPE : targetSC.STATE_TYPE);                                                    
-            targetSC.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", (defaultSkillConfig != null) ? defaultSkillConfig.ATTACK_WEIGHT : targetSC.ATTACK_WEIGHT);
-            targetSC.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel",(targetSC.SP_LEVEL == -1 && defaultSkillConfig != null) ? defaultSkillConfig.SP_LEVEL : targetSC.SP_LEVEL, exoptions_display,exoptions);
-            GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
-            GUILayout.Space(5f);
+            skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], AttackRangeToggleGUI);
+            skillrangeselectfilter[1] = EditorGUILayout.Toggle("中", skillrangeselectfilter[1], AttackRangeToggleGUI);
+            skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
+            skillrangeselectfilter[3] = EditorGUILayout.Toggle("超", skillrangeselectfilter[3], AttackRangeToggleGUI);
+            EditorGUILayout.EndToggleGroup();
             
-            EditorGUILayout.LabelField("AI模式技能触发范围");
-            defaultSkillConfig.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MIN_DIS);
-            defaultSkillConfig.AI_MAX_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MAX_DIS);
-            GUILayout.Space(5f);
+            selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, skillrarelevelShow, skillrarelevels);
+            EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
+            GUILayout.Space(20f);
         }
+        
+        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
+        
+        int index2 = 0;
+        selectedskillindex = 0;
+        foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)
+        {
+            if (keyValuePair.Key == targetSC.RECORD_ID)
+            {
+                selectedskillindex = index2;
+                break;
+            }
+            index2++;
+        }
+        selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
+        targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;                        
+        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(targetSC.RECORD_ID);
+        if (defaultSkillConfig == null)
+        {
+            goto A;
+        }
+        targetSC.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",(targetSC.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE) ? defaultSkillConfig.STATE_TYPE : targetSC.STATE_TYPE);                                                    
+        targetSC.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", (defaultSkillConfig != null) ? defaultSkillConfig.ATTACK_WEIGHT : targetSC.ATTACK_WEIGHT);
+        targetSC.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel",(targetSC.SP_LEVEL == -1 && defaultSkillConfig != null) ? defaultSkillConfig.SP_LEVEL : targetSC.SP_LEVEL, exoptions_display,exoptions);
+        GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
+        GUILayout.Space(5f);
+        
+        EditorGUILayout.LabelField("AI模式技能触发范围");
+        defaultSkillConfig.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MIN_DIS);
+        defaultSkillConfig.AI_MAX_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MAX_DIS);
+        GUILayout.Space(5f);
+        
         if (focusingCharInfo != null && focusingCharInfo._NineAndTwo != null)
         {
             focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();

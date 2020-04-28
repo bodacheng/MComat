@@ -24,6 +24,7 @@
         public string REAL_NAME;
         public string SHOW_NAME;
         public float ATTACK_WEIGHT;
+        public float HP_WEIGHT;
         public BehaviorType STATE_TYPE;
         public float AI_MIN_DIS;
         public float AI_MAX_DIS;
@@ -35,7 +36,7 @@
         {
             return (SkillConfig)MemberwiseClone();
         }
-        
+                
         public SkillConfig()
         {
             RECORD_ID = null;
@@ -43,17 +44,19 @@
             REAL_NAME = null;
             SHOW_NAME = null;
             ATTACK_WEIGHT = 1;
+            HP_WEIGHT = 1;
             STATE_TYPE = BehaviorType.NONE;
             SP_LEVEL = 1;
             CONNATE_CODE = null;
         }
-        public SkillConfig(string id, string type, string keyName, string ShowName, int AT, BehaviorType stateType, float AITriggerDistanceMin,float AITriggerDistanceMax, int SPLevel)
+        public SkillConfig(string id, string type, string keyName, string ShowName, float AT, float HP, BehaviorType stateType, float AITriggerDistanceMin,float AITriggerDistanceMax, int SPLevel)
         {
             this.RECORD_ID = id;//和Skills表id对应
             this.TYPE = type;
             this.REAL_NAME = keyName;
             this.SHOW_NAME = ShowName;
             this.ATTACK_WEIGHT = AT;
+            this.HP_WEIGHT = HP;
             this.STATE_TYPE = stateType;
             this.AI_MIN_DIS = AITriggerDistanceMin;
             this.AI_MAX_DIS = AITriggerDistanceMax;
@@ -87,17 +90,17 @@
         }
     }
     
-    public class PassiveSkillConfigs
+    public class PassiveSkillEntitys
     {
         public MoveType moveType;
         public bool hasDefend;
         public RushType rushType;
-
-        public SkillConfig MConfig;
-        public SkillConfig DConfig;
-        public SkillConfig RConfig;
-
-        public PassiveSkillConfigs(MoveType moveType, bool hasDefend, RushType RStyle)
+        
+        public SkillEntity M_SE;
+        public SkillEntity D_SE;
+        public SkillEntity R_SE;
+        
+        public PassiveSkillEntitys(MoveType moveType, bool hasDefend, RushType RStyle)
         {
             this.moveType = moveType;
             this.hasDefend = hasDefend;
@@ -106,66 +109,164 @@
             switch (moveType)
             {
                 case MoveType.Move_normal:
-                    this.MConfig = new SkillConfig
-                        (
-                            null, null, "Move_normal", "normal move", 0, 0,0, 0, 0
-                        );
+                    M_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Move_normal",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 case MoveType.Move_slow:
-                    this.MConfig = new SkillConfig
-                        (
-                            null, null, "Move_slow", "normal move", 0, 0, 0, 0, 0
-                        );
+                    M_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Move_slow",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 case MoveType.Move_fast:
-                    this.MConfig = new SkillConfig
-                        (
-                            null, null, "Move_fast", "normal move",  0, 0, 0, 0, 0
-                        );
+                    M_SE = new SkillEntity()
+                    {
+                        REAL_NAME = "Move_fast",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 case MoveType.Test_Move:
-                    this.MConfig = new SkillConfig
-                        (
-                            null, null, "Test_Move", "测试用移动状态(角色站着不动)",  0, 0, 0, 0, 0
-                        );
+                    M_SE = new SkillEntity()
+                    {
+                        REAL_NAME = "Test_Move",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 default:
-                    this.MConfig = new SkillConfig
-                        (
-                            null, null, "Move_normal", "normal move",  0, 0, 0, 0, 0
-                        );
+                    M_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Move_normal",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
             }
 
-            this.DConfig = hasDefend
-                ? new SkillConfig
-                        (
-                            null, null, "Defend", "防衛",  0, 0, 0, 0, 0
-                        )
-                : null;
+            D_SE = hasDefend
+                ? new SkillEntity
+                    {
+                        REAL_NAME = "Defend",
+                        LEVEL = 0,
+                        StateType = BehaviorType.Def,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Defend,
+                        ExitInput = InputKey.Defend_Cancel,
+                        SP_LEVEL = 0
+                    } : null;
 
             switch (RStyle)
             {
                 case RushType.Jump:
-                    this.RConfig = new SkillConfig
-                        (
-                            null, null, "Jump", "Jump", 0, 0, 0, 0, 0
-                        );
+                    R_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Jump",
+                        LEVEL = 0,
+                        StateType = BehaviorType.AC,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Acc,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 case RushType.Rush:
-                    this.RConfig = new SkillConfig
-                        (
-                            null, null, "Rush", "Rush", 0, 0, 0, 0, 0
-                        );
+                    R_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Rush",
+                        LEVEL = 0,
+                        StateType = BehaviorType.AC,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Acc,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 case RushType.RushBack:
-                    this.RConfig = new SkillConfig
-                        (
-                            null, null, "RushBack", "RushBack",0, 0, 0, 0, 0
-                        );
+                    R_SE = new SkillEntity
+                    {
+                        REAL_NAME = "RushBack",
+                        LEVEL = 0,
+                        StateType = BehaviorType.AC,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Acc,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
                     break;
                 case RushType.None:
-                    this.RConfig = null;
+                    R_SE = null;
                     break;
             }
         }
