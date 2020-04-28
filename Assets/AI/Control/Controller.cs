@@ -162,7 +162,7 @@ namespace Soul
             {
                 allAvaliableKeyCodes.Add(avaliable_casual_Transitions[i].REAL_NAME);
             }
-            
+
             if (behaviorRunner.GetNowState().Strategic_exit_condition())
             {
                 for (int y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)

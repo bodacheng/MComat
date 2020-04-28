@@ -41,8 +41,8 @@ public partial class NineAndTwo
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         PassiveSkillEntitys passiveSkillConfigs = new PassiveSkillEntitys(moveType, canDefend, rushType);
-        D = passiveSkillConfigs.M_SE;
-        M = passiveSkillConfigs.D_SE;
+        D = passiveSkillConfigs.D_SE;
+        M = passiveSkillConfigs.M_SE;
         R = passiveSkillConfigs.R_SE;
         //////////////////////////////////////////////////////////////////////////
         
@@ -179,14 +179,15 @@ public partial class NineAndTwo
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);
         StateTransitionSetList.Add(M);
-        if (this.D != null)
+        if (D != null)
         {
-            StateTransitionSetList.Add(this.D);
+            StateTransitionSetList.Add(D);
         }
-        if (this.R != null)
+        if (R != null)
         {
             StateTransitionSetList.Add(R);
-        }      
+        }
+        
         if(this.A1 != null)
         {
             StateTransitionSetList.Add(A1);

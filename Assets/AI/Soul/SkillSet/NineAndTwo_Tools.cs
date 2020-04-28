@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Skill;
+using UnityEngine;
 
 public partial class NineAndTwo
 {
@@ -150,19 +151,12 @@ public partial class NineAndTwo
     
     public List<SkillEntity> ReturnSTSlist()
     {
+        Debug.Log("行为总数：" + StateTransitionSetList.Count);
         return StateTransitionSetList;
     }
     
-    public SkillEntity GetD_STS()
-    {
-        return D;
-    }
     public SkillEntity GetM_STS()
     {
         return M;
-    }
-    public SkillEntity GetR_STS()
-    {
-        return R;
     }
 }

@@ -22,7 +22,7 @@ namespace Soul
 
         public void SaveTrans(string chracterType)
         {
-            this.SaveStateTransitionInfo(State_Transition_Set_List, AI_States_path, chracterType);
+            this.SaveStateTransitionInfo(SkillEntity_List, AI_States_path, chracterType);
         }
 
         public string ArrangeScriptPathForPlatfom(string PathInStringOrigin)
@@ -155,7 +155,7 @@ namespace Soul
             {
                 now_Behavior.AI_State_exit();
             }
-            State_Transition_Set_List = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
+            SkillEntity_List = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; //理解整个系统的关键
             BehaviourDic = new Dictionary<string, Behavior>();
             foreach (BehaviorIndex_With_Behavior s in Num_State_List)
@@ -164,7 +164,7 @@ namespace Soul
             }
             SkillEntityDic = new Dictionary<string, SkillEntity>();
             List<string> alreadyInList = new List<string>();//7.29 这个环节貌似是现在“同技能没法重复”bug的来源
-            foreach (SkillEntity _SE in State_Transition_Set_List)
+            foreach (SkillEntity _SE in SkillEntity_List)
             {
                 if (_SE.REAL_NAME != null
                     &&

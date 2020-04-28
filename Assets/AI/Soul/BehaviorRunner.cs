@@ -8,7 +8,7 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         #region 初始化相关
-        public List<SkillEntity> State_Transition_Set_List;
+        public List<SkillEntity> SkillEntity_List;
         Behaviors_Incubator _States_Incubator;
         #endregion
 
@@ -171,20 +171,6 @@ namespace Soul
             {
                 now_Behavior.AI_State_enter();
             }
-        }
-        
-        public void StartToGo()
-        {
-            string[] startOffState = { "Move_normal", "Move_slow", "Move_fast", "Test_Move" };
-            for (int i = 0; i < startOffState.Length; i++)
-            {
-                SkillEntityDic.TryGetValue(startOffState[i], out SkillEntity _State_Transition);
-                if (_State_Transition != null)
-                {
-                    ChangeState(startOffState[i]);
-                    break;
-                }
-            }
-        }
+        }       
     }
 }

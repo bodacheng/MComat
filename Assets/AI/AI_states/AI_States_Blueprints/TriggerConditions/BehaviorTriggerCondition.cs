@@ -84,6 +84,7 @@ namespace Soul
         
         public bool TimeToStopRunning()
         {
+            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
             return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) || Sensor.GetSuddenThreatInRange(0,8) != null;
         }
         

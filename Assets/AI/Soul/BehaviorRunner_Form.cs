@@ -92,9 +92,8 @@ namespace Soul
             nineAndTwo.SortNineAndTwo();
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
             SkillEntityDic = nineAndTwo.GenerateBeheviourSets();
-            State_Transition_Set_List = nineAndTwo.ReturnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
-            
-            _States_Incubator = new Behaviors_Incubator(empty_State,this.SkillEntityDic);
+            SkillEntity_List = nineAndTwo.ReturnSTSlist();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
+            _States_Incubator = new Behaviors_Incubator(empty_State, SkillEntityDic);
             List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
             BehaviourDic.Clear();
             ConditionAndRespondPriority.Clear();
@@ -118,10 +117,7 @@ namespace Soul
                 }
             }
             AllConditionCodes = ConditionAndRespond.Keys.ToList();
-            if (nineAndTwo.GetM_STS() != null)
-            {
-                commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
-            }
+            commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
         }
     }
 }

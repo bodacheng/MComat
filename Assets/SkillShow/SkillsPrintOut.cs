@@ -225,7 +225,7 @@ namespace mainMenu
             }
             
             //focusingCharacterData._MyBehaviorRunner.FormFightingSetsByNineAndTwo(nineAndTwo);
-            analysisStatesList = focusingC._MyBehaviorRunner.State_Transition_Set_List;
+            analysisStatesList = focusingC._MyBehaviorRunner.SkillEntity_List;
             analysisSKList = LToD(analysisStatesList);
             
             StateButtonDic.Clear();

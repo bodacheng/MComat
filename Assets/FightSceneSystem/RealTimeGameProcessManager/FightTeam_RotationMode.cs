@@ -115,7 +115,7 @@ public class FightTeam_RotationMode : FightTeam
 
     public override void ModeStart()
     {
-        RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
+        RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
     }
     
     void WaitToTriggerMemberChange()
@@ -272,7 +272,7 @@ public class FightTeam_RotationMode : FightTeam
                 }
                 RotationMode_fightingMember = _changeTo;
                 RotationMode_fightingMember.IsDead.Subscribe( x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); }});
-                RotationMode_fightingMember._MyBehaviorRunner.StartToGo();
+                RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
                 RotationMode_fightingMember.WholeT.transform.position = targetposition;                
                 EffectAndHurtObjectLoading.Instance.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                 memberchanged = true;
