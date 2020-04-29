@@ -103,7 +103,7 @@ namespace mainMenu
                     }
                 }
                 
-                ////////超级功能////////
+                //////// 超级功能 ////////
                 if (focusingC.Animation_Manger != null)
                 {
                     //SkillShowT.gameObject.SetActive(false);
@@ -235,7 +235,7 @@ namespace mainMenu
             
             Button newShow;
             
-            attack_chuan = nineAndTwo.GetAttackChuan();
+            attack_chuan = nineAndTwo.GetAttack1Chuan();
             for (int i = 1; i < 4; i++)
             {
                 if (attack_chuan[i] == null)
@@ -255,7 +255,7 @@ namespace mainMenu
             }
             ///////////////////////
 
-            Fire1_chuan = nineAndTwo.GetFire1Chuan();
+            Fire1_chuan = nineAndTwo.GetAttack2Chuan();
             for (int i = 1; i < 4; i++)
             {
                 if (Fire1_chuan[i] == null)
@@ -276,7 +276,7 @@ namespace mainMenu
             }
             ///////////////////////
             
-            Fire2_chuan = nineAndTwo.GetFire2Chuan();
+            Fire2_chuan = nineAndTwo.GetAttack3Chuan();
             for (int i = 1; i < 4; i++)
             {
                 if (Fire2_chuan[i] == null)

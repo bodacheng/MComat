@@ -65,7 +65,7 @@ public partial class NineAndTwo
     }
 
     //下面的环节纯粹是针对SkillPrintOut的一些处理
-    public IDictionary<int, SkillEntity> GetAttackChuan()
+    public IDictionary<int, SkillEntity> GetAttack1Chuan()
     {
         IDictionary<int, SkillEntity> attack_chuan = new Dictionary<int, SkillEntity>
         {
@@ -75,7 +75,7 @@ public partial class NineAndTwo
         };
         return attack_chuan;
     }
-    public IDictionary<int, SkillEntity> GetFire1Chuan()
+    public IDictionary<int, SkillEntity> GetAttack2Chuan()
     {
         IDictionary<int, SkillEntity> B_chuan = new Dictionary<int, SkillEntity>
         {
@@ -85,7 +85,7 @@ public partial class NineAndTwo
         };
         return B_chuan;
     }
-    public IDictionary<int, SkillEntity> GetFire2Chuan()
+    public IDictionary<int, SkillEntity> GetAttack3Chuan()
     {
         IDictionary<int, SkillEntity> C_chuan = new Dictionary<int, SkillEntity>
         {

@@ -32,10 +32,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         case CellPhase.NineSlotCell_full:
                             switch (sourceCell.cellPhase)
                             {
-                                case CellPhase.NineSlotCell_full://从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                case CellPhase.NineSlotCell_full:// 从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                     SwapItems(sourceCell,this);
                                 break;
-                                case CellPhase.NineSlotCell_empty://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                case CellPhase.NineSlotCell_empty:// 从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                 break;
                                 case CellPhase.SkillStoneBoxCell:
                                     Install(sourceCell,_SkillStoneSlot);
@@ -45,7 +45,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         case CellPhase.NineSlotCell_empty:
                             switch (sourceCell.cellPhase)
                             {
-                                case CellPhase.NineSlotCell_full://add模式下，从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                case CellPhase.NineSlotCell_full:// 从box把一个石头拖到9宫中同被新石头所覆盖的格子上
                                     AddItem(item);
                                 break;
                                 case CellPhase.SkillStoneBoxCell:
