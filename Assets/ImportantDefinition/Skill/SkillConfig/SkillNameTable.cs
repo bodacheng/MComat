@@ -30,21 +30,21 @@ public class SkillNameTable
     {
         foreach (Row row in rowList)
         {
-            if (!SkillNameDic.ContainsKey(row.RECORD_ID))
+            if (!SkillNameDic.ContainsKey(row.SKILL_ID))
             {
                 switch (apiLanguage)
                 {
                     case ApiLanguage.EnUs:
-                        SkillNameDic.Add(row.RECORD_ID,row.EN_NAME);
+                        SkillNameDic.Add(row.SKILL_ID,row.EN_NAME);
                     break;
                     case ApiLanguage.JaJp:
-                        SkillNameDic.Add(row.RECORD_ID,row.JP_NAME);
+                        SkillNameDic.Add(row.SKILL_ID,row.JP_NAME);
                     break;
                     case ApiLanguage.ZhCn:
-                        SkillNameDic.Add(row.RECORD_ID,row.CN_NAME);
+                        SkillNameDic.Add(row.SKILL_ID,row.CN_NAME);
                     break;
                     default:
-                        SkillNameDic.Add(row.RECORD_ID,row.EN_NAME);
+                        SkillNameDic.Add(row.SKILL_ID,row.EN_NAME);
                     break;
                 }
             }
@@ -78,17 +78,20 @@ public class SkillNameTable
 
     static void Load(TextAsset csv)
     {
+        Debug.Log("尝试读取技能名文档");
     	rowList.Clear();
     	string[][] grid = CsvParser2.Parse(csv.text);
     	for(int i = 1 ; i < grid.Length ; i++)
     	{
-    		Row row = new Row();
-    		row.RECORD_ID = grid[i][0];
-    		row.SKILL_ID = grid[i][1];
-    		row.EN_NAME = grid[i][2];
-    		row.JP_NAME = grid[i][3];
-    		row.CN_NAME = grid[i][4];
-    		rowList.Add(row);
+            Row row = new Row
+            {
+                RECORD_ID = grid[i][0],
+                SKILL_ID = grid[i][1],
+                EN_NAME = grid[i][2],
+                JP_NAME = grid[i][3],
+                CN_NAME = grid[i][4]
+            };
+            rowList.Add(row);
     	}
         PrepareSkillNames(Setting.Language);
     	isLoaded = true;

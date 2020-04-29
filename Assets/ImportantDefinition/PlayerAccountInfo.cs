@@ -18,7 +18,7 @@ public class PlayerAccountInfo
     {
         Coin = 2000;
         Diamond = 99999;
-        Stoneboxsize = 200;
+        Stoneboxsize = 500;
     }
     
     public float BgmVolumn

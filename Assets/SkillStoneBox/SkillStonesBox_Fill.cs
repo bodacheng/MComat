@@ -36,7 +36,7 @@ namespace mainMenu
             
             if (targetSKs.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
             {
-                Debug.Log("错误：待显示技能石数量超过了盒子容量");
+                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + AccountSet.Instance._PlayerAccountInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
                 yield break;
             }
             int cellindex = 0;

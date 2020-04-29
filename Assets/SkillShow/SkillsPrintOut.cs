@@ -168,7 +168,7 @@ namespace mainMenu
         List<GameObject> renderPs = new List<GameObject>();
         void RenderButton(Zokusei zokusei,GameObject button,int splevel)
         {
-            GameObject t = ZokuseiSkillStoneTagsGroup.CreateOneButtonIcon(zokusei,splevel);
+            GameObject t = ZokuseiStoneTagsGroup.CreateOneButtonIcon(zokusei,splevel);
             t.layer = 5;//UI Layer
             foreach (Transform _t in t.transform)
             {

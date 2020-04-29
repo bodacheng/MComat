@@ -6,19 +6,19 @@ namespace mainMenu
 {
     public class SkillStoneBoxTabEffectsManager : MonoBehaviour
     {
-        IDictionary<Zokusei, ZokuseiSkillStoneTagsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, ZokuseiSkillStoneTagsGroup>();
-        ZokuseiSkillStoneTagsGroup _focusingButtonEffectsGroup;
+        IDictionary<Zokusei, ZokuseiStoneTagsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, ZokuseiStoneTagsGroup>();
+        ZokuseiStoneTagsGroup _focusingButtonEffectsGroup;
         GameObject triggerExplosionPretab0;
         ParticleSystem triggerExplosion0;
         
         public IEnumerator StartUp()
         {
-            ZokuseiSkillStoneTagsGroup red = new ZokuseiSkillStoneTagsGroup();
-            ZokuseiSkillStoneTagsGroup blue = new ZokuseiSkillStoneTagsGroup();
-            ZokuseiSkillStoneTagsGroup green = new ZokuseiSkillStoneTagsGroup();
-            ZokuseiSkillStoneTagsGroup dark = new ZokuseiSkillStoneTagsGroup();
-            ZokuseiSkillStoneTagsGroup _light = new ZokuseiSkillStoneTagsGroup();
-            ZokuseiSkillStoneTagsGroup _default = new ZokuseiSkillStoneTagsGroup();
+            ZokuseiStoneTagsGroup red = new ZokuseiStoneTagsGroup();
+            ZokuseiStoneTagsGroup blue = new ZokuseiStoneTagsGroup();
+            ZokuseiStoneTagsGroup green = new ZokuseiStoneTagsGroup();
+            ZokuseiStoneTagsGroup dark = new ZokuseiStoneTagsGroup();
+            ZokuseiStoneTagsGroup _light = new ZokuseiStoneTagsGroup();
+            ZokuseiStoneTagsGroup _default = new ZokuseiStoneTagsGroup();
             
             red.INI_forSkillStoneBox(Zokusei.redMagic,transform);
             blue.INI_forSkillStoneBox(Zokusei.blueMagic,transform);

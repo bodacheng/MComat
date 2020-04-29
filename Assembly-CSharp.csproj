@@ -98,8 +98,8 @@
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_Tools.cs" />
     <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
+    <Compile Include="Assets\AI\buttons\ZokuseiStoneTagsGroup.cs" />
     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
-    <Compile Include="Assets\AI\buttons\zokuseiSkillStoneTagsGroup.cs" />
     <Compile Include="Assets\AnimControl\Animation_Manger.cs" />
     <Compile Include="Assets\AnimControl\Animation_Manger_CachLoad.cs" />
     <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />

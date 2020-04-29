@@ -7,7 +7,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     private IEnumerator characterComponentsDownload()
     {
         ////////// 下面统计各个type角色的必要组件 ////////////
-        foreach (KeyValuePair<string,List<string>> keyValuePair in characterTypeCodeAndBasicMoveSets)
+        foreach (KeyValuePair<string,List<string>> keyValuePair in CharTypeCodeAndBasicMoveSets)
         {
             //for (int i = 0; i < keyValuePair.Value.Count; i++)
             //{

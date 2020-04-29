@@ -46,7 +46,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     
     public bool dProcessFinished;
     IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
-    IDictionary<string, List<string>> characterTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
+    IDictionary<string, List<string>> CharTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
     CachDownLoadMission modelConfigFileMission;
     CachDownLoadMission animationConfigFileMission;
 
@@ -119,7 +119,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 LoadingCanvas.target.NowProcess("正在加载资源",0.1f);
                 break;
         }
-
+        
         switch (ResourceLoadingSetting.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -135,11 +135,11 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         // characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
         foreach (MonstersConfigTable.Row row in MonstersConfigTable.Instance.rowList)
         {
-            if (!characterTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE))
-                characterTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE,new List<string>());
-            if (!characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Contains(row.BASIC_MOVEMENT_PACK))
+            if (!CharTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE))
+                CharTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE,new List<string>());
+            if (!CharTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Contains(row.BASIC_MOVEMENT_PACK))
             {
-                characterTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Add(row.BASIC_MOVEMENT_PACK);
+                CharTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Add(row.BASIC_MOVEMENT_PACK);
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ZokuseiSkillStoneTagsGroup
+public class ZokuseiStoneTagsGroup
 {
     public Zokusei zokusei;
     

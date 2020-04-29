@@ -22,7 +22,7 @@ namespace dataAccess
                 {
                     try
                     {
-                        Debug.Log("处理技能石："+file);
+                        //Debug.Log("处理技能石："+file);
                         string dataAsJson = File.ReadAllText(file);
                         SkillStoneOfPlayerInfoModel info = JsonConvert.DeserializeObject<SkillStoneOfPlayerInfoModel>(dataAsJson);
                         DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, info.skillStoneOfPlayerId, info);
@@ -64,8 +64,9 @@ namespace dataAccess
         
         public static IEnumerator LocalSaveDataGetAllStones()
         {
+            yield return LoadAll();
+            //LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
             yield return SkillConfigTable.LoadAllSkillConfigs();
-            LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
             {
                 //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
