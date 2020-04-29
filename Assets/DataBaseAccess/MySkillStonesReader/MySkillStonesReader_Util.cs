@@ -124,6 +124,6 @@ namespace dataAccess
                 case playerinfoReferenceMode.formalVersion:
                     break;
             }
-        }
+        }        
     }
 }

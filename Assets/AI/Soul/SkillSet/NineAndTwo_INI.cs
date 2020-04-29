@@ -17,15 +17,15 @@ public partial class NineAndTwo
     
     public void SortNineAndTwo()
     {
-        AConfig1 = A1skillid != null ? GetSkillConfigBySkillId(A1skillid) : new SkillConfig();
-        AConfig2 = A2skillid != null ? GetSkillConfigBySkillId(A2skillid) : new SkillConfig();
-        AConfig3 = A3skillid != null ? GetSkillConfigBySkillId(A3skillid) : new SkillConfig();
-        BConfig1 = B1skillid != null ? GetSkillConfigBySkillId(B1skillid) : new SkillConfig();
-        BConfig2 = B2skillid != null ? GetSkillConfigBySkillId(B2skillid) : new SkillConfig();
-        BConfig3 = B3skillid != null ? GetSkillConfigBySkillId(B3skillid) : new SkillConfig();
-        CConfig1 = C1skillid != null ? GetSkillConfigBySkillId(C1skillid) : new SkillConfig();
-        CConfig2 = C2skillid != null ? GetSkillConfigBySkillId(C2skillid) : new SkillConfig();
-        CConfig3 = C3skillid != null ? GetSkillConfigBySkillId(C3skillid) : new SkillConfig();
+        AConfig1 = A1skillid != null ? SkillConfigTable.GetSkillConfigByID(A1skillid) : new SkillConfig();
+        AConfig2 = A2skillid != null ? SkillConfigTable.GetSkillConfigByID(A2skillid) : new SkillConfig();
+        AConfig3 = A3skillid != null ? SkillConfigTable.GetSkillConfigByID(A3skillid) : new SkillConfig();
+        BConfig1 = B1skillid != null ? SkillConfigTable.GetSkillConfigByID(B1skillid) : new SkillConfig();
+        BConfig2 = B2skillid != null ? SkillConfigTable.GetSkillConfigByID(B2skillid) : new SkillConfig();
+        BConfig3 = B3skillid != null ? SkillConfigTable.GetSkillConfigByID(B3skillid) : new SkillConfig();
+        CConfig1 = C1skillid != null ? SkillConfigTable.GetSkillConfigByID(C1skillid) : new SkillConfig();
+        CConfig2 = C2skillid != null ? SkillConfigTable.GetSkillConfigByID(C2skillid) : new SkillConfig();
+        CConfig3 = C3skillid != null ? SkillConfigTable.GetSkillConfigByID(C3skillid) : new SkillConfig();
         
         A1 = AConfig1 != null ? GetSE(A1skillid, A1level) : null;
         A2 = AConfig2 != null ? GetSE(A2skillid, A2level) : null;
@@ -252,7 +252,7 @@ public partial class NineAndTwo
     // 这个应该是所谓技能等级的着手点
     SkillEntity GetSE(string skillid, int level)
     {
-        SkillConfig SC = GetSkillConfigBySkillId(skillid);
+        SkillConfig SC = SkillConfigTable.GetSkillConfigByID(skillid);
         if (SC == null)
             return null;
             
@@ -276,15 +276,5 @@ public partial class NineAndTwo
             return _SE;
         }
         return null;
-    }
-        
-    SkillConfig GetSkillConfigBySkillId(string skillid)
-    {
-        if (skillid == null)
-        {
-            return null;
-        }
-        SkillConfigTable.SkillConfigRefDic.TryGetValue(skillid, out SkillConfig REF);
-        return REF;
     }
 }

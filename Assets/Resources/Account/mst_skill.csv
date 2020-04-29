@@ -2,7 +2,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 1,5hitcombo,human,1,10,GR,0,0.2,5,,1
 2,backfistround_l,human,1,10,GR,0,0.2,5,,1
 3,backfistround_r,human,1,10,GR,0,0.2,5,,1
-4,chunli,human,1,10,GR,0,0.2,5,,1
+4,chunli,human,1,10,GR,2,0.2,5,,1
 5,doublechamber_punch,human,1,10,GR,0,0.2,5,,1
 6,doublehooks,human,1,10,GR,0,0.2,5,,1
 7,doublethrustlowkick,human,1,10,GR,0,0.2,5,,1

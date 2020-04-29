@@ -558,6 +558,7 @@
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
+    <Compile Include="Assets\TheNineSlot\TheNineSlot_Validation.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
     <Compile Include="Assets\UI\BackGroundPS.cs" />
     <Compile Include="Assets\UI\LoadingCanvas.cs" />

@@ -12,28 +12,31 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             return;
         }
-        
+        targetSlot._DragAndDropCell.UpdateMyItem();
         switch(targetSlot._DragAndDropCell.cellPhase)//drag目标slot的phase
         {
             case CellPhase.NineSlotCell_empty:
                 if (AccountCharsSet.CheckExist(MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                 {
-                    string monsterID = MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
-                    if (TheNineSlot.Instance.CheckNineSlotPointsAfterOneStoneRemoved(monsterID, itemFromStoneBox._SkillConfig.RECORD_ID) < 0)
+                    string monsterOfID = MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+                    TheNineSlot.SkillEditError valR3 = TheNineSlot.Instance.CheckEditBasedOnSaveDataAfterOneStoneRemoved(monsterOfID, itemFromStoneBox._SkillConfig.RECORD_ID);
+                    if (valR3 != TheNineSlot.SkillEditError.Perfect)
                     {
-                        Debug.Log("其他角色卸载此技能石会导致点数失衡，不予操作");
+                        TheNineSlot.Instance.ValiationWarn(valR3, monsterOfID);
                         return;
                     }
                 }
-                if (!TheNineSlot.Instance.RefreshWholePointBasedOnCurrentNineSlots(itemFromStoneBox, targetSlot._DragAndDropCell))
+                TheNineSlot.SkillEditError valR = TheNineSlot.Instance.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
+                if (valR != TheNineSlot.SkillEditError.Perfect)
                 {
-                    Debug.Log("Validation错误，不执行操作，返回");
+                    TheNineSlot.Instance.ValiationWarn(valR, MemberDetail.target.focusingCharDataInfo.monsterOfPlayerId);
                     return;
                 }
                 targetSlot._DragAndDropCell.AddItem(itemFromStoneBox);
                 cellInSkillStoneBox.UpdateMyItem();
             break;
             case CellPhase.NineSlotCell_full:
+            
                 SKStoneItem stone = targetSlot._DragAndDropCell.GetItem();
                 if (stone.Inherent)
                 {
@@ -43,16 +46,18 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 
                 if (AccountCharsSet.CheckExist(MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
                 {
-                    string monsterID = MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
-                    if (TheNineSlot.Instance.CheckNineSlotPointsAfterOneStoneRemoved(monsterID, itemFromStoneBox._SkillConfig.RECORD_ID) < 0)
+                    string monsterPlayerID = MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+                    TheNineSlot.SkillEditError valR3 = TheNineSlot.Instance.CheckEditBasedOnSaveDataAfterOneStoneRemoved(monsterPlayerID, itemFromStoneBox._SkillConfig.RECORD_ID);
+                    if (valR3 != TheNineSlot.SkillEditError.Perfect)
                     {
-                        Debug.Log("其他角色卸载此技能石会导致点数失衡，不予操作");
+                        TheNineSlot.Instance.ValiationWarn(valR3, monsterPlayerID);
                         return;
                     }
                 }
-                if (!TheNineSlot.Instance.RefreshWholePointBasedOnCurrentNineSlots(itemFromStoneBox, targetSlot._DragAndDropCell))
+                TheNineSlot.SkillEditError valR2 = TheNineSlot.Instance.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
+                if (valR2 != TheNineSlot.SkillEditError.Perfect)
                 {
-                    Debug.Log("Validation错误，不执行操作，返回");
+                    TheNineSlot.Instance.ValiationWarn(valR2, MemberDetail.target.focusingCharDataInfo.monsterOfPlayerId);
                     return;
                 }
                 SwapItems(cellInSkillStoneBox, targetSlot._DragAndDropCell);

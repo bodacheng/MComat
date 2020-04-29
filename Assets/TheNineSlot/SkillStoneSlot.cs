@@ -32,7 +32,9 @@ public class SkillStoneSlot
         _DragAndDropCell.UpdateMyItem();
         SKStoneItem _DragAndDropItem = _DragAndDropCell.GetItem();
         if (_DragAndDropItem)
+        {
             _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
+        }
         _DragAndDropCell.UpdateMyItem();
     }
     

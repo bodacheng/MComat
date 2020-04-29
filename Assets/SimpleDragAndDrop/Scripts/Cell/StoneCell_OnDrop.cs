@@ -65,9 +65,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                                         Debug.Log("固有技能无法移出，返回");
                                         return;
                                     }
-                                    if (!TheNineSlot.Instance.RefreshWholePointBasedOnCurrentNineSlots(null, sourceCell))
+                                    TheNineSlot.SkillEditError valR = TheNineSlot.Instance.CheckEditBasedOnCurrent(null, sourceCell);
+                                    if (valR != TheNineSlot.SkillEditError.Perfect)
                                     {
-                                        Debug.Log("Validation错误，不执行操作，返回");
+                                        TheNineSlot.Instance.ValiationWarn(valR, MemberDetail.target.focusingCharDataInfo.monsterOfPlayerId);
                                         return;
                                     }
                                     if (GetItem() != null) // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下

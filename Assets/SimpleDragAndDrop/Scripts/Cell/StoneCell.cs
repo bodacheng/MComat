@@ -114,6 +114,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public void UpdateMyItem()
     {
         myDadItem = GetComponentInChildren<SKStoneItem>();
+        if (_SkillStoneSlot != null)
+        {
+            cellPhase = myDadItem != null ? CellPhase.NineSlotCell_full : CellPhase.NineSlotCell_empty;
+        }
         switch(cellPhase)
         {
             case CellPhase.NineSlotCell_empty:

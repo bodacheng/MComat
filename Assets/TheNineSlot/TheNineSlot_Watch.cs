@@ -105,59 +105,7 @@ namespace mainMenu
                 }
             }
         }
-        
-        public bool RefreshWholePointBasedOnCurrentNineSlots(SKStoneItem item, StoneCell replacePosition)
-        {
-            List<string> nineskillids = Instance.GetCurrentNineSlotAllSkillIds();
 
-            if (item == null)
-            {
-                item = new SKStoneItem
-                {
-                    _SkillConfig = new SkillConfig()
-                };
-            }
-
-            if (replacePosition == Instance.A1DragAndDropCell)
-            {
-                nineskillids[0] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.A2DragAndDropCell)
-            {
-                nineskillids[1] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.A3DragAndDropCell)
-            {
-                nineskillids[2] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.B1DragAndDropCell)
-            {
-                nineskillids[3] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.B2DragAndDropCell)
-            {
-                nineskillids[4] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.B3DragAndDropCell)
-            {
-                nineskillids[5] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.C1DragAndDropCell)
-            {
-                nineskillids[6] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.C2DragAndDropCell)
-            {
-                nineskillids[7] = item._SkillConfig.RECORD_ID;
-            }
-            if (replacePosition == Instance.C3DragAndDropCell)
-            {
-                nineskillids[8] = item._SkillConfig.RECORD_ID;
-            }
-            int wholepint = MySkillStonesReader.SkillBalancePoint(nineskillids[0], nineskillids[1], nineskillids[2], nineskillids[3], nineskillids[4], nineskillids[5], nineskillids[6], nineskillids[7], nineskillids[8]);
-            return wholepint >= 0;
-        }
-        
         public void RefreshCurrentHpBasedOnNineSlots()
         {
             List<SkillStoneOfPlayerInfoModel> stonelist = GetMyStonesOnNineSlot();
@@ -182,48 +130,6 @@ namespace mainMenu
                 WholeHP += SkillEntity.StoneHpCal(_SkillConfig.HP_WEIGHT, level[index]);
             }
             return WholeHP;
-        }
-        
-        // 这个是从角色存档来读取
-        public int GetNineSlotWholePointOfMonster(GetMonsterOfPlayerDetailModel _AccountCharInfo)
-        {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetMonsterEquipingStones(_AccountCharInfo.monsterOfPlayerId);
-            string A1=null, A2=null, A3=null, B1=null, B2=null, B3=null, C1=null, C2=null, C3=null;
-            for (int i = 0; i < equipingstones.Count; i++)
-            {
-                switch (equipingstones[i].inUsingSkillSlot)
-                {
-                    case "1":
-                        A1 = equipingstones[i].skillId;
-                        break;
-                    case "2":
-                        A2 = equipingstones[i].skillId;
-                        break;
-                    case "3":
-                        A3 = equipingstones[i].skillId;
-                        break;
-                    case "4":
-                        B1 = equipingstones[i].skillId;
-                        break;
-                    case "5":
-                        B2 = equipingstones[i].skillId;
-                        break;
-                    case "6":
-                        B3 = equipingstones[i].skillId;
-                        break;
-                    case "7":
-                        C1 = equipingstones[i].skillId;
-                        break;
-                    case "8":
-                        C2 = equipingstones[i].skillId;
-                        break;
-                    case "9":
-                        C3 = equipingstones[i].skillId;
-                        break;
-                }
-            }
-            int wholePoint = MySkillStonesReader.SkillBalancePoint(A1,A2,A3,B1,B2,B3,C1,C2,C3);
-            return wholePoint;
         }
     }
 }
