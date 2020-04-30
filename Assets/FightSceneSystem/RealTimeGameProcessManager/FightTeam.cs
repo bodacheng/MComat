@@ -22,7 +22,7 @@ public class FightTeam : MonoBehaviour
     [HideInInspector]
     public Transform[] TeamStandPoints;
     protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-
+    
     public IEnumerator CharsLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
     {
         foreach (KeyValuePair<int,List<int>> keys in MembersSets.GetAllUnNullKeys())

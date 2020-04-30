@@ -22,11 +22,9 @@ public class NineForShow : MonoBehaviour
         yield return getA1;
         yield return getA2;
         yield return getA3;
-        
         yield return getB1;
         yield return getB2;
         yield return getB3;
-        
         yield return getC1;
         yield return getC2;
         yield return getC3;
