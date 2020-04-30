@@ -342,6 +342,7 @@
     <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharDataInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\MonstersConfigTable.cs" />
+    <Compile Include="Assets\ImportantDefinition\Monster\monster_nameTable.cs" />
     <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\AIDataBase.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\HitBoxLogTable.cs" />
@@ -555,6 +556,7 @@
     <Compile Include="Assets\TheBlur\Blur.cs" />
     <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
     <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
+    <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />

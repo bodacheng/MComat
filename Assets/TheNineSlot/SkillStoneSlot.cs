@@ -80,19 +80,15 @@ public class SkillStoneSlot
         _DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
         yield break;
     }
-
-    public IEnumerator TakeASkillStoneFromBoxToSlot(string OnSlotStonelocalID, Color itemColor)
+        
+    public IEnumerator TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
     {
-        SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Get(OnSlotStonelocalID);
-        SKStoneItem _DragAndDropItem = MySkillStonesReader.GetRenderModel(OnSlotStonelocalID);
-        if (_DragAndDropItem == null)
+        SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Get(stoneOfPlayerID);
+        SKStoneItem stoneModel = MySkillStonesReader.GetRenderModel(stoneOfPlayerID);
+        if (stoneModel == null)
             yield break;
-        else
-        {
-            _DragAndDropItem.GetComponent<Image>().color = itemColor;
-            _DragAndDropCell.GetComponent<Image>().color = _DragAndDropItem._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
-            _DragAndDropCell.AddItem(_DragAndDropItem);
-        }
-        yield break;
-    }    
+        stoneModel.GetComponent<Image>().color = itemColor;
+        _DragAndDropCell.GetComponent<Image>().color = stoneModel._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
+        _DragAndDropCell.AddItem(stoneModel);
+    }
 }

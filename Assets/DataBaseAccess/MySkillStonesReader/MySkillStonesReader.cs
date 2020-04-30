@@ -51,10 +51,11 @@ namespace dataAccess
         
         public static IEnumerator Update_Level(string skillstoneofplayerid, string targetLevel, ApiLanguage apiLanguage)
         {
-            SkillStoneOfPlayerInfoModel st = Get(skillstoneofplayerid);
-            st.level = targetLevel;
-            IEnumerator up = Update(skillstoneofplayerid);
-            yield return up;
+            //SkillStoneOfPlayerInfoModel st = Get(skillstoneofplayerid);
+            //st.level = targetLevel;
+            //IEnumerator up = Update(skillstoneofplayerid);
+            //yield return up;
+            yield break;
         }
         
         public static IEnumerator LoadAll()
@@ -81,7 +82,7 @@ namespace dataAccess
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
                     yield break;
                 }
-                yield return SkillStonesBox.GenerateOneStoneModel(pair.Value.skillStoneOfPlayerId);
+                yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
             }
             yield break;
         }

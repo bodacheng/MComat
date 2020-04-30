@@ -35,7 +35,7 @@ public class FightTeam_RotationMode : FightTeam
     
     public override void Clear()
     {
-        datacenterCharIconDic.Clear();
+        CharIconDic.Clear();
         rotationModeHitCombo.text = "";
     }
     
@@ -125,7 +125,7 @@ public class FightTeam_RotationMode : FightTeam
             if (RefreshTimeDic[teamMembers.values[i]] > 0)
             {
                 RefreshTimeDic[teamMembers.values[i]] -= Time.deltaTime; // 角色切换倒计时;
-                datacenterCharIconDic[teamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[teamMembers.values[i]]/10);
+                CharIconDic[teamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[teamMembers.values[i]]/10);
             }
         }
         
@@ -162,7 +162,7 @@ public class FightTeam_RotationMode : FightTeam
         {
             HeroIcon.Seletedfeature(null,selectedFrame,100f);
         }else{
-            datacenterCharIconDic.TryGetValue(waitingToChangeMember,out _tempSI);
+            CharIconDic.TryGetValue(waitingToChangeMember,out _tempSI);
             HeroIcon.Seletedfeature(_tempSI?.focusingCharIcon,selectedFrame,100f);
         }
     }
@@ -205,7 +205,7 @@ public class FightTeam_RotationMode : FightTeam
                 _SideCharIcon.transform.SetParent(_targetCanvas.transform);
                 _SideCharIcon.transform.localScale = Vector3.one;
             }
-            datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
+            CharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }
         rotationModeHitCombo = Instantiate(HitCombo);

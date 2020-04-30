@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using mainMenu;
-using Skill;
 
 public class FightTeam : MonoBehaviour
 {
@@ -23,7 +21,7 @@ public class FightTeam : MonoBehaviour
     
     [HideInInspector]
     public Transform[] TeamStandPoints;
-    protected IDictionary<Data_Center, SideCharIcon> datacenterCharIconDic = new Dictionary<Data_Center, SideCharIcon>();
+    protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
 
     public IEnumerator CharsLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
     {
@@ -44,7 +42,7 @@ public class FightTeam : MonoBehaviour
 
     public virtual void Clear()
     {
-        datacenterCharIconDic.Clear();
+        CharIconDic.Clear();
     }
 
     public virtual List<Transform> TeamMemberTransforms()
@@ -57,7 +55,7 @@ public class FightTeam : MonoBehaviour
     {
         foreach(Data_Center _one in teamMembers.values)
         {
-            datacenterCharIconDic.TryGetValue(_one,out _tempSI);
+            CharIconDic.TryGetValue(_one,out _tempSI);
             _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f),Time.deltaTime * 20f);
         }
     }
@@ -85,14 +83,14 @@ public class FightTeam : MonoBehaviour
     
     protected void RefreshResistanceBar(Data_Center data_Center)
     {
-        datacenterCharIconDic.TryGetValue(data_Center, out _tempSI);
+        CharIconDic.TryGetValue(data_Center, out _tempSI);
         DOTween.To(() => _tempSI.ResistBar.value, (x) => _tempSI.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
         _tempSI.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
     }
     
     protected void RefreshHPBar(Data_Center data_Center,float current_hp,float wholeHP)
     {
-        datacenterCharIconDic.TryGetValue(data_Center,out _tempSI);
+        CharIconDic.TryGetValue(data_Center,out _tempSI);
         _tempSI.HpText.text = current_hp.ToString();
         DOTween.To(() => _tempSI.HpBar.value, (x) => _tempSI.HpBar.value = x, current_hp / wholeHP, 0.2f);
     }
@@ -102,7 +100,7 @@ public class FightTeam : MonoBehaviour
     {
         foreach (Data_Center _datacenter in teamMembers.values)
         {
-            datacenterCharIconDic.TryGetValue(_datacenter, out _tempSI);
+            CharIconDic.TryGetValue(_datacenter, out _tempSI);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
             {
                 _tempSI.transform.localScale = _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;

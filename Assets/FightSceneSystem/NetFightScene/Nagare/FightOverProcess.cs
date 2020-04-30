@@ -1,29 +1,29 @@
 ﻿using UniRx;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
 public class FightOverProcess : NagareProcess
 {
     public FightOverProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
-        this.thisProcessStep = SceneStep.FightOver;
-        this.nextProcessStep = SceneStep.FightSummary;
+        thisProcessStep = SceneStep.FightOver;
+        nextProcessStep = SceneStep.FightSummary;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
-        fightOverControl.canGotoSummary.Subscribe(x => { if (x) AutoMoveToNext = true; });
+        fightOverControl.CanGotoSummary.Subscribe(x => { if (x) AutoMoveToNext = true; });
     }
     
     public override void ProcessEnter()
     {
         fightOverControl.FightOverCanvas.gameObject.SetActive(true);
-        switch (this.fightLogger.getWinner())
+        switch (fightLogger.getWinner())
         {
             case Team.player1:
-                mainProcessRunner.Run(this.fightOverControl.WINProcess());//这里是要根据情况的。。
+                mainProcessRunner.Run(fightOverControl.WINProcess());//这里是要根据情况的。。
                 break;
             case Team.player2:
-                mainProcessRunner.Run(this.fightOverControl.LoseProcess());//这里是要根据情况的。。
+                mainProcessRunner.Run(fightOverControl.LoseProcess());//这里是要根据情况的。。
                 break;
         }
+        mainProcessRunner.Run(fightOverControl.ShowSKillSets(_RealTimeGameProcessManager.FightTeam1.CharDataInfoRef.Values.ToList()));//这里是要根据情况的。。
     }
     
     public override void ProcessEnd()

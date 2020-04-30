@@ -8,7 +8,7 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        public static IEnumerator GenerateOneStoneModel(string skillStoneOfPlayerId)
+        public static IEnumerator GenerateStoneModelByAccID(string skillStoneOfPlayerId)
         {
             if (MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
             {
@@ -18,15 +18,38 @@ namespace mainMenu
                 }
             }
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(skillStoneOfPlayerId);
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
+            IEnumerator Generate = GenerateStoneMode(skillStoneOfPlayerInfoModel.skillId);
+            yield return Generate;
+            SKStoneItem item = (SKStoneItem)Generate.Current;
+                      
+            if (!MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
+                MySkillStonesReader.RenderModelDic.Add(skillStoneOfPlayerId, item);
+            else
+                 MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] = item;
+            
+            item.Inherent = skillStoneOfPlayerInfoModel.Inherent == "true";
+            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId);
+            item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
+            item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
+            item.gameObject.transform.SetParent(_stonesTempContainer);
+        }
+        
+        public static IEnumerator GenerateStoneMode(string skillID)
+        {
+            if (skillID == null)
+            {
+                yield return null;
+                yield break;
+            }
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             IEnumerator process = null;
             switch (ResourceLoadingSetting.IconLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    process = (SkillIconsDic.Instance.FindSkillIconByCach(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId));
+                    process = (SkillIconsDic.Instance.FindSkillIconByCach(skillID));
                     break;
                 case ResourceLoadMode.Resource:
-                    process = (SkillIconsDic.Instance.FindSkillIconByResource(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId));
+                    process = (SkillIconsDic.Instance.FindSkillIconByResource(skillID));
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
@@ -40,17 +63,7 @@ namespace mainMenu
             {
                 item = Icon.AddComponent<SKStoneItem>();
             }
-            
-            if (!MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
-                MySkillStonesReader.RenderModelDic.Add(skillStoneOfPlayerId, item);
-            else
-                 MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] = item;
-
-            item.Inherent = skillStoneOfPlayerInfoModel.Inherent == "true";
-            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId);
-            item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
-            item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
-            item.gameObject.transform.SetParent(_stonesTempContainer);           
-            }
+            yield return item;
+        }
     }
 }

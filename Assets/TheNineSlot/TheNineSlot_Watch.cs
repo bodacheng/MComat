@@ -114,7 +114,7 @@ namespace mainMenu
             
             foreach(SkillStoneOfPlayerInfoModel one in stonelist)
             {
-                level.Add(int.Parse(one.level));
+                level.Add(one.GetLevel());
                 skillIDs.Add(one.skillId);
             }
             

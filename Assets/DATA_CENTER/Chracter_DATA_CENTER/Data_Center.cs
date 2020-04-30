@@ -206,6 +206,7 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
         FightDataRef.EnableAllHitBoxCollider(true);
         FightDataRef.CurrentHp.Value = nineSkillHp;
+        Debug.Log("总HP：" + FightDataRef.CurrentHp.Value);
     }
 
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰

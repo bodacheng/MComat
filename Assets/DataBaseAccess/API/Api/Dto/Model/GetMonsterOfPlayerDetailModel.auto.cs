@@ -55,39 +55,39 @@ namespace Api.Dto.Model {
                     {
                         case "1":
                             nineAndTwo.A1skillid = targets[i].skillId;
-                            nineAndTwo.A1level = int.Parse(targets[i].level);
+                            nineAndTwo.A1level = targets[i].GetLevel();
                         break;
                         case "2":
                             nineAndTwo.A2skillid = targets[i].skillId;
-                            nineAndTwo.A2level = int.Parse(targets[i].level);
+                            nineAndTwo.A2level = targets[i].GetLevel();
                         break;
                         case "3":
                             nineAndTwo.A3skillid = targets[i].skillId;
-                            nineAndTwo.A3level = int.Parse(targets[i].level);
+                            nineAndTwo.A3level = targets[i].GetLevel();
                         break;
                         case "4":
                             nineAndTwo.B1skillid = targets[i].skillId;
-                            nineAndTwo.B1level = int.Parse(targets[i].level);
+                            nineAndTwo.B1level = targets[i].GetLevel();
                         break;
                         case "5":
                             nineAndTwo.B2skillid = targets[i].skillId;
-                            nineAndTwo.B2level = int.Parse(targets[i].level);
+                            nineAndTwo.B2level = targets[i].GetLevel();
                         break;
                         case "6":
                             nineAndTwo.B3skillid = targets[i].skillId;
-                            nineAndTwo.B3level = int.Parse(targets[i].level);
+                            nineAndTwo.B3level = targets[i].GetLevel();
                         break;
                         case "7":
                             nineAndTwo.C1skillid = targets[i].skillId;
-                            nineAndTwo.C1level = int.Parse(targets[i].level);
+                            nineAndTwo.C1level = targets[i].GetLevel();
                         break;
                         case "8":
                             nineAndTwo.C2skillid = targets[i].skillId;
-                            nineAndTwo.C2level = int.Parse(targets[i].level);
+                            nineAndTwo.C2level = targets[i].GetLevel();
                         break;
                         case "9":
                             nineAndTwo.C3skillid = targets[i].skillId;
-                            nineAndTwo.C3level = int.Parse(targets[i].level);
+                            nineAndTwo.C3level = targets[i].GetLevel();
                         break;
                     }
                 }

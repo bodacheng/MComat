@@ -21,70 +21,87 @@ public class FightOverControl : MonoBehaviour {
     public GameObject lose_textanimation;
     public Button TryAgain;
     public Button ReturnToMainMenuLose;
+
+    [Header("NineForShow")]
+    public RectTransform NinesT;
+    public NineForShow NineForShowPretab;
     
     [Header("Rewards")]
     public RectTransform RewardsTransform;
     public Text goldrewards;
     public Text diamondrewards;
 
-    public ReactiveProperty<bool> canGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
-    
-    UnityEngine.Events.UnityAction returnToMainMenu = () =>
+    public ReactiveProperty<bool> CanGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
+
+    readonly UnityEngine.Events.UnityAction ReturnToMainMenu = () =>
     {
         SceneManager.LoadScene(1);
     };
 
     //重新开战意味着所有资源重新加载？
-    UnityEngine.Events.UnityAction restartGame = () =>
+    readonly UnityEngine.Events.UnityAction RestartGame = () =>
     {
         SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
     };
-
+    
+    public IEnumerator ShowSKillSets(List<CharDataInfo> TeamMembers)
+    {
+        for (int i = 0; i < TeamMembers.Count; i++)
+        {
+            NineForShow nineForShow = Instantiate(NineForShowPretab);
+            yield return nineForShow.ShowStones(TeamMembers[i]._NineAndTwo);
+            nineForShow.gameObject.SetActive(true);
+            nineForShow.transform.SetParent(NinesT);
+            nineForShow.transform.localPosition = Vector3.zero;
+            nineForShow.transform.localScale = Vector3.one;
+        }
+    }
+    
     public IEnumerator WINProcess()
     {
-        canGotoSummary.Value = false;
+        CanGotoSummary.Value = false;
         FightOverCanvas.gameObject.SetActive(true);
         PlayAgain.onClick.RemoveAllListeners();
-        PlayAgain.onClick.AddListener(restartGame);
+        PlayAgain.onClick.AddListener(RestartGame);
         ReturnToMainMenuWin.onClick.RemoveAllListeners();
-        ReturnToMainMenuWin.onClick.AddListener(returnToMainMenu);
-
+        ReturnToMainMenuWin.onClick.AddListener(ReturnToMainMenu);
+        
         LoseRectTransform.gameObject.SetActive(false);
         WinRectTransform.gameObject.SetActive(true);
-
+        
         win_textanimation.transform.position = _CameraManager.transform.position + _CameraManager.transform.forward * 5f;
         win_textanimation.transform.rotation = _CameraManager.transform.rotation;
         win_textanimation.transform.SetParent( _CameraManager.transform);
         win_textanimation.gameObject.SetActive(true);
         
         yield return new WaitForSeconds(2f);
-        canGotoSummary.Value = true;
+        CanGotoSummary.Value = true;
         yield break;
     }
-
+    
     public IEnumerator LoseProcess()
     {
-        canGotoSummary.Value = false;
+        CanGotoSummary.Value = false;
         FightOverCanvas.gameObject.SetActive(true);
         TryAgain.onClick.RemoveAllListeners();
-        TryAgain.onClick.AddListener(restartGame);
+        TryAgain.onClick.AddListener(RestartGame);
         ReturnToMainMenuLose.onClick.RemoveAllListeners();
-        ReturnToMainMenuLose.onClick.AddListener(returnToMainMenu);
-
+        ReturnToMainMenuLose.onClick.AddListener(ReturnToMainMenu);
+        
         WinRectTransform.gameObject.SetActive(false);
         LoseRectTransform.gameObject.SetActive(true);
-
+        
         lose_textanimation.transform.position = _CameraManager.transform.position + _CameraManager.transform.forward * 5f;
         lose_textanimation.transform.rotation = _CameraManager.transform.rotation;
         lose_textanimation.transform.SetParent( _CameraManager.transform);
         lose_textanimation.gameObject.SetActive(true);
-
+        
         yield return new WaitForSeconds(2f);
-        canGotoSummary.Value = true;
+        CanGotoSummary.Value = true;
         yield break;
     }
 
-    public IEnumerator showRewards(int golds,int diamond,List<int> skillstones)
+    public IEnumerator ShowRewards(int golds,int diamond)
     {
         goldrewards.text = golds.ToString();
         diamondrewards.text = diamond.ToString();

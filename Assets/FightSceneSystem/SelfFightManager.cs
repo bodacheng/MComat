@@ -52,7 +52,7 @@ namespace mainMenu
 
         void Start()
         {
-            HPinput.text = "500";
+            HPinput.text = "0";
             stage = new StageScriptableObject
             {
                 BattleGroundID = 2

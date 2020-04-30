@@ -50,7 +50,7 @@ public class SSLevelUpManager : MonoBehaviour
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
-        selectedTargetLevel = focusingSSD.GetSTTarget().level != null ? int.Parse(focusingSSD.GetSTTarget().level) : 1;
+        selectedTargetLevel = focusingSSD.GetSTTarget().GetLevel();
     }
     #endregion
 
@@ -80,7 +80,7 @@ public class SSLevelUpManager : MonoBehaviour
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
-        currentlevel = focusingSSD.GetSTTarget().level != null ? int.Parse(focusingSSD.GetSTTarget().level) : 1;
+        currentlevel = focusingSSD.GetSTTarget().GetLevel();
         if (IfCanLevelUp(selectedTargetLevel, focusingSSD.GetSTTarget()))
         {
             plusLevel.gameObject.SetActive(true);
@@ -103,7 +103,7 @@ public class SSLevelUpManager : MonoBehaviour
     
     bool IfCanLevelUp(int tartgetlevel, SkillStoneOfPlayerInfoModel currentStone)
     {
-        int current_level = currentStone.level != null ? int.Parse(currentStone.level) : 1;
+        int current_level = currentStone.GetLevel();
         Debug.Log("Current Level:" + current_level + ", Targetlevel : " + tartgetlevel);
         return AccountSet.Instance._PlayerAccountInfo.Coin > (tartgetlevel - current_level);
     }

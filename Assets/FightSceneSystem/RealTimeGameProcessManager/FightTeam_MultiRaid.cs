@@ -53,7 +53,7 @@ public class FightTeam_MultiRaid : FightTeam
     
     public override void Clear()
     {
-        datacenterCharIconDic.Clear();
+        CharIconDic.Clear();
         multiRaidHitComboDic.Clear();
     }
     
@@ -146,7 +146,7 @@ public class FightTeam_MultiRaid : FightTeam
                 _SideCharIcon.transform.SetParent(_targetCanvas.transform);
                 _SideCharIcon.transform.localScale = Vector3.one;
             }
-            datacenterCharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
+            CharIconDic.Add(new KeyValuePair<Data_Center, SideCharIcon>(a_char, _SideCharIcon));
             multiRaidHitComboDic.Add(new KeyValuePair<Data_Center, Text>(a_char, hitCombo));
             _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
         }

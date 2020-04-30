@@ -67,7 +67,7 @@ namespace mainMenu
                     SkillStoneOfPlayerInfoModel myStone1 = MySkillStonesReader.Get(targets[j]);
                     SkillStoneOfPlayerInfoModel myStone2 = MySkillStonesReader.Get(targets[j+1]);
                     
-                    if (order == 1 ? int.Parse(myStone1.level) > int.Parse(myStone2.level) : int.Parse(myStone1.level) < int.Parse(myStone2.level))
+                    if (order == 1 ? myStone1.GetLevel() > myStone2.GetLevel() : myStone1.GetLevel() < myStone2.GetLevel())
                     {
                         string temp = targets[j];
                         targets[j] = targets[j + 1];

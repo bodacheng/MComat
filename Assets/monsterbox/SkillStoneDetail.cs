@@ -39,8 +39,8 @@ namespace mainMenu
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
             ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
             currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
-            skill_level_levelup.text = "LV:" + (currentstone.level ?? "1");
-            skill_level_info.text = "LV:" + (currentstone.level ?? "1");
+            skill_level_levelup.text = "LV:" + currentstone.GetLevel();
+            skill_level_info.text = "LV:" + currentstone.GetLevel();
         }
         
         // 技能画面展示用
