@@ -91,7 +91,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 90,punchcombination,human,1,10,GR,0,0.2,5,,1
 91,punchheavy,human,1,10,GR,0,0.2,5,,1
 92,punchrightstraight,human,1,10,GR,0,0.2,5,,1
-93,punchrightuppercut,human,1,10,GR,0,0.2,5,,1
+93,punchrightuppercut,human,1,10,GR,1,0.2,5,,1
 94,risingp,human,1,10,GR,0,0.2,5,,1
 95,rotatefoward_d3,human,1,10,GR,0,0.2,5,,1
 96,rotateleg,human,1,10,GR,0,0.2,5,,1
@@ -102,7 +102,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 101,smashground_foward,human,1,10,GR,0,0.2,5,,1
 102,spinningflarekick,human,1,10,GR,0,0.2,5,,1
 103,stab,human,1,10,GR,0,0.2,5,,1
-104,stormbeamimpact,human,1,10,GR,0,0.2,5,,1
+104,landkick,human,1,10,GR,0,0.2,5,,1
 105,switchkick,human,1,10,GR,0,0.2,5,,1
 106,turning_leg_strike,human,1,10,GR,0,0.2,5,,1
 107,upanddown,human,1,10,GR,0,0.2,5,,1

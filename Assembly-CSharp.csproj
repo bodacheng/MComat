@@ -503,6 +503,7 @@
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicLightFade.cs" />
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicLightFlicker.cs" />
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicRotation.cs" />
+    <Compile Include="Assets\RewardManager\RewardManager.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManager.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManagerGUI.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\SKillAnalyzer.cs" />

@@ -105525,7 +105525,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.18333334
+  - time: 0.16666667
     functionName: EffectOnBodyPart
     data: right_hand
     objectReferenceParameter: {fileID: 0}
@@ -105567,7 +105567,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7
+  - time: 0.65
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
