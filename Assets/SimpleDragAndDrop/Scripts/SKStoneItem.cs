@@ -6,7 +6,7 @@ using Skill;
 /// <summary>
 /// Drag and Drop item.
 /// </summary>
-public class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	public static SKStoneItem draggedItem;                                      // Item that is dragged now
 	public static GameObject icon;                                                  // Icon of dragged item

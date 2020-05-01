@@ -44,8 +44,8 @@ namespace Api.Dto.Model {
         {
             return ExpToLevel(float.Parse(exp));
         }
-              
-        int ExpToLevel(float Exp)
+        
+        public static int ExpToLevel(float Exp)
         {
             return (int)((Exp / 10) + 1);
         }

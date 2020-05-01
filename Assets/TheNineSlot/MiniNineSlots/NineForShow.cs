@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
 
-public class NineForShow : MonoBehaviour
+public partial class NineForShow : MonoBehaviour
 {
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
     
@@ -38,7 +38,12 @@ public class NineForShow : MonoBehaviour
         SKStoneItem C1S = getC1.Current != null ? (SKStoneItem)getC1.Current : null;
         SKStoneItem C2S = getC2.Current != null ? (SKStoneItem)getC2.Current : null;
         SKStoneItem C3S = getC3.Current != null ? (SKStoneItem)getC3.Current : null;
+
+        Parent(A1S,A2S,A3S,B1S,B2S,B3S,C1S,C2S,C3S);
+    }
         
+    void Parent(SKStoneItem A1S, SKStoneItem A2S, SKStoneItem A3S, SKStoneItem B1S, SKStoneItem B2S, SKStoneItem B3S, SKStoneItem C1S, SKStoneItem C2S, SKStoneItem C3S)
+    {
         if (A1S != null)
         {
             A1S.transform.SetParent(A1T.transform);

@@ -1,5 +1,8 @@
 ﻿using UniRx;
 using System.Linq;
+using System.Collections.Generic;
+using Api.Dto.Model;
+using dataAccess;
 
 public class FightOverProcess : NagareProcess
 {
@@ -24,6 +27,16 @@ public class FightOverProcess : NagareProcess
                 break;
         }
         mainProcessRunner.Run(fightOverControl.ShowSKillSets(_RealTimeGameProcessManager.FightTeam1.CharDataInfoRef.Values.ToList()));//这里是要根据情况的。。
+        foreach (CharDataInfo charDataInfo in _RealTimeGameProcessManager.FightTeam1.CharDataInfoRef.Values)
+        {
+            List<string> mystoneids = new List<string>();
+            List<SkillStoneOfPlayerInfoModel> mystones = MySkillStonesReader.GetMonsterEquipingStones(charDataInfo.monsterOfPlayerId);
+            for (int i = 0; i < mystones.Count; i++)
+            {
+                mystoneids.Add(mystones[i].skillStoneOfPlayerId);
+            }
+            mainProcessRunner.Run(RewardManager.ExpUpForStones(mystoneids, 1000f));
+        }
     }
     
     public override void ProcessEnd()

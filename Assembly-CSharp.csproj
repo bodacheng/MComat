@@ -524,6 +524,7 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_OnDrop.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
@@ -558,6 +559,7 @@
     <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
     <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
+    <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_ByAcc.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />

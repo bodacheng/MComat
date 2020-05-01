@@ -9,19 +9,19 @@ public class FightOverControl : MonoBehaviour {
 
     public Canvas FightOverCanvas;
     public CameraManager _CameraManager;
-
+    
     [Header("WIN")]
     public RectTransform WinRectTransform;
     public GameObject win_textanimation;
     public Button PlayAgain;
     public Button ReturnToMainMenuWin;
-
+    
     [Header("LOSE")]
     public RectTransform LoseRectTransform;
     public GameObject lose_textanimation;
     public Button TryAgain;
     public Button ReturnToMainMenuLose;
-
+    
     [Header("NineForShow")]
     public RectTransform NinesT;
     public NineForShow NineForShowPretab;
@@ -32,12 +32,12 @@ public class FightOverControl : MonoBehaviour {
     public Text diamondrewards;
 
     public ReactiveProperty<bool> CanGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
-
+    
     readonly UnityEngine.Events.UnityAction ReturnToMainMenu = () =>
     {
         SceneManager.LoadScene(1);
     };
-
+    
     //重新开战意味着所有资源重新加载？
     readonly UnityEngine.Events.UnityAction RestartGame = () =>
     {
@@ -49,7 +49,7 @@ public class FightOverControl : MonoBehaviour {
         for (int i = 0; i < TeamMembers.Count; i++)
         {
             NineForShow nineForShow = Instantiate(NineForShowPretab);
-            yield return nineForShow.ShowStones(TeamMembers[i]._NineAndTwo);
+            yield return nineForShow.ShowStones_Acc(TeamMembers[i].monsterOfPlayerId);
             nineForShow.gameObject.SetActive(true);
             nineForShow.transform.SetParent(NinesT);
             nineForShow.transform.localPosition = Vector3.zero;
@@ -74,7 +74,7 @@ public class FightOverControl : MonoBehaviour {
         win_textanimation.transform.SetParent( _CameraManager.transform);
         win_textanimation.gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         CanGotoSummary.Value = true;
         yield break;
     }
@@ -96,11 +96,11 @@ public class FightOverControl : MonoBehaviour {
         lose_textanimation.transform.SetParent( _CameraManager.transform);
         lose_textanimation.gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         CanGotoSummary.Value = true;
         yield break;
     }
-
+    
     public IEnumerator ShowRewards(int golds,int diamond)
     {
         goldrewards.text = golds.ToString();
