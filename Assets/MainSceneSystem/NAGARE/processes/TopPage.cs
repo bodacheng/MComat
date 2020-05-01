@@ -23,10 +23,10 @@ public class TopPage : MainSceneProcess
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-
+        
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        _CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
-        _CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
+        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
+        _CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
 
         yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);

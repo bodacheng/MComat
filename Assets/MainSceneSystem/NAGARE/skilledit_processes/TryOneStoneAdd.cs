@@ -39,8 +39,8 @@ public class TryOneStoneAdd : MainSceneProcess
         TheNineSlot.Instance.C3DragAndDropCell.gameObject.SetActive(false);
         TheNineSlot.Instance.ConfirmSkillChangeButton.gameObject.SetActive(false);
 
-        this._CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
-        this._CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
+        this._CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
+        this._CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;
         
         // 表现系
         CharConfig _CharacterResourceInfo = MonstersConfigTable.GetCharConfig(MemberDetail.target.focusingCharDataInfo.monsterId);

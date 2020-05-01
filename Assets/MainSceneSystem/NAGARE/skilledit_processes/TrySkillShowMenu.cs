@@ -24,8 +24,8 @@ public class TrySkillShowMenu : MainSceneProcess
         //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
         MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
-        this._CameraManager.Assign_StartToEndModeCamera(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
-        this._CameraManager.current_Camera_Mode.target = MemberDetail.target.MemDetailTargetPos;
+        this._CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
+        this._CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;
         yield break;     
     }
     

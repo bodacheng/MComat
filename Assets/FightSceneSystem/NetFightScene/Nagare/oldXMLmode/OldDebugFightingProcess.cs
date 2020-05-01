@@ -21,8 +21,8 @@ public class OldDebugFightingProcess : NagareProcess
     public override void ProcessEnter()
     {
         this.BoundaryControllByGod.AllMembers.Clear();
-        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.teamMembers.values);
-        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.teamMembers.values);
+        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
+        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
         
         if (debugManager.debugMode == DebugMode.ab_mode)
         {
@@ -152,7 +152,7 @@ public class OldDebugFightingProcess : NagareProcess
         if (_finalSurviver != null)
         {
             watch.Add(_finalSurviver.gameObject.transform);
-            _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, watch);
+            _NetFightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watch);
         }
         yield return new WaitForSeconds(2f);
 

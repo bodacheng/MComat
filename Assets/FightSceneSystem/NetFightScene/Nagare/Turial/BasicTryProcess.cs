@@ -54,8 +54,8 @@ public class BasicTryProcess : NagareProcess
     public IEnumerator enterProcess()
     {
         this.BoundaryControllByGod.AllMembers.Clear();
-        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.teamMembers.values);
-        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.teamMembers.values);
+        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
+        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
         this.BoundaryControllByGod.AllMembers = AllMembers;
         TeamDeadMemberDictionary.Clear();
         
@@ -104,7 +104,7 @@ public class BasicTryProcess : NagareProcess
     {
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        mainProcessRunner.Run(finalMoment(finalSurviver, loser));
+        mainProcessRunner.Run(FinalMoment(finalSurviver, loser));
     }
     
     public override void LocalUpdate()
@@ -152,22 +152,22 @@ public class BasicTryProcess : NagareProcess
 
         if (RealTimeGameProcessManager.focusingChar != null)
         {
-            _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, watchetargets);
-            _NetFightScene._CameraManager.current_Camera_Mode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
+            _NetFightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
+            _NetFightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
         }
         
         this.TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);
-        loser = getDeadTeamLocalGame(TeamDeadMemberDictionary);
+        loser = GetDeadTeamLocalGame(TeamDeadMemberDictionary);
     }
 
-    IEnumerator finalMoment(Data_Center _finalSurviver,Team _loser)
+    IEnumerator FinalMoment(Data_Center _finalSurviver,Team _loser)
     {
         Time.timeScale = 0.4f;
         watchetargets.Clear();
         if (_finalSurviver != null)
         {
             watchetargets.Add(_finalSurviver.gameObject.transform);
-            _NetFightScene._CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, watchetargets);
+            _NetFightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
         }
         yield return new WaitForSeconds(2f);
 
@@ -211,7 +211,7 @@ public class BasicTryProcess : NagareProcess
         return TeamDeadMemberDictionary;
     }
     
-    public Team getDeadTeamLocalGame(IDictionary<Team, List<Data_Center>> deadMemberDic)
+    public Team GetDeadTeamLocalGame(IDictionary<Team, List<Data_Center>> deadMemberDic)
     {
         List<Team> AllDieList = new List<Team>();
 

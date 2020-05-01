@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using mainMenu;
 
-public class GotchaProcess : MainSceneProcess
+public class GachaProcess : MainSceneProcess
 {
-    //enterProcess()绝不能出现triggerMainProcess
     public IEnumerator EnterProcess()
     {
+        BackGroundPS.target.Off();
+        _CameraManager.Assign_Camera(C_Mode.NULL, null);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
-        yield break;
+        PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
+        yield return GachaManager.target.Process();
     }
     
-    public GotchaProcess()
+    public GachaProcess()
     {
         thisProcessStep = MainSceneStep.Gotcha;
         EelementsInherit(PreScene.Instance);

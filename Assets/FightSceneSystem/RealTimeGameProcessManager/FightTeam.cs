@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FightTeam : MonoBehaviour
 {
     public TeamMode TeamMode;
-    public MultiDictionary<int, int, Data_Center> teamMembers = new MultiDictionary<int, int, Data_Center>();
+    public MultiDictionary<int, int, Data_Center> TeamMembers = new MultiDictionary<int, int, Data_Center>();
     public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
     public TeamConfig teamConfig;
     public RectTransform sideIconsContainer;
@@ -34,8 +34,8 @@ public class FightTeam : MonoBehaviour
                 yield return char_DC;
                 Data_Center data_Center = (Data_Center)char_DC.Current;
                 data_Center.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(_one._NineAndTwo.SkillEntityList()));
-                teamMembers.Set(keys.Key,key,data_Center);
-                CharDataInfoRef.Add(teamMembers.Get(keys.Key,key),_one);
+                TeamMembers.Set(keys.Key,key,data_Center);
+                CharDataInfoRef.Add(TeamMembers.Get(keys.Key,key),_one);
             }
         }
     }
@@ -53,7 +53,7 @@ public class FightTeam : MonoBehaviour
     protected SideCharIcon _tempSI;
     public void BarsPositionUpdate()
     {
-        foreach(Data_Center _one in teamMembers.values)
+        foreach(Data_Center _one in TeamMembers.values)
         {
             CharIconDic.TryGetValue(_one,out _tempSI);
             _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f),Time.deltaTime * 20f);
@@ -98,7 +98,7 @@ public class FightTeam : MonoBehaviour
     //这个刷新是倾向于画面制御
     public virtual void Refresh()
     {
-        foreach (Data_Center _datacenter in teamMembers.values)
+        foreach (Data_Center _datacenter in TeamMembers.values)
         {
             CharIconDic.TryGetValue(_datacenter, out _tempSI);
             if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
@@ -120,7 +120,7 @@ public class FightTeam : MonoBehaviour
 
     public bool IfAllCharsPreparedForBattle()
     {
-        foreach (Data_Center oneMember in teamMembers.values)
+        foreach (Data_Center oneMember in TeamMembers.values)
         {
             if (!oneMember.IfPreparedForBattle())
                 return false;
@@ -130,7 +130,7 @@ public class FightTeam : MonoBehaviour
     
     public void LetAllCharactersStartOff()
     {
-        foreach (Data_Center oneMember in teamMembers.values)
+        foreach (Data_Center oneMember in TeamMembers.values)
         {
             oneMember._MyBehaviorRunner.ChangeToWaitingState();
         }

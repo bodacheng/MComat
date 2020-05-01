@@ -105,7 +105,7 @@ namespace mainMenu
             TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
-            GotchaProcess gotchaProcess = new GotchaProcess();
+            GachaProcess gotchaProcess = new GachaProcess();
             ArenaProcess areanaProcess = new ArenaProcess();
             
             ProcessesRunner.Instance.Clear();
@@ -166,23 +166,24 @@ namespace mainMenu
             }
             LoadingCanvas.target.LightUp();
             
-            if (ReturnButtonManager.returnMissionList.Count > 0)
+            if (ReturnButtonManager.ReturnMissionList.Count > 0)
             {
                 ReturnButtonManager.AddFeatureToReturnButton();
-                ReturnButtonManager.POP(); //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
+                //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
+                ReturnButtonManager.POP();
             }else{
                 // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
                 switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
                 {
                     case PlayerAccountProgressStep.Freedom:
                         trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
-                        break;
+                    break;
                     case PlayerAccountProgressStep.justCreated:
                         trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
-                        break;
+                    break;
                     case PlayerAccountProgressStep.Tutorial:
                         trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
-                        break;
+                    break;
                 }
             }            
         }
@@ -196,7 +197,7 @@ namespace mainMenu
         {
             LoadingCanvas.target.ArrangeValiationWindow(delegate { LoadFight(stage); }, "开打？");
         }
-
+        
         public void LoadFight(StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
         {
             FightSceneNote.Instance.nextBattle = stage;

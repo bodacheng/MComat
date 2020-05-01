@@ -11,7 +11,7 @@ public class FightTeam_MultiRaid : FightTeam
     public override void Refresh()
     {
         base.Refresh();
-        foreach (Data_Center _datacenter in teamMembers.values)
+        foreach (Data_Center _datacenter in TeamMembers.values)
         {
             if (multiRaidHitComboDic.ContainsKey(_datacenter))
             {
@@ -63,7 +63,7 @@ public class FightTeam_MultiRaid : FightTeam
 
     protected override void TeamsFightInitialize(float extraHP)
     {
-        foreach (Data_Center a_char in teamMembers.values)
+        foreach (Data_Center a_char in TeamMembers.values)
         {
             a_char.FightDataRef.CurrentHp.Value += extraHP;
             float maxHp = a_char.FightDataRef.CurrentHp.Value;
@@ -117,7 +117,7 @@ public class FightTeam_MultiRaid : FightTeam
     {
         SideCharIcon _SideCharIcon;
         Text hitCombo;
-        foreach(Data_Center a_char in teamMembers.values)
+        foreach(Data_Center a_char in TeamMembers.values)
         {
             hitCombo = Instantiate(HitCombo);
             hitCombo.name = a_char.WholeT.name + "HitCombo";

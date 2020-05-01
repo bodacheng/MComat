@@ -24,6 +24,11 @@ public class BackGroundPS : MonoBehaviour
         SwitchBG(playingNum);
     }
     
+    public void Off()
+    {
+        SwitchBG(-1);
+    }
+    
     public void ChangeBGByZokusei(Zokusei _zokusei)
     {
         switch (_zokusei)

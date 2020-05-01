@@ -136,16 +136,16 @@ public class NetFightScene : MonoBehaviour {
         yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.team1_ExtraHP);
         yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.team2_ExtraHP);
         
-        _RealTimeGameProcessManager.FightTeam1.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam1.teamMembers);
-        _RealTimeGameProcessManager.FightTeam2.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam2.teamMembers);
+        _RealTimeGameProcessManager.FightTeam1.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam1.TeamMembers);
+        _RealTimeGameProcessManager.FightTeam2.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam2.TeamMembers);
 
         switch (RealTimeGameProcessManager.playerTeam)
         {
             case Team.player1:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0],false);
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.TeamMembers.values[0],false);
                 break;
             case Team.player2:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0],false);
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.TeamMembers.values[0],false);
                 break;
         }
                 
@@ -160,10 +160,10 @@ public class NetFightScene : MonoBehaviour {
         switch (RealTimeGameProcessManager.playerTeam)
         {
             case Team.player1:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.teamMembers.values[0], false);
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.TeamMembers.values[0], false);
                 break;
             case Team.player2:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.teamMembers.values[0], false);
+                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.TeamMembers.values[0], false);
                 break;
         }
         _RealTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
@@ -173,7 +173,7 @@ public class NetFightScene : MonoBehaviour {
     public void returnToFront()
     {
         //Position_Set_Executor.Instance.P_sets.Clear();
-        List<Data_Center> player1 = _RealTimeGameProcessManager.FightTeam1.teamMembers.values;
+        List<Data_Center> player1 = _RealTimeGameProcessManager.FightTeam1.TeamMembers.values;
         List<string> dontdestroy = new List<string>();
 
         List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
@@ -191,7 +191,7 @@ public class NetFightScene : MonoBehaviour {
             }
         }
         
-        List<Data_Center> player2 = _RealTimeGameProcessManager.FightTeam2.teamMembers.values;
+        List<Data_Center> player2 = _RealTimeGameProcessManager.FightTeam2.TeamMembers.values;
         for (int i = 0; i < player2.Count; i++)
         {
             if (player2[i] != null)

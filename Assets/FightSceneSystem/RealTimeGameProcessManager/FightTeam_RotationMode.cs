@@ -96,7 +96,7 @@ public class FightTeam_RotationMode : FightTeam
     
     protected override void TeamsFightInitialize(float extraHP)
     {
-        foreach (Data_Center a_char in teamMembers.values)
+        foreach (Data_Center a_char in TeamMembers.values)
         {
             a_char.FightDataRef.CurrentHp.Value += extraHP;
             float maxHp = a_char.FightDataRef.CurrentHp.Value;
@@ -120,12 +120,12 @@ public class FightTeam_RotationMode : FightTeam
     
     void WaitToTriggerMemberChange()
     {
-        for (int i = 0; i < teamMembers.values.Count; i++)
+        for (int i = 0; i < TeamMembers.values.Count; i++)
         {
-            if (RefreshTimeDic[teamMembers.values[i]] > 0)
+            if (RefreshTimeDic[TeamMembers.values[i]] > 0)
             {
-                RefreshTimeDic[teamMembers.values[i]] -= Time.deltaTime; // 角色切换倒计时;
-                CharIconDic[teamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[teamMembers.values[i]]/10);
+                RefreshTimeDic[TeamMembers.values[i]] -= Time.deltaTime; // 角色切换倒计时;
+                CharIconDic[TeamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[TeamMembers.values[i]]/10);
             }
         }
         
@@ -170,7 +170,7 @@ public class FightTeam_RotationMode : FightTeam
     protected override void InstantiateCharsIconsAndFloatHPBar()//这个环节应该能够同时把HP bar也适配好。
     {
         SideCharIcon _SideCharIcon;    
-        foreach(Data_Center a_char in teamMembers.values)
+        foreach(Data_Center a_char in TeamMembers.values)
         {
             if (!RefreshTimeDic.ContainsKey(a_char))
             {
@@ -221,23 +221,23 @@ public class FightTeam_RotationMode : FightTeam
         time_counter += Time.deltaTime;
         if (RotationMode_fightingMember != null && RotationMode_fightingMember.IsDead.Value)
         {
-            if (teamMembers.values.Count > 0)
+            if (TeamMembers.values.Count > 0)
             {
-                for (int i = 0; i < teamMembers.values.Count; i++)
+                for (int i = 0; i < TeamMembers.values.Count; i++)
                 {
-                    ReadyForNextMemberOnTheShow(teamMembers.values[i]);
+                    ReadyForNextMemberOnTheShow(TeamMembers.values[i]);
                 }
             }
         }
         if (time_counter > 6f)
         {
-            if (teamMembers.values.Count > 0)
+            if (TeamMembers.values.Count > 0)
             {
-                for (int i = 0; i < teamMembers.values.Count; i++)
+                for (int i = 0; i < TeamMembers.values.Count; i++)
                 {
-                    if (RefreshTimeDic[teamMembers.values[i]] <= 0)
+                    if (RefreshTimeDic[TeamMembers.values[i]] <= 0)
                     {
-                        ReadyForNextMemberOnTheShow(teamMembers.values[i]);
+                        ReadyForNextMemberOnTheShow(TeamMembers.values[i]);
                     }
                     time_counter = 0f;
                 }
@@ -248,7 +248,7 @@ public class FightTeam_RotationMode : FightTeam
     
     public bool ChangeFightingMember(Data_Center _changeTo)
     {
-        if (!(teamMembers.values.Count > 1) || RotationMode_fightingMember == _changeTo)
+        if (!(TeamMembers.values.Count > 1) || RotationMode_fightingMember == _changeTo)
         {
             return false;
         }
@@ -262,7 +262,7 @@ public class FightTeam_RotationMode : FightTeam
         {
             targetposition = RotationMode_fightingMember.transform.position;
         }
-        foreach (Data_Center data_Center in teamMembers.values)
+        foreach (Data_Center data_Center in TeamMembers.values)
         {
             if (_changeTo == data_Center)
             {
@@ -302,7 +302,7 @@ public class FightTeam_RotationMode : FightTeam
                 }
             }
         }
-        foreach (Data_Center data_Center in teamMembers.values)
+        foreach (Data_Center data_Center in TeamMembers.values)
         {
             if (!data_Center.IsDead.Value)
             {
@@ -318,7 +318,7 @@ public class FightTeam_RotationMode : FightTeam
     public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo,Transform IniStandPoint)
     {
         bool memberchanged = false;
-        foreach (Data_Center data_Center in teamMembers.values)
+        foreach (Data_Center data_Center in TeamMembers.values)
         {
             if (_changeTo == data_Center)
             {

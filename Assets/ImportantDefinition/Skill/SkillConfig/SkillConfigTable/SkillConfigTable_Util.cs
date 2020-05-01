@@ -1,10 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System;
-using System.IO;
-using System.Linq;
-using System.Text;
 using Skill;
 
 public partial class SkillConfigTable

@@ -9,8 +9,8 @@ namespace mainMenu
     {
         public Button ReturnButton;
         static Button ToUseReturnButton;
-        static UnityEvent unityEvent = new UnityEvent();
-        public static readonly List<UnityAction> returnMissionList = new List<UnityAction>();
+        static UnityEvent UnityEvent = new UnityEvent();
+        public static readonly List<UnityAction> ReturnMissionList = new List<UnityAction>();
         
         void Awake()
         {
@@ -19,13 +19,13 @@ namespace mainMenu
         
         public static void POP()
         {
-            if (returnMissionList.Count == 0)
+            if (ReturnMissionList.Count == 0)
                 return;
-            unityEvent.RemoveAllListeners();
-            unityEvent.AddListener(returnMissionList[returnMissionList.Count - 1]);
-            unityEvent.Invoke();
-            returnMissionList.RemoveAt(returnMissionList.Count - 1);
-            if (returnMissionList.Count == 0)
+            UnityEvent.RemoveAllListeners();
+            UnityEvent.AddListener(ReturnMissionList[ReturnMissionList.Count - 1]);
+            UnityEvent.Invoke();
+            ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
+            if (ReturnMissionList.Count == 0)
             {
                 ToUseReturnButton.gameObject.SetActive(false);
             }else{
@@ -42,14 +42,14 @@ namespace mainMenu
 
         public static void PUSH(UnityAction onemission)
         {
-            returnMissionList.Add(onemission);
+            ReturnMissionList.Add(onemission);
             AddFeatureToReturnButton();
         }
         
         public void Clear()
         {
             ReturnButton.gameObject.SetActive(false);
-            returnMissionList.Clear();
+            ReturnMissionList.Clear();
         }
     }
 }

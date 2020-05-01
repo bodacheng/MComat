@@ -6,26 +6,26 @@ using UnityEngine.UI;
 public class RealTimeGameProcessManager : MonoBehaviour
 {
     [Header("Basic Element")]
-	public CameraManager _CameraManager;
-	public MobileInputsManager _mobileInputsManager;
+    public CameraManager _CameraManager;
+    public MobileInputsManager _mobileInputsManager;
     
     [Header("Watch Mode")]
     [Space(6)]
     public Button WatchModeButton;
-        
+    
     [Header("Auto BUtton")]
     [Space(6)]
     public Button autoBUtton;
     public Image _C_button;
     public Image _AI_button;
-    
+
     public FightTeam FightTeam1, FightTeam2;
     public FightTeam_MultiRaid FightTeam1_multi, FightTeam2_multi;
     public FightTeam_RotationMode FightTeam1_rotation, FightTeam2_rotation;
-    
+
     public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
     public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
-    
+
     public static bool Auto;
     public static Data_Center focusingChar;
     public static Team playerTeam = Team.player1;
@@ -98,15 +98,15 @@ public class RealTimeGameProcessManager : MonoBehaviour
         {
             if (team == Team.player1)
             {
-                _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam2.TeamMemberTransforms());
+                _CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, FightTeam2.TeamMemberTransforms());
             }
             else
             {
-                _CameraManager.Assign_Camera(Camera_Mode_Num.CertainYAntiVibrationCamera, FightTeam1.TeamMemberTransforms());
+                _CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, FightTeam1.TeamMemberTransforms());
             }
-            _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);
+            _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
         }else{
-            _CameraManager.Assign_Camera(Camera_Mode_Num.TopDown,null);
+            _CameraManager.Assign_Camera(C_Mode.TopDown,null);
         }
     }
                
@@ -125,7 +125,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
         
         if (focusingChar != null)
         {
-            _CameraManager.current_Camera_Mode.SetMeCenter(focusingChar.WholeT);//!>>!>!>!!??!
+            _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);//!>>!>!>!!??!
         }        
     }
     

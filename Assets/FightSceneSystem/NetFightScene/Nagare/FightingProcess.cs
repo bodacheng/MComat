@@ -20,8 +20,8 @@ public class FightingProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.teamMembers.values);
-        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.teamMembers.values);
+        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
+        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
 
         BoundaryControllByGod.AllMembers = AllMembers;
         fightLogger.ReadyToLog(AllMembers);

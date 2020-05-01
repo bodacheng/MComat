@@ -7,7 +7,7 @@ public class CountDownProcess : NagareProcess
         thisProcessStep = SceneStep.CountDown;
         nextProcessStep = SceneStep.none;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
-        fightTalksRunner.playersStartOff.Subscribe(x => { if (x == true) MoveToFight();});
+        fightTalksRunner.PlayersStartOff.Subscribe(x => { if (x == true) MoveToFight();});
     }
     
     public override void ProcessEnter()
