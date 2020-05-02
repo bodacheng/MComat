@@ -31,6 +31,8 @@ public class GachaProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        GachaManager.target.mainCamera.gameObject.SetActive(true);
+        GachaManager.target.Camera.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()

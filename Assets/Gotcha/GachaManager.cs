@@ -7,9 +7,10 @@ using DG.Tweening;
 public class GachaManager : MonoBehaviour
 {
     public Camera Camera;
+    public Camera mainCamera;
     public Transform SkyLightCenter;
-    public float SkySphereRadius = 1950f;
-
+    public float SkySphereRadius = 650;
+    
     public static GachaManager target;
     
     void Awake()
@@ -19,6 +20,8 @@ public class GachaManager : MonoBehaviour
     
     public IEnumerator Process()
     {
+        mainCamera.gameObject.SetActive(false);
+        Camera.gameObject.SetActive(true);
         Camera.transform.position = SkyLightCenter.position;
         Quaternion rotation = Quaternion.LookRotation(Vector3.up, Vector3.up);
         transform.rotation = rotation; //  相机面朝天
@@ -27,14 +30,14 @@ public class GachaManager : MonoBehaviour
         foreach (SkillStoneOfPlayerInfoModel stoneinfo in TenTimesGotcha)
         {
             Decompositioner Star = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", FightGlobalSetting.EffectPathDefine(Zokusei.redMagic), GetRandomStarPos(), Quaternion.identity, null);
-            Camera.transform.DORotate(Star.transform.position - Camera.transform.position,1f);
+            Camera.transform.DOLookAt(Star.transform.position,1f);
             yield return new WaitForSecondsRealtime(1f);
         }
     }
-        
+    
     Vector3 GetRandomStarPos()
     {
-        float xzDisFromCenter = Random.Range(0, SkySphereRadius / 2);
+        float xzDisFromCenter = Random.Range(0, SkySphereRadius * 2 / 3);
         Vector3 temp = SkyLightCenter.transform.position + (Vector3.forward * Random.Range(0, 100) + Vector3.right * Random.Range(0, 100)).normalized * xzDisFromCenter;
         float tempheight = Mathf.Sqrt(Mathf.Pow(SkySphereRadius, 2) - Mathf.Pow(xzDisFromCenter, 2));
         Vector3 finalPos = temp + (int)tempheight * Vector3.up;
