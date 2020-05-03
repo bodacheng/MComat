@@ -25,7 +25,7 @@ public class GachaRender : MonoBehaviour
         
         foreach (SkillStoneOfPlayerInfoModel stoneinfo in results)
         {
-            Decompositioner Star = EffectAndHurtObjectLoading.Instance.GenerateEffect("gachastar", FightGlobalSetting.EffectPathDefine(Zokusei.Null), GetRandomStarPos(), Quaternion.identity, null);
+            Decompositioner Star = EffectsManager.GenerateEffect("gachastar", FightGlobalSetting.EffectPathDefine(Zokusei.Null), GetRandomStarPos(), Quaternion.identity, null);
             Camera.transform.DOLookAt(Star.transform.position,1f);
             Star.transform.DOMoveY(-600,30f);// 星星下坠
             yield return new WaitForSecondsRealtime(1f);

@@ -47,18 +47,18 @@ public partial class BO_Ani_E : MonoBehaviour
         {
             case ResourceLoadMode.CachAB:
                 if (myMagicForwardPath != null)
-                    yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL,this.myMagicForwardPath));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", magic_path));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics","defaultmagic"));
+                    yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL,this.myMagicForwardPath));
+                yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", magic_path));
+                yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics","defaultmagic"));
             break;
             case ResourceLoadMode.Resource:
 
             break;
             case ResourceLoadMode.StreamingAssetAB:
                 if (myMagicForwardPath != null)
-                    yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets(magic_path));
-                yield return (EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets("defaultmagic"));
+                    yield return (EffectsManager.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));
+                yield return (EffectsManager.PrepareMagicFromStreamingAssets(magic_path));
+                yield return (EffectsManager.PrepareMagicFromStreamingAssets("defaultmagic"));
             break;
         }
     }
@@ -139,16 +139,16 @@ public partial class BO_Ani_E : MonoBehaviour
 		switch (e.intParameter) 
 		{
 			case 3:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
+                effect = EffectsManager.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
 			    break;
 			case 1:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
+                effect = EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
                 break;
 			case 2:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
+                effect = EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
                 break;
 			default:
-                effect = EffectAndHurtObjectLoading.Instance.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
+                effect = EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
                 break;
 		}
            

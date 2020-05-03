@@ -6,7 +6,7 @@ public class GachaAnim : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("gachastar", "defaultmagic", 3);
+        EffectsManager.IniEffectsPool("gachastar", "defaultmagic", 3);
         yield return GachaRender.target.TenGotchaAnimProcess(GachaManager.target.GetResult());
         PreScene.Instance.trySwitchToStep(MainSceneStep.GotchaResult,false);
     }

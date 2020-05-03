@@ -19,7 +19,7 @@ public class OldDebugPreparingProcess : NagareProcess
         _NetFightScene.PreparingCanvas.gameObject.SetActive(true);
         _NetFightScene.FightCanvas.gameObject.SetActive(false);
         _NetFightScene._FightOverControl.FightOverCanvas.gameObject.SetActive(false);
-        _NetFightScene.StartCoroutine(EffectAndHurtObjectLoading.Instance.PrepareMagicFromStreamingAssets("defaultmagic"));//我们姑且这样处理debug环境默认魔法问题
+        _NetFightScene.StartCoroutine(EffectsManager.PrepareMagicFromStreamingAssets("defaultmagic"));//我们姑且这样处理debug环境默认魔法问题
         debugManager.debugCharPlacer.SetActive(true);
         _NetFightScene._CameraManager.Assign_Camera(C_Mode.ApproachToCertainDis,null);//乱写的。原来的模式删除了。
         debugManager.debugModePlayerPlacementStep = 0;

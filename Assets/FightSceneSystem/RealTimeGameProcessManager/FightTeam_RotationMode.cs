@@ -274,7 +274,7 @@ public class FightTeam_RotationMode : FightTeam
                 RotationMode_fightingMember.IsDead.Subscribe( x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); }});
                 RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
                 RotationMode_fightingMember.WholeT.transform.position = targetposition;                
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
+                EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                 memberchanged = true;
             } else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");
@@ -325,8 +325,8 @@ public class FightTeam_RotationMode : FightTeam
                 RotationMode_fightingMember = _changeTo;
                 RotationMode_fightingMember.IsDead.Subscribe( x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); }});
                 RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
-                RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;                
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
+                RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
+                EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                 memberchanged = true;
             } else {
                 data_Center._MyBehaviorRunner.ChangeState("Empty");

@@ -46,7 +46,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     Resistance.Value += 1;
                     data_Center._SkillCancelFlag.turn_on_flag();
-                    EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter);
+                    EffectsManager.GenerateEffect("break_free", "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter);
                 };
                 UnityEngine.Events.UnityAction eventEnd = () =>
                 {

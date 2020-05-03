@@ -88,9 +88,9 @@ public partial class Data_Center : MonoBehaviour
                     personalEffectsPath = "defaultmagic";
                     break;
             }
-            EffectAndHurtObjectLoading.Instance.IniEffectsPool("short_effect", personalEffectsPath, 3);
-            EffectAndHurtObjectLoading.Instance.IniEffectsPool("normal_effect", personalEffectsPath, 3);
-            EffectAndHurtObjectLoading.Instance.IniEffectsPool("long_effect", personalEffectsPath, 3);
+            EffectsManager.IniEffectsPool("short_effect", personalEffectsPath, 3);
+            EffectsManager.IniEffectsPool("normal_effect", personalEffectsPath, 3);
+            EffectsManager.IniEffectsPool("long_effect", personalEffectsPath, 3);
             switch (ResourceLoadingSetting.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
@@ -100,7 +100,7 @@ public partial class Data_Center : MonoBehaviour
                     yield return (Animation_Manger.preloadBasicPersonalAnimsStreamingAssetMode(type, basicPackName));
                     break;
                 case ResourceLoadMode.Resource:
-                    yield return (Animation_Manger.preloadBasicPersonalAnimsResourceMode(type, basicPackName));
+                    yield return (Animation_Manger.PreloadBasicPersonalAnimsResourceMode(type, basicPackName));
                     break;
             }
             Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
@@ -154,13 +154,13 @@ public partial class Data_Center : MonoBehaviour
                 break;
         }
 
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("Sparks", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("light_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("light_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("heavy_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("super_hit", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("resistanceUp", effectPath, 3);
-        EffectAndHurtObjectLoading.Instance.IniEffectsPool("on_enable_effect", effectPath, 3);
+        EffectsManager.IniEffectsPool("Sparks", effectPath, 3);
+        EffectsManager.IniEffectsPool("light_hit", effectPath, 3);
+        EffectsManager.IniEffectsPool("light_hit", effectPath, 3);
+        EffectsManager.IniEffectsPool("heavy_hit", effectPath, 3);
+        EffectsManager.IniEffectsPool("super_hit", effectPath, 3);
+        EffectsManager.IniEffectsPool("resistanceUp", effectPath, 3);
+        EffectsManager.IniEffectsPool("on_enable_effect", effectPath, 3);
                    
         if (Shield != null)
         {
@@ -191,10 +191,10 @@ public partial class Data_Center : MonoBehaviour
                 yield return (Animation_Manger.PreloadPersonalAnims(ResourceLordSceneStarter.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
             break;
             case ResourceLoadMode.Resource:
-                yield return (Animation_Manger.preloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                yield return (Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
             break;
             case ResourceLoadMode.StreamingAssetAB:
-                yield return (Animation_Manger.preloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                yield return (Animation_Manger.PreloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
             break;
         }
     }

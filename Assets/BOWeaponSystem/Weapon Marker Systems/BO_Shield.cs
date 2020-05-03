@@ -95,7 +95,7 @@ public class BO_Shield : MonoBehaviour {
         {
             if (shieldBreakSpark == null)
             {
-                shieldBreakSpark = EffectAndHurtObjectLoading.Instance.IniEffectsPool("onEnableShieldSpark", personalEffectPath, 3);
+                shieldBreakSpark = EffectsManager.IniEffectsPool("onEnableShieldSpark", personalEffectPath, 3);
             }
             if (shieldBreakSpark != null)
             {
@@ -128,7 +128,7 @@ public class BO_Shield : MonoBehaviour {
     public void PassHitPointsFromWeaponToShiled(List<Vector3> _ShiledHitPositions)
     {
         if (_hitSparks == null)
-            _hitSparks = EffectAndHurtObjectLoading.Instance.IniEffectsPool("shield_hit", personalEffectPath, 3);
+            _hitSparks = EffectsManager.IniEffectsPool("shield_hit", personalEffectPath, 3);
         
         if (_hitSparks != null)
         {

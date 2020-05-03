@@ -35,16 +35,15 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     [Tooltip("Image of this cell")]
     public Image image;
     [Tooltip("Sprite color for empty cell")]
-    public Color empty = new Color();                                       // Sprite color for empty cell
+    public Color empty = new Color(); // Sprite color for empty cell
     [Tooltip("Sprite color for filled cell")]
-    public Color full = new Color();                                        // Sprite color for filled cell
+    public Color full = new Color(); // Sprite color for filled cell
     
-    SKStoneItem myDadItem;										// Item of this DaD cell
+    SKStoneItem myDadItem;
 
-    // 自定义成员
-    public SkillStoneSlot _SkillStoneSlot;//这个看起来比较古怪，目的是和这个cell对应的SkillStoneSlot形成一个互相链接。只针对9宫设置画面，和SkillStoneBox无关。
+    public SkillStoneSlot _SkillStoneSlot;
     SingleThreadProcesser _SingleThreadProcesser;
-
+    
     void Awake()
     {
         _SingleThreadProcesser = transform.GetComponent<SingleThreadProcesser>();

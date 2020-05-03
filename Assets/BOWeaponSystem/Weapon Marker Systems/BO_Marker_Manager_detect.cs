@@ -312,7 +312,7 @@ namespace HittingDetection
             if (weaponHP > 0)
             {
                 CurrentHP -= 1;
-                EffectAndHurtObjectLoading.Instance.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
+                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
             }else{
                 if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
                 {

@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class Animation_Manger : MonoBehaviour{
 
-    public IEnumerator preloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
+    public IEnumerator PreloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
     {
         List<AnimationClip> basicAnims = new List<AnimationClip>();
         string basicPackKey = animPath + "/" + basicPackName;
@@ -20,34 +20,42 @@ public partial class Animation_Manger : MonoBehaviour{
                 AnimationClip _AnimationClip = (AnimationClip)_object;
                 if (_AnimationClip.name == "rush")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "rush";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "rush",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "rushback")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "rushback";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "rushback",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "jump")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "jump";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "jump",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "getup")
                 {
-                    AnimationEvent endFlag = new AnimationEvent();
-                    endFlag.functionName = "ThisIsEndOfAnimation";
-                    endFlag.stringParameter = "getup";
-                    endFlag.time = _AnimationClip.length;
+                    AnimationEvent endFlag = new AnimationEvent
+                    {
+                        functionName = "ThisIsEndOfAnimation",
+                        stringParameter = "getup",
+                        time = _AnimationClip.length
+                    };
                     _AnimationClip.AddEvent(endFlag);
                 }
                 if (_AnimationClip.name == "block")
@@ -254,7 +262,7 @@ public partial class Animation_Manger : MonoBehaviour{
         yield break;
     }
 
-    public IEnumerator preloadPersonalAnimResourceMode(string animPath, string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnimResourceMode(string animPath, string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
         {
@@ -270,27 +278,27 @@ public partial class Animation_Manger : MonoBehaviour{
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
                                 break;
                             case 2:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
                                 break;
                             case 3:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
                                 break;
                             default:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
                                 break;
                         }
                     }
@@ -299,16 +307,16 @@ public partial class Animation_Manger : MonoBehaviour{
                         switch (e.intParameter)
                         {
                             case 0:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
                                 break;
                             case 1:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
                                 break;
                             case 2:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
                                 break;
                             default:
-                                yield return (EffectAndHurtObjectLoading.Instance.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
                                 break;
                         }
                     }
@@ -324,13 +332,13 @@ public partial class Animation_Manger : MonoBehaviour{
     }
 
     AnimationClip _clip;
-    public IEnumerator preloadPersonalAnimsResourceMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnimsResourceMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
     {
         if (toLoadSkillAnimsNames != null)
         {
             foreach (string anim_name in toLoadSkillAnimsNames)
             {
-                yield return preloadPersonalAnimResourceMode(animPath, anim_name, personalMagic, _zokusei);
+                yield return PreloadPersonalAnimResourceMode(animPath, anim_name, personalMagic, _zokusei);
             }
         }
     }

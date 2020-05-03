@@ -43,7 +43,7 @@ public class Knock_Off_State : Behavior
         _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
 
-        processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
+        processingBlood = EffectsManager.GenerateEffect("super_hit",
                                                        FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
                                                        newValue.damageHappenPoint,
                                                        newValue.CutRotation,
@@ -77,7 +77,7 @@ public class Knock_Off_State : Behavior
                 effectT.y = gameObject.transform.position.y;
                 Vector3 quaV = Vector3.zero - gameObject.transform.position.normalized;
                 quaV.y = 0;
-                EffectAndHurtObjectLoading.Instance.GenerateEffect("wallCrack",null,effectT,  Quaternion.LookRotation(quaV, Vector3.up),null);
+                EffectsManager.GenerateEffect("wallCrack",null,effectT,  Quaternion.LookRotation(quaV, Vector3.up),null);
             }
         }
         

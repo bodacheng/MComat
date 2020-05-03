@@ -137,12 +137,12 @@ namespace mainMenu
                         break;
                     case ResourceLoadMode.StreamingAssetAB:
                         yield return
-                            focusingC.Animation_Manger.preloadPersonalAnimStreamingAssetMode
+                            focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode
                             (_watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.Resource:
                         yield return
-                            focusingC.Animation_Manger.preloadPersonalAnimResourceMode
+                            focusingC.Animation_Manger.PreloadPersonalAnimResourceMode
                             (_watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                 }

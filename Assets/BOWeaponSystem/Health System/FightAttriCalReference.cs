@@ -131,7 +131,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     {
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
-            processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("shield_hit",
+            processingBlood = EffectsManager.GenerateEffect("shield_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
@@ -142,35 +142,35 @@ public partial class FightAttriCalReference : MonoBehaviour
             switch (v_Damage.from_weapon.damage_type)
             {
                 case DamageType.slight_damage_forward:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                    processingBlood = EffectsManager.GenerateEffect("light_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.light_damage_forward:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                    processingBlood = EffectsManager.GenerateEffect("light_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.heavy_damage_forward:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("heavy_hit",
+                    processingBlood = EffectsManager.GenerateEffect("heavy_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 case DamageType.supper_damage_forward:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("super_hit",
+                    processingBlood = EffectsManager.GenerateEffect("super_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,
                                                                    v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
                     break;
                 default:
-                    processingBlood = EffectAndHurtObjectLoading.Instance.GenerateEffect("light_hit",
+                    processingBlood = EffectsManager.GenerateEffect("light_hit",
                                                                    FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
                                                                    v_Damage.damageHappenPoint,
                                                                    v_Damage.CutRotation,

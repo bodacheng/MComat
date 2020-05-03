@@ -55,16 +55,16 @@ public partial class BO_Ani_E : MonoBehaviour
             switch (grade)
             {
                 case 0:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
                 case 1:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
                 case 2:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("big_blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
                 default:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
             }
                     
@@ -108,23 +108,23 @@ public partial class BO_Ani_E : MonoBehaviour
             switch (grade)
             {
                 case 1:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
                 case 2:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("big_bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("big_bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
                 case 3:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("super_bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("super_bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
                 default:
-                    Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool("bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("bullet", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
             }
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
             Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
-            EffectAndHurtObjectLoading.Instance.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null);
+            EffectsManager.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null);
             Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
             Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
@@ -155,8 +155,8 @@ public partial class BO_Ani_E : MonoBehaviour
             {
                 return;
             }
-    
-            Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(objectname, Ani_E.myMagicForwardPath, Ani_E.magic_path);
+            
+            Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool(objectname, Ani_E.myMagicForwardPath, Ani_E.magic_path);
             if (Ani_E.target_pool != null)
             {
                 Ani_E.processingHitBox = Ani_E.target_pool.Rent();
@@ -210,7 +210,7 @@ public partial class BO_Ani_E : MonoBehaviour
         {
             if (Ani_E.OnLoadMagic == null)
                 return;
-            Ani_E.target_pool = EffectAndHurtObjectLoading.Instance.GetHurtObjectPool(Ani_E.OnLoadMagic, Ani_E.myMagicForwardPath, Ani_E.magic_path);
+            Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool(Ani_E.OnLoadMagic, Ani_E.myMagicForwardPath, Ani_E.magic_path);
             if (Ani_E.target_pool == null)
                 return;
         
