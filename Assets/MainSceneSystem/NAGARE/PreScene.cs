@@ -107,7 +107,7 @@ namespace mainMenu
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             
             GachaFront gachaFront = new GachaFront();
-            GachaAnim gotchaAnimProcess = new GachaAnim();
+            GachaAnim gotchaAnim = new GachaAnim();
             GachaResult gachaResult = new GachaResult();
             
             ArenaProcess areanaProcess = new ArenaProcess();
@@ -126,7 +126,7 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
             
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnimProcess);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
             
             LoadingCanvas.target.TurnOnProcessDescription(true);

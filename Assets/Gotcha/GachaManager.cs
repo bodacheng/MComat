@@ -28,10 +28,10 @@ public class GachaManager : MonoBehaviour
     {
         target = this;
     }
-        
+    
     public void TenTimes()
     {
         SetResult(SkillConfigTable.TenTimesGotcha("human"));
-        PreScene.Instance.trySwitchToStep(MainSceneStep.GotchaAnim,false);
+        PreScene.Instance.trySwitchToStep(MainSceneStep.GotchaAnim,true);
     }
 }

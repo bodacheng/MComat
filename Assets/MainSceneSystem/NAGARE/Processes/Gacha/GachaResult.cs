@@ -11,7 +11,8 @@ public class GachaResult : MainSceneProcess
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaFrontT.gameObject.SetActive(false);
         GachaManager.target.GotchaResultT.gameObject.SetActive(true);
-        
+        CameraManager._camera.gameObject.SetActive(false);
+        GachaRender.target.Camera.gameObject.SetActive(true);
         List<SkillStoneOfPlayerInfoModel> results = GachaManager.target.GetResult();
         yield return GachaManager.target.NineForShow.ShowStones(
             results[0].skillId, results[1].skillId,results[2].skillId,
@@ -40,6 +41,8 @@ public class GachaResult : MainSceneProcess
     public override void ProcessEnd()
     {
         GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
+        CameraManager._camera.gameObject.SetActive(true);
+        GachaRender.target.Camera.gameObject.SetActive(false);
     }
     
     public override void LocalUpdate()

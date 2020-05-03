@@ -21,7 +21,7 @@ public class GachaRender : MonoBehaviour
     {
         CameraManager._camera.gameObject.SetActive(false);
         Camera.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(0.5f);
         
         foreach (SkillStoneOfPlayerInfoModel stoneinfo in results)
         {

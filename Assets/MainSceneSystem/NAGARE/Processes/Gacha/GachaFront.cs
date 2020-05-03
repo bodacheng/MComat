@@ -5,6 +5,7 @@ public class GachaFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
+        yield return _modelShower.ShowModel(null);
         PreScene.Instance.MainMenuCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
