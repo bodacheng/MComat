@@ -14,7 +14,8 @@ public class GachaResult : MainSceneProcess
         CameraManager._camera.gameObject.SetActive(false);
         GachaRender.target.Camera.gameObject.SetActive(true);
         List<SkillStoneOfPlayerInfoModel> results = GachaManager.target.GetResult();
-        yield return GachaManager.target.NineForShow.ShowStones(
+        yield return GachaManager.target.NineForShow.ShowStones
+        (
             results[0].skillId, results[1].skillId,results[2].skillId,
             results[3].skillId, results[4].skillId,results[5].skillId,
             results[6].skillId, results[7].skillId,results[8].skillId

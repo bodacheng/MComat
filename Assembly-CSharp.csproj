@@ -358,7 +358,6 @@
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\INHERENT_SKILLTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
-    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Gotcha.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillNameTable.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />

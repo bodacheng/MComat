@@ -55,5 +55,5 @@ public class CameraManager : MonoBehaviour
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)CurrentMode;
         _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration, sizeoffield);
         CurrentMode.Enter(_camera);
-    }    
+    }
 }

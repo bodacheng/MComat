@@ -6,8 +6,8 @@ public class PreparingProcess : NagareProcess
 {
     public PreparingProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
-        this.thisProcessStep = SceneStep.Preparing;
-        this.nextProcessStep = SceneStep.StoryBeforeFight;
+        thisProcessStep = SceneStep.Preparing;
+        nextProcessStep = SceneStep.StoryBeforeFight;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
     }
     
@@ -23,7 +23,7 @@ public class PreparingProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -32,8 +32,9 @@ public class PreparingProcess : NagareProcess
         if (FightLoadError.Instance.FightLoadErrors.Count > 0)
         {
             foreach (string error in FightLoadError.Instance.FightLoadErrors)
+            {
                 Debug.Log("双方队伍读取后问题： " + error);
-            
+            }
             SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步呗？
         }
         FightLoadError.Instance.FightLoadErrors.Clear();
@@ -41,7 +42,6 @@ public class PreparingProcess : NagareProcess
     
     public override void LocalUpdate()
     {
-        AutoMoveToNext |= 
-        (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle());
+        AutoMoveToNext |= (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle());
     }
 }

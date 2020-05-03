@@ -26,14 +26,14 @@ public class StoryProcess : NagareProcess
     
     void CanGoNext(PlayableDirector _a)
     {
-        this.AutoMoveToNext = true;
+        AutoMoveToNext = true;
     }
     
     
     public override void ProcessEnd()
     {
         _NetFightScene._FightTalksRunner.RPGTalk.gameObject.SetActive(false);
-        this.AutoMoveToNext = false;
+        AutoMoveToNext = false;
     }
     
     public override void LocalUpdate()

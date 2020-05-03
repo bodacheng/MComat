@@ -7,7 +7,7 @@ public partial class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     public static IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
-
+    
     static DecompositionerPool EffectPool;
     static GameObject EffectPrefab;
     static Decompositioner processingEffectObj;
