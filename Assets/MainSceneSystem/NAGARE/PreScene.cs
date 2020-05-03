@@ -105,7 +105,11 @@ namespace mainMenu
             TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
-            GachaProcess gotchaProcess = new GachaProcess();
+            
+            GachaFront gachaFront = new GachaFront();
+            GachaAnim gotchaAnimProcess = new GachaAnim();
+            GachaResult gachaResult = new GachaResult();
+            
             ArenaProcess areanaProcess = new ArenaProcess();
             
             ProcessesRunner.Instance.Clear();
@@ -120,7 +124,10 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Arena, areanaProcess);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Gotcha, gotchaProcess);
+            
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnimProcess);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
             
             LoadingCanvas.target.TurnOnProcessDescription(true);
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);

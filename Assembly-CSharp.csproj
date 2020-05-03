@@ -346,6 +346,7 @@
     <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
     <Compile Include="Assets\Gotcha\GachaManager.cs" />
+    <Compile Include="Assets\Gotcha\GachaRender.cs" />
     <Compile Include="Assets\ImagineVR\CameraCensorship.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
     <Compile Include="Assets\ImportantDefinition\Monster\CharDataInfo.cs" />
@@ -380,7 +381,9 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\GachaProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaFront.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_selectBaseMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_selectMaterialMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\JiNengRongLian_waitForConfirm.cs" />

@@ -7,17 +7,19 @@ public partial class NineForShow : MonoBehaviour
 {
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
     
-    public IEnumerator ShowStones(NineAndTwo SkillSet)
+    public IEnumerator ShowStones(string A1skillid, string A2skillid, string A3skillid,
+                                    string B1skillid, string B2skillid, string B3skillid,
+                                        string C1skillid, string C2skillid, string C3skillid)
     {
-        IEnumerator getA1 = SkillStonesBox.GenerateStoneMode(SkillSet.A1skillid);
-        IEnumerator getA2 = SkillStonesBox.GenerateStoneMode(SkillSet.A2skillid);
-        IEnumerator getA3 = SkillStonesBox.GenerateStoneMode(SkillSet.A3skillid);
-        IEnumerator getB1 = SkillStonesBox.GenerateStoneMode(SkillSet.B1skillid);
-        IEnumerator getB2 = SkillStonesBox.GenerateStoneMode(SkillSet.B2skillid);
-        IEnumerator getB3 = SkillStonesBox.GenerateStoneMode(SkillSet.B3skillid);
-        IEnumerator getC1 = SkillStonesBox.GenerateStoneMode(SkillSet.C1skillid);
-        IEnumerator getC2 = SkillStonesBox.GenerateStoneMode(SkillSet.C2skillid);
-        IEnumerator getC3 = SkillStonesBox.GenerateStoneMode(SkillSet.C3skillid);
+        IEnumerator getA1 = SkillStonesBox.GenerateStoneMode(A1skillid);
+        IEnumerator getA2 = SkillStonesBox.GenerateStoneMode(A2skillid);
+        IEnumerator getA3 = SkillStonesBox.GenerateStoneMode(A3skillid);
+        IEnumerator getB1 = SkillStonesBox.GenerateStoneMode(B1skillid);
+        IEnumerator getB2 = SkillStonesBox.GenerateStoneMode(B2skillid);
+        IEnumerator getB3 = SkillStonesBox.GenerateStoneMode(B3skillid);
+        IEnumerator getC1 = SkillStonesBox.GenerateStoneMode(C1skillid);
+        IEnumerator getC2 = SkillStonesBox.GenerateStoneMode(C2skillid);
+        IEnumerator getC3 = SkillStonesBox.GenerateStoneMode(C3skillid);
         
         yield return getA1;
         yield return getA2;

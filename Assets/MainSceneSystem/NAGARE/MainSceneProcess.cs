@@ -51,7 +51,10 @@ namespace mainMenu
         MemberDetail_edit = 16,
         MemberDetail_show = 17,
         SkillStones = 15,
-        Gotcha = 7,
+        GotchaFront = 6,      
+        GotchaAnim = 7,
+        GotchaResult = 24,
+        
         QuestInfo = 8,
         ArcadeFront = 9,
         Arena = 3,

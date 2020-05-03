@@ -1,46 +1,37 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using Api.Dto.Model;
-using DG.Tweening;
+using mainMenu;
 
 public class GachaManager : MonoBehaviour
 {
-    public Camera Camera;
-    public Camera mainCamera;
-    public Transform SkyLightCenter;
-    public float SkySphereRadius = 650;
+    public Canvas GotchaCanvas;
+    public RectTransform GotchaFrontT;
+    public RectTransform GotchaResultT;
+    public NineForShow NineForShow;
+    
+    List<SkillStoneOfPlayerInfoModel> Result;
     
     public static GachaManager target;
+    
+    public void SetResult(List<SkillStoneOfPlayerInfoModel> results)
+    {
+        Result = results;
+    }
+    
+    public List<SkillStoneOfPlayerInfoModel> GetResult()
+    {
+        return Result;
+    }
     
     void Awake()
     {
         target = this;
     }
-    
-    public IEnumerator Process()
+        
+    public void TenTimes()
     {
-        mainCamera.gameObject.SetActive(false);
-        Camera.gameObject.SetActive(true);
-        Camera.transform.position = SkyLightCenter.position;
-        Quaternion rotation = Quaternion.LookRotation(Vector3.up, Vector3.up);
-        transform.rotation = rotation; //  相机面朝天
-        yield return new WaitForSecondsRealtime(2f);
-        List<SkillStoneOfPlayerInfoModel> TenTimesGotcha = SkillConfigTable.TenTimesGotcha("human");      
-        foreach (SkillStoneOfPlayerInfoModel stoneinfo in TenTimesGotcha)
-        {
-            Decompositioner Star = EffectAndHurtObjectLoading.Instance.GenerateEffect("long_effect", FightGlobalSetting.EffectPathDefine(Zokusei.redMagic), GetRandomStarPos(), Quaternion.identity, null);
-            Camera.transform.DOLookAt(Star.transform.position,1f);
-            yield return new WaitForSecondsRealtime(1f);
-        }
-    }
-    
-    Vector3 GetRandomStarPos()
-    {
-        float xzDisFromCenter = Random.Range(0, SkySphereRadius * 2 / 3);
-        Vector3 temp = SkyLightCenter.transform.position + (Vector3.forward * Random.Range(0, 100) + Vector3.right * Random.Range(0, 100)).normalized * xzDisFromCenter;
-        float tempheight = Mathf.Sqrt(Mathf.Pow(SkySphereRadius, 2) - Mathf.Pow(xzDisFromCenter, 2));
-        Vector3 finalPos = temp + (int)tempheight * Vector3.up;
-        return finalPos;
+        SetResult(SkillConfigTable.TenTimesGotcha("human"));
+        PreScene.Instance.trySwitchToStep(MainSceneStep.GotchaAnim,false);
     }
 }
