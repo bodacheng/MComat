@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 using UniRx;
@@ -8,66 +7,14 @@ public class FightTalksRunner : MonoBehaviour
 {
     public RPGTalk RPGTalk; //这个元件里有对应的ui.text？应该是在storyCanvas下面。这两个部件应该是在场景里给布置好，检测到哪个元件缺失的话那不播放剧情就行。
     public PlayableDirector playableDirector;
-    public CameraManager _CameraManager;
     public Text CountDown;
-    
     public ReactiveProperty<bool> PlayersStartOff { get; set; } = new ReactiveProperty<bool>(false);
-    
-    float startTimestamp = 3f;
-    int step = -1;
-    
-    public int Step
-    {
-        set
-        {
-            step = value;
-            switch (step)
-            {
-                case 0:
-                    startTimestamp = 3f;
-                    this._CameraManager.Assign_Camera(C_Mode.RoundBoundary,null);
-                    StartCoroutine(BeforeFightCountDown());
-                break;
-                case 1:
-                    PlayersStartOff.Value = true;
-                break;
-            }
-        }
-        get
-        {
-            return step;
-        }
-    }
 
-    void Start()
-    {
-        Step = -1;
-    }
+    public static FightTalksRunner target;
     
-    public void RunStoryTimeLine(PlayableAsset playableAsset)
+    void Awake()
     {
-        playableDirector.playableAsset = playableAsset;
-        //必须设法在timeline条上设置RPGTalk轨道对应的RPGTalk。
-        //foreach (PlayableBinding item in playableDirector.playableAsset.outputs)
-        //{
-        //    if (item.streamName == "RPGTalkTrack")
-        //        playableDirector.SetGenericBinding(item.sourceObject, RPGTalk.gameObject);//为对话轨道设置场景里的对话管理器。
-        //}
-        playableDirector.Play();      
-        //RPGTalk.PlayNext();        
-    }
-
-    IEnumerator BeforeFightCountDown()
-    {
-        while (startTimestamp > 0)
-        {
-            startTimestamp -= Time.deltaTime;
-            CountDown.text = "" + (1 + (int)(startTimestamp));
-            yield return null;
-        }
-        CountDown.gameObject.SetActive(false);
-        Step = 1;
-        yield break;
+        target = this;
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class TestCameraMode : CameraMode
+class CertainYAntiVabration : CameraMode
 {
     Vector3 CameraTargetPos;
     Vector3 enemiescenter;//敌人的位置中心
@@ -10,7 +10,7 @@ class TestCameraMode : CameraMode
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
     float h;
    
-    public TestCameraMode(float XZDis, float YDis)
+    public CertainYAntiVabration(float XZDis, float YDis)
     {
         this.XZDis = XZDis;
         this.YDis = YDis;

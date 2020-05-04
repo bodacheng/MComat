@@ -41,7 +41,7 @@ public class FightOverControl : MonoBehaviour {
     //重新开战意味着所有资源重新加载？
     readonly UnityEngine.Events.UnityAction RestartGame = () =>
     {
-        SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
+        SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
     };
     
     public IEnumerator ShowSKillSets(List<CharDataInfo> TeamMembers)

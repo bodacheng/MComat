@@ -9,9 +9,8 @@ public class QuestInfo : MainSceneProcess
         yield return _modelShower.ShowModel(null);
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-        QuestPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
-        yield return QuestPreparePage.target.GetReadyForStageASTeam();
-        yield break;
+        FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
+        yield return FightPreparePage.target.GetReadyForStageASTeam();
     }
     
     public QuestInfo()
@@ -32,10 +31,6 @@ public class QuestInfo : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        QuestPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
-    }
-    
-    public override void LocalUpdate()
-    {
+        FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
     }
 }

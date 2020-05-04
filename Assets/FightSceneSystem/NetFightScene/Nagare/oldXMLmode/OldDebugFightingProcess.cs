@@ -14,13 +14,13 @@ public class OldDebugFightingProcess : NagareProcess
     {
         this.thisProcessStep = SceneStep.Fighting;
         this.nextProcessStep = SceneStep.FightOver;
-        this._NetFightScene = _NetFightScene;
+        this.FightScene = _NetFightScene;
         this.debugManager = debugManager;
     }
     
     public override void ProcessEnter()
     {
-        this.BoundaryControllByGod.AllMembers.Clear();
+        BoundaryControllByGod.target.AllMembers.Clear();
         AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
         AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
         
@@ -41,10 +41,10 @@ public class OldDebugFightingProcess : NagareProcess
     
     public override void ProcessEnd()
     {
-        _NetFightScene.LoadStageFinished.Value = false;
-        _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
-        _NetFightScene.FightCanvas.gameObject.SetActive(false);
-        mainProcessRunner.Run(_NetFightScene._FightOverControl.WINProcess());//这里是要根据情况的。。
+        FightScene.LoadStageFinished.Value = false;
+        FightScene.PreparingCanvas.gameObject.SetActive(false);
+        FightScene.FightCanvas.gameObject.SetActive(false);
+        mainProcessRunner.Run(FightScene._FightOverControl.WINProcess());//这里是要根据情况的。。
     }
 
     public override void LocalUpdate()
@@ -90,7 +90,7 @@ public class OldDebugFightingProcess : NagareProcess
             mainProcessRunner.Run(finalMoment(finalSurviver, winner)) ;
         }
 
-        if (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
+        if (FightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
         {
             AutoMoveToNext = true;
         }
@@ -152,7 +152,7 @@ public class OldDebugFightingProcess : NagareProcess
         if (_finalSurviver != null)
         {
             watch.Add(_finalSurviver.gameObject.transform);
-            _NetFightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watch);
+            FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watch);
         }
         yield return new WaitForSeconds(2f);
 

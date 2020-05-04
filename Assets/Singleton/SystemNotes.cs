@@ -6,46 +6,10 @@
 
 public class FightSceneNote
 {
-    static FightSceneNote instance;
-
-    public StageScriptableObject nextBattle;
-
-    FightSceneNote()
-    {
-        nextBattle = new StageScriptableObject();//这个地方无非是意思意思
-    }
-
-    public static FightSceneNote Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new FightSceneNote();
-            }
-            return instance;
-        }
-    }
+    public static StageScriptableObject nextBattle;
 }
 
 public class MainMenuNote
 {
-    private static MainMenuNote instance;
-    public MainSceneStep goingtostep = MainSceneStep.FrontPage;
-
-    private MainMenuNote()
-    {
-    }
-
-    public static MainMenuNote Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new MainMenuNote();
-            }
-            return instance;
-        }
-    }
+    public static MainSceneStep goingtostep = MainSceneStep.FrontPage;
 }

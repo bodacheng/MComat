@@ -50,7 +50,6 @@ public enum C_Mode
     CertainYAntiVibration = 12,
     WatchOver = 8,
     TopDown = 2,
-    LerpToCertainPlace = 9,
     GodPlayerCertainYCamera = 10,
     keepTargetLeft = 13,
     ApproachToCertainDis = 14,

@@ -52,7 +52,7 @@ namespace mainMenu
                 StageButton newButton = Instantiate(pretab);
                 void LoadThisStage()
                 {
-                    QuestPreparePage.target.PreLoad(one, TeamSetGameMode.story);
+                    FightPreparePage.target.PreLoad(one, TeamSetGameMode.story);
                     PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo,true);
                 }
                 newButton.button.onClick.AddListener(LoadThisStage);

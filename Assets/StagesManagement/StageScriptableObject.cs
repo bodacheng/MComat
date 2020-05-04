@@ -35,7 +35,7 @@ public class StageScriptableObject : ScriptableObject
     public TeamMode Team1Mode = TeamMode.multiraid;
     public TeamMode Team2Mode = TeamMode.multiraid;
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     [MenuItem ("Stage/Create StageScriptEditor")]
     static void CreateExampleAsset ()
     {
@@ -44,7 +44,7 @@ public class StageScriptableObject : ScriptableObject
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
         AssetDatabase.Refresh ();
     }
-#endif
+    #endif
     
     public void LoadLocalFightFromScript(TextAsset S)//这个函数的运行必须十分谨慎
     {

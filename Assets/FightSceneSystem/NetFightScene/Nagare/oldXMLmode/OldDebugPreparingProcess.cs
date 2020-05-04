@@ -10,18 +10,18 @@ public class OldDebugPreparingProcess : NagareProcess
     {
         this.thisProcessStep = SceneStep.Preparing;
         this.nextProcessStep = SceneStep.Fighting;
-        this._NetFightScene = _NetFightScene;
+        this.FightScene = _NetFightScene;
         this.debugManager = debugManager;
     }
     
     public override void ProcessEnter()
     {
-        _NetFightScene.PreparingCanvas.gameObject.SetActive(true);
-        _NetFightScene.FightCanvas.gameObject.SetActive(false);
-        _NetFightScene._FightOverControl.FightOverCanvas.gameObject.SetActive(false);
-        _NetFightScene.StartCoroutine(EffectsManager.PrepareMagicFromStreamingAssets("defaultmagic"));//我们姑且这样处理debug环境默认魔法问题
+        FightScene.PreparingCanvas.gameObject.SetActive(true);
+        FightScene.FightCanvas.gameObject.SetActive(false);
+        FightScene._FightOverControl.FightOverCanvas.gameObject.SetActive(false);
+        FightScene.StartCoroutine(EffectsManager.PrepareMagicFromStreamingAssets("defaultmagic"));//我们姑且这样处理debug环境默认魔法问题
         debugManager.debugCharPlacer.SetActive(true);
-        _NetFightScene._CameraManager.Assign_Camera(C_Mode.ApproachToCertainDis,null);//乱写的。原来的模式删除了。
+        FightScene._CameraManager.Assign_Camera(C_Mode.ApproachToCertainDis,null);//乱写的。原来的模式删除了。
         debugManager.debugModePlayerPlacementStep = 0;
     
         if (debugManager.debugMode == DebugMode.ab_mode)

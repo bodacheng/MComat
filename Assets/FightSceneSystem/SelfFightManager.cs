@@ -142,7 +142,7 @@ namespace mainMenu
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
-            QuestPreparePage.target.PreLoad(stage, TeamSetGameMode.selfFight);
+            FightPreparePage.target.PreLoad(stage, TeamSetGameMode.selfFight);
             PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo, true);
         }
         

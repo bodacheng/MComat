@@ -183,7 +183,7 @@ namespace mainMenu
                 switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
                 {
                     case PlayerAccountProgressStep.Freedom:
-                        trySwitchToStep(MainMenuNote.Instance.goingtostep, false);
+                        trySwitchToStep(MainMenuNote.goingtostep, false);
                     break;
                     case PlayerAccountProgressStep.justCreated:
                         trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
@@ -207,11 +207,11 @@ namespace mainMenu
         
         public void LoadFight(StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
         {
-            FightSceneNote.Instance.nextBattle = stage;
-            _CharSetManager.PreventTheseMyModelsFromDestroying(FightSceneNote.Instance.nextBattle.GetTeam1EnterRingLocalIds(FightSceneNote.Instance.nextBattle.localFight));
+            FightSceneNote.nextBattle = stage;
+            _CharSetManager.PreventTheseMyModelsFromDestroying(FightSceneNote.nextBattle.GetTeam1EnterRingLocalIds(FightSceneNote.nextBattle.localFight));
             SkillStonesBox.PreventCellsFromDestroy();
             MySkillStonesReader.PreventStonesFromDestroy();
-            SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
+            SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
         }
 
         [EnumAction(typeof(MainSceneStep))]

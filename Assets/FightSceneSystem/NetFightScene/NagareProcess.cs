@@ -5,8 +5,9 @@ public abstract class NagareProcess
     public SceneStep thisProcessStep;
     public SceneStep nextProcessStep = SceneStep.none;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
-    private bool can_next;
-    public bool AutoMoveToNext{
+    bool can_next;
+    public bool AutoMoveToNext
+    {
         set
         {
             can_next = value;
@@ -21,11 +22,9 @@ public abstract class NagareProcess
         }
     }
 
-    public NetFightScene _NetFightScene;
+    public NetFightScene FightScene;
     public RealTimeGameProcessManager _RealTimeGameProcessManager;
     public MobileInputsManager mobileInputsManager;
-    public FightTalksRunner fightTalksRunner;
-    public BoundaryControllByGod BoundaryControllByGod;
     public DebugManager debugManager;
     public CharsManager CharsManager;
     public CameraManager cameraManager;
@@ -36,17 +35,15 @@ public abstract class NagareProcess
     public void EelementsInherit(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
     {
         this.fightSceneProcessesRunner = fightSceneProcessesRunner;
-        this._NetFightScene = _NetFightScene;
+        this.FightScene = _NetFightScene;
         this._RealTimeGameProcessManager = _NetFightScene._RealTimeGameProcessManager;
         this.mainProcessRunner = _NetFightScene.mainProcessRunner;
         this.mobileInputsManager = this._RealTimeGameProcessManager._mobileInputsManager;
-        this.CharsManager = this._NetFightScene._CharSetManager;
+        this.CharsManager = this.FightScene._CharSetManager;
         this.cameraManager = this._RealTimeGameProcessManager._CameraManager;
-        this.fightOverControl = this._NetFightScene._FightOverControl;
-        this.fightTalksRunner = this._NetFightScene._FightTalksRunner;
-        this.debugManager = this._NetFightScene._DebugManager;
-        this.fightLogger = this._NetFightScene.fightLogger;
-        this.BoundaryControllByGod = this._NetFightScene._BoundaryControllByGod;
+        this.fightOverControl = this.FightScene._FightOverControl;
+        this.debugManager = this.FightScene._DebugManager;
+        this.fightLogger = this.FightScene.fightLogger;
     }
     
     public virtual void ProcessEnter()

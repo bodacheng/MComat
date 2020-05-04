@@ -8,9 +8,8 @@ public class CameraManager : MonoBehaviour
     
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
-        {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainYCamera(5f, 5f, 2f)},
-        {C_Mode.CertainYAntiVibration, new TestCameraMode(10f, 7f)},
-        {C_Mode.LerpToCertainPlace, new LerpToCertainPlace()},
+        {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
+        {C_Mode.CertainYAntiVibration, new CertainYAntiVabration(10f, 7f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f,1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
         {C_Mode.WatchOver, new WatchOverCamera(7f,5f)},

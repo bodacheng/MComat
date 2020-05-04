@@ -1,39 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-class GodPlayerCertainYCamera : CameraMode
+class GodPlayerCertainY : CameraMode
 {
     Vector3 Xi;
     Vector3 center;
     Quaternion ToRotation;
 
-    public GodPlayerCertainYCamera(float XZDis, float YDis, float speed)
+    public GodPlayerCertainY(float XZDis, float YDis)
     {
         this.XZDis = XZDis;
         this.YDis = YDis;
-        this.speed = speed;
     }
 
     public override void LocalUpdate(Camera _camera)
     {
-        if (this.targets == null)
+        if (targets == null || targets.Count == 0)
         {
             return;
         }
-        else
-        {
-            if (this.targets.Count == 0)
-            {
-                return;
-            }
-        }
-
+        
         center = Vector3.zero;
         foreach (Transform o in this.targets)
         {
             if (o != null)
+            {
                 center += o.transform.position;
+            }
         }
         center /= targets.Count;
 

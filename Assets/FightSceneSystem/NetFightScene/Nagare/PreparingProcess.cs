@@ -15,7 +15,7 @@ public class PreparingProcess : NagareProcess
     {
         LoadingCanvas.target.DarkOff(1f);
         FightLoadError.Instance.FightLoadErrors.Clear();
-        mainProcessRunner.Run(_NetFightScene.LoadGame(FightSceneNote.Instance.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+        mainProcessRunner.Run(FightScene.LoadGame(FightSceneNote.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
         EffectsManager.IniEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
         yield break;
@@ -28,7 +28,7 @@ public class PreparingProcess : NagareProcess
     
     public override void ProcessEnd()
     {
-        _NetFightScene.LoadStageFinished.Value = false;
+        FightScene.LoadStageFinished.Value = false;
         if (FightLoadError.Instance.FightLoadErrors.Count > 0)
         {
             foreach (string error in FightLoadError.Instance.FightLoadErrors)
@@ -42,6 +42,6 @@ public class PreparingProcess : NagareProcess
     
     public override void LocalUpdate()
     {
-        AutoMoveToNext |= (_NetFightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle());
+        AutoMoveToNext |= (FightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle());
     }
 }

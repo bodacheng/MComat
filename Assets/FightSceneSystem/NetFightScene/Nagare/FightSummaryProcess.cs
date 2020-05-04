@@ -11,7 +11,7 @@ public class FightSummaryProcess : NagareProcess
         thisProcessStep = SceneStep.FightSummary;
         //this.nextProcessStep = 这个环节结束后应该是直接的产生条件判断分歧。
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
-        enternext.Subscribe(x => {if (x) afterSummary(FightSceneNote.Instance.nextBattle._fightEventType);});
+        enternext.Subscribe(x => {if (x) afterSummary(FightSceneNote.nextBattle._fightEventType);});
     }
     
     public override void ProcessEnter()
@@ -34,11 +34,11 @@ public class FightSummaryProcess : NagareProcess
                 break;
             case FightEventType.Tutorial_Basic:
                 AccountSet.instance._PlayerAccountInfo.accountprogress = PlayerAccountProgressStep.Tutorial;
-                this._NetFightScene.returnToFront();
+                this.FightScene.returnToFront();
                 break;
             case FightEventType.Tutorial_Story_AdamVsGuards:
                 AccountSet.instance._PlayerAccountInfo.accountprogress = PlayerAccountProgressStep.Freedom;
-                this._NetFightScene.returnToFront();
+                this.FightScene.returnToFront();
                 break;
         }    
     }

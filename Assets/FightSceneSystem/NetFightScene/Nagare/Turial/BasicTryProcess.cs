@@ -53,10 +53,10 @@ public class BasicTryProcess : NagareProcess
         
     public IEnumerator enterProcess()
     {
-        this.BoundaryControllByGod.AllMembers.Clear();
+        BoundaryControllByGod.target.AllMembers.Clear();
         AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
         AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
-        this.BoundaryControllByGod.AllMembers = AllMembers;
+        BoundaryControllByGod.target.AllMembers = AllMembers;
         TeamDeadMemberDictionary.Clear();
         
         foreach (KeyValuePair<Team,List<Data_Center>> keyValuePair in AllMembers)
@@ -73,10 +73,10 @@ public class BasicTryProcess : NagareProcess
             TeamDeadMemberDictionary.Add(keyValuePair.Key,new List<Data_Center>());//这个什么意思呢，就是说把所有队伍的Team值加进TeamDeadMemberDictionary，value是个空列表，谁死了谁加进入
         }
         loser = Team.none;
-        _NetFightScene.pressedStartButton();
-        _NetFightScene.FightCanvas.gameObject.SetActive(true);
+        FightScene.pressedStartButton();
+        FightScene.FightCanvas.gameObject.SetActive(true);
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
-        _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
+        FightScene.PreparingCanvas.gameObject.SetActive(false);
         
         watchetargets.Clear();
         if (RealTimeGameProcessManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
@@ -102,8 +102,8 @@ public class BasicTryProcess : NagareProcess
     
     public override void ProcessEnd()
     {
-        _NetFightScene.FightCanvas.gameObject.SetActive(false);
-        _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
+        FightScene.FightCanvas.gameObject.SetActive(false);
+        FightScene.PreparingCanvas.gameObject.SetActive(false);
         mainProcessRunner.Run(FinalMoment(finalSurviver, loser));
     }
     
@@ -113,10 +113,10 @@ public class BasicTryProcess : NagareProcess
 
         if (UnityEngine.Input.GetKey(KeyCode.Escape))
         {
-            _NetFightScene.PauseScene();
+            FightScene.PauseScene();
         }
 
-        switch (BoundaryControllByGod.boundaryMode)
+        switch (BoundaryControllByGod.target.boundaryMode)
         {
             case BoundaryMode.Round:
                 //_BoundaryControllByGod.SUOQUANER(alivemembercount);
@@ -152,8 +152,8 @@ public class BasicTryProcess : NagareProcess
 
         if (RealTimeGameProcessManager.focusingChar != null)
         {
-            _NetFightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
-            _NetFightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
+            FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
+            FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
         }
         
         this.TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);
@@ -167,7 +167,7 @@ public class BasicTryProcess : NagareProcess
         if (_finalSurviver != null)
         {
             watchetargets.Add(_finalSurviver.gameObject.transform);
-            _NetFightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
+            FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
         }
         yield return new WaitForSeconds(2f);
 

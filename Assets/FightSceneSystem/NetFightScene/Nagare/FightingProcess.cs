@@ -23,7 +23,7 @@ public class FightingProcess : NagareProcess
         AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
         AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
 
-        BoundaryControllByGod.AllMembers = AllMembers;
+        BoundaryControllByGod.target.AllMembers = AllMembers;
         fightLogger.ReadyToLog(AllMembers);
         foreach (KeyValuePair<Team,List<Data_Center>> _set in AllMembers)
         {
@@ -32,16 +32,16 @@ public class FightingProcess : NagareProcess
                 _char.Sensor.TeamMembers = AllMembers;
             }
         }
-        _NetFightScene.pressedStartButton();
-        _NetFightScene.FightCanvas.gameObject.SetActive(true);
+        FightScene.pressedStartButton();
+        FightScene.FightCanvas.gameObject.SetActive(true);
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
-        _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
+        FightScene.PreparingCanvas.gameObject.SetActive(false);
     }
     
     public override void ProcessEnd()
     {
-        _NetFightScene.FightCanvas.gameObject.SetActive(false);
-        _NetFightScene.PreparingCanvas.gameObject.SetActive(false);
+        FightScene.FightCanvas.gameObject.SetActive(false);
+        FightScene.PreparingCanvas.gameObject.SetActive(false);
         mainProcessRunner.Run(FinalMoment(this.fightLogger.getWinner()));
     }
     
@@ -49,7 +49,7 @@ public class FightingProcess : NagareProcess
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            _NetFightScene.PauseScene();
+            FightScene.PauseScene();
         }
         _RealTimeGameProcessManager.FightingStepProcess();
     }

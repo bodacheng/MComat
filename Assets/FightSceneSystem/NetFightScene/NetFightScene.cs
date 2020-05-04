@@ -19,10 +19,6 @@ public class NetFightScene : MonoBehaviour {
     public DebugManager _DebugManager;
 
     [Space(11)]
-    [Header("战斗前的演出")]
-    public FightTalksRunner _FightTalksRunner;
-
-    [Space(11)]
     [Header("战斗的最后一击时候的处理")]
     public FightOverControl _FightOverControl;
     
@@ -220,7 +216,7 @@ public class NetFightScene : MonoBehaviour {
         }
 
         FightSceneProcessesRunner.Clear();
-        MainMenuNote.Instance.goingtostep = MainSceneStep.FrontPage;
+        MainMenuNote.goingtostep = MainSceneStep.FrontPage;
         SceneManager.LoadScene(1);
     }
     
@@ -228,7 +224,7 @@ public class NetFightScene : MonoBehaviour {
 	public void LocalGameRestart()
 	{
         FightSceneProcessesRunner.ChangeProcess(SceneStep.Preparing);
-		SceneManager.LoadScene(FightSceneNote.Instance.nextBattle.BattleGroundID);
+		SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
 	}
 
 	// 本地系函数 而且目前有逻辑问题

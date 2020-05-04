@@ -26,11 +26,14 @@ public class BoundaryControllByGod : MonoBehaviour {
     ParticleSystem BattleRingPS;
     float BattleRingRadius = 20f;
     public static float _BattleRingRadius;
+
+    public static BoundaryControllByGod target;
     
     public IDictionary<Team, List<Data_Center>> AllMembers;//双方队伍人员字典，和netfightscene模块里同名变量统一。
 
     void Awake()
     {
+        target = this;
         _BattleRingRadius = BattleRingRadius;
     }
     
