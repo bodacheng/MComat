@@ -324,7 +324,6 @@
     <Compile Include="Assets\FightSceneSystem\Debug\DebugManager.cs" />
     <Compile Include="Assets\FightSceneSystem\FightOverControl.cs" />
     <Compile Include="Assets\FightSceneSystem\FightSceneProcessesRunner.cs" />
-    <Compile Include="Assets\FightSceneSystem\FightTalksRunner.cs" />
     <Compile Include="Assets\FightSceneSystem\NetFightScene\Nagare\CountDownProcess.cs" />
     <Compile Include="Assets\FightSceneSystem\NetFightScene\Nagare\FightOverProcess.cs" />
     <Compile Include="Assets\FightSceneSystem\NetFightScene\Nagare\FightSummaryProcess.cs" />

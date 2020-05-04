@@ -73,7 +73,7 @@ public class BasicTryProcess : NagareProcess
             TeamDeadMemberDictionary.Add(keyValuePair.Key,new List<Data_Center>());//这个什么意思呢，就是说把所有队伍的Team值加进TeamDeadMemberDictionary，value是个空列表，谁死了谁加进入
         }
         loser = Team.none;
-        FightScene.pressedStartButton();
+        FightScene.PressedStartButton();
         FightScene.FightCanvas.gameObject.SetActive(true);
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
         FightScene.PreparingCanvas.gameObject.SetActive(false);

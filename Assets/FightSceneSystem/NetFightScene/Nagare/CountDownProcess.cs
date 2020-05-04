@@ -1,5 +1,4 @@
-﻿using UniRx;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using mainMenu;
 
@@ -12,7 +11,6 @@ public class CountDownProcess : NagareProcess
         thisProcessStep = SceneStep.CountDown;
         nextProcessStep = SceneStep.Fighting;
         EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
-        FightTalksRunner.target.PlayersStartOff.Subscribe(x => { if (x == true) AutoMoveToNext = true;});
     }
 
     public override void ProcessEnter()
@@ -30,14 +28,15 @@ public class CountDownProcess : NagareProcess
     
     IEnumerator BeforeFightCountDown()
     {
+        FightScene.CountDown.gameObject.SetActive(true);
         while (startTimestamp > 0)
         {
             startTimestamp -= Time.deltaTime;
-            FightTalksRunner.target.CountDown.text = "" + (1 + (int)(startTimestamp));
+            FightScene.CountDown.text = "" + (1 + (int)(startTimestamp));
             yield return null;
         }
-        FightTalksRunner.target.CountDown.gameObject.SetActive(false);
-        FightTalksRunner.target.PlayersStartOff.Value = true;
+        FightScene.CountDown.gameObject.SetActive(false);
+        AutoMoveToNext = true;
         yield break;
     }
 }

@@ -32,7 +32,7 @@ public class FightingProcess : NagareProcess
                 _char.Sensor.TeamMembers = AllMembers;
             }
         }
-        FightScene.pressedStartButton();
+        FightScene.PressedStartButton();
         FightScene.FightCanvas.gameObject.SetActive(true);
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
         FightScene.PreparingCanvas.gameObject.SetActive(false);

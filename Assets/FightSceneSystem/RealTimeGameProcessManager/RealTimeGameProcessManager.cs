@@ -18,14 +18,14 @@ public class RealTimeGameProcessManager : MonoBehaviour
     public Button autoBUtton;
     public Image _C_button;
     public Image _AI_button;
-
+    
     public FightTeam FightTeam1, FightTeam2;
     public FightTeam_MultiRaid FightTeam1_multi, FightTeam2_multi;
     public FightTeam_RotationMode FightTeam1_rotation, FightTeam2_rotation;
-
+    
     public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
     public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
-
+    
     public static bool Auto;
     public static Data_Center focusingChar;
     public static Team playerTeam = Team.player1;

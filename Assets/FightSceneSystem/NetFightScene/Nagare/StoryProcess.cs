@@ -16,9 +16,9 @@ public class StoryProcess : NagareProcess
         if (FightSceneNote.nextBattle.beforefightstory != null)
         {
             AutoMoveToNext = false;
-            FightTalksRunner.target.playableDirector.playableAsset = FightSceneNote.nextBattle.beforefightstory;
-            FightTalksRunner.target.playableDirector.stopped += CanGoNext;
-            FightTalksRunner.target.playableDirector.Play();
+            FightScene.playableDirector.playableAsset = FightSceneNote.nextBattle.beforefightstory;
+            FightScene.playableDirector.stopped += CanGoNext;
+            FightScene.playableDirector.Play();
         }else{
             AutoMoveToNext = true;
         }

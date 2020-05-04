@@ -2643,7 +2643,7 @@ GameObject:
   - component: {fileID: 2075428156307059471}
   - component: {fileID: 2075428156307059468}
   m_Layer: 0
-  m_Name: ResourceLoadProcess
+  m_Name: ResourceLoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
