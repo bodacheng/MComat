@@ -23,7 +23,6 @@ public abstract class NagareProcess
     }
 
     public NetFightScene FightScene;
-    public RealTimeGameProcessManager _RealTimeGameProcessManager;
     public MobileInputsManager mobileInputsManager;
     public DebugManager debugManager;
     public CharsManager CharsManager;
@@ -36,14 +35,13 @@ public abstract class NagareProcess
     {
         this.fightSceneProcessesRunner = fightSceneProcessesRunner;
         this.FightScene = _NetFightScene;
-        this._RealTimeGameProcessManager = _NetFightScene._RealTimeGameProcessManager;
         this.mainProcessRunner = _NetFightScene.mainProcessRunner;
-        this.mobileInputsManager = this._RealTimeGameProcessManager._mobileInputsManager;
-        this.CharsManager = this.FightScene._CharSetManager;
-        this.cameraManager = this._RealTimeGameProcessManager._CameraManager;
-        this.fightOverControl = this.FightScene._FightOverControl;
-        this.debugManager = this.FightScene._DebugManager;
-        this.fightLogger = this.FightScene.fightLogger;
+        this.mobileInputsManager = RealTimeGameProcessManager.target._mobileInputsManager;
+        this.CharsManager = FightScene._CharSetManager;
+        this.cameraManager = RealTimeGameProcessManager.target._CameraManager;
+        this.fightOverControl = FightScene._FightOverControl;
+        this.debugManager = FightScene._DebugManager;
+        this.fightLogger = FightScene.fightLogger;
     }
     
     public virtual void ProcessEnter()

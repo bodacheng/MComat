@@ -26,8 +26,8 @@ public class FightOverProcess : NagareProcess
                 mainProcessRunner.Run(fightOverControl.LoseProcess());//这里是要根据情况的。。
                 break;
         }
-        mainProcessRunner.Run(fightOverControl.ShowSKillSets(_RealTimeGameProcessManager.FightTeam1.CharDataInfoRef.Values.ToList()));//这里是要根据情况的。。
-        foreach (CharDataInfo charDataInfo in _RealTimeGameProcessManager.FightTeam1.CharDataInfoRef.Values)
+        mainProcessRunner.Run(fightOverControl.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef.Values.ToList()));//这里是要根据情况的。。
+        foreach (CharDataInfo charDataInfo in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef.Values)
         {
             List<string> mystoneids = new List<string>();
             List<SkillStoneOfPlayerInfoModel> mystones = MySkillStonesReader.GetMonsterEquipingStones(charDataInfo.monsterOfPlayerId);

@@ -54,8 +54,8 @@ public class BasicTryProcess : NagareProcess
     public IEnumerator enterProcess()
     {
         BoundaryControllByGod.target.AllMembers.Clear();
-        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
-        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
+        AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+        AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
         BoundaryControllByGod.target.AllMembers = AllMembers;
         TeamDeadMemberDictionary.Clear();
         
@@ -109,7 +109,7 @@ public class BasicTryProcess : NagareProcess
     
     public override void LocalUpdate()
     {
-        _RealTimeGameProcessManager.FightGUIProcess();
+        RealTimeGameProcessManager.target.FightGUIProcess();
 
         if (UnityEngine.Input.GetKey(KeyCode.Escape))
         {
@@ -153,13 +153,13 @@ public class BasicTryProcess : NagareProcess
         if (RealTimeGameProcessManager.focusingChar != null)
         {
             FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
-            FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);            
+            FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
         }
         
-        this.TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);
+        TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);
         loser = GetDeadTeamLocalGame(TeamDeadMemberDictionary);
     }
-
+    
     IEnumerator FinalMoment(Data_Center _finalSurviver,Team _loser)
     {
         Time.timeScale = 0.4f;

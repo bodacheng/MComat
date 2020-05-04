@@ -42,10 +42,6 @@ public class NetFightScene : MonoBehaviour {
     public BoundaryControllByGod _BoundaryControllByGod;
 
     [Space(11)]
-    [Header("部分UI要素的管理模块")]
-    public RealTimeGameProcessManager _RealTimeGameProcessManager;
-
-    [Space(11)]
     public RectTransform PauseMenu;
     
     [Space(11)]
@@ -57,11 +53,14 @@ public class NetFightScene : MonoBehaviour {
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
     
+    public static NetFightScene target;
+    
     public ReactiveProperty<bool> LoadStageFinished{ get; set; } = new ReactiveProperty<bool>(false);
     readonly FightSceneProcessesRunner ProcessesRunner = new FightSceneProcessesRunner();
 
     void Awake()
     {
+        target = this;
         Screen.SetResolution(1920, 1080, true);
     }
 
@@ -103,84 +102,29 @@ public class NetFightScene : MonoBehaviour {
     {
         ProcessesRunner.LocalUpdate();
     }
-
-    public IEnumerator LoadGame(StageScriptableObject stage)
-    {
-        _RealTimeGameProcessManager.FightTeam1.TeamMode = stage.Team1Mode;        
-        switch (_RealTimeGameProcessManager.FightTeam1.TeamMode)
-        {
-            case TeamMode.multiraid:
-            _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_multi;
-            break;
-            case TeamMode.rotation:
-            _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_rotation;
-            break;
-            case TeamMode.test:
-            _RealTimeGameProcessManager.FightTeam1 = _RealTimeGameProcessManager.FightTeam1_multi;
-            break;
-        }
-        
-        _RealTimeGameProcessManager.FightTeam2.TeamMode = stage.Team2Mode;
-        switch (_RealTimeGameProcessManager.FightTeam2.TeamMode)
-        {
-            case TeamMode.multiraid:
-            _RealTimeGameProcessManager.FightTeam2 = _RealTimeGameProcessManager.FightTeam2_multi;
-            break;
-            case TeamMode.rotation:
-            _RealTimeGameProcessManager.FightTeam2 = _RealTimeGameProcessManager.FightTeam2_rotation;
-            break;
-            case TeamMode.test:
-            _RealTimeGameProcessManager.FightTeam2 = _RealTimeGameProcessManager.FightTeam2_multi;
-            break;
-        }
-
-        _RealTimeGameProcessManager.FightTeam1.TeamStandPoints = Team1StandPoints;
-        _RealTimeGameProcessManager.FightTeam2.TeamStandPoints = Team2StandPoints;
-        
-        _RealTimeGameProcessManager.FightTeam1.teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
-        _RealTimeGameProcessManager.FightTeam2.teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
-        
-        yield return _RealTimeGameProcessManager.FightTeam1.Instantiate (stage.localFight.HeroSets,stage.team1_ExtraHP);
-        yield return _RealTimeGameProcessManager.FightTeam2.Instantiate (stage.localFight.EnemySets,stage.team2_ExtraHP);
-        
-        _RealTimeGameProcessManager.FightTeam1.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam1.TeamMembers);
-        _RealTimeGameProcessManager.FightTeam2.ArrangeAllTeamMembersToPosition(_RealTimeGameProcessManager.FightTeam2.TeamMembers);
-        
-        switch (RealTimeGameProcessManager.playerTeam)
-        {
-            case Team.player1:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.TeamMembers.values[0],false);
-                break;
-            case Team.player2:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.TeamMembers.values[0],false);
-                break;
-        }
-
-        LoadStageFinished.Value = true;
-    }
-           
+     
     // 本地系函数
     public void PressedStartButton()
     {
-        _RealTimeGameProcessManager.FightTeam1.ModeStart();
-        _RealTimeGameProcessManager.FightTeam2.ModeStart();
+        RealTimeGameProcessManager.target.FightTeam1.ModeStart();
+        RealTimeGameProcessManager.target.FightTeam2.ModeStart();
         switch (RealTimeGameProcessManager.playerTeam)
         {
             case Team.player1:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam1.TeamMembers.values[0], false);
+                RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values[0], false);
                 break;
             case Team.player2:
-                _RealTimeGameProcessManager.SwitchToCMode(_RealTimeGameProcessManager.FightTeam2.TeamMembers.values[0], false);
+                RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values[0], false);
                 break;
         }
-        _RealTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
     }
     
     // 这个函数应该包括一些更深层的考虑。
     public void ReturnToFront()
     {
         //Position_Set_Executor.Instance.P_sets.Clear();
-        List<Data_Center> player1 = _RealTimeGameProcessManager.FightTeam1.TeamMembers.values;
+        List<Data_Center> player1 = RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values;
         List<string> dontdestroy = new List<string>();
 
         List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
@@ -190,7 +134,7 @@ public class NetFightScene : MonoBehaviour {
             {
                 singleFightLogs.Add(player1[i]._MyBehaviorRunner.SingleFightLog);
                 player1[i]._MyBehaviorRunner.ChangeState("Empty");
-                CharDataInfo characterDataInfo = _RealTimeGameProcessManager.FightTeam1.CharDataInfoRef[player1[i]];
+                CharDataInfo characterDataInfo = RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef[player1[i]];
                 if (characterDataInfo != null)
                 {
                     dontdestroy.Add(characterDataInfo.monsterOfPlayerId);
@@ -198,7 +142,7 @@ public class NetFightScene : MonoBehaviour {
             }
         }
         
-        List<Data_Center> player2 = _RealTimeGameProcessManager.FightTeam2.TeamMembers.values;
+        List<Data_Center> player2 = RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values;
         for (int i = 0; i < player2.Count; i++)
         {
             if (player2[i] != null)
@@ -208,7 +152,7 @@ public class NetFightScene : MonoBehaviour {
         }
         
         _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
-        _RealTimeGameProcessManager.Clear();
+        RealTimeGameProcessManager.target.Clear();
         
         if (FightGlobalSetting.HitBoxLogger)
         {

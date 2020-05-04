@@ -15,7 +15,6 @@ public class FightTeam : MonoBehaviour
     public SideCharIcon button_prefab;
     public GameObject selectedFrame;
     public Text HitCombo;
-    public RealTimeGameProcessManager realTimeGameProcessManager;
     public MobileInputsManager _mobileInputsManager;
     public CharsManager _CharSetManager;
     

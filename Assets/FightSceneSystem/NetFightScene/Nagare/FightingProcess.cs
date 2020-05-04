@@ -5,7 +5,8 @@ using UniRx;
 
 public class FightingProcess : NagareProcess
 {
-    readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
+    readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
+    
     public FightingProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
     {
         thisProcessStep = SceneStep.Fighting;
@@ -20,9 +21,9 @@ public class FightingProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
-        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
-
+        AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+        AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+        
         BoundaryControllByGod.target.AllMembers = AllMembers;
         fightLogger.ReadyToLog(AllMembers);
         foreach (KeyValuePair<Team,List<Data_Center>> _set in AllMembers)
@@ -32,17 +33,17 @@ public class FightingProcess : NagareProcess
                 _char.Sensor.TeamMembers = AllMembers;
             }
         }
-        FightScene.PressedStartButton();
         FightScene.FightCanvas.gameObject.SetActive(true);
         fightOverControl.FightOverCanvas.gameObject.SetActive(false);
         FightScene.PreparingCanvas.gameObject.SetActive(false);
+        FightScene.PressedStartButton();
     }
     
     public override void ProcessEnd()
     {
         FightScene.FightCanvas.gameObject.SetActive(false);
         FightScene.PreparingCanvas.gameObject.SetActive(false);
-        mainProcessRunner.Run(FinalMoment(this.fightLogger.getWinner()));
+        mainProcessRunner.Run(FinalMoment(fightLogger.getWinner()));
     }
     
     public override void LocalUpdate()
@@ -51,20 +52,20 @@ public class FightingProcess : NagareProcess
         {
             FightScene.PauseScene();
         }
-        _RealTimeGameProcessManager.FightingStepProcess();
+        RealTimeGameProcessManager.target.FightingStepProcess();
     }
 
     IEnumerator FinalMoment(Team winner)
     {
         Time.timeScale = 0.4f;
         yield return new WaitForSeconds(2f);
-
+        
         List<Data_Center> winners = new List<Data_Center>();
         if (winner == Team.player1)
             winners = AllMembers[Team.player1];
         if (winner == Team.player2)
             winners = AllMembers[Team.player2];
-
+        
         foreach (Data_Center _one in winners)
         {
             if (!_one.IsDead.Value)

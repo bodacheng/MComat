@@ -19,18 +19,18 @@ public class BoundaryControllByGod : MonoBehaviour {
     [Header("场地控制模式")]
     [Space(6)]
     public BoundaryMode boundaryMode;
-
+    
     [Header("圆形模式参数")]
     [Space(6)]
     public List<ParticleSystem> BattleRingPSs;
     ParticleSystem BattleRingPS;
     float BattleRingRadius = 20f;
     public static float _BattleRingRadius;
-
+    
     public static BoundaryControllByGod target;
     
     public IDictionary<Team, List<Data_Center>> AllMembers;//双方队伍人员字典，和netfightscene模块里同名变量统一。
-
+    
     void Awake()
     {
         target = this;
@@ -51,7 +51,7 @@ public class BoundaryControllByGod : MonoBehaviour {
             }
         }
     }
-
+    
     public void ChangeMagicRingRadius(float targetradius)
     {
         BattleRingRadius = targetradius;
@@ -63,7 +63,7 @@ public class BoundaryControllByGod : MonoBehaviour {
         }
         DOTween.To(() => BattleRingRadius, x => BattleRingRadius = x, targetradius, 1).OnUpdate(() => changeRadius(BattleRingRadius));        
     }
-
+    
     float distanceFromCharToCenter;
     public void RoundBattleFieldNormalControl(Vector3 battleRingCenter)
     {

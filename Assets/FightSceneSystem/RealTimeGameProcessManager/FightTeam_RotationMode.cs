@@ -283,10 +283,10 @@ public class FightTeam_RotationMode : FightTeam
         }
         if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
         {
-            realTimeGameProcessManager.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
+            RealTimeGameProcessManager.target.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
         }
-        realTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-        realTimeGameProcessManager.Refresh();
+        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        RealTimeGameProcessManager.target.Refresh();
         return memberchanged;
     }
     
@@ -333,8 +333,8 @@ public class FightTeam_RotationMode : FightTeam
                 data_Center.WholeT.transform.position = new Vector3(9999, -200, 9999);
             }
         }
-        realTimeGameProcessManager.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-        realTimeGameProcessManager.Refresh();
+        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        RealTimeGameProcessManager.target.Refresh();
         return memberchanged;
     }
 }

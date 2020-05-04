@@ -22,7 +22,6 @@ public class DebugManager : MonoBehaviour {
 
     public CharsManager _CharSetManager;//0610 charsetmanger临时扮演数据库的作用
     public NetFightScene _NetFightScene;
-    public RealTimeGameProcessManager _RealTimeGameProcessManager;
     public CameraManager _CameraManager;//这个东西其实其他模块如果也拥有对其操作权的话，倒不会产生多大的问题
 
     public BoundaryControllByGod _BoundaryControllByGod;
@@ -191,11 +190,11 @@ public class DebugManager : MonoBehaviour {
                                 TeamConfig teamConfig;
                                 if (tag_dropdown.options[tag_dropdown.value].text == "Player1")
                                 {
-                                    teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
+                                    teamConfig = RealTimeGameProcessManager.target.heroTeamConfig;
                                 }
                                 else
                                 {
-                                    teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
+                                    teamConfig = RealTimeGameProcessManager.target.EnemyTeamConfig;
                                 }
 
                                 Zokusei Zokusei;
@@ -225,12 +224,12 @@ public class DebugManager : MonoBehaviour {
                                 {
                                     IDictionary<string, GameObject> teamDic = null;
                                     string localID = (-1).ToString();
-                                    if (teamConfig == _RealTimeGameProcessManager.heroTeamConfig)
+                                    if (teamConfig == RealTimeGameProcessManager.target.heroTeamConfig)
                                     {
                                         localID = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count.ToString();
                                         teamDic = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID;
                                     }
-                                    if (teamConfig == _RealTimeGameProcessManager.EnemyTeamConfig)
+                                    if (teamConfig == RealTimeGameProcessManager.target.EnemyTeamConfig)
                                     {
                                         //localID = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID.Count.ToString();
                                         //teamDic = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID;
@@ -316,11 +315,11 @@ public class DebugManager : MonoBehaviour {
                             TeamConfig teamConfig;
                             if (tag_dropdown.options[tag_dropdown.value].text == "Player1")
                             {
-                                teamConfig = _RealTimeGameProcessManager.heroTeamConfig;
+                                teamConfig = RealTimeGameProcessManager.target.heroTeamConfig;
                             }
                             else
                             {
-                                teamConfig = _RealTimeGameProcessManager.EnemyTeamConfig;
+                                teamConfig = RealTimeGameProcessManager.target.EnemyTeamConfig;
                             }
 
                             Zokusei Zokusei;
@@ -350,12 +349,12 @@ public class DebugManager : MonoBehaviour {
                             {
                                 IDictionary<string, GameObject> teamDic = null;
                                 string localID = (-1).ToString();
-                                if (teamConfig == _RealTimeGameProcessManager.heroTeamConfig)
+                                if (teamConfig == RealTimeGameProcessManager.target.heroTeamConfig)
                                 {
                                     localID = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.Count.ToString();
                                     teamDic = MyModelPool.Instance.ModelDicBasedOnPlayerLocalID;
                                 }
-                                if (teamConfig == _RealTimeGameProcessManager.EnemyTeamConfig)
+                                if (teamConfig == RealTimeGameProcessManager.target.EnemyTeamConfig)
                                 {
                                     //localID = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID.Count.ToString();
                                     //teamDic = myModelPool.Instance.ModelDicBasedOnEnemiesLocalID;

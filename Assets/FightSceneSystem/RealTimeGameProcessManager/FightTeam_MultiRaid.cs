@@ -127,8 +127,8 @@ public class FightTeam_MultiRaid : FightTeam
             _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
             void Action1()
             {
-                realTimeGameProcessManager.SwitchToCMode(a_char, RealTimeGameProcessManager.Auto);
-                realTimeGameProcessManager.CameraParaAdjustment(teamConfig.myTeam);
+                RealTimeGameProcessManager.target.SwitchToCMode(a_char, RealTimeGameProcessManager.Auto);
+                RealTimeGameProcessManager.target.CameraParaAdjustment(teamConfig.myTeam);
             }
             _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
             CharDataInfo characterDataInfo = CharDataInfoRef[a_char];

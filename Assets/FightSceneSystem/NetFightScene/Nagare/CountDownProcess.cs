@@ -15,7 +15,6 @@ public class CountDownProcess : NagareProcess
 
     public override void ProcessEnter()
     {
-        PreScene.Instance._CameraManager.Assign_Camera(C_Mode.RoundBoundary,null);
         startTimestamp = 3f;
         AutoMoveToNext = false;
         BoundaryControllByGod.target.ChangeMagicRingRadius(20f);

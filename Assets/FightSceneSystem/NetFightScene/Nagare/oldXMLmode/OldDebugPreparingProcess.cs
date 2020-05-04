@@ -66,7 +66,7 @@ public class OldDebugPreparingProcess : NagareProcess
         //{
         //    _NetFightScene.gameStartButton.gameObject.SetActive(false);
         //}
-        if (_RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
+        if (RealTimeGameProcessManager.target.FightTeam1.IfAllCharsPreparedForBattle() && RealTimeGameProcessManager.target.FightTeam2.IfAllCharsPreparedForBattle())
         {
             this.AutoMoveToNext = true;
         }

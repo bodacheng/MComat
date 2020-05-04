@@ -21,8 +21,8 @@ public class OldDebugFightingProcess : NagareProcess
     public override void ProcessEnter()
     {
         BoundaryControllByGod.target.AllMembers.Clear();
-        AllMembers.Add(Team.player1,_RealTimeGameProcessManager.FightTeam1.TeamMembers.values);
-        AllMembers.Add(Team.player2,_RealTimeGameProcessManager.FightTeam2.TeamMembers.values);
+        AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+        AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
         
         if (debugManager.debugMode == DebugMode.ab_mode)
         {
@@ -90,7 +90,7 @@ public class OldDebugFightingProcess : NagareProcess
             mainProcessRunner.Run(finalMoment(finalSurviver, winner)) ;
         }
 
-        if (FightScene.LoadStageFinished.Value && _RealTimeGameProcessManager.FightTeam1.IfAllCharsPreparedForBattle() && _RealTimeGameProcessManager.FightTeam2.IfAllCharsPreparedForBattle())
+        if (FightScene.LoadStageFinished.Value && RealTimeGameProcessManager.target.FightTeam1.IfAllCharsPreparedForBattle() && RealTimeGameProcessManager.target.FightTeam2.IfAllCharsPreparedForBattle())
         {
             AutoMoveToNext = true;
         }

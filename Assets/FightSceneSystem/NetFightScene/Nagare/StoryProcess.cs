@@ -1,5 +1,4 @@
 ﻿using UnityEngine.Playables;
-using mainMenu;
 
 public class StoryProcess : NagareProcess
 {
@@ -12,7 +11,8 @@ public class StoryProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        PreScene.Instance._CameraManager.Assign_Camera(C_Mode.RoundBoundary,null);
+        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
         if (FightSceneNote.nextBattle.beforefightstory != null)
         {
             AutoMoveToNext = false;
