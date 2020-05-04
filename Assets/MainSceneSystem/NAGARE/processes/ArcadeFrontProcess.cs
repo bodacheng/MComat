@@ -5,7 +5,7 @@ public class ArcadeFrontProcess : MainSceneProcess
 {    
     public IEnumerator EnterProcess()
     {
-        ArcadeManager.Instance._ArcadeCanvas.gameObject.SetActive(true);
+        ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
         yield break;
     }
     
@@ -27,7 +27,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        ArcadeManager.Instance._ArcadeCanvas.gameObject.SetActive(false);
+        ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()

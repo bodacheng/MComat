@@ -28,12 +28,12 @@ namespace mainMenu
         [Header("preparingScene")]
         public SingleThreadProcesser mainProcessRunner;
                         
-        public static ArcadeManager Instance;
+        public static ArcadeManager target;
         List<StageButton> stageButtons = new List<StageButton>();
                 
         void Awake()
         {
-            Instance = this;
+            target = this;
         }
 
         void Start()
