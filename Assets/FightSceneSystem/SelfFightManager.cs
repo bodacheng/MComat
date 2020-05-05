@@ -143,7 +143,7 @@ namespace mainMenu
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
             FightPreparePage.target.PreLoad(stage, TeamSetGameMode.selfFight);
-            PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo, true);
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, true);
         }
         
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
@@ -163,7 +163,7 @@ namespace mainMenu
             }
             void Trigger()
             {
-                PreScene.Instance.mainProcessRunner.Run(MonsterIconButton());
+                PreScene.target.mainProcessRunner.Run(MonsterIconButton());
             }
             targetButton.onClick.AddListener(Trigger);
         }
@@ -386,7 +386,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                PreScene.Instance.mainProcessRunner.Run(FightStart(float.Parse(HPinput.text)));
+                PreScene.target.mainProcessRunner.Run(FightStart(float.Parse(HPinput.text)));
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

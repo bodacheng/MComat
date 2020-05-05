@@ -8,8 +8,8 @@ public class SelfFightFront : MainSceneProcess
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;
         
-        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         
         MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
@@ -22,7 +22,7 @@ public class SelfFightFront : MainSceneProcess
     public SelfFightFront()
     {
         thisProcessStep = MainSceneStep.SelfFightFront;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()

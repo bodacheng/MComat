@@ -14,7 +14,7 @@ public class TryChangeStonePos : MainSceneProcess
     public TryChangeStonePos()
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
-        this.EelementsInherit(PreScene.Instance);
+        this.EelementsInherit(PreScene.target);
     }
     
     public IEnumerator EnterProcess()
@@ -37,11 +37,11 @@ public class TryChangeStonePos : MainSceneProcess
                 {
                     battleNameCH = "亚当大战傻逼门卫"
                 };
-                if (this.TuroialFight != null)
+                if (TuroialFight != null)
                 {
                     CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(myfighter);
-                    this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
-                    this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
+                    TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
+                    TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
                 }
                 else
                 {
@@ -51,8 +51,8 @@ public class TryChangeStonePos : MainSceneProcess
                 stage.localFight = this.TuroialFight;
                 stage._fightEventType = FightEventType.Tutorial_Story_AdamVsGuards;
                 stage.BattleGroundID = 2;
-                PreScene.Instance.LoadFight(stage);
-                this.ProcessEnd();
+                PreScene.target.LoadFight(stage);
+                ProcessEnd();
             }
             mainProcessRunner.Run(skilleditconfrim());
         }

@@ -106,7 +106,7 @@ namespace mainMenu
 
         public void OnTypeChangeMyMonsterBox()
         {
-            PreScene.Instance.mainProcessRunner.Run(DisplayMonsterIcons());
+            PreScene.target.mainProcessRunner.Run(DisplayMonsterIcons());
         }
 
         //icon的排列，显示   

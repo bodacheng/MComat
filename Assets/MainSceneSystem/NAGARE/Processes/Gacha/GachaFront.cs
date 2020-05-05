@@ -6,7 +6,7 @@ public class GachaFront : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         yield return _modelShower.ShowModel(null);
-        PreScene.Instance.MainMenuCanvas.gameObject.SetActive(true);
+        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         CameraManager._camera.gameObject.SetActive(false);
@@ -20,7 +20,7 @@ public class GachaFront : MainSceneProcess
     public GachaFront()
     {
         thisProcessStep = MainSceneStep.GotchaFront;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public override bool CanEnterOtherProcess()

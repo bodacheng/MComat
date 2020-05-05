@@ -69,7 +69,7 @@ namespace mainMenu
             }
             void Trigger()
             {
-                PreScene.Instance.mainProcessRunner.Run(MonsterIconButton());
+                PreScene.target.mainProcessRunner.Run(MonsterIconButton());
             }
             targetButton.onClick.AddListener(Trigger);
         }
@@ -95,11 +95,11 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                PreScene.Instance.mainProcessRunner.Run(Step2INIForUIRefresh(focusingCharDataInfo));
+                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(focusingCharDataInfo));
             }
             void SkillShow()
             {
-                PreScene.Instance.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
+                PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
             SkillShowButton.onClick.AddListener(SkillShow);
@@ -108,7 +108,7 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                PreScene.Instance.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+                PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
 

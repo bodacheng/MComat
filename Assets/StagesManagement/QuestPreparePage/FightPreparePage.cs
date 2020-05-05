@@ -59,7 +59,7 @@ namespace mainMenu
             EnterQuest.onClick.RemoveAllListeners();
             void Go()
             {
-                PreScene.Instance.AskIfLoadFight(ToBeLoad);
+                PreScene.target.AskIfLoadFight(ToBeLoad);
             }
             EnterQuest.onClick.AddListener(Go);
             EnterQuest.gameObject.SetActive(true);

@@ -3,7 +3,6 @@ using UnityEngine;
 using UniRx.Toolkit;
 using HittingDetection;
 using System;
-using System.Collections.Generic;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
 
@@ -79,25 +78,30 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         GameObject a = UnityEngine.Object.Instantiate(Prefab);
         a.transform.SetParent(Marker.transform);
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
-        BO_Marker_Manager bO_Marker_Manager = a.GetComponent<BO_Marker_Manager>();
+        BO_Marker_Manager BBMM = a.GetComponent<BO_Marker_Manager>();
         TrackControl danMuTest = a.GetComponent<TrackControl>();
-        PositionConstraint positionConstraint = a.GetComponent<PositionConstraint>();
-        if (positionConstraint == null)
+        PositionConstraint PC = a.GetComponent<PositionConstraint>();
+        if (PC == null)
         {
-            positionConstraint = a.AddComponent<PositionConstraint>();
-            positionConstraint.translationOffset = Vector3.zero;
-            positionConstraint.weight = 1;
+            PC = a.AddComponent<PositionConstraint>();
+            PC.translationOffset = Vector3.zero;
+            PC.weight = 1;
         }
         
-        Rigidbody rigidbody = a.GetComponent<Rigidbody>();//不加刚体的话很多情况下collider的检测类物理函数检测不到
-        if (rigidbody == null)
+        Rigidbody RG = a.GetComponent<Rigidbody>();//不加刚体的话很多情况下collider的检测类物理函数检测不到
+        if (RG == null)
         {
-            rigidbody = a.AddComponent<Rigidbody>();
+            RG = a.AddComponent<Rigidbody>();
         }
-        rigidbody.isKinematic = true;//这个刚体不受物理影响
+        RG.isKinematic = true;//这个刚体不受物理影响
         
-        decompositioner._HitBox = bO_Marker_Manager;
-        decompositioner.SetPositionConstraint(positionConstraint);
+        if (decompositioner.audioSource == null)
+        {
+            decompositioner.audioSource = decompositioner.transform.GetComponent<AudioSource>();
+        }
+        
+        decompositioner._HitBox = BBMM;
+        decompositioner.SetPositionConstraint(PC);
         decompositioner.TrackControl = danMuTest;
         decompositioner.SetPool(this);
         return decompositioner;

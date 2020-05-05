@@ -7,8 +7,8 @@ public class QuestInfo : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         yield return _modelShower.ShowModel(null);
-        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
         yield return FightPreparePage.target.GetReadyForStageASTeam();
     }
@@ -16,7 +16,7 @@ public class QuestInfo : MainSceneProcess
     public QuestInfo()
     {
         thisProcessStep = MainSceneStep.QuestInfo;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public override bool CanEnterOtherProcess()

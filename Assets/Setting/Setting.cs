@@ -59,7 +59,7 @@ public class Setting : MonoBehaviour {
     {
         AccountSet._AccInfo.BgmVolumn = bgmSLider.value;
         AccountSet._AccInfo.EffectsVolumn = effectsSoundsSlider.value;
-        PreScene.Instance.mainProcessRunner.Run(AccountSet.SaveCustomerInfo());
+        PreScene.target.mainProcessRunner.Run(AccountSet.SaveCustomerInfo());
     }
 
     public void onBgmChange()

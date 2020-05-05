@@ -14,7 +14,7 @@ public class TryEditNineSlot : MainSceneProcess
         this.nextProcessStep = MainSceneStep.None;
         
         this.subProcessesRunner = processesRunner;
-        this.EelementsInherit(PreScene.Instance);
+        this.EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()

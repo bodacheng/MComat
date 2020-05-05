@@ -34,7 +34,7 @@ public class GachaManager : MonoBehaviour
     
     public void TenTimes()
     {
-        PreScene.Instance.trySwitchToStep(MainSceneStep.GotchaAnim,true);
+        PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim,true);
     }
     
     public IEnumerator Gacha()

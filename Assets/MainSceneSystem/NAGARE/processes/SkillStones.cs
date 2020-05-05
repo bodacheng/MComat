@@ -9,19 +9,19 @@ public class SkillStones : MainSceneProcess
     {
         LoadingCanvas.target.DarkOff(1f);
         yield return _modelShower.ShowModel(null);
-        SkillStonesBox.target = PreScene.Instance._SkillStonesBox_Show;
+        SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
         
-        PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
+        PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         
         IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
         yield return (loadMyStonesProcess);
-        PreScene.Instance._SkillStonesBox_Show.BoxWholeT.gameObject.SetActive(true);
+        PreScene.target._SkillStonesBox_Show.BoxWholeT.gameObject.SetActive(true);
         
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);//这一行因为牵扯到对玩家存档中技能石头的读取所以可能是(协程)
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
@@ -40,7 +40,7 @@ public class SkillStones : MainSceneProcess
     public SkillStones()
     {
         thisProcessStep = MainSceneStep.SkillStones;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()

@@ -12,7 +12,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     public ArcadeFrontProcess()
     {
         thisProcessStep = MainSceneStep.ArcadeFront;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public override bool CanEnterOtherProcess()

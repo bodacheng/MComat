@@ -12,7 +12,7 @@ public class TrySkillShowMenu : MainSceneProcess
     {
         //this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
         this.subProcessesRunner = processesRunner;
-        this.EelementsInherit(PreScene.Instance);
+        this.EelementsInherit(PreScene.target);
     }
     
     public IEnumerator EnterProcess()

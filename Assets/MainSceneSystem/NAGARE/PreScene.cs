@@ -8,7 +8,7 @@ namespace mainMenu
 {
     public class PreScene : MonoBehaviour
     {
-        public static PreScene Instance;
+        public static PreScene target;
         
         [Space(7)]
         [Header("主进程处理器")]
@@ -64,7 +64,7 @@ namespace mainMenu
         
         void Awake()
         {
-            Instance = this;
+            target = this;
         }
         
         void Start()

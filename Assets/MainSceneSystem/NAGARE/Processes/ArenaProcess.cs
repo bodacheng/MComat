@@ -6,7 +6,7 @@ public class ArenaProcess : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        PreScene.Instance.mainProcessRunner.Run(ArenaManager.target.LoadArena());
+        PreScene.target.mainProcessRunner.Run(ArenaManager.target.LoadArena());
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
         yield break;
     }
@@ -14,7 +14,7 @@ public class ArenaProcess : MainSceneProcess
     public ArenaProcess()
     {
         thisProcessStep = MainSceneStep.Arena;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public override bool CanEnterOtherProcess()

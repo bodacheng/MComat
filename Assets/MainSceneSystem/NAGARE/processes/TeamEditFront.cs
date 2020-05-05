@@ -7,23 +7,23 @@ public class TeamEditFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
         _CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;        
         yield return TeamSet.LoadTeamSet(TeamSet.targetTeamMode);
-        yield return PreScene.Instance.TeamEditor.INITeamPosButtons();
+        yield return PreScene.target.TeamEditor.INITeamPosButtons();
         yield return MonsterBox.DisplayMonsterIcons();
-        PreScene.Instance.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
-        PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(true);
+        PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
         yield break;
     }
     
     public TeamEditFront()
     {
         thisProcessStep = MainSceneStep.TeamEditFront;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public override bool CanEnterOtherProcess()
@@ -38,7 +38,7 @@ public class TeamEditFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.Instance.ArcadeTeamEditT.gameObject.SetActive(false);
+        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         mainProcessRunner.Run(TeamSet.SaveTeamSet(TeamSet.targetTeamMode));// 退出队伍编辑画面即保存
     }

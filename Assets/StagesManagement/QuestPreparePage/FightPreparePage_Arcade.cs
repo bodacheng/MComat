@@ -14,7 +14,7 @@ namespace mainMenu
             void GoToTeamEdit_Arcade()
             {
                 TeamSet.SwitchTargetTeam(TeamSetGameMode.story);
-                PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+                PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront,true);
             }
             EditTeamButton.gameObject.SetActive(true);
             EditTeamButton.onClick.RemoveAllListeners();

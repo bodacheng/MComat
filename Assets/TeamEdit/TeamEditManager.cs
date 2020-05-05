@@ -36,7 +36,7 @@ public class TeamEditManager : MonoBehaviour
         }
         void Trigger()
         {
-            PreScene.Instance.mainProcessRunner.Run(MonsterIconButton());
+            PreScene.target.mainProcessRunner.Run(MonsterIconButton());
         }
         targetButton.onClick.AddListener(Trigger);
     }
@@ -80,7 +80,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 yield return ChangeTeamPos(null, focusingPosNum);
             }
-            PreScene.Instance.mainProcessRunner.Run(RemoveSelected());
+            PreScene.target.mainProcessRunner.Run(RemoveSelected());
         }
         RemoveButton.onClick.AddListener(Remove);
 
@@ -94,7 +94,7 @@ public class TeamEditManager : MonoBehaviour
                 HeroIcon.Seletedfeature(team1front, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
-            PreScene.Instance.mainProcessRunner.Run(setPosF());
+            PreScene.target.mainProcessRunner.Run(setPosF());
         }
         team1front.iconButton.onClick.AddListener(pos1F);
         
@@ -108,7 +108,7 @@ public class TeamEditManager : MonoBehaviour
                 HeroIcon.Seletedfeature(team1left, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
-            PreScene.Instance.mainProcessRunner.Run(setPosL());
+            PreScene.target.mainProcessRunner.Run(setPosL());
         }
         team1left.iconButton.onClick.AddListener(pos1L);
         
@@ -122,7 +122,7 @@ public class TeamEditManager : MonoBehaviour
                 HeroIcon.Seletedfeature(team1right, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
-            PreScene.Instance.mainProcessRunner.Run(setPosR());
+            PreScene.target.mainProcessRunner.Run(setPosR());
         }
         team1right.iconButton.onClick.AddListener(pos1R);
     }

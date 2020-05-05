@@ -9,13 +9,13 @@ public class GachaAnim : MainSceneProcess
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         EffectsManager.IniEffectsPool("gachastar", "defaultmagic", 3);
         yield return GachaRender.target.TenGotchaAnimProcess(GachaManager.target.GetResult());
-        PreScene.Instance.trySwitchToStep(MainSceneStep.GotchaResult,false);
+        PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult,false);
     }
     
     public GachaAnim()
     {
         thisProcessStep = MainSceneStep.GotchaAnim;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public override bool CanEnterOtherProcess()

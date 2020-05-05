@@ -38,7 +38,7 @@ public class TryEditALines : MainSceneProcess
     public TryEditALines()
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;    
-        this.EelementsInherit(PreScene.Instance);
+        this.EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()
@@ -106,7 +106,7 @@ public class TryEditALines : MainSceneProcess
             stage.localFight = this.TuroialFight;
             stage._fightEventType = FightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
-            PreScene.Instance.LoadFight(stage);
+            PreScene.target.LoadFight(stage);
             this.ProcessEnd();
         }
 

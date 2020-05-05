@@ -34,7 +34,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     {
         this.thisProcessStep = MainSceneStep.Tutorial_skillEdit;
         this.nextProcessStep = MainSceneStep.Tutorial_Story;
-        this.EelementsInherit(PreScene.Instance);
+        this.EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()//这个应该是有条件的，玩家应该给亚当装配多少个技能石才能进入战斗环节？  

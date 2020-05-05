@@ -53,7 +53,7 @@ namespace mainMenu
                 void LoadThisStage()
                 {
                     FightPreparePage.target.PreLoad(one, TeamSetGameMode.story);
-                    PreScene.Instance.trySwitchToStep(MainSceneStep.QuestInfo,true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
                 }
                 newButton.button.onClick.AddListener(LoadThisStage);
                 newButton.ID = one.LocalFightID;

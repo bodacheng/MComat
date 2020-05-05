@@ -9,15 +9,15 @@ public class MemberDetail_skillshow : MainSceneProcess
     public MemberDetail_skillshow()
     {
         thisProcessStep = MainSceneStep.MemberDetail_show;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
     
     public IEnumerator EnterProcess()
     {
         CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target.focusingCharDataInfo);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
-        PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);

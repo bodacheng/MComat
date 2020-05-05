@@ -13,7 +13,7 @@ namespace mainMenu
             void GoToTeamEdit_Arena()
             {
                 TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
-                PreScene.Instance.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+                PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront,true);
             }
             EditTeamButton.gameObject.SetActive(true);
             EditTeamButton.onClick.RemoveAllListeners();

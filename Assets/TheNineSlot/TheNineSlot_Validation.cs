@@ -22,7 +22,7 @@ namespace mainMenu
                         yield return new WaitForSecondsRealtime(2f);
                         _ValiWarn.text = "";
                     }
-                    PreScene.Instance.mainProcessRunner.Run(temp());
+                    PreScene.target.mainProcessRunner.Run(temp());
                 break;
                 case SkillEditError.UnBalanced:
                     IEnumerator temp2()
@@ -31,7 +31,7 @@ namespace mainMenu
                         yield return new WaitForSecondsRealtime(2f);
                         _ValiWarn.text = "";
                     }
-                    PreScene.Instance.mainProcessRunner.Run(temp2());
+                    PreScene.target.mainProcessRunner.Run(temp2());
                 break;
             }
         }

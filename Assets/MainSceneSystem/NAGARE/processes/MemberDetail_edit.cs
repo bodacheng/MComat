@@ -8,9 +8,9 @@ public class MemberDetail_edit : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        SkillStonesBox.target = PreScene.Instance._SkillStonesBox_NineSlot;
+        SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
-        PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
+        PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 2);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
@@ -32,7 +32,7 @@ public class MemberDetail_edit : MainSceneProcess
     public MemberDetail_edit()
     {
         thisProcessStep = MainSceneStep.MemberDetail_edit;
-        EelementsInherit(PreScene.Instance);
+        EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()
@@ -47,7 +47,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.Instance.MainMenuCanvas.gameObject.SetActive(true);
+        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
