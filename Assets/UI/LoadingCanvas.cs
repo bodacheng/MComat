@@ -16,6 +16,7 @@ public class LoadingCanvas : MonoBehaviour {
     [Space(11)]
     [Header("Validation")]
     public RectTransform ValidationWindow;
+    public RectTransform ValidationWindow_PosForMask;
     public Text ValidationIntro;
     public Button YesButton;
     public Button NoButton;
@@ -44,10 +45,12 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void HigtLightRect(Transform _Transform)
     {
-        Loading_Canvas.gameObject.SetActive(true);
+        hollowOutMask.gameObject.SetActive(true);
+        
         if (LoadingCanvasBigCurtain != null)
             LoadingCanvasBigCurtain.color = Color.clear;
         //Loading_Canvas.sortingOrder = 1;
+        hollowOutMask.raycastTarget = true;
         hollowOutMask.SetTarget(_Transform.GetComponent<RectTransform>());
         hollowOutMask.color = new Color(0, 0, 0, 0.6f);
     }
@@ -57,6 +60,7 @@ public class LoadingCanvas : MonoBehaviour {
         hollowOutMask.SetTarget(null);
         Loading_Canvas.gameObject.SetActive(false);
         hollowOutMask.color = Color.clear;
+        hollowOutMask.gameObject.SetActive(false);
     }
     
     public void LightUp()
@@ -101,8 +105,7 @@ public class LoadingCanvas : MonoBehaviour {
     {
         this.Loading_Canvas.gameObject.SetActive(true);
         this.ValidationWindow.gameObject.SetActive(true);
-        
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0.5f);
+        HigtLightRect(this.ValidationWindow_PosForMask.transform);
         
         void closeValidationWindow()
         {
@@ -112,6 +115,7 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
             this.ValidationWindow.gameObject.SetActive(false);
             this.Loading_Canvas.gameObject.SetActive(false);
+            ClearHigtLight();
         }
         
         this.YesButton.onClick.RemoveAllListeners();
@@ -127,8 +131,7 @@ public class LoadingCanvas : MonoBehaviour {
     {
         this.Loading_Canvas.gameObject.SetActive(true);
         this.ValidationWindow.gameObject.SetActive(true);
-        
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0.5f);
+        HigtLightRect(this.ValidationWindow_PosForMask.transform);
         
         void closeValidationWindow()
         {
@@ -138,6 +141,7 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
             this.ValidationWindow.gameObject.SetActive(false);
             this.Loading_Canvas.gameObject.SetActive(false);
+            ClearHigtLight();
         }
         
         this.YesButton.onClick.RemoveAllListeners();

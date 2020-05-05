@@ -19,11 +19,11 @@ namespace mainMenu
         [Space(7)]
         [Header("ViewScrollBar")]
         public Scrollbar _Scrollbar;
-
+        
         [Space(7)]
         [Header("StageButtonPretab")]
         public StageButton pretab;
-
+        
         [Space(7)]
         [Header("preparingScene")]
         public SingleThreadProcesser mainProcessRunner;
@@ -35,7 +35,7 @@ namespace mainMenu
         {
             target = this;
         }
-
+        
         void Start()
         {
             GenerateStageButtons();

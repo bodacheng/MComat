@@ -1,21 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// 实现镂空效果的Mask组件
+/// 实现镂空效果的Mask组件，该模块必须放在Canvas上，
+/// 并且其作用方式是将这个Canvas的部分区域给剪掉并让其他区域变色来实现“缕空”目的
+/// 这个剪掉并不是说将对应Canvas区域的图像也给扣去，而是让对象区域失去点击功能，并且辅之以颜色区别
+/// 可推知，如果希望靠该缕空功能来让部分窗口高亮显示，
+/// 对象窗口如果在本模块所在Canvas内部的话，对应区域会失去点击功能，内部的按钮也点不了了。
+/// 如果希望实现高亮显示一些带按钮的窗口高亮显示，必须专门建立一个Mask Canvas来装载本组件，
+/// 并且在内部安排与欲高亮显示区域一样大小的RectTransform来辅助功能完成。
+/// 另外，Canvas的sort order在本功能里有着重要的影响。
+/// Mask Canvas的sort order值必须最高，欲高亮显示窗口所在Canvas为其次，高亮显示期间欲屏蔽区域所在的Canvas为最低
 /// </summary>
+
 public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
 {
     [SerializeField]
-    private RectTransform _target;
-
-    private Vector3 _targetMin = Vector3.zero;
-    private Vector3 _targetMax = Vector3.zero;
-
-    private bool _canRefresh = true;
-    private Transform _cacheTrans = null;
+    RectTransform _target;
+    
+    Vector3 _targetMin = Vector3.zero;
+    Vector3 _targetMax = Vector3.zero;
+    
+    bool _canRefresh = true;
+    Transform _cacheTrans = null;
 
     /// <summary>
     /// 设置镂空的目标
@@ -27,7 +34,7 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         _RefreshView();
     }
 
-    private void _SetTarget(Vector3 tarMin, Vector3 tarMax)
+    void _SetTarget(Vector3 tarMin, Vector3 tarMax)
     {
         if (tarMin == _targetMin && tarMax == _targetMax)
             return;
@@ -36,11 +43,11 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         SetAllDirty();
     }
 
-    private void _RefreshView()
+    void _RefreshView()
     {
-        if(!_canRefresh) return;
+        if (!_canRefresh) return;
         _canRefresh = false;
-
+        
         if (null == _target)
         {
             _SetTarget(Vector3.zero, Vector3.zero);
