@@ -128,7 +128,7 @@ namespace mainMenu
                 _targetingIcon.iconButton.onClick.RemoveAllListeners();
                 void Select()
                 {
-                    HeroIcon.Seletedfeature(_targetingIcon, target.selectedFrame,150f);
+                    HeroIcon.Seletedfeature(_targetingIcon, target.selectedFrame, 150f);
                 }
                 _targetingIcon.iconButton.onClick.AddListener(Select);
                 _targetingIcon.gameObject.SetActive(true);

@@ -30,7 +30,7 @@ public class TryChangeStonePos : MainSceneProcess
                 IEnumerator getchar = AccountCharsSet.Load("1");
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel myfighter = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                yield return TheNineSlot.Instance.UpdateMyStonesBaseOnSlots(myfighter);
+                yield return TheNineSlot.target.UpdateMyStonesBaseOnSlots(myfighter);
                 yield return MemberDetail.target.SkillEditConfirmAnimation();
 
                 StageScriptableObject stage = new StageScriptableObject
@@ -61,8 +61,8 @@ public class TryChangeStonePos : MainSceneProcess
         {
             LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
-        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
-        TheNineSlot.Instance.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        TheNineSlot.target.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
+        TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
         yield break;
     }
     

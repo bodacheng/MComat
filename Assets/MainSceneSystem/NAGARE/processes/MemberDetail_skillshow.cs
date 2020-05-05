@@ -19,7 +19,7 @@ public class MemberDetail_skillshow : MainSceneProcess
         PreScene.Instance._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.Instance._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
-        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         yield break;

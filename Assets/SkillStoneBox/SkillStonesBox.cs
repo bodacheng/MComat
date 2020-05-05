@@ -96,7 +96,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 0;
-            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
         
         // Button feature
@@ -104,7 +104,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 1;
-            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
         
         // Button feature
@@ -112,7 +112,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 2;
-            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
         
         // Button feature
@@ -120,7 +120,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
             focusingExType = 3;
-            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
@@ -154,13 +154,13 @@ namespace mainMenu
 
         void RangeCheckBoxOnValueChanged()
         {
-            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
 
         public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            TheNineSlot.Instance.mainProcessRunner.Run(EXTabsFeatureRefresh(true));
+            TheNineSlot.target.mainProcessRunner.Run(EXTabsFeatureRefresh(true));
         }
         
         Vector2 buttonAnchorPosition;

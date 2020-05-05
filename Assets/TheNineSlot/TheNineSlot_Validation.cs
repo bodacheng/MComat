@@ -38,7 +38,7 @@ namespace mainMenu
         
         public SkillEditError CheckEditBasedOnCurrent(SKStoneItem item, StoneCell replacePosition)
         {
-            List<string> nineskillids = Instance.GetCurrentNineSlotAllSkillIds();// 基于九宫格
+            List<string> nineskillids = target.GetCurrentNineSlotAllSkillIds();// 基于九宫格
             
             if (item == null)
             {
@@ -48,39 +48,39 @@ namespace mainMenu
                 };
             }
             
-            if (replacePosition == Instance.A1DragAndDropCell)
+            if (replacePosition == target.A1DragAndDropCell)
             {
                 nineskillids[0] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.A2DragAndDropCell)
+            if (replacePosition == target.A2DragAndDropCell)
             {
                 nineskillids[1] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.A3DragAndDropCell)
+            if (replacePosition == target.A3DragAndDropCell)
             {
                 nineskillids[2] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.B1DragAndDropCell)
+            if (replacePosition == target.B1DragAndDropCell)
             {
                 nineskillids[3] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.B2DragAndDropCell)
+            if (replacePosition == target.B2DragAndDropCell)
             {
                 nineskillids[4] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.B3DragAndDropCell)
+            if (replacePosition == target.B3DragAndDropCell)
             {
                 nineskillids[5] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.C1DragAndDropCell)
+            if (replacePosition == target.C1DragAndDropCell)
             {
                 nineskillids[6] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.C2DragAndDropCell)
+            if (replacePosition == target.C2DragAndDropCell)
             {
                 nineskillids[7] = item._SkillConfig.RECORD_ID;
             }
-            if (replacePosition == Instance.C3DragAndDropCell)
+            if (replacePosition == target.C3DragAndDropCell)
             {
                 nineskillids[8] = item._SkillConfig.RECORD_ID;
             }

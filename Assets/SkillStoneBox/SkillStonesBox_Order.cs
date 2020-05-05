@@ -38,7 +38,7 @@ namespace mainMenu
                     orderButtonText.text = "Rarity DES";
                 break;
             }
-            TheNineSlot.Instance.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
         
         List<string> Order(List<string> targets)

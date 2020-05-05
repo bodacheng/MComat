@@ -17,7 +17,7 @@ public class SkillStones : MainSceneProcess
         
         PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         
         IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
         yield return (loadMyStonesProcess);

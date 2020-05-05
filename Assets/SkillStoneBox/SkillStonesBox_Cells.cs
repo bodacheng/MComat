@@ -8,11 +8,11 @@ using Api.Dto.Model;
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
-    {        
+    {
         [Space(7)]
         [Header("格子pretab")]
         public StoneCell Cellprefab;
-        
+                
         [Space(5)]
         [Header("选中框")]
         public GameObject SelectedFrame;
@@ -88,9 +88,9 @@ namespace mainMenu
                 CellsDictionary[i]._selected.SetActive(false);
                 CellsDictionary[i]._SelectMode = StoneCell.SelectMode.single;
             }
-            GridLayoutGroup gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
-            hangshu = cellsLimit / gridLayoutGroup.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hangshu);
+            GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            hangshu = cellsLimit / GridLayoutGroup.constraintCount + 1;
+            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
         }
         
         public StoneCell GetFirstEmptyCell()
@@ -114,9 +114,9 @@ namespace mainMenu
                 {
                     if (Time.time - lastclicktime < 0.25f) // double click
                     {
-                        if (TheNineSlot.Instance.GetFocusingStoneSlot() != null)
+                        if (TheNineSlot.target.GetFocusingStoneSlot() != null)
                         {
-                            _SkillStoneCell.Install(_SkillStoneCell,TheNineSlot.Instance.GetFocusingStoneSlot());
+                            _SkillStoneCell.Install(_SkillStoneCell,TheNineSlot.target.GetFocusingStoneSlot());
                         }
                     }
                     lastclicktime = Time.time;

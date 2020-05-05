@@ -3,7 +3,7 @@ using UnityEngine;
 using mainMenu;
 
 public class MemberDetailProcess : MainSceneProcess
-{    
+{
     public MemberDetailProcess()
     {
         thisProcessStep = MainSceneStep.MemberDetail;

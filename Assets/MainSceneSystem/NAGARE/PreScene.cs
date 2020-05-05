@@ -91,7 +91,7 @@ namespace mainMenu
             
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-            TheNineSlot.Instance.gameObject.SetActive(false);
+            TheNineSlot.target.gameObject.SetActive(false);
             MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
             MainMenuCanvas.gameObject.SetActive(false);
             
@@ -146,7 +146,7 @@ namespace mainMenu
             yield return _SkillStonesBox_NineSlot.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
             yield return _SkillStonesBox_Show.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
-            yield return (TheNineSlot.Instance.StartUp());
+            yield return (TheNineSlot.target.StartUp());
             
             yield return _SelfFightManager.INITeamPosButtons();
             

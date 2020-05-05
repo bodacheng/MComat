@@ -22,7 +22,7 @@ public class TrySkillShowMenu : MainSceneProcess
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh(characterDataInfo);
         //SkillStonesBox.Instance.SkillBoxCanvas.gameObject.SetActive(false);
         //SkillStonesBox.Instance.BoxWholeT.gameObject.SetActive(false);
-        TheNineSlot.Instance.NineSlotT.gameObject.SetActive(false);
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
         this._CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
         this._CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;

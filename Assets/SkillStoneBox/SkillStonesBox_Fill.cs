@@ -11,10 +11,10 @@ namespace mainMenu
     {
         public IEnumerator ArrangeSkillStonesToBox()
         {
-            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.Instance.GetUsingStonesId());
+            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.target.GetUsingStonesId());
             _StoneDeleteManger.RefreshSelectedRender();
         }
-                
+        
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<string> UsingStoneIDs)
         {
@@ -31,6 +31,7 @@ namespace mainMenu
                 }
                 cellPair.Value.UpdateMyItem(); // 被拔下石头的格子需要把使用中角色头像关闭。单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
             }
+            
             List<String> targetSKs = MySkillStonesReader.TargetStonesFromOfAccount(type, exType, close, near, far, outrange);
             targetSKs = Order(targetSKs);
             
@@ -39,6 +40,7 @@ namespace mainMenu
                 Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + AccountSet.Instance._PlayerAccountInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
                 yield break;
             }
+            
             int cellindex = 0;
             for (int i = 0; i < targetSKs.Count; i++)
             {

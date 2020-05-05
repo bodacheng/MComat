@@ -10,12 +10,12 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public static TheNineSlot Instance;
-
+        public static TheNineSlot target;
+        
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
-
+        
         [Space(5)]
         [Header("几个重要RectTransform")]
         public RectTransform NineSlotT;
@@ -23,7 +23,7 @@ namespace mainMenu
         [Space(5)]
         [Header("SKillPrintout")]
         public SkillsPrintOut _SkillsPrintOut;
-
+        
         [Space(5)]
         [Header("CurrentHp")]
         public Text _HP;
@@ -31,22 +31,22 @@ namespace mainMenu
         [Space(5)]
         [Header("Validation Warning")]
         public Text _ValiWarn;
-
+        
         [Space(5)]
         [Header("九格")]
         public StoneCell
         A1DragAndDropCell, A2DragAndDropCell, A3DragAndDropCell,
         B1DragAndDropCell, B2DragAndDropCell, B3DragAndDropCell,
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
-
+        
         [Space(1)]
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;
-
+        
         [Space(7)]
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
-
+        
         [Space(7)]
         [Header("EXRemain")]
         public List<GameObject> remainCharges;//固定是9个长度
@@ -55,7 +55,7 @@ namespace mainMenu
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;
-
+        
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
         SkillStoneSlot C1Slot, C2Slot, C3Slot;
@@ -66,7 +66,7 @@ namespace mainMenu
         void Awake()
         {
             _Selected = SelectedFrame;
-            Instance = this;
+            target = this;
         }
         
         public static void SeletedRender(StoneCell cell)
