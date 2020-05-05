@@ -15,7 +15,7 @@ namespace dataAccess
         {
             GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm
             {
-                sessionId = AccountSet.Instance.sessionId
+                sessionId = AccountSet.sessionId
             };
             switch (teamSetGameMode)
             {
@@ -75,7 +75,7 @@ namespace dataAccess
         {
             SetMonsterTeamOfPlayerForm form = new SetMonsterTeamOfPlayerForm
             {
-                sessionId = AccountSet.Instance.sessionId
+                sessionId = AccountSet.sessionId
             };
             switch (teamSetGameMode)
             {

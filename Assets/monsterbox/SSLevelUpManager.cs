@@ -105,7 +105,7 @@ public class SSLevelUpManager : MonoBehaviour
     {
         int current_level = currentStone.GetLevel();
         Debug.Log("Current Level:" + current_level + ", Targetlevel : " + tartgetlevel);
-        return AccountSet.Instance._PlayerAccountInfo.Coin > (tartgetlevel - current_level);
+        return AccountSet._AccInfo.Coin > (tartgetlevel - current_level);
     }
 
     // 技能升级确认。放在按钮上就可以

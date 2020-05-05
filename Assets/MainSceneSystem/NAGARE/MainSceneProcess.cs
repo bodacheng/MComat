@@ -54,7 +54,7 @@ namespace mainMenu
         GotchaFront = 6,      
         GotchaAnim = 7,
         GotchaResult = 24,
-        
+        BoxExpansion = 202,
         QuestInfo = 8,
         ArcadeFront = 9,
         Arena = 3,

@@ -15,7 +15,7 @@ namespace dataAccess
             List<SkillStoneOfPlayerInfoModel> infos = new List<SkillStoneOfPlayerInfoModel>();
             GetSkillStoneOfPlayerInfoForm form = new GetSkillStoneOfPlayerInfoForm
             {
-                sessionId = AccountSet.Instance.sessionId
+                sessionId = AccountSet.sessionId
             };
             yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm>
             (
@@ -49,7 +49,7 @@ namespace dataAccess
             List<SkillStoneGotchaInfoModel> infos;
             SkillStoneGotchaForm form = new SkillStoneGotchaForm
             {
-                sessionId = AccountSet.Instance.sessionId,
+                sessionId = AccountSet.sessionId,
                 gotchaPolicyKey = gotchaPolicyKey
             };
 

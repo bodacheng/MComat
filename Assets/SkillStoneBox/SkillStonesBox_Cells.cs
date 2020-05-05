@@ -189,19 +189,19 @@ namespace mainMenu
                 List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromOfAccount(characterTypes[i], 2, true, true, true, true);
                 List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromOfAccount(characterTypes[i], 3, true, true, true, true);
                 
-                if (SkillStonesOfType_normal.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
+                if (SkillStonesOfType_normal.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
                     error_massegas.Add(characterTypes[i]+"类角色的普通技能石数量超过限制");
                 }
-                if (SkillStonesOfType_EX1.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
+                if (SkillStonesOfType_EX1.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
                     error_massegas.Add(characterTypes[i]+"类角色的一级必杀技能石数量超过限制");
                 }
-                if (SkillStonesOfType_EX2.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
+                if (SkillStonesOfType_EX2.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
                     error_massegas.Add(characterTypes[i]+"类角色的二级必杀技能石数量超过限制");
                 }
-                if (SkillStonesOfType_EX3.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
+                if (SkillStonesOfType_EX3.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
                     error_massegas.Add(characterTypes[i]+"类角色的三级必杀技能石数量超过限制");
                 }

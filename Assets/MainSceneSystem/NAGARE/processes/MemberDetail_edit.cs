@@ -12,7 +12,7 @@ public class MemberDetail_edit : MainSceneProcess
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         PreScene.Instance.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize, 2);
+        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 2);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         yield return SkillEditButtonFeature(MemberDetail.target.focusingCharDataInfo);

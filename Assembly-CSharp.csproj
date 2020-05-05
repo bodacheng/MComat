@@ -390,6 +390,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfo.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStones.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneBoxExpansion.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TopPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial_skillEdit.cs" />
@@ -550,6 +551,7 @@
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
     <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
+    <Compile Include="Assets\SkillStoneBox\BoxExpansionHelper\BoxManageHelper.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Fill.cs" />

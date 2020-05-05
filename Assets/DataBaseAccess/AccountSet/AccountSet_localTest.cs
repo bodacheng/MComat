@@ -8,7 +8,7 @@ namespace dataAccess
 {
     public partial class AccountSet
     {
-        public IEnumerator LoadCustomerInfoViaLocalFile()
+        public static IEnumerator LoadCustomerInfoViaLocalFile()
         {
             try
             {
@@ -20,24 +20,24 @@ namespace dataAccess
                     info = JsonConvert.DeserializeObject<PlayerAccountInfo>(dataAsJson);
                     Debug.Log("玩家账户信息读取成功");
                 }
-                _PlayerAccountInfo = info;
+                _AccInfo = info;
             }
             catch (Exception e)
             {
                 Debug.Log("玩家账户信息读取失败");
                 Debug.Log(e.ToString());
-                _PlayerAccountInfo = new PlayerAccountInfo();
+                _AccInfo = new PlayerAccountInfo();
             }
             yield break;
         }
 
-        public IEnumerator OverrideAccountOnLocalFile()
+        public static IEnumerator OverrideAccountOnLocalFile()
         {
-            OverrideLocalCustomerInfoOnLocalFile(_PlayerAccountInfo);
+            OverrideLocalCustomerInfoOnLocalFile(_AccInfo);
             yield break;
         }
 
-        public bool OverrideLocalCustomerInfoOnLocalFile(PlayerAccountInfo refreshedPlayerAccountInfo)
+        public static bool OverrideLocalCustomerInfoOnLocalFile(PlayerAccountInfo refreshedPlayerAccountInfo)
         {
             try
             {

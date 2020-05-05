@@ -13,7 +13,7 @@ public class SkillStones : MainSceneProcess
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
-        SkillStonesBox.target.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize, 1);
+        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
         
         PreScene.Instance.MainMenuBottonsT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);

@@ -72,14 +72,14 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
 
     public IEnumerator _BeginRemoteTestMode()
     {
-        AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.remoteTestPlayer;
-        yield return AccountSet.Instance.login();
+        AccountSet._playerinfoReferenceMode = playerInfoRefMode.remoteTestPlayer;
+        yield return AccountSet.login();
         SceneManager.LoadScene(1);       
     }
 
     public IEnumerator _StartNewLocalTestMode()
     {
-        AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
+        AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);
@@ -88,8 +88,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
 
     public IEnumerator _BeginLocalTestMode()
     {
-        AccountSet.Instance._playerinfoReferenceMode = playerinfoReferenceMode.localTestSaveData;
-
+        AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
         SceneManager.LoadScene(1);
         yield break;
     }

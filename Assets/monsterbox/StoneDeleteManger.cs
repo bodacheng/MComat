@@ -36,7 +36,7 @@ public class StoneDeleteManger : MonoBehaviour
         OperationsT.gameObject.SetActive(true);
         SelectionConfirmT.gameObject.SetActive(false);
         CurrentSelectedCount.text = "";
-        SkillStonesBox.GenerateCells(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize,1);
+        SkillStonesBox.GenerateCells(AccountSet._AccInfo.Stoneboxsize,1);
     }
     
     public void RefreshSelectedRender()

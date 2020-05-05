@@ -48,8 +48,8 @@ public class Setting : MonoBehaviour {
     
     public void LoadProgrameSettingFromAccount()
     {
-        bgmSLider.value = AccountSet.Instance._PlayerAccountInfo.BgmVolumn;
-        effectsSoundsSlider.value = AccountSet.Instance._PlayerAccountInfo.EffectsVolumn;
+        bgmSLider.value = AccountSet._AccInfo.BgmVolumn;
+        effectsSoundsSlider.value = AccountSet._AccInfo.EffectsVolumn;
         
         bgmSource.volume = bgmSLider.value;
         AudioManager.effectsVolumn = effectsSoundsSlider.value;
@@ -57,9 +57,9 @@ public class Setting : MonoBehaviour {
     
     public void SaveProgrameSettingToAccount()
     {
-        AccountSet.Instance._PlayerAccountInfo.BgmVolumn = bgmSLider.value;
-        AccountSet.Instance._PlayerAccountInfo.EffectsVolumn = effectsSoundsSlider.value;
-        PreScene.Instance.mainProcessRunner.Run(AccountSet.Instance.SaveCustomerInfo());
+        AccountSet._AccInfo.BgmVolumn = bgmSLider.value;
+        AccountSet._AccInfo.EffectsVolumn = effectsSoundsSlider.value;
+        PreScene.Instance.mainProcessRunner.Run(AccountSet.SaveCustomerInfo());
     }
 
     public void onBgmChange()

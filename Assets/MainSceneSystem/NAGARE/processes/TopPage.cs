@@ -46,7 +46,7 @@ public class TopPage : MainSceneProcess
         
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -59,7 +59,7 @@ public class TopPage : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
 }

@@ -31,15 +31,15 @@ namespace dataAccess
         
         public static IEnumerator LoadTeamSet(TeamSetGameMode teamSetGameMode)
         {
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     yield return LoadTeamSetsRemote(teamSetGameMode, ApiLanguage.JaJp);
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     
                     break;
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     switch (teamSetGameMode)
                     {
                         case TeamSetGameMode.story:
@@ -60,14 +60,14 @@ namespace dataAccess
         
         public static IEnumerator SaveTeamSet(TeamSetGameMode teamSetGameMode)
         {
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     yield return SaveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     yield return OverrideTeamSetInfoOnJsonFile(teamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
             }

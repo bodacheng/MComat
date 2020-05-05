@@ -17,7 +17,7 @@ public enum ResourceLoadMode
     Resource = 3
 }
 
-public enum playerinfoReferenceMode
+public enum playerInfoRefMode
 {
     localTestSaveData = 1,
     remoteTestPlayer = 2,

@@ -132,10 +132,10 @@ namespace mainMenu
             LoadingCanvas.target.TurnOnProcessDescription(true);
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
             
-            yield return AccountSet.Instance.LoadCustomerInfo();
+            yield return AccountSet.LoadCustomerInfo();
             Setting.target.LoadProgrameSettingFromAccount();
-            accountDiamondCoin.text = AccountSet.Instance._PlayerAccountInfo.Diamond.ToString();
-            accountIntelliCoin.text = AccountSet.Instance._PlayerAccountInfo.Coin.ToString();
+            accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
+            accountIntelliCoin.text = AccountSet._AccInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
 
             HeroIcon.INIFrames();
@@ -143,15 +143,15 @@ namespace mainMenu
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
-            yield return _SkillStonesBox_NineSlot.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
-            yield return _SkillStonesBox_Show.StartUp(AccountSet.Instance._PlayerAccountInfo.Stoneboxsize);
+            yield return _SkillStonesBox_NineSlot.StartUp(AccountSet._AccInfo.Stoneboxsize);
+            yield return _SkillStonesBox_Show.StartUp(AccountSet._AccInfo.Stoneboxsize);
             LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
             yield return (TheNineSlot.target.StartUp());
             
             yield return _SelfFightManager.INITeamPosButtons();
             
             // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-            switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
+            switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
                     // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
@@ -180,7 +180,7 @@ namespace mainMenu
                 ReturnButtonManager.POP();
             }else{
                 // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-                switch (AccountSet.Instance._PlayerAccountInfo.accountprogress)
+                switch (AccountSet._AccInfo.accountprogress)
                 {
                     case PlayerAccountProgressStep.Freedom:
                         trySwitchToStep(MainMenuNote.goingtostep, false);

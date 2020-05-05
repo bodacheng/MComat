@@ -19,7 +19,7 @@ namespace dataAccess
             // フォーム
             CertificationForm form = new CertificationForm
             {
-                sessionId = AccountSet.Instance.sessionId
+                sessionId = AccountSet.sessionId
             };
 
             // ==============================
@@ -55,7 +55,7 @@ namespace dataAccess
         {
             GetMonsterOfPlayerDetailForm form = new GetMonsterOfPlayerDetailForm
             {
-                sessionId = AccountSet.Instance.sessionId,
+                sessionId = AccountSet.sessionId,
                 monsterOfPlayerId = monsterlocalid
             };
 
@@ -76,7 +76,7 @@ namespace dataAccess
         {
             SetMonsterSkillStoneForm form = new SetMonsterSkillStoneForm
             {
-                sessionId = AccountSet.Instance.sessionId,
+                sessionId = AccountSet.sessionId,
                 monsterOfPlayerId = accountCharsSet.monsterOfPlayerId,
             };
 

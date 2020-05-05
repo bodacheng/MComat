@@ -36,14 +36,14 @@ namespace dataAccess
                 Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + stoneOfPlayerID);
                 yield break;
             }
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     Update_Json(Dic[stoneOfPlayerID]);
                 break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                 break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                 break;
             }
             yield break;
@@ -61,15 +61,15 @@ namespace dataAccess
         public static IEnumerator LoadAll()
         {
             Dic.Clear();
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     LoadAll_Json();
                     break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
             }
             // 上面的步骤已经完成了Dic的适配

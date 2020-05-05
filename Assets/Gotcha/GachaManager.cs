@@ -40,14 +40,14 @@ public class GachaManager : MonoBehaviour
     public IEnumerator Gacha()
     {
         List<SkillStoneOfPlayerInfoModel> Results = null;
-        switch (AccountSet.Instance._playerinfoReferenceMode)
+        switch (AccountSet._playerinfoReferenceMode)
         {
-            case playerinfoReferenceMode.localTestSaveData:
+            case playerInfoRefMode.localTestSaveData:
                 Results = TenTimesGotcha("human");
                 break;
-            case playerinfoReferenceMode.remoteTestPlayer:
+            case playerInfoRefMode.remoteTestPlayer:
                 break;
-            case playerinfoReferenceMode.formalVersion:
+            case playerInfoRefMode.formalVersion:
                 break;
         }
         SetResult(Results);

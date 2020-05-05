@@ -74,7 +74,7 @@ namespace mainMenu
         
         public void JumpToNewest()
         {
-            JumpTo(AccountSet.Instance._PlayerAccountInfo.ArcadeProcess);
+            JumpTo(AccountSet._AccInfo.ArcadeProcess);
         }
         
         public void JumpTo(int stageNum)

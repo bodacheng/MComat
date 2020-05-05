@@ -35,9 +35,9 @@ namespace mainMenu
             List<String> targetSKs = MySkillStonesReader.TargetStonesFromOfAccount(type, exType, close, near, far, outrange);
             targetSKs = Order(targetSKs);
             
-            if (targetSKs.Count > AccountSet.Instance._PlayerAccountInfo.Stoneboxsize)
+            if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
             {
-                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + AccountSet.Instance._PlayerAccountInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
+                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + AccountSet._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
                 yield break;
             }
             

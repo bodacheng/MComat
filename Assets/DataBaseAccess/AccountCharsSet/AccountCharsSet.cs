@@ -26,22 +26,22 @@ namespace dataAccess
         
         public static IEnumerator Update(GetMonsterOfPlayerDetailModel target)
         {
-            if (AccountSet.instance._PlayerAccountInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
+            if (AccountSet._AccInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
             {
                 IEnumerator getchar = Load(target.monsterOfPlayerId);
                 yield return getchar;
                 GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield break;
             }
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     yield return UpdateCharJsonSaveData(target);
                     break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     yield return UpdateCharRemote(target,ApiLanguage.EnUs);
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
             }
             yield break;
@@ -50,14 +50,14 @@ namespace dataAccess
         public static IEnumerator AddToAccount(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
         {
             IEnumerator temp_enumerator = null;
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     temp_enumerator = AddNewCharToJsonSaveData(_accountCharacterInfo);// 内部已经包整理角色列表的处理
                     break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
             }
             yield return temp_enumerator;
@@ -83,17 +83,17 @@ namespace dataAccess
         public static IEnumerator Load(string monsterlocalid)
         {
             GetMonsterOfPlayerDetailModel accountCharInfo = null;
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     accountCharInfo = LoadAccCharInfoViaJsonFile(monsterlocalid);
                     break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid, ApiLanguage.JaJp);
                     yield return load;
                     accountCharInfo = (GetMonsterOfPlayerDetailModel)load.Current;
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
             }
             DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
@@ -103,14 +103,14 @@ namespace dataAccess
         public static IEnumerator LoadAll()
         {
             List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     charList = LoadAll_Json();
                     break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
             }
             AccountCharInfoDic.Clear();

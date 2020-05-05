@@ -113,15 +113,15 @@ namespace dataAccess
         
         public static IEnumerator StoneGotcha()
         {
-            switch (AccountSet.Instance._playerinfoReferenceMode)
+            switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerinfoReferenceMode.localTestSaveData:
+                case playerInfoRefMode.localTestSaveData:
                     break;
-                case playerinfoReferenceMode.remoteTestPlayer:
+                case playerInfoRefMode.remoteTestPlayer:
                     yield return SkillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
                     yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
-                case playerinfoReferenceMode.formalVersion:
+                case playerInfoRefMode.formalVersion:
                     break;
             }
         }        

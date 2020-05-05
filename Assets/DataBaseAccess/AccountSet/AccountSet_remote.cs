@@ -13,7 +13,7 @@ namespace dataAccess
 {
     public partial class AccountSet
     {
-        public IEnumerator login()
+        public static IEnumerator login()
         {
             WWWForm form = new WWWForm();
             form.AddField("userId", "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd");
@@ -26,14 +26,14 @@ namespace dataAccess
                 Debug.Log("login返回:" + response);
                 JsonData jsonvale = JsonMapper.ToObject(downloadHandler.text);
                 sessionId = jsonvale["data"]["sessionId"].ToJson();
-                sessionId = Regex.Replace(this.sessionId, @"[^a-zA-Z0-9\u4e00-\u9fa5\s]", "");
+                sessionId = Regex.Replace(sessionId, @"[^a-zA-Z0-9\u4e00-\u9fa5\s]", "");
             }else{
                 Debug.Log("login失败.按理说应该返回大厅终止程序进行");
             }
             yield break;
         }
 
-        IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage)
+        static IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage)
         {
 
             // ==============================
@@ -42,7 +42,7 @@ namespace dataAccess
             // フォーム
             CertificationForm form = new CertificationForm
             {
-                sessionId = this.sessionId
+                sessionId = sessionId
             };
 
             // ==============================
@@ -52,14 +52,14 @@ namespace dataAccess
             yield return ApiCaller.Instance.Post<BaseModel<GetPlayerInfoModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/player/getPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model =>
                  {
-                     _PlayerAccountInfo.Coin = model.data.coinCount;
-                     _PlayerAccountInfo.Diamond = model.data.diamondCount;
+                     _AccInfo.Coin = model.data.coinCount;
+                     _AccInfo.Diamond = model.data.diamondCount;
                  }
                 ,
                  model =>
                  {
-                     _PlayerAccountInfo.Coin = model.data.coinCount;
-                     _PlayerAccountInfo.Diamond = model.data.diamondCount;
+                     _AccInfo.Coin = model.data.coinCount;
+                     _AccInfo.Diamond = model.data.diamondCount;
                  }
             );
             yield break;
