@@ -56,6 +56,7 @@ public class SkillStones : MainSceneProcess
     public override void ProcessEnd()
     {
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
     }
 
     public override void LocalUpdate()

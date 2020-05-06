@@ -177,33 +177,33 @@ namespace mainMenu
             charConfig == null ? Zokusei.Null : charConfig._zokusei);
             yield break;
         }
-                
-        public List<string> CheckIfExceedCellLimit()
+        
+        public static List<string> CheckIfExceedCellLimit()
         {
             List<string> error_massegas = new List<string>();
-            List<string> characterTypes = MonstersConfigTable.Instance.GetTypeList();
-            for (int i = 0; i < characterTypes.Count; i++)
+            List<string> C_Types = MonstersConfigTable.Instance.GetTypeList();
+            for (int i = 0; i < C_Types.Count; i++)
             {
-                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromOfAccount(characterTypes[i], 0, true, true, true, true);
-                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromOfAccount(characterTypes[i], 1, true, true, true, true);
-                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromOfAccount(characterTypes[i], 2, true, true, true, true);
-                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromOfAccount(characterTypes[i], 3, true, true, true, true);
+                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 0, true, true, true, true);
+                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 1, true, true, true, true);
+                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 2, true, true, true, true);
+                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 3, true, true, true, true);
                 
                 if (SkillStonesOfType_normal.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(characterTypes[i]+"类角色的普通技能石数量超过限制");
+                    error_massegas.Add(C_Types[i]+"类角色的普通技能石数量超过限制");
                 }
                 if (SkillStonesOfType_EX1.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(characterTypes[i]+"类角色的一级必杀技能石数量超过限制");
+                    error_massegas.Add(C_Types[i]+"类角色的一级必杀技能石数量超过限制");
                 }
                 if (SkillStonesOfType_EX2.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(characterTypes[i]+"类角色的二级必杀技能石数量超过限制");
+                    error_massegas.Add(C_Types[i]+"类角色的二级必杀技能石数量超过限制");
                 }
                 if (SkillStonesOfType_EX3.Count > AccountSet._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(characterTypes[i]+"类角色的三级必杀技能石数量超过限制");
+                    error_massegas.Add(C_Types[i]+"类角色的三级必杀技能石数量超过限制");
                 }
             }
             return error_massegas;

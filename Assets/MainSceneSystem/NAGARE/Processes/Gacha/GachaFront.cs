@@ -1,11 +1,21 @@
 ﻿using System.Collections;
 using mainMenu;
+using System.Collections.Generic;
 
 public class GachaFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
         yield return _modelShower.ShowModel(null);
+        
+        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        if (CheckIfExceedLimit.Count > 0)
+        {
+            //ReturnButtonManager.POP_NoExecute();
+            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
+            yield break;
+        }
+        
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
         _CameraManager.Assign_Camera(C_Mode.NULL, null);

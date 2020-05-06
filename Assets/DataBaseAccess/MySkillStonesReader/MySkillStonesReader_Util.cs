@@ -17,7 +17,7 @@ namespace dataAccess
             }
         }
         
-        public static List<string> TargetStonesFromOfAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
+        public static List<string> TargetStonesFromAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
         {
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)

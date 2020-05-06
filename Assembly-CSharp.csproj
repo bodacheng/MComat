@@ -378,6 +378,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\BoxOverLoadFix.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
@@ -554,6 +555,7 @@
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
     <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
+    <Compile Include="Assets\SkillStoneBox\CellLimit\BoxOverLoadFixManager.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Fill.cs" />

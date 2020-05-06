@@ -56,6 +56,7 @@ namespace mainMenu
         GotchaResult = 24,
         
         ShopTop = 201,
+        BoxOverLoadHelper = 203,
         BoxExpansion = 202,
         
         QuestInfo = 8,

@@ -32,7 +32,7 @@ namespace mainMenu
                 cellPair.Value.UpdateMyItem(); // 被拔下石头的格子需要把使用中角色头像关闭。单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
             }
             
-            List<String> targetSKs = MySkillStonesReader.TargetStonesFromOfAccount(type, exType, close, near, far, outrange);
+            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount(type, exType, close, near, far, outrange);
             targetSKs = Order(targetSKs);
             
             if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
