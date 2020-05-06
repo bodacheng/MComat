@@ -105,7 +105,12 @@ namespace mainMenu
             TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
+
+            // Shop
+            ShopTop shopTop = new ShopTop();
+            StoneBoxExpansion stoneBoxExpansion = new StoneBoxExpansion();
             
+            // Gotcha
             GachaFront gachaFront = new GachaFront();
             GachaAnim gotchaAnim = new GachaAnim();
             GachaResult gachaResult = new GachaResult();
@@ -124,6 +129,9 @@ namespace mainMenu
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Arena, areanaProcess);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
+            
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ShopTop, shopTop);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.BoxExpansion, stoneBoxExpansion);
             
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);

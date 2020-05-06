@@ -2514,6 +2514,7 @@ MonoBehaviour:
   processingDescrition: {fileID: 2026878286}
   LoadingCanvasBigCurtain: {fileID: 1580542111}
   ValidationWindow: {fileID: 1915681023}
+  ValidationWindow_PosForMask: {fileID: 0}
   ValidationIntro: {fileID: 2026878286}
   YesButton: {fileID: 17286397}
   NoButton: {fileID: 1430212125}
