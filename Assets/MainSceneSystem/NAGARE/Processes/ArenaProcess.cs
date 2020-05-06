@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using mainMenu;
-using UnityEngine;
 
 public class ArenaProcess : MainSceneProcess
 {
@@ -30,9 +29,5 @@ public class ArenaProcess : MainSceneProcess
     public override void ProcessEnd()
     {
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(false);
-    }
-    
-    public override void LocalUpdate()
-    {
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using dataAccess;
 using mainMenu;
 
 public class ArenaManager : MonoBehaviour
@@ -15,7 +14,12 @@ public class ArenaManager : MonoBehaviour
     {
         target = this;
     }
-        
+
+    public void RefreshOpponent()
+    {
+        PreScene.target.mainProcessRunner.Run(ArenaManager.target.LoadArena());
+    }
+
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     public IEnumerator LoadArena()
     {

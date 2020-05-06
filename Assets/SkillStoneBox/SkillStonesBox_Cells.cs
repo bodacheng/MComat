@@ -71,12 +71,15 @@ namespace mainMenu
                     CellsDictionary.Add(i, cell);
                 }
                 
-                CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
+                //CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
                 CellsDictionary[i].gameObject.SetActive(true);
-                CellsDictionary[i].transform.SetParent(BoxT);
-                CellsDictionary[i].transform.localPosition = Vector3.zero;
-                CellsDictionary[i].transform.localScale = Vector3.one;
-                                
+                if (CellsDictionary[i].transform.parent != BoxT)
+                {
+                    CellsDictionary[i].transform.SetParent(BoxT);
+                    CellsDictionary[i].transform.localPosition = Vector3.zero;
+                    CellsDictionary[i].transform.localScale = Vector3.one;
+                }
+
                 if (mode == 1)
                 {
                     CellButtonBeheviour_STStoneShow(CellsDictionary[i]);
