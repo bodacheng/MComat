@@ -392,7 +392,8 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\StoneBoxExpansion.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStones.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\SkillStones.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TopPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial_skillEdit.cs" />
@@ -537,7 +538,7 @@
     <Compile Include="Assets\Setting\ResourceSetting.cs" />
     <Compile Include="Assets\Setting\ResourceSettingGUI.cs" />
     <Compile Include="Assets\Setting\Setting.cs" />
-    <Compile Include="Assets\ShopManager\BoxManageHelper.cs" />
+    <Compile Include="Assets\ShopManager\BoxExpandHelper.cs" />
     <Compile Include="Assets\ShopManager\ShopManager.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />

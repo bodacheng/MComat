@@ -6,7 +6,7 @@ public class MemberDetailProcess : MainSceneProcess
 {
     public MemberDetailProcess()
     {
-        thisProcessStep = MainSceneStep.MemberDetail;
+        Step = MainSceneStep.MemberDetail;
         EelementsInherit(PreScene.target);
     }
     
@@ -47,7 +47,7 @@ public class MemberDetailProcess : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
 }

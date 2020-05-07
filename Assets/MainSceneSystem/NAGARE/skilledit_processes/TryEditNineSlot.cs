@@ -10,7 +10,7 @@ public class TryEditNineSlot : MainSceneProcess
 {
     public TryEditNineSlot(ProcessesRunner processesRunner)
     {
-        this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub3;
+        this.Step = MainSceneStep.Tutorial_skillEdit_sub3;
         this.nextProcessStep = MainSceneStep.None;
         
         this.subProcessesRunner = processesRunner;

@@ -49,6 +49,6 @@ public class TrySkillShowMenu : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
     }}

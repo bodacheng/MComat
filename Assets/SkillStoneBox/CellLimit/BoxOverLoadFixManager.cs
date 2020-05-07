@@ -25,7 +25,7 @@ public class BoxOverLoadFixManager : MonoBehaviour
         
         void ChooseToSell()
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.SkillStones,true);
+            PreScene.target.trySwitchToStep(MainSceneStep.SkillStones_Sell,true);
         }
         SELL.onClick.RemoveAllListeners();
         SELL.onClick.AddListener(ChooseToSell);

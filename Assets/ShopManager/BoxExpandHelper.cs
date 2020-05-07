@@ -6,7 +6,7 @@ using dataAccess;
 using System;
 
 // 贩卖过多的技能石？ 扩张技能石盒？
-public class BoxManageHelper : MonoBehaviour
+public class BoxExpandHelper : MonoBehaviour
 {    
     #region 扩张    
     public Canvas ExpansionT;
@@ -19,7 +19,7 @@ public class BoxManageHelper : MonoBehaviour
     public Button ResultConfirmButton;
     public Text Result;
 
-    public static BoxManageHelper target;
+    public static BoxExpandHelper target;
 
     void Awake()
     {

@@ -14,7 +14,7 @@ public class GachaAnim : MainSceneProcess
     
     public GachaAnim()
     {
-        thisProcessStep = MainSceneStep.GotchaAnim;
+        Step = MainSceneStep.GotchaAnim;
         EelementsInherit(PreScene.target);
     }
     

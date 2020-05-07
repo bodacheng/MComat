@@ -13,7 +13,7 @@ public class TryChangeStonePos : MainSceneProcess
     
     public TryChangeStonePos()
     {
-        this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
+        this.Step = MainSceneStep.Tutorial_skillEdit_sub4;
         this.EelementsInherit(PreScene.target);
     }
     
@@ -85,6 +85,6 @@ public class TryChangeStonePos : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
     }}

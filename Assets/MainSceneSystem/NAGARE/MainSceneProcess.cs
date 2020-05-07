@@ -3,11 +3,10 @@ namespace mainMenu
 {
     public abstract class MainSceneProcess
     {
-        public MainSceneStep thisProcessStep;
+        public MainSceneStep Step;
         public MainSceneStep nextProcessStep = MainSceneStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
         public SingleThreadProcesser mainProcessRunner;
-        public ModelShower _modelShower;
         public CharsManager _CharsManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
@@ -16,7 +15,6 @@ namespace mainMenu
         public void EelementsInherit(PreScene _preparingScene)
         {
             _CharsManager = _preparingScene._CharSetManager;
-            _modelShower = _preparingScene._modelShower;
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
@@ -51,6 +49,7 @@ namespace mainMenu
         MemberDetail_edit = 16,
         MemberDetail_show = 17,
         SkillStones = 15,
+        SkillStones_Sell = 100,
         GotchaFront = 6,
         GotchaAnim = 7,
         GotchaResult = 24,

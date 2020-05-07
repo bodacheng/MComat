@@ -32,7 +32,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     
     public Tutorial_skillEdit()
     {
-        this.thisProcessStep = MainSceneStep.Tutorial_skillEdit;
+        this.Step = MainSceneStep.Tutorial_skillEdit;
         this.nextProcessStep = MainSceneStep.Tutorial_Story;
         this.EelementsInherit(PreScene.target);
     }
@@ -57,7 +57,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            this._modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
         if (subProcessesRunner != null)
             subProcessesRunner.ProcessNagare();       

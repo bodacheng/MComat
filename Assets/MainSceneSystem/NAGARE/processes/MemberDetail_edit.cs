@@ -31,7 +31,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public MemberDetail_edit()
     {
-        thisProcessStep = MainSceneStep.MemberDetail_edit;
+        Step = MainSceneStep.MemberDetail_edit;
         EelementsInherit(PreScene.target);
     }
 
@@ -56,7 +56,7 @@ public class MemberDetail_edit : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
     

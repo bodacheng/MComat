@@ -4,7 +4,7 @@ public class ShopTop : MainSceneProcess
 {
     public ShopTop()
     {
-        thisProcessStep = MainSceneStep.ShopTop;
+        Step = MainSceneStep.ShopTop;
         EelementsInherit(PreScene.target);
     }
     

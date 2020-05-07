@@ -10,9 +10,15 @@ public class StoneDeleteManger : MonoBehaviour
     public Text CurrentSelectedCount;
     public RectTransform SkillInfoT, SelectionInfoT, OperationsT, SelectionConfirmT;
     public SkillStonesBox SkillStonesBox;
-    
-    List<SkillStoneOfPlayerInfoModel> selected = new List<SkillStoneOfPlayerInfoModel>();
-    
+    readonly List<SkillStoneOfPlayerInfoModel> selected = new List<SkillStoneOfPlayerInfoModel>();
+
+    public static StoneDeleteManger target;
+
+    void Awake()
+    {
+        target = this;
+    }
+
     public void EnterDeleteMode()
     {
         SkillStonesBox._Selected.SetActive(false);
@@ -37,6 +43,12 @@ public class StoneDeleteManger : MonoBehaviour
         SelectionConfirmT.gameObject.SetActive(false);
         CurrentSelectedCount.text = "";
         SkillStonesBox.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
+    }
+    
+    public void ClearSelect()
+    {
+        selected.Clear();
+        RefreshSelectedRender();
     }
     
     public void RefreshSelectedRender()

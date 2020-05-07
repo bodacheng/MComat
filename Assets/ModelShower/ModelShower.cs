@@ -10,7 +10,7 @@ public class ModelShower : MonoBehaviour
     [Header("Essentials")]
     public CameraManager _CameraManager;
     public CharsManager _CharSetManager;
-
+    
     [Header("Team Member Positions For Show")]
     public Transform MembersStandCenterPoint;
     public Transform TeamEditWatchPoint;
@@ -18,15 +18,17 @@ public class ModelShower : MonoBehaviour
     public Transform Member1StandPoint;
     public Transform Member2StandPoint;
     public Transform Member3StandPoint;
-
+    
+    public static ModelShower target;
+    
     IDictionary<int, Transform> myShowCharPositionDic = new Dictionary<int, Transform>();
     PinchZoom pinchZoom = new PinchZoom();
     GameObject showingChar;
-        
+    
     void Awake()
     {
+        target = this;
         pinchZoom.camera = _CameraManager.GetComponent<Camera>();
-        
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(0, Member0StandPoint));
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(1, Member1StandPoint));
         myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(2, Member2StandPoint));

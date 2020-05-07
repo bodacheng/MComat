@@ -7,7 +7,7 @@ public class TopPage : MainSceneProcess
 {
     public TopPage()
     {
-        thisProcessStep = MainSceneStep.FrontPage;
+        Step = MainSceneStep.FrontPage;
         EelementsInherit(PreScene.target);
     }
 
@@ -36,8 +36,8 @@ public class TopPage : MainSceneProcess
             string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
             if (focusLocalid != null)
             {
-                 yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
-                yield return _modelShower.ShowModel(focusLocalid);
+                yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
+                yield return ModelShower.target.ShowModel(focusLocalid);
             }
         }
         yield break;
@@ -59,7 +59,7 @@ public class TopPage : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
 }

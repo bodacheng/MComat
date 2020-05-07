@@ -4,7 +4,7 @@ public class BoxOverLoadFix : MainSceneProcess
 {
     public BoxOverLoadFix()
     {
-        thisProcessStep = MainSceneStep.BoxOverLoadHelper;
+        Step = MainSceneStep.BoxOverLoadHelper;
         EelementsInherit(PreScene.target);
     }
     

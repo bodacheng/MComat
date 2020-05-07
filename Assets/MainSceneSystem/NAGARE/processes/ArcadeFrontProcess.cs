@@ -11,7 +11,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public ArcadeFrontProcess()
     {
-        thisProcessStep = MainSceneStep.ArcadeFront;
+        Step = MainSceneStep.ArcadeFront;
         EelementsInherit(PreScene.target);
     }
     

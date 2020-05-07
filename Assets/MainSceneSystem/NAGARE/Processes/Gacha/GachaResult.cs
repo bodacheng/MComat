@@ -25,7 +25,7 @@ public class GachaResult : MainSceneProcess
     
     public GachaResult()
     {
-        thisProcessStep = MainSceneStep.GotchaResult;
+        Step = MainSceneStep.GotchaResult;
         EelementsInherit(PreScene.target);
     }
     

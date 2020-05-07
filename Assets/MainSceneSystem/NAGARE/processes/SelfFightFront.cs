@@ -16,12 +16,12 @@ public class SelfFightFront : MainSceneProcess
         yield return MonsterBox.DisplayMonsterIcons();
         _SelfFightManager.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);
-        yield return _modelShower.ShowModel(null);
+        yield return ModelShower.target.ShowModel(null);
     }
     
     public SelfFightFront()
     {
-        thisProcessStep = MainSceneStep.SelfFightFront;
+        Step = MainSceneStep.SelfFightFront;
         EelementsInherit(PreScene.target);
     }
 

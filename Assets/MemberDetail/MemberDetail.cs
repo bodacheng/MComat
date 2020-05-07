@@ -8,11 +8,7 @@ using System.Collections.Generic;
 namespace mainMenu
 {
     public class MemberDetail : MonoBehaviour
-    {
-        [Space(11)]
-        [Header("modelShower")]
-        public ModelShower _modelShower;
-        
+    {        
         [Space(7)]
         [Header("美术进程处理器")]
         public SingleThreadProcesser presentationProcessRunner;
@@ -147,12 +143,12 @@ namespace mainMenu
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 _SkillsPrintOut.focusingC = null;
-                IEnumerator readshowmodel = _modelShower.ShowModel(null);
+                IEnumerator readshowmodel = ModelShower.target.ShowModel(null);
                 yield return readshowmodel;
                 yield break;
             }else{
                 _SkillsPrintOut.focusingResourceID = _focusingCharacterDataInfo.ResourceID;
-                IEnumerator readshowmodel = _modelShower.ShowModel(_focusingCharacterDataInfo.monsterOfPlayerId);
+                IEnumerator readshowmodel = ModelShower.target.ShowModel(_focusingCharacterDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)

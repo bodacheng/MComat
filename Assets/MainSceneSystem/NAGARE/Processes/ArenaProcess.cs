@@ -12,7 +12,7 @@ public class ArenaProcess : MainSceneProcess
     
     public ArenaProcess()
     {
-        thisProcessStep = MainSceneStep.Arena;
+        Step = MainSceneStep.Arena;
         EelementsInherit(PreScene.target);
     }
     

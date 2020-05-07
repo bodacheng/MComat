@@ -56,7 +56,7 @@ public class TryOneStoneAdd : MainSceneProcess
     
     public TryOneStoneAdd()
     {
-        this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub1;
+        this.Step = MainSceneStep.Tutorial_skillEdit_sub1;
         this.nextProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
         
         this.EelementsInherit(PreScene.target);

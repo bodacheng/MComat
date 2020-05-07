@@ -22,7 +22,7 @@ public class TeamEditFront : MainSceneProcess
     
     public TeamEditFront()
     {
-        thisProcessStep = MainSceneStep.TeamEditFront;
+        Step = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.target);
     }
     
@@ -48,7 +48,7 @@ public class TeamEditFront : MainSceneProcess
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
-            _modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
     }
 }

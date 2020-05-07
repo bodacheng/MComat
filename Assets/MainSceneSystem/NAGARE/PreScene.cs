@@ -97,6 +97,7 @@ namespace mainMenu
             
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
+            StoneSell stoneSell = new StoneSell();
             SelfFightFront selfFightFront = new SelfFightFront();
             QuestInfo questInfo = new QuestInfo();
             MemberDetailProcess memberDetail = new MemberDetailProcess();
@@ -121,6 +122,7 @@ namespace mainMenu
             ProcessesRunner.Instance.Clear();
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones, skillStones);
+            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones_Sell, stoneSell);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
@@ -235,7 +237,7 @@ namespace mainMenu
         {
             if (foward && ProcessesRunner.Instance.currentProcess != null)
             {
-                MainSceneStep returnToStep = ProcessesRunner.Instance.currentProcess.thisProcessStep;
+                MainSceneStep returnToStep = ProcessesRunner.Instance.currentProcess.Step;
                 void returnTOCurrent()
                 {
                     trySwitchToStep(returnToStep, false);
