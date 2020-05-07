@@ -21599,7 +21599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e2d01d97d4c4c00893c3c604fc988f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modelShower: {fileID: 85698363}
   presentationProcessRunner: {fileID: 313104901}
   MemberDetailCanvas: {fileID: 92526664}
   MemberInfoT: {fileID: 554049859}
@@ -86638,7 +86637,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainProcessRunner: {fileID: 493364712}
   SkillBoxCanvas: {fileID: 1959059132}
-  BoxWholeT: {fileID: 2034604367}
   BoxT: {fileID: 1637319304}
   stonesTempContainer: {fileID: 1897995074}
   types: {fileID: 1530341171}
@@ -104307,7 +104305,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainProcessRunner: {fileID: 1231687260}
   SkillBoxCanvas: {fileID: 1762077932}
-  BoxWholeT: {fileID: 787138455}
   BoxT: {fileID: 2066072370}
   stonesTempContainer: {fileID: 1897995074}
   types: {fileID: 1119658841}

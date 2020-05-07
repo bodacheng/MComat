@@ -15,15 +15,14 @@ public class MemberDetail_edit : MainSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 2);
-        SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         yield return SkillEditButtonFeature(MemberDetail.target.focusingCharDataInfo);
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
-               
+        
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target.focusingCharDataInfo.monsterId);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons

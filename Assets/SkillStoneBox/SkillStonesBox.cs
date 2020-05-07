@@ -21,7 +21,7 @@ namespace mainMenu
         
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
-        public RectTransform BoxWholeT, BoxT, stonesTempContainer;
+        public RectTransform BoxT, stonesTempContainer;
         
         [Space(7)]
         [Header("type按钮")]

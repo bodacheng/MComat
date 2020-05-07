@@ -10,7 +10,6 @@ public class StoneSell : MainSceneProcess
             yield return SkillStones.EnterProcess();
         } else {
             SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-            SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         }
         StoneDeleteManger.target.EnterDeleteMode();
     }

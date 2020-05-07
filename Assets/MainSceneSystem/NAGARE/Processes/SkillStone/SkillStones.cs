@@ -26,7 +26,6 @@ public class SkillStones : MainSceneProcess
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
         LoadingCanvas.target.LightUp();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
     }
 
     public SkillStones()
@@ -48,7 +47,6 @@ public class SkillStones : MainSceneProcess
             mainProcessRunner.Run(EnterProcess());
         } else {
             SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-            SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         }
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
