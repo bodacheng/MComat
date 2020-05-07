@@ -67,8 +67,23 @@ public class ProcessesRunner
         }
     }
     
-    public MainSceneProcess AccessCertainMainSceneProcessObject(MainSceneStep step)
+    // 清空返回菜单，并进入step。将返回按钮设置为返回到FrontPage画面
+    // 暂时没用。可能用来处理一些临时弹出的画面
+    public void GrandNewChangeProcess(MainSceneStep sceneStep)
     {
-        return SceneProcessDictionary[step];
+        if (currentProcess != null)
+            currentProcess.ProcessEnd();
+        ReturnButtonManager.ReturnMissionList.Clear();
+        MainSceneStep returnToStep = MainSceneStep.FrontPage;
+        void returnTOCurrent()
+        {
+            PreScene.target.trySwitchToStep(returnToStep, false);
+        }
+        ReturnButtonManager.PUSH(returnTOCurrent);
+        SceneProcessDictionary.TryGetValue(sceneStep, out currentProcess);
+        if (currentProcess != null)
+        {
+            currentProcess.ProcessEnter();
+        }
     }
 }

@@ -11,9 +11,9 @@ public class StoneDeleteManger : MonoBehaviour
     public RectTransform SkillInfoT, SelectionInfoT, OperationsT, SelectionConfirmT;
     public SkillStonesBox SkillStonesBox;
     readonly List<SkillStoneOfPlayerInfoModel> selected = new List<SkillStoneOfPlayerInfoModel>();
-
+    
     public static StoneDeleteManger target;
-
+    
     void Awake()
     {
         target = this;
@@ -45,6 +45,7 @@ public class StoneDeleteManger : MonoBehaviour
         SkillStonesBox.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
     }
     
+    // 按钮函数
     public void ClearSelect()
     {
         selected.Clear();

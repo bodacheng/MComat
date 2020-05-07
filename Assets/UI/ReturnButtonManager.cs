@@ -32,20 +32,7 @@ namespace mainMenu
                 ToUseReturnButton.gameObject.SetActive(true);
             }
         }
-        
-        public static void POP_NoExecute()
-        {
-            if (ReturnMissionList.Count == 0)
-                return;
-            ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
-            if (ReturnMissionList.Count == 0)
-            {
-                ToUseReturnButton.gameObject.SetActive(false);
-            }else{
-                ToUseReturnButton.gameObject.SetActive(true);
-            }
-        }
-        
+                
         public static void AddFeatureToReturnButton()
         {
             ToUseReturnButton.onClick.RemoveAllListeners();

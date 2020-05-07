@@ -10,12 +10,14 @@ public class GachaFront : MainSceneProcess
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         CameraManager._camera.gameObject.SetActive(false);
         GachaRender.target.Camera.gameObject.SetActive(true);
+        
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
+        
         BackGroundPS.target.Off();
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
@@ -45,9 +47,5 @@ public class GachaFront : MainSceneProcess
         GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
         CameraManager._camera.gameObject.SetActive(true);
         GachaRender.target.Camera.gameObject.SetActive(false);
-    }
-    
-    public override void LocalUpdate()
-    {
     }
 }

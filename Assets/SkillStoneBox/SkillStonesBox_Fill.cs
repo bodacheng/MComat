@@ -17,7 +17,7 @@ namespace mainMenu
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<string> UsingStoneIDs)
-        {
+        {            
             foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
             {
                 // 下面第一行（UpdateMyItem）至关重要。技能石box往往和九宫格一起显示，readANineAndTwo函数如果和arrangeSkillStonesToBox配合运行，

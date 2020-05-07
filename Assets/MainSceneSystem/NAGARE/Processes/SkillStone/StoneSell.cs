@@ -8,6 +8,9 @@ public class StoneSell : MainSceneProcess
         if (ProcessesRunner.Instance.lastProcess.Step != MainSceneStep.SkillStones)
         {
             yield return SkillStones.EnterProcess();
+        } else {
+            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+            SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         }
         StoneDeleteManger.target.EnterDeleteMode();
     }
@@ -21,8 +24,6 @@ public class StoneSell : MainSceneProcess
     public override void ProcessEnter()
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         mainProcessRunner.Run(EnterProcess());
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (

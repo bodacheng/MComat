@@ -233,7 +233,7 @@ namespace mainMenu
         }
         
         [EnumAction(typeof(MainSceneStep))]
-        public void trySwitchToStep(MainSceneStep next_step, bool foward)//这个是试图进入某个step。另一个是根据一些东西的选择情况来在某个step内对GUI进行刷新。两个都需要。
+        public void trySwitchToStep(MainSceneStep next_step, bool foward)
         {
             if (foward && ProcessesRunner.Instance.currentProcess != null)
             {

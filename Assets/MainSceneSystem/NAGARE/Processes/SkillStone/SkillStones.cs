@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using mainMenu;
 using dataAccess;
+using System.Collections.Generic;
 
 public class SkillStones : MainSceneProcess
 {
     //EnterProcess()内绝不能出现triggerMainProcess
     public static IEnumerator EnterProcess()
     {
+        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        if (CheckIfExceedLimit.Count > 0)
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
+            yield break;
+        }
         LoadingCanvas.target.DarkOff(1f);
         yield return ModelShower.target.ShowModel(null);
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);        
@@ -18,6 +25,8 @@ public class SkillStones : MainSceneProcess
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);//这一行因为牵扯到对玩家存档中技能石头的读取所以可能是(协程)
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
         LoadingCanvas.target.LightUp();
+        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+        SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
     }
 
     public SkillStones()
@@ -25,7 +34,7 @@ public class SkillStones : MainSceneProcess
         Step = MainSceneStep.SkillStones;
         EelementsInherit(PreScene.target);
     }
-    
+
     public override bool CanEnterOtherProcess()
     {
         return true;
@@ -34,11 +43,12 @@ public class SkillStones : MainSceneProcess
     public override void ProcessEnter()
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         if (ProcessesRunner.Instance.lastProcess.Step != MainSceneStep.SkillStones_Sell)
         {
             mainProcessRunner.Run(EnterProcess());
+        } else {
+            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+            SkillStonesBox.target.BoxWholeT.gameObject.SetActive(true);
         }
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
