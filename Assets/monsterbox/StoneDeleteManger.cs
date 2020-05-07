@@ -8,11 +8,11 @@ using dataAccess;
 public class StoneDeleteManger : MonoBehaviour
 {
     public Text CurrentSelectedCount;
-    public RectTransform SkillInfoT,SelectionInfoT,OperationsT,SelectionConfirmT;
+    public RectTransform SkillInfoT, SelectionInfoT, OperationsT, SelectionConfirmT;
     public SkillStonesBox SkillStonesBox;
     
     List<SkillStoneOfPlayerInfoModel> selected = new List<SkillStoneOfPlayerInfoModel>();
-
+    
     public void EnterDeleteMode()
     {
         SkillStonesBox._Selected.SetActive(false);

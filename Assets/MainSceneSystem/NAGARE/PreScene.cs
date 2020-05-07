@@ -147,9 +147,9 @@ namespace mainMenu
             accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
-
+            
             HeroIcon.INIFrames();
-
+            
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();

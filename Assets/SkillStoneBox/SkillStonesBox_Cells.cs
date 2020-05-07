@@ -17,7 +17,7 @@ namespace mainMenu
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;
-
+        
         [Space(7)]
         [Header("石头滚动视窗")]
         public ScrollRect stoneviewScrollRect;
@@ -79,7 +79,7 @@ namespace mainMenu
                     CellsDictionary[i].transform.localPosition = Vector3.zero;
                     CellsDictionary[i].transform.localScale = Vector3.one;
                 }
-
+            
                 if (mode == 1)
                 {
                     CellButtonBeheviour_STStoneShow(CellsDictionary[i]);

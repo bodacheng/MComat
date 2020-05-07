@@ -8,12 +8,12 @@ public class BoxOverLoadFixManager : MonoBehaviour
     
     public Canvas T;
     public Button SELL, Expand;
-
+    
     void Awake()
     {
         target = this;
     }
-
+    
     public void ArrangeButtonsFeature()
     {
         void ChooseToExpand()

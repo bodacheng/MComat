@@ -18,8 +18,4 @@ public class BoxOverLoadFix : MainSceneProcess
     {
         BoxOverLoadFixManager.target.T.gameObject.SetActive(false);
     }
-    
-    public override void LocalUpdate()
-    {
-    }
 }
