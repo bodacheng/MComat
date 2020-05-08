@@ -44,6 +44,10 @@ public class LoadingCanvas : MonoBehaviour {
         processingDescrition.gameObject.SetActive(_b);
     }
     
+    /// <summary>
+    // 注：参数列表内的第一个(Ts[0])元素是会高亮显示，而其他transform对应的区域并不会高亮显示，但也会缕空
+    // 我们曾经尝试让复数个对象区域都高亮度显示，但失败了。
+    /// </summary>
     public void HigtLightRect(List<Transform> Ts)
     {
         hollowOutMask.gameObject.SetActive(true);

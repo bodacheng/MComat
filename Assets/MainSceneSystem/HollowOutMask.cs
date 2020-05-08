@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
@@ -18,16 +16,10 @@ using System.Collections.Generic;
 
 public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
 {
-    public class TargetRange
-    {
-        public Vector3 _targetMin, _targetMax;
-    }
-
     [SerializeField]
     List<RectTransform> _target;
-
-    List<TargetRange> targetRanges;
     
+    Vector3 _targetMin = Vector3.zero, _targetMax = Vector3.zero;
     bool _canRefresh = true;
     Transform _cacheTrans = null;
     
@@ -41,9 +33,12 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         _RefreshView();
     }
     
-    void _SetTarget(List<TargetRange> Ranges)
+    void _SetTarget(Vector3 min, Vector3 max)
     {
-        targetRanges = Ranges;
+        if (min == _targetMin && max == _targetMax)
+            return;
+        _targetMin = min;
+        _targetMax = max;
         SetAllDirty();
     }
 
@@ -54,83 +49,70 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         
         if (null == _target)
         {
-            _SetTarget(null);
+            _SetTarget(Vector3.zero,Vector3.zero);
             SetAllDirty();
         }
         else
         {
-            List<TargetRange> targets = new List<TargetRange>();
-            for (int i = 0; i < _target.Count; i++)
-            {
-                Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(_cacheTrans, _target[i]);
-                TargetRange targetRange = new TargetRange
-                {
-                    _targetMin = bounds.min,
-                    _targetMax = bounds.max
-                };
-                targets.Add(targetRange);
-            }
-            _SetTarget(targets);
+            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(_cacheTrans, _target[0]);
+            _SetTarget(bounds.min, bounds.max);
         }
     }
 
     protected override void OnPopulateMesh(VertexHelper vh)
     {
-        if (_target == null)
+        if (_targetMin == Vector3.zero && _targetMax == Vector3.zero)
         {
             base.OnPopulateMesh(vh);
             return;
         }
         vh.Clear();
         
-        for (int i = 0; i < targetRanges.Count; i++)
-        {
-            // 填充顶点
-            UIVertex vert = UIVertex.simpleVert;
-            vert.color = color;
-            
-            Vector2 selfPiovt = rectTransform.pivot;
-            Rect selfRect = rectTransform.rect;
-            float outerLx = -selfPiovt.x*selfRect.width;
-            float outerBy = -selfPiovt.y*selfRect.height;
-            float outerRx = (1 - selfPiovt.x)*selfRect.width;
-            float outerTy = (1 - selfPiovt.y)*selfRect.height;
-            // 0 - Outer:LT
-            vert.position = new Vector3(outerLx, outerTy);
-            vh.AddVert(vert);
-            // 1 - Outer:RT
-            vert.position = new Vector3(outerRx, outerTy);
-            vh.AddVert(vert);
-            // 2 - Outer:RB
-            vert.position = new Vector3(outerRx, outerBy);
-            vh.AddVert(vert);
-            // 3 - Outer:LB
-            vert.position = new Vector3(outerLx, outerBy);
-            vh.AddVert(vert);
-            
-            // 4 - Inner:LT
-            vert.position = new Vector3(targetRanges[i]._targetMin.x, targetRanges[i]._targetMax.y);
-            vh.AddVert(vert);
-            // 5 - Inner:RT
-            vert.position = new Vector3(targetRanges[i]._targetMax.x, targetRanges[i]._targetMax.y);
-            vh.AddVert(vert);
-            // 6 - Inner:RB
-            vert.position = new Vector3(targetRanges[i]._targetMax.x, targetRanges[i]._targetMin.y);
-            vh.AddVert(vert);
-            // 7 - Inner:LB
-            vert.position = new Vector3(targetRanges[i]._targetMin.x, targetRanges[i]._targetMin.y);
-            vh.AddVert(vert);
-            
-            // 设定三角形
-            vh.AddTriangle(4, 0, 1);
-            vh.AddTriangle(4, 1, 5);
-            vh.AddTriangle(5, 1, 2);
-            vh.AddTriangle(5, 2, 6);
-            vh.AddTriangle(6, 2, 3);
-            vh.AddTriangle(6, 3, 7);
-            vh.AddTriangle(7, 3, 0);
-            vh.AddTriangle(7, 0, 4);
-        }
+        // 填充顶点
+        UIVertex vert = UIVertex.simpleVert;
+        vert.color = color;
+        
+        Vector2 selfPiovt = rectTransform.pivot;
+        Rect selfRect = rectTransform.rect;
+        float outerLx = -selfPiovt.x*selfRect.width;
+        float outerBy = -selfPiovt.y*selfRect.height;
+        float outerRx = (1 - selfPiovt.x)*selfRect.width;
+        float outerTy = (1 - selfPiovt.y)*selfRect.height;
+        // 0 - Outer:LT
+        vert.position = new Vector3(outerLx, outerTy);
+        vh.AddVert(vert);
+        // 1 - Outer:RT
+        vert.position = new Vector3(outerRx, outerTy);
+        vh.AddVert(vert);
+        // 2 - Outer:RB
+        vert.position = new Vector3(outerRx, outerBy);
+        vh.AddVert(vert);
+        // 3 - Outer:LB
+        vert.position = new Vector3(outerLx, outerBy);
+        vh.AddVert(vert);
+        
+        // 4 - Inner:LT
+        vert.position = new Vector3(_targetMin.x, _targetMax.y);
+        vh.AddVert(vert);
+        // 5 - Inner:RT
+        vert.position = new Vector3(_targetMax.x, _targetMax.y);
+        vh.AddVert(vert);
+        // 6 - Inner:RB
+        vert.position = new Vector3(_targetMax.x, _targetMin.y);
+        vh.AddVert(vert);
+        // 7 - Inner:LB
+        vert.position = new Vector3(_targetMin.x, _targetMin.y);
+        vh.AddVert(vert);
+        
+        // 设定三角形
+        vh.AddTriangle(4, 0, 1);
+        vh.AddTriangle(4, 1, 5);
+        vh.AddTriangle(5, 1, 2);
+        vh.AddTriangle(5, 2, 6);
+        vh.AddTriangle(6, 2, 3);
+        vh.AddTriangle(6, 3, 7);
+        vh.AddTriangle(7, 3, 0);
+        vh.AddTriangle(7, 0, 4);
     }
 
     // 将目标对象范围内的事件镂空（使其穿过）
