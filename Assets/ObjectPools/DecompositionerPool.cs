@@ -3,6 +3,7 @@ using UnityEngine;
 using UniRx.Toolkit;
 using HittingDetection;
 using System;
+using dataAccess;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
 
@@ -99,7 +100,12 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         {
             decompositioner.audioSource = decompositioner.transform.GetComponent<AudioSource>();
         }
-        
+        if (decompositioner.audioSource != null)
+        {
+            decompositioner.audioSource.volume = AccountSet._AccInfo.EffectsVolumn;
+            decompositioner.audioSource.minDistance = 20;
+            decompositioner.audioSource.maxDistance = 80;
+        } 
         decompositioner._HitBox = BBMM;
         decompositioner.SetPositionConstraint(PC);
         decompositioner.TrackControl = danMuTest;

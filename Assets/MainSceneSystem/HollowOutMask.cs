@@ -16,8 +16,7 @@ using System.Collections.Generic;
 
 public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
 {
-    [SerializeField]
-    List<RectTransform> _target;
+    List<RectTransform> _target = null;
     
     Vector3 _targetMin = Vector3.zero, _targetMax = Vector3.zero;
     bool _canRefresh = true;
@@ -47,7 +46,7 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         if (!_canRefresh) return;
         _canRefresh = false;
         
-        if (null == _target)
+        if (_target == null || _target.Count == 0)
         {
             _SetTarget(Vector3.zero,Vector3.zero);
             SetAllDirty();
