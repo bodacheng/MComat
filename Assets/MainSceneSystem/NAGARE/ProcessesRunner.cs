@@ -34,13 +34,13 @@ public class ProcessesRunner
     
     public MainSceneProcess lastProcess;
     public MainSceneProcess currentProcess;
-    IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
-
+    readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
+    
     public MainSceneProcess GetProcess(MainSceneStep step)
     {
         return SceneProcessDictionary[step];
     }
-
+    
     public void Clear()
     {
         lastProcess = null;
@@ -51,7 +51,6 @@ public class ProcessesRunner
     public void AddNewProcess(MainSceneStep step, MainSceneProcess _process)
     {
         SceneProcessDictionary.Add(step, _process);
-        Debug.Log(this + " : " + SceneProcessDictionary.Count);
     }
     
     public void ProcessNagare()

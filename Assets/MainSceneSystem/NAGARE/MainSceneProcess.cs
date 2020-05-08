@@ -61,21 +61,26 @@ namespace mainMenu
         QuestInfo = 8,
         ArcadeFront = 9,
         Arena = 3,
-        Tutorial_skillEdit = 18,
-        Tutorial_Story = 19,
-
-        Tutorial_skillEdit_sub1 = 20,
-        Tutorial_skillEdit_sub2 = 21,
-        // 前半 后半
-        Tutorial_skillEdit_sub3 = 22,
-        Tutorial_skillEdit_sub4 = 23,
-
+        
         JiNengRongLian_selectMaterialMonster = 12,
         JiNengRongLian_selectBaseMonster = 13,
         JiNengRongLian_waitForConfirm = 14,
         
+        Tutorial_skillEdit = 18,
+        Tutorial_Story = 19,
+        
         //Tutorial (主要流程并行)
         GoToMemberDetail = 101,
-        OpenSkillEdit = 102
+        OpenSkillEdit = 102,
+        
+        SkillEditTry_A1Selected = 103,
+        SkillEditTry_A2Selected = 104,
+        SkillEditTry_A3Selected = 105,
+        
+        SkillEditTry_A1Filled = 106,
+        SkillEditTry_A2Filled = 107,
+        SkillEditTry_A3Filled = 108,
+        
+        ALineConfirm = 109
     }
 }

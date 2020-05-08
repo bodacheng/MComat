@@ -46,7 +46,6 @@ public class LoadingCanvas : MonoBehaviour {
     public void HigtLightRect(Transform _Transform)
     {
         hollowOutMask.gameObject.SetActive(true);
-        
         if (LoadingCanvasBigCurtain != null)
             LoadingCanvasBigCurtain.color = Color.clear;
         //Loading_Canvas.sortingOrder = 1;

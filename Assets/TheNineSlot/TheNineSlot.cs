@@ -59,7 +59,7 @@ namespace mainMenu
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
         SkillStoneSlot C1Slot, C2Slot, C3Slot;
-        SkillStoneSlot focusingSlot;
+        public SkillStoneSlot focusingSlot;
         readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
         float last_clickTime;
         

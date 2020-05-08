@@ -1,6 +1,6 @@
 ﻿using mainMenu;
-using UnityEngine;
 
+// Tutorial 2
 public class OpenSkillEdit : MainSceneProcess
 {
     bool missionCompleted;
@@ -8,6 +8,7 @@ public class OpenSkillEdit : MainSceneProcess
     public OpenSkillEdit()
     {
         Step = MainSceneStep.OpenSkillEdit;
+        nextProcessStep = MainSceneStep.SkillEditTry_A1Selected;
         EelementsInherit(PreScene.target);
     }
     
@@ -17,11 +18,15 @@ public class OpenSkillEdit : MainSceneProcess
         MemberDetailProcess = (MemberDetailProcess)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail);
     }
     
+    public override bool CanEnterOtherProcess()
+    {
+        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.MemberDetail_edit;
+    }
+    
     public override void LocalUpdate()
     {        
         if (!missionCompleted)
         {
-            Debug.Log("here");
             if (MemberDetailProcess.loadFinished)
             {
                 LoadingCanvas.target.HigtLightRect(TutorialHelper.target.SkillEditButton.transform);

@@ -36,8 +36,7 @@ public class TryEditALines : MainSceneProcess
     }
     
     public TryEditALines()
-    {
-        this.Step = MainSceneStep.Tutorial_skillEdit_sub2;    
+    {  
         this.EelementsInherit(PreScene.target);
     }
 

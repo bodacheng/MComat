@@ -190,8 +190,27 @@ namespace mainMenu
                     case PlayerAccountProgressStep.Tutorial:
                         GoToMemberDetail goToMemberDetail = new GoToMemberDetail();
                         OpenSkillEdit openSkillEdit = new OpenSkillEdit();
+                        
+                        SkillEditA1Try skillEditA1Try = new SkillEditA1Try();
+                        SkillEditA2Try skillEditA2Try = new SkillEditA2Try();
+                        SkillEditA3Try skillEditA3Try = new SkillEditA3Try();
+                        SkillEditTry_A1Filled skillEditTry_A1Filled = new SkillEditTry_A1Filled();
+                        SkillEditTry_A2Filled skillEditTry_A2Filled = new SkillEditTry_A2Filled();
+                        SkillEditTry_A3Filled skillEditTry_A3Filled = new SkillEditTry_A3Filled();
+                        ALineConfirm aLineConfirm = new ALineConfirm();
+                        
                         ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.GoToMemberDetail, goToMemberDetail);
                         ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.OpenSkillEdit, openSkillEdit);
+                        
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A1Selected, skillEditA1Try);
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A2Selected, skillEditA2Try);
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A3Selected, skillEditA3Try);
+                        
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A1Filled, skillEditTry_A1Filled);
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A2Filled, skillEditTry_A2Filled);
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A3Filled, skillEditTry_A3Filled);
+                        
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.ALineConfirm, aLineConfirm);
                         trySwitchToStep(MainMenuNote.goingtostep, false);
                         ProcessesRunner.Tutorial.ChangeProcess(MainSceneStep.GoToMemberDetail);
                     break;

@@ -16,17 +16,17 @@ public class Tutorial_skillEdit : MainSceneProcess
         {
             TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd();
             TryEditALines tryEditALines = new TryEditALines();
-            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub1,tryOneStoneAdd);
-            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
-            SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
+            //SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub1,tryOneStoneAdd);
+            //SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
+            //SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
         }
         if (AccountSet._AccInfo.accountprogress == PlayerAccountProgressStep.Tutorial)
         {
             TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(SubProcessesRunner);
             TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos();
-            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub3,tryEditNineSlot);
-            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub4,_TryChangeStonePos);
-            SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub3);
+            //SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub3,tryEditNineSlot);
+            //SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub4,_TryChangeStonePos);
+            //SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub3);
         }
         yield break;
     }

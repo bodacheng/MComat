@@ -23,7 +23,7 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
     
     bool _canRefresh = true;
     Transform _cacheTrans = null;
-
+    
     /// <summary>
     /// 设置镂空的目标
     /// </summary>
@@ -33,7 +33,7 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         _target = target;
         _RefreshView();
     }
-
+    
     void _SetTarget(Vector3 tarMin, Vector3 tarMax)
     {
         if (tarMin == _targetMin && tarMax == _targetMax)

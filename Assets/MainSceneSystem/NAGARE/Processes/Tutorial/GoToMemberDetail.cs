@@ -1,5 +1,6 @@
 ﻿using mainMenu;
 
+// Tutorial 1 
 public class GoToMemberDetail : MainSceneProcess
 {
     public GoToMemberDetail()

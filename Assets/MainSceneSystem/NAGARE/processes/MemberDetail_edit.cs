@@ -7,8 +7,10 @@ using System.Collections.Generic;
 
 public class MemberDetail_edit : MainSceneProcess
 {
+    public bool loadFinished;
     public IEnumerator EnterProcess()
     {
+        loadFinished = false;
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -33,6 +35,7 @@ public class MemberDetail_edit : MainSceneProcess
             SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX3Tab.gameObject,5f), 
             _CharConfig._zokusei
         );
+        loadFinished = true;
         yield break;
     }
     

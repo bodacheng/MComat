@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Model;
 using mainMenu;
@@ -13,15 +12,14 @@ public class TryChangeStonePos : MainSceneProcess
     
     public TryChangeStonePos()
     {
-        this.Step = MainSceneStep.Tutorial_skillEdit_sub4;
         this.EelementsInherit(PreScene.target);
     }
     
     public IEnumerator EnterProcess()
     {
-        this.TuroialFightScript = Resources.Load("Account/TuroialFight2") as TextAsset;
-        if (this.TuroialFightScript != null)
-            this.TuroialFight = LocalFight.LoadOneLocalFightByScript(TuroialFightScript);
+        TuroialFightScript = Resources.Load("Account/TuroialFight2") as TextAsset;
+        if (TuroialFightScript != null)
+            TuroialFight = LocalFight.LoadOneLocalFightByScript(TuroialFightScript);
 
         void SkillEditConfirm()
         {

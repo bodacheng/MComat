@@ -10,7 +10,6 @@ public class TryEditNineSlot : MainSceneProcess
 {
     public TryEditNineSlot(ProcessesRunner processesRunner)
     {
-        this.Step = MainSceneStep.Tutorial_skillEdit_sub3;
         this.nextProcessStep = MainSceneStep.None;
         
         this.SubProcessesRunner = processesRunner;
@@ -100,7 +99,6 @@ public class TryEditNineSlot : MainSceneProcess
         {
             mainProcessRunner.Run(TheNineSlot.target.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
             MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
-            this.SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
         }
 
         void SkillUpdateValidation()
@@ -112,7 +110,7 @@ public class TryEditNineSlot : MainSceneProcess
     }
     
     public IEnumerator RefreshMemberDetailGamenSystemBaseOnFocusingCharTutorailVersion()
-    {        
+    {
         // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
         IEnumerator getchar = AccountCharsSet.Load("1");
         yield return getchar;

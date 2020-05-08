@@ -56,10 +56,7 @@ public class TryOneStoneAdd : MainSceneProcess
     
     public TryOneStoneAdd()
     {
-        this.Step = MainSceneStep.Tutorial_skillEdit_sub1;
-        this.nextProcessStep = MainSceneStep.Tutorial_skillEdit_sub2;
-        
-        this.EelementsInherit(PreScene.target);
+        EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()
