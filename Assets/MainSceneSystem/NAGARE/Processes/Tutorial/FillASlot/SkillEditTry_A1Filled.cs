@@ -1,4 +1,6 @@
 ﻿using mainMenu;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class SkillEditTry_A1Filled : MainSceneProcess
 {
@@ -11,7 +13,7 @@ public class SkillEditTry_A1Filled : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(SkillStonesBox.CellsDictionary[0].transform);
+        LoadingCanvas.target.HigtLightRect(new List<Transform> {SkillStonesBox.CellsDictionary[0].transform , TheNineSlot.target.A1DragAndDropCell.transform});
     }
     
     public override void ProcessEnd()

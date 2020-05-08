@@ -44,6 +44,22 @@ public class LoadingCanvas : MonoBehaviour {
         processingDescrition.gameObject.SetActive(_b);
     }
     
+    public void HigtLightRect(List<Transform> Ts)
+    {
+        hollowOutMask.gameObject.SetActive(true);
+        if (LoadingCanvasBigCurtain != null)
+            LoadingCanvasBigCurtain.color = Color.clear;
+        //Loading_Canvas.sortingOrder = 1;
+        hollowOutMask.raycastTarget = true;
+        List<RectTransform> rectTransforms = new List<RectTransform>();
+        for (int i = 0; i < Ts.Count; i++)
+        {
+            rectTransforms.Add(Ts[i].GetComponent<RectTransform>());
+        }
+        hollowOutMask.SetTarget(rectTransforms);
+        hollowOutMask.color = new Color(0, 0, 0, 0.6f);
+    }
+    
     public void HigtLightRect(Transform _Transform)
     {
         hollowOutMask.gameObject.SetActive(true);

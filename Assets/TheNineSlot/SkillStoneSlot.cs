@@ -77,7 +77,7 @@ public class SkillStoneSlot
             yield return TakeASkillStoneFromBoxToSlot(OnSlotStoneID, stoneColor);
         }
         _DragAndDropCell.UpdateMyItem();
-        _DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 0.2f);
+        _DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
         yield break;
     }
         
