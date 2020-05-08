@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 // LoadingCanvas 可以存在很多别的丰富的功能，比如播放视频？用于loading画面？
 public class LoadingCanvas : MonoBehaviour {
@@ -50,7 +51,7 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = Color.clear;
         //Loading_Canvas.sortingOrder = 1;
         hollowOutMask.raycastTarget = true;
-        hollowOutMask.SetTarget(_Transform.GetComponent<RectTransform>());
+        hollowOutMask.SetTarget(new List<RectTransform>{ _Transform.GetComponent<RectTransform>() });
         hollowOutMask.color = new Color(0, 0, 0, 0.6f);
     }
     

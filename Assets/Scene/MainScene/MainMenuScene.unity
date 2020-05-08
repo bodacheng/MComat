@@ -41960,7 +41960,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  _target: {fileID: 0}
+  _target:
+  - {fileID: 0}
 --- !u!222 &901086527
 CanvasRenderer:
   m_ObjectHideFlags: 0

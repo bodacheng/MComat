@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 实现镂空效果的Mask组件，该模块必须放在Canvas上，
@@ -16,7 +19,7 @@ using UnityEngine.UI;
 public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
 {
     [SerializeField]
-    RectTransform _target;
+    List<RectTransform> _target;
     
     Vector3 _targetMin = Vector3.zero;
     Vector3 _targetMax = Vector3.zero;
@@ -27,7 +30,7 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
     /// <summary>
     /// 设置镂空的目标
     /// </summary>
-    public void SetTarget(RectTransform target)
+    public void SetTarget(List<RectTransform> target)
     {
         _canRefresh = true;
         _target = target;
@@ -55,8 +58,11 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         }
         else
         {
-            Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(_cacheTrans, _target);
-            _SetTarget(bounds.min, bounds.max);
+            for (int i = 0; i < _target.Count; i++)
+            {
+                Bounds bounds = RectTransformUtility.CalculateRelativeRectTransformBounds(_cacheTrans, _target[i]);
+                _SetTarget(bounds.min, bounds.max);
+            }
         }
     }
 
@@ -116,11 +122,17 @@ public class HollowOutMask : MaskableGraphic, ICanvasRaycastFilter
         vh.AddTriangle(7, 0, 4);
     }
 
+    // 将目标对象范围内的事件镂空（使其穿过）
     bool ICanvasRaycastFilter.IsRaycastLocationValid(Vector2 screenPos, Camera eventCamera)
     {
-        if (null == _target) return true;
-        // 将目标对象范围内的事件镂空（使其穿过）
-        return !RectTransformUtility.RectangleContainsScreenPoint(_target, screenPos, eventCamera);
+        if (null == _target) return true;        
+        bool _R = true;
+        // 以下完全是蒙的
+        for (int i = 0; i < _target.Count; i++)
+        {
+            _R &= !RectTransformUtility.RectangleContainsScreenPoint(_target[i], screenPos, eventCamera);
+        }
+        return _R;
     }
 
     protected override void Awake()
