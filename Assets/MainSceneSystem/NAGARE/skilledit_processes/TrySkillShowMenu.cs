@@ -11,7 +11,7 @@ public class TrySkillShowMenu : MainSceneProcess
     public TrySkillShowMenu(ProcessesRunner processesRunner)
     {
         //this.thisProcessStep = MainSceneStep.Tutorial_skillEdit_sub4;
-        this.subProcessesRunner = processesRunner;
+        this.SubProcessesRunner = processesRunner;
         this.EelementsInherit(PreScene.target);
     }
     

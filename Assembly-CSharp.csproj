@@ -396,6 +396,8 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TopPage.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\GoToMemberDetail.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\OpenSkillEdit.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial_skillEdit.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\skilledit_processes\TryChangeStonePos.cs" />
@@ -588,6 +590,7 @@
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Validation.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
+    <Compile Include="Assets\Tutorial\TutorialHelper.cs" />
     <Compile Include="Assets\UI\BackGroundPS.cs" />
     <Compile Include="Assets\UI\LoadingCanvas.cs" />
     <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />

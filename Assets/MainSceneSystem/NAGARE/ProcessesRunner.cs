@@ -5,22 +5,41 @@ using mainMenu;
 // 这个进程处理器写成单例模式，并不代表除了那一个单例外就没发生成其他instance。可能在一些情况下单独建立它的instance比如在一个进程的内部。
 public class ProcessesRunner
 {
-    static ProcessesRunner instance;
-    public static ProcessesRunner Instance
+    static ProcessesRunner instance_main;
+    static ProcessesRunner instance_sub;
+    
+    public static ProcessesRunner Main
     {
         get
         {
-            if (instance == null)
+            if (instance_main == null)
             {
-                instance = new ProcessesRunner();
+                instance_main = new ProcessesRunner();
             }
-            return instance;
+            return instance_main;
+        }
+    }
+    
+    public static ProcessesRunner Tutorial
+    {
+        get
+        {
+            if (instance_sub == null)
+            {
+                instance_sub = new ProcessesRunner();
+            }
+            return instance_sub;
         }
     }
     
     public MainSceneProcess lastProcess;
     public MainSceneProcess currentProcess;
-    readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
+    IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
+
+    public MainSceneProcess GetProcess(MainSceneStep step)
+    {
+        return SceneProcessDictionary[step];
+    }
 
     public void Clear()
     {
@@ -28,10 +47,11 @@ public class ProcessesRunner
         currentProcess = null;
         SceneProcessDictionary.Clear();
     }
-
+    
     public void AddNewProcess(MainSceneStep step, MainSceneProcess _process)
     {
         SceneProcessDictionary.Add(step, _process);
+        Debug.Log(this + " : " + SceneProcessDictionary.Count);
     }
     
     public void ProcessNagare()

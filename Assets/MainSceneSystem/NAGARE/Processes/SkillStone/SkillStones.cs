@@ -42,7 +42,7 @@ public class SkillStones : MainSceneProcess
     public override void ProcessEnter()
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        if (ProcessesRunner.Instance.lastProcess.Step != MainSceneStep.SkillStones_Sell)
+        if (ProcessesRunner.Main.lastProcess.Step != MainSceneStep.SkillStones_Sell)
         {
             mainProcessRunner.Run(EnterProcess());
         } else {

@@ -6,35 +6,36 @@ using UnityEngine;
 // 这里，应该启动技能编辑画面。而且应该是技能编辑画面的一个特殊模式。
 // 剧情人物亚当的模型应该会在这里启动，并且技能背包中应该是有备用的测试技能石。
 // 点击了技能石编辑的确定按钮后，会进入战斗场景，而且是特殊的剧情式教学战斗。
+
 public class Tutorial_skillEdit : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        subProcessesRunner = new ProcessesRunner();
+        SubProcessesRunner = new ProcessesRunner();
         if (AccountSet._AccInfo.accountprogress == PlayerAccountProgressStep.justCreated)
         {
             TryOneStoneAdd tryOneStoneAdd = new TryOneStoneAdd();
             TryEditALines tryEditALines = new TryEditALines();
-            subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub1,tryOneStoneAdd);
-            subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
-            subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
+            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub1,tryOneStoneAdd);
+            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub2,tryEditALines);
+            SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub1);
         }
         if (AccountSet._AccInfo.accountprogress == PlayerAccountProgressStep.Tutorial)
         {
-            TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(subProcessesRunner);
+            TryEditNineSlot tryEditNineSlot = new TryEditNineSlot(SubProcessesRunner);
             TryChangeStonePos _TryChangeStonePos = new TryChangeStonePos();
-            subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub3,tryEditNineSlot);
-            subProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub4,_TryChangeStonePos);
-            subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub3);
+            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub3,tryEditNineSlot);
+            SubProcessesRunner.AddNewProcess(MainSceneStep.Tutorial_skillEdit_sub4,_TryChangeStonePos);
+            SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub3);
         }
         yield break;
     }
     
     public Tutorial_skillEdit()
     {
-        this.Step = MainSceneStep.Tutorial_skillEdit;
-        this.nextProcessStep = MainSceneStep.Tutorial_Story;
-        this.EelementsInherit(PreScene.target);
+        Step = MainSceneStep.Tutorial_skillEdit;
+        nextProcessStep = MainSceneStep.Tutorial_Story;
+        EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()//这个应该是有条件的，玩家应该给亚当装配多少个技能石才能进入战斗环节？  
@@ -44,7 +45,7 @@ public class Tutorial_skillEdit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -59,7 +60,7 @@ public class Tutorial_skillEdit : MainSceneProcess
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }
-        if (subProcessesRunner != null)
-            subProcessesRunner.ProcessNagare();       
+        if (SubProcessesRunner != null)
+            SubProcessesRunner.ProcessNagare();       
     }
 }

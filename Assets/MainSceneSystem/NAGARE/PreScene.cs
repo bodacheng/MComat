@@ -119,32 +119,32 @@ namespace mainMenu
             
             ArenaProcess areanaProcess = new ArenaProcess();
             
-            ProcessesRunner.Instance.Clear();
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones, skillStones);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SkillStones_Sell, stoneSell);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.FrontPage, frontPage);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Arena, areanaProcess);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
+            ProcessesRunner.Main.Clear();
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones, skillStones);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones_Sell, stoneSell);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.FrontPage, frontPage);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.Arena, areanaProcess);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
             
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.ShopTop, shopTop);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.BoxExpansion, stoneBoxExpansion);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.ShopTop, shopTop);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxExpansion, stoneBoxExpansion);
             
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);
-            ProcessesRunner.Instance.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
             
             LoadingCanvas.target.TurnOnProcessDescription(true);
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
             
-            yield return AccountSet.LoadCustomerInfo();
+            yield return AccountSet.LoadCustomerInfo(); // 缺response判断
             Setting.target.LoadProgrameSettingFromAccount();
             accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.Coin.ToString();
@@ -162,27 +162,15 @@ namespace mainMenu
             
             yield return _SelfFightManager.INITeamPosButtons();
             
-            // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-            switch (AccountSet._AccInfo.accountprogress)
-            {
-                case PlayerAccountProgressStep.Freedom:
-                    // 账户信息。。如果账户信息没有能读取成功的话那接下来的账户拥有财产等等都不应该继续尝试读取。
-                    // 在正式版本当中读取账户信息应该就是获取token的过程。那么。。。说白了如果用户信息都没能获取那程序的初始化工作应该一点也不需要再进行了才对。
-                    // 那这样的话势必我需要来看接下来这个请求工作的返回值。
-                    IEnumerator localMyChractersProcess = AccountCharsSet.LoadAll();
-                    yield return (localMyChractersProcess);
-                    //上面这些都缺response判断
-                    yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
-                    yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
-                    yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
-                    IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
-                    yield return loadMyStonesProcess;
-                break;
-                case PlayerAccountProgressStep.justCreated:
-                break;
-                case PlayerAccountProgressStep.Tutorial:
-                break;
-            }
+            IEnumerator localMyChractersProcess = AccountCharsSet.LoadAll();
+            yield return localMyChractersProcess;
+            // 缺response判断
+            yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
+            yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
+            yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
+            IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
+            yield return loadMyStonesProcess;
+            
             LoadingCanvas.target.LightUp();
             
             if (ReturnButtonManager.ReturnMissionList.Count > 0)
@@ -198,10 +186,14 @@ namespace mainMenu
                         trySwitchToStep(MainMenuNote.goingtostep, false);
                     break;
                     case PlayerAccountProgressStep.justCreated:
-                        trySwitchToStep(MainSceneStep.Tutorial_skillEdit, false);
                     break;
                     case PlayerAccountProgressStep.Tutorial:
-                        trySwitchToStep(MainSceneStep.Tutorial_skillEdit,false);
+                        GoToMemberDetail goToMemberDetail = new GoToMemberDetail();
+                        OpenSkillEdit openSkillEdit = new OpenSkillEdit();
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.GoToMemberDetail, goToMemberDetail);
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.OpenSkillEdit, openSkillEdit);
+                        trySwitchToStep(MainMenuNote.goingtostep, false);
+                        ProcessesRunner.Tutorial.ChangeProcess(MainSceneStep.GoToMemberDetail);
                     break;
                 }
             }
@@ -209,7 +201,8 @@ namespace mainMenu
 
         void Update()
         {
-            ProcessesRunner.Instance.ProcessNagare();
+            ProcessesRunner.Main.ProcessNagare();
+            ProcessesRunner.Tutorial.ProcessNagare();
         }
         
         public void AskIfLoadFight(StageScriptableObject stage)
@@ -235,16 +228,16 @@ namespace mainMenu
         [EnumAction(typeof(MainSceneStep))]
         public void trySwitchToStep(MainSceneStep next_step, bool foward)
         {
-            if (foward && ProcessesRunner.Instance.currentProcess != null)
+            if (foward && ProcessesRunner.Main.currentProcess != null)
             {
-                MainSceneStep returnToStep = ProcessesRunner.Instance.currentProcess.Step;
+                MainSceneStep returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnTOCurrent()
                 {
                     trySwitchToStep(returnToStep, false);
                 }
                 ReturnButtonManager.PUSH(returnTOCurrent);
             }
-            ProcessesRunner.Instance.ChangeProcess(next_step);
+            ProcessesRunner.Main.ChangeProcess(next_step);
         }
         
         //void OnGUI()

@@ -13,7 +13,7 @@ public class TryEditNineSlot : MainSceneProcess
         this.Step = MainSceneStep.Tutorial_skillEdit_sub3;
         this.nextProcessStep = MainSceneStep.None;
         
-        this.subProcessesRunner = processesRunner;
+        this.SubProcessesRunner = processesRunner;
         this.EelementsInherit(PreScene.target);
     }
 
@@ -100,7 +100,7 @@ public class TryEditNineSlot : MainSceneProcess
         {
             mainProcessRunner.Run(TheNineSlot.target.UpdateMyStonesBaseOnSlots(_CharacterDataInfo));
             MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
-            this.subProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
+            this.SubProcessesRunner.ChangeProcess(MainSceneStep.Tutorial_skillEdit_sub4);
         }
 
         void SkillUpdateValidation()

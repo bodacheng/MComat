@@ -64,7 +64,7 @@ public class TryEditALines : MainSceneProcess
         {
             if (TheNineSlot.target.A1DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() &&
                 TheNineSlot.target.A2DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>() &&
-                    TheNineSlot.target.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>())
+                TheNineSlot.target.A3DragAndDropCell.gameObject.transform.GetComponentInChildren<SKStoneItem>())
             {
                 TheNineSlot.target.ConfirmSkillChangeButton.gameObject.SetActive(true);
                 step = 2;

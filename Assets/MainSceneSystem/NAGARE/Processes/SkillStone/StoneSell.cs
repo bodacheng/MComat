@@ -5,7 +5,7 @@ public class StoneSell : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        if (ProcessesRunner.Instance.lastProcess.Step != MainSceneStep.SkillStones)
+        if (ProcessesRunner.Main.lastProcess.Step != MainSceneStep.SkillStones)
         {
             yield return SkillStones.EnterProcess();
         } else {

@@ -4,6 +4,8 @@ using mainMenu;
 
 public class MemberDetailProcess : MainSceneProcess
 {
+    public bool loadFinished;
+    
     public MemberDetailProcess()
     {
         Step = MainSceneStep.MemberDetail;
@@ -12,6 +14,7 @@ public class MemberDetailProcess : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        loadFinished = false;
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -23,6 +26,7 @@ public class MemberDetailProcess : MainSceneProcess
         //this._MonsterBox.adjustAllIconsSize(null);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+        loadFinished = true;
     }
 
     public override bool CanEnterOtherProcess()

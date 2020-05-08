@@ -10,7 +10,7 @@ namespace mainMenu
         public CharsManager _CharsManager;
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
-        public ProcessesRunner subProcessesRunner;
+        public ProcessesRunner SubProcessesRunner;
 
         public void EelementsInherit(PreScene _preparingScene)
         {
@@ -73,5 +73,9 @@ namespace mainMenu
         JiNengRongLian_selectMaterialMonster = 12,
         JiNengRongLian_selectBaseMonster = 13,
         JiNengRongLian_waitForConfirm = 14,
+        
+        //Tutorial (主要流程并行)
+        GoToMemberDetail = 101,
+        OpenSkillEdit = 102
     }
 }
