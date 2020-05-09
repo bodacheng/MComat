@@ -365,7 +365,6 @@ MonoBehaviour:
     type: 3}
   selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
-  realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
   TeamStandPoints: []
@@ -407,7 +406,6 @@ MonoBehaviour:
     type: 3}
   selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
-  realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
   TeamStandPoints: []
@@ -430,7 +428,6 @@ MonoBehaviour:
     type: 3}
   selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
-  realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
   TeamStandPoints: []
@@ -526,7 +523,7 @@ Transform:
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &154877734
 GameObject:
@@ -656,6 +653,7 @@ MonoBehaviour:
   processingDescrition: {fileID: 0}
   LoadingCanvasBigCurtain: {fileID: 950019771}
   ValidationWindow: {fileID: 0}
+  ValidationWindow_PosForMask: {fileID: 0}
   ValidationIntro: {fileID: 0}
   YesButton: {fileID: 0}
   NoButton: {fileID: 0}
@@ -1967,52 +1965,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &768322272
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 768322273}
-  - component: {fileID: 768322274}
-  m_Layer: 0
-  m_Name: OutsideScreenIndicator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &768322273
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768322272}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 20
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &768322274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768322272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f706c7b5cfc83428ab7864d54251e679, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _CharSetManager: {fileID: 3000649885530816838}
-  _CameraManager: {fileID: 3000649885118306800}
-  icon: {fileID: 2800000, guid: ba2e3c040e4e9174ca78a6d11c5cbf56, type: 3}
 --- !u!1 &832744875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2441,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  _target: {fileID: 0}
 --- !u!222 &997439421
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7333,7 +7284,6 @@ MonoBehaviour:
     type: 3}
   selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
-  realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
   TeamStandPoints: []
@@ -7375,7 +7325,6 @@ MonoBehaviour:
     type: 3}
   selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
-  realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
   TeamStandPoints: []
@@ -7398,7 +7347,6 @@ MonoBehaviour:
     type: 3}
   selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
-  realTimeGameProcessManager: {fileID: 3000649885613694109}
   _mobileInputsManager: {fileID: 3000649885448912316}
   _CharSetManager: {fileID: 3000649885530816838}
   TeamStandPoints: []
@@ -27242,7 +27190,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2640308065028409347
 MonoBehaviour:
@@ -31339,7 +31287,6 @@ MonoBehaviour:
   _FightOverControl: {fileID: 3000649884636254494}
   fightLogger: {fileID: 443880814}
   _BoundaryControllByGod: {fileID: 3000649885939633397}
-  _RealTimeGameProcessManager: {fileID: 3000649885613694109}
   PauseMenu: {fileID: 3000649884971873964}
   Team1StandPoints:
   - {fileID: 3000649885858378209}
@@ -44674,18 +44621,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3000649886060170056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000649886060170060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 149f64a0af80ec54ab1bc183b5860b78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &3000649886060170057
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44705,7 +44640,6 @@ GameObject:
   - component: {fileID: 3000649886060170063}
   - component: {fileID: 3000649886060170057}
   - component: {fileID: 3000649886060170062}
-  - component: {fileID: 3000649886060170056}
   m_Layer: 5
   m_Name: CountDown
   m_TagString: Untagged
@@ -48327,7 +48261,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3000649886549965726
 GameObject:

@@ -15,7 +15,10 @@ public class PreparingProcess : NagareProcess
     {
         LoadingCanvas.target.DarkOff(1f);
         FightLoadError.Instance.FightLoadErrors.Clear();
-        mainProcessRunner.Run(RealTimeGameProcessManager.target.LoadGame(FightSceneNote.nextBattle));//这个环节的完成flag就是ifLoadStageFinished()
+        if (FightSceneNote.nextBattle != null)
+        {
+            mainProcessRunner.Run(RealTimeGameProcessManager.target.LoadGame(FightSceneNote.nextBattle));
+        }
         EffectsManager.IniEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
         yield break;

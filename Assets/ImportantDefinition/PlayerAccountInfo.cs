@@ -16,8 +16,8 @@ public class PlayerAccountInfo
 
     public PlayerAccountInfo()
     {
-        Coin = 2000;
-        Diamond = 99999;
+        Coin = 0;
+        Diamond = 0;
         Stoneboxsize = 500;
     }
     

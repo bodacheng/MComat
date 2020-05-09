@@ -72,6 +72,11 @@ namespace dataAccess
         
         public static GetMonsterOfPlayerDetailModel Get(string monsterlocalid)
         {
+            if (monsterlocalid == null)
+            {
+                Debug.Log("流程错误");
+                return null;
+            }
             if (AccountCharInfoDic.ContainsKey(monsterlocalid))
             {
                 if (AccountCharInfoDic[monsterlocalid] != null)

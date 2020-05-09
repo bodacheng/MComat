@@ -129,7 +129,7 @@ public class RealTimeGameProcessManager : MonoBehaviour
             target.FightTeam2 = target.FightTeam2_multi;
             break;
         }
-
+        
         FightTeam1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
         FightTeam2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
         
