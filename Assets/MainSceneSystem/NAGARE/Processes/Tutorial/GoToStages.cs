@@ -1,0 +1,27 @@
+﻿using mainMenu;
+
+// Tutorial 1 
+public class GoToStages : MainSceneProcess
+{
+    public GoToStages()
+    {
+        Step = MainSceneStep.GoToStages;
+        nextProcessStep = MainSceneStep.GoToStage1;
+        EelementsInherit(PreScene.target);
+    }
+    
+    public override void ProcessEnter()
+    {
+        LoadingCanvas.target.HigtLightRect(TutorialHelper.target.MemberEditButton.transform);
+    }
+    
+    public override void ProcessEnd()
+    {
+        LoadingCanvas.target.ClearHigtLight();
+    }
+    
+    public override bool CanEnterOtherProcess()
+    {
+        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.MemberDetail;
+    }
+}

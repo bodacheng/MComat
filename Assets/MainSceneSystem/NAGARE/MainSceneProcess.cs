@@ -81,6 +81,9 @@ namespace mainMenu
         SkillEditTry_A2Filled = 107,
         SkillEditTry_A3Filled = 108,
         
-        ALineConfirm = 109
+        ALineConfirm = 109,
+        GoToStages = 111,
+        GoToStage1 = 110,
+        TutorialReturn = 112
     }
 }

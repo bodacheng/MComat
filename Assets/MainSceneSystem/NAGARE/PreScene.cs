@@ -198,6 +198,7 @@ namespace mainMenu
                         SkillEditTry_A2Filled skillEditTry_A2Filled = new SkillEditTry_A2Filled();
                         SkillEditTry_A3Filled skillEditTry_A3Filled = new SkillEditTry_A3Filled();
                         ALineConfirm aLineConfirm = new ALineConfirm();
+                        ReturnOne returnOne = new ReturnOne();
                         
                         ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.GoToMemberDetail, goToMemberDetail);
                         ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.OpenSkillEdit, openSkillEdit);
@@ -211,6 +212,8 @@ namespace mainMenu
                         ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A3Filled, skillEditTry_A3Filled);
                         
                         ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.ALineConfirm, aLineConfirm);
+                        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.TutorialReturn, returnOne);
+                        
                         trySwitchToStep(MainMenuNote.goingtostep, false);
                         ProcessesRunner.Tutorial.ChangeProcess(MainSceneStep.GoToMemberDetail);
                     break;

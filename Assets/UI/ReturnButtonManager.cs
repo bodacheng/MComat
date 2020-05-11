@@ -8,7 +8,7 @@ namespace mainMenu
     public class ReturnButtonManager : MonoBehaviour
     {
         public Button ReturnButton;
-        static Button ToUseReturnButton;
+        public static Button ToUseReturnButton;
         static UnityEvent UnityEvent = new UnityEvent();
         public static readonly List<UnityAction> ReturnMissionList = new List<UnityAction>();
         

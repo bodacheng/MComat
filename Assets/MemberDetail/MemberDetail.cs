@@ -164,8 +164,8 @@ namespace mainMenu
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
-                this._SkillsPrintOut.focusingC = aI_DATA_CENTER;
-                this._SkillsPrintOut.focusingC.Animation_Manger.Animator.applyRootMotion = true;
+                _SkillsPrintOut.focusingC = aI_DATA_CENTER;
+                _SkillsPrintOut.focusingC.Animation_Manger.Animator.applyRootMotion = true;
             }
             yield break;
         }

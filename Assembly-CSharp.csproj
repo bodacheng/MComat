@@ -375,6 +375,7 @@
     <Compile Include="Assets\Mail\MailManager.cs" />
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />
     <Compile Include="Assets\MainSceneSystem\HollowOutMask.cs" />
+    <Compile Include="Assets\MainSceneSystem\MainSceneLogger.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\OldTutorial\TryChangeStonePos.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\OldTutorial\TryEditALines.cs" />
@@ -407,7 +408,10 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\FillASlot\SkillEditTry_A2Filled.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\FillASlot\SkillEditTry_A3Filled.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\GoToMemberDetail.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\GoToStageOne.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\GoToStages.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\OpenSkillEdit.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\ReturnOne.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\SelectASlot\SkillEditA1Try.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\SelectASlot\SkillEditA2Try.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Tutorial\SelectASlot\SkillEditA3Try.cs" />

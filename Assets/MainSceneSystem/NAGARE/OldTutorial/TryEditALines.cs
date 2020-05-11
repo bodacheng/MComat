@@ -36,8 +36,8 @@ public class TryEditALines : MainSceneProcess
     }
     
     public TryEditALines()
-    {  
-        this.EelementsInherit(PreScene.target);
+    {
+        EelementsInherit(PreScene.target);
     }
 
     public override bool CanEnterOtherProcess()
@@ -50,7 +50,7 @@ public class TryEditALines : MainSceneProcess
 
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
@@ -91,22 +91,22 @@ public class TryEditALines : MainSceneProcess
             {
                 battleNameCH = "亚当大战傻逼门卫"
             };
-            if (this.TuroialFight != null)
+            if (TuroialFight != null)
             {
                 CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(_CharacterDataInfo);
-                this.TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
-                this.TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
+                TuroialFight.HeroSets = new MultiDictionary<int, int, CharDataInfo>();
+                TuroialFight.HeroSets.Set(0, 0, characterDataInfo);
             }
             else
             {
                 Debug.Log("严重错误：未能创建教学战斗信息");
                 return;
             }
-            stage.localFight = this.TuroialFight;
+            stage.localFight = TuroialFight;
             stage._fightEventType = FightEventType.Tutorial_Basic;
             stage.BattleGroundID = 2;
             PreScene.target.LoadFight(stage);
-            this.ProcessEnd();
+            ProcessEnd();
         }
 
         void SkillUpdateValidation()

@@ -68,12 +68,27 @@ public class ProcessesRunner
     public void ChangeProcess(MainSceneStep sceneStep)
     {
         if (currentProcess != null)
+        {
             currentProcess.ProcessEnd();
+            MainSceneLog Log = new MainSceneLog()
+            {
+                step = currentProcess.Step,
+                description = "end"
+            };
+            MainSceneLogger.Logs.Add(Log);
+        }
+
         lastProcess = currentProcess;
         SceneProcessDictionary.TryGetValue(sceneStep, out currentProcess);
         if (currentProcess != null)
         {
             currentProcess.ProcessEnter();
+            MainSceneLog Log = new MainSceneLog()
+            {
+                step = currentProcess.Step,
+                description = "start"
+            };
+            MainSceneLogger.Logs.Add(Log);
         }
         else
         {

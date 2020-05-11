@@ -9,7 +9,7 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         // 这个函数应该能够被用于Tutorial模式下亚当的技能编辑。
-        public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+        public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accCharInfo)
         {
             List<string> SkIDs = new List<string>();
             for (int i = 0; i < allSlot.Count; i++)
@@ -43,7 +43,7 @@ namespace mainMenu
                         yield return RemoveStone(allSlot[i].OnSlotStoneID);
                         // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
                         SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStonesReader.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
-                        new_skillStoneInfo.inUsingMonsterOfPlayerId = accountCharacterInfo.monsterOfPlayerId;
+                        new_skillStoneInfo.inUsingMonsterOfPlayerId = accCharInfo.monsterOfPlayerId;
                         new_skillStoneInfo.inUsingSkillSlot = allSlot[i].number.ToString();
                         yield return MySkillStonesReader.Update(new_skillStoneInfo.skillStoneOfPlayerId);
                     }
@@ -51,8 +51,15 @@ namespace mainMenu
                     yield return RemoveStone(allSlot[i].OnSlotStoneID);
                 }
             }
-            yield return ReadANineAndTwo(accountCharacterInfo);
+            yield return ReadANineAndTwo(accCharInfo);
             SeletedRender(null);
+
+            MainSceneLog skillConfirmLog = new MainSceneLog()
+            {
+                step = ProcessesRunner.Main.currentProcess.Step,
+                description = "success"
+            };
+            MainSceneLogger.Logs.Add(skillConfirmLog);
         }
         
         IEnumerator RemoveStone(string stoneID)
