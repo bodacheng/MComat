@@ -24,12 +24,7 @@ public class MemberDetail_skillshow : MainSceneProcess
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
         yield break;
     }
-    
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
-    
+       
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

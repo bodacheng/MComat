@@ -30,7 +30,7 @@ namespace mainMenu
 
         public virtual bool CanEnterOtherProcess()
         {
-            return true;
+            return false;
         }
 
         public virtual void LocalUpdate()

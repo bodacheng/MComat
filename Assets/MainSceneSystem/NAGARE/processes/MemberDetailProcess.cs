@@ -28,11 +28,6 @@ public class MemberDetailProcess : MainSceneProcess
         yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         loadFinished = true;
     }
-
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
     
     public override void ProcessEnter()
     {

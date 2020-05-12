@@ -58,7 +58,7 @@ public class ProcessesRunner
         if (currentProcess != null)
         {
             currentProcess.LocalUpdate();
-            if (currentProcess.CanEnterOtherProcess() && currentProcess.nextProcessStep != MainSceneStep.None)
+            if (currentProcess.CanEnterOtherProcess()) // && currentProcess.nextProcessStep != MainSceneStep.None
             {
                 ChangeProcess(currentProcess.nextProcessStep);
             }
@@ -100,7 +100,7 @@ public class ProcessesRunner
             Debug.Log("这个场景进程没定义：" + sceneStep);
         }
     }
-    
+   
     // 清空返回菜单，并进入step。将返回按钮设置为返回到FrontPage画面
     // 暂时没用。可能用来处理一些临时弹出的画面
     public void GrandNewChangeProcess(MainSceneStep sceneStep)

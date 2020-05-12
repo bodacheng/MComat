@@ -34,11 +34,6 @@ public class SkillStones : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
-
     public override void ProcessEnter()
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;

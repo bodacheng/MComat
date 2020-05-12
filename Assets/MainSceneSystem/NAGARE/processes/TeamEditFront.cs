@@ -25,12 +25,7 @@ public class TeamEditFront : MainSceneProcess
         Step = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.target);
     }
-    
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
-    
+        
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

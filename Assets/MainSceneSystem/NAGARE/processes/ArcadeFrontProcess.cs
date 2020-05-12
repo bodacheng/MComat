@@ -14,12 +14,7 @@ public class ArcadeFrontProcess : MainSceneProcess
         Step = MainSceneStep.ArcadeFront;
         EelementsInherit(PreScene.target);
     }
-    
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
-    
+        
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

@@ -45,11 +45,6 @@ public class MemberDetail_edit : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
     
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
-    
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

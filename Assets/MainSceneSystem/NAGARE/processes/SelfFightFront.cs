@@ -24,12 +24,7 @@ public class SelfFightFront : MainSceneProcess
         Step = MainSceneStep.SelfFightFront;
         EelementsInherit(PreScene.target);
     }
-
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
-    
+   
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

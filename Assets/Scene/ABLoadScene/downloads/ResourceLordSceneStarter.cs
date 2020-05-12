@@ -80,6 +80,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     public IEnumerator _StartNewLocalTestMode()
     {
         AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
+        yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);

@@ -38,11 +38,6 @@ public class Tutorial_skillEdit : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
-    public override bool CanEnterOtherProcess()//这个应该是有条件的，玩家应该给亚当装配多少个技能石才能进入战斗环节？  
-    {
-        return false;
-    }
-    
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

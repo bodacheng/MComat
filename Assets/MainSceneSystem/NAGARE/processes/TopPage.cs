@@ -10,11 +10,6 @@ public class TopPage : MainSceneProcess
         Step = MainSceneStep.FrontPage;
         EelementsInherit(PreScene.target);
     }
-
-    public override bool CanEnterOtherProcess()
-    {
-        return true;
-    }
     
     public IEnumerator EnterProcess()
     {
