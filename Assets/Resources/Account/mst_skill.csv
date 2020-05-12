@@ -100,7 +100,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 99,samk,human,1,10,GR,0,0.2,5,,1
 100,smashground,human,1,10,GR,0,0.2,5,,1
 101,smashground_foward,human,1,10,GR,0,0.2,5,,1
-102,slashwave,human,1,10,GR,1,3,5,,1
+102,slashwave,human,1,10,GR,1,3,10,,1
 103,stab,human,1,10,GR,0,0.2,5,,1
 104,landkick,human,1,10,GR,0,0.2,5,,1
 105,switchkick,human,1,10,GR,0,0.2,5,,1
@@ -149,3 +149,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 148,rotateleg_far,human,1,10,GM,0,3,8,,1
 149,rotatepunchesforward,human,1,10,GM,0,3,8,,1
 150,screwk,human,1,10,GM,0,3,8,,1
+151,risingp2,human,1,10,GR,1,0,5,,1
+152,roundkick,human,1,10,GR,0,0,5,,1
+153,punchdown,human,1,10,GR,0,0,5,,1
+154,s_pillarblast,human,1,10,GR,1,0,5,,1
