@@ -52,27 +52,7 @@ public class BO_Shield : MonoBehaviour {
 
     void Awake()
     {
-        switch (zokusei)
-        {
-            case Zokusei.darkMagic:
-                personalEffectPath = "darkMagic";
-                break;
-            case Zokusei.blueMagic:
-                personalEffectPath = "blueMagic";
-                break;
-            case Zokusei.greenMagic:
-                personalEffectPath = "greenMagic";
-                break;
-            case Zokusei.lightMagic:
-                personalEffectPath = "lightMagic";
-                break;
-            case Zokusei.redMagic:
-                personalEffectPath = "redMagic";
-                break;
-            default:
-                personalEffectPath = "defaultmagic";
-                break;
-        }
+        personalEffectPath = FightGlobalSetting.EffectPathDefine(zokusei);
     }
 
     public void PlusHP(int plus)

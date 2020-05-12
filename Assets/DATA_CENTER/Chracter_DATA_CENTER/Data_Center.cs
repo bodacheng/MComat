@@ -66,28 +66,7 @@ public partial class Data_Center : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-            string personalEffectsPath;
-            switch (Zokusei)
-            {
-                case Zokusei.darkMagic:
-                    personalEffectsPath = "darkMagic";
-                    break;
-                case Zokusei.blueMagic:
-                    personalEffectsPath = "blueMagic";
-                    break;
-                case Zokusei.greenMagic:
-                    personalEffectsPath = "greenMagic";
-                    break;
-                case Zokusei.lightMagic:
-                    personalEffectsPath = "lightMagic";
-                    break;
-                case Zokusei.redMagic:
-                    personalEffectsPath = "redMagic";
-                    break;
-                default:
-                    personalEffectsPath = "defaultmagic";
-                    break;
-            }
+            string personalEffectsPath = FightGlobalSetting.EffectPathDefine(Zokusei);
             EffectsManager.IniEffectsPool("short_effect", personalEffectsPath, 3);
             EffectsManager.IniEffectsPool("normal_effect", personalEffectsPath, 3);
             EffectsManager.IniEffectsPool("long_effect", personalEffectsPath, 3);
@@ -130,29 +109,7 @@ public partial class Data_Center : MonoBehaviour
 
         Sensor.SetDectectLayer(_TeamConfig,this);
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
-
-        string effectPath;
-        switch (Zokusei)
-        {
-            case Zokusei.darkMagic:
-                effectPath = "darkMagic";
-                break;
-            case Zokusei.blueMagic:
-                effectPath = "blueMagic";
-                break;
-            case Zokusei.greenMagic:
-                effectPath = "greenMagic";
-                break;
-            case Zokusei.lightMagic:
-                effectPath = "lightMagic";
-                break;
-            case Zokusei.redMagic:
-                effectPath = "redMagic";
-                break;
-            default:
-                effectPath = "defaultmagic";
-                break;
-        }
+        string effectPath = FightGlobalSetting.EffectPathDefine(Zokusei);
 
         EffectsManager.IniEffectsPool("Sparks", effectPath, 3);
         EffectsManager.IniEffectsPool("light_hit", effectPath, 3);

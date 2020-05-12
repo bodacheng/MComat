@@ -175,28 +175,7 @@ namespace mainMenu
         {
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
             CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
-            string personalEffectsPath;
-            switch (characterResourceInfo._zokusei)
-            {
-                case Zokusei.darkMagic:
-                    personalEffectsPath = "darkMagic";
-                    break;
-                case Zokusei.blueMagic:
-                    personalEffectsPath = "blueMagic";
-                    break;
-                case Zokusei.greenMagic:
-                    personalEffectsPath = "greenMagic";
-                    break;
-                case Zokusei.lightMagic:
-                    personalEffectsPath = "lightMagic";
-                    break;
-                case Zokusei.redMagic:
-                    personalEffectsPath = "redMagic";
-                    break;
-                default:
-                    personalEffectsPath = "defaultmagic";
-                    break;
-            }
+            string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
             EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             yield return new WaitForSeconds(0.1f);
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
