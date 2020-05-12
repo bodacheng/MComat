@@ -6,8 +6,7 @@ using mainMenu;
 public class ProcessesRunner
 {
     static ProcessesRunner instance_main;
-    static ProcessesRunner instance_sub;
-    
+
     public static ProcessesRunner Main
     {
         get
@@ -19,40 +18,28 @@ public class ProcessesRunner
             return instance_main;
         }
     }
-    
-    public static ProcessesRunner Tutorial
-    {
-        get
-        {
-            if (instance_sub == null)
-            {
-                instance_sub = new ProcessesRunner();
-            }
-            return instance_sub;
-        }
-    }
-    
+
     public MainSceneProcess lastProcess;
     public MainSceneProcess currentProcess;
     readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
-    
+
     public MainSceneProcess GetProcess(MainSceneStep step)
     {
         return SceneProcessDictionary[step];
     }
-    
+
     public void Clear()
     {
         lastProcess = null;
         currentProcess = null;
         SceneProcessDictionary.Clear();
     }
-    
+
     public void AddNewProcess(MainSceneStep step, MainSceneProcess _process)
     {
         SceneProcessDictionary.Add(step, _process);
     }
-    
+
     public void ProcessNagare()
     {
         if (currentProcess != null)
@@ -100,7 +87,7 @@ public class ProcessesRunner
             Debug.Log("这个场景进程没定义：" + sceneStep);
         }
     }
-   
+
     // 清空返回菜单，并进入step。将返回按钮设置为返回到FrontPage画面
     // 暂时没用。可能用来处理一些临时弹出的画面
     public void GrandNewChangeProcess(MainSceneStep sceneStep)

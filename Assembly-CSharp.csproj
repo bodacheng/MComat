@@ -384,6 +384,9 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\OldTutorial\TrySkillShowMenu.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\PreScene.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\SceneProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\TutorialProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\TutorialRunner.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ArcadeFrontProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\ArenaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\BoxOverLoadFix.cs" />
@@ -417,6 +420,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\Tutorial\SelectASlot\SkillEditA2Try.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\Tutorial\SelectASlot\SkillEditA3Try.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\processes\Tutorial_skillEdit.cs" />
+    <Compile Include="Assets\MainSceneSystem\TutorialLogger.cs" />
     <Compile Include="Assets\MemberDetail\LevelManager.cs" />
     <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
     <Compile Include="Assets\ModelShower\ModelShower.cs" />

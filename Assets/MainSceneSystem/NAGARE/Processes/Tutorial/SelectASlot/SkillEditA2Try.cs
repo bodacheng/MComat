@@ -1,12 +1,12 @@
 ﻿using mainMenu;
 
 // Tutorial 3
-public class SkillEditA2Try : MainSceneProcess
+public class SkillEditA2Try : TutorialProcess
 {
     public SkillEditA2Try()
     {
-        Step = MainSceneStep.SkillEditTry_A2Selected;
-        nextProcessStep = MainSceneStep.SkillEditTry_A2Filled;
+        Step = TutorialStep.SkillEditTry_A2Selected;
+        nextProcessStep = TutorialStep.SkillEditTry_A2Filled;
         EelementsInherit(PreScene.target);
     }
     

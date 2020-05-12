@@ -190,7 +190,7 @@ namespace mainMenu
                     case PlayerAccountProgressStep.Tutorial:
                         TutorialHelper.target.Test();
                         trySwitchToStep(MainMenuNote.goingtostep, false);
-                        ProcessesRunner.Tutorial.ChangeProcess(MainSceneStep.GoToMemberDetail);
+                        TutorialRunner.Main.ChangeProcess(TutorialStep.GoToMemberDetail);
                     break;
                 }
             }
@@ -199,7 +199,7 @@ namespace mainMenu
         void Update()
         {
             ProcessesRunner.Main.ProcessNagare();
-            ProcessesRunner.Tutorial.ProcessNagare();
+            TutorialRunner.Main.ProcessNagare();
         }
         
         public void AskIfLoadFight(StageScriptableObject stage)

@@ -1,13 +1,13 @@
 ﻿using mainMenu;
 
 // Tutorial 1 
-public class ReturnOne : MainSceneProcess
+public class ReturnOne : TutorialProcess
 {
     MainSceneStep nowstep;
     
     public ReturnOne()
     {
-        Step = MainSceneStep.TutorialReturn;
+        Step = TutorialStep.TutorialReturn;
         EelementsInherit(PreScene.target);
     }
     

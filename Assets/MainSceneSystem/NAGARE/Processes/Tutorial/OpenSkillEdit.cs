@@ -1,14 +1,14 @@
 ﻿using mainMenu;
 
 // Tutorial 2
-public class OpenSkillEdit : MainSceneProcess
+public class OpenSkillEdit : TutorialProcess
 {
     bool missionCompleted;
     MemberDetailProcess MemberDetailProcess;
     public OpenSkillEdit()
     {
-        Step = MainSceneStep.OpenSkillEdit;
-        nextProcessStep = MainSceneStep.SkillEditTry_A1Selected;
+        Step = TutorialStep.OpenSkillEdit;
+        nextProcessStep = TutorialStep.SkillEditTry_A1Selected;
         EelementsInherit(PreScene.target);
     }
     

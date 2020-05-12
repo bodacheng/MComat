@@ -1,12 +1,12 @@
 ﻿using mainMenu;
 
 // Tutorial 1 
-public class GoToMemberDetail : MainSceneProcess
+public class GoToMemberDetail : TutorialProcess
 {
     public GoToMemberDetail()
     {
-        Step = MainSceneStep.GoToMemberDetail;
-        nextProcessStep = MainSceneStep.OpenSkillEdit;
+        Step = TutorialStep.GoToMemberDetail;
+        nextProcessStep = TutorialStep.OpenSkillEdit;
         EelementsInherit(PreScene.target);
     }
     

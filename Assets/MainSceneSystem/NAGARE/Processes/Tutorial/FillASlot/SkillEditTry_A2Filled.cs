@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillEditTry_A2Filled : MainSceneProcess
+public class SkillEditTry_A2Filled : TutorialProcess
 {
     public SkillEditTry_A2Filled()
     {
-        Step = MainSceneStep.SkillEditTry_A2Filled;
-        nextProcessStep = MainSceneStep.SkillEditTry_A3Selected;
+        Step = TutorialStep.SkillEditTry_A2Filled;
+        nextProcessStep = TutorialStep.SkillEditTry_A3Selected;
         EelementsInherit(PreScene.target);
     }
     

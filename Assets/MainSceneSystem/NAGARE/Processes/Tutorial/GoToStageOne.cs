@@ -1,11 +1,11 @@
 ﻿using mainMenu;
 
 // Tutorial 1 
-public class GoToStageOne : MainSceneProcess
+public class GoToStageOne : TutorialProcess
 {
     public GoToStageOne()
     {
-        Step = MainSceneStep.GoToStage1;
+        Step = TutorialStep.GoToStage1;
         EelementsInherit(PreScene.target);
     }
     

@@ -1,14 +1,14 @@
 ﻿using mainMenu;
 
 // Tutorial 3  1
-public class SkillEditA1Try : MainSceneProcess
+public class SkillEditA1Try : TutorialProcess
 {
     bool missionCompleted;
     MemberDetail_edit memberDetail_Edit;
     public SkillEditA1Try()
     {
-        Step = MainSceneStep.SkillEditTry_A1Selected;
-        nextProcessStep = MainSceneStep.SkillEditTry_A1Filled;
+        Step = TutorialStep.SkillEditTry_A1Selected;
+        nextProcessStep = TutorialStep.SkillEditTry_A1Filled;
         EelementsInherit(PreScene.target);
     }
     

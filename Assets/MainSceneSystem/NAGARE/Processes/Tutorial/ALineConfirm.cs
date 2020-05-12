@@ -1,12 +1,12 @@
 ﻿using mainMenu;
 
 // Tutorial
-public class ALineConfirm : MainSceneProcess
+public class ALineConfirm : TutorialProcess
 {
     public ALineConfirm()
     {
-        Step = MainSceneStep.ALineConfirm;
-        nextProcessStep = MainSceneStep.TutorialReturn;
+        Step = TutorialStep.ALineConfirm;
+        nextProcessStep = TutorialStep.TutorialReturn;
     }
     
     public override void ProcessEnter()

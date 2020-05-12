@@ -13,7 +13,8 @@ public class TutorialHelper : MonoBehaviour
     public static TutorialHelper target;
 
     // 这个结构代表了教程的顺序, 很大的特点在于可加入重复元素。典型的如后退菜单
-    List<MainSceneProcess> TutorialProcesses = new List<MainSceneProcess>(); 
+    List<TutorialProcess> TutorialProcesses = new List<TutorialProcess>();
+    int progressPointer = 0;
 
     void Awake()
     {
@@ -33,18 +34,16 @@ public class TutorialHelper : MonoBehaviour
         ALineConfirm aLineConfirm = new ALineConfirm();
         ReturnOne returnOne = new ReturnOne();
 
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.GoToMemberDetail, goToMemberDetail);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.OpenSkillEdit, openSkillEdit);
-
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A1Selected, skillEditA1Try);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A2Selected, skillEditA2Try);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A3Selected, skillEditA3Try);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A1Filled, skillEditTry_A1Filled);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A2Filled, skillEditTry_A2Filled);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.SkillEditTry_A3Filled, skillEditTry_A3Filled);
-
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.ALineConfirm, aLineConfirm);
-        ProcessesRunner.Tutorial.AddNewProcess(MainSceneStep.TutorialReturn, returnOne);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToMemberDetail, goToMemberDetail);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.OpenSkillEdit, openSkillEdit);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A1Selected, skillEditA1Try);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A2Selected, skillEditA2Try);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A3Selected, skillEditA3Try);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A1Filled, skillEditTry_A1Filled);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A2Filled, skillEditTry_A2Filled);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A3Filled, skillEditTry_A3Filled);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ALineConfirm, aLineConfirm);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.TutorialReturn, returnOne);
 
         TutorialProcesses.Add(goToMemberDetail);
         TutorialProcesses.Add(openSkillEdit);
