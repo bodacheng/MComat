@@ -7,7 +7,6 @@ public class SkillEditTry_A3Filled : TutorialProcess
     public SkillEditTry_A3Filled()
     {
         Step = TutorialStep.SkillEditTry_A3Filled;
-        nextProcessStep = TutorialStep.ALineConfirm;
         EelementsInherit(PreScene.target);
     }
     

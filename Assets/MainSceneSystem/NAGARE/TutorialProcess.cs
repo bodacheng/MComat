@@ -3,8 +3,6 @@
     public class TutorialProcess : SceneProcess
     {
         public TutorialStep Step;
-        public TutorialStep nextProcessStep = TutorialStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
-
         public SingleThreadProcesser mainProcessRunner;
         public CharsManager _CharsManager;
         public SelfFightManager _SelfFightManager;

@@ -8,7 +8,6 @@ public class OpenSkillEdit : TutorialProcess
     public OpenSkillEdit()
     {
         Step = TutorialStep.OpenSkillEdit;
-        nextProcessStep = TutorialStep.SkillEditTry_A1Selected;
         EelementsInherit(PreScene.target);
     }
     

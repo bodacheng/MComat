@@ -6,7 +6,6 @@ public class ALineConfirm : TutorialProcess
     public ALineConfirm()
     {
         Step = TutorialStep.ALineConfirm;
-        nextProcessStep = TutorialStep.TutorialReturn;
     }
     
     public override void ProcessEnter()

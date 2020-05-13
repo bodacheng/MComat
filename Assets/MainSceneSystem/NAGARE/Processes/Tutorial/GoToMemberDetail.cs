@@ -6,7 +6,6 @@ public class GoToMemberDetail : TutorialProcess
     public GoToMemberDetail()
     {
         Step = TutorialStep.GoToMemberDetail;
-        nextProcessStep = TutorialStep.OpenSkillEdit;
         EelementsInherit(PreScene.target);
     }
     

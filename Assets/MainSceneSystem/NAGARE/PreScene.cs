@@ -188,9 +188,9 @@ namespace mainMenu
                     case PlayerAccountProgressStep.justCreated:
                     break;
                     case PlayerAccountProgressStep.Tutorial:
-                        TutorialHelper.target.Test();
+                        TutorialRunner.Main.GenerateTutorial();
                         trySwitchToStep(MainMenuNote.goingtostep, false);
-                        TutorialRunner.Main.ChangeProcess(TutorialStep.GoToMemberDetail);
+                        TutorialRunner.Main.StartToMove();
                     break;
                 }
             }

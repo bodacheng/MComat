@@ -21986,6 +21986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99b7e9f13f2e45ea84d825d71307402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArcadeMode: {fileID: 151546577}
   MemberEditButton: {fileID: 463728214}
   SkillEditButton: {fileID: 676286616}
   SkillBoxAndNineSlotT: {fileID: 1261126708}

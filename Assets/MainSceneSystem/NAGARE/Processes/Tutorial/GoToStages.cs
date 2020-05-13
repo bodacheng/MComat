@@ -6,13 +6,12 @@ public class GoToStages : TutorialProcess
     public GoToStages()
     {
         Step = TutorialStep.GoToStages;
-        nextProcessStep = TutorialStep.GoToStage1;
         EelementsInherit(PreScene.target);
     }
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(TutorialHelper.target.MemberEditButton.transform);
+        LoadingCanvas.target.HigtLightRect(TutorialHelper.target.ArcadeMode.transform);
     }
     
     public override void ProcessEnd()
@@ -22,6 +21,6 @@ public class GoToStages : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.MemberDetail;
+        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.ArcadeFront;
     }
 }
