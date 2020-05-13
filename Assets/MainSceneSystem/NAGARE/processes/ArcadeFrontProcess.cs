@@ -2,10 +2,14 @@
 using mainMenu;
 
 public class ArcadeFrontProcess : MainSceneProcess
-{    
+{
+    public bool loadFinished;
+    
     public IEnumerator EnterProcess()
     {
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
+        yield return ArcadeManager.target.GenerateStageButtons();
+        loadFinished = true;
         yield break;
     }
     
@@ -17,6 +21,7 @@ public class ArcadeFrontProcess : MainSceneProcess
         
     public override void ProcessEnter()
     {
+        loadFinished = false;
         mainProcessRunner.Run(EnterProcess());
     }
     

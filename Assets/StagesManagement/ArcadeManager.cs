@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using dataAccess;
+using System.Collections;
 
 namespace mainMenu
 {
@@ -30,20 +31,27 @@ namespace mainMenu
                         
         public static ArcadeManager target;
         List<StageButton> stageButtons = new List<StageButton>();
-                
+        
         void Awake()
         {
             target = this;
         }
         
-        void Start()
+        public StageButton GetStageButton(int level)
         {
-            GenerateStageButtons();
+            for (int i = 0; i < stageButtons.Count; i++)
+            {
+                if (stageButtons[i].ID == level)
+                {
+                    return stageButtons[i];
+                }
+            }
+            return null;
         }
-
+        
         // 原则上这些玩意没有每次都去生成的道理..
         // 而且这个功能可能做一些扩展，比如关卡图标可以搞个特殊一类的
-        public void GenerateStageButtons()
+        public IEnumerator GenerateStageButtons()
         {
             List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(StageScriptableObject)).ToList();
             foreach (Object _object in stageScriptableObjects)
@@ -70,6 +78,7 @@ namespace mainMenu
             VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
             ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x,
             (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * stageButtons.Count);
+            yield break;
         }
         
         public void JumpToNewest()

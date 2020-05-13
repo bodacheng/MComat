@@ -3,6 +3,9 @@
 // Tutorial 1 
 public class GoToStageOne : TutorialProcess
 {
+    bool missionCompleted;
+    ArcadeFrontProcess ArcadeFrontProcess;
+    
     public GoToStageOne()
     {
         Step = TutorialStep.GoToStage1;
@@ -11,7 +14,8 @@ public class GoToStageOne : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(TutorialHelper.target.MemberEditButton.transform);
+        missionCompleted = false;
+        ArcadeFrontProcess = (ArcadeFrontProcess)ProcessesRunner.Main.GetProcess(MainSceneStep.ArcadeFront);
     }
     
     public override void ProcessEnd()
@@ -21,6 +25,18 @@ public class GoToStageOne : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.MemberDetail;
+        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.QuestInfo;
+    }
+    
+    public override void LocalUpdate()
+    {
+        if (!missionCompleted)
+        {
+            if (ArcadeFrontProcess.loadFinished)
+            {
+                LoadingCanvas.target.HigtLightRect(ArcadeManager.target.GetStageButton(1).button.transform);
+                missionCompleted = true;
+            }
+        }
     }
 }

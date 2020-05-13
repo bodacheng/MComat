@@ -37,6 +37,7 @@ public class TutorialRunner
         ALineConfirm aLineConfirm = new ALineConfirm();
         ReturnOne returnOne = new ReturnOne();
         GoToStages goToStages = new GoToStages();
+        GoToStageOne goToStageOne = new GoToStageOne();
 
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToMemberDetail, goToMemberDetail);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.OpenSkillEdit, openSkillEdit);
@@ -49,6 +50,7 @@ public class TutorialRunner
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.ALineConfirm, aLineConfirm);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.TutorialReturn, returnOne);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToStages, goToStages);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToStage1, goToStageOne);
 
         TutorialProcesses.Add(goToMemberDetail);
         TutorialProcesses.Add(openSkillEdit);
@@ -62,6 +64,7 @@ public class TutorialRunner
         TutorialProcesses.Add(returnOne);
         TutorialProcesses.Add(returnOne);
         TutorialProcesses.Add(goToStages);
+        TutorialProcesses.Add(goToStageOne);
     }
 
     public void AddTutorialProcess(TutorialStep step, TutorialProcess _process)
