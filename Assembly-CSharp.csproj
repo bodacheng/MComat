@@ -122,12 +122,6 @@
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\ParticleCollisionInstance.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\TargetProjectile.cs" />
-    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\CameraTarget.cs" />
-    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\EffectController.cs" />
-    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\EffectDemo.cs" />
-    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\EffectShaderPropertyStr.cs" />
-    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\RenderEffect.cs" />
-    <Compile Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Script\TransformExtension.cs" />
     <Compile Include="Assets\AudioManager\AudioManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
     <Compile Include="Assets\BOWeaponSystem\Decompositioner.cs" />
@@ -619,7 +613,6 @@
     <Compile Include="Assets\UI\ReturnButtonManager.cs" />
     <Compile Include="Assets\UI\SideCharIcon.cs" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\Toon Blended Premmultiply.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
     <None Include="Assets\EasyTouchBundle\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
@@ -628,7 +621,6 @@
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Readme.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleBlendEffect.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_Scroll01.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_CenterGlow.shader" />
@@ -653,7 +645,6 @@
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Add_Trail.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Add_Fresnel.shader" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\effect_distortion_mask.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\DynamicStarrySky\README.txt" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Ice.shader" />
@@ -678,7 +669,6 @@
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\ReleaseNotes.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleAddEffect.shader" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\LightGlow.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Documentation\Version 2.0.txt" />
@@ -725,17 +715,13 @@
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticleAddSoftEffect.shader" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\READ ME.txt" />
     <None Include="Assets\POFX\Shaders\Resources\Eraser.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\SlashOld.shader" />
     <None Include="Assets\EasyTouchBundle\EasyTouch\RealseNotes.txt" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Shaders\IceShader01.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\ParticlePremultiplyBlend.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
-    <None Include="Assets\Asstes\Particlecollection_Magic_ring\Plugins\Effect\Shader\Toon Additive.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
