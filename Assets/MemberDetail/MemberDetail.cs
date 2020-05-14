@@ -85,7 +85,7 @@ namespace mainMenu
             
             CharConfig Ref = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
-
+            
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载
             SkillShowButton.onClick.RemoveAllListeners();
@@ -99,7 +99,7 @@ namespace mainMenu
             }
             SkillShowButton.onClick.AddListener(step2INI);
             SkillShowButton.onClick.AddListener(SkillShow);
-
+            
             // edit按钮功能加载
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
@@ -107,9 +107,6 @@ namespace mainMenu
                 PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
-
-            //UnityEngine.Events.UnityAction exPlusAction = () => { this.EXplus(_choosingAIBeheviourInfo, 100); };
-            //expPlus.GetComponentInChildren<Button>().onClick.AddListener(exPlusAction);
 
             // 自定义tag功能加载
             //selfdefindtag.text = focusingCharacterDataInfo.userd_efined_name;
@@ -120,21 +117,8 @@ namespace mainMenu
             //    this._preparingScene.triggerMainProcess(AccountCharsSet.Instance.updateMyCharInfo(focusingCharacterDataInfo));
             //};
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
-            //UnityEngine.Events.UnityAction sellIt = () =>
-            //{
-            //    AccountCharsSet.Instance.sellOneChar(focusingCharacterDataInfo.monsterOfPlayerId);
-            //    this._preparingScene.triggerMainProcess(AccountCharsSet.Instance.updateMyCharInfo(focusingCharacterDataInfo));
-            //    _preparingScene.trySwitchToStep(MainSceneStep.MemberDetail, true);
-            //};
-            //UnityEngine.Events.UnityAction validation = () =>
-            //{
-            //    this._preparingScene._LoadingCanvas.arrangeValiationWindow(sellIt, "确实要卖？");
-            //};
-            //sell.onClick.RemoveAllListeners();
-            //sell.onClick.AddListener(validation);
-
+            
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            Debug.Log("begins");
             presentationProcessRunner.Run(SkillsPrintOutFocusingCharChangeProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharDataInfo)));
         }
 
