@@ -31,7 +31,8 @@ namespace mainMenu
         [Space(2)]
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
-        
+
+        public static List<string> typeOfMonstersIhave = new List<string>();
         public static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
         
         void Start()
@@ -47,7 +48,7 @@ namespace mainMenu
                 icon.Value.DecideIconSize(focusingLocalID);
             }
         }
-        
+
         public static HeroIcon GetCharIcon(string monsterofplayid)
         {
             if (monsterofplayid == null)
@@ -68,6 +69,7 @@ namespace mainMenu
             {
                 yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId);
             }
+            target._monsterboxFilter.RefreshTypeDropDown(typeOfMonstersIhave);
         }
 
         public static IEnumerator AddOneNewIcon(string monsterOfPlayerId)
@@ -84,22 +86,17 @@ namespace mainMenu
                 targetingIcon._MonsterOfPlayerDetailModel = targetingCharInfo;
                 targetingIcon._CharConfig = _CharConfig;
                 targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
+                void Select()
+                {
+                    HeroIcon.Seletedfeature(targetingIcon, target.selectedFrame, 150f);
+                }
+                targetingIcon.iconButton.onClick.AddListener(Select);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);
             }
             
-            // 下面的环节重新加载type下拉表
-            List<string> typeList = new List<string>();
-            foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
+            if (!typeOfMonstersIhave.Contains(targetingIcon._CharConfig.TYPE))
             {
-                if (!typeList.Contains(keyValuePair.Value._CharConfig.TYPE))
-                {
-                    typeList.Add(keyValuePair.Value._CharConfig.TYPE);
-                    Dropdown.OptionData m_NewData = new Dropdown.OptionData
-                    {
-                        text = keyValuePair.Value._CharConfig.TYPE
-                    };
-                    target._monsterboxFilter.typeDropDown.options.Add(m_NewData);
-                }
+                typeOfMonstersIhave.Add(targetingIcon._CharConfig.TYPE);
             }
             yield break;
         }
@@ -114,6 +111,10 @@ namespace mainMenu
         {
             target.MonsterBoxContainer.gameObject.SetActive(true);
             yield return MonsterIconsGenerate();
+            foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
+            {
+                keyValuePair.Value.gameObject.SetActive(false);
+            }
             List<HeroIcon> nowcharIcons = target._monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
             int hangshu = 1;
             for (int i = 0; i < nowcharIcons.Count; i++)
@@ -124,13 +125,6 @@ namespace mainMenu
                     Debug.Log("严重错误");
                     yield break;
                 }
-                string monsterOfPlayerId = _targetingIcon._MonsterOfPlayerDetailModel.monsterOfPlayerId;
-                _targetingIcon.iconButton.onClick.RemoveAllListeners();
-                void Select()
-                {
-                    HeroIcon.Seletedfeature(_targetingIcon, target.selectedFrame, 150f);
-                }
-                _targetingIcon.iconButton.onClick.AddListener(Select);
                 _targetingIcon.gameObject.SetActive(true);
                 _targetingIcon.transform.SetParent(target.MonsterBoxContainer);
                 _targetingIcon.transform.localScale = Vector3.one;

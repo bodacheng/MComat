@@ -130,6 +130,7 @@ public class HeroIcon : MonoBehaviour {
             selectedFrame.SetActive(false);
             return;
         }
+        Debug.Log("click");
         selectedFrame.transform.SetParent(_charIcon.transform);
         selectedFrame.transform.localPosition = Vector3.zero;
         selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);

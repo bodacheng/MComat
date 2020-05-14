@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class MonsterboxFilter : MonoBehaviour
 {
-    //public LoadingCanvas loadingCanvas;
     public Toggle byzokusei;
     public Dropdown typeDropDown;
     public InputField searchtag;
@@ -23,13 +22,26 @@ public class MonsterboxFilter : MonoBehaviour
     public List<HeroIcon> OrderIcons(List<HeroIcon> origin_mainMenuIcons)
     {
         origin_mainMenuIcons = TypeFilter(origin_mainMenuIcons);    
-
         if (byzokusei.isOn)
+        {
             origin_mainMenuIcons = OrderIconsByZokusei(origin_mainMenuIcons);
-
+        }
         //origin_mainMenuIcons = putFavourateFirst(origin_mainMenuIcons);
         origin_mainMenuIcons = SearchByKeyword(origin_mainMenuIcons);
         return origin_mainMenuIcons;
+    }
+
+    public void RefreshTypeDropDown(List<string> types)
+    {
+        typeDropDown.options.Clear();
+        for (int i = 0; i < types.Count; i++)
+        {
+            Dropdown.OptionData m_NewData = new Dropdown.OptionData
+            {
+                text = types[i]
+            };
+            typeDropDown.options.Add(m_NewData);
+        }
     }
 
     List<HeroIcon> TypeFilter(List<HeroIcon> origin_mainMenuIcons)
@@ -42,7 +54,9 @@ public class MonsterboxFilter : MonoBehaviour
                 if (origin_mainMenuIcons[i] != null)
                 {
                     if (origin_mainMenuIcons[i]._CharConfig.TYPE == typeDropDown.options[typeDropDown.value].text)
+                    {
                         new_mainMenuIcons.Add(origin_mainMenuIcons[i]);
+                    }
                 }
                 else
                 {

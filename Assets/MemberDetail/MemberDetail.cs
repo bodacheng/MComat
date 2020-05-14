@@ -134,6 +134,7 @@ namespace mainMenu
             //sell.onClick.AddListener(validation);
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
+            Debug.Log("begins");
             presentationProcessRunner.Run(SkillsPrintOutFocusingCharChangeProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharDataInfo)));
         }
 
