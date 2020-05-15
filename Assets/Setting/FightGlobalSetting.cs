@@ -4,9 +4,9 @@ public class FightGlobalSetting : MonoBehaviour
 {
     public AnimationCurve knockOffyAnimationCurve;
     public AnimationCurve knockOffzAnimationCurve;
-    
+
     public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f;
-    public float knockoffextent = 5f;
+    public float knockoffextent = 20f;
     public float MaxKnockoffLaidGroundTime = 2f;
     public float CanGetUpAfterKnockoffToGround = 0.5f;
     public float GetupTime = 1f;

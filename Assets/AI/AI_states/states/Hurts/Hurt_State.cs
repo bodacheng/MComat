@@ -92,7 +92,7 @@ public class Hurt_State : Behavior {
                 );
                 fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
-                _FightAttriCalReference.GetKnockOffCount().PlusGauge(4f);
+                _FightAttriCalReference.GetKnockOffCount().PlusGauge(6f);
                 _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
             break;
             case DamageType.draw:
@@ -145,7 +145,8 @@ public class Hurt_State : Behavior {
         {
             _FightAttriCalReference.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
         }
-        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent && newValue.from_weapon.damage_type == DamageType.supper_damage_forward)
+
+        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
         {
             _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
             _AIStateRunner.ChangeState("KnockOff", newValue);

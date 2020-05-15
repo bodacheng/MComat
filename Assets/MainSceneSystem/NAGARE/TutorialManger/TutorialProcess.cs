@@ -38,6 +38,7 @@
         GoToTeamEdit = 113,
         ClickTeamEditSlot1 = 114,
         ChooseAdamToSlot1 = 115,
+        ConfirmQuest1 = 116,
         TutorialReturn = 112,
 
         None = 0

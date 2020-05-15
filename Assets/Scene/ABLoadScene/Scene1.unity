@@ -1543,7 +1543,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
-  knockoffextent: 8
+  knockoffextent: 50
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 1
