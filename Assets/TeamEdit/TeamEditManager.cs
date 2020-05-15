@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class TeamEditManager : MonoBehaviour
 {
+    public Button StartToTeamEditButton;
     public Button RemoveButton;
     public HeroIcon team1front, team1left, team1right; // 可能允许部分为null。。。来对应不同人数制的队伍编辑
     
@@ -14,7 +15,7 @@ public class TeamEditManager : MonoBehaviour
     [Header("选中框")]
     public GameObject selectedFrame;
 
-    int focusingPosNum = -1;
+    public int focusingPosNum = -1;
     readonly IDictionary<int, HeroIcon> teamButtonDic = new Dictionary<int, HeroIcon>();
         
     #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
@@ -55,9 +56,16 @@ public class TeamEditManager : MonoBehaviour
     // 纯渲染函数
     IEnumerator ChangeIconOnPos(int posNum)
     {
-        HeroIcon tar = teamButtonDic[posNum];
-        string PosMonsterOfPlayerId = TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(posNum);
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(PosMonsterOfPlayerId, tar);
+        if (teamButtonDic.ContainsKey(posNum))
+        {
+            HeroIcon tar = teamButtonDic[posNum];
+            string PosMonsterOfPlayerId = TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(posNum);
+            yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(PosMonsterOfPlayerId, tar);
+        }
+        else
+        {
+            Debug.Log("逻辑冗余？posNum:" + posNum);
+        }
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）

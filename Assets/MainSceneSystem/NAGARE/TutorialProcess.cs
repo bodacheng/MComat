@@ -35,9 +35,11 @@
         ALineConfirm = 109,
         GoToStages = 111,
         GoToStage1 = 110,
+        GoToTeamEdit = 113,
+        ClickTeamEditSlot1 = 114,
+        ChooseAdamToSlot1 = 115,
         TutorialReturn = 112,
 
         None = 0
     }
 }
-

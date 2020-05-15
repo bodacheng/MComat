@@ -38,6 +38,9 @@ public class TutorialRunner
         ReturnOne returnOne = new ReturnOne();
         GoToStages goToStages = new GoToStages();
         GoToStageOne goToStageOne = new GoToStageOne();
+        GoToTeamEdit goToTeamEdit = new GoToTeamEdit();
+        ClickTeamEditSlotOne clickTeamEditSlotOne = new ClickTeamEditSlotOne();
+        ChooseAdamToSlot1 ChooseAdamToSlot1 = new ChooseAdamToSlot1();
 
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToMemberDetail, goToMemberDetail);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.OpenSkillEdit, openSkillEdit);
@@ -51,6 +54,9 @@ public class TutorialRunner
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.TutorialReturn, returnOne);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToStages, goToStages);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToStage1, goToStageOne);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToTeamEdit, goToTeamEdit);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ClickTeamEditSlot1, clickTeamEditSlotOne);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ChooseAdamToSlot1, ChooseAdamToSlot1);
 
         TutorialProcesses.Add(goToMemberDetail);
         TutorialProcesses.Add(openSkillEdit);
@@ -65,6 +71,9 @@ public class TutorialRunner
         TutorialProcesses.Add(returnOne);
         TutorialProcesses.Add(goToStages);
         TutorialProcesses.Add(goToStageOne);
+        TutorialProcesses.Add(goToTeamEdit);
+        TutorialProcesses.Add(clickTeamEditSlotOne);
+        TutorialProcesses.Add(ChooseAdamToSlot1);
     }
 
     public void AddTutorialProcess(TutorialStep step, TutorialProcess _process)

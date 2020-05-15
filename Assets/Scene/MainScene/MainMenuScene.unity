@@ -92173,6 +92173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b64822b218944cc8b599131a14206d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartToTeamEditButton: {fileID: 1942010047}
   RemoveButton: {fileID: 2017834559}
   team1front: {fileID: 4599398632746346849}
   team1left: {fileID: 4599398634173831936}
