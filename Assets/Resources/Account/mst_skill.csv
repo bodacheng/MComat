@@ -153,3 +153,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 152,roundkick,human,1,10,GR,0,0,5,,1
 153,punchdown,human,1,10,GR,0,0,5,,1
 154,s_pillarblast,human,1,10,GR,1,0,5,,1
+155,h_kick,human,1,10,GR,0,0,5,,1
+156,bulletclaw,human,1,10,GM,0,3,8,,1

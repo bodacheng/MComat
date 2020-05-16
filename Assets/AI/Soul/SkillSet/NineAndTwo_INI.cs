@@ -173,12 +173,29 @@ public partial class NineAndTwo
         SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null,0,0);
-                                                            
+        SkillEntity TestMove = new SkillEntity()
+                    {
+                        REAL_NAME = "Test_Move",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AI_MIN_DIS = -1,
+                        AI_MAX_DIS = -1,
+                        CasualTo = {},
+                        ForcedTransitions = {},
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = 0
+                    };
+        
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);
         StateTransitionSetList.Add(M);
+        StateTransitionSetList.Add(TestMove);
+        
         if (D != null)
         {
             StateTransitionSetList.Add(D);

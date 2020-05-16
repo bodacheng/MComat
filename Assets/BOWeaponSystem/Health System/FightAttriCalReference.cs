@@ -189,12 +189,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             HitEffect(_dmg);
             return;
         }
-        
-        if (_dmg.from_weapon._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
-        {
-            _dmg.attacker._Center.Animation_Manger.FrameFreeze();
-        }
-        
+                
         HitEffect(_dmg);
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {

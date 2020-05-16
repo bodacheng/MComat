@@ -69,10 +69,6 @@ namespace Soul
                 MobileInputsManager.target.ButtonsFeatureLoad(OptionsForButtonRefresh);
             #endregion
             
-            #region 决策制定
-            controller.PlayerControll(this, CanTranTo,!((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
-            #endregion
-
             CalAdviceDistanceFromEnemy();
         }
 

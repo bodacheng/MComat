@@ -32,6 +32,8 @@ namespace Soul
         Behavior last_Behavior;
         Behavior try_Behavior;
         public Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+
+        public bool scarecrow = false;
         #endregion
 
         void Awake()
@@ -58,6 +60,15 @@ namespace Soul
             if (IfRunning())
             {
                 BehaviourTransitionEngine();
+                if (!scarecrow)
+                {
+                    #region 决策制定
+                    controller.PlayerControll(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
+                    #endregion
+                }
+                
+                controller.Resetter(this);
+                
                 if (now_Behavior != null)
                 {
                     now_Behavior._State_Update();
@@ -147,6 +158,13 @@ namespace Soul
             {
                 ChangeState(commandWaitingState.StateKey);
             }
+        }
+        
+        public void ChangeToTestMode()
+        {
+            BehaviourDic.TryGetValue("Test_Move", out try_Behavior);
+            commandWaitingState = try_Behavior;
+            ChangeToWaitingState();          
         }
       
         public void INIStates(Data_Center data_Center)

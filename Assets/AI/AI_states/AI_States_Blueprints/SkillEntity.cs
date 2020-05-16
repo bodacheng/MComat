@@ -102,8 +102,7 @@ namespace Skill
     {
         Move_normal = 1,
         Move_slow = 2,
-        Move_fast = 3,
-        Test_Move = 0
+        Move_fast = 3
     }
     
     public enum RushType

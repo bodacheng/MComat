@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using HittingDetection;
+using DG.Tweening;
 
 public partial class Decompositioner : MonoBehaviour
 {
+    float timeAdvanceSpeed = 1f;
+    public void FrameFreeze()
+    {
+        DOTween.To(() => timeAdvanceSpeed, x => timeAdvanceSpeed = x, 0f, 0.01f).OnComplete(() => { DOTween.To(() => timeAdvanceSpeed, x => timeAdvanceSpeed = x, 1f, 0.08f).SetEase(Ease.InExpo); });
+    }
+    
     public void Life()
     {
         if (Phase == 1 && _HitBox != null)
@@ -73,7 +80,7 @@ public partial class Decompositioner : MonoBehaviour
         
         if (gameObject.activeSelf)
         {
-            Counter += Time.deltaTime;
+            Counter += Time.deltaTime * timeAdvanceSpeed;
         }
     }
 }

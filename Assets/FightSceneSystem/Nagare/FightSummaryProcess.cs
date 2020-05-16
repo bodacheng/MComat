@@ -1,0 +1,47 @@
+﻿using dataAccess;
+using UniRx;
+
+namespace FightScene
+{
+    // 这个环节大体来说应该是某种。。。点击确认然后进入下一个菜单的感觉。。。
+    public class FightSummaryProcess : NagareProcess
+    {
+        public ReactiveProperty<bool> enternext { get; set; } = new ReactiveProperty<bool>(false);
+        public FightSummaryProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
+        {
+            thisProcessStep = SceneStep.FightSummary;
+            //this.nextProcessStep = 这个环节结束后应该是直接的产生条件判断分歧。
+            EelementsInherit(_NetFightScene, fightSceneProcessesRunner);
+            enternext.Subscribe(x => { if (x) afterSummary(FightSceneNote.nextBattle._fightEventType); });
+        }
+
+        public override void ProcessEnter()
+        {
+            mainProcessRunner.Run(fightOverControl.ShowRewards(999, 999));
+        }
+
+        public override void ProcessEnd()
+        {
+            fightOverControl.FightOverCanvas.gameObject.SetActive(false);
+        }
+
+        public void afterSummary(FightEventType _fightEventType)
+        {
+            switch (_fightEventType)
+            {
+                case FightEventType.Arena:
+                    break;
+                case FightEventType.Quest:
+                    break;
+                case FightEventType.Tutorial_Basic:
+                    AccountSet._AccInfo.accountprogress = PlayerAccountProgressStep.Tutorial;
+                    this.FightScene.ReturnToFront();
+                    break;
+                case FightEventType.Tutorial_Story_AdamVsGuards:
+                    AccountSet._AccInfo.accountprogress = PlayerAccountProgressStep.Freedom;
+                    this.FightScene.ReturnToFront();
+                    break;
+            }
+        }
+    }
+}

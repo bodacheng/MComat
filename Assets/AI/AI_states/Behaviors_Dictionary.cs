@@ -15,7 +15,7 @@ public class Behaviors_Incubator
     public List<string> StateIndexList;
     public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
-    public Behaviors_Incubator(Empty_State empty_State,IDictionary<string, SkillEntity> toFormAttackStateList)
+    public Behaviors_Incubator(Empty_State empty_State, IDictionary<string, SkillEntity> toFormAttackStateList)
     {
         Num_State_List = new List<BehaviorIndex_With_Behavior>();
         StateIndexList = new List<string>();
@@ -32,10 +32,10 @@ public class Behaviors_Incubator
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Death", death));
         StateIndexList.Add("Death");
 
-        Move_State move1 = new Move_State(AIMoveStyle.normal,10f, 1f);
-        Move_State move2 = new Move_State(AIMoveStyle.normal,2f, 2f);
-        Move_State move3 = new Move_State(AIMoveStyle.normal,3f, 2f);
-        Move_State testmove = new Move_State(AIMoveStyle.test, 1f, 2f);
+        Move_State move1 = new Move_State(AIMoveMode.normal,10f, 1f);
+        Move_State move2 = new Move_State(AIMoveMode.normal,2f, 2f);
+        Move_State move3 = new Move_State(AIMoveMode.normal,3f, 2f);
+        Move_State testmove = new Move_State(AIMoveMode.test, 1f, 2f);
         move1.StateType = BehaviorType.MV;
         move2.StateType = BehaviorType.MV;
         move3.StateType = BehaviorType.MV;

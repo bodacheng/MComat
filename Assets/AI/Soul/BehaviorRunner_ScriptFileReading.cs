@@ -5,6 +5,7 @@ using System.Linq;
 using System.IO;
 using System;
 using Skill;
+using FightScene;
 
 // 这整张代码也就是暂时摆在这提供个“保存技能组”的概念。如果真的以后有需要保存技能组那太多东西需要修。
 

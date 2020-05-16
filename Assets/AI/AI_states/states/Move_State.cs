@@ -2,7 +2,7 @@
 using UnityEngine;
 using Soul;
 
-public enum AIMoveStyle
+public enum AIMoveMode
 {
     test = 0,
     normal = 1
@@ -12,7 +12,7 @@ public class Move_State : Behavior
 {
     readonly float speed;
     readonly float time_limit;
-    readonly AIMoveStyle _AIMoveStyle;
+    readonly AIMoveMode _AIMoveStyle;
     float time_counter;
     Vector3 use_direction;
     AIMoveDirection moveDirection;
@@ -31,7 +31,7 @@ public class Move_State : Behavior
         RunAwayFromThreat = 5
     }
     
-    public Move_State(AIMoveStyle aiMoveStyle, float speed, float time_limit)
+    public Move_State(AIMoveMode aiMoveStyle, float speed, float time_limit)
 	{
         _AIMoveStyle = aiMoveStyle;
         this.speed = speed;
@@ -78,7 +78,7 @@ public class Move_State : Behavior
         }
         return false;
     }
-
+    
     public override void C_State_enter()
     {
         time_counter = 0f;
@@ -106,7 +106,7 @@ public class Move_State : Behavior
         EnemiesByDistance = Sensor.GetEnemiesByDistance(true);
         switch (_AIMoveStyle)
         {
-            case AIMoveStyle.normal:
+            case AIMoveMode.normal:
                 if (EnemiesByDistance.Count > 0)
                 {
                     Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
@@ -166,7 +166,7 @@ public class Move_State : Behavior
                     use_direction = Vector3.zero;
                 }
                 break;
-            case AIMoveStyle.test:
+            case AIMoveMode.test:
                 moveDirection = AIMoveDirection.stay;
                 use_direction = Vector3.zero;
                 break;

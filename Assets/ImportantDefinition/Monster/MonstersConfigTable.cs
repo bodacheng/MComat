@@ -397,9 +397,6 @@ public class MonstersConfigTable
             case "Move3":
                 _CharacterResourceInfo.MoveType = MoveType.Move_fast;
                 break;
-            case "Test":
-                _CharacterResourceInfo.MoveType = MoveType.Test_Move;
-                break;
             default:
                 _CharacterResourceInfo.MoveType = MoveType.Move_normal;
                 break;

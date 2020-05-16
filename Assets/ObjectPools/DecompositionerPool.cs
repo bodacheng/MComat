@@ -105,8 +105,13 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             decompositioner.audioSource.volume = AccountSet._AccInfo.EffectsVolumn;
             decompositioner.audioSource.minDistance = 20;
             decompositioner.audioSource.maxDistance = 80;
-        } 
-        decompositioner._HitBox = BBMM;
+        }
+        if (BBMM != null)
+        {
+            decompositioner._HitBox = BBMM;
+            BBMM.SetDecompositioner(decompositioner);
+        }
+        
         decompositioner.SetPositionConstraint(PC);
         decompositioner.TrackControl = danMuTest;
         decompositioner.SetPool(this);

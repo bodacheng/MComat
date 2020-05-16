@@ -70,23 +70,6 @@ namespace Skill
                         SP_LEVEL = 0
                     };
                     break;
-                case MoveType.Test_Move:
-                    M_SE = new SkillEntity()
-                    {
-                        REAL_NAME = "Test_Move",
-                        LEVEL = 0,
-                        StateType = BehaviorType.MV,
-                        AT = 0,
-                        HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Null,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
-                    };
-                    break;
                 default:
                     M_SE = new SkillEntity
                     {

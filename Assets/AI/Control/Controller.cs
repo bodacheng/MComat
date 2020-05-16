@@ -112,16 +112,16 @@ namespace Soul
                 #endregion
             }
             
+            #region AI决策
             if (AI_Active)
             {
-                #region AI决策
-                if (AI_RUNs(behaviorRunner,Options))
-                {
-                    return;//基本说明输入行为让AI_Active为false从而放行至接下来的归idle判断，从而让角色直接进入move state
-                }
-                #endregion
+                AI_RUNs(behaviorRunner, Options);
             }
-
+            #endregion
+        }
+        
+        public void Resetter(BehaviorRunner behaviorRunner)
+        {
             #region 当前状态可自然退出了却没有任何后续行为被触发的话，回复起始状态
             if (behaviorRunner.GetNowState().Capacity_Exit_Condition())
             {

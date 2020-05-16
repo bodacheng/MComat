@@ -46,6 +46,7 @@ namespace HittingDetection
         public int CurrentHP { get; set; }
 
         FightAttriCalReference _MyOwnerCalReference;
+        Decompositioner decompositioner;
         TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
@@ -58,6 +59,16 @@ namespace HittingDetection
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         bool TraditionalDefendMode = false;
         float AT;
+        
+        public Decompositioner GetDecompositioner()
+        {
+            return decompositioner;
+        }
+        
+        public void SetDecompositioner(Decompositioner _d)
+        {
+            this.decompositioner = _d;
+        }
         
         public string GeneratedByStateKey { get; set; }
         HitBoxLifeEnding hitBoxLifeEnding = HitBoxLifeEnding.untouched;

@@ -31,7 +31,7 @@ public partial class Decompositioner : MonoBehaviour {
     PositionConstraint positionConstraint;
     BO_Ani_E BO_Ani_E;
     ParticleSystem to_be_stop_emissions;
-    float Counter;
+    public float Counter;
     public int Phase { get; set; }
     #endregion
 
