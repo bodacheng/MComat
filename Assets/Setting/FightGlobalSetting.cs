@@ -4,6 +4,9 @@ public class FightGlobalSetting : MonoBehaviour
 {
     public AnimationCurve knockOffyAnimationCurve;
     public AnimationCurve knockOffzAnimationCurve;
+    
+    public AnimationCurve HdamageYAnimationCurve;
+    public AnimationCurve HdamageZAnimationCurve;
 
     public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f;
     public float knockoffextent = 20f;
@@ -25,6 +28,8 @@ public class FightGlobalSetting : MonoBehaviour
     public static int _defendHP;
     public static float _lightBlockLastingTime, _heavyBlockLastingTime;
     public static AnimationCurve _knockOffyAnimationCurve,_knockOffzAnimationCurve;
+    public static AnimationCurve _HdamageYAnimationCurve;
+    public static AnimationCurve _HdamageZAnimationCurve;
     public static float _attackDrawingDistance;
     public static bool HitBoxLogger = true;
     
@@ -70,6 +75,9 @@ public class FightGlobalSetting : MonoBehaviour
         
         _knockOffyAnimationCurve = knockOffyAnimationCurve;
         _knockOffzAnimationCurve = knockOffzAnimationCurve;
+
+        _HdamageYAnimationCurve = HdamageYAnimationCurve;
+        _HdamageZAnimationCurve = HdamageZAnimationCurve;
 
         _defendHP = defendHP;
         _lighthit_lastingtime = lighthit_lastingtime;

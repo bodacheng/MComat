@@ -84,8 +84,17 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
                 case 3:
                     damageType = DamageType.supper_damage_forward;
                     break;
+                case 5:
+                    damageType = DamageType.draw;
+                    break;
+                case 6:
+                    damageType = DamageType.explosion;
+                    break;
                 case 7:
                     damageType = DamageType.push_to_mid;
+                    break;
+                case 8:
+                    damageType = DamageType.high;
                     break;
                 default:
                     damageType = DamageType.light_damage_forward;

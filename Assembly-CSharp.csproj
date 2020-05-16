@@ -77,6 +77,14 @@
     <Compile Include="Assets\AI\AI_states\states\G_M_Attack_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\GetUp_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Expolosion.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Hight.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_PushMid.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Slight.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Super.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_draw.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_heavy.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_light.cs" />
     <Compile Include="Assets\AI\AI_states\states\Idle_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Jump_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Knock_Off_State.cs" />

@@ -7,20 +7,20 @@ public class Knock_Off_State : Behavior
 {
     readonly DecompositionerPool superHitPool;
     float time_counter;
-    Vector3 _xz;    
+    Vector3 _xz;
     bool touchedBoundary;
-    bool dropped,canWakeUp,canbeattack;
-     
+    bool dropped, canWakeUp, canbeattack;
+    
     public Knock_Off_State()
     {
         StateType = BehaviorType.KnockOff;
     }
-
+    
     public override void Pre_process_before_enter()
     {
 		base.Pre_process_before_enter ();
     }
-
+    
     Decompositioner processingBlood;
     public override void AI_State_enter(V_Damage newValue)
     {
@@ -42,7 +42,6 @@ public class Knock_Off_State : Behavior
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
         _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-
         processingBlood = EffectsManager.GenerateEffect("super_hit",
                                                        FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
                                                        newValue.damageHappenPoint,
@@ -114,7 +113,7 @@ public class Knock_Off_State : Behavior
             _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
             canbeattack = true;
         }
-        
+
         time_counter += Time.fixedDeltaTime;
         
         // 原先的MultiplyPoint3x4击飞曲线计划相关

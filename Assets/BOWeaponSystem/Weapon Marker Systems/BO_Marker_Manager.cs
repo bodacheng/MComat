@@ -23,7 +23,8 @@ namespace HittingDetection
 
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
-
+        public int CurrentHP { get; set; }
+        
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
         [Tooltip("特效是否有粘身视效")]
@@ -42,11 +43,8 @@ namespace HittingDetection
         [Tooltip("If you choose the Continuous damage, what should the interval of damage dealing be? (In seconds)")]
         [SerializeField]
         float ContinuousDamageInterval = 0.2f;
-
-        public int CurrentHP { get; set; }
-
+        
         FightAttriCalReference _MyOwnerCalReference;
-        Decompositioner decompositioner;
         TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
@@ -59,16 +57,6 @@ namespace HittingDetection
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         bool TraditionalDefendMode = false;
         float AT;
-        
-        public Decompositioner GetDecompositioner()
-        {
-            return decompositioner;
-        }
-        
-        public void SetDecompositioner(Decompositioner _d)
-        {
-            this.decompositioner = _d;
-        }
         
         public string GeneratedByStateKey { get; set; }
         HitBoxLifeEnding hitBoxLifeEnding = HitBoxLifeEnding.untouched;
@@ -93,13 +81,13 @@ namespace HittingDetection
                 }                
             }
         }
-                
+        
         public float GetDamageAmount()
         {
             return weaponHP > 0 ? AT/weaponHP : AT;
         }
 
-        void Awake()//按理说所有现在Awake里的东西都应该能静态化。。或者最起码的。。。可以换个更好的时机
+        void Awake()
         {
             Transform _MarkersParent = transform;
             Transform[] children = new Transform[_MarkersParent.childCount];
@@ -116,7 +104,7 @@ namespace HittingDetection
             }
             _markers = bms.ToArray();
         }
-                
+        
         public void MarkersEnablingStarts()
         {
             if (System.Math.Abs(ActivateAfterTime) < 0.01f)
@@ -241,47 +229,5 @@ namespace HittingDetection
                 ClearMarkersDectections();
             }
         }
-
-        public bool IfVectorClean(Vector3 rot)
-        {
-            return rot == Vector3.zero
-            || float.IsNaN(rot.x) || float.IsNaN(rot.y) || float.IsNaN(rot.z)
-            || !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
-        }
     }
 }
-//AudioClip processingClip;
-//void PlayTargetHitSound(string soundName)
-//{
-//    if (SoundSource == null)
-//    {
-//        Debug.Log("武器音效无法找到音源");
-//        return;
-//    }
-//    soundEffectDic.TryGetValue(soundName.GetHashCode(),out processingClip);
-//    if (processingClip != null)
-//    {
-//        SoundSource.PlayOneShot(processingClip);
-//    }else{
-//        Debug.Log("找不到武器音效");
-//    }
-//}
-
-//void iniSoundDic(string resource_name)
-//{
-//    if (personalSoundResourcePath != null)
-//    {
-//        if ((Resources.Load(defaultSoundResourcePath + "/" + personalSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip) != null)
-//        {
-//            soundEffectDic.Add(new KeyValuePair<int, AudioClip>(resource_name.GetHashCode(),Resources.Load(defaultSoundResourcePath + "/" + personalSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip));
-//            return;
-//        }
-//    }
-//    if (Resources.Load(defaultSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip != null)
-//    {
-//        soundEffectDic.Add(new KeyValuePair<int,AudioClip>(resource_name.GetHashCode(),Resources.Load(defaultSoundResourcePath + "/" + resource_name, typeof(AudioClip)) as AudioClip));
-//        return;
-//    }
-//    Debug.Log("无法找到音源：" + resource_name);
-//}
-

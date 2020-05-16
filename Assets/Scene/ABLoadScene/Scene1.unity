@@ -1541,6 +1541,63 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  HdamageYAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 5.029743
+      outSlope: 5.029743
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16201451
+    - serializedVersion: 3
+      time: 0.29402563
+      value: 4.0518084
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7581976
+      value: -1.9216361
+      inSlope: -1.4565402
+      outSlope: -1.4565402
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16924219
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  HdamageZAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.52632904
+      outSlope: 0.52632904
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.073528126
+    - serializedVersion: 3
+      time: 19.962341
+      value: 18.133713
+      inSlope: 0.8173122
+      outSlope: 0.8173122
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08547168
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
   knockoffextent: 50

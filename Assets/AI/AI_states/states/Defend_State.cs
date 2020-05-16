@@ -143,6 +143,13 @@ public class Defend_State : Behavior
                 DefendHPfade(newValue);
                 _FightAttriCalReference.PlusCriticalGauge(2);
             break;
+            default:
+                Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
+                _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
+                DefendHPfade(newValue);
+                _FightAttriCalReference.PlusCriticalGauge(2);
+                break;
          }
         TimeCounter = used_block_least_time;
     }

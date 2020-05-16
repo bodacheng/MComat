@@ -48,7 +48,7 @@ public partial class Decompositioner : MonoBehaviour
                     break;
             }
         }
-        
+
         switch (Phase)
         {
             case 1:

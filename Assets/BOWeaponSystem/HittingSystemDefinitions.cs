@@ -38,7 +38,8 @@ namespace HittingDetection
         supper_damage_forward = 3,//能够打飞敌人的攻击 
         draw = 5,
         explosion = 6,
-        push_to_mid = 7
+        push_to_mid = 7,
+        high = 8,
     }
     
     public enum WeaponMode
