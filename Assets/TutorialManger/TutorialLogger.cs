@@ -4,7 +4,6 @@ namespace mainMenu
 {
     public class TutorialLog
     {
-        public TutorialStep step;
         public string description;
     }
 

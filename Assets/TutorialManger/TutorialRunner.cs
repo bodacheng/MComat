@@ -20,7 +20,6 @@ public class TutorialRunner
 
     public TutorialProcess lastProcess;
     public TutorialProcess currentProcess;
-    readonly IDictionary<TutorialStep, TutorialProcess> TutorialProcessesDic = new Dictionary<TutorialStep, TutorialProcess>();
 
     // 这个结构代表了教程的顺序, 很大的特点在于可加入重复元素。典型的如后退菜单
     List<TutorialProcess> TutorialProcesses = new List<TutorialProcess>();
@@ -50,24 +49,6 @@ public class TutorialRunner
         }
         WaitProcess waitForStage1Loaded = new WaitProcess(StartedFighting);
 
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToMemberDetail, goToMemberDetail);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.OpenSkillEdit, openSkillEdit);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A1Selected, skillEditA1Try);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A2Selected, skillEditA2Try);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A3Selected, skillEditA3Try);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A1Filled, skillEditTry_A1Filled);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A2Filled, skillEditTry_A2Filled);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.SkillEditTry_A3Filled, skillEditTry_A3Filled);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ALineConfirm, aLineConfirm);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.TutorialReturn, returnOne);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToStages, goToStages);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToStage1, goToStageOne);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToTeamEdit, goToTeamEdit);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ClickTeamEditSlot1, clickTeamEditSlotOne);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ChooseAdamToSlot1, ChooseAdamToSlot1);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.ConfirmQuest1, confirmQuest1);
-        TutorialRunner.Main.AddTutorialProcess(TutorialStep.waitingForStage1Start, waitForStage1Loaded);
-
         TutorialProcesses.Add(goToMemberDetail);
         TutorialProcesses.Add(openSkillEdit);
         TutorialProcesses.Add(skillEditA1Try);
@@ -89,11 +70,6 @@ public class TutorialRunner
         TutorialProcesses.Add(waitForStage1Loaded);
     }
 
-    public void AddTutorialProcess(TutorialStep step, TutorialProcess _process)
-    {
-        TutorialProcessesDic.Add(step, _process);
-    }
-
     public void ProcessNagare()
     {
         if (currentProcess != null)
@@ -108,7 +84,7 @@ public class TutorialRunner
 
     public void StartToMove()
     {
-        ChangeProcess(TutorialProcesses[0].Step);
+        ChangeProcess(TutorialProcesses[0]);
     }
 
     public void MoveToNext()
@@ -116,48 +92,37 @@ public class TutorialRunner
         // 假设当前process在0位置
         if (TutorialProcesses.Count > 1)
         {
-            ChangeProcess(TutorialProcesses[1].Step);
+            ChangeProcess(TutorialProcesses[1]);
         }
         else
         {
-            ChangeProcess(TutorialStep.None);
+            ChangeProcess(null);
         }
         TutorialProcesses.RemoveAt(0);
     }
-
-    void ChangeProcess(TutorialStep sceneStep)
+    
+    void ChangeProcess(TutorialProcess nextProcess)
     {
         if (currentProcess != null)
         {
             currentProcess.ProcessEnd();
             TutorialLog Log = new TutorialLog()
             {
-                step = currentProcess.Step,
                 description = "end"
             };
             TutorialLogger.Logs.Add(Log);
         }
 
         lastProcess = currentProcess;
-        TutorialProcessesDic.TryGetValue(sceneStep, out currentProcess);
+        currentProcess = nextProcess;
         if (currentProcess != null)
         {
             currentProcess.ProcessEnter();
             TutorialLog Log = new TutorialLog()
             {
-                step = currentProcess.Step,
                 description = "start"
             };
             TutorialLogger.Logs.Add(Log);
-        }
-        else
-        {
-            if (TutorialProcessesDic.ContainsKey(sceneStep))
-            {
-                Debug.Log(sceneStep + "倒是在字典里");
-                Debug.Log(currentProcess);
-            }
-            Debug.Log("这个场景进程没定义：" + sceneStep);
         }
     }
 }

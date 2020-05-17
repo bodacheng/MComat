@@ -10,7 +10,6 @@ public class WaitProcess : TutorialProcess
     
     public WaitProcess(WaitOverDelegate waitOverDelegate)
     {
-        Step = TutorialStep.waitingForStage1Start;
         waitForThis = waitOverDelegate;
         EelementsInherit(NetFightScene.target);
     }

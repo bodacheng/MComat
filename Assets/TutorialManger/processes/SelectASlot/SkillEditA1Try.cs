@@ -7,7 +7,6 @@ public class SkillEditA1Try : TutorialProcess
     MemberDetail_edit memberDetail_Edit;
     public SkillEditA1Try()
     {
-        Step = TutorialStep.SkillEditTry_A1Selected;
         EelementsInherit(PreScene.target);
     }
     

@@ -5,7 +5,6 @@ public class ClickTeamEditSlotOne : TutorialProcess
 {
     public ClickTeamEditSlotOne()
     {
-        Step = TutorialStep.ClickTeamEditSlot1;
         EelementsInherit(PreScene.target);
     }
     

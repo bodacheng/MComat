@@ -6,7 +6,6 @@ public class ConfirmQuest1 : TutorialProcess
 {
     public ConfirmQuest1()
     {
-        Step = TutorialStep.ConfirmQuest1;
         EelementsInherit(PreScene.target);
     }
     

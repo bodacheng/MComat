@@ -2,12 +2,7 @@
 
 // Tutorial
 public class ALineConfirm : TutorialProcess
-{
-    public ALineConfirm()
-    {
-        Step = TutorialStep.ALineConfirm;
-    }
-    
+{    
     public override void ProcessEnter()
     {
         LoadingCanvas.target.HigtLightRect(TheNineSlot.target.ConfirmSkillChangeButton.transform);

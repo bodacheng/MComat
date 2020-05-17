@@ -5,7 +5,6 @@ public class GoToTeamEdit : TutorialProcess
 {
     public GoToTeamEdit()
     {
-        Step = TutorialStep.GoToTeamEdit;
         EelementsInherit(PreScene.target);
     }
     

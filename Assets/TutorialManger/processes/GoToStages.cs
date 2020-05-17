@@ -5,7 +5,6 @@ public class GoToStages : TutorialProcess
 {
     public GoToStages()
     {
-        Step = TutorialStep.GoToStages;
         EelementsInherit(PreScene.target);
     }
     

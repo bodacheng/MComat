@@ -6,7 +6,6 @@ public class ChooseAdamToSlot1 : TutorialProcess
 {
     public ChooseAdamToSlot1()
     {
-        Step = TutorialStep.ChooseAdamToSlot1;
         EelementsInherit(PreScene.target);
     }
     

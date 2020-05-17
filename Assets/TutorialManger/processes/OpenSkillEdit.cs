@@ -7,7 +7,6 @@ public class OpenSkillEdit : TutorialProcess
     MemberDetailProcess MemberDetailProcess;
     public OpenSkillEdit()
     {
-        Step = TutorialStep.OpenSkillEdit;
         EelementsInherit(PreScene.target);
     }
     

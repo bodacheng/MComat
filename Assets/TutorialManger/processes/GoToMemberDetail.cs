@@ -5,7 +5,6 @@ public class GoToMemberDetail : TutorialProcess
 {
     public GoToMemberDetail()
     {
-        Step = TutorialStep.GoToMemberDetail;
         EelementsInherit(PreScene.target);
     }
     

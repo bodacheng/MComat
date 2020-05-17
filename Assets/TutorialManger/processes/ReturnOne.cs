@@ -7,7 +7,6 @@ public class ReturnOne : TutorialProcess
     
     public ReturnOne()
     {
-        Step = TutorialStep.TutorialReturn;
         EelementsInherit(PreScene.target);
     }
     
