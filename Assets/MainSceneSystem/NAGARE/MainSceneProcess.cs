@@ -11,7 +11,7 @@ namespace mainMenu
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
         public ProcessesRunner SubProcessesRunner;
-
+        
         public void EelementsInherit(PreScene _preparingScene)
         {
             _CharsManager = _preparingScene._CharSetManager;

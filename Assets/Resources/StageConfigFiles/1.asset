@@ -18,11 +18,11 @@ MonoBehaviour:
   battleNameENG: 
   battleNameJPG: 
   battleNameCH: "\u4E00\u4E2A\u5C4C"
-  beforefightstory: {fileID: 11400000, guid: 5ee95c7aaa36c4d059baaf9d0deb9fd7, type: 2}
+  beforefightstory: {fileID: 0}
   Script: {fileID: 4900000, guid: d7d89c8d4923e4183ad5e99c51e8f56c, type: 3}
   StageButtonSprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
   team1_ExtraHP: 0
   team2_ExtraHP: 0
   _fightEventType: 1
   Team1Mode: 2
-  Team2Mode: 2
+  Team2Mode: 3

@@ -3,42 +3,57 @@ using UnityEngine;
 
 namespace FightScene
 {
-    public class FightSceneProcessesRunner
+    public class FSceneProcessesRunner
     {
-        public static NagareProcess lastProcess;
-        public static NagareProcess currentProcess;
-        static readonly IDictionary<SceneStep, NagareProcess> SceneProcessDictionary = new Dictionary<SceneStep, NagareProcess>();
+        static FSceneProcessesRunner instance_main;
+        public static FSceneProcessesRunner Main
+        {
+            get
+            {
+                if (instance_main == null)
+                {
+                    instance_main = new FSceneProcessesRunner();
+                }
+                return instance_main;
+            }
+        }
+        
+        public FSceneProcess lastProcess;
+        public FSceneProcess currentProcess;
+        readonly IDictionary<SceneStep, FSceneProcess> SceneProcessDictionary = new Dictionary<SceneStep, FSceneProcess>();
     
-        public static void Clear()
+        public void Clear()
         {
             currentProcess = null;
             SceneProcessDictionary.Clear();
         }
-    
-        public void LocalUpdate()
+            
+        public void ProcessNagare()
         {
             if (currentProcess != null)
             {
                 currentProcess.LocalUpdate();
+                if (currentProcess.CanEnterOtherProcess()) // && currentProcess.nextProcessStep != MainSceneStep.None
+                {
+                    ChangeProcess(currentProcess.nextProcessStep);
+                }
             }
         }
     
-        public void AddNewProcess(SceneStep step, NagareProcess _process)
+        public void AddNewProcess(SceneStep step, FSceneProcess _process)
         {
             if (!SceneProcessDictionary.ContainsKey(step))
                 SceneProcessDictionary.Add(step, _process);
             else
-            {
                 SceneProcessDictionary[step] = _process;
-            }
         }
-    
-        public NagareProcess AccessCertainFightSceneProcessObject(SceneStep step)
+        
+        public FSceneProcess GetProcess(SceneStep step)
         {
             return SceneProcessDictionary[step];
         }
-    
-        public static void ChangeProcess(SceneStep sceneStep)
+        
+        public void ChangeProcess(SceneStep sceneStep)
         {
             if (currentProcess != null)
                 currentProcess.ProcessEnd();

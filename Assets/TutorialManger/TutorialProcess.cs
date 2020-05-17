@@ -1,4 +1,6 @@
-﻿namespace mainMenu
+﻿using FightScene;
+
+namespace mainMenu
 {
     public class TutorialProcess : SceneProcess
     {
@@ -15,6 +17,10 @@
             _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
+        }
+        
+        public void EelementsInherit(NetFightScene NetFightScene)
+        {
         }
     }
 
@@ -40,7 +46,7 @@
         ChooseAdamToSlot1 = 115,
         ConfirmQuest1 = 116,
         TutorialReturn = 112,
-
+        waitingForStage1Start = 117,        
         None = 0
     }
 }

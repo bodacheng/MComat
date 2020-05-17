@@ -5,20 +5,20 @@ using UniRx;
 
 namespace FightScene
 {
-    public class FightingProcess : NagareProcess
+    public class FightingProcess : FSceneProcess
     {
         readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
 
-        public FightingProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
+        public FightingProcess(NetFightScene _NetFightScene)
         {
-            thisProcessStep = SceneStep.Fighting;
+            Step = SceneStep.Fighting;
             nextProcessStep = SceneStep.FightOver;
-            EelementsInherit(_NetFightScene, fightSceneProcessesRunner);
-            fightLogger.gameOver.Subscribe(x =>
-                {
-                    AutoMoveToNext |= x == true;
-                }
-            );
+            EelementsInherit(_NetFightScene);
+        }
+        
+        public override bool CanEnterOtherProcess()
+        {
+            return fightLogger.gameOver.Value;
         }
 
         public override void ProcessEnter()

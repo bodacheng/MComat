@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace mainMenu
+﻿namespace mainMenu
 {
     public abstract class SceneProcess
     {

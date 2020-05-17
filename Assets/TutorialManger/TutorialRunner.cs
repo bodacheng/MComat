@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
+using FightScene;
 
 public class TutorialRunner
 {
@@ -42,6 +43,12 @@ public class TutorialRunner
         ClickTeamEditSlotOne clickTeamEditSlotOne = new ClickTeamEditSlotOne();
         ChooseAdamToSlot1 ChooseAdamToSlot1 = new ChooseAdamToSlot1();
         ConfirmQuest1 confirmQuest1 = new ConfirmQuest1();
+        
+        bool StartedFighting()
+        { 
+            return FSceneProcessesRunner.Main.currentProcess.Step == SceneStep.Fighting; 
+        }
+        WaitProcess waitForStage1Loaded = new WaitProcess(StartedFighting);
 
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.GoToMemberDetail, goToMemberDetail);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.OpenSkillEdit, openSkillEdit);
@@ -59,14 +66,15 @@ public class TutorialRunner
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.ClickTeamEditSlot1, clickTeamEditSlotOne);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.ChooseAdamToSlot1, ChooseAdamToSlot1);
         TutorialRunner.Main.AddTutorialProcess(TutorialStep.ConfirmQuest1, confirmQuest1);
+        TutorialRunner.Main.AddTutorialProcess(TutorialStep.waitingForStage1Start, waitForStage1Loaded);
 
         TutorialProcesses.Add(goToMemberDetail);
         TutorialProcesses.Add(openSkillEdit);
         TutorialProcesses.Add(skillEditA1Try);
-        TutorialProcesses.Add(skillEditA2Try);
-        TutorialProcesses.Add(skillEditA3Try);
         TutorialProcesses.Add(skillEditTry_A1Filled);
+        TutorialProcesses.Add(skillEditA2Try);
         TutorialProcesses.Add(skillEditTry_A2Filled);
+        TutorialProcesses.Add(skillEditA3Try);
         TutorialProcesses.Add(skillEditTry_A3Filled);
         TutorialProcesses.Add(aLineConfirm);
         TutorialProcesses.Add(returnOne);
@@ -78,6 +86,7 @@ public class TutorialRunner
         TutorialProcesses.Add(ChooseAdamToSlot1);
         TutorialProcesses.Add(returnOne);
         TutorialProcesses.Add(confirmQuest1);
+        TutorialProcesses.Add(waitForStage1Loaded);
     }
 
     public void AddTutorialProcess(TutorialStep step, TutorialProcess _process)

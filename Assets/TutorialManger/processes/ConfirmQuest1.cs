@@ -1,4 +1,5 @@
 ﻿using mainMenu;
+using FightScene;
 
 // Tutorial 1 
 public class ConfirmQuest1 : TutorialProcess
@@ -21,7 +22,9 @@ public class ConfirmQuest1 : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step != MainSceneStep.QuestInfo;
+        if (FSceneProcessesRunner.Main.currentProcess == null)
+            return false;
+        return FSceneProcessesRunner.Main.currentProcess.Step == SceneStep.CountDown;
     }
     
     public override void LocalUpdate()

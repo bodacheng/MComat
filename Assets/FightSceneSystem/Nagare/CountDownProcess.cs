@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace FightScene
 {
-    public class CountDownProcess : NagareProcess
+    public class CountDownProcess : FSceneProcess
     {
         float startTimestamp = 3f;
-    
-        public CountDownProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
+        bool AutoMoveToNext;
+        public CountDownProcess(NetFightScene _NetFightScene)
         {
-            thisProcessStep = SceneStep.CountDown;
+            Step = SceneStep.CountDown;
             nextProcessStep = SceneStep.Fighting;
-            EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
+            EelementsInherit(_NetFightScene);
         }
-    
+        
         public override void ProcessEnter()
         {
             startTimestamp = 3f;
@@ -21,11 +21,7 @@ namespace FightScene
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             FightScene.mainProcessRunner.Run(BeforeFightCountDown());
         }
-        
-        public override void ProcessEnd()
-        {
-        }
-        
+                
         IEnumerator BeforeFightCountDown()
         {
             FightScene.CountDown.gameObject.SetActive(true);
@@ -38,6 +34,11 @@ namespace FightScene
             FightScene.CountDown.gameObject.SetActive(false);
             AutoMoveToNext = true;
             yield break;
+        }
+        
+        public override bool CanEnterOtherProcess()
+        {
+            return AutoMoveToNext;
         }
     }
 }

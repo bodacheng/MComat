@@ -29,7 +29,6 @@ namespace FightScene
         [Header("Basic Essentials")]
         public CameraManager _CameraManager;
         public CharsManager _CharSetManager;
-        public DebugManager _DebugManager;
 
         [Space(11)]
         [Header("战斗的最后一击时候的处理")]
@@ -58,7 +57,6 @@ namespace FightScene
         public static NetFightScene target;
 
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
-        readonly FightSceneProcessesRunner ProcessesRunner = new FightSceneProcessesRunner();
 
         void Awake()
         {
@@ -79,30 +77,31 @@ namespace FightScene
         {
             Time.timeScale = 1f;
             //Position_Set_Executor.Instance.P_sets.Clear();
-            PreparingProcess preparingProcess = new PreparingProcess(this, ProcessesRunner);
-            FightingProcess fightingProcess = new FightingProcess(this, ProcessesRunner);
-            CountDownProcess countDownProcess = new CountDownProcess(this, ProcessesRunner);
-            StoryProcess storyProcess = new StoryProcess(this, ProcessesRunner);
-            FightOverProcess fightOverProcess = new FightOverProcess(this, ProcessesRunner);
-            FightSummaryProcess fightSummaryProcess = new FightSummaryProcess(this, ProcessesRunner);
+            PreparingProcess preparingProcess = new PreparingProcess(this);
+            FightingProcess fightingProcess = new FightingProcess(this);
+            CountDownProcess countDownProcess = new CountDownProcess(this);
+            StoryProcess storyProcess = new StoryProcess(this);
+            FightOverProcess fightOverProcess = new FightOverProcess(this);
+            FightSummaryProcess fightSummaryProcess = new FightSummaryProcess(this);
 
-            BasicTryProcess basicTryProcess = new BasicTryProcess(this, ProcessesRunner);
+            BasicTryProcess basicTryProcess = new BasicTryProcess(this);
 
-            ProcessesRunner.AddNewProcess(SceneStep.Preparing, preparingProcess);
-            ProcessesRunner.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
-            ProcessesRunner.AddNewProcess(SceneStep.CountDown, countDownProcess);
-            ProcessesRunner.AddNewProcess(SceneStep.Fighting, fightingProcess);
-            ProcessesRunner.AddNewProcess(SceneStep.FightOver, fightOverProcess);
-            ProcessesRunner.AddNewProcess(SceneStep.FightSummary, fightSummaryProcess);
-            ProcessesRunner.AddNewProcess(SceneStep.BasicTryTutorial, basicTryProcess);
-
-            FightSceneProcessesRunner.ChangeProcess(SceneStep.Preparing);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightSummary, fightSummaryProcess);
+            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.BasicTryTutorial, basicTryProcess);
+            
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             yield break;
         }
 
         void Update()
         {
-            ProcessesRunner.LocalUpdate();
+            FSceneProcessesRunner.Main.ProcessNagare();
+            TutorialRunner.Main.ProcessNagare();
         }
 
         // 本地系函数
@@ -180,7 +179,7 @@ namespace FightScene
                 HitBoxLogger.Instance.Clear();
             }
 
-            FightSceneProcessesRunner.Clear();
+            FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
             SceneManager.LoadScene(1);
         }
@@ -188,7 +187,7 @@ namespace FightScene
         //本地系函数 
         public void LocalGameRestart()
         {
-            FightSceneProcessesRunner.ChangeProcess(SceneStep.Preparing);
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
         }
 
@@ -208,7 +207,7 @@ namespace FightScene
 
         public void PassFightSummary()
         {
-            FightSummaryProcess process = (FightSummaryProcess)ProcessesRunner.AccessCertainFightSceneProcessObject(SceneStep.FightSummary);
+            FightSummaryProcess process = (FightSummaryProcess)FSceneProcessesRunner.Main.GetProcess(SceneStep.FightSummary);
             process.enternext.Value = true;
         }
     }

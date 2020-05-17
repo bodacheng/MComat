@@ -3,7 +3,7 @@
 // Tutorial 3  1
 public class SkillEditA1Try : TutorialProcess
 {
-    bool missionCompleted;
+    bool waitCompleted;
     MemberDetail_edit memberDetail_Edit;
     public SkillEditA1Try()
     {
@@ -13,7 +13,7 @@ public class SkillEditA1Try : TutorialProcess
     
     public override void ProcessEnter()
     {
-        missionCompleted = false;
+        waitCompleted = false;
         memberDetail_Edit = (MemberDetail_edit)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail_edit);
     }
     
@@ -28,12 +28,12 @@ public class SkillEditA1Try : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (!missionCompleted)
+        if (!waitCompleted)
         {
             if (memberDetail_Edit.loadFinished)
             {
                 LoadingCanvas.target.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
-                missionCompleted = true;
+                waitCompleted = true;
             }
         }
     }

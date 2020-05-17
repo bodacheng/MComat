@@ -2,13 +2,15 @@
 
 namespace FightScene
 {
-    public class StoryProcess : NagareProcess
+    public class StoryProcess : FSceneProcess
     {
-        public StoryProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
+        bool AutoMoveToNext;
+        
+        public StoryProcess(NetFightScene _NetFightScene)
         {
-            thisProcessStep = SceneStep.StoryBeforeFight;
+            Step = SceneStep.StoryBeforeFight;
             nextProcessStep = SceneStep.CountDown;
-            EelementsInherit(_NetFightScene, fightSceneProcessesRunner);
+            EelementsInherit(_NetFightScene);
         }
 
         public override void ProcessEnter()
@@ -38,10 +40,10 @@ namespace FightScene
         {
             AutoMoveToNext = false;
         }
-
-        public override void LocalUpdate()
+        
+        public override bool CanEnterOtherProcess()
         {
-            //播放timeline途中
+            return AutoMoveToNext;
         }
     }
 }

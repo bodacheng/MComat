@@ -8,7 +8,7 @@ using UniRx;
 using FightScene;
 
 // 这个就是FightingProcess的一个变种。
-public class BasicTryProcess : NagareProcess
+public class BasicTryProcess : FSceneProcess
 {
     int step = 2;// 1. 移动 2. 技能  3.防御  4. 闪避 
     int Step
@@ -26,7 +26,6 @@ public class BasicTryProcess : NagareProcess
                 case 3:
                 break;
                 case 4:
-                    AutoMoveToNext = true;
                 break; 
             }
         }
@@ -45,11 +44,16 @@ public class BasicTryProcess : NagareProcess
     
     IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
     
-    public BasicTryProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
+    public BasicTryProcess(NetFightScene _NetFightScene)
     {
-        this.thisProcessStep = SceneStep.BasicTryTutorial;
-        this.nextProcessStep = SceneStep.FightOver;
-        EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
+        base.Step = SceneStep.BasicTryTutorial;
+        nextProcessStep = SceneStep.FightOver;
+        EelementsInherit(_NetFightScene);
+    }
+    
+    public override bool CanEnterOtherProcess()
+    {
+        return Step == 4;
     }
         
     public IEnumerator enterProcess()
@@ -98,7 +102,7 @@ public class BasicTryProcess : NagareProcess
     
     public override void ProcessEnter()
     {
-        this.mainProcessRunner.Run(enterProcess());
+        mainProcessRunner.Run(enterProcess());
     }
     
     public override void ProcessEnd()

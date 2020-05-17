@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
 
-public class PreparingProcess : NagareProcess
+public class PreparingProcess : FSceneProcess
 {
-    public PreparingProcess(NetFightScene _NetFightScene,FightSceneProcessesRunner fightSceneProcessesRunner)
+    public PreparingProcess(NetFightScene _NetFightScene)
     {
-        thisProcessStep = SceneStep.Preparing;
+        Step = SceneStep.Preparing;
         nextProcessStep = SceneStep.StoryBeforeFight;
-        EelementsInherit(_NetFightScene,fightSceneProcessesRunner);
+        EelementsInherit(_NetFightScene);
     }
     
     public IEnumerator EnterProcess()
@@ -44,8 +44,10 @@ public class PreparingProcess : NagareProcess
         FightLoadError.Instance.FightLoadErrors.Clear();
     }
     
-    public override void LocalUpdate()
+    public override bool CanEnterOtherProcess()
     {
-        AutoMoveToNext |= (FightScene.LoadStageFinished.Value && RealTimeGameProcessManager.target.FightTeam1.IfAllCharsPreparedForBattle() && RealTimeGameProcessManager.target.FightTeam2.IfAllCharsPreparedForBattle());
+        return FightScene.LoadStageFinished.Value
+            && RealTimeGameProcessManager.target.FightTeam1.IfAllCharsPreparedForBattle() 
+            && RealTimeGameProcessManager.target.FightTeam2.IfAllCharsPreparedForBattle();
     }
 }

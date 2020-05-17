@@ -3,7 +3,7 @@
 // Tutorial 2
 public class OpenSkillEdit : TutorialProcess
 {
-    bool missionCompleted;
+    bool waitCompleted;
     MemberDetailProcess MemberDetailProcess;
     public OpenSkillEdit()
     {
@@ -13,7 +13,7 @@ public class OpenSkillEdit : TutorialProcess
     
     public override void ProcessEnter()
     {
-        missionCompleted = false;
+        waitCompleted = false;
         MemberDetailProcess = (MemberDetailProcess)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail);
     }
     
@@ -24,12 +24,12 @@ public class OpenSkillEdit : TutorialProcess
     
     public override void LocalUpdate()
     {        
-        if (!missionCompleted)
+        if (!waitCompleted)
         {
             if (MemberDetailProcess.loadFinished)
             {
                 LoadingCanvas.target.HigtLightRect(TutorialHelper.target.SkillEditButton.transform);
-                missionCompleted = true;
+                waitCompleted = true;
             }
         }
     }

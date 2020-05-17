@@ -6,14 +6,18 @@ using dataAccess;
 
 namespace FightScene
 {
-    public class FightOverProcess : NagareProcess
+    public class FightOverProcess : FSceneProcess
     {
-        public FightOverProcess(NetFightScene _NetFightScene, FightSceneProcessesRunner fightSceneProcessesRunner)
+        public FightOverProcess(NetFightScene _NetFightScene)
         {
-            thisProcessStep = SceneStep.FightOver;
+            Step = SceneStep.FightOver;
             nextProcessStep = SceneStep.FightSummary;
-            EelementsInherit(_NetFightScene, fightSceneProcessesRunner);
-            fightOverControl.CanGotoSummary.Subscribe(x => { if (x) AutoMoveToNext = true; });
+            EelementsInherit(_NetFightScene);
+        }
+        
+        public override bool CanEnterOtherProcess()
+        {
+            return fightOverControl.CanGotoSummary.Value;
         }
 
         public override void ProcessEnter()
@@ -40,15 +44,7 @@ namespace FightScene
                 mainProcessRunner.Run(RewardManager.ExpUpForStones(mystoneids, 1000f));
             }
         }
-
-        public override void ProcessEnd()
-        {
-
-        }
-
-        public override void LocalUpdate()
-        {
-
-        }
+        
+        
     }
 }
