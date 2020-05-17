@@ -41,13 +41,9 @@ public class StartUpScenePresentation : MonoBehaviour
     
     public IEnumerator PresentationProcess()
     {
-        LoadingCanvas.target.LightUp();
-        yield return new WaitForSeconds(1f);
-        LoadingCanvas.target.DarkOff(1);
-        yield return new WaitForSeconds(1f);
         logo.gameObject.SetActive(false);
         bigPic.gameObject.SetActive(true);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(0.1f);
         LoadingCanvas.target.LightUp();
         pProcessFinished = true;
         yield break;

@@ -101,11 +101,11 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         ResourceLoadingSetting.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
         ResourceLoadingSetting.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
         ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
-
+        
         LoadingCanvas.target.DarkOff(0.5f);
         LoadingCanvas.target.TurnOnProcessDescription(true);
         LoadingCanvas.target.NowProcess("正在加载资源",0);
-        
+
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -156,7 +156,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 int i = 0;
                 foreach (string type in _ConfigFileManager.chartypes)
                 {
-                    yield return AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
+                    AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
                     i++;
                     LoadingCanvas.target.NowProcess("正在加载资源", i/_ConfigFileManager.chartypes.Length);
                     yield return null;

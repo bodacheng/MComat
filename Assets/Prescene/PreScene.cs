@@ -88,7 +88,7 @@ namespace mainMenu
         {
             LoadingCanvas.target.DarkOff(0.5f);
             Application.targetFrameRate = 60;
-            
+
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.target.gameObject.SetActive(false);
@@ -149,9 +149,9 @@ namespace mainMenu
             accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
-            
+
             HeroIcon.INIFrames();
-            
+
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
@@ -161,7 +161,7 @@ namespace mainMenu
             yield return (TheNineSlot.target.StartUp());
             
             yield return _SelfFightManager.INITeamPosButtons();
-            
+                        
             IEnumerator localMyChractersProcess = AccountCharsSet.LoadAll();
             yield return localMyChractersProcess;
             // 缺response判断

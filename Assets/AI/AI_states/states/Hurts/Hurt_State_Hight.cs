@@ -14,7 +14,7 @@ public partial class Hurt_State : Behavior
         _Animator.applyRootMotion = false;
         _Rigidbody.velocity = Vector3.zero;
         _BasicPhysicSupport.SetUsingGravity(false);
-        used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+        used_dizzy_time = FightGlobalSetting._highhit_lastingTime;
         _xz = newValue.attacker._Center.WholeT.forward;
         _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);

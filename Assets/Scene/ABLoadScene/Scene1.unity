@@ -1547,29 +1547,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 5.029743
-      outSlope: 5.029743
+      inSlope: 46.083805
+      outSlope: 46.083805
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.16201451
+      outWeight: 0.19700004
     - serializedVersion: 3
-      time: 0.29402563
-      value: 4.0518084
-      inSlope: 0
-      outSlope: 0
+      time: 0.29354197
+      value: 4.3344316
+      inSlope: 0.7652734
+      outSlope: 0.7652734
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.13037302
     - serializedVersion: 3
-      time: 0.7581976
-      value: -1.9216361
-      inSlope: -1.4565402
-      outSlope: -1.4565402
+      time: 1.2633854
+      value: -27.206444
+      inSlope: -31.738638
+      outSlope: -31.738638
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.16924219
+      inWeight: 0.086018056
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1600,6 +1600,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
+  highhit_lastingTime: 0.65
   knockoffextent: 50
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
@@ -7795,6 +7796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chartypes:
   - human
+  - wolf
   CharacterConfigTextFile: {fileID: 4900000, guid: a8dfd9feec637466989cc8c3dc8b20b2,
     type: 3}
   MonstersConfigFilePath: Assets/MonstersConfig.csv

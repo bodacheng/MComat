@@ -305,14 +305,14 @@ public class AnimationResourceLoader
     // 这个函数的构造就是说，我们虽然正式版本游戏各个type角色的攻击动画都是ab包放一起，但开发环境下他们还是按着自身特点放在那几个文件夹下面，
     // 那么测试环境下我们就干脆把所有resource文件夹下的攻击类动画全load来方便提取。
     // 正式版本游戏是根据脚本决定load哪些包从而构成字典的，不会产生load不用动画的问题
-    public IEnumerator PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(string type)
+    public void PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(string type)
     {
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
+        List<Object> G_Attack_States = Resources.LoadAll("Animations/"+ type + "/G_Attack_State", typeof(AnimationClip)).ToList();
+        List<Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/G_Attack_State_Stay", typeof(AnimationClip)).ToList();
+        List<Object> GMStatess = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
 
         string clipkey;
-        foreach (UnityEngine.Object _object in G_Attack_States)
+        foreach (Object _object in G_Attack_States)
         {
             clipkey = type + "/skill/" + _object.name;
             if (AnimationClipDic.ContainsKey(clipkey))
@@ -330,7 +330,7 @@ public class AnimationResourceLoader
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
-        foreach (UnityEngine.Object _object in G_Attack_State_Stays)
+        foreach (Object _object in G_Attack_State_Stays)
         {
             clipkey = type + "/skill/" + _object.name;
             if (AnimationClipDic.ContainsKey(clipkey))
@@ -347,7 +347,7 @@ public class AnimationResourceLoader
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
-        foreach (UnityEngine.Object _object in GMStatess)
+        foreach (Object _object in GMStatess)
         {
             clipkey = type + "/skill/" + _object.name;
             if (AnimationClipDic.ContainsKey(clipkey))
@@ -364,7 +364,6 @@ public class AnimationResourceLoader
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
-        yield break;
     }
 }
 
