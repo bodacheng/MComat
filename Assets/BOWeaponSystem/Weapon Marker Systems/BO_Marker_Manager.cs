@@ -84,7 +84,7 @@ namespace HittingDetection
         
         public float GetDamageAmount()
         {
-            return weaponHP > 0 ? AT/weaponHP : AT;
+            return weaponHP > 0 ? AT / weaponHP : AT;
         }
 
         void Awake()
