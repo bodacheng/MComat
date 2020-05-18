@@ -19,7 +19,7 @@ namespace mainMenu
         public void SwitchOrder()
         {
             ordertype++;
-            if (ordertype == 4)
+            if (ordertype == 5)
             {
                 ordertype = 0;
             }
@@ -37,6 +37,9 @@ namespace mainMenu
                 case 3:// 稀有度升序
                     orderButtonText.text = "Rarity DES";
                 break;
+                case 4:// DevID
+                    orderButtonText.text = "开发代号ID";
+                break;
             }
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -45,20 +48,44 @@ namespace mainMenu
         {
             switch (ordertype)
             {
-                case 0:// 等级降序
+                case 0: // 等级降序
                 return ByLevel(targets,1);
-                case 1:// 等级升序
+                case 1: // 等级升序
                 return ByLevel(targets,0);
-                case 2:// 稀有度降序
+                case 2: // 稀有度降序
                 return ByRareLevel(targets,1);
-                case 3:// 稀有度升序
+                case 3: // 稀有度升序
                 return ByRareLevel(targets,0);
+                case 4: // 以技能ID
+                return ByDevID(targets, 1);
             }
             return targets;
         }
-           
+
+        List<string> ByDevID(List<string> targets, int order) //1:升序 0:降序 
+        {
+            for (int i = 0; i < targets.Count - 1; i++)
+            {
+                for (int j = 0; j < targets.Count - 1 - i; j++)
+                {
+                    SkillStoneOfPlayerInfoModel myStone1 = MySkillStonesReader.Get(targets[j]);
+                    SkillStoneOfPlayerInfoModel myStone2 = MySkillStonesReader.Get(targets[j + 1]);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
+
+                    if (order == 1 ? int.Parse(skillConfig1.RECORD_ID) > int.Parse(skillConfig2.RECORD_ID) : int.Parse(skillConfig2.RECORD_ID) < int.Parse(skillConfig1.RECORD_ID))
+                    {
+                        string temp = targets[j];
+                        targets[j] = targets[j + 1];
+                        targets[j + 1] = temp;
+                    }
+                }
+            }
+            return targets;
+        }
+
         // 等级升序降序
-        List<string> ByLevel(List<string> targets, int order) //0:升序 1:降序 //是否按type排序
+        List<string> ByLevel(List<string> targets, int order) //1:升序 0:降序 
         {
             for (int i = 0; i < targets.Count - 1; i++)
             {
@@ -78,7 +105,7 @@ namespace mainMenu
             return targets;
         }
         
-        List<string> ByRareLevel(List<string> targets, int order) //0:升序 1:降序 //是否按type排序
+        List<string> ByRareLevel(List<string> targets, int order) //1:升序 0:降序 
         {
             targets = ByLevel(targets,1);
             for (int i = 0; i < targets.Count - 1; i++)
@@ -90,7 +117,7 @@ namespace mainMenu
                     SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
                     SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
                     
-                    if (order == 1 ? skillConfig1.RARITY_LEVEL > skillConfig2.RARITY_LEVEL : skillConfig2.RARITY_LEVEL > skillConfig1.RARITY_LEVEL)
+                    if (order == 1 ? skillConfig1.RARITY_LEVEL > skillConfig2.RARITY_LEVEL : skillConfig2.RARITY_LEVEL < skillConfig1.RARITY_LEVEL)
                     {
                         string temp = targets[j];
                         targets[j] = targets[j + 1];
