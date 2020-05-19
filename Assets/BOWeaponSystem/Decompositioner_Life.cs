@@ -23,7 +23,6 @@ public partial class Decompositioner : MonoBehaviour
                         StopEmissions(false);
                         Counter = stop_emission_delay;
                         Phase = 2;
-                        HitBoxFadedEvent();
                     }
                     if (_HitBox.GetOwnerFightAttriCalReference() != null)
                     {
@@ -43,7 +42,6 @@ public partial class Decompositioner : MonoBehaviour
                         StopEmissions(false);
                         Counter = stop_emission_delay;
                         Phase = 2;
-                        HitBoxFadedEvent();
                     }
                     break;
             }

@@ -120,7 +120,7 @@ public partial class BO_Ani_E : MonoBehaviour
     public void ReleasePreparedMagicToAir(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
-        hiddenMethods.ReleasePreparedMagic_core(target.position,transform.rotation,null,e.floatParameter,null);
+        hiddenMethods.ReleasePreparedMagic_core(target.position, transform.rotation,null,e.floatParameter,null);
     }
 
     Vector3 intPos;

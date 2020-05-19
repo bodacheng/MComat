@@ -24,7 +24,6 @@ public partial class Decompositioner : MonoBehaviour {
 
     [Tooltip("附属物体。这个只能自己把握。")]
     public string[] Attachments;
-    public string _HitTriggerEvent;
 
     #region realtime
     DecompositionerPool _DecompositionerPool;
@@ -43,6 +42,11 @@ public partial class Decompositioner : MonoBehaviour {
     public void SetPool(DecompositionerPool _DecompositionerPool)
     {
         this._DecompositionerPool = _DecompositionerPool;
+    }
+
+    public void ReturnSelfToPool()
+    {
+        this._DecompositionerPool.Return(this);
     }
     
     public void SetPositionConstraint(PositionConstraint positionConstraint)
@@ -153,38 +157,26 @@ public partial class Decompositioner : MonoBehaviour {
             }
         }
     }
-    
-    void HitBoxFadedEvent()//这个就只能在这自定义了
-    {
-        switch (_HitTriggerEvent)
-        {
-            case "expolosion":
-                BO_Ani_E.hiddenMethods.BlastAttack_core(transform.position,transform.rotation,null,2, _HitBox.GeneratedByStateKey);
-                break;
-            case "explosionlighteningball_big":
-                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big", 
-                    transform.position,transform.rotation,0,_HitBox.GeneratedByStateKey);
-                break;
-        }
-    }
-    
+        
     public void SpecialTriggerEvent(string defined_event_code, HitBoxSubEventManger hitBoxSubEventManger)//这个就只能在这自定义了
     {
         switch (defined_event_code)
         {
             case "expolosion":
-                BO_Ani_E.hiddenMethods.BlastAttack_core(transform.position,transform.rotation,null,2,_HitBox.GeneratedByStateKey);
+                BO_Ani_E.hiddenMethods.BlastAttack_core(transform.position, transform.rotation, null, 2, _HitBox.GeneratedByStateKey);
                 break;
             case "bulletForward":
                 BO_Ani_E.hiddenMethods.Bullet_shoot_from_Core(hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation, 1,10,_HitBox.GeneratedByStateKey);
                 break;
             case "groundroundblast":
-                BO_Ani_E.hiddenMethods.MagicForward_core("groundroundblast", 
-                hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
+                BO_Ani_E.hiddenMethods.MagicForward_core("groundroundblast", hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
                 break;
             case "explosionlighteningball_big":
-                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big",
-                hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
+                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big", hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
+                break;
+            case "s_pillarblast":
+                BO_Ani_E.hiddenMethods.MagicForward_core("s_pillarblast", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 0, _HitBox.GeneratedByStateKey);
+                ReturnSelfToPool();
                 break;
         }
     }

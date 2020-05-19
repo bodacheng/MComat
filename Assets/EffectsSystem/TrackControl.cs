@@ -10,6 +10,7 @@ public class TrackControl : MonoBehaviour {
     [Header("DefinedTrack")]
     public AnimationCurve xAnimationCurve;
     public AnimationCurve zAnimationCurve;
+    public AnimationCurve yAnimationCurve;
     public float Z_scale = 1f;
     Matrix4x4 m;
 
@@ -23,7 +24,7 @@ public class TrackControl : MonoBehaviour {
     Transform navTarget;
     float navRunSpeed;
     
-    public void StartOff(Vector3 start,Quaternion startQ,float Z_scale)
+    public void StartOff(Vector3 start, Quaternion startQ, float Z_scale)
     {
         time_counter = 0;
         switch (_TrackMode)
@@ -48,7 +49,7 @@ public class TrackControl : MonoBehaviour {
         switch(_TrackMode)
         {
             case TrackMode.DefinedTrack:
-            transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ), 0, zAnimationCurve.Evaluate( time_counter ) * Z_scale ));
+                transform.position = m.MultiplyPoint3x4(new Vector3(xAnimationCurve.Evaluate( time_counter ), yAnimationCurve.Evaluate(time_counter), zAnimationCurve.Evaluate( time_counter ) * Z_scale ));
             break;
             case TrackMode.Navigation:
                 if (time_counter < navi_time)
@@ -76,32 +77,11 @@ public class TrackControl : MonoBehaviour {
                 transform.position = Vector3.Lerp(transform.position,transform.position + direction * navRunSpeed,Time.deltaTime);
             break;
         }
-       
-		//foreach( EventKeyframe ekf in listEventKeyframe )
-		//{
-		//	if( ( ( currentEventKeyframeTime < ekf.time && ekf.time < currentEventKeyframeTime + Time.deltaTime ) ||
-		//			( currentEventKeyframeTime == ekf.time ) ) && ekf.functionName != null )
-		//	{
-		//		gameObject.SendMessage( ekf.functionName );
-		//	}
-		//}
 	}
 
     public enum TrackMode
     {
         DefinedTrack = 1,
         Navigation = 2
-    }
-}
-
-public class EventKeyframe
-{
-    public float time;
-    public string functionName;
-    
-    public void SetValues( float _time, string _name )
-    {
-        time = _time;
-        functionName = _name;
     }
 }

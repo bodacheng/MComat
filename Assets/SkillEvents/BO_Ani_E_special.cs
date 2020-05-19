@@ -50,7 +50,7 @@ public partial class BO_Ani_E : MonoBehaviour
             }
         }
                
-        public void BlastAttack_core(Vector3 pos, Quaternion qua , Transform parentTarget, int grade,string logForStateKey)
+        public void BlastAttack_core(Vector3 pos, Quaternion qua , Transform parentTarget, int grade, string logForStateKey)
         {
             switch (grade)
             {
@@ -67,7 +67,7 @@ public partial class BO_Ani_E : MonoBehaviour
                     Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
             }
-                    
+
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
             Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
@@ -206,7 +206,7 @@ public partial class BO_Ani_E : MonoBehaviour
             }
         }
         
-        public void ReleasePreparedMagic_core(Vector3 pos,Quaternion qua, Transform parentT, float trackSpeed, string logForStateKey)
+        public void ReleasePreparedMagic_core(Vector3 pos, Quaternion qua, Transform parentT, float trackSpeed, string logForStateKey)
         {
             if (Ani_E.OnLoadMagic == null)
                 return;
@@ -243,10 +243,9 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
             if (Ani_E.processingHitBox.TrackControl != null)
             {
-                Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position, Ani_E.processingHitBox.transform.rotation, trackSpeed);
+                Ani_E.processingHitBox.TrackControl.StartOff(pos, qua, trackSpeed);
             }
-            Ani_E.OnLoadMagic = null;
-                        
+            
             if (FightGlobalSetting.HitBoxLogger)
             {
                 Ani_E.processingHitBox._HitBox.GeneratedByStateKey = logForStateKey ?? Ani_E._DATA_CENTER._MyBehaviorRunner.GetNowState().StateKey;
