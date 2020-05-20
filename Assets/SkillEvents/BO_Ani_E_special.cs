@@ -243,7 +243,7 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.MarkersEnablingStarts();
             if (Ani_E.processingHitBox.TrackControl != null)
             {
-                Ani_E.processingHitBox.TrackControl.StartOff(pos, qua, trackSpeed);
+                Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position, qua, trackSpeed);
             }
             
             if (FightGlobalSetting.HitBoxLogger)
