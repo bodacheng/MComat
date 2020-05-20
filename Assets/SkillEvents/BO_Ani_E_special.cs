@@ -181,19 +181,19 @@ public partial class BO_Ani_E : MonoBehaviour
                     switch (speedGrade)
                     {
                         case 1:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,1f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 1f);
                             break;
                         case 2:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,1.2f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 2f);
                             break;
                         case 3:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,1.5f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 3f);
                             break;
                         case 0:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,0f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 0f);
                             break;
                         default:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua,0f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 0f);
                             break;
                     }
                 }

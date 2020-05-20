@@ -178,6 +178,10 @@ public partial class Decompositioner : MonoBehaviour {
                 BO_Ani_E.hiddenMethods.MagicForward_core("s_pillarblast", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 0, _HitBox.GeneratedByStateKey);
                 ReturnSelfToPool();
                 break;
+            case "lightningspray":
+                BO_Ani_E.hiddenMethods.MagicForward_core("lightningspray", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 0, _HitBox.GeneratedByStateKey);
+                ReturnSelfToPool();
+                break;
         }
     }
 }
