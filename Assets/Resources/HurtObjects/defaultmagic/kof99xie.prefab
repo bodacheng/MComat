@@ -134,7 +134,7 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!198 &2108080917776050
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4897,6 +4897,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -9916,7 +9922,7 @@ GameObject:
   - component: {fileID: 4753933129581600}
   - component: {fileID: 198704150319674366}
   - component: {fileID: 199270438673693974}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: particle glow master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
