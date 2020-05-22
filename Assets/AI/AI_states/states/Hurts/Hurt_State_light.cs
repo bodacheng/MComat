@@ -12,7 +12,7 @@ public partial class Hurt_State : Behavior
         var disposable2 = new SingleAssignmentDisposable();
         disposable2.Disposable = Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (TimeCounter > 2 * used_dizzy_time / 3)
+                if (TimeCounter > 2 * FightGlobalSetting._normalattackpositionfixingtime)
                 {
                     _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                     disposable2.Dispose();
