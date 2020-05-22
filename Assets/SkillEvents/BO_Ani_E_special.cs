@@ -184,10 +184,10 @@ public partial class BO_Ani_E : MonoBehaviour
                             Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 1f);
                             break;
                         case 2:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 2f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 3f);
                             break;
                         case 3:
-                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 3f);
+                            Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 5f);
                             break;
                         case 0:
                             Ani_E.processingHitBox.TrackControl.StartOff(Ani_E.processingHitBox.transform.position,qua, 0f);

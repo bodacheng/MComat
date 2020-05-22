@@ -28,9 +28,6 @@ public partial class FightAttriCalReference : MonoBehaviour
     List<Collider> myColliders;
     E_Damage managingEventDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
-    UnityEngine.Events.UnityAction gravityloststart;
-    UnityEngine.Events.UnityAction gravitylostend;
-    CustomCoroutine burstCoroutine;
 
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
@@ -132,10 +129,10 @@ public partial class FightAttriCalReference : MonoBehaviour
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
             processingBlood = EffectsManager.GenerateEffect("shield_hit",
-                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   null);
+                                                            FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
+                                                            v_Damage.damageHappenPoint,
+                                                            v_Damage.CutRotation,
+                                                            null);
         }
         else
         {

@@ -4780,7 +4780,7 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!114 &1987579097138158395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4802,7 +4802,7 @@ MonoBehaviour:
   effectSpreadOnBody: 0
   zokusei: 0
   muzzle: 
-  ExplosionEffect: energy_resolve
+  ExplosionEffect: slash_hit
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!114 &2986065017533419536
@@ -4845,6 +4845,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

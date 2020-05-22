@@ -4904,10 +4904,10 @@ MonoBehaviour:
   weaponHP: 3
   onGroundMagic: 0
   effectSpreadOnBody: 0
-  zokusei: 0
+  zokusei: 4
   muzzle: 
-  ExplosionEffect: energy_resolve
-  ContinuousDamage: 1
+  ExplosionEffect: slash_hit
+  ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!114 &706760947075087323
 MonoBehaviour:

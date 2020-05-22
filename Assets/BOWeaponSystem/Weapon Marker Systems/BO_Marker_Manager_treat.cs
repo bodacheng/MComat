@@ -79,7 +79,7 @@ namespace HittingDetection
                     _hitOnHealthBody.victim.ApplyDamage(_hitOnHealthBody);
                     _hitOnHealthBody.attacker.MyDamageCount(_hitOnHealthBody);
                     _hitOnHealthBody.attacker._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
-                    _hitOnHealthBody.attacker.PlusCriticalGauge(1);
+                    _hitOnHealthBody.attacker.PlusCriticalGauge(5);
                 }
             }
 
