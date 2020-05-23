@@ -57,9 +57,6 @@ namespace mainMenu
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform MainMenuBottonsT;
-        public RectTransform JiNengRongLian_selectT;
-        public RectTransform RonglianConfirmGAMENT;
-        public RectTransform SelfFightUIT;
         public RectTransform ArcadeTeamEditT;
         
         void Awake()
@@ -81,9 +78,6 @@ namespace mainMenu
         // 这里面的东西都是应该针对本地模式或联网模式来搞分歧处理。
         // 这里面有的是读数据库，有的是和本地资源的循环有关，
         // 应该有更好精致的机理来回避重复计算。
-        // 我们应该对这里面的所有进程做进一步分析，然后来细致的安排这个进程运行的时机
-        // 现在Start()里只有场景相关的一些轻量级画面相关处理。
-        // 围绕这个进程画面应该有相应配合
         public IEnumerator StartUpProcess()
         {
             LoadingCanvas.target.DarkOff(0.5f);
@@ -105,7 +99,6 @@ namespace mainMenu
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
             TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
-            Tutorial_skillEdit tutorial_SkillEdit = new Tutorial_skillEdit();
             
             // Shop
             ShopTop shopTop = new ShopTop();
@@ -131,7 +124,6 @@ namespace mainMenu
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.Arena, areanaProcess);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.Tutorial_skillEdit, tutorial_SkillEdit);
             
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
@@ -161,16 +153,25 @@ namespace mainMenu
             yield return (TheNineSlot.target.StartUp());
             
             yield return _SelfFightManager.INITeamPosButtons();
-                        
-            IEnumerator localMyChractersProcess = AccountCharsSet.LoadAll();
-            yield return localMyChractersProcess;
+            
             // 缺response判断
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
+
+            switch (AccountSet._AccInfo.accountprogress)
+            {
+                case PlayerAccountProgressStep.Freedom:
+                    yield return AccountCharsSet.LoadAll();
+                    yield return MySkillStonesReader.LoadAll();
+                break;
+                case PlayerAccountProgressStep.justCreated:
+                break;
+                case PlayerAccountProgressStep.Tutorial:
+                    yield return AccountCharsSet.LoadTutorial();
+                    yield return MySkillStonesReader.LoadTutorial();
+                break;
+            }
             yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
-            IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
-            yield return loadMyStonesProcess;
-            
             LoadingCanvas.target.LightUp();
             
             if (ReturnButtonManager.ReturnMissionList.Count > 0)

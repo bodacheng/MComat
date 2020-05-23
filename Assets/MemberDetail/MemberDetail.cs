@@ -25,13 +25,8 @@ namespace mainMenu
         [Space(7)]
         [Header("部下详细")]
         public Text focusingCharName;
-        //public UIBulletBar ExpTiao;
         public SkillsPrintOut _SkillsPrintOut;
-        public RectTransform SkillShowT;
         public Button SkillShowButton, SkillEditButton;
-        public Button favouriteButton;
-        public Button sell;
-        public InputField selfdefindtag;
         
         [Space(7)]
         [Header("Positions For Show")]
@@ -69,6 +64,14 @@ namespace mainMenu
             }
             targetButton.onClick.AddListener(Trigger);
         }
+        
+        public void ClearHeroIconsFeatures()
+        {
+            foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
+            {
+                keyValuePair.Value.iconButton.onClick.RemoveAllListeners();
+            }
+        }
         #endregion
         
         public IEnumerator RefreshMemberDetailPageByFocusingChar()
@@ -76,8 +79,6 @@ namespace mainMenu
             if (focusingCharDataInfo == null || focusingCharDataInfo.monsterOfPlayerId == null || focusingCharDataInfo.monsterId == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
-                sell.onClick.RemoveAllListeners();
-                favouriteButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
                 MemberInfoT.gameObject.SetActive(false);
                 yield break;
@@ -119,40 +120,38 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
             
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.Run(SkillsPrintOutFocusingCharChangeProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharDataInfo)));
+            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharDataInfo)));
         }
 
-        public IEnumerator SkillsPrintOutFocusingCharChangeProcess(CharDataInfo _focusingCharacterDataInfo)
+        public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
         {
-            if (_focusingCharacterDataInfo == null)
+            if (_CharDataInfo == null)
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 _SkillsPrintOut.focusingC = null;
                 IEnumerator readshowmodel = ModelShower.target.ShowModel(null);
                 yield return readshowmodel;
-                yield break;
             }else{
-                _SkillsPrintOut.focusingResourceID = _focusingCharacterDataInfo.ResourceID;
-                IEnumerator readshowmodel = ModelShower.target.ShowModel(_focusingCharacterDataInfo.monsterOfPlayerId);
+                _SkillsPrintOut.focusingResourceID = _CharDataInfo.ResourceID;
+                IEnumerator readshowmodel = ModelShower.target.ShowModel(_CharDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");
-                    this._SkillsPrintOut.focusingC = null;
+                    _SkillsPrintOut.focusingC = null;
                     yield break;
                 }
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
                 if (outsideDataLink == null)
                 {
-                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _focusingCharacterDataInfo.ResourceID);
+                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _CharDataInfo.ResourceID);
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
                 _SkillsPrintOut.focusingC = aI_DATA_CENTER;
                 _SkillsPrintOut.focusingC.Animation_Manger.Animator.applyRootMotion = true;
             }
-            yield break;
         }
 
         // 纯表现系

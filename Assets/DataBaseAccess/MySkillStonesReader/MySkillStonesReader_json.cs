@@ -11,10 +11,9 @@ using Skill;
 namespace dataAccess
 {
     public partial class MySkillStonesReader
-    {
-        public static void LoadAll_Json()
+    {    
+        static void LoadAll_Json(string filePath)
         {
-            string filePath = Application.persistentDataPath + "/MyStones";
             if (Directory.Exists(filePath))
             {
                 Debug.Log("正从以下路径获取技能石存档："+filePath);
@@ -22,13 +21,13 @@ namespace dataAccess
                 {
                     try
                     {
-                        //Debug.Log("处理技能石："+file);
                         string dataAsJson = File.ReadAllText(file);
                         SkillStoneOfPlayerInfoModel info = JsonConvert.DeserializeObject<SkillStoneOfPlayerInfoModel>(dataAsJson);
                         DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, info.skillStoneOfPlayerId, info);
                     }
                     catch (Exception e)
                     {
+                        Debug.Log("尝试读取以下路径技能石结果出错："+ file);
                         Debug.Log(e.ToString());
                     }
                 }

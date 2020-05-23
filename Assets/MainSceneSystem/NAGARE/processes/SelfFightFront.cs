@@ -35,8 +35,4 @@ public class SelfFightFront : MainSceneProcess
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
-
-    public override void LocalUpdate()
-    {
-    }
 }

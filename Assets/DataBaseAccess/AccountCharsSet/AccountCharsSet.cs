@@ -111,13 +111,28 @@ namespace dataAccess
             switch (AccountSet._playerinfoReferenceMode)
             {
                 case playerInfoRefMode.localTestSaveData:
-                    charList = LoadAll_Json();
+                    charList = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
                     break;
                 case playerInfoRefMode.remoteTestPlayer:
                     break;
                 case playerInfoRefMode.formalVersion:
                     break;
             }
+            AccountCharInfoDic.Clear();
+            foreach (GetMonsterOfPlayerDetailModel one in charList)
+            {
+                if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
+                    AccountCharInfoDic.Add(one.monsterOfPlayerId, one);
+                else
+                    Debug.Log("重复的角色存档id："+ one.monsterOfPlayerId);
+            }
+            yield break;
+        }
+        
+        public static IEnumerator LoadTutorial()
+        {
+            List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
+            charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
             AccountCharInfoDic.Clear();
             foreach (GetMonsterOfPlayerDetailModel one in charList)
             {

@@ -10,30 +10,30 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        public static List<GetMonsterOfPlayerDetailModel> LoadAll_Json()
+        static List<GetMonsterOfPlayerDetailModel> LoadAll_Json(string filePath)
         {
             List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
-            try
+            GetMonsterOfPlayerDetailModel info;
+            if (Directory.Exists(filePath))
             {
-                GetMonsterOfPlayerDetailModel info;
-                string filePath = Application.persistentDataPath + "/AccountCharacterInfos";
-                if (Directory.Exists(filePath))
+                foreach (string file in Directory.GetFiles(filePath))
                 {
-                    foreach (string file in Directory.GetFiles(filePath))
+                    try
                     {
                         string dataAsJson = File.ReadAllText(file);
                         info = JsonConvert.DeserializeObject<GetMonsterOfPlayerDetailModel>(dataAsJson);
                         charList.Add(info);
                     }
+                    catch (Exception e)
+                    {
+                        Debug.Log("尝试读取以下路径角色信息结果出错："+ file);
+                        Debug.Log(e.ToString());
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e.ToString());
             }
             return charList;
         }
-    
+        
         public static GetMonsterOfPlayerDetailModel LoadAccCharInfoViaJsonFile(string monsterlocalid)
         {
             try

@@ -20,8 +20,6 @@ public class SkillStones : MainSceneProcess
         SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);        
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         
-        IEnumerator loadMyStonesProcess = MySkillStonesReader.LoadAll();
-        yield return (loadMyStonesProcess);        
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);//这一行因为牵扯到对玩家存档中技能石头的读取所以可能是(协程)
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
         LoadingCanvas.target.LightUp();

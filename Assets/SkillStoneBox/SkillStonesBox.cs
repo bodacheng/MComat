@@ -73,7 +73,7 @@ namespace mainMenu
         {
             DeleteArea.cellPhase = StoneCell.CellPhase.DeleteArea;
             DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
-            Debug.Log("技能石盒子容量为" + stoneboxsize);
+            //Debug.Log("技能石盒子容量为" + stoneboxsize);
             GenerateCells(stoneboxsize, 1);
             yield break;
         }

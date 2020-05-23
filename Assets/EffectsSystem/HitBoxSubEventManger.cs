@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UniRx;
 
 public class HitBoxSubEventManger : MonoBehaviour
 {
@@ -8,35 +9,68 @@ public class HitBoxSubEventManger : MonoBehaviour
     public string fadeEvent;
 
     float time_count;
-    bool start;
 
     void OnEnable()
     {
-        start = true;
+        time_count = 0;        
+        if (!string.IsNullOrEmpty(_event.event_name))
+        {
+            var clockEvent = new SingleAssignmentDisposable();
+            clockEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    if (time_count > _event.time)
+                    {
+                        _Decompositioner.SpecialTriggerEvent(_event.event_name, this);
+                        clockEvent.Dispose();
+                    }
+                    if (!gameObject.activeSelf)
+                    {
+                        clockEvent.Dispose();
+                    }
+                }
+            );
+        }
+        
+        if (!string.IsNullOrEmpty(LandedEvent))
+        {
+            var landEvent = new SingleAssignmentDisposable();
+            landEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    if (_Decompositioner.transform.position.y <= 0)
+                    {
+                        _Decompositioner.SpecialTriggerEvent(LandedEvent, this);
+                        landEvent.Dispose();
+                    }
+                    if (!gameObject.activeSelf)
+                    {
+                        landEvent.Dispose();
+                    }
+                }
+            );
+        }
+        
+        if (!string.IsNullOrEmpty(fadeEvent))
+        {
+            var fadedEvent = new SingleAssignmentDisposable();
+            fadedEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    if (_Decompositioner._HitBox.weaponHP > 0 && _Decompositioner._HitBox.CurrentHP <= 0)
+                    {
+                        _Decompositioner.SpecialTriggerEvent(fadeEvent, this);
+                        fadedEvent.Dispose();
+                    }
+                    if (!gameObject.activeSelf)
+                    {
+                        fadedEvent.Dispose();
+                    }
+                }
+            );
+        }
     }
-
+    
     void Update()
     {
-        if (start)
-        {
-            time_count += Time.deltaTime;
-            if (time_count > _event.time)
-            {
-                start = false;
-                time_count = 0;
-                _Decompositioner.SpecialTriggerEvent(_event.event_name, this);
-            }
-        }
-
-        if (_Decompositioner.transform.position.y <= 0)
-        {
-            _Decompositioner.SpecialTriggerEvent(LandedEvent, this);
-        }
-
-        if (_Decompositioner._HitBox.weaponHP > 0 && _Decompositioner._HitBox.CurrentHP <= 0)
-        {
-            _Decompositioner.SpecialTriggerEvent(fadeEvent, this);
-        }
+        time_count += Time.deltaTime;
     }
 
     [System.Serializable]

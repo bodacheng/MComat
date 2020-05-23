@@ -36,6 +36,7 @@ public class MemberDetailProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        MemberDetail.target.ClearHeroIconsFeatures();
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
         MemberDetail.target.MemberInfoT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);

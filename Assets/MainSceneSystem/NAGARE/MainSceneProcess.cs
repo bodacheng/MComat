@@ -44,11 +44,7 @@ namespace mainMenu
         QuestInfo = 8,
         ArcadeFront = 9,
         Arena = 3,
-        
-        JiNengRongLian_selectMaterialMonster = 12,
-        JiNengRongLian_selectBaseMonster = 13,
-        JiNengRongLian_waitForConfirm = 14,
-        
+                
         Tutorial_skillEdit = 18,
         Tutorial_Story = 19
     }

@@ -64,7 +64,7 @@ namespace dataAccess
             switch (AccountSet._playerinfoReferenceMode)
             {
                 case playerInfoRefMode.localTestSaveData:
-                    LoadAll_Json();
+                    LoadAll_Json(Application.persistentDataPath + "/MyStones");
                     break;
                 case playerInfoRefMode.remoteTestPlayer:
                     yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
@@ -72,6 +72,25 @@ namespace dataAccess
                 case playerInfoRefMode.formalVersion:
                     break;
             }
+            // 上面的步骤已经完成了Dic的适配
+            RenderModelDic.Clear();
+            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)
+            {
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
+                if (_SkillConfig == null)
+                {
+                    Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
+                    yield break;
+                }
+                yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
+            }
+            yield break;
+        }
+        
+        public static IEnumerator LoadTutorial()
+        {
+            Dic.Clear();
+            LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
             // 上面的步骤已经完成了Dic的适配
             RenderModelDic.Clear();
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)

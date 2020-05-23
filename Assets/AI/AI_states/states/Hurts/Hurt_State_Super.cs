@@ -9,13 +9,13 @@ public partial class Hurt_State : Behavior
     {
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(),true,0.05f);
         used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-        var disposable4 = new SingleAssignmentDisposable();
-        disposable4.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+        var disposable = new SingleAssignmentDisposable();
+        disposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
             {
                 if (TimeCounter > 2 * FightGlobalSetting._normalattackpositionfixingtime)
                 {
                     _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                    disposable4.Dispose();
+                    disposable.Dispose();
                 }
             }
         );
