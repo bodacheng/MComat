@@ -43,9 +43,6 @@ namespace mainMenu
         
         QuestInfo = 8,
         ArcadeFront = 9,
-        Arena = 3,
-                
-        Tutorial_skillEdit = 18,
-        Tutorial_Story = 19
+        Arena = 3
     }
 }

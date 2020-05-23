@@ -367,8 +367,6 @@
     <Compile Include="Assets\MainSceneSystem\HollowOutMask.cs" />
     <Compile Include="Assets\MainSceneSystem\MainSceneLogger.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\OldTutorial\TryEditALines.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\OldTutorial\TryEditNineSlot.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\BoxOverLoadFix.cs" />

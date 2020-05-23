@@ -51,6 +51,7 @@ namespace mainMenu
         
         // 原则上这些玩意没有每次都去生成的道理..
         // 而且这个功能可能做一些扩展，比如关卡图标可以搞个特殊一类的
+        // 2020523 : 计划根据账户进度选择是否显示隐藏关卡
         public IEnumerator GenerateStageButtons()
         {
             List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(StageScriptableObject)).ToList();

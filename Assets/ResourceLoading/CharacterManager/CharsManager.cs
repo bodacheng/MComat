@@ -36,7 +36,6 @@ public partial class CharsManager : MonoBehaviour {
     {
         if (myChar == null)
         {
-            Debug.Log("流程错误");
             yield break;
         }
         IEnumerator loadshowmodel;

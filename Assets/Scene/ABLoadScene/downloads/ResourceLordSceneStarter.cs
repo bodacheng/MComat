@@ -64,19 +64,25 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     {
         StartCoroutine(_BeginLocalTestMode());
     }
-
+    
     public void StartNewLocalTestMode()
     {
         StartCoroutine(_StartNewLocalTestMode());
     }
-
+    
     public IEnumerator _BeginRemoteTestMode()
     {
         AccountSet._playerinfoReferenceMode = playerInfoRefMode.remoteTestPlayer;
         yield return AccountSet.login();
         SceneManager.LoadScene(1);       
     }
-
+    
+    public void DeleteLocalSaveDate()
+    {
+        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
+        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/AccountCharacterInfos");
+    }
+    
     public IEnumerator _StartNewLocalTestMode()
     {
         AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
@@ -86,7 +92,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         SceneManager.LoadScene(1);
         yield break;
     }
-
+    
     public IEnumerator _BeginLocalTestMode()
     {
         AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;

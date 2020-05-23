@@ -6,7 +6,7 @@ public class StartUpScenePresentation : MonoBehaviour
 {
     [Space(7)]
     [Header("选择模式T")]
-    public Button StartNewLocalMode,LocalMode,NetMode;
+    public Button StartNewLocalMode,LocalMode,localDataDelete,NetMode;
     
     [Space(7)]
     [Header("ResourceLordSceneStarter")]
@@ -35,6 +35,7 @@ public class StartUpScenePresentation : MonoBehaviour
         {
             StartNewLocalMode.gameObject.SetActive(true);
             LocalMode.gameObject.SetActive(true);
+            localDataDelete.gameObject.SetActive(true);
             NetMode.gameObject.SetActive(true);
         }
     }
