@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace HittingDetection
 {
@@ -20,7 +19,7 @@ namespace HittingDetection
             myCollider.radius = radius;
             myCollider.isTrigger = true;
         }
-
+        
         public override bool HitCheck()
         {
             return BallDetectHitPool.Count > 0;
@@ -40,22 +39,22 @@ namespace HittingDetection
         {
             ClearDetection();
         }
-
+        
         protected override void ClearDetection()
         {
             BallDetectHitPool.Clear();
         }
-
+        
         protected override void OnTriggerEnter(Collider other)
         {
             BallDetectModeDetection(other);
         }
-
+        
         protected override void OnTriggerStay(Collider other)
         {
             BallDetectModeDetection(other);
         }
-
+        
         void BallDetectModeDetection(Collider other)
         {
             //_hits = Physics.SphereCastAll(_tempPos, radius, _dir, _dist, _layers, QueryTriggerInteraction.Collide);// 如果有能力把这个句子去掉最好。会极大幅度提高整个程序速度，但对于相应的代价得有替代方案
@@ -78,8 +77,8 @@ namespace HittingDetection
         float temp;
         public Vector3 HitPointCal(Vector3 colliderCenterPosition)
         {
-            temp = Mathf.Clamp((colliderCenterPosition - transform.position).magnitude,0,radius);
-            return transform.position + (colliderCenterPosition - transform.position).normalized * temp;
+            temp = Mathf.Clamp((colliderCenterPosition - myCollider.transform.position).magnitude,0,radius);
+            return myCollider.transform.position + (colliderCenterPosition - myCollider.transform.position).normalized * temp;
         }
         
         void OnDrawGizmosSelected()

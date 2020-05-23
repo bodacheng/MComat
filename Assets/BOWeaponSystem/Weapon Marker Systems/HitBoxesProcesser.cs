@@ -35,22 +35,16 @@ public class HitBoxesProcesser : MonoBehaviour
             {
                 processingDecompositioners[i].Step1();
             }
-        }
-        if (processingDecompositioners.Count > 0)
-        {
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
                 processingDecompositioners[i].Step2();
             }
-        }
-        if (processingDecompositioners.Count > 0)
-        {
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
                 processingDecompositioners[i].Life();
             }
+            processingDecompositioners.Clear();
         }
-        processingDecompositioners.Clear();
     }
 
     void AddToHitBoxesProcesserList(Decompositioner _poolObject)
