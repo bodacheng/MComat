@@ -75,10 +75,13 @@ namespace HittingDetection
         }
 
         float temp;
+        Vector3 _temp;
         public Vector3 HitPointCal(Vector3 colliderCenterPosition)
         {
             temp = Mathf.Clamp((colliderCenterPosition - myCollider.transform.position).magnitude,0,radius);
-            return myCollider.transform.position + (colliderCenterPosition - myCollider.transform.position).normalized * temp;
+            _temp = myCollider.transform.position + (colliderCenterPosition - myCollider.transform.position).normalized * temp;
+            _temp = new Vector3(Mathf.Round(_temp.x),Mathf.Round(_temp.y),Mathf.Round(_temp.z));
+            return _temp;
         }
         
         void OnDrawGizmosSelected()
