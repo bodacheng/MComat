@@ -9,21 +9,16 @@ namespace FightScene
 {
     public class FightOverControl : MonoBehaviour
     {
-
         public Canvas FightOverCanvas;
         public CameraManager _CameraManager;
 
         [Header("WIN")]
         public RectTransform WinRectTransform;
         public GameObject win_textanimation;
-        public Button PlayAgain;
-        public Button ReturnToMainMenuWin;
 
         [Header("LOSE")]
         public RectTransform LoseRectTransform;
         public GameObject lose_textanimation;
-        public Button TryAgain;
-        public Button ReturnToMainMenuLose;
         
         [Header("技能与角色头像T")]
         public RectTransform IconAndSKillShowUISetT;
@@ -45,6 +40,13 @@ namespace FightScene
         {
             SceneManager.LoadScene(1);
         };
+
+        public static FightOverControl target;
+
+        void Awake()
+        {
+            target = this;
+        }
 
         //重新开战意味着所有资源重新加载？
         readonly UnityEngine.Events.UnityAction RestartGame = () =>
@@ -69,50 +71,39 @@ namespace FightScene
             }
         }
         
+        // 胜利字幕与对应页面加载
         public IEnumerator WINProcess()
         {
-            CanGotoSummary.Value = false;
-            FightOverCanvas.gameObject.SetActive(true);
-            PlayAgain.onClick.RemoveAllListeners();
-            PlayAgain.onClick.AddListener(RestartGame);
-            ReturnToMainMenuWin.onClick.RemoveAllListeners();
-            ReturnToMainMenuWin.onClick.AddListener(ReturnToMainMenu);
-
+            CanGotoSummary.Value = false;            
             LoseRectTransform.gameObject.SetActive(false);
             WinRectTransform.gameObject.SetActive(true);
-
+            
             win_textanimation.transform.position = _CameraManager.transform.position + _CameraManager.transform.forward * 5f;
             win_textanimation.transform.rotation = _CameraManager.transform.rotation;
             win_textanimation.transform.SetParent(_CameraManager.transform);
             win_textanimation.gameObject.SetActive(true);
-
-            yield return new WaitForSeconds(1f);
+            
+            yield return new WaitForSeconds(0.2f);
             CanGotoSummary.Value = true;
-            yield break;
         }
-
+        
+        // 失败字幕与对应页面加载
         public IEnumerator LoseProcess()
         {
             CanGotoSummary.Value = false;
-            FightOverCanvas.gameObject.SetActive(true);
-            TryAgain.onClick.RemoveAllListeners();
-            TryAgain.onClick.AddListener(RestartGame);
-            ReturnToMainMenuLose.onClick.RemoveAllListeners();
-            ReturnToMainMenuLose.onClick.AddListener(ReturnToMainMenu);
-
+                    
             WinRectTransform.gameObject.SetActive(false);
             LoseRectTransform.gameObject.SetActive(true);
-
+            
             lose_textanimation.transform.position = _CameraManager.transform.position + _CameraManager.transform.forward * 5f;
             lose_textanimation.transform.rotation = _CameraManager.transform.rotation;
             lose_textanimation.transform.SetParent(_CameraManager.transform);
             lose_textanimation.gameObject.SetActive(true);
-
-            yield return new WaitForSeconds(1f);
+            
+            yield return new WaitForSeconds(0.2f);
             CanGotoSummary.Value = true;
-            yield break;
         }
-
+        
         public IEnumerator ShowRewards(int golds, int diamond)
         {
             goldrewards.text = golds.ToString();

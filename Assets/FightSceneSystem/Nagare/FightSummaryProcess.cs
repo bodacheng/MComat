@@ -17,12 +17,12 @@ namespace FightScene
 
         public override void ProcessEnter()
         {
-            mainProcessRunner.Run(fightOverControl.ShowRewards(999, 999));
+            mainProcessRunner.Run(FightOverControl.target.ShowRewards(999, 999));
         }
 
         public override void ProcessEnd()
         {
-            fightOverControl.FightOverCanvas.gameObject.SetActive(false);
+            FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
         }
 
         public void AfterSummary(FightEventType _fightEventType)

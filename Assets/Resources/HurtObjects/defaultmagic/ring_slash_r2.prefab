@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 4024563832635986876}
   - component: {fileID: 3821498288784323200}
   - component: {fileID: 3821750962554731142}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: SparksCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4982,7 +4982,7 @@ GameObject:
   - component: {fileID: 4018426558674213908}
   - component: {fileID: 3821486313104796626}
   - component: {fileID: 3822490504237401692}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9797,7 +9797,7 @@ GameObject:
   - component: {fileID: 1861503007501220043}
   - component: {fileID: 6128180510291148108}
   - component: {fileID: 1233845165351957868}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: ring_slash_r2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14814,7 +14814,7 @@ GameObject:
   - component: {fileID: 4024998038938990106}
   - component: {fileID: 3822235775254124356}
   - component: {fileID: 3823046676242303726}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Derbis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19626,7 +19626,7 @@ GameObject:
   - component: {fileID: 4024688285977915452}
   - component: {fileID: 3822412971335987730}
   - component: {fileID: 3823024335069497018}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Distortion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24438,7 +24438,7 @@ GameObject:
   - component: {fileID: 4018431598979247000}
   - component: {fileID: 3821951724408936728}
   - component: {fileID: 3822465470655841924}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29250,7 +29250,7 @@ GameObject:
   - component: {fileID: 4024887777818212568}
   - component: {fileID: 3822409203665081318}
   - component: {fileID: 3823392818330914046}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

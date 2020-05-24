@@ -29,6 +29,7 @@ public partial class EffectsManager
             processingEffectObj.GetPositionConstraint().translationOffset = Vector3.zero;
             processingEffectObj.GetPositionConstraint().constraintActive = true;
         }else{
+            myConstraintSource.weight = 0;
             processingEffectObj.GetPositionConstraint().constraintActive = false;
         }
         processingEffectObj.transform.position = Pos;
@@ -36,7 +37,7 @@ public partial class EffectsManager
         return processingEffectObj;
     }
         
-    public static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
+    public static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
         if (prefab != null)
         {

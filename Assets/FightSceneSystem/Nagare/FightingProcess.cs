@@ -36,7 +36,7 @@ namespace FightScene
                 }
             }
             FightScene.FightCanvas.gameObject.SetActive(true);
-            fightOverControl.FightOverCanvas.gameObject.SetActive(false);
+            FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
             FightScene.PreparingCanvas.gameObject.SetActive(false);
             FightScene.PressedStartButton();
         }

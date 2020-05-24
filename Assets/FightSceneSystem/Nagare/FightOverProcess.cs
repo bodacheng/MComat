@@ -1,6 +1,4 @@
-﻿using UniRx;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Api.Dto.Model;
 using dataAccess;
 
@@ -17,29 +15,29 @@ namespace FightScene
         
         public override bool CanEnterOtherProcess()
         {
-            return fightOverControl.CanGotoSummary.Value;
+            return FightOverControl.target.CanGotoSummary.Value;
         }
 
         public override void ProcessEnter()
         {
-            fightOverControl.FightOverCanvas.gameObject.SetActive(true);
+            FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
             switch (fightLogger.getWinner())
             {
                 case Team.player1:
-                    mainProcessRunner.Run(fightOverControl.WINProcess());//这里是要根据情况的。。
+                    mainProcessRunner.Run(FightOverControl.target.WINProcess());//这里是要根据情况的。。
                     break;
                 case Team.player2:
-                    mainProcessRunner.Run(fightOverControl.LoseProcess());//这里是要根据情况的。。
+                    mainProcessRunner.Run(FightOverControl.target.LoseProcess());//这里是要根据情况的。。
                     break;
             }
             
             switch (FightSceneNote.nextBattle._fightEventType)
             {
                 case FightEventType.Arena:
-                    mainProcessRunner.Run(fightOverControl.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
+                    mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     break;
                 case FightEventType.Quest:
-                    mainProcessRunner.Run(fightOverControl.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
+                    mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     foreach (CharDataInfo charDataInfo in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef.Values)
                     {
                         List<string> mystoneids = new List<string>();
@@ -51,8 +49,8 @@ namespace FightScene
                         mainProcessRunner.Run(RewardManager.ExpUpForStones(mystoneids, 1000f));
                     }
                     break;
-                case FightEventType.Self:
-                    mainProcessRunner.Run(fightOverControl.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
+                case FightEventType.Self: 
+                    mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     break;
             }
         }

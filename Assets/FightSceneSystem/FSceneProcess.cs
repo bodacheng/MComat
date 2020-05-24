@@ -11,7 +11,6 @@ namespace FightScene
         public CharsManager CharsManager;
         public CameraManager cameraManager;
         public FightLogger fightLogger;
-        public FightOverControl fightOverControl;
         public SingleThreadProcesser mainProcessRunner;
 
         public void EelementsInherit(NetFightScene _NetFightScene)
@@ -21,7 +20,6 @@ namespace FightScene
             this.mobileInputsManager = RealTimeGameProcessManager.target._mobileInputsManager;
             this.CharsManager = FightScene._CharSetManager;
             this.cameraManager = RealTimeGameProcessManager.target._CameraManager;
-            this.fightOverControl = FightScene._FightOverControl;
             this.fightLogger = FightScene.fightLogger;
         }
     }

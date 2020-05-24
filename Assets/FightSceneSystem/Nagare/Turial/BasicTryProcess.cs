@@ -56,7 +56,7 @@ public class BasicTryProcess : FSceneProcess
         return Step == 4;
     }
         
-    public IEnumerator enterProcess()
+    public IEnumerator EnterProcess()
     {
         BoundaryControllByGod.target.AllMembers.Clear();
         AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
@@ -80,7 +80,7 @@ public class BasicTryProcess : FSceneProcess
         loser = Team.none;
         FightScene.PressedStartButton();
         FightScene.FightCanvas.gameObject.SetActive(true);
-        fightOverControl.FightOverCanvas.gameObject.SetActive(false);
+        FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
         FightScene.PreparingCanvas.gameObject.SetActive(false);
         
         watchetargets.Clear();
@@ -102,7 +102,7 @@ public class BasicTryProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.Run(enterProcess());
+        mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
