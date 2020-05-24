@@ -12,7 +12,7 @@ namespace FightScene
             Step = SceneStep.FightSummary;
             //this.nextProcessStep = 这个环节结束后应该是直接的产生条件判断分歧。
             EelementsInherit(_NetFightScene);
-            enternext.Subscribe(x => { if (x) afterSummary(FightSceneNote.nextBattle._fightEventType); });
+            enternext.Subscribe(x => { if (x) AfterSummary(FightSceneNote.nextBattle._fightEventType); });
         }
 
         public override void ProcessEnter()
@@ -25,21 +25,13 @@ namespace FightScene
             fightOverControl.FightOverCanvas.gameObject.SetActive(false);
         }
 
-        public void afterSummary(FightEventType _fightEventType)
+        public void AfterSummary(FightEventType _fightEventType)
         {
             switch (_fightEventType)
             {
                 case FightEventType.Arena:
                     break;
                 case FightEventType.Quest:
-                    break;
-                case FightEventType.Tutorial_Basic:
-                    AccountSet._AccInfo.accountprogress = PlayerAccountProgressStep.Tutorial;
-                    this.FightScene.ReturnToFront();
-                    break;
-                case FightEventType.Tutorial_Story_AdamVsGuards:
-                    AccountSet._AccInfo.accountprogress = PlayerAccountProgressStep.Freedom;
-                    this.FightScene.ReturnToFront();
                     break;
             }
         }

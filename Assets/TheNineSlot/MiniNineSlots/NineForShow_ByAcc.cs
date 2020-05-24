@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public partial class NineForShow : MonoBehaviour
 {
+    // 战斗结束后统计技能石升级情况时的画面显示
     public IEnumerator ShowStones_Acc(string MonsterOfPlayerID)
     {
         List<SkillStoneOfPlayerInfoModel> skillStoneOfPlayerInfoModels = MySkillStonesReader.GetMonsterEquipingStones(MonsterOfPlayerID);
@@ -58,7 +59,6 @@ public partial class NineForShow : MonoBehaviour
         SKStoneItem C3S = MySkillStonesReader.GetRenderModel(C3SkillID);
         
         Parent(A1S,A2S,A3S,B1S,B2S,B3S,C1S,C2S,C3S);
-
         yield break;
     }
 }

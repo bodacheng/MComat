@@ -108,6 +108,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         if (BBMM != null)
         {
+            BBMM.CurrentHP = BBMM.weaponHP;
             decompositioner._HitBox = BBMM;
             BBMM.SetDecompositioner(decompositioner);
         }

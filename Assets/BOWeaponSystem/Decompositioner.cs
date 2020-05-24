@@ -93,7 +93,7 @@ public partial class Decompositioner : MonoBehaviour {
         }
         SetMaterialsAlpha(1f);
     }
-
+    
     void Update()
     {
         HitBoxesProcesser.AddToDecompositionerProcesserList(this);
@@ -144,7 +144,7 @@ public partial class Decompositioner : MonoBehaviour {
     {
         if (to_be_faded_renderers.Count == 0)
             return;
-
+        
         for (int i = 0; i < to_be_faded_renderers.Count; i++)
         {
             if (to_be_faded_renderers[i] != null)

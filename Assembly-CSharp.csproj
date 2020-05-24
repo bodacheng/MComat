@@ -532,6 +532,7 @@
     <Compile Include="Assets\TheBlur\Blur.cs" />
     <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
     <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
+    <Compile Include="Assets\TheNineSlot\MiniNineSlots\FightOverShow\IconAndSKillShowUISet.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_ByAcc.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />

@@ -24,9 +24,14 @@ namespace FightScene
         public GameObject lose_textanimation;
         public Button TryAgain;
         public Button ReturnToMainMenuLose;
-
+        
+        [Header("技能与角色头像T")]
+        public RectTransform IconAndSKillShowUISetT;
+        
+        [Header("IconWithSkillShow")]
+        public IconAndSKillShowUISet IconAndSKillShowUISetPretab;
+        
         [Header("NineForShow")]
-        public RectTransform NinesT;
         public NineForShow NineForShowPretab;
 
         [Header("Rewards")]
@@ -46,20 +51,24 @@ namespace FightScene
         {
             SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
         };
-
-        public IEnumerator ShowSKillSets(List<CharDataInfo> TeamMembers)
+        
+        // 战斗结束后统计技能石升级情况时的画面显示
+        public IEnumerator ShowSKillSets(FightTeam fightTeam)
         {
-            for (int i = 0; i < TeamMembers.Count; i++)
+            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in fightTeam.CharDataInfoRef)
             {
+                IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);
+                SideCharIcon sideCharIcon = fightTeam.GetSideIcon(keyValuePair.Key);                
                 NineForShow nineForShow = Instantiate(NineForShowPretab);
-                yield return nineForShow.ShowStones_Acc(TeamMembers[i].monsterOfPlayerId);
-                nineForShow.gameObject.SetActive(true);
-                nineForShow.transform.SetParent(NinesT);
-                nineForShow.transform.localPosition = Vector3.zero;
-                nineForShow.transform.localScale = Vector3.one;
+                iconAndSKillShowUISet.Set(sideCharIcon, nineForShow);
+                iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
+                iconAndSKillShowUISet.transform.localPosition = Vector3.zero;
+                iconAndSKillShowUISet.transform.localScale = Vector3.one;
+                
+                yield return nineForShow.ShowStones_Acc(keyValuePair.Value.monsterOfPlayerId); 
             }
         }
-
+        
         public IEnumerator WINProcess()
         {
             CanGotoSummary.Value = false;

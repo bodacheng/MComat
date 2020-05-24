@@ -173,21 +173,22 @@ public partial class NineAndTwo
         SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null,0,0);
-        SkillEntity TestMove = new SkillEntity()
-                    {
-                        REAL_NAME = "Test_Move",
-                        LEVEL = 0,
-                        StateType = BehaviorType.MV,
-                        AT = 0,
-                        HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
-                        CasualTo = {},
-                        ForcedTransitions = {},
-                        EnterInput = InputKey.Null,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
-                    };
+        SkillEntity TestMove = 
+            new SkillEntity()
+            {
+                REAL_NAME = "Test_Move",
+                LEVEL = 0,
+                StateType = BehaviorType.MV,
+                AT = 0,
+                HP = 0,
+                AI_MIN_DIS = -1,
+                AI_MAX_DIS = -1,
+                CasualTo = {},
+                ForcedTransitions = {},
+                EnterInput = InputKey.Null,
+                ExitInput = InputKey.Null,
+                SP_LEVEL = 0
+            };
         
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
@@ -205,39 +206,39 @@ public partial class NineAndTwo
             StateTransitionSetList.Add(R);
         }
         
-        if(this.A1 != null)
+        if(A1 != null)
         {
             StateTransitionSetList.Add(A1);
         }
-        if (this.A2 != null)
+        if (A2 != null)
         {
             StateTransitionSetList.Add(A2);
         }            
-        if (this.A3 != null)
+        if (A3 != null)
         {
             StateTransitionSetList.Add(A3);
         }
-        if (this.B1 != null)
+        if (B1 != null)
         {
             StateTransitionSetList.Add(B1);
         }            
-        if (this.B2 != null)
+        if (B2 != null)
         {
             StateTransitionSetList.Add(B2);
         }
-        if (this.B3 != null)
+        if (B3 != null)
         {
             StateTransitionSetList.Add(B3);
         }
-        if (this.C1 != null)
+        if (C1 != null)
         {
             StateTransitionSetList.Add(C1);
         }                    
-        if (this.C2 != null)
+        if (C2 != null)
         {
             StateTransitionSetList.Add(C2);
         }            
-        if (this.C3 != null)
+        if (C3 != null)
         {
             StateTransitionSetList.Add(C3);
         }

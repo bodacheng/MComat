@@ -81,8 +81,6 @@ public class StageScriptableObject : ScriptableObject
 // 再比如是自己打自己的一个战斗，结束后回到的应该是那个自己打自己的选人菜单。
 public enum FightEventType
 {
-    Tutorial_Basic = 0,
-    Tutorial_Story_AdamVsGuards = 3,
     Quest = 1,
     Arena = 2,
     Self = 4,

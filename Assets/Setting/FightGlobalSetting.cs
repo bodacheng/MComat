@@ -8,6 +8,8 @@ public class FightGlobalSetting : MonoBehaviour
     public AnimationCurve HdamageYAnimationCurve;
     public AnimationCurve HdamageZAnimationCurve;
 
+    public float AT_coefficient = 1;
+    public float HP_coefficient = 1;
     public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f, highhit_lastingTime = 0.8f;
     public float normalattackpositionfixingtime = 0.1f;
     public float knockoffextent = 20f;
@@ -20,6 +22,8 @@ public class FightGlobalSetting : MonoBehaviour
     public float attackDrawingDistance = 1f;
     
     public static int scenestep;//0 :mainmenu 1: fightscene
+    public static float _AT_coefficient = 1;
+    public static float _HP_coefficient = 1;
     public static float _lighthit_lastingtime, _heavyhit_lastingtime;
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
@@ -67,6 +71,9 @@ public class FightGlobalSetting : MonoBehaviour
     
     void Awake()
     {
+        _AT_coefficient = AT_coefficient;
+        _HP_coefficient = HP_coefficient;
+        
         _lighthit_lastingtime = lighthit_lastingtime;
         _heavyhit_lastingtime = heavyhit_lastingtime;
         _highhit_lastingTime = highhit_lastingTime;

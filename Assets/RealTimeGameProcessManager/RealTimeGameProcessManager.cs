@@ -43,7 +43,7 @@ namespace FightScene
         {
             target = this;
         }
-
+        
         public void FightGUIProcess()
         {
             if (FightTeam1.teamConfig.myTeam == playerTeam)
@@ -51,7 +51,7 @@ namespace FightScene
             if (FightTeam2.teamConfig.myTeam == playerTeam)
                 FightTeam1.BarsPositionUpdate();
         }
-
+        
         public void SwitchToWatchMode() // button behaviour
         {
             SwitchToCMode(null, false);
@@ -77,10 +77,10 @@ namespace FightScene
             }
             autoBUtton.onClick.RemoveAllListeners();
             autoBUtton.onClick.AddListener(SwitchAutoMode);
-
+        
             FightTeam1.Refresh();
             FightTeam2.Refresh();
-
+        
             if (focusingChar == null)
             {
                 _mobileInputsManager.TurnOffButtons();
