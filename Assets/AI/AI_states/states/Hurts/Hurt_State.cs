@@ -24,7 +24,7 @@ public partial class Hurt_State : Behavior {
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         _FightAttriCalReference.PlusCriticalGauge(1);
         TimeCounter = 0f;
-        _Rigidbody.mass = 500;
+        _Rigidbody.mass = 800;
         switch (newValue.from_weapon.damage_type)
         {
             case DamageType.slight_damage_forward:

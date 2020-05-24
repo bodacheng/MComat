@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace HittingDetection
 {
@@ -78,9 +79,11 @@ namespace HittingDetection
         Vector3 _temp;
         public Vector3 HitPointCal(Vector3 colliderCenterPosition)
         {
-            temp = Mathf.Clamp((colliderCenterPosition - myCollider.transform.position).magnitude,0,radius);
-            _temp = myCollider.transform.position + (colliderCenterPosition - myCollider.transform.position).normalized * temp;
-            _temp = new Vector3(Mathf.Round(_temp.x),Mathf.Round(_temp.y),Mathf.Round(_temp.z));
+            temp = Mathf.Clamp((colliderCenterPosition - transform.position).magnitude,0,radius);
+            _temp = transform.position + (colliderCenterPosition - transform.position).normalized * temp;
+            _temp = new Vector3((float)Math.Round(_temp.x, 1, MidpointRounding.AwayFromZero),
+                                (float)Math.Round(_temp.y, 1, MidpointRounding.AwayFromZero),
+                                (float)Math.Round(_temp.z, 1, MidpointRounding.AwayFromZero));
             return _temp;
         }
         

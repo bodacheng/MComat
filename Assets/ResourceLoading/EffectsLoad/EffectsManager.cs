@@ -12,11 +12,11 @@ public partial class EffectsManager
     static GameObject EffectPrefab;
     static Decompositioner processingEffectObj;
     static ConstraintSource myConstraintSource;
-    public static Decompositioner GenerateEffect(string resource_name, string EffectsPath,Vector3 Pos,Quaternion Qua,Transform parentsetT)
+    public static Decompositioner GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentsetT)
     {
         if (string.IsNullOrEmpty(resource_name))
             return null;
-        EffectPool = IniEffectsPool(resource_name, EffectsPath,3);
+        EffectPool = IniEffectsPool(resource_name, EffectsPath, 3);
         if (EffectPool == null)
             return null;
         processingEffectObj = EffectPool.Rent();
@@ -24,28 +24,18 @@ public partial class EffectsManager
         {
             myConstraintSource.sourceTransform = parentsetT;
             myConstraintSource.weight = 1;
-            processingEffectObj.GetPositionConstraint().SetSources(new List<ConstraintSource>{myConstraintSource});
-            processingEffectObj.GetPositionConstraint().constraintActive = true;
+            processingEffectObj.GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
             processingEffectObj.GetPositionConstraint().locked = true;
             processingEffectObj.GetPositionConstraint().translationOffset = Vector3.zero;
+            processingEffectObj.GetPositionConstraint().constraintActive = true;
+        }else{
+            processingEffectObj.GetPositionConstraint().constraintActive = false;
         }
         processingEffectObj.transform.position = Pos;
         processingEffectObj.transform.rotation = Qua;
         return processingEffectObj;
     }
-    
-    public Decompositioner GenerateEffect(string resource_name,string EffectsPath,Vector3 Pos)
-    {
-        if (string.IsNullOrEmpty(resource_name))
-            return null;
-        EffectPool = IniEffectsPool(resource_name, EffectsPath,3);
-        if (EffectPool == null)
-            return null;
-        processingEffectObj = EffectPool.Rent();
-        processingEffectObj.transform.position = Pos;
-        return processingEffectObj;
-    }
-    
+        
     public static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
     {
         if (prefab != null)

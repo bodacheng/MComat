@@ -229,7 +229,7 @@ namespace HittingDetection
                                         if (hit_hitbox != null && hit_hitbox.Enabled)
                                         {
                                             _Used_Targets.Add(Hit_C.Key.transform);
-                                            WeaponEnergyExaust(Hit_C.Key.transform.position, Hit_C.Key.transform.rotation);
+                                            WeaponEnergyExaust(Hit_C.Value.pos, Hit_C.Value.qua);
                                             HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                             if (weaponHP > 0 && CurrentHP <= 0)
                                             {
@@ -273,7 +273,7 @@ namespace HittingDetection
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
                                         hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,Hit_C.Value.pos, Hit_C.Value.qua));
-                                        WeaponEnergyExaust(Hit_C.Key.transform.position, Hit_C.Key.transform.rotation);
+                                        WeaponEnergyExaust(Hit_C.Value.pos, Hit_C.Value.qua);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)

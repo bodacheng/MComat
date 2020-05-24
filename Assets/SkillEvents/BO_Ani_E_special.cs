@@ -72,6 +72,7 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
+            Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
             if (parentTarget != null)
             {
                 Ani_E.myConstraintSource.sourceTransform = parentTarget;
@@ -80,9 +81,8 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox.GetPositionConstraint().constraintActive = true;
                 Ani_E.processingHitBox.GetPositionConstraint().locked = true;
                 Ani_E.processingHitBox.GetPositionConstraint().translationOffset = Vector3.zero;
-                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
             }else{
-                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+                Ani_E.processingHitBox.GetPositionConstraint().constraintActive = false;
             }
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
             if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
@@ -229,9 +229,8 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox.GetPositionConstraint().SetSources(new List<ConstraintSource>{Ani_E.myConstraintSource});
                 Ani_E.processingHitBox.GetPositionConstraint().constraintActive = true;
                 Ani_E.processingHitBox.GetPositionConstraint().locked = true;
-                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
             }else{
-                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+                Ani_E.processingHitBox.GetPositionConstraint().constraintActive = false;
             }
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
             if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)

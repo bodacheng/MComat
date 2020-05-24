@@ -124,6 +124,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
     
     Decompositioner processingBlood;
+    string temp;
     void HitEffect(V_Damage v_Damage)
     {
         if (_Center._ResistanceManager.Resistance.Value > 0)
@@ -138,42 +139,22 @@ public partial class FightAttriCalReference : MonoBehaviour
         {
             switch (v_Damage.from_weapon.damage_type)
             {
-                case DamageType.slight_damage_forward:
-                    processingBlood = EffectsManager.GenerateEffect("light_hit",
-                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
-                    break;
-                case DamageType.light_damage_forward:
-                    processingBlood = EffectsManager.GenerateEffect("light_hit",
-                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
-                    break;
                 case DamageType.heavy_damage_forward:
-                    processingBlood = EffectsManager.GenerateEffect("heavy_hit",
-                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
+                    temp = "heavy_hit";
                     break;
                 case DamageType.supper_damage_forward:
-                    processingBlood = EffectsManager.GenerateEffect("super_hit",
-                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
+                    temp = "super_hit";
                     break;
                 default:
-                    processingBlood = EffectsManager.GenerateEffect("light_hit",
-                                                                   FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                                   v_Damage.damageHappenPoint,
-                                                                   v_Damage.CutRotation,
-                                                                   v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
+                    temp = "light_hit";
                     break;
             }
+            processingBlood = EffectsManager.GenerateEffect(
+                                temp,
+                                FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
+                                v_Damage.damageHappenPoint,
+                                v_Damage.CutRotation,
+                                v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
         }
     }
     
