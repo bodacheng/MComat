@@ -188,7 +188,6 @@ namespace FightScene
         public void LocalGameRestart()
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-            SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
         }
 
         // 本地系函数 而且目前有逻辑问题

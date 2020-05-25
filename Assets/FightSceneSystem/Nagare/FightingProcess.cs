@@ -23,9 +23,8 @@ namespace FightScene
 
         public override void ProcessEnter()
         {
-            AllMembers.Add(Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
-            AllMembers.Add(Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
-
+            DicAdd<Team, List<Data_Center>>.Add(AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+            DicAdd<Team, List<Data_Center>>.Add(AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
             BoundaryControllByGod.target.AllMembers = AllMembers;
             fightLogger.ReadyToLog(AllMembers);
             foreach (KeyValuePair<Team, List<Data_Center>> _set in AllMembers)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44892442, g: 0.49899286, b: 0.57570684, a: 1}
+  m_IndirectSpecularColor: {r: 0.44892442, g: 0.49899328, b: 0.5757072, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1729,7 +1729,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AT_coefficient: 1
-  HP_coefficient: 0.1
+  HP_coefficient: 0.2
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
   highhit_lastingTime: 0.65

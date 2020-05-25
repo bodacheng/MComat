@@ -36,12 +36,16 @@ namespace FightScene
                 foreach (int key in keys.Value)
                 {
                     CharDataInfo _one = MembersSets.Get(keys.Key, key);
-                    IEnumerator char_DC = _CharSetManager.CreateCharacter(_one);
-                    yield return char_DC;
-                    Data_Center data_Center = (Data_Center)char_DC.Current;
-                    data_Center.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(_one._NineAndTwo.SkillEntityList()));
-                    TeamMembers.Set(keys.Key, key, data_Center);
-                    CharDataInfoRef.Add(TeamMembers.Get(keys.Key, key), _one);
+                    Data_Center model = TeamMembers.Get(keys.Key, key);
+                    if (model == null)
+                    {
+                        IEnumerator char_DC = _CharSetManager.CreateCharacter(_one);
+                        yield return char_DC;
+                        model = (Data_Center)char_DC.Current;
+                    }
+                    model.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(_one._NineAndTwo.SkillEntityList()));
+                    TeamMembers.Set(keys.Key, key, model);
+                    DicAdd<Data_Center, CharDataInfo>.Add(CharDataInfoRef, TeamMembers.Get(keys.Key, key), _one);
                 }
             }
         }
