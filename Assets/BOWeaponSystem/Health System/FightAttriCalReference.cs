@@ -13,13 +13,13 @@ public partial class FightAttriCalReference : MonoBehaviour
         
     [Tooltip("当前攻击力")]
     public float AT = 10;
-
+    
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     KnockOffCount _knockOffCount = new KnockOffCount();
     BeHitCount _BeHitCount = new BeHitCount();    
-    
+
     V_Damage deathknockOff;
     bool gettingdamage;
     List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();//713添加

@@ -43,7 +43,6 @@ namespace FightScene
                         yield return char_DC;
                         model = (Data_Center)char_DC.Current;
                     }
-                    model.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(_one._NineAndTwo.SkillEntityList()));
                     TeamMembers.Set(keys.Key, key, model);
                     DicAdd<Data_Center, CharDataInfo>.Add(CharDataInfoRef, TeamMembers.Get(keys.Key, key), _one);
                 }
@@ -84,20 +83,20 @@ namespace FightScene
         }
 
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-        public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> ChracterSets, float extraHP)
+        public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> CharacterSets, float extraHP)
         {
-            yield return CharsLoad(ChracterSets);
+            yield return CharsLoad(CharacterSets);
             InstantiateCharsIconsAndFloatHPBar();
             TeamsFightInitialize(extraHP);
         }
-
+        
         protected void RefreshResistanceBar(Data_Center data_Center)
         {
             CharIconDic.TryGetValue(data_Center, out _tempSI);
             DOTween.To(() => _tempSI.ResistBar.value, (x) => _tempSI.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
             _tempSI.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
         }
-
+        
         protected void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
             CharIconDic.TryGetValue(data_Center, out _tempSI);

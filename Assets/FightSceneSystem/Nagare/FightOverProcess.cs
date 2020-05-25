@@ -9,19 +9,18 @@ namespace FightScene
         public FightOverProcess(NetFightScene _NetFightScene)
         {
             Step = SceneStep.FightOver;
-            nextProcessStep = SceneStep.FightSummary;
             EelementsInherit(_NetFightScene);
         }
-        
-        public override bool CanEnterOtherProcess()
+                
+        public override void ProcessEnd()
         {
-            return FightOverControl.target.CanGotoSummary.Value;
+            FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
         }
-
+        
         public override void ProcessEnter()
         {
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
-            switch (fightLogger.getWinner())
+            switch (fightLogger.GetWinner())
             {
                 case Team.player1:
                     mainProcessRunner.Run(FightOverControl.target.WINProcess());//这里是要根据情况的。。
@@ -37,6 +36,7 @@ namespace FightScene
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     break;
                 case FightEventType.Quest:
+                    mainProcessRunner.Run(FightOverControl.target.ShowRewards(999, 999));
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     foreach (CharDataInfo charDataInfo in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef.Values)
                     {

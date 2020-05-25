@@ -28,7 +28,6 @@ public class TeamConfig
     public LayerMask enemyShieldLayerMask;
     public LayerMask enemyAndEnemyWeaponLayerMask;
     public LayerMask mySensorAndWeaponTargetLayerMask;//不管是我的武器还是我的Sensor都是用这个layermask决定去检测哪些战场上的敌人信息
-    public int deadLayer;
 
     public static TeamConfig defaultSet = new TeamConfig(Team.none,new List<Team>());
 
@@ -111,6 +110,5 @@ public class TeamConfig
                     break;
             }
         }
-        deadLayer = 14;
     }
 }

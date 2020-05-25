@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UniRx;
 
 namespace FightScene
 {
@@ -18,7 +17,7 @@ namespace FightScene
         
         public override bool CanEnterOtherProcess()
         {
-            return fightLogger.gameOver.Value;
+            return fightLogger.GameOver.Value;
         }
 
         public override void ProcessEnter()
@@ -42,9 +41,10 @@ namespace FightScene
 
         public override void ProcessEnd()
         {
+            fightLogger.WatchMissionsAbandon();
             FightScene.FightCanvas.gameObject.SetActive(false);
             FightScene.PreparingCanvas.gameObject.SetActive(false);
-            mainProcessRunner.Run(FinalMoment(fightLogger.getWinner()));
+            mainProcessRunner.Run(FinalMoment(fightLogger.GetWinner()));
         }
 
         public override void LocalUpdate()

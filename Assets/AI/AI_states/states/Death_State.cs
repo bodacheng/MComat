@@ -6,10 +6,10 @@ using Skill;
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
 public class Death_State : Behavior
 {
-    private readonly string clip_name;
-    private readonly float stopRunningTime;    
-    private readonly GameObject processingBlood;
-    private float time_count;
+    readonly string clip_name;
+    readonly float stopRunningTime;
+    readonly GameObject processingBlood;
+    float time_count;
     Vector3 _xz;    
     bool touchedBoundary;
     bool dropped;
@@ -49,9 +49,10 @@ public class Death_State : Behavior
         _Animator.applyRootMotion = false;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
-        EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
-                                             newValue.damageHappenPoint, gameObject.transform.rotation,
-                                             _FightAttriCalReference.transform);
+        EffectsManager.GenerateEffect("super_hit",
+            FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
+            newValue.damageHappenPoint, gameObject.transform.rotation,
+            _FightAttriCalReference.transform);
         touchedBoundary = false;
         dropped = false;
         _xz = newValue.attacker._Center.WholeT.forward;
@@ -62,6 +63,7 @@ public class Death_State : Behavior
     {
         base.AI_State_exit();
         time_count = 0f;
+        _DATA_CENTER.IsDead.Value = false;
     }
 
     public override void _State_FixedUpdate1()
@@ -92,9 +94,6 @@ public class Death_State : Behavior
                 Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_count + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_count));
             }
         }
-        time_count += Time.fixedDeltaTime;
-        Sensor.enabled &= time_count <= stopRunningTime;
-        _AIStateRunner.enabled &= time_count <= stopRunningTime + 1f;
         time_count += Time.fixedDeltaTime;
     }
 }

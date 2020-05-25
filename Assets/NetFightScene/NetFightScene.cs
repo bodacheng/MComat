@@ -41,21 +41,21 @@ namespace FightScene
         [Space(11)]
         [Header("场地控制")]
         public BoundaryControllByGod _BoundaryControllByGod;
-
+        
         [Space(11)]
         public RectTransform PauseMenu;
-
+        
         [Space(11)]
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
-
+        
         // 主进程
         [Space(7)]
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
-
+        
         public static NetFightScene target;
-
+        
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
 
         void Awake()
@@ -82,7 +82,6 @@ namespace FightScene
             CountDownProcess countDownProcess = new CountDownProcess(this);
             StoryProcess storyProcess = new StoryProcess(this);
             FightOverProcess fightOverProcess = new FightOverProcess(this);
-            FightSummaryProcess fightSummaryProcess = new FightSummaryProcess(this);
 
             BasicTryProcess basicTryProcess = new BasicTryProcess(this);
 
@@ -91,7 +90,6 @@ namespace FightScene
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightSummary, fightSummaryProcess);
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.BasicTryTutorial, basicTryProcess);
             
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
@@ -111,7 +109,7 @@ namespace FightScene
                 RealTimeGameProcessManager.target.FightTeam1.LetAllCharactersChangeToTestMode();
             else
                 RealTimeGameProcessManager.target.FightTeam1.ModeStart();
-                
+
             if (RealTimeGameProcessManager.target.FightTeam2.TeamMode == TeamMode.test)
                 RealTimeGameProcessManager.target.FightTeam2.LetAllCharactersChangeToTestMode();
             else
@@ -132,6 +130,8 @@ namespace FightScene
         // 这个函数应该包括一些更深层的考虑。
         public void ReturnToFront()
         {
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
+            
             //Position_Set_Executor.Instance.P_sets.Clear();
             List<Data_Center> player1 = RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values;
             List<string> dontdestroy = new List<string>();
@@ -202,12 +202,6 @@ namespace FightScene
         {
             PauseMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
-        }
-
-        public void PassFightSummary()
-        {
-            FightSummaryProcess process = (FightSummaryProcess)FSceneProcessesRunner.Main.GetProcess(SceneStep.FightSummary);
-            process.enternext.Value = true;
         }
     }
 }

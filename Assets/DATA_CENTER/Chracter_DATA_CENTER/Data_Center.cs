@@ -169,8 +169,7 @@ public partial class Data_Center : MonoBehaviour
     //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
     public void DeathInitialize()
     {
-        gameObject.layer = _TeamConfig.deadLayer;
-        FightDataRef.ChangeLayerForAllSelfColliders(_TeamConfig.deadLayer);
+        FightDataRef.ChangeLayerForAllSelfColliders(0);
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

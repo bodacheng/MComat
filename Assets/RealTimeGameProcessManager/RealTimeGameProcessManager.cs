@@ -11,17 +11,17 @@ namespace FightScene
         [Header("Basic Element")]
         public CameraManager _CameraManager;
         public MobileInputsManager _mobileInputsManager;
-
+        
         [Header("Watch Mode")]
         [Space(6)]
         public Button WatchModeButton;
-
+        
         [Header("Auto BUtton")]
         [Space(6)]
         public Button autoBUtton;
         public Image _C_button;
         public Image _AI_button;
-
+        
         [Header("Messages")]
         [Space(6)]
         public Text Messages;
@@ -105,7 +105,7 @@ namespace FightScene
             focusingChar = _char;
             Refresh();
         }
-
+        
         public IEnumerator LoadGame(StageScriptableObject stage)
         {
             switch (stage.Team1Mode)
@@ -121,7 +121,7 @@ namespace FightScene
                     break;
             }
             FightTeam1.TeamMode = stage.Team1Mode;
-
+            
             switch (stage.Team2Mode)
             {
                 case TeamMode.multiraid:
@@ -135,19 +135,18 @@ namespace FightScene
                     break;
             }
             FightTeam2.TeamMode = stage.Team2Mode;
-            
+
             FightTeam1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
             FightTeam2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
-
             FightTeam1.teamConfig = heroTeamConfig;
             FightTeam2.teamConfig = EnemyTeamConfig;
-
+            
             yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.team1_ExtraHP);
             yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.team2_ExtraHP);
 
             FightTeam1.ArrangeAllTeamMembersToPosition(FightTeam1.TeamMembers);
             FightTeam2.ArrangeAllTeamMembersToPosition(FightTeam2.TeamMembers);
-
+            
             switch (playerTeam)
             {
                 case Team.player1:

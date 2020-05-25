@@ -58,7 +58,7 @@ namespace FightScene
             if (currentProcess != null)
                 currentProcess.ProcessEnd();
             lastProcess = currentProcess;
-            currentProcess = SceneProcessDictionary[sceneStep];
+            currentProcess = SceneProcessDictionary.ContainsKey(sceneStep) ? SceneProcessDictionary[sceneStep] : null;
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnter();

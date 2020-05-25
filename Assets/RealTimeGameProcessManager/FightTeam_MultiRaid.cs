@@ -69,13 +69,14 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
+                a_char.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()));
                 a_char.FightDataRef.CurrentHp.Value += extraHP;
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(a_char, x, maxHp);
                 });
-
+                
                 a_char._ResistanceManager.Resistance.Value = 0;
                 a_char._ResistanceManager.Resistance.Subscribe(x =>
                 {
