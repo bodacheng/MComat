@@ -114,8 +114,6 @@ public class BasicTryProcess : FSceneProcess
     
     public override void LocalUpdate()
     {
-        RealTimeGameProcessManager.target.FightGUIProcess();
-
         if (UnityEngine.Input.GetKey(KeyCode.Escape))
         {
             FightScene.PauseScene();

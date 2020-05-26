@@ -92,7 +92,7 @@ namespace FightScene
             }
             if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
             {
-                //TurnModeEnemySideAutoMemberShaft();
+                BarsPositionUpdate();
             }
         }
 
@@ -100,6 +100,7 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
+                a_char.FightDataRef.CurrentHp = new ReactiveProperty<float>();
                 a_char.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()));
                 a_char.FightDataRef.CurrentHp.Value += extraHP;
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
@@ -107,6 +108,8 @@ namespace FightScene
                 {
                     RefreshHPBar(a_char, x, maxHp);
                 });
+
+                a_char._ResistanceManager.Resistance = new ReactiveProperty<int>();
                 a_char._ResistanceManager.Resistance.Value = 0;
                 a_char._ResistanceManager.Resistance.Subscribe(x =>
                 {
@@ -177,29 +180,34 @@ namespace FightScene
             SideCharIcon _SideCharIcon;
             foreach (Data_Center a_char in TeamMembers.values)
             {
+                //  时间刷新整备
                 if (!RefreshTimeDic.ContainsKey(a_char))
                 {
                     RefreshTimeDic.Add(a_char, 0);
                 }
-                _SideCharIcon = Instantiate(button_prefab);
-                _SideCharIcon.name = a_char.name + " ICon";
+                //  SideCharIcon整备
+                if (!(CharIconDic.ContainsKey(a_char) && CharIconDic[a_char] != null))
+                {
+                    _SideCharIcon = Instantiate(button_prefab);
+                    _SideCharIcon.name = a_char.name + " ICon";
+                    _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
+                    void action1()
+                    {
+                        ReadyForNextMemberOnTheShow(a_char);
+                    }
+                    _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
+                    CharDataInfo characterDataInfo = CharDataInfoRef[a_char];
+                    CharConfig _charConfig = MonstersConfigTable.GetCharConfig(characterDataInfo.ResourceID);
+                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID), _charConfig._zokusei);
+                    _SideCharIcon.gameObject.SetActive(true);
+                }
+                else
+                {
+                    _SideCharIcon = CharIconDic[a_char];
+                }
                 _SideCharIcon.IniHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
-                _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
-                void action1()
-                {
-                    ReadyForNextMemberOnTheShow(a_char);
-                }
-                _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
-                CharDataInfo characterDataInfo = CharDataInfoRef[a_char];
-                if (characterDataInfo == null)
-                {
-                    Debug.Log("角色信息字典严重错误");
-                    continue;
-                }
-                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(characterDataInfo.ResourceID);
-                _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID), characterResourceInfo._zokusei);
                 _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
-                _SideCharIcon.gameObject.SetActive(true);
+
                 if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
                 {
                     _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
@@ -211,10 +219,18 @@ namespace FightScene
                     _SideCharIcon.transform.localScale = Vector3.one;
                 }
                 DicAdd<Data_Center, SideCharIcon>.Add(CharIconDic, a_char, _SideCharIcon);
+
+                // hitCombo整备
+                if (rotationModeHitCombo == null)
+                {
+                    rotationModeHitCombo = Instantiate(HitCombo);
+                    rotationModeHitCombo.name = teamConfig.myTeam + "HitCombo";
+                }
+
+                // 魔法按键
                 _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
             }
-            rotationModeHitCombo = Instantiate(HitCombo);
-            rotationModeHitCombo.name = teamConfig.myTeam + "HitCombo";
+
         }
 
         /// <summary>

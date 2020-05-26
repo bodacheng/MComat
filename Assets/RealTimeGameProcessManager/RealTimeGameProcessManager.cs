@@ -43,15 +43,7 @@ namespace FightScene
         {
             target = this;
         }
-        
-        public void FightGUIProcess()
-        {
-            if (FightTeam1.teamConfig.myTeam == playerTeam)
-                FightTeam2.BarsPositionUpdate();
-            if (FightTeam2.teamConfig.myTeam == playerTeam)
-                FightTeam1.BarsPositionUpdate();
-        }
-        
+                
         public void SwitchToWatchMode() // button behaviour
         {
             SwitchToCMode(null, false);
@@ -191,7 +183,6 @@ namespace FightScene
         {
             FightTeam1.LocalFightingUpdate();
             FightTeam2.LocalFightingUpdate();
-            FightGUIProcess();
 
             if (focusingChar != null)
             {

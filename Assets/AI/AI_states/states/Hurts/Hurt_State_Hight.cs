@@ -35,9 +35,4 @@ public partial class Hurt_State : Behavior
             }
         }
     }
-    
-    void HighDamageEnd()
-    {
-        _BasicPhysicSupport.SetUsingGravity(true);   
-    }
 }

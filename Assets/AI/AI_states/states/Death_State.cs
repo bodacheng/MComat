@@ -63,6 +63,7 @@ public class Death_State : Behavior
     {
         base.AI_State_exit();
         time_count = 0f;
+        _BasicPhysicSupport.SetUsingGravity(true);
         _DATA_CENTER.IsDead.Value = false;
     }
 
