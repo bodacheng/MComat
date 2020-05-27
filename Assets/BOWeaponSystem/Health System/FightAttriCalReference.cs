@@ -85,7 +85,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
 
     public bool IfMyBody(Collider collider) => myColliders.Contains(collider);
-
+    
     public void FindAllSelfCollidersAndIgnoreCollision()
     {
         myColliders = new List<Collider>();
@@ -207,6 +207,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             }
         );
     }//打别人计数
+    
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     
     // event 攻击系列。暂时不再使用

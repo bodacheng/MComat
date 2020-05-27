@@ -22,6 +22,7 @@ namespace FightScene
 
         public override void ProcessEnter()
         {
+            FightScene.PreparingCanvas.gameObject.SetActive(false);
             AllMembers.Clear();
             DicAdd<Team, List<Data_Center>>.Add(AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
             DicAdd<Team, List<Data_Center>>.Add(AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
@@ -36,7 +37,6 @@ namespace FightScene
             }
             FightScene.FightCanvas.gameObject.SetActive(true);
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
-            FightScene.PreparingCanvas.gameObject.SetActive(false);
             FightScene.PressedStartButton();
         }
 
@@ -44,7 +44,6 @@ namespace FightScene
         {
             fightLogger.WatchMissionsAbandon();
             FightScene.FightCanvas.gameObject.SetActive(false);
-            FightScene.PreparingCanvas.gameObject.SetActive(false);
             mainProcessRunner.Run(FinalMoment(fightLogger.GetWinner()));
         }
 

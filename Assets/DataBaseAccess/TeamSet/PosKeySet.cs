@@ -12,7 +12,7 @@ public class PosKeySet
     
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new PosNumWithLocalKey[3] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
+        PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
     }
     
     public IEnumerator LoadTeamBasedOnAccountInfo()
@@ -25,15 +25,15 @@ public class PosKeySet
                 GetMonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = AccountCharsSet.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
-                    CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
-                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, characterDataInfo);
+                    CharDataInfo charDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
+                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, charDataInfo);
                 }
             }
         }
         yield return multiDictionary;
     }
     
-    public void SetPosMemInfoByLocalID(int posNum,string monsterofplayerid)
+    public void SetPosMemInfoByLocalID(int posNum, string monsterofplayerid)
     {
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {

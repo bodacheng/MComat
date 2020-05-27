@@ -35,19 +35,19 @@ namespace FightScene
         public Text diamondrewards;
 
         public ReactiveProperty<bool> CanGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
-
+        
         readonly UnityEngine.Events.UnityAction ReturnToMainMenu = () =>
         {
             SceneManager.LoadScene(1);
         };
-
+        
         public static FightOverControl target;
-
+        
         void Awake()
         {
             target = this;
         }
-
+        
         //重新开战意味着所有资源重新加载？
         readonly UnityEngine.Events.UnityAction RestartGame = () =>
         {
@@ -57,6 +57,11 @@ namespace FightScene
         // 战斗结束后统计技能石升级情况时的画面显示
         public IEnumerator ShowSKillSets(FightTeam fightTeam)
         {
+            foreach (Transform child in IconAndSKillShowUISetT) 
+            {
+                Destroy(child.gameObject);
+            }
+            
             foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in fightTeam.CharDataInfoRef)
             {
                 IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);

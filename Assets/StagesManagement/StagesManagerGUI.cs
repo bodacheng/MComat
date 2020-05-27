@@ -403,8 +403,11 @@ public class StagesManagerGUI : Editor {
             GUILayout.Space(20f);
         }
         
-        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, selectskillrarelevel);
-        
+        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, 
+            new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, 
+            new bool[4] { true, true, true, true },
+            selectskillrarelevel);
+                    
         int index2 = 0;
         selectedskillindex = 0;
         foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)

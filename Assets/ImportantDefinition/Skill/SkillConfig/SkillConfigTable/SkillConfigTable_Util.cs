@@ -134,7 +134,7 @@ public partial class SkillConfigTable
         return _SkillConfig;
     }
     
-    public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, int rarelevel)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
+    public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, bool[] EXType, int rarelevel)// close, near, far , out , rarelevel = -1代表全部，0代表无星级技能
     {
         Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>
         {
@@ -146,9 +146,32 @@ public partial class SkillConfigTable
             if (SkillConfig.RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2],ranges[3]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
                 if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
+                {
+                    switch (one.SP_LEVEL)
+                    {
+                        case 0:
+                        if (!EXType[0])
+                            continue;
+                        break;
+                        case 1:
+                        if (!EXType[1])
+                            continue;
+                        break;
+                        case 2:
+                         if (!EXType[2])
+                            continue;   
+                        break;
+                        case 3:
+                        if (!EXType[3])
+                            continue;
+                        break;
+                    }
                     SkillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
+                }
                 else
+                {
                     Debug.Log("重复的技能ID？？："+one.RECORD_ID);
+                }
             }
         }
         return SkillIDAndNameDic;

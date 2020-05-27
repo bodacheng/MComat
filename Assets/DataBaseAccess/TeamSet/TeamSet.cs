@@ -105,6 +105,6 @@ namespace dataAccess
     {
         story = 1,
         arena3V3 = 2,
-        selfFight = 3
+        SelfFight = 3
     }
 }

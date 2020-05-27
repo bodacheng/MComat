@@ -27,7 +27,7 @@ public class StageScriptableObject : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
 
-    public float team1_ExtraHP,team2_ExtraHP;
+    public float team1_ExtraHP, team2_ExtraHP;
     public LocalFight localFight = new LocalFight();
     
     public FightEventType _fightEventType = FightEventType.Arena;
@@ -72,6 +72,17 @@ public class StageScriptableObject : ScriptableObject
         stage._fightEventType = FightEventType.Arena;
         return stage;
     }
+    
+    public static StageScriptableObject RandomSkillTestStage()
+    {
+        StageScriptableObject stage = CreateInstance<StageScriptableObject>();
+        stage.localFight = StagesManager.RandomSkillTest();
+        stage.BattleGroundID = 2;
+        stage.Team1Mode = TeamMode.rotation;
+        stage.Team2Mode = TeamMode.rotation;
+        stage._fightEventType = FightEventType.SkillTest;
+        return stage;
+    }
 }
 
 // 这个东西是用来规定我每一场战斗结束之后所自动加载的事件
@@ -84,6 +95,7 @@ public enum FightEventType
     Quest = 1,
     Arena = 2,
     Self = 4,
+    SkillTest = 5,
 }
 
 public enum TeamMode

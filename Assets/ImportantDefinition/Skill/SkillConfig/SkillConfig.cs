@@ -48,7 +48,7 @@ namespace Skill
             ATTACK_WEIGHT = 1;
             HP_WEIGHT = 1;
             STATE_TYPE = BehaviorType.NONE;
-            SP_LEVEL = 1;
+            SP_LEVEL = 0;
             EVENT_CODE = null;
         }
                 

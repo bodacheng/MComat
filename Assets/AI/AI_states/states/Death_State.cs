@@ -64,9 +64,10 @@ public class Death_State : Behavior
         base.AI_State_exit();
         time_count = 0f;
         _BasicPhysicSupport.SetUsingGravity(true);
+        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _DATA_CENTER.IsDead.Value = false;
     }
-
+    
     public override void _State_FixedUpdate1()
     {
         if (!touchedBoundary)

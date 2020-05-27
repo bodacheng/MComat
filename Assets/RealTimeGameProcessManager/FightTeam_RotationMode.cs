@@ -12,13 +12,13 @@ namespace FightScene
         Data_Center waitingToChangeMember; // 不能任何时候点击切换角色按钮都切换，那样就乱了。
         IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
         Text rotationModeHitCombo;
-
+        
         public override List<Transform> TeamMemberTransforms()
         {
             List<Transform> transforms = new List<Transform>
-        {
-            RotationMode_fightingMember.transform
-        };
+            {
+                RotationMode_fightingMember.transform
+            };
             return transforms;
         }
 
@@ -145,6 +145,10 @@ namespace FightScene
 
         bool CanChangeToThisMember(Data_Center targetMember)
         {
+            if (targetMember.IsDead.Value)
+            {
+                return false;
+            }
             if (RefreshTimeDic[targetMember] > 0)
             {
                 return false;

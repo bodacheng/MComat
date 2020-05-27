@@ -33,12 +33,12 @@ namespace mainMenu
         public Transform RotationTeam1T,RotationTeam2T;
         public HeroIcon team11_R, team12_R, team13_R;
         public HeroIcon team21_R, team22_R, team23_R;
-
+        
         readonly IDictionary<int, HeroIcon> team1ButtonDic_M = new Dictionary<int, HeroIcon>();
         readonly IDictionary<int, HeroIcon> team2ButtonDic_M = new Dictionary<int, HeroIcon>();
         readonly IDictionary<int, HeroIcon> team1ButtonDic_R = new Dictionary<int, HeroIcon>();
         readonly IDictionary<int, HeroIcon> team2ButtonDic_R = new Dictionary<int, HeroIcon>();
-
+        
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
         Team focusingTeam;
@@ -142,7 +142,7 @@ namespace mainMenu
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
-            FightPreparePage.target.PreLoad(stage, TeamSetGameMode.selfFight);
+            FightPreparePage.target.PreLoad(stage, TeamSetGameMode.SelfFight);
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, true);
         }
         
@@ -336,7 +336,7 @@ namespace mainMenu
                 break;
                 default:
                     Debug.Log("logic error");
-                    return;
+                return;
             }
             if (targetTeamIcons == null) targetTeamIcons = new Dictionary<int, HeroIcon>();
             else targetTeamIcons.Clear();
@@ -364,24 +364,11 @@ namespace mainMenu
 
         public IEnumerator INITeamPosButtons()
         {
-            IniMutiRaidModeCharIcons(
-                new List<HeroIcon> { team1back, team1left,team1front,team1right,team1_1,team1_2,team1_3,team1_4,team1_5,team1_6},
-                Team.player1
-            );
-            IniMutiRaidModeCharIcons(
-                new List<HeroIcon> { team2back, team2left,team2front,team2right,team2_1,team2_2,team2_3,team2_4,team2_5,team2_6},
-                Team.player2
-            );
-            
-            IniRotationModeCharIcons(
-                new List<HeroIcon> { team11_R, team12_R, team13_R },
-                Team.player1
-            );
-            
-            IniRotationModeCharIcons(
-                new List<HeroIcon> { team21_R, team22_R, team23_R },
-                Team.player2
-            );
+            IniMutiRaidModeCharIcons(new List<HeroIcon> { team1back, team1left,team1front,team1right,team1_1,team1_2,team1_3,team1_4,team1_5,team1_6}, Team.player1);
+            IniMutiRaidModeCharIcons(new List<HeroIcon> { team2back, team2left,team2front,team2right,team2_1,team2_2,team2_3,team2_4,team2_5,team2_6}, Team.player2);
+
+            IniRotationModeCharIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
+            IniRotationModeCharIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
                        
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()

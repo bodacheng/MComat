@@ -27,6 +27,7 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
+        FightScene.PreparingCanvas.gameObject.SetActive(true);
         mainProcessRunner.Run(EnterProcess());
     }
     

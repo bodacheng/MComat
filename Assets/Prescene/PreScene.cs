@@ -205,16 +205,23 @@ namespace mainMenu
         
         public void AskIfLoadFight(StageScriptableObject stage)
         {
-            LoadingCanvas.target.ArrangeValiationWindow(delegate { LoadFight(stage); }, "开打？");
+            LoadingCanvas.target.ArrangeValiationWindow(delegate { 
+            _CharSetManager.PreventTheseMyModelsFromDestroying(stage.GetTeam1EnterRingLocalIds(stage.localFight));
+            LoadFight(stage); }, "开打？");
         }
         
         public void LoadFight(StageScriptableObject stage)//6.29 这个环节可能要进一步研究。进入战斗场景要做的事情安说很多，包括loadscene什么的，而这些都应该在这里进行。
         {
             FightSceneNote.nextBattle = stage;
-            _CharSetManager.PreventTheseMyModelsFromDestroying(FightSceneNote.nextBattle.GetTeam1EnterRingLocalIds(FightSceneNote.nextBattle.localFight));
             SkillStonesBox.PreventCellsFromDestroy();
             MySkillStonesReader.PreventStonesFromDestroy();
             SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
+        }
+        
+        public void BeginSkillTest()
+        {
+            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage();
+            LoadFight(stage);
         }
 
         [EnumAction(typeof(MainSceneStep))]

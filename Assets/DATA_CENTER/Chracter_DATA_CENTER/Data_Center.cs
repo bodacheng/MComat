@@ -158,6 +158,7 @@ public partial class Data_Center : MonoBehaviour
 
     public void Step3Initialize(TeamConfig _TeamConfig,float nineSkillHp)//战斗必备
     {
+        Debug.Log(_TeamConfig.myTeam);
         BodyElementTagAndLayerSet(_TeamConfig);//这一步和下面的changeLayerForAllSelfColliders为什么分开？没什么为什么。就是给写开了。
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         FightDataRef.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);

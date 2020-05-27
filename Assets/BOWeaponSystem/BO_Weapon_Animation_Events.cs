@@ -260,45 +260,32 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     }
 
     public void SetRightHandMarkerManager (int in_or_out = 1)
-	{
+    {
         hiddenMethods.RegisterBodyPartWeapon(right_hand,in_or_out);
     }
-
+    
     public void SetLeftHandMarkerManager(int in_or_out = 1)
     {
         hiddenMethods.RegisterBodyPartWeapon(left_hand,in_or_out);
     }
-
+    
     public void SetLeftFootMarkerManager(int in_or_out = 1)
     {
         hiddenMethods.RegisterBodyPartWeapon(left_foot,in_or_out);
     }
-
+    
     public void SetRightFootMarkerManager(int in_or_out = 1)
     {
         hiddenMethods.RegisterBodyPartWeapon(right_foot,in_or_out);
     }
-
+    
     public void SetHeadMarkerManager(int in_or_out = 1)
     {
         hiddenMethods.RegisterBodyPartWeapon(head,in_or_out);
     }
-
+    
     public void SetTailMarkerManager(int in_or_out = 1)
     {
         hiddenMethods.RegisterBodyPartWeapon(tail,in_or_out);
-    }
-    
-    // 需要非常谨慎使用。如果这里改变的不是角色一切collider那么就可能产生无敌无法恢复等问题。
-    public void Invincible(AnimationEvent e)
-    {
-        if (e.intParameter == 1)
-        {
-            myownheath.ChangeLayerForAllSelfColliders(0);
-        }
-        else if (e.intParameter == 0)
-        {
-            myownheath.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
-        }         
     }
 }
