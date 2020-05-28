@@ -69,10 +69,10 @@ namespace FightScene
             }
             autoBUtton.onClick.RemoveAllListeners();
             autoBUtton.onClick.AddListener(SwitchAutoMode);
-        
+            
             FightTeam1.Refresh();
             FightTeam2.Refresh();
-        
+            
             if (focusingChar == null)
             {
                 _mobileInputsManager.TurnOffButtons();
@@ -177,17 +177,6 @@ namespace FightScene
             FightTeam1.Clear();
             FightTeam2.Clear();
             _mobileInputsManager.Clear();
-        }
-
-        public void FightingStepProcess()
-        {
-            FightTeam1.LocalFightingUpdate();
-            FightTeam2.LocalFightingUpdate();
-
-            if (focusingChar != null)
-            {
-                _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);//!>>!>!>!!??!
-            }
         }
 
         void OnGUI()

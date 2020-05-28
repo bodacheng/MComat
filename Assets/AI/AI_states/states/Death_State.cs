@@ -65,7 +65,6 @@ public class Death_State : Behavior
         time_count = 0f;
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
-        _DATA_CENTER.IsDead.Value = false;
     }
     
     public override void _State_FixedUpdate1()
@@ -89,7 +88,6 @@ public class Death_State : Behavior
                 _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.velocity = Vector3.zero;
                 time_count = 0;//开始针对躺地时间记时
-                //Debug.Log(gameObject + "pos:"+ gameObject.transform.position + this._Rigidbody.useGravity);
             }else{
                 gameObject.transform.position += 
                 _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_count + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_count)) +

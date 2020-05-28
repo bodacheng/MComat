@@ -81,7 +81,7 @@ namespace FightScene
         public virtual void ArrangeAllTeamMembersToPosition(MultiDictionary<int, int, Data_Center> heromultiDictionary)
         {
         }
-
+        
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
         public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> CharacterSets, float extraHP)
         {
@@ -89,46 +89,49 @@ namespace FightScene
             InstantiateCharsIconsAndFloatHPBar();
             TeamsFightInitialize(extraHP);
         }
-        
+
+        SideCharIcon SideCharIcon;
         protected void RefreshResistanceBar(Data_Center data_Center)
         {
-            CharIconDic.TryGetValue(data_Center, out _tempSI);
-            DOTween.To(() => _tempSI.ResistBar.value, (x) => _tempSI.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
-            _tempSI.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
+            CharIconDic.TryGetValue(data_Center, out SideCharIcon);
+            DOTween.To(() => SideCharIcon.ResistBar.value, (x) => SideCharIcon.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
+            SideCharIcon.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
         }
         
+        SideCharIcon SideCharIcon2;
         protected void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
-            CharIconDic.TryGetValue(data_Center, out _tempSI);
-            _tempSI.HpText.text = current_hp.ToString();
-            DOTween.To(() => _tempSI.HpBar.value, (x) => _tempSI.HpBar.value = x, current_hp / wholeHP, 0.2f);
+            CharIconDic.TryGetValue(data_Center, out SideCharIcon2);
+            SideCharIcon2.HpText.text = current_hp.ToString();
+            DOTween.To(() => SideCharIcon2.HpBar.value, (x) => SideCharIcon2.HpBar.value = x, current_hp / wholeHP, 0.2f);
         }
 
         //这个刷新是倾向于画面制御
+        SideCharIcon SideCharIcon3;
         public virtual void Refresh()
         {
             foreach (Data_Center _datacenter in TeamMembers.values)
             {
-                CharIconDic.TryGetValue(_datacenter, out _tempSI);
+                CharIconDic.TryGetValue(_datacenter, out SideCharIcon3);
                 if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
                 {
-                    _tempSI.transform.localScale = _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
-                    _tempSI.transform.SetParent(sideIconsContainer.transform);
-                    _tempSI.focusingCharIcon.gameObject.SetActive(true);
-                    _tempSI.RecallBars();
+                    SideCharIcon3.transform.localScale = _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                    SideCharIcon3.transform.SetParent(sideIconsContainer.transform);
+                    SideCharIcon3.focusingCharIcon.gameObject.SetActive(true);
+                    SideCharIcon3.RecallBars();
                 }
                 else
                 {
-                    _tempSI.focusingCharIcon.gameObject.SetActive(false);
-                    _tempSI.transform.SetParent(_targetCanvas.transform);
+                    SideCharIcon3.focusingCharIcon.gameObject.SetActive(false);
+                    SideCharIcon3.transform.SetParent(_targetCanvas.transform);
                 }
             }
         }
-
+        
         public virtual void LocalFightingUpdate()
         {
         }
-
+        
         public bool IfAllCharsPreparedForBattle()
         {
             foreach (Data_Center oneMember in TeamMembers.values)
@@ -138,7 +141,7 @@ namespace FightScene
             }
             return true;
         }
-
+        
         public void LetAllCharactersStartOff()
         {
             foreach (Data_Center oneMember in TeamMembers.values)
@@ -156,7 +159,7 @@ namespace FightScene
                 oneMember._MyBehaviorRunner.ChangeToTestMode();
             }
         }
-
+        
         // 队伍模式对应行为运行第一步。
         public virtual void ModeStart()
         {

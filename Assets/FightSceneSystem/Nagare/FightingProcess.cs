@@ -53,7 +53,9 @@ namespace FightScene
             {
                 FightScene.PauseScene();
             }
-            RealTimeGameProcessManager.target.FightingStepProcess();
+
+            RealTimeGameProcessManager.target.FightTeam1.LocalFightingUpdate();
+            RealTimeGameProcessManager.target.FightTeam2.LocalFightingUpdate();
         }
 
         IEnumerator FinalMoment(Team winner)
