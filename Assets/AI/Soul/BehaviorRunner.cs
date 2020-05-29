@@ -66,9 +66,7 @@ namespace Soul
                     controller.PlayerControll(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
                     #endregion
                 }
-                
-                controller.Resetter(this);
-                
+                controller.Resetter(this);                
                 if (now_Behavior != null)
                 {
                     now_Behavior._State_Update();
@@ -133,13 +131,18 @@ namespace Soul
         
         public void ChangeState(string num, V_Damage newvalue)
         {
+            if (GetNowState().StateKey == "Empty")
+            {
+                Debug.Log(this + " special case");
+                return;// 找不到轮番模式下多个角色可能同时在场的原因，怀疑可能是因为待机角色因某种角色“受伤”而从empty状态脱离
+            }
             BehaviourDic.TryGetValue(num, out try_Behavior);
             if (now_Behavior != null)
                 now_Behavior.AI_State_exit();
-
+            
             last_Behavior = now_Behavior;
             now_Behavior = try_Behavior;
-
+            
             if (now_Behavior == null)
             {
                 Debug.Log("尝试读取未定义的状态" + num);

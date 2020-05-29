@@ -66,10 +66,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         }
         
         //注意看0被空出来是和添加 删除有效武器列表中的0参数有关
-        DamageType damageType;
-        Decompositioner target_hitbox;
         void SetThisWeaponDamageTypeByNum(int heavynum, BO_Marker_Manager theweapon)
         {
+            DamageType damageType;
             switch (heavynum)
             {
                 case -1:
@@ -102,11 +101,11 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
             theweapon.SetDamageType(damageType);
         }
-
-        readonly Decompositioner processingEffectObj;
+        
         ConstraintSource myConstraintSource;
         void RegisterBodyPartWeapon(Transform t)
         {
+            Decompositioner target_hitbox = null;
             if (t != null && !BEs.bodyPartsWeaponRegisterDic.ContainsKey(t))
             {
                 BEs.bodyPartsWeaponRegisterDic.Add(t, null);
@@ -115,25 +114,23 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             {
                 target_hitbox = default_hitboxPool.Rent();
                 BEs.bodyPartsWeaponRegisterDic[t] = target_hitbox;
-                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
-                
-                
+                target_hitbox._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
             }
             myConstraintSource.sourceTransform = t;
             myConstraintSource.weight = 1;
-            BEs.bodyPartsWeaponRegisterDic[t].transform.position = t.position;
-            BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
-            BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().constraintActive = true;
-            BEs.bodyPartsWeaponRegisterDic[t].GetPositionConstraint().locked = true;
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetTeamConfig(BEs._TeamConfig);
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
-            BEs.bodyPartsWeaponRegisterDic[t]._HitBox.MarkersEnablingStarts();
+            target_hitbox.transform.position = t.position;
+            target_hitbox.GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
+            target_hitbox.GetPositionConstraint().constraintActive = true;
+            target_hitbox.GetPositionConstraint().locked = true;
+            target_hitbox._HitBox.SetTeamConfig(BEs._TeamConfig);
+            target_hitbox._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
+            target_hitbox._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
+            target_hitbox._HitBox.MarkersEnablingStarts();
             
             if (FightGlobalSetting.HitBoxLogger)
             {
-                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.GeneratedByStateKey = BEs.myownheath._Center._MyBehaviorRunner.GetNowState().StateKey;
-                BEs.bodyPartsWeaponRegisterDic[t]._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+                target_hitbox._HitBox.GeneratedByStateKey = BEs.myownheath._Center._MyBehaviorRunner.GetNowState().StateKey;
+                target_hitbox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }
         
@@ -141,17 +138,19 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         {
             if (!BEs.bodyPartsWeaponRegisterDic.ContainsKey(t))
             {
+                Debug.Log("邪门1："+ t);
                 return;
             }
             if (BEs.bodyPartsWeaponRegisterDic[t] != null)
             {
-                target_hitbox = BEs.bodyPartsWeaponRegisterDic[t];
+                Decompositioner target_hitbox = BEs.bodyPartsWeaponRegisterDic[t];
                 BEs.bodyPartsWeaponRegisterDic[t] = null;
                 target_hitbox.GetPositionConstraint().constraintActive = false;
                 default_hitboxPool.Return(target_hitbox); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
                 target_hitbox._HitBox.SetDectionTargetsUnion(null);//为什么要先把hitbox返回对象池内才执行SetDectionTargetsUnion(null)呢，因为disablemarker在返回对象池的操作里，如果不先disablemarker的话，会导致检测过程中找不到used_targets
             }
         }
+        
         public void RegisterBodyPartWeapon(Transform t, int hit_type) //hit_type == 0: clear ;hit_type != 0 : in
         {
             if (hit_type != 0)
@@ -188,7 +187,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         bodyparts = bodyPartsWeaponRegisterDic.Keys.ToList();
         for (int i = 0; i < bodyparts.Count;i++)
         {
-            if (bodyparts[i] !=null)
+            if (bodyparts[i] != null)
             {
                 hiddenMethods.RemoveBodyPartWeapon(bodyparts[i]);
             }

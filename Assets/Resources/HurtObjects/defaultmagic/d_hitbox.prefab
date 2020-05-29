@@ -45,19 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startActivated: 1
+  ActivateAfterTime: 0
+  SpecificTarget: 0
   damage_type: 1
   _WeaponMode: 3
-  _WeaponPosAdjustMode: 1
   weaponHP: -1
   onGroundMagic: 0
   effectSpreadOnBody: 0
-  _specialApply: 0
+  zokusei: 0
+  muzzle: 
+  ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
-  muzzle: 
-  explosionEffect: 
-  zokusei: 0
 --- !u!114 &1062223919313163292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,9 +72,11 @@ MonoBehaviour:
   _HitBox: {fileID: 7007343582443700653}
   TrackControl: {fileID: 0}
   DestructionDelay: -1
-  stop_emission_delay: 0
+  stop_emission_delay: -1
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
+  Attachments: []
+  Counter: 0
 --- !u!1 &1420864978612344187
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempPos: {x: 0, y: 0, z: 0}
   _layers:
     serializedVersion: 2
     m_Bits: 0
@@ -127,4 +127,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 0.6
-  mode: 2

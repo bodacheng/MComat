@@ -26,7 +26,6 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     public override Decompositioner Rent()
     {
         if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
-
         Decompositioner instance = null;
         if (q.Count > 0)
         {
@@ -39,7 +38,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
                 }
                 if (q[index].gameObject.activeSelf)
                 {
-                    Debug.Log("h変ですね" + q[index].gameObject);
+                    Debug.Log("不可解错误" + q[index].gameObject + " index:"+ index);
                 }
             }
         }
@@ -65,6 +64,8 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         instance.Phase = 0;
         base.OnBeforeReturn(instance);
+        if (instance.gameObject.activeSelf)
+            Debug.Log(instance + "??");
     }
 
     protected override void OnBeforeRent(Decompositioner instance)

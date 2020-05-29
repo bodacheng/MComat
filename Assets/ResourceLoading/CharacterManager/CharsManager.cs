@@ -12,6 +12,10 @@ public partial class CharsManager : MonoBehaviour {
 
         for (int i = 0; i < myCharLocalIDForNextBattle.Count;i++)
         {
+            if (myCharLocalIDForNextBattle[i] == null)
+            {
+                continue;
+            }
             if (MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.ContainsKey(myCharLocalIDForNextBattle[i])
                &&
                 MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]] != null)
