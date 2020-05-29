@@ -152,7 +152,7 @@ namespace FightScene
                 {
                     _SideCharIcon = CharIconDic[a_char];
                 }
-                _SideCharIcon.IniHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
+                _SideCharIcon.INIHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
                 _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
 
                 if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
@@ -168,7 +168,7 @@ namespace FightScene
                 DicAdd<Data_Center, SideCharIcon>.Add(CharIconDic, a_char, _SideCharIcon);
 
                 // hitCombo整备
-                if (!(multiRaidHitComboDic.ContainsKey(a_char) && multiRaidHitComboDic[a_char] != null))
+                if (multiRaidHitComboDic.ContainsKey(a_char) && multiRaidHitComboDic[a_char] != null)
                 {
                     hitCombo = multiRaidHitComboDic[a_char];
                 }

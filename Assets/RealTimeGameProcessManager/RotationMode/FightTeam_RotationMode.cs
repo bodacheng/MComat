@@ -133,6 +133,10 @@ namespace FightScene
 
         bool CanChangeToThisMember(Data_Center targetMember)
         {
+            if (targetMember == RotationMode_fightingMember)
+            {
+                return false;
+            }
             if (targetMember.IsDead.Value)
             {
                 return false;
@@ -152,10 +156,13 @@ namespace FightScene
             }
             return true;
         }
-        
+
         void ReadyForNextMember(Data_Center nextOne)
         {
-            waitingMember = waitingMember != nextOne ? nextOne : null;
+            if (waitingMember != nextOne)
+            {
+                waitingMember = nextOne;
+            }
         }
 
         /// <summary>

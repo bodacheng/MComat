@@ -19,7 +19,8 @@ namespace FightScene
                 });
                 
                 a_char.IsDead = new ReactiveProperty<bool>(false);
-                a_char.IsDead.Subscribe(x => { if (x == true) 
+                a_char.IsDead.Subscribe(x => {
+                    if (x == true) 
                     {
                         Invoke("RandomChangeAliveFightingMember", 2f);
                         CharIconDic[a_char].focusingCharIcon.CooldownCurtainUpdate(1);
@@ -70,7 +71,7 @@ namespace FightScene
                     _SideCharIcon = CharIconDic[a_char];
                 }
                 
-                _SideCharIcon.IniHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
+                _SideCharIcon.INIHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
                 _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
                 if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)

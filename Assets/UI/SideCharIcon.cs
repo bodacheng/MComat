@@ -21,13 +21,12 @@ public class SideCharIcon : MonoBehaviour {
     public HeroIcon focusingCharIcon;
     
     float maxHp;
-    float currentHp;
-    
-    public void IniHPShow(Data_Center watching, float MaxHp)
+
+    public void INIHPShow(Data_Center watching, float MaxHp)
     {
     	_charDataCenter = watching;
         maxHp = MaxHp;
-    	currentHp = maxHp;
+        HpBar.value = 1;
     }
     
     public void RecallBars()
