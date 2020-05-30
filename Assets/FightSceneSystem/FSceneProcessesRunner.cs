@@ -62,7 +62,7 @@ namespace FightScene
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnter();
-                Debug.Log("主场景已经进入了：" + sceneStep);
+                //Debug.Log("主场景已经进入了：" + sceneStep);
             }
             else
             {

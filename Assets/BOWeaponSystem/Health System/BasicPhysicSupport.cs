@@ -9,7 +9,7 @@ public class BasicPhysicSupport : MonoBehaviour
     public HiddenMethods hiddenMethods;
     public Transform floorCheckersT;
     Transform[] floorCheckers;
-    
+
     public class HiddenMethods
     {
         readonly BasicPhysicSupport _BasicPhysicSupport;
@@ -22,7 +22,7 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             this._BasicPhysicSupport = _BasicPhysicSupport;
         }
-        public bool IfStepOnEnemyCharacter(Collider box)
+        public bool IfStepOnEnemy(Collider box)
         {
             if (box == null)
                 return false;
@@ -32,7 +32,7 @@ public class BasicPhysicSupport : MonoBehaviour
                 return false;
             if (_BasicPhysicSupport._DATA_CENTER._TeamConfig == null)
                 return false;
-
+                
             return _BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyLayerMask == (_BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyLayerMask | (1 << box.gameObject.layer))
                 ||
                 (_BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
@@ -106,14 +106,13 @@ public class BasicPhysicSupport : MonoBehaviour
     public void SetUsingGravity(bool _on)
     {
         UsingGravity = _on;
-        Rigidbody.useGravity = UsingGravity && !hiddenMethods.Grounded;
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
-            if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
+            if (hiddenMethods.IfStepOnEnemy(collision.collider))
             {
                 hiddenMethods.ITouchedThisCollider(1);
                 hiddenMethods.meTouchingEnemyBody = true;
@@ -125,7 +124,7 @@ public class BasicPhysicSupport : MonoBehaviour
     {
         if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
-            if (hiddenMethods.IfStepOnEnemyCharacter(collision.collider))
+            if (hiddenMethods.IfStepOnEnemy(collision.collider))
             {
                 hiddenMethods.ITouchedThisCollider(1);
                 hiddenMethods.meTouchingEnemyBody = false;

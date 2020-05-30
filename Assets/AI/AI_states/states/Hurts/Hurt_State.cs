@@ -97,8 +97,8 @@ public partial class Hurt_State : Behavior {
         switch(target.from_weapon.damage_type)
         {
             case DamageType.high:
-                _BasicPhysicSupport.SetUsingGravity(true);
             break;
         }
+        _BasicPhysicSupport.SetUsingGravity(true);
     }
 }

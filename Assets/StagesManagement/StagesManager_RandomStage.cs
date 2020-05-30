@@ -56,36 +56,36 @@ public partial class StagesManager : MonoBehaviour
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
         
         LocalFight target = new LocalFight();
-        
+
         CharDataInfo char1 = new CharDataInfo
         {
-            ResourceID = charRecordIds[Indexes[0]],
+            ResourceID = "2",//charRecordIds[Indexes[0]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         CharDataInfo char2 = new CharDataInfo
         {
-            ResourceID = charRecordIds[Indexes[1]],
+            ResourceID = "2",//charRecordIds[Indexes[1]],
             _NineAndTwo = BalanceStyle("human", 1)
         };        
         CharDataInfo char3 = new CharDataInfo
         {
-            ResourceID = charRecordIds[Indexes[2]],
+            ResourceID = "2",//charRecordIds[Indexes[2]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         
         CharDataInfo char4 = new CharDataInfo
         {
-            ResourceID = charRecordIds[Indexes[0]],
+            ResourceID = "2",//charRecordIds[Indexes[0]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         CharDataInfo char5 = new CharDataInfo
         {
-            ResourceID = charRecordIds[Indexes[1]],
+            ResourceID = "2",//charRecordIds[Indexes[1]],
             _NineAndTwo = BalanceStyle("human", 1)
         };        
         CharDataInfo char6 = new CharDataInfo
         {
-            ResourceID = charRecordIds[Indexes[2]],
+            ResourceID = "2",//charRecordIds[Indexes[2]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         

@@ -113,7 +113,7 @@ namespace Soul
                 }
                 else
                 {
-                    Debug.Log("没用上的key？：" + s.num);
+                    //Debug.Log("没用上的key？：" + s.num);
                 }
             }
             AllConditionCodes = ConditionAndRespond.Keys.ToList();

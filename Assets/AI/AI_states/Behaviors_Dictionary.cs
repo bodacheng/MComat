@@ -175,7 +175,7 @@ public class Behaviors_Incubator
                         break;
                 }
             }else{
-                Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
+                //Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
             }
         }             
 	}

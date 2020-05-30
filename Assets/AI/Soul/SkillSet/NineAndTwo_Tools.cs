@@ -151,7 +151,6 @@ public partial class NineAndTwo
     
     public List<SkillEntity> ReturnSTSlist()
     {
-        Debug.Log("行为总数：" + StateTransitionSetList.Count);
         return StateTransitionSetList;
     }
     
