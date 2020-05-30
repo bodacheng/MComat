@@ -20,6 +20,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
+            FightScene.SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
             switch (fightLogger.GetWinner())
             {
@@ -50,7 +51,7 @@ namespace FightScene
                         mainProcessRunner.Run(RewardManager.ExpUpForStones(mystoneids, 1000f));
                     }
                     break;
-                case FightEventType.Self: 
+                case FightEventType.Self:
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     break;
                 case FightEventType.SkillTest:

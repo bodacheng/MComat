@@ -126,32 +126,17 @@ namespace FightScene
             }
             RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         }
-
-        // 这个函数应该包括一些更深层的考虑。
-        public void ReturnToFront()
+        
+        public void SkillLog(List<Data_Center> player1, List<Data_Center> player2)
         {
-            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
-            
-            //Position_Set_Executor.Instance.P_sets.Clear();
-            List<Data_Center> player1 = RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values;
-            List<string> dontdestroy = new List<string>();
-
             List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
             for (int i = 0; i < player1.Count; i++)
             {
                 if (player1[i] != null)
                 {
                     singleFightLogs.Add(player1[i]._MyBehaviorRunner.SingleFightLog);
-                    player1[i]._MyBehaviorRunner.ChangeState("Empty");
-                    CharDataInfo characterDataInfo = RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef[player1[i]];
-                    if (characterDataInfo != null)
-                    {
-                        dontdestroy.Add(characterDataInfo.monsterOfPlayerId);
-                    }
                 }
             }
-
-            List<Data_Center> player2 = RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values;
             for (int i = 0; i < player2.Count; i++)
             {
                 if (player2[i] != null)
@@ -159,9 +144,6 @@ namespace FightScene
                     singleFightLogs.Add(player2[i]._MyBehaviorRunner.SingleFightLog);
                 }
             }
-
-            _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
-            RealTimeGameProcessManager.target.Clear();
 
             if (FightGlobalSetting.HitBoxLogger)
             {
@@ -178,7 +160,37 @@ namespace FightScene
                 }
                 HitBoxLogger.Instance.Clear();
             }
-
+        }
+        
+        // 这个函数应该包括一些更深层的考虑。
+        public void ReturnToFront()
+        {
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
+            
+            //Position_Set_Executor.Instance.P_sets.Clear();
+            List<Data_Center> player1 = RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values;
+            List<string> dontdestroy = new List<string>();
+            switch (FightSceneNote.nextBattle._fightEventType)
+            {
+                case FightEventType.Arena:
+                case FightEventType.Quest:
+                    for (int i = 0; i < player1.Count; i++)
+                    {
+                        if (player1[i] != null)
+                        {
+                            player1[i]._MyBehaviorRunner.ChangeState("Empty");
+                            CharDataInfo charDataInfo = RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef[player1[i]];
+                            if (charDataInfo != null)
+                            {
+                                dontdestroy.Add(charDataInfo.monsterOfPlayerId);
+                            }
+                        }
+                    }
+                break;
+            }
+            SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
+            RealTimeGameProcessManager.target.Clear();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
             SceneManager.LoadScene(1);
