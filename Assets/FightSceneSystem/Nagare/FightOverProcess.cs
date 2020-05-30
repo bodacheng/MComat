@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Api.Dto.Model;
 using dataAccess;
+using System.Collections;
 
 namespace FightScene
 {
@@ -52,7 +53,27 @@ namespace FightScene
                 case FightEventType.Self: 
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     break;
+                case FightEventType.SkillTest:
+                    mainProcessRunner.Run(SKillTestReload());
+                    break;
             }
+        }
+        
+        IEnumerator SKillTestReload()
+        {
+            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef)
+            {
+                keyValuePair.Value._NineAndTwo = StagesManager.BalanceStyle("human", 1);
+                CharConfig _CharConfig = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(keyValuePair.Value.ResourceID));
+                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value._NineAndTwo, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+            }
+            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam2.CharDataInfoRef)
+            {
+                keyValuePair.Value._NineAndTwo = StagesManager.BalanceStyle("human", 1);
+                CharConfig _CharConfig = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(keyValuePair.Value.ResourceID));
+                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value._NineAndTwo, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+            }
+            this.FightScene.LocalGameRestart();
         }
     }
 }

@@ -31,15 +31,20 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         {
             for (int index = 0; index < q.Count; index++)
             {
-                if (q[index] != null && !q[index].gameObject.activeSelf)
+                if (q[index] != null && q[index].Phase < 0) //&& !q[index].gameObject.activeSelf
                 {
                     instance = q[index];
                     break;
                 }
                 if (q[index].gameObject.activeSelf)
                 {
-                    Debug.Log("不可解错误" + q[index].gameObject + " index:"+ index);
+                    Debug.Log("不可解错误" + q[index].gameObject + " Phase:"+ q[index].Phase);
                 }
+                if (q[index].gameObject.activeSelf && q[index].Phase < 0)
+                {
+                    Debug.Log("超不可解错误" + q[index].gameObject + " Phase:"+ q[index].Phase);
+                }
+                q[index].Phase--;
             }
         }
         if (instance == null)
@@ -51,7 +56,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         OnBeforeRent(instance);
         return instance;
     }
-        
+    
     protected override void OnBeforeReturn(Decompositioner instance)
     {
         if (FightGlobalSetting.HitBoxLogger)
@@ -64,8 +69,6 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         instance.Phase = 0;
         base.OnBeforeReturn(instance);
-        if (instance.gameObject.activeSelf)
-            Debug.Log(instance + "??");
     }
 
     protected override void OnBeforeRent(Decompositioner instance)

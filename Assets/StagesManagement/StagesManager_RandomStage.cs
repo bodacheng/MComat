@@ -100,7 +100,7 @@ public partial class StagesManager : MonoBehaviour
         return target;
     }
     
-    static NineAndTwo BalanceStyle(string focusingtype, int skilllevel)
+    public static NineAndTwo BalanceStyle(string focusingtype, int skilllevel)
     {
         IDictionary<string, string> _Skills = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, true, true, true }, -1);
         IDictionary<string, string> Normal_Skills = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, false, false, false }, -1);

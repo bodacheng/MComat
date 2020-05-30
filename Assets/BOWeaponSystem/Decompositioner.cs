@@ -17,7 +17,6 @@ public partial class Decompositioner : MonoBehaviour {
     
 	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;
-    //public bool energyDissolveSlowly;
     
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;

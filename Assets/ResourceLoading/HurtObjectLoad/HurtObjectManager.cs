@@ -5,8 +5,25 @@ using UniRx;
 
 public partial class HurtObjectManager
 {
+    public static DecompositionerPool default_hitboxPool;
     public static IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
     
+    public static DecompositionerPool GetDPool()
+    {
+        return default_hitboxPool;
+    }
+    
+    // 默认攻击物件池的创建
+    public static void ConstructDPool()
+    {
+        if (default_hitboxPool == null)
+        {
+            GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/d_hitbox") as GameObject;
+            default_hitboxPool = new DecompositionerPool(hurtObject);
+            default_hitboxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
+        }
+    }
+
     public static IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Zokusei zokusei)
     {
          switch(ResourceLoadingSetting.MagicLoadingMode)
@@ -40,7 +57,7 @@ public partial class HurtObjectManager
                 }
             }
         }
-    
+        
         // 第二轮
         if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
         {
@@ -50,7 +67,7 @@ public partial class HurtObjectManager
                 return HurtObjectPool;
             }
         }
-    
+        
         // 第三轮
         if (myDefaultMagicPath != "defaultmagic")
         {

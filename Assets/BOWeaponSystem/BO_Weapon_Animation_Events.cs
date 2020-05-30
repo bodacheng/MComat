@@ -15,17 +15,10 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     Transform geometryCenter;
     FightAttriCalReference myownheath;
-    static DecompositionerPool default_hitboxPool;
 
     void Awake()
     {
         hiddenMethods = new HiddenMethods(this);
-        if (default_hitboxPool == null)
-        {
-            GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/d_hitbox") as GameObject;
-            default_hitboxPool = new DecompositionerPool(hurtObject);
-            default_hitboxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
-        }
     }
 
     public class HiddenMethods
@@ -112,7 +105,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
             if (BEs.bodyPartsWeaponRegisterDic[t] == null)
             {
-                target_hitbox = default_hitboxPool.Rent();
+                target_hitbox = HurtObjectManager.GetDPool().Rent();
                 BEs.bodyPartsWeaponRegisterDic[t] = target_hitbox;
                 target_hitbox._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
             }
@@ -146,7 +139,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
                 Decompositioner target_hitbox = BEs.bodyPartsWeaponRegisterDic[t];
                 BEs.bodyPartsWeaponRegisterDic[t] = null;
                 target_hitbox.GetPositionConstraint().constraintActive = false;
-                default_hitboxPool.Return(target_hitbox); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
+                HurtObjectManager.GetDPool().Return(target_hitbox); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
                 target_hitbox._HitBox.SetDectionTargetsUnion(null);//为什么要先把hitbox返回对象池内才执行SetDectionTargetsUnion(null)呢，因为disablemarker在返回对象池的操作里，如果不先disablemarker的话，会导致检测过程中找不到used_targets
             }
         }
