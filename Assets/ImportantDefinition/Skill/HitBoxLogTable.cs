@@ -146,11 +146,11 @@ public class HitBoxLogTable
                 grid[i][0] = "RECORD_ID";
                 grid[i][1] = "REAL_NAME";
                 grid[i][2] = "USEABLE_MONSTER_TYPE";
-                grid[i][3] = "Untouched";
-                grid[i][4] = "Touched";
-                grid[i][5] = "Successed";
-                grid[i][6] = "TriggerdTimes";
-                grid[i][7] = "InteruptedTimes";
+                grid[i][3] = "Untouched(未触摸到敌人的hitbox数量)";
+                grid[i][4] = "Touched(触摸到敌人但没造成伤害的hitbox数量)";
+                grid[i][5] = "Successed(成功击中敌人的hitbox数量)";
+                grid[i][6] = "TriggerdTimes(技能使用次数）";
+                grid[i][7] = "InteruptedTimes（技能被打断次数）";
             }
             else
             {
