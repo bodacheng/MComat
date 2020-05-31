@@ -4846,7 +4846,7 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!114 &114244190037631932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4932,6 +4932,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
@@ -4946,7 +4952,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5c6cf6a48778ed2408afb1d10a161461, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 67aef289c876e604cab7efedd0bd3442, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -13990,7 +13990,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9f2a8aaee6b49234299d7a37c49a1dfb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 27f97d5953dd5894fa03564e99188e3e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1.2
@@ -18643,7 +18643,6 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
   Counter: 0
 --- !u!1 &1386473993178744
 GameObject:
