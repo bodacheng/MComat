@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: IceSpikes01
   m_Shader: {fileID: 4800000, guid: 7f173d1e98ec5884cbcb1ffe4ec53c52, type: 3}
   m_ShaderKeywords: 
@@ -31,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ColorBrightness: 1.5
+    - _ColorBrightness: 2.1
     - _Cutoff: 0.5
     - _Distortion: 0.25
     - _FresnelArea: 1.43
