@@ -296,7 +296,7 @@ public class MonstersConfigTable
         List<CharConfig> ToReturn = new List<CharConfig>();
         foreach (Row row in List)
         {
-            CharConfig _CharacterResourceInfo = RowToCharacterResourceInfo(row);
+            CharConfig _CharacterResourceInfo = RowToCharConfigInfo(row);
             if (_CharacterResourceInfo != null)
                 ToReturn.Add(_CharacterResourceInfo);
             else
@@ -351,7 +351,7 @@ public class MonstersConfigTable
         return row;
     }
 
-    public CharConfig RowToCharacterResourceInfo(Row row)
+    public CharConfig RowToCharConfigInfo(Row row)
     {
         if (row == null)
             return null;

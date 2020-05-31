@@ -52,7 +52,7 @@ public class Death_State : Behavior
         EffectsManager.GenerateEffect("super_hit",
             FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
             newValue.damageHappenPoint, gameObject.transform.rotation,
-            _FightAttriCalReference.transform);
+            _FightAttriCalRef.transform);
         touchedBoundary = false;
         dropped = false;
         _xz = newValue.attacker._Center.WholeT.forward;
@@ -64,7 +64,7 @@ public class Death_State : Behavior
         base.AI_State_exit();
         time_count = 0f;
         _BasicPhysicSupport.SetUsingGravity(true);
-        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+        _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
     }
     
     public override void _State_FixedUpdate1()
@@ -85,7 +85,7 @@ public class Death_State : Behavior
             if (time_count > 0.1f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 dropped = true;
-                _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
+                _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.velocity = Vector3.zero;
                 time_count = 0;//开始针对躺地时间记时
             }else{

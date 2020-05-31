@@ -104,8 +104,6 @@ namespace Soul
                 {
                     s.state.StateKey = SkillEntityDic[s.num].REAL_NAME;
                     s.state.splevel = SkillEntityDic[s.num].SP_LEVEL;
-                    s.state.enterInput = SkillEntityDic[s.num].EnterInput;
-                    s.state.exitInput = SkillEntityDic[s.num].ExitInput;
                     s.state.triggerAtttackRangeMin = SkillEntityDic[s.num].AI_MIN_DIS;
                     s.state.triggerAtttackRangeMax = SkillEntityDic[s.num].AI_MAX_DIS;
                     AddAITriggerConditionToBehavior(SkillEntityDic[s.num]);

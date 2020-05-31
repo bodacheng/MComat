@@ -59,7 +59,7 @@ namespace mainMenu
             EnterQuest.onClick.RemoveAllListeners();
             void Go()
             {
-                PreScene.target._CharSetManager.PreventTheseMyModelsFromDestroying(ToBeLoad.GetTeam1EnterRingLocalIds(ToBeLoad.localFight));
+                CharsManager.target.PreventTheseMyModelsFromDestroying(ToBeLoad.GetTeam1EnterRingLocalIds(ToBeLoad.localFight));
                 PreScene.target.LoadFight(ToBeLoad);
             }
             EnterQuest.onClick.AddListener(Go);

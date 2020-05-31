@@ -17,13 +17,11 @@ namespace FightScene
         public SideCharIcon button_prefab;
         public GameObject selectedFrame;
         public Text HitCombo;
-        public MobileInputsManager _mobileInputsManager;
-        public CharsManager _CharSetManager;
 
         [HideInInspector]
         public Transform[] TeamStandPoints;
         protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-
+        
         public SideCharIcon GetSideIcon(Data_Center d)
         {
             return CharIconDic.ContainsKey(d) ? CharIconDic[d]: null;
@@ -39,7 +37,7 @@ namespace FightScene
                     Data_Center model = TeamMembers.Get(keys.Key, key);
                     if (model == null)
                     {
-                        IEnumerator char_DC = _CharSetManager.CreateCharacter(_one);
+                        IEnumerator char_DC = CharsManager.target.CreateCharacter(_one);
                         yield return char_DC;
                         model = (Data_Center)char_DC.Current;
                     }

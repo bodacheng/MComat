@@ -36,4 +36,18 @@ public class RewardManager : MonoBehaviour
         sKStone.LevelUpShow(formerExp, (formerExp + addExp));
         yield break;
     }
+    
+    public static IEnumerator ExpUpForTeamStones(List<CharDataInfo> expUpForStones)
+    {
+        foreach (CharDataInfo charDataInfo in expUpForStones)
+        {
+            List<string> mystoneids = new List<string>();
+            List<SkillStoneOfPlayerInfoModel> mystones = MySkillStonesReader.GetMonsterEquipingStones(charDataInfo.monsterOfPlayerId);
+            for (int i = 0; i < mystones.Count; i++)
+            {
+                mystoneids.Add(mystones[i].skillStoneOfPlayerId);
+            }
+            yield return ExpUpForStones(mystoneids, 1000f);
+        }
+    }
 }

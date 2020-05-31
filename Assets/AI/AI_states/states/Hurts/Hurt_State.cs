@@ -19,12 +19,11 @@ public partial class Hurt_State : Behavior {
         target = newValue;
         base.AI_State_enter();
         _Animator.applyRootMotion = false;
-        _FightAttriCalReference.SetGettingDamageState(true);
+        _FightAttriCalRef.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-        _FightAttriCalReference.PlusCriticalGauge(1);
+        _FightAttriCalRef.PlusCriticalGauge(1);
         TimeCounter = 0f;
-        _Rigidbody.mass = 800;
         switch (newValue.from_weapon.damage_type)
         {
             case DamageType.slight_damage_forward:
@@ -57,12 +56,12 @@ public partial class Hurt_State : Behavior {
         
         if (newValue.from_weapon.effectSpreadOnBody)
         {
-            _FightAttriCalReference.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
+            _FightAttriCalRef.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
         }
         
-        if (_FightAttriCalReference.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
+        if (_FightAttriCalRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
         {
-            _FightAttriCalReference.GetKnockOffCount().SetGauge(0f);
+            _FightAttriCalRef.GetKnockOffCount().SetGauge(0f);
             _AIStateRunner.ChangeState("KnockOff", newValue);
             return;
         }
@@ -92,8 +91,7 @@ public partial class Hurt_State : Behavior {
     {
         base.AI_State_exit();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        _Rigidbody.mass = 1000;
-        _FightAttriCalReference.SetGettingDamageState(false);
+        _FightAttriCalRef.SetGettingDamageState(false);
         switch(target.from_weapon.damage_type)
         {
             case DamageType.high:

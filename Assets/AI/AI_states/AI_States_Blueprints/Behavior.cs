@@ -15,7 +15,7 @@ namespace Soul
         public BehaviorRunner _AIStateRunner;
         public Data_Center _DATA_CENTER;
         public BO_Ani_E _BO_Ani_E;
-        public FightAttriCalReference _FightAttriCalReference;
+        public FightAttriCalReference _FightAttriCalRef;
         public ResistanceManager _ResistanceManager;
         public BasicPhysicSupport _BasicPhysicSupport;
         public Sensor Sensor;
@@ -34,9 +34,6 @@ namespace Soul
         public float AT; //攻击力,或者说攻击力权重。这个设计的目的在于让所有技能的伤害可以在技能表里以一种形式直接设置。
         public string StateKey;
         public int splevel;
-        public InputKey enterInput = InputKey.Null;
-        public InputKey exitInput = InputKey.Null;
-
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
 
         // Prepare for basic parameters here
@@ -45,7 +42,7 @@ namespace Soul
             this.gameObject = _DATA_CENTER.WholeT.gameObject;
             this.GeoCenterT = _DATA_CENTER.geometryCenter;
             this.Sensor = _DATA_CENTER.Sensor;
-            this._FightAttriCalReference = _DATA_CENTER.FightDataRef;
+            this._FightAttriCalRef = _DATA_CENTER.FightDataRef;
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
@@ -75,7 +72,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return _FightAttriCalReference.HasPlentyGauge(splevel);
+            return _FightAttriCalRef.HasPlentyGauge(splevel);
         }
 
         // On what condition we have to enter this state
@@ -87,16 +84,16 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            _FightAttriCalReference.AT = AT;
-            _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
+            _FightAttriCalRef.AT = AT;
+            _FightAttriCalRef.CostCriticalGaugeBySPlevel(splevel);
             BeheviourFrameCounter = 0;
         }
         
         // Process when entering the state 
         public virtual void AI_State_enter(V_Damage newValue)
         {
-            _FightAttriCalReference.AT = AT;
-            _FightAttriCalReference.CostCriticalGaugeBySPlevel(this.splevel);
+            _FightAttriCalRef.AT = AT;
+            _FightAttriCalRef.CostCriticalGaugeBySPlevel(splevel);
         }
 
         public virtual void C_State_enter()
@@ -113,6 +110,7 @@ namespace Soul
         public virtual void AI_State_exit()
         {
             Sensor.OneRoundDetectionStart(5);
+            _BasicPhysicSupport.SetUsingGravity(true);
         }
 
         // Process when exit the state

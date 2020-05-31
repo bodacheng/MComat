@@ -27,7 +27,7 @@ public class GetUp : Behavior {
         counter = 0f;
         _Animator.SetFloat("speed", 0f);
         Sensor.OneRoundDetectionStart(5);
-        _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
+        _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
 	}
 
@@ -44,7 +44,7 @@ public class GetUp : Behavior {
         {
             if (counter > FightGlobalSetting._LeastCommandTimeAfterGetup)
             {
-                _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+                _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
                 _SkillCancelFlag.turn_on_flag();
             }
         }
@@ -54,6 +54,6 @@ public class GetUp : Behavior {
     {
         base.AI_State_exit();
          _SkillCancelFlag.turn_off_flag();
-        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+        _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
     }
 }

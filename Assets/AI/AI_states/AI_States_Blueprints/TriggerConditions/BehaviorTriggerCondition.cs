@@ -15,7 +15,7 @@ namespace Soul
         
         public bool DangerousNearby() // Dash_Back_State G_Ani_MoveEscape_State 2
         {
-            return (_FightAttriCalReference.IFgettingDamage() || Sensor.GetSuddenThreatInRange(0,5) != null) && _ResistanceManager.Resistance.Value == 0;
+            return (_FightAttriCalRef.IFgettingDamage() || Sensor.GetSuddenThreatInRange(0,5) != null) && _ResistanceManager.Resistance.Value == 0;
         }
         
         public bool DangerousClose() //Counter_State 1 2 3
@@ -36,7 +36,7 @@ namespace Soul
             {
                 return false;
             }
-            if (_FightAttriCalReference.IFgettingDamage())
+            if (_FightAttriCalRef.IFgettingDamage())
             {
                 return true;
             }

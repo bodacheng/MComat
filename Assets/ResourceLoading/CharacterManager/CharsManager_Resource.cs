@@ -7,7 +7,7 @@ public partial class CharsManager : MonoBehaviour
     {
         //以上这个信息就包括了全部的“我的角色”信息，下面别的信息都是据此各种由此索引出来的。
         Data_Center _TempDATACENTER;
-        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId));
+        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");

@@ -17,7 +17,6 @@ namespace mainMenu
         [Space(11)]
         [Header("Essentials")]
         public CameraManager _CameraManager;
-        public CharsManager _CharSetManager;
         public Text accountDiamondCoin;
         public Text accountIntelliCoin;
         
@@ -195,6 +194,7 @@ namespace mainMenu
                     break;
                 }
             }
+            HurtObjectManager.ConstructDPool();
         }
 
         void Update()
@@ -206,7 +206,7 @@ namespace mainMenu
         public void AskIfLoadFight(StageScriptableObject stage)
         {
             LoadingCanvas.target.ArrangeValiationWindow(delegate {
-                _CharSetManager.PreventTheseMyModelsFromDestroying(stage.GetTeam1EnterRingLocalIds(stage.localFight));
+                CharsManager.target.PreventTheseMyModelsFromDestroying(stage.GetTeam1EnterRingLocalIds(stage.localFight));
                 LoadFight(stage); 
                 }, "开打？");
         }

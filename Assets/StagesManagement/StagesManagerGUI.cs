@@ -185,7 +185,7 @@ public class StagesManagerGUI : Editor {
                         {
                             if (set._Value != null)
                             {
-                                CharConfig _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceID));
+                                CharConfig _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceID));
                                 if (_CharacterResourceInfo == null)
                                 {
                                     Debug.Log("检测到存档错误：ResourceID");
@@ -263,7 +263,7 @@ public class StagesManagerGUI : Editor {
             goto A;
         }
         
-        focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
+        focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
         focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("CharacerType", focusingCharResourceInfo.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
         if (CharIDsAndNames.Count == 0)

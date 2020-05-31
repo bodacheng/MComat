@@ -15,7 +15,7 @@ namespace FightScene
         [Space(11)]
         [Header("Canvas")]
         public Canvas PreparingCanvas, FightCanvas;
-
+        
         #region before fight
         [Space(11)]
         [Header("PlayableDirector")]
@@ -24,20 +24,19 @@ namespace FightScene
         [Header("CountDownText")]
         public Text CountDown;
         #endregion
-
+        
         [Space(11)]
         [Header("Basic Essentials")]
         public CameraManager _CameraManager;
-        public CharsManager _CharSetManager;
-
+        
         [Space(11)]
         [Header("战斗的最后一击时候的处理")]
         public FightOverControl _FightOverControl;
-
+        
         [Space(11)]
         [Header("战斗信息记录器")]
         public FightLogger fightLogger;
-
+        
         [Space(11)]
         [Header("场地控制")]
         public BoundaryControllByGod _BoundaryControllByGod;
@@ -93,6 +92,7 @@ namespace FightScene
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.BasicTryTutorial, basicTryProcess);
             
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+            HurtObjectManager.ConstructDPool();
             yield break;
         }
 
@@ -189,7 +189,7 @@ namespace FightScene
                 break;
             }
             SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
-            _CharSetManager.PreventTheseMyModelsFromDestroying(dontdestroy);
+            CharsManager.target.PreventTheseMyModelsFromDestroying(dontdestroy);
             RealTimeGameProcessManager.target.Clear();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;

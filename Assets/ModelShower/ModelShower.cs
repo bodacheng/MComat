@@ -9,7 +9,6 @@ public class ModelShower : MonoBehaviour
     [Space(11)]
     [Header("Essentials")]
     public CameraManager _CameraManager;
-    public CharsManager _CharSetManager;
     
     [Header("Team Member Positions For Show")]
     public Transform MembersStandCenterPoint;
@@ -48,7 +47,7 @@ public class ModelShower : MonoBehaviour
         if (_char == null)
         {
             GetMonsterOfPlayerDetailModel targetInfo = AccountCharsSet.Get(localID);
-            yield return _CharSetManager.BuildShowModel(targetInfo);
+            yield return CharsManager.target.BuildShowModel(targetInfo);
             _char = MyModelPool.Instance.GetMyModel(localID);
         }
         
@@ -224,7 +223,7 @@ public class ModelShower : MonoBehaviour
         if (_one != null)
             onsetLocals.Add(_one);
             
-        yield return _CharSetManager.BuildTheseMyModels(onsetLocals.ToArray());
+        yield return CharsManager.target.BuildTheseMyModels(onsetLocals.ToArray());
         ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(0), 0);
         ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(1), 1);
         ArrangeShowModelOnTeam(_positionLocalCharKeySet4V4Mode.GetMonsterOfPlayerIdOnPos(2), 2);

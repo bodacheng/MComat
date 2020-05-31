@@ -127,28 +127,28 @@ public class Defend_State : Behavior
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);
-                _FightAttriCalReference.PlusCriticalGauge(5);
+                _FightAttriCalRef.PlusCriticalGauge(5);
             break;
             case DamageType.heavy_damage_forward:
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                 DefendHPfade(newValue);
-                _FightAttriCalReference.PlusCriticalGauge(5);
+                _FightAttriCalRef.PlusCriticalGauge(5);
             break;
             case DamageType.supper_damage_forward:
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                 DefendHPfade(newValue);
-                _FightAttriCalReference.PlusCriticalGauge(5);
+                _FightAttriCalRef.PlusCriticalGauge(5);
             break;
             default:
                 Animation_Manger.AnimationTrigger(block_break_name,true,0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);
-                _FightAttriCalReference.PlusCriticalGauge(5);
+                _FightAttriCalRef.PlusCriticalGauge(5);
                 break;
          }
         TimeCounter = used_block_least_time;

@@ -82,8 +82,10 @@ namespace FightScene
                     RefreshHPBar(a_char, x, maxHp);
                 });
 
-                a_char._ResistanceManager.Resistance = new ReactiveProperty<int>();
-                a_char._ResistanceManager.Resistance.Value = 0;
+                a_char._ResistanceManager.Resistance = new ReactiveProperty<int>
+                {
+                    Value = 0
+                };
                 a_char._ResistanceManager.Resistance.Subscribe(x =>
                 {
                     a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
@@ -180,7 +182,7 @@ namespace FightScene
                 DicAdd<Data_Center, Text>.Add(multiRaidHitComboDic, a_char, hitCombo);
 
                 // 魔法按键
-                _mobileInputsManager.ZokuseiButtonRegister(a_char.Zokusei);
+                MobileInputsManager.target.ZokuseiButtonRegister(a_char.Zokusei);
             }
         }
 

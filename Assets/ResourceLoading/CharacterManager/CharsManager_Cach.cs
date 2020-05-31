@@ -1,13 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public partial class CharsManager : MonoBehaviour
 {
-    private IEnumerator _loadingProcess;
+    IEnumerator _loadingProcess;
     public IEnumerator CreateModelForShowingByCach(string monsterId)
     {
-        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId));
+        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(monsterId));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");

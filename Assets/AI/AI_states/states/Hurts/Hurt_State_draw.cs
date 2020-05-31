@@ -14,7 +14,7 @@ public partial class Hurt_State : Behavior
         vector3.y = gameObject.transform.position.y;
         gameObject.transform.DOMove(vector3,0.1f).
         OnComplete(() =>{_Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;});
-        _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
-        _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
+        _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);
+        _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
     }
 }

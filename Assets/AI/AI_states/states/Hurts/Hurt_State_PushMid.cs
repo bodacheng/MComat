@@ -23,7 +23,7 @@ public partial class Hurt_State : Behavior
             }
         );
         gameObject.transform.DOMove(MidDistanceFromMe,0.3f).OnComplete(() =>{_Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;});
-        _FightAttriCalReference.GetKnockOffCount().PlusGauge(3f);
-        _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
+        _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);
+        _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
     }
 }

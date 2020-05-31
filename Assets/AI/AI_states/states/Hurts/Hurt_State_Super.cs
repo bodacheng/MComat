@@ -21,7 +21,7 @@ public partial class Hurt_State : Behavior
         );
         fixDesPos = CalFixPosDestination(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
         _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
-        _FightAttriCalReference.GetKnockOffCount().PlusGauge(6f);
-        _FightAttriCalReference.GetKnockOffCount().PlusTimeCounter(0.2f);
+        _FightAttriCalRef.GetKnockOffCount().PlusGauge(6f);
+        _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
     }
 }

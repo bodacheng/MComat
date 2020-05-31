@@ -104,9 +104,9 @@ public class G_Attack_State : Behavior {
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         if (isEventAttackLaunchState)
         {
-            if (_FightAttriCalReference != null)
+            if (_FightAttriCalRef != null)
             {
-                _FightAttriCalReference.ReturnApprovedEventAttackAttempts().Clear();
+                _FightAttriCalRef.ReturnApprovedEventAttackAttempts().Clear();
             }
         }
         if (isEventAttackEndState)
@@ -195,7 +195,7 @@ public class G_Attack_State : Behavior {
         _phase = Phase.farFromReach;
         return;
     }
-       
+    
     public override void _State_FixedUpdate1() 
 	{
         switch (_phase)

@@ -5,6 +5,13 @@ using Api.Dto.Model;
 
 public partial class CharsManager : MonoBehaviour {
 
+    public static CharsManager target;
+    
+    void Start()
+    {
+        target = this;
+    }
+
     public void PreventTheseMyModelsFromDestroying(List<string> myCharLocalIDForNextBattle)
     {
         if (myCharLocalIDForNextBattle == null)
@@ -88,7 +95,7 @@ public partial class CharsManager : MonoBehaviour {
             Debug.Log("严重资源类错误");
             yield break;
         }
-        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharacterResourceInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.ResourceID.ToString()));
+        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_CharacterDataInfo.ResourceID.ToString()));
         yield return (_TempDATACENTER.Step2Initialize
             (_TempCharacterResourceInfo.TYPE,
              _CharacterDataInfo._NineAndTwo,

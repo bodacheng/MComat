@@ -31,13 +31,13 @@ public class Knock_Off_State : Behavior
         canWakeUp = false;
         canbeattack = false;
         _BasicPhysicSupport.SetUsingGravity(false);
-        _FightAttriCalReference.SetGettingDamageState(true);
+        _FightAttriCalRef.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
-        _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
+        _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
         personality_Events.CloseAllPersonalityEffects();
-        _FightAttriCalReference.PlusCriticalGauge(5);
+        _FightAttriCalRef.PlusCriticalGauge(5);
         _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
         _xz = newValue.attacker._Center.WholeT.forward;
@@ -57,9 +57,9 @@ public class Knock_Off_State : Behavior
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+        _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _BasicPhysicSupport.SetUsingGravity(true);
-        _FightAttriCalReference.SetGettingDamageState(false);
+        _FightAttriCalRef.SetGettingDamageState(false);
     }
     
     public override void _State_FixedUpdate1()
@@ -85,7 +85,7 @@ public class Knock_Off_State : Behavior
             if (time_counter > 0.1f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 dropped = true;
-                _FightAttriCalReference.ChangeLayerForAllSelfColliders(0);
+                _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.velocity = Vector3.zero;
                 time_counter = 0;//开始针对躺地时间记时
             }else{
@@ -110,7 +110,7 @@ public class Knock_Off_State : Behavior
 
         if (!canbeattack && time_counter > 0.01f)
         {
-            _FightAttriCalReference.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+            _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
             canbeattack = true;
         }
 
