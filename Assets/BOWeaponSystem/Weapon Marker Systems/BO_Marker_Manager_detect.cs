@@ -131,6 +131,7 @@ namespace HittingDetection
                                         HitFlesh = true;
                                         _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
                                         _Used_Targets.Add(_BO_Hitbox.transform);
+                                        _Used_Targets.Add(_BO_Hitbox.MainHealth.transform);
                                     }
                                 }
                                 
@@ -153,6 +154,8 @@ namespace HittingDetection
                                     }
                                 }
                             }
+
+                            _Raw_Target_Instance = null;
                             if (weaponHP > 0 && CurrentHP <= 0)
                             {
                                 break;
@@ -266,6 +269,7 @@ namespace HittingDetection
                                             HitFlesh = true;
                                             _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
                                             _Used_Targets.Add(_BO_Hitbox.transform);
+                                            _Used_Targets.Add(_BO_Hitbox.MainHealth.transform);
                                         }
                                     }
 
@@ -286,6 +290,7 @@ namespace HittingDetection
                                         }
                                     }
                                 }
+                                _Raw_Target_Instance = null;
                                 if (weaponHP > 0 && CurrentHP <= 0)
                                 {
                                     break;
@@ -294,7 +299,6 @@ namespace HittingDetection
                         }
                     }
                 }
-                _Raw_Target_Instance = null;
             }
             // 防止一个武器单位的多个markers重复打中健康体
             _Targets_Raw_Hit.Clear();
