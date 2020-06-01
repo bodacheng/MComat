@@ -59502,35 +59502,35 @@ AnimationClip:
     intParameter: 2
     messageOptions: 0
   - time: 0.33333334
-    functionName: SetRightHandMarkerManager
-    data: in
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.33333334
-    functionName: SetLeftHandMarkerManager
-    data: in
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.36666667
-    functionName: SetDamageType
-    data: 3
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 2
-    messageOptions: 0
-  - time: 0.9
-    functionName: turn_on_flag
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.5
+    functionName: PrepareOneMagic
+    data: big_blast
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.93333334
-    functionName: ClearMarkerManagers
+  - time: 0.6666667
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.8
+    functionName: ReleasePreparedMagicToAir
+    data: right_hand
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.9
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
