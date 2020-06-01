@@ -46,11 +46,16 @@ namespace Soul
                 return; // Once a state is forced to trigger, there is no need for the rest of codes to run at this frame
             }
             #endregion
-            
+
             #region 查找已经可以触发的后续技能
             foreach (string _Key in CurrentSKillEntity.CasualTo)
             {
                 BehaviourDic.TryGetValue(_Key, out try_Behavior);
+                if (try_Behavior == null)
+                {
+                    Debug.Log("没找到"+_Key);
+                    return;
+                }
                 if (!try_Behavior.Capacity_enter_condition())
                 {
                     continue;
