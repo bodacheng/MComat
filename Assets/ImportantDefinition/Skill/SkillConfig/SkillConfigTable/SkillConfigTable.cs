@@ -11,7 +11,7 @@ using Skill;
 public partial class SkillConfigTable
 {
     public static IDictionary<string, SkillConfig> SkillConfigRefDic = new Dictionary<string, SkillConfig>();
-       
+    
     public class Row
     {
         public string RECORD_ID;
@@ -33,6 +33,16 @@ public partial class SkillConfigTable
     public static bool IsLoaded()
     {
     	return isLoaded;
+    }
+
+    static List<string> AttackTypes = new List<string>()
+    {
+        "GR","GM","GI","CT"
+    };
+    
+    static bool LegalStateType(string attackType)
+    {
+        return AttackTypes.Contains(attackType);
     }
     
     public static IEnumerator LoadAllSkillConfigs()
@@ -148,6 +158,11 @@ public partial class SkillConfigTable
                 grid[i][8] = rowList[i - 1].TRIGGER_DIS_MAX;
                 grid[i][9] = rowList[i - 1].EVENT_CODE;
                 grid[i][10] = rowList[i - 1].RARITY_LEVEL;
+                    
+                if (!LegalStateType(rowList[i - 1].ATTACK_TYPE))
+                {
+                    Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ rowList[i - 1].RECORD_ID);
+                }
             }
         }
         string delimiter = ",";
@@ -184,6 +199,10 @@ public partial class SkillConfigTable
                     EVENT_CODE = grid[i][9],
                     RARITY_LEVEL = grid[i][10]
                 };
+                if (!LegalStateType(grid[i][5]))
+                {
+                    Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ rowList[i - 1].RECORD_ID);
+                }
                 rowList.Add(row);
             }
             isLoaded = true;

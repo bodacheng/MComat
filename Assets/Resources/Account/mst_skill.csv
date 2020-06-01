@@ -163,5 +163,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 162,mirrorcannon,human,1,10,GI,1,5,12,,1
 163,ct,human,1,10,CT,1,0,4,,1
 164,handfiref,human,1,10,GI,1,0.3,5,,1
-165,threeenergy,human,1,10,CR,2,0,5,,1
+165,threeenergy,human,1,10,GR,2,0,5,,1
 166,bjk,human,1,10,GI,1,0.3,8,,1

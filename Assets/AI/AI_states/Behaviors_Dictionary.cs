@@ -15,7 +15,7 @@ public class Behaviors_Incubator
     public List<string> StateIndexList;
     public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
-    public Behaviors_Incubator(Empty_State empty_State, IDictionary<string, SkillEntity> toFormAttackStateList)
+    public Behaviors_Incubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
     {
         Num_State_List = new List<BehaviorIndex_With_Behavior>();
         StateIndexList = new List<string>();
@@ -113,7 +113,7 @@ public class Behaviors_Incubator
         StateIndexList.Add("getUp");
 
         SkillTypeKeys = new List<string>();
-        foreach (KeyValuePair<string, SkillEntity> valuePair in toFormAttackStateList)
+        foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
         {
             SkillEntity _set = valuePair.Value;
             if (_set == null)
@@ -121,8 +121,7 @@ public class Behaviors_Incubator
                 
             if (!StateIndexList.Contains(_set.REAL_NAME))
             {
-                BehaviorType _attackType = _set.StateType;
-                switch (_attackType)
+                switch (_set.StateType)
                 {
                     case BehaviorType.GI:
                         G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 0f, _set.REAL_NAME)

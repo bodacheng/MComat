@@ -188,15 +188,19 @@ public partial class NineAndTwo
                 EnterInput = InputKey.Null,
                 ExitInput = InputKey.Null,
                 SP_LEVEL = 0
-            };
+            };            
+        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null,0,0);
+        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, new string[] { "getUp" },null,InputKey.Null, InputKey.Null,0,0);
         
+        StateTransitionSetList.Add(getUp);
+        StateTransitionSetList.Add(KnockOff);
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);
-        StateTransitionSetList.Add(M);
         StateTransitionSetList.Add(TestMove);
         
+        StateTransitionSetList.Add(M);
         if (D != null)
         {
             StateTransitionSetList.Add(D);
@@ -205,7 +209,7 @@ public partial class NineAndTwo
         {
             StateTransitionSetList.Add(R);
         }
-        
+
         if(A1 != null)
         {
             StateTransitionSetList.Add(A1);
@@ -243,11 +247,6 @@ public partial class NineAndTwo
             StateTransitionSetList.Add(C3);
         }
         
-        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null,0,0);
-        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, new string[] { "getUp" },null,InputKey.Null, InputKey.Null,0,0);
-        StateTransitionSetList.Add(getUp);
-        StateTransitionSetList.Add(KnockOff);
-        
         foreach (SkillEntity _SE in StateTransitionSetList)
         {
             if (_SE.REAL_NAME != null && !_SEDic.ContainsKey(_SE.REAL_NAME))
@@ -272,8 +271,10 @@ public partial class NineAndTwo
     {
         SkillConfig SC = SkillConfigTable.GetSkillConfigByID(skillid);
         if (SC == null)
+        {
             return null;
-            
+        }
+        
         if (!string.IsNullOrEmpty(SC.REAL_NAME))
         {
             SkillEntity _SE = new SkillEntity(

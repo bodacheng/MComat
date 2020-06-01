@@ -12,6 +12,11 @@ public partial class SkillConfigTable
             SkillConfig newConfig = RowToSkillConfig(row);
             if (newConfig != null)
                 skillConfigs.Add(newConfig);
+                
+            if (!LegalStateType(row.ATTACK_TYPE))
+            {
+                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ row.RECORD_ID);
+            }
         }
         return skillConfigs;
     }
@@ -46,6 +51,11 @@ public partial class SkillConfigTable
             case BehaviorType.NONE:
                 row.ATTACK_TYPE = "NONE";
                 break;
+        }
+        
+        if (!LegalStateType(row.ATTACK_TYPE))
+        {
+            Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ skillConfig.RECORD_ID);
         }
         
         row.TRIGGER_DIS_MIN = skillConfig.AI_MIN_DIS.ToString();
@@ -105,6 +115,11 @@ public partial class SkillConfigTable
             default:
                 _SkillConfig.STATE_TYPE = BehaviorType.NONE;
                 break;
+        }
+        
+        if (!LegalStateType(row.ATTACK_TYPE))
+        {
+            Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ _SkillConfig.RECORD_ID);
         }
         
         _SkillConfig.AI_MIN_DIS = float.Parse(row.TRIGGER_DIS_MIN);
