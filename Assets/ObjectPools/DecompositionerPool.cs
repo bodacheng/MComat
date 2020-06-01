@@ -4,6 +4,7 @@ using UniRx.Toolkit;
 using HittingDetection;
 using System;
 using dataAccess;
+using System.Collections.Generic;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
 
@@ -18,6 +19,28 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             UnityEngine.Object.DontDestroyOnLoad(Marker);
         }
         Prefab = prefab;
+    }
+    
+    /// <summary>
+    /// Return instance to pool.
+    /// </summary>
+    public override void Return(Decompositioner instance)
+    {
+        if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
+        if (instance == null) throw new ArgumentNullException("instance");
+        
+        if (q == null) q = new List<Decompositioner>();
+        
+        if ((q.Count + 1) == MaxPoolCount)
+        {
+            throw new InvalidOperationException("Reached Max PoolSize");
+        }
+        OnBeforeReturn(instance);
+        if (!q.Contains(instance))
+            q.Add(instance);
+        else{
+            Debug.Log(" 邪门了："+ instance);
+        }
     }
 
     /// <summary>

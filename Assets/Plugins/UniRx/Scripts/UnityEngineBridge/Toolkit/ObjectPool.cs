@@ -93,13 +93,13 @@ namespace UniRx.Toolkit
         /// <summary>
         /// Return instance to pool.
         /// </summary>
-        public void Return(T instance)
+        public virtual void Return(T instance)
         {
             if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
             if (instance == null) throw new ArgumentNullException("instance");
-
+            
             if (q == null) q = new List<T>();
-
+            
             if ((q.Count + 1) == MaxPoolCount)
             {
                 throw new InvalidOperationException("Reached Max PoolSize");

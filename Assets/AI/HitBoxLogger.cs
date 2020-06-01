@@ -14,7 +14,7 @@ public class HitBoxLogger
             return instance;
         }
     }
-
+    
     public List<KeyValuePair<string, HitBoxLifeEnding>> HitBoxersEndings = new List<KeyValuePair<string, HitBoxLifeEnding>>();
     public IDictionary<string, int> untouchedtimes = new Dictionary<string, int>();
     public IDictionary<string, int> touchedtimes = new Dictionary<string, int>();
