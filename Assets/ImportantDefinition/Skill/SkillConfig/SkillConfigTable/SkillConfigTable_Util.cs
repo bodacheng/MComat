@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Skill;
+using System.Linq;
 
 public partial class SkillConfigTable
 {
@@ -147,6 +148,20 @@ public partial class SkillConfigTable
         _SkillConfig.EVENT_CODE = row.EVENT_CODE;
         _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
         return _SkillConfig;
+    }
+    
+    public static List<string> GetTargetSkillRecordIds(string type, bool[] ranges, bool[] EXType, int rarelevel, int Count)
+    {
+        IDictionary<string, string> _Skills = GetSkillIDAndNameDic(type, ranges, EXType, rarelevel);
+        List<int> indexes = RandomSelect.Get(0, _Skills.Count -1 , Count);
+        List<string> normalSKillRecordIds = _Skills.Keys.ToList();
+
+        List<string> targetRecordIds = new List<string>();
+        for (int i = 0; i < indexes.Count; i++)
+        {
+            targetRecordIds.Add(normalSKillRecordIds[indexes[i]]);
+        }
+        return targetRecordIds;
     }
     
     public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, bool[] EXType, int rarelevel)// close, near, far , out , rarelevel = -1代表全部，0代表无星级技能

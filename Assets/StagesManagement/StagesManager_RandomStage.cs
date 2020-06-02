@@ -102,15 +102,11 @@ public partial class StagesManager : MonoBehaviour
     
     public static NineAndTwo BalanceStyle(string focusingtype, int skilllevel)
     {
-        IDictionary<string, string> _Skills = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, true, true, true }, -1);
-        IDictionary<string, string> Normal_Skills = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, false, false, false }, -1);
+        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, false, false, false }, -1, 6);
+        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, true, false, false }, -1, 1);
+        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, false, true, false }, -1, 1);
+        List<string> _Ex3Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, false, false, true }, -1, 1);
         
-        List<int> Indexes = RandomSelect.Get(0, _Skills.Count -1 , 8);
-        int normalSkill = RandomSelect.Get(0, Normal_Skills.Count -1 , 1)[0];
-        
-        List<string> SKillRecordIds = _Skills.Keys.ToList();
-        List<string> SKillRecordIds_normal = Normal_Skills.Keys.ToList();
-
         NineAndTwo one = new NineAndTwo
         {
             A1level = skilllevel,
@@ -122,17 +118,17 @@ public partial class StagesManager : MonoBehaviour
             C1level = skilllevel,
             C2level = skilllevel,
             C3level = skilllevel,
-
-            A1skillid = SKillRecordIds_normal[normalSkill],
-            A2skillid = SKillRecordIds[Indexes[0]],
-            A3skillid = SKillRecordIds[Indexes[1]],
-            B1skillid = SKillRecordIds[Indexes[2]],
-            B2skillid = SKillRecordIds[Indexes[3]],
-            B3skillid = SKillRecordIds[Indexes[4]],
-            C1skillid = SKillRecordIds[Indexes[5]],
-            C2skillid = SKillRecordIds[Indexes[6]],
-            C3skillid = SKillRecordIds[Indexes[7]],
-
+            
+            A1skillid = _normalSkills[0],
+            A2skillid = _normalSkills[1],
+            A3skillid = _normalSkills[2],
+            B1skillid = _normalSkills[3],
+            B2skillid = _normalSkills[4],
+            B3skillid = _normalSkills[5],
+            C1skillid = _Ex1Skills[0],
+            C2skillid = _Ex2Skills[0],
+            C3skillid = _Ex3Skills[0],
+            
             canDefend = true,
             moveType = Skill.MoveType.Move_normal,
             rushType = Skill.RushType.Rush
