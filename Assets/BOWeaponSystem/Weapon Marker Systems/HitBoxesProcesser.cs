@@ -18,8 +18,9 @@ public class HitBoxesProcesser : MonoBehaviour
         if (Instance != null)
             Instance.AddToHitBoxesProcesserList(_poolObject);
     }
-
-    public static void AddToColliderHitBoxDic(Collider collider,BO_Marker_Manager bo_hitbox)
+    
+    // 用于靠collider索引对应的BO_Marker_Manager，与update内功能无关。
+    public static void AddToColliderHitBoxDic(Collider collider, BO_Marker_Manager bo_hitbox)
     {
         if (!ColliderHitBox.ContainsKey(collider))
         {

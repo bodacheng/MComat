@@ -99,7 +99,7 @@ namespace HittingDetection
                     _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>().LocalAwake();
                     bms.Add(_MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>());
                     Collider colliderofmarker = _MarkersParent.GetChild(i).gameObject.GetComponent<Collider>();
-                    HitBoxesProcesser.AddToColliderHitBoxDic(colliderofmarker,this);
+                    HitBoxesProcesser.AddToColliderHitBoxDic(colliderofmarker, this);
                 }
             }
             _markers = bms.ToArray();

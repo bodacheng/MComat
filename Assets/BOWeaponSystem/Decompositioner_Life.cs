@@ -74,6 +74,9 @@ public partial class Decompositioner : MonoBehaviour
                     EnergyRessolve();
                 }
             break;
+            case -1: // -1是立刻归还对象池的flag，主要用于d_hitbox
+                EnergyRessolve();
+                break;
         }
         
         if (gameObject.activeSelf)

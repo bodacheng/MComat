@@ -117,9 +117,11 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
                 Debug.Log("重复使用现有："+t);
                 target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
             }
-            ConstraintSource myConstraintSource = new ConstraintSource();
-            myConstraintSource.sourceTransform = t;
-            myConstraintSource.weight = 1;
+            ConstraintSource myConstraintSource = new ConstraintSource
+            {
+                sourceTransform = t,
+                weight = 1
+            };
             target_hitbox.transform.position = t.position;
             target_hitbox.GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
             target_hitbox.GetPositionConstraint().constraintActive = true;
@@ -148,8 +150,9 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
                 Decompositioner target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
                 BEs.bodyPartsHitBoxRegisterDic[t] = null;
                 target_hitbox.GetPositionConstraint().constraintActive = false;
-                HurtObjectManager.GetDPool().Return(target_hitbox); //diablemarkers在对象池物件的onbeforereturn里。原因是方便特效攻击在作用周期结束时自主disablemarker
-                target_hitbox._HitBox.SetDectionTargetsUnion(null);//为什么要先把hitbox返回对象池内才执行SetDectionTargetsUnion(null)呢，因为disablemarker在返回对象池的操作里，如果不先disablemarker的话，会导致检测过程中找不到used_targets
+                target_hitbox.CloseMarkers();
+                target_hitbox._HitBox.SetDectionTargetsUnion(null);
+                target_hitbox.Phase = -1;
             }
         }
         

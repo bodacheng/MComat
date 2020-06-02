@@ -112,7 +112,7 @@ public partial class Decompositioner : MonoBehaviour {
             _HitBox.SetOwnerFightAttriCalReference(null);
         }
     }
-       
+    
     public void Step1()
     {
         if (Phase == 1 && _HitBox != null)
@@ -127,7 +127,7 @@ public partial class Decompositioner : MonoBehaviour {
             _HitBox.LocalLateUpdate();
         }
     }
-    
+
     public void StopEmissions(bool clearParticles)
     {
         if (to_be_stop_emissions != null && to_be_stop_emissions.isPlaying)
