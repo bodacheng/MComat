@@ -54,20 +54,19 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         {
             for (int index = 0; index < q.Count; index++)
             {
-                if (q[index] != null && q[index].Phase < 0) //&& !q[index].gameObject.activeSelf
+                if (q[index].gameObject.activeSelf)
+                {
+                    Debug.Log("不可解错误" + q[index].gameObject + " Phase:" + q[index].Phase);
+                }
+                if (q[index].gameObject.activeSelf && q[index].Phase < 0)
+                {
+                    Debug.Log("超不可解错误" + q[index].gameObject + " Phase:" + q[index].Phase);
+                }
+                if (q[index] != null) //&& !q[index].gameObject.activeSelf
                 {
                     instance = q[index];
                     break;
                 }
-                if (q[index].gameObject.activeSelf)
-                {
-                    Debug.Log("不可解错误" + q[index].gameObject + " Phase:"+ q[index].Phase);
-                }
-                if (q[index].gameObject.activeSelf && q[index].Phase < 0)
-                {
-                    Debug.Log("超不可解错误" + q[index].gameObject + " Phase:"+ q[index].Phase);
-                }
-                q[index].Phase--;
             }
         }
         if (instance == null)
