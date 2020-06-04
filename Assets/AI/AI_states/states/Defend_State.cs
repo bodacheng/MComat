@@ -92,6 +92,7 @@ public class Defend_State : Behavior
         //defendHP = FightGlobalSetting._defendHP;
         base.AI_State_enter();
         freezed = false;
+        _Rigidbody.mass = 60;
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
@@ -108,6 +109,7 @@ public class Defend_State : Behavior
     {
         base.AI_State_enter();
         freezed = false;
+        _Rigidbody.mass = 80;
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
@@ -165,6 +167,7 @@ public class Defend_State : Behavior
         // 我们把defend状态exit中的PlayLayerAnim(_animator_layer_index, null)删除了后就不再产生对应bug。
         // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
         base.AI_State_exit();
+        _Rigidbody.mass = 100;
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         lastExitTime = Time.time;
         _ResistanceManager.ResistanceClear();

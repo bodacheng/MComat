@@ -427122,7 +427122,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.76666665
+  - time: 0.8333333
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -427143,7 +427143,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2333333
+  - time: 1.3333334
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -427164,19 +427164,19 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.6166667
-    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
   - time: 1.8166667
     functionName: turn_on_Right_energy_blade
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
+    messageOptions: 0
+  - time: 1.8666667
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0
   - time: 1.9333333
     functionName: MagicForward

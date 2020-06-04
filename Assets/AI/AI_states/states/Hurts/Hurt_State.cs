@@ -18,6 +18,7 @@ public partial class Hurt_State : Behavior {
 	{
         target = newValue;
         base.AI_State_enter();
+        _Rigidbody.mass = 80;
         _Animator.applyRootMotion = false;
         _FightAttriCalRef.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
@@ -90,6 +91,7 @@ public partial class Hurt_State : Behavior {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        _Rigidbody.mass = 100;
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _FightAttriCalRef.SetGettingDamageState(false);
         switch(target.from_weapon.damage_type)
