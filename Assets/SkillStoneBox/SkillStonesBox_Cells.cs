@@ -56,7 +56,7 @@ namespace mainMenu
         }
         
         // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
-        public void GenerateCells(int cellsLimit, int mode)// 1 : showMode 2: skilledit
+        public void GenerateCells(int cellsLimit, int mode)// 1 : showMode 2: skilledit 3 : 技能展示器
         {
             int hangshu = 1;
             for (int i = 0; i < cellsLimit; i++)
@@ -79,15 +79,20 @@ namespace mainMenu
                     CellsDictionary[i].transform.localPosition = Vector3.zero;
                     CellsDictionary[i].transform.localScale = Vector3.one;
                 }
-            
-                if (mode == 1)
+                
+                switch(mode)
                 {
-                    CellButtonBeheviour_STStoneShow(CellsDictionary[i]);
+                    case 1:
+                        CellButtonBeheviour_STStoneShow(CellsDictionary[i]);
+                    break;
+                    case 2:
+                        CellButtonBeheviour_EditCharSkill(CellsDictionary[i]);
+                    break;
+                    case 3:
+                        CellButtonBeheviour_SKillShowMode(CellsDictionary[i]);
+                    break;
                 }
-                if (mode == 2)
-                {
-                    CellButtonBeheviour_EditCharSkill(CellsDictionary[i]);
-                }
+                
                 CellsDictionary[i]._selected.SetActive(false);
                 CellsDictionary[i]._SelectMode = StoneCell.SelectMode.single;
             }
@@ -146,6 +151,27 @@ namespace mainMenu
                     if (_stone != null && _stone._SkillConfig != null)
                     {
                         _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
+                    }
+                }
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(buttonFeature);
+                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
+            }
+        }
+        
+        // 技能浏览器模式
+        public void CellButtonBeheviour_SKillShowMode(StoneCell _SkillStoneCell)
+        {
+            Button button = _SkillStoneCell.GetComponent<Button>();
+            if (button != null)
+            {
+                void buttonFeature()
+                {
+                    SKStoneItem _stone = _SkillStoneCell.GetItem();
+                    if (_stone != null && _stone._SkillConfig != null)
+                    {
+                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
+                        mainProcessRunner.Run(MemberDetail.target._SkillsPrintOut.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
                     }
                 }
                 button.onClick.RemoveAllListeners();

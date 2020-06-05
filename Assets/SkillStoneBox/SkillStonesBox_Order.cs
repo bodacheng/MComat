@@ -12,7 +12,7 @@ namespace mainMenu
         [Space(7)]
         [Header("Order Button")]
         public Text orderButtonText;
-
+        
         int ordertype = 0;
         
         // 功能本身直接放按钮上，但text要适配到SkillStonesBox上。
@@ -23,40 +23,27 @@ namespace mainMenu
             {
                 ordertype = 0;
             }
-            switch (ordertype)
-            {
-                case 0:// 等级降序
-                    orderButtonText.text = "Level ASC";
-                break;
-                case 1:// 等级升序
-                    orderButtonText.text = "Level DES";
-                break;
-                case 2:// 稀有度降序
-                    orderButtonText.text = "Rarity ASC";
-                break;
-                case 3:// 稀有度升序
-                    orderButtonText.text = "Rarity DES";
-                break;
-                case 4:// DevID
-                    orderButtonText.text = "开发代号ID";
-                break;
-            }
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
-        
+              
         List<string> Order(List<string> targets)
         {
             switch (ordertype)
             {
-                case 0: // 等级降序
-                return ByLevel(targets,1);
-                case 1: // 等级升序
+                case 4: // 等级降序
+                    orderButtonText.text = "Level ASC";
+                return ByLevel(targets, 1);
+                case 3: // 等级升序
+                    orderButtonText.text = "Level DES";
                 return ByLevel(targets,0);
                 case 2: // 稀有度降序
+                    orderButtonText.text = "Rarity ASC";
                 return ByRareLevel(targets,1);
-                case 3: // 稀有度升序
+                case 1: // 稀有度升序
+                    orderButtonText.text = "Rarity DES";
                 return ByRareLevel(targets,0);
-                case 4: // 以技能ID
+                case 0: // 以技能ID
+                    orderButtonText.text = "开发代号ID";
                 return ByDevID(targets, 1);
             }
             return targets;

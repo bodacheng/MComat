@@ -36,7 +36,7 @@ public class Knock_Off_State : Behavior
         _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
         _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
         _FightAttriCalRef.PlusCriticalGauge(5);
         _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);

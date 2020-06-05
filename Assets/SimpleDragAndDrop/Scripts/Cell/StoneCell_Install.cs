@@ -29,7 +29,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
                 if (valR != TheNineSlot.SkillEditError.Perfect)
                 {
-                    TheNineSlot.target.ValiationWarn(valR, MemberDetail.target.focusingCharDataInfo.monsterOfPlayerId);
+                    TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
                     return;
                 }
                 targetSlot._DragAndDropCell.AddItem(itemFromStoneBox);
@@ -57,7 +57,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 TheNineSlot.SkillEditError valR2 = TheNineSlot.target.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
                 if (valR2 != TheNineSlot.SkillEditError.Perfect)
                 {
-                    TheNineSlot.target.ValiationWarn(valR2, MemberDetail.target.focusingCharDataInfo.monsterOfPlayerId);
+                    TheNineSlot.target.ValiationWarn(valR2, MemberDetail.target._focusing.monsterOfPlayerId);
                     return;
                 }
                 SwapItems(cellInSkillStoneBox, targetSlot._DragAndDropCell);

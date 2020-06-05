@@ -90,7 +90,7 @@ namespace mainMenu
         {
             return focusingExType;
         }
-
+        
         // Button feature
         public void NormalTabFeature(GameObject self)
         {
@@ -151,12 +151,12 @@ namespace mainMenu
             farCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
             yield break;
         }
-
+        
         void RangeCheckBoxOnValueChanged()
         {
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
-
+        
         public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;

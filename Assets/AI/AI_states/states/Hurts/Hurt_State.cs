@@ -67,7 +67,7 @@ public partial class Hurt_State : Behavior {
             return;
         }
         RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
     }

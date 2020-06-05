@@ -85,7 +85,7 @@ public class Move_State : Behavior
         _Weapon_Animation_Events.ClearMarkerManagers();
         mainCam = CameraManager._camera.transform;
         Animation_Manger.PlayLayerAnim(null,true,0.05f);
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
     }
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
@@ -98,7 +98,7 @@ public class Move_State : Behavior
         DecideDirection();
         time_counter = 0f;
         mainCam = CameraManager._camera.transform;
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
     }
 
     void DecideDirection()

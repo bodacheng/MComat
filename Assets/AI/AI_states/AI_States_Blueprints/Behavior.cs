@@ -29,7 +29,7 @@ namespace Soul
         public Animation_Manger Animation_Manger;
         public BuffsRunner _BuffsRunner;
         public BlendShapeProxy blendShapeProxy;
-        public Personality_events personality_Events;
+        public Personality_events pEvents;
 
         public float AT; //攻击力,或者说攻击力权重。这个设计的目的在于让所有技能的伤害可以在技能表里以一种形式直接设置。
         public string StateKey;
@@ -56,7 +56,7 @@ namespace Soul
             this._ResistanceManager = _DATA_CENTER._ResistanceManager;
             this._BuffsRunner = _DATA_CENTER.buffsRunner;
             this.blendShapeProxy = _DATA_CENTER.blendShapeProxy;
-            this.personality_Events = _DATA_CENTER.Personality_events;
+            this.pEvents = _DATA_CENTER.Personality_events;
         }
 
         // On what condition can we exit this state 
@@ -111,8 +111,9 @@ namespace Soul
         {
             Sensor.OneRoundDetectionStart(5);
             _BasicPhysicSupport.SetUsingGravity(true);
+            pEvents.CloseAllPersonalityEffects();
         }
-
+        
         // Process when exit the state
         protected int BeheviourFrameCounter;
         public virtual void _State_Update()

@@ -31,7 +31,10 @@ public class StartUpScenePresentation : MonoBehaviour
     
     void Update()
     {
-        if (pProcessFinished && _resourceLordSceneStarter.dProcessFinished && !LocalMode.gameObject.activeSelf)
+        if (pProcessFinished && 
+        _resourceLordSceneStarter.dProcessFinished 
+        && !LocalMode.gameObject.activeSelf
+        && FightGlobalSetting._programMode != FightGlobalSetting.ProgramMode.skillShow)
         {
             StartNewLocalMode.gameObject.SetActive(true);
             LocalMode.gameObject.SetActive(true);
@@ -47,6 +50,12 @@ public class StartUpScenePresentation : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         LoadingCanvas.target.LightUp();
         pProcessFinished = true;
+        
+        if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
+        {
+            _resourceLordSceneStarter.DeleteLocalSaveDate();
+            _resourceLordSceneStarter.StartNewLocalTestMode();
+        }
         yield break;
     }
 }

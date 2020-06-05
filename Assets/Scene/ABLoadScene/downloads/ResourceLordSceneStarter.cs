@@ -24,7 +24,7 @@ public class CachDownLoadMission
     public string subPath;
     public float filesize;
     public bool downloadfinished = false;
-
+    
     public CachDownLoadMission(string subPath,string filename, float filesize)
     {
         this.filename = filename;
@@ -54,7 +54,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     {
         BundleURL = assetBundleURL;
     }
-
+    
     public void BeginRemoteTestMode()
     {
         StartCoroutine(_BeginRemoteTestMode());
@@ -74,7 +74,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     {
         AccountSet._playerinfoReferenceMode = playerInfoRefMode.remoteTestPlayer;
         yield return AccountSet.login();
-        SceneManager.LoadScene(1);       
+        SceneManager.LoadScene(1);
     }
     
     public void DeleteLocalSaveDate()

@@ -33,7 +33,7 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
         
-        public GetMonsterOfPlayerDetailModel focusingCharDataInfo;
+        public GetMonsterOfPlayerDetailModel _focusing;
         
         public static MemberDetail target;
         
@@ -51,11 +51,11 @@ namespace mainMenu
             }
         }
         
-        void AddHeroIconFeatureToMonsterBox(string CharRecordId, Button targetButton)
+        void AddHeroIconFeatureToMonsterBox(string CharLocalId, Button targetButton)
         {
             IEnumerator MonsterIconButton()
             {
-                yield return target.SetMemberDetailFocusingChar(CharRecordId);//确立focusing角色
+                yield return target.SetMemberDetailFocusingChar(CharLocalId);//确立focusing角色
                 yield return target.RefreshMemberDetailPageByFocusingChar();
             }
             void Trigger()
@@ -76,7 +76,7 @@ namespace mainMenu
         
         public IEnumerator RefreshMemberDetailPageByFocusingChar()
         {
-            if (focusingCharDataInfo == null || focusingCharDataInfo.monsterOfPlayerId == null || focusingCharDataInfo.monsterId == null)
+            if (_focusing == null || _focusing.monsterOfPlayerId == null || _focusing.monsterId == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
@@ -84,7 +84,7 @@ namespace mainMenu
                 yield break;
             }
             
-            CharConfig Ref = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
+            CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
             
             MemberInfoT.gameObject.SetActive(true);
@@ -92,7 +92,7 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(focusingCharDataInfo));
+                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(_focusing));
             }
             void SkillShow()
             {
@@ -120,7 +120,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
             
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(focusingCharDataInfo)));
+            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)));
         }
 
         public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
@@ -158,7 +158,7 @@ namespace mainMenu
         public IEnumerator SkillEditConfirmAnimation()
         {
             _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
-            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(focusingCharDataInfo.monsterId);
+            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
             string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
             EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             yield return new WaitForSeconds(0.1f);
@@ -199,7 +199,7 @@ namespace mainMenu
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public IEnumerator SetMemberDetailFocusingChar(string localID)
         {
-            focusingCharDataInfo = AccountCharsSet.Get(localID);
+            _focusing = AccountCharsSet.Get(localID);
             yield break;
         }
 

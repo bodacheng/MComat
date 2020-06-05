@@ -4827,12 +4827,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 114876869664722322}
   TrackControl: {fileID: 0}
-  DestructionDelay: 0.5
-  stop_emission_delay: 0.3
+  DestructionDelay: 0.3
+  stop_emission_delay: 0.1
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!114 &114876869664722322
 MonoBehaviour:
   m_ObjectHideFlags: 0

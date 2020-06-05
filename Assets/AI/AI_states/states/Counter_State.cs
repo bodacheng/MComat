@@ -21,7 +21,7 @@ public class Counter_State : Behavior {
         _SkillCancelFlag.turn_off_flag();
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
         Animation_Manger.AnimationTrigger(clip_name,true,0.08f);
         _Rigidbody.velocity = Vector3.zero;
         _Animator.applyRootMotion = true;

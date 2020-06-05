@@ -22,7 +22,7 @@ public class Empty_State : Behavior
         _Rigidbody.velocity = Vector3.zero;
         _BasicPhysicSupport.enabled = false;
         _DATA_CENTER.CleanClear();
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
     }
 
 	public override void _State_FixedUpdate1()

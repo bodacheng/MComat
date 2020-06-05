@@ -40,7 +40,7 @@ public class Death_State : Behavior
     {
         base.AI_State_enter();
         time_count = 0f;
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
         _BasicPhysicSupport.SetUsingGravity(false);
         _DATA_CENTER.IsDead.Value = true;
         _DATA_CENTER.DeathInitialize();
@@ -56,7 +56,7 @@ public class Death_State : Behavior
         touchedBoundary = false;
         dropped = false;
         _xz = newValue.attacker._Center.WholeT.forward;
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
     }
 
     public override void AI_State_exit()

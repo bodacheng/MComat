@@ -81,7 +81,7 @@ namespace mainMenu
         {
             LoadingCanvas.target.DarkOff(0.5f);
             Application.targetFrameRate = 60;
-
+            
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             TheNineSlot.target.gameObject.SetActive(false);
@@ -108,7 +108,6 @@ namespace mainMenu
             GachaFront gachaFront = new GachaFront();
             GachaAnim gotchaAnim = new GachaAnim();
             GachaResult gachaResult = new GachaResult();
-            
             ArenaProcess areanaProcess = new ArenaProcess();
             
             ProcessesRunner.Main.Clear();
@@ -142,7 +141,7 @@ namespace mainMenu
             LoadingCanvas.target.TurnOnProcessDescription(false);
 
             HeroIcon.INIFrames();
-
+            
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
@@ -173,25 +172,32 @@ namespace mainMenu
             yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
             LoadingCanvas.target.LightUp();
             
-            if (ReturnButtonManager.ReturnMissionList.Count > 0)
+            if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
-                ReturnButtonManager.AddFeatureToReturnButton();
-                //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
-                ReturnButtonManager.POP();
+                yield return MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色
+                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                trySwitchToStep(MainSceneStep.MemberDetail_edit, false);
             }else{
-                // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-                switch (AccountSet._AccInfo.accountprogress)
+                if (ReturnButtonManager.ReturnMissionList.Count > 0)
                 {
-                    case PlayerAccountProgressStep.Freedom:
-                        trySwitchToStep(MainMenuNote.goingtostep, false);
-                    break;
-                    case PlayerAccountProgressStep.justCreated:
-                    break;
-                    case PlayerAccountProgressStep.Tutorial:
-                        TutorialRunner.Main.GenerateTutorial();
-                        trySwitchToStep(MainMenuNote.goingtostep, false);
-                        TutorialRunner.Main.StartToMove();
-                    break;
+                    ReturnButtonManager.AddFeatureToReturnButton();
+                    //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
+                    ReturnButtonManager.POP();
+                }else{
+                    // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
+                    switch (AccountSet._AccInfo.accountprogress)
+                    {
+                        case PlayerAccountProgressStep.Freedom:
+                            trySwitchToStep(MainMenuNote.goingtostep, false);
+                        break;
+                        case PlayerAccountProgressStep.justCreated:
+                        break;
+                        case PlayerAccountProgressStep.Tutorial:
+                            TutorialRunner.Main.GenerateTutorial();
+                            trySwitchToStep(MainMenuNote.goingtostep, false);
+                            TutorialRunner.Main.StartToMove();
+                        break;
+                    }
                 }
             }
             HurtObjectManager.ConstructDPool();

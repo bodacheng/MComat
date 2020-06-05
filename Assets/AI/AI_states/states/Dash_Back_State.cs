@@ -43,7 +43,7 @@ public class Dash_Back_State : Behavior
         _Animator.SetFloat("speed", 0f);
         Sensor.ContinuousDetectionStart(2);
         _SkillCancelFlag.turn_off_flag();
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
         Vector3 threatsComingPosition = Vector3.zero;
         if (Sensor.GetEnemiesByDistance(true).Count > 0)
             threatsComingPosition = Sensor.GetEnemiesByDistance(false)[0].transform.position;

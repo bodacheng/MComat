@@ -32,7 +32,7 @@ public class TeamEditManager : MonoBehaviour
         IEnumerator MonsterIconButton()
         {
             yield return MemberDetail.target.SetMemberDetailFocusingChar(CharRecordId);//确立focusing角色
-            yield return ChangeTeamPos(MemberDetail.target.focusingCharDataInfo.monsterOfPlayerId, focusingPosNum);
+            yield return ChangeTeamPos(MemberDetail.target._focusing.monsterOfPlayerId, focusingPosNum);
             yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         }
         void Trigger()

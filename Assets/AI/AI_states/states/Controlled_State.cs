@@ -21,7 +21,7 @@ public class Controlled_State : Behavior {
 	public override void AI_State_enter()
 	{
         base.AI_State_enter();
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
 		_Rigidbody.useGravity = false;
         Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
     }

@@ -14,7 +14,7 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target.focusingCharDataInfo);
+        CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target._focusing);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);

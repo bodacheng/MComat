@@ -34,7 +34,7 @@ public class G_M_Attack_State : Behavior {
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.turn_off_flag();
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
-        personality_Events.CloseAllPersonalityEffects();
+        pEvents.CloseAllPersonalityEffects();
         Sensor.GetEnemiesByDistance(true);
         if (Sensor.GetEnemiesByDistance(false)[0] != null)
             RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
