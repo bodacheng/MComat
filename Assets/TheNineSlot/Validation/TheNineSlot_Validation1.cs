@@ -12,6 +12,17 @@ namespace mainMenu
             return CheckEditBasedOnCurrent(nineskillids);
         }
         
+        // 基于当前九宫格对技能编辑进行合法判断 包括首发技能检测
+        public SkillEditError CheckEditBasedOnCurrent_WithStartSkillCheck()
+        {
+            List<string> nineskillids = target.GetCurrentNineSlotAllSkillIds();
+            if (CheckStartSKills(nineskillids[0], nineskillids[3], nineskillids[6]) == SkillEditError.NoNormalStart)
+            {
+                return SkillEditError.NoNormalStart;
+            }
+            return CheckEditBasedOnCurrent(nineskillids);
+        }
+        
         // 基于当前九宫格对技能编辑进行合法判断
         public SkillEditError CheckEditBasedOnCurrent(SKStoneItem item, StoneCell replacePosition)
         {

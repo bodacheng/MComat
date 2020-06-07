@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43766b8020d004e79a0be7e7abcca48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  programMode: 1
+  programMode: 0
   knockOffyAnimationCurve:
     serializedVersion: 2
     m_Curve:

@@ -75,7 +75,7 @@ namespace mainMenu
                 _Selected.SetActive(false);
                 return;
             }
-        
+            
             if (cell._SelectMode == StoneCell.SelectMode.single)
             {
                 _Selected.SetActive(true);
@@ -96,7 +96,7 @@ namespace mainMenu
         {
             return focusingSlot;
         }
-
+        
         public void SlotButtonBeheviour(SkillStoneSlot skillStoneSlot)
         {
             Button button = skillStoneSlot._DragAndDropCell.gameObject.GetComponent<Button>();

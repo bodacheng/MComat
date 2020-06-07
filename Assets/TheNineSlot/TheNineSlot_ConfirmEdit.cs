@@ -8,7 +8,6 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        // 这个函数应该能够被用于Tutorial模式下亚当的技能编辑。
         public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accCharInfo)
         {
             List<string> SkIDs = new List<string>();
@@ -21,7 +20,21 @@ namespace mainMenu
                     SkIDs.Add(null);
                 }
             }
-            int wholePoint = MySkillStonesReader.SkillBalancePoint(SkIDs[0],SkIDs[1],SkIDs[2],SkIDs[3],SkIDs[4],SkIDs[5],SkIDs[6],SkIDs[7],SkIDs[8]);
+            
+            // 第一列技能必须有普通技能
+            if (CheckStartSKills(SkIDs[0], SkIDs[3], SkIDs[6]) == SkillEditError.NoNormalStart)
+            {
+                IEnumerator temp3()
+                {
+                    _ValiWarn.text = "第一竖列必须有一个非必杀技";
+                    yield return new WaitForSecondsRealtime(2f);
+                    _ValiWarn.text = "";
+                }
+                PreScene.target.mainProcessRunner.Run(temp3());
+                yield break;
+            }
+            
+            int wholePoint = MySkillStonesReader.SkillBalancePoint(SkIDs[0], SkIDs[1], SkIDs[2], SkIDs[3], SkIDs[4], SkIDs[5], SkIDs[6], SkIDs[7], SkIDs[8]);
             if (wholePoint < 0)
             {
                 Debug.Log("点数不平衡，停止技能更新");
@@ -53,7 +66,8 @@ namespace mainMenu
             }
             yield return ReadANineAndTwo(accCharInfo);
             SeletedRender(null);
-
+            
+            MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
             MainSceneLog skillConfirmLog = new MainSceneLog()
             {
                 step = ProcessesRunner.Main.currentProcess.Step,

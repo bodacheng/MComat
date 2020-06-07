@@ -54,12 +54,6 @@ namespace mainMenu
         
         SkillEditError CheckEditBasedOnCurrent(List<string> nineskillids)
         {
-            // 第一列技能必须有普通技能
-            if (CheckStartSKills(nineskillids[0], nineskillids[3], nineskillids[6]) == SkillEditError.NoNormalStart)
-            {
-                return SkillEditError.NoNormalStart;
-            }
-            
             List<string> checkSame = new List<string>();
             for (int i = 0; i < nineskillids.Count; i++)
             {
