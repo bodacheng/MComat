@@ -154,23 +154,19 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         if (newItem != null)
         {
+            TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(newItem, this);
+            if (valR != TheNineSlot.SkillEditError.Perfect)
+            {
+                TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
+                return;
+            }
+            
             newItem.gameObject.SetActive(true);
             PlaceItemNotDestroyOldItemVersion(newItem);//PlaceItem(newItem); 2018.10.9
             UpdateMyItem();
         }
     }
 
-    public void RemoveItemWithOutDestroy()
-    {
-        SKStoneItem _DragAndDropItem = GetItem();
-        if (_DragAndDropItem != null)
-        {
-            _DragAndDropItem.gameObject.SetActive(true);
-            _DragAndDropItem.gameObject.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
-        }
-        UpdateMyItem();
-    }
-    
     /// <summary>
     /// Swap items between two cells
     /// </summary>
@@ -199,5 +195,16 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 secondItem.transform.DOMove(firstCell.transform.position,0.5f);
             }
         }
+    }
+    
+    public void RemoveItemWithOutDestroy()
+    {
+        SKStoneItem _DragAndDropItem = GetItem();
+        if (_DragAndDropItem != null)
+        {
+            _DragAndDropItem.gameObject.SetActive(true);
+            _DragAndDropItem.gameObject.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
+        }
+        UpdateMyItem();
     }
 }

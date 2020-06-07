@@ -42,7 +42,7 @@ namespace dataAccess
         }
         
         // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
-        public static List<SkillStoneOfPlayerInfoModel> GetMonsterEquipingStones(string monsterOfPlayerId)
+        public static List<SkillStoneOfPlayerInfoModel> GetEquipingStones(string monsterOfPlayerId)
         {
             List<SkillStoneOfPlayerInfoModel> targetStones = new List<SkillStoneOfPlayerInfoModel>();
             foreach(KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)

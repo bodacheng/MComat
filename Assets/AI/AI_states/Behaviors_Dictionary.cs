@@ -3,12 +3,6 @@ using UnityEngine;
 using Soul;
 using Skill;
 
-//记住我们AI系统的机制是这样：在任何时候，如果之前的状态已经可以退出，那么进入的是一个所有状态之间抽签的环节。
-//比方说一个角色现在和一个敌人处于近距离，他技能组中所有的近距离攻击的absolutely rate总和与move状态的比例可能是体现出他攻击性的关键。
-//而他一旦开始了一个攻击动作，那么接下来如果说他有着很长的技能串，这些技能串如果都是近距离攻击的话那他就会一直攻击，除非你在设定技能串的时候，
-//每一个casual to state列表里有设置了move状态并且有一定rate值，否则这个角色就会进入一个不停攻击直到技能串到头或者被中断环节。
-//上面这一套你不要问为什么我们现在就是这么设计的。
-
 public class Behaviors_Incubator
 {
     public List<BehaviorIndex_With_Behavior> Num_State_List;
@@ -195,8 +189,8 @@ public class Behaviors_Incubator
 public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做成。我们姑且认为在开发环境下所有动画片段都是放在resource下
 {
     public List<string> BehaviorIndexList;
-    List<SkillConfig> SkillConfigs;
-
+    readonly List<SkillConfig> SkillConfigs;
+    
     public Behaviors_Incubator_ForLocalResourceCheck(string anim_path)
     {
         if (anim_path == null)

@@ -9,7 +9,7 @@ public partial class NineForShow : MonoBehaviour
     // 战斗结束后统计技能石升级情况时的画面显示
     public IEnumerator ShowStones_Acc(string MonsterOfPlayerID)
     {
-        List<SkillStoneOfPlayerInfoModel> skillStoneOfPlayerInfoModels = MySkillStonesReader.GetMonsterEquipingStones(MonsterOfPlayerID);
+        List<SkillStoneOfPlayerInfoModel> skillStoneOfPlayerInfoModels = MySkillStonesReader.GetEquipingStones(MonsterOfPlayerID);
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;
         string C1SkillID = null, C2SkillID = null, C3SkillID = null;

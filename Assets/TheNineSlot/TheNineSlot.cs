@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
 
-//这个模块应该具备能力去读取一个角色的九宫信息。
 namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
@@ -158,7 +157,7 @@ namespace mainMenu
             C1Slot = new SkillStoneSlot(7,null, C1DragAndDropCell);
             C2Slot = new SkillStoneSlot(8,null, C2DragAndDropCell);
             C3Slot = new SkillStoneSlot(9,null, C3DragAndDropCell);
-
+            
             allSlot.Clear();
             allSlot.Add(A1Slot);
             allSlot.Add(A2Slot);
@@ -189,7 +188,7 @@ namespace mainMenu
             {
                 yield break;
             }
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetMonsterEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
             for (int i = 0; i < equipingstones.Count; i++)
             {
                 switch (equipingstones[i].inUsingSkillSlot)
@@ -231,7 +230,8 @@ namespace mainMenu
             NineSlotsStatusRefresh();
         }
         
-        public void NineSlotsStatusRefresh()//这个的核心作用在于即使调整cell的phase
+        // 核心作用在于即使调整cell的phase
+        public void NineSlotsStatusRefresh()
         {
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
             int wholePoint = MySkillStonesReader.SkillBalancePoint(

@@ -42,7 +42,7 @@ public class RewardManager : MonoBehaviour
         foreach (CharDataInfo charDataInfo in expUpForStones)
         {
             List<string> mystoneids = new List<string>();
-            List<SkillStoneOfPlayerInfoModel> mystones = MySkillStonesReader.GetMonsterEquipingStones(charDataInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> mystones = MySkillStonesReader.GetEquipingStones(charDataInfo.monsterOfPlayerId);
             for (int i = 0; i < mystones.Count; i++)
             {
                 mystoneids.Add(mystones[i].skillStoneOfPlayerId);

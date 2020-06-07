@@ -63,7 +63,7 @@ public partial class NineAndTwo
         
         return behavior_Transition_Sets;
     }
-
+    
     //下面的环节纯粹是针对SkillPrintOut的一些处理
     public IDictionary<int, SkillEntity> GetAttack1Chuan()
     {

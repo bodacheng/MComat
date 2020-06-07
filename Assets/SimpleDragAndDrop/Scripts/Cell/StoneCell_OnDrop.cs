@@ -18,7 +18,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             item = SKStoneItem.draggedItem;
             sourceCell = SKStoneItem.sourceCell;
-
+            
             // If icon inactive do not need to drop item into cell
             if (SKStoneItem.icon.activeSelf == true)
             {
@@ -32,10 +32,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         case CellPhase.NineSlotCell_full:
                             switch (sourceCell.cellPhase)
                             {
-                                case CellPhase.NineSlotCell_full:// 从box把一个石头拖到9宫中同被新石头所覆盖的格子上
-                                    SwapItems(sourceCell,this);
+                                case CellPhase.NineSlotCell_full:
+                                    SwapItems(sourceCell, this);
                                 break;
-                                case CellPhase.NineSlotCell_empty:// 从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                case CellPhase.NineSlotCell_empty:
                                 break;
                                 case CellPhase.SkillStoneBoxCell:
                                     Install(sourceCell,_SkillStoneSlot);
@@ -45,7 +45,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         case CellPhase.NineSlotCell_empty:
                             switch (sourceCell.cellPhase)
                             {
-                                case CellPhase.NineSlotCell_full:// 从box把一个石头拖到9宫中同被新石头所覆盖的格子上
+                                case CellPhase.NineSlotCell_full:
                                     AddItem(item);
                                 break;
                                 case CellPhase.SkillStoneBoxCell:
@@ -65,7 +65,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                                         Debug.Log("固有技能无法移出，返回");
                                         return;
                                     }
-                                    TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(null, sourceCell);
+                                    TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
                                     if (valR != TheNineSlot.SkillEditError.Perfect)
                                     {
                                         TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
@@ -105,7 +105,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                                     LoadingCanvas.target.ArrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, "确实要删除技能石头：" + GetItem()._SkillConfig.REAL_NAME + "?");
                                     break;
                             }
-                            break;
+                        break;
                     }
                 }
             }
