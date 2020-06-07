@@ -83,7 +83,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             myDadItem = null;
             StoneCell SourceCell = item.GetComponentInParent<StoneCell>();
             item.transform.SetParent(transform, false);
-            item.transform.localScale = Vector3.one;
+            item.transform.localScale = Vector3.one * 1.2f;
             item.transform.localPosition = Vector3.zero;
             item.MakeRaycast(true);
             myDadItem = item;
