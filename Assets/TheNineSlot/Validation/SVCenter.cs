@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public static class SVCenter
 {
-    public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell, SKStoneItem item)
+    public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
         SKStoneItem stone = sourceCell.GetItem();
         if (stone != null && stone.Inherent)
@@ -13,13 +13,15 @@ public static class SVCenter
             Debug.Log("固有技能无法移出，返回");
             return;
         }
-        TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
+        TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(null, sourceCell);
         if (valR != TheNineSlot.SkillEditError.Perfect)
         {
             TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
             return;
         }
-        if (boxcell.GetItem() != null) // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
+        
+        // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
+        if (boxcell.GetItem() != null)
         {
             sourceCell._SkillStoneSlot.ReturnStoneToBox();
         }
@@ -28,22 +30,18 @@ public static class SVCenter
             // 如果把技能石从9宫格拖到空技能背包格子上，那就让这个技能石在那个空格子上就可以。
             // 的确这个瞬间可能产生这个技能石所在位置和当前背包显示类型不一致问题，但如果是进行了一个背包自动排序的话，
             // 松手瞬间会有一个技能石“变图案”的错觉。
-            boxcell.AddItem(item);
+            boxcell.AddItem(stone);
         }
-        sourceCell.UpdateMyItem();
+        TheNineSlot.target.NineSlotsStatusRefresh();
     }
     
     public static void AddToSlotFromBox(StoneCell cellInBox, SkillStoneSlot targetSlot)
     {
         SKStoneItem itemFromStoneBox = cellInBox.GetItem();
         if (itemFromStoneBox == null)
-        {
             return;
-        }
-        
         if (!CheckIfOkAfterStoneRemove(itemFromStoneBox))
             return;
-            
         TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
         if (valR != TheNineSlot.SkillEditError.Perfect)
         {
@@ -59,10 +57,7 @@ public static class SVCenter
     {
         SKStoneItem itemFromStoneBox = cellInBox.GetItem();
         if (itemFromStoneBox == null)
-        {
             return;
-        }
-        
         SKStoneItem stone = targetSlot._DragAndDropCell.GetItem();
         if (stone.Inherent)
         {
@@ -72,8 +67,7 @@ public static class SVCenter
         
         if (!CheckIfOkAfterStoneRemove(itemFromStoneBox))
             return;
-
-        // part2 part2与part1本质上等效
+            
         TheNineSlot.SkillEditError valR2 = TheNineSlot.target.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
         if (valR2 != TheNineSlot.SkillEditError.Perfect)
         {
@@ -91,26 +85,23 @@ public static class SVCenter
     /// <param name="secondCell"> Cell </param>
     static void SwapItems(StoneCell firstCell, StoneCell secondCell)
     {
-        if ((firstCell != null) && (secondCell != null))
+        firstCell.UpdateMyItem();
+        secondCell.UpdateMyItem();
+        SKStoneItem firstItem = firstCell.GetItem();                // Get item from first cell
+        SKStoneItem secondItem = secondCell.GetItem();              // Get item from second cell
+        // Swap items
+        if (firstItem != null)
         {
-            firstCell.UpdateMyItem();
-            secondCell.UpdateMyItem();
-            SKStoneItem firstItem = firstCell.GetItem();                // Get item from first cell
-            SKStoneItem secondItem = secondCell.GetItem();              // Get item from second cell
-            // Swap items
-            if (firstItem != null)
-            {
-                //firstItem.transform.DOMove(secondCell.transform.position,1f);
-                //firstItem.transform.localPosition = Vector3.zero;
-                //firstItem.MakeRaycast(true);
-                secondCell.AddItem(firstItem);
-            }
-            if (secondItem != null)
-            {
-                firstCell.AddItem(secondItem);
-                secondItem.transform.position = secondCell.transform.position;
-                secondItem.transform.DOMove(firstCell.transform.position,0.5f);
-            }
+            //firstItem.transform.DOMove(secondCell.transform.position,1f);
+            //firstItem.transform.localPosition = Vector3.zero;
+            //firstItem.MakeRaycast(true);
+            secondCell.AddItem(firstItem);
+        }
+        if (secondItem != null)
+        {
+            firstCell.AddItem(secondItem);
+            secondItem.transform.position = secondCell.transform.position;
+            secondItem.transform.DOMove(firstCell.transform.position,0.5f);
         }
     }
     

@@ -113,9 +113,6 @@ public partial class SkillConfigTable
             case "NONE":
                 _SkillConfig.STATE_TYPE = BehaviorType.NONE;
                 break;
-            default:
-                _SkillConfig.STATE_TYPE = BehaviorType.NONE;
-                break;
         }
         
         if (!LegalStateType(row.ATTACK_TYPE))

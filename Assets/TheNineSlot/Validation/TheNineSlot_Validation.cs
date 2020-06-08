@@ -57,10 +57,12 @@ namespace mainMenu
             List<string> checkSame = new List<string>();
             for (int i = 0; i < nineskillids.Count; i++)
             {
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(nineskillids[i]);
+                if (_SkillConfig == null)
+                    continue;
                 if (!checkSame.Contains(nineskillids[i]))
                 {
-                    if (SkillConfigTable.GetSkillConfigByID(nineskillids[i]) != null)
-                        checkSame.Add(nineskillids[i]);
+                    checkSame.Add(nineskillids[i]);
                 }else{
                     return SkillEditError.RepeatedSkill;
                 }
@@ -84,7 +86,7 @@ namespace mainMenu
                 NormalSkillsOfAList.Add(_SkillConfigB1.REAL_NAME);
             if (_SkillConfigC1 != null && _SkillConfigC1.SP_LEVEL == 0)
                 NormalSkillsOfAList.Add(_SkillConfigC1.REAL_NAME);
-        
+                
             return NormalSkillsOfAList.Count == 0 ? SkillEditError.NoNormalStart : SkillEditError.Perfect;
         }
     }

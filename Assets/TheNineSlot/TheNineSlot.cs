@@ -230,7 +230,7 @@ namespace mainMenu
             NineSlotsStatusRefresh();
         }
         
-        // 核心作用在于即使调整cell的phase
+        // 当前技能编辑形成的各项参数更新
         public void NineSlotsStatusRefresh()
         {
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();

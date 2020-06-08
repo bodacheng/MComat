@@ -27,14 +27,11 @@ namespace mainMenu
         public SkillEditError CheckEditBasedOnCurrent(SKStoneItem item, StoneCell replacePosition)
         {
             List<string> nineskillids = target.GetCurrentNineSlotAllSkillIds();
-            if (item != null)
+            for (int i = 0; i < allSlot.Count; i++)
             {
-                for (int i = 0; i < allSlot.Count; i++)
+                if (replacePosition == allSlot[i]._DragAndDropCell)
                 {
-                    if (replacePosition == allSlot[i]._DragAndDropCell)
-                    {
-                        nineskillids[i] = item._SkillConfig.RECORD_ID;
-                    }
+                    nineskillids[i] = item == null ? "-1" : item._SkillConfig.RECORD_ID;
                 }
             }
             return CheckEditBasedOnCurrent(nineskillids);

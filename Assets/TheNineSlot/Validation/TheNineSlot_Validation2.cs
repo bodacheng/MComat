@@ -7,7 +7,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        // 基于角色存档对技能编辑进行合法判断
+        // 基于角色存档对技能编辑进行合法判断. 必须接受完整validation检测
         public SkillEditError CheckEditAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID) // 基于存档
         {
             List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(monsterOfPlayerId);
@@ -103,7 +103,6 @@ namespace mainMenu
             {
                 return SkillEditError.RepeatedSkill;
             }
-                        
             int wholePoint = MySkillStonesReader.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
             return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
         }

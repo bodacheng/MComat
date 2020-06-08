@@ -72,6 +72,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             item.transform.localPosition = Vector3.zero;
             item.MakeRaycast(true);
             myDadItem = item;
+            UpdateMyItem();
         }
     }
     
@@ -111,7 +112,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public void AddItem(SKStoneItem newItem)
     {
         if (newItem != null)
-        {            
+        {
             newItem.gameObject.SetActive(true);
             PlaceItemNotDestroyOldItemVersion(newItem);//PlaceItem(newItem); 2018.10.9
             UpdateMyItem();
@@ -131,7 +132,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             secondCell.UpdateMyItem();
             SKStoneItem firstItem = firstCell.GetItem();                // Get item from first cell
             SKStoneItem secondItem = secondCell.GetItem();              // Get item from second cell
-            // Swap items
+
             if (firstItem != null)
             {
                 //firstItem.transform.DOMove(secondCell.transform.position,1f);

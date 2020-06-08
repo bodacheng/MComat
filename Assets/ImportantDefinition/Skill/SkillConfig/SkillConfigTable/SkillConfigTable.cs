@@ -62,20 +62,20 @@ public partial class SkillConfigTable
         yield break;
     }
     
-    static void RefreshSkillConfigDicForReference()// 下午从这个开始研究。
+    static void RefreshSkillConfigDicForReference()
     {
         IDictionary<string, SkillConfig> Dic = new Dictionary<string, SkillConfig>();
         List<SkillConfig> ALL = RowsToSkillConfigList(rowList);
-        foreach (SkillConfig keyValuePair in ALL)
+        foreach (SkillConfig _SkillConfig in ALL)
         {
-            if (!Dic.ContainsKey(keyValuePair.RECORD_ID))
+            if (!Dic.ContainsKey(_SkillConfig.RECORD_ID))
             {
-                Dic.Add(new KeyValuePair<string, SkillConfig>(keyValuePair.RECORD_ID, keyValuePair));
+                Dic.Add(new KeyValuePair<string, SkillConfig>(_SkillConfig.RECORD_ID, _SkillConfig));
                 //Debug.Log("以下技能加入字典： RECORDID:"+keyValuePair.RECORD_ID + "  realname:"+ keyValuePair.REAL_NAME);
             }
             else
             {
-                Debug.Log("致命错误「技能配置文件」技能ID重复：" + keyValuePair.RECORD_ID);
+                Debug.Log("致命错误「技能配置文件」技能ID重复：" + _SkillConfig.RECORD_ID);
             }
         }
         Debug.Log("已读取共"+ Dic.Count + "个技能");
@@ -88,9 +88,8 @@ public partial class SkillConfigTable
         {
             SkillConfigRefDic.TryGetValue(ID, out SkillConfig skillConfig);
             return skillConfig;
-        }else{
-            return null;
         }
+        return null;
     }
     
     public static List<SkillConfig> GetSkillConfigsOfType(string type)
