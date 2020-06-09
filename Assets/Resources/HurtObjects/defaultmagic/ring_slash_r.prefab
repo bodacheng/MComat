@@ -33774,8 +33774,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 4
-  _WeaponMode: 2
+  damage_type: 2
+  _WeaponMode: 3
   weaponHP: -1
   onGroundMagic: 0
   effectSpreadOnBody: 0

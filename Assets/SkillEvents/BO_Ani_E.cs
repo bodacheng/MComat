@@ -178,18 +178,30 @@ public partial class BO_Ani_E : MonoBehaviour
     //-1 后退
     void Flash(int mode)
     {
+        float dis_from_center;
         switch (mode)
         {
             case -1:
-                Vector3 moveBack = transform.position - transform.forward * 5f;
-                moveBack.y = 0;
-                float dis_from_center = moveBack.magnitude;
-                if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
-                {
-                    moveBack = moveBack.normalized * BoundaryControllByGod._BattleRingRadius;
-                }
-                hiddenMethods.Flash(moveBack);
+                hiddenMethods.Flash(targetPos(-transform.forward, 5f));
                 break;
+            case 1:
+                hiddenMethods.Flash(targetPos(transform.forward, 5f));
+                break;
+            case 2:
+                hiddenMethods.Flash(targetPos(transform.forward, 8f));
+                break;
+        }
+
+        Vector3 targetPos(Vector3 direction, float step)
+        {
+            Vector3 temp = transform.position + direction * 5f;
+            temp.y = 0;
+            dis_from_center = temp.magnitude;
+            if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+            {
+                temp = temp.normalized * BoundaryControllByGod._BattleRingRadius;
+            }
+            return temp;
         }
     }
 }
