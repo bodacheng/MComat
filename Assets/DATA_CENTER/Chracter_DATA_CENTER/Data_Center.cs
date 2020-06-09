@@ -118,7 +118,9 @@ public partial class Data_Center : MonoBehaviour
         EffectsManager.IniEffectsPool("super_hit", effectPath, 3);
         EffectsManager.IniEffectsPool("resistanceUp", effectPath, 3);
         EffectsManager.IniEffectsPool("on_enable_effect", effectPath, 3);
-                   
+        EffectsManager.IniEffectsPool("FlashStart", effectPath, 3);
+        EffectsManager.IniEffectsPool("FlashEnd", effectPath, 3);
+
         if (Shield != null)
         {
             Shield.gameObject.SetActive(false);

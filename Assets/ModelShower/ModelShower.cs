@@ -66,7 +66,7 @@ public class ModelShower : MonoBehaviour
                 showingChar.SetActive(true);
                 showingChar.transform.parent = null;
                 showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 10f));//右
-                showingChar.transform.LookAt(_CameraManager.transform,Vector3.up);
+                showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
             }
         }
         yield return showingChar;

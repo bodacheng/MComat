@@ -80,7 +80,7 @@ public class BO_Shield : MonoBehaviour {
             if (shieldBreakSpark != null)
             {
                 shieldbreaking = shieldBreakSpark.Rent();
-                shieldbreaking.transform.position = this._ShieldCenterSpot.position;
+                shieldbreaking.transform.position = _ShieldCenterSpot.position;
                 shieldbreaking.transform.rotation = Quaternion.identity;
                 shieldbreaking.transform.LookAt(_ShieldCenterSpot.position - _ShieldBackSpot.position);
             }
