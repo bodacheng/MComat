@@ -174,4 +174,22 @@ public partial class BO_Ani_E : MonoBehaviour
     {
         OnLoadMagic = magicname;
     }
+
+    //-1 后退
+    void Flash(int mode)
+    {
+        switch (mode)
+        {
+            case -1:
+                Vector3 moveBack = transform.position - transform.forward * 5f;
+                moveBack.y = 0;
+                float dis_from_center = moveBack.magnitude;
+                if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+                {
+                    moveBack = moveBack.normalized * BoundaryControllByGod._BattleRingRadius;
+                }
+                hiddenMethods.Flash(moveBack);
+                break;
+        }
+    }
 }

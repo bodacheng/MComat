@@ -261,6 +261,11 @@ public partial class BO_Ani_E : MonoBehaviour
                     keyValuePair.Value.StopEmissions(clearParticles);
                 }
             }
-        }               
+        }
+
+        public void Flash(Vector3 targetpos)
+        {
+            Ani_E.transform.position = targetpos;
+        }
     }
 }

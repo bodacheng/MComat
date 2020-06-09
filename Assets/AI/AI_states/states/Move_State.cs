@@ -37,12 +37,14 @@ public class Move_State : Behavior
         this.speed = speed;
 		this.time_limit = time_limit;		
 	}
-    
-	public override void Pre_process_before_enter()
-	{
-		base.Pre_process_before_enter ();
-	}
-    
+
+    // Process when exit the state 
+    public override void AI_State_exit()
+    {
+        base.AI_State_exit();
+        _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.Extrapolate;
+    }
+
     bool Finished()
     {
         switch (moveDirection)
@@ -86,6 +88,7 @@ public class Move_State : Behavior
         mainCam = CameraManager._camera.transform;
         Animation_Manger.PlayLayerAnim(null,true,0.05f);
         pEvents.CloseAllPersonalityEffects();
+        _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
     }
 
     public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
@@ -99,6 +102,7 @@ public class Move_State : Behavior
         time_counter = 0f;
         mainCam = CameraManager._camera.transform;
         pEvents.CloseAllPersonalityEffects();
+        _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
     }
 
     void DecideDirection()
