@@ -83,21 +83,21 @@ namespace HittingDetection
                 }
             }
 
-            // 下面的环节对特效攻击的“能量消解”机制极端关键。如果非ContinuousDamage那么每帧一个能量特效只会被一个撞击对象消耗一格寿命
-            // 可以结合WeaponEnergyExaust的作用位置来理解
-            if (!ContinuousDamage && weaponHP > 0)
-            {
-                ClearTargets();
-            }
             if (ContinuousDamage)
             {
-                _ContinuousDamage_Timer += Time.fixedDeltaTime;
+                _ContinuousDamage_Timer += Time.deltaTime;
                 if (_ContinuousDamage_Timer >= ContinuousDamageInterval)
                 {
                     ClearTargets();
                     _ContinuousDamage_Timer = 0;
                 }
             }
+
+            for (int i = 0; i < WeaponEnergyExaustMissions.Count; i++)
+            {
+                WeaponEnergyExaustMissions[i].Invoke();               
+            }
+            WeaponEnergyExaustMissions.Clear();
         }
 
         Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Transform attackerTransform)

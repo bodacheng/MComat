@@ -8,7 +8,7 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         // 基于角色存档对技能编辑进行合法判断. 必须接受完整validation检测
-        public SkillEditError CheckEditAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID) // 基于存档
+        public SkillEditError CheckEditAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
         {
             List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(monsterOfPlayerId);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;

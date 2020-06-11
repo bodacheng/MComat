@@ -4873,12 +4873,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 9.5
-  stop_emission_delay: 9
+  DestructionDelay: 3.1
+  stop_emission_delay: 3
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!114 &114581353364657918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4943,6 +4943,12 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

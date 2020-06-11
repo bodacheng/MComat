@@ -28820,7 +28820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 4791646065903600854}
   TrackControl: {fileID: 7025996636308094240}
-  DestructionDelay: 2.5
+  DestructionDelay: 1.6
   stop_emission_delay: 1.5
   to_be_faded_renderers: []
   audioSource: {fileID: 1848449343563482259}

@@ -132,7 +132,7 @@ public class MemberDetail_edit : MainSceneProcess
         void SkillUpdateValidation()
         {
             // 第一列技能必须有普通技能
-            TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent_WithStartSkillCheck();
+            TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
             if (valR != TheNineSlot.SkillEditError.Perfect)
             {
                 TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);

@@ -83,6 +83,10 @@ namespace HittingDetection
 
                         for (int hit_target_index = 0; hit_target_index < _hits.Length; hit_target_index++)
                         {
+                            if (weaponHP > 0 && CurrentHP <= 0)
+                            {
+                                break;
+                            }
                             if (SpecificTarget != SpecificTarget.flesh)
                             {
                                 if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer))) && !_Used_Targets.Contains(_hits[hit_target_index].collider.transform))
@@ -91,12 +95,8 @@ namespace HittingDetection
                                     if (hit_hitbox != null && hit_hitbox.Enabled)
                                     {
                                         _Used_Targets.Add(_hits[hit_target_index].collider.transform);
-                                        WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
+                                        AddWeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
-                                        if (weaponHP > 0 && CurrentHP <= 0)
-                                        {
-                                            break;
-                                        }
                                         continue;//这里不退出循环的话就可能造成一个HP只有1的能量球既打碎了敌人的一个同血量能量球，又对敌人产生一点伤害。
                                     }
                                 }
@@ -141,7 +141,7 @@ namespace HittingDetection
                                     _TrailModeStartPoint = _hits[hit_target_index].point;
                                     _TrailModeStartPoint = _TrailModeStartPoint + (_hits[hit_target_index].transform.position - _TrailModeStartPoint) * 0.3f;
                                     hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,_TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_TrailModeStartPoint,Vector3.up)));
-                                    WeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
+                                    AddWeaponEnergyExaust(_hits[hit_target_index].point, _hits[hit_target_index].collider.transform.rotation);
                                     HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
@@ -154,12 +154,7 @@ namespace HittingDetection
                                     }
                                 }
                             }
-
                             _Raw_Target_Instance = null;
-                            if (weaponHP > 0 && CurrentHP <= 0)
-                            {
-                                break;
-                            }
                         }
                     }
 
@@ -223,6 +218,10 @@ namespace HittingDetection
 
                             foreach (KeyValuePair<Collider,HitPointPara> Hit_C in BallDetectHitPool)
                             {
+                                if (weaponHP > 0 && CurrentHP <= 0)
+                                {
+                                    break;
+                                }
                                 if (SpecificTarget != SpecificTarget.flesh)
                                 {
                                     if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << Hit_C.Key.gameObject.layer)))
@@ -232,12 +231,8 @@ namespace HittingDetection
                                         if (hit_hitbox != null && hit_hitbox.Enabled)
                                         {
                                             _Used_Targets.Add(Hit_C.Key.transform);
-                                            WeaponEnergyExaust(Hit_C.Value.pos, Hit_C.Value.qua);
+                                            AddWeaponEnergyExaust(Hit_C.Value.pos, Hit_C.Value.qua);
                                             HitBoxLifeEnding = HitBoxLifeEnding.touched;
-                                            if (weaponHP > 0 && CurrentHP <= 0)
-                                            {
-                                                break;
-                                            }
                                             continue;
                                         }
                                     }
@@ -277,7 +272,7 @@ namespace HittingDetection
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
                                         hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference,Hit_C.Value.pos, Hit_C.Value.qua));
-                                        WeaponEnergyExaust(Hit_C.Value.pos, Hit_C.Value.qua);
+                                        AddWeaponEnergyExaust(Hit_C.Value.pos, Hit_C.Value.qua);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
@@ -291,10 +286,6 @@ namespace HittingDetection
                                     }
                                 }
                                 _Raw_Target_Instance = null;
-                                if (weaponHP > 0 && CurrentHP <= 0)
-                                {
-                                    break;
-                                }
                             }
                         }
                     }
@@ -316,14 +307,25 @@ namespace HittingDetection
         // 它在攻击到一个对象后不会立刻随着自身hp的减少而cleartargets，但如果它有着大于0的hp，它依然会随着打击到对象而掉血，并随着寿命结束而消失
         // 设想有一个地上火焰技能是ContinuousDamage，它可能有两种消失方式，一种是打击了不少对象hp为0了，一种是随着自身BO_destroyer的设置而时间已经尽。        
         // WeaponEnergyExaust 这个函数在“与敌人武器发生接触”和“与敌人肉体产生接触”的时候是不同的处理逻辑
-        void WeaponEnergyExaust(Vector3 Pos, Quaternion Qua)
+        List<UnityEngine.Events.UnityAction> WeaponEnergyExaustMissions = new List<UnityEngine.Events.UnityAction>();
+        void AddWeaponEnergyExaust(Vector3 Pos, Quaternion Qua)
         {
-            if (weaponHP > 0)
+            if (weaponHP > 0 && CurrentHP > 0)
             {
                 CurrentHP -= 1;
                 EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
+                UnityEngine.Events.UnityAction wC = WeaponEnergyExaust_C;
+                WeaponEnergyExaustMissions.Add(wC);
             }
-            
+            if (weaponHP <= 0)
+            {
+                UnityEngine.Events.UnityAction we_C = WeaponEnergyExaust;
+                WeaponEnergyExaustMissions.Add(we_C);
+            }
+        }
+        
+        void WeaponEnergyExaust()
+        {
             if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
             {
                 _MyOwnerCalReference._Center.Animation_Manger.FrameFreeze();
@@ -332,6 +334,12 @@ namespace HittingDetection
                 else
                     Debug.Log("hitbox与Decompositioner失去链接");
             }
+        }
+        
+        void WeaponEnergyExaust_C()
+        {
+            ClearTargets();
+            WeaponEnergyExaust();
         }
     }
 }

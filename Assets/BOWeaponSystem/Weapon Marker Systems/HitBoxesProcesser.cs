@@ -7,7 +7,7 @@ public class HitBoxesProcesser : MonoBehaviour
     public static HitBoxesProcesser Instance;
     public static Dictionary<Collider, BO_Marker_Manager> ColliderHitBox = new Dictionary<Collider, BO_Marker_Manager>();
     public List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
-
+    
     void Awake()
     {
         Instance = this;
@@ -39,7 +39,7 @@ public class HitBoxesProcesser : MonoBehaviour
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
                 processingDecompositioners[i].Step2();
-            }
+            }            
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
                 processingDecompositioners[i].Life();

@@ -10,34 +10,11 @@ namespace mainMenu
     {
         public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accCharInfo)
         {
-            List<string> SkIDs = new List<string>();
-            for (int i = 0; i < allSlot.Count; i++)
+            SkillEditError SkillEditError = CheckEditBasedOnCurrent();
+            SkillEditError valR = target.CheckEditBasedOnCurrent();
+            if (valR != TheNineSlot.SkillEditError.Perfect)
             {
-                if (allSlot[i]._DragAndDropCell.GetItem() != null)
-                {
-                    SkIDs.Add(allSlot[i]._DragAndDropCell.GetItem()._SkillConfig.RECORD_ID);
-                }else{
-                    SkIDs.Add(null);
-                }
-            }
-            
-            // 第一列技能必须有普通技能
-            if (CheckStartSKills(SkIDs[0], SkIDs[3], SkIDs[6]) == SkillEditError.NoNormalStart)
-            {
-                IEnumerator temp3()
-                {
-                    _ValiWarn.text = "第一竖列必须有一个非必杀技";
-                    yield return new WaitForSecondsRealtime(2f);
-                    _ValiWarn.text = "";
-                }
-                PreScene.target.mainProcessRunner.Run(temp3());
-                yield break;
-            }
-            
-            int wholePoint = MySkillStonesReader.SkillBalancePoint(SkIDs[0], SkIDs[1], SkIDs[2], SkIDs[3], SkIDs[4], SkIDs[5], SkIDs[6], SkIDs[7], SkIDs[8]);
-            if (wholePoint < 0)
-            {
-                Debug.Log("点数不平衡，停止技能更新");
+                target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
                 yield break;
             }
             
@@ -47,12 +24,6 @@ namespace mainMenu
                 {
                     if (allSlot[i].OnSlotStoneID != allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId) 
                     {
-                        SkillStoneOfPlayerInfoModel formerStoneInfo = MySkillStonesReader.Get(allSlot[i].OnSlotStoneID);
-                        if (formerStoneInfo != null && formerStoneInfo.Inherent == "true")
-                        {
-                            Debug.Log("无法卸载原生技能.skillID: "+ formerStoneInfo.skillId + "  skillStoneOfPlayerId" + formerStoneInfo.skillStoneOfPlayerId);
-                            yield break;
-                        }
                         yield return RemoveStone(allSlot[i].OnSlotStoneID);
                         // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
                         SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStonesReader.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);

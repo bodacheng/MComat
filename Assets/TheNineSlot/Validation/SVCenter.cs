@@ -13,13 +13,7 @@ public static class SVCenter
             Debug.Log("固有技能无法移出，返回");
             return;
         }
-        TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(null, sourceCell);
-        if (valR != TheNineSlot.SkillEditError.Perfect)
-        {
-            TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
-            return;
-        }
-        
+
         // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
         if (boxcell.GetItem() != null)
         {
@@ -42,12 +36,7 @@ public static class SVCenter
             return;
         if (!CheckIfOkAfterStoneRemove(itemFromStoneBox))
             return;
-        TheNineSlot.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
-        if (valR != TheNineSlot.SkillEditError.Perfect)
-        {
-            TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
-            return;
-        }
+            
         targetSlot._DragAndDropCell.AddItem(itemFromStoneBox);
         cellInBox.UpdateMyItem();
         TheNineSlot.target.NineSlotsStatusRefresh();
@@ -68,12 +57,6 @@ public static class SVCenter
         if (!CheckIfOkAfterStoneRemove(itemFromStoneBox))
             return;
             
-        TheNineSlot.SkillEditError valR2 = TheNineSlot.target.CheckEditBasedOnCurrent(itemFromStoneBox, targetSlot._DragAndDropCell);
-        if (valR2 != TheNineSlot.SkillEditError.Perfect)
-        {
-            TheNineSlot.target.ValiationWarn(valR2, MemberDetail.target._focusing.monsterOfPlayerId);
-            return;
-        }
         SwapItems(cellInBox, targetSlot._DragAndDropCell);
         TheNineSlot.target.NineSlotsStatusRefresh();
     }
