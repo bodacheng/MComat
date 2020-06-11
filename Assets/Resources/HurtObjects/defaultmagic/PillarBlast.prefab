@@ -23592,7 +23592,7 @@ MonoBehaviour:
   zokusei: 4
   muzzle: 
   ExplosionEffect: energy_resolve
-  ContinuousDamage: 1
+  ContinuousDamage: 0
   ContinuousDamageInterval: 0.5
 --- !u!114 &8285377075919577095
 MonoBehaviour:
@@ -23608,8 +23608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 0.62
-  stop_emission_delay: 0.6
+  DestructionDelay: 0.6
+  stop_emission_delay: 0.3
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
