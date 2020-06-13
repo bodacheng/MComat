@@ -94528,6 +94528,13 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.26666668
+    functionName: Flash
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.28333333
     functionName: SetHeadMarkerManager
     data: 
     objectReferenceParameter: {fileID: 0}
