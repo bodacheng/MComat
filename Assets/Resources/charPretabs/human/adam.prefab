@@ -15924,7 +15924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3578482740118803362}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.065, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2995071695234393264}
@@ -16093,6 +16093,7 @@ MonoBehaviour:
     SP_LEVEL: 0
     RARITY_LEVEL: 0
     ForcedTransitions: []
+  scarecrow: 0
   AllConditionCodes: []
   AI_States_path: 
   usingScript: {fileID: 0}
@@ -26449,7 +26450,7 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!1 &5513121457017788194
 GameObject:
   m_ObjectHideFlags: 0
@@ -36186,7 +36187,7 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!1 &5669526324546736318
 GameObject:
   m_ObjectHideFlags: 0

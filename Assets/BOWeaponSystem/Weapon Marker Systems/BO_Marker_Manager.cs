@@ -12,7 +12,7 @@ namespace HittingDetection
 
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
         [SerializeField]
-        float ActivateAfterTime = 0;
+        float ActivateAfterTime;
 
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;

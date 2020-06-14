@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4310801907089312}
   - component: {fileID: 198812226671965698}
   - component: {fileID: 199329958470165428}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: particle glow master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9685,7 +9685,7 @@ GameObject:
   - component: {fileID: 4049196517827416}
   - component: {fileID: 198733870612455618}
   - component: {fileID: 199450885862242292}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Spiral_02.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
