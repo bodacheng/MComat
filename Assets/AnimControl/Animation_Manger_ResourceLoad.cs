@@ -38,16 +38,6 @@ public partial class Animation_Manger : MonoBehaviour{
                     };
                     _AnimationClip.AddEvent(endFlag);
                 }
-                if (_AnimationClip.name == "jump")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "jump",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
                 if (_AnimationClip.name == "getup")
                 {
                     AnimationEvent endFlag = new AnimationEvent
@@ -140,17 +130,6 @@ public partial class Animation_Manger : MonoBehaviour{
                 else
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", _AnimationClip));
-                }
-            }
-            if (_AnimationClip.name == "controlled")
-            {
-                if (toLoadAnims.ContainsKey("controlled"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("controlled", _AnimationClip));
                 }
             }
             if (_AnimationClip.name == "dash")

@@ -108,23 +108,6 @@ namespace Skill
             
             switch (RStyle)
             {
-                case RushType.Jump:
-                    R_SE = new SkillEntity
-                    {
-                        REAL_NAME = "Jump",
-                        LEVEL = 0,
-                        StateType = BehaviorType.AC,
-                        AT = 0,
-                        HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Acc,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
-                    };
-                    break;
                 case RushType.Rush:
                     R_SE = new SkillEntity
                     {

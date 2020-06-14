@@ -68,17 +68,6 @@ public partial class Animation_Manger : MonoBehaviour
                         toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", _AnimationClip));
                     }
                 }
-                if (_AnimationClip.name == "controlled")
-                {
-                    if (toLoadAnims.ContainsKey("controlled"))
-                    {
-                        Debug.Log("严重错误。基础包里有重名动画片段？");
-                    }
-                    else
-                    {
-                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("controlled", _AnimationClip));
-                    }
-                }
                 if (_AnimationClip.name == "dash")
                 {
                     if (toLoadAnims.ContainsKey("dash"))

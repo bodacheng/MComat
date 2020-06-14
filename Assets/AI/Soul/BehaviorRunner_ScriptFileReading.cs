@@ -238,7 +238,7 @@ namespace Soul
                     setsHaveInitialInput.Add(_set);
                 }
             
-                if (_set.REAL_NAME == "Controlled" || _set.REAL_NAME == "Hit" || _set.REAL_NAME == "Move")
+                if (_set.REAL_NAME == "Hit" || _set.REAL_NAME == "Move")
                 {
                     _set.ForcedTransitions = new string[2] { "Hit", "KnockOff" };
                     regularStates.Add(_set);

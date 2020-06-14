@@ -66,7 +66,6 @@
     <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\SkillEntity.cs" />
     <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\TriggerConditions\BehaviorTriggerCondition.cs" />
     <Compile Include="Assets\AI\AI_states\Behaviors_Dictionary.cs" />
-    <Compile Include="Assets\AI\AI_states\states\Controlled_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Counter_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Dash_Back_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Death_State.cs" />
@@ -86,7 +85,6 @@
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_heavy.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_light.cs" />
     <Compile Include="Assets\AI\AI_states\states\Idle_State.cs" />
-    <Compile Include="Assets\AI\AI_states\states\Jump_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Knock_Off_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
     <Compile Include="Assets\AI\Control\Controller.cs" />
@@ -340,19 +338,6 @@
     <Compile Include="Assets\EasyTouchBundle\EasyTouch\Plugins\Engine\Gesture.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouch\Plugins\Engine\TwoFingerGesture.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Component\ETCSetDirectActionTransform.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\Button-Event-Input\ButtonInputUI.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\Button-Event-Input\ButtonUIEvent.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\ControlEventInput\ControlUIEvent.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\ControlEventInput\ControlUIInput.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\DPadClassicalTime\DPadParameterUI.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\FPSExample\FPSPlayerControl.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\FPSExample\ImpactEffect.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\JoystickParameter\AxisXUi.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\LoadLevelScript.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 1.X\TouchPad-Event-Input\TouchPadUIEvent.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 2.X_New Features\Script\CharacterAnimation.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\Version 2.X_New Features\Script\CharacterAnimationDungeon.cs" />
-    <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Examples\_Medias\SliderText.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\ComponentExtensions.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\ETCArea.cs" />
     <Compile Include="Assets\EasyTouchBundle\EasyTouchControls\Plugins\ETCAxis.cs" />
@@ -723,7 +708,6 @@
     <None Include="Assets\EasyTouchBundle\EasyTouchControls\Documentation\Version 2.0.txt" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
-    <None Include="Assets\Asstes\Frank_Fighting_Set3\Documentation\Frank_Fighting_Set3_MotionList.txt" />
     <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lightning.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Shaders\Electricity.shader" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />

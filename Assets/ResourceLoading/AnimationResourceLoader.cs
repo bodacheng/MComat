@@ -75,16 +75,6 @@ public class AnimationResourceLoader
                     };
                     _AnimationClip.AddEvent(endFlag);
                 }
-                if (_AnimationClip.name == "jump")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "jump",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
                 if (_AnimationClip.name == "getup")
                 {
                     AnimationEvent endFlag = new AnimationEvent
@@ -205,16 +195,6 @@ public class AnimationResourceLoader
                         _AnimationClip.AddEvent(endFlag);
                     }
                     if (_AnimationClip.name == "rushback")
-                    {
-                        AnimationEvent endFlag = new AnimationEvent
-                        {
-                            functionName = "ThisIsEndOfAnimation",
-                            stringParameter = _AnimationClip.name,
-                            time = _AnimationClip.length
-                        };
-                        _AnimationClip.AddEvent(endFlag);
-                    }
-                    if (_AnimationClip.name == "jump")
                     {
                         AnimationEvent endFlag = new AnimationEvent
                         {

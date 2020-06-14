@@ -219,9 +219,6 @@ public class MonstersConfigTable
                 }
                 switch (characterResourceInfo.RushType)
                 {
-                    case RushType.Jump:
-                        row.DODGE_SKILL = "Jump";
-                        break;
                     case RushType.Rush:
                         row.DODGE_SKILL = "Rush";
                         break;
@@ -335,9 +332,6 @@ public class MonstersConfigTable
             case RushType.None:
                 row.DODGE_SKILL = "None";
                 break;
-            case RushType.Jump:
-                row.DODGE_SKILL = "Jump";
-                break;
             case RushType.Rush:
                 row.DODGE_SKILL = "Rush";
                 break;
@@ -404,9 +398,6 @@ public class MonstersConfigTable
 
         switch (row.DODGE_SKILL)
         {
-            case "Jump":
-                _CharacterResourceInfo.RushType = RushType.Jump;
-                break;
             case "Rush":
                 _CharacterResourceInfo.RushType = RushType.Rush;
                 break;

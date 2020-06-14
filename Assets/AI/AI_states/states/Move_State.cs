@@ -128,13 +128,14 @@ public class Move_State : Behavior
                                 use_direction = -GetVerticalDir(EnemiesByDistance[0].transform.position - gameObject.transform.position) + (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
                             break;
                         case 2:
-                            moveDirection = AIMoveDirection.towardsEnemy;
-                            break;
                         case 3:
+                        case 4:                        
                             moveDirection = AIMoveDirection.towardsEnemy;
-                            break;
-                        case 4:
-                            moveDirection = AIMoveDirection.towardsEnemy;
+                            if (closetEnemyT != null)
+                            {
+                                targetPos = closetEnemyT.position + (gameObject.transform.position - closetEnemyT.position).normalized * _AIStateRunner.FixedSkillTriggerDis();
+                                targetPos.y = 0;
+                            }
                             break;
                         case 5:
                             moveDirection = AIMoveDirection.RunAwayFromThreat;
@@ -213,11 +214,10 @@ public class Move_State : Behavior
                 use_direction = Vector3.zero;
                 break;
             case AIMoveDirection.backTowardsEnemy:
+                use_direction = closetEnemyT.position - gameObject.transform.position;
                 break;
             case AIMoveDirection.towardsEnemy:
-                targetPos = closetEnemyT.position + (gameObject.transform.position - closetEnemyT.position).normalized * _AIStateRunner.FixedSkillTriggerDis();
-                targetPos.y = 0;
-                use_direction = targetPos - gameObject.transform.position;                
+                use_direction = targetPos - gameObject.transform.position;
                 // 其实use_direction的计算非常恶心，因为实时算朝向特定敌人的话会产生个抖动问题，上面的结果效果差强人意，但比底下这些强。
                 // 底下这些是一些失败的例子
                 //use_direction = Quaternion.Euler(0, angle * Time.fixedDeltaTime / (Time.fixedDeltaTime + 1f), 0) * use_direction;
@@ -232,7 +232,7 @@ public class Move_State : Behavior
         if (EnemyAndTeammateBetweenMeAndEnemy != null)
         {
             Vector3 temp = (EnemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
-            (gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized ;
+            (gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized;
             temp.y = 0;
             use_direction = Vector3.RotateTowards(use_direction, temp, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
         }

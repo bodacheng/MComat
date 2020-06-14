@@ -29,7 +29,7 @@ public class G_Ani_MoveEscape_State : Behavior {
     public override void _State_Update()
     {
         base._State_Update();
-        if (BeheviourFrameCounter == 5f)
+        if (System.Math.Abs(BeheviourFrameCounter - 5f) < 0.1f)
             _BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
     }
 

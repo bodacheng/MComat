@@ -54,13 +54,6 @@ public class Behaviors_Incubator
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
         StateIndexList.Add("Defend");
 
-        Jump_State jump = new Jump_State("jump", 30f, 30f, 0.3f, true)
-        {
-            nextAttackStateCanRushFirst = false
-        };
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Jump", jump));
-        StateIndexList.Add("Jump");
-
         Dash_Back_State RushBack = new Dash_Back_State
         {
             nextAttackStateCanRushFirst = false,
@@ -82,11 +75,6 @@ public class Behaviors_Incubator
             StateType = BehaviorType.Hit
         };
 
-        Controlled_State controlled = new Controlled_State("controlled")
-        {
-            nextAttackStateCanRushFirst = false
-        };
-
         Knock_Off_State knock_off = new Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff,
@@ -99,8 +87,6 @@ public class Behaviors_Incubator
 
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Hit", hit));
         StateIndexList.Add("Hit");
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Controlled", controlled));
-        StateIndexList.Add("Controlled");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
         StateIndexList.Add("KnockOff");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp",getUp));
@@ -112,7 +98,7 @@ public class Behaviors_Incubator
             SkillEntity _set = valuePair.Value;
             if (_set == null)
                 continue;
-                
+
             if (!StateIndexList.Contains(_set.REAL_NAME))
             {
                 switch (_set.StateType)
@@ -214,12 +200,10 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Death");
 
         BehaviorIndexList.Add("Defend");
-        BehaviorIndexList.Add("Jump");
         BehaviorIndexList.Add("RushBack");
         BehaviorIndexList.Add("Rush");
 
         BehaviorIndexList.Add("Hit");
-        BehaviorIndexList.Add("Controlled");
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
 
@@ -253,12 +237,10 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Death");
         
         BehaviorIndexList.Add("Defend");
-        BehaviorIndexList.Add("Jump");
         BehaviorIndexList.Add("RushBack");
         BehaviorIndexList.Add("Rush");
 
         BehaviorIndexList.Add("Hit");
-        BehaviorIndexList.Add("Controlled");
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
 

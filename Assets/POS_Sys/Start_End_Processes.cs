@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Start_End_Processes {
 
-    private static Start_End_Processes instance;
-
+    static Start_End_Processes instance;
     public static Start_End_Processes Instance
     {
         get

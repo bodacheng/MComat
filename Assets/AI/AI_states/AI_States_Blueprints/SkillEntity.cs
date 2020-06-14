@@ -118,7 +118,6 @@ namespace Skill
     public enum RushType
     {
         None = -1,
-        Jump = 1,
         RushBack = 2,
         Rush = 3
     }
