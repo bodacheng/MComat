@@ -41,7 +41,7 @@ public class Sensor : MonoBehaviour {
         SelfDataCenter = _self;
     }
 
-    public Collider GetTargetRangeEnemyCollider(float min,float max)
+    public Collider GetTargetRangeEnemyCollider(float min, float max)
     {
         for (int i = 0; i < detectedEnemies.Count; i++)
         {
@@ -161,7 +161,7 @@ public class Sensor : MonoBehaviour {
     public void SensorDetectProcess()
     {
         _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(transform.position,1f,SelfDataCenter.WholeT.forward, sensor_radius, meAndEnemyLayermask, QueryTriggerInteraction.Collide);
+        _spherecastHits = Physics.SphereCastAll(transform.position, 1f, SelfDataCenter.WholeT.forward, sensor_radius, meAndEnemyLayermask, QueryTriggerInteraction.Collide);
     }
 
     public void SensorDetectionResultClearProcess()

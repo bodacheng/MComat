@@ -44,7 +44,8 @@ public class zokuseiButtonEffectsGroup
             keyValue.Value.Stop(true);
         }
         pressingExplosion.Stop(true);
-        defendbutton.Stop(true);
+        if (FightGlobalSetting._hasDefend)
+            defendbutton.Stop(true);
         rushbutton.Stop(true);
     }
         
@@ -67,9 +68,12 @@ public class zokuseiButtonEffectsGroup
             keyValue.Value.Stop(true);
         }
         pressingExplosion.Stop(true);
-        
-        defendbutton.gameObject.transform.position = defendbuttonpos;
-        defendbutton.Play(true);
+
+        if (FightGlobalSetting._hasDefend)
+        {
+            defendbutton.gameObject.transform.position = defendbuttonpos;
+            defendbutton.Play(true);
+        }
         rushbutton.gameObject.transform.position = rushbuttonpos;
         rushbutton.Play(true);
     }
@@ -95,7 +99,8 @@ public class zokuseiButtonEffectsGroup
         attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
         fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
         fire2buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
-        defendbutton = Object.Instantiate(Defend).GetComponent<ParticleSystem>();
+        if (FightGlobalSetting._hasDefend)
+            defendbutton = Object.Instantiate(Defend).GetComponent<ParticleSystem>();
         rushbutton = Object.Instantiate(Rush).GetComponent<ParticleSystem>();
         arefresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
         fire1refresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
@@ -109,7 +114,8 @@ public class zokuseiButtonEffectsGroup
         attackbuttonslot.transform.SetParent(targetRectT);
         fire1buttonslot.transform.SetParent(targetRectT);
         fire2buttonslot.transform.SetParent(targetRectT);
-        defendbutton.transform.SetParent(targetRectT);
+        if (FightGlobalSetting._hasDefend)
+            defendbutton.transform.SetParent(targetRectT);
         rushbutton.transform.SetParent(targetRectT);
         arefresh.transform.SetParent(targetRectT);
         fire1refresh.transform.SetParent(targetRectT);

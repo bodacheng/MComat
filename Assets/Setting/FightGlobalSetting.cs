@@ -3,7 +3,7 @@
 public class FightGlobalSetting : MonoBehaviour
 {
     public ProgramMode programMode = ProgramMode.normal;
-
+    public bool hasDefend;
     public AnimationCurve knockOffyAnimationCurve;
     public AnimationCurve knockOffzAnimationCurve;
 
@@ -25,6 +25,7 @@ public class FightGlobalSetting : MonoBehaviour
 
     public static ProgramMode _programMode;
     public static int scenestep;//0 :mainmenu 1: fightscene
+    public static bool _hasDefend;
     public static float _AT_coefficient = 1;
     public static float _HP_coefficient = 1;
     public static float _lighthit_lastingtime, _heavyhit_lastingtime;
@@ -81,7 +82,9 @@ public class FightGlobalSetting : MonoBehaviour
     void Awake()
     {
         _programMode = programMode;
-        
+
+        _hasDefend = hasDefend;
+
         _AT_coefficient = AT_coefficient;
         _HP_coefficient = HP_coefficient;
         

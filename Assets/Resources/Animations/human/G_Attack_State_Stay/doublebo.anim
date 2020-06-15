@@ -61501,14 +61501,14 @@ AnimationClip:
     functionName: Bullet_shoot_from_body_part
     data: right_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 16
+    floatParameter: 20
     intParameter: 1
     messageOptions: 0
   - time: 0.15
     functionName: Bullet_shoot_from_body_part
     data: left_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 16
+    floatParameter: 20
     intParameter: 1
     messageOptions: 0
   - time: 0.53333336

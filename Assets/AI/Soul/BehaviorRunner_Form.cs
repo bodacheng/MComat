@@ -28,7 +28,7 @@ namespace Soul
             switch(behavior_define.StateType)
             {
                 case BehaviorType.MV:
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME,"TimeToStopRunning");
+                    //BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME,"TimeToStopRunning");
                     break;
                 case BehaviorType.AC:
                     KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.REAL_NAME);

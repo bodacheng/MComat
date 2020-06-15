@@ -10362,8 +10362,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4855631583518454219}
-  - component: {fileID: 5970452881129297126}
-  - component: {fileID: 4103813306163090643}
   m_Layer: 0
   m_Name: Bip001 R UpperArm
   m_TagString: Untagged
@@ -10387,33 +10385,6 @@ Transform:
   m_Father: {fileID: 4701690182695463766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5970452881129297126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2760768147747502364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainHealth: {fileID: 2406689596573462947}
-  myColliderMustEquip: {fileID: 4103813306163090643}
---- !u!65 &4103813306163090643
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2760768147747502364}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.3}
-  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!1 &2840557931418435905
 GameObject:
   m_ObjectHideFlags: 0
@@ -10996,7 +10967,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.7, z: 0.7}
+  m_Size: {x: 0.7, y: 0.75, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2482538045137992282
 MonoBehaviour:
@@ -16885,8 +16856,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.5, z: 0.3}
-  m_Center: {x: -0.3, y: 0, z: 0}
+  m_Size: {x: 0.7, y: 0.5, z: 0.5}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!1 &6404155196967069540
 GameObject:
   m_ObjectHideFlags: 0
@@ -27115,8 +27086,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.5, z: 0.3}
-  m_Center: {x: -0.3, y: 0, z: 0}
+  m_Size: {x: 0.7, y: 0.5, z: 0.5}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!114 &4198658949043498935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51655,8 +51626,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 338689058589636754}
-  - component: {fileID: 7503512383766527638}
-  - component: {fileID: 508203665113518113}
   m_Layer: 0
   m_Name: Bip001 L UpperArm
   m_TagString: Untagged
@@ -51680,33 +51649,6 @@ Transform:
   m_Father: {fileID: 3435314457017336012}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7503512383766527638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8640128046861019768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainHealth: {fileID: 2406689596573462947}
-  myColliderMustEquip: {fileID: 508203665113518113}
---- !u!65 &508203665113518113
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8640128046861019768}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.3}
-  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!1 &8776800646885436134
 GameObject:
   m_ObjectHideFlags: 0

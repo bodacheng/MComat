@@ -67,12 +67,12 @@ namespace Soul
             {
                 return false;
             }
-            
+
             // 从移动状态到攻击的话技能释放范围要求精准，但连招情况明明敌人在眼前但因为按技能最好范围而言“不够远”而不释放的话，会很奇怪
-            if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
+            //if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
                 tar = Sensor.GetTargetRangeEnemyCollider(triggerAtttackRangeMin, triggerAtttackRangeMax);
-            else
-                tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f,0, triggerAtttackRangeMin - 4), triggerAtttackRangeMax);
+            //else
+                //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f,0, triggerAtttackRangeMin - 4), triggerAtttackRangeMax);
             return tar != null;
         }
 
@@ -82,7 +82,7 @@ namespace Soul
             return threat == null;
         }
         
-        public bool TimeToStopRunning()
+        public bool TimeToStopRunning() //没有意义的条件。 
         {
             nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
             return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) || Sensor.GetSuddenThreatInRange(0,8) != null;

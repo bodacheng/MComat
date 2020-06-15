@@ -38,6 +38,28 @@ public class Move_State : Behavior
 		this.time_limit = time_limit;		
 	}
 
+    void CommonEnter()
+    {
+        time_counter = 0f;
+        _Weapon_Animation_Events.ClearMarkerManagers();
+        Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+        pEvents.CloseAllPersonalityEffects();
+        mainCam = CameraManager._camera.transform;
+        _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
+    }
+
+    public override void C_State_enter()
+    {
+        CommonEnter();
+    }
+
+    public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
+    {
+        CommonEnter();
+        Sensor.ContinuousDetectionStart(-1);
+        DecideDirection();
+    }
+
     // Process when exit the state 
     public override void AI_State_exit()
     {
@@ -81,30 +103,6 @@ public class Move_State : Behavior
         return false;
     }
     
-    public override void C_State_enter()
-    {
-        time_counter = 0f;
-        _Weapon_Animation_Events.ClearMarkerManagers();
-        mainCam = CameraManager._camera.transform;
-        Animation_Manger.PlayLayerAnim(null,true,0.05f);
-        pEvents.CloseAllPersonalityEffects();
-        _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
-    }
-
-    public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
-    {
-        _Weapon_Animation_Events.ClearMarkerManagers();
-        Sensor.ContinuousDetectionStart(-1);//movestate里希望对敌人的出现比较反应迅速。
-        Animation_Manger.PlayLayerAnim(null,true,0.05f);
-        // AI模式决定第一轮moveDirection和use_direction的
-        // moveDirection是用来引导use_direction的
-        DecideDirection();
-        time_counter = 0f;
-        mainCam = CameraManager._camera.transform;
-        pEvents.CloseAllPersonalityEffects();
-        _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
-    }
-
     void DecideDirection()
     {
         EnemiesByDistance = Sensor.GetEnemiesByDistance(true);

@@ -284,7 +284,8 @@ public class MobileInputsManager : MonoBehaviour {
         Attack.gameObject.SetActive(true);
         Fire1.gameObject.SetActive(true);
         Fire2.gameObject.SetActive(true);
-        Defend.gameObject.SetActive(true);
+        if (FightGlobalSetting._hasDefend)
+            Defend.gameObject.SetActive(true);
         Dash.gameObject.SetActive(true);
         
         attack = false;
@@ -299,7 +300,8 @@ public class MobileInputsManager : MonoBehaviour {
         Attack.gameObject.SetActive(false);
         Fire1.gameObject.SetActive(false);
         Fire2.gameObject.SetActive(false);
-        Defend.gameObject.SetActive(false);
+        if (FightGlobalSetting._hasDefend)
+            Defend.gameObject.SetActive(false);
         Dash.gameObject.SetActive(false);
         
         attack = false;

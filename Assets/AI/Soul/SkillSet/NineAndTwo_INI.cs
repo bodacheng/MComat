@@ -130,7 +130,8 @@ public partial class NineAndTwo
             H2_list.Add(R.REAL_NAME);
             H3_list.Add(R.REAL_NAME);
         }
-        if (D != null)
+
+        if (D != null && FightGlobalSetting._hasDefend)
         {
             H1_E_list.Add(D);
             H2_E_list.Add(D);
@@ -201,7 +202,7 @@ public partial class NineAndTwo
         StateTransitionSetList.Add(TestMove);
         
         StateTransitionSetList.Add(M);
-        if (D != null)
+        if (D != null && FightGlobalSetting._hasDefend)
         {
             StateTransitionSetList.Add(D);
         }

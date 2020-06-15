@@ -51,8 +51,11 @@ public class Behaviors_Incubator
             StateType = BehaviorType.Def,
             nextAttackStateCanRushFirst = false
         };
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
-        StateIndexList.Add("Defend");
+        if (FightGlobalSetting._hasDefend)
+        {
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
+            StateIndexList.Add("Defend");
+        }
 
         Dash_Back_State RushBack = new Dash_Back_State
         {
@@ -198,8 +201,8 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Victory");
         BehaviorIndexList.Add("zhuangbi");
         BehaviorIndexList.Add("Death");
-
-        BehaviorIndexList.Add("Defend");
+        if (FightGlobalSetting._hasDefend)
+            BehaviorIndexList.Add("Defend");
         BehaviorIndexList.Add("RushBack");
         BehaviorIndexList.Add("Rush");
 
@@ -235,8 +238,8 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Victory");
         BehaviorIndexList.Add("zhuangbi");
         BehaviorIndexList.Add("Death");
-        
-        BehaviorIndexList.Add("Defend");
+        if (FightGlobalSetting._hasDefend)
+            BehaviorIndexList.Add("Defend");
         BehaviorIndexList.Add("RushBack");
         BehaviorIndexList.Add("Rush");
 
