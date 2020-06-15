@@ -44,9 +44,10 @@ public class zokuseiButtonEffectsGroup
             keyValue.Value.Stop(true);
         }
         pressingExplosion.Stop(true);
+        rushbutton.Stop(true);
+        
         if (FightGlobalSetting._hasDefend)
             defendbutton.Stop(true);
-        rushbutton.Stop(true);
     }
         
     public void Open(Vector3 defendbuttonpos,Vector3 rushbuttonpos)
@@ -68,14 +69,14 @@ public class zokuseiButtonEffectsGroup
             keyValue.Value.Stop(true);
         }
         pressingExplosion.Stop(true);
-
+        rushbutton.gameObject.transform.position = rushbuttonpos;
+        rushbutton.Play(true);
+        
         if (FightGlobalSetting._hasDefend)
         {
             defendbutton.gameObject.transform.position = defendbuttonpos;
             defendbutton.Play(true);
         }
-        rushbutton.gameObject.transform.position = rushbuttonpos;
-        rushbutton.Play(true);
     }
                 
     public void INI(Transform targetRectT, Zokusei zokusei,Button Attack, Button Fire1, Button Fire2)

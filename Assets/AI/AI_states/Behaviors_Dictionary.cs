@@ -46,13 +46,13 @@ public class Behaviors_Incubator
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Test_Move", testmove));
         StateIndexList.Add("Test_Move");
 
-        Defend_State defend = new Defend_State("block", "block_break")
-        {
-            StateType = BehaviorType.Def,
-            nextAttackStateCanRushFirst = false
-        };
         if (FightGlobalSetting._hasDefend)
         {
+            Defend_State defend = new Defend_State("block", "block_break")
+            {
+                StateType = BehaviorType.Def,
+                nextAttackStateCanRushFirst = false
+            };
             Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
             StateIndexList.Add("Defend");
         }
@@ -201,14 +201,16 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Victory");
         BehaviorIndexList.Add("zhuangbi");
         BehaviorIndexList.Add("Death");
-        if (FightGlobalSetting._hasDefend)
-            BehaviorIndexList.Add("Defend");
         BehaviorIndexList.Add("RushBack");
         BehaviorIndexList.Add("Rush");
-
         BehaviorIndexList.Add("Hit");
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
+
+        if (FightGlobalSetting._hasDefend)
+        {
+            BehaviorIndexList.Add("Defend");
+        }
 
         foreach (SkillConfig skillConfig in SkillConfigs)
         {
@@ -238,15 +240,16 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Victory");
         BehaviorIndexList.Add("zhuangbi");
         BehaviorIndexList.Add("Death");
-        if (FightGlobalSetting._hasDefend)
-            BehaviorIndexList.Add("Defend");
         BehaviorIndexList.Add("RushBack");
         BehaviorIndexList.Add("Rush");
-
         BehaviorIndexList.Add("Hit");
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
-
+        if (FightGlobalSetting._hasDefend)
+        {
+            BehaviorIndexList.Add("Defend");
+        }
+        
         foreach (SkillEntity _set in toFormAttackStateList)
         {
             if (!BehaviorIndexList.Contains(_set.REAL_NAME))

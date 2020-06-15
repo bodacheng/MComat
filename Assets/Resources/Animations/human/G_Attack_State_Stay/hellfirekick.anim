@@ -1274,8 +1274,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -1696,8 +1696,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -2540,8 +2540,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -2962,8 +2962,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
   m_CompressedRotationCurves: []
   m_EulerCurves: []
   m_PositionCurves:
@@ -3809,8 +3809,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -4231,8 +4231,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -4653,8 +4653,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -5075,8 +5075,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -6762,8 +6762,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -7184,8 +7184,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -7606,8 +7606,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -8028,8 +8028,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -130446,8 +130446,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -130871,8 +130871,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -131296,8 +131296,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -131721,8 +131721,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -132146,8 +132146,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -132571,8 +132571,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -132996,8 +132996,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -133421,8 +133421,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -133846,8 +133846,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -134271,8 +134271,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -134696,8 +134696,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -135121,8 +135121,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -139365,8 +139365,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -139790,8 +139790,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -140215,8 +140215,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -140640,8 +140640,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -141065,8 +141065,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -141490,8 +141490,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -141915,8 +141915,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -142340,8 +142340,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -142765,8 +142765,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -143190,8 +143190,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -143615,8 +143615,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -144040,8 +144040,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -150401,8 +150401,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -150826,8 +150826,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -151251,8 +151251,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -151676,8 +151676,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -152101,8 +152101,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -152526,8 +152526,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -152951,8 +152951,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -153376,8 +153376,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -155501,8 +155501,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -155926,8 +155926,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -156351,8 +156351,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -156776,8 +156776,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -157201,8 +157201,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -157626,8 +157626,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -158051,8 +158051,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -158476,8 +158476,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalRotation.w
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -160177,8 +160177,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -160602,8 +160602,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -161027,8 +161027,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      L UpperArm/Bip001 L ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 L UpperArm/Bip001 L ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -161452,8 +161452,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -161877,8 +161877,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -162302,8 +162302,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L Clavicle/Bip001
-      LUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 L
+      Clavicle/Bip001 LUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -162727,8 +162727,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -163152,8 +163152,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -163577,8 +163577,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      R UpperArm/Bip001 R ForeTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 R UpperArm/Bip001 R ForeTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -164002,8 +164002,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.x
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -164427,8 +164427,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.y
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -164852,8 +164852,8 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAngles.z
-    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R Clavicle/Bip001
-      RUpArmTwist
+    path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Spine2/Bip001 R
+      Clavicle/Bip001 RUpArmTwist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -167410,12 +167410,19 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.3
-    functionName: MagicForward
-    data: hellglow
+  - time: 0.18333334
+    functionName: PrepareOneMagic
+    data: g_lightning
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 1
-    intParameter: 2
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.3
+    functionName: ReleasePreparedMagicToAir
+    data: left_foot
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 5
+    intParameter: 0
     messageOptions: 0
   - time: 0.38333333
     functionName: turn_on_flag

@@ -82,9 +82,9 @@ public class FightGlobalSetting : MonoBehaviour
     void Awake()
     {
         _programMode = programMode;
-
+        
         _hasDefend = hasDefend;
-
+        
         _AT_coefficient = AT_coefficient;
         _HP_coefficient = HP_coefficient;
         

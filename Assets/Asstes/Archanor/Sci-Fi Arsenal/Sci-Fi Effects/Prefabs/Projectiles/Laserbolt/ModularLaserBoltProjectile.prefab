@@ -9477,6 +9477,9 @@ GameObject:
   - component: {fileID: 8221800}
   - component: {fileID: 19939078}
   - component: {fileID: 19871570}
+  - component: {fileID: 1817817369060026328}
+  - component: {fileID: 6775235017798677851}
+  - component: {fileID: 5883171321873445294}
   m_Layer: 0
   m_Name: ModularLaserBoltProjectile
   m_TagString: Untagged
@@ -9498,6 +9501,7 @@ Transform:
   - {fileID: 468718}
   - {fileID: 457734}
   - {fileID: 408480}
+  - {fileID: 9133467106298121414}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10053,7 +10057,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -10106,7 +10110,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -14265,3 +14269,150 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1817817369060026328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HitBox: {fileID: 6775235017798677851}
+  TrackControl: {fileID: 5883171321873445294}
+  DestructionDelay: 1.1
+  stop_emission_delay: 0.9
+  to_be_faded_renderers: []
+  audioSource: {fileID: 8221800}
+  Attachments: []
+  Counter: 0
+--- !u!114 &6775235017798677851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
+  SpecificTarget: 0
+  damage_type: 1
+  _WeaponMode: 2
+  weaponHP: 1
+  onGroundMagic: 0
+  effectSpreadOnBody: 0
+  zokusei: 0
+  muzzle: 
+  ExplosionEffect: energy_resolve
+  ContinuousDamage: 0
+  ContinuousDamageInterval: 0.2
+--- !u!114 &5883171321873445294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackMode: 1
+  xAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 10
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Z_scale: 1
+  navi_time: 5
+  DegreeOfControl: 1
+  Sensor: {fileID: 0}
+--- !u!1 &8404084680690039327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9133467106298121414}
+  - component: {fileID: 6390956205863608773}
+  m_Layer: 0
+  m_Name: marker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9133467106298121414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404084680690039327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 474680}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6390956205863608773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8404084680690039327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c94714ac130c5740af6933936e15c47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layers:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyShieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  radius: 0.5

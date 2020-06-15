@@ -164,6 +164,9 @@ public partial class Decompositioner : MonoBehaviour {
             case "expolosion":
                 BO_Ani_E.hiddenMethods.BlastAttack_core(transform.position, transform.rotation, null, 2, _HitBox.GeneratedByStateKey);
                 break;
+            case "boltpForward":
+                BO_Ani_E.hiddenMethods.MagicForward_core("boltp", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
+                break;
             case "bulletForward":
                 BO_Ani_E.hiddenMethods.Bullet_shoot_from_Core(hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation, 1, 10, _HitBox.GeneratedByStateKey);
                 break;
