@@ -10,7 +10,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     [Tooltip("数据中心")]
     public Data_Center _Center;
-        
+    
     [Tooltip("当前攻击力")]
     public float AT = 10;
     
@@ -19,15 +19,16 @@ public partial class FightAttriCalReference : MonoBehaviour
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     KnockOffCount _knockOffCount = new KnockOffCount();
     BeHitCount _BeHitCount = new BeHitCount();    
-
+    
     V_Damage deathknockOff;
     bool gettingdamage;
     List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();//713添加
     List<E_Damage> Event_Damage_List = new List<E_Damage>();
     List<V_Damage> ICauseDamages = new List<V_Damage>();
-    List<Collider> myColliders;
+    List<Collider> myColliders = new List<Collider>();
     E_Damage managingEventDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
+    IDictionary<Collider, Vector3> myColliderSizes = new Dictionary<Collider, Vector3>();
 
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
@@ -70,7 +71,15 @@ public partial class FightAttriCalReference : MonoBehaviour
                 hitbox.myColliderMustEquip.isTrigger = !_bool;
         }
     }
-        
+    
+    public void ScaleAllMyCollider(float scalesize)
+    {
+        foreach (KeyValuePair<Collider,Vector3> keyValuePair in myColliderSizes)
+        {
+            ((BoxCollider)keyValuePair.Key).size = keyValuePair.Value * scalesize;
+        }
+    }
+    
     public void ChangeLayerForAllSelfColliders(int layer)
     {
         if (myBOHitBoxeComponent != null)
@@ -83,12 +92,13 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
         gameObject.layer = layer;
     }
-
+    
     public bool IfMyBody(Collider collider) => myColliders.Contains(collider);
     
     public void FindAllSelfCollidersAndIgnoreCollision()
     {
-        myColliders = new List<Collider>();
+        myColliders.Clear();
+        myColliderSizes.Clear();
         if (myBOHitBoxeComponent != null)
         {
             foreach (BO_Limb _BO_Hitbox in myBOHitBoxeComponent)
@@ -97,6 +107,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 if (_BO_Hitbox.myColliderMustEquip != null && !myColliders.Contains(_BO_Hitbox.myColliderMustEquip))
                 {
                     myColliders.Add(_BO_Hitbox.myColliderMustEquip);
+                    myColliderSizes.Add(_BO_Hitbox.myColliderMustEquip, ((BoxCollider)_BO_Hitbox.myColliderMustEquip).size);
                 }
             }
         }
@@ -114,7 +125,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             AllMeatColliders.Add(myColliders[i]);
         }
     }
-
+    
     public void MyDamageCount(V_Damage _dmg)
     {
         if (ICauseDamages != null)

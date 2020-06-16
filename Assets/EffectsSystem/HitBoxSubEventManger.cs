@@ -7,7 +7,7 @@ public class HitBoxSubEventManger : MonoBehaviour
     public EventAndTriggerTime _event;
     public string LandedEvent;
     public string fadeEvent;
-
+    
     float time_count;
 
     void OnEnable()
