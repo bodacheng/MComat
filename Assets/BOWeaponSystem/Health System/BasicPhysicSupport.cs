@@ -13,11 +13,10 @@ public class BasicPhysicSupport : MonoBehaviour
     public class HiddenMethods
     {
         readonly BasicPhysicSupport _BasicPhysicSupport;
-        public bool meTouchingEnemyBody;
+        
         public bool onBattleGroundBundary;
         public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
-        readonly List<int> TheCollidersITouched = new List<int>();
-        
+
         public HiddenMethods(BasicPhysicSupport _BasicPhysicSupport)
         {
             this._BasicPhysicSupport = _BasicPhysicSupport;
@@ -43,19 +42,41 @@ public class BasicPhysicSupport : MonoBehaviour
             return _BasicPhysicSupport._DATA_CENTER == null || _BasicPhysicSupport._DATA_CENTER._TeamConfig != null
                 && (_BasicPhysicSupport._DATA_CENTER._TeamConfig.mylayer == box.gameObject.layer) || _BasicPhysicSupport._DATA_CENTER._TeamConfig.myShieldLayer == box.gameObject.layer;
         }
-
-        public void ITouchedThisCollider(int _dmg)
-        {
-            TheCollidersITouched.Add(_dmg);
-        }
         
-        public void ClearHitCountForAttackStepping()
+        // 与敌人的接触摩操功能
+        bool EnemyTouchingDrag = false;
+        public List<Collider> touchingEnemyCs = new List<Collider>();
+        public void OpenEnemyTouchingDrag(bool on)
         {
-            TheCollidersITouched.Clear();
+            EnemyTouchingDrag = on;
+            if (EnemyTouchingDrag == false)
+                ClearTouchedEnemyBody();
         }
         public bool ITouchedEnemyBody()
         {
-            return TheCollidersITouched.Count > 0;
+            return touchingEnemyCs.Count > 0;
+        }
+        public void AddTouchedEnemyBody(Collider C)
+        {
+            if (!EnemyTouchingDrag)
+                return;
+            touchingEnemyCs.Add(C);
+            _BasicPhysicSupport.Rigidbody.drag = 50f;
+        }
+        public void RemoveTouchedEnemyBody(Collider C)
+        {
+            if (!EnemyTouchingDrag)
+                return;
+            touchingEnemyCs.Remove(C);
+            if (touchingEnemyCs.Count == 0)
+            {
+                _BasicPhysicSupport.Rigidbody.drag = 0f;
+            }
+        }
+        public void ClearTouchedEnemyBody()
+        {
+            touchingEnemyCs.Clear();
+            _BasicPhysicSupport.Rigidbody.drag = 0f;
         }
         
         bool grounded;
@@ -114,8 +135,7 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (hiddenMethods.IfStepOnEnemy(collision.collider))
             {
-                hiddenMethods.ITouchedThisCollider(1);
-                hiddenMethods.meTouchingEnemyBody = true;
+                hiddenMethods.AddTouchedEnemyBody(collision.collider);
             }
         }
     }
@@ -126,8 +146,7 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (hiddenMethods.IfStepOnEnemy(collision.collider))
             {
-                hiddenMethods.ITouchedThisCollider(1);
-                hiddenMethods.meTouchingEnemyBody = false;
+                hiddenMethods.RemoveTouchedEnemyBody(collision.collider);
             }
         }
     }

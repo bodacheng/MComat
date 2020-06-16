@@ -22,45 +22,27 @@ public class BO_Limb : MonoBehaviour
         else
         {
             Debug.Log("hitbox" + transform + "没有配置collider，并不会自动创建，请检查");
-            this.enabled = false;
+            enabled = false;
             return;
         }
 
         if (MainHealth == null)//就是说，在awake阶段角色必须被适配mainhealth
         {
             Debug.Log("hitbox" + this.gameObject.name + "由于没有适配health体而将尝试关闭");
-            this.enabled = false;
+            enabled = false;
             return;
         }
     }
+        
+    public bool IfStepOnEnemy(Collider box)
+    {
+        if (box.isTrigger)
+            return false;
+        return
+        MainHealth._Center._TeamConfig.enemyLayerMask == (MainHealth._Center._TeamConfig.enemyLayerMask | (1 << box.gameObject.layer)) || 
+        (MainHealth._Center._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
+    }
 }
-    //void OnCollisionEnter(Collision collision)
-    //{
-        //if (enable)
-        //{
-        //    if (AI_DATA_CENTER == null)
-        //        return;
-
-        //    if (AI_DATA_CENTER._loadMode == loadMode.fightModel)
-        //    {
-        //        if (MainHealth.ifStepOnEnemyCharacter(collision.collider) )
-        //        {
-        //            if (AI_DATA_CENTER.Sensor != null)
-        //                AI_DATA_CENTER.Sensor.innerEnemies.Add(collision.collider);
-
-        //            this.MainHealth.WhenIHitSomethingEnemy(1);
-        //            if (!AI_DATA_CENTER.IsGrounded())
-        //                MainHealth.addHoutuiForcePoint(collision.collider.transform.position);
-        //        }
-        //        if (MainHealth.ifStepOnFriendCharacter(collision.collider))
-        //        {
-        //            if (!AI_DATA_CENTER.IsGrounded())
-        //                MainHealth.addHoutuiForcePoint(collision.collider.transform.position);
-        //        }
-        //    }
-        //}
-    //}
-
     //void OnTriggerExit(Collider other)
     //{
         //if (other.gameObject.layer == 19)

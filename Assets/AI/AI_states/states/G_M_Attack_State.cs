@@ -29,6 +29,7 @@ public class G_M_Attack_State : Behavior {
 	{
 		base.AI_State_enter ();
         _FightAttriCalRef.ScaleAllMyCollider(0.7f);
+        this._BasicPhysicSupport.hiddenMethods.OpenEnemyTouchingDrag(true);
         _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("confident");
@@ -47,6 +48,7 @@ public class G_M_Attack_State : Behavior {
     {
         base.AI_State_exit();
         _FightAttriCalRef.ScaleAllMyCollider(1f);
+        this._BasicPhysicSupport.hiddenMethods.OpenEnemyTouchingDrag(false);
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(false);
         _Animator.applyRootMotion = false;
     }

@@ -84,7 +84,6 @@ public class SkillCancelFlag : MonoBehaviour {
             AttackApproachLoopCounter = 0f;
             attackApproaching = false;//与校准方向一起 开始校准迈步
         }
-        _C._BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 
     public void TurnRotationAdjustmentStartFlag(int i = 1)
@@ -102,6 +101,5 @@ public class SkillCancelFlag : MonoBehaviour {
             AttackApproachLoopCounter = 0f;
             attackApproaching = true;//与校准方向一起 开始校准迈步
         }
-        _C._BasicPhysicSupport.hiddenMethods.ClearHitCountForAttackStepping();//清理移动用攻击统计，从这个时候开始，一旦击中了敌人，脚步停止
     }
 }

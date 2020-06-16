@@ -98,6 +98,7 @@ public class G_Attack_State : Behavior {
     {
         base.AI_State_exit();
         _FightAttriCalRef.ScaleAllMyCollider(1f);
+        this._BasicPhysicSupport.hiddenMethods.OpenEnemyTouchingDrag(false);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _Animator.applyRootMotion = false;
         pEvents.CloseAllPersonalityEffects();
@@ -123,6 +124,7 @@ public class G_Attack_State : Behavior {
         //Animation_Manger.Animator.SetTrigger("confident");
         _Animator.SetFloat("speed", 0f);
         _FightAttriCalRef.ScaleAllMyCollider(0.7f);
+        this._BasicPhysicSupport.hiddenMethods.OpenEnemyTouchingDrag(true);
         _SkillCancelFlag.turn_off_flag();
         if (StateType == BehaviorType.GR)
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
