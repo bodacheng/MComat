@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
-using dataAccess;
-using mainMenu;
 
 public partial class StoneCell : MonoBehaviour, IDropHandler
 {
@@ -51,27 +48,13 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                     case CellPhase.SkillStoneBoxCell:
                         switch (sourceCell.cellPhase)
                         {
-                            case CellPhase.NineSlotCell_full:// 已装备石头的卸载功能。
+                            case CellPhase.NineSlotCell_full:// 已装备石头的卸载
                                 SVCenter.StoneRemoveFromSlotToCell(sourceCell, this);
                             break;
                         }
                     break;
-                    case CellPhase.DeleteArea:
-                        switch (sourceCell.cellPhase)
-                        {
-                            case CellPhase.SkillStoneBoxCell:
-                                UnityEngine.Events.UnityAction SkillstoneDeleteConfirm = () =>
-                                {
-                                    TheNineSlot.target.mainProcessRunner.Run(MySkillStonesReader.RemoveTheseStonesFromLocalDic(new List<string>{ GetItem().SkillStoneOfPlayerId}));
-                                    UpdateMyItem();
-                                };
-                                UnityEngine.Events.UnityAction SkillstoneDeleteCancel = () =>
-                                {
-                                    TheNineSlot.target.mainProcessRunner.Run(SkillStonesBox.target.ArrangeSkillStonesToBox());
-                                };
-                                LoadingCanvas.target.ArrangeValiationWindow(SkillstoneDeleteConfirm, SkillstoneDeleteCancel, "确实要删除技能石头：" + GetItem()._SkillConfig.REAL_NAME + "?");
-                                break;
-                        }
+                    case CellPhase.Casual:
+                        AddItem(item);
                     break;
                 }
             }

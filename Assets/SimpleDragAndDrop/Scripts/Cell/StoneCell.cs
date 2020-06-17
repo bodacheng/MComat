@@ -16,7 +16,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         SkillStoneBoxCell,
         NineSlotCell_full,
         NineSlotCell_empty,
-        DeleteArea,
+        Casual
     }
     
     public enum SelectMode

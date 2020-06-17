@@ -36,7 +36,7 @@ public class SSLevelUpManager : MonoBehaviour
         IniStartLevel();
         RefreshSkillLevelUpModule();
         levelUpPageRect.gameObject.SetActive(true);
-        LoadingCanvas.target.HigtLightRect(levelUpPageRect);
+        //LoadingCanvas.target.HigtLightRect(levelUpPageRect);// 这个到底有没有必要那待定吧。。。
     }
     public void CloseLevelUpPage()
     {

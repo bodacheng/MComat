@@ -12,7 +12,7 @@ namespace mainMenu
         public IEnumerator ArrangeSkillStonesToBox()
         {
             yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.target.GetUsingStonesId());
-            _StoneDeleteManger.RefreshSelectedRender();
+            StoneDeleteManger.target.RefreshSelectedRender();
         }
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。

@@ -10,8 +10,8 @@ public class StoneDeleteManger : MonoBehaviour
     public Text CurrentSelectedCount;
     public RectTransform SkillInfoT, SelectionInfoT, OperationsT, SelectionConfirmT;
     public SkillStonesBox SkillStonesBox;
-    readonly List<SkillStoneOfPlayerInfoModel> selected = new List<SkillStoneOfPlayerInfoModel>();
-    
+    readonly List<SkillStoneOfPlayerInfoModel> selectedForDelete = new List<SkillStoneOfPlayerInfoModel>();
+
     public static StoneDeleteManger target;
     
     void Awake()
@@ -34,7 +34,7 @@ public class StoneDeleteManger : MonoBehaviour
         OperationsT.gameObject.SetActive(false);
         SelectionConfirmT.gameObject.SetActive(true);
     }
-    
+
     public void ExitDeleteMode()
     {
         SkillInfoT.gameObject.SetActive(true);
@@ -48,13 +48,14 @@ public class StoneDeleteManger : MonoBehaviour
     // 按钮函数
     public void ClearSelect()
     {
-        selected.Clear();
+        selectedForDelete.Clear();
         RefreshSelectedRender();
     }
     
+    // 显示正选择中的技能石
     public void RefreshSelectedRender()
     {
-        foreach(KeyValuePair<int,StoneCell> KV in SkillStonesBox.CellsDictionary)
+        foreach(KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDictionary)
         {
             StoneCell cell = KV.Value;
             if (cell.GetItem() == null)
@@ -65,7 +66,7 @@ public class StoneDeleteManger : MonoBehaviour
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
-                if (selected.Contains(skillStoneOfPlayerInfoModel))
+                if (selectedForDelete.Contains(skillStoneOfPlayerInfoModel))
                 {
                     cell._selected.SetActive(true);
                 }else{
@@ -75,6 +76,7 @@ public class StoneDeleteManger : MonoBehaviour
         }
     }
     
+    // 在集体删除技能石多选模式下单击技能石格。未选中时点击为选中，选中时点击则取消
     void SelectForDelete(StoneCell cell)
     {
         if (cell.GetItem() != null)
@@ -82,7 +84,7 @@ public class StoneDeleteManger : MonoBehaviour
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
-                if (selected.Contains(skillStoneOfPlayerInfoModel))
+                if (selectedForDelete.Contains(skillStoneOfPlayerInfoModel))
                 {
                     RemoveStoneForDelete(cell);
                 }else{
@@ -92,6 +94,7 @@ public class StoneDeleteManger : MonoBehaviour
         }
     }
     
+    // 选择以集体删除
     void SelectStoneForDelete(StoneCell cell)
     {
         if (cell.GetItem() != null)
@@ -99,13 +102,14 @@ public class StoneDeleteManger : MonoBehaviour
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
-                selected.Add(skillStoneOfPlayerInfoModel);
-                CurrentSelectedCount.text = "选中" + selected.Count + "个技能石";
+                selectedForDelete.Add(skillStoneOfPlayerInfoModel);
+                CurrentSelectedCount.text = "选中" + selectedForDelete.Count + "个技能石";
                 cell._selected.SetActive(true);
             }
         }
     }
     
+    // 取消选择
     void RemoveStoneForDelete(StoneCell cell)
     {
         if (cell.GetItem() != null)
@@ -113,8 +117,8 @@ public class StoneDeleteManger : MonoBehaviour
             SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
             if (skillStoneOfPlayerInfoModel != null)
             {
-                selected.Remove(skillStoneOfPlayerInfoModel);
-                CurrentSelectedCount.text = "选中" + selected.Count + "个技能石";
+                selectedForDelete.Remove(skillStoneOfPlayerInfoModel);
+                CurrentSelectedCount.text = "选中" + selectedForDelete.Count + "个技能石";
                 cell._selected.SetActive(false);
             }
         }

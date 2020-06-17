@@ -2,15 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// 11.13号思考这样几个问题：
-// 1.玩家的等级与CellLimit之间的制约关系怎么实现
-// 2.从数据库阅读拥有技能石的函数在哪
-// 3.当石头的数量超过了格子数量时候所进行的validation在哪。
-// 4.有财产类的安全隐患吗。
-// 18.1.6
-// 这个模块缺乏这些函数：添加新技能石头(与技能石头盒子的画面配合？)
-// 消耗某技能石头
-
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
@@ -34,11 +25,7 @@ namespace mainMenu
         [Space(7)]
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _SkillStoneBoxTabEffectsManager;
-        
-        [Space(7)]
-        [Header("技能石头删除区域")]
-        public StoneCell DeleteArea;
-        
+                
         [Space(7)]
         [Header("攻击范围限定")]
         public Toggle closeCheckBox;
@@ -52,13 +39,9 @@ namespace mainMenu
         
         [Header("fxcamera")]
         public Camera fxCamera;
-        
-        [Header("DeleteManger")]
-        public StoneDeleteManger _StoneDeleteManger;
-        
+                
         string focusingtype = "human";
         int focusingExType;
-        SkillStoneSlot DeleteSkillStoneSlot;
         static RectTransform _stonesTempContainer;
         
         public static SkillStonesBox target;
@@ -71,9 +54,6 @@ namespace mainMenu
         
         public IEnumerator StartUp(int stoneboxsize)
         {
-            DeleteArea.cellPhase = StoneCell.CellPhase.DeleteArea;
-            DeleteSkillStoneSlot = new SkillStoneSlot(-1, null, DeleteArea);
-            //Debug.Log("技能石盒子容量为" + stoneboxsize);
             GenerateCells(stoneboxsize, 1);
             yield break;
         }
