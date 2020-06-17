@@ -42,16 +42,10 @@ public class BasicPhysicSupport : MonoBehaviour
             return _BasicPhysicSupport._DATA_CENTER == null || _BasicPhysicSupport._DATA_CENTER._TeamConfig != null
                 && (_BasicPhysicSupport._DATA_CENTER._TeamConfig.mylayer == box.gameObject.layer) || _BasicPhysicSupport._DATA_CENTER._TeamConfig.myShieldLayer == box.gameObject.layer;
         }
-        
+
         // 与敌人的接触摩操功能
-        bool EnemyTouchingDrag = false;
+        public bool EnemyTouchingDrag = false;
         public List<Collider> touchingEnemyCs = new List<Collider>();
-        public void OpenEnemyTouchingDrag(bool on)
-        {
-            EnemyTouchingDrag = on;
-            if (EnemyTouchingDrag == false)
-                ClearTouchedEnemyBody();
-        }
         public bool ITouchedEnemyBody()
         {
             return touchingEnemyCs.Count > 0;
@@ -129,6 +123,13 @@ public class BasicPhysicSupport : MonoBehaviour
     public void SetUsingGravity(bool _on)
     {
         UsingGravity = _on;
+    }
+
+    public void OpenEnemyTouchingDrag(int open)
+    {
+        hiddenMethods.EnemyTouchingDrag = open == 0 ? false:true;
+        if (hiddenMethods.EnemyTouchingDrag == false)
+            hiddenMethods.ClearTouchedEnemyBody();
     }
 
     void OnCollisionEnter(Collision collision)
