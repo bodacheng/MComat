@@ -39,6 +39,7 @@ public class HitBoxSubEventManger : MonoBehaviour
                     if (_Decompositioner.transform.position.y <= 0)
                     {
                         _Decompositioner.SpecialTriggerEvent(LandedEvent, this);
+                        _Decompositioner.ReturnSelfToPool();
                         landEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)
