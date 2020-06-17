@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HittingDetection;
 using Soul;
+using UniRx;
 
 public partial class Hurt_State : Behavior {
 
@@ -8,7 +9,8 @@ public partial class Hurt_State : Behavior {
     Vector3 fixDesPos;
     float TimeCounter { set; get; }
     V_Damage target;
-    
+    SingleAssignmentDisposable physicMissionDisposable;
+
     public override void Pre_process_before_enter()
 	{
 		base.Pre_process_before_enter ();
@@ -87,11 +89,13 @@ public partial class Hurt_State : Behavior {
     {
         return TimeCounter > used_dizzy_time;
     }
-    
+
     public override void AI_State_exit()
     {
         base.AI_State_exit();
         _Rigidbody.mass = 100;
+        if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
+            physicMissionDisposable.Dispose();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _FightAttriCalRef.SetGettingDamageState(false);
         switch(target.from_weapon.damage_type)

@@ -60,14 +60,16 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (!EnemyTouchingDrag)
                 return;
-            touchingEnemyCs.Add(C);
+            if (!touchingEnemyCs.Contains(C))
+                touchingEnemyCs.Add(C);
             _BasicPhysicSupport.Rigidbody.drag = 50f;
         }
         public void RemoveTouchedEnemyBody(Collider C)
         {
             if (!EnemyTouchingDrag)
                 return;
-            touchingEnemyCs.Remove(C);
+            if (touchingEnemyCs.Contains(C))
+                touchingEnemyCs.Remove(C);
             if (touchingEnemyCs.Count == 0)
             {
                 _BasicPhysicSupport.Rigidbody.drag = 0f;
