@@ -37,7 +37,7 @@ namespace Soul
 
                     KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>("DangerousNearby", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair2);
-                    ConditionAndRespondPriority.Set(keyValuePair2.Key,keyValuePair2.Value,3);
+                    ConditionAndRespondPriority.Set(keyValuePair2.Key,keyValuePair2.Value, 3);
 
                     KeyValuePair<string, string> keyValuePair3 = new KeyValuePair<string, string>("DangerousClose", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair3);
@@ -49,10 +49,10 @@ namespace Soul
                     
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;
-                case BehaviorType.CT:                    
-                    KeyValuePair<string, string> keyValuePair_ct = new KeyValuePair<string, string>("DangerousClose", behavior_define.REAL_NAME);
+                case BehaviorType.CT:
+                    KeyValuePair<string, string> keyValuePair_ct = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair_ct);
-                    ConditionAndRespondPriority.Set(keyValuePair_ct.Key,keyValuePair_ct.Value,1);
+                    ConditionAndRespondPriority.Set(keyValuePair_ct.Key, keyValuePair_ct.Value, 1);
                     
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;

@@ -4868,7 +4868,7 @@ MonoBehaviour:
   effectSpreadOnBody: 1
   zokusei: 4
   muzzle: 
-  ExplosionEffect: energy_resolve
+  ExplosionEffect: electric_hit
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!114 &5965544156700164547

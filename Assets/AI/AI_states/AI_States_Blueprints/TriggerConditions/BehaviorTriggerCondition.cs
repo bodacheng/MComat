@@ -4,10 +4,7 @@ using System.Reflection;
 namespace Soul
 {
     public abstract partial class Behavior
-    {
-        Collider threat;
-        Collider nearestEnemyMeat;
-        
+    {        
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
             return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
@@ -20,17 +17,17 @@ namespace Soul
         
         public bool DangerousClose() //Counter_State 1 2 3
         {
-            return Sensor.GetSuddenThreatInRange(0,5) != null;
+            return Sensor.GetSuddenThreatInRange(0, 5) != null;
         }
         
         public bool CounterComingEnergy()
         {
-            nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0,5);
-            threat = Sensor.GetSuddenThreatInRange(5, 15);
+            Collider nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0,5);
+            Collider threat = Sensor.GetSuddenThreatInRange(5, 15);
             return nearestEnemyMeat == null && (threat != null);
         }
         
-        public bool DangerousVeryClose() //Defend_State 1 
+        public bool DangerousVeryClose() //CT
         {
             if (_ResistanceManager.Resistance.Value > 0)
             {
@@ -40,8 +37,8 @@ namespace Soul
             {
                 return true;
             }
-            threat = Sensor.GetSuddenThreatInRange(0, 5);
-            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
+            Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
+            Collider nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
 
             if (nearestEnemyMeat != null && threat != null)
             {
@@ -78,13 +75,13 @@ namespace Soul
 
         public bool TimeToRespond()
         {
-            threat = Sensor.GetSuddenThreatInRange(0, 5);
+            Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
             return threat == null;
         }
         
         public bool TimeToStopRunning() //没有意义的条件。 
         {
-            nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
+            Collider nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
             return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) || Sensor.GetSuddenThreatInRange(0,8) != null;
         }
         
