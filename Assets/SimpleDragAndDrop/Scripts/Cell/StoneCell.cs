@@ -14,8 +14,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public enum CellPhase
     {
         SkillStoneBoxCell,
-        NineSlotCell_full,
-        NineSlotCell_empty,
+        NineSlotCell,
         Casual
     }
     
@@ -82,21 +81,12 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public void UpdateMyItem()
     {
         myDadItem = GetComponentInChildren<SKStoneItem>();
-        if (_SkillStoneSlot != null)
+        if (cellPhase == CellPhase.SkillStoneBoxCell)
         {
-            cellPhase = myDadItem != null ? CellPhase.NineSlotCell_full : CellPhase.NineSlotCell_empty;
-        }
-        switch(cellPhase)
-        {
-            case CellPhase.NineSlotCell_empty:
-            case CellPhase.NineSlotCell_full:
-                break;
-            case CellPhase.SkillStoneBoxCell:
-                if (gameObject.activeSelf)
-                {
-                    ShowUsingCharIcon(myDadItem,_charIcon);
-                }
-                break;
+            if (gameObject.activeSelf)
+            {
+                ShowUsingCharIcon(myDadItem,_charIcon);
+            }
         }
     }
     

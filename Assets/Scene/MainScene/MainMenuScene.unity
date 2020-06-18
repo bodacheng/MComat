@@ -40066,7 +40066,7 @@ MonoBehaviour:
   _SelectMode: 1
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
-  cellPhase: 3
+  cellPhase: 2
   image: {fileID: 0}
   empty: {r: 0, g: 0, b: 0, a: 0}
   full: {r: 0, g: 0, b: 0, a: 0}
@@ -98392,7 +98392,7 @@ MonoBehaviour:
   _SelectMode: 1
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
-  cellPhase: 3
+  cellPhase: 2
   image: {fileID: 0}
   empty: {r: 0, g: 0, b: 0, a: 0}
   full: {r: 0, g: 0, b: 0, a: 0}
@@ -109476,7 +109476,7 @@ MonoBehaviour:
   _SelectMode: 1
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
-  cellPhase: 3
+  cellPhase: 2
   image: {fileID: 0}
   empty: {r: 0, g: 0, b: 0, a: 0}
   full: {r: 0, g: 0, b: 0, a: 0}

@@ -23,38 +23,26 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             {
                 switch (cellPhase)//自身phase
                 {
-                    case CellPhase.NineSlotCell_full:
+                    case CellPhase.NineSlotCell:
                         switch (sourceCell.cellPhase)
                         {
-                            case CellPhase.NineSlotCell_full:
-                                SwapItems(sourceCell, this);
-                            break;
+                            case CellPhase.NineSlotCell:
                             case CellPhase.SkillStoneBoxCell:
-                                Install(sourceCell, _SkillStoneSlot);
-                            break;
-                        }
-                    break;
-                    case CellPhase.NineSlotCell_empty:
-                        switch (sourceCell.cellPhase)
-                        {
-                            case CellPhase.NineSlotCell_full:
-                                AddItem(item);
-                            break;
-                            case CellPhase.SkillStoneBoxCell:
-                                Install(sourceCell, _SkillStoneSlot);
+                                Install(sourceCell, this);
                             break;
                         }
                     break;
                     case CellPhase.SkillStoneBoxCell:
                         switch (sourceCell.cellPhase)
                         {
-                            case CellPhase.NineSlotCell_full:// 已装备石头的卸载
-                                SVCenter.StoneRemoveFromSlotToCell(sourceCell, this);
+                            case CellPhase.NineSlotCell:// 已装备石头的卸载
+                            case CellPhase.Casual:// 已装备石头的卸载                            
+                                Install(sourceCell, this);
                             break;
                         }
                     break;
                     case CellPhase.Casual:
-                        AddItem(item);
+                        Install(sourceCell, this);
                     break;
                 }
             }

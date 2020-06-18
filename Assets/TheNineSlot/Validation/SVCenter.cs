@@ -17,7 +17,7 @@ public static class SVCenter
         // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
         if (boxcell.GetItem() != null)
         {
-            sourceCell._SkillStoneSlot.ReturnStoneToBox();
+            sourceCell.ReturnStoneToBox();
         }
         else
         {
@@ -29,35 +29,46 @@ public static class SVCenter
         TheNineSlot.target.NineSlotsStatusRefresh();
     }
     
-    public static void AddToSlotFromBox(StoneCell cellInBox, SkillStoneSlot targetSlot)
+    public static void MoveItemFromTo(StoneCell from, StoneCell to)
     {
-        SKStoneItem itemFromStoneBox = cellInBox.GetItem();
-        if (itemFromStoneBox == null)
+        SKStoneItem item = from.GetItem();
+        if (item == null)
             return;
-        if (!CheckIfOkAfterStoneRemove(itemFromStoneBox))
-            return;
-            
-        targetSlot._DragAndDropCell.AddItem(itemFromStoneBox);
-        cellInBox.UpdateMyItem();
+        if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
+        {
+            if (!CheckIfOtherCharOkAfterStoneRemove(item))
+                return;
+        }
+        to.AddItem(item);
+        from.UpdateMyItem();
         TheNineSlot.target.NineSlotsStatusRefresh();
     }
     
-    public static void Swap_BoxCell_SlotCell(StoneCell cellInBox, SkillStoneSlot targetSlot)
+    public static void SwapItemFromTo(StoneCell from, StoneCell to)
     {
-        SKStoneItem itemFromStoneBox = cellInBox.GetItem();
-        if (itemFromStoneBox == null)
-            return;
-        SKStoneItem stone = targetSlot._DragAndDropCell.GetItem();
-        if (stone.Inherent)
-        {
-            Debug.Log("固有技能无法移出，返回");
-            return;
-        }
-        
-        if (!CheckIfOkAfterStoneRemove(itemFromStoneBox))
+        SKStoneItem itemFromCell = from.GetItem();
+        if (itemFromCell == null)
             return;
             
-        SwapItems(cellInBox, targetSlot._DragAndDropCell);
+        // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
+        if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
+        {
+            if (!CheckIfOtherCharOkAfterStoneRemove(itemFromCell))
+                return;
+        }
+        
+        // 把技能石从技能槽拖回技能石盒，如果是固有技能石，连移动也不允许
+        if (to.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell && from.cellPhase == StoneCell.CellPhase.NineSlotCell)
+        {
+            SKStoneItem stone = to.GetItem();
+            if (stone.Inherent)
+            {
+                Debug.Log("固有技能无法移出，返回");
+                return;
+            }
+        }
+        
+        SwapItems(from, to);
         TheNineSlot.target.NineSlotsStatusRefresh();
     }
     
@@ -89,12 +100,17 @@ public static class SVCenter
     }
     
     // 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
-    static bool CheckIfOkAfterStoneRemove(SKStoneItem itemFromStoneBox)
+    static bool CheckIfOtherCharOkAfterStoneRemove(SKStoneItem item)
     {
-        if (AccountCharsSet.CheckExist(MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
+        if (item.Inherent)
         {
-            string monsterPlayerID = MySkillStonesReader.Get(itemFromStoneBox.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
-            TheNineSlot.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, itemFromStoneBox._SkillConfig.RECORD_ID);
+            Debug.Log("固有技能无法移出，返回");
+            return false;
+        }
+        if (AccountCharsSet.CheckExist(MySkillStonesReader.Get(item.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
+        {
+            string monsterPlayerID = MySkillStonesReader.Get(item.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
+            TheNineSlot.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
             if (valR3 != TheNineSlot.SkillEditError.Perfect)
             {
                 TheNineSlot.target.ValiationWarn(valR3, monsterPlayerID);

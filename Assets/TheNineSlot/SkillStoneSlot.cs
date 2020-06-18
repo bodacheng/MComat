@@ -38,31 +38,6 @@ public class SkillStoneSlot
         _DragAndDropCell.UpdateMyItem();
     }
     
-    public void ReturnStoneToBox()
-    {
-        _DragAndDropCell.UpdateMyItem();
-        SKStoneItem _DragAndDropItem = _DragAndDropCell.GetItem();
-        if (_DragAndDropItem)
-        {
-            if (_DragAndDropItem._SkillConfig.SP_LEVEL == SkillStonesBox.target.GetFocusingExType())//如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
-            {
-                StoneCell dragAndDropCell = SkillStonesBox.target.GetFirstEmptyCell();
-                if (dragAndDropCell != null)
-                {
-                    dragAndDropCell.AddItem(_DragAndDropItem);
-                }
-                else
-                {
-                    _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
-                }
-            }
-            else{
-                _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);//如果尝试归还背包的技能石必杀等级与显示中的不一致，则直接使其非显示。
-            }
-        }
-        _DragAndDropCell.UpdateMyItem();
-    }
-
     //这个函数指的是格子自身的更新
     // 一个是在readANineAndTwo时候作用，也就是读取角色技能至九宫格的初期，
     // 一个是在SeliWholeNineAndTwo()里作用，进一步说就是每次石头的拖拽行为结束时(拖到某格子内或某空白区)

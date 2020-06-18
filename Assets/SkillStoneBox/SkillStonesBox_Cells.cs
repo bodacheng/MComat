@@ -124,7 +124,7 @@ namespace mainMenu
                     {
                         if (TheNineSlot.target.GetFocusingStoneSlot() != null)
                         {
-                            _SkillStoneCell.Install(_SkillStoneCell, TheNineSlot.target.GetFocusingStoneSlot());
+                            _SkillStoneCell.Install(_SkillStoneCell, TheNineSlot.target.GetFocusingStoneSlot()._DragAndDropCell);
                         }
                     }
                     lastclicktime = Time.time;
