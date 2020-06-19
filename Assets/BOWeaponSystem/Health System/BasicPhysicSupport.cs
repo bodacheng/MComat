@@ -50,13 +50,27 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             return touchingEnemyCs.Count > 0;
         }
+
+        public int draglevel;
         public void AddTouchedEnemyBody(Collider C)
         {
             if (!EnemyTouchingDrag)
                 return;
             if (!touchingEnemyCs.Contains(C))
                 touchingEnemyCs.Add(C);
-            _BasicPhysicSupport.Rigidbody.drag = 50f;
+            switch (draglevel)
+            {
+                case 1:
+                    _BasicPhysicSupport.Rigidbody.drag = 5f;
+                    break;
+                case 2:
+                    _BasicPhysicSupport.Rigidbody.drag = 20f;
+                    break;
+                case 3:
+                    _BasicPhysicSupport.Rigidbody.drag = 40f;
+                    break;
+            }
+            
         }
         public void RemoveTouchedEnemyBody(Collider C)
         {
@@ -127,6 +141,7 @@ public class BasicPhysicSupport : MonoBehaviour
 
     public void OpenEnemyTouchingDrag(int open)
     {
+        hiddenMethods.draglevel = open;
         hiddenMethods.EnemyTouchingDrag = open == 0 ? false:true;
         if (hiddenMethods.EnemyTouchingDrag == false)
             hiddenMethods.ClearTouchedEnemyBody();
