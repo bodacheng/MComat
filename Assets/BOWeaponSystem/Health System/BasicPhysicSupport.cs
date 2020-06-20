@@ -61,13 +61,13 @@ public class BasicPhysicSupport : MonoBehaviour
             switch (draglevel)
             {
                 case 1:
-                    _BasicPhysicSupport.Rigidbody.drag = 5f;
+                    _BasicPhysicSupport.Rigidbody.drag = 10f;
                     break;
                 case 2:
-                    _BasicPhysicSupport.Rigidbody.drag = 20f;
+                    _BasicPhysicSupport.Rigidbody.drag = 30f;
                     break;
                 case 3:
-                    _BasicPhysicSupport.Rigidbody.drag = 40f;
+                    _BasicPhysicSupport.Rigidbody.drag = 50f;
                     break;
             }
             
