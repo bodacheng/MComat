@@ -150992,7 +150992,7 @@ AnimationClip:
     functionName: ReleasePreparedMagicToAir
     data: right_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 15
+    floatParameter: 25
     intParameter: 1
     messageOptions: 0
   - time: 0.6166667

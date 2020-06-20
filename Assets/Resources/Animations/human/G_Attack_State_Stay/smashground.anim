@@ -146305,7 +146305,7 @@ AnimationClip:
     functionName: MagicForward
     data: e_eruption
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 7
+    floatParameter: 4
     intParameter: 0
     messageOptions: 0
   - time: 0.53333336
