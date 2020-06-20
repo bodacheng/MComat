@@ -146303,12 +146303,12 @@ AnimationClip:
   m_Events:
   - time: 0.28333333
     functionName: MagicForward
-    data: PillarBlast
+    data: e_eruption
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 7
     intParameter: 0
     messageOptions: 0
-  - time: 0.75
+  - time: 0.53333336
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

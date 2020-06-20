@@ -8,7 +8,7 @@ using UnityEngine.Animations;
 public class BO_Weapon_Animation_Events : MonoBehaviour
 {
     public HiddenMethods hiddenMethods;
-
+    
     TeamConfig _TeamConfig = TeamConfig.defaultSet;
     readonly List<Transform> _Used_Targets = new List<Transform>();
     IDictionary<Transform, Decompositioner> bodyPartsHitBoxRegisterDic;

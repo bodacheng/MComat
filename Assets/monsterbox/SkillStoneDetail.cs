@@ -3,11 +3,16 @@ using UnityEngine.UI;
 using Api.Dto.Model;
 using dataAccess;
 using Skill;
+using System.Collections;
 
 namespace mainMenu
 {
     public class SkillStoneDetail : MonoBehaviour
     {
+        [Space(2)]
+        [Header("图标")]
+        public RectTransform IconShowT;
+        
         [Space(2)]
         [Header("技能名字")]
         public Text keyname;
@@ -32,12 +37,32 @@ namespace mainMenu
             return currentstone;
         }
         
-        public void RefreshSkillDetail(SkillConfig _SkillConfigOfSkillStone, string skillStoneOfPlayerId)
+        IEnumerator IconForShow(string skillID)
         {
-            keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
-            Showname.text = _SkillConfigOfSkillStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_SkillConfigOfSkillStone.RECORD_ID);
-            ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
-            ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
+            IEnumerator Generate = SkillStonesBox.GenerateStoneMode(skillID , 2);
+            yield return Generate;
+            SKStoneItem item = (SKStoneItem)Generate.Current;
+            if (IconShowT != null)
+            {
+                foreach (Transform child in IconShowT) 
+                {
+                    Destroy(child.gameObject);
+                }
+                item.transform.SetParent(IconShowT);
+                item.gameObject.SetActive(true);
+                item.transform.localPosition = Vector3.zero;
+                item.transform.localScale = Vector3.one;
+            }
+        }
+        
+        public void RefreshSkillDetail(SkillConfig _SkillConfigOfStone, string skillStoneOfPlayerId)
+        {
+            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_SkillConfigOfStone.RECORD_ID));
+
+            keyname.text = _SkillConfigOfStone.REAL_NAME;
+            Showname.text = _SkillConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_SkillConfigOfStone.RECORD_ID);
+            ShowSkillStoneExType(_SkillConfigOfStone.SP_LEVEL);
+            ShowSKillRanges(_SkillConfigOfStone.AI_MIN_DIS,_SkillConfigOfStone.AI_MAX_DIS);
             currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
             skill_level_levelup.text = "LV:" + currentstone.GetLevel();
             skill_level_info.text = "LV:" + currentstone.GetLevel();

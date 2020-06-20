@@ -25,7 +25,7 @@ namespace mainMenu
         [Space(7)]
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _SkillStoneBoxTabEffectsManager;
-                
+
         [Space(7)]
         [Header("攻击范围限定")]
         public Toggle closeCheckBox;
@@ -39,7 +39,7 @@ namespace mainMenu
         
         [Header("fxcamera")]
         public Camera fxCamera;
-                
+
         string focusingtype = "human";
         int focusingExType;
         static RectTransform _stonesTempContainer;

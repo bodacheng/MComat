@@ -17,28 +17,28 @@ namespace mainMenu
                     yield break;
                 }
             }
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(skillStoneOfPlayerId);
-            IEnumerator Generate = GenerateStoneMode(skillStoneOfPlayerInfoModel.skillId);
+            SkillStoneOfPlayerInfoModel StoneOfPlayerInfo = MySkillStonesReader.Get(skillStoneOfPlayerId);
+            IEnumerator Generate = GenerateStoneMode(StoneOfPlayerInfo.skillId , 1);
             yield return Generate;
             SKStoneItem item = (SKStoneItem)Generate.Current;
-                      
+
             if (!MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))
                 MySkillStonesReader.RenderModelDic.Add(skillStoneOfPlayerId, item);
             else
                  MySkillStonesReader.RenderModelDic[skillStoneOfPlayerId] = item;
-            
-            item.Inherent = skillStoneOfPlayerInfoModel.Inherent == "true";
+                 
+            item.Inherent = StoneOfPlayerInfo.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(MySkillStonesReader.Dic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(_stonesTempContainer);
         }
         
-        public static IEnumerator GenerateStoneMode(string skillID)
+        // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
+        public static IEnumerator GenerateStoneMode(string skillID, int mode)
         {
             if (skillID == null)
             {
-                yield return null;
                 yield break;
             }
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
@@ -62,6 +62,10 @@ namespace mainMenu
             if (item == null)
             {
                 item = Icon.AddComponent<SKStoneItem>();
+            }
+            if (mode == 2)
+            {
+                item.enabled = false;
             }
             yield return item;
         }

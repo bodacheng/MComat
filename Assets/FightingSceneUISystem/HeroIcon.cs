@@ -38,7 +38,7 @@ public class HeroIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
         
-    public void ChangeIcon(Sprite _Sprite,Zokusei zokusei)
+    public void ChangeIcon(Sprite _Sprite, Zokusei zokusei)
     {
         if (frame == null || Icon == null)
         {

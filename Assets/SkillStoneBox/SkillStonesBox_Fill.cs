@@ -50,7 +50,7 @@ namespace mainMenu
                     {
                         CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
                         _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[targetSKs[i]]);
-                        _SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                        //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                         cellindex++;
                     }
                     else
@@ -64,8 +64,8 @@ namespace mainMenu
                 {
                     MySkillStonesReader.RenderModelDic[targetSKs[i]].GetComponent<Image>().color = Color.white;
                     CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                    _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[targetSKs[i]]); //！！！！！这个环节会销毁被覆盖的石头。
-                    _SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
+                    _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[targetSKs[i]]);
+                    //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }
             }

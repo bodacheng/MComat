@@ -12,7 +12,7 @@ namespace mainMenu
         [Space(7)]
         [Header("格子pretab")]
         public StoneCell Cellprefab;
-                
+
         [Space(5)]
         [Header("选中框")]
         public GameObject SelectedFrame;
@@ -61,13 +61,13 @@ namespace mainMenu
             int hangshu = 1;
             for (int i = 0; i < cellsLimit; i++)
             {
-                if (!CellsDictionary.ContainsKey(i))//我姑且认为该字典里每个key值对应的SkillStoneCell对象不会凭空消失
+                if (!CellsDictionary.ContainsKey(i))
                 {
                     StoneCell cell = Instantiate(Cellprefab);
                     cell.empty = new Color(1, 1, 1, 0.6f);
                     cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
-                    cell._SkillStoneSlot = null;//技能石box里用不到这个
+                    cell._SkillStoneSlot = null;
                     CellsDictionary.Add(i, cell);
                 }
                 
@@ -111,97 +111,30 @@ namespace mainMenu
             }
             return null;
         }
-        
-        float lastclicktime;
-        public void CellButtonBeheviour_EditCharSkill(StoneCell _SkillStoneCell)
+
+        public IEnumerator ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
         {
-            Button button = _SkillStoneCell.GetComponent<Button>();
-            if (button != null)
-            {
-                void buttonFeature()
-                {
-                    if (Time.time - lastclicktime < 0.25f) // double click
-                    {
-                        if (TheNineSlot.target.GetFocusingStoneSlot() != null)
-                        {
-                            _SkillStoneCell.Install(_SkillStoneCell, TheNineSlot.target.GetFocusingStoneSlot()._DragAndDropCell);
-                        }
-                    }
-                    lastclicktime = Time.time;
-                    SKStoneItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfig != null)
-                    {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
-                    }
-                }
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(buttonFeature);
-                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
-            }
-        }
-        
-        public void CellButtonBeheviour_STStoneShow(StoneCell _SkillStoneCell)
-        {
-            Button button = _SkillStoneCell.GetComponent<Button>();
-            if (button != null)
-            {
-                void buttonFeature()
-                {
-                    SKStoneItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfig != null)
-                    {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
-                    }
-                }
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(buttonFeature);
-                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
-            }
-        }
-        
-        // 技能浏览器模式
-        public void CellButtonBeheviour_SKillShowMode(StoneCell _SkillStoneCell)
-        {
-            Button button = _SkillStoneCell.GetComponent<Button>();
-            if (button != null)
-            {
-                void buttonFeature()
-                {
-                    SKStoneItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfig != null)
-                    {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
-                        mainProcessRunner.Run(MemberDetail.target._SkillsPrintOut.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
-                    }
-                }
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(buttonFeature);
-                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
-            }
-        }
-        
-        public IEnumerator ShowUsingChar(SKStoneItem dragAndDropItem, HeroIcon targetIcon)
-        {
-            if (dragAndDropItem == null || dragAndDropItem.SkillStoneOfPlayerId == null)
+            if (Item == null || Item.SkillStoneOfPlayerId == null)
             {
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Get(dragAndDropItem.SkillStoneOfPlayerId);
-            if (SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId == null)
+            SkillStoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStonesReader.Get(Item.SkillStoneOfPlayerId);
+            if (SSOfPlayerInfo.inUsingMonsterOfPlayerId == null)
             {
+                Debug.Log("逻辑错误。SkillStoneOfPlayerId："+ Item.SkillStoneOfPlayerId);
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            CharConfig charConfig = null;
-            GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SkillStoneOfPlayerInfoModel.inUsingMonsterOfPlayerId);
+            GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
+                Debug.Log("逻辑错误。inUsingMonsterOfPlayerId："+ SSOfPlayerInfo.inUsingMonsterOfPlayerId);
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
             targetIcon.gameObject.SetActive(true);
-            charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
+            CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
             targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
             charConfig == null ? Zokusei.Null : charConfig._zokusei);
             yield break;

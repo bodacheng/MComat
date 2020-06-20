@@ -39,7 +39,7 @@ public class HitBoxesProcesser : MonoBehaviour
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
                 processingDecompositioners[i].Step2();
-            }            
+            }
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
                 processingDecompositioners[i].Life();
