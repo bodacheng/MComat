@@ -8,7 +8,6 @@ public class ArcadeFrontProcess : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
-        yield return ArcadeManager.target.GenerateStageButtons();
         loadFinished = true;
         yield break;
     }

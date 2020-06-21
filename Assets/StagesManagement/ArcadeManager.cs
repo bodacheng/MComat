@@ -25,10 +25,6 @@ namespace mainMenu
         [Header("StageButtonPretab")]
         public StageButton pretab;
         
-        [Space(7)]
-        [Header("preparingScene")]
-        public SingleThreadProcesser mainProcessRunner;
-                        
         public static ArcadeManager target;
         List<StageButton> stageButtons = new List<StageButton>();
         
@@ -36,19 +32,19 @@ namespace mainMenu
         {
             target = this;
         }
-        
-        public StageButton GetStageButton(int level)
+
+        public StageButton GetStageButton(int stageno)
         {
             for (int i = 0; i < stageButtons.Count; i++)
             {
-                if (stageButtons[i].ID == level)
+                if (stageButtons[i].ID == stageno)
                 {
                     return stageButtons[i];
                 }
             }
             return null;
         }
-        
+
         // 原则上这些玩意没有每次都去生成的道理..
         // 而且这个功能可能做一些扩展，比如关卡图标可以搞个特殊一类的
         // 2020523 : 计划根据账户进度选择是否显示隐藏关卡
@@ -96,7 +92,7 @@ namespace mainMenu
             }else{
                 VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
                 // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
-                
+
                 targetScrollbarValue = 
                 ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (stageNum - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
                 / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
@@ -106,7 +102,7 @@ namespace mainMenu
         
         public void Clear()
         {
-            foreach (Transform child in ButtonsContainer) 
+            foreach (Transform child in ButtonsContainer)
             {
                 Destroy(child.gameObject);
             }

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public partial class EffectsManager
 {
-    public static DecompositionerPool IniEffectsPool(string resource_name, string EffectsPath, int object_count)
+    public static DecompositionerPool INIEffectsPool(string resource_name, string EffectsPath, int object_count)
     {
         EffectPrefab = null;
         EffectPool = null;
@@ -28,7 +26,7 @@ public partial class EffectsManager
                 return null;//防止无限循环
             }
         }
-        EffectPool = IniEffectsPool(resource_name, "defaultmagic", object_count);
+        EffectPool = INIEffectsPool(resource_name, "defaultmagic", object_count);
         return EffectPool;
     }
 }

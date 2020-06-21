@@ -44,7 +44,7 @@ public class BasicPhysicSupport : MonoBehaviour
         }
 
         // 与敌人的接触摩操功能
-        public bool EnemyTouchingDrag = false;
+        public bool EnemyTouchingDrag;
         public List<Collider> touchingEnemyCs = new List<Collider>();
         public bool ITouchedEnemyBody()
         {
@@ -99,7 +99,7 @@ public class BasicPhysicSupport : MonoBehaviour
             }
         }
         
-        readonly float floorY = 0;
+        readonly float floorY;
         public void GroundedCal()
         {
             foreach (Transform check in _BasicPhysicSupport.floorCheckers)
@@ -142,7 +142,7 @@ public class BasicPhysicSupport : MonoBehaviour
     public void OpenEnemyTouchingDrag(int open)
     {
         hiddenMethods.draglevel = open;
-        hiddenMethods.EnemyTouchingDrag = open == 0 ? false:true;
+        hiddenMethods.EnemyTouchingDrag = open != 0;
         if (hiddenMethods.EnemyTouchingDrag == false)
             hiddenMethods.ClearTouchedEnemyBody();
     }
@@ -183,10 +183,10 @@ public class BasicPhysicSupport : MonoBehaviour
                 animator.SetBool("Grounded", hiddenMethods.Grounded);
                 animator.SetFloat("airCount", airCount);
                 animator.SetFloat("groundedCount", groundedCount);
-                groundedCount = (hiddenMethods.Grounded) ? groundedCount += Time.deltaTime : 0f;
+                groundedCount = hiddenMethods.Grounded ? groundedCount += Time.deltaTime : 0f;
                 airCount = (!hiddenMethods.Grounded) ? airCount += Time.deltaTime : 0f;
             }
-            
+
             temp2 = transform.position;
             temp2.y = 0;
             dis_from_center = temp2.magnitude;
@@ -215,36 +215,3 @@ public class BasicPhysicSupport : MonoBehaviour
         }
     }
 }
-
-//private List<Vector3> houtui = new List<Vector3>();
-//private bool canBodyPush = true;//这个值的存在并不是为了突出角色“体重”而是为了让一些冲击类技能的穿透性不会受“角色互斥系统”的影响
-//public void setBodyPushFlag(bool flag)
-//{
-//    canBodyPush = flag;
-//}
-//if (canBodyPush)
-//{
-//    averageDirection = Vector3.zero;
-//    if (houtui.Count > 0)
-//    {
-//        foreach (Vector3 t in houtui)
-//        {
-//            averageDirection += t;
-//        }
-//        averageDirection /= houtui.Count;
-//        forceDirection = (gameObject.transform.position - averageDirection).normalized;
-//        forceDirection.y = 0f;
-//        //Rigidbody.velocity = forceDirection * 10f;
-//        //Rigidbody.AddForce(forceDirection * 20f, ForceMode.VelocityChange);
-//        //gameObject.transform.position += forceDirection;
-//        gameObject.transform.position =
-//                      Vector3.Lerp(gameObject.transform.position, gameObject.transform.position + forceDirection * 100, Time.deltaTime);//这个100是主观的。
-//    }
-//}
-//houtui.Clear();
-//public void addHoutuiForcePoint(Vector3 point)
-//{
-//    houtui.Add(point);
-//}
-//private Vector3 averageDirection;
-//private Vector3 forceDirection;

@@ -99,6 +99,9 @@ namespace mainMenu
             TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             
+            // 关卡按钮一次生成就可以
+            yield return ArcadeManager.target.GenerateStageButtons();
+            
             // Shop
             ShopTop shopTop = new ShopTop();
             BoxOverLoadFix boxOverLoadFix = new BoxOverLoadFix();

@@ -55,5 +55,6 @@ public class SkillStones : MainSceneProcess
     {
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
+        SSLevelUpManager.target.CloseLevelUpPage();
     }
 }

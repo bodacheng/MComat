@@ -135,10 +135,10 @@ namespace FightScene
             
             yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.team1_ExtraHP);
             yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.team2_ExtraHP);
-
+            
             FightTeam1.ArrangeAllTeamMembersToPosition(FightTeam1.TeamMembers);
             FightTeam2.ArrangeAllTeamMembersToPosition(FightTeam2.TeamMembers);
-            
+
             switch (playerTeam)
             {
                 case Team.player1:

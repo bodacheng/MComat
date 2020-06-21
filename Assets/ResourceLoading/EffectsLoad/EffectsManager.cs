@@ -16,7 +16,7 @@ public partial class EffectsManager
     {
         if (string.IsNullOrEmpty(resource_name))
             return null;
-        EffectPool = IniEffectsPool(resource_name, EffectsPath, 3);
+        EffectPool = INIEffectsPool(resource_name, EffectsPath, 3);
         if (EffectPool == null)
             return null;
         processingEffectObj = EffectPool.Rent();

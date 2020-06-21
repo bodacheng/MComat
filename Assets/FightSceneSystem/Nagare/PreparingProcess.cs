@@ -20,7 +20,7 @@ public class PreparingProcess : FSceneProcess
         {
             mainProcessRunner.Run(RealTimeGameProcessManager.target.LoadGame(FightSceneNote.nextBattle));
         }
-        EffectsManager.IniEffectsPool("wallCrack", null, 3);
+        EffectsManager.INIEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
         yield break;
     }

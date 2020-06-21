@@ -11,7 +11,8 @@ public class SSLevelUpManager : MonoBehaviour
     [Space(7)]
     [Header("升级按钮系列")]
     public RectTransform levelUpPageRect;
-    public Button plusLevel; // 这个按钮的有效与否应该是取决于有没有足够的经验值币来满足升级请求。
+    public Button LevelUp;
+    public Button plusLevel;
     public Button minusLevel;
     public Button confirmLevelUp;
     public Text TargetLevel;
@@ -63,7 +64,7 @@ public class SSLevelUpManager : MonoBehaviour
             }
         }
     }
-        
+    
     void ReturnAllMaterialsToBox()
     {
         for (int i = 0; i < MaterialSlots.Count; i++)
@@ -89,7 +90,7 @@ public class SSLevelUpManager : MonoBehaviour
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
         RefreshSkillLevelUpModule();
         levelUpPageRect.gameObject.SetActive(true);
-
+        LevelUp.gameObject.SetActive(false);
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
         //LoadingCanvas.target.HigtLightRect(levelUpPageRect);// 这个到底有没有必要那待定吧。。。
     }
@@ -99,7 +100,7 @@ public class SSLevelUpManager : MonoBehaviour
         StoneCell.SeletedRender(null, _Selected);
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 1);
         levelUpPageRect.gameObject.SetActive(false);
-        
+        LevelUp.gameObject.SetActive(true);
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(true);
         //LoadingCanvas.target.ClearHigtLight();
     }
@@ -158,6 +159,13 @@ public class SSLevelUpManager : MonoBehaviour
             minusLevel.gameObject.SetActive(false);
         }
         TargetLevel.text = "Level " + currentlevel + "->" + selectedTargetLevel.ToString();
+        
+        void LevelUp()
+        {
+            LoadingCanvas.target.ArrangeValiationWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
+        }
+        confirmLevelUp.onClick.RemoveAllListeners();
+        confirmLevelUp.onClick.AddListener(LevelUp);
     }
     #endregion
     
@@ -168,7 +176,7 @@ public class SSLevelUpManager : MonoBehaviour
         return AccountSet._AccInfo.Coin > (tartgetlevel - current_level);
     }
 
-    // 技能升级确认。放在按钮上就可以
+    // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
         if (focusingSSD.GetSTTarget() == null)

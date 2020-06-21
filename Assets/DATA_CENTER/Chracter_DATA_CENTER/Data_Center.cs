@@ -67,9 +67,9 @@ public partial class Data_Center : MonoBehaviour
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             string personalEffectsPath = FightGlobalSetting.EffectPathDefine(Zokusei);
-            EffectsManager.IniEffectsPool("short_effect", personalEffectsPath, 3);
-            EffectsManager.IniEffectsPool("normal_effect", personalEffectsPath, 3);
-            EffectsManager.IniEffectsPool("long_effect", personalEffectsPath, 3);
+            EffectsManager.INIEffectsPool("short_effect", personalEffectsPath, 3);
+            EffectsManager.INIEffectsPool("normal_effect", personalEffectsPath, 3);
+            EffectsManager.INIEffectsPool("long_effect", personalEffectsPath, 3);
             switch (ResourceLoadingSetting.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
@@ -111,15 +111,15 @@ public partial class Data_Center : MonoBehaviour
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
         string effectPath = FightGlobalSetting.EffectPathDefine(Zokusei);
 
-        EffectsManager.IniEffectsPool("Sparks", effectPath, 3);
-        EffectsManager.IniEffectsPool("light_hit", effectPath, 3);
-        EffectsManager.IniEffectsPool("light_hit", effectPath, 3);
-        EffectsManager.IniEffectsPool("heavy_hit", effectPath, 3);
-        EffectsManager.IniEffectsPool("super_hit", effectPath, 3);
-        EffectsManager.IniEffectsPool("resistanceUp", effectPath, 3);
-        EffectsManager.IniEffectsPool("on_enable_effect", effectPath, 3);
-        EffectsManager.IniEffectsPool("FlashStart", effectPath, 3);
-        EffectsManager.IniEffectsPool("FlashEnd", effectPath, 3);
+        EffectsManager.INIEffectsPool("Sparks", effectPath, 3);
+        EffectsManager.INIEffectsPool("light_hit", effectPath, 3);
+        EffectsManager.INIEffectsPool("light_hit", effectPath, 3);
+        EffectsManager.INIEffectsPool("heavy_hit", effectPath, 3);
+        EffectsManager.INIEffectsPool("super_hit", effectPath, 3);
+        EffectsManager.INIEffectsPool("resistanceUp", effectPath, 3);
+        EffectsManager.INIEffectsPool("on_enable_effect", effectPath, 3);
+        EffectsManager.INIEffectsPool("FlashStart", effectPath, 3);
+        EffectsManager.INIEffectsPool("FlashEnd", effectPath, 3);
 
         if (Shield != null)
         {

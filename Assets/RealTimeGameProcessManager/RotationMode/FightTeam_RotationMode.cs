@@ -26,7 +26,7 @@ namespace FightScene
             CharIconDic.Clear();
             rotationModeHitCombo.text = "";
         }
-
+        
         public override void ArrangeAllTeamMembersToPosition(MultiDictionary<int, int, Data_Center> heromultiDictionary)
         {
             foreach (KeyValuePair<int, List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
@@ -56,6 +56,31 @@ namespace FightScene
             {
                 BarsPositionUpdate();
             }
+        }
+        
+        public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, Transform IniStandPoint)
+        {
+            bool memberchanged = false;
+            foreach (Data_Center data_Center in TeamMembers.values)
+            {
+                if (_changeTo == data_Center)
+                {
+                    RotationMode_fightingMember = _changeTo;
+                    RotationMode_fightingMember.IsDead.Subscribe(x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); } });
+                    RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
+                    RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
+                    EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
+                    memberchanged = true;
+                }
+                else
+                {
+                    data_Center._MyBehaviorRunner.ChangeState("Empty");
+                    data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
+                }
+            }
+            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+            RealTimeGameProcessManager.target.Refresh();
+            return memberchanged;
         }
         
         bool ChangeFightingMember(Data_Center _changeTo)
@@ -92,8 +117,8 @@ namespace FightScene
                 {
                     if (data_Center._MyBehaviorRunner.GetNowState().StateKey != "Empty")
                     {
-                        data_Center._MyBehaviorRunner.ChangeState("Empty");// 换角色的话当前角色是要切到empty状态的，dead flag要用来做一些参考所以在dead状态推出时候不能改变dead flag
-                        data_Center.WholeT.transform.position = new Vector3(9999, -200, 9999);
+                        data_Center._MyBehaviorRunner.ChangeState("Empty");
+                        data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                     }
                 }
             }
@@ -197,31 +222,6 @@ namespace FightScene
                 }
                 time_counter = 0f;
             }
-        }
-        
-        public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, Transform IniStandPoint)
-        {
-            bool memberchanged = false;
-            foreach (Data_Center data_Center in TeamMembers.values)
-            {
-                if (_changeTo == data_Center)
-                {
-                    RotationMode_fightingMember = _changeTo;
-                    RotationMode_fightingMember.IsDead.Subscribe(x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); } });
-                    RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
-                    RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
-                    EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
-                    memberchanged = true;
-                }
-                else
-                {
-                    data_Center._MyBehaviorRunner.ChangeState("Empty");
-                    data_Center.WholeT.transform.position = new Vector3(9999, -200, 9999);
-                }
-            }
-            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            RealTimeGameProcessManager.target.Refresh();
-            return memberchanged;
         }
         
         public bool RandomChangeAliveFightingMember()
