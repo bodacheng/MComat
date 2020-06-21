@@ -30,7 +30,7 @@ namespace mainMenu
         [Header("当前技能等级")]
         public Text skill_level_info;
         public Text skill_level_levelup;
-        
+
         SkillStoneOfPlayerInfoModel currentstone;
         public SkillStoneOfPlayerInfoModel GetSTTarget()
         {
@@ -55,14 +55,14 @@ namespace mainMenu
             }
         }
         
-        public void RefreshSkillDetail(SkillConfig _SkillConfigOfStone, string skillStoneOfPlayerId)
+        public void RefreshSkillDetail(SkillConfig _ConfigOfStone, string skillStoneOfPlayerId)
         {
-            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_SkillConfigOfStone.RECORD_ID));
-
-            keyname.text = _SkillConfigOfStone.REAL_NAME;
-            Showname.text = _SkillConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_SkillConfigOfStone.RECORD_ID);
-            ShowSkillStoneExType(_SkillConfigOfStone.SP_LEVEL);
-            ShowSKillRanges(_SkillConfigOfStone.AI_MIN_DIS,_SkillConfigOfStone.AI_MAX_DIS);
+            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_ConfigOfStone.RECORD_ID));
+            
+            keyname.text = _ConfigOfStone.REAL_NAME;
+            Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
+            ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
+            ShowSKillRanges(_ConfigOfStone.AI_MIN_DIS, _ConfigOfStone.AI_MAX_DIS);
             currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
             skill_level_levelup.text = "LV:" + currentstone.GetLevel();
             skill_level_info.text = "LV:" + currentstone.GetLevel();
@@ -75,32 +75,32 @@ namespace mainMenu
             {
                 keyname.text = "";
                 ShowSkillStoneExType(0);
-                ShowSKillRanges(-10,-10);//即清空
+                ShowSKillRanges(-10, -10);//即清空
                 return;
             }
             keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
             ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
-            ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS);
+            ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS, _SkillConfigOfSkillStone.AI_MAX_DIS);
         }
         
         void ShowSKillRanges(float dis_min, float float_max)
         {
-            if (SkillConfig.RangeLimit(dis_min,float_max,true, false, false, false))
+            if (SkillConfig.RangeLimit(dis_min, float_max, true, false, false, false))
                 close.SetActive(true);
             else
                 close.SetActive(false);
                 
-            if (SkillConfig.RangeLimit(dis_min,float_max,false, true, false, false))
+            if (SkillConfig.RangeLimit(dis_min, float_max, false, true, false, false))
                 near.SetActive(true);
             else
                 near.SetActive(false);
                 
-            if (SkillConfig.RangeLimit(dis_min,float_max,false, false, true, false))
+            if (SkillConfig.RangeLimit(dis_min, float_max, false, false, true, false))
                 far.SetActive(true);
             else
                 far.SetActive(false);
-                
-            if (SkillConfig.RangeLimit(dis_min,float_max,false, false, false, true))
+
+            if (SkillConfig.RangeLimit(dis_min, float_max, false, false, false, true))
                 outter.SetActive(true);
             else
                 outter.SetActive(false);

@@ -16,8 +16,8 @@ public class SkillStones : MainSceneProcess
         }
         LoadingCanvas.target.DarkOff(1f);
         yield return ModelShower.target.ShowModel(null);
-        SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);        
-        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);        
+        SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
+        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);//这一行因为牵扯到对玩家存档中技能石头的读取所以可能是(协程)

@@ -9,12 +9,12 @@ using Skill;
 public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	public static SKStoneItem draggedItem;                                      // Item that is dragged now
-	public static GameObject icon;                                                  // Icon of dragged item
-	public static StoneCell sourceCell;                                       // From this cell dragged item is
+	public static GameObject icon;                                              // Icon of dragged item
+	public static StoneCell sourceCell;                                         // From this cell dragged item is
 
     static Canvas canvas;                                                       // Canvas for item drag operation
     static readonly string canvasName = "DragAndDropCanvas";                    // Name of canvas
-    static readonly int canvasSortOrder = 100;                                       // Sort order for canvas
+    static readonly int canvasSortOrder = 100;                                  // Sort order for canvas
 
     public Image image;
     //自定义item属性

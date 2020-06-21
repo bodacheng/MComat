@@ -4,9 +4,10 @@ using Api.Dto.Model;
 using dataAccess;
 using System.Collections;
 using mainMenu;
+using System.Collections.Generic;
 
 public class SSLevelUpManager : MonoBehaviour
-{    
+{
     [Space(7)]
     [Header("升级按钮系列")]
     public RectTransform levelUpPageRect;
@@ -14,46 +15,105 @@ public class SSLevelUpManager : MonoBehaviour
     public Button minusLevel;
     public Button confirmLevelUp;
     public Text TargetLevel;
-
+    
+    [Space(7)]
+    [Header("尝试升级的技能石的选中标记框")]
+    public GameObject _Selected;
+    
+    [Space(7)]
+    [Header("融合技能槽")]
+    public StoneCell cell1;
+    public StoneCell cell2;
+    public StoneCell cell3;
+    public StoneCell cell4;
+    public StoneCell cell5;
+    List<StoneCell> MaterialSlots;
+    
     public static SSLevelUpManager target;
-
+    
     SkillStoneDetail focusingSSD;
     public void SetFocusingSSD(SkillStoneDetail fSSD)
     {
         focusingSSD = fSSD;
     }
-
+    
     void Awake()
     {
         target = this;
+        MaterialSlots = new List<StoneCell>
+        {
+            cell1,
+            cell2,
+            cell3,
+            cell4,
+            cell5
+        };
     }
-
+    
+    // 添加强化素材用技能石
+    public void AddMaterial(StoneCell skillboxcell)
+    {
+        for (int i = 0; i < MaterialSlots.Count; i++)
+        {
+            MaterialSlots[i].UpdateMyItem();
+            if (MaterialSlots[i].GetItem() == null)
+            {
+                StoneCell.Install(skillboxcell, MaterialSlots[i]);
+                break;
+            }
+        }
+    }
+        
+    void ReturnAllMaterialsToBox()
+    {
+        for (int i = 0; i < MaterialSlots.Count; i++)
+        {
+            MaterialSlots[i].UpdateMyItem();
+            if (MaterialSlots[i].GetItem() != null)
+            {
+                MaterialSlots[i].ReturnStoneToBox();
+            }
+        }
+    }
+    
     #region 技能石升级窗口的开启与关闭,都是直接放在按钮上。
     public void OpenLevelUpPage()
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
-        IniStartLevel();
+        SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(focusingSSD.GetSTTarget().skillStoneOfPlayerId);
+        StoneCell targetStoneOnCell = targetStone.GetCell();
+        StoneCell.SeletedRender(targetStoneOnCell, _Selected);
+        
+        INIStartLevel();
+        SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
         RefreshSkillLevelUpModule();
         levelUpPageRect.gameObject.SetActive(true);
+
+        StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
         //LoadingCanvas.target.HigtLightRect(levelUpPageRect);// 这个到底有没有必要那待定吧。。。
     }
     public void CloseLevelUpPage()
     {
+        ReturnAllMaterialsToBox();
+        StoneCell.SeletedRender(null, _Selected);
+        SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 1);
         levelUpPageRect.gameObject.SetActive(false);
-        LoadingCanvas.target.ClearHigtLight();
+        
+        StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(true);
+        //LoadingCanvas.target.ClearHigtLight();
     }
     #endregion
     
     #region 打开技能升级画面时候数值的初始化 （起始等级一类的）。
-    void IniStartLevel()
+    void INIStartLevel()
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
         selectedTargetLevel = focusingSSD.GetSTTarget().GetLevel();
     }
     #endregion
-
+    
     #region 调整目标等级 直接放在按钮上。
     int selectedTargetLevel;
     public void PlusTargetLevel()

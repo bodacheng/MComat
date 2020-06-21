@@ -22,7 +22,7 @@ namespace mainMenu
                 }
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
-                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
+                button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, _Selected); });
             }
         }
     }

@@ -528,6 +528,7 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_OnDrop.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Utili.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
@@ -546,6 +547,7 @@
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_EditMode.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Fill.cs" />
+    <Compile Include="Assets\SkillStoneBox\SkillStonesBox_MAdd.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Order.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_SKillShower.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_ShowMode.cs" />

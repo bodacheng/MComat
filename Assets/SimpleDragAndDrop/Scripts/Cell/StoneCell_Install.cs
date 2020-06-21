@@ -4,7 +4,7 @@ using mainMenu;
 
 public partial class StoneCell : MonoBehaviour, IDropHandler
 {
-    public void Install(StoneCell from, StoneCell to)
+    public static void Install(StoneCell from, StoneCell to)
     {
         switch(to.cellPhase)
         {

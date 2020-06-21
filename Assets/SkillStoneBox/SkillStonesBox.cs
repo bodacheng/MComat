@@ -9,7 +9,7 @@ namespace mainMenu
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
-        
+
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
         public RectTransform BoxT, stonesTempContainer;

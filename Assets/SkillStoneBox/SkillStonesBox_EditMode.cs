@@ -17,7 +17,7 @@ namespace mainMenu
                     {
                         if (TheNineSlot.target.GetFocusingStoneSlot() != null)
                         {
-                            _SkillStoneCell.Install(_SkillStoneCell, TheNineSlot.target.GetFocusingStoneSlot()._DragAndDropCell);
+                            StoneCell.Install(_SkillStoneCell, TheNineSlot.target.GetFocusingStoneSlot()._DragAndDropCell);
                         }
                     }
                     lastclicktime = Time.time;
@@ -29,7 +29,7 @@ namespace mainMenu
                 }
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
-                button.onClick.AddListener(delegate { SeletedRender(_SkillStoneCell); });
+                button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
             }
         }
     }

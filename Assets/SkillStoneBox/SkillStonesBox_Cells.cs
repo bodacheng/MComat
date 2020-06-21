@@ -32,31 +32,8 @@ namespace mainMenu
             }
         }
         
-        public static void SeletedRender(StoneCell cell)
-        {
-            if (cell == null)
-            {
-                _Selected.SetActive(false);
-                return;
-            }
-            
-            if (cell._SelectMode == StoneCell.SelectMode.single)
-            {
-                _Selected.SetActive(true);
-                _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
-                _Selected.transform.localPosition = Vector3.zero;
-                _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-                _Selected.GetComponent<RectTransform>().localScale = Vector3.one;
-                _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-                _Selected.gameObject.SetActive(true);
-            }
-            else if (cell._SelectMode == StoneCell.SelectMode.multi)
-            {
-            }
-        }
-        
         // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
-        public void GenerateCells(int cellsLimit, int mode)// 1 : showMode 2: skilledit 3 : 技能展示器
+        public void GenerateCells(int cellsLimit, int mode)
         {
             int hangshu = 1;
             for (int i = 0; i < cellsLimit; i++)
@@ -80,8 +57,23 @@ namespace mainMenu
                     CellsDictionary[i].transform.localScale = Vector3.one;
                 }
                 
+                CellsDictionary[i]._selected.SetActive(false);
+            }
+            GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            hangshu = cellsLimit / GridLayoutGroup.constraintCount + 1;
+            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
+            CellsFeatureLoad(cellsLimit, mode);
+        }
+        
+        public void CellsFeatureLoad(int cellsLimit, int mode) // 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
+        {
+            for (int i = 0; i < cellsLimit; i++)
+            {
                 switch(mode)
                 {
+                    case 0:
+                        CellButtonBeheviour_MAdd(CellsDictionary[i]);
+                    break;
                     case 1:
                         CellButtonBeheviour_STStoneShow(CellsDictionary[i]);
                     break;
@@ -92,13 +84,8 @@ namespace mainMenu
                         CellButtonBeheviour_SKillShowMode(CellsDictionary[i]);
                     break;
                 }
-                
-                CellsDictionary[i]._selected.SetActive(false);
                 CellsDictionary[i]._SelectMode = StoneCell.SelectMode.single;
             }
-            GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
-            hangshu = cellsLimit / GridLayoutGroup.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
         }
         
         public StoneCell GetFirstEmptyCell()

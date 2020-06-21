@@ -8,8 +8,9 @@ using dataAccess;
 public class StoneDeleteManger : MonoBehaviour
 {
     public Text CurrentSelectedCount;
-    public RectTransform SkillInfoT, SelectionInfoT, OperationsT, SelectionConfirmT;
+    public RectTransform SkillInfoT, SelectionInfoT, SelectionConfirmT;
     public SkillStonesBox SkillStonesBox;
+    public Button EnterDeleteModeButton;
     readonly List<SkillStoneOfPlayerInfoModel> selectedForDelete = new List<SkillStoneOfPlayerInfoModel>();
 
     public static StoneDeleteManger target;
@@ -31,15 +32,15 @@ public class StoneDeleteManger : MonoBehaviour
         
         SkillInfoT.gameObject.SetActive(false);
         SelectionInfoT.gameObject.SetActive(true);
-        OperationsT.gameObject.SetActive(false);
         SelectionConfirmT.gameObject.SetActive(true);
+        EnterDeleteModeButton.gameObject.SetActive(false);
     }
 
     public void ExitDeleteMode()
     {
         SkillInfoT.gameObject.SetActive(true);
         SelectionInfoT.gameObject.SetActive(false);
-        OperationsT.gameObject.SetActive(true);
+        EnterDeleteModeButton.gameObject.SetActive(true);
         SelectionConfirmT.gameObject.SetActive(false);
         CurrentSelectedCount.text = "";
         SkillStonesBox.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
