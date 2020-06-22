@@ -5,12 +5,12 @@ using mainMenu;
 
 public class Setting : MonoBehaviour {
 
-    public Button OpenSetting,CloseSetting;
+    public Button OpenSetting, CloseSetting;
     public Canvas SettingCanvas;
     public RectTransform SettingMenuT;
     public AudioSource bgmSource;
-    public Slider bgmSLider,CVSlider,effectsSoundsSlider;
-
+    public Slider bgmSLider, CVSlider, effectsSoundsSlider;
+    
     public static ApiLanguage Language = ApiLanguage.EnUs;
     public static Setting target;
     
@@ -27,18 +27,18 @@ public class Setting : MonoBehaviour {
             LoadingCanvas.target.HigtLightRect(SettingMenuT);
         }
         OpenSetting.onClick.AddListener(Open);
-
+        
         void Close()
         {
             SaveProgrameSettingToAccount();
-                        
+            
             SettingCanvas.sortingOrder = 0;
             LoadingCanvas.target.ClearHigtLight();
             SettingCanvas.gameObject.SetActive(false);
         }
         CloseSetting.onClick.AddListener(Close);
     }
-
+    
     void Start()
     {
         onBgmChange();

@@ -10,7 +10,7 @@ public class PlayerAccountInfo
 
     int arcadeProcess;
 
-    float bgmVolumn, effectsVolumn;
+    float bgmVolumn = 0.5f, effectsVolumn = 0.5f;
     
     public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
 
@@ -81,7 +81,7 @@ public class PlayerAccountInfo
     }
 }
 
-public enum PlayerAccountProgressStep : int
+public enum PlayerAccountProgressStep
 {
     justCreated = 1,
     Tutorial = 2,
