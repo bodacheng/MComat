@@ -100,6 +100,7 @@ namespace FightScene
         
         public IEnumerator LoadGame(StageScriptableObject stage)
         {
+            BoundaryControllByGod.target.ChangeBackGround(stage.BattleGroundID);
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:

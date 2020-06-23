@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667588, g: 0.48427194, b: 0.564524, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1052,6 +1052,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fb50d714250ab14dbcbc394bb2a2736, type: 3}
+--- !u!1 &283316400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7797062606497684132, guid: 3fb50d714250ab14dbcbc394bb2a2736,
+    type: 3}
+  m_PrefabInstance: {fileID: 283316399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306543131
 GameObject:
   m_ObjectHideFlags: 0
@@ -13751,17 +13757,27 @@ PrefabInstance:
     - target: {fileID: 1857210060592510330, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -120515
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1857210060592510330, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 4.5912e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1857210060592510330, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.4033e-41
+      value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857210061131105288, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 3e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857210061131105288, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3535964293995474218, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
         type: 3}
@@ -13855,6 +13871,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b95f5aaa81b4049eb804ebe242cc8f9c, type: 3}
+--- !u!1 &2143688078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6307544600642956812, guid: b95f5aaa81b4049eb804ebe242cc8f9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2143688077}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619014923820344016
 GameObject:
   m_ObjectHideFlags: 0
@@ -31366,7 +31388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000649885118306801}
   m_LocalRotation: {x: 0.2355046, y: -0, z: -0, w: 0.9718732}
-  m_LocalPosition: {x: -11.8, y: 155, z: -158}
+  m_LocalPosition: {x: -3.95, y: 8.6, z: -24.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37661,7 +37683,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf12d54e993347749276eec466f7143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundaryMode: 1
+  BackGrounds:
+  - {fileID: 2143688078}
+  - {fileID: 283316400}
   BattleRingPSs:
   - {fileID: 1149068244378366120}
   - {fileID: 619014923834735490}

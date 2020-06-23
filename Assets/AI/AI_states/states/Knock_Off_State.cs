@@ -85,7 +85,7 @@ public class Knock_Off_State : Behavior
             if (time_counter > 0.1f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 dropped = true;
-                _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
+                //_FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.velocity = Vector3.zero;
                 time_counter = 0;//开始针对躺地时间记时
             }else{
@@ -108,7 +108,7 @@ public class Knock_Off_State : Behavior
                 _AIStateRunner.ChangeState("getUp");
         }
 
-        if (!canbeattack && time_counter > 0.01f)
+        if (!canbeattack && time_counter > 0.005f)
         {
             _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
             canbeattack = true;

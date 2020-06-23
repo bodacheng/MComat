@@ -28,7 +28,7 @@ public class GetUp : Behavior {
         _Animator.SetFloat("speed", 0f);
         Sensor.OneRoundDetectionStart(5);
         _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
-        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
+        Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
 	}
 
     public override void C_State_enter()

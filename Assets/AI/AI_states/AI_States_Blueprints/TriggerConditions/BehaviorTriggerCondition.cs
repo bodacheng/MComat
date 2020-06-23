@@ -9,7 +9,7 @@ namespace Soul
         {
             return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
         }
-        
+
         public bool DangerousNearby() // Dash_Back_State G_Ani_MoveEscape_State 2
         {
             return (_FightAttriCalRef.IFgettingDamage() || Sensor.GetSuddenThreatInRange(0,5) != null) && _ResistanceManager.Resistance.Value == 0;
@@ -64,10 +64,25 @@ namespace Soul
             {
                 return false;
             }
-
+            
             // 从移动状态到攻击的话技能释放范围要求精准，但连招情况明明敌人在眼前但因为按技能最好范围而言“不够远”而不释放的话，会很奇怪
             //if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
                 tar = Sensor.GetTargetRangeEnemyCollider(triggerAtttackRangeMin, triggerAtttackRangeMax);
+            //else
+                //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f, 0, triggerAtttackRangeMin - 3f), triggerAtttackRangeMax);
+            return tar != null;
+        }
+        
+        public bool TimeToAttack_Reluctant()
+        {
+            if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
+            {
+                return false;
+            }
+            
+            // 从移动状态到攻击的话技能释放范围要求精准，但连招情况明明敌人在眼前但因为按技能最好范围而言“不够远”而不释放的话，会很奇怪
+            //if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
+                tar = Sensor.GetTargetRangeEnemyCollider(0, triggerAtttackRangeMax);
             //else
                 //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f, 0, triggerAtttackRangeMin - 3f), triggerAtttackRangeMax);
             return tar != null;

@@ -55,7 +55,7 @@ namespace mainMenu
             HPinput.text = "0";
             stage = new StageScriptableObject
             {
-                BattleGroundID = 2
+                BattleGroundID = 1
             };
             SwitchToRotationMode();
         }

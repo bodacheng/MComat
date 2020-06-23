@@ -68,6 +68,10 @@ namespace Soul
                     RegisterConditionToRespond(keyValuePair);
                     ConditionAndRespondPriority.Set(keyValuePair.Key, keyValuePair.Value, 2);
 
+                    KeyValuePair<string, string> eretet = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behavior_define.REAL_NAME);
+                    RegisterConditionToRespond(eretet);
+                    ConditionAndRespondPriority.Set(eretet.Key, eretet.Value, 3);
+
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;
                 case BehaviorType.GI:
@@ -75,12 +79,20 @@ namespace Soul
                     RegisterConditionToRespond(keyValuePairuu);
                     ConditionAndRespondPriority.Set(keyValuePairuu.Key, keyValuePairuu.Value, 2);
                     
+                    KeyValuePair<string, string> fgerte = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behavior_define.REAL_NAME);
+                    RegisterConditionToRespond(fgerte);
+                    ConditionAndRespondPriority.Set(fgerte.Key, fgerte.Value, 3);
+                    
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;
                 case BehaviorType.GM:
                     KeyValuePair<string, string> keyValuePairqq = new KeyValuePair<string, string>("TimeToAttack", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairqq);
                     ConditionAndRespondPriority.Set(keyValuePairqq.Key, keyValuePairqq.Value, 2);
+                    
+                    KeyValuePair<string, string> fdsfr = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behavior_define.REAL_NAME);
+                    RegisterConditionToRespond(fdsfr);
+                    ConditionAndRespondPriority.Set(fdsfr.Key, fdsfr.Value, 3);
 
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;

@@ -225,7 +225,7 @@ namespace mainMenu
             FightSceneNote.nextBattle = stage;
             SkillStonesBox.PreventCellsFromDestroy();
             MySkillStonesReader.PreventStonesFromDestroy();
-            SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
+            SceneManager.LoadScene(2);
         }
         
         public void BeginSkillTest()

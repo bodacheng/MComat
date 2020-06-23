@@ -51,7 +51,7 @@ namespace FightScene
         //重新开战意味着所有资源重新加载？
         readonly UnityEngine.Events.UnityAction RestartGame = () =>
         {
-            SceneManager.LoadScene(FightSceneNote.nextBattle.BattleGroundID);
+            SceneManager.LoadScene(2);
         };
         
         // 战斗结束后统计技能石升级情况时的画面显示

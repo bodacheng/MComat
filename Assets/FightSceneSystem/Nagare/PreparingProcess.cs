@@ -40,7 +40,7 @@ public class PreparingProcess : FSceneProcess
             {
                 Debug.Log("双方队伍读取后问题： " + error);
             }
-            SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步呗？
+            SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步
         }
         FightLoadError.Instance.FightLoadErrors.Clear();
     }

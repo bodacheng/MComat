@@ -58,10 +58,8 @@ public class BasicTryProcess : FSceneProcess
         
     public IEnumerator EnterProcess()
     {
-        BoundaryControllByGod.target.AllMembers.Clear();
         AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
         AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
-        BoundaryControllByGod.target.AllMembers = AllMembers;
         TeamDeadMemberDictionary.Clear();
         
         foreach (KeyValuePair<Team,List<Data_Center>> keyValuePair in AllMembers)
@@ -118,18 +116,7 @@ public class BasicTryProcess : FSceneProcess
         {
             FightScene.PauseScene();
         }
-
-        switch (BoundaryControllByGod.target.boundaryMode)
-        {
-            case BoundaryMode.Round:
-                //_BoundaryControllByGod.SUOQUANER(alivemembercount);
-                //BoundaryControllByGod.RoundModeGodControll(BoundaryControllByGod.battleRingCenter, BoundaryControllByGod.BattleRingRadius);
-                break;
-            case BoundaryMode.None:
-                //BoundaryControllByGod.RoundBattleFieldNormalControl(BoundaryControllByGod.battleRingCenter, 24);
-                break;
-        }
-        
+                
         switch (Step)
         {
             case 1:
