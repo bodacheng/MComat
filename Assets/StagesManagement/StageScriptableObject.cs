@@ -77,7 +77,7 @@ public class StageScriptableObject : ScriptableObject
     {
         StageScriptableObject stage = CreateInstance<StageScriptableObject>();
         stage.localFight = StagesManager.RandomSkillTest();
-        stage.BattleGroundID = 1;
+        stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
         stage._fightEventType = FightEventType.SkillTest;
