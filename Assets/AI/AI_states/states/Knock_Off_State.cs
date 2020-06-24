@@ -57,7 +57,8 @@ public class Knock_Off_State : Behavior
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        //_FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalRef.SetGettingDamageState(false);
     }
@@ -86,7 +87,7 @@ public class Knock_Off_State : Behavior
             {
                 dropped = true;
                 //_FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
-                _Rigidbody.velocity = Vector3.zero;
+                _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 time_counter = 0;//开始针对躺地时间记时
             }else{
                 gameObject.transform.position += 

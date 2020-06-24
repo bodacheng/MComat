@@ -27,6 +27,7 @@ public class GetUp : Behavior {
         counter = 0f;
         _Animator.SetFloat("speed", 0f);
         Sensor.OneRoundDetectionStart(5);
+        _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
         Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
 	}
@@ -53,7 +54,8 @@ public class GetUp : Behavior {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-         _SkillCancelFlag.turn_off_flag();
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        _SkillCancelFlag.turn_off_flag();
         _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
     }
 }
