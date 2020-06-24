@@ -29,12 +29,12 @@ namespace FightScene
         public FightTeam FightTeam1, FightTeam2;
         public FightTeam_MultiRaid FightTeam1_multi, FightTeam2_multi;
         public FightTeam_RotationMode FightTeam1_rotation, FightTeam2_rotation;
-
+        
         public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
         public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
-
+        
         public static RealTimeGameProcessManager target;
-
+        
         public static bool Auto;
         public static Data_Center focusingChar;
         public static Team playerTeam = Team.player1;
@@ -83,7 +83,7 @@ namespace FightScene
                 _mobileInputsManager.TurnOnButtons();
             }
         }
-
+        
         public void SwitchToCMode(Data_Center _char, bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
         {
             if (_char != null)
@@ -128,7 +128,7 @@ namespace FightScene
                     break;
             }
             FightTeam2.TeamMode = stage.Team2Mode;
-
+            
             FightTeam1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
             FightTeam2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
             FightTeam1.teamConfig = heroTeamConfig;
@@ -139,7 +139,7 @@ namespace FightScene
             
             FightTeam1.ArrangeAllTeamMembersToPosition(FightTeam1.TeamMembers);
             FightTeam2.ArrangeAllTeamMembersToPosition(FightTeam2.TeamMembers);
-
+            
             switch (playerTeam)
             {
                 case Team.player1:

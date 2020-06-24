@@ -20,17 +20,17 @@ public class Death_State : Behavior
         this.clip_name = clip_name;
         StateType = BehaviorType.KnockOff;
     }
-
+    
     public override void Pre_process_before_enter()
     {
-		base.Pre_process_before_enter ();
+        base.Pre_process_before_enter ();
     }
-
+    
     public override bool Capacity_Exit_Condition()
     {
         return false;
     }
-
+    
     public override bool Force_enter_condition()
     {
         return false;
@@ -62,11 +62,13 @@ public class Death_State : Behavior
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         time_count = 0f;
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
     }
     
+    Vector3 effectP;
     public override void _State_FixedUpdate1()
     {
         if (!touchedBoundary)
@@ -77,6 +79,11 @@ public class Death_State : Behavior
                 _xz = Vector3.zero - gameObject.transform.position;
                 _xz.y = 0;
                 _xz = _xz.normalized;
+                effectP = gameObject.transform.position.normalized * BoundaryControllByGod._BattleRingRadius;
+                effectP.y = gameObject.transform.position.y;
+                Vector3 quaV = Vector3.zero - gameObject.transform.position.normalized;
+                quaV.y = 0;
+                EffectsManager.GenerateEffect("wallCrack", null, effectP, Quaternion.LookRotation(quaV, Vector3.up), null);
             }
         }
         
@@ -85,8 +92,11 @@ public class Death_State : Behavior
             if (time_count > 0.1f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 dropped = true;
+                effectP = gameObject.transform.position;
+                effectP.y = 0;
+                EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
                 _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
-                _Rigidbody.velocity = Vector3.zero;
+                _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 time_count = 0;//开始针对躺地时间记时
             }else{
                 gameObject.transform.position += 

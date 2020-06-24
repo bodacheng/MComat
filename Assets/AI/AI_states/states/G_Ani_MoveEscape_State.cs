@@ -99,7 +99,7 @@ public class G_Ani_MoveEscape_State : Behavior {
         _SkillCancelFlag.turn_off_flag();
         pEvents.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
+        Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
         mainCam = CameraManager._camera.transform;
         screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
         screenMovementForward = screenMovementSpace * Vector3.forward;
