@@ -6,6 +6,8 @@ class CertainYAntiVabration : CameraMode
     Vector3 enemiescenter;//敌人的位置中心
     Quaternion ToRotation;//目标相机旋角
     Vector3 rotateToDirection;
+    
+    Vector2 mescreenpos;
     Vector2 enemyscreenpos;
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
     float h;
@@ -14,6 +16,15 @@ class CertainYAntiVabration : CameraMode
     {
         this.XZDis = XZDis;
         this.YDis = YDis;
+    }
+    
+    /// <summary>
+    /// 获取某向量的垂直向量（方向是左手边?）
+    /// </summary>
+    Vector3 GetVerticalDir(Vector3 _dir)
+    {
+        //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
+        return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
     }
     
     public override void LocalUpdate(Camera _camera)
@@ -45,9 +56,25 @@ class CertainYAntiVabration : CameraMode
                 enemiescenter /= targets.Count;
                 enemiescenter.y = 0;
                 enemyscreenpos = _camera.WorldToViewportPoint(enemiescenter);
-                if (enemyscreenpos.x < 0.2 || enemyscreenpos.x > 0.8 ||  enemyscreenpos.y < 0.2)
+                mescreenpos = _camera.WorldToViewportPoint(meCenter.position);
+                if (enemyscreenpos.x < 0.08 || enemyscreenpos.x > 0.92)
                 {
                     xzOff = Vector3.RotateTowards(xzOff, meCenter.position - enemiescenter, 3 * Time.deltaTime, 0.0f);
+                }else{
+                    // special version
+                    //Vector3 midpoint = (enemiescenter + meCenter.position) / 2;
+                    //float dis1 = Vector3.Distance(_camera.transform.position, midpoint + GetVerticalDir(meCenter.position - enemiescenter) * 5f);    // 试验点1
+                    //float dis2 = Vector3.Distance(_camera.transform.position, midpoint + GetVerticalDir(enemiescenter - meCenter.position) * 5f);    // 试验点1
+                    //xzOff = dis1 < dis2 ? 
+                    //Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiescenter), Time.deltaTime, 0.0f)
+                    //:
+                    //Vector3.RotateTowards(xzOff, GetVerticalDir(enemiescenter - meCenter.position), Time.deltaTime, 0.0f);
+                    
+                    // old version
+                    if (Vector3.Distance(enemiescenter, meCenter.position) < 10f)
+                    {
+                        xzOff = Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiescenter), Time.deltaTime, 0.0f);
+                    }
                 }
             }
         }
