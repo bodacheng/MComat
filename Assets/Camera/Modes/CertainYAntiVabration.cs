@@ -71,7 +71,7 @@ class CertainYAntiVabration : CameraMode
                     //Vector3.RotateTowards(xzOff, GetVerticalDir(enemiescenter - meCenter.position), Time.deltaTime, 0.0f);
                     
                     // old version
-                    if (Vector3.Distance(enemiescenter, meCenter.position) < 10f)
+                    if (Mathf.Abs(mescreenpos.x - enemyscreenpos.x) < Mathf.Abs(mescreenpos.y - enemyscreenpos.y) && (enemyscreenpos.x > 0.35 && enemyscreenpos.x < 0.65))
                     {
                         xzOff = Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiescenter), Time.deltaTime, 0.0f);
                     }
