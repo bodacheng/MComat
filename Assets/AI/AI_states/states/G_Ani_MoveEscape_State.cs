@@ -6,7 +6,7 @@ public class G_Ani_MoveEscape_State : Behavior {
     Transform mainCam;
     Quaternion screenMovementSpace;
     Vector3 screenMovementForward, screenMovementRight, use_direction;
-
+    
     readonly UnityEngine.Events.UnityAction breakfreestart;
     readonly UnityEngine.Events.UnityAction breakfreeend;
     readonly CustomCoroutine breakfreeCoroutine;
@@ -14,7 +14,6 @@ public class G_Ani_MoveEscape_State : Behavior {
     public G_Ani_MoveEscape_State(string _clip_name)
     {
         clip_name = _clip_name;
-
         breakfreestart = () =>
         {
             _ResistanceManager.Resistance.Value += 10;
@@ -25,14 +24,14 @@ public class G_Ani_MoveEscape_State : Behavior {
         };
         breakfreeCoroutine = new CustomCoroutine(breakfreestart, 0.6f, breakfreeend);
     }
-
+    
     public override void _State_Update()
     {
         base._State_Update();
-        if (System.Math.Abs(BeheviourFrameCounter - 5f) < 0.1f)
+        if (BeheviourFrameCounter == 5)
             _BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
     }
-
+    
     public override void Pre_process_before_enter()
     {
         base.Pre_process_before_enter ();
@@ -42,7 +41,7 @@ public class G_Ani_MoveEscape_State : Behavior {
     {
         return _BasicPhysicSupport.hiddenMethods.Grounded && base.Capacity_enter_condition();
     }
-
+    
     public override bool Capacity_Exit_Condition()
     {
         return AnimationCasualFinishedFlag();

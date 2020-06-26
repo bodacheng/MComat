@@ -21,7 +21,7 @@ public class SideCharIcon : MonoBehaviour {
     public HeroIcon focusingCharIcon;
     
     float maxHp;
-
+    
     public void INIHPShow(Data_Center watching, float MaxHp)
     {
     	_charDataCenter = watching;

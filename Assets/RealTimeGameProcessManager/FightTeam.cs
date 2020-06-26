@@ -21,7 +21,7 @@ namespace FightScene
         [HideInInspector]
         public Transform[] TeamStandPoints;
         protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-        
+
         public SideCharIcon GetSideIcon(Data_Center d)
         {
             return CharIconDic.ContainsKey(d) ? CharIconDic[d]: null;

@@ -58,6 +58,7 @@ namespace FightScene
             }
         }
         
+        // 最初切换队员
         public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, Transform IniStandPoint)
         {
             bool memberchanged = false;
@@ -71,11 +72,17 @@ namespace FightScene
                     RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
                     EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                     memberchanged = true;
+                    RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
+                    if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                        CharIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
                 }
                 else
                 {
                     data_Center._MyBehaviorRunner.ChangeState("Empty");
-                    data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
+                    //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
+                    data_Center.WholeT.gameObject.SetActive(false);
+                    if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                        CharIconDic[data_Center].gameObject.SetActive(false);
                 }
             }
             RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
@@ -83,6 +90,7 @@ namespace FightScene
             return memberchanged;
         }
         
+        // 切换队员
         bool ChangeFightingMember(Data_Center _changeTo)
         {
             if (!(TeamMembers.values.Count > 1) || RotationMode_fightingMember == _changeTo)
@@ -108,6 +116,9 @@ namespace FightScene
                         _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RotationMode_fightingMember.FightDataRef._ComboHitCount.HitCount.Value;
                     }
                     RotationMode_fightingMember = _changeTo;
+                    RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
+                    if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                        CharIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
                     RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
                     RotationMode_fightingMember.WholeT.transform.position = targetposition;
                     EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
@@ -118,7 +129,10 @@ namespace FightScene
                     if (data_Center._MyBehaviorRunner.GetNowState().StateKey != "Empty")
                     {
                         data_Center._MyBehaviorRunner.ChangeState("Empty");
-                        data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
+                        //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
+                        data_Center.WholeT.gameObject.SetActive(false);
+                        if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                            CharIconDic[data_Center].gameObject.SetActive(false);
                     }
                 }
             }
@@ -155,7 +169,7 @@ namespace FightScene
                 waitingMember = null;
             }
         }
-
+        
         bool CanChangeToThisMember(Data_Center targetMember)
         {
             if (targetMember == RotationMode_fightingMember)

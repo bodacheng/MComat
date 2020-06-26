@@ -30,7 +30,7 @@ public class Dash_Back_State : Behavior
     public override void _State_Update()
     {
         base._State_Update();
-        if (System.Math.Abs(BeheviourFrameCounter - 5f) < 0.01f)
+        if (BeheviourFrameCounter == 5)
         {
             _BuffsRunner.RunSubCoroutineOfState(breakfreeCoroutine);
         }
@@ -59,30 +59,13 @@ public class Dash_Back_State : Behavior
         }
         RotateToTarget_Tween(threatsComingPosition, 0.01f, true);
         Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
-        //if (_AIStateRunner.getLastState().StateType == stateType.Def)
-        //{
-        //    Defend_State df = (Defend_State)this._AIStateRunner.getLastState();
-        //    if (df.block_time_counter > 0)
-        //    {
-        //        df.block_time_counter = 0;
-        //        this._FightAttriCalReference.costCriticalGaugeBySPlevel(3);
-        //        _FightAttriCalReference.ClearDamageLists();
-        //        EffectAndHurtObjectLoading.Instance.GenerateEffect("break_free", null,this._DATA_CENTER.geometryCenter.position, Quaternion.identity, this._DATA_CENTER.geometryCenter);
-        //        this._BuffsRunner.runSubCoroutineOfState(breakfreeCoroutine);
-        //    }
-        //}
     }
     
-    //public override bool Capacity_enter_condition()
-    //{
-    //    return base.Capacity_enter_condition() && !_Animator.GetBool("in_transition");
-    //}
-
     public override bool Capacity_Exit_Condition()
     {
         return AnimationCasualFinishedFlag();
     }
-
+    
     public override void AI_State_exit()
     {
         _Animator.applyRootMotion = false;

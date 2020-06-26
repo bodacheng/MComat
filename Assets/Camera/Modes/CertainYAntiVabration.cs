@@ -24,7 +24,8 @@ class CertainYAntiVabration : CameraMode
     Vector3 GetVerticalDir(Vector3 _dir)
     {
         //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
-        return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
+        //return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
+        return new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
     }
     
     public override void LocalUpdate(Camera _camera)
@@ -59,7 +60,7 @@ class CertainYAntiVabration : CameraMode
                 mescreenpos = _camera.WorldToViewportPoint(meCenter.position);
                 if (enemyscreenpos.x < 0.08 || enemyscreenpos.x > 0.92)
                 {
-                    xzOff = Vector3.RotateTowards(xzOff, meCenter.position - enemiescenter, 3 * Time.deltaTime, 0.0f);
+                    xzOff = Vector3.RotateTowards(xzOff, meCenter.position - enemiescenter, 4 * Time.deltaTime, 0.0f);
                 }else{
                     // special version
                     //Vector3 midpoint = (enemiescenter + meCenter.position) / 2;
@@ -71,7 +72,7 @@ class CertainYAntiVabration : CameraMode
                     //Vector3.RotateTowards(xzOff, GetVerticalDir(enemiescenter - meCenter.position), Time.deltaTime, 0.0f);
                     
                     // old version
-                    if (Mathf.Abs(mescreenpos.x - enemyscreenpos.x) < Mathf.Abs(mescreenpos.y - enemyscreenpos.y) && (enemyscreenpos.x > 0.35 && enemyscreenpos.x < 0.65))
+                    if (Mathf.Abs(mescreenpos.x - enemyscreenpos.x) < (Mathf.Abs(mescreenpos.y - enemyscreenpos.y) + 0.1f) && (enemyscreenpos.x > 0.35 && enemyscreenpos.x < 0.65))
                     {
                         xzOff = Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiescenter), Time.deltaTime, 0.0f);
                     }
