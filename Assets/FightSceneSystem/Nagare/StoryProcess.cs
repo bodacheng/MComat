@@ -5,17 +5,16 @@ namespace FightScene
     public class StoryProcess : FSceneProcess
     {
         bool AutoMoveToNext;
-        
         public StoryProcess(NetFightScene _NetFightScene)
         {
             Step = SceneStep.StoryBeforeFight;
             nextProcessStep = SceneStep.CountDown;
             EelementsInherit(_NetFightScene);
         }
-
+        
         public override void ProcessEnter()
         {
-            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+            RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(FightScene.WatchTeam2.position, FightScene.Team2StandPoints[0], 3f, 50f);
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             if (FightSceneNote.nextBattle.beforefightstory != null)
             {
@@ -29,13 +28,13 @@ namespace FightScene
                 AutoMoveToNext = true;
             }
         }
-
+        
         // 参数是timeline编程的一个特殊写法
         void CanGoNext(PlayableDirector _a)
         {
             AutoMoveToNext = true;
         }
-
+        
         public override void ProcessEnd()
         {
             AutoMoveToNext = false;

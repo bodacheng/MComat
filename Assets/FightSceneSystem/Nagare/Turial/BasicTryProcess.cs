@@ -142,8 +142,8 @@ public class BasicTryProcess : FSceneProcess
 
         if (RealTimeGameProcessManager.focusingChar != null)
         {
-            FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
-            FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
+            //FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
+            //FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
         }
         
         TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);
@@ -157,7 +157,7 @@ public class BasicTryProcess : FSceneProcess
         if (_finalSurviver != null)
         {
             watchetargets.Add(_finalSurviver.gameObject.transform);
-            FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
+            //FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
         }
         yield return new WaitForSeconds(2f);
 

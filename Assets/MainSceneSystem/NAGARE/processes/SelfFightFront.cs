@@ -5,8 +5,7 @@ public class SelfFightFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, 3f,15f);
-        _CameraManager.CurrentMode.target = MemberDetail.target.MemDetailTargetPos;
+        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);

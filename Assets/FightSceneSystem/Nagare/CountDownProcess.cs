@@ -27,13 +27,18 @@ namespace FightScene
             FightScene.CountDown.gameObject.SetActive(true);
             while (startTimestamp > 0)
             {
+                if (startTimestamp > 1.3 && startTimestamp < 1.7)
+                {
+                    //RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(FightScene.WatchTeam1.position, FightScene.Team1StandPoints[0], 3f, 50f);
+                    RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+                }
                 startTimestamp -= Time.deltaTime;
                 FightScene.CountDown.text = "" + (1 + (int)(startTimestamp));
                 yield return null;
             }
+            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             FightScene.CountDown.gameObject.SetActive(false);
             AutoMoveToNext = true;
-            yield break;
         }
         
         public override bool CanEnterOtherProcess()

@@ -10,12 +10,12 @@ public class CameraManager : MonoBehaviour
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
         {C_Mode.CertainYAntiVibration, new CertainYAntiVabration(10f, 7f)},
-        {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f,1f)},
+        {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
-        {C_Mode.WatchOver, new WatchOverCamera(7f,5f)},
+        {C_Mode.WatchOver, new WatchOverCamera(7f, 5f)},
         {C_Mode.StartAndEnd, new StartToEndMode()},
-        {C_Mode.RoundBoundary, new CenterSurroundCamera(25f,10f)},
-        {C_Mode.TopDown, new TouchTopDownCamera(12f,20f)}
+        {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
+        {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f)}
     };
     
     void Awake()
@@ -48,11 +48,12 @@ public class CameraManager : MonoBehaviour
         }
     }
     
-    public void Assign_SToEMode(Vector3 p, float duration,float sizeoffield)
+    public void Assign_SToEMode(Vector3 obj_p, Transform _target ,float duration, float sizeoffield)
     {
         CModeDic.TryGetValue(C_Mode.StartAndEnd, out CurrentMode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)CurrentMode;
-        _LerpToCertainPlace.SetObjPosAndRotAndSpeed(p, duration, sizeoffield);
+        _LerpToCertainPlace.SetObjPosAndRotAndSpeed(obj_p, duration, sizeoffield);
+        CurrentMode.target = _target;
         CurrentMode.Enter(_camera);
     }
 }

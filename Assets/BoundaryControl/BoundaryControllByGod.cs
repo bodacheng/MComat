@@ -5,7 +5,7 @@ using DG.Tweening;
 public class BoundaryControllByGod : MonoBehaviour {
 
     public List<GameObject> BackGrounds = new List<GameObject>();
-    
+
     public List<ParticleSystem> BattleRingPSs;
     ParticleSystem BattleRingPS;
     float BattleRingRadius = 20f;

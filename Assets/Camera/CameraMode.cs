@@ -13,7 +13,7 @@ public abstract class CameraMode
     protected float speed;
     protected float XZDis, YDis;
     protected float XZrosOffset, YrosOffset;
-    public float duration,fieldOfView;
+    public float duration, fieldOfView;
     
     public void SetMeCenter(Transform meCenter)
     {

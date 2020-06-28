@@ -1,26 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 class WatchOverCamera : CameraMode
 {
-    private Vector3 direction = Vector3.zero;
-    private Quaternion ToRotation;
-
+    Vector3 direction = Vector3.zero;
+    Quaternion ToRotation;
+    
     public WatchOverCamera(float distance, float height)
     {
         targets = new List<Transform>();
-        this.XZDis = distance;
-        this.YDis = height;
+        XZDis = distance;
+        YDis = height;
     }
-
+    
+    Vector3 center;
     public override void LocalUpdate(Camera _camera)
     {
-        if (this.targets == null || this.targets.Count == 0)
+        if (targets == null || targets.Count == 0)
             return;
 
-        Vector3 center = Vector3.zero;
-        //Quaternion average = new Quaternion(0, 0, 0, 0);
+        center = Vector3.zero;
         direction = Vector3.zero;
         foreach (Transform o in this.targets)
         {

@@ -10,8 +10,7 @@ namespace FightScene
     public class FightOverControl : MonoBehaviour
     {
         public Canvas FightOverCanvas;
-        public CameraManager _CameraManager;
-
+        
         [Header("WIN")]
         public GameObject win_textanimation;
 

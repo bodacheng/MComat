@@ -24,11 +24,7 @@ namespace FightScene
         [Header("CountDownText")]
         public Text CountDown;
         #endregion
-        
-        [Space(11)]
-        [Header("Basic Essentials")]
-        public CameraManager _CameraManager;
-        
+                
         [Space(11)]
         [Header("战斗的最后一击时候的处理")]
         public FightOverControl _FightOverControl;
@@ -47,6 +43,10 @@ namespace FightScene
         [Space(11)]
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
+        
+        [Space(11)]
+        [Header("双方站位点_观看点")]
+        public Transform WatchTeam1, WatchTeam2;
         
         // 主进程
         [Space(7)]
