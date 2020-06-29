@@ -1,4 +1,5 @@
 ﻿using System;
+using dataAccess;
 
 namespace Api.Dto.Model {
 
@@ -23,7 +24,15 @@ namespace Api.Dto.Model {
         /// <summary>
         /// 等级，限制为1到100
         /// </summary>
-        public string exp { get; set; }
+        string exp { get; set; }
+        public float EXP {
+            set {
+                if (exp != null)
+                    ExpUpForStoneShow(float.Parse(exp), value);
+                exp = value.ToString();
+            }
+            get { return float.Parse(exp);}
+        }
         
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
@@ -39,7 +48,7 @@ namespace Api.Dto.Model {
         /// 是否为角色原生技能
         /// </summary>
         public string Inherent { get; set; }
-
+        
         public int GetLevel()
         {
             return ExpToLevel(float.Parse(exp));
@@ -48,6 +57,12 @@ namespace Api.Dto.Model {
         public static int ExpToLevel(float Exp)
         {
             return (int)((Exp / 10) + 1);
+        }
+                
+        public void ExpUpForStoneShow(float formerExp, float newExp)
+        {
+            SKStoneItem SKStone = MySkillStonesReader.GetRenderModel(skillStoneOfPlayerId);
+            SKStone.LevelUpShow(formerExp, newExp);
         }
     }
 }

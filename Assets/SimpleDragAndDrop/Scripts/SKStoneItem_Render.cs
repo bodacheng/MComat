@@ -2,6 +2,7 @@
 using Api.Dto.Model;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using EckTechGames.FloatingCombatText;
 
 public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -9,16 +10,16 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     {
         int beforeLevel = SkillStoneOfPlayerInfoModel.ExpToLevel(beforeexp);
         int aferlevel = SkillStoneOfPlayerInfoModel.ExpToLevel(afterexp);
-        
         if (aferlevel > beforeLevel)
         {
-            transform.GetComponent<RectTransform>().DOScale(Vector3.one * 10, 1f).OnComplete
-            (
-                () =>
-                {
-                    transform.GetComponent<RectTransform>().DOScale(Vector3.one, 1f);
-                }
-            );
+            OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.Miss, "LevelUp");
+            //transform.GetComponent<RectTransform>().DOScale(Vector3.one * 4, 1f).OnComplete
+            //(
+            //    () =>
+            //    {
+            //        transform.GetComponent<RectTransform>().DOScale(Vector3.one, 1f);
+            //    }
+            //);
         }
     }
 }

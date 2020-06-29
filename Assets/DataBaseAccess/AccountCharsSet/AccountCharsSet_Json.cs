@@ -98,7 +98,7 @@ namespace dataAccess
                     {
                         skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
                         skillId = INHERENTSKs[index],
-                        exp = "0",
+                        EXP = 0,
                         Inherent = "true",
                         inUsingMonsterOfPlayerId = i.ToString(),
                         inUsingSkillSlot = (index + 1).ToString()

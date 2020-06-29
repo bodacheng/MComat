@@ -8,6 +8,10 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
+        /// <summary>
+        /// 生成账户用技能石图标
+        /// </summary>
+        /// <param name="skillStoneOfPlayerId">技能石账户id</param>
         public static IEnumerator GenerateStoneModelByAccID(string skillStoneOfPlayerId)
         {
             if (MySkillStonesReader.RenderModelDic.ContainsKey(skillStoneOfPlayerId))

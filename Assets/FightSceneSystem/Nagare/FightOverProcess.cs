@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections;
 
 namespace FightScene
 {
@@ -10,7 +9,7 @@ namespace FightScene
             Step = SceneStep.FightOver;
             EelementsInherit(_NetFightScene);
         }
-                
+        
         public override void ProcessEnd()
         {
             FightOverControl.target.Step2.gameObject.SetActive(false);
@@ -30,7 +29,7 @@ namespace FightScene
                     mainProcessRunner.Run(FightOverControl.target.LoseProcess());//这里是要根据情况的。。
                     break;
             }
-
+            
             switch (FightSceneNote.nextBattle._fightEventType)
             {
                 case FightEventType.Arena:
@@ -39,10 +38,13 @@ namespace FightScene
                 case FightEventType.Quest:
                     mainProcessRunner.Run(FightOverControl.target.ShowRewards(999, 999));
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
-                    mainProcessRunner.Run(RewardManager.ExpUpForTeamStones((List<CharDataInfo>)RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef.Values));
+                    List<string> stoneids = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
+                    mainProcessRunner.Run(RewardManager.ExpUpForStones(stoneids,100));
                     break;
                 case FightEventType.Self:
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
+                    List<string> stoneidss = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
+                    mainProcessRunner.Run(RewardManager.ExpUpForStones(stoneidss,100));
                     break;
                 case FightEventType.SkillTest:
                     mainProcessRunner.Run(SKillTestReload());
@@ -50,7 +52,7 @@ namespace FightScene
             }
         }
         
-        IEnumerator SKillTestReload()
+        System.Collections.IEnumerator SKillTestReload()
         {
             foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef)
             {

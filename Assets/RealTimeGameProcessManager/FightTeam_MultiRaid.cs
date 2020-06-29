@@ -145,9 +145,9 @@ namespace FightScene
                     _SideCharIcon.name = a_char.name + " ICon";
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
-                    CharDataInfo characterDataInfo = CharDataInfoRef[a_char];
-                    CharConfig _charConfig = MonstersConfigTable.GetCharConfig(characterDataInfo.ResourceID);
-                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(characterDataInfo.ResourceID), _charConfig._zokusei);
+                    CharDataInfo charDInfo = CharDataInfoRef[a_char];
+                    CharConfig _charConfig = MonstersConfigTable.GetCharConfig(charDInfo.ResourceID);
+                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(charDInfo.ResourceID), _charConfig._zokusei);
                     _SideCharIcon.gameObject.SetActive(true);
                 }
                 else

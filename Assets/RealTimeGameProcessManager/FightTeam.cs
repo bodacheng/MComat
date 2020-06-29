@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using dataAccess;
+using Api.Dto.Model;
 
 namespace FightScene
 {
@@ -161,6 +163,21 @@ namespace FightScene
         // 队伍模式对应行为运行第一步。
         public virtual void ModeStart()
         {
+        }
+        
+        // 获取该队伍所有账户技能石id（只有在这个队伍是玩家账户队员组成情况下有效）
+        public List<string> GetAllUsingStoneOfAcc()
+        {
+            List<string> stones = new List<string>();
+            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in CharDataInfoRef)
+            {
+                List<SkillStoneOfPlayerInfoModel> mystones = MySkillStonesReader.GetEquipingStones(keyValuePair.Value.monsterOfPlayerId);
+                for (int i = 0; i < mystones.Count; i++)
+                {
+                    stones.Add(mystones[i].skillStoneOfPlayerId);
+                }
+            }
+            return stones;
         }
     }
 }

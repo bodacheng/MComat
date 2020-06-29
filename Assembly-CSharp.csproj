@@ -132,6 +132,11 @@
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
+    <Compile Include="Assets\Asstes\FloatingCombatText\DemoScene\DemoController.cs" />
+    <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextAnchorController.cs" />
+    <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextController.cs" />
+    <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextType.cs" />
+    <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
@@ -616,6 +621,7 @@
     <Compile Include="Assets\UI\SideCharIcon.cs" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
+    <None Include="Assets\Asstes\FloatingCombatText\ReadMe.txt" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
     <None Include="Assets\EasyTouchBundle\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

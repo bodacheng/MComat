@@ -73,7 +73,7 @@ namespace dataAccess
                 {
                     skillStoneOfPlayerId = GetNonRepeatID_LocalSave(),
                     skillId = _pair.Value.RECORD_ID,
-                    exp = "0",
+                    EXP = 0,
                     Inherent = "false"
                 };
                 yield return Add(stoneInfo);

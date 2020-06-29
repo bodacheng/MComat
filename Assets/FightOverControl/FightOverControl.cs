@@ -13,10 +13,10 @@ namespace FightScene
         
         [Header("WIN")]
         public GameObject win_textanimation;
-
+        
         [Header("LOSE")]
         public GameObject lose_textanimation;
-
+        
         [Header("技能与角色头像T")]
         public RectTransform Step1;
         public RectTransform Step2;
@@ -27,12 +27,12 @@ namespace FightScene
         
         [Header("NineForShow")]
         public NineForShow NineForShowPretab;
-
+        
         [Header("Rewards")]
         public RectTransform RewardsTransform;
         public Text goldrewards;
         public Text diamondrewards;
-
+        
         public ReactiveProperty<bool> CanGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
         
         readonly UnityEngine.Events.UnityAction ReturnToMainMenu = () =>
@@ -70,7 +70,6 @@ namespace FightScene
                 iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
                 iconAndSKillShowUISet.transform.localPosition = Vector3.zero;
                 iconAndSKillShowUISet.transform.localScale = Vector3.one;
-                
                 yield return nineForShow.ShowStones_Acc(keyValuePair.Value.monsterOfPlayerId);
             }
         }
