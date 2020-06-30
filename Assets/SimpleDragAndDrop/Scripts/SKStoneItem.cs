@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Skill;
+using dataAccess;
+using Api.Dto.Model;
 
 /// <summary>
 /// Drag and Drop item.
@@ -17,6 +19,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     static readonly int canvasSortOrder = 100;                                  // Sort order for canvas
 
     public Image image;
+    public Text info;
     //自定义item属性
     public SkillConfig _SkillConfig;
     public bool Inherent;
@@ -33,8 +36,22 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 			canvas = canvasObj.AddComponent<Canvas>();
 			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 			canvas.sortingOrder = canvasSortOrder;
+            CloseInfo();
 		}
 	}
+    
+    public void ShowStoneLevel()
+    {
+        info.gameObject.SetActive(true);
+        SkillStoneOfPlayerInfoModel sspim = MySkillStonesReader.Get(SkillStoneOfPlayerId);
+        info.text = sspim.GetLevel().ToString();
+    }
+    
+    public void CloseInfo()
+    {
+        if (info != null)
+            info.gameObject.SetActive(false);
+    }
 
 	/// <summary>
 	/// This item started to drag.

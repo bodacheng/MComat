@@ -14,6 +14,10 @@ namespace FightScene
         {
             FightOverControl.target.Step2.gameObject.SetActive(false);
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
+            foreach(NineForShow nineForShow in FightOverControl.target.NineForShows)
+            {
+                nineForShow.CloseStoneInfo();
+            }
         }
         
         public override void ProcessEnter()
@@ -39,12 +43,12 @@ namespace FightScene
                     mainProcessRunner.Run(FightOverControl.target.ShowRewards(999, 999));
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     List<string> stoneids = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
-                    mainProcessRunner.Run(RewardManager.ExpUpForStones(stoneids,100));
+                    mainProcessRunner.Run(RewardManager.ExpUpForStones(stoneids, 100));
                     break;
                 case FightEventType.Self:
                     mainProcessRunner.Run(FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1));//这里是要根据情况的。。
                     List<string> stoneidss = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
-                    mainProcessRunner.Run(RewardManager.ExpUpForStones(stoneidss,100));
+                    mainProcessRunner.Run(RewardManager.ExpUpForStones(stoneidss, 100));
                     break;
                 case FightEventType.SkillTest:
                     mainProcessRunner.Run(SKillTestReload());

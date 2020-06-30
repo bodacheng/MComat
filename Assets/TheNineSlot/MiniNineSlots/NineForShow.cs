@@ -6,6 +6,8 @@ using mainMenu;
 public partial class NineForShow : MonoBehaviour
 {
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
+
+    SKStoneItem A1S, A2S, A3S, B1S, B2S, B3S, C1S, C2S, C3S;
     
     public IEnumerator ShowStones(string A1skillid, string A2skillid, string A3skillid,
                                     string B1skillid, string B2skillid, string B3skillid,
@@ -31,20 +33,100 @@ public partial class NineForShow : MonoBehaviour
         yield return getC2;
         yield return getC3;
         
-        SKStoneItem A1S = getA1.Current != null ? (SKStoneItem)getA1.Current : null;
-        SKStoneItem A2S = getA2.Current != null ? (SKStoneItem)getA2.Current : null;
-        SKStoneItem A3S = getA3.Current != null ? (SKStoneItem)getA3.Current : null;
-        SKStoneItem B1S = getB1.Current != null ? (SKStoneItem)getB1.Current : null;
-        SKStoneItem B2S = getB2.Current != null ? (SKStoneItem)getB2.Current : null;
-        SKStoneItem B3S = getB3.Current != null ? (SKStoneItem)getB3.Current : null;
-        SKStoneItem C1S = getC1.Current != null ? (SKStoneItem)getC1.Current : null;
-        SKStoneItem C2S = getC2.Current != null ? (SKStoneItem)getC2.Current : null;
-        SKStoneItem C3S = getC3.Current != null ? (SKStoneItem)getC3.Current : null;
+        A1S = getA1.Current != null ? (SKStoneItem)getA1.Current : null;
+        A2S = getA2.Current != null ? (SKStoneItem)getA2.Current : null;
+        A3S = getA3.Current != null ? (SKStoneItem)getA3.Current : null;
+        B1S = getB1.Current != null ? (SKStoneItem)getB1.Current : null;
+        B2S = getB2.Current != null ? (SKStoneItem)getB2.Current : null;
+        B3S = getB3.Current != null ? (SKStoneItem)getB3.Current : null;
+        C1S = getC1.Current != null ? (SKStoneItem)getC1.Current : null;
+        C2S = getC2.Current != null ? (SKStoneItem)getC2.Current : null;
+        C3S = getC3.Current != null ? (SKStoneItem)getC3.Current : null;
 
-        Parent(A1S,A2S,A3S,B1S,B2S,B3S,C1S,C2S,C3S);
+        Parent();
     }
-        
-    void Parent(SKStoneItem A1S, SKStoneItem A2S, SKStoneItem A3S, SKStoneItem B1S, SKStoneItem B2S, SKStoneItem B3S, SKStoneItem C1S, SKStoneItem C2S, SKStoneItem C3S)
+    
+    public void ShowStoneLevel()
+    {
+        if (A1S != null)
+        {
+            A1S.ShowStoneLevel();
+        }
+        if (A2S != null)
+        {
+            A2S.ShowStoneLevel();
+        }
+        if (A3S != null)
+        {
+            A3S.ShowStoneLevel();
+        }
+        if (B1S != null)
+        {
+            B1S.ShowStoneLevel();
+        }
+        if (B2S != null)
+        {
+            B2S.ShowStoneLevel();
+        }
+        if (B3S != null)
+        {
+            B3S.ShowStoneLevel();
+        }
+        if (C1S != null)
+        {
+            C1S.ShowStoneLevel();
+        }
+        if (C2S != null)
+        {
+            C2S.ShowStoneLevel();
+        }
+        if (C3S != null)
+        {
+            C3S.ShowStoneLevel();
+        }
+    }
+    
+    public void CloseStoneInfo()
+    {
+        if (A1S != null)
+        {
+            A1S.CloseInfo();
+        }
+        if (A2S != null)
+        {
+            A2S.CloseInfo();
+        }
+        if (A3S != null)
+        {
+            A3S.CloseInfo();
+        }
+        if (B1S != null)
+        {
+            B1S.ShowStoneLevel();
+        }
+        if (B2S != null)
+        {
+            B2S.CloseInfo();
+        }
+        if (B3S != null)
+        {
+            B3S.CloseInfo();
+        }
+        if (C1S != null)
+        {
+            C1S.CloseInfo();
+        }
+        if (C2S != null)
+        {
+            C2S.CloseInfo();
+        }
+        if (C3S != null)
+        {
+            C3S.CloseInfo();
+        }
+    }
+    
+    void Parent()
     {
         if (A1S != null)
         {

@@ -18,7 +18,7 @@ namespace EckTechGames.FloatingCombatText
 		public CombatTextAnchorController combatTextAnchorPrefab;
 		
 		protected Dictionary<CombatTextType, List<CombatTextAnchorController>> combatTextAnchorDictionary;
-
+        
 		void Awake()
 		{
 			if (instance == null)
@@ -88,17 +88,16 @@ namespace EckTechGames.FloatingCombatText
 		/// <returns></returns>
 		protected CombatTextAnchorController EnsureCombatTextAnchor(GameObject targetGameObject, CombatTextType combatTextType)
 		{
-			CombatTextAnchorController textAnchor;
-
-			if (poolDamage)
-			{
-				// Look for a currently playing animation that is young enough so we can add our numbers to them.
-				textAnchor = combatTextAnchorDictionary[combatTextType].Find(x => x.combatTextShown && x.targetGameObject == targetGameObject && x.ageInSeconds < 1f);
-				if (textAnchor != null)
-				{
-					return textAnchor;
-				}
-			}
+            CombatTextAnchorController textAnchor;
+            if (poolDamage)
+            {
+            	// Look for a currently playing animation that is young enough so we can add our numbers to them.
+            	textAnchor = combatTextAnchorDictionary[combatTextType].Find(x => x.combatTextShown && x.targetGameObject == targetGameObject && x.ageInSeconds < 1f);
+            	if (textAnchor != null)
+            	{
+            		return textAnchor;
+            	}
+            }
 
 			// Look for a combatText that has stopped playing
 			textAnchor = combatTextAnchorDictionary[combatTextType].Find(x => !x.combatTextShown);
@@ -134,7 +133,6 @@ namespace EckTechGames.FloatingCombatText
 				{
 					// Turn ourselves off since we're invalid.
 					gameObject.SetActive(false);
-
 					string errorMessage = string.Format("The enumeration CombatTextType must have unique values. [CombatTextType.{0}] has the same value as another entry.", combatTextType);
 					throw new InvalidOperationException(errorMessage);
 				}

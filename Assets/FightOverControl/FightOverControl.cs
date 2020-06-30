@@ -41,6 +41,8 @@ namespace FightScene
         };
         
         public static FightOverControl target;
+
+        public List<NineForShow> NineForShows = new List<NineForShow>();
         
         void Awake()
         {
@@ -56,6 +58,7 @@ namespace FightScene
         // 战斗结束后统计技能石升级情况时的画面显示
         public IEnumerator ShowSKillSets(FightTeam fightTeam)
         {
+            NineForShows.Clear();
             foreach (Transform child in IconAndSKillShowUISetT) 
             {
                 Destroy(child.gameObject);
@@ -66,6 +69,7 @@ namespace FightScene
                 IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);
                 SideCharIcon sideCharIcon = fightTeam.GetSideIcon(keyValuePair.Key);
                 NineForShow nineForShow = Instantiate(NineForShowPretab);
+                NineForShows.Add(nineForShow);
                 iconAndSKillShowUISet.Set(sideCharIcon, nineForShow);
                 iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
                 iconAndSKillShowUISet.transform.localPosition = Vector3.zero;

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Api.Dto.Model;
-using DG.Tweening;
 using UnityEngine.EventSystems;
 using EckTechGames.FloatingCombatText;
 
@@ -12,14 +11,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         int aferlevel = SkillStoneOfPlayerInfoModel.ExpToLevel(afterexp);
         if (aferlevel > beforeLevel)
         {
-            OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.Miss, "LevelUp");
-            //transform.GetComponent<RectTransform>().DOScale(Vector3.one * 4, 1f).OnComplete
-            //(
-            //    () =>
-            //    {
-            //        transform.GetComponent<RectTransform>().DOScale(Vector3.one, 1f);
-            //    }
-            //);
+            OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.LevelUp, aferlevel);
         }
     }
 }

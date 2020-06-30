@@ -569,6 +569,7 @@
     <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_XML.cs" />
     <Compile Include="Assets\Structure\DicAdd.cs" />
+    <Compile Include="Assets\Structure\ExtraProcesser.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\RandomSelect.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />

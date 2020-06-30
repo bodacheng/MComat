@@ -51,7 +51,7 @@ namespace Api.Dto.Model {
         
         public int GetLevel()
         {
-            return ExpToLevel(float.Parse(exp));
+            return ExpToLevel(EXP);
         }
         
         public static int ExpToLevel(float Exp)

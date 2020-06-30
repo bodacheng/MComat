@@ -10,6 +10,8 @@ public partial class NineForShow : MonoBehaviour
     public IEnumerator ShowStones_Acc(string MonsterOfPlayerID)
     {
         List<SkillStoneOfPlayerInfoModel> skillStoneOfPlayerInfoModels = MySkillStonesReader.GetEquipingStones(MonsterOfPlayerID);
+        
+        // 下面这些是localid。不是技能定义id
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;
         string C1SkillID = null, C2SkillID = null, C3SkillID = null;
@@ -19,46 +21,46 @@ public partial class NineForShow : MonoBehaviour
             switch(skillStoneOfPlayerInfoModels[i].inUsingSkillSlot)
             {
                 case "1":
-                    A1SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    A1SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "2":
-                    A2SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    A2SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "3":
-                    A3SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    A3SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "4":
-                    B1SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    B1SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "5":
-                    B2SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    B2SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "6":
-                    B3SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    B3SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "7":
-                    C1SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    C1SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "8":
-                    C2SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    C2SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
                 case "9":
-                    C3SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    C3SkillID = skillStoneOfPlayerInfoModels[i].skillStoneOfPlayerId;
                 break;
             }
         }
         
-        SKStoneItem A1S = MySkillStonesReader.GetRenderModel(A1SkillID);
-        SKStoneItem A2S = MySkillStonesReader.GetRenderModel(A2SkillID);
-        SKStoneItem A3S = MySkillStonesReader.GetRenderModel(A3SkillID);
-        SKStoneItem B1S = MySkillStonesReader.GetRenderModel(B1SkillID);
-        SKStoneItem B2S = MySkillStonesReader.GetRenderModel(B2SkillID);
-        SKStoneItem B3S = MySkillStonesReader.GetRenderModel(B3SkillID);
-        SKStoneItem C1S = MySkillStonesReader.GetRenderModel(C1SkillID);
-        SKStoneItem C2S = MySkillStonesReader.GetRenderModel(C2SkillID);
-        SKStoneItem C3S = MySkillStonesReader.GetRenderModel(C3SkillID);
+        A1S = MySkillStonesReader.GetRenderModel(A1SkillID);
+        A2S = MySkillStonesReader.GetRenderModel(A2SkillID);
+        A3S = MySkillStonesReader.GetRenderModel(A3SkillID);
+        B1S = MySkillStonesReader.GetRenderModel(B1SkillID);
+        B2S = MySkillStonesReader.GetRenderModel(B2SkillID);
+        B3S = MySkillStonesReader.GetRenderModel(B3SkillID);
+        C1S = MySkillStonesReader.GetRenderModel(C1SkillID);
+        C2S = MySkillStonesReader.GetRenderModel(C2SkillID);
+        C3S = MySkillStonesReader.GetRenderModel(C3SkillID);
         
-        Parent(A1S,A2S,A3S,B1S,B2S,B3S,C1S,C2S,C3S);
+        Parent();
         yield break;
     }
 }

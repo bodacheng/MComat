@@ -11,8 +11,8 @@ namespace EckTechGames.FloatingCombatText
 	/// </summary>
 	public class CombatTextAnchorController : MonoBehaviour
 	{
-		public GameObject targetGameObject = null;
-		public RectTransform targetRectTransform = null;
+		public GameObject targetGameObject;
+		public RectTransform targetRectTransform;
         
 		public Camera mainCamera;  // 如果生成文字是在rectTransform上，那这个相机没有意义 
 		public float ageInSeconds; // How long has this text been alive since the last reuse.

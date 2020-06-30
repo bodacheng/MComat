@@ -126,22 +126,10 @@ namespace mainMenu
             }
         }
         
-        GameObject SkillStonePrefab;
-        public SKStoneItem GenerateOneDragAndDropItem()
-        {
-            GameObject SkillStone = Instantiate(SkillStonePrefab);
-            SkillStone.SetActive(true);
-            return SkillStone.GetComponent<SKStoneItem>();
-        }
-
         public IEnumerator StartUp()
         {
-            SkillStonePrefab = new GameObject("SkillStone");
-            SkillStonePrefab.AddComponent<SKStoneItem>();
-            SkillStonePrefab.AddComponent<Image>();
             NineSlotT.gameObject.SetActive(false);
             yield return GetNineSlotReady();
-            yield break;
         }
 
         IEnumerator GetNineSlotReady()
