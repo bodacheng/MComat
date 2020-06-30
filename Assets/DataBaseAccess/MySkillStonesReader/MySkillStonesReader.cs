@@ -17,16 +17,12 @@ namespace dataAccess
         {
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
-        
+
         public static SKStoneItem GetRenderModel(string localStoneid)
         {
-            if (localStoneid == null)
-            {
-                return null;
-            }
-            return RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
+            return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
         }
-        
+
         public static IEnumerator Add(SkillStoneOfPlayerInfoModel one)
         {
             DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);

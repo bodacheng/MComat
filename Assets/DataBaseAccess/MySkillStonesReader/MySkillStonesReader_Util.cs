@@ -9,6 +9,24 @@ namespace dataAccess
 {
     public partial class MySkillStonesReader
     {
+        // 把所有技能的等级显示出来
+        public static void ShowAllMyStoneLevel()
+        {
+            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
+            {
+                keyValuePair.Value.ShowStoneLevel();
+            }
+        }
+        
+        // 关闭所有技能石文字类提示
+        public static void CloseAllMyStoneFloatInfo()
+        {
+            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
+            {
+                keyValuePair.Value.CloseInfo();
+            }
+        }
+        
         public static void PreventStonesFromDestroy()
         {
             foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
