@@ -17,7 +17,7 @@ namespace Soul
         
         public bool DangerousClose() //Counter_State 1 2 3
         {
-            return Sensor.GetSuddenThreatInRange(0, 5) != null;
+            return Sensor.GetSuddenThreatInRange(0, 3) != null;
         }
         
         public bool CounterComingEnergy()
@@ -37,7 +37,7 @@ namespace Soul
             {
                 return true;
             }
-            Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
+            Collider threat = Sensor.GetSuddenThreatInRange(0, 3);
             Collider nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
 
             if (nearestEnemyMeat != null && threat != null)

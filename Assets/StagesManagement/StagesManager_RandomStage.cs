@@ -64,23 +64,23 @@ public partial class StagesManager : MonoBehaviour
         };
         CharDataInfo char2 = new CharDataInfo
         {
-            ResourceID = "2",//charRecordIds[Indexes[1]],
+            ResourceID = "3",//charRecordIds[Indexes[1]],
             _NineAndTwo = BalanceStyle("human", 1)
         };        
         CharDataInfo char3 = new CharDataInfo
         {
-            ResourceID = "2",//charRecordIds[Indexes[2]],
+            ResourceID = "3",//charRecordIds[Indexes[2]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         
         CharDataInfo char4 = new CharDataInfo
         {
-            ResourceID = "2",//charRecordIds[Indexes[0]],
+            ResourceID = "3",//charRecordIds[Indexes[0]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         CharDataInfo char5 = new CharDataInfo
         {
-            ResourceID = "2",//charRecordIds[Indexes[1]],
+            ResourceID = "3",//charRecordIds[Indexes[1]],
             _NineAndTwo = BalanceStyle("human", 1)
         };        
         CharDataInfo char6 = new CharDataInfo

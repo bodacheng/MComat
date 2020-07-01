@@ -6,18 +6,14 @@ using Skill;
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
 public class Death_State : Behavior
 {
-    readonly string clip_name;
-    readonly float stopRunningTime;
     readonly GameObject processingBlood;
     float time_count;
     Vector3 _xz;    
     bool touchedBoundary;
     bool dropped;
     
-    public Death_State(float stopRunningTime, string clip_name)
+    public Death_State()
     {
-        this.stopRunningTime = stopRunningTime;
-        this.clip_name = clip_name;
         StateType = BehaviorType.KnockOff;
     }
     
@@ -48,7 +44,7 @@ public class Death_State : Behavior
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
         //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
-        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
+        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
         EffectsManager.GenerateEffect("super_hit",
             FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
             newValue.damageHappenPoint, gameObject.transform.rotation,

@@ -18,7 +18,7 @@ public class Behaviors_Incubator
         StateIndexList.Add("Empty");
         Idle_State victory = new Idle_State("victory");
         Idle_State zhuangbi = new Idle_State("zhuangbi");
-        Death_State death = new Death_State(1f, "death");
+        Death_State death = new Death_State();
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Victory", victory));
         StateIndexList.Add("Victory");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("zhuangbi", zhuangbi));
