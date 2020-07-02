@@ -96,11 +96,11 @@ public enum FightEventType
     Arena = 2,
     Self = 4,
     SkillTest = 5,
+    Test = 6
 }
 
 public enum TeamMode
 {
     multiraid = 1,
-    rotation = 2,
-    test = 3
+    rotation = 2
 }

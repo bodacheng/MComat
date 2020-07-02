@@ -38,7 +38,9 @@ namespace FightScene
         public static bool Auto;
         public static Data_Center focusingChar;
         public static Team playerTeam = Team.player1;
-
+        
+        public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
+        
         void Awake()
         {
             target = this;
@@ -109,22 +111,16 @@ namespace FightScene
                 case TeamMode.rotation:
                     target.FightTeam1 = FightTeam1_rotation;
                     break;
-                case TeamMode.test:
-                    FightTeam1 = FightTeam1_multi;
-                    break;
             }
             FightTeam1.TeamMode = stage.Team1Mode;
             
             switch (stage.Team2Mode)
             {
                 case TeamMode.multiraid:
-                    FightTeam2 = FightTeam2_multi;
+                    target.FightTeam2 = FightTeam2_multi;
                     break;
                 case TeamMode.rotation:
-                    FightTeam2 = FightTeam2_rotation;
-                    break;
-                case TeamMode.test:
-                    target.FightTeam2 = target.FightTeam2_multi;
+                    target.FightTeam2 = FightTeam2_rotation;
                     break;
             }
             FightTeam2.TeamMode = stage.Team2Mode;
@@ -151,7 +147,7 @@ namespace FightScene
             }
             NetFightScene.target.LoadStageFinished.Value = true;
         }
-
+        
         // 战斗模式相机。根据选择队伍做相应调整。
         public void CameraParaAdjustment(Team myTeam)
         {
@@ -200,16 +196,4 @@ namespace FightScene
             }
         }
     }
-}
-
-public enum InputKey
-{
-    Null = -1,
-    Attack1 = 0,
-    Attack2 = 1,
-    Attack3 = 2,
-    Acc = 5,
-    Defend = 3,
-    Defend_Cancel = 4,
-    Any = 6
 }

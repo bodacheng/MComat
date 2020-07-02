@@ -58,6 +58,7 @@ public class Death_State : Behavior
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        _DATA_CENTER.IsDead.Value = false;
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         time_count = 0f;
         _BasicPhysicSupport.SetUsingGravity(true);

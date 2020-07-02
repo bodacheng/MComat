@@ -37,10 +37,13 @@ public class G_M_Attack_State : Behavior {
         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
         pEvents.CloseAllPersonalityEffects();
         Sensor.GetEnemiesByDistance(true);
-        if (Sensor.GetEnemiesByDistance(false)[0] != null)
-            RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+        if (Sensor.GetEnemiesByDistance(false).Count > 0)
+        {
+            if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+        }
 		_Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+        Animation_Manger.AnimationTrigger(clip_name,true, 0.05f);
 	}
     
     public override void AI_State_exit()

@@ -71,7 +71,7 @@ namespace FightScene
             FightGlobalSetting.scenestep = 1;
             mainProcessRunner.Run(FightSceneStartUp());
         }
-
+        
         IEnumerator FightSceneStartUp()
         {
             Time.timeScale = 1f;
@@ -81,9 +81,9 @@ namespace FightScene
             CountDownProcess countDownProcess = new CountDownProcess(this);
             StoryProcess storyProcess = new StoryProcess(this);
             FightOverProcess fightOverProcess = new FightOverProcess(this);
-
+            
             BasicTryProcess basicTryProcess = new BasicTryProcess(this);
-
+            
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
             FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
@@ -105,16 +105,17 @@ namespace FightScene
         // 本地系函数
         public void PressedStartButton()
         {
-            if (RealTimeGameProcessManager.target.FightTeam1.TeamMode == TeamMode.test)
-                RealTimeGameProcessManager.target.FightTeam1.LetAllCharactersChangeToTestMode();
-            else
-                RealTimeGameProcessManager.target.FightTeam1.ModeStart();
-
-            if (RealTimeGameProcessManager.target.FightTeam2.TeamMode == TeamMode.test)
+            RealTimeGameProcessManager.target.FightTeam1.ModeStart();
+            
+            if (FightSceneNote.nextBattle._fightEventType == FightEventType.Test)
+            {
                 RealTimeGameProcessManager.target.FightTeam2.LetAllCharactersChangeToTestMode();
+            }
             else
+            {
                 RealTimeGameProcessManager.target.FightTeam2.ModeStart();
-                
+            }
+            
             switch (RealTimeGameProcessManager.playerTeam)
             {
                 case Team.player1:

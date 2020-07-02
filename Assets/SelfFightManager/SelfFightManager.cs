@@ -112,9 +112,9 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
-            stage._fightEventType = FightEventType.Self;
+            stage._fightEventType = FightEventType.Test;
             stage.Team1Mode = TeamMode.multiraid;
-            stage.Team2Mode = TeamMode.test;
+            stage.Team2Mode = TeamMode.multiraid;
         }
 
         public IEnumerator FightStart(float HP)
@@ -129,7 +129,7 @@ namespace mainMenu
                     IEnumerator enumerator2 = _team2positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
                     yield return enumerator2;
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator2.Current;
-                    break;
+                break;
                 case TeamMode.rotation:
                     IEnumerator enumerator3 = _team1positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
                     yield return enumerator3;
@@ -137,7 +137,7 @@ namespace mainMenu
                     IEnumerator enumerator4 = _team2positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
                     yield return enumerator4;
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator4.Current;
-                    break;
+                break;
             }
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;

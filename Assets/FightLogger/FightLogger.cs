@@ -30,6 +30,7 @@ public class FightLogger : MonoBehaviour
             }
         }
         WatchPlayerers.Clear();
+        GameOver.Value = false;
     }
     
     public void ReadyToLog(IDictionary<Team, List<Data_Center>> TeamMembers)
@@ -37,10 +38,10 @@ public class FightLogger : MonoBehaviour
         wholeteamCount = 0;
         TeamDeadMemberDic.Clear();
         deadTeam.Clear();
+        GameOver.Value = false;
+        winner = Team.none;
         foreach (KeyValuePair<Team, List<Data_Center>> pair in TeamMembers)
         {
-            winner = Team.none;
-            GameOver.Value = false;
             TeamDeadMemberDic.Add(pair.Key,new List<Data_Center>());
             wholeteamCount += 1;
             foreach (Data_Center data_Center in pair.Value)
@@ -57,7 +58,7 @@ public class FightLogger : MonoBehaviour
                             if (!deadTeam.Contains(pair.Key))
                                 deadTeam.Add(pair.Key);
                         }
-                        if (wholeteamCount == deadTeam.Count + 1)
+                        if (wholeteamCount == deadTeam.Count + 1) // 胜负已决
                         {
                             GameOver.Value = true;
                             List<Team> allteams = TeamMembers.Keys.ToList();

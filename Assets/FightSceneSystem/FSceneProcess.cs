@@ -1,4 +1,5 @@
 ﻿using mainMenu;
+using System.Collections.Generic;
 
 namespace FightScene
 {
@@ -10,7 +11,9 @@ namespace FightScene
         public MobileInputsManager mobileInputsManager;
         public FightLogger fightLogger;
         public SingleThreadProcesser mainProcessRunner;
-
+        
+        
+        
         public void EelementsInherit(NetFightScene _NetFightScene)
         {
             this.FightScene = _NetFightScene;
@@ -19,7 +22,7 @@ namespace FightScene
             this.fightLogger = FightScene.fightLogger;
         }
     }
-
+    
     public enum SceneStep
     {
         None = 0,

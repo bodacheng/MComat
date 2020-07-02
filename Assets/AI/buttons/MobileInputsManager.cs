@@ -4,6 +4,18 @@ using UnityEngine.UI;
 using Soul;
 using Skill;
 
+public enum InputKey
+{
+    Null = -1,
+    Attack1 = 0,
+    Attack2 = 1,
+    Attack3 = 2,
+    Acc = 5,
+    Defend = 3,
+    Defend_Cancel = 4,
+    Any = 6
+}
+
 public class MobileInputsManager : MonoBehaviour {
 
     public Button Attack;

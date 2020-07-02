@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
+using System.Collections.Generic;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -18,12 +19,23 @@ public class PreparingProcess : FSceneProcess
         FightLoadError.Instance.FightLoadErrors.Clear();
         if (FightSceneNote.nextBattle != null)
         {
-            mainProcessRunner.Run(RealTimeGameProcessManager.target.LoadGame(FightSceneNote.nextBattle));
+            yield return RealTimeGameProcessManager.target.LoadGame(FightSceneNote.nextBattle);
+        }
+        RealTimeGameProcessManager.target.AllMembers.Clear();
+        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+        fightLogger.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
+        foreach (KeyValuePair<Team, List<Data_Center>> _set in RealTimeGameProcessManager.target.AllMembers)
+        {
+            foreach (Data_Center _char in _set.Value)
+            {
+                _char.Sensor.TeamMembers = RealTimeGameProcessManager.target.AllMembers;
+                _char.IsDead.Value = false;
+            }
         }
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
-        yield break;
     }
     
     public override void ProcessEnter()
