@@ -24073,7 +24073,7 @@ GameObject:
   - component: {fileID: 6377394201629858435}
   - component: {fileID: 6309858298055156934}
   - component: {fileID: 429357622321241779}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: electric_hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
