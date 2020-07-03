@@ -137,6 +137,16 @@
     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextController.cs" />
     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextType.cs" />
     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\ParticleSystemController\ParticleSystemController.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\ParticleSystemController\ParticleSystemControllerEditor.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\ParticleSystemController\SaveParticleSystemScript.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueMagicAbilities\SpawnCometsScript.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueMagicAbilities\SpawnMagicAbilityScript.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\RotateToMouseScript.cs" />
+    <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
@@ -706,6 +716,7 @@
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionEffect.shader" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Add_DistortTexture.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AdditiveMobile_Scroll01.shader" />
+    <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Readme.txt" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
     <None Include="Assets\Resources\StageConfigFiles\oneFight.json" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />

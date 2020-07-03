@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 584500107098996272}
   - component: {fileID: 584500107118405726}
   - component: {fileID: 584500107118492816}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Linger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4646,7 +4646,7 @@ GameObject:
   - component: {fileID: 584500107118475584}
   - component: {fileID: 584500107117243384}
   - component: {fileID: 82768902295825438}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: v_slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9546,7 +9546,7 @@ GameObject:
   - component: {fileID: 584500107099081998}
   - component: {fileID: 584500107118477508}
   - component: {fileID: 584500107118502024}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14213,7 +14213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5905615003500762326}
   - component: {fileID: 3991255640594768901}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: marker3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14263,7 +14263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8612325144268865203}
   - component: {fileID: 6709860805287909935}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19080,7 +19080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415966224332496966}
   - component: {fileID: 8752713116262958162}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: marker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
