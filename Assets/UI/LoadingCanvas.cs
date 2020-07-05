@@ -120,34 +120,55 @@ public class LoadingCanvas : MonoBehaviour {
         }
         yield break;
     }
+    
+    public void ArrangeWarnWindow(string intro)
+    {
+        this.Loading_Canvas.gameObject.SetActive(true);
+        this.ValidationWindow.gameObject.SetActive(true);
+        HigtLightRect(ValidationWindow_PosForMask.transform);
+                
+        this.YesButton.gameObject.SetActive(false);
+        this.NoButton.gameObject.SetActive(false);
+        
+        ValidationIntro.text = intro;
+        
+        IEnumerator closeWindow()
+        {
+            yield return new WaitForSeconds(1f);
+            CloseValidationWindow();
+        }
+        ExtraProcesser.target.Run(closeWindow());
+    }
+    
+    void CloseValidationWindow()
+    {
+        this.YesButton.onClick.RemoveAllListeners();
+        this.NoButton.onClick.RemoveAllListeners();
+        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
+        this.ValidationWindow.gameObject.SetActive(false);
+        this.Loading_Canvas.gameObject.SetActive(false);
+        ClearHigtLight();
+    }
 
-    public void ArrangeValiationWindow(UnityEngine.Events.UnityAction action, string intro)
+    public void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, string intro)
     {
         this.Loading_Canvas.gameObject.SetActive(true);
         this.ValidationWindow.gameObject.SetActive(true);
         HigtLightRect(this.ValidationWindow_PosForMask.transform);
         
-        void closeValidationWindow()
-        {
-            this.YesButton.onClick.RemoveAllListeners();
-            this.NoButton.onClick.RemoveAllListeners();
-        
-            LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
-            this.ValidationWindow.gameObject.SetActive(false);
-            this.Loading_Canvas.gameObject.SetActive(false);
-            ClearHigtLight();
-        }
+        this.YesButton.gameObject.SetActive(true);
+        this.NoButton.gameObject.SetActive(true);
         
         this.YesButton.onClick.RemoveAllListeners();
         this.YesButton.onClick.AddListener(action);
-        this.YesButton.onClick.AddListener(closeValidationWindow);
+        this.YesButton.onClick.AddListener(CloseValidationWindow);
         
         this.NoButton.onClick.RemoveAllListeners();
-        this.NoButton.onClick.AddListener(closeValidationWindow);
+        this.NoButton.onClick.AddListener(CloseValidationWindow);
         ValidationIntro.text = intro;
     }
     
-    public void ArrangeValiationWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
+    public void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
         this.Loading_Canvas.gameObject.SetActive(true);
         this.ValidationWindow.gameObject.SetActive(true);
@@ -163,6 +184,9 @@ public class LoadingCanvas : MonoBehaviour {
             this.Loading_Canvas.gameObject.SetActive(false);
             ClearHigtLight();
         }
+        
+        this.YesButton.gameObject.SetActive(true);
+        this.NoButton.gameObject.SetActive(true);
         
         this.YesButton.onClick.RemoveAllListeners();
         this.YesButton.onClick.AddListener(action);

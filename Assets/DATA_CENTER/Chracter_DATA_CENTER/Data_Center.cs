@@ -66,10 +66,7 @@ public partial class Data_Center : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-            string personalEffectsPath = FightGlobalSetting.EffectPathDefine(Zokusei);
-            EffectsManager.INIEffectsPool("short_effect", personalEffectsPath, 3);
-            EffectsManager.INIEffectsPool("normal_effect", personalEffectsPath, 3);
-            EffectsManager.INIEffectsPool("long_effect", personalEffectsPath, 3);
+
             switch (ResourceLoadingSetting.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
@@ -109,18 +106,6 @@ public partial class Data_Center : MonoBehaviour
 
         Sensor.SetDectectLayer(_TeamConfig,this);
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
-        string effectPath = FightGlobalSetting.EffectPathDefine(Zokusei);
-
-        EffectsManager.INIEffectsPool("Sparks", effectPath, 3);
-        EffectsManager.INIEffectsPool("light_hit", effectPath, 3);
-        EffectsManager.INIEffectsPool("light_hit", effectPath, 3);
-        EffectsManager.INIEffectsPool("heavy_hit", effectPath, 3);
-        EffectsManager.INIEffectsPool("super_hit", effectPath, 3);
-        EffectsManager.INIEffectsPool("resistanceUp", effectPath, 3);
-        EffectsManager.INIEffectsPool("on_enable_effect", effectPath, 3);
-        EffectsManager.INIEffectsPool("FlashStart", effectPath, 3);
-        EffectsManager.INIEffectsPool("FlashEnd", effectPath, 3);
-
         if (Shield != null)
         {
             Shield.gameObject.SetActive(false);
@@ -141,7 +126,20 @@ public partial class Data_Center : MonoBehaviour
         
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo);
         _MyBehaviorRunner.INIStates(this);
-
+        
+        EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+    
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         List<string> toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();

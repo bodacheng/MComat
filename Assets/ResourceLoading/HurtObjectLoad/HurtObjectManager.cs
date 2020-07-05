@@ -5,12 +5,20 @@ using UniRx;
 
 public partial class HurtObjectManager
 {
-    public static DecompositionerPool default_hitboxPool;
-    public static IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
+    static DecompositionerPool default_hitboxPool;
+    static IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
     
     public static DecompositionerPool GetDPool()
     {
         return default_hitboxPool;
+    }
+    
+    public static void ClearCurrent()
+    {
+        foreach (KeyValuePair<string, DecompositionerPool> keyValuePair in HurtPoolDic)
+        {
+            keyValuePair.Value.Clear(false);
+        }
     }
     
     // 默认攻击物件池的创建
@@ -69,9 +77,9 @@ public partial class HurtObjectManager
         }
         
         // 第三轮
-        if (myDefaultMagicPath != "defaultmagic")
+        if (myDefaultMagicPath != FightGlobalSetting.EffectPathDefine(Zokusei.Null))
         {
-            myDefaultMagicPath = "defaultmagic";
+            myDefaultMagicPath = FightGlobalSetting.EffectPathDefine(Zokusei.Null);
             if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
             {
                 HurtPoolDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out HurtObjectPool);
@@ -84,9 +92,7 @@ public partial class HurtObjectManager
         return null;
     }
     
-    //其实上面那些特效啦什么的也应该把先查字典再决定是否load的函数写出来，但为什么没写呢？因为特效物体的来源其实存在些问题。一个是视效物体在本地，而伤害物体在包里，再一个还存在个属性文件夹问题，
-    //而现在这两类东西你却安排在一个字典中。这就是为什么可能应该把字典分成两个
-    public static DecompositionerPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab,string key,int ini_count)
+    public static DecompositionerPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
         if (prefab != null)
         {

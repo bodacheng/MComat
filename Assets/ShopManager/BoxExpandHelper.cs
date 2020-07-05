@@ -30,14 +30,14 @@ public class BoxExpandHelper : MonoBehaviour
     {
         void expandFive()
         {
-            LoadingCanvas.target.ArrangeValiationWindow(ChooseFive, "来他5个技能石格子？？");
+            LoadingCanvas.target.ArrangeConfirmWindow(ChooseFive, "来他5个技能石格子？？");
         }
         Five.onClick.RemoveAllListeners();
         Five.onClick.AddListener(expandFive);
         
         void expandTen()
         {
-            LoadingCanvas.target.ArrangeValiationWindow(ChooseTen, "来他10个技能石格子？？");
+            LoadingCanvas.target.ArrangeConfirmWindow(ChooseTen, "来他10个技能石格子？？");
         }
         Ten.onClick.RemoveAllListeners();
         Ten.onClick.AddListener(expandTen);

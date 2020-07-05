@@ -114,15 +114,25 @@ namespace UniRx.Toolkit
         public void Clear(bool callOnBeforeRent = false)
         {
             if (q == null) return;
-            while (q.Count != 0)
+            //while (q.Count != 0)
+            //{
+            //    var instance = q[0];
+            //    if (callOnBeforeRent)
+            //    {
+            //        OnBeforeRent(instance);
+            //    }
+            //    OnClear(instance);
+            //}
+            for (int i = 0; i < q.Count; i++)
             {
-                var instance = q[0];
+                var instance = q[i];
                 if (callOnBeforeRent)
                 {
                     OnBeforeRent(instance);
                 }
                 OnClear(instance);
             }
+            q.Clear();
         }
 
         /// <summary>

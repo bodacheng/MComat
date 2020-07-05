@@ -49,7 +49,7 @@ public partial class BO_Ani_E : MonoBehaviour
                 if (myMagicForwardPath != null)
                     yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL,this.myMagicForwardPath));
                 yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", magic_path));
-                yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics","defaultmagic"));
+                yield return (EffectsManager.PrepareMagicFromCach(ResourceLordSceneStarter.BundleURL + "/Magics", FightGlobalSetting.EffectPathDefine(Zokusei.Null)));
             break;
             case ResourceLoadMode.Resource:
 
@@ -58,7 +58,7 @@ public partial class BO_Ani_E : MonoBehaviour
                 if (myMagicForwardPath != null)
                     yield return (EffectsManager.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));
                 yield return (EffectsManager.PrepareMagicFromStreamingAssets(magic_path));
-                yield return (EffectsManager.PrepareMagicFromStreamingAssets("defaultmagic"));
+                yield return (EffectsManager.PrepareMagicFromStreamingAssets(FightGlobalSetting.EffectPathDefine(Zokusei.Null)));
             break;
         }
     }

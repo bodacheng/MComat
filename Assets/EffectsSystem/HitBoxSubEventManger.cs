@@ -7,15 +7,36 @@ public class HitBoxSubEventManger : MonoBehaviour
     public EventAndTriggerTime _event;
     public string LandedEvent;
     public string fadeEvent;
-    
     float time_count;
+    
+    SingleAssignmentDisposable clockEvent, landEvent, fadedEvent;
+    
+    void OnDestroy()
+    {
+        if (clockEvent != null && !clockEvent.IsDisposed)
+            clockEvent.Dispose();
+        if (landEvent != null && !landEvent.IsDisposed)
+            landEvent.Dispose();
+        if (fadedEvent != null && !fadedEvent.IsDisposed)
+            fadedEvent.Dispose();
+    }
+    
+    void OnDisable()
+    {
+        if (clockEvent != null && !clockEvent.IsDisposed)
+            clockEvent.Dispose();
+        if (landEvent != null && !landEvent.IsDisposed)
+            landEvent.Dispose();
+        if (fadedEvent != null && !fadedEvent.IsDisposed)
+            fadedEvent.Dispose();
+    }
 
     void OnEnable()
     {
         time_count = 0;        
         if (!string.IsNullOrEmpty(_event.event_name))
         {
-            var clockEvent = new SingleAssignmentDisposable();
+            clockEvent = new SingleAssignmentDisposable();
             clockEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (time_count > _event.time)
@@ -33,7 +54,7 @@ public class HitBoxSubEventManger : MonoBehaviour
         
         if (!string.IsNullOrEmpty(LandedEvent))
         {
-            var landEvent = new SingleAssignmentDisposable();
+            landEvent = new SingleAssignmentDisposable();
             landEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (_Decompositioner.transform.position.y <= 0)
@@ -52,7 +73,7 @@ public class HitBoxSubEventManger : MonoBehaviour
         
         if (!string.IsNullOrEmpty(fadeEvent))
         {
-            var fadedEvent = new SingleAssignmentDisposable();
+            fadedEvent = new SingleAssignmentDisposable();
             fadedEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (_Decompositioner._HitBox.weaponHP > 0 && _Decompositioner._HitBox.CurrentHP <= 0)
@@ -73,7 +94,7 @@ public class HitBoxSubEventManger : MonoBehaviour
     {
         time_count += Time.deltaTime;
     }
-
+    
     [System.Serializable]
     public class EventAndTriggerTime
     {

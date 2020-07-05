@@ -11,19 +11,19 @@ public enum HitBoxLifeEnding
 }
 
 public partial class Decompositioner : MonoBehaviour {
-    
+
     public BO_Marker_Manager _HitBox;
     public TrackControl TrackControl;
     
-	public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
+    public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     public float stop_emission_delay = 0.9f;
     
     public List<MeshRenderer> to_be_faded_renderers;
     public AudioSource audioSource;
-
+    
     [Tooltip("附属物体。这个只能自己把握。")]
     public string[] Attachments;
-
+    
     #region realtime
     DecompositionerPool _DecompositionerPool;
     PositionConstraint positionConstraint;

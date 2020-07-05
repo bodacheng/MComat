@@ -116,10 +116,9 @@ namespace mainMenu
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
         }
-
-        public IEnumerator FightStart(float HP)
+        
+        IEnumerator ArrangeTeamBySelection(float HP)
         {
-            MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
@@ -142,6 +141,12 @@ namespace mainMenu
             stage.team1_ExtraHP = HP;
             stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
+        }
+
+        public IEnumerator FightStart(float HP)
+        {
+            MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+            yield return ArrangeTeamBySelection(HP);
             FightPreparePage.target.PreLoad(stage, TeamSetGameMode.SelfFight);
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, true);
         }

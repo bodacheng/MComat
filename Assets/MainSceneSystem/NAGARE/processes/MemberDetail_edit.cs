@@ -138,7 +138,7 @@ public class MemberDetail_edit : MainSceneProcess
                 TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
                 return;
             }
-            LoadingCanvas.target.ArrangeValiationWindow(SkillEditConfirm, "确实要进行技能更新？");
+            LoadingCanvas.target.ArrangeConfirmWindow(SkillEditConfirm, "确实要进行技能更新？");
         }
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);

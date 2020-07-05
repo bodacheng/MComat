@@ -7,8 +7,6 @@ namespace mainMenu
 {
     public partial class FightPreparePage : MonoBehaviour
     {
-        public SingleThreadProcesser mainProcessRunner;
-
         [Space(7)]
         [Header("UI elements")]
         public Canvas QuestPreparePageCanvas;
@@ -19,12 +17,12 @@ namespace mainMenu
         public RectTransform enemyTeamShowT;
         public Button EditTeamButton; // 根据进入战斗模式决定是否显示
         public static FightPreparePage target;
-
+        
         #region 待加载战斗信息
         StageScriptableObject ToBeLoad;
         TeamSetGameMode ToBeLoadMode;
         #endregion
-
+        
         void Awake()
         {
             target = this;
@@ -56,15 +54,19 @@ namespace mainMenu
             target.QuestPreparePageCanvas.gameObject.SetActive(true);
             EnterQuest.gameObject.SetActive(false);
             StageMembersInfoShow(ToBeLoad);
-            EnterQuest.onClick.RemoveAllListeners();
             void Go()
             {
                 CharsManager.target.PreventTheseMyModelsFromDestroying(ToBeLoad.GetTeam1EnterRingLocalIds(ToBeLoad.localFight));
+                if (ToBeLoad.localFight.HeroSets.values.Count < 1 || ToBeLoad.localFight.EnemySets.values.Count < 1)
+                {
+                    LoadingCanvas.target.ArrangeWarnWindow("队伍人员不够。");
+                    return;
+                }
                 PreScene.target.LoadFight(ToBeLoad);
             }
+            EnterQuest.onClick.RemoveAllListeners();
             EnterQuest.onClick.AddListener(Go);
             EnterQuest.gameObject.SetActive(true);
-            yield break;
         }
         
         void StageMembersInfoShow(StageScriptableObject stage)

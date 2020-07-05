@@ -6,20 +6,16 @@ using UnityEngine.Animations;
 public partial class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
-    public static IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
-    
-    static DecompositionerPool EffectPool;
-    static GameObject EffectPrefab;
-    static Decompositioner processingEffectObj;
-    static ConstraintSource myConstraintSource;
+    static IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();        
     public static Decompositioner GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentsetT)
     {
         if (string.IsNullOrEmpty(resource_name))
             return null;
-        EffectPool = INIEffectsPool(resource_name, EffectsPath, 3);
+        DecompositionerPool EffectPool = INIEffectsPool(resource_name, EffectsPath, 3);
         if (EffectPool == null)
             return null;
-        processingEffectObj = EffectPool.Rent();
+        Decompositioner processingEffectObj = EffectPool.Rent();
+        ConstraintSource myConstraintSource = new ConstraintSource();
         if (parentsetT != null)
         {
             myConstraintSource.sourceTransform = parentsetT;

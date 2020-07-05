@@ -26,7 +26,7 @@ public class StagesManagerGUI : Editor {
     string focusingMemberRecordID;
     IDictionary<string, string> CharIDsAndNames;
     CharDataInfo focusingCharInfo;
-    CharConfig focusingCharResourceInfo;
+    CharConfig focusingCharConfig;
     SkillConfig targetSC;
     
     bool skillselectfilter;
@@ -34,8 +34,14 @@ public class StagesManagerGUI : Editor {
     readonly bool[] skillrangeselectfilter = { true, true, true, true };//close,near,far,out
     int selectedskillindex, selectedmonsterindex;
     int selectskillrarelevel = -1;
-    readonly int[] skillrarelevels = {-1,0,1,2,3};
-    readonly string[] skillrarelevelShow = {"ALL","0", "★", "★★", "★★★"};
+    int selectSkillExLevel = -1;
+    
+    readonly int[] skillrarelevels = {-1, 0, 1, 2, 3 };
+    readonly string[] skillrarelevelShow = { "ALL", "0", "★", "★★", "★★★" };
+    
+    readonly int[] exLevels = {-1, 0, 1, 2, 3 };
+    readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
+    
     string focusingtype;
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
@@ -132,15 +138,15 @@ public class StagesManagerGUI : Editor {
             ButtonStyle_save.normal.textColor = Color.blue;
             ButtonStyle_save.fixedWidth = 200f;
             ButtonStyle_save.alignment = TextAnchor.MiddleCenter;
-    
+            
             Title = new GUIStyle(GUI.skin.label);
             Title.normal.textColor = Color.blue;
             Title.alignment = TextAnchor.MiddleCenter;
-    
+            
             Big_title = new GUIStyle(GUI.skin.label);
             Big_title.normal.textColor = Color.red;
             Big_title.alignment = TextAnchor.UpperLeft;
-    
+            
             ButtonStyle_NineAndTwo = new GUIStyle(GUI.skin.button);
             ButtonStyle_NineAndTwo.normal.textColor = Color.blue;
             ButtonStyle_NineAndTwo.fixedWidth = 80f;
@@ -162,7 +168,7 @@ public class StagesManagerGUI : Editor {
             SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
             MonstersConfigTable.LoadMonstersConfigByResource();
             MonstersConfigTable.RefreshCharacterResourceInfoDic();
-
+            
             Initialized = true;
         }
                 
@@ -257,14 +263,14 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
         GUILayout.Space(10);
         // 指定站位人员的添加与删除end //
-
+        
         if (focusingCharInfo == null)
         {
             goto A;
         }
         
-        focusingCharResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
-        focusingtype = focusingCharResourceInfo != null ? EditorGUILayout.TextField("CharacerType", focusingCharResourceInfo.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
+        focusingCharConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
+        focusingtype = focusingCharConfig != null ? EditorGUILayout.TextField("CharacerType", focusingCharConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
         if (CharIDsAndNames.Count == 0)
         {
@@ -301,13 +307,12 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
 
         /////// 九宫格 //////////
-
         GUILayout.BeginHorizontal();
         void SlotColorCal(SkillConfig targetC)
         {
             GUI.backgroundColor = Repeated(targetC, targetC.RECORD_ID) ? Color.red : SlotHasSkill(targetC.RECORD_ID) ? Color.yellow : Color.white;
         }
-
+        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetA1Config());
         if (GUILayout.Button("A1", targetSC != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
@@ -333,7 +338,7 @@ public class StagesManagerGUI : Editor {
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB1Config();
         }
-
+        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetB2Config());
         if (GUILayout.Button("B2", targetSC != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
@@ -367,7 +372,7 @@ public class StagesManagerGUI : Editor {
             targetSC = focusingCharInfo._NineAndTwo.GetC3Config();
         }
         GUILayout.EndHorizontal();
-
+        
         GUI.backgroundColor = Color.white;
         focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
         focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
@@ -378,12 +383,31 @@ public class StagesManagerGUI : Editor {
         {
             goto A;
         }
+        selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", selectSkillExLevel, exLevelShows, exLevels);
+        bool[] SPselected;
+        switch(selectSkillExLevel)
+        {
+            case 0:
+            SPselected = new bool[4] { true, false, false, false };
+            break;
+            case 1:
+            SPselected = new bool[4] { false, true, false, false };
+            break;
+            case 2:
+            SPselected = new bool[4] { false, false, true, false };
+            break;
+            case 3:
+            SPselected = new bool[4] { false, false, false, true };
+            break;
+            default:
+            SPselected = new bool[4] { true, true, true, true };
+            break;
+        }
         
         skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, AttackRangeToggleGUI);
         if (skillselectfilter)
         {
             EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
-            
             filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
             if (!filterallranges) 
             {
@@ -403,11 +427,8 @@ public class StagesManagerGUI : Editor {
             GUILayout.Space(20f);
         }
         
-        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, 
-            new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, 
-            new bool[4] { true, true, true, true },
-            selectskillrarelevel);
-                    
+        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, SPselected, selectskillrarelevel);
+        
         int index2 = 0;
         selectedskillindex = 0;
         foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)

@@ -14,6 +14,7 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
+            HurtObjectManager.ClearCurrent();
             FightOverControl.target.Step2.gameObject.SetActive(false);
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
             foreach(NineForShow nineForShow in FightOverControl.target.NineForShows)
