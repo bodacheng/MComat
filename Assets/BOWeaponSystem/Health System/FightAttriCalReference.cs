@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UniRx;
 using HittingDetection;
 
-//整个脚本中有若干个量并没有在本脚本内进行任何计算，就是起了个作为属性被参考的作用，原因在于为了保持BO武器脚本只参考BO系列文件的状态。
 public partial class FightAttriCalReference : MonoBehaviour
 {
     public static List<Collider> AllMeatColliders = new List<Collider>();
@@ -168,7 +167,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                                 v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
         }
     }
-    
+
     // 受攻击方运行
     public void ApplyDamage(V_Damage _dmg)
 	{
@@ -178,20 +177,23 @@ public partial class FightAttriCalReference : MonoBehaviour
             HitEffect(_dmg);
             return;
         }
-                
+        
         HitEffect(_dmg);
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
             _Center._ResistanceManager.Resistance.Value -= 1;
             return;
         }
-                
+        
         _dmg.attacker.HitCountPlus();
         _ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
         
-        CurrentHp.Value -= _dmg.from_weapon.GetDamageAmount();
-        
+        float wholeDamge = _dmg.from_weapon.GetDamageAmount();
+        CurrentHp.Value -= wholeDamge;
+        PlusEx(wholeDamge/2 * 5);
+        _dmg.from_weapon.GetOwnerFightAttriCalReference().PlusEx(wholeDamge * 5);
+               
         if (CurrentHp.Value <= 0)
         {
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);

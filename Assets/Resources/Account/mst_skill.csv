@@ -160,7 +160,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 159,g_fire,human,1,10,GI,1,5,14,,1
 160,stepslash,human,1,10,GR,2,2,10,,1
 161,psychoblast,human,1,10,GR,2,0.3,5,,1
-162,mirrorcannon,human,1,10,GI,1,5,12,,1
+162,mirrorcannon,human,1,10,GI,1,2,5,,1
 163,ct,human,1,10,CT,1,0,4,,1
 164,handfiref,human,1,10,GI,2,0.3,5,,1
 165,threeenergy,human,1,10,GR,3,0,5,,1

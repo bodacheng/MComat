@@ -25,7 +25,6 @@ public partial class Hurt_State : Behavior {
         _FightAttriCalRef.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-        _FightAttriCalRef.PlusCriticalGauge(1);
         TimeCounter = 0f;
         switch (newValue.from_weapon.damage_type)
         {

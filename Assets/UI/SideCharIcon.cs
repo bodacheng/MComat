@@ -18,6 +18,10 @@ public class SideCharIcon : MonoBehaviour {
     public Slider ResistBar;
     public Image ResistBarFillImage;
     
+    [Header("浮动Ex条")]
+    [Space(6)]
+    public Slider ExBar;
+    
     public HeroIcon focusingCharIcon;
     
     float maxHp;

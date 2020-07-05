@@ -18,6 +18,12 @@ namespace FightScene
                     RefreshHPBar(a_char, x, maxHp);
                 });
                 
+                a_char.FightDataRef.CriticalGauge = new ReactiveProperty<float>();
+                a_char.FightDataRef.CriticalGauge.Subscribe(x =>
+                {
+                    RefreshExBar(a_char, x, 100f);
+                });
+                
                 a_char.IsDead = new ReactiveProperty<bool>(false);
                 a_char.IsDead.Subscribe(x => {
                     if (x == true) 

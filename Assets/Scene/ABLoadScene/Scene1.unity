@@ -1731,7 +1731,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AT_coefficient: 1
-  HP_coefficient: 0.1
+  HP_coefficient: 0.5
   lighthit_lastingtime: 0.4
   heavyhit_lastingtime: 0.6
   highhit_lastingTime: 0.65
