@@ -191,8 +191,6 @@ public partial class FightAttriCalReference : MonoBehaviour
         
         float wholeDamge = _dmg.from_weapon.GetDamageAmount();
         CurrentHp.Value -= wholeDamge;
-        PlusEx(wholeDamge/2 * 5);
-        _dmg.from_weapon.GetOwnerFightAttriCalReference().PlusEx(wholeDamge * 5);
                
         if (CurrentHp.Value <= 0)
         {
@@ -219,6 +217,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 //打了别人，属于正面效益
             }
         );
+        _Center._MyBehaviorRunner.GetNowState().EnergyAbsorb();
     }//打别人计数
     
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数

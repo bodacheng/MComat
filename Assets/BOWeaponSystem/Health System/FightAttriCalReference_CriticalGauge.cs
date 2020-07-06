@@ -11,7 +11,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     public void PlusEx(float add)
     {
-        CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0,100);
+        CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0, 100);
     }
     
     public void CostCriticalGaugeBySPlevel(int level)

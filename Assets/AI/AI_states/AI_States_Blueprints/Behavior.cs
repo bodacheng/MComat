@@ -35,7 +35,31 @@ namespace Soul
         public string StateKey;
         public int splevel;
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
-
+        protected bool AbsorbEnergyFinished;
+        
+        public void EnergyAbsorb()
+        {
+            if (!AbsorbEnergyFinished)
+            {
+                switch(splevel)
+                {
+                    case 0:
+                    _FightAttriCalRef.PlusEx(15);
+                    break;
+                    case 1:
+                    _FightAttriCalRef.PlusEx(10);
+                    break;
+                    case 2:
+                    _FightAttriCalRef.PlusEx(10);
+                    break;
+                    case 3:
+                    _FightAttriCalRef.PlusEx(10);
+                    break;
+                }
+                AbsorbEnergyFinished = true;
+            }
+        }
+        
         // Prepare for basic parameters here
         public virtual void Pre_process_before_enter()
         {
@@ -87,6 +111,7 @@ namespace Soul
             _FightAttriCalRef.AT = AT;
             _FightAttriCalRef.CostCriticalGaugeBySPlevel(splevel);
             BeheviourFrameCounter = 0;
+            AbsorbEnergyFinished = false;
         }
         
         // Process when entering the state 
