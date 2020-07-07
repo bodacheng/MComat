@@ -65,12 +65,12 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char2 = new CharDataInfo
         {
             ResourceID = "3",//charRecordIds[Indexes[1]],
-            _NineAndTwo = BalanceStyle("human", 1)
+            _NineAndTwo = RangedStyle("human", 1)
         };        
         CharDataInfo char3 = new CharDataInfo
         {
             ResourceID = "3",//charRecordIds[Indexes[2]],
-            _NineAndTwo = BalanceStyle("human", 1)
+            _NineAndTwo = RangedStyle("human", 1)
         };
         
         CharDataInfo char4 = new CharDataInfo
@@ -81,12 +81,12 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char5 = new CharDataInfo
         {
             ResourceID = "3",//charRecordIds[Indexes[1]],
-            _NineAndTwo = BalanceStyle("human", 1)
+            _NineAndTwo = RangedStyle("human", 1)
         };        
         CharDataInfo char6 = new CharDataInfo
         {
             ResourceID = "2",//charRecordIds[Indexes[2]],
-            _NineAndTwo = BalanceStyle("human", 1)
+            _NineAndTwo = RangedStyle("human", 1)
         };
         
         target.EnemySets.Set(0, 0, char1);
@@ -134,6 +134,42 @@ public partial class StagesManager : MonoBehaviour
             rushType = Skill.RushType.Rush
         };
 
+        return one;
+    }
+    
+    public static NineAndTwo RangedStyle(string focusingtype, int skilllevel)
+    {
+        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, false, false, false }, -1, 5);
+        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { false, true, true, true }, new bool[4] { false, true, false, false }, -1, 3);
+        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, false, true, false }, -1, 1);
+        
+        NineAndTwo one = new NineAndTwo
+        {
+            A1level = skilllevel,
+            A2level = skilllevel,
+            A3level = skilllevel,
+            B1level = skilllevel,
+            B2level = skilllevel,
+            B3level = skilllevel,
+            C1level = skilllevel,
+            C2level = skilllevel,
+            C3level = skilllevel,
+            
+            A1skillid = _normalSkills[0],
+            A2skillid = _normalSkills[1],
+            A3skillid = _normalSkills[2],
+            B1skillid = _Ex1Skills[0],
+            B2skillid = _Ex1Skills[1],
+            B3skillid = _Ex1Skills[2],
+            C1skillid = _normalSkills[3],
+            C2skillid = _normalSkills[4],
+            C3skillid = _Ex2Skills[0],
+            
+            canDefend = true,
+            moveType = Skill.MoveType.Move_normal,
+            rushType = Skill.RushType.Rush
+        };
+        
         return one;
     }
 }

@@ -226,8 +226,35 @@ namespace mainMenu
             skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
             skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
             skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]);
+                       
             ShowNineSlotExSurplus(wholePoint);
             RefreshCurrentHpBasedOnNineSlots();
+            RefreshNineSlotColors();
         }
+        
+         void RefreshNineSlotColors()
+         {
+            foreach (SkillStoneSlot _slot in allSlot)
+            {
+                SKStoneItem sKStoneItem = _slot._DragAndDropCell.GetItem();
+                if (sKStoneItem == null)
+                    continue;
+                switch(sKStoneItem._SkillConfig.SP_LEVEL)
+                {
+                    case 1:
+                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1,0.2f,0.3f,1f);
+                    break;
+                    case 2:
+                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(0f,1f,0.1f,1f);
+                    break;
+                    case 3:
+                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(0f,0.1f,1f,1f);
+                    break;
+                    default:
+                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
+                    break;
+                }
+            }
+         }
     }
 }

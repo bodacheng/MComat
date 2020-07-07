@@ -3,6 +3,7 @@ using Skill;
 using System.Collections.Generic;
 using UnityEngine;
 using dataAccess;
+using UnityEngine.UI;
 
 namespace mainMenu
 {
@@ -98,7 +99,7 @@ namespace mainMenu
                 if (i + 1 <= pointremain)
                 {
                     remainCharges[i].SetActive(true);
-                } 
+                }
                 else
                 {
                     remainCharges[i].SetActive(false);
@@ -120,7 +121,7 @@ namespace mainMenu
             
             _HP.text = "HP:" + INI_Hp(skillIDs, level).ToString();
         }
-        
+                
         public static float INI_Hp(List<string> skillIDs, List<int> level)
         {
             float WholeHP = 0;

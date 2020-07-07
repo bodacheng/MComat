@@ -34,7 +34,7 @@ public partial class Decompositioner : MonoBehaviour
                             Phase = 2;
                         }
                     }
-                    break;
+                break;
                 case WeaponMode.FlyerWeapon:
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
@@ -43,10 +43,10 @@ public partial class Decompositioner : MonoBehaviour
                         Counter = stop_emission_delay;
                         Phase = 2;
                     }
-                    break;
+                break;
             }
         }
-
+        
         switch (Phase)
         {
             case 1:
@@ -70,11 +70,10 @@ public partial class Decompositioner : MonoBehaviour
                 }
                 if (Counter > DestructionDelay || DestructionDelay <= 0)//DestructionDelay <= 0 代表这个物件没有生存寿命
                 {
-                    Phase = 0;
-                    EnergyRessolve();
+                    Phase = -1;
                 }
             break;
-            case -1: // -1是立刻归还对象池的flag，主要用于d_hitbox
+            case -1: // -1是立刻归还对象池的flag。这个逻辑是让所有hitbox按序运行的重要一环。
                 EnergyRessolve();
                 break;
         }

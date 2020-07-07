@@ -94,7 +94,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         _SingleThreadProcesser.Run(SkillStonesBox.target.ShowUsingChar(dragAndDropItem, targetIcon));
     }
-
+    
     /// <summary>
     /// Manualy add item into this cell
     /// </summary>

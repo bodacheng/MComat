@@ -96,7 +96,6 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
             theweapon.SetDamageType(damageType);
         }
-
         
         void RegisterBodyPartWeapon(Transform t)
         {

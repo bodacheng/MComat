@@ -28,9 +28,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     {
         if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
         if (instance == null) throw new ArgumentNullException("instance");
-        
-        if (q == null) q = new List<Decompositioner>();
-        
+        if (q == null) q = new List<Decompositioner>();       
         if ((q.Count + 1) == MaxPoolCount)
         {
             throw new InvalidOperationException("Reached Max PoolSize");
