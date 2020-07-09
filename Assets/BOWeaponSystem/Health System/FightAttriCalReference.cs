@@ -28,10 +28,29 @@ public partial class FightAttriCalReference : MonoBehaviour
     E_Damage managingEventDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
     IDictionary<Collider, Vector3> myColliderSizes = new Dictionary<Collider, Vector3>();
+    float DamgeGotExCounter; // 所收到的总伤害，用于处理受伤所获得ex槽
     
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
     
+    float DamageToEx { 
+        get => DamgeGotExCounter; 
+        set {
+            DamgeGotExCounter = value;
+            while (DamgeGotExCounter >= FightGlobalSetting._GetExAfterDamageBy)
+            {
+                DamgeGotExCounter -= FightGlobalSetting._GetExAfterDamageBy;
+                PlusEx(FightGlobalSetting._ExGetAfterDamage);
+            }
+        }
+    }
+
+    public void Ini()
+    {
+        CurrentHp = new ReactiveProperty<float>();
+        DamageToEx = 0;
+    }
+
     public void SetGettingDamageState(bool _state)
     {
         gettingdamage = _state;
@@ -70,15 +89,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 hitbox.myColliderMustEquip.isTrigger = !_bool;
         }
     }
-    
-    public void ScaleAllMyCollider(float scalesize)
-    {
-        foreach (KeyValuePair<Collider,Vector3> keyValuePair in myColliderSizes)
-        {
-            ((BoxCollider)keyValuePair.Key).size = keyValuePair.Value * scalesize;
-        }
-    }
-    
+        
     public void ChangeLayerForAllSelfColliders(int layer)
     {
         if (myBOHitBoxeComponent != null)
@@ -191,7 +202,7 @@ public partial class FightAttriCalReference : MonoBehaviour
         
         float wholeDamge = _dmg.from_weapon.GetDamageAmount();
         CurrentHp.Value -= wholeDamge;
-               
+        DamageToEx += wholeDamge;
         if (CurrentHp.Value <= 0)
         {
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);

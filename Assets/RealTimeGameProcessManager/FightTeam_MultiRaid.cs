@@ -73,7 +73,7 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
-                a_char.FightDataRef.CurrentHp = new ReactiveProperty<float>();
+                a_char.FightDataRef.Ini();
                 a_char.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()));
                 a_char.FightDataRef.CurrentHp.Value += extraHP;
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
@@ -87,7 +87,7 @@ namespace FightScene
                 {
                     RefreshExBar(a_char, x, 100f);
                 });
-
+                
                 a_char._ResistanceManager.Resistance = new ReactiveProperty<int>
                 {
                     Value = 0
@@ -97,7 +97,7 @@ namespace FightScene
                     a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
                     RefreshResistanceBar(a_char);
                 });
-
+                
                 a_char.FightDataRef._ComboHitCount.HitCount.Value = 0;
                 a_char.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
                 {

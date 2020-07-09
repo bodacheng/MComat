@@ -62,6 +62,7 @@ namespace Soul
         {
             if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             {
+                Debug.Log("检查下"+Sensor.EnemyAndTeammateBetweenMeAndEnemy());
                 return false;
             }
             

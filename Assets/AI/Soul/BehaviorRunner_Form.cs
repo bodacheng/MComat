@@ -31,9 +31,9 @@ namespace Soul
                     //BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME,"TimeToStopRunning");
                     break;
                 case BehaviorType.AC:
-                    KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.REAL_NAME);
-                    RegisterConditionToRespond(keyValuePair1);
-                    ConditionAndRespondPriority.Set(keyValuePair1.Key, keyValuePair1.Value, 1);
+                    //KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.REAL_NAME);
+                    //RegisterConditionToRespond(keyValuePair1);
+                    //ConditionAndRespondPriority.Set(keyValuePair1.Key, keyValuePair1.Value, 1);
 
                     //KeyValuePair<string, string> keyValuePair2 = new KeyValuePair<string, string>("DangerousNearby", behavior_define.REAL_NAME);
                     //RegisterConditionToRespond(keyValuePair2);
@@ -45,7 +45,7 @@ namespace Soul
 
                     KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair4);
-                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 2);
+                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 3);
                     
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;

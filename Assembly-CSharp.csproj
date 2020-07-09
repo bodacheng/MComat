@@ -519,6 +519,7 @@
     <Compile Include="Assets\ResourceLoading\HurtObjectLoad\HurtObjectManager_Cach.cs" />
     <Compile Include="Assets\ResourceLoading\HurtObjectLoad\HurtObjectManager_Local.cs" />
     <Compile Include="Assets\ResourceLoading\ResourceLoadingSetting.cs" />
+    <Compile Include="Assets\Resources\FaciaManager.cs" />
     <Compile Include="Assets\Resources\effectsresource\Effect3FromJapanNet\eff_magiccircle_sample\UvScroll.cs" />
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicLightFade.cs" />
