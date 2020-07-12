@@ -5,13 +5,12 @@ namespace FightScene
 {
     public partial class FightTeam_RotationMode : FightTeam
     {
-        protected override void TeamsFightInitialize(float extraHP)
+        protected override void TeamsFightInitialize(float TeamHpRate, LocalFight.CriticalGaugeMode teamCGMode)
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
                 a_char.FightDataRef.Ini();
-                a_char.Step3Initialize(teamConfig, NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()));
-                a_char.FightDataRef.CurrentHp.Value += extraHP;
+                a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>
                 {

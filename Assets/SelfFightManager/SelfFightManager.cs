@@ -15,7 +15,6 @@ namespace mainMenu
         
         [Space(7)]
         [Header("基本UI元素")]
-        public InputField HPinput;
         public Button FightStartBUtton;
         
         [Space(7)]
@@ -52,7 +51,6 @@ namespace mainMenu
 
         void Start()
         {
-            HPinput.text = "0";
             stage = new StageScriptableObject
             {
                 BattleGroundID = 1
@@ -117,7 +115,7 @@ namespace mainMenu
             stage.Team2Mode = TeamMode.multiraid;
         }
         
-        IEnumerator ArrangeTeamBySelection(float HP)
+        IEnumerator ArrangeTeamBySelection()
         {
             switch (stage.Team1Mode)
             {
@@ -138,15 +136,13 @@ namespace mainMenu
                     _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator4.Current;
                 break;
             }
-            stage.team1_ExtraHP = HP;
-            stage.team2_ExtraHP = HP;
             stage.localFight = _selfFight;
         }
 
-        public IEnumerator FightStart(float HP)
+        public IEnumerator FightStart()
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-            yield return ArrangeTeamBySelection(HP);
+            yield return ArrangeTeamBySelection();
             FightPreparePage.target.PreLoad(stage, TeamSetGameMode.SelfFight);
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, true);
         }
@@ -354,7 +350,7 @@ namespace mainMenu
                 
                 void SelectedRender()
                 {
-                    HeroIcon.Seletedfeature(charIcon,selectedFrame,110f);
+                    HeroIcon.Seletedfeature(charIcon,selectedFrame, 110f);
                 }
                 
                 string pos = i.ToString().Clone().ToString();
@@ -378,7 +374,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                PreScene.target.mainProcessRunner.Run(FightStart(float.Parse(HPinput.text)));
+                PreScene.target.mainProcessRunner.Run(FightStart());
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;

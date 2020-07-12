@@ -5,12 +5,15 @@ using UnityEditor;
 using System.Linq;
 using UniRx;
 using Skill;
+using mainMenu;
 
 // 后排敌人——〉角色ID，
 // localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
 [CustomEditor(typeof(StagesManager))]
 public class StagesManagerGUI : Editor {
 
+    StagesManager _stagesManager;
+    
     GUIStyle ButtonStyle;
     GUIStyle AddDeleteMember;
     GUIStyle ButtonStyle_selected;
@@ -20,8 +23,7 @@ public class StagesManagerGUI : Editor {
     GUIStyle Big_title;
     GUIStyle Title;
     GUIStyle AttackRangeToggleGUI;
-
-    StagesManager _stagesManager;
+    
     string pathAndNameForLocalSave = "oneFight.json";    
     string focusingMemberRecordID;
     IDictionary<string, string> CharIDsAndNames;
@@ -38,7 +40,6 @@ public class StagesManagerGUI : Editor {
     
     readonly int[] skillrarelevels = {-1, 0, 1, 2, 3 };
     readonly string[] skillrarelevelShow = { "ALL", "0", "★", "★★", "★★★" };
-    
     readonly int[] exLevels = {-1, 0, 1, 2, 3 };
     readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
     
@@ -47,74 +48,10 @@ public class StagesManagerGUI : Editor {
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
     IDictionary<string, string> _SkillIDsAndNames;
     bool Initialized;
+    TheNineSlot.SkillEditError se;
     
-    bool Repeated(SkillConfig _target,string recordID)
-    {
-        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList())
-        {
-            if (keyValuePair.Value == recordID && keyValuePair.Key != _target)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    IDictionary<SkillConfig,string> GetFocusingCharSkillList()
-    {
-        IDictionary<SkillConfig,string> list = new Dictionary<SkillConfig,string>();
-        
-        SkillConfig A1 = focusingCharInfo._NineAndTwo.GetA1Config();
-        SkillConfig A2 = focusingCharInfo._NineAndTwo.GetA2Config();
-        SkillConfig A3 = focusingCharInfo._NineAndTwo.GetA3Config();
-        SkillConfig B1 = focusingCharInfo._NineAndTwo.GetB1Config();
-        SkillConfig B2 = focusingCharInfo._NineAndTwo.GetB2Config();
-        SkillConfig B3 = focusingCharInfo._NineAndTwo.GetB3Config();
-        SkillConfig C1 = focusingCharInfo._NineAndTwo.GetC1Config();
-        SkillConfig C2 = focusingCharInfo._NineAndTwo.GetC2Config();
-        SkillConfig C3 = focusingCharInfo._NineAndTwo.GetC3Config();
-        
-        if (A1 != null && A1.RECORD_ID != null)
-        {
-            list.Add(A1,A1.RECORD_ID);
-        }
-        if (A2 != null && A2.RECORD_ID != null)
-        {
-            list.Add(A2,A2.RECORD_ID);
-        }
-        if (A3 != null && A3.RECORD_ID != null)
-        {
-            list.Add(A3,A3.RECORD_ID);
-        }
-        if (B1 != null && B1.RECORD_ID != null)
-        {
-            if (!list.ContainsKey(B1))
-            list.Add(B1,B1.RECORD_ID);
-        }
-        if (B2 != null && B2.RECORD_ID != null)
-        {
-            list.Add(B2,B2.RECORD_ID);
-        }
-        if (B3 != null && B3.RECORD_ID != null)
-        {
-            list.Add(B3,B3.RECORD_ID);
-        }
-        if (C1 != null && C1.RECORD_ID != null)
-        {
-            list.Add(C1,C1.RECORD_ID);
-        }
-        if (C2 != null && C2.RECORD_ID != null)
-        {
-            list.Add(C2,C2.RECORD_ID);
-        }
-        if (C3 != null && C3.RECORD_ID != null)
-        {
-            list.Add(C3,C3.RECORD_ID);
-        }
-        return list;
-    }
-
-    int level = 1;// 参考等级。角色自身不存在等级，但为了设置方便所有技能等级可以一致
+    // 参考等级。角色自身不存在等级，但为了设置方便所有技能等级可以一致
+    int level = 1;
     public override void OnInspectorGUI()
     {
         if (!Initialized)
@@ -125,7 +62,7 @@ public class StagesManagerGUI : Editor {
             ButtonStyle.alignment = TextAnchor.MiddleCenter;
             
             AddDeleteMember = new GUIStyle(GUI.skin.button);
-            AddDeleteMember.normal.textColor = new Color(1,0.3f,0f);
+            AddDeleteMember.normal.textColor = new Color(1, 0.3f, 0f);
             AddDeleteMember.fixedWidth = 50f;
             AddDeleteMember.alignment = TextAnchor.MiddleCenter;
             
@@ -168,12 +105,12 @@ public class StagesManagerGUI : Editor {
             SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
             MonstersConfigTable.LoadMonstersConfigByResource();
             MonstersConfigTable.RefreshCharacterResourceInfoDic();
-            
+            INHERENT_SkillTable.LoadINHERENTSkillsByLocalConfigFile();
             Initialized = true;
         }
-                
+                        
         _stagesManager = (StagesManager)target;
-        
+
         GUILayout.Space(10);
         GUILayout.BeginHorizontal();
         _stagesManager.FightScript = EditorGUILayout.ObjectField("战斗脚本读取", _stagesManager.FightScript, typeof(TextAsset), true) as TextAsset;
@@ -210,7 +147,11 @@ public class StagesManagerGUI : Editor {
         }
         GUILayout.EndHorizontal();
         GUILayout.Space(10);
-
+        _stagesManager.EditoringFight.Team1HpRate = EditorGUILayout.FloatField("队伍1血量比率", _stagesManager.EditoringFight.Team1HpRate);
+        _stagesManager.EditoringFight.Team2HpRate = EditorGUILayout.FloatField("队伍2血量比率", _stagesManager.EditoringFight.Team2HpRate);
+        _stagesManager.EditoringFight.team1CGMode = (LocalFight.CriticalGaugeMode)EditorGUILayout.EnumPopup("队伍1回气模式", _stagesManager.EditoringFight.team1CGMode);
+        _stagesManager.EditoringFight.team2CGMode = (LocalFight.CriticalGaugeMode)EditorGUILayout.EnumPopup("队伍2回气模式", _stagesManager.EditoringFight.team2CGMode);
+        
         EditorGUILayout.LabelField(" 关卡敌人信息  ", Title);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("back", (focusingMemberRecordID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
@@ -250,7 +191,7 @@ public class StagesManagerGUI : Editor {
                 {
                     monsterOfPlayerId = focusingMemberRecordID
                 };
-                _stagesManager.EditoringFight.EnemySets.Set(0,int.Parse(focusingMemberRecordID),focusingCharInfo);
+                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberRecordID),focusingCharInfo);
             }
         }
         if (focusingCharInfo != null)
@@ -261,6 +202,7 @@ public class StagesManagerGUI : Editor {
             }
         }
         GUILayout.EndHorizontal();
+        
         GUILayout.Space(10);
         // 指定站位人员的添加与删除end //
         
@@ -318,33 +260,29 @@ public class StagesManagerGUI : Editor {
         {
             targetSC = focusingCharInfo._NineAndTwo.GetA1Config();
         }
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetA2Config());
         if (GUILayout.Button("A2", targetSC != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetA2Config();
         }
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetA3Config());
         if (GUILayout.Button("A3", targetSC != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetA3Config();
         }
         GUILayout.EndHorizontal();
-
+        
         GUILayout.BeginHorizontal();
         SlotColorCal(focusingCharInfo._NineAndTwo.GetB1Config());
         if (GUILayout.Button("B1", targetSC != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB1Config();
         }
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetB2Config());
         if (GUILayout.Button("B2", targetSC != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetB2Config();
         }
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetB3Config());
         if (GUILayout.Button("B3", targetSC != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
@@ -353,19 +291,16 @@ public class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetC1Config());
         if (GUILayout.Button("C1", targetSC != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetC1Config();
         }
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetC2Config());
         if (GUILayout.Button("C2", targetSC != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
             targetSC = focusingCharInfo._NineAndTwo.GetC2Config();
         }
-        
         SlotColorCal(focusingCharInfo._NineAndTwo.GetC3Config());
         if (GUILayout.Button("C3", targetSC != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
@@ -373,16 +308,40 @@ public class StagesManagerGUI : Editor {
         }
         GUILayout.EndHorizontal();
         
-        GUI.backgroundColor = Color.white;
-        focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
-        focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
-        focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
-        GUILayout.Space(10f);
+        // 技能组评价
+        GUILayout.BeginHorizontal();
+        se = TheNineSlot.CheckEdit(
+            focusingCharInfo._NineAndTwo.GetA1Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetA2Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetA3Config()?.RECORD_ID,
+            focusingCharInfo._NineAndTwo.GetB1Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetB2Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetB3Config()?.RECORD_ID,
+            focusingCharInfo._NineAndTwo.GetC1Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetC2Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetC3Config()?.RECORD_ID
+        );
+        switch (se)
+        {
+            case TheNineSlot.SkillEditError.Perfect:
+                Title.normal.textColor = Color.green;
+                EditorGUILayout.LabelField("合法", Title);
+            break;
+            case TheNineSlot.SkillEditError.NoNormalStart:
+                Title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("首发技能无普攻", Title);
+            break;
+            case TheNineSlot.SkillEditError.RepeatedSkill:
+                Title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("技能重复", Title);
+            break;
+            case TheNineSlot.SkillEditError.UnBalanced:
+                Title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("必杀普攻不平衡", Title);
+            break;
+        }
+        Title.normal.textColor = Color.black;
+        GUILayout.EndHorizontal();
         
         if (targetSC == null)
         {
             goto A;
         }
+        
         selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", selectSkillExLevel, exLevelShows, exLevels);
         bool[] SPselected;
         switch(selectSkillExLevel)
@@ -409,7 +368,7 @@ public class StagesManagerGUI : Editor {
         {
             EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
             filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
-            if (!filterallranges) 
+            if (!filterallranges)
             {
                 skillrangeselectfilter[0] = true;
                 skillrangeselectfilter[1] = true;
@@ -440,8 +399,12 @@ public class StagesManagerGUI : Editor {
             }
             index2++;
         }
+        
+        // 原生技能
+        IDictionary<string, string> inheretedskills = INHERENT_SkillTable.GetINHERENTSKIDList(focusingCharConfig.RECORD_ID);
+        
         selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
-        targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;                        
+        targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;
         SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(targetSC.RECORD_ID);
         if (defaultSkillConfig == null)
         {
@@ -467,6 +430,17 @@ public class StagesManagerGUI : Editor {
         
         A:
         GUI.backgroundColor = Color.white;
+        
+        // 三被动
+        if (focusingCharInfo != null)
+        {
+            GUILayout.Space(30f);
+            focusingCharInfo._NineAndTwo.moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", focusingCharInfo._NineAndTwo.moveType);
+            focusingCharInfo._NineAndTwo.canDefend = EditorGUILayout.Toggle("有防御技能", focusingCharInfo._NineAndTwo.canDefend);
+            focusingCharInfo._NineAndTwo.rushType = (RushType)EditorGUILayout.EnumPopup("Rush Type", focusingCharInfo._NineAndTwo.rushType);
+            GUILayout.Space(30f);
+        }
+        
         GUILayout.BeginHorizontal();
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         if (GUILayout.Button("保存战斗关卡至本地文档json",ButtonStyle_save))
@@ -478,6 +452,73 @@ public class StagesManagerGUI : Editor {
         //    _stagesManager.SaveFightAsXml(pathAndNameForLocalSave,_stagesManager.EditoringFight);
         //}
         GUILayout.EndHorizontal();
+    }
+    
+    bool Repeated(SkillConfig _target,string recordID)
+    {
+        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList())
+        {
+            if (keyValuePair.Value == recordID && keyValuePair.Key != _target)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    // 服务于Repeated函数，获取当前编辑中角色的技能列表
+    IDictionary<SkillConfig,string> GetFocusingCharSkillList()
+    {
+        IDictionary<SkillConfig,string> list = new Dictionary<SkillConfig,string>();
+        
+        SkillConfig A1 = focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig A2 = focusingCharInfo._NineAndTwo.GetA2Config();
+        SkillConfig A3 = focusingCharInfo._NineAndTwo.GetA3Config();
+        SkillConfig B1 = focusingCharInfo._NineAndTwo.GetB1Config();
+        SkillConfig B2 = focusingCharInfo._NineAndTwo.GetB2Config();
+        SkillConfig B3 = focusingCharInfo._NineAndTwo.GetB3Config();
+        SkillConfig C1 = focusingCharInfo._NineAndTwo.GetC1Config();
+        SkillConfig C2 = focusingCharInfo._NineAndTwo.GetC2Config();
+        SkillConfig C3 = focusingCharInfo._NineAndTwo.GetC3Config();
+        
+        if (A1 != null && A1.RECORD_ID != null)
+        {
+            list.Add(A1,A1.RECORD_ID);
+        }
+        if (A2 != null && A2.RECORD_ID != null)
+        {
+            list.Add(A2,A2.RECORD_ID);
+        }
+        if (A3 != null && A3.RECORD_ID != null)
+        {
+            list.Add(A3,A3.RECORD_ID);
+        }
+        if (B1 != null && B1.RECORD_ID != null)
+        {
+            if (!list.ContainsKey(B1))
+            list.Add(B1,B1.RECORD_ID);
+        }
+        if (B2 != null && B2.RECORD_ID != null)
+        {
+            list.Add(B2,B2.RECORD_ID);
+        }
+        if (B3 != null && B3.RECORD_ID != null)
+        {
+            list.Add(B3,B3.RECORD_ID);
+        }
+        if (C1 != null && C1.RECORD_ID != null)
+        {
+            list.Add(C1,C1.RECORD_ID);
+        }
+        if (C2 != null && C2.RECORD_ID != null)
+        {
+            list.Add(C2,C2.RECORD_ID);
+        }
+        if (C3 != null && C3.RECORD_ID != null)
+        {
+            list.Add(C3,C3.RECORD_ID);
+        }
+        return list;
     }
     
     bool SlotHasSkill(string RECORD_ID)

@@ -16,6 +16,8 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     public void CostCriticalGaugeBySPlevel(int level)
     {
+        if (criticalGaugeMode == LocalFight.CriticalGaugeMode.Unlimited)
+            return;
         switch (level)
         {
             case 0:

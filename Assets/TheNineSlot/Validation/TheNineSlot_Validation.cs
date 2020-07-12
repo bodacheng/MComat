@@ -52,6 +52,70 @@ namespace mainMenu
             }
         }
         
+        // 靠9个技能ID判断技能组是否合法，技能编辑原始函数
+        public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
+        {
+            // 第一列技能必须有普通技能
+            if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
+            {
+                return SkillEditError.NoNormalStart;
+            }
+            
+            // 检查技能重复
+            List<string> checkSame = new List<string>();
+            bool CheckRepeat(string skillID)
+            {
+                if (checkSame.Contains(skillID))
+                {
+                    return true;
+                }
+                if (SkillConfigTable.GetSkillConfigByID(skillID) != null)
+                {
+                    checkSame.Add(skillID);
+                }
+                return false;
+            }
+            
+            if (CheckRepeat(A1))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(A2))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(A3))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(B1))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(B2))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(B3))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(C1))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(C2))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            if (CheckRepeat(C3))
+            {
+                return SkillEditError.RepeatedSkill;
+            }
+            int wholePoint = MySkillStonesReader.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+            return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
+        }
+        
         SkillEditError CheckEditBasedOnCurrent(List<string> nineskillids)
         {
             List<string> checkSame = new List<string>();
@@ -72,7 +136,7 @@ namespace mainMenu
         }
         
         // 检查起始技能有没有普通技能
-        SkillEditError CheckStartSKills(string a1skill, string a2skill, string a3skill)
+        static SkillEditError CheckStartSKills(string a1skill, string a2skill, string a3skill)
         {
             // 第一列技能必须有普通技能
             List<string> NormalSkillsOfAList = new List<string>();            

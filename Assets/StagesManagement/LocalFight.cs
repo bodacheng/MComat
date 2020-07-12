@@ -7,12 +7,25 @@ using System.IO;
 [Serializable]
 public class LocalFight
 {
+    public float Team1HpRate = 1f;
+    public float Team2HpRate = 1f;
+    
+    public CriticalGaugeMode team1CGMode = CriticalGaugeMode.normal;
+    public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
+    
     [NonSerialized]
     public MultiDictionary<int, int, CharDataInfo> HeroSets = new MultiDictionary<int, int, CharDataInfo>();
     public MultiDictionary<int, int, CharDataInfo> EnemySets = new MultiDictionary<int, int, CharDataInfo>();
-
+    
     public LocalFight()
     {
+    }
+    
+    public enum CriticalGaugeMode
+    {
+        normal,
+        doubleGain,
+        Unlimited
     }
     
     public static LocalFight LoadOneLocalFightByScript(TextAsset Script)

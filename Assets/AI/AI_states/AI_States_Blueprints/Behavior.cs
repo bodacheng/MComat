@@ -36,26 +36,37 @@ namespace Soul
         public int splevel;
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
         protected bool AbsorbEnergyFinished;
-        
-        public void EnergyAbsorb()
+
+        float temp;
+        public void EnergyAbsorb(LocalFight.CriticalGaugeMode gaugeMode)
         {
             if (!AbsorbEnergyFinished)
             {
                 switch(splevel)
                 {
                     case 0:
-                    _FightAttriCalRef.PlusEx(15);
+                        temp = 15;
                     break;
                     case 1:
-                    _FightAttriCalRef.PlusEx(10);
+                        temp = 10;
                     break;
                     case 2:
-                    _FightAttriCalRef.PlusEx(10);
+                        temp = 10;
                     break;
                     case 3:
-                    _FightAttriCalRef.PlusEx(10);
+                        temp = 10;
                     break;
                 }
+                
+                switch(gaugeMode)
+                {
+                    case LocalFight.CriticalGaugeMode.doubleGain:
+                        temp *= 2;
+                        break;
+                    default:
+                        break;
+                }
+                _FightAttriCalRef.PlusEx(temp);
                 AbsorbEnergyFinished = true;
             }
         }

@@ -16,7 +16,7 @@ namespace mainMenu
         [Space(7)]
         [Header("ScrollRect")]
         public ScrollRect _ScrollRect;
-           
+        
         [Space(7)]
         [Header("ViewScrollBar")]
         public Scrollbar _Scrollbar;
@@ -78,6 +78,7 @@ namespace mainMenu
             yield break;
         }
         
+        // Button feature
         public void JumpToNewest()
         {
             JumpTo(AccountSet._AccInfo.ArcadeProcess);
@@ -92,7 +93,7 @@ namespace mainMenu
             }else{
                 VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
                 // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
-
+        
                 targetScrollbarValue = 
                 ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (stageNum - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
                 / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母

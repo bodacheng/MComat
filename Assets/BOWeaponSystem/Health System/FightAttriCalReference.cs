@@ -12,6 +12,9 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     [Tooltip("当前攻击力")]
     public float AT = 10;
+
+    [Tooltip("当前吸气模式")]
+    public LocalFight.CriticalGaugeMode criticalGaugeMode;
     
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     
@@ -228,7 +231,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 //打了别人，属于正面效益
             }
         );
-        _Center._MyBehaviorRunner.GetNowState().EnergyAbsorb();
+        _Center._MyBehaviorRunner.GetNowState().EnergyAbsorb(criticalGaugeMode);
     }//打别人计数
     
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数

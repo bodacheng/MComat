@@ -90,7 +90,7 @@ namespace dataAccess
                     monsterOfPlayerId = i.ToString()
                 };
                 
-                List<string> INHERENTSKs = INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID);
+                List<string> INHERENTSKs = (System.Collections.Generic.List<string>)INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID).Keys;
                 for (int index = 0; index < INHERENTSKs.Count; index++)
                 {
                     Debug.Log("角色"+ _CharConfig.RECORD_ID + "的原生技能："+ INHERENTSKs[index]);

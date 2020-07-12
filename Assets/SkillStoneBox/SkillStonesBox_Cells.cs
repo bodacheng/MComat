@@ -98,7 +98,8 @@ namespace mainMenu
             }
             return null;
         }
-
+        
+        // Show Character icon using this SkillStone
         public IEnumerator ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
         {
             if (Item == null || Item.SkillStoneOfPlayerId == null)
@@ -109,7 +110,6 @@ namespace mainMenu
             SkillStoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStonesReader.Get(Item.SkillStoneOfPlayerId);
             if (SSOfPlayerInfo.inUsingMonsterOfPlayerId == null)
             {
-                Debug.Log("逻辑错误。SkillStoneOfPlayerId："+ Item.SkillStoneOfPlayerId);
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
@@ -124,7 +124,6 @@ namespace mainMenu
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
             targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
             charConfig == null ? Zokusei.Null : charConfig._zokusei);
-            yield break;
         }
         
         public static List<string> CheckIfExceedCellLimit()

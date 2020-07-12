@@ -35,6 +35,7 @@ namespace dataAccess
             }
         }
         
+        // 用于过滤显示在技能石盒内的技能石
         public static List<string> TargetStonesFromAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
         {
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id

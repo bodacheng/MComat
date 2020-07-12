@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Skill;
 
 public class INHERENT_SkillTable
 {
@@ -20,18 +21,24 @@ public class INHERENT_SkillTable
         return isLoaded;
     }
     
-    public static List<string> GetINHERENTSKIDList(string monsterID)
+    public static IDictionary<string, string> GetINHERENTSKIDList(string monsterID)
     {
+        IDictionary<string, string> targets = new Dictionary<string, string>();
         List<Row> rows = FindAll_MONSTER_ID(monsterID);
-        List<string> skillIds = new List<string>();
         for (int i = 0; i < rows.Count; i++)
         {
-            if (!skillIds.Contains(rows[i].SKILL_ID))
+            if (!targets.ContainsKey(rows[i].SKILL_ID))
             {
-                skillIds.Add(rows[i].SKILL_ID);
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(rows[i].SKILL_ID);
+                if (_SkillConfig == null)
+                {
+                    Debug.Log("严重问题：被动技能表里定义的技能在总技能表里没有对应ID");
+                    continue;
+                }
+                targets.Add(rows[i].SKILL_ID, _SkillConfig.REAL_NAME);
             }
         }
-        return skillIds;
+        return targets;
     }
     
     public List<Row> GetRowList()
@@ -90,12 +97,10 @@ public class INHERENT_SkillTable
 
 	public Row GetAt(int i)
 	{
-		if(rowList.Count <= i)
-			return null;
-		return rowList[i];
-	}
+        return rowList.Count <= i ? null : rowList[i];
+    }
 
-	public Row Find_RECORD_ID(string find)
+    public Row Find_RECORD_ID(string find)
 	{
 		return rowList.Find(x => x.RECORD_ID == find);
 	}

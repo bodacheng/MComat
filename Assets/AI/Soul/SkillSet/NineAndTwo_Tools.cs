@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Skill;
-using UnityEngine;
 
 public partial class NineAndTwo
 {
@@ -14,7 +13,7 @@ public partial class NineAndTwo
         }
         return IDs;
     }
-
+    
     public List<int> SkillLevelList()
     {
         List<SkillEntity> sklist = SkillEntityList();
