@@ -72,16 +72,16 @@ public class StageScriptableObject : ScriptableObject
         return stage;
     }
     
-    public static StageScriptableObject RandomSkillTestStage()
+    public static StageScriptableObject RandomSkillTestStage(TeamMode teamMode)
     {
         StageScriptableObject stage = CreateInstance<StageScriptableObject>();
         stage.localFight = StagesManager.RandomSkillTest();
         stage.BattleGroundID = 0;
-        stage.Team1Mode = TeamMode.rotation;
-        stage.Team2Mode = TeamMode.rotation;
+        stage.Team1Mode = teamMode;
+        stage.Team2Mode = teamMode;
         stage._fightEventType = FightEventType.SkillTest;
         return stage;
-    }
+    }    
 }
 
 // 这个东西是用来规定我每一场战斗结束之后所自动加载的事件

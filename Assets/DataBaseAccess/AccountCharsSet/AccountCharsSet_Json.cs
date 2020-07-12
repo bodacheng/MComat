@@ -5,6 +5,7 @@ using System;
 using Newtonsoft.Json;
 using System.Collections;
 using Api.Dto.Model;
+using System.Linq;
 
 namespace dataAccess
 {
@@ -90,20 +91,23 @@ namespace dataAccess
                     monsterOfPlayerId = i.ToString()
                 };
                 
-                List<string> INHERENTSKs = (System.Collections.Generic.List<string>)INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID).Keys;
-                for (int index = 0; index < INHERENTSKs.Count; index++)
+                IDictionary<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID);
+                if (INHERENTSkills != null && INHERENTSkills.Count > 0)
                 {
-                    Debug.Log("角色"+ _CharConfig.RECORD_ID + "的原生技能："+ INHERENTSKs[index]);
-                    SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+                    List<string> dasfs = INHERENTSkills.Keys.ToList();
+                    for (int index = 0; index < dasfs.Count; index++)
                     {
-                        skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
-                        skillId = INHERENTSKs[index],
-                        EXP = 0,
-                        Inherent = "true",
-                        inUsingMonsterOfPlayerId = i.ToString(),
-                        inUsingSkillSlot = (index + 1).ToString()
-                    };
-                    yield return MySkillStonesReader.Add(stoneInfo);
+                        SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+                        {
+                            skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
+                            skillId = dasfs[index],
+                            EXP = 0,
+                            Inherent = "true",
+                            inUsingMonsterOfPlayerId = i.ToString(),
+                            inUsingSkillSlot = (index + 1).ToString()
+                        };
+                        yield return MySkillStonesReader.Add(stoneInfo);
+                    }
                 }
                 
                 Debug.Log("将角色" + _CharConfig.REAL_NAME + "加入存档");

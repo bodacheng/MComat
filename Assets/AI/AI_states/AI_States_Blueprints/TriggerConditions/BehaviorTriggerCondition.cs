@@ -62,10 +62,9 @@ namespace Soul
         {
             if (Sensor.EnemyAndTeammateBetweenMeAndEnemy() != null)
             {
-                Debug.Log("检查下"+Sensor.EnemyAndTeammateBetweenMeAndEnemy());
                 return false;
             }
-            
+                        
             // 从移动状态到攻击的话技能释放范围要求精准，但连招情况明明敌人在眼前但因为按技能最好范围而言“不够远”而不释放的话，会很奇怪
             //if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
                 tar = Sensor.GetTargetRangeEnemyCollider(triggerAtttackRangeMin, triggerAtttackRangeMax);

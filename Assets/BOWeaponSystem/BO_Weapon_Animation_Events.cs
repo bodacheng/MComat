@@ -102,7 +102,6 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             Decompositioner target_hitbox = null;
             if (t != null && !BEs.bodyPartsHitBoxRegisterDic.ContainsKey(t))
             {
-                Debug.Log(">>????"+ t);
                 BEs.bodyPartsHitBoxRegisterDic.Add(t, null);
             }
             if (BEs.bodyPartsHitBoxRegisterDic[t] == null)
@@ -113,7 +112,6 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
             else
             {
-                Debug.Log("重复使用现有："+t);
                 target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
             }
             ConstraintSource myConstraintSource = new ConstraintSource

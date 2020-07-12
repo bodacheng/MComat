@@ -228,9 +228,15 @@ namespace mainMenu
             SceneManager.LoadScene(2);
         }
         
-        public void BeginSkillTest()
+        public void BeginSkillTest_Rotatiom()
         {
-            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage();
+            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+            LoadFight(stage);
+        }
+        
+        public void BeginSkillTest_Multi()
+        {
+            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.multiraid);
             LoadFight(stage);
         }
 
