@@ -167,12 +167,6 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.criticalGaugeMode = criticalGaugeMode;
     }
 
-    //为什么需要一个这样的函数呢，最主要原因是DATA系感知函数和Sensor系列感知函数都是靠一些层和标签来为AI模块提供判断依据，如果角色战败，他们还挂着原来的信息则会对仍战斗中的AI判断进行干扰
-    public void DeathInitialize()
-    {
-        FightDataRef.ChangeLayerForAllSelfColliders(0);
-    }
-
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。
     //关于角色初始化，我们需要把所有进行初始化的内容都拿出来进行一个归类工作。其实当下我们的系统里最不稳的一个事情在于
     //很多靠字符串表达的地址。。这种东西我们在读取角色和读取脚本的地方已经修改了，但在读取动画文件和读取脚本的地方仍然存在。

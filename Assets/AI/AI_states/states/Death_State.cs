@@ -39,7 +39,7 @@ public class Death_State : Behavior
         pEvents.CloseAllPersonalityEffects();
         _BasicPhysicSupport.SetUsingGravity(false);
         _DATA_CENTER.IsDead.Value = true;
-        _DATA_CENTER.DeathInitialize();
+        _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
         _Rigidbody.velocity = Vector3.zero;
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
@@ -61,7 +61,6 @@ public class Death_State : Behavior
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         time_count = 0f;
         _BasicPhysicSupport.SetUsingGravity(true);
-        _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
     }
     
     Vector3 effectP;
@@ -91,7 +90,6 @@ public class Death_State : Behavior
                 effectP = gameObject.transform.position;
                 effectP.y = 0;
                 EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
-                _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 time_count = 0;//开始针对躺地时间记时
             }else{
