@@ -42,7 +42,7 @@ public partial class StagesManager : MonoBehaviour
         return target;
     }
     
-    public static LocalFight RandomSkillTest()
+    public static LocalFight RandomSkillTest(TeamMode teamMode)
     {
         string focusingtype = "human";
         
@@ -56,7 +56,7 @@ public partial class StagesManager : MonoBehaviour
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
         
         LocalFight target = new LocalFight();
-
+        
         CharDataInfo char1 = new CharDataInfo
         {
             ResourceID = "2",//charRecordIds[Indexes[0]],
@@ -89,13 +89,23 @@ public partial class StagesManager : MonoBehaviour
             _NineAndTwo = RangedStyle("human", 1)
         };
         
-        target.EnemySets.Set(0, 0, char1);
-        target.EnemySets.Set(0, 1, char2);
-        target.EnemySets.Set(0, 2, char3);
-        
-        target.HeroSets.Set(0, 0, char4);
-        target.HeroSets.Set(0, 1, char5);
-        target.HeroSets.Set(0, 2, char6);
+        switch(teamMode)
+        {
+            case TeamMode.multiraid:
+                target.EnemySets.Set(0, 0, char1);
+                target.EnemySets.Set(0, 1, char6);
+                target.HeroSets.Set(0, 0, char4);
+                target.HeroSets.Set(0, 1, char5);
+            break;
+            case TeamMode.rotation:
+                target.EnemySets.Set(0, 0, char1);
+                target.EnemySets.Set(0, 1, char2);
+                target.EnemySets.Set(0, 2, char3);
+                target.HeroSets.Set(0, 0, char4);
+                target.HeroSets.Set(0, 1, char5);
+                target.HeroSets.Set(0, 2, char6);
+            break;
+        }
         
         return target;
     }

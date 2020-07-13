@@ -76,6 +76,35 @@ namespace Soul
             
             CalAdviceDistanceFromEnemy();
         }
+               
+        // 获取接下来等待释放的技能，并非是真正可触发技能，但反应了是否够气
+        public List<SkillEntity> GetNextSkills()
+        {
+            List<SkillEntity> List = new List<SkillEntity>();
+            SkillEntity _CurrentSKillEntity = new SkillEntity();
+            if (now_Behavior != null)
+            {
+                SkillEntityDic.TryGetValue(now_Behavior.StateKey, out _CurrentSKillEntity);
+            }
+            if (_CurrentSKillEntity == null)
+                return List;
+            foreach (string _Key in _CurrentSKillEntity.CasualTo)
+            {
+                BehaviourDic.TryGetValue(_Key, out try_Behavior);
+                if (try_Behavior == null)
+                {
+                    Debug.Log("没找到"+_Key);
+                    continue;
+                }
+                if (!try_Behavior.Capacity_enter_condition())
+                {
+                    continue;
+                }
+                SkillEntityDic.TryGetValue(_Key, out tempSKillEntity);
+                List.Add(tempSKillEntity);
+            }
+            return List;
+        }
 
         float min,max;
         void CalAdviceDistanceFromEnemy()

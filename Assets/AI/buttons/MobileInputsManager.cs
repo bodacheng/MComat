@@ -24,7 +24,6 @@ public class MobileInputsManager : MonoBehaviour {
     public Button Defend;
     public Button Dash;
     
-    //2019.3.26 折腾了整整两天的移动端按键粒子特效。留下的唯一一点不足是，没有针对防御状态，rush状态的有无来决定防御键是否显示，也没有针对未来可能出现的耗气式防御或rush状态来刷新两个键的显示状态。
     public Camera fxCamera;
     public Transform effectsParent;
     
@@ -53,6 +52,7 @@ public class MobileInputsManager : MonoBehaviour {
         if (Observing_Runner != null)
         {
             SwitchZokuseiButtons(zokusei);
+            SuddenRereshButtons(Observing_Runner);
         }else{
             TurnOffButtons();
         }
@@ -72,7 +72,7 @@ public class MobileInputsManager : MonoBehaviour {
         if (zokuseiButtonEffects.ContainsKey(zokusei))
         {
             _focusingButtonEffectsGroup = zokuseiButtonEffects[zokusei];
-            _focusingButtonEffectsGroup.Open(ButtonEffectInFxCameraWorldSpace(Defend,5),ButtonEffectInFxCameraWorldSpace(Dash,5));
+            _focusingButtonEffectsGroup.Open(ButtonEffectInFxCameraWorldSpace(Defend,5), ButtonEffectInFxCameraWorldSpace(Dash,5));
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
         }
@@ -92,7 +92,7 @@ public class MobileInputsManager : MonoBehaviour {
     }
 
     static ParticleSystem targetexplode;
-    public static void SkillButtonExplosion(InputKey inputs_Defined,int eX)
+    public static void SkillButtonExplosion(InputKey inputs_Defined, int eX)
     {
         switch(eX)
         {
@@ -126,14 +126,14 @@ public class MobileInputsManager : MonoBehaviour {
         }
         targetexplode.Play();
         
-        //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效
+        //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
         foreach (KeyValuePair<Button, ParticleSystem> keyValue in _focusingButtonEffectsGroup.buttonRefreshEffects)
         {
-            keyValue.Value.transform.position = ButtonEffectInFxCameraWorldSpace(keyValue.Key,4);//也就是说，刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
+            keyValue.Value.transform.position = ButtonEffectInFxCameraWorldSpace(keyValue.Key,4);
             keyValue.Value.Play(true);
         }
     }
-
+    
     // 等把机动和防御分离后，要做这样的事情：
     // 根据玩家的技能列表来决定防御，机动，三攻击键分别存在与否。
     // 然后，refresh button是要看情况的，攻击键要么是变成空按钮，要么应该是就没有按钮。。。？
@@ -154,17 +154,20 @@ public class MobileInputsManager : MonoBehaviour {
             _focusingButtonEffectsGroup.pressingExplosion.Stop();
     }
     
-    public static void CheckIfPlayerIsInputting() // 如果不是对准角色，不会跑。
+    // 如果不是对准角色，不会跑。
+    static float h;
+    static float v;
+    public static void CheckIfPlayerIsInputting()
     {
         inputting = defendButtonHover;
         if (inputting)
         {
             return;
         }
-        float h = 0f;
-        float v = 0f;
-        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
-        || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
+        h = 0f;
+        v = 0f;
+        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || 
+            Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
@@ -176,13 +179,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
         inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
-
-    public static bool defendButtonHover;
-    public bool DefendExitTrigger()
-    {
-        return !defendButtonHover;
-    }
-
+    
     readonly Dictionary<InputKey, SkillEntity> Options_lastframe = new Dictionary<InputKey, SkillEntity>()
     {
         {InputKey.Attack1,null},
@@ -190,10 +187,14 @@ public class MobileInputsManager : MonoBehaviour {
         {InputKey.Attack3,null}
     };
     
+    // 动态按钮系统是基于状态流动
     SkillEntity Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
     public void ButtonsFeatureLoad(List<SkillEntity> Options_preview)
-    {        
-        Behavior_preview_button1 = null; Behavior_preview_button2 = null; Behavior_preview_button3 = null;
+    {
+        Behavior_preview_button1 = null; 
+        Behavior_preview_button2 = null;
+        Behavior_preview_button3 = null;
+        
         for (int i = 0; i < Options_preview.Count; i++)
         {
             switch (Options_preview[i].EnterInput)
@@ -209,6 +210,7 @@ public class MobileInputsManager : MonoBehaviour {
                     break;
             }
         }
+        
         if (Options_lastframe[InputKey.Attack1] != Behavior_preview_button1)
         {
             ChangeButtonPatternNewTest(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SP_LEVEL : -1);
@@ -226,12 +228,27 @@ public class MobileInputsManager : MonoBehaviour {
         Options_lastframe[InputKey.Attack2] = Behavior_preview_button2;
         Options_lastframe[InputKey.Attack3] = Behavior_preview_button3;
     }
+    
+    // 直接根据角色状态刷新按钮。因为动态按钮系统是基于状态流动
+    public void SuddenRereshButtons(BehaviorRunner behaviorRunner)
+    {
+        Options_lastframe[InputKey.Attack1] = null;
+        Options_lastframe[InputKey.Attack2] = null;
+        Options_lastframe[InputKey.Attack3] = null;
+        ButtonsFeatureLoad(behaviorRunner.GetNextSkills());
+    }
 
     void Update()
     {
         CheckIfPlayerIsInputting();
     }
-
+    
+    public static bool defendButtonHover;
+    public bool DefendExitTrigger()
+    {
+        return !defendButtonHover;
+    }
+    
     public static bool attack;
     public void AttackDown()
     {
@@ -267,7 +284,7 @@ public class MobileInputsManager : MonoBehaviour {
         fire2 = false;
         StopPressing();
     }
-
+    
     public void DefendDown()
     {
         defendButtonHover = true;
@@ -278,7 +295,7 @@ public class MobileInputsManager : MonoBehaviour {
         defendButtonHover = false;
         StopPressing();
     }
-
+    
     public static bool acc;
     public void RushDown()
     {
@@ -337,7 +354,7 @@ public class MobileInputsManager : MonoBehaviour {
     static Vector2 buttonAnchorPosition;
     static Vector2 true_buttonAnchorPosition;
     static Vector3 buttonWorldPosition;
-    static Vector3 ButtonEffectInFxCameraWorldSpace(Button button,float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
+    static Vector3 ButtonEffectInFxCameraWorldSpace(Button button, float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
     {
         //buttonAnchorPosition = button.GetComponent<RectTransform>().anchoredPosition;
         //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x,buttonAnchorPosition.y);
@@ -353,7 +370,7 @@ public class MobileInputsManager : MonoBehaviour {
     }
     
     Vector3 targetButtonPos;
-    void ChangeButtonPatternNewTest(Button button,int sp_level)//按钮切换也可以在这里做文章
+    void ChangeButtonPatternNewTest(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
         targetButtonPos = ButtonEffectInFxCameraWorldSpace(button,5);
         _focusingButtonEffectsGroup.Refreshforbutton(button,sp_level,targetButtonPos);
