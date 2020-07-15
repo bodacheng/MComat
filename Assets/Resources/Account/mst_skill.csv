@@ -99,7 +99,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 98,rotatepunches,human,1,10,GR,1,0.2,5,,1
 99,samk,human,1,10,GR,0,0.2,5,,1
 100,smashground,human,1,10,GI,1,2,4,,1
-101,smashground_foward,human,1,10,GR,1,4,7,,1
+101,smashground_foward,human,1,10,GR,1,5,8,,1
 102,slashwave,human,1,10,GR,0,3,5,,1
 103,stab,human,1,10,GR,0,0.2,5,,1
 104,landkick,human,1,10,GR,0,5,7,,1
