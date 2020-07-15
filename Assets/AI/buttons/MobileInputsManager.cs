@@ -159,7 +159,7 @@ public class MobileInputsManager : MonoBehaviour {
     static float v;
     public static void CheckIfPlayerIsInputting()
     {
-        inputting = defendButtonHover;
+        inputting = defendButtonHover || attack || fire1 || fire2;
         if (inputting)
         {
             return;

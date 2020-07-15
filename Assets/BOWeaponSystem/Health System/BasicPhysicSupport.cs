@@ -15,8 +15,6 @@ public class BasicPhysicSupport : MonoBehaviour
         readonly BasicPhysicSupport _BasicPhysicSupport;
         
         public bool onBattleGroundBundary;
-        public Vector3 antiWallDirection;//往墙内走的方向，防止角色AI冲着墙走。我们的游戏里角色的走位基本是基于队友和敌人，通过地形判断走位只有这一条
-
         public HiddenMethods(BasicPhysicSupport _BasicPhysicSupport)
         {
             this._BasicPhysicSupport = _BasicPhysicSupport;

@@ -51,7 +51,7 @@ public class Knock_Off_State : Behavior
     {
         base.AI_State_exit();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        //_FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
+         _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalRef.SetGettingDamageState(false);
     }

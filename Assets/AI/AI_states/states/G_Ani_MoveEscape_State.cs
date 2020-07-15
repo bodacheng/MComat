@@ -2,6 +2,7 @@
 using Soul;
 
 public class G_Ani_MoveEscape_State : Behavior {
+
     readonly string clip_name;
     Transform mainCam;
     Quaternion screenMovementSpace;
@@ -16,11 +17,11 @@ public class G_Ani_MoveEscape_State : Behavior {
         clip_name = _clip_name;
         breakfreestart = () =>
         {
-            _ResistanceManager.Resistance.Value += 10;
+            _ResistanceManager.Resistance.Value += 2;
         };
         breakfreeend = () =>
         {
-            _ResistanceManager.Resistance.Value -= 10;
+            _ResistanceManager.Resistance.Value -= 2;
         };
         breakfreeCoroutine = new CustomCoroutine(breakfreestart, 0.6f, breakfreeend);
     }
@@ -49,6 +50,8 @@ public class G_Ani_MoveEscape_State : Behavior {
     
     Vector3 damagingWeaponComingDirection;
     Vector3 facedirection;
+    Collider threat;
+    Collider ECollider;
     public override void AI_State_enter()
 	{
         base.AI_State_enter();
@@ -57,35 +60,43 @@ public class G_Ani_MoveEscape_State : Behavior {
         _SkillCancelFlag.turn_off_flag();
         pEvents.CloseAllPersonalityEffects();
         _Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
+        Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
         facedirection = gameObject.transform.forward;
-        Collider threat = Sensor.GetSuddenThreatInRange(0,5);
-        if (threat != null)
+        threat = Sensor.GetSuddenThreatInRange(0, 5);
+        
+        if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
         {
-            damagingWeaponComingDirection = gameObject.transform.position - threat.transform.position;
-            switch (Random.Range(0, 2))
-            {
-                case 0:
-                    facedirection = Quaternion.Euler(0, -90, 0) * damagingWeaponComingDirection;
-                    break;
-                case 1:
-                    facedirection = Quaternion.Euler(0, 90, 0) * damagingWeaponComingDirection;
-                    break;
-            }
+            facedirection = Vector3.zero - gameObject.transform.position;
+            facedirection.y = 0;
         }else{
-            Collider collider = Sensor.GetClosestEnemyColliderInSensorRange();
-            if (collider != null)
-                facedirection = - gameObject.transform.position + collider.transform.position;
-            switch (Random.Range(0, 2))
+            if (threat != null)
             {
-                case 0:
-                    facedirection = Quaternion.Euler(0, -90, 0) * facedirection;
-                    break;
-                case 1:
-                    facedirection = Quaternion.Euler(0, 90, 0) * facedirection;
-                    break;
+                damagingWeaponComingDirection = gameObject.transform.position - threat.transform.position;
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        facedirection = Quaternion.Euler(0, -135, 0) * damagingWeaponComingDirection;
+                        break;
+                    case 1:
+                        facedirection = Quaternion.Euler(0, 135, 0) * damagingWeaponComingDirection;
+                        break;
+                }
+            }else{
+                ECollider = Sensor.GetClosestEnemyColliderInSensorRange();
+                if (ECollider != null)
+                    facedirection = - gameObject.transform.position + ECollider.transform.position;
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        facedirection = Quaternion.Euler(0, -90, 0) * facedirection;
+                        break;
+                    case 1:
+                        facedirection = Quaternion.Euler(0, 90, 0) * facedirection;
+                        break;
+                }
             }
         }
+        
         RotateToTarget_Tween(gameObject.transform.position + facedirection, 0.01f, true);
 	}
 

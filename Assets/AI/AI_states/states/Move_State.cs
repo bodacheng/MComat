@@ -189,7 +189,8 @@ public class Move_State : Behavior
         }
         if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
         {
-            use_direction = _BasicPhysicSupport.hiddenMethods.antiWallDirection;
+            use_direction = Vector3.zero - gameObject.transform.position;
+            use_direction.y = 0;
             return;
         }
         
