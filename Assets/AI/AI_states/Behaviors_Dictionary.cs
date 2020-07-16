@@ -56,22 +56,7 @@ public class Behaviors_Incubator
             Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
             StateIndexList.Add("Defend");
         }
-
-        Dash_Back_State RushBack = new Dash_Back_State
-        {
-            nextAttackStateCanRushFirst = false,
-            StateType = BehaviorType.AC
-        };
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("RushBack", RushBack));
-        StateIndexList.Add("RushBack");
-        G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
-        {
-            nextAttackStateCanRushFirst = true,
-            StateType = BehaviorType.AC
-        };
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Rush", Rush));
-        StateIndexList.Add("Rush");
-
+        
         Hurt_State hit = new Hurt_State()
         {
             nextAttackStateCanRushFirst = false,
@@ -87,7 +72,6 @@ public class Behaviors_Incubator
         {
             StateType = BehaviorType.GetUp
         };
-
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Hit", hit));
         StateIndexList.Add("Hit");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
@@ -106,6 +90,29 @@ public class Behaviors_Incubator
             {
                 switch (_set.StateType)
                 {
+                    case BehaviorType.AC:
+                        switch(_set.REAL_NAME)
+                        {
+                            case "RushBack":
+                                Dash_Back_State RushBack = new Dash_Back_State
+                                {
+                                    nextAttackStateCanRushFirst = false,
+                                    StateType = BehaviorType.AC
+                                };
+                                Num_State_List.Add(new BehaviorIndex_With_Behavior("RushBack", RushBack));
+                                StateIndexList.Add("RushBack");
+                            break;
+                            case "Rush":
+                                G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
+                                {
+                                    nextAttackStateCanRushFirst = true,
+                                    StateType = BehaviorType.AC
+                                };
+                                Num_State_List.Add(new BehaviorIndex_With_Behavior("Rush", Rush));
+                                StateIndexList.Add("Rush");
+                            break;
+                        }
+                        break;
                     case BehaviorType.GI:
                         G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 0f, _set.REAL_NAME)
                         {

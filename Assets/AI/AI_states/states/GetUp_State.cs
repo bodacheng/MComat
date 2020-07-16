@@ -3,9 +3,7 @@ using Soul;
 
 public class GetUp : Behavior {
     readonly string clip_name;
-    float counter;
-    bool canbeattack;
-    
+    float counter;    
     public GetUp(string _clip_name)
 	{
         clip_name = _clip_name;
@@ -25,8 +23,7 @@ public class GetUp : Behavior {
     public override void AI_State_enter()
 	{
         base.AI_State_enter();
-        canbeattack = false;
-        _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
+        _SkillCancelFlag.turn_on_flag();
         counter = 0f;
         _Animator.SetFloat("speed", 0f);
         Sensor.OneRoundDetectionStart(5);
@@ -43,23 +40,12 @@ public class GetUp : Behavior {
 	{
         counter += Time.fixedDeltaTime;
 		_Rigidbody.velocity = Vector3.zero;
-        
-        if (!canbeattack)
-        {
-            if (counter > FightGlobalSetting._LeastCommandTimeAfterGetup)
-            {
-                _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
-                _SkillCancelFlag.turn_on_flag();
-                canbeattack = true;
-            }
-        }
 	}
 
     public override void AI_State_exit()
     {
         base.AI_State_exit();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-         _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _SkillCancelFlag.turn_off_flag();
     }
 }

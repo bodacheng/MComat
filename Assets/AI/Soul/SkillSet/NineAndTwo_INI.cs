@@ -175,7 +175,7 @@ public partial class NineAndTwo
         SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null,0,0);
         SkillEntity TestMove = 
-            new SkillEntity()
+            new SkillEntity
             {
                 REAL_NAME = "Test_Move",
                 LEVEL = 0,
@@ -189,9 +189,9 @@ public partial class NineAndTwo
                 EnterInput = InputKey.Null,
                 ExitInput = InputKey.Null,
                 SP_LEVEL = 0
-            };            
+            };
         SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null,0,0);
-        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, new string[] { "getUp" },null,InputKey.Null, InputKey.Null,0,0);
+        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, 0, 0);
         
         StateTransitionSetList.Add(getUp);
         StateTransitionSetList.Add(KnockOff);

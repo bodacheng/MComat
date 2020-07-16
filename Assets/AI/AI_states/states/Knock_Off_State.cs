@@ -8,7 +8,7 @@ public class Knock_Off_State : Behavior
     float time_counter;
     Vector3 _xz;
     bool touchedBoundary;
-    bool dropped, canWakeUp, canbeattack;
+    bool dropped, canWakeUp;
 
     public Knock_Off_State()
     {
@@ -27,13 +27,11 @@ public class Knock_Off_State : Behavior
         touchedBoundary = false;
         dropped = false;
         canWakeUp = false;
-        canbeattack = false;
         _BasicPhysicSupport.SetUsingGravity(false);
         _FightAttriCalRef.SetGettingDamageState(true);
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
-        _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
         pEvents.CloseAllPersonalityEffects();
         _Rigidbody.velocity = Vector3.zero;
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
@@ -51,33 +49,19 @@ public class Knock_Off_State : Behavior
     {
         base.AI_State_exit();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-         _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
         _BasicPhysicSupport.SetUsingGravity(true);
         _FightAttriCalRef.SetGettingDamageState(false);
+        _SkillCancelFlag.turn_off_flag();
     }
     
     public override void _c_State_FixedUpdate1()
     {
         _State_FixedUpdate();
-        if (canWakeUp)
-        {
-            if (MobileInputsManager.inputting)
-            {
-                _AIStateRunner.ChangeState("getUp");
-            }
-        }
     }
     
     public override void _State_FixedUpdate1()
     {
         _State_FixedUpdate();
-        if (canWakeUp)
-        {
-            if (Sensor.GetSuddenThreatInRange(0,5f) != null)
-            {
-                _AIStateRunner.ChangeState("getUp");
-            }
-        }
     }
     
     Vector3 effectP;
@@ -107,7 +91,6 @@ public class Knock_Off_State : Behavior
                 effectP = gameObject.transform.position;
                 effectP.y = 0;
                 EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
-                //_FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 time_counter = 0;//开始针对躺地时间记时
             }else{
@@ -124,12 +107,11 @@ public class Knock_Off_State : Behavior
         
         if (!canWakeUp)
         {
-            canWakeUp |= (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround);
-        }
-        if (!canbeattack && time_counter > 0.005f)
-        {
-            _FightAttriCalRef.ChangeLayerForAllSelfColliders(_DATA_CENTER._TeamConfig.mylayer);
-            canbeattack = true;
+            if (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
+            {
+                canWakeUp = true;
+                _SkillCancelFlag.turn_on_flag();
+            }
         }
         time_counter += Time.fixedDeltaTime;
     }

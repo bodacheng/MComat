@@ -32,7 +32,7 @@ namespace Soul
         Behavior last_Behavior;
         Behavior try_Behavior;
         public Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
-
+        
         public bool scarecrow;
         #endregion
 

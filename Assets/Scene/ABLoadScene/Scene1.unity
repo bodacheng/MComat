@@ -1738,11 +1738,10 @@ MonoBehaviour:
   heavyhit_lastingtime: 0.6
   highhit_lastingTime: 0.65
   normalattackpositionfixingtime: 0.1
-  knockoffextent: 30
+  knockoffextent: 25
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 1
-  LeastCommandTimeAfterGetup: 0.5
   defendHP: 20
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6
