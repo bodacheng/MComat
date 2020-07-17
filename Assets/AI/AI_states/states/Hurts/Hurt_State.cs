@@ -47,10 +47,16 @@ public partial class Hurt_State : Behavior {
                 ExplosionDamgeStart(newValue);
             break;
             case DamageType.push_to_mid:
-                PushToMidStart(newValue);
+                PushToMidStart(newValue, 10f, true);
             break;
             case DamageType.high:
                 HighDamgeStart(newValue);
+                break;
+            case DamageType.push_to_mid_slight:
+                PushToMidStart(newValue, 4f, true);
+                break;
+            case DamageType.same_height_to_mid:
+                PushToMidStart(newValue, 4f, false);
                 break;
             default:
             break;
@@ -97,11 +103,6 @@ public partial class Hurt_State : Behavior {
             physicMissionDisposable.Dispose();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _FightAttriCalRef.SetGettingDamageState(false);
-        switch(target.from_weapon.damage_type)
-        {
-            case DamageType.high:
-            break;
-        }
         _BasicPhysicSupport.SetUsingGravity(true);
     }
 }

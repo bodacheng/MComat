@@ -40,6 +40,8 @@ namespace HittingDetection
         explosion = 6,
         push_to_mid = 7,
         high = 8,
+        push_to_mid_slight = 9,
+        same_height_to_mid = 10,
     }
     
     public enum WeaponMode
