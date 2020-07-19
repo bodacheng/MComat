@@ -22,7 +22,7 @@ public partial class HurtObjectManager
             hurtObject = Resources.Load("HurtObjects/" + MagicForwardPath + "/" + resource_name) as GameObject;
             if (hurtObject != null)
             {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name,2);
+                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name, FightGlobalSetting._HurtObjectPreLoadCount);
                 
                 Decompositioner decompositioner = hurtObject.GetComponent<Decompositioner>();
                 if (decompositioner != null)

@@ -24,7 +24,7 @@ public class StagesManagerGUI : Editor {
     GUIStyle Title;
     GUIStyle AttackRangeToggleGUI;
     
-    string pathAndNameForLocalSave = "oneFight.json";    
+    string pathAndNameForLocalSave = "Resources/stageTemp/oneFight.json";    
     string focusingMemberRecordID;
     IDictionary<string, string> CharIDsAndNames;
     CharDataInfo focusingCharInfo;
@@ -191,7 +191,7 @@ public class StagesManagerGUI : Editor {
                 {
                     monsterOfPlayerId = focusingMemberRecordID
                 };
-                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberRecordID),focusingCharInfo);
+                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberRecordID), focusingCharInfo);
             }
         }
         if (focusingCharInfo != null)

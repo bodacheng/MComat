@@ -266,8 +266,8 @@ public class Move_State : Behavior
 			}
 			else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
 			{
-				h = ETCInput.GetAxis("Horizontal");
-				v = ETCInput.GetAxis("Vertical");
+				h = UltimateJoystick.GetHorizontalAxis("joystick");
+				v = UltimateJoystick.GetVerticalAxis("joystick");
 			}
 			use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         }else{

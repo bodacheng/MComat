@@ -174,8 +174,8 @@ public class MobileInputsManager : MonoBehaviour {
         }
         else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            h = ETCInput.GetAxis("Horizontal");
-            v = ETCInput.GetAxis("Vertical");
+            h = UltimateJoystick.GetHorizontalAxis("joystick");
+            v = UltimateJoystick.GetVerticalAxis("joystick");
         }
         inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }

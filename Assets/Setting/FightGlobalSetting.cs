@@ -23,6 +23,8 @@ public class FightGlobalSetting : MonoBehaviour
     public int defendHP = 20;
     public float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     public float attackDrawingDistance = 1f;
+
+    public int HurtObjectPreLoadCount = 5;
     
     public static ProgramMode _programMode;
     public static int scenestep;//0 :mainmenu 1: fightscene
@@ -44,6 +46,8 @@ public class FightGlobalSetting : MonoBehaviour
     public static AnimationCurve _HdamageZAnimationCurve;
     public static float _attackDrawingDistance;
     public static bool HitBoxLogger = true;
+    
+    public static int _HurtObjectPreLoadCount;
 
     public static string EffectPathDefine(Zokusei zokusei)
     {
@@ -84,6 +88,8 @@ public class FightGlobalSetting : MonoBehaviour
     void Awake()
     {
         _programMode = programMode;
+
+        _HurtObjectPreLoadCount = HurtObjectPreLoadCount;
         
         _hasDefend = hasDefend;
         

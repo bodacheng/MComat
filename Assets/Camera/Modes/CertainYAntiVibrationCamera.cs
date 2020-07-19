@@ -68,7 +68,7 @@ class CertainYAntiVibrationCamera : CameraMode
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
                 || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
-                h =  ETCInput.GetAxis("HorizontalCR");
+                h = UltimateJoystick.GetHorizontalAxis("joystick");
                 xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
                 //if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
                 //{
@@ -84,7 +84,7 @@ class CertainYAntiVibrationCamera : CameraMode
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                h =  ETCInput.GetAxis("HorizontalCR");
+                h = UltimateJoystick.GetHorizontalAxis("joystick");
                 xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
                 //if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
                 //{

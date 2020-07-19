@@ -81,6 +81,10 @@ namespace dataAccess
             int membercount = 0;
             for (int i = 0; i < 3; i++)
             {
+                if (PosKeySet.GetMonsterOfPlayerIdOnPos(i) == null)
+                {
+                    continue;
+                }
                 GetMonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 if (myfighter != null)
                 {

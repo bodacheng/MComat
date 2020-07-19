@@ -69,8 +69,8 @@ class TopDownWatchCamera : CameraMode
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                h = ETCInput.GetAxis("Horizontal");
-                v = ETCInput.GetAxis("Vertical");
+                h = UltimateJoystick.GetHorizontalAxis("joystick");
+                v = UltimateJoystick.GetVerticalAxis("joystick");
             }
             use_direction = (screenMovementForward * v) + (screenMovementRight * h);
 
@@ -81,7 +81,7 @@ class TopDownWatchCamera : CameraMode
             }
             else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                k += ETCInput.GetAxis("HorizontalCR") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
+                k += UltimateJoystick.GetHorizontalAxis("joystick") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
             }
         }
         Vector3 to = pos + use_direction.normalized * speed;

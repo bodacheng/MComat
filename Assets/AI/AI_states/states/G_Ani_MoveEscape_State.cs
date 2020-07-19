@@ -123,8 +123,8 @@ public class G_Ani_MoveEscape_State : Behavior {
         }
         else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            h = ETCInput.GetAxis("Horizontal");
-            v = ETCInput.GetAxis("Vertical");
+            h = UltimateJoystick.GetHorizontalAxis("joystick");
+            v = UltimateJoystick.GetVerticalAxis("joystick");
         }
         use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f, true);
