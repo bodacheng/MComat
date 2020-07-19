@@ -115,17 +115,9 @@ public class G_Ani_MoveEscape_State : Behavior {
         screenMovementForward = screenMovementSpace * Vector3.forward;
         screenMovementRight = screenMovementSpace * Vector3.right;
 
-        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
-            || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-        {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
-        }
-        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            h = UltimateJoystick.GetHorizontalAxis("joystick");
-            v = UltimateJoystick.GetVerticalAxis("joystick");
-        }
+        h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
+        v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
+        
         use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f, true);
     }

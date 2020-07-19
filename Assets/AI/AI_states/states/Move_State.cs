@@ -19,7 +19,7 @@ public class Move_State : Behavior
     Transform mainCam;
     Quaternion screenMovementSpace;
     Vector3 screenMovementForward, screenMovementRight;
-    List<GameObject> EnemiesByDistance;
+    List<GameObject> EnemiesByDistance = new List<GameObject>();
     
     enum AIMoveDirection
     {
@@ -249,27 +249,16 @@ public class Move_State : Behavior
 
         if (mainCam != null)
 		{
-			//get movement axis relative to camera
-			screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
-			screenMovementForward = screenMovementSpace * Vector3.forward;
-			screenMovementRight = screenMovementSpace * Vector3.right;
-			//get movement input, set direction to move in
-			h = 0f;
-			v = 0f;
-			if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
-            || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-			{
-                h = UnityEngine.Input.GetAxis("Horizontal");
-                v = UnityEngine.Input.GetAxis("Vertical");
-				//h = ETCInput.GetAxis("Horizontal");
-				//v = ETCInput.GetAxis("Vertical");
-			}
-			else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-			{
-				h = UltimateJoystick.GetHorizontalAxis("joystick");
-				v = UltimateJoystick.GetVerticalAxis("joystick");
-			}
-			use_direction = (screenMovementForward * v) + (screenMovementRight * h);
+            //get movement axis relative to camera
+            screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
+            screenMovementForward = screenMovementSpace * Vector3.forward;
+            screenMovementRight = screenMovementSpace * Vector3.right;
+            //get movement input, set direction to move in
+            
+            h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
+            v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
+            
+            use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         }else{
             Debug.Log("错误：角色处于控制模式却没有被适配相机。");
         }

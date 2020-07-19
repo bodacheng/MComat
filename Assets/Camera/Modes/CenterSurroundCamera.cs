@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CenterSurroundCamera : CameraMode
 {
@@ -21,13 +19,13 @@ public class CenterSurroundCamera : CameraMode
     
     public override void LocalUpdate(Camera _camera)
     {
-        h = UltimateJoystick.GetHorizontalAxis("joystick");
+        h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
         xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;                
         xzOff.y = 0;
         
         CameraTargetPos = focuscenter + xzOff.normalized * XZDis;
         CameraTargetPos.y = YDis;
-
+        
         rotateToDirection = focuscenter - CameraTargetPos;
         rotateToDirection.y = 0;
         rotateToDirection = rotateToDirection.normalized + Vector3.down/2;

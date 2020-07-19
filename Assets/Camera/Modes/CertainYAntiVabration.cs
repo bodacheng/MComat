@@ -30,16 +30,8 @@ class CertainYAntiVabration : CameraMode
     float fixy, h;
     public override void LocalUpdate(Camera _camera)
     {
-        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-        {
-            h = UltimateJoystick.GetHorizontalAxis("RotateCamera");
-            xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
-        }
-        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            h = UltimateJoystick.GetHorizontalAxis("RotateCamera");
-            xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
-        }
+        h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
+        xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
         xzOff.y = 0;
         
         if (auto)

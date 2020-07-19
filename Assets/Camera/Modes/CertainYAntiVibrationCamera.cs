@@ -65,38 +65,19 @@ class CertainYAntiVibrationCamera : CameraMode
         }
         else
         {
-            if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
-                || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                h = UltimateJoystick.GetHorizontalAxis("joystick");
-                xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
-                //if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
-                //{
-                //    FirstPoint = Input.mousePosition;
-                //    xAngleTemp = xAngle;
-                //    xzOff_onstartrecord = xzOff;
-                //}else if (Input.GetMouseButton(0))
-                //{
-                //    SecondPoint = Input.mousePosition;
-                //    xAngle = xAngleTemp - (SecondPoint.x - FirstPoint.x);
-                //    xzOff = Quaternion.AngleAxis(xAngle, Vector3.up) * xzOff_onstartrecord;
-                //}
-            }
-            else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                h = UltimateJoystick.GetHorizontalAxis("joystick");
-                xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
-                //if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
-                //{
-                //    FirstPoint = Input.mousePosition;
-                //    xAngleTemp = xAngle;
-                //}else if (Input.GetMouseButton(0))
-                //{
-                //    SecondPoint = Input.mousePosition;
-                //    xAngle = xAngleTemp - (SecondPoint.x - FirstPoint.x);
-                //    xzOff = Quaternion.AngleAxis(xAngle, Vector3.up) * xzOff;
-                //}
-            }
+            h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
+            xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
+            //if (Input.GetMouseButtonDown(0))//Input.GetTouch(0).phase == TouchPhase.Began
+            //{
+            //    FirstPoint = Input.mousePosition;
+            //    xAngleTemp = xAngle;
+            //    xzOff_onstartrecord = xzOff;
+            //}else if (Input.GetMouseButton(0))
+            //{
+            //    SecondPoint = Input.mousePosition;
+            //    xAngle = xAngleTemp - (SecondPoint.x - FirstPoint.x);
+            //    xzOff = Quaternion.AngleAxis(xAngle, Vector3.up) * xzOff_onstartrecord;
+            //}
         }
         xzOff.y = 0;
 

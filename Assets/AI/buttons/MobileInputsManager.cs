@@ -164,19 +164,8 @@ public class MobileInputsManager : MonoBehaviour {
         {
             return;
         }
-        h = 0f;
-        v = 0f;
-        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || 
-            Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-        {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
-        }
-        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            h = UltimateJoystick.GetHorizontalAxis("joystick");
-            v = UltimateJoystick.GetVerticalAxis("joystick");
-        }
+        h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
+        v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
         inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
     

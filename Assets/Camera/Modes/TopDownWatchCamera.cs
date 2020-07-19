@@ -44,6 +44,7 @@ class TopDownWatchCamera : CameraMode
     }
 
     Vector3 pos;
+    float h, v;
     public override void LocalUpdate(Camera _camera)
     {
         pos = new Vector3(_camera.transform.position.x, height, _camera.transform.position.z);
@@ -60,29 +61,11 @@ class TopDownWatchCamera : CameraMode
             screenMovementForward = screenMovementSpace * Vector3.forward;
             screenMovementRight = screenMovementSpace * Vector3.right;
             //get movement input, set direction to move in
-            float h = 0f;
-            float v = 0f;
-            if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
-            }
-            else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                h = UltimateJoystick.GetHorizontalAxis("joystick");
-                v = UltimateJoystick.GetVerticalAxis("joystick");
-            }
+            h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
+            v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("RotateCamera");
+            
             use_direction = (screenMovementForward * v) + (screenMovementRight * h);
-
-            if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor 
-                || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                k += Input.GetAxis("HorizontalCR") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
-            }
-            else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                k += UltimateJoystick.GetHorizontalAxis("joystick") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
-            }
+            k += UltimateJoystick.GetHorizontalAxis("joystick") * speed * Time.deltaTime / (Time.deltaTime + 0.2f);
         }
         Vector3 to = pos + use_direction.normalized * speed;
         if (_camera.transform.position != to)
