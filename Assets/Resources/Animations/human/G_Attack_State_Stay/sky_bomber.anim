@@ -478602,6 +478602,13 @@ AnimationClip:
     floatParameter: 2.5
     intParameter: 0
     messageOptions: 0
+  - time: 0.5833333
+    functionName: TurnRotationAdjustmentStartFlag
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.68333334
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
@@ -478615,6 +478622,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 2.5
     intParameter: 0
+    messageOptions: 0
+  - time: 0.8666667
+    functionName: TurnRotationAdjustmentStartFlag
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0
   - time: 0.9166667
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
@@ -478630,6 +478644,13 @@ AnimationClip:
     floatParameter: 2.5
     intParameter: 0
     messageOptions: 0
+  - time: 1.15
+    functionName: TurnRotationAdjustmentStartFlag
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 1.2333333
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
@@ -478643,6 +478664,13 @@ AnimationClip:
     objectReferenceParameter: {fileID: 0}
     floatParameter: 2.5
     intParameter: 0
+    messageOptions: 0
+  - time: 1.6333333
+    functionName: TurnRotationAdjustmentStartFlag
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0
   - time: 1.7833333
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
@@ -478665,7 +478693,7 @@ AnimationClip:
     floatParameter: 2.5
     intParameter: 0
     messageOptions: 0
-  - time: 2.5833333
+  - time: 2.2333333
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

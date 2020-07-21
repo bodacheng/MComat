@@ -1746,6 +1746,7 @@ MonoBehaviour:
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6
   attackDrawingDistance: 1
+  HurtObjectPreLoadCount: 5
 --- !u!4 &1558915669
 Transform:
   m_ObjectHideFlags: 0

@@ -168800,14 +168800,14 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 7
     messageOptions: 0
   - time: 0.46666667
     functionName: SetLeftFootMarkerManager
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 7
     messageOptions: 0
   - time: 0.8
     functionName: turn_on_flag
