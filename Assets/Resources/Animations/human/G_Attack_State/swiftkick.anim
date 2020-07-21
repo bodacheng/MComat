@@ -31012,14 +31012,14 @@ AnimationClip:
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 9
     messageOptions: 0
   - time: 0.1
     functionName: SetLeftFootMarkerManager
     data: in
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 9
     messageOptions: 0
   - time: 0.16666667
     functionName: ClearTargets

@@ -43,11 +43,6 @@ public partial class Decompositioner : MonoBehaviour {
         this._DecompositionerPool = _DecompositionerPool;
     }
 
-    public void ReturnSelfToPool()
-    {
-        this._DecompositionerPool.Return(this);
-    }
-    
     public void SetPositionConstraint(PositionConstraint positionConstraint)
     {
         this.positionConstraint = positionConstraint;
@@ -183,15 +178,16 @@ public partial class Decompositioner : MonoBehaviour {
                 BO_Ani_E.hiddenMethods.MagicForward_core("groundroundblast", hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
                 break;
             case "explosionlighteningball_big":
-                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big", hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation,0,_HitBox.GeneratedByStateKey);
+                BO_Ani_E.hiddenMethods.MagicForward_core("explosionlighteningball_big", hitBoxSubEventManger.transform.position,hitBoxSubEventManger.transform.rotation, 2, _HitBox.GeneratedByStateKey);
+                Phase = -1;
                 break;
             case "s_pillarblast":
                 BO_Ani_E.hiddenMethods.MagicForward_core("s_pillarblast", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 0, _HitBox.GeneratedByStateKey);
-                ReturnSelfToPool();
+                Phase = -1;
                 break;
             case "lightningspray":
                 BO_Ani_E.hiddenMethods.MagicForward_core("lightningspray", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 0, _HitBox.GeneratedByStateKey);
-                ReturnSelfToPool();
+                Phase = -1;
                 break;
         }
     }

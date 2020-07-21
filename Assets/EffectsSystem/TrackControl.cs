@@ -18,26 +18,25 @@ public class TrackControl : MonoBehaviour {
     [Header("Navigation")]
     public float navi_time = 5f;
     public float DegreeOfControl = 1;
-    
+    public float navRunSpeed = 10;
+
     public Sensor Sensor;
     Vector3 direction;
     Transform navTarget;
-    float navRunSpeed;
     
-    public void StartOff(Vector3 start, Quaternion startQ, float Z_scale)
+    public void StartOff(Vector3 start, Quaternion startQ, float _Z_scale)
     {
         time_counter = 0;
         switch (_TrackMode)
         {
             case TrackMode.DefinedTrack:
-                this.Z_scale = Z_scale;
+                this.Z_scale = _Z_scale;
                 m = Matrix4x4.TRS(start, startQ, Vector3.one * 1);
             break;
             case TrackMode.Navigation:
                 m = Matrix4x4.TRS(start, startQ, Vector3.one * 1);
                 direction = m.MultiplyPoint3x4(new Vector3(0,0,1)) - m.MultiplyPoint3x4(new Vector3(0,0,0));
                 transform.position = start;
-                navRunSpeed = Z_scale;
             break;
         }
     }
@@ -74,7 +73,7 @@ public class TrackControl : MonoBehaviour {
                 
                 direction.y = 0;
                 direction = direction.normalized;
-                transform.position = Vector3.Lerp(transform.position,transform.position + direction * navRunSpeed,Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position,transform.position + direction * navRunSpeed, Time.deltaTime);
             break;
         }
 	}

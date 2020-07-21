@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8331770003736234923}
   - component: {fileID: 5387008758705548204}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 3766635673845985683}
   - component: {fileID: 3933330190611897255}
   - component: {fileID: 3933470471024099755}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Electro orb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4877,7 +4877,7 @@ GameObject:
   - component: {fileID: 4692008214712184246}
   - component: {fileID: 4206099239167434891}
   - component: {fileID: 2193680439077055946}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: explosionlighteningball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9742,7 +9742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TrackMode: 1
+  _TrackMode: 2
   xAnimationCurve:
     serializedVersion: 2
     m_Curve: []
@@ -9779,9 +9779,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Z_scale: 1
+  Z_scale: 30
   navi_time: 5
-  DegreeOfControl: 1
+  DegreeOfControl: 0.5
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!82 &2193680439077055946
 AudioSource:
@@ -9890,7 +9891,7 @@ GameObject:
   - component: {fileID: 3766613346957847077}
   - component: {fileID: 3957155199408346335}
   - component: {fileID: 3933448680126469825}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: ShineLightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14702,7 +14703,7 @@ GameObject:
   - component: {fileID: 3766381164075215019}
   - component: {fileID: 3933020502256241329}
   - component: {fileID: 3932547243344598113}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19514,7 +19515,7 @@ GameObject:
   - component: {fileID: 3772886351909894297}
   - component: {fileID: 3957137329372695739}
   - component: {fileID: 3931776334920007925}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24326,7 +24327,7 @@ GameObject:
   - component: {fileID: 3772860385984787025}
   - component: {fileID: 3933634721938435345}
   - component: {fileID: 3932617989533239359}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29362,7 +29363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2245507071479709194}
   - component: {fileID: 4874498767001558741}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29397,7 +29398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Decompositioner: {fileID: 6672627024804372310}
   _event:
-    time: 1.9
+    time: 0.3
     event_name: explosionlighteningball_big
   LandedEvent: 
   fadeEvent: 

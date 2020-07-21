@@ -33607,7 +33607,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   Z_scale: 1
   navi_time: 5
-  DegreeOfControl: 10
+  DegreeOfControl: 8
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!114 &784774995269956937
 MonoBehaviour:
@@ -33650,7 +33651,7 @@ MonoBehaviour:
   DestructionDelay: 9.1
   stop_emission_delay: 9
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1291871725349577654}
   Attachments: []
   Counter: 0
 --- !u!82 &1291871725349577654
@@ -38560,6 +38561,7 @@ MonoBehaviour:
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 0.5
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!114 &5560952172138529054
 MonoBehaviour:

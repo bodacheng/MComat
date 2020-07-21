@@ -14401,6 +14401,7 @@ GameObject:
   - component: {fileID: 7576388078106573534}
   - component: {fileID: 461050908091574122}
   - component: {fileID: 421662593764057370}
+  - component: {fileID: 1273278170822457021}
   m_Layer: 0
   m_Name: explosionlighteningball_big
   m_TagString: Untagged
@@ -19218,8 +19219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HitBox: {fileID: 0}
-  TrackControl: {fileID: 0}
+  _HitBox: {fileID: 461050908091574122}
+  TrackControl: {fileID: 1273278170822457021}
   DestructionDelay: 2.5
   stop_emission_delay: 2
   to_be_faded_renderers: []
@@ -19346,6 +19347,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1273278170822457021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273910870217252656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TrackMode: 2
+  xAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Z_scale: 20
+  navi_time: 5
+  DegreeOfControl: 10
+  navRunSpeed: 5
+  Sensor: {fileID: 0}
 --- !u!1 &8981742826541500355
 GameObject:
   m_ObjectHideFlags: 0

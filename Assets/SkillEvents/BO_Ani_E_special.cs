@@ -149,7 +149,7 @@ public partial class BO_Ani_E : MonoBehaviour
             }
         }
         
-        public void MagicForward_core(string objectname, Vector3 pos, Quaternion qua, int speedGrade,string logForStateKey)
+        public void MagicForward_core(string objectname, Vector3 pos, Quaternion qua, int speedGrade, string logForStateKey)
         {
             if (string.IsNullOrEmpty(objectname))
             {
