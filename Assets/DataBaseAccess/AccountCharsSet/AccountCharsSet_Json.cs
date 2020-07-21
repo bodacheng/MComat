@@ -57,11 +57,20 @@ namespace dataAccess
         
         public static IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _AccCharInfo)
         {
-            DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
-            string json = JsonConvert.SerializeObject(_AccCharInfo);
-            LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.monsterOfPlayerId + ".json", json);
-            yield return _AccCharInfo;
+            GetMonsterOfPlayerDetailModel returnValue = null;
+            try
+            {
+                DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
+                string json = JsonConvert.SerializeObject(_AccCharInfo);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.monsterOfPlayerId + ".json", json);
+                returnValue = _AccCharInfo;
             }
+            catch(Exception e)
+            {
+                Debug.Log(e);                
+            }
+            yield return returnValue;
+        }
             
         public static IEnumerator UpdateCharJsonSaveData(GetMonsterOfPlayerDetailModel _CharInfo)
         {
@@ -110,7 +119,7 @@ namespace dataAccess
                     }
                 }
                 
-                Debug.Log("将角色" + _CharConfig.REAL_NAME + "加入存档");
+                Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
                 yield return AddToAccount(_Char);
                 i++;
             }
