@@ -165,6 +165,10 @@
     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLocalizationStringEditor.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkSkipCutsceneEditor.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\Editor\RPGTalkCinematicDrawer.cs" />
+    <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\ContextMenu.cs" />
+    <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\ExtendedColorPicker.cs" />
+    <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\InitShift.cs" />
+    <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\UIManagerEditor.cs" />
     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickEditor.cs" />
     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadme.cs" />
     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadmeEditor.cs" />
