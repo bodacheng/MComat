@@ -26,23 +26,24 @@ namespace mainMenu
         public StageButton pretab;
         
         public static ArcadeManager target;
-        List<StageButton> stageButtons = new List<StageButton>();
+        //List<StageButton> stageButtons = new List<StageButton>();
+
+        public static IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
         
         void Awake()
         {
             target = this;
         }
-
+        
+        public class StageInfo
+        {
+            public StageScriptableObject stageConfig;
+            public StageButton stageButton;
+        }
+        
         public StageButton GetStageButton(int stageno)
         {
-            for (int i = 0; i < stageButtons.Count; i++)
-            {
-                if (stageButtons[i].ID == stageno)
-                {
-                    return stageButtons[i];
-                }
-            }
-            return null;
+            return ArcadeStages[stageno]?.stageButton;
         }
 
         // 原则上这些玩意没有每次都去生成的道理..
@@ -54,27 +55,40 @@ namespace mainMenu
             foreach (Object _object in stageScriptableObjects)
             {
                 StageScriptableObject one = (StageScriptableObject)_object;
-                StageButton newButton = Instantiate(pretab);
-                void LoadThisStage()
+                if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
-                    FightPreparePage.target.PreLoad(one, TeamSetGameMode.story);
-                    PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
+                    StageButton newButton = Instantiate(pretab);
+                    void LoadThisStage()
+                    {
+                        FightPreparePage.target.PreLoad(ArcadeStages[one.LocalFightID].stageConfig, TeamSetGameMode.story);
+                        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
+                    }
+                    newButton.button.onClick.AddListener(LoadThisStage);
+                    newButton.ID = one.LocalFightID;
+                    newButton.text.text = "Stage" + one.LocalFightID.ToString();
+                    
+                    StageInfo stageInfo = new StageInfo
+                    {
+                        stageConfig = one,
+                        stageButton = newButton
+                    };
+                    ArcadeStages.Add(one.LocalFightID, stageInfo);
+                }else{
+                    Debug.Log("重复的Arcade模式关卡ID："+ one.LocalFightID);
                 }
-                newButton.button.onClick.AddListener(LoadThisStage);
-                newButton.ID = one.LocalFightID;
-                stageButtons.Add(newButton);
-                newButton.text.text = "Stage" + one.LocalFightID.ToString();
             }
-            stageButtons = OrderStagesButtonByNo(stageButtons);
-            for (int i = 0; i < stageButtons.Count; i++)
+            
+            for (int i = 0; i < 100; i++) // 假设有100关
             {
-                stageButtons[i].gameObject.SetActive(true);
-                stageButtons[i].transform.SetParent(ButtonsContainer);
-                stageButtons[i].transform.localScale = Vector3.one;
+                if (!ArcadeStages.ContainsKey(i))
+                    continue;
+                ArcadeStages[i].stageButton.gameObject.SetActive(true);
+                ArcadeStages[i].stageButton.gameObject.transform.SetParent(ButtonsContainer);
+                ArcadeStages[i].stageButton.gameObject.transform.localScale = Vector3.one;
             }
             VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
             ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x,
-            (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * stageButtons.Count);
+            (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * ArcadeStages.Count);
             yield break;
         }
         
@@ -109,25 +123,25 @@ namespace mainMenu
             }
         }
         
-        // 等级升序降序
-        readonly int order = 0;//0:升序 1:降序 //是否按type排序
-        List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
-        {
-            for (int i = 0; i < originBoxes.Count - 1; i++)
-            {
-                for (int j = 0; j < originBoxes.Count - 1 - i; j++)
-                {
-                    int no1 = originBoxes[j].ID;
-                    int no2 = originBoxes[j + 1].ID;
-                    if (order == 1 ? no1 > no2 : no1 < no2)
-                    {
-                        StageButton temp = originBoxes[j];
-                        originBoxes[j] = originBoxes[j + 1];
-                        originBoxes[j + 1] = temp;
-                    }
-                }
-            }
-            return originBoxes;
-        }
+        //// 等级升序降序
+        //readonly int order = 0;//0:升序 1:降序 //是否按type排序
+        //List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
+        //{
+        //    for (int i = 0; i < originBoxes.Count - 1; i++)
+        //    {
+        //        for (int j = 0; j < originBoxes.Count - 1 - i; j++)
+        //        {
+        //            int no1 = originBoxes[j].ID;
+        //            int no2 = originBoxes[j + 1].ID;
+        //            if (order == 1 ? no1 > no2 : no1 < no2)
+        //            {
+        //                StageButton temp = originBoxes[j];
+        //                originBoxes[j] = originBoxes[j + 1];
+        //                originBoxes[j + 1] = temp;
+        //            }
+        //        }
+        //    }
+        //    return originBoxes;
+        //}
     }
 }
