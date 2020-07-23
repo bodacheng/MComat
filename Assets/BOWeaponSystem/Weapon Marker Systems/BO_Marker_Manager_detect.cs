@@ -312,9 +312,8 @@ namespace HittingDetection
         {
             if (weaponHP > 0 && CurrentHP > 0)
             {
-                CurrentHP -= 1;
-                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
-                UnityEngine.Events.UnityAction wC = WeaponEnergyExaust_C;
+                CurrentHP -= 1;                
+                UnityEngine.Events.UnityAction wC = WeaponEnergyExaust;
                 WeaponEnergyExaustMissions.Add(wC);
             }
             if (weaponHP <= 0)
@@ -322,6 +321,7 @@ namespace HittingDetection
                 UnityEngine.Events.UnityAction we_C = WeaponEnergyExaust;
                 WeaponEnergyExaustMissions.Add(we_C);
             }
+            EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), Pos, Qua, null);
         }
         
         void WeaponEnergyExaust()
@@ -329,17 +329,7 @@ namespace HittingDetection
             if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
             {
                 _MyOwnerCalReference._Center.Animation_Manger.FrameFreeze();
-                if (decompositioner != null)
-                    decompositioner.FrameFreeze();
-                else
-                    Debug.Log("hitbox与Decompositioner失去链接");
             }
-        }
-        
-        void WeaponEnergyExaust_C()
-        {
-            ClearTargets();
-            WeaponEnergyExaust();
         }
     }
 }

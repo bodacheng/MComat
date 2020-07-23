@@ -53,7 +53,7 @@ namespace mainMenu
         {
             stage = new StageScriptableObject
             {
-                BattleGroundID = 1
+                BattleGroundID = 0
             };
             SwitchToRotationMode();
         }

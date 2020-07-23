@@ -12,6 +12,8 @@ public partial class BO_Ani_E : MonoBehaviour
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     DecompositionerPool target_pool;
     IDictionary<Transform, Decompositioner> EffectsOnBodyParts = new Dictionary<Transform, Decompositioner>();
+    List<Decompositioner> OnProcessEnergyFromBodyWeapons = new List<Decompositioner>();
+    
     Decompositioner processingHitBox;
 
     void Awake()
@@ -24,19 +26,14 @@ public partial class BO_Ani_E : MonoBehaviour
         hiddenMethods.SetBodyPartsTransform();// 设置为private目的是减少出现在inpector里的函数数量
     }
     
-    Quaternion SlightRotateToEnemy(Transform startT)
+    public void CloseOnProcessEnergyFromBodyWeapons()
     {
-        if (_DATA_CENTER.Sensor.GetEnemiesByDistance(true).Count > 0)
+        for (int i = 0; i < OnProcessEnergyFromBodyWeapons.Count; i++)
         {
-            Vector3 relativePos = _DATA_CENTER.Sensor.GetEnemiesByDistance(false)[0].transform.position - startT.position;
-            relativePos.y = 0;
-            // the second argument, upwards, defaults to Vector3.up
-            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-            return Quaternion.RotateTowards(transform.rotation, rotation, 1f);
+            OnProcessEnergyFromBodyWeapons[i].Phase = -1;
         }
-        return transform.rotation;
     }
-
+    
     // 这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
     public IEnumerator BasicMagicAndEffectsPathDefine(Zokusei _zokusei, string personalMagic)

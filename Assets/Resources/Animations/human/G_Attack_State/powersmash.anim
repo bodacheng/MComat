@@ -75689,7 +75689,14 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.28333333
+    functionName: ResistanceClear
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 0.33333334
     functionName: EffectOnBodyPart
@@ -75703,7 +75710,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 7
     messageOptions: 0
   - time: 0.43333334
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
@@ -75712,14 +75719,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.53333336
-    functionName: ResistanceClear
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6166667
+  - time: 0.56666666
     functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}

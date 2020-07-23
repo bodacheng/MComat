@@ -181419,7 +181419,7 @@ AnimationClip:
     functionName: MagicForward
     data: hengxianghuxian
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.9
+    floatParameter: 1.2
     intParameter: 0
     messageOptions: 0
   - time: 0.7

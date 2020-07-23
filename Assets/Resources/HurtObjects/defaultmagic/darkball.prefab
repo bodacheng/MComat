@@ -4835,14 +4835,14 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 3
-  weaponHP: 7
+  weaponHP: 20
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 1
   muzzle: 
   ExplosionEffect: dark_boom
   ContinuousDamage: 1
-  ContinuousDamageInterval: 0.2
+  ContinuousDamageInterval: 0.1
 --- !u!114 &3829198492329961209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4857,10 +4857,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 3074355485202923511}
   TrackControl: {fileID: 0}
-  DestructionDelay: 0.7
-  stop_emission_delay: 0.6
+  DestructionDelay: 5.5
+  stop_emission_delay: 5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 5955561958762602793}
   Attachments: []
   Counter: 0
 --- !u!82 &5955561958762602793

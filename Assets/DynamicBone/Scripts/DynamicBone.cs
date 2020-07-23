@@ -157,19 +157,23 @@ public class DynamicBone : MonoBehaviour
             PreUpdate();
     }
 
+    float dt;
     void LateUpdate()
     {
-        if (m_DistantDisable)
-            CheckDistance();
-
-        if (m_Weight > 0 && !(m_DistantDisable && m_DistantDisabled))
+        if (FPSLabel.fps > 55)
         {
-#if UNITY_5_3_OR_NEWER
-            float dt = m_UpdateMode == UpdateMode.UnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-#else
-            float dt = Time.deltaTime;
-#endif
-            UpdateDynamicBones(dt);
+            if (m_DistantDisable)
+                CheckDistance();
+    
+            if (m_Weight > 0 && !(m_DistantDisable && m_DistantDisabled))
+            {
+    #if UNITY_5_3_OR_NEWER
+                dt = m_UpdateMode == UpdateMode.UnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+    #else
+                dt = Time.deltaTime;
+    #endif
+                UpdateDynamicBones(dt);
+            }
         }
     }
 
@@ -278,7 +282,7 @@ public class DynamicBone : MonoBehaviour
         int loop = 1;
         if (m_UpdateRate > 0)
         {
-            float dt = 1.0f / m_UpdateRate;
+            dt = 1.0f / m_UpdateRate;
             m_Time += t;
             loop = 0;
 

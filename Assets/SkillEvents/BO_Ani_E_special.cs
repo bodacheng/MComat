@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
+using UniRx;
 
 public partial class BO_Ani_E : MonoBehaviour
 {
@@ -49,7 +50,22 @@ public partial class BO_Ani_E : MonoBehaviour
                 }
             }
         }
-               
+        
+        public void AddOnProcessEnergyFromBodyWeapons(Decompositioner decompositioner)
+        {
+            Ani_E.OnProcessEnergyFromBodyWeapons.Add(decompositioner);
+            SingleAssignmentDisposable Disposable = new SingleAssignmentDisposable();
+                Disposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    if (decompositioner.Phase == 0 || decompositioner.Phase == -1)
+                    {
+                        Ani_E.OnProcessEnergyFromBodyWeapons.Remove(decompositioner);
+                        Disposable.Dispose();
+                    }
+                }
+            );
+        }
+        
         public void BlastAttack_core(Vector3 pos, Quaternion qua , Transform parentTarget, int grade, string logForStateKey)
         {
             switch (grade)
@@ -233,6 +249,10 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox.GetPositionConstraint().constraintActive = false;
             }
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
+            if (Ani_E.processingHitBox._HitBox._WeaponMode == WeaponMode.EnergyFromBodyWeapon)
+            {
+                AddOnProcessEnergyFromBodyWeapons(Ani_E.processingHitBox);
+            }
             if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
             {
                 Ani_E.processingHitBox.TrackControl.Sensor = Ani_E._DATA_CENTER.Sensor;

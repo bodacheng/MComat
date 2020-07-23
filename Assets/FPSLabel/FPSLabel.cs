@@ -93,9 +93,10 @@ public class FPSLabel : MonoBehaviour
 		GUI.DragWindow(new Rect(0f, 0f, m_WindowRect.width, m_WindowRect.height));
 	}
 
+    public static float fps;
 	private void UpdateText()
 	{
-		float fps = 1f / m_DeltaTime;
+        fps = 1f / m_DeltaTime;
 		if (m_ShowMSec)
 		{
 			float msec = m_DeltaTime * 1000f;
