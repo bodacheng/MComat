@@ -38,6 +38,7 @@ namespace FightScene
                     break;
             }
             
+            FightScene.CheckNextArcadeLevel();
             switch (FightSceneNote.nextBattle._fightEventType)
             {
                 case FightEventType.Arena:

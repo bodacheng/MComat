@@ -5,6 +5,8 @@ using UnityEngine.Playables;
 
 public class StageScriptableObject : ScriptableObject
 {
+    public FightEventType _fightEventType = FightEventType.Arena;
+    
     [SerializeField]
     public int LocalFightID;
     [SerializeField]
@@ -18,18 +20,16 @@ public class StageScriptableObject : ScriptableObject
     public string battleNameJPG;
     [SerializeField]
     public string battleNameCH;
-
+    
     [SerializeField]
     public PlayableAsset beforefightstory;
     [SerializeField]
     public TextAsset Script;
-
+    
     [SerializeField]
     public Sprite StageButtonSprite;
     
     public LocalFight localFight = new LocalFight();
-    
-    public FightEventType _fightEventType = FightEventType.Arena;
     
     public TeamMode Team1Mode = TeamMode.multiraid;
     public TeamMode Team2Mode = TeamMode.multiraid;
@@ -41,7 +41,7 @@ public class StageScriptableObject : ScriptableObject
         var exampleAsset = CreateInstance<StageScriptableObject> ();
         
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
-        AssetDatabase.Refresh ();
+        AssetDatabase.Refresh();
     }
     #endif
     

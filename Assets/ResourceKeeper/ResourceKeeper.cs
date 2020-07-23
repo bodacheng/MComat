@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ResourceKeeper : MonoBehaviour
 {
@@ -10,9 +8,13 @@ public class ResourceKeeper : MonoBehaviour
     void Awake()
     {
         if (dontDestroyOnLoadParent == null)
+        {
             dontDestroyOnLoadParent = _dontDestroyOnLoadParent;
+        }
         else
+        {
             Debug.Log("已经找到非销毁对象parent");
+        }
         DontDestroyOnLoad(dontDestroyOnLoadParent);
     }
 }

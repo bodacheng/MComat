@@ -92,6 +92,14 @@ namespace mainMenu
             yield break;
         }
         
+        public static void PreventStageButtonsFromDestroy()
+        {
+            foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
+            {
+                keyValuePair.Value.stageButton.transform.SetParent( ResourceKeeper.dontDestroyOnLoadParent);
+            }
+        }
+                
         // Button feature
         public void JumpToNewest()
         {
@@ -107,41 +115,32 @@ namespace mainMenu
             }else{
                 VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
                 // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
-        
                 targetScrollbarValue = 
                 ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (stageNum - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
                 / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
             }
             DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x,targetScrollbarValue,0.5f);
         }
-        
-        public void Clear()
-        {
-            foreach (Transform child in ButtonsContainer)
-            {
-                Destroy(child.gameObject);
-            }
-        }
-        
-        //// 等级升序降序
-        //readonly int order = 0;//0:升序 1:降序 //是否按type排序
-        //List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
-        //{
-        //    for (int i = 0; i < originBoxes.Count - 1; i++)
-        //    {
-        //        for (int j = 0; j < originBoxes.Count - 1 - i; j++)
-        //        {
-        //            int no1 = originBoxes[j].ID;
-        //            int no2 = originBoxes[j + 1].ID;
-        //            if (order == 1 ? no1 > no2 : no1 < no2)
-        //            {
-        //                StageButton temp = originBoxes[j];
-        //                originBoxes[j] = originBoxes[j + 1];
-        //                originBoxes[j + 1] = temp;
-        //            }
-        //        }
-        //    }
-        //    return originBoxes;
-        //}
     }
 }
+
+//// 等级升序降序
+//readonly int order = 0;//0:升序 1:降序 //是否按type排序
+//List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
+//{
+//    for (int i = 0; i < originBoxes.Count - 1; i++)
+//    {
+//        for (int j = 0; j < originBoxes.Count - 1 - i; j++)
+//        {
+//            int no1 = originBoxes[j].ID;
+//            int no2 = originBoxes[j + 1].ID;
+//            if (order == 1 ? no1 > no2 : no1 < no2)
+//            {
+//                StageButton temp = originBoxes[j];
+//                originBoxes[j] = originBoxes[j + 1];
+//                originBoxes[j + 1] = temp;
+//            }
+//        }
+//    }
+//    return originBoxes;
+//}

@@ -225,6 +225,7 @@ namespace mainMenu
             FightSceneNote.nextBattle = stage;
             SkillStonesBox.PreventCellsFromDestroy();
             MySkillStonesReader.PreventStonesFromDestroy();
+            ArcadeManager.PreventStageButtonsFromDestroy();
             SceneManager.LoadScene(2);
         }
         

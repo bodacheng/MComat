@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Material #4
-  m_Shader: {fileID: 14000, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 10704, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION _NORMALMAP
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -20,6 +20,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseTextureRGBA:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -51,12 +55,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DistortTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: d4cbca07f12e24980925a9dddc39b265, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,6 +80,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MotionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -109,7 +125,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _AlphaMultiplier: 12
+    - _AlphaMultiplier: 90.2
     - _BlendOp: 0
     - _BumpScale: 1
     - _CameraFadingEnabled: 0
@@ -118,6 +134,7 @@ Material:
     - _Cull: 2
     - _CutRotation: 0
     - _Cutoff: 0.5
+    - _Depthpower: 1
     - _DetailNormalMapScale: 1
     - _DisplacementScrollSpeedX: 0
     - _DisplacementScrollSpeedY: 0
@@ -128,6 +145,7 @@ Material:
     - _DoubleSided: 1
     - _DstBlend: 0
     - _EdgeSoftness: 0
+    - _Emission: 2
     - _EmissionEnabled: 0
     - _EmissionGain: 0
     - _EnableExternalAlpha: 0
@@ -155,7 +173,8 @@ Material:
     - _Outline: 0
     - _Parallax: 0.02
     - _Posterize: 2
-    - _RimPower: 0.1
+    - _RimPower: 0
+    - _Shininess: 0.078125
     - _Smooth: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
@@ -201,6 +220,8 @@ Material:
     - _UVScrollX: 0
     - _UVScrollY: 0
     - _UVSec: 0
+    - _Usecenterglow: 0
+    - _Usedepth: 0
     - _WindQuality: 0
     - _ZWrite: 1
     - _outline: 0
@@ -210,6 +231,7 @@ Material:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _CellSize: {r: 0.02, g: 0.02, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color1: {r: 0.4411765, g: 0.2099391, b: 0, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
@@ -222,6 +244,7 @@ Material:
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpeedMainTexUVNoiseZW: {r: 0, g: 0, b: 0, a: 0}
     - _StarLayer1Color: {r: 1, g: 1, b: 1, a: 1}
     - _StarLayer2Color: {r: 1, g: 0.5, b: 0.96, a: 1}
     - _StarLayer3Color: {r: 0.22, g: 1, b: 0.55, a: 1}
