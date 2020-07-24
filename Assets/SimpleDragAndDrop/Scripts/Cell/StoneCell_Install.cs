@@ -63,5 +63,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             }
         }
         UpdateMyItem();
+        TheNineSlot.target.NineSlotsStatusRefresh();
     }
 }

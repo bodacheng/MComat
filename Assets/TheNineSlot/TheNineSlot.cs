@@ -47,8 +47,11 @@ namespace mainMenu
         public SkillStoneDetail _skillStoneDetail;
         
         [Space(7)]
-        [Header("EXRemain")]
+        [Header("EXPoint+")]
         public List<GameObject> remainCharges;//固定是9个长度
+        [Space(7)]
+        [Header("EXPoint-")]
+        public List<GameObject> burdenCharges;//固定是9个长度
         
         [Space(5)]
         [Header("选中框")]
@@ -221,12 +224,17 @@ namespace mainMenu
         // 当前技能编辑形成的各项参数更新
         public void NineSlotsStatusRefresh()
         {
+            foreach (SkillStoneSlot _slot in allSlot)
+            {
+                _slot._DragAndDropCell.UpdateMyItem();
+            }
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
             int wholePoint = MySkillStonesReader.SkillBalancePoint(
-            skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
-            skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
-            skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]);
-                       
+                skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
+                skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
+                skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]
+            );
+            
             ShowNineSlotExSurplus(wholePoint);
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
@@ -238,8 +246,11 @@ namespace mainMenu
             {
                 SKStoneItem sKStoneItem = _slot._DragAndDropCell.GetItem();
                 if (sKStoneItem == null)
+                {
+                    _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
                     continue;
-                switch(sKStoneItem._SkillConfig.SP_LEVEL)
+                }
+                switch (sKStoneItem._SkillConfig.SP_LEVEL)
                 {
                     case 1:
                         _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1,0.2f,0.3f,1f);

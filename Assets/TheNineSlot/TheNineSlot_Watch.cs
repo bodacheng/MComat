@@ -3,7 +3,6 @@ using Skill;
 using System.Collections.Generic;
 using UnityEngine;
 using dataAccess;
-using UnityEngine.UI;
 
 namespace mainMenu
 {
@@ -103,6 +102,18 @@ namespace mainMenu
                 else
                 {
                     remainCharges[i].SetActive(false);
+                }
+            }
+            
+            for (int i = 0; i < burdenCharges.Count; i++)
+            {
+                if (-i - 1 >= pointremain)
+                {
+                    burdenCharges[i].SetActive(true);
+                }
+                else
+                {
+                    burdenCharges[i].SetActive(false);
                 }
             }
         }
