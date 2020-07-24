@@ -16,11 +16,10 @@ public class zokuseiButtonEffectsGroup
     public ParticleSystem triggerExplosion3;
     public ParticleSystem pressingExplosion;//这个不需要对象池子。
     
+    IDictionary<Button, ParticleSystem> buttonSlotEffects;
+    
     ParticleSystem defendbutton;
     ParticleSystem rushbutton;
-    ParticleSystem attackbuttonslot;
-    ParticleSystem fire1buttonslot;
-    ParticleSystem fire2buttonslot;
     ParticleSystem arefresh;
     ParticleSystem fire1refresh;
     ParticleSystem fire2refresh;
@@ -97,9 +96,17 @@ public class zokuseiButtonEffectsGroup
         GameObject triggerExplosionPretab3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
         GameObject pressingExplosionPretab = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
 
-        attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
-        fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
-        fire2buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        ParticleSystem attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        ParticleSystem fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        ParticleSystem fire2buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        
+        buttonSlotEffects = new Dictionary<Button, ParticleSystem>
+        {
+            { Attack, attackbuttonslot },
+            { Fire1, fire1buttonslot },
+            { Fire2, fire2buttonslot }
+        };
+        
         if (FightGlobalSetting._hasDefend)
             defendbutton = Object.Instantiate(Defend).GetComponent<ParticleSystem>();
         rushbutton = Object.Instantiate(Rush).GetComponent<ParticleSystem>();
@@ -112,9 +119,6 @@ public class zokuseiButtonEffectsGroup
         triggerExplosion3 = Object.Instantiate(triggerExplosionPretab3).GetComponent<ParticleSystem>();
         pressingExplosion = Object.Instantiate(pressingExplosionPretab).GetComponent<ParticleSystem>();
 
-        attackbuttonslot.transform.SetParent(targetRectT);
-        fire1buttonslot.transform.SetParent(targetRectT);
-        fire2buttonslot.transform.SetParent(targetRectT);
         if (FightGlobalSetting._hasDefend)
             defendbutton.transform.SetParent(targetRectT);
         rushbutton.transform.SetParent(targetRectT);
@@ -133,7 +137,7 @@ public class zokuseiButtonEffectsGroup
             { Fire1, fire1refresh },
             { Fire2, fire2refresh }
         };
-
+        
         Attack1ButtonEffects = new Dictionary<int, ParticleSystem>();
         Fire1ButtonEffects = new Dictionary<int, ParticleSystem>();
         Fire2ButtonEffects = new Dictionary<int, ParticleSystem>();
@@ -205,9 +209,17 @@ public class zokuseiButtonEffectsGroup
     }
     
     IDictionary<int, ParticleSystem> tartget;
-    public void Refreshforbutton(Button button,int eX,Vector3 pos)
+    public void Refreshforbutton(Button button, int eX, Vector3 pos)
     {
         tartget = buttonEffectsSets[button];
+        if (eX == -1)
+        {
+            buttonSlotEffects[button].transform.position = pos;
+            buttonSlotEffects[button].Play(true);
+        }else{
+            buttonSlotEffects[button].Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+                
         foreach(KeyValuePair<int, ParticleSystem> pair in tartget)
         {
             if (pair.Key == eX)

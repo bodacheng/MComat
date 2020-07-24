@@ -361,8 +361,8 @@ public class MobileInputsManager : MonoBehaviour {
     Vector3 targetButtonPos;
     void ChangeButtonPatternNewTest(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
-        targetButtonPos = ButtonEffectInFxCameraWorldSpace(button,5);
-        _focusingButtonEffectsGroup.Refreshforbutton(button,sp_level,targetButtonPos);
+        targetButtonPos = ButtonEffectInFxCameraWorldSpace(button, 5);
+        _focusingButtonEffectsGroup.Refreshforbutton(button, sp_level, targetButtonPos);
     }
 
     //void changeButtonPatternParticleVer(Button button,EX sp_level)//按钮切换也可以在这里做文章
