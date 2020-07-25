@@ -101205,21 +101205,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.16666667
-    functionName: EffectOnBodyPart
-    data: left_hand
+  - time: 0.21666667
+    functionName: SetRightHandMarkerManager
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 8
     messageOptions: 0
-  - time: 0.18333334
-    functionName: EffectOnBodyPart
-    data: right_hand
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.26666668
+  - time: 0.3
     functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -101227,13 +101220,20 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.31666666
-    functionName: SetRightHandMarkerManager
-    data: 
+    functionName: EffectOnBodyPart
+    data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 8
+    intParameter: 1
     messageOptions: 0
-  - time: 0.33333334
+  - time: 0.31666666
+    functionName: EffectOnBodyPart
+    data: left_hand
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.38333333
     functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}

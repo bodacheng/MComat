@@ -31,7 +31,7 @@ public partial class Hurt_State : Behavior
                 }
             }
         );
-        gameObject.transform.DOMove(MidDistanceFromMe, 0.3f).OnComplete(() =>{
+        gameObject.transform.DOMove(MidDistanceFromMe, 0.3f).OnComplete(() => {
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             _BasicPhysicSupport.SetUsingGravity(true);
         });

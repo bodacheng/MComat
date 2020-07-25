@@ -255604,14 +255604,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.2
-    functionName: BlastAttack
-    data: right_hand
+    functionName: SetRightHandMarkerManager
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
+  - time: 0.21666667
+    functionName: ClearMarkerManagers
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.38333333
-    functionName: TurnRotationAdjustmentStartFlag
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -255624,14 +255631,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.6333333
+  - time: 0.6
     functionName: MagicForward
     data: kof99xie
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.8
+    floatParameter: 0.85
     intParameter: 0
     messageOptions: 0
-  - time: 1.0333333
+  - time: 0.95
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

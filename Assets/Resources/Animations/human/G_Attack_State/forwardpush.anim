@@ -66778,14 +66778,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.2
+  - time: 0.23333333
     functionName: ReleasePreparedMagicToAir
     data: left_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 4
     intParameter: 2
     messageOptions: 0
-  - time: 0.53333336
+  - time: 0.51666665
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

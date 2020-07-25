@@ -140663,6 +140663,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
+  - time: 0.2
+    functionName: ClearMarkerManagers
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.25
     functionName: EffectOnBodyPart
     data: right_foot
@@ -140670,22 +140677,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.3
+  - time: 0.28333333
     functionName: SetRightFootMarkerManager
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 1
     messageOptions: 0
-  - time: 0.46666667
-    functionName: turn_on_flag
+  - time: 0.38333333
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: ClearMarkerManagers
+  - time: 0.48333332
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

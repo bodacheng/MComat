@@ -75101,6 +75101,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
+  - time: 0.2
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.28333333
     functionName: MagicForward
     data: lightningmuzzle
@@ -75108,7 +75115,7 @@ AnimationClip:
     floatParameter: 2
     intParameter: 0
     messageOptions: 0
-  - time: 0.35
+  - time: 0.36666667
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

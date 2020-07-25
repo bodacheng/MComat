@@ -174331,7 +174331,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 5
     messageOptions: 0
-  - time: 1.1
+  - time: 1.1333333
     functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -174350,7 +174350,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0
   - time: 1.2666667
     functionName: SetRightHandMarkerManager
@@ -174359,14 +174359,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 1.3833333
-    functionName: ClearTargets
+  - time: 1.2833333
+    functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4666667
+  - time: 1.3833333
+    functionName: SetLeftHandMarkerManager
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 2
+    messageOptions: 0
+  - time: 1.4333333
     functionName: ClearMarkerManagers
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -174378,7 +174385,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 2
     messageOptions: 0
   - time: 1.6666666
     functionName: ClearMarkerManagers
@@ -174388,7 +174395,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.8
-    functionName: SetRightHandMarkerManager
+    functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -174401,19 +174408,19 @@ AnimationClip:
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
-  - time: 1.8666667
-    functionName: ResistanceUp
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 5
-    messageOptions: 0
   - time: 1.8833333
     functionName: TurnRotationAdjustmentStartFlag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
+    messageOptions: 0
+  - time: 1.9333333
+    functionName: turn_on_Right_energy_blade
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 1.95
     functionName: ResistanceClear
@@ -174426,11 +174433,11 @@ AnimationClip:
     functionName: MagicForward
     data: zongxianghuxian
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.6
+    floatParameter: 0.9
     intParameter: 1
     messageOptions: 0
-  - time: 2.0166667
-    functionName: ClearMarkerManagers
+  - time: 2
+    functionName: turn_off_Right_energy_blade
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -147953,6 +147953,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
+  - time: 0.8
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.8833333
     functionName: MagicForward
     data: spikes
@@ -148030,7 +148037,7 @@ AnimationClip:
     floatParameter: 7
     intParameter: 0
     messageOptions: 0
-  - time: 2.3833334
+  - time: 2.2
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

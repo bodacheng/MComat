@@ -150988,6 +150988,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
+  - time: 0.3
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.31666666
     functionName: MagicForward
     data: kof99xie
@@ -150995,7 +151002,7 @@ AnimationClip:
     floatParameter: 1
     intParameter: 1
     messageOptions: 0
-  - time: 0.7
+  - time: 0.5833333
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

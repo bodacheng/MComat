@@ -4800,7 +4800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TrackMode: 1
+  _TrackMode: 2
   xAnimationCurve:
     serializedVersion: 2
     m_Curve: []
@@ -4838,8 +4838,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Z_scale: 1
-  navi_time: 5
-  DegreeOfControl: 1
+  navi_time: 2
+  DegreeOfControl: 8
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!198 &6652847054692287643
 ParticleSystem:

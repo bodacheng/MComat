@@ -427122,7 +427122,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
+  - time: 0.85
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -427143,7 +427143,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3333334
+  - time: 1.35
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -427171,7 +427171,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.8666667
+  - time: 1.8833333
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -427192,7 +427192,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 2.3333333
+  - time: 2.2166667
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -148648,6 +148648,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
+  - time: 0.55
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
   - time: 0.5833333
     functionName: Bullet_shoot_from_body_part
     data: left_hand
@@ -148655,7 +148662,7 @@ AnimationClip:
     floatParameter: 30
     intParameter: 3
     messageOptions: 0
-  - time: 0.9
+  - time: 0.6666667
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -93,7 +93,7 @@ public class BasicPhysicSupport : MonoBehaviour
             get => grounded;
             set {
                 grounded = value;
-                _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.UsingGravity && !grounded;
+                _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.UsingGravity && !value;
             }
         }
         
