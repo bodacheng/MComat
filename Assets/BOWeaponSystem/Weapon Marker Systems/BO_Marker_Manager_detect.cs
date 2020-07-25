@@ -312,9 +312,13 @@ namespace HittingDetection
         {
             if (weaponHP > 0 && CurrentHP > 0)
             {
-                CurrentHP -= 1;                
+                CurrentHP -= 1;
                 UnityEngine.Events.UnityAction wC = WeaponEnergyExaust;
                 WeaponEnergyExaustMissions.Add(wC);
+                if (!ContinuousDamage)
+                {
+                    WeaponEnergyExaustMissions.Add(ClearTargets);
+                }
             }
             if (weaponHP <= 0)
             {
