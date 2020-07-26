@@ -271,7 +271,14 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }
-        
+
+        public void ReleasePreparedEffect_core(Vector3 pos, Quaternion qua, Transform parentT)
+        {
+            if (Ani_E.OnLoadEffect == null)
+                return;
+            EffectsManager.GenerateEffect(Ani_E.OnLoadEffect, Ani_E.magic_path , parentT.position, parentT.rotation, parentT);
+        }
+
         public void CloseEffectsOnBodyParts(bool clearParticles)
         {
             foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in Ani_E.EffectsOnBodyParts)

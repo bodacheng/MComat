@@ -160341,19 +160341,33 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.016666668
-    functionName: EffectOnBodyPart
-    data: left_hand
+  - time: 0.033333335
+    functionName: PrepareOneEffect
+    data: electric_s_e
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 0
     messageOptions: 0
-  - time: 0.016666668
-    functionName: EffectOnBodyPart
+  - time: 0.15
+    functionName: ReleasePreparedEffect
     data: right_hand
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.15
+    functionName: ReleasePreparedEffect
+    data: left_hand
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.16666667
+    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
     messageOptions: 0
   - time: 0.18333334
     functionName: MagicForward
@@ -160362,7 +160376,7 @@ AnimationClip:
     floatParameter: 6
     intParameter: 0
     messageOptions: 0
-  - time: 0.26666668
+  - time: 0.43333334
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

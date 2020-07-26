@@ -111,13 +111,25 @@ public partial class BO_Ani_E : MonoBehaviour
     public void ReleasePreparedMagic(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
-        hiddenMethods.ReleasePreparedMagic_core(target.position,transform.rotation,target,e.floatParameter,null);
+        hiddenMethods.ReleasePreparedMagic_core(target.position, transform.rotation, target, e.floatParameter, null);
     }
     
     public void ReleasePreparedMagicToAir(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
-        hiddenMethods.ReleasePreparedMagic_core(target.position, transform.rotation,null,e.floatParameter,null);
+        hiddenMethods.ReleasePreparedMagic_core(target.position, transform.rotation, null, e.floatParameter, null);
+    }
+
+    public void ReleasePreparedEffect(AnimationEvent e)
+    {
+        DecideTarget(e.stringParameter);
+        hiddenMethods.ReleasePreparedEffect_core(target.position, transform.rotation, target);
+    }
+
+    public void ReleasePreparedEffectToAir(AnimationEvent e)
+    {
+        DecideTarget(e.stringParameter);
+        hiddenMethods.ReleasePreparedEffect_core(target.position, transform.rotation, null);
     }
 
     Vector3 intPos;
@@ -170,6 +182,12 @@ public partial class BO_Ani_E : MonoBehaviour
     void PrepareOneMagic(string magicname)
     {
         OnLoadMagic = magicname;
+    }
+
+    string OnLoadEffect;
+    void PrepareOneEffect(string magicname)
+    {
+        OnLoadEffect = magicname;
     }
 
     //-1 后退

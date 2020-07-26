@@ -14,7 +14,7 @@ public class FightGlobalSetting : MonoBehaviour
     public float HP_coefficient = 1;
     public float GetExAfterDamageBy = 10f;
     public float ExGetAfterDamage = 10f;
-    public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f, highhit_lastingTime = 0.8f;
+    public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f, superhit_lastingtime = 1f, highhit_lastingTime = 0.8f;
     public float normalattackpositionfixingtime = 0.1f;
     public float knockoffextent = 20f;
     public float MaxKnockoffLaidGroundTime = 2f;
@@ -33,7 +33,7 @@ public class FightGlobalSetting : MonoBehaviour
     public static float _HP_coefficient = 1;
     public static float _GetExAfterDamageBy;
     public static float _ExGetAfterDamage;
-    public static float _lighthit_lastingtime, _heavyhit_lastingtime;
+    public static float _lighthit_lastingtime, _heavyhit_lastingtime, _superhit_lastingtime;
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
     public static float _CanGetUpAfterKnockoffToGround;
@@ -101,6 +101,7 @@ public class FightGlobalSetting : MonoBehaviour
         
         _lighthit_lastingtime = lighthit_lastingtime;
         _heavyhit_lastingtime = heavyhit_lastingtime;
+        _superhit_lastingtime = superhit_lastingtime;
         _highhit_lastingTime = highhit_lastingTime;
         _normalattackpositionfixingtime = normalattackpositionfixingtime;
         

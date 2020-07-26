@@ -28768,7 +28768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683421902126819500}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1681317581230388002}
@@ -43115,7 +43115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683861407178060334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1681002894748473372}
@@ -62318,8 +62318,8 @@ MonoBehaviour:
   zokusei: 4
   muzzle: 
   ExplosionEffect: electric_s_e
-  ContinuousDamage: 0
-  ContinuousDamageInterval: 0.2
+  ContinuousDamage: 1
+  ContinuousDamageInterval: 0.5
 --- !u!82 &7743381156824896071
 AudioSource:
   m_ObjectHideFlags: 0

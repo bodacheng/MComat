@@ -8,7 +8,7 @@ public partial class Hurt_State : Behavior
     void SuperDamgeStart(V_Damage newValue)
     {
         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(),true,0.05f);
-        used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+        used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
         physicMissionDisposable = new SingleAssignmentDisposable();
         physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
             {
@@ -23,5 +23,7 @@ public partial class Hurt_State : Behavior
         _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
         _FightAttriCalRef.GetKnockOffCount().PlusGauge(6f);
         _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
+
+        EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.damageHappenPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
     }
 }
