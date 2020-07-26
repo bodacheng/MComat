@@ -10,6 +10,10 @@ namespace mainMenu
     public class SkillStoneDetail : MonoBehaviour
     {
         [Space(2)]
+        [Header("BOXT")]
+        public RectTransform _T;
+    
+        [Space(2)]
         [Header("图标")]
         public RectTransform IconShowT;
         
@@ -20,17 +24,17 @@ namespace mainMenu
         
         [Space(7)]
         [Header("EXTypes")]
-        public GameObject Ex1Icon,Ex2Icon,Ex3Icon;
+        public GameObject Ex1Icon, Ex2Icon, Ex3Icon;
         
         [Space(7)]
         [Header("EXTypes")]
-        public GameObject close,near,far,outter;
+        public GameObject close, near, far, outter;
         
         [Space(7)]
         [Header("当前技能等级")]
         public Text skill_level_info;
         public Text skill_level_levelup;
-
+        
         SkillStoneOfPlayerInfoModel currentstone;
         public SkillStoneOfPlayerInfoModel GetSTTarget()
         {
@@ -66,6 +70,18 @@ namespace mainMenu
             currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
             skill_level_levelup.text = "LV:" + currentstone.GetLevel();
             skill_level_info.text = "LV:" + currentstone.GetLevel();
+        }
+        
+        public void RefreshSkillDetail(SkillConfig _ConfigOfStone)
+        {
+            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_ConfigOfStone.RECORD_ID));
+            
+            keyname.text = _ConfigOfStone.REAL_NAME;
+            Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
+            ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
+            ShowSKillRanges(_ConfigOfStone.AI_MIN_DIS, _ConfigOfStone.AI_MAX_DIS);
+            skill_level_levelup.text = "";
+            skill_level_info.text = "";
         }
         
         // 技能画面展示用

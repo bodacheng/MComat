@@ -5,7 +5,6 @@ public class GachaAnim : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        yield return GachaManager.target.Gacha();
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         EffectsManager.INIEffectsPool("gachastar", "defaultmagic", 3);
         yield return GachaRender.target.TenGotchaAnimProcess(GachaManager.target.GetResult());

@@ -46,6 +46,12 @@ namespace mainMenu
                 yield break;
             }
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
+            if (skillConfig == null)
+            {
+                yield return null;
+                yield break;
+            }
+            
             IEnumerator process = null;
             switch (ResourceLoadingSetting.IconLoadingMode)
             {
@@ -67,6 +73,7 @@ namespace mainMenu
             {
                 item = Icon.AddComponent<SKStoneItem>();
             }
+            item._SkillConfig = skillConfig;
             if (mode == 2)
             {
                 item.enabled = false;

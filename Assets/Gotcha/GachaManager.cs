@@ -11,7 +11,9 @@ public class GachaManager : MonoBehaviour
     public Canvas GotchaCanvas;
     public RectTransform GotchaFrontT;
     public RectTransform GotchaResultT;
+    public RectTransform SKillEditStoneBoxT;
     public NineForShow NineForShow;
+    public SkillStoneDetail _skillStoneDetail;
     
     List<SkillStoneOfPlayerInfoModel> Result;
     
@@ -21,60 +23,79 @@ public class GachaManager : MonoBehaviour
     {
         target = this;
     }
-    
-    public void SetResult(List<SkillStoneOfPlayerInfoModel> results)
-    {
-        Result = results;
-    }
-    
+       
     public List<SkillStoneOfPlayerInfoModel> GetResult()
     {
         return Result;
     }
     
-    public void TenTimes()
+    public void OneTime()
     {
-        PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim,true);
+        IEnumerator Go()
+        {
+            yield return GachaManager.target.Gacha(1);
+            PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+        }
+        PreScene.target.mainProcessRunner.Run(Go());
     }
     
-    public IEnumerator Gacha()
+    public void TenTimes()
+    {
+        IEnumerator Go()
+        {
+            yield return GachaManager.target.Gacha(9);
+            PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+        }
+        PreScene.target.mainProcessRunner.Run(Go());
+    }
+    
+    public IEnumerator Gacha(int count)
     {
         List<SkillStoneOfPlayerInfoModel> Results = null;
         switch (AccountSet._playerinfoReferenceMode)
         {
             case playerInfoRefMode.localTestSaveData:
-                Results = TenTimesGotcha("human");
+                IEnumerator GET = Gotcha("human", count);
+                yield return GET;
+                Results = (List<SkillStoneOfPlayerInfoModel>)GET.Current;
                 break;
             case playerInfoRefMode.remoteTestPlayer:
                 break;
             case playerInfoRefMode.formalVersion:
                 break;
         }
-        SetResult(Results);
+        Result = Results;
         yield break;
     }
     
-    public static List<SkillStoneOfPlayerInfoModel> TenTimesGotcha(string type)
+    public static IEnumerator Gotcha(string type, int stoneCount)
     {
         List<SkillStoneOfPlayerInfoModel> Geted = new List<SkillStoneOfPlayerInfoModel>();
-        
         List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < stoneCount; i++)
         {
-            int random_index = Random.Range(0,skillConfigs.Count);
-            SkillConfig skillConfig = skillConfigs[random_index];
-            SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
-            {
-                skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
-                skillId = skillConfig.REAL_NAME,
-                EXP = 0,
-                Inherent = "false",
-                inUsingMonsterOfPlayerId = i.ToString(),
-                inUsingSkillSlot = null
-            };
-            Geted.Add(stoneInfo);
+            IEnumerator GET = Gocha(type);
+            yield return GET;
+            Geted.Add((SkillStoneOfPlayerInfoModel)GET.Current);
         }
-        return Geted;
+        yield return Geted;
     }
     
+    static IEnumerator Gocha(string type)
+    {
+        List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
+        int random_index = Random.Range(0, skillConfigs.Count);
+        SkillConfig skillConfig = skillConfigs[random_index];
+        SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+        {
+            skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
+            skillId = skillConfig.RECORD_ID,
+            EXP = 0,
+            Inherent = "false",
+            inUsingMonsterOfPlayerId = "-1",
+            inUsingSkillSlot = null
+        };
+        yield return MySkillStonesReader.Add(stoneInfo);
+        yield return stoneInfo;
+    }
 }

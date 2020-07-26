@@ -42,7 +42,7 @@ namespace mainMenu
 
         string focusingtype = "human";
         int focusingExType;
-        static RectTransform _stonesTempContainer;
+        public static RectTransform _stonesTempContainer;
         
         public static SkillStonesBox target;
         

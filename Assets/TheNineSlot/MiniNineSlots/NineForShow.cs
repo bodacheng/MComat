@@ -45,7 +45,7 @@ public partial class NineForShow : MonoBehaviour
 
         Parent();
     }
-    
+        
     public void ShowStoneLevel()
     {
         if (A1S != null)
@@ -123,6 +123,46 @@ public partial class NineForShow : MonoBehaviour
         if (C3S != null)
         {
             C3S.CloseInfo();
+        }
+    }
+    
+    public void Clear()
+    {
+        if (A1S != null)
+        {
+            A1S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (A2S != null)
+        {
+            A2S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (A3S != null)
+        {
+            A3S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (B1S != null)
+        {
+            B1S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (B2S != null)
+        {
+            B2S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (B3S != null)
+        {
+            B3S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (C1S != null)
+        {
+            C1S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (C2S != null)
+        {
+            C2S.transform.SetParent(SkillStonesBox._stonesTempContainer);
+        }
+        if (C3S != null)
+        {
+            C3S.transform.SetParent(SkillStonesBox._stonesTempContainer);
         }
     }
     
