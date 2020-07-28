@@ -76,7 +76,7 @@ namespace Soul
             
             CalAdviceDistanceFromEnemy();
         }
-               
+        
         // 获取接下来等待释放的技能，并非是真正可触发技能，但反应了是否够气
         public List<SkillEntity> GetNextSkills()
         {

@@ -145,9 +145,10 @@ public class SSIMultiDictionary
         main = new MultiDictionary<string, string, int>();        
     }
     public MultiDictionary<string, string, int> main = new MultiDictionary<string, string, int>();
+    List<KeyValuePair<string, List<string>>> temp;
     public List<KeyValuePair<string, string>> GiveOutMin()
     {
-        List<KeyValuePair<string, List<string>>> temp = new List<KeyValuePair<string, List<string>>>();//各个大key所属的对应最终最小值的小key
+        temp = new List<KeyValuePair<string, List<string>>>();//各个大key所属的对应最终最小值的小key
         foreach (KeyValuePair<string,Dictionary<string, int>> BigPair in main.mDict)
         {
             Dictionary<string, int> LittleDic = BigPair.Value;
@@ -183,7 +184,6 @@ public class SSIMultiDictionary
                 final_minkeys.Add(new KeyValuePair<string, string>(allMinusBigKeys[i].Key,allMinusBigKeys[i].Value[y]));
             }
         }
-        
         return final_minkeys;
     }
 }

@@ -7,13 +7,14 @@ public class DynamicBone : MonoBehaviour
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("The root of the transform hierarchy to apply physics.")]
 #endif
-    public Transform m_Root = null;
+    public Transform m_Root;
 	
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("Internal physics simulation rate.")]
 #endif
     public float m_UpdateRate = 60.0f;
-	
+    float use_UpdateRate;
+
     public enum UpdateMode
     {
         Normal,
@@ -27,45 +28,45 @@ public class DynamicBone : MonoBehaviour
 #endif
     [Range(0, 1)]
     public float m_Damping = 0.1f;
-    public AnimationCurve m_DampingDistrib = null;
+    public AnimationCurve m_DampingDistrib;
 	
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("How much the force applied to return each bone to original orientation.")]
 #endif
     [Range(0, 1)]
     public float m_Elasticity = 0.1f;
-    public AnimationCurve m_ElasticityDistrib = null;
+    public AnimationCurve m_ElasticityDistrib;
 	
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("How much bone's original orientation are preserved.")]
 #endif
     [Range(0, 1)]
     public float m_Stiffness = 0.1f;
-    public AnimationCurve m_StiffnessDistrib = null;
+    public AnimationCurve m_StiffnessDistrib;
 	
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("How much character's position change is ignored in physics simulation.")]
 #endif
     [Range(0, 1)]
-    public float m_Inert = 0;
-    public AnimationCurve m_InertDistrib = null;
+    public float m_Inert;
+    public AnimationCurve m_InertDistrib;
 
 #if UNITY_5_3_OR_NEWER
     [Tooltip("How much the bones slowed down when collide.")]
 #endif
-    public float m_Friction = 0;
-    public AnimationCurve m_FrictionDistrib = null;
+    public float m_Friction;
+    public AnimationCurve m_FrictionDistrib;
 
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("Each bone can be a sphere to collide with colliders. Radius describe sphere's size.")]
 #endif
-    public float m_Radius = 0;
-    public AnimationCurve m_RadiusDistrib = null;
+    public float m_Radius;
+    public AnimationCurve m_RadiusDistrib;
 
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("If End Length is not zero, an extra bone is generated at the end of transform hierarchy.")]
 #endif
-    public float m_EndLength = 0;
+    public float m_EndLength;
 	
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("If End Offset is not zero, an extra bone is generated at the end of transform hierarchy.")]
@@ -85,12 +86,12 @@ public class DynamicBone : MonoBehaviour
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("Collider objects interact with the bones.")]
 #endif
-    public List<DynamicBoneColliderBase> m_Colliders = null;
+    public List<DynamicBoneColliderBase> m_Colliders;
 	
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("Bones exclude from physics simulation.")]
 #endif
-    public List<Transform> m_Exclusions = null;
+    public List<Transform> m_Exclusions;
 	
 	
     public enum FreezeAxis
@@ -105,31 +106,31 @@ public class DynamicBone : MonoBehaviour
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("Disable physics simulation automatically if character is far from camera or player.")]
 #endif		
-    public bool m_DistantDisable = false;
-    public Transform m_ReferenceObject = null;
+    public bool m_DistantDisable;
+    public Transform m_ReferenceObject;
     public float m_DistanceToObject = 20;
 
     Vector3 m_LocalGravity = Vector3.zero;
     Vector3 m_ObjectMove = Vector3.zero;
     Vector3 m_ObjectPrevPosition = Vector3.zero;
-    float m_BoneTotalLength = 0;
+    float m_BoneTotalLength;
     float m_ObjectScale = 1.0f;
-    float m_Time = 0;
+    float m_Time;
     float m_Weight = 1.0f;
-    bool m_DistantDisabled = false;
+    bool m_DistantDisabled;
 
     class Particle
     {
-        public Transform m_Transform = null;
+        public Transform m_Transform;
         public int m_ParentIndex = -1;
-        public float m_Damping = 0;
-        public float m_Elasticity = 0;
-        public float m_Stiffness = 0;
-        public float m_Inert = 0;
-        public float m_Friction = 0;
-        public float m_Radius = 0;
-        public float m_BoneLength = 0;
-        public bool m_isCollide = false;
+        public float m_Damping;
+        public float m_Elasticity;
+        public float m_Stiffness;
+        public float m_Inert;
+        public float m_Friction;
+        public float m_Radius;
+        public float m_BoneLength;
+        public bool m_isCollide;
 
         public Vector3 m_Position = Vector3.zero;
         public Vector3 m_PrevPosition = Vector3.zero;
@@ -138,7 +139,12 @@ public class DynamicBone : MonoBehaviour
         public Quaternion m_InitLocalRotation = Quaternion.identity;
     }
 
-    List<Particle> m_Particles = new List<Particle>();
+    readonly List<Particle> m_Particles = new List<Particle>();
+
+    void Awake()
+    {
+        use_UpdateRate = m_UpdateRate;
+    }
 
     void Start()
     {
@@ -160,18 +166,25 @@ public class DynamicBone : MonoBehaviour
     float dt;
     void LateUpdate()
     {
+        if (FPSLabel.fps < 57)
+        {
+            use_UpdateRate = m_UpdateRate / 2;
+        }else{
+            use_UpdateRate = m_UpdateRate;
+        }
+        
         if (FPSLabel.fps > 55)
         {
             if (m_DistantDisable)
                 CheckDistance();
-    
+        
             if (m_Weight > 0 && !(m_DistantDisable && m_DistantDisabled))
             {
-    #if UNITY_5_3_OR_NEWER
+        #if UNITY_5_3_OR_NEWER
                 dt = m_UpdateMode == UpdateMode.UnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-    #else
+        #else
                 dt = Time.deltaTime;
-    #endif
+        #endif
                 UpdateDynamicBones(dt);
             }
         }
@@ -280,9 +293,9 @@ public class DynamicBone : MonoBehaviour
         m_ObjectPrevPosition = transform.position;
 
         int loop = 1;
-        if (m_UpdateRate > 0)
+        if (use_UpdateRate > 0)
         {
-            dt = 1.0f / m_UpdateRate;
+            dt = 1.0f / use_UpdateRate;
             m_Time += t;
             loop = 0;
 

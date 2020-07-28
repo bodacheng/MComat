@@ -11,7 +11,7 @@ public class DynamicBoneCollider : DynamicBoneColliderBase
 #if UNITY_5_3_OR_NEWER
 	[Tooltip("The height of the capsule.")]
 #endif		
-    public float m_Height = 0;
+    public float m_Height;
 
     void OnValidate()
     {
@@ -25,10 +25,9 @@ public class DynamicBoneCollider : DynamicBoneColliderBase
         float h = m_Height * 0.5f - m_Radius;
         if (h <= 0)
         {
-            if (m_Bound == Bound.Outside)
-                return OutsideSphere(ref particlePosition, particleRadius, transform.TransformPoint(m_Center), radius);
-            else
-                return InsideSphere(ref particlePosition, particleRadius, transform.TransformPoint(m_Center), radius);
+            return m_Bound == Bound.Outside
+                ? OutsideSphere(ref particlePosition, particleRadius, transform.TransformPoint(m_Center), radius)
+                : InsideSphere(ref particlePosition, particleRadius, transform.TransformPoint(m_Center), radius);
         }
         else
         {
@@ -50,10 +49,9 @@ public class DynamicBoneCollider : DynamicBoneColliderBase
                     c1.z += h;
                     break;
             }
-            if (m_Bound == Bound.Outside)
-                return OutsideCapsule(ref particlePosition, particleRadius, transform.TransformPoint(c0), transform.TransformPoint(c1), radius);
-            else
-                return InsideCapsule(ref particlePosition, particleRadius, transform.TransformPoint(c0), transform.TransformPoint(c1), radius);
+            return m_Bound == Bound.Outside
+                ? OutsideCapsule(ref particlePosition, particleRadius, transform.TransformPoint(c0), transform.TransformPoint(c1), radius)
+                : InsideCapsule(ref particlePosition, particleRadius, transform.TransformPoint(c0), transform.TransformPoint(c1), radius);
         }
     }
 
@@ -198,10 +196,7 @@ public class DynamicBoneCollider : DynamicBoneColliderBase
         if (!enabled)
             return;
 
-        if (m_Bound == Bound.Outside)
-            Gizmos.color = Color.yellow;
-        else
-            Gizmos.color = Color.magenta;
+        Gizmos.color = m_Bound == Bound.Outside ? Color.yellow : Color.magenta;
         float radius = m_Radius * Mathf.Abs(transform.lossyScale.x);
         float h = m_Height * 0.5f - m_Radius;
         if (h <= 0)

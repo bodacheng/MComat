@@ -4,15 +4,15 @@ using System.Reflection;
 namespace Soul
 {
     public abstract partial class Behavior
-    {        
+    {
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
             return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
         }
-
+        
         public bool DangerousNearby() // Dash_Back_State G_Ani_MoveEscape_State 2
         {
-            return (_FightAttriCalRef.IFgettingDamage() || Sensor.GetSuddenThreatInRange(0,5) != null) && _ResistanceManager.Resistance.Value == 0;
+            return Sensor.GetSuddenThreatInRange(0 , 5) != null && _ResistanceManager.Resistance.Value == 0;
         }
         
         public bool DangerousClose() //Counter_State 1 2 3
@@ -33,13 +33,9 @@ namespace Soul
             {
                 return false;
             }
-            if (_FightAttriCalRef.IFgettingDamage())
-            {
-                return true;
-            }
             Collider threat = Sensor.GetSuddenThreatInRange(0, 3);
             Collider nearestEnemyMeat = Sensor.GetClosestEnemyColliderInSensorRange();
-
+            
             if (nearestEnemyMeat != null && threat != null)
             {
                 if (Vector3.Distance(nearestEnemyMeat.transform.position, _DATA_CENTER.geometryCenter.position) >  Vector3.Distance(threat.transform.position, _DATA_CENTER.geometryCenter.position))
@@ -55,6 +51,12 @@ namespace Soul
                 }
             }
             return false;
+        }
+        
+        public bool EnemyNotClose()
+        {
+            tar = Sensor.GetTargetRangeEnemyCollider(0, 5);
+            return tar == null;
         }
 
         Collider tar;

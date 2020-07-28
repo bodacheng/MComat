@@ -8,7 +8,7 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         public IDictionary<string, List<string>> ConditionAndRespond = new Dictionary<string, List<string>>();
-        public MultiDictionary<string, string, int> ConditionAndRespondPriority = new MultiDictionary<string, string, int>();
+        public MultiDictionary<string, string, int> ConditionAndRespondPriority = new MultiDictionary<string, string, int>();// 注意，这个字典是value越小代表有限度越高
         public IDictionary<string, string> BehaviourAndStrategicExitCondition = new Dictionary<string, string>();
         public List<string> AllConditionCodes;
 
@@ -29,6 +29,11 @@ namespace Soul
             {
                 case BehaviorType.MV:
                     //BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME,"TimeToStopRunning");
+                    
+                    KeyValuePair<string, string> sdff = new KeyValuePair<string, string>("EnemyNotClose", behavior_define.REAL_NAME);
+                    RegisterConditionToRespond(sdff);
+                    ConditionAndRespondPriority.Set(sdff.Key, sdff.Value, 4);
+                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, "TimeToRespond");
                     break;
                 case BehaviorType.AC:
                     //KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.REAL_NAME);
@@ -42,6 +47,10 @@ namespace Soul
                     //KeyValuePair<string, string> keyValuePair3 = new KeyValuePair<string, string>("DangerousClose", behavior_define.REAL_NAME);
                     //RegisterConditionToRespond(keyValuePair3);
                     //ConditionAndRespondPriority.Set(keyValuePair3.Key, keyValuePair3.Value, 3);
+
+                    KeyValuePair<string, string> Csakjdh = new KeyValuePair<string, string>("EnemyNotClose", behavior_define.REAL_NAME);
+                    RegisterConditionToRespond(Csakjdh);
+                    ConditionAndRespondPriority.Set(Csakjdh.Key, Csakjdh.Value, 5);
 
                     KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair4);

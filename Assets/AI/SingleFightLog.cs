@@ -75,15 +75,14 @@ namespace Soul
             StateInterruptedTimes.Clear();
         }
 
-        readonly IDictionary<string, int> skillnobenefitlog = new Dictionary<string, int>();
-        public void AnalysisLog(IDictionary<string, Behavior> Behaviour_Dictionary)
+        readonly MultiDictionary<string, string, int> skillnobenefitlog = new MultiDictionary<string, string, int>();
+        public void AnalysisLog(MultiDictionary<string, string, int> _ConditionAndRespondPriority)
         {
             if (MyBehaviourHistory.Count < 5)
             {
                 return;
             }
             skillnobenefitlog.Clear();
-            int Count = MyBehaviourHistory.Count;
             for (int i = 2; i < MyBehaviourHistory.Count; i++)
             {
                 FightRecord fightRecord = MyBehaviourHistory[i];
@@ -91,26 +90,31 @@ namespace Soul
                 {
                     if ((MyBehaviourHistory[i - 2] is BehaviourFightRecord) && (MyBehaviourHistory[i - 1] is BehaviourFightRecord))// 发招两次没有获得正面效益
                     {
-                        if (skillnobenefitlog.ContainsKey(MyBehaviourHistory[i - 2].stateKey))
-                        {
-                            skillnobenefitlog[MyBehaviourHistory[i - 2].stateKey] += 1;
-                        }
-                        else
-                        {
-                            skillnobenefitlog.Add(MyBehaviourHistory[i - 2].stateKey, 1);
-                        }
+                        BehaviourFightRecord behaviourFightRecord = (BehaviourFightRecord)MyBehaviourHistory[i - 2];
+                        skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey,
+                        skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey) + 1);
+                    }
+                }
+                if (fightRecord is NegativeRecord)
+                {
+                    if (MyBehaviourHistory[i - 1] is BehaviourFightRecord)
+                    {
+                        BehaviourFightRecord behaviourFightRecord = (BehaviourFightRecord)MyBehaviourHistory[i - 1];
+                        skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey,
+                        skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey) + 1);
                     }
                 }
             }
             
-            foreach (KeyValuePair<string,int> keyValuePair in skillnobenefitlog)
+            if (skillnobenefitlog.values.Count > 0)
             {
-                if (keyValuePair.Value > 2)
+                foreach(KeyValuePair<string, Dictionary<string, int>> keyValuePair in skillnobenefitlog.mDict)
                 {
-                    Behavior behavior = Behaviour_Dictionary[keyValuePair.Key];
-                    behavior.triggerAtttackRangeMin = Mathf.Clamp(behavior.triggerAtttackRangeMin -1 ,0, 5);
-                    behavior.triggerAtttackRangeMax = Mathf.Clamp(behavior.triggerAtttackRangeMax - 1, 4, 10);
-                    Debug.Log("触发距离调整:"+ keyValuePair.Key);
+                    foreach(KeyValuePair<string, int> KV in keyValuePair.Value)
+                    {
+                        _ConditionAndRespondPriority.Set(keyValuePair.Key, KV.Key, _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key) + 1);
+                        Debug.Log(keyValuePair.Key + ":" +  KV.Key + ":" + _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key));
+                    }
                 }
             }
             MyBehaviourHistory.Clear();
