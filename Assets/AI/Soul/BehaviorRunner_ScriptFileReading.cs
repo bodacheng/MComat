@@ -372,7 +372,7 @@ namespace Soul
             //第一轮循环所应该做的就是把Attack，Fire1，Fire2这三个系列的技能串儿搜出来。
             foreach (KeyValuePair<string, SkillEntity> Transition in SEDic)
             {
-                if (Transition.Key == "Move_normal" || Transition.Key == "Move_slow" || Transition.Key == "Move_fast" || Transition.Key == "Test_Move")
+                if (Transition.Key == "Move")
                 {
                     myMoveStateKey = Transition.Key;
                 }
@@ -479,13 +479,7 @@ namespace Soul
                 }
 
                 // 移动概率
-                if (Transition.Key == "Move_normal"
-                    ||
-                    Transition.Key == "Move_slow"
-                    ||
-                    Transition.Key == "Move_fast"
-                    ||
-                    Transition.Key == "Test_Move")
+                if (Transition.Key == "Move")
                 {
                     Transition.Value.CasualTo = new string[] { };
                 }

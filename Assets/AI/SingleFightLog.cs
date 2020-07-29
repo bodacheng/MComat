@@ -91,8 +91,13 @@ namespace Soul
                     if ((MyBehaviourHistory[i - 2] is BehaviourFightRecord) && (MyBehaviourHistory[i - 1] is BehaviourFightRecord))// 发招两次没有获得正面效益
                     {
                         BehaviourFightRecord behaviourFightRecord = (BehaviourFightRecord)MyBehaviourHistory[i - 2];
-                        skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey,
-                        skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey) + 1);
+                        if (behaviourFightRecord.whyIDidThis != null)
+                        {
+                            skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey,
+                            skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey) + 1);
+                        }else{
+                            Debug.Log("strange:"+ behaviourFightRecord.stateKey);
+                        }
                     }
                 }
                 if (fightRecord is NegativeRecord)
@@ -100,8 +105,13 @@ namespace Soul
                     if (MyBehaviourHistory[i - 1] is BehaviourFightRecord)
                     {
                         BehaviourFightRecord behaviourFightRecord = (BehaviourFightRecord)MyBehaviourHistory[i - 1];
-                        skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey,
-                        skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey) + 1);
+                        if (behaviourFightRecord.whyIDidThis != null)
+                        {
+                            skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey,
+                            skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey) + 1);
+                        }else{
+                            Debug.Log("strange:"+ behaviourFightRecord.stateKey);
+                        }
                     }
                 }
             }
@@ -113,7 +123,7 @@ namespace Soul
                     foreach(KeyValuePair<string, int> KV in keyValuePair.Value)
                     {
                         _ConditionAndRespondPriority.Set(keyValuePair.Key, KV.Key, _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key) + 1);
-                        Debug.Log(keyValuePair.Key + ":" +  KV.Key + ":" + _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key));
+                        //Debug.Log(keyValuePair.Key + ":" +  KV.Key + ":" + _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key));
                     }
                 }
             }

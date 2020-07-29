@@ -27,13 +27,11 @@ namespace Soul
         {
             switch(behavior_define.StateType)
             {
-                case BehaviorType.MV:
-                    //BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME,"TimeToStopRunning");
+                case BehaviorType.MV: //移动状态的触发条件。不添加的话移动状态不触发的。
+                    KeyValuePair<string, string> fdsgfg = new KeyValuePair<string, string>("SpareOption", behavior_define.REAL_NAME);
+                    RegisterConditionToRespond(fdsgfg);
+                    ConditionAndRespondPriority.Set(fdsgfg.Key, fdsgfg.Value, 10);
                     
-                    KeyValuePair<string, string> sdff = new KeyValuePair<string, string>("EnemyNotClose", behavior_define.REAL_NAME);
-                    RegisterConditionToRespond(sdff);
-                    ConditionAndRespondPriority.Set(sdff.Key, sdff.Value, 4);
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, "TimeToRespond");
                     break;
                 case BehaviorType.AC:
                     //KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.REAL_NAME);
@@ -47,10 +45,6 @@ namespace Soul
                     //KeyValuePair<string, string> keyValuePair3 = new KeyValuePair<string, string>("DangerousClose", behavior_define.REAL_NAME);
                     //RegisterConditionToRespond(keyValuePair3);
                     //ConditionAndRespondPriority.Set(keyValuePair3.Key, keyValuePair3.Value, 3);
-
-                    KeyValuePair<string, string> Csakjdh = new KeyValuePair<string, string>("EnemyNotClose", behavior_define.REAL_NAME);
-                    RegisterConditionToRespond(Csakjdh);
-                    ConditionAndRespondPriority.Set(Csakjdh.Key, Csakjdh.Value, 5);
 
                     KeyValuePair<string, string> keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair4);

@@ -15,36 +15,19 @@ public class Behaviors_Incubator
         StateIndexList = new List<string>();
 
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Empty", empty_State));
-        StateIndexList.Add("Empty");
         Idle_State victory = new Idle_State("victory");
         Idle_State zhuangbi = new Idle_State("zhuangbi");
         Death_State death = new Death_State();
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Victory", victory));
-        StateIndexList.Add("Victory");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("zhuangbi", zhuangbi));
         StateIndexList.Add("zhuangbi");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Death", death));
-        StateIndexList.Add("Death");
-
-        Move_State move1 = new Move_State(AIMoveMode.normal,10f, 1f);
-        Move_State move2 = new Move_State(AIMoveMode.normal,2f, 2f);
-        Move_State move3 = new Move_State(AIMoveMode.normal,3f, 2f);
-        Move_State testmove = new Move_State(AIMoveMode.test, 1f, 2f);
-        move1.StateType = BehaviorType.MV;
-        move2.StateType = BehaviorType.MV;
-        move3.StateType = BehaviorType.MV;
-        testmove.StateType = BehaviorType.MV;
-        move1.nextAttackStateCanRushFirst = false;
-        move2.nextAttackStateCanRushFirst = false;
-        move3.nextAttackStateCanRushFirst = false;
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Move_normal", move1));
-        StateIndexList.Add("Move_normal");
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Move_slow", move2));
-        StateIndexList.Add("Move_slow");
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Move_fast", move3));
-        StateIndexList.Add("Move_fast");
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Test_Move", testmove));
-        StateIndexList.Add("Test_Move");
+        Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
+        {
+            StateType = BehaviorType.MV,
+            nextAttackStateCanRushFirst = false
+        };
+        Num_State_List.Add(new BehaviorIndex_With_Behavior("Move", move));
 
         if (FightGlobalSetting._hasDefend)
         {
@@ -73,11 +56,8 @@ public class Behaviors_Incubator
             StateType = BehaviorType.GetUp
         };
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Hit", hit));
-        StateIndexList.Add("Hit");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
-        StateIndexList.Add("KnockOff");
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp",getUp));
-        StateIndexList.Add("getUp");
+        Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp", getUp));
 
         SkillTypeKeys = new List<string>();
         foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
@@ -164,9 +144,9 @@ public class Behaviors_Incubator
                         break;
                 }
             }else{
-                //Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
+                Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
             }
-        }             
+        }
 	}
 
     public bool IfContainsKey(string key)
@@ -196,15 +176,9 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
         
         SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(anim_path);
-        BehaviorIndexList = new List<string>
-        {
-            "Empty",
-            "Move_normal",
-            "Move_slow",
-            "Move_fast",
-            "Test_Move"
-        };
-
+        BehaviorIndexList = new List<string>{};
+        BehaviorIndexList.Add("Empty");
+        BehaviorIndexList.Add("Move");
         BehaviorIndexList.Add("Victory");
         BehaviorIndexList.Add("zhuangbi");
         BehaviorIndexList.Add("Death");
@@ -213,7 +187,6 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
         BehaviorIndexList.Add("Hit");
         BehaviorIndexList.Add("KnockOff");
         BehaviorIndexList.Add("getUp");
-
         if (FightGlobalSetting._hasDefend)
         {
             BehaviorIndexList.Add("Defend");
@@ -235,15 +208,9 @@ public class Behaviors_Incubator_ForLocalResourceCheck // 用于本地脚本做�
             return;
         }
         
-        BehaviorIndexList = new List<string>
-        {
-            "Empty",
-            "Move_normal",
-            "Move_slow",
-            "Move_fast",
-            "Test_Move"
-        };
-
+        BehaviorIndexList = new List<string>{};
+        BehaviorIndexList.Add("Empty");
+        BehaviorIndexList.Add("Move");
         BehaviorIndexList.Add("Victory");
         BehaviorIndexList.Add("zhuangbi");
         BehaviorIndexList.Add("Death");

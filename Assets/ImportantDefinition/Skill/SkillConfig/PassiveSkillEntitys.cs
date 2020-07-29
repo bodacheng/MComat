@@ -22,7 +22,7 @@ namespace Skill
                 case MoveType.Move_normal:
                     M_SE = new SkillEntity
                     {
-                        REAL_NAME = "Move_normal",
+                        REAL_NAME = "Move",
                         LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
@@ -39,7 +39,7 @@ namespace Skill
                 case MoveType.Move_slow:
                     M_SE = new SkillEntity
                     {
-                        REAL_NAME = "Move_slow",
+                        REAL_NAME = "Move",
                         LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
@@ -56,7 +56,7 @@ namespace Skill
                 case MoveType.Move_fast:
                     M_SE = new SkillEntity()
                     {
-                        REAL_NAME = "Move_fast",
+                        REAL_NAME = "Move",
                         LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
@@ -73,7 +73,7 @@ namespace Skill
                 default:
                     M_SE = new SkillEntity
                     {
-                        REAL_NAME = "Move_normal",
+                        REAL_NAME = "Move",
                         LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,

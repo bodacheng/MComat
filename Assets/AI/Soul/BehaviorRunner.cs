@@ -33,7 +33,6 @@ namespace Soul
         Behavior try_Behavior;
         public Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         
-        public bool scarecrow;
         #endregion
 
         void Awake()
@@ -60,13 +59,11 @@ namespace Soul
             if (IfRunning())
             {
                 BehaviourTransitionEngine();
-                if (!scarecrow)
-                {
-                    #region 决策制定
-                    controller.PlayerControll(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
-                    #endregion
-                }
-                controller.Resetter(this);                
+                
+                #region 决策制定
+                controller.PlayerControll(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
+                #endregion
+                
                 if (now_Behavior != null)
                 {
                     now_Behavior._State_Update();
@@ -131,11 +128,6 @@ namespace Soul
         
         public void ChangeState(string num, V_Damage newvalue)
         {
-            if (GetNowState().StateKey == "Empty")
-            {
-                Debug.Log(this + " special case");
-                return;// 找不到轮番模式下多个角色可能同时在场的原因，怀疑可能是因为待机角色因某种角色“受伤”而从empty状态脱离
-            }
             BehaviourDic.TryGetValue(num, out try_Behavior);
             if (now_Behavior != null)
                 now_Behavior.AI_State_exit();
@@ -165,8 +157,9 @@ namespace Soul
         
         public void ChangeToTestMode()
         {
-            BehaviourDic.TryGetValue("Test_Move", out try_Behavior);
-            commandWaitingState = try_Behavior;
+            BehaviourDic.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
+            Move_State move_State = (Move_State)try_Behavior;
+            move_State._AIMoveStyle = AIMoveMode.test;
             ChangeToWaitingState();          
         }
       

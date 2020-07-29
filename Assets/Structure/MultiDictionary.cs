@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
+using UnityEngine;
 /// <summary>
 /// 复合字典
 /// </summary>
@@ -159,7 +159,7 @@ public class SSIMultiDictionary
             }
         }
 
-        int Minimum = 9;
+        int Minimum = 9999999;
         string minusBigKey;
         List<KeyValuePair<string, List<string>>> allMinusBigKeys = new List<KeyValuePair<string, List<string>>>();
         for (int i = 0; i < temp.Count; i++)

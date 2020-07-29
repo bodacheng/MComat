@@ -12,7 +12,7 @@ public class Move_State : Behavior
 {
     readonly float speed;
     readonly float time_limit;
-    readonly AIMoveMode _AIMoveStyle;
+    public AIMoveMode _AIMoveStyle;
     float time_counter;
     Vector3 use_direction;
     AIMoveDirection moveDirection;
@@ -37,6 +37,11 @@ public class Move_State : Behavior
         this.speed = speed;
 		this.time_limit = time_limit;		
 	}
+    
+    public override bool Capacity_enter_condition()
+    {
+        return true;
+    }
 
     void CommonEnter()
     {

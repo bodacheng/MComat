@@ -153,7 +153,7 @@ namespace FightScene
         {
             foreach (Data_Center oneMember in TeamMembers.values)
             {
-                oneMember._MyBehaviorRunner.scarecrow = false;
+                oneMember.controller.TestMode = false;
                 oneMember._MyBehaviorRunner.ChangeToWaitingState();
             }
         }
@@ -162,7 +162,7 @@ namespace FightScene
         {
             foreach (Data_Center oneMember in TeamMembers.values)
             {
-                oneMember._MyBehaviorRunner.scarecrow = true;
+                oneMember.controller.TestMode = true;
                 oneMember._MyBehaviorRunner.ChangeToTestMode();
             }
         }

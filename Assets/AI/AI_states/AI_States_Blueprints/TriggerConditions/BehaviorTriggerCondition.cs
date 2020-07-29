@@ -5,6 +5,11 @@ namespace Soul
 {
     public abstract partial class Behavior
     {
+        public bool SpareOption()
+        {
+            return true;
+        }
+    
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
             return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;

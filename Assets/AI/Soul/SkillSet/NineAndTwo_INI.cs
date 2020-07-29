@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Skill;
+using System.Linq;
 
 public partial class NineAndTwo
 {
@@ -43,6 +44,7 @@ public partial class NineAndTwo
         PassiveSkillEntitys passiveSkillConfigs = new PassiveSkillEntitys(moveType, canDefend, rushType);
         D = passiveSkillConfigs.D_SE;
         M = passiveSkillConfigs.M_SE;
+        M.CANBECANCELLEDTO = false;
         R = passiveSkillConfigs.R_SE;
         //////////////////////////////////////////////////////////////////////////
         
@@ -174,23 +176,7 @@ public partial class NineAndTwo
         SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
         SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null,0,0);
-        SkillEntity TestMove = 
-            new SkillEntity
-            {
-                REAL_NAME = "Test_Move",
-                LEVEL = 0,
-                StateType = BehaviorType.MV,
-                AT = 0,
-                HP = 0,
-                AI_MIN_DIS = -1,
-                AI_MAX_DIS = -1,
-                CasualTo = {},
-                ForcedTransitions = {},
-                EnterInput = InputKey.Null,
-                ExitInput = InputKey.Null,
-                SP_LEVEL = 0
-            };
-        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null,0,0);
+        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, 0, 0);
         SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, 0, 0);
         
         StateTransitionSetList.Add(getUp);
@@ -198,10 +184,9 @@ public partial class NineAndTwo
         StateTransitionSetList.Add(Empty);
         StateTransitionSetList.Add(Victory);
         StateTransitionSetList.Add(Death);
-        StateTransitionSetList.Add(Hit);
-        StateTransitionSetList.Add(TestMove);
-        
+        StateTransitionSetList.Add(Hit);        
         StateTransitionSetList.Add(M);
+        
         if (D != null && FightGlobalSetting._hasDefend)
         {
             StateTransitionSetList.Add(D);
@@ -250,9 +235,18 @@ public partial class NineAndTwo
         
         foreach (SkillEntity _SE in StateTransitionSetList)
         {
+            if (_SE != M && _SE != KnockOff && _SE != Empty && _SE != Death && _SE != Victory)
+            {
+                List<string> casualToOptoins = _SE.CasualTo.ToList();
+                if (!casualToOptoins.Contains(M.REAL_NAME))
+                {
+                    casualToOptoins.Add(M.REAL_NAME);
+                }
+                _SE.CasualTo = casualToOptoins.ToArray();
+            }
             if (_SE.REAL_NAME != null && !_SEDic.ContainsKey(_SE.REAL_NAME))
             {
-                _SEDic.Add(new KeyValuePair<string, SkillEntity>(_SE.REAL_NAME,_SE));
+                _SEDic.Add(new KeyValuePair<string, SkillEntity>(_SE.REAL_NAME, _SE));
             }
             else
             {

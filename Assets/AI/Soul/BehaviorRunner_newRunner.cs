@@ -27,7 +27,7 @@ namespace Soul
                 Debug.Log("???" + now_Behavior.StateKey);
                 return;
             }
-                       
+            
             #region Forced state transition 
             if (CurrentSKillEntity.ForcedTransitions != null && CurrentSKillEntity.ForcedTransitions.Length > 0)
             {
