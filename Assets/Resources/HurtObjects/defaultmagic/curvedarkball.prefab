@@ -33606,7 +33606,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Z_scale: 1
-  navi_time: 5
+  navi_time: 2
   DegreeOfControl: 8
   navRunSpeed: 10
   Sensor: {fileID: 0}
