@@ -108,7 +108,7 @@ public class MobileInputsManager : MonoBehaviour {
             case 3:
                 targetexplode = _focusingButtonEffectsGroup.triggerExplosion3;
             break;
-            case -1:
+            default:
                 return;
         }
     

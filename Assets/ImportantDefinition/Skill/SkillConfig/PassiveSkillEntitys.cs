@@ -33,7 +33,7 @@ namespace Skill
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
                         ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
+                        SP_LEVEL = -1
                     };
                 break;
                 case MoveType.Move_slow:
@@ -50,7 +50,7 @@ namespace Skill
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
                         ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
+                        SP_LEVEL = -1
                     };
                     break;
                 case MoveType.Move_fast:
@@ -67,7 +67,7 @@ namespace Skill
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
                         ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
+                        SP_LEVEL = -1
                     };
                     break;
                 default:
@@ -84,7 +84,7 @@ namespace Skill
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
                         ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
+                        SP_LEVEL = -1
                     };
                     break;
             }
@@ -103,7 +103,7 @@ namespace Skill
                 ForcedTransitions = null,
                 EnterInput = InputKey.Defend,
                 ExitInput = InputKey.Defend_Cancel,
-                SP_LEVEL = 0
+                SP_LEVEL = -1
             } : null;
             
             switch (RStyle)
@@ -122,7 +122,7 @@ namespace Skill
                         ForcedTransitions = null,
                         EnterInput = InputKey.Acc,
                         ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
+                        SP_LEVEL = -1
                     };
                     break;
                 case RushType.RushBack:
@@ -139,7 +139,7 @@ namespace Skill
                         ForcedTransitions = null,
                         EnterInput = InputKey.Acc,
                         ExitInput = InputKey.Null,
-                        SP_LEVEL = 0
+                        SP_LEVEL = -1
                     };
                     break;
                 case RushType.None:

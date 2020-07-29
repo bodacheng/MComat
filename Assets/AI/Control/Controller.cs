@@ -127,7 +127,7 @@ namespace Soul
             }
             #endregion
         }
-                
+
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
         bool BehaviourExitInputTrigger(SkillEntity current_Behavior_Set)
         {

@@ -12,15 +12,13 @@ public class Behaviors_Incubator
     public Behaviors_Incubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
     {
         Num_State_List = new List<BehaviorIndex_With_Behavior>();
-        StateIndexList = new List<string>();
-
+        
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Empty", empty_State));
         Idle_State victory = new Idle_State("victory");
         Idle_State zhuangbi = new Idle_State("zhuangbi");
         Death_State death = new Death_State();
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Victory", victory));
         Num_State_List.Add(new BehaviorIndex_With_Behavior("zhuangbi", zhuangbi));
-        StateIndexList.Add("zhuangbi");
         Num_State_List.Add(new BehaviorIndex_With_Behavior("Death", death));
         Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
         {
@@ -37,7 +35,6 @@ public class Behaviors_Incubator
                 nextAttackStateCanRushFirst = false
             };
             Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
-            StateIndexList.Add("Defend");
         }
         
         Hurt_State hit = new Hurt_State()
@@ -59,6 +56,7 @@ public class Behaviors_Incubator
         Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
         Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp", getUp));
 
+        StateIndexList = new List<string>();
         SkillTypeKeys = new List<string>();
         foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
         {

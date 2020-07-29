@@ -172,16 +172,23 @@ public partial class NineAndTwo
         IDictionary<string, SkillEntity> _SEDic = new Dictionary<string, SkillEntity>();
         StateTransitionSetList = new List<SkillEntity>();
         
-        SkillEntity Empty = new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
-        SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
-        SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0);
-        SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null,0,0);
-        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, 0, 0);
-        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, 0, 0);
-        
+        SkillEntity Empty = new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        SkillEntity zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1, 0);
+        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
+        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1, 0);
+        if (FightGlobalSetting._hasDefend)
+        {
+            SkillEntity Defend = new SkillEntity("Defend", 0, BehaviorType.Def, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
+            StateTransitionSetList.Add(Defend);
+        }
+
         StateTransitionSetList.Add(getUp);
         StateTransitionSetList.Add(KnockOff);
         StateTransitionSetList.Add(Empty);
+        StateTransitionSetList.Add(zhuangbi);
         StateTransitionSetList.Add(Victory);
         StateTransitionSetList.Add(Death);
         StateTransitionSetList.Add(Hit);        

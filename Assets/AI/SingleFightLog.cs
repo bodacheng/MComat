@@ -78,7 +78,7 @@ namespace Soul
         readonly MultiDictionary<string, string, int> skillnobenefitlog = new MultiDictionary<string, string, int>();
         public void AnalysisLog(MultiDictionary<string, string, int> _ConditionAndRespondPriority)
         {
-            if (MyBehaviourHistory.Count < 5)
+            if (MyBehaviourHistory.Count < 10)
             {
                 return;
             }
@@ -91,12 +91,10 @@ namespace Soul
                     if ((MyBehaviourHistory[i - 2] is BehaviourFightRecord) && (MyBehaviourHistory[i - 1] is BehaviourFightRecord))// 发招两次没有获得正面效益
                     {
                         BehaviourFightRecord behaviourFightRecord = (BehaviourFightRecord)MyBehaviourHistory[i - 2];
-                        if (behaviourFightRecord.whyIDidThis != null)
+                        if (behaviourFightRecord.AI_Decided)
                         {
                             skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey,
-                            skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey) + 1);
-                        }else{
-                            Debug.Log("strange:"+ behaviourFightRecord.stateKey);
+                            skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 2].stateKey, 0) + 1);
                         }
                     }
                 }
@@ -105,12 +103,10 @@ namespace Soul
                     if (MyBehaviourHistory[i - 1] is BehaviourFightRecord)
                     {
                         BehaviourFightRecord behaviourFightRecord = (BehaviourFightRecord)MyBehaviourHistory[i - 1];
-                        if (behaviourFightRecord.whyIDidThis != null)
+                        if (behaviourFightRecord.AI_Decided)
                         {
                             skillnobenefitlog.Set(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey,
-                            skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey) + 1);
-                        }else{
-                            Debug.Log("strange:"+ behaviourFightRecord.stateKey);
+                            skillnobenefitlog.Get(behaviourFightRecord.whyIDidThis, MyBehaviourHistory[i - 1].stateKey, 0) + 1);
                         }
                     }
                 }
@@ -122,8 +118,11 @@ namespace Soul
                 {
                     foreach(KeyValuePair<string, int> KV in keyValuePair.Value)
                     {
-                        _ConditionAndRespondPriority.Set(keyValuePair.Key, KV.Key, _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key) + 1);
-                        //Debug.Log(keyValuePair.Key + ":" +  KV.Key + ":" + _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key));
+                        if (skillnobenefitlog.Get(keyValuePair.Key, KV.Key) > 2) // 10个连续状态记录里某个条件反应大于两次没有正面效应，说明这个因果关系没有好的效益，修改其优先度
+                        {
+                            _ConditionAndRespondPriority.Set(keyValuePair.Key, KV.Key, _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key) + 1);
+                            Debug.Log(keyValuePair.Key + ":" +  KV.Key + ":" + _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key));
+                        }
                     }
                 }
             }
