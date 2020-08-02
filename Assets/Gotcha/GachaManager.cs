@@ -71,7 +71,6 @@ public class GachaManager : MonoBehaviour
     public static IEnumerator Gotcha(string type, int stoneCount)
     {
         List<SkillStoneOfPlayerInfoModel> Geted = new List<SkillStoneOfPlayerInfoModel>();
-        List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         for (int i = 0; i < stoneCount; i++)
         {
             IEnumerator GET = Gocha(type);
@@ -81,6 +80,7 @@ public class GachaManager : MonoBehaviour
         yield return Geted;
     }
     
+    // Gocha对象技能石应该有个更明确的范围，因为开启不同的gocha项目，出的东西还不一样，这应该是比较普遍的。更何况还有个不同获得概率的问题。
     static IEnumerator Gocha(string type)
     {
         List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);

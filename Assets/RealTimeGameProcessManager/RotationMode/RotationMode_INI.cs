@@ -36,6 +36,7 @@ namespace FightScene
                 {
                     Value = 0
                 };
+                a_char._ResistanceManager.OpenResistRender();
                 a_char._ResistanceManager.Resistance.Subscribe(x =>
                 {
                     a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);

@@ -64,7 +64,7 @@ public class Knock_Off_State : Behavior
         _State_FixedUpdate();
     }
     
-    Vector3 effectP;
+    Vector3 effectP, quaV;
     void _State_FixedUpdate()
     {
         if (!touchedBoundary)
@@ -77,7 +77,7 @@ public class Knock_Off_State : Behavior
                 _xz = _xz.normalized;
                 effectP = gameObject.transform.position.normalized * BoundaryControllByGod._BattleRingRadius;
                 effectP.y = gameObject.transform.position.y;
-                Vector3 quaV = Vector3.zero - gameObject.transform.position.normalized;
+                quaV = Vector3.zero - gameObject.transform.position.normalized;
                 quaV.y = 0;
                 EffectsManager.GenerateEffect("wallCrack", null, effectP, Quaternion.LookRotation(quaV, Vector3.up), null);
             }
@@ -85,7 +85,7 @@ public class Knock_Off_State : Behavior
         
         if (!dropped)
         {
-            if (time_counter > 0.1f && _BasicPhysicSupport.hiddenMethods.Grounded)
+            if (time_counter > 0.2f && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 dropped = true;
                 effectP = gameObject.transform.position;

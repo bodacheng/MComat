@@ -31,21 +31,22 @@ public class Move_State : Behavior
         RunAwayFromThreat = 5
     }
     
-    public Move_State(AIMoveMode aiMoveStyle, float speed, float time_limit)
-	{
+    public Move_State(AIMoveMode aiMoveStyle, float _speed, float _time_limit)
+    {
         _AIMoveStyle = aiMoveStyle;
-        this.speed = speed;
-		this.time_limit = time_limit;		
-	}
+        speed = _speed;
+        time_limit = _time_limit;
+    }
     
     public override bool Capacity_enter_condition()
     {
         return true;
     }
-
+    
     void CommonEnter()
     {
         time_counter = 0f;
+        _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Animation_Manger.PlayLayerAnim(null, true, 0.05f);
         pEvents.CloseAllPersonalityEffects();

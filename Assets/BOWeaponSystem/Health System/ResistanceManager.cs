@@ -12,9 +12,16 @@ public class ResistanceManager : MonoBehaviour
 
     Color ResistColor;
     
+    SingleAssignmentDisposable ResistColorChange;
+    
     void Awake()
     {
-        ColorUtility.TryParseHtmlString("70D1FF",out ResistColor);
+        ColorUtility.TryParseHtmlString("70D1FF", out ResistColor);
+        OpenResistRender();
+    }
+    
+    public void OpenResistRender()
+    {
         Resistance.Subscribe(
             x => 
             {
@@ -35,7 +42,7 @@ public class ResistanceManager : MonoBehaviour
             }
         );
     }
-
+    
     public void ResistanceUp(AnimationEvent R)
     {
         Resistance.Value += R.intParameter;                      

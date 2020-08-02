@@ -99,7 +99,6 @@ public class G_Attack_State : Behavior {
         base.AI_State_exit();
         _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
         _Weapon_Animation_Events.ClearMarkerManagers();
-        _Animator.applyRootMotion = false;
         pEvents.CloseAllPersonalityEffects();
         _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);

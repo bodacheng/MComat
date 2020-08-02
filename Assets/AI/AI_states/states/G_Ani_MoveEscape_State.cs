@@ -125,6 +125,5 @@ public class G_Ani_MoveEscape_State : Behavior {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        _Animator.applyRootMotion = false;
     }
 }

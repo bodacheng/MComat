@@ -6,8 +6,8 @@ namespace Soul
 {
     public partial class BehaviorRunner : MonoBehaviour
     {
-        // 这个纯粹为了按钮效果
-        public List<SkillEntity> OptionsForButtonRefresh = new List<SkillEntity>();// 按钮刷新。预告作用
+        // 这个纯粹为了按钮效果 按钮刷新。预告作用
+        public List<SkillEntity> OptionsForButtonRefresh = new List<SkillEntity>();
         List<SkillEntity> CanTranTo = new List<SkillEntity>(); //可以启动的技能的列表
         List<string> ForcedTransitions = new List<string>();
         
@@ -22,14 +22,8 @@ namespace Soul
                 SkillEntityDic.TryGetValue(now_Behavior.StateKey, out CurrentSKillEntity);
             }
             
-            if (CurrentSKillEntity == null)
-            {
-                Debug.Log("???" + now_Behavior.StateKey);
-                return;
-            }
-            
             #region Forced state transition 
-            if (CurrentSKillEntity.ForcedTransitions != null && CurrentSKillEntity.ForcedTransitions.Length > 0)
+            if (CurrentSKillEntity.ForcedTransitions.Length > 0)
             {
                 foreach (string num in CurrentSKillEntity.ForcedTransitions)
                 {
@@ -119,7 +113,7 @@ namespace Soul
                     max = CanTranTo[index].AI_MAX_DIS;
             }
         }
-
+        
         public float FixedSkillTriggerDis()
         {
             return (min + max) / 2;

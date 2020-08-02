@@ -707,6 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7534015840190737141}
   - component: {fileID: 6065141341421888466}
+  - component: {fileID: 7944117858369668075}
   m_Layer: 0
   m_Name: pasted__polySurface678_group
   m_TagString: Untagged
@@ -759,7 +760,7 @@ SkinnedMeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -907,6 +908,23 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.024513096, y: -0.08701706, z: -0.000000014901161}
     m_Extent: {x: 0.92478406, y: 0.3385045, z: 0.40931106}
   m_DirtyAABB: 0
+--- !u!114 &7944117858369668075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980356493055300818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_version: 1.2.1
+  m_layers: []
+  m_hideRenderer: 0
+  m_hideEditorSelection: 0
+  m_spriteRenderer: {fileID: 0}
 --- !u!1 &991845761341625020
 GameObject:
   m_ObjectHideFlags: 0
@@ -31115,7 +31133,6 @@ MonoBehaviour:
     SP_LEVEL: 0
     RARITY_LEVEL: 0
     ForcedTransitions: []
-  scarecrow: 0
   AllConditionCodes: []
   AI_States_path: 
   usingScript: {fileID: 0}
@@ -31186,7 +31203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pOFXes: []
+  pOFXes:
+  - {fileID: 7944117858369668075}
 --- !u!114 &8839058533215737761
 MonoBehaviour:
   m_ObjectHideFlags: 0

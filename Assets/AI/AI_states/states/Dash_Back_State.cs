@@ -68,7 +68,6 @@ public class Dash_Back_State : Behavior
     
     public override void AI_State_exit()
     {
-        _Animator.applyRootMotion = false;
         base.AI_State_exit();
     }
 }
