@@ -21,16 +21,16 @@ namespace Soul
             {
                 SkillEntityDic.TryGetValue(now_Behavior.StateKey, out CurrentSKillEntity);
             }
-            
+                        
             #region Forced state transition 
-            if (CurrentSKillEntity.ForcedTransitions.Length > 0)
+            if (CurrentSKillEntity.ForcedTransitions != null)
             {
-                foreach (string num in CurrentSKillEntity.ForcedTransitions)
+                for (int i = 0; i < CurrentSKillEntity.ForcedTransitions.Length; i++)
                 {
-                    BehaviourDic.TryGetValue(num, out try_Behavior);
+                    BehaviourDic.TryGetValue(CurrentSKillEntity.ForcedTransitions[i], out try_Behavior);
                     if (try_Behavior.Force_enter_condition())
                     {
-                        ForcedTransitions.Add(num);
+                        ForcedTransitions.Add(CurrentSKillEntity.ForcedTransitions[i]);
                     }
                 }
             }

@@ -44,7 +44,7 @@ public static class AIScriptReading {
             _AIStateRunner.usingScript = Script;
             if (list == null)
             {
-                list = new List<SkillEntity>() {new SkillEntity("Empty",0,0,0,0,0,0,null ,null,InputKey.Null, InputKey.Null,0,0)};
+                list = new List<SkillEntity>() {new SkillEntity("Empty",0,0,0,0,0,0, null ,null,InputKey.Null, InputKey.Null,0,0)};
             }else{
                 if (list.Count == 0)
                 {
