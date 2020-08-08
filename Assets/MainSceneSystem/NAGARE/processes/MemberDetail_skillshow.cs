@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using mainMenu;
-using dataAccess;
 using Api.Dto.Model;
 
 public class MemberDetail_skillshow : MainSceneProcess
@@ -14,8 +13,20 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target._focusing);
-        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( characterDataInfo);
+        CharDataInfo _CharDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target._focusing);
+        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( _CharDataInfo);
+        // 表现系
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
+        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        (
+            SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.NormalTab.gameObject,5f),
+            SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX1Tab.gameObject,5f),
+            SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX2Tab.gameObject,5f),
+            SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera,SkillStonesBox.target.EX3Tab.gameObject,5f), 
+            _CharConfig._zokusei
+        );
+        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);

@@ -46,7 +46,7 @@ namespace mainMenu
                 _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
         }
         
-        public void SwitchZokuseiButtons(Vector3 normaltagpos,Vector3 ex1tagpos,Vector3 ex2tagpos,Vector3 ex3tagpos, Zokusei zokusei)
+        public void SwitchZokuseiButtons(Vector3 normaltagpos, Vector3 ex1tagpos, Vector3 ex2tagpos, Vector3 ex3tagpos, Zokusei zokusei)
         {
             if (_focusingButtonEffectsGroup != null)
             {

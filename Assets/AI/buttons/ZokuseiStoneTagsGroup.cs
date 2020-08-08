@@ -64,7 +64,7 @@ public class ZokuseiStoneTagsGroup
     public void LoadPressedEffect(Zokusei zokusei)
     {
         string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
-    
+        
         GameObject triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
         GameObject triggerExplosionPretab1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
         GameObject triggerExplosionPretab2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
@@ -74,7 +74,7 @@ public class ZokuseiStoneTagsGroup
         ParticleSystem triggerExplosion1 = Object.Instantiate(triggerExplosionPretab1).GetComponent<ParticleSystem>();
         ParticleSystem triggerExplosion2 = Object.Instantiate(triggerExplosionPretab2).GetComponent<ParticleSystem>();
         ParticleSystem triggerExplosion3 = Object.Instantiate(triggerExplosionPretab3).GetComponent<ParticleSystem>();
-
+        
         buttonPressedEffects.Add(0,triggerExplosion0);
         buttonPressedEffects.Add(1,triggerExplosion1);
         buttonPressedEffects.Add(2,triggerExplosion2);

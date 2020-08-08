@@ -574,6 +574,9 @@
     <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
     <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
     <Compile Include="Assets\UI\ReturnButtonManager.cs" />
+    <Compile Include="Assets\UI\SciFic Icons\Scripts\IconScript.cs" />
+    <Compile Include="Assets\UI\SciFic Icons\Scripts\ImageFadeIn.cs" />
+    <Compile Include="Assets\UI\SciFic Icons\Scripts\RotationAnimation.cs" />
     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\ChapterButton.cs" />
     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\FavoriteButton.cs" />
     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\MainButton.cs" />
