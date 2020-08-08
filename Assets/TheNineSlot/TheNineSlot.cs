@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
+using Michsky.UI.Shift;
 
 namespace mainMenu
 {
@@ -57,6 +58,10 @@ namespace mainMenu
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;
+
+        [Space(5)]
+        [Header("UIManager 就是有个UI插件自带的一套东西")]
+        public UIManager uIManager;// 实时控制确认按钮颜色
         
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
@@ -238,6 +243,15 @@ namespace mainMenu
             ShowNineSlotExSurplus(wholePoint);
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
+            
+            SkillEditError valR = target.CheckEditBasedOnCurrent();
+            if (valR != SkillEditError.Perfect)
+            {
+                // confirm 按钮颜色变化
+                uIManager.primaryColor = new Color(1,0,0,1);
+            }else{
+                uIManager.primaryColor = new Color(0,1,0,1);
+            }
         }
         
          void RefreshNineSlotColors()
