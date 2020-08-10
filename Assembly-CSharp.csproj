@@ -526,6 +526,7 @@
     <Compile Include="Assets\Structure\ExtraProcesser.cs" />
     <Compile Include="Assets\Structure\MultiDictionary.cs" />
     <Compile Include="Assets\Structure\RandomSelect.cs" />
+    <Compile Include="Assets\Structure\ScreenPositionCal.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
     <Compile Include="Assets\TheBlur\Blur.cs" />
@@ -565,6 +566,7 @@
     <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA2Try.cs" />
     <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA3Try.cs" />
     <Compile Include="Assets\UI\BackGroundPS.cs" />
+    <Compile Include="Assets\UI\ExBarBurn.cs" />
     <Compile Include="Assets\UI\ImageGliter.cs" />
     <Compile Include="Assets\UI\LoadingCanvas.cs" />
     <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />

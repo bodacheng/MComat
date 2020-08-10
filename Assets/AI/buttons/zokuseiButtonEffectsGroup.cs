@@ -49,7 +49,7 @@ public class zokuseiButtonEffectsGroup
             defendbutton.Stop(true);
     }
         
-    public void Open(Vector3 defendbuttonpos,Vector3 rushbuttonpos)
+    public void Open(Vector3 defendbuttonpos, Vector3 rushbuttonpos)
     {
         foreach(KeyValuePair<Button, IDictionary<int, ParticleSystem>> keyValuePair in buttonEffectsSets)
         {

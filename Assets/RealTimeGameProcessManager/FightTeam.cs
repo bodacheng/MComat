@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
@@ -94,21 +93,18 @@ namespace FightScene
         protected void RefreshResistanceBar(Data_Center data_Center)
         {
             CharIconDic.TryGetValue(data_Center, out SideCharIcon);
-            DOTween.To(() => SideCharIcon.ResistBar.value, (x) => SideCharIcon.ResistBar.value = x, data_Center._ResistanceManager.Resistance.Value / 10f, 0.2f);
-            SideCharIcon.ResistBarFillImage.color = data_Center._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
+            SideCharIcon.RefreshResistanceBar();
         }
         
-        SideCharIcon SideCharIcon2;
         protected void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
-            CharIconDic.TryGetValue(data_Center, out SideCharIcon2);
-            SideCharIcon2.HpText.text = current_hp.ToString();
-            DOTween.To(() => SideCharIcon2.HpBar.value, (x) => SideCharIcon2.HpBar.value = x, current_hp / wholeHP, 0.2f);
+            CharIconDic.TryGetValue(data_Center, out SideCharIcon);
+            SideCharIcon.RefreshHpBar(current_hp, wholeHP);
         }
         protected void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
         {
-            CharIconDic.TryGetValue(data_Center, out SideCharIcon2);
-            SideCharIcon2.RefreshExBar(current_ex, wholeex);
+            CharIconDic.TryGetValue(data_Center, out SideCharIcon);
+            SideCharIcon.RefreshExBar(current_ex, wholeex);
         }
 
         //这个刷新是倾向于画面制御

@@ -31,6 +31,18 @@ public class SideCharIcon : MonoBehaviour {
     
     float maxHp;
     
+    public void RefreshResistanceBar()
+    {
+        DOTween.To(() => ResistBar.value, (x) => ResistBar.value = x, _charDataCenter._ResistanceManager.Resistance.Value / 10f, 0.2f);
+        ResistBarFillImage.color = _charDataCenter._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
+    }
+    
+    public void RefreshHpBar(float current_hp, float whole_hp)
+    {
+        HpText.text = Mathf.Ceil(current_hp).ToString();
+        DOTween.To(() => HpBar.value, (x) => HpBar.value = x, current_hp / whole_hp, 0.2f);
+    }
+    
     public void RefreshExBar(int current_ex, int wholeex)
     {
         if (current_ex > 0 && !ExBar.fillRect.gameObject.activeSelf)

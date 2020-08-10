@@ -74,7 +74,7 @@ namespace mainMenu
         // Button feature
         public void NormalTabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
             focusingExType = 0;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -82,7 +82,7 @@ namespace mainMenu
         // Button feature
         public void EX1TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
             focusingExType = 1;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -90,7 +90,7 @@ namespace mainMenu
         // Button feature
         public void EX2TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
             focusingExType = 2;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -98,7 +98,7 @@ namespace mainMenu
         // Button feature
         public void EX3TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ButtonEffectInFxCameraWorldSpace(fxCamera,self, 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
             focusingExType = 3;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -141,28 +141,6 @@ namespace mainMenu
         {
             string targetType = types.options[types.value].text.Clone() as string;
             TheNineSlot.target.mainProcessRunner.Run(EXTabsFeatureRefresh(true));
-        }
-        
-        Vector2 buttonAnchorPosition;
-        Vector2 true_buttonAnchorPosition;
-        Vector3 buttonWorldPosition;
-        readonly int worldSpaceConvertMode = 1;// 1: canvas screen space 2: UI元素在左下角？忘了
-        public Vector3 ButtonEffectInFxCameraWorldSpace(Camera fxcamera, GameObject UI_thing, float z_offset)
-        {
-            switch (worldSpaceConvertMode)
-            {
-                case 1:
-                    buttonWorldPosition = UI_thing.transform.position;
-                    buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, buttonWorldPosition.z + z_offset);
-                break;
-                case 2:
-                    buttonAnchorPosition = UI_thing.GetComponent<RectTransform>().transform.position;
-                    true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
-                    buttonWorldPosition = fxcamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-                    buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, fxcamera.transform.position.z + z_offset);
-                break;
-            }
-            return buttonWorldPosition;
         }
     }
 }

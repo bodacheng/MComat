@@ -72,7 +72,10 @@ public class MobileInputsManager : MonoBehaviour {
         if (zokuseiButtonEffects.ContainsKey(zokusei))
         {
             _focusingButtonEffectsGroup = zokuseiButtonEffects[zokusei];
-            _focusingButtonEffectsGroup.Open(ButtonEffectInFxCameraWorldSpace(Defend,5), ButtonEffectInFxCameraWorldSpace(Dash,5));
+            _focusingButtonEffectsGroup.Open(
+                ScreenPositionCal.Cal(2, target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
+                ScreenPositionCal.Cal(2, target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
+            );
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
         }
@@ -115,13 +118,13 @@ public class MobileInputsManager : MonoBehaviour {
         switch (inputs_Defined)
         {
             case InputKey.Attack1:
-                targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(target.Attack,3);
+                targetexplode.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, target.Attack.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(target.Fire1,3);
+                targetexplode.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, target.Fire1.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                targetexplode.transform.position = ButtonEffectInFxCameraWorldSpace(target.Fire2,3);
+                targetexplode.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, target.Fire2.GetComponent<RectTransform>(), 3);
                 break;
         }
         targetexplode.Play();
@@ -129,7 +132,7 @@ public class MobileInputsManager : MonoBehaviour {
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
         foreach (KeyValuePair<Button, ParticleSystem> keyValue in _focusingButtonEffectsGroup.buttonRefreshEffects)
         {
-            keyValue.Value.transform.position = ButtonEffectInFxCameraWorldSpace(keyValue.Key,4);
+            keyValue.Value.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
         }
     }
@@ -140,7 +143,7 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBUtton)
     {
-        targetButtonPos = ButtonEffectInFxCameraWorldSpace(targetBUtton, 7);
+        targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, targetBUtton.GetComponent<RectTransform>(), 7);
         if (_focusingButtonEffectsGroup != null)
         {
             _focusingButtonEffectsGroup.pressingExplosion.transform.position = targetButtonPos;
@@ -339,29 +342,11 @@ public class MobileInputsManager : MonoBehaviour {
             _focusingButtonEffectsGroup.Close();
         }
     }
-
-    static Vector2 buttonAnchorPosition;
-    static Vector2 true_buttonAnchorPosition;
-    static Vector3 buttonWorldPosition;
-    static Vector3 ButtonEffectInFxCameraWorldSpace(Button button, float z_offset)//这个函数是以攻击钮与防御，闪避钮在右下角为前提写的。
-    {
-        //buttonAnchorPosition = button.GetComponent<RectTransform>().anchoredPosition;
-        //true_buttonAnchorPosition = new Vector2(Screen.width + buttonAnchorPosition.x,buttonAnchorPosition.y);
-        //buttonWorldPosition = s_fxCamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-        //buttonWorldPosition = new Vector3(buttonWorldPosition.x,buttonWorldPosition.y,s_fxCamera.transform.position.z + z_offset);
-        //return buttonWorldPosition;
         
-        buttonAnchorPosition = button.GetComponent<RectTransform>().transform.position;
-        true_buttonAnchorPosition = new Vector2(buttonAnchorPosition.x, buttonAnchorPosition.y);
-        buttonWorldPosition = target.fxCamera.ScreenToWorldPoint(true_buttonAnchorPosition);
-        buttonWorldPosition = new Vector3(buttonWorldPosition.x, buttonWorldPosition.y, target.fxCamera.transform.position.z + z_offset);
-        return buttonWorldPosition;
-    }
-    
     Vector3 targetButtonPos;
     void ChangeButtonPatternNewTest(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
-        targetButtonPos = ButtonEffectInFxCameraWorldSpace(button, 5);
+        targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, button.GetComponent<RectTransform>(), 5);
         _focusingButtonEffectsGroup.Refreshforbutton(button, sp_level, targetButtonPos);
     }
 

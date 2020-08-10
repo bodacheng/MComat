@@ -174,7 +174,7 @@ namespace mainMenu
             {
                 _t.gameObject.layer = 5;
             }
-            t.transform.position = SkillStonesBox.target.ButtonEffectInFxCameraWorldSpace(SkillStonesBox.target.fxCamera, button, 5f);
+            t.transform.position = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, button.GetComponent<RectTransform>(), 5f);
             renderPs.Add(t);
         }
         // 离开技能展示画面的时候必须要清除掉不要的特效
