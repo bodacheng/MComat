@@ -565,6 +565,7 @@
     <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA2Try.cs" />
     <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA3Try.cs" />
     <Compile Include="Assets\UI\BackGroundPS.cs" />
+    <Compile Include="Assets\UI\ImageGliter.cs" />
     <Compile Include="Assets\UI\LoadingCanvas.cs" />
     <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />
     <Compile Include="Assets\UI\Oldscripts\FloatOnHead.cs" />

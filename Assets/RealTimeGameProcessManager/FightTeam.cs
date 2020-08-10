@@ -105,10 +105,10 @@ namespace FightScene
             SideCharIcon2.HpText.text = current_hp.ToString();
             DOTween.To(() => SideCharIcon2.HpBar.value, (x) => SideCharIcon2.HpBar.value = x, current_hp / wholeHP, 0.2f);
         }
-        protected void RefreshExBar(Data_Center data_Center, float current_ex, float wholeex)
+        protected void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
         {
             CharIconDic.TryGetValue(data_Center, out SideCharIcon2);
-            DOTween.To(() => SideCharIcon2.ExBar.value, (x) => SideCharIcon2.ExBar.value = x, current_ex / wholeex, 0.2f);
+            SideCharIcon2.RefreshExBar(current_ex, wholeex);
         }
 
         //这个刷新是倾向于画面制御
@@ -124,6 +124,7 @@ namespace FightScene
                     SideCharIcon3.transform.SetParent(sideIconsContainer.transform);
                     SideCharIcon3.focusingCharIcon.gameObject.SetActive(true);
                     SideCharIcon3.ExBar.gameObject.SetActive(true);
+                    SideCharIcon3.ExBar.transform.SetSiblingIndex(4);
                     SideCharIcon3.RecallBars();
                 }
                 else

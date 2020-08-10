@@ -12,8 +12,12 @@ public class FightGlobalSetting : MonoBehaviour
 
     public float AT_coefficient = 1;
     public float HP_coefficient = 1;
-    public float GetExAfterDamageBy = 10f;
-    public float ExGetAfterDamage = 10f;
+    public int NormalSkillExGet = 20;
+    public int Sp1SkillExGet = 15;
+    public int Sp2SkillExGet = 10;
+    public int Sp3SkillExGet = 5;
+    public float GetExAfterDamageBy = 10f;// 每受到GetExAfterDamageBy的伤害，获得ExGetAfterDamage的EX槽。用以平衡弱势
+    public int ExGetAfterDamage = 10;
     public float lighthit_lastingtime = 0.4f, heavyhit_lastingtime = 0.6f, superhit_lastingtime = 1f, highhit_lastingTime = 0.8f;
     public float normalattackpositionfixingtime = 0.1f;
     public float knockoffextent = 20f;
@@ -31,8 +35,12 @@ public class FightGlobalSetting : MonoBehaviour
     public static bool _hasDefend;
     public static float _AT_coefficient = 1;
     public static float _HP_coefficient = 1;
+    public static int _NormalSkillExGet;
+    public static int _Sp1SkillExGet;
+    public static int _Sp2SkillExGet;
+    public static int _Sp3SkillExGet;
     public static float _GetExAfterDamageBy;
-    public static float _ExGetAfterDamage;
+    public static int _ExGetAfterDamage;
     public static float _lighthit_lastingtime, _heavyhit_lastingtime, _superhit_lastingtime;
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
@@ -95,6 +103,11 @@ public class FightGlobalSetting : MonoBehaviour
         
         _AT_coefficient = AT_coefficient;
         _HP_coefficient = HP_coefficient;
+        
+        _NormalSkillExGet = NormalSkillExGet;
+        _Sp1SkillExGet = Sp1SkillExGet;
+        _Sp2SkillExGet = Sp2SkillExGet;
+        _Sp3SkillExGet = Sp3SkillExGet;
 
         _GetExAfterDamageBy = GetExAfterDamageBy;
         _ExGetAfterDamage = ExGetAfterDamage;

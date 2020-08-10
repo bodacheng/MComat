@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SideCharIcon : MonoBehaviour {
 
@@ -22,9 +23,42 @@ public class SideCharIcon : MonoBehaviour {
     [Space(6)]
     public Slider ExBar;
     
+    [Header("必杀技点")]
+    [Space(6)]
+    public GameObject[] charges;
+    
     public HeroIcon focusingCharIcon;
     
     float maxHp;
+    
+    public void RefreshExBar(int current_ex, int wholeex)
+    {
+        if (current_ex > 0 && !ExBar.fillRect.gameObject.activeSelf)
+        {
+            ExBar.fillRect.gameObject.SetActive(true);
+        }
+        DOTween.To(() => ExBar.value, (x) => ExBar.value = x, (float)current_ex / wholeex, 0.1f).OnComplete(() => { if (System.Math.Abs(ExBar.value) < 0.1) ExBar.fillRect.gameObject.SetActive(false); });
+        if (current_ex >= 90)
+        {
+            charges[2].SetActive(true);
+        }else{
+            charges[2].SetActive(false);
+        }
+        
+        if (current_ex >= 60)
+        {
+            charges[1].SetActive(true);
+        }else{
+            charges[1].SetActive(false);
+        }
+        
+        if (current_ex >= 30)
+        {
+            charges[0].SetActive(true);
+        }else{
+            charges[0].SetActive(false);
+        }
+    }
     
     public void INIHPShow(Data_Center watching, float MaxHp)
     {

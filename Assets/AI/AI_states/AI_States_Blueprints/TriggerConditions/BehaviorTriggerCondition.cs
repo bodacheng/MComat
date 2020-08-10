@@ -27,7 +27,7 @@ namespace Soul
         
         public bool CounterComingEnergy()
         {
-            Collider nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0,5);
+            Collider nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0, 5);
             Collider threat = Sensor.GetSuddenThreatInRange(5, 15);
             return nearestEnemyMeat == null && (threat != null);
         }

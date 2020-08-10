@@ -61,7 +61,7 @@ public class BoundaryControllByGod : MonoBehaviour {
         {
             sh.radius = x;
         }
-        DOTween.To(() => BattleRingRadius, x => BattleRingRadius = x, targetradius, 1).OnUpdate(() => changeRadius(BattleRingRadius));        
+        DOTween.To(() => BattleRingRadius, x => BattleRingRadius = x, targetradius, 1).OnUpdate(() => changeRadius(BattleRingRadius));
     }
 }
 

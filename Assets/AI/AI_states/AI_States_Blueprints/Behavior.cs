@@ -37,7 +37,7 @@ namespace Soul
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
         protected bool AbsorbEnergyFinished;
 
-        float temp;
+        int temp;
         public void EnergyAbsorb(LocalFight.CriticalGaugeMode gaugeMode)
         {
             if (!AbsorbEnergyFinished)
@@ -45,16 +45,16 @@ namespace Soul
                 switch(splevel)
                 {
                     case 0:
-                        temp = 15;
+                        temp = FightGlobalSetting._NormalSkillExGet;
                     break;
                     case 1:
-                        temp = 10;
+                        temp = FightGlobalSetting._Sp1SkillExGet;
                     break;
                     case 2:
-                        temp = 10;
+                        temp = FightGlobalSetting._Sp2SkillExGet;
                     break;
                     case 3:
-                        temp = 10;
+                        temp = FightGlobalSetting._Sp3SkillExGet;
                     break;
                 }
                 

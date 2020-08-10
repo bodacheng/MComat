@@ -1548,7 +1548,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1732,6 +1732,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   AT_coefficient: 1
   HP_coefficient: 0.5
+  NormalSkillExGet: 20
+  Sp1SkillExGet: 15
+  Sp2SkillExGet: 10
+  Sp3SkillExGet: 5
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
   lighthit_lastingtime: 0.4
