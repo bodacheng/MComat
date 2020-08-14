@@ -6,7 +6,7 @@ public class StartUpScenePresentation : MonoBehaviour
 {
     [Space(7)]
     [Header("选择模式T")]
-    public Button StartNewLocalMode,LocalMode,localDataDelete,NetMode;
+    public Button StartNewLocalMode, LocalMode, localDataDelete, NetMode;
     
     [Space(7)]
     [Header("ResourceLordSceneStarter")]

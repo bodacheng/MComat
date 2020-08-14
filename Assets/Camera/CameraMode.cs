@@ -47,6 +47,7 @@ public enum C_Mode
     NULL = -1,
     RoundBoundary = 0,
     StartAndEnd = 1,
+    ScreenSaver = 3,
     CertainYAntiVibration = 12,
     WatchOver = 8,
     TopDown = 2,

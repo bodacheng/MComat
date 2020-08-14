@@ -39,7 +39,7 @@ public class MobileInputsManager : MonoBehaviour {
     {
         target = this;
     }
-
+    
     public static void SetPlayerMode(bool result)
     {
         playerMode = result;
@@ -57,7 +57,7 @@ public class MobileInputsManager : MonoBehaviour {
             TurnOffButtons();
         }
     }
-
+    
     public void Clear()
     {
         zokuseiButtonEffects.Clear();
@@ -229,11 +229,6 @@ public class MobileInputsManager : MonoBehaviour {
         Options_lastframe[InputKey.Attack3] = null;
         ButtonsFeatureLoad(behaviorRunner.GetNextSkills());
     }
-
-    void Update()
-    {
-        CheckIfPlayerIsInputting();
-    }
     
     public static bool defendButtonHover;
     public bool DefendExitTrigger()
@@ -341,6 +336,11 @@ public class MobileInputsManager : MonoBehaviour {
         {
             _focusingButtonEffectsGroup.Close();
         }
+    }
+    
+    void Update()
+    {
+        CheckIfPlayerIsInputting();
     }
         
     Vector3 targetButtonPos;

@@ -89,14 +89,22 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
+        
+        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+        stage._fightEventType = FightEventType.Screensaver;
+        FightLoad.Go(stage);
         yield break;
     }
     
     public IEnumerator _BeginLocalTestMode()
     {
         AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
+        
+        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+        stage._fightEventType = FightEventType.Screensaver;
+        FightLoad.Go(stage);
         yield break;
     }
         

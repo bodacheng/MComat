@@ -14,7 +14,7 @@ namespace FightScene
     {
         [Space(11)]
         [Header("Canvas")]
-        public Canvas PreparingCanvas, FightCanvas;
+        public Canvas PreparingCanvas, FightCanvas , ScreensaverCanvas;
         
         #region before fight
         [Space(11)]
@@ -85,15 +85,32 @@ namespace FightScene
             CountDownProcess countDownProcess = new CountDownProcess(this);
             StoryProcess storyProcess = new StoryProcess(this);
             FightOverProcess fightOverProcess = new FightOverProcess(this);
-            
             BasicTryProcess basicTryProcess = new BasicTryProcess(this);
             
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
-            FSceneProcessesRunner.Main.AddNewProcess(SceneStep.BasicTryTutorial, basicTryProcess);
+            switch(FightSceneNote.nextBattle._fightEventType)
+            {
+                case FightEventType.SkillTest:
+                case FightEventType.Self:
+                case FightEventType.Arena:
+                case FightEventType.Test:
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
+                    break;
+                case FightEventType.Quest:
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
+                    break;
+                case FightEventType.Screensaver:
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
+                    break;
+            }
+            FSceneProcessesRunner.Main.ArrangeProcessOrder();           
             
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             HurtObjectManager.ConstructDPool();
@@ -129,7 +146,10 @@ namespace FightScene
                     RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values[0], false);
                     break;
             }
-            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+            if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
+                RealTimeGameProcessManager.target.ScreenSaverC(RealTimeGameProcessManager.playerTeam);
+            else
+                RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         }
         
         public void SkillLog(List<Data_Center> player1, List<Data_Center> player2)

@@ -229,6 +229,7 @@
     <Compile Include="Assets\Camera\Modes\GodPlayerCertainY.cs" />
     <Compile Include="Assets\Camera\Modes\GodplayerCamera.cs" />
     <Compile Include="Assets\Camera\Modes\LerpToCertainDistance.cs" />
+    <Compile Include="Assets\Camera\Modes\ScreenSaverC.cs" />
     <Compile Include="Assets\Camera\Modes\StartToEndMode.cs" />
     <Compile Include="Assets\Camera\Modes\TeamEditCamera.cs" />
     <Compile Include="Assets\Camera\Modes\TopDownWatchCamera.cs" />
@@ -312,6 +313,7 @@
     <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
+    <Compile Include="Assets\FightLoad\FightLoad.cs" />
     <Compile Include="Assets\FightLogger\FightLogger.cs" />
     <Compile Include="Assets\FightOverControl\FightOverControl.cs" />
     <Compile Include="Assets\FightSceneSystem\FSceneProcess.cs" />

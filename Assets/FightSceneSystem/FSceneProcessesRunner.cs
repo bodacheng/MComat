@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace FightScene
 {
@@ -46,6 +47,17 @@ namespace FightScene
                 SceneProcessDictionary.Add(step, _process);
             else
                 SceneProcessDictionary[step] = _process;
+        }
+        
+        public void ArrangeProcessOrder()
+        {
+            for (int i = 0; i < SceneProcessDictionary.Count; i++)
+            {
+                if (SceneProcessDictionary.Count > i+1)
+                {
+                    SceneProcessDictionary.ElementAt(i).Value.nextProcessStep = SceneProcessDictionary.ElementAt(i + 1).Key;
+                }
+            }
         }
         
         public FSceneProcess GetProcess(SceneStep step)

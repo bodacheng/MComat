@@ -1,5 +1,4 @@
 ﻿using mainMenu;
-using System.Collections.Generic;
 
 namespace FightScene
 {
@@ -12,14 +11,12 @@ namespace FightScene
         public FightLogger fightLogger;
         public SingleThreadProcesser mainProcessRunner;
         
-        
-        
         public void EelementsInherit(NetFightScene _NetFightScene)
         {
-            this.FightScene = _NetFightScene;
-            this.mainProcessRunner = _NetFightScene.mainProcessRunner;
-            this.mobileInputsManager = RealTimeGameProcessManager.target._mobileInputsManager;
-            this.fightLogger = FightScene.fightLogger;
+            FightScene = _NetFightScene;
+            mainProcessRunner = _NetFightScene.mainProcessRunner;
+            mobileInputsManager = RealTimeGameProcessManager.target._mobileInputsManager;
+            fightLogger = FightScene.fightLogger;
         }
     }
     

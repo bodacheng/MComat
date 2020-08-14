@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using dataAccess;
 
 namespace mainMenu
@@ -214,31 +213,23 @@ namespace mainMenu
         
         public void AskIfLoadFight(StageScriptableObject stage)
         {
-            LoadingCanvas.target.ArrangeConfirmWindow(delegate {
+            LoadingCanvas.target.ArrangeConfirmWindow(
+                delegate {
                 CharsManager.target.PreventTheseMyModelsFromDestroying(stage.GetTeam1EnterRingLocalIds(stage.localFight));
-                LoadFight(stage); 
+                FightLoad.Go(stage); 
                 }, "开打？");
-        }
-        
-        public void LoadFight(StageScriptableObject stage)
-        {
-            FightSceneNote.nextBattle = stage;
-            SkillStonesBox.PreventCellsFromDestroy();
-            MySkillStonesReader.PreventStonesFromDestroy();
-            ArcadeManager.PreventStageButtonsFromDestroy();
-            SceneManager.LoadScene(2);
         }
         
         public void BeginSkillTest_Rotatiom()
         {
             StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
-            LoadFight(stage);
+            FightLoad.Go(stage);
         }
         
         public void BeginSkillTest_Multi()
         {
             StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.multiraid);
-            LoadFight(stage);
+            FightLoad.Go(stage);
         }
 
         [EnumAction(typeof(MainSceneStep))]

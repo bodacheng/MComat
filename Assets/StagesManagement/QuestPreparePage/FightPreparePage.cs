@@ -62,7 +62,7 @@ namespace mainMenu
                     LoadingCanvas.target.ArrangeWarnWindow("队伍人员不够。");
                     return;
                 }
-                PreScene.target.LoadFight(ToBeLoad);
+                FightLoad.Go(ToBeLoad);
             }
             EnterQuest.onClick.RemoveAllListeners();
             EnterQuest.onClick.AddListener(Go);

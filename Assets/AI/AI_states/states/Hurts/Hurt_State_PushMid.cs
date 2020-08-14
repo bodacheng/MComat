@@ -12,7 +12,7 @@ public partial class Hurt_State : Behavior
         Vector3 MidDistanceFromMe = newValue.attacker._Center.geometryCenter.transform.position + newValue.attacker._Center.WholeT.transform.forward * dis;
         if (Grounded)
         {
-            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(), true, 0.05f);
+            PlayHurtAnim(newValue);
             MidDistanceFromMe.y = 0;
         }
         else

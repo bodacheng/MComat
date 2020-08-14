@@ -179,17 +179,54 @@ public partial class Animation_Manger : MonoBehaviour{
         }
         
         ///////////////////////////////////
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts"))
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/back"))
         {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts",new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts", typeof(AnimationClip)).ToList();
+            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/back", new List<AnimationClip>());
+            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/back", typeof(AnimationClip)).ToList();
             foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
             {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts"].Add(_object as AnimationClip);
+                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/back"].Add(_object as AnimationClip);
             }
-            Debug.Log("基础受伤动画包"+animPath + "/basic_hurts" + "已经加入公共字典");
-        }else{
-            //认为已经存在了相应系列的动画包
+        }
+        
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/high"))
+        {
+            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/high", new List<AnimationClip>());
+            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/high", typeof(AnimationClip)).ToList();
+            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+            {
+                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/high"].Add(_object as AnimationClip);
+            }
+        }
+        
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/lay"))
+        {
+            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/lay", new List<AnimationClip>());
+            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/lay", typeof(AnimationClip)).ToList();
+            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+            {
+                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/lay"].Add(_object as AnimationClip);
+            }
+        }
+        
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/low"))
+        {
+            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/low", new List<AnimationClip>());
+            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/low", typeof(AnimationClip)).ToList();
+            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+            {
+                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/low"].Add(_object as AnimationClip);
+            }
+        }
+        
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/press"))
+        {
+            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/press", new List<AnimationClip>());
+            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/press", typeof(AnimationClip)).ToList();
+            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+            {
+                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/press"].Add(_object as AnimationClip);
+            }
         }
 
         if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_knockoffs"))

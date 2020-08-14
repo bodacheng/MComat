@@ -161,7 +161,7 @@ public class AnimationResourceLoader
         }
     }
     
-    public IEnumerator LoadAnimationPackFromStreamingAssets(string type,string packABName)
+    public IEnumerator LoadAnimationPackFromStreamingAssets(string type, string packABName)
     {
         string packkey;
         packkey = type + "/"+ packABName;//这种时候additionalPath兼具动画包的名字

@@ -9,13 +9,14 @@ public class CameraManager : MonoBehaviour
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
-        {C_Mode.CertainYAntiVibration, new CertainYAntiVabration(10f, 7f)},
+        {C_Mode.CertainYAntiVibration, new CertainYAntiVabration(8.8f, 5.8f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
         {C_Mode.WatchOver, new WatchOverCamera(7f, 5f)},
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
-        {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f)}
+        {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f)},
+        {C_Mode.ScreenSaver, new ScreenSaverC(8.8f, 8.8f)}
     };
     
     void Awake()

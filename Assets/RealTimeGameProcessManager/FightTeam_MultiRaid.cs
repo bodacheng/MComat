@@ -35,17 +35,17 @@ namespace FightScene
             {
                 foreach (int key in keys.Value)
                 {
-                    Data_Center character_data_Center = heromultiDictionary.Get(keys.Key, key);
-                    if (character_data_Center == null)
+                    Data_Center _DataCenter = heromultiDictionary.Get(keys.Key, key);
+                    if (_DataCenter == null)
                     {
                         continue;
                     }
                     if (TeamStandPoints[key] != null)
                     {
-                        character_data_Center.WholeT.transform.position = TeamStandPoints[key].position;
-                        character_data_Center.WholeT.transform.rotation = TeamStandPoints[key].rotation;
-                        character_data_Center.WholeT.parent = null;
-                        character_data_Center.WholeT.gameObject.SetActive(true);
+                        _DataCenter.WholeT.transform.position = TeamStandPoints[key].position;
+                        _DataCenter.WholeT.transform.rotation = TeamStandPoints[key].rotation;
+                        _DataCenter.WholeT.parent = null;
+                        _DataCenter.WholeT.gameObject.SetActive(true);
                     }
                     else
                     {
@@ -73,7 +73,7 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
-                a_char.FightDataRef.Ini();
+                a_char.FightDataRef.INI();
                 a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>

@@ -8,7 +8,7 @@ public partial class Hurt_State : Behavior
 {
     void DrawDamgeStart(V_Damage newValue)
     {
-        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(),true,0.05f);
+        PlayHurtAnim(newValue);
         used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
         Vector3 vector3 = newValue.from_weapon_marker.transform.position;
         vector3.y = gameObject.transform.position.y;

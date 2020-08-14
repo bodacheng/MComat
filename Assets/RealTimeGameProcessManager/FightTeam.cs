@@ -88,6 +88,15 @@ namespace FightScene
             InstantiateCharsIconsAndFloatHPBar();
             TeamsFightInitialize(TeamHpRate, teamCGMode);
         }
+        
+        // 全队无敌
+        public void TurnAllMembersInvincible(bool _Invincible)
+        {
+            foreach (Data_Center a_char in TeamMembers.values)
+            {
+                a_char.FightDataRef.Invincible = _Invincible;
+            }
+        }
 
         SideCharIcon SideCharIcon;
         protected void RefreshResistanceBar(Data_Center data_Center)

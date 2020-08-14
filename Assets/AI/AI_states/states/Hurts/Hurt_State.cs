@@ -15,6 +15,38 @@ public partial class Hurt_State : Behavior {
 	{
 		base.Pre_process_before_enter ();
     }
+
+    string HurtPos;
+    void PlayHurtAnim(V_Damage newValue)
+    {
+        if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
+        {
+            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, 0.05f);
+            return;
+        }
+        Vector3 point = newValue.damageHappenPoint;
+        point.y = 0;
+        if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 90)
+        {
+            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.05f);
+            RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f, true);
+        }else{
+            if (newValue.damageHappenPoint.y > _DATA_CENTER.head_t.position.y)
+            {
+                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.05f);
+                RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+            }else{
+                if (newValue.damageHappenPoint.y > _DATA_CENTER.geometryCenter.position.y)
+                {
+                    Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.05f);
+                    RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                }else{
+                    Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.05f);
+                    RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                }
+            }
+        }       
+    }
     
     public override void AI_State_enter(V_Damage newValue)
 	{
@@ -73,7 +105,7 @@ public partial class Hurt_State : Behavior {
             _AIStateRunner.ChangeState("KnockOff", newValue);
             return;
         }
-        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+        
         pEvents.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");

@@ -275,7 +275,7 @@ namespace Soul
 
         public void RotateToTarget_Tween(Vector3 target, float duration, bool ignoreY)
         {
-            _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y,Vector3.up);
+            _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y, Vector3.up);
         }
 
         //protected void RotateToDirection_Tween(Vector3 direction, float duration, bool ignoreY)

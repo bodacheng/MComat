@@ -7,7 +7,7 @@ public partial class Hurt_State : Behavior
 {
     void SuperDamgeStart(V_Damage newValue)
     {
-        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(),true,0.05f);
+        PlayHurtAnim(newValue);
         used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
         physicMissionDisposable = new SingleAssignmentDisposable();
         physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>

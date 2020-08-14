@@ -21,7 +21,7 @@ namespace FightScene
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             FightScene.mainProcessRunner.Run(BeforeFightCountDown());
         }
-                
+        
         IEnumerator BeforeFightCountDown()
         {
             FightScene.CountDown.gameObject.SetActive(true);

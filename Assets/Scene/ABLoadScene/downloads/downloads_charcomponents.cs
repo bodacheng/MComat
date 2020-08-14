@@ -18,13 +18,35 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             ////////////    以上内容为实时动画片段的预备和个性化片段对他们的覆盖   /////////////
             
             //底下这一套有一个特别关键的逻辑：它在通过是不是有对应动画包的key来判断到底这个包的动画有没有load到内存。
-            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts"))
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts/back"))
+            {
                 yield return (AnimationResourceLoader.Instance.
-                LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL+ "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts","basic_hurts"));
-                                                                                
+                LoadAnimationPackFromCache(BundleURL + "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts/back", "basic_hurts/back"));
+            }
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts/lay"))
+            {
+                yield return (AnimationResourceLoader.Instance.
+                LoadAnimationPackFromCache(BundleURL + "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts/lay", "basic_hurts/lay"));
+            }
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts/high"))
+            {
+                yield return (AnimationResourceLoader.Instance.
+                LoadAnimationPackFromCache(BundleURL + "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts/high", "basic_hurts/high"));
+            }
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts/low"))
+            {
+                yield return (AnimationResourceLoader.Instance.
+                LoadAnimationPackFromCache(BundleURL + "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts/low", "basic_hurts/low"));
+            }
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key + "/basic_hurts/press"))
+            {
+                yield return (AnimationResourceLoader.Instance.
+                LoadAnimationPackFromCache(BundleURL + "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key  + "/basic_hurts/low", "basic_hurts/press"));
+            }
+
             if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(keyValuePair.Key  + "/basic_knockoffs"))
                 yield return (AnimationResourceLoader.Instance.
-                LoadAnimationPackFromCache(ResourceLordSceneStarter.BundleURL +"/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key + "/basic_knockoffs","basic_knockoffs"));
+                LoadAnimationPackFromCache(BundleURL + "/animClips/"+ keyValuePair.Key  + "/hurtAndKnockOff", keyValuePair.Key + "/basic_knockoffs","basic_knockoffs"));
             // 上面这些就是说什么呢。。各个type的伤害动作包和基础动作包就不放进DownLoadMissionDic进行之后的集中下载了。上面的函数已经执行下载处理了。
             // 但上面这些存在一个比较大的坑就是这些下载过程直接把所有type角色的伤害动画和基础动画都载入了内存，如果这样做负担很大我们要研究对上面两个函数进行修改。
             // 这个地方还差个各个type的generic_controller包下载的问题。            

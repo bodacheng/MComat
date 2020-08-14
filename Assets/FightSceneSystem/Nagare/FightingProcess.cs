@@ -18,8 +18,15 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            FightScene.PreparingCanvas.gameObject.SetActive(false);
-            FightScene.FightCanvas.gameObject.SetActive(true);
+            if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
+            {
+                FightScene.ScreensaverCanvas.gameObject.SetActive(true);
+                FightScene.FightCanvas.gameObject.SetActive(false);
+            }else{
+                FightScene.ScreensaverCanvas.gameObject.SetActive(false);
+                FightScene.FightCanvas.gameObject.SetActive(true);
+            }
+            FightScene.PreparingCanvas.gameObject.SetActive(false);            
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
             FightScene.PressedStartButton();
         }

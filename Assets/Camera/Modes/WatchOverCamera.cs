@@ -18,7 +18,7 @@ class WatchOverCamera : CameraMode
     {
         if (targets == null || targets.Count == 0)
             return;
-
+            
         center = Vector3.zero;
         direction = Vector3.zero;
         foreach (Transform o in this.targets)

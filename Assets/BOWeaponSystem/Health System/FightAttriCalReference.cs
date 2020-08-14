@@ -12,16 +12,14 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     [Tooltip("当前攻击力")]
     public float AT = 10;
-
+    
     [Tooltip("当前吸气模式")]
     public LocalFight.CriticalGaugeMode criticalGaugeMode;
     
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
-    
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     KnockOffCount _knockOffCount = new KnockOffCount();
     BeHitCount _BeHitCount = new BeHitCount();    
-    
     V_Damage deathknockOff;
     bool gettingdamage;
     List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();//713添加
@@ -31,12 +29,15 @@ public partial class FightAttriCalReference : MonoBehaviour
     E_Damage managingEventDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
     IDictionary<Collider, Vector3> myColliderSizes = new Dictionary<Collider, Vector3>();
-    float DamgeGotExCounter; // 所收到的总伤害，用于处理受伤所获得ex槽
+    float DamgeGotExCounter;
     
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
     
-    float DamageToEx { 
+    public bool Invincible { get; set; }
+    
+    // 所收到的总伤害，用于处理受伤所获得ex槽
+    float DamageToEx {
         get => DamgeGotExCounter; 
         set {
             DamgeGotExCounter = value;
@@ -47,13 +48,13 @@ public partial class FightAttriCalReference : MonoBehaviour
             }
         }
     }
-
-    public void Ini()
+    
+    public void INI()
     {
         CurrentHp = new ReactiveProperty<float>();
         DamageToEx = 0;
     }
-
+    
     public void SetGettingDamageState(bool _state)
     {
         gettingdamage = _state;
@@ -183,11 +184,12 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
 
     // 受攻击方运行
+    float _d;
     public void ApplyDamage(V_Damage _dmg)
 	{
         if (_Center._MyBehaviorRunner.GetNowState().StateKey == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
         {
-            _Center._MyBehaviorRunner.ChangeState("Defend",_dmg);
+            _Center._MyBehaviorRunner.ChangeState("Defend", _dmg);
             HitEffect(_dmg);
             return;
         }
@@ -203,9 +205,10 @@ public partial class FightAttriCalReference : MonoBehaviour
         _ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
         
-        float wholeDamge = _dmg.from_weapon.GetDamageAmount();
-        CurrentHp.Value -= wholeDamge;
-        DamageToEx += wholeDamge;
+        _d = _dmg.from_weapon.GetDamageAmount();
+        if (!Invincible)
+            CurrentHp.Value -= _d;
+        DamageToEx += _d;
         if (CurrentHp.Value <= 0)
         {
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);

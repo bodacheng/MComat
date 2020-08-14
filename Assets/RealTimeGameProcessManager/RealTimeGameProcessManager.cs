@@ -82,7 +82,8 @@ namespace FightScene
             else
             {
                 _mobileInputsManager.FocusCharInputs(focusingChar._MyBehaviorRunner, focusingChar.Zokusei);
-                _mobileInputsManager.TurnOnButtons();
+                if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
+                    _mobileInputsManager.TurnOffButtons();
             }
         }
         
@@ -130,8 +131,17 @@ namespace FightScene
             FightTeam1.teamConfig = heroTeamConfig;
             FightTeam2.teamConfig = EnemyTeamConfig;
             
-            yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.localFight.Team1HpRate , stage.localFight.team1CGMode);
-            yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.localFight.Team2HpRate , stage.localFight.team2CGMode);
+            yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.localFight.Team1HpRate ,stage.localFight.team1CGMode);
+            yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.localFight.Team2HpRate ,stage.localFight.team2CGMode);
+            
+            if (stage._fightEventType == FightEventType.Screensaver)
+            {
+                FightTeam1.TurnAllMembersInvincible(true);
+                FightTeam2.TurnAllMembersInvincible(true);
+            }else{
+                FightTeam1.TurnAllMembersInvincible(false);
+                FightTeam2.TurnAllMembersInvincible(false);
+            }
             
             FightTeam1.ArrangeAllTeamMembersToPosition(FightTeam1.TeamMembers);
             FightTeam2.ArrangeAllTeamMembersToPosition(FightTeam2.TeamMembers);
@@ -166,6 +176,23 @@ namespace FightScene
             else
             {
                 _CameraManager.Assign_Camera(C_Mode.TopDown, null);
+            }
+        }
+        
+        // 屏保模式相机。
+        public void ScreenSaverC(Team myTeam)
+        {
+            if (focusingChar != null)
+            {
+                if (myTeam == Team.player1)
+                {
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam2.TeamMemberTransforms());
+                }
+                else
+                {
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam1.TeamMemberTransforms());
+                }
+                _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
             }
         }
 

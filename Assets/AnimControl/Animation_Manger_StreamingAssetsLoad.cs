@@ -115,13 +115,25 @@ public partial class Animation_Manger : MonoBehaviour
             }
         }
 
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts"))
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/back"))
         {
-            yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath, "basic_hurts"));
+            yield return AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath, "basic_hurts/back");
         }
-        else
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/high"))
         {
-            //认为已经存在了相应系列的动画包
+            yield return AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath, "basic_hurts/high");
+        }
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/low"))
+        {
+            yield return AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath, "basic_hurts/low");
+        }
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/lay"))
+        {
+            yield return AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath, "basic_hurts/lay");
+        }
+        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/press"))
+        {
+            yield return AnimationResourceLoader.Instance.LoadAnimationPackFromStreamingAssets(animPath, "basic_hurts/press");
         }
         
         /////

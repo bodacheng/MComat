@@ -61,18 +61,44 @@ public partial class Animation_Manger : MonoBehaviour
         }
     }
     
-    List<AnimationClip> hurtclips;
+    List<AnimationClip> hurtclips_back, hurtclips_low, hurtclips_high, hurtclips_press, hurtclips_lay;
     List<AnimationClip> knockoffAnimations;
     public void PrepareHurtAndKnockOffAnimations(string type)
     {
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts", out hurtclips);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out hurtclips_back);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out hurtclips_low);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out hurtclips_high);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out hurtclips_press);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out hurtclips_lay);
     }
     
-    public AnimationClip GetRandomHurtAnim()
+    public AnimationClip GetRandomHurtAnim(string hurtPos)
     {
-        int ranDom = Random.Range(0, hurtclips.Count);
-        return hurtclips[ranDom];
+        List<AnimationClip> target;
+        switch (hurtPos)
+        {
+            case "back":
+            target = hurtclips_back;
+            break;
+            case "lay":
+            target = hurtclips_lay;
+            break;
+            case "high":
+            target = hurtclips_high;
+            break;
+            case "low":
+            target = hurtclips_low;
+            break;
+            case "press":
+            target = hurtclips_press;
+            break;
+            default:
+            target = hurtclips_high;
+            break;
+        }
+        int ranDom = Random.Range(0, target.Count);
+        return target[ranDom];
     }
     
     public AnimationClip GetRandomKnockOffAnim()
