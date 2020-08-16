@@ -55,10 +55,15 @@ public class MemberDetail_edit : MainSceneProcess
         {
             TheNineSlot.target.remainCharges[i].gameObject.SetActive(false);
         }
+        for (int i = 0; i < TheNineSlot.target.burdenCharges.Count; i++)
+        {
+            TheNineSlot.target.burdenCharges[i].gameObject.SetActive(false);
+        }
+        TheNineSlot.target.ResetButton.gameObject.SetActive(false);
         TheNineSlot.target.ConfirmSkillChangeButton.gameObject.SetActive(false);
         SSLevelUpManager.target.plusLevel.gameObject.SetActive(false);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
-
+        
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
         PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
@@ -100,12 +105,14 @@ public class MemberDetail_edit : MainSceneProcess
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
-    Vector3 screenPos = new Vector3(0.23f, 0.3f, 20f);
+    Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
+        }else{
+            ModelShower.target.CFollowCharZ();
         }
     }
     
@@ -142,6 +149,8 @@ public class MemberDetail_edit : MainSceneProcess
         }
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        TheNineSlot.target.ResetButton.onClick.RemoveAllListeners();
+        TheNineSlot.target.ResetButton.onClick.AddListener(TheNineSlot.target.ResetNineSlot);
     }
     
     // 技能浏览器版本

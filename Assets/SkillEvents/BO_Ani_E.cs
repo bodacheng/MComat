@@ -209,12 +209,15 @@ public partial class BO_Ani_E : MonoBehaviour
 
         Vector3 targetPos(Vector3 direction, float step)
         {
-            Vector3 temp = transform.position + direction * 5f;
-            temp.y = 0;
-            dis_from_center = temp.magnitude;
-            if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+            Vector3 temp = transform.position + direction * step;
+            if (FightGlobalSetting.scenestep == 1)
             {
-                temp = temp.normalized * BoundaryControllByGod._BattleRingRadius;
+                temp.y = 0;
+                dis_from_center = temp.magnitude;
+                if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+                {
+                    temp = temp.normalized * BoundaryControllByGod._BattleRingRadius;
+                }
             }
             return temp;
         }

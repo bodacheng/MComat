@@ -276,7 +276,7 @@ public partial class BO_Ani_E : MonoBehaviour
         {
             if (Ani_E.OnLoadEffect == null)
                 return;
-            EffectsManager.GenerateEffect(Ani_E.OnLoadEffect, Ani_E.magic_path , parentT.position, parentT.rotation, parentT);
+            EffectsManager.GenerateEffect(Ani_E.OnLoadEffect, Ani_E.magic_path , pos, qua, parentT);
         }
 
         public void CloseEffectsOnBodyParts(bool clearParticles)

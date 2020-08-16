@@ -8,6 +8,8 @@ public class ModelShower : MonoBehaviour
     [Space(11)]
     [Header("Essentials")]
     public CameraManager _CameraManager;
+
+    public static float _nearClipPlane = 10f;
     
     //[Header("Team Member Positions For Show")]
     //public Transform MembersStandCenterPoint;
@@ -64,7 +66,7 @@ public class ModelShower : MonoBehaviour
             {
                 showingChar.SetActive(true);
                 showingChar.transform.parent = null;
-                showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 10f));//右
+                showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
                 //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
                 showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
             }
@@ -132,6 +134,18 @@ public class ModelShower : MonoBehaviour
             }
             pinchZoom.LocalUpdate();
         }
+    }
+    
+    public void CFollowCharZ()
+    {
+        if (showingChar != null)
+        {
+            if (Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z) < ModelShower._nearClipPlane)
+            {
+                _CameraManager.transform.position = Vector3.Lerp(_CameraManager.transform.position, _CameraManager.transform.position + Vector3.forward * 
+                (_nearClipPlane - Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z)),Time.deltaTime * 10f);
+            }
+        }    
     }
 
     Vector3 tempV;

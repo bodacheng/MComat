@@ -283,6 +283,7 @@ MonoBehaviour:
   C2DragAndDropCell: {fileID: 1031694323}
   C3DragAndDropCell: {fileID: 1697051136}
   ConfirmSkillChangeButton: {fileID: 2093238720419168642}
+  ResetButton: {fileID: 2101895506}
   _skillStoneDetail: {fileID: 1003711765}
   remainCharges:
   - {fileID: 190903252}
@@ -15622,7 +15623,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 375713681}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &317512007
 GameObject:
@@ -22477,9 +22478,9 @@ Transform:
   m_LocalPosition: {x: -26.711199, y: 0.026189804, z: -33.411697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 313104902}
   - {fileID: 580008789}
   - {fileID: 2108180226}
-  - {fileID: 313104902}
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33323,11 +33324,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580008788}
   m_LocalRotation: {x: -0, y: 0.9961947, z: -0, w: -0.0871556}
-  m_LocalPosition: {x: 396.92, y: 2.2, z: 1769.86}
+  m_LocalPosition: {x: 396.92, y: 0.8738103, z: 1769.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 375713681}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 189.99998, z: 0}
 --- !u!108 &580008790
 Light:
@@ -91378,7 +91379,6 @@ MonoBehaviour:
   fire1T: {fileID: 1015689246}
   fire2T: {fileID: 778555518}
   _skillStoneDetail: {fileID: 662487850}
-  MemDetailWatchPos: {fileID: 580008789}
   SkillShowT: {fileID: 1252385579}
   focusingResourceID: 
   focusingC: {fileID: 0}
@@ -110973,18 +110973,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2101895507}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6065445}
-        m_MethodName: ResetNineSlot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2101895507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111195,11 +111184,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108180225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 395.7112, y: 1.3, z: 1762.9917}
+  m_LocalPosition: {x: 395.7112, y: -0.026189804, z: 1762.9917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 375713681}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108902970
 GameObject:

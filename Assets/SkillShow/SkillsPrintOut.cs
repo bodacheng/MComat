@@ -27,7 +27,6 @@ namespace mainMenu
 
         [Space(11)]
         [Header("用以技能显示途中调整。与memberdetail模块对应两个变量一样")]
-        public Transform MemDetailWatchPos;
         public RectTransform SkillShowT;
 
         public string focusingResourceID;
@@ -65,8 +64,9 @@ namespace mainMenu
                     if (focusingC.Animation_Manger.Animator.GetBool("in_transition") == false && focusingC.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                     {
                         //SkillShowT.gameObject.SetActive(true);
-                        focusingC.Animation_Manger.PlayLayerAnim(null,true,0.05f);
+                        focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
                         IfShowingSkill = false;
+                        PreScene.target._CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
                     }
                 }
             }

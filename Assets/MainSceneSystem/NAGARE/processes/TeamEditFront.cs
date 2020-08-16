@@ -37,12 +37,14 @@ public class TeamEditFront : MainSceneProcess
         mainProcessRunner.Run(TeamSet.SaveTeamSet(TeamSet.targetTeamMode));// 退出队伍编辑画面即保存
     }
     
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, 20f);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
+        }else{
+            ModelShower.target.CFollowCharZ();
         }
     }
 }

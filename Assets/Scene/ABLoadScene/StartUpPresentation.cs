@@ -47,7 +47,7 @@ public class StartUpPresentation : MonoBehaviour
                     if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
                     {
                         _Util.DeleteLocalSaveDate();
-                        _Util.StartNewLocalTestMode();
+                        _Util.ToMainScene();
                         Watershed.Dispose();
                         return;
                     }

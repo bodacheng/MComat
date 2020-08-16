@@ -18,29 +18,15 @@ using UnityEngine.SceneManagement;
 // 以上这些如果在load过程里出了任何问题，则应该终止程序运行。这些方法写在哪里都可以只要在头画面里运行就行。
 // 然后如果程序运行途中这些下载完了的数据在读取时候出错，那怎么办？不管任何时候， 直接弹回资源确认画面。
 
-public class CachDownLoadMission
-{
-    public string filename;
-    public string subPath;
-    public float filesize;
-    public bool downloadfinished;
-    
-    public CachDownLoadMission(string subPath,string filename, float filesize)
-    {
-        this.filename = filename;
-        this.subPath = subPath;
-        this.filesize = filesize;
-    }
-}
-
 public partial class ResourceLordSceneUtil : MonoBehaviour
 {
     public PlayerInfoRefMode ProjectPlayerInfoRefMode;
-
+    
+    [Space(7)]
     [Header("资源读取设置")]
     public ResourceSetting _ResourceSetting;
     public ConfigFileManager _ConfigFileManager;
-        
+    
     [Space(7)]
     [Header("assetBundleURL。根据服务器可能有变化")]
     public string assetBundleURL = "http://18.218.70.129/ios";
@@ -49,11 +35,12 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     IDictionary<string, List<string>> CharTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
     CachDownLoadMission modelConfigFileMission;
     CachDownLoadMission animationConfigFileMission;
-
+    
     public bool DProcessFinished { get; set; }
-
+    
     void Start()
     {
+        DProcessFinished = false;
         BundleURL = assetBundleURL;
     }
     
@@ -72,6 +59,11 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         StartCoroutine(_StartNewLocalTestMode());
     }
     
+    public void ToMainScene()
+    {
+        StartCoroutine(ToMainSceneDirectly());
+    }
+    
     public IEnumerator _BeginRemoteTestMode()
     {
         AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
@@ -85,31 +77,35 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/AccountCharacterInfos");
     }
     
-    public IEnumerator _StartNewLocalTestMode()
+    IEnumerator ToMainSceneDirectly()
     {
         AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
         yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
-        //SceneManager.LoadScene(1);
-        
+        SceneManager.LoadScene(1);
+    }
+    
+    IEnumerator _StartNewLocalTestMode()
+    {
+        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        yield return AccountSet.OverrideAccountOnLocalFile();
+        yield return MySkillStonesReader.LocalSaveDataGetAllStones();
+        yield return AccountCharsSet.LocalSaveDataGetAllCharacters();        
+        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+        stage._fightEventType = FightEventType.Screensaver;
+        FightLoad.Go(stage);
+    }
+    
+    IEnumerator _BeginLocalTestMode()
+    {
+        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;        
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
         stage._fightEventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
         yield break;
     }
     
-    public IEnumerator _BeginLocalTestMode()
-    {
-        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        //SceneManager.LoadScene(1);
-        
-        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
-        stage._fightEventType = FightEventType.Screensaver;
-        FightLoad.Go(stage);
-        yield break;
-    }
-        
     public IEnumerator ResourcePrepareProcess()
     {
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
@@ -121,7 +117,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         LoadingCanvas.target.DarkOff(0.5f);
         LoadingCanvas.target.TurnOnProcessDescription(true);
         LoadingCanvas.target.NowProcess("正在加载资源", 0);
-
+        
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -149,7 +145,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         }
         LoadingCanvas.target.NowProcess("正在加载资源", 0.6f);
         
-        // characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
+        // CharTypeCodeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
         foreach (MonstersConfigTable.Row row in MonstersConfigTable.Instance.rowList)
         {
             if (!CharTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE))
@@ -180,7 +176,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
                 }
                 break;
         }
-
+        
         switch (ResourceLoadingSetting.MagicLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -211,8 +207,8 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         DownLoadMissionDic.Clear();
         yield break;
     }
-
-    public IEnumerator LetThisloadMissionBegin(CachDownLoadMission _CachDownLoadMission)
+    
+    IEnumerator LetThisloadMissionBegin(CachDownLoadMission _CachDownLoadMission)
     {
         IEnumerator task;
         if (_CachDownLoadMission != null)

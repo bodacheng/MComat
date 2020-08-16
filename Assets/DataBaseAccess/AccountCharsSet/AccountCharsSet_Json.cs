@@ -118,7 +118,6 @@ namespace dataAccess
                         yield return MySkillStonesReader.Add(stoneInfo);
                     }
                 }
-                
                 Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
                 yield return AddToAccount(_Char);
                 i++;

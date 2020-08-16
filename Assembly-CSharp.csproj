@@ -472,6 +472,7 @@
     <Compile Include="Assets\Scene\ABLoadScene\SKillAnalyzer.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\SKillAnalyzerGUI.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\StartUpPresentation.cs" />
+    <Compile Include="Assets\Scene\ABLoadScene\downloads\CachDownLoadMission.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\ResourceLordSceneUtil.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_anim.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_charcomponents.cs" />

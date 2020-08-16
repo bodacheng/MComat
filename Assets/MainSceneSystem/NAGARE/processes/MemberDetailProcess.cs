@@ -18,7 +18,7 @@ public class MemberDetailProcess : MainSceneProcess
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 25f);
+        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
         yield return MonsterBox.DisplayMonsterIcons();
         MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
@@ -41,12 +41,14 @@ public class MemberDetailProcess : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
     
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, 20f);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
+        }else{
+            ModelShower.target.CFollowCharZ();
         }
     }
 }

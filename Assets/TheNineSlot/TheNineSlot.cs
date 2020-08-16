@@ -43,6 +43,10 @@ namespace mainMenu
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;
         
+        [Space(1)]
+        [Header("技能石编辑确认")]
+        public Button ResetButton;
+        
         [Space(7)]
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
