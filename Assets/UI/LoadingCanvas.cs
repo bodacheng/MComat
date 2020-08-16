@@ -22,7 +22,6 @@ public class LoadingCanvas : MonoBehaviour {
     public Button YesButton;
     public Button NoButton;
     
-    //进程类
     [Space(7)]
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
@@ -52,7 +51,9 @@ public class LoadingCanvas : MonoBehaviour {
     {
         hollowOutMask.gameObject.SetActive(true);
         if (LoadingCanvasBigCurtain != null)
+        {
             LoadingCanvasBigCurtain.color = Color.clear;
+        }
         //Loading_Canvas.sortingOrder = 1;
         hollowOutMask.raycastTarget = true;
         List<RectTransform> rectTransforms = new List<RectTransform>();
@@ -93,6 +94,12 @@ public class LoadingCanvas : MonoBehaviour {
         mainProcessRunner.Run(DarkOffCanvas(darkness));
     }
     
+    public void DarkOffDirectly(float darkness)
+    {
+        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, darkness);
+        Loading_Canvas.gameObject.SetActive(true);
+    }
+    
     IEnumerator LightUpCanvas()
     {
         float a = 1;
@@ -104,7 +111,6 @@ public class LoadingCanvas : MonoBehaviour {
             yield return null;
         }
         Loading_Canvas.gameObject.SetActive(false);
-        yield break;
     }
 
     IEnumerator DarkOffCanvas(float toAlpha)
@@ -123,12 +129,12 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void ArrangeWarnWindow(string intro)
     {
-        this.Loading_Canvas.gameObject.SetActive(true);
-        this.ValidationWindow.gameObject.SetActive(true);
+        Loading_Canvas.gameObject.SetActive(true);
+        ValidationWindow.gameObject.SetActive(true);
         HigtLightRect(ValidationWindow_PosForMask.transform);
-                
-        this.YesButton.gameObject.SetActive(false);
-        this.NoButton.gameObject.SetActive(false);
+        
+        YesButton.gameObject.SetActive(false);
+        NoButton.gameObject.SetActive(false);
         
         ValidationIntro.text = intro;
         
@@ -142,59 +148,58 @@ public class LoadingCanvas : MonoBehaviour {
     
     void CloseValidationWindow()
     {
-        this.YesButton.onClick.RemoveAllListeners();
-        this.NoButton.onClick.RemoveAllListeners();
+        YesButton.onClick.RemoveAllListeners();
+        NoButton.onClick.RemoveAllListeners();
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
-        this.ValidationWindow.gameObject.SetActive(false);
-        this.Loading_Canvas.gameObject.SetActive(false);
+        ValidationWindow.gameObject.SetActive(false);
+        Loading_Canvas.gameObject.SetActive(false);
         ClearHigtLight();
     }
-
+    
     public void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, string intro)
     {
-        this.Loading_Canvas.gameObject.SetActive(true);
-        this.ValidationWindow.gameObject.SetActive(true);
-        HigtLightRect(this.ValidationWindow_PosForMask.transform);
+        Loading_Canvas.gameObject.SetActive(true);
+        ValidationWindow.gameObject.SetActive(true);
+        HigtLightRect(ValidationWindow_PosForMask.transform);
         
-        this.YesButton.gameObject.SetActive(true);
-        this.NoButton.gameObject.SetActive(true);
+        YesButton.gameObject.SetActive(true);
+        NoButton.gameObject.SetActive(true);
         
-        this.YesButton.onClick.RemoveAllListeners();
-        this.YesButton.onClick.AddListener(action);
-        this.YesButton.onClick.AddListener(CloseValidationWindow);
+        YesButton.onClick.RemoveAllListeners();
+        YesButton.onClick.AddListener(action);
+        YesButton.onClick.AddListener(CloseValidationWindow);
         
-        this.NoButton.onClick.RemoveAllListeners();
-        this.NoButton.onClick.AddListener(CloseValidationWindow);
+        NoButton.onClick.RemoveAllListeners();
+        NoButton.onClick.AddListener(CloseValidationWindow);
         ValidationIntro.text = intro;
     }
     
     public void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
-        this.Loading_Canvas.gameObject.SetActive(true);
-        this.ValidationWindow.gameObject.SetActive(true);
-        HigtLightRect(this.ValidationWindow_PosForMask.transform);
+        Loading_Canvas.gameObject.SetActive(true);
+        ValidationWindow.gameObject.SetActive(true);
+        HigtLightRect(ValidationWindow_PosForMask.transform);
         
         void closeValidationWindow()
         {
-            this.YesButton.onClick.RemoveAllListeners();
-            this.NoButton.onClick.RemoveAllListeners();
-        
+            YesButton.onClick.RemoveAllListeners();
+            NoButton.onClick.RemoveAllListeners();
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
-            this.ValidationWindow.gameObject.SetActive(false);
-            this.Loading_Canvas.gameObject.SetActive(false);
+            ValidationWindow.gameObject.SetActive(false);
+            Loading_Canvas.gameObject.SetActive(false);
             ClearHigtLight();
         }
         
-        this.YesButton.gameObject.SetActive(true);
-        this.NoButton.gameObject.SetActive(true);
+        YesButton.gameObject.SetActive(true);
+        NoButton.gameObject.SetActive(true);
         
-        this.YesButton.onClick.RemoveAllListeners();
-        this.YesButton.onClick.AddListener(action);
-        this.YesButton.onClick.AddListener(closeValidationWindow);
+        YesButton.onClick.RemoveAllListeners();
+        YesButton.onClick.AddListener(action);
+        YesButton.onClick.AddListener(closeValidationWindow);
         
-        this.NoButton.onClick.RemoveAllListeners();
-        this.NoButton.onClick.AddListener(cancel_action);
-        this.NoButton.onClick.AddListener(closeValidationWindow);
+        NoButton.onClick.RemoveAllListeners();
+        NoButton.onClick.AddListener(cancel_action);
+        NoButton.onClick.AddListener(closeValidationWindow);
         ValidationIntro.text = intro;
     }
 }

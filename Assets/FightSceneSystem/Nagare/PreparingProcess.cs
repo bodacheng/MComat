@@ -15,7 +15,6 @@ public class PreparingProcess : FSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        LoadingCanvas.target.DarkOff(1f);
         FightLoadError.Instance.FightLoadErrors.Clear();
         if (FightSceneNote.nextBattle != null)
         {
@@ -41,6 +40,7 @@ public class PreparingProcess : FSceneProcess
     public override void ProcessEnter()
     {
         FightScene.PreparingCanvas.gameObject.SetActive(true);
+        LoadingCanvas.target.DarkOffDirectly(1f);
         mainProcessRunner.Run(EnterProcess());
     }
     

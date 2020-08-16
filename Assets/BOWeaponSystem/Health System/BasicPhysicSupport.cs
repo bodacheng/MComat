@@ -184,7 +184,7 @@ public class BasicPhysicSupport : MonoBehaviour
                 groundedCount = hiddenMethods.Grounded ? groundedCount += Time.deltaTime : 0f;
                 airCount = (!hiddenMethods.Grounded) ? airCount += Time.deltaTime : 0f;
             }
-
+            
             temp2 = transform.position;
             temp2.y = 0;
             dis_from_center = temp2.magnitude;
