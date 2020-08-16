@@ -16,6 +16,7 @@ namespace mainMenu
         [Space(11)]
         [Header("Essentials")]
         public CameraManager _CameraManager;
+        public Text UserID;
         public Text accountDiamondCoin;
         public Text accountIntelliCoin;
         
@@ -138,6 +139,7 @@ namespace mainMenu
             
             yield return AccountSet.LoadCustomerInfo(); // 缺response判断
             Setting.target.LoadProgrameSettingFromAccount();
+            UserID.text = SystemInfo.deviceUniqueIdentifier;
             accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.Coin.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);

@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-//这个类在远程更新的过程中需要被json化。
 [System.Serializable]
 public class PlayerAccountInfo
 {
+    string PlayerID;
+    
     int coin;//智慧果实
     int diamond;
     int stoneboxsize;
@@ -16,6 +17,7 @@ public class PlayerAccountInfo
 
     public PlayerAccountInfo()
     {
+        PlayerID = "helloKitty";
         Coin = 0;
         Diamond = 0;
         Stoneboxsize = 500;

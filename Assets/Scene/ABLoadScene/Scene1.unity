@@ -13877,7 +13877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d5e2020bd3347af8b48316fe103ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectPlayerInfoRefMode: 1
+  ProjectPlayerInfoRefMode: 0
   _ResourceSetting: {fileID: 144245842945334449}
   _ConfigFileManager: {fileID: 1428483490221249642}
   assetBundleURL: http://18.218.70.129/ios
