@@ -54,14 +54,14 @@ public class GachaManager : MonoBehaviour
         List<SkillStoneOfPlayerInfoModel> Results = null;
         switch (AccountSet._playerinfoReferenceMode)
         {
-            case playerInfoRefMode.localTestSaveData:
+            case PlayerInfoRefMode.localTestSaveData:
                 IEnumerator GET = Gotcha("human", count);
                 yield return GET;
                 Results = (List<SkillStoneOfPlayerInfoModel>)GET.Current;
                 break;
-            case playerInfoRefMode.remoteTestPlayer:
+            case PlayerInfoRefMode.remoteTestPlayer:
                 break;
-            case playerInfoRefMode.formalVersion:
+            case PlayerInfoRefMode.formalVersion:
                 break;
         }
         Result = Results;

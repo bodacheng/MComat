@@ -33,13 +33,13 @@ namespace dataAccess
         {
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     yield return LoadTeamSetsRemote(teamSetGameMode, ApiLanguage.JaJp);
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     
                     break;
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     switch (teamSetGameMode)
                     {
                         case TeamSetGameMode.story:
@@ -62,12 +62,12 @@ namespace dataAccess
         {
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     yield return SaveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     yield return OverrideTeamSetInfoOnJsonFile(teamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
             }

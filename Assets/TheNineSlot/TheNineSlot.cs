@@ -58,7 +58,7 @@ namespace mainMenu
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;
-
+        
         [Space(5)]
         [Header("UIManager 就是有个UI插件自带的一套东西")]
         public UIManager uIManager;// 实时控制确认按钮颜色

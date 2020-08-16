@@ -10,11 +10,11 @@ using UnityEngine.SceneManagement;
 // controller的话从上面的步骤里搞一个type统计，从所有type里找对应的controller组件
 // 魔法包直接代码引导去下那6个大包。
 // 所有资源应该进行一个文件数量统计和容量统计。下载过程中应该是前台有一个动画告诉已经下载到多少。
-//还有个问题。。。我们看了下主场景里startup函数。。。发现的确很多加载性的东西分布在主场景的很多模块。。。
-//所以我们这么想，这个scene只负责资源加载而不负责信息加载。
+// 还有个问题。。。我们看了下主场景里startup函数。。。发现的确很多加载性的东西分布在主场景的很多模块。。。
+// 所以我们这么想，这个scene只负责资源加载而不负责信息加载。
 
 // 一上来是要load所有的ab包，所有ab包包括什么呢 
-//  魔法特效，所有角色，所有角色动画，所有角色controller文件，所有技能脚本，所有音乐包。
+// 魔法特效，所有角色，所有角色动画，所有角色controller文件，所有技能脚本，所有音乐包。
 // 以上这些如果在load过程里出了任何问题，则应该终止程序运行。这些方法写在哪里都可以只要在头画面里运行就行。
 // 然后如果程序运行途中这些下载完了的数据在读取时候出错，那怎么办？不管任何时候， 直接弹回资源确认画面。
 
@@ -23,7 +23,7 @@ public class CachDownLoadMission
     public string filename;
     public string subPath;
     public float filesize;
-    public bool downloadfinished = false;
+    public bool downloadfinished;
     
     public CachDownLoadMission(string subPath,string filename, float filesize)
     {
@@ -35,6 +35,8 @@ public class CachDownLoadMission
 
 public partial class ResourceLordSceneStarter : MonoBehaviour
 {
+    public PlayerInfoRefMode ProjectPlayerInfoRefMode;
+
     [Header("资源读取设置")]
     public ResourceSetting _ResourceSetting;
     public ConfigFileManager _ConfigFileManager;
@@ -49,10 +51,22 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     IDictionary<string, List<string>> CharTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
     CachDownLoadMission modelConfigFileMission;
     CachDownLoadMission animationConfigFileMission;
-
+    
     void Start()
     {
         BundleURL = assetBundleURL;
+        switch (ProjectPlayerInfoRefMode)
+        {
+            case PlayerInfoRefMode.toBeSelect:
+                break;
+            case PlayerInfoRefMode.formalVersion:
+                break;
+            case PlayerInfoRefMode.localTestSaveData:
+                BeginLocalTestMode();
+                break;
+            case PlayerInfoRefMode.remoteTestPlayer:
+                break;
+        }
     }
     
     public void BeginRemoteTestMode()
@@ -72,7 +86,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     
     public IEnumerator _BeginRemoteTestMode()
     {
-        AccountSet._playerinfoReferenceMode = playerInfoRefMode.remoteTestPlayer;
+        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
         yield return AccountSet.login();
         SceneManager.LoadScene(1);
     }
@@ -85,7 +99,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     
     public IEnumerator _StartNewLocalTestMode()
     {
-        AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
+        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
         yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
@@ -99,7 +113,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     
     public IEnumerator _BeginLocalTestMode()
     {
-        AccountSet._playerinfoReferenceMode = playerInfoRefMode.localTestSaveData;
+        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
         //SceneManager.LoadScene(1);
         
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);

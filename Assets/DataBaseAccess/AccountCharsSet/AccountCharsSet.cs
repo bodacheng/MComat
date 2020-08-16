@@ -35,13 +35,13 @@ namespace dataAccess
             }
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     yield return UpdateCharJsonSaveData(target);
                     break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     yield return UpdateCharRemote(target,ApiLanguage.EnUs);
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
             }
             yield break;
@@ -52,12 +52,12 @@ namespace dataAccess
             IEnumerator temp_enumerator = null;
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     temp_enumerator = AddNewCharToJsonSaveData(_accountCharacterInfo);// 内部已经包整理角色列表的处理
                     break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
             }
             yield return temp_enumerator;
@@ -90,15 +90,15 @@ namespace dataAccess
             GetMonsterOfPlayerDetailModel accountCharInfo = null;
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     accountCharInfo = LoadAccCharInfoViaJsonFile(monsterlocalid);
                     break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     IEnumerator load = LoadAccountCharacterInfoRemote(monsterlocalid, ApiLanguage.JaJp);
                     yield return load;
                     accountCharInfo = (GetMonsterOfPlayerDetailModel)load.Current;
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
             }
             DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
@@ -110,12 +110,12 @@ namespace dataAccess
             List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     charList = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
                     break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
             }
             AccountCharInfoDic.Clear();

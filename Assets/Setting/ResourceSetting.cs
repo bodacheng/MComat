@@ -17,9 +17,10 @@ public enum ResourceLoadMode
     Resource = 3
 }
 
-public enum playerInfoRefMode
+public enum PlayerInfoRefMode
 {
     localTestSaveData = 1,
     remoteTestPlayer = 2,
     formalVersion = 3,
+    toBeSelect = 0
 }

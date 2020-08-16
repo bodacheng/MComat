@@ -17,12 +17,12 @@ public class RewardManager : MonoBehaviour
         {
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     yield return ExpUpForStones_Local(StoneOfPlayerIDs[i], addExp);
                 break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                 break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                 break;
             }
         }

@@ -74,13 +74,13 @@ public class BoxExpandHelper : MonoBehaviour
         IEnumerator expansionProcess = null;
         switch (AccountSet._playerinfoReferenceMode)
         {
-            case playerInfoRefMode.localTestSaveData:
+            case PlayerInfoRefMode.localTestSaveData:
                 AccountSet._AccInfo.Stoneboxsize = AccountSet._AccInfo.Stoneboxsize + ExpandCount;
                 expansionProcess = AccountSet.SaveCustomerInfo();
             break;
-            case playerInfoRefMode.remoteTestPlayer:
+            case PlayerInfoRefMode.remoteTestPlayer:
             break;
-            case playerInfoRefMode.formalVersion:
+            case PlayerInfoRefMode.formalVersion:
             break;
         }
         yield return expansionProcess;

@@ -38,12 +38,12 @@ namespace dataAccess
             }
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     Update_Json(Dic[stoneOfPlayerID]);
                 break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                 break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                 break;
             }
             yield break;
@@ -63,13 +63,13 @@ namespace dataAccess
             Dic.Clear();
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     LoadAll_Json(Application.persistentDataPath + "/MyStones");
                     break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
             }
             // 上面的步骤已经完成了Dic的适配

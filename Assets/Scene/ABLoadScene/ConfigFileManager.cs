@@ -39,7 +39,7 @@ public class ConfigFileManager : MonoBehaviour {
         List<string> KisoonRecordIDs = new List<string>();
         List<string> AllDeletedRecordIDs = new List<string>();
         List<SkillConfig> AllNewSkillConfigsOfAllTypes = new List<SkillConfig>();
-
+        
         foreach (string chartype in chartypes)
         {
             List<SkillConfig> SkillConfigsOfOldConfigFileOFtype = SkillConfigTable.RowsToSkillConfigList(SkillConfigTable.FindAll_MONSTER_TYPE(chartype));

@@ -134,13 +134,13 @@ namespace dataAccess
         {
             switch (AccountSet._playerinfoReferenceMode)
             {
-                case playerInfoRefMode.localTestSaveData:
+                case PlayerInfoRefMode.localTestSaveData:
                     break;
-                case playerInfoRefMode.remoteTestPlayer:
+                case PlayerInfoRefMode.remoteTestPlayer:
                     yield return SkillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
                     yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
-                case playerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                     break;
             }
         }        
