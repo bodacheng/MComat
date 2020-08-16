@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public partial class ResourceLordSceneStarter : MonoBehaviour
+public partial class ResourceLordSceneUtil : MonoBehaviour
 {
     IEnumerator ConfigFilesDownLoad()
     {

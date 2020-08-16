@@ -133,7 +133,7 @@ namespace mainMenu
                     case ResourceLoadMode.CachAB:
                         yield return
                             focusingC.Animation_Manger.PreloadPersonalAnim
-                            (ResourceLordSceneStarter.BundleURL, _watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
+                            (ResourceLordSceneUtil.BundleURL, _watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
                         break;
                     case ResourceLoadMode.StreamingAssetAB:
                         yield return

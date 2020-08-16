@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class ResourceLordSceneStarter : MonoBehaviour
+public partial class ResourceLordSceneUtil : MonoBehaviour
 {
     private IEnumerator ModelResourceDownLoad()
     {

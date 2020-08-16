@@ -33,7 +33,7 @@ public class CachDownLoadMission
     }
 }
 
-public partial class ResourceLordSceneStarter : MonoBehaviour
+public partial class ResourceLordSceneUtil : MonoBehaviour
 {
     public PlayerInfoRefMode ProjectPlayerInfoRefMode;
 
@@ -45,28 +45,16 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
     [Header("assetBundleURL。根据服务器可能有变化")]
     public string assetBundleURL = "http://18.218.70.129/ios";
     public static string BundleURL = "http://18.218.70.129/ios";
-    
-    public bool dProcessFinished;
     IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
     IDictionary<string, List<string>> CharTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();//key是typecode，值是所有基础动画包的名字
     CachDownLoadMission modelConfigFileMission;
     CachDownLoadMission animationConfigFileMission;
-    
+
+    public bool DProcessFinished { get; set; }
+
     void Start()
     {
         BundleURL = assetBundleURL;
-        switch (ProjectPlayerInfoRefMode)
-        {
-            case PlayerInfoRefMode.toBeSelect:
-                break;
-            case PlayerInfoRefMode.formalVersion:
-                break;
-            case PlayerInfoRefMode.localTestSaveData:
-                BeginLocalTestMode();
-                break;
-            case PlayerInfoRefMode.remoteTestPlayer:
-                break;
-        }
     }
     
     public void BeginRemoteTestMode()
@@ -132,7 +120,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
         
         LoadingCanvas.target.DarkOff(0.5f);
         LoadingCanvas.target.TurnOnProcessDescription(true);
-        LoadingCanvas.target.NowProcess("正在加载资源",0);
+        LoadingCanvas.target.NowProcess("正在加载资源", 0);
 
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
@@ -144,7 +132,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             case ResourceLoadMode.Resource:
                 yield return MonstersConfigTable.Instance.LoadMonstersConfig();
                 yield return SkillConfigTable.LoadAllSkillConfigs();
-                LoadingCanvas.target.NowProcess("正在加载资源",0.1f);
+                LoadingCanvas.target.NowProcess("正在加载资源", 0.3f);
                 break;
         }
         
@@ -159,6 +147,7 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
                 //Resource模式下模型都是现加载。
                 break;
         }
+        LoadingCanvas.target.NowProcess("正在加载资源", 0.6f);
         
         // characterTypeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
         foreach (MonstersConfigTable.Row row in MonstersConfigTable.Instance.rowList)
@@ -202,7 +191,9 @@ public partial class ResourceLordSceneStarter : MonoBehaviour
             case ResourceLoadMode.Resource:
                 break;
         }
-        dProcessFinished = true;
+        LoadingCanvas.target.NowProcess("正在加载资源", 1f);
+        LoadingCanvas.target.TurnOnProcessDescription(false);
+        DProcessFinished = true;
     }
 
     // 初始热更新所还欠缺的环节
