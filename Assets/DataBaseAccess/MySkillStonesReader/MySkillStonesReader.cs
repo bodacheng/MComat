@@ -5,7 +5,6 @@ using mainMenu;
 using Api.Dto.Model;
 using Skill;
 
-// 配置文件属于资源信息，不是账户信息，应该分离开处理。
 namespace dataAccess
 {
     public partial class MySkillStonesReader
@@ -29,6 +28,7 @@ namespace dataAccess
             yield return Update(one.skillStoneOfPlayerId);
         }
         
+        // 更新存档数据
         public static IEnumerator Update(string stoneOfPlayerID)
         {
             if (!Dic.ContainsKey(stoneOfPlayerID) || Dic[stoneOfPlayerID] == null)
@@ -46,7 +46,6 @@ namespace dataAccess
                 case PlayerInfoRefMode.formalVersion:
                 break;
             }
-            yield break;
         }
         
         public static IEnumerator Update_Level(string skillstoneofplayerid, string targetLevel, ApiLanguage apiLanguage)
@@ -84,7 +83,6 @@ namespace dataAccess
                 }
                 yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
             }
-            yield break;
         }
         
         public static IEnumerator LoadTutorial()
@@ -121,12 +119,32 @@ namespace dataAccess
             }
             for (int i = 0; i < toRemove.Count; i++)
             {
-                if (RenderModelDic.ContainsKey(toRemove[i].skillStoneOfPlayerId))
-                    Object.Destroy(RenderModelDic[toRemove[i].skillStoneOfPlayerId].gameObject);
-                RenderModelDic.Remove(toRemove[i].skillStoneOfPlayerId);
-                Dic.Remove(toRemove[i].skillStoneOfPlayerId);
+                yield return RemoveStone(toRemove[i].skillStoneOfPlayerId);
             }
+        }
+        
+        // 删除一个技能石
+        public static IEnumerator RemoveStone(string stoneID)
+        {
+            if (RenderModelDic.ContainsKey(stoneID))
+            {
+                Object.Destroy(RenderModelDic[stoneID].gameObject);
+            }
+            RenderModelDic.Remove(stoneID);
+            Dic.Remove(stoneID);
             yield break;
+        }
+        
+        // 技能石转化为智慧果实数量评价
+        public static int ConvertSKStoneToWisdomFruit(string stoneID)
+        {
+            int point = 0;
+            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = Get(stoneID);
+            point += skillStoneOfPlayerInfoModel.GetLevel();
+            
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
+            point += skillConfig.RARITY_LEVEL;
+            return point;
         }
     }
 }

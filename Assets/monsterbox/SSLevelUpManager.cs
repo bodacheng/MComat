@@ -181,14 +181,37 @@ public class SSLevelUpManager : MonoBehaviour
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
-        StartCoroutine(SkillStoneLevelUp(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
+        PreScene.target.mainProcessRunner.Run(SkillStoneLevelUp(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
     }
-
+    
+    // 分析当前选定的技能石
+    public IEnumerator levelUp()
+    {
+        SKStoneItem item1 = cell1.GetItem();
+        SKStoneItem item2 = cell2.GetItem();
+        SKStoneItem item3 = cell3.GetItem();
+        SKStoneItem item4 = cell4.GetItem();
+        SKStoneItem item5 = cell5.GetItem();
+        
+        float point1 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item1.SkillStoneOfPlayerId);
+        float point2 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item2.SkillStoneOfPlayerId);
+        float point3 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item3.SkillStoneOfPlayerId);
+        float point4 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item4.SkillStoneOfPlayerId);
+        float point5 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item5.SkillStoneOfPlayerId);
+        
+        yield return MySkillStonesReader.RemoveStone(item1.SkillStoneOfPlayerId);
+        yield return MySkillStonesReader.RemoveStone(item2.SkillStoneOfPlayerId);
+        yield return MySkillStonesReader.RemoveStone(item3.SkillStoneOfPlayerId);
+        yield return MySkillStonesReader.RemoveStone(item4.SkillStoneOfPlayerId);
+        yield return MySkillStonesReader.RemoveStone(item5.SkillStoneOfPlayerId);
+    }
+    
     // 实际将技能石提升等级的执行函数
     IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
     {
         IEnumerator up = MySkillStonesReader.Update_Level(PlayerSkillStoneID, selectedTargetLevel.ToString(), ApiLanguage.EnUs);
         yield return up;
+        Debug.Log("here"+PlayerSkillStoneID);
         RefreshSkillLevelUpModule();
     }
 }
