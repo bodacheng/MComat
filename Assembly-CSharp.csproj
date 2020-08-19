@@ -387,7 +387,8 @@
     <Compile Include="Assets\ModelShower\ModelShower.cs" />
     <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager.cs" />
+    <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
+    <Compile Include="Assets\Monsterbox\SSLevelUpManager\Util.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />

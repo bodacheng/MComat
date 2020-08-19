@@ -6,7 +6,7 @@ using System.Collections;
 using mainMenu;
 using System.Collections.Generic;
 
-public class SSLevelUpManager : MonoBehaviour
+public partial class SSLevelUpManager : MonoBehaviour
 {
     [Space(7)]
     [Header("升级按钮系列")]
@@ -31,12 +31,7 @@ public class SSLevelUpManager : MonoBehaviour
     List<StoneCell> MaterialSlots;
     
     public static SSLevelUpManager target;
-    
-    SkillStoneDetail focusingSSD;
-    public void SetFocusingSSD(SkillStoneDetail fSSD)
-    {
-        focusingSSD = fSSD;
-    }
+    static LevelCal _LevelCal;
     
     void Awake()
     {
@@ -49,6 +44,13 @@ public class SSLevelUpManager : MonoBehaviour
             cell4,
             cell5
         };
+        _LevelCal.INI();
+    }
+    
+    SkillStoneDetail focusingSSD;
+    public void SetFocusingSSD(SkillStoneDetail fSSD)
+    {
+        focusingSSD = fSSD;
     }
     
     // 添加强化素材用技能石
@@ -86,7 +88,6 @@ public class SSLevelUpManager : MonoBehaviour
         StoneCell targetStoneOnCell = targetStone.GetCell();
         StoneCell.SeletedRender(targetStoneOnCell, _Selected);
         
-        INIStartLevel();
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
         RefreshSkillLevelUpModule();
         levelUpPageRect.gameObject.SetActive(true);
@@ -105,60 +106,20 @@ public class SSLevelUpManager : MonoBehaviour
         //LoadingCanvas.target.ClearHigtLight();
     }
     #endregion
-    
-    #region 打开技能升级画面时候数值的初始化 （起始等级一类的）。
-    void INIStartLevel()
-    {
-        if (focusingSSD.GetSTTarget() == null)
-            return;
-        selectedTargetLevel = focusingSSD.GetSTTarget().GetLevel();
-    }
-    #endregion
-    
-    #region 调整目标等级 直接放在按钮上。
-    int selectedTargetLevel;
-    public void PlusTargetLevel()
-    {
-        if (focusingSSD.GetSTTarget() == null)
-            return;
-        selectedTargetLevel += 1;
-        RefreshSkillLevelUpModule();
-        // 消耗coin的显示？
-    }
-    public void MinusTargetLevel()
-    {
-        if (focusingSSD.GetSTTarget() == null)
-            return;
-        selectedTargetLevel -= 1;
-        RefreshSkillLevelUpModule();
-        // 消耗coin的显示？
-    }
-    #endregion
-
+        
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
     int currentlevel;
     void RefreshSkillLevelUpModule()
     {
         if (focusingSSD.GetSTTarget() == null)
-            return;
-        currentlevel = focusingSSD.GetSTTarget().GetLevel();
-        if (IfCanLevelUp(selectedTargetLevel, focusingSSD.GetSTTarget()))
-        {
-            plusLevel.gameObject.SetActive(true);
-        }
-        else
         {
             plusLevel.gameObject.SetActive(false);
-        }
-        if (selectedTargetLevel > currentlevel)
-        {
-            minusLevel.gameObject.SetActive(true);
-        }
-        else
-        {
             minusLevel.gameObject.SetActive(false);
+            return;
         }
-        TargetLevel.text = "Level " + currentlevel + "->" + selectedTargetLevel.ToString();
+        currentlevel = focusingSSD.GetSTTarget().GetLevel();        
+        plusLevel.gameObject.SetActive(true);
+        minusLevel.gameObject.SetActive(true);
         
         void LevelUp()
         {
@@ -169,23 +130,16 @@ public class SSLevelUpManager : MonoBehaviour
     }
     #endregion
     
-    bool IfCanLevelUp(int tartgetlevel, SkillStoneOfPlayerInfoModel currentStone)
-    {
-        int current_level = currentStone.GetLevel();
-        Debug.Log("Current Level:" + current_level + ", Targetlevel : " + tartgetlevel);
-        return AccountSet._AccInfo.Coin > (tartgetlevel - current_level);
-    }
-
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
-        PreScene.target.mainProcessRunner.Run(SkillStoneLevelUp(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
+        PreScene.target.mainProcessRunner.Run(LevelUpStone(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
     }
     
     // 分析当前选定的技能石
-    public IEnumerator levelUp()
+    public IEnumerator LevelUpStone(string PlayerSkillStoneID)
     {
         SKStoneItem item1 = cell1.GetItem();
         SKStoneItem item2 = cell2.GetItem();
@@ -204,12 +158,14 @@ public class SSLevelUpManager : MonoBehaviour
         yield return MySkillStonesReader.RemoveStone(item3.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item4.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item5.SkillStoneOfPlayerId);
+        
+        yield return SkillStoneLevelUp(PlayerSkillStoneID, point1 + point2 + point3 + point4 + point5);
     }
     
     // 实际将技能石提升等级的执行函数
-    IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
+    IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID, float AddExp)
     {
-        IEnumerator up = MySkillStonesReader.Update_Level(PlayerSkillStoneID, selectedTargetLevel.ToString(), ApiLanguage.EnUs);
+        IEnumerator up = MySkillStonesReader.Update_Level(ApiLanguage.EnUs);
         yield return up;
         Debug.Log("here"+PlayerSkillStoneID);
         RefreshSkillLevelUpModule();

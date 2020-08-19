@@ -1,5 +1,6 @@
 ﻿using System;
 using dataAccess;
+using System.Collections.Generic;
 
 namespace Api.Dto.Model {
 
@@ -53,16 +54,64 @@ namespace Api.Dto.Model {
         {
             return ExpToLevel(EXP);
         }
-        
+                
         public static int ExpToLevel(float Exp)
         {
             return (int)((Exp / 10) + 1);
         }
-                
+        
         public void ExpUpForStoneShow(float formerExp, float newExp)
         {
             SKStoneItem SKStone = MySkillStonesReader.GetRenderModel(skillStoneOfPlayerId);
             SKStone.LevelUpShow(formerExp, newExp);
+        }
+    }
+
+    public struct LevelCal
+    {
+        static Dictionary<int, int> LevelExp;
+        public void INI()
+        {
+            LevelExp = new Dictionary<int, int>();
+            for (int i = 1; i < 100; i++)
+            {
+                LevelExp.Add(i, 100);
+            }
+        }
+        
+        public static Current GetCurrentLevel(int exp)
+        {
+            int currentLevel = 1;
+            while (exp >= 0)
+            {
+                float remain = exp - LevelExp[currentLevel];
+                if (remain >= 0)
+                {
+                    currentLevel++;
+                    exp -= LevelExp[currentLevel];
+                }
+                else
+                {
+                    Current current = new Current
+                    {
+                        currentLevel = currentLevel,
+                        expRemain = exp
+                    };
+                    return current;
+                }
+            }
+            Current level1 = new Current
+            {
+                currentLevel = currentLevel,
+                expRemain = exp
+            };
+            return level1;
+        }
+
+        public struct Current
+        {
+            public int currentLevel;
+            public int expRemain;
         }
     }
 }

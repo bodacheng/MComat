@@ -48,7 +48,7 @@ namespace dataAccess
             }
         }
         
-        public static IEnumerator Update_Level(string skillstoneofplayerid, string targetLevel, ApiLanguage apiLanguage)
+        public static IEnumerator Update_Level(ApiLanguage apiLanguage)
         {
             //SkillStoneOfPlayerInfoModel st = Get(skillstoneofplayerid);
             //st.level = targetLevel;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7991325651183781566}
   - component: {fileID: 6158361636552470340}
   - component: {fileID: 2051349265028375027}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: rotateupwind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4831,8 +4831,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 2.5
-  stop_emission_delay: 2
+  DestructionDelay: 2
+  stop_emission_delay: 1
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
@@ -4967,7 +4967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1385308943760616536}
   - component: {fileID: 7687589937067961523}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: marker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5017,7 +5017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4575415150030162738}
   - component: {fileID: 731286765707987929}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
