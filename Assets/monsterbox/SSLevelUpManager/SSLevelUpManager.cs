@@ -29,7 +29,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     public StoneCell cell4;
     public StoneCell cell5;
     List<StoneCell> MaterialSlots;
-    
+
+    int CurrentExpAmount;
+    int CurrentGoldExaust;
     public static SSLevelUpManager target;
     static LevelCal _LevelCal;
     
@@ -94,6 +96,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         LevelUp.gameObject.SetActive(false);
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
         //LoadingCanvas.target.HigtLightRect(levelUpPageRect);// 这个到底有没有必要那待定吧。。。
+        
+        
     }
     public void CloseLevelUpPage()
     {
@@ -127,6 +131,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         confirmLevelUp.onClick.RemoveAllListeners();
         confirmLevelUp.onClick.AddListener(LevelUp);
+
+        CurrentExpAmount = CalCurrentExpFromMaterialStone();
     }
     #endregion
     
@@ -138,6 +144,24 @@ public partial class SSLevelUpManager : MonoBehaviour
         PreScene.target.mainProcessRunner.Run(LevelUpStone(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
     }
     
+    private int CalCurrentExpFromMaterialStone()
+    {
+        SKStoneItem item1 = cell1.GetItem();
+        SKStoneItem item2 = cell2.GetItem();
+        SKStoneItem item3 = cell3.GetItem();
+        SKStoneItem item4 = cell4.GetItem();
+        SKStoneItem item5 = cell5.GetItem();
+        
+        int point1 = item1 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item1.SkillStoneOfPlayerId) : 0;
+        int point2 = item2 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item2.SkillStoneOfPlayerId) : 0;
+        int point3 = item3 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item3.SkillStoneOfPlayerId) : 0;
+        int point4 = item4 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item4.SkillStoneOfPlayerId) : 0;
+        int point5 = item5 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item5.SkillStoneOfPlayerId) : 0;
+        
+        int fullAmount = GoldToExp(point1) + GoldToExp(point2) + GoldToExp(point3) + GoldToExp(point4) + GoldToExp(point5);
+        return fullAmount;
+    }
+    
     // 分析当前选定的技能石
     public IEnumerator LevelUpStone(string PlayerSkillStoneID)
     {
@@ -146,20 +170,14 @@ public partial class SSLevelUpManager : MonoBehaviour
         SKStoneItem item3 = cell3.GetItem();
         SKStoneItem item4 = cell4.GetItem();
         SKStoneItem item5 = cell5.GetItem();
-        
-        float point1 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item1.SkillStoneOfPlayerId);
-        float point2 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item2.SkillStoneOfPlayerId);
-        float point3 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item3.SkillStoneOfPlayerId);
-        float point4 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item4.SkillStoneOfPlayerId);
-        float point5 = MySkillStonesReader.ConvertSKStoneToWisdomFruit(item5.SkillStoneOfPlayerId);
-        
+                
         yield return MySkillStonesReader.RemoveStone(item1.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item2.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item3.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item4.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item5.SkillStoneOfPlayerId);
         
-        yield return SkillStoneLevelUp(PlayerSkillStoneID, point1 + point2 + point3 + point4 + point5);
+        yield return SkillStoneLevelUp(PlayerSkillStoneID, CurrentExpAmount);
     }
     
     // 实际将技能石提升等级的执行函数
@@ -169,5 +187,17 @@ public partial class SSLevelUpManager : MonoBehaviour
         yield return up;
         Debug.Log("here"+PlayerSkillStoneID);
         RefreshSkillLevelUpModule();
+    }
+    
+    // 智慧果实与经验值转换关系
+    public int GoldToExp(int gold)
+    {
+        return (gold) / 10 * 1;
+    }
+    
+    // 智慧果实与经验值转换关系
+    public int ExpToGold(int Exp)
+    {
+        return Exp * 10;
     }
 }

@@ -7,8 +7,10 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 {
     public void LevelUpShow(float beforeexp, float afterexp)
     {
-        int beforeLevel = SkillStoneOfPlayerInfoModel.ExpToLevel(beforeexp);
-        int aferlevel = SkillStoneOfPlayerInfoModel.ExpToLevel(afterexp);
+        LevelCal levelCal = new LevelCal();
+        levelCal.INI();
+        int beforeLevel = levelCal.GetCurrentLevel((int)beforeexp).currentLevel;
+        int aferlevel = levelCal.GetCurrentLevel((int)afterexp).currentLevel;
         if (aferlevel > beforeLevel)
         {
             OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.LevelUp, aferlevel);

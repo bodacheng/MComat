@@ -3,7 +3,7 @@
 [System.Serializable]
 public class PlayerAccountInfo
 {
-    string PlayerID;
+    readonly string PlayerID;
     
     int coin;//智慧果实
     int diamond;

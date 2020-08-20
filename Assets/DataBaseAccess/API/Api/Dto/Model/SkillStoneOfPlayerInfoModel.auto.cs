@@ -50,23 +50,20 @@ namespace Api.Dto.Model {
         /// </summary>
         public string Inherent { get; set; }
         
-        public int GetLevel()
-        {
-            return ExpToLevel(EXP);
-        }
-                
-        public static int ExpToLevel(float Exp)
-        {
-            return (int)((Exp / 10) + 1);
-        }
-        
         public void ExpUpForStoneShow(float formerExp, float newExp)
         {
             SKStoneItem SKStone = MySkillStonesReader.GetRenderModel(skillStoneOfPlayerId);
             SKStone.LevelUpShow(formerExp, newExp);
         }
+        
+        public int GetLevel()
+        {
+            LevelCal levelCal = new LevelCal();
+            levelCal.INI();
+            return levelCal.GetCurrentLevel((int)EXP).currentLevel;
+        }
     }
-
+    
     public struct LevelCal
     {
         static Dictionary<int, int> LevelExp;
@@ -79,12 +76,12 @@ namespace Api.Dto.Model {
             }
         }
         
-        public static Current GetCurrentLevel(int exp)
+        public Current GetCurrentLevel(int exp)
         {
             int currentLevel = 1;
             while (exp >= 0)
             {
-                float remain = exp - LevelExp[currentLevel];
+                int remain = exp - LevelExp[currentLevel];
                 if (remain >= 0)
                 {
                     currentLevel++;
@@ -95,7 +92,8 @@ namespace Api.Dto.Model {
                     Current current = new Current
                     {
                         currentLevel = currentLevel,
-                        expRemain = exp
+                        expRemain = exp,
+                        expToNextLevel = LevelExp[currentLevel] - exp
                     };
                     return current;
                 }
@@ -112,6 +110,7 @@ namespace Api.Dto.Model {
         {
             public int currentLevel;
             public int expRemain;
+            public int expToNextLevel;
         }
     }
 }
