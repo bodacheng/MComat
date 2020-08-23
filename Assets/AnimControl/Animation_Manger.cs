@@ -32,7 +32,7 @@ public partial class Animation_Manger : MonoBehaviour
             {
                 return _toUse;
             }
-            Debug.Log("邪门了。：" + clip_name);
+            Debug.Log("邪门了." + clip_name + " from 角色：" + gameObject);
         }
         return null;
     }

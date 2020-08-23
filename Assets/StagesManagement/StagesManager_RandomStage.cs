@@ -52,40 +52,40 @@ public partial class StagesManager : MonoBehaviour
         MonstersConfigTable.RefreshCharacterResourceInfoDic();
         
         IDictionary<string, string> CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
-        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count -1 , 3);
+        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count -1 , 6);
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
         
         LocalFight target = new LocalFight();
         
         CharDataInfo char1 = new CharDataInfo
         {
-            ResourceID = "2",//charRecordIds[Indexes[0]],
+            ResourceID = charRecordIds[Indexes[0]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         CharDataInfo char2 = new CharDataInfo
         {
-            ResourceID = "3",//charRecordIds[Indexes[1]],
+            ResourceID = charRecordIds[Indexes[1]],
             _NineAndTwo = RangedStyle("human", 1)
         };        
         CharDataInfo char3 = new CharDataInfo
         {
-            ResourceID = "3",//charRecordIds[Indexes[2]],
+            ResourceID = charRecordIds[Indexes[2]],
             _NineAndTwo = RangedStyle("human", 1)
         };
         
         CharDataInfo char4 = new CharDataInfo
         {
-            ResourceID = "3",//charRecordIds[Indexes[0]],
+            ResourceID = charRecordIds[Indexes[3]],
             _NineAndTwo = BalanceStyle("human", 1)
         };
         CharDataInfo char5 = new CharDataInfo
         {
-            ResourceID = "3",//charRecordIds[Indexes[1]],
+            ResourceID = charRecordIds[Indexes[4]],
             _NineAndTwo = RangedStyle("human", 1)
         };        
         CharDataInfo char6 = new CharDataInfo
         {
-            ResourceID = "2",//charRecordIds[Indexes[2]],
+            ResourceID = charRecordIds[Indexes[5]],
             _NineAndTwo = RangedStyle("human", 1)
         };
         

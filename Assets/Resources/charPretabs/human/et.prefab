@@ -10377,7 +10377,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.7, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6858777148729336541
 MonoBehaviour:
@@ -15540,7 +15540,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.7, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7206054502172281076
 MonoBehaviour:
@@ -16586,7 +16586,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.6, z: 0.6}
+  m_Size: {x: 0.7, y: 0.75, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1809233712296040774
 MonoBehaviour:
@@ -41687,7 +41687,6 @@ MonoBehaviour:
     SP_LEVEL: 0
     RARITY_LEVEL: 0
     ForcedTransitions: []
-  scarecrow: 0
   AllConditionCodes: []
   AI_States_path: 
   usingScript: {fileID: 0}

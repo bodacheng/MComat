@@ -143,7 +143,7 @@ public class LoadingCanvas : MonoBehaviour {
             yield return new WaitForSeconds(1f);
             CloseValidationWindow();
         }
-        ExtraProcesser.target.Run(closeWindow());
+        mainProcessRunner.Run(closeWindow());
     }
     
     void CloseValidationWindow()

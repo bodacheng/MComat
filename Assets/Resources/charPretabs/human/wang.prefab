@@ -5103,7 +5103,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.7, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &271912397744968284
 MonoBehaviour:
@@ -15994,7 +15994,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Size: {x: 0.3, y: 0.4, z: 0.4}
   m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!1 &2971369797708751267
 GameObject:
@@ -35625,7 +35625,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.7, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2043182340236650918
 MonoBehaviour:
@@ -35640,7 +35640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainHealth: {fileID: 1444166451265967107}
-  myColliderMustEquip: {fileID: 0}
+  myColliderMustEquip: {fileID: 2105615979023705492}
 --- !u!1 &4373781954014266372
 GameObject:
   m_ObjectHideFlags: 0
@@ -36206,7 +36206,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.6, z: 0.6}
+  m_Size: {x: 0.7, y: 0.75, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2092628706828742054
 MonoBehaviour:
@@ -51523,7 +51523,6 @@ MonoBehaviour:
     SP_LEVEL: 0
     RARITY_LEVEL: 0
     ForcedTransitions: []
-  scarecrow: 0
   AllConditionCodes: []
   AI_States_path: 
   usingScript: {fileID: 0}
@@ -51568,6 +51567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Center: {fileID: 6530159608908039965}
   AT: 10
+  criticalGaugeMode: 0
 --- !u!114 &1084393984564171710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51772,7 +51772,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6718947497816898733, guid: 54c142c787677d9438287d40ca95832f, type: 3}
+  - {fileID: 2100000, guid: b52864f2ef9914c0389ad209221e9518, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
