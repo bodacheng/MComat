@@ -18,7 +18,7 @@ public class PlayerAccountInfo
     public PlayerAccountInfo()
     {
         PlayerID = "helloKitty";
-        Coin = 0;
+        Coin = 999999999;
         Diamond = 0;
         Stoneboxsize = 500;
     }

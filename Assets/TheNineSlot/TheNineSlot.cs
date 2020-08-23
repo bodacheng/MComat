@@ -131,6 +131,8 @@ namespace mainMenu
                     {
                         _skillStoneDetail.RefreshSkillDetail(_SkillStone._SkillConfig, _SkillStone.SkillStoneOfPlayerId);
                         mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
+                    }else{
+                        _skillStoneDetail.Clear();
                     }
                 }
                 button.onClick.RemoveAllListeners();

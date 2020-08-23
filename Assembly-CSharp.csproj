@@ -387,8 +387,9 @@
     <Compile Include="Assets\ModelShower\ModelShower.cs" />
     <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
+    <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
+    <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager\Util.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
@@ -495,6 +496,7 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
+    <Compile Include="Assets\Singleton\LevelCal.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
     <Compile Include="Assets\Singleton\SystemNotes.cs" />

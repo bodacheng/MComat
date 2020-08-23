@@ -25,6 +25,8 @@ namespace mainMenu
                     if (_stone != null && _stone._SkillConfig != null)
                     {
                         _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
+                    }else{
+                        _skillStoneDetail.Clear();
                     }
                 }
                 button.onClick.RemoveAllListeners();

@@ -23437,7 +23437,7 @@ GameObject:
   - component: {fileID: 419105427}
   - component: {fileID: 419105426}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28633,7 +28633,7 @@ GameObject:
   - component: {fileID: 437884325}
   - component: {fileID: 437884324}
   m_Layer: 5
-  m_Name: exMinusButton
+  m_Name: goldMinusButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30151,7 +30151,7 @@ GameObject:
   - component: {fileID: 480116517}
   - component: {fileID: 480116516}
   m_Layer: 5
-  m_Name: levelUpButton
+  m_Name: OpenLevelUpWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33008,6 +33008,83 @@ MonoBehaviour:
           m_StringArgument: SkillStones
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &571802167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 571802170}
+  - component: {fileID: 571802169}
+  - component: {fileID: 571802168}
+  m_Layer: 5
+  m_Name: Exp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &571802168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571802167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &571802169
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571802167}
+  m_CullTransparentMesh: 0
+--- !u!224 &571802170
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571802167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1539971669}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 144, y: -58}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &573660419
 GameObject:
   m_ObjectHideFlags: 0
@@ -36137,7 +36214,7 @@ GameObject:
   - component: {fileID: 669186687}
   - component: {fileID: 669186686}
   m_Layer: 5
-  m_Name: exPlusButton
+  m_Name: goldPlusButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38528,7 +38605,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.9999991}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38611,7 +38688,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 747297275}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999991
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -79262,11 +79339,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelUpPageRect: {fileID: 1800753982}
-  LevelUp: {fileID: 480116516}
+  OpenLevelUpWindow: {fileID: 480116516}
   plusLevel: {fileID: 669186686}
   minusLevel: {fileID: 437884324}
   confirmLevelUp: {fileID: 8769088591108847385}
-  TargetLevel: {fileID: 319411671}
+  StoneTargetLevel: {fileID: 419105426}
+  CurrentExpToNextLevel: {fileID: 571802168}
+  CurrentGoldExaustText: {fileID: 319411671}
   _Selected: {fileID: 1006085233}
   cell1: {fileID: 812817515}
   cell2: {fileID: 2101234952}
@@ -87488,6 +87567,7 @@ RectTransform:
   m_Children:
   - {fileID: 2124342769}
   - {fileID: 419105425}
+  - {fileID: 571802170}
   m_Father: {fileID: 1800753982}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

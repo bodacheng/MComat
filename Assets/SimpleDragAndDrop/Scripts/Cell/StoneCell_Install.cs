@@ -22,18 +22,22 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                     break;
                 }
             break;
-            case CellPhase.Casual:
+            case CellPhase.SKLevelUpMSlot:
                 if (to.myDadItem == null)
                     SVCenter.MoveItemFromTo(from, to);
                 else
                     SVCenter.SwapItemFromTo(from, to);
+                SSLevelUpManager.target.RefreshSkillLevelUpModule();
             break;
             case CellPhase.SkillStoneBoxCell:
                 switch(from.cellPhase)
                 {
                     case CellPhase.NineSlotCell:
-                    case CellPhase.Casual:
                         SVCenter.StoneRemoveFromSlotToCell(from, to);
+                    break;
+                    case CellPhase.SKLevelUpMSlot:
+                        SVCenter.StoneRemoveFromSlotToCell(from, to);
+                        SSLevelUpManager.target.RefreshSkillLevelUpModule();
                     break;
                 }
             break;

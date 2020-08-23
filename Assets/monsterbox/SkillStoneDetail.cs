@@ -12,7 +12,7 @@ namespace mainMenu
         [Space(2)]
         [Header("BOXT")]
         public RectTransform _T;
-    
+        
         [Space(2)]
         [Header("图标")]
         public RectTransform IconShowT;
@@ -41,6 +41,7 @@ namespace mainMenu
             return currentstone;
         }
         
+        // 额外生成一个技能石图像
         IEnumerator IconForShow(string skillID)
         {
             IEnumerator Generate = SkillStonesBox.GenerateStoneMode(skillID , 2);
@@ -56,6 +57,23 @@ namespace mainMenu
                 item.gameObject.SetActive(true);
                 item.transform.localPosition = Vector3.zero;
                 item.transform.localScale = Vector3.one;
+            }
+        }
+        
+        public void Clear()
+        {
+            keyname.text = "";
+            Showname.text = "";
+            ShowSkillStoneExType(-1);
+            ShowSKillRanges(-10, -10);//即清空
+            skill_level_levelup.text = "";
+            skill_level_info.text = "";
+            if (IconShowT != null)
+            {
+                foreach (Transform child in IconShowT)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
         

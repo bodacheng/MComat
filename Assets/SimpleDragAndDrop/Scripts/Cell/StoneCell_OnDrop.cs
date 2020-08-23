@@ -36,13 +36,17 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         switch (sourceCell.cellPhase)
                         {
                             case CellPhase.NineSlotCell:// 已装备石头的卸载
-                            case CellPhase.Casual:// 已装备石头的卸载                            
                                 Install(sourceCell, this);
+                                break;
+                            case CellPhase.SKLevelUpMSlot:// 已装备石头的卸载                            
+                                Install(sourceCell, this);
+                                SSLevelUpManager.target.RefreshSkillLevelUpModule();
                             break;
                         }
                     break;
-                    case CellPhase.Casual:
+                    case CellPhase.SKLevelUpMSlot:
                         Install(sourceCell, this);
+                        SSLevelUpManager.target.RefreshSkillLevelUpModule();
                     break;
                 }
             }

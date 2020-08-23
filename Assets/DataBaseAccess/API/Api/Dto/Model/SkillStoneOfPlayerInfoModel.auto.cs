@@ -26,13 +26,13 @@ namespace Api.Dto.Model {
         /// 等级，限制为1到100
         /// </summary>
         string exp { get; set; }
-        public float EXP {
+        public int EXP {
             set {
                 if (exp != null)
                     ExpUpForStoneShow(float.Parse(exp), value);
                 exp = value.ToString();
             }
-            get { return float.Parse(exp);}
+            get { return int.Parse(exp);}
         }
         
         /// <summary>
@@ -58,59 +58,7 @@ namespace Api.Dto.Model {
         
         public int GetLevel()
         {
-            LevelCal levelCal = new LevelCal();
-            levelCal.INI();
-            return levelCal.GetCurrentLevel((int)EXP).currentLevel;
-        }
-    }
-    
-    public struct LevelCal
-    {
-        static Dictionary<int, int> LevelExp;
-        public void INI()
-        {
-            LevelExp = new Dictionary<int, int>();
-            for (int i = 1; i < 100; i++)
-            {
-                LevelExp.Add(i, 100);
-            }
-        }
-        
-        public Current GetCurrentLevel(int exp)
-        {
-            int currentLevel = 1;
-            while (exp >= 0)
-            {
-                int remain = exp - LevelExp[currentLevel];
-                if (remain >= 0)
-                {
-                    currentLevel++;
-                    exp -= LevelExp[currentLevel];
-                }
-                else
-                {
-                    Current current = new Current
-                    {
-                        currentLevel = currentLevel,
-                        expRemain = exp,
-                        expToNextLevel = LevelExp[currentLevel] - exp
-                    };
-                    return current;
-                }
-            }
-            Current level1 = new Current
-            {
-                currentLevel = currentLevel,
-                expRemain = exp
-            };
-            return level1;
-        }
-
-        public struct Current
-        {
-            public int currentLevel;
-            public int expRemain;
-            public int expToNextLevel;
+            return LevelCal.Instance.GetCurrentInfo((int)EXP).currentLevel;
         }
     }
 }

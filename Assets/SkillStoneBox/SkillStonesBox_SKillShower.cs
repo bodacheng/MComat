@@ -18,6 +18,8 @@ namespace mainMenu
                     {
                         _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
                         mainProcessRunner.Run(MemberDetail.target._SkillsPrintOut.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
+                    }else{
+                        _skillStoneDetail.Clear();
                     }
                 }
                 button.onClick.RemoveAllListeners();

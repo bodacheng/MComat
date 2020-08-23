@@ -11,7 +11,7 @@ public class RewardManager : MonoBehaviour
      /// </summary>
      /// <param name="StoneOfPlayerIDs">技能石存档列表</param>
      /// <param name="addExp">增加的经验</param>
-    public static IEnumerator ExpUpForStones(List<string> StoneOfPlayerIDs, float addExp)
+    public static IEnumerator ExpUpForStones(List<string> StoneOfPlayerIDs, int addExp)
     {
         for (int i = 0; i < StoneOfPlayerIDs.Count; i++)
         {
@@ -29,10 +29,10 @@ public class RewardManager : MonoBehaviour
         yield break;
     }
     
-    public static IEnumerator ExpUpForStones_Local(string StoneOfPlayerID, float addExp)
+    public static IEnumerator ExpUpForStones_Local(string StoneOfPlayerID, int addExp)
     {
         SkillStoneOfPlayerInfoModel stoneOfPlayer =  MySkillStonesReader.Get(StoneOfPlayerID);
-        float formerExp = stoneOfPlayer.EXP;
+        int formerExp = stoneOfPlayer.EXP;
         stoneOfPlayer.EXP = formerExp + addExp;
         yield return MySkillStonesReader.Update(StoneOfPlayerID);
     }

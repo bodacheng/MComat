@@ -24,6 +24,7 @@ public class MemberDetail_edit : MainSceneProcess
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 2);
         yield return SkillEditButtonFeature(MemberDetail.target._focusing);
+        SkillStonesBox.target._skillStoneDetail.Clear();
         
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);

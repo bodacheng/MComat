@@ -1,26 +1,30 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using Api.Dto.Model;
-using dataAccess;
-using System.Collections;
-using mainMenu;
+﻿using System.Collections;
 using System.Collections.Generic;
+using dataAccess;
+using mainMenu;
+using UnityEngine;
+using UnityEngine.UI;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
     [Space(7)]
-    [Header("升级按钮系列")]
+    [Header("按钮")]
     public RectTransform levelUpPageRect;
-    public Button LevelUp;
+    public Button OpenLevelUpWindow;
     public Button plusLevel;
     public Button minusLevel;
     public Button confirmLevelUp;
-    public Text TargetLevel;
-    
+
+    [Space(7)]
+    [Header("目前各种参数显示")]
+    public Text StoneTargetLevel;
+    public Text CurrentExpToNextLevel;
+    public Text CurrentGoldExaustText;
+
     [Space(7)]
     [Header("尝试升级的技能石的选中标记框")]
     public GameObject _Selected;
-    
+
     [Space(7)]
     [Header("融合技能槽")]
     public StoneCell cell1;
@@ -30,11 +34,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     public StoneCell cell5;
     List<StoneCell> MaterialSlots;
 
-    int CurrentExpAmount;
-    int CurrentGoldExaust;
+    SkillStoneDetail focusingSSD;
     public static SSLevelUpManager target;
-    static LevelCal _LevelCal;
-    
+
     void Awake()
     {
         target = this;
@@ -46,41 +48,19 @@ public partial class SSLevelUpManager : MonoBehaviour
             cell4,
             cell5
         };
-        _LevelCal.INI();
     }
-    
-    SkillStoneDetail focusingSSD;
+
     public void SetFocusingSSD(SkillStoneDetail fSSD)
     {
         focusingSSD = fSSD;
     }
-    
-    // 添加强化素材用技能石
-    public void AddMaterial(StoneCell skillboxcell)
+
+    // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
+    public int CurrentAddExp()
     {
-        for (int i = 0; i < MaterialSlots.Count; i++)
-        {
-            MaterialSlots[i].UpdateMyItem();
-            if (MaterialSlots[i].GetItem() == null)
-            {
-                StoneCell.Install(skillboxcell, MaterialSlots[i]);
-                break;
-            }
-        }
+        return GoldToExp(CurrentGoldExaust) + CalCurrentExpFromMaterialStone();
     }
-    
-    void ReturnAllMaterialsToBox()
-    {
-        for (int i = 0; i < MaterialSlots.Count; i++)
-        {
-            MaterialSlots[i].UpdateMyItem();
-            if (MaterialSlots[i].GetItem() != null)
-            {
-                MaterialSlots[i].ReturnStoneToBox();
-            }
-        }
-    }
-    
+
     #region 技能石升级窗口的开启与关闭,都是直接放在按钮上。
     public void OpenLevelUpPage()
     {
@@ -89,15 +69,10 @@ public partial class SSLevelUpManager : MonoBehaviour
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(focusingSSD.GetSTTarget().skillStoneOfPlayerId);
         StoneCell targetStoneOnCell = targetStone.GetCell();
         StoneCell.SeletedRender(targetStoneOnCell, _Selected);
-        
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
-        RefreshSkillLevelUpModule();
         levelUpPageRect.gameObject.SetActive(true);
-        LevelUp.gameObject.SetActive(false);
+        RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
-        //LoadingCanvas.target.HigtLightRect(levelUpPageRect);// 这个到底有没有必要那待定吧。。。
-        
-        
     }
     public void CloseLevelUpPage()
     {
@@ -105,34 +80,73 @@ public partial class SSLevelUpManager : MonoBehaviour
         StoneCell.SeletedRender(null, _Selected);
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 1);
         levelUpPageRect.gameObject.SetActive(false);
-        LevelUp.gameObject.SetActive(true);
+        RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(true);
-        //LoadingCanvas.target.ClearHigtLight();
     }
     #endregion
-        
+    
+    public void Clear()
+    {
+        StoneTargetLevel.text = "";
+        CurrentExpToNextLevel.text = "";
+        CurrentGoldExaustText.text = "";
+        plusLevel.gameObject.SetActive(false);
+        minusLevel.gameObject.SetActive(false);
+        confirmLevelUp.gameObject.SetActive(false);
+        OpenLevelUpWindow.gameObject.SetActive(false);
+    }
+    
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
-    int currentlevel;
-    void RefreshSkillLevelUpModule()
+    public void RefreshSkillLevelUpModule()
     {
         if (focusingSSD.GetSTTarget() == null)
         {
-            plusLevel.gameObject.SetActive(false);
-            minusLevel.gameObject.SetActive(false);
+            Clear();
             return;
         }
-        currentlevel = focusingSSD.GetSTTarget().GetLevel();        
-        plusLevel.gameObject.SetActive(true);
-        minusLevel.gameObject.SetActive(true);
-        
-        void LevelUp()
+        if (levelUpPageRect.gameObject.activeSelf)
         {
-            LoadingCanvas.target.ArrangeConfirmWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
+            OpenLevelUpWindow.gameObject.SetActive(false);
+        }else{
+            OpenLevelUpWindow.gameObject.SetActive(true);
         }
-        confirmLevelUp.onClick.RemoveAllListeners();
-        confirmLevelUp.onClick.AddListener(LevelUp);
+        
+        #region 各数值文本刷新
+        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + (int)focusingSSD.GetSTTarget().EXP);
+        StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
+        StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
 
-        CurrentExpAmount = CalCurrentExpFromMaterialStone();
+        CurrentExpToNextLevel.text = "(" + current.expRemain + "/" + (current.expRemain + current.expToNextLevel).ToString() + ")";
+        CurrentExpToNextLevel.color = CurrentGoldExaust > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
+
+        CurrentGoldExaustText.text = "消耗金币："+ CurrentGoldExaust;
+        #endregion
+        
+        if (CurrentGoldExaust > 0)
+        {
+            minusLevel.gameObject.SetActive(true);
+        }else{
+            minusLevel.gameObject.SetActive(false);
+        }
+        if (AccountSet._AccInfo.Coin == CurrentGoldExaust)
+        {
+            plusLevel.gameObject.SetActive(false);
+        }else{
+            plusLevel.gameObject.SetActive(true);
+        }
+        
+        if (CurrentAddExp() > 0)
+        {
+            void LevelUp()
+            {
+                LoadingCanvas.target.ArrangeConfirmWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
+            }
+            confirmLevelUp.onClick.RemoveAllListeners();
+            confirmLevelUp.onClick.AddListener(LevelUp);
+            confirmLevelUp.gameObject.SetActive(true);
+        }else{
+            confirmLevelUp.gameObject.SetActive(false);
+        }
     }
     #endregion
     
@@ -142,24 +156,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         if (focusingSSD.GetSTTarget() == null)
             return;
         PreScene.target.mainProcessRunner.Run(LevelUpStone(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
-    }
-    
-    private int CalCurrentExpFromMaterialStone()
-    {
-        SKStoneItem item1 = cell1.GetItem();
-        SKStoneItem item2 = cell2.GetItem();
-        SKStoneItem item3 = cell3.GetItem();
-        SKStoneItem item4 = cell4.GetItem();
-        SKStoneItem item5 = cell5.GetItem();
-        
-        int point1 = item1 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item1.SkillStoneOfPlayerId) : 0;
-        int point2 = item2 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item2.SkillStoneOfPlayerId) : 0;
-        int point3 = item3 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item3.SkillStoneOfPlayerId) : 0;
-        int point4 = item4 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item4.SkillStoneOfPlayerId) : 0;
-        int point5 = item5 != null ? MySkillStonesReader.ConvertSKStoneToWisdomFruit(item5.SkillStoneOfPlayerId) : 0;
-        
-        int fullAmount = GoldToExp(point1) + GoldToExp(point2) + GoldToExp(point3) + GoldToExp(point4) + GoldToExp(point5);
-        return fullAmount;
     }
     
     // 分析当前选定的技能石
@@ -177,27 +173,15 @@ public partial class SSLevelUpManager : MonoBehaviour
         yield return MySkillStonesReader.RemoveStone(item4.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item5.SkillStoneOfPlayerId);
         
-        yield return SkillStoneLevelUp(PlayerSkillStoneID, CurrentExpAmount);
+        yield return SkillStoneLevelUp(PlayerSkillStoneID);
     }
     
     // 实际将技能石提升等级的执行函数
-    IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID, float AddExp)
+    IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
     {
         IEnumerator up = MySkillStonesReader.Update_Level(ApiLanguage.EnUs);
         yield return up;
         Debug.Log("here"+PlayerSkillStoneID);
         RefreshSkillLevelUpModule();
-    }
-    
-    // 智慧果实与经验值转换关系
-    public int GoldToExp(int gold)
-    {
-        return (gold) / 10 * 1;
-    }
-    
-    // 智慧果实与经验值转换关系
-    public int ExpToGold(int Exp)
-    {
-        return Exp * 10;
     }
 }

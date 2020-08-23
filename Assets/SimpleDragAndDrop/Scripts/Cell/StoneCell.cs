@@ -15,7 +15,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         SkillStoneBoxCell,
         NineSlotCell,
-        Casual
+        SKLevelUpMSlot
     }
     
     public enum SelectMode
