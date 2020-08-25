@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using LitJson;
-using System.Text.RegularExpressions;
 using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Form.Common;
@@ -13,11 +12,14 @@ namespace dataAccess
 {
     public partial class AccountSet
     {
+        static string deviceId;
         public static IEnumerator login()
         {
+            deviceId = SystemInfo.deviceUniqueIdentifier;
+            deviceId = "asdadasdafwerfefe";
             WWWForm form = new WWWForm();
-            form.AddField("userId", "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd");
-            IEnumerator ask = RemoteAccess.generalRemoteAccess(form,"http://160.16.187.230/AssetStoreFight/player/login");
+            form.AddField("deviceId", deviceId);
+            IEnumerator ask = RemoteAccess.generalRemoteAccess(form, "http://160.16.187.230:8089/player/login");
             yield return ask;
             DownloadHandler downloadHandler = (DownloadHandler)ask.Current;
             if (downloadHandler != null)
@@ -25,12 +27,42 @@ namespace dataAccess
                 string response = System.Text.Encoding.UTF8.GetString(downloadHandler.data);
                 Debug.Log("login返回:" + response);
                 JsonData jsonvale = JsonMapper.ToObject(downloadHandler.text);
-                sessionId = jsonvale["data"]["sessionId"].ToJson();
-                sessionId = Regex.Replace(sessionId, @"[^a-zA-Z0-9\u4e00-\u9fa5\s]", "");
+                if (jsonvale["deviceId"] != null)
+                {
+                
+                }else{
+                    IEnumerator _registered = registered();
+                    yield return _registered;
+                    DownloadHandler _registereddownloadHandler = (DownloadHandler)_registered.Current;
+                    if (_registereddownloadHandler != null)
+                    {
+                        yield return login();
+                    }else{
+                        Debug.Log("注册失败，退出");
+                        yield return null;
+                        yield break;
+                    }
+                }
             }else{
-                Debug.Log("login失败.按理说应该返回大厅终止程序进行");
+                Debug.Log("网络错误等等");
             }
-            yield break;
+        }
+        
+        public static IEnumerator registered()
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("deviceId", deviceId);
+            IEnumerator ask = RemoteAccess.generalRemoteAccess(form, "http://160.16.187.230:8089/player/addPlayer");
+            yield return ask;
+            DownloadHandler downloadHandler = (DownloadHandler)ask.Current;
+            if (downloadHandler != null)
+            {
+                string response = System.Text.Encoding.UTF8.GetString(downloadHandler.data);
+                Debug.Log("注册返回:" + response);
+                JsonData jsonvale = JsonMapper.ToObject(downloadHandler.text);
+            }else{
+                Debug.Log("注册失败.按理说应该返回大厅终止程序进行");
+            }
         }
 
         static IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage)
@@ -42,7 +74,6 @@ namespace dataAccess
             // フォーム
             CertificationForm form = new CertificationForm
             {
-                sessionId = sessionId
             };
 
             // ==============================

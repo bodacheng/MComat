@@ -8,6 +8,6 @@
         /// <summary>
         /// セッションID
         /// </summary>
-        public string sessionId { get; set; }
+        //public string sessionId { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace dataAccess
                 Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + stoneOfPlayerID);
                 yield break;
             }
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     Update_Json(Dic[stoneOfPlayerID]);
@@ -60,7 +60,7 @@ namespace dataAccess
         public static IEnumerator LoadAll()
         {
             Dic.Clear();
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     LoadAll_Json(Application.persistentDataPath + "/MyStones");

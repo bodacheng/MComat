@@ -4853,7 +4853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 3.1
+  DestructionDelay: 3.01
   stop_emission_delay: 3
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
@@ -4935,6 +4935,7 @@ MonoBehaviour:
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!1 &1049895528718422
 GameObject:

@@ -132,7 +132,7 @@ namespace dataAccess
         
         public static IEnumerator StoneGotcha()
         {
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     break;

@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Model;
-using System.Linq;
 using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Model.Common;
@@ -15,7 +13,6 @@ namespace dataAccess
         {
             GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm
             {
-                sessionId = AccountSet.sessionId
             };
             switch (teamSetGameMode)
             {
@@ -75,7 +72,6 @@ namespace dataAccess
         {
             SetMonsterTeamOfPlayerForm form = new SetMonsterTeamOfPlayerForm
             {
-                sessionId = AccountSet.sessionId
             };
             switch (teamSetGameMode)
             {

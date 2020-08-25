@@ -15,7 +15,7 @@ public class RewardManager : MonoBehaviour
     {
         for (int i = 0; i < StoneOfPlayerIDs.Count; i++)
         {
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     yield return ExpUpForStones_Local(StoneOfPlayerIDs[i], addExp);

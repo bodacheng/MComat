@@ -74,7 +74,6 @@ namespace FightScene
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnter();
-                //Debug.Log("主场景已经进入了：" + sceneStep);
             }
             else
             {
@@ -83,7 +82,6 @@ namespace FightScene
                     Debug.Log(sceneStep + "倒是在字典里");
                     Debug.Log(currentProcess);
                 }
-                Debug.Log("这个场景进程没定义：" + sceneStep);
             }
         }
     }

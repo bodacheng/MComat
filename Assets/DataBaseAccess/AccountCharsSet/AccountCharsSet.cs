@@ -33,7 +33,7 @@ namespace dataAccess
                 GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
                 yield break;
             }
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     yield return UpdateCharJsonSaveData(target);
@@ -50,7 +50,7 @@ namespace dataAccess
         public static IEnumerator AddToAccount(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
         {
             IEnumerator temp_enumerator = null;
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     temp_enumerator = AddNewCharToJsonSaveData(_accountCharacterInfo);// 内部已经包整理角色列表的处理
@@ -88,7 +88,7 @@ namespace dataAccess
         public static IEnumerator Load(string monsterlocalid)
         {
             GetMonsterOfPlayerDetailModel accountCharInfo = null;
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     accountCharInfo = LoadAccCharInfoViaJsonFile(monsterlocalid);
@@ -108,7 +108,7 @@ namespace dataAccess
         public static IEnumerator LoadAll()
         {
             List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     charList = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");

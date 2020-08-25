@@ -72,7 +72,7 @@ public class BoxExpandHelper : MonoBehaviour
     {
         OptionT.gameObject.SetActive(false);
         IEnumerator expansionProcess = null;
-        switch (AccountSet._playerinfoReferenceMode)
+        switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 AccountSet._AccInfo.Stoneboxsize = AccountSet._AccInfo.Stoneboxsize + ExpandCount;

@@ -31,7 +31,7 @@ namespace dataAccess
         
         public static IEnumerator LoadTeamSet(TeamSetGameMode teamSetGameMode)
         {
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.remoteTestPlayer:
                     yield return LoadTeamSetsRemote(teamSetGameMode, ApiLanguage.JaJp);
@@ -60,7 +60,7 @@ namespace dataAccess
         
         public static IEnumerator SaveTeamSet(TeamSetGameMode teamSetGameMode)
         {
-            switch (AccountSet._playerinfoReferenceMode)
+            switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.remoteTestPlayer:
                     yield return SaveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。

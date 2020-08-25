@@ -18866,12 +18866,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 114285811957036984}
   TrackControl: {fileID: 0}
-  DestructionDelay: 9.5
+  DestructionDelay: 9.01
   stop_emission_delay: 9
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!114 &1884312957814384221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18915,7 +18915,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}

@@ -4885,12 +4885,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 9.5
+  DestructionDelay: 9.01
   stop_emission_delay: 9
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!114 &114187521424108902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4958,9 +4958,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  yAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!1 &5731053541432460348
 GameObject:

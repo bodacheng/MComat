@@ -64,11 +64,25 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         StartCoroutine(ToMainSceneDirectly());
     }
     
-    public IEnumerator _BeginRemoteTestMode()
+    IEnumerator _BeginRemoteTestMode()
     {
-        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
+        AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
         yield return AccountSet.login();
-        SceneManager.LoadScene(1);
+        EnterFrontScene();
+    }
+    
+    IEnumerator _BeginLocalTestMode()
+    {
+        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        EnterFrontScene();
+        yield break;
+    }
+    
+    void EnterFrontScene()
+    {
+        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+        stage._fightEventType = FightEventType.Screensaver;
+        FightLoad.Go(stage);
     }
     
     public void DeleteLocalSaveDate()
@@ -79,7 +93,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     
     IEnumerator ToMainSceneDirectly()
     {
-        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
@@ -88,7 +102,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     
     IEnumerator _StartNewLocalTestMode()
     {
-        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();        
@@ -96,16 +110,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         stage._fightEventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
     }
-    
-    IEnumerator _BeginLocalTestMode()
-    {
-        AccountSet._playerinfoReferenceMode = PlayerInfoRefMode.localTestSaveData;        
-        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
-        stage._fightEventType = FightEventType.Screensaver;
-        FightLoad.Go(stage);
-        yield break;
-    }
-    
+        
     public IEnumerator ResourcePrepareProcess()
     {
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
