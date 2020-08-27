@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using mainMenu;
+using dataAccess;
 
 public class QuestInfo : MainSceneProcess
 {
@@ -10,7 +11,7 @@ public class QuestInfo : MainSceneProcess
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
-        yield return FightPreparePage.target.GetReadyForStageASTeam();
+        yield return GetReadyForQuestInfoPage();
     }
     
     public QuestInfo()
@@ -18,7 +19,7 @@ public class QuestInfo : MainSceneProcess
         Step = MainSceneStep.QuestInfo;
         EelementsInherit(PreScene.target);
     }
-      
+    
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());
@@ -27,5 +28,28 @@ public class QuestInfo : MainSceneProcess
     public override void ProcessEnd()
     {
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
+    }
+    
+    // 这个函数目前是固定使用“默认队伍配置”
+    public IEnumerator GetReadyForQuestInfoPage()
+    {
+        FightPreparePage.target.QuestName.text = FightLoad.ToBeLoad.battleNameJPG;
+        switch(FightLoad.ToBeLoadMode)
+        {
+            case TeamSetGameMode.arena3V3:
+                void GoToTeamEdit_Arena()
+                {
+                    TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
+                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+                }
+                FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
+                FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
+                yield return FightLoad.Arena();
+                break;
+        }
+        FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
+        FightPreparePage.target.StageMembersInfoShow(FightLoad.ToBeLoad);
+        FightPreparePage.target.BeginFight.onClick.RemoveAllListeners();
+        FightPreparePage.target.BeginFight.onClick.AddListener(FightLoad.GoTo);
     }
 }

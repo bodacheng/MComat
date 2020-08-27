@@ -8,6 +8,8 @@ public class ArcadeFrontProcess : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
+        ArcadeManager.target.JumpToNewest();
+        ArcadeManager.target.RefreshRender();
         loadFinished = true;
         yield break;
     }

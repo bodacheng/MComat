@@ -76,7 +76,7 @@ public class MonstersConfigTable
                 break;
         }
         RefreshCharacterResourceInfoDic();
-        yield break;    
+        yield break;
     }
 
 	public List<Row> rowList = new List<Row>();

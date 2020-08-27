@@ -33,11 +33,23 @@ public class HeroIcon : MonoBehaviour {
             frames.Add(Zokusei.Null, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
     }
     
+    public void Grey()
+    {
+        frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
+        Icon.color = new Color(1,1,1,0.3f);
+    }
+    
+    public void LightOn()
+    {
+        frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
+        Icon.color = new Color(1,1,1,1f);
+    }
+    
     public void CooldownCurtainUpdate(float proportion)
     {
         cooldownCurtain.fillAmount = proportion;
     }
-        
+    
     public void ChangeIcon(Sprite _Sprite, Zokusei zokusei)
     {
         if (frame == null || Icon == null)
@@ -90,7 +102,7 @@ public class HeroIcon : MonoBehaviour {
                 break;
         }
         iconButton.colors = colors;
-
+        
         Icon.sprite = _Sprite;
         Icon.color = Icon.sprite == null ? new Color(1, 1, 1, 0f) : Color.white;
         
@@ -141,19 +153,20 @@ public class HeroIcon : MonoBehaviour {
     }
     
     // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static void ArrangeHeroIconToT(HeroIcon heroIconPretab, CharDataInfo CharDataInfo, RectTransform T)
+    public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, CharDataInfo CharDataInfo, RectTransform T)
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
         CharConfig charConfig = MonstersConfigTable.GetCharConfig(CharDataInfo.ResourceID);
         if (charConfig == null)
         {
             Debug.Log("?? : " + CharDataInfo.ResourceID);
-            return;
+            return null;
         }
         MyMemberIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig._zokusei);
         MyMemberIcon.transform.SetParent(T);
         MyMemberIcon.transform.localPosition = Vector3.one;
         MyMemberIcon.transform.localScale = Vector3.one;
         MyMemberIcon.gameObject.SetActive(true);
+        return MyMemberIcon;
     }
 }

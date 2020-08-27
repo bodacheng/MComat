@@ -143,8 +143,8 @@ namespace mainMenu
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             yield return ArrangeTeamBySelection();
-            FightPreparePage.target.PreLoad(stage, TeamSetGameMode.SelfFight);
-            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, true);
+            FightLoad.PreLoad(stage, TeamSetGameMode.SelfFight);
+            FightLoad.GoTo();
         }
         
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行

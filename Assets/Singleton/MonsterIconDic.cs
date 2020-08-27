@@ -37,10 +37,10 @@ public class MonsterIconDic {
         switch (ResourceLoadingSetting.IconLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                onecoroutine = MonsterIconDic.Instance.FindMonsterIconByCach(resource_id);
+                onecoroutine = Instance.FindMonsterIconByCach(resource_id);
                 break;
             case ResourceLoadMode.Resource:
-                onecoroutine = MonsterIconDic.Instance.FindMonsterIconByResource(resource_id);
+                onecoroutine = Instance.FindMonsterIconByResource(resource_id);
                 break;
             case ResourceLoadMode.StreamingAssetAB:
                 break;

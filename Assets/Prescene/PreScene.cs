@@ -79,6 +79,23 @@ namespace mainMenu
         // 应该有更好精致的机理来回避重复计算。
         public IEnumerator StartUpProcess()
         {
+            switch (AccountSet._AccInfo.accountprogress)
+            {
+                case PlayerAccountProgressStep.Freedom:
+                    yield return AccountCharsSet.LoadAll();
+                    yield return MySkillStonesReader.LoadAll();
+                break;
+                case PlayerAccountProgressStep.justCreated:
+                break;
+                case PlayerAccountProgressStep.Tutorial:
+                    yield return AccountCharsSet.LoadTutorial();
+                    yield return MySkillStonesReader.LoadTutorial();
+                break;
+            }
+            yield return AccountSet.LoadCustomerInfo(); // 缺response判断
+            yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
+            yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
+        
             LoadingCanvas.target.DarkOff(0.5f);
             Application.targetFrameRate = 60;
             
@@ -137,7 +154,6 @@ namespace mainMenu
             LoadingCanvas.target.TurnOnProcessDescription(true);
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
             
-            yield return AccountSet.LoadCustomerInfo(); // 缺response判断
             Setting.target.LoadProgrameSettingFromAccount();
             UserID.text = SystemInfo.deviceUniqueIdentifier;
             accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
@@ -156,23 +172,6 @@ namespace mainMenu
             
             yield return _SelfFightManager.INITeamPosButtons();
             
-            // 缺response判断
-            yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
-            yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
-
-            switch (AccountSet._AccInfo.accountprogress)
-            {
-                case PlayerAccountProgressStep.Freedom:
-                    yield return AccountCharsSet.LoadAll();
-                    yield return MySkillStonesReader.LoadAll();
-                break;
-                case PlayerAccountProgressStep.justCreated:
-                break;
-                case PlayerAccountProgressStep.Tutorial:
-                    yield return AccountCharsSet.LoadTutorial();
-                    yield return MySkillStonesReader.LoadTutorial();
-                break;
-            }
             yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
             LoadingCanvas.target.LightUp();
             

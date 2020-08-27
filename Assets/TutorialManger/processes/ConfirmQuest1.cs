@@ -11,7 +11,7 @@ public class ConfirmQuest1 : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(FightPreparePage.target.EnterQuest.transform);
+        //LoadingCanvas.target.HigtLightRect(FightPreparePage.target.EnterQuest.transform);
     }
     
     public override void ProcessEnd()

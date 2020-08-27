@@ -41,7 +41,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
         {
-            FightPreparePage.target.PreLoad(_SO, TeamSetGameMode.arena3V3);
+            FightLoad.PreLoad(_SO, TeamSetGameMode.arena3V3);
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
         }
         BigButton.onClick.AddListener(PrepareForIt);
