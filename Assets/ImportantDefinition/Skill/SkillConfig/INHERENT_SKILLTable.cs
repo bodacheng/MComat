@@ -14,7 +14,7 @@ public class INHERENT_SkillTable
 	}
     
     static readonly List<Row> rowList = new List<Row>();
-    static bool isLoaded = false;
+    static bool isLoaded;
     
     public static bool IsLoaded()
     {
@@ -69,7 +69,7 @@ public class INHERENT_SkillTable
             Load(csv);
         }
     }
-
+    
 	public static void Load(TextAsset csv)
 	{
 		rowList.Clear();

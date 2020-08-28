@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using dataAccess;
 using System.Collections;
+using UniRx;
 
 namespace mainMenu
 {
@@ -16,6 +17,10 @@ namespace mainMenu
         [Space(7)]
         [Header("编辑队伍")]
         public Button EditTeamButton; // 根据进入战斗模式决定是否显示
+        
+        [Space(7)]
+        [Header("编辑队伍")]
+        public Button JumpToNewStage; // 根据进入战斗模式决定是否显示
         
         [Space(7)]
         [Header("myteamT")]
@@ -137,7 +142,31 @@ namespace mainMenu
             
             EditTeamButton.onClick.RemoveAllListeners();
             EditTeamButton.onClick.AddListener(TeamSet.GoToTeamEdit_Arcade);
-            
+            JumpToNewStage.onClick.RemoveAllListeners();
+            JumpToNewStage.onClick.AddListener(JumpToNewest);
+
+            SingleAssignmentDisposable autoHide = new SingleAssignmentDisposable
+            {
+                Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                    {
+                        if (!JumpToNewStage.gameObject.activeSelf)
+                        {
+                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.2f)
+                            {
+                                JumpToNewStage.gameObject.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) <= 0.2f)
+                            {
+                                JumpToNewStage.gameObject.SetActive(false);
+                            }
+                        }
+                    }
+                )
+            };
+
             PosKeySet set = TeamSet.Default;
             IEnumerator getDefaultTeamSet = TeamSet.MyTeamByEntryLimit(4, set);// 暂时不根据关卡人数限制修改我方队伍显示
             yield return getDefaultTeamSet;
@@ -145,17 +174,43 @@ namespace mainMenu
             {
                 Debug.Log("获取我方人员错误");
                 yield break;
-            }else{
-                MultiDictionary<int, int, CharDataInfo> my = (MultiDictionary<int, int, CharDataInfo>)getDefaultTeamSet.Current;
-                for (int i = 0; i < my.values.Count; i++)
-                {
-                    IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(my.values[i].ResourceID);
-                    yield return onecoroutine;
-                }
-                FightPreparePage.MemberInfosShow(my.values, myT);
             }
-                        
+            MultiDictionary<int, int, CharDataInfo> my = (MultiDictionary<int, int, CharDataInfo>)getDefaultTeamSet.Current;
+            for (int i = 0; i < my.values.Count; i++)
+            {
+                IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(my.values[i].ResourceID);
+                yield return onecoroutine;
+            }
+            FightPreparePage.MemberInfosShow(my.values, myT);
+
             yield break;
+        }
+        
+        // Button feature
+        public void JumpToNewest()
+        {
+            JumpTo(AccountSet._AccInfo.ArcadeProcess);
+        }
+        
+        float CurrentTargetScrollbarValue()
+        {
+            float targetScrollbarValue;
+            if (AccountSet._AccInfo.ArcadeProcess <= 3)
+            {
+                targetScrollbarValue = 0;
+            }else{
+                VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
+                // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
+                targetScrollbarValue = 
+                ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (AccountSet._AccInfo.ArcadeProcess - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
+                / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
+            }
+            return targetScrollbarValue;
+        }
+        
+        public void JumpTo(int stageNum)
+        {
+            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x, CurrentTargetScrollbarValue(), 0.5f);
         }
         
         public void RefreshRender()
@@ -184,12 +239,6 @@ namespace mainMenu
         }
         
         // Button feature
-        public void JumpToNewest()
-        {
-            JumpTo(AccountSet._AccInfo.ArcadeProcess);
-        }
-        
-        // Button feature
         public void BeginNewStage()
         {
             ArcadeStages.TryGetValue(AccountSet._AccInfo.ArcadeProcess, out StageInfo targetStage);
@@ -199,23 +248,7 @@ namespace mainMenu
                 FightLoad.GoTo();
             }
         }
-        
-        public void JumpTo(int stageNum)
-        {
-            float targetScrollbarValue;
-            if (stageNum <= 3)//5 是现在scrollview里所最多能显示的关卡按钮数量
-            {
-                targetScrollbarValue = 0;
-            }else{
-                VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
-                // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
-                targetScrollbarValue = 
-                ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (stageNum - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
-                / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
-            }
-            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x,targetScrollbarValue,0.5f);
-        }
-        
+               
         // 等级升序降序
         //readonly int order = 0;//0:升序 1:降序 //是否按type排序
         //List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)

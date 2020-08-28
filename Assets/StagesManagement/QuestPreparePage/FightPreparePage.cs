@@ -44,6 +44,10 @@ namespace mainMenu
             {
                 icons.Add(HeroIcon.ArrangeHeroIconToT(target.FighterIcon, oneMember, _ShowT));
             }
+            for (int i = 0; i < icons.Count; i++)
+            {
+                icons[i].iconButton.targetGraphic.raycastTarget = false;
+            }
             return icons;
         }
     }

@@ -174,3 +174,4 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 173,fivewayboltp,human,1,10,GI,2,6,20,,2
 174,threearrows,human,1,10,GI,1,6,20,,3
 175,runesburst,human,1,10,GI,2,7,11,,4
+176,adam_spin,human,1,10,GI,1,0,5,,4

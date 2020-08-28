@@ -41,9 +41,8 @@ public class BasicTryProcess : FSceneProcess
 
     CharDataInfo adamInfo;
     Data_Center Adam, Guard;
-    
-    IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
-    
+    readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
+
     public BasicTryProcess(NetFightScene _NetFightScene)
     {
         base.Step = SceneStep.BasicTryTutorial;
