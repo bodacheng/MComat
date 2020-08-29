@@ -523,7 +523,14 @@
     <Compile Include="Assets\StagesManagement\StageButton.cs" />
     <Compile Include="Assets\StagesManagement\StageScriptableObject.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager.cs" />
-    <Compile Include="Assets\StagesManagement\StagesManagerGUI.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\Members.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\NineSlotSelect.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\SelectInheretSkill.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillInfo.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSelect.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSetComment.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\StagesManagerGUI.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\UI_Ini.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_XML.cs" />
     <Compile Include="Assets\Structure\DicAdd.cs" />

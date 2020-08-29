@@ -222,4 +222,55 @@ public partial class BO_Ani_E : MonoBehaviour
             return temp;
         }
     }
+    
+    //-1 后退
+    void Rush(int mode)
+    {
+        float dis_from_center;
+        switch (mode)
+        {
+            case -1:
+                hiddenMethods.Flash(targetPos(-transform.forward, 5f));
+                break;
+            case 1:
+                hiddenMethods.Flash(targetPos(transform.forward, 5f));
+                break;
+            case 2:
+                hiddenMethods.Flash(targetPos(transform.forward, 8f));
+                break;
+        }
+        
+        Vector3 targetPos(Vector3 direction, float step)
+        {
+            _DATA_CENTER.Sensor.OneRoundDetectionStart(5);
+            Collider collider = _DATA_CENTER.Sensor.GetClosestEnemyColliderInSensorRange();
+            Vector3 temp;
+            if (collider == null)
+            {
+                temp = transform.position + direction * step;
+            }else{
+                temp = collider.transform.position;
+                temp.y = 0;
+                float tome = Vector3.Distance(transform.position, temp);
+                if (tome < step)
+                {
+                    direction = (temp - transform.position).normalized;
+                    temp = transform.position + direction * (tome - 1);
+                }else{
+                    temp = transform.position + direction * step;
+                }
+            }
+            
+            if (FightGlobalSetting.scenestep == 1)
+            {
+                temp.y = 0;
+                dis_from_center = temp.magnitude;
+                if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+                {
+                    temp = temp.normalized * BoundaryControllByGod._BattleRingRadius;
+                }
+            }
+            return temp;
+        }
+    }
 }

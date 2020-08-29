@@ -92,7 +92,7 @@ public class Behaviors_Incubator
                         }
                         break;
                     case BehaviorType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 0f, _set.REAL_NAME)
+                        G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 20f, _set.REAL_NAME)
                         {
                             StateType = BehaviorType.GI,
                             AT = _set.AT,

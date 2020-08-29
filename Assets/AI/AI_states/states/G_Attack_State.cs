@@ -25,7 +25,7 @@ public class G_Attack_State : Behavior {
     UnityEngine.Events.UnityAction rushstart;
     UnityEngine.Events.UnityAction rushend;
     CustomCoroutine rushCoroutine;
-
+    
     enum Phase
     {
         noRushState = 0,
@@ -36,11 +36,7 @@ public class G_Attack_State : Behavior {
     }
 
     #region Constructor
-    public G_Attack_State(string clip_name)
-	{
-		this.clip_name = clip_name;
-    }
-
+    
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, float approachingSpeed, string clip_name)
     {
         this.rushSpeed = rushSpeed;
@@ -59,13 +55,6 @@ public class G_Attack_State : Behavior {
         isEventAttackLaunchState = EventLauncher_Or_Ender;
         isEventAttackEndState = !EventLauncher_Or_Ender;
     }
-
-    public G_Attack_State(string clip_name, bool EventLauncher_Or_Ender)
-    {
-        this.clip_name = clip_name;
-        isEventAttackLaunchState = EventLauncher_Or_Ender;
-        isEventAttackEndState = !EventLauncher_Or_Ender;
-    }
     #endregion
     
     #region Capacity Enter Exit
@@ -74,10 +63,6 @@ public class G_Attack_State : Behavior {
         return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == clip_name;
     }
     
-    //public override bool Capacity_enter_condition()
-    //{
-    //    return base.Capacity_enter_condition() && !_Animator.GetBool("in_transition");
-    //}
     #endregion
     
     public override void Pre_process_before_enter()
@@ -148,7 +133,7 @@ public class G_Attack_State : Behavior {
             return;
         }
         float distance = Vector3.Distance(gameObject.transform.position, collider.transform.position);
-        if (distance < 5f)//内环检测结果
+        if (distance < Sensor.sensor_radius / 3)//内环检测结果
         {
             _phase = Phase.reachedFromThebeginning;
             Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
@@ -162,7 +147,7 @@ public class G_Attack_State : Behavior {
             return;
         }
         
-        if (distance < 10f)
+        if (distance < Sensor.sensor_radius * 2 / 3)
         {
             if (Sensor.GetEnemiesByDistance(false).Count > 0)
             {
@@ -176,23 +161,23 @@ public class G_Attack_State : Behavior {
             {
                 _phase = Phase.needToRush;
                 if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)
-                    Animation_Manger.AnimationTrigger(dash_clip_name,true,0.05f);
+                    Animation_Manger.AnimationTrigger(dash_clip_name, true, 0.05f);
                 else
                 {
                     Debug.Log("here:"+ clip_name);
-                    Animation_Manger.PlayLayerAnim(null,true,0f);
+                    Animation_Manger.PlayLayerAnim(null, true, 0f);
                 }
                 _BuffsRunner.RunSubCoroutineOfState(rushCoroutine);
             }
             else
             {
                 _phase = Phase.reachedFromThebeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+                Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
                 return;
             }
         }
 
-        Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+        Animation_Manger.AnimationTrigger(clip_name,true, 0.05f);
         _phase = Phase.farFromReach;
         return;
     }
