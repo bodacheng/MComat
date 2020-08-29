@@ -41,7 +41,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2386837626998290639}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 40
+  simulationSpeed: 5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -9644,7 +9644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivateAfterTime: 0
+  ActivateAfterTime: 0.12
   SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 3
@@ -14635,7 +14635,7 @@ ParticleSystem:
   m_GameObject: {fileID: 7890040624337637340}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 4
+  simulationSpeed: 20
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0

@@ -13,12 +13,12 @@ public class SkillCancelFlag : MonoBehaviour {
         public void SkillCancelFlagFixedUpdate()
         {
             if (skillCancelFlag.attackApproaching)
-                skillCancelFlag.AttackApproachLoopCounter += Time.fixedDeltaTime;
-            
-            if (skillCancelFlag.attackApproaching)
             {
+                skillCancelFlag.AttackApproachLoopCounter += Time.fixedDeltaTime;
                 if (skillCancelFlag.AttackApproachLoopCounter > 0.08f)
+                {
                     skillCancelFlag.attackApproaching = false;
+                }
             }
         }
         

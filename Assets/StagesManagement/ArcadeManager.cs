@@ -6,6 +6,7 @@ using DG.Tweening;
 using dataAccess;
 using System.Collections;
 using UniRx;
+using UnityEngine.SceneManagement;
 
 namespace mainMenu
 {
@@ -145,10 +146,15 @@ namespace mainMenu
             JumpToNewStage.onClick.RemoveAllListeners();
             JumpToNewStage.onClick.AddListener(JumpToNewest);
 
-            SingleAssignmentDisposable autoHide = new SingleAssignmentDisposable
+            SingleAssignmentDisposable autoHide = new SingleAssignmentDisposable();
+            autoHide = new SingleAssignmentDisposable
             {
                 Disposable = Observable.EveryUpdate().Subscribe(_ =>
                     {
+                        if (FightGlobalSetting.scenestep != 1)
+                        {
+                            autoHide.Dispose();
+                        }
                         if (!JumpToNewStage.gameObject.activeSelf)
                         {
                             if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.2f)
