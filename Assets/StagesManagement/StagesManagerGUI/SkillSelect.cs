@@ -12,6 +12,7 @@ public partial class StagesManagerGUI : Editor {
     readonly string[] skillrarelevelShow = { "ALL", "0", "★", "★★", "★★★" };
     readonly int[] exLevels = {-1, 0, 1, 2, 3 };
     readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
+    bool[] SPselected = { true, true, true, true };
     int selectskillrarelevel = -1;
     readonly bool[] skillrangeselectfilter = { true, true, true, true }; //close, near, far, out
     int selectedskillindex;
@@ -21,31 +22,30 @@ public partial class StagesManagerGUI : Editor {
     
     void SkillSelect()
     {
-        selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", selectSkillExLevel, exLevelShows, exLevels);
-        bool[] SPselected;
-        switch(selectSkillExLevel)
-        {
-            case 0:
-            SPselected = new bool[4] { true, false, false, false };
-            break;
-            case 1:
-            SPselected = new bool[4] { false, true, false, false };
-            break;
-            case 2:
-            SPselected = new bool[4] { false, false, true, false };
-            break;
-            case 3:
-            SPselected = new bool[4] { false, false, false, true };
-            break;
-            default:
-            SPselected = new bool[4] { true, true, true, true };
-            break;
-        }
-        
         skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, AttackRangeToggleGUI);
         if (skillselectfilter)
         {
             EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
+            selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", selectSkillExLevel, exLevelShows, exLevels);
+            switch(selectSkillExLevel)
+            {
+                case 0:
+                SPselected = new bool[4] { true, false, false, false };
+                break;
+                case 1:
+                SPselected = new bool[4] { false, true, false, false };
+                break;
+                case 2:
+                SPselected = new bool[4] { false, false, true, false };
+                break;
+                case 3:
+                SPselected = new bool[4] { false, false, false, true };
+                break;
+                default:
+                SPselected = new bool[4] { true, true, true, true };
+                break;
+            }
+            
             filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
             if (!filterallranges)
             {

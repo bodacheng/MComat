@@ -100,23 +100,19 @@ namespace dataAccess
                     monsterOfPlayerId = i.ToString()
                 };
                 
-                IDictionary<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSKIDList(_CharConfig.RECORD_ID);
-                if (INHERENTSkills != null && INHERENTSkills.Count > 0)
+                KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(_CharConfig.RECORD_ID);
+                if (INHERENTSkills.Key != null)
                 {
-                    List<string> dasfs = INHERENTSkills.Keys.ToList();
-                    for (int index = 0; index < dasfs.Count; index++)
+                    SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
                     {
-                        SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
-                        {
-                            skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
-                            skillId = dasfs[index],
-                            EXP = 0,
-                            Inherent = "true",
-                            inUsingMonsterOfPlayerId = i.ToString(),
-                            inUsingSkillSlot = (index + 1).ToString()
-                        };
-                        yield return MySkillStonesReader.Add(stoneInfo);
-                    }
+                        skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
+                        skillId = INHERENTSkills.Key,
+                        EXP = 0,
+                        Inherent = "true",
+                        inUsingMonsterOfPlayerId = i.ToString(),
+                        inUsingSkillSlot = "1"
+                    };
+                    yield return MySkillStonesReader.Add(stoneInfo);
                 }
                 Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
                 yield return AddToAccount(_Char);

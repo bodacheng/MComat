@@ -6,21 +6,21 @@ using UniRx;
 
 public partial class StagesManagerGUI : Editor {
 
-    IDictionary<string, string> InhereSks;
+    KeyValuePair<string, string> InhereSks;
     IDictionary<string, string> SelectInhere;
     int selectedInhereskill;
     
-    void SelectInher()
+    void SelectInher(string CharResourceID)
     {
         // 原生技能
         SelectInhere = new Dictionary<string, string>()
         {
             {"0","空"}
         };
-        InhereSks = INHERENT_SkillTable.GetINHERENTSKIDList(focusingCharConfig.RECORD_ID);
-        foreach(KeyValuePair<string,string> keyValuePair in InhereSks)
+        InhereSks = INHERENT_SkillTable.GetINHERENTSkill(CharResourceID);
+        if (InhereSks.Key != null)
         {
-            SelectInhere.Add(keyValuePair.Key, keyValuePair.Value);
+            SelectInhere.Add(InhereSks.Key, InhereSks.Value);
         }
         selectedInhereskill = EditorGUILayout.Popup("原生技能：", selectedInhereskill, SelectInhere.Values.ToArray());
     }

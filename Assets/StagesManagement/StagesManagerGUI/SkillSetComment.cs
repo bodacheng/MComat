@@ -6,7 +6,7 @@ using mainMenu;
 public partial class StagesManagerGUI : Editor {
 
     TheNineSlot.SkillEditError se;
-
+    
     void SkillSetComent()
     {
         // 技能组评价

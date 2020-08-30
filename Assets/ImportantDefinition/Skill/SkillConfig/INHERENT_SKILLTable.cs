@@ -21,24 +21,21 @@ public class INHERENT_SkillTable
         return isLoaded;
     }
     
-    public static IDictionary<string, string> GetINHERENTSKIDList(string monsterID)
+    // 一个角色最多只有一个原生技能
+    public static KeyValuePair<string, string> GetINHERENTSkill(string monsterID)
     {
-        IDictionary<string, string> targets = new Dictionary<string, string>();
         List<Row> rows = FindAll_MONSTER_ID(monsterID);
         for (int i = 0; i < rows.Count; i++)
         {
-            if (!targets.ContainsKey(rows[i].SKILL_ID))
+            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(rows[i].SKILL_ID);
+            if (_SkillConfig == null)
             {
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(rows[i].SKILL_ID);
-                if (_SkillConfig == null)
-                {
-                    Debug.Log("严重问题：被动技能表里定义的技能在总技能表里没有对应ID");
-                    continue;
-                }
-                targets.Add(rows[i].SKILL_ID, _SkillConfig.REAL_NAME);
+                Debug.Log("严重问题：被动技能表里定义的技能在总技能表里没有对应ID");
+                continue;
             }
+            return new KeyValuePair<string, string>(rows[i].SKILL_ID, _SkillConfig.REAL_NAME);
         }
-        return targets;
+        return new KeyValuePair<string, string>(null,null);
     }
     
     public List<Row> GetRowList()

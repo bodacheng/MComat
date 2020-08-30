@@ -11,9 +11,15 @@ public partial class StagesManagerGUI : Editor {
         GUILayout.BeginHorizontal();
         void SlotColorCal(SkillConfig targetC)
         {
-            GUI.backgroundColor = Repeated(targetC, targetC.RECORD_ID) ? Color.red : SlotHasSkill(targetC.RECORD_ID) ? Color.yellow : Color.white;
+            GUI.backgroundColor = Repeated(focusingCharInfo, targetC, targetC.RECORD_ID) ? Color.red : SlotHasSkill(targetC.RECORD_ID);
         }
         
+        Color SlotHasSkill(string RECORD_ID)
+        {
+            SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(RECORD_ID);
+            return defaultSkillConfig != null ? InhereSks.Key == RECORD_ID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white;
+        }
+
         SlotColorCal(focusingCharInfo._NineAndTwo.GetA1Config());
         if (GUILayout.Button("A1", targetSC != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
         {
@@ -74,12 +80,13 @@ public partial class StagesManagerGUI : Editor {
             targetSC = focusingCharInfo._NineAndTwo.GetC3Config();
             selectedInhereskill = 0;
         }
+        GUI.backgroundColor = Color.white;
         GUILayout.EndHorizontal();
     }
     
-    bool Repeated(SkillConfig _target,string recordID)
+    bool Repeated(CharDataInfo _focusingCharInfo , SkillConfig _target,string recordID)
     {
-        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList())
+        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList(_focusingCharInfo))
         {
             if (keyValuePair.Value == recordID && keyValuePair.Key != _target)
             {
@@ -90,19 +97,19 @@ public partial class StagesManagerGUI : Editor {
     }
     
     // 服务于Repeated函数，获取当前编辑中角色的技能列表
-    IDictionary<SkillConfig,string> GetFocusingCharSkillList()
+    IDictionary<SkillConfig,string> GetFocusingCharSkillList(CharDataInfo _focusingCharInfo)
     {
         IDictionary<SkillConfig,string> list = new Dictionary<SkillConfig,string>();
         
-        SkillConfig A1 = focusingCharInfo._NineAndTwo.GetA1Config();
-        SkillConfig A2 = focusingCharInfo._NineAndTwo.GetA2Config();
-        SkillConfig A3 = focusingCharInfo._NineAndTwo.GetA3Config();
-        SkillConfig B1 = focusingCharInfo._NineAndTwo.GetB1Config();
-        SkillConfig B2 = focusingCharInfo._NineAndTwo.GetB2Config();
-        SkillConfig B3 = focusingCharInfo._NineAndTwo.GetB3Config();
-        SkillConfig C1 = focusingCharInfo._NineAndTwo.GetC1Config();
-        SkillConfig C2 = focusingCharInfo._NineAndTwo.GetC2Config();
-        SkillConfig C3 = focusingCharInfo._NineAndTwo.GetC3Config();
+        SkillConfig A1 = _focusingCharInfo._NineAndTwo.GetA1Config();
+        SkillConfig A2 = _focusingCharInfo._NineAndTwo.GetA2Config();
+        SkillConfig A3 = _focusingCharInfo._NineAndTwo.GetA3Config();
+        SkillConfig B1 = _focusingCharInfo._NineAndTwo.GetB1Config();
+        SkillConfig B2 = _focusingCharInfo._NineAndTwo.GetB2Config();
+        SkillConfig B3 = _focusingCharInfo._NineAndTwo.GetB3Config();
+        SkillConfig C1 = _focusingCharInfo._NineAndTwo.GetC1Config();
+        SkillConfig C2 = _focusingCharInfo._NineAndTwo.GetC2Config();
+        SkillConfig C3 = _focusingCharInfo._NineAndTwo.GetC3Config();
         
         if (A1 != null && A1.RECORD_ID != null)
         {
@@ -118,7 +125,6 @@ public partial class StagesManagerGUI : Editor {
         }
         if (B1 != null && B1.RECORD_ID != null)
         {
-            if (!list.ContainsKey(B1))
             list.Add(B1,B1.RECORD_ID);
         }
         if (B2 != null && B2.RECORD_ID != null)
@@ -142,12 +148,6 @@ public partial class StagesManagerGUI : Editor {
             list.Add(C3,C3.RECORD_ID);
         }
         return list;
-    }
-    
-    bool SlotHasSkill(string RECORD_ID)
-    {
-        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(RECORD_ID);
-        return defaultSkillConfig != null;
     }
 }
 #endif
