@@ -15,7 +15,6 @@ public partial class StagesManagerGUI : Editor {
     bool[] SPselected = { true, true, true, true };
     int selectskillrarelevel = -1;
     readonly bool[] skillrangeselectfilter = { true, true, true, true }; //close, near, far, out
-    int selectedskillindex;
     bool skillselectfilter;
     bool filterallranges = true;
     IDictionary<string, string> _SkillIDsAndNames;
@@ -62,13 +61,13 @@ public partial class StagesManagerGUI : Editor {
             
             selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, skillrarelevelShow, skillrarelevels);
             EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
-            GUILayout.Space(20f);
+            GUILayout.Space(10f);
         }
         
         _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, SPselected, selectskillrarelevel);
         
         int index2 = 0;
-        selectedskillindex = 0;
+        int selectedskillindex = 0;
         foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)
         {
             if (keyValuePair.Key == targetSC.RECORD_ID)

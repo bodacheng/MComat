@@ -39,6 +39,7 @@ public partial class StagesManagerGUI : Editor {
         {
             if (GUILayout.Button("Add", AddDeleteMember))
             {
+                focusingMemberPosID = focusingMemberPosID ?? "0";
                 focusingCharInfo = new CharDataInfo
                 {
                     monsterOfPlayerId = focusingMemberPosID
@@ -78,20 +79,29 @@ public partial class StagesManagerGUI : Editor {
         {
             goto A;
         }
-
-        // 原生技能
-        if (focusingCharInfo != null)
-        {
-            SelectInher(focusingCharInfo.ResourceID);
-            if (selectedInhereskill != 0)
-            {
-                targetSC.RECORD_ID = SelectInhere.ElementAt(selectedInhereskill).Key;
-                goto B;
-            }
-        }
         
         // 技能选择
-        SkillSelect();
+        if (targetSC.RECORD_ID == null)
+        {
+            // 原生技能
+            if (focusingCharInfo != null)
+            {
+                SelectInher(focusingCharInfo.ResourceID);
+                if (selectedInhereskill != 0)
+                {
+                    targetSC.RECORD_ID = SelectInhere.ElementAt(selectedInhereskill).Key;
+                    goto B;
+                }
+            }
+            SkillSelect();
+        }
+        else
+        {
+            if (GUILayout.Button("重选技能", ButtonStyle))
+            {
+                targetSC.RECORD_ID = null;
+            }
+        }
         
         if (focusingCharInfo != null && focusingCharInfo._NineAndTwo != null)
         {

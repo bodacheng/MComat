@@ -10,12 +10,14 @@ public partial class StagesManagerGUI : Editor {
     
     void SkillInfo(SkillConfig defaultSkillConfig)
     {
+        if (defaultSkillConfig == null)
+            return;
         EditorGUILayout.LabelField("技能详细信息");
-        targetSC.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type",(targetSC.STATE_TYPE == BehaviorType.NONE && defaultSkillConfig != null && defaultSkillConfig.STATE_TYPE != BehaviorType.NONE) ? defaultSkillConfig.STATE_TYPE : targetSC.STATE_TYPE);                                                    
-        targetSC.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", (defaultSkillConfig != null) ? defaultSkillConfig.ATTACK_WEIGHT : targetSC.ATTACK_WEIGHT);
-        targetSC.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel",(targetSC.SP_LEVEL == -1 && defaultSkillConfig != null) ? defaultSkillConfig.SP_LEVEL : targetSC.SP_LEVEL, exoptions_display,exoptions);
         GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
-        GUILayout.Space(2f);
+        defaultSkillConfig.REAL_NAME = EditorGUILayout.TextField("Name",defaultSkillConfig.REAL_NAME);
+        targetSC.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type", defaultSkillConfig.STATE_TYPE);                                                    
+        targetSC.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", defaultSkillConfig.ATTACK_WEIGHT);
+        targetSC.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", defaultSkillConfig.SP_LEVEL, exoptions_display, exoptions);        
         EditorGUILayout.LabelField("AI模式技能触发范围");
         defaultSkillConfig.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MIN_DIS);
         defaultSkillConfig.AI_MAX_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MAX_DIS);
