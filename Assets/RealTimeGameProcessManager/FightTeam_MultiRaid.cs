@@ -69,7 +69,7 @@ namespace FightScene
             }
         }
         
-        protected override void TeamsFightInitialize(float TeamHpRate, LocalFight.CriticalGaugeMode teamCGMode)
+        protected override void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {

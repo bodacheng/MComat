@@ -8,13 +8,7 @@ public partial class StagesManagerGUI : Editor {
     string focusingMemberPosID;
     
     void Members()
-    {
-        EditorGUILayout.LabelField(" 关卡基础数值信息  ", Title);
-        _stagesManager.EditoringFight.Team1HpRate = EditorGUILayout.FloatField("队伍1血量比率", _stagesManager.EditoringFight.Team1HpRate);
-        _stagesManager.EditoringFight.Team2HpRate = EditorGUILayout.FloatField("队伍2血量比率", _stagesManager.EditoringFight.Team2HpRate);
-        _stagesManager.EditoringFight.team1CGMode = (LocalFight.CriticalGaugeMode)EditorGUILayout.EnumPopup("队伍1回气模式", _stagesManager.EditoringFight.team1CGMode);
-        _stagesManager.EditoringFight.team2CGMode = (LocalFight.CriticalGaugeMode)EditorGUILayout.EnumPopup("队伍2回气模式", _stagesManager.EditoringFight.team2CGMode);
-        
+    {        
         EditorGUILayout.LabelField(" 关卡敌人信息  ", Title);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("back", (focusingMemberPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))

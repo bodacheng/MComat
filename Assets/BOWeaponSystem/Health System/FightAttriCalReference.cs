@@ -14,7 +14,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     public float AT = 10;
     
     [Tooltip("当前吸气模式")]
-    public LocalFight.CriticalGaugeMode criticalGaugeMode;
+    public CriticalGaugeMode criticalGaugeMode;
     
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     public ComboHitCount _ComboHitCount = new ComboHitCount();

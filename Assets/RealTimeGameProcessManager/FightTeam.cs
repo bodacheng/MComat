@@ -72,7 +72,7 @@ namespace FightScene
         {
         }
 
-        protected virtual void TeamsFightInitialize(float TeamHpRate, LocalFight.CriticalGaugeMode teamCGMode)
+        protected virtual void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
         }
 
@@ -82,7 +82,7 @@ namespace FightScene
         }
         
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-        public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> CharacterSets, float TeamHpRate, LocalFight.CriticalGaugeMode teamCGMode)
+        public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> CharacterSets, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             yield return CharsLoad(CharacterSets);
             InstantiateCharsIconsAndFloatHPBar();

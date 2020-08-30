@@ -31,6 +31,11 @@ public class StageScriptableObject : ScriptableObject
     
     public LocalFight localFight = new LocalFight();
     
+    public int stageLevel = 1;
+    public float Team1HpRate = 1f;
+    public float Team2HpRate = 1f;
+    public CriticalGaugeMode team1CGMode = CriticalGaugeMode.normal;
+    public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
     public TeamMode Team1Mode = TeamMode.multiraid;
     public TeamMode Team2Mode = TeamMode.multiraid;
 
@@ -47,7 +52,8 @@ public class StageScriptableObject : ScriptableObject
     
     public void LoadLocalFightFromScript()
     {
-        localFight = LocalFight.LoadOneLocalFightByScript(Script);    
+        localFight = LocalFight.LoadOneLocalFightByScript(Script);
+        localFight.SetEnemyLevel(stageLevel);
     }
     
     public List<string> GetTeam1EnterRingLocalIds(LocalFight localFight)
@@ -81,7 +87,14 @@ public class StageScriptableObject : ScriptableObject
         stage.Team2Mode = teamMode;
         stage._fightEventType = FightEventType.SkillTest;
         return stage;
-    }    
+    }
+}
+
+public enum CriticalGaugeMode
+{
+    normal,
+    doubleGain,
+    Unlimited
 }
 
 // 这个东西是用来规定我每一场战斗结束之后所自动加载的事件

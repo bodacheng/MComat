@@ -131,8 +131,8 @@ namespace FightScene
             FightTeam1.teamConfig = heroTeamConfig;
             FightTeam2.teamConfig = EnemyTeamConfig;
             
-            yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.localFight.Team1HpRate ,stage.localFight.team1CGMode);
-            yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.localFight.Team2HpRate ,stage.localFight.team2CGMode);
+            yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
+            yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.Team2HpRate ,stage.team2CGMode);
             
             if (stage._fightEventType == FightEventType.Screensaver)
             {

@@ -157,7 +157,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
 
-    public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, LocalFight.CriticalGaugeMode criticalGaugeMode)
+    public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)
     {
         BodyElementTagAndLayerSet(_TeamConfig);
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。

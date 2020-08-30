@@ -1,7 +1,5 @@
 ﻿using HittingDetection;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using DG.Tweening;
 using Skill;
 
@@ -38,7 +36,7 @@ namespace Soul
         protected bool AbsorbEnergyFinished;
 
         int temp;
-        public void EnergyAbsorb(LocalFight.CriticalGaugeMode gaugeMode)
+        public void EnergyAbsorb(CriticalGaugeMode gaugeMode)
         {
             if (!AbsorbEnergyFinished)
             {
@@ -60,7 +58,7 @@ namespace Soul
                 
                 switch(gaugeMode)
                 {
-                    case LocalFight.CriticalGaugeMode.doubleGain:
+                    case CriticalGaugeMode.doubleGain:
                         temp *= 2;
                         break;
                     default:

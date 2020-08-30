@@ -14,6 +14,19 @@ public partial class NineAndTwo
         return IDs;
     }
     
+    public void SetSkillLevel(int level)
+    {
+        A1level = level;
+        A2level = level;
+        A3level = level;
+        B1level = level;
+        B2level = level;
+        B3level = level;
+        C1level = level;
+        C2level = level;
+        C3level = level;
+    }
+    
     public List<int> SkillLevelList()
     {
         List<SkillEntity> sklist = SkillEntityList();
