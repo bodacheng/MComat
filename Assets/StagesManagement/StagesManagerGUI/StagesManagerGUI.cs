@@ -51,6 +51,7 @@ public partial class StagesManagerGUI : Editor {
         {
             if (GUILayout.Button("Delete", AddDeleteMember))
             {
+                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberPosID), null);
                 focusingCharInfo = null;
             }
         }

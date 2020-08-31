@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: 
+  _fightEventType: 1
   LocalFightID: 5
   EntryMemberNum: 4
   BattleGroundID: 2
@@ -19,13 +20,12 @@ MonoBehaviour:
   battleNameJPG: "\u5218\u607A\u5A01\u7F13\u89E3\u6CD5\u4EE4\u7EB9\u653E\u5047\u4E86\u53D1\u6211"
   battleNameCH: "\u4E09\u4E2A\u5C4C"
   beforefightstory: {fileID: 0}
-  Script: {fileID: 4900000, guid: 23daf0904fb1f4e1188dde42747543e8, type: 3}
+  Script: {fileID: 4900000, guid: 507986ef218fcff46b223a8120564214, type: 3}
   StageButtonSprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
-  localFight:
-    Team1HpRate: 1
-    Team2HpRate: 1
-    team1CGMode: 0
-    team2CGMode: 0
-  _fightEventType: 1
+  stageLevel: 1
+  Team1HpRate: 1
+  Team2HpRate: 1
+  team1CGMode: 0
+  team2CGMode: 0
   Team1Mode: 2
   Team2Mode: 2
