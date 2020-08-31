@@ -6,7 +6,6 @@ using DG.Tweening;
 using dataAccess;
 using System.Collections;
 using UniRx;
-using UnityEngine.SceneManagement;
 
 namespace mainMenu
 {
@@ -114,7 +113,7 @@ namespace mainMenu
                         IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(one.localFight.EnemySets.values[i].ResourceID);
                         yield return onecoroutine;
                     }
-                    List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.localFight.EnemySets.values, newButton.GetComponent<RectTransform>());
+                    List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.localFight.EnemySets.values, newButton.IconsT);
                     StageInfo stageInfo = new StageInfo
                     {
                         stageConfig = one,
@@ -127,25 +126,6 @@ namespace mainMenu
                 }
             }
             
-             // 假设有100关，然后按钮应该是越往下拖关卡数越大，才能和JumpToNewest()堆起来
-            for (int i = 100; i > -1; i--)
-            {
-                if (!ArcadeStages.ContainsKey(i))
-                {
-                    continue;
-                }
-                ArcadeStages[i].stageButton.gameObject.SetActive(true);
-                ArcadeStages[i].stageButton.gameObject.transform.SetParent(ButtonsContainer);
-                ArcadeStages[i].stageButton.gameObject.transform.localScale = Vector3.one;
-            }
-            VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
-            ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * ArcadeStages.Count);
-            
-            EditTeamButton.onClick.RemoveAllListeners();
-            EditTeamButton.onClick.AddListener(TeamSet.GoToTeamEdit_Arcade);
-            JumpToNewStage.onClick.RemoveAllListeners();
-            JumpToNewStage.onClick.AddListener(JumpToNewest);
-
             SingleAssignmentDisposable autoHide = new SingleAssignmentDisposable();
             autoHide = new SingleAssignmentDisposable
             {
@@ -172,6 +152,28 @@ namespace mainMenu
                     }
                 )
             };
+        }
+        
+        public IEnumerator PageRefresh()
+        {
+             // 假设有100关，然后按钮应该是越往下拖关卡数越大，才能和JumpToNewest()堆起来
+            for (int i = 100; i > -1; i--)
+            {
+                if (!ArcadeStages.ContainsKey(i))
+                {
+                    continue;
+                }
+                ArcadeStages[i].stageButton.gameObject.SetActive(true);
+                ArcadeStages[i].stageButton.gameObject.transform.SetParent(ButtonsContainer);
+                ArcadeStages[i].stageButton.gameObject.transform.localScale = Vector3.one;
+            }
+            VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
+            ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * ArcadeStages.Count);
+            
+            EditTeamButton.onClick.RemoveAllListeners();
+            EditTeamButton.onClick.AddListener(TeamSet.GoToTeamEdit_Arcade);
+            JumpToNewStage.onClick.RemoveAllListeners();
+            JumpToNewStage.onClick.AddListener(JumpTo);
 
             PosKeySet set = TeamSet.Default;
             IEnumerator getDefaultTeamSet = TeamSet.MyTeamByEntryLimit(4, set);// 暂时不根据关卡人数限制修改我方队伍显示
@@ -188,16 +190,10 @@ namespace mainMenu
                 yield return onecoroutine;
             }
             FightPreparePage.MemberInfosShow(my.values, myT);
-
-            yield break;
+            RefreshRender();
+            JumpTo();
         }
-        
-        // Button feature
-        public void JumpToNewest()
-        {
-            JumpTo(AccountSet._AccInfo.ArcadeProcess);
-        }
-        
+                
         float CurrentTargetScrollbarValue()
         {
             float targetScrollbarValue;
@@ -214,7 +210,7 @@ namespace mainMenu
             return targetScrollbarValue;
         }
         
-        public void JumpTo(int stageNum)
+        public void JumpTo()
         {
             DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x, CurrentTargetScrollbarValue(), 0.5f);
         }

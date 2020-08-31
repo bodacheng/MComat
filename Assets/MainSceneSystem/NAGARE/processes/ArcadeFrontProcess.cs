@@ -8,12 +8,11 @@ public class ArcadeFrontProcess : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         yield return ModelShower.target.ShowModel(null);
+        yield return ArcadeManager.target.PageRefresh();
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
-        ArcadeManager.target.JumpToNewest();
-        ArcadeManager.target.RefreshRender();
         loadFinished = true;
     }
-    
+        
     public ArcadeFrontProcess()
     {
         Step = MainSceneStep.ArcadeFront;

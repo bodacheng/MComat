@@ -128,9 +128,17 @@ public partial class StagesManagerGUI : Editor {
         
         GUILayout.BeginHorizontal();
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
-        if (GUILayout.Button("保存战斗关卡至本地文档json",ButtonStyle_save))
+        if (GUILayout.Button("保存战斗关卡至本地文档json", ButtonStyle_save))
         {
-            _stagesManager.SaveFightAsJson(pathAndNameForLocalSave,_stagesManager.EditoringFight);
+            for (int i = 0; i < _stagesManager.EditoringFight.EnemySets.values.Count; i++)
+            {
+                if (_stagesManager.EditoringFight.EnemySets.values[i].ResourceID == "-1")
+                {
+                    Debug.Log("未安排有效角色ID");
+                    return;
+                }
+            }
+            _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.EditoringFight);
         }
         //if (GUILayout.Button("保存战斗关卡至本地文档xml",ButtonStyle_save))
         //{

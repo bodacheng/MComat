@@ -23,22 +23,17 @@ namespace mainMenu
         }
         
         public void StageMembersInfoShow(StageScriptableObject stage)
-        {
-            foreach (Transform _child in myTeamShowT)
-            {
-                Destroy(_child.gameObject);
-            }
-            foreach (Transform _child in enemyTeamShowT)
-            {
-                Destroy(_child.gameObject);
-            }
-            
+        {            
             MemberInfosShow(stage.localFight.HeroSets.values, myTeamShowT);
             MemberInfosShow(stage.localFight.EnemySets.values, enemyTeamShowT);
         }
         
         public static List<HeroIcon> MemberInfosShow(List<CharDataInfo> HeroSets, RectTransform _ShowT)
         {
+            foreach (Transform transform in _ShowT)
+            {
+                Destroy(transform.gameObject);
+            }
             List<HeroIcon> icons = new List<HeroIcon>();
             foreach(CharDataInfo oneMember in HeroSets)
             {

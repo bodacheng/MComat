@@ -421,8 +421,8 @@ public class MonstersConfigTable
 	{
 		return rowList.Count;
 	}
-   
-    public static IDictionary<string,string> GetMonsterRecordIDsAndNamesArrayDic(string type)// close, near, far.rarelevel = -1代表全部，0代表无星级技能
+    
+    public static IDictionary<string,string> GetMonsterRecordIDsAndNamesArrayDic(string type) // close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
         IDictionary<string, string> Mdic = new Dictionary<string, string>();
         List<Row> references = Instance.FindAll_MONSTER_TYPE(type);

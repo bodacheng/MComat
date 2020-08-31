@@ -20,6 +20,8 @@ public partial class StagesManagerGUI : Editor {
     {
         IDictionary<SkillConfig, string> FocusingCharSkillList = GetFocusingCharSkillList(_focusingCharInfo);
         CharConfig CharConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
+        if (CharConfig == null)
+            return true;
         InhereSks = INHERENT_SkillTable.GetINHERENTSkill(CharConfig.RECORD_ID);
         if (InhereSks.Key != null)
         {

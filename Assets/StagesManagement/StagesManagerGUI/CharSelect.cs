@@ -11,7 +11,11 @@ public partial class StagesManagerGUI : Editor {
         // 角色选择
         CharConfig focusingCharConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
         focusingtype = focusingCharConfig != null ? EditorGUILayout.TextField("CharacerType", focusingCharConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
-        CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
+        CharIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
+        foreach(KeyValuePair<string,string> keyValuePair in MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype))
+        {
+            CharIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
+        }
         int index = 0;
         foreach (KeyValuePair<string, string> keyValuePair in CharIDsAndNames)
         {
