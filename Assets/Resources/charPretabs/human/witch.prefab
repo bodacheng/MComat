@@ -198,8 +198,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3156178087434329626}
+  - component: {fileID: 4341040624710133783}
   m_Layer: 0
-  m_Name: Bone009
+  m_Name: n_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,6 +221,73 @@ Transform:
   m_Father: {fileID: 1178584275157382375}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4341040624710133783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686890919834778648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ac8d30c6a0d9642a11e5be4c440740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Root: {fileID: 3156178087434329626}
+  m_UpdateRate: 60
+  m_UpdateMode: 0
+  m_Damping: 0.1
+  m_DampingDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Elasticity: 0.2
+  m_ElasticityDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Stiffness: 0.1
+  m_StiffnessDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Inert: 0
+  m_InertDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Friction: 0
+  m_FrictionDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Radius: 0
+  m_RadiusDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_EndLength: 0
+  m_EndOffset: {x: 0, y: 0, z: 0}
+  m_Gravity: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: 0, z: 0}
+  m_Colliders: []
+  m_Exclusions: []
+  m_FreezeAxis: 0
+  m_DistantDisable: 0
+  m_ReferenceObject: {fileID: 0}
+  m_DistanceToObject: 20
 --- !u!1 &719848262940729985
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +483,7 @@ GameObject:
   - component: {fileID: 6091429662660935132}
   - component: {fileID: 144988626437910078}
   m_Layer: 0
-  m_Name: Bone020
+  m_Name: subhair1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +533,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Stiffness: 0.1
+  m_Stiffness: 0.6
   m_StiffnessDistrib:
     serializedVersion: 2
     m_Curve: []
@@ -605,8 +673,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8626064440320011392}
+  - component: {fileID: 3854991275697490623}
   m_Layer: 0
-  m_Name: Bone009(mirrored)
+  m_Name: n_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,6 +696,73 @@ Transform:
   m_Father: {fileID: 1178584275157382375}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3854991275697490623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595977667791284039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ac8d30c6a0d9642a11e5be4c440740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Root: {fileID: 8626064440320011392}
+  m_UpdateRate: 60
+  m_UpdateMode: 0
+  m_Damping: 0.1
+  m_DampingDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Elasticity: 0.2
+  m_ElasticityDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Stiffness: 0.1
+  m_StiffnessDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Inert: 0
+  m_InertDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Friction: 0
+  m_FrictionDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Radius: 0
+  m_RadiusDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_EndLength: 0
+  m_EndOffset: {x: 0, y: 0, z: 0}
+  m_Gravity: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: 0, z: 0}
+  m_Colliders: []
+  m_Exclusions: []
+  m_FreezeAxis: 0
+  m_DistantDisable: 0
+  m_ReferenceObject: {fileID: 0}
+  m_DistanceToObject: 20
 --- !u!1 &1631216968964579356
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +793,7 @@ Transform:
   - {fileID: 1776308421241108458}
   m_Father: {fileID: 507124193015899535}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -23.736002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.794001}
 --- !u!1 &1805717696217866370
 GameObject:
   m_ObjectHideFlags: 0
@@ -51742,9 +51878,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4887601825774700336}
-  - component: {fileID: 4622483770548415371}
+  - component: {fileID: 8998239893334514737}
   m_Layer: 0
-  m_Name: Bone012
+  m_Name: mainhair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51765,7 +51901,7 @@ Transform:
   m_Father: {fileID: 887065627593383603}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 28.654001}
---- !u!114 &4622483770548415371
+--- !u!114 &8998239893334514737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51801,8 +51937,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.40796545
-      value: 0.35324556
+      time: 0.30762365
+      value: 0.42160493
       inSlope: -1.4427028
       outSlope: -1.4427028
       tangentMode: 0
@@ -51828,12 +51964,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -1.1975685
-      outSlope: -1.1975685
+      inSlope: -3.1869667
+      outSlope: -3.1869667
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.05514316
+      outWeight: 0.12592582
+    - serializedVersion: 3
+      time: 0.20232314
+      value: 0.5802479
+      inSlope: -1.3488446
+      outSlope: -1.3488446
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 0
@@ -51871,7 +52016,8 @@ MonoBehaviour:
   m_EndOffset: {x: 0, y: 0, z: 0}
   m_Gravity: {x: 0, y: 0, z: 0}
   m_Force: {x: 0, y: 0, z: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 6511271659220918569}
   m_Exclusions: []
   m_FreezeAxis: 0
   m_DistantDisable: 0
@@ -52593,7 +52739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506296974355660343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.092, y: -0.071, z: 0}
+  m_LocalPosition: {x: -0.038, y: -0.038, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1178584275157382375}
@@ -52614,7 +52760,7 @@ MonoBehaviour:
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_Bound: 0
-  m_Radius: 0.2
+  m_Radius: 0.25
   m_Height: 0
 --- !u!1 &8705086598650853979
 GameObject:
@@ -52967,7 +53113,7 @@ GameObject:
   - component: {fileID: 297265931035422536}
   - component: {fileID: 344063394211239465}
   m_Layer: 0
-  m_Name: Bone024
+  m_Name: subhair2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53010,14 +53156,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Elasticity: 0.1
+  m_Elasticity: 0.2
   m_ElasticityDistrib:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Stiffness: 0
+  m_Stiffness: 0.6
   m_StiffnessDistrib:
     serializedVersion: 2
     m_Curve: []
