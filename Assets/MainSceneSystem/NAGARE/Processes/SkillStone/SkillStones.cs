@@ -9,13 +9,13 @@ public class SkillStones : MainSceneProcess
     //EnterProcess()内绝不能出现triggerMainProcess
     public static IEnumerator EnterProcess()
     {
+        LoadingCanvas.target.DarkOffDirectly(1f);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
-        LoadingCanvas.target.DarkOff(1f);
         yield return ModelShower.target.ShowModel(null);
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         SkillStonesBox.target._skillStoneDetail.Clear();
@@ -28,6 +28,15 @@ public class SkillStones : MainSceneProcess
         
         LoadingCanvas.target.LightUp();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+        
+        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        (
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
+            Zokusei.blueMagic
+        );
     }
 
     public SkillStones()
@@ -45,14 +54,6 @@ public class SkillStones : MainSceneProcess
         } else {
             SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         }
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
-        (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
-            Zokusei.Null
-        );
     }
 
     public override void ProcessEnd()

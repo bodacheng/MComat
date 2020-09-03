@@ -49,6 +49,10 @@ namespace mainMenu
                     if (!UsingStoneIDs.Contains(targetSKs[i]))
                     {
                         CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
+                        if (!MySkillStonesReader.RenderModelDic.ContainsKey(targetSKs[i]))
+                        {
+                            Debug.Log(" 技能石图标索引错误？对应账户技能石ID： " + targetSKs[i]);
+                        }
                         _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[targetSKs[i]]);
                         //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                         cellindex++;
