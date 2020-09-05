@@ -34272,7 +34272,7 @@ GameObject:
   - component: {fileID: 890670414398321986}
   - component: {fileID: 2810957786191108333}
   - component: {fileID: 4670950707664251585}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56219,7 +56219,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8838834265679539103}
-  m_LocalRotation: {x: 0.0032137306, y: 0.9154055, z: 0.36284328, w: -0.1742617}
+  m_LocalRotation: {x: 0.0032137306, y: 0.9154056, z: 0.36284328, w: -0.17426172}
   m_LocalPosition: {x: -0.12255523, y: 0.08100834, z: -0.120000124}
   m_LocalScale: {x: 1.0000001, y: 1.0000004, z: 1.0000002}
   m_Children:

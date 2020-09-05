@@ -41472,7 +41472,7 @@ GameObject:
   - component: {fileID: 102433634080305671}
   - component: {fileID: 6305197644801510157}
   - component: {fileID: 6608059380738713262}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: pasted__polySurface488_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}

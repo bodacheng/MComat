@@ -51735,8 +51735,8 @@ GameObject:
   - component: {fileID: 172407918758080551}
   - component: {fileID: 17184762308706144}
   - component: {fileID: 8931495282845235141}
-  m_Layer: 0
-  m_Name: pasted__polySurface480_pasted__polySurface477_pasted__polySurface465_group
+  m_Layer: 14
+  m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

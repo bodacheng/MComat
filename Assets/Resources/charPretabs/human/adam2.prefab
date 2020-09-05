@@ -16384,6 +16384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Center: {fileID: 6268034811119985460}
   AT: 10
+  criticalGaugeMode: 0
 --- !u!114 &4126922216815244389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16519,7 +16520,6 @@ MonoBehaviour:
     SP_LEVEL: 0
     RARITY_LEVEL: 0
     ForcedTransitions: []
-  scarecrow: 0
   AllConditionCodes: []
   AI_States_path: 
   usingScript: {fileID: 0}
@@ -26559,7 +26559,7 @@ GameObject:
   - component: {fileID: 2081810640009136050}
   - component: {fileID: 2336647351602078650}
   - component: {fileID: 3997072810238635809}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: polySurface111
   m_TagString: Untagged
   m_Icon: {fileID: 0}
