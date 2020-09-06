@@ -21,6 +21,10 @@ namespace mainMenu
         [Space(7)]
         [Header("SkillStoneManager")]
         public SkillStonesBox _SkillStonesBox;
+
+        [Space(7)]
+        [Header("mini nineslot")]
+        public NineForShow _NineForShow;
         
         [Space(7)]
         [Header("部下详细")]
@@ -74,6 +78,11 @@ namespace mainMenu
         }
         #endregion
         
+        public void MiniNineSlotRefresh(string monsterOfPlayerID)
+        {
+            //this.presentationProcessRunner.Run(_NineForShow.ShowStones_Acc(monsterOfPlayerID));
+        }
+        
         public IEnumerator RefreshMemberDetailPageByFocusingChar()
         {
             if (_focusing == null || _focusing.monsterOfPlayerId == null || _focusing.monsterId == null)
@@ -86,6 +95,9 @@ namespace mainMenu
             
             CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
+
+            // mini nineslot show
+            yield return _NineForShow.ShowStones_Acc(_focusing.monsterOfPlayerId);
             
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载

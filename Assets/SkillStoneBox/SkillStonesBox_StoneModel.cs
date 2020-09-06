@@ -9,7 +9,7 @@ namespace mainMenu
     public partial class SkillStonesBox : MonoBehaviour
     {
         /// <summary>
-        /// 生成账户用技能石图标
+        /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
         /// <param name="skillStoneOfPlayerId">技能石账户id</param>
         public static IEnumerator GenerateStoneModelByAccID(string skillStoneOfPlayerId)
@@ -22,7 +22,7 @@ namespace mainMenu
                 }
             }
             SkillStoneOfPlayerInfoModel StoneOfPlayerInfo = MySkillStonesReader.Get(skillStoneOfPlayerId);
-            IEnumerator Generate = GenerateStoneMode(StoneOfPlayerInfo.skillId , 1);
+            IEnumerator Generate = GenerateNewStoneModel(StoneOfPlayerInfo.skillId , 1);
             yield return Generate;
             SKStoneItem item = (SKStoneItem)Generate.Current;
 
@@ -38,13 +38,12 @@ namespace mainMenu
             item.gameObject.transform.SetParent(_stonesTempContainer);
         }
         
+        // 生成展示用技能石（额外模型）
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
-        public static IEnumerator GenerateStoneMode(string skillID, int mode)
+        public static IEnumerator GenerateNewStoneModel(string skillID, int mode)
         {
             if (skillID == null)
-            {
                 yield break;
-            }
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             if (skillConfig == null)
             {
@@ -75,9 +74,7 @@ namespace mainMenu
             }
             item._SkillConfig = skillConfig;
             if (mode == 2)
-            {
                 item.enabled = false;
-            }
             yield return item;
         }
     }

@@ -9,19 +9,70 @@ public partial class NineForShow : MonoBehaviour
 
     SKStoneItem A1S, A2S, A3S, B1S, B2S, B3S, C1S, C2S, C3S;
     
+    void ClearCurrent()
+    {
+        if (A1S != null)
+        {
+            Destroy(A1S.gameObject);
+            A1S = null;
+        }
+        if (A2S != null)
+        {
+            Destroy(A2S.gameObject);
+            A2S = null;
+        }
+        if (A3S != null)
+        {
+            Destroy(A3S.gameObject);
+            A3S = null;
+        }
+        if (B1S != null)
+        {
+            Destroy(B1S.gameObject);
+            B1S = null;
+        }
+        if (B2S != null)
+        {
+            Destroy(B2S.gameObject);
+            B2S = null;
+        }
+        if (B3S != null)
+        {
+            Destroy(B3S.gameObject);
+            B3S = null;
+        }
+        if (C1S != null)
+        {
+            Destroy(C1S.gameObject);
+            C1S = null;
+        }
+        if (C2S != null)
+        {
+            Destroy(C2S.gameObject);
+            C2S = null;
+        }
+        if (C3S != null)
+        {
+            Destroy(C3S.gameObject);
+            C3S = null;
+        }
+    }
+    
     public IEnumerator ShowStones(string A1skillid, string A2skillid, string A3skillid,
                                     string B1skillid, string B2skillid, string B3skillid,
                                         string C1skillid, string C2skillid, string C3skillid)
     {
-        IEnumerator getA1 = SkillStonesBox.GenerateStoneMode(A1skillid, 1);
-        IEnumerator getA2 = SkillStonesBox.GenerateStoneMode(A2skillid, 1);
-        IEnumerator getA3 = SkillStonesBox.GenerateStoneMode(A3skillid, 1);
-        IEnumerator getB1 = SkillStonesBox.GenerateStoneMode(B1skillid, 1);
-        IEnumerator getB2 = SkillStonesBox.GenerateStoneMode(B2skillid, 1);
-        IEnumerator getB3 = SkillStonesBox.GenerateStoneMode(B3skillid, 1);
-        IEnumerator getC1 = SkillStonesBox.GenerateStoneMode(C1skillid, 1);
-        IEnumerator getC2 = SkillStonesBox.GenerateStoneMode(C2skillid, 1);
-        IEnumerator getC3 = SkillStonesBox.GenerateStoneMode(C3skillid, 1);
+        ClearCurrent();
+        
+        IEnumerator getA1 = SkillStonesBox.GenerateNewStoneModel(A1skillid, 2);
+        IEnumerator getA2 = SkillStonesBox.GenerateNewStoneModel(A2skillid, 2);
+        IEnumerator getA3 = SkillStonesBox.GenerateNewStoneModel(A3skillid, 2);
+        IEnumerator getB1 = SkillStonesBox.GenerateNewStoneModel(B1skillid, 2);
+        IEnumerator getB2 = SkillStonesBox.GenerateNewStoneModel(B2skillid, 2);
+        IEnumerator getB3 = SkillStonesBox.GenerateNewStoneModel(B3skillid, 2);
+        IEnumerator getC1 = SkillStonesBox.GenerateNewStoneModel(C1skillid, 2);
+        IEnumerator getC2 = SkillStonesBox.GenerateNewStoneModel(C2skillid, 2);
+        IEnumerator getC3 = SkillStonesBox.GenerateNewStoneModel(C3skillid, 2);
         
         yield return getA1;
         yield return getA2;
@@ -42,7 +93,7 @@ public partial class NineForShow : MonoBehaviour
         C1S = getC1.Current != null ? (SKStoneItem)getC1.Current : null;
         C2S = getC2.Current != null ? (SKStoneItem)getC2.Current : null;
         C3S = getC3.Current != null ? (SKStoneItem)getC3.Current : null;
-
+        
         Parent();
     }
         
@@ -168,11 +219,13 @@ public partial class NineForShow : MonoBehaviour
     
     void Parent()
     {
+        RectTransform slotRT = A1T.GetComponent<RectTransform>();
         if (A1S != null)
         {
             A1S.transform.SetParent(A1T.transform);
             A1S.transform.localPosition = Vector3.zero;
             A1S.transform.localScale = Vector3.one;
+            A1S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             A1S.gameObject.SetActive(true);
         }
         if (A2S != null)
@@ -180,6 +233,7 @@ public partial class NineForShow : MonoBehaviour
             A2S.transform.SetParent(A2T.transform);
             A2S.transform.localPosition = Vector3.zero;
             A2S.transform.localScale = Vector3.one;
+            A2S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             A2S.gameObject.SetActive(true);
         }
         if (A3S != null)
@@ -187,6 +241,7 @@ public partial class NineForShow : MonoBehaviour
             A3S.transform.SetParent(A3T.transform);
             A3S.transform.localPosition = Vector3.zero;
             A3S.transform.localScale = Vector3.one;
+            A3S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             A3S.gameObject.SetActive(true);
         }
         if (B1S != null)
@@ -194,6 +249,7 @@ public partial class NineForShow : MonoBehaviour
             B1S.transform.SetParent(B1T.transform);
             B1S.transform.localPosition = Vector3.zero;
             B1S.transform.localScale = Vector3.one;
+            B1S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             B1S.gameObject.SetActive(true);
         }
         if (B2S != null)
@@ -201,6 +257,7 @@ public partial class NineForShow : MonoBehaviour
             B2S.transform.SetParent(B2T.transform);
             B2S.transform.localPosition = Vector3.zero;
             B2S.transform.localScale = Vector3.one;
+            B2S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             B2S.gameObject.SetActive(true);
         }
         if (B3S != null)
@@ -208,6 +265,7 @@ public partial class NineForShow : MonoBehaviour
             B3S.transform.SetParent(B3T.transform);
             B3S.transform.localPosition = Vector3.zero;
             B3S.transform.localScale = Vector3.one;
+            B3S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             B3S.gameObject.SetActive(true);
         }
         if (C1S != null)
@@ -215,6 +273,7 @@ public partial class NineForShow : MonoBehaviour
             C1S.transform.SetParent(C1T.transform);
             C1S.transform.localPosition = Vector3.zero;
             C1S.transform.localScale = Vector3.one;
+            C1S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             C1S.gameObject.SetActive(true);
         }
         if (C2S != null)
@@ -222,6 +281,7 @@ public partial class NineForShow : MonoBehaviour
             C2S.transform.SetParent(C2T.transform);
             C2S.transform.localPosition = Vector3.zero;
             C2S.transform.localScale = Vector3.one;
+            C2S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             C2S.gameObject.SetActive(true);
         }
         if (C3S != null)
@@ -229,6 +289,7 @@ public partial class NineForShow : MonoBehaviour
             C3S.transform.SetParent(C3T.transform);
             C3S.transform.localPosition = Vector3.zero;
             C3S.transform.localScale = Vector3.one;
+            C3S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
             C3S.gameObject.SetActive(true);
         }
     }
