@@ -19,7 +19,7 @@ namespace FightScene
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
             foreach(NineForShow nineForShow in FightOverControl.target.NineForShows)
             {
-                nineForShow.CloseStoneInfo();
+                nineForShow.ClearCurrent();
             }
         }
         

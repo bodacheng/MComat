@@ -78,11 +78,6 @@ namespace mainMenu
         }
         #endregion
         
-        public void MiniNineSlotRefresh(string monsterOfPlayerID)
-        {
-            //this.presentationProcessRunner.Run(_NineForShow.ShowStones_Acc(monsterOfPlayerID));
-        }
-        
         public IEnumerator RefreshMemberDetailPageByFocusingChar()
         {
             if (_focusing == null || _focusing.monsterOfPlayerId == null || _focusing.monsterId == null)
@@ -108,7 +103,8 @@ namespace mainMenu
             }
             void SkillShow()
             {
-                PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
+                if (MemberDetail.target._focusing.monsterOfPlayerId != null)
+                    PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
             SkillShowButton.onClick.AddListener(SkillShow);
@@ -117,7 +113,8 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+                if (MemberDetail.target._focusing.monsterOfPlayerId != null)
+                    PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
 

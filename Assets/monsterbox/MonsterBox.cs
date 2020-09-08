@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
 
@@ -89,7 +88,6 @@ namespace mainMenu
                 void Select()
                 {
                     HeroIcon.Seletedfeature(targetingIcon, target.selectedFrame, 150f);
-                    MemberDetail.target.MiniNineSlotRefresh(monsterOfPlayerId);
                 }
                 targetingIcon.iconButton.onClick.AddListener(Select);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);

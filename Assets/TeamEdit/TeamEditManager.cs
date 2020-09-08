@@ -15,9 +15,28 @@ public class TeamEditManager : MonoBehaviour
     [Header("选中框")]
     public GameObject selectedFrame;
 
+    [Space(7)]
+    [Header("选中角色的技能显示")]
+    public NineForShow _nineForShow;
+    [Space(7)]
+    [Header("技能编辑按钮")]
+    public Button SkillEditButton;
+
     public int focusingPosNum = -1;
     readonly IDictionary<int, HeroIcon> teamButtonDic = new Dictionary<int, HeroIcon>();
-        
+
+    void Awake()
+    {
+        // edit按钮功能加载
+        SkillEditButton.onClick.RemoveAllListeners();
+        void SkillEdit()
+        {
+            if (MemberDetail.target._focusing.monsterOfPlayerId != null)
+                PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+        }
+        SkillEditButton.onClick.AddListener(SkillEdit);
+    }
+
     #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
     public void AddHeroIconFeaturesToMonsterBox()
     {
@@ -33,6 +52,8 @@ public class TeamEditManager : MonoBehaviour
         {
             yield return MemberDetail.target.SetMemberDetailFocusingChar(CharRecordId);//确立focusing角色
             yield return ChangeTeamPos(MemberDetail.target._focusing.monsterOfPlayerId, focusingPosNum);
+            // mini nineslot show
+            yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
             yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         }
         void Trigger()

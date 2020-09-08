@@ -61,7 +61,7 @@ public class GachaResult : MainSceneProcess
         GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
         CameraManager._camera.gameObject.SetActive(true);
         GachaRender.target.Camera.gameObject.SetActive(false);
-        GachaManager.target.NineForShow.Clear();
+        GachaManager.target.NineForShow.ClearCurrent();
         PreScene.target._SkillStonesBox_NineSlot._skillStoneDetail._T.SetParent(GachaManager.target.SKillEditStoneBoxT);
         PreScene.target._SkillStonesBox_NineSlot._skillStoneDetail._T.localScale = Vector3.one;
         PreScene.target._SkillStonesBox_NineSlot._skillStoneDetail._T.localPosition = Vector3.zero;
