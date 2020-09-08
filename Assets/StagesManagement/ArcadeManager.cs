@@ -47,7 +47,7 @@ namespace mainMenu
         {
             target = this;
         }
-
+        
         public StageButton GetStageButton(int stageno)
         {
             return ArcadeStages[stageno]?.stageButton;
@@ -55,15 +55,17 @@ namespace mainMenu
 
         void ArrageStageMembersButtonIconFeature()
         {
+            void IconButtonFeature(string MonsterResourceID)
+            {
+                // 显示技能组
+                
+                // 显示模型
+                
+                
+            }
             foreach(KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
             {
-                void IconButtonFeature()
-                {
-                    // 显示技能组
-                    
-                    // 显示模型
-                    
-                }
+
             }
         }
 

@@ -7,7 +7,7 @@ public class QuestInfo : MainSceneProcess
     // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
     public IEnumerator EnterProcess()
     {
-        yield return ModelShower.target.ShowModel(null);
+        yield return ModelShower.target.ShowMyModel(null);
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);

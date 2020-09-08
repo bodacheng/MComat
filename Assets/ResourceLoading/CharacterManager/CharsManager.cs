@@ -32,39 +32,14 @@ public partial class CharsManager : MonoBehaviour {
         }
     }
     
-    //这个函数是建立在这样的前提下：我们认为从数据库获取的玩家拥有角色，localid是正常的(不重复)
-    //如果localid产生重复的情况下这个函数被执行，将产生大量紊乱。
-    public IEnumerator BuildTheseMyModels(GetMonsterOfPlayerDetailModel[] myChars)
-    {
-        foreach(GetMonsterOfPlayerDetailModel one in myChars)
-        {
-            if (one != null)
-                yield return (BuildShowModel(one));
-        }
-    }
-    
+    // 下面这个特指“我的角色”
     public IEnumerator BuildShowModel(GetMonsterOfPlayerDetailModel myChar)
     {
         if (myChar == null)
         {
             yield break;
         }
-        IEnumerator loadshowmodel;
-        switch (ResourceLoadingSetting.ModelLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                loadshowmodel = CreateModelForShowingByCach(myChar.monsterId);
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                loadshowmodel = CreateModelForShowingByStreamingAssets(myChar.monsterId);
-                break;
-            case ResourceLoadMode.Resource:
-                loadshowmodel = CreateModelForShowingByResource(myChar.monsterId);
-                break;
-            default:
-                loadshowmodel = CreateModelForShowingByResource(myChar.monsterId);
-                break;
-        }
+        IEnumerator loadshowmodel = CreateCharModel(myChar.monsterId);
         yield return loadshowmodel;
         Data_Center targetmodel = (Data_Center)loadshowmodel.Current;
         if (targetmodel != null)
@@ -76,19 +51,8 @@ public partial class CharsManager : MonoBehaviour {
     //这些都是中间变量
     public IEnumerator CreateCharacter(CharDataInfo _CharacterDataInfo)
     {
-        IEnumerator buildmodelproess = null;
-        switch(ResourceLoadingSetting.ModelLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-            yield return buildmodelproess= (CreateModelForShowingByCach(_CharacterDataInfo.ResourceID));
-            break;
-            case ResourceLoadMode.Resource:
-            yield return buildmodelproess = (CreateModelForShowingByResource(_CharacterDataInfo.ResourceID));
-            break;
-            case ResourceLoadMode.StreamingAssetAB:
-            yield return buildmodelproess = (CreateModelForShowingByStreamingAssets(_CharacterDataInfo.ResourceID));
-            break;
-        }
+        IEnumerator buildmodelproess = CreateCharModel(_CharacterDataInfo.ResourceID);
+        yield return buildmodelproess;
         Data_Center _TempDATACENTER = (Data_Center)buildmodelproess.Current;
         if (_TempDATACENTER == null)
         {
@@ -102,5 +66,24 @@ public partial class CharsManager : MonoBehaviour {
              _TempCharacterResourceInfo._zokusei,
              _TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;
-    }    
+    }
+    
+    IEnumerator CreateCharModel(string ResourceID)
+    {
+        IEnumerator buildmodelproess = null;
+        switch(ResourceLoadingSetting.ModelLoadingMode)
+        {
+            case ResourceLoadMode.CachAB:
+            yield return buildmodelproess= (CreateModelForShowingByCach(ResourceID));
+            break;
+            case ResourceLoadMode.Resource:
+            yield return buildmodelproess = (CreateModelForShowingByResource(ResourceID));
+            break;
+            case ResourceLoadMode.StreamingAssetAB:
+            yield return buildmodelproess = (CreateModelForShowingByStreamingAssets(ResourceID));
+            break;
+        }
+        Data_Center _TempDATACENTER = (Data_Center)buildmodelproess.Current;
+        yield return _TempDATACENTER;
+    }
 }

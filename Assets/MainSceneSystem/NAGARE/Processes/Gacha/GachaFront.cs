@@ -6,7 +6,7 @@ public class GachaFront : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        yield return ModelShower.target.ShowModel(null);
+        yield return ModelShower.target.ShowMyModel(null);
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         CameraManager._camera.gameObject.SetActive(false);
         GachaRender.target.Camera.gameObject.SetActive(true);

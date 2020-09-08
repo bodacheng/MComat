@@ -16,7 +16,7 @@ public class SkillStones : MainSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
-        yield return ModelShower.target.ShowModel(null);
+        yield return ModelShower.target.ShowMyModel(null);
         SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         SkillStonesBox.target._skillStoneDetail.Clear();
         SSLevelUpManager.target.RefreshSkillLevelUpModule();

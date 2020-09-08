@@ -7,7 +7,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        yield return ModelShower.target.ShowModel(null);
+        yield return ModelShower.target.ShowMyModel(null);
         yield return ArcadeManager.target.PageRefresh();
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
         loadFinished = true;

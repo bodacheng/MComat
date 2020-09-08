@@ -35,7 +35,7 @@ public class ModelShower : MonoBehaviour
         pinchZoom.camera = _CameraManager.GetComponent<Camera>();
     }
 
-    public IEnumerator ShowModel(string localID)
+    public IEnumerator ShowMyModel(string localID)
     {
         if (localID == null)
         {
@@ -73,7 +73,7 @@ public class ModelShower : MonoBehaviour
         }
         yield return showingChar;
     }
-    
+        
     Vector3 FirstPoint;
     Vector3 SecondPoint;
     Vector3 modelPOnScreen;

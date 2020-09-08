@@ -394,6 +394,7 @@
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
     <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
     <Compile Include="Assets\NetFightScene\NetFightScene.cs" />
+    <Compile Include="Assets\ObjectPools\CharPool.cs" />
     <Compile Include="Assets\ObjectPools\DecompositionerPool.cs" />
     <Compile Include="Assets\OldUseless\DebugManager.cs" />
     <Compile Include="Assets\OldUseless\OldDebugFightingProcess.cs" />
@@ -496,6 +497,7 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
+    <Compile Include="Assets\Singleton\GeneralModelPool.cs" />
     <Compile Include="Assets\Singleton\LevelCal.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\MyModelPool.cs" />
