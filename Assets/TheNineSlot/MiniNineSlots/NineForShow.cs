@@ -6,7 +6,8 @@ using mainMenu;
 public partial class NineForShow : MonoBehaviour
 {
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
-
+    public Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
+    
     SKStoneItem A1S, A2S, A3S, B1S, B2S, B3S, C1S, C2S, C3S;
     
     public void ClearCurrent()
@@ -94,9 +95,61 @@ public partial class NineForShow : MonoBehaviour
         C2S = getC2.Current != null ? (SKStoneItem)getC2.Current : null;
         C3S = getC3.Current != null ? (SKStoneItem)getC3.Current : null;
         
+        if (A1S != null)
+        {
+            A1Frame.color = RefreshFrameColor(A1S._SkillConfig.SP_LEVEL);
+        }
+        if (A2S != null)
+        {
+            A2Frame.color = RefreshFrameColor(A2S._SkillConfig.SP_LEVEL);
+        }
+        if (A3S != null)
+        {
+            A3Frame.color = RefreshFrameColor(A3S._SkillConfig.SP_LEVEL);
+        }
+        if (B1S != null)
+        {
+            B1Frame.color = RefreshFrameColor(B1S._SkillConfig.SP_LEVEL);
+        }
+        if (B2S != null)
+        {
+            B2Frame.color = RefreshFrameColor(B2S._SkillConfig.SP_LEVEL);
+        }
+        if (B3S != null)
+        {
+            B3Frame.color = RefreshFrameColor(B3S._SkillConfig.SP_LEVEL);
+        }
+        if (C1S != null)
+        {
+            C1Frame.color = RefreshFrameColor(C1S._SkillConfig.SP_LEVEL);
+        }
+        if (C2S != null)
+        {
+            C2Frame.color = RefreshFrameColor(C2S._SkillConfig.SP_LEVEL);
+        }
+        if (C3S != null)
+        {
+            C3Frame.color = RefreshFrameColor(C3S._SkillConfig.SP_LEVEL);
+        }
+        
         Parent();
     }
-        
+    
+    Color RefreshFrameColor(int splevel)
+    {
+        switch(splevel)
+        {
+            case 1:
+                return Color.green;
+            case 2:
+                return Color.yellow;
+            case 3:
+                return Color.red;
+            default:
+                return Color.white;
+        }
+    }
+    
     public void ShowStoneLevel()
     {
         if (A1S != null)
