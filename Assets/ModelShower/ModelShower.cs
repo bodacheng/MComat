@@ -44,12 +44,12 @@ public class ModelShower : MonoBehaviour
             yield break;
         }
         
-        GameObject _char = MyModelPool.Instance.GetMyModel(localID);
+        GameObject _char = AyModelPool.Instance.GetMyModel(localID);
         if (_char == null)
         {
             GetMonsterOfPlayerDetailModel targetInfo = AccountCharsSet.Get(localID);
             yield return CharsManager.target.BuildShowModel(targetInfo);
-            _char = MyModelPool.Instance.GetMyModel(localID);
+            _char = AyModelPool.Instance.GetMyModel(localID);
         }
         
         if (showingChar == _char)

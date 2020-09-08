@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MyModelPool {
+public class AyModelPool {
 
-    private static MyModelPool instance;
-    public static MyModelPool Instance
+    static AyModelPool instance;
+    public static AyModelPool Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new MyModelPool();
+                instance = new AyModelPool();
             }
             return instance;
         }
@@ -34,7 +32,7 @@ public class MyModelPool {
             ModelDicBasedOnPlayerLocalID.Remove(problemKeys[i]);
         }
     }
-
+    
     //我们希望这个字典来负责加载了的模型的重复利用。另外不同于各种特效是由default单例那个组件保存字典，这个模型的字典我觉得放在这里也有道理，因为毕竟这里保存的是一些展示用模型。
     public void AddToDic(string LocalID,GameObject Model,IDictionary<string, GameObject> ReferenceDic)
     {

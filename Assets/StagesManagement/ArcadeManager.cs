@@ -13,76 +13,58 @@ namespace mainMenu
     {
         public Canvas _ArcadeCanvas;
         public RectTransform ButtonsContainer;
-        
+
         [Space(7)]
         [Header("编辑队伍")]
         public Button EditTeamButton; // 根据进入战斗模式决定是否显示
-        
+
         [Space(7)]
         [Header("编辑队伍")]
         public Button JumpToNewStage; // 根据进入战斗模式决定是否显示
-        
+
         [Space(7)]
         [Header("myteamT")]
         public RectTransform myT;
-        
+
         [Space(7)]
         [Header("ScrollRect")]
         public ScrollRect _ScrollRect;
-        
+
         [Space(7)]
         [Header("ViewScrollBar")]
         public Scrollbar _Scrollbar;
-        
+
         [Space(7)]
         [Header("StageButtonPretab")]
         public StageButton pretab;
-        
+
         public static ArcadeManager target;
         //List<StageButton> stageButtons = new List<StageButton>();
-        
+
         public static IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
-        
+
         void Awake()
         {
             target = this;
         }
-        
-        public class StageInfo
-        {
-            public StageScriptableObject stageConfig;
-            public StageButton stageButton;
-            public List<HeroIcon> MemberIcons;
-            
-            public void ChangeColorOfIcons(bool on)
-            {
-                Image buttonImage = stageButton.GetComponent<Image>();
-                if (on)
-                {
-                    buttonImage.raycastTarget = true;
-                    buttonImage.color = new Color(1, 1, 1, 1);
-                    stageButton.text.color = new Color(1, 1, 1, 1);
-                    for (int i = 0; i < MemberIcons.Count; i++)
-                    {
-                        MemberIcons[i].LightOn();
-                        MemberIcons[i].iconButton.targetGraphic.raycastTarget = false;
-                    }
-                }else{
-                    buttonImage.raycastTarget = false;
-                    buttonImage.color = new Color(1, 1, 1, 0.3f);
-                    stageButton.text.color = new Color(1, 1, 1, 0.3f);
-                    for (int i = 0; i < MemberIcons.Count; i++)
-                    {
-                        MemberIcons[i].Grey();
-                        MemberIcons[i].iconButton.targetGraphic.raycastTarget = false;
-                    }
-                }
-            }
-        }
-        
+
         public StageButton GetStageButton(int stageno)
         {
             return ArcadeStages[stageno]?.stageButton;
+        }
+
+        void ArrageStageMembersButtonIconFeature()
+        {
+            foreach(KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
+            {
+                void IconButtonFeature()
+                {
+                    // 显示技能组
+                    
+                    // 显示模型
+                    
+                }
+            }
         }
 
         // 原则上这些玩意没有每次都去生成的道理..
@@ -131,20 +113,20 @@ namespace mainMenu
             {
                 Disposable = Observable.EveryUpdate().Subscribe(_ =>
                     {
-                        if (FightGlobalSetting.scenestep != 1)
+                        if (FightGlobalSetting.scenestep != 0)
                         {
                             autoHide.Dispose();
                         }
                         if (!JumpToNewStage.gameObject.activeSelf)
                         {
-                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.2f)
+                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.1f)
                             {
                                 JumpToNewStage.gameObject.SetActive(true);
                             }
                         }
                         else
                         {
-                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) <= 0.2f)
+                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) <= 0.1f)
                             {
                                 JumpToNewStage.gameObject.SetActive(false);
                             }
@@ -193,7 +175,7 @@ namespace mainMenu
             RefreshRender();
             JumpTo();
         }
-                
+        
         float CurrentTargetScrollbarValue()
         {
             float targetScrollbarValue;

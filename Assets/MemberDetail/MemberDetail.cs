@@ -21,7 +21,7 @@ namespace mainMenu
         [Space(7)]
         [Header("SkillStoneManager")]
         public SkillStonesBox _SkillStonesBox;
-
+        
         [Space(7)]
         [Header("mini nineslot")]
         public NineForShow _NineForShow;
@@ -103,7 +103,7 @@ namespace mainMenu
             }
             void SkillShow()
             {
-                if (MemberDetail.target._focusing.monsterOfPlayerId != null)
+                if (target._focusing.monsterOfPlayerId != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
@@ -113,7 +113,7 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                if (MemberDetail.target._focusing.monsterOfPlayerId != null)
+                if (target._focusing.monsterOfPlayerId != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
@@ -180,7 +180,7 @@ namespace mainMenu
         {
             if (accountCharacterInfo != null)
             {
-                GameObject focusingOneModel = MyModelPool.Instance.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
+                GameObject focusingOneModel = AyModelPool.Instance.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");

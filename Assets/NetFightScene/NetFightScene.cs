@@ -218,6 +218,7 @@ namespace FightScene
             RealTimeGameProcessManager.target.Clear();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+            HitBoxesProcesser.Instance.processingDecompositioners.Clear();
             SceneManager.LoadScene(1);
         }
 
