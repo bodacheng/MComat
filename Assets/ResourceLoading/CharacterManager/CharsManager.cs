@@ -23,11 +23,11 @@ public partial class CharsManager : MonoBehaviour {
             {
                 continue;
             }
-            if (AyModelPool.Instance.ModelDicBasedOnPlayerLocalID.ContainsKey(myCharLocalIDForNextBattle[i])
+            if (MyModelPool.Instance.ModelDicBasedOnPlayerLocalID.ContainsKey(myCharLocalIDForNextBattle[i])
                &&
-                AyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]] != null)
+                MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]] != null)
             {
-                AyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]].transform.parent = ResourceKeeper.dontDestroyOnLoadParent;
+                MyModelPool.Instance.ModelDicBasedOnPlayerLocalID[myCharLocalIDForNextBattle[i]].transform.parent = ResourceKeeper.dontDestroyOnLoadParent;
             }
         }
     }
@@ -69,7 +69,7 @@ public partial class CharsManager : MonoBehaviour {
         Data_Center targetmodel = (Data_Center)loadshowmodel.Current;
         if (targetmodel != null)
         {
-            AyModelPool.Instance.AddToDic(myChar.monsterOfPlayerId,targetmodel.WholeT.gameObject, AyModelPool.Instance.ModelDicBasedOnPlayerLocalID);
+            MyModelPool.Instance.AddToDic(myChar.monsterOfPlayerId,targetmodel.WholeT.gameObject, MyModelPool.Instance.ModelDicBasedOnPlayerLocalID);
         }
     }
     

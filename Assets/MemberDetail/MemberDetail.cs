@@ -180,7 +180,7 @@ namespace mainMenu
         {
             if (accountCharacterInfo != null)
             {
-                GameObject focusingOneModel = AyModelPool.Instance.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
+                GameObject focusingOneModel = MyModelPool.Instance.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");

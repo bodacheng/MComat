@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AyModelPool {
+public class MyModelPool {
 
-    static AyModelPool instance;
-    public static AyModelPool Instance
+    static MyModelPool instance;
+    public static MyModelPool Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new AyModelPool();
+                instance = new MyModelPool();
             }
             return instance;
         }

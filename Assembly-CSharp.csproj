@@ -495,10 +495,10 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Utili.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
-    <Compile Include="Assets\Singleton\AyModelPool.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\LevelCal.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
+    <Compile Include="Assets\Singleton\MyModelPool.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
     <Compile Include="Assets\Singleton\SystemNotes.cs" />
     <Compile Include="Assets\Singleton\TeamConfig.cs" />
