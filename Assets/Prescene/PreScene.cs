@@ -117,7 +117,7 @@ namespace mainMenu
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             
             // 关卡按钮一次生成就可以
-            yield return ArcadeManager.target.GenerateStageButtons();
+            yield return ArcadeManager.target.INIArcadeStageButtons();
             
             // Shop
             ShopTop shopTop = new ShopTop();

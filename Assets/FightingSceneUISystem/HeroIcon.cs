@@ -11,11 +11,10 @@ public class HeroIcon : MonoBehaviour {
     public Image Icon;
     public Image frame;
     public Image cooldownCurtain;
-
+    
     public CharDataInfo CharDataInfo;
-    public GetMonsterOfPlayerDetailModel _MonsterOfPlayerDetailModel;
     public CharConfig _CharConfig;
-
+    
     static IDictionary<Zokusei, Sprite> frames = new Dictionary<Zokusei, Sprite>();
     
     public static void INIFrames()
@@ -131,12 +130,7 @@ public class HeroIcon : MonoBehaviour {
         CharConfig charConfig = MonstersConfigTable.GetCharConfig(monsterRecordID);
         Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
     }
-    
-    public void DecideIconSize(string mainMenuFocusing)
-    {
-        gameObject.GetComponent<RectTransform>().localScale = mainMenuFocusing != _MonsterOfPlayerDetailModel.monsterOfPlayerId ? new Vector3(1, 1, 1) : new Vector3(1.1f, 1.1f, 1.1f);
-    }
-    
+        
     public static void Seletedfeature(HeroIcon _charIcon,GameObject selectedFrame, float size)
     {
         if (_charIcon == null)

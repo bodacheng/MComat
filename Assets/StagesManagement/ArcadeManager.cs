@@ -56,36 +56,17 @@ namespace mainMenu
         {
             return ArcadeStages[stageno]?.stageButton;
         }
-
-        void ArrageStageMembersButtonIconFeature()
-        {
-            foreach(KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
-            {
-                for (int i = 0; i < keyValuePair.Value.MemberIcons.Count; i++)
-                {
-                    HeroIcon heroIcon = keyValuePair.Value.MemberIcons[i];
-                    void IconButtonFeature()
-                    {
-                        // 显示模型
-                        MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
-                        // 显示技能组
-                        MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
-                    }
-                    heroIcon.iconButton.onClick.RemoveAllListeners();
-                    heroIcon.iconButton.onClick.AddListener(IconButtonFeature);
-                }
-            }
-        }
-
+        
         // 原则上这些玩意没有每次都去生成的道理..
         // 而且这个功能可能做一些扩展，比如关卡图标可以搞个特殊一类的
         // 2020523 : 计划根据账户进度选择是否显示隐藏关卡
-        public IEnumerator GenerateStageButtons()
+        public IEnumerator INIArcadeStageButtons()
         {
             List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(StageScriptableObject)).ToList();
             foreach (Object _object in stageScriptableObjects)
             {
                 StageScriptableObject one = (StageScriptableObject)_object;
+                one.LoadLocalFightFromScript();
                 
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
@@ -99,13 +80,27 @@ namespace mainMenu
                     newButton.ID = one.LocalFightID;
                     newButton.text.text = "Stage" + one.LocalFightID.ToString();
                     newButton.name = "Stage" + one.LocalFightID.ToString();
-                    one.LoadLocalFightFromScript();
+                    
                     for (int i = 0; i < one.localFight.EnemySets.values.Count; i++)
                     {
                         IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(one.localFight.EnemySets.values[i].ResourceID);
                         yield return onecoroutine;
                     }
                     List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.localFight.EnemySets.values, newButton.IconsT);
+                    for (int i = 0; i < heroIcons.Count; i++)
+                    {
+                        HeroIcon heroIcon = heroIcons[i];
+                        void IconButtonFeature()
+                        {
+                            // 显示模型
+                            MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
+                            // 显示技能组
+                            MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
+                        }
+                        heroIcon.iconButton.onClick.RemoveAllListeners();
+                        heroIcon.iconButton.onClick.AddListener(IconButtonFeature);
+                    }
+                    
                     StageInfo stageInfo = new StageInfo
                     {
                         stageConfig = one,
@@ -123,7 +118,7 @@ namespace mainMenu
             {
                 Disposable = Observable.EveryUpdate().Subscribe(_ =>
                     {
-                        if (FightGlobalSetting.scenestep != 0)
+                        if (FightGlobalSetting.scenestep != 0 || JumpToNewStage.IsDestroyed())
                         {
                             autoHide.Dispose();
                         }
@@ -144,7 +139,6 @@ namespace mainMenu
                     }
                 )
             };
-            ArrageStageMembersButtonIconFeature();
         }
         
         public IEnumerator PageRefresh()

@@ -16,6 +16,7 @@ public class StageInfo
     public StageButton stageButton;
     public List<HeroIcon> MemberIcons;
     
+    // 即 关卡是否已经解锁
     public void ChangeColorOfIcons(bool on)
     {
         Image buttonImage = stageButton.GetComponent<Image>();
@@ -36,7 +37,7 @@ public class StageInfo
             for (int i = 0; i < MemberIcons.Count; i++)
             {
                 MemberIcons[i].Grey();
-                MemberIcons[i].iconButton.targetGraphic.raycastTarget = false;
+                MemberIcons[i].iconButton.targetGraphic.raycastTarget = true; // 可以浏览未解锁关卡
             }
         }
     }

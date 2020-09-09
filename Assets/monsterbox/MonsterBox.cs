@@ -39,15 +39,7 @@ namespace mainMenu
             noMagic.gameObject.SetActive(false);
             target = this; //放在start是确保每次进入菜单场景都运行
         }
-
-        public void AdjustAllIconsSize(string focusingLocalID)
-        {
-            foreach (KeyValuePair<string, HeroIcon> icon in mainMenuIcons)
-            {
-                icon.Value.DecideIconSize(focusingLocalID);
-            }
-        }
-
+        
         public static HeroIcon GetCharIcon(string monsterofplayid)
         {
             if (monsterofplayid == null)
@@ -82,7 +74,6 @@ namespace mainMenu
                 yield return onecoroutine;
                 targetingIcon = Instantiate(target.noMagic);
                 targetingIcon.name = _CharConfig.REAL_NAME + "_icon";
-                targetingIcon._MonsterOfPlayerDetailModel = targetingCharInfo;
                 targetingIcon._CharConfig = _CharConfig;
                 targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
                 void Select()

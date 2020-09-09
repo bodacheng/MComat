@@ -744,6 +744,7 @@
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AdditiveMobile_Scroll01.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Readme.txt" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
+    <None Include="Assets\Resources\stageTemp\oneFight5.json" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlendedMobile_Scroll01.shader" />
