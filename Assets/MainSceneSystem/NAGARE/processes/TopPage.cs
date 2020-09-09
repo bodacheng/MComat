@@ -2,6 +2,7 @@
 using UnityEngine;
 using mainMenu;
 using dataAccess;
+using DG.Tweening;
 
 public class TopPage : MainSceneProcess
 {
@@ -13,6 +14,7 @@ public class TopPage : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(true);
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
@@ -45,10 +47,11 @@ public class TopPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
     }
 
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
