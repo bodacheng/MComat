@@ -214,7 +214,6 @@ namespace FightScene
                 break;
             }
             SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
-            CharsManager.target.PreventTheseMyModelsFromDestroying(dontdestroy);
             RealTimeGameProcessManager.target.Clear();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;

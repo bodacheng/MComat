@@ -63,7 +63,6 @@ public static class FightLoad
                 LoadingCanvas.target.ArrangeWarnWindow("队伍人员不够。");
                 yield break;
             }
-            CharsManager.target.PreventTheseMyModelsFromDestroying(ToBeLoad.GetTeam1EnterRingLocalIds(ToBeLoad.localFight));
             Go(ToBeLoad);
         }
         PreScene.target.mainProcessRunner.Run(LoadAndGo());
@@ -75,6 +74,7 @@ public static class FightLoad
         SkillStonesBox.PreventCellsFromDestroy();
         MySkillStonesReader.PreventStonesFromDestroy();
         ArcadeManager.PreventStageButtonsFromDestroy();
+        GeneralModelPool.Clear();
         SceneManager.LoadScene(2);
     }
 }

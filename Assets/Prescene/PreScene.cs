@@ -216,8 +216,7 @@ namespace mainMenu
         {
             LoadingCanvas.target.ArrangeConfirmWindow(
                 delegate {
-                CharsManager.target.PreventTheseMyModelsFromDestroying(stage.GetTeam1EnterRingLocalIds(stage.localFight));
-                FightLoad.Go(stage); 
+                    FightLoad.Go(stage); 
                 }, "开打？");
         }
         

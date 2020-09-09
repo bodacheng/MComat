@@ -180,14 +180,14 @@ namespace mainMenu
         {
             if (accountCharacterInfo != null)
             {
-                GameObject focusingOneModel = MyModelPool.Instance.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
-                if (focusingOneModel == null)
+                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
+                yield return focusingOneModel;
+                if (focusingOneModel.Current == null)
                 {
                     Debug.Log("模型错误");
                     yield break;
                 }
-                OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
-                Data_Center aI_DATA_CENTER = outsideDataLink._C;
+                Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;
                 if (aI_DATA_CENTER == null)
                 {
                     Debug.Log("角色pretab构成严重错误");

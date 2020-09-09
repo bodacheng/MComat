@@ -37,39 +37,28 @@ public class ModelShower : MonoBehaviour
 
     public IEnumerator ShowMyModel(string localID)
     {
+        if (showingChar != null)
+            showingChar.SetActive(false);
         if (localID == null)
         {
-            if (showingChar != null)
-                showingChar.SetActive(false);
             yield break;
         }
-        
-        GameObject _char = MyModelPool.Instance.GetMyModel(localID);
-        if (_char == null)
+        IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(localID);
+        yield return focusingOneModel;
+        if (focusingOneModel.Current == null)
         {
-            GetMonsterOfPlayerDetailModel targetInfo = AccountCharsSet.Get(localID);
-            yield return CharsManager.target.BuildShowModel(targetInfo);
-            _char = MyModelPool.Instance.GetMyModel(localID);
+            Debug.Log("模型错误");
+            yield break;
         }
-        
-        if (showingChar == _char)
+        Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;
+        showingChar = aI_DATA_CENTER.WholeT.gameObject;
+        if (showingChar != null)
         {
-            if (showingChar != null)
-                showingChar.SetActive(true);
-        }else{
-            if (showingChar != null)
-            {
-                showingChar.SetActive(false);
-            }
-            showingChar = _char;
-            if (showingChar != null)
-            {
-                showingChar.SetActive(true);
-                showingChar.transform.parent = null;
-                showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
-                //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
-                showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
-            }
+            showingChar.SetActive(true);
+            showingChar.transform.parent = null;
+            showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
+            //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
+            showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
         }
         yield return showingChar;
     }
