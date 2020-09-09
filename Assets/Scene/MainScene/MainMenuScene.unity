@@ -58543,7 +58543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 175, y: -20}
+  m_AnchoredPosition: {x: -10, y: -20}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1120707307
@@ -71658,6 +71658,7 @@ MonoBehaviour:
   _ScrollRect: {fileID: 210254829}
   _Scrollbar: {fileID: 845218270}
   pretab: {fileID: 3416358147097766526, guid: 8beb627230cfe453fa023b5c8bcd53eb, type: 3}
+  _NineForShow: {fileID: 1633083905}
 --- !u!4 &1270620269
 Transform:
   m_ObjectHideFlags: 0
@@ -89658,6 +89659,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1633083903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1633083905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6326787604693422998, guid: c33785a0a0f404bec93eee5ee37434ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 1633083903}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dcb8800f0aa24b6ba6fdb2d5f13af2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1636556792
 GameObject:
   m_ObjectHideFlags: 0
@@ -596953,6 +596966,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633547576662}
   frame: {fileID: 7186568799690212753}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597436,6 +597474,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633632514745}
   frame: {fileID: 7186568799571718782}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597703,6 +597766,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633854256102}
   frame: {fileID: 7186568799921451809}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597859,6 +597947,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633853950555}
   frame: {fileID: 7186568799921760924}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597892,6 +598005,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633759516196}
   frame: {fileID: 7186568800032184035}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598199,6 +598337,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633938550558}
   frame: {fileID: 7186568799802822617}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598386,6 +598549,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633951568769}
   frame: {fileID: 7186568799824139078}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598872,6 +599060,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398634047860937}
   frame: {fileID: 7186568800247152654}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599392,6 +599605,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632461697885}
   frame: {fileID: 7186568798596101018}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599548,6 +599786,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632477971297}
   frame: {fileID: 7186568798612333478}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599664,6 +599927,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632523478688}
   frame: {fileID: 7186568798584915559}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599931,6 +600219,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632627013991}
   frame: {fileID: 7186568798430001568}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600047,6 +600360,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632655998919}
   frame: {fileID: 7186568798451089152}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600203,6 +600541,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632590799930}
   frame: {fileID: 7186568798517331197}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600393,6 +600756,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632780052211}
   frame: {fileID: 7186568798847125044}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600469,6 +600857,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632778283167}
   frame: {fileID: 7186568798850205784}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600625,6 +601038,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632706365963}
   frame: {fileID: 7186568798904036044}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600846,6 +601284,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632911146153}
   frame: {fileID: 7186568798716296302}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601110,6 +601573,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632816041625}
   frame: {fileID: 7186568798812450398}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601186,6 +601674,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632829184045}
   frame: {fileID: 7186568798764701930}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601376,6 +601889,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632939112085}
   frame: {fileID: 7186568799208158802}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601492,6 +602030,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632929401996}
   frame: {fileID: 7186568799202143307}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601651,6 +602214,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398632977274294}
   frame: {fileID: 7186568799187035505}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601724,6 +602312,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633173767237}
   frame: {fileID: 7186568798974551170}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601923,6 +602536,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633080456546}
   frame: {fileID: 7186568799084639653}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601999,6 +602637,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633105017702}
   frame: {fileID: 7186568799042255777}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -602112,6 +602775,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633122589352}
   frame: {fileID: 7186568799058238063}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -602271,6 +602959,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633417805074}
   frame: {fileID: 7186568799284166101}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -602347,6 +603060,31 @@ MonoBehaviour:
   Icon: {fileID: 4599398633352961071}
   frame: {fileID: 7186568799349271784}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 

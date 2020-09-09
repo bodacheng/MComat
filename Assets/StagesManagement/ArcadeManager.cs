@@ -37,6 +37,10 @@ namespace mainMenu
         [Space(7)]
         [Header("StageButtonPretab")]
         public StageButton pretab;
+        
+        [Space(7)]
+        [Header("mini nineslot")]
+        public NineForShow _NineForShow;
 
         public static ArcadeManager target;
         //List<StageButton> stageButtons = new List<StageButton>();
@@ -55,17 +59,21 @@ namespace mainMenu
 
         void ArrageStageMembersButtonIconFeature()
         {
-            void IconButtonFeature(string MonsterResourceID)
-            {
-                // 显示技能组
-                
-                // 显示模型
-                
-                
-            }
             foreach(KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
             {
-
+                for (int i = 0; i < keyValuePair.Value.MemberIcons.Count; i++)
+                {
+                    HeroIcon heroIcon = keyValuePair.Value.MemberIcons[i];
+                    void IconButtonFeature()
+                    {
+                        // 显示模型
+                        MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
+                        // 显示技能组
+                        MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
+                    }
+                    heroIcon.iconButton.onClick.RemoveAllListeners();
+                    heroIcon.iconButton.onClick.AddListener(IconButtonFeature);
+                }
             }
         }
 
@@ -136,6 +144,7 @@ namespace mainMenu
                     }
                 )
             };
+            ArrageStageMembersButtonIconFeature();
         }
         
         public IEnumerator PageRefresh()

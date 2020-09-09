@@ -41,7 +41,7 @@ namespace mainMenu
             }
             for (int i = 0; i < icons.Count; i++)
             {
-                icons[i].iconButton.targetGraphic.raycastTarget = false;
+                icons[i].iconButton.targetGraphic.raycastTarget = true;
             }
             return icons;
         }

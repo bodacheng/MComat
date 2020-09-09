@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using mainMenu;
+using UnityEngine;
 
 public class ArcadeFrontProcess : MainSceneProcess
 {
@@ -30,7 +31,14 @@ public class ArcadeFrontProcess : MainSceneProcess
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(false);
     }
 
+    readonly Vector3 screenPos = new Vector3(0.3f, 0.3f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
+        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
+        {
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
+        }else{
+            ModelShower.target.CFollowCharZ();
+        }
     }
 }

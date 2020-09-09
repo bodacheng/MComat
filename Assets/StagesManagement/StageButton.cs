@@ -21,16 +21,16 @@ public class StageInfo
         Image buttonImage = stageButton.GetComponent<Image>();
         if (on)
         {
-            buttonImage.raycastTarget = true;
+            //buttonImage.raycastTarget = true;
             buttonImage.color = new Color(1, 1, 1, 1);
             stageButton.text.color = new Color(1, 1, 1, 1);
             for (int i = 0; i < MemberIcons.Count; i++)
             {
                 MemberIcons[i].LightOn();
-                MemberIcons[i].iconButton.targetGraphic.raycastTarget = false;
+                MemberIcons[i].iconButton.targetGraphic.raycastTarget = true;
             }
         }else{
-            buttonImage.raycastTarget = false;
+            //buttonImage.raycastTarget = false;
             buttonImage.color = new Color(1, 1, 1, 0.3f);
             stageButton.text.color = new Color(1, 1, 1, 0.3f);
             for (int i = 0; i < MemberIcons.Count; i++)

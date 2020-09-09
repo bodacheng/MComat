@@ -11,7 +11,8 @@ public class HeroIcon : MonoBehaviour {
     public Image Icon;
     public Image frame;
     public Image cooldownCurtain;
-    
+
+    public CharDataInfo CharDataInfo;
     public GetMonsterOfPlayerDetailModel _MonsterOfPlayerDetailModel;
     public CharConfig _CharConfig;
 
@@ -162,6 +163,8 @@ public class HeroIcon : MonoBehaviour {
             Debug.Log("?? : " + CharDataInfo.ResourceID);
             return null;
         }
+        MyMemberIcon.CharDataInfo = CharDataInfo;
+        MyMemberIcon._CharConfig = charConfig;
         MyMemberIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig._zokusei);
         MyMemberIcon.transform.SetParent(T);
         MyMemberIcon.transform.localPosition = Vector3.one;
