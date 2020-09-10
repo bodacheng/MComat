@@ -491,6 +491,9 @@
     <Reference Include="DOTweenEditor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
+    <Reference Include="JMOAssets_MatCapWelcome">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
+    </Reference>
     <Reference Include="POFX_Runtime">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
     </Reference>
@@ -508,9 +511,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="JMOAssets_MatCapWelcome">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
