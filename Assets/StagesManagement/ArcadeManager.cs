@@ -47,6 +47,8 @@ namespace mainMenu
 
         public static IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
 
+        SingleAssignmentDisposable autoHide;
+                
         void Awake()
         {
             target = this;
@@ -66,10 +68,9 @@ namespace mainMenu
             foreach (Object _object in stageScriptableObjects)
             {
                 StageScriptableObject one = (StageScriptableObject)_object;
-                one.LoadLocalFightFromScript();
-                
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
+                    one.LoadLocalFightFromScript();
                     StageButton newButton = Instantiate(pretab);
                     void LoadThisStage()
                     {
@@ -113,14 +114,14 @@ namespace mainMenu
                 }
             }
             
-            SingleAssignmentDisposable autoHide = new SingleAssignmentDisposable();
             autoHide = new SingleAssignmentDisposable
             {
                 Disposable = Observable.EveryUpdate().Subscribe(_ =>
                     {
-                        if (FightGlobalSetting.scenestep != 0 || JumpToNewStage.IsDestroyed())
+                        if (FightGlobalSetting.scenestep != 0 || JumpToNewStage.IsDestroyed() || JumpToNewStage == null || JumpToNewStage.gameObject == null)
                         {
                             autoHide.Dispose();
+                            return;
                         }
                         if (!JumpToNewStage.gameObject.activeSelf)
                         {
