@@ -34,14 +34,32 @@ public class HitBoxesProcesser : MonoBehaviour
         {
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
+                if (processingDecompositioners[i] == null)
+                {
+                    Debug.Log("队列错误");
+                    processingDecompositioners.Clear();
+                    return;
+                }
                 processingDecompositioners[i].Step1();
             }
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
+                if (processingDecompositioners[i] == null)
+                {
+                    Debug.Log("队列错误");
+                    processingDecompositioners.Clear();
+                    return;
+                }
                 processingDecompositioners[i].Step2();
             }
             for (int i = 0; i < processingDecompositioners.Count; i++)
             {
+                if (processingDecompositioners[i] == null)
+                {
+                    Debug.Log("队列错误");
+                    processingDecompositioners.Clear();
+                    return;
+                }
                 processingDecompositioners[i].Life();
             }
             processingDecompositioners.Clear();
