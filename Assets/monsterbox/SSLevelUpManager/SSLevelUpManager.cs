@@ -10,7 +10,6 @@ public partial class SSLevelUpManager : MonoBehaviour
     [Space(7)]
     [Header("按钮")]
     public RectTransform levelUpPageRect;
-    public Button OpenLevelUpWindow;
     public Button plusLevel;
     public Button minusLevel;
     public Button confirmLevelUp;
@@ -21,6 +20,10 @@ public partial class SSLevelUpManager : MonoBehaviour
     public Text CurrentExpToNextLevel;
     public Text CurrentGoldExaustText;
 
+    [Space(7)]
+    [Header("材料技能石参数")]
+    public SkillStoneDetail _MSkillStoneDetail;
+    
     [Space(7)]
     [Header("尝试升级的技能石的选中标记框")]
     public GameObject _Selected;
@@ -48,8 +51,35 @@ public partial class SSLevelUpManager : MonoBehaviour
             cell4,
             cell5
         };
+        
+        AddMSlotBehaviour(cell1);
+        AddMSlotBehaviour(cell2);
+        AddMSlotBehaviour(cell3);
+        AddMSlotBehaviour(cell4);
+        AddMSlotBehaviour(cell5);
     }
-
+    
+    // 显示
+    public void AddMSlotBehaviour(StoneCell cell)
+    {
+        Button button = cell.GetComponent<Button>();
+        if (button != null)
+        {
+            void buttonFeature()
+            {
+                SKStoneItem _stone = cell.GetItem();
+                if (_stone != null && _stone._SkillConfig != null)
+                {
+                    _MSkillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
+                }else{
+                    _MSkillStoneDetail.Clear();
+                }
+            }
+            button.onClick.AddListener(buttonFeature);
+            button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, _Selected); });
+        }
+    }
+    
     public void SetFocusingSSD(SkillStoneDetail fSSD)
     {
         focusingSSD = fSSD;
@@ -61,7 +91,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         return GoldToExp(CurrentGoldExaust) + CalCurrentExpFromMaterialStone();
     }
 
-    #region 技能石升级窗口的开启与关闭,都是直接放在按钮上。
+    #region 技能石升级窗口的开启与关闭
+    // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
     {
         if (focusingSSD.GetSTTarget() == null)
@@ -93,7 +124,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         plusLevel.gameObject.SetActive(false);
         minusLevel.gameObject.SetActive(false);
         confirmLevelUp.gameObject.SetActive(false);
-        OpenLevelUpWindow.gameObject.SetActive(false);
     }
     
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
@@ -104,13 +134,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             Clear();
             return;
         }
-        if (levelUpPageRect.gameObject.activeSelf)
-        {
-            OpenLevelUpWindow.gameObject.SetActive(false);
-        }else{
-            OpenLevelUpWindow.gameObject.SetActive(true);
-        }
-        
+                
         #region 各数值文本刷新
         LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + (int)focusingSSD.GetSTTarget().EXP);
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";

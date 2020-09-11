@@ -17,8 +17,6 @@ public class StartUpPresentation : MonoBehaviour
     [Header("开发公司商标")]
     public Image logo;
     
-    SingleAssignmentDisposable Watershed;
-    
     // step1 商标显示
     // step2 可skip的小动画
     // step3 标题
@@ -38,8 +36,9 @@ public class StartUpPresentation : MonoBehaviour
         logo.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         logo.gameObject.SetActive(false);
-        
+
         // step2:主洁面
+        SingleAssignmentDisposable Watershed = null;
         Watershed = new SingleAssignmentDisposable
         {
             Disposable = Observable.EveryUpdate().Subscribe(_ =>

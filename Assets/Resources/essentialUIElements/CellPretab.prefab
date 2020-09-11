@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.9827944, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -159,6 +161,7 @@ GameObject:
   - component: {fileID: 2362666687670186532}
   - component: {fileID: 5079401564192131196}
   - component: {fileID: 9087381990746991603}
+  - component: {fileID: 8493128223712769493}
   m_Layer: 5
   m_Name: CellPretab
   m_TagString: Untagged
@@ -210,6 +213,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -285,6 +289,19 @@ MonoBehaviour:
   image: {fileID: 2362666687670186532}
   empty: {r: 0, g: 0, b: 0, a: 0}
   full: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &8493128223712769493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200566296820303500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &4037095681978422865
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +400,31 @@ MonoBehaviour:
   Icon: {fileID: 7072365312884837822}
   frame: {fileID: 5454514250545940457}
   cooldownCurtain: {fileID: 0}
+  CharDataInfo:
+    monsterOfPlayerId: 
+    ResourceID: 
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -460,6 +502,7 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: fbaa37cd5f9454710a0fdef876aefeff, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
