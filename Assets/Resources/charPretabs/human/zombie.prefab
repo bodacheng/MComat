@@ -39381,7 +39381,7 @@ GameObject:
   - component: {fileID: 4244888249350672672}
   - component: {fileID: 4283382421860971708}
   m_Layer: 0
-  m_Name: Zombie
+  m_Name: zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39430,7 +39430,7 @@ Animator:
   m_GameObject: {fileID: 6566515607636454343}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fe2eb0b4e90413643a3ddc78c368140f, type: 3}
-  m_Controller: {fileID: 9100000, guid: e10558744504b244599302a4ca2e3be3, type: 2}
+  m_Controller: {fileID: 9100000, guid: a7980b15d03d447b08d873db5a38b219, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
