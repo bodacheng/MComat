@@ -138227,18 +138227,11 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.31666666
-    functionName: SetLeftFootMarkerManager
-    data: 
+    functionName: BlastAttack
+    data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 1
-    messageOptions: 0
-  - time: 0.51666665
-    functionName: ClearMarkerManagers
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
     messageOptions: 0
   - time: 0.6
     functionName: turn_on_flag
