@@ -77,17 +77,29 @@ namespace mainMenu
             }
         }
         
-        public void RefreshSkillDetail(SkillConfig _ConfigOfStone, string skillStoneOfPlayerId)
+        public void RefreshSkillDetail(string skillStoneOfPlayerId)
         {
-            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_ConfigOfStone.RECORD_ID));
-            
-            keyname.text = _ConfigOfStone.REAL_NAME;
-            Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
-            ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
-            ShowSKillRanges(_ConfigOfStone.AI_MIN_DIS, _ConfigOfStone.AI_MAX_DIS);
-            currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
-            skill_level_levelup.text = "LV:" + currentstone.GetLevel();
-            skill_level_info.text = "LV:" + currentstone.GetLevel();
+            if (!string.IsNullOrEmpty(skillStoneOfPlayerId))
+            {
+                currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
+                SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(currentstone.skillId);
+                SkillStonesBox.target.mainProcessRunner.Run(IconForShow(skillConfig.RECORD_ID));
+                
+                keyname.text = skillConfig.REAL_NAME;
+                Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
+                ShowSkillStoneExType(skillConfig.SP_LEVEL);
+                ShowSKillRanges(skillConfig.AI_MIN_DIS, skillConfig.AI_MAX_DIS);
+                
+                skill_level_levelup.text = "LV:" + currentstone.GetLevel();
+                skill_level_info.text = "LV:" + currentstone.GetLevel();
+            }else{
+                keyname.text = null;
+                Showname.text = null;
+                ShowSkillStoneExType(-1);
+                ShowSKillRanges(99, -1);
+                skill_level_levelup.text = null;
+                skill_level_info.text = null;
+            }
         }
         
         public void RefreshSkillDetail(SkillConfig _ConfigOfStone)

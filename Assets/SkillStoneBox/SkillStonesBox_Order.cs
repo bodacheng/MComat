@@ -23,6 +23,8 @@ namespace mainMenu
             {
                 ordertype = 0;
             }
+            _Selected.gameObject.SetActive(false);
+            SSLevelUpManager.target._MSkillStoneDetail.RefreshSkillDetail(string.Empty);
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
               
@@ -70,7 +72,7 @@ namespace mainMenu
             }
             return targets;
         }
-
+        
         // 等级升序降序
         List<string> ByLevel(List<string> targets, int order) //1:升序 0:降序 
         {

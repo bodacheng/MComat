@@ -70,13 +70,14 @@ public partial class SSLevelUpManager : MonoBehaviour
                 SKStoneItem _stone = cell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
-                    _MSkillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
+                    // 如果点击的不是升级对象技能石
+                    if (_stone.SkillStoneOfPlayerId != focusingSSD.GetSTTarget().skillStoneOfPlayerId)
+                        _MSkillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
                 }else{
                     _MSkillStoneDetail.Clear();
                 }
             }
             button.onClick.AddListener(buttonFeature);
-            button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, _Selected); });
         }
     }
     
@@ -99,7 +100,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             return;
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(focusingSSD.GetSTTarget().skillStoneOfPlayerId);
         StoneCell targetStoneOnCell = targetStone.GetCell();
-        StoneCell.SeletedRender(targetStoneOnCell, _Selected);
+        SKStoneItem.SeletedRender(targetStone, _Selected);
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
@@ -107,8 +108,8 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     public void CloseLevelUpPage()
     {
+        _Selected.SetActive(false);
         ReturnAllMaterialsToBox();
-        StoneCell.SeletedRender(null, _Selected);
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 1);
         levelUpPageRect.gameObject.SetActive(false);
         RefreshSkillLevelUpModule();
@@ -134,15 +135,13 @@ public partial class SSLevelUpManager : MonoBehaviour
             Clear();
             return;
         }
-                
+        
         #region 各数值文本刷新
         LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + (int)focusingSSD.GetSTTarget().EXP);
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
         StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-
         CurrentExpToNextLevel.text = "(" + current.expRemain + "/" + (current.expRemain + current.expToNextLevel).ToString() + ")";
         CurrentExpToNextLevel.color = CurrentGoldExaust > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-
         CurrentGoldExaustText.text = "消耗金币："+ CurrentGoldExaust;
         #endregion
         

@@ -16,12 +16,13 @@ namespace mainMenu
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
             {
+                button.onClick.RemoveAllListeners();
                 void buttonFeature()
                 {
                     SKStoneItem _stone = _SkillStoneCell.GetItem();
                     if (_stone != null && _stone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_stone._SkillConfig, _stone.SkillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
                         SSLevelUpManager.target.RefreshSkillLevelUpModule();
                     }else{
                         _skillStoneDetail.Clear();

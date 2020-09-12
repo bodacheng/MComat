@@ -10,10 +10,14 @@ public partial class SSLevelUpManager : MonoBehaviour
         for (int i = 0; i < MaterialSlots.Count; i++)
         {
             MaterialSlots[i].UpdateMyItem();
-            if (MaterialSlots[i].GetItem() == null)
+            SKStoneItem Material = skillboxcell.GetItem();
+            if (MaterialSlots[i].GetItem() == null && Material != null)
             {
-                StoneCell.Install(skillboxcell, MaterialSlots[i]);
-                break;
+                if (Material.SkillStoneOfPlayerId != focusingSSD.GetSTTarget().skillStoneOfPlayerId)
+                {
+                    StoneCell.Install(skillboxcell, MaterialSlots[i]);
+                    break;
+                }
             }
         }
     }
