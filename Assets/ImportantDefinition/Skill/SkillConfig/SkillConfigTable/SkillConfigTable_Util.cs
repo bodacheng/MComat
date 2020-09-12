@@ -170,7 +170,7 @@ public partial class SkillConfigTable
         List<SkillConfig> list = GetSkillConfigsOfType(type);
         foreach (SkillConfig one in list)
         {    
-            if (SkillConfig.RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2],ranges[3]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
+            if (SkillConfig.RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
                 if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
                 {

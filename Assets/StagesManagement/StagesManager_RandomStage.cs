@@ -112,10 +112,10 @@ public partial class StagesManager : MonoBehaviour
     
     public static NineAndTwo BalanceStyle(string focusingtype, int skilllevel)
     {
-        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, false, false, false }, -1, 6);
-        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, true, false, false }, -1, 1);
-        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, false, true, false }, -1, 1);
-        List<string> _Ex3Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, false, false, true }, -1, 1);
+        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { true, false, false, false }, -1, 6);
+        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { false, true, false, false }, -1, 1);
+        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { false, false, true, false }, -1, 1);
+        List<string> _Ex3Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { false, false, false, true }, -1, 1);
         
         NineAndTwo one = new NineAndTwo
         {

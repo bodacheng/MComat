@@ -132,10 +132,10 @@ namespace mainMenu
             List<string> C_Types = MonstersConfigTable.Instance.GetTypeList();
             for (int i = 0; i < C_Types.Count; i++)
             {
-                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 0, true, true, true, true);
-                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 1, true, true, true, true);
-                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 2, true, true, true, true);
-                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 3, true, true, true, true);
+                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 0, true, true, true);
+                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 1, true, true, true);
+                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 2, true, true, true);
+                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 3, true, true, true);
                 
                 if (SkillStonesOfType_normal.Count > AccountSet._AccInfo.Stoneboxsize)
                 {

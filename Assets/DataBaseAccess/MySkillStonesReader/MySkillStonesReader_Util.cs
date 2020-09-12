@@ -36,7 +36,7 @@ namespace dataAccess
         }
         
         // 用于过滤显示在技能石盒内的技能石
-        public static List<string> TargetStonesFromAccount(string type, int ExType, bool close, bool near, bool far, bool outrange)
+        public static List<string> TargetStonesFromAccount(string type, int ExType, bool close, bool near, bool far)
         {
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
@@ -45,14 +45,15 @@ namespace dataAccess
                 {
                     continue;//原生技能不显示在技能石盒子内
                 }
-                SkillConfig _SkillConfigOfSkillStone = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
-                if (_SkillConfigOfSkillStone == null)
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
+                if (_SkillConfig == null)
                 {
                     Debug.Log("????"+ keyValuePair.Value.skillId);
                     continue;
                 }
-                if (_SkillConfigOfSkillStone.TYPE == type && (_SkillConfigOfSkillStone.SP_LEVEL == ExType || ExType == -1) &&
-                    SkillConfig.RangeLimit(_SkillConfigOfSkillStone.AI_MIN_DIS,_SkillConfigOfSkillStone.AI_MAX_DIS,close, near, far, outrange))
+                if (_SkillConfig.TYPE == type && 
+                    (_SkillConfig.SP_LEVEL == ExType || ExType == -1) &&
+                    SkillConfig.RangeLimit(_SkillConfig.AI_MIN_DIS, _SkillConfig.AI_MAX_DIS, close, near, far))
                 {
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
                 }

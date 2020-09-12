@@ -11,12 +11,12 @@ namespace mainMenu
     {
         public IEnumerator ArrangeSkillStonesToBox()
         {
-            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, outRangeCheckBox.isOn, TheNineSlot.target.GetUsingStonesId());
+            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, TheNineSlot.target.GetUsingStonesId());
             StoneDeleteManger.target.RefreshSelectedRender();
         }
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, bool outrange, List<string> UsingStoneIDs)
+        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, List<string> UsingStoneIDs)
         {
             foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
             {
@@ -32,7 +32,7 @@ namespace mainMenu
                 cellPair.Value.UpdateMyItem(); // 被拔下石头的格子需要把使用中角色头像关闭。单纯的通过null化物体的parent不会让Cell组件所记录的“放置中item”撤销
             }
             
-            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount(type, exType, close, near, far, outrange);
+            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount(type, exType, close, near, far);
             targetSKs = Order(targetSKs);
             
             if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)

@@ -9,7 +9,7 @@ namespace mainMenu
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
-
+        
         [Header("画面主模块parent")]
         public RectTransform SkillBoxCanvas;
         public RectTransform BoxT, stonesTempContainer;
@@ -25,21 +25,20 @@ namespace mainMenu
         [Space(7)]
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _SkillStoneBoxTabEffectsManager;
-
+        
         [Space(7)]
         [Header("攻击范围限定")]
         public Toggle closeCheckBox;
         public Toggle nearCheckBox;
         public Toggle farCheckBox;
-        public Toggle outRangeCheckBox;
-        
+                
         [Space(7)]
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
         
         [Header("fxcamera")]
         public Camera fxCamera;
-
+        
         string focusingtype = "human";
         int focusingExType;
         public static RectTransform _stonesTempContainer;

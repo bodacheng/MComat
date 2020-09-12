@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using UnityEngine.SceneManagement;
+using mainMenu;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -21,6 +22,8 @@ using UnityEngine.SceneManagement;
 public partial class ResourceLordSceneUtil : MonoBehaviour
 {
     public PlayerInfoRefMode ProjectPlayerInfoRefMode;
+
+    public bool enterFrontPageFirst;
     
     [Space(7)]
     [Header("资源读取设置")]
@@ -78,11 +81,18 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         yield break;
     }
     
+    // 进入开头画面
     void EnterFrontScene()
     {
-        StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
-        stage._fightEventType = FightEventType.Screensaver;
-        FightLoad.Go(stage);
+        if (enterFrontPageFirst)
+        {
+            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+            stage._fightEventType = FightEventType.Screensaver;
+            FightLoad.Go(stage);
+        }else{
+            MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+            SceneManager.LoadScene(1);
+        }
     }
     
     public void DeleteLocalSaveDate()
@@ -110,7 +120,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         stage._fightEventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
     }
-        
+    
     public IEnumerator ResourcePrepareProcess()
     {
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;

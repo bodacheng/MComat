@@ -28,7 +28,7 @@ namespace mainMenu
         
         [Space(7)]
         [Header("EXTypes")]
-        public GameObject close, near, far, outter;
+        public GameObject close, near, far;
         
         [Space(7)]
         [Header("当前技能等级")]
@@ -131,25 +131,20 @@ namespace mainMenu
         
         void ShowSKillRanges(float dis_min, float float_max)
         {
-            if (SkillConfig.RangeLimit(dis_min, float_max, true, false, false, false))
+            if (SkillConfig.RangeLimit(dis_min, float_max, true, false, false))
                 close.SetActive(true);
             else
                 close.SetActive(false);
                 
-            if (SkillConfig.RangeLimit(dis_min, float_max, false, true, false, false))
+            if (SkillConfig.RangeLimit(dis_min, float_max, false, true, false))
                 near.SetActive(true);
             else
                 near.SetActive(false);
                 
-            if (SkillConfig.RangeLimit(dis_min, float_max, false, false, true, false))
+            if (SkillConfig.RangeLimit(dis_min, float_max, false, false, true))
                 far.SetActive(true);
             else
                 far.SetActive(false);
-
-            if (SkillConfig.RangeLimit(dis_min, float_max, false, false, false, true))
-                outter.SetActive(true);
-            else
-                outter.SetActive(false);
         }
         
         void ShowSkillStoneExType(int eX)

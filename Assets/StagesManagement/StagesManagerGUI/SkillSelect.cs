@@ -64,7 +64,7 @@ public partial class StagesManagerGUI : Editor {
             GUILayout.Space(10f);
         }
         
-        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[4] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2], skillrangeselectfilter[3]}, SPselected, selectskillrarelevel);
+        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[3] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2]}, SPselected, selectskillrarelevel);
         
         int index2 = 0;
         int selectedskillindex = 0;
