@@ -4,13 +4,20 @@ using UnityEngine.UI;
 using Api.Dto.Model;
 using System.Collections.Generic;
 using dataAccess;
+using UniRx;
 
 public class StoneDeleteManger : MonoBehaviour
 {
     public Text CurrentSelectedCount;
-    public RectTransform SkillInfoT, SelectionInfoT, SelectionConfirmT;
+    public RectTransform SkillInfoT, SelectionInfoT;
     public SkillStonesBox SkillStonesBox;
     public Button EnterDeleteModeButton;
+
+    [Space(7)]
+    [Header("确认，取消")]
+    public Button confirm, cancel;
+    SingleAssignmentDisposable autoHide;
+    
     readonly List<SkillStoneOfPlayerInfoModel> selectedForDelete = new List<SkillStoneOfPlayerInfoModel>();
 
     public static StoneDeleteManger target;
@@ -32,8 +39,33 @@ public class StoneDeleteManger : MonoBehaviour
         
         SkillInfoT.gameObject.SetActive(false);
         SelectionInfoT.gameObject.SetActive(true);
-        SelectionConfirmT.gameObject.SetActive(true);
         EnterDeleteModeButton.gameObject.SetActive(false);
+
+        confirm.onClick.RemoveAllListeners();
+        // confirm.onClick.Add.... 删除用函数暂时未写
+        
+        autoHide = new SingleAssignmentDisposable
+        {
+            Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    if (!confirm.gameObject.activeSelf)
+                    {
+                        if (selectedForDelete.Count > 0)
+                        {
+                            confirm.gameObject.SetActive(true);
+                            cancel.gameObject.SetActive(true);
+                        }
+                    }else{
+                        if (selectedForDelete.Count == 0)
+                        {
+                            confirm.gameObject.SetActive(false);
+                            cancel.gameObject.SetActive(false);
+                        }
+                    }
+
+                }
+            )
+        };
     }
 
     public void ExitDeleteMode()
@@ -41,15 +73,19 @@ public class StoneDeleteManger : MonoBehaviour
         SkillInfoT.gameObject.SetActive(true);
         SelectionInfoT.gameObject.SetActive(false);
         EnterDeleteModeButton.gameObject.SetActive(true);
-        SelectionConfirmT.gameObject.SetActive(false);
         CurrentSelectedCount.text = "";
+        ClearSelect();
         SkillStonesBox.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
+        autoHide.Dispose();
     }
     
     // 按钮函数
     public void ClearSelect()
     {
+        CurrentSelectedCount.text = "";
         selectedForDelete.Clear();
+        confirm.gameObject.SetActive(false);
+        cancel.gameObject.SetActive(false);
         RefreshSelectedRender();
     }
     
