@@ -57,7 +57,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 56,tornadoup,human,1,10,GR,0,0.2,5,,1
 57,headrush,human,1,10,GR,0,8,10,,1
 58,highrroundhouse,human,1,10,GR,0,0.2,5,,1
-59,highsmashground,human,1,10,GR,3,0.2,5,,3
+59,highsmashground,human,1,10,GI,2,7,14,,3
 60,hook_r,human,1,10,GR,0,0.2,5,,1
 61,jab_lr,human,1,10,GR,0,0.2,5,,1
 62,jab_rlhook,human,1,10,GR,0,0.2,5,,1
@@ -179,4 +179,3 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 178,bangzi_k,human,1,10,GM,1,5,8,,4
 179,witchmirror,human,1,10,CT,1,2,5,,4
 180,bladekick,human,1,10,CT,1,2,5,,4
-
