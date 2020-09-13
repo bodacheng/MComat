@@ -40,7 +40,7 @@ public class StoneDeleteManger : MonoBehaviour
         SkillInfoT.gameObject.SetActive(false);
         SelectionInfoT.gameObject.SetActive(true);
         EnterDeleteModeButton.gameObject.SetActive(false);
-
+        
         confirm.onClick.RemoveAllListeners();
         // confirm.onClick.Add.... 删除用函数暂时未写
         

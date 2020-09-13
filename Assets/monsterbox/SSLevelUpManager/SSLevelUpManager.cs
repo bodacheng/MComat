@@ -27,7 +27,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     [Space(7)]
     [Header("尝试升级的技能石的选中标记框")]
     public GameObject _Selected;
-
+    
     [Space(7)]
     [Header("融合技能槽")]
     public StoneCell cell1;
@@ -72,12 +72,16 @@ public partial class SSLevelUpManager : MonoBehaviour
                 {
                     // 如果点击的不是升级对象技能石
                     if (_stone.SkillStoneOfPlayerId != focusingSSD.GetSTTarget().skillStoneOfPlayerId)
+                    {
                         _MSkillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
-                }else{
+                    }
+                }
+                else{
                     _MSkillStoneDetail.Clear();
                 }
             }
             button.onClick.AddListener(buttonFeature);
+            button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, SkillStonesBox._Selected); });
         }
     }
     

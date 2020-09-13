@@ -93,12 +93,7 @@ namespace mainMenu
                 skill_level_levelup.text = "LV:" + currentstone.GetLevel();
                 skill_level_info.text = "LV:" + currentstone.GetLevel();
             }else{
-                keyname.text = null;
-                Showname.text = null;
-                ShowSkillStoneExType(-1);
-                ShowSKillRanges(99, -1);
-                skill_level_levelup.text = null;
-                skill_level_info.text = null;
+                Clear();
             }
         }
         

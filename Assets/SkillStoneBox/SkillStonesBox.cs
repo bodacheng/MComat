@@ -107,7 +107,6 @@ namespace mainMenu
         {
             if (viewingMode)
             {
-                types.gameObject.SetActive(true);
                 types.ClearOptions();
                 foreach (string Rname in MonstersConfigTable.Instance.GetTypeList())
                 {
@@ -116,6 +115,12 @@ namespace mainMenu
                         text = Rname
                     };
                     types.options.Add(m_NewData);
+                }
+                if (types.options.Count > 1)
+                {
+                    types.gameObject.SetActive(false);
+                }else{
+                    types.gameObject.SetActive(true);
                 }
             }
             else
