@@ -62,12 +62,17 @@ public class ShaderManager : MonoBehaviour
         for (int i = 0; i < pOFXes.Count; i++)
         {
             POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
+            if (RIMlayer == null)
+            {
+                Debug.Log("ShaderMangerError:"+ transform);
+                continue;
+            }
             RIMlayer.m_cParams.color = targetColor;
-            pOFXes[i].enabled = true;
+            RIMlayer.enabled = true;
             DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, tartget_intensity, time).
             OnComplete(() => {
                 DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, time);
-                pOFXes[i].enabled = false;
+                RIMlayer.enabled = false;
             });
         }
     }
