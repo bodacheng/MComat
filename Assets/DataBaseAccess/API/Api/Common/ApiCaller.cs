@@ -125,10 +125,15 @@ namespace Api.Common {
             // ==============================
             // モデル
             try {
-                //Debug.Log(System.Text.Encoding.UTF8.GetString(req.downloadHandler.data));
-
-                M model = JsonConvert.DeserializeObject<M>(req.downloadHandler.text);
-                model.httpStatus = (int) req.responseCode;
+                Debug.Log(url + "  上述API尝试解析以下字符串" + req.downloadHandler.text);
+                var settings = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore
+                    };
+                M model = JsonConvert.DeserializeObject<M>(req.downloadHandler.text, settings);
+                model.httpStatus = (int)req.responseCode; // httpStatus? Status? 貌似取值用model要有一个统一定义
+                                
                 if (!(req.isHttpError || req.isNetworkError)) {
                     Debug.Log(url + "以下为成功信息："+ req.downloadHandler.text);
                     success(model);
@@ -145,8 +150,8 @@ namespace Api.Common {
                 }
             }
             catch (Exception e) {
-                Debug.Log(e);
                 Debug.LogError("レスポンスの解析に失敗しました。\n" + req.downloadHandler.text);
+                Debug.Log("这个是catch到的错误" + e);
                 foreach (var prop in form.GetType().GetProperties())
                 {
                     if (prop.GetValue(form) != null) {

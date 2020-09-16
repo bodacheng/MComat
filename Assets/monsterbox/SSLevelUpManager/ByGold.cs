@@ -14,13 +14,13 @@ public partial class SSLevelUpManager : MonoBehaviour
             return;
         
         LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
-        if (GoldToExp(AccountSet._AccInfo.Coin) >= current.expToNextLevel)
+        if (StoneExpManager.GoldToExp(AccountSet._AccInfo.coinCount) >= current.expToNextLevel)
         {
             CurrentGoldExaust += GetGoldNeedForNextLevel();
         }
         else
         {
-            CurrentGoldExaust += AccountSet._AccInfo.Coin;
+            CurrentGoldExaust += AccountSet._AccInfo.coinCount;
         }
         RefreshSkillLevelUpModule();
     }
@@ -39,14 +39,14 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         if (current.expRemain > 0)
         {
-            if (CurrentGoldExaust >= ExpToGold(current.expRemain))
-                CurrentGoldExaust -= ExpToGold(current.expRemain);
+            if (CurrentGoldExaust >= StoneExpManager.ExpToGold(current.expRemain))
+                CurrentGoldExaust -= StoneExpManager.ExpToGold(current.expRemain);
             else
                 CurrentGoldExaust = 0;
         }else{
-            if (CurrentGoldExaust >= ExpToGold(LevelCal.Instance.GetLevelExp(current.currentLevel - 1)))
+            if (CurrentGoldExaust >= StoneExpManager.ExpToGold(LevelCal.Instance.GetLevelExp(current.currentLevel - 1)))
             {
-                CurrentGoldExaust -= ExpToGold(LevelCal.Instance.GetLevelExp(current.currentLevel - 1));
+                CurrentGoldExaust -= StoneExpManager.ExpToGold(LevelCal.Instance.GetLevelExp(current.currentLevel - 1));
             }else{
                 CurrentGoldExaust = 0; 
             }
@@ -55,10 +55,5 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     #endregion
 
-    // 当前技能石为了升到下一级，需要多少Gold
-    int GetGoldNeedForNextLevel()
-    {
-        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
-        return ExpToGold(current.expToNextLevel);
-    }
+
 }

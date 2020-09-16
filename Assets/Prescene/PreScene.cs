@@ -156,10 +156,10 @@ namespace mainMenu
             
             Setting.target.LoadProgrameSettingFromAccount();
             UserID.text = SystemInfo.deviceUniqueIdentifier;
-            accountDiamondCoin.text = AccountSet._AccInfo.Diamond.ToString();
-            accountIntelliCoin.text = AccountSet._AccInfo.Coin.ToString();
+            accountDiamondCoin.text = AccountSet._AccInfo.diamondCount.ToString();
+            accountIntelliCoin.text = AccountSet._AccInfo.coinCount.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);
-
+            
             HeroIcon.INIFrames();
             
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);

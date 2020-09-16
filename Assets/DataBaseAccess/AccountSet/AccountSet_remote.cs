@@ -33,6 +33,12 @@ namespace dataAccess
                 }else{
                     IEnumerator _registered = registered();
                     yield return _registered;
+                    if (_registered.Current == null)
+                    {
+                        Debug.Log("注册失败，退出");
+                        yield return null;
+                        yield break;
+                    }
                     DownloadHandler _registereddownloadHandler = (DownloadHandler)_registered.Current;
                     if (_registereddownloadHandler != null)
                     {
@@ -75,22 +81,25 @@ namespace dataAccess
             CertificationForm form = new CertificationForm
             {
             };
-
+            
             // ==============================
             // API送信
             // ==============================
             // 送信
-            yield return ApiCaller.Instance.Post<BaseModel<GetPlayerInfoModel>, CertificationForm>("http://160.16.187.230/AssetStoreFight/player/getPlayerInfo", form, ApiCaller.Instance.getHeader(apiLanguage),
+            yield return ApiCaller.Instance.Post<BaseModel<GetPlayerInfoModel>, CertificationForm>("http://160.16.187.230:8089/player/getPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model =>
                  {
-                     _AccInfo.Coin = model.data.coinCount;
-                     _AccInfo.Diamond = model.data.diamondCount;
+                     Debug.Log(model);
+                     _AccInfo.PlayerName = model.data.playerName;
+                     _AccInfo.coinCount = model.data.coinCount;
+                     _AccInfo.diamondCount = model.data.diamondCount;
                  }
                 ,
                  model =>
                  {
-                     _AccInfo.Coin = model.data.coinCount;
-                     _AccInfo.Diamond = model.data.diamondCount;
+                    _AccInfo.PlayerName = model.data.playerName;
+                     _AccInfo.coinCount = model.data.coinCount;
+                     _AccInfo.diamondCount = model.data.diamondCount;
                  }
             );
             yield break;

@@ -14,8 +14,7 @@ namespace dataAccess
             Debug.Log("发送请求：" + webRequest.url);
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
-            Debug.Log("返回code：" + webRequest.responseCode);
-            Debug.Log($"{DateTime.Now:yyyy/MM/dd HH:mm:ss.fff}");
+            Debug.Log("返回code：" + webRequest.responseCode + " 时间为："+ $"{DateTime.Now:yyyy/MM/dd HH:mm:ss.fff}");
             if (webRequest.isNetworkError)
             {
                 Debug.Log("Error: " + webRequest.error);

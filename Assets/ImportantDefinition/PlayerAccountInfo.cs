@@ -3,12 +3,12 @@
 [System.Serializable]
 public class PlayerAccountInfo
 {
-    readonly string PlayerID;
+    public string PlayerName;
     
     int coin;//智慧果实
     int diamond;
     int stoneboxsize;
-
+    
     int arcadeProcess;
 
     float bgmVolumn = 0.5f, effectsVolumn = 0.5f;
@@ -17,9 +17,9 @@ public class PlayerAccountInfo
 
     public PlayerAccountInfo()
     {
-        PlayerID = "helloKitty";
-        Coin = 999999999;
-        Diamond = 0;
+        PlayerName = "helloKitty";
+        coinCount = 999999999;
+        diamondCount = 0;
         Stoneboxsize = 500;
     }
     
@@ -59,7 +59,7 @@ public class PlayerAccountInfo
         }
     }
     
-    public int Diamond
+    public int diamondCount
     {
         get => diamond;
         set
@@ -68,7 +68,7 @@ public class PlayerAccountInfo
         }
     }
 
-    public int Coin
+    public int coinCount
     {
         get => coin;
         set
@@ -79,7 +79,7 @@ public class PlayerAccountInfo
 
     public void PlusCoin(int plus)
     {
-        Coin = Coin + plus;
+        coinCount = coinCount + plus;
     }
 }
 

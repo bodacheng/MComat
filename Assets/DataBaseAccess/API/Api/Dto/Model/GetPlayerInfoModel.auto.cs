@@ -1,4 +1,5 @@
 using System;
+using Api.Dto.Model.Common;
 
 namespace Api.Dto.Model {
 
@@ -9,27 +10,12 @@ namespace Api.Dto.Model {
     /// </summary>
     [Serializable]
     public class GetPlayerInfoModel
-    {
+    {        
 		/// <summary>
 		/// プレーヤレコードID
 		/// </summary>
-		public string playerId { get; set; }
-
-		/// <summary>
-		/// ニックネーム
-		/// </summary>
-		public string nickname { get; set; }
-
-		/// <summary>
-		/// レベル
-		/// </summary>
-		public int level { get; set; }
-
-		/// <summary>
-		/// 経験値
-		/// </summary>
-		public int experience { get; set; }
-
+		public string playerName { get; set; }
+        
 		/// <summary>
 		/// ダイヤモンド数
 		/// </summary>

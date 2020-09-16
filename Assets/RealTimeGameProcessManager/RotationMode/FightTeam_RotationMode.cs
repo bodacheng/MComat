@@ -86,7 +86,6 @@ namespace FightScene
                 }
             }
             RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            RealTimeGameProcessManager.target.Refresh();
             return memberchanged;
         }
         

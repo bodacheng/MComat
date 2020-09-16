@@ -93,7 +93,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
     public int CurrentAddExp()
     {
-        return GoldToExp(CurrentGoldExaust) + CalCurrentExpFromMaterialStone();
+        return StoneExpManager.GoldToExp(CurrentGoldExaust) + CalCurrentExpFromMaterialStone();
     }
 
     #region 技能石升级窗口的开启与关闭
@@ -141,7 +141,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         #region 各数值文本刷新
-        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + (int)focusingSSD.GetSTTarget().EXP);
+        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
         StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
         CurrentExpToNextLevel.text = "(" + current.expRemain + "/" + (current.expRemain + current.expToNextLevel).ToString() + ")";
@@ -155,7 +155,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }else{
             minusLevel.gameObject.SetActive(false);
         }
-        if (AccountSet._AccInfo.Coin == CurrentGoldExaust)
+        if (AccountSet._AccInfo.coinCount == CurrentGoldExaust)
         {
             plusLevel.gameObject.SetActive(false);
         }else{
@@ -193,7 +193,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         SKStoneItem item3 = cell3.GetItem();
         SKStoneItem item4 = cell4.GetItem();
         SKStoneItem item5 = cell5.GetItem();
-                
+        
         yield return MySkillStonesReader.RemoveStone(item1.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item2.SkillStoneOfPlayerId);
         yield return MySkillStonesReader.RemoveStone(item3.SkillStoneOfPlayerId);
@@ -208,7 +208,13 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         IEnumerator up = MySkillStonesReader.Update_Level(ApiLanguage.EnUs);
         yield return up;
-        Debug.Log("here"+PlayerSkillStoneID);
         RefreshSkillLevelUpModule();
+    }
+    
+    // 当前技能石为了升到下一级，需要多少Gold
+    int GetGoldNeedForNextLevel()
+    {
+        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        return StoneExpManager.ExpToGold(current.expToNextLevel);
     }
 }

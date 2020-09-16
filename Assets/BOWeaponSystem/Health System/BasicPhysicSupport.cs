@@ -130,48 +130,12 @@ public class BasicPhysicSupport : MonoBehaviour
             floorCheckers[i] = floorCheckersT.GetChild(i);
         }
     }
-
-    bool UsingGravity = true;
-    public void SetUsingGravity(bool _on)
-    {
-        UsingGravity = _on;
-    }
-
-    public void OpenEnemyTouchingDrag(int open)
-    {
-        hiddenMethods.draglevel = open;
-        hiddenMethods.EnemyTouchingDrag = open != 0;
-        if (hiddenMethods.EnemyTouchingDrag == false)
-            hiddenMethods.ClearTouchedEnemyBody();
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
-        {
-            if (hiddenMethods.IfStepOnEnemy(collision.collider))
-            {
-                hiddenMethods.AddTouchedEnemyBody(collision.collider);
-            }
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
-        {
-            if (hiddenMethods.IfStepOnEnemy(collision.collider))
-            {
-                hiddenMethods.RemoveTouchedEnemyBody(collision.collider);
-            }
-        }
-    }
     
     Vector3 temp,temp2;
     float dis_from_center;
     float groundedCount;
     float airCount;
-    void OnAnimatorMove()
+    void Update()
     {
         if (FightGlobalSetting.scenestep == 1)
         {
@@ -207,9 +171,41 @@ public class BasicPhysicSupport : MonoBehaviour
                 transform.position = temp;
             }
         }
-        if (animator.applyRootMotion)
+    }
+
+    bool UsingGravity = true;
+    public void SetUsingGravity(bool _on)
+    {
+        UsingGravity = _on;
+    }
+
+    public void OpenEnemyTouchingDrag(int open)
+    {
+        hiddenMethods.draglevel = open;
+        hiddenMethods.EnemyTouchingDrag = open != 0;
+        if (hiddenMethods.EnemyTouchingDrag == false)
+            hiddenMethods.ClearTouchedEnemyBody();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
-            animator.ApplyBuiltinRootMotion();
+            if (hiddenMethods.IfStepOnEnemy(collision.collider))
+            {
+                hiddenMethods.AddTouchedEnemyBody(collision.collider);
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
+        {
+            if (hiddenMethods.IfStepOnEnemy(collision.collider))
+            {
+                hiddenMethods.RemoveTouchedEnemyBody(collision.collider);
+            }
         }
     }
 }

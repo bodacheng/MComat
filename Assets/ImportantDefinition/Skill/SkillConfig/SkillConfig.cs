@@ -52,10 +52,11 @@ namespace Skill
             EVENT_CODE = null;
         }
         
+        // 后面的三个bool变量意思是是否进行限制
         public static bool RangeLimit(float dis_min ,float dis_max, bool close, bool near, bool far)
         {
             if (dis_max > dis_min)
-            {                
+            {
                 return (!close || (dis_min < 5 && dis_max >= 0f))
                 && (!near || (dis_min < 10f && dis_max >= 5f))
                 && (!far || dis_max >= 10f);

@@ -46,7 +46,7 @@ public class MobileInputsManager : MonoBehaviour {
         inputting = false;
     }
     
-    public void FocusCharInputs(BehaviorRunner focusingCharInputManger,Zokusei zokusei)
+    public void FocusCharInputs(BehaviorRunner focusingCharInputManger, Zokusei zokusei)
     {
         Observing_Runner = focusingCharInputManger;
         if (Observing_Runner != null)

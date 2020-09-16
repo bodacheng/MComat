@@ -34,8 +34,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
     }
     #endregion
-    
-    private int CalCurrentExpFromMaterialStone()
+
+    int CalCurrentExpFromMaterialStone()
     {
         cell1.UpdateMyItem();
         cell2.UpdateMyItem();
@@ -55,19 +55,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         int point4 = item4 != null ? MySkillStonesReader.ConvertSKStoneToExp(item4.SkillStoneOfPlayerId) : 0;
         int point5 = item5 != null ? MySkillStonesReader.ConvertSKStoneToExp(item5.SkillStoneOfPlayerId) : 0;
         
-        int fullAmount = GoldToExp(point1) + GoldToExp(point2) + GoldToExp(point3) + GoldToExp(point4) + GoldToExp(point5);
+        int fullAmount = StoneExpManager.GoldToExp(point1) + StoneExpManager.GoldToExp(point2) + StoneExpManager.GoldToExp(point3) + StoneExpManager.GoldToExp(point4) + StoneExpManager.GoldToExp(point5);
         return fullAmount;
     }
-    
-    #region 智慧果实与经验值转换关系 可能改变位置
-    public int GoldToExp(int gold)
-    {
-        return (gold) / 10 * 1;
-    }
-    
-    public int ExpToGold(int Exp)
-    {
-        return Exp * 10;
-    }
-    #endregion
 }

@@ -65,12 +65,12 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char2 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[1]],
-            _NineAndTwo = RangedStyle("human", 1)
+            _NineAndTwo = BalanceStyle("human", 1)
         };        
         CharDataInfo char3 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[2]],
-            _NineAndTwo = RangedStyle("human", 1)
+            _NineAndTwo = BalanceStyle("human", 1)
         };
         
         CharDataInfo char4 = new CharDataInfo
@@ -81,12 +81,12 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char5 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[4]],
-            _NineAndTwo = RangedStyle("human", 1)
+            _NineAndTwo = BalanceStyle("human", 1)
         };        
         CharDataInfo char6 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[5]],
-            _NineAndTwo = RangedStyle("human", 1)
+            _NineAndTwo = BalanceStyle("human", 1)
         };
         
         switch(teamMode)
@@ -112,10 +112,10 @@ public partial class StagesManager : MonoBehaviour
     
     public static NineAndTwo BalanceStyle(string focusingtype, int skilllevel)
     {
-        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { true, false, false, false }, -1, 6);
-        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { false, true, false, false }, -1, 1);
-        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { false, false, true, false }, -1, 1);
-        List<string> _Ex3Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { true, true, true }, new bool[4] { false, false, false, true }, -1, 1);
+        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, false, false, false }, -1, 6);
+        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { false, true, false, false }, -1, 1);
+        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { false, false, true, false }, -1, 1);
+        List<string> _Ex3Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { false, false, false, true }, -1, 1);
         
         NineAndTwo one = new NineAndTwo
         {
@@ -143,15 +143,15 @@ public partial class StagesManager : MonoBehaviour
             moveType = Skill.MoveType.Move_normal,
             rushType = Skill.RushType.Rush
         };
-
+        
         return one;
     }
     
     public static NineAndTwo RangedStyle(string focusingtype, int skilllevel)
     {
-        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { true, false, false, false }, -1, 5);
-        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { false, true, true, true }, new bool[4] { false, true, false, false }, -1, 3);
-        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[4] { true, true, true, true }, new bool[4] { false, false, true, false }, -1, 1);
+        List<string> _normalSkills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, false, false, false }, -1, 5);
+        List<string> _Ex1Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, true, true }, new bool[4] { false, true, false, false }, -1, 3);
+        List<string> _Ex2Skills = SkillConfigTable.GetTargetSkillRecordIds(focusingtype, new bool[3] { false, true, true }, new bool[4] { false, false, true, false }, -1, 1);
         
         NineAndTwo one = new NineAndTwo
         {
