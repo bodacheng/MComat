@@ -49,12 +49,12 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 1
   _WeaponMode: 3
-  weaponHP: -1
+  weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 0
   zokusei: 0
   muzzle: 
-  ExplosionEffect: 
+  ExplosionEffect: light_hit
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!114 &1062223919313163292

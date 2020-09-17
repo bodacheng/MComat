@@ -184,7 +184,14 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         {
             if (keyValuePair.Value != null)
             {
-                keyValuePair.Value._HitBox.ClearTargets();
+                if (keyValuePair.Value.Phase > 0)
+                {
+                    keyValuePair.Value._HitBox.ClearTargets();
+                }
+                else
+                {
+                    hiddenMethods.RegisterBodyPartWeapon(keyValuePair.Key, 1);
+                }
             }
         }
     }
