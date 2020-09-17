@@ -23,7 +23,8 @@ namespace mainMenu
                     if (_stone != null && _stone._SkillConfig != null)
                     {
                         _skillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
-                        SSLevelUpManager.target.RefreshSkillLevelUpModule();
+                        if (SSLevelUpManager.target != null)
+                            SSLevelUpManager.target.RefreshSkillLevelUpModule();
                     }else{
                         _skillStoneDetail.Clear();
                     }

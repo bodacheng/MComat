@@ -134,7 +134,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
     public void RefreshSkillLevelUpModule()
     {
-        if (focusingSSD.GetSTTarget() == null)
+        if (focusingSSD == null || focusingSSD.GetSTTarget() == null)
         {
             Clear();
             return;

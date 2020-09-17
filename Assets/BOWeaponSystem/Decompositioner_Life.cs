@@ -2,7 +2,9 @@
 using HittingDetection;
 
 public partial class Decompositioner : MonoBehaviour
-{    
+{
+    Vector3 temp,temp2;
+    float dis_from_center;
     public void Life()
     {
         if (Phase == 1 && _HitBox != null)
@@ -69,6 +71,17 @@ public partial class Decompositioner : MonoBehaviour
             case -1: // -1是立刻归还对象池的flag。这个逻辑是让所有hitbox按序运行的重要一环。
                 EnergyRessolve();
                 break;
+        }
+        
+        if (FightGlobalSetting.scenestep == 1)
+        {
+            temp2 = transform.position;
+            temp2.y = 0;
+            dis_from_center = temp2.magnitude;
+            if (dis_from_center > BoundaryControllByGod._BattleRingRadius + 4f)
+            {
+                Phase = -1;
+            }
         }
         
         if (gameObject.activeSelf)

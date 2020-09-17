@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Skill;
 using System.Linq;
+using System;
 
 public partial class SkillConfigTable
 {
@@ -87,64 +88,73 @@ public partial class SkillConfigTable
     
     public static SkillConfig RowToSkillConfig(Row row)
     {
-        SkillConfig _SkillConfig = new SkillConfig
+        try
         {
-            TYPE = row.USEABLE_MONSTER_TYPE,
-            RECORD_ID = row.RECORD_ID,
-            REAL_NAME = row.REAL_NAME,
-            ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT),
-            HP_WEIGHT = float.Parse(row.HP_WEIGHT)
-        };
-        
-        switch (row.ATTACK_TYPE)
-        {
-            case "GR":
-                _SkillConfig.STATE_TYPE = BehaviorType.GR;
-                break;
-            case "GI":
-                _SkillConfig.STATE_TYPE = BehaviorType.GI;
-                break;
-            case "GM":
-                _SkillConfig.STATE_TYPE = BehaviorType.GM;
-                break;
-            case "CT":
-                _SkillConfig.STATE_TYPE = BehaviorType.CT;
-                break;
-            case "NONE":
-                _SkillConfig.STATE_TYPE = BehaviorType.NONE;
-                break;
+            SkillConfig _SkillConfig = new SkillConfig
+            {
+                TYPE = row.USEABLE_MONSTER_TYPE,
+                RECORD_ID = row.RECORD_ID,
+                REAL_NAME = row.REAL_NAME,
+                ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT),
+                HP_WEIGHT = float.Parse(row.HP_WEIGHT)
+            };
+            
+            switch (row.ATTACK_TYPE)
+            {
+                case "GR":
+                    _SkillConfig.STATE_TYPE = BehaviorType.GR;
+                    break;
+                case "GI":
+                    _SkillConfig.STATE_TYPE = BehaviorType.GI;
+                    break;
+                case "GM":
+                    _SkillConfig.STATE_TYPE = BehaviorType.GM;
+                    break;
+                case "CT":
+                    _SkillConfig.STATE_TYPE = BehaviorType.CT;
+                    break;
+                case "NONE":
+                    _SkillConfig.STATE_TYPE = BehaviorType.NONE;
+                    break;
+            }
+            
+            if (!LegalStateType(row.ATTACK_TYPE))
+            {
+                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ _SkillConfig.RECORD_ID);
+            }
+            
+            _SkillConfig.AI_MIN_DIS = float.Parse(row.TRIGGER_DIS_MIN);
+            _SkillConfig.AI_MAX_DIS = float.Parse(row.TRIGGER_DIS_MAX);
+            
+            switch(row.SP_LEVEL)
+            {
+                case "0":
+                    _SkillConfig.SP_LEVEL = 0;
+                    break;
+                case "1":
+                    _SkillConfig.SP_LEVEL = 1;
+                    break;
+                case "2":
+                    _SkillConfig.SP_LEVEL = 2;
+                    break;
+                case "3":
+                    _SkillConfig.SP_LEVEL = 3;
+                    break;
+                default:
+                    _SkillConfig.SP_LEVEL = -1;
+                    break;
+            }
+            _SkillConfig.SHOW_NAME = SkillNameTable.GetSkillName(row.RECORD_ID);
+            _SkillConfig.EVENT_CODE = row.EVENT_CODE;
+            _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
+            return _SkillConfig;
         }
-        
-        if (!LegalStateType(row.ATTACK_TYPE))
+        catch(Exception e)
         {
-            Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ _SkillConfig.RECORD_ID);
+            Debug.Log(e);
+            Debug.Log(row.REAL_NAME);
+            return null;
         }
-        
-        _SkillConfig.AI_MIN_DIS = float.Parse(row.TRIGGER_DIS_MIN);
-        _SkillConfig.AI_MAX_DIS = float.Parse(row.TRIGGER_DIS_MAX);
-        
-        switch(row.SP_LEVEL)
-        {
-            case "0":
-                _SkillConfig.SP_LEVEL = 0;
-                break;
-            case "1":
-                _SkillConfig.SP_LEVEL = 1;
-                break;
-            case "2":
-                _SkillConfig.SP_LEVEL = 2;
-                break;
-            case "3":
-                _SkillConfig.SP_LEVEL = 3;
-                break;
-            default:
-                _SkillConfig.SP_LEVEL = -1;
-                break;
-        }
-        _SkillConfig.SHOW_NAME = SkillNameTable.GetSkillName(row.RECORD_ID);
-        _SkillConfig.EVENT_CODE = row.EVENT_CODE;
-        _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
-        return _SkillConfig;
     }
     
     public static List<string> GetTargetSkillRecordIds(string type, bool[] ranges, bool[] EXType, int rarelevel, int Count)

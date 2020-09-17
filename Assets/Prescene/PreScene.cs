@@ -23,6 +23,10 @@ namespace mainMenu
         [Space(11)]
         [Header("TeamEdit")]
         public TeamEditManager TeamEditor;
+
+        [Space(11)]
+        [Header("技能展示器模式切换角色按钮")]
+        public Button charSwitcher;
         
         [Space(11)]
         [Header("modelShower")]
@@ -177,10 +181,12 @@ namespace mainMenu
             
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
+                charSwitcher.gameObject.SetActive(true);
                 yield return MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                 trySwitchToStep(MainSceneStep.MemberDetail_edit, false);
             }else{
+                charSwitcher.gameObject.SetActive(false);
                 if (ReturnButtonManager.ReturnMissionList.Count > 0)
                 {
                     ReturnButtonManager.AddFeatureToReturnButton();

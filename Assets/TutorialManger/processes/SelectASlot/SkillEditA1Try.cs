@@ -29,7 +29,7 @@ public class SkillEditA1Try : TutorialProcess
     {
         if (!waitCompleted)
         {
-            if (memberDetail_Edit.loadFinished)
+            if (MemberDetail_edit.loadFinished)
             {
                 LoadingCanvas.target.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
                 waitCompleted = true;

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using dataAccess;
 using Api.Dto.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace mainMenu
 {
@@ -45,6 +46,25 @@ namespace mainMenu
         {
             target = this;
         }
+        
+        #region 快捷切换角色
+        public void SwitchChar()
+        {
+            List<string> keys = MonsterBox.mainMenuIcons.Keys.ToList();
+            int index = keys.IndexOf(_focusing.monsterOfPlayerId);
+            index--;
+            if (index == -1)
+                index = keys.Count - 1;
+            string targetMonsterOfPlayerID = keys[index];
+            IEnumerator MonsterIconButton()
+            {
+                yield return target.SetMemberDetailFocusingChar(targetMonsterOfPlayerID);//确立focusing角色
+                yield return target.RefreshMemberDetailPageByFocusingChar();
+                yield return MemberDetail_edit.SkillShowSpEnterProcess();
+            }
+            PreScene.target.mainProcessRunner.Run(MonsterIconButton());
+        }
+        #endregion
         
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
         public void AddHeroIconFeaturesToMonsterBox()

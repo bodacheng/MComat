@@ -26,7 +26,7 @@ public partial class Hurt_State : Behavior {
         }
         Vector3 point = newValue.damageHappenPoint;
         point.y = 0;
-        if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 90)
+        if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 140)
         {
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.05f);
             RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f, true);

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class MemberDetail_edit : MainSceneProcess
 {
-    public bool loadFinished;
+    public static bool loadFinished;
     public IEnumerator EnterProcess()
     {
         loadFinished = false;
@@ -39,7 +39,8 @@ public class MemberDetail_edit : MainSceneProcess
         loadFinished = true;
     }
     
-    public IEnumerator SkillShowSpEnterProcess()
+    // 技能浏览器程序模式专用
+    public static IEnumerator SkillShowSpEnterProcess()
     {
         loadFinished = false;
         TheNineSlot.target.A1DragAndDropCell.gameObject.SetActive(false);
@@ -155,7 +156,7 @@ public class MemberDetail_edit : MainSceneProcess
     }
     
     // 技能浏览器版本
-    IEnumerator SkillEditButtonFeature_SP(GetMonsterOfPlayerDetailModel _AccCharInfo)
+    static IEnumerator SkillEditButtonFeature_SP(GetMonsterOfPlayerDetailModel _AccCharInfo)
     {
         if (_AccCharInfo == null || _AccCharInfo.monsterId == null)
         {

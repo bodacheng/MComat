@@ -20,17 +20,17 @@ public class HeroIcon : MonoBehaviour {
     public static void INIFrames()
     {
         if (!frames.ContainsKey(Zokusei.blueMagic))
-            frames.Add(Zokusei.blueMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+            frames.Add(Zokusei.blueMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
         if (!frames.ContainsKey(Zokusei.redMagic))
-            frames.Add(Zokusei.redMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+            frames.Add(Zokusei.redMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
         if (!frames.ContainsKey(Zokusei.greenMagic))
-            frames.Add(Zokusei.greenMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+            frames.Add(Zokusei.greenMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
         if (!frames.ContainsKey(Zokusei.lightMagic))
-            frames.Add(Zokusei.lightMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+            frames.Add(Zokusei.lightMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
         if (!frames.ContainsKey(Zokusei.darkMagic))
-            frames.Add(Zokusei.darkMagic, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+            frames.Add(Zokusei.darkMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
         if (!frames.ContainsKey(Zokusei.Null))
-            frames.Add(Zokusei.Null, Resources.Load("essentialUIElements/iconframes/4") as Sprite);
+            frames.Add(Zokusei.Null, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
     }
     
     public void Grey()
