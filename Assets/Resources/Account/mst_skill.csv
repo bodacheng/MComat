@@ -1,10 +1,10 @@
 RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_LEVEL,TRIGGER_DIS_MIN,TRIGGER_DIS_MAX,EVENT_CODE,RARITY_LEVEL
 1,5hitcombo,human,0.5,10,GR,1,0.2,5,,2
 2,backfistround_l,human,1,10,GR,2,0.2,5,,2
-3,backfistround_r,human,1,10,GR,0,0.2,5,,1
+3,backfistround_r,human,1,10,GR,0,2,4,,1
 4,chunli,human,1,10,GR,2,0.2,5,,3
 5,doublepunch,human,1,10,GR,0,0.2,5,,1
-6,doublehooks,human,1,10,GR,0,0.2,5,,1
+6,doublehooks,human,1,10,GR,0,2,5,,1
 7,doublethrustlowkick,human,0.5,10,GR,1,0.2,5,,1
 8,doublethrustroundhouse,human,0.5,10,GR,1,0.2,5,,1
 9,downrotatekick,human,1,10,GR,0,0.2,5,,1

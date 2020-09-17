@@ -4792,8 +4792,8 @@ MonoBehaviour:
   ActivateAfterTime: 0
   SpecificTarget: 0
   damage_type: 2
-  _WeaponMode: 1
-  weaponHP: 2
+  _WeaponMode: 2
+  weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 0
   zokusei: 0
@@ -9577,6 +9577,7 @@ MonoBehaviour:
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!82 &5064485511292710020
 AudioSource:
