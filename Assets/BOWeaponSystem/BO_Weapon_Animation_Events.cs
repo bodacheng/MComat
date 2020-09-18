@@ -178,21 +178,31 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     // 三个函数中都存在重复执行，都把本模块内的_Used_Targets给多次执行clear操作了。
     // 因为武器在作为飞行道具，伤害性特效的情况下，是自己保有一个单独的_Used_Targets列表，也是靠这三个函数来连带着对其进行清空
     // 所以找不太到一种能更好统合固化武器，特效武器这方面的写法，所以干脆就保持着这个让_Used_Targets重复被clear的状态。
+    List<Transform> toRefreshParts = new List<Transform>();
     public void ClearTargets()
 	{
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
+        toRefreshParts.Clear();
+        foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)
             {
-                if (keyValuePair.Value.Phase > 0)
+                if (keyValuePair.Value._HitBox.weaponHP < 0) // weaponHP >= 0的武器会在HP下降的同时自动  ClearTargets
                 {
                     keyValuePair.Value._HitBox.ClearTargets();
                 }
                 else
                 {
-                    hiddenMethods.RegisterBodyPartWeapon(keyValuePair.Key, 1);
+                    if (keyValuePair.Value._HitBox.CurrentHP <= 0) // 来自本模块的ClearTargets意味着hitbox的刷新。
+                    {
+                        toRefreshParts.Add(keyValuePair.Key);
+                    }
                 }
             }
+        }
+        for (int i = 0; i < toRefreshParts.Count; i++)
+        {
+            hiddenMethods.RemoveBodyPartWeapon(toRefreshParts[i]);
+            hiddenMethods.RegisterBodyPartWeapon(toRefreshParts[i], 1);
         }
     }
 
@@ -200,7 +210,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     public void ClearMarkerManagers()
     {
         bodyparts = bodyPartsHitBoxRegisterDic.Keys.ToList();
-        for (int i = 0; i < bodyparts.Count;i++)
+        for (int i = 0; i < bodyparts.Count; i++)
         {
             if (bodyparts[i] != null)
             {
@@ -211,12 +221,23 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     
 	public void EnableMarkers()
 	{
+        toRefreshParts.Clear();
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)
             {
-                keyValuePair.Value._HitBox.EnableMarkers();
+                if (keyValuePair.Value._HitBox.weaponHP > 0 && keyValuePair.Value._HitBox.CurrentHP <= 0) // 来自本模块的ClearTargets意味着hitbox的刷新。
+                {
+                    toRefreshParts.Add(keyValuePair.Key);
+                }else{
+                    keyValuePair.Value._HitBox.EnableMarkers();
+                }
             }
+        }
+        for (int i = 0; i < toRefreshParts.Count; i++)
+        {
+            hiddenMethods.RemoveBodyPartWeapon(toRefreshParts[i]);
+            hiddenMethods.RegisterBodyPartWeapon(toRefreshParts[i], 1);
         }
 	}
     
