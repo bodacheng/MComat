@@ -9,6 +9,7 @@ namespace HittingDetection
     {
         public Vector3 pos;
         public Quaternion qua;
+        public float WeaponHpCost;
     }
     
     public class Marker : MonoBehaviour
@@ -16,8 +17,14 @@ namespace HittingDetection
         [Tooltip("Choose which Layers should be affected by this marker's hit check.")]
         public LayerMask _layers;
         public LayerMask enemyShieldLayer;
-        
         protected SphereCollider myCollider;
+
+        public int PowerLevel { get; set; } = 1;
+
+        public int GetPowerLevel()
+        {
+            return PowerLevel;
+        }
         
         public virtual bool HitCheck()
         {
@@ -33,9 +40,10 @@ namespace HittingDetection
             }
         }
         
-        public virtual void EnableMarkerProcess(int weaponLayer)
+        public virtual void EnableMarkerProcess(int weaponLayer, int attackLevel)
         {
             gameObject.layer = weaponLayer;
+            PowerLevel = attackLevel;
         }
         
         public virtual void DisableMarkerProcess()

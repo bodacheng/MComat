@@ -26,9 +26,9 @@ namespace HittingDetection
             return BallDetectHitPool.Count > 0;
         }
         
-        public override void EnableMarkerProcess(int weaponLayer)
+        public override void EnableMarkerProcess(int weaponLayer, int attackLevel)
         {
-            base.EnableMarkerProcess(weaponLayer);
+            base.EnableMarkerProcess(weaponLayer, attackLevel);
         }
         
         public override void DisableMarkerProcess()
@@ -55,7 +55,9 @@ namespace HittingDetection
         {
             BallDetectModeDetection(other);
         }
-        
+
+        Marker tempM;
+        float tempWHpCost;
         void BallDetectModeDetection(Collider other)
         {
             //_hits = Physics.SphereCastAll(_tempPos, radius, _dir, _dist, _layers, QueryTriggerInteraction.Collide);// 如果有能力把这个句子去掉最好。会极大幅度提高整个程序速度，但对于相应的代价得有替代方案
@@ -65,12 +67,20 @@ namespace HittingDetection
             {
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
+                    tempM = other.GetComponent<Marker>();
+                    if (tempM != null)
+                    {
+                        tempWHpCost = WeaponCal.WpHpCost(PowerLevel, tempM.PowerLevel);
+                    }else{
+                        tempWHpCost = 1;
+                    }
                     HitPointPara hitPointPara = new HitPointPara()
                     {
                         pos = HitPointCal(other.transform.position),
-                        qua = Quaternion.LookRotation(other.transform.position - HitPointCal(other.transform.position), Vector3.up)
+                        qua = Quaternion.LookRotation(other.transform.position - HitPointCal(other.transform.position), Vector3.up),
+                        WeaponHpCost = tempWHpCost
                     };
-                    BallDetectHitPool.Add(other,hitPointPara);
+                    BallDetectHitPool.Add(other, hitPointPara);
                 }
             }
         }

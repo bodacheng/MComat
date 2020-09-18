@@ -32,10 +32,10 @@ namespace HittingDetection
             return _hits.Length > 0;
         }
         
-        public override void EnableMarkerProcess(int weaponLayer)
+        public override void EnableMarkerProcess(int weaponLayer, int attackLevel)
         {
             _lastFramePos = transform.position;
-            base.EnableMarkerProcess(weaponLayer);
+            base.EnableMarkerProcess(weaponLayer, attackLevel);
         }
         
         public override void DisableMarkerProcess()

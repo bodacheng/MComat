@@ -23,7 +23,7 @@ namespace HittingDetection
 
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
-        public int CurrentHP { get; set; }
+        public float CurrentHP { get; set; }
         
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
@@ -62,10 +62,7 @@ namespace HittingDetection
         HitBoxLifeEnding hitBoxLifeEnding = HitBoxLifeEnding.untouched;
         public HitBoxLifeEnding HitBoxLifeEnding
         {
-            get
-            {
-                return hitBoxLifeEnding;
-            }
+            get => hitBoxLifeEnding;
             set
             {
                 switch (value)
@@ -78,10 +75,10 @@ namespace HittingDetection
                         if (value != HitBoxLifeEnding.successed)
                             hitBoxLifeEnding = value;
                         break;
-                }                
+                }
             }
         }
-        
+
         public float GetDamageAmount()
         {
             return weaponHP > 0 ? AT / weaponHP : AT;
@@ -163,7 +160,7 @@ namespace HittingDetection
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {
-                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer);
+                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer, WeaponCal.WeaponHeavyCal(damage_type));
             }
             Enabled = true;
         }
