@@ -115,7 +115,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         yield return AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStonesReader.LocalSaveDataGetAllStones();
-        yield return AccountCharsSet.LocalSaveDataGetAllCharacters();        
+        yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
         stage._fightEventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
@@ -143,6 +143,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
             case ResourceLoadMode.Resource:
                 yield return MonstersConfigTable.Instance.LoadMonstersConfig();
                 yield return SkillConfigTable.LoadAllSkillConfigs();
+                LevelExpConfig.LoadLevelExpConfig();
                 LoadingCanvas.target.NowProcess("正在加载资源", 0.3f);
                 break;
         }

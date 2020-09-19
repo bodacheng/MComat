@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Api.Dto.Model;
 using dataAccess;
 
 // 智慧果实消耗
@@ -13,10 +12,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         if (focusingSSD.GetSTTarget() == null)
             return;
         
-        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        // +号代表直接把技能石升到下一级所需要的经验全数补充上，不够的话就把当前所有剩余的金币加上
         if (StoneExpManager.GoldToExp(AccountSet._AccInfo.coinCount) >= current.expToNextLevel)
         {
-            CurrentGoldExaust += GetGoldNeedForNextLevel();
+            CurrentGoldExaust += StoneExpManager.ExpToGold(current.expToNextLevel);
         }
         else
         {
@@ -24,13 +24,13 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         RefreshSkillLevelUpModule();
     }
-
+    
     public void MinusTargetLevel()
     {
         if (focusingSSD.GetSTTarget() == null)
             return;
             
-        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
         
         if (current.currentLevel ==1)
         {
@@ -43,10 +43,10 @@ public partial class SSLevelUpManager : MonoBehaviour
                 CurrentGoldExaust -= StoneExpManager.ExpToGold(current.expRemain);
             else
                 CurrentGoldExaust = 0;
-        }else{
-            if (CurrentGoldExaust >= StoneExpManager.ExpToGold(LevelCal.Instance.GetLevelExp(current.currentLevel - 1)))
+        }else{// 即便为0
+            if (CurrentGoldExaust >= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel - 1)))
             {
-                CurrentGoldExaust -= StoneExpManager.ExpToGold(LevelCal.Instance.GetLevelExp(current.currentLevel - 1));
+                CurrentGoldExaust -= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel - 1));
             }else{
                 CurrentGoldExaust = 0; 
             }

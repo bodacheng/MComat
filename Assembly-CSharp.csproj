@@ -207,7 +207,8 @@
     <Compile Include="Assets\BOWeaponSystem\Health System\Health_BasicClasses.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\ResistanceManager.cs" />
     <Compile Include="Assets\BOWeaponSystem\Health System\ShaderManager.cs" />
-    <Compile Include="Assets\BOWeaponSystem\HittingSystemDefinitions.cs" />
+    <Compile Include="Assets\BOWeaponSystem\HittingSystemDefinitions\HittingSystemDefinitions.cs" />
+    <Compile Include="Assets\BOWeaponSystem\HittingSystemDefinitions\V_Damage.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager.cs" />
     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_ManagerGUI.cs" />
@@ -393,6 +394,7 @@
     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
+    <Compile Include="Assets\Monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
@@ -416,6 +418,7 @@
     <Compile Include="Assets\POFX\Scripts\FX\POFX_Sobel.cs" />
     <Compile Include="Assets\POFX\Scripts\POFX.cs" />
     <Compile Include="Assets\POS_Sys\Child_Label.cs" />
+    <Compile Include="Assets\POS_Sys\E_Damage.cs" />
     <Compile Include="Assets\POS_Sys\Parent_Label.cs" />
     <Compile Include="Assets\POS_Sys\Position_Set_Executor.cs" />
     <Compile Include="Assets\POS_Sys\Position_Set_Libary.cs" />
@@ -501,7 +504,6 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\GeneralModelPool.cs" />
-    <Compile Include="Assets\Singleton\LevelCal.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
     <Compile Include="Assets\Singleton\SystemNotes.cs" />

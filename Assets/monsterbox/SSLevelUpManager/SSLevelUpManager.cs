@@ -59,7 +59,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         AddMSlotBehaviour(cell5);
     }
     
-    // 显示
+    // 材料槽
     public void AddMSlotBehaviour(StoneCell cell)
     {
         Button button = cell.GetComponent<Button>();
@@ -85,6 +85,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
     }
     
+    // 设置目前链接的技能石细节显示模块
     public void SetFocusingSSD(SkillStoneDetail fSSD)
     {
         focusingSSD = fSSD;
@@ -121,6 +122,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     #endregion
     
+    // 清除显示
     public void Clear()
     {
         StoneTargetLevel.text = "";
@@ -141,7 +143,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         #region 各数值文本刷新
-        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
         StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
         CurrentExpToNextLevel.text = "(" + current.expRemain + "/" + (current.expRemain + current.expToNextLevel).ToString() + ")";
@@ -212,9 +214,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     
     // 当前技能石为了升到下一级，需要多少Gold
-    int GetGoldNeedForNextLevel()
-    {
-        LevelCal.Current current = LevelCal.Instance.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
-        return StoneExpManager.ExpToGold(current.expToNextLevel);
-    }
+    //int GetGoldNeedForNextLevel()
+    //{
+    //    LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+    //    return StoneExpManager.ExpToGold(current.expToNextLevel);
+    //}
 }

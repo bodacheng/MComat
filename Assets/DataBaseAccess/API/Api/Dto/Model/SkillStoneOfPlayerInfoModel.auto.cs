@@ -58,7 +58,7 @@ namespace Api.Dto.Model {
         
         public int GetLevel()
         {
-            return LevelCal.Instance.GetCurrentInfo((int)EXP).currentLevel;
+            return LevelExpConfig.GetCurrentInfo(EXP).currentLevel;
         }
     }
 }
