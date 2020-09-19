@@ -63,43 +63,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         //注意看0被空出来是和添加 删除有效武器列表中的0参数有关
         void SetThisWeaponDamageTypeByNum(int heavynum, BO_Marker_Manager theweapon)
         {
-            DamageType damageType;
-            switch (heavynum)
-            {
-                case -1:
-                    damageType = DamageType.slight_damage_forward;
-                    break;
-                case 1:
-                    damageType = DamageType.light_damage_forward;
-                    break;
-                case 2:
-                    damageType = DamageType.heavy_damage_forward;
-                    break;
-                case 3:
-                    damageType = DamageType.supper_damage_forward;
-                    break;
-                case 5:
-                    damageType = DamageType.draw;
-                    break;
-                case 6:
-                    damageType = DamageType.explosion;
-                    break;
-                case 7:
-                    damageType = DamageType.push_to_mid;
-                    break;
-                case 8:
-                    damageType = DamageType.high;
-                    break;
-                case 9:
-                    damageType = DamageType.push_to_mid_slight;
-                    break;
-                case 10:
-                    damageType = DamageType.same_height_to_mid;
-                    break;
-                default:
-                    damageType = DamageType.light_damage_forward;
-                    break;
-            }
+            DamageType damageType = V_Damage.FormalIntToDamageType(heavynum);
             theweapon.SetDamageType(damageType);
         }
         
@@ -255,24 +219,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     DamageType damageType;
     public void SetDamageType(AnimationEvent e)
     {
-        switch (e.intParameter)
-        {
-			case 0:
-                damageType = DamageType.slight_damage_forward;
-				break;
-            case 1 :
-                damageType = DamageType.light_damage_forward;
-                break;
-            case 2:
-                damageType = DamageType.heavy_damage_forward;
-                break;
-			case 3:
-                damageType = DamageType.supper_damage_forward;
-				break;
-            default:
-                damageType = DamageType.light_damage_forward;
-                break;
-        }
+        damageType = V_Damage.FormalIntToDamageType(e.intParameter);
         foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)

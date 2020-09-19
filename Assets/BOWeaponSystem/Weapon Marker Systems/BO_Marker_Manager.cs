@@ -160,7 +160,7 @@ namespace HittingDetection
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {
-                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer, WeaponCal.WeaponHeavyCal(damage_type));
+                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer, V_Damage.WeaponHeavyCal(damage_type));
             }
             Enabled = true;
         }

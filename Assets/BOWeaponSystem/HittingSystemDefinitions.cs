@@ -26,8 +26,91 @@ namespace HittingDetection
         {
             return (V_Damage)MemberwiseClone();
         }
+        
+        public static DamageType FormalIntToDamageType(int num)
+        {
+            DamageType damageType;
+            switch (num)
+            {
+                case -1:
+                    damageType = DamageType.slight_damage_forward;
+                    break;
+                case 1:
+                    damageType = DamageType.light_damage_forward;
+                    break;
+                case 2:
+                    damageType = DamageType.heavy_damage_forward;
+                    break;
+                case 3:
+                    damageType = DamageType.supper_damage_forward;
+                    break;
+                case 5:
+                    damageType = DamageType.draw;
+                    break;
+                case 6:
+                    damageType = DamageType.explosion;
+                    break;
+                case 7:
+                    damageType = DamageType.push_to_mid;
+                    break;
+                case 8:
+                    damageType = DamageType.high;
+                    break;
+                case 9:
+                    damageType = DamageType.push_to_mid_slight;
+                    break;
+                case 10:
+                    damageType = DamageType.same_height_to_mid;
+                    break;
+                default:
+                    damageType = DamageType.light_damage_forward;
+                    break;
+            }
+            return damageType; 
+        }
+        
+        public static int WeaponHeavyCal(DamageType me)
+        {
+            switch (me)
+            {
+                case DamageType.none:
+                case DamageType.slight_damage_forward:
+                    return 0;
+                case DamageType.light_damage_forward:
+                    return 1;
+                case DamageType.heavy_damage_forward:
+                case DamageType.same_height_to_mid:
+                case DamageType.draw:
+                case DamageType.high:
+                case DamageType.push_to_mid:
+                case DamageType.push_to_mid_slight:
+                    return 2;
+                case DamageType.explosion:
+                case DamageType.supper_damage_forward:
+                    return 3;
+                default:
+                    return 1;
+            }
+        }
+        
+        public static float WpHpCost(int meLevel, int counterdLevel)
+        {
+            if (meLevel > counterdLevel)
+            {
+                switch (meLevel - counterdLevel)
+                {
+                    case 1:
+                        return 0.5f;
+                    case 2:
+                        return 0.25f;
+                    case 3:
+                        return 0.2f;
+                }
+            }
+            return 1;
+        }
     }
-
+    
     // 枚举所对应的数字与SetThisWeaponDamageTypeByNum参数值没必要存在对应关系
     public enum DamageType
     {

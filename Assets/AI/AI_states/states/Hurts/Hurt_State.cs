@@ -58,51 +58,49 @@ public partial class Hurt_State : Behavior {
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         TimeCounter = 0f;
-        switch (newValue.from_weapon.damage_type)
+        switch (target.from_weapon.damage_type)
         {
             case DamageType.slight_damage_forward:
-                SlightDamgeStart(newValue);
+                SlightDamgeStart(target);
             break;
             case DamageType.light_damage_forward:
-                LightDamgeStart(newValue);
+                LightDamgeStart(target);
             break;
             case DamageType.heavy_damage_forward:
-                HeavyDamgeStart(newValue);
+                HeavyDamgeStart(target);
             break;
             case DamageType.supper_damage_forward:
-                SuperDamgeStart(newValue);
+                SuperDamgeStart(target);
             break;
             case DamageType.draw:
-                DrawDamgeStart(newValue);
+                DrawDamgeStart(target);
             break;
             case DamageType.explosion:
-                ExplosionDamgeStart(newValue);
+                ExplosionDamgeStart(target);
             break;
             case DamageType.push_to_mid:
-                PushToMidStart(newValue, 10f, true);
+                PushToMidStart(target, 10f, true);
             break;
             case DamageType.high:
-                HighDamgeStart(newValue);
+                HighDamgeStart(target);
                 break;
             case DamageType.push_to_mid_slight:
-                PushToMidStart(newValue, 4f, true);
+                PushToMidStart(target, 4f, true);
                 break;
             case DamageType.same_height_to_mid:
-                PushToMidStart(newValue, 4f, false);
+                PushToMidStart(target, 4f, false);
                 break;
-            default:
-            break;
         }
         
-        if (newValue.from_weapon.effectSpreadOnBody)
+        if (target.from_weapon.effectSpreadOnBody)
         {
-            _FightAttriCalRef.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), 0.1f);
+            _FightAttriCalRef.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(target.from_weapon.zokusei), 0.1f);
         }
         
         if (_FightAttriCalRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
         {
             _FightAttriCalRef.GetKnockOffCount().SetGauge(0f);
-            _AIStateRunner.ChangeState("KnockOff", newValue);
+            _AIStateRunner.ChangeState("KnockOff", target);
             return;
         }
         

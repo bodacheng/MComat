@@ -68,12 +68,7 @@ namespace HittingDetection
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
                     tempM = other.GetComponent<Marker>();
-                    if (tempM != null)
-                    {
-                        tempWHpCost = WeaponCal.WpHpCost(PowerLevel, tempM.PowerLevel);
-                    }else{
-                        tempWHpCost = 1;
-                    }
+                    tempWHpCost = tempM != null ? V_Damage.WpHpCost(PowerLevel, tempM.PowerLevel) : 1;
                     HitPointPara hitPointPara = new HitPointPara()
                     {
                         pos = HitPointCal(other.transform.position),

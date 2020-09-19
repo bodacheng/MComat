@@ -507,7 +507,6 @@
     <Compile Include="Assets\Singleton\SystemNotes.cs" />
     <Compile Include="Assets\Singleton\TeamConfig.cs" />
     <Compile Include="Assets\Singleton\TutorialNotes.cs" />
-    <Compile Include="Assets\Singleton\WeaponCal.cs" />
     <Compile Include="Assets\Singleton\levelExpDefine.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
     <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />

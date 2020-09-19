@@ -96,6 +96,10 @@ public partial class Decompositioner : MonoBehaviour {
     void EnergyRessolve()
     {
         StopEmissions(true);
+        if (this == null)
+            Debug.Log("见鬼了");
+        if (_DecompositionerPool == null)
+            Debug.Log(this + "见鬼了");
         _DecompositionerPool.Return(this);
     }
     
