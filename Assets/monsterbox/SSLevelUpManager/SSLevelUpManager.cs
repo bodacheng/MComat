@@ -16,6 +16,7 @@ public partial class SSLevelUpManager : MonoBehaviour
 
     [Space(7)]
     [Header("目前各种参数显示")]
+    public Slider expValue;
     public Text StoneTargetLevel;
     public Text CurrentExpToNextLevel;
     public Text CurrentGoldExaustText;
@@ -90,6 +91,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         focusingSSD = fSSD;
     }
+    
+    public SkillStoneDetail GetFocusingSSD()
+    {
+        return focusingSSD;
+    }
 
     // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
     public int CurrentAddExp()
@@ -128,6 +134,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         StoneTargetLevel.text = "";
         CurrentExpToNextLevel.text = "";
         CurrentGoldExaustText.text = "";
+        expValue.value = 0;
         plusLevel.gameObject.SetActive(false);
         minusLevel.gameObject.SetActive(false);
         confirmLevelUp.gameObject.SetActive(false);
@@ -145,6 +152,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         #region 各数值文本刷新
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
+        expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
         StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
         CurrentExpToNextLevel.text = "(" + current.expRemain + "/" + (current.expRemain + current.expToNextLevel).ToString() + ")";
         CurrentExpToNextLevel.color = CurrentGoldExaust > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);

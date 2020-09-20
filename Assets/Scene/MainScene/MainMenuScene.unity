@@ -37254,7 +37254,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.0000008940697}
-  m_AnchorMax: {x: 1, y: 0.99999964}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -77810,6 +77810,7 @@ MonoBehaviour:
   plusLevel: {fileID: 669186686}
   minusLevel: {fileID: 437884324}
   confirmLevelUp: {fileID: 8769088591108847385}
+  expValue: {fileID: 2124342770}
   StoneTargetLevel: {fileID: 419105426}
   CurrentExpToNextLevel: {fileID: 571802168}
   CurrentGoldExaustText: {fileID: 319411671}
