@@ -1796,7 +1796,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.22357102
     - serializedVersion: 3
-      time: 0.21670322
+      time: 0.3
       value: 4.2652397
       inSlope: -1.0423629
       outSlope: -1.0423629
@@ -1805,7 +1805,7 @@ MonoBehaviour:
       inWeight: 0.30258226
       outWeight: 0.08148797
     - serializedVersion: 3
-      time: 0.9265934
+      time: 1.2
       value: -27.144798
       inSlope: -74.15157
       outSlope: -74.15157
@@ -1822,20 +1822,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 15.927266
-      outSlope: 15.927266
+      inSlope: 9.446574
+      outSlope: 9.446574
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.05599841
+      outWeight: 0.062140897
     - serializedVersion: 3
       time: 1
-      value: 10
-      inSlope: 4.66541
-      outSlope: 4.66541
+      value: 5
+      inSlope: 2.2851849
+      outSlope: 2.2851849
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08159423
+      inWeight: 0.08363986
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   Sp3SkillExGet: 5
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
-  slighthit_lastingtime: 0.05
+  slighthit_lastingtime: 0.1
   lighthit_lastingtime: 0.3
   heavyhit_lastingtime: 0.5
   superhit_lastingtime: 0.6
