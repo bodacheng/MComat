@@ -1848,7 +1848,7 @@ MonoBehaviour:
   Sp3SkillExGet: 5
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
-  slighthit_lastingtime: 0.1
+  slighthit_lastingtime: 0.2
   lighthit_lastingtime: 0.3
   heavyhit_lastingtime: 0.5
   superhit_lastingtime: 0.6
@@ -38675,7 +38675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285862622090311237}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.2834225, y: -3.6514676, z: 0.56043005}
+  m_LocalPosition: {x: 4.2834225, y: -3.6514676, z: 4.5}
   m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 6867727053322609211}
