@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Skill;
+using System;
+using System.Linq;
 using DG.Tweening;
 //using VRM;
 
@@ -37,7 +39,6 @@ namespace mainMenu
         IDictionary<int, SkillEntity> Fire2_chuan = new Dictionary<int, SkillEntity>();
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();
         IDictionary<string, SkillEntity> analysisSKList = new Dictionary<string, SkillEntity>();
-        List<SkillEntity> analysisStatesList = new List<SkillEntity>();
         
         void LateUpdate()
         {
@@ -79,7 +80,10 @@ namespace mainMenu
             foreach (SkillEntity _set in _analysisStatesList)
             {
                 if (!analysisSKList.ContainsKey(_set.REAL_NAME))
+                {
+                    Debug.Log(_set.REAL_NAME);
                     analysisSKList.Add(_set.REAL_NAME, _set);
+                }
             }
             return analysisSKList;
         }
@@ -96,23 +100,18 @@ namespace mainMenu
                 foreach (string _set in _SE.CasualTo)
                 {
                     analysisSKList.TryGetValue(_set, out SkillEntity _oneCasualTo);
-                    StateButtonDic.TryGetValue(_oneCasualTo.REAL_NAME, out Button CasualToButton);
-                    if (_button != null && CasualToButton != null)
+                    if (_oneCasualTo != null)
                     {
-                        BuildSkillFlowParticle(_button.transform, CasualToButton.transform);
+                        StateButtonDic.TryGetValue(_oneCasualTo.REAL_NAME, out Button CasualToButton);
+                        if (_button != null && CasualToButton != null)
+                        {
+                            BuildSkillFlowParticle(_button.transform, CasualToButton.transform);
+                        }
                     }
                 }
                 
                 //////// 超级功能 ////////
-                if (focusingC.Animation_Manger != null)
-                {
-                    //SkillShowT.gameObject.SetActive(false);
-                    focusingC.Animation_Manger.AnimationTrigger(_SE.REAL_NAME,true,0.05f);
-                }
-                else
-                {
-                    Debug.Log(" 没能锁定角色动画播放器？ ");
-                }
+                PreScene.target.mainProcessRunner.Run(SkillShowRunWithPrepare(_SE.REAL_NAME));                
                 IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
@@ -161,7 +160,7 @@ namespace mainMenu
             particle.transform.SetParent(SkillShowT);
             particle.transform.position = startT.position;
             particle.transform.localScale = Vector3.one;
-            particle.transform.DOMove(endT.position,1f).OnComplete(()=> { DestroyFloatingMarks();});
+            particle.transform.DOMove(endT.position,1f).OnComplete(DestroyFloatingMarks);
         }
         
         // 技能按钮渲染与处理
@@ -197,11 +196,11 @@ namespace mainMenu
                 SkillScriptReader(_watchingCharInfo._NineAndTwo,CharConfig._zokusei);
             }
             
-            void backGroundButtonforRefresh()
-            {
-                SkillsPrintGamenRefresh(_watchingCharInfo);
-            }
-            skillInfoGamenBackGroundButton.onClick.AddListener(backGroundButtonforRefresh);
+            //void backGroundButtonforRefresh()
+            //{
+            //    SkillsPrintGamenRefresh(_watchingCharInfo);
+            //}
+            //skillInfoGamenBackGroundButton.onClick.AddListener(backGroundButtonforRefresh);
         }
 
         // 打印出技能显示画面
@@ -223,18 +222,18 @@ namespace mainMenu
             {
                 Destroy(child.gameObject);
             }
-            
             //focusingCharacterData._MyBehaviorRunner.FormFightingSetsByNineAndTwo(nineAndTwo);
-            analysisStatesList = focusingC._MyBehaviorRunner.SkillEntity_List;
-            analysisSKList = LToD(analysisStatesList);
+            List<SkillEntity> SkillEntity_List = new List<SkillEntity>();
+            SkillEntity_List.AddRange(nineAndTwo.GetAttack1Chuan().Values.ToList());
+            SkillEntity_List.AddRange(nineAndTwo.GetAttack2Chuan().Values.ToList());
+            SkillEntity_List.AddRange(nineAndTwo.GetAttack3Chuan().Values.ToList());
+            analysisSKList = LToD(SkillEntity_List);
             
             StateButtonDic.Clear();
             attack_chuan.Clear();
             Fire1_chuan.Clear();
             Fire2_chuan.Clear();
-            
-            Button newShow;
-            
+                        
             attack_chuan = nineAndTwo.GetAttack1Chuan();
             for (int i = 1; i < 4; i++)
             {
@@ -242,7 +241,7 @@ namespace mainMenu
                 {
                     continue;
                 }
-                newShow = Instantiate(SkillButton);
+                Button newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, attack_chuan[i]);
                 StateButtonDic.Add(attack_chuan[i].REAL_NAME, newShow);
                 newShow.name = attack_chuan[i].REAL_NAME;
@@ -262,8 +261,7 @@ namespace mainMenu
                 {
                     continue;
                 }
-                
-                newShow = Instantiate(SkillButton);
+                Button newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, Fire1_chuan[i]);
                 StateButtonDic.Add(Fire1_chuan[i].REAL_NAME, newShow);
                 newShow.name = Fire1_chuan[i].REAL_NAME;
@@ -283,7 +281,7 @@ namespace mainMenu
                 {
                     continue;
                 }
-                newShow = Instantiate(SkillButton);
+                Button newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
                 StateButtonDic.Add(Fire2_chuan[i].REAL_NAME, newShow);
                 //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;

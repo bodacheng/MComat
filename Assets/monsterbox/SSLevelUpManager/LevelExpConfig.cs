@@ -36,7 +36,7 @@ public static class LevelExpConfig
             Load(csv);
         }
     }
-
+    
 	public static void Load(TextAsset csv)
 	{
 		rowList.Clear();
@@ -74,22 +74,7 @@ public static class LevelExpConfig
         };
         return Current;
     }
-
-	public static int NumRows()
-	{
-		return rowList.Count;
-	}
-    
-	public static Row Find_Level(string find)
-	{
-		return rowList.Find(x => x.Level == find);
-	}
-    
-	public static List<Row> FindAll_Level(string find)
-	{
-		return rowList.FindAll(x => x.Level == find);
-	}
-    
+        
     public struct Current
     {
         public int currentLevel;
