@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Skill;
-using System;
 using System.Linq;
 using DG.Tweening;
-//using VRM;
 
 namespace mainMenu
 {
@@ -22,21 +20,15 @@ namespace mainMenu
         public RectTransform attacksT;
         public RectTransform fire1T;
         public RectTransform fire2T;
+        public RectTransform SkillShowT;
         
         [Space(11)]
         [Header("Skill Info")]
         public SkillStoneDetail _skillStoneDetail;
-
-        [Space(11)]
-        [Header("用以技能显示途中调整。与memberdetail模块对应两个变量一样")]
-        public RectTransform SkillShowT;
-
-        public string focusingResourceID;
+        
+        public string focusCharConfigID;
         public Data_Center focusingC;
-
-        IDictionary<int, SkillEntity> attack_chuan = new Dictionary<int, SkillEntity>();
-        IDictionary<int, SkillEntity> Fire1_chuan = new Dictionary<int, SkillEntity>();
-        IDictionary<int, SkillEntity> Fire2_chuan = new Dictionary<int, SkillEntity>();
+        
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();
         IDictionary<string, SkillEntity> analysisSKList = new Dictionary<string, SkillEntity>();
         
@@ -54,7 +46,7 @@ namespace mainMenu
             }
             floatingMarks.Clear();
         }
-
+        
         public bool IfShowingSkill { get; private set; } = false;
         public void SkillsPrintOutLateUpdate()
         {
@@ -81,7 +73,6 @@ namespace mainMenu
             {
                 if (!analysisSKList.ContainsKey(_set.REAL_NAME))
                 {
-                    Debug.Log(_set.REAL_NAME);
                     analysisSKList.Add(_set.REAL_NAME, _set);
                 }
             }
@@ -96,7 +87,7 @@ namespace mainMenu
             {
                 DestroyFloatingMarks();
                 _skillStoneDetail.RefreshSkillDetail_SkillEntity(_SE);
-                //下面这些是逻辑核心
+                
                 foreach (string _set in _SE.CasualTo)
                 {
                     analysisSKList.TryGetValue(_set, out SkillEntity _oneCasualTo);
@@ -111,7 +102,7 @@ namespace mainMenu
                 }
                 
                 //////// 超级功能 ////////
-                PreScene.target.mainProcessRunner.Run(SkillShowRunWithPrepare(_SE.REAL_NAME));                
+                TheNineSlot.target.mainProcessRunner.Run(SkillShowRunWithPrepare(_SE.REAL_NAME));                
                 IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
@@ -123,7 +114,7 @@ namespace mainMenu
         // 九宫格内技能显示功能
         public IEnumerator SkillShowRunWithPrepare(string keyname)
         {
-            CharConfig _watchingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(focusingResourceID);
+            CharConfig _watchingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(focusCharConfigID);
             //下面这一大片，在资源存在的情况下压根不应该运行            
             if (focusingC.Animation_Manger != null)
             {
@@ -165,7 +156,7 @@ namespace mainMenu
         
         // 技能按钮渲染与处理
         List<GameObject> renderPs = new List<GameObject>();
-        void RenderButton(Zokusei zokusei,GameObject button,int splevel)
+        void RenderButton(Zokusei zokusei, GameObject button, int splevel)
         {
             GameObject t = ZokuseiStoneTagsGroup.CreateOneButtonIcon(zokusei,splevel);
             t.layer = 5;//UI Layer
@@ -193,14 +184,13 @@ namespace mainMenu
             skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo._NineAndTwo != null)
             {
-                SkillScriptReader(_watchingCharInfo._NineAndTwo,CharConfig._zokusei);
+                SkillScriptReader(_watchingCharInfo._NineAndTwo, CharConfig._zokusei);
             }
-            
-            //void backGroundButtonforRefresh()
-            //{
-            //    SkillsPrintGamenRefresh(_watchingCharInfo);
-            //}
-            //skillInfoGamenBackGroundButton.onClick.AddListener(backGroundButtonforRefresh);
+            void backGroundButtonforRefresh()
+            {
+                SkillsPrintGamenRefresh(_watchingCharInfo);
+            }
+            skillInfoGamenBackGroundButton.onClick.AddListener(backGroundButtonforRefresh);
         }
 
         // 打印出技能显示画面
@@ -222,19 +212,15 @@ namespace mainMenu
             {
                 Destroy(child.gameObject);
             }
-            //focusingCharacterData._MyBehaviorRunner.FormFightingSetsByNineAndTwo(nineAndTwo);
+            
             List<SkillEntity> SkillEntity_List = new List<SkillEntity>();
             SkillEntity_List.AddRange(nineAndTwo.GetAttack1Chuan().Values.ToList());
             SkillEntity_List.AddRange(nineAndTwo.GetAttack2Chuan().Values.ToList());
             SkillEntity_List.AddRange(nineAndTwo.GetAttack3Chuan().Values.ToList());
             analysisSKList = LToD(SkillEntity_List);
-            
             StateButtonDic.Clear();
-            attack_chuan.Clear();
-            Fire1_chuan.Clear();
-            Fire2_chuan.Clear();
-                        
-            attack_chuan = nineAndTwo.GetAttack1Chuan();
+            
+            IDictionary<int, SkillEntity> attack_chuan = nineAndTwo.GetAttack1Chuan();
             for (int i = 1; i < 4; i++)
             {
                 if (attack_chuan[i] == null)
@@ -252,9 +238,8 @@ namespace mainMenu
                 newShow.gameObject.SetActive(true);
                 RenderButton(zokusei,newShow.gameObject,attack_chuan[i].SP_LEVEL);
             }
-            ///////////////////////
 
-            Fire1_chuan = nineAndTwo.GetAttack2Chuan();
+            IDictionary<int, SkillEntity> Fire1_chuan = nineAndTwo.GetAttack2Chuan();
             for (int i = 1; i < 4; i++)
             {
                 if (Fire1_chuan[i] == null)
@@ -272,9 +257,8 @@ namespace mainMenu
                 newShow.gameObject.SetActive(true);
                 RenderButton(zokusei,newShow.gameObject,Fire1_chuan[i].SP_LEVEL);
             }
-            ///////////////////////
-            
-            Fire2_chuan = nineAndTwo.GetAttack3Chuan();
+             
+            IDictionary<int, SkillEntity> Fire2_chuan = nineAndTwo.GetAttack3Chuan();
             for (int i = 1; i < 4; i++)
             {
                 if (Fire2_chuan[i] == null)
@@ -284,7 +268,6 @@ namespace mainMenu
                 Button newShow = Instantiate(SkillButton);
                 AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
                 StateButtonDic.Add(Fire2_chuan[i].REAL_NAME, newShow);
-                //newShow.GetComponent<Text>().text = attack_chuan[i].StateKey;
                 newShow.name = Fire2_chuan[i].REAL_NAME;
                 newShow.transform.SetParent(fire2T);
                 newShow.transform.localScale = new Vector3(1, 1, 1);

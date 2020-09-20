@@ -14,7 +14,7 @@ public partial class Animation_Manger : MonoBehaviour
 {
     public Animator Animator;
     public AnimationClip _toUse;
-        
+    
     IDictionary<string, AnimationClip> toLoadAnims;
     string to_be_override_animation_name;
 

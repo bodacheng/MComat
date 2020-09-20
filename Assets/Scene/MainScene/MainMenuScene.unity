@@ -90443,9 +90443,9 @@ MonoBehaviour:
   attacksT: {fileID: 2038945567}
   fire1T: {fileID: 1015689246}
   fire2T: {fileID: 778555518}
-  _skillStoneDetail: {fileID: 662487850}
   SkillShowT: {fileID: 1252385579}
-  focusingResourceID: 
+  _skillStoneDetail: {fileID: 662487850}
+  focusCharConfigID: 
   focusingC: {fileID: 0}
 --- !u!4 &1747971330
 Transform:
@@ -204756,7 +204756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -204873,8 +204873,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294961664
-  m_fontColor: {r: 0, g: 0.91764706, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -205095,7 +205095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.49019608}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -205296,7 +205296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

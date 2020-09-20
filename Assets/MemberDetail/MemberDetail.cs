@@ -161,7 +161,7 @@ namespace mainMenu
                 IEnumerator readshowmodel = ModelShower.target.ShowMyModel(null);
                 yield return readshowmodel;
             }else{
-                _SkillsPrintOut.focusingResourceID = _CharDataInfo.ResourceID;
+                _SkillsPrintOut.focusCharConfigID = _CharDataInfo.ResourceID;
                 IEnumerator readshowmodel = ModelShower.target.ShowMyModel(_CharDataInfo.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
