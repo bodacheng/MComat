@@ -26,8 +26,8 @@ public class MonsterIconDic {
     {
         readingSprite = null;
         characterIconDic.TryGetValue(monsterid,out readingSprite);
-        if (readingSprite == null)
-            Debug.Log("没有找到对应角色的icon，monsterid："+monsterid);
+        //if (readingSprite == null)
+            //Debug.Log("没有找到对应角色的icon，monsterid："+monsterid);
         return readingSprite;
     }
     

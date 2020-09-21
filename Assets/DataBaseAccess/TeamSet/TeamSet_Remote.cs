@@ -24,7 +24,7 @@ namespace dataAccess
                     break;
             }
        
-                yield return ApiCaller.Instance.Post<BaseModel<GetMonsterTeamOfPlayerModel> , GetMonsterTeamOfPlayerForm> 
+                yield return ApiCaller.Instance.Post<GetMonsterTeamOfPlayerModel , GetMonsterTeamOfPlayerForm> 
                 ("http://160.16.187.230/AssetStoreFight/team/getMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
                      GetMonsterTeamOfPlayerModel _GetMonsterTeamOfPlayerModel = model.data;
@@ -95,7 +95,7 @@ namespace dataAccess
                     form.rMonsterOfPlayerId = Arena3V3.GetMonsterOfPlayerIdOnPos(3);
                     break;
             }
-            yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel> , SetMonsterTeamOfPlayerForm> 
+            yield return ApiCaller.Instance.Post<BasicVoidModel<Any>, SetMonsterTeamOfPlayerForm> 
             ("http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
              model => {
                 Debug.Log(teamSetGameMode+"阵容修改成功。");

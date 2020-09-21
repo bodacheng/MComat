@@ -260,8 +260,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\SetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\SkillStoneGotchaForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\Common\AbstractModel.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\Common\BaseModel.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\Common\BaseVoidModel.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\Common\BasicVoidModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetMonsterOfPlayerDetailModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetMonsterTeamOfPlayerModel.auto.cs" />

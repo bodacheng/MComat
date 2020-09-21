@@ -91,8 +91,7 @@ namespace Api.Common {
         /// <param name="headers">ヘッダー</param>
         /// <param name="success">API処理に成功時のコールバック関数</param>
         /// <param name="fail">API処理に失敗時のコールバック関数</param>
-        public IEnumerator Post<M, F>(string url, F form, Dictionary<string, string> headers, SuccessDelegate<M> success, FailDelegate<M> fail)
-            where M : AbstractModel where F : AbstractForm {
+        public IEnumerator Post<M, F>(string url, F form, Dictionary<string, string> headers, SuccessDelegate<AbstractModel<M>> success, FailDelegate<AbstractModel<M>> fail){
 
             // ==============================
             // フォームの生成
@@ -131,9 +130,12 @@ namespace Api.Common {
                         NullValueHandling = NullValueHandling.Ignore,
                         MissingMemberHandling = MissingMemberHandling.Ignore
                     };
-                M model = JsonConvert.DeserializeObject<M>(req.downloadHandler.text, settings);
-                model.httpStatus = (int)req.responseCode; // httpStatus? Status? 貌似取值用model要有一个统一定义
-                                
+                AbstractModel<M> model = new AbstractModel<M>
+                {
+                    data = JsonConvert.DeserializeObject<M>(req.downloadHandler.text, settings),
+                    httpStatus = (int)req.responseCode // httpStatus? Status? 貌似取值用model要有一个统一定义
+                };
+
                 if (!(req.isHttpError || req.isNetworkError)) {
                     Debug.Log(url + "以下为成功信息："+ req.downloadHandler.text);
                     success(model);

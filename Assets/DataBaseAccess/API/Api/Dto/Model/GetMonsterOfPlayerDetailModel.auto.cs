@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using dataAccess;
+using Api.Dto.Model.Common;
 
 namespace Api.Dto.Model {
 

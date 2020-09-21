@@ -134,38 +134,6 @@ namespace dataAccess
             Dic.Remove(stoneID);
             yield break;
         }
-        
-        // 技能石转化为智慧果实数量评价
-        public static int ConvertSKStoneToExp(string stoneID)
-        {
-            int point = 0;
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = Get(stoneID);
-            point += skillStoneOfPlayerInfoModel.EXP;
-            
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
-            switch (skillConfig.RARITY_LEVEL)
-            {
-                case 1:
-                    point += 100;
-                    break;
-                case 2:
-                    point += 200;
-                    break;
-                case 3:
-                    point += 300;
-                    break;
-                case 4:
-                    point += 400;
-                    break;
-                case 5:
-                    point += 500;
-                    break;
-                default:
-                    point += 100;
-                    break;
-            }
-            return point;
-        }
     }
 }
 

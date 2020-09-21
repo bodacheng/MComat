@@ -16,7 +16,7 @@ namespace dataAccess
             GetSkillStoneOfPlayerInfoForm form = new GetSkillStoneOfPlayerInfoForm
             {
             };
-            yield return ApiCaller.Instance.Post<BaseModel<GetSkillStoneOfPlayerInfoModel>, GetSkillStoneOfPlayerInfoForm>
+            yield return ApiCaller.Instance.Post<GetSkillStoneOfPlayerInfoModel, GetSkillStoneOfPlayerInfoForm>
             (
                 "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo",
                 form,
@@ -51,7 +51,7 @@ namespace dataAccess
                 gotchaPolicyKey = gotchaPolicyKey
             };
 
-            yield return ApiCaller.Instance.Post<BaseModel<SkillStoneGotchaModel>, SkillStoneGotchaForm>
+            yield return ApiCaller.Instance.Post<SkillStoneGotchaModel, SkillStoneGotchaForm>
             ("http://160.16.187.230/AssetStoreFight/skillStone/skillStoneGotcha", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model =>
                  {

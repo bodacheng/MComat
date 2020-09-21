@@ -5,7 +5,6 @@ using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Form.Common;
 using Api.Dto.Model;
-using Api.Dto.Model.Common;
 
 namespace dataAccess
 {
@@ -58,11 +57,10 @@ namespace dataAccess
             };
 
             GetMonsterOfPlayerDetailModel _GetMonsterOfPlayerDetailModel = null;
-            yield return ApiCaller.Instance.Post<BaseModel<GetMonsterOfPlayerDetailModel>, GetMonsterOfPlayerDetailForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerDetail", form, ApiCaller.Instance.getHeader(apiLanguage),
+            yield return ApiCaller.Instance.Post<GetMonsterOfPlayerDetailModel, GetMonsterOfPlayerDetailForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerDetail", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
                      _GetMonsterOfPlayerDetailModel = model.data;
-                 }
-                ,
+                 },
                  model => {
                      _GetMonsterOfPlayerDetailModel = null;
                  }
@@ -77,7 +75,7 @@ namespace dataAccess
                 monsterOfPlayerId = accountCharsSet.monsterOfPlayerId,
             };
 
-            yield return ApiCaller.Instance.Post<BaseModel<BaseVoidModel>, SetMonsterSkillStoneForm>("http://160.16.187.230/AssetStoreFight/monster/setMonsterSkillStone", form, ApiCaller.Instance.getHeader(apiLanguage),
+            yield return ApiCaller.Instance.Post<BasicVoidModel<Any>, SetMonsterSkillStoneForm>("http://160.16.187.230/AssetStoreFight/monster/setMonsterSkillStone", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model => {
                      Debug.Log(accountCharsSet.monsterOfPlayerId + "(monsterOfPlayerId)技能编辑成功");
                  }

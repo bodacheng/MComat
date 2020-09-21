@@ -220,11 +220,4 @@ public partial class SSLevelUpManager : MonoBehaviour
         yield return up;
         RefreshSkillLevelUpModule();
     }
-    
-    // 当前技能石为了升到下一级，需要多少Gold
-    //int GetGoldNeedForNextLevel()
-    //{
-    //    LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
-    //    return StoneExpManager.ExpToGold(current.expToNextLevel);
-    //}
 }

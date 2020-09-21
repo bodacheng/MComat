@@ -6,7 +6,7 @@ namespace Api.Dto.Model.Common {
     /// 抽象的モデル
     /// </summary>
     [Serializable]
-    public abstract class AbstractModel {
+    public class AbstractModel<T> {
 
         /// <summary>
         /// HTTPステータス
@@ -28,5 +28,9 @@ namespace Api.Dto.Model.Common {
         /// </summary>
         public string detailMessage { get; set; }
 
+        /// <summary>
+        /// データ
+        /// </summary>
+        public T data { get; set; }
     }
 }

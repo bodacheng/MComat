@@ -89,7 +89,6 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         iconRect.anchorMax = new Vector2(0.5f, 0.5f);
         iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
         //OnItemDragStartEvent?.Invoke(this);                                         // Notify all items about drag start for raycast disabling
-        Debug.Log("拖拽操作step1");
 	}
 
 	/// <summary>

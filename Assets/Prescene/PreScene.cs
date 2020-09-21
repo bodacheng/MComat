@@ -159,7 +159,7 @@ namespace mainMenu
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
             
             Setting.target.LoadProgrameSettingFromAccount();
-            UserID.text = SystemInfo.deviceUniqueIdentifier;
+            UserID.text = AccountSet._AccInfo.PlayerName; //SystemInfo.deviceUniqueIdentifier;
             accountDiamondCoin.text = AccountSet._AccInfo.diamondCount.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.coinCount.ToString();
             LoadingCanvas.target.TurnOnProcessDescription(false);

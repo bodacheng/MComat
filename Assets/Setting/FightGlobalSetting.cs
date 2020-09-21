@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using dataAccess;
 
 public class FightGlobalSetting : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class FightGlobalSetting : MonoBehaviour
     public float attackDrawingDistance = 1f;
 
     public int HurtObjectPreLoadCount = 5;
+    
+    #region 技能石经验相关
+    public float goldToExp = 1;
+    public int SkillStoneRankToExp_rank1 = 100;
+    public int SkillStoneRankToExp_rank2 = 200;
+    public int SkillStoneRankToExp_rank3 = 300;
+    public int SkillStoneRankToExp_rank4 = 400;
+    public int SkillStoneRankToExp_rank5 = 500;
+    #endregion
     
     public static ProgramMode _programMode;
     public static int scenestep;//0 :mainmenu 1: fightscene
@@ -135,5 +145,12 @@ public class FightGlobalSetting : MonoBehaviour
         _heavyBlockLastingTime = heavyBlockLastingTime;
 
         _attackDrawingDistance = attackDrawingDistance;
+
+        StoneExpManager.goldToExp = goldToExp;
+        StoneExpManager.SkillStoneRankToExp_rank1 = SkillStoneRankToExp_rank1;
+        StoneExpManager.SkillStoneRankToExp_rank2 = SkillStoneRankToExp_rank2;
+        StoneExpManager.SkillStoneRankToExp_rank3 = SkillStoneRankToExp_rank3;
+        StoneExpManager.SkillStoneRankToExp_rank4 = SkillStoneRankToExp_rank4;
+        StoneExpManager.SkillStoneRankToExp_rank5 = SkillStoneRankToExp_rank5;
     }
 }

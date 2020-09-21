@@ -28,6 +28,7 @@ public static class LevelExpConfig
         return sum;
     }
     
+    #region 技能-经验定义文件读取
     public static void LoadLevelExpConfig()
     {
         TextAsset csv = Resources.Load("Account/LevelExpConfig") as TextAsset;
@@ -58,6 +59,7 @@ public static class LevelExpConfig
             }
         }
 	}
+    #endregion
     
     public static Current GetCurrentInfo(int exp)
     {
