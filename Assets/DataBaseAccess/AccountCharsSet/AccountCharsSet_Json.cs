@@ -11,7 +11,7 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        static List<GetMonsterOfPlayerDetailModel> LoadAll_Json(string filePath)
+        public static IEnumerator LoadAll_Json(string filePath)
         {
             List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
             GetMonsterOfPlayerDetailModel info;
@@ -32,27 +32,19 @@ namespace dataAccess
                     }
                 }
             }
-            return charList;
+            yield return charList;
         }
         
-        public static GetMonsterOfPlayerDetailModel LoadAccCharInfoViaJsonFile(string monsterlocalid)
+        public static IEnumerator LoadAccCharInfoViaJsonFile(string monsterlocalid)
         {
-            try
+            GetMonsterOfPlayerDetailModel info = null;
+            string wholepath = Application.persistentDataPath + "/AccountCharacterInfos/" + monsterlocalid + ".json";
+            if (File.Exists(wholepath))
             {
-                GetMonsterOfPlayerDetailModel info = null;
-                string wholepath = Application.persistentDataPath + "/AccountCharacterInfos/" + monsterlocalid + ".json";
-                if (File.Exists(wholepath))
-                {
-                    string dataAsJson = File.ReadAllText(wholepath);
-                    info = JsonConvert.DeserializeObject<GetMonsterOfPlayerDetailModel>(dataAsJson);
-                }
-                return info;
+                string dataAsJson = File.ReadAllText(wholepath);
+                info = JsonConvert.DeserializeObject<GetMonsterOfPlayerDetailModel>(dataAsJson);
             }
-            catch (Exception e)
-            {
-                Debug.Log(e + " 角色读取过程有些问题。测试用json文档格式？");
-                return null;
-            }
+            yield return info;
         }
         
         public static IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _AccCharInfo)

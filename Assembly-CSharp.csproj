@@ -253,6 +253,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\Common\CertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\Common\NoneCertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\GetMonsterOfPlayerDetailForm.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\GetMonsterOfPlayerListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\GetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\GetSkillStoneOfPlayerInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\LoginForm.auto.cs" />
@@ -275,6 +276,7 @@
     <Compile Include="Assets\DataBaseAccess\API\ApiDemo2.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Json.cs" />
+    <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Load.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_XMLLoad.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet.cs" />

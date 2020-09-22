@@ -49,25 +49,6 @@ namespace dataAccess
             yield break;
         }
         
-        public static IEnumerator LoadAccountCharacterInfoRemote(string monsterlocalid,ApiLanguage apiLanguage)
-        {
-            GetMonsterOfPlayerDetailForm form = new GetMonsterOfPlayerDetailForm
-            {
-                monsterOfPlayerId = monsterlocalid
-            };
-
-            GetMonsterOfPlayerDetailModel _GetMonsterOfPlayerDetailModel = null;
-            yield return ApiCaller.Instance.Post<GetMonsterOfPlayerDetailModel, GetMonsterOfPlayerDetailForm>("http://160.16.187.230/AssetStoreFight/monster/getMonsterOfPlayerDetail", form, ApiCaller.Instance.getHeader(apiLanguage),
-                 model => {
-                     _GetMonsterOfPlayerDetailModel = model.data;
-                 },
-                 model => {
-                     _GetMonsterOfPlayerDetailModel = null;
-                 }
-            );
-            yield return _GetMonsterOfPlayerDetailModel;
-        }
-        
         public static IEnumerator UpdateCharRemote(GetMonsterOfPlayerDetailModel accountCharsSet,ApiLanguage apiLanguage)
         {
             SetMonsterSkillStoneForm form = new SetMonsterSkillStoneForm

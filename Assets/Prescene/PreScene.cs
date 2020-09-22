@@ -86,7 +86,7 @@ namespace mainMenu
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
-                    yield return AccountCharsSet.LoadAll();
+                    yield return AccountCharsSet.Load_List();
                     yield return MySkillStonesReader.LoadAll();
                 break;
                 case PlayerAccountProgressStep.justCreated:

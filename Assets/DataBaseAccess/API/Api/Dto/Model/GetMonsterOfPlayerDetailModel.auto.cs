@@ -29,7 +29,6 @@ namespace Api.Dto.Model {
 		/// </summary>
 		public string monsterId { get; set; }
         
-        
         public static CharDataInfo GetCharDataInfo(GetMonsterOfPlayerDetailModel accountCharacterInfo)
         {
             try
