@@ -90,8 +90,8 @@ namespace Api.Common {
         /// <param name="headers">ヘッダー</param>
         /// <param name="success">API処理に成功時のコールバック関数</param>
         /// <param name="fail">API処理に失敗時のコールバック関数</param>
-        public IEnumerator Post<M, F>(string url, F form, Dictionary<string, string> headers, SuccessDelegate<AbstractModel<M>> success, FailDelegate<AbstractModel<M>> fail){
-
+        public IEnumerator Post<M, F>(string url, F form, Dictionary<string, string> headers, SuccessDelegate<AbstractModel<M>> success, FailDelegate<AbstractModel<M>> fail)
+        {
             // ==============================
             // フォームの生成
             // ==============================
@@ -123,12 +123,12 @@ namespace Api.Common {
             // ==============================
             // モデル
             try {
-                Debug.Log(url + "  上述API尝试解析以下字符串" + req.downloadHandler.text);
+                //Debug.Log(url + "  上述API尝试解析以下字符串" + req.downloadHandler.text);
                 var settings = new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore
-                    };
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
                 AbstractModel<M> model = new AbstractModel<M>
                 {
                     data = JsonConvert.DeserializeObject<M>(req.downloadHandler.text, settings),
@@ -136,7 +136,7 @@ namespace Api.Common {
                 };
 
                 if (!(req.isHttpError || req.isNetworkError)) {
-                    Debug.Log(url + "以下为成功信息："+ req.downloadHandler.text);
+                    //Debug.Log(url + "以下为成功信息："+ req.downloadHandler.text);
                     success(model);
                 }
                 else {

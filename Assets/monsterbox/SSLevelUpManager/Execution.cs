@@ -4,6 +4,7 @@ using mainMenu;
 using UnityEngine;
 using Api.Dto.Form;
 using Api.Common;
+using Api.Dto.Model;
 
 // 执行
 public partial class SSLevelUpManager : MonoBehaviour
@@ -44,7 +45,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     
     // 技能石升级
-    public IEnumerator LevelUpStoneTest(SkillStoneLevelUpForm form, SuccessDelegate<BasicVoidModel<Any>> success, FailDelegate<BasicVoidModel<Any>> fail, ApiLanguage apiLanguage)
+    public IEnumerator LevelUpStoneTest(SkillStoneLevelUpForm form, SuccessDelegate<SkillStoneOfPlayerInfoModel> success, FailDelegate<SkillStoneOfPlayerInfoModel> fail, ApiLanguage apiLanguage)
     {
         switch (AccountSet.ReferenceMode)
         {
@@ -58,7 +59,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 }
                 break;
             case PlayerInfoRefMode.remoteTestPlayer:
-                yield return ApiCaller.Instance.Post<BasicVoidModel<Any>, SkillStoneLevelUpForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
+                yield return ApiCaller.Instance.Post<SkillStoneOfPlayerInfoModel, SkillStoneLevelUpForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
                     model => {
                         success(model.data);
                     },
