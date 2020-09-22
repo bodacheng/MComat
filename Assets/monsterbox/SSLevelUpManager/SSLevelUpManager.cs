@@ -187,37 +187,5 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     #endregion
     
-    // 技能升级确认。
-    public void ConfirmSkillStoneLevelUp()
-    {
-        if (focusingSSD.GetSTTarget() == null)
-            return;
-        PreScene.target.mainProcessRunner.Run(LevelUpStone(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
-    }
-    
-    // 分析当前选定的技能石
-    public IEnumerator LevelUpStone(string PlayerSkillStoneID)
-    {
-        SKStoneItem item1 = cell1.GetItem();
-        SKStoneItem item2 = cell2.GetItem();
-        SKStoneItem item3 = cell3.GetItem();
-        SKStoneItem item4 = cell4.GetItem();
-        SKStoneItem item5 = cell5.GetItem();
-        
-        yield return MySkillStonesReader.RemoveStone(item1.SkillStoneOfPlayerId);
-        yield return MySkillStonesReader.RemoveStone(item2.SkillStoneOfPlayerId);
-        yield return MySkillStonesReader.RemoveStone(item3.SkillStoneOfPlayerId);
-        yield return MySkillStonesReader.RemoveStone(item4.SkillStoneOfPlayerId);
-        yield return MySkillStonesReader.RemoveStone(item5.SkillStoneOfPlayerId);
-        
-        yield return SkillStoneLevelUp(PlayerSkillStoneID);
-    }
-    
-    // 实际将技能石提升等级的执行函数
-    IEnumerator SkillStoneLevelUp(string PlayerSkillStoneID)
-    {
-        IEnumerator up = MySkillStonesReader.Update_Level(ApiLanguage.EnUs);
-        yield return up;
-        RefreshSkillLevelUpModule();
-    }
+
 }

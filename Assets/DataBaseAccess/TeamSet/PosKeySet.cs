@@ -15,6 +15,31 @@ public class PosKeySet
         PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
     }
     
+    public MonsterTeamOfPlayerModel ToMonsterTeamOfPlayerModel(string teamType)
+    {
+        MonsterTeamOfPlayerModel model = new MonsterTeamOfPlayerModel();
+        model.teamType = teamType;
+        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
+        {
+            switch (PosNumsWithLocalKeys[i].posNum)
+            {
+                case 0:
+                    model.bMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                break;
+                case 1:
+                    model.lMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                break;
+                case 2:
+                    model.rMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                break;
+                case 3:
+                    model.fMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                break;
+            }
+        }
+        return model;
+    }
+    
     public IEnumerator LoadTeamBasedOnAccountInfo()
     {
         MultiDictionary<int, int, CharDataInfo> multiDictionary = new MultiDictionary<int, int, CharDataInfo>();

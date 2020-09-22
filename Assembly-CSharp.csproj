@@ -259,11 +259,11 @@
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\SetMonsterSkillStoneForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\SetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\SkillStoneGotchaForm.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Form\SkillStoneLevelUpForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\Common\AbstractModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\Common\BasicVoidModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetMonsterOfPlayerDetailModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetMonsterTeamOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\GetSkillStoneOfPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Api\Dto\Model\LoginModel.auto.cs" />
@@ -291,7 +291,7 @@
     <Compile Include="Assets\DataBaseAccess\TeamSet\PosKeySet.cs" />
     <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet.cs" />
     <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet_Json.cs" />
-    <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet_Remote.cs" />
+    <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet_Save.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
@@ -393,6 +393,7 @@
     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
+    <Compile Include="Assets\Monsterbox\SSLevelUpManager\Execution.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
     <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />

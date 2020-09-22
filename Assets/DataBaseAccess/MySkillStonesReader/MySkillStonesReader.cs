@@ -4,6 +4,7 @@ using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 using Skill;
+using System;
 
 namespace dataAccess
 {
@@ -47,16 +48,7 @@ namespace dataAccess
                 break;
             }
         }
-        
-        public static IEnumerator Update_Level(ApiLanguage apiLanguage)
-        {
-            //SkillStoneOfPlayerInfoModel st = Get(skillstoneofplayerid);
-            //st.level = targetLevel;
-            //IEnumerator up = Update(skillstoneofplayerid);
-            //yield return up;
-            yield break;
-        }
-        
+                
         public static IEnumerator LoadAll()
         {
             Dic.Clear();
@@ -119,20 +111,20 @@ namespace dataAccess
             }
             for (int i = 0; i < toRemove.Count; i++)
             {
-                yield return RemoveStone(toRemove[i].skillStoneOfPlayerId);
+                RemoveStone(toRemove[i].skillStoneOfPlayerId);
             }
+            yield break;
         }
         
         // 删除一个技能石
-        public static IEnumerator RemoveStone(string stoneID)
+        public static void RemoveStone(string stoneID)
         {
             if (RenderModelDic.ContainsKey(stoneID))
             {
-                Object.Destroy(RenderModelDic[stoneID].gameObject);
+                UnityEngine.Object.Destroy(RenderModelDic[stoneID].gameObject);
             }
             RenderModelDic.Remove(stoneID);
             Dic.Remove(stoneID);
-            yield break;
         }
     }
 }

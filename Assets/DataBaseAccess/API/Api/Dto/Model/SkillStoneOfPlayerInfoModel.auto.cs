@@ -23,7 +23,7 @@ namespace Api.Dto.Model {
         public string skillId { get; set; }
         
         /// <summary>
-        /// 等级，限制为1到100
+        /// 经验值
         /// </summary>
         string exp { get; set; }
         public int EXP {
@@ -36,12 +36,22 @@ namespace Api.Dto.Model {
         }
         
         /// <summary>
+        /// 突破等级上限次数
+        /// </summary>
+        public string breakthrough { get; set; }
+        public int BreakThrough
+        {
+            set => breakthrough = value.ToString();
+            get => int.Parse(breakthrough);
+        }
+        
+        /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
         public string inUsingMonsterOfPlayerId { get; set; }
         
         /// <summary>
-        /// 使用中のプレーヤ所有モンスターID
+        /// 装备的位置槽。从1到9为A1到C3
         /// </summary>
         public string inUsingSkillSlot { get; set; }
         

@@ -10,11 +10,6 @@ namespace Api.Dto.Form {
 	public class GetMonsterTeamOfPlayerForm : CertificationForm {
 
 		/// <summary>
-		/// プレーヤ所有出戦チームID
-		/// </summary>
-		public string monsterTeamOfPlayerId { get; set; }
-
-		/// <summary>
 		/// チームタイプ
 		/// </summary>
 		public string teamType { get; set; }

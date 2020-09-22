@@ -54,6 +54,4 @@ public partial class SSLevelUpManager : MonoBehaviour
         RefreshSkillLevelUpModule();
     }
     #endregion
-
-
 }

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using Api.Dto.Model;
 using mainMenu;
+using Api.Dto.Form;
+using UnityEngine;
+using Api.Common;
 
 // 站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
 namespace dataAccess
@@ -10,8 +13,9 @@ namespace dataAccess
         public static TeamSetGameMode targetTeamMode;
         public static PosKeySet Default = new PosKeySet();
         public static PosKeySet Arena3V3 = new PosKeySet();
-        
+
         // 决定本模块将处理哪一组玩家队伍的编辑。竞技场还是arcade
+        #region targetTeam
         public static void SwitchTargetTeam(TeamSetGameMode mode)
         {
             targetTeamMode = mode;
@@ -28,47 +32,95 @@ namespace dataAccess
             }
             return null;
         }
-        
+        #endregion
+
         public static IEnumerator LoadTeamSet(TeamSetGameMode teamSetGameMode)
         {
-            switch (AccountSet.ReferenceMode)
+            GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm
             {
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return LoadTeamSetsRemote(teamSetGameMode, ApiLanguage.JaJp);
+            };
+            switch (teamSetGameMode)
+            {
+                case TeamSetGameMode.story:
+                    form.teamType = "00";
                     break;
-                case PlayerInfoRefMode.formalVersion:
-                    
-                    break;
-                case PlayerInfoRefMode.localTestSaveData:
-                    switch (teamSetGameMode)
-                    {
-                        case TeamSetGameMode.story:
-                            IEnumerator enumerator = LoadMyTeamSetInfoViaJsonFile("TeamSet.json");
-                            yield return enumerator;
-                            Default = (PosKeySet)enumerator.Current;
-                            break;
-                        case TeamSetGameMode.arena3V3:
-                            IEnumerator enumerator1 = LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json");
-                            yield return enumerator1;
-                            Arena3V3 = (PosKeySet)enumerator1.Current;
-                            break;
-                    }
+                case TeamSetGameMode.arena3V3:
+                    form.teamType = "13";
                     break;
             }
+            
+            yield return Load(
+                form,
+                model => {
+                        MonsterTeamOfPlayerModel MonsterTeamOfPlayerModel = model;
+                        switch (form.teamType)
+                        {
+                            case "00":
+                            Default = MonsterTeamOfPlayerModel.ToPosKeySet();
+                            Debug.Log("quest模式阵型已经读取");
+                            break;
+                            case "13":
+                            Arena3V3 = MonsterTeamOfPlayerModel.ToPosKeySet();
+                            Debug.Log("竞技场3v3模式阵型已经读取");
+                            break;
+                            default:
+                            Debug.Log("队伍阵型信息不明");
+                            break;
+                        }
+                    },
+                model => {
+                    Debug.Log(teamSetGameMode+"阵容读取失败。");
+                }
+                , ApiLanguage.EnUs
+            );
             yield break;
         }
         
-        public static IEnumerator SaveTeamSet(TeamSetGameMode teamSetGameMode)
+        // 技能石升级
+        static IEnumerator Load(GetMonsterTeamOfPlayerForm form, SuccessDelegate<MonsterTeamOfPlayerModel> success, FailDelegate<MonsterTeamOfPlayerModel> fail, ApiLanguage apiLanguage)
         {
             switch (AccountSet.ReferenceMode)
             {
+                case PlayerInfoRefMode.localTestSaveData:
+                    IEnumerator enumerator = null;
+                    switch (form.teamType)
+                    {
+                        case "00":
+                            enumerator = LoadMyTeamSetInfoViaJsonFile("TeamSet.json");
+                            break;
+                        case "11":
+                            break;
+                        case "12":
+                            break;
+                        case "13":
+                             enumerator = LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json");
+                            break;
+                        case "14":
+                            break;
+                        default:
+                             Debug.Log("队伍阵型信息不明");
+                             yield break;
+                    }
+                    yield return enumerator;
+                    if (enumerator.Current != null)
+                    {
+                        success((MonsterTeamOfPlayerModel)enumerator.Current);
+                    }else{
+                        fail(new MonsterTeamOfPlayerModel());
+                    }
+                    break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return SaveTeamSetsRemote(teamSetGameMode,ApiLanguage.JaJp);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
+                    yield return ApiCaller.Instance.Post<MonsterTeamOfPlayerModel , GetMonsterTeamOfPlayerForm> 
+                        ("http://160.16.187.230/AssetStoreFight/team/getMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage), 
+                        model => {
+                            success(model.data);
+                        },
+                        model => {
+                            fail(model.data);
+                        }
+                    );
                     break;
                 case PlayerInfoRefMode.formalVersion:
-                    break;
-                case PlayerInfoRefMode.localTestSaveData:
-                    yield return OverrideTeamSetInfoOnJsonFile(teamSetGameMode);//也就是说只要对队伍进行了一次编辑，立刻保存阵容信息。
                     break;
             }
             yield break;
