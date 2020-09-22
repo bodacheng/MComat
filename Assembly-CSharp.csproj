@@ -273,10 +273,10 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneGotchaModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneOfPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet.cs" />
+    <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Add.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Json.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Load.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_XMLLoad.cs" />
-    <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_localTest.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />

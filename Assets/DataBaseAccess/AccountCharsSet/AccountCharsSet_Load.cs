@@ -17,7 +17,8 @@ namespace dataAccess
                 playerId = AccountSet._AccInfo.PlayerName
             };
             
-            yield return LoadList_execution(form,
+            yield return LoadList_execution(
+                form,
                 model => {
                     AccountCharInfoDic.Clear();
                     foreach (GetMonsterOfPlayerDetailModel one in model.monsterOfPlayerList)
@@ -32,7 +33,7 @@ namespace dataAccess
                     AccountCharInfoDic.Clear();
                     Debug.Log(" 人员列表读取失败 ");
                 },
-                ApiLanguage.EnUs
+                Setting.Language
             );
         }
         
@@ -42,7 +43,6 @@ namespace dataAccess
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
                     IEnumerator enumerator = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
                     yield return enumerator;
                     if (enumerator.Current != null)
@@ -57,7 +57,10 @@ namespace dataAccess
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
                     yield return ApiCaller.Instance.Post<GetMonsterOfPlayerListModel, GetMonsterOfPlayerListForm> 
-                        ("http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
+                        (
+                            "http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", 
+                            form, 
+                            ApiCaller.Instance.getHeader(apiLanguage),
                             model => {
                                 success(model.data);
                             },
@@ -83,7 +86,8 @@ namespace dataAccess
                 monsterOfPlayerId = monsterlocalid
             };
             GetMonsterOfPlayerDetailModel accountCharInfo = null;
-            IEnumerator _LoadOne = Load_execution(form,
+            yield return Load_execution(
+                form,
                 model => {
                     accountCharInfo = model;
                     DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
@@ -91,9 +95,8 @@ namespace dataAccess
                 model => {
                     Debug.Log("读取角色失败："+ monsterlocalid);
                 },
-                ApiLanguage.EnUs
+                Setting.Language
             );
-            yield return _LoadOne;
             yield return accountCharInfo;
         }
         
@@ -115,14 +118,17 @@ namespace dataAccess
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
                     yield return ApiCaller.Instance.Post<GetMonsterOfPlayerDetailModel, GetMonsterOfPlayerDetailForm> 
-                        ("http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
-                            model => {
-                                success(model.data);
-                            },
-                            model => {
-                                fail(model.data);
-                            }
-                        );
+                    (
+                        "http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", 
+                        form, 
+                        ApiCaller.Instance.getHeader(apiLanguage),
+                        model => {
+                            success(model.data);
+                        },
+                        model => {
+                            fail(model.data);
+                        }
+                    );
                     break;
             }
         }

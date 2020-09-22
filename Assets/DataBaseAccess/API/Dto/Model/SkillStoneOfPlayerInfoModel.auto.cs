@@ -38,7 +38,7 @@ namespace Api.Dto.Model {
         /// <summary>
         /// 突破等级上限次数
         /// </summary>
-        public string breakthrough { get; set; }
+        string breakthrough { get; set; }
         public int BreakThrough
         {
             set => breakthrough = value.ToString();

@@ -1715,7 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43766b8020d004e79a0be7e7abcca48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  programMode: 0
+  programMode: 1
   hasDefend: 0
   knockOffyAnimationCurve:
     serializedVersion: 2
@@ -1863,6 +1863,12 @@ MonoBehaviour:
   heavyBlockLastingTime: 0.6
   attackDrawingDistance: 1
   HurtObjectPreLoadCount: 5
+  goldToExp: 1
+  SkillStoneRankToExp_rank1: 100
+  SkillStoneRankToExp_rank2: 200
+  SkillStoneRankToExp_rank3: 300
+  SkillStoneRankToExp_rank4: 400
+  SkillStoneRankToExp_rank5: 500
 --- !u!4 &1558915669
 Transform:
   m_ObjectHideFlags: 0

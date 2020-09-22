@@ -91,6 +91,7 @@ public class GachaManager : MonoBehaviour
             skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
             skillId = skillConfig.RECORD_ID,
             EXP = 0,
+            BreakThrough = 0,
             Inherent = "false",
             inUsingMonsterOfPlayerId = "-1",
             inUsingSkillSlot = null

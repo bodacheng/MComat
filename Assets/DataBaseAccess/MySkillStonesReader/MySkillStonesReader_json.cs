@@ -73,6 +73,7 @@ namespace dataAccess
                 {
                     skillStoneOfPlayerId = GetNonRepeatID_LocalSave(),
                     skillId = _pair.Value.RECORD_ID,
+                    BreakThrough = 0,
                     EXP = 0,
                     Inherent = "false"
                 };

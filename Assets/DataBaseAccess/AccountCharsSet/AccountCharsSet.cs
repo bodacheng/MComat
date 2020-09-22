@@ -24,52 +24,6 @@ namespace dataAccess
             return false;
         }
         
-        public static IEnumerator Update(GetMonsterOfPlayerDetailModel target)
-        {
-            if (AccountSet._AccInfo.accountprogress != PlayerAccountProgressStep.Freedom)//教程 阶段不保存
-            {
-                IEnumerator getchar = Load(target.monsterOfPlayerId);
-                yield return getchar;
-                GetMonsterOfPlayerDetailModel targetAccountCharacterInfo = (GetMonsterOfPlayerDetailModel)getchar.Current;
-                yield break;
-            }
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    yield return UpdateCharJsonSaveData(target);
-                    break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return UpdateCharRemote(target,ApiLanguage.EnUs);
-                    break;
-                case PlayerInfoRefMode.formalVersion:
-                    break;
-            }
-            yield break;
-        }
-        
-        public static IEnumerator AddToAccount(GetMonsterOfPlayerDetailModel _accountCharacterInfo)
-        {
-            IEnumerator temp_enumerator = null;
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    temp_enumerator = AddNewCharToJsonSaveData(_accountCharacterInfo);// 内部已经包整理角色列表的处理
-                    break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    break;
-                case PlayerInfoRefMode.formalVersion:
-                    break;
-            }
-            yield return temp_enumerator;
-            GetMonsterOfPlayerDetailModel result = null;
-            if (temp_enumerator.Current != null)
-                result = (GetMonsterOfPlayerDetailModel)temp_enumerator.Current;
-            if (result == null)
-            {
-                Debug.Log("角色添加失败");
-            }
-        }
-        
         public static GetMonsterOfPlayerDetailModel Get(string monsterlocalid)
         {
             if (monsterlocalid == null)
@@ -84,8 +38,6 @@ namespace dataAccess
             }
             return null;
         }
-        
-
         
         public static IEnumerator LoadTutorial()
         {

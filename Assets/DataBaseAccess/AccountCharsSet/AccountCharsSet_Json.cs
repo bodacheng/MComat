@@ -63,21 +63,6 @@ namespace dataAccess
             }
             yield return returnValue;
         }
-            
-        public static IEnumerator UpdateCharJsonSaveData(GetMonsterOfPlayerDetailModel _CharInfo)
-        {
-            IEnumerator getchar = Load(_CharInfo.monsterOfPlayerId);
-            yield return getchar;
-            GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
-            if (before == null)
-            {
-                Debug.Log("无法找到尝试更新的对象。monsterOfPlayerId："+ _CharInfo.monsterOfPlayerId);
-                yield break;
-            }
-            string json = JsonConvert.SerializeObject(_CharInfo);
-            LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _CharInfo.monsterOfPlayerId + ".json", json);
-            yield break;
-        }
         
         public static IEnumerator LocalSaveDataGetAllCharacters()
         {
@@ -100,6 +85,7 @@ namespace dataAccess
                         skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
                         skillId = INHERENTSkills.Key,
                         EXP = 0,
+                        BreakThrough = 0,
                         Inherent = "true",
                         inUsingMonsterOfPlayerId = i.ToString(),
                         inUsingSkillSlot = "1"
