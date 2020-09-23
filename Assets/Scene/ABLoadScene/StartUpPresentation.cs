@@ -4,7 +4,11 @@ using UnityEngine.UI;
 using UniRx;
 
 public class StartUpPresentation : MonoBehaviour
-{    
+{
+    [Space(7)]
+    [Header("runner")]
+    public SingleThreadProcesser runner;
+
     [Space(7)]
     [Header("ResourceLordSceneStarter")]
     public ResourceLordSceneUtil _Util;
@@ -16,11 +20,16 @@ public class StartUpPresentation : MonoBehaviour
     [Space(7)]
     [Header("开发公司商标")]
     public Image logo;
-    
+
     // step1 商标显示
     // step2 可skip的小动画
     // step3 标题
-    
+
+    void Awake()
+    {
+        SingleThreadProcesser.backup = runner;
+    }
+
     void Start()
     {
         _Util.DProcessFinished = false;

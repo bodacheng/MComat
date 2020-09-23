@@ -4,7 +4,6 @@ using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 using Skill;
-using System;
 
 namespace dataAccess
 {
@@ -17,12 +16,12 @@ namespace dataAccess
         {
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
-
+        
         public static SKStoneItem GetRenderModel(string localStoneid)
         {
             return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
         }
-
+        
         public static IEnumerator Add(SkillStoneOfPlayerInfoModel one)
         {
             DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
@@ -49,38 +48,10 @@ namespace dataAccess
             }
         }
                 
-        public static IEnumerator LoadAll()
-        {
-            Dic.Clear();
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    LoadAll_Json(Application.persistentDataPath + "/MyStones");
-                    break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
-                    break;
-                case PlayerInfoRefMode.formalVersion:
-                    break;
-            }
-            // 上面的步骤已经完成了Dic的适配
-            RenderModelDic.Clear();
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)
-            {
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
-                if (_SkillConfig == null)
-                {
-                    Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
-                    yield break;
-                }
-                yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
-            }
-        }
-        
         public static IEnumerator LoadTutorial()
         {
             Dic.Clear();
-            LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
+            //LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
             // 上面的步骤已经完成了Dic的适配
             RenderModelDic.Clear();
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)

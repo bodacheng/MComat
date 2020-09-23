@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
+    public static SingleThreadProcesser backup;
+
     readonly IEnumerator MenuProcess;
     readonly List<Task> Tasks = new List<Task>();
     

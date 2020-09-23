@@ -7,23 +7,32 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using Skill;
+using Api.Common;
+using Api.Dto.Form;
 
 namespace dataAccess
 {
     public partial class MySkillStonesReader
     {    
-        static void LoadAll_Json(string filePath)
+        static IEnumerator LoadAll_Json(
+            string filePath, 
+            GetSkillStoneOfPlayerInfoForm form, 
+            Dictionary<string, string> headers, 
+            SuccessDelegate<GetSkillStoneOfPlayerInfoModel> success, 
+            FailDelegate<GetSkillStoneOfPlayerInfoModel> fail)
         {
+            GetSkillStoneOfPlayerInfoModel model = new GetSkillStoneOfPlayerInfoModel();
             if (Directory.Exists(filePath))
             {
                 Debug.Log("正从以下路径获取技能石存档："+filePath);
+                List<SkillStoneOfPlayerInfoModel> list = new List<SkillStoneOfPlayerInfoModel>();
                 foreach (string file in Directory.GetFiles(filePath))
                 {
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
                         SkillStoneOfPlayerInfoModel info = JsonConvert.DeserializeObject<SkillStoneOfPlayerInfoModel>(dataAsJson);
-                        DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, info.skillStoneOfPlayerId, info);
+                        list.Add(info);
                     }
                     catch (Exception e)
                     {
@@ -31,7 +40,12 @@ namespace dataAccess
                         Debug.Log(e.ToString());
                     }
                 }
+                model.skillStoneOfPlayerInfoList = list;
+                success(model);
+            }else{
+                fail(model);
             }
+            yield break;
         }
         
         //新
@@ -63,7 +77,7 @@ namespace dataAccess
         
         public static IEnumerator LocalSaveDataGetAllStones()
         {
-            yield return LoadAll();
+            yield return LoadAMySkillstones(Setting.Language);
             //LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
             yield return SkillConfigTable.LoadAllSkillConfigs();
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)

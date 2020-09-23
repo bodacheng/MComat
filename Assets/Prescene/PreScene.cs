@@ -65,6 +65,7 @@ namespace mainMenu
         void Awake()
         {
             target = this;
+            SingleThreadProcesser.backup = mainProcessRunner;
         }
         
         void Start()
@@ -87,7 +88,7 @@ namespace mainMenu
             {
                 case PlayerAccountProgressStep.Freedom:
                     yield return AccountCharsSet.Load_List();
-                    yield return MySkillStonesReader.LoadAll();
+                    yield return MySkillStonesReader.LoadAMySkillstones(Setting.Language);
                 break;
                 case PlayerAccountProgressStep.justCreated:
                 break;

@@ -139,7 +139,6 @@ namespace dataAccess
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
                     yield return SkillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
-                    yield return LoadMySkillstonesRemote(ApiLanguage.JaJp);
                     break;
                 case PlayerInfoRefMode.formalVersion:
                     break;
