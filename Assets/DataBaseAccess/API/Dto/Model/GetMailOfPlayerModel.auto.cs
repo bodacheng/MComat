@@ -1,0 +1,31 @@
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using dataAccess;
+
+namespace Api.Dto.Model {
+
+	/// <summary>
+	/// プレーヤ所有モンスター情報詳細取得モデル
+	/// 作成者：Auto Generated
+	/// バージョン：1.00 2019/07/01
+	/// </summary>
+	[Serializable]
+	public class GetMailOfPlayerModel {
+    
+        /// <summary>
+        /// プレーヤレコードID
+        /// </summary>
+        public string playerId { get; set; }
+        
+        /// <summary>
+        /// プレーヤレコードID
+        /// </summary>
+        public string mailId { get; set; }
+        
+        /// <summary>
+        /// 是否已读
+        /// </summary>
+        public string read { get; set; }
+	}
+}

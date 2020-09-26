@@ -21,11 +21,11 @@ namespace dataAccess
                 form,
                 model => {
                     infos = model.skillStoneOfPlayerInfoList;
-                    Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");
-                    foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
-                    {
-                        Debug.Log("skillStoneOfPlayerId:" + SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:" + SkillStoneOfPlayerInfoModel.skillId);
-                    }
+                    //Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");
+                    //foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
+                    //{
+                    //    Debug.Log("skillStoneOfPlayerId:" + SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:" + SkillStoneOfPlayerInfoModel.skillId);
+                    //}
                     foreach (SkillStoneOfPlayerInfoModel one in infos)
                     {
                         DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);

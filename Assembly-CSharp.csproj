@@ -263,6 +263,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneLevelUpForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\AbstractModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\BasicVoidModel.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerDetailModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetPlayerInfoModel.auto.cs" />
@@ -283,6 +284,8 @@
     <Compile Include="Assets\DataBaseAccess\LocalJson.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Load.cs" />
+    <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Remove.cs" />
+    <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Update.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Util.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_json.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\ShowAllMyStoneLevel.cs" />
@@ -360,6 +363,7 @@
     <Compile Include="Assets\JsonSupport\UnityLitJson\Platform.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
     <Compile Include="Assets\Mail\MailManager.cs" />
+    <Compile Include="Assets\Mail\MailModel.cs" />
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />
     <Compile Include="Assets\MainSceneSystem\HollowOutMask.cs" />
     <Compile Include="Assets\MainSceneSystem\MainSceneLogger.cs" />
@@ -370,6 +374,8 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailBox.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailDetail.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetailProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_edit.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_skillshow.cs" />

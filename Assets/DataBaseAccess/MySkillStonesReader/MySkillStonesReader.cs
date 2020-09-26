@@ -27,27 +27,7 @@ namespace dataAccess
             DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
             yield return Update(one.skillStoneOfPlayerId);
         }
-        
-        // 更新存档数据
-        public static IEnumerator Update(string stoneOfPlayerID)
-        {
-            if (!Dic.ContainsKey(stoneOfPlayerID) || Dic[stoneOfPlayerID] == null)
-            {
-                Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + stoneOfPlayerID);
-                yield break;
-            }
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    Update_Json(Dic[stoneOfPlayerID]);
-                break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                break;
-                case PlayerInfoRefMode.formalVersion:
-                break;
-            }
-        }
-                
+
         public static IEnumerator LoadTutorial()
         {
             Dic.Clear();
@@ -66,88 +46,5 @@ namespace dataAccess
             }
             yield break;
         }
-        
-        // 真正删除技能石头是要通过服务器的API
-        // 而本地的操作与远程的财产操作是分开的，为了效率我们不希望本地的拥有技能石列表在每次更新后都通过读取数据库重新生成，
-        // 所以走了一个if requeset ok，本地直接修改索引的过程。
-        public static IEnumerator RemoveTheseStonesFromLocalDic(List<string> stoneSkillIDs)// 如此一来的话，参数里的这个列表是石头localid的列表。
-        {
-            List<SkillStoneOfPlayerInfoModel> toRemove = new List<SkillStoneOfPlayerInfoModel>();
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
-            {
-                if (stoneSkillIDs.Contains(keyValuePair.Value.skillStoneOfPlayerId))
-                {
-                    toRemove.Add(keyValuePair.Value);
-                }
-            }
-            for (int i = 0; i < toRemove.Count; i++)
-            {
-                RemoveStone(toRemove[i].skillStoneOfPlayerId);
-            }
-            yield break;
-        }
-        
-        // 删除一个技能石
-        public static void RemoveStone(string stoneID)
-        {
-            if (RenderModelDic.ContainsKey(stoneID))
-            {
-                UnityEngine.Object.Destroy(RenderModelDic[stoneID].gameObject);
-            }
-            RenderModelDic.Remove(stoneID);
-            Dic.Remove(stoneID);
-        }
     }
 }
-
-//曾经的XML技能配置文件
-//public IDictionary<int, SkillConfig> loadAllSkillConfigFromConfigFile(string accountInfoPath)//假设到时候要是全部从配置文件读取这个信息，那这方面东西写成同步函数应该也不是太大的问题。但这个信息原则上要一直在程序内。
-//{
-//    try
-//    {
-//        List<SkillConfig> list = new List<SkillConfig>();
-//        //Debug.Log("开始尝试读取技能列表");
-//        XmlSerializer XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
-//        if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
-//        {
-//            FileStream FileStream = new FileStream(Application.dataPath + accountInfoPath, FileMode.Open);
-//            list = XmlSerializer.Deserialize(FileStream) as List<SkillConfig>;
-//            FileStream.Close();
-//        }
-//        else if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
-//        {
-//            accountInfoPath = accountInfoPath.Replace(Environment.NewLine, "");
-//            TextAsset xmlData = Resources.Load(accountInfoPath) as TextAsset;
-//            XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
-//            var reader = new System.IO.StringReader(xmlData.text);
-//            list = XmlSerializer.Deserialize(reader) as List<SkillConfig>;
-//            //Debug.Log("技能适配信息读取成功");
-//        }
-//        else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-//        {
-//            accountInfoPath = accountInfoPath.Replace(Environment.NewLine, "");
-//            TextAsset xmlData = Resources.Load(accountInfoPath) as TextAsset;
-//            XmlSerializer = new XmlSerializer(typeof(List<SkillConfig>));
-//            var reader = new System.IO.StringReader(xmlData.text);
-//            list = XmlSerializer.Deserialize(reader) as List<SkillConfig>;
-//            //Debug.Log("技能适配信息读取成功");
-//        }
-
-//        // 那么也就是说每次程序启动，我们为玩家所拥有的所有角色添加的这个key其实都是临时给加的，方便本地索引。这么做有无风险？
-//        MySkillStonesReader.SkillConfigDicForReference = new Dictionary<int, SkillConfig>();
-//        foreach (SkillConfig _SkillConfig in list)
-//        {
-//            if (!MySkillStonesReader.SkillConfigDicForReference.ContainsKey(_SkillConfig.id))
-//            {
-//                MySkillStonesReader.SkillConfigDicForReference.Add(_SkillConfig.id, _SkillConfig);
-//            }
-//        }
-//        return MySkillStonesReader.SkillConfigDicForReference;
-//    }
-//    catch (Exception e)
-//    {
-//        Debug.Log("技能总列表读取失败");
-//        Debug.Log(e.ToString());
-//        return null;
-//    }
-//}

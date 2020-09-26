@@ -23,6 +23,8 @@ namespace mainMenu
     {
         None = 0,
         Setting = -1,
+        MailBox = 10,
+        MailDetail = 11,
         FrontPage = 1,
         SelfFightFront = 4,
         TeamEditFront = 2,
