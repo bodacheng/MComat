@@ -23,6 +23,12 @@ namespace Api.Dto.Model {
         /// </summary>
         public string mailId { get; set; }
         
+        public string title { get; set; }
+        
+        public string message { get; set; }
+        
+        public string presentlifeRemain { get; set; }
+        
         /// <summary>
         /// 是否已读
         /// </summary>

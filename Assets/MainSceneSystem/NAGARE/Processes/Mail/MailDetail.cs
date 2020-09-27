@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using mainMenu;
-using DG.Tweening;
 
 // 邮箱top
 public class MailDetail : MainSceneProcess
@@ -13,6 +12,7 @@ public class MailDetail : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        MailManager.target.detailPartT.gameObject.SetActive(true);
         yield break;
     }
         
@@ -23,7 +23,7 @@ public class MailDetail : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
+        MailManager.target.detailPartT.gameObject.SetActive(false);
     }
 }

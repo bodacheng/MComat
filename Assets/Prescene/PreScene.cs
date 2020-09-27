@@ -134,6 +134,10 @@ namespace mainMenu
             GachaAnim gotchaAnim = new GachaAnim();
             GachaResult gachaResult = new GachaResult();
             ArenaProcess areanaProcess = new ArenaProcess();
+
+            // mail
+            MailBox mailBox = new MailBox();
+            MailDetail mailDetail = new MailDetail();
             
             ProcessesRunner.Main.Clear();
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
@@ -151,6 +155,9 @@ namespace mainMenu
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxExpansion, stoneBoxExpansion);
+            
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MailBox, mailBox);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MailDetail, mailDetail);
             
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);

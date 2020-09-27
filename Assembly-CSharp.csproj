@@ -252,6 +252,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\AbstractForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\CertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\NoneCertificationForm.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMailListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterOfPlayerDetailForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterOfPlayerListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterTeamOfPlayerForm.auto.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\AbstractModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\BasicVoidModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailOfPlayerModel.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailsOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerDetailModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetPlayerInfoModel.auto.cs" />

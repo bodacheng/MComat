@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using mainMenu;
-using DG.Tweening;
 
 // 邮箱top
 public class MailBox : MainSceneProcess
@@ -13,6 +12,8 @@ public class MailBox : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        yield return MailManager.target.RequestMails(Setting.Language);
+        MailManager.target.BoxPartT.gameObject.SetActive(true);
         yield break;    
     }
         
@@ -23,7 +24,7 @@ public class MailBox : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
+        MailManager.target.BoxPartT.gameObject.SetActive(false);
     }
 }
