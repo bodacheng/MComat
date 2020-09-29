@@ -14145,7 +14145,7 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 2
-  weaponHP: 2
+  weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 4
@@ -23644,5 +23644,4 @@ MonoBehaviour:
   enemyShieldLayer:
     serializedVersion: 2
     m_Bits: 0
-  powerLevel: 1
   radius: 0.6

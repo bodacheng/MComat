@@ -14330,7 +14330,7 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 2
-  weaponHP: 2
+  weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 3

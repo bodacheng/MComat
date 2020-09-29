@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806304775604888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 140.32, y: 34.427067, z: 21.011938}
+  m_LocalPosition: {x: -3617.2544, y: 1452.6067, z: -3103.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4070344735045342962}
@@ -57,7 +57,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d9a322a5258933746a431aebb15655ce, type: 2}
+  - {fileID: 2100000, guid: 64c774a016e044548b7752ac7e5d088c, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -291,8 +291,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.5384381, b: 0.18382353, a: 1}
-      maxColor: {r: 1, g: 0.89959437, b: 0.33823532, a: 1}
+      minColor: {r: 1, g: 0.9990684, b: 0, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1498,7 +1498,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 1
+    enabled: 0
     mode: 0
     timeMode: 0
     fps: 30
@@ -4917,6 +4917,7 @@ MonoBehaviour:
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!114 &114241232230328680
 MonoBehaviour:
@@ -5259,8 +5260,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.5384381, b: 0.18382353, a: 1}
-      maxColor: {r: 1, g: 0.89959437, b: 0.33823532, a: 1}
+      minColor: {r: 0.94427913, g: 1, b: 0.4009434, a: 1}
+      maxColor: {r: 1, g: 0.9532509, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
