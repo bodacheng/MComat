@@ -71,6 +71,10 @@ namespace mainMenu
             analysisSKList.Clear();
             foreach (SkillEntity _set in _analysisStatesList)
             {
+                if (_set == null)
+                {
+                    continue;
+                }
                 if (!analysisSKList.ContainsKey(_set.REAL_NAME))
                 {
                     analysisSKList.Add(_set.REAL_NAME, _set);

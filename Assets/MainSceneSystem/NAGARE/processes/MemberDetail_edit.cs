@@ -43,29 +43,7 @@ public class MemberDetail_edit : MainSceneProcess
     public static IEnumerator SkillShowSpEnterProcess()
     {
         loadFinished = false;
-        TheNineSlot.target.A1DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.A2DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.A3DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.B1DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.B2DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.B3DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.C1DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.C2DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target.C3DragAndDropCell.gameObject.SetActive(false);
-        TheNineSlot.target._HP.gameObject.SetActive(false);
-        for (int i = 0; i < TheNineSlot.target.remainCharges.Count; i++)
-        {
-            TheNineSlot.target.remainCharges[i].gameObject.SetActive(false);
-        }
-        for (int i = 0; i < TheNineSlot.target.burdenCharges.Count; i++)
-        {
-            TheNineSlot.target.burdenCharges[i].gameObject.SetActive(false);
-        }
-        TheNineSlot.target.ResetButton.gameObject.SetActive(false);
-        TheNineSlot.target.ConfirmSkillChangeButton.gameObject.SetActive(false);
-        SSLevelUpManager.target.plusLevel.gameObject.SetActive(false);
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
-        
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);                
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
         PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
