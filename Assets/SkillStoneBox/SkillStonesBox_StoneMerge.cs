@@ -6,7 +6,8 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        public void CellButtonBeheviour_MAdd(StoneCell _SkillStoneCell)
+        // 技能浏览器模式
+        public void CellButtonBeheviour_StoneMergeMode(StoneCell _SkillStoneCell)
         {
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
@@ -18,7 +19,7 @@ namespace mainMenu
                 {
                     if (Time.time - lastclicktime < 0.25f) // double click
                     {
-                        SSLevelUpManager.target.AddMaterial(_SkillStoneCell);
+                        StoneMergeManger.target.AddMaterial(_SkillStoneCell);
                     }
                     lastclicktime = Time.time;
                 }

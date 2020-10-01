@@ -262,10 +262,12 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneGotchaForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneLevelUpForm.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneMergeForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\AbstractModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\BasicVoidModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailsOfPlayerModel.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMergedStoneModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerDetailModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetPlayerInfoModel.auto.cs" />
@@ -387,6 +389,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\StoneBoxExpansion.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\SkillStones.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TopPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
@@ -529,6 +532,7 @@
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Order.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_SKillShower.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_ShowMode.cs" />
+    <Compile Include="Assets\SkillStoneBox\SkillStonesBox_StoneMerge.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_StoneModel.cs" />
     <Compile Include="Assets\StagesManagement\ArcadeManager.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />
@@ -658,6 +662,7 @@
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\GameManager.cs" />
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\技能石合成\StoneMergeManger.cs" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
     <None Include="Assets\Asstes\FloatingCombatText\ReadMe.txt" />

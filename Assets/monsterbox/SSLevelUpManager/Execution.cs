@@ -40,7 +40,7 @@ public partial class SSLevelUpManager : MonoBehaviour
              model => {
              
              }
-             , ApiLanguage.EnUs
+             , Setting.Language
         );
     }
     

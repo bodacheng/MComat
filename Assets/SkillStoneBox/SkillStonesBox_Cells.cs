@@ -65,12 +65,15 @@ namespace mainMenu
             CellsFeatureLoad(cellsLimit, mode);
         }
         
-        public void CellsFeatureLoad(int cellsLimit, int mode) // 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
+        public void CellsFeatureLoad(int cellsLimit, int mode) // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
         {
             for (int i = 0; i < cellsLimit; i++)
             {
                 switch(mode)
                 {
+                    case -1:
+                        CellButtonBeheviour_StoneMergeMode(CellsDictionary[i]);
+                        break;
                     case 0:
                         CellButtonBeheviour_MAdd(CellsDictionary[i]);
                     break;

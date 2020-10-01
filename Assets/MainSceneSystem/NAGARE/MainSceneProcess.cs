@@ -36,6 +36,7 @@ namespace mainMenu
         GotchaFront = 6,
         GotchaAnim = 7,
         GotchaResult = 24,
+        StoneMerge = 25,
         
         ShopTop = 201,
         BoxOverLoadHelper = 203,
