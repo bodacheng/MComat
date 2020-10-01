@@ -23,7 +23,7 @@ namespace mainMenu
         [Space(11)]
         [Header("TeamEdit")]
         public TeamEditManager TeamEditor;
-
+        
         [Space(11)]
         [Header("技能展示器模式切换角色按钮")]
         public Button charSwitcher;
@@ -52,7 +52,6 @@ namespace mainMenu
         [Header("自我战斗管理模块")]
         public SelfFightManager _SelfFightManager;
         
-        //preparingscene应该就是只有这些画布
         [Space(7)]
         [Header("Canvas")]
         public Canvas MainMenuCanvas;
@@ -70,11 +69,10 @@ namespace mainMenu
         
         void Start()
         {
-            //_stagesManager.loadAndRefresh();
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
             mainProcessRunner.Run(StartUpProcess());
-            Screen.SetResolution(1920,1080,true);
+            Screen.SetResolution(1920,1080, true);
         }
 
         // 这个应该是和热更新进程完全分开了。
@@ -84,6 +82,14 @@ namespace mainMenu
         // 应该有更好精致的机理来回避重复计算。
         public IEnumerator StartUpProcess()
         {
+            _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+            _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+            MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
+            MainMenuCanvas.gameObject.SetActive(false);
+            
+            LoadingCanvas.target.TurnOnProcessDescription(true);
+            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
+            
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
@@ -100,15 +106,9 @@ namespace mainMenu
             yield return AccountSet.LoadCustomerInfo(); // 缺response判断
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
-        
+            
             LoadingCanvas.target.DarkOff(0.5f);
             Application.targetFrameRate = 60;
-            
-            _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-            _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-            TheNineSlot.target.gameObject.SetActive(false);
-            MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
-            MainMenuCanvas.gameObject.SetActive(false);
             
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
@@ -121,9 +121,6 @@ namespace mainMenu
             TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             
-            // 关卡按钮一次生成就可以
-            yield return ArcadeManager.target.INIArcadeStageButtons();
-            
             // Shop
             ShopTop shopTop = new ShopTop();
             BoxOverLoadFix boxOverLoadFix = new BoxOverLoadFix();
@@ -134,7 +131,7 @@ namespace mainMenu
             GachaAnim gotchaAnim = new GachaAnim();
             GachaResult gachaResult = new GachaResult();
             ArenaProcess areanaProcess = new ArenaProcess();
-
+            
             // mail
             MailBox mailBox = new MailBox();
             MailDetail mailDetail = new MailDetail();
@@ -151,37 +148,34 @@ namespace mainMenu
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.Arena, areanaProcess);
-            
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxExpansion, stoneBoxExpansion);
-            
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.MailBox, mailBox);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.MailDetail, mailDetail);
-            
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
             
-            LoadingCanvas.target.TurnOnProcessDescription(true);
-            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
+            // 关卡按钮一次生成就可以
+            yield return ArcadeManager.target.INIArcadeStageButtons();
             
             Setting.target.LoadProgrameSettingFromAccount();
             UserID.text = AccountSet._AccInfo.PlayerName; //SystemInfo.deviceUniqueIdentifier;
             accountDiamondCoin.text = AccountSet._AccInfo.diamondCount.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.coinCount.ToString();
-            LoadingCanvas.target.TurnOnProcessDescription(false);
-            
             HeroIcon.INIFrames();
             
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.2f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.4f);
             yield return _SkillStonesBox_NineSlot.StartUp(AccountSet._AccInfo.Stoneboxsize);
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.5f);
             yield return _SkillStonesBox_Show.StartUp(AccountSet._AccInfo.Stoneboxsize);
-            LoadingCanvas.target.NowProcess("正在加载技能编辑器", 0.7f);
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             yield return (TheNineSlot.target.StartUp());
-            
+            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.7f);
             yield return _SelfFightManager.INITeamPosButtons();
             
             yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
@@ -217,7 +211,10 @@ namespace mainMenu
                     }
                 }
             }
+            LoadingCanvas.target.NowProcess("near", 0.8f);
             HurtObjectManager.ConstructDPool();
+            LoadingCanvas.target.NowProcess("Finished", 1f);
+            LoadingCanvas.target.TurnOnProcessDescription(false);
         }
 
         void Update()

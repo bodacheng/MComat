@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-// LoadingCanvas 可以存在很多别的丰富的功能，比如播放视频？用于loading画面？
+// 该模块的最大待解决问题：
+// Loading_Canvas 会在不同方面的功能下被打开或关闭，这会让对该画布内容的显示产生很多混乱
+
 public class LoadingCanvas : MonoBehaviour {
 
     public static LoadingCanvas target;
@@ -26,7 +28,7 @@ public class LoadingCanvas : MonoBehaviour {
     [Header("主进程处理器")]
     public SingleThreadProcesser mainProcessRunner;
     
-    void Start()
+    void Awake()
     {
         target = this;
     }
@@ -39,10 +41,12 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void TurnOnProcessDescription(bool _b)
     {
+        Loading_Canvas.gameObject.SetActive(_b);
         loadingBar.gameObject.SetActive(_b);
         processingDescrition.gameObject.SetActive(_b);
     }
-    
+
+    #region 高亮显示
     /// <summary>
     // 注：参数列表内的第一个(Ts[0])元素是会高亮显示，而其他transform对应的区域并不会高亮显示，但也会缕空
     // 我们曾经尝试让复数个对象区域都高亮度显示，但失败了。
@@ -83,7 +87,9 @@ public class LoadingCanvas : MonoBehaviour {
         hollowOutMask.color = Color.clear;
         hollowOutMask.gameObject.SetActive(false);
     }
-    
+    #endregion
+
+    #region 黑幕
     public void LightUp()
     {
         mainProcessRunner.Run(LightUpCanvas());
@@ -112,7 +118,7 @@ public class LoadingCanvas : MonoBehaviour {
         }
         Loading_Canvas.gameObject.SetActive(false);
     }
-
+    
     IEnumerator DarkOffCanvas(float toAlpha)
     {
         Loading_Canvas.gameObject.SetActive(true);
@@ -126,7 +132,9 @@ public class LoadingCanvas : MonoBehaviour {
         }
         yield break;
     }
+    #endregion
     
+    #region 浮动窗口
     public void ArrangeWarnWindow(string intro)
     {
         Loading_Canvas.gameObject.SetActive(true);
@@ -202,4 +210,5 @@ public class LoadingCanvas : MonoBehaviour {
         NoButton.onClick.AddListener(closeValidationWindow);
         ValidationIntro.text = intro;
     }
+    #endregion
 }
