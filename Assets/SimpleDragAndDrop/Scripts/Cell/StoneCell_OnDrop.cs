@@ -37,10 +37,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         {
                             case CellPhase.NineSlotCell:// 已装备石头的卸载
                                 Install(sourceCell, this);
-                                break;
+                            break;
                             case CellPhase.SKLevelUpMSlot:// 已装备石头的卸载                            
                                 Install(sourceCell, this);
-                                SSLevelUpManager.target.RefreshSkillLevelUpModule();
                             break;
                         }
                     break;
@@ -48,7 +47,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         if (item.SkillStoneOfPlayerId != SSLevelUpManager.target.GetFocusingSSD().GetSTTarget().skillStoneOfPlayerId)
                         {
                             Install(sourceCell, this);
-                            SSLevelUpManager.target.RefreshSkillLevelUpModule();
                         }
                     break;
                 }

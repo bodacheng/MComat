@@ -13,7 +13,7 @@ public static class SVCenter
             Debug.Log("固有技能无法移出，返回");
             return;
         }
-
+        
         // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
         if (boxcell.GetItem() != null)
         {
@@ -26,7 +26,15 @@ public static class SVCenter
             // 松手瞬间会有一个技能石“变图案”的错觉。
             boxcell.AddItem(stone);
         }
-        TheNineSlot.target.NineSlotsStatusRefresh();
+        
+        if (sourceCell.cellPhase == StoneCell.CellPhase.NineSlotCell)
+        {
+            TheNineSlot.target.NineSlotsStatusRefresh();
+        }
+        if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
+        {
+            SSLevelUpManager.target.RefreshSkillLevelUpModule();
+        }
     }
     
     public static void MoveItemFromTo(StoneCell from, StoneCell to)
@@ -41,7 +49,18 @@ public static class SVCenter
         }
         to.AddItem(item);
         from.UpdateMyItem();
-        TheNineSlot.target.NineSlotsStatusRefresh();
+        
+        if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || 
+                to.cellPhase == StoneCell.CellPhase.NineSlotCell)
+        {
+            TheNineSlot.target.NineSlotsStatusRefresh();
+        }
+        
+        if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || 
+                to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
+        {
+            SSLevelUpManager.target.RefreshSkillLevelUpModule();
+        }
     }
     
     public static void SwapItemFromTo(StoneCell from, StoneCell to)
@@ -69,7 +88,18 @@ public static class SVCenter
         }
         
         SwapItems(from, to);
-        TheNineSlot.target.NineSlotsStatusRefresh();
+        
+        if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || 
+                to.cellPhase == StoneCell.CellPhase.NineSlotCell)
+        {
+            TheNineSlot.target.NineSlotsStatusRefresh();
+        }
+        
+        if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || 
+                to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
+        {
+            SSLevelUpManager.target.RefreshSkillLevelUpModule();
+        }
     }
     
     /// <summary>

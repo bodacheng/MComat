@@ -85,7 +85,11 @@ public class StoneMergeManger : MonoBehaviour
     #region Merger Process
     public void Confirm()
     {
-        PreScene.target.mainProcessRunner.Run(SubmitMergeRequest());
+        void run()
+        {
+            PreScene.target.mainProcessRunner.Run(SubmitMergeRequest());
+        }
+        LoadingCanvas.target.ArrangeConfirmWindow(run, "确实要融合技能石？");
     }
     
     public IEnumerator SubmitMergeRequest()
@@ -97,7 +101,7 @@ public class StoneMergeManger : MonoBehaviour
         SKStoneItem item3 = cell3.GetItem();
         SKStoneItem item4 = cell4.GetItem();
         SKStoneItem item5 = cell5.GetItem();
-                
+        
         skillStoneLevelUpForm.M1Stone = item1 != null ? item1.SkillStoneOfPlayerId : null;
         skillStoneLevelUpForm.M2Stone = item2 != null ? item2.SkillStoneOfPlayerId : null;
         skillStoneLevelUpForm.M3Stone = item3 != null ? item3.SkillStoneOfPlayerId : null;
@@ -105,13 +109,20 @@ public class StoneMergeManger : MonoBehaviour
         skillStoneLevelUpForm.M5Stone = item5 != null ? item5.SkillStoneOfPlayerId : null;
                 
         yield return Merge(skillStoneLevelUpForm,
-             model => {
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M1Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M2Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M3Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M4Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M5Stone);
-                 MySkillStonesReader.Add(model.stone);
+             model =>
+             {
+                if (skillStoneLevelUpForm.M1Stone != null)
+                    MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M1Stone);
+                if (skillStoneLevelUpForm.M2Stone != null)
+                    MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M2Stone);
+                if (skillStoneLevelUpForm.M3Stone != null)
+                    MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M3Stone);
+                if (skillStoneLevelUpForm.M4Stone != null)
+                    MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M4Stone);
+                if (skillStoneLevelUpForm.M5Stone != null)
+                    MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M5Stone);
+                    
+                MySkillStonesReader.Add(model.stone);
              },
              model => {
              
@@ -128,7 +139,7 @@ public class StoneMergeManger : MonoBehaviour
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
-                bool succeed = true;
+                bool succeed = false;
                 if (succeed)
                 {
                     success(null);

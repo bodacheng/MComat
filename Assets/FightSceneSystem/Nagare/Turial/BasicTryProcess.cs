@@ -11,7 +11,8 @@ using FightScene;
 public class BasicTryProcess : FSceneProcess
 {
     int step = 2;// 1. 移动 2. 技能  3.防御  4. 闪避 
-    int Step
+
+    new int Step
     {
         set
         {
