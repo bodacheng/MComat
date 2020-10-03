@@ -113,6 +113,7 @@ namespace mainMenu
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
             StoneSell stoneSell = new StoneSell();
+            StoneMerge stoneMerge = new StoneMerge();
             SelfFightFront selfFightFront = new SelfFightFront();
             QuestInfo questInfo = new QuestInfo();
             MemberDetailProcess memberDetail = new MemberDetailProcess();
@@ -140,6 +141,7 @@ namespace mainMenu
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones, skillStones);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones_Sell, stoneSell);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.StoneMerge, stoneMerge);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);

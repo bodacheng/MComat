@@ -73,7 +73,7 @@ namespace mainMenu
                 {
                     case -1:
                         CellButtonBeheviour_StoneMergeMode(CellsDictionary[i]);
-                        break;
+                    break;
                     case 0:
                         CellButtonBeheviour_MAdd(CellsDictionary[i]);
                     break;

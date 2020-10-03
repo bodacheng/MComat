@@ -26,7 +26,7 @@ namespace mainMenu
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
                 button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, _Selected); });
-                SSLevelUpManager.target.AddMSlotBehaviour(_SkillStoneCell);
+                StoneMergeManger.target.AddMSlotBehaviour(_SkillStoneCell);
             }
         }
     }

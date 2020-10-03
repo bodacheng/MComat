@@ -41,6 +41,12 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                     break;
                 }
             break;
+            case CellPhase.StoneMergeSlot:
+                if (to.myDadItem == null)
+                    SVCenter.MoveItemFromTo(from, to);
+                else
+                    SVCenter.SwapItemFromTo(from, to);
+            break;
         }
     }
     

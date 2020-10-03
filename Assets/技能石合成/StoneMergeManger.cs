@@ -13,7 +13,7 @@ public class StoneMergeManger : MonoBehaviour
     [Space(7)]
     [Header("对应画布")]
     public Canvas _Canvas;
-
+    
     [Space(7)]
     [Header("融合技能槽")]
     public StoneCell cell1;
