@@ -132,6 +132,7 @@ public class StoneMergeManger : MonoBehaviour
     }
     
     // 技能石升级
+    // 该操作仍余留一个很大的问题：选择的技能石为装备中的情况。如何避免点数失衡
     public IEnumerator Merge(SkillStoneMergeForm form,
         SuccessDelegate<GetMergedStoneModel> success, 
             FailDelegate<GetMergedStoneModel> fail, ApiLanguage apiLanguage)

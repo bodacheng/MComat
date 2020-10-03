@@ -15,6 +15,8 @@ public class PreparingProcess : FSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        LoadingCanvas.target.DarkOffDirectly(1f);
+        RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(FightScene.WatchTeam2.position, FightScene.Team2StandPoints[0], 3f, 50f);
         FightLoadError.Instance.FightLoadErrors.Clear();
         if (FightSceneNote.nextBattle != null)
         {
@@ -40,7 +42,6 @@ public class PreparingProcess : FSceneProcess
     public override void ProcessEnter()
     {
         FightScene.PreparingCanvas.gameObject.SetActive(true);
-        LoadingCanvas.target.DarkOffDirectly(1f);
         mainProcessRunner.Run(EnterProcess());
     }
     

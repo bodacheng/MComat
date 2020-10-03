@@ -4,14 +4,14 @@ using DG.Tweening;
 public class StartToEndMode : CameraMode
 {
     Vector3 obj_position;
-            
+    
     public void SetObjPosAndRotAndSpeed(Vector3 obj_position, float duration, float fieldOfView)
     {
         this.obj_position = obj_position;
         this.duration = duration;
         this.fieldOfView = fieldOfView;
     }
-                
+    
     public override void Enter(Camera _camera)
     {
         _camera.DOFieldOfView(fieldOfView, duration);

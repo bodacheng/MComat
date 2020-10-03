@@ -942,7 +942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8beaaf4159771448997aea9c633544c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hollowOutMask: {fileID: 997439420}
+  hollowOutMask: {fileID: 0}
   Loading_Canvas: {fileID: 997439419}
   loadingBar: {fileID: 0}
   processingDescrition: {fileID: 0}
@@ -2694,7 +2694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2863,14 +2863,13 @@ GameObject:
   - component: {fileID: 997439418}
   - component: {fileID: 997439417}
   - component: {fileID: 997439421}
-  - component: {fileID: 997439420}
   m_Layer: 0
   m_Name: LoadingCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &997439416
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2951,25 +2950,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &997439420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997439415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ffa7f1f1908c4bd6bc8664ee37f0c27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!222 &997439421
 CanvasRenderer:
   m_ObjectHideFlags: 0

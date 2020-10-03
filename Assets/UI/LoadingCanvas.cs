@@ -41,7 +41,6 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void TurnOnProcessDescription(bool _b)
     {
-        Loading_Canvas.gameObject.SetActive(_b);
         loadingBar.gameObject.SetActive(_b);
         processingDescrition.gameObject.SetActive(_b);
     }
@@ -83,7 +82,6 @@ public class LoadingCanvas : MonoBehaviour {
     public void ClearHigtLight()
     {
         hollowOutMask.SetTarget(null);
-        Loading_Canvas.gameObject.SetActive(false);
         hollowOutMask.color = Color.clear;
         hollowOutMask.gameObject.SetActive(false);
     }
@@ -103,7 +101,6 @@ public class LoadingCanvas : MonoBehaviour {
     public void DarkOffDirectly(float darkness)
     {
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, darkness);
-        Loading_Canvas.gameObject.SetActive(true);
     }
     
     IEnumerator LightUpCanvas()
@@ -116,12 +113,11 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
             yield return null;
         }
-        Loading_Canvas.gameObject.SetActive(false);
+        Debug.Log(LoadingCanvasBigCurtain.color);
     }
     
     IEnumerator DarkOffCanvas(float toAlpha)
     {
-        Loading_Canvas.gameObject.SetActive(true);
         float a = 0;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
         while (a < toAlpha)
@@ -137,7 +133,6 @@ public class LoadingCanvas : MonoBehaviour {
     #region 浮动窗口
     public void ArrangeWarnWindow(string intro)
     {
-        Loading_Canvas.gameObject.SetActive(true);
         ValidationWindow.gameObject.SetActive(true);
         HigtLightRect(ValidationWindow_PosForMask.transform);
         
@@ -158,15 +153,13 @@ public class LoadingCanvas : MonoBehaviour {
     {
         YesButton.onClick.RemoveAllListeners();
         NoButton.onClick.RemoveAllListeners();
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
+        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0);
         ValidationWindow.gameObject.SetActive(false);
-        Loading_Canvas.gameObject.SetActive(false);
         ClearHigtLight();
     }
     
     public void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, string intro)
     {
-        Loading_Canvas.gameObject.SetActive(true);
         ValidationWindow.gameObject.SetActive(true);
         HigtLightRect(ValidationWindow_PosForMask.transform);
         
@@ -184,7 +177,6 @@ public class LoadingCanvas : MonoBehaviour {
     
     public void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
-        Loading_Canvas.gameObject.SetActive(true);
         ValidationWindow.gameObject.SetActive(true);
         HigtLightRect(ValidationWindow_PosForMask.transform);
         
@@ -192,9 +184,8 @@ public class LoadingCanvas : MonoBehaviour {
         {
             YesButton.onClick.RemoveAllListeners();
             NoButton.onClick.RemoveAllListeners();
-            LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 1);
+            LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0);
             ValidationWindow.gameObject.SetActive(false);
-            Loading_Canvas.gameObject.SetActive(false);
             ClearHigtLight();
         }
         

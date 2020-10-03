@@ -14,7 +14,6 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(FightScene.WatchTeam2.position, FightScene.Team2StandPoints[0], 3f, 50f);
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             if (FightSceneNote.nextBattle.beforefightstory != null)
             {

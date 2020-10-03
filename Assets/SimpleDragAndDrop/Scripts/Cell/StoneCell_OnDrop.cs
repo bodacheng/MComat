@@ -49,6 +49,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                             Install(sourceCell, this);
                         }
                     break;
+                    case CellPhase.StoneMergeSlot:
+                        Install(sourceCell, this);
+                    break;
                 }
             }
             sourceCell.UpdateMyItem();
