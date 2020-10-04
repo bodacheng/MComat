@@ -38,7 +38,9 @@ public class ModelShower : MonoBehaviour
     public IEnumerator ShowMyModel(string localID)
     {
         if (showingChar != null)
+        {
             showingChar.SetActive(false);
+        }
         if (localID == null)
         {
             yield break;
@@ -51,12 +53,6 @@ public class ModelShower : MonoBehaviour
     
     public IEnumerator ShowModel(string monsterID)
     {
-        if (showingChar != null)
-            showingChar.SetActive(false);
-        if (monsterID == null)
-        {
-            yield break;
-        }
         IEnumerator focusingOneModel = GeneralModelPool.GetModel(monsterID, true);
         yield return focusingOneModel;
         if (focusingOneModel.Current == null)
@@ -65,6 +61,7 @@ public class ModelShower : MonoBehaviour
             yield break;
         }
         Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;
+        aI_DATA_CENTER._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
         showingChar = aI_DATA_CENTER.WholeT.gameObject;
         if (showingChar != null)
         {

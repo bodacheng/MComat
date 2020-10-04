@@ -27,11 +27,7 @@ namespace mainMenu
         [Space(11)]
         [Header("技能展示器模式切换角色按钮")]
         public Button charSwitcher;
-        
-        [Space(11)]
-        [Header("modelShower")]
-        public ModelShower _modelShower;
-        
+                
         [Space(11)]
         [Header("SkillStonesBox")]
         public SkillStonesBox _SkillStonesBox_NineSlot;
@@ -82,6 +78,7 @@ namespace mainMenu
         // 应该有更好精致的机理来回避重复计算。
         public IEnumerator StartUpProcess()
         {
+            Application.targetFrameRate = 60;
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
@@ -89,7 +86,8 @@ namespace mainMenu
             
             LoadingCanvas.target.TurnOnProcessDescription(true);
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
-            
+
+            #region 数据读取
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
@@ -106,10 +104,10 @@ namespace mainMenu
             yield return AccountSet.LoadCustomerInfo(); // 缺response判断
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
+            #endregion
             
-            LoadingCanvas.target.DarkOff(0.5f);
-            Application.targetFrameRate = 60;
-            
+            #region 主界面各大画面
+            TopPage frontPage = new TopPage();
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStones skillStones = new SkillStones();
             StoneSell stoneSell = new StoneSell();
@@ -119,7 +117,6 @@ namespace mainMenu
             MemberDetailProcess memberDetail = new MemberDetailProcess();
             MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
-            TopPage frontPage = new TopPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
             
             // Shop
@@ -158,6 +155,7 @@ namespace mainMenu
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
+            #endregion
             
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
@@ -181,7 +179,8 @@ namespace mainMenu
             yield return _SelfFightManager.INITeamPosButtons();
             
             yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
-            LoadingCanvas.target.LightUp();
+
+            HurtObjectManager.ConstructDPool();
             
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
@@ -213,8 +212,6 @@ namespace mainMenu
                     }
                 }
             }
-            LoadingCanvas.target.NowProcess("near", 0.8f);
-            HurtObjectManager.ConstructDPool();
             LoadingCanvas.target.NowProcess("Finished", 1f);
             LoadingCanvas.target.TurnOnProcessDescription(false);
         }

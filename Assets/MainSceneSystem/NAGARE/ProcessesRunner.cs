@@ -17,7 +17,7 @@ namespace mainMenu
                 return instance_main;
             }
         }
-
+        
         public MainSceneProcess lastProcess;
         public MainSceneProcess currentProcess;
         readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();

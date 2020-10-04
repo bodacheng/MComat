@@ -32,7 +32,10 @@ namespace dataAccess
                     }
                     IEnumerator GenerateStoneModel()
                     {
+                        LoadingCanvas.target.TurnOnProcessDescription(true);
+                        LoadingCanvas.target.NowProcess("正在构成技能石模型", 0);
                         RenderModelDic.Clear();
+                        int i = 1;
                         foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)
                         {
                             SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
@@ -42,7 +45,10 @@ namespace dataAccess
                                 yield break;
                             }
                             yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
+                            i++;
+                            LoadingCanvas.target.NowProcess("正在构成技能石模型", (float) i / Dic.Count);
                         }
+                        LoadingCanvas.target.TurnOnProcessDescription(false);
                     }
                     SingleThreadProcesser.backup.Run(GenerateStoneModel());
                 },

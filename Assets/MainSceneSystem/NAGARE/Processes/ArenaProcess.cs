@@ -5,7 +5,7 @@ public class ArenaProcess : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        PreScene.target.mainProcessRunner.Run(ArenaManager.target.LoadArena());
+        yield return ArenaManager.target.LoadArena();
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
         yield break;
     }

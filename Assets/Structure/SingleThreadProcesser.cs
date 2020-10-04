@@ -13,7 +13,6 @@ public class SingleThreadProcesser : MonoBehaviour
     {
         public int phase = 0;
         public IEnumerator process;
-        public int test = 0;
         void SetPhase(int a)
         {
             phase = a;
@@ -34,7 +33,6 @@ public class SingleThreadProcesser : MonoBehaviour
             switch (Tasks[0].phase)
             {
                 case 0:
-                    Tasks[0].test += 1;
                     StartCoroutine(Tasks[0].GiveProcessStartEndFlag());
                 break;
                 case 1:

@@ -113,7 +113,6 @@ public class LoadingCanvas : MonoBehaviour {
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
             yield return null;
         }
-        Debug.Log(LoadingCanvasBigCurtain.color);
     }
     
     IEnumerator DarkOffCanvas(float toAlpha)

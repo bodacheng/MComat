@@ -110,7 +110,7 @@ namespace mainMenu
             
             CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
-
+            
             // mini nineslot show
             yield return _NineForShow.ShowStones_Acc(_focusing.monsterOfPlayerId);
             
@@ -178,7 +178,6 @@ namespace mainMenu
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
-                aI_DATA_CENTER._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
                 _SkillsPrintOut.focusingC = aI_DATA_CENTER;
                 _SkillsPrintOut.focusingC.Animation_Manger.Animator.applyRootMotion = true;
             }

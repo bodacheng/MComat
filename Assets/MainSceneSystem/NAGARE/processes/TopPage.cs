@@ -15,8 +15,7 @@ public class TopPage : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
-        PreScene.target.MainMenuBottonsT.gameObject.SetActive(true);
+
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
@@ -35,11 +34,11 @@ public class TopPage : MainSceneProcess
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
                 yield return ModelShower.target.ShowMyModel(focusLocalid);
             }
-        }
-        yield break;
-    
+        }        
+        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
+        PreScene.target.MainMenuBottonsT.gameObject.SetActive(true);
     }
-        
+    
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());
