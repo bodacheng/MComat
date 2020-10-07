@@ -38382,13 +38382,13 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 3
   _WeaponMode: 2
-  weaponHP: 5
+  weaponHP: 3
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 2
   muzzle: electric_s_e
   ExplosionEffect: dark_hit
-  ContinuousDamage: 1
+  ContinuousDamage: 0
   ContinuousDamageInterval: 0.1
 --- !u!114 &7183177203232057296
 MonoBehaviour:
@@ -38442,6 +38442,7 @@ MonoBehaviour:
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}
 --- !u!82 &8885381585105076500
 AudioSource:

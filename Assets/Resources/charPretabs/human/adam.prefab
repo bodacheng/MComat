@@ -41579,7 +41579,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2006636172013958659}
   - component: {fileID: 2105445768737525133}
-  - component: {fileID: 5800209350536526030}
   m_Layer: 0
   m_Name: shadow
   m_TagString: Untagged
@@ -41726,23 +41725,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.008417606, y: -0.064956285, z: 0.00000008940697}
     m_Extent: {x: 0.893314, y: 0.200465, z: 0.6386255}
   m_DirtyAABB: 0
---- !u!114 &5800209350536526030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6870264395378993215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_version: 1.2.1
-  m_layers: []
-  m_hideRenderer: 0
-  m_hideEditorSelection: 0
-  m_spriteRenderer: {fileID: 0}
 --- !u!1 &6909575831948048788
 GameObject:
   m_ObjectHideFlags: 0

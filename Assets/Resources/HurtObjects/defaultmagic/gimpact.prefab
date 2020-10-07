@@ -43048,9 +43048,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 3
+  damage_type: 6
   _WeaponMode: 2
-  weaponHP: -1
+  weaponHP: 1
   onGroundMagic: 1
   effectSpreadOnBody: 0
   zokusei: 3

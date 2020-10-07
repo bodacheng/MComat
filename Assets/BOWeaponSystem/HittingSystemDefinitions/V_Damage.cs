@@ -62,6 +62,9 @@ namespace HittingDetection
                 case 10:
                     damageType = DamageType.same_height_to_mid;
                     break;
+                case 11:
+                    damageType = DamageType.time_pause;
+                    break;
                 default:
                     damageType = DamageType.light_damage_forward;
                     break;

@@ -90,6 +90,9 @@ public partial class Hurt_State : Behavior {
             case DamageType.same_height_to_mid:
                 PushToMidStart(target, 4f, false);
                 break;
+            case DamageType.time_pause:
+                TimePauseStart();
+                break;
         }
         
         if (target.from_weapon.effectSpreadOnBody)
@@ -128,6 +131,13 @@ public partial class Hurt_State : Behavior {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
+        switch (target.from_weapon.damage_type)
+        {
+            case DamageType.time_pause:
+                _Animator.speed = 1;
+                shaderManager.FlatColor(0, Color.white);
+            break;
+        }
         _Rigidbody.mass = 100;
         if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
             physicMissionDisposable.Dispose();

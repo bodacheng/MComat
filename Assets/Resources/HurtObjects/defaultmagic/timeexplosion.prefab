@@ -77286,7 +77286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 1.3
   SpecificTarget: 0
-  damage_type: 6
+  damage_type: 11
   _WeaponMode: 2
   weaponHP: -1
   onGroundMagic: 1

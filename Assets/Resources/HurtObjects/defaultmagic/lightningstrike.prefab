@@ -72648,7 +72648,7 @@ MonoBehaviour:
   effectSpreadOnBody: 1
   zokusei: 4
   muzzle: 
-  ExplosionEffect: energy_resolve
+  ExplosionEffect: electric_s_e
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!114 &8554431029063623610
@@ -72670,7 +72670,7 @@ MonoBehaviour:
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
-  _HitTriggerEvent: 
+  Counter: 0
 --- !u!82 &1063247827281357279
 AudioSource:
   m_ObjectHideFlags: 0

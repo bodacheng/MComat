@@ -115984,7 +115984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 2061028042329074931}
   TrackControl: {fileID: 0}
-  DestructionDelay: 1.8
+  DestructionDelay: 2
   stop_emission_delay: 1.4
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
@@ -116006,7 +116006,7 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 5
   _WeaponMode: 2
-  weaponHP: -1
+  weaponHP: 1
   onGroundMagic: 1
   effectSpreadOnBody: 0
   zokusei: 2
