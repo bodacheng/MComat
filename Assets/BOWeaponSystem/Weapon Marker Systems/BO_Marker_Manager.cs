@@ -91,10 +91,12 @@ namespace HittingDetection
             List<BO_Marker> bms = new List<BO_Marker>();
             for (int i = 0; i < children.Length; i++)
             {
-                if (_MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>() != null)
+                BO_Marker bO_Marker = _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>();
+                if (bO_Marker != null)
                 {
-                    _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>().LocalAwake();
-                    bms.Add(_MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>());
+                    bO_Marker.LocalAwake();
+                    bms.Add(bO_Marker);
+                    bO_Marker.SetOwner(this);
                     Collider colliderofmarker = _MarkersParent.GetChild(i).gameObject.GetComponent<Collider>();
                     HitBoxesProcesser.AddToColliderHitBoxDic(colliderofmarker, this);
                 }
@@ -160,7 +162,7 @@ namespace HittingDetection
             _Shields_Hit.Clear();
             for (int i = 0; i < _markers.Length; i++)
             {
-                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer, V_Damage.WeaponHeavyCal(damage_type));
+                _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer);
             }
             Enabled = true;
         }

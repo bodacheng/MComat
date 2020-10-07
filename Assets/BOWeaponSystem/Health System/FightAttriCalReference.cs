@@ -6,6 +6,7 @@ using HittingDetection;
 public partial class FightAttriCalReference : MonoBehaviour
 {
     public static List<Collider> AllMeatColliders = new List<Collider>();
+    public static FightAttriCalReference AvoidNullCheck = new FightAttriCalReference();
     
     [Tooltip("数据中心")]
     public Data_Center _Center;

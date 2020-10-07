@@ -17,13 +17,13 @@ namespace HittingDetection
         [Tooltip("Choose which Layers should be affected by this marker's hit check.")]
         public LayerMask _layers;
         public LayerMask enemyShieldLayer;
+        
         protected SphereCollider myCollider;
-
-        public int PowerLevel { get; set; } = 1;
-
-        public int GetPowerLevel()
+        protected BO_Marker_Manager owner;
+        
+        public void SetOwner(BO_Marker_Manager b)
         {
-            return PowerLevel;
+            this.owner = b;
         }
         
         public virtual bool HitCheck()
@@ -40,10 +40,9 @@ namespace HittingDetection
             }
         }
         
-        public virtual void EnableMarkerProcess(int weaponLayer, int attackLevel)
+        public virtual void EnableMarkerProcess(int weaponLayer)
         {
             gameObject.layer = weaponLayer;
-            PowerLevel = attackLevel;
         }
         
         public virtual void DisableMarkerProcess()

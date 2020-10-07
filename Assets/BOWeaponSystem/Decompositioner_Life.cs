@@ -7,7 +7,7 @@ public partial class Decompositioner : MonoBehaviour
     float dis_from_center;
     public void Life()
     {
-        if (Phase == 1 && _HitBox != null)
+        if (Phase == 1 && IsWeapon)
         {
             switch (_HitBox._WeaponMode)
             {
@@ -19,15 +19,12 @@ public partial class Decompositioner : MonoBehaviour
                         Counter = stop_emission_delay;
                         Phase = 2;
                     }
-                    if (_HitBox.GetOwnerFightAttriCalReference() != null)
+                    if (_HitBox.GetOwnerFightAttriCalReference().IFgettingDamage())
                     {
-                        if (_HitBox.GetOwnerFightAttriCalReference().IFgettingDamage())
-                        {
-                            CloseMarkers();
-                            StopEmissions(false);
-                            Counter = stop_emission_delay;
-                            Phase = 2;
-                        }
+                        CloseMarkers();
+                        StopEmissions(false);
+                        Counter = stop_emission_delay;
+                        Phase = 2;
                     }
                 break;
                 case WeaponMode.FlyerWeapon:

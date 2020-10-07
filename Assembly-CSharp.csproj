@@ -366,6 +366,8 @@
     <Compile Include="Assets\JsonSupport\UnityLitJson\ParserToken.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Platform.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
+    <Compile Include="Assets\Language\LanguageCodeTable.cs" />
+    <Compile Include="Assets\Language\LanguageConverter.cs" />
     <Compile Include="Assets\Mail\MailManager.cs" />
     <Compile Include="Assets\Mail\MailModel.cs" />
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />

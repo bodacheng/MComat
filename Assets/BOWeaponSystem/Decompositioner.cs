@@ -23,7 +23,7 @@ public partial class Decompositioner : MonoBehaviour {
     
     [Tooltip("附属物体。这个只能自己把握。")]
     public string[] Attachments;
-    
+
     #region realtime
     DecompositionerPool _DecompositionerPool;
     PositionConstraint positionConstraint;
@@ -31,11 +31,14 @@ public partial class Decompositioner : MonoBehaviour {
     ParticleSystem to_be_stop_emissions;
     public float Counter;
     public int Phase { get; set; }
+    public bool IsWeapon { get; set; }
+    public bool hasParticle { get; set; }
     #endregion
 
     void Awake()
     {
         to_be_stop_emissions = gameObject.GetComponent<ParticleSystem>();
+        hasParticle = to_be_stop_emissions != null;
     }
 
     public void SetPool(DecompositionerPool _DecompositionerPool)
@@ -73,14 +76,10 @@ public partial class Decompositioner : MonoBehaviour {
         {
             Counter = 0;
         }
-        if (_HitBox != null)
-        {
+        if (IsWeapon)
             _HitBox.CurrentHP = _HitBox.weaponHP;
-        }
-        if (to_be_stop_emissions != null)
-        {
+        if (hasParticle)
             to_be_stop_emissions.Play(true);
-        }
         if (audioSource)
         {
             audioSource.volume = AudioManager.effectsVolumn;
@@ -96,45 +95,46 @@ public partial class Decompositioner : MonoBehaviour {
     void EnergyRessolve()
     {
         StopEmissions(true);
-        if (this == null)
-            Debug.Log("见鬼了");
-        if (_DecompositionerPool == null)
-            Debug.Log(this + "见鬼了");
         _DecompositionerPool.Return(this);
     }
     
     public void CloseMarkers()
     {
-        if (_HitBox != null)
+        if (IsWeapon)
         {
             _HitBox.Local_OnDisable();// 与Local_OnDisable()内的Local_OnDisable看起来重复，意思就是说
-            _HitBox.SetOwnerFightAttriCalReference(null);
+            _HitBox.SetOwnerFightAttriCalReference(FightAttriCalReference.AvoidNullCheck);
         }
     }
     
     public void Step1()
     {
-        if (Phase == 1 && _HitBox != null)
+        if (Phase == 1)
         {
-            _HitBox.LocalUpdate();
+            if (IsWeapon)
+                _HitBox.LocalUpdate();
         }
     }
     public void Step2()
     {
-        if (Phase == 1 && _HitBox != null)
+        if (Phase == 1)
         {
-            _HitBox.LocalLateUpdate();
+            if (IsWeapon)
+                _HitBox.LocalLateUpdate();
         }
     }
 
     public void StopEmissions(bool clearParticles)
     {
-        if (to_be_stop_emissions != null && to_be_stop_emissions.isPlaying)
+        if (hasParticle)
         {
-            if (clearParticles)
-                to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            else
-                to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            if (to_be_stop_emissions.isPlaying)
+            {
+                if (clearParticles)
+                    to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                else
+                    to_be_stop_emissions.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
         }
     }
 
@@ -145,13 +145,9 @@ public partial class Decompositioner : MonoBehaviour {
         
         for (int i = 0; i < to_be_faded_renderers.Count; i++)
         {
-            if (to_be_faded_renderers[i] != null)
+            for (int y = 0; y < to_be_faded_renderers[i].materials.Length; y++)
             {
-                for (int y = 0; y < to_be_faded_renderers[i].materials.Length; y++)
-                {
-                    if (to_be_faded_renderers[i].materials[y] != null)
-                        to_be_faded_renderers[i].materials[y].SetColor("_TintColor", new Color(to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").r,to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").g, to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").b, a));
-                }
+                to_be_faded_renderers[i].materials[y].SetColor("_TintColor", new Color(to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").r,to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").g, to_be_faded_renderers[i].materials[y] .GetColor("_TintColor").b, a));
             }
         }
     }

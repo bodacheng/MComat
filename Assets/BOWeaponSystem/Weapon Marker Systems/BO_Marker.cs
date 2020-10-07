@@ -13,7 +13,7 @@ namespace HittingDetection
         {
             return BallDetectHitPool;
         }
-
+        
         public override void LocalAwake()
         {
             base.LocalAwake();
@@ -26,9 +26,9 @@ namespace HittingDetection
             return BallDetectHitPool.Count > 0;
         }
         
-        public override void EnableMarkerProcess(int weaponLayer, int attackLevel)
+        public override void EnableMarkerProcess(int weaponLayer)
         {
-            base.EnableMarkerProcess(weaponLayer, attackLevel);
+            base.EnableMarkerProcess(weaponLayer);
         }
         
         public override void DisableMarkerProcess()
@@ -56,7 +56,7 @@ namespace HittingDetection
             BallDetectModeDetection(other);
         }
 
-        Marker tempM;
+        BO_Marker_Manager tempM;
         float tempWHpCost;
         void BallDetectModeDetection(Collider other)
         {
@@ -67,9 +67,9 @@ namespace HittingDetection
             {
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
-                    tempM = other.GetComponent<Marker>();
-                    tempWHpCost = tempM != null ? V_Damage.WpHpCost(PowerLevel, tempM.PowerLevel) : 1;
-                    HitPointPara hitPointPara = new HitPointPara()
+                    HitBoxesProcesser.ColliderHitBox.TryGetValue(other, out BO_Marker_Manager hit_hitbox);
+                    tempWHpCost = tempM != null ? V_Damage.WpHpCost(V_Damage.WeaponHeavyCal(owner.damage_type), V_Damage.WeaponHeavyCal(tempM.damage_type)) : 1;
+                    HitPointPara hitPointPara = new HitPointPara
                     {
                         pos = HitPointCal(other.transform.position),
                         qua = Quaternion.LookRotation(other.transform.position - HitPointCal(other.transform.position), Vector3.up),

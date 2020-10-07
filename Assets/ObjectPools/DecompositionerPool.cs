@@ -115,13 +115,14 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             decompositioner.audioSource.minDistance = 20;
             decompositioner.audioSource.maxDistance = 80;
         }
+        
         if (BBMM != null)
         {
             BBMM.CurrentHP = BBMM.weaponHP;
             decompositioner._HitBox = BBMM;
             BBMM.SetDecompositioner(decompositioner);
         }
-        
+        decompositioner.IsWeapon = decompositioner._HitBox != null;
         decompositioner.SetPositionConstraint(PC);
         decompositioner.TrackControl = danMuTest;
         decompositioner.SetPool(this);
