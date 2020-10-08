@@ -124,25 +124,25 @@ public class Defend_State : Behavior
          switch(newValue.from_weapon.damage_type)
          {
             case DamageType.light_damage_forward:
-                Animation_Manger.AnimationTrigger(block_break_name,true, 0.05f);
+                Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);
             break;
             case DamageType.heavy_damage_forward:
-                Animation_Manger.AnimationTrigger(block_break_name,true, 0.05f);
+                Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                 DefendHPfade(newValue);
             break;
             case DamageType.supper_damage_forward:
-                Animation_Manger.AnimationTrigger(block_break_name,true, 0.05f);
+                Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                 DefendHPfade(newValue);
             break;
             default:
-                Animation_Manger.AnimationTrigger(block_break_name,true, 0.05f);
+                Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                 _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
                 used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                 DefendHPfade(newValue);

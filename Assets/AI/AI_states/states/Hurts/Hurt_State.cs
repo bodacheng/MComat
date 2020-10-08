@@ -45,11 +45,36 @@ public partial class Hurt_State : Behavior {
                     RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
                 }
             }
-        }       
+        }
+    }
+    
+    public override void AI_State_exit()
+    {
+        base.AI_State_exit();
+        switch (target.from_weapon.damage_type)
+        {
+            case DamageType.time_pause:
+            case DamageType.sekka:
+                _Animator.speed = 1;
+                shaderManager.FlatColor(0, Color.white);
+            break;
+        }
+        _Rigidbody.mass = 100;
+        if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
+            physicMissionDisposable.Dispose();
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        _FightAttriCalRef.SetGettingDamageState(false);
+        _BasicPhysicSupport.SetUsingGravity(true);
     }
     
     public override void AI_State_enter(V_Damage newValue)
 	{
+        if (_AIStateRunner.GetLastState().StateType == Skill.BehaviorType.Hit && target.from_weapon.damage_type == DamageType.time_pause)
+        {
+            TimePauseStart();
+            return;
+        }
+        
         target = newValue;
         base.AI_State_enter();
         _Rigidbody.mass = 80;
@@ -58,6 +83,7 @@ public partial class Hurt_State : Behavior {
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         TimeCounter = 0f;
+        pEvents.CloseAllPersonalityEffects();
         switch (target.from_weapon.damage_type)
         {
             case DamageType.slight_damage_forward:
@@ -82,17 +108,21 @@ public partial class Hurt_State : Behavior {
                 PushToMidStart(target, 10f, true);
             break;
             case DamageType.high:
-                HighDamgeStart(target);
-                break;
+                // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
+                _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
+                return;
             case DamageType.push_to_mid_slight:
                 PushToMidStart(target, 4f, true);
-                break;
+            break;
             case DamageType.same_height_to_mid:
                 PushToMidStart(target, 4f, false);
-                break;
+            break;
+            case DamageType.sekka:
+                SekkaStart(target.from_weapon.zokusei);
+            break;
             case DamageType.time_pause:
                 TimePauseStart();
-                break;
+            return;
         }
         
         if (target.from_weapon.effectSpreadOnBody)
@@ -107,7 +137,6 @@ public partial class Hurt_State : Behavior {
             return;
         }
         
-        pEvents.CloseAllPersonalityEffects();
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
     }
@@ -126,23 +155,5 @@ public partial class Hurt_State : Behavior {
     public override bool Capacity_Exit_Condition()
     {
         return TimeCounter > used_dizzy_time;
-    }
-
-    public override void AI_State_exit()
-    {
-        base.AI_State_exit();
-        switch (target.from_weapon.damage_type)
-        {
-            case DamageType.time_pause:
-                _Animator.speed = 1;
-                shaderManager.FlatColor(0, Color.white);
-            break;
-        }
-        _Rigidbody.mass = 100;
-        if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
-            physicMissionDisposable.Dispose();
-        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        _FightAttriCalRef.SetGettingDamageState(false);
-        _BasicPhysicSupport.SetUsingGravity(true);
     }
 }

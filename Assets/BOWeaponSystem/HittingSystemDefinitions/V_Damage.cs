@@ -65,6 +65,9 @@ namespace HittingDetection
                 case 11:
                     damageType = DamageType.time_pause;
                     break;
+                case 12:
+                    damageType = DamageType.sekka;
+                    break;
                 default:
                     damageType = DamageType.light_damage_forward;
                     break;

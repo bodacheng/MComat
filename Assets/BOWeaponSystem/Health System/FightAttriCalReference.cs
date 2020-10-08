@@ -188,7 +188,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     float _d;
     public void ApplyDamage(V_Damage _dmg)
 	{
-        if (_Center._MyBehaviorRunner.GetNowState().StateKey == "Defend" && _Center._ResistanceManager.Resistance.Value > 0)
+        if (_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Def && _Center._ResistanceManager.Resistance.Value > 0)
         {
             _Center._MyBehaviorRunner.ChangeState("Defend", _dmg);
             HitEffect(_dmg);

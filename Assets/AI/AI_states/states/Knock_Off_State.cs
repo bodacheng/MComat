@@ -9,7 +9,9 @@ public class Knock_Off_State : Behavior
     Vector3 _xz;
     bool touchedBoundary;
     bool dropped, canWakeUp;
-
+    AnimationCurve usedYCurve;
+    AnimationCurve usedZCurve;
+    
     public Knock_Off_State()
     {
         StateType = BehaviorType.KnockOff;
@@ -17,7 +19,7 @@ public class Knock_Off_State : Behavior
     
     public override void Pre_process_before_enter()
     {
-		base.Pre_process_before_enter ();
+		base.Pre_process_before_enter();
     }
     
     public override void AI_State_enter(V_Damage newValue)
@@ -38,6 +40,8 @@ public class Knock_Off_State : Behavior
         _xz = newValue.attacker._Center.WholeT.forward;
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.damageHappenPoint, newValue.CutRotation, null);
+        usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
+        usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
     }
 
     public override bool Capacity_Exit_Condition()
@@ -95,8 +99,8 @@ public class Knock_Off_State : Behavior
                 time_counter = 0;//开始针对躺地时间记时
             }else{
                 gameObject.transform.position += 
-                _xz * (FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffzAnimationCurve.Evaluate(time_counter)) +
-                Vector3.up * (FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter + Time.fixedDeltaTime) - FightGlobalSetting._knockOffyAnimationCurve.Evaluate(time_counter));
+                _xz * (usedZCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedZCurve.Evaluate(time_counter)) +
+                Vector3.up * (usedYCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedYCurve.Evaluate(time_counter));
             }
         }else{
             if (time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime)

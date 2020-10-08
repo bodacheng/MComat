@@ -75101,6 +75101,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
+  - time: 0.15
+    functionName: PrepareOneMagic
+    data: lightningmuzzle
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.2
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
@@ -75108,11 +75115,18 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.28333333
-    functionName: MagicForward
-    data: lightningmuzzle
+  - time: 0.3
+    functionName: ReleasePreparedMagic
+    data: right_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 2
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.3
+    functionName: ReleasePreparedMagic
+    data: left_hand
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.36666667

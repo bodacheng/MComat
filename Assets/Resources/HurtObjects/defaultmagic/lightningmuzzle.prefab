@@ -9483,15 +9483,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 1
+  damage_type: 12
   _WeaponMode: 2
-  weaponHP: -1
+  weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
-  zokusei: 0
+  zokusei: 2
   muzzle: 
-  ExplosionEffect: energy_resolve
-  ContinuousDamage: 1
+  ExplosionEffect: ice_smoke
+  ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!111 &4980780050557549806
 Animation:

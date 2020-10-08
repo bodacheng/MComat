@@ -11,7 +11,7 @@ namespace Soul
         public List<SkillEntity> SkillEntity_List;
         Behaviors_Incubator _States_Incubator;
         #endregion
-
+        
         #region 辅助模块：技能链接时机判断器
         public SkillCancelFlag _SkillCancelFlag;
         #endregion
@@ -19,20 +19,19 @@ namespace Soul
         #region 辅助模块：控制器
         public Controller controller;
         #endregion
-
+        
         #region 运行时活参数
         public SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity CurrentSKillEntity;
         SkillEntity tempSKillEntity;
-
+        
         Empty_State empty_State = new Empty_State();
         Behavior now_Behavior;
         Behavior last_Behavior;
         Behavior try_Behavior;
         public Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
-        
         #endregion
 
         void Awake()
