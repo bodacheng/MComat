@@ -28404,10 +28404,10 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 5
   _WeaponMode: 2
-  weaponHP: 3
+  weaponHP: 2
   onGroundMagic: 1
   effectSpreadOnBody: 1
-  zokusei: 0
+  zokusei: 3
   muzzle: 
   ExplosionEffect: energy_resolve
   ContinuousDamage: 1
@@ -28426,8 +28426,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 8777032696470910540}
   TrackControl: {fileID: 8948687465943688710}
-  DestructionDelay: 1.6
-  stop_emission_delay: 1.5
+  DestructionDelay: 1
+  stop_emission_delay: 0.2
   to_be_faded_renderers: []
   audioSource: {fileID: 0}
   Attachments: []
@@ -28439,7 +28439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8060952551503919237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
   m_Name: 
@@ -28484,4 +28484,5 @@ MonoBehaviour:
   Z_scale: 1
   navi_time: 5
   DegreeOfControl: 1
+  navRunSpeed: 10
   Sensor: {fileID: 0}

@@ -128,7 +128,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 127,frank_riseup3,human,1,10,CT,2,3,10,,1
 128,frank_smashground,human,1,10,GI,1,6,8,,1
 129,frankfury,human,1,10,GI,2,1,5,,3
-130,hellfirekick,human,1,10,GI,1,5,15,,3
+130,hellfirekick,human,1,10,GI,1,2,5,,3
 131,highlevelbo,human,1,10,GI,1,3,10,,2
 132,highspeedbo,human,1,10,GI,0,3,10,,2
 133,spike,human,1,10,GI,0,3,10,,2
