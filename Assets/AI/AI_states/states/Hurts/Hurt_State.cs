@@ -55,7 +55,7 @@ public partial class Hurt_State : Behavior {
         {
             case DamageType.time_pause:
             case DamageType.sekka:
-                _Animator.speed = 1;
+                Animation_Manger.Speed = 1;
                 shaderManager.FlatColor(0, Color.white);
             break;
         }

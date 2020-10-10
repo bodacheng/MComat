@@ -7,7 +7,7 @@ public partial class Hurt_State : Behavior
     Color freeze = new Color(0.1f, 0.1f, 0.8f);
     void SekkaStart(Zokusei zokusei)
     {
-        _Animator.speed = 0;
+        Animation_Manger.Speed = 0;
         used_dizzy_time = FightGlobalSetting._superhit_lastingtime * 2;
         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);

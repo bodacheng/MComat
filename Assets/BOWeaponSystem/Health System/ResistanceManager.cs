@@ -43,6 +43,7 @@ public class ResistanceManager : MonoBehaviour
         );
     }
     
+    Color speedbuff = new Color(0.2f, 0.2f, 1f);
     public void ResistanceUp(AnimationEvent R)
     {
         Resistance.Value += R.intParameter;                      
@@ -59,7 +60,11 @@ public class ResistanceManager : MonoBehaviour
                 {
                     Resistance.Value = 0;
                 };
-                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.2f, eventEnd);
+                CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.8f, 
+                () =>
+                {
+                    return data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit;
+                }, eventEnd);
                 temp = Resistance.Value;
                 var disposable = new SingleAssignmentDisposable();
                 disposabletasks.Add(disposable);
@@ -70,6 +75,41 @@ public class ResistanceManager : MonoBehaviour
                     {
                         data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
                         disposable.Dispose();
+                    }
+                });
+                break;
+            case "speedup":
+                UnityEngine.Events.UnityAction eventStart3 = () =>
+                {
+                    data_Center._SkillCancelFlag.turn_on_flag();
+                    Resistance.Value += 1;
+                    data_Center._ShaderManager.FlatColor(0.5f, speedbuff);
+                    data_Center.Animation_Manger.Speed = 2f;
+                    EffectsManager.GenerateEffect("speedupbuff", "defaultmagic", data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT);
+                };
+                UnityEngine.Events.UnityAction eventEnd3 = () =>
+                {
+                    data_Center.Animation_Manger.Speed = 1f;
+                    Resistance.Value = 0;
+                    data_Center._ShaderManager.FlatColor(0f, Color.clear);
+                };
+                
+                CustomCoroutine eventCoroutine3 = new CustomCoroutine(
+                    eventStart3, 0.8f,
+                     () =>
+                     {
+                         return data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit;
+                     }, eventEnd3);
+                temp = Resistance.Value;
+                var disposable3 = new SingleAssignmentDisposable();
+                disposabletasks.Add(disposable3);
+                disposable3.Disposable = Observable.EveryUpdate()
+                .Subscribe(_ =>
+                {
+                    if (Resistance.Value < temp)
+                    {
+                        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine3);
+                        disposable3.Dispose();
                     }
                 });
                 break;

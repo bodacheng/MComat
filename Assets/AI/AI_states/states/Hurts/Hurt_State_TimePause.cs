@@ -6,7 +6,7 @@ public partial class Hurt_State : Behavior
     Color gold = new Color(1f,1,0.2f);
     void TimePauseStart()
     {
-        _Animator.speed = 0;
+        Animation_Manger.Speed = 0;
         used_dizzy_time = FightGlobalSetting._superhit_lastingtime * 2;
         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);

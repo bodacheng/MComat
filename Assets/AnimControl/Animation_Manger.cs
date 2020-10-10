@@ -18,9 +18,19 @@ public partial class Animation_Manger : MonoBehaviour
     IDictionary<string, AnimationClip> toLoadAnims;
     string to_be_override_animation_name;
 
+    float speed = 1;
+    public float Speed { 
+        get => speed; 
+        set
+        {
+            speed = value;
+            Animator.speed = speed;
+        }
+    }
+    
     public void FrameFreeze()
     {
-        DOTween.To(() => Animator.speed, x => Animator.speed = x, 0f, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, 1f, 0.08f).SetEase(Ease.InExpo); });
+        DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.08f).SetEase(Ease.InExpo); });
     }
     
 	public AnimationClip TryAnimationClip(string clip_name)
@@ -48,7 +58,8 @@ public partial class Animation_Manger : MonoBehaviour
     }
 
     AnimatorStateInfo AnimatorStateInfo;
-    AnimatorOverrideController animatorOverride;    
+    AnimatorOverrideController animatorOverride;
+    
     public void PlayLayerAnim(string clip_name, bool in_transition,float Duration)
     {
         AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(1);

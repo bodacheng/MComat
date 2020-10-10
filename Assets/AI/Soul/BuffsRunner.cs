@@ -4,7 +4,7 @@ using UnityEngine;
 public class BuffsRunner : MonoBehaviour
 {
     #region 自定义携程
-    readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
+    public readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
     readonly List<CustomCoroutine> endedcustomCoroutines = new List<CustomCoroutine>();
     #endregion
 
@@ -55,21 +55,51 @@ public class BuffsRunner : MonoBehaviour
     }
 }
 
+public delegate bool EndConditionDelegate();
+
 public class CustomCoroutine
 {
     bool processing;
+    
     UnityEngine.Events.UnityAction startaction;
     UnityEngine.Events.UnityAction endaction;
+    readonly EndConditionDelegate endCondition;
     readonly float processtime;
     float timecounter;
-
-    public CustomCoroutine(UnityEngine.Events.UnityAction startaction,float processtime,UnityEngine.Events.UnityAction endaction)
+    
+    public CustomCoroutine(UnityEngine.Events.UnityAction startaction, float processtime, UnityEngine.Events.UnityAction endaction)
     {
         this.startaction = startaction;
         this.processtime = processtime;
         this.endaction = endaction;
+        endCondition = TimeOver;
         processing = false;
         timecounter = 0;
+    }
+    
+    public CustomCoroutine(UnityEngine.Events.UnityAction startaction, float processtime, EndConditionDelegate c ,UnityEngine.Events.UnityAction endaction)
+    {
+        this.startaction = startaction;
+        this.processtime = processtime;
+        this.endaction = endaction;
+        endCondition = TimeOver;
+        endCondition = EndConditionCombine(endCondition, c);
+        processing = false;
+        timecounter = 0;
+    }
+    
+    EndConditionDelegate EndConditionCombine(EndConditionDelegate a, EndConditionDelegate b)
+    {
+        bool c()
+        {
+            return a() || b();
+        }
+        return c;
+    }
+    
+    bool TimeOver()
+    {
+        return timecounter >= processtime;
     }
 
     public void CustomCoroutineTrigger()
@@ -87,16 +117,17 @@ public class CustomCoroutine
 
     public void CustomCoroutineProcess()
     {
-        if (processing && timecounter < processtime)
+        if (processing && !endCondition())
         {
             timecounter += Time.fixedDeltaTime;
-            if (timecounter >= processtime)
+            if (endCondition())
             {
                 processing = false;
                 endaction.Invoke();
             }
         }
     }
+    
     public bool IfProcessing()
     {
         return processing;

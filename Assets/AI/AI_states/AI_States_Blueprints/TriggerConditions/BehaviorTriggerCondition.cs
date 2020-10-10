@@ -32,6 +32,16 @@ namespace Soul
             return nearestEnemyMeat == null && (threat != null);
         }
         
+        public bool CT()
+        {
+            return !OnBuff() && DangerousVeryClose();
+        }
+        
+        public bool OnBuff()
+        {
+            return _DATA_CENTER.buffsRunner.mysubmissions.Count > 0;
+        }
+        
         public bool DangerousVeryClose() //CT
         {
             if (_ResistanceManager.Resistance.Value > 0)
@@ -57,11 +67,11 @@ namespace Soul
             }
             return false;
         }
-        
-        public bool EnemyNotClose()
+                
+        public bool EnemyClose()
         {
             tar = Sensor.GetTargetRangeEnemyCollider(0, 5);
-            return tar == null;
+            return tar != null;
         }
 
         Collider tar;
