@@ -66,9 +66,9 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     {
         if (FightGlobalSetting.HitBoxLogger)
         {
-            if (instance._HitBox != null)
+            if (instance.IsWeapon)
             {
-                HitBoxLogger.Instance.AddLog(instance._HitBox.GeneratedByStateKey,instance._HitBox.HitBoxLifeEnding);
+                HitBoxLogger.Instance.AddLog(instance._HitBox.GeneratedByStateKey, instance._HitBox.HitBoxLifeEnding);
                 instance._HitBox.GeneratedByStateKey = null;
             }
         }

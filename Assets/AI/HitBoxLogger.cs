@@ -33,6 +33,7 @@ public class HitBoxLogger
         successedtimes.Clear();
     }
     
+    // 获取现版本text
     public string LoadCurrentToString()
     {
         if (File.Exists(Application.persistentDataPath + "/HitBoxLog.csv"))
@@ -96,4 +97,11 @@ public class HitBoxLogger
             }
         }
     }
+}
+
+public enum HitBoxLifeEnding
+{
+    untouched = 1,
+    touched = 2,
+    successed = 3
 }

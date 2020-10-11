@@ -14,19 +14,19 @@ namespace Soul
         {
             MyBehaviourHistory.Add(behaviourHistory);
         }
-
+        
         public class FightRecord
         {
             public string stateKey;
             public BehaviorType behaviorType;
         }
-
+        
         public class BehaviourFightRecord : FightRecord
         {
             public bool AI_Decided;
             public string whyIDidThis;
         }
-
+        
         public class PositiveRecord : FightRecord
         {
         }
@@ -78,12 +78,12 @@ namespace Soul
         readonly MultiDictionary<string, string, int> skillnobenefitlog = new MultiDictionary<string, string, int>();
         public void AnalysisLog(MultiDictionary<string, string, int> _ConditionAndRespondPriority)
         {
-            if (MyBehaviourHistory.Count < 10)
+            if (MyBehaviourHistory.Count % 10 != 0 || MyBehaviourHistory.Count < 10)
             {
                 return;
             }
             skillnobenefitlog.Clear();
-            for (int i = 2; i < MyBehaviourHistory.Count; i++)
+            for (int i = MyBehaviourHistory.Count - 10 + 2; i < MyBehaviourHistory.Count; i++)
             {
                 FightRecord fightRecord = MyBehaviourHistory[i];
                 if (fightRecord is BehaviourFightRecord)
@@ -126,7 +126,6 @@ namespace Soul
                     }
                 }
             }
-            MyBehaviourHistory.Clear();
         }
     }
 }

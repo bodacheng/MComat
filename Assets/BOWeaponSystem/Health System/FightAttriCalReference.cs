@@ -216,13 +216,14 @@ public partial class FightAttriCalReference : MonoBehaviour
             return;
         }
         
-        _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
         _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
             new Soul.SingleFightLog.NegativeRecord
             {
                 //被打了，属于负面效益
             }
         );
+        _Center._MyBehaviorRunner.SingleFightLog.AnalysisLog(_Center._MyBehaviorRunner.ConditionAndRespondPriority);
+        _Center._MyBehaviorRunner.ChangeState("Hit", _dmg);
         _dmg.from_weapon.HitBoxLifeEnding = HitBoxLifeEnding.successed;
     }
     
@@ -235,6 +236,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                 //打了别人，属于正面效益
             }
         );
+        _Center._MyBehaviorRunner.SingleFightLog.AnalysisLog(_Center._MyBehaviorRunner.ConditionAndRespondPriority);
         _Center._MyBehaviorRunner.GetNowState().EnergyAbsorb(criticalGaugeMode);
     }//打别人计数
     

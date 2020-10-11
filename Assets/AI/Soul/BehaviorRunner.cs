@@ -67,7 +67,6 @@ namespace Soul
                 {
                     now_Behavior._State_Update();
                 }
-                SingleFightLog.AnalysisLog(ConditionAndRespondPriority);
             }
         }
 

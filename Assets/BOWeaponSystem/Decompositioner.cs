@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
 
-public enum HitBoxLifeEnding
-{
-    untouched = 1,
-    touched = 2,
-    successed = 3
-}
-
 public partial class Decompositioner : MonoBehaviour {
 
     public BO_Marker_Manager _HitBox;

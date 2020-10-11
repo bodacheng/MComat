@@ -75,15 +75,17 @@ public class HitBoxLogTable
             {
                 continue;
             }
-            Row row = new Row();
-            row.RECORD_ID = grid[i][0];
-            row.REAL_NAME = grid[i][1];
-            row.USEABLE_MONSTER_TYPE = grid[i][2];
-            row.Untouched = grid[i][3];
-            row.Touched = grid[i][4];
-            row.Successed = grid[i][5];
-            row.TriggerdTimes = grid[i][6];
-            row.InteruptedTimes = grid[i][7];
+            Row row = new Row
+            {
+                RECORD_ID = grid[i][0],
+                REAL_NAME = grid[i][1],
+                USEABLE_MONSTER_TYPE = grid[i][2],
+                Untouched = grid[i][3],
+                Touched = grid[i][4],
+                Successed = grid[i][5],
+                TriggerdTimes = grid[i][6],
+                InteruptedTimes = grid[i][7]
+            };
             rowList.Add(row);
         }
         isLoaded = true;
@@ -102,7 +104,7 @@ public class HitBoxLogTable
             IDictionary<string, int> one_triggerdtimes = singleFightLogs[index].StateTriggerTimes;
             IDictionary<string, int> one_interruptedTimes = singleFightLogs[index].StateInterruptedTimes;
             
-            foreach (KeyValuePair<string,int> keyValuePair in one_triggerdtimes)
+            foreach (KeyValuePair<string, int> keyValuePair in one_triggerdtimes)
             {
                 if (!StateTriggerTimes_whole.ContainsKey(keyValuePair.Key))
                 {
@@ -112,7 +114,7 @@ public class HitBoxLogTable
                 }
             }
             
-            foreach (KeyValuePair<string,int> keyValuePair in one_interruptedTimes)
+            foreach (KeyValuePair<string, int> keyValuePair in one_interruptedTimes)
             {
                 if (!StateInterruptedTimes_whole.ContainsKey(keyValuePair.Key))
                 {

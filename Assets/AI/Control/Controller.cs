@@ -42,6 +42,7 @@ namespace Soul
                                         whyIDidThis = null
                                     }
                                 );
+                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                                 behaviorRunner.ChangeState(Options[i].REAL_NAME);
                                 return;
                             }
@@ -58,6 +59,7 @@ namespace Soul
                                         whyIDidThis = null
                                     }
                                 );
+                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                                 behaviorRunner.ChangeState(Options[i].REAL_NAME);
                                 return;
                             }
@@ -74,6 +76,7 @@ namespace Soul
                                         whyIDidThis = null
                                     }
                                 );
+                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                                 behaviorRunner.ChangeState(Options[i].REAL_NAME);
                                 return;
                             }
@@ -89,6 +92,7 @@ namespace Soul
                                         whyIDidThis = null
                                     }
                                 );
+                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                                 behaviorRunner.ChangeState(Options[i].REAL_NAME);
                                 return;
                             }
@@ -104,6 +108,7 @@ namespace Soul
                                         whyIDidThis = null
                                     }
                                 );
+                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                                 behaviorRunner.ChangeState(Options[i].REAL_NAME);
                                 return;
                             }
@@ -196,6 +201,7 @@ namespace Soul
                                 whyIDidThis = finalConditionStakeKeySet[random].Key
                             }
                         );
+                        behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                     }
                     behaviorRunner.ChangeState(_SE.REAL_NAME);
                     return true;
