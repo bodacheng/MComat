@@ -75,7 +75,7 @@ class CertainYAntiVabration : CameraMode
         //下面的那个(meCenter.position + enemiescenter)，其实是说从0，0，0到他们
         CameraTargetPos = meCenter.position + xzOff.normalized * XZDis;//focuscenter + xzOff.normalized * XZDis;
         CameraTargetPos += Vector3.up * YDis;
-        fixy = Mathf.Clamp(CameraTargetPos.y, 3f, CameraTargetPos.y);
+        fixy = Mathf.Clamp(CameraTargetPos.y, YDis, CameraTargetPos.y);
         CameraTargetPos.y = fixy;
         //CameraTargetPos.y = Mathf.Clamp(YDis - angele / 180 * 10f, 6f,7f);//夹角越大，相机越低。夹角小说明两个角色在画面里一上一下，更俯视一些会看的更方便。
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, CameraTargetPos, Time.deltaTime / (0.2f + Time.deltaTime));//上下这两部分都是分母里那个附加值越大，变得越慢。

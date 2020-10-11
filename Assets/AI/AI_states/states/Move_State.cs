@@ -23,12 +23,13 @@ public class Move_State : Behavior
     
     enum AIMoveDirection
     {
-        stay = 0,
-        towardsEnemy = 1,
-        backTowardsEnemy = 2,
-        towardsEnemyRight = 6,
-        towardsEnemyLeft = 7,
-        RunAwayFromThreat = 5
+        stay,
+        towardsEnemy,
+        backTowardsEnemy,
+        towardsEnemyRight,
+        towardsEnemyLeft,
+        RunAwayFromThreat,
+        RunToBattleGroundCenter
     }
     
     public Move_State(AIMoveMode aiMoveStyle, float _speed, float _time_limit)
@@ -58,8 +59,9 @@ public class Move_State : Behavior
     {
         CommonEnter();
     }
-
-    public override void AI_State_enter()// 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
+    
+    // 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
+    public override void AI_State_enter()
     {
         CommonEnter();
         Sensor.ContinuousDetectionStart(-1);
@@ -105,16 +107,31 @@ public class Move_State : Behavior
                 if (time_counter > time_limit / 3)
                     return true;
                 break;
+            case AIMoveDirection.RunToBattleGroundCenter:
+                if (time_counter > time_limit / 3)
+                    return true;
+                break;
         }
         return false;
     }
     
     void DecideDirection()
     {
+        if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary && moveDirection == AIMoveDirection.RunToBattleGroundCenter)
+        {
+            // 非常粗糙的逻辑。意思是只要在边界并且已经是在往边界移动了，就不用再重新决策往哪跑了。和213行的逻辑相匹配
+            return;
+        }
         EnemiesByDistance = Sensor.GetEnemiesByDistance(true);
         switch (_AIMoveStyle)
         {
             case AIMoveMode.normal:
+                if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+                {
+                    moveDirection = AIMoveDirection.RunToBattleGroundCenter;
+                    use_direction = Vector3.zero - gameObject.transform.position;
+                    use_direction.y = 0;
+                }
                 if (EnemiesByDistance.Count > 0)
                 {
                     Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
@@ -133,7 +150,7 @@ public class Move_State : Behavior
                             break;
                         case 2:
                         case 3:
-                        case 4:                        
+                        case 4:
                             moveDirection = AIMoveDirection.towardsEnemy;
                             if (closetEnemyT != null)
                             {
@@ -193,11 +210,9 @@ public class Move_State : Behavior
         {
             Sensor.ContinuousDetectionStart(-1);//这个的真正目的是把检测关闭
         }
-        if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary) //这一段指的是AI模式下走位的问题。
+        if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
         {
-            use_direction = Vector3.zero - gameObject.transform.position;
-            use_direction.y = 0;
-            return;
+            DecideDirection();
         }
         
         if (Finished())
@@ -252,17 +267,17 @@ public class Move_State : Behavior
         {
             Sensor.OneRoundDetectionStart(1);
         }
-
+        
         if (mainCam != null)
-		{
+        {
             //get movement axis relative to camera
             screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
             screenMovementForward = screenMovementSpace * Vector3.forward;
             screenMovementRight = screenMovementSpace * Vector3.right;
             //get movement input, set direction to move in
             
-            h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
-            v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
+            h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
+            v = Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
             
             use_direction = (screenMovementForward * v) + (screenMovementRight * h);
         }else{

@@ -56,6 +56,8 @@ namespace mainMenu
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform MainMenuBottonsT;
         public RectTransform ArcadeTeamEditT;
+
+        static bool DataRead = false;
         
         void Awake()
         {
@@ -67,27 +69,14 @@ namespace mainMenu
         {
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
+            if (!DataRead)
+                mainProcessRunner.Run(DataLoad());
             mainProcessRunner.Run(StartUpProcess());
-            Screen.SetResolution(1920,1080, true);
+            Screen.SetResolution(1920, 1080, true);
         }
 
-        // 这个应该是和热更新进程完全分开了。
-        // 我们把场景加载时候需要进行加载的一些东西给总结到了一起
-        // 这里面的东西都是应该针对本地模式或联网模式来搞分歧处理。
-        // 这里面有的是读数据库，有的是和本地资源的循环有关，
-        // 应该有更好精致的机理来回避重复计算。
-        public IEnumerator StartUpProcess()
+        IEnumerator DataLoad()
         {
-            Application.targetFrameRate = 60;
-            _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-            _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-            MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
-            MainMenuCanvas.gameObject.SetActive(false);
-            
-            LoadingCanvas.target.TurnOnProcessDescription(true);
-            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
-
-            #region 数据读取
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
@@ -104,8 +93,21 @@ namespace mainMenu
             yield return AccountSet.LoadCustomerInfo(); // 缺response判断
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
             yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
-            #endregion
             
+            DataRead = true;
+        }
+
+        public IEnumerator StartUpProcess()
+        {
+            Application.targetFrameRate = 60;
+            _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
+            _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+            MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
+            MainMenuCanvas.gameObject.SetActive(false);
+            
+            LoadingCanvas.target.TurnOnProcessDescription(true);
+            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
+
             #region 主界面各大画面
             TopPage frontPage = new TopPage();
             TeamEditFront teamEditFront = new TeamEditFront();
