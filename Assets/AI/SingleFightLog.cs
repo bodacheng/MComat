@@ -76,6 +76,7 @@ namespace Soul
         }
 
         readonly MultiDictionary<string, string, int> skillnobenefitlog = new MultiDictionary<string, string, int>();
+        // 本函数的运行紧邻WriteLog之后
         public void AnalysisLog(MultiDictionary<string, string, int> _ConditionAndRespondPriority)
         {
             if (MyBehaviourHistory.Count % 10 != 0 || MyBehaviourHistory.Count < 10)
