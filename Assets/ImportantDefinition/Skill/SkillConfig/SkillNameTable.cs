@@ -12,7 +12,6 @@ public class SkillNameTable
 		public string EN_NAME;
 		public string JP_NAME;
 		public string CN_NAME;
-
 	}
     
     static IDictionary<string, string> SkillNameDic = new Dictionary<string, string>();

@@ -491,10 +491,14 @@
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicLightFlicker.cs" />
     <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicRotation.cs" />
     <Compile Include="Assets\RewardManager\RewardManager.cs" />
+    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer.cs" />
+    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzerGUI.cs" />
+    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_AT.cs" />
+    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Common.cs" />
+    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
+    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Rename.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManager.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManagerGUI.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\SKillAnalyzer.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\SKillAnalyzerGUI.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\StartUpPresentation.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\CachDownLoadMission.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\ResourceLordSceneUtil.cs" />

@@ -118,30 +118,24 @@ namespace mainMenu
         // 九宫格内技能显示功能
         public IEnumerator SkillShowRunWithPrepare(string keyname)
         {
-            CharConfig _watchingCharacterResourceInfo = MonstersConfigTable.GetCharConfig(focusCharConfigID);
+            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(focusCharConfigID);
             //下面这一大片，在资源存在的情况下压根不应该运行            
             if (focusingC.Animation_Manger != null)
             {
                 switch (ResourceLoadingSetting.AnimationLoadingMode)
                 {
                     case ResourceLoadMode.CachAB:
-                        yield return
-                            focusingC.Animation_Manger.PreloadPersonalAnim
-                            (ResourceLordSceneUtil.BundleURL, _watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
-                        break;
+                        yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceLordSceneUtil.BundleURL, _CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                    break;
                     case ResourceLoadMode.StreamingAssetAB:
-                        yield return
-                            focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode
-                            (_watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
-                        break;
+                        yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                    break;
                     case ResourceLoadMode.Resource:
-                        yield return
-                            focusingC.Animation_Manger.PreloadPersonalAnimResourceMode
-                            (_watchingCharacterResourceInfo.TYPE, keyname, _watchingCharacterResourceInfo.SPECIAL_ZOKUSEI, _watchingCharacterResourceInfo._zokusei);
-                        break;
+                        yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                    break;
                 }
                 IfShowingSkill = true;
-                focusingC.Animation_Manger.AnimationTrigger(keyname,true,0.05f);
+                focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
             }
             yield break;
         }

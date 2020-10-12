@@ -1,30 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-// 18 年年初
-//该类不进行网络值同步，但个别值向其他组件看齐
-//武器是用来伤害敌人的，而在我们的计划是把自身受伤害这个判断放在自身这一边的客户端上决定。
 
 namespace HittingDetection
 {
     public partial class BO_Marker_Manager : MonoBehaviour
     {
-        bool Enabled;
-
+        #region settings
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
-        [SerializeField]
         float ActivateAfterTime;
-
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
         public DamageType damage_type = DamageType.light_damage_forward;
         [Tooltip("damageTypeOfTheWeapon")]
         public WeaponMode _WeaponMode;
-
+        [Tooltip("AT Weights")]
+        public float AT_weight = 1;
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
-        public float CurrentHP { get; set; }
-        
         [Tooltip("如果是特效类攻击，是否为贴地魔法")]
         public bool onGroundMagic;//这个是和其他模块联动的。确实不得不放这儿。
         [Tooltip("特效是否有粘身视效")]
@@ -34,16 +27,16 @@ namespace HittingDetection
         [Tooltip("启动特效")]
         public string muzzle;
         [Tooltip("特殊爆炸特效")]
-        [SerializeField]
         string ExplosionEffect = "energy_resolve";
-
         [Tooltip("A weapon can work in two ways: Manual and Continuous. Manual bases on an idea that each attack (like a sword swing) can hit each target only once - it then needs to be manualy reloaded through a function call or an Animation Event (for example by ClearTargets() - explained in the Info Bool, at the bottom of this Inspector window). This method is very precise, as you can be certain that each Target will get damage and  Hurt animation (on BS_Main_Health script) triggered only once with each swing. Manual should be used in most situations, mostly for animation-driven combat (like Dark Souls or God of War). The Continuous mode deals damage constantly, in a given time interval, giving you a constant damage-dealing weapon. It's better for VR and games with free-moving weapons (like when the Player can swing his sword by moving his mouse in any desired direction) - the downside of Continuous damage is that it takes away the precise control of the damage dealt (as each Target may be hit more than once depending on how fast the weapon is being driven around). Continuous should be used with blades which can move freely, independent from animations. [INFO:] Continuous damage is not fit for working with shields (BS_Shield script objects).")]
-        [SerializeField]
         bool ContinuousDamage = false;
         [Tooltip("If you choose the Continuous damage, what should the interval of damage dealing be? (In seconds)")]
-        [SerializeField]
         float ContinuousDamageInterval = 0.2f;
-        
+        #endregion
+
+        #region realtime param
+        bool Enabled;
+        public float CurrentHP { get; set; }
         FightAttriCalReference _MyOwnerCalReference;
         TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
@@ -57,7 +50,6 @@ namespace HittingDetection
         List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         bool TraditionalDefendMode = false;
         float AT;
-        
         public string GeneratedByStateKey { get; set; }
         HitBoxLifeEnding hitBoxLifeEnding = HitBoxLifeEnding.untouched;
         public HitBoxLifeEnding HitBoxLifeEnding
@@ -78,6 +70,7 @@ namespace HittingDetection
                 }
             }
         }
+        #endregion
 
         public float GetDamageAmount()
         {
@@ -130,7 +123,7 @@ namespace HittingDetection
         public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
         {
             _MyOwnerCalReference = myOwnerCalReference;
-            AT = _MyOwnerCalReference == null ? 0 : _MyOwnerCalReference.AT;
+            AT = _MyOwnerCalReference == null ? 0 : _MyOwnerCalReference.AT * AT_weight;
         }
         public FightAttriCalReference GetOwnerFightAttriCalReference()
         {
