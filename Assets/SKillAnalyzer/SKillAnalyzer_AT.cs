@@ -6,20 +6,7 @@ using System.Text;
 using HittingDetection;
 
 public partial class SKillAnalyzer : MonoBehaviour
-{
-    readonly List<string> NormalAttackMethodNames = new List<string>() {
-        "SetRightHandMarkerManager","SetLeftHandMarkerManager",
-        "SetRightFootMarkerManager","SetLeftFootMarkerManager",
-        "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
-        "SetHeadMarkerManager","SetTailMarkerManager",
-        "SetAllBodyMarkerManagersIn"
-    };
-    
-    readonly List<string> MagicMethods22 = new List<string>()
-    {
-        "MagicForward", "Bullet_shoot_from_body_part", "BlastAttack"
-    };
-    
+{        
     public void Export(string type)
     {
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
@@ -33,19 +20,21 @@ public partial class SKillAnalyzer : MonoBehaviour
         string[][] grid = new string[SkillConfigs.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
         {
-            grid[i] = new string[3];
+            grid[i] = new string[4];
             if (i == 0)
             {
                 grid[i][0] = "RECORD_ID";
                 grid[i][1] = "REAL_NAME";
-                grid[i][2] = "预计最大伤害";
+                grid[i][2] = "SPLevel";
+                grid[i][3] = "预计最大伤害";
             }
             else
             {
                 grid[i][0] = SkillConfigs[i - 1].RECORD_ID;
                 grid[i][1] = SkillConfigs[i - 1].REAL_NAME;
+                grid[i][2] = SkillConfigs[i - 1].SP_LEVEL.ToString();
                 AnimDic.TryGetValue(SkillConfigs[i -1].REAL_NAME, out AnimationClip clip);
-                grid[i][2] = ATCal(clip, SkillConfigs[i - 1].ATTACK_WEIGHT).ToString();
+                grid[i][3] = ATCal(clip, SkillConfigs[i - 1].ATTACK_WEIGHT).ToString();
             }
         }
         string delimiter = ",";
@@ -63,12 +52,22 @@ public partial class SKillAnalyzer : MonoBehaviour
         float amount = 0;
         for (int i = 0; i < _clip.events.Length; i++)
         {
-            if (NormalAttackMethodNames.Contains(_clip.events[i].functionName) ||
-                _clip.events[i].functionName == "ClearTargets")
+            #region 拳脚攻击
+            if (AttackFrameStartMethodNames.Contains(_clip.events[i].functionName) && _clip.events[i].intParameter != 0)
             {
                 amount += skillATRef;
             }
-            
+            if (_clip.events[i].functionName == "SetAllBodyMarkerManagersIn")
+            {
+                amount += skillATRef;
+            }
+            if (_clip.events[i].functionName == "ClearTargets")
+            {
+                amount += skillATRef;
+            }
+            #endregion
+                        
+            #region MagicForward
             if (_clip.events[i].functionName == "MagicForward")
             {
                 string magicobjectname = _clip.events[i].stringParameter;
@@ -84,25 +83,29 @@ public partial class SKillAnalyzer : MonoBehaviour
                 if ( decompositioner.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");
+                    return -999f;
                 }
                 
-                // attachment /////
-                //for (int z = 0; z < decompositioner.Attachments.Length; z++)
-                //{
-                //    GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
-                //    BO_Marker_Manager attachmentbo = attachment.GetComponent<BO_Marker_Manager>();
-                //    if (attachmentbo == null)
-                //    {
-                //        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname);
-                //    }
-                //    amount += attachmentbo.AT_weight * skillATRef;
-                //}
-                ////////////////////
+                //// 顺便检查attachment，与攻击力预估无关 /////
+                for (int z = 0; z < decompositioner.Attachments.Length; z++)
+                {
+                    GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
+                    BO_Marker_Manager attachmentbo = attachment.GetComponent<BO_Marker_Manager>();
+                    if (attachmentbo == null)
+                    {
+                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
+                    }
+                }
+                ///////////////////////////////////////////
             }
+            #endregion
+            
+            #region 几个固定魔法
             if (_clip.events[i].functionName == "Bullet_shoot_from_body_part" || _clip.events[i].functionName == "BlastAttack")
             {
                 amount += skillATRef;
             }
+            #endregion
             
             if (_clip.events[i].functionName == "PrepareOneMagic")
             {
@@ -116,20 +119,20 @@ public partial class SKillAnalyzer : MonoBehaviour
                 if ( decompositioner.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");
+                    return -999f;
                 }
                 
-                // attachment /////
-                //for (int z = 0; z < decompositioner.Attachments.Length; z++)
-                //{
-                //    GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
-                //    BO_Marker_Manager attachmentbo = attachment.GetComponent<BO_Marker_Manager>();
-                //    if (attachmentbo == null)
-                //    {
-                //        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname);
-                //    }
-                //    oneDamege += attachmentbo.AT_weight * skillATRef;
-                //}
-                ////////////////////
+                //// 顺便检查attachment，与攻击力预估无关 /////
+                for (int z = 0; z < decompositioner.Attachments.Length; z++)
+                {
+                    GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
+                    BO_Marker_Manager attachmentbo = attachment.GetComponent<BO_Marker_Manager>();
+                    if (attachmentbo == null)
+                    {
+                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
+                    }
+                }
+                ///////////////////////////////////////////
                 
                 for (int y = i + 1; y < _clip.events.Length; y++)
                 {
@@ -137,6 +140,7 @@ public partial class SKillAnalyzer : MonoBehaviour
                     {
                         amount += oneDamege;
                     }
+                    // 第二次遇到PrepareOneMagic说明换魔法了。一个技能两次PrepareOneMagic目前其实还没有
                     if (_clip.events[i].functionName == "PrepareOneMagic")
                     {
                         break;
