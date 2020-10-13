@@ -18883,18 +18883,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivateAfterTime: 0
   SpecificTarget: 0
   damage_type: 5
   _WeaponMode: 3
+  AT_weight: 1
   weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 5
   muzzle: 
-  ExplosionEffect: energy_resolve
-  ContinuousDamage: 0
-  ContinuousDamageInterval: 0.1
 --- !u!114 &1688290816804885414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23666,7 +23663,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3e3ea9e0f37802b488b934858afae7af, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1c9d410c093016c4fa30a414243892cb, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
