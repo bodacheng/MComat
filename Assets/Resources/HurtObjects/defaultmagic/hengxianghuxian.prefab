@@ -9548,7 +9548,7 @@ MonoBehaviour:
   damage_type: 6
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: -1
+  weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   zokusei: 1
