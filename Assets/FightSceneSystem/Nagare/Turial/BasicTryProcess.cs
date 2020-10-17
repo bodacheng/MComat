@@ -111,12 +111,7 @@ public class BasicTryProcess : FSceneProcess
     }
     
     public override void LocalUpdate()
-    {
-        if (UnityEngine.Input.GetKey(KeyCode.Escape))
-        {
-            FightScene.PauseScene();
-        }
-                
+    {                
         switch (Step)
         {
             case 1:

@@ -5,7 +5,6 @@ using mainMenu;
 
 public class Setting : MonoBehaviour {
 
-    public Button OpenSetting, CloseSetting;
     public Canvas SettingCanvas;
     public RectTransform SettingMenuT;
     public AudioSource bgmSource;
@@ -17,26 +16,22 @@ public class Setting : MonoBehaviour {
     void Awake()
     {
         target = this;
-        
-        void Open()
-        {
-            LoadProgrameSettingFromAccount();
-            
-            SettingCanvas.gameObject.SetActive(true);
-            SettingCanvas.sortingOrder = 1;
-            LoadingCanvas.target.HigtLightRect(SettingMenuT);
-        }
-        OpenSetting.onClick.AddListener(Open);
-        
-        void Close()
-        {
-            SaveProgrameSettingToAccount();
-            
-            SettingCanvas.sortingOrder = 0;
-            LoadingCanvas.target.ClearHigtLight();
-            SettingCanvas.gameObject.SetActive(false);
-        }
-        CloseSetting.onClick.AddListener(Close);
+    }
+    
+    public void Open()
+    {
+        LoadProgrameSettingFromAccount();
+        SettingCanvas.gameObject.SetActive(true);
+        SettingCanvas.sortingOrder = 1;
+        LoadingCanvas.target.HigtLightRect(SettingMenuT);
+    }
+    
+    public void Close()
+    {
+        SaveProgrameSettingToAccount();
+        SettingCanvas.sortingOrder = 0;
+        LoadingCanvas.target.ClearHigtLight();
+        SettingCanvas.gameObject.SetActive(false);
     }
     
     void Start()
@@ -50,12 +45,11 @@ public class Setting : MonoBehaviour {
     {
         bgmSLider.value = AccountSet._AccInfo.BgmVolumn;
         effectsSoundsSlider.value = AccountSet._AccInfo.EffectsVolumn;
-        
         bgmSource.volume = bgmSLider.value;
         AudioManager.effectsVolumn = effectsSoundsSlider.value;
     }
     
-    public void SaveProgrameSettingToAccount()
+    void SaveProgrameSettingToAccount()
     {
         AccountSet._AccInfo.BgmVolumn = bgmSLider.value;
         AccountSet._AccInfo.EffectsVolumn = effectsSoundsSlider.value;

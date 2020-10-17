@@ -42,9 +42,6 @@ namespace FightScene
         public BoundaryControllByGod _BoundaryControllByGod;
         
         [Space(11)]
-        public RectTransform PauseMenu;
-        
-        [Space(11)]
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
         
@@ -226,21 +223,7 @@ namespace FightScene
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         }
-
-        // 本地系函数 而且目前有逻辑问题
-        public void ResumeScene()
-        {
-            PauseMenu.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
-
-        // 本地系函数 而且目前有逻辑问题
-        public void PauseScene()
-        {
-            PauseMenu.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-        
+                
         // ArcadeNext
         public void CheckNextArcadeLevel()
         {

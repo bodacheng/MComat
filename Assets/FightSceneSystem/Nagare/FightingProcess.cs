@@ -39,10 +39,6 @@ namespace FightScene
 
         public override void LocalUpdate()
         {
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                FightScene.PauseScene();
-            }
             RealTimeGameProcessManager.target.FightTeam1.LocalFightingUpdate();
             RealTimeGameProcessManager.target.FightTeam2.LocalFightingUpdate();
         }

@@ -33156,8 +33156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2237f336af74447458a573b9d2cbcead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenSetting: {fileID: 449604555}
-  CloseSetting: {fileID: 1241615573}
   SettingCanvas: {fileID: 800549505}
   SettingMenuT: {fileID: 1815183079}
   bgmSource: {fileID: 3333130315161903288}
@@ -51486,7 +51484,6 @@ MonoBehaviour:
   accountIntelliCoin: {fileID: 593032044}
   TeamEditor: {fileID: 1806706059}
   charSwitcher: {fileID: 1476510420}
-  _modelShower: {fileID: 85698363}
   _SkillStonesBox_NineSlot: {fileID: 1911103746}
   _SkillStonesBox_Show: {fileID: 1576397250}
   _SwapAllModelShader: {fileID: 977937446}

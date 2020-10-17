@@ -370,6 +370,8 @@
     <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
     <Compile Include="Assets\Language\LanguageCodeTable.cs" />
     <Compile Include="Assets\Language\LanguageConverter.cs" />
+    <Compile Include="Assets\LoadingCanvas\LoadingCanvas.cs" />
+    <Compile Include="Assets\LoadingCanvas\LoadingCanvas_HightLight.cs" />
     <Compile Include="Assets\Mail\MailManager.cs" />
     <Compile Include="Assets\Mail\MailModel.cs" />
     <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />
@@ -462,8 +464,9 @@
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSimpleAnimation.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSkipCutscene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
+    <Compile Include="Assets\RealTimeGameProcessManager\FightSettingSupport\FightSceneSettingSupport.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\FightTeam.cs" />
-    <Compile Include="Assets\RealTimeGameProcessManager\FightTeam_MultiRaid.cs" />
+    <Compile Include="Assets\RealTimeGameProcessManager\MultiRaid\FightTeam_MultiRaid.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\RealTimeGameProcessManager.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\FightTeam_RotationMode.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\RotationMode_INI.cs" />
@@ -608,7 +611,6 @@
     <Compile Include="Assets\UI\BackGroundPS.cs" />
     <Compile Include="Assets\UI\ExBarBurn.cs" />
     <Compile Include="Assets\UI\ImageGliter.cs" />
-    <Compile Include="Assets\UI\LoadingCanvas.cs" />
     <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />
     <Compile Include="Assets\UI\Oldscripts\FloatOnHead.cs" />
     <Compile Include="Assets\UI\Oldscripts\NetWork\fightingSceneNetworkManager.cs" />
