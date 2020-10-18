@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class MailManager : MonoBehaviour {
 
     public Canvas MailCanvas;
-
+    
     #region MailBox
     public RectTransform BoxPartT;
     public MailModel mailModelPretab;    
@@ -28,7 +28,7 @@ public class MailManager : MonoBehaviour {
     #endregion
     
     public static MailManager target;
-
+    
     List<GetMailOfPlayerModel> myMailList = new List<GetMailOfPlayerModel>();
     
     void Awake()
@@ -36,24 +36,43 @@ public class MailManager : MonoBehaviour {
         target = this;
     }
     
-    public void GenerateMailModels()
+    public GetMailOfPlayerModel Get(string mailID)
     {
-        foreach (Transform t in BoxPartT)
+        for (int i = 0; i < myMailList.Count; i++)
+        {
+            if (myMailList[i].mailId == mailID)
+                return myMailList[i];
+        }
+        return null;
+    }
+    
+    public void Read(GetMailOfPlayerModel model)
+    {
+        title.text = model.title;
+        message.text = model.message;
+        presentlifeRemain.text = model.presentlifeRemain;
+    }
+    
+    public void GenerateMailModels(List<GetMailOfPlayerModel> _myMailList)
+    {
+        foreach (Transform t in MailBoxT)
         {
             Destroy(t.gameObject);
         }
-        for (int i = 0; i < myMailList.Count; i++)
+        for (int i = 0; i < _myMailList.Count; i++)
         {
             MailModel mailModel = Instantiate(mailModelPretab) as MailModel;
-            mailModel.mailId = myMailList[i].mailId;
+            mailModel.mailId = _myMailList[i].mailId;
             // 内容设置
-            mailModel.title.text = myMailList[i].title;
-            mailModel.message.text = myMailList[i].message;
-            mailModel.presentlifeRemain.text = myMailList[i].presentlifeRemain;
-            mailModel.transform.SetParent(BoxPartT);
+            mailModel.title.text = _myMailList[i].title;
+            mailModel.message.text = _myMailList[i].message;
+            mailModel.presentlifeRemain.text = _myMailList[i].presentlifeRemain;
+            mailModel.transform.SetParent(MailBoxT);
+            mailModel.transform.localPosition = Vector3.zero;
+            mailModel.transform.localScale = Vector3.one;
         }
     }
-
+    
     public IEnumerator RequestMails(ApiLanguage apiLanguage)
     {
         GetMailListForm getMailListForm = new GetMailListForm();
@@ -61,7 +80,15 @@ public class MailManager : MonoBehaviour {
             getMailListForm,
             model => {
                 myMailList = model.myMailList;
-                GenerateMailModels();
+
+                /// test //
+                GetMailOfPlayerModel mail1 = new GetMailOfPlayerModel();
+                GetMailOfPlayerModel mail2 = new GetMailOfPlayerModel();
+                myMailList.Add(mail1);
+                myMailList.Add(mail2);
+                ///////////
+                
+                GenerateMailModels(myMailList);
             },
             model => {
             
@@ -91,6 +118,7 @@ public class MailManager : MonoBehaviour {
                     );
                 break;
             case PlayerInfoRefMode.localTestSaveData:
+                success(new GetMailsOfPlayerModel());
                 break;
         }
         yield break;

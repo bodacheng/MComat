@@ -2,9 +2,9 @@
 using mainMenu;
 
 // 邮箱top
-public class MailBox : MainSceneProcess
+public class MailBoxProcess : MainSceneProcess
 {
-    public MailBox()
+    public MailBoxProcess()
     {
         Step = MainSceneStep.MailBox;
         EelementsInherit(PreScene.target);
@@ -13,8 +13,9 @@ public class MailBox : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         yield return MailManager.target.RequestMails(Setting.Language);
+        MailManager.target.MailCanvas.gameObject.SetActive(true);
         MailManager.target.BoxPartT.gameObject.SetActive(true);
-        yield break;    
+        yield break;
     }
         
     public override void ProcessEnter()

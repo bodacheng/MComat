@@ -385,8 +385,8 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailBox.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailDetail.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailBoxProcess.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailDetailProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetailProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_edit.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_skillshow.cs" />

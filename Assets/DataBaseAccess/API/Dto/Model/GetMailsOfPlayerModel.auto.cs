@@ -16,6 +16,6 @@ namespace Api.Dto.Model {
         /// </summary>
         public string playerId { get; set; }
 
-        public List<GetMailOfPlayerModel> myMailList;
+        public List<GetMailOfPlayerModel> myMailList = new List<GetMailOfPlayerModel>();
 	}
 }

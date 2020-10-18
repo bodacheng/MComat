@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using mainMenu;
+using Api.Dto.Model;
 
 // 邮箱top
-public class MailDetail : MainSceneProcess
+public class MailDetailProcess : MainSceneProcess
 {
-    public MailDetail()
+    public static string targetMailID;
+
+    public MailDetailProcess()
     {
         Step = MainSceneStep.MailDetail;
         EelementsInherit(PreScene.target);
@@ -12,6 +15,8 @@ public class MailDetail : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        GetMailOfPlayerModel mail = MailManager.target.Get(targetMailID);
+        MailManager.target.Read(mail);
         MailManager.target.detailPartT.gameObject.SetActive(true);
         yield break;
     }
@@ -23,7 +28,7 @@ public class MailDetail : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
+        //PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         MailManager.target.detailPartT.gameObject.SetActive(false);
     }
 }

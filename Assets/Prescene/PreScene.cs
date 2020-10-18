@@ -134,8 +134,8 @@ namespace mainMenu
             ArenaProcess areanaProcess = new ArenaProcess();
             
             // mail
-            MailBox mailBox = new MailBox();
-            MailDetail mailDetail = new MailDetail();
+            MailBoxProcess mailBox = new MailBoxProcess();
+            MailDetailProcess mailDetail = new MailDetailProcess();
             
             ProcessesRunner.Main.Clear();
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
