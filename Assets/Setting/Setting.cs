@@ -16,16 +16,18 @@ public class Setting : MonoBehaviour {
     void Awake()
     {
         target = this;
+        LoadProgrameSettingFromAccount();
     }
     
+    // 打开Setting面板。战斗界面置于暂停按钮的option按钮上。主界面直接置于上方悬挂按钮的option按钮上
     public void Open()
     {
-        LoadProgrameSettingFromAccount();
         SettingCanvas.gameObject.SetActive(true);
         SettingCanvas.sortingOrder = 1;
         LoadingCanvas.target.HigtLightRect(SettingMenuT);
     }
     
+    // 按钮函数，置于Seting面板返回键上
     public void Close()
     {
         SaveProgrameSettingToAccount();

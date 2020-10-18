@@ -162,7 +162,6 @@ namespace mainMenu
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
             
-            Setting.target.LoadProgrameSettingFromAccount();
             UserID.text = AccountSet._AccInfo.PlayerName; //SystemInfo.deviceUniqueIdentifier;
             accountDiamondCoin.text = AccountSet._AccInfo.diamondCount.ToString();
             accountIntelliCoin.text = AccountSet._AccInfo.coinCount.ToString();

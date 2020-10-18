@@ -464,7 +464,7 @@
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSimpleAnimation.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSkipCutscene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
-    <Compile Include="Assets\RealTimeGameProcessManager\FightSettingSupport\FightSceneSettingSupport.cs" />
+    <Compile Include="Assets\RealTimeGameProcessManager\FightSettingSupport\FightScenePauseSupport.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\FightTeam.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\MultiRaid\FightTeam_MultiRaid.cs" />
     <Compile Include="Assets\RealTimeGameProcessManager\RealTimeGameProcessManager.cs" />
