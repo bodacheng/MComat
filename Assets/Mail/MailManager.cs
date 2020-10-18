@@ -13,7 +13,7 @@ public class MailManager : MonoBehaviour {
     
     #region MailBox
     public RectTransform BoxPartT;
-    public MailModel mailModelPretab;    
+    public MailModel mailModelPretab;   
     public RectTransform MailBoxT;
     public Button GetAll;
     public Button DeleteAllRead;
