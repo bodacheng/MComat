@@ -10,7 +10,7 @@ public class Setting : MonoBehaviour {
     public AudioSource bgmSource;
     public Slider bgmSLider, CVSlider, effectsSoundsSlider;
     
-    public static ApiLanguage Language = ApiLanguage.EnUs;
+    public static ApiLanguage Language = ApiLanguage.JaJp;
     public static Setting target;
     
     void Awake()

@@ -370,6 +370,7 @@
     <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
     <Compile Include="Assets\Language\LanguageCodeTable.cs" />
     <Compile Include="Assets\Language\LanguageConverter.cs" />
+    <Compile Include="Assets\Language\LanguageConverterManger.cs" />
     <Compile Include="Assets\LoadingCanvas\LoadingCanvas.cs" />
     <Compile Include="Assets\LoadingCanvas\LoadingCanvas_HightLight.cs" />
     <Compile Include="Assets\Mail\MailManager.cs" />

@@ -100,6 +100,7 @@ namespace mainMenu
         public IEnumerator StartUpProcess()
         {
             Application.targetFrameRate = 60;
+            
             _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);

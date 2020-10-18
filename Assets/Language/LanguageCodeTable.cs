@@ -24,8 +24,17 @@ public static class LanguageCodeTable
 	{
 		return rowList;
 	}
+    
+    public static void LoadLanguageCodes()
+    {
+        TextAsset csv = Resources.Load("Account/LanguageCode") as TextAsset;
+        if (csv != null)
+        {
+            Load(csv);
+        }
+    }
 
-	public static void Load(TextAsset csv)
+    static void Load(TextAsset csv)
 	{
 		rowList.Clear();
 		string[][] grid = CsvParser2.Parse(csv.text);

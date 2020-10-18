@@ -1,31 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class LanguageConverter : MonoBehaviour
 {
-    static List<LanguageConverter> list = new List<LanguageConverter>();
     public string languageCode;
-    Text target;
+    public Text target;
     
     void Awake()
     {
-        if (!list.Contains(this))
+        if (!LanguageConverterManger.list.Contains(this))
         {
-            list.Add(this);
+            LanguageConverterManger.list.Add(this);
         }
-        target = transform.GetComponent<Text>();
+        if (target == null)
+            target = transform.GetComponent<Text>();
     }
     
-    public static void ChangeLanguage()
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            list[i].Change();
-        }
-    }
-
-    void Change()
+    public void Change()
     {
         if (target != null && !string.IsNullOrEmpty(languageCode))
         {
