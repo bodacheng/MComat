@@ -6,7 +6,7 @@ using System.IO;
 
 [Serializable]
 public class LocalFight
-{    
+{
     [NonSerialized]
     public MultiDictionary<int, int, CharDataInfo> HeroSets = new MultiDictionary<int, int, CharDataInfo>();
     public MultiDictionary<int, int, CharDataInfo> EnemySets = new MultiDictionary<int, int, CharDataInfo>();

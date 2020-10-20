@@ -24,17 +24,14 @@ public partial class Hurt_State : Behavior
         physicMissionDisposable = new SingleAssignmentDisposable();
         physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
             {
-                if (Vector3.Distance(MidDistanceFromMe,gameObject.transform.position) < 0.3f || _BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+                if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
                 {
                     _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                     physicMissionDisposable.Dispose();
                 }
             }
         );
-        gameObject.transform.DOMove(MidDistanceFromMe, 0.3f).OnComplete(() => {
-            _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-            _BasicPhysicSupport.SetUsingGravity(true);
-        });
+        gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
         _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);
         _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
     }

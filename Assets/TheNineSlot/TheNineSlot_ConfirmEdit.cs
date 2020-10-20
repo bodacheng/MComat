@@ -15,8 +15,8 @@ namespace mainMenu
         
         public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accCharInfo)
         {
-            SkillEditError valR = target.CheckEditBasedOnCurrent();
-            if (valR != SkillEditError.Perfect)
+            NineAndTwo.SkillEditError valR = target.CheckEditBasedOnCurrent();
+            if (valR != NineAndTwo.SkillEditError.Perfect)
             {
                 target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
                 yield break;

@@ -240,7 +240,7 @@ namespace mainMenu
                 _slot._DragAndDropCell.UpdateMyItem();
             }
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
-            int wholePoint = MySkillStonesReader.SkillBalancePoint(
+            int wholePoint = NineAndTwo.SkillBalancePoint(
                 skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
                 skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
                 skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]
@@ -250,8 +250,8 @@ namespace mainMenu
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
             
-            SkillEditError valR = target.CheckEditBasedOnCurrent();
-            if (valR != SkillEditError.Perfect)
+            NineAndTwo.SkillEditError valR = target.CheckEditBasedOnCurrent();
+            if (valR != NineAndTwo.SkillEditError.Perfect)
             {
                 // confirm 按钮颜色变化
                 uIManager.primaryColor = new Color(1,0,0,1);

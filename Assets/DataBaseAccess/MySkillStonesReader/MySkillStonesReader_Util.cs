@@ -75,62 +75,6 @@ namespace dataAccess
             return targetStones;
         }
         
-        public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid, string B1skillid, string B2skillid, string B3skillid, string C1skillid, string C2skillid, string C3skillid)
-        {
-            SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfigByID(A1skillid);
-            SkillConfig _SkillConfigA2 = SkillConfigTable.GetSkillConfigByID(A2skillid);
-            SkillConfig _SkillConfigA3 = SkillConfigTable.GetSkillConfigByID(A3skillid);
-            SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfigByID(B1skillid);
-            SkillConfig _SkillConfigB2 = SkillConfigTable.GetSkillConfigByID(B2skillid);
-            SkillConfig _SkillConfigB3 = SkillConfigTable.GetSkillConfigByID(B3skillid);
-            SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfigByID(C1skillid);
-            SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfigByID(C2skillid);
-            SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfigByID(C3skillid);
-            List<SkillConfig> allnineskill = new List<SkillConfig>();
-            
-            if (_SkillConfigA1 != null)
-                allnineskill.Add(_SkillConfigA1);
-            if (_SkillConfigA2 != null)
-                allnineskill.Add(_SkillConfigA2);
-            if (_SkillConfigA3 != null)
-                allnineskill.Add(_SkillConfigA3);
-            if (_SkillConfigB1 != null)
-                allnineskill.Add(_SkillConfigB1);
-            if (_SkillConfigB2 != null)
-                allnineskill.Add(_SkillConfigB2);
-            if (_SkillConfigB3 != null)
-                allnineskill.Add(_SkillConfigB3);
-            if (_SkillConfigC1 != null)
-                allnineskill.Add(_SkillConfigC1);
-            if (_SkillConfigC2 != null)
-                allnineskill.Add(_SkillConfigC2);
-            if (_SkillConfigC3 != null)
-                allnineskill.Add(_SkillConfigC3);
-                
-            int wholeskillpoint = 0;
-            for (int i = 0; i < allnineskill.Count; i++)
-            {
-                switch (allnineskill[i].SP_LEVEL)
-                {
-                    case 0:
-                        wholeskillpoint += 10;
-                        break;
-                    case 1:
-                        wholeskillpoint -= 10;
-                        break;
-                    case 2:
-                        wholeskillpoint -= 20;
-                        break;
-                    case 3:
-                        wholeskillpoint -= 30;
-                        break;
-                    case -1:
-                        break;
-                }
-            }
-            return wholeskillpoint;
-        }
-        
         public static IEnumerator StoneGotcha()
         {
             switch (AccountSet.ReferenceMode)

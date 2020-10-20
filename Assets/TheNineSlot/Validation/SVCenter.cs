@@ -140,8 +140,8 @@ public static class SVCenter
         if (AccountCharsSet.CheckExist(MySkillStonesReader.Get(item.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId))
         {
             string monsterPlayerID = MySkillStonesReader.Get(item.SkillStoneOfPlayerId).inUsingMonsterOfPlayerId;
-            TheNineSlot.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
-            if (valR3 != TheNineSlot.SkillEditError.Perfect)
+            NineAndTwo.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
+            if (valR3 != NineAndTwo.SkillEditError.Perfect)
             {
                 TheNineSlot.target.ValiationWarn(valR3, monsterPlayerID);
                 return false;

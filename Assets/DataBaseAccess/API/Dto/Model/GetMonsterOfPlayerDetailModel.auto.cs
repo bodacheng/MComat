@@ -141,7 +141,7 @@ namespace Api.Dto.Model {
                         break;
                 }
             }
-            int wholePoint = MySkillStonesReader.SkillBalancePoint(A1,A2,A3,B1,B2,B3,C1,C2,C3);
+            int wholePoint = NineAndTwo.SkillBalancePoint(A1,A2,A3,B1,B2,B3,C1,C2,C3);
             return wholePoint;
         }
 	}

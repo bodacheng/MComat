@@ -104,6 +104,8 @@
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo.cs" />
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_INI.cs" />
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_Tools.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_Validation.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\RandomSkillSet.cs" />
     <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\ZokuseiStoneTagsGroup.cs" />
@@ -586,8 +588,7 @@
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
     <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
     <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_Validation.cs" />
-    <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_Validation1.cs" />
-    <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_Validation2.cs" />
+    <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_ValidationWarn.cs" />
     <Compile Include="Assets\TutorialManger\Tutorial\TutorialHelper.cs" />
     <Compile Include="Assets\TutorialManger\TutorialLogger.cs" />
     <Compile Include="Assets\TutorialManger\TutorialProcess.cs" />

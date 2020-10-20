@@ -26,7 +26,7 @@ public class MailDetailProcess : MainSceneProcess
         MailManager.target.detailPartT.gameObject.SetActive(true);
         yield break;
     }
-        
+    
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

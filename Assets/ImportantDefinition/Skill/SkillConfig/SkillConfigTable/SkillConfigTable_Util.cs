@@ -157,9 +157,9 @@ public partial class SkillConfigTable
         }
     }
     
-    public static List<string> GetTargetSkillRecordIds(string type, bool[] ranges, bool[] EXType, int rarelevel, int Count)
+    public static List<string> GetTargetSkillRecordIds(string type, bool[] ranges, bool[] EXType, BehaviorType behaviorType, int rarelevel, int Count)
     {
-        IDictionary<string, string> _Skills = GetSkillIDAndNameDic(type, ranges, EXType, rarelevel);
+        IDictionary<string, string> _Skills = GetSkillIDAndNameDic(type, ranges, EXType, behaviorType, rarelevel);
         List<int> indexes = RandomSelect.Get(0, _Skills.Count -1 , Count);
         List<string> normalSKillRecordIds = _Skills.Keys.ToList();
 
@@ -171,7 +171,7 @@ public partial class SkillConfigTable
         return targetRecordIds;
     }
     
-    public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, bool[] EXType, int rarelevel)// close, near, far , out , rarelevel = -1代表全部，0代表无星级技能
+    public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, bool[] EXType, BehaviorType behaviorType, int rarelevel)// close, near, far , out , rarelevel = -1代表全部，0代表无星级技能
     {
         Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>
         {
@@ -179,7 +179,12 @@ public partial class SkillConfigTable
         };
         List<SkillConfig> list = GetSkillConfigsOfType(type);
         foreach (SkillConfig one in list)
-        {    
+        {
+            if (behaviorType != BehaviorType.NONE && one.STATE_TYPE != behaviorType)
+            {
+                continue;
+            }
+            
             if (SkillConfig.RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
                 if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
