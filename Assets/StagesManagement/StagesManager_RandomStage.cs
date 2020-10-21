@@ -55,33 +55,33 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char1 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[0]],
-            _NineAndTwo = NineAndTwo.BalanceStyle("human", 1)
+            _NineAndTwo = NineAndTwo.NEW("human", 1)
         };
         CharDataInfo char2 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[1]],
-            _NineAndTwo = NineAndTwo.BalanceStyle("human", 1)
+            _NineAndTwo = NineAndTwo.NEW("human", 1)
         };
         CharDataInfo char3 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[2]],
-            _NineAndTwo = NineAndTwo.BalanceStyle("human", 1)
+            _NineAndTwo = NineAndTwo.NEW("human", 1)
         };
 
         CharDataInfo char4 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[3]],
-            _NineAndTwo = NineAndTwo.BalanceStyle("human", 1)
+            _NineAndTwo = NineAndTwo.NEW("human", 1)
         };
         CharDataInfo char5 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[4]],
-            _NineAndTwo = NineAndTwo.BalanceStyle("human", 1)
+            _NineAndTwo = NineAndTwo.NEW("human", 1)
         };
         CharDataInfo char6 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[5]],
-            _NineAndTwo = NineAndTwo.BalanceStyle("human", 1)
+            _NineAndTwo = NineAndTwo.NEW("human", 1)
         };
 
         switch (teamMode)

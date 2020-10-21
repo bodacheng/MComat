@@ -157,7 +157,7 @@ public partial class SkillConfigTable
         }
     }
     
-    public static List<string> GetTargetSkillRecordIds(string type, bool[] ranges, bool[] EXType, BehaviorType behaviorType, int rarelevel, int Count)
+    public static List<string> RandomGetTargetSkillRecordIds(string type, bool[] ranges, bool[] EXType, BehaviorType behaviorType, int rarelevel, int Count)
     {
         IDictionary<string, string> _Skills = GetSkillIDAndNameDic(type, ranges, EXType, behaviorType, rarelevel);
         List<int> indexes = RandomSelect.Get(0, _Skills.Count -1 , Count);
