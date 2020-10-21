@@ -3,61 +3,59 @@ using UnityEngine;
 
 public partial class NineAndTwo
 {
+    static void SkillAdd(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) // 1~9
+    {
+        while (!PointCheck(nineAndTwo) ||
+                !CheckRepeat(nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid, 
+                            nineAndTwo.B1skillid, nineAndTwo.B2skillid, nineAndTwo.B3skillid, 
+                            nineAndTwo.C1skillid, nineAndTwo.C2skillid, nineAndTwo.C3skillid))
+        {
+            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
+            switch(targetSlot)
+            {
+                case 1:
+                nineAndTwo.A1skillid = one[0];
+                break;
+                case 2:
+                nineAndTwo.A2skillid = one[0];
+                break;
+                case 3:
+                nineAndTwo.A3skillid = one[0];
+                break;
+                case 4:
+                nineAndTwo.B1skillid = one[0];
+                break;
+                case 5:
+                nineAndTwo.B2skillid = one[0];
+                break;
+                case 6:
+                nineAndTwo.B3skillid = one[0];
+                break;
+                case 7:
+                nineAndTwo.C1skillid = one[0];
+                break;
+                case 8:
+                nineAndTwo.C2skillid = one[0];
+                break;
+                case 9:
+                nineAndTwo.C3skillid = one[0];
+                break;
+            }
+        }
+    }
+
     public static NineAndTwo NEW(string focusingtype, int skilllevel)
     {
         NineAndTwo nineAndTwo = new NineAndTwo();
         
         List<string> OneSkillId = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, false, false, false }, Skill.BehaviorType.NONE, -1, 1);
         nineAndTwo.A1skillid = OneSkillId[0];
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.A2skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.A3skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.B1skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.B2skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.B3skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.C1skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.C2skillid = one[0];
-        }
-        
-        while (!PointCheck(nineAndTwo))
-        {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            nineAndTwo.C3skillid = one[0];
-        }
 
+        for (int i = 2; i <= 9; i++)
+        {
+            SkillAdd(focusingtype, nineAndTwo, 1);
+        }
+        
         nineAndTwo.A1level = skilllevel;
         nineAndTwo.A2level = skilllevel;
         nineAndTwo.A3level = skilllevel;

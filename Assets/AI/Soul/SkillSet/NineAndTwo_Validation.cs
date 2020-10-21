@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Skill;
+using UnityEngine;
 
 public partial class NineAndTwo
 {
@@ -67,6 +68,35 @@ public partial class NineAndTwo
         return wholeskillpoint;
     }
     
+    static bool CheckRepeat(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
+    {
+        // 检查技能重复
+        List<string> checkSame = new List<string>();
+        checkSame.Add(A1);
+        checkSame.Add(A2);
+        checkSame.Add(A3);
+        checkSame.Add(B1);
+        checkSame.Add(B2);
+        checkSame.Add(B3);
+        checkSame.Add(C1);
+        checkSame.Add(C2);
+        checkSame.Add(C3);
+
+        for (int i = 0; i < checkSame.Count; i++)
+        {
+            if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfigByID(checkSame[i]) != null)
+            {
+                for (int y = i + 1; y < checkSame.Count; y++)
+                {
+                    if (checkSame[i] == checkSame[y])
+                        return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
     // 靠9个技能ID判断技能组是否合法，技能编辑原始函数
     public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
     {
@@ -76,58 +106,12 @@ public partial class NineAndTwo
             return SkillEditError.NoNormalStart;
         }
         
-        // 检查技能重复
-        List<string> checkSame = new List<string>();
-        bool CheckRepeat(string skillID)
-        {
-            if (checkSame.Contains(skillID))
-            {
-                return true;
-            }
-            if (SkillConfigTable.GetSkillConfigByID(skillID) != null)
-            {
-                checkSame.Add(skillID);
-            }
-            return false;
-        }
-        
-        if (CheckRepeat(A1))
+        if (CheckRepeat(A1, A2, A3, B1, B2, B3, C1, C2, C3))
         {
             return SkillEditError.RepeatedSkill;
         }
-        if (CheckRepeat(A2))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(A3))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(B1))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(B2))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(B3))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(C1))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(C2))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        if (CheckRepeat(C3))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-        int wholePoint = NineAndTwo.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+
+        int wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
         return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
     }
         
