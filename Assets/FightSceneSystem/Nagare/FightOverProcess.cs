@@ -81,10 +81,10 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.BalanceStyle("human", 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", 1);
                         break;
                     case 3:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RangedStyle("human", 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", 1);
                         break;
                 }
                 
@@ -100,10 +100,10 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.BalanceStyle("human", 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", 1);
                         break;
                     case 3:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RangedStyle("human", 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", 1);
                         break;
                 }
                 

@@ -12,6 +12,25 @@ public partial class NineAndTwo
         Perfect
     }
     
+    // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
+    public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
+    {
+        // 第一列技能必须有普通技能
+        if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
+        {
+            return SkillEditError.NoNormalStart;
+        }
+        
+        if (!CheckRepeat(A1, A2, A3, B1, B2, B3, C1, C2, C3))
+        {
+            return SkillEditError.RepeatedSkill;
+        }
+        
+        int wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+        return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
+    }
+    
+    // 当前总分。不问技能组是否合法
     public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid, string B1skillid, string B2skillid, string B3skillid, string C1skillid, string C2skillid, string C3skillid)
     {
         SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfigByID(A1skillid);
@@ -68,20 +87,23 @@ public partial class NineAndTwo
         return wholeskillpoint;
     }
     
+    // 查看技能组内是否有重复 false :不合法，有重复  true：合法，无重复
     static bool CheckRepeat(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
     {
         // 检查技能重复
-        List<string> checkSame = new List<string>();
-        checkSame.Add(A1);
-        checkSame.Add(A2);
-        checkSame.Add(A3);
-        checkSame.Add(B1);
-        checkSame.Add(B2);
-        checkSame.Add(B3);
-        checkSame.Add(C1);
-        checkSame.Add(C2);
-        checkSame.Add(C3);
-
+        List<string> checkSame = new List<string>
+        {
+            A1,
+            A2,
+            A3,
+            B1,
+            B2,
+            B3,
+            C1,
+            C2,
+            C3
+        };
+        
         for (int i = 0; i < checkSame.Count; i++)
         {
             if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfigByID(checkSame[i]) != null)
@@ -97,24 +119,6 @@ public partial class NineAndTwo
         return true;
     }
     
-    // 靠9个技能ID判断技能组是否合法，技能编辑原始函数
-    public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
-    {
-        // 第一列技能必须有普通技能
-        if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
-        {
-            return SkillEditError.NoNormalStart;
-        }
-        
-        if (CheckRepeat(A1, A2, A3, B1, B2, B3, C1, C2, C3))
-        {
-            return SkillEditError.RepeatedSkill;
-        }
-
-        int wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
-        return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
-    }
-        
     // 检查起始技能有没有普通技能
     static SkillEditError CheckStartSKills(string a1skill, string a2skill, string a3skill)
     {

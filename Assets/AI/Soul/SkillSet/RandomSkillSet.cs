@@ -3,48 +3,49 @@ using UnityEngine;
 
 public partial class NineAndTwo
 {
-    static void SkillAdd(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) // 1~9
+    // 为技能组的特定位置安排技能。内部while循环直到技能组合法的做法，让这个函数相关的任何处理一定不能用于正式版本。
+    static void SkillRandomAdd(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) // 1~9
     {
-        while (!PointCheck(nineAndTwo) ||
-                !CheckRepeat(nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid, 
-                            nineAndTwo.B1skillid, nineAndTwo.B2skillid, nineAndTwo.B3skillid, 
-                            nineAndTwo.C1skillid, nineAndTwo.C2skillid, nineAndTwo.C3skillid))
+        do
         {
             List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
-            switch(targetSlot)
+            switch (targetSlot)
             {
                 case 1:
-                nineAndTwo.A1skillid = one[0];
-                break;
+                    nineAndTwo.A1skillid = one[0];
+                    break;
                 case 2:
-                nineAndTwo.A2skillid = one[0];
-                break;
+                    nineAndTwo.A2skillid = one[0];
+                    break;
                 case 3:
-                nineAndTwo.A3skillid = one[0];
-                break;
+                    nineAndTwo.A3skillid = one[0];
+                    break;
                 case 4:
-                nineAndTwo.B1skillid = one[0];
-                break;
+                    nineAndTwo.B1skillid = one[0];
+                    break;
                 case 5:
-                nineAndTwo.B2skillid = one[0];
-                break;
+                    nineAndTwo.B2skillid = one[0];
+                    break;
                 case 6:
-                nineAndTwo.B3skillid = one[0];
-                break;
+                    nineAndTwo.B3skillid = one[0];
+                    break;
                 case 7:
-                nineAndTwo.C1skillid = one[0];
-                break;
+                    nineAndTwo.C1skillid = one[0];
+                    break;
                 case 8:
-                nineAndTwo.C2skillid = one[0];
-                break;
+                    nineAndTwo.C2skillid = one[0];
+                    break;
                 case 9:
-                nineAndTwo.C3skillid = one[0];
-                break;
+                    nineAndTwo.C3skillid = one[0];
+                    break;
             }
-        }
+        } while (!InProcessPointLegalCheck(nineAndTwo) ||
+                !CheckRepeat(nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid,
+                            nineAndTwo.B1skillid, nineAndTwo.B2skillid, nineAndTwo.B3skillid,
+                            nineAndTwo.C1skillid, nineAndTwo.C2skillid, nineAndTwo.C3skillid));
     }
-
-    public static NineAndTwo NEW(string focusingtype, int skilllevel)
+    
+    public static NineAndTwo RandomSkillSet(string focusingtype, int skilllevel)
     {
         NineAndTwo nineAndTwo = new NineAndTwo();
         
@@ -53,7 +54,7 @@ public partial class NineAndTwo
 
         for (int i = 2; i <= 9; i++)
         {
-            SkillAdd(focusingtype, nineAndTwo, 1);
+            SkillRandomAdd(focusingtype, nineAndTwo, i);
         }
         
         nineAndTwo.A1level = skilllevel;
@@ -69,7 +70,8 @@ public partial class NineAndTwo
         return nineAndTwo;
     }
     
-    static bool PointCheck(NineAndTwo current)
+    // 这个能在技能槽没有填满的情况下分析技能组是否合法。比如有三个3级超杀那其他格子无论怎么配置都注定非法。
+    static bool InProcessPointLegalCheck(NineAndTwo current)
     {
         int remainSlotCount = 0;
         if (current.A1skillid == null)
@@ -98,79 +100,4 @@ public partial class NineAndTwo
         }
         return true;
     }
-
-    #region 随机技能组
-    public static NineAndTwo BalanceStyle(string focusingtype, int skilllevel)
-    {
-        List<string> _normalSkills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, false, false, false }, Skill.BehaviorType.NONE, -1, 6);
-        List<string> _Ex1Skills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { false, true, false, false }, Skill.BehaviorType.NONE, -1, 1);
-        List<string> _Ex2Skills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { false, false, true, false }, Skill.BehaviorType.NONE, -1, 1);
-        List<string> _Ex3Skills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { false, false, false, true }, Skill.BehaviorType.NONE, -1, 1);
-        
-        NineAndTwo one = new NineAndTwo
-        {
-            A1level = skilllevel,
-            A2level = skilllevel,
-            A3level = skilllevel,
-            B1level = skilllevel,
-            B2level = skilllevel,
-            B3level = skilllevel,
-            C1level = skilllevel,
-            C2level = skilllevel,
-            C3level = skilllevel,
-    
-            A1skillid = _normalSkills[0],
-            A2skillid = _normalSkills[1],
-            A3skillid = _normalSkills[2],
-            B1skillid = _normalSkills[3],
-            B2skillid = _normalSkills[4],
-            B3skillid = _normalSkills[5],
-            C1skillid = _Ex1Skills[0],
-            C2skillid = _Ex2Skills[0],
-            C3skillid = _Ex3Skills[0],
-    
-            canDefend = true,
-            moveType = Skill.MoveType.Move_normal,
-            rushType = Skill.RushType.Rush
-        };
-    
-        return one;
-    }
-    
-    public static NineAndTwo RangedStyle(string focusingtype, int skilllevel)
-    {
-        List<string> _normalSkills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, false, false, false }, Skill.BehaviorType.NONE, -1, 5);
-        List<string> _Ex1Skills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, true, true }, new bool[4] { false, true, false, false }, Skill.BehaviorType.NONE, -1, 3);
-        List<string> _Ex2Skills = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, true, true }, new bool[4] { false, false, true, false }, Skill.BehaviorType.NONE, -1, 1);
-        
-        NineAndTwo one = new NineAndTwo
-        {
-            A1level = skilllevel,
-            A2level = skilllevel,
-            A3level = skilllevel,
-            B1level = skilllevel,
-            B2level = skilllevel,
-            B3level = skilllevel,
-            C1level = skilllevel,
-            C2level = skilllevel,
-            C3level = skilllevel,
-        
-            A1skillid = _normalSkills[0],
-            A2skillid = _normalSkills[1],
-            A3skillid = _normalSkills[2],
-            B1skillid = _Ex1Skills[0],
-            B2skillid = _Ex1Skills[1],
-            B3skillid = _Ex1Skills[2],
-            C1skillid = _normalSkills[3],
-            C2skillid = _normalSkills[4],
-            C3skillid = _Ex2Skills[0],
-        
-            canDefend = true,
-            moveType = Skill.MoveType.Move_normal,
-            rushType = Skill.RushType.Rush
-        };
-        
-        return one;
-    }
-    #endregion
 }

@@ -69,6 +69,14 @@ public partial class StagesManagerGUI : Editor {
         // 九宫格
         NineSlotPart();
         
+        if (GUILayout.Button("推荐（暂时未适配原生技能自动适应）", ButtonStyle))
+        {
+            if (string.IsNullOrEmpty(focusingtype))
+                return;
+            focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, 1);
+            focusingCharInfo._NineAndTwo.SortNineAndTwo();
+        }
+        
         // 自动在A1格适配原生技能
         if (focusingCharInfo != null)
             AutoSetInherSkill();
