@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Skill;
 
 public partial class NineAndTwo
 {
     // 为技能组的特定位置安排技能。内部while循环直到技能组合法的做法，让这个函数相关的任何处理一定不能用于正式版本。
-    static void SkillRandomAdd(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) // 1~9
+    // targetSlot : 1~9
+    static void SkillRandomAdd(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) 
     {
         do
         {
-            List<string> one = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
+            List<string> one = SkillConfigTable.RandomGetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, true, true, true }, Skill.BehaviorType.NONE, -1, 1);
             switch (targetSlot)
             {
                 case 1:
@@ -39,22 +41,48 @@ public partial class NineAndTwo
                     nineAndTwo.C3skillid = one[0];
                     break;
             }
-        } while (!InProcessPointLegalCheck(nineAndTwo) ||
+        }
+        while (!InProcessPointLegalCheck(nineAndTwo) ||
                 !CheckRepeat(nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid,
                             nineAndTwo.B1skillid, nineAndTwo.B2skillid, nineAndTwo.B3skillid,
                             nineAndTwo.C1skillid, nineAndTwo.C2skillid, nineAndTwo.C3skillid));
     }
     
-    public static NineAndTwo RandomSkillSet(string focusingtype, int skilllevel)
+    // 随机生成技能组，并且安排一个指定技能（原生技能）
+    // 角色的原生技能如果是普攻则会被安排在A1，如果是非普攻则会被安排在A2
+    public static NineAndTwo RandomSkillSet(string focusingtype, string originSkill, int skilllevel)
     {
         NineAndTwo nineAndTwo = new NineAndTwo();
+        SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
         
-        List<string> OneSkillId = SkillConfigTable.RandomGetTargetSkillRecordIds(focusingtype, new bool[3] { false, false, false }, new bool[4] { true, false, false, false }, Skill.BehaviorType.NONE, -1, 1);
-        nineAndTwo.A1skillid = OneSkillId[0];
-
-        for (int i = 2; i <= 9; i++)
+        for (int i = 1; i <= 9; i++)
         {
-            SkillRandomAdd(focusingtype, nineAndTwo, i);
+            if (i == 1)
+            {
+                if (originSkillConfig != null && originSkillConfig.SP_LEVEL == 0)
+                {
+                    nineAndTwo.A1skillid = originSkillConfig.RECORD_ID;
+                    continue;
+                }
+                List<string> OneSkillId = SkillConfigTable.RandomGetSkillRecordIds(
+                focusingtype,
+                new bool[3] { false, false, false },
+                new bool[4] { true, false, false, false }, BehaviorType.NONE, -1, 1);
+                nineAndTwo.A1skillid = OneSkillId[0];
+            }
+            else if (i == 2) // A2
+            {
+                if (originSkillConfig != null && originSkillConfig.SP_LEVEL != 0)
+                {
+                    nineAndTwo.A2skillid = originSkillConfig.RECORD_ID; 
+                }else{
+                    SkillRandomAdd(focusingtype, nineAndTwo, i);
+                }
+            }
+            else
+            {
+                SkillRandomAdd(focusingtype, nineAndTwo, i);
+            }
         }
         
         nineAndTwo.A1level = skilllevel;

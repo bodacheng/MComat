@@ -73,7 +73,8 @@ public partial class StagesManagerGUI : Editor {
         {
             if (string.IsNullOrEmpty(focusingtype))
                 return;
-            focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, 1);
+            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.ResourceID);
+            focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1);
             focusingCharInfo._NineAndTwo.SortNineAndTwo();
         }
         

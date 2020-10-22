@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Skill;
-using UnityEngine;
 
 public partial class NineAndTwo
 {
