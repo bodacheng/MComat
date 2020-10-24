@@ -40,6 +40,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 		}
 	}
     
+    // 在技能石模型上显示目前等级
     public void ShowStoneLevel()
     {
         info.gameObject.SetActive(true);

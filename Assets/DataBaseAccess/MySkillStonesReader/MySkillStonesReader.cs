@@ -17,6 +17,19 @@ namespace dataAccess
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
         
+        public static List<SkillStoneOfPlayerInfoModel> GetMyStonesBySkillID(string skillID)
+        {
+            List<SkillStoneOfPlayerInfoModel> infoModels = new List<SkillStoneOfPlayerInfoModel>();
+            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
+            {
+                if (keyValuePair.Value.skillId == skillID)
+                {
+                    infoModels.Add(keyValuePair.Value);
+                }
+            }
+            return infoModels;
+        }
+                
         public static SKStoneItem GetRenderModel(string localStoneid)
         {
             return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;

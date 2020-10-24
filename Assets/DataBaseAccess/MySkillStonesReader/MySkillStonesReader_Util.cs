@@ -9,6 +9,7 @@ namespace dataAccess
 {
     public partial class MySkillStonesReader
     {
+        #region 技能石模型相关
         // 把所有技能的等级显示出来
         public static void ShowAllMyStoneLevel()
         {
@@ -34,7 +35,9 @@ namespace dataAccess
                 keyValuePair.Value.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
             }
         }
-        
+        #endregion
+
+        #region 财产数据相关
         // 用于过滤显示在技能石盒内的技能石
         public static List<string> TargetStonesFromAccount(string type, int ExType, bool close, bool near, bool far)
         {
@@ -61,6 +64,21 @@ namespace dataAccess
             return SkillStonesOfTypeAndExType;
         }
         
+        public static List<string> TargetStonesFromAccount_unusing(string type, int ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
+        {
+            List<string> origin = TargetStonesFromAccount(type, ExType, close, near, far);
+            List<string> list = new List<string>();
+            for (int i = 0; i < origin.Count; i++)
+            {
+                SkillStoneOfPlayerInfoModel infoModel = Get(origin[i]);
+                if (AccountCharsSet.Get(infoModel.inUsingMonsterOfPlayerId) == null  &&  !exceptSkIDs.Contains(infoModel.skillId))
+                {
+                    list.Add(origin[i]);
+                }
+            }
+            return list;
+        }
+        
         // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
         public static List<SkillStoneOfPlayerInfoModel> GetEquipingStones(string monsterOfPlayerId)
         {
@@ -75,18 +93,19 @@ namespace dataAccess
             return targetStones;
         }
         
-        public static IEnumerator StoneGotcha()
+        // 获取一个角色的原生技能的对应技能石信息
+        public static SkillStoneOfPlayerInfoModel GetOriginSkillOfMonster(string monsterOfPlayerId)
         {
-            switch (AccountSet.ReferenceMode)
+            SkillStoneOfPlayerInfoModel targetStone = null;
+            foreach(KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
             {
-                case PlayerInfoRefMode.localTestSaveData:
-                    break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return SkillStoneGotcha("POLI0000000000000002",ApiLanguage.JaJp);
-                    break;
-                case PlayerInfoRefMode.formalVersion:
-                    break;
+                if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
+                {
+                    targetStone = keyValuePair.Value;
+                }
             }
-        }        
+            return targetStone;
+        }
+        #endregion
     }
 }

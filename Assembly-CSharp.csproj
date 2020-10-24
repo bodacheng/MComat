@@ -105,7 +105,8 @@
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_INI.cs" />
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_Tools.cs" />
     <Compile Include="Assets\AI\Soul\SkillSet\NineAndTwo_Validation.cs" />
-    <Compile Include="Assets\AI\Soul\SkillSet\RandomSkillSet.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\RandomSet\RandomSkillSet.cs" />
+    <Compile Include="Assets\AI\Soul\SkillSet\RandomSet\RandomSkillSet_Acc.cs" />
     <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
     <Compile Include="Assets\AI\buttons\ZokuseiStoneTagsGroup.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\LocalJson.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader.cs" />
+    <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Gotcha.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Load.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Remove.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader_Update.cs" />
@@ -585,6 +587,7 @@
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
+    <Compile Include="Assets\TheNineSlot\TheNineSlot_RandomAdd.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
     <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
     <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_Validation.cs" />

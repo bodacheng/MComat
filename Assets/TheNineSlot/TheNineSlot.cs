@@ -145,20 +145,20 @@ namespace mainMenu
             NineSlotT.gameObject.SetActive(false);
             yield return GetNineSlotReady();
         }
-
+        
         IEnumerator GetNineSlotReady()
         {
             SeletedRender(null);
             
-            A1Slot = new SkillStoneSlot(1,null, A1DragAndDropCell);
-            A2Slot = new SkillStoneSlot(2,null, A2DragAndDropCell);
-            A3Slot = new SkillStoneSlot(3,null, A3DragAndDropCell);
-            B1Slot = new SkillStoneSlot(4,null, B1DragAndDropCell);
-            B2Slot = new SkillStoneSlot(5,null, B2DragAndDropCell);
-            B3Slot = new SkillStoneSlot(6,null, B3DragAndDropCell);
-            C1Slot = new SkillStoneSlot(7,null, C1DragAndDropCell);
-            C2Slot = new SkillStoneSlot(8,null, C2DragAndDropCell);
-            C3Slot = new SkillStoneSlot(9,null, C3DragAndDropCell);
+            A1Slot = new SkillStoneSlot(1, null, A1DragAndDropCell);
+            A2Slot = new SkillStoneSlot(2, null, A2DragAndDropCell);
+            A3Slot = new SkillStoneSlot(3, null, A3DragAndDropCell);
+            B1Slot = new SkillStoneSlot(4, null, B1DragAndDropCell);
+            B2Slot = new SkillStoneSlot(5, null, B2DragAndDropCell);
+            B3Slot = new SkillStoneSlot(6, null, B3DragAndDropCell);
+            C1Slot = new SkillStoneSlot(7, null, C1DragAndDropCell);
+            C2Slot = new SkillStoneSlot(8, null, C2DragAndDropCell);
+            C3Slot = new SkillStoneSlot(9, null, C3DragAndDropCell);
             
             allSlot.Clear();
             allSlot.Add(A1Slot);
@@ -177,8 +177,8 @@ namespace mainMenu
             }
             yield return ReadANineAndTwo(null);
         }
-
-        public IEnumerator ReadANineAndTwo(GetMonsterOfPlayerDetailModel _AccountCharacterInfo)
+        
+        void Clear()
         {
             foreach (SkillStoneSlot _slot in allSlot)
             {
@@ -186,11 +186,17 @@ namespace mainMenu
                 _slot._DragAndDropCell.cellPhase = StoneCell.CellPhase.NineSlotCell;
                 _slot.RemoveStoneFromSlot();
             }
-            if (_AccountCharacterInfo == null)
+        }
+
+        public IEnumerator ReadANineAndTwo(GetMonsterOfPlayerDetailModel _AccCharInfo)
+        {
+            Clear();
+            
+            if (_AccCharInfo == null)
             {
                 yield break;
             }
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(_AccountCharacterInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(_AccCharInfo.monsterOfPlayerId);
             for (int i = 0; i < equipingstones.Count; i++)
             {
                 switch (equipingstones[i].inUsingSkillSlot)

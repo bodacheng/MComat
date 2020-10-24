@@ -10,7 +10,7 @@ namespace mainMenu
         // 撤销编辑
         public void ResetNineSlot()
         {
-            mainProcessRunner.Run(TheNineSlot.target.ReadANineAndTwo(MemberDetail.target._focusing));
+            mainProcessRunner.Run(target.ReadANineAndTwo(MemberDetail.target._focusing));
         }
         
         public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accCharInfo)

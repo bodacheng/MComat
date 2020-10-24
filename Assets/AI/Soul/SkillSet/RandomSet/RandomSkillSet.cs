@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Skill;
 
 public partial class NineAndTwo
@@ -14,7 +13,11 @@ public partial class NineAndTwo
             switch (targetSlot)
             {
                 case 1:
-                    nineAndTwo.A1skillid = one[0];
+                    List<string> OneSkillId = SkillConfigTable.RandomGetSkillRecordIds(
+                    focusingtype,
+                    new bool[3] { false, false, false },
+                    new bool[4] { true, false, false, false }, BehaviorType.NONE, -1, 1);
+                    nineAndTwo.A1skillid = OneSkillId[0];
                     break;
                 case 2:
                     nineAndTwo.A2skillid = one[0];
@@ -64,11 +67,7 @@ public partial class NineAndTwo
                     nineAndTwo.A1skillid = originSkillConfig.RECORD_ID;
                     continue;
                 }
-                List<string> OneSkillId = SkillConfigTable.RandomGetSkillRecordIds(
-                focusingtype,
-                new bool[3] { false, false, false },
-                new bool[4] { true, false, false, false }, BehaviorType.NONE, -1, 1);
-                nineAndTwo.A1skillid = OneSkillId[0];
+                SkillRandomAdd(focusingtype, nineAndTwo, i);
             }
             else if (i == 2) // A2
             {
@@ -123,6 +122,36 @@ public partial class NineAndTwo
             
         int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);
         if (currentPoint + remainSlotCount * 10 < 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    static bool RemainSlotMustBeAllNormal(NineAndTwo current)
+    {
+        int remainSlotCount = 0;
+        if (current.A1skillid == null)
+            remainSlotCount++;
+        if (current.A2skillid == null)
+            remainSlotCount++;
+        if (current.A3skillid == null)
+            remainSlotCount++;
+        if (current.B1skillid == null)
+            remainSlotCount++;
+        if (current.B2skillid == null)
+            remainSlotCount++;
+        if (current.B3skillid == null)
+            remainSlotCount++;
+        if (current.C1skillid == null)
+            remainSlotCount++;
+        if (current.C2skillid == null)
+            remainSlotCount++;
+        if (current.C3skillid == null)
+            remainSlotCount++;
+            
+        int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);
+        if (currentPoint + remainSlotCount * 10 == 0)
         {
             return false;
         }
