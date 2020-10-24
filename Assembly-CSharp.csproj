@@ -589,6 +589,7 @@
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Clear.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_RandomAdd.cs" />
+    <Compile Include="Assets\TheNineSlot\TheNineSlot_Read.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
     <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
     <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_Validation.cs" />

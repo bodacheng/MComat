@@ -6,6 +6,51 @@ using Api.Dto.Model;
 
 public partial class NineAndTwo : MonoBehaviour
 {
+    // 根据账户内拥有的技能石来安排九宫格内技能石排布。
+    public static NineAndTwo RandomSkillSet_BasedOnMyStones(string type, string originSkill, int skilllevel)
+    {
+        NineAndTwo nineAndTwo = new NineAndTwo();
+        SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
+        
+        for (int i = 1; i <= 9; i++)
+        {
+            if (i == 1)
+            {
+                if (originSkillConfig != null && originSkillConfig.SP_LEVEL == 0)
+                {
+                    nineAndTwo.A1skillid = originSkillConfig.RECORD_ID;
+                }else{
+                    SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
+                }
+            }
+            else if (i == 2) // A2
+            {
+                if (originSkillConfig != null && originSkillConfig.SP_LEVEL != 0)
+                {
+                    nineAndTwo.A2skillid = originSkillConfig.RECORD_ID; 
+                }else{
+                    SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
+                }
+            }
+            else
+            {
+                SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
+            }
+        }
+        
+        nineAndTwo.A1level = skilllevel;
+        nineAndTwo.A2level = skilllevel;
+        nineAndTwo.A3level = skilllevel;
+        nineAndTwo.B1level = skilllevel;
+        nineAndTwo.B2level = skilllevel;
+        nineAndTwo.B3level = skilllevel;
+        nineAndTwo.C1level = skilllevel;
+        nineAndTwo.C2level = skilllevel;
+        nineAndTwo.C3level = skilllevel;
+        
+        return nineAndTwo;
+    }
+    
     static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(string type, int[] ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
     {
         SkillStoneOfPlayerInfoModel infoModel;
@@ -88,49 +133,5 @@ public partial class NineAndTwo : MonoBehaviour
                     break;
             }
         }
-    }
-    
-    public static NineAndTwo RandomSkillSet_BasedOnMyStones(string focusingtype, string originSkill, int skilllevel)
-    {
-        NineAndTwo nineAndTwo = new NineAndTwo();
-        SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
-        
-        for (int i = 1; i <= 9; i++)
-        {
-            if (i == 1)
-            {
-                if (originSkillConfig != null && originSkillConfig.SP_LEVEL == 0)
-                {
-                    nineAndTwo.A1skillid = originSkillConfig.RECORD_ID;
-                }else{
-                    SkillRandomAdd_BasedOnMyStones(focusingtype, nineAndTwo, i);
-                }
-            }
-            else if (i == 2) // A2
-            {
-                if (originSkillConfig != null && originSkillConfig.SP_LEVEL != 0)
-                {
-                    nineAndTwo.A2skillid = originSkillConfig.RECORD_ID; 
-                }else{
-                    SkillRandomAdd_BasedOnMyStones(focusingtype, nineAndTwo, i);
-                }
-            }
-            else
-            {
-                SkillRandomAdd_BasedOnMyStones(focusingtype, nineAndTwo, i);
-            }
-        }
-        
-        nineAndTwo.A1level = skilllevel;
-        nineAndTwo.A2level = skilllevel;
-        nineAndTwo.A3level = skilllevel;
-        nineAndTwo.B1level = skilllevel;
-        nineAndTwo.B2level = skilllevel;
-        nineAndTwo.B3level = skilllevel;
-        nineAndTwo.C1level = skilllevel;
-        nineAndTwo.C2level = skilllevel;
-        nineAndTwo.C3level = skilllevel;
-        
-        return nineAndTwo;
     }
 }

@@ -19,21 +19,22 @@ namespace mainMenu
             
             NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet_BasedOnMyStones(charConfig.TYPE, originSkillInfo?.skillId, 1);
 
-            Temp(info.monsterOfPlayerId, 1, targetSkillSet.A1skillid);
-            Temp(info.monsterOfPlayerId, 2, targetSkillSet.A2skillid);
-            Temp(info.monsterOfPlayerId, 3, targetSkillSet.A3skillid);
-            Temp(info.monsterOfPlayerId, 4, targetSkillSet.B1skillid);
-            Temp(info.monsterOfPlayerId, 5, targetSkillSet.B2skillid);
-            Temp(info.monsterOfPlayerId, 6, targetSkillSet.B3skillid);
-            Temp(info.monsterOfPlayerId, 7, targetSkillSet.C1skillid);
-            Temp(info.monsterOfPlayerId, 8, targetSkillSet.C2skillid);
-            Temp(info.monsterOfPlayerId, 9, targetSkillSet.C3skillid);
+            // 如果角色有原生技能，则已经存在于targetSkillSet当中
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 1, targetSkillSet.A1skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 2, targetSkillSet.A2skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 3, targetSkillSet.A3skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 4, targetSkillSet.B1skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 5, targetSkillSet.B2skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 6, targetSkillSet.B3skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 7, targetSkillSet.C1skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 8, targetSkillSet.C2skillid);
+            AddRandomStoneToSlot(info.monsterOfPlayerId, 9, targetSkillSet.C3skillid);
             
             NineSlotsStatusRefresh();
             TheNineSlot.target.mainProcessRunner.Run(SkillStonesBox.target.ArrangeSkillStonesToBox());
         }
         
-        void Temp(string monsterOfPlayerId, int targetSlot, string skillid)
+        void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillid)
         {
             GetMonsterOfPlayerDetailModel charInfo = AccountCharsSet.Get(monsterOfPlayerId);
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(monsterOfPlayerId);
