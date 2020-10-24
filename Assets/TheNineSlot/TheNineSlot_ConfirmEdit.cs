@@ -18,10 +18,14 @@ namespace mainMenu
             NineAndTwo.SkillEditError valR = target.CheckEditBasedOnCurrent();
             if (valR != NineAndTwo.SkillEditError.Perfect)
             {
-                target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
+                target.ValiationWarn(valR, accCharInfo.monsterOfPlayerId);
                 yield break;
             }
-            
+            yield return UpdateMyStonesBaseOnSlotsExecution(accCharInfo);
+        }
+        
+        IEnumerator UpdateMyStonesBaseOnSlotsExecution(GetMonsterOfPlayerDetailModel accCharInfo)
+        {
             for (int i = 0; i < allSlot.Count; i++)
             {
                 if (allSlot[i]._DragAndDropCell.GetItem() != null)

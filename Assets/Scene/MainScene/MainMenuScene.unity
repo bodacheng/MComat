@@ -837,28 +837,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -1791,28 +1770,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -35263,6 +35221,7 @@ RectTransform:
   - {fileID: 2093238720419168646}
   - {fileID: 360249891}
   - {fileID: 2101895505}
+  - {fileID: 1521698411}
   - {fileID: 743696840}
   m_Father: {fileID: 1762077932}
   m_RootOrder: 1
@@ -35726,7 +35685,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 721552152}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -36596,28 +36555,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -47537,28 +47475,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -83490,6 +83407,135 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!1 &1521698410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521698411}
+  - component: {fileID: 1521698414}
+  - component: {fileID: 1521698413}
+  - component: {fileID: 1521698412}
+  m_Layer: 5
+  m_Name: ClearButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1521698411
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521698410}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 721552152}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -82, y: -611.0024}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1521698412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521698410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1521698413}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6065445}
+        m_MethodName: ClearSkillEquip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1521698413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521698410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9e9d070f9647b40c2a017dce7661cc99, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1521698414
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521698410}
+  m_CullTransparentMesh: 0
 --- !u!1 &1527894830
 GameObject:
   m_ObjectHideFlags: 0
@@ -104481,8 +104527,8 @@ RectTransform:
   m_Father: {fileID: 689913692}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.19117452}
-  m_AnchorMax: {x: 1, y: 0.999997}
+  m_AnchorMin: {x: 0, y: 0.19116919}
+  m_AnchorMax: {x: 1, y: 0.9999943}
   m_AnchoredPosition: {x: 1, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -104565,8 +104611,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1982118370}
   m_HandleRect: {fileID: 1982118369}
   m_Direction: 2
-  m_Value: 0.9999845
-  m_Size: 0.8088225
+  m_Value: 0.99996996
+  m_Size: 0.8088251
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -202598,7 +202644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -202715,8 +202761,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294961664
-  m_fontColor: {r: 0, g: 0.91764706, b: 1, a: 1}
+    rgba: 4278255360
+  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -202937,7 +202983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.49019608}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -203138,7 +203184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.78431374}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -374555,28 +374601,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -595071,28 +595096,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -595579,28 +595583,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -595871,28 +595854,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596052,28 +596014,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596110,28 +596051,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596442,28 +596362,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596654,28 +596553,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597165,28 +597043,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597710,28 +597567,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597891,28 +597727,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598032,28 +597847,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598324,28 +598118,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598465,28 +598238,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598646,28 +598398,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598861,28 +598592,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598962,28 +598672,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599143,28 +598832,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599389,28 +599057,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599678,28 +599325,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599779,28 +599405,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599994,28 +599599,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600135,28 +599719,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600319,28 +599882,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600417,28 +599959,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600641,28 +600162,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600742,28 +600242,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600880,28 +600359,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601064,28 +600522,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601165,28 +600602,7 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
+    _NineAndTwo: {fileID: 0}
   _CharConfig:
     RECORD_ID: 
     TYPE: 

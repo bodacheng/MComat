@@ -29,7 +29,7 @@ namespace dataAccess
             }
             return infoModels;
         }
-                
+                      
         public static SKStoneItem GetRenderModel(string localStoneid)
         {
             return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;

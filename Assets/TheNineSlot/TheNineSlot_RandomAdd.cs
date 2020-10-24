@@ -2,6 +2,8 @@
 using dataAccess;
 using Api.Dto.Model;
 using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 namespace mainMenu
 {
@@ -9,40 +11,45 @@ namespace mainMenu
     {
         public void Random()
         {
-            Clear();
+            ForceClearAll();
             
             GetMonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
             
             NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet_BasedOnMyStones(charConfig.TYPE, originSkillInfo?.skillId, 1);
-            
-            List<SkillStoneOfPlayerInfoModel> A1Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.A1skillid);
-            List<SkillStoneOfPlayerInfoModel> A2Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.A2skillid);
-            List<SkillStoneOfPlayerInfoModel> A3Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.A3skillid);
-            
-            List<SkillStoneOfPlayerInfoModel> B1Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.B1skillid);
-            List<SkillStoneOfPlayerInfoModel> B2Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.B2skillid);
-            List<SkillStoneOfPlayerInfoModel> B3Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.B3skillid);
-            
-            List<SkillStoneOfPlayerInfoModel> C1Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.C1skillid);
-            List<SkillStoneOfPlayerInfoModel> C2Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.C2skillid);
-            List<SkillStoneOfPlayerInfoModel> C3Options = MySkillStonesReader.GetMyStonesBySkillID(targetSkillSet.C3skillid);
-            
-            A1Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(A1Options.Count > 0 ? A1Options[0].skillStoneOfPlayerId : null));
-            A2Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(A2Options.Count > 0 ? A2Options[0].skillStoneOfPlayerId : null));
-            A3Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(A3Options.Count > 0 ? A3Options[0].skillStoneOfPlayerId : null));
-            
-            B1Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(B1Options.Count > 0 ? B1Options[0].skillStoneOfPlayerId : null));
-            B2Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(B2Options.Count > 0 ? B2Options[0].skillStoneOfPlayerId : null));
-            B3Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(B3Options.Count > 0 ? B3Options[0].skillStoneOfPlayerId : null));
-            
-            C1Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(C1Options.Count > 0 ? C1Options[0].skillStoneOfPlayerId : null));
-            C2Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(C2Options.Count > 0 ? C2Options[0].skillStoneOfPlayerId : null));
-            C3Slot._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(C3Options.Count > 0 ? C3Options[0].skillStoneOfPlayerId : null));
 
+            Temp(info.monsterOfPlayerId, 1, targetSkillSet.A1skillid);
+            Temp(info.monsterOfPlayerId, 2, targetSkillSet.A2skillid);
+            Temp(info.monsterOfPlayerId, 3, targetSkillSet.A3skillid);
+            Temp(info.monsterOfPlayerId, 4, targetSkillSet.B1skillid);
+            Temp(info.monsterOfPlayerId, 5, targetSkillSet.B2skillid);
+            Temp(info.monsterOfPlayerId, 6, targetSkillSet.B3skillid);
+            Temp(info.monsterOfPlayerId, 7, targetSkillSet.C1skillid);
+            Temp(info.monsterOfPlayerId, 8, targetSkillSet.C2skillid);
+            Temp(info.monsterOfPlayerId, 9, targetSkillSet.C3skillid);
+            
             NineSlotsStatusRefresh();
             TheNineSlot.target.mainProcessRunner.Run(SkillStonesBox.target.ArrangeSkillStonesToBox());
+        }
+        
+        void Temp(string monsterOfPlayerId, int targetSlot, string skillid)
+        {
+            GetMonsterOfPlayerDetailModel charInfo = AccountCharsSet.Get(monsterOfPlayerId);
+            SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> Options = MySkillStonesReader.GetMyStonesBySkillID(skillid);
+
+            if (originSkillInfo != null && skillid == originSkillInfo.skillId)
+            {
+                for (int i = 0; i < Options.Count; i++)
+                {
+                    if (Options[i] == originSkillInfo)
+                        allSlot[targetSlot - 1]._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(Options.Count > 0 ? originSkillInfo.skillStoneOfPlayerId : null));
+                }
+            }else{
+                Options.OrderByDescending(x => x.EXP);
+                allSlot[targetSlot - 1]._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(Options.Count > 0 ? Options[0].skillStoneOfPlayerId : null));
+            }
         }
     }
 }

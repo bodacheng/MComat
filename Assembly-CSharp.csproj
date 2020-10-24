@@ -586,6 +586,7 @@
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
+    <Compile Include="Assets\TheNineSlot\TheNineSlot_Clear.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_RandomAdd.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />

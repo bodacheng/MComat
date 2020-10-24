@@ -64,9 +64,13 @@ namespace dataAccess
             return SkillStonesOfTypeAndExType;
         }
         
-        public static List<string> TargetStonesFromAccount_unusing(string type, int ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
+        public static List<string> TargetStonesFromAccount_unusing(string type, int[] ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
         {
-            List<string> origin = TargetStonesFromAccount(type, ExType, close, near, far);
+            List<string> origin = new List<string>();
+            for (int i = 0; i < ExType.Length; i++)
+            {
+                origin.AddRange(TargetStonesFromAccount(type, ExType[i], close, near, far));
+            }
             List<string> list = new List<string>();
             for (int i = 0; i < origin.Count; i++)
             {

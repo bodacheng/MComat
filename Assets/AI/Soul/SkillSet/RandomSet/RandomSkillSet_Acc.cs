@@ -6,7 +6,7 @@ using Api.Dto.Model;
 
 public partial class NineAndTwo : MonoBehaviour
 {
-    static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(string type, int ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
+    static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(string type, int[] ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
     {
         SkillStoneOfPlayerInfoModel infoModel;
         List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_unusing(type, ExType, close, near, far, exceptSkIDs);
@@ -42,7 +42,7 @@ public partial class NineAndTwo : MonoBehaviour
         
         if (targetSlot == 1)
         {
-            SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(focusingtype, 0, false, false, false, exceptSKIds);
+            SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(focusingtype, new int[1] {0}, false, false, false, exceptSKIds);
             if (infoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("A1的普攻都找不到");
@@ -51,19 +51,15 @@ public partial class NineAndTwo : MonoBehaviour
             string skillid = infoModel.skillId;
             nineAndTwo.A1skillid = skillid;
         }else{
-            SkillStoneOfPlayerInfoModel infoModel = 
-                RemainSlotMustBeAllNormal(nineAndTwo) ? 
-                SearchStoneForRandomSet(focusingtype, 0, false, false, false, exceptSKIds)
-                :
-                SearchStoneForRandomSet(focusingtype, -1, false, false, false, exceptSKIds);
-                
-            if (infoModel == null) // 如果账户已经没有符合要求的石头
+            int[] CanEx = RemainSlotSPLevelCal(nineAndTwo).ToArray();            
+            SkillStoneOfPlayerInfoModel stoneInfoModel = SearchStoneForRandomSet(focusingtype, CanEx, false, false, false, exceptSKIds);
+            if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot +"找到合适技能石");
                 return;
             }
             
-            string skillid = infoModel.skillId;
+            string skillid = stoneInfoModel.skillId;
             switch (targetSlot)
             {
                 case 2:

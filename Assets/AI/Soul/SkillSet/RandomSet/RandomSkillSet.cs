@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Skill;
+using UnityEngine;
 
 public partial class NineAndTwo
 {
@@ -128,7 +129,7 @@ public partial class NineAndTwo
         return true;
     }
     
-    static bool RemainSlotMustBeAllNormal(NineAndTwo current)
+    static List<int> RemainSlotSPLevelCal(NineAndTwo current)
     {
         int remainSlotCount = 0;
         if (current.A1skillid == null)
@@ -151,10 +152,15 @@ public partial class NineAndTwo
             remainSlotCount++;
             
         int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);
-        if (currentPoint + remainSlotCount * 10 == 0)
-        {
-            return false;
-        }
-        return true;
+        int point = currentPoint + (remainSlotCount - 1) * 10;
+        List<int> returnValue = new List<int>();
+        if (point >= 30)
+            returnValue.Add(3);
+        if (point >= 20)
+            returnValue.Add(2);
+        if (point >= 10)
+            returnValue.Add(1);
+        returnValue.Add(0);
+        return returnValue;
     }
 }

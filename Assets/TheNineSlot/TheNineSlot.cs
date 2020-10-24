@@ -178,19 +178,9 @@ namespace mainMenu
             yield return ReadANineAndTwo(null);
         }
         
-        void Clear()
-        {
-            foreach (SkillStoneSlot _slot in allSlot)
-            {
-                _slot.OnSlotStoneID = null;
-                _slot._DragAndDropCell.cellPhase = StoneCell.CellPhase.NineSlotCell;
-                _slot.RemoveStoneFromSlot();
-            }
-        }
-
         public IEnumerator ReadANineAndTwo(GetMonsterOfPlayerDetailModel _AccCharInfo)
         {
-            Clear();
+            ForceClearAll();
             
             if (_AccCharInfo == null)
             {
