@@ -11,7 +11,7 @@ namespace FightScene
             Step = SceneStep.FightOver;
             EelementsInherit(_NetFightScene);
         }
-                
+        
         IEnumerator EnterProcess()
         {
             yield return FinalMomentAnim(fightLogger.GetWinner());

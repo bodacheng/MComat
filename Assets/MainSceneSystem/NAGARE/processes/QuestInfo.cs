@@ -46,6 +46,16 @@ public class QuestInfo : MainSceneProcess
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
                 yield return FightLoad.Arena();
                 break;
+            case TeamSetGameMode.story:
+                void GoToTeamEdit_Arcade()
+                {
+                    TeamSet.SwitchTargetTeam(TeamSetGameMode.story);
+                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, true);
+                }
+                FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
+                FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
+                yield return FightLoad.Arcade();
+                break;
         }
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
         FightPreparePage.target.StageMembersInfoShow(FightLoad.ToBeLoad);

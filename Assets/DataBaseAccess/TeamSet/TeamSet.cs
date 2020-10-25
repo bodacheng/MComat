@@ -155,12 +155,6 @@ namespace dataAccess
             }
             yield return teamMembers;
         }
-        
-        public static void GoToTeamEdit_Arcade()
-        {
-            SwitchTargetTeam(TeamSetGameMode.story);
-            PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, true);
-        }
     }
     
     public enum TeamSetGameMode

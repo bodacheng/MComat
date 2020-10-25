@@ -37,22 +37,23 @@ public class ModelShower : MonoBehaviour
 
     public IEnumerator ShowMyModel(string localID)
     {
-        if (showingChar != null)
-        {
-            showingChar.SetActive(false);
-        }
-        if (localID == null)
-        {
-            yield break;
-        }
         GetMonsterOfPlayerDetailModel targetInfo = AccountCharsSet.Get(localID);
-        IEnumerator enumerator = ShowModel(targetInfo.monsterId);
+        IEnumerator enumerator = ShowModel(targetInfo != null ? targetInfo.monsterId : null);
         yield return enumerator;
         yield return enumerator.Current;
     }
     
     public IEnumerator ShowModel(string monsterID)
     {
+        if (showingChar != null)
+        {
+            showingChar.SetActive(false);
+        }
+        if (monsterID == null)
+        {
+            yield break;
+        }
+    
         IEnumerator focusingOneModel = GeneralModelPool.GetModel(monsterID, true);
         yield return focusingOneModel;
         if (focusingOneModel.Current == null)

@@ -2,6 +2,7 @@
 using mainMenu;
 using UnityEngine;
 using DG.Tweening;
+using dataAccess;
 
 public class ArcadeFrontProcess : MainSceneProcess
 {
@@ -10,7 +11,16 @@ public class ArcadeFrontProcess : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.5f, 0.1f);
-        yield return ModelShower.target.ShowMyModel(null);
+        
+        if (ArcadeManager.ArcadeStages.ContainsKey(AccountSet._AccInfo.ArcadeProcess))
+        {
+            StageInfo StageInfo = ArcadeManager.ArcadeStages[AccountSet._AccInfo.ArcadeProcess];
+            ArcadeManager.target.IconButtonFeature(StageInfo.MemberIcons[0]);
+        }else{
+            Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");
+            yield return ModelShower.target.ShowMyModel(null);
+        }
+        
         yield return ArcadeManager.target.PageRefresh();
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
         loadFinished = true;

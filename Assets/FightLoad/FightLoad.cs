@@ -45,6 +45,7 @@ public static class FightLoad
         ToBeLoad.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getArenaTeam.Current;
     }
     
+    #region 进入战斗
     public static void GoTo()
     {
         IEnumerator LoadAndGo()
@@ -77,4 +78,5 @@ public static class FightLoad
         GeneralModelPool.Clear();
         SceneManager.LoadScene(2);
     }
+    #endregion
 }

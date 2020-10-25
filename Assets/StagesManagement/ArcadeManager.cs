@@ -13,19 +13,11 @@ namespace mainMenu
     {
         public Canvas _ArcadeCanvas;
         public RectTransform ButtonsContainer;
-
-        [Space(7)]
-        [Header("编辑队伍")]
-        public Button EditTeamButton; // 根据进入战斗模式决定是否显示
-
+        
         [Space(7)]
         [Header("编辑队伍")]
         public Button JumpToNewStage; // 根据进入战斗模式决定是否显示
-
-        [Space(7)]
-        [Header("myteamT")]
-        public RectTransform myT;
-
+        
         [Space(7)]
         [Header("ScrollRect")]
         public ScrollRect _ScrollRect;
@@ -75,7 +67,7 @@ namespace mainMenu
                     void LoadThisStage()
                     {
                         FightLoad.PreLoad(ArcadeStages[one.LocalFightID].stageConfig, TeamSetGameMode.story);
-                        FightLoad.GoTo();
+                        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
                     }
                     newButton.button.onClick.AddListener(LoadThisStage);
                     newButton.ID = one.LocalFightID;
@@ -91,15 +83,12 @@ namespace mainMenu
                     for (int i = 0; i < heroIcons.Count; i++)
                     {
                         HeroIcon heroIcon = heroIcons[i];
-                        void IconButtonFeature()
+                        void temp()
                         {
-                            // 显示模型
-                            MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
-                            // 显示技能组
-                            MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
+                            IconButtonFeature(heroIcon);
                         }
                         heroIcon.iconButton.onClick.RemoveAllListeners();
-                        heroIcon.iconButton.onClick.AddListener(IconButtonFeature);
+                        heroIcon.iconButton.onClick.AddListener(temp);
                     }
                     
                     StageInfo stageInfo = new StageInfo
@@ -142,6 +131,14 @@ namespace mainMenu
             };
         }
         
+        public void IconButtonFeature(HeroIcon heroIcon)
+        {
+            // 显示模型
+            MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
+            // 显示技能组
+            MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
+        }
+        
         public IEnumerator PageRefresh()
         {
              // 假设有100关，然后按钮应该是越往下拖关卡数越大，才能和JumpToNewest()堆起来
@@ -158,28 +155,13 @@ namespace mainMenu
             VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
             ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * ArcadeStages.Count);
             
-            EditTeamButton.onClick.RemoveAllListeners();
-            EditTeamButton.onClick.AddListener(TeamSet.GoToTeamEdit_Arcade);
             JumpToNewStage.onClick.RemoveAllListeners();
             JumpToNewStage.onClick.AddListener(JumpTo);
 
-            PosKeySet set = TeamSet.Default;
-            IEnumerator getDefaultTeamSet = TeamSet.MyTeamByEntryLimit(4, set);// 暂时不根据关卡人数限制修改我方队伍显示
-            yield return getDefaultTeamSet;
-            if (getDefaultTeamSet.Current == null)
-            {
-                Debug.Log("获取我方人员错误");
-                yield break;
-            }
-            MultiDictionary<int, int, CharDataInfo> my = (MultiDictionary<int, int, CharDataInfo>)getDefaultTeamSet.Current;
-            for (int i = 0; i < my.values.Count; i++)
-            {
-                IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(my.values[i].ResourceID);
-                yield return onecoroutine;
-            }
-            FightPreparePage.MemberInfosShow(my.values, myT);
             RefreshRender();
             JumpTo();
+
+            yield break;
         }
         
         float CurrentTargetScrollbarValue()
