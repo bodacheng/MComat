@@ -7,7 +7,7 @@ namespace HittingDetection
     {
         #region settings
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
-        float ActivateAfterTime;
+        public float ActivateAfterTime;
         [Tooltip("特定针对")]
         public SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
@@ -99,7 +99,7 @@ namespace HittingDetection
         
         public void MarkersEnablingStarts()
         {
-            if (System.Math.Abs(ActivateAfterTime) < 0.01f)
+            if (System.Math.Abs(ActivateAfterTime) < 0.001f)
             {
                 EnableMarkers();
             }

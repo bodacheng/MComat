@@ -114,11 +114,17 @@ public class G_Ani_MoveEscape_State : Behavior {
         screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
         screenMovementForward = screenMovementSpace * Vector3.forward;
         screenMovementRight = screenMovementSpace * Vector3.right;
-
+        
         h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
         v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
         
-        use_direction = (screenMovementForward * v) + (screenMovementRight * h);
+        if (System.Math.Abs(h) < 0.001f && System.Math.Abs(v) < 0.001f)
+        {
+            use_direction = gameObject.transform.forward;
+        }else{
+            use_direction = (screenMovementForward * v) + (screenMovementRight * h);
+        }
+        
         RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f, true);
     }
     
