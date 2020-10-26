@@ -134,8 +134,8 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GradientHorizonColor: {r: 0.9378356, g: 0.5028655, b: 0.9632353, a: 1}
-    - _GradientSkyColor: {r: 0.0934256, g: 0.2600022, b: 0.39705884, a: 1}
+    - _GradientHorizonColor: {r: 0, g: 0.6401701, b: 1, a: 1}
+    - _GradientSkyColor: {r: 0, g: 0.097770154, b: 0.1792453, a: 1}
     - _MoonColor: {r: 0.66, g: 0.65, b: 0.55, a: 1}
     - _MoonComputedPositionData: {r: -0.36930114, g: 0.66199994, b: 0.65220606, a: 0}
     - _MoonComputedRotationData: {r: 5.5597014, g: 5.7679644, b: 0, a: 0}
@@ -162,6 +162,7 @@ Texture2D:
   m_MipCount: 1
   m_IsReadable: 1
   m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_AlphaIsTransparency: 0
@@ -203,6 +204,7 @@ Texture2D:
   m_MipCount: 1
   m_IsReadable: 1
   m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_AlphaIsTransparency: 0
@@ -244,6 +246,7 @@ Texture2D:
   m_MipCount: 1
   m_IsReadable: 1
   m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
   m_StreamingMipmaps: 0
   m_StreamingMipmapsPriority: 0
   m_AlphaIsTransparency: 0
