@@ -5,37 +5,68 @@ public partial class NineAndTwo
 {
     public List<string> SkillIDList()
     {
-        List<SkillEntity> sklist = SkillEntityList();
         List<string> IDs = new List<string>();
-        for (int i = 0; i < sklist.Count; i++)
-        {
-            IDs.Add(sklist[i].REAL_NAME);
-        }
+
+        if (A1skillid != null)
+            IDs.Add(A1skillid);
+        if (A2skillid != null)
+            IDs.Add(A2skillid);
+        if (A3skillid != null)
+            IDs.Add(A3skillid);
+            
+        if (B1skillid != null)
+            IDs.Add(B1skillid);
+        if (B2skillid != null)
+            IDs.Add(B2skillid);
+        if (B3skillid != null)
+            IDs.Add(B3skillid);
+            
+        if (C1skillid != null)
+            IDs.Add(C1skillid);
+        if (C2skillid != null)
+            IDs.Add(C2skillid);
+        if (C3skillid != null)
+            IDs.Add(C3skillid);
+            
         return IDs;
     }
     
-    public void SetSkillLevel(int level)
+    // 获取平均技能等级
+    float GetAerLevel()
     {
-        A1level = level;
-        A2level = level;
-        A3level = level;
-        B1level = level;
-        B2level = level;
-        B3level = level;
-        C1level = level;
-        C2level = level;
-        C3level = level;
-    }
-    
-    public List<int> SkillLevelList()
-    {
-        List<SkillEntity> sklist = SkillEntityList();
         List<int> levels = new List<int>();
-        for (int i = 0; i < sklist.Count; i++)
+
+        if (A1skillid != null)
+            levels.Add(A1level);
+        if (A2skillid != null)
+            levels.Add(A2level);
+        if (A3skillid != null)
+            levels.Add(A3level);
+            
+        if (B1skillid != null)
+            levels.Add(B1level);
+        if (B2skillid != null)
+            levels.Add(B2level);
+        if (B3skillid != null)
+            levels.Add(B3level);
+            
+        if (C1skillid != null)
+            levels.Add(C1level);
+        if (C2skillid != null)
+            levels.Add(C2level);
+        if (C3skillid != null)
+            levels.Add(C3level);
+
+        float aver = 0;
+        for (int i = 0; i < levels.Count; i++)
         {
-            levels.Add(sklist[i].LEVEL);
+            aver += (float)levels[i];
         }
-        return levels;
+        aver = aver / levels.Count;
+        // 取小数点后一位
+        int intValue =(int)(aver * 10);
+        aver = (float)(intValue * 1.0)/10;
+        return aver;
     }
     
     public static float INI_Hp(List<SkillEntity> sklist)
@@ -48,6 +79,7 @@ public partial class NineAndTwo
         return WholeHP;
     }
     
+    // 获取技能实体列表，调用必须在SortNineAndTwo之后
     public List<SkillEntity> SkillEntityList()
     {
         List<SkillEntity> behavior_Transition_Sets = new List<SkillEntity>();
@@ -72,7 +104,28 @@ public partial class NineAndTwo
             behavior_Transition_Sets.Add(C2);
         if (C3 != null)
             behavior_Transition_Sets.Add(C3);
-        
+            
+        if (D != null)
+            behavior_Transition_Sets.Add(D);
+        if (M != null)
+            behavior_Transition_Sets.Add(M);
+        if (R != null)
+            behavior_Transition_Sets.Add(R);
+        if (Empty != null)
+            behavior_Transition_Sets.Add(Empty);
+        if (zhuangbi != null)
+            behavior_Transition_Sets.Add(zhuangbi);
+        if (Victory != null)
+            behavior_Transition_Sets.Add(Victory);    
+        if (Death != null)
+            behavior_Transition_Sets.Add(Death);
+        if (Hit != null)
+            behavior_Transition_Sets.Add(Hit);
+        if (getUp != null)
+            behavior_Transition_Sets.Add(getUp);
+        if (KnockOff != null)
+            behavior_Transition_Sets.Add(KnockOff);
+            
         return behavior_Transition_Sets;
     }
     
@@ -161,13 +214,22 @@ public partial class NineAndTwo
         C3skillid = CConfig3?.RECORD_ID;
     }
     
-    public List<SkillEntity> ReturnSTSlist()
-    {
-        return StateTransitionSetList;
-    }
-    
     public SkillEntity GetM_STS()
     {
         return M;
+    }
+    
+    // 平均设置所有技能的等级，只能用于关卡制作等等
+    public void SetSkillLevel(int level)
+    {
+        A1level = level;
+        A2level = level;
+        A3level = level;
+        B1level = level;
+        B2level = level;
+        B3level = level;
+        C1level = level;
+        C2level = level;
+        C3level = level;
     }
 }

@@ -8,7 +8,7 @@ using Soul;
 using Skill;
 
 [CustomEditor(typeof(BehaviorRunner))]
-public class BehaviorRunnerGUI : Editor {
+public partial class BehaviorRunnerGUI : Editor {
 
     BehaviorRunner myScript;
 
@@ -24,8 +24,7 @@ public class BehaviorRunnerGUI : Editor {
 
     string targetType;
     List<string> casualToStateKeyOptionsList;
-
-    Behaviors_Incubator_ForLocalResourceCheck _States_Incubator_ForLocalResourceCheck;
+    
     bool LocalResourceReferenceMode;
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
@@ -64,17 +63,8 @@ public class BehaviorRunnerGUI : Editor {
         
         if (GUILayout.Button(" refresh skill define "))
         {
-            _States_Incubator_ForLocalResourceCheck = LocalResourceReferenceMode ? 
-            new Behaviors_Incubator_ForLocalResourceCheck(targetType) : new Behaviors_Incubator_ForLocalResourceCheck(targetType, myScript.SkillEntity_List);
-        }
-        
-        if (_States_Incubator_ForLocalResourceCheck != null && _States_Incubator_ForLocalResourceCheck.BehaviorIndexList != null)
-        {
-            StateIndexListOptions = _States_Incubator_ForLocalResourceCheck.BehaviorIndexList.ToArray();
-        }
-        else
-        {
-            return;
+            StateIndexListOptions = LocalResourceReferenceMode ? 
+            GetBeheviourOptions(targetType).ToArray() : GetBeheviourOptions(targetType, myScript.SkillEntity_List).ToArray();
         }
         
         EditorGUILayout.BeginVertical();

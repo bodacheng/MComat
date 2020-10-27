@@ -90,10 +90,11 @@
     <Compile Include="Assets\AI\AI_states\states\Knock_Off_State.cs" />
     <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
     <Compile Include="Assets\AI\Control\Controller.cs" />
+    <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
+    <Compile Include="Assets\AI\GUI\SkillOptions.cs" />
     <Compile Include="Assets\AI\HitBoxLogger.cs" />
     <Compile Include="Assets\AI\SingleFightLog.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner.cs" />
-    <Compile Include="Assets\AI\Soul\BehaviorRunnerGUI.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_Form.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_ScriptFileReading.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_newRunner.cs" />

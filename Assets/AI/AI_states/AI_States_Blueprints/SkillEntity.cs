@@ -98,11 +98,11 @@ namespace Skill
         // ex1 ：20
         // Ex2 ：40
         // Ex3 ：60
-        public static float ATCal(float originAT,int level)
+        public static float ATCal(float originAT, float level)
         {
             return FightGlobalSetting._AT_coefficient * originAT * (10 + level) / 11;
         }
-        public static float StoneHpCal(float originHP, int level)
+        public static float StoneHpCal(float originHP, float level)
         {
             return FightGlobalSetting._HP_coefficient * originHP * (10 + level) / 11;
         }

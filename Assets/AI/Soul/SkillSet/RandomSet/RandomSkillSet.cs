@@ -85,41 +85,14 @@ public partial class NineAndTwo
             }
         }
         
-        nineAndTwo.A1level = skilllevel;
-        nineAndTwo.A2level = skilllevel;
-        nineAndTwo.A3level = skilllevel;
-        nineAndTwo.B1level = skilllevel;
-        nineAndTwo.B2level = skilllevel;
-        nineAndTwo.B3level = skilllevel;
-        nineAndTwo.C1level = skilllevel;
-        nineAndTwo.C2level = skilllevel;
-        nineAndTwo.C3level = skilllevel;
-        
+        nineAndTwo.SetSkillLevel(skilllevel);
         return nineAndTwo;
     }
     
     // 这个能在技能槽没有填满的情况下分析技能组是否合法。比如有三个3级超杀那其他格子无论怎么配置都注定非法。
     static bool InProcessPointLegalCheck(NineAndTwo current)
     {
-        int remainSlotCount = 0;
-        if (current.A1skillid == null)
-            remainSlotCount++;
-        if (current.A2skillid == null)
-            remainSlotCount++;
-        if (current.A3skillid == null)
-            remainSlotCount++;
-        if (current.B1skillid == null)
-            remainSlotCount++;
-        if (current.B2skillid == null)
-            remainSlotCount++;
-        if (current.B3skillid == null)
-            remainSlotCount++;
-        if (current.C1skillid == null)
-            remainSlotCount++;
-        if (current.C2skillid == null)
-            remainSlotCount++;
-        if (current.C3skillid == null)
-            remainSlotCount++;
+        int remainSlotCount = 9 - current.SkillIDList().Count;
             
         int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);
         if (currentPoint + remainSlotCount * 10 < 0)
@@ -131,26 +104,7 @@ public partial class NineAndTwo
     
     static List<int> RemainSlotSPLevelCal(NineAndTwo current)
     {
-        int remainSlotCount = 0;
-        if (current.A1skillid == null)
-            remainSlotCount++;
-        if (current.A2skillid == null)
-            remainSlotCount++;
-        if (current.A3skillid == null)
-            remainSlotCount++;
-        if (current.B1skillid == null)
-            remainSlotCount++;
-        if (current.B2skillid == null)
-            remainSlotCount++;
-        if (current.B3skillid == null)
-            remainSlotCount++;
-        if (current.C1skillid == null)
-            remainSlotCount++;
-        if (current.C2skillid == null)
-            remainSlotCount++;
-        if (current.C3skillid == null)
-            remainSlotCount++;
-            
+        int remainSlotCount = 9 - current.SkillIDList().Count;
         int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);
         int point = currentPoint + (remainSlotCount - 1) * 10;
         List<int> returnValue = new List<int>();

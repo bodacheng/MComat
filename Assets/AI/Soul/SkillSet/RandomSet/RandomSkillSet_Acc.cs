@@ -38,15 +38,7 @@ public partial class NineAndTwo : MonoBehaviour
             }
         }
         
-        nineAndTwo.A1level = skilllevel;
-        nineAndTwo.A2level = skilllevel;
-        nineAndTwo.A3level = skilllevel;
-        nineAndTwo.B1level = skilllevel;
-        nineAndTwo.B2level = skilllevel;
-        nineAndTwo.B3level = skilllevel;
-        nineAndTwo.C1level = skilllevel;
-        nineAndTwo.C2level = skilllevel;
-        nineAndTwo.C3level = skilllevel;
+        nineAndTwo.SetSkillLevel(skilllevel);
         
         return nineAndTwo;
     }
@@ -65,26 +57,8 @@ public partial class NineAndTwo : MonoBehaviour
     
     static void SkillRandomAdd_BasedOnMyStones(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) 
     {
-        List<string> exceptSKIds = new List<string>();
-        if (nineAndTwo.A1skillid != null)
-            exceptSKIds.Add(nineAndTwo.A1skillid);
-        if (nineAndTwo.A2skillid != null)
-            exceptSKIds.Add(nineAndTwo.A2skillid);
-        if (nineAndTwo.A3skillid != null)
-            exceptSKIds.Add(nineAndTwo.A3skillid);
-        if (nineAndTwo.B1skillid != null)
-            exceptSKIds.Add(nineAndTwo.B1skillid);
-        if (nineAndTwo.B2skillid != null)
-            exceptSKIds.Add(nineAndTwo.B2skillid);
-        if (nineAndTwo.B3skillid != null)
-            exceptSKIds.Add(nineAndTwo.B3skillid);
-        if (nineAndTwo.C1skillid != null)
-            exceptSKIds.Add(nineAndTwo.C1skillid);
-        if (nineAndTwo.C2skillid != null)
-            exceptSKIds.Add(nineAndTwo.C2skillid);
-        if (nineAndTwo.C3skillid != null)
-            exceptSKIds.Add(nineAndTwo.C3skillid);
-        
+        List<string> exceptSKIds = nineAndTwo.SkillIDList();
+                
         if (targetSlot == 1)
         {
             SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(focusingtype, new int[1] {0}, false, false, false, exceptSKIds);

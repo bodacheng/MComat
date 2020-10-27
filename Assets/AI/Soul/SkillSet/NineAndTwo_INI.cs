@@ -6,8 +6,11 @@ using System.Linq;
 public partial class NineAndTwo
 {
     SkillEntity A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
-    List<SkillEntity> StateTransitionSetList;//这个的作用是发生在StateDictionary的生成阶段。见AIStateRunner之FormFightingSetsByNineAndTwo
-    
+
+    #region 基础进程实体
+    SkillEntity Empty, zhuangbi, Victory, Death, Hit, getUp, KnockOff;
+    #endregion
+
     List<SkillEntity> H1_E_list = new List<SkillEntity>();
     List<SkillEntity> H2_E_list = new List<SkillEntity>();
     List<SkillEntity> H3_E_list = new List<SkillEntity>();
@@ -27,18 +30,20 @@ public partial class NineAndTwo
         CConfig1 = C1skillid != null ? SkillConfigTable.GetSkillConfigByID(C1skillid) : new SkillConfig();
         CConfig2 = C2skillid != null ? SkillConfigTable.GetSkillConfigByID(C2skillid) : new SkillConfig();
         CConfig3 = C3skillid != null ? SkillConfigTable.GetSkillConfigByID(C3skillid) : new SkillConfig();
+
+        float level = GetAerLevel();
         
-        A1 = AConfig1 != null ? GetSE(A1skillid, A1level) : null;
-        A2 = AConfig2 != null ? GetSE(A2skillid, A2level) : null;
-        A3 = AConfig3 != null ? GetSE(A3skillid, A3level) : null;
+        A1 = AConfig1 != null ? GetSE(A1skillid, level) : null;
+        A2 = AConfig2 != null ? GetSE(A2skillid, level) : null;
+        A3 = AConfig3 != null ? GetSE(A3skillid, level) : null;
         
-        B1 = BConfig1 != null ? GetSE(B1skillid, B1level) : null;
-        B2 = BConfig2 != null ? GetSE(B2skillid, B2level) : null;
-        B3 = BConfig3 != null ? GetSE(B3skillid, B3level) : null;
+        B1 = BConfig1 != null ? GetSE(B1skillid, level) : null;
+        B2 = BConfig2 != null ? GetSE(B2skillid, level) : null;
+        B3 = BConfig3 != null ? GetSE(B3skillid, level) : null;
         
-        C1 = CConfig1 != null ? GetSE(C1skillid, C1level) : null;
-        C2 = CConfig2 != null ? GetSE(C2skillid, C2level) : null;
-        C3 = CConfig3 != null ? GetSE(C3skillid, C3level) : null;
+        C1 = CConfig1 != null ? GetSE(C1skillid, level) : null;
+        C2 = CConfig2 != null ? GetSE(C2skillid, level) : null;
+        C3 = CConfig3 != null ? GetSE(C3skillid, level) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         PassiveSkillEntitys passiveSkillConfigs = new PassiveSkillEntitys(moveType, canDefend, rushType);
@@ -170,21 +175,21 @@ public partial class NineAndTwo
     public IDictionary<string, SkillEntity> GenerateBeheviourSets()
     {
         IDictionary<string, SkillEntity> _SEDic = new Dictionary<string, SkillEntity>();
-        StateTransitionSetList = new List<SkillEntity>();
+        List<SkillEntity> StateTransitionSetList = new List<SkillEntity>();
         
-        SkillEntity Empty = new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        SkillEntity zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        SkillEntity Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        SkillEntity Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        SkillEntity Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1, 0);
-        SkillEntity getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
-        SkillEntity KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1, 0);
+        Empty = new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
+        Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1, 0);
+        getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
+        KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1, 0);
         if (FightGlobalSetting._hasDefend)
         {
-            SkillEntity Defend = new SkillEntity("Defend", 0, BehaviorType.Def, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
-            StateTransitionSetList.Add(Defend);
+            D.CasualTo = H1_list.ToArray();
+            StateTransitionSetList.Add(D);
         }
-
+        
         StateTransitionSetList.Add(getUp);
         StateTransitionSetList.Add(KnockOff);
         StateTransitionSetList.Add(Empty);
@@ -269,7 +274,7 @@ public partial class NineAndTwo
     }
     
     // 这个应该是所谓技能等级的着手点
-    SkillEntity GetSE(string skillid, int level)
+    SkillEntity GetSE(string skillid, float level)
     {
         SkillConfig SC = SkillConfigTable.GetSkillConfigByID(skillid);
         if (SC == null)
@@ -283,8 +288,8 @@ public partial class NineAndTwo
                 SC.REAL_NAME,
                 0,
                 SC.STATE_TYPE,
-                SkillEntity.ATCal(SC.ATTACK_WEIGHT,level),
-                SkillEntity.StoneHpCal(SC.HP_WEIGHT,level),
+                SkillEntity.ATCal(SC.ATTACK_WEIGHT, level),
+                SkillEntity.StoneHpCal(SC.HP_WEIGHT, level),
                 SC.AI_MIN_DIS,
                 SC.AI_MAX_DIS,
                 null,
