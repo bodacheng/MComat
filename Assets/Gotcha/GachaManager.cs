@@ -33,29 +33,39 @@ public class GachaManager : MonoBehaviour
     {
         IEnumerator Go()
         {
-            yield return GachaManager.target.Gacha(1);
-            PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+            IEnumerator process = target.Gacha("human", 1);
+            yield return process;
+            if ((bool)process.Current)
+                PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+            else{
+                Debug.Log("错误返回" + process.Current);
+            }
         }
         PreScene.target.mainProcessRunner.Run(Go());
     }
     
-    public void TenTimes()
+    public void NineTimes()
     {
         IEnumerator Go()
         {
-            yield return GachaManager.target.Gacha(9);
-            PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+            IEnumerator process = target.Gacha("human", 9);
+            yield return process;
+            if (process.Current != null)
+                PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+            else{
+                Debug.Log("错误返回" + process.Current);
+            }
         }
         PreScene.target.mainProcessRunner.Run(Go());
     }
     
-    public IEnumerator Gacha(int count)
+    public IEnumerator Gacha(string type, int count)
     {
         List<SkillStoneOfPlayerInfoModel> Results = null;
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
-                IEnumerator GET = Gotcha("human", count);
+                IEnumerator GET = Gotcha(type, count);
                 yield return GET;
                 Results = (List<SkillStoneOfPlayerInfoModel>)GET.Current;
                 break;
@@ -65,7 +75,7 @@ public class GachaManager : MonoBehaviour
                 break;
         }
         Result = Results;
-        yield break;
+        yield return true;
     }
     
     public static IEnumerator Gotcha(string type, int stoneCount)

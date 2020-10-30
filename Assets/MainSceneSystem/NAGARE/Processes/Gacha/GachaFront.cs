@@ -23,7 +23,6 @@ public class GachaFront : MainSceneProcess
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaFrontT.gameObject.SetActive(true);
         GachaManager.target.GotchaResultT.gameObject.SetActive(false);
-        yield break;
     }
     
     public GachaFront()
