@@ -4,32 +4,42 @@ using System.Collections.Generic;
 using Api.Dto.Model;
 using DG.Tweening;
 using mainMenu;
+using UnityEngine.UI;
 
 public class GachaRender : MonoBehaviour
 {
+    public static GachaRender target;
+    
+    #region 动画的跳过以及加速
+    public Button Skip;
+    public Button SpeedOnce;
+    bool starfallAnimEnd = false;
+    bool oneStarfallAnimEnd = false;
+    Coroutine starFallAnimWholeProcess;
+    Coroutine starFallAnimOneProcess;
+    #endregion
+    
+    #region 星空球
+    // 抽卡画面背景观摩用相机，在星空球内部
     public Camera Camera;
     public Transform SkyLightCenter;
     public float SkySphereRadius = 650;
-
-    #region 
+    #endregion
+    
+    #region 屏幕星星飞入位置
     public RectTransform starWaitPos1, starWaitPos2, starWaitPos3, starWaitPos4, starWaitPos5, starWaitPos6, starWaitPos7, starWaitPos8, starWaitPos9;
     List<RectTransform> WaitPos = new List<RectTransform>();
     #endregion
-
-    public static GachaRender target;
-
+    
     List<Decompositioner> stoneFallingModels = new List<Decompositioner>();
-    List<Decompositioner> screenStarModels = new List<Decompositioner>();
     List<Vector3> nineslotScreenPos = new List<Vector3>();
+    List<IEnumerator> enumerators = new List<IEnumerator>();
     
     void Awake()
     {
         target = this;
-    }
-    
-    // 必须使用时候即时运行因为里面几个决定位置的运算要考虑当前相机位置等
-    void PosDecide()
-    {
+        Skip.onClick.AddListener(SkipStarFallAnim);
+        SpeedOnce.onClick.AddListener(SpeedOneGochaAnim);
         WaitPos.Clear();
         WaitPos.Add(starWaitPos1);
         WaitPos.Add(starWaitPos2);
@@ -40,7 +50,11 @@ public class GachaRender : MonoBehaviour
         WaitPos.Add(starWaitPos7);
         WaitPos.Add(starWaitPos8);
         WaitPos.Add(starWaitPos9);
-        
+    }
+    
+    // 必须使用时候即时运行因为里面几个决定位置的运算要考虑当前相机位置等
+    void PosDecide()
+    {
         // 星星落入格子
         Vector3 A1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.A1T.GetComponent<RectTransform>(), 5f);
         Vector3 A2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.A2T.GetComponent<RectTransform>(), 5f);
@@ -62,76 +76,95 @@ public class GachaRender : MonoBehaviour
         nineslotScreenPos.Add(C2screenpos);
         nineslotScreenPos.Add(C3screenpos);
     }
+
+    // 清理相关特效等等
+    public void Reset()
+    {
+        starfallAnimEnd = false;
+        oneStarfallAnimEnd = false;
+        for (int i = 0; i < stoneFallingModels.Count; i++)
+        {
+            stoneFallingModels[i].EnergyRessolve();
+        }
+        stoneFallingModels.Clear();
+        GachaManager.target.NineForShow.ClearGochaEffects();
+    }
+
+    #region 星星下落动画
+    // 整个星星下落动画
+    public IEnumerator StarFallAnim(List<SkillStoneOfPlayerInfoModel> results)
+    {
+        starfallAnimEnd = false;
+        Reset();
+        foreach (SkillStoneOfPlayerInfoModel stoneinfo in results)
+        {
+            starFallAnimOneProcess = StartCoroutine(OneStarFallAnim());
+            while(!oneStarfallAnimEnd)
+                yield return new WaitForSeconds(0.1f);
+            Decompositioner Star = EffectsManager.GenerateEffect("gachastar", FightGlobalSetting.EffectPathDefine(Zokusei.Null), GetRandomStarPos(), Quaternion.identity, null);
+            stoneFallingModels.Add(Star);
+            Camera.transform.DOLookAt(Star.transform.position, 1f);
+            Star.transform.DOMoveY(-600, 30f);
+        }
+        starfallAnimEnd = true;
+    }
     
-    public IEnumerator TenGotchaAnimProcess(List<SkillStoneOfPlayerInfoModel> results)
+    // 跳过整个星星下落动画
+    void SkipStarFallAnim()
+    {
+        if (starFallAnimWholeProcess != null)
+        {
+            StopCoroutine(starFallAnimWholeProcess);
+        }
+        SpeedOnce.gameObject.SetActive(false);
+        starfallAnimEnd = true;
+    }
+    
+    // 一个星星下落动画
+    IEnumerator OneStarFallAnim()
+    {
+        oneStarfallAnimEnd = false;
+        yield return new WaitForSecondsRealtime(1f);
+        oneStarfallAnimEnd = true;
+    }
+    
+    // 加速一个星星下落动画
+    void SpeedOneGochaAnim()
+    {
+        if (starFallAnimOneProcess != null)
+        {
+            StopCoroutine(starFallAnimOneProcess);
+        }
+        oneStarfallAnimEnd = true;
+    }
+    #endregion
+    
+    // Gotcha总过程 点击画面的话进入下一个星星
+    public IEnumerator GotchaAnimProcess(List<SkillStoneOfPlayerInfoModel> results)
     {
         CameraManager._camera.gameObject.SetActive(false);
         Camera.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(0.5f);
         PosDecide();
+        SpeedOnce.gameObject.SetActive(true);
         
-        // 星星下坠
-        foreach (SkillStoneOfPlayerInfoModel stoneinfo in results)
-        {
-            Decompositioner Star = EffectsManager.GenerateEffect("gachastar", FightGlobalSetting.EffectPathDefine(Zokusei.Null), GetRandomStarPos(), Quaternion.identity, null);
-            stoneFallingModels.Add(Star);
-            Camera.transform.DOLookAt(Star.transform.position,1f);
-            Star.transform.DOMoveY(-600, 30f);
-            yield return new WaitForSecondsRealtime(1f);
-        }
+        starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
         
+        while(!starfallAnimEnd)       
+            yield return new WaitForSeconds(0.1f);
+            
+        SpeedOnce.gameObject.SetActive(false);
+        Reset();
+                
         // 屏幕星星
         for (int i = 0; i < results.Count; i++)
         {
-            Decompositioner screenStar = EffectsManager.GenerateEffect("normal_test_screenstar", FightGlobalSetting.EffectPathDefine(Zokusei.Null), WaitPos[i].position, Quaternion.identity, null);
-            screenStarModels.Add(screenStar);
+            IEnumerator enumerator = GachaManager.target.NineForShow.OneStoneGochaAnim(results[i], WaitPos[i].position, nineslotScreenPos[i]);
+            enumerators.Add(enumerator);
+            StartCoroutine(enumerator);
         }
-        
-        if (results.Count == 1)
-        {
-            screenStarModels[0].transform.DOMove(nineslotScreenPos[4], 2f);
-            yield return new WaitForSeconds(2f);
-            EffectsManager.GenerateEffect("screenStarExplostionTest", FightGlobalSetting.EffectPathDefine(Zokusei.Null), nineslotScreenPos[4], Quaternion.identity, null);
-            yield return GachaManager.target.NineForShow.ShowStones
-            (
-                "-1", "-1", "-1",
-                "-1", results[0] != null ? results[0].skillId : "-1", "-1",
-                "-1", "-1", "-1"
-            );
-        }
-        else if (results.Count == 9)
-        {
-            screenStarModels[0].transform.DOMove(nineslotScreenPos[0], 2f);
-            screenStarModels[1].transform.DOMove(nineslotScreenPos[1], 2f);
-            screenStarModels[2].transform.DOMove(nineslotScreenPos[2], 2f);
-            screenStarModels[3].transform.DOMove(nineslotScreenPos[3], 2f);
-            screenStarModels[4].transform.DOMove(nineslotScreenPos[4], 2f);
-            screenStarModels[5].transform.DOMove(nineslotScreenPos[5], 2f);
-            screenStarModels[6].transform.DOMove(nineslotScreenPos[6], 2f);
-            screenStarModels[7].transform.DOMove(nineslotScreenPos[7], 2f);
-            screenStarModels[8].transform.DOMove(nineslotScreenPos[8], 2f);
-            yield return new WaitForSeconds(2f);
-            
-            // 星星爆炸
-            for (int i = 0; i < results.Count; i++)
-            {
-                EffectsManager.GenerateEffect("screenStarExplostionTest", FightGlobalSetting.EffectPathDefine(Zokusei.Null), nineslotScreenPos[i], Quaternion.identity, null);
-            }
-            
-            yield return GachaManager.target.NineForShow.ShowStones
-            (
-                results[0] != null ? results[0].skillId : null,
-                results[1] != null ? results[1].skillId : null,
-                results[2] != null ? results[2].skillId : null,
-                results[3] != null ? results[3].skillId : null,
-                results[4] != null ? results[4].skillId : null,
-                results[5] != null ? results[5].skillId : null,
-                results[6] != null ? results[6].skillId : null,
-                results[7] != null ? results[7].skillId : null,
-                results[8] != null ? results[8].skillId : null
-            );
-        }
-        
+        yield return new WaitForSecondsRealtime(2f);
+        yield return GachaManager.target.NineForShow.GochaResultShow(results);
         CameraManager._camera.gameObject.SetActive(true);
         Camera.gameObject.SetActive(false);
     }

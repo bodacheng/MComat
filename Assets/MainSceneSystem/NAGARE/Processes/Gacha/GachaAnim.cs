@@ -7,7 +7,8 @@ public class GachaAnim : MainSceneProcess
     {
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         EffectsManager.INIEffectsPool("gachastar", "defaultmagic", 3);
-        yield return GachaRender.target.TenGotchaAnimProcess(GachaManager.target.GetResult());
+        GachaRender.target.Skip.gameObject.SetActive(true);
+        yield return GachaRender.target.GotchaAnimProcess(GachaManager.target.GetResult());
         PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, false);
     }
     
@@ -24,6 +25,8 @@ public class GachaAnim : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        GachaRender.target.Reset();
+        GachaRender.target.Skip.gameObject.SetActive(false);
     }
     
     public override void LocalUpdate()

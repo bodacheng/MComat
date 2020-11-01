@@ -85,7 +85,7 @@ public partial class Decompositioner : MonoBehaviour {
         HitBoxesProcesser.AddToDecompositionerProcesserList(this);
     }
 
-    void EnergyRessolve()
+    public void EnergyRessolve()
     {
         StopEmissions(true);
         _DecompositionerPool.Return(this);

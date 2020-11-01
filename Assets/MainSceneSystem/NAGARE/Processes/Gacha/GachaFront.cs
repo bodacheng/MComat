@@ -38,7 +38,9 @@ public class GachaFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
+        //GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
+        GachaManager.target.GotchaFrontT.gameObject.SetActive(false);
+        GachaManager.target.GotchaResultT.gameObject.SetActive(false);
         CameraManager._camera.gameObject.SetActive(true);
         GachaRender.target.Camera.gameObject.SetActive(false);
     }

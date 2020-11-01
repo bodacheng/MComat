@@ -584,6 +584,7 @@
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\FightOverShow\IconAndSKillShowUISet.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_ByAcc.cs" />
+    <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_GochaResult.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
     <Compile Include="Assets\TheNineSlot\SkillStoneSlot.cs" />
     <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
