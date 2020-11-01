@@ -5,6 +5,7 @@ using Api.Dto.Model;
 using DG.Tweening;
 using mainMenu;
 using UnityEngine.UI;
+using Skill;
 
 public class GachaRender : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class GachaRender : MonoBehaviour
     #endregion
     
     List<Decompositioner> stoneFallingModels = new List<Decompositioner>();
+    readonly List<Decompositioner> stoneStartFlashModels = new List<Decompositioner>();
     List<Vector3> nineslotScreenPos = new List<Vector3>();
     List<IEnumerator> enumerators = new List<IEnumerator>();
     
@@ -86,7 +88,12 @@ public class GachaRender : MonoBehaviour
         {
             stoneFallingModels[i].EnergyRessolve();
         }
+        for (int i = 0; i < stoneStartFlashModels.Count; i++)
+        {
+            stoneStartFlashModels[i].EnergyRessolve();
+        }
         stoneFallingModels.Clear();
+        stoneStartFlashModels.Clear();
         GachaManager.target.NineForShow.ClearGochaEffects();
     }
 
@@ -101,10 +108,41 @@ public class GachaRender : MonoBehaviour
             starFallAnimOneProcess = StartCoroutine(OneStarFallAnim());
             while(!oneStarfallAnimEnd)
                 yield return new WaitForSeconds(0.1f);
-            Decompositioner Star = EffectsManager.GenerateEffect("gachastar", FightGlobalSetting.EffectPathDefine(Zokusei.Null), GetRandomStarPos(), Quaternion.identity, null);
-            stoneFallingModels.Add(Star);
-            Camera.transform.DOLookAt(Star.transform.position, 1f);
-            Star.transform.DOMoveY(-600, 30f);
+            void StarComing(SkillStoneOfPlayerInfoModel stone)
+            {
+                Vector3 targetPos = GetRandomStarPos();
+                Vector3 flashPos = ScreenPositionCal.Cal(3, Camera, targetPos, 300f);
+
+                SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stone.skillId);
+                string fallingstarname = "";
+                string fallingstarexplosionname = "";
+                switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
+                {
+                    case 0:
+                        fallingstarname = "gachastar0";
+                        fallingstarexplosionname = "screenStarExplostionTest0";
+                    break;
+                    case 1:
+                        fallingstarname = "gachastar1";
+                        fallingstarexplosionname = "screenStarExplostionTest1";
+                    break;
+                    case 2:
+                        fallingstarname = "gachastar2";
+                        fallingstarexplosionname = "screenStarExplostionTest2";
+                    break;
+                    case 3:
+                        fallingstarname = "gachastar3";
+                        fallingstarexplosionname = "screenStarExplostionTest3";
+                    break;
+                }
+                Decompositioner Star = EffectsManager.GenerateEffect(fallingstarname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), targetPos, Quaternion.identity, null);
+                Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), flashPos, Quaternion.identity, null);
+                stoneFallingModels.Add(Star);
+                stoneStartFlashModels.Add(flash);
+                Camera.transform.DOLookAt(Star.transform.position, 1f);
+                Star.transform.DOMoveY(-600, 30f);
+            }
+            StarComing(stoneinfo);
         }
         starfallAnimEnd = true;
     }
@@ -139,6 +177,19 @@ public class GachaRender : MonoBehaviour
     }
     #endregion
     
+    #region 星星集中到屏幕动画
+    public IEnumerator StarSortAnim(List<SkillStoneOfPlayerInfoModel> results)
+    {
+        for (int i = 0; i < results.Count; i++)
+        {
+            IEnumerator enumerator = GachaManager.target.NineForShow.OneStoneGochaAnim(results[i], WaitPos[i].position, nineslotScreenPos[i]);
+            enumerators.Add(enumerator);
+            StartCoroutine(enumerator);
+        }
+        yield return new WaitForSecondsRealtime(2f);
+    }
+    #endregion
+    
     // Gotcha总过程 点击画面的话进入下一个星星
     public IEnumerator GotchaAnimProcess(List<SkillStoneOfPlayerInfoModel> results)
     {
@@ -147,23 +198,16 @@ public class GachaRender : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         PosDecide();
         SpeedOnce.gameObject.SetActive(true);
-        
+        GachaRender.target.Skip.gameObject.SetActive(true);
         starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
         
-        while(!starfallAnimEnd)       
+        while(!starfallAnimEnd)
             yield return new WaitForSeconds(0.1f);
-            
+        
         SpeedOnce.gameObject.SetActive(false);
         Reset();
-                
-        // 屏幕星星
-        for (int i = 0; i < results.Count; i++)
-        {
-            IEnumerator enumerator = GachaManager.target.NineForShow.OneStoneGochaAnim(results[i], WaitPos[i].position, nineslotScreenPos[i]);
-            enumerators.Add(enumerator);
-            StartCoroutine(enumerator);
-        }
-        yield return new WaitForSecondsRealtime(2f);
+        GachaRender.target.Skip.gameObject.SetActive(false);
+        yield return StarSortAnim(results);
         yield return GachaManager.target.NineForShow.GochaResultShow(results);
         CameraManager._camera.gameObject.SetActive(true);
         Camera.gameObject.SetActive(false);
