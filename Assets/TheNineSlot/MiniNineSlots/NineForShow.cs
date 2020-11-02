@@ -1,7 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using mainMenu;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using dataAccess;
+using Api.Dto.Model;
+using Skill;
 
 public partial class NineForShow : MonoBehaviour
 {
@@ -65,15 +70,15 @@ public partial class NineForShow : MonoBehaviour
     {
         ClearCurrent();
         
-        IEnumerator getA1 = SkillStonesBox.GenerateNewStoneModel(A1skillid, 2);
-        IEnumerator getA2 = SkillStonesBox.GenerateNewStoneModel(A2skillid, 2);
-        IEnumerator getA3 = SkillStonesBox.GenerateNewStoneModel(A3skillid, 2);
-        IEnumerator getB1 = SkillStonesBox.GenerateNewStoneModel(B1skillid, 2);
-        IEnumerator getB2 = SkillStonesBox.GenerateNewStoneModel(B2skillid, 2);
-        IEnumerator getB3 = SkillStonesBox.GenerateNewStoneModel(B3skillid, 2);
-        IEnumerator getC1 = SkillStonesBox.GenerateNewStoneModel(C1skillid, 2);
-        IEnumerator getC2 = SkillStonesBox.GenerateNewStoneModel(C2skillid, 2);
-        IEnumerator getC3 = SkillStonesBox.GenerateNewStoneModel(C3skillid, 2);
+        IEnumerator getA1 = MySkillStonesReader.GenerateNewStoneModel(A1skillid, false);
+        IEnumerator getA2 = MySkillStonesReader.GenerateNewStoneModel(A2skillid, false);
+        IEnumerator getA3 = MySkillStonesReader.GenerateNewStoneModel(A3skillid, false);
+        IEnumerator getB1 = MySkillStonesReader.GenerateNewStoneModel(B1skillid, false);
+        IEnumerator getB2 = MySkillStonesReader.GenerateNewStoneModel(B2skillid, false);
+        IEnumerator getB3 = MySkillStonesReader.GenerateNewStoneModel(B3skillid, false);
+        IEnumerator getC1 = MySkillStonesReader.GenerateNewStoneModel(C1skillid, false);
+        IEnumerator getC2 = MySkillStonesReader.GenerateNewStoneModel(C2skillid, false);
+        IEnumerator getC3 = MySkillStonesReader.GenerateNewStoneModel(C3skillid, false);
         
         yield return getA1;
         yield return getA2;

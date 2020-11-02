@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using mainMenu;
 using Api.Dto.Model;
 using Skill;
 
@@ -35,12 +34,6 @@ namespace dataAccess
             return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
         }
         
-        public static IEnumerator Add(SkillStoneOfPlayerInfoModel one)
-        {
-            DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
-            yield return Update(one.skillStoneOfPlayerId);
-        }
-
         public static IEnumerator LoadTutorial()
         {
             Dic.Clear();
@@ -55,7 +48,7 @@ namespace dataAccess
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
                     yield break;
                 }
-                yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
+                yield return GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
             }
             yield break;
         }

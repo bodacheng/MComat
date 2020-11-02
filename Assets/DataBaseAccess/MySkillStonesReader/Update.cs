@@ -1,11 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Api.Common;
-using Api.Dto.Form;
-using Api.Dto.Model;
-using mainMenu;
-using Skill;
 
 namespace dataAccess
 {

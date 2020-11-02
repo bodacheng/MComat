@@ -4,8 +4,8 @@ using UnityEngine;
 using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Model;
-using mainMenu;
 using Skill;
+using mainMenu;
 
 namespace dataAccess
 {
@@ -21,36 +21,30 @@ namespace dataAccess
                 form,
                 model => {
                     infos = model.skillStoneOfPlayerInfoList;
-                    //Debug.Log("拥有技能石情报成功,玩家拥有以下技能石：");
-                    //foreach (SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel in infos)
-                    //{
-                    //    Debug.Log("skillStoneOfPlayerId:" + SkillStoneOfPlayerInfoModel.skillStoneOfPlayerId + ",skillId:" + SkillStoneOfPlayerInfoModel.skillId);
-                    //}
+                    int i = 1;
                     foreach (SkillStoneOfPlayerInfoModel one in infos)
                     {
-                        DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
-                    }
-                    IEnumerator GenerateStoneModel()
-                    {
-                        LoadingCanvas.target.TurnOnProcessDescription(true);
-                        LoadingCanvas.target.NowProcess("正在构成技能石模型", 0);
-                        RenderModelDic.Clear();
-                        int i = 1;
-                        foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)
+                        SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
+                        if (_SkillConfig == null)
                         {
-                            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
-                            if (_SkillConfig == null)
-                            {
-                                Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
-                                yield break;
-                            }
-                            yield return SkillStonesBox.GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
-                            i++;
-                            LoadingCanvas.target.NowProcess("正在构成技能石模型", (float) i / Dic.Count);
+                            Debug.Log("巨大问题,技能id似乎未定义：" + one.skillId);
+                            LoadingCanvas.target.TurnOnProcessDescription(false);
+                            continue;
                         }
-                        LoadingCanvas.target.TurnOnProcessDescription(false);
+                        IEnumerator readOne(int a)
+                        {
+                            if (a == 1)
+                                LoadingCanvas.target.TurnOnProcessDescription(true);
+                            LoadingCanvas.target.NowProcess("正在构成技能石模型", (float) a / infos.Count);
+                            yield return Read(one);
+                            if (a == infos.Count)
+                            {
+                                LoadingCanvas.target.TurnOnProcessDescription(false);
+                            }
+                        }
+                        PreScene.target.mainProcessRunner.Run(readOne(i));
+                        i++;
                     }
-                    SingleThreadProcesser.backup.Run(GenerateStoneModel());
                 },
                 model => {
                     Dic.Clear();

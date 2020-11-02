@@ -33,7 +33,7 @@ public partial class LoadingCanvas : MonoBehaviour {
         target = this;
     }
     
-    public void NowProcess(string desription,float percent)
+    public void NowProcess(string desription, float percent)
     {
         processingDescrition.text = desription;
         loadingBar.value = percent;

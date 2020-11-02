@@ -44,7 +44,7 @@ namespace mainMenu
         // 额外生成一个技能石图像
         IEnumerator IconForShow(string skillID)
         {
-            IEnumerator Generate = SkillStonesBox.GenerateNewStoneModel(skillID , 2);
+            IEnumerator Generate = MySkillStonesReader.GenerateNewStoneModel(skillID, false);
             yield return Generate;
             SKStoneItem item = (SKStoneItem)Generate.Current;
             if (IconShowT != null)
