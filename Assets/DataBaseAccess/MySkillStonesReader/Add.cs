@@ -49,8 +49,6 @@ namespace dataAccess
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
         public static IEnumerator GenerateNewStoneModel(string skillID, bool openStoneFeature)
         {
-            if (skillID == null)
-                yield break;
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             if (skillConfig == null)
             {
@@ -70,14 +68,13 @@ namespace dataAccess
                 case ResourceLoadMode.StreamingAssetAB:
                     break;
             }
-            yield return (process);
+            yield return process;
             GameObject Icon = (GameObject)process.Current;
-            if (Icon == null)
-                Icon = Object.Instantiate(SkillIconsDic.Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL));
-            SKStoneItem item = Icon.GetComponent<SKStoneItem>();
+            GameObject newIcon = Object.Instantiate(Icon);
+            SKStoneItem item = newIcon.GetComponent<SKStoneItem>();
             if (item == null)
             {
-                item = Icon.AddComponent<SKStoneItem>();
+                item = newIcon.AddComponent<SKStoneItem>();
             }
             item._SkillConfig = skillConfig;
             item.enabled = openStoneFeature;

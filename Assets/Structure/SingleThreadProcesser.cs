@@ -1,30 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
-using UniRx;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
     public static SingleThreadProcesser backup;
-
-    readonly IEnumerator MenuProcess;
+    
     readonly List<Task> Tasks = new List<Task>();
     
     class Task
     {
-        public int phase = 0;
-        public string description;
+        public bool started = false;
         public IEnumerator process;
-        void SetPhase(int a)
+        public IEnumerator Processing(List<Task> Tasks)
         {
-            phase = a;
-        }
-    
-        public IEnumerator GiveProcessStartEndFlag()
-        {
-            SetPhase(1);
             yield return process;
-            SetPhase(2);
+            Tasks.Remove(Tasks[0]);
         }
     }
     
@@ -32,16 +23,10 @@ public class SingleThreadProcesser : MonoBehaviour
     {
         if (Tasks.Count > 0)
         {
-            switch (Tasks[0].phase)
+            if (!Tasks[0].started)
             {
-                case 0:
-                    StartCoroutine(Tasks[0].GiveProcessStartEndFlag());
-                break;
-                case 1:
-                break;
-                case 2:
-                    Tasks.Remove(Tasks[0]);
-                break;
+                Tasks[0].started = true;
+                StartCoroutine(Tasks[0].Processing(Tasks));
             }
         }
     }
@@ -49,26 +34,5 @@ public class SingleThreadProcesser : MonoBehaviour
     public void Run(IEnumerator _process)
     {
         Tasks.Add(new Task{ process = _process });
-    }
-    
-    public void Run(IEnumerator _process, string _description)
-    {
-        Tasks.Add(new Task { process = _process, description = _description });
-    }
-
-    SingleAssignmentDisposable SingleAssignment;
-    void AddRender()
-    {
-        SingleAssignment = new SingleAssignmentDisposable
-        {
-            Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                {
-                    if (Tasks.Count > 0)
-                    {
-                        
-                    }
-                }
-            )
-        };
     }
 }

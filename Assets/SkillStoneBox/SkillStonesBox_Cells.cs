@@ -111,6 +111,12 @@ namespace mainMenu
                 yield break;
             }
             SkillStoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStonesReader.Get(Item.SkillStoneOfPlayerId);
+            if (SSOfPlayerInfo == null)
+            {
+                Debug.Log("逻辑错误. SkillStoneOfPlayerId:"+ Item.SkillStoneOfPlayerId);
+                yield break;
+            }
+            
             if (SSOfPlayerInfo.inUsingMonsterOfPlayerId == null)
             {
                 targetIcon.gameObject.SetActive(false);
@@ -119,7 +125,6 @@ namespace mainMenu
             GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
-                Debug.Log("逻辑错误。inUsingMonsterOfPlayerId："+ SSOfPlayerInfo.inUsingMonsterOfPlayerId);
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }

@@ -535,7 +535,8 @@
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\GeneralModelPool.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
-    <Compile Include="Assets\Singleton\SkillIconsDic.cs" />
+    <Compile Include="Assets\Singleton\SkillIconsDic\FromCach.cs" />
+    <Compile Include="Assets\Singleton\SkillIconsDic\SkillIconsDic.cs" />
     <Compile Include="Assets\Singleton\SystemNotes.cs" />
     <Compile Include="Assets\Singleton\TeamConfig.cs" />
     <Compile Include="Assets\Singleton\TutorialNotes.cs" />
