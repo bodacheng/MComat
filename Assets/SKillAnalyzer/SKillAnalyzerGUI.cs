@@ -21,7 +21,8 @@ public class SKillAnalyzerGUI : Editor
         focusingType = EditorGUILayout.TextField("统计以下类型角色的技能信息", focusingType);
         if (GUILayout.Button("输出技能攻击力预估"))
         {
-            sKillAnalyzer.Export(focusingType);
+            SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
+            PowerEstimateTable.Save(focusingType);
         }
         
         targetEventName = EditorGUILayout.TextField("选择拥有该事件的技能动画片段", targetEventName);

@@ -143,6 +143,8 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
             case ResourceLoadMode.Resource:
                 yield return MonstersConfigTable.Instance.LoadMonstersConfig();
                 yield return SkillConfigTable.LoadAllSkillConfigs();
+                PowerEstimateTable.Load();
+                
                 LevelExpConfig.LoadLevelExpConfig();
                 LoadingCanvas.target.NowProcess("正在加载资源", 0.3f);
                 break;

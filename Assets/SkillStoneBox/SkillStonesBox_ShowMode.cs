@@ -44,7 +44,6 @@ namespace mainMenu
                                         pressingSeconds = 0;
                                         pressStart = false;
                                         SSLevelUpManager.target.OpenLevelUpPage();
-                                        SSLevelUpManager.target._MSkillStoneDetail.Clear();
                                     }
                                 }
                                 if (!pressStart)

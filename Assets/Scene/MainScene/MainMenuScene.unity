@@ -436,6 +436,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10313828}
   m_CullTransparentMesh: 0
+--- !u!1 &13365833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13365834}
+  - component: {fileID: 13365836}
+  - component: {fileID: 13365835}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &13365834
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13365833}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1009975001}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &13365835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13365833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 52448ae15e1341549861e136fc7ddb42, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u5F3A\u5316"
+--- !u!222 &13365836
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13365833}
+  m_CullTransparentMesh: 0
 --- !u!1 &15499231
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +950,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -1064,8 +1163,9 @@ MonoBehaviour:
   close: {fileID: 1860840005658375620}
   near: {fileID: 1860840006702212084}
   far: {fileID: 1860840005227158485}
-  skill_level_info: {fileID: 1860840005370943522}
-  skill_level_levelup: {fileID: 1860840005370943522}
+  powerInfo: {fileID: 0}
+  expValue: {fileID: 0}
+  StoneTargetLevel: {fileID: 1860840005370943522}
 --- !u!1 &69853221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,6 +1486,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76287231}
+  m_CullTransparentMesh: 0
+--- !u!1 &82716966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 82716967}
+  - component: {fileID: 82716969}
+  - component: {fileID: 82716968}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &82716967
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82716966}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 724901494}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &82716968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82716966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.9882353, b: 1, a: 0.6313726}
+  m_RaycastTarget: 0
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &82716969
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82716966}
   m_CullTransparentMesh: 0
 --- !u!1 &85698362
 GameObject:
@@ -1805,7 +1979,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -3585,19 +3780,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151618608}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 756904660}
   - {fileID: 324347108}
   - {fileID: 1264688323}
-  m_Father: {fileID: 1901616803}
-  m_RootOrder: 0
+  m_Father: {fileID: 2062793662}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: 0}
+  m_AnchoredPosition: {x: 104, y: 80}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151618610
@@ -3617,7 +3812,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -22168,6 +22363,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &407111123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407111124}
+  m_Layer: 5
+  m_Name: Handle Slide Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &407111124
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407111123}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 724901494}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &419052007
 GameObject:
   m_ObjectHideFlags: 0
@@ -29129,7 +29359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -204, y: 401}
+  m_AnchoredPosition: {x: -213, y: 162}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &520999254
@@ -32259,6 +32489,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593032042}
   m_CullTransparentMesh: 0
+--- !u!1 &593301879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593301880}
+  - component: {fileID: 593301882}
+  - component: {fileID: 593301881}
+  m_Layer: 5
+  m_Name: Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &593301880
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593301879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 911668277}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -8}
+  m_SizeDelta: {x: 500, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &593301881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593301879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 52448ae15e1341549861e136fc7ddb42, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'LEVEL : 21/100'
+--- !u!222 &593301882
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593301879}
+  m_CullTransparentMesh: 0
 --- !u!1 &604760692
 GameObject:
   m_ObjectHideFlags: 0
@@ -32842,6 +33150,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &613857795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 613857796}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &613857796
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613857795}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1883855078}
+  m_Father: {fileID: 724901494}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &619450975
 GameObject:
   m_ObjectHideFlags: 0
@@ -33598,7 +33942,7 @@ GameObject:
   - component: {fileID: 662487851}
   - component: {fileID: 662487850}
   m_Layer: 0
-  m_Name: SkillStoneDetail
+  m_Name: SkillPrintOutSSDetail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33626,8 +33970,9 @@ MonoBehaviour:
   close: {fileID: 470257218}
   near: {fileID: 355354821}
   far: {fileID: 578369647}
-  skill_level_info: {fileID: 0}
-  skill_level_levelup: {fileID: 0}
+  powerInfo: {fileID: 0}
+  expValue: {fileID: 0}
+  StoneTargetLevel: {fileID: 0}
 --- !u!4 &662487851
 Transform:
   m_ObjectHideFlags: 0
@@ -35170,7 +35515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48, y: 172}
+  m_AnchoredPosition: {x: -48, y: 96}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &717241989
@@ -35321,6 +35666,95 @@ RectTransform:
   m_AnchoredPosition: {x: -989.99713, y: 129}
   m_SizeDelta: {x: 300, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &724901493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724901494}
+  - component: {fileID: 724901495}
+  m_Layer: 5
+  m_Name: Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &724901494
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724901493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 82716967}
+  - {fileID: 613857796}
+  - {fileID: 407111124}
+  m_Father: {fileID: 911668277}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -39}
+  m_SizeDelta: {x: 500, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &724901495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724901493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 1883855078}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &731438112
 GameObject:
   m_ObjectHideFlags: 0
@@ -36643,7 +37077,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -40310,6 +40765,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911643115}
   m_CullTransparentMesh: 0
+--- !u!1 &911668276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911668277}
+  m_Layer: 5
+  m_Name: EXP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &911668277
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911668276}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 724901494}
+  - {fileID: 593301880}
+  m_Father: {fileID: 2062793662}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1, y: -27}
+  m_SizeDelta: {x: 500, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &913678155
 GameObject:
   m_ObjectHideFlags: 0
@@ -41231,8 +41723,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199.00485, y: 298.99802}
-  m_SizeDelta: {x: 100, y: 40}
+  m_AnchoredPosition: {x: -258, y: 96}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &944355384
 MonoBehaviour:
@@ -41251,7 +41743,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -41857,7 +42349,7 @@ GameObject:
   - component: {fileID: 961783364}
   - component: {fileID: 961783363}
   m_Layer: 0
-  m_Name: SkillStoneDetail
+  m_Name: StoneShow_SSDetail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41885,8 +42377,9 @@ MonoBehaviour:
   close: {fileID: 756904659}
   near: {fileID: 324347107}
   far: {fileID: 1264688322}
-  skill_level_info: {fileID: 1140825909}
-  skill_level_levelup: {fileID: 319411671}
+  powerInfo: {fileID: 1140825909}
+  expValue: {fileID: 724901495}
+  StoneTargetLevel: {fileID: 593301881}
 --- !u!4 &961783364
 Transform:
   m_ObjectHideFlags: 0
@@ -47751,7 +48244,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -47901,7 +48415,7 @@ GameObject:
   - component: {fileID: 1003711766}
   - component: {fileID: 1003711765}
   m_Layer: 0
-  m_Name: SkillStoneDetail
+  m_Name: SkillStoneBoxNineSkillSSDetail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47929,8 +48443,9 @@ MonoBehaviour:
   close: {fileID: 1784626368}
   near: {fileID: 953133214}
   far: {fileID: 2026071508}
-  skill_level_info: {fileID: 1851646116}
-  skill_level_levelup: {fileID: 1723017109}
+  powerInfo: {fileID: 1851646116}
+  expValue: {fileID: 0}
+  StoneTargetLevel: {fileID: 936170835}
 --- !u!4 &1003711766
 Transform:
   m_ObjectHideFlags: 0
@@ -48145,6 +48660,136 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007183200}
+  m_CullTransparentMesh: 0
+--- !u!1 &1009975000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1009975001}
+  - component: {fileID: 1009975004}
+  - component: {fileID: 1009975003}
+  - component: {fileID: 1009975002}
+  m_Layer: 5
+  m_Name: "\u5F3A\u5316"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1009975001
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009975000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 13365834}
+  m_Father: {fileID: 2062793662}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 170, y: -135}
+  m_SizeDelta: {x: 160, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1009975002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009975000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1009975003}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1412401008}
+        m_MethodName: OpenLevelUpPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1009975003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009975000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: af1452e8f1b39854ebdee8c724fa8c90, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1009975004
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009975000}
   m_CullTransparentMesh: 0
 --- !u!1 &1011511145
 GameObject:
@@ -54934,7 +55579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -219, y: 39}
+  m_AnchoredPosition: {x: -219, y: -19}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109395901
@@ -55881,18 +56526,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 10
     m_FontStyle: 3
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 30
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'LV : 100    AT: 100'
+  m_Text: 'AT: 100'
 --- !u!222 &1140825910
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -83700,7 +84345,7 @@ GameObject:
   - component: {fileID: 1519141880}
   - component: {fileID: 1519141881}
   m_Layer: 5
-  m_Name: "\u57FA\u7840\u6570\u503C"
+  m_Name: "\u653B\u51FB\u529B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83723,7 +84368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -248.99606, y: 374.99802}
+  m_AnchoredPosition: {x: -287, y: 48}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519141881
@@ -84539,7 +85184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: 290}
+  m_AnchoredPosition: {x: 70, y: 255}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1552610663
@@ -90443,8 +91088,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 344}
-  m_SizeDelta: {x: 570, y: 700}
+  m_AnchoredPosition: {x: 0, y: 304}
+  m_SizeDelta: {x: 570, y: 610}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800753983
 MonoBehaviour:
@@ -90459,7 +91104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.02745098, b: 0.34117648, a: 1}
+  m_Color: {r: 0.2901961, g: 0.30980393, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -97211,6 +97856,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880420307}
   m_CullTransparentMesh: 0
+--- !u!1 &1883855077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883855078}
+  - component: {fileID: 1883855080}
+  - component: {fileID: 1883855079}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1883855078
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883855077}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 613857796}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1883855079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883855077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.89411765, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1883855080
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883855077}
+  m_CullTransparentMesh: 0
 --- !u!1 &1885346070
 GameObject:
   m_ObjectHideFlags: 0
@@ -102368,42 +103087,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1901616802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1901616803}
-  m_Layer: 5
-  m_Name: "\u5C04\u7A0B"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1901616803
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901616802}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 151618609}
-  m_Father: {fileID: 2062793662}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 63.996124, y: 316.0002}
-  m_SizeDelta: {x: 100, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1905849279
 GameObject:
   m_ObjectHideFlags: 0
@@ -102439,7 +103122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 68, y: -64}
+  m_AnchoredPosition: {x: 68, y: -82}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905849281
@@ -103203,8 +103886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210, y: 422}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 9, y: 342}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1931422197
 CanvasRenderer:
@@ -104714,8 +105397,8 @@ RectTransform:
   m_Father: {fileID: 689913692}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.19116919}
-  m_AnchorMax: {x: 1, y: 0.9999943}
+  m_AnchorMin: {x: 0, y: 0.19117452}
+  m_AnchorMax: {x: 1, y: 0.999997}
   m_AnchoredPosition: {x: 1, y: -1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -104798,8 +105481,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1982118370}
   m_HandleRect: {fileID: 1982118369}
   m_Direction: 2
-  m_Value: 0.99996996
-  m_Size: 0.8088251
+  m_Value: 0.9999845
+  m_Size: 0.8088225
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -107107,7 +107790,9 @@ RectTransform:
   - {fileID: 520999253}
   - {fileID: 1519141880}
   - {fileID: 944355383}
-  - {fileID: 1901616803}
+  - {fileID: 151618609}
+  - {fileID: 911668277}
+  - {fileID: 1009975001}
   m_Father: {fileID: 1492041455}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -201767,15 +202452,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1860840006496212546}
+  - {fileID: 1860840006295118782}
   - {fileID: 1860840005481219311}
-  - {fileID: 1860840005980569376}
   - {fileID: 1860840006261572390}
   m_Father: {fileID: 1800753982}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 285, y: -524}
+  m_AnchoredPosition: {x: 281, y: -517}
   m_SizeDelta: {x: 570, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1860840004951260330
@@ -201903,13 +202588,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'LV : 100    AT: 100'
+  m_Text: 'LV : 100'
 --- !u!224 &1860840005370943523
 RectTransform:
   m_ObjectHideFlags: 0
@@ -201926,8 +202611,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 100, y: -20}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1860840005370943524
 GameObject:
@@ -201958,7 +202643,7 @@ GameObject:
   - component: {fileID: 1860840005481219311}
   - component: {fileID: 1860840005481219310}
   m_Layer: 5
-  m_Name: "\u57FA\u7840\u6570\u503C"
+  m_Name: "\u7B49\u7EA7"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202002,11 +202687,11 @@ RectTransform:
   m_Children:
   - {fileID: 1860840005370943523}
   m_Father: {fileID: 1860840004951260329}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -248.99606, y: 29}
+  m_AnchoredPosition: {x: -249, y: -26}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1860840005554177920
@@ -202240,68 +202925,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1860840005980569376
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860840005980569377}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1860840006295118782}
-  m_Father: {fileID: 1860840004951260329}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199.00485, y: -43}
-  m_SizeDelta: {x: 100, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1860840005980569377
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1860840005980569376}
-  - component: {fileID: 1860840005980569391}
-  m_Layer: 5
-  m_Name: "\u5FC5\u6740\u7EA7\u522B"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1860840005980569391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860840005980569377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
 --- !u!114 &1860840006261572389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202346,7 +202969,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60.993156, y: -27}
+  m_AnchoredPosition: {x: 124, y: 6}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1860840006261572391
@@ -202398,19 +203021,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860840006295118783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7939758239363654783}
   - {fileID: 7939758239267662876}
   - {fileID: 7939758239251811795}
-  m_Father: {fileID: 1860840005980569376}
-  m_RootOrder: 0
+  m_Father: {fileID: 1860840004951260329}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 38, y: -76}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1860840006295118783
@@ -202835,7 +203458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.91764706, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -202952,8 +203575,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255360
-  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
+    rgba: 4294961664
+  m_fontColor: {r: 0, g: 0.91764706, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -203174,7 +203797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 0.49019608}
+  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.49019608}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -203375,7 +203998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 0.78431374}
+  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -375435,7 +376058,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -595955,7 +596599,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596442,7 +597107,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596713,7 +597399,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596873,7 +597580,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -596910,7 +597638,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597221,7 +597970,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597412,7 +598182,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -597902,7 +598693,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598426,7 +599238,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598586,7 +599419,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598706,7 +599560,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -598977,7 +599852,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599097,7 +599993,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599257,7 +600174,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599451,7 +600389,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599531,7 +600490,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599691,7 +600671,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -599916,7 +600917,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600184,7 +601206,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600264,7 +601307,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600458,7 +601522,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600578,7 +601663,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600741,7 +601847,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -600818,7 +601945,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601021,7 +602169,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601101,7 +602270,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601218,7 +602408,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601381,7 +602592,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 
@@ -601461,7 +602693,28 @@ MonoBehaviour:
   CharDataInfo:
     monsterOfPlayerId: 
     ResourceID: 
-    _NineAndTwo: {fileID: 0}
+    _NineAndTwo:
+      A1skillid: 
+      A2skillid: 
+      A3skillid: 
+      B1skillid: 
+      B2skillid: 
+      B3skillid: 
+      C1skillid: 
+      C2skillid: 
+      C3skillid: 
+      A1level: 0
+      A2level: 0
+      A3level: 0
+      B1level: 0
+      B2level: 0
+      B3level: 0
+      C1level: 0
+      C2level: 0
+      C3level: 0
+      canDefend: 0
+      moveType: 1
+      rushType: 3
   _CharConfig:
     RECORD_ID: 
     TYPE: 

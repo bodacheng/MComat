@@ -4,7 +4,7 @@ using UnityEngine;
 using Skill;
 using Api.Dto.Model;
 
-public partial class NineAndTwo : MonoBehaviour
+public partial class NineAndTwo
 {
     // 根据账户内拥有的技能石来安排九宫格内技能石排布。
     public static NineAndTwo RandomSkillSet_BasedOnMyStones(string type, string originSkill, int skilllevel)

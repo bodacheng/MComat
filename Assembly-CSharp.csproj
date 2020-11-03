@@ -358,6 +358,7 @@
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\INHERENT_SKILLTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\PassiveSkillEntitys.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
+    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\PowerEstimateTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillNameTable.cs" />
@@ -503,7 +504,6 @@
     <Compile Include="Assets\RewardManager\RewardManager.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzerGUI.cs" />
-    <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_AT.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Common.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Rename.cs" />

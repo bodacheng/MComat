@@ -12,7 +12,7 @@ namespace mainMenu
         [Space(7)]
         [Header("格子pretab")]
         public StoneCell Cellprefab;
-
+        
         [Space(5)]
         [Header("选中框")]
         public GameObject SelectedFrame;
@@ -22,7 +22,7 @@ namespace mainMenu
         [Header("石头滚动视窗")]
         public ScrollRect stoneviewScrollRect;
         
-        public static IDictionary<int, StoneCell> CellsDictionary = new Dictionary<int, StoneCell>();//Cell这个东西我每次进入场景重新生成一次就可以。
+        public static IDictionary<int, StoneCell> CellsDictionary = new Dictionary<int, StoneCell>();
         
         public static void PreventCellsFromDestroy()
         {
