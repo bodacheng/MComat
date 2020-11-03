@@ -285,6 +285,7 @@ public partial class NineAndTwo
         if (!string.IsNullOrEmpty(SC.REAL_NAME))
         {
             SkillEntity _SE = new SkillEntity(
+                SC.RECORD_ID,
                 SC.REAL_NAME,
                 0,
                 SC.STATE_TYPE,

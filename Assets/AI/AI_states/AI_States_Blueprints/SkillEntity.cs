@@ -5,6 +5,7 @@ namespace Skill
     [System.Serializable]
     public class SkillEntity
     {
+        public string SkillID;
         public string REAL_NAME;
         public int LEVEL;
         public BehaviorType StateType;
@@ -25,7 +26,8 @@ namespace Skill
         {
         }
         
-        public SkillEntity(string _StateKey,
+        public SkillEntity( string SkillID,
+                            string REAL_NAME,
                             int LEVEL,
                             BehaviorType _attackType,
                             float _AT,
@@ -37,7 +39,8 @@ namespace Skill
                             int _SPMove,
                             int _rarelevel)
         {
-            this.REAL_NAME = _StateKey;
+            this.SkillID = SkillID;
+            this.REAL_NAME = REAL_NAME;
             this.LEVEL = LEVEL;
             this.StateType = _attackType;
             this.AT = _AT;
@@ -61,7 +64,7 @@ namespace Skill
             }
         }
         
-        public SkillEntity(string _StateKey,
+        public SkillEntity( string REAL_NAME,
                             int level,
                             BehaviorType _BType,
                             float _AT,
@@ -71,7 +74,70 @@ namespace Skill
                             InputKey enterInput, InputKey exitInput,
                             int SPMove)
         {
-            REAL_NAME = _StateKey;
+            SkillID = null;
+            this.REAL_NAME = REAL_NAME;
+            LEVEL = level;
+            StateType = _BType;
+            AT = _AT;
+            HP = _HP;
+            CANBECANCELLEDTO = can_be_cancelled_to;
+            AI_MIN_DIS = AITriggerDistanceMin;
+            AI_MAX_DIS = AITriggerDistanceMax;
+            EnterInput = enterInput;
+            ExitInput = exitInput;
+            SP_LEVEL = SPMove;
+        }
+        
+        public SkillEntity( string REAL_NAME,
+                            int LEVEL,
+                            BehaviorType _attackType,
+                            float _AT,
+                            float _HP,
+                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            string[] _casual_to_state_nums,
+                            string[] _forced_to_state_nums,
+                            InputKey _enterInput, InputKey _exitInput,
+                            int _SPMove,
+                            int _rarelevel)
+        {
+            this.SkillID = null;
+            this.REAL_NAME = REAL_NAME;
+            this.LEVEL = LEVEL;
+            this.StateType = _attackType;
+            this.AT = _AT;
+            this.HP = _HP;
+            this.AI_MIN_DIS = AITriggerDistanceMin;
+            this.AI_MAX_DIS = AITriggerDistanceMax;
+            this.CasualTo = _casual_to_state_nums;
+            this.ForcedTransitions = _forced_to_state_nums;
+            this.EnterInput = _enterInput;
+            this.ExitInput = _exitInput;
+            this.SP_LEVEL = _SPMove;
+            this.RARITY_LEVEL = _rarelevel;
+            
+            if (this.CasualTo == null)
+            {
+                this.CasualTo = new string[] { };
+            }
+            if (this.ForcedTransitions == null)
+            {
+                this.ForcedTransitions = new string[] { };
+            }
+        }
+        
+        public SkillEntity( string SkillID,
+                            string REAL_NAME,
+                            int level,
+                            BehaviorType _BType,
+                            float _AT,
+                            float _HP,
+                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            bool can_be_cancelled_to,
+                            InputKey enterInput, InputKey exitInput,
+                            int SPMove)
+        {
+            this.SkillID = SkillID;
+            this.REAL_NAME = REAL_NAME;
             LEVEL = level;
             StateType = _BType;
             AT = _AT;

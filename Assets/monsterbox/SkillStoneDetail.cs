@@ -67,14 +67,16 @@ namespace mainMenu
         
         public void Clear()
         {
+            _T.gameObject.SetActive(false);
             keyname.text = "";
             Showname.text = "";
             ShowSkillStoneExType(-1);
             ShowSKillRanges(-10, -10); //即清空
             if (expValue != null)
+            {
                 expValue.value = 0;
+            }
             StoneTargetLevel.text = "";
-            
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT)
@@ -109,6 +111,7 @@ namespace mainMenu
                 StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
                 if (expValue != null)
                     expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
+                _T.gameObject.SetActive(true);
             }else{
                 Clear();
             }
@@ -122,21 +125,31 @@ namespace mainMenu
             Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
             ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
             ShowSKillRanges(_ConfigOfStone.AI_MIN_DIS, _ConfigOfStone.AI_MAX_DIS);
+            _T.gameObject.SetActive(true);
         }
         
         // 技能画面展示用
-        public void RefreshSkillDetail_SkillEntity(SkillEntity _SkillConfigOfSkillStone)
+        public void RefreshSkillDetail_SkillEntity(SkillEntity _SkillEntity)
         {
-            if (_SkillConfigOfSkillStone == null)
+            if (_SkillEntity == null)
             {
-                keyname.text = "";
-                ShowSkillStoneExType(0);
-                ShowSKillRanges(-10, -10);//即清空
+                Clear();
                 return;
             }
-            keyname.text = _SkillConfigOfSkillStone.REAL_NAME;
-            ShowSkillStoneExType(_SkillConfigOfSkillStone.SP_LEVEL);
-            ShowSKillRanges(_SkillConfigOfSkillStone.AI_MIN_DIS, _SkillConfigOfSkillStone.AI_MAX_DIS);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(_SkillEntity.SkillID);
+            keyname.text = _SkillEntity.REAL_NAME;
+            Showname.text = skillConfig.SHOW_NAME;
+            ShowSkillStoneExType(_SkillEntity.SP_LEVEL);
+            ShowSKillRanges(_SkillEntity.AI_MIN_DIS, _SkillEntity.AI_MAX_DIS);
+            if (powerInfo != null)
+            {
+                PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
+                float.TryParse(row.HP, out float hp);
+                float.TryParse(row.EstimateDamage, out float at);
+                powerInfo.text = "MaxDamage = " + _SkillEntity.AT +
+                "  MaxHp = " + _SkillEntity.HP;
+            }
+            _T.gameObject.SetActive(true);
         }
         
         void ShowSKillRanges(float dis_min, float float_max)
