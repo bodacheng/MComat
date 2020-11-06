@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using dataAccess;
+using Api.Dto.Model;
 
 // 技能石消耗
 public partial class SSLevelUpManager : MonoBehaviour
@@ -7,13 +8,14 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 素材的添加与移除
     public void AddMaterial(StoneCell skillboxcell)
     {
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
         for (int i = 0; i < MaterialSlots.Count; i++)
         {
             MaterialSlots[i].UpdateMyItem();
             SKStoneItem Material = skillboxcell.GetItem();
             if (MaterialSlots[i].GetItem() == null && Material != null)
             {
-                if (Material.SkillStoneOfPlayerId != focusingSSD.GetSTTarget().skillStoneOfPlayerId)
+                if (Material.SkillStoneOfPlayerId != StoneInfoModel.skillStoneOfPlayerId)
                 {
                     StoneCell.Install(skillboxcell, MaterialSlots[i]);
                     break;

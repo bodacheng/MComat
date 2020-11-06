@@ -401,7 +401,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\StoneBoxExpansion.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\SkillStones.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\SkillStonesList.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />

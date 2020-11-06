@@ -29,7 +29,7 @@ namespace mainMenu
         [Space(7)]
         [Header("EXTypes")]
         public GameObject close, near, far;
-
+        
         [Space(7)]
         [Header("攻击力与HP")]
         public Text powerInfo;
@@ -38,13 +38,7 @@ namespace mainMenu
         [Header("当前技能等级")]
         public Slider expValue;
         public Text StoneTargetLevel;
-        
-        SkillStoneOfPlayerInfoModel currentstone;
-        public SkillStoneOfPlayerInfoModel GetSTTarget()
-        {
-            return currentstone;
-        }
-        
+                
         // 额外生成一个技能石图像
         IEnumerator IconForShow(string skillID)
         {
@@ -72,11 +66,11 @@ namespace mainMenu
             Showname.text = "";
             ShowSkillStoneExType(-1);
             ShowSKillRanges(-10, -10); //即清空
+            StoneTargetLevel.text = "";
             if (expValue != null)
             {
                 expValue.value = 0;
             }
-            StoneTargetLevel.text = "";
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT)
@@ -86,41 +80,43 @@ namespace mainMenu
             }
         }
         
-        public void RefreshSkillDetail(string skillStoneOfPlayerId)
+        public void RefreshInfo(string skillStoneOfPlayerId)
         {
-            if (!string.IsNullOrEmpty(skillStoneOfPlayerId))
+            SkillStoneOfPlayerInfoModel currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
+            if (currentstone == null)
             {
-                currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
-                SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(currentstone.skillId);
-                SkillStonesBox.target.mainProcessRunner.Run(IconForShow(skillConfig.RECORD_ID));
-                
-                keyname.text = skillConfig.REAL_NAME;
-                Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
-                ShowSkillStoneExType(skillConfig.SP_LEVEL);
-                ShowSKillRanges(skillConfig.AI_MIN_DIS, skillConfig.AI_MAX_DIS);
-                if (powerInfo != null)
-                {
-                    PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
-                    float.TryParse(row.HP, out float hp);
-                    float.TryParse(row.EstimateDamage, out float at);
-                    powerInfo.text = "MaxDamage = " + SkillEntity.ATCal(at, currentstone.GetLevel()) +
-                    "  MaxHp = " + SkillEntity.StoneHpCal(hp, currentstone.GetLevel());
-                }
-                
-                LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(currentstone.EXP);
-                StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
-                if (expValue != null)
-                    expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
-                _T.gameObject.SetActive(true);
-            }else{
                 Clear();
+                return;
             }
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(currentstone.skillId);
+            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(skillConfig.RECORD_ID));
+            
+            keyname.text = skillConfig.REAL_NAME;
+            Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
+            ShowSkillStoneExType(skillConfig.SP_LEVEL);
+            ShowSKillRanges(skillConfig.AI_MIN_DIS, skillConfig.AI_MAX_DIS);
+            if (powerInfo != null)
+            {
+                PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
+                float.TryParse(row.HP, out float hp);
+                float.TryParse(row.EstimateDamage, out float at);
+                powerInfo.text = "MaxDamage = " + SkillEntity.ATCal(at, currentstone.GetLevel()) +
+                "  MaxHp = " + SkillEntity.StoneHpCal(hp, currentstone.GetLevel());
+            }
+            
+            LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(currentstone.EXP);
+            StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
+            if (expValue != null)
+            {
+                expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
+                expValue.gameObject.SetActive(true);
+            }
+            _T.gameObject.SetActive(true);
         }
         
-        public void RefreshSkillDetail(SkillConfig _ConfigOfStone)
+        public void RefreshInfo(SkillConfig _ConfigOfStone)
         {
             SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_ConfigOfStone.RECORD_ID));
-            
             keyname.text = _ConfigOfStone.REAL_NAME;
             Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
             ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
@@ -129,7 +125,7 @@ namespace mainMenu
         }
         
         // 技能画面展示用
-        public void RefreshSkillDetail_SkillEntity(SkillEntity _SkillEntity)
+        public void RefreshInfo(SkillEntity _SkillEntity)
         {
             if (_SkillEntity == null)
             {
@@ -148,6 +144,11 @@ namespace mainMenu
                 float.TryParse(row.EstimateDamage, out float at);
                 powerInfo.text = "MaxDamage = " + _SkillEntity.AT +
                 "  MaxHp = " + _SkillEntity.HP;
+            }
+            if (expValue != null)
+            {
+                // 显示技能实体的细节不需要量化等级，实际攻击力等等才是重点
+                expValue.gameObject.SetActive(false);
             }
             _T.gameObject.SetActive(true);
         }

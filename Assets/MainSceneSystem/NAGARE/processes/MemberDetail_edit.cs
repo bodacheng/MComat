@@ -19,7 +19,6 @@ public class MemberDetail_edit : MainSceneProcess
         }
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
-        SSLevelUpManager.target.SetFocusingSSD(SkillStonesBox.target._skillStoneDetail);
         PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 2);
@@ -82,6 +81,7 @@ public class MemberDetail_edit : MainSceneProcess
     public override void ProcessEnd()
     {
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
+        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 

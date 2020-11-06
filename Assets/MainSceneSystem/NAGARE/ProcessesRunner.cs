@@ -56,6 +56,11 @@ namespace mainMenu
 
         public void ChangeProcess(MainSceneStep sceneStep)
         {
+            ChangeProcess<Any>(sceneStep, null);
+        }
+        
+        public void ChangeProcess<T>(MainSceneStep sceneStep, T t)
+        {
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnd();
@@ -71,7 +76,10 @@ namespace mainMenu
             SceneProcessDictionary.TryGetValue(sceneStep, out currentProcess);
             if (currentProcess != null)
             {
-                currentProcess.ProcessEnter();
+                if (t != null)
+                    currentProcess.ProcessEnter(t);
+                else
+                    currentProcess.ProcessEnter();
                 MainSceneLog Log = new MainSceneLog()
                 {
                     step = currentProcess.Step,

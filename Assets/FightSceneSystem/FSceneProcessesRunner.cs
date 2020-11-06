@@ -22,7 +22,7 @@ namespace FightScene
         public FSceneProcess lastProcess;
         public FSceneProcess currentProcess;
         readonly IDictionary<SceneStep, FSceneProcess> SceneProcessDictionary = new Dictionary<SceneStep, FSceneProcess>();
-    
+        
         public void Clear()
         {
             currentProcess = null;

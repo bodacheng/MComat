@@ -3,6 +3,7 @@ using dataAccess;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
+using Api.Dto.Model;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     public Text StoneTargetLevel;
     public Text CurrentExpToNextLevel;
     public Text CurrentGoldExaustText;
-
+    
+    [Space(7)]
+    [Header("升级对象技能石参数")]
+    public SkillStoneDetail focusingSSD;
+    
     [Space(7)]
     [Header("材料技能石参数")]
     public SkillStoneDetail _MSkillStoneDetail;
@@ -36,9 +41,15 @@ public partial class SSLevelUpManager : MonoBehaviour
     public StoneCell cell4;
     public StoneCell cell5;
     List<StoneCell> MaterialSlots;
-
-    SkillStoneDetail focusingSSD;
+    
     public static SSLevelUpManager target;
+
+    string stoneOfPlayerId;
+    
+    public string GetTargetStoneID()
+    {
+        return stoneOfPlayerId;
+    }
 
     void Awake()
     {
@@ -71,9 +82,9 @@ public partial class SSLevelUpManager : MonoBehaviour
                 if (_stone != null && _stone._SkillConfig != null)
                 {
                     // 如果点击的不是升级对象技能石
-                    if (_stone.SkillStoneOfPlayerId != focusingSSD.GetSTTarget().skillStoneOfPlayerId)
+                    if (_stone.SkillStoneOfPlayerId != stoneOfPlayerId)
                     {
-                        _MSkillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
+                        _MSkillStoneDetail.RefreshInfo(_stone.SkillStoneOfPlayerId);
                     }
                 }
                 else{
@@ -85,17 +96,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
     }
     
-    // 设置目前链接的技能石细节显示模块
-    public void SetFocusingSSD(SkillStoneDetail fSSD)
-    {
-        focusingSSD = fSSD;
-    }
-    
-    public SkillStoneDetail GetFocusingSSD()
-    {
-        return focusingSSD;
-    }
-
     // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
     public int CurrentAddExp()
     {
@@ -106,10 +106,14 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
     {
-        if (focusingSSD.GetSTTarget() == null)
-            return;
-        SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(focusingSSD.GetSTTarget().skillStoneOfPlayerId);
-        StoneCell targetStoneOnCell = targetStone.GetCell();
+        OpenLevelUpPage(stoneOfPlayerId);
+    }
+    
+    public void OpenLevelUpPage(string skillstoneofplayer)
+    {
+        stoneOfPlayerId = skillstoneofplayer;
+        focusingSSD.RefreshInfo(stoneOfPlayerId);
+        SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
         SKStoneItem.SeletedRender(targetStone, _Selected);
         SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
         levelUpPageRect.gameObject.SetActive(true);
@@ -117,6 +121,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
         target._MSkillStoneDetail.Clear();
     }
+    
     public void CloseLevelUpPage()
     {
         _Selected.SetActive(false);
@@ -143,14 +148,16 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
     public void RefreshSkillLevelUpModule()
     {
-        if (focusingSSD == null || focusingSSD.GetSTTarget() == null)
+        if (focusingSSD == null || stoneOfPlayerId == null)
         {
             Clear();
             return;
         }
         
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
+        
         #region 各数值文本刷新
-        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
         expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
         StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);

@@ -5,6 +5,10 @@
         public virtual void ProcessEnter()
         {
         }
+        
+        public virtual void ProcessEnter<T>(T t)
+        {
+        }
 
         public virtual void ProcessEnd()
         {

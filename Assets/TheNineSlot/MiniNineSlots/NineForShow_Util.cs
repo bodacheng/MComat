@@ -80,7 +80,7 @@ public partial class NineForShow : MonoBehaviour
         SKStoneItem item = targetButton.transform.GetComponentInChildren<SKStoneItem>();
         if (item != null)
         {
-            GachaManager.target._skillStoneDetail.RefreshSkillDetail(item._SkillConfig);
+            GachaManager.target._skillStoneDetail.RefreshInfo(item._SkillConfig);
         }
     }
 }

@@ -77,8 +77,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
-        if (focusingSSD.GetSTTarget() == null)
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
+        if (StoneInfoModel == null)
             return;
-        PreScene.target.mainProcessRunner.Run(LevelUpStone(focusingSSD.GetSTTarget().skillStoneOfPlayerId));
+        PreScene.target.mainProcessRunner.Run(LevelUpStone(StoneInfoModel.skillStoneOfPlayerId));
     }
 }

@@ -129,7 +129,7 @@ namespace mainMenu
                     SKStoneItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
                     if (_SkillStone != null && _SkillStone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_SkillStone.SkillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshInfo(_SkillStone.SkillStoneOfPlayerId);
                         mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();

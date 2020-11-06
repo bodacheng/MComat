@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using dataAccess;
+using Api.Dto.Model;
 
 // 智慧果实消耗
 public partial class SSLevelUpManager : MonoBehaviour
@@ -9,10 +10,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 调整目标等级 直接放在按钮上。
     public void PlusTargetLevel()
     {
-        if (focusingSSD.GetSTTarget() == null)
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
+        if (StoneInfoModel == null)
             return;
         
-        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
         // +号代表直接把技能石升到下一级所需要的经验全数补充上，不够的话就把当前所有剩余的金币加上
         if (StoneExpManager.GoldToExp(AccountSet._AccInfo.coinCount) >= current.expToNextLevel)
         {
@@ -27,10 +29,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void MinusTargetLevel()
     {
-        if (focusingSSD.GetSTTarget() == null)
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
+        if (StoneInfoModel == null)
             return;
             
-        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + focusingSSD.GetSTTarget().EXP);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
         
         if (current.currentLevel ==1)
         {

@@ -8,7 +8,7 @@ public class StoneSell : MainSceneProcess
     {
         if (ProcessesRunner.Main.lastProcess.Step != MainSceneStep.SkillStones)
         {
-            yield return SkillStones.EnterProcess();
+            yield return SkillStonesList.EnterProcess();
         } else {
             SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         }

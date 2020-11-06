@@ -90,8 +90,7 @@ namespace mainMenu
             void showSkillInfo()
             {
                 DestroyFloatingMarks();
-                _skillStoneDetail.RefreshSkillDetail_SkillEntity(_SE);
-                
+                _skillStoneDetail.RefreshInfo(_SE);
                 foreach (string _set in _SE.CasualTo)
                 {
                     analysisSKList.TryGetValue(_set, out SkillEntity _oneCasualTo);
@@ -196,7 +195,7 @@ namespace mainMenu
         {
             DestroyFloatingMarks();
             ClearRenderPs();
-            _skillStoneDetail.RefreshSkillDetail_SkillEntity(null);
+            _skillStoneDetail.RefreshInfo((SkillEntity)null);
             
             foreach (Transform child in attacksT)
             {

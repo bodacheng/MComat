@@ -24,7 +24,7 @@ namespace mainMenu
                 ordertype = 0;
             }
             _Selected.gameObject.SetActive(false);
-            SSLevelUpManager.target._MSkillStoneDetail.RefreshSkillDetail(string.Empty);
+            SSLevelUpManager.target._MSkillStoneDetail.RefreshInfo(string.Empty);
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
               

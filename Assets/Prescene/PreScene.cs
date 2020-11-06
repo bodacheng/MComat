@@ -112,7 +112,7 @@ namespace mainMenu
             #region 主界面各大画面
             TopPage frontPage = new TopPage();
             TeamEditFront teamEditFront = new TeamEditFront();
-            SkillStones skillStones = new SkillStones();
+            SkillStonesList skillStones = new SkillStonesList();
             StoneSell stoneSell = new StoneSell();
             StoneMerge stoneMerge = new StoneMerge();
             SelfFightFront selfFightFront = new SelfFightFront();
@@ -263,6 +263,20 @@ namespace mainMenu
                 ReturnButtonManager.PUSH(returnTOCurrent);
             }
             ProcessesRunner.Main.ChangeProcess(next_step);
+        }
+        
+        public void trySwitchToStep<T>(MainSceneStep next_step, T t, bool foward)
+        {
+            if (foward && ProcessesRunner.Main.currentProcess != null)
+            {
+                MainSceneStep returnToStep = ProcessesRunner.Main.currentProcess.Step;
+                void returnTOCurrent()
+                {
+                    trySwitchToStep(returnToStep, false);
+                }
+                ReturnButtonManager.PUSH(returnTOCurrent);
+            }
+            ProcessesRunner.Main.ChangeProcess(next_step, t);
         }
     }
 }

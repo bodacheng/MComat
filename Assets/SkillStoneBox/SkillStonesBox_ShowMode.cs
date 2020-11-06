@@ -13,78 +13,75 @@ namespace mainMenu
         
         public void CellButtonBeheviour_STStoneShow(StoneCell _SkillStoneCell)
         {
-            Button button = _SkillStoneCell.GetComponent<Button>();
-            if (button != null)
+            Button button = _SkillStoneCell.GetComponent<Button>();                
+            button.onClick.RemoveAllListeners();
+            void buttonFeature()
             {
-                button.onClick.RemoveAllListeners();
-                void buttonFeature()
+                SKStoneItem _stone = _SkillStoneCell.GetItem();
+                if (_stone != null && _stone._SkillConfig != null)
                 {
-                    SKStoneItem _stone = _SkillStoneCell.GetItem();
-                    if (_stone != null && _stone._SkillConfig != null)
-                    {
-                        _skillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
-                        if (SSLevelUpManager.target != null)
-                            SSLevelUpManager.target.RefreshSkillLevelUpModule();
-                    }else{
-                        _skillStoneDetail.Clear();
-                    }
+                    _skillStoneDetail.RefreshInfo(_stone.SkillStoneOfPlayerId);
+                }else{
+                    _skillStoneDetail.Clear();
                 }
-                
-                void PressGoToLevelUpPage()
+            }
+            
+            void PressGoToLevelUpPage()
+            {
+                pressCount = new SingleAssignmentDisposable
                 {
-                    pressCount = new SingleAssignmentDisposable
-                    {
-                        Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                    Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                        {
+                            if (pressStart)
                             {
-                                if (pressStart)
-                                {
-                                    pressingSeconds += Time.deltaTime;
-                                    if (pressingSeconds > 1f)
-                                    {
-                                        pressingSeconds = 0;
-                                        pressStart = false;
-                                        SSLevelUpManager.target.OpenLevelUpPage();
-                                    }
-                                }
-                                if (!pressStart)
+                                pressingSeconds += Time.deltaTime;
+                                if (pressingSeconds > 1f)
                                 {
                                     pressingSeconds = 0;
-                                    if (!pressCount.IsDisposed)
-                                    {
-                                        pressCount.Dispose();
-                                    }
+                                    pressStart = false;
+                                    SKStoneItem _stone = _SkillStoneCell.GetItem();
+                                    if (_stone != null && _stone._SkillConfig != null)
+                                        SSLevelUpManager.target.OpenLevelUpPage(_stone.SkillStoneOfPlayerId);
                                 }
                             }
-                        )
-                    };
-                }
-                
-                EventTrigger trigger = button.GetComponent<EventTrigger>();
-                EventTrigger.Entry enter = new EventTrigger.Entry
-                {
-                    eventID = EventTriggerType.PointerDown
+                            if (!pressStart)
+                            {
+                                pressingSeconds = 0;
+                                if (!pressCount.IsDisposed)
+                                {
+                                    pressCount.Dispose();
+                                }
+                            }
+                        }
+                    )
                 };
-                EventTrigger.Entry up = new EventTrigger.Entry
-                {
-                    eventID = EventTriggerType.PointerUp
-                };
-                enter.callback.AddListener((eventData) => {
-                    if (!pressStart)
-                    {
-                        pressStart = true;
-                        buttonFeature();
-                        PressGoToLevelUpPage();
-                        StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
-                    }
-                } );
-                up.callback.AddListener( (eventData) => { pressStart = false; } );
-                
-                trigger.triggers.Clear();
-                trigger.triggers.Add(enter);
-                trigger.triggers.Add(up);
-                
-                //button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
             }
+            
+            EventTrigger trigger = button.GetComponent<EventTrigger>();
+            EventTrigger.Entry enter = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerDown
+            };
+            EventTrigger.Entry up = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerUp
+            };
+            enter.callback.AddListener((eventData) => {
+                if (!pressStart)
+                {
+                    pressStart = true;
+                    buttonFeature();
+                    PressGoToLevelUpPage();
+                    StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
+                }
+            } );
+            up.callback.AddListener( (eventData) => { pressStart = false; } );
+            
+            trigger.triggers.Clear();
+            trigger.triggers.Add(enter);
+            trigger.triggers.Add(up);
+            
+            //button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
         }
     }
 }

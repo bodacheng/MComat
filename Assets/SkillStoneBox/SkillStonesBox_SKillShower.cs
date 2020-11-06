@@ -16,7 +16,7 @@ namespace mainMenu
                     SKStoneItem _stone = _SkillStoneCell.GetItem();
                     if (_stone != null && _stone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshSkillDetail(_stone.SkillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshInfo(_stone.SkillStoneOfPlayerId);
                         mainProcessRunner.Run(MemberDetail.target._SkillsPrintOut.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();
