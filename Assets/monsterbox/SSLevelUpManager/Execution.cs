@@ -27,7 +27,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         skillStoneLevelUpForm.M4Stone = item4 != null ? item4.SkillStoneOfPlayerId : null;
         skillStoneLevelUpForm.M5Stone = item5 != null ? item5.SkillStoneOfPlayerId : null;
         
-        skillStoneLevelUpForm.UseGold = CurrentAddExp().ToString();
+        skillStoneLevelUpForm.UseGold = CurrentGoldExaust.ToString();
         
         yield return LevelUpStoneTest(skillStoneLevelUpForm,
              model => {

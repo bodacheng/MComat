@@ -106,7 +106,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         return StoneExpManager.GoldToExp(CurrentGoldExaust) + CalCurrentExpFromMaterialStone();
     }
-
+    
     #region 技能石升级窗口的开启与关闭
     // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
