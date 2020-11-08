@@ -70,6 +70,7 @@ namespace mainMenu
             if (expValue != null)
             {
                 expValue.value = 0;
+                expValue.gameObject.SetActive(false);
             }
             if (IconShowT != null)
             {

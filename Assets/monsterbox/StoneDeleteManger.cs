@@ -12,7 +12,7 @@ public class StoneDeleteManger : MonoBehaviour
     public RectTransform SkillInfoT, SelectionInfoT;
     public SkillStonesBox SkillStonesBox;
     public Button EnterDeleteModeButton;
-
+    
     [Space(7)]
     [Header("确认，取消")]
     public Button confirm, cancel;
@@ -62,7 +62,6 @@ public class StoneDeleteManger : MonoBehaviour
                             cancel.gameObject.SetActive(false);
                         }
                     }
-
                 }
             )
         };
@@ -75,7 +74,8 @@ public class StoneDeleteManger : MonoBehaviour
         EnterDeleteModeButton.gameObject.SetActive(true);
         CurrentSelectedCount.text = "";
         ClearSelect();
-        SkillStonesBox.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
+        SkillStonesBox.GenerateCells();
+        SkillStonesBox.CellsFeatureLoad(1);
         autoHide.Dispose();
     }
     

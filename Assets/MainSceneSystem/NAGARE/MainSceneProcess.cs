@@ -31,7 +31,7 @@ namespace mainMenu
         MemberDetail = 5,
         MemberDetail_edit = 16,
         MemberDetail_show = 17,
-        SkillStones = 15,
+        SkillStoneList = 15,
         SkillStones_Sell = 100,
         GotchaFront = 6,
         GotchaAnim = 7,

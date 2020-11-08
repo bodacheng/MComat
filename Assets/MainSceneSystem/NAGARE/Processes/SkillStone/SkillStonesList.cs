@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using mainMenu;
-using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,24 +8,25 @@ public class SkillStonesList : MainSceneProcess
     //EnterProcess()内绝不能出现triggerMainProcess
     public static IEnumerator EnterProcess()
     {
-        yield return CommonEnterProcess();
         SkillStonesBox.target._skillStoneDetail.Clear();
-        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 1);
+        yield return CommonEnterProcess();
+        SkillStonesBox.target.GenerateCells();
+        SkillStonesBox.target.CellsFeatureLoad(1);
     }
     
     //EnterProcess()内绝不能出现triggerMainProcess
     public static IEnumerator EnterProcess<T>(T t)
     {
         yield return CommonEnterProcess();
-        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, 0);
+        SkillStonesBox.target.GenerateCells();
         SSLevelUpManager.target.OpenLevelUpPage(t as string);
     }
     
     static IEnumerator CommonEnterProcess()
     {
+        LoadingCanvas.target.DarkOffDirectly(1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         yield return ModelShower.target.ShowMyModel(null);
-        LoadingCanvas.target.DarkOffDirectly(1f);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -35,7 +35,6 @@ public class SkillStonesList : MainSceneProcess
         }
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
-        LoadingCanvas.target.LightUp();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
@@ -45,26 +44,22 @@ public class SkillStonesList : MainSceneProcess
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
             Zokusei.blueMagic
         );
+        LoadingCanvas.target.LightUp();
     }
 
     public SkillStonesList()
     {
-        Step = MainSceneStep.SkillStones;
+        Step = MainSceneStep.SkillStoneList;
         EelementsInherit(PreScene.target);
     }
     
     public override void ProcessEnter<T>(T t)
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        if (ProcessesRunner.Main.lastProcess.Step != MainSceneStep.SkillStones_Sell)
-        {
-            if (t != null)
-                mainProcessRunner.Run(EnterProcess(t));
-            else
-                mainProcessRunner.Run(EnterProcess());
-        } else {
-            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        }
+        if (t != null)
+            mainProcessRunner.Run(EnterProcess(t));
+        else
+            mainProcessRunner.Run(EnterProcess());
     }
     
     public override void ProcessEnter()
@@ -74,6 +69,7 @@ public class SkillStonesList : MainSceneProcess
 
     public override void ProcessEnd()
     {
+        SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SSLevelUpManager.target.CloseLevelUpPage();

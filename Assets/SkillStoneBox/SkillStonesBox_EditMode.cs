@@ -48,7 +48,7 @@ namespace mainMenu
                                     SKStoneItem _stone = _SkillStoneCell.GetItem();
                                     if (_stone != null && _stone._SkillConfig != null)
                                     {
-                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStones, _stone.SkillStoneOfPlayerId, true);
+                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.SkillStoneOfPlayerId, true);
                                     }
                                 }
                             }

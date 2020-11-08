@@ -107,7 +107,7 @@ public class BoxExpandHelper : MonoBehaviour
     #region 贩卖    
     void GoToStoneSell()
     {
-        PreScene.target.trySwitchToStep(MainSceneStep.SkillStones,true); // 没有单独的技能石贩卖画面所以只能送到这里
+        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList,true); // 没有单独的技能石贩卖画面所以只能送到这里
     }
     #endregion
 }

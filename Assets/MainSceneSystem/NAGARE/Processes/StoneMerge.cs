@@ -19,7 +19,8 @@ public class StoneMerge : MainSceneProcess
         StoneMergeManger.target._Canvas.gameObject.SetActive(true);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.GenerateCells(AccountSet._AccInfo.Stoneboxsize, -1);
+        SkillStonesBox.target.GenerateCells();
+        SkillStonesBox.target.CellsFeatureLoad(-1);
         yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
         SkillStonesBox.target._skillStoneDetail.Clear();
@@ -32,7 +33,7 @@ public class StoneMerge : MainSceneProcess
             Zokusei.redMagic
         );
     }
-        
+    
     public override void ProcessEnter()
     {
         mainProcessRunner.Run(EnterProcess());

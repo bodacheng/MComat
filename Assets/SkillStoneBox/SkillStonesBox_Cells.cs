@@ -33,10 +33,10 @@ namespace mainMenu
         }
         
         // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
-        public void GenerateCells(int cellsLimit, int mode)
+        public void GenerateCells()
         {
             int hangshu = 1;
-            for (int i = 0; i < cellsLimit; i++)
+            for (int i = 0; i < AccountSet._AccInfo.Stoneboxsize; i++)
             {
                 if (!CellsDictionary.ContainsKey(i))
                 {
@@ -60,14 +60,13 @@ namespace mainMenu
                 CellsDictionary[i]._selected.SetActive(false);
             }
             GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
-            hangshu = cellsLimit / GridLayoutGroup.constraintCount + 1;
+            hangshu = AccountSet._AccInfo.Stoneboxsize / GridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
-            CellsFeatureLoad(cellsLimit, mode);
         }
         
-        public void CellsFeatureLoad(int cellsLimit, int mode) // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
+        public void CellsFeatureLoad(int mode) // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
         {
-            for (int i = 0; i < cellsLimit; i++)
+            for (int i = 0; i < CellsDictionary.Count; i++)
             {
                 switch(mode)
                 {

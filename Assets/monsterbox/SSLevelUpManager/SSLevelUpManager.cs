@@ -13,7 +13,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     public Button plusLevel;
     public Button minusLevel;
     public Button confirmLevelUp;
-
+    
     [Space(7)]
     [Header("目前各种参数显示")]
     public Slider expValue;
@@ -45,7 +45,10 @@ public partial class SSLevelUpManager : MonoBehaviour
     public static SSLevelUpManager target;
 
     string stoneOfPlayerId;
-    
+    public void SetTargetStoneID(string value)
+    {
+        stoneOfPlayerId = value;
+    }
     public string GetTargetStoneID()
     {
         return stoneOfPlayerId;
@@ -74,26 +77,28 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void AddMSlotBehaviour(StoneCell cell)
     {
         Button button = cell.GetComponent<Button>();
-        if (button != null)
+        if (button == null)
         {
-            void buttonFeature()
+            return;
+        }
+        
+        void buttonFeature()
+        {
+            SKStoneItem _stone = cell.GetItem();
+            if (_stone != null && _stone._SkillConfig != null)
             {
-                SKStoneItem _stone = cell.GetItem();
-                if (_stone != null && _stone._SkillConfig != null)
+                // 如果点击的不是升级对象技能石
+                if (_stone.SkillStoneOfPlayerId != stoneOfPlayerId)
                 {
-                    // 如果点击的不是升级对象技能石
-                    if (_stone.SkillStoneOfPlayerId != stoneOfPlayerId)
-                    {
-                        _MSkillStoneDetail.RefreshInfo(_stone.SkillStoneOfPlayerId);
-                    }
-                }
-                else{
-                    _MSkillStoneDetail.Clear();
+                    _MSkillStoneDetail.RefreshInfo(_stone.SkillStoneOfPlayerId);
                 }
             }
-            button.onClick.AddListener(buttonFeature);
-            button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, SkillStonesBox._Selected); });
+            else{
+                _MSkillStoneDetail.Clear();
+            }
         }
+        button.onClick.AddListener(buttonFeature);
+        button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, SkillStonesBox._Selected); });
     }
     
     // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
@@ -115,7 +120,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
         SKStoneItem.SeletedRender(targetStone, _Selected);
-        SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 0);
+        SkillStonesBox.target.CellsFeatureLoad(0);
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
@@ -126,7 +131,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         _Selected.SetActive(false);
         ReturnAllMaterialsToBox();
-        SkillStonesBox.target.CellsFeatureLoad(AccountSet._AccInfo.Stoneboxsize, 1);
+        SkillStonesBox.target.CellsFeatureLoad(1);
         levelUpPageRect.gameObject.SetActive(false);
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(true);
@@ -139,7 +144,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         StoneTargetLevel.text = "";
         CurrentExpToNextLevel.text = "";
         CurrentGoldExaustText.text = "";
-        expValue.value = 0;
+        if (expValue != null)
+        {
+            expValue.value = 0;
+            expValue.gameObject.SetActive(false);
+        }        
         plusLevel.gameObject.SetActive(false);
         minusLevel.gameObject.SetActive(false);
         confirmLevelUp.gameObject.SetActive(false);

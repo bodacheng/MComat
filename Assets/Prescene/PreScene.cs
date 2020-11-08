@@ -139,7 +139,7 @@ namespace mainMenu
             
             ProcessesRunner.Main.Clear();
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones, skillStones);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStoneList, skillStones);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones_Sell, stoneSell);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.StoneMerge, stoneMerge);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
@@ -172,9 +172,9 @@ namespace mainMenu
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.4f);
-            yield return _SkillStonesBox_NineSlot.StartUp(AccountSet._AccInfo.Stoneboxsize);
+            yield return _SkillStonesBox_NineSlot.StartUp();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.5f);
-            yield return _SkillStonesBox_Show.StartUp(AccountSet._AccInfo.Stoneboxsize);
+            yield return _SkillStonesBox_Show.StartUp();
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
             yield return (TheNineSlot.target.StartUp());
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.7f);

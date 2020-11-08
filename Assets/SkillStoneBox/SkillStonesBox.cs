@@ -51,9 +51,10 @@ namespace mainMenu
             _stonesTempContainer = stonesTempContainer;
         }
         
-        public IEnumerator StartUp(int stoneboxsize)
+        public IEnumerator StartUp()
         {
-            GenerateCells(stoneboxsize, 1);
+            GenerateCells();
+            CellsFeatureLoad(1);
             yield break;
         }
         

@@ -1,12 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
-using Skill;
 
 public partial class NineForShow : MonoBehaviour
 {

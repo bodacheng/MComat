@@ -18,14 +18,14 @@ public class BoxOverLoadFixManager : MonoBehaviour
     {
         void ChooseToExpand()
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxExpansion,true);
+            PreScene.target.trySwitchToStep(MainSceneStep.BoxExpansion, true);
         }
         Expand.onClick.RemoveAllListeners();
         Expand.onClick.AddListener(ChooseToExpand);
         
         void ChooseToSell()
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.SkillStones_Sell,true);
+            PreScene.target.trySwitchToStep(MainSceneStep.SkillStones_Sell, true);
         }
         SELL.onClick.RemoveAllListeners();
         SELL.onClick.AddListener(ChooseToSell);

@@ -6,12 +6,7 @@ public class StoneSell : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        if (ProcessesRunner.Main.lastProcess.Step != MainSceneStep.SkillStones)
-        {
-            yield return SkillStonesList.EnterProcess();
-        } else {
-            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        }
+        yield return SkillStonesList.EnterProcess();
         StoneDeleteManger.target.EnterDeleteMode();
     }
     
@@ -27,10 +22,10 @@ public class StoneSell : MainSceneProcess
         mainProcessRunner.Run(EnterProcess());
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
             Zokusei.Null
         );
     }
