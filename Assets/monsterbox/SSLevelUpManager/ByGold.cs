@@ -50,11 +50,13 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (CurrentGoldExaust >= StoneExpManager.ExpToGold(current.expRemain))
             {
                 CurrentGoldExaust -= StoneExpManager.ExpToGold(current.expRemain);
-                Debug.Log(CurrentGoldExaust);
             }
             else
+            {
                 CurrentGoldExaust = 0;
-        }else{
+            }
+        }
+        else{
             if (CurrentGoldExaust >= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel)))
             {
                 CurrentGoldExaust -= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel));

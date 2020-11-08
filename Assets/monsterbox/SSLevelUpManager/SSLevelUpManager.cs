@@ -4,6 +4,7 @@ using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
+using DG.Tweening;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
@@ -44,6 +45,55 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public static SSLevelUpManager target;
 
+    int targetexp;
+    public int TargetExp
+    {
+        get
+        {
+            return targetexp;
+        }
+        set
+        {
+            LevelExpConfig.Current before = LevelExpConfig.GetCurrentInfo(targetexp);
+            LevelExpConfig.Current after = LevelExpConfig.GetCurrentInfo(value);
+            
+            if (targetexp > value)
+                MinusAnim(before.currentLevel - after.currentLevel, (float)after.expRemain / (float)(after.expRemain + after.expToNextLevel));
+            else
+                PlusAnim(after.currentLevel - before.currentLevel, (float)after.expRemain / (float)(after.expRemain + after.expToNextLevel));
+            targetexp = value;
+        }
+    }
+    
+    void PlusAnim(int temp, float valueTo)
+    {
+        if (temp > 0)
+        {
+            DOTween.To(() => expValue.value, x => expValue.value = x, 1, 0.5f).
+            OnComplete(() =>
+            {
+                expValue.value = 0;
+                PlusAnim(temp - 1, valueTo);
+            });
+        }else{
+            expValue.value = 0;
+            DOTween.To(() => expValue.value, x => expValue.value = x, valueTo, 0.5f);
+        }
+    }
+    
+    void MinusAnim(int temp, float valueTo)
+    {
+        if (temp > 0)
+        {
+            DOTween.To(() => expValue.value, x => expValue.value = x, 0, 0.5f);
+            expValue.value = 1;
+            MinusAnim(temp - 1, valueTo);
+        }else{
+            expValue.value = 1;
+            DOTween.To(() => expValue.value, x => expValue.value = x, valueTo, 0.5f);
+        }
+    }
+    
     string stoneOfPlayerId;
     public void SetTargetStoneID(string value)
     {
@@ -158,6 +208,18 @@ public partial class SSLevelUpManager : MonoBehaviour
         confirmLevelUp.gameObject.SetActive(false);
     }
     
+    void ExpBar(int beforeExp, int currentExp)
+    {
+        if (expValue == null)
+            return;
+        LevelExpConfig.Current before = LevelExpConfig.GetCurrentInfo(beforeExp);
+        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(currentExp);
+        if (currentExp > beforeExp)
+            PlusAnim(current.currentLevel - before.currentLevel, (float)current.expRemain / (current.expRemain + current.expToNextLevel));
+        else
+            MinusAnim(before.currentLevel - current.currentLevel, (float)current.expRemain / (current.expRemain + current.expToNextLevel));
+    }
+    
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
     public void RefreshSkillLevelUpModule()
     {
@@ -171,10 +233,10 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         #region 各数值文本刷新
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
+        TargetExp = CurrentAddExp() + StoneInfoModel.EXP;
         StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
-        expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
         StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-        CurrentExpToNextLevel.text = "(" + current.expRemain + "/" + (current.expRemain + current.expToNextLevel).ToString() + ")";
+        CurrentExpToNextLevel.text = "( " + ((float)current.expRemain/(float)(current.expRemain + current.expToNextLevel)).ToString() + "% )";
         CurrentExpToNextLevel.color = CurrentGoldExaust > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
         CurrentGoldExaustText.text = "消耗金币："+ CurrentGoldExaust;
         #endregion
