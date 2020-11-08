@@ -14,11 +14,8 @@ namespace mainMenu
         public SingleThreadProcesser mainProcessRunner;
         
         [Space(11)]
-        [Header("Essentials")]
+        [Header("主相机")]
         public CameraManager _CameraManager;
-        public Text UserID;
-        public Text accountDiamondCoin;
-        public Text accountIntelliCoin;
         
         [Space(11)]
         [Header("TeamEdit")]
@@ -27,7 +24,7 @@ namespace mainMenu
         [Space(11)]
         [Header("技能展示器模式切换角色按钮")]
         public Button charSwitcher;
-                
+        
         [Space(11)]
         [Header("SkillStonesBox")]
         public SkillStonesBox _SkillStonesBox_NineSlot;
@@ -105,6 +102,7 @@ namespace mainMenu
             _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
             MainMenuCanvas.gameObject.SetActive(false);
+            UpperInfoBar.target.T.gameObject.SetActive(false);
             
             LoadingCanvas.target.TurnOnProcessDescription(true);
             LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
@@ -163,9 +161,7 @@ namespace mainMenu
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
             
-            UserID.text = AccountSet._AccInfo.PlayerName; //SystemInfo.deviceUniqueIdentifier;
-            accountDiamondCoin.text = AccountSet._AccInfo.diamondCount.ToString();
-            accountIntelliCoin.text = AccountSet._AccInfo.coinCount.ToString();
+            UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
             
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.2f);

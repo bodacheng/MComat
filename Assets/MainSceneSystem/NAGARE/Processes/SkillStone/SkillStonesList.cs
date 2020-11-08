@@ -25,6 +25,7 @@ public class SkillStonesList : MainSceneProcess
     static IEnumerator CommonEnterProcess()
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
+        UpperInfoBar.target.T.gameObject.SetActive(false);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         yield return ModelShower.target.ShowMyModel(null);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
@@ -72,6 +73,7 @@ public class SkillStonesList : MainSceneProcess
         SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
+        UpperInfoBar.target.T.gameObject.SetActive(true);
         SSLevelUpManager.target.CloseLevelUpPage();
     }
 }
