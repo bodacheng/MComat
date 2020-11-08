@@ -31,25 +31,33 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
         if (StoneInfoModel == null)
+        {
+            RefreshSkillLevelUpModule();
             return;
-            
+        }
+        
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
         
-        if (current.currentLevel ==1)
+        if (current.currentLevel == 1)
         {
+            CurrentGoldExaust = 0;
+            RefreshSkillLevelUpModule();
             return;
         }
         
         if (current.expRemain > 0)
         {
             if (CurrentGoldExaust >= StoneExpManager.ExpToGold(current.expRemain))
+            {
                 CurrentGoldExaust -= StoneExpManager.ExpToGold(current.expRemain);
+                Debug.Log(CurrentGoldExaust);
+            }
             else
                 CurrentGoldExaust = 0;
-        }else{// 即便为0
-            if (CurrentGoldExaust >= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel - 1)))
+        }else{
+            if (CurrentGoldExaust >= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel)))
             {
-                CurrentGoldExaust -= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel - 1));
+                CurrentGoldExaust -= StoneExpManager.ExpToGold(LevelExpConfig.GetLevelExp(current.currentLevel));
             }else{
                 CurrentGoldExaust = 0; 
             }

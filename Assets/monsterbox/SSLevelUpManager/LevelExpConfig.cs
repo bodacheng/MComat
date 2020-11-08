@@ -15,7 +15,7 @@ public static class LevelExpConfig
     
     public static int GetLevelExp(int level)
     {
-        return Dic.ContainsKey(level) ? Dic[level] : -1;
+        return Dic.ContainsKey(level) ? Dic[level] : 0;
     }
 
     public static int GetLevelSumExp(int level)
@@ -49,7 +49,7 @@ public static class LevelExpConfig
                 Level = grid[i][0],
                 Exp = grid[i][1]
             };
-
+            
             rowList.Add(row);
             if (!Dic.ContainsKey(int.Parse(row.Level)))
             {
@@ -80,7 +80,9 @@ public static class LevelExpConfig
     public struct Current
     {
         public int currentLevel;
+        // 相对当前等级的盈余Exp
         public int expRemain;
+        // 至下一级所需的Exp
         public int expToNextLevel;
     }
 }

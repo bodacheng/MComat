@@ -129,10 +129,14 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void CloseLevelUpPage()
     {
-        _Selected.SetActive(false);
+        _Selected.gameObject.SetActive(false);
+        SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
+        SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
+        focusingSSD.RefreshInfo(stoneOfPlayerId);
         ReturnAllMaterialsToBox();
         SkillStonesBox.target.CellsFeatureLoad(1);
         levelUpPageRect.gameObject.SetActive(false);
+        CurrentGoldExaust = 0;
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(true);
     }
