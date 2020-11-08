@@ -16,13 +16,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     
     public static void SeletedRender(SKStoneItem item ,GameObject _Selected)
     {
-        _Selected.SetActive(true);
-        _Selected.transform.SetParent(item.GetComponent<RectTransform>());
-        _Selected.transform.localPosition = Vector3.zero;
-        _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        _Selected.GetComponent<RectTransform>().localScale = Vector3.one;
-        _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        _Selected.gameObject.SetActive(true);
-        _Selected.transform.SetAsFirstSibling();
+        StoneCell cell = item.GetCell();
+        StoneCell.SeletedRender(cell, _Selected);
     }
 }

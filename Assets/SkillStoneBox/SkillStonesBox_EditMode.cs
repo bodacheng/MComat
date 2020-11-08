@@ -80,7 +80,7 @@ namespace mainMenu
                     pressStart = true;
                     buttonFeature();
                     PressGoToLevelUpPage();
-                    StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
+                    StoneCell.SeletedRender(_SkillStoneCell, _Selected);
                 }
             } );
             up.callback.AddListener( (eventData) => { pressStart = false; } );

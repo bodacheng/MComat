@@ -16,20 +16,13 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             _Selected.SetActive(false);
             return;
         }
-        
-        if (cell._SelectMode == SelectMode.single)
-        {
-            _Selected.SetActive(true);
-            _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
-            _Selected.transform.localPosition = Vector3.zero;
-            _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-            _Selected.GetComponent<RectTransform>().localScale = Vector3.one;
-            _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            _Selected.gameObject.SetActive(true);
-            _Selected.transform.SetAsFirstSibling();
-        }
-        else if (cell._SelectMode == StoneCell.SelectMode.multi)
-        {
-        }
+        _Selected.SetActive(true);
+        _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
+        _Selected.transform.localPosition = Vector3.zero;
+        _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        _Selected.GetComponent<RectTransform>().localScale = Vector3.one;
+        _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        _Selected.gameObject.SetActive(true);
+        _Selected.transform.SetAsFirstSibling();
     }
 }

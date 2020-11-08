@@ -32,7 +32,6 @@ public class StoneDeleteManger : MonoBehaviour
         SkillStonesBox._Selected.SetActive(false);
         foreach (KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDictionary)
         {
-            KV.Value._SelectMode = StoneCell.SelectMode.multi;
             Button button = KV.Value.GetComponent<Button>();
             button.onClick.AddListener(delegate { SelectForDelete(KV.Value); });
         }

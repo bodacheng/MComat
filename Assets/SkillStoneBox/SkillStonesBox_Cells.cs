@@ -88,7 +88,6 @@ namespace mainMenu
                         CellButtonBeheviour_SKillShowMode(CellsDictionary[i]);
                     break;
                 }
-                CellsDictionary[i]._SelectMode = StoneCell.SelectMode.single;
             }
         }
         

@@ -19,14 +19,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         StoneMergeSlot
     }
     
-    public enum SelectMode
-    {
-        single = 1,
-        multi = 2
-    }
-    
-    public SelectMode _SelectMode = SelectMode.single;
-    
     [Tooltip("using Stone Character Icon")]
     public HeroIcon _charIcon;
     [Tooltip("选中框，用来确保有一个选中框选中这个格子的时候不会有其他选中框选中他。")]
