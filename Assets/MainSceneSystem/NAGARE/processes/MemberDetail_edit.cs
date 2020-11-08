@@ -2,7 +2,6 @@
 using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
-using dataAccess;
 using System.Collections.Generic;
 
 public class MemberDetail_edit : MainSceneProcess

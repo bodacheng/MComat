@@ -64,7 +64,9 @@ namespace mainMenu
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
         }
         
-        public void CellsFeatureLoad(int mode) // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
+        // 加载技能石背包机能
+        // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
+        public void CellsFeatureLoad(int mode)
         {
             for (int i = 0; i < CellsDictionary.Count; i++)
             {
