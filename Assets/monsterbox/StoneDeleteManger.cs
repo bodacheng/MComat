@@ -118,10 +118,10 @@ public class StoneDeleteManger : MonoBehaviour
     {
         if (cell.GetItem() != null)
         {
-            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
-            if (skillStoneOfPlayerInfoModel != null)
+            SkillStoneOfPlayerInfoModel StoneOInfo = MySkillStonesReader.Get(cell.GetItem().SkillStoneOfPlayerId);
+            if (StoneOInfo != null)
             {
-                if (selectedForDelete.Contains(skillStoneOfPlayerInfoModel))
+                if (selectedForDelete.Contains(StoneOInfo))
                 {
                     RemoveStoneForDelete(cell);
                 }else{
