@@ -56,41 +56,31 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             LevelExpConfig.Current before = LevelExpConfig.GetCurrentInfo(targetexp);
             LevelExpConfig.Current after = LevelExpConfig.GetCurrentInfo(value);
-            
-            if (targetexp > value)
-                MinusAnim(before.currentLevel - after.currentLevel, (float)after.expRemain / (float)(after.expRemain + after.expToNextLevel));
-            else
-                PlusAnim(after.currentLevel - before.currentLevel, (float)after.expRemain / (float)(after.expRemain + after.expToNextLevel));
+
+            DOTween.To(() => DataForShow, x => DataForShow = x, value, 1);
             targetexp = value;
         }
     }
-    
-    void PlusAnim(int temp, float valueTo)
+
+    int dataforshow;
+    float DataForShow
     {
-        if (temp > 0)
+        get
         {
-            DOTween.To(() => expValue.value, x => expValue.value = x, 1, 0.5f).
-            OnComplete(() =>
-            {
-                expValue.value = 0;
-                PlusAnim(temp - 1, valueTo);
-            });
-        }else{
-            expValue.value = 0;
-            DOTween.To(() => expValue.value, x => expValue.value = x, valueTo, 0.5f);
+            return dataforshow;
         }
-    }
-    
-    void MinusAnim(int temp, float valueTo)
-    {
-        if (temp > 0)
+        set
         {
-            DOTween.To(() => expValue.value, x => expValue.value = x, 0, 0.5f);
-            expValue.value = 1;
-            MinusAnim(temp - 1, valueTo);
-        }else{
-            expValue.value = 1;
-            DOTween.To(() => expValue.value, x => expValue.value = x, valueTo, 0.5f);
+            LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo((int)value);
+            expValue.value = (float)current.expRemain / (float)(current.expRemain + current.expToNextLevel);
+            if (expValue.value >= 1)
+                expValue.value = 0;
+            StoneTargetLevel.text = "Level:" + current.currentLevel.ToString();
+            StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
+            CurrentExpToNextLevel.text = "( " + (expValue.value * 100).ToString() + "% )";
+            CurrentExpToNextLevel.color = CurrentGoldExaust > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
+            CurrentGoldExaustText.text = "消耗金币："+ CurrentGoldExaust;
+            dataforshow = (int)value;
         }
     }
     
@@ -208,18 +198,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         confirmLevelUp.gameObject.SetActive(false);
     }
     
-    void ExpBar(int beforeExp, int currentExp)
-    {
-        if (expValue == null)
-            return;
-        LevelExpConfig.Current before = LevelExpConfig.GetCurrentInfo(beforeExp);
-        LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(currentExp);
-        if (currentExp > beforeExp)
-            PlusAnim(current.currentLevel - before.currentLevel, (float)current.expRemain / (current.expRemain + current.expToNextLevel));
-        else
-            MinusAnim(before.currentLevel - current.currentLevel, (float)current.expRemain / (current.expRemain + current.expToNextLevel));
-    }
-    
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
     public void RefreshSkillLevelUpModule()
     {
@@ -234,11 +212,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         #region 各数值文本刷新
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
         TargetExp = CurrentAddExp() + StoneInfoModel.EXP;
-        StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
-        StoneTargetLevel.color = CurrentAddExp() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-        CurrentExpToNextLevel.text = "( " + ((float)current.expRemain/(float)(current.expRemain + current.expToNextLevel)).ToString() + "% )";
-        CurrentExpToNextLevel.color = CurrentGoldExaust > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-        CurrentGoldExaustText.text = "消耗金币："+ CurrentGoldExaust;
         #endregion
         
         if (CurrentGoldExaust > 0)
