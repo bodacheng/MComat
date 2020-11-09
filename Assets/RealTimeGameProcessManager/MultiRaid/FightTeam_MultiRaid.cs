@@ -60,7 +60,7 @@ namespace FightScene
             CharIconDic.Clear();
             multiRaidHitComboDic.Clear();
         }
-
+        
         public override void LocalFightingUpdate()
         {
             if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
@@ -102,6 +102,13 @@ namespace FightScene
                 a_char.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
                 {
                     RefreshComboHitMultiRaid(a_char);
+                });
+                a_char.IsDead.Subscribe(x => 
+                {
+                    if (x == true) 
+                    {
+                        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+                    } 
                 });
             }
         }
@@ -199,7 +206,15 @@ namespace FightScene
 
         public override List<Transform> TeamMemberTransforms()
         {
-            return null;
+            List<Transform> transforms = new List<Transform>();
+            foreach (Data_Center a_char in TeamMembers.values)
+            {
+                if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
+                {
+                    transforms.Add(a_char.WholeT.transform);
+                }
+            }
+            return transforms;
         }
     }
 }

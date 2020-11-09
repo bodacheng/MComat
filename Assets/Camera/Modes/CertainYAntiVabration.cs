@@ -33,7 +33,6 @@ class CertainYAntiVabration : CameraMode
         h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
         xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
         xzOff.y = 0;
-        
         if (auto)
         {
             if (targets != null && targets.Count > 0)
