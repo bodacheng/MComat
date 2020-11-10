@@ -28,6 +28,7 @@ public class ModelShower : MonoBehaviour
     
     PinchZoom pinchZoom = new PinchZoom();
     GameObject showingChar;
+    string showingCharResourceId;
     
     void Awake()
     {
@@ -45,36 +46,44 @@ public class ModelShower : MonoBehaviour
     
     public IEnumerator ShowModel(string monsterID)
     {
+        if (showingCharResourceId == monsterID)
+        {
+            yield return showingChar;
+            yield break;
+        }
         if (showingChar != null)
         {
             showingChar.SetActive(false);
         }
-        if (monsterID == null)
+        showingCharResourceId = monsterID;
+        if (showingCharResourceId == null)
         {
             yield break;
         }
-    
-        IEnumerator focusingOneModel = GeneralModelPool.GetModel(monsterID, true);
+        
+        IEnumerator focusingOneModel = GeneralModelPool.GetModel(showingCharResourceId, true);
         yield return focusingOneModel;
         if (focusingOneModel.Current == null)
         {
+            if (showingChar != null)
+            {
+                showingChar.SetActive(false);
+            }
             Debug.Log("模型错误");
             yield break;
         }
-        Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;
+        
+        Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;        
         aI_DATA_CENTER._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
         showingChar = aI_DATA_CENTER.WholeT.gameObject;
-        if (showingChar != null)
-        {
-            showingChar.SetActive(true);
-            showingChar.transform.parent = null;
-            showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
-            //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
-            showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
-        }
+        showingChar.SetActive(true);
+        showingChar.transform.parent = null;
+        showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
+        //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
+        showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
         yield return showingChar;
     }
-        
+    
     Vector3 FirstPoint;
     Vector3 SecondPoint;
     Vector3 modelPOnScreen;
@@ -161,7 +170,7 @@ public class ModelShower : MonoBehaviour
         tempV = CameraManager._camera.WorldToScreenPoint(now);
         return tempV;
     }
-
+    
     //void ArrangeShowModelOnTeam(string localID, int PositionNum)//所以这是个可能把某个阵容位置里加入null的函数。
     //{
     //    myShowCharPositionDic.TryGetValue(PositionNum, out Transform t);

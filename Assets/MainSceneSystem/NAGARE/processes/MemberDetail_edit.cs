@@ -25,30 +25,7 @@ public class MemberDetail_edit : MainSceneProcess
         yield return SkillEditButtonFeature(MemberDetail.target._focusing);
         SkillStonesBox.target._skillStoneDetail.Clear();
         
-        // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
-        (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
-            _CharConfig._zokusei
-        );
-        loadFinished = true;
-    }
-    
-    // 技能浏览器程序模式专用
-    public static IEnumerator SkillShowSpEnterProcess()
-    {
-        loadFinished = false;
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);                
-        SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.GenerateCells();
-        SkillStonesBox.target.CellsFeatureLoad(3);
-        yield return SkillEditButtonFeature_SP(MemberDetail.target._focusing);
+        yield return MemberDetail.target.CharModelAndSkillRenderProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target._focusing));
         
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
@@ -132,6 +109,31 @@ public class MemberDetail_edit : MainSceneProcess
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
         TheNineSlot.target.ResetButton.onClick.RemoveAllListeners();
         TheNineSlot.target.ResetButton.onClick.AddListener(TheNineSlot.target.ResetNineSlot);
+    }
+    
+    // 技能浏览器程序模式专用
+    public static IEnumerator SkillShowSpEnterProcess()
+    {
+        loadFinished = false;
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);                
+        SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
+        PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
+        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+        SkillStonesBox.target.GenerateCells();
+        SkillStonesBox.target.CellsFeatureLoad(3);
+        yield return SkillEditButtonFeature_SP(MemberDetail.target._focusing);
+        
+        // 表现系
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
+        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        (
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
+            _CharConfig._zokusei
+        );
+        loadFinished = true;
     }
     
     // 技能浏览器版本
