@@ -7,7 +7,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public IEnumerator UpdateMyStonesBaseOnSlots(GetMonsterOfPlayerDetailModel accCharInfo)
+        public IEnumerator UpdateMyStonesBaseOnSlots(MonsterOfPlayerDetailModel accCharInfo)
         {
             NineAndTwo.SkillEditError valR = target.CheckEditBasedOnCurrent();
             if (valR != NineAndTwo.SkillEditError.Perfect)
@@ -18,7 +18,7 @@ namespace mainMenu
             yield return UpdateMyStonesBaseOnSlotsExecution(accCharInfo);
         }
         
-        IEnumerator UpdateMyStonesBaseOnSlotsExecution(GetMonsterOfPlayerDetailModel accCharInfo)
+        IEnumerator UpdateMyStonesBaseOnSlotsExecution(MonsterOfPlayerDetailModel accCharInfo)
         {
             for (int i = 0; i < allSlot.Count; i++)
             {

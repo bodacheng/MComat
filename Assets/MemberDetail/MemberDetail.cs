@@ -38,7 +38,7 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
         
-        public GetMonsterOfPlayerDetailModel _focusing;
+        public MonsterOfPlayerDetailModel _focusing;
         
         public static MemberDetail target;
         
@@ -149,7 +149,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
             
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(GetMonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(MonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)));
         }
         
         public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
@@ -195,7 +195,7 @@ namespace mainMenu
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(GetMonsterOfPlayerDetailModel accountCharacterInfo)
+        public IEnumerator Step2INIForUIRefresh(MonsterOfPlayerDetailModel accountCharacterInfo)
         {
             if (accountCharacterInfo != null)
             {
@@ -214,7 +214,7 @@ namespace mainMenu
                 }
 
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accountCharacterInfo.monsterId);
-                CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(accountCharacterInfo);
+                CharDataInfo characterDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 

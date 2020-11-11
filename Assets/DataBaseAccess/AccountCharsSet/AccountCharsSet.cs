@@ -8,7 +8,7 @@ namespace dataAccess
     //这个函数应该是个一上来就从本地。。。或数据库读取的东西，应该存在很多协程类函数，因为到时候牵扯到从数据库直接读取信息。
     public partial class AccountCharsSet
     {
-        public static IDictionary<string, GetMonsterOfPlayerDetailModel> AccountCharInfoDic = new Dictionary<string, GetMonsterOfPlayerDetailModel>();
+        public static IDictionary<string, MonsterOfPlayerDetailModel> AccountCharInfoDic = new Dictionary<string, MonsterOfPlayerDetailModel>();
         
         public static bool CheckExist(string key)
         {
@@ -24,7 +24,7 @@ namespace dataAccess
             return false;
         }
         
-        public static GetMonsterOfPlayerDetailModel Get(string monsterlocalid)
+        public static MonsterOfPlayerDetailModel Get(string monsterlocalid)
         {
             if (monsterlocalid == null)
             {
@@ -40,10 +40,10 @@ namespace dataAccess
         
         public static IEnumerator LoadTutorial()
         {
-            List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
+            List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
             //charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
             AccountCharInfoDic.Clear();
-            foreach (GetMonsterOfPlayerDetailModel one in charList)
+            foreach (MonsterOfPlayerDetailModel one in charList)
             {
                 if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
                     AccountCharInfoDic.Add(one.monsterOfPlayerId, one);

@@ -122,7 +122,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
+            MonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
                 targetIcon.gameObject.SetActive(false);

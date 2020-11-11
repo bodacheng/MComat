@@ -22,7 +22,7 @@ namespace mainMenu
         {
             if (MemberDetail.target._focusing == null)
                 return;
-            GetMonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
+            MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
             
             NineSlotsStatusRefresh();

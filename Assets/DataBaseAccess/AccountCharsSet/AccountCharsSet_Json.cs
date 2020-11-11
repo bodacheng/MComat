@@ -13,8 +13,8 @@ namespace dataAccess
     {
         public static IEnumerator LoadAll_Json(string filePath)
         {
-            List<GetMonsterOfPlayerDetailModel> charList = new List<GetMonsterOfPlayerDetailModel>();
-            GetMonsterOfPlayerDetailModel info;
+            List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
+            MonsterOfPlayerDetailModel info;
             if (Directory.Exists(filePath))
             {
                 foreach (string file in Directory.GetFiles(filePath))
@@ -22,7 +22,7 @@ namespace dataAccess
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
-                        info = JsonConvert.DeserializeObject<GetMonsterOfPlayerDetailModel>(dataAsJson);
+                        info = JsonConvert.DeserializeObject<MonsterOfPlayerDetailModel>(dataAsJson);
                         charList.Add(info);
                     }
                     catch (Exception e)
@@ -37,22 +37,22 @@ namespace dataAccess
         
         public static IEnumerator LoadAccCharInfoViaJsonFile(string monsterlocalid)
         {
-            GetMonsterOfPlayerDetailModel info = null;
+            MonsterOfPlayerDetailModel info = null;
             string wholepath = Application.persistentDataPath + "/AccountCharacterInfos/" + monsterlocalid + ".json";
             if (File.Exists(wholepath))
             {
                 string dataAsJson = File.ReadAllText(wholepath);
-                info = JsonConvert.DeserializeObject<GetMonsterOfPlayerDetailModel>(dataAsJson);
+                info = JsonConvert.DeserializeObject<MonsterOfPlayerDetailModel>(dataAsJson);
             }
             yield return info;
         }
         
-        public static IEnumerator AddNewCharToJsonSaveData(GetMonsterOfPlayerDetailModel _AccCharInfo)
+        public static IEnumerator AddNewCharToJsonSaveData(MonsterOfPlayerDetailModel _AccCharInfo)
         {
-            GetMonsterOfPlayerDetailModel returnValue = null;
+            MonsterOfPlayerDetailModel returnValue = null;
             try
             {
-                DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
+                DicAdd<string, MonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
                 string json = JsonConvert.SerializeObject(_AccCharInfo);
                 LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.monsterOfPlayerId + ".json", json);
                 returnValue = _AccCharInfo;
@@ -71,7 +71,7 @@ namespace dataAccess
             int i = 0;
             foreach (CharConfig _CharConfig in charList)
             {
-                GetMonsterOfPlayerDetailModel _Char = new GetMonsterOfPlayerDetailModel
+                MonsterOfPlayerDetailModel _Char = new MonsterOfPlayerDetailModel
                 {
                     monsterId = _CharConfig.RECORD_ID,
                     monsterOfPlayerId = i.ToString()

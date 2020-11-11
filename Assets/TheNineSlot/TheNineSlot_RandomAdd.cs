@@ -13,7 +13,7 @@ namespace mainMenu
         {
             ForceClearAll();
             
-            GetMonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
+            MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
             
@@ -36,7 +36,7 @@ namespace mainMenu
         
         void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillid)
         {
-            GetMonsterOfPlayerDetailModel charInfo = AccountCharsSet.Get(monsterOfPlayerId);
+            MonsterOfPlayerDetailModel charInfo = AccountCharsSet.Get(monsterOfPlayerId);
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(monsterOfPlayerId);
             List<SkillStoneOfPlayerInfoModel> Options = MySkillStonesReader.GetMyStonesBySkillID(skillid);
 

@@ -3,6 +3,7 @@
 [System.Serializable]
 public class PlayerAccountInfo
 {
+    public string playerID;
     public string PlayerName;
     
     int coin;//智慧果实

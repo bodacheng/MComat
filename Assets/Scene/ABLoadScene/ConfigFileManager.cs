@@ -408,7 +408,7 @@ public class ConfigFileManager : MonoBehaviour {
     
     public void GenerateTutorialCharacterFiles()
     {
-        GetMonsterOfPlayerDetailModel Adam = new GetMonsterOfPlayerDetailModel
+        MonsterOfPlayerDetailModel Adam = new MonsterOfPlayerDetailModel
         {
             monsterOfPlayerId = 1.ToString(),
             monsterId = 1.ToString()

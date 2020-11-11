@@ -29,14 +29,14 @@ public class MailManager : MonoBehaviour {
     
     public static MailManager target;
     
-    List<GetMailOfPlayerModel> myMailList = new List<GetMailOfPlayerModel>();
+    List<MailOfPlayerModel> myMailList = new List<MailOfPlayerModel>();
     
     void Awake()
     {
         target = this;
     }
     
-    public GetMailOfPlayerModel Get(string mailID)
+    public MailOfPlayerModel Get(string mailID)
     {
         for (int i = 0; i < myMailList.Count; i++)
         {
@@ -46,14 +46,14 @@ public class MailManager : MonoBehaviour {
         return null;
     }
     
-    public void Read(GetMailOfPlayerModel model)
+    public void Read(MailOfPlayerModel model)
     {
         title.text = model.title;
         message.text = model.message;
         presentlifeRemain.text = model.presentlifeRemain;
     }
     
-    public void GenerateMailModels(List<GetMailOfPlayerModel> _myMailList)
+    public void GenerateMailModels(List<MailOfPlayerModel> _myMailList)
     {
         foreach (Transform t in MailBoxT)
         {
@@ -82,8 +82,8 @@ public class MailManager : MonoBehaviour {
                 myMailList = model.myMailList;
 
                 /// test //
-                GetMailOfPlayerModel mail1 = new GetMailOfPlayerModel();
-                GetMailOfPlayerModel mail2 = new GetMailOfPlayerModel();
+                MailOfPlayerModel mail1 = new MailOfPlayerModel();
+                MailOfPlayerModel mail2 = new MailOfPlayerModel();
                 myMailList.Add(mail1);
                 myMailList.Add(mail2);
                 ///////////

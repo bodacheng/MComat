@@ -92,8 +92,8 @@ public class BasicTryProcess : FSceneProcess
         
         IEnumerator getchar = AccountCharsSet.Load("1");
         yield return getchar;
-        GetMonsterOfPlayerDetailModel before = (GetMonsterOfPlayerDetailModel)getchar.Current;
-        CharDataInfo characterDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(before);
+        MonsterOfPlayerDetailModel before = (MonsterOfPlayerDetailModel)getchar.Current;
+        CharDataInfo characterDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(before);
         adamInfo = characterDataInfo;
         yield break;
     }

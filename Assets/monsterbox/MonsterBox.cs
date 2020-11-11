@@ -56,7 +56,7 @@ namespace mainMenu
         // 这个函数的生成本随着“type”选项卡的整理。
         public static IEnumerator MonsterIconsGenerate()
         {
-            foreach (KeyValuePair<string, GetMonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
+            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
             {
                 yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId);
             }
@@ -65,7 +65,7 @@ namespace mainMenu
 
         public static IEnumerator AddOneNewIcon(string monsterOfPlayerId)
         {
-            GetMonsterOfPlayerDetailModel targetingCharInfo = AccountCharsSet.Get(monsterOfPlayerId);
+            MonsterOfPlayerDetailModel targetingCharInfo = AccountCharsSet.Get(monsterOfPlayerId);
             CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)

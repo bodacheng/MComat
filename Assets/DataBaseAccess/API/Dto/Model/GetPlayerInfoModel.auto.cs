@@ -1,5 +1,4 @@
 using System;
-using Api.Dto.Model.Common;
 
 namespace Api.Dto.Model {
 
@@ -10,7 +9,7 @@ namespace Api.Dto.Model {
     /// </summary>
     [Serializable]
     public class GetPlayerInfoModel
-    {        
+    {
 		/// <summary>
 		/// プレーヤレコードID
 		/// </summary>

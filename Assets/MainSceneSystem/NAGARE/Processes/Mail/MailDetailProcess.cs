@@ -21,7 +21,7 @@ public class MailDetailProcess : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        GetMailOfPlayerModel mail = MailManager.target.Get(targetMailID);
+        MailOfPlayerModel mail = MailManager.target.Get(targetMailID);
         MailManager.target.Read(mail);
         MailManager.target.detailPartT.gameObject.SetActive(true);
         yield break;

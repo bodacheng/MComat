@@ -32,9 +32,9 @@ public class CharDataInfo
         this._NineAndTwo = _NineAndTwo;
     }
 
-    public GetMonsterOfPlayerDetailModel GetCharacterDataInfoJson()
+    public MonsterOfPlayerDetailModel GetCharacterDataInfoJson()
     {
-        GetMonsterOfPlayerDetailModel characterDataInfoJson = new GetMonsterOfPlayerDetailModel
+        MonsterOfPlayerDetailModel characterDataInfoJson = new MonsterOfPlayerDetailModel
         {
             playerId = "1",
             monsterId = ResourceID,

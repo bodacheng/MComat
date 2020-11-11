@@ -8,7 +8,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public IEnumerator ReadANineAndTwo(GetMonsterOfPlayerDetailModel _AccCharInfo)
+        public IEnumerator ReadANineAndTwo(MonsterOfPlayerDetailModel _AccCharInfo)
         {
             ForceClearAll();
             

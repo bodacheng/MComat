@@ -133,9 +133,7 @@ public class StoneMergeManger : MonoBehaviour
     
     // 技能石升级
     // 该操作仍余留一个很大的问题：选择的技能石为装备中的情况。如何避免点数失衡
-    public IEnumerator Merge(SkillStoneMergeForm form,
-        SuccessDelegate<GetMergedStoneModel> success, 
-            FailDelegate<GetMergedStoneModel> fail, ApiLanguage apiLanguage)
+    public IEnumerator Merge(SkillStoneMergeForm form, SuccessDelegate<GetMergedStoneModel> success, FailDelegate<GetMergedStoneModel> fail, ApiLanguage apiLanguage)
     {
         switch (AccountSet.ReferenceMode)
         {
@@ -147,7 +145,7 @@ public class StoneMergeManger : MonoBehaviour
                 }else{
                     fail(null);
                 }
-                break;
+            break;
             case PlayerInfoRefMode.remoteTestPlayer:
                 yield return ApiCaller.Instance.Post<GetMergedStoneModel, SkillStoneMergeForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
                     model => {
@@ -157,9 +155,9 @@ public class StoneMergeManger : MonoBehaviour
                         fail(model.data);
                     }
                 );
-                break;
+            break;
             case PlayerInfoRefMode.formalVersion:
-                break;
+            break;
         }
         yield break;
     }

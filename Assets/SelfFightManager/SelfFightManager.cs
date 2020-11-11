@@ -174,7 +174,7 @@ namespace mainMenu
         {
             if (focusingTeam == Team.none || focusingPosition < 0)
                 yield break;
-            GetMonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(localID);
+            MonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(localID);
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
@@ -273,7 +273,7 @@ namespace mainMenu
             if (PositionMonsterOfPlayerId != null)
             {
                 CharConfig charConfig = null;
-                GetMonsterOfPlayerDetailModel _one = AccountCharsSet.Get(PositionMonsterOfPlayerId);
+                MonsterOfPlayerDetailModel _one = AccountCharsSet.Get(PositionMonsterOfPlayerId);
                 charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
                 tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
                     charConfig == null ? Zokusei.Null : charConfig._zokusei);

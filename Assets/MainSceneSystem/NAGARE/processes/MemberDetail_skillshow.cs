@@ -13,7 +13,7 @@ public class MemberDetail_skillshow : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        CharDataInfo _CharDataInfo = GetMonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target._focusing);
+        CharDataInfo _CharDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(MemberDetail.target._focusing);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( _CharDataInfo);
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);

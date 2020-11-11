@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using LitJson;
 using Api.Common;
-using Api.Dto.Form;
 using Api.Dto.Form.Common;
 using Api.Dto.Model;
-using Api.Dto.Model.Common;
 
 namespace dataAccess
 {

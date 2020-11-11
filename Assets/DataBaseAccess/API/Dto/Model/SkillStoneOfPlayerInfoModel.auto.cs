@@ -1,6 +1,5 @@
 ﻿using System;
 using dataAccess;
-using System.Collections.Generic;
 
 namespace Api.Dto.Model {
 

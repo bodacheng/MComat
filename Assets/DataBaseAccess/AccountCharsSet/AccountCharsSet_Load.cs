@@ -21,7 +21,7 @@ namespace dataAccess
                 form,
                 model => {
                     AccountCharInfoDic.Clear();
-                    foreach (GetMonsterOfPlayerDetailModel one in model.monsterOfPlayerList)
+                    foreach (MonsterOfPlayerDetailModel one in model.monsterOfPlayerList)
                     {
                         if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
                             AccountCharInfoDic.Add(one.monsterOfPlayerId, one);
@@ -47,7 +47,7 @@ namespace dataAccess
                     yield return enumerator;
                     if (enumerator.Current != null)
                     {
-                        listModel.monsterOfPlayerList = (List<GetMonsterOfPlayerDetailModel>)enumerator.Current;
+                        listModel.monsterOfPlayerList = (List<MonsterOfPlayerDetailModel>)enumerator.Current;
                         success(listModel);
                     }else{
                         fail(null);
@@ -85,12 +85,12 @@ namespace dataAccess
             {
                 monsterOfPlayerId = monsterlocalid
             };
-            GetMonsterOfPlayerDetailModel accountCharInfo = null;
+            MonsterOfPlayerDetailModel accountCharInfo = null;
             yield return Load_execution(
                 form,
                 model => {
                     accountCharInfo = model;
-                    DicAdd<string, GetMonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
+                    DicAdd<string, MonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, monsterlocalid, accountCharInfo);
                 },
                 model => {
                     Debug.Log("读取角色失败："+ monsterlocalid);
@@ -100,7 +100,7 @@ namespace dataAccess
             yield return accountCharInfo;
         }
         
-        public static IEnumerator Load_execution(GetMonsterOfPlayerDetailForm form, SuccessDelegate<GetMonsterOfPlayerDetailModel> success, FailDelegate<GetMonsterOfPlayerDetailModel> fail, ApiLanguage apiLanguage)
+        public static IEnumerator Load_execution(GetMonsterOfPlayerDetailForm form, SuccessDelegate<MonsterOfPlayerDetailModel> success, FailDelegate<MonsterOfPlayerDetailModel> fail, ApiLanguage apiLanguage)
         {
             switch (AccountSet.ReferenceMode)
             {
@@ -109,7 +109,7 @@ namespace dataAccess
                     yield return enumerator;
                     if (enumerator.Current != null)
                     {
-                        success((GetMonsterOfPlayerDetailModel)enumerator.Current);
+                        success((MonsterOfPlayerDetailModel)enumerator.Current);
                     }else{
                         fail(null);
                     }
@@ -117,7 +117,7 @@ namespace dataAccess
                 case PlayerInfoRefMode.formalVersion:
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return ApiCaller.Instance.Post<GetMonsterOfPlayerDetailModel, GetMonsterOfPlayerDetailForm> 
+                    yield return ApiCaller.Instance.Post<MonsterOfPlayerDetailModel, GetMonsterOfPlayerDetailForm> 
                     (
                         "http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", 
                         form, 

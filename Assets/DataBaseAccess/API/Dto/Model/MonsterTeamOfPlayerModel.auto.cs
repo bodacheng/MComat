@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Api.Dto.Model
 {
-
     /// <summary>
     /// プレーヤ所有出戦チームモデル
     /// 作成者：Auto Generated
@@ -12,7 +11,6 @@ namespace Api.Dto.Model
     [Serializable]
     public class MonsterTeamOfPlayerModel
     {
-
         /// <summary>
         /// プレーヤ所有出戦チームID
         /// </summary>

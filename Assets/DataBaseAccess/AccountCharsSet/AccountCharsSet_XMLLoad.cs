@@ -12,27 +12,27 @@ namespace dataAccess
     //Resource模式读取应该是可以用于一些临时剧情人物的读取？最典型的，教学模式角色读取。
     public partial class AccountCharsSet
     {
-        public static GetMonsterOfPlayerDetailModel loadMyCharsByXMLFile(string Path)
+        public static MonsterOfPlayerDetailModel loadMyCharsByXMLFile(string Path)
         {
             FileStream FileStream = null;
             try
             {
                 Debug.Log("尝试从下面的路径读取角色信息：" + Path);
-                GetMonsterOfPlayerDetailModel info = new GetMonsterOfPlayerDetailModel { };
-                XmlSerializer XmlSerializer = new XmlSerializer(typeof(GetMonsterOfPlayerDetailModel));
+                MonsterOfPlayerDetailModel info = new MonsterOfPlayerDetailModel { };
+                XmlSerializer XmlSerializer = new XmlSerializer(typeof(MonsterOfPlayerDetailModel));
                 if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
                 {
                     FileStream = new FileStream(Path, FileMode.Open);
-                    info = XmlSerializer.Deserialize(FileStream) as GetMonsterOfPlayerDetailModel;
+                    info = XmlSerializer.Deserialize(FileStream) as MonsterOfPlayerDetailModel;
                     FileStream.Close();
                 }
                 else if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer ||
                     Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
                 {
                     TextAsset xmlData = Resources.Load(Path) as TextAsset;
-                    XmlSerializer serializer = new XmlSerializer(typeof(GetMonsterOfPlayerDetailModel));
+                    XmlSerializer serializer = new XmlSerializer(typeof(MonsterOfPlayerDetailModel));
                     var reader = new System.IO.StringReader(xmlData.text);
-                    info = serializer.Deserialize(reader) as GetMonsterOfPlayerDetailModel;
+                    info = serializer.Deserialize(reader) as MonsterOfPlayerDetailModel;
                 }
                 return info;
             }
@@ -46,11 +46,11 @@ namespace dataAccess
         }
 
         // 请参考generateStoryCharsIntoXMLFile函数来安排文件路径，是否包括文件后缀等问题
-        public static bool overrideMyOwnedCharsInfoXML(string Path, GetMonsterOfPlayerDetailModel _ownedChars)
+        public static bool overrideMyOwnedCharsInfoXML(string Path, MonsterOfPlayerDetailModel _ownedChars)
         {
             try
             {
-                XmlSerializer XmlSerializer = new XmlSerializer(typeof(GetMonsterOfPlayerDetailModel));
+                XmlSerializer XmlSerializer = new XmlSerializer(typeof(MonsterOfPlayerDetailModel));
                 if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
                 {
                     FileStream FileStream = new FileStream(Path, FileMode.Create);
@@ -89,7 +89,7 @@ namespace dataAccess
         }
 
         // 存储一套角色信息到StoryChars.xml文件
-        public static void generateStoryCharsIntoXMLFile(GetMonsterOfPlayerDetailModel _Chars)
+        public static void generateStoryCharsIntoXMLFile(MonsterOfPlayerDetailModel _Chars)
         {
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
                 overrideMyOwnedCharsInfoXML(Application.dataPath + "/Resources/Account/StoryChars.xml", _Chars);
