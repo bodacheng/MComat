@@ -6,7 +6,7 @@ using Api.Dto.Form;
 
 namespace dataAccess
 {
-    public class ArenaRankCal
+    public partial class Arena
     {
         public static IEnumerator GetPlayerRankInfo()
         {

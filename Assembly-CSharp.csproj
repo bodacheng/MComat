@@ -122,9 +122,10 @@
     <Compile Include="Assets\AnimControl\dontuse\Animation_Manger_old.cs" />
     <Compile Include="Assets\AnimControl\dontuse\NullStateProcess.cs" />
     <Compile Include="Assets\AnimControl\readMe.cs" />
+    <Compile Include="Assets\Arena\Arena.cs" />
+    <Compile Include="Assets\Arena\Arena1.cs" />
     <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
     <Compile Include="Assets\Arena\ArenaManager.cs" />
-    <Compile Include="Assets\Arena\ArenaRankCal.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
