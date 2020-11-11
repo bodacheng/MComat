@@ -121,14 +121,14 @@ public class G_Attack_State : Behavior {
         {
             //一般来说下面这些情况不跑？
             _phase = Phase.noRushState;
-            Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+            Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
             return;
         }
 
         collider = Sensor.GetClosestEnemyColliderInSensorRange();
         if (collider == null)
         {
-            Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
+            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
             _phase = Phase.farFromReach;
             return;
         }
@@ -136,7 +136,7 @@ public class G_Attack_State : Behavior {
         if (distance < Sensor.sensor_radius / 3)//内环检测结果
         {
             _phase = Phase.reachedFromThebeginning;
-            Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+            Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
             if (Sensor.GetEnemiesByDistance(false).Count > 0)
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
@@ -172,12 +172,12 @@ public class G_Attack_State : Behavior {
             else
             {
                 _phase = Phase.reachedFromThebeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
+                Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
                 return;
             }
         }
 
-        Animation_Manger.AnimationTrigger(clip_name,true, 0.05f);
+        Animation_Manger.AnimationTrigger(clip_name,true, 0.1f);
         _phase = Phase.farFromReach;
         return;
     }
@@ -205,7 +205,7 @@ public class G_Attack_State : Behavior {
                     }
                     if (_phase == Phase.reached)
                     {
-                        Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
+                        Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         _Rigidbody.velocity = Vector3.zero;
                         Sensor.GetEnemiesByDistance(true);
@@ -225,7 +225,7 @@ public class G_Attack_State : Behavior {
                 }
                 if (_phase == Phase.reached)
                 {
-                    Animation_Manger.AnimationTrigger(clip_name,true,0.05f);
+                    Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
                     _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                     _Rigidbody.velocity = Vector3.zero;
                     Sensor.OneRoundDetectionStart(5);

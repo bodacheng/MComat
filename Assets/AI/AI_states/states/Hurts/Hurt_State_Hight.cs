@@ -16,7 +16,7 @@ public partial class Hurt_State : Behavior
         used_dizzy_time = FightGlobalSetting._highhit_lastingTime;
         _xz = newValue.attacker._Center.WholeT.forward;
         _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
-        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.05f);
+        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(),true,0.1f);
     }
     
     void HighDamageUpdate()

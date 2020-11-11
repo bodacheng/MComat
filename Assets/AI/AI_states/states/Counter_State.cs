@@ -22,7 +22,7 @@ public class Counter_State : Behavior {
         _Animator.SetFloat("speed", 0f);
         _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
         pEvents.CloseAllPersonalityEffects();
-        Animation_Manger.AnimationTrigger(clip_name,true,0.08f);
+        Animation_Manger.AnimationTrigger(clip_name,true,0.1f);
         _Rigidbody.velocity = Vector3.zero;
         _Animator.applyRootMotion = true;
         if (threat != null)

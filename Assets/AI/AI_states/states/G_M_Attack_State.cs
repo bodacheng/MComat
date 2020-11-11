@@ -36,7 +36,7 @@ public class G_M_Attack_State : Behavior {
                 RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
         }
         _Animator.applyRootMotion = true;
-        Animation_Manger.AnimationTrigger(clip_name, true, 0.05f);
+        Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
 	}
     
     public override void AI_State_exit()

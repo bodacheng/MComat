@@ -17,7 +17,7 @@ public partial class Hurt_State : Behavior
         }
         else
         {
-            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
+            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
             _BasicPhysicSupport.SetUsingGravity(false);
         }
 
