@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 
 namespace Api.Dto.Model {
     
     [Serializable]
-    public class GetRankOpponentsModel
+    public class RankOpponentsModel
     {
         OneTeam strongTeam;
         OneTeam normalTeam1;

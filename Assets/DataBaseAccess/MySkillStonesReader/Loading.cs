@@ -96,7 +96,7 @@ namespace dataAccess
                 gotchaPolicyKey = gotchaPolicyKey
             };
 
-            yield return ApiCaller.Instance.Post<SkillStoneGotchaModel, SkillStoneGotchaForm>
+            yield return ApiCaller.Instance.Post<GetSkillStoneGotchaModel, SkillStoneGotchaForm>
             ("http://160.16.187.230/AssetStoreFight/skillStone/skillStoneGotcha", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model =>
                  {
@@ -104,7 +104,7 @@ namespace dataAccess
                      Debug.Log("以下是gotcha到的技能石");
                      foreach (SkillStoneGotchaInfoModel _SkillStoneGotchaInfoModel in infos)
                      {
-                         Debug.Log("skillId:" + _SkillStoneGotchaInfoModel.skillId + ",rare:" + _SkillStoneGotchaInfoModel.rarityLevel);
+                         Debug.Log("skillId:" + _SkillStoneGotchaInfoModel.skillId);
                      }
                  }
                 ,

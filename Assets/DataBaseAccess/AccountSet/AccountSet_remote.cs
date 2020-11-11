@@ -84,7 +84,7 @@ namespace dataAccess
             // API送信
             // ==============================
             // 送信
-            yield return ApiCaller.Instance.Post<GetPlayerInfoModel, CertificationForm>("http://160.16.187.230:8089/player/getPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
+            yield return ApiCaller.Instance.Post<PlayerInfoModel, CertificationForm>("http://160.16.187.230:8089/player/getPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
                  model =>
                  {
                      Debug.Log(model);

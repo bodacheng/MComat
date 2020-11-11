@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace Api.Dto.Model {
 
     /// <summary>
-    /// プレーヤ所有モンスター情報一覧取得モデル
+    /// スキルストーンガッチャモデル
     /// 作成者：Auto Generated
-    /// バージョン：1.00 2019/07/01
+    /// バージョン：1.00 2019/07/15
     /// </summary>
     [Serializable]
-    public class GetMonsterOfPlayerListModel 
+    public class GetSkillStoneGotchaModel 
     {
         /// <summary>
         /// プレーヤレコードID
@@ -17,8 +17,8 @@ namespace Api.Dto.Model {
         public string playerId { get; set; }
         
         /// <summary>
-        /// プレーヤ所有モンスター情報リスト
+        /// スキルストーンガッチャ情報のリスト
         /// </summary>
-        public List<MonsterOfPlayerDetailModel> monsterOfPlayerList { get; set; }
+        public List<SkillStoneGotchaInfoModel> skillStoneGotchaInfoList { get; set; }
     }
 }
