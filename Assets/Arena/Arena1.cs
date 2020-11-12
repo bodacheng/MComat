@@ -8,24 +8,24 @@ namespace dataAccess
 {
     public partial class Arena
     {
+        public static RankOpponentsModel rankOpponentsModel;
         public static IEnumerator GetOpponents()
         {
             GetRankInfoForm form = new GetRankInfoForm
             {
                 playerID = ""
             };
-            RankOpponentsModel GetRankInfoOfPlayerModel = null;
             yield return GetOpponentsE(
                 form,
                 model => {
-                    GetRankInfoOfPlayerModel = model;
+                    rankOpponentsModel = model;
                 },
                 model => {
                     Debug.Log("读取玩家竞技场信息失败："+ form.playerID);
                 },
                 Setting.Language
             );
-            yield return GetRankInfoOfPlayerModel;
+            yield return rankOpponentsModel;
         }
         
         public static IEnumerator GetOpponentsE(GetRankInfoForm form, SuccessDelegate<RankOpponentsModel> success, FailDelegate<RankOpponentsModel> fail, ApiLanguage apiLanguage)

@@ -67,6 +67,17 @@ public class StageScriptableObject : ScriptableObject
         return enterRingLocalIDs;
     }
     
+    public static StageScriptableObject ArenaStage(LocalFight LocalFight)
+    {
+        StageScriptableObject stage = CreateInstance<StageScriptableObject>();
+        stage.localFight = LocalFight;
+        stage.BattleGroundID = 0;
+        stage.Team1Mode = TeamMode.rotation;
+        stage.Team2Mode = TeamMode.rotation;
+        stage._fightEventType = FightEventType.Arena;
+        return stage;
+    }
+    
     public static StageScriptableObject RandomStage()
     {
         StageScriptableObject stage = CreateInstance<StageScriptableObject>();

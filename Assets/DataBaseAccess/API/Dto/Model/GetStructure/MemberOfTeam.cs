@@ -9,7 +9,7 @@ namespace Api.Dto.Model
         readonly MonsterOfPlayerDetailModel MonsterInfo;
         readonly List<SkillStoneOfPlayerInfoModel> stones;
         
-        CharDataInfo ToCharDataInfo()
+        public CharDataInfo ToCharDataInfo()
         {
             CharDataInfo charData = new CharDataInfo
             {
