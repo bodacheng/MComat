@@ -2,6 +2,13 @@
 
 namespace Skill
 {
+    public class AIAttrs
+    {
+        public float AI_MIN_DIS;
+        public float AI_MAX_DIS;
+        public int height = 1; // 0:低 1:中 2:高
+    }
+
     [System.Serializable]
     public class SkillEntity
     {
@@ -11,8 +18,7 @@ namespace Skill
         public BehaviorType StateType;
         public float AT;
         public float HP;
-        public float AI_MIN_DIS;
-        public float AI_MAX_DIS;
+        public AIAttrs AIAttrs;
         public string[] CasualTo = { };
         public bool CANBECANCELLEDTO = true;
         public InputKey EnterInput = InputKey.Null;
@@ -21,7 +27,7 @@ namespace Skill
         public int RARITY_LEVEL;
         [HideInInspector]
         public string[] ForcedTransitions = { };
-    
+        
         public SkillEntity()
         {
         }
@@ -45,14 +51,14 @@ namespace Skill
             this.StateType = _attackType;
             this.AT = _AT;
             this.HP = _HP;
-            this.AI_MIN_DIS = AITriggerDistanceMin;
-            this.AI_MAX_DIS = AITriggerDistanceMax;
             this.CasualTo = _casual_to_state_nums;
             this.ForcedTransitions = _forced_to_state_nums;
             this.EnterInput = _enterInput;
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
             this.RARITY_LEVEL = _rarelevel;
+            this.AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
+            this.AIAttrs.AI_MAX_DIS = AITriggerDistanceMax;
             
             if (this.CasualTo == null)
             {
@@ -81,11 +87,12 @@ namespace Skill
             AT = _AT;
             HP = _HP;
             CANBECANCELLEDTO = can_be_cancelled_to;
-            AI_MIN_DIS = AITriggerDistanceMin;
-            AI_MAX_DIS = AITriggerDistanceMax;
             EnterInput = enterInput;
             ExitInput = exitInput;
             SP_LEVEL = SPMove;
+            
+            this.AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
+            this.AIAttrs.AI_MAX_DIS = AITriggerDistanceMin;
         }
         
         public SkillEntity( string REAL_NAME,
@@ -106,14 +113,15 @@ namespace Skill
             this.StateType = _attackType;
             this.AT = _AT;
             this.HP = _HP;
-            this.AI_MIN_DIS = AITriggerDistanceMin;
-            this.AI_MAX_DIS = AITriggerDistanceMax;
             this.CasualTo = _casual_to_state_nums;
             this.ForcedTransitions = _forced_to_state_nums;
             this.EnterInput = _enterInput;
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
             this.RARITY_LEVEL = _rarelevel;
+            
+            this.AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
+            this.AIAttrs.AI_MAX_DIS = AITriggerDistanceMax;
             
             if (this.CasualTo == null)
             {
@@ -143,11 +151,11 @@ namespace Skill
             AT = _AT;
             HP = _HP;
             CANBECANCELLEDTO = can_be_cancelled_to;
-            AI_MIN_DIS = AITriggerDistanceMin;
-            AI_MAX_DIS = AITriggerDistanceMax;
             EnterInput = enterInput;
             ExitInput = exitInput;
             SP_LEVEL = SPMove;
+            AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
+            AIAttrs.AI_MAX_DIS = AITriggerDistanceMax;
         }
         
         // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。

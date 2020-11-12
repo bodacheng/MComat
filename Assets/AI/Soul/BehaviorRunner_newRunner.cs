@@ -107,10 +107,10 @@ namespace Soul
             max = 0f;
             for (int index = 0; index < CanTranTo.Count; index++)
             {
-                if (min > CanTranTo[index].AI_MIN_DIS)
-                    min = CanTranTo[index].AI_MIN_DIS;
-                if (max < CanTranTo[index].AI_MAX_DIS)
-                    max = CanTranTo[index].AI_MAX_DIS;
+                if (min > CanTranTo[index].AIAttrs.AI_MIN_DIS)
+                    min = CanTranTo[index].AIAttrs.AI_MIN_DIS;
+                if (max < CanTranTo[index].AIAttrs.AI_MAX_DIS)
+                    max = CanTranTo[index].AIAttrs.AI_MAX_DIS;
             }
         }
         

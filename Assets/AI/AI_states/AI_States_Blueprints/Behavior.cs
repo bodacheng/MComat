@@ -33,6 +33,7 @@ namespace Soul
         public string StateKey;
         public int splevel;
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
+        public int triggerAtttackHeight;
         protected bool AbsorbEnergyFinished;
 
         int temp;

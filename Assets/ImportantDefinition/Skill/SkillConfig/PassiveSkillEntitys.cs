@@ -27,8 +27,11 @@ namespace Skill
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
                         CasualTo = null,
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
@@ -44,8 +47,11 @@ namespace Skill
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
                         CasualTo = null,
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
@@ -61,8 +67,11 @@ namespace Skill
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
                         CasualTo = null,
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
@@ -78,8 +87,11 @@ namespace Skill
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
                         CasualTo = null,
                         ForcedTransitions = null,
                         EnterInput = InputKey.Null,
@@ -97,8 +109,11 @@ namespace Skill
                 StateType = BehaviorType.Def,
                 AT = 0,
                 HP = 0,
-                AI_MIN_DIS = -1,
-                AI_MAX_DIS = -1,
+                AIAttrs = new AIAttrs
+                {
+                    AI_MIN_DIS = -1,
+                    AI_MAX_DIS = -1
+                },
                 CasualTo = null,
                 ForcedTransitions = null,
                 EnterInput = InputKey.Defend,
@@ -116,8 +131,11 @@ namespace Skill
                         StateType = BehaviorType.AC,
                         AT = 0,
                         HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
                         CasualTo = null,
                         ForcedTransitions = null,
                         EnterInput = InputKey.Acc,
@@ -133,8 +151,11 @@ namespace Skill
                         StateType = BehaviorType.AC,
                         AT = 0,
                         HP = 0,
-                        AI_MIN_DIS = -1,
-                        AI_MAX_DIS = -1,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
                         CasualTo = null,
                         ForcedTransitions = null,
                         EnterInput = InputKey.Acc,

@@ -119,8 +119,8 @@ public partial class BehaviorRunnerGUI : Editor {
                         attackRangeToggleGUI.stretchWidth = false;
                     }
 
-                    myScript.SkillEntity_List[i].AI_MIN_DIS = EditorGUILayout.FloatField("Distance Min",myScript.SkillEntity_List[i].AI_MIN_DIS);
-                    myScript.SkillEntity_List[i].AI_MAX_DIS = EditorGUILayout.FloatField("Distance Max",myScript.SkillEntity_List[i].AI_MAX_DIS);
+                    myScript.SkillEntity_List[i].AIAttrs.AI_MIN_DIS = EditorGUILayout.FloatField("Distance Min",myScript.SkillEntity_List[i].AIAttrs.AI_MIN_DIS);
+                    myScript.SkillEntity_List[i].AIAttrs.AI_MAX_DIS = EditorGUILayout.FloatField("Distance Max",myScript.SkillEntity_List[i].AIAttrs.AI_MAX_DIS);
                     
                     GUI.backgroundColor = Color.white;
                 }

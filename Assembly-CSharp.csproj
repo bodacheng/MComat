@@ -94,6 +94,7 @@
     <Compile Include="Assets\AI\GUI\SkillOptions.cs" />
     <Compile Include="Assets\AI\HitBoxLogger.cs" />
     <Compile Include="Assets\AI\SingleFightLog.cs" />
+    <Compile Include="Assets\AI\SkillAIAttrs.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_Form.cs" />
     <Compile Include="Assets\AI\Soul\BehaviorRunner_ScriptFileReading.cs" />

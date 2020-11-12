@@ -45,7 +45,7 @@ public class G_Attack_State : Behavior {
         this.clip_name = clip_name;
         this.dash_clip_name = dash_clip_name;
     }
-
+    
     public G_Attack_State(string dash_clip_name,float rushSpeed, float maxRushTime, string clip_name, bool EventLauncher_Or_Ender)
 	{
         this.maxRushTime = maxRushTime;

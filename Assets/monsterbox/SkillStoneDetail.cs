@@ -140,7 +140,7 @@ namespace mainMenu
             keyname.text = _SkillEntity.REAL_NAME;
             Showname.text = skillConfig.SHOW_NAME;
             ShowSkillStoneExType(_SkillEntity.SP_LEVEL);
-            ShowSKillRanges(_SkillEntity.AI_MIN_DIS, _SkillEntity.AI_MAX_DIS);
+            ShowSKillRanges(_SkillEntity.AIAttrs.AI_MIN_DIS, _SkillEntity.AIAttrs.AI_MAX_DIS);
             PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);

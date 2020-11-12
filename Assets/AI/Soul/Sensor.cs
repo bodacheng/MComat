@@ -5,24 +5,24 @@ public class Sensor : MonoBehaviour {
 
     public float sensor_radius = 15;//这个范围我们也就看作是普攻的冲击检测范围。
     public IDictionary<Team, List<Data_Center>> TeamMembers;
-
+    
     LayerMask _layers;
     LayerMask meAndEnemyLayermask;
     Collider[] _hits; //What was hit in this frame?
     RaycastHit[] _spherecastHits;
     TeamConfig _TeamConfig = TeamConfig.defaultSet;
-
+    
     int DetectionInterval;
     bool DetectionLoopStarted;
     int DetectionResultLastFrame;
     bool continuousDetection;
-
+    
     List<Collider> detectedEnemies = new List<Collider>();
     Collider nearestEnemyCollider;
-        
+    
     List<Collider> DamagingWeaponAround = new List<Collider>();
     Collider NearestDamagingWeapon;
-        
+    
     Data_Center SelfDataCenter;
 
     public bool IFContinuousDetectionStarted()
