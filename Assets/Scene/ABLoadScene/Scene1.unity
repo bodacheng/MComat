@@ -1897,7 +1897,7 @@ MonoBehaviour:
   superhit_lastingtime: 0.6
   highhit_lastingTime: 0.65
   normalattackpositionfixingtime: 0.1
-  knockoffextent: 25
+  knockoffextent: 15
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.6
@@ -8882,13 +8882,12 @@ MonoBehaviour:
   _SkillCancelFlag: {fileID: 5746399932408021486}
   controller: {fileID: 4035170480120778249}
   CurrentSKillEntity:
+    SkillID: 
     REAL_NAME: 
     LEVEL: 0
     StateType: 0
     AT: 0
     HP: 0
-    AI_MIN_DIS: 0
-    AI_MAX_DIS: 0
     CasualTo: []
     CANBECANCELLEDTO: 1
     EnterInput: -1

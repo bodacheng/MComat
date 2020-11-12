@@ -123,7 +123,6 @@ namespace Soul
                 {
                     s.state.StateKey = SkillEntityDic[s.num].REAL_NAME;
                     s.state.splevel = SkillEntityDic[s.num].SP_LEVEL;
-                    
                     s.state.triggerAtttackRangeMin = SkillEntityDic[s.num].AIAttrs.AI_MIN_DIS;
                     s.state.triggerAtttackRangeMax = SkillEntityDic[s.num].AIAttrs.AI_MAX_DIS;
                     s.state.triggerAtttackHeight = SkillEntityDic[s.num].AIAttrs.height;

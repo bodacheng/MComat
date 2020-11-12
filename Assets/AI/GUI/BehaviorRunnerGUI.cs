@@ -227,7 +227,7 @@ public partial class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.SkillEntity_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, 0, 0));
+                myScript.SkillEntity_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0, 0));
                 InitializeList(-1, myScript.SkillEntity_List.Count);
             }
         }

@@ -97,7 +97,7 @@ namespace mainMenu
             keyname.text = skillConfig.REAL_NAME;
             Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
             ShowSkillStoneExType(skillConfig.SP_LEVEL);
-            ShowSKillRanges(skillConfig.AI_MIN_DIS, skillConfig.AI_MAX_DIS);
+            ShowSKillRanges(skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS);
             PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
@@ -124,7 +124,7 @@ namespace mainMenu
             keyname.text = _ConfigOfStone.REAL_NAME;
             Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
             ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
-            ShowSKillRanges(_ConfigOfStone.AI_MIN_DIS, _ConfigOfStone.AI_MAX_DIS);
+            ShowSKillRanges(_ConfigOfStone.AIAttrs.AI_MIN_DIS, _ConfigOfStone.AIAttrs.AI_MAX_DIS);
             _T.gameObject.SetActive(true);
         }
         

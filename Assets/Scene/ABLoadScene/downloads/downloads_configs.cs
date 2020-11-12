@@ -3,6 +3,7 @@ using UnityEngine;
 
 public partial class ResourceLordSceneUtil : MonoBehaviour
 {
+    //  Config文件已经发生变动，下列程序未考虑skill_ai_attrs等文件的下载。初始版本以resource读取相应config文件为准
     IEnumerator ConfigFilesDownLoad()
     {
         AssetBundle readingbundle;
@@ -88,7 +89,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         TextAsset SkillConfigTextFile = (TextAsset)loadAsset.asset;
         if (SkillConfigTextFile != null)
         {
-            SkillConfigTable.Load(SkillConfigTextFile);
+            SkillConfigTable.Load(SkillConfigTextFile); // 这里未考虑skill_ai_attrs的下载与读取。
         }
         else
         {

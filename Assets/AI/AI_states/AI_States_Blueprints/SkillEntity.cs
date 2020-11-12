@@ -18,7 +18,7 @@ namespace Skill
         public BehaviorType StateType;
         public float AT;
         public float HP;
-        public AIAttrs AIAttrs;
+        public AIAttrs AIAttrs = new AIAttrs();
         public string[] CasualTo = { };
         public bool CANBECANCELLEDTO = true;
         public InputKey EnterInput = InputKey.Null;
@@ -38,7 +38,7 @@ namespace Skill
                             BehaviorType _attackType,
                             float _AT,
                             float _HP,
-                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            AIAttrs AIAttrs,
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
                             InputKey _enterInput, InputKey _exitInput,
@@ -57,8 +57,7 @@ namespace Skill
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
             this.RARITY_LEVEL = _rarelevel;
-            this.AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
-            this.AIAttrs.AI_MAX_DIS = AITriggerDistanceMax;
+            this.AIAttrs = AIAttrs;
             
             if (this.CasualTo == null)
             {
@@ -75,7 +74,7 @@ namespace Skill
                             BehaviorType _BType,
                             float _AT,
                             float _HP,
-                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            AIAttrs aIAttrs,
                             bool can_be_cancelled_to,
                             InputKey enterInput, InputKey exitInput,
                             int SPMove)
@@ -90,9 +89,7 @@ namespace Skill
             EnterInput = enterInput;
             ExitInput = exitInput;
             SP_LEVEL = SPMove;
-            
-            this.AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
-            this.AIAttrs.AI_MAX_DIS = AITriggerDistanceMin;
+            AIAttrs = aIAttrs;
         }
         
         public SkillEntity( string REAL_NAME,
@@ -100,7 +97,7 @@ namespace Skill
                             BehaviorType _attackType,
                             float _AT,
                             float _HP,
-                            float AITriggerDistanceMin,float AITriggerDistanceMax,
+                            AIAttrs aIAttrs,
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
                             InputKey _enterInput, InputKey _exitInput,
@@ -119,9 +116,7 @@ namespace Skill
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
             this.RARITY_LEVEL = _rarelevel;
-            
-            this.AIAttrs.AI_MIN_DIS = AITriggerDistanceMin;
-            this.AIAttrs.AI_MAX_DIS = AITriggerDistanceMax;
+            AIAttrs = aIAttrs;
             
             if (this.CasualTo == null)
             {

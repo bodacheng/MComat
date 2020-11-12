@@ -19,8 +19,9 @@ public partial class StagesManagerGUI : Editor {
         targetSC.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", defaultSkillConfig.ATTACK_WEIGHT);
         targetSC.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", defaultSkillConfig.SP_LEVEL, exoptions_display, exoptions);        
         EditorGUILayout.LabelField("AI模式技能触发范围");
-        defaultSkillConfig.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MIN_DIS);
-        defaultSkillConfig.AI_MAX_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AI_MAX_DIS);
+        defaultSkillConfig.AIAttrs.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",defaultSkillConfig.AIAttrs.AI_MIN_DIS);
+        defaultSkillConfig.AIAttrs.AI_MAX_DIS = EditorGUILayout.FloatField("max_dis",defaultSkillConfig.AIAttrs.AI_MAX_DIS);
+        defaultSkillConfig.AIAttrs.height = EditorGUILayout.IntField("height",defaultSkillConfig.AIAttrs.height);
         GUI.backgroundColor = Color.white;
     }
 }

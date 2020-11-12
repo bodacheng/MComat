@@ -87,6 +87,17 @@ namespace Soul
                 tar = Sensor.GetTargetRangeEnemyCollider(triggerAtttackRangeMin, triggerAtttackRangeMax);
             //else
                 //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f, 0, triggerAtttackRangeMin - 3f), triggerAtttackRangeMax);
+            switch (triggerAtttackHeight)
+            {
+                case -1:// 只适合砸地
+                    return (tar != null) && tar.transform.position.y < 0.5f;
+                case 0:// 只适合中段
+                    return (tar != null) && tar.transform.position.y >= 0.8f;
+                case 1:// 只适合对空和打脑袋
+                    return (tar != null) && tar.transform.position.y >= 1f;
+                case 2:// 全高度适合
+                    break;
+            }
             return tar != null;
         }
         
@@ -102,6 +113,18 @@ namespace Soul
                 tar = Sensor.GetTargetRangeEnemyCollider(0, triggerAtttackRangeMax);
             //else
                 //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f, 0, triggerAtttackRangeMin - 3f), triggerAtttackRangeMax);
+            
+            switch (triggerAtttackHeight)
+            {
+                case -1:// 只适合砸地
+                    return (tar != null) && tar.transform.position.y < 0.5f;
+                case 0:// 只适合中段
+                    return (tar != null) && tar.transform.position.y >= 0.8f;
+                case 1:// 只适合对空和打脑袋
+                    return (tar != null) && tar.transform.position.y >= 1f;
+                case 2:// 全高度适合
+                    break;
+            }
             return tar != null;
         }
 

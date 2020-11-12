@@ -56,7 +56,7 @@ namespace dataAccess
                 }
                 if (_SkillConfig.TYPE == type && 
                     (_SkillConfig.SP_LEVEL == ExType || ExType == -1) &&
-                    SkillConfig.RangeLimit(_SkillConfig.AI_MIN_DIS, _SkillConfig.AI_MAX_DIS, close, near, far))
+                    SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, close, near, far))
                 {
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
                 }

@@ -9,15 +9,16 @@ public partial class SkillConfigTable
     public static List<SkillConfig> RowsToSkillConfigList(List<Row> Rows)
     {
         List<SkillConfig> skillConfigs = new List<SkillConfig>();
-        foreach(Row row in Rows)
+        for (int i = 0; i < Rows.Count; i++)
         {
-            SkillConfig newConfig = RowToSkillConfig(row);
+            SkillAIAttrs.Row aiRow = SkillAIAttrs.Find_RECORD_ID(Rows[i].RECORD_ID);
+            SkillConfig newConfig = RowToSkillConfig(Rows[i], aiRow);
             if (newConfig != null)
                 skillConfigs.Add(newConfig);
                 
-            if (!LegalStateType(row.ATTACK_TYPE))
+            if (!LegalStateType(Rows[i].ATTACK_TYPE))
             {
-                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ row.RECORD_ID);
+                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ Rows[i].RECORD_ID);
             }
         }
         return skillConfigs;
@@ -59,10 +60,7 @@ public partial class SkillConfigTable
         {
             Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ skillConfig.RECORD_ID);
         }
-        
-        row.TRIGGER_DIS_MIN = skillConfig.AI_MIN_DIS.ToString();
-        row.TRIGGER_DIS_MAX = skillConfig.AI_MAX_DIS.ToString();
-                
+                        
         switch (skillConfig.SP_LEVEL)
         {
             case 0:
@@ -86,7 +84,7 @@ public partial class SkillConfigTable
         return row;
     }
     
-    public static SkillConfig RowToSkillConfig(Row row)
+    public static SkillConfig RowToSkillConfig(Row row, SkillAIAttrs.Row aiRow)
     {
         try
         {
@@ -123,8 +121,9 @@ public partial class SkillConfigTable
                 Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ _SkillConfig.RECORD_ID);
             }
             
-            _SkillConfig.AI_MIN_DIS = float.Parse(row.TRIGGER_DIS_MIN);
-            _SkillConfig.AI_MAX_DIS = float.Parse(row.TRIGGER_DIS_MAX);
+            _SkillConfig.AIAttrs.AI_MIN_DIS = float.Parse(aiRow.TRIGGER_DIS_MIN);
+            _SkillConfig.AIAttrs.AI_MAX_DIS = float.Parse(aiRow.TRIGGER_DIS_MAX);
+            _SkillConfig.AIAttrs.height = int.Parse(aiRow.TRIGGER_HEIGHT);
             
             switch(row.SP_LEVEL)
             {
@@ -186,7 +185,7 @@ public partial class SkillConfigTable
                 continue;
             }
             
-            if (SkillConfig.RangeLimit(one.AI_MIN_DIS, one.AI_MAX_DIS, ranges[0], ranges[1], ranges[2]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
+            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, ranges[0], ranges[1], ranges[2]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
             {
                 if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
                 {

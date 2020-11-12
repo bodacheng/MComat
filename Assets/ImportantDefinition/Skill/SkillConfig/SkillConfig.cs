@@ -28,12 +28,11 @@ namespace Skill
         public float ATTACK_WEIGHT;
         public float HP_WEIGHT;
         public BehaviorType STATE_TYPE;
-        public float AI_MIN_DIS;
-        public float AI_MAX_DIS;
         public int SP_LEVEL;
         public string EVENT_CODE;
         public int RARITY_LEVEL;
-
+        public AIAttrs AIAttrs = new AIAttrs();
+        
         public SkillConfig Clone()
         {
             return (SkillConfig)MemberwiseClone();

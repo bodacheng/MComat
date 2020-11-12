@@ -21,8 +21,6 @@ public partial class SkillConfigTable
         public string HP_WEIGHT;
         public string ATTACK_TYPE;
         public string SP_LEVEL;
-        public string TRIGGER_DIS_MIN;
-        public string TRIGGER_DIS_MAX;
         public string EVENT_CODE;
         public string RARITY_LEVEL;
     }
@@ -55,10 +53,10 @@ public partial class SkillConfigTable
             break;
             case ResourceLoadMode.Resource:
                 LoadAllSkillConfigFromLocalConfigFile();
+                yield return INHERENT_SkillTable.LoadAllINHERENTSkillConfigs();// 角色原生技能的load和技能表load同步进行。
+                yield return SkillNameTable.LoadSkillNames();
             break;
         }
-        yield return INHERENT_SkillTable.LoadAllINHERENTSkillConfigs();// 角色原生技能的load和技能表load同步进行。
-        yield return SkillNameTable.LoadSkillNames();
         yield break;
     }
     
@@ -106,10 +104,10 @@ public partial class SkillConfigTable
     public static void LoadAllSkillConfigFromLocalConfigFile()
     {
         TextAsset csv = Resources.Load("Account/mst_skill") as TextAsset;
-        if (csv != null)
-        {
-            Load(csv);
-        }
+        TextAsset aiCsv = Resources.Load("Account/skill_ai_attrs") as TextAsset;
+        Load(csv);
+        SkillAIAttrs.Load(aiCsv);
+        RefreshSkillConfigDicForReference();
     }
     
     public static void SaveByCurrentRows(string filePath)
@@ -153,10 +151,8 @@ public partial class SkillConfigTable
                 grid[i][4] = rowList[i - 1].HP_WEIGHT;
                 grid[i][5] = rowList[i - 1].ATTACK_TYPE;
                 grid[i][6] = rowList[i - 1].SP_LEVEL;
-                grid[i][7] = rowList[i - 1].TRIGGER_DIS_MIN;
-                grid[i][8] = rowList[i - 1].TRIGGER_DIS_MAX;
-                grid[i][9] = rowList[i - 1].EVENT_CODE;
-                grid[i][10] = rowList[i - 1].RARITY_LEVEL;
+                grid[i][7] = rowList[i - 1].EVENT_CODE;
+                grid[i][8] = rowList[i - 1].RARITY_LEVEL;
                     
                 if (!LegalStateType(rowList[i - 1].ATTACK_TYPE))
                 {
@@ -193,10 +189,8 @@ public partial class SkillConfigTable
                     HP_WEIGHT = grid[i][4],
                     ATTACK_TYPE = grid[i][5],
                     SP_LEVEL = grid[i][6],
-                    TRIGGER_DIS_MIN = grid[i][7],
-                    TRIGGER_DIS_MAX = grid[i][8],
-                    EVENT_CODE = grid[i][9],
-                    RARITY_LEVEL = grid[i][10]
+                    EVENT_CODE = grid[i][7],
+                    RARITY_LEVEL = grid[i][8]
                 };
                 if (!LegalStateType(grid[i][5]))
                 {
@@ -210,7 +204,6 @@ public partial class SkillConfigTable
         {
             Debug.Log(e);
         }
-        RefreshSkillConfigDicForReference();
     }
     
     public static List<Row> FindAll_type_keyName(string type, string keyName)

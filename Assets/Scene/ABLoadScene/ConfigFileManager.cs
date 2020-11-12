@@ -42,9 +42,9 @@ public class ConfigFileManager : MonoBehaviour {
         
         foreach (string chartype in chartypes)
         {
-            List<SkillConfig> SkillConfigsOfOldConfigFileOFtype = SkillConfigTable.RowsToSkillConfigList(SkillConfigTable.FindAll_MONSTER_TYPE(chartype));
+            List<SkillConfig> SkillConfigsOfOldFileOFtype = SkillConfigTable.RowsToSkillConfigList(SkillConfigTable.FindAll_MONSTER_TYPE(chartype));
             List<string> KisonnRecourdsOFRealNames = new List<string>(); //这个type的角色旧config文件中所有条目的keyname list。
-            foreach (SkillConfig skillConfig in SkillConfigsOfOldConfigFileOFtype)
+            foreach (SkillConfig skillConfig in SkillConfigsOfOldFileOFtype)
             {
                 if (!KisonnRecourdsOFRealNames.Contains(skillConfig.REAL_NAME))
                 {
@@ -95,8 +95,12 @@ public class ConfigFileManager : MonoBehaviour {
                         SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
                         STATE_TYPE = BehaviorType.GR,
-                        AI_MIN_DIS = 0.2f,
-                        AI_MAX_DIS = 5f,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = 0.2f,
+                            AI_MAX_DIS = 5f,
+                            height = 0
+                        },
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -131,8 +135,12 @@ public class ConfigFileManager : MonoBehaviour {
                         SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
                         STATE_TYPE = BehaviorType.GI,
-                        AI_MIN_DIS = 3f,
-                        AI_MAX_DIS = 10f,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = 3f,
+                            AI_MAX_DIS = 10f,
+                            height = 0
+                        },
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -167,8 +175,12 @@ public class ConfigFileManager : MonoBehaviour {
                         SHOW_NAME = "unknown",
                         SP_LEVEL = 0,
                         STATE_TYPE = BehaviorType.GM,
-                        AI_MIN_DIS = 3f,
-                        AI_MAX_DIS = 8f,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = 3f,
+                            AI_MAX_DIS = 8f,
+                            height = 0
+                        },
                         RARITY_LEVEL = 1
                     };
                     newSkillConfigsOfType.Add(OneConfig);
@@ -203,7 +215,7 @@ public class ConfigFileManager : MonoBehaviour {
                 }
             }
         }
-
+        
         foreach (SkillConfig newSkillConfig in AllNewSkillConfigsOfAllTypes)
         {
             //if (AllDeletedRecordsIDs.Count > 0)

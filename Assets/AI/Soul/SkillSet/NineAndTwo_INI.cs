@@ -177,13 +177,13 @@ public partial class NineAndTwo
         IDictionary<string, SkillEntity> _SEDic = new Dictionary<string, SkillEntity>();
         List<SkillEntity> StateTransitionSetList = new List<SkillEntity>();
         
-        Empty = new SkillEntity("Empty", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        Victory = new SkillEntity("Victory",0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        Death = new SkillEntity("Death", 0, 0, 0, 0, 0, 0, null, null, InputKey.Null, InputKey.Null, -1, 0);
-        Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0, 0, 0, H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1, 0);
-        getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, 0, 0, H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
-        KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, 0, 0, R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1, 0);
+        Empty = new SkillEntity("Empty", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
+        zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
+        Victory = new SkillEntity("Victory",0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
+        Death = new SkillEntity("Death", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
+        Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0,new AIAttrs(), H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1, 0);
+        getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, new AIAttrs(), H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
+        KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1, 0);
         if (FightGlobalSetting._hasDefend)
         {
             D.CasualTo = H1_list.ToArray();
@@ -291,8 +291,7 @@ public partial class NineAndTwo
                 SC.STATE_TYPE,
                 SkillEntity.ATCal(SC.ATTACK_WEIGHT, level),
                 SkillEntity.StoneHpCal(SC.HP_WEIGHT, level),
-                SC.AI_MIN_DIS,
-                SC.AI_MAX_DIS,
+                SC.AIAttrs,
                 null,
                 null,
                 InputKey.Null,
