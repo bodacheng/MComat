@@ -127,6 +127,7 @@
     <Compile Include="Assets\Arena\Arena1.cs" />
     <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
     <Compile Include="Assets\Arena\ArenaManager.cs" />
+    <Compile Include="Assets\Arena\PlayerArenaRankInfo.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />

@@ -8,7 +8,7 @@ namespace dataAccess
 {
     public partial class Arena
     {
-        static playerArenaRankInfo myRankInfo;
+        static PlayerArenaRankInfo myRankInfo;
         public static IEnumerator GetPlayerRankInfo()
         {
             GetRankInfoForm form = new GetRankInfoForm
@@ -52,11 +52,4 @@ namespace dataAccess
             }
         }
     }
-}
-
-public class playerArenaRankInfo
-{
-    string playerID;
-    int ArenaPoint;
-    public int rankNum;
 }

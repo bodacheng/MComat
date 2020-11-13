@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace Api.Dto.Model {
 
@@ -10,10 +9,10 @@ namespace Api.Dto.Model {
     /// </summary>
     [Serializable]
     public class GetRankInfoOfPlayerModel 
-    {    
+    {
         /// <summary>
         /// プレーヤレコードID
         /// </summary>
-        public playerArenaRankInfo playerArenaRankInfo { get; set; }
+        public PlayerArenaRankInfo playerArenaRankInfo { get; set; }
     }
 }
