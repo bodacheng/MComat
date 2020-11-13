@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using mainMenu;
-using dataAccess;
 
 public class ArenaProcess : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        yield return Arena.GetPlayerRankInfo();
-        yield return Arena.GetOpponents();
         yield return ArenaManager.target.LoadArena();
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
     }

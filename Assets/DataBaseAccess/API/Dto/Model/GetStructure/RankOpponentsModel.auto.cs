@@ -5,9 +5,9 @@ namespace Api.Dto.Model {
     [Serializable]
     public class RankOpponentsModel
     {
-        public OneTeam strongTeam;
-        public OneTeam normalTeam1;
-        public OneTeam normalTeam2;
-        public OneTeam weakTeam;
+        public PlayerArenaRankInfo strongTeam;
+        public PlayerArenaRankInfo normalTeam1;
+        public PlayerArenaRankInfo normalTeam2;
+        public PlayerArenaRankInfo weakTeam;
     }
 }

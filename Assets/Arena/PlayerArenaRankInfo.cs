@@ -1,7 +1,8 @@
 ﻿
 public class PlayerArenaRankInfo
 {
-    string playerID;
-    int ArenaPoint;
-    int rankNum;
+    public string playerID;
+    public int ArenaPoint;
+    public int rankNum;
+    public bool isRealPlayer;
 }

@@ -21,27 +21,35 @@ public class ArenaManager : MonoBehaviour
     {
         PreScene.target.mainProcessRunner.Run(target.LoadArena());
     }
-    
+        
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     public IEnumerator LoadArena()
     {
         yield return myTeam.ShowMyTeam();
-        if (Arena.rankOpponentsModel != null)
+        yield return Arena.GetPlayerRankInfo();
+        yield return Arena.GetOpponentsBasicInfo();
+        
+        PlayerArenaRankInfo opponent1Info = Arena.rankOpponentsModel.strongTeam;
+        PlayerArenaRankInfo opponent2Info = Arena.rankOpponentsModel.normalTeam1;
+        PlayerArenaRankInfo opponent3Info = Arena.rankOpponentsModel.normalTeam2;
+        PlayerArenaRankInfo opponent4Info = Arena.rankOpponentsModel.weakTeam;
+        
+        IEnumerator temp(ArenaFightTeamDisplay target, PlayerArenaRankInfo opponentInfo)
         {
-            OneTeam OneTeam1 = Arena.rankOpponentsModel.strongTeam;
-            OneTeam OneTeam2 = Arena.rankOpponentsModel.normalTeam1;
-            OneTeam OneTeam3 = Arena.rankOpponentsModel.normalTeam2;
-            OneTeam OneTeam4 = Arena.rankOpponentsModel.weakTeam;
-            
-            yield return Fight1.AddFightToList(StageScriptableObject.ArenaStage(OneTeam1.ToFightInfo()));
-            yield return Fight2.AddFightToList(StageScriptableObject.ArenaStage(OneTeam2.ToFightInfo()));
-            yield return Fight3.AddFightToList(StageScriptableObject.ArenaStage(OneTeam3.ToFightInfo()));
-            yield return Fight4.AddFightToList(StageScriptableObject.ArenaStage(OneTeam4.ToFightInfo()));
-        }else{
-            yield return Fight1.AddFightToList(StageScriptableObject.RandomStage());
-            yield return Fight2.AddFightToList(StageScriptableObject.RandomStage());
-            yield return Fight3.AddFightToList(StageScriptableObject.RandomStage());
-            yield return Fight4.AddFightToList(StageScriptableObject.RandomStage());
+            if (opponent1Info.isRealPlayer)
+            {
+                IEnumerator opponentteam = Arena.GetOpponentTeamInfo(opponentInfo.playerID);
+                yield return opponentteam;
+                OneTeam oneTeam = (OneTeam)opponentteam.Current;
+                yield return target.AddFightToList(StageScriptableObject.ArenaStage(oneTeam.ToFightInfo()));
+            }else{
+                yield return target.AddFightToList(StageScriptableObject.RandomStage());
+            }
         }
+        
+        yield return temp(Fight1, opponent1Info);
+        yield return temp(Fight2, opponent2Info);
+        yield return temp(Fight3, opponent3Info);
+        yield return temp(Fight4, opponent4Info);
     }
 }
