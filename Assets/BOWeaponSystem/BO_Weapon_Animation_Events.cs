@@ -78,7 +78,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             {
                 target_hitbox = HurtObjectManager.GetDPool().Rent();
                 BEs.bodyPartsHitBoxRegisterDic[t] = target_hitbox;
-                target_hitbox._HitBox.SetOwnerFightAttriCalReference(BEs.myownheath);
+                target_hitbox._HitBox.SetOwnerFACR(BEs.myownheath);
             }
             else
             {

@@ -96,7 +96,7 @@ public partial class Decompositioner : MonoBehaviour {
         if (IsWeapon)
         {
             _HitBox.Local_OnDisable();// 与Local_OnDisable()内的Local_OnDisable看起来重复，意思就是说
-            _HitBox.SetOwnerFightAttriCalReference(FightAttriCalReference.AvoidNullCheck);
+            _HitBox.SetOwnerFACR(null);
         }
     }
     

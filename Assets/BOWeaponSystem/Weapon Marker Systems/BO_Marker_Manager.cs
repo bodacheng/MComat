@@ -120,12 +120,12 @@ namespace HittingDetection
             _WeaponHolderCenter = centerT;
         }
 
-        public void SetOwnerFightAttriCalReference(FightAttriCalReference myOwnerCalReference)
+        public void SetOwnerFACR(FightAttriCalReference myOwnerCalReference)
         {
             _MyOwnerCalReference = myOwnerCalReference;
             AT = _MyOwnerCalReference == null ? 0 : _MyOwnerCalReference.AT * AT_weight;
         }
-        public FightAttriCalReference GetOwnerFightAttriCalReference()
+        public FightAttriCalReference GetOwnerFACR()
         {
             return _MyOwnerCalReference;
         }

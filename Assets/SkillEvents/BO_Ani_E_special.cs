@@ -85,7 +85,7 @@ public partial class BO_Ani_E : MonoBehaviour
             }
 
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
+            Ani_E.processingHitBox._HitBox.SetOwnerFACR(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
             Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.EnergyFromBodyWeapon;
@@ -137,7 +137,7 @@ public partial class BO_Ani_E : MonoBehaviour
                     break;
             }
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
+            Ani_E.processingHitBox._HitBox.SetOwnerFACR(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
             EffectsManager.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null);
@@ -176,7 +176,7 @@ public partial class BO_Ani_E : MonoBehaviour
             if (Ani_E.target_pool != null)
             {
                 Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-                Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
+                Ani_E.processingHitBox._HitBox.SetOwnerFACR(Ani_E._DATA_CENTER.FightDataRef);
                 Ani_E.processingHitBox.transform.position = pos;
                 Ani_E.processingHitBox.transform.rotation = qua;
                 Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
@@ -231,7 +231,7 @@ public partial class BO_Ani_E : MonoBehaviour
                 return;
         
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
-            Ani_E.processingHitBox._HitBox.SetOwnerFightAttriCalReference(Ani_E._DATA_CENTER.FightDataRef);
+            Ani_E.processingHitBox._HitBox.SetOwnerFACR(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             if (Ani_E.processingHitBox._HitBox.onGroundMagic)
             {

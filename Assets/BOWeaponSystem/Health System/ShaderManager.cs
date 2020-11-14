@@ -6,13 +6,13 @@ using DG.Tweening;
 public class ShaderManager : MonoBehaviour
 {
     public List<POFX> pOFXes;
-
+    POFX_Rim RIMlayer;
     void Awake()
     {
         for (int i = 0; i < pOFXes.Count; i++)
         {
             // Rim
-            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
+            RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
             if (RIMlayer == null)
             {
                 pOFXes[i].AddLayer(pOFXes[i].gameObject.AddComponent<POFX_Rim>() as POFXLayer);
@@ -21,8 +21,10 @@ public class ShaderManager : MonoBehaviour
             RIMlayer.m_cParams.intensity = 0f;
             POFX_RimBase pOFX_RimBase = pOFXes[i].GetComponent<POFX_RimBase>();
             if (pOFX_RimBase)
+            {
                 pOFX_RimBase.m_params.rimpower = 0.9f;
-
+            }
+            
             // flatColor
             POFX_FlatColor flatColorLayer = pOFXes[i].GetLayer(1) as POFX_FlatColor;
             if (flatColorLayer == null)
@@ -32,7 +34,7 @@ public class ShaderManager : MonoBehaviour
             }
             flatColorLayer.m_cParams.intensity = 0f;
             POFX_FlatColorBase flatColorLayerBase = pOFXes[i].GetComponent<POFX_FlatColorBase>();
-
+            
             pOFXes[i].enabled = false;
         }
     }
@@ -43,7 +45,6 @@ public class ShaderManager : MonoBehaviour
         for (int i = 0; i < pOFXes.Count; i++)
         {
             pOFXes[i].enabled = true;
-            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
             RIMlayer.m_cParams.color = color;
             DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, intensity, time);
         }
@@ -53,8 +54,10 @@ public class ShaderManager : MonoBehaviour
     {
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
-            DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, cleartime).OnComplete(() => { RIMlayer.enabled = false; });
+            if (RIMlayer != null)
+            {
+                DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, cleartime).OnComplete(() => { RIMlayer.enabled = false; });
+            }
         }
     }
 
@@ -62,7 +65,6 @@ public class ShaderManager : MonoBehaviour
     {
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            POFX_Rim RIMlayer = pOFXes[i].GetLayer(0) as POFX_Rim;
             if (RIMlayer == null)
             {
                 Debug.Log("ShaderMangerError:" + transform);
@@ -85,7 +87,6 @@ public class ShaderManager : MonoBehaviour
     {
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            POFX_FlatColor RIMlayer = pOFXes[i].GetLayer(1) as POFX_FlatColor;
             RIMlayer.m_cParams.color = targetColor;
             pOFXes[i].enabled = true;
             RIMlayer.m_cParams.intensity = tartget_intensity;
@@ -96,7 +97,6 @@ public class ShaderManager : MonoBehaviour
     {
         for (int i = 0; i < pOFXes.Count; i++)
         {
-            POFX_FlatColor RIMlayer = pOFXes[i].GetLayer(1) as POFX_FlatColor;
             RIMlayer.m_cParams.color = targetColor;
             pOFXes[i].enabled = true;
             RIMlayer.m_cParams.intensity = tartget_intensity;

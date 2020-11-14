@@ -19,7 +19,7 @@ public partial class Decompositioner : MonoBehaviour
                         Counter = stop_emission_delay;
                         Phase = 2;
                     }
-                    if (_HitBox.GetOwnerFightAttriCalReference().IFgettingDamage())
+                    if (_HitBox.GetOwnerFACR() != null && _HitBox.GetOwnerFACR().IFgettingDamage())
                     {
                         CloseMarkers();
                         StopEmissions(false);
