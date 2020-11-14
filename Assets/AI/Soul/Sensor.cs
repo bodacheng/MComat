@@ -19,17 +19,15 @@ public class Sensor : MonoBehaviour {
     
     List<Collider> detectedEnemies = new List<Collider>();
     Collider nearestEnemyCollider;
-    
     List<Collider> DamagingWeaponAround = new List<Collider>();
-    Collider NearestDamagingWeapon;
-    
+    Collider NearestDamagingWeapon;    
     Data_Center SelfDataCenter;
-
+    
     public bool IFContinuousDetectionStarted()
     {
         return continuousDetection;
     }
-
+    
     public void SetDectectLayer(TeamConfig teamConfig,Data_Center _self)
     {
         _TeamConfig = teamConfig;
@@ -40,7 +38,7 @@ public class Sensor : MonoBehaviour {
         }
         SelfDataCenter = _self;
     }
-
+    
     public Collider GetTargetRangeEnemyCollider(float min, float max)
     {
         for (int i = 0; i < detectedEnemies.Count; i++)

@@ -59,7 +59,6 @@ public class SkillCancelFlag : MonoBehaviour {
     public void turn_on_flag()
     {
         _C.Sensor.ContinuousDetectionStart(-1);
-        _C.bO_Weapon_Animation_Events.ClearMarkerManagers();//????????
         Cancel_Flag = true;
     }
 

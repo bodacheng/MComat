@@ -56,7 +56,7 @@ public partial class Animation_Manger : MonoBehaviour
     {
         PlayLayerAnim_clip(clip,in_Transition,Duration);
     }
-
+    
     AnimatorStateInfo AnimatorStateInfo;
     AnimatorOverrideController animatorOverride;
     
@@ -74,7 +74,6 @@ public partial class Animation_Manger : MonoBehaviour
                 animatorOverride[to_be_override_animation_name] = TryAnimationClip(clip_name);
                 Animator.CrossFade("full_body_state1", Duration);
             }else{
-
             }
         }
         else
