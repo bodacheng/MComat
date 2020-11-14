@@ -18,62 +18,12 @@ public partial class Animation_Manger : MonoBehaviour{
             foreach (UnityEngine.Object _object in basicAnimsObject)
             {
                 AnimationClip _AnimationClip = (AnimationClip)_object;
-                if (_AnimationClip.name == "rush")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "rush",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "rushback")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "rushback",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "getup")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "getup",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "block")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "block",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "block_break")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "block_break",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
                 basicAnims.Add(_AnimationClip);
             }
             AnimationResourceLoader.SeriesAnimationClipsDic.Add(basicPackKey, basicAnims);
             Debug.Log("基础动画包"+basicPackKey + "已经加入了defaultPools.SeriesAnimationClipsDic公用字典");
         }
-
+        
         toLoadAnims = new Dictionary<string, AnimationClip>();        
         foreach (AnimationClip _AnimationClip in basicAnims)
         {

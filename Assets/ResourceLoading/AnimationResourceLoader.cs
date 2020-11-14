@@ -55,56 +55,6 @@ public class AnimationResourceLoader
             _AnimationClip = assetBundle.LoadAsset<AnimationClip>(_oneAssetName);
             if (_AnimationClip != null)
             {
-                if (_AnimationClip.name == "rush")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "rush",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "rushback")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "rushback",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "getup")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "getup",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "block")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "block",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
-                if (_AnimationClip.name == "block_break")
-                {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = "block_break",
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
-                }
                 clipList.Add(_AnimationClip);
             }
         }
@@ -138,13 +88,6 @@ public class AnimationResourceLoader
             readingBundle.Unload(false);
             if (!AnimationClipDic.ContainsKey(dic_key))
             {
-                AnimationEvent endFlag = new AnimationEvent
-                {
-                    functionName = "ThisIsEndOfAnimation",
-                    stringParameter = _AnimationClip.name,
-                    time = _AnimationClip.length
-                };
-                _AnimationClip.AddEvent(endFlag);
                 AnimationClipDic.Add(dic_key,_AnimationClip);
             }
             else
@@ -184,36 +127,6 @@ public class AnimationResourceLoader
                 _AnimationClip = readingBundle.LoadAsset<AnimationClip>(_oneAssetName);
                 if (_AnimationClip != null)
                 {
-                    if (_AnimationClip.name == "rush")
-                    {
-                        AnimationEvent endFlag = new AnimationEvent
-                        {
-                            functionName = "ThisIsEndOfAnimation",
-                            stringParameter = _AnimationClip.name,
-                            time = _AnimationClip.length
-                        };
-                        _AnimationClip.AddEvent(endFlag);
-                    }
-                    if (_AnimationClip.name == "rushback")
-                    {
-                        AnimationEvent endFlag = new AnimationEvent
-                        {
-                            functionName = "ThisIsEndOfAnimation",
-                            stringParameter = _AnimationClip.name,
-                            time = _AnimationClip.length
-                        };
-                        _AnimationClip.AddEvent(endFlag);
-                    }
-                    if (_AnimationClip.name == "getup")
-                    {
-                        AnimationEvent endFlag = new AnimationEvent
-                        {
-                            functionName = "ThisIsEndOfAnimation",
-                            stringParameter = _AnimationClip.name,
-                            time = _AnimationClip.length
-                        };
-                        _AnimationClip.AddEvent(endFlag);
-                    }
                     if (!clipList.Contains(_AnimationClip))
                         clipList.Add(_AnimationClip);
                 }
@@ -259,13 +172,6 @@ public class AnimationResourceLoader
                 readingBundle.Unload(false);
                 if (!AnimationClipDic.ContainsKey(clipkey))
                 {
-                    AnimationEvent endFlag = new AnimationEvent
-                    {
-                        functionName = "ThisIsEndOfAnimation",
-                        stringParameter = _AnimationClip.name,
-                        time = _AnimationClip.length
-                    };
-                    _AnimationClip.AddEvent(endFlag);
                     AnimationClipDic.Add(clipkey, _AnimationClip);
                 }
                 else
@@ -300,13 +206,6 @@ public class AnimationResourceLoader
             else
             {
                 AnimationClip theclip = (AnimationClip)_object;
-                AnimationEvent endFlag = new AnimationEvent
-                {
-                    functionName = "ThisIsEndOfAnimation",
-                    stringParameter = theclip.name,
-                    time = theclip.length
-                };
-                theclip.AddEvent(endFlag);
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
@@ -317,13 +216,6 @@ public class AnimationResourceLoader
                 Debug.Log("严重错误 技能动画key重复："+clipkey);
             else{
                 AnimationClip theclip = (AnimationClip)_object;
-                AnimationEvent endFlag = new AnimationEvent
-                {
-                    functionName = "ThisIsEndOfAnimation",
-                    stringParameter = theclip.name,
-                    time = theclip.length
-                };
-                theclip.AddEvent(endFlag);
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
@@ -334,13 +226,6 @@ public class AnimationResourceLoader
                 Debug.Log("严重错误 技能动画key重复："+clipkey);
             else{
                 AnimationClip theclip = (AnimationClip)_object;
-                AnimationEvent endFlag = new AnimationEvent
-                {
-                    functionName = "ThisIsEndOfAnimation",
-                    stringParameter = theclip.name,
-                    time = theclip.length
-                };
-                theclip.AddEvent(endFlag);
                 AnimationClipDic.Add(clipkey, theclip);
             }
         }
