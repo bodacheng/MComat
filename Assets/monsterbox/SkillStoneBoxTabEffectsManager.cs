@@ -64,18 +64,19 @@ namespace mainMenu
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }
         }
-
+        
         void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
         {
             _focusingButtonEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
-
-        public void SkillButtonExplosion(int splevel, Vector3 targetPOS)
+        
+        public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)
         {
             ParticleSystem pressedExplosion = _focusingButtonEffectsGroup.buttonPressedEffects.ContainsKey(splevel) ?
             _focusingButtonEffectsGroup.buttonPressedEffects[splevel] : triggerExplosion0;
             pressedExplosion.transform.position = targetPOS;
             pressedExplosion.Play();
+            pressedExplosion.transform.SetParent(parent);
         }
     }
 }

@@ -175,9 +175,8 @@ namespace mainMenu
             yield return (TheNineSlot.target.StartUp());
             LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.7f);
             yield return _SelfFightManager.INITeamPosButtons();
-                        
             yield return MonsterBox.DisplayMonsterIcons();//这个进程会先找到所有角色的头像。
-
+            
             HurtObjectManager.ConstructDPool();
             
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
@@ -213,7 +212,7 @@ namespace mainMenu
             LoadingCanvas.target.NowProcess("Finished", 1f);
             LoadingCanvas.target.TurnOnProcessDescription(false);
         }
-
+        
         void Update()
         {
             ProcessesRunner.Main.ProcessNagare();

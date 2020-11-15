@@ -74,7 +74,7 @@ namespace mainMenu
         // Button feature
         public void NormalTabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 0;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -82,7 +82,7 @@ namespace mainMenu
         // Button feature
         public void EX1TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 1;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -90,7 +90,7 @@ namespace mainMenu
         // Button feature
         public void EX2TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 2;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }
@@ -98,7 +98,7 @@ namespace mainMenu
         // Button feature
         public void EX3TabFeature(GameObject self)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3));
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 3;
             TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
         }

@@ -109,7 +109,7 @@ namespace mainMenu
                 IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
-                SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position);
+                SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position, transform);
             }
             _button.onClick.AddListener(showSkillInfo);
         }

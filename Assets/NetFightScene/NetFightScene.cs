@@ -119,7 +119,7 @@ namespace FightScene
             FSceneProcessesRunner.Main.ProcessNagare();
             TutorialRunner.Main.ProcessNagare();
         }
-
+        
         // 本地系函数
         public void PressedStartButton()
         {
