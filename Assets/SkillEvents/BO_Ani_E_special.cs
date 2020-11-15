@@ -83,7 +83,7 @@ public partial class BO_Ani_E : MonoBehaviour
                     Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.myMagicForwardPath, Ani_E.magic_path);
                     break;
             }
-
+            
             Ani_E.processingHitBox = Ani_E.target_pool.Rent();
             Ani_E.processingHitBox._HitBox.SetOwnerFACR(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;

@@ -25,12 +25,10 @@ public class StageScriptableObject : ScriptableObject
     public PlayableAsset beforefightstory;
     [SerializeField]
     public TextAsset Script;
-    
     [SerializeField]
     public Sprite StageButtonSprite;
     
     public LocalFight localFight = new LocalFight();
-    
     public int stageLevel = 1;
     public float Team1HpRate = 1f;
     public float Team2HpRate = 1f;
@@ -38,13 +36,12 @@ public class StageScriptableObject : ScriptableObject
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
     public TeamMode Team1Mode = TeamMode.multiraid;
     public TeamMode Team2Mode = TeamMode.multiraid;
-
+    
     #if UNITY_EDITOR
     [MenuItem ("Stage/Create StageScriptEditor")]
     static void CreateExampleAsset ()
     {
         var exampleAsset = CreateInstance<StageScriptableObject> ();
-        
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
         AssetDatabase.Refresh();
     }
@@ -108,8 +105,6 @@ public enum CriticalGaugeMode
     Unlimited
 }
 
-// 这个东西是用来规定我每一场战斗结束之后所自动加载的事件
-// 其实相当程度上说这个也决定了每一个关卡的event类型。
 // 系统会根据这个量来决定一场战斗结束后应该做什么。
 // 比如一个剧情战斗，他结束了后应该是播放某个动画片，
 // 再比如是自己打自己的一个战斗，结束后回到的应该是那个自己打自己的选人菜单。
