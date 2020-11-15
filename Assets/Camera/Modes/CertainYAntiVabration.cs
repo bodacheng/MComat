@@ -6,7 +6,7 @@ class CertainYAntiVabration : CameraMode
     Vector3 enemiescenter;//敌人的位置中心
     Quaternion ToRotation;//目标相机旋角
     Vector3 rotateToDirection;
-    
+    Vector3 temp;
     Vector2 mescreenpos;
     Vector2 enemyscreenpos;
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
@@ -79,7 +79,11 @@ class CertainYAntiVabration : CameraMode
         //CameraTargetPos.y = Mathf.Clamp(YDis - angele / 180 * 10f, 6f,7f);//夹角越大，相机越低。夹角小说明两个角色在画面里一上一下，更俯视一些会看的更方便。
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, CameraTargetPos, Time.deltaTime / (0.2f + Time.deltaTime));//上下这两部分都是分母里那个附加值越大，变得越慢。
 
-        rotateToDirection = (meCenter.position + Vector3.up * 2f) - CameraTargetPos;
+        temp = (meCenter.position + Vector3.up * 2f);
+        h = Mathf.Clamp(temp.y, 1f, 8f);
+        temp = new Vector3(temp.x, h, temp.z);
+
+        rotateToDirection = temp - CameraTargetPos;
         ToRotation = Quaternion.LookRotation(rotateToDirection.normalized);
         _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, ToRotation, (Time.deltaTime) / (0.2f + Time.deltaTime));
     }

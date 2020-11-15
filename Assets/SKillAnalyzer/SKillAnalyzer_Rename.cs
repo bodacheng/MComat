@@ -52,10 +52,10 @@ public partial class SKillAnalyzer : MonoBehaviour
             }
             if (changed)
             {
-                AnimationClip toSave = Instantiate(animationClip);
-                AnimationUtility.SetAnimationEvents(toSave, evnets.ToArray());
-                AssetDatabase.CreateAsset(toSave, AssetDatabase.GetAssetPath(_clip));
-                AssetDatabase.SaveAssets();
+                //AnimationClip toSave = Instantiate(animationClip);
+                //AnimationUtility.SetAnimationEvents(toSave, evnets.ToArray());
+                //AssetDatabase.CreateAsset(toSave, AssetDatabase.GetAssetPath(_clip));
+                //AssetDatabase.SaveAssets();
             }
         }
     }

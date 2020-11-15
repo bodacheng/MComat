@@ -13,10 +13,17 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
             OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.LevelUp, aferlevel);
         }
     }
-    
-    public static void SeletedRender(SKStoneItem item ,GameObject _Selected)
+
+    public static void SeletedRender(SKStoneItem item, GameObject _Selected)
     {
-        StoneCell cell = item.GetCell();
-        StoneCell.SeletedRender(cell, _Selected);
+        if (item != null)
+        {
+            StoneCell cell = item.GetCell();
+            StoneCell.SeletedRender(cell, _Selected);
+        }
+        else
+        {
+            StoneCell.SeletedRender(null, _Selected);
+        }
     }
 }

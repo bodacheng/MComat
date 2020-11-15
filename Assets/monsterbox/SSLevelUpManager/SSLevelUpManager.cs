@@ -166,7 +166,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
         target._MSkillStoneDetail.Clear();
     }
-    
+
     public void CloseLevelUpPage()
     {
         _Selected.gameObject.SetActive(false);
