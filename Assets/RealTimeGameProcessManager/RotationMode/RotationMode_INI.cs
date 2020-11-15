@@ -20,7 +20,7 @@ namespace FightScene
                 a_char.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
                 a_char.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
-                    RefreshExBar(a_char, x, 90);
+                    RefreshExBar(a_char, x, 120);
                 });
                 
                 a_char.IsDead = new ReactiveProperty<bool>(false);

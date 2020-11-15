@@ -49,8 +49,6 @@ public class FightGlobalSetting : MonoBehaviour
     public static int _Sp1SkillExGet;
     public static int _Sp2SkillExGet;
     public static int _Sp3SkillExGet;
-    public static float _GetExAfterDamageBy;
-    public static int _ExGetAfterDamage;
     public static float _slighthit_lastingtime, _lighthit_lastingtime, _heavyhit_lastingtime, _superhit_lastingtime;
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
@@ -118,10 +116,7 @@ public class FightGlobalSetting : MonoBehaviour
         _Sp1SkillExGet = Sp1SkillExGet;
         _Sp2SkillExGet = Sp2SkillExGet;
         _Sp3SkillExGet = Sp3SkillExGet;
-
-        _GetExAfterDamageBy = GetExAfterDamageBy;
-        _ExGetAfterDamage = ExGetAfterDamage;
-
+        
         _slighthit_lastingtime = slighthit_lastingtime;
         _lighthit_lastingtime = lighthit_lastingtime;
         _heavyhit_lastingtime = heavyhit_lastingtime;

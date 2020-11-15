@@ -1884,11 +1884,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AT_coefficient: 1
-  HP_coefficient: 0.5
-  NormalSkillExGet: 20
-  Sp1SkillExGet: 15
-  Sp2SkillExGet: 10
-  Sp3SkillExGet: 5
+  HP_coefficient: 1
+  NormalSkillExGet: 15
+  Sp1SkillExGet: 0
+  Sp2SkillExGet: 0
+  Sp3SkillExGet: 0
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
   slighthit_lastingtime: 0.2

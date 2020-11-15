@@ -4,14 +4,10 @@ using UniRx;
 public partial class FightAttriCalReference : MonoBehaviour
 {
     public ReactiveProperty<int> CriticalGauge { get; set; } = new ReactiveProperty<int>();
-    //{
-    //    get => critical_gauge;
-    //    set => critical_gauge = Mathf.Clamp(value, 0, 100);
-    //}
-    
+        
     public void PlusEx(int add)
     {
-        CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0, 90);
+        CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0, 120);
     }
     
     public void CostCriticalGaugeBySPlevel(int level)
@@ -33,7 +29,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             break;
         }
     }
-
+    
     public bool HasPlentyGauge(int splevel)
     {
         switch (splevel)

@@ -12,6 +12,7 @@ using Skill;
 // 并且留下了一些问题：必须重新权衡此类攻击的AI进入范围，对整个系统的距离分段也要重新衡量，以及本状态的进入冲刺距离也都要重新仔细考虑。
 
 public class G_Attack_State : Behavior {
+
     readonly string clip_name;
     readonly string dash_clip_name;
     readonly int _skillEmergentLevel;
@@ -34,9 +35,8 @@ public class G_Attack_State : Behavior {
         reached = 3,
         reachedFromThebeginning = 4
     }
-
-    #region Constructor
     
+    #region Constructor
     public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, float approachingSpeed, string clip_name)
     {
         this.rushSpeed = rushSpeed;

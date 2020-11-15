@@ -37,7 +37,7 @@ namespace Soul
         protected bool AbsorbEnergyFinished;
 
         int temp;
-        public void EnergyAbsorb(CriticalGaugeMode gaugeMode)
+        public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightAttriCalReference victim)
         {
             if (!AbsorbEnergyFinished)
             {
@@ -57,6 +57,7 @@ namespace Soul
                     break;
                 }
                 
+                victim.PlusEx(temp + 5);
                 switch(gaugeMode)
                 {
                     case CriticalGaugeMode.doubleGain:

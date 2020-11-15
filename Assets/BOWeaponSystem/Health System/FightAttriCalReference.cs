@@ -35,24 +35,10 @@ public partial class FightAttriCalReference : MonoBehaviour
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
     
     public bool Invincible { get; set; }
-    
-    // 所收到的总伤害，用于处理受伤所获得ex槽
-    float DamageToEx {
-        get => DamgeGotExCounter; 
-        set {
-            DamgeGotExCounter = value;
-            while (DamgeGotExCounter >= FightGlobalSetting._GetExAfterDamageBy)
-            {
-                DamgeGotExCounter -= FightGlobalSetting._GetExAfterDamageBy;
-                PlusEx(FightGlobalSetting._ExGetAfterDamage);
-            }
-        }
-    }
-    
+        
     public void INI()
     {
         CurrentHp = new ReactiveProperty<float>();
-        DamageToEx = 0;
     }
     
     public void SetGettingDamageState(bool _state)
@@ -201,14 +187,13 @@ public partial class FightAttriCalReference : MonoBehaviour
             return;
         }
         
-        _dmg.attacker.HitCountPlus();
+        _dmg.attacker.HitCountPlus(this);
         _ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
         
         _d = _dmg.from_weapon.GetDamageAmount();
         if (!Invincible)
             CurrentHp.Value -= _d;
-        DamageToEx += _d;
         if (CurrentHp.Value <= 0)
         {
             _Center._MyBehaviorRunner.ChangeState("Death", _dmg);
@@ -226,7 +211,8 @@ public partial class FightAttriCalReference : MonoBehaviour
         _dmg.from_weapon.HitBoxLifeEnding = HitBoxLifeEnding.successed;
     }
     
-    public void HitCountPlus()
+    // 打别人计数
+    public void HitCountPlus(FightAttriCalReference victim)
     {
         _ComboHitCount.HitCountPlus(_BeHitCount);
         _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
@@ -236,8 +222,8 @@ public partial class FightAttriCalReference : MonoBehaviour
             }
         );
         _Center._MyBehaviorRunner.SingleFightLog.AnalysisLog(_Center._MyBehaviorRunner.ConditionAndRespondPriority);
-        _Center._MyBehaviorRunner.GetNowState().EnergyAbsorb(criticalGaugeMode);
-    }//打别人计数
+        _Center._MyBehaviorRunner.GetNowState().EnergyAbsorb(criticalGaugeMode, victim);
+    }
     
     public int GetBeHitCount() => _BeHitCount.GetBeHitCount(); //自己被揍计数
     
@@ -287,25 +273,25 @@ public partial class FightAttriCalReference : MonoBehaviour
     }
     
     Color damagecolor;
-    public void RunShaderChangeProcess(string magicKind, float time)
+    public void RunShaderChangeProcess(Zokusei zokusei, float time)
     {
         if (_Center._ShaderManager != null)
         {
-            switch (magicKind)
+            switch (zokusei)
             {
-                case "redMagic":
+                case Zokusei.redMagic:
                     damagecolor = Color.red;
                     break;
-                case "blueMagic":
+                case Zokusei.blueMagic:
                     damagecolor = Color.blue;
                     break;
-                case "greenMagic":
+                case Zokusei.greenMagic:
                     damagecolor = Color.green;
                     break;
-                case "darkMagic":
+                case Zokusei.darkMagic:
                     damagecolor = new Color(1f, 0f, 1f);
                     break;
-                case "lightMagic":
+                case Zokusei.lightMagic:
                     damagecolor = new Color(0f, 1f, 1f);
                     break;
                 default:

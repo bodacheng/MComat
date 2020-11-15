@@ -127,7 +127,7 @@ public partial class Hurt_State : Behavior {
         
         if (target.from_weapon.effectSpreadOnBody)
         {
-            _FightAttriCalRef.RunShaderChangeProcess(FightGlobalSetting.EffectPathDefine(target.from_weapon.zokusei), 0.1f);
+            _FightAttriCalRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
         }
         
         if (_FightAttriCalRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
