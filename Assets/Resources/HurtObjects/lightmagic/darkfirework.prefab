@@ -7,6 +7,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3192319184569957890, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: zokusei
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5851485357143169755, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
@@ -25,17 +60,17 @@ PrefabInstance:
     - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: TrailModule.colorOverTrail.maxColor.r
-      value: 1
+      value: 0.5943396
       objectReference: {fileID: 0}
     - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: TrailModule.colorOverTrail.maxColor.g
-      value: 0.9800461
+      value: 0.5943396
       objectReference: {fileID: 0}
     - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: TrailModule.colorOverTrail.maxColor.b
-      value: 0
+      value: 0.5943396
       objectReference: {fileID: 0}
     - target: {fileID: 5857319742154606299, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}

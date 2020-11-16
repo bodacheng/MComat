@@ -4794,6 +4794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
   SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 3
@@ -4803,6 +4804,9 @@ MonoBehaviour:
   effectSpreadOnBody: 0
   zokusei: 0
   muzzle: 
+  ExplosionEffect: slash_hit
+  ContinuousDamage: 0
+  ContinuousDamageInterval: 0.2
 --- !u!114 &2986065017533419536
 MonoBehaviour:
   m_ObjectHideFlags: 0

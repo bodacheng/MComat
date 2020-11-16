@@ -7,6 +7,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3192319184569957890, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: zokusei
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 0.47450984
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.g
+      value: 0.6638847
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.2980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.71965444
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 0.30588233
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.b
+      value: 0.952974
+      objectReference: {fileID: 0}
     - target: {fileID: 6049798670193411119, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: m_Name

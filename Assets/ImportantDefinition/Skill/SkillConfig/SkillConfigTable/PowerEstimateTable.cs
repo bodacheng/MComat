@@ -35,7 +35,7 @@ public class PowerEstimateTable
     {
         List<SkillConfig> SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         IDictionary<string, AnimationClip> AnimDic = SKillAnalyzer.AllSkillAnims(type);
-        Save(Application.persistentDataPath + "/技能总伤害预估.csv", SkillConfigs, AnimDic);
+        Save(Application.persistentDataPath + "/PowerEstimateTable.csv", SkillConfigs, AnimDic);
     }
     
     public static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
