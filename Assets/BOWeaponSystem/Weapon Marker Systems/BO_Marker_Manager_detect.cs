@@ -343,6 +343,9 @@ namespace HittingDetection
             }
             if (!(zokusei == Zokusei.Null && _WeaponMode == WeaponMode.EnergyFromBodyWeapon)) // 不希望普攻hitbox有能量消逝火花
                 EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.pos, hitPointPara.qua, null);
+            else{
+                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.pos, hitPointPara.qua, null);
+            }
         }
         
         void WeaponEnergyExaust()
