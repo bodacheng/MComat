@@ -4832,7 +4832,7 @@ MonoBehaviour:
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
   DestructionDelay: 2
-  stop_emission_delay: 0.8
+  stop_emission_delay: 0.5
   to_be_faded_renderers: []
   audioSource: {fileID: 2051349265028375027}
   Attachments: []
@@ -4849,6 +4849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a48db1ed15426469ef2ac2ae741ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivateAfterTime: 0
   SpecificTarget: 0
   damage_type: 8
   _WeaponMode: 3
@@ -4858,6 +4859,9 @@ MonoBehaviour:
   effectSpreadOnBody: 1
   zokusei: 0
   muzzle: 
+  ExplosionEffect: energy_resolve
+  ContinuousDamage: 0
+  ContinuousDamageInterval: 0.2
 --- !u!82 &2051349265028375027
 AudioSource:
   m_ObjectHideFlags: 0

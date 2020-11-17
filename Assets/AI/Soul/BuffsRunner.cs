@@ -2,10 +2,12 @@
 using UnityEngine;
 
 public class BuffsRunner : MonoBehaviour
-{
+{    
     #region 自定义携程
     public readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
     readonly List<CustomCoroutine> endedcustomCoroutines = new List<CustomCoroutine>();
+
+    public bool Freesing { get; set; } = false;
     #endregion
 
     public void RunSubCoroutineOfState(CustomCoroutine _Coroutine)

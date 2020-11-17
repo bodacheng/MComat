@@ -91,7 +91,6 @@ public class Defend_State : Behavior
         //defendHP = FightGlobalSetting._defendHP;
         base.AI_State_enter();
         freezed = false;
-        _Rigidbody.mass = 60;
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);
@@ -108,7 +107,6 @@ public class Defend_State : Behavior
     {
         base.AI_State_enter();
         freezed = false;
-        _Rigidbody.mass = 80;
         _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
         _Weapon_Animation_Events.ClearMarkerManagers();
         Sensor.ContinuousDetectionStart(-1);

@@ -81,6 +81,7 @@
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_PushMid.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Sekka.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Slight.cs" />
+    <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Stable.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Super.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_TimePause.cs" />
     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_draw.cs" />

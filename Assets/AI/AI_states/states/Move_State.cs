@@ -52,6 +52,7 @@ public class Move_State : Behavior
         Animation_Manger.PlayLayerAnim(null, true, 0.05f);
         pEvents.CloseAllPersonalityEffects();
         mainCam = CameraManager._camera.transform;
+        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
     }
 

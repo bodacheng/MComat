@@ -44,6 +44,9 @@ namespace HittingDetection
                 case 3:
                     damageType = DamageType.supper_damage_forward;
                     break;
+                case 4:
+                    damageType = DamageType.stable_damage;
+                    break;
                 case 5:
                     damageType = DamageType.draw;
                     break;
@@ -83,6 +86,7 @@ namespace HittingDetection
                 case DamageType.slight_damage_forward:
                     return 0;
                 case DamageType.light_damage_forward:
+                case DamageType.stable_damage:
                     return 1;
                 case DamageType.heavy_damage_forward:
                 case DamageType.same_height_to_mid:

@@ -293,6 +293,7 @@ public partial class BO_Ani_E : MonoBehaviour
         public void Flash(Vector3 targetpos)
         {
             Vector3 StartToEnd = targetpos - Ani_E.transform.position;
+            StartToEnd.y = 0;
             EffectsManager.GenerateEffect("FlashStart", Ani_E.magic_path, Ani_E._DATA_CENTER.geometryCenter.position, Quaternion.LookRotation(StartToEnd, Vector3.up), null);
             Ani_E.transform.position = targetpos;
             EffectsManager.GenerateEffect("FlashEnd", Ani_E.magic_path, Ani_E._DATA_CENTER.geometryCenter.position, Quaternion.LookRotation(-StartToEnd, Vector3.up), null);

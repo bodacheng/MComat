@@ -51,39 +51,33 @@ public partial class Hurt_State : Behavior {
     public override void AI_State_exit()
     {
         base.AI_State_exit();
-        switch (target.from_weapon.damage_type)
-        {
-            case DamageType.time_pause:
-            case DamageType.sekka:
-                Animation_Manger.Speed = 1;
-                shaderManager.FlatColor(0, Color.white);
-            break;
-        }
-        _Rigidbody.mass = 100;
+        _FightAttriCalRef.SetGettingDamageState(false);   
         if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
             physicMissionDisposable.Dispose();
+        if (_BuffsRunner.Freesing)
+            goto B;
+
+        _Rigidbody.mass = 100;
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        _FightAttriCalRef.SetGettingDamageState(false);
         _BasicPhysicSupport.SetUsingGravity(true);
+        B:;
     }
     
     public override void AI_State_enter(V_Damage newValue)
 	{
-        if (_AIStateRunner.GetLastState().StateType == Skill.BehaviorType.Hit && target.from_weapon.damage_type == DamageType.time_pause)
-        {
-            TimePauseStart();
-            return;
-        }
-        
         target = newValue;
         base.AI_State_enter();
-        _Rigidbody.mass = 80;
         _Animator.applyRootMotion = false;
         _FightAttriCalRef.SetGettingDamageState(true);
         _Weapon_Animation_Events.ClearMarkerManagers();
         _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
         TimeCounter = 0f;
         pEvents.CloseAllPersonalityEffects();
+        _Rigidbody.mass = 80;
+        
+        if (_BuffsRunner.Freesing)
+            goto B;
+        
         switch (target.from_weapon.damage_type)
         {
             case DamageType.slight_damage_forward:
@@ -139,6 +133,11 @@ public partial class Hurt_State : Behavior {
         
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
+
+        B:;
+        
+        if (target.from_weapon.damage_type == DamageType.stable_damage)
+            StableDamgeStart(target);
     }
     
     public override void _State_FixedUpdate1()
