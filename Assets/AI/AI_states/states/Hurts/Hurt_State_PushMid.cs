@@ -32,7 +32,5 @@ public partial class Hurt_State : Behavior
             }
         );
         gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
-        _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);
-        _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
     }
 }

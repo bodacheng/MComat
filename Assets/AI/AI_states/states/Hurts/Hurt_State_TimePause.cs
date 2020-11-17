@@ -16,8 +16,6 @@ public partial class Hurt_State : Behavior
             Animation_Manger.Speed = 0;
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             shaderManager.FlatColor(0.5f, gold);
-            _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);
-            _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
         };
         pasueend = () =>
         {

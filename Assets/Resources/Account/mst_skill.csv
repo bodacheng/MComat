@@ -44,11 +44,11 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,SP_
 43,forwardblade,human,2,5,GR,1,,2
 44,frictionkick,human,2,5,GR,1,,3
 45,f_rushpuch,human,2,5,GR,1,,2
-46,horiblade,human,1,5,GR,1,,2
-47,jiancepunch,human,1,5,GR,1,,2
-48,chargepunch,human,1,5,GR,1,,2
-49,lift,human,2,5,GR,0,,1
-50,push,human,1,5,GR,1,,2
+46,horiblade,human,2,5,GR,1,,2
+47,jiancepunch,human,2,5,GR,1,,2
+48,chargepunch,human,2,5,GR,1,,2
+49,lift,human,1,5,GR,0,,1
+50,push,human,4.5,5,GR,1,,2
 51,gyrokick,human,1,5,GR,1,,2
 52,highkick,human,1,5,GR,1,,1
 53,dropkick,human,2,5,GR,0,,1

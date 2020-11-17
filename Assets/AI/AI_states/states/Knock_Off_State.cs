@@ -30,7 +30,7 @@ public class Knock_Off_State : Behavior
         dropped = false;
         canWakeUp = false;
         _BasicPhysicSupport.SetUsingGravity(false);
-        _FightAttriCalRef.SetGettingDamageState(true);
+        _FightAttriCalRef.Gettingdamage = true;
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;
         _Weapon_Animation_Events.ClearMarkerManagers();
@@ -54,7 +54,7 @@ public class Knock_Off_State : Behavior
         base.AI_State_exit();
         _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _BasicPhysicSupport.SetUsingGravity(true);
-        _FightAttriCalRef.SetGettingDamageState(false);
+        _FightAttriCalRef.Gettingdamage = false;
         _SkillCancelFlag.turn_off_flag();
     }
     

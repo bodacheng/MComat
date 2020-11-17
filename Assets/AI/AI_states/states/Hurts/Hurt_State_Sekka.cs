@@ -12,9 +12,6 @@ public partial class Hurt_State : Behavior
             _BuffsRunner.Freesing = true;
             Animation_Manger.Speed = 0;
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-            shaderManager.FlatColor(0.5f, gold);
-            _FightAttriCalRef.GetKnockOffCount().PlusGauge(3f);
-            _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
         };
         pasueend = () =>
         {
@@ -23,7 +20,15 @@ public partial class Hurt_State : Behavior
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _BuffsRunner.Freesing = false;
         };
-        pasueCoroutine = new CustomCoroutine(pasuestart, FightGlobalSetting._superhit_lastingtime * 2, pasueend);
+        pasueCoroutine = new CustomCoroutine(
+            pasuestart,
+            FightGlobalSetting._superhit_lastingtime * 2,
+            () =>
+            {
+                // 被其他种类攻击打一下接着石化就中止
+                return this.target.from_weapon.damage_type != HittingDetection.DamageType.sekka;
+            },
+            pasueend);
         _BuffsRunner.RunSubCoroutineOfState(pasueCoroutine);
         
         switch(zokusei)

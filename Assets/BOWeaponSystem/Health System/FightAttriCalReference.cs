@@ -21,7 +21,6 @@ public partial class FightAttriCalReference : MonoBehaviour
     KnockOffCount _knockOffCount = new KnockOffCount();
     BeHitCount _BeHitCount = new BeHitCount();    
     V_Damage deathknockOff;
-    bool gettingdamage;
     List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();//713添加
     List<E_Damage> Event_Damage_List = new List<E_Damage>();
     List<V_Damage> ICauseDamages = new List<V_Damage>();
@@ -35,21 +34,13 @@ public partial class FightAttriCalReference : MonoBehaviour
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
     
     public bool Invincible { get; set; }
-        
+    public bool Gettingdamage { get; set; }
+
     public void INI()
     {
         CurrentHp = new ReactiveProperty<float>();
     }
     
-    public void SetGettingDamageState(bool _state)
-    {
-        gettingdamage = _state;
-    }
-    public bool IFgettingDamage()
-    {
-        return gettingdamage;
-    }
-
     public void HealthBodyFixedUpdate()
     {
         _knockOffCount.Update();

@@ -6,7 +6,7 @@ public class BuffsRunner : MonoBehaviour
     #region 自定义携程
     public readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
     readonly List<CustomCoroutine> endedcustomCoroutines = new List<CustomCoroutine>();
-
+    
     public bool Freesing { get; set; } = false;
     #endregion
 
@@ -79,7 +79,7 @@ public class CustomCoroutine
         timecounter = 0;
     }
     
-    public CustomCoroutine(UnityEngine.Events.UnityAction startaction, float processtime, EndConditionDelegate c ,UnityEngine.Events.UnityAction endaction)
+    public CustomCoroutine(UnityEngine.Events.UnityAction startaction, float processtime, EndConditionDelegate c, UnityEngine.Events.UnityAction endaction)
     {
         this.startaction = startaction;
         this.processtime = processtime;
@@ -103,30 +103,30 @@ public class CustomCoroutine
     {
         return timecounter >= processtime;
     }
-
+    
     public void CustomCoroutineTrigger()
     {
         processing = true;
         timecounter = 0;
         startaction.Invoke();
     }
-
+    
     public void EndCustomCoroutine()
     {
         endaction.Invoke();
         processing = false;
     }
-
+    
     public void CustomCoroutineProcess()
     {
         if (processing && !endCondition())
         {
             timecounter += Time.fixedDeltaTime;
-            if (endCondition())
-            {
-                processing = false;
-                endaction.Invoke();
-            }
+        }
+        if (endCondition())
+        {
+            processing = false;
+            endaction.Invoke();
         }
     }
     
