@@ -9,7 +9,7 @@ using UniRx;
 
 namespace mainMenu
 {
-    public class ArcadeManager : MonoBehaviour
+    public partial class ArcadeManager : MonoBehaviour
     {
         public Canvas _ArcadeCanvas;
         public RectTransform ButtonsContainer;
@@ -21,11 +21,11 @@ namespace mainMenu
         [Space(7)]
         [Header("ScrollRect")]
         public ScrollRect _ScrollRect;
-
+        
         [Space(7)]
         [Header("ViewScrollBar")]
         public Scrollbar _Scrollbar;
-
+        
         [Space(7)]
         [Header("StageButtonPretab")]
         public StageButton pretab;
@@ -33,7 +33,7 @@ namespace mainMenu
         [Space(7)]
         [Header("mini nineslot")]
         public NineForShow _NineForShow;
-
+        
         public static ArcadeManager target;
         //List<StageButton> stageButtons = new List<StageButton>();
 
@@ -139,31 +139,6 @@ namespace mainMenu
             MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
         }
         
-        public IEnumerator PageRefresh()
-        {
-             // 假设有100关，然后按钮应该是越往下拖关卡数越大，才能和JumpToNewest()堆起来
-            for (int i = 100; i > -1; i--)
-            {
-                if (!ArcadeStages.ContainsKey(i))
-                {
-                    continue;
-                }
-                ArcadeStages[i].stageButton.gameObject.SetActive(true);
-                ArcadeStages[i].stageButton.gameObject.transform.SetParent(ButtonsContainer);
-                ArcadeStages[i].stageButton.gameObject.transform.localScale = Vector3.one;
-            }
-            VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
-            ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * ArcadeStages.Count);
-            
-            JumpToNewStage.onClick.RemoveAllListeners();
-            JumpToNewStage.onClick.AddListener(JumpTo);
-
-            RefreshRender();
-            JumpTo();
-
-            yield break;
-        }
-        
         float CurrentTargetScrollbarValue()
         {
             float targetScrollbarValue;
@@ -201,15 +176,7 @@ namespace mainMenu
                 }
             }
         }
-        
-        public static void PreventStageButtonsFromDestroy()
-        {
-            foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
-            {
-                keyValuePair.Value.stageButton.transform.SetParent( ResourceKeeper.dontDestroyOnLoadParent);
-            }
-        }
-        
+                
         // Button feature
         public void BeginNewStage()
         {

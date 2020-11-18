@@ -17,10 +17,10 @@ public partial class SkillConfigTable
         public string RECORD_ID;
         public string REAL_NAME;
         public string USEABLE_MONSTER_TYPE;
+        public string SP_LEVEL;
         public string ATTACK_WEIGHT;
         public string HP_WEIGHT;
         public string ATTACK_TYPE;
-        public string SP_LEVEL;
         public string EVENT_CODE;
         public string RARITY_LEVEL;
     }
@@ -133,27 +133,24 @@ public partial class SkillConfigTable
                 grid[i][0] = "RECORD_ID";
                 grid[i][1] = "REAL_NAME";
                 grid[i][2] = "USEABLE_MONSTER_TYPE";
-                grid[i][3] = "ATTACK_WEIGHT";
-                grid[i][4] = "HP_WEIGHT";
-                grid[i][5] = "ATTACK_TYPE";
-                grid[i][6] = "SP_LEVEL";
-                grid[i][7] = "TRIGGER_DIS_MIN";
-                grid[i][8] = "TRIGGER_DIS_MAX";
-                grid[i][9] = "CONNATE_CODE";
-                grid[i][10] = "RARITY_LEVEL";
+                grid[i][3] = "SP_LEVEL";
+                grid[i][4] = "ATTACK_WEIGHT";
+                grid[i][5] = "HP_WEIGHT";
+                grid[i][6] = "ATTACK_TYPE";
+                grid[i][7] = "EVENT_CODE";
+                grid[i][8] = "RARITY_LEVEL";
             }
             else
             {
                 grid[i][0] = rowList[i - 1].RECORD_ID;
                 grid[i][1] = rowList[i - 1].REAL_NAME;
                 grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
-                grid[i][3] = rowList[i - 1].ATTACK_WEIGHT;
-                grid[i][4] = rowList[i - 1].HP_WEIGHT;
-                grid[i][5] = rowList[i - 1].ATTACK_TYPE;
-                grid[i][6] = rowList[i - 1].SP_LEVEL;
+                grid[i][3] = rowList[i - 1].SP_LEVEL;
+                grid[i][4] = rowList[i - 1].ATTACK_WEIGHT;
+                grid[i][5] = rowList[i - 1].HP_WEIGHT;
+                grid[i][6] = rowList[i - 1].ATTACK_TYPE;
                 grid[i][7] = rowList[i - 1].EVENT_CODE;
                 grid[i][8] = rowList[i - 1].RARITY_LEVEL;
-                    
                 if (!LegalStateType(rowList[i - 1].ATTACK_TYPE))
                 {
                     Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ rowList[i - 1].RECORD_ID);
@@ -185,16 +182,16 @@ public partial class SkillConfigTable
                     RECORD_ID = grid[i][0],
                     REAL_NAME = grid[i][1],
                     USEABLE_MONSTER_TYPE = grid[i][2],
-                    ATTACK_WEIGHT = grid[i][3],
-                    HP_WEIGHT = grid[i][4],
-                    ATTACK_TYPE = grid[i][5],
-                    SP_LEVEL = grid[i][6],
+                    SP_LEVEL = grid[i][3],
+                    ATTACK_WEIGHT = grid[i][4],
+                    HP_WEIGHT = grid[i][5],
+                    ATTACK_TYPE = grid[i][6],
                     EVENT_CODE = grid[i][7],
                     RARITY_LEVEL = grid[i][8]
                 };
-                if (!LegalStateType(grid[i][5]))
+                if (!LegalStateType(grid[i][6]))
                 {
-                    Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ rowList[i - 1].RECORD_ID);
+                    Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ grid[i][0]);
                 }
                 rowList.Add(row);
             }
