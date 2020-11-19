@@ -36,7 +36,7 @@ namespace mainMenu
         
         public static ArcadeManager target;        
         public static IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
-        SingleAssignmentDisposable autoHide;
+        SingleAssignmentDisposable autoCommand;
 
         int StageCount;
         
