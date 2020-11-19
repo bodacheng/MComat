@@ -160,6 +160,7 @@ namespace mainMenu
             
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
+            ArcadeManager.target.INIPagingSystem(2);
             
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();

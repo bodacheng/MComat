@@ -21,7 +21,6 @@ public class ArcadeFrontProcess : MainSceneProcess
             yield return ModelShower.target.ShowMyModel(null);
         }
         
-        yield return ArcadeManager.target.PageRefresh();
         ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
         loadFinished = true;
     }

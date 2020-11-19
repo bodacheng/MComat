@@ -527,7 +527,9 @@
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_ShowMode.cs" />
     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_StoneMerge.cs" />
     <Compile Include="Assets\StagesManagement\ArcadeManager\ArcadeManager.cs" />
-    <Compile Include="Assets\StagesManagement\ArcadeManager\Chapters.cs" />
+    <Compile Include="Assets\StagesManagement\ArcadeManager\Pages.cs" />
+    <Compile Include="Assets\StagesManagement\ArcadeManager\Pages_Chapter.cs" />
+    <Compile Include="Assets\StagesManagement\ArcadeManager\Pages_Mugen.cs" />
     <Compile Include="Assets\StagesManagement\LocalFight.cs" />
     <Compile Include="Assets\StagesManagement\QuestPreparePage\FightPreparePage.cs" />
     <Compile Include="Assets\StagesManagement\StageButton.cs" />

@@ -34,13 +34,12 @@ namespace mainMenu
         [Header("mini nineslot")]
         public NineForShow _NineForShow;
         
-        public static ArcadeManager target;
-        //List<StageButton> stageButtons = new List<StageButton>();
-
+        public static ArcadeManager target;        
         public static IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
-
         SingleAssignmentDisposable autoHide;
-                
+
+        int StageCount;
+        
         void Awake()
         {
             target = this;
@@ -102,33 +101,7 @@ namespace mainMenu
                     Debug.Log("重复的Arcade模式关卡ID："+ one.LocalFightID);
                 }
             }
-            
-            autoHide = new SingleAssignmentDisposable
-            {
-                Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                    {
-                        if (FightGlobalSetting.scenestep != 0 || JumpToNewStage.IsDestroyed() || JumpToNewStage == null || JumpToNewStage.gameObject == null)
-                        {
-                            autoHide.Dispose();
-                            return;
-                        }
-                        if (!JumpToNewStage.gameObject.activeSelf)
-                        {
-                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.1f)
-                            {
-                                JumpToNewStage.gameObject.SetActive(true);
-                            }
-                        }
-                        else
-                        {
-                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) <= 0.1f)
-                            {
-                                JumpToNewStage.gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                )
-            };
+            StageCount = ArcadeStages.Count;
         }
         
         public void IconButtonFeature(HeroIcon heroIcon)
@@ -139,28 +112,7 @@ namespace mainMenu
             MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
         }
         
-        float CurrentTargetScrollbarValue()
-        {
-            float targetScrollbarValue;
-            if (AccountSet._AccInfo.ArcadeProcess <= 3)
-            {
-                targetScrollbarValue = 0;
-            }else{
-                VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
-                // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
-                targetScrollbarValue = 
-                ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (AccountSet._AccInfo.ArcadeProcess - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
-                / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
-            }
-            return targetScrollbarValue;
-        }
-        
-        public void JumpTo()
-        {
-            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x, CurrentTargetScrollbarValue(), 0.5f);
-        }
-        
-        public void RefreshRender()
+        void RefreshRender()
         {
             foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
             {
@@ -176,37 +128,26 @@ namespace mainMenu
                 }
             }
         }
-                
-        // Button feature
-        public void BeginNewStage()
-        {
-            ArcadeStages.TryGetValue(AccountSet._AccInfo.ArcadeProcess, out StageInfo targetStage);
-            if (targetStage != null)
-            {
-                FightLoad.PreLoad(targetStage.stageConfig, TeamSetGameMode.story);
-                FightLoad.GoTo();
-            }
-        }
-               
-        // 等级升序降序
-        //readonly int order = 0;//0:升序 1:降序 //是否按type排序
-        //List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
-        //{
-        //    for (int i = 0; i < originBoxes.Count - 1; i++)
-        //    {
-        //        for (int j = 0; j < originBoxes.Count - 1 - i; j++)
-        //        {
-        //            int no1 = originBoxes[j].ID;
-        //            int no2 = originBoxes[j + 1].ID;
-        //            if (order == 1 ? no1 > no2 : no1 < no2)
-        //            {
-        //                StageButton temp = originBoxes[j];
-        //                originBoxes[j] = originBoxes[j + 1];
-        //                originBoxes[j + 1] = temp;
-        //            }
-        //        }
-        //    }
-        //    return originBoxes;
-        //}
     }
 }
+
+// 等级升序降序
+//readonly int order = 0;//0:升序 1:降序 //是否按type排序
+//List<StageButton> OrderStagesButtonByNo(List<StageButton> originBoxes)
+//{
+//    for (int i = 0; i < originBoxes.Count - 1; i++)
+//    {
+//        for (int j = 0; j < originBoxes.Count - 1 - i; j++)
+//        {
+//            int no1 = originBoxes[j].ID;
+//            int no2 = originBoxes[j + 1].ID;
+//            if (order == 1 ? no1 > no2 : no1 < no2)
+//            {
+//                StageButton temp = originBoxes[j];
+//                originBoxes[j] = originBoxes[j + 1];
+//                originBoxes[j + 1] = temp;
+//            }
+//        }
+//    }
+//    return originBoxes;
+//}
