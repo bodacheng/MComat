@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using dataAccess;
 using System.Collections;
 using UniRx;
@@ -110,23 +109,6 @@ namespace mainMenu
             MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
             // 显示技能组
             MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
-        }
-        
-        void RefreshRender()
-        {
-            foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
-            {
-                Image buttonImage = keyValuePair.Value.stageButton.GetComponent<Image>();
-                Animator buttonAnimator = keyValuePair.Value.stageButton.GetComponent<Animator>();
-                if (buttonAnimator != null)
-                    buttonAnimator.enabled = AccountSet._AccInfo.ArcadeProcess == keyValuePair.Key;
-                if (AccountSet._AccInfo.ArcadeProcess >= keyValuePair.Key)
-                {
-                    keyValuePair.Value.ChangeColorOfIcons(true);
-                }else{
-                    keyValuePair.Value.ChangeColorOfIcons(false);
-                }
-            }
         }
     }
 }

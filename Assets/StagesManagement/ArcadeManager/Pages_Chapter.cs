@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using DG.Tweening;
 using dataAccess;
 using UniRx;
 
@@ -24,6 +23,13 @@ namespace mainMenu
                             autoCommand.Dispose();
                             return;
                         }
+                        
+                        // 不可拖向太超前的关卡
+                        if (_Scrollbar.value > PageD(AccountSet._AccInfo.ArcadeProcess, StageCount) + (float) 0.5 / StageCount)
+                        {
+                            JumpTo(PageD(AccountSet._AccInfo.ArcadeProcess, StageCount));
+                        }
+                        
                         if (!JumpToNewStage.gameObject.activeSelf)
                         {
                             if (Mathf.Abs(PageD(AccountSet._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)

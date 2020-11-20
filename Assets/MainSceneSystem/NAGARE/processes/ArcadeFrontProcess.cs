@@ -12,6 +12,8 @@ public class ArcadeFrontProcess : MainSceneProcess
     {
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.5f, 0.1f);
         
+        ArcadeManager.target.INIPagingSystem(2);
+        
         if (ArcadeManager.ArcadeStages.ContainsKey(AccountSet._AccInfo.ArcadeProcess))
         {
             StageInfo StageInfo = ArcadeManager.ArcadeStages[AccountSet._AccInfo.ArcadeProcess];
