@@ -164,7 +164,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
-        target._MSkillStoneDetail.Clear();
     }
 
     public void CloseLevelUpPage()
@@ -201,6 +200,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 技能石升级画面更新。每调整一次目标等级画面都要随之更新
     public void RefreshSkillLevelUpModule()
     {
+        _MSkillStoneDetail.Clear();
         if (focusingSSD == null || stoneOfPlayerId == null)
         {
             Clear();
