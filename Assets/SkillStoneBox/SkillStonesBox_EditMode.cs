@@ -31,40 +31,6 @@ namespace mainMenu
                 }
             }
             
-            // 前往技能石升级画面
-            void PressGoToLevelUpPage()
-            {
-                pressCount = new SingleAssignmentDisposable
-                {
-                    Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                        {
-                            if (pressStart)
-                            {
-                                pressingSeconds += Time.deltaTime;
-                                if (pressingSeconds > 1f)
-                                {
-                                    pressingSeconds = 0;
-                                    pressStart = false;
-                                    SKStoneItem _stone = _SkillStoneCell.GetItem();
-                                    if (_stone != null && _stone._SkillConfig != null)
-                                    {
-                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.SkillStoneOfPlayerId, true);
-                                    }
-                                }
-                            }
-                            if (!pressStart)
-                            {
-                                pressingSeconds = 0;
-                                if (!pressCount.IsDisposed)
-                                {
-                                    pressCount.Dispose();
-                                }
-                            }
-                        }
-                    )
-                };
-            }
-            
             EventTrigger trigger = button.GetComponent<EventTrigger>();
             EventTrigger.Entry enter = new EventTrigger.Entry
             {
@@ -79,7 +45,7 @@ namespace mainMenu
                 {
                     pressStart = true;
                     buttonFeature();
-                    PressGoToLevelUpPage();
+                    PressGoToLevelUpPage(_SkillStoneCell);
                     StoneCell.SeletedRender(_SkillStoneCell, _Selected);
                 }
             } );
@@ -88,6 +54,40 @@ namespace mainMenu
             trigger.triggers.Clear();
             trigger.triggers.Add(enter);
             trigger.triggers.Add(up);
+        }
+        
+        // 前往技能石升级画面
+        public void PressGoToLevelUpPage(StoneCell _SkillStoneCell)
+        {
+            pressCount = new SingleAssignmentDisposable
+            {
+                Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                    {
+                        if (pressStart)
+                        {
+                            pressingSeconds += Time.deltaTime;
+                            if (pressingSeconds > 1f)
+                            {
+                                pressingSeconds = 0;
+                                pressStart = false;
+                                SKStoneItem _stone = _SkillStoneCell.GetItem();
+                                if (_stone != null && _stone._SkillConfig != null)
+                                {
+                                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.SkillStoneOfPlayerId, true);
+                                }
+                            }
+                        }
+                        if (!pressStart)
+                        {
+                            pressingSeconds = 0;
+                            if (!pressCount.IsDisposed)
+                            {
+                                pressCount.Dispose();
+                            }
+                        }
+                    }
+                )
+            };
         }
     }
 }

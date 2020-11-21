@@ -27,7 +27,7 @@ namespace mainMenu
                 }
             }
             
-            void PressGoToLevelUpPage()
+            void PressGoToLevelUpPage2()
             {
                 pressCount = new SingleAssignmentDisposable
                 {
@@ -72,7 +72,7 @@ namespace mainMenu
                 {
                     pressStart = true;
                     buttonFeature();
-                    PressGoToLevelUpPage();
+                    PressGoToLevelUpPage2();
                     StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
                 }
             } );
