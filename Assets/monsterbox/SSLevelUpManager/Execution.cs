@@ -38,7 +38,12 @@ public partial class SSLevelUpManager : MonoBehaviour
                  MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M5Stone);
              },
              model => {
-             
+                // 各种方面的合法分析
+                // 1. 技能石拥有数量不可以低于30
+                // 2. 高阶石不能为低阶石牺牲？
+                // 3. 满级石不再接受牺牲材料？
+                // 4. 如果某种石头只拥有一个的话那不可牺牲？
+                // 5. 不能用以牺牲的石头干脆不予以显示？
              }
              , Setting.Language
         );
@@ -57,7 +62,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 }else{
                     fail(null);
                 }
-                break;
+            break;
             case PlayerInfoRefMode.remoteTestPlayer:
                 yield return ApiCaller.Instance.Post<SkillStoneOfPlayerInfoModel, SkillStoneLevelUpForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
                     model => {
@@ -67,11 +72,10 @@ public partial class SSLevelUpManager : MonoBehaviour
                         fail(model.data);
                     }
                 );
-                break;
+            break;
             case PlayerInfoRefMode.formalVersion:
-                break;
+            break;
         }
-        yield break;
     }
 
     // 技能升级确认。
