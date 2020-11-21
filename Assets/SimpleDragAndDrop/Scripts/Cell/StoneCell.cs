@@ -52,13 +52,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         if (item != null)
         {
-            UpdateMyItem();
-            if (myDadItem != null)
-            {
-                myDadItem._using = false;
-                myDadItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
-            }
-            myDadItem = null;
+            RemoveToTemp();
             StoneCell SourceCell = item.GetComponentInParent<StoneCell>();
             item.transform.SetParent(transform, false);
             item.transform.localScale = Vector3.one * 1.2f;

@@ -26,19 +26,7 @@ public class SkillStoneSlot
         this._DragAndDropCell = _DragAndDropCell;
         this._DragAndDropCell._SkillStoneSlot = this;
     }
-    
-    public void RemoveStoneFromSlot()
-    {
-        _DragAndDropCell.UpdateMyItem();
-        SKStoneItem _DragAndDropItem = _DragAndDropCell.GetItem();
-        if (_DragAndDropItem)
-        {
-            _DragAndDropItem._using = false;
-            _DragAndDropItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
-        }
-        _DragAndDropCell.UpdateMyItem();
-    }
-    
+        
     //这个函数指的是格子自身的更新
     // 一个是在readANineAndTwo时候作用，也就是读取角色技能至九宫格的初期，
     // 一个是在SeliWholeNineAndTwo()里作用，进一步说就是每次石头的拖拽行为结束时(拖到某格子内或某空白区)
@@ -47,7 +35,7 @@ public class SkillStoneSlot
     // 如果是新石头，则普通技能为黄Color(1, 1, 0,1)，必杀技能为红Color(1, 0, 1, 1)
     public IEnumerator ShowOrigin(Color stoneColor)
     {
-        RemoveStoneFromSlot();
+        this._DragAndDropCell.RemoveToTemp();
         if (OnSlotStoneID != null)
         {
             yield return TakeASkillStoneFromBoxToSlot(OnSlotStoneID, stoneColor);

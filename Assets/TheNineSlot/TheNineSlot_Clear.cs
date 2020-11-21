@@ -12,7 +12,7 @@ namespace mainMenu
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 _slot.OnSlotStoneID = null;
-                _slot.RemoveStoneFromSlot();
+                _slot._DragAndDropCell.RemoveToTemp();
             }
         }
         
@@ -35,7 +35,7 @@ namespace mainMenu
                 
                 }else{
                     _slot._DragAndDropCell.cellPhase = StoneCell.CellPhase.NineSlotCell;
-                    _slot.RemoveStoneFromSlot();
+                    _slot._DragAndDropCell.RemoveToTemp();
                 }
             }
             mainProcessRunner.Run(TheNineSlot.target.UpdateMyStonesBaseOnSlotsExecution(info));
