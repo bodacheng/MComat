@@ -183,6 +183,10 @@ public class PowerEstimateTable
             {
                 amount += skillATRef;
             }
+            if (_clip.events[i].functionName == "EnableMarkers")
+            {
+                amount += skillATRef;
+            }
             #endregion
                         
             #region MagicForward
@@ -256,12 +260,13 @@ public class PowerEstimateTable
                 {
                     if (_clip.events[y].functionName == "ReleasePreparedMagic" || _clip.events[y].functionName == "ReleasePreparedMagicToAir")
                     {
-                        Debug.Log(_clip.events[y].functionName);
+                        //Debug.Log(_clip.name + ":" + _clip.events[y].functionName + "伤害估值增加："+ oneDamege);
                         amount += oneDamege;
                     }
                     // 第二次遇到PrepareOneMagic说明换魔法了。一个技能两次PrepareOneMagic目前其实还没有
                     if (_clip.events[y].functionName == "PrepareOneMagic")
                     {
+                        Debug.Log(_clip.name + "出现两次PrepareOneMagic");
                         break;
                     }
                 }
