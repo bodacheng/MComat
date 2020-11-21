@@ -55,6 +55,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             UpdateMyItem();
             if (myDadItem != null)
             {
+                myDadItem._using = false;
                 myDadItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
             }
             myDadItem = null;
@@ -96,6 +97,17 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         if (newItem != null)
         {
+            switch(cellPhase)
+            {
+                case CellPhase.NineSlotCell:
+                case CellPhase.StoneMergeSlot:
+                case CellPhase.SKLevelUpMSlot:
+                    newItem._using = true;
+                    break;
+                default:
+                    newItem._using = false;
+                    break;
+            }
             newItem.gameObject.SetActive(true);
             PlaceItemNotDestroyOldItemVersion(newItem);//PlaceItem(newItem); 2018.10.9
             UpdateMyItem();

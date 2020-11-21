@@ -10,6 +10,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         SKStoneItem _DragAndDropItem = GetItem();
         if (_DragAndDropItem)
         {
+            _DragAndDropItem._using = false;
             //如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
             if (_DragAndDropItem._SkillConfig.SP_LEVEL == SkillStonesBox.target.GetFocusingExType())
             {

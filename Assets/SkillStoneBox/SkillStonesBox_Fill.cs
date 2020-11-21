@@ -11,12 +11,12 @@ namespace mainMenu
     {
         public IEnumerator ArrangeSkillStonesToBox()
         {
-            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn, TheNineSlot.target.GetUsingStonesId());
+            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn);
             StoneDeleteManger.target.RefreshSelectedRender();
         }
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far, List<string> UsingStoneIDs)
+        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far)
         {
             foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
             {
@@ -44,33 +44,21 @@ namespace mainMenu
             int cellindex = 0;
             for (int i = 0; i < targetSKs.Count; i++)
             {
-                if (UsingStoneIDs != null)
+                CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
+                if (!MySkillStonesReader.RenderModelDic[targetSKs[i]]._using)
                 {
-                    if (!UsingStoneIDs.Contains(targetSKs[i]))
+                    if (!MySkillStonesReader.RenderModelDic.ContainsKey(targetSKs[i]))
                     {
-                        CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                        if (!MySkillStonesReader.RenderModelDic.ContainsKey(targetSKs[i]))
-                        {
-                            Debug.Log(" 技能石图标索引错误？对应账户技能石ID： " + targetSKs[i]);
-                        }
-                        _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[targetSKs[i]]);
-                        //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
-                        cellindex++;
+                        Debug.Log(" 技能石图标索引错误？对应账户技能石ID： " + targetSKs[i]);
                     }
-                    else
-                    {
-                        CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                        _SkillStoneCell.UpdateMyItem();
-                        Debug.Log("有使用中的技能石头，直接跳过这一格");
-                    }
-                }
-                else
-                {
-                    MySkillStonesReader.RenderModelDic[targetSKs[i]].GetComponent<Image>().color = Color.white;
-                    CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
                     _SkillStoneCell.AddItem(MySkillStonesReader.RenderModelDic[targetSKs[i]]);
                     //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
+                }
+                else
+                {
+                    _SkillStoneCell.UpdateMyItem();
+                    Debug.Log("有使用中的技能石头，直接跳过这一格");
                 }
             }
             yield break;

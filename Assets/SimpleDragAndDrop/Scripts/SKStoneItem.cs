@@ -13,7 +13,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 	public static SKStoneItem draggedItem;                                      // Item that is dragged now
 	public static GameObject icon;                                              // Icon of dragged item
 	public static StoneCell sourceCell;                                         // From this cell dragged item is
-
+    
     static Canvas canvas;                                                       // Canvas for item drag operation
     static readonly string canvasName = "DragAndDropCanvas";                    // Name of canvas
     static readonly int canvasSortOrder = 100;                                  // Sort order for canvas
@@ -24,7 +24,8 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     public SkillConfig _SkillConfig;
     public bool Inherent;
     public string SkillStoneOfPlayerId;
-
+    public bool _using = false;
+    
     /// <summary>
     /// Awake this instance.
     /// </summary>

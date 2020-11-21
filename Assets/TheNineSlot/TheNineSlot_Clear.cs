@@ -12,7 +12,6 @@ namespace mainMenu
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 _slot.OnSlotStoneID = null;
-                _slot._DragAndDropCell.cellPhase = StoneCell.CellPhase.NineSlotCell;
                 _slot.RemoveStoneFromSlot();
             }
         }
