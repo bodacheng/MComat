@@ -68,14 +68,19 @@ namespace dataAccess
             return SkillStonesOfTypeAndExType;
         }
         
-        public static List<string> TargetStonesFromAccount_unusing(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
+        public static List<string> TargetStonesFromAccount_except(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
         {
             List<string> origin = TargetStonesFromAccount(filterForm);
             List<string> list = new List<string>();
             for (int i = 0; i < origin.Count; i++)
             {
+                if (extraList != null && extraList.Contains(origin[i]))
+                {
+                    list.Add(origin[i]);
+                    continue;
+                }
                 SkillStoneOfPlayerInfoModel infoModel = Get(origin[i]);
-                if (AccountCharsSet.Get(infoModel.inUsingMonsterOfPlayerId) == null  &&  !exceptSkIDs.Contains(infoModel.skillId))
+                if (AccountCharsSet.Get(infoModel.inUsingMonsterOfPlayerId) == null  &&  (exceptSkIDs == null || !exceptSkIDs.Contains(infoModel.skillStoneOfPlayerId)))
                 {
                     list.Add(origin[i]);
                 }

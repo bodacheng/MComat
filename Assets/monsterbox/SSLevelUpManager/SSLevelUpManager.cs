@@ -30,11 +30,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     [Space(7)]
     [Header("材料技能石参数")]
     public SkillStoneDetail _MSkillStoneDetail;
-    
-    [Space(7)]
-    [Header("尝试升级的技能石的选中标记框")]
-    public GameObject _Selected;
-    
+        
     [Space(7)]
     [Header("融合技能槽")]
     public StoneCell cell1;
@@ -57,12 +53,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             LevelExpConfig.Current before = LevelExpConfig.GetCurrentInfo(targetexp);
             LevelExpConfig.Current after = LevelExpConfig.GetCurrentInfo(value);
-
-            DOTween.To(() => DataForShow, x => DataForShow = x, value, 1);
+            DOTween.To(() => DataForShow, x => DataForShow = x, value, 0.6f);
             targetexp = value;
         }
     }
-
+    
     int dataforshow;
     float DataForShow
     {
@@ -157,13 +152,20 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public IEnumerator OpenLevelUpPage(string skillstoneofplayer)
     {
-        SkillStonesBox.target.rares = new int[2] {0, 1};
-        SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
-        yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);
         stoneOfPlayerId = skillstoneofplayer;
+        
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
-        SKStoneItem.SeletedRender(targetStone, _Selected);
+        List<SkillStoneOfPlayerInfoModel> GetSameSkillIdStones = MySkillStonesReader.GetMyStonesBySkillID(targetStone._SkillConfig.RECORD_ID);
+        List<string> extra = new List<string>();
+        for (int i = 0; i < GetSameSkillIdStones.Count; i++)
+        {
+            if (GetSameSkillIdStones[i].skillStoneOfPlayerId != stoneOfPlayerId)
+                extra.Add(GetSameSkillIdStones[i].skillStoneOfPlayerId);
+        }
+        SkillStonesBox.target.rares = new int[2] {0, 1};
+        SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
+        yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm, new List<string> {stoneOfPlayerId}, extra);
         SkillStonesBox.target.CellsFeatureLoad(0);
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
@@ -177,7 +179,6 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public IEnumerator _CloseLevelUpPage()
     {
-        _Selected.gameObject.SetActive(false);
         SkillStonesBox.target.rares = new int[3] {0, 1, 2};
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
         yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);

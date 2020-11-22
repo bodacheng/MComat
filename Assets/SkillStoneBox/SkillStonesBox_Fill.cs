@@ -22,10 +22,15 @@ namespace mainMenu
             return filterForm;
         }
         
-        // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public IEnumerator PutSkillStonesToBox(StoneFilterForm filterForm)
         {
-            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount(filterForm);
+            yield return PutSkillStonesToBox(filterForm, null, null);
+        }
+        
+        // stoneviewScrollRect 应该在这个函数里扮演一个作用。
+        public IEnumerator PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
+        {
+            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
             {
@@ -51,7 +56,7 @@ namespace mainMenu
                 else
                 {
                     _SkillStoneCell.UpdateMyItem();
-                    Debug.Log("有使用中的技能石头，直接跳过这一格");
+                    //Debug.Log("有使用中的技能石头，直接跳过这一格");
                 }
             }
             StoneDeleteManger.target.RefreshSelectedRender();

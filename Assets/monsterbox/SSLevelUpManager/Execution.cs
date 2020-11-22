@@ -35,14 +35,14 @@ public partial class SSLevelUpManager : MonoBehaviour
             model => {
                 for (int i = 0; i < model.StonesToDelete.Count; i++)
                 {
-                    MySkillStonesReader.RemoveStone(model.StonesToDelete[i]);
+                    MySkillStonesReader.RemoveStoneLocal(model.StonesToDelete[i]);
                 }
             },
             model => {
                 // 各种方面的合法分析
                 // 1. 技能石拥有数量不可以低于30
                 // 2. 3阶以上技能石不能牺牲。这样看，1到2阶，或者就是1阶技能石，他们不是没有实战价值而是入手容易，从这个角度讲玩家也不至于因为误操作而破坏账号。
-                // 3. 满级石不再接受牺牲材料？
+                // 3. 满级石不再接受牺牲材料？不。。不是还有突破机制吗，如果等级已经满了根据加入的技能石种类可能形成突破那还是加的了的对不对。。。剩下的就是玩家个人责任了。。。
                 // 照这么看的话可能用ArrangeWarnWindow处理的报错就只有第一条，其他几条。。。不显示那些不能用来做材料的技能石不就行了吗
                 string warn = "";
                 for (int i = 0; i < model.warnMessage.Count; i++)

@@ -47,7 +47,7 @@ public partial class NineAndTwo
     static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
     {
         SkillStoneOfPlayerInfoModel infoModel;
-        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_unusing(filterForm, exceptSkIDs);
+        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptSkIDs, null);
         if (StoneAccIDs.Count == 0)
             return null;
         int ranDom = Random.Range(0, StoneAccIDs.Count);

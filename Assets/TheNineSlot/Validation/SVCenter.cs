@@ -50,14 +50,12 @@ public static class SVCenter
         to.AddItem(item);
         from.UpdateMyItem();
         
-        if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || 
-                to.cellPhase == StoneCell.CellPhase.NineSlotCell)
+        if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
             TheNineSlot.target.NineSlotsStatusRefresh();
         }
         
-        if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || 
-                to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
+        if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
             SSLevelUpManager.target.RefreshSkillLevelUpModule();
         }
@@ -89,14 +87,12 @@ public static class SVCenter
         
         SwapItems(from, to);
         
-        if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || 
-                to.cellPhase == StoneCell.CellPhase.NineSlotCell)
+        if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
             TheNineSlot.target.NineSlotsStatusRefresh();
         }
         
-        if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || 
-                to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
+        if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
             SSLevelUpManager.target.RefreshSkillLevelUpModule();
         }
