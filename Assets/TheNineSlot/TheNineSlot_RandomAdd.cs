@@ -31,7 +31,7 @@ namespace mainMenu
             AddRandomStoneToSlot(info.monsterOfPlayerId, 9, targetSkillSet.C3skillid);
             
             NineSlotsStatusRefresh();
-            TheNineSlot.target.mainProcessRunner.Run(SkillStonesBox.target.ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter()));
         }
         
         void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillid)

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using mainMenu;
 using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Model;
 using Skill;
+using System.Linq;
 
 // 配置文件属于资源信息，不是账户信息，应该分离开处理。
 namespace dataAccess
@@ -39,7 +40,7 @@ namespace dataAccess
 
         #region 财产数据相关
         // 用于过滤显示在技能石盒内的技能石
-        public static List<string> TargetStonesFromAccount(string type, int ExType, bool close, bool near, bool far)
+        public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
         {
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
@@ -54,9 +55,12 @@ namespace dataAccess
                     Debug.Log("????"+ keyValuePair.Value.skillId);
                     continue;
                 }
-                if (_SkillConfig.TYPE == type && 
-                    (_SkillConfig.SP_LEVEL == ExType || ExType == -1) &&
-                    SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, close, near, far))
+                List<int> exs = filterForm.exType.ToList();
+                List<int> rare = filterForm.rare.ToList();
+                if (_SkillConfig.TYPE == filterForm.type 
+                    && exs.Contains(_SkillConfig.SP_LEVEL) 
+                    && SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far)
+                    && rare.Contains(_SkillConfig.RARITY_LEVEL))
                 {
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.skillStoneOfPlayerId);
                 }
@@ -64,13 +68,9 @@ namespace dataAccess
             return SkillStonesOfTypeAndExType;
         }
         
-        public static List<string> TargetStonesFromAccount_unusing(string type, int[] ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
+        public static List<string> TargetStonesFromAccount_unusing(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
         {
-            List<string> origin = new List<string>();
-            for (int i = 0; i < ExType.Length; i++)
-            {
-                origin.AddRange(TargetStonesFromAccount(type, ExType[i], close, near, far));
-            }
+            List<string> origin = TargetStonesFromAccount(filterForm);
             List<string> list = new List<string>();
             for (int i = 0; i < origin.Count; i++)
             {

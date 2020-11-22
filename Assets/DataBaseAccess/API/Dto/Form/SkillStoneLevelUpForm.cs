@@ -1,4 +1,6 @@
 ﻿using Api.Dto.Form.Common;
+using System.Collections.Generic;
+using dataAccess;
 
 namespace Api.Dto.Form
 {
@@ -28,5 +30,16 @@ namespace Api.Dto.Form
         /// 消耗金币
         /// </summary>
         public string UseGold { get; set; }
+        
+        // 可能显示错误信息的材料添加错误现在看就只有技能石总数不过30那一条。
+        public List<string> LocalCheck()
+        {
+            List<string> wrongs = new List<string>();
+            if (MySkillStonesReader.Dic.Count< 30)
+            {
+                wrongs.Add("技能石总量不够30");
+            }
+            return wrongs;
+        }
     }
 }

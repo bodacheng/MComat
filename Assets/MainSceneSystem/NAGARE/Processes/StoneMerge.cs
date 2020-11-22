@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using mainMenu;
-using dataAccess;
 using UnityEngine;
 
 public class StoneMerge : MainSceneProcess
@@ -21,7 +20,7 @@ public class StoneMerge : MainSceneProcess
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.GenerateCells();
         SkillStonesBox.target.CellsFeatureLoad(-1);
-        yield return SkillStonesBox.target.ArrangeSkillStonesToBox();
+        yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
         SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons

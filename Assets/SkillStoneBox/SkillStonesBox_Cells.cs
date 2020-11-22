@@ -140,10 +140,43 @@ namespace mainMenu
             List<string> C_Types = MonstersConfigTable.Instance.GetTypeList();
             for (int i = 0; i < C_Types.Count; i++)
             {
-                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 0, true, true, true);
-                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 1, true, true, true);
-                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 2, true, true, true);
-                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromAccount(C_Types[i], 3, true, true, true);
+                StoneFilterForm filterForm0 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 0 },
+                    close = false,
+                    near = false,
+                    far = false
+                };
+                StoneFilterForm filterForm1 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 1 },
+                    close = false,
+                    near = false,
+                    far = false
+                };
+                StoneFilterForm filterForm2 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 2 },
+                    close = false,
+                    near = false,
+                    far = false
+                };
+                StoneFilterForm filterForm3 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 3 },
+                    close = false,
+                    near = false,
+                    far = false
+                };
+                
+                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromAccount(filterForm0);
+                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromAccount(filterForm1);
+                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromAccount(filterForm2);
+                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromAccount(filterForm3);
                 
                 if (SkillStonesOfType_normal.Count > AccountSet._AccInfo.Stoneboxsize)
                 {

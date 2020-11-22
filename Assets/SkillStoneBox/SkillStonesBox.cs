@@ -31,7 +31,10 @@ namespace mainMenu
         public Toggle closeCheckBox;
         public Toggle nearCheckBox;
         public Toggle farCheckBox;
-                
+
+        // rare 度限定
+        public int[] rares = {0, 1, 2};
+        
         [Space(7)]
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
@@ -76,7 +79,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 0;
-            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter()));
         }
         
         // Button feature
@@ -84,7 +87,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 1;
-            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter()));
         }
         
         // Button feature
@@ -92,7 +95,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 2;
-            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter()));
         }
         
         // Button feature
@@ -100,7 +103,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 3;
-            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter()));
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
@@ -139,7 +142,7 @@ namespace mainMenu
         
         void RangeCheckBoxOnValueChanged()
         {
-            TheNineSlot.target.mainProcessRunner.Run(ArrangeSkillStonesToBox());
+            TheNineSlot.target.mainProcessRunner.Run(PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter()));
         }
         
         public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能

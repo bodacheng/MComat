@@ -3,6 +3,7 @@ using dataAccess;
 using UnityEngine;
 using Skill;
 using Api.Dto.Model;
+using mainMenu;
 
 public partial class NineAndTwo
 {
@@ -43,10 +44,10 @@ public partial class NineAndTwo
         return nineAndTwo;
     }
     
-    static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(string type, int[] ExType, bool close, bool near, bool far, List<string> exceptSkIDs)
+    static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
     {
         SkillStoneOfPlayerInfoModel infoModel;
-        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_unusing(type, ExType, close, near, far, exceptSkIDs);
+        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_unusing(filterForm, exceptSkIDs);
         if (StoneAccIDs.Count == 0)
             return null;
         int ranDom = Random.Range(0, StoneAccIDs.Count);
@@ -61,7 +62,15 @@ public partial class NineAndTwo
                 
         if (targetSlot == 1)
         {
-            SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(focusingtype, new int[1] {0}, false, false, false, exceptSKIds);
+            SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
+            {
+                type = focusingtype,
+                exType = new int[1] { 0 },
+                close = false,
+                near = false,
+                far = false
+            };
+            SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(filterForm, exceptSKIds);
             if (infoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("A1的普攻都找不到");
@@ -70,8 +79,15 @@ public partial class NineAndTwo
             string skillid = infoModel.skillId;
             nineAndTwo.A1skillid = skillid;
         }else{
-            int[] CanEx = RemainSlotSPLevelCal(nineAndTwo).ToArray();            
-            SkillStoneOfPlayerInfoModel stoneInfoModel = SearchStoneForRandomSet(focusingtype, CanEx, false, false, false, exceptSKIds);
+            SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
+            {
+                type = focusingtype,
+                exType = RemainSlotSPLevelCal(nineAndTwo).ToArray(),
+                close = false,
+                near = false,
+                far = false
+            };
+            SkillStoneOfPlayerInfoModel stoneInfoModel = SearchStoneForRandomSet(filterForm, exceptSKIds);
             if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot +"找到合适技能石");

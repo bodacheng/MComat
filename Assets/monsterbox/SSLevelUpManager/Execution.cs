@@ -5,6 +5,7 @@ using UnityEngine;
 using Api.Dto.Form;
 using Api.Common;
 using Api.Dto.Model;
+using System.Collections.Generic;
 
 // 执行
 public partial class SSLevelUpManager : MonoBehaviour
@@ -29,42 +30,51 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         skillStoneLevelUpForm.UseGold = CurrentGoldExaust.ToString();
         
-        yield return LevelUpStoneTest(skillStoneLevelUpForm,
-             model => {
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M1Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M2Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M3Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M4Stone);
-                 MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M5Stone);
-             },
-             model => {
+        yield return LevelUpStoneTest(
+            skillStoneLevelUpForm,
+            model => {
+                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M1Stone);
+                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M2Stone);
+                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M3Stone);
+                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M4Stone);
+                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M5Stone);
+            },
+            model => {
                 // 各种方面的合法分析
                 // 1. 技能石拥有数量不可以低于30
-                // 2. 高阶石不能为低阶石牺牲？
+                // 2. 3阶以上技能石不能牺牲。这样看，1到2阶，或者就是1阶技能石，他们不是没有实战价值而是入手容易，从这个角度讲玩家也不至于因为误操作而破坏账号。
                 // 3. 满级石不再接受牺牲材料？
-                // 4. 如果某种石头只拥有一个的话那不可牺牲？
-                // 5. 不能用以牺牲的石头干脆不予以显示？
-             }
-             , Setting.Language
+                // 照这么看的话可能用ArrangeWarnWindow处理的报错就只有第一条，其他几条。。。不显示那些不能用来做材料的技能石不就行了吗
+                string warn = "";
+                for (int i = 0; i < model.warnMessage.Count; i++)
+                {
+                    warn += model.warnMessage[i] +"/n";
+                }
+                LoadingCanvas.target.ArrangeWarnWindow(warn);
+            }
+            , Setting.Language
         );
     }
     
     // 技能石升级
-    public IEnumerator LevelUpStoneTest(SkillStoneLevelUpForm form, SuccessDelegate<SkillStoneOfPlayerInfoModel> success, FailDelegate<SkillStoneOfPlayerInfoModel> fail, ApiLanguage apiLanguage)
+    public IEnumerator LevelUpStoneTest(SkillStoneLevelUpForm form, SuccessDelegate<SkillStoneLevelUpModel> success, FailDelegate<SkillStoneLevelUpModel> fail, ApiLanguage apiLanguage)
     {
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
-                bool succeed = true;
-                if (succeed)
+                SkillStoneLevelUpModel SkillStoneLevelUpModel = new SkillStoneLevelUpModel();
+                List<string> wrongs = form.LocalCheck();
+                if (wrongs.Count == 0)
                 {
-                    success(null);
+                    SkillStoneLevelUpModel.LocalAnalysis(form);
+                    success(SkillStoneLevelUpModel);
                 }else{
-                    fail(null);
+                    SkillStoneLevelUpModel.warnMessage = wrongs;
+                    fail(SkillStoneLevelUpModel);
                 }
             break;
             case PlayerInfoRefMode.remoteTestPlayer:
-                yield return ApiCaller.Instance.Post<SkillStoneOfPlayerInfoModel, SkillStoneLevelUpForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
+                yield return ApiCaller.Instance.Post<SkillStoneLevelUpModel, SkillStoneLevelUpForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
                     model => {
                         success(model.data);
                     },

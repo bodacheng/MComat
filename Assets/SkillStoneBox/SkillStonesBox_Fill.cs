@@ -2,23 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.UI;
 using dataAccess;
 
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
-    {
-        public IEnumerator ArrangeSkillStonesToBox()
+    {        
+        public StoneFilterForm CurrentFilter()
         {
-            yield return ArrangeSkillStonesToBox(GetFocusingType(), GetFocusingExType(), closeCheckBox.isOn, nearCheckBox.isOn, farCheckBox.isOn);
-            StoneDeleteManger.target.RefreshSelectedRender();
+            StoneFilterForm filterForm = new StoneFilterForm
+            {
+                type = GetFocusingType(),
+                exType = new int[1] { GetFocusingExType() },
+                close = closeCheckBox.isOn,
+                near = nearCheckBox.isOn,
+                far = farCheckBox.isOn,
+                rare = rares
+            };
+            return filterForm;
         }
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator ArrangeSkillStonesToBox(string type, int exType, bool close, bool near, bool far)
+        public IEnumerator PutSkillStonesToBox(StoneFilterForm filterForm)
         {
-            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount(type, exType, close, near, far);
+            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount(filterForm);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
             {
@@ -30,7 +37,7 @@ namespace mainMenu
             {
                 cellPair.Value.RemoveToTemp();
             }
-            
+
             int cellindex = 0;
             for (int i = 0; i < targetSKs.Count; i++)
             {
@@ -47,6 +54,17 @@ namespace mainMenu
                     Debug.Log("有使用中的技能石头，直接跳过这一格");
                 }
             }
+            StoneDeleteManger.target.RefreshSelectedRender();
+        }
+
+        public class StoneFilterForm
+        {
+            public string type;
+            public int[] exType;
+            public bool close = false;
+            public bool near = false;
+            public bool far = false;
+            public int[] rare = new int[4]{ 0,1,2,3 };
         }
     }
 }

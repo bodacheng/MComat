@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
 using DG.Tweening;
+using System.Collections;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
@@ -151,11 +152,14 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
     {
-        OpenLevelUpPage(stoneOfPlayerId);
+        PreScene.target.mainProcessRunner.Run(OpenLevelUpPage(stoneOfPlayerId));
     }
     
-    public void OpenLevelUpPage(string skillstoneofplayer)
+    public IEnumerator OpenLevelUpPage(string skillstoneofplayer)
     {
+        SkillStonesBox.target.rares = new int[2] {0, 1};
+        SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
+        yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);
         stoneOfPlayerId = skillstoneofplayer;
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
@@ -169,6 +173,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void CloseLevelUpPage()
     {
         _Selected.gameObject.SetActive(false);
+        SkillStonesBox.target.rares = new int[3] {0, 1, 2};
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
