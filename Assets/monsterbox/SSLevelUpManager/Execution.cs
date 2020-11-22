@@ -33,11 +33,10 @@ public partial class SSLevelUpManager : MonoBehaviour
         yield return LevelUpStoneTest(
             skillStoneLevelUpForm,
             model => {
-                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M1Stone);
-                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M2Stone);
-                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M3Stone);
-                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M4Stone);
-                MySkillStonesReader.RemoveStone(skillStoneLevelUpForm.M5Stone);
+                for (int i = 0; i < model.StonesToDelete.Count; i++)
+                {
+                    MySkillStonesReader.RemoveStone(model.StonesToDelete[i]);
+                }
             },
             model => {
                 // 各种方面的合法分析

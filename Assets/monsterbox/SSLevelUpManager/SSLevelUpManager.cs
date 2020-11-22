@@ -169,11 +169,18 @@ public partial class SSLevelUpManager : MonoBehaviour
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
     }
-
+    
     public void CloseLevelUpPage()
+    {
+        PreScene.target.mainProcessRunner.Run(_CloseLevelUpPage());
+    }
+    
+    public IEnumerator _CloseLevelUpPage()
     {
         _Selected.gameObject.SetActive(false);
         SkillStonesBox.target.rares = new int[3] {0, 1, 2};
+        SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
+        yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
