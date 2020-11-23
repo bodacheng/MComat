@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Api.Dto.Form;
+using dataAccess;
 
 namespace FightScene
 {
@@ -14,8 +16,8 @@ namespace FightScene
         
         IEnumerator EnterProcess()
         {
-            yield return FinalMomentAnim(fightLogger.GetWinner());
             FightScene.SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            yield return FinalMomentAnim(fightLogger.GetWinner());
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
             switch (fightLogger.GetWinner())
             {
@@ -35,23 +37,42 @@ namespace FightScene
             switch (FightSceneNote.nextBattle._fightEventType)
             {
                 case FightEventType.Arena:
+                    FightOverControl.target.rankInfo.gameObject.SetActive(true);
+                    FightOverControl.target.rankInfo.RankPointChange(0,0);
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
-                    break;
+                break;
                 case FightEventType.Quest:
-                    yield return FightOverControl.target.ShowRewards(999, 999);
-                    yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                     List<string> stoneids = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
-                    yield return RewardManager.ExpUpForStones(stoneids, 100);
+                    RequestRewardForm form = new RequestRewardForm
+                    {
+                        userId = AccountSet._AccInfo.playerID,
+                        fightEventType = FightEventType.Quest,
+                        eventNum = FightSceneNote.nextBattle.LocalFightID,
+                        StoneOfPlayerIDs = stoneids
+                    };
+                    IEnumerator requestReward = RewardManager.RequestRewardsExaution(
+                        form,
+                        model => {
+                            int diamond = model.Diamond;
+                            int gold = model.Gold;
+                            FightOverControl.target.ShowRewards(gold, diamond);
+                        },
+                        model => {
+                            // 再次请求报酬？？
+                        },
+                        Setting.Language
+                    );
+                    yield return requestReward;
+                    yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                     FightScene.CheckNextArcadeLevel();
-                    break;
+                break;
                 case FightEventType.Self:
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                     List<string> stoneidss = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
-                    yield return RewardManager.ExpUpForStones(stoneidss, 100);
-                    break;
+                break;
                 case FightEventType.SkillTest:
                     yield return SKillTestReload();
-                    break;
+                break;
             }
         }
         
@@ -63,12 +84,31 @@ namespace FightScene
         public override void ProcessEnd()
         {
             HurtObjectManager.ClearCurrent();
-            FightOverControl.target.Step2.gameObject.SetActive(false);
-            FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
-            foreach(NineForShow nineForShow in FightOverControl.target.NineForShows)
+            FightOverControl.target.Clear();
+        }
+        
+        // 这纯粹是个动画，没什么必要被这种东西延迟相关的数值处理。
+        IEnumerator FinalMomentAnim(Team winner)
+        {
+            Time.timeScale = 0.4f;
+            yield return new WaitForSeconds(2f);
+            List<Data_Center> winners = new List<Data_Center>();
+            if (winner == Team.player1)
             {
-                nineForShow.ClearCurrent();
+                winners = RealTimeGameProcessManager.target.AllMembers[Team.player1];
             }
+            if (winner == Team.player2)
+            {
+                winners = RealTimeGameProcessManager.target.AllMembers[Team.player2];
+            }
+            foreach (Data_Center _one in winners)
+            {
+                if (!_one.IsDead.Value)
+                {
+                    _one._MyBehaviorRunner.ChangeState("Victory");
+                }
+            }
+            Time.timeScale = 1f;
         }
         
         IEnumerator SKillTestReload()
@@ -112,32 +152,6 @@ namespace FightScene
                 i++;
             }
             FightScene.LocalGameRestart();
-        }
-        
-        // 这纯粹是个动画，没什么必要被这种东西延迟相关的数值处理。
-        IEnumerator FinalMomentAnim(Team winner)
-        {
-            Time.timeScale = 0.4f;
-            yield return new WaitForSeconds(2f);
-            
-            List<Data_Center> winners = new List<Data_Center>();
-            if (winner == Team.player1)
-            {
-                winners = RealTimeGameProcessManager.target.AllMembers[Team.player1];
-            }
-            if (winner == Team.player2)
-            {
-                winners = RealTimeGameProcessManager.target.AllMembers[Team.player2];
-            }
-            
-            foreach (Data_Center _one in winners)
-            {
-                if (!_one.IsDead.Value)
-                {
-                    _one._MyBehaviorRunner.ChangeState("Victory");
-                }
-            }
-            Time.timeScale = 1f;
         }
     }
 }

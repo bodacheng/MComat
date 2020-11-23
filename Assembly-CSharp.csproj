@@ -129,6 +129,7 @@
     <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
     <Compile Include="Assets\Arena\ArenaManager.cs" />
     <Compile Include="Assets\Arena\PlayerArenaRankInfo.cs" />
+    <Compile Include="Assets\Arena\RankInfo.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetRankInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetSkillStoneOfPlayerInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\LoginForm.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\RequestRewardForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterSkillStoneForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneGotchaForm.auto.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMergedStoneModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRankInfoOfPlayerModel.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRewardModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneOfPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MailOfPlayerModel.auto.cs" />

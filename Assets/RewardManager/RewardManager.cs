@@ -1,34 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Api.Dto.Model;
 using dataAccess;
+using Api.Dto.Form;
+using Api.Common;
 
-public class RewardManager : MonoBehaviour
+public static class RewardManager
 {
-     /// <summary>
-     /// 给出技能石存档列表，为其增加一定量经验
-     /// </summary>
-     /// <param name="StoneOfPlayerIDs">技能石存档列表</param>
-     /// <param name="addExp">增加的经验</param>
-    public static IEnumerator ExpUpForStones(List<string> StoneOfPlayerIDs, int addExp)
+    public static IEnumerator RequestRewardsExaution(RequestRewardForm form, SuccessDelegate<GetRewardModel> success, FailDelegate<GetRewardModel> fail, ApiLanguage apiLanguage)
     {
-        for (int i = 0; i < StoneOfPlayerIDs.Count; i++)
+        switch (AccountSet.ReferenceMode)
         {
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    yield return ExpUpForStones_Local(StoneOfPlayerIDs[i], addExp);
+            case PlayerInfoRefMode.localTestSaveData:
+                for (int i = 0; i < form.StoneOfPlayerIDs.Count; i++)
+                {
+                    switch (AccountSet.ReferenceMode)
+                    {
+                        case PlayerInfoRefMode.localTestSaveData:
+                            yield return ExpUpForStones_Local(form.StoneOfPlayerIDs[i], 100);
+                        break;
+                        case PlayerInfoRefMode.remoteTestPlayer:
+                        break;
+                        case PlayerInfoRefMode.formalVersion:
+                        break;
+                    }
+                }
                 break;
-                case PlayerInfoRefMode.remoteTestPlayer:
+            case PlayerInfoRefMode.formalVersion:
                 break;
-                case PlayerInfoRefMode.formalVersion:
+            case PlayerInfoRefMode.remoteTestPlayer:
+                yield return ApiCaller.Instance.Post<GetRewardModel, RequestRewardForm> 
+                (
+                    "http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", 
+                    form, 
+                    ApiCaller.Instance.getHeader(apiLanguage),
+                    model => {
+                        success(model.data);
+                    },
+                    model => {
+                        fail(model.data);
+                    }
+                );
                 break;
-            }
         }
-        yield break;
     }
-    
+        
     public static IEnumerator ExpUpForStones_Local(string StoneOfPlayerID, int addExp)
     {
         SkillStoneOfPlayerInfoModel stoneOfPlayer =  MySkillStonesReader.Get(StoneOfPlayerID);

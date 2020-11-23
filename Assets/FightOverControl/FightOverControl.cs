@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UniRx;
+using Api.Dto.Model;
+using dataAccess;
 
 namespace FightScene
 {
     public class FightOverControl : MonoBehaviour
     {
+        public static FightOverControl target;
+        
+        [Header("FightOverCanvas")]
         public Canvas FightOverCanvas;
         
         [Header("WIN")]
@@ -33,29 +36,27 @@ namespace FightScene
         public Text goldrewards;
         public Text diamondrewards;
         
-        public ReactiveProperty<bool> CanGotoSummary { get; set; } = new ReactiveProperty<bool>(false);
-        
-        readonly UnityEngine.Events.UnityAction ReturnToMainMenu = () =>
-        {
-            SceneManager.LoadScene(1);
-        };
-        
-        public static FightOverControl target;
-
-        public List<NineForShow> NineForShows = new List<NineForShow>();
+        [Header("RankInfo")]
+        public RankInfo rankInfo;
         
         void Awake()
         {
             target = this;
         }
         
-        //重新开战意味着所有资源重新加载？
-        readonly UnityEngine.Events.UnityAction RestartGame = () =>
+        public void Clear()
         {
-            SceneManager.LoadScene(2);
-        };
+            Step1.gameObject.SetActive(false);
+            Step2.gameObject.SetActive(false);
+            FightOverCanvas.gameObject.SetActive(false);
+            foreach(NineForShow nineForShow in NineForShows)
+            {
+                nineForShow.ClearCurrent();
+            }
+        }
         
         // 战斗结束后统计技能石升级情况时的画面显示
+        List<NineForShow> NineForShows = new List<NineForShow>();
         public IEnumerator ShowSKillSets(FightTeam fightTeam)
         {
             NineForShows.Clear();
@@ -82,11 +83,9 @@ namespace FightScene
         public IEnumerator WINProcess()
         {
             Step1.gameObject.SetActive(true);
-            CanGotoSummary.Value = false;
             win_textanimation.gameObject.SetActive(true);
             yield return new WaitForSeconds(3f);
             win_textanimation.gameObject.SetActive(false);
-            CanGotoSummary.Value = true;
             Step1.gameObject.SetActive(false);
             Step2.gameObject.SetActive(true);
         }
@@ -95,21 +94,18 @@ namespace FightScene
         public IEnumerator LoseProcess()
         {
             Step1.gameObject.SetActive(true);
-            CanGotoSummary.Value = false;
             lose_textanimation.gameObject.SetActive(true);
             yield return new WaitForSeconds(3f);
             lose_textanimation.gameObject.SetActive(false);
-            CanGotoSummary.Value = true;
             Step1.gameObject.SetActive(false);
             Step2.gameObject.SetActive(true);
         }
         
-        public IEnumerator ShowRewards(int golds, int diamond)
+        public void ShowRewards(int golds, int diamond)
         {
             goldrewards.text = golds.ToString();
             diamondrewards.text = diamond.ToString();
             RewardsTransform.gameObject.SetActive(true);
-            yield break;
         }
     }
 }
