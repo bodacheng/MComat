@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Form;
 using dataAccess;
+using Api.Dto.Model;
 
 namespace FightScene
 {
@@ -37,11 +38,33 @@ namespace FightScene
             switch (FightSceneNote.nextBattle._fightEventType)
             {
                 case FightEventType.Arena:
+                    RequestRewardForm form1 = new RequestRewardForm
+                    {
+                        userId = AccountSet._AccInfo.playerID,
+                        fightEventType = FightEventType.Arena,
+                        eventNum = 0 // 对手的id
+                    };
+                    IEnumerator requestReward1 = RewardManager.RequestRewardsExaution(
+                        form1,
+                        model => {
+                            int diamond = model.Diamond;
+                            int gold = model.Gold;
+                            FightOverControl.target.ShowRewards(gold, diamond);
+                        },
+                        model => {
+                            // 再次请求报酬？？
+                        },
+                        Setting.Language
+                    );
+                    yield return requestReward1;
+                    // 玩家rank远程已经进行了加分处理，这时候只需要以玩家id为key检索一下，本地刷新就可以
+                    yield return Arena.GetPlayerRankInfo();
                     FightOverControl.target.rankInfo.gameObject.SetActive(true);
                     FightOverControl.target.rankInfo.RankPointChange(0,0);
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                 break;
                 case FightEventType.Quest:
+                    yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                     List<string> stoneids = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
                     RequestRewardForm form = new RequestRewardForm
                     {
@@ -56,6 +79,11 @@ namespace FightScene
                             int diamond = model.Diamond;
                             int gold = model.Gold;
                             FightOverControl.target.ShowRewards(gold, diamond);
+                            for (int i = 0; i < model.stonesToGetExp.Count; i++)
+                            {
+                                SkillStoneOfPlayerInfoModel one = MySkillStonesReader.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
+                                one.EXP = model.stonesToGetExp[i].EXP;
+                            }
                         },
                         model => {
                             // 再次请求报酬？？
@@ -63,7 +91,6 @@ namespace FightScene
                         Setting.Language
                     );
                     yield return requestReward;
-                    yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                     FightScene.CheckNextArcadeLevel();
                 break;
                 case FightEventType.Self:

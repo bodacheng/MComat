@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 namespace Api.Dto.Model {
 
     /// <summary>
@@ -16,6 +16,8 @@ namespace Api.Dto.Model {
         public int Gold;
         public int Diamond;
         
-        public List<SkillStoneGotchaInfoModel> skillStoneGotchaInfoList { get; set; }
+        // 还应该包括竞技场模式下玩家rank的变化才对。。。
+        
+        public List<SkillStoneOfPlayerInfoModel> stonesToGetExp { get; set; }
     }
 }
