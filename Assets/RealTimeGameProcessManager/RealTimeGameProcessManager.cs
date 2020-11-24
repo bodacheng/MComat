@@ -10,8 +10,7 @@ namespace FightScene
     {
         [Header("Basic Element")]
         public CameraManager _CameraManager;
-        public MobileInputsManager _mobileInputsManager;
-        
+                
         [Header("Watch Mode")]
         [Space(6)]
         public Button WatchModeButton;
@@ -77,13 +76,15 @@ namespace FightScene
             
             if (focusingChar == null)
             {
-                _mobileInputsManager.TurnOffButtons();
+                MobileInputsManager.target.TurnOffButtons();
             }
             else
             {
-                _mobileInputsManager.FocusCharInputs(focusingChar._MyBehaviorRunner, focusingChar.Zokusei);
+                MobileInputsManager.target.FocusCharInputs(focusingChar._MyBehaviorRunner, focusingChar.Zokusei);
                 if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
-                    _mobileInputsManager.TurnOffButtons();
+                {
+                    MobileInputsManager.target.TurnOffButtons();
+                }
             }
         }
         
@@ -200,7 +201,7 @@ namespace FightScene
         {
             FightTeam1.Clear();
             FightTeam2.Clear();
-            _mobileInputsManager.Clear();
+            MobileInputsManager.target.Clear();
         }
 
         void OnGUI()

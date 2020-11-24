@@ -7,7 +7,6 @@ namespace FightScene
         public SceneStep Step;
         public SceneStep nextProcessStep = SceneStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
         public NetFightScene FightScene;
-        public MobileInputsManager mobileInputsManager;
         public FightLogger fightLogger;
         public SingleThreadProcesser mainProcessRunner;
         
@@ -15,7 +14,6 @@ namespace FightScene
         {
             FightScene = _NetFightScene;
             mainProcessRunner = _NetFightScene.mainProcessRunner;
-            mobileInputsManager = RealTimeGameProcessManager.target._mobileInputsManager;
             fightLogger = FightScene.fightLogger;
         }
     }

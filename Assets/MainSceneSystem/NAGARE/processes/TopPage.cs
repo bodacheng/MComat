@@ -48,6 +48,7 @@ public class TopPage : MainSceneProcess
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         UpperInfoBar.target.T.gameObject.SetActive(false);
+        BigButtonRender.target.TestOff();
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, ModelShower._nearClipPlane);

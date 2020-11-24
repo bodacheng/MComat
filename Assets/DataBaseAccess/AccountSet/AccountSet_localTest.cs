@@ -10,6 +10,7 @@ namespace dataAccess
     {
         public static IEnumerator LoadCustomerInfoViaLocalFile()
         {
+            bool ok = false;
             try
             {
                 PlayerAccountInfo info = new PlayerAccountInfo();
@@ -21,6 +22,7 @@ namespace dataAccess
                     Debug.Log("玩家账户信息读取成功");
                 }
                 _AccInfo = info;
+                ok = true;
             }
             catch (Exception e)
             {
@@ -28,30 +30,16 @@ namespace dataAccess
                 Debug.Log(e.ToString());
                 _AccInfo = new PlayerAccountInfo();
             }
-            yield return OverrideAccountOnLocalFile();
+            if (!ok)
+                yield return OverrideAccountOnLocalFile();
             yield break;
         }
-
+        
         public static IEnumerator OverrideAccountOnLocalFile()
         {
-            OverrideLocalCustomerInfoOnLocalFile(_AccInfo);
+            string json = JsonConvert.SerializeObject(_AccInfo);
+            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);
             yield break;
-        }
-
-        public static bool OverrideLocalCustomerInfoOnLocalFile(PlayerAccountInfo refreshedPlayerAccountInfo)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(refreshedPlayerAccountInfo);
-                LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);
-                return true;
-            }
-            catch (Exception e)
-            {
-                Debug.Log("玩家信息保存失败");
-                Debug.Log(e.ToString());
-                return false;
-            }
         }
     }
 }

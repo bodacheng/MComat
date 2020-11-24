@@ -230,11 +230,16 @@ namespace mainMenu
         }
         
         // 当前技能编辑形成的各项参数更新
-        public void NineSlotsStatusRefresh()
+        public bool NineSlotsStatusRefresh()
         {
+            bool full = true;
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 _slot._DragAndDropCell.UpdateMyItem();
+                if (_slot._DragAndDropCell.GetItem() == null)
+                {
+                    full = false;
+                }
             }
             List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
             int wholePoint = NineAndTwo.SkillBalancePoint(
@@ -255,6 +260,7 @@ namespace mainMenu
             }else{
                 uIManager.primaryColor = new Color(0,1,0,1);
             }
+            return full;
         }
         
          void RefreshNineSlotColors()

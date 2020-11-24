@@ -50,17 +50,23 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     /// <param name="item">Item.</param>
     void PlaceItemNotDestroyOldItemVersion(SKStoneItem item)
     {
-        if (item != null)
+        item.gameObject.SetActive(true);
+        RemoveToTemp();
+        switch(cellPhase)
         {
-            RemoveToTemp();
-            StoneCell SourceCell = item.GetComponentInParent<StoneCell>();
-            item.transform.SetParent(transform, false);
-            item.transform.localScale = Vector3.one * 1.2f;
-            item.transform.localPosition = Vector3.zero;
-            item.MakeRaycast(true);
-            myDadItem = item;
-            UpdateMyItem();
+            case CellPhase.NineSlotCell:
+            case CellPhase.StoneMergeSlot:
+            case CellPhase.SKLevelUpMSlot:
+                item._using = true;
+                break;
+            default:
+                item._using = false;
+                break;
         }
+        item.transform.SetParent(transform, false);
+        item.transform.localScale = Vector3.one * 1.2f;
+        item.transform.localPosition = Vector3.zero;
+        item.MakeRaycast(true);
     }
     
     /// <summary>
@@ -91,18 +97,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         if (newItem != null)
         {
-            switch(cellPhase)
-            {
-                case CellPhase.NineSlotCell:
-                case CellPhase.StoneMergeSlot:
-                case CellPhase.SKLevelUpMSlot:
-                    newItem._using = true;
-                    break;
-                default:
-                    newItem._using = false;
-                    break;
-            }
-            newItem.gameObject.SetActive(true);
             PlaceItemNotDestroyOldItemVersion(newItem);//PlaceItem(newItem); 2018.10.9
             UpdateMyItem();
         }

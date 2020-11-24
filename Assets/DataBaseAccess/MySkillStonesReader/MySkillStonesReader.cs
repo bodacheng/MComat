@@ -16,14 +16,14 @@ namespace dataAccess
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
         
-        public static List<SkillStoneOfPlayerInfoModel> GetMyStonesBySkillID(string skillID)
+        public static List<string> GetMyStonesBySkillID(string skillID)
         {
-            List<SkillStoneOfPlayerInfoModel> infoModels = new List<SkillStoneOfPlayerInfoModel>();
+            List<string> infoModels = new List<string>();
             foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.skillId == skillID)
                 {
-                    infoModels.Add(keyValuePair.Value);
+                    infoModels.Add(keyValuePair.Value.skillStoneOfPlayerId);
                 }
             }
             return infoModels;

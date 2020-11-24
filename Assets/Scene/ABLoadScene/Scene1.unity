@@ -1884,7 +1884,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AT_coefficient: 1
-  HP_coefficient: 1
+  HP_coefficient: 0.2
   NormalSkillExGet: 15
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0

@@ -35,7 +35,7 @@ public class SkillStoneSlot
     // 如果是新石头，则普通技能为黄Color(1, 1, 0,1)，必杀技能为红Color(1, 0, 1, 1)
     public IEnumerator ShowOrigin(Color stoneColor)
     {
-        this._DragAndDropCell.RemoveToTemp();
+        _DragAndDropCell.RemoveToTemp();
         if (OnSlotStoneID != null)
         {
             yield return TakeASkillStoneFromBoxToSlot(OnSlotStoneID, stoneColor);

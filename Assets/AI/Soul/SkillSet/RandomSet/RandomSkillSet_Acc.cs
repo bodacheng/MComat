@@ -38,16 +38,22 @@ public partial class NineAndTwo
                 SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
             }
         }
-        
         nineAndTwo.SetSkillLevel(skilllevel);
-        
         return nineAndTwo;
     }
     
+    // exceptSkIDs : 除了这些技能ID。切记是技能ID
     static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
     {
         SkillStoneOfPlayerInfoModel infoModel;
-        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptSkIDs, null);
+
+        List<string> exceptStones = new List<string>();
+        for (int i = 0; i < exceptSkIDs.Count; i++)
+        {
+            List<string> exceptAccIds = MySkillStonesReader.GetMyStonesBySkillID(exceptSkIDs[i]);
+            exceptStones.AddRange(exceptAccIds);
+        }
+        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptStones, null);
         if (StoneAccIDs.Count == 0)
             return null;
         int ranDom = Random.Range(0, StoneAccIDs.Count);

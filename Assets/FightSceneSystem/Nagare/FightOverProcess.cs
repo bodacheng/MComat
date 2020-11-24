@@ -17,7 +17,8 @@ namespace FightScene
         
         IEnumerator EnterProcess()
         {
-            FightScene.SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            FightOverControl.target.SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            MobileInputsManager.target.TurnOffButtons();
             yield return FinalMomentAnim(fightLogger.GetWinner());
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
             switch (fightLogger.GetWinner())
@@ -91,7 +92,7 @@ namespace FightScene
                         Setting.Language
                     );
                     yield return requestReward;
-                    FightScene.CheckNextArcadeLevel();
+                    FightOverControl.target.CheckNextArcadeLevel();
                 break;
                 case FightEventType.Self:
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
@@ -101,6 +102,9 @@ namespace FightScene
                     yield return SKillTestReload();
                 break;
             }
+            
+            LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
+            FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(false);
         }
         
         public override void ProcessEnter()
@@ -110,6 +114,7 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
+            FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             HurtObjectManager.ClearCurrent();
             FightOverControl.target.Clear();
         }
@@ -140,7 +145,7 @@ namespace FightScene
         
         IEnumerator SKillTestReload()
         {
-            int i = 0;        
+            int i = 0;
             foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef)
             {
                 switch(i)
@@ -178,7 +183,7 @@ namespace FightScene
                 yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value._NineAndTwo, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
                 i++;
             }
-            FightScene.LocalGameRestart();
+            FightOverControl.target.LocalGameRestart();
         }
     }
 }

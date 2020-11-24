@@ -1,11 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
-using UnityEngine.SceneManagement;
-using mainMenu;
-using Soul;
 using UnityEngine.Playables;
 
 namespace FightScene
@@ -24,10 +20,6 @@ namespace FightScene
         [Header("CountDownText")]
         public Text CountDown;
         #endregion
-
-        [Space(11)]
-        [Header("战斗的最后一击时候的处理")]
-        public Button NextLevelButton;
         
         [Space(11)]
         [Header("战斗的最后一击时候的处理")]
@@ -70,6 +62,7 @@ namespace FightScene
             Screen.SetResolution(1920, 1080, true);
             Application.targetFrameRate = 60;
             FightGlobalSetting.scenestep = 1;
+            SingleThreadProcesser.backup = mainProcessRunner;
             mainProcessRunner.Run(FightSceneStartUp());
         }
         
@@ -147,104 +140,6 @@ namespace FightScene
                 RealTimeGameProcessManager.target.ScreenSaverC(RealTimeGameProcessManager.playerTeam);
             else
                 RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-        }
-        
-        public void SkillLog(List<Data_Center> player1, List<Data_Center> player2)
-        {
-            List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
-            for (int i = 0; i < player1.Count; i++)
-            {
-                if (player1[i] != null)
-                {
-                    singleFightLogs.Add(player1[i]._MyBehaviorRunner.SingleFightLog);
-                }
-            }
-            for (int i = 0; i < player2.Count; i++)
-            {
-                if (player2[i] != null)
-                {
-                    singleFightLogs.Add(player2[i]._MyBehaviorRunner.SingleFightLog);
-                }
-            }
-
-            if (FightGlobalSetting.HitBoxLogger)
-            {
-                HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
-                HitBoxLogger.Instance.LogSummit();
-                for (int i = 0; i < singleFightLogs.Count; i++)
-                {
-                    singleFightLogs[i].Summary();
-                }
-                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", HitBoxLogger.Instance, singleFightLogs);
-                for (int i = 0; i < singleFightLogs.Count; i++)
-                {
-                    singleFightLogs[i].Clear();
-                }
-                HitBoxLogger.Instance.Clear();
-            }
-        }
-        
-        // 这个函数应该包括一些更深层的考虑。
-        public void ReturnToFront()
-        {
-            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
-            
-            //Position_Set_Executor.Instance.P_sets.Clear();
-            List<Data_Center> player1 = RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values;
-            List<string> dontdestroy = new List<string>();
-            switch (FightSceneNote.nextBattle._fightEventType)
-            {
-                case FightEventType.Arena:
-                case FightEventType.Quest:
-                    for (int i = 0; i < player1.Count; i++)
-                    {
-                        if (player1[i] != null)
-                        {
-                            player1[i]._MyBehaviorRunner.ChangeState("Empty");
-                            CharDataInfo charDataInfo = RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef[player1[i]];
-                            if (charDataInfo != null)
-                            {
-                                dontdestroy.Add(charDataInfo.monsterOfPlayerId);
-                            }
-                        }
-                    }
-                break;
-            }
-            SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
-            RealTimeGameProcessManager.target.Clear();
-            FSceneProcessesRunner.Main.Clear();
-            MainMenuNote.goingtostep = MainSceneStep.FrontPage;
-            HitBoxesProcesser.Instance.processingDecompositioners.Clear();
-            SceneManager.LoadScene(1);
-        }
-
-        //本地系函数 
-        public void LocalGameRestart()
-        {
-            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-        }
-                
-        // ArcadeNext
-        public void CheckNextArcadeLevel()
-        {
-            if (FightSceneNote.nextBattle._fightEventType == FightEventType.Quest)
-            {
-                if (ArcadeManager.ArcadeStages.ContainsKey(FightSceneNote.nextBattle.LocalFightID + 1))
-                {
-                    NextLevelButton.onClick.RemoveAllListeners();
-                    void LoadNextLevel()
-                    {
-                        FightSceneNote.nextBattle = ArcadeManager.ArcadeStages[FightSceneNote.nextBattle.LocalFightID + 1].stageConfig;
-                        FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-                    }
-                    NextLevelButton.onClick.AddListener(LoadNextLevel);
-                    NextLevelButton.gameObject.SetActive(true);
-                }else{
-                    NextLevelButton.gameObject.SetActive(false);
-                }
-            }else{
-                NextLevelButton.gameObject.SetActive(false);
-            }
         }
     }
 }

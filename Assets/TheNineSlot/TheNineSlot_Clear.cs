@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
+using System.Collections;
 
 namespace mainMenu
 {
@@ -24,21 +25,27 @@ namespace mainMenu
             MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
             
-            NineSlotsStatusRefresh();
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 SKStoneItem sK = _slot._DragAndDropCell.GetItem();
                 if (sK == null)
-                    continue;
-                if (sK.Inherent && MySkillStonesReader.Get(sK.SkillStoneOfPlayerId) == originSkillInfo)
                 {
-                
-                }else{
-                    _slot._DragAndDropCell.cellPhase = StoneCell.CellPhase.NineSlotCell;
+                    continue;
+                }
+                if (originSkillInfo == null || (originSkillInfo != null && (sK.SkillStoneOfPlayerId != originSkillInfo.skillStoneOfPlayerId)))
+                {
                     _slot._DragAndDropCell.RemoveToTemp();
                 }
             }
-            mainProcessRunner.Run(TheNineSlot.target.UpdateMyStonesBaseOnSlotsExecution(info));
+            
+            IEnumerator temp()
+            {
+                yield return target.UpdateMyStonesBaseOnSlotsExecution(info);
+                yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+                NineSlotsStatusRefresh();
+            }
+            
+            mainProcessRunner.Run(temp());            
         }
     }
 }

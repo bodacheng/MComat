@@ -3,6 +3,7 @@ using Api.Dto.Model;
 using dataAccess;
 using Api.Dto.Form;
 using Api.Common;
+using mainMenu;
 
 public static class RewardManager
 {
@@ -11,18 +12,21 @@ public static class RewardManager
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
-                for (int i = 0; i < form.StoneOfPlayerIDs.Count; i++)
+                switch(form.fightEventType)
                 {
-                    switch (AccountSet.ReferenceMode)
-                    {
-                        case PlayerInfoRefMode.localTestSaveData:
-                            yield return ExpUpForStones_Local(form.StoneOfPlayerIDs[i], 100);
+                    case FightEventType.Quest:
+                        for (int i = 0; i < form.StoneOfPlayerIDs.Count; i++)
+                        {
+                            yield return ExpUpForStones_Local(form.StoneOfPlayerIDs[i], 20);
+                        }
+                        if (AccountSet._AccInfo.ArcadeProcess == form.eventNum)
+                        {
+                            AccountSet._AccInfo.ArcadeProcess = form.eventNum + 1;
+                        }
+                        SingleThreadProcesser.backup.Run(AccountSet.SaveCustomerInfo());
                         break;
-                        case PlayerInfoRefMode.remoteTestPlayer:
+                    case FightEventType.Arena:
                         break;
-                        case PlayerInfoRefMode.formalVersion:
-                        break;
-                    }
                 }
                 break;
             case PlayerInfoRefMode.formalVersion:

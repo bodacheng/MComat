@@ -37,7 +37,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         if (myDadItem)
         {
             myDadItem._using = false;
-            myDadItem.gameObject.transform.SetParent(SkillStonesBox.target.stonesTempContainer);
+            myDadItem.gameObject.transform.SetParent(SkillStonesBox._stonesTempContainer);
         }
         UpdateMyItem();
     }

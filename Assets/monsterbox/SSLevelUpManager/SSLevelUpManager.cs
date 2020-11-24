@@ -156,12 +156,12 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
-        List<SkillStoneOfPlayerInfoModel> GetSameSkillIdStones = MySkillStonesReader.GetMyStonesBySkillID(targetStone._SkillConfig.RECORD_ID);
+        List<string> GetSameSkillIdStones = MySkillStonesReader.GetMyStonesBySkillID(targetStone._SkillConfig.RECORD_ID);
         List<string> extra = new List<string>();
         for (int i = 0; i < GetSameSkillIdStones.Count; i++)
         {
-            if (GetSameSkillIdStones[i].skillStoneOfPlayerId != stoneOfPlayerId)
-                extra.Add(GetSameSkillIdStones[i].skillStoneOfPlayerId);
+            if (GetSameSkillIdStones[i] != stoneOfPlayerId)
+                extra.Add(GetSameSkillIdStones[i]);
         }
         SkillStonesBox.target.rares = new int[2] {0, 1};
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();

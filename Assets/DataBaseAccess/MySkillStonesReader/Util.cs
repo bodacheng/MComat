@@ -68,7 +68,9 @@ namespace dataAccess
             return SkillStonesOfTypeAndExType;
         }
         
-        public static List<string> TargetStonesFromAccount_except(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
+        // exceptList ： 除了这些 技能石账户ID
+        // extraList ：额外添加这些 技能石账户ID
+        public static List<string> TargetStonesFromAccount_except(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptList, List<string> extraList)
         {
             List<string> origin = TargetStonesFromAccount(filterForm);
             List<string> list = new List<string>();
@@ -80,7 +82,7 @@ namespace dataAccess
                     continue;
                 }
                 SkillStoneOfPlayerInfoModel infoModel = Get(origin[i]);
-                if (AccountCharsSet.Get(infoModel.inUsingMonsterOfPlayerId) == null  &&  (exceptSkIDs == null || !exceptSkIDs.Contains(infoModel.skillStoneOfPlayerId)))
+                if (AccountCharsSet.Get(infoModel.inUsingMonsterOfPlayerId) == null && (exceptList == null || !exceptList.Contains(infoModel.skillStoneOfPlayerId)))
                 {
                     list.Add(origin[i]);
                 }

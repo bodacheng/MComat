@@ -6,7 +6,7 @@ public partial class NineAndTwo
     public List<string> SkillIDList()
     {
         List<string> IDs = new List<string>();
-
+        
         if (A1skillid != null)
             IDs.Add(A1skillid);
         if (A2skillid != null)

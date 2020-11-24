@@ -29,10 +29,17 @@ public class FightScenePauseSupport : MonoBehaviour
     [Header("战斗界面canvas")]
     public Canvas FightCanvas, ControlCanvas;
     
+    public static FightScenePauseSupport target;
+
+    void Awake()
+    {
+        target = this;
+    }
+
     void Start()
     {
         ReturnButton.onClick.RemoveAllListeners();
-        ReturnButton.onClick.AddListener(NetFightScene.target.ReturnToFront);
+        ReturnButton.onClick.AddListener(FightOverControl.target.ReturnToFront);
         
         ResumeButton.onClick.RemoveAllListeners();
         ResumeButton.onClick.AddListener(ResumeScene);
