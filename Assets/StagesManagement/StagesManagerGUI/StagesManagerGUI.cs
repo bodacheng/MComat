@@ -74,8 +74,7 @@ public partial class StagesManagerGUI : Editor {
             if (string.IsNullOrEmpty(focusingtype))
                 return;
             KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.ResourceID);
-            focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1);
-            focusingCharInfo._NineAndTwo.SortNineAndTwo();
+            focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1, false);
         }
         
         // 自动在A1格适配原生技能

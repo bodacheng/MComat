@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using dataAccess;
+using Skill;
 
 namespace mainMenu
 {
@@ -65,11 +66,12 @@ namespace mainMenu
         public class StoneFilterForm
         {
             public string type;
-            public int[] exType;
+            public BehaviorType BType = BehaviorType.NONE;
+            public int[] exType = { 0,1,2,3 };
             public bool close = false;
             public bool near = false;
             public bool far = false;
-            public int[] rare = new int[4]{ 0,1,2,3 };
+            public int[] rare = { 0,1,2,3 };
         }
     }
 }

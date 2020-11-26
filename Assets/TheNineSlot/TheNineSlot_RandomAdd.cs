@@ -14,7 +14,7 @@ namespace mainMenu
             MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
             SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
-            NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet_BasedOnMyStones(charConfig.TYPE, originSkillInfo?.skillId, 1);
+            NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet(charConfig.TYPE, originSkillInfo?.skillId, 1, true);
             
             IEnumerator temp()
             {

@@ -15,17 +15,19 @@ public partial class BehaviorRunnerGUI : Editor {
         
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
         List<SkillConfig> SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(anim_path);
-        List<string> returnValue = new List<string>();
-        returnValue.Add("Empty");
-        returnValue.Add("Move");
-        returnValue.Add("Victory");
-        returnValue.Add("zhuangbi");
-        returnValue.Add("Death");
-        returnValue.Add("RushBack");
-        returnValue.Add("Rush");
-        returnValue.Add("Hit");
-        returnValue.Add("KnockOff");
-        returnValue.Add("getUp");
+        List<string> returnValue = new List<string>
+        {
+            "Empty",
+            "Move",
+            "Victory",
+            "zhuangbi",
+            "Death",
+            "RushBack",
+            "Rush",
+            "Hit",
+            "KnockOff",
+            "getUp"
+        };
         if (FightGlobalSetting._hasDefend)
         {
             returnValue.Add("Defend");

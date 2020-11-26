@@ -4,20 +4,22 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using UniRx;
+using mainMenu;
 
 public partial class StagesManagerGUI : Editor {
 
     int selectSkillExLevel = -1;
-    readonly int[] skillrarelevels = {-1, 0, 1, 2, 3 };
-    readonly string[] skillrarelevelShow = { "ALL", "0", "★", "★★", "★★★" };
+    int[] rares = {};
+    readonly int[] rareOptions = {-1, 0, 1, 2, 3};
+    readonly string[] rareOptionsRender = { "ALL", "★", "★★", "★★★" , "★★★★" };
     readonly int[] exLevels = {-1, 0, 1, 2, 3 };
     readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
-    bool[] SPselected = { true, true, true, true };
+    int[] SPselected = { 0, 1, 2, 3 };
     int selectskillrarelevel = -1;
-    readonly bool[] skillrangeselectfilter = { true, true, true, true }; //close, near, far, out
+    readonly bool[] skillrangeselectfilter = { true, true, true };
     bool skillselectfilter;
-    bool filterallranges = true;
-    IDictionary<string, string> _SkillIDsAndNames;
+    bool filterranges = true;
+    IDictionary<string, string> _SkillIDsAndNames = new Dictionary<string, string>();
     
     void SkillSelect()
     {
@@ -29,42 +31,66 @@ public partial class StagesManagerGUI : Editor {
             switch(selectSkillExLevel)
             {
                 case 0:
-                SPselected = new bool[4] { true, false, false, false };
+                    SPselected = new int[] { 0 };
                 break;
                 case 1:
-                SPselected = new bool[4] { false, true, false, false };
+                    SPselected = new int[] { 1 };
                 break;
                 case 2:
-                SPselected = new bool[4] { false, false, true, false };
+                    SPselected = new int[] { 2 };
                 break;
                 case 3:
-                SPselected = new bool[4] { false, false, false, true };
+                    SPselected = new int[] { 3 };
                 break;
                 default:
-                SPselected = new bool[4] { true, true, true, true };
+                    SPselected = new int[] { 0, 1, 2, 3 };
                 break;
             }
             
-            filterallranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterallranges);
-            if (!filterallranges)
+            filterranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterranges);
+            if (!filterranges)
             {
-                skillrangeselectfilter[0] = true;
-                skillrangeselectfilter[1] = true;
-                skillrangeselectfilter[2] = true;
-                skillrangeselectfilter[3] = true;
+                skillrangeselectfilter[0] = false;
+                skillrangeselectfilter[1] = false;
+                skillrangeselectfilter[2] = false;
+            }else{
+                skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], AttackRangeToggleGUI);
+                skillrangeselectfilter[1] = EditorGUILayout.Toggle("中", skillrangeselectfilter[1], AttackRangeToggleGUI);
+                skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
             }
-            skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], AttackRangeToggleGUI);
-            skillrangeselectfilter[1] = EditorGUILayout.Toggle("中", skillrangeselectfilter[1], AttackRangeToggleGUI);
-            skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
-            skillrangeselectfilter[3] = EditorGUILayout.Toggle("超", skillrangeselectfilter[3], AttackRangeToggleGUI);
             EditorGUILayout.EndToggleGroup();
             
-            selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, skillrarelevelShow, skillrarelevels);
+            selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, rareOptionsRender, rareOptions);
             EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
             GUILayout.Space(10f);
         }
         
-        _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(focusingtype, new bool[3] { skillrangeselectfilter[0], skillrangeselectfilter[1], skillrangeselectfilter[2]}, SPselected, Skill.BehaviorType.NONE, selectskillrarelevel);
+        switch(selectskillrarelevel)
+        {
+            case 1:
+                rares = new int[] {1};
+                break;
+            case 2:
+                rares = new int[] {2};
+                break;
+            case 3:
+                rares = new int[] {3};
+                break;
+            default:
+                rares = new int[] {1,2,3,4};
+                break;
+        }
+        SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
+        {
+            type = focusingtype,
+            close = skillrangeselectfilter[0],
+            near = skillrangeselectfilter[1],
+            far = skillrangeselectfilter[2],
+            exType = SPselected,
+            BType = Skill.BehaviorType.NONE,
+            rare = rares
+        };        
+        _SkillIDsAndNames = SkillList(filterForm);// 待研究
         
         int index2 = 0;
         int selectedskillindex = 0;
@@ -80,6 +106,20 @@ public partial class StagesManagerGUI : Editor {
         
         selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
         targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;
+    }
+    
+    IDictionary<string,string> SkillList(SkillStonesBox.StoneFilterForm filterForm)
+    {
+        IDictionary<string, string> returnvalue = new Dictionary<string, string>
+        {
+            { "-1", "空" }
+        };
+        IDictionary<string, string> SkillIDAndNameDic = SkillConfigTable.GetSkillIDAndNameDic(filterForm);
+        foreach(KeyValuePair<string, string> keyValuePair in SkillIDAndNameDic)
+        {
+            returnvalue.Add(keyValuePair.Key, keyValuePair.Value);
+        }
+        return returnvalue;
     }
 }
 #endif

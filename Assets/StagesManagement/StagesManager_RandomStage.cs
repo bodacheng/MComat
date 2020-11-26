@@ -17,17 +17,17 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char1 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[0]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
         CharDataInfo char2 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[1]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
         CharDataInfo char3 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[2]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
 
         target.EnemySets.Set(0, 0, char1);
@@ -55,33 +55,33 @@ public partial class StagesManager : MonoBehaviour
         CharDataInfo char1 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[0]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
         CharDataInfo char2 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[1]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
         CharDataInfo char3 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[2]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
 
         CharDataInfo char4 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[3]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
         CharDataInfo char5 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[4]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
         CharDataInfo char6 = new CharDataInfo
         {
             ResourceID = charRecordIds[Indexes[5]],
-            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1)
+            _NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false)
         };
 
         switch (teamMode)

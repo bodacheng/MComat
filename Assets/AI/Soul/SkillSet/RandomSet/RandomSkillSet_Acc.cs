@@ -8,7 +8,7 @@ using mainMenu;
 public partial class NineAndTwo
 {
     // 根据账户内拥有的技能石来安排九宫格内技能石排布。
-    public static NineAndTwo RandomSkillSet_BasedOnMyStones(string type, string originSkill, int skilllevel)
+    public static NineAndTwo RandomSkillSet(string type, string originSkill, int skilllevel, bool baseOnAcc)
     {
         NineAndTwo nineAndTwo = new NineAndTwo();
         SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
@@ -21,7 +21,7 @@ public partial class NineAndTwo
                 {
                     nineAndTwo.A1skillid = originSkillConfig.RECORD_ID;
                 }else{
-                    SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
+                    SkillRandomAdd(type, nineAndTwo, i, baseOnAcc);
                 }
             }
             else if (i == 2) // A2
@@ -30,15 +30,16 @@ public partial class NineAndTwo
                 {
                     nineAndTwo.A2skillid = originSkillConfig.RECORD_ID; 
                 }else{
-                    SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
+                    SkillRandomAdd(type, nineAndTwo, i, baseOnAcc);
                 }
             }
             else
             {
-                SkillRandomAdd_BasedOnMyStones(type, nineAndTwo, i);
+                SkillRandomAdd(type, nineAndTwo, i, baseOnAcc);
             }
         }
         nineAndTwo.SetSkillLevel(skilllevel);
+        nineAndTwo.SortNineAndTwo();
         return nineAndTwo;
     }
     
@@ -62,10 +63,10 @@ public partial class NineAndTwo
         return infoModel;
     }
     
-    static void SkillRandomAdd_BasedOnMyStones(string focusingtype, NineAndTwo nineAndTwo, int targetSlot) 
+    static void SkillRandomAdd(string focusingtype, NineAndTwo nineAndTwo, int targetSlot, bool baseOnAcc)
     {
         List<string> exceptSKIds = nineAndTwo.SkillIDList();
-                
+        
         if (targetSlot == 1)
         {
             SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
@@ -76,14 +77,24 @@ public partial class NineAndTwo
                 near = false,
                 far = false
             };
-            SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(filterForm, exceptSKIds);
-            if (infoModel == null) // 如果账户已经没有符合要求的石头
+            if (baseOnAcc)
             {
-                Debug.Log("A1的普攻都找不到");
-                return;
+                SkillStoneOfPlayerInfoModel infoModel = SearchStoneForRandomSet(filterForm, exceptSKIds);
+                if (infoModel == null) // 如果账户已经没有符合要求的石头
+                {
+                    Debug.Log("A1的普攻都找不到");
+                    return;
+                }
+                nineAndTwo.A1skillid = infoModel.skillId;
+            }else{
+                string skid = SearchStoneForRandomSet2(filterForm, exceptSKIds);
+                if (skid == null) // 如果账户已经没有符合要求的石头
+                {
+                    Debug.Log("A1的普攻都找不到");
+                    return;
+                }
+                nineAndTwo.A1skillid = skid;
             }
-            string skillid = infoModel.skillId;
-            nineAndTwo.A1skillid = skillid;
         }else{
             SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
             {
@@ -93,14 +104,26 @@ public partial class NineAndTwo
                 near = false,
                 far = false
             };
-            SkillStoneOfPlayerInfoModel stoneInfoModel = SearchStoneForRandomSet(filterForm, exceptSKIds);
-            if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
+            string skillid = null;
+            if (baseOnAcc)
             {
-                Debug.Log("无法为" + targetSlot +"找到合适技能石");
-                return;
+                SkillStoneOfPlayerInfoModel stoneInfoModel = SearchStoneForRandomSet(filterForm, exceptSKIds);
+                if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
+                {
+                    Debug.Log("无法为" + targetSlot +"找到合适技能石");
+                    return;
+                }
+                skillid = stoneInfoModel.skillId;
+            }else{
+                string skid = SearchStoneForRandomSet2(filterForm, exceptSKIds);
+                if (skid == null) // 如果账户已经没有符合要求的石头
+                {
+                    Debug.Log("无法为" + targetSlot +"找到合适技能石");
+                    return;
+                }
+                skillid = skid;
             }
             
-            string skillid = stoneInfoModel.skillId;
             switch (targetSlot)
             {
                 case 2:

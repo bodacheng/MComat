@@ -7,7 +7,7 @@ public partial class StagesManagerGUI : Editor {
     
     void AutoSetInherSkill()
     {
-        if (!InheretedSkillSet(focusingCharInfo))
+        if (!InheretedSkillSet(focusingCharInfo._NineAndTwo))
         {
             SkillConfig A1 = focusingCharInfo._NineAndTwo.GetA1Config();
             CharConfig CharConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
@@ -16,9 +16,9 @@ public partial class StagesManagerGUI : Editor {
         }
     }
     
-    bool InheretedSkillSet(CharDataInfo _focusingCharInfo)
+    bool InheretedSkillSet(NineAndTwo _NineAndTwo)
     {
-        IDictionary<SkillConfig, string> FocusingCharSkillList = GetFocusingCharSkillList(_focusingCharInfo);
+        IDictionary<SkillConfig, string> FocusingCharSkillList = GetFocusingCharSkillList(_NineAndTwo);
         CharConfig CharConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
         if (CharConfig == null)
             return true;

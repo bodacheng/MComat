@@ -153,10 +153,10 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 
@@ -172,10 +172,10 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1);
+                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 

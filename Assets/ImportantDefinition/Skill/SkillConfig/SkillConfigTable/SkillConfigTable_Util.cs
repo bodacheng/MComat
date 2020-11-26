@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Skill;
 using System.Linq;
 using System;
+using mainMenu;
 
 public partial class SkillConfigTable
 {
@@ -155,59 +156,28 @@ public partial class SkillConfigTable
             return null;
         }
     }
-    
-    // 随机获取不重复的若干几个技能ID
-    public static List<string> RandomGetSkillRecordIds(string type, bool[] ranges, bool[] EXType, BehaviorType behaviorType, int rarelevel, int Count)
+        
+    public static IDictionary<string,string> GetSkillIDAndNameDic(SkillStonesBox.StoneFilterForm filterForm)
     {
-        IDictionary<string, string> _Skills = GetSkillIDAndNameDic(type, ranges, EXType, behaviorType, rarelevel);
-        List<int> indexes = RandomSelect.Get(0, _Skills.Count -1 , Count);
-        List<string> normalSKillRecordIds = _Skills.Keys.ToList();
-
-        List<string> targetRecordIds = new List<string>();
-        for (int i = 0; i < indexes.Count; i++)
-        {
-            targetRecordIds.Add(normalSKillRecordIds[indexes[i]]);
-        }
-        return targetRecordIds;
-    }
-    
-    public static IDictionary<string,string> GetSkillIDAndNameDic(string type, bool[] ranges, bool[] EXType, BehaviorType behaviorType, int rarelevel)// close, near, far , out , rarelevel = -1代表全部，0代表无星级技能
-    {
-        Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>
-        {
-            { "-1", "空" }
-        };
-        List<SkillConfig> list = GetSkillConfigsOfType(type);
+        Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>();
+        List<SkillConfig> list = GetSkillConfigsOfType(filterForm.type);
         foreach (SkillConfig one in list)
         {
-            if (behaviorType != BehaviorType.NONE && one.STATE_TYPE != behaviorType)
+            if (filterForm.BType != BehaviorType.NONE && filterForm.BType != one.STATE_TYPE)
             {
                 continue;
             }
             
-            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, ranges[0], ranges[1], ranges[2]) && (one.RARITY_LEVEL == rarelevel || rarelevel == -1))
+            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far) 
+                && (filterForm.rare.ToList().Contains(one.RARITY_LEVEL))
+                && filterForm.exType.ToList().Contains(one.SP_LEVEL))
             {
+                if (one.RECORD_ID == null)
+                {
+                    Debug.Log(one.REAL_NAME);
+                }
                 if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
                 {
-                    switch (one.SP_LEVEL)
-                    {
-                        case 0:
-                        if (!EXType[0])
-                            continue;
-                        break;
-                        case 1:
-                        if (!EXType[1])
-                            continue;
-                        break;
-                        case 2:
-                         if (!EXType[2])
-                            continue;   
-                        break;
-                        case 3:
-                        if (!EXType[3])
-                            continue;
-                        break;
-                    }
                     SkillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
                 }
                 else
@@ -218,4 +188,6 @@ public partial class SkillConfigTable
         }
         return SkillIDAndNameDic;
     }
+    
+    
 }

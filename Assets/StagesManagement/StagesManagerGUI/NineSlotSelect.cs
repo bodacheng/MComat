@@ -21,6 +21,11 @@ public partial class StagesManagerGUI : Editor {
         GUILayout.BeginHorizontal();
         void SlotColorCal(SkillConfig targetC)
         {
+            if (targetC == null)
+            {
+                Debug.Log("逻辑错误1");
+                return;
+            }
             GUI.backgroundColor = Repeated(focusingCharInfo, targetC, targetC.RECORD_ID) ? Color.red : SlotHasSkill(targetC.RECORD_ID);
         }
         
@@ -94,9 +99,9 @@ public partial class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
     }
     
-    bool Repeated(CharDataInfo _focusingCharInfo , SkillConfig _target,string recordID)
+    bool Repeated(CharDataInfo _focusingCharInfo , SkillConfig _target, string recordID)
     {
-        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList(_focusingCharInfo))
+        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList(_focusingCharInfo._NineAndTwo))
         {
             if (keyValuePair.Value == recordID && keyValuePair.Key != _target)
             {
@@ -107,19 +112,19 @@ public partial class StagesManagerGUI : Editor {
     }
     
     // 服务于Repeated函数，获取当前编辑中角色的技能列表
-    IDictionary<SkillConfig,string> GetFocusingCharSkillList(CharDataInfo _focusingCharInfo)
+    IDictionary<SkillConfig,string> GetFocusingCharSkillList(NineAndTwo _NineAndTwo)
     {
-        IDictionary<SkillConfig,string> list = new Dictionary<SkillConfig,string>();
+        IDictionary<SkillConfig, string> list = new Dictionary<SkillConfig,string>();
         
-        SkillConfig A1 = _focusingCharInfo._NineAndTwo.GetA1Config();
-        SkillConfig A2 = _focusingCharInfo._NineAndTwo.GetA2Config();
-        SkillConfig A3 = _focusingCharInfo._NineAndTwo.GetA3Config();
-        SkillConfig B1 = _focusingCharInfo._NineAndTwo.GetB1Config();
-        SkillConfig B2 = _focusingCharInfo._NineAndTwo.GetB2Config();
-        SkillConfig B3 = _focusingCharInfo._NineAndTwo.GetB3Config();
-        SkillConfig C1 = _focusingCharInfo._NineAndTwo.GetC1Config();
-        SkillConfig C2 = _focusingCharInfo._NineAndTwo.GetC2Config();
-        SkillConfig C3 = _focusingCharInfo._NineAndTwo.GetC3Config();
+        SkillConfig A1 = _NineAndTwo.GetA1Config();
+        SkillConfig A2 = _NineAndTwo.GetA2Config();
+        SkillConfig A3 = _NineAndTwo.GetA3Config();
+        SkillConfig B1 = _NineAndTwo.GetB1Config();
+        SkillConfig B2 = _NineAndTwo.GetB2Config();
+        SkillConfig B3 = _NineAndTwo.GetB3Config();
+        SkillConfig C1 = _NineAndTwo.GetC1Config();
+        SkillConfig C2 = _NineAndTwo.GetC2Config();
+        SkillConfig C3 = _NineAndTwo.GetC3Config();
         
         A1ButtonText = RefreshButtonText(A1);
         A2ButtonText = RefreshButtonText(A2);
@@ -172,6 +177,11 @@ public partial class StagesManagerGUI : Editor {
     
     string RefreshButtonText(SkillConfig skillConfig)
     {
+        if (skillConfig == null)
+        {
+            Debug.Log("逻辑问题");
+            return "";
+        }
         switch(skillConfig.SP_LEVEL)
         {
             case 0:

@@ -18,11 +18,7 @@ namespace mainMenu
         [Header("角色明细T，技能显示T")]
         public RectTransform MemberDetailCanvas;
         public RectTransform MemberInfoT;
-        
-        [Space(7)]
-        [Header("SkillStoneManager")]
-        public SkillStonesBox _SkillStonesBox;
-        
+                
         [Space(7)]
         [Header("mini nineslot")]
         public NineForShow _NineForShow;
@@ -186,12 +182,12 @@ namespace mainMenu
         // 纯表现系
         public IEnumerator SkillEditConfirmAnimation()
         {
-            _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(false);
+            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
             CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
             string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
             EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             yield return new WaitForSeconds(0.1f);
-            _SkillStonesBox.SkillBoxCanvas.gameObject.SetActive(true);
+            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
