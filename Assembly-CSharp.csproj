@@ -541,7 +541,6 @@
     <Compile Include="Assets\StagesManagement\StagesManager.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\BasicState.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\CharSelect.cs" />
-    <Compile Include="Assets\StagesManagement\StagesManagerGUI\InherSkillAutoSet.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\Members.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\NineSlotSelect.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\ScriptRead.cs" />
@@ -549,6 +548,7 @@
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillInfo.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSelect.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSetComment.cs" />
+    <Compile Include="Assets\StagesManagement\StagesManagerGUI\SlotFocus.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\StagesManagerGUI.cs" />
     <Compile Include="Assets\StagesManagement\StagesManagerGUI\UI_Ini.cs" />
     <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />

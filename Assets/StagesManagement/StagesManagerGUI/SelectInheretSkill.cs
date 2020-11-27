@@ -23,6 +23,7 @@ public partial class StagesManagerGUI : Editor {
             SelectInhere.Add(InhereSks.Key, InhereSks.Value);
         }
         selectedInhereskill = EditorGUILayout.Popup("原生技能：", selectedInhereskill, SelectInhere.Values.ToArray());
+        SetSkillId(SelectInhere.ElementAt(selectedInhereskill).Key);
     }
 }
 #endif

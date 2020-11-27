@@ -16,7 +16,7 @@ public partial class StagesManagerGUI : Editor {
     readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
     int[] SPselected = { 0, 1, 2, 3 };
     int selectskillrarelevel = -1;
-    readonly bool[] skillrangeselectfilter = { true, true, true };
+    readonly bool[] skillrangeselectfilter = { false, false, false };
     bool skillselectfilter;
     bool filterranges = true;
     IDictionary<string, string> _SkillIDsAndNames = new Dictionary<string, string>();
@@ -96,7 +96,7 @@ public partial class StagesManagerGUI : Editor {
         int selectedskillindex = 0;
         foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)
         {
-            if (keyValuePair.Key == targetSC.RECORD_ID)
+            if (keyValuePair.Key == GetFocusSkillId())
             {
                 selectedskillindex = index2;
                 break;
@@ -105,7 +105,7 @@ public partial class StagesManagerGUI : Editor {
         }
         
         selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
-        targetSC.RECORD_ID = selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key;
+        SetSkillId(selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key);
     }
     
     IDictionary<string,string> SkillList(SkillStonesBox.StoneFilterForm filterForm)

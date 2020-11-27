@@ -19,168 +19,144 @@ public partial class StagesManagerGUI : Editor {
     void NineSlotPart()
     {
         GUILayout.BeginHorizontal();
-        void SlotColorCal(SkillConfig targetC)
+        
+        void SlotAnalyze(int _targetSlot)
         {
-            if (targetC == null)
+            string nowSkillID = null;
+            SkillConfig defaultSkillConfig = null;
+            switch(_targetSlot)
             {
-                Debug.Log("逻辑错误1");
-                return;
+                case 1:
+                nowSkillID = focusingCharInfo._NineAndTwo.A1skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                A1ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 2:
+                nowSkillID = focusingCharInfo._NineAndTwo.A2skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                A2ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 3:
+                nowSkillID = focusingCharInfo._NineAndTwo.A3skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                A3ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 4:
+                nowSkillID = focusingCharInfo._NineAndTwo.B1skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                B1ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 5:
+                nowSkillID = focusingCharInfo._NineAndTwo.B2skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                B2ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 6:
+                nowSkillID = focusingCharInfo._NineAndTwo.B3skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                B3ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 7:
+                nowSkillID = focusingCharInfo._NineAndTwo.C1skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                C1ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 8:
+                nowSkillID = focusingCharInfo._NineAndTwo.C2skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                C2ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
+                case 9:
+                nowSkillID = focusingCharInfo._NineAndTwo.C1skillid;
+                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                C3ButtonText = RefreshButtonText(defaultSkillConfig);
+                break;
             }
-            GUI.backgroundColor = Repeated(focusingCharInfo, targetC, targetC.RECORD_ID) ? Color.red : SlotHasSkill(targetC.RECORD_ID);
+            KeyValuePair<string, string> kv = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.ResourceID);
+            GUI.backgroundColor = Repeated(focusingCharInfo._NineAndTwo, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.Key == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
         }
         
-        Color SlotHasSkill(string RECORD_ID)
+        SlotAnalyze(1);
+        if (GUILayout.Button(A1ButtonText, targetSlot == 1 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(RECORD_ID);
-            return defaultSkillConfig != null ? InhereSks.Key == RECORD_ID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white;
-        }
-
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetA1Config());
-        if (GUILayout.Button(A1ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetA1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
-        {
-            targetSC = focusingCharInfo._NineAndTwo.GetA1Config();
             selectedInhereskill = 0;
+            targetSlot = 1;
         }
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetA2Config());
-        if (GUILayout.Button(A2ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetA2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(2);
+        if (GUILayout.Button(A2ButtonText, targetSlot == 2 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetA2Config();
             selectedInhereskill = 0;
+            targetSlot = 2;
         }
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetA3Config());
-        if (GUILayout.Button(A3ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetA3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(3);
+        if (GUILayout.Button(A3ButtonText, targetSlot == 3 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetA3Config();
             selectedInhereskill = 0;
+            targetSlot = 3;
         }
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetB1Config());
-        if (GUILayout.Button(B1ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetB1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(4);
+        if (GUILayout.Button(B1ButtonText, targetSlot == 4 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetB1Config();
             selectedInhereskill = 0;
+            targetSlot = 4;
         }
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetB2Config());
-        if (GUILayout.Button(B2ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetB2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(5);
+        if (GUILayout.Button(B2ButtonText, targetSlot == 5 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetB2Config();
             selectedInhereskill = 0;
+            targetSlot = 5;
         }
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetB3Config());
-        if (GUILayout.Button(B3ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetB3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(6);
+        if (GUILayout.Button(B3ButtonText, targetSlot == 6 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetB3Config();
             selectedInhereskill = 0;
+            targetSlot = 6;
         }
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetC1Config());
-        if (GUILayout.Button(C1ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetC1Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(7);
+        if (GUILayout.Button(C1ButtonText, targetSlot == 7 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetC1Config();
             selectedInhereskill = 0;
+            targetSlot = 7;
         }
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetC2Config());
-        if (GUILayout.Button(C2ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetC2Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(8);
+        if (GUILayout.Button(C2ButtonText, targetSlot == 8 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetC2Config();
             selectedInhereskill = 0;
+            targetSlot = 8;
         }
-        SlotColorCal(focusingCharInfo._NineAndTwo.GetC3Config());
-        if (GUILayout.Button(C3ButtonText, targetSC != focusingCharInfo._NineAndTwo.GetC3Config() ? ButtonStyle_NineAndTwo : ButtonStyle_NineAndTwo_Selected))
+        SlotAnalyze(9);
+        if (GUILayout.Button(C3ButtonText, targetSlot == 9 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            targetSC = focusingCharInfo._NineAndTwo.GetC3Config();
             selectedInhereskill = 0;
+            targetSlot = 9;
         }
         GUI.backgroundColor = Color.white;
         GUILayout.EndHorizontal();
     }
     
-    bool Repeated(CharDataInfo _focusingCharInfo , SkillConfig _target, string recordID)
+    bool Repeated(NineAndTwo _NineAndTwo, string recordID)
     {
-        foreach (KeyValuePair<SkillConfig,string> keyValuePair in GetFocusingCharSkillList(_focusingCharInfo._NineAndTwo))
+        List<string> currentSkillList = _NineAndTwo.SkillIDList();
+        int count = 0;
+        for (int i = 0; i < currentSkillList.Count; i++)
         {
-            if (keyValuePair.Value == recordID && keyValuePair.Key != _target)
-            {
-                return true;
-            }
+            if (currentSkillList[i] == recordID)
+                count += 1;
         }
-        return false;
+        return count > 1;
     }
-    
-    // 服务于Repeated函数，获取当前编辑中角色的技能列表
-    IDictionary<SkillConfig,string> GetFocusingCharSkillList(NineAndTwo _NineAndTwo)
-    {
-        IDictionary<SkillConfig, string> list = new Dictionary<SkillConfig,string>();
         
-        SkillConfig A1 = _NineAndTwo.GetA1Config();
-        SkillConfig A2 = _NineAndTwo.GetA2Config();
-        SkillConfig A3 = _NineAndTwo.GetA3Config();
-        SkillConfig B1 = _NineAndTwo.GetB1Config();
-        SkillConfig B2 = _NineAndTwo.GetB2Config();
-        SkillConfig B3 = _NineAndTwo.GetB3Config();
-        SkillConfig C1 = _NineAndTwo.GetC1Config();
-        SkillConfig C2 = _NineAndTwo.GetC2Config();
-        SkillConfig C3 = _NineAndTwo.GetC3Config();
-        
-        A1ButtonText = RefreshButtonText(A1);
-        A2ButtonText = RefreshButtonText(A2);
-        A3ButtonText = RefreshButtonText(A3);
-        B1ButtonText = RefreshButtonText(B1);
-        B2ButtonText = RefreshButtonText(B2);
-        B3ButtonText = RefreshButtonText(B3);
-        C1ButtonText = RefreshButtonText(C1);
-        C2ButtonText = RefreshButtonText(C2);
-        C3ButtonText = RefreshButtonText(C3);
-        
-        if (A1 != null && A1.RECORD_ID != null)
-        {
-            list.Add(A1, A1.RECORD_ID);
-        }
-        if (A2 != null && A2.RECORD_ID != null)
-        {
-            list.Add(A2, A2.RECORD_ID);
-        }
-        if (A3 != null && A3.RECORD_ID != null)
-        {
-            list.Add(A3, A3.RECORD_ID);
-        }
-        if (B1 != null && B1.RECORD_ID != null)
-        {
-            list.Add(B1, B1.RECORD_ID);
-        }
-        if (B2 != null && B2.RECORD_ID != null)
-        {
-            list.Add(B2, B2.RECORD_ID);
-        }
-        if (B3 != null && B3.RECORD_ID != null)
-        {
-            list.Add(B3, B3.RECORD_ID);
-        }
-        if (C1 != null && C1.RECORD_ID != null)
-        {
-            list.Add(C1, C1.RECORD_ID);
-        }
-        if (C2 != null && C2.RECORD_ID != null)
-        {
-            list.Add(C2, C2.RECORD_ID);
-        }
-        if (C3 != null && C3.RECORD_ID != null)
-        {
-            list.Add(C3, C3.RECORD_ID);
-        }
-        return list;
-    }
-    
     string RefreshButtonText(SkillConfig skillConfig)
     {
         if (skillConfig == null)
         {
-            Debug.Log("逻辑问题");
-            return "";
+            return "-";
         }
         switch(skillConfig.SP_LEVEL)
         {

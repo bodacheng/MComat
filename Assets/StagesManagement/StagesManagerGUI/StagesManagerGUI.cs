@@ -15,7 +15,6 @@ public partial class StagesManagerGUI : Editor {
     string pathAndNameForLocalSave = "Resources/stageTemp/oneFight.json";
     IDictionary<string, string> CharIDsAndNames;
     CharDataInfo focusingCharInfo;
-    SkillConfig targetSC;
     string focusingtype;
     
     public override void OnInspectorGUI()
@@ -53,73 +52,55 @@ public partial class StagesManagerGUI : Editor {
             {
                 _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberPosID), null);
                 focusingCharInfo = null;
+                targetSlot = 0;
             }
         }
         GUILayout.EndHorizontal();
         
         if (focusingCharInfo == null)
-        {
             goto A;
-        }
-
-        string selectedCharResourceID = CharSelect();
-        if (selectedCharResourceID == null)
-            goto A;
+        
+        CharSelect();
             
         // 九宫格
         NineSlotPart();
         
         if (GUILayout.Button("推荐（暂时未适配原生技能自动适应）", ButtonStyle))
         {
+            targetSlot = 0;
             if (string.IsNullOrEmpty(focusingtype))
                 return;
             KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.ResourceID);
             focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1, false);
         }
-        
-        // 自动在A1格适配原生技能
-        if (focusingCharInfo != null)
-            AutoSetInherSkill();
-        
+                
         // 技能组评价
         SkillSetComent();
         
-        if (targetSC == null)
-        {
+        if (targetSlot == 0)
             goto A;
-        }
-        
+                
         // 技能选择
-        if (targetSC.RECORD_ID == null)
+        if (GetFocusSkillId() == null)
         {
-            // 原生技能
-            if (focusingCharInfo != null)
+            SelectInher(focusingCharInfo.ResourceID);
+            if (selectedInhereskill == 0)
             {
-                SelectInher(focusingCharInfo.ResourceID);
-                if (selectedInhereskill != 0)
-                {
-                    targetSC.RECORD_ID = SelectInhere.ElementAt(selectedInhereskill).Key;
-                    goto B;
-                }
-            }
-            SkillSelect();
+                SkillSelect();
+            }                
         }
         else
         {
             if (GUILayout.Button("重选技能", ButtonStyle))
             {
-                targetSC.RECORD_ID = null;
+                SetSkillId(null);
+                NineSlotPart();// 为了刷新格子颜色
             }
         }
         
-        if (focusingCharInfo != null && focusingCharInfo._NineAndTwo != null)
-        {
-            focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();
-        }
-        
-        B:
-        
-        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(targetSC.RECORD_ID);
+        focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();
+                
+        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(GetFocusSkillId());
         if (defaultSkillConfig == null)
         {
             goto A;
