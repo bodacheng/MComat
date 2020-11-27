@@ -126,6 +126,7 @@ public partial class StagesManagerGUI : Editor {
                     Debug.Log("未安排有效角色ID");
                     return;
                 }
+                _stagesManager.EditoringFight.EnemySets.values[i]._NineAndTwo.SortNineAndTwo();
             }
             _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.EditoringFight);
         }
