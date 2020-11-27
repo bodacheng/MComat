@@ -5,38 +5,31 @@ using UnityEditor;
 public partial class StagesManagerGUI : Editor {
     
     int selectedmonsterindex;
-    string focusingMemberPosID;
+    string focusingPosID;
     
     void Members()
-    {        
+    {
         EditorGUILayout.LabelField(" 关卡敌人信息  ", Title);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("back", (focusingMemberPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("left", (focusingPosID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedmonsterindex = 0;
-            focusingMemberPosID = 0.ToString();
-            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 0);
-            targetSlot = 0;
-        }
-        if (GUILayout.Button("left",(focusingMemberPosID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
-        {
-            selectedmonsterindex = 0;
-            focusingMemberPosID = 1.ToString();
+            focusingPosID = 1.ToString();
             focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 1);
             targetSlot = 0;
         }
-        if (GUILayout.Button("front", (focusingMemberPosID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("mid", (focusingPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedmonsterindex = 0;
-            focusingMemberPosID = 2.ToString();
-            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 2);
+            focusingPosID = 0.ToString();
+            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 0);
             targetSlot = 0;
         }
-        if (GUILayout.Button("right",(focusingMemberPosID != 3.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("right", (focusingPosID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedmonsterindex = 0;
-            focusingMemberPosID = 3.ToString();
-            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 3);
+            focusingPosID = 2.ToString();
+            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 2);
             targetSlot = 0;
         }
         GUILayout.EndHorizontal();

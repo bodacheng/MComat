@@ -38,19 +38,19 @@ public partial class StagesManagerGUI : Editor {
         {
             if (GUILayout.Button("Add", AddDeleteMember))
             {
-                focusingMemberPosID = focusingMemberPosID ?? "0";
+                focusingPosID = focusingPosID ?? "0";
                 focusingCharInfo = new CharDataInfo
                 {
-                    monsterOfPlayerId = focusingMemberPosID
+                    monsterOfPlayerId = focusingPosID
                 };
-                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberPosID), focusingCharInfo);
+                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingPosID), focusingCharInfo);
             }
         }
         if (focusingCharInfo != null)
         {
             if (GUILayout.Button("Delete", AddDeleteMember))
             {
-                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingMemberPosID), null);
+                _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingPosID), null);
                 focusingCharInfo = null;
                 targetSlot = 0;
             }

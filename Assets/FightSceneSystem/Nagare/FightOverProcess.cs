@@ -74,25 +74,28 @@ namespace FightScene
                         eventNum = FightSceneNote.nextBattle.LocalFightID,
                         StoneOfPlayerIDs = stoneids
                     };
-                    IEnumerator requestReward = RewardManager.RequestRewardsExaution(
-                        form,
-                        model => {
-                            int diamond = model.Diamond;
-                            int gold = model.Gold;
-                            FightOverControl.target.ShowRewards(gold, diamond);
-                            for (int i = 0; i < model.stonesToGetExp.Count; i++)
-                            {
-                                SkillStoneOfPlayerInfoModel one = MySkillStonesReader.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
-                                one.EXP = model.stonesToGetExp[i].EXP;
-                            }
-                        },
-                        model => {
-                            // 再次请求报酬？？
-                        },
-                        Setting.Language
-                    );
-                    yield return requestReward;
-                    FightOverControl.target.CheckNextArcadeLevel();
+                    if (fightLogger.GetWinner() == Team.player1)
+                    {
+                        IEnumerator requestReward = RewardManager.RequestRewardsExaution(
+                            form,
+                            model => {
+                                int diamond = model.Diamond;
+                                int gold = model.Gold;
+                                FightOverControl.target.ShowRewards(gold, diamond);
+                                for (int i = 0; i < model.stonesToGetExp.Count; i++)
+                                {
+                                    SkillStoneOfPlayerInfoModel one = MySkillStonesReader.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
+                                    one.EXP = model.stonesToGetExp[i].EXP;
+                                }
+                            },
+                            model => {
+                                // 再次请求报酬？？
+                            },
+                            Setting.Language
+                        );
+                        yield return requestReward;
+                        FightOverControl.target.CheckNextArcadeLevel();
+                    }
                 break;
                 case FightEventType.Self:
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。

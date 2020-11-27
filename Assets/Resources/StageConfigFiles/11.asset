@@ -20,7 +20,7 @@ MonoBehaviour:
   battleNameJPG: 
   battleNameCH: "\u4E00\u4E2A\u5C4C"
   beforefightstory: {fileID: 0}
-  Script: {fileID: 4900000, guid: a795b5989a8ea455f99e04cf9c8f9194, type: 3}
+  Script: {fileID: 4900000, guid: 0c13e89241f6a4257a1d9ee7d6469a4f, type: 3}
   StageButtonSprite: {fileID: 21300000, guid: 89d6fcf1b6e03be45b794182ea1e0de7, type: 3}
   stageLevel: 1
   Team1HpRate: 1

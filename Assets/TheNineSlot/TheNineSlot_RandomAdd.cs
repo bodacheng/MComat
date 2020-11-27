@@ -4,6 +4,7 @@ using Api.Dto.Model;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using Skill;
 
 namespace mainMenu
 {
@@ -56,6 +57,11 @@ namespace mainMenu
                 Options.OrderByDescending(x => MySkillStonesReader.Get(x).EXP);
                 allSlot[targetSlot - 1]._DragAndDropCell.AddItem(MySkillStonesReader.GetRenderModel(Options.Count > 0 ? Options[0] : null));
             }
+
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillid);
+            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL, 
+            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3), 
+            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.transform);
         }
     }
 }

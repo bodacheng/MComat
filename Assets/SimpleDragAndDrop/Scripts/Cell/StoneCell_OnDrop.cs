@@ -9,7 +9,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     /// <param name="data"></param>
     public void OnDrop(PointerEventData data)
     {
-        Debug.Log(data);
         StoneCell sourceCell = SKStoneItem.sourceCell;
         if (SKStoneItem.icon != null)
         {
