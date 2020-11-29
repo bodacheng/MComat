@@ -2,6 +2,7 @@
 using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
+using System.Collections.Generic;
 
 namespace mainMenu
 {
@@ -20,6 +21,17 @@ namespace mainMenu
         
         IEnumerator UpdateMyStonesBaseOnSlotsExecution(MonsterOfPlayerDetailModel accCharInfo)
         {
+            // 先把所有这个角色装备中的旧石头卸载。事实上，如果某个石头的装备情况没发生变化，那么就产生了一些冗余功。但我感觉不如就这样，因为客户端是可以做手脚的，
+            // 如果你用客户端判断是不是有石头在九宫格内位置没发生变化，来决定是否需要通信，那万一被人做了手脚。。
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(accCharInfo.monsterOfPlayerId);
+            for (int i = 0; i < equipingstones.Count; i++)
+            {
+                SkillStoneOfPlayerInfoModel removedStone = MySkillStonesReader.Get(equipingstones[i].skillStoneOfPlayerId);
+                removedStone.inUsingMonsterOfPlayerId = null;
+                removedStone.inUsingSkillSlot = null;
+                yield return MySkillStonesReader.Update(removedStone.skillStoneOfPlayerId);
+            }
+            
             for (int i = 0; i < allSlot.Count; i++)
             {
                 if (allSlot[i]._DragAndDropCell.GetItem() != null)
@@ -40,7 +52,7 @@ namespace mainMenu
             yield return ReadANineAndTwo(accCharInfo);
             SeletedRender(null);
             
-            MemberDetail.target.presentationProcessRunner.Run(MemberDetail.target.SkillEditConfirmAnimation());
+            yield return MemberDetail.target.SkillEditConfirmAnimation();
             MainSceneLog skillConfirmLog = new MainSceneLog()
             {
                 step = ProcessesRunner.Main.currentProcess.Step,

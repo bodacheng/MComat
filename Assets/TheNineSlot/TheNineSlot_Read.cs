@@ -17,6 +17,7 @@ namespace mainMenu
                 yield break;
             }
             List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(_AccCharInfo.monsterOfPlayerId);
+            List<int> fullSlotNum = new List<int>();
             for (int i = 0; i < equipingstones.Count; i++)
             {
                 switch (equipingstones[i].inUsingSkillSlot)
@@ -48,6 +49,45 @@ namespace mainMenu
                     case "9":
                         C3Slot.OnSlotStoneID = equipingstones[i].skillStoneOfPlayerId;
                         break;
+                }
+                int.TryParse(equipingstones[i].inUsingSkillSlot, out int a);
+                fullSlotNum.Add(a);
+            }
+
+            for (int i = 1; i <= 9; i++)
+            {
+                if (!fullSlotNum.Contains(i))
+                {
+                    switch(i.ToString())
+                    {
+                        case "1":
+                            A1Slot.OnSlotStoneID = null;
+                            break;
+                        case "2":
+                            A2Slot.OnSlotStoneID = null;
+                            break;
+                        case "3":
+                            A3Slot.OnSlotStoneID = null;
+                            break;
+                        case "4":
+                            B1Slot.OnSlotStoneID = null;
+                            break;
+                        case "5":
+                            B2Slot.OnSlotStoneID = null;
+                            break;
+                        case "6":
+                            B3Slot.OnSlotStoneID = null;
+                            break;
+                        case "7":
+                            C1Slot.OnSlotStoneID = null;
+                            break;
+                        case "8":
+                            C2Slot.OnSlotStoneID = null;
+                            break;
+                        case "9":
+                            C3Slot.OnSlotStoneID = null;
+                            break;
+                    }
                 }
             }
             

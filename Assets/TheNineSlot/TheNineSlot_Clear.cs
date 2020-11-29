@@ -22,29 +22,27 @@ namespace mainMenu
         {
             if (MemberDetail.target._focusing == null)
                 return;
-            MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
-            SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
-            
-            foreach (SkillStoneSlot _slot in allSlot)
-            {
-                SKStoneItem sK = _slot._DragAndDropCell.GetItem();
-                if (sK == null)
-                {
-                    continue;
-                }
-                if (originSkillInfo == null || (originSkillInfo != null && (sK.SkillStoneOfPlayerId != originSkillInfo.skillStoneOfPlayerId)))
-                {
-                    _slot._DragAndDropCell.RemoveToTemp();
-                }
-            }
-            
+                
             IEnumerator temp()
             {
+                MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
+                SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStonesReader.GetOriginSkillOfMonster(info.monsterOfPlayerId);
+                foreach (SkillStoneSlot _slot in allSlot)
+                {
+                    SKStoneItem sK = _slot._DragAndDropCell.GetItem();
+                    if (sK == null)
+                    {
+                        continue;
+                    }
+                    if (originSkillInfo == null || (originSkillInfo != null && (sK.SkillStoneOfPlayerId != originSkillInfo.skillStoneOfPlayerId)))
+                    {
+                        _slot._DragAndDropCell.RemoveToTemp();
+                    }
+                }
                 yield return target.UpdateMyStonesBaseOnSlotsExecution(info);
                 yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 NineSlotsStatusRefresh();
             }
-            
             mainProcessRunner.Run(temp());            
         }
     }
