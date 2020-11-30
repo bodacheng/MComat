@@ -5,7 +5,6 @@ using Api.Common;
 using Api.Dto.Form;
 using Api.Dto.Model;
 using Skill;
-using mainMenu;
 
 namespace dataAccess
 {
@@ -42,7 +41,7 @@ namespace dataAccess
                                 LoadingCanvas.target.TurnOnProcessDescription(false);
                             }
                         }
-                        PreScene.target.mainProcessRunner.Run(readOne(i));
+                        SingleThreadProcesser.backup.Run(readOne(i));
                         i++;
                     }
                 },
