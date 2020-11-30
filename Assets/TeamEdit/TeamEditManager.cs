@@ -14,7 +14,7 @@ public class TeamEditManager : MonoBehaviour
     [Space(7)]
     [Header("选中框")]
     public GameObject selectedFrame;
-
+    
     [Space(7)]
     [Header("选中角色的技能显示")]
     public NineForShow _nineForShow;
@@ -120,6 +120,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 0;
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
                 HeroIcon.Seletedfeature(team1front, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
@@ -134,6 +135,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 1;
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
                 HeroIcon.Seletedfeature(team1left, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
@@ -148,6 +150,7 @@ public class TeamEditManager : MonoBehaviour
             {
                 focusingPosNum = 2;
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
                 HeroIcon.Seletedfeature(team1right, selectedFrame, 200f);
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
