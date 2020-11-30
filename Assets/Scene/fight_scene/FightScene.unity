@@ -8852,7 +8852,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3000649884765589350}
+      - m_Target: {fileID: 3000649884636254494}
         m_MethodName: ReturnToFront
         m_Mode: 1
         m_Arguments:
@@ -26866,7 +26866,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _CameraManager: {fileID: 3000649885118306800}
-  _mobileInputsManager: {fileID: 3000649885448912316}
   WatchModeButton: {fileID: 3000649886131320850}
   autoBUtton: {fileID: 3000649886131320850}
   _C_button: {fileID: 3000649885093480754}
