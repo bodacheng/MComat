@@ -37,6 +37,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.editorcoroutines": {
+      "version": "0.1.0-preview.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.0",
       "depth": 1,
@@ -125,6 +132,120 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
+    },
+    "io.gs2.unity.sdk": {
+      "version": "2020.11.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.purchasing": "2.0.6"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.core": {
+      "version": "1.2.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "io.gs2.unity.sdk": "2020.7.3"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.credential": {
+      "version": "1.0.23",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.core": "1.2.7"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.editor-extension": {
+      "version": "1.0.22",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.editorcoroutines": "0.1.0-preview.2"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.experience": {
+      "version": "1.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.unit": "1.0.9"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.gacha": {
+      "version": "1.0.10",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.money-store": "1.0.8",
+        "io.gs2.unity.weave.unit": "1.0.9",
+        "io.gs2.unity.weave.job-queue": "1.0.9"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.gold": {
+      "version": "1.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.login": "1.0.15"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.job-queue": {
+      "version": "1.0.9",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.login": "1.0.15"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.login": {
+      "version": "1.0.15",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.credential": "1.0.23",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.money": {
+      "version": "1.0.10",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.login": "1.0.15"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.money-store": {
+      "version": "1.0.8",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.money": "1.0.10"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
+    "io.gs2.unity.weave.unit": {
+      "version": "1.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.login": "1.0.15"
+      },
+      "url": "https://upm.gs2.io/npm"
     },
     "nuget.mono-cecil": {
       "version": "0.1.6-preview",
