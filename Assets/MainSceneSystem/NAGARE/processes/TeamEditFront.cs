@@ -13,11 +13,10 @@ public class TeamEditFront : MainSceneProcess
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         yield return TeamSet.LoadTeamSet(TeamSet.targetTeamMode);
         yield return PreScene.target.TeamEditor.INITeamPosButtons();
-        yield return MonsterBox.DisplayMonsterIcons();
+        yield return MonsterBox.DisplayMonsterIcons(true);
         PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         yield return PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
-        yield break;
     }
     
     public TeamEditFront()

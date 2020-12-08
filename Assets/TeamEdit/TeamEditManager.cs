@@ -45,20 +45,37 @@ public class TeamEditManager : MonoBehaviour
             AddHeroIconFeatureToMonsterBox(keyValuePair.Key,keyValuePair.Value.iconButton);
         }
     }
-    
-    void AddHeroIconFeatureToMonsterBox(string CharRecordId, Button targetButton)
+
+    void CancelSelect()
     {
-        IEnumerator MonsterIconButton()
+        focusingPosNum = -1;
+        HeroIcon.Seletedfeature(null, selectedFrame, 200f);
+    }
+
+    IEnumerator MonsterIconButton(string CharAccId)
+    {
+        if (focusingPosNum != -1)
         {
-            yield return MemberDetail.target.SetMemberDetailFocusingChar(CharRecordId);//确立focusing角色
-            yield return ChangeTeamPos(MemberDetail.target._focusing.monsterOfPlayerId, focusingPosNum);
-            // mini nineslot show
-            yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
-            yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+            yield return ChangeTeamPos(CharAccId, focusingPosNum);
+            CancelSelect();
+            MonsterBox.target.CancelSelect();
         }
+        else
+        {
+            MonsterBox.target.Select(CharAccId);
+        }
+
+        yield return MemberDetail.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
+        // mini nineslot show
+        yield return _nineForShow.ShowStones_Acc(CharAccId);
+        yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+    }
+
+    void AddHeroIconFeatureToMonsterBox(string CharAccId, Button targetButton)
+    {
         void Trigger()
         {
-            PreScene.target.mainProcessRunner.Run(MonsterIconButton());
+            PreScene.target.mainProcessRunner.Run(MonsterIconButton(CharAccId));
         }
         targetButton.onClick.AddListener(Trigger);
     }
@@ -108,53 +125,63 @@ public class TeamEditManager : MonoBehaviour
             IEnumerator RemoveSelected()
             {
                 yield return ChangeTeamPos(null, focusingPosNum);
+                CancelSelect();
             }
             PreScene.target.mainProcessRunner.Run(RemoveSelected());
         }
         RemoveButton.onClick.AddListener(Remove);
 
         team1front.iconButton.onClick.RemoveAllListeners();
+
+        IEnumerator setPos(int posNum)
+        {
+            if (MonsterBox.selectingAccID != null)
+            {
+                yield return ChangeTeamPos(MonsterBox.selectingAccID, posNum);
+                MonsterBox.target.CancelSelect();
+                CancelSelect();
+            }
+            else
+            {
+                focusingPosNum = posNum;
+                switch (focusingPosNum)
+                {
+                    case 0:
+                        HeroIcon.Seletedfeature(team1front, selectedFrame, 200f);
+                        break;
+                    case 1:
+                        HeroIcon.Seletedfeature(team1left, selectedFrame, 200f);
+                        break;
+                    case 2:
+                        HeroIcon.Seletedfeature(team1right, selectedFrame, 200f);
+                        break;
+                    default:
+                        HeroIcon.Seletedfeature(null, selectedFrame, 200f);
+                        break;
+                }
+                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
+            }
+        }
+
         void pos1F()
         {
-            IEnumerator setPosF()
-            {
-                focusingPosNum = 0;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
-                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
-                HeroIcon.Seletedfeature(team1front, selectedFrame, 200f);
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-            }
-            PreScene.target.mainProcessRunner.Run(setPosF());
+            PreScene.target.mainProcessRunner.Run(setPos(0));
         }
         team1front.iconButton.onClick.AddListener(pos1F);
         
         team1left.iconButton.onClick.RemoveAllListeners();
         void pos1L()
         {
-            IEnumerator setPosL()
-            {
-                focusingPosNum = 1;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
-                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
-                HeroIcon.Seletedfeature(team1left, selectedFrame, 200f);
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-            }
-            PreScene.target.mainProcessRunner.Run(setPosL());
+            PreScene.target.mainProcessRunner.Run(setPos(1));
         }
         team1left.iconButton.onClick.AddListener(pos1L);
         
         team1right.iconButton.onClick.RemoveAllListeners();
         void pos1R()
         {
-            IEnumerator setPosR()
-            {
-                focusingPosNum = 2;
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
-                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
-                HeroIcon.Seletedfeature(team1right, selectedFrame, 200f);
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-            }
-            PreScene.target.mainProcessRunner.Run(setPosR());
+            PreScene.target.mainProcessRunner.Run(setPos(2));
         }
         team1right.iconButton.onClick.AddListener(pos1R);
     }

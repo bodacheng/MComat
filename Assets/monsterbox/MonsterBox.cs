@@ -33,7 +33,9 @@ namespace mainMenu
 
         public static List<string> typeOfMonstersIhave = new List<string>();
         public static readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
-        
+
+        public static string selectingAccID;
+
         void Start()
         {
             noMagic.gameObject.SetActive(false);
@@ -54,16 +56,30 @@ namespace mainMenu
         // 还有，monsterbox是所有角色CharacterDataInfo的由来，而这个信息现在记载了技能信息，从而可以说这个信息量现在非常大，逻辑出问题也会出现错误。
         // 19.1.3 : monsterbox应该具备能力可以非常灵活的根据检索条件对所有monster进行分类显示，优先显示等等。
         // 这个函数的生成本随着“type”选项卡的整理。
-        public static IEnumerator MonsterIconsGenerate()
+        public static IEnumerator MonsterIconsGenerate(bool clearButtonFeature)
         {
+            selectingAccID = null;
             foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
             {
-                yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId);
+                yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId, clearButtonFeature);
             }
             target._monsterboxFilter.RefreshTypeDropDown(typeOfMonstersIhave);
         }
 
-        public static IEnumerator AddOneNewIcon(string monsterOfPlayerId)
+        public void CancelSelect()
+        {
+            selectingAccID = null;
+            HeroIcon.Seletedfeature(null, target.selectedFrame, 150f);
+        }
+
+        public void Select(string monsterOfPlayerId)
+        {
+            HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
+            HeroIcon.Seletedfeature(targetingIcon, target.selectedFrame, 150f);
+            selectingAccID = monsterOfPlayerId;
+        }
+
+        public static IEnumerator AddOneNewIcon(string monsterOfPlayerId, bool clearButtonFeature)
         {
             MonsterOfPlayerDetailModel targetingCharInfo = AccountCharsSet.Get(monsterOfPlayerId);
             CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
@@ -76,14 +92,10 @@ namespace mainMenu
                 targetingIcon.name = _CharConfig.REAL_NAME + "_icon";
                 targetingIcon._CharConfig = _CharConfig;
                 targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
-                void Select()
-                {
-                    HeroIcon.Seletedfeature(targetingIcon, target.selectedFrame, 150f);
-                }
-                targetingIcon.iconButton.onClick.AddListener(Select);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);
             }
-            
+            if (clearButtonFeature)
+                targetingIcon.iconButton.onClick.RemoveAllListeners();
             if (!typeOfMonstersIhave.Contains(targetingIcon._CharConfig.TYPE))
             {
                 typeOfMonstersIhave.Add(targetingIcon._CharConfig.TYPE);
@@ -93,14 +105,14 @@ namespace mainMenu
 
         public void OnTypeChangeMyMonsterBox()
         {
-            PreScene.target.mainProcessRunner.Run(DisplayMonsterIcons());
+            PreScene.target.mainProcessRunner.Run(DisplayMonsterIcons(false));
         }
 
         //icon的排列，显示   
-        public static IEnumerator DisplayMonsterIcons()
+        public static IEnumerator DisplayMonsterIcons(bool clearButtonFeature)
         {
             target.MonsterBoxContainer.gameObject.SetActive(true);
-            yield return MonsterIconsGenerate();
+            yield return MonsterIconsGenerate(clearButtonFeature);
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);

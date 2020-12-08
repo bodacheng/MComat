@@ -156,11 +156,12 @@ namespace mainMenu
             }
         }
         
-        void AddHeroIconFeatureToMonsterBox(string CharRecordId, Button targetButton)
+        void AddHeroIconFeatureToMonsterBox(string CharAccID, Button targetButton)
         {
             IEnumerator MonsterIconButton()
             {
-                yield return MonsterIConButton(CharRecordId);
+                MonsterBox.target.Select(CharAccID);
+                yield return MonsterIConButton(CharAccID);
             }
             void Trigger()
             {

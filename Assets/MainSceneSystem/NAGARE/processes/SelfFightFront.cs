@@ -12,7 +12,7 @@ public class SelfFightFront : MainSceneProcess
         
         MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
-        yield return MonsterBox.DisplayMonsterIcons();
+        yield return MonsterBox.DisplayMonsterIcons(true);
         _SelfFightManager.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);
         yield return ModelShower.target.ShowMyModel(null);

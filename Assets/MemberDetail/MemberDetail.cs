@@ -75,6 +75,7 @@ namespace mainMenu
         {
             IEnumerator MonsterIconButton()
             {
+                MonsterBox.target.Select(CharLocalId);
                 yield return target.SetMemberDetailFocusingChar(CharLocalId);//确立focusing角色
                 yield return target.RefreshMemberDetailPageByFocusingChar();
             }
