@@ -23,7 +23,7 @@ namespace mainMenu
         
         [Space(7)]
         [Header("共同战斗式按钮")]
-        public RectTransform MuitiRaidTeam1T,MuitiRaidTeam2T;
+        public RectTransform MuitiRaidTeam1T, MuitiRaidTeam2T;
         public HeroIcon team1back, team1front, team1left, team1right, team1_1, team1_2,team1_3,team1_4,team1_5,team1_6;
         public HeroIcon team2back, team2front, team2left, team2right, team2_1, team2_2,team2_3,team2_4,team2_5,team2_6;
         
@@ -41,8 +41,7 @@ namespace mainMenu
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
         Team focusingTeam;
-        int focusingPosition;
-        readonly HeroIcon focusingPosButton;
+        int focusingPosNum = -1;
         
         PosKeySet _team1positionLocalCharKeySet_M = new PosKeySet();
         PosKeySet _team2positionLocalCharKeySet_M = new PosKeySet();
@@ -81,7 +80,13 @@ namespace mainMenu
             _team1positionLocalCharKeySet_R = new PosKeySet();
             _team2positionLocalCharKeySet_R = new PosKeySet();
         }
-        
+
+        void CancelSelect()
+        {
+            focusingPosNum = -1;
+            HeroIcon.Seletedfeature(null, selectedFrame, 200f);
+        }
+
         public void SwitchToMultiRaidMode()
         {
             MuitiRaidTeam1T.gameObject.SetActive(true);
@@ -173,40 +178,43 @@ namespace mainMenu
         
         public IEnumerator MonsterIConButton(string localID)
         {
-            if (focusingTeam == Team.none || focusingPosition < 0)
-                yield break;
-            MonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(localID);
-            switch (stage.Team1Mode)
+            if (focusingPosNum == -1)
             {
-                case TeamMode.multiraid:
-                    switch (focusingTeam)
-                    {
-                        case Team.player1:
-                            _team1positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosition, localID);
-                            yield return ChangeIconOnPos(focusingPosition, team1ButtonDic_M,_team1positionLocalCharKeySet_M);
-                            break;
-                        case Team.player2:
-                            _team2positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosition, localID);
-                            yield return ChangeIconOnPos(focusingPosition, team2ButtonDic_M,_team2positionLocalCharKeySet_M);
-                            break;
-                    }
-                    break;
-                case TeamMode.rotation:
-                    switch (focusingTeam)
-                    {
-                        case Team.player1:
-                            _team1positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosition, localID);
-                            yield return ChangeIconOnPos(focusingPosition, team1ButtonDic_R,_team1positionLocalCharKeySet_R);
-                            break;
-                        case Team.player2:
-                            _team2positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosition, localID);
-                            yield return ChangeIconOnPos(focusingPosition, team2ButtonDic_R,_team2positionLocalCharKeySet_R);
-                            break;
-                    }
-                    break;
+                MonsterBox.target.Select(localID);
             }
-            yield break;
-            
+            else
+            {
+                switch (stage.Team1Mode)
+                {
+                    case TeamMode.multiraid:
+                        switch (focusingTeam)
+                        {
+                            case Team.player1:
+                                _team1positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosNum, localID);
+                                yield return ChangeIconOnPos(focusingPosNum, team1ButtonDic_M, _team1positionLocalCharKeySet_M);
+                                break;
+                            case Team.player2:
+                                _team2positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosNum, localID);
+                                yield return ChangeIconOnPos(focusingPosNum, team2ButtonDic_M, _team2positionLocalCharKeySet_M);
+                                break;
+                        }
+                        break;
+                    case TeamMode.rotation:
+                        switch (focusingTeam)
+                        {
+                            case Team.player1:
+                                _team1positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosNum, localID);
+                                yield return ChangeIconOnPos(focusingPosNum, team1ButtonDic_R, _team1positionLocalCharKeySet_R);
+                                break;
+                            case Team.player2:
+                                _team2positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosNum, localID);
+                                yield return ChangeIconOnPos(focusingPosNum, team2ButtonDic_R, _team2positionLocalCharKeySet_R);
+                                break;
+                        }
+                        break;
+                }
+            }
+
             //以下为防重复版本选人。
             //switch (this.focusingTeam)
             //{
@@ -318,14 +326,14 @@ namespace mainMenu
                 string pos = i.ToString().Clone().ToString();
                 void A()
                 {
-                    OneTeamPosButtonBehaviour(team,pos);
+                    OneTeamPosButtonBehaviour(team, pos);
                 }
                 charIcon.iconButton.onClick.AddListener(A);
                 charIcon.iconButton.onClick.AddListener(SelectedRender);
             }
         }
         
-        void IniRotationModeCharIcons(List<HeroIcon> icons,Team team)
+        void IniRotationModeCharIcons(List<HeroIcon> icons, Team team)
         {
             IDictionary<int, HeroIcon> targetTeamIcons;
             switch (team)
@@ -348,26 +356,25 @@ namespace mainMenu
                 targetTeamIcons.Add(i,charIcon);
                 charIcon.ChangeIcon(null, Zokusei.Null);
                 charIcon.iconButton.onClick.RemoveAllListeners();
-                
-                void SelectedRender()
-                {
-                    HeroIcon.Seletedfeature(charIcon,selectedFrame, 110f);
-                }
-                
+
                 string pos = i.ToString().Clone().ToString();
                 void A()
                 {
-                    OneTeamPosButtonBehaviour(team,pos);
+                    OneTeamPosButtonBehaviour(team, pos);
                 }
                 charIcon.iconButton.onClick.AddListener(A);
-                charIcon.iconButton.onClick.AddListener(SelectedRender);
             }
+        }
+
+        void SelectedRender(HeroIcon charIcon)
+        {
+            HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
         }
 
         public IEnumerator INITeamPosButtons()
         {
-            IniMutiRaidModeCharIcons(new List<HeroIcon> { team1back, team1left,team1front,team1right,team1_1,team1_2,team1_3,team1_4,team1_5,team1_6}, Team.player1);
-            IniMutiRaidModeCharIcons(new List<HeroIcon> { team2back, team2left,team2front,team2right,team2_1,team2_2,team2_3,team2_4,team2_5,team2_6}, Team.player2);
+            IniMutiRaidModeCharIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right, team1_1, team1_2, team1_3, team1_4, team1_5, team1_6}, Team.player1);
+            IniMutiRaidModeCharIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right, team2_1, team2_2, team2_3, team2_4, team2_5, team2_6}, Team.player2);
 
             IniRotationModeCharIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
             IniRotationModeCharIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
@@ -384,8 +391,18 @@ namespace mainMenu
         void OneTeamPosButtonBehaviour(Team team, string pos)
         {
             focusingTeam = team;
-            focusingPosition = int.Parse(pos);
-            //Debug.Log("点击了队伍" + team + "的位置" + pos);
+            focusingPosNum = int.Parse(pos);
+
+            if (MonsterBox.selectingAccID != null)
+            {
+                IEnumerator temp()
+                {
+                    yield return MonsterIConButton(MonsterBox.selectingAccID);
+                    CancelSelect();
+                    MonsterBox.target.CancelSelect();
+                }
+                PreScene.target.mainProcessRunner.Run(temp());
+            }
         }
     }
 }
