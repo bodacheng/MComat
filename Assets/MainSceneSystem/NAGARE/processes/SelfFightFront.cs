@@ -16,6 +16,7 @@ public class SelfFightFront : MainSceneProcess
         _SelfFightManager.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);
         yield return ModelShower.target.ShowMyModel(null);
+        _SelfFightManager.SwitchToRotationMode();
     }
     
     public SelfFightFront()

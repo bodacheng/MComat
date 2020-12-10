@@ -12,7 +12,7 @@ public class PosKeySet
     
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
+        PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null), new PosNumWithLocalKey(3, null) };
     }
     
     public MonsterTeamOfPlayerModel ToMonsterTeamOfPlayerModel(string teamType)

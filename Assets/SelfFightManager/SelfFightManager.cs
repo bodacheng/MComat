@@ -16,7 +16,11 @@ namespace mainMenu
         [Space(7)]
         [Header("基本UI元素")]
         public Button FightStartBUtton;
-        
+
+        [Space(7)]
+        [Header("模式选中框")]
+        public GameObject RFrame, MFrame, TFrame;
+
         [Space(7)]
         [Header("选中框")]
         public GameObject selectedFrame;
@@ -24,20 +28,20 @@ namespace mainMenu
         [Space(7)]
         [Header("共同战斗式按钮")]
         public RectTransform MuitiRaidTeam1T, MuitiRaidTeam2T;
-        public HeroIcon team1back, team1front, team1left, team1right, team1_1, team1_2,team1_3,team1_4,team1_5,team1_6;
-        public HeroIcon team2back, team2front, team2left, team2right, team2_1, team2_2,team2_3,team2_4,team2_5,team2_6;
+        public HeroIcon team1back, team1front, team1left, team1right;
+        public HeroIcon team2back, team2front, team2left, team2right;
         
         [Space(7)]
         [Header("轮番战斗式按钮")]
-        public Transform RotationTeam1T,RotationTeam2T;
+        public Transform RotationTeam1T, RotationTeam2T;
         public HeroIcon team11_R, team12_R, team13_R;
         public HeroIcon team21_R, team22_R, team23_R;
-        
-        readonly IDictionary<int, HeroIcon> team1ButtonDic_M = new Dictionary<int, HeroIcon>();
-        readonly IDictionary<int, HeroIcon> team2ButtonDic_M = new Dictionary<int, HeroIcon>();
-        readonly IDictionary<int, HeroIcon> team1ButtonDic_R = new Dictionary<int, HeroIcon>();
-        readonly IDictionary<int, HeroIcon> team2ButtonDic_R = new Dictionary<int, HeroIcon>();
-        
+
+        public MultiDictionary<Team, int, HeroIcon> teamButtonDic_M = new MultiDictionary<Team, int, HeroIcon>();
+        public MultiDictionary<Team, int, HeroIcon> teamButtonDic_R = new MultiDictionary<Team, int, HeroIcon>();
+
+        IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
+
         LocalFight _selfFight = new LocalFight { };
         StageScriptableObject stage;
         Team focusingTeam;
@@ -54,27 +58,19 @@ namespace mainMenu
             {
                 BattleGroundID = 0
             };
-            SwitchToRotationMode();
         }
 
         public void Clear()
         {
-            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team1ButtonDic_M)
+            foreach (HeroIcon Icon in teamButtonDic_M.values)
             {
-                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
+                Icon.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team2ButtonDic_M)
+            foreach (HeroIcon Icon in teamButtonDic_R.values)
             {
-                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
+                Icon.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team1ButtonDic_R)
-            {
-                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
-            }
-            foreach (KeyValuePair<int, HeroIcon> keyValuePair in team2ButtonDic_R)
-            {
-                keyValuePair.Value.ChangeIcon(null, Zokusei.Null);
-            }
+
             _team1positionLocalCharKeySet_M = new PosKeySet();
             _team2positionLocalCharKeySet_M = new PosKeySet();
             _team1positionLocalCharKeySet_R = new PosKeySet();
@@ -93,6 +89,9 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
+            RFrame.gameObject.SetActive(false);
+            MFrame.gameObject.SetActive(true);
+            TFrame.gameObject.SetActive(false);
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
@@ -104,6 +103,9 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(false);
             RotationTeam1T.gameObject.SetActive(true);
             RotationTeam2T.gameObject.SetActive(true);
+            RFrame.gameObject.SetActive(true);
+            MFrame.gameObject.SetActive(false);
+            TFrame.gameObject.SetActive(false);
             stage._fightEventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
@@ -115,6 +117,9 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
+            RFrame.gameObject.SetActive(false);
+            MFrame.gameObject.SetActive(false);
+            TFrame.gameObject.SetActive(true);
             stage._fightEventType = FightEventType.Test;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
@@ -191,11 +196,11 @@ namespace mainMenu
                         {
                             case Team.player1:
                                 _team1positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosNum, localID);
-                                yield return ChangeIconOnPos(focusingPosNum, team1ButtonDic_M, _team1positionLocalCharKeySet_M);
+                                yield return ChangeIconOnPos(focusingPosNum, teamButtonDic_M, _team1positionLocalCharKeySet_M);
                                 break;
                             case Team.player2:
                                 _team2positionLocalCharKeySet_M.SetPosMemInfoByLocalID(focusingPosNum, localID);
-                                yield return ChangeIconOnPos(focusingPosNum, team2ButtonDic_M, _team2positionLocalCharKeySet_M);
+                                yield return ChangeIconOnPos(focusingPosNum, teamButtonDic_M, _team2positionLocalCharKeySet_M);
                                 break;
                         }
                         break;
@@ -204,15 +209,17 @@ namespace mainMenu
                         {
                             case Team.player1:
                                 _team1positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosNum, localID);
-                                yield return ChangeIconOnPos(focusingPosNum, team1ButtonDic_R, _team1positionLocalCharKeySet_R);
+                                yield return ChangeIconOnPos(focusingPosNum, teamButtonDic_R, _team1positionLocalCharKeySet_R);
                                 break;
                             case Team.player2:
                                 _team2positionLocalCharKeySet_R.SetPosMemInfoByLocalID(focusingPosNum, localID);
-                                yield return ChangeIconOnPos(focusingPosNum, team2ButtonDic_R, _team2positionLocalCharKeySet_R);
+                                yield return ChangeIconOnPos(focusingPosNum, teamButtonDic_R, _team2positionLocalCharKeySet_R);
                                 break;
                         }
                         break;
                 }
+                CancelSelect();
+                MonsterBox.target.CancelSelect();
             }
 
             //以下为防重复版本选人。
@@ -255,23 +262,14 @@ namespace mainMenu
             //} 
         }
 
-        IEnumerator ChangeIconOnPos(int posNum, IDictionary<int, HeroIcon> teamButtonDic, PosKeySet positionLocalCharKey)
+        IEnumerator ChangeIconOnPos(int posNum, MultiDictionary<Team, int, HeroIcon> teamButtonDic, PosKeySet positionLocalCharKey)
         {
             if (posNum == -1)
             {
                 Debug.Log("请检查changeIconOnPos函数执行顺序");
                 yield break;
             }
-            HeroIcon tar = null;
-            if (teamButtonDic.ContainsKey(posNum))
-            {
-                teamButtonDic.TryGetValue(posNum, out tar);
-            }
-            else
-            {
-                Debug.Log("错误的位置值：" + posNum);
-                yield break;
-            }
+            HeroIcon tar = teamButtonDic.Get(focusingTeam, posNum);
             if (tar == null)
             {
                 Debug.Log("严重错误");
@@ -281,9 +279,8 @@ namespace mainMenu
             string PositionMonsterOfPlayerId = positionLocalCharKey.GetMonsterOfPlayerIdOnPos(posNum);
             if (PositionMonsterOfPlayerId != null)
             {
-                CharConfig charConfig = null;
                 MonsterOfPlayerDetailModel _one = AccountCharsSet.Get(PositionMonsterOfPlayerId);
-                charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
+                CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
                 tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
                     charConfig == null ? Zokusei.Null : charConfig._zokusei);
             }
@@ -294,40 +291,24 @@ namespace mainMenu
             yield break;
         }
 
-        public void IniMutiRaidModeCharIcons(List<HeroIcon> icons,Team team)
+        public void IniMutiRaidModeCharIcons(List<HeroIcon> icons, Team team)
         {
-            IDictionary<int, HeroIcon> targetTeamIcons;
-            switch (team)
-            {
-                case Team.player1:
-                    targetTeamIcons = team1ButtonDic_M;
-                break;
-                case Team.player2:
-                    targetTeamIcons = team2ButtonDic_M;
-                break;
-                default:
-                    Debug.Log("logic error");
-                    return;
-            }
-            if (targetTeamIcons == null) targetTeamIcons = new Dictionary<int, HeroIcon>();
-            else targetTeamIcons.Clear();
             for (int i = 0; i < icons.Count; i++)
             {
                 HeroIcon charIcon = icons[i];
-                targetTeamIcons.Add(i,charIcon);
+                teamButtonDic_M.Set(team, i, charIcon);
+                DicAdd<HeroIcon, int>.Add(IconNumCheck, charIcon, i);
                 charIcon.ChangeIcon(null, Zokusei.Null);
-                charIcon.iconButton.onClick.RemoveAllListeners();
                 
                 void SelectedRender()
                 {
-                    HeroIcon.Seletedfeature(charIcon,selectedFrame,110f);
+                    HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
                 }
-
-                string pos = i.ToString().Clone().ToString();
                 void A()
                 {
-                    OneTeamPosButtonBehaviour(team, pos);
+                    OneTeamPosButtonBehaviour(team, IconNumCheck[charIcon]);
                 }
+                charIcon.iconButton.onClick.RemoveAllListeners();
                 charIcon.iconButton.onClick.AddListener(A);
                 charIcon.iconButton.onClick.AddListener(SelectedRender);
             }
@@ -335,34 +316,24 @@ namespace mainMenu
         
         void IniRotationModeCharIcons(List<HeroIcon> icons, Team team)
         {
-            IDictionary<int, HeroIcon> targetTeamIcons;
-            switch (team)
-            {
-                case Team.player1:
-                    targetTeamIcons = team1ButtonDic_R;
-                break;
-                case Team.player2:
-                    targetTeamIcons = team2ButtonDic_R;
-                break;
-                default:
-                    Debug.Log("logic error");
-                return;
-            }
-            if (targetTeamIcons == null) targetTeamIcons = new Dictionary<int, HeroIcon>();
-            else targetTeamIcons.Clear();
             for (int i = 0; i < icons.Count; i++)
             {
                 HeroIcon charIcon = icons[i];
-                targetTeamIcons.Add(i,charIcon);
+                teamButtonDic_R.Set(team, i, charIcon);
+                DicAdd<HeroIcon, int>.Add(IconNumCheck, charIcon, i);
                 charIcon.ChangeIcon(null, Zokusei.Null);
-                charIcon.iconButton.onClick.RemoveAllListeners();
 
-                string pos = i.ToString().Clone().ToString();
+                void SelectedRender()
+                {
+                    HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
+                }
                 void A()
                 {
-                    OneTeamPosButtonBehaviour(team, pos);
+                    OneTeamPosButtonBehaviour(team, IconNumCheck[charIcon]);
                 }
+                charIcon.iconButton.onClick.RemoveAllListeners();
                 charIcon.iconButton.onClick.AddListener(A);
+                charIcon.iconButton.onClick.AddListener(SelectedRender);
             }
         }
 
@@ -373,8 +344,8 @@ namespace mainMenu
 
         public IEnumerator INITeamPosButtons()
         {
-            IniMutiRaidModeCharIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right, team1_1, team1_2, team1_3, team1_4, team1_5, team1_6}, Team.player1);
-            IniMutiRaidModeCharIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right, team2_1, team2_2, team2_3, team2_4, team2_5, team2_6}, Team.player2);
+            IniMutiRaidModeCharIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
+            IniMutiRaidModeCharIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
 
             IniRotationModeCharIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
             IniRotationModeCharIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
@@ -388,18 +359,16 @@ namespace mainMenu
             yield break;
         }
 
-        void OneTeamPosButtonBehaviour(Team team, string pos)
+        void OneTeamPosButtonBehaviour(Team team, int pos)
         {
             focusingTeam = team;
-            focusingPosNum = int.Parse(pos);
+            focusingPosNum = pos;
 
             if (MonsterBox.selectingAccID != null)
             {
                 IEnumerator temp()
                 {
                     yield return MonsterIConButton(MonsterBox.selectingAccID);
-                    CancelSelect();
-                    MonsterBox.target.CancelSelect();
                 }
                 PreScene.target.mainProcessRunner.Run(temp());
             }
