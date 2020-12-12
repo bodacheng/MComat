@@ -1,9 +1,18 @@
 ﻿using System.Collections;
-using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using UnityEngine.SceneManagement;
 using mainMenu;
+using Gs2.Unity;
+using Gs2.Unity.Util;
+using Gs2.Weave.Login;
+using Gs2.Weave.Credential;
+using Gs2.Core.Exception;
+using Weave.Core.Runtime;
+using Gs2.Unity.Gs2JobQueue.Model;
+using UnityEngine.Events;
+using UnityEngine;
+using Gs2.Unity.Gs2Auth;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -40,7 +49,41 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     CachDownLoadMission animationConfigFileMission;
     
     public bool DProcessFinished { get; set; }
-    
+
+    /// <summary>
+    /// GS2 相关
+    /// </summary>
+    /// 
+    public LoginDirector loginDirector;
+    public CredentialDirector credentialDirector;
+    private Gs2Client _client;
+    private Gs2GameSession _session;
+
+    IEnumerator Gs2Login()
+    {
+        yield return credentialDirector.Run();
+        if (_client != null)
+        {
+            Debug.Log(_client);
+        }
+        //yield return loginDirector.Run(_client.Client, new PlayerPrefsAccountRepository());
+    }
+
+    public void OnCreateGs2Client(Gs2Client client)
+    {
+        Debug.Log("SceneDirector::OnCreateGs2Client");
+
+        _client = client;
+
+        StartCoroutine(loginDirector.Run(client.Client, new PlayerPrefsAccountRepository()));
+    }
+
+    public void OnCreateGameSession(Gs2GameSession session)
+    {
+        Debug.Log("SceneDirector::OnCreateGameSession");
+        _session = session;
+    }
+
     void Start()
     {
         DProcessFinished = false;
@@ -49,7 +92,8 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     
     public void BeginRemoteTestMode()
     {
-        StartCoroutine(_BeginRemoteTestMode());
+        //StartCoroutine(_BeginRemoteTestMode());
+        StartCoroutine(Gs2Login());
     }
     
     public void BeginLocalTestMode()
