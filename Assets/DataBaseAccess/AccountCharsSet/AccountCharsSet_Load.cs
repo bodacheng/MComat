@@ -4,6 +4,8 @@ using UnityEngine;
 using Api.Dto.Model;
 using Api.Common;
 using Api.Dto.Form;
+using Gs2.Weave.Unit;
+using Gs2.Weave.Login;
 
 namespace dataAccess
 {
@@ -12,6 +14,9 @@ namespace dataAccess
         #region 获取所有角色
         public static IEnumerator Load_List()
         {
+            // GS2 version
+            yield return me_UnitDirector.target.Run(me_LoginDirector._myclient.Client, me_LoginDirector._mysession.Session, new Dictionary<string, string>());
+
             GetMonsterOfPlayerListForm form = new GetMonsterOfPlayerListForm
             {
                 playerId = AccountSet._AccInfo.PlayerName

@@ -54,17 +54,16 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     /// GS2 相关
     /// </summary>
     /// 
-    public LoginDirector loginDirector;
+    public me_LoginDirector loginDirector;
     public CredentialDirector credentialDirector;
-    public static Gs2Client _myclient;
-    public static Gs2GameSession _mysession;
 
     IEnumerator Gs2Login()
     {
+        me_LoginDirector.loginFinished = false;
         yield return credentialDirector.Run();
-        if (_myclient != null)
+        while (!me_LoginDirector.loginFinished)
         {
-            Debug.Log(_myclient);
+            yield return null;
         }
         yield return _BeginLocalTestMode();
     }
@@ -72,16 +71,14 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     public void OnCreateGs2Client(Gs2Client client)
     {
         Debug.Log("SceneDirector::OnCreateGs2Client");
-
-        _myclient = client;
-
+        me_LoginDirector._myclient = client;
         StartCoroutine(loginDirector.Run(client.Client, new PlayerPrefsAccountRepository()));
     }
 
     public void OnCreateGameSession(Gs2GameSession session)// login
     {
         Debug.Log("SceneDirector::OnCreateGameSession");
-        _mysession = session;
+        me_LoginDirector._mysession = session;
     }
 
     void Start()

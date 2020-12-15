@@ -188,16 +188,6 @@ PrefabInstance:
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3965122150900362587, guid: 0aa33f33d1b0b864a833d6ae1c614748,
-        type: 3}
-      propertyPath: applicationClientId
-      value: GKIrHmSEOIAi_DmtK9UR9jf366TPVyczD30RjHNwBE83aBmQdjXQaJVrAgHxjKgD1Kf
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965122150900362587, guid: 0aa33f33d1b0b864a833d6ae1c614748,
-        type: 3}
-      propertyPath: applicationClientSecret
-      value: aVVHUTVxUFJHZ25UcHc0WkkyN1IzQUdEbHdYQmZ6UXA=
-      objectReference: {fileID: 0}
     - target: {fileID: 4420731715639397950, guid: 0aa33f33d1b0b864a833d6ae1c614748,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,11 +247,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Credential
-      objectReference: {fileID: 0}
-    - target: {fileID: 8154755449197551303, guid: 0aa33f33d1b0b864a833d6ae1c614748,
-        type: 3}
-      propertyPath: applicationUserName
-      value: test
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa33f33d1b0b864a833d6ae1c614748, type: 3}
@@ -664,16 +649,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6930373840697842912, guid: 1e68b459274bcb94c8791ee0191f241d,
-        type: 3}
-      propertyPath: accountNamespaceName
-      value: account
-      objectReference: {fileID: 0}
-    - target: {fileID: 6930373840697842912, guid: 1e68b459274bcb94c8791ee0191f241d,
-        type: 3}
-      propertyPath: accountEncryptionKeyId
-      value: grn:gs2:ap-northeast-1:c2Zr7Lt8-c2Zr7Lt8:key:account-key:key:key
       objectReference: {fileID: 0}
     - target: {fileID: 6930373840697842913, guid: 1e68b459274bcb94c8791ee0191f241d,
         type: 3}
@@ -1273,26 +1248,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657473100232657574, guid: 97f9c62053af1c949a8f0ac03e7e8ce4,
-        type: 3}
-      propertyPath: inventoryNamespaceName
-      value: unit
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657473100232657574, guid: 97f9c62053af1c949a8f0ac03e7e8ce4,
-        type: 3}
-      propertyPath: inventoryModelName
-      value: unit
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657473100232657574, guid: 97f9c62053af1c949a8f0ac03e7e8ce4,
-        type: 3}
-      propertyPath: identifierAcquireUnitClientId
-      value: GKIZV1ixBn9dFAUJde5mofoDPl62adBZWzwHNaH8VlBm7NokJYALu9Sv5VokMqn2nGAkllYLbTdaP1EMgWEseuidg==
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657473100232657574, guid: 97f9c62053af1c949a8f0ac03e7e8ce4,
-        type: 3}
-      propertyPath: identifierAcquireUnitClientSecret
-      value: S1FLU1A3SW1GMGxGR1BUUXg5VnRRc0k5OFVYR1NCWVk=
       objectReference: {fileID: 0}
     - target: {fileID: 5657473100232657576, guid: 97f9c62053af1c949a8f0ac03e7e8ce4,
         type: 3}
