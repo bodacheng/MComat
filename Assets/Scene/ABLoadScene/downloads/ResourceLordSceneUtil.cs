@@ -57,17 +57,6 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     public me_LoginDirector loginDirector;
     public CredentialDirector credentialDirector;
 
-    IEnumerator Gs2Login()
-    {
-        me_LoginDirector.loginFinished = false;
-        yield return credentialDirector.Run();
-        while (!me_LoginDirector.loginFinished)
-        {
-            yield return null;
-        }
-        yield return _BeginLocalTestMode();
-    }
-
     public void OnCreateGs2Client(Gs2Client client)
     {
         Debug.Log("SceneDirector::OnCreateGs2Client");
@@ -86,13 +75,24 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         DProcessFinished = false;
         BundleURL = assetBundleURL;
     }
-    
+
+    // 测试中的远程模式
     public void BeginRemoteTestMode()
     {
-        //StartCoroutine(_BeginRemoteTestMode());
         StartCoroutine(Gs2Login());
     }
-    
+    IEnumerator Gs2Login()
+    {
+        me_LoginDirector.loginFinished = false;
+        yield return credentialDirector.Run();
+        while (!me_LoginDirector.loginFinished)
+        {
+            yield return null;
+        }
+        AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
+        EnterFrontScene();
+    }
+
     public void BeginLocalTestMode()
     {
         StartCoroutine(_BeginLocalTestMode());
@@ -106,13 +106,6 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     public void ToMainScene()
     {
         StartCoroutine(ToMainSceneDirectly());
-    }
-    
-    IEnumerator _BeginRemoteTestMode()
-    {
-        AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
-        yield return AccountSet.login();
-        EnterFrontScene();
     }
     
     IEnumerator _BeginLocalTestMode()

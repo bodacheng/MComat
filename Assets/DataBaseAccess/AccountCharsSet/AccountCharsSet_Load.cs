@@ -14,9 +14,6 @@ namespace dataAccess
         #region 获取所有角色
         public static IEnumerator Load_List()
         {
-            // GS2 version
-            yield return me_UnitDirector.target.Run(me_LoginDirector._myclient.Client, me_LoginDirector._mysession.Session, new Dictionary<string, string>());
-
             GetMonsterOfPlayerListForm form = new GetMonsterOfPlayerListForm
             {
                 playerId = AccountSet._AccInfo.PlayerName
@@ -61,18 +58,21 @@ namespace dataAccess
                 case PlayerInfoRefMode.formalVersion:
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return ApiCaller.Instance.Post<GetMonsterOfPlayerListModel, GetMonsterOfPlayerListForm> 
-                        (
-                            "http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", 
-                            form, 
-                            ApiCaller.Instance.getHeader(apiLanguage),
-                            model => {
-                                success(model.data);
-                            },
-                            model => {
-                                fail(model.data);
-                            }
-                        );
+                    // GS2 version
+                    yield return me_UnitDirector.target.Run(me_LoginDirector._myclient.Client, me_LoginDirector._mysession.Session, new Dictionary<string, string>());
+
+                    //yield return ApiCaller.Instance.Post<GetMonsterOfPlayerListModel, GetMonsterOfPlayerListForm> 
+                    //    (
+                    //        "http://160.16.187.230/AssetStoreFight/team/setMonsterTeamOfPlayer", 
+                    //        form, 
+                    //        ApiCaller.Instance.getHeader(apiLanguage),
+                    //        model => {
+                    //            success(model.data);
+                    //        },
+                    //        model => {
+                    //            fail(model.data);
+                    //        }
+                    //    );
                     break;
             }
         }
