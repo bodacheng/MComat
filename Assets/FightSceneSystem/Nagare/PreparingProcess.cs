@@ -16,6 +16,7 @@ public class PreparingProcess : FSceneProcess
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
         RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
+        //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
         if (FightSceneNote.nextBattle != null)
         {
@@ -35,6 +36,7 @@ public class PreparingProcess : FSceneProcess
         }
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
+        
         LoadingCanvas.target.LightUp();
     }
     
