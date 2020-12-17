@@ -6,6 +6,8 @@ using System.Linq;
 // 用于在每一局游戏里起记录数据的作用，包括胜利判断，都应该是由本模块来执行。
 public class FightLogger : MonoBehaviour
 {
+    public static FightLogger target;
+
     public ReactiveProperty<bool> GameOver{ get; set; } = new ReactiveProperty<bool>(false);
     
     readonly IDictionary<Team, List<Data_Center>> TeamDeadMemberDic = new Dictionary<Team, List<Data_Center>>();
@@ -13,7 +15,12 @@ public class FightLogger : MonoBehaviour
     readonly List<SingleAssignmentDisposable> WatchPlayerers = new List<SingleAssignmentDisposable>();
     Team winner = Team.none;
     int wholeteamCount;
-    
+
+    void Awake()
+    {
+        target = this;
+    }
+
     public Team GetWinner()
     {
         return winner;

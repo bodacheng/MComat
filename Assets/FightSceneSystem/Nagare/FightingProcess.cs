@@ -1,40 +1,37 @@
-﻿using UnityEngine;
-
-namespace FightScene
+﻿namespace FightScene
 {
     public class FightingProcess : FSceneProcess
     {
-        public FightingProcess(NetFightScene _NetFightScene)
+        public FightingProcess()
         {
             Step = SceneStep.Fighting;
             nextProcessStep = SceneStep.FightOver;
-            EelementsInherit(_NetFightScene);
         }
         
         public override bool CanEnterOtherProcess()
         {
-            return fightLogger.GameOver.Value;
+            return FightLogger.target.GameOver.Value;
         }
         
         public override void ProcessEnter()
         {
             if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
             {
-                FightScene.ScreensaverCanvas.gameObject.SetActive(true);
-                FightScene.FightCanvas.gameObject.SetActive(false);
+                NetFightScene.target.ScreensaverCanvas.gameObject.SetActive(true);
+                NetFightScene.target.FightCanvas.gameObject.SetActive(false);
             }else{
-                FightScene.ScreensaverCanvas.gameObject.SetActive(false);
-                FightScene.FightCanvas.gameObject.SetActive(true);
+                NetFightScene.target.ScreensaverCanvas.gameObject.SetActive(false);
+                NetFightScene.target.FightCanvas.gameObject.SetActive(true);
             }
-            FightScene.PreparingCanvas.gameObject.SetActive(false);            
+            NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);            
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
-            FightScene.PressedStartButton();
+            NetFightScene.target.PressedStartButton();
         }
         
         public override void ProcessEnd()
         {
-            fightLogger.WatchMissionsAbandon();
-            FightScene.FightCanvas.gameObject.SetActive(false);
+            FightLogger.target.WatchMissionsAbandon();
+            NetFightScene.target.FightCanvas.gameObject.SetActive(false);
         }
 
         public override void LocalUpdate()

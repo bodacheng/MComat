@@ -5,11 +5,10 @@ namespace FightScene
     public class StoryProcess : FSceneProcess
     {
         bool AutoMoveToNext;
-        public StoryProcess(NetFightScene _NetFightScene)
+        public StoryProcess()
         {
             Step = SceneStep.StoryBeforeFight;
             nextProcessStep = SceneStep.CountDown;
-            EelementsInherit(_NetFightScene);
         }
         
         public override void ProcessEnter()
@@ -18,9 +17,9 @@ namespace FightScene
             if (FightSceneNote.nextBattle.beforefightstory != null)
             {
                 AutoMoveToNext = false;
-                FightScene.playableDirector.playableAsset = FightSceneNote.nextBattle.beforefightstory;
-                FightScene.playableDirector.stopped += CanGoNext;
-                FightScene.playableDirector.Play();
+                NetFightScene.target.playableDirector.playableAsset = FightSceneNote.nextBattle.beforefightstory;
+                NetFightScene.target.playableDirector.stopped += CanGoNext;
+                NetFightScene.target.playableDirector.Play();
             }
             else
             {

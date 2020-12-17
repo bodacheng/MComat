@@ -44,11 +44,10 @@ public class BasicTryProcess : FSceneProcess
     Data_Center Adam, Guard;
     readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
 
-    public BasicTryProcess(NetFightScene _NetFightScene)
+    public BasicTryProcess()
     {
         base.Step = SceneStep.BasicTryTutorial;
         nextProcessStep = SceneStep.FightOver;
-        EelementsInherit(_NetFightScene);
     }
     
     public override bool CanEnterOtherProcess()
@@ -76,10 +75,10 @@ public class BasicTryProcess : FSceneProcess
             TeamDeadMemberDictionary.Add(keyValuePair.Key,new List<Data_Center>());//这个什么意思呢，就是说把所有队伍的Team值加进TeamDeadMemberDictionary，value是个空列表，谁死了谁加进入
         }
         loser = Team.none;
-        FightScene.PressedStartButton();
-        FightScene.FightCanvas.gameObject.SetActive(true);
+        NetFightScene.target.PressedStartButton();
+        NetFightScene.target.FightCanvas.gameObject.SetActive(true);
         FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
-        FightScene.PreparingCanvas.gameObject.SetActive(false);
+        NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
         
         watchetargets.Clear();
         if (RealTimeGameProcessManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
@@ -100,14 +99,14 @@ public class BasicTryProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.Run(EnterProcess());
+        SingleThreadProcesser.backup.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
-        FightScene.FightCanvas.gameObject.SetActive(false);
-        FightScene.PreparingCanvas.gameObject.SetActive(false);
-        mainProcessRunner.Run(FinalMoment(finalSurviver, loser));
+        NetFightScene.target.FightCanvas.gameObject.SetActive(false);
+        NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
+        SingleThreadProcesser.backup.Run(FinalMoment(finalSurviver, loser));
     }
     
     public override void LocalUpdate()

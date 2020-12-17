@@ -9,19 +9,18 @@ namespace FightScene
 {
     public class FightOverProcess : FSceneProcess
     {
-        public FightOverProcess(NetFightScene _NetFightScene)
+        public FightOverProcess()
         {
             Step = SceneStep.FightOver;
-            EelementsInherit(_NetFightScene);
         }
         
         IEnumerator EnterProcess()
         {
             FightOverControl.target.SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
             MobileInputsManager.target.TurnOffButtons();
-            yield return FinalMomentAnim(fightLogger.GetWinner());
+            yield return FinalMomentAnim(FightLogger.target.GetWinner());
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
-            switch (fightLogger.GetWinner())
+            switch (FightLogger.target.GetWinner())
             {
                 case Team.player1:
                     yield return FightOverControl.target.WINProcess();
@@ -74,7 +73,7 @@ namespace FightScene
                         eventNum = FightSceneNote.nextBattle.LocalFightID,
                         StoneOfPlayerIDs = stoneids
                     };
-                    if (fightLogger.GetWinner() == Team.player1)
+                    if (FightLogger.target.GetWinner() == Team.player1)
                     {
                         IEnumerator requestReward = RewardManager.RequestRewardsExaution(
                             form,
@@ -112,7 +111,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            mainProcessRunner.Run(EnterProcess());
+            SingleThreadProcesser.backup.Run(EnterProcess());
         }
         
         public override void ProcessEnd()

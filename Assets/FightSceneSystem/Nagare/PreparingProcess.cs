@@ -6,17 +6,16 @@ using System.Collections.Generic;
 
 public class PreparingProcess : FSceneProcess
 {
-    public PreparingProcess(NetFightScene _NetFightScene)
+    public PreparingProcess()
     {
         Step = SceneStep.Preparing;
         nextProcessStep = SceneStep.StoryBeforeFight;
-        EelementsInherit(_NetFightScene);
     }
     
     public IEnumerator EnterProcess()
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
-        RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(FightScene.WatchTeam2.position, FightScene.Team2StandPoints[0], 3f, 50f);
+        RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
         FightLoadError.Instance.FightLoadErrors.Clear();
         if (FightSceneNote.nextBattle != null)
         {
@@ -25,7 +24,7 @@ public class PreparingProcess : FSceneProcess
         RealTimeGameProcessManager.target.AllMembers.Clear();
         DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
         DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
-        fightLogger.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
+        FightLogger.target.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
         foreach (KeyValuePair<Team, List<Data_Center>> _set in RealTimeGameProcessManager.target.AllMembers)
         {
             foreach (Data_Center _char in _set.Value)
@@ -41,13 +40,13 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        FightScene.PreparingCanvas.gameObject.SetActive(true);
-        mainProcessRunner.Run(EnterProcess());
+        NetFightScene.target.PreparingCanvas.gameObject.SetActive(true);
+        SingleThreadProcesser.backup.Run(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
-        FightScene.LoadStageFinished.Value = false;
+        NetFightScene.target.LoadStageFinished.Value = false;
         if (FightLoadError.Instance.FightLoadErrors.Count > 0)
         {
             foreach (string error in FightLoadError.Instance.FightLoadErrors)
@@ -61,7 +60,7 @@ public class PreparingProcess : FSceneProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return FightScene.LoadStageFinished.Value
+        return NetFightScene.target.LoadStageFinished.Value
             && RealTimeGameProcessManager.target.FightTeam1.IfAllCharsPreparedForBattle() 
             && RealTimeGameProcessManager.target.FightTeam2.IfAllCharsPreparedForBattle();
     }

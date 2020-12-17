@@ -7,11 +7,10 @@ namespace FightScene
     {
         float startTimestamp = 3f;
         bool AutoMoveToNext;
-        public CountDownProcess(NetFightScene _NetFightScene)
+        public CountDownProcess()
         {
             Step = SceneStep.CountDown;
             nextProcessStep = SceneStep.Fighting;
-            EelementsInherit(_NetFightScene);
         }
         
         public override void ProcessEnter()
@@ -19,12 +18,12 @@ namespace FightScene
             startTimestamp = 3f;
             AutoMoveToNext = false;
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
-            FightScene.mainProcessRunner.Run(BeforeFightCountDown());
+            NetFightScene.target.mainProcessRunner.Run(BeforeFightCountDown());
         }
         
         IEnumerator BeforeFightCountDown()
         {
-            FightScene.CountDown.gameObject.SetActive(true);
+            NetFightScene.target.CountDown.gameObject.SetActive(true);
             while (startTimestamp > 0)
             {
                 if (startTimestamp > 1.3 && startTimestamp < 1.7)
@@ -33,11 +32,11 @@ namespace FightScene
                     RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
                 }
                 startTimestamp -= Time.deltaTime;
-                FightScene.CountDown.text = "" + (1 + (int)(startTimestamp));
+                NetFightScene.target.CountDown.text = "" + (1 + (int)(startTimestamp));
                 yield return null;
             }
             RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            FightScene.CountDown.gameObject.SetActive(false);
+            NetFightScene.target.CountDown.gameObject.SetActive(false);
             AutoMoveToNext = true;
         }
         

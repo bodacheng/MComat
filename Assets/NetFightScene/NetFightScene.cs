@@ -70,12 +70,12 @@ namespace FightScene
         {
             Time.timeScale = 1f;
             //Position_Set_Executor.Instance.P_sets.Clear();
-            PreparingProcess preparingProcess = new PreparingProcess(this);
-            FightingProcess fightingProcess = new FightingProcess(this);
-            CountDownProcess countDownProcess = new CountDownProcess(this);
-            StoryProcess storyProcess = new StoryProcess(this);
-            FightOverProcess fightOverProcess = new FightOverProcess(this);
-            BasicTryProcess basicTryProcess = new BasicTryProcess(this);
+            PreparingProcess preparingProcess = new PreparingProcess();
+            FightingProcess fightingProcess = new FightingProcess();
+            CountDownProcess countDownProcess = new CountDownProcess();
+            StoryProcess storyProcess = new StoryProcess();
+            FightOverProcess fightOverProcess = new FightOverProcess();
+            BasicTryProcess basicTryProcess = new BasicTryProcess();
             
             switch(FightSceneNote.nextBattle._fightEventType)
             {
