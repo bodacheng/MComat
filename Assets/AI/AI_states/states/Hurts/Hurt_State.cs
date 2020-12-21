@@ -12,11 +12,10 @@ public partial class Hurt_State : Behavior {
     SingleAssignmentDisposable physicMissionDisposable;
 
     public override void Pre_process_before_enter()
-	{
-		base.Pre_process_before_enter ();
+    {
+        base.Pre_process_before_enter ();
     }
 
-    string HurtPos;
     void PlayHurtAnim(V_Damage newValue)
     {
         if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
@@ -26,7 +25,7 @@ public partial class Hurt_State : Behavior {
         }
         Vector3 point = newValue.damageHappenPoint;
         point.y = 0;
-        if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 150)
+        if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
         {
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
             RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f, true);
@@ -75,14 +74,15 @@ public partial class Hurt_State : Behavior {
         TimeCounter = 0f;
         pEvents.CloseAllPersonalityEffects();
         _Rigidbody.mass = 80;
+
+        if (_BuffsRunner.Freesing)
+            return;
+
         if (target.from_weapon.effectSpreadOnBody)
         {
             _FightAttriCalRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
         }
-        
-        if (_BuffsRunner.Freesing)
-            return;
-        
+
         switch (target.from_weapon.damage_type)
         {
             case DamageType.slight_damage_forward:
@@ -115,15 +115,15 @@ public partial class Hurt_State : Behavior {
             case DamageType.sekka:
                 SekkaStart(target.from_weapon.zokusei);
             break;
-            case DamageType.high:
-                // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
-                _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
-            return;
             case DamageType.time_pause:
                 TimePauseStart();
             return;
             case DamageType.stable_damage:
                 StableDamgeStart(target);
+            return;
+            case DamageType.high:
+                // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
+                _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
             return;
         }
         
@@ -136,7 +136,7 @@ public partial class Hurt_State : Behavior {
             _AIStateRunner.ChangeState("KnockOff", target);
             return;
         }
-        
+
         Animation_Manger.Animator.SetTrigger("face_reset");
         Animation_Manger.Animator.SetTrigger("hurt");
     }

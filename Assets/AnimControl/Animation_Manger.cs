@@ -30,7 +30,7 @@ public partial class Animation_Manger : MonoBehaviour
     
     public void FrameFreeze()
     {
-        DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.08f).SetEase(Ease.InExpo); });
+        DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.1f).SetEase(Ease.InExpo); });
     }
     
 	public AnimationClip TryAnimationClip(string clip_name)

@@ -19,16 +19,14 @@ public partial class FightAttriCalReference : MonoBehaviour
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     KnockOffCount _knockOffCount = new KnockOffCount();
-    BeHitCount _BeHitCount = new BeHitCount();    
-    V_Damage deathknockOff;
-    List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();//713添加
+    BeHitCount _BeHitCount = new BeHitCount();
+    List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();
     List<E_Damage> Event_Damage_List = new List<E_Damage>();
     List<V_Damage> ICauseDamages = new List<V_Damage>();
     List<Collider> myColliders = new List<Collider>();
     E_Damage managingEventDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
     IDictionary<Collider, Vector3> myColliderSizes = new Dictionary<Collider, Vector3>();
-    float DamgeGotExCounter;
     
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
