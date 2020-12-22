@@ -10,7 +10,7 @@ class OneVOneMode : CameraMode
     Vector2 mescreenpos;
     Vector2 enemyscreenpos;
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
-    float yaoHeight = 1.1f;
+    float yaoHeight = 0.95f;
     public float xzMax = 100f;
 
     float xzd;
