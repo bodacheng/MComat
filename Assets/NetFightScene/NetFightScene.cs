@@ -138,8 +138,6 @@ namespace FightScene
             }
             if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
                 RealTimeGameProcessManager.target.ScreenSaverC(RealTimeGameProcessManager.playerTeam);
-            else
-                RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         }
     }
 }

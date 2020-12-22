@@ -209,6 +209,7 @@
     <Compile Include="Assets\Camera\Modes\GodPlayerCertainY.cs" />
     <Compile Include="Assets\Camera\Modes\GodplayerCamera.cs" />
     <Compile Include="Assets\Camera\Modes\LerpToCertainDistance.cs" />
+    <Compile Include="Assets\Camera\Modes\NewTest.cs" />
     <Compile Include="Assets\Camera\Modes\ScreenSaverC.cs" />
     <Compile Include="Assets\Camera\Modes\StartToEndMode.cs" />
     <Compile Include="Assets\Camera\Modes\TeamEditCamera.cs" />

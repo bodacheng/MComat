@@ -3,7 +3,7 @@
 class CertainYAntiVabration : CameraMode
 {
     Vector3 CameraTargetPos;
-    Vector3 enemiescenter;//敌人的位置中心
+    Vector3 enemiesCenter;//敌人的位置中心
     Quaternion ToRotation;//目标相机旋角
     Vector3 rotateToDirection;
     Vector3 temp;
@@ -16,16 +16,6 @@ class CertainYAntiVabration : CameraMode
         this.XZDis = XZDis;
         this.YDis = YDis;
     }
-    
-    /// <summary>
-    /// 获取某向量的垂直向量（方向是左手边?）
-    /// </summary>
-    Vector3 GetVerticalDir(Vector3 _dir)
-    {
-        //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
-        //return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
-        return new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
-    }
 
     float fixy, h;
     public override void LocalUpdate(Camera _camera)
@@ -37,21 +27,22 @@ class CertainYAntiVabration : CameraMode
         {
             if (targets != null && targets.Count > 0)
             {
-                enemiescenter = Vector3.zero;
+                enemiesCenter = Vector3.zero;
                 foreach (Transform o in targets)
                 {
                     if (o != null)
                     {
-                        enemiescenter += o.transform.position;
+                        enemiesCenter += o.transform.position;
                     }
                 }
-                enemiescenter /= targets.Count;
-                enemiescenter.y = 0;
-                enemyscreenpos = _camera.WorldToViewportPoint(enemiescenter);
+                enemiesCenter /= targets.Count;
+                enemiesCenter.y = 0;
+                enemyscreenpos = _camera.WorldToViewportPoint(enemiesCenter);
                 mescreenpos = _camera.WorldToViewportPoint(meCenter.position);
+
                 if (enemyscreenpos.x < 0.08 || enemyscreenpos.x > 0.92 || enemyscreenpos.y < 0.1)
                 {
-                    xzOff = Vector3.RotateTowards(xzOff, meCenter.position - enemiescenter, 4 * Time.deltaTime, 0.0f);
+                    xzOff = Vector3.RotateTowards(xzOff, meCenter.position - enemiesCenter, 4 * Time.deltaTime, 0.0f);
                 }else{
                     // special version
                     //Vector3 midpoint = (enemiescenter + meCenter.position) / 2;
@@ -62,17 +53,18 @@ class CertainYAntiVabration : CameraMode
                     //:
                     //Vector3.RotateTowards(xzOff, GetVerticalDir(enemiescenter - meCenter.position), Time.deltaTime, 0.0f);
                     
-                    // old version
-                    if (Mathf.Abs(mescreenpos.x - enemyscreenpos.x) < (Mathf.Abs(mescreenpos.y - enemyscreenpos.y) + 0.2f) && (enemyscreenpos.x > 0.35 && enemyscreenpos.x < 0.65))
+                    // 如果敌人和player在画面中太过倾向于一上一下的位置，自动调整相机至他们连线的垂直方向
+                    if (Mathf.Abs(mescreenpos.x - enemyscreenpos.x) < (Mathf.Abs(mescreenpos.y - enemyscreenpos.y) + 0.2f) &&
+                        (enemyscreenpos.x > 0.35 && enemyscreenpos.x < 0.65))
                     {
-                        xzOff = Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiescenter), Time.deltaTime, 0.0f);
+                        xzOff = Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiesCenter), Time.deltaTime, 0.0f);
                     }
                 }
             }
         }
-        
-        //下面的那个(meCenter.position + enemiescenter)，其实是说从0，0，0到他们
-        CameraTargetPos = meCenter.position + xzOff.normalized * XZDis;//focuscenter + xzOff.normalized * XZDis;
+
+        // 相机所在位置是基于player位置偏移一定距离
+        CameraTargetPos = meCenter.position + xzOff.normalized * XZDis;
         CameraTargetPos += Vector3.up * YDis;
         fixy = Mathf.Clamp(CameraTargetPos.y, YDis, CameraTargetPos.y);
         CameraTargetPos.y = fixy;

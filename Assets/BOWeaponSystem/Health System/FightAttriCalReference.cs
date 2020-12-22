@@ -123,17 +123,16 @@ public partial class FightAttriCalReference : MonoBehaviour
         }
     }
     
-    Decompositioner processingBlood;
     string temp;
     void HitEffect(V_Damage v_Damage)
     {
         if (_Center._ResistanceManager.Resistance.Value > 0)
         {
-            processingBlood = EffectsManager.GenerateEffect("shield_hit",
-                                                            FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                                            v_Damage.damageHappenPoint,
-                                                            v_Damage.CutRotation,
-                                                            null);
+            EffectsManager.GenerateEffect("shield_hit",
+            FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
+            v_Damage.damageHappenPoint,
+            v_Damage.CutRotation,
+            null);
         }
         else
         {
@@ -149,12 +148,12 @@ public partial class FightAttriCalReference : MonoBehaviour
                     temp = "light_hit";
                     break;
             }
-            processingBlood = EffectsManager.GenerateEffect(
-                                temp,
-                                FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-                                v_Damage.damageHappenPoint,
-                                v_Damage.CutRotation,
-                                v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
+            EffectsManager.GenerateEffect(
+            temp,
+            FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
+            v_Damage.damageHappenPoint,
+            v_Damage.CutRotation,
+            v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
         }
     }
 

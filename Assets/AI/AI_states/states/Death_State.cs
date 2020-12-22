@@ -6,7 +6,6 @@ using Skill;
 //死亡状态下关于怎么将死亡角色从战场正式排除需要重新研究。详见Data_Center.FindTargetsByDistance（直接从游戏物体获取tag意外的浪费时间）
 public class Death_State : Behavior
 {
-    readonly GameObject processingBlood;
     float time_count;
     Vector3 _xz;    
     bool touchedBoundary;
@@ -39,7 +38,7 @@ public class Death_State : Behavior
         pEvents.CloseAllPersonalityEffects();
         _BasicPhysicSupport.SetUsingGravity(false);
         _DATA_CENTER.IsDead.Value = true;
-        _FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
+        //_FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
         _Rigidbody.velocity = Vector3.zero;
         _Animator.SetFloat("speed", 0f);
         _Animator.applyRootMotion = false;

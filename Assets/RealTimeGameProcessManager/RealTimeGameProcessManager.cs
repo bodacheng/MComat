@@ -162,15 +162,24 @@ namespace FightScene
         // 战斗模式相机。根据选择队伍做相应调整。
         public void CameraParaAdjustment(Team myTeam)
         {
+            C_Mode c_Mode;
+            if (FightSceneNote.nextBattle.Team1Mode == TeamMode.multiraid)
+            {
+                c_Mode = C_Mode.CertainYAntiVibration;
+            }
+            else
+            {
+                c_Mode = C_Mode.OneVOne;
+            }
             if (focusingChar != null)
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, FightTeam2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, FightTeam2.TeamMemberTransforms());
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, FightTeam1.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, FightTeam1.TeamMemberTransforms());
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
             }
