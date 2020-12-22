@@ -30,6 +30,7 @@ namespace FightScene
 
         public IEnumerator CharsLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
         {
+            TeamMembers.Clear();
             foreach (KeyValuePair<int, List<int>> keys in MembersSets.GetAllUnNullKeys())
             {
                 foreach (int key in keys.Value)

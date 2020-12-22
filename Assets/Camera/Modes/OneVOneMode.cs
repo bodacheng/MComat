@@ -10,7 +10,8 @@ class OneVOneMode : CameraMode
     Vector2 mescreenpos;
     Vector2 enemyscreenpos;
     Vector3 xzOff = Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
-    float yaoHeight = 1.2f;
+    float yaoHeight = 1.1f;
+    public float xzMax = 100f;
 
     float xzd;
     float XZ_distance
@@ -18,7 +19,7 @@ class OneVOneMode : CameraMode
         get { return xzd; }
         set
         {
-            xzd = Mathf.Clamp(value, 8.5f, 14f);
+            xzd = Mathf.Clamp(value, 8.5f, xzMax);
             YDis = xzd * 0.5f;
         }
     }
@@ -46,7 +47,6 @@ class OneVOneMode : CameraMode
                     }
                 }
                 enemiesCenter /= targets.Count;
-                enemiesCenter.y = 0;
 
                 enemyscreenpos = _camera.WorldToViewportPoint(enemiesCenter);
                 mescreenpos = _camera.WorldToViewportPoint(meCenter.position);
@@ -54,11 +54,11 @@ class OneVOneMode : CameraMode
                 if (enemyscreenpos.x < 0.08 || enemyscreenpos.x > 0.92 || enemyscreenpos.y < 0.1 ||
                     mescreenpos.x < 0.08 || mescreenpos.x > 0.92 || mescreenpos.y < 0.1)
                 {
-                    XZ_distance += 3 * Time.fixedDeltaTime;
+                    XZ_distance += 5f * Time.fixedDeltaTime;
                 }
                 else
                 {
-                    XZ_distance -= 1.5f * Time.fixedDeltaTime;
+                    XZ_distance -= 5f * Time.fixedDeltaTime;
                 }
                 xzOff = Vector3.RotateTowards(xzOff, GetVerticalDir(meCenter.position - enemiesCenter), Time.deltaTime, 0.0f);
             }

@@ -14,9 +14,8 @@ public class PreparingProcess : FSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        LoadingCanvas.target.DarkOffDirectly(1f);
-        RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
-        //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        //RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
+        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
         if (FightSceneNote.nextBattle != null)
         {
@@ -42,6 +41,7 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
+        LoadingCanvas.target.DarkOffDirectly(1f);
         NetFightScene.target.PreparingCanvas.gameObject.SetActive(true);
         SingleThreadProcesser.backup.Run(EnterProcess());
     }
