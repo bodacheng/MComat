@@ -66,6 +66,7 @@ namespace mainMenu
         {
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
+
             if (!DataRead)
                 mainProcessRunner.Run(DataLoad());
             mainProcessRunner.Run(StartUpProcess());

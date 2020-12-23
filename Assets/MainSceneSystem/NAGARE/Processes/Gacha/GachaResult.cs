@@ -39,7 +39,7 @@ public class GachaResult : MainSceneProcess
         //        results[8] != null ? results[8].skillId : null
         //    );
         //}
-        GachaManager.target._skillStoneDetail._T.SetParent(GachaManager.target.GotchaResultT);
+        GachaManager.target._skillStoneDetail._T.SetParent(GachaManager.target.MemberDetailT);
         GachaManager.target._skillStoneDetail._T.localScale = Vector3.one;
         GachaManager.target._skillStoneDetail._T.localPosition = Vector3.zero;
         GachaManager.target.NineForShow.LoadShowDetailFeature();

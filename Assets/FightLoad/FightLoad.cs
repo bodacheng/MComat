@@ -61,7 +61,17 @@ public static class FightLoad
             }
             if (ToBeLoad.localFight.HeroSets.values.Count < 1 || ToBeLoad.localFight.EnemySets.values.Count < 1)
             {
-                LoadingCanvas.target.ArrangeWarnWindow("队伍人员不够。");
+                string error;
+                switch (Setting.Language)
+                {
+                    case ApiLanguage.JaJp:
+                        error = "チームメンバーは3人未満でステージに入場出来ません。";
+                        break;
+                    default:
+                        error = "队伍人员不够。";
+                        break;
+                }
+                LoadingCanvas.target.ArrangeWarnWindow(error);
                 yield break;
             }
             Go(ToBeLoad);

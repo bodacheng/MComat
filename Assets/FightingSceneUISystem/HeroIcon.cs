@@ -49,7 +49,7 @@ public class HeroIcon : MonoBehaviour {
     {
         cooldownCurtain.fillAmount = proportion;
     }
-    
+
     public void ChangeIcon(Sprite _Sprite, Zokusei zokusei)
     {
         if (frame == null || Icon == null)
@@ -57,10 +57,10 @@ public class HeroIcon : MonoBehaviour {
             Debug.Log("组件缺失");
             return;
         }
-        
-        frame.transform.localScale = Vector3.one;
-        Icon.transform.localScale = Vector3.one;
-        Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x - 40 , frame.GetComponent<RectTransform>().sizeDelta.y - 40);
+
+        //frame.transform.localScale = Vector3.one;
+        //Icon.transform.localScale = Vector3.one;
+        Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x * 0.8f, frame.GetComponent<RectTransform>().sizeDelta.y * 0.8f);
         frame.transform.SetSiblingIndex(4);
         Icon.transform.SetSiblingIndex(4);
         if (cooldownCurtain != null)

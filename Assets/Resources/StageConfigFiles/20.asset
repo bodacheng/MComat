@@ -15,7 +15,7 @@ MonoBehaviour:
   _fightEventType: 1
   LocalFightID: 20
   EntryMemberNum: 4
-  BattleGroundID: 2
+  BattleGroundID: 0
   battleNameENG: 
   battleNameJPG: "\u5218\u607A\u5A01\u7F13\u89E3\u6CD5\u4EE4\u7EB9\u653E\u5047\u4E86\u53D1\u6211"
   battleNameCH: "\u4E09\u4E2A\u5C4C"

@@ -11,6 +11,7 @@ public class GachaManager : MonoBehaviour
     public Canvas GotchaCanvas;
     public RectTransform GotchaFrontT;
     public RectTransform GotchaResultT;
+    public RectTransform MemberDetailT;
     public RectTransform SKillEditStoneBoxT;
     public NineForShow NineForShow;
     public SkillStoneDetail _skillStoneDetail;

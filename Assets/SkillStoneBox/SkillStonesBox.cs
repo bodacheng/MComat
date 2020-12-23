@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace mainMenu
 {
@@ -33,8 +34,8 @@ namespace mainMenu
         public Toggle farCheckBox;
 
         // rare 度限定
-        public int[] rares = {0, 1, 2};
-        
+        public List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
+
         [Space(7)]
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
@@ -52,6 +53,7 @@ namespace mainMenu
         {
             _Selected = SelectedFrame;
             _stonesTempContainer = stonesTempContainer;
+            rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
         }
         
         public IEnumerator StartUp()

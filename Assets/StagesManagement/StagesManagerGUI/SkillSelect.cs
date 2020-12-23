@@ -9,7 +9,7 @@ using mainMenu;
 public partial class StagesManagerGUI : Editor {
 
     int selectSkillExLevel = -1;
-    int[] rares = {};
+    List<int> rares = new List<int>();
     readonly int[] rareOptions = {-1, 0, 1, 2, 3};
     readonly string[] rareOptionsRender = { "ALL", "★", "★★", "★★★" , "★★★★" };
     readonly int[] exLevels = {-1, 0, 1, 2, 3 };
@@ -68,16 +68,22 @@ public partial class StagesManagerGUI : Editor {
         switch(selectskillrarelevel)
         {
             case 1:
-                rares = new int[] {1};
+                rares = new List<int>() { 1 };
                 break;
             case 2:
-                rares = new int[] {2};
+                rares = new List<int>() { 2 };
                 break;
             case 3:
-                rares = new int[] {3};
+                rares = new List<int>() { 3 };
+                break;
+            case 4:
+                rares = new List<int>() { 4 };
+                break;
+            case 5:
+                rares = new List<int>() { 5 };
                 break;
             default:
-                rares = new int[] {1,2,3,4};
+                rares = new List<int>() { 1, 2, 3, 4, 5 };
                 break;
         }
         SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm

@@ -213,24 +213,24 @@ namespace FightScene
             MobileInputsManager.target.Clear();
         }
 
-        void OnGUI()
-        {
-            if (GUI.Button(new Rect(40, 40, 60, 30), "切换队伍"))
-            {
-                switch (playerTeam)
-                {
-                    case Team.player1:
-                        playerTeam = Team.player2;
-                        SwitchToCMode(null, Auto);
+        //void OnGUI()
+        //{
+        //    if (GUI.Button(new Rect(40, 40, 60, 30), "切换队伍"))
+        //    {
+        //        switch (playerTeam)
+        //        {
+        //            case Team.player1:
+        //                playerTeam = Team.player2;
+        //                SwitchToCMode(null, Auto);
 
-                        break;
-                    case Team.player2:
-                        playerTeam = Team.player1;
-                        SwitchToCMode(null, Auto);
-                        break;
-                }
-                CameraParaAdjustment(playerTeam);
-            }
-        }
+        //                break;
+        //            case Team.player2:
+        //                playerTeam = Team.player1;
+        //                SwitchToCMode(null, Auto);
+        //                break;
+        //        }
+        //        CameraParaAdjustment(playerTeam);
+        //    }
+        //}
     }
 }

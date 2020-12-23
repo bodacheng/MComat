@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fightEventType: 1
   LocalFightID: 1
-  EntryMemberNum: 4
-  BattleGroundID: 2
+  EntryMemberNum: 3
+  BattleGroundID: 0
   battleNameENG: 
   battleNameJPG: 
   battleNameCH: "\u4E00\u4E2A\u5C4C"

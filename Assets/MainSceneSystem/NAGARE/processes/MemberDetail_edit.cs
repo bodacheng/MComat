@@ -104,7 +104,19 @@ public class MemberDetail_edit : MainSceneProcess
                 TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.monsterOfPlayerId);
                 return;
             }
-            LoadingCanvas.target.ArrangeConfirmWindow(SkillEditConfirm, "确实要进行技能更新？");
+
+            string warn;
+            switch (Setting.Language)
+            {
+                case ApiLanguage.JaJp:
+                    warn = "選択したスキルストーンでユニットの技を更新しますか？";
+                break;
+                default:
+                    warn = "确实要进行技能更新？";
+                break;
+            }
+
+            LoadingCanvas.target.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);

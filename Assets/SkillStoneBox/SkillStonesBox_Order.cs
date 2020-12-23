@@ -45,7 +45,7 @@ namespace mainMenu
                     orderButtonText.text = "Rarity DES";
                 return ByRareLevel(targets,0);
                 case 0: // 以技能ID
-                    orderButtonText.text = "开发代号ID";
+                    orderButtonText.text = "開発番号";
                 return ByDevID(targets, 1);
             }
             return targets;

@@ -31,7 +31,7 @@ namespace mainMenu
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public IEnumerator PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
         {
-            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList);
+            List<String> targetSKs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
             {
@@ -71,7 +71,7 @@ namespace mainMenu
             public bool close = false;
             public bool near = false;
             public bool far = false;
-            public int[] rare = { 0,1,2,3 };
+            public List<int> rare = new List<int> { 0,1,2,3,4,5};
         }
     }
 }

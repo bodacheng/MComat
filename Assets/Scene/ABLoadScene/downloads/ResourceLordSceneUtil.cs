@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using dataAccess;
 using UnityEngine.SceneManagement;
 using mainMenu;
-using Gs2.Unity;
-using Gs2.Unity.Util;
 using Gs2.Weave.Login;
 using Gs2.Weave.Credential;
-using Gs2.Core.Exception;
 using Weave.Core.Runtime;
-using Gs2.Unity.Gs2JobQueue.Model;
-using UnityEngine.Events;
 using UnityEngine;
-using Gs2.Unity.Gs2Auth;
-
+using UnityEditor;
+using System.IO;
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
 // 资源下载策略：角色模型和技能动画先读取配置文件再根据配置文件一个个请求资源。
@@ -131,8 +126,9 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
     
     public void DeleteLocalSaveDate()
     {
-        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
+        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath);
         LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/AccountCharacterInfos");
+        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
     }
     
     IEnumerator ToMainSceneDirectly()
@@ -143,16 +139,47 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);
     }
-    
+
+    bool forShow = true;
     IEnumerator _StartNewLocalTestMode()
     {
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        yield return AccountSet.OverrideAccountOnLocalFile();
-        yield return MySkillStonesReader.LocalSaveDataGetAllStones();
-        yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
+        if (forShow)
+        {
+            DeleteLocalSaveDate();
+            CopyFileTo("Assets/Resources/TestSaveData", Application.persistentDataPath, null);
+            CopyFileTo("Assets/Resources/TestSaveData/AccountCharacterInfos", Application.persistentDataPath + "/AccountCharacterInfos", null);
+            CopyFileTo("Assets/Resources/TestSaveData/MyStones", Application.persistentDataPath + "/MyStones", null);
+        }
+        else
+        {
+            DeleteLocalSaveDate();
+            yield return AccountSet.OverrideAccountOnLocalFile();
+            yield return MySkillStonesReader.LocalSaveDataGetAllStones();
+            yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
+        }
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
         stage._fightEventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
+    }
+
+    void CopyFileTo(string sourceDir, string backupDir, string extension)
+    {
+        if (!Directory.Exists(backupDir))
+        {
+            //if it doesn't, create it
+            Directory.CreateDirectory(backupDir);
+        }
+        string[] picList = Directory.GetFiles(sourceDir, "*" + extension != null ? ("." + extension) : string.Empty);
+        foreach (string f in picList)
+        {
+            // Remove path from the file name.
+            string fName = f.Substring(sourceDir.Length + 1);
+
+            // Use the Path.Combine method to safely append the file name to the path.
+            // Will overwrite if the destination file already exists.
+            File.Copy(Path.Combine(sourceDir, fName), Path.Combine(backupDir, fName), true);
+        }
     }
     
     public IEnumerator ResourcePrepareProcess()

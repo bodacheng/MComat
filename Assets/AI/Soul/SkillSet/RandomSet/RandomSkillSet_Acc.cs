@@ -54,7 +54,7 @@ public partial class NineAndTwo
             List<string> exceptAccIds = MySkillStonesReader.GetMyStonesBySkillID(exceptSkIDs[i]);
             exceptStones.AddRange(exceptAccIds);
         }
-        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptStones, null);
+        List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
         if (StoneAccIDs.Count == 0)
             return null;
         int ranDom = Random.Range(0, StoneAccIDs.Count);

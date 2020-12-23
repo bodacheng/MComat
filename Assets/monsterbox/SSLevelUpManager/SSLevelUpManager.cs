@@ -163,7 +163,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (GetSameSkillIdStones[i] != stoneOfPlayerId)
                 extra.Add(GetSameSkillIdStones[i]);
         }
-        SkillStonesBox.target.rares = new int[2] {0, 1};
+        SkillStonesBox.target.rares = new List<int> { 0, 1, 2 };
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
         yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm, new List<string> {stoneOfPlayerId}, extra);
         SkillStonesBox.target.CellsFeatureLoad(0);
@@ -179,7 +179,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public IEnumerator _CloseLevelUpPage()
     {
-        SkillStonesBox.target.rares = new int[3] {0, 1, 2};
+        SkillStonesBox.target.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
         yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);
         SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);

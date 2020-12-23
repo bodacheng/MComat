@@ -86,14 +86,15 @@ namespace FightScene
             {
                 IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);
                 SideCharIcon sideCharIcon = fightTeam.GetSideIcon(keyValuePair.Key);
-                NineForShow nineForShow = Instantiate(NineForShowPretab);
-                NineForShows.Add(nineForShow);
-                iconAndSKillShowUISet.Set(sideCharIcon, nineForShow);
-                iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
-                iconAndSKillShowUISet.transform.localPosition = Vector3.zero;
-                iconAndSKillShowUISet.transform.localScale = Vector3.one;
-                yield return nineForShow.ShowStones_Acc(keyValuePair.Value.monsterOfPlayerId);
+                //NineForShow nineForShow = Instantiate(NineForShowPretab);
+                //NineForShows.Add(nineForShow);
+                //iconAndSKillShowUISet.Set(sideCharIcon, nineForShow);
+                //iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
+                //iconAndSKillShowUISet.transform.localPosition = Vector3.zero;
+                //iconAndSKillShowUISet.transform.localScale = Vector3.one;
+                //yield return nineForShow.ShowStones_Acc(keyValuePair.Value.monsterOfPlayerId);
             }
+            yield break;
         }
         
         // 胜利字幕与对应页面加载
