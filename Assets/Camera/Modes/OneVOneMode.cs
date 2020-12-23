@@ -66,7 +66,9 @@ class OneVOneMode : CameraMode
 
         // 相机所在位置计算
         CameraTargetPos = (meCenter.position + enemiesCenter) / 2 + xzOff.normalized * XZ_distance;
-        CameraTargetPos.y = YDis + yaoHeight;
+        CameraTargetPos.y += YDis + yaoHeight;
+        h = Mathf.Clamp(CameraTargetPos.y, YDis + yaoHeight, YDis + yaoHeight + 2f);
+        CameraTargetPos.y = h;
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, CameraTargetPos, Time.deltaTime / (0.2f + Time.deltaTime));//分母里那个附加值越大，变得越慢。
 
         // 计算相机“看向的位置”

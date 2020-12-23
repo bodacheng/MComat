@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+
 namespace FightScene
 {
     public class CountDownProcess : FSceneProcess
