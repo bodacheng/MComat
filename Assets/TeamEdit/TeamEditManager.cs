@@ -161,7 +161,12 @@ public class TeamEditManager : MonoBehaviour
                 }
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
                 yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-                yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
+                if (MemberDetail.target._focusing != null)
+                    yield return _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
+                else
+                {
+                    // empty slot
+                };
             }
         }
 
