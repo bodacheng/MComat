@@ -156,6 +156,7 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
             DeleteLocalSaveDate();
             yield return AccountSet.OverrideAccountOnLocalFile();
             yield return MySkillStonesReader.LocalSaveDataGetAllStones();
+            yield return MySkillStonesReader.LocalSaveDataGetAllStones();
             yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         }
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
