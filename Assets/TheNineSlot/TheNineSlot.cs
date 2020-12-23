@@ -201,15 +201,15 @@ namespace mainMenu
         {
             SeletedRender(null);
             
-            A1Slot = new SkillStoneSlot(1, null, A1DragAndDropCell);
-            A2Slot = new SkillStoneSlot(2, null, A2DragAndDropCell);
-            A3Slot = new SkillStoneSlot(3, null, A3DragAndDropCell);
-            B1Slot = new SkillStoneSlot(4, null, B1DragAndDropCell);
-            B2Slot = new SkillStoneSlot(5, null, B2DragAndDropCell);
-            B3Slot = new SkillStoneSlot(6, null, B3DragAndDropCell);
-            C1Slot = new SkillStoneSlot(7, null, C1DragAndDropCell);
-            C2Slot = new SkillStoneSlot(8, null, C2DragAndDropCell);
-            C3Slot = new SkillStoneSlot(9, null, C3DragAndDropCell);
+            A1Slot = new SkillStoneSlot(1, A1DragAndDropCell);
+            A2Slot = new SkillStoneSlot(2, A2DragAndDropCell);
+            A3Slot = new SkillStoneSlot(3, A3DragAndDropCell);
+            B1Slot = new SkillStoneSlot(4, B1DragAndDropCell);
+            B2Slot = new SkillStoneSlot(5, B2DragAndDropCell);
+            B3Slot = new SkillStoneSlot(6, B3DragAndDropCell);
+            C1Slot = new SkillStoneSlot(7, C1DragAndDropCell);
+            C2Slot = new SkillStoneSlot(8, C2DragAndDropCell);
+            C3Slot = new SkillStoneSlot(9, C3DragAndDropCell);
             
             allSlot.Clear();
             allSlot.Add(A1Slot);

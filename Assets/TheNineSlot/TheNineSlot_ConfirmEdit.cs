@@ -36,17 +36,15 @@ namespace mainMenu
             {
                 if (allSlot[i]._DragAndDropCell.GetItem() != null)
                 {
-                    if (allSlot[i].OnSlotStoneID != allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId) 
-                    {
-                        yield return RemoveStone(allSlot[i].OnSlotStoneID);
-                        // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
-                        SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStonesReader.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
-                        new_skillStoneInfo.inUsingMonsterOfPlayerId = accCharInfo.monsterOfPlayerId;
-                        new_skillStoneInfo.inUsingSkillSlot = allSlot[i].number.ToString();
-                        yield return MySkillStonesReader.Update(new_skillStoneInfo.skillStoneOfPlayerId);
-                    }
-                }else{
-                    yield return RemoveStone(allSlot[i].OnSlotStoneID);
+                    //yield return RemoveStone(allSlot[i].OnSlotStoneID);
+                    // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
+                    SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStonesReader.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
+                    new_skillStoneInfo.inUsingMonsterOfPlayerId = accCharInfo.monsterOfPlayerId;
+                    new_skillStoneInfo.inUsingSkillSlot = allSlot[i].number.ToString();
+                    yield return MySkillStonesReader.Update(new_skillStoneInfo.skillStoneOfPlayerId);
+                }
+                else{
+                    //yield return RemoveStone(allSlot[i].OnSlotStoneID);
                 }
             }
             yield return ReadANineAndTwo(accCharInfo);

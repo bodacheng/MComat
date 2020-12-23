@@ -16,35 +16,15 @@ using Api.Dto.Model;
 public class SkillStoneSlot
 {
     public int number;
-    public string OnSlotStoneID; // stone of player id
     public StoneCell _DragAndDropCell;
     
-    public SkillStoneSlot(int num,string OnSlotStonelocalid, StoneCell _DragAndDropCell)
+    public SkillStoneSlot(int num, StoneCell _DragAndDropCell)
     {
         number = num;
-        OnSlotStoneID = OnSlotStonelocalid;
         this._DragAndDropCell = _DragAndDropCell;
         this._DragAndDropCell._SkillStoneSlot = this;
     }
-        
-    //这个函数指的是格子自身的更新
-    // 一个是在readANineAndTwo时候作用，也就是读取角色技能至九宫格的初期，
-    // 一个是在SeliWholeNineAndTwo()里作用，进一步说就是每次石头的拖拽行为结束时(拖到某格子内或某空白区)
-    // 这个进程的一个细节作用在于对格子颜色的更新，目前是这样：
-    // 如果格子显示的是已经有的技能，则为半透明白
-    // 如果是新石头，则普通技能为黄Color(1, 1, 0,1)，必杀技能为红Color(1, 0, 1, 1)
-    public IEnumerator ShowOrigin(Color stoneColor)
-    {
-        _DragAndDropCell.RemoveToTemp();
-        if (OnSlotStoneID != null)
-        {
-            yield return TakeASkillStoneFromBoxToSlot(OnSlotStoneID, stoneColor);
-        }
-        _DragAndDropCell.UpdateMyItem();
-        _DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
-        yield break;
-    }
-        
+
     public IEnumerator TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
     {
         SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStonesReader.Get(stoneOfPlayerID);
