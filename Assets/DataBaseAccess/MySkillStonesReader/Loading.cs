@@ -34,7 +34,16 @@ namespace dataAccess
                         {
                             if (a == 1)
                                 LoadingCanvas.target.TurnOnProcessDescription(true);
-                            LoadingCanvas.target.NowProcess("正在构成技能石模型", (float) a / infos.Count);
+                            switch (apiLanguage)
+                            {
+                                case ApiLanguage.JaJp:
+                                    LoadingCanvas.target.NowProcess("スキルストーン を読み込み中", (float)a / infos.Count);
+                                    break;
+                                default:
+                                    LoadingCanvas.target.NowProcess("正在构成技能石模型", (float)a / infos.Count);
+                                    break;
+                            }
+                            
                             yield return Read(one);
                             if (a == infos.Count)
                             {

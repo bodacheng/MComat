@@ -105,7 +105,7 @@ namespace mainMenu
             UpperInfoBar.target.T.gameObject.SetActive(false);
             
             LoadingCanvas.target.TurnOnProcessDescription(true);
-            LoadingCanvas.target.NowProcess("正在读取账户信息", 0);
+            LoadingCanvas.target.NowProcess("Reading Account", 0);
 
             #region 主界面各大画面
             TopPage frontPage = new TopPage();
@@ -164,16 +164,16 @@ namespace mainMenu
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
             
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.2f);
+            LoadingCanvas.target.NowProcess("Opening item Box", 0.2f);
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.4f);
+            LoadingCanvas.target.NowProcess("Opening item Box", 0.4f);
             yield return _SkillStonesBox_NineSlot.StartUp();
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.5f);
+            LoadingCanvas.target.NowProcess("Opening item Box", 0.5f);
             yield return _SkillStonesBox_Show.StartUp();
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.6f);
+            LoadingCanvas.target.NowProcess("Opening item Box", 0.6f);
             yield return (TheNineSlot.target.StartUp());
-            LoadingCanvas.target.NowProcess("正在启动技能石头背包", 0.7f);
+            LoadingCanvas.target.NowProcess("Opening item Box", 0.7f);
             yield return _SelfFightManager.INITeamPosButtons();
             yield return MonsterBox.DisplayMonsterIcons(true);//这个进程会先找到所有角色的头像。
             
