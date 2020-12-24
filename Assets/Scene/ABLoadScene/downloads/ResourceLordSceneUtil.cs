@@ -163,12 +163,12 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
 
             for (int i = 0; i < stones.Length; i++)
             {
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stones[i].name + ".json", JsonConvert.SerializeObject(stones[i]));
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stones[i].name + ".json", ((TextAsset)(stones[i])).text);
             }
 
             for (int i = 0; i < units.Length; i++)
             {
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", units[i].name + ".json", JsonConvert.SerializeObject(units[i]));
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", units[i].name + ".json", ((TextAsset)(units[i])).text);
             }
 
             //CopyFileTo(Application.streamingAssetsPath + "/TestSaveData", Application.persistentDataPath, "json");
