@@ -7,8 +7,10 @@ using Gs2.Weave.Login;
 using Gs2.Weave.Credential;
 using Weave.Core.Runtime;
 using UnityEngine;
-using UnityEditor;
+using System.Linq;
 using System.IO;
+using Newtonsoft.Json;
+
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
 // 资源下载策略：角色模型和技能动画先读取配置文件再根据配置文件一个个请求资源。
@@ -147,9 +149,31 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
         if (forShow)
         {
             DeleteLocalSaveDate();
-            CopyFileTo("Assets/Resources/TestSaveData", Application.persistentDataPath, null);
-            CopyFileTo("Assets/Resources/TestSaveData/AccountCharacterInfos", Application.persistentDataPath + "/AccountCharacterInfos", null);
-            CopyFileTo("Assets/Resources/TestSaveData/MyStones", Application.persistentDataPath + "/MyStones", null);
+
+            TextAsset arena3V3TeamSet = Resources.Load("TestSaveData/arena3V3TeamSet") as TextAsset;
+            TextAsset localAccountInfo = Resources.Load("TestSaveData/localAccountInfo") as TextAsset;
+            TextAsset TeamSet = Resources.Load("TestSaveData/TeamSet") as TextAsset;
+
+            Object[] stones = Resources.LoadAll("TestSaveData/MyStones", typeof(TextAsset));
+            Object[] units = Resources.LoadAll("TestSaveData/AccountCharacterInfos", typeof(TextAsset));
+
+            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", arena3V3TeamSet.text);
+            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", localAccountInfo.text);
+            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "TeamSet.json", TeamSet.text);
+
+            for (int i = 0; i < stones.Length; i++)
+            {
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stones[i].name + ".json", JsonConvert.SerializeObject(stones[i]));
+            }
+
+            for (int i = 0; i < units.Length; i++)
+            {
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", units[i].name + ".json", JsonConvert.SerializeObject(units[i]));
+            }
+
+            //CopyFileTo(Application.streamingAssetsPath + "/TestSaveData", Application.persistentDataPath, "json");
+            //CopyFileTo(Application.streamingAssetsPath + "/TestSaveData/AccountCharacterInfos", Application.persistentDataPath + "/AccountCharacterInfos", "json");
+            //CopyFileTo(Application.streamingAssetsPath + "/TestSaveData/MyStones", Application.persistentDataPath + "/MyStones", "json");
         }
         else
         {
@@ -171,7 +195,14 @@ public partial class ResourceLordSceneUtil : MonoBehaviour
             //if it doesn't, create it
             Directory.CreateDirectory(backupDir);
         }
-        string[] picList = Directory.GetFiles(sourceDir, "*" + extension != null ? ("." + extension) : string.Empty);
+        string[] picList;
+        if (extension != null)
+            picList = Directory.GetFiles(sourceDir).Where(file => file.ToLower().EndsWith(extension)).ToArray();
+        else
+            picList = Directory.GetFiles(sourceDir);
+
+        Debug.Log(sourceDir + "下找到" + picList.Length + "个json文件");
+
         foreach (string f in picList)
         {
             // Remove path from the file name.
