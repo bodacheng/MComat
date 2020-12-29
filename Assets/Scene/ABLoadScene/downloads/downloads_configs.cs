@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public partial class ResourceLordSceneUtil : MonoBehaviour
+public partial class ResourceDownLoad : MonoBehaviour
 {
     //  Config文件已经发生变动，下列程序未考虑skill_ai_attrs等文件的下载。初始版本以resource读取相应config文件为准
     IEnumerator ConfigFilesDownLoad()

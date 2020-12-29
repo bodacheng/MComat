@@ -11,7 +11,7 @@ public partial class Animation_Manger : MonoBehaviour
     public IEnumerator PreloadBasicPersonalAnims(string animPath, string basicPackName)
     {
         string basicPackKey = "BasicPack/" + animPath + "/" + basicPackName;
-        yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceLordSceneUtil.BundleURL + "/animClips/" + animPath, basicPackKey, basicPackName));
+        yield return (AnimationResourceLoader.Instance.LoadAnimationPackFromCache(ResourceDownLoad.BundleURL + "/animClips/" + animPath, basicPackKey, basicPackName));
         List<AnimationClip> basicAnims = AnimationResourceLoader.Instance.GetAnimationPack(basicPackKey);
 
         toLoadAnims = new Dictionary<string, AnimationClip>();

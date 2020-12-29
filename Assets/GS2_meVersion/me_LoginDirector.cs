@@ -30,8 +30,7 @@ namespace Gs2.Weave.Login
         private Client _client;
         private IAccountRepository _repository;
 
-        public static Gs2Client _myclient;
-        public static Gs2GameSession _mysession;
+
 
         public static bool loginFinished { get; set; }
 
@@ -71,11 +70,10 @@ namespace Gs2.Weave.Login
             _loginSetting.onLogin.RemoveListener(OnLogin);
             _loginSetting.onError.RemoveListener(OnError);
 
-            Debug.Log("_mysession:" + _mysession.Session);
+            Debug.Log("_mysession:" + Auth._mysession.Session);
 
-            DontDestroyOnLoad(_myclient.gameObject);
-            DontDestroyOnLoad(_mysession.gameObject);
-
+            DontDestroyOnLoad(Auth._myclient.gameObject);
+            DontDestroyOnLoad(Auth._mysession.gameObject);
             loginFinished = true;
         }
 

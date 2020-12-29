@@ -78,6 +78,7 @@ namespace Gs2.Weave.Unit
             );
 
             _unitSetting.onGetInventoryModel.RemoveListener(OnGetInventoryModel);
+
             yield return _inventoryWatcher.Run(
                     client,
                     session,
@@ -90,9 +91,10 @@ namespace Gs2.Weave.Unit
                     _unitSetting.onError
                 );
 
-            _inventoryWatcher.Refresh();
-            Debug.Log(Watcher.ItemModels);
+            Debug.Log(_inventoryWatcher.ItemModels.Count);
 
+            _inventoryWatcher.Refresh();
+            
             for (int i = 0; i < _inventoryWatcher.ItemModels.Count; i++)
             {
                 //Debug.Log(_inventoryWatcher.ItemModels[i].Name + ":" + _inventoryWatcher.ItemModels[i].Metadata.Length);

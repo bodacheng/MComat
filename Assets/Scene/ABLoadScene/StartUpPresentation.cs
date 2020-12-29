@@ -10,8 +10,12 @@ public class StartUpPresentation : MonoBehaviour
     public SingleThreadProcesser runner;
 
     [Space(7)]
+    [Header("Starter")]
+    public Starter Starter;
+
+    [Space(7)]
     [Header("ResourceLordSceneStarter")]
-    public ResourceLordSceneUtil _Util;
+    public ResourceDownLoad ResourceDownLoad;
     
     [Space(7)]
     [Header("开发模式启动画面")]
@@ -32,12 +36,11 @@ public class StartUpPresentation : MonoBehaviour
 
     void Start()
     {
-        _Util.DProcessFinished = false;
-
-        StartCoroutine(_Util.ResourcePrepareProcess());
+        ResourceDownLoad.DProcessFinished = false;
+        StartCoroutine(ResourceDownLoad.ResourcePrepareProcess());
         StartCoroutine(PresentationProcess());
     }
-            
+
     public IEnumerator PresentationProcess()
     {
         // step1 ：商标显示
@@ -54,15 +57,14 @@ public class StartUpPresentation : MonoBehaviour
                 {
                     if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
                     {
-                        _Util.DeleteLocalSaveDate();
-                        _Util.ToMainScene();
+                        Starter.ToSkillShowerMode();
                         Watershed.Dispose();
                         return;
                     }
                     
-                    if (_Util.DProcessFinished)
+                    if (ResourceDownLoad.DProcessFinished)
                     {
-                        switch (_Util.ProjectPlayerInfoRefMode)
+                        switch (Starter.ProjectPlayerInfoRefMode)
                         {
                             case PlayerInfoRefMode.toBeSelect:
                                 DevT.gameObject.SetActive(true);
@@ -70,10 +72,10 @@ public class StartUpPresentation : MonoBehaviour
                             case PlayerInfoRefMode.formalVersion:
                                 break;
                             case PlayerInfoRefMode.localTestSaveData:
-                                _Util.BeginLocalTestMode();
+                                Starter.BeginLocalTestMode();
                                 break;
                             case PlayerInfoRefMode.remoteTestPlayer:
-                                _Util.BeginRemoteTestMode();
+                                Starter.BeginRemoteTestMode();
                                 break;
                         }
                         Watershed.Dispose();

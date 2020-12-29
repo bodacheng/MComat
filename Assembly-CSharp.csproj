@@ -324,6 +324,7 @@
     <Compile Include="Assets\FightSceneSystem\Nagare\Turial\BasicTryProcess.cs" />
     <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
     <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
+    <Compile Include="Assets\GS2_meVersion\Auth.cs" />
     <Compile Include="Assets\GS2_meVersion\me_LoginDirector.cs" />
     <Compile Include="Assets\GS2_meVersion\me_UnitDirector.cs" />
     <Compile Include="Assets\Gotcha\GachaManager.cs" />
@@ -492,8 +493,10 @@
     <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManager.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManagerGUI.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\StartUpPresentation.cs" />
+    <Compile Include="Assets\Scene\ABLoadScene\Starter.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\CachDownLoadMission.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\downloads\ResourceLordSceneUtil.cs" />
+    <Compile Include="Assets\Scene\ABLoadScene\downloads\DownLoad_CMM.cs" />
+    <Compile Include="Assets\Scene\ABLoadScene\downloads\ResourceDownLoad.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_anim.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_charcomponents.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_configs.cs" />
@@ -563,6 +566,7 @@
     <Compile Include="Assets\Structure\RandomSelect.cs" />
     <Compile Include="Assets\Structure\ScreenPositionCal.cs" />
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
+    <Compile Include="Assets\Structure\Sys.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
     <Compile Include="Assets\TheBlur\Blur.cs" />
     <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
@@ -1893,6 +1897,9 @@
     <Reference Include="Gs2.Weave.Experience.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Experience.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Gs2.Weave.Inventory">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Inventory.dll</HintPath>
+    </Reference>
     <Reference Include="Gs2.Weave.MoneyStore">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.MoneyStore.dll</HintPath>
     </Reference>
@@ -1925,6 +1932,9 @@
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Gs2.Weave.Inventory.Editor">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Inventory.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>

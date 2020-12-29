@@ -124,7 +124,7 @@ namespace mainMenu
                 switch (ResourceLoadingSetting.AnimationLoadingMode)
                 {
                     case ResourceLoadMode.CachAB:
-                        yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceLordSceneUtil.BundleURL, _CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                        yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceDownLoad.BundleURL, _CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
                     break;
                     case ResourceLoadMode.StreamingAssetAB:
                         yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);

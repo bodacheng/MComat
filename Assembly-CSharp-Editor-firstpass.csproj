@@ -736,6 +736,9 @@
     <Reference Include="Gs2.Weave.Experience.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Experience.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Gs2.Weave.Inventory">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Inventory.dll</HintPath>
+    </Reference>
     <Reference Include="Gs2.Weave.MoneyStore">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.MoneyStore.dll</HintPath>
     </Reference>
@@ -768,6 +771,9 @@
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Gs2.Weave.Inventory.Editor">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Inventory.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
