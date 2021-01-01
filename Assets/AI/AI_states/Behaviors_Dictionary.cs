@@ -8,7 +8,6 @@ namespace Soul
     public class BehaviorsIncubator
     {
         public IDictionary<string, Behavior> Num_State_List;
-        public List<string> StateIndexList;
         public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
         public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
@@ -57,7 +56,6 @@ namespace Soul
             Num_State_List.Add("KnockOff", knock_off);
             Num_State_List.Add("getUp", getUp);
 
-            StateIndexList = new List<string>();
             SkillTypeKeys = new List<string>();
             foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
             {
@@ -65,7 +63,7 @@ namespace Soul
                 if (_set == null)
                     continue;
 
-                if (!StateIndexList.Contains(_set.REAL_NAME))
+                if (!Num_State_List.Keys.Contains(_set.REAL_NAME))
                 {
                     switch (_set.StateType)
                     {
@@ -79,7 +77,6 @@ namespace Soul
                                         StateType = BehaviorType.AC
                                     };
                                     Num_State_List.Add("RushBack", RushBack);
-                                    StateIndexList.Add("RushBack");
                                     break;
                                 case "Rush":
                                     G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
@@ -88,7 +85,6 @@ namespace Soul
                                         StateType = BehaviorType.AC
                                     };
                                     Num_State_List.Add("Rush", Rush);
-                                    StateIndexList.Add("Rush");
                                     break;
                             }
                             break;
@@ -100,7 +96,6 @@ namespace Soul
                                 nextAttackStateCanRushFirst = false
                             };
                             Num_State_List.Add(_set.REAL_NAME, _GI_Attack);
-                            StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.GM:
@@ -111,7 +106,6 @@ namespace Soul
                                 nextAttackStateCanRushFirst = false
                             };
                             Num_State_List.Add(_set.REAL_NAME, _GM_Attack);
-                            StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.GR:
@@ -122,7 +116,6 @@ namespace Soul
                                 nextAttackStateCanRushFirst = false
                             };
                             Num_State_List.Add(_set.REAL_NAME, _GR_Attack);
-                            StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.CT:
@@ -133,7 +126,6 @@ namespace Soul
                                 nextAttackStateCanRushFirst = false
                             };
                             Num_State_List.Add(_set.REAL_NAME, _Counter);
-                            StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.NONE:
@@ -152,7 +144,7 @@ namespace Soul
 
         public bool IfContainsKey(string key)
         {
-            foreach (string _key in StateIndexList)
+            foreach (string _key in Num_State_List.Keys)
             {
                 if (_key.GetHashCode() == key.GetHashCode())
                 {

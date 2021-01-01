@@ -58,7 +58,7 @@ namespace Soul
                 List<string> alreadyInList = new List<string>();
                 foreach (SkillEntity s in list)
                 {
-                    if (!alreadyInList.Contains(s.REAL_NAME) && _States_Incubator.StateIndexList.Contains(s.REAL_NAME))
+                    if (!alreadyInList.Contains(s.REAL_NAME) && _States_Incubator.Num_State_List.Keys.Contains(s.REAL_NAME))
                     {
                         after_list.Add(s);
                         alreadyInList.Add(s.REAL_NAME);
@@ -226,7 +226,7 @@ namespace Soul
             
             foreach (SkillEntity _set in list)
             {
-                if (_States_Incubator.StateIndexList.Contains(_set.REAL_NAME))
+                if (_States_Incubator.Num_State_List.Keys.Contains(_set.REAL_NAME))
                 {
                     stateTransitionSetDictionary.Add(new KeyValuePair<string, SkillEntity>(_set.REAL_NAME, _set));
                 }
@@ -279,7 +279,7 @@ namespace Soul
             
             foreach (SkillEntity _set in list)
             {
-                if (!allChuans.Contains(_set) && !regularStates.Contains(_set) && _set.REAL_NAME != null && _States_Incubator.StateIndexList.Contains(_set.REAL_NAME))
+                if (!allChuans.Contains(_set) && !regularStates.Contains(_set) && _set.REAL_NAME != null && _States_Incubator.Num_State_List.Keys.Contains(_set.REAL_NAME))
                 {
                     allChuans.Add(_set);
                 }
