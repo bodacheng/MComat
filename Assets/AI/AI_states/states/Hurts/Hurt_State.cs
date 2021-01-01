@@ -3,157 +3,167 @@ using HittingDetection;
 using Soul;
 using UniRx;
 
-public partial class Hurt_State : Behavior {
-
-    float used_dizzy_time;
-    Vector3 fixDesPos;
-    float TimeCounter { set; get; }
-    V_Damage target;
-    SingleAssignmentDisposable physicMissionDisposable;
-
-    public override void Pre_process_before_enter()
+namespace Soul
+{
+    public partial class Hurt_State : Behavior
     {
-        base.Pre_process_before_enter ();
-    }
 
-    void PlayHurtAnim(V_Damage newValue)
-    {
-        if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
+        float used_dizzy_time;
+        Vector3 fixDesPos;
+        float TimeCounter { set; get; }
+        V_Damage target;
+        SingleAssignmentDisposable physicMissionDisposable;
+
+        public override void Pre_process_before_enter()
         {
-            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, 0.1f);
-            return;
+            base.Pre_process_before_enter();
         }
-        Vector3 point = newValue.damageHappenPoint;
-        point.y = 0;
-        if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
+
+        void PlayHurtAnim(V_Damage newValue)
         {
-            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
-            RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f, true);
-        }else{
-            if (newValue.damageHappenPoint.y > _DATA_CENTER.head_t.position.y)
+            if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
-                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.1f);
-                RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
-            }else{
-                if (newValue.damageHappenPoint.y > _DATA_CENTER.geometryCenter.position.y)
+                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, 0.1f);
+                return;
+            }
+            Vector3 point = newValue.damageHappenPoint;
+            point.y = 0;
+            if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
+            {
+                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
+                RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f, true);
+            }
+            else
+            {
+                if (newValue.damageHappenPoint.y > _DATA_CENTER.head_t.position.y)
                 {
-                    Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.1f);
+                    Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.1f);
                     RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
-                }else{
-                    Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.1f);
-                    RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                }
+                else
+                {
+                    if (newValue.damageHappenPoint.y > _DATA_CENTER.geometryCenter.position.y)
+                    {
+                        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.1f);
+                        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                    }
+                    else
+                    {
+                        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.1f);
+                        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                    }
                 }
             }
         }
-    }
-    
-    public override void AI_State_exit()
-    {
-        base.AI_State_exit();
-        _FightAttriCalRef.Gettingdamage = false;
-        if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
-            physicMissionDisposable.Dispose();
-        if (_BuffsRunner.Freesing)
-        {
-            return;
-        }
-        _Rigidbody.mass = 100;
-        _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        _BasicPhysicSupport.SetUsingGravity(true);
-    }
-    
-    public override void AI_State_enter(V_Damage newValue)
-	{
-        target = newValue;
-        base.AI_State_enter();
-        _Animator.applyRootMotion = false;
-        PlayHurtAnim(newValue);
-        _FightAttriCalRef.Gettingdamage = true;
-        _Weapon_Animation_Events.ClearMarkerManagers();
-        _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-        TimeCounter = 0f;
-        pEvents.CloseAllPersonalityEffects();
-        _Rigidbody.mass = 80;
 
-        if (_BuffsRunner.Freesing)
-            return;
-
-        if (target.from_weapon.effectSpreadOnBody)
+        public override void AI_State_exit()
         {
-            _FightAttriCalRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
+            base.AI_State_exit();
+            _FightAttriCalRef.Gettingdamage = false;
+            if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
+                physicMissionDisposable.Dispose();
+            if (_BuffsRunner.Freesing)
+            {
+                return;
+            }
+            _Rigidbody.mass = 100;
+            _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            _BasicPhysicSupport.SetUsingGravity(true);
         }
 
-        switch (target.from_weapon.damage_type)
+        public override void AI_State_enter(V_Damage newValue)
         {
-            case DamageType.slight_damage_forward:
-                SlightDamgeStart(target);
-            break;
-            case DamageType.light_damage_forward:
-                LightDamgeStart(target);
-            break;
-            case DamageType.heavy_damage_forward:
-                HeavyDamgeStart(target);
-            break;
-            case DamageType.supper_damage_forward:
-                SuperDamgeStart(target);
-            break;
-            case DamageType.draw:
-                DrawDamgeStart(target);
-            break;
-            case DamageType.explosion:
-                ExplosionDamgeStart(target);
-            break;
-            case DamageType.push_to_mid:
-                PushToMidStart(target, 10f, true);
-            break;
-            case DamageType.push_to_mid_slight:
-                PushToMidStart(target, 4f, true);
-            break;
-            case DamageType.same_height_to_mid:
-                PushToMidStart(target, 4f, false);
-            break;
-            case DamageType.sekka:
-                SekkaStart(target.from_weapon.zokusei);
-            break;
-            case DamageType.time_pause:
-                TimePauseStart();
-            return;
-            case DamageType.stable_damage:
-                StableDamgeStart(target);
-            return;
-            case DamageType.high:
-                // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
-                _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
-            return;
-        }
-        
-        _FightAttriCalRef.GetKnockOffCount().PlusGauge(1f);
-        _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
-        
-        if (_FightAttriCalRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
-        {
-            _FightAttriCalRef.GetKnockOffCount().SetGauge(0f);
-            _AIStateRunner.ChangeState("KnockOff", target);
-            return;
+            target = newValue;
+            base.AI_State_enter();
+            _Animator.applyRootMotion = false;
+            PlayHurtAnim(newValue);
+            _FightAttriCalRef.Gettingdamage = true;
+            _Weapon_Animation_Events.ClearMarkerManagers();
+            _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
+            TimeCounter = 0f;
+            pEvents.CloseAllPersonalityEffects();
+            _Rigidbody.mass = 80;
+
+            if (_BuffsRunner.Freesing)
+                return;
+
+            if (target.from_weapon.effectSpreadOnBody)
+            {
+                _FightAttriCalRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
+            }
+
+            switch (target.from_weapon.damage_type)
+            {
+                case DamageType.slight_damage_forward:
+                    SlightDamgeStart(target);
+                    break;
+                case DamageType.light_damage_forward:
+                    LightDamgeStart(target);
+                    break;
+                case DamageType.heavy_damage_forward:
+                    HeavyDamgeStart(target);
+                    break;
+                case DamageType.supper_damage_forward:
+                    SuperDamgeStart(target);
+                    break;
+                case DamageType.draw:
+                    DrawDamgeStart(target);
+                    break;
+                case DamageType.explosion:
+                    ExplosionDamgeStart(target);
+                    break;
+                case DamageType.push_to_mid:
+                    PushToMidStart(target, 10f, true);
+                    break;
+                case DamageType.push_to_mid_slight:
+                    PushToMidStart(target, 4f, true);
+                    break;
+                case DamageType.same_height_to_mid:
+                    PushToMidStart(target, 4f, false);
+                    break;
+                case DamageType.sekka:
+                    SekkaStart(target.from_weapon.zokusei);
+                    break;
+                case DamageType.time_pause:
+                    TimePauseStart();
+                    return;
+                case DamageType.stable_damage:
+                    StableDamgeStart(target);
+                    return;
+                case DamageType.high:
+                    // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
+                    _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
+                    return;
+            }
+
+            _FightAttriCalRef.GetKnockOffCount().PlusGauge(1f);
+            _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
+
+            if (_FightAttriCalRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
+            {
+                _FightAttriCalRef.GetKnockOffCount().SetGauge(0f);
+                _AIStateRunner.ChangeState("KnockOff", target);
+                return;
+            }
+
+            Animation_Manger.Animator.SetTrigger("face_reset");
+            Animation_Manger.Animator.SetTrigger("hurt");
         }
 
-        Animation_Manger.Animator.SetTrigger("face_reset");
-        Animation_Manger.Animator.SetTrigger("hurt");
-    }
-    
-    public override void _State_FixedUpdate1()
-    {
-        TimeCounter += Time.fixedDeltaTime;
-        switch(target.from_weapon.damage_type)
+        public override void _State_FixedUpdate1()
         {
-            case DamageType.high:
-                HighDamageUpdate();
-            break;
+            TimeCounter += Time.fixedDeltaTime;
+            switch (target.from_weapon.damage_type)
+            {
+                case DamageType.high:
+                    HighDamageUpdate();
+                    break;
+            }
         }
-    }
-    
-    public override bool Capacity_Exit_Condition()
-    {
-        return TimeCounter > used_dizzy_time && !_BuffsRunner.Freesing;
+
+        public override bool Capacity_Exit_Condition()
+        {
+            return TimeCounter > used_dizzy_time && !_BuffsRunner.Freesing;
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Soul;
 using Skill;
 
 namespace Soul
