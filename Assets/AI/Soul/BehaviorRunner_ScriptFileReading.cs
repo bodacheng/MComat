@@ -157,11 +157,11 @@ namespace Soul
                 now_Behavior.AI_State_exit();
             }
             SkillEntity_List = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
-            List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; //理解整个系统的关键
+            IDictionary<string, Behavior> Num_State_List = _States_Incubator.Num_State_List; //理解整个系统的关键
             BehaviourDic = new Dictionary<string, Behavior>();
-            foreach (BehaviorIndex_With_Behavior s in Num_State_List)
+            foreach (KeyValuePair<string, Behavior> s in Num_State_List)
             {
-                BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
+                BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.Key, s.Value));
             }
             SkillEntityDic = new Dictionary<string, SkillEntity>();
             List<string> alreadyInList = new List<string>();//7.29 这个环节貌似是现在“同技能没法重复”bug的来源

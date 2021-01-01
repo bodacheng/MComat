@@ -11,13 +11,12 @@ public partial class NineAndTwo
     SkillEntity Empty, zhuangbi, Victory, Death, Hit, getUp, KnockOff;
     #endregion
 
-    List<SkillEntity> H1_E_list = new List<SkillEntity>();
-    List<SkillEntity> H2_E_list = new List<SkillEntity>();
-    List<SkillEntity> H3_E_list = new List<SkillEntity>();
-    
-    List<string> H1_list = new List<string>();
-    List<string> H2_list = new List<string>();
-    List<string> H3_list = new List<string>();
+    readonly List<SkillEntity> H1_E_list = new List<SkillEntity>();
+    readonly List<SkillEntity> H2_E_list = new List<SkillEntity>();
+    readonly List<SkillEntity> H3_E_list = new List<SkillEntity>();
+    readonly List<string> H1_list = new List<string>();
+    readonly List<string> H2_list = new List<string>();
+    readonly List<string> H3_list = new List<string>();
     
     public void SortNineAndTwo()
     {

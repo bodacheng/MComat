@@ -113,21 +113,21 @@ namespace Soul
             SkillEntityDic = nineAndTwo.GenerateBeheviourSets();
             SkillEntity_List = nineAndTwo.SkillEntityList();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
             _States_Incubator = new BehaviorsIncubator(empty_State, SkillEntityDic);
-            List<BehaviorIndex_With_Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
+            IDictionary<string, Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
             BehaviourDic.Clear();
             ConditionAndRespondPriority.Clear();
             BehaviourAndStrategicExitCondition.Clear();
-            foreach (BehaviorIndex_With_Behavior s in Num_State_List)
+            foreach (KeyValuePair<string, Behavior> s in Num_State_List)
             {
-                if (SkillEntityDic.ContainsKey(s.num))
+                if (SkillEntityDic.ContainsKey(s.Key))
                 {
-                    s.state.StateKey = SkillEntityDic[s.num].REAL_NAME;
-                    s.state.splevel = SkillEntityDic[s.num].SP_LEVEL;
-                    s.state.triggerAtttackRangeMin = SkillEntityDic[s.num].AIAttrs.AI_MIN_DIS;
-                    s.state.triggerAtttackRangeMax = SkillEntityDic[s.num].AIAttrs.AI_MAX_DIS;
-                    s.state.triggerAtttackHeight = SkillEntityDic[s.num].AIAttrs.height;
-                    AddAITriggerConditionToBehavior(SkillEntityDic[s.num]);
-                    BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.num, s.state));
+                    s.Value.StateKey = SkillEntityDic[s.Key].REAL_NAME;
+                    s.Value.splevel = SkillEntityDic[s.Key].SP_LEVEL;
+                    s.Value.triggerAtttackRangeMin = SkillEntityDic[s.Key].AIAttrs.AI_MIN_DIS;
+                    s.Value.triggerAtttackRangeMax = SkillEntityDic[s.Key].AIAttrs.AI_MAX_DIS;
+                    s.Value.triggerAtttackHeight = SkillEntityDic[s.Key].AIAttrs.height;
+                    AddAITriggerConditionToBehavior(SkillEntityDic[s.Key]);
+                    BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.Key, s.Value));
                 }
                 else
                 {

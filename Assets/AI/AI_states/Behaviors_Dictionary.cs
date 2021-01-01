@@ -7,28 +7,26 @@ namespace Soul
 {
     public class BehaviorsIncubator
     {
-        public List<BehaviorIndex_With_Behavior> Num_State_List;
+        public IDictionary<string, Behavior> Num_State_List;
         public List<string> StateIndexList;
         public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
         public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
         {
-            Num_State_List = new List<BehaviorIndex_With_Behavior>
-            {
-                new BehaviorIndex_With_Behavior("Empty", empty_State)
-            };
+            Num_State_List = new Dictionary<string, Behavior>();
+            Num_State_List.Add("Empty", empty_State);
             Idle_State victory = new Idle_State("victory");
             Idle_State zhuangbi = new Idle_State("zhuangbi");
             Death_State death = new Death_State();
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("Victory", victory));
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("zhuangbi", zhuangbi));
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("Death", death));
+            Num_State_List.Add("Victory", victory);
+            Num_State_List.Add("zhuangbi", zhuangbi);
+            Num_State_List.Add("Death", death);
             Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
             {
                 StateType = BehaviorType.MV,
                 nextAttackStateCanRushFirst = false
             };
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("Move", move));
+            Num_State_List.Add("Move", move);
 
             if (FightGlobalSetting._hasDefend)
             {
@@ -37,7 +35,7 @@ namespace Soul
                     StateType = BehaviorType.Def,
                     nextAttackStateCanRushFirst = false
                 };
-                Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
+                Num_State_List.Add("Defend", defend);
             }
 
             Hurt_State hit = new Hurt_State()
@@ -55,9 +53,9 @@ namespace Soul
             {
                 StateType = BehaviorType.GetUp
             };
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("Hit", hit));
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp", getUp));
+            Num_State_List.Add("Hit", hit);
+            Num_State_List.Add("KnockOff", knock_off);
+            Num_State_List.Add("getUp", getUp);
 
             StateIndexList = new List<string>();
             SkillTypeKeys = new List<string>();
@@ -80,7 +78,7 @@ namespace Soul
                                         nextAttackStateCanRushFirst = false,
                                         StateType = BehaviorType.AC
                                     };
-                                    Num_State_List.Add(new BehaviorIndex_With_Behavior("RushBack", RushBack));
+                                    Num_State_List.Add("RushBack", RushBack);
                                     StateIndexList.Add("RushBack");
                                     break;
                                 case "Rush":
@@ -89,7 +87,7 @@ namespace Soul
                                         nextAttackStateCanRushFirst = true,
                                         StateType = BehaviorType.AC
                                     };
-                                    Num_State_List.Add(new BehaviorIndex_With_Behavior("Rush", Rush));
+                                    Num_State_List.Add("Rush", Rush);
                                     StateIndexList.Add("Rush");
                                     break;
                             }
@@ -101,7 +99,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GI_Attack));
+                            Num_State_List.Add(_set.REAL_NAME, _GI_Attack);
                             StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
@@ -112,7 +110,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GM_Attack));
+                            Num_State_List.Add(_set.REAL_NAME, _GM_Attack);
                             StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
@@ -123,7 +121,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GR_Attack));
+                            Num_State_List.Add(_set.REAL_NAME, _GR_Attack);
                             StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
@@ -134,7 +132,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _Counter));
+                            Num_State_List.Add(_set.REAL_NAME, _Counter);
                             StateIndexList.Add(_set.REAL_NAME);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
@@ -163,19 +161,5 @@ namespace Soul
             }
             return false;
         }
-    }
-}
-
-namespace Skill
-{
-    public class BehaviorIndex_With_Behavior
-    {
-        public BehaviorIndex_With_Behavior(string num, Behavior state)
-        {
-            this.num = num;
-            this.state = state;
-        }
-        public string num;
-        public Behavior state;
     }
 }
