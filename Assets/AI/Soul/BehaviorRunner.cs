@@ -9,7 +9,7 @@ namespace Soul
     {
         #region 初始化相关
         public List<SkillEntity> SkillEntity_List;
-        Behaviors_Incubator _States_Incubator;
+        BehaviorsIncubator _States_Incubator;
         #endregion
         
         #region 辅助模块：技能链接时机判断器

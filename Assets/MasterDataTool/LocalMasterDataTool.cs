@@ -1,17 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 using Skill;
+using System.Collections;
 
-public class ConfigFileManager : MonoBehaviour {
+public partial class LocalMasterDataTool : MonoBehaviour {
 
     public string[] chartypes;
     public TextAsset CharacterConfigTextFile;
     public string MonstersConfigFilePath;
     public TextAsset SkillConfigTextFile;
     public string SkillConfigFilePath;
-        
+
+    /// <summary>
+    /// 生成gs2 技能石master更新文件
+    /// </summary>
+    /// <param name="textAsset"></param>
+    /// <returns></returns>
+    public IEnumerator GenerateGS2ConfigFile(TextAsset textAsset)
+    {
+        yield return SkillConfigTable.LoadAllSkillConfigs();
+        string returnValue = string.Empty;
+        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
+        {
+
+        }
+        LocalJson.SaveInfoToJsonFile_persistentDataPath("gs2SkillConfigFile", "gs2SkillStoneModelUpdate.json", returnValue);
+    }
+
     // 以下这个函数对技能表的更新机制企划如下：
     // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
     // 配置文件允许在一个type下存在相同realname的复数个条目(同一个动画不同攻击类型)，
@@ -28,7 +44,7 @@ public class ConfigFileManager : MonoBehaviour {
     // 也就是说这个配置文件更新函数的重点只是根据资源的有无来决定是不是添加初始条目或删除旧条目，技能详细定义你自己去改，它不会胡乱给你改。
     // 4. ID的“填补机制”是建立在原有条目对应资源缺失,并且在一次更新操作的前提下。只有那些找不到资源了的条目的旧ID才会被新资源对应的新条目代替ID。
     // 假设你在某资源存在的时候删了它条目，然后重新更新一次配置文件，会发现被补上的条目ID是最新（最大）值。这一点无论是角色Config还是SkillConfig都是一样的。
-    
+
     public void SkillConfigFileUpdate(string path, TextAsset textAsset)
     {
         if (textAsset != null)
@@ -250,181 +266,5 @@ public class ConfigFileManager : MonoBehaviour {
         }
         SkillConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_skill");
         HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", null, null);
-    }
-    
-    public int MaxOfIntList(List<int> List)
-    {
-        int i = -999;
-
-        if (List.Count == 0)
-        {
-            return 0;
-        }
-        if (List.Count == 1)
-        {
-            return List[0];
-        }
-        if (List.Count > 1)
-        {
-            i = List[0];
-            for (int y = 0; y < List.Count; y++)
-            {
-                if (i < List[y])
-                {
-                    i = List[y];
-                }
-            }
-            return i;
-        }
-        return i;
-    }
-
-    // 由Resource文件夹更新角色配置文件信息所需要的工作应该有如下：
-    // 首先，同prefabName 允许在数据库存在复数个条目。比如外观一样的红色魔法暴龙和蓝色魔法暴龙，他们可以prefabName一样但charResouceNum不同。
-    // 但首次自动生成配置文件，系统只会为新的资源添加一条对应条目，并且条目具体信息是默认的，非常空，一定需要手动设置。
-    // 如果要有一样的资源不同的条目这种情况，必定是手动添加的结果。
-    // 如果数据库里存在条目在Resource下检测不到对应资源。。。。那这样的条目会被删除。原先的ID会被新添加的资源对应的新条目补空档。
-    // 系统不会对旧条目中自己手动填写的任何具体定义做更新，只会根据资源的有无来决定条目的追加与删除与否。
-    public void CharsConfigFileGenerate(string path, TextAsset textAsset)
-    {
-        if (textAsset != null)
-        {
-            MonstersConfigTable.Instance.Load(textAsset);
-        }
-        List<int> AllDeletedRecordsIDs = new List<int>();
-        List<string> kisoonCharacterResourceInfoRID = new List<string>();
-        List<CharConfig> AllNewCharacterConfigsOfAllTypes = new List<CharConfig>();
-        foreach (string chartype in chartypes)
-        {
-            List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharConfig> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
-            List<string> keySonnCharacterRealNames = new List<string>();
-            foreach (CharConfig oneConfig in CharConfigsOfOldConfigFileOFtype)
-            {
-                if (!keySonnCharacterRealNames.Contains(oneConfig.REAL_NAME))
-                {
-                    keySonnCharacterRealNames.Add(oneConfig.REAL_NAME);
-                }
-                else
-                {
-                    //什么也不做。允许。
-                }
-                kisoonCharacterResourceInfoRID.Add(oneConfig.RECORD_ID);
-            }
-
-            Object[] pretabResources = Resources.LoadAll("CharPretabs/" + chartype);
-            foreach (Object charPretab in pretabResources)
-            {
-                if (!currentAllRealNamesOfResourceFolder.Contains(charPretab.name))
-                    currentAllRealNamesOfResourceFolder.Add(charPretab.name);
-
-                if (keySonnCharacterRealNames.Contains(charPretab.name))
-                {
-                    continue;//不对原来就存在的资源对应条目做更改。
-                }
-
-                GameObject character = charPretab as GameObject;
-                if (character.GetComponent<OutsideDataLink>() == null)
-                {
-                    Debug.Log(chartype + "资源" + charPretab.name + "丢失必要组件，不是一个正常角色资源");
-                    continue;
-                }
-
-                CharConfig _CharacterResourceInfo = new CharConfig
-                {
-                    RECORD_ID = "-1",
-                    TYPE = chartype,
-                    REAL_NAME = charPretab.name,
-                    showNameEN = null,
-                    showNameCN = null,
-                    showNameJP = null
-                };
-
-                OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
-                switch (outsideDataLink._C.Zokusei)
-                {
-                    case Zokusei.blueMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.blueMagic;
-                        break;
-                    case Zokusei.redMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.redMagic;
-                        break;
-                    case Zokusei.greenMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.greenMagic;
-                        break;
-                    case Zokusei.darkMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.darkMagic;
-                        break;
-                    case Zokusei.lightMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
-                        break;
-                }
-                _CharacterResourceInfo.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
-                _CharacterResourceInfo.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
-                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
-                _CharacterResourceInfo.RushType = RushType.RushBack;
-                _CharacterResourceInfo.DEFENDABLE_FLAG = true;
-                _CharacterResourceInfo.InstructionCH = null;
-                _CharacterResourceInfo.InstructionEN = null;
-                _CharacterResourceInfo.InstructionJP = null;
-                _CharacterResourceInfo.RARITY_LEVEL = 1;
-
-                AllNewCharacterConfigsOfAllTypes.Add(_CharacterResourceInfo);
-            }
-
-            //旧版本有的keyname可是Resource文件夹下没有的
-            List<string> ResourceNamesShouldDeletedFromConfig = new List<string>();
-            foreach (string keyname in keySonnCharacterRealNames)
-            {
-                if (!currentAllRealNamesOfResourceFolder.Contains(keyname))
-                    ResourceNamesShouldDeletedFromConfig.Add(keyname);
-            }
-
-            foreach (string keyname in ResourceNamesShouldDeletedFromConfig)
-            {
-                List<MonstersConfigTable.Row> toDeleteRows = MonstersConfigTable.Instance.FindAll_TYPE_REALNAME(chartype, keyname);
-                foreach (MonstersConfigTable.Row row in toDeleteRows)
-                {
-                    if (!AllDeletedRecordsIDs.Contains(int.Parse(row.RECORD_ID)))
-                    {
-                        Debug.Log("这是一个要删除的ID" + int.Parse(row.RECORD_ID));
-                        AllDeletedRecordsIDs.Add(int.Parse(row.RECORD_ID));
-                    }
-                    else
-                        Debug.Log("原monstersConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
-                    MonstersConfigTable.Instance.rowList.Remove(row);
-                }
-            }
-        }
-
-        foreach (CharConfig characterResourceInfo in AllNewCharacterConfigsOfAllTypes)
-        {
-            if (AllDeletedRecordsIDs.Count > 0)
-            {
-                characterResourceInfo.RECORD_ID = "new";
-                Debug.Log(characterResourceInfo.REAL_NAME + "的 ID： " + characterResourceInfo.RECORD_ID);
-                AllDeletedRecordsIDs.RemoveAt(0);
-                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
-            }
-            else
-            {
-                characterResourceInfo.RECORD_ID = "new";
-                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
-            }
-            MonstersConfigTable.Row newRow = MonstersConfigTable.Instance.CharacterResourceInfoToRow(characterResourceInfo);
-            if (newRow != null && newRow.REAL_NAME != null)
-                MonstersConfigTable.Instance.rowList.Add(newRow);
-        }
-        MonstersConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null? path : "mst_monster");
-    }
-    
-    public void GenerateTutorialCharacterFiles()
-    {
-        MonsterOfPlayerDetailModel Adam = new MonsterOfPlayerDetailModel
-        {
-            monsterOfPlayerId = 1.ToString(),
-            monsterId = 1.ToString()
-        };
-        AccountCharsSet.generateStoryCharsIntoXMLFile(Adam);
     }
 }

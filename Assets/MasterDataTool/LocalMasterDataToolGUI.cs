@@ -3,21 +3,21 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(ConfigFileManager))]
-public class ConfigFileManagerGUI : Editor {
+[CustomEditor(typeof(LocalMasterDataTool))]
+public class LocalMasterDataToolGUI : Editor {
 
-    ConfigFileManager _ConfigFileManager;
+    LocalMasterDataTool _ConfigFileManager;
     
     public override void OnInspectorGUI()
     {
-        _ConfigFileManager = (ConfigFileManager)target;
+        _ConfigFileManager = (LocalMasterDataTool)target;
         DrawDefaultInspector();
         
         //_ConfigFileManager.SkillConfigTextFile = EditorGUILayout.ObjectField("SkillConfigFile", _ConfigFileManager.SkillConfigTextFile, typeof(TextAsset), true) as TextAsset;
         
         if (GUILayout.Button("根据Resource文件夹生成所有角色配置文件"))
         {
-            _ConfigFileManager.CharsConfigFileGenerate(_ConfigFileManager.MonstersConfigFilePath,_ConfigFileManager.CharacterConfigTextFile);
+            _ConfigFileManager.UnitsConfigFileGenerate(_ConfigFileManager.MonstersConfigFilePath,_ConfigFileManager.CharacterConfigTextFile);
         }
         
         if (GUILayout.Button("根据Resource文件夹生成,更新技能配置文件"))
@@ -91,7 +91,7 @@ public class ConfigFileManagerGUI : Editor {
         
         if (GUILayout.Button("生成剧情用临时角色存档文件"))
         {
-            _ConfigFileManager.GenerateTutorialCharacterFiles();
+            _ConfigFileManager.GenerateTutorialUnitsFiles();
         }        
     }
 }

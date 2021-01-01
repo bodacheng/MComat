@@ -11,6 +11,11 @@ public class Auth : MonoBehaviour
 
     public static Auth target;
 
+    void Awake()
+    {
+        target = this;
+    }
+
     /// <summary>
     /// GS2 相关
     /// </summary>
@@ -25,7 +30,7 @@ public class Auth : MonoBehaviour
         StartCoroutine(loginDirector.Run(client.Client, new PlayerPrefsAccountRepository()));
     }
 
-    public void OnCreateGameSession(Gs2GameSession session)// login
+    public void OnCreateGameSession(Gs2GameSession session)
     {
         Debug.Log("SceneDirector::OnCreateGameSession");
         Auth._mysession = session;

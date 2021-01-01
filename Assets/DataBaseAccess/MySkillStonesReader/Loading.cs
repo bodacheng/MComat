@@ -80,16 +80,16 @@ namespace dataAccess
                 break;
             case PlayerInfoRefMode.remoteTestPlayer:
                 yield return ApiCaller.Instance.Post<GetSkillStoneOfPlayerInfoModel, GetSkillStoneOfPlayerInfoForm>
-                    (   "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo",
-                        form, 
-                        ApiCaller.Instance.getHeader(apiLanguage), 
-                        model => {
-                            success(model.data);
-                        },
-                        model => {
-                            fail(model.data);
-                        }
-                    );
+                (   "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo",
+                    form, 
+                    ApiCaller.Instance.getHeader(apiLanguage), 
+                    model => {
+                    success(model.data);
+                    },
+                    model => {
+                    fail(model.data);
+                    }
+                );
                 break;
             case PlayerInfoRefMode.formalVersion:
                 break;

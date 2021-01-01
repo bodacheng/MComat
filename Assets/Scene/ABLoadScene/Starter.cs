@@ -14,11 +14,11 @@ public class Starter : MonoBehaviour
     {
         IEnumerator temp()
         {
+            AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
             yield return Auth.target.Gs2Login();
-
+            EnterFrontScene();
         }
-        AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
-        EnterFrontScene();
+        
         StartCoroutine(temp());
     }
 

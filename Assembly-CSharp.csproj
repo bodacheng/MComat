@@ -264,6 +264,7 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneLevelUpModel.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Add.cs" />
+    <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_GS2.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Json.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_Load.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountCharsSet\AccountCharsSet_XMLLoad.cs" />
@@ -393,6 +394,9 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_waitForConfirm.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\SceneProcess.cs" />
+    <Compile Include="Assets\MasterDataTool\LocalMasterDataTool.cs" />
+    <Compile Include="Assets\MasterDataTool\LocalMasterDataToolGUI.cs" />
+    <Compile Include="Assets\MasterDataTool\LocalMasterDataTool_Unit.cs" />
     <Compile Include="Assets\MemberDetail\LevelManager.cs" />
     <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
     <Compile Include="Assets\ModelShower\ModelShower.cs" />
@@ -490,8 +494,6 @@
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Common.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Rename.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManager.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\ConfigFileManagerGUI.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\StartUpPresentation.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\Starter.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\CachDownLoadMission.cs" />

@@ -3,160 +3,166 @@ using UnityEngine;
 using Soul;
 using Skill;
 
-public class Behaviors_Incubator
+namespace Soul
 {
-    public List<BehaviorIndex_With_Behavior> Num_State_List;
-    public List<string> StateIndexList;
-    public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
-
-    public Behaviors_Incubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
+    public class BehaviorsIncubator
     {
-        Num_State_List = new List<BehaviorIndex_With_Behavior>();
-        
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Empty", empty_State));
-        Idle_State victory = new Idle_State("victory");
-        Idle_State zhuangbi = new Idle_State("zhuangbi");
-        Death_State death = new Death_State();
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Victory", victory));
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("zhuangbi", zhuangbi));
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Death", death));
-        Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
-        {
-            StateType = BehaviorType.MV,
-            nextAttackStateCanRushFirst = false
-        };
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Move", move));
+        public List<BehaviorIndex_With_Behavior> Num_State_List;
+        public List<string> StateIndexList;
+        public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
 
-        if (FightGlobalSetting._hasDefend)
+        public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
         {
-            Defend_State defend = new Defend_State("block", "block_break")
+            Num_State_List = new List<BehaviorIndex_With_Behavior>
             {
-                StateType = BehaviorType.Def,
+                new BehaviorIndex_With_Behavior("Empty", empty_State)
+            };
+            Idle_State victory = new Idle_State("victory");
+            Idle_State zhuangbi = new Idle_State("zhuangbi");
+            Death_State death = new Death_State();
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("Victory", victory));
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("zhuangbi", zhuangbi));
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("Death", death));
+            Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
+            {
+                StateType = BehaviorType.MV,
                 nextAttackStateCanRushFirst = false
             };
-            Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
-        }
-        
-        Hurt_State hit = new Hurt_State()
-        {
-            nextAttackStateCanRushFirst = false,
-            StateType = BehaviorType.Hit
-        };
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("Move", move));
 
-        Knock_Off_State knock_off = new Knock_Off_State()
-        {
-            StateType = BehaviorType.KnockOff,
-            nextAttackStateCanRushFirst = true
-        };
-        GetUp getUp = new GetUp("getup")
-        {
-            StateType = BehaviorType.GetUp
-        };
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("Hit", hit));
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
-        Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp", getUp));
-
-        StateIndexList = new List<string>();
-        SkillTypeKeys = new List<string>();
-        foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
-        {
-            SkillEntity _set = valuePair.Value;
-            if (_set == null)
-                continue;
-
-            if (!StateIndexList.Contains(_set.REAL_NAME))
+            if (FightGlobalSetting._hasDefend)
             {
-                switch (_set.StateType)
+                Defend_State defend = new Defend_State("block", "block_break")
                 {
-                    case BehaviorType.AC:
-                        switch(_set.REAL_NAME)
-                        {
-                            case "RushBack":
-                                Dash_Back_State RushBack = new Dash_Back_State
-                                {
-                                    nextAttackStateCanRushFirst = false,
-                                    StateType = BehaviorType.AC
-                                };
-                                Num_State_List.Add(new BehaviorIndex_With_Behavior("RushBack", RushBack));
-                                StateIndexList.Add("RushBack");
-                            break;
-                            case "Rush":
-                                G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
-                                {
-                                    nextAttackStateCanRushFirst = true,
-                                    StateType = BehaviorType.AC
-                                };
-                                Num_State_List.Add(new BehaviorIndex_With_Behavior("Rush", Rush));
-                                StateIndexList.Add("Rush");
-                            break;
-                        }
-                        break;
-                    case BehaviorType.GI:
-                        G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 20f, _set.REAL_NAME)
-                        {
-                            StateType = BehaviorType.GI,
-                            AT = _set.AT,
-                            nextAttackStateCanRushFirst = false
-                        };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GI_Attack));
-                        StateIndexList.Add(_set.REAL_NAME);
-                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
-                        break;
-                    case BehaviorType.GM:
-                        G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.REAL_NAME)
-                        {
-                            StateType = BehaviorType.GM,
-                            AT = _set.AT,
-                            nextAttackStateCanRushFirst = false
-                        };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GM_Attack));
-                        StateIndexList.Add(_set.REAL_NAME);
-                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
-                        break;
-                    case BehaviorType.GR:
-                        G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.REAL_NAME)
-                        {
-                            StateType = BehaviorType.GR,
-                            AT = _set.AT,
-                            nextAttackStateCanRushFirst = false
-                        };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GR_Attack));
-                        StateIndexList.Add(_set.REAL_NAME);
-                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
-                        break;
-                    case BehaviorType.CT:
-                        Counter_State _Counter = new Counter_State(_set.REAL_NAME)
-                        {
-                            StateType = BehaviorType.CT,
-                            AT = _set.AT,
-                            nextAttackStateCanRushFirst = false
-                        };
-                        Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _Counter));
-                        StateIndexList.Add(_set.REAL_NAME);
-                        if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
-                        break;
-                    case BehaviorType.NONE:
-                        // 除了我们特别例举出来的那些基础状态外按说都是攻击性状
-                        // 另外脚本保存函数中，被带入toFormAttackStateList参数的是一个全部state的列表。
-                        // 所以可能存在none状态
-                        break;
-                }
-            }else{
-                Debug.Log("正在回避状态重复定义："+ _set.REAL_NAME);
+                    StateType = BehaviorType.Def,
+                    nextAttackStateCanRushFirst = false
+                };
+                Num_State_List.Add(new BehaviorIndex_With_Behavior("Defend", defend));
             }
-        }
-	}
 
-    public bool IfContainsKey(string key)
-    {
-        foreach(string _key in StateIndexList)
-        {
-            if (_key.GetHashCode() == key.GetHashCode())
+            Hurt_State hit = new Hurt_State()
             {
-                return true;
+                nextAttackStateCanRushFirst = false,
+                StateType = BehaviorType.Hit
+            };
+
+            Knock_Off_State knock_off = new Knock_Off_State()
+            {
+                StateType = BehaviorType.KnockOff,
+                nextAttackStateCanRushFirst = true
+            };
+            GetUp getUp = new GetUp("getup")
+            {
+                StateType = BehaviorType.GetUp
+            };
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("Hit", hit));
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("KnockOff", knock_off));
+            Num_State_List.Add(new BehaviorIndex_With_Behavior("getUp", getUp));
+
+            StateIndexList = new List<string>();
+            SkillTypeKeys = new List<string>();
+            foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
+            {
+                SkillEntity _set = valuePair.Value;
+                if (_set == null)
+                    continue;
+
+                if (!StateIndexList.Contains(_set.REAL_NAME))
+                {
+                    switch (_set.StateType)
+                    {
+                        case BehaviorType.AC:
+                            switch (_set.REAL_NAME)
+                            {
+                                case "RushBack":
+                                    Dash_Back_State RushBack = new Dash_Back_State
+                                    {
+                                        nextAttackStateCanRushFirst = false,
+                                        StateType = BehaviorType.AC
+                                    };
+                                    Num_State_List.Add(new BehaviorIndex_With_Behavior("RushBack", RushBack));
+                                    StateIndexList.Add("RushBack");
+                                    break;
+                                case "Rush":
+                                    G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
+                                    {
+                                        nextAttackStateCanRushFirst = true,
+                                        StateType = BehaviorType.AC
+                                    };
+                                    Num_State_List.Add(new BehaviorIndex_With_Behavior("Rush", Rush));
+                                    StateIndexList.Add("Rush");
+                                    break;
+                            }
+                            break;
+                        case BehaviorType.GI:
+                            G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 20f, _set.REAL_NAME)
+                            {
+                                StateType = BehaviorType.GI,
+                                AT = _set.AT,
+                                nextAttackStateCanRushFirst = false
+                            };
+                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GI_Attack));
+                            StateIndexList.Add(_set.REAL_NAME);
+                            if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
+                            break;
+                        case BehaviorType.GM:
+                            G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.REAL_NAME)
+                            {
+                                StateType = BehaviorType.GM,
+                                AT = _set.AT,
+                                nextAttackStateCanRushFirst = false
+                            };
+                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GM_Attack));
+                            StateIndexList.Add(_set.REAL_NAME);
+                            if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
+                            break;
+                        case BehaviorType.GR:
+                            G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.REAL_NAME)
+                            {
+                                StateType = BehaviorType.GR,
+                                AT = _set.AT,
+                                nextAttackStateCanRushFirst = false
+                            };
+                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _GR_Attack));
+                            StateIndexList.Add(_set.REAL_NAME);
+                            if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
+                            break;
+                        case BehaviorType.CT:
+                            Counter_State _Counter = new Counter_State(_set.REAL_NAME)
+                            {
+                                StateType = BehaviorType.CT,
+                                AT = _set.AT,
+                                nextAttackStateCanRushFirst = false
+                            };
+                            Num_State_List.Add(new BehaviorIndex_With_Behavior(_set.REAL_NAME, _Counter));
+                            StateIndexList.Add(_set.REAL_NAME);
+                            if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
+                            break;
+                        case BehaviorType.NONE:
+                            // 除了我们特别例举出来的那些基础状态外按说都是攻击性状
+                            // 另外脚本保存函数中，被带入toFormAttackStateList参数的是一个全部state的列表。
+                            // 所以可能存在none状态
+                            break;
+                    }
+                }
+                else
+                {
+                    Debug.Log("正在回避状态重复定义：" + _set.REAL_NAME);
+                }
             }
         }
-        return false;
+
+        public bool IfContainsKey(string key)
+        {
+            foreach (string _key in StateIndexList)
+            {
+                if (_key.GetHashCode() == key.GetHashCode())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
 
