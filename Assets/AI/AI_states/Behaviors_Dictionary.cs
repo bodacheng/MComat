@@ -7,25 +7,28 @@ namespace Soul
 {
     public class BehaviorsIncubator
     {
-        public IDictionary<string, Behavior> Num_State_List;
-        public List<string> SkillTypeKeys;//之所以要设置出这样一个列表，是为了方便对一个个加载的skill类ab包进行读取，回避掉一些其他读取流程的基础状态动画
+        public IDictionary<string, Behavior> BehaviorDic;
+        // 技能动画列表（不包括基础动画）
+        public List<string> SkillTypeKeys;
 
         public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
         {
-            Num_State_List = new Dictionary<string, Behavior>();
-            Num_State_List.Add("Empty", empty_State);
+            BehaviorDic = new Dictionary<string, Behavior>
+            {
+                { "Empty", empty_State }
+            };
             Idle_State victory = new Idle_State("victory");
             Idle_State zhuangbi = new Idle_State("zhuangbi");
             Death_State death = new Death_State();
-            Num_State_List.Add("Victory", victory);
-            Num_State_List.Add("zhuangbi", zhuangbi);
-            Num_State_List.Add("Death", death);
+            BehaviorDic.Add("Victory", victory);
+            BehaviorDic.Add("zhuangbi", zhuangbi);
+            BehaviorDic.Add("Death", death);
             Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
             {
                 StateType = BehaviorType.MV,
                 nextAttackStateCanRushFirst = false
             };
-            Num_State_List.Add("Move", move);
+            BehaviorDic.Add("Move", move);
 
             if (FightGlobalSetting._hasDefend)
             {
@@ -34,7 +37,7 @@ namespace Soul
                     StateType = BehaviorType.Def,
                     nextAttackStateCanRushFirst = false
                 };
-                Num_State_List.Add("Defend", defend);
+                BehaviorDic.Add("Defend", defend);
             }
 
             Hurt_State hit = new Hurt_State()
@@ -52,9 +55,9 @@ namespace Soul
             {
                 StateType = BehaviorType.GetUp
             };
-            Num_State_List.Add("Hit", hit);
-            Num_State_List.Add("KnockOff", knock_off);
-            Num_State_List.Add("getUp", getUp);
+            BehaviorDic.Add("Hit", hit);
+            BehaviorDic.Add("KnockOff", knock_off);
+            BehaviorDic.Add("getUp", getUp);
 
             SkillTypeKeys = new List<string>();
             foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
@@ -63,7 +66,7 @@ namespace Soul
                 if (_set == null)
                     continue;
 
-                if (!Num_State_List.Keys.Contains(_set.REAL_NAME))
+                if (!BehaviorDic.Keys.Contains(_set.REAL_NAME))
                 {
                     switch (_set.StateType)
                     {
@@ -76,7 +79,7 @@ namespace Soul
                                         nextAttackStateCanRushFirst = false,
                                         StateType = BehaviorType.AC
                                     };
-                                    Num_State_List.Add("RushBack", RushBack);
+                                    BehaviorDic.Add("RushBack", RushBack);
                                     break;
                                 case "Rush":
                                     G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
@@ -84,7 +87,7 @@ namespace Soul
                                         nextAttackStateCanRushFirst = true,
                                         StateType = BehaviorType.AC
                                     };
-                                    Num_State_List.Add("Rush", Rush);
+                                    BehaviorDic.Add("Rush", Rush);
                                     break;
                             }
                             break;
@@ -95,7 +98,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(_set.REAL_NAME, _GI_Attack);
+                            BehaviorDic.Add(_set.REAL_NAME, _GI_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.GM:
@@ -105,7 +108,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(_set.REAL_NAME, _GM_Attack);
+                            BehaviorDic.Add(_set.REAL_NAME, _GM_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.GR:
@@ -115,7 +118,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(_set.REAL_NAME, _GR_Attack);
+                            BehaviorDic.Add(_set.REAL_NAME, _GR_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.CT:
@@ -125,7 +128,7 @@ namespace Soul
                                 AT = _set.AT,
                                 nextAttackStateCanRushFirst = false
                             };
-                            Num_State_List.Add(_set.REAL_NAME, _Counter);
+                            BehaviorDic.Add(_set.REAL_NAME, _Counter);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.NONE:
@@ -140,18 +143,6 @@ namespace Soul
                     Debug.Log("正在回避状态重复定义：" + _set.REAL_NAME);
                 }
             }
-        }
-
-        public bool IfContainsKey(string key)
-        {
-            foreach (string _key in Num_State_List.Keys)
-            {
-                if (_key.GetHashCode() == key.GetHashCode())
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

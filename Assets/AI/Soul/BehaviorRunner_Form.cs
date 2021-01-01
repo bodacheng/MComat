@@ -113,7 +113,7 @@ namespace Soul
             SkillEntityDic = nineAndTwo.GenerateBeheviourSets();
             SkillEntity_List = nineAndTwo.SkillEntityList();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
             _States_Incubator = new BehaviorsIncubator(empty_State, SkillEntityDic);
-            IDictionary<string, Behavior> Num_State_List = _States_Incubator.Num_State_List; // 理解整个系统的关键
+            IDictionary<string, Behavior> Num_State_List = _States_Incubator.BehaviorDic; // 理解整个系统的关键
             BehaviourDic.Clear();
             ConditionAndRespondPriority.Clear();
             BehaviourAndStrategicExitCondition.Clear();
