@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UniRx;
 using HittingDetection;
+using Log;
 
 public partial class FightAttriCalReference : MonoBehaviour
 {

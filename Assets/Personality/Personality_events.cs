@@ -8,15 +8,7 @@ public class Personality_events : MonoBehaviour
 
     void Start()
     {
-        // 在第一级初始化中我们把两个角色武器先打开，又关闭，这起到了个非常邪门的效果：使得这两把武器的相关awake函数得以运行，在这里就是找到了相应武器的markers
-        if (right_sword != null)
-        {
-            right_sword.SetActive(false);
-        }
-        if (left_sword != null)
-        {
-            left_sword.SetActive(false);
-        }
+        CloseAllPersonalityEffects();
     }
     
     public void CloseAllPersonalityEffects()

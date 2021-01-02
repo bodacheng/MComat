@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Log;
 
 namespace HittingDetection
 {
@@ -10,7 +11,6 @@ namespace HittingDetection
         BO_Limb _BO_Hitbox;
         Vector3 _TrailModeStartPoint;
         IDictionary<Collider, HitPointPara> BallDetectHitPool;
-        BO_Weapon_Animation_Events bO_Weapon_Animation_Events;//20180208 重要改修：凡是与这个量建立连接的BO_Marker_Manager，都“一体化”
 
         void DetectProcess()
         {

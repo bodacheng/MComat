@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
 using UniRx;
+using Log;
 
 public partial class BO_Ani_E : MonoBehaviour
 {

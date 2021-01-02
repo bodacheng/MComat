@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using mainMenu;
 using UnityEngine.SceneManagement;
 using Soul;
+using Log;
 
 namespace FightScene
 {

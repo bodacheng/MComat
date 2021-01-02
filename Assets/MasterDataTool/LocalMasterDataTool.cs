@@ -3,6 +3,7 @@ using UnityEngine;
 using dataAccess;
 using Skill;
 using System.Collections;
+using Log;
 
 public partial class LocalMasterDataTool : MonoBehaviour {
 

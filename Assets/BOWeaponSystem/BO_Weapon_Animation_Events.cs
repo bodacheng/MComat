@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HittingDetection;
 using UniRx;
 using UnityEngine.Animations;
+using Log;
 
 public class BO_Weapon_Animation_Events : MonoBehaviour
 {

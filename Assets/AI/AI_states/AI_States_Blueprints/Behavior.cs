@@ -22,21 +22,21 @@ namespace Soul
         public SkillCancelFlag _SkillCancelFlag;
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
         public ShaderManager shaderManager;
-        public BehaviorType StateType;
-        public bool nextAttackStateCanRushFirst;
         public Animation_Manger Animation_Manger;
         public BuffsRunner _BuffsRunner;
         public BlendShapeProxy blendShapeProxy;
         public Personality_events pEvents;
 
-        public float AT; //攻击力,或者说攻击力权重。这个设计的目的在于让所有技能的伤害可以在技能表里以一种形式直接设置。
+        public float AT;
         public string StateKey;
         public int splevel;
         public float triggerAtttackRangeMin, triggerAtttackRangeMax;
         public int triggerAtttackHeight;
         protected bool AbsorbEnergyFinished;
-
+        public BehaviorType StateType;
+        public bool nextAttackStateCanRushFirst;
         int temp;
+
         public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightAttriCalReference victim)
         {
             if (!AbsorbEnergyFinished)

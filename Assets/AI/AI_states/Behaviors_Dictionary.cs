@@ -91,7 +91,7 @@ namespace Soul
                             }
                             break;
                         case BehaviorType.GI:
-                            G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 20f, _set.REAL_NAME)
+                            G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 10f, _set.REAL_NAME)
                             {
                                 StateType = BehaviorType.GI,
                                 AT = _set.AT,
@@ -111,7 +111,7 @@ namespace Soul
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.GR:
-                            G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 20f, _set.REAL_NAME)
+                            G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 10f, _set.REAL_NAME)
                             {
                                 StateType = BehaviorType.GR,
                                 AT = _set.AT,

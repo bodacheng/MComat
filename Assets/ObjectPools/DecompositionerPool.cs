@@ -5,6 +5,7 @@ using HittingDetection;
 using System;
 using dataAccess;
 using System.Collections.Generic;
+using Log;
 
 public class DecompositionerPool : ObjectPool<Decompositioner> {
 

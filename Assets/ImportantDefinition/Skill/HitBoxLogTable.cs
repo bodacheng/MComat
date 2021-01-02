@@ -5,248 +5,259 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-public class HitBoxLogTable
+namespace Log
 {
-    static HitBoxLogTable instance;
-    public static HitBoxLogTable Instance
+    public class HitBoxLogTable
     {
-        get
+        static HitBoxLogTable instance;
+        public static HitBoxLogTable Instance
         {
-            if (instance == null)
+            get
             {
-                instance = new HitBoxLogTable();
-            }
-            return instance;
-        }
-    }
-    
-	public class Row
-	{
-		public string RECORD_ID;
-		public string REAL_NAME;
-		public string USEABLE_MONSTER_TYPE;
-		public string Untouched;
-		public string Touched;
-		public string Successed;
-        public string TriggerdTimes;
-        public string InteruptedTimes;
-	}
-
-	public List<Row> rowList = new List<Row>();
-	bool isLoaded = false;
-
-	public bool IsLoaded()
-	{
-		return isLoaded;
-	}
-
-	public List<Row> GetRowList()
-	{
-		return rowList;
-	}
-
-	public void Load(TextAsset csv)
-	{
-		rowList.Clear();
-		string[][] grid = CsvParser2.Parse(csv.text);
-		for(int i = 1 ; i < grid.Length ; i++)
-		{
-			Row row = new Row();
-			row.RECORD_ID = grid[i][0];
-			row.REAL_NAME = grid[i][1];
-			row.USEABLE_MONSTER_TYPE = grid[i][2];
-			row.Untouched = grid[i][3];
-			row.Touched = grid[i][4];
-			row.Successed = grid[i][5];
-            row.TriggerdTimes = grid[i][6];
-            row.InteruptedTimes = grid[i][7];
-			rowList.Add(row);
-		}
-		isLoaded = true;
-	}
-    
-    public void Load(string csv)
-    {
-        rowList.Clear();
-        string[][] grid = CsvParser2.Parse(csv);
-        for(int i = 1 ; i < grid.Length ; i++)
-        {
-            if (grid[i].Length == 0)
-            {
-                continue;
-            }
-            Row row = new Row
-            {
-                RECORD_ID = grid[i][0],
-                REAL_NAME = grid[i][1],
-                USEABLE_MONSTER_TYPE = grid[i][2],
-                Untouched = grid[i][3],
-                Touched = grid[i][4],
-                Successed = grid[i][5],
-                TriggerdTimes = grid[i][6],
-                InteruptedTimes = grid[i][7]
-            };
-            rowList.Add(row);
-        }
-        isLoaded = true;
-    }
-    
-    public void SaveByCurrentRows_HitBoxLog(string filePath, HitBoxLogger hitBoxLogger,List<SingleFightLog> singleFightLogs)
-    {
-        IDictionary<string, int> StateTriggerTimes_whole = new Dictionary<string, int>();
-        IDictionary<string, int> StateInterruptedTimes_whole = new Dictionary<string, int>();
-
-        if (singleFightLogs == null)
-            goto A;
-            
-        for (int index = 0; index < singleFightLogs.Count; index++)
-        {
-            IDictionary<string, int> one_triggerdtimes = singleFightLogs[index].StateTriggerTimes;
-            IDictionary<string, int> one_interruptedTimes = singleFightLogs[index].StateInterruptedTimes;
-            
-            foreach (KeyValuePair<string, int> keyValuePair in one_triggerdtimes)
-            {
-                if (!StateTriggerTimes_whole.ContainsKey(keyValuePair.Key))
+                if (instance == null)
                 {
-                    StateTriggerTimes_whole.Add(keyValuePair);
-                }else{
-                    StateTriggerTimes_whole[keyValuePair.Key] += keyValuePair.Value;
+                    instance = new HitBoxLogTable();
+                }
+                return instance;
+            }
+        }
+
+        public class Row
+        {
+            public string RECORD_ID;
+            public string REAL_NAME;
+            public string USEABLE_MONSTER_TYPE;
+            public string Untouched;
+            public string Touched;
+            public string Successed;
+            public string TriggerdTimes;
+            public string InteruptedTimes;
+        }
+
+        public List<Row> rowList = new List<Row>();
+        bool isLoaded = false;
+
+        public bool IsLoaded()
+        {
+            return isLoaded;
+        }
+
+        public List<Row> GetRowList()
+        {
+            return rowList;
+        }
+
+        public void Load(TextAsset csv)
+        {
+            rowList.Clear();
+            string[][] grid = CsvParser2.Parse(csv.text);
+            for (int i = 1; i < grid.Length; i++)
+            {
+                Row row = new Row
+                {
+                    RECORD_ID = grid[i][0],
+                    REAL_NAME = grid[i][1],
+                    USEABLE_MONSTER_TYPE = grid[i][2],
+                    Untouched = grid[i][3],
+                    Touched = grid[i][4],
+                    Successed = grid[i][5],
+                    TriggerdTimes = grid[i][6],
+                    InteruptedTimes = grid[i][7]
+                };
+                rowList.Add(row);
+            }
+            isLoaded = true;
+        }
+
+        public void Load(string csv)
+        {
+            rowList.Clear();
+            string[][] grid = CsvParser2.Parse(csv);
+            for (int i = 1; i < grid.Length; i++)
+            {
+                if (grid[i].Length == 0)
+                {
+                    continue;
+                }
+                Row row = new Row
+                {
+                    RECORD_ID = grid[i][0],
+                    REAL_NAME = grid[i][1],
+                    USEABLE_MONSTER_TYPE = grid[i][2],
+                    Untouched = grid[i][3],
+                    Touched = grid[i][4],
+                    Successed = grid[i][5],
+                    TriggerdTimes = grid[i][6],
+                    InteruptedTimes = grid[i][7]
+                };
+                rowList.Add(row);
+            }
+            isLoaded = true;
+        }
+
+        public void SaveByCurrentRows_HitBoxLog(string filePath, HitBoxLogger hitBoxLogger, List<SingleFightLog> singleFightLogs)
+        {
+            IDictionary<string, int> StateTriggerTimes_whole = new Dictionary<string, int>();
+            IDictionary<string, int> StateInterruptedTimes_whole = new Dictionary<string, int>();
+
+            if (singleFightLogs == null)
+                goto A;
+
+            for (int index = 0; index < singleFightLogs.Count; index++)
+            {
+                IDictionary<string, int> one_triggerdtimes = singleFightLogs[index].StateTriggerTimes;
+                IDictionary<string, int> one_interruptedTimes = singleFightLogs[index].StateInterruptedTimes;
+
+                foreach (KeyValuePair<string, int> keyValuePair in one_triggerdtimes)
+                {
+                    if (!StateTriggerTimes_whole.ContainsKey(keyValuePair.Key))
+                    {
+                        StateTriggerTimes_whole.Add(keyValuePair);
+                    }
+                    else
+                    {
+                        StateTriggerTimes_whole[keyValuePair.Key] += keyValuePair.Value;
+                    }
+                }
+
+                foreach (KeyValuePair<string, int> keyValuePair in one_interruptedTimes)
+                {
+                    if (!StateInterruptedTimes_whole.ContainsKey(keyValuePair.Key))
+                    {
+                        StateInterruptedTimes_whole.Add(keyValuePair);
+                    }
+                    else
+                    {
+                        StateInterruptedTimes_whole[keyValuePair.Key] += keyValuePair.Value;
+                    }
                 }
             }
-            
-            foreach (KeyValuePair<string, int> keyValuePair in one_interruptedTimes)
+
+        A:
+
+            List<Row> toDeleteList = new List<Row>();
+            foreach (Row row in rowList)
             {
-                if (!StateInterruptedTimes_whole.ContainsKey(keyValuePair.Key))
+                if (row.REAL_NAME == null)
+                    toDeleteList.Add(row);
+            }
+            foreach (Row row in toDeleteList)
+            {
+                Debug.Log("由于原先行的一些问题将之予以删除：" + rowList.IndexOf(row));
+                rowList.Remove(row);
+            }
+
+            string[][] grid = new string[rowList.Count + 1][];
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i] = new string[12];
+                if (i == 0)
                 {
-                    StateInterruptedTimes_whole.Add(keyValuePair);
-                }else{
-                    StateInterruptedTimes_whole[keyValuePair.Key] += keyValuePair.Value;
+                    grid[i][0] = "RECORD_ID";
+                    grid[i][1] = "REAL_NAME";
+                    grid[i][2] = "USEABLE_MONSTER_TYPE";
+                    grid[i][3] = "Untouched(未触摸到敌人的hitbox数量)";
+                    grid[i][4] = "Touched(触摸到敌人但没造成伤害的hitbox数量)";
+                    grid[i][5] = "Successed(成功击中敌人的hitbox数量)";
+                    grid[i][6] = "TriggerdTimes(技能使用次数）";
+                    grid[i][7] = "InteruptedTimes（技能被打断次数）";
+                }
+                else
+                {
+                    if (hitBoxLogger == null)
+                    {
+                        grid[i][0] = rowList[i - 1].RECORD_ID;
+                        grid[i][1] = rowList[i - 1].REAL_NAME;
+                        grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
+                        grid[i][3] = "0";
+                        grid[i][4] = "0";
+                        grid[i][5] = "0";
+                        grid[i][6] = "0";
+                        grid[i][7] = "0";
+
+                    }
+                    else
+                    {
+                        grid[i][0] = rowList[i - 1].RECORD_ID;
+                        grid[i][1] = rowList[i - 1].REAL_NAME;
+                        grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
+                        grid[i][3] = ((hitBoxLogger.untouchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.untouchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Untouched)).ToString();
+                        grid[i][4] = ((hitBoxLogger.touchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.touchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Touched)).ToString();
+                        grid[i][5] = ((hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Successed)).ToString();
+                        grid[i][6] = ((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggerdTimes)).ToString();
+                        grid[i][7] = ((StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].InteruptedTimes)).ToString();
+                    }
                 }
             }
-        }
-        
-        A :
-        
-        List<Row> toDeleteList = new List<Row>();
-        foreach(Row row in rowList)
-        {
-            if (row.REAL_NAME == null)
-                toDeleteList.Add(row);
-        }
-        foreach(Row row in toDeleteList)
-        {
-            Debug.Log("由于原先行的一些问题将之予以删除：" + rowList.IndexOf(row));
-            rowList.Remove(row);
+            string delimiter = ",";
+            StringBuilder sb = new StringBuilder();
+            for (int index = 0; index < grid.Length; index++)
+                sb.AppendLine(string.Join(delimiter, grid[index]));
+            Debug.Log("尝试最终保存文件" + filePath);
+            StreamWriter outStream = File.CreateText(filePath);
+            outStream.WriteLine(sb);
+            outStream.Close();
         }
 
-        string[][] grid = new string[rowList.Count + 1][];
-        for (int i = 0; i < grid.Length; i++)
+        public int NumRows()
         {
-            grid[i] = new string[12];
-            if (i == 0)
-            {
-                grid[i][0] = "RECORD_ID";
-                grid[i][1] = "REAL_NAME";
-                grid[i][2] = "USEABLE_MONSTER_TYPE";
-                grid[i][3] = "Untouched(未触摸到敌人的hitbox数量)";
-                grid[i][4] = "Touched(触摸到敌人但没造成伤害的hitbox数量)";
-                grid[i][5] = "Successed(成功击中敌人的hitbox数量)";
-                grid[i][6] = "TriggerdTimes(技能使用次数）";
-                grid[i][7] = "InteruptedTimes（技能被打断次数）";
-            }
-            else
-            {
-                if (hitBoxLogger == null)
-                {
-                    grid[i][0] = rowList[i - 1].RECORD_ID;
-                    grid[i][1] = rowList[i - 1].REAL_NAME;
-                    grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
-                    grid[i][3] = "0";
-                    grid[i][4] = "0";
-                    grid[i][5] = "0";
-                    grid[i][6] = "0";
-                    grid[i][7] = "0";
-                    
-                }else{
-                    grid[i][0] = rowList[i - 1].RECORD_ID;
-                    grid[i][1] = rowList[i - 1].REAL_NAME;
-                    grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
-                    grid[i][3] = ((hitBoxLogger.untouchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.untouchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Untouched)).ToString();
-                    grid[i][4] = ((hitBoxLogger.touchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.touchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Touched)).ToString();
-                    grid[i][5] = ((hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Successed)).ToString();
-                    grid[i][6] = ((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggerdTimes)).ToString();
-                    grid[i][7] = ((StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0)+ int.Parse(rowList[i - 1].InteruptedTimes)).ToString();
-                }
-            }
+            return rowList.Count;
         }
-        string delimiter = ",";
-        StringBuilder sb = new StringBuilder();
-        for (int index = 0; index < grid.Length; index++)
-            sb.AppendLine(string.Join(delimiter, grid[index]));
-        Debug.Log("尝试最终保存文件" + filePath);
-        StreamWriter outStream = File.CreateText(filePath);
-        outStream.WriteLine(sb);
-        outStream.Close();
+
+        public Row GetAt(int i)
+        {
+            if (rowList.Count <= i)
+                return null;
+            return rowList[i];
+        }
+
+        public Row Find_RECORD_ID(string find)
+        {
+            return rowList.Find(x => x.RECORD_ID == find);
+        }
+        public List<Row> FindAll_RECORD_ID(string find)
+        {
+            return rowList.FindAll(x => x.RECORD_ID == find);
+        }
+        public Row Find_REAL_NAME(string find)
+        {
+            return rowList.Find(x => x.REAL_NAME == find);
+        }
+        public List<Row> FindAll_REAL_NAME(string find)
+        {
+            return rowList.FindAll(x => x.REAL_NAME == find);
+        }
+        public Row Find_USEABLE_MONSTER_TYPE(string find)
+        {
+            return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
+        }
+        public List<Row> FindAll_USEABLE_MONSTER_TYPE(string find)
+        {
+            return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
+        }
+        public Row Find_Untouched(string find)
+        {
+            return rowList.Find(x => x.Untouched == find);
+        }
+        public List<Row> FindAll_Untouched(string find)
+        {
+            return rowList.FindAll(x => x.Untouched == find);
+        }
+        public Row Find_Touched(string find)
+        {
+            return rowList.Find(x => x.Touched == find);
+        }
+        public List<Row> FindAll_Touched(string find)
+        {
+            return rowList.FindAll(x => x.Touched == find);
+        }
+        public Row Find_Successed(string find)
+        {
+            return rowList.Find(x => x.Successed == find);
+        }
+        public List<Row> FindAll_Successed(string find)
+        {
+            return rowList.FindAll(x => x.Successed == find);
+        }
     }
-    
-	public int NumRows()
-	{
-		return rowList.Count;
-	}
-
-	public Row GetAt(int i)
-	{
-		if(rowList.Count <= i)
-			return null;
-		return rowList[i];
-	}
-
-	public Row Find_RECORD_ID(string find)
-	{
-		return rowList.Find(x => x.RECORD_ID == find);
-	}
-	public List<Row> FindAll_RECORD_ID(string find)
-	{
-		return rowList.FindAll(x => x.RECORD_ID == find);
-	}
-	public Row Find_REAL_NAME(string find)
-	{
-		return rowList.Find(x => x.REAL_NAME == find);
-	}
-	public List<Row> FindAll_REAL_NAME(string find)
-	{
-		return rowList.FindAll(x => x.REAL_NAME == find);
-	}
-	public Row Find_USEABLE_MONSTER_TYPE(string find)
-	{
-		return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
-	}
-	public List<Row> FindAll_USEABLE_MONSTER_TYPE(string find)
-	{
-		return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
-	}
-	public Row Find_Untouched(string find)
-	{
-		return rowList.Find(x => x.Untouched == find);
-	}
-	public List<Row> FindAll_Untouched(string find)
-	{
-		return rowList.FindAll(x => x.Untouched == find);
-	}
-	public Row Find_Touched(string find)
-	{
-		return rowList.Find(x => x.Touched == find);
-	}
-	public List<Row> FindAll_Touched(string find)
-	{
-		return rowList.FindAll(x => x.Touched == find);
-	}
-	public Row Find_Successed(string find)
-	{
-		return rowList.Find(x => x.Successed == find);
-	}
-	public List<Row> FindAll_Successed(string find)
-	{
-		return rowList.FindAll(x => x.Successed == find);
-	}
 }
