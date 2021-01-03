@@ -20,19 +20,18 @@ namespace Soul
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
                 _BasicPhysicSupport.SetUsingGravity(false);
             }
-
+            tween = gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
             physicMissionDisposable = new SingleAssignmentDisposable();
             physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-
                     if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
                     {
+                        tween.Kill(false);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         physicMissionDisposable.Dispose();
                     }
                 }
             );
-            gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
         }
     }
 }

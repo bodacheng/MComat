@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 using HittingDetection;
-using Soul;
 using UniRx;
-
+using DG.Tweening;
 namespace Soul
 {
     public partial class Hurt_State : Behavior
     {
-
         float used_dizzy_time;
         Vector3 fixDesPos;
         float TimeCounter { set; get; }
         V_Damage target;
         SingleAssignmentDisposable physicMissionDisposable;
+        Tween tween;
 
         public override void Pre_process_before_enter()
         {

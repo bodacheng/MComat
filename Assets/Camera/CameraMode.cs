@@ -24,6 +24,10 @@ public abstract class CameraMode
     {
     }
 
+    public virtual void Exit(Camera _camera)
+    {
+    }
+
     public virtual void LocalUpdate(Camera _camera)
     {
     }

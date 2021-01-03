@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+// 该版本试图让敌我接近时偏向横版，
+// 远离时又类似与火影忍者究极风暴那种斜前后关系，
+// 但难以形容的情景下会产生角色不在视野内的严重bug
 class OneVOneMode_failed : CameraMode
 {
     Vector3 CameraTargetPos;
@@ -41,7 +44,7 @@ class OneVOneMode_failed : CameraMode
         }
     }
 
-    public OneVOneMode(float XZDis)
+    public OneVOneMode_failed(float XZDis)
     {
         this.XZ_distance = XZDis;
         YDis = this.XZ_distance * heightOfXZRate;

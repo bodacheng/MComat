@@ -45,6 +45,8 @@ public class CameraManager : MonoBehaviour
 
     public void Assign_Camera(C_Mode num, List<Transform> targets)
     {
+        if (CurrentMode != null)
+            CurrentMode.Exit(_camera);
         CModeDic.TryGetValue(num, out CurrentMode);
         if (CurrentMode != null)
         {
@@ -56,6 +58,8 @@ public class CameraManager : MonoBehaviour
 
     public void Assign_Camera(C_Mode num, Transform me, List<Transform> targets)
     {
+        if (CurrentMode != null)
+            CurrentMode.Exit(_camera);
         CModeDic.TryGetValue(num, out CurrentMode);
         if (CurrentMode != null)
         {
@@ -68,6 +72,8 @@ public class CameraManager : MonoBehaviour
 
     public void Assign_SToEMode(Vector3 obj_p, Transform _target ,float duration, float sizeoffield)
     {
+        if (CurrentMode != null)
+            CurrentMode.Exit(_camera);
         CModeDic.TryGetValue(C_Mode.StartAndEnd, out CurrentMode);
         StartToEndMode _LerpToCertainPlace = (StartToEndMode)CurrentMode;
         _LerpToCertainPlace.SetObjPosAndRotAndSpeed(obj_p, duration, sizeoffield);
