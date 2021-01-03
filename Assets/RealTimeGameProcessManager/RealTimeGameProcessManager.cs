@@ -49,6 +49,7 @@ namespace FightScene
         {
             SwitchToCMode(null, false);
             CameraParaAdjustment(playerTeam);
+            Debug.Log(playerTeam);
         }
 
         public void Refresh()//这个刷新是倾向于画面制御
@@ -175,13 +176,12 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, FightTeam2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, FightTeam2.TeamMemberTransforms());
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, FightTeam1.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, FightTeam1.TeamMemberTransforms());
                 }
-                _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
             }
             else
             {
@@ -196,7 +196,8 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam2.TeamMemberTransforms());
+                    //_CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(C_Mode.OneVOne, FightTeam2.TeamMemberTransforms());
                 }
                 else
                 {

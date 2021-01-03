@@ -2508,6 +2508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   programMode: 0
+  IgnoreStoneTexture: 0
   hasDefend: 0
   knockOffyAnimationCurve:
     serializedVersion: 2

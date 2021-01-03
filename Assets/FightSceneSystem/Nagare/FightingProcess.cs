@@ -1,6 +1,4 @@
-﻿using DG.Tweening;
-
-namespace FightScene
+﻿namespace FightScene
 {
     public class FightingProcess : FSceneProcess
     {
@@ -17,11 +15,11 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            CameraMode nowC = RealTimeGameProcessManager.target._CameraManager.CModeDic[C_Mode.OneVOne];
-            if (nowC is OneVOneMode)
-            {
-                DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
-            }
+            //CameraMode nowC = RealTimeGameProcessManager.target._CameraManager.CModeDic[C_Mode.OneVOne];
+            //if (nowC is OneVOneMode)
+            //{
+            //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
+            //}
             if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
             {
                 NetFightScene.target.ScreensaverCanvas.gameObject.SetActive(true);
@@ -32,6 +30,7 @@ namespace FightScene
             }
             NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);            
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
+            FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             NetFightScene.target.PressedStartButton();
         }
         

@@ -198,6 +198,7 @@ public partial class Data_Center : MonoBehaviour
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
         buffsRunner.EndAllCoroutines();
+        _ResistanceManager.ResistanceClear();
         _BasicPhysicSupport.hiddenMethods.ResetAnimator();
     }
 

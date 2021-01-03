@@ -50,6 +50,7 @@ public class HitBoxSubEventManger : MonoBehaviour
                     }
                 }
             );
+            SingleAssignmentDisposableCleaner.Add(clockEvent);
         }
         
         if (!string.IsNullOrEmpty(LandedEvent))
@@ -69,6 +70,7 @@ public class HitBoxSubEventManger : MonoBehaviour
                     }
                 }
             );
+            SingleAssignmentDisposableCleaner.Add(landEvent);
         }
         
         if (!string.IsNullOrEmpty(fadeEvent))
@@ -87,6 +89,7 @@ public class HitBoxSubEventManger : MonoBehaviour
                     }
                 }
             );
+            SingleAssignmentDisposableCleaner.Add(fadedEvent);
         }
     }
     

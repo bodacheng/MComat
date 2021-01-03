@@ -17,6 +17,7 @@ namespace Soul
         public override void Pre_process_before_enter()
         {
             base.Pre_process_before_enter();
+            SingleAssignmentDisposableCleaner.Add(physicMissionDisposable);
         }
 
         void PlayHurtAnim(V_Damage newValue)
@@ -31,26 +32,26 @@ namespace Soul
             if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
             {
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
-                RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f, true);
+                RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.damageHappenPoint), 0.1f);
             }
             else
             {
                 if (newValue.damageHappenPoint.y > _DATA_CENTER.head_t.position.y)
                 {
                     Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.1f);
-                    RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                    RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f);
                 }
                 else
                 {
                     if (newValue.damageHappenPoint.y > _DATA_CENTER.geometryCenter.position.y)
                     {
                         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.1f);
-                        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f);
                     }
                     else
                     {
                         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.1f);
-                        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f, true);
+                        RotateToTarget_Tween(newValue.damageHappenPoint, 0.1f);
                     }
                 }
             }

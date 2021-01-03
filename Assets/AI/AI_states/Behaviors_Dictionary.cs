@@ -137,10 +137,6 @@ namespace Soul
                             break;
                     }
                 }
-                else
-                {
-                    Debug.Log("正在回避状态重复定义：" + _set.REAL_NAME);
-                }
             }
         }
     }

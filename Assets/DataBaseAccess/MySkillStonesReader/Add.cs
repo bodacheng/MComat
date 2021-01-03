@@ -35,6 +35,8 @@ namespace dataAccess
             SkillStoneOfPlayerInfoModel StoneOfPlayerInfo = Get(skillStoneOfPlayerId);
             IEnumerator Generate = GenerateNewStoneModel(StoneOfPlayerInfo.skillId, true);
             yield return Generate;
+            if (Generate.Current == null)
+                yield break;
             SKStoneItem item = (SKStoneItem)Generate.Current;
             item.Inherent = StoneOfPlayerInfo.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[skillStoneOfPlayerId].skillId);
@@ -55,7 +57,8 @@ namespace dataAccess
                 yield return null;
                 yield break;
             }
-            
+
+            SKStoneItem item;
             IEnumerator process = null;
             switch (ResourceLoadingSetting.IconLoadingMode)
             {
@@ -69,9 +72,14 @@ namespace dataAccess
                     break;
             }
             yield return process;
+            if (process.Current == null)
+            {
+                yield return null;
+                yield break;
+            }
             GameObject Icon = (GameObject)process.Current;
             GameObject newIcon = Object.Instantiate(Icon);
-            SKStoneItem item = newIcon.GetComponent<SKStoneItem>();
+            item = newIcon.GetComponent<SKStoneItem>();
             if (item == null)
             {
                 item = newIcon.AddComponent<SKStoneItem>();

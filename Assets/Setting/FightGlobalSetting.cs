@@ -4,6 +4,7 @@ using dataAccess;
 public class FightGlobalSetting : MonoBehaviour
 {
     public ProgramMode programMode = ProgramMode.normal;
+    public bool IgnoreStoneTexture = false;
     public bool hasDefend;
     public AnimationCurve knockOffyAnimationCurve;
     public AnimationCurve knockOffzAnimationCurve;
@@ -41,6 +42,7 @@ public class FightGlobalSetting : MonoBehaviour
     #endregion
     
     public static ProgramMode _programMode;
+    public static bool _IgnoreStoneTexture;
     public static int scenestep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
     public static float _AT_coefficient = 1;
@@ -104,6 +106,7 @@ public class FightGlobalSetting : MonoBehaviour
     void Awake()
     {
         _programMode = programMode;
+        _IgnoreStoneTexture = IgnoreStoneTexture;
 
         _HurtObjectPreLoadCount = HurtObjectPreLoadCount;
         

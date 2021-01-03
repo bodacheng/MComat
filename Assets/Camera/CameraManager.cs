@@ -4,7 +4,10 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public static Camera _camera;
+    public Transform StartPosRef;
     public CameraMode CurrentMode;
+
+    public static Transform _StartPosRef;
 
     public readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
@@ -24,6 +27,7 @@ public class CameraManager : MonoBehaviour
     {
         _camera = gameObject.GetComponent<Camera>();
         _camera.depthTextureMode = DepthTextureMode.Depth;
+        _StartPosRef = StartPosRef;
     }
 
     void Start()
@@ -49,7 +53,19 @@ public class CameraManager : MonoBehaviour
             CurrentMode.Enter(_camera);
         }
     }
-    
+
+    public void Assign_Camera(C_Mode num, Transform me, List<Transform> targets)
+    {
+        CModeDic.TryGetValue(num, out CurrentMode);
+        if (CurrentMode != null)
+        {
+            //有些相机模式的enter函数内处理需要根据targets来
+            CurrentMode.SetMeCenter(me);
+            CurrentMode.targets = targets;
+            CurrentMode.Enter(_camera);
+        }
+    }
+
     public void Assign_SToEMode(Vector3 obj_p, Transform _target ,float duration, float sizeoffield)
     {
         CModeDic.TryGetValue(C_Mode.StartAndEnd, out CurrentMode);

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using DG.Tweening;
 
 namespace FightScene
 {
@@ -16,11 +15,11 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            CameraMode nowC = RealTimeGameProcessManager.target._CameraManager.CModeDic[C_Mode.OneVOne];
-            if (nowC is OneVOneMode)
-            {
-                ((OneVOneMode)nowC).xzMax = 70f;
-            }
+            //CameraMode nowC = RealTimeGameProcessManager.target._CameraManager.CModeDic[C_Mode.OneVOne];
+            //if (nowC is OneVOneMode)
+            //{
+            //    ((OneVOneMode)nowC).xzMax = 100f;
+            //}
             startTimestamp = 3f;
             AutoMoveToNext = false;
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
@@ -29,7 +28,7 @@ namespace FightScene
         
         IEnumerator BeforeFightCountDown()
         {
-            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+            //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             NetFightScene.target.CountDown.gameObject.SetActive(true);
             while (startTimestamp > 0)
             {
@@ -37,11 +36,9 @@ namespace FightScene
                 NetFightScene.target.CountDown.text = "" + (1 + (int)(startTimestamp));
                 yield return null;
             }
-            //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             NetFightScene.target.CountDown.gameObject.SetActive(false);
             AutoMoveToNext = true;
-
-
         }
         
         public override bool CanEnterOtherProcess()

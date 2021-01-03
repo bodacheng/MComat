@@ -29,7 +29,7 @@ namespace Soul
             _Animator.applyRootMotion = true;
             if (threat != null)
             {
-                RotateToTarget_Tween(threat.transform.position, 0.02f, true);
+                RotateToTarget_Tween(threat.transform.position, 0.02f);
             }
         }
 

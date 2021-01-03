@@ -25,7 +25,7 @@ public partial class FightAttriCalReference : MonoBehaviour
     List<E_Damage> Event_Damage_List = new List<E_Damage>();
     List<V_Damage> ICauseDamages = new List<V_Damage>();
     List<Collider> myColliders = new List<Collider>();
-    E_Damage managingEventDamage;
+    E_Damage managingEDamage;
     List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
     IDictionary<Collider, Vector3> myColliderSizes = new Dictionary<Collider, Vector3>();
     
@@ -38,6 +38,11 @@ public partial class FightAttriCalReference : MonoBehaviour
     public void INI()
     {
         CurrentHp = new ReactiveProperty<float>();
+    }
+
+    public void Clear()
+    {
+        CurrentHp.Dispose();
     }
     
     public void HealthBodyFixedUpdate()
@@ -149,9 +154,7 @@ public partial class FightAttriCalReference : MonoBehaviour
                     temp = "light_hit";
                     break;
             }
-            EffectsManager.GenerateEffect(
-            temp,
-            FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
+            EffectsManager.GenerateEffect(temp, FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
             v_Damage.damageHappenPoint,
             v_Damage.CutRotation,
             v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
@@ -219,11 +222,11 @@ public partial class FightAttriCalReference : MonoBehaviour
     // event 攻击系列。暂时不再使用
     public void SetManagingEventDamage(E_Damage e)
     {
-        managingEventDamage = e;
+        managingEDamage = e;
     }
     public E_Damage GetManagingEventDamage()
     {
-        return managingEventDamage;
+        return managingEDamage;
     }
     public void EventAttackHitApprove(E_Damage e)
     {
@@ -241,24 +244,6 @@ public partial class FightAttriCalReference : MonoBehaviour
     public List<E_Damage> ReturnApprovedEventAttackAttempts()
     {
         return Event_Attack_Successed_List;
-    }
-
-    IDictionary<int, Shader> myDefaultMaterialsShaderDic;
-    void RegisterMyDefaultMaterialsShaderDic()
-    {
-        myDefaultMaterialsShaderDic = new Dictionary<int, Shader>();
-        foreach (Renderer singleRenderer in GetComponentsInChildren<Renderer>())
-        {
-            if (singleRenderer is ParticleSystemRenderer)
-            {
-                continue;
-            }
-            foreach (Material singleMaterial in singleRenderer.materials)
-                if (!myDefaultMaterialsShaderDic.ContainsKey(singleMaterial.GetHashCode()))
-                {
-                    myDefaultMaterialsShaderDic.Add(new KeyValuePair<int, Shader>(singleMaterial.GetHashCode(), singleMaterial.shader));
-                }
-        }
     }
     
     Color damagecolor;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Soul
 {
     public class SingleFightLog
-    {        
+    {
         readonly List<FightRecord> MyBehaviourHistory = new List<FightRecord>();
         public IDictionary<string, int> StateTriggerTimes = new Dictionary<string, int>();
         public IDictionary<string, int> StateInterruptedTimes = new Dictionary<string, int>();

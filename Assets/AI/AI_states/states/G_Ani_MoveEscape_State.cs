@@ -103,7 +103,7 @@ namespace Soul
                 }
             }
 
-            RotateToTarget_Tween(gameObject.transform.position + facedirection, 0.01f, true);
+            RotateToTarget_Tween(gameObject.transform.position + facedirection, 0.01f);
         }
 
         float h;
@@ -133,7 +133,7 @@ namespace Soul
                 use_direction = (screenMovementForward * v) + (screenMovementRight * h);
             }
 
-            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f, true);
+            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f);
         }
 
         public override void AI_State_exit()

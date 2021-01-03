@@ -16,7 +16,6 @@ namespace FightScene
         
         IEnumerator EnterProcess()
         {
-            FightOverControl.target.SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
             MobileInputsManager.target.TurnOffButtons();
             yield return FinalMomentAnim(FightLogger.target.GetWinner());
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
@@ -104,7 +103,17 @@ namespace FightScene
                     yield return SKillTestReload();
                 break;
             }
-            
+
+            List<Data_Center> data_Centers = new List<Data_Center>();
+            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            FightOverControl.target.SkillLog(data_Centers);
+            foreach (Data_Center one in data_Centers)
+            {
+                one.CleanClear();
+            }
+            FightLogger.target.WatchMissionsAbandon();
+            SingleAssignmentDisposableCleaner.Clear();
             LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(false);
         }
@@ -116,7 +125,6 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
-            FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             HurtObjectManager.ClearCurrent();
             FightOverControl.target.Clear();
         }

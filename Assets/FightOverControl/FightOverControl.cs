@@ -154,33 +154,20 @@ namespace FightScene
         public void ReturnToFront()
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
-            
-            //Position_Set_Executor.Instance.P_sets.Clear();
-            List<Data_Center> player1 = RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values;
-            List<string> dontdestroy = new List<string>();
-            switch (FightSceneNote.nextBattle._fightEventType)
+            List<Data_Center> data_Centers = new List<Data_Center>();
+            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
+            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            SkillLog(data_Centers);
+            foreach (Data_Center one in data_Centers)
             {
-                case FightEventType.Arena:
-                case FightEventType.Quest:
-                    for (int i = 0; i < player1.Count; i++)
-                    {
-                        if (player1[i] != null)
-                        {
-                            player1[i]._MyBehaviorRunner.ChangeState("Empty");
-                            CharDataInfo charDataInfo = RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef[player1[i]];
-                            if (charDataInfo != null)
-                            {
-                                dontdestroy.Add(charDataInfo.monsterOfPlayerId);
-                            }
-                        }
-                    }
-                break;
+                one.CleanClear();
             }
-            SkillLog(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            FightLogger.target.WatchMissionsAbandon();
             RealTimeGameProcessManager.target.Clear();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
             HitBoxesProcesser.Instance.processingDecompositioners.Clear();
+            SingleAssignmentDisposableCleaner.Clear();
             SceneManager.LoadScene(1);
         }
 
@@ -190,21 +177,14 @@ namespace FightScene
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         }
         
-        public void SkillLog(List<Data_Center> player1, List<Data_Center> player2)
+        public void SkillLog(List<Data_Center> members)
         {
             List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
-            for (int i = 0; i < player1.Count; i++)
+            for (int i = 0; i < members.Count; i++)
             {
-                if (player1[i] != null)
+                if (members[i] != null)
                 {
-                    singleFightLogs.Add(player1[i]._MyBehaviorRunner.SingleFightLog);
-                }
-            }
-            for (int i = 0; i < player2.Count; i++)
-            {
-                if (player2[i] != null)
-                {
-                    singleFightLogs.Add(player2[i]._MyBehaviorRunner.SingleFightLog);
+                    singleFightLogs.Add(members[i]._MyBehaviorRunner.SingleFightLog);
                 }
             }
 

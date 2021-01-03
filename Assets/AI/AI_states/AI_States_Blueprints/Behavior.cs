@@ -214,47 +214,6 @@ namespace Soul
             BO_Health.SetManagingEventDamage(null);
         }
 
-        // If the state is based on the distance from the nearest enemy, check if the character is at the proper distance to enter the state
-        //bool inner;
-        //bool mid;
-        //bool far;
-        //bool CheckToEnemyDisEnterCondition(BehaviorEnterRange[] _behaviorEnterRanges)
-        //{
-        //    if (_behaviorEnterRanges != null)
-        //    {
-        //        if (_behaviorEnterRanges.Length == 0)
-        //            return true;
-        //        inner = false;
-        //        mid = false;
-        //        far = false;
-        //        for (int i = 0; i < _behaviorEnterRanges.Length; i++)
-        //        {
-        //            switch (_behaviorEnterRanges[i])
-        //            {
-        //                case BehaviorEnterRange.inner_range:
-        //                    inner |= this.Sensor.GetInnerEnemiesColliders().Count > 0;
-        //                    break;
-        //                case BehaviorEnterRange.mid_range:
-        //                    mid |= this.Sensor.GetMidEnemiesColliders().Count > 0;
-        //                    break;
-        //                case BehaviorEnterRange.far_range:
-        //                    far |= this.Sensor.GetFarEnemiesColliders().Count > 0;
-        //                    break;
-        //                case BehaviorEnterRange.out_of_range:
-        //                    if (this.Sensor.GetInnerEnemiesColliders().Count == 0
-        //                        &&
-        //                        this.Sensor.GetMidEnemiesColliders().Count == 0
-        //                        &&
-        //                        this.Sensor.GetFarEnemiesColliders().Count == 0)
-        //                        return true;
-        //                    break;
-        //            }
-        //        }
-        //        return inner || mid || far;
-        //    }
-        //    return true;
-        //}
-
         // Rotate to a target
         Vector3 look_dir;
         Quaternion dirQ;
@@ -273,7 +232,7 @@ namespace Soul
             return Vector3.SignedAngle(_Rigidbody.transform.forward, look_dir, Vector3.up);
         }
 
-        public void RotateToTarget_Tween(Vector3 target, float duration, bool ignoreY)
+        public void RotateToTarget_Tween(Vector3 target, float duration)
         {
             _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y, Vector3.up);
         }
@@ -377,9 +336,6 @@ namespace Soul
             }
         }
 
-        // Time.deltaTime / (0.5f + Time.deltaTime));//上下这两部分都是分母里那个附加值越大，变得越慢。
-        // Quaternion.Angle(gameObject.transform.rotation, dirQ)
-        // Rotate to velocity
         Vector3 dir;
         Quaternion slerp;
         public void RotateToVelocity(float turnSpeed, bool ignoreY)
@@ -405,6 +361,13 @@ namespace Soul
             }
         }
 
+        /// <summary>
+        /// Get fixed Pos destination
+        /// damageHappenPoint 伤害发生点
+        /// attackerTransform_foward 攻击方“前方”的单位向量
+        /// victimT_pos 受害者点
+        /// _DamageType 攻击种类
+        /// </summary>
         float f_temp;
         Vector3 v_temp;
         protected Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Vector3 attackerTransform_foward, Vector3 attackerTransform_pos, Vector3 victimT_pos, DamageType _DamageType)
@@ -413,7 +376,7 @@ namespace Soul
             {
                 v_temp = (victimT_pos - damageHappenPoint).normalized;
                 v_temp.y = 0;
-                v_temp = v_temp + victimT_pos;
+                v_temp += victimT_pos;
                 return v_temp;
             }
             
@@ -426,61 +389,6 @@ namespace Soul
             }
             return CalFixPosDestination(damageHappenPoint, attackerTransform_foward, attackerTransform_pos, victimT_pos, DamageType.explosion);                
         }
-
-        // compare two Quaternions
-        public bool CompareQuaternionApproximately(Quaternion A, Quaternion B)
-        {
-            return Mathf.Approximately(A.x, B.x)
-                &&
-                Mathf.Approximately(A.y, B.y)
-                &&
-                Mathf.Approximately(A.z, B.z)
-                &&
-                Mathf.Approximately(A.w, B.w)
-                ? true
-                : false;
-        }
-
-        //float ji;
-        //float lastFrameRotateAngle;
-        //float thisFrameRotateAngle;
-        //void SingleDirectionRotateProcess(Vector3 P, float speed)
-        //{
-        //    //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
-        //    if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag())
-        //    {
-        //        thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
-        //        ji = thisFrameRotateAngle * lastFrameRotateAngle;
-        //        if (ji > 0)//同向
-        //        {
-        //            lastFrameRotateAngle = thisFrameRotateAngle;
-        //        }
-        //        else if (ji < 0)//反向
-        //        {
-        //            _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
-        //        }
-        //        else //刚开始计
-        //        {
-        //            lastFrameRotateAngle = thisFrameRotateAngle;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        lastFrameRotateAngle = 0;
-        //        thisFrameRotateAngle = 0;
-        //    }
-
-        //    if (_SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
-        //    {
-        //        use_direction = P - gameObject.transform.position;
-        //        use_direction.y = 0;
-        //        Move(use_direction, speed, true);
-        //        if (_BasicPhysicSupport.hiddenMethods.ITouchedEnemyBody())
-        //        {
-        //            _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
-        //        }
-        //    }
-        //}
 
         Vector3 use_direction;
         protected void AttackApprocach(Vector3 P, float speed)
@@ -496,11 +404,47 @@ namespace Soul
                 }
             }
         }
-
-        public bool IfVectorClean(Vector3 rot)
-        {
-            return rot != Vector3.zero && !float.IsNaN(rot.x) && !float.IsNaN(rot.y) && !float.IsNaN(rot.z) && !float.IsInfinity(rot.x) && !float.IsInfinity(rot.y) && !float.IsInfinity(rot.z);
-        }
         #endregion
     }
 }
+
+//float ji;
+//float lastFrameRotateAngle;
+//float thisFrameRotateAngle;
+//void SingleDirectionRotateProcess(Vector3 P, float speed)
+//{
+//    //底下这个是说，攻击状态里角色在一个1f周期里有0.3f时长会调整方向，但是在这0.3f时间段里，如果产生了旋转不定向(比如已经转到目标)，那么转向就会提前结束。
+//    if (_SkillCancelFlag.hiddenMethods.GetRotationAdjustmentStartFlag())
+//    {
+//        thisFrameRotateAngle = this.RotateToTarget(P, 1f, true);
+//        ji = thisFrameRotateAngle * lastFrameRotateAngle;
+//        if (ji > 0)//同向
+//        {
+//            lastFrameRotateAngle = thisFrameRotateAngle;
+//        }
+//        else if (ji < 0)//反向
+//        {
+//            _SkillCancelFlag.TurnRotationAdjustmentStartFlag(0);
+//        }
+//        else //刚开始计
+//        {
+//            lastFrameRotateAngle = thisFrameRotateAngle;
+//        }
+//    }
+//    else
+//    {
+//        lastFrameRotateAngle = 0;
+//        thisFrameRotateAngle = 0;
+//    }
+
+//    if (_SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
+//    {
+//        use_direction = P - gameObject.transform.position;
+//        use_direction.y = 0;
+//        Move(use_direction, speed, true);
+//        if (_BasicPhysicSupport.hiddenMethods.ITouchedEnemyBody())
+//        {
+//            _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
+//        }
+//    }
+//}

@@ -143,7 +143,7 @@ namespace Soul
                 {
                     if (Sensor.GetEnemiesByDistance(false)[0] != null)
                     {
-                        RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                        RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
                     }
                 }
                 return;
@@ -155,7 +155,7 @@ namespace Soul
                 {
                     if (Sensor.GetEnemiesByDistance(false)[0] != null)
                     {
-                        RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                        RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
                     }
                 }
                 //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
@@ -216,7 +216,7 @@ namespace Soul
                             {
                                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
                                 {
-                                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
                                 }
                             }
                         }

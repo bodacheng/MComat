@@ -35,7 +35,7 @@ namespace Soul
             if (Sensor.GetEnemiesByDistance(false).Count > 0)
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
-                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f, true);
+                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
             }
             _Animator.applyRootMotion = true;
             Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);

@@ -85,7 +85,6 @@ namespace FightScene
                         CharIconDic[data_Center].gameObject.SetActive(false);
                 }
             }
-            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             return memberchanged;
         }
         

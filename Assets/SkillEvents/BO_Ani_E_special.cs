@@ -65,6 +65,7 @@ public partial class BO_Ani_E : MonoBehaviour
                     }
                 }
             );
+            SingleAssignmentDisposableCleaner.Add(Disposable);
         }
         
         public void BlastAttack_core(Vector3 pos, Quaternion qua , Transform parentTarget, int grade, string logForStateKey)
