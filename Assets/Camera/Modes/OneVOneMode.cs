@@ -16,7 +16,7 @@ class OneVOneMode : CameraMode
     // 过快的摆动xzOff会造成不适。因而靠autoRotateXZOffRangeMaxSpeed限制摇摆xzOff的上限
     float autoRotateXZOffRangeMaxSpeed = 1f;
 
-    readonly float xzMax = 15f;// 相机距离焦点的xz方向最远距离
+    readonly float xzMax = 18f;// 相机距离焦点的xz方向最远距离
     float lookdownDegree = 0.5f; //相机向下方看的角度，以横向为单位1
     float zoomAcc;
     float ZoomAcc // 相机调整焦距的加速度。以恒定速度拉远或拉近相机会造成抖动
@@ -27,6 +27,9 @@ class OneVOneMode : CameraMode
             zoomAcc = Mathf.Clamp(value, -1f, 1f);// 上下限两个值过大会导致自动zoom不灵敏
         }
     }
+
+    float zoomcounter;
+    float zoomChangeInter = 3f;// zoom in or out 切换所必须达到的时间间隔
 
     float heightOfXZRate = 0.7f;//高度恒定为XZ_distance的百分之多少
     float xzd;
@@ -107,25 +110,29 @@ class OneVOneMode : CameraMode
             enemyscreenpos = _camera.WorldToViewportPoint(enemiesCenter);
             mescreenpos = _camera.WorldToViewportPoint(meCenter.position);
 
+            zoomcounter += Time.deltaTime;
+
             void ZoomOut()
             {
-                if (!zoomDirection)
+                if (!zoomDirection && zoomcounter > zoomChangeInter)
                 {
                     zoomDirection = true;
-                    ZoomAcc = ZoomAcc / 3;
+                    ZoomAcc = 0;
+                    zoomcounter = 0;
                 }
                 ZoomAcc += Time.deltaTime;
             }
 
             void ZoomIn()
             {
-                if (zoomDirection)
+                if (zoomDirection && zoomcounter > zoomChangeInter)
                 {
                     zoomDirection = false;
-                    ZoomAcc = ZoomAcc / 3;
+                    ZoomAcc = 0;
+                    zoomcounter = 0;
                 }
                 // zoomIn的速度比zoomOut慢一些
-                ZoomAcc -= 0.6f * Time.deltaTime;
+                ZoomAcc -= Time.deltaTime;
             }
 
             if (mescreenpos.y < 0.2f)
@@ -157,7 +164,7 @@ class OneVOneMode : CameraMode
                     rotateToDirection = mescreenpos.x > enemyscreenpos.x ? GetVerticalDir(meCenter.position - enemiesCenter) : GetVerticalDir(enemiesCenter - meCenter.position);
                     // Mathf.Pow(mescreenpos.x - enemyscreenpos.x, 2f) 如果二者横向非常近，那么至今距离内会产生不可调整的剧烈抖动
                     // 4f 是因为Mathf.Pow2使得0开始的相距范围内值过于低，而增大一些。 
-                    speed = Mathf.Clamp(Mathf.Pow(mescreenpos.x - enemyscreenpos.x, 2f), 0, autoRotateXZOffRangeMaxSpeed);
+                    speed = Mathf.Clamp(Mathf.Pow(mescreenpos.x - enemyscreenpos.x, 2f), 0, autoRotateXZOffRangeMaxSpeed); //mescreenpos.x - enemyscreenpos.x;
                     xzOff = Vector3.RotateTowards(xzOff, rotateToDirection, speed * Time.deltaTime / (0.2f + Time.deltaTime), 0.0f);
                 }
             }
