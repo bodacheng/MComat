@@ -39,16 +39,13 @@ namespace Soul
             pEvents.CloseAllPersonalityEffects();
             _BasicPhysicSupport.SetUsingGravity(false);
             _DATA_CENTER.IsDead.Value = true;
-            //_FightAttriCalRef.ChangeLayerForAllSelfColliders(0);
+            _FightAttriCalRef.ChangeLayerForAllSelfColliders(14);
             _Rigidbody.velocity = Vector3.zero;
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
             //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
-            EffectsManager.GenerateEffect("super_hit",
-                FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei),
-                newValue.damageHappenPoint, gameObject.transform.rotation,
-                _FightAttriCalRef.transform);
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.damageHappenPoint, gameObject.transform.rotation, _FightAttriCalRef.transform);
             touchedBoundary = false;
             dropped = false;
             _xz = newValue.attacker._Center.WholeT.forward;

@@ -29,7 +29,7 @@ class OneVOneMode : CameraMode
     }
 
     float zoomcounter;
-    float zoomChangeInter = 3f;// zoom in or out 切换所必须达到的时间间隔
+    float zoomChangeInter = 5f;// zoom in or out 切换所必须达到的时间间隔
 
     float heightOfXZRate = 0.7f;//高度恒定为XZ_distance的百分之多少
     float xzd;

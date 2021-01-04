@@ -26,7 +26,6 @@ public class TeamConfig
     public LayerMask enemyLayerMask;
     public LayerMask enemyWeaponLayerMask;
     public LayerMask enemyShieldLayerMask;
-    public LayerMask enemyAndEnemyWeaponLayerMask;
     public LayerMask mySensorAndWeaponTargetLayerMask;//不管是我的武器还是我的Sensor都是用这个layermask决定去检测哪些战场上的敌人信息
 
     public static TeamConfig defaultSet = new TeamConfig(Team.none,new List<Team>());
@@ -83,8 +82,7 @@ public class TeamConfig
                     enemyLayerMask = (1 << 9);
                     enemyWeaponLayerMask = (1 << 11);
                     enemyShieldLayerMask = (1 << 15);
-                    mySensorAndWeaponTargetLayerMask = (1 << 9) | (1 << 11) | (1 << 15);
-                    enemyAndEnemyWeaponLayerMask = (1 << 9) | (1 << 11);
+                    mySensorAndWeaponTargetLayerMask = (1 << 9) | (1 << 11) | (1 << 15) | (1 << 14);
                     myTeamAndMyEnemy = (1 << 10) | (1 << 9);
                     //myTeamAndMyEnemy |=(1 << 9);
                     break;
@@ -92,8 +90,7 @@ public class TeamConfig
                     enemyLayerMask = (1 << 10);
                     enemyWeaponLayerMask = (1 << 12);
                     enemyShieldLayerMask = (1 << 16);
-                    mySensorAndWeaponTargetLayerMask = (1 << 10) | (1 << 12) | (1 << 16);
-                    enemyAndEnemyWeaponLayerMask = (1 << 10) | (1 << 12);
+                    mySensorAndWeaponTargetLayerMask = (1 << 10) | (1 << 12) | (1 << 16) | (1 << 14);
                     myTeamAndMyEnemy = (1 << 10) | (1 << 9);
                     //myTeamAndMyEnemy |=(1 << 10);
                     break;
@@ -106,7 +103,6 @@ public class TeamConfig
                     enemyWeaponLayerMask = 31;
                     enemyShieldLayerMask = 31;
                     mySensorAndWeaponTargetLayerMask = 31;
-                    enemyAndEnemyWeaponLayerMask = 31;
                     break;
             }
         }
