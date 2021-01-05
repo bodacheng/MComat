@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-class OneVOneMode : CameraMode
+// 这个版本我们试图实现“转向第三人称”，“转向横版”的和谐
+// 但实在因为转向第三人称时候产生的各种抖动太不舒服而弃用
+class OneVOneModeNew : CameraMode
 {
     Vector3 CameraTargetPos;
     Vector3 enemiesCenter;//敌人的位置中心
@@ -10,9 +12,7 @@ class OneVOneMode : CameraMode
     Vector2 enemyscreenpos;
     Vector3 xzOff = -Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
 
-    float startAutoRotateRange = 9;
-
-    readonly float xzMax = 16f;// 相机距离焦点的xz方向最远距离
+    readonly float xzMax = 10f;// 相机距离焦点的xz方向最远距离
     float lookdownDegree = 0.5f; //相机向下方看的角度，以横向为单位1
     float zoomAcc;
     float ZoomAcc // 相机调整焦距的加速度。以恒定速度拉远或拉近相机会造成抖动
@@ -25,7 +25,7 @@ class OneVOneMode : CameraMode
     }
 
     float zoomcounter;
-    float zoomChangeInter = 2f;// zoom in or out 切换所必须达到的时间间隔
+    float zoomChangeInter = 0.5f;// zoom in or out 切换所必须达到的时间间隔
 
     float heightOfXZRate = 0.65f;//高度恒定为XZ_distance的百分之多少
     float xzd;
@@ -39,7 +39,7 @@ class OneVOneMode : CameraMode
         }
     }
 
-    public OneVOneMode(float XZDis)
+    public OneVOneModeNew(float XZDis)
     {
         this.XZ_distance = XZDis;
         YDis = this.XZ_distance * heightOfXZRate;
@@ -118,7 +118,15 @@ class OneVOneMode : CameraMode
                     zoomcounter = 0;
                 }
                 if (zoomDirection)
+                {
                     ZoomAcc += Time.deltaTime;
+                    if (auto)
+                    {
+                        rotateToDirection = meCenter.position - enemiesCenter;
+                        speed = Vector3.Angle(xzOff, rotateToDirection) / 180;
+                        xzOff = Vector3.RotateTowards(xzOff, rotateToDirection, speed * Time.deltaTime / (0.1f + Time.deltaTime), 0.0f);
+                    }
+                }
             }
 
             void ZoomIn()
@@ -129,48 +137,38 @@ class OneVOneMode : CameraMode
                     ZoomAcc = 0;
                     zoomcounter = 0;
                 }
+                // zoomIn的速度比zoomOut慢一些
                 if (!zoomDirection)
+                {
                     ZoomAcc -= Time.deltaTime;
+                    if (auto)
+                    {
+                        temp = Vector3.Distance(meCenter.position, enemiesCenter);
+                        rotateToDirection = mescreenpos.x > enemyscreenpos.x ? GetVerticalDir(meCenter.position - enemiesCenter) : GetVerticalDir(enemiesCenter - meCenter.position);
+                        speed = Vector3.Angle(xzOff, rotateToDirection) / 180;
+                        xzOff = Vector3.RotateTowards(xzOff, rotateToDirection, speed * Time.deltaTime / (0.1f + Time.deltaTime), 0.0f);
+                    }
+                }
             }
 
-            if (mescreenpos.y < 0.2f)
+            if (enemyscreenpos.x < 0.1 || enemyscreenpos.x > 0.9 || enemyscreenpos.y < 0.3 || mescreenpos.y < 0.3)
             {
-                ZoomIn();
+                ZoomOut();
             }
             else
             {
-                if (enemyscreenpos.x < 0.1 || enemyscreenpos.x > 0.9 || enemyscreenpos.y < 0.2 || mescreenpos.x < 0.1 || mescreenpos.x > 0.9)
-                {
-                    ZoomOut();
-                }
-                else
-                {
-                    ZoomIn();
-                }
+                ZoomIn();
             }
 
             XZ_distance += ZoomAcc;
         }
 
-        if (auto)
-        {
-            if (targets != null && targets.Count > 0)
-            {
-                temp = Vector3.Distance(meCenter.position, enemiesCenter);
-                if (temp < startAutoRotateRange)
-                {
-                    rotateToDirection = mescreenpos.x > enemyscreenpos.x ? GetVerticalDir(meCenter.position - enemiesCenter) : GetVerticalDir(enemiesCenter - meCenter.position);
-                    speed = Vector3.Angle(xzOff, rotateToDirection) / 180;
-                    xzOff = Vector3.RotateTowards(xzOff, rotateToDirection, speed * Time.deltaTime / (0.2f + Time.deltaTime), 0.0f);
-                }
-            }
-        }
-
         h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
-        xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
+        xzOff = Quaternion.AngleAxis(h * 2f, Vector3.up) * xzOff;
         maxheight = Mathf.Max(meCenter.position.y, enemiesCenter.y);
 
         // 相机所在位置计算
+
         temp = Mathf.Max(maxheight, YDis);
         // Slerp中心
         SlerpCenter = meCenter.position;
@@ -191,6 +189,6 @@ class OneVOneMode : CameraMode
         rotateToDirection = rotateToDirection.normalized;
         rotateToDirection.y = -lookdownDegree * 1;
         ToRotation = Quaternion.LookRotation(rotateToDirection.normalized);
-        _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, ToRotation, Time.deltaTime / (0.1f + Time.deltaTime));
+        _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, ToRotation,  Time.deltaTime / (0.05f + Time.deltaTime));
     }
 }
