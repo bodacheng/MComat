@@ -57,6 +57,10 @@ namespace FightScene
 
         public override void Clear()
         {
+            foreach (Data_Center one in TeamMembers.values)
+            {
+                one.FightDataRef.Clear();
+            }
             CharIconDic.Clear();
             multiRaidHitComboDic.Clear();
         }
@@ -73,8 +77,8 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
-                a_char.FightDataRef.INI();
                 a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
+                
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>
                 {

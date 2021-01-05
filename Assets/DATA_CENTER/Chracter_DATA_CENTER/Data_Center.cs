@@ -160,9 +160,11 @@ public partial class Data_Center : MonoBehaviour
     public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)
     {
         BodyElementTagAndLayerSet(_TeamConfig);
+        IsDead.Value = false;
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
         FightDataRef.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
         FightDataRef.EnableAllHitBoxCollider(true);
+        FightDataRef.INI();
         FightDataRef.CurrentHp.Value = nineSkillHp;
         FightDataRef.criticalGaugeMode = criticalGaugeMode;
     }
@@ -195,11 +197,15 @@ public partial class Data_Center : MonoBehaviour
     public void CleanClear()
     {
         _BasicPhysicSupport.hiddenMethods.Grounded = true;
+        _BasicPhysicSupport.SetUsingGravity(false);
+        _BasicPhysicSupport.Rigidbody.velocity = Vector3.zero;
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
         buffsRunner.EndAllCoroutines();
         _ResistanceManager.ResistanceClear();
         _BasicPhysicSupport.hiddenMethods.ResetAnimator();
+        Animation_Manger.PlayLayerAnim(null, false, 0f);
+        Personality_events.CloseAllPersonalityEffects();
     }
 
     float p1_to_me, p2_to_me;

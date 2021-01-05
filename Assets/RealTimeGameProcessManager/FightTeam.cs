@@ -50,7 +50,6 @@ namespace FightScene
 
         public virtual void Clear()
         {
-            CharIconDic.Clear();
         }
 
         public virtual List<Transform> TeamMemberTransforms()
@@ -160,6 +159,7 @@ namespace FightScene
             foreach (Data_Center oneMember in TeamMembers.values)
             {
                 oneMember.controller.TestMode = false;
+                RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
                 oneMember._MyBehaviorRunner.ChangeToWaitingState();
             }
         }
@@ -169,6 +169,7 @@ namespace FightScene
             foreach (Data_Center oneMember in TeamMembers.values)
             {
                 oneMember.controller.TestMode = true;
+                RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
                 oneMember._MyBehaviorRunner.ChangeToTestMode();
             }
         }

@@ -39,7 +39,30 @@ namespace FightScene
         public static Team playerTeam = Team.player1;
         
         public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
-        
+        public static IDictionary<Team, List<Data_Center>> FightingMembers = new Dictionary<Team, List<Data_Center>>();
+
+        public static void AddOrRemoveFightingMember(Data_Center member, Team team, bool add) // add:true remove: false
+        {
+            if (!FightingMembers.ContainsKey(team))
+                FightingMembers.Add(team, new List<Data_Center>());
+            List<Data_Center> fightingmembers = FightingMembers[team];
+            if (add)
+            {
+                if (!fightingmembers.Contains(member))
+                {
+                    fightingmembers.Add(member);
+                }
+            }
+            else
+            {
+                if (fightingmembers.Contains(member))
+                {
+                    fightingmembers.Remove(member);
+                }
+            }
+            FightingMembers[team] = fightingmembers;
+        }
+
         void Awake()
         {
             target = this;
@@ -211,6 +234,8 @@ namespace FightScene
         {
             FightTeam1.Clear();
             FightTeam2.Clear();
+            AllMembers.Clear();
+            FightingMembers.Clear();
             MobileInputsManager.target.Clear();
         }
 

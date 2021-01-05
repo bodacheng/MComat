@@ -10,7 +10,7 @@ class OneVOneMode : CameraMode
     Vector2 enemyscreenpos;
     Vector3 xzOff = -Vector3.forward;//相机从focuscenter出发的角度，最大的难点。
 
-    float startAutoRotateRange = 9;
+    float startAutoRotateRange = 9; // 两个角色的实际位置低于该值的话则开始偏移向垂直角度
 
     readonly float xzMax = 16f;// 相机距离焦点的xz方向最远距离
     float lookdownDegree = 0.5f; //相机向下方看的角度，以横向为单位1
@@ -20,7 +20,7 @@ class OneVOneMode : CameraMode
         get { return zoomAcc; }
         set
         {
-            zoomAcc = Mathf.Clamp(value, -1f, 1f);// 上下限两个值过大会导致自动zoom不灵敏
+            zoomAcc = Mathf.Clamp(value, -1f, 1f);
         }
     }
 
@@ -35,7 +35,7 @@ class OneVOneMode : CameraMode
         set
         {
             xzd = Mathf.Clamp(value, 8.5f, xzMax);
-            YDis = this.xzd * heightOfXZRate; // 相机恒定高度。但如果有角色位置高出次值，则相机高度会超出此位置
+            YDis = this.xzd * heightOfXZRate;
         }
     }
 
@@ -76,7 +76,6 @@ class OneVOneMode : CameraMode
 
             justEnterdThisMode = false;
         }
-        this.LocalUpdate(_camera);
     }
 
     public override void Exit(Camera _camera)
@@ -148,7 +147,6 @@ class OneVOneMode : CameraMode
                     ZoomIn();
                 }
             }
-
             XZ_distance += ZoomAcc;
         }
 
@@ -167,7 +165,7 @@ class OneVOneMode : CameraMode
         }
 
         h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("RotateCamera");
-        xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
+        xzOff = Quaternion.AngleAxis(h * 2f, Vector3.up) * xzOff;
         maxheight = Mathf.Max(meCenter.position.y, enemiesCenter.y);
 
         // 相机所在位置计算

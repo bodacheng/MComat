@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using FightScene;
 
 public class Sensor : MonoBehaviour {
 
     public float sensor_radius = 15;//这个范围我们也就看作是普攻的冲击检测范围。
-    public IDictionary<Team, List<Data_Center>> TeamMembers;
     
     LayerMask _layers;
     LayerMask meAndEnemyLayermask;
@@ -202,17 +202,16 @@ public class Sensor : MonoBehaviour {
         {
             for (int i = 0; i < tags.Length; i++)
             {
-                if (TeamMembers != null)
+                if (RealTimeGameProcessManager.FightingMembers != null)
                 {
                     for (int y = 0; y < tags.Length; y++)
                     {
-                        TeamMembers.TryGetValue(tags[y], out searchingMembers);
+                        RealTimeGameProcessManager.FightingMembers.TryGetValue(tags[y], out searchingMembers);
                         if (searchingMembers != null)
                         {
                             for (int k = 0; k < searchingMembers.Count; k++)
                             {
-                                if (searchingMembers[k]._MyBehaviorRunner.GetNowState().StateKey != "Death" && searchingMembers[k]._MyBehaviorRunner.GetNowState().StateKey != "Empty")
-                                    target_list.Add(searchingMembers[k].WholeT.gameObject);
+                                target_list.Add(searchingMembers[k].WholeT.gameObject);
                             }
                         }
                         else

@@ -27,18 +27,10 @@ public class PreparingProcess : FSceneProcess
         RealTimeGameProcessManager.target.AllMembers.Clear();
         DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
         DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+        RealTimeGameProcessManager.FightingMembers.Clear();
         FightLogger.target.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
-        foreach (KeyValuePair<Team, List<Data_Center>> _set in RealTimeGameProcessManager.target.AllMembers)
-        {
-            foreach (Data_Center _char in _set.Value)
-            {
-                _char.Sensor.TeamMembers = RealTimeGameProcessManager.target.AllMembers;
-                _char.IsDead.Value = false;
-            }
-        }
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
-        
         LoadingCanvas.target.LightUp();
     }
     

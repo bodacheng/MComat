@@ -17,12 +17,7 @@ namespace Soul
         public override void AI_State_enter()
         {
             base.AI_State_enter();
-            _FightAttriCalRef.Clear();
-            Animation_Manger.PlayLayerAnim(null, false, 0f);
-            _Rigidbody.velocity = Vector3.zero;
-            _BasicPhysicSupport.SetUsingGravity(false);
             _DATA_CENTER.CleanClear();
-            pEvents.CloseAllPersonalityEffects();
         }
 
         public override void AI_State_exit()

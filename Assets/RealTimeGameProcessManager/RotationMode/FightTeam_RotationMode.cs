@@ -23,6 +23,10 @@ namespace FightScene
         
         public override void Clear()
         {
+            foreach (Data_Center one in TeamMembers.values)
+            {
+                one.FightDataRef.Clear();
+            }
             CharIconDic.Clear();
             rotationModeHitCombo.text = "";
         }
@@ -113,6 +117,9 @@ namespace FightScene
                     {
                         _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RotationMode_fightingMember.FightDataRef._ComboHitCount.HitCount.Value;
                     }
+                    RealTimeGameProcessManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, false);
+                    RealTimeGameProcessManager.AddOrRemoveFightingMember(_changeTo, this.teamConfig.myTeam, true);
+
                     RotationMode_fightingMember = _changeTo;
                     RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
@@ -145,6 +152,7 @@ namespace FightScene
 
         public override void ModeStart()
         {
+            RealTimeGameProcessManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, true);
             RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
         }
 
