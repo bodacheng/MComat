@@ -71,7 +71,6 @@ namespace FightScene
                 if (_changeTo == data_Center)
                 {
                     RotationMode_fightingMember = _changeTo;
-                    RotationMode_fightingMember.IsDead.Subscribe(x => { if (x == true) { Invoke("RandomChangeAliveFightingMember", 2f); } });
                     RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
                     RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
                     EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);

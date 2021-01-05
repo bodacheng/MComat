@@ -111,8 +111,9 @@ namespace FightScene
                 {
                     if (x == true) 
                     {
+                        RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
                         RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-                    } 
+                    }
                 });
             }
         }

@@ -27,6 +27,7 @@ namespace FightScene
                 a_char.IsDead.Subscribe(x => {
                     if (x == true) 
                     {
+                        RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
                         Invoke("RandomChangeAliveFightingMember", 2f);
                         CharIconDic[a_char].focusingCharIcon.CooldownCurtainUpdate(1);
                     }
