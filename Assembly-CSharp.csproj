@@ -347,7 +347,7 @@
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillNameTable.cs" />
-    <Compile Include="Assets\JsonSupport\JsonDotNet\LocalJson.cs" />
+    <Compile Include="Assets\JsonSupport\LocalJson.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\JsonAttribute.cs" />
