@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using dataAccess;
 using Skill;
 using System.Collections;
 using Log;
+using Json;
 
 public partial class LocalMasterDataTool : MonoBehaviour {
 

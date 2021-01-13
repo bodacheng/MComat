@@ -273,7 +273,6 @@
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_localTest.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />
-    <Compile Include="Assets\DataBaseAccess\LocalJson.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Add.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Gotcha.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Json.cs" />
@@ -287,6 +286,7 @@
     <Compile Include="Assets\DataBaseAccess\StoneExpManager.cs" />
     <Compile Include="Assets\DataBaseAccess\TeamSet\PosKeySet.cs" />
     <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet.cs" />
+    <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet_GS2.cs" />
     <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet_Json.cs" />
     <Compile Include="Assets\DataBaseAccess\TeamSet\TeamSet_Save.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
@@ -347,6 +347,7 @@
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillNameTable.cs" />
+    <Compile Include="Assets\JsonSupport\LocalJson.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\JsonSupport\UnityLitJson\JsonAttribute.cs" />
@@ -521,7 +522,6 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_returnToBox.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
-    <Compile Include="Assets\SingleAssignmentDisposableCleaner.cs" />
     <Compile Include="Assets\Singleton\FightLoadError.cs" />
     <Compile Include="Assets\Singleton\GeneralModelPool.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
@@ -1890,6 +1890,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Gs2.Weave.Party">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Party.dll</HintPath>
+    </Reference>
     <Reference Include="Gs2.Weave.JobQueue.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.JobQueue.Editor.dll</HintPath>
     </Reference>
@@ -1994,6 +1997,9 @@
     </Reference>
     <Reference Include="Gs2.Weave.Gacha">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Gacha.dll</HintPath>
+    </Reference>
+    <Reference Include="Gs2.Weave.Party.Editor">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Party.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Gs2.Weave.Core">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Core.dll</HintPath>

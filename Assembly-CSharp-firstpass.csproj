@@ -74,6 +74,7 @@
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogPopup.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugLogRecycledListView.cs" />
     <Compile Include="Assets\Plugins\IngameDebugConsole\Scripts\DebugsOnScrollListener.cs" />
+    <Compile Include="Assets\Plugins\UniRx\SingleAssignmentDisposableCleaner.cs" />
     <Compile Include="Assets\Plugins\UnityPurchasing\script\CodelessIAPStoreListener.cs" />
     <Compile Include="Assets\Plugins\UnityPurchasing\script\ComboBox.cs" />
     <Compile Include="Assets\Plugins\UnityPurchasing\script\Demo\DemoInventory.cs" />
@@ -703,6 +704,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Gs2.Weave.Party">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Party.dll</HintPath>
+    </Reference>
     <Reference Include="Gs2.Weave.JobQueue.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.JobQueue.Editor.dll</HintPath>
     </Reference>
@@ -807,6 +811,9 @@
     </Reference>
     <Reference Include="Gs2.Weave.Gacha">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Gacha.dll</HintPath>
+    </Reference>
+    <Reference Include="Gs2.Weave.Party.Editor">
+      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Party.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Gs2.Weave.Core">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Core.dll</HintPath>

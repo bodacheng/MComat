@@ -859,16 +859,6 @@ PrefabInstance:
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6930373840697842912, guid: 1e68b459274bcb94c8791ee0191f241d,
-        type: 3}
-      propertyPath: accountNamespaceName
-      value: account
-      objectReference: {fileID: 0}
-    - target: {fileID: 6930373840697842912, guid: 1e68b459274bcb94c8791ee0191f241d,
-        type: 3}
-      propertyPath: accountEncryptionKeyId
-      value: grn:gs2:ap-northeast-1:c2Zr7Lt8-c2Zr7Lt8:key:account-key:key:key
-      objectReference: {fileID: 0}
     - target: {fileID: 6930373840697842913, guid: 1e68b459274bcb94c8791ee0191f241d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -967,21 +957,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3301893184532616890, guid: 0ef72c0ed94f7d14a8e06b98db6ebefa,
-        type: 3}
-      propertyPath: moneyNamespaceName
-      value: money
-      objectReference: {fileID: 0}
-    - target: {fileID: 3301893184532616890, guid: 0ef72c0ed94f7d14a8e06b98db6ebefa,
-        type: 3}
-      propertyPath: identifierDepositClientId
-      value: GKIl1QAq-zoBltOy9vXE2tqyj-Bpy_jrxg42_hhJLBpbUUZyWIqS7GM_y1ZmopAsD9C
-      objectReference: {fileID: 0}
-    - target: {fileID: 3301893184532616890, guid: 0ef72c0ed94f7d14a8e06b98db6ebefa,
-        type: 3}
-      propertyPath: identifierDepositClientSecret
-      value: WHJCUEhiaXBkZUI4eUdpUDR4RVJEa2thb3pSZUVyWEk=
       objectReference: {fileID: 0}
     - target: {fileID: 3990679340256521431, guid: 0ef72c0ed94f7d14a8e06b98db6ebefa,
         type: 3}
@@ -1175,16 +1150,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965122150900362587, guid: 0aa33f33d1b0b864a833d6ae1c614748,
-        type: 3}
-      propertyPath: applicationClientId
-      value: GKIrHmSEOIAi_DmtK9UR9jf366TPVyczD30RjHNwBE83aBmQdjXQaJVrAgHxjKgD1Kf
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965122150900362587, guid: 0aa33f33d1b0b864a833d6ae1c614748,
-        type: 3}
-      propertyPath: applicationClientSecret
-      value: aVVHUTVxUFJHZ25UcHc0WkkyN1IzQUdEbHdYQmZ6UXA=
       objectReference: {fileID: 0}
     - target: {fileID: 4420731715639397950, guid: 0aa33f33d1b0b864a833d6ae1c614748,
         type: 3}
@@ -1450,26 +1415,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onError.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1080032077122476375, guid: 30f79e910740dda448de69e902976919,
-        type: 3}
-      propertyPath: moneyNamespaceName
-      value: money
-      objectReference: {fileID: 0}
-    - target: {fileID: 1080032077122476375, guid: 30f79e910740dda448de69e902976919,
-        type: 3}
-      propertyPath: showcaseNamespaceName
-      value: money-store
-      objectReference: {fileID: 0}
-    - target: {fileID: 1080032077122476375, guid: 30f79e910740dda448de69e902976919,
-        type: 3}
-      propertyPath: showcaseModelName
-      value: money
-      objectReference: {fileID: 0}
-    - target: {fileID: 1080032077122476375, guid: 30f79e910740dda448de69e902976919,
-        type: 3}
-      propertyPath: showcaseKeyId
-      value: grn:gs2:ap-northeast-1:c2Zr7Lt8-c2Zr7Lt8:key:money-store:key:key
       objectReference: {fileID: 0}
     - target: {fileID: 1080032077122476713, guid: 30f79e910740dda448de69e902976919,
         type: 3}

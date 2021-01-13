@@ -219,8 +219,7 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    //_CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam2.TeamMemberTransforms());
-                    _CameraManager.Assign_Camera(C_Mode.OneVOne, FightTeam2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam2.TeamMemberTransforms());
                 }
                 else
                 {

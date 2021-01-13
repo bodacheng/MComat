@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using Api.Dto.Model;
-using mainMenu;
 using Api.Dto.Form;
 using UnityEngine;
 using Api.Common;
@@ -110,15 +109,22 @@ namespace dataAccess
                     }
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return ApiCaller.Instance.Post<MonsterTeamOfPlayerModel , GetMonsterTeamOfPlayerForm> 
-                        ("http://160.16.187.230/AssetStoreFight/team/getMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage), 
-                        model => {
-                            success(model.data);
-                        },
-                        model => {
-                            fail(model.data);
-                        }
+                    yield return TestGS2(
+                        form,
+                        success,
+                        fail,
+                        apiLanguage
                     );
+
+                    //yield return ApiCaller.Instance.Post<MonsterTeamOfPlayerModel , GetMonsterTeamOfPlayerForm> 
+                    //    ("http://160.16.187.230/AssetStoreFight/team/getMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage), 
+                    //    model => {
+                    //        success(model.data);
+                    //    },
+                    //    model => {
+                    //        fail(model.data);
+                    //    }
+                    //);
                     break;
                 case PlayerInfoRefMode.formalVersion:
                     break;
