@@ -7,7 +7,7 @@ using System.Linq;
 public partial class NineAndTwo
 {
     // exceptSkIDs : 除了这些技能ID。切记是技能ID
-    static string SearchStoneForRandomSet2(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
+    static string RandomSkillIDOfStone(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
     {
         IDictionary<string, string> _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(filterForm);
         List<string> StoneSkillIDs = _SkillIDsAndNames.Keys.ToList();
@@ -25,8 +25,8 @@ public partial class NineAndTwo
         int ranDom = Random.Range(0, StoneSkillIDs.Count);
         return StoneSkillIDs[ranDom];
     }
-        
-    static List<int> RemainSlotSPLevelCal(NineAndTwo current)
+
+    public static List<int> RemainSlotSPLevelCal(NineAndTwo current)
     {
         int remainSlotCount = 9 - current.SkillIDList().Count;
         int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);

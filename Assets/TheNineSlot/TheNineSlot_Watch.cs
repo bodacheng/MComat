@@ -64,6 +64,32 @@ namespace mainMenu
                 IDs.Add(C3);
             return IDs;
         }
+
+        public NineAndTwo GetCurrentNineAndTwo()
+        {
+            NineAndTwo returnValue = new NineAndTwo();
+            string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string B1 = B1DragAndDropCell.GetItem() != null ? B1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string B2 = B2DragAndDropCell.GetItem() != null ? B2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string B3 = B3DragAndDropCell.GetItem() != null ? B3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+            string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
+
+            returnValue.A1skillid = A1;
+            returnValue.A2skillid = A2;
+            returnValue.A3skillid = A3;
+            returnValue.B1skillid = B1;
+            returnValue.B2skillid = B2;
+            returnValue.B3skillid = B3;
+            returnValue.C1skillid = C1;
+            returnValue.C2skillid = C2;
+            returnValue.C3skillid = C3;
+
+            return returnValue;
+        }
         
         // 返回的是技能定义ID，长度固定为9
         public List<string> GetCurrentNineSlotAllSkillIds()

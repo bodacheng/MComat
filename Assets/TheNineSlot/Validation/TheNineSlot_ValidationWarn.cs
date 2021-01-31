@@ -39,6 +39,15 @@ namespace mainMenu
                     }
                     PreScene.target.mainProcessRunner.Run(temp3());
                 break;
+                case NineAndTwo.SkillEditError.UnableToFinish:
+                    IEnumerator temp4()
+                    {
+                        _ValiWarn.text = "没法补全当前九宫格";
+                        yield return new WaitForSecondsRealtime(2f);
+                        _ValiWarn.text = "";
+                    }
+                    PreScene.target.mainProcessRunner.Run(temp4());
+                    break;
             }
         }
         

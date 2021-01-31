@@ -97,7 +97,27 @@ namespace dataAccess
             }
             return list;
         }
-        
+
+        // 从账户随机抽取符合要求的技能石
+        // exceptSkIDs : 除了这些技能ID。切记是技能ID
+        public static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
+        {
+            SkillStoneOfPlayerInfoModel infoModel;
+            List<string> exceptStones = new List<string>();
+            for (int i = 0; i < exceptSkIDs.Count; i++)
+            {
+                List<string> exceptAccIds = MySkillStonesReader.GetMyStonesBySkillID(exceptSkIDs[i]);
+                exceptStones.AddRange(exceptAccIds);
+            }
+            List<string> StoneAccIDs = MySkillStonesReader.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
+            if (StoneAccIDs.Count == 0)
+                return null;
+            int ranDom = Random.Range(0, StoneAccIDs.Count);
+            string stoneAccID = StoneAccIDs[ranDom];
+            infoModel = MySkillStonesReader.Get(stoneAccID);
+            return infoModel;
+        }
+
         // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
         public static List<SkillStoneOfPlayerInfoModel> GetEquipingStones(string monsterOfPlayerId)
         {

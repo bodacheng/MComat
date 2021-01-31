@@ -8,6 +8,7 @@ public partial class NineAndTwo
         UnBalanced,
         RepeatedSkill,
         NoNormalStart,
+        UnableToFinish,
         Perfect
     }
     
