@@ -59,42 +59,22 @@ public partial class NineForShow : MonoBehaviour
         }
     }
     
-    public IEnumerator ShowStones(string A1skillid, string A2skillid, string A3skillid,
+    public void ShowStones(string A1skillid, string A2skillid, string A3skillid,
                                     string B1skillid, string B2skillid, string B3skillid,
                                         string C1skillid, string C2skillid, string C3skillid)
     {
         ClearCurrent();
-        
-        IEnumerator getA1 = MySkillStonesReader.GenerateNewStoneModel(A1skillid, false);
-        IEnumerator getA2 = MySkillStonesReader.GenerateNewStoneModel(A2skillid, false);
-        IEnumerator getA3 = MySkillStonesReader.GenerateNewStoneModel(A3skillid, false);
-        IEnumerator getB1 = MySkillStonesReader.GenerateNewStoneModel(B1skillid, false);
-        IEnumerator getB2 = MySkillStonesReader.GenerateNewStoneModel(B2skillid, false);
-        IEnumerator getB3 = MySkillStonesReader.GenerateNewStoneModel(B3skillid, false);
-        IEnumerator getC1 = MySkillStonesReader.GenerateNewStoneModel(C1skillid, false);
-        IEnumerator getC2 = MySkillStonesReader.GenerateNewStoneModel(C2skillid, false);
-        IEnumerator getC3 = MySkillStonesReader.GenerateNewStoneModel(C3skillid, false);
-        
-        yield return getA1;
-        yield return getA2;
-        yield return getA3;
-        yield return getB1;
-        yield return getB2;
-        yield return getB3;
-        yield return getC1;
-        yield return getC2;
-        yield return getC3;
-        
-        A1S = getA1.Current != null ? (SKStoneItem)getA1.Current : null;
-        A2S = getA2.Current != null ? (SKStoneItem)getA2.Current : null;
-        A3S = getA3.Current != null ? (SKStoneItem)getA3.Current : null;
-        B1S = getB1.Current != null ? (SKStoneItem)getB1.Current : null;
-        B2S = getB2.Current != null ? (SKStoneItem)getB2.Current : null;
-        B3S = getB3.Current != null ? (SKStoneItem)getB3.Current : null;
-        C1S = getC1.Current != null ? (SKStoneItem)getC1.Current : null;
-        C2S = getC2.Current != null ? (SKStoneItem)getC2.Current : null;
-        C3S = getC3.Current != null ? (SKStoneItem)getC3.Current : null;
-        
+
+        A1S = MySkillStonesReader.GenerateNewStoneModel_New(A1skillid, false);
+        A2S = MySkillStonesReader.GenerateNewStoneModel_New(A2skillid, false);
+        A3S = MySkillStonesReader.GenerateNewStoneModel_New(A3skillid, false);
+        B1S = MySkillStonesReader.GenerateNewStoneModel_New(B1skillid, false);
+        B2S = MySkillStonesReader.GenerateNewStoneModel_New(B2skillid, false);
+        B3S = MySkillStonesReader.GenerateNewStoneModel_New(B3skillid, false);
+        C1S = MySkillStonesReader.GenerateNewStoneModel_New(C1skillid, false);
+        C2S = MySkillStonesReader.GenerateNewStoneModel_New(C2skillid, false);
+        C3S = MySkillStonesReader.GenerateNewStoneModel_New(C3skillid, false);
+         
         if (A1S != null)
         {
             A1Frame.color = RefreshFrameColor(A1S._SkillConfig.SP_LEVEL);

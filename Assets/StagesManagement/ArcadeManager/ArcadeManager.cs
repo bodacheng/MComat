@@ -108,7 +108,7 @@ namespace mainMenu
             // 显示模型
             MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
             // 显示技能组
-            MemberDetail.target.presentationProcessRunner.Run(_NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo));
+            _NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo);
         }
     }
 }

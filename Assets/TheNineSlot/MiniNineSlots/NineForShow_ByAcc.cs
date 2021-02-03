@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public partial class NineForShow : MonoBehaviour
 {
-    public IEnumerator ShowStones_Acc(string MonsterOfPlayerID)
+    public void ShowStones_Acc(string MonsterOfPlayerID)
     {
         List<SkillStoneOfPlayerInfoModel> skillStoneOfPlayerInfoModels = MySkillStonesReader.GetEquipingStones(MonsterOfPlayerID);
         
@@ -48,7 +48,7 @@ public partial class NineForShow : MonoBehaviour
             }
         }
 
-        yield return ShowStones(
+        ShowStones(
             A1SkillID, A2SkillID, A3SkillID,
             B1SkillID, B2SkillID, B3SkillID,
             C1SkillID, C2SkillID, C3SkillID

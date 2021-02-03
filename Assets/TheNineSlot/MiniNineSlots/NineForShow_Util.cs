@@ -5,9 +5,9 @@ using System.Collections;
 // 抽卡技能石细节显示
 public partial class NineForShow : MonoBehaviour
 {
-    public IEnumerator ShowStones_DataInfo(CharDataInfo _CharDataInfo)
+    public void ShowStones_DataInfo(CharDataInfo _CharDataInfo)
     {
-        yield return ShowStones(
+        ShowStones(
             _CharDataInfo._NineAndTwo.A1skillid, _CharDataInfo._NineAndTwo.A2skillid, _CharDataInfo._NineAndTwo.A3skillid,
             _CharDataInfo._NineAndTwo.B1skillid, _CharDataInfo._NineAndTwo.B2skillid, _CharDataInfo._NineAndTwo.B3skillid,
             _CharDataInfo._NineAndTwo.C1skillid, _CharDataInfo._NineAndTwo.C2skillid, _CharDataInfo._NineAndTwo.C3skillid

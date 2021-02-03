@@ -109,7 +109,7 @@ namespace mainMenu
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
             
             // mini nineslot show
-            yield return _NineForShow.ShowStones_Acc(_focusing.monsterOfPlayerId);
+            _NineForShow.ShowStones_Acc(_focusing.monsterOfPlayerId);
             
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载

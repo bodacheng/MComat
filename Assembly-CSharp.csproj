@@ -526,6 +526,7 @@
     <Compile Include="Assets\Singleton\GeneralModelPool.cs" />
     <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic\FromCach.cs" />
+    <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />
     <Compile Include="Assets\Singleton\SkillIconsDic\SkillIconsDic.cs" />
     <Compile Include="Assets\Singleton\SystemNotes.cs" />
     <Compile Include="Assets\Singleton\TeamConfig.cs" />

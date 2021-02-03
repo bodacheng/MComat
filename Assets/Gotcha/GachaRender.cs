@@ -208,7 +208,7 @@ public class GachaRender : MonoBehaviour
         Reset();
         GachaRender.target.Skip.gameObject.SetActive(false);
         yield return StarSortAnim(results);
-        yield return GachaManager.target.NineForShow.GochaResultShow(results);
+        GachaManager.target.NineForShow.GochaResultShow(results);
         CameraManager._camera.gameObject.SetActive(true);
         Camera.gameObject.SetActive(false);
     }

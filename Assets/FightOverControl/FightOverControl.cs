@@ -93,7 +93,7 @@ namespace FightScene
                 iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
                 iconAndSKillShowUISet.transform.localPosition = Vector3.zero;
                 iconAndSKillShowUISet.transform.localScale = Vector3.one;
-                yield return nineForShow.ShowStones_Acc(keyValuePair.Value.monsterOfPlayerId);
+                nineForShow.ShowStones_Acc(keyValuePair.Value.monsterOfPlayerId);
             }
             yield break;
         }

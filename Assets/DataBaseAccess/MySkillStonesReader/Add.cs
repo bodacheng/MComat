@@ -46,7 +46,27 @@ namespace dataAccess
             
             DicAdd<string, SKStoneItem>.Add(RenderModelDic, skillStoneOfPlayerId, item);
         }
-        
+
+        public static SKStoneItem GenerateNewStoneModel_New(string skillID, bool openStoneFeature)
+        {
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
+            if (skillConfig == null)
+            {
+                return null;
+            }
+
+            GameObject pretab = SkillIconsDic.Instance.Get(skillID);
+            GameObject newIcon = Object.Instantiate(pretab);
+            SKStoneItem item = newIcon.GetComponent<SKStoneItem>();
+            if (item == null)
+            {
+                item = newIcon.AddComponent<SKStoneItem>();
+            }
+            item._SkillConfig = skillConfig;
+            item.enabled = openStoneFeature;
+            return item;
+        }
+
         // 生成展示用技能石（额外模型）
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
         public static IEnumerator GenerateNewStoneModel(string skillID, bool openStoneFeature)

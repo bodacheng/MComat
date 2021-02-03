@@ -59,7 +59,7 @@ public partial class NineForShow : MonoBehaviour
         screenStarExplosionModels.Add(boo);
     }
 
-    public IEnumerator GochaResultShow(List<SkillStoneOfPlayerInfoModel> results)
+    public void GochaResultShow(List<SkillStoneOfPlayerInfoModel> results)
     {
         string A1skillid = null, A2skillid= null, A3skillid= null, B1skillid= null, B2skillid= null, B3skillid= null, C1skillid= null, C2skillid= null, C3skillid= null;
         for (int i = 0; i < results.Count; i++)
@@ -95,6 +95,6 @@ public partial class NineForShow : MonoBehaviour
                 break;
             }
         }
-        yield return ShowStones(A1skillid, A2skillid, A3skillid, B1skillid, B2skillid, B3skillid, C1skillid, C2skillid, C3skillid);
+        ShowStones(A1skillid, A2skillid, A3skillid, B1skillid, B2skillid, B3skillid, C1skillid, C2skillid, C3skillid);
     }    
 }

@@ -15,7 +15,7 @@ public class TeamEditFront : MainSceneProcess
         yield return PreScene.target.TeamEditor.INITeamPosButtons();
         yield return MonsterBox.DisplayMonsterIcons(true);
         PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
-        yield return PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
+        PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
     }
     

@@ -43,11 +43,9 @@ namespace mainMenu
         public Text StoneTargetLevel;
         
         // 额外生成一个技能石图像
-        IEnumerator IconForShow(string skillID)
+        void IconForShow(string skillID)
         {
-            IEnumerator Generate = MySkillStonesReader.GenerateNewStoneModel(skillID, false);
-            yield return Generate;
-            SKStoneItem item = (SKStoneItem)Generate.Current;
+            SKStoneItem item = MySkillStonesReader.GenerateNewStoneModel_New(skillID, false);
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT) 
@@ -92,8 +90,8 @@ namespace mainMenu
                 return;
             }
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(currentstone.skillId);
-            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(skillConfig.RECORD_ID));
-            
+            IconForShow(skillConfig.RECORD_ID);
+
             keyname.text = skillConfig.REAL_NAME;
             Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
             ShowSkillStoneExType(skillConfig.SP_LEVEL);
@@ -120,7 +118,7 @@ namespace mainMenu
         
         public void RefreshInfo(SkillConfig _ConfigOfStone)
         {
-            SkillStonesBox.target.mainProcessRunner.Run(IconForShow(_ConfigOfStone.RECORD_ID));
+            IconForShow(_ConfigOfStone.RECORD_ID);
             keyname.text = _ConfigOfStone.REAL_NAME;
             Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
             ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
