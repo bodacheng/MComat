@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using FightScene;
+using Unity.Jobs;
 
-public class Sensor : MonoBehaviour {
-
+public class Sensor
+{
     public float sensor_radius = 15;//这个范围我们也就看作是普攻的冲击检测范围。
-    
+
+    public Transform Center;
+
     LayerMask _layers;
     LayerMask meAndEnemyLayermask;
     Collider[] _hits; //What was hit in this frame?
@@ -43,7 +46,7 @@ public class Sensor : MonoBehaviour {
     {
         for (int i = 0; i < detectedEnemies.Count; i++)
         {
-            float to_me = Vector3.Distance(transform.position, detectedEnemies[i].transform.position);
+            float to_me = Vector3.Distance(Center.position, detectedEnemies[i].transform.position);
             if (to_me >= min && to_me <= max)
             {
                 return detectedEnemies[i];
@@ -64,7 +67,7 @@ public class Sensor : MonoBehaviour {
         {
             return null;
         }
-        float to_me = Vector3.Distance(transform.position, threat.transform.position);
+        float to_me = Vector3.Distance(Center.position, threat.transform.position);
         if (to_me >= min && to_me <= max)
         {
             return threat;
@@ -158,8 +161,8 @@ public class Sensor : MonoBehaviour {
 
     public void SensorDetectProcess()
     {
-        _hits = Physics.OverlapSphere(transform.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(transform.position, 1f, SelfDataCenter.WholeT.forward, sensor_radius, meAndEnemyLayermask, QueryTriggerInteraction.Collide);
+        _hits = Physics.OverlapSphere(Center.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
+        _spherecastHits = Physics.SphereCastAll(Center.position, 1f, SelfDataCenter.WholeT.forward, sensor_radius, meAndEnemyLayermask, QueryTriggerInteraction.Collide);
     }
 
     public void SensorDetectionResultClearProcess()
@@ -248,7 +251,7 @@ public class Sensor : MonoBehaviour {
                 {
                     if (!SelfDataCenter.FightDataRef.IfMyBody(raycastHit.collider))
                     {
-                        float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
+                        float to_me = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
                         if (to_me < matetome)
                         {
                             jiamateammate = raycastHit.collider;
@@ -258,7 +261,7 @@ public class Sensor : MonoBehaviour {
                 }
                 if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << raycastHit.collider.gameObject.layer)))
                 {
-                    float to_me = Vector3.Distance(transform.position, raycastHit.collider.transform.position);
+                    float to_me = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
                     if (to_me < enemytome)
                     {
                         nearestenemy = raycastHit.collider;
@@ -270,7 +273,7 @@ public class Sensor : MonoBehaviour {
 
         if (jiamateammate != null && nearestenemy != null)
         {
-            if (Vector3.Distance(transform.position, jiamateammate.transform.position) < Vector3.Distance(transform.position, nearestenemy.transform.position))
+            if (Vector3.Distance(Center.position, jiamateammate.transform.position) < Vector3.Distance(Center.position, nearestenemy.transform.position))
                 return;//意思就是说让jiamateammate和nearestenemy不为空
         }
         jiamateammate = null;
@@ -304,11 +307,11 @@ public class Sensor : MonoBehaviour {
     float p1_to_me, p2_to_me;
     int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
     {
-        p1.y = gameObject.transform.position.y;
-        p1_to_me = (p1 - gameObject.transform.position).magnitude;
+        p1.y = Center.position.y;
+        p1_to_me = (p1 - Center.position).magnitude;
 
-        p2.y = gameObject.transform.position.y;
-        p2_to_me = (p2 - gameObject.transform.position).magnitude;
+        p2.y = Center.position.y;
+        p2_to_me = (p2 - Center.position).magnitude;
 
         return p1_to_me > p2_to_me ? 1 : p1_to_me < p2_to_me ? -1 : 0;
     }
@@ -347,20 +350,20 @@ public class Sensor : MonoBehaviour {
         if (EnemiesByDistance.Count > 0 && AlliesByDistance.Count > 1)
         {
             float disToNearestEnemy2j, disToNearestAlly2j;
-            disToNearestEnemy2j = HorizontalDistanceCompare(EnemiesByDistance[0].transform.position, gameObject.transform.position);
-            disToNearestAlly2j = HorizontalDistanceCompare(AlliesByDistance[1].transform.position, gameObject.transform.position);
+            disToNearestEnemy2j = HorizontalDistanceCompare(EnemiesByDistance[0].transform.position, Center.position);
+            disToNearestAlly2j = HorizontalDistanceCompare(AlliesByDistance[1].transform.position, Center.position);
             return disToNearestEnemy2j >= disToNearestAlly2j && disToNearestEnemy2j < Mathf.Pow(judgmentRange, 2) && 
-            Vector3.Angle((EnemiesByDistance[0].transform.position - gameObject.transform.position), (AlliesByDistance[1].transform.position - gameObject.transform.position)) < 40;
+            Vector3.Angle((EnemiesByDistance[0].transform.position - Center.position), (AlliesByDistance[1].transform.position - Center.position)) < 40;
         }
         return false;
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, sensor_radius);
-        //Gizmos.DrawRay(transform.position,selfDataCenter.WholeT.forward * sensor_radius);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.white;
+    //    Gizmos.DrawWireSphere(Center.position, sensor_radius);
+    //    //Gizmos.DrawRay(transform.position,selfDataCenter.WholeT.forward * sensor_radius);
+    //}
 }
 
 //public List<Collider> getInnerRangeWallColliders() //这个函数的调用必须要确保每次都在update函数之后

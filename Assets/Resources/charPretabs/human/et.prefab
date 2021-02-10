@@ -41807,7 +41807,6 @@ GameObject:
   - component: {fileID: 2528620918878322548}
   - component: {fileID: 7027103738300868446}
   - component: {fileID: 8181722184899454752}
-  - component: {fileID: 5395038836420238830}
   - component: {fileID: 8747199787006875575}
   - component: {fileID: 2431596430110933349}
   - component: {fileID: 3908928393913922486}
@@ -41907,19 +41906,6 @@ MonoBehaviour:
   _Center: {fileID: 2658460366440925070}
   AT: 10
   criticalGaugeMode: 0
---- !u!114 &5395038836420238830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7930453913989577960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 907f3ba15e345411fb7341b328c3ed8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensor_radius: 15
 --- !u!114 &8747199787006875575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41974,7 +41960,6 @@ MonoBehaviour:
   geometryCenter: {fileID: 3917424891767807214}
   WholeT: {fileID: 2762312063442416219}
   _AudioSource: {fileID: 907746159943355574}
-  Sensor: {fileID: 5395038836420238830}
   Animation_Manger: {fileID: 2528620918878322548}
   _SkillCancelFlag: {fileID: 3830665473633381785}
   _BO_Ani_E: {fileID: 1647229161059095285}

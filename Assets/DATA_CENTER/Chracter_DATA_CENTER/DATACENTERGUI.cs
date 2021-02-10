@@ -71,8 +71,6 @@ public class DATACENTERGUI : Editor {
             myScript._AudioSource = myScript.WholeT.GetComponent<AudioSource>();
             myScript.Animation_Manger = myScript.gameObject.GetComponent<Animation_Manger>();
             myScript.Animation_Manger.Animator = myScript.WholeT.GetComponent<Animator>();
-            myScript.Sensor = myScript.gameObject.GetComponent<Sensor>();
-            myScript.Sensor.sensor_radius = 15f;
             myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
             myScript._SkillCancelFlag._C = myScript;
             myScript.FightDataRef = myScript.gameObject.GetComponent<FightAttriCalReference>();
@@ -286,11 +284,6 @@ public class DATACENTERGUI : Editor {
             myScript._BasicPhysicSupport.floorCheckersT = EditorGUILayout.ObjectField("Floor Checker", myScript._BasicPhysicSupport.floorCheckersT, typeof(Transform), true) as Transform;
             EditorGUILayout.EndVertical();
         }
-
-        GUILayout.Space(5f);
-        EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-        myScript.Sensor = EditorGUILayout.ObjectField("Sensor", myScript.Sensor, typeof(Sensor), true) as Sensor;
-        EditorGUILayout.EndVertical();
 
         title.normal.textColor = Color.red;
         GUILayout.Space(5f);

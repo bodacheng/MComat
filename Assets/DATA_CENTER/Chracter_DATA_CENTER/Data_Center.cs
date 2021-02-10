@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Soul;
+using Unity.Jobs;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
 //Those paremeters are sent to all parts of character from here.
@@ -10,7 +11,6 @@ using Soul;
 [RequireComponent(typeof(Animation_Manger))]
 [RequireComponent(typeof(Controller))]
 [RequireComponent(typeof(FightAttriCalReference))]
-[RequireComponent(typeof(Sensor))]
 [RequireComponent(typeof(ShaderManager))]
 [RequireComponent(typeof(BuffsRunner))]
 [RequireComponent(typeof(BlendShapeProxy))]
@@ -22,7 +22,7 @@ public partial class Data_Center : MonoBehaviour
     public Transform geometryCenter;
     public Transform WholeT;
     public AudioSource _AudioSource;
-    public Sensor Sensor;
+    public Sensor Sensor = new Sensor();
     public Animation_Manger Animation_Manger;
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
@@ -63,6 +63,9 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!phase1Initialized)
         {
+            this.Sensor.Center = this.geometryCenter;
+            this.Sensor.sensor_radius = 15f;
+
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
