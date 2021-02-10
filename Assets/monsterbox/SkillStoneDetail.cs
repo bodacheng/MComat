@@ -45,7 +45,7 @@ namespace mainMenu
         // 额外生成一个技能石图像
         void IconForShow(string skillID)
         {
-            SKStoneItem item = MySkillStonesReader.GenerateNewStoneModel_New(skillID, false);
+            SKStoneItem item = MySkillStonesReader.GenerateNewStoneModel_Memory(skillID, false);
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT) 

@@ -21,6 +21,27 @@ namespace dataAccess
                 model => {
                     infos = model.skillStoneOfPlayerInfoList;
                     int i = 1;
+
+                    void readOne(SkillStoneOfPlayerInfoModel one, int a)
+                    {
+                        if (a == 1)
+                            LoadingCanvas.target.TurnOnProcessDescription(true);
+                        switch (apiLanguage)
+                        {
+                            case ApiLanguage.JaJp:
+                                LoadingCanvas.target.NowProcess("スキルストーン を読み込み中", (float)a / infos.Count);
+                                break;
+                            default:
+                                LoadingCanvas.target.NowProcess("正在构成技能石模型", (float)a / infos.Count);
+                                break;
+                        }
+                        Read(one);
+                        if (a == infos.Count)
+                        {
+                            LoadingCanvas.target.TurnOnProcessDescription(false);
+                        }
+                    }
+
                     foreach (SkillStoneOfPlayerInfoModel one in infos)
                     {
                         SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
@@ -30,27 +51,7 @@ namespace dataAccess
                             LoadingCanvas.target.TurnOnProcessDescription(false);
                             continue;
                         }
-                        IEnumerator readOne(int a)
-                        {
-                            if (a == 1)
-                                LoadingCanvas.target.TurnOnProcessDescription(true);
-                            switch (apiLanguage)
-                            {
-                                case ApiLanguage.JaJp:
-                                    LoadingCanvas.target.NowProcess("スキルストーン を読み込み中", (float)a / infos.Count);
-                                    break;
-                                default:
-                                    LoadingCanvas.target.NowProcess("正在构成技能石模型", (float)a / infos.Count);
-                                    break;
-                            }
-                            
-                            yield return Read(one);
-                            if (a == infos.Count)
-                            {
-                                LoadingCanvas.target.TurnOnProcessDescription(false);
-                            }
-                        }
-                        SingleThreadProcesser.backup.Run(readOne(i));
+                        readOne(one, i);
                         i++;
                     }
                 },
@@ -61,7 +62,7 @@ namespace dataAccess
                 apiLanguage
             );
         }
-        
+
         static IEnumerator Load(GetSkillStoneOfPlayerInfoForm form, SuccessDelegate<GetSkillStoneOfPlayerInfoModel> success, FailDelegate<GetSkillStoneOfPlayerInfoModel> fail, ApiLanguage apiLanguage)
         {
             switch (AccountSet.ReferenceMode)

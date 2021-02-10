@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
 using System.Collections.Generic;

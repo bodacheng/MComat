@@ -11,43 +11,39 @@ namespace dataAccess
         public static IEnumerator Add(SkillStoneOfPlayerInfoModel one)
         {
             DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
-            yield return GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
+            GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
             yield return Update(one.skillStoneOfPlayerId);
         }
         
-        public static IEnumerator Read(SkillStoneOfPlayerInfoModel one)
+        public static void Read(SkillStoneOfPlayerInfoModel one)
         {
             DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
-            yield return GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
+            GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
         }
         
         /// <summary>
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
         /// <param name="skillStoneOfPlayerId">技能石账户id</param>
-        public static IEnumerator GenerateStoneModelByAccID(string skillStoneOfPlayerId)
+        public static void GenerateStoneModelByAccID(string skillStoneOfPlayerId)
         {
             if (RenderModelDic.ContainsKey(skillStoneOfPlayerId))
             {
                 if (RenderModelDic[skillStoneOfPlayerId] != null)
-                    yield break;
+                    return;
             }
             SkillStoneOfPlayerInfoModel StoneOfPlayerInfo = Get(skillStoneOfPlayerId);
-            IEnumerator Generate = GenerateNewStoneModel(StoneOfPlayerInfo.skillId, true);
-            yield return Generate;
-            if (Generate.Current == null)
-                yield break;
-            SKStoneItem item = (SKStoneItem)Generate.Current;
+            SKStoneItem item = GenerateNewStoneModel_Resource(StoneOfPlayerInfo.skillId, true);
             item.Inherent = StoneOfPlayerInfo.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(SkillStonesBox._stonesTempContainer);
-            
+
             DicAdd<string, SKStoneItem>.Add(RenderModelDic, skillStoneOfPlayerId, item);
         }
 
-        public static SKStoneItem GenerateNewStoneModel_New(string skillID, bool openStoneFeature)
+        public static SKStoneItem GenerateNewStoneModel_Memory(string skillID, bool openStoneFeature)
         {
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             if (skillConfig == null)
@@ -69,35 +65,16 @@ namespace dataAccess
 
         // 生成展示用技能石（额外模型）
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
-        public static IEnumerator GenerateNewStoneModel(string skillID, bool openStoneFeature)
+        public static SKStoneItem GenerateNewStoneModel_Resource(string skillID, bool openStoneFeature)
         {
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             if (skillConfig == null)
             {
-                yield return null;
-                yield break;
+                return null;
             }
 
             SKStoneItem item;
-            IEnumerator process = null;
-            switch (ResourceLoadingSetting.IconLoadingMode)
-            {
-                case ResourceLoadMode.CachAB:
-                    process = (SkillIconsDic.Instance.FindSkillIconByCach(skillID));
-                    break;
-                case ResourceLoadMode.Resource:
-                    process = (SkillIconsDic.Instance.FindSkillIconByResource(skillID));
-                    break;
-                case ResourceLoadMode.StreamingAssetAB:
-                    break;
-            }
-            yield return process;
-            if (process.Current == null)
-            {
-                yield return null;
-                yield break;
-            }
-            GameObject Icon = (GameObject)process.Current;
+            GameObject Icon = SkillIconsDic.Instance.FindSkillIconByResource_P(skillID);
             GameObject newIcon = Object.Instantiate(Icon);
             item = newIcon.GetComponent<SKStoneItem>();
             if (item == null)
@@ -106,7 +83,7 @@ namespace dataAccess
             }
             item._SkillConfig = skillConfig;
             item.enabled = openStoneFeature;
-            yield return item;
+            return item;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace dataAccess
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
                     yield break;
                 }
-                yield return GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
+                GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
             }
             yield break;
         }
