@@ -9,7 +9,7 @@ using Skill;
 // 但目前来说我们还不需要。或许可以制作一个简单的通过logger分析条件组下各个行为有没有效益，并调整优先级的脚本，但这个点到为止。
 namespace Soul
 {
-    public class Controller : MonoBehaviour
+    public class Controller
     {
         readonly SSIMultiDictionary Triggerd = new SSIMultiDictionary();
         public bool TestMode { get; set; } = false;
@@ -147,9 +147,6 @@ namespace Soul
 
         string Condition;
         List<KeyValuePair<string, string>> finalConditionStakeKeySet = new List<KeyValuePair<string, string>>();
-
-
-
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
             Triggerd.main.Clear();

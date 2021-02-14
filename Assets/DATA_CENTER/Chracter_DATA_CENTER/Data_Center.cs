@@ -8,11 +8,7 @@ using Unity.Jobs;
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
 //Those paremeters are sent to all parts of character from here.
 [RequireComponent(typeof(BehaviorRunner))]
-[RequireComponent(typeof(Animation_Manger))]
-[RequireComponent(typeof(Controller))]
-[RequireComponent(typeof(FightAttriCalReference))]
 [RequireComponent(typeof(ShaderManager))]
-[RequireComponent(typeof(BuffsRunner))]
 [RequireComponent(typeof(BlendShapeProxy))]
 public partial class Data_Center : MonoBehaviour
 {
@@ -23,15 +19,14 @@ public partial class Data_Center : MonoBehaviour
     public Transform WholeT;
     public AudioSource _AudioSource;
     public Sensor Sensor = new Sensor();
-    public Animation_Manger Animation_Manger;
+    public Animation_Manger Animation_Manger = new Animation_Manger();
+    public FightAttriCalReference FightDataRef = new FightAttriCalReference();
+    public BuffsRunner buffsRunner = new BuffsRunner();
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
-    public FightAttriCalReference FightDataRef;
     public BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
     public BasicPhysicSupport _BasicPhysicSupport;
     public BehaviorRunner _MyBehaviorRunner;
-    public Controller controller;
-    public BuffsRunner buffsRunner;
     public ResistanceManager _ResistanceManager;
     public ShaderManager _ShaderManager;
     public BlendShapeProxy blendShapeProxy;
@@ -63,8 +58,10 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!phase1Initialized)
         {
+            Animation_Manger.Animator =  WholeT.GetComponent<Animator>();
             this.Sensor.Center = this.geometryCenter;
             this.Sensor.sensor_radius = 15f;
+            FightDataRef._Center = this;
 
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);

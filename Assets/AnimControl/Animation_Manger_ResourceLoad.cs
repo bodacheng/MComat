@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-public partial class Animation_Manger : MonoBehaviour{
+public partial class Animation_Manger{
 
     public IEnumerator PreloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
     {

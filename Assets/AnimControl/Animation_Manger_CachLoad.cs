@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Animation_Manger : MonoBehaviour
+public partial class Animation_Manger
 {
     /// <summary>
     /// CachVersion

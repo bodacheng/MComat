@@ -24342,11 +24342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5923838457233646209}
   - component: {fileID: 6544547620114995247}
-  - component: {fileID: 3223728063866843164}
-  - component: {fileID: 6730575530034209811}
-  - component: {fileID: 1834380818070187256}
   - component: {fileID: 7308519143849233649}
-  - component: {fileID: 1552464820491268052}
   - component: {fileID: 7577628410818382092}
   - component: {fileID: 1095450809162554161}
   m_Layer: 0
@@ -24384,7 +24380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillEntity_List: []
   _SkillCancelFlag: {fileID: 4848944393571123126}
-  controller: {fileID: 6730575530034209811}
   CurrentSKillEntity:
     SkillID: 
     REAL_NAME: 
@@ -24403,47 +24398,6 @@ MonoBehaviour:
   AI_States_path: 
   usingScript: {fileID: 0}
   OptionsForButtonRefresh: []
---- !u!114 &3223728063866843164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5210362535211434828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27066a43a93d34e8785a416113ee95fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 7471859487403949901}
-  _toUse: {fileID: 0}
---- !u!114 &6730575530034209811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5210362535211434828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69393890d808a4c7f9b5db8a3344cf59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1834380818070187256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5210362535211434828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64875388d5fcb4231ab05c2b5dfa741c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Center: {fileID: 1095450809162554161}
-  AT: 10
-  criticalGaugeMode: 0
 --- !u!114 &7308519143849233649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24458,18 +24412,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pOFXes:
   - {fileID: 4797167972111862999}
---- !u!114 &1552464820491268052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5210362535211434828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35923ae9cfe124110a05065dcd59dfd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7577628410818382092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24498,15 +24440,11 @@ MonoBehaviour:
   geometryCenter: {fileID: 5923838457233646209}
   WholeT: {fileID: 7471859487411720391}
   _AudioSource: {fileID: 2311726169599591066}
-  Animation_Manger: {fileID: 3223728063866843164}
   _SkillCancelFlag: {fileID: 4848944393571123126}
   _BO_Ani_E: {fileID: 8433584119817771657}
-  FightDataRef: {fileID: 1834380818070187256}
   bO_Weapon_Animation_Events: {fileID: 7591814493894485471}
   _BasicPhysicSupport: {fileID: 5057786350275387707}
   _MyBehaviorRunner: {fileID: 6544547620114995247}
-  controller: {fileID: 6730575530034209811}
-  buffsRunner: {fileID: 1552464820491268052}
   _ResistanceManager: {fileID: 1866218318361429664}
   _ShaderManager: {fileID: 7308519143849233649}
   blendShapeProxy: {fileID: 7577628410818382092}
@@ -49085,7 +49023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHealth: {fileID: 1834380818070187256}
+  Center: {fileID: 0}
   myColliderMustEquip: {fileID: 0}
 --- !u!1 &7471859487411358859
 GameObject:
@@ -49146,7 +49084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHealth: {fileID: 1834380818070187256}
+  Center: {fileID: 0}
   myColliderMustEquip: {fileID: 0}
 --- !u!1 &7471859487411358861
 GameObject:
@@ -49521,7 +49459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHealth: {fileID: 0}
+  Center: {fileID: 0}
   myColliderMustEquip: {fileID: 2311142884212797873}
 --- !u!1 &7471859487411358915
 GameObject:
@@ -50916,7 +50854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainHealth: {fileID: 1834380818070187256}
+  Center: {fileID: 1095450809162554161}
   myColliderMustEquip: {fileID: 1659744858195279823}
 --- !u!1 &7471859487411359013
 GameObject:

@@ -52,7 +52,7 @@ namespace mainMenu
         {
             if (focusingC != null)
             {
-                if (focusingC.Animation_Manger != null && focusingC.Animation_Manger.Animator != null && focusingC.Animation_Manger.gameObject.activeSelf)
+                if (focusingC.Animation_Manger != null && focusingC.Animation_Manger.Animator != null && focusingC.WholeT.gameObject.activeSelf)
                 {
                     if (focusingC.Animation_Manger.Animator.GetBool("in_transition") == false && focusingC.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                     {

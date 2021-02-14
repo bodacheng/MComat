@@ -3,14 +3,18 @@
 public class BO_Limb : MonoBehaviour
 {
     [Tooltip("What is this Limb attached to? Select the desired BS Health script which stores the Health of this Object (for example in one of the limb's parents.")]
-    public FightAttriCalReference MainHealth;
+    public Data_Center Center;
     [Tooltip("ColliderOfThisHitBox.MUST HAVE")]
     public Collider myColliderMustEquip;
 
-    void Awake()
+    void Start()
     {
-        if (MainHealth != null)
-            MainHealth.AddToBOHitBoxeComponent(this);
+        if (Center != null)
+            Center.FightDataRef.AddToBOHitBoxeComponent(this);
+        else
+        {
+            Debug.Log("存在未启用的BO_Limb"+ gameObject);
+        }
     }
 
     public void INI()
@@ -26,9 +30,9 @@ public class BO_Limb : MonoBehaviour
             return;
         }
 
-        if (MainHealth == null)//就是说，在awake阶段角色必须被适配mainhealth
+        if (Center == null)
         {
-            Debug.Log("hitbox" + this.gameObject.name + "由于没有适配health体而将尝试关闭");
+            Debug.Log("hitbox" + this.gameObject.name + "由于没有适配Center而将尝试关闭");
             enabled = false;
             return;
         }
@@ -39,8 +43,8 @@ public class BO_Limb : MonoBehaviour
         if (box.isTrigger)
             return false;
         return
-        MainHealth._Center._TeamConfig.enemyLayerMask == (MainHealth._Center._TeamConfig.enemyLayerMask | (1 << box.gameObject.layer)) || 
-        (MainHealth._Center._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
+        Center._TeamConfig.enemyLayerMask == (Center._TeamConfig.enemyLayerMask | (1 << box.gameObject.layer)) || 
+        (Center._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
     }
 }
     //void OnTriggerExit(Collider other)

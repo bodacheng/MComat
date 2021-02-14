@@ -69,19 +69,13 @@ public class DATACENTERGUI : Editor {
             // 关于collisionDetectionMode ，计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
             // 设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
             myScript._AudioSource = myScript.WholeT.GetComponent<AudioSource>();
-            myScript.Animation_Manger = myScript.gameObject.GetComponent<Animation_Manger>();
-            myScript.Animation_Manger.Animator = myScript.WholeT.GetComponent<Animator>();
             myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
             myScript._SkillCancelFlag._C = myScript;
-            myScript.FightDataRef = myScript.gameObject.GetComponent<FightAttriCalReference>();
             myScript.FightDataRef._Center = myScript;
             myScript._BO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
             myScript._BO_Ani_E._DATA_CENTER = myScript;
-            myScript.controller = myScript.gameObject.GetComponent<Controller>();
             myScript._MyBehaviorRunner = myScript.gameObject.GetComponent<BehaviorRunner>();            
             myScript._MyBehaviorRunner._SkillCancelFlag = myScript._SkillCancelFlag;
-            myScript._MyBehaviorRunner.controller = myScript.controller;
-            myScript.buffsRunner = myScript.gameObject.GetComponent<BuffsRunner>();
             myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();                       
             myScript._BasicPhysicSupport = myScript.WholeT.GetComponent<BasicPhysicSupport>();
             myScript._BasicPhysicSupport._DATA_CENTER = myScript;
@@ -120,7 +114,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript.FightDataRef;
+                focusingHitBox.Center = myScript;
             }
             if (myScript.left_arm_hitbox_t != null)
             {
@@ -134,7 +128,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript.FightDataRef;
+                focusingHitBox.Center = myScript;
             }
             if (myScript.right_leg_hitbox_t != null)
             {
@@ -148,7 +142,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript.FightDataRef;
+                focusingHitBox.Center = myScript;
             }
             if (myScript.left_leg_hitbox_t != null)
             {
@@ -162,7 +156,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript.FightDataRef;
+                focusingHitBox.Center = myScript;
             }
             if (myScript.spine_hitbox_t != null)
             {
@@ -176,7 +170,7 @@ public class DATACENTERGUI : Editor {
                 if (focusingHitBox == null)
                     myScript.spine_hitbox_t.gameObject.AddComponent<BO_Limb>();
                 focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.MainHealth = myScript.FightDataRef;
+                focusingHitBox.Center = myScript;
             }
 
             string bladeName;

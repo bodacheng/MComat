@@ -17,7 +17,7 @@ namespace Soul
         #endregion
         
         #region 辅助模块：控制器
-        public Controller controller;
+        public Controller controller = new Controller();
         #endregion
         
         #region 运行时活参数

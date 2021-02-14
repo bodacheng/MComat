@@ -7,7 +7,6 @@ namespace HittingDetection
     public partial class BO_Marker_Manager : MonoBehaviour
     {
         FightAttriCalReference _Raw_Target_Instance;//A single target which was hit.
-        FightAttriCalReference CalReference;
         BO_Limb _BO_Hitbox;
         Vector3 _TrailModeStartPoint;
         IDictionary<Collider, HitPointPara> BallDetectHitPool;
@@ -37,7 +36,7 @@ namespace HittingDetection
                                     }
                                     if (_Shields_Hit.Contains(TheS.transform) == false // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
                                         && _Used_Targets.Contains(TheS.transform) == false //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
-                                        && _Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算 一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                        && _Used_Targets.Contains(TheS._ownerFightAttriCalReference._Center.geometryCenter) == false) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算 一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
                                     {
                                         if (TheS._AdvancedShieldDetection)
                                         {
@@ -68,7 +67,7 @@ namespace HittingDetection
                                             //就比如说一个弧形攻击，打中盾牌的瞬间这个弧形攻击动作还是会继续，那攻击点由于动画问题穿透了对方的盾牌打到对方身体话，就和我们对攻击防御演出的认识相违背了。
                                             _Shields_Hit.Add(TheS.transform);
                                             HitShield = true;
-                                            _Used_Targets.Add(TheS._ownerFightAttriCalReference.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
+                                            _Used_Targets.Add(TheS._ownerFightAttriCalReference._Center.geometryCenter);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
                                             _ShiledHitPositions.Add(_hits[hit_target_index].point);
                                             if (_ShiledHitPositions.Count > 0)
                                             {
@@ -117,7 +116,6 @@ namespace HittingDetection
  
                             //_Raw_Target_Instance这个里面全是mainhealth，就是mainhealth，不是含着mainhealth的transform
                             //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
-                            CalReference = _hits[hit_target_index].collider.GetComponent<FightAttriCalReference>();
                             _BO_Hitbox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
                             if (!_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) && !_Used_Targets.Contains(_hits[hit_target_index].collider.transform))
                             {
@@ -134,21 +132,21 @@ namespace HittingDetection
                                 //方式2：hitbox模式
                                 if (_BO_Hitbox != null)
                                 {
-                                    if (!_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform)) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                    if (!_Used_Targets.Contains(_BO_Hitbox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
                                     {
                                         HitFlesh = true;
-                                        _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                        _Raw_Target_Instance = _BO_Hitbox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
                                         _Used_Targets.Add(_BO_Hitbox.transform);
-                                        _Used_Targets.Add(_BO_Hitbox.MainHealth.transform);
+                                        _Used_Targets.Add(_BO_Hitbox.Center.geometryCenter);
                                     }
                                 }
                                 
                                 if (_Raw_Target_Instance != null)
                                 {
-                                    _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
+                                    _Targets_Raw_Hit.Add(_Raw_Target_Instance._Center.geometryCenter);
                                     _TrailModeStartPoint = _hits[hit_target_index].point;
                                     _TrailModeStartPoint = _TrailModeStartPoint + (_hits[hit_target_index].transform.position - _TrailModeStartPoint) * 0.3f;
-                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference, _TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance.transform.position-_TrailModeStartPoint,Vector3.up)));
+                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference, _TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance._Center.geometryCenter.position-_TrailModeStartPoint,Vector3.up)));
                                     
                                     HitPointPara hitPointPara = new HitPointPara()
                                     {
@@ -199,7 +197,7 @@ namespace HittingDetection
 
                                         if (!_Shields_Hit.Contains(TheS.transform) // 本帧之内只要有武器上的一个mark打中了盾牌，那不再考虑其他mark是否打中盾牌
                                             && !_Used_Targets.Contains(TheS.transform) //used_target只在一轮攻击后才清空，所以这里的意思应该是：如果打中的这个盾牌物体在这一轮里已经起过一次作用，那就不再研究。
-                                            && !_Used_Targets.Contains(TheS._ownerFightAttriCalReference.transform)) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
+                                            && !_Used_Targets.Contains(TheS._ownerFightAttriCalReference._Center.geometryCenter)) //所打中的盾牌对应的肉体已经在本轮攻击起过一次作用，那也不再详细计算
                                         {
                                             if (TheS._AdvancedShieldDetection)
                                             {
@@ -220,7 +218,7 @@ namespace HittingDetection
                                                 //就比如说一个弧形攻击，打中盾牌的瞬间这个弧形攻击动作还是会继续，那攻击点由于动画问题穿透了对方的盾牌打到对方身体话，就和我们对攻击防御演出的认识相违背了。
                                                 _Shields_Hit.Add(TheS.transform);
                                                 HitShield = true;
-                                                _Used_Targets.Add(TheS._ownerFightAttriCalReference.transform);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
+                                                _Used_Targets.Add(TheS._ownerFightAttriCalReference._Center.geometryCenter);//这一行与接下来含（* *）的两行紧密对应(不管打中盾牌的主人是谁，主人都因为受盾牌保护而不会收到攻击了)
 
                                                 _ShiledHitPositions.Add(Hit_C.Key.ClosestPoint(_markers[i].transform.position));//ClosestPointOnBounds
                                                 if (_ShiledHitPositions.Count > 0)
@@ -259,7 +257,6 @@ namespace HittingDetection
                                     continue;
                                 }
 
-                                CalReference = Hit_C.Key.GetComponent<FightAttriCalReference>();
                                 _BO_Hitbox = Hit_C.Key.GetComponent<BO_Limb>();
                                 if (!_Targets_Raw_Hit.Contains(Hit_C.Key.transform) && !_Used_Targets.Contains(Hit_C.Key.transform))
                                 {
@@ -275,18 +272,18 @@ namespace HittingDetection
                                     //方式2：hitbox模式
                                     if (_BO_Hitbox != null)
                                     {
-                                        if (!_Used_Targets.Contains(_BO_Hitbox.MainHealth.transform)) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                        if (!_Used_Targets.Contains(_BO_Hitbox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
                                         {
                                             HitFlesh = true;
-                                            _Raw_Target_Instance = _BO_Hitbox.MainHealth;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                            _Raw_Target_Instance = _BO_Hitbox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
                                             _Used_Targets.Add(_BO_Hitbox.transform);
-                                            _Used_Targets.Add(_BO_Hitbox.MainHealth.transform);
+                                            _Used_Targets.Add(_BO_Hitbox.Center.geometryCenter);
                                         }
                                     }
 
                                     if (_Raw_Target_Instance != null)
                                     {
-                                        _Targets_Raw_Hit.Add(_Raw_Target_Instance.transform);
+                                        _Targets_Raw_Hit.Add(_Raw_Target_Instance._Center.geometryCenter);
                                         hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _MyOwnerCalReference, Hit_C.Value.pos, Hit_C.Value.qua));
                                         AddWeaponEnergyExaust(Hit_C.Value);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;

@@ -17,7 +17,6 @@ namespace Soul
         public ResistanceManager _ResistanceManager;
         public BasicPhysicSupport _BasicPhysicSupport;
         public Sensor Sensor;
-        public Controller controller;
         public Animator _Animator;
         public SkillCancelFlag _SkillCancelFlag;
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
@@ -81,7 +80,6 @@ namespace Soul
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
-            this.controller = _DATA_CENTER.controller;
             this._SkillCancelFlag = _DATA_CENTER._SkillCancelFlag;
             this._BO_Ani_E = _DATA_CENTER._BO_Ani_E;
             this._Weapon_Animation_Events = _DATA_CENTER.bO_Weapon_Animation_Events;

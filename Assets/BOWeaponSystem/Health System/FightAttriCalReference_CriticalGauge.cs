@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UniRx;
 
-public partial class FightAttriCalReference : MonoBehaviour
+public partial class FightAttriCalReference
 {
     public ReactiveProperty<int> CriticalGauge { get; set; } = new ReactiveProperty<int>();
         

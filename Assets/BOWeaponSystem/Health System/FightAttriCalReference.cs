@@ -4,17 +4,12 @@ using UniRx;
 using HittingDetection;
 using Log;
 
-public partial class FightAttriCalReference : MonoBehaviour
+public partial class FightAttriCalReference
 {
     public static List<Collider> AllMeatColliders = new List<Collider>();
     
-    [Tooltip("数据中心")]
     public Data_Center _Center;
-    
-    [Tooltip("当前攻击力")]
     public float AT = 10;
-    
-    [Tooltip("当前吸气模式")]
     public CriticalGaugeMode criticalGaugeMode;
     
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
@@ -69,7 +64,6 @@ public partial class FightAttriCalReference : MonoBehaviour
     
     public void EnableAllHitBoxCollider(bool _bool)
     {
-        if (myBOHitBoxeComponent != null)
         foreach (BO_Limb hitbox in myBOHitBoxeComponent)
         {
             if (hitbox.myColliderMustEquip != null)
@@ -79,15 +73,12 @@ public partial class FightAttriCalReference : MonoBehaviour
         
     public void ChangeLayerForAllSelfColliders(int layer)
     {
-        if (myBOHitBoxeComponent != null)
+        for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
         {
-            for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
-            {
-                BO_Limb _BO_Hitbox = myBOHitBoxeComponent[i];
-                _BO_Hitbox.gameObject.layer = layer;
-            }
+            BO_Limb _BO_Hitbox = myBOHitBoxeComponent[i];
+            _BO_Hitbox.gameObject.layer = layer;
         }
-        gameObject.layer = layer;
+        _Center.geometryCenter.gameObject.layer = layer;
     }
     
     public bool IfMyBody(Collider collider) => myColliders.Contains(collider);
@@ -159,7 +150,7 @@ public partial class FightAttriCalReference : MonoBehaviour
             EffectsManager.GenerateEffect(temp, FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
             v_Damage.damageHappenPoint,
             v_Damage.CutRotation,
-            v_Damage.from_weapon.effectSpreadOnBody ? transform : null);
+            v_Damage.from_weapon.effectSpreadOnBody ? _Center.geometryCenter : null);
         }
     }
 

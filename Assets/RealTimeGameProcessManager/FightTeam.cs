@@ -158,7 +158,7 @@ namespace FightScene
         {
             foreach (Data_Center oneMember in TeamMembers.values)
             {
-                oneMember.controller.TestMode = false;
+                oneMember._MyBehaviorRunner.controller.TestMode = false;
                 RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
                 oneMember._MyBehaviorRunner.ChangeToWaitingState();
             }
@@ -168,7 +168,7 @@ namespace FightScene
         {
             foreach (Data_Center oneMember in TeamMembers.values)
             {
-                oneMember.controller.TestMode = true;
+                oneMember._MyBehaviorRunner.controller.TestMode = true;
                 RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
                 oneMember._MyBehaviorRunner.ChangeToTestMode();
             }

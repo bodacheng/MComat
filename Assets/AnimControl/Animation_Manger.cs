@@ -10,7 +10,7 @@ using DG.Tweening;
 // 再去向第三者状态迁移，之前的迁移过程并不会受干扰，后触发的迁移条件也并不会被遗忘，一切会按顺序进行
 // 从而也就是说对最后要触发那个状态来说，从条件激活到开始进入会发生一点延迟。
 
-public partial class Animation_Manger : MonoBehaviour
+public partial class Animation_Manger
 {
     public Animator Animator;
     public AnimationClip _toUse;
@@ -42,7 +42,7 @@ public partial class Animation_Manger : MonoBehaviour
             {
                 return _toUse;
             }
-            Debug.Log("邪门了." + clip_name + " from 角色：" + gameObject);
+            Debug.Log("邪门了." + clip_name);
         }
         return null;
     }

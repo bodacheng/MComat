@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Animation_Manger : MonoBehaviour
+public partial class Animation_Manger
 {
     void PlayLayerAnim_clip(AnimationClip clip, bool in_transition , float Duration)
     {

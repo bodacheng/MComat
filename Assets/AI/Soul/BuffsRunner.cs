@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BuffsRunner : MonoBehaviour
+public class BuffsRunner
 {    
     #region 自定义携程
     public readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();

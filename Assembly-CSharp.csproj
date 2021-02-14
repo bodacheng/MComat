@@ -309,7 +309,6 @@
     <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
     <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
     <Compile Include="Assets\EffectsSystem\HitBoxVarityEvents.cs" />
-    <Compile Include="Assets\EffectsSystem\RanSe.cs" />
     <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
     <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
     <Compile Include="Assets\FPSLabel\FPSLabel.cs" />

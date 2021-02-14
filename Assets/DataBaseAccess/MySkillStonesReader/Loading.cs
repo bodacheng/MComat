@@ -20,8 +20,6 @@ namespace dataAccess
                 form,
                 model => {
                     infos = model.skillStoneOfPlayerInfoList;
-                    int i = 1;
-
                     void readOne(SkillStoneOfPlayerInfoModel one, int a)
                     {
                         if (a == 1)
@@ -42,6 +40,7 @@ namespace dataAccess
                         }
                     }
 
+                    int i = 1;
                     foreach (SkillStoneOfPlayerInfoModel one in infos)
                     {
                         SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
