@@ -75,7 +75,6 @@ public class StartUpPresentation : MonoBehaviour
                                 Starter.BeginLocalTestMode();
                                 break;
                             case PlayerInfoRefMode.remoteTestPlayer:
-                                Starter.BeginRemoteTestMode();
                                 break;
                         }
                         Watershed.Dispose();

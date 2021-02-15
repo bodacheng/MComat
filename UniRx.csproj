@@ -544,15 +544,6 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
-    <Reference Include="gs2_websocket-sharp">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/io.gs2.unity.sdk@2020.11.1/Plugins/gs2_websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="gs2_Google.Protobuf">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/io.gs2.unity.sdk@2020.11.1/Plugins/gs2_Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="gs2_LitJSON">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/io.gs2.unity.sdk@2020.11.1/Plugins/gs2_LitJSON.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>

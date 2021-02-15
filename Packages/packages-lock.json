@@ -256,6 +256,15 @@
       },
       "url": "https://upm.gs2.io/npm"
     },
+    "io.gs2.unity.weave.stamina": {
+      "version": "1.0.8",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "io.gs2.unity.weave.login": "1.0.15"
+      },
+      "url": "https://upm.gs2.io/npm"
+    },
     "io.gs2.unity.weave.unit": {
       "version": "1.0.9",
       "depth": 0,

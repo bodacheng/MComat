@@ -109,12 +109,6 @@ namespace dataAccess
                     }
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return TestGS2(
-                        form,
-                        success,
-                        fail,
-                        apiLanguage
-                    );
 
                     //yield return ApiCaller.Instance.Post<MonsterTeamOfPlayerModel , GetMonsterTeamOfPlayerForm> 
                     //    ("http://160.16.187.230/AssetStoreFight/team/getMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage), 

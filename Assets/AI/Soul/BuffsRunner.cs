@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class BuffsRunner
-{    
+{
     #region 自定义携程
     public readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
     readonly List<CustomCoroutine> endedcustomCoroutines = new List<CustomCoroutine>();

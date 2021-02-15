@@ -10,19 +10,6 @@ public class Starter : MonoBehaviour
     public PlayerInfoRefMode ProjectPlayerInfoRefMode;
     public bool enterFrontPageFirst;
 
-    // 测试中的远程模式
-    public void BeginRemoteTestMode()
-    {
-        IEnumerator temp()
-        {
-            AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
-            yield return Auth.target.Gs2Login();
-            EnterFrontScene();
-        }
-        
-        StartCoroutine(temp());
-    }
-
     // 启动本地测试模式
     public void BeginLocalTestMode()
     {

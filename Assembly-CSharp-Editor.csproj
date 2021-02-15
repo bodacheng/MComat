@@ -433,15 +433,6 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
-    <Reference Include="gs2_websocket-sharp">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/io.gs2.unity.sdk@2020.11.1/Plugins/gs2_websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="gs2_Google.Protobuf">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/io.gs2.unity.sdk@2020.11.1/Plugins/gs2_Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="gs2_LitJSON">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/io.gs2.unity.sdk@2020.11.1/Plugins/gs2_LitJSON.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
@@ -814,15 +805,6 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Gs2.Weave.Gold.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Gold.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Core.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Login.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Login.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Monetization">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
@@ -832,68 +814,20 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Gs2.Weave.Party">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Party.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.JobQueue.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.JobQueue.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Unit">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Unit.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Experience.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Experience.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Inventory">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Inventory.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.MoneyStore">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.MoneyStore.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Gacha.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Gacha.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Login">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Login.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Money.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Money.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Gold">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Gold.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Gs2.Weave.JobQueue">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.JobQueue.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.EditorExtension">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.EditorExtension.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Experience">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Experience.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Inventory.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Inventory.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Unit.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Unit.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
@@ -907,20 +841,11 @@
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Gs2.Weave.Money">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Money.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.MoneyStore.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.MoneyStore.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
@@ -928,23 +853,11 @@
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Gs2.Weave.Credential">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Credential.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Gacha">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Gacha.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Party.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Party.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Core">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -954,9 +867,6 @@
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Gs2.Weave.Credential.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Gs2.Weave.Credential.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

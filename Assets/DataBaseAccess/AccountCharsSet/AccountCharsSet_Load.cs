@@ -56,20 +56,6 @@ namespace dataAccess
                 case PlayerInfoRefMode.formalVersion:
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    // GS2 version
-                    List<MonsterOfPlayerDetailModel> returnValue = new List<MonsterOfPlayerDetailModel>();
-                    for (int i = 0; i < MonstersConfigTable.Instance.rowList.Count; i++)
-                    {
-                        IEnumerator getOneUnit = LoadOneUnit(MonstersConfigTable.Instance.rowList[i].RECORD_ID);
-                        yield return getOneUnit;
-                        if (getOneUnit.Current != null)
-                        {
-                            MonsterOfPlayerDetailModel one = (MonsterOfPlayerDetailModel)getOneUnit.Current;
-                            returnValue.Add(one);
-                        }
-                    }
-                    listModel.monsterOfPlayerList = returnValue;
-                    success(listModel);
                     break;
             }
         }
