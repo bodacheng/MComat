@@ -30,6 +30,7 @@ public class Starter : MonoBehaviour
     
     IEnumerator _BeginLocalTestMode()
     {
+        PlayFabLogin.CustomIDLogin();
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         EnterFrontScene();
         yield break;
@@ -70,9 +71,10 @@ public class Starter : MonoBehaviour
     /// <summary>
     /// 是否使用提前准备好的存档文件，即Resources/TestSaveData下的各本地存档
     /// </summary>
-    bool UseBackUpData = true;
+    bool UseBackUpData = false;
     IEnumerator _StartNewLocalTestMode()
     {
+        PlayFabLogin.CustomIDLogin();
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         if (UseBackUpData)
         {
@@ -103,7 +105,6 @@ public class Starter : MonoBehaviour
         {
             DeleteLocalSaveDate();
             yield return AccountSet.OverrideAccountOnLocalFile();
-            yield return MySkillStonesReader.LocalSaveDataGetAllStones();
             yield return MySkillStonesReader.LocalSaveDataGetAllStones();
             yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         }

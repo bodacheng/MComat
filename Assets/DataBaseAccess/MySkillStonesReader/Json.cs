@@ -10,6 +10,7 @@ using Skill;
 using Api.Common;
 using Api.Dto.Form;
 using Json;
+using PlayFab;
 
 namespace dataAccess
 {
@@ -92,6 +93,21 @@ namespace dataAccess
                     EXP = 0,
                     Inherent = "false"
                 };
+
+                PlayFabClientAPI.PurchaseItem(
+                    new PlayFab.ClientModels.PurchaseItemRequest()
+                    {
+                        CatalogVersion = "stoneTest2",
+                        ItemId = _pair.Value.RECORD_ID,
+                    },result =>
+                    {
+                        Debug.Log("成功购买"+ _pair.Value.RECORD_ID);
+                    },error =>
+                    {
+                        Debug.Log(error.GenerateErrorReport());
+                    }
+                    );
+
                 yield return Add(stoneInfo);
             }
         }

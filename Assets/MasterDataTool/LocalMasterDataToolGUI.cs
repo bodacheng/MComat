@@ -24,7 +24,12 @@ public class LocalMasterDataToolGUI : Editor {
         {
             _ConfigFileManager.SkillConfigFileUpdate(_ConfigFileManager.SkillConfigFilePath, _ConfigFileManager.SkillConfigTextFile);
         }
-                
+
+        if (GUILayout.Button("输出Json格式技能石定义文件(只能在程序启动状态下正常运行)"))
+        {
+            _ConfigFileManager.OutputSKStonesCatalog();
+        }
+
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))
         {
             Debug.Log("危险，已经弃用");

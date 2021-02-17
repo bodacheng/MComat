@@ -4,6 +4,8 @@ using Skill;
 using System.Collections;
 using Log;
 using Json;
+using Newtonsoft.Json;
+using System.Linq;
 
 public partial class LocalMasterDataTool : MonoBehaviour {
 
@@ -18,15 +20,31 @@ public partial class LocalMasterDataTool : MonoBehaviour {
     /// </summary>
     /// <param name="textAsset"></param>
     /// <returns></returns>
-    public IEnumerator GenerateGS2ConfigFile(TextAsset textAsset)
+    ///
+    public void OutputSKStonesCatalog()
+    {
+        StartCoroutine(_OutputSKStonesCatalog());
+    }
+    public static IEnumerator _OutputSKStonesCatalog()
     {
         yield return SkillConfigTable.LoadAllSkillConfigs();
-        string returnValue = string.Empty;
-        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
-        {
+        PFSKDefine pFSKDefine = new PFSKDefine();
+        pFSKDefine.CatalogVersion = "stoneTest2";
+        List<PFSKDefine.Item> items = new List<PFSKDefine.Item>();
 
+        List<SkillConfig> stoneDefinationList = SkillConfigTable.SkillConfigRefDic.Values.ToList();
+        for (int i = 0; i < stoneDefinationList.Count; i++)
+        {
+            PFSKDefine.Item item = new PFSKDefine.Item()
+            {
+                ItemId = stoneDefinationList[i].RECORD_ID,
+                DisplayName = stoneDefinationList[i].REAL_NAME
+            };
+            items.Add(item);
         }
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("gs2SkillConfigFile", "gs2SkillStoneModelUpdate.json", returnValue);
+        pFSKDefine.Catalog = items.ToArray();
+        string json = JsonConvert.SerializeObject(pFSKDefine);
+        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneDefinationsJson.json", json);
     }
 
     // 以下这个函数对技能表的更新机制企划如下：

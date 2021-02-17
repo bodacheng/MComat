@@ -31,6 +31,7 @@ namespace Json
                     File.Create(wholepath).Close();
                 }
                 File.WriteAllText(wholepath, json, System.Text.Encoding.UTF8);
+                Debug.Log(wholepath);
             }
             catch (Exception e)
             {

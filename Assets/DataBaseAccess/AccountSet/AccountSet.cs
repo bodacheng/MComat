@@ -30,6 +30,7 @@ namespace dataAccess
                 case PlayerInfoRefMode.formalVersion:
                     break;
                 case PlayerInfoRefMode.localTestSaveData:
+                    SetUserData();
                     yield return OverrideAccountOnLocalFile();
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:

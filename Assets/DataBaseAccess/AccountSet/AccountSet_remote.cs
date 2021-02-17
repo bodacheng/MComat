@@ -5,6 +5,8 @@ using LitJson;
 using Api.Common;
 using Api.Dto.Form.Common;
 using Api.Dto.Model;
+using PlayFab;
+using PlayFab.ClientModels;
 
 namespace dataAccess
 {
@@ -101,6 +103,28 @@ namespace dataAccess
                  }
             );
             yield break;
+        }
+
+        static void SetUserData()
+        {
+            PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
+            {
+                Data = new System.Collections.Generic.Dictionary<string, string>
+                    {
+                        { "PlayerName",  AccountSet._AccInfo.PlayerName },
+                        { "coinCount", AccountSet._AccInfo.coinCount.ToString() },
+                        { "diamondCount", AccountSet._AccInfo.diamondCount.ToString() }
+                    }
+            },
+            result =>
+            {
+                Debug.Log("账户数据修改成功");
+            },
+            error =>
+            {
+                Debug.Log(error.GenerateErrorReport());
+            }
+            );
         }
     }
 }
