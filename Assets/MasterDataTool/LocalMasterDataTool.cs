@@ -25,6 +25,12 @@ public partial class LocalMasterDataTool : MonoBehaviour {
     {
         StartCoroutine(_OutputSKStonesCatalog());
     }
+
+    public void OutputSKStonesStore()
+    {
+        StartCoroutine(_OutputSKStonesShop());
+    }
+
     public static IEnumerator _OutputSKStonesCatalog()
     {
         yield return SkillConfigTable.LoadAllSkillConfigs();
@@ -45,6 +51,37 @@ public partial class LocalMasterDataTool : MonoBehaviour {
         pFSKDefine.Catalog = items.ToArray();
         string json = JsonConvert.SerializeObject(pFSKDefine);
         LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneDefinationsJson.json", json);
+    }
+
+    public static IEnumerator _OutputSKStonesShop()
+    {
+        yield return SkillConfigTable.LoadAllSkillConfigs();
+        PFSKSTDefine pFSKDefine = new PFSKSTDefine();
+        pFSKDefine.StoreId = "stone";
+        List<PFSKSTDefine.StoreItem> storeitems = new List<PFSKSTDefine.StoreItem>();
+
+        List<SkillConfig> stoneDefinationList = SkillConfigTable.SkillConfigRefDic.Values.ToList();
+        for (int i = 0; i < stoneDefinationList.Count; i++)
+        {
+            PFSKSTDefine.StoreItem storeitem = new PFSKSTDefine.StoreItem()
+            {
+                ItemId = stoneDefinationList[i].RECORD_ID,
+                VirtualCurrencyPrices = new PFSKSTDefine.VirtualCurrencyPrices
+                {
+                    GD = 0
+                }
+            };
+            storeitems.Add(storeitem);
+        }
+        pFSKDefine.Store = storeitems.ToArray();
+        pFSKDefine.MarketingData = new PFSKSTDefine._MarketingData
+        {
+            DisplayName = "stonestore"
+        };
+
+        string json = JsonConvert.SerializeObject(pFSKDefine);
+        json = "[" + json + "]";
+        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneStoreDefinationsJson.json", json);
     }
 
     // 以下这个函数对技能表的更新机制企划如下：

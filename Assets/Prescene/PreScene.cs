@@ -79,13 +79,13 @@ namespace mainMenu
             {
                 case PlayerAccountProgressStep.Freedom:
                     yield return AccountCharsSet.Load_List();
-                    yield return MySkillStonesReader.LoadAMySkillstones(Setting.Language);
+                    yield return MySkillStones.LoadAMySkillstones(Setting.Language);
                 break;
                 case PlayerAccountProgressStep.justCreated:
                 break;
                 case PlayerAccountProgressStep.Tutorial:
                     yield return AccountCharsSet.LoadTutorial();
-                    yield return MySkillStonesReader.LoadTutorial();
+                    yield return MySkillStones.LoadTutorial();
                 break;
             }
             yield return AccountSet.LoadCustomerInfo(); // 缺response判断

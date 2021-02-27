@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace dataAccess
 {
-    public partial class MySkillStonesReader
+    public partial class MySkillStones
     {
         // 更新存档数据
         public static IEnumerator Update(string stoneOfPlayerID)

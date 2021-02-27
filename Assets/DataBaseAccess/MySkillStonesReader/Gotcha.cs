@@ -2,7 +2,7 @@
 
 namespace dataAccess
 {
-    public partial class MySkillStonesReader
+    public partial class MySkillStones
     {
         public static IEnumerator StoneGotcha()
         {

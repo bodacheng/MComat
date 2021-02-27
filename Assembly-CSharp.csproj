@@ -337,7 +337,6 @@
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\INHERENT_SKILLTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\PassiveSkillEntitys.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
-    <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\PFSKDefine.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\PowerEstimateTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
@@ -435,6 +434,8 @@
     <Compile Include="Assets\POS_Sys\Start_End_Processes.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
+    <Compile Include="Assets\PlayFabConfig\PFSKDefine.cs" />
+    <Compile Include="Assets\PlayFabConfig\PFSKSTDefine.cs" />
     <Compile Include="Assets\Prescene\BigButtonRender.cs" />
     <Compile Include="Assets\Prescene\PreScene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Helpers\RPGTalkCharacter.cs" />

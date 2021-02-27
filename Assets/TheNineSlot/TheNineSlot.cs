@@ -148,6 +148,7 @@ namespace mainMenu
                         StoneCell.SeletedRender(skillStoneSlot._DragAndDropCell, _Selected);
                         buttonFeature();
                     }
+
                 } );
                 up.callback.AddListener( (eventData) => { pressStart = false; } );
                 
@@ -174,7 +175,8 @@ namespace mainMenu
                                 SKStoneItem _stone = _SkillStoneCell.GetItem();
                                 if (_stone != null && _stone._SkillConfig != null)
                                 {
-                                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.SkillStoneOfPlayerId, true);
+                                    if (FightGlobalSetting._skillStoneHasExp)
+                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.SkillStoneOfPlayerId, true);
                                 }
                             }
                         }

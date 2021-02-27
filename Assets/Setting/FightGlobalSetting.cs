@@ -6,6 +6,7 @@ public class FightGlobalSetting : MonoBehaviour
     public ProgramMode programMode = ProgramMode.normal;
     public bool IgnoreStoneTexture = false;
     public bool hasDefend;
+    public bool skillStoneHasExp = false;
     public AnimationCurve knockOffyAnimationCurve;
     public AnimationCurve knockOffzAnimationCurve;
 
@@ -45,6 +46,7 @@ public class FightGlobalSetting : MonoBehaviour
     public static bool _IgnoreStoneTexture;
     public static int scenestep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
+    public static bool _skillStoneHasExp;
     public static float _AT_coefficient = 1;
     public static float _HP_coefficient = 1;
     public static int _NormalSkillExGet;
@@ -111,7 +113,8 @@ public class FightGlobalSetting : MonoBehaviour
         _HurtObjectPreLoadCount = HurtObjectPreLoadCount;
         
         _hasDefend = hasDefend;
-        
+        _skillStoneHasExp = skillStoneHasExp;
+
         _AT_coefficient = AT_coefficient;
         _HP_coefficient = HP_coefficient;
         

@@ -6,7 +6,7 @@ using Skill;
 
 namespace dataAccess
 {
-    public partial class MySkillStonesReader
+    public partial class MySkillStones
     {
         public static IDictionary<string, SkillStoneOfPlayerInfoModel> Dic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
         public static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();

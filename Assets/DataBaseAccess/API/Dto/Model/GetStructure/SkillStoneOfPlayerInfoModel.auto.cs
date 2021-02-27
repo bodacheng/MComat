@@ -61,7 +61,7 @@ namespace Api.Dto.Model {
         
         public void ExpUpForStoneShow(float formerExp, float newExp)
         {
-            SKStoneItem SKStone = MySkillStonesReader.GetRenderModel(skillStoneOfPlayerId);
+            SKStoneItem SKStone = MySkillStones.GetRenderModel(skillStoneOfPlayerId);
             SKStone.LevelUpShow(formerExp, newExp);
         }
         

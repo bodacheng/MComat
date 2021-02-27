@@ -23,13 +23,13 @@ namespace mainMenu
         {
             // 先把所有这个角色装备中的旧石头卸载。事实上，如果某个石头的装备情况没发生变化，那么就产生了一些冗余功。但我感觉不如就这样，因为客户端是可以做手脚的，
             // 如果你用客户端判断是不是有石头在九宫格内位置没发生变化，来决定是否需要通信，那万一被人做了手脚。。
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStonesReader.GetEquipingStones(accCharInfo.monsterOfPlayerId);
+            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(accCharInfo.monsterOfPlayerId);
             for (int i = 0; i < equipingstones.Count; i++)
             {
-                SkillStoneOfPlayerInfoModel removedStone = MySkillStonesReader.Get(equipingstones[i].skillStoneOfPlayerId);
+                SkillStoneOfPlayerInfoModel removedStone = MySkillStones.Get(equipingstones[i].skillStoneOfPlayerId);
                 removedStone.inUsingMonsterOfPlayerId = null;
                 removedStone.inUsingSkillSlot = null;
-                yield return MySkillStonesReader.Update(removedStone.skillStoneOfPlayerId);
+                yield return MySkillStones.Update(removedStone.skillStoneOfPlayerId);
             }
             
             for (int i = 0; i < allSlot.Count; i++)
@@ -38,10 +38,10 @@ namespace mainMenu
                 {
                     //yield return RemoveStone(allSlot[i].OnSlotStoneID);
                     // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
-                    SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStonesReader.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
+                    SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStones.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
                     new_skillStoneInfo.inUsingMonsterOfPlayerId = accCharInfo.monsterOfPlayerId;
                     new_skillStoneInfo.inUsingSkillSlot = allSlot[i].number.ToString();
-                    yield return MySkillStonesReader.Update(new_skillStoneInfo.skillStoneOfPlayerId);
+                    yield return MySkillStones.Update(new_skillStoneInfo.skillStoneOfPlayerId);
                 }
                 else{
                     //yield return RemoveStone(allSlot[i].OnSlotStoneID);
@@ -62,7 +62,7 @@ namespace mainMenu
         IEnumerator RemoveStone(string stoneID)
         {
             // 将原先九宫格对应位置的技能石卸载。即将其inUsingMonsterOfPlayerId变为null。
-            SkillStoneOfPlayerInfoModel formerStoneInfo = MySkillStonesReader.Get(stoneID);
+            SkillStoneOfPlayerInfoModel formerStoneInfo = MySkillStones.Get(stoneID);
             if (formerStoneInfo != null)
             {
                 if (formerStoneInfo.Inherent == "true")
@@ -75,7 +75,7 @@ namespace mainMenu
                     Debug.Log("技能石头："+ formerStoneInfo.skillStoneOfPlayerId + "被卸下");
                     formerStoneInfo.inUsingMonsterOfPlayerId = null;
                     formerStoneInfo.inUsingSkillSlot = null;
-                    yield return MySkillStonesReader.Update(formerStoneInfo.skillStoneOfPlayerId);
+                    yield return MySkillStones.Update(formerStoneInfo.skillStoneOfPlayerId);
                 }else{
                     // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。
                 }

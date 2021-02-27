@@ -155,8 +155,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         stoneOfPlayerId = skillstoneofplayer;
         
         focusingSSD.RefreshInfo(stoneOfPlayerId);
-        SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
-        List<string> GetSameSkillIdStones = MySkillStonesReader.GetMyStonesBySkillID(targetStone._SkillConfig.RECORD_ID);
+        SKStoneItem targetStone = MySkillStones.GetRenderModel(stoneOfPlayerId);
+        List<string> GetSameSkillIdStones = MySkillStones.GetMyStonesBySkillID(targetStone._SkillConfig.RECORD_ID);
         List<string> extra = new List<string>();
         for (int i = 0; i < GetSameSkillIdStones.Count; i++)
         {
@@ -182,7 +182,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         SkillStonesBox.target.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
         yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);
-        SKStoneItem targetStone = MySkillStonesReader.GetRenderModel(stoneOfPlayerId);
+        SKStoneItem targetStone = MySkillStones.GetRenderModel(stoneOfPlayerId);
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         ReturnAllMaterialsToBox();
@@ -220,7 +220,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             return;
         }
         
-        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         
         #region 各数值文本刷新
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);

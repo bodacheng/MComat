@@ -99,7 +99,7 @@ public class GachaManager : MonoBehaviour
         SkillConfig skillConfig = skillConfigs[random_index];
         SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
         {
-            skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
+            skillStoneOfPlayerId = MySkillStones.GetNonRepeatID_LocalSave(),
             skillId = skillConfig.RECORD_ID,
             EXP = 0,
             BreakThrough = 0,
@@ -107,7 +107,7 @@ public class GachaManager : MonoBehaviour
             inUsingMonsterOfPlayerId = "-1",
             inUsingSkillSlot = null
         };
-        yield return MySkillStonesReader.Add(stoneInfo);
+        yield return MySkillStones.Add(stoneInfo);
         yield return stoneInfo;
     }
 }

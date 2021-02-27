@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using Api.Dto.Model;
 using dataAccess;
 using Skill;
-using System.Collections;
 
 namespace mainMenu
 {
@@ -45,7 +44,7 @@ namespace mainMenu
         // 额外生成一个技能石图像
         void IconForShow(string skillID)
         {
-            SKStoneItem item = MySkillStonesReader.GenerateNewStoneModel_Memory(skillID, false);
+            SKStoneItem item = MySkillStones.GenerateNewStoneModel_Memory(skillID, false);
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT) 
@@ -83,7 +82,7 @@ namespace mainMenu
         
         public void RefreshInfo(string skillStoneOfPlayerId)
         {
-            SkillStoneOfPlayerInfoModel currentstone = MySkillStonesReader.Get(skillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel currentstone = MySkillStones.Get(skillStoneOfPlayerId);
             if (currentstone == null)
             {
                 Clear();

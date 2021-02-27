@@ -110,7 +110,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            SkillStoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStonesReader.Get(Item.SkillStoneOfPlayerId);
+            SkillStoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStones.Get(Item.SkillStoneOfPlayerId);
             if (SSOfPlayerInfo == null)
             {
                 Debug.Log("逻辑错误. SkillStoneOfPlayerId:"+ Item.SkillStoneOfPlayerId);
@@ -173,10 +173,10 @@ namespace mainMenu
                     far = false
                 };
                 
-                List<string> SkillStonesOfType_normal = MySkillStonesReader.TargetStonesFromAccount(filterForm0);
-                List<string> SkillStonesOfType_EX1 = MySkillStonesReader.TargetStonesFromAccount(filterForm1);
-                List<string> SkillStonesOfType_EX2 = MySkillStonesReader.TargetStonesFromAccount(filterForm2);
-                List<string> SkillStonesOfType_EX3 = MySkillStonesReader.TargetStonesFromAccount(filterForm3);
+                List<string> SkillStonesOfType_normal = MySkillStones.TargetStonesFromAccount(filterForm0);
+                List<string> SkillStonesOfType_EX1 = MySkillStones.TargetStonesFromAccount(filterForm1);
+                List<string> SkillStonesOfType_EX2 = MySkillStones.TargetStonesFromAccount(filterForm2);
+                List<string> SkillStonesOfType_EX3 = MySkillStones.TargetStonesFromAccount(filterForm3);
                 
                 if (SkillStonesOfType_normal.Count > AccountSet._AccInfo.Stoneboxsize)
                 {

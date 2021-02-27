@@ -82,7 +82,7 @@ namespace dataAccess
                 {
                     SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
                     {
-                        skillStoneOfPlayerId = MySkillStonesReader.GetNonRepeatID_LocalSave(),
+                        skillStoneOfPlayerId = MySkillStones.GetNonRepeatID_LocalSave(),
                         skillId = INHERENTSkills.Key,
                         EXP = 0,
                         BreakThrough = 0,
@@ -90,7 +90,7 @@ namespace dataAccess
                         inUsingMonsterOfPlayerId = i.ToString(),
                         inUsingSkillSlot = "1"
                     };
-                    yield return MySkillStonesReader.Add(stoneInfo);
+                    yield return MySkillStones.Add(stoneInfo);
                 }
                 Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
                 yield return AddToAccount(_Char);

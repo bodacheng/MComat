@@ -50,9 +50,9 @@ public static class RewardManager
         
     public static IEnumerator ExpUpForStones_Local(string StoneOfPlayerID, int addExp)
     {
-        SkillStoneOfPlayerInfoModel stoneOfPlayer =  MySkillStonesReader.Get(StoneOfPlayerID);
+        SkillStoneOfPlayerInfoModel stoneOfPlayer =  MySkillStones.Get(StoneOfPlayerID);
         int formerExp = stoneOfPlayer.EXP;
         stoneOfPlayer.EXP = formerExp + addExp;
-        yield return MySkillStonesReader.Update(StoneOfPlayerID);
+        yield return MySkillStones.Update(StoneOfPlayerID);
     }
 }

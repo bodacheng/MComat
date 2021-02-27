@@ -65,15 +65,15 @@ public partial class NineForShow : MonoBehaviour
     {
         ClearCurrent();
 
-        A1S = MySkillStonesReader.GenerateNewStoneModel_Memory(A1skillid, false);
-        A2S = MySkillStonesReader.GenerateNewStoneModel_Memory(A2skillid, false);
-        A3S = MySkillStonesReader.GenerateNewStoneModel_Memory(A3skillid, false);
-        B1S = MySkillStonesReader.GenerateNewStoneModel_Memory(B1skillid, false);
-        B2S = MySkillStonesReader.GenerateNewStoneModel_Memory(B2skillid, false);
-        B3S = MySkillStonesReader.GenerateNewStoneModel_Memory(B3skillid, false);
-        C1S = MySkillStonesReader.GenerateNewStoneModel_Memory(C1skillid, false);
-        C2S = MySkillStonesReader.GenerateNewStoneModel_Memory(C2skillid, false);
-        C3S = MySkillStonesReader.GenerateNewStoneModel_Memory(C3skillid, false);
+        A1S = MySkillStones.GenerateNewStoneModel_Memory(A1skillid, false);
+        A2S = MySkillStones.GenerateNewStoneModel_Memory(A2skillid, false);
+        A3S = MySkillStones.GenerateNewStoneModel_Memory(A3skillid, false);
+        B1S = MySkillStones.GenerateNewStoneModel_Memory(B1skillid, false);
+        B2S = MySkillStones.GenerateNewStoneModel_Memory(B2skillid, false);
+        B3S = MySkillStones.GenerateNewStoneModel_Memory(B3skillid, false);
+        C1S = MySkillStones.GenerateNewStoneModel_Memory(C1skillid, false);
+        C2S = MySkillStones.GenerateNewStoneModel_Memory(C2skillid, false);
+        C3S = MySkillStones.GenerateNewStoneModel_Memory(C3skillid, false);
 
         if (A1S != null)
         {

@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using mainMenu;
 using UnityEngine;
 using Json;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class Starter : MonoBehaviour
 {
@@ -19,7 +21,21 @@ public class Starter : MonoBehaviour
     // 启动本地测试模式（新存档）
     public void StartNewLocalTestMode()
     {
-        StartCoroutine(_StartNewLocalTestMode());
+        PlayFabClientAPI.LoginWithCustomID(
+            new LoginWithCustomIDRequest
+            {
+                CustomId = "111",
+                CreateAccount = true
+            },
+            result =>
+            {
+                StartCoroutine(_StartNewLocalTestMode());
+            },
+            error =>
+            {
+                Debug.Log(error.GenerateErrorReport());
+            }
+        );
     }
 
     // 启动技能浏览器模式
@@ -41,7 +57,7 @@ public class Starter : MonoBehaviour
         DeleteLocalSaveDate();
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         yield return AccountSet.OverrideAccountOnLocalFile();
-        yield return MySkillStonesReader.LocalSaveDataGetAllStones();
+        yield return MySkillStones.LocalSaveDataGetAllStones();
         yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);
     }
@@ -105,7 +121,7 @@ public class Starter : MonoBehaviour
         {
             DeleteLocalSaveDate();
             yield return AccountSet.OverrideAccountOnLocalFile();
-            yield return MySkillStonesReader.LocalSaveDataGetAllStones();
+            yield return MySkillStones.LocalSaveDataGetAllStones();
             yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
         }
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);

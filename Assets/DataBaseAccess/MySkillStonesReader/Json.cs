@@ -14,7 +14,7 @@ using PlayFab;
 
 namespace dataAccess
 {
-    public partial class MySkillStonesReader
+    public partial class MySkillStones
     {    
         static IEnumerator LoadAll_Json(
             string filePath, 
@@ -99,6 +99,10 @@ namespace dataAccess
                     {
                         CatalogVersion = "stoneTest2",
                         ItemId = _pair.Value.RECORD_ID,
+                        StoreId = "stone",
+                        VirtualCurrency = "GD",
+                        Price = 0
+
                     },result =>
                     {
                         Debug.Log("成功购买"+ _pair.Value.RECORD_ID);

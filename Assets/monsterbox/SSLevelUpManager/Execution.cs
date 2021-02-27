@@ -35,7 +35,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             model => {
                 for (int i = 0; i < model.StonesToDelete.Count; i++)
                 {
-                    MySkillStonesReader.RemoveStoneLocal(model.StonesToDelete[i]);
+                    MySkillStones.RemoveStoneLocal(model.StonesToDelete[i]);
                 }
             },
             model => {
@@ -90,7 +90,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
-        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStonesReader.Get(stoneOfPlayerId);
+        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         if (StoneInfoModel == null)
             return;
         PreScene.target.mainProcessRunner.Run(LevelUpStone(StoneInfoModel.skillStoneOfPlayerId));
