@@ -93,26 +93,33 @@ namespace dataAccess
                     EXP = 0,
                     Inherent = "false"
                 };
+                yield return Add(stoneInfo);
+            }
+            PurchaseAllStones(SkillConfigTable.SkillConfigRefDic.Values.ToList(), 0);
+        }
 
+        public static void PurchaseAllStones(List<SkillConfig> stones, int i)
+        {
+            if (i != stones.Count - 1)
+            {
+                SkillConfig targetStoneConfig = stones[i];
                 PlayFabClientAPI.PurchaseItem(
                     new PlayFab.ClientModels.PurchaseItemRequest()
                     {
                         CatalogVersion = "stoneTest2",
-                        ItemId = _pair.Value.RECORD_ID,
+                        ItemId = targetStoneConfig.RECORD_ID,
                         StoreId = "stone",
                         VirtualCurrency = "GD",
                         Price = 0
-
-                    },result =>
+                    }, result =>
                     {
-                        Debug.Log("成功购买"+ _pair.Value.RECORD_ID);
-                    },error =>
+                        Debug.Log("成功购买" + targetStoneConfig.RECORD_ID);
+                        PurchaseAllStones(stones, i + 1);
+                    }, error =>
                     {
                         Debug.Log(error.GenerateErrorReport());
                     }
-                    );
-
-                yield return Add(stoneInfo);
+                );
             }
         }
     }

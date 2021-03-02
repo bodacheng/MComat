@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 using mainMenu;
 using UnityEngine;
 using Json;
-using PlayFab;
-using PlayFab.ClientModels;
 
 public class Starter : MonoBehaviour
 {
@@ -21,12 +19,7 @@ public class Starter : MonoBehaviour
     // 启动本地测试模式（新存档）
     public void StartNewLocalTestMode()
     {
-        PlayFabClientAPI.LoginWithCustomID(
-            new LoginWithCustomIDRequest
-            {
-                CustomId = "111",
-                CreateAccount = true
-            },
+        PlayFabLogin.CustomIDLogin(
             result =>
             {
                 StartCoroutine(_StartNewLocalTestMode());
@@ -46,9 +39,16 @@ public class Starter : MonoBehaviour
     
     IEnumerator _BeginLocalTestMode()
     {
-        PlayFabLogin.CustomIDLogin();
-        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        EnterFrontScene();
+        PlayFabLogin.CustomIDLogin(
+            result => {
+                CloudScript.StartCloudHelloWorld();
+                AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+                EnterFrontScene();
+            },
+            fail => {
+                Debug.Log("login fail");
+            }
+        );
         yield break;
     }
 
@@ -90,7 +90,6 @@ public class Starter : MonoBehaviour
     bool UseBackUpData = false;
     IEnumerator _StartNewLocalTestMode()
     {
-        PlayFabLogin.CustomIDLogin();
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         if (UseBackUpData)
         {

@@ -241,7 +241,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\RequestRewardForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterSkillStoneForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterTeamOfPlayerForm.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneGotchaForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneLevelUpForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneMergeForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\AbstractModel.cs" />
@@ -273,7 +272,6 @@
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_localTest.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Add.cs" />
-    <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Gotcha.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Json.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Loading.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader.cs" />
@@ -434,8 +432,9 @@
     <Compile Include="Assets\POS_Sys\Start_End_Processes.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
-    <Compile Include="Assets\PlayFabConfig\PFSKDefine.cs" />
-    <Compile Include="Assets\PlayFabConfig\PFSKSTDefine.cs" />
+    <Compile Include="Assets\PlayFab\CloudScripts\HelloWorld.cs" />
+    <Compile Include="Assets\PlayFab\Defs\PFSKDefine.cs" />
+    <Compile Include="Assets\PlayFab\Defs\PFSKSTDefine.cs" />
     <Compile Include="Assets\Prescene\BigButtonRender.cs" />
     <Compile Include="Assets\Prescene\PreScene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Helpers\RPGTalkCharacter.cs" />

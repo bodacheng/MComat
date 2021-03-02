@@ -96,34 +96,6 @@ namespace dataAccess
             }
         }
         
-        static IEnumerator SkillStoneGotcha(string gotchaPolicyKey, ApiLanguage apiLanguage)
-        {
-            List<SkillStoneGotchaInfoModel> infos;
-            SkillStoneGotchaForm form = new SkillStoneGotchaForm
-            {
-                gotchaPolicyKey = gotchaPolicyKey
-            };
-
-            yield return ApiCaller.Instance.Post<GetSkillStoneGotchaModel, SkillStoneGotchaForm>
-            ("http://160.16.187.230/AssetStoreFight/skillStone/skillStoneGotcha", form, ApiCaller.Instance.getHeader(apiLanguage),
-                 model =>
-                 {
-                     infos = model.data.skillStoneGotchaInfoList;
-                     Debug.Log("以下是gotcha到的技能石");
-                     foreach (SkillStoneGotchaInfoModel _SkillStoneGotchaInfoModel in infos)
-                     {
-                         Debug.Log("skillId:" + _SkillStoneGotchaInfoModel.skillId);
-                     }
-                 }
-                ,
-                 model =>
-                 {
-
-                 }
-            );
-            yield break;
-        }
-        
         public IEnumerator LevelUpMySkillStone_Remote(string skillstoneid, string targetLevel, ApiLanguage apiLanguage)
         {
             yield break;
