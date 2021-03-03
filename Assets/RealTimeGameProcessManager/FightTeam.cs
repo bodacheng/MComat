@@ -7,6 +7,8 @@ using Api.Dto.Model;
 
 namespace FightScene
 {
+    public delegate void LocalFightingUpdate();
+
     public class FightTeam : MonoBehaviour
     {
         public TeamMode TeamMode;
@@ -51,6 +53,8 @@ namespace FightScene
         public virtual void Clear()
         {
         }
+
+        public LocalFightingUpdate localFightingUpdate;
 
         public virtual List<Transform> TeamMemberTransforms()
         {
@@ -139,11 +143,7 @@ namespace FightScene
                 }
             }
         }
-        
-        public virtual void LocalFightingUpdate()
-        {
-        }
-        
+
         public bool IfAllCharsPreparedForBattle()
         {
             foreach (Data_Center oneMember in TeamMembers.values)

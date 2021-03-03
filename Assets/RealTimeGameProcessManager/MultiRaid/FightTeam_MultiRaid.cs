@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
+using Cysharp.Threading.Tasks;
+using System;
 
 namespace FightScene
 {
@@ -63,34 +65,39 @@ namespace FightScene
             }
             CharIconDic.Clear();
             multiRaidHitComboDic.Clear();
+            foreach (UniTask uniTask in waitForDeads)
+            {
+                // uniTask. 某种办法取消掉它？
+            }
         }
         
-        public override void LocalFightingUpdate()
+        public void MultiRaid_LocalFightingUpdate()
         {
             if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
             {
                 BarsPositionUpdate();
             }
         }
-        
+
+        List<UniTask> waitForDeads = new List<UniTask>();
         protected override void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (Data_Center a_char in TeamMembers.values)
             {
                 a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
-                
+
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(a_char, x, maxHp);
                 });
-                
+
                 a_char.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
                 a_char.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
                     RefreshExBar(a_char, x, 120);
                 });
-                
+
                 a_char._ResistanceManager.Resistance = new ReactiveProperty<int>
                 {
                     Value = 0
@@ -101,21 +108,26 @@ namespace FightScene
                     a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
                     RefreshResistanceBar(a_char);
                 });
-                
+
                 a_char.FightDataRef._ComboHitCount.HitCount.Value = 0;
                 a_char.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
                 {
                     RefreshComboHitMultiRaid(a_char);
                 });
-                a_char.IsDead.Subscribe(x => 
+
+                async UniTask WaitForDead()
                 {
-                    if (x == true) 
-                    {
-                        RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
-                        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-                    }
-                });
+                    await a_char.IsDead;
+                    RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
+                    RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+                    Debug.Log(a_char + "Is dead!");
+                }
+
+                waitForDeads.Add(WaitForDead());
+                WaitForDead().Forget();
             }
+
+            localFightingUpdate = MultiRaid_LocalFightingUpdate;
         }
 
         Text _hitcomboText;

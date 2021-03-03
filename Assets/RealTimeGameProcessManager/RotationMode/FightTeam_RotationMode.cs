@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using Cysharp.Threading.Tasks;
 
 namespace FightScene
 {
@@ -49,7 +50,7 @@ namespace FightScene
             ChangeFightingMember_ReadyToGo(heromultiDictionary.values[0], TeamStandPoints[0]);
         }
         
-        public override void LocalFightingUpdate()
+        public void Rotation_LocalFightingUpdate()
         {
             WaitToTriggerMemberChange();
             if (RotationMode_fightingMember != null)
