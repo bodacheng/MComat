@@ -41,7 +41,7 @@ public class Starter : MonoBehaviour
     {
         PlayFabLogin.CustomIDLogin(
             result => {
-                CloudScript.StartCloudHelloWorld();
+                //CloudScript.StartCloudHelloWorld();
                 AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
                 EnterFrontScene();
             },
