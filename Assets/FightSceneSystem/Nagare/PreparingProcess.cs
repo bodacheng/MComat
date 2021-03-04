@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -38,7 +39,7 @@ public class PreparingProcess : FSceneProcess
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
         NetFightScene.target.PreparingCanvas.gameObject.SetActive(true);
-        SingleThreadProcesser.backup.Run(EnterProcess());
+        SingleThreadProcesser.backup.Run(EnterProcess().ToUniTask());
     }
     
     public override void ProcessEnd()

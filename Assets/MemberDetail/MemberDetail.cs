@@ -5,6 +5,7 @@ using dataAccess;
 using Api.Dto.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 
 namespace mainMenu
 {
@@ -144,9 +145,9 @@ namespace mainMenu
             //    this._preparingScene.triggerMainProcess(AccountCharsSet.Instance.updateMyCharInfo(focusingCharacterDataInfo));
             //};
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
-            
+
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(MonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(MonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)).ToUniTask());
         }
         
         public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
