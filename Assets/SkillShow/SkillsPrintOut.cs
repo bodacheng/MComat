@@ -136,7 +136,6 @@ namespace mainMenu
                 IfShowingSkill = true;
                 focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
             }
-            yield break;
         }
         
         // 生成技能迁移表示符

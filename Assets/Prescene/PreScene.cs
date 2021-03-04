@@ -69,8 +69,8 @@ namespace mainMenu
             FightGlobalSetting.scenestep = 0;
 
             if (!DataRead)
-                mainProcessRunner.Run(DataLoad().ToUniTask());
-            mainProcessRunner.Run(StartUpProcess().ToUniTask());
+                mainProcessRunner.Run(DataLoad());
+            mainProcessRunner.Run(StartUpProcess());
             Screen.SetResolution(1920, 1080, true);
         }
 

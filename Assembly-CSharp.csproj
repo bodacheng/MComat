@@ -924,6 +924,7 @@
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\MotionBlurClear.shader" />
     <None Include="Assets\Resources\TestSaveData\MyStones\116.json" />
     <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Electricity.shader" />
+    <None Include="Assets\Resources\essentialUIElements\iconframes\Sp_addtive.shader" />
     <None Include="Assets\Asstes\enviroments\Top-Down SF\Demo\readme mobile.txt" />
     <None Include="Assets\Resources\TestSaveData\MyStones\327.json" />
     <None Include="Assets\Resources\TestSaveData\MyStones\249.json" />

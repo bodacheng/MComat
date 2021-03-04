@@ -5,7 +5,6 @@ using dataAccess;
 using Api.Dto.Model;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 
 namespace mainMenu
 {
@@ -82,7 +81,7 @@ namespace mainMenu
             }
             void Trigger()
             {
-                PreScene.target.mainProcessRunner.Run(MonsterIconButton().ToUniTask());
+                PreScene.target.mainProcessRunner.Run(MonsterIconButton());
             }
             targetButton.onClick.AddListener(Trigger);
         }
@@ -117,7 +116,7 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(_focusing).ToUniTask());
+                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(_focusing));
             }
             void SkillShow()
             {
@@ -147,7 +146,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(MonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)).ToUniTask());
+            presentationProcessRunner.Run(CharModelAndSkillRenderProcess(MonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)));
         }
         
         public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
