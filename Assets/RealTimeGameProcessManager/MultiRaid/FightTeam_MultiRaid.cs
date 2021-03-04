@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
-using Cysharp.Threading.Tasks;
-using System;
 
 namespace FightScene
 {
@@ -65,10 +63,6 @@ namespace FightScene
             }
             CharIconDic.Clear();
             multiRaidHitComboDic.Clear();
-            foreach (UniTask uniTask in waitForDeads)
-            {
-                // uniTask. 某种办法取消掉它？
-            }
         }
         
         public void MultiRaid_LocalFightingUpdate()
@@ -79,7 +73,6 @@ namespace FightScene
             }
         }
 
-        List<UniTask> waitForDeads = new List<UniTask>();
         protected override void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (Data_Center a_char in TeamMembers.values)
@@ -115,16 +108,15 @@ namespace FightScene
                     RefreshComboHitMultiRaid(a_char);
                 });
 
-                async UniTask WaitForDead()
+                a_char.IsDead = new ReactiveProperty<bool>(false);
+                a_char.IsDead.Subscribe(x =>
                 {
-                    await a_char.IsDead;
-                    RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
-                    RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-                    Debug.Log(a_char + "Is dead!");
-                }
-
-                waitForDeads.Add(WaitForDead());
-                WaitForDead().Forget();
+                    if (x == true)
+                    {
+                        RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
+                        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+                    }
+                });
             }
 
             localFightingUpdate = MultiRaid_LocalFightingUpdate;
