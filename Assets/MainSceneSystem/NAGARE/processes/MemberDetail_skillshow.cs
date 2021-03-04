@@ -33,7 +33,7 @@ public class MemberDetail_skillshow : MainSceneProcess
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
         //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
-        yield break;
+        yield return null;
     }
        
     public override void ProcessEnter()

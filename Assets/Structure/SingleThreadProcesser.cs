@@ -12,7 +12,7 @@ public class SingleThreadProcesser : MonoBehaviour
         await _process;
     }
 
-    public async void Run(UniTask _process)
+    public void Run(UniTask _process)
     {
         _process.Forget();
     }

@@ -25,7 +25,7 @@ namespace mainMenu
             }
             _Selected.gameObject.SetActive(false);
             SSLevelUpManager.target._MSkillStoneDetail.Clear();
-            TheNineSlot.target.mainProcessRunner.Run(PutSkillStonesToBox(target.CurrentFilter()));
+            mainProcessRunner.Run(PutSkillStonesToBox(target.CurrentFilter()));
         }
               
         List<string> Order(List<string> targets)

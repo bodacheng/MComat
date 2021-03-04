@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using Cysharp.Threading.Tasks;
 
 namespace mainMenu
 {
@@ -68,8 +69,8 @@ namespace mainMenu
             FightGlobalSetting.scenestep = 0;
 
             if (!DataRead)
-                mainProcessRunner.Run(DataLoad());
-            mainProcessRunner.Run(StartUpProcess());
+                mainProcessRunner.Run(DataLoad().ToUniTask());
+            mainProcessRunner.Run(StartUpProcess().ToUniTask());
             Screen.SetResolution(1920, 1080, true);
         }
 

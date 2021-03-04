@@ -8,7 +8,7 @@ using Skill;
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
-    {        
+    {
         public StoneFilterForm CurrentFilter()
         {
             StoneFilterForm filterForm = new StoneFilterForm

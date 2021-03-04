@@ -82,7 +82,7 @@ namespace mainMenu
             }
             void Trigger()
             {
-                PreScene.target.mainProcessRunner.Run(MonsterIconButton());
+                PreScene.target.mainProcessRunner.Run(MonsterIconButton().ToUniTask());
             }
             targetButton.onClick.AddListener(Trigger);
         }
@@ -117,7 +117,7 @@ namespace mainMenu
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(_focusing));
+                PreScene.target.mainProcessRunner.Run(Step2INIForUIRefresh(_focusing).ToUniTask());
             }
             void SkillShow()
             {
