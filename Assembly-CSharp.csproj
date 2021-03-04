@@ -422,6 +422,9 @@
     <Compile Include="Assets\POS_Sys\Start_End_Processes.cs" />
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
+    <Compile Include="Assets\PlayFab\CloudScripts\HelloWorld.cs" />
+    <Compile Include="Assets\PlayFab\Defs\PFSKDefine.cs" />
+    <Compile Include="Assets\PlayFab\Defs\PFSKSTDefine.cs" />
     <Compile Include="Assets\Prescene\BigButtonRender.cs" />
     <Compile Include="Assets\Prescene\PreScene.cs" />
     <Compile Include="Assets\RPGTALK\Scripts\Helpers\RPGTalkCharacter.cs" />
