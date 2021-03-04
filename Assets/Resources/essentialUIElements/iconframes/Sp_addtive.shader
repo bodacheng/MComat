@@ -4,6 +4,11 @@
 // - no AlphaTest
 // - no ColorMask
 
+// 这是为了解决Material xxx doesn‘t have _Stencil property问题而制作的shader。
+// 起作用的是//MASK SUPPORT ADD 和 //MASK SUPPORT END之间的部分
+// 那个bug的原因貌似是因为对象在Scroll view内部，然后和mask什么的有关系
+// 所以任何在scroll view内部的图标，只要加上这两部分，都能解决那个问题
+
 Shader "Custom/Sp_addtive" {
 Properties {
     _MainTex ("Particle Texture", 2D) = "white" {}
@@ -22,7 +27,6 @@ Category {
     Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
 
         //MASK SUPPORT ADD
-
         Stencil
         {
             Ref [_Stencil]

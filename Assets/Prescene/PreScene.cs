@@ -69,30 +69,31 @@ namespace mainMenu
             FightGlobalSetting.scenestep = 0;
 
             if (!DataRead)
-                mainProcessRunner.Run(DataLoad());
+                DataLoad();
             mainProcessRunner.Run(StartUpProcess());
             Screen.SetResolution(1920, 1080, true);
         }
 
-        IEnumerator DataLoad()
+        //  尝试把各种加载非同期化。目前这个版本并没有结束。
+        void DataLoad()
         {
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
-                    yield return AccountCharsSet.Load_List();
-                    yield return MySkillStones.LoadAMySkillstones(Setting.Language);
+                    mainProcessRunner.Run(AccountCharsSet.Load_List());
+                    mainProcessRunner.Run(MySkillStones.LoadAMySkillstones(Setting.Language));
                 break;
                 case PlayerAccountProgressStep.justCreated:
                 break;
                 case PlayerAccountProgressStep.Tutorial:
-                    yield return AccountCharsSet.LoadTutorial();
-                    yield return MySkillStones.LoadTutorial();
+                    mainProcessRunner.Run(AccountCharsSet.LoadTutorial());
+                    mainProcessRunner.Run(MySkillStones.LoadTutorial());
                 break;
             }
-            yield return AccountSet.LoadCustomerInfo(); // 缺response判断
-            yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
-            yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
-            
+            mainProcessRunner.Run(AccountSet.LoadCustomerInfo()); // 缺response判断
+            mainProcessRunner.Run(TeamSet.LoadTeamSet(TeamSetGameMode.story));
+            mainProcessRunner.Run(TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3));
+
             DataRead = true;
         }
 
