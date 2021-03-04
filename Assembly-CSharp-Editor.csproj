@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{DD02ED4D-0088-7BA8-FC96-A207483AF5EC}</ProjectGuid>
+    <ProjectGuid>{F451BE96-EBFD-412C-9F39-6773D0CADC34}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -360,67 +360,67 @@
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
     </Reference>
     <Reference Include="Purchasing.Common">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
     </Reference>
     <Reference Include="Stores">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
     </Reference>
     <Reference Include="Apple">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
     </Reference>
     <Reference Include="AppleMacos">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleMacos.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleMacos.dll</HintPath>
     </Reference>
     <Reference Include="AppleCore">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleCore.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleCore.dll</HintPath>
     </Reference>
     <Reference Include="Security">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
     </Reference>
     <Reference Include="FacebookStore">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
     </Reference>
     <Reference Include="winrt">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="JMOAssets_MatCapWelcome">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
     </Reference>
     <Reference Include="POFX_Runtime">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
     </Reference>
     <Reference Include="POFX_Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>/Users/bo_dacheng/MComat/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>/Users/bo_dacheng/MComat/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/bo_dacheng/MComat/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>/Users/bo_dacheng/MComat/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>/Users/bo_dacheng/MComat/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -777,108 +777,108 @@
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Monetization">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>/Users/bo_dacheng/MComat/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{6804368C-7A8A-B7D3-C918-E2C289B797C7}</Project>
+      <Project>{84E95158-C26D-C721-2578-C58A46E4DE54}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{04C238BA-71A7-E003-DF42-5C463B72B783}</Project>
+      <Project>{D42C09C4-BDF6-1E53-86F6-DDE1BA94A620}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
-      <Project>{EDA2AF1C-4E1E-2424-C176-0B096974951F}</Project>
+      <Project>{FCD412CD-7BDE-91EA-3718-CA5E4D6B9C69}</Project>
       <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
-      <Project>{28C80E44-794A-E44D-31B6-851831CBE736}</Project>
+      <Project>{D9FF62E3-C749-051A-AAAA-7A236C8B83A5}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFab.csproj">
-      <Project>{6F111ED7-9C0F-B1DF-AE86-028EB47A24E5}</Project>
+      <Project>{A4C5C97D-798B-7AC9-7F6E-42E76EF9397A}</Project>
       <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
-      <Project>{077D52D5-106E-1BD8-5EF2-D5DF80A4F1A1}</Project>
+      <Project>{874A125E-AB13-6D48-0E2C-9890F14DF9BF}</Project>
       <Name>PlayFabEditorExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{9DAB1AC8-0E05-4B8B-0BC4-B2A05EAD4B49}</Project>
+      <Project>{20DB9ADB-D7A2-A54F-9F0A-182D7DBA668C}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
   </ItemGroup>
