@@ -68,7 +68,7 @@ public class TeamEditManager : MonoBehaviour
         yield return MemberDetail.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
         // mini nineslot show
         _nineForShow.ShowStones_Acc(CharAccId);
-        yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+        MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
     }
 
     void AddHeroIconFeatureToMonsterBox(string CharAccId, Button targetButton)
@@ -160,7 +160,7 @@ public class TeamEditManager : MonoBehaviour
                         break;
                 }
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                 if (MemberDetail.target._focusing != null)
                     _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
                 else

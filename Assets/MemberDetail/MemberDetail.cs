@@ -55,7 +55,7 @@ namespace mainMenu
             IEnumerator MonsterIconButton()
             {
                 yield return target.SetMemberDetailFocusingChar(targetMonsterOfPlayerID);//确立focusing角色
-                yield return target.RefreshMemberDetailPageByFocusingChar();
+                target.RefreshMemberDetailPageByFocusingChar();
                 yield return MemberDetail_edit.SkillShowSpEnterProcess();
             }
             PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton());
@@ -77,7 +77,7 @@ namespace mainMenu
             {
                 MonsterBox.target.Select(CharLocalId);
                 yield return target.SetMemberDetailFocusingChar(CharLocalId);//确立focusing角色
-                yield return target.RefreshMemberDetailPageByFocusingChar();
+                target.RefreshMemberDetailPageByFocusingChar();
             }
             void Trigger()
             {
@@ -95,14 +95,13 @@ namespace mainMenu
         }
         #endregion
         
-        public IEnumerator RefreshMemberDetailPageByFocusingChar()
+        public void RefreshMemberDetailPageByFocusingChar()
         {
             if (_focusing == null || _focusing.monsterOfPlayerId == null || _focusing.monsterId == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
                 MemberInfoT.gameObject.SetActive(false);
-                yield break;
             }
             
             CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);

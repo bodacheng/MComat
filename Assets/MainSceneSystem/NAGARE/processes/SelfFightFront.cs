@@ -1,21 +1,16 @@
-﻿using System.Collections;
-using mainMenu;
+﻿using mainMenu;
+using Cysharp.Threading.Tasks;
 
 public class SelfFightFront : MainSceneProcess
 {
-    public IEnumerator EnterProcess()
+    public void temp()
     {
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        
+        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);       
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
-        
         MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
-        yield return MonsterBox.DisplayMonsterIcons(true);
-        _SelfFightManager.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);
-        yield return ModelShower.target.ShowMyModel(null);
         _SelfFightManager.SwitchToRotationMode();
     }
     
@@ -24,10 +19,18 @@ public class SelfFightFront : MainSceneProcess
         Step = MainSceneStep.SelfFightFront;
         EelementsInherit(PreScene.target);
     }
-   
+
+    public async UniTask enter()
+    {
+        await MonsterBox.DisplayMonsterIcons(true);
+        _SelfFightManager.AddHeroIconFeaturesToMonsterBox();
+        temp();
+    }
+
     public override void ProcessEnter()
     {
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
+        mainProcessRunner.RunAsQueued(enter());        
     }
     
     public override void ProcessEnd()

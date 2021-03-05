@@ -4,13 +4,18 @@ using System.Linq;
 using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
+using Cysharp.Threading.Tasks;
 
 namespace mainMenu
 {
     public class MonsterBox : MonoBehaviour
     {
         public static MonsterBox target;
-        
+
+        [Space(7)]
+        [Header("进程处理器")]
+        public SingleThreadProcesser ProcessRunner;
+
         [Space(7)]
         [Header("monsterboxFilter")]
         public MonsterboxFilter _monsterboxFilter;
@@ -48,22 +53,6 @@ namespace mainMenu
                 return null;
             mainMenuIcons.TryGetValue(monsterofplayid, out HeroIcon charIcon);
             return charIcon;
-        }
-
-        // 从这个函数的名字来看，应该是个产生monsterbox内所有图标的东西。原则上这个玩意如果没有什么新宠物的添加，它是很少加载才对。
-        // 难点在于每个monstericon上给予一个什么样的按钮 ，并且这个按钮到底是什么时机下给予。
-        // 现在的模型循环利用机制决定：每次运行mymonsterbox，都要执行所有拥有角色的模型建立或确认工作
-        // 还有，monsterbox是所有角色CharacterDataInfo的由来，而这个信息现在记载了技能信息，从而可以说这个信息量现在非常大，逻辑出问题也会出现错误。
-        // 19.1.3 : monsterbox应该具备能力可以非常灵活的根据检索条件对所有monster进行分类显示，优先显示等等。
-        // 这个函数的生成本随着“type”选项卡的整理。
-        public static IEnumerator MonsterIconsGenerate(bool clearButtonFeature)
-        {
-            selectingAccID = null;
-            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
-            {
-                yield return AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId, clearButtonFeature);
-            }
-            target._monsterboxFilter.RefreshTypeDropDown(typeOfMonstersIhave);
         }
 
         public void CancelSelect()
@@ -108,11 +97,33 @@ namespace mainMenu
             PreScene.target.mainProcessRunner.RunAsQueued(DisplayMonsterIcons(false));
         }
 
+        // 从这个函数的名字来看，应该是个产生monsterbox内所有图标的东西。原则上这个玩意如果没有什么新宠物的添加，它是很少加载才对。
+        // 难点在于每个monstericon上给予一个什么样的按钮 ，并且这个按钮到底是什么时机下给予。
+        // 现在的模型循环利用机制决定：每次运行mymonsterbox，都要执行所有拥有角色的模型建立或确认工作
+        // 还有，monsterbox是所有角色CharacterDataInfo的由来，而这个信息现在记载了技能信息，从而可以说这个信息量现在非常大，逻辑出问题也会出现错误。
+        // 19.1.3 : monsterbox应该具备能力可以非常灵活的根据检索条件对所有monster进行分类显示，优先显示等等。
+        // 这个函数的生成本随着“type”选项卡的整理。
+        public static async UniTask MonsterIconsGenerate(bool clearButtonFeature)
+        {
+            selectingAccID = null;
+            List<IEnumerator> addIconTasks = new List<IEnumerator>();
+            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
+            {
+                addIconTasks.Add(AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId, clearButtonFeature));
+            }
+            UnityEngine.Events.UnityAction unityAction = () =>
+            {
+                target._monsterboxFilter.RefreshTypeDropDown(typeOfMonstersIhave);
+            };
+            UniTask UniTask = target.ProcessRunner.RunAsQueued_UniTask(addIconTasks, unityAction);
+            await UniTask;
+        }
+
         //icon的排列，显示   
-        public static IEnumerator DisplayMonsterIcons(bool clearButtonFeature)
+        public static async UniTask DisplayMonsterIcons(bool clearButtonFeature)
         {
             target.MonsterBoxContainer.gameObject.SetActive(true);
-            yield return MonsterIconsGenerate(clearButtonFeature);
+            await (MonsterIconsGenerate(clearButtonFeature));
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
@@ -125,7 +136,7 @@ namespace mainMenu
                 if (_targetingIcon == null)
                 {
                     Debug.Log("严重错误");
-                    yield break;
+                    return;
                 }
                 _targetingIcon.gameObject.SetActive(true);
                 _targetingIcon.transform.SetParent(target.MonsterBoxContainer);

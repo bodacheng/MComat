@@ -72,6 +72,9 @@ namespace mainMenu
             await uniTask;
             Debug.Log("数据读取任务完成?");
 
+            UniTask uniTask3 = MonsterBox.DisplayMonsterIcons(true);
+            await uniTask3;
+
             UniTask uniTask2 = mainProcessRunner.RunAsQueued_UniTask(new List<IEnumerator> { StartUp1(), StartUp2() });
             await uniTask2;
 
@@ -171,7 +174,6 @@ namespace mainMenu
 
         IEnumerator StartUp1()
         {
-            yield return MonsterBox.DisplayMonsterIcons(true);
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
@@ -191,7 +193,7 @@ namespace mainMenu
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
                 yield return MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
         }
 

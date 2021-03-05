@@ -31,7 +31,7 @@ public class TopPage : MainSceneProcess
             {
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
                 yield return ModelShower.target.ShowMyModel(focusLocalid);
-                yield return MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
         }
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);

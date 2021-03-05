@@ -13,8 +13,6 @@ public class TeamEditFront : MainSceneProcess
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         yield return TeamSet.LoadTeamSet(TeamSet.targetTeamMode);
         yield return PreScene.target.TeamEditor.INITeamPosButtons();
-        yield return MonsterBox.DisplayMonsterIcons(true);
-        PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
     }
@@ -28,6 +26,11 @@ public class TeamEditFront : MainSceneProcess
     public override void ProcessEnter()
     {
         mainProcessRunner.RunAsQueued(EnterProcess());
+        UnityEngine.Events.UnityAction unityAction = () =>
+        {
+            PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        };
+        mainProcessRunner.RunAsQueued(MonsterBox.DisplayMonsterIcons(true), unityAction);        
     }
     
     public override void ProcessEnd()
