@@ -136,7 +136,6 @@ namespace mainMenu
             //adjustAllIconsSize(null);
             hangshu = 1 + nowcharIcons.Count / 7;
             target.MonsterBoxContainer.sizeDelta = new Vector2(target.MonsterBoxContainer.rect.width, target.noMagic.GetComponent<RectTransform>().rect.height * hangshu);
-            yield break;
         }
     }
 }

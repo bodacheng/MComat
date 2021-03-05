@@ -8,31 +8,7 @@ public class SingleThreadProcesser : MonoBehaviour
 {
     public static SingleThreadProcesser backup;
 
-    ReactiveProperty<List<UniTask>> processQueue = new ReactiveProperty<List<UniTask>>();
-    BoolReactiveProperty lastTaskFinished = new BoolReactiveProperty(true);
-
-    void Awake()
-    {
-        processQueue.Value = new List<UniTask>();
-        processQueue.Subscribe(x =>
-        {
-            if (x.Count == 0)
-            {
-                lastTaskFinished.Value = true;
-            }
-            else
-            {
-                if (x[0].Status == UniTaskStatus.Succeeded)
-                {
-                    lastTaskFinished.Value = true;
-                }
-                else
-                {
-                    lastTaskFinished.Value = false;
-                }
-            }
-        });
-    }
+    List<UniTask> processQueue = new List<UniTask>();
 
     /// <summary>
     /// 执行一个コルーチン，严格按照前后顺序，前一个任务结束了后再执行下一个
@@ -42,10 +18,10 @@ public class SingleThreadProcesser : MonoBehaviour
     {
         UniTask origin = EnumeratorAsyncExtensions.ToUniTask(_process, this);
         UniTask whole = AsQueue(origin);
-        processQueue.Value.Add(whole);
+        processQueue.Add(whole);
         await whole;
-        processQueue.Value.Remove(whole);
-        Debug.Log("runner"+ this + "  process count:" + processQueue.Value.Count) ;
+        processQueue.Remove(whole);
+        Debug.Log("runner"+ this + "  process count:" + processQueue.Count) ;
     }
 
     /// <summary>
@@ -58,10 +34,10 @@ public class SingleThreadProcesser : MonoBehaviour
     {
         UniTask origin = EnumeratorAsyncExtensions.ToUniTask(_process, this);
         UniTask whole = AsQueue(origin);
-        processQueue.Value.Add(whole);
+        processQueue.Add(whole);
         await whole;
-        processQueue.Value.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Value.Count);
+        processQueue.Remove(whole);
+        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
     }
 
     /// <summary>
@@ -80,16 +56,21 @@ public class SingleThreadProcesser : MonoBehaviour
         }
 
         UniTask whole = AsQueue(UniTask.WhenAll(tasks.ToArray()));
-        processQueue.Value.Add(whole);
+        processQueue.Add(whole);
         await whole;
-        processQueue.Value.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Value.Count);
+        processQueue.Remove(whole);
+        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
     }
 
     private async UniTask AsQueue(UniTask origin)
     {
-        await lastTaskFinished;
+        await temp(origin);
         await origin;
+    }
+
+    private async UniTask<bool> temp(UniTask origin)
+    {
+        return (processQueue.IndexOf(origin) == 0);
     }
 
     /// <summary>
