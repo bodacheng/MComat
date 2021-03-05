@@ -19,7 +19,7 @@ public class SkillStonesList : MainSceneProcess
     {
         yield return CommonEnterProcess();
         SkillStonesBox.target.GenerateCells();
-        yield return SSLevelUpManager.target.OpenLevelUpPage(t as string);
+        SSLevelUpManager.target.OpenLevelUpPage(t as string);
     }
     
     static IEnumerator CommonEnterProcess()
@@ -34,7 +34,7 @@ public class SkillStonesList : MainSceneProcess
             yield break;
         }
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);
-        yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+        SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (

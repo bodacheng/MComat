@@ -23,20 +23,20 @@ namespace mainMenu
             return filterForm;
         }
         
-        public IEnumerator PutSkillStonesToBox(StoneFilterForm filterForm)
+        public void PutSkillStonesToBox(StoneFilterForm filterForm)
         {
-            yield return PutSkillStonesToBox(filterForm, null, null);
+            PutSkillStonesToBox(filterForm, null, null);
         }
         
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public IEnumerator PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
+        public void PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
         {
             List<String> targetSKs = MySkillStones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
             {
                 Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + AccountSet._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
-                yield break;
+                return;
             }
             
             foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)

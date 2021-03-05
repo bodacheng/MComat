@@ -39,7 +39,7 @@ namespace mainMenu
                     }
                 }
                 yield return target.UpdateMyStonesBaseOnSlotsExecution(info);
-                yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+                SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 NineSlotsStatusRefresh();
             }
             mainProcessRunner.RunAsQueued(temp());            

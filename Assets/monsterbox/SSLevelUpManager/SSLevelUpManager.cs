@@ -147,10 +147,10 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
     {
-        PreScene.target.mainProcessRunner.RunAsQueued(OpenLevelUpPage(stoneOfPlayerId));
+        OpenLevelUpPage(stoneOfPlayerId);
     }
     
-    public IEnumerator OpenLevelUpPage(string skillstoneofplayer)
+    public void OpenLevelUpPage(string skillstoneofplayer)
     {
         stoneOfPlayerId = skillstoneofplayer;
         
@@ -165,7 +165,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         SkillStonesBox.target.rares = new List<int> { 0, 1, 2 };
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
-        yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm, new List<string> {stoneOfPlayerId}, extra);
+        SkillStonesBox.target.PutSkillStonesToBox(filterForm, new List<string> {stoneOfPlayerId}, extra);
         SkillStonesBox.target.CellsFeatureLoad(0);
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
@@ -174,14 +174,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void CloseLevelUpPage()
     {
-        PreScene.target.mainProcessRunner.RunAsQueued(_CloseLevelUpPage());
-    }
-    
-    public IEnumerator _CloseLevelUpPage()
-    {
         SkillStonesBox.target.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
         SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
-        yield return SkillStonesBox.target.PutSkillStonesToBox(filterForm);
+        SkillStonesBox.target.PutSkillStonesToBox(filterForm);
         SKStoneItem targetStone = MySkillStones.GetRenderModel(stoneOfPlayerId);
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
