@@ -57,9 +57,9 @@ public class SkillStonesList : MainSceneProcess
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
         if (t != null)
-            mainProcessRunner.Run(EnterProcess(t));
+            mainProcessRunner.RunAsQueued(EnterProcess(t));
         else
-            mainProcessRunner.Run(EnterProcess());
+            mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnter()

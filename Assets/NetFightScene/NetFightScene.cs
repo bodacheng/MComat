@@ -63,7 +63,7 @@ namespace FightScene
             Application.targetFrameRate = 60;
             FightGlobalSetting.scenestep = 1;
             SingleThreadProcesser.backup = mainProcessRunner;
-            mainProcessRunner.Run(FightSceneStartUp());
+            mainProcessRunner.RunAsQueued(FightSceneStartUp());
         }
         
         IEnumerator FightSceneStartUp()

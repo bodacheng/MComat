@@ -54,7 +54,7 @@ namespace mainMenu
                     yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 }
 
-                PreScene.target.mainProcessRunner.Run(temp());
+                PreScene.target.mainProcessRunner.RunAsQueued(temp());
             }
         }
 
@@ -92,7 +92,7 @@ namespace mainMenu
                 yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
             }
 
-            PreScene.target.mainProcessRunner.Run(temp());
+            PreScene.target.mainProcessRunner.RunAsQueued(temp());
         }
 
         

@@ -42,7 +42,7 @@ namespace mainMenu
                 yield return SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 NineSlotsStatusRefresh();
             }
-            mainProcessRunner.Run(temp());            
+            mainProcessRunner.RunAsQueued(temp());            
         }
     }
 }

@@ -125,7 +125,7 @@ namespace mainMenu
                     if (_SkillStone != null && _SkillStone._SkillConfig != null)
                     {
                         _skillStoneDetail.RefreshInfo(_SkillStone.SkillStoneOfPlayerId);
-                        mainProcessRunner.Run(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
+                        mainProcessRunner.RunAsQueued(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();
                     }

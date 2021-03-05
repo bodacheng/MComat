@@ -36,7 +36,7 @@ public class ArcadeFrontProcess : MainSceneProcess
     public override void ProcessEnter()
     {
         loadFinished = false;
-        mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()

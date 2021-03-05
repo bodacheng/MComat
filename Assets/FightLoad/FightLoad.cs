@@ -76,7 +76,7 @@ public static class FightLoad
             }
             Go(ToBeLoad);
         }
-        PreScene.target.mainProcessRunner.Run(LoadAndGo());
+        PreScene.target.mainProcessRunner.RunAsQueued(LoadAndGo());
     }
     
     public static void Go(StageScriptableObject stage)

@@ -39,7 +39,7 @@ public class PreparingProcess : FSceneProcess
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
         NetFightScene.target.PreparingCanvas.gameObject.SetActive(true);
-        SingleThreadProcesser.backup.Run(EnterProcess().ToUniTask());
+        SingleThreadProcesser.backup.RunFreely(EnterProcess().ToUniTask());
     }
     
     public override void ProcessEnd()

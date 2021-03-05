@@ -51,9 +51,9 @@ public class MemberDetail_edit : MainSceneProcess
     {
         if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
         {
-            mainProcessRunner.Run(SkillShowSpEnterProcess());
+            mainProcessRunner.RunAsQueued(SkillShowSpEnterProcess());
         }else{
-            mainProcessRunner.Run(EnterProcess());
+            mainProcessRunner.RunAsQueued(EnterProcess());
         }
     }
     
@@ -93,7 +93,7 @@ public class MemberDetail_edit : MainSceneProcess
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            mainProcessRunner.Run(TheNineSlot.target.UpdateMyStonesBaseOnSlots(_AccCharInfo));
+            mainProcessRunner.RunAsQueued(TheNineSlot.target.UpdateMyStonesBaseOnSlots(_AccCharInfo));
         }
         void SkillUpdateValidation()
         {

@@ -19,7 +19,7 @@ namespace mainMenu
                         yield return new WaitForSecondsRealtime(2f);
                         _ValiWarn.text = "";
                     }
-                    PreScene.target.mainProcessRunner.Run(temp());
+                    PreScene.target.mainProcessRunner.RunAsQueued(temp());
                 break;
                 case NineAndTwo.SkillEditError.UnBalanced:
                     IEnumerator temp2()
@@ -28,7 +28,7 @@ namespace mainMenu
                         yield return new WaitForSecondsRealtime(2f);
                         _ValiWarn.text = "";
                     }
-                    PreScene.target.mainProcessRunner.Run(temp2());
+                    PreScene.target.mainProcessRunner.RunAsQueued(temp2());
                 break;
                 case NineAndTwo.SkillEditError.NoNormalStart:
                     IEnumerator temp3()
@@ -37,7 +37,7 @@ namespace mainMenu
                         yield return new WaitForSecondsRealtime(2f);
                         _ValiWarn.text = "";
                     }
-                    PreScene.target.mainProcessRunner.Run(temp3());
+                    PreScene.target.mainProcessRunner.RunAsQueued(temp3());
                 break;
                 case NineAndTwo.SkillEditError.UnableToFinish:
                     IEnumerator temp4()
@@ -46,7 +46,7 @@ namespace mainMenu
                         yield return new WaitForSecondsRealtime(2f);
                         _ValiWarn.text = "";
                     }
-                    PreScene.target.mainProcessRunner.Run(temp4());
+                    PreScene.target.mainProcessRunner.RunAsQueued(temp4());
                     break;
             }
         }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using mainMenu;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -86,7 +87,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     
     void ShowUsingCharIcon(SKStoneItem dragAndDropItem, HeroIcon targetIcon)
     {
-        _SingleThreadProcesser.Run(SkillStonesBox.target.ShowUsingChar(dragAndDropItem, targetIcon));
+        _SingleThreadProcesser.RunFreely(SkillStonesBox.target.ShowUsingChar(dragAndDropItem, targetIcon).ToUniTask());
     }
     
     /// <summary>

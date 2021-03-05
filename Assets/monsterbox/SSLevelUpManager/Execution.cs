@@ -93,6 +93,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         if (StoneInfoModel == null)
             return;
-        PreScene.target.mainProcessRunner.Run(LevelUpStone(StoneInfoModel.skillStoneOfPlayerId));
+        PreScene.target.mainProcessRunner.RunAsQueued(LevelUpStone(StoneInfoModel.skillStoneOfPlayerId));
     }
 }

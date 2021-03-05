@@ -106,7 +106,7 @@ namespace mainMenu
         public void IconButtonFeature(HeroIcon heroIcon)
         {
             // 显示模型
-            MemberDetail.target.presentationProcessRunner.Run(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
+            MemberDetail.target.presentationProcessRunner.RunAsQueued(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
             // 显示技能组
             _NineForShow.ShowStones_DataInfo(heroIcon.CharDataInfo);
         }

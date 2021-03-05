@@ -175,7 +175,7 @@ namespace mainMenu
             }
             void Trigger()
             {
-                PreScene.target.mainProcessRunner.Run(MonsterIconButton());
+                PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton());
             }
             targetButton.onClick.AddListener(Trigger);
         }
@@ -353,7 +353,7 @@ namespace mainMenu
             FightStartBUtton.onClick.RemoveAllListeners();
             void AskStartFight()
             {
-                PreScene.target.mainProcessRunner.Run(FightStart());
+                PreScene.target.mainProcessRunner.RunAsQueued(FightStart());
             }
             FightStartBUtton.onClick.AddListener(AskStartFight);
             yield break;
@@ -370,7 +370,7 @@ namespace mainMenu
                 {
                     yield return MonsterIConButton(MonsterBox.selectingAccID);
                 }
-                PreScene.target.mainProcessRunner.Run(temp());
+                PreScene.target.mainProcessRunner.RunAsQueued(temp());
             }
         }
     }

@@ -42,7 +42,7 @@ public class GachaManager : MonoBehaviour
                 Debug.Log("错误返回" + process.Current);
             }
         }
-        PreScene.target.mainProcessRunner.Run(Go());
+        PreScene.target.mainProcessRunner.RunAsQueued(Go());
     }
     
     public void NineTimes()
@@ -57,7 +57,7 @@ public class GachaManager : MonoBehaviour
                 Debug.Log("错误返回" + process.Current);
             }
         }
-        PreScene.target.mainProcessRunner.Run(Go());
+        PreScene.target.mainProcessRunner.RunAsQueued(Go());
     }
     
     public IEnumerator Gacha(string type, int count)

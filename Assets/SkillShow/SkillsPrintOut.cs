@@ -105,7 +105,7 @@ namespace mainMenu
                 }
                 
                 //////// 超级功能 ////////
-                TheNineSlot.target.mainProcessRunner.Run(SkillShowRunWithPrepare(_SE.REAL_NAME));                
+                TheNineSlot.target.mainProcessRunner.RunAsQueued(SkillShowRunWithPrepare(_SE.REAL_NAME));                
                 IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。

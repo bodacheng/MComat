@@ -39,7 +39,7 @@ namespace mainMenu
         // 撤销编辑
         public void ResetNineSlot()
         {
-            mainProcessRunner.Run(target.ReadANineAndTwo(MemberDetail.target._focusing));
+            mainProcessRunner.RunAsQueued(target.ReadANineAndTwo(MemberDetail.target._focusing));
         }
     }
 }

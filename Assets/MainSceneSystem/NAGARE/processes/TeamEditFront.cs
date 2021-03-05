@@ -27,14 +27,14 @@ public class TeamEditFront : MainSceneProcess
         
     public override void ProcessEnter()
     {
-        mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-        mainProcessRunner.Run(TeamSet.SaveTeamSet(TeamSet.targetTeamMode));// 退出队伍编辑画面即保存
+        mainProcessRunner.RunAsQueued(TeamSet.SaveTeamSet(TeamSet.targetTeamMode));// 退出队伍编辑画面即保存
     }
     
     readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);

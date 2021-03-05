@@ -43,7 +43,7 @@ namespace mainMenu
                                     SKStoneItem _stone = _SkillStoneCell.GetItem();
                                     if (_stone != null && _stone._SkillConfig != null)
                                     {
-                                        PreScene.target.mainProcessRunner.Run(SSLevelUpManager.target.OpenLevelUpPage(_stone.SkillStoneOfPlayerId));
+                                        PreScene.target.mainProcessRunner.RunAsQueued(SSLevelUpManager.target.OpenLevelUpPage(_stone.SkillStoneOfPlayerId));
                                     }
                                 }
                             }

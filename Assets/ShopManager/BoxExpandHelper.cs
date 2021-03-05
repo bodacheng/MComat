@@ -53,12 +53,12 @@ public class BoxExpandHelper : MonoBehaviour
     
     void ChooseFive()
     {
-        PreScene.target.mainProcessRunner.Run(BoxExpansion(5));
+        PreScene.target.mainProcessRunner.RunAsQueued(BoxExpansion(5));
     }
     
     void ChooseTen()
     {
-        PreScene.target.mainProcessRunner.Run(BoxExpansion(10));
+        PreScene.target.mainProcessRunner.RunAsQueued(BoxExpansion(10));
     }
     
     void ShowResult()

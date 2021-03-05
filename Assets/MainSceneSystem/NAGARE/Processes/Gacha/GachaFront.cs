@@ -33,7 +33,7 @@ public class GachaFront : MainSceneProcess
      
     public override void ProcessEnter()
     {
-        mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()

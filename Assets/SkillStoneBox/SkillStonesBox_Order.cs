@@ -25,7 +25,7 @@ namespace mainMenu
             }
             _Selected.gameObject.SetActive(false);
             SSLevelUpManager.target._MSkillStoneDetail.Clear();
-            mainProcessRunner.Run(PutSkillStonesToBox(target.CurrentFilter()));
+            mainProcessRunner.RunAsQueued(PutSkillStonesToBox(target.CurrentFilter()));
         }
               
         List<string> Order(List<string> targets)

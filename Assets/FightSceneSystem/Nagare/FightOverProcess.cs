@@ -120,7 +120,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            SingleThreadProcesser.backup.Run(EnterProcess());
+            SingleThreadProcesser.backup.RunAsQueued(EnterProcess());
         }
         
         public override void ProcessEnd()

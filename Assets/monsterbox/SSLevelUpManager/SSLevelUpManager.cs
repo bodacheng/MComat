@@ -147,7 +147,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
     {
-        PreScene.target.mainProcessRunner.Run(OpenLevelUpPage(stoneOfPlayerId));
+        PreScene.target.mainProcessRunner.RunAsQueued(OpenLevelUpPage(stoneOfPlayerId));
     }
     
     public IEnumerator OpenLevelUpPage(string skillstoneofplayer)
@@ -174,7 +174,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void CloseLevelUpPage()
     {
-        PreScene.target.mainProcessRunner.Run(_CloseLevelUpPage());
+        PreScene.target.mainProcessRunner.RunAsQueued(_CloseLevelUpPage());
     }
     
     public IEnumerator _CloseLevelUpPage()

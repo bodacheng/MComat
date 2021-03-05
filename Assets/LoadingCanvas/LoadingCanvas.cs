@@ -48,12 +48,12 @@ public partial class LoadingCanvas : MonoBehaviour {
     #region 黑幕
     public void LightUp()
     {
-        mainProcessRunner.Run(LightUpCanvas());
+        mainProcessRunner.RunAsQueued(LightUpCanvas());
     }
     
     public void DarkOff(float darkness)
     {
-        mainProcessRunner.Run(DarkOffCanvas(darkness));
+        mainProcessRunner.RunAsQueued(DarkOffCanvas(darkness));
     }
     
     public void DarkOffDirectly(float darkness)
@@ -103,7 +103,7 @@ public partial class LoadingCanvas : MonoBehaviour {
             yield return new WaitForSeconds(1f);
             CloseValidationWindow();
         }
-        mainProcessRunner.Run(closeWindow());
+        mainProcessRunner.RunAsQueued(closeWindow());
     }
     
     void CloseValidationWindow()

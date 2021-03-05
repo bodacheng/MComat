@@ -75,7 +75,7 @@ public class TeamEditManager : MonoBehaviour
     {
         void Trigger()
         {
-            PreScene.target.mainProcessRunner.Run(MonsterIconButton(CharAccId));
+            PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton(CharAccId));
         }
         targetButton.onClick.AddListener(Trigger);
     }
@@ -127,7 +127,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return ChangeTeamPos(null, focusingPosNum);
                 CancelSelect();
             }
-            PreScene.target.mainProcessRunner.Run(RemoveSelected());
+            PreScene.target.mainProcessRunner.RunAsQueued(RemoveSelected());
         }
         RemoveButton.onClick.AddListener(Remove);
 
@@ -172,21 +172,21 @@ public class TeamEditManager : MonoBehaviour
 
         void pos1F()
         {
-            PreScene.target.mainProcessRunner.Run(setPos(0));
+            PreScene.target.mainProcessRunner.RunAsQueued(setPos(0));
         }
         team1front.iconButton.onClick.AddListener(pos1F);
         
         team1left.iconButton.onClick.RemoveAllListeners();
         void pos1L()
         {
-            PreScene.target.mainProcessRunner.Run(setPos(1));
+            PreScene.target.mainProcessRunner.RunAsQueued(setPos(1));
         }
         team1left.iconButton.onClick.AddListener(pos1L);
         
         team1right.iconButton.onClick.RemoveAllListeners();
         void pos1R()
         {
-            PreScene.target.mainProcessRunner.Run(setPos(2));
+            PreScene.target.mainProcessRunner.RunAsQueued(setPos(2));
         }
         team1right.iconButton.onClick.AddListener(pos1R);
     }

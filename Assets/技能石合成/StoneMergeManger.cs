@@ -87,7 +87,7 @@ public class StoneMergeManger : MonoBehaviour
     {
         void run()
         {
-            PreScene.target.mainProcessRunner.Run(SubmitMergeRequest());
+            PreScene.target.mainProcessRunner.RunAsQueued(SubmitMergeRequest());
         }
         LoadingCanvas.target.ArrangeConfirmWindow(run, "确实要融合技能石？");
     }

@@ -19,7 +19,7 @@ public class StoneSell : MainSceneProcess
     public override void ProcessEnter()
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        mainProcessRunner.Run(EnterProcess());
+        mainProcessRunner.RunAsQueued(EnterProcess());
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),

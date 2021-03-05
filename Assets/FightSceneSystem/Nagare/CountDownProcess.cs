@@ -23,7 +23,7 @@ namespace FightScene
             startTimestamp = 3f;
             AutoMoveToNext = false;
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
-            NetFightScene.target.mainProcessRunner.Run(BeforeFightCountDown());
+            NetFightScene.target.mainProcessRunner.RunAsQueued(BeforeFightCountDown());
         }
         
         IEnumerator BeforeFightCountDown()

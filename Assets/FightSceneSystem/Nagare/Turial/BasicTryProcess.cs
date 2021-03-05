@@ -99,14 +99,14 @@ public class BasicTryProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        SingleThreadProcesser.backup.Run(EnterProcess());
+        SingleThreadProcesser.backup.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
         NetFightScene.target.FightCanvas.gameObject.SetActive(false);
         NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
-        SingleThreadProcesser.backup.Run(FinalMoment(finalSurviver, loser));
+        SingleThreadProcesser.backup.RunAsQueued(FinalMoment(finalSurviver, loser));
     }
     
     public override void LocalUpdate()

@@ -70,7 +70,7 @@ namespace mainMenu
 
             if (!DataRead)
                 DataLoad();
-            mainProcessRunner.Run(StartUpProcess());
+            mainProcessRunner.RunAsQueued(StartUpProcess());
             Screen.SetResolution(1920, 1080, true);
         }
 
@@ -80,19 +80,19 @@ namespace mainMenu
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
-                    mainProcessRunner.Run(AccountCharsSet.Load_List());
-                    mainProcessRunner.Run(MySkillStones.LoadAMySkillstones(Setting.Language));
+                    mainProcessRunner.RunAsQueued(AccountCharsSet.Load_List());
+                    mainProcessRunner.RunAsQueued(MySkillStones.LoadAMySkillstones(Setting.Language));
                 break;
                 case PlayerAccountProgressStep.justCreated:
                 break;
                 case PlayerAccountProgressStep.Tutorial:
-                    mainProcessRunner.Run(AccountCharsSet.LoadTutorial());
-                    mainProcessRunner.Run(MySkillStones.LoadTutorial());
+                    mainProcessRunner.RunAsQueued(AccountCharsSet.LoadTutorial());
+                    mainProcessRunner.RunAsQueued(MySkillStones.LoadTutorial());
                 break;
             }
-            mainProcessRunner.Run(AccountSet.LoadCustomerInfo()); // 缺response判断
-            mainProcessRunner.Run(TeamSet.LoadTeamSet(TeamSetGameMode.story));
-            mainProcessRunner.Run(TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3));
+            mainProcessRunner.RunAsQueued(AccountSet.LoadCustomerInfo()); // 缺response判断
+            mainProcessRunner.RunAsQueued(TeamSet.LoadTeamSet(TeamSetGameMode.story));
+            mainProcessRunner.RunAsQueued(TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3));
 
             DataRead = true;
         }

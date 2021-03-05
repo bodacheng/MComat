@@ -19,7 +19,7 @@ public class ArenaManager : MonoBehaviour
     
     public void RefreshOpponent()
     {
-        PreScene.target.mainProcessRunner.Run(target.LoadArena());
+        PreScene.target.mainProcessRunner.RunAsQueued(target.LoadArena());
     }
         
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
