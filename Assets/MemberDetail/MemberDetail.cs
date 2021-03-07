@@ -102,6 +102,7 @@ namespace mainMenu
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
                 MemberInfoT.gameObject.SetActive(false);
+                return;
             }
             
             CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
