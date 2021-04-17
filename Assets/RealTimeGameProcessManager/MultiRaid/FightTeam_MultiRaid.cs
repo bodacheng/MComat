@@ -109,7 +109,7 @@ namespace FightScene
                 });
 
                 a_char.IsDead = new ReactiveProperty<bool>(false);
-                a_char.IsDead.Subscribe(x =>
+                a_char.IsDead.Subscribe(x => 
                 {
                     if (x == true)
                     {
