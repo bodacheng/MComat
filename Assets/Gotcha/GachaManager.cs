@@ -92,6 +92,7 @@ public class GachaManager : MonoBehaviour
     }
     
     // Gocha对象技能石应该有个更明确的范围，因为开启不同的gocha项目，出的东西还不一样，这应该是比较普遍的。更何况还有个不同获得概率的问题。
+    // 这个函数摆在这地方本身是违背原则的。
     static IEnumerator OneGocha(string type)
     {
         List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);

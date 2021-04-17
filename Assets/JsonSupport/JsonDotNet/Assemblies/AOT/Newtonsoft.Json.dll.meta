@@ -1,131 +1,76 @@
 fileFormatVersion: 2
-guid: 48a333bf473070e498e31374abd849d3
+guid: 6a3c684705042f345975d924f6983e36
+timeCreated: 1466788352
+licenseType: Store
 PluginImporter:
-  externalObjects: {}
-  serializedVersion: 2
+  serializedVersion: 1
   iconMap: {}
   executionOrder: {}
-  defineConstraints: []
   isPreloaded: 0
-  isOverridable: 0
-  isExplicitlyReferenced: 0
-  validateReferences: 1
   platformData:
-  - first:
-      '': Any
-    second:
-      enabled: 0
-      settings:
-        Exclude Android: 1
-        Exclude Editor: 1
-        Exclude Linux: 1
-        Exclude Linux64: 1
-        Exclude LinuxUniversal: 1
-        Exclude OSXUniversal: 1
-        Exclude Win: 1
-        Exclude Win64: 1
-  - first:
-      '': OSXIntel
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
-      '': OSXIntel64
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
-      '': SamsungTV
-    second:
-      enabled: 0
-      settings:
-        STV_MODEL: STANDARD_13
-  - first:
-      Android: Android
-    second:
-      enabled: 0
-      settings:
-        CPU: ARMv7
-  - first:
-      Any: 
-    second:
+    Android:
       enabled: 1
+      settings:
+        CPU: AnyCPU
+    Any:
+      enabled: 0
       settings: {}
-  - first:
-      Editor: Editor
-    second:
+    Editor:
       enabled: 0
       settings:
         CPU: AnyCPU
         DefaultValueInitialized: true
         OS: AnyOS
-  - first:
-      Facebook: Win
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
-      Facebook: Win64
-    second:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
-  - first:
-      Standalone: Linux
-    second:
+    Linux:
       enabled: 0
       settings:
         CPU: x86
-  - first:
-      Standalone: Linux64
-    second:
+    Linux64:
       enabled: 0
       settings:
         CPU: x86_64
-  - first:
-      Standalone: LinuxUniversal
-    second:
-      enabled: 0
-      settings:
-        CPU: None
-  - first:
-      Standalone: OSXUniversal
-    second:
+    OSXIntel:
       enabled: 0
       settings:
         CPU: AnyCPU
-  - first:
-      Standalone: Win
-    second:
+    OSXIntel64:
       enabled: 0
       settings:
         CPU: AnyCPU
-  - first:
-      Standalone: Win64
-    second:
+    SamsungTV:
+      enabled: 1
+      settings:
+        STV_MODEL: STANDARD_13
+    Tizen:
+      enabled: 1
+      settings: {}
+    WebGL:
+      enabled: 1
+      settings: {}
+    Win:
       enabled: 0
       settings:
         CPU: AnyCPU
-  - first:
-      Windows Store Apps: WindowsStoreApps
-    second:
+    Win64:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+    WindowsStoreApps:
       enabled: 1
       settings:
         CPU: AnyCPU
         DontProcess: False
         PlaceholderPath: Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll
         SDK: AnySDK
-        ScriptingBackend: DotNet
-  - first:
-      iPhone: iOS
-    second:
-      enabled: 0
+        ScriptingBackend: Il2Cpp
+    iOS:
+      enabled: 1
       settings:
         CompileFlags: 
         FrameworkDependencies: 
+    tvOS:
+      enabled: 1
+      settings: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.8.4.0</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.9.4.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>iOS:9</UnityBuildTarget>
     <UnityVersion>2019.4.9f1</UnityVersion>
@@ -272,6 +272,7 @@
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_localTest.cs" />
     <Compile Include="Assets\DataBaseAccess\AccountSet\AccountSet_remote.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Add.cs" />
+    <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Gotcha.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Json.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Loading.cs" />
     <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\MySkillStonesReader.cs" />
@@ -356,6 +357,8 @@
     <Compile Include="Assets\Language\LanguageCodeTable.cs" />
     <Compile Include="Assets\Language\LanguageConverter.cs" />
     <Compile Include="Assets\Language\LanguageConverterManger.cs" />
+    <Compile Include="Assets\Launcher\StartUpPresentation.cs" />
+    <Compile Include="Assets\Launcher\Starter.cs" />
     <Compile Include="Assets\LoadingCanvas\LoadingCanvas.cs" />
     <Compile Include="Assets\LoadingCanvas\LoadingCanvas_HightLight.cs" />
     <Compile Include="Assets\Login\PlayFabLogin.cs" />
@@ -493,8 +496,6 @@
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Common.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
     <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Rename.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\StartUpPresentation.cs" />
-    <Compile Include="Assets\Scene\ABLoadScene\Starter.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\CachDownLoadMission.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\DownLoad_CMM.cs" />
     <Compile Include="Assets\Scene\ABLoadScene\downloads\ResourceDownLoad.cs" />
@@ -505,9 +506,8 @@
     <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_model.cs" />
     <Compile Include="Assets\Scene\TITLE_SCENE\Intro.cs" />
     <Compile Include="Assets\SelfFightManager\SelfFightManager.cs" />
+    <Compile Include="Assets\Setting\ConfigureOptions.cs" />
     <Compile Include="Assets\Setting\FightGlobalSetting.cs" />
-    <Compile Include="Assets\Setting\ResourceSetting.cs" />
-    <Compile Include="Assets\Setting\ResourceSettingGUI.cs" />
     <Compile Include="Assets\Setting\Setting.cs" />
     <Compile Include="Assets\ShopManager\BoxExpandHelper.cs" />
     <Compile Include="Assets\ShopManager\ShopManager.cs" />

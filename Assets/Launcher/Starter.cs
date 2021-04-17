@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using dataAccess;
-using UnityEngine.SceneManagement;
-using mainMenu;
+﻿using dataAccess;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 using Json;
+using mainMenu;
 
-public class Starter : MonoBehaviour
+public partial class Starter : MonoBehaviour
 {
     public PlayerInfoRefMode ProjectPlayerInfoRefMode;
     public bool enterFrontPageFirst;
@@ -13,7 +13,8 @@ public class Starter : MonoBehaviour
     // 启动本地测试模式
     public void BeginLocalTestMode()
     {
-        StartCoroutine(_BeginLocalTestMode());
+        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        EnterFrontScene();
     }
 
     // 启动本地测试模式（新存档）
@@ -35,21 +36,6 @@ public class Starter : MonoBehaviour
     public void ToSkillShowerMode()
     {
         StartCoroutine(SkillShowerMode());
-    }
-    
-    IEnumerator _BeginLocalTestMode()
-    {
-        PlayFabLogin.CustomIDLogin(
-            result => {
-                //CloudScript.StartCloudHelloWorld();
-                AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-                EnterFrontScene();
-            },
-            fail => {
-                Debug.Log("login fail");
-            }
-        );
-        yield break;
     }
 
     IEnumerator SkillShowerMode()
@@ -126,5 +112,20 @@ public class Starter : MonoBehaviour
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
         stage._fightEventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
+    }
+
+    // 启动网络模式
+    public void BeginNetMode()
+    {
+        PlayFabLogin.CustomIDLogin(
+            result => {
+                CloudScript.StartCloudHelloWorld();
+                AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+                EnterFrontScene();
+            },
+            fail => {
+                Debug.Log("login fail");
+            }
+        );
     }
 }

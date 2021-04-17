@@ -20,7 +20,7 @@ public partial class ResourceDownLoad : MonoBehaviour
 {
     [Space(7)]
     [Header("资源读取设置")]
-    public ResourceSetting _ResourceSetting;
+    public ConfigureOptions _ResourceSetting;
     public LocalMasterDataTool _ConfigFileManager;
 
     [Space(7)]
