@@ -4,62 +4,55 @@ using UnityEngine;
 using Api.Dto.Model;
 using Api.Common;
 using Api.Dto.Form;
+using PlayFab;
+using PlayFab.ClientModels;
+using Newtonsoft.Json;
 
 namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        #region 获取所有角色
-        public static IEnumerator Load_List()
+        public static void Load_List()
         {
-            GetMonsterOfPlayerListForm form = new GetMonsterOfPlayerListForm
+            AccountCharInfoDic.Clear();
+            List<MonsterOfPlayerDetailModel> charList = default;
+            switch (AccountSet.ReferenceMode)
             {
-                playerId = AccountSet._AccInfo.PlayerName
-            };
-            
-            yield return LoadList_execution(
-                form,
-                model => {
-                    AccountCharInfoDic.Clear();
-                    foreach (MonsterOfPlayerDetailModel one in model.monsterOfPlayerList)
+                case PlayerInfoRefMode.localTestSaveData:
+                    charList = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
+                    foreach (MonsterOfPlayerDetailModel one in charList)
                     {
                         if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
                             AccountCharInfoDic.Add(one.monsterOfPlayerId, one);
                         else
-                            Debug.Log("重复的角色存档id："+ one.monsterOfPlayerId);
-                    }
-                },
-                model => {
-                    AccountCharInfoDic.Clear();
-                    Debug.Log(" 人员列表读取失败 ");
-                },
-                Setting.Language
-            );
-        }
-        
-        public static IEnumerator LoadList_execution(GetMonsterOfPlayerListForm form, SuccessDelegate<GetMonsterOfPlayerListModel> success, FailDelegate<GetMonsterOfPlayerListModel> fail, ApiLanguage apiLanguage)
-        {
-            GetMonsterOfPlayerListModel listModel = new GetMonsterOfPlayerListModel();
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    IEnumerator enumerator = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
-                    yield return enumerator;
-                    if (enumerator.Current != null)
-                    {
-                        listModel.monsterOfPlayerList = (List<MonsterOfPlayerDetailModel>)enumerator.Current;
-                        success(listModel);
-                    }else{
-                        fail(null);
+                            Debug.Log("重复的角色存档id：" + one.monsterOfPlayerId);
                     }
                     break;
                 case PlayerInfoRefMode.formalVersion:
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
+                    PlayFabClientAPI.GetUserData(
+                        new GetUserDataRequest() {
+                            PlayFabId = AccountSet._AccInfo.PlayerName,
+                            Keys = new List<string>() { "charList" }
+                        },
+                        (GetUserDataResult obj) => {
+                            UserDataRecord userDataRecord = obj.Data["charList"];
+                            charList = JsonConvert.DeserializeObject<List<MonsterOfPlayerDetailModel>>(userDataRecord.Value);
+                            foreach (MonsterOfPlayerDetailModel one in charList)
+                            {
+                                if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
+                                    AccountCharInfoDic.Add(one.monsterOfPlayerId, one);
+                                else
+                                    Debug.Log("重复的角色存档id：" + one.monsterOfPlayerId);
+                            }
+                        },
+                        errorCallback => {
+                            Debug.Log(errorCallback.Error);
+                        });
                     break;
             }
         }
-        #endregion
         
         #region 获取单个角色
         /// <summary>

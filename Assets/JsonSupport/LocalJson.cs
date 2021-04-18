@@ -23,7 +23,7 @@ namespace Json
             {
                 wholepath = Application.persistentDataPath + "/" + filename;
             }
-
+            Debug.Log("try:"+wholepath);
             try
             {
                 if (!File.Exists(wholepath))

@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.9.4.0</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.10.1.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>iOS:9</UnityBuildTarget>
     <UnityVersion>2019.4.9f1</UnityVersion>
@@ -233,7 +233,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\NoneCertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMailListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterOfPlayerDetailForm.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterOfPlayerListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetRankInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetSkillStoneOfPlayerInfoForm.auto.cs" />
@@ -247,7 +246,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\BasicVoidModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailsOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMergedStoneModel.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMonsterOfPlayerListModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRankInfoOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRewardModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
@@ -436,7 +434,7 @@
     <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
     <Compile Include="Assets\Personality\Personality_events.cs" />
     <Compile Include="Assets\PlayFab\CloudScripts\HelloWorld.cs" />
-    <Compile Include="Assets\PlayFab\Defs\PFSKDefine.cs" />
+    <Compile Include="Assets\PlayFab\Defs\PFDefine.cs" />
     <Compile Include="Assets\PlayFab\Defs\PFSKSTDefine.cs" />
     <Compile Include="Assets\Prescene\BigButtonRender.cs" />
     <Compile Include="Assets\Prescene\PreScene.cs" />

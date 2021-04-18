@@ -1,5 +1,5 @@
 ﻿
-public class PFSKSTDefine
+public class PFStoreDefine
 {
     public string StoreId = "";
     public StoreItem[] Store;
@@ -14,7 +14,7 @@ public class PFSKSTDefine
         public string DisplayPosition;
     }
 
-    public class CustomData
+    public abstract class CustomData
     {
     }
 

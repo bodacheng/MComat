@@ -35,6 +35,16 @@ public class LocalMasterDataToolGUI : Editor {
             _ConfigFileManager.OutputSKStonesStore();
         }
 
+        if (GUILayout.Button("(playFab)输出Json格式角色定义文件(只能在程序启动状态下正常运行)"))
+        {
+            _ConfigFileManager.OutputMonstersCatalog();
+        }
+
+        if (GUILayout.Button("(playFab)输出Json格式角色商店文件(只能在程序启动状态下正常运行)"))
+        {
+            _ConfigFileManager.OutputMonsterStore();
+        }
+
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))
         {
             Debug.Log("危险，已经弃用");

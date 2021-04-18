@@ -90,7 +90,7 @@ namespace mainMenu
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
-                    yield return AccountCharsSet.Load_List();
+                    AccountCharsSet.Load_List();
                     yield return MySkillStones.LoadAMySkillstones(Setting.Language);
                     break;
                 case PlayerAccountProgressStep.justCreated:

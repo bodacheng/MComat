@@ -1,5 +1,5 @@
 ﻿
-public class PFSKDefine
+public class PFDefine
 {
     public string CatalogVersion = "";
     public Item[] Catalog;
@@ -16,7 +16,7 @@ public class PFSKDefine
         public string RealCurrencyPrices;
         public string[] Tags = new string[] { };
         public CustomData CustomData;
-        public Consumable Consumable = new Consumable();
+        public Consumable Consumable;
         public string Container;
         public string Bundle;
         public bool CanBecomeCharacter;
@@ -26,13 +26,21 @@ public class PFSKDefine
         public bool IsLimitedEdition;
         public int InitialLimitedEditionCount;
         public string ActivatedMembership;
-        
     }
 
-    public class CustomData
+    public abstract class CustomData
+    {
+    }
+
+    public class SK_CustomData : CustomData
     {
         public string exp;
         public string equipingC;
+    }
+
+    public class C_CustomData : CustomData
+    {
+        public string zokusei;
     }
 
     public class Consumable
@@ -42,5 +50,3 @@ public class PFSKDefine
         public string UsagePeriodGroup;
     }
 }
-
-

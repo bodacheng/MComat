@@ -11,7 +11,7 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        public static IEnumerator LoadAll_Json(string filePath)
+        public static List<MonsterOfPlayerDetailModel> LoadAll_Json(string filePath)
         {
             List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
             MonsterOfPlayerDetailModel info;
@@ -32,7 +32,7 @@ namespace dataAccess
                     }
                 }
             }
-            yield return charList;
+            return charList;
         }
         
         public static IEnumerator LoadAccCharInfoViaJsonFile(string monsterlocalid)
