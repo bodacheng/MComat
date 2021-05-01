@@ -7,8 +7,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using Skill;
-using Api.Common;
-using Api.Dto.Form;
 using Json;
 using PlayFab;
 
@@ -16,14 +14,8 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {    
-        static IEnumerator LoadAll_Json(
-            string filePath, 
-            GetSkillStoneOfPlayerInfoForm form, 
-            Dictionary<string, string> headers, 
-            SuccessDelegate<GetSkillStoneOfPlayerInfoModel> success, 
-            FailDelegate<GetSkillStoneOfPlayerInfoModel> fail)
+        static List<SkillStoneOfPlayerInfoModel> LoadAll_Json(string filePath)
         {
-            GetSkillStoneOfPlayerInfoModel model = new GetSkillStoneOfPlayerInfoModel();
             if (Directory.Exists(filePath))
             {
                 Debug.Log("正从以下路径获取技能石存档："+filePath);
@@ -42,12 +34,9 @@ namespace dataAccess
                         Debug.Log(e.ToString());
                     }
                 }
-                model.skillStoneOfPlayerInfoList = list;
-                success(model);
-            }else{
-                fail(model);
+                return list;
             }
-            yield break;
+            return new List<SkillStoneOfPlayerInfoModel>();
         }
         
         //新
@@ -79,7 +68,7 @@ namespace dataAccess
         
         public static IEnumerator LocalSaveDataGetAllStones()
         {
-            yield return LoadAMySkillstones(Setting.Language);
+            //LoadAMySkillstones();
             //LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
             yield return SkillConfigTable.LoadAllSkillConfigs();
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)

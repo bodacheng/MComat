@@ -235,7 +235,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterOfPlayerDetailForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetRankInfoForm.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetSkillStoneOfPlayerInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\LoginForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\RequestRewardForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterSkillStoneForm.auto.cs" />
@@ -249,7 +248,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRankInfoOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRewardModel.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneOfPlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MailOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MemberOfTeam.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterOfPlayerDetailModel.auto.cs" />

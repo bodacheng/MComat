@@ -84,14 +84,26 @@ namespace mainMenu
             ToInitialPhase();
         }
 
+        bool monsterLoadFinished = false;
+        void MonsterLoadFinished(bool value)
+        {
+            monsterLoadFinished = value;
+        }
+
+        bool skillStonesLoadFinished = false;
+        void SkillStonesLoadFinished(bool value)
+        {
+            skillStonesLoadFinished = value;
+        }
+
         //  尝试把各种加载非同期化。目前这个版本并没有结束。
         IEnumerator DataLoad_part1()
         {
             switch (AccountSet._AccInfo.accountprogress)
             {
                 case PlayerAccountProgressStep.Freedom:
-                    AccountCharsSet.Load_List();
-                    yield return MySkillStones.LoadAMySkillstones(Setting.Language);
+                    AccountCharsSet.Load_List(MonsterLoadFinished);
+                    MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
                     break;
                 case PlayerAccountProgressStep.justCreated:
                     break;

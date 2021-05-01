@@ -1,95 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Api.Common;
-using Api.Dto.Form;
+using PlayFab;
+using PlayFab.ClientModels;
 using Api.Dto.Model;
 using Skill;
+using Newtonsoft.Json;
+using System;
 
 namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static IEnumerator LoadAMySkillstones(ApiLanguage apiLanguage)
+        static void ConvertToDic(List<SkillStoneOfPlayerInfoModel> list)
         {
-            List<SkillStoneOfPlayerInfoModel> infos = new List<SkillStoneOfPlayerInfoModel>();
-            GetSkillStoneOfPlayerInfoForm form = new GetSkillStoneOfPlayerInfoForm
+            foreach (SkillStoneOfPlayerInfoModel stoneinfo in list)
             {
-            };
-            yield return Load(
-                form,
-                model => {
-                    infos = model.skillStoneOfPlayerInfoList;
-                    void readOne(SkillStoneOfPlayerInfoModel one, int a)
-                    {
-                        if (a == 1)
-                            LoadingCanvas.target.TurnOnProcessDescription(true);
-                        switch (apiLanguage)
-                        {
-                            case ApiLanguage.JaJp:
-                                LoadingCanvas.target.NowProcess("スキルストーン を読み込み中", (float)a / infos.Count);
-                                break;
-                            default:
-                                LoadingCanvas.target.NowProcess("正在构成技能石模型", (float)a / infos.Count);
-                                break;
-                        }
-                        Read(one);
-                        if (a == infos.Count)
-                        {
-                            LoadingCanvas.target.TurnOnProcessDescription(false);
-                        }
-                    }
-
-                    int i = 1;
-                    foreach (SkillStoneOfPlayerInfoModel one in infos)
-                    {
-                        SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(one.skillId);
-                        if (_SkillConfig == null)
-                        {
-                            Debug.Log("巨大问题,技能id似乎未定义：" + one.skillId);
-                            LoadingCanvas.target.TurnOnProcessDescription(false);
-                            continue;
-                        }
-                        readOne(one, i);
-                        i++;
-                    }
-                },
-                model => {
-                    Dic.Clear();
-                    RenderModelDic.Clear();
-                },
-                apiLanguage
-            );
+                Read(stoneinfo);
+            }
         }
 
-        static IEnumerator Load(GetSkillStoneOfPlayerInfoForm form, SuccessDelegate<GetSkillStoneOfPlayerInfoModel> success, FailDelegate<GetSkillStoneOfPlayerInfoModel> fail, ApiLanguage apiLanguage)
+        public static void LoadAMySkillstones(Action<bool> finished)
         {
+            Dic.Clear();
+            RenderModelDic.Clear();
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    yield return LoadAll_Json(Application.persistentDataPath + "/MyStones",
-                        form,
-                        ApiCaller.Instance.getHeader(apiLanguage), 
-                        model => {
-                            success(model);
-                        },
-                        model => {
-                            fail(model);
-                        }
-                    );
+                    List<SkillStoneOfPlayerInfoModel> list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
+                    ConvertToDic(list);
+                    finished(true);
                 break;
-            case PlayerInfoRefMode.remoteTestPlayer:
-                yield return ApiCaller.Instance.Post<GetSkillStoneOfPlayerInfoModel, GetSkillStoneOfPlayerInfoForm>
-                (   "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo",
-                    form, 
-                    ApiCaller.Instance.getHeader(apiLanguage), 
-                    model => {
-                    success(model.data);
-                    },
-                    model => {
-                    fail(model.data);
-                    }
-                );
+                case PlayerInfoRefMode.remoteTestPlayer:
+                    PlayFabClientAPI.GetUserData(
+                        new GetUserDataRequest()
+                        {
+                            PlayFabId = AccountSet._AccInfo.PlayerName,
+                            Keys = new List<string>() { "stoneList" }
+                        },
+                        (GetUserDataResult obj) => {
+                            UserDataRecord userDataRecord = obj.Data["stoneList"];
+                            List<SkillStoneOfPlayerInfoModel> info = JsonConvert.DeserializeObject<List<SkillStoneOfPlayerInfoModel>>(userDataRecord.Value);
+                            ConvertToDic(info);
+                            finished(true);
+                        },
+                        errorCallback => {
+                            Debug.Log(errorCallback.Error);
+                            finished(false);
+                        });
                 break;
             case PlayerInfoRefMode.formalVersion:
                 break;
