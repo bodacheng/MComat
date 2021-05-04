@@ -69,7 +69,7 @@ namespace mainMenu
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
 
-            UniTask uniTask = mainProcessRunner.RunAsQueued_UniTask(new List<IEnumerator> { StartUp1(), StartUp2() });
+            UniTask uniTask = mainProcessRunner.RunAsQueued_UniTask(StartUp());
             await uniTask;
 
             BasicPhase();
@@ -116,30 +116,30 @@ namespace mainMenu
             MailDetailProcess mailDetail = new MailDetailProcess();
 
             ProcessesRunner.Main.Clear();
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.TeamEditFront, teamEditFront);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStoneList, skillStones);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SkillStones_Sell, stoneSell);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.StoneMerge, stoneMerge);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MonsterList, memberDetail);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.FrontPage, frontPage);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.ArcadeFront, arcadeFrontProcess);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.Arena, areanaProcess);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.ShopTop, shopTop);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.BoxExpansion, stoneBoxExpansion);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MailBox, mailBox);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MailDetail, mailDetail);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaFront, gachaFront);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaAnim, gotchaAnim);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.GotchaResult, gachaResult);
+            ProcessesRunner.Main.Add(MainSceneStep.TeamEditFront, teamEditFront);
+            ProcessesRunner.Main.Add(MainSceneStep.SkillStoneList, skillStones);
+            ProcessesRunner.Main.Add(MainSceneStep.SkillStones_Sell, stoneSell);
+            ProcessesRunner.Main.Add(MainSceneStep.StoneMerge, stoneMerge);
+            ProcessesRunner.Main.Add(MainSceneStep.SelfFightFront, selfFightFront);
+            ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
+            ProcessesRunner.Main.Add(MainSceneStep.MonsterList, memberDetail);
+            ProcessesRunner.Main.Add(MainSceneStep.MemberDetail_edit, memberDetail_edit);
+            ProcessesRunner.Main.Add(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
+            ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
+            ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontProcess);
+            ProcessesRunner.Main.Add(MainSceneStep.Arena, areanaProcess);
+            ProcessesRunner.Main.Add(MainSceneStep.ShopTop, shopTop);
+            ProcessesRunner.Main.Add(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
+            ProcessesRunner.Main.Add(MainSceneStep.BoxExpansion, stoneBoxExpansion);
+            ProcessesRunner.Main.Add(MainSceneStep.MailBox, mailBox);
+            ProcessesRunner.Main.Add(MainSceneStep.MailDetail, mailDetail);
+            ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gachaFront);
+            ProcessesRunner.Main.Add(MainSceneStep.GotchaAnim, gotchaAnim);
+            ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gachaResult);
             #endregion
         }
 
-        IEnumerator StartUp1()
+        IEnumerator StartUp()
         {
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
@@ -147,16 +147,12 @@ namespace mainMenu
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
             yield return _SkillStonesBox_NineSlot.StartUp();
             yield return _SkillStonesBox_Show.StartUp();
-        }
-
-        IEnumerator StartUp2()
-        {
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
             yield return (TheNineSlot.target.StartUp());
             yield return _SelfFightManager.INITeamPosButtons();
-            
-            HurtObjectManager.ConstructDPool();            
+
+            HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
                 yield return MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色

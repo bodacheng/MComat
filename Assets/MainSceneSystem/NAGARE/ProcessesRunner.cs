@@ -20,26 +20,23 @@ namespace mainMenu
         
         public MainSceneProcess lastProcess;
         public MainSceneProcess currentProcess;
-        readonly IDictionary<MainSceneStep, MainSceneProcess> SceneProcessDictionary = new Dictionary<MainSceneStep, MainSceneProcess>();
+        readonly IDictionary<MainSceneStep, MainSceneProcess> Dic = new Dictionary<MainSceneStep, MainSceneProcess>();
 
         public MainSceneProcess GetProcess(MainSceneStep step)
         {
-            return SceneProcessDictionary[step];
+            return Dic[step];
         }
 
         public void Clear()
         {
             lastProcess = null;
             currentProcess = null;
-            SceneProcessDictionary.Clear();
+            Dic.Clear();
         }
 
-        public void AddNewProcess(MainSceneStep step, MainSceneProcess _process)
+        public void Add(MainSceneStep step, MainSceneProcess _process)
         {
-            if (!SceneProcessDictionary.ContainsKey(step))
-                SceneProcessDictionary.Add(step, _process);
-            else
-                SceneProcessDictionary[step] = _process;
+            DicAdd<MainSceneStep, MainSceneProcess>.Add(Dic, step, _process);
         }
 
         public void ProcessNagare()
@@ -73,7 +70,7 @@ namespace mainMenu
             }
 
             lastProcess = currentProcess;
-            SceneProcessDictionary.TryGetValue(sceneStep, out currentProcess);
+            Dic.TryGetValue(sceneStep, out currentProcess);
             if (currentProcess != null)
             {
                 if (t != null)
@@ -89,7 +86,7 @@ namespace mainMenu
             }
             else
             {
-                if (SceneProcessDictionary.ContainsKey(sceneStep))
+                if (Dic.ContainsKey(sceneStep))
                 {
                     Debug.Log(sceneStep + "倒是在字典里");
                     Debug.Log(currentProcess);
@@ -111,7 +108,7 @@ namespace mainMenu
                 PreScene.target.trySwitchToStep(returnToStep, false);
             }
             ReturnButtonManager.PUSH(returnTOCurrent);
-            SceneProcessDictionary.TryGetValue(sceneStep, out currentProcess);
+            Dic.TryGetValue(sceneStep, out currentProcess);
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnter();

@@ -74,7 +74,7 @@ namespace mainMenu
                     
                     for (int i = 0; i < one.localFight.EnemySets.values.Count; i++)
                     {
-                        IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(one.localFight.EnemySets.values[i].ResourceID);
+                        IEnumerator onecoroutine = MonsterIconDic.LoadAndGet(one.localFight.EnemySets.values[i].ResourceID);
                         yield return onecoroutine;
                     }
                     List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.localFight.EnemySets.values, newButton.IconsT);

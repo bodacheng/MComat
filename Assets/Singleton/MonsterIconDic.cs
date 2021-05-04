@@ -3,54 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterIconDic {
+public static class MonsterIconDic {
 
-    static MonsterIconDic instance;
-    public static MonsterIconDic Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new MonsterIconDic();
-            }
-            return instance;
-        }
-    }
-
-    public Sprite readingSprite;
-    AssetBundle readingBundle;
-    readonly IDictionary<string, Sprite> characterIconDic = new Dictionary<string, Sprite>();
+    public static Sprite readingSprite;
+    static AssetBundle readingBundle;
+    static readonly IDictionary<string, Sprite> Dic = new Dictionary<string, Sprite>();
     
-    public Sprite GetMonsterIconSyn(string monsterid)
+    public static Sprite GetMonsterIconSyn(string monsterid)
     {
-        readingSprite = null;
-        characterIconDic.TryGetValue(monsterid,out readingSprite);
-        //if (readingSprite == null)
-            //Debug.Log("没有找到对应角色的icon，monsterid："+monsterid);
-        return readingSprite;
+        Dic.TryGetValue(monsterid, out Sprite Sprite);
+        return Sprite;
     }
     
-    public IEnumerator LoadAndGet(string resource_id)
+    public static IEnumerator LoadAndGet(string monsterId)
     {
-        IEnumerator onecoroutine = null;
+        IEnumerator coroutine = null;
         switch (ResourceLoadingSetting.IconLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                onecoroutine = Instance.FindMonsterIconByCach(resource_id);
+                coroutine = FindByCach(monsterId);
                 break;
             case ResourceLoadMode.Resource:
-                onecoroutine = Instance.FindMonsterIconByResource(resource_id);
+                coroutine = FindByResource(monsterId);
                 break;
             case ResourceLoadMode.StreamingAssetAB:
                 break;
         }
-        yield return onecoroutine;
+        yield return coroutine;
     }
-    
-    IEnumerator FindMonsterIconByCach(string resource_id)
+
+    static IEnumerator FindByCach(string resource_id)
     {
-        characterIconDic.TryGetValue(resource_id, out readingSprite);
+        Dic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
         {
             IEnumerator ienObj = CachManager.Instance.getABFromCach("monsterIcons", resource_id.ToString());
@@ -74,10 +58,10 @@ public class MonsterIconDic {
             if (resultObject.asset != null)
             {
                 readingSprite = (Sprite)resultObject.asset;
-                if (characterIconDic.ContainsKey(resource_id))
-                    characterIconDic[resource_id] = readingSprite;
+                if (Dic.ContainsKey(resource_id))
+                    Dic[resource_id] = readingSprite;
                 else
-                    characterIconDic.Add(resource_id, readingSprite);
+                    Dic.Add(resource_id, readingSprite);
 
                 Debug.Log("成功从缓存读取了以下图标：" + resource_id);
                 readingBundle.Unload(false);
@@ -91,20 +75,18 @@ public class MonsterIconDic {
         }
         yield return readingSprite;
     }
-    
-    IEnumerator FindMonsterIconByResource(string resource_id)
-    {
-        characterIconDic.TryGetValue(resource_id, out readingSprite);
-        if (readingSprite == null)
-            readingSprite = Resources.Load<Sprite>("Sprites/monsterIcons/" + resource_id) as Sprite;
-        else
-            yield return readingSprite;
 
-        if (characterIconDic.ContainsKey(resource_id))
-            characterIconDic[resource_id] = readingSprite;
+    static IEnumerator FindByResource(string monsterId)
+    {
+        Dic.TryGetValue(monsterId, out Sprite Sprite);
+        if (Sprite == null)
+            Sprite = Resources.Load<Sprite>("Sprites/monsterIcons/" + monsterId);
         else
-            characterIconDic.Add(resource_id, readingSprite);
-            
-        yield return readingSprite;
+        {
+            yield return Sprite;
+            yield break;
+        }
+        DicAdd<string, Sprite>.Add(Dic, monsterId, Sprite);            
+        yield return Sprite;
     }
 }

@@ -281,7 +281,7 @@ namespace mainMenu
             {
                 MonsterOfPlayerDetailModel _one = AccountCharsSet.Get(PositionMonsterOfPlayerId);
                 CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
-                tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Instance.GetMonsterIconSyn(charConfig.RECORD_ID),
+                tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.GetMonsterIconSyn(charConfig.RECORD_ID),
                     charConfig == null ? Zokusei.Null : charConfig._zokusei);
             }
             else

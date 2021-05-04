@@ -75,12 +75,12 @@ namespace mainMenu
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {
-                IEnumerator onecoroutine = MonsterIconDic.Instance.LoadAndGet(targetingCharInfo.monsterId);
+                IEnumerator onecoroutine = MonsterIconDic.LoadAndGet(_CharConfig.RECORD_ID);
                 yield return onecoroutine;
                 targetingIcon = Instantiate(target.noMagic);
                 targetingIcon.name = _CharConfig.REAL_NAME + "_icon";
                 targetingIcon._CharConfig = _CharConfig;
-                targetingIcon.ChangeIcon(MonsterIconDic.Instance.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
+                targetingIcon.ChangeIcon(MonsterIconDic.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);
             }
             if (clearButtonFeature)
@@ -89,7 +89,6 @@ namespace mainMenu
             {
                 typeOfMonstersIhave.Add(targetingIcon._CharConfig.TYPE);
             }
-            yield break;
         }
 
         public void OnTypeChangeMyMonsterBox()

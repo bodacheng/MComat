@@ -1,11 +1,20 @@
 ﻿using UnityEngine;
 using mainMenu;
 using Cysharp.Threading.Tasks;
+using dataAccess;
+using System.Collections.Generic;
+using UniRx;
 
 public class MonsterListPage : MainSceneProcess
 {
     public bool loadFinished;
-    
+
+    ReactiveProperty<int> monsterLoadFinished = new ReactiveProperty<int>(0);
+    void MonsterLoadFinished(int value)
+    {
+        monsterLoadFinished.Value = value;
+    }
+
     public MonsterListPage()
     {
         Step = MainSceneStep.MonsterList;
@@ -34,11 +43,31 @@ public class MonsterListPage : MainSceneProcess
     public override void ProcessEnter()
     {
         loadFinished = false;
-        UnityEngine.Events.UnityAction afterToDo = () =>
+        switch (AccountSet._AccInfo.accountprogress)
         {
-            temp();
-        };
-        mainProcessRunner.RunAsQueued(enter(), afterToDo);        
+            case PlayerAccountProgressStep.Freedom:
+                AccountCharsSet.Load_List(MonsterLoadFinished);
+                break;
+            case PlayerAccountProgressStep.justCreated:
+                break;
+            case PlayerAccountProgressStep.Tutorial:
+                AccountCharsSet.LoadTutorial();
+                break;
+        }
+
+        MissionWatcher missionWatcher = new MissionWatcher(
+            new List<ReactiveProperty<int>>() {
+                monsterLoadFinished
+            },
+            () => {
+                UnityEngine.Events.UnityAction afterToDo = () =>
+                {
+                    temp();
+                };
+                mainProcessRunner.RunAsQueued(enter(), afterToDo);
+            },
+            () => { Debug.Log("错误，怎么办？"); }
+        );
     }
     
     public override void ProcessEnd()
