@@ -3,15 +3,31 @@ using UnityEngine;
 using mainMenu;
 using dataAccess;
 using DG.Tweening;
+using System.Collections.Generic;
+using UniRx;
+using Api.Dto.Model;
 
-public class TopPage : MainSceneProcess
+public class FrontPage : MainSceneProcess
 {
-    public TopPage()
+    public FrontPage()
     {
         Step = MainSceneStep.FrontPage;
         EelementsInherit(PreScene.target);
     }
-    
+
+    // 读取角色列表完成判断
+    ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
+    void AccLoadFinished(int value)
+    {
+        accLoadFinished.Value = value;
+    }
+
+    ReactiveProperty<int> monsterLoadFinished = new ReactiveProperty<int>(0);
+    void MonsterLoadFinished(int value)
+    {
+        monsterLoadFinished.Value = value;
+    }
+
     public IEnumerator EnterProcess()
     {
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
@@ -22,18 +38,18 @@ public class TopPage : MainSceneProcess
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
 
-        yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
-        
-        if (TeamSet.Default != null)
+        string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
+        if (focusLocalid == null)
         {
-            string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
-            if (focusLocalid != null)
+            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
             {
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
-                yield return ModelShower.target.ShowMyModel(focusLocalid);
-                MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                focusLocalid = keyValuePair.Key;
+                break;
             }
         }
+        yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
+        yield return ModelShower.target.ShowMyModel(focusLocalid);
+        MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(true);
         UpperInfoBar.target.T.gameObject.SetActive(true);
@@ -41,7 +57,25 @@ public class TopPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        AccountSet.LoadCustomerInfo(AccLoadFinished);
+        switch (AccountSet._AccInfo.accountprogress)
+        {
+            case PlayerAccountProgressStep.Freedom:
+                AccountCharsSet.Load_List(MonsterLoadFinished);
+                break;
+            case PlayerAccountProgressStep.justCreated:
+                break;
+            case PlayerAccountProgressStep.Tutorial:
+                AccountCharsSet.LoadTutorial();
+                break;
+        }
+        MissionWatcher missionWatcher = new MissionWatcher(
+            new List<ReactiveProperty<int>>() {
+                accLoadFinished, monsterLoadFinished
+            },
+            () => mainProcessRunner.RunAsQueued(EnterProcess()),
+            () => { Debug.Log("错误，怎么办？"); }
+        );
     }
     
     public override void ProcessEnd()

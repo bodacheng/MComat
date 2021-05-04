@@ -71,34 +71,32 @@ public class BoxExpandHelper : MonoBehaviour
     public IEnumerator BoxExpansion(int ExpandCount)
     {
         OptionT.gameObject.SetActive(false);
-        IEnumerator expansionProcess = null;
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 AccountSet._AccInfo.Stoneboxsize = AccountSet._AccInfo.Stoneboxsize + ExpandCount;
-                expansionProcess = AccountSet.SaveCustomerInfo();
+                AccountSet.SaveCustomerInfo();
             break;
             case PlayerInfoRefMode.remoteTestPlayer:
             break;
             case PlayerInfoRefMode.formalVersion:
             break;
         }
-        yield return expansionProcess;
         
-        try 
-        {
-            if ((bool)expansionProcess.Current)
-            {
-                Result.text = " 成功扩张技能石盒 ";
-            }else{
-                Result.text = " 失败 ";
-            }            
-        }
-        catch(Exception e)
-        {
-            Result.text = " 失败 ";
-            Debug.Log(e);
-        }
+        //try 
+        //{
+        //    if ((bool)expansionProcess.Current)
+        //    {
+        //        Result.text = " 成功扩张技能石盒 ";
+        //    }else{
+        //        Result.text = " 失败 ";
+        //    }            
+        //}
+        //catch(Exception e)
+        //{
+        //    Result.text = " 失败 ";
+        //    Debug.Log(e);
+        //}
         ShowResult();
         yield break;
     }

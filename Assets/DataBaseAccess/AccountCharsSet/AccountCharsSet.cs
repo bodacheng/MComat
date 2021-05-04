@@ -38,7 +38,7 @@ namespace dataAccess
             return null;
         }
         
-        public static IEnumerator LoadTutorial()
+        public static void LoadTutorial()
         {
             List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
             //charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
@@ -50,7 +50,6 @@ namespace dataAccess
                 else
                     Debug.Log("重复的角色存档id："+ one.monsterOfPlayerId);
             }
-            yield break;
         }
     }
 }

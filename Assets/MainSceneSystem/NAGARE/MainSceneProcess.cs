@@ -28,7 +28,7 @@ namespace mainMenu
         FrontPage = 1,
         SelfFightFront = 4,
         TeamEditFront = 2,
-        MemberDetail = 5,
+        MonsterList = 5,
         MemberDetail_edit = 16,
         MemberDetail_show = 17,
         SkillStoneList = 15,

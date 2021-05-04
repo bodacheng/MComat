@@ -233,7 +233,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\NoneCertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMailListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterOfPlayerDetailForm.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetRankInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\LoginForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\RequestRewardForm.cs" />
@@ -253,7 +252,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterOfPlayerDetailModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\OneTeam.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\PlayerInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\RankOpponentsModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneGotchaInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneOfPlayerInfoModel.auto.cs" />
@@ -367,14 +365,15 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\BoxOverLoadFix.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\FrontPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailBoxProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailDetailProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetailProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_edit.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_skillshow.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterListPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfo.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightFront.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
@@ -383,7 +382,6 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TopPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectMaterialMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_waitForConfirm.cs" />
@@ -673,6 +671,7 @@
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\GameManager.cs" />
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
     <Compile Include="Assets\UpperInfoBar\UpperInfoBar.cs" />
+    <Compile Include="Assets\missionWatcher\MissionWatcher.cs" />
     <Compile Include="Assets\技能石合成\StoneMergeManger.cs" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />

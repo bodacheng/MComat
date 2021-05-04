@@ -13,7 +13,7 @@ namespace dataAccess
 {
     public partial class AccountCharsSet
     {
-        public static void Load_List(Action<bool> finished)
+        public static void Load_List(Action<int> finished)
         {
             AccountCharInfoDic.Clear();
             List<MonsterOfPlayerDetailModel> charList = default;
@@ -28,7 +28,7 @@ namespace dataAccess
                         else
                             Debug.Log("重复的角色存档id：" + one.monsterOfPlayerId);
                     }
-                    finished.Invoke(true);
+                    finished.Invoke(1);
                     break;
                 case PlayerInfoRefMode.formalVersion:
                     break;
@@ -48,11 +48,11 @@ namespace dataAccess
                                 else
                                     Debug.Log("重复的角色存档id：" + one.monsterOfPlayerId);
                             }
-                            finished.Invoke(true);
+                            finished.Invoke(1);
                         },
                         errorCallback => {
                             Debug.Log(errorCallback.Error);
-                            finished.Invoke(false);
+                            finished.Invoke(-1);
                         });
                     break;
             }

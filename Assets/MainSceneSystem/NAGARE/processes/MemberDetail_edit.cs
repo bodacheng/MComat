@@ -3,10 +3,24 @@ using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using dataAccess;
+using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using UniRx;
 
 public class MemberDetail_edit : MainSceneProcess
 {
     public static bool loadFinished;
+
+    ReactiveProperty<int> skillStonesLoadFinished = new ReactiveProperty<int>(0);
+    void SkillStonesLoadFinished(int value)
+    {
+        skillStonesLoadFinished.Value = value;
+    }
+
     public IEnumerator EnterProcess()
     {
         loadFinished = false;
@@ -49,12 +63,23 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
-        {
-            mainProcessRunner.RunAsQueued(SkillShowSpEnterProcess());
-        }else{
-            mainProcessRunner.RunAsQueued(EnterProcess());
-        }
+        MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
+        MissionWatcher missionWatcher = new MissionWatcher(
+            new List<ReactiveProperty<int>>() {
+                skillStonesLoadFinished
+            },
+            () => {
+                if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
+                {
+                    mainProcessRunner.RunAsQueued(SkillShowSpEnterProcess());
+                }
+                else
+                {
+                    mainProcessRunner.RunAsQueued(EnterProcess());
+                }
+            },
+            () => { Debug.Log("failed"); }
+        );
     }
     
     public override void ProcessEnd()

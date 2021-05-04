@@ -23,7 +23,7 @@ public static class RewardManager
                         {
                             AccountSet._AccInfo.ArcadeProcess = form.eventNum + 1;
                         }
-                        SingleThreadProcesser.backup.RunAsQueued(AccountSet.SaveCustomerInfo());
+                        AccountSet.SaveCustomerInfo();
                         break;
                     case FightEventType.Arena:
                         break;

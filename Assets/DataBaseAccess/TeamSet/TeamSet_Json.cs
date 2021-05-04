@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 using System;
 using Newtonsoft.Json;
-using System.Linq;
 using Api.Dto.Model;
 
 namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static IEnumerator LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
+        public static MonsterTeamOfPlayerModel LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
         {
             string wholepath = Application.persistentDataPath + "/" + jsonFilename;
             MonsterTeamOfPlayerModel TeamSet;
@@ -27,12 +24,12 @@ namespace dataAccess
                     Debug.Log("读取阵容配置文件："+jsonFilename+"发生异常"+ e);
                     TeamSet = new MonsterTeamOfPlayerModel();
                 }
-                yield return TeamSet;
+                return TeamSet;
             }
             else
             {
                 Debug.Log("读取阵容配置文件："+jsonFilename+"没有找到");
-                yield return new MonsterTeamOfPlayerModel();
+                return new MonsterTeamOfPlayerModel();
             }
         }
     }

@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using Api.Dto.Model;
-using Api.Dto.Form;
 using UnityEngine;
-using Api.Common;
+using PlayFab;
+using PlayFab.ClientModels;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System;
 
 // 站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
 namespace dataAccess
@@ -32,98 +35,70 @@ namespace dataAccess
             return null;
         }
         #endregion
-
-        public static IEnumerator LoadTeamSet(TeamSetGameMode teamSetGameMode)
-        {
-            GetMonsterTeamOfPlayerForm form = new GetMonsterTeamOfPlayerForm
-            {
-            };
-            switch (teamSetGameMode)
-            {
-                case TeamSetGameMode.story:
-                    form.teamType = "00";
-                    break;
-                case TeamSetGameMode.arena3V3:
-                    form.teamType = "13";
-                    break;
-            }
-            
-            yield return Load(
-                form,
-                model => {
-                        MonsterTeamOfPlayerModel MonsterTeamOfPlayerModel = model;
-                        switch (form.teamType)
-                        {
-                            case "00":
-                            Default = MonsterTeamOfPlayerModel.ToPosKeySet();
-                            Debug.Log("quest模式阵型已经读取");
-                            break;
-                            case "13":
-                            Arena3V3 = MonsterTeamOfPlayerModel.ToPosKeySet();
-                            Debug.Log("竞技场3v3模式阵型已经读取");
-                            break;
-                            default:
-                            Debug.Log("队伍阵型信息不明");
-                            break;
-                        }
-                    },
-                model => {
-                    Debug.Log(teamSetGameMode+"阵容读取失败。");
-                }
-                , ApiLanguage.EnUs
-            );
-            yield break;
-        }
         
         // 技能石升级
-        static IEnumerator Load(GetMonsterTeamOfPlayerForm form, SuccessDelegate<MonsterTeamOfPlayerModel> success, FailDelegate<MonsterTeamOfPlayerModel> fail, ApiLanguage apiLanguage)
+        public static void LoadTeamSet(TeamSetGameMode teamSetGameMode, Action<int> finished)
         {
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    IEnumerator enumerator = null;
-                    switch (form.teamType)
+                    switch (teamSetGameMode.ToString())
                     {
                         case "00":
-                            enumerator = LoadMyTeamSetInfoViaJsonFile("TeamSet.json");
+                            Default = LoadMyTeamSetInfoViaJsonFile("TeamSet.json").ToPosKeySet();
                             break;
                         case "11":
                             break;
                         case "12":
                             break;
                         case "13":
-                             enumerator = LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json");
+                            Arena3V3 = LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json").ToPosKeySet();
                             break;
                         case "14":
                             break;
                         default:
                              Debug.Log("队伍阵型信息不明");
-                             yield break;
+                            break;
                     }
-                    yield return enumerator;
-                    if (enumerator.Current != null)
-                    {
-                        success((MonsterTeamOfPlayerModel)enumerator.Current);
-                    }else{
-                        fail(new MonsterTeamOfPlayerModel());
-                    }
+                    finished.Invoke(1);
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-
-                    //yield return ApiCaller.Instance.Post<MonsterTeamOfPlayerModel , GetMonsterTeamOfPlayerForm> 
-                    //    ("http://160.16.187.230/AssetStoreFight/team/getMonsterTeamOfPlayer", form, ApiCaller.Instance.getHeader(apiLanguage), 
-                    //    model => {
-                    //        success(model.data);
-                    //    },
-                    //    model => {
-                    //        fail(model.data);
-                    //    }
-                    //);
+                    PlayFabClientAPI.GetUserData
+                    (
+                        new GetUserDataRequest() {
+                            PlayFabId = AccountSet._AccInfo.PlayerName,
+                            Keys = new List<string>() { teamSetGameMode.ToString() }
+                        },
+                        (GetUserDataResult obj) => {
+                            UserDataRecord userDataRecord = obj.Data[teamSetGameMode.ToString()];
+                            switch (teamSetGameMode.ToString())
+                            {
+                                case "00":
+                                    Default = JsonConvert.DeserializeObject<MonsterTeamOfPlayerModel>(userDataRecord.Value).ToPosKeySet();
+                                    break;
+                                case "11":
+                                    break;
+                                case "12":
+                                    break;
+                                case "13":
+                                    Arena3V3 = JsonConvert.DeserializeObject<MonsterTeamOfPlayerModel>(userDataRecord.Value).ToPosKeySet();
+                                    break;
+                                case "14":
+                                    break;
+                                default:
+                                    Debug.Log("队伍阵型信息不明");
+                                    break;
+                            }
+                            finished.Invoke(1);
+                        },
+                        errorCallback => {
+                            finished.Invoke(-1);
+                        }
+                    );
                     break;
                 case PlayerInfoRefMode.formalVersion:
                     break;
             }
-            yield break;
         }
         
         // 下面的函数让阵容配置可以跳格。比方说一个游戏只能入场2人，那么现在在back和right位置有人，其他位置为空，也可顺利以此两人入场。

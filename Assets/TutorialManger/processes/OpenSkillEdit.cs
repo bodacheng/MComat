@@ -4,7 +4,7 @@
 public class OpenSkillEdit : TutorialProcess
 {
     bool waitCompleted;
-    MemberDetailProcess MemberDetailProcess;
+    MonsterListPage MemberDetailProcess;
     public OpenSkillEdit()
     {
         EelementsInherit(PreScene.target);
@@ -13,7 +13,7 @@ public class OpenSkillEdit : TutorialProcess
     public override void ProcessEnter()
     {
         waitCompleted = false;
-        MemberDetailProcess = (MemberDetailProcess)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail);
+        MemberDetailProcess = (MonsterListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.MonsterList);
     }
     
     public override bool CanEnterOtherProcess()

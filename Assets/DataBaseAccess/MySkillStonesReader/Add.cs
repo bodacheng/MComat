@@ -14,13 +14,7 @@ namespace dataAccess
             GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
             yield return Update(one.skillStoneOfPlayerId);
         }
-        
-        public static void Read(SkillStoneOfPlayerInfoModel one)
-        {
-            DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
-            GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
-        }
-        
+
         /// <summary>
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>

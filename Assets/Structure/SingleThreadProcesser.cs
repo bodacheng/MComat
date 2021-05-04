@@ -79,7 +79,7 @@ public class SingleThreadProcesser : MonoBehaviour
         processQueue.Add(whole);
         await whole;
         processQueue.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
     }
 
     public async UniTask RunAsQueued_UniTask(List<IEnumerator> _processes, UnityEngine.Events.UnityAction afterToDo)

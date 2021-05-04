@@ -2,14 +2,13 @@
 using System.IO;
 using System;
 using Newtonsoft.Json;
-using System.Collections;
 using Json;
 
 namespace dataAccess
 {
     public partial class AccountSet
     {
-        public static IEnumerator LoadCustomerInfoViaLocalFile()
+        public static void LoadCustomerInfoViaLocalFile()
         {
             bool ok = false;
             try
@@ -32,15 +31,15 @@ namespace dataAccess
                 _AccInfo = new PlayerAccountInfo();
             }
             if (!ok)
-                yield return OverrideAccountOnLocalFile();
-            yield break;
+            {
+                OverrideAccountOnLocalFile();
+            }
         }
         
-        public static IEnumerator OverrideAccountOnLocalFile()
+        public static void OverrideAccountOnLocalFile()
         {
             string json = JsonConvert.SerializeObject(_AccInfo);
             LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);
-            yield break;
         }
     }
 }

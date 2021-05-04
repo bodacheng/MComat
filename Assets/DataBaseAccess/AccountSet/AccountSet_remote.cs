@@ -2,11 +2,11 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using LitJson;
-using Api.Common;
-using Api.Dto.Form.Common;
-using Api.Dto.Model;
 using PlayFab;
 using PlayFab.ClientModels;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System;
 
 namespace dataAccess
 {
@@ -71,59 +71,44 @@ namespace dataAccess
             }
         }
 
-        static IEnumerator loadCustomerInfoFromRemoteServer(ApiLanguage apiLanguage)
+        static void loadCustomerInfoFromRemoteServer(Action<int> finished)
         {
-
-            // ==============================
-            // フォームの生成
-            // ==============================
-            // フォーム
-            CertificationForm form = new CertificationForm
-            {
-            };
-            
-            // ==============================
-            // API送信
-            // ==============================
-            // 送信
-            yield return ApiCaller.Instance.Post<PlayerInfoModel, CertificationForm>("http://160.16.187.230:8089/player/getPlayer", form, ApiCaller.Instance.getHeader(apiLanguage),
-                 model =>
-                 {
-                     Debug.Log(model);
-                     _AccInfo.PlayerName = model.data.playerName;
-                     _AccInfo.coinCount = model.data.coinCount;
-                     _AccInfo.diamondCount = model.data.diamondCount;
-                 }
-                ,
-                 model =>
-                 {
-                    _AccInfo.PlayerName = model.data.playerName;
-                     _AccInfo.coinCount = model.data.coinCount;
-                     _AccInfo.diamondCount = model.data.diamondCount;
-                 }
+            PlayFabClientAPI.GetUserData
+            (
+                new GetUserDataRequest() {
+                    PlayFabId = AccountSet._AccInfo.PlayerName,
+                    Keys = new List<string>() { "CustomerInfo" }
+                },
+                (GetUserDataResult obj) => {
+                    UserDataRecord userDataRecord = obj.Data["CustomerInfo"];
+                    _AccInfo = JsonConvert.DeserializeObject<PlayerAccountInfo>(userDataRecord.Value);
+                    finished.Invoke(1);
+                },
+                errorCallback => {
+                    finished.Invoke(-1);
+                }
             );
-            yield break;
         }
 
         static void SetUserData()
         {
-            PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest
-            {
-                Data = new System.Collections.Generic.Dictionary<string, string>
-                    {
-                        { "PlayerName",  AccountSet._AccInfo.PlayerName },
-                        { "coinCount", AccountSet._AccInfo.coinCount.ToString() },
-                        { "diamondCount", AccountSet._AccInfo.diamondCount.ToString() }
-                    }
-            },
-            result =>
-            {
-                Debug.Log("账户数据修改成功");
-            },
-            error =>
-            {
-                Debug.Log(error.GenerateErrorReport());
-            }
+            PlayFabClientAPI.UpdateUserData(
+                new UpdateUserDataRequest{
+                    Data = new Dictionary<string, string>
+                        {
+                            { "PlayerName",  AccountSet._AccInfo.PlayerName },
+                            { "coinCount", AccountSet._AccInfo.coinCount.ToString() },
+                            { "diamondCount", AccountSet._AccInfo.diamondCount.ToString() }
+                        }
+                },
+                result =>
+                {
+                    Debug.Log("账户数据修改成功");
+                },
+                error =>
+                {
+                    Debug.Log(error.GenerateErrorReport());
+                }
             );
         }
     }

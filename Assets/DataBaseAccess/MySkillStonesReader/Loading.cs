@@ -12,7 +12,13 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        static void ConvertToDic(List<SkillStoneOfPlayerInfoModel> list)
+        static void Read(SkillStoneOfPlayerInfoModel one)
+        {
+            DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
+            GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
+        }
+
+        static void ConvertListToDic(List<SkillStoneOfPlayerInfoModel> list)
         {
             foreach (SkillStoneOfPlayerInfoModel stoneinfo in list)
             {
@@ -20,16 +26,18 @@ namespace dataAccess
             }
         }
 
-        public static void LoadAMySkillstones(Action<bool> finished)
+        public static void LoadAMySkillstones(Action<int> finished)
         {
             Dic.Clear();
             RenderModelDic.Clear();
+
+            List<SkillStoneOfPlayerInfoModel> list;
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    List<SkillStoneOfPlayerInfoModel> list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
-                    ConvertToDic(list);
-                    finished(true);
+                    list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
+                    ConvertListToDic(list);
+                    finished(1);
                 break;
                 case PlayerInfoRefMode.remoteTestPlayer:
                     PlayFabClientAPI.GetUserData(
@@ -40,23 +48,18 @@ namespace dataAccess
                         },
                         (GetUserDataResult obj) => {
                             UserDataRecord userDataRecord = obj.Data["stoneList"];
-                            List<SkillStoneOfPlayerInfoModel> info = JsonConvert.DeserializeObject<List<SkillStoneOfPlayerInfoModel>>(userDataRecord.Value);
-                            ConvertToDic(info);
-                            finished(true);
+                            list = JsonConvert.DeserializeObject<List<SkillStoneOfPlayerInfoModel>>(userDataRecord.Value);
+                            ConvertListToDic(list);
+                            finished(1);
                         },
                         errorCallback => {
                             Debug.Log(errorCallback.Error);
-                            finished(false);
+                            finished(-1);
                         });
                 break;
             case PlayerInfoRefMode.formalVersion:
                 break;
             }
-        }
-        
-        public IEnumerator LevelUpMySkillStone_Remote(string skillstoneid, string targetLevel, ApiLanguage apiLanguage)
-        {
-            yield break;
         }
     }
 }

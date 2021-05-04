@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using dataAccess;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UniRx;
 
 namespace mainMenu
 {
@@ -68,57 +69,11 @@ namespace mainMenu
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
 
-            UniTask uniTask = mainProcessRunner.RunAsQueued_UniTask(new List<IEnumerator> { DataLoad_part1(), DataLoad_part2() });
+            UniTask uniTask = mainProcessRunner.RunAsQueued_UniTask(new List<IEnumerator> { StartUp1(), StartUp2() });
             await uniTask;
-            Debug.Log("数据读取任务完成?");
-
-            UniTask uniTask3 = MonsterBox.DisplayMonsterIcons(true);
-            await uniTask3;
-
-            UniTask uniTask2 = mainProcessRunner.RunAsQueued_UniTask(new List<IEnumerator> { StartUp1(), StartUp2() });
-            await uniTask2;
-
-            Debug.Log("游戏加载任务完成?");
 
             BasicPhase();
             ToInitialPhase();
-        }
-
-        bool monsterLoadFinished = false;
-        void MonsterLoadFinished(bool value)
-        {
-            monsterLoadFinished = value;
-        }
-
-        bool skillStonesLoadFinished = false;
-        void SkillStonesLoadFinished(bool value)
-        {
-            skillStonesLoadFinished = value;
-        }
-
-        //  尝试把各种加载非同期化。目前这个版本并没有结束。
-        IEnumerator DataLoad_part1()
-        {
-            switch (AccountSet._AccInfo.accountprogress)
-            {
-                case PlayerAccountProgressStep.Freedom:
-                    AccountCharsSet.Load_List(MonsterLoadFinished);
-                    MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
-                    break;
-                case PlayerAccountProgressStep.justCreated:
-                    break;
-                case PlayerAccountProgressStep.Tutorial:
-                    yield return AccountCharsSet.LoadTutorial();
-                    yield return MySkillStones.LoadTutorial();
-                    break;
-            }
-        }
-
-        IEnumerator DataLoad_part2()
-        {
-            yield return AccountSet.LoadCustomerInfo(); // 缺response判断
-            yield return TeamSet.LoadTeamSet(TeamSetGameMode.story);
-            yield return TeamSet.LoadTeamSet(TeamSetGameMode.arena3V3);
         }
 
         void BasicPhase()
@@ -133,14 +88,14 @@ namespace mainMenu
             UpperInfoBar.target.T.gameObject.SetActive(false);
 
             #region 主界面各大画面
-            TopPage frontPage = new TopPage();
+            FrontPage frontPage = new FrontPage();
             TeamEditFront teamEditFront = new TeamEditFront();
             SkillStonesList skillStones = new SkillStonesList();
             StoneSell stoneSell = new StoneSell();
             StoneMerge stoneMerge = new StoneMerge();
             SelfFightFront selfFightFront = new SelfFightFront();
             QuestInfo questInfo = new QuestInfo();
-            MemberDetailProcess memberDetail = new MemberDetailProcess();
+            MonsterListPage memberDetail = new MonsterListPage();
             MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
             MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
@@ -167,7 +122,7 @@ namespace mainMenu
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.StoneMerge, stoneMerge);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.QuestInfo, questInfo);
-            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail, memberDetail);
+            ProcessesRunner.Main.AddNewProcess(MainSceneStep.MonsterList, memberDetail);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail_edit, memberDetail_edit);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
             ProcessesRunner.Main.AddNewProcess(MainSceneStep.FrontPage, frontPage);

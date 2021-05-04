@@ -2,13 +2,13 @@
 using mainMenu;
 using Cysharp.Threading.Tasks;
 
-public class MemberDetailProcess : MainSceneProcess
+public class MonsterListPage : MainSceneProcess
 {
     public bool loadFinished;
     
-    public MemberDetailProcess()
+    public MonsterListPage()
     {
-        Step = MainSceneStep.MemberDetail;
+        Step = MainSceneStep.MonsterList;
         EelementsInherit(PreScene.target);
     }
     

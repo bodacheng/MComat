@@ -34,7 +34,7 @@ namespace dataAccess
             return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
         }
         
-        public static IEnumerator LoadTutorial()
+        public static void LoadTutorial()
         {
             Dic.Clear();
             //LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
@@ -46,11 +46,10 @@ namespace dataAccess
                 if (_SkillConfig == null)
                 {
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
-                    yield break;
+                    return;
                 }
                 GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
             }
-            yield break;
         }
     }
 }
