@@ -1,7 +1,7 @@
 ﻿using mainMenu;
 using Cysharp.Threading.Tasks;
 
-public class SelfFightFront : MainSceneProcess
+public class SelfFightPage : MainSceneProcess
 {
     public void temp()
     {
@@ -14,7 +14,7 @@ public class SelfFightFront : MainSceneProcess
         _SelfFightManager.SwitchToRotationMode();
     }
     
-    public SelfFightFront()
+    public SelfFightPage()
     {
         Step = MainSceneStep.SelfFightFront;
         EelementsInherit(PreScene.target);

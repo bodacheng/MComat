@@ -9,12 +9,6 @@ public class MonsterListPage : MainSceneProcess
 {
     public bool loadFinished;
 
-    ReactiveProperty<int> monsterLoadFinished = new ReactiveProperty<int>(0);
-    void MonsterLoadFinished(int value)
-    {
-        monsterLoadFinished.Value = value;
-    }
-
     public MonsterListPage()
     {
         Step = MainSceneStep.MonsterList;
@@ -55,7 +49,7 @@ public class MonsterListPage : MainSceneProcess
                 break;
         }
 
-        MissionWatcher missionWatcher = new MissionWatcher(
+        missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 monsterLoadFinished
             },
@@ -72,6 +66,7 @@ public class MonsterListPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        missionWatcher.DisposeAll();
         MemberDetail.target.ClearHeroIconsFeatures();
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
         MemberDetail.target.MemberInfoT.gameObject.SetActive(false);

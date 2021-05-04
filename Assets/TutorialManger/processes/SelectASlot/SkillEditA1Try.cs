@@ -4,7 +4,7 @@
 public class SkillEditA1Try : TutorialProcess
 {
     bool waitCompleted;
-    MemberDetail_edit memberDetail_Edit;
+    MonsterEditPage memberDetail_Edit;
     public SkillEditA1Try()
     {
         EelementsInherit(PreScene.target);
@@ -13,7 +13,7 @@ public class SkillEditA1Try : TutorialProcess
     public override void ProcessEnter()
     {
         waitCompleted = false;
-        memberDetail_Edit = (MemberDetail_edit)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail_edit);
+        memberDetail_Edit = (MonsterEditPage)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail_edit);
     }
     
     public override void ProcessEnd()
@@ -29,7 +29,7 @@ public class SkillEditA1Try : TutorialProcess
     {
         if (!waitCompleted)
         {
-            if (MemberDetail_edit.loadFinished)
+            if (MonsterEditPage.loadFinished)
             {
                 LoadingCanvas.target.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
                 waitCompleted = true;

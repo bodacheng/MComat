@@ -15,19 +15,6 @@ public class FrontPage : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
-    // 读取角色列表完成判断
-    ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
-    void AccLoadFinished(int value)
-    {
-        accLoadFinished.Value = value;
-    }
-
-    ReactiveProperty<int> monsterLoadFinished = new ReactiveProperty<int>(0);
-    void MonsterLoadFinished(int value)
-    {
-        monsterLoadFinished.Value = value;
-    }
-
     public IEnumerator EnterProcess()
     {
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
@@ -69,17 +56,25 @@ public class FrontPage : MainSceneProcess
                 AccountCharsSet.LoadTutorial();
                 break;
         }
-        MissionWatcher missionWatcher = new MissionWatcher(
+        MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
+
+        Debug.Log(accLoadFinished.Value + ":" + monsterLoadFinished.Value);
+
+        missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                accLoadFinished, monsterLoadFinished
+                accLoadFinished, monsterLoadFinished, skillStonesLoadFinished
             },
-            () => mainProcessRunner.RunAsQueued(EnterProcess()),
+            () =>
+            {
+                mainProcessRunner.RunAsQueued(EnterProcess());
+            },
             () => { Debug.Log("错误，怎么办？"); }
         );
     }
     
     public override void ProcessEnd()
     {
+        missionWatcher.DisposeAll();
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         UpperInfoBar.target.T.gameObject.SetActive(false);

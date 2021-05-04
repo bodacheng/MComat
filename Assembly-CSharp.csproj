@@ -371,13 +371,13 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailBoxProcess.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailDetailProcess.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_edit.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MemberDetail_skillshow.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterEditPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterListPage.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfo.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightFront.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\StoneBoxExpansion.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillShowPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\SkillStonesList.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />

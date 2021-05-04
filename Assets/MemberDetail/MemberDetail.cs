@@ -56,7 +56,7 @@ namespace mainMenu
             {
                 yield return target.SetMemberDetailFocusingChar(targetMonsterOfPlayerID);//确立focusing角色
                 target.RefreshMemberDetailPageByFocusingChar();
-                yield return MemberDetail_edit.SkillShowSpEnterProcess();
+                yield return MonsterEditPage.SkillShowSpEnterProcess();
             }
             PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton());
         }

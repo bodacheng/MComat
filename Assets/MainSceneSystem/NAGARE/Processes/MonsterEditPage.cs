@@ -3,23 +3,12 @@ using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
 using dataAccess;
-using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
 using UniRx;
 
-public class MemberDetail_edit : MainSceneProcess
+public class MonsterEditPage : MainSceneProcess
 {
     public static bool loadFinished;
-
-    ReactiveProperty<int> skillStonesLoadFinished = new ReactiveProperty<int>(0);
-    void SkillStonesLoadFinished(int value)
-    {
-        skillStonesLoadFinished.Value = value;
-    }
 
     public IEnumerator EnterProcess()
     {
@@ -55,7 +44,7 @@ public class MemberDetail_edit : MainSceneProcess
         loadFinished = true;
     }
     
-    public MemberDetail_edit()
+    public MonsterEditPage()
     {
         Step = MainSceneStep.MemberDetail_edit;
         EelementsInherit(PreScene.target);
@@ -64,7 +53,7 @@ public class MemberDetail_edit : MainSceneProcess
     public override void ProcessEnter()
     {
         MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
-        MissionWatcher missionWatcher = new MissionWatcher(
+        missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 skillStonesLoadFinished
             },
@@ -84,6 +73,7 @@ public class MemberDetail_edit : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        missionWatcher.DisposeAll();
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();

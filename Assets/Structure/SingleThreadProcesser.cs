@@ -26,7 +26,7 @@ public class SingleThreadProcesser : MonoBehaviour
         processQueue.Add(whole);
         await whole;
         processQueue.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
         afterToDo();
     }
 
@@ -41,7 +41,7 @@ public class SingleThreadProcesser : MonoBehaviour
         processQueue.Add(whole);
         await whole;
         processQueue.Remove(whole);
-        Debug.Log("runner"+ this + "  process count:" + processQueue.Count) ;
+        //Debug.Log("runner"+ this + "  process count:" + processQueue.Count) ;
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class SingleThreadProcesser : MonoBehaviour
         processQueue.Add(whole);
         await whole;
         processQueue.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public class SingleThreadProcesser : MonoBehaviour
         processQueue.Add(whole);
         await whole;
         processQueue.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
         afterToDo();
     }
 

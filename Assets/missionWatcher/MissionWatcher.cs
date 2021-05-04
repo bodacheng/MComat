@@ -12,7 +12,7 @@ public class MissionWatcher
 
     ReactiveProperty<int> MissionCompletedCount = new ReactiveProperty<int>();
 
-    void DisposeAll()
+    public void DisposeAll()
     {
         Disposable.Dispose();
         MissionFlags.Clear();
@@ -39,7 +39,7 @@ public class MissionWatcher
                         break;
                     case 1:
                         MissionCompletedCount.Value += 1;
-                        MissionFlags[i].Dispose();
+                        MissionFlags[i].Value = 0;
                         break;
                 }
             }).AddTo(Disposable);
@@ -72,7 +72,7 @@ public class MissionWatcher
                         break;
                     case 1:
                         MissionCompletedCount.Value += 1;
-                        MissionFlags[i].Dispose();
+                        MissionFlags[i].Value = 0;
                         break;
                 }
             }).AddTo(Disposable);

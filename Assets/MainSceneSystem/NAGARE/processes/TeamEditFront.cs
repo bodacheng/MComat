@@ -2,26 +2,11 @@
 using UnityEngine;
 using mainMenu;
 using dataAccess;
-using dataAccess;
-using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UniRx;
 
 public class TeamEditFront : MainSceneProcess
 {
-    MissionWatcher missionWatcher;
-
-    ReactiveProperty<int> team3v3LoadFinished = new ReactiveProperty<int>(0);
-    void Team3V3LoadFinished(int value)
-    {
-        team3v3LoadFinished.Value = value;
-    }
-    ReactiveProperty<int> teamArenaLoadFinished = new ReactiveProperty<int>(0);
-    void TeamArenaLoadFinished(int value)
-    {
-        teamArenaLoadFinished.Value = value;
-    }
-
     public IEnumerator EnterProcess()
     {
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
@@ -38,7 +23,7 @@ public class TeamEditFront : MainSceneProcess
         Step = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.target);
     }
-        
+
     public override void ProcessEnter()
     {
         switch (TeamSet.targetTeamMode)

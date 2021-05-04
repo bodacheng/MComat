@@ -1,4 +1,5 @@
-﻿
+﻿using UniRx;
+
 namespace mainMenu
 {
     public abstract class MainSceneProcess : SceneProcess
@@ -10,7 +11,37 @@ namespace mainMenu
         public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
         public ProcessesRunner SubProcessesRunner;
-        
+        public MissionWatcher missionWatcher;
+
+        public ReactiveProperty<int> skillStonesLoadFinished = new ReactiveProperty<int>(0);
+        public void SkillStonesLoadFinished(int value)
+        {
+            skillStonesLoadFinished.Value = value;
+        }
+
+        public ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
+        public void AccLoadFinished(int value)
+        {
+            accLoadFinished.Value = value;
+        }
+
+        public ReactiveProperty<int> monsterLoadFinished = new ReactiveProperty<int>(0);
+        public void MonsterLoadFinished(int value)
+        {
+            monsterLoadFinished.Value = value;
+        }
+
+        public ReactiveProperty<int> team3v3LoadFinished = new ReactiveProperty<int>(0);
+        public void Team3V3LoadFinished(int value)
+        {
+            team3v3LoadFinished.Value = value;
+        }
+        public ReactiveProperty<int> teamArenaLoadFinished = new ReactiveProperty<int>(0);
+        public void TeamArenaLoadFinished(int value)
+        {
+            teamArenaLoadFinished.Value = value;
+        }
+
         public void EelementsInherit(PreScene _preparingScene)
         {
             _SelfFightManager = _preparingScene._SelfFightManager;

@@ -93,11 +93,11 @@ namespace mainMenu
             SkillStonesList skillStones = new SkillStonesList();
             StoneSell stoneSell = new StoneSell();
             StoneMerge stoneMerge = new StoneMerge();
-            SelfFightFront selfFightFront = new SelfFightFront();
-            QuestInfo questInfo = new QuestInfo();
+            SelfFightPage selfFightFront = new SelfFightPage();
+            QuestInfoPage questInfo = new QuestInfoPage();
             MonsterListPage memberDetail = new MonsterListPage();
-            MemberDetail_edit memberDetail_edit = new MemberDetail_edit();
-            MemberDetail_skillshow memberDetail_Skillshow = new MemberDetail_skillshow();
+            MonsterEditPage memberDetail_edit = new MonsterEditPage();
+            SkillShowPage memberDetail_Skillshow = new SkillShowPage();
             ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
 
             // Shop
@@ -236,6 +236,7 @@ namespace mainMenu
                 MainSceneStep returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnTOCurrent()
                 {
+                    Debug.Log("回到：" + returnToStep);
                     trySwitchToStep(returnToStep, false);
                 }
                 ReturnButtonManager.PUSH(returnTOCurrent);

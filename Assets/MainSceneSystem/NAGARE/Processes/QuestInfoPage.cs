@@ -2,7 +2,7 @@
 using mainMenu;
 using dataAccess;
 
-public class QuestInfo : MainSceneProcess
+public class QuestInfoPage : MainSceneProcess
 {
     // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
     public IEnumerator EnterProcess()
@@ -14,7 +14,7 @@ public class QuestInfo : MainSceneProcess
         yield return GetReadyForQuestInfoPage();
     }
     
-    public QuestInfo()
+    public QuestInfoPage()
     {
         Step = MainSceneStep.QuestInfo;
         EelementsInherit(PreScene.target);

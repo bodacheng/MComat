@@ -3,9 +3,9 @@ using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 
-public class MemberDetail_skillshow : MainSceneProcess
+public class SkillShowPage : MainSceneProcess
 {
-    public MemberDetail_skillshow()
+    public SkillShowPage()
     {
         Step = MainSceneStep.MemberDetail_show;
         EelementsInherit(PreScene.target);
