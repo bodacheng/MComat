@@ -6,7 +6,7 @@ public class StoneSell : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        yield return SkillStonesList.EnterProcess();
+        yield return StonesPage.EnterProcess();
         StoneDeleteManger.target.EnterDeleteMode();
     }
     

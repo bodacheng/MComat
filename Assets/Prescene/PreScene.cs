@@ -90,7 +90,7 @@ namespace mainMenu
             #region 主界面各大画面
             FrontPage frontPage = new FrontPage();
             TeamEditFront teamEditFront = new TeamEditFront();
-            SkillStonesList skillStones = new SkillStonesList();
+            StonesPage skillStones = new StonesPage();
             StoneSell stoneSell = new StoneSell();
             StoneMerge stoneMerge = new StoneMerge();
             SelfFightPage selfFightFront = new SelfFightPage();

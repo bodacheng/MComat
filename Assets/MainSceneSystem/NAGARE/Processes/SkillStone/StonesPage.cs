@@ -3,7 +3,7 @@ using mainMenu;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillStonesList : MainSceneProcess
+public class StonesPage : MainSceneProcess
 { 
     //EnterProcess()内绝不能出现triggerMainProcess
     public static IEnumerator EnterProcess()
@@ -47,7 +47,7 @@ public class SkillStonesList : MainSceneProcess
         LoadingCanvas.target.LightUp();
     }
 
-    public SkillStonesList()
+    public StonesPage()
     {
         Step = MainSceneStep.SkillStoneList;
         EelementsInherit(PreScene.target);
