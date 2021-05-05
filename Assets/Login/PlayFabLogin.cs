@@ -10,7 +10,7 @@ public class PlayFabLogin
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest
             {
-                CustomId = "111",
+                CustomId = SystemInfo.deviceUniqueIdentifier,
                 CreateAccount = true
             },
             sucess,

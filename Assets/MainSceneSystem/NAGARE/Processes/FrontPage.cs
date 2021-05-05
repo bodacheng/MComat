@@ -45,20 +45,9 @@ public class FrontPage : MainSceneProcess
     public override void ProcessEnter()
     {
         AccountSet.LoadCustomerInfo(AccLoadFinished);
-        switch (AccountSet._AccInfo.accountprogress)
-        {
-            case PlayerAccountProgressStep.Freedom:
-                AccountCharsSet.Load_List(MonsterLoadFinished);
-                break;
-            case PlayerAccountProgressStep.justCreated:
-                break;
-            case PlayerAccountProgressStep.Tutorial:
-                AccountCharsSet.LoadTutorial();
-                break;
-        }
+        AccountCharsSet.Load_List(MonsterLoadFinished);
+        AccountCharsSet.LoadTutorial();
         MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
-
-        Debug.Log(accLoadFinished.Value + ":" + monsterLoadFinished.Value);
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {

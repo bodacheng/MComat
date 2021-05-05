@@ -19,8 +19,7 @@ namespace dataAccess
                     finished(1);
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    //yield return loadCustomerInfoFromRemoteServer();
-                    loadCustomerInfoFromRemoteServer(finished);
+                    LoadAccInfoRemote(finished);
                     break;
             }
         }

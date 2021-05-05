@@ -12,7 +12,7 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        static void Read(SkillStoneOfPlayerInfoModel one)
+        public static void Read(SkillStoneOfPlayerInfoModel one)
         {
             DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
             GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
@@ -40,24 +40,9 @@ namespace dataAccess
                     finished(1);
                 break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    PlayFabClientAPI.GetUserData(
-                        new GetUserDataRequest()
-                        {
-                            PlayFabId = AccountSet._AccInfo.PlayerName,
-                            Keys = new List<string>() { "stoneList" }
-                        },
-                        (GetUserDataResult obj) => {
-                            UserDataRecord userDataRecord = obj.Data["stoneList"];
-                            list = JsonConvert.DeserializeObject<List<SkillStoneOfPlayerInfoModel>>(userDataRecord.Value);
-                            ConvertListToDic(list);
-                            finished(1);
-                        },
-                        errorCallback => {
-                            Debug.Log(errorCallback.Error);
-                            finished(-1);
-                        });
+                    PlayFabRead.LoadItems(finished);
                 break;
-            case PlayerInfoRefMode.formalVersion:
+                case PlayerInfoRefMode.formalVersion:
                 break;
             }
         }

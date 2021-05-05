@@ -88,10 +88,8 @@ public class BasicTryProcess : FSceneProcess
                 watchetargets.Add(_G.transform);
             }
         }
-        
-        IEnumerator getchar = AccountCharsSet.Load("1");
-        yield return getchar;
-        MonsterOfPlayerDetailModel before = (MonsterOfPlayerDetailModel)getchar.Current;
+
+        MonsterOfPlayerDetailModel before = AccountCharsSet.Get("1");
         CharDataInfo characterDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(before);
         adamInfo = characterDataInfo;
         yield break;

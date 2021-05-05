@@ -2,6 +2,9 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.PfEditor.Json;
+using Api.Dto.Model;
+using dataAccess;
+using System;
 
 public class CloudScript
 {
@@ -24,5 +27,45 @@ public class CloudScript
         object messageValue;
         jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
         Debug.Log((string)messageValue);
+    }
+}
+
+public static class PlayFabRead {
+
+    public static void LoadItems(Action<int> finished)
+    {
+        PlayFabClientAPI.GetUserInventory(
+            new GetUserInventoryRequest(),
+            (GetUserInventoryResult result) =>
+            {
+                foreach (var item in result.Inventory)
+                {
+                    Debug.Log(item.CatalogVersion + ":" + item.ItemId);
+                    switch (item.CatalogVersion)
+                    {
+                        case "chars":
+                            MonsterOfPlayerDetailModel info = new MonsterOfPlayerDetailModel
+                            {
+                                monsterOfPlayerId = item.ItemId,
+                                monsterId = item.CustomData["monsterID"]
+                            };
+                            DicAdd<string, MonsterOfPlayerDetailModel>.Add(AccountCharsSet.AccountCharInfoDic, item.ItemId, info);
+                            break;
+                        case "stone":
+                            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfo = new SkillStoneOfPlayerInfoModel
+                            {
+                                skillStoneOfPlayerId = item.ItemId,
+                                skillId = item.CustomData["skillId"]
+                            };
+                            MySkillStones.Read(skillStoneOfPlayerInfo);
+                        break;
+                    }
+                }
+                finished.Invoke(1);
+            },
+            errorCallback => {
+                Debug.Log(errorCallback.Error);
+                finished.Invoke(-1);
+            });
     }
 }

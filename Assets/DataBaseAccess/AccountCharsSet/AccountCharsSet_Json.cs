@@ -35,7 +35,7 @@ namespace dataAccess
             return charList;
         }
         
-        public static IEnumerator LoadAccCharInfoViaJsonFile(string monsterlocalid)
+        public static MonsterOfPlayerDetailModel LoadAccCharInfoViaJsonFile(string monsterlocalid)
         {
             MonsterOfPlayerDetailModel info = null;
             string wholepath = Application.persistentDataPath + "/AccountCharacterInfos/" + monsterlocalid + ".json";
@@ -44,7 +44,7 @@ namespace dataAccess
                 string dataAsJson = File.ReadAllText(wholepath);
                 info = JsonConvert.DeserializeObject<MonsterOfPlayerDetailModel>(dataAsJson);
             }
-            yield return info;
+            return info;
         }
         
         public static IEnumerator AddNewCharToJsonSaveData(MonsterOfPlayerDetailModel _AccCharInfo)
