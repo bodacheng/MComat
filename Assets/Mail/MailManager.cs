@@ -75,9 +75,7 @@ public class MailManager : MonoBehaviour {
     
     public IEnumerator RequestMails(ApiLanguage apiLanguage)
     {
-        GetMailListForm getMailListForm = new GetMailListForm();
         yield return Request(
-            getMailListForm,
             model => {
                 myMailList = model.myMailList;
 
@@ -97,25 +95,13 @@ public class MailManager : MonoBehaviour {
         );
     }
     
-    static IEnumerator Request(GetMailListForm form, SuccessDelegate<GetMailsOfPlayerModel> success, FailDelegate<GetMailsOfPlayerModel> fail, ApiLanguage apiLanguage)
+    static IEnumerator Request(SuccessDelegate<GetMailsOfPlayerModel> success, FailDelegate<GetMailsOfPlayerModel> fail, ApiLanguage apiLanguage)
     {
         switch(AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.formalVersion:
                 break;
             case PlayerInfoRefMode.remoteTestPlayer:
-                    yield return ApiCaller.Instance.Post<GetMailsOfPlayerModel, GetMailListForm>
-                    (
-                        "http://160.16.187.230/AssetStoreFight/skillStone/getSkillStoneOfPlayerInfo",
-                        form,
-                        ApiCaller.Instance.getHeader(apiLanguage), 
-                        model => {
-                            success(model.data);
-                        },
-                        model => {
-                            fail(model.data);
-                        }
-                    );
                 break;
             case PlayerInfoRefMode.localTestSaveData:
                 success(new GetMailsOfPlayerModel());

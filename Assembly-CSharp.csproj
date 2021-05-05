@@ -231,7 +231,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\AbstractForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\CertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\NoneCertificationForm.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetMailListForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetRankInfoForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\RequestRewardForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterSkillStoneForm.auto.cs" />
