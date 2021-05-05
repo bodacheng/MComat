@@ -89,7 +89,7 @@ namespace mainMenu
 
             #region 主界面各大画面
             FrontPage frontPage = new FrontPage();
-            TeamEditFront teamEditFront = new TeamEditFront();
+            TeamEditPage teamEditFront = new TeamEditPage();
             StonesPage skillStones = new StonesPage();
             StoneSell stoneSell = new StoneSell();
             StoneMerge stoneMerge = new StoneMerge();

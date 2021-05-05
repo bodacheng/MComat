@@ -377,7 +377,7 @@
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StoneSell.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StonesPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
-    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditFront.cs" />
+    <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditPage.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectMaterialMonster.cs" />
     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_waitForConfirm.cs" />

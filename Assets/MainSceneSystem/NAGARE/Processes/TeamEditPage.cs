@@ -5,7 +5,7 @@ using dataAccess;
 using System.Collections.Generic;
 using UniRx;
 
-public class TeamEditFront : MainSceneProcess
+public class TeamEditPage : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
@@ -18,7 +18,7 @@ public class TeamEditFront : MainSceneProcess
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
     }
     
-    public TeamEditFront()
+    public TeamEditPage()
     {
         Step = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.target);
