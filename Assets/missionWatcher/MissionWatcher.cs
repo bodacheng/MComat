@@ -15,7 +15,7 @@ public class MissionWatcher
     public void DisposeAll()
     {
         Disposable.Dispose();
-        MissionFlags.Clear();
+        Debug.Log(":"+ MissionFlags.Count);
     }
 
     async void RunUniTask(UniTask task)
@@ -39,7 +39,7 @@ public class MissionWatcher
                         break;
                     case 1:
                         MissionCompletedCount.Value += 1;
-                        MissionFlags[i].Value = 0;
+                        x = 0;
                         break;
                 }
             }).AddTo(Disposable);
@@ -49,7 +49,6 @@ public class MissionWatcher
         {
             if (x == MissionFlags.Count)
             {
-                Debug.Log("her" + x);
                 RunUniTask(success);
                 DisposeAll();
             }
@@ -72,7 +71,7 @@ public class MissionWatcher
                         break;
                     case 1:
                         MissionCompletedCount.Value += 1;
-                        MissionFlags[i].Value = 0;
+                        x = 0;
                         break;
                 }
             }).AddTo(Disposable);

@@ -57,8 +57,8 @@ namespace mainMenu
             {
                 for (int j = 0; j < targets.Count - 1 - i; j++)
                 {
-                    SkillStoneOfPlayerInfoModel myStone1 = MySkillStones.Get(targets[j]);
-                    SkillStoneOfPlayerInfoModel myStone2 = MySkillStones.Get(targets[j + 1]);
+                    StoneOfPlayerInfoModel myStone1 = MySkillStones.Get(targets[j]);
+                    StoneOfPlayerInfoModel myStone2 = MySkillStones.Get(targets[j + 1]);
                     SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
                     SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
 
@@ -80,8 +80,8 @@ namespace mainMenu
             {
                 for (int j = 0; j < targets.Count - 1 - i; j++)
                 {
-                    SkillStoneOfPlayerInfoModel myStone1 = MySkillStones.Get(targets[j]);
-                    SkillStoneOfPlayerInfoModel myStone2 = MySkillStones.Get(targets[j+1]);
+                    StoneOfPlayerInfoModel myStone1 = MySkillStones.Get(targets[j]);
+                    StoneOfPlayerInfoModel myStone2 = MySkillStones.Get(targets[j+1]);
                     
                     if (order == 1 ? myStone1.GetLevel() > myStone2.GetLevel() : myStone1.GetLevel() < myStone2.GetLevel())
                     {
@@ -101,8 +101,8 @@ namespace mainMenu
             {
                 for (int j = 0; j < targets.Count - 1 - i; j++)
                 {
-                    SkillStoneOfPlayerInfoModel myStone1 = MySkillStones.Get(targets[j]);
-                    SkillStoneOfPlayerInfoModel myStone2 = MySkillStones.Get(targets[j+1]);
+                    StoneOfPlayerInfoModel myStone1 = MySkillStones.Get(targets[j]);
+                    StoneOfPlayerInfoModel myStone2 = MySkillStones.Get(targets[j+1]);
                     SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
                     SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
                     

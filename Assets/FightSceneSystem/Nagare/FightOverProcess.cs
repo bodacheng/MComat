@@ -82,7 +82,7 @@ namespace FightScene
                                 FightOverControl.target.ShowRewards(gold, diamond);
                                 for (int i = 0; i < model.stonesToGetExp.Count; i++)
                                 {
-                                    SkillStoneOfPlayerInfoModel one = MySkillStones.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
+                                    StoneOfPlayerInfoModel one = MySkillStones.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
                                     one.EXP = model.stonesToGetExp[i].EXP;
                                 }
                             },

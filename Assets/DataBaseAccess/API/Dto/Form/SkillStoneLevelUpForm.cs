@@ -35,10 +35,10 @@ namespace Api.Dto.Form
         public List<string> LocalCheck()
         {
             List<string> wrongs = new List<string>();
-            if (MySkillStones.Dic.Count< 30)
-            {
-                wrongs.Add("技能石总量不够30");
-            }
+            //if (MySkillStones.Dic.Count< 30)
+            //{
+            //    wrongs.Add("技能石总量不够30");
+            //}
             return wrongs;
         }
     }

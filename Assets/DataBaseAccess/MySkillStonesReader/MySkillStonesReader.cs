@@ -8,10 +8,16 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static IDictionary<string, SkillStoneOfPlayerInfoModel> Dic = new Dictionary<string, SkillStoneOfPlayerInfoModel>();
-        public static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
+        static IDictionary<string, StoneOfPlayerInfoModel> Dic = new Dictionary<string, StoneOfPlayerInfoModel>();
+        static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
+
+        public static void Clear()
+        {
+            Dic.Clear();
+            RenderModelDic.Clear();
+        }
         
-        public static SkillStoneOfPlayerInfoModel Get(string id)
+        public static StoneOfPlayerInfoModel Get(string id)
         {
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
@@ -19,7 +25,7 @@ namespace dataAccess
         public static List<string> GetMyStonesBySkillID(string skillID)
         {
             List<string> infoModels = new List<string>();
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
+            foreach (KeyValuePair<string, StoneOfPlayerInfoModel> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.skillId == skillID)
                 {
@@ -28,10 +34,10 @@ namespace dataAccess
             }
             return infoModels;
         }
-                      
-        public static SKStoneItem GetRenderModel(string localStoneid)
+
+        public static SKStoneItem GetRenderModel(string ItemId)
         {
-            return localStoneid == null ? null : RenderModelDic.ContainsKey(localStoneid) ? RenderModelDic[localStoneid] : null;
+            return ItemId == null ? null : RenderModelDic.ContainsKey(ItemId) ? RenderModelDic[ItemId] : null;
         }
         
         public static void LoadTutorial()
@@ -40,7 +46,7 @@ namespace dataAccess
             //LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
             // 上面的步骤已经完成了Dic的适配
             RenderModelDic.Clear();
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> pair in Dic)
+            foreach (KeyValuePair<string, StoneOfPlayerInfoModel> pair in Dic)
             {
                 SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
                 if (_SkillConfig == null)

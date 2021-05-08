@@ -7,7 +7,7 @@ namespace Api.Dto.Model
     public class MemberOfTeam
     {
         readonly MonsterOfPlayerDetailModel MonsterInfo;
-        readonly List<SkillStoneOfPlayerInfoModel> stones;
+        readonly List<StoneOfPlayerInfoModel> stones;
         
         public CharDataInfo ToCharDataInfo()
         {
@@ -16,7 +16,7 @@ namespace Api.Dto.Model
                 ResourceID = MonsterInfo.monsterId,
                 monsterOfPlayerId = MonsterInfo.monsterOfPlayerId
             };
-            List<SkillStoneOfPlayerInfoModel> targets = stones;
+            List<StoneOfPlayerInfoModel> targets = stones;
             NineAndTwo nineAndTwo = new NineAndTwo();
             CharConfig _CharConfigInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(charData.ResourceID));
             if (_CharConfigInfo == null)

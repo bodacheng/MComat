@@ -215,7 +215,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             return;
         }
         
-        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         
         #region 各数值文本刷新
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);

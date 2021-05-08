@@ -90,7 +90,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
-        SkillStoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         if (StoneInfoModel == null)
             return;
         PreScene.target.mainProcessRunner.RunAsQueued(LevelUpStone(StoneInfoModel.skillStoneOfPlayerId));

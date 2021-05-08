@@ -38,7 +38,7 @@ namespace Api.Dto.Model {
                     monsterOfPlayerId = accountCharInfo.monsterOfPlayerId
                 };
                 
-                List<SkillStoneOfPlayerInfoModel> targets = MySkillStones.GetEquipingStones(accountCharInfo.monsterOfPlayerId);
+                List<StoneOfPlayerInfoModel> targets = MySkillStones.GetEquipingStones(accountCharInfo.monsterOfPlayerId);
                 NineAndTwo nineAndTwo = new NineAndTwo();
                 CharConfig _CharConfigInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(accountCharInfo.monsterId));
                 if (_CharConfigInfo == null)
@@ -105,7 +105,7 @@ namespace Api.Dto.Model {
         // 这个是从角色存档来读取
         public int GetNineSlotWholePointOfMonster(string monsterOfPlayerId)
         {
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(monsterOfPlayerId);
+            List<StoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(monsterOfPlayerId);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
             for (int i = 0; i < equipingstones.Count; i++)
             {

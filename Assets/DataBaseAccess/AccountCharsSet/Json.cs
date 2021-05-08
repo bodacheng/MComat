@@ -9,7 +9,7 @@ using Json;
 
 namespace dataAccess
 {
-    public partial class AccountCharsSet
+    public partial class MyMonsters
     {
         public static List<MonsterOfPlayerDetailModel> LoadAll_Json(string filePath)
         {
@@ -52,7 +52,7 @@ namespace dataAccess
             MonsterOfPlayerDetailModel returnValue = null;
             try
             {
-                DicAdd<string, MonsterOfPlayerDetailModel>.Add(AccountCharInfoDic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
+                DicAdd<string, MonsterOfPlayerDetailModel>.Add(Dic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
                 string json = JsonConvert.SerializeObject(_AccCharInfo);
                 LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.monsterOfPlayerId + ".json", json);
                 returnValue = _AccCharInfo;
@@ -80,7 +80,7 @@ namespace dataAccess
                 KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(_CharConfig.RECORD_ID);
                 if (INHERENTSkills.Key != null)
                 {
-                    SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+                    StoneOfPlayerInfoModel stoneInfo = new StoneOfPlayerInfoModel
                     {
                         skillStoneOfPlayerId = MySkillStones.GetNonRepeatID_LocalSave(),
                         skillId = INHERENTSkills.Key,

@@ -6,9 +6,9 @@ using Api.Dto.Model;
 namespace dataAccess
 {
     //这个函数应该是个一上来就从本地。。。或数据库读取的东西，应该存在很多协程类函数，因为到时候牵扯到从数据库直接读取信息。
-    public partial class AccountCharsSet
+    public partial class MyMonsters
     {
-        public static IDictionary<string, MonsterOfPlayerDetailModel> AccountCharInfoDic = new Dictionary<string, MonsterOfPlayerDetailModel>();
+        public static IDictionary<string, MonsterOfPlayerDetailModel> Dic = new Dictionary<string, MonsterOfPlayerDetailModel>();
         
         public static bool CheckExist(string key)
         {
@@ -16,9 +16,9 @@ namespace dataAccess
             {
                 return false;
             }
-            if (AccountCharInfoDic.ContainsKey(key))
+            if (Dic.ContainsKey(key))
             {
-                if (AccountCharInfoDic[key] != null)
+                if (Dic[key] != null)
                     return true;
             }
             return false;
@@ -30,10 +30,10 @@ namespace dataAccess
             {
                 return null;
             }
-            if (AccountCharInfoDic.ContainsKey(monsterlocalid))
+            if (Dic.ContainsKey(monsterlocalid))
             {
-                if (AccountCharInfoDic[monsterlocalid] != null)
-                    return AccountCharInfoDic[monsterlocalid];
+                if (Dic[monsterlocalid] != null)
+                    return Dic[monsterlocalid];
             }
             return null;
         }
@@ -42,11 +42,11 @@ namespace dataAccess
         {
             List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
             //charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
-            AccountCharInfoDic.Clear();
+            Dic.Clear();
             foreach (MonsterOfPlayerDetailModel one in charList)
             {
-                if (!AccountCharInfoDic.ContainsKey(one.monsterOfPlayerId))
-                    AccountCharInfoDic.Add(one.monsterOfPlayerId, one);
+                if (!Dic.ContainsKey(one.monsterOfPlayerId))
+                    Dic.Add(one.monsterOfPlayerId, one);
                 else
                     Debug.Log("重复的角色存档id："+ one.monsterOfPlayerId);
             }

@@ -25,7 +25,7 @@ namespace mainMenu
             IEnumerator temp()
             {
                 MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
-                SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.monsterOfPlayerId);
+                StoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.monsterOfPlayerId);
                 foreach (SkillStoneSlot _slot in allSlot)
                 {
                     SKStoneItem sK = _slot._DragAndDropCell.GetItem();

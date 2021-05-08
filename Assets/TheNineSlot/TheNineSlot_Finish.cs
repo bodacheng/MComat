@@ -102,7 +102,7 @@ public partial class NineAndTwo
 
         if (baseOnAcc)
         {
-            SkillStoneOfPlayerInfoModel stoneInfoModel = MySkillStones.SearchStoneForRandomSet(filterForm, exceptSKIds);
+            StoneOfPlayerInfoModel stoneInfoModel = MySkillStones.SearchStoneForRandomSet(filterForm, exceptSKIds);
             if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");

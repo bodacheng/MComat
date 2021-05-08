@@ -47,7 +47,7 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].monsterOfPlayerId != null)
             {
-                MonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = AccountCharsSet.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
+                MonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
                     CharDataInfo charDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(GetMonsterOfPlayerDetailModel);

@@ -28,7 +28,7 @@ public class FrontPage : MainSceneProcess
         string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
         if (focusLocalid == null)
         {
-            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
+            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in MyMonsters.Dic)
             {
                 focusLocalid = keyValuePair.Key;
                 break;
@@ -45,13 +45,12 @@ public class FrontPage : MainSceneProcess
     public override void ProcessEnter()
     {
         AccountSet.LoadCustomerInfo(AccLoadFinished);
-        AccountCharsSet.Load_List(MonsterLoadFinished);
-        AccountCharsSet.LoadTutorial();
-        MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
+        //AccountCharsSet.LoadTutorial();
+        ItemLoader.LoadAll(ItemsLoadFinished);
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                accLoadFinished, monsterLoadFinished, skillStonesLoadFinished
+                accLoadFinished, itemsLoadFinished
             },
             () =>
             {

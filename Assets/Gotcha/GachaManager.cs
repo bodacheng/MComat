@@ -16,7 +16,7 @@ public class GachaManager : MonoBehaviour
     public NineForShow NineForShow;
     public SkillStoneDetail _skillStoneDetail;
     
-    List<SkillStoneOfPlayerInfoModel> Result;
+    List<StoneOfPlayerInfoModel> Result;
     
     public static GachaManager target;
     
@@ -25,7 +25,7 @@ public class GachaManager : MonoBehaviour
         target = this;
     }
        
-    public List<SkillStoneOfPlayerInfoModel> GetResult()
+    public List<StoneOfPlayerInfoModel> GetResult()
     {
         return Result;
     }
@@ -62,13 +62,13 @@ public class GachaManager : MonoBehaviour
     
     public IEnumerator Gacha(string type, int count)
     {
-        List<SkillStoneOfPlayerInfoModel> Results = null;
+        List<StoneOfPlayerInfoModel> Results = null;
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 IEnumerator GET = Gotcha(type, count);
                 yield return GET;
-                Results = (List<SkillStoneOfPlayerInfoModel>)GET.Current;
+                Results = (List<StoneOfPlayerInfoModel>)GET.Current;
                 break;
             case PlayerInfoRefMode.remoteTestPlayer:
                 break;
@@ -81,12 +81,12 @@ public class GachaManager : MonoBehaviour
     
     public static IEnumerator Gotcha(string type, int stoneCount)
     {
-        List<SkillStoneOfPlayerInfoModel> Geted = new List<SkillStoneOfPlayerInfoModel>();
+        List<StoneOfPlayerInfoModel> Geted = new List<StoneOfPlayerInfoModel>();
         for (int i = 0; i < stoneCount; i++)
         {
             IEnumerator GET = OneGocha(type);
             yield return GET;
-            Geted.Add((SkillStoneOfPlayerInfoModel)GET.Current);
+            Geted.Add((StoneOfPlayerInfoModel)GET.Current);
         }
         yield return Geted;
     }
@@ -98,7 +98,7 @@ public class GachaManager : MonoBehaviour
         List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         int random_index = Random.Range(0, skillConfigs.Count);
         SkillConfig skillConfig = skillConfigs[random_index];
-        SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+        StoneOfPlayerInfoModel stoneInfo = new StoneOfPlayerInfoModel
         {
             skillStoneOfPlayerId = MySkillStones.GetNonRepeatID_LocalSave(),
             skillId = skillConfig.RECORD_ID,

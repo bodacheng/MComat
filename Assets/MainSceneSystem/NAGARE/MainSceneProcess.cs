@@ -13,22 +13,16 @@ namespace mainMenu
         public ProcessesRunner SubProcessesRunner;
         public MissionWatcher missionWatcher;
 
-        public ReactiveProperty<int> skillStonesLoadFinished = new ReactiveProperty<int>(0);
-        public void SkillStonesLoadFinished(int value)
-        {
-            skillStonesLoadFinished.Value = value;
-        }
-
         public ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
         public void AccLoadFinished(int value)
         {
             accLoadFinished.Value = value;
         }
 
-        public ReactiveProperty<int> monsterLoadFinished = new ReactiveProperty<int>(0);
-        public void MonsterLoadFinished(int value)
+        public ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
+        public void ItemsLoadFinished(int value)
         {
-            monsterLoadFinished.Value = value;
+            itemsLoadFinished.Value = value;
         }
 
         public ReactiveProperty<int> team3v3LoadFinished = new ReactiveProperty<int>(0);

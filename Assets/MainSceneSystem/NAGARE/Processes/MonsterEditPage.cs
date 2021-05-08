@@ -52,10 +52,10 @@ public class MonsterEditPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        MySkillStones.LoadAMySkillstones(SkillStonesLoadFinished);
+        ItemLoader.LoadAll(ItemsLoadFinished);
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                skillStonesLoadFinished
+                itemsLoadFinished
             },
             () => {
                 if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)

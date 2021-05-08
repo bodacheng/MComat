@@ -44,7 +44,7 @@ public partial class Starter : MonoBehaviour
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         AccountSet.OverrideAccountOnLocalFile();
         yield return MySkillStones.LocalSaveDataGetAllStones();
-        yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
+        yield return MyMonsters.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);
     }
 
@@ -107,7 +107,7 @@ public partial class Starter : MonoBehaviour
             DeleteLocalSaveDate();
             AccountSet.OverrideAccountOnLocalFile();
             yield return MySkillStones.LocalSaveDataGetAllStones();
-            yield return AccountCharsSet.LocalSaveDataGetAllCharacters();
+            yield return MyMonsters.LocalSaveDataGetAllCharacters();
         }
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
         stage._fightEventType = FightEventType.Screensaver;

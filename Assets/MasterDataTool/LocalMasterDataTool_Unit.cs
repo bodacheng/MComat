@@ -153,6 +153,6 @@ public partial class LocalMasterDataTool : MonoBehaviour
             monsterOfPlayerId = 1.ToString(),
             monsterId = 1.ToString()
         };
-        AccountCharsSet.generateStoryCharsIntoXMLFile(Adam);
+        MyMonsters.generateStoryCharsIntoXMLFile(Adam);
     }
 }

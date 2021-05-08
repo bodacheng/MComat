@@ -27,7 +27,7 @@ public class SkillStoneSlot
 
     public IEnumerator TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
     {
-        SkillStoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStones.Get(stoneOfPlayerID);
+        StoneOfPlayerInfoModel SkillStoneOfPlayerInfoModel = MySkillStones.Get(stoneOfPlayerID);
         SKStoneItem stoneModel = MySkillStones.GetRenderModel(stoneOfPlayerID);
         if (stoneModel == null)
             yield break;

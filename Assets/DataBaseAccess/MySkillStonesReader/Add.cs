@@ -8,9 +8,9 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static IEnumerator Add(SkillStoneOfPlayerInfoModel one)
+        public static IEnumerator Add(StoneOfPlayerInfoModel one)
         {
-            DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
+            DicAdd<string, StoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
             GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
             yield return Update(one.skillStoneOfPlayerId);
         }
@@ -26,7 +26,7 @@ namespace dataAccess
                 if (RenderModelDic[skillStoneOfPlayerId] != null)
                     return;
             }
-            SkillStoneOfPlayerInfoModel StoneOfPlayerInfo = Get(skillStoneOfPlayerId);
+            StoneOfPlayerInfoModel StoneOfPlayerInfo = Get(skillStoneOfPlayerId);
             SKStoneItem item = GenerateNewStoneModel_Resource(StoneOfPlayerInfo.skillId, true);
             item.Inherent = StoneOfPlayerInfo.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[skillStoneOfPlayerId].skillId);

@@ -23,10 +23,10 @@ namespace mainMenu
         {
             // 先把所有这个角色装备中的旧石头卸载。事实上，如果某个石头的装备情况没发生变化，那么就产生了一些冗余功。但我感觉不如就这样，因为客户端是可以做手脚的，
             // 如果你用客户端判断是不是有石头在九宫格内位置没发生变化，来决定是否需要通信，那万一被人做了手脚。。
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(accCharInfo.monsterOfPlayerId);
+            List<StoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(accCharInfo.monsterOfPlayerId);
             for (int i = 0; i < equipingstones.Count; i++)
             {
-                SkillStoneOfPlayerInfoModel removedStone = MySkillStones.Get(equipingstones[i].skillStoneOfPlayerId);
+                StoneOfPlayerInfoModel removedStone = MySkillStones.Get(equipingstones[i].skillStoneOfPlayerId);
                 removedStone.inUsingMonsterOfPlayerId = null;
                 removedStone.inUsingSkillSlot = null;
                 yield return MySkillStones.Update(removedStone.skillStoneOfPlayerId);
@@ -38,7 +38,7 @@ namespace mainMenu
                 {
                     //yield return RemoveStone(allSlot[i].OnSlotStoneID);
                     // 下面是将九宫格slot上放着的技能石正式装备到目标角色身上。
-                    SkillStoneOfPlayerInfoModel new_skillStoneInfo = MySkillStones.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
+                    StoneOfPlayerInfoModel new_skillStoneInfo = MySkillStones.Get(allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
                     new_skillStoneInfo.inUsingMonsterOfPlayerId = accCharInfo.monsterOfPlayerId;
                     new_skillStoneInfo.inUsingSkillSlot = allSlot[i].number.ToString();
                     yield return MySkillStones.Update(new_skillStoneInfo.skillStoneOfPlayerId);
@@ -62,7 +62,7 @@ namespace mainMenu
         IEnumerator RemoveStone(string stoneID)
         {
             // 将原先九宫格对应位置的技能石卸载。即将其inUsingMonsterOfPlayerId变为null。
-            SkillStoneOfPlayerInfoModel formerStoneInfo = MySkillStones.Get(stoneID);
+            StoneOfPlayerInfoModel formerStoneInfo = MySkillStones.Get(stoneID);
             if (formerStoneInfo != null)
             {
                 if (formerStoneInfo.Inherent == "true")

@@ -112,7 +112,7 @@ namespace dataAccess
                 {
                     continue;
                 }
-                MonsterOfPlayerDetailModel myfighter = AccountCharsSet.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
+                MonsterOfPlayerDetailModel myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 if (myfighter != null)
                 {
                     CharDataInfo CharDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(myfighter);

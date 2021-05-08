@@ -34,6 +34,9 @@ public static class PlayFabRead {
 
     public static void LoadItems(Action<int> finished)
     {
+        MyMonsters.Dic.Clear();
+        MySkillStones.Clear();
+
         PlayFabClientAPI.GetUserInventory(
             new GetUserInventoryRequest(),
             (GetUserInventoryResult result) =>
@@ -49,10 +52,10 @@ public static class PlayFabRead {
                                 monsterOfPlayerId = item.ItemId,
                                 monsterId = item.CustomData["monsterID"]
                             };
-                            DicAdd<string, MonsterOfPlayerDetailModel>.Add(AccountCharsSet.AccountCharInfoDic, item.ItemId, info);
+                            DicAdd<string, MonsterOfPlayerDetailModel>.Add(MyMonsters.Dic, item.ItemId, info);
                             break;
                         case "stone":
-                            SkillStoneOfPlayerInfoModel skillStoneOfPlayerInfo = new SkillStoneOfPlayerInfoModel
+                            StoneOfPlayerInfoModel skillStoneOfPlayerInfo = new StoneOfPlayerInfoModel
                             {
                                 skillStoneOfPlayerId = item.ItemId,
                                 skillId = item.CustomData["skillId"]

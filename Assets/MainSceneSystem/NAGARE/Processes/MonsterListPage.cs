@@ -40,18 +40,17 @@ public class MonsterListPage : MainSceneProcess
         switch (AccountSet._AccInfo.accountprogress)
         {
             case PlayerAccountProgressStep.Freedom:
-                AccountCharsSet.Load_List(MonsterLoadFinished);
                 break;
             case PlayerAccountProgressStep.justCreated:
                 break;
             case PlayerAccountProgressStep.Tutorial:
-                AccountCharsSet.LoadTutorial();
+                MyMonsters.LoadTutorial();
                 break;
         }
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                monsterLoadFinished
+                itemsLoadFinished
             },
             () => {
                 UnityEngine.Events.UnityAction afterToDo = () =>

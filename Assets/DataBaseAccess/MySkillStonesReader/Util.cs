@@ -43,7 +43,7 @@ namespace dataAccess
         public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
         {
             List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
-            foreach (KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
+            foreach (KeyValuePair<string, StoneOfPlayerInfoModel> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.Inherent == "true")
                 {
@@ -81,10 +81,10 @@ namespace dataAccess
                     list.Add(origin[i]);
                     continue;
                 }
-                SkillStoneOfPlayerInfoModel infoModel = Get(origin[i]);
+                StoneOfPlayerInfoModel infoModel = Get(origin[i]);
                 if (notUsing)
                 {
-                    if (AccountCharsSet.Get(infoModel.inUsingMonsterOfPlayerId) != null)
+                    if (MyMonsters.Get(infoModel.inUsingMonsterOfPlayerId) != null)
                     {
                         continue;
                     }
@@ -100,9 +100,9 @@ namespace dataAccess
 
         // 从账户随机抽取符合要求的技能石
         // exceptSkIDs : 除了这些技能ID。切记是技能ID
-        public static SkillStoneOfPlayerInfoModel SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
+        public static StoneOfPlayerInfoModel SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
         {
-            SkillStoneOfPlayerInfoModel infoModel;
+            StoneOfPlayerInfoModel infoModel;
             List<string> exceptStones = new List<string>();
             for (int i = 0; i < exceptSkIDs.Count; i++)
             {
@@ -119,10 +119,10 @@ namespace dataAccess
         }
 
         // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
-        public static List<SkillStoneOfPlayerInfoModel> GetEquipingStones(string monsterOfPlayerId)
+        public static List<StoneOfPlayerInfoModel> GetEquipingStones(string monsterOfPlayerId)
         {
-            List<SkillStoneOfPlayerInfoModel> targetStones = new List<SkillStoneOfPlayerInfoModel>();
-            foreach(KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
+            List<StoneOfPlayerInfoModel> targetStones = new List<StoneOfPlayerInfoModel>();
+            foreach(KeyValuePair<string, StoneOfPlayerInfoModel> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId)
                 {
@@ -133,10 +133,10 @@ namespace dataAccess
         }
         
         // 获取一个角色的原生技能的对应技能石信息
-        public static SkillStoneOfPlayerInfoModel GetOriginSkillOfMonster(string monsterOfPlayerId)
+        public static StoneOfPlayerInfoModel GetOriginSkillOfMonster(string monsterOfPlayerId)
         {
-            SkillStoneOfPlayerInfoModel targetStone = null;
-            foreach(KeyValuePair<string, SkillStoneOfPlayerInfoModel> keyValuePair in Dic)
+            StoneOfPlayerInfoModel targetStone = null;
+            foreach(KeyValuePair<string, StoneOfPlayerInfoModel> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
                 {

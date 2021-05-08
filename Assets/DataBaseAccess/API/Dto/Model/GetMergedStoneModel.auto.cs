@@ -10,6 +10,6 @@ namespace Api.Dto.Model {
     [Serializable]
     public class GetMergedStoneModel 
     {
-        public SkillStoneOfPlayerInfoModel stone;
+        public StoneOfPlayerInfoModel stone;
     }
 }

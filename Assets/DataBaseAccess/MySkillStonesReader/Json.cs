@@ -14,18 +14,18 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {    
-        static List<SkillStoneOfPlayerInfoModel> LoadAll_Json(string filePath)
+        static List<StoneOfPlayerInfoModel> LoadAll_Json(string filePath)
         {
             if (Directory.Exists(filePath))
             {
                 Debug.Log("正从以下路径获取技能石存档："+filePath);
-                List<SkillStoneOfPlayerInfoModel> list = new List<SkillStoneOfPlayerInfoModel>();
+                List<StoneOfPlayerInfoModel> list = new List<StoneOfPlayerInfoModel>();
                 foreach (string file in Directory.GetFiles(filePath))
                 {
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
-                        SkillStoneOfPlayerInfoModel info = JsonConvert.DeserializeObject<SkillStoneOfPlayerInfoModel>(dataAsJson);
+                        StoneOfPlayerInfoModel info = JsonConvert.DeserializeObject<StoneOfPlayerInfoModel>(dataAsJson);
                         list.Add(info);
                     }
                     catch (Exception e)
@@ -36,11 +36,11 @@ namespace dataAccess
                 }
                 return list;
             }
-            return new List<SkillStoneOfPlayerInfoModel>();
+            return new List<StoneOfPlayerInfoModel>();
         }
         
         //新
-        public static void Update_Json(SkillStoneOfPlayerInfoModel stone)
+        public static void Update_Json(StoneOfPlayerInfoModel stone)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace dataAccess
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
             {
                 //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-                SkillStoneOfPlayerInfoModel stoneInfo = new SkillStoneOfPlayerInfoModel
+                StoneOfPlayerInfoModel stoneInfo = new StoneOfPlayerInfoModel
                 {
                     skillStoneOfPlayerId = GetNonRepeatID_LocalSave(),
                     skillId = _pair.Value.RECORD_ID,

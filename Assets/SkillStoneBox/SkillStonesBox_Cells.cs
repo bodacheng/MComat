@@ -110,7 +110,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            SkillStoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStones.Get(Item.SkillStoneOfPlayerId);
+            StoneOfPlayerInfoModel SSOfPlayerInfo = MySkillStones.Get(Item.SkillStoneOfPlayerId);
             if (SSOfPlayerInfo == null)
             {
                 Debug.Log("逻辑错误. SkillStoneOfPlayerId:"+ Item.SkillStoneOfPlayerId);
@@ -122,7 +122,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 yield break;
             }
-            MonsterOfPlayerDetailModel _one = AccountCharsSet.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
+            MonsterOfPlayerDetailModel _one = MyMonsters.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
                 targetIcon.gameObject.SetActive(false);

@@ -70,7 +70,7 @@ namespace mainMenu
 
         public static IEnumerator AddOneNewIcon(string monsterOfPlayerId, bool clearButtonFeature)
         {
-            MonsterOfPlayerDetailModel targetingCharInfo = AccountCharsSet.Get(monsterOfPlayerId);
+            MonsterOfPlayerDetailModel targetingCharInfo = MyMonsters.Get(monsterOfPlayerId);
             CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
@@ -106,7 +106,7 @@ namespace mainMenu
         {
             selectingAccID = null;
             List<IEnumerator> addIconTasks = new List<IEnumerator>();
-            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in AccountCharsSet.AccountCharInfoDic)
+            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in MyMonsters.Dic)
             {
                 addIconTasks.Add(AddOneNewIcon(keyValuePair.Value.monsterOfPlayerId, clearButtonFeature));
             }

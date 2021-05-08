@@ -48,9 +48,9 @@ namespace mainMenu
             for (int i = 0; i < targetSKs.Count; i++)
             {
                 CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                if (!MySkillStones.RenderModelDic[targetSKs[i]]._using)
+                if (!MySkillStones.GetRenderModel(targetSKs[i])._using)
                 {
-                    _SkillStoneCell.AddItem(MySkillStones.RenderModelDic[targetSKs[i]]);
+                    _SkillStoneCell.AddItem(MySkillStones.GetRenderModel(targetSKs[i]));
                     //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }

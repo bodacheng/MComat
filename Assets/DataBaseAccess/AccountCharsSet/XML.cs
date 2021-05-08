@@ -10,7 +10,7 @@ using Api.Dto.Model;
 namespace dataAccess
 {
     //Resource模式读取应该是可以用于一些临时剧情人物的读取？最典型的，教学模式角色读取。
-    public partial class AccountCharsSet
+    public partial class MyMonsters
     {
         public static MonsterOfPlayerDetailModel loadMyCharsByXMLFile(string Path)
         {

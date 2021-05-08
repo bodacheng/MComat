@@ -9,7 +9,7 @@ namespace Api.Dto.Model {
     /// バージョン：1.00 2019/07/01
     /// </summary>
     [Serializable]
-    public class SkillStoneOfPlayerInfoModel
+    public class StoneOfPlayerInfoModel
     {
         /// <summary>
         /// プレーヤ所有スキルストーンID

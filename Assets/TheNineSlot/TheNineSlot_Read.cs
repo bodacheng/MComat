@@ -17,7 +17,7 @@ namespace mainMenu
             {
                 yield break;
             }
-            List<SkillStoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(_AccCharInfo.monsterOfPlayerId);
+            List<StoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(_AccCharInfo.monsterOfPlayerId);
 
             for (int i = 1; i <= 9; i++)
             {

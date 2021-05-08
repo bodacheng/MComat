@@ -1,50 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using PlayFab;
-using PlayFab.ClientModels;
 using Api.Dto.Model;
-using Skill;
-using Newtonsoft.Json;
-using System;
 
 namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static void Read(SkillStoneOfPlayerInfoModel one)
+        public static void Read(StoneOfPlayerInfoModel one)
         {
-            DicAdd<string, SkillStoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
+            DicAdd<string, StoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
             GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
         }
 
-        static void ConvertListToDic(List<SkillStoneOfPlayerInfoModel> list)
+        static void ConvertListToDic(List<StoneOfPlayerInfoModel> list)
         {
-            foreach (SkillStoneOfPlayerInfoModel stoneinfo in list)
+            foreach (StoneOfPlayerInfoModel stoneinfo in list)
             {
                 Read(stoneinfo);
             }
         }
 
-        public static void LoadAMySkillstones(Action<int> finished)
+        public static void LoadAllLocal()
         {
-            Dic.Clear();
-            RenderModelDic.Clear();
-
-            List<SkillStoneOfPlayerInfoModel> list;
-            switch (AccountSet.ReferenceMode)
-            {
-                case PlayerInfoRefMode.localTestSaveData:
-                    list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
-                    ConvertListToDic(list);
-                    finished(1);
-                break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    PlayFabRead.LoadItems(finished);
-                break;
-                case PlayerInfoRefMode.formalVersion:
-                break;
-            }
+            Clear();
+            List<StoneOfPlayerInfoModel>  list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
+            ConvertListToDic(list);
         }
     }
 }

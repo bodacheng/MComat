@@ -62,7 +62,7 @@ namespace mainMenu
         {
             MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
-            SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.monsterOfPlayerId);
+            StoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.monsterOfPlayerId);
             // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
             NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet(charConfig.TYPE, originSkillInfo?.skillId, 1, true);
 
@@ -103,7 +103,7 @@ namespace mainMenu
                 return;
             }
 
-            SkillStoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(monsterOfPlayerId);
+            StoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(monsterOfPlayerId);
             List<string> Options = MySkillStones.GetMyStonesBySkillID(skillid);
             if (originSkillInfo != null && skillid == originSkillInfo.skillId)
             {
@@ -113,8 +113,8 @@ namespace mainMenu
                 string targetStoneId = null;
                 for (int i = 0; i < Options.Count; i++)
                 {
-                    SkillStoneOfPlayerInfoModel stoneInfo = MySkillStones.Get(Options[i]);
-                    if (AccountCharsSet.Get(stoneInfo.inUsingMonsterOfPlayerId) == null)
+                    StoneOfPlayerInfoModel stoneInfo = MySkillStones.Get(Options[i]);
+                    if (MyMonsters.Get(stoneInfo.inUsingMonsterOfPlayerId) == null)
                     {
                         targetStoneId = Options[i];
                         break;
