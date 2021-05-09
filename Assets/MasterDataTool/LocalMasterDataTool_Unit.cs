@@ -17,7 +17,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
     {
         if (textAsset != null)
         {
-            MonstersConfigTable.Instance.Load(textAsset);
+            MonstersConfigTable.Load(textAsset);
         }
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
@@ -25,7 +25,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharConfig> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.Instance.RowToCharacterResourceInfoList(MonstersConfigTable.Instance.FindAll_MONSTER_TYPE(chartype));
+            List<CharConfig> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.RowToConfigList(MonstersConfigTable.FindAll_MONSTER_TYPE(chartype));
             List<string> keySonnCharacterRealNames = new List<string>();
             foreach (CharConfig oneConfig in CharConfigsOfOldConfigFileOFtype)
             {
@@ -110,7 +110,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
 
             foreach (string keyname in ResourceNamesShouldDeletedFromConfig)
             {
-                List<MonstersConfigTable.Row> toDeleteRows = MonstersConfigTable.Instance.FindAll_TYPE_REALNAME(chartype, keyname);
+                List<MonstersConfigTable.Row> toDeleteRows = MonstersConfigTable.FindAll_TYPE_REALNAME(chartype, keyname);
                 foreach (MonstersConfigTable.Row row in toDeleteRows)
                 {
                     if (!AllDeletedRecordsIDs.Contains(int.Parse(row.RECORD_ID)))
@@ -120,7 +120,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
                     }
                     else
                         Debug.Log("原monstersConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
-                    MonstersConfigTable.Instance.rowList.Remove(row);
+                    MonstersConfigTable.rowList.Remove(row);
                 }
             }
         }
@@ -139,11 +139,11 @@ public partial class LocalMasterDataTool : MonoBehaviour
                 characterResourceInfo.RECORD_ID = "new";
                 kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
             }
-            MonstersConfigTable.Row newRow = MonstersConfigTable.Instance.CharacterResourceInfoToRow(characterResourceInfo);
+            MonstersConfigTable.Row newRow = MonstersConfigTable.ConfigToRow(characterResourceInfo);
             if (newRow != null && newRow.REAL_NAME != null)
-                MonstersConfigTable.Instance.rowList.Add(newRow);
+                MonstersConfigTable.rowList.Add(newRow);
         }
-        MonstersConfigTable.Instance.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
+        MonstersConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
     }
 
     public void GenerateTutorialUnitsFiles()

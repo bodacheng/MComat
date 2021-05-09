@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Api.Dto.Model;
 
 namespace dataAccess
@@ -18,13 +17,6 @@ namespace dataAccess
             {
                 Read(stoneinfo);
             }
-        }
-
-        public static void LoadAllLocal()
-        {
-            Clear();
-            List<StoneOfPlayerInfoModel>  list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
-            ConvertListToDic(list);
         }
     }
 }

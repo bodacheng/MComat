@@ -43,8 +43,8 @@ public partial class StagesManager : MonoBehaviour
 
         // 这几个东西用不用执行待定
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
-        MonstersConfigTable.LoadMonstersConfigByResource();
-        MonstersConfigTable.RefreshCharacterResourceInfoDic();
+        MonstersConfigTable.LoadByResource();
+        MonstersConfigTable.RefreshDic();
 
         IDictionary<string, string> CharIDsAndNames = MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype);
         List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);

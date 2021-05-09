@@ -14,9 +14,11 @@ public class MonsterListPage : MainSceneProcess
         Step = MainSceneStep.MonsterList;
         EelementsInherit(PreScene.target);
     }
-    
-    public void temp()
+
+    public async UniTask Enter()
     {
+        await MonsterBox.DisplayMonsterIcons(true);
+        MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -26,12 +28,6 @@ public class MonsterListPage : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         loadFinished = true;
-    }
-
-    public async UniTask enter()
-    {
-        await MonsterBox.DisplayMonsterIcons(true);
-        MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
     }
 
     public override void ProcessEnter()
@@ -52,13 +48,7 @@ public class MonsterListPage : MainSceneProcess
             new List<ReactiveProperty<int>>() {
                 itemsLoadFinished
             },
-            () => {
-                UnityEngine.Events.UnityAction afterToDo = () =>
-                {
-                    temp();
-                };
-                mainProcessRunner.RunAsQueued(enter(), afterToDo);
-            },
+            Enter(),
             () => { Debug.Log("错误，怎么办？"); }
         );
     }

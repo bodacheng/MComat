@@ -23,7 +23,7 @@ public partial class CharsManager : MonoBehaviour {
             Debug.Log("严重资源类错误");
             yield break;
         }
-        CharConfig charConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(_CharDataInfo.ResourceID));
+        CharConfig charConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(_CharDataInfo.ResourceID));
         yield return _TempDATACENTER.Step2Initialize (charConfig.TYPE, _CharDataInfo._NineAndTwo, charConfig._zokusei, charConfig.SPECIAL_ZOKUSEI);
         yield return _TempDATACENTER;
     }

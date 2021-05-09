@@ -9,7 +9,7 @@ public partial class StagesManagerGUI : Editor {
     string CharSelect()
     {
         // 角色选择
-        CharConfig focusingCharConfig = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(focusingCharInfo.ResourceID));
+        CharConfig focusingCharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(focusingCharInfo.ResourceID));
         focusingtype = focusingCharConfig != null ? EditorGUILayout.TextField("CharacerType", focusingCharConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         CharIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
         foreach(KeyValuePair<string,string> keyValuePair in MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype))

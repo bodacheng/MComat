@@ -15,7 +15,6 @@ public class MissionWatcher
     public void DisposeAll()
     {
         Disposable.Dispose();
-        Debug.Log(":"+ MissionFlags.Count);
     }
 
     async void RunUniTask(UniTask task)
@@ -23,7 +22,7 @@ public class MissionWatcher
         await task;
     }
 
-    public MissionWatcher(List<ReactiveProperty<int>> missionFlags, UniTask success, UniTask fail)
+    public MissionWatcher(List<ReactiveProperty<int>> missionFlags, UniTask success, Action fail)
     {
         MissionFlags = missionFlags;
         MissionCompletedCount.Value = 0;
@@ -34,7 +33,7 @@ public class MissionWatcher
                 switch (x)
                 {
                     case -1:
-                        RunUniTask(fail);
+                        fail.Invoke();
                         DisposeAll();
                         break;
                     case 1:

@@ -44,8 +44,8 @@ public partial class ResourceDownLoad : MonoBehaviour
         TextAsset CharacterConfigTextFile = (TextAsset)loadAsset.asset;
         if (CharacterConfigTextFile != null)
         {
-            MonstersConfigTable.Instance.Load(CharacterConfigTextFile);
-            MonstersConfigTable.RefreshCharacterResourceInfoDic();
+            MonstersConfigTable.Load(CharacterConfigTextFile);
+            MonstersConfigTable.RefreshDic();
         }
         else
         {

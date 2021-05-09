@@ -8,19 +8,9 @@ using System.Linq;
 using System.Text;
 using Skill;
 
-public class MonstersConfigTable
+public static class MonstersConfigTable
 {
-    static MonstersConfigTable instance;
-    public static MonstersConfigTable Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = new MonstersConfigTable();
-            return instance;
-        }
-    }
-    public static IDictionary<string, CharConfig> CharacterResourceInfoDic = new Dictionary<string, CharConfig>();
+    public static IDictionary<string, CharConfig> Dic = new Dictionary<string, CharConfig>();
 
     [Serializable]
     public class Row
@@ -39,31 +29,31 @@ public class MonstersConfigTable
             
     public static CharConfig GetCharConfig(string resourceId)
     {
-        return CharacterResourceInfoDic.ContainsKey(resourceId) ? CharacterResourceInfoDic[resourceId] : null;
+        return Dic.ContainsKey(resourceId) ? Dic[resourceId] : null;
     }
-    public static void LoadMonstersConfigByResource()
+    public static void LoadByResource()
     {
         //暂时做如下处理
         TextAsset CSV = Resources.Load("Account/mst_monster") as TextAsset;
         if (CSV)
         {
-            Instance.Load(CSV);
+            Load(CSV);
         }
         else
             Debug.Log("没能读取到角色数据库文件。");
     }
     
-    public static void RefreshCharacterResourceInfoDic()
+    public static void RefreshDic()
     {
-        CharacterResourceInfoDic.Clear();
-        List<CharConfig> characterResourceInfos = Instance.RowToCharacterResourceInfoList(Instance.rowList);
+        Dic.Clear();
+        List<CharConfig> characterResourceInfos = RowToConfigList(rowList);
         foreach (CharConfig one in characterResourceInfos)            
         {
-            CharacterResourceInfoDic.Add(one.RECORD_ID,one);
+            Dic.Add(one.RECORD_ID,one);
         }
     }
     
-    public IEnumerator LoadMonstersConfig()
+    public static void LoadMonstersConfig()
     {
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
@@ -72,27 +62,26 @@ public class MonstersConfigTable
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                LoadMonstersConfigByResource();
+                LoadByResource();
                 break;
         }
-        RefreshCharacterResourceInfoDic();
-        yield break;
+        RefreshDic();
     }
 
-	public List<Row> rowList = new List<Row>();
-	bool isLoaded;
+	public static List<Row> rowList = new List<Row>();
+    static bool isLoaded;
 
-	public bool IsLoaded()
+	public static bool IsLoaded()
 	{
 		return isLoaded;
 	}
 
-	public List<Row> GetRowList()
+	public static List<Row> GetRowList()
 	{
 		return rowList;
 	}
 
-	public void Load(TextAsset csv)
+	public static void Load(TextAsset csv)
 	{
 		rowList.Clear();
 		string[][] grid = CsvParser2.Parse(csv.text);
@@ -100,7 +89,7 @@ public class MonstersConfigTable
         {
             for (int i = 1; i < grid.Length; i++)
             {
-                Row row = new Row
+                Row row = new Row()
                 {
                     RECORD_ID = grid[i][0],
                     REAL_NAME = grid[i][1],
@@ -123,7 +112,7 @@ public class MonstersConfigTable
         }
     }
 
-    public void SaveByCurrentRows(string filePath)
+    public static void SaveByCurrentRows(string filePath)
     {
         List<Row> toDeleteList = new List<Row>();
         foreach (Row row in rowList)
@@ -184,25 +173,25 @@ public class MonstersConfigTable
 
     // by haku 9.12
     // filePath的后面记得包括文件名和CSV后缀？
-    public void Save(string filePath, List<CharConfig> characterResourceList)
+    public static void Save(string filePath, List<CharConfig> characterResourceList)
     {
         try
         {
             rowList.Clear();
 
-            foreach (CharConfig characterResourceInfo in characterResourceList)
+            foreach (CharConfig Config in characterResourceList)
             {
-                Debug.Log("尝试整理角色：" + characterResourceInfo.REAL_NAME);
+                Debug.Log("尝试整理角色：" + Config.REAL_NAME);
                 Row row = new Row
                 {
-                    RECORD_ID = characterResourceInfo.RECORD_ID,
-                    MONSTER_TYPE = characterResourceInfo.TYPE,
-                    REAL_NAME = characterResourceInfo.REAL_NAME,
-                    ZOKUSEI = ((int)characterResourceInfo._zokusei).ToString(),
-                    SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI,
-                    BASIC_MOVEMENT_PACK = characterResourceInfo.BASIC_MOVEMENT_PACK
+                    RECORD_ID = Config.RECORD_ID,
+                    MONSTER_TYPE = Config.TYPE,
+                    REAL_NAME = Config.REAL_NAME,
+                    ZOKUSEI = ((int)Config._zokusei).ToString(),
+                    SPECIAL_ZOKUSEI = Config.SPECIAL_ZOKUSEI,
+                    BASIC_MOVEMENT_PACK = Config.BASIC_MOVEMENT_PACK
                 };
-                switch (characterResourceInfo.MoveType)
+                switch (Config.MoveType)
                 {
                     case MoveType.Move_normal:
                         row.MOVE_TYPE = "Move1";
@@ -217,7 +206,7 @@ public class MonstersConfigTable
                         row.MOVE_TYPE = "Move1";
                         break;
                 }
-                switch (characterResourceInfo.RushType)
+                switch (Config.RushType)
                 {
                     case RushType.Rush:
                         row.DODGE_SKILL = "Rush";
@@ -232,9 +221,9 @@ public class MonstersConfigTable
                         row.DODGE_SKILL = "RushBack";
                         break;
                 }
-                row.DEFENDABLE_FLAG = characterResourceInfo.DEFENDABLE_FLAG ? "1" : "0";
+                row.DEFENDABLE_FLAG = Config.DEFENDABLE_FLAG ? "1" : "0";
 
-                row.RARITY_LEVEL = characterResourceInfo.RARITY_LEVEL.ToString();
+                row.RARITY_LEVEL = Config.RARITY_LEVEL.ToString();
                 rowList.Add(row);
             }
 
@@ -288,7 +277,7 @@ public class MonstersConfigTable
         }
     }
 
-    public List<CharConfig> RowToCharacterResourceInfoList(List<Row> List)
+    public static List<CharConfig> RowToConfigList(List<Row> List)
     {
         List<CharConfig> ToReturn = new List<CharConfig>();
         foreach (Row row in List)
@@ -302,20 +291,20 @@ public class MonstersConfigTable
         return ToReturn;
     }
 
-    public Row CharacterResourceInfoToRow(CharConfig characterResourceInfo)
+    public static Row ConfigToRow(CharConfig config)
     {
-        if (characterResourceInfo == null)
+        if (config == null)
             return null;
         Row row = new Row
         {
-            RECORD_ID = characterResourceInfo.RECORD_ID,
-            MONSTER_TYPE = characterResourceInfo.TYPE,
-            REAL_NAME = characterResourceInfo.REAL_NAME,
-            ZOKUSEI = ((int)characterResourceInfo._zokusei).ToString(),
-            SPECIAL_ZOKUSEI = characterResourceInfo.SPECIAL_ZOKUSEI,
-            BASIC_MOVEMENT_PACK = characterResourceInfo.BASIC_MOVEMENT_PACK
+            RECORD_ID = config.RECORD_ID,
+            MONSTER_TYPE = config.TYPE,
+            REAL_NAME = config.REAL_NAME,
+            ZOKUSEI = ((int)config._zokusei).ToString(),
+            SPECIAL_ZOKUSEI = config.SPECIAL_ZOKUSEI,
+            BASIC_MOVEMENT_PACK = config.BASIC_MOVEMENT_PACK
         };
-        switch (characterResourceInfo.MoveType)
+        switch (config.MoveType)
         {
             case MoveType.Move_normal:
                 row.MOVE_TYPE = "Move1";
@@ -327,7 +316,7 @@ public class MonstersConfigTable
                 row.MOVE_TYPE = "Move3";
                 break;
         }
-        switch(characterResourceInfo.RushType)
+        switch(config.RushType)
         {
             case RushType.None:
                 row.DODGE_SKILL = "None";
@@ -340,16 +329,16 @@ public class MonstersConfigTable
                 break;
         }
 
-        row.DEFENDABLE_FLAG = characterResourceInfo.DEFENDABLE_FLAG ? "1" : "0";
-        row.RARITY_LEVEL = characterResourceInfo.RARITY_LEVEL.ToString();
+        row.DEFENDABLE_FLAG = config.DEFENDABLE_FLAG ? "1" : "0";
+        row.RARITY_LEVEL = config.RARITY_LEVEL.ToString();
         return row;
     }
 
-    public CharConfig RowToCharConfigInfo(Row row)
+    public static CharConfig RowToCharConfigInfo(Row row)
     {
         if (row == null)
             return null;
-        CharConfig _CharacterResourceInfo = new CharConfig
+        CharConfig _Config = new CharConfig
         {
             RECORD_ID = row.RECORD_ID,
             TYPE = row.MONSTER_TYPE,
@@ -359,65 +348,65 @@ public class MonstersConfigTable
         switch (row.ZOKUSEI)
         {
             case "4":
-                _CharacterResourceInfo._zokusei = Zokusei.blueMagic;
+                _Config._zokusei = Zokusei.blueMagic;
                 break;
             case "3":
-                _CharacterResourceInfo._zokusei = Zokusei.redMagic;
+                _Config._zokusei = Zokusei.redMagic;
                 break;
             case "5":
-                _CharacterResourceInfo._zokusei = Zokusei.greenMagic;
+                _Config._zokusei = Zokusei.greenMagic;
                 break;
             case "1":
-                _CharacterResourceInfo._zokusei = Zokusei.darkMagic;
+                _Config._zokusei = Zokusei.darkMagic;
                 break;
             case "2":
-                _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
+                _Config._zokusei = Zokusei.lightMagic;
                 break;
             default:
-                _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
+                _Config._zokusei = Zokusei.lightMagic;
                 break;
         }
 
-        _CharacterResourceInfo.BASIC_MOVEMENT_PACK = row.BASIC_MOVEMENT_PACK;
+        _Config.BASIC_MOVEMENT_PACK = row.BASIC_MOVEMENT_PACK;
 
         switch (row.MOVE_TYPE)
         {
             case "Move1":
-                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
+                _Config.MoveType = MoveType.Move_normal;
                 break;
             case "Move2":
-                _CharacterResourceInfo.MoveType = MoveType.Move_slow;
+                _Config.MoveType = MoveType.Move_slow;
                 break;
             case "Move3":
-                _CharacterResourceInfo.MoveType = MoveType.Move_fast;
+                _Config.MoveType = MoveType.Move_fast;
                 break;
             default:
-                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
+                _Config.MoveType = MoveType.Move_normal;
                 break;
         }
 
         switch (row.DODGE_SKILL)
         {
             case "Rush":
-                _CharacterResourceInfo.RushType = RushType.Rush;
+                _Config.RushType = RushType.Rush;
                 break;
             case "RushBack":
-                _CharacterResourceInfo.RushType = RushType.RushBack;
+                _Config.RushType = RushType.RushBack;
                 break;
             case "None":
-                _CharacterResourceInfo.RushType = RushType.None;
+                _Config.RushType = RushType.None;
                 break;
             default:
-                _CharacterResourceInfo.RushType = RushType.RushBack;
+                _Config.RushType = RushType.RushBack;
                 break;
         }
 
-        _CharacterResourceInfo.DEFENDABLE_FLAG = row.DEFENDABLE_FLAG == "1";
-        _CharacterResourceInfo.RARITY_LEVEL = Int32.Parse(row.RARITY_LEVEL);
-        return _CharacterResourceInfo;
+        _Config.DEFENDABLE_FLAG = row.DEFENDABLE_FLAG == "1";
+        _Config.RARITY_LEVEL = Int32.Parse(row.RARITY_LEVEL);
+        return _Config;
     }
 
-    public int NumRows()
+    public static int NumRows()
 	{
 		return rowList.Count;
 	}
@@ -425,7 +414,7 @@ public class MonstersConfigTable
     public static IDictionary<string,string> GetMonsterRecordIDsAndNamesArrayDic(string type) // close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
         IDictionary<string, string> Mdic = new Dictionary<string, string>();
-        List<Row> references = Instance.FindAll_MONSTER_TYPE(type);
+        List<Row> references = FindAll_MONSTER_TYPE(type);
         foreach (Row one in references)
         {
             Mdic.Add(one.RECORD_ID,one.REAL_NAME);
@@ -433,90 +422,100 @@ public class MonstersConfigTable
         return Mdic;
     }
 
-    public List<Row> FindAll_TYPE_REALNAME(string MONSTER_TYPE, string keyName)
+    public static List<Row> FindAll_TYPE_REALNAME(string MONSTER_TYPE, string keyName)
     {
         //monsterTypeReferenceTable.Row reference = monsterTypeReferenceTable.Instance.Find_MONSTER_TYPE_CODE(row.MONSTER_TYPE_CODE);
         return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.MONSTER_TYPE == MONSTER_TYPE))).ToList();
     }
 
-    public Row GetAt(int i)
+    public static Row GetAt(int i)
 	{
         return rowList.Count <= i ? null : rowList[i];
     }
 
-    public Row Find_RECORD_ID(string find)
+    public static Row Find_RECORD_ID(string find)
 	{
 		return rowList.Find(x => x.RECORD_ID == find);
 	}
-    public Row Find_REAL_NAME(string find)
+
+    public static string GetRecordIDByRealName(string find)
+    {
+        Row row = Find_REAL_NAME(find);
+        if (row != null)
+            return row.RECORD_ID;
+        else
+            return null;
+    }
+
+    public static Row Find_REAL_NAME(string find)
 	{
 		return rowList.Find(x => x.REAL_NAME == find);
 	}
     
-    public List<Row> FindAll_MONSTER_TYPE(string find)
+    public static List<Row> FindAll_MONSTER_TYPE(string find)
     {
         return rowList.FindAll(x => x.MONSTER_TYPE == find);
     }
     
-	public Row Find_Zokusei(string find)
+	public static Row Find_Zokusei(string find)
 	{
 		return rowList.Find(x => x.ZOKUSEI == find);
 	}
-	public List<Row> FindAll_Zokusei(string find)
+	public static List<Row> FindAll_Zokusei(string find)
 	{
 		return rowList.FindAll(x => x.ZOKUSEI == find);
 	}
-	public Row Find_personalMagicPack(string find)
+	public static Row Find_personalMagicPack(string find)
 	{
         return rowList.Find(x => x.SPECIAL_ZOKUSEI == find);
 	}
-	public List<Row> FindAll_personalMagicPack(string find)
+	public static List<Row> FindAll_personalMagicPack(string find)
 	{
 		return rowList.FindAll(x => x.SPECIAL_ZOKUSEI == find);
 	}
-	public Row Find_BasicMoveSet(string find)
+	public static Row Find_BasicMoveSet(string find)
 	{
         return rowList.Find(x => x.BASIC_MOVEMENT_PACK == find);
 	}
-	public List<Row> FindAll_BasicMoveSet(string find)
+	public static List<Row> FindAll_BasicMoveSet(string find)
 	{
 		return rowList.FindAll(x => x.BASIC_MOVEMENT_PACK == find);
 	}
-	public Row Find_MoveType(string find)
+	public static Row Find_MoveType(string find)
 	{
         return rowList.Find(x => x.MOVE_TYPE == find);
 	}
-	public List<Row> FindAll_MoveType(string find)
+	public static List<Row> FindAll_MoveType(string find)
 	{
 		return rowList.FindAll(x => x.MOVE_TYPE == find);
 	}
-	public Row Find_accSkill(string find)
+	public static Row Find_accSkill(string find)
 	{
 		return rowList.Find(x => x.DODGE_SKILL == find);
 	}
-	public List<Row> FindAll_accSkill(string find)
+	public static List<Row> FindAll_accSkill(string find)
 	{
 		return rowList.FindAll(x => x.DODGE_SKILL == find);
 	}
-	public Row Find_canDefend(string find)
+	public static Row Find_canDefend(string find)
 	{
         return rowList.Find(x => x.DEFENDABLE_FLAG == find);
 	}
-	public List<Row> FindAll_canDefend(string find)
+	public static List<Row> FindAll_canDefend(string find)
 	{
 		return rowList.FindAll(x => x.DEFENDABLE_FLAG == find);
 	}
-	public Row Find_rarelevel(string find)
+	public static Row Find_rarelevel(string find)
 	{
 		return rowList.Find(x => x.RARITY_LEVEL == find);
 	}
-	public List<Row> FindAll_rarelevel(string find)
+	public static List<Row> FindAll_rarelevel(string find)
 	{
 		return rowList.FindAll(x => x.RARITY_LEVEL == find);
 	}
     
     // 20200322 新追加。角色type的追加按说不应该那么麻烦，事前定义好就可以
-    public List<string> GetTypeList()
+    public static List<string> GetTypeList()
     {
         List<string> typeList = new List<string>
         {

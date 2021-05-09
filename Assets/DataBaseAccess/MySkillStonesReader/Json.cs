@@ -13,7 +13,14 @@ using PlayFab;
 namespace dataAccess
 {
     public partial class MySkillStones
-    {    
+    {
+        public static void LoadAllLocal()
+        {
+            Clear();
+            List<StoneOfPlayerInfoModel> list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
+            ConvertListToDic(list);
+        }
+
         static List<StoneOfPlayerInfoModel> LoadAll_Json(string filePath)
         {
             if (Directory.Exists(filePath))

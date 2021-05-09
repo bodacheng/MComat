@@ -40,7 +40,7 @@ namespace Api.Dto.Model {
                 
                 List<StoneOfPlayerInfoModel> targets = MySkillStones.GetEquipingStones(accountCharInfo.monsterOfPlayerId);
                 NineAndTwo nineAndTwo = new NineAndTwo();
-                CharConfig _CharConfigInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(accountCharInfo.monsterId));
+                CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accountCharInfo.monsterId));
                 if (_CharConfigInfo == null)
                 {
                     Debug.Log("角色定义信息错误。monsterId：" + accountCharInfo.monsterId);

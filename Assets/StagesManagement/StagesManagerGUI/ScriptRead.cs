@@ -22,7 +22,7 @@ public partial class StagesManagerGUI : Editor {
                         {
                             if (set._Value != null)
                             {
-                                CharConfig _CharacterResourceInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(set._Value.ResourceID));
+                                CharConfig _CharacterResourceInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(set._Value.ResourceID));
                                 if (_CharacterResourceInfo == null)
                                 {
                                     Debug.Log("检测到存档错误：ResourceID");

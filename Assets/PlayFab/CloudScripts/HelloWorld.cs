@@ -28,6 +28,27 @@ public class CloudScript
         jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
         Debug.Log((string)messageValue);
     }
+
+    public static void GrantMonsterTest()
+    {
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "getMonsterTest", // Arbitrary function name (must exist in your uploaded cloud.js file)
+            FunctionParameter = new { inputValue = "YOUR NAME" }, // The parameter provided to your function
+            GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+        },
+        OnGrantMonsters,
+        error => { Debug.Log("failed"); });
+    }
+
+    static void OnGrantMonsters(ExecuteCloudScriptResult result)
+    {
+        //Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
+        PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+        object messageValue;
+        jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+        Debug.Log((string)messageValue);
+    }
 }
 
 public static class PlayFabRead {
@@ -46,11 +67,11 @@ public static class PlayFabRead {
                     Debug.Log(item.CatalogVersion + ":" + item.ItemId);
                     switch (item.CatalogVersion)
                     {
-                        case "chars":
+                        case "Monsters":
                             MonsterOfPlayerDetailModel info = new MonsterOfPlayerDetailModel
                             {
                                 monsterOfPlayerId = item.ItemId,
-                                monsterId = item.CustomData["monsterID"]
+                                monsterId = MonstersConfigTable.GetRecordIDByRealName(item.DisplayName)
                             };
                             DicAdd<string, MonsterOfPlayerDetailModel>.Add(MyMonsters.Dic, item.ItemId, info);
                             break;

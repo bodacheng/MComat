@@ -137,7 +137,7 @@ namespace mainMenu
         public static List<string> CheckIfExceedCellLimit()
         {
             List<string> error_massegas = new List<string>();
-            List<string> C_Types = MonstersConfigTable.Instance.GetTypeList();
+            List<string> C_Types = MonstersConfigTable.GetTypeList();
             for (int i = 0; i < C_Types.Count; i++)
             {
                 StoneFilterForm filterForm0 = new StoneFilterForm

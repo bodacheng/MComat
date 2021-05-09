@@ -236,7 +236,7 @@ namespace mainMenu
                 MainSceneStep returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnTOCurrent()
                 {
-                    Debug.Log("回到：" + returnToStep);
+                    //Debug.Log("回到：" + returnToStep);
                     trySwitchToStep(returnToStep, false);
                 }
                 ReturnButtonManager.PUSH(returnTOCurrent);

@@ -18,7 +18,7 @@ namespace Api.Dto.Model
             };
             List<StoneOfPlayerInfoModel> targets = stones;
             NineAndTwo nineAndTwo = new NineAndTwo();
-            CharConfig _CharConfigInfo = MonstersConfigTable.Instance.RowToCharConfigInfo(MonstersConfigTable.Instance.Find_RECORD_ID(charData.ResourceID));
+            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(charData.ResourceID));
             if (_CharConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + charData.ResourceID);

@@ -33,21 +33,11 @@ public partial class LocalMasterDataTool : MonoBehaviour {
 
     public void OutputMonstersCatalog()
     {
-        StartCoroutine(_OutputMonstersCatalog());
-    }
-
-    public void OutputMonsterStore()
-    {
-        StartCoroutine(_OutputMonsterShop());
-    }
-
-    public static IEnumerator _OutputMonstersCatalog()
-    {
-        yield return MonstersConfigTable.Instance.LoadMonstersConfig();
+        MonstersConfigTable.LoadMonstersConfig();
         PFDefine pFSKDefine = new PFDefine();
         pFSKDefine.CatalogVersion = "Monsters";
         List<PFDefine.Item> items = new List<PFDefine.Item>();
-        List<CharConfig> charsConfigs = MonstersConfigTable.CharacterResourceInfoDic.Values.ToList();
+        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             PFDefine.Item item = new PFDefine.Item()
@@ -65,14 +55,14 @@ public partial class LocalMasterDataTool : MonoBehaviour {
         LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "MonsterDefinationsJson.json", json);
     }
 
-    public static IEnumerator _OutputMonsterShop()
+    public void OutputMonsterStore()
     {
-        yield return MonstersConfigTable.Instance.LoadMonstersConfig();
+        MonstersConfigTable.LoadMonstersConfig();
         PFStoreDefine pFSKDefine = new PFStoreDefine();
         pFSKDefine.StoreId = "monster";
         List<PFStoreDefine.StoreItem> storeitems = new List<PFStoreDefine.StoreItem>();
 
-        List<CharConfig> charsConfigs = MonstersConfigTable.CharacterResourceInfoDic.Values.ToList();
+        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             PFStoreDefine.StoreItem storeitem = new PFStoreDefine.StoreItem()
