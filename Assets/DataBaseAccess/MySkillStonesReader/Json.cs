@@ -77,7 +77,7 @@ namespace dataAccess
         {
             //LoadAMySkillstones();
             //LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
-            yield return SkillConfigTable.LoadAllSkillConfigs();
+            SkillConfigTable.LoadAllSkillConfigs();
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
             {
                 //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);

@@ -43,7 +43,7 @@ public class INHERENT_SkillTable
         return rowList;
     }
     
-    public static IEnumerator LoadAllINHERENTSkillConfigs()
+    public static void LoadAllINHERENTSkillConfigs()
     {
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
@@ -55,7 +55,6 @@ public class INHERENT_SkillTable
                 LoadINHERENTSkillsByLocalConfigFile();
                 break;
         }
-        yield break;
     }
     
     public static void LoadINHERENTSkillsByLocalConfigFile()

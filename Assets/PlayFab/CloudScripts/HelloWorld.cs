@@ -5,6 +5,7 @@ using PlayFab.PfEditor.Json;
 using Api.Dto.Model;
 using dataAccess;
 using System;
+using Skill;
 
 public class CloudScript
 {
@@ -49,6 +50,25 @@ public class CloudScript
         jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
         Debug.Log((string)messageValue);
     }
+
+    public static void GrantStonesTest()
+    {
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "getStonesTest", // Arbitrary function name (must exist in your uploaded cloud.js file)
+            FunctionParameter = new { inputValue = "YOUR NAME" }, // The parameter provided to your function
+            GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+        },
+        OnGrantStoness,
+        error => { Debug.Log("failed"); });
+    }
+
+    static void OnGrantStoness(ExecuteCloudScriptResult result)
+    {
+        //Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
+        PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+        Debug.Log(jsonResult);
+    }
 }
 
 public static class PlayFabRead {
@@ -75,11 +95,11 @@ public static class PlayFabRead {
                             };
                             DicAdd<string, MonsterOfPlayerDetailModel>.Add(MyMonsters.Dic, item.ItemId, info);
                             break;
-                        case "stone":
+                        case "stoneTest2":
                             StoneOfPlayerInfoModel skillStoneOfPlayerInfo = new StoneOfPlayerInfoModel
                             {
                                 skillStoneOfPlayerId = item.ItemId,
-                                skillId = item.CustomData["skillId"]
+                                skillId = SkillConfigTable.GetRecordIDByRealName(item.DisplayName),
                             };
                             MySkillStones.Read(skillStoneOfPlayerInfo);
                         break;

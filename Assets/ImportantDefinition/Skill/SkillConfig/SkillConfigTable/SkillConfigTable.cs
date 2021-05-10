@@ -43,7 +43,7 @@ public partial class SkillConfigTable
         return AttackTypes.Contains(attackType);
     }
     
-    public static IEnumerator LoadAllSkillConfigs()
+    public static void LoadAllSkillConfigs()
     {
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
@@ -53,11 +53,10 @@ public partial class SkillConfigTable
             break;
             case ResourceLoadMode.Resource:
                 LoadAllSkillConfigFromLocalConfigFile();
-                yield return INHERENT_SkillTable.LoadAllINHERENTSkillConfigs();// 角色原生技能的load和技能表load同步进行。
-                yield return SkillNameTable.LoadSkillNames();
+                INHERENT_SkillTable.LoadAllINHERENTSkillConfigs();// 角色原生技能的load和技能表load同步进行。
+                SkillNameTable.LoadSkillNames();
             break;
         }
-        yield break;
     }
     
     static void RefreshSkillConfigDicForReference()
@@ -239,7 +238,17 @@ public partial class SkillConfigTable
     {
     	return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
     }
-    public Row Find_keyName(string find)
+
+    public static string GetRecordIDByRealName(string find)
+    {
+        Row row = Find_keyName(find);
+        if (row != null)
+            return row.RECORD_ID;
+        else
+            return null;
+    }
+
+    public static Row Find_keyName(string find)
     {
     	return rowList.Find(x => x.REAL_NAME == find);
     }

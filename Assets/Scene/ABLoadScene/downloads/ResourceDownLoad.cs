@@ -66,7 +66,7 @@ public partial class ResourceDownLoad : MonoBehaviour
                 break;
             case ResourceLoadMode.Resource:
                 MonstersConfigTable.LoadMonstersConfig();
-                yield return SkillConfigTable.LoadAllSkillConfigs();
+                SkillConfigTable.LoadAllSkillConfigs();
                 PowerEstimateTable.Load();
                 LevelExpConfig.LoadLevelExpConfig();
                 LoadingCanvas.target.NowProcess("正在加载资源", 0.3f);

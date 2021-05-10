@@ -37,7 +37,7 @@ public class LocalMasterDataToolGUI : Editor {
 
         if (GUILayout.Button("(playFab)输出获取全部技能石的测试用cloudscript)"))
         {
-            
+            _ConfigManager.OutputCloudScriptPart_GetAllStones();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式角色定义文件(只能在程序启动状态下正常运行)"))
@@ -52,7 +52,7 @@ public class LocalMasterDataToolGUI : Editor {
 
         if (GUILayout.Button("(playFab)输出获取全部角色的测试用cloudscript)"))
         {
-
+            _ConfigManager.OutputCloudScriptPart_GetAllMonsters();
         }
 
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))

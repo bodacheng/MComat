@@ -50,7 +50,7 @@ public class SkillNameTable
         }
     }
     
-    public static IEnumerator LoadSkillNames()
+    public static void LoadSkillNames()
     {
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
@@ -62,7 +62,6 @@ public class SkillNameTable
                 LoadAllSkillNamesFromLocalConfigFile();
                 break;
         }
-        yield break;
     }
     
 	public bool IsLoaded()

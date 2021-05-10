@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Skill;
-using System.Collections;
 using Log;
-using Json;
-using Newtonsoft.Json;
-using System.Linq;
 
 public partial class LocalMasterDataTool : MonoBehaviour {
 
@@ -14,133 +10,6 @@ public partial class LocalMasterDataTool : MonoBehaviour {
     public string CharConfigFilePath;
     public TextAsset SkillConfigFile;
     public string SkillConfigPath;
-
-    /// <summary>
-    /// 生成gs2 技能石master更新文件
-    /// </summary>
-    /// <param name="textAsset"></param>
-    /// <returns></returns>
-    ///
-    public void OutputSKStonesCatalog()
-    {
-        StartCoroutine(_OutputSKStonesCatalog());
-    }
-
-    public void OutputSKStonesStore()
-    {
-        StartCoroutine(_OutputSKStonesShop());
-    }
-
-    public void OutputMonstersCatalog()
-    {
-        MonstersConfigTable.LoadMonstersConfig();
-        PFDefine pFSKDefine = new PFDefine
-        {
-            CatalogVersion = "Monsters"
-        };
-        List<PFDefine.Item> items = new List<PFDefine.Item>();
-        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
-        for (int i = 0; i < charsConfigs.Count; i++)
-        {
-            PFDefine.Item item = new PFDefine.Item()
-            {
-                ItemId = charsConfigs[i].RECORD_ID,
-                DisplayName = charsConfigs[i].REAL_NAME
-            };
-            PFDefine.C_CustomData c_CustomData = new PFDefine.C_CustomData();
-            c_CustomData.zokusei = ((int)charsConfigs[i]._zokusei).ToString();
-            item.CustomData = c_CustomData.AsPlayFabVer();
-            items.Add(item);
-        }
-        pFSKDefine.Catalog = items.ToArray();
-        string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "MonsterDefinationsJson.json", json);
-    }
-
-    public void OutputMonsterStore()
-    {
-        MonstersConfigTable.LoadMonstersConfig();
-        PFStoreDefine pFSKDefine = new PFStoreDefine();
-        pFSKDefine.StoreId = "monster";
-        List<PFStoreDefine.StoreItem> storeitems = new List<PFStoreDefine.StoreItem>();
-
-        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
-        for (int i = 0; i < charsConfigs.Count; i++)
-        {
-            PFStoreDefine.StoreItem storeitem = new PFStoreDefine.StoreItem()
-            {
-                ItemId = charsConfigs[i].RECORD_ID,
-                VirtualCurrencyPrices = new PFStoreDefine.VirtualCurrencyPrices
-                {
-                    GD = 0
-                }
-            };
-            storeitems.Add(storeitem);
-        }
-        pFSKDefine.Store = storeitems.ToArray();
-        pFSKDefine.MarketingData = new PFStoreDefine._MarketingData
-        {
-            DisplayName = "monsterstore"
-        };
-
-        string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
-        json = "[" + json + "]";
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "MonsterStoresDefinationsJson.json", json);
-    }
-
-    public static IEnumerator _OutputSKStonesCatalog()
-    {
-        yield return SkillConfigTable.LoadAllSkillConfigs();
-        PFDefine pFSKDefine = new PFDefine();
-        pFSKDefine.CatalogVersion = "stoneTest2";
-        List<PFDefine.Item> items = new List<PFDefine.Item>();
-        List<SkillConfig> stoneDefinationList = SkillConfigTable.SkillConfigRefDic.Values.ToList();
-        for (int i = 0; i < stoneDefinationList.Count; i++)
-        {
-            PFDefine.Item item = new PFDefine.Item()
-            {
-                ItemId = stoneDefinationList[i].RECORD_ID,
-                DisplayName = stoneDefinationList[i].REAL_NAME
-            };
-            item.CustomData = null;
-            items.Add(item);
-        }
-        pFSKDefine.Catalog = items.ToArray();
-        string json = JsonConvert.SerializeObject(pFSKDefine ,Formatting.Indented);
-
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneDefinationsJson.json", json);
-    }
-
-    public static IEnumerator _OutputSKStonesShop()
-    {
-        yield return SkillConfigTable.LoadAllSkillConfigs();
-        PFStoreDefine pFSKDefine = new PFStoreDefine();
-        pFSKDefine.StoreId = "stone";
-        List<PFStoreDefine.StoreItem> storeitems = new List<PFStoreDefine.StoreItem>();
-
-        List<SkillConfig> stoneDefinationList = SkillConfigTable.SkillConfigRefDic.Values.ToList();
-        for (int i = 0; i < stoneDefinationList.Count; i++)
-        {
-            PFStoreDefine.StoreItem storeitem = new PFStoreDefine.StoreItem()
-            {
-                ItemId = stoneDefinationList[i].RECORD_ID,
-                VirtualCurrencyPrices = new PFStoreDefine.VirtualCurrencyPrices
-                {
-                    GD = 0
-                }
-            };
-            storeitems.Add(storeitem);
-        }
-        pFSKDefine.Store = storeitems.ToArray();
-        pFSKDefine.MarketingData = new PFStoreDefine._MarketingData
-        {
-            DisplayName = "stonestore"
-        };
-
-        string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
-        json = "[" + json + "]";
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneStoreDefinationsJson.json", json);
-    }
 
     // 以下这个函数对技能表的更新机制企划如下：
     // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
