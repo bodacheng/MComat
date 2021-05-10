@@ -31,7 +31,7 @@ public class TeamEditManager : MonoBehaviour
         SkillEditButton.onClick.RemoveAllListeners();
         void SkillEdit()
         {
-            if (MemberDetail.target._focusing.monsterOfPlayerId != null)
+            if (MemberDetail.target._focusing.InstanceId != null)
                 PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
         }
         SkillEditButton.onClick.AddListener(SkillEdit);
@@ -162,7 +162,7 @@ public class TeamEditManager : MonoBehaviour
                 yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
                 MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                 if (MemberDetail.target._focusing != null)
-                    _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
+                    _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
                 else
                 {
                     // empty slot

@@ -7,7 +7,7 @@ public partial class NineForShow : MonoBehaviour
 {
     public void ShowStones_Acc(string MonsterOfPlayerID)
     {
-        List<StoneOfPlayerInfoModel> skillStoneOfPlayerInfoModels = MySkillStones.GetEquipingStones(MonsterOfPlayerID);
+        List<StoneOfPlayerInfo> skillStoneOfPlayerInfoModels = MySkillStones.GetEquipingStones(MonsterOfPlayerID);
         
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;

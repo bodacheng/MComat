@@ -16,7 +16,7 @@ public class GachaManager : MonoBehaviour
     public NineForShow NineForShow;
     public SkillStoneDetail _skillStoneDetail;
     
-    List<StoneOfPlayerInfoModel> Result;
+    List<StoneOfPlayerInfo> Result;
     
     public static GachaManager target;
     
@@ -25,7 +25,7 @@ public class GachaManager : MonoBehaviour
         target = this;
     }
        
-    public List<StoneOfPlayerInfoModel> GetResult()
+    public List<StoneOfPlayerInfo> GetResult()
     {
         return Result;
     }
@@ -62,13 +62,13 @@ public class GachaManager : MonoBehaviour
     
     public IEnumerator Gacha(string type, int count)
     {
-        List<StoneOfPlayerInfoModel> Results = null;
+        List<StoneOfPlayerInfo> Results = null;
         switch (AccountSet.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 IEnumerator GET = Gotcha(type, count);
                 yield return GET;
-                Results = (List<StoneOfPlayerInfoModel>)GET.Current;
+                Results = (List<StoneOfPlayerInfo>)GET.Current;
                 break;
             case PlayerInfoRefMode.remoteTestPlayer:
                 break;
@@ -81,12 +81,12 @@ public class GachaManager : MonoBehaviour
     
     public static IEnumerator Gotcha(string type, int stoneCount)
     {
-        List<StoneOfPlayerInfoModel> Geted = new List<StoneOfPlayerInfoModel>();
+        List<StoneOfPlayerInfo> Geted = new List<StoneOfPlayerInfo>();
         for (int i = 0; i < stoneCount; i++)
         {
             IEnumerator GET = OneGocha(type);
             yield return GET;
-            Geted.Add((StoneOfPlayerInfoModel)GET.Current);
+            Geted.Add((StoneOfPlayerInfo)GET.Current);
         }
         yield return Geted;
     }
@@ -98,9 +98,9 @@ public class GachaManager : MonoBehaviour
         List<SkillConfig> skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         int random_index = Random.Range(0, skillConfigs.Count);
         SkillConfig skillConfig = skillConfigs[random_index];
-        StoneOfPlayerInfoModel stoneInfo = new StoneOfPlayerInfoModel
+        StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
         {
-            skillStoneOfPlayerId = MySkillStones.GetNonRepeatID_LocalSave(),
+            InstanceId = MySkillStones.GetNonRepeatID_LocalSave(),
             skillId = skillConfig.RECORD_ID,
             EXP = 0,
             BreakThrough = 0,

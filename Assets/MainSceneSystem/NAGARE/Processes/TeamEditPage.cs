@@ -14,7 +14,7 @@ public class TeamEditPage : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         yield return PreScene.target.TeamEditor.INITeamPosButtons();
-        PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.monsterOfPlayerId);
+        PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
     }
     

@@ -45,7 +45,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     public void ShowStoneLevel()
     {
         info.gameObject.SetActive(true);
-        StoneOfPlayerInfoModel sspim = MySkillStones.Get(SkillStoneOfPlayerId);
+        StoneOfPlayerInfo sspim = MySkillStones.Get(SkillStoneOfPlayerId);
         info.text = sspim.GetLevel().ToString();
     }
     

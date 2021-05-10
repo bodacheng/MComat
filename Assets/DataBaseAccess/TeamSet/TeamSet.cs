@@ -112,10 +112,10 @@ namespace dataAccess
                 {
                     continue;
                 }
-                MonsterOfPlayerDetailModel myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
+                MonsterOfPlayerInfo myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 if (myfighter != null)
                 {
-                    CharDataInfo CharDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(myfighter);
+                    CharDataInfo CharDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(myfighter);
                     teamMembers.Set(0, i, CharDataInfo);
                     membercount += 1;
                     if (membercount == playerEntryNum)

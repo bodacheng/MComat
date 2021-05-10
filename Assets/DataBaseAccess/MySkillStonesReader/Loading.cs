@@ -5,15 +5,15 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static void Read(StoneOfPlayerInfoModel one)
+        public static void Read(StoneOfPlayerInfo one)
         {
-            DicAdd<string, StoneOfPlayerInfoModel>.Add(Dic, one.skillStoneOfPlayerId, one);
-            GenerateStoneModelByAccID(one.skillStoneOfPlayerId);
+            DicAdd<string, StoneOfPlayerInfo>.Add(Dic, one.InstanceId, one);
+            GenerateStoneModelByAccID(one.InstanceId);
         }
 
-        static void ConvertListToDic(List<StoneOfPlayerInfoModel> list)
+        static void ConvertListToDic(List<StoneOfPlayerInfo> list)
         {
-            foreach (StoneOfPlayerInfoModel stoneinfo in list)
+            foreach (StoneOfPlayerInfo stoneinfo in list)
             {
                 Read(stoneinfo);
             }

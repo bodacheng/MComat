@@ -47,10 +47,10 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].monsterOfPlayerId != null)
             {
-                MonsterOfPlayerDetailModel GetMonsterOfPlayerDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
+                MonsterOfPlayerInfo GetMonsterOfPlayerDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
-                    CharDataInfo charDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
+                    CharDataInfo charDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
                     multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, charDataInfo);
                 }
             }

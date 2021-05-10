@@ -9,12 +9,12 @@ namespace Api.Dto.Model {
     /// バージョン：1.00 2019/07/01
     /// </summary>
     [Serializable]
-    public class StoneOfPlayerInfoModel
+    public class StoneOfPlayerInfo
     {
         /// <summary>
         /// プレーヤ所有スキルストーンID
         /// </summary>
-        public string skillStoneOfPlayerId { get; set; }
+        public string InstanceId { get; set; }
         
         /// <summary>
         /// スキルレコードID
@@ -28,10 +28,16 @@ namespace Api.Dto.Model {
         public int EXP {
             set {
                 if (exp != null)
+                {
                     ExpUpForStoneShow(float.Parse(exp), value);
+                }
+                else
+                {
+                    ExpUpForStoneShow(0, value);
+                }
                 exp = value.ToString();
             }
-            get { return int.Parse(exp);}
+            get { return exp == null ? 0 : int.Parse(exp);}
         }
         
         /// <summary>
@@ -61,7 +67,7 @@ namespace Api.Dto.Model {
         
         public void ExpUpForStoneShow(float formerExp, float newExp)
         {
-            SKStoneItem SKStone = MySkillStones.GetRenderModel(skillStoneOfPlayerId);
+            SKStoneItem SKStone = MySkillStones.GetRenderModel(InstanceId);
             SKStone.LevelUpShow(formerExp, newExp);
         }
         

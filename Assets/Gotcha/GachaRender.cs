@@ -99,16 +99,16 @@ public class GachaRender : MonoBehaviour
 
     #region 星星下落动画
     // 整个星星下落动画
-    public IEnumerator StarFallAnim(List<StoneOfPlayerInfoModel> results)
+    public IEnumerator StarFallAnim(List<StoneOfPlayerInfo> results)
     {
         starfallAnimEnd = false;
         Reset();
-        foreach (StoneOfPlayerInfoModel stoneinfo in results)
+        foreach (StoneOfPlayerInfo stoneinfo in results)
         {
             starFallAnimOneProcess = StartCoroutine(OneStarFallAnim());
             while(!oneStarfallAnimEnd)
                 yield return new WaitForSeconds(0.1f);
-            void StarComing(StoneOfPlayerInfoModel stone)
+            void StarComing(StoneOfPlayerInfo stone)
             {
                 Vector3 targetPos = GetRandomStarPos();
                 Vector3 flashPos = ScreenPositionCal.Cal(3, Camera, targetPos, 300f);
@@ -178,7 +178,7 @@ public class GachaRender : MonoBehaviour
     #endregion
     
     #region 星星集中到屏幕动画
-    public IEnumerator StarSortAnim(List<StoneOfPlayerInfoModel> results)
+    public IEnumerator StarSortAnim(List<StoneOfPlayerInfo> results)
     {
         for (int i = 0; i < results.Count; i++)
         {
@@ -191,7 +191,7 @@ public class GachaRender : MonoBehaviour
     #endregion
     
     // Gotcha总过程 点击画面的话进入下一个星星
-    public IEnumerator GotchaAnimProcess(List<StoneOfPlayerInfoModel> results)
+    public IEnumerator GotchaAnimProcess(List<StoneOfPlayerInfo> results)
     {
         CameraManager._camera.gameObject.SetActive(false);
         Camera.gameObject.SetActive(true);

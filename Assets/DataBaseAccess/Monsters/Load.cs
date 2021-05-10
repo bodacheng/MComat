@@ -9,13 +9,13 @@ namespace dataAccess
         public static void LoadLocal()
         {
             Dic.Clear();
-            List<MonsterOfPlayerDetailModel> charList = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
-            foreach (MonsterOfPlayerDetailModel one in charList)
+            List<MonsterOfPlayerInfo> charList = LoadAll_Json(Application.persistentDataPath + "/AccountCharacterInfos");
+            foreach (MonsterOfPlayerInfo one in charList)
             {
-                if (!Dic.ContainsKey(one.monsterOfPlayerId))
-                    Dic.Add(one.monsterOfPlayerId, one);
+                if (!Dic.ContainsKey(one.InstanceId))
+                    Dic.Add(one.InstanceId, one);
                 else
-                    Debug.Log("重复的角色存档id：" + one.monsterOfPlayerId);
+                    Debug.Log("重复的角色存档id：" + one.InstanceId);
             }
         }
     }

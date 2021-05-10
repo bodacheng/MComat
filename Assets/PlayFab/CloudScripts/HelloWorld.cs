@@ -5,7 +5,6 @@ using PlayFab.PfEditor.Json;
 using Api.Dto.Model;
 using dataAccess;
 using System;
-using Skill;
 
 public class CloudScript
 {
@@ -88,18 +87,18 @@ public static class PlayFabRead {
                     switch (item.CatalogVersion)
                     {
                         case "Monsters":
-                            MonsterOfPlayerDetailModel info = new MonsterOfPlayerDetailModel
+                            MonsterOfPlayerInfo info = new MonsterOfPlayerInfo
                             {
-                                monsterOfPlayerId = item.ItemId,
-                                monsterId = MonstersConfigTable.GetRecordIDByRealName(item.DisplayName)
+                                InstanceId = item.ItemInstanceId,
+                                monsterId = item.ItemId
                             };
-                            DicAdd<string, MonsterOfPlayerDetailModel>.Add(MyMonsters.Dic, item.ItemId, info);
+                            DicAdd<string, MonsterOfPlayerInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
                             break;
                         case "stoneTest2":
-                            StoneOfPlayerInfoModel skillStoneOfPlayerInfo = new StoneOfPlayerInfoModel
+                            StoneOfPlayerInfo skillStoneOfPlayerInfo = new StoneOfPlayerInfo
                             {
-                                skillStoneOfPlayerId = item.ItemId,
-                                skillId = SkillConfigTable.GetRecordIDByRealName(item.DisplayName),
+                                InstanceId = item.ItemInstanceId,
+                                skillId = item.ItemId
                             };
                             MySkillStones.Read(skillStoneOfPlayerInfo);
                         break;

@@ -26,7 +26,7 @@ public partial class NineForShow : MonoBehaviour
         screenStarExplosionModels.Clear();
     }
     
-    public IEnumerator OneStoneGochaAnim(StoneOfPlayerInfoModel stoneinfo, Vector3 waitposition, Vector3 endPosition)
+    public IEnumerator OneStoneGochaAnim(StoneOfPlayerInfo stoneinfo, Vector3 waitposition, Vector3 endPosition)
     {
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stoneinfo.skillId);
         string screenstarname = "";
@@ -59,7 +59,7 @@ public partial class NineForShow : MonoBehaviour
         screenStarExplosionModels.Add(boo);
     }
 
-    public void GochaResultShow(List<StoneOfPlayerInfoModel> results)
+    public void GochaResultShow(List<StoneOfPlayerInfo> results)
     {
         string A1skillid = null, A2skillid= null, A3skillid= null, B1skillid= null, B2skillid= null, B3skillid= null, C1skillid= null, C2skillid= null, C3skillid= null;
         for (int i = 0; i < results.Count; i++)

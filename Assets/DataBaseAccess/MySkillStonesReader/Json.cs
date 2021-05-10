@@ -17,22 +17,22 @@ namespace dataAccess
         public static void LoadAllLocal()
         {
             Clear();
-            List<StoneOfPlayerInfoModel> list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
+            List<StoneOfPlayerInfo> list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
             ConvertListToDic(list);
         }
 
-        static List<StoneOfPlayerInfoModel> LoadAll_Json(string filePath)
+        static List<StoneOfPlayerInfo> LoadAll_Json(string filePath)
         {
             if (Directory.Exists(filePath))
             {
                 Debug.Log("正从以下路径获取技能石存档："+filePath);
-                List<StoneOfPlayerInfoModel> list = new List<StoneOfPlayerInfoModel>();
+                List<StoneOfPlayerInfo> list = new List<StoneOfPlayerInfo>();
                 foreach (string file in Directory.GetFiles(filePath))
                 {
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
-                        StoneOfPlayerInfoModel info = JsonConvert.DeserializeObject<StoneOfPlayerInfoModel>(dataAsJson);
+                        StoneOfPlayerInfo info = JsonConvert.DeserializeObject<StoneOfPlayerInfo>(dataAsJson);
                         list.Add(info);
                     }
                     catch (Exception e)
@@ -43,16 +43,16 @@ namespace dataAccess
                 }
                 return list;
             }
-            return new List<StoneOfPlayerInfoModel>();
+            return new List<StoneOfPlayerInfo>();
         }
         
         //新
-        public static void Update_Json(StoneOfPlayerInfoModel stone)
+        public static void Update_Json(StoneOfPlayerInfo stone)
         {
             try
             {
                 string json = JsonConvert.SerializeObject(stone);
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stone.skillStoneOfPlayerId + ".json", json);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stone.InstanceId + ".json", json);
             }
             catch (Exception e)
             {
@@ -81,9 +81,9 @@ namespace dataAccess
             foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
             {
                 //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-                StoneOfPlayerInfoModel stoneInfo = new StoneOfPlayerInfoModel
+                StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
                 {
-                    skillStoneOfPlayerId = GetNonRepeatID_LocalSave(),
+                    InstanceId = GetNonRepeatID_LocalSave(),
                     skillId = _pair.Value.RECORD_ID,
                     BreakThrough = 0,
                     EXP = 0,

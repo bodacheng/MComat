@@ -9,7 +9,7 @@ namespace mainMenu
     {
         public void ValiationWarn(NineAndTwo.SkillEditError skillEditError, string monsterOfPlayerID)
         {
-            MonsterOfPlayerDetailModel charInfo = MyMonsters.Get(monsterOfPlayerID);
+            MonsterOfPlayerInfo charInfo = MyMonsters.Get(monsterOfPlayerID);
             switch(skillEditError)
             {
                 case NineAndTwo.SkillEditError.RepeatedSkill:

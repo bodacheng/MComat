@@ -239,15 +239,6 @@ public partial class SkillConfigTable
     	return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
     }
 
-    public static string GetRecordIDByRealName(string find)
-    {
-        Row row = Find_keyName(find);
-        if (row != null)
-            return row.RECORD_ID;
-        else
-            return null;
-    }
-
     public static Row Find_keyName(string find)
     {
     	return rowList.Find(x => x.REAL_NAME == find);

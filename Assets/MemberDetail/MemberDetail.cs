@@ -34,7 +34,7 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
         
-        public MonsterOfPlayerDetailModel _focusing;
+        public MonsterOfPlayerInfo _focusing;
         
         public static MemberDetail target;
         
@@ -47,7 +47,7 @@ namespace mainMenu
         public void SwitchChar()
         {
             List<string> keys = MonsterBox.mainMenuIcons.Keys.ToList();
-            int index = keys.IndexOf(_focusing.monsterOfPlayerId);
+            int index = keys.IndexOf(_focusing.InstanceId);
             index--;
             if (index == -1)
                 index = keys.Count - 1;
@@ -97,7 +97,7 @@ namespace mainMenu
         
         public void RefreshMemberDetailPageByFocusingChar()
         {
-            if (_focusing == null || _focusing.monsterOfPlayerId == null || _focusing.monsterId == null)
+            if (_focusing == null || _focusing.InstanceId == null || _focusing.monsterId == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
@@ -109,7 +109,7 @@ namespace mainMenu
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
             
             // mini nineslot show
-            _NineForShow.ShowStones_Acc(_focusing.monsterOfPlayerId);
+            _NineForShow.ShowStones_Acc(_focusing.InstanceId);
             
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载
@@ -120,7 +120,7 @@ namespace mainMenu
             }
             void SkillShow()
             {
-                if (target._focusing.monsterOfPlayerId != null)
+                if (target._focusing.InstanceId != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
@@ -130,7 +130,7 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                if (target._focusing.monsterOfPlayerId != null)
+                if (target._focusing.InstanceId != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
@@ -146,7 +146,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(CharModelAndSkillRenderProcess(MonsterOfPlayerDetailModel.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.RunAsQueued(CharModelAndSkillRenderProcess(MonsterOfPlayerInfo.GetCharDataInfo(_focusing)));
         }
         
         public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
@@ -192,11 +192,11 @@ namespace mainMenu
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(MonsterOfPlayerDetailModel accountCharacterInfo)
+        public IEnumerator Step2INIForUIRefresh(MonsterOfPlayerInfo accountCharacterInfo)
         {
             if (accountCharacterInfo != null)
             {
-                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accountCharacterInfo.monsterOfPlayerId);
+                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accountCharacterInfo.InstanceId);
                 yield return focusingOneModel;
                 if (focusingOneModel.Current == null)
                 {
@@ -211,7 +211,7 @@ namespace mainMenu
                 }
 
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accountCharacterInfo.monsterId);
-                CharDataInfo characterDataInfo = MonsterOfPlayerDetailModel.GetCharDataInfo(accountCharacterInfo);
+                CharDataInfo characterDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(accountCharacterInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 

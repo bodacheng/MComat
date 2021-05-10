@@ -28,7 +28,7 @@ public class FrontPage : MainSceneProcess
         string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
         if (focusLocalid == null)
         {
-            foreach (KeyValuePair<string, MonsterOfPlayerDetailModel> keyValuePair in MyMonsters.Dic)
+            foreach (KeyValuePair<string, MonsterOfPlayerInfo> keyValuePair in MyMonsters.Dic)
             {
                 focusLocalid = keyValuePair.Key;
                 break;

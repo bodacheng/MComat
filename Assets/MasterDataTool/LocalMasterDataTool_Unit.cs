@@ -148,9 +148,9 @@ public partial class LocalMasterDataTool : MonoBehaviour
 
     public void GenerateTutorialUnitsFiles()
     {
-        MonsterOfPlayerDetailModel Adam = new MonsterOfPlayerDetailModel
+        MonsterOfPlayerInfo Adam = new MonsterOfPlayerInfo
         {
-            monsterOfPlayerId = 1.ToString(),
+            InstanceId = 1.ToString(),
             monsterId = 1.ToString()
         };
         MyMonsters.generateStoryCharsIntoXMLFile(Adam);

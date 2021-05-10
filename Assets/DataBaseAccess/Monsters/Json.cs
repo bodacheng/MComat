@@ -11,10 +11,10 @@ namespace dataAccess
 {
     public partial class MyMonsters
     {
-        public static List<MonsterOfPlayerDetailModel> LoadAll_Json(string filePath)
+        public static List<MonsterOfPlayerInfo> LoadAll_Json(string filePath)
         {
-            List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
-            MonsterOfPlayerDetailModel info;
+            List<MonsterOfPlayerInfo> charList = new List<MonsterOfPlayerInfo>();
+            MonsterOfPlayerInfo info;
             if (Directory.Exists(filePath))
             {
                 foreach (string file in Directory.GetFiles(filePath))
@@ -22,7 +22,7 @@ namespace dataAccess
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
-                        info = JsonConvert.DeserializeObject<MonsterOfPlayerDetailModel>(dataAsJson);
+                        info = JsonConvert.DeserializeObject<MonsterOfPlayerInfo>(dataAsJson);
                         charList.Add(info);
                     }
                     catch (Exception e)
@@ -35,26 +35,26 @@ namespace dataAccess
             return charList;
         }
         
-        public static MonsterOfPlayerDetailModel LoadAccCharInfoViaJsonFile(string monsterlocalid)
+        public static MonsterOfPlayerInfo LoadAccCharInfoViaJsonFile(string monsterlocalid)
         {
-            MonsterOfPlayerDetailModel info = null;
+            MonsterOfPlayerInfo info = null;
             string wholepath = Application.persistentDataPath + "/AccountCharacterInfos/" + monsterlocalid + ".json";
             if (File.Exists(wholepath))
             {
                 string dataAsJson = File.ReadAllText(wholepath);
-                info = JsonConvert.DeserializeObject<MonsterOfPlayerDetailModel>(dataAsJson);
+                info = JsonConvert.DeserializeObject<MonsterOfPlayerInfo>(dataAsJson);
             }
             return info;
         }
         
-        public static IEnumerator AddNewCharToJsonSaveData(MonsterOfPlayerDetailModel _AccCharInfo)
+        public static IEnumerator AddNewCharToJsonSaveData(MonsterOfPlayerInfo _AccCharInfo)
         {
-            MonsterOfPlayerDetailModel returnValue = null;
+            MonsterOfPlayerInfo returnValue = null;
             try
             {
-                DicAdd<string, MonsterOfPlayerDetailModel>.Add(Dic, _AccCharInfo.monsterOfPlayerId, _AccCharInfo);            
+                DicAdd<string, MonsterOfPlayerInfo>.Add(Dic, _AccCharInfo.InstanceId, _AccCharInfo);            
                 string json = JsonConvert.SerializeObject(_AccCharInfo);
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.monsterOfPlayerId + ".json", json);
+                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.InstanceId + ".json", json);
                 returnValue = _AccCharInfo;
             }
             catch(Exception e)
@@ -71,18 +71,18 @@ namespace dataAccess
             int i = 0;
             foreach (CharConfig _CharConfig in charList)
             {
-                MonsterOfPlayerDetailModel _Char = new MonsterOfPlayerDetailModel
+                MonsterOfPlayerInfo _Char = new MonsterOfPlayerInfo
                 {
                     monsterId = _CharConfig.RECORD_ID,
-                    monsterOfPlayerId = i.ToString()
+                    InstanceId = i.ToString()
                 };
                 
                 KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(_CharConfig.RECORD_ID);
                 if (INHERENTSkills.Key != null)
                 {
-                    StoneOfPlayerInfoModel stoneInfo = new StoneOfPlayerInfoModel
+                    StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
                     {
-                        skillStoneOfPlayerId = MySkillStones.GetNonRepeatID_LocalSave(),
+                        InstanceId = MySkillStones.GetNonRepeatID_LocalSave(),
                         skillId = INHERENTSkills.Key,
                         EXP = 0,
                         BreakThrough = 0,

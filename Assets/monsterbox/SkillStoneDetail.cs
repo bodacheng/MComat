@@ -82,7 +82,7 @@ namespace mainMenu
         
         public void RefreshInfo(string skillStoneOfPlayerId)
         {
-            StoneOfPlayerInfoModel currentstone = MySkillStones.Get(skillStoneOfPlayerId);
+            StoneOfPlayerInfo currentstone = MySkillStones.Get(skillStoneOfPlayerId);
             if (currentstone == null)
             {
                 Clear();

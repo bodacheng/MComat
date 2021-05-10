@@ -34,7 +34,7 @@ namespace dataAccess
         public static int ConvertSKStoneToExp(string stoneID)
         {
             int point = 0;
-            StoneOfPlayerInfoModel skillStoneOfPlayerInfoModel = MySkillStones.Get(stoneID);
+            StoneOfPlayerInfo skillStoneOfPlayerInfoModel = MySkillStones.Get(stoneID);
             point += skillStoneOfPlayerInfoModel.EXP;
 
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);

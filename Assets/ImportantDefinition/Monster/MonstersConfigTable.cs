@@ -438,15 +438,6 @@ public static class MonstersConfigTable
 		return rowList.Find(x => x.RECORD_ID == find);
 	}
 
-    public static string GetRecordIDByRealName(string find)
-    {
-        Row row = Find_REAL_NAME(find);
-        if (row != null)
-            return row.RECORD_ID;
-        else
-            return null;
-    }
-
     public static Row Find_REAL_NAME(string find)
 	{
 		return rowList.Find(x => x.REAL_NAME == find);

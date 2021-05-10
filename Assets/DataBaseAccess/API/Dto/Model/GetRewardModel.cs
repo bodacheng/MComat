@@ -18,6 +18,6 @@ namespace Api.Dto.Model {
         
         // 还应该包括竞技场模式下玩家rank的变化才对。。。
         
-        public List<StoneOfPlayerInfoModel> stonesToGetExp { get; set; }
+        public List<StoneOfPlayerInfo> stonesToGetExp { get; set; }
     }
 }

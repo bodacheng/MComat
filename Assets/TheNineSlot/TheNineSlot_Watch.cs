@@ -8,9 +8,9 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        List<StoneOfPlayerInfoModel> GetMyStonesOnNineSlot()
+        List<StoneOfPlayerInfo> GetMyStonesOnNineSlot()
         {
-            List<StoneOfPlayerInfoModel> returnValue = new List<StoneOfPlayerInfoModel>();
+            List<StoneOfPlayerInfo> returnValue = new List<StoneOfPlayerInfo>();
             List<string> IDlist = GetUsingStonesId();
             for (int i = 0; i < IDlist.Count; i++)
             {
@@ -146,11 +146,11 @@ namespace mainMenu
 
         public void RefreshCurrentHpBasedOnNineSlots()
         {
-            List<StoneOfPlayerInfoModel> stonelist = GetMyStonesOnNineSlot();
+            List<StoneOfPlayerInfo> stonelist = GetMyStonesOnNineSlot();
             List<int> level = new List<int>();
             List<string> skillIDs = new List<string>();
             
-            foreach(StoneOfPlayerInfoModel one in stonelist)
+            foreach(StoneOfPlayerInfo one in stonelist)
             {
                 level.Add(one.GetLevel());
                 skillIDs.Add(one.skillId);

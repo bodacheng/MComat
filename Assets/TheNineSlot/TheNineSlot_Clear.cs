@@ -24,8 +24,8 @@ namespace mainMenu
                 
             IEnumerator temp()
             {
-                MonsterOfPlayerDetailModel info = MemberDetail.target._focusing;
-                StoneOfPlayerInfoModel originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.monsterOfPlayerId);
+                MonsterOfPlayerInfo info = MemberDetail.target._focusing;
+                StoneOfPlayerInfo originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.InstanceId);
                 foreach (SkillStoneSlot _slot in allSlot)
                 {
                     SKStoneItem sK = _slot._DragAndDropCell.GetItem();
@@ -33,7 +33,7 @@ namespace mainMenu
                     {
                         continue;
                     }
-                    if (originSkillInfo == null || (originSkillInfo != null && (sK.SkillStoneOfPlayerId != originSkillInfo.skillStoneOfPlayerId)))
+                    if (originSkillInfo == null || (originSkillInfo != null && (sK.SkillStoneOfPlayerId != originSkillInfo.InstanceId)))
                     {
                         _slot._DragAndDropCell.RemoveToTemp();
                     }

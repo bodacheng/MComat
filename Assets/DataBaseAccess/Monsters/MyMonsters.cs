@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Model;
 
@@ -8,7 +7,7 @@ namespace dataAccess
     //这个函数应该是个一上来就从本地。。。或数据库读取的东西，应该存在很多协程类函数，因为到时候牵扯到从数据库直接读取信息。
     public partial class MyMonsters
     {
-        public static IDictionary<string, MonsterOfPlayerDetailModel> Dic = new Dictionary<string, MonsterOfPlayerDetailModel>();
+        public static IDictionary<string, MonsterOfPlayerInfo> Dic = new Dictionary<string, MonsterOfPlayerInfo>();
         
         public static bool CheckExist(string key)
         {
@@ -24,7 +23,7 @@ namespace dataAccess
             return false;
         }
         
-        public static MonsterOfPlayerDetailModel Get(string monsterlocalid)
+        public static MonsterOfPlayerInfo Get(string monsterlocalid)
         {
             if (monsterlocalid == null)
             {
@@ -40,15 +39,15 @@ namespace dataAccess
         
         public static void LoadTutorial()
         {
-            List<MonsterOfPlayerDetailModel> charList = new List<MonsterOfPlayerDetailModel>();
+            List<MonsterOfPlayerInfo> charList = new List<MonsterOfPlayerInfo>();
             //charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
             Dic.Clear();
-            foreach (MonsterOfPlayerDetailModel one in charList)
+            foreach (MonsterOfPlayerInfo one in charList)
             {
-                if (!Dic.ContainsKey(one.monsterOfPlayerId))
-                    Dic.Add(one.monsterOfPlayerId, one);
+                if (!Dic.ContainsKey(one.InstanceId))
+                    Dic.Add(one.InstanceId, one);
                 else
-                    Debug.Log("重复的角色存档id："+ one.monsterOfPlayerId);
+                    Debug.Log("重复的角色存档id："+ one.InstanceId);
             }
         }
     }

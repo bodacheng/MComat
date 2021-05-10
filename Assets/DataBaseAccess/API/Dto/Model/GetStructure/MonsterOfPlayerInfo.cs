@@ -11,34 +11,29 @@ namespace Api.Dto.Model {
     /// バージョン：1.00 2019/07/01
     /// </summary>
     [Serializable]
-    public class MonsterOfPlayerDetailModel 
+    public class MonsterOfPlayerInfo
     {
         /// <summary>
         /// プレーヤ所有モンスターID
         /// </summary>
-        public string monsterOfPlayerId { get; set; }
-        
-        /// <summary>
-        /// プレーヤレコードID
-        /// </summary>
-        public string playerId { get; set; }
+        public string InstanceId { get; set; }
         
         /// <summary>
         /// モンスターID
         /// </summary>
         public string monsterId { get; set; }
         
-        public static CharDataInfo GetCharDataInfo(MonsterOfPlayerDetailModel accountCharInfo)
+        public static CharDataInfo GetCharDataInfo(MonsterOfPlayerInfo accountCharInfo)
         {
             try
             {
                 CharDataInfo charDataInfo = new CharDataInfo
                 {
                     ResourceID = accountCharInfo.monsterId,
-                    monsterOfPlayerId = accountCharInfo.monsterOfPlayerId
+                    monsterOfPlayerId = accountCharInfo.InstanceId
                 };
                 
-                List<StoneOfPlayerInfoModel> targets = MySkillStones.GetEquipingStones(accountCharInfo.monsterOfPlayerId);
+                List<StoneOfPlayerInfo> targets = MySkillStones.GetEquipingStones(accountCharInfo.InstanceId);
                 NineAndTwo nineAndTwo = new NineAndTwo();
                 CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accountCharInfo.monsterId));
                 if (_CharConfigInfo == null)
@@ -105,7 +100,7 @@ namespace Api.Dto.Model {
         // 这个是从角色存档来读取
         public int GetNineSlotWholePointOfMonster(string monsterOfPlayerId)
         {
-            List<StoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(monsterOfPlayerId);
+            List<StoneOfPlayerInfo> equipingstones = MySkillStones.GetEquipingStones(monsterOfPlayerId);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
             for (int i = 0; i < equipingstones.Count; i++)
             {

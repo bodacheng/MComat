@@ -6,17 +6,17 @@ namespace Api.Dto.Model
     // 这个信息组成了一个角色与其对应的技能   
     public class MemberOfTeam
     {
-        readonly MonsterOfPlayerDetailModel MonsterInfo;
-        readonly List<StoneOfPlayerInfoModel> stones;
+        readonly MonsterOfPlayerInfo MonsterInfo;
+        readonly List<StoneOfPlayerInfo> stones;
         
         public CharDataInfo ToCharDataInfo()
         {
             CharDataInfo charData = new CharDataInfo
             {
                 ResourceID = MonsterInfo.monsterId,
-                monsterOfPlayerId = MonsterInfo.monsterOfPlayerId
+                monsterOfPlayerId = MonsterInfo.InstanceId
             };
-            List<StoneOfPlayerInfoModel> targets = stones;
+            List<StoneOfPlayerInfo> targets = stones;
             NineAndTwo nineAndTwo = new NineAndTwo();
             CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(charData.ResourceID));
             if (_CharConfigInfo == null)

@@ -38,7 +38,7 @@ public class ModelShower : MonoBehaviour
 
     public IEnumerator ShowMyModel(string localID)
     {
-        MonsterOfPlayerDetailModel targetInfo = MyMonsters.Get(localID);
+        MonsterOfPlayerInfo targetInfo = MyMonsters.Get(localID);
         IEnumerator enumerator = ShowModel(targetInfo != null ? targetInfo.monsterId : null);
         yield return enumerator;
         yield return enumerator.Current;

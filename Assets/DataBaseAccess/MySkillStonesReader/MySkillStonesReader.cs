@@ -8,7 +8,7 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        static IDictionary<string, StoneOfPlayerInfoModel> Dic = new Dictionary<string, StoneOfPlayerInfoModel>();
+        static IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
 
         public static void Clear()
@@ -17,7 +17,7 @@ namespace dataAccess
             RenderModelDic.Clear();
         }
         
-        public static StoneOfPlayerInfoModel Get(string id)
+        public static StoneOfPlayerInfo Get(string id)
         {
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
@@ -25,11 +25,11 @@ namespace dataAccess
         public static List<string> GetMyStonesBySkillID(string skillID)
         {
             List<string> infoModels = new List<string>();
-            foreach (KeyValuePair<string, StoneOfPlayerInfoModel> keyValuePair in Dic)
+            foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.skillId == skillID)
                 {
-                    infoModels.Add(keyValuePair.Value.skillStoneOfPlayerId);
+                    infoModels.Add(keyValuePair.Value.InstanceId);
                 }
             }
             return infoModels;
@@ -46,7 +46,7 @@ namespace dataAccess
             //LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
             // 上面的步骤已经完成了Dic的适配
             RenderModelDic.Clear();
-            foreach (KeyValuePair<string, StoneOfPlayerInfoModel> pair in Dic)
+            foreach (KeyValuePair<string, StoneOfPlayerInfo> pair in Dic)
             {
                 SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
                 if (_SkillConfig == null)
@@ -54,7 +54,7 @@ namespace dataAccess
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
                     return;
                 }
-                GenerateStoneModelByAccID(pair.Value.skillStoneOfPlayerId);
+                GenerateStoneModelByAccID(pair.Value.InstanceId);
             }
         }
     }

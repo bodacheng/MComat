@@ -9,7 +9,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public IEnumerator ReadANineAndTwo(MonsterOfPlayerDetailModel _AccCharInfo)
+        public IEnumerator ReadANineAndTwo(MonsterOfPlayerInfo _AccCharInfo)
         {
             ForceClearAll();
             
@@ -17,7 +17,7 @@ namespace mainMenu
             {
                 yield break;
             }
-            List<StoneOfPlayerInfoModel> equipingstones = MySkillStones.GetEquipingStones(_AccCharInfo.monsterOfPlayerId);
+            List<StoneOfPlayerInfo> equipingstones = MySkillStones.GetEquipingStones(_AccCharInfo.InstanceId);
 
             for (int i = 1; i <= 9; i++)
             {
@@ -27,8 +27,8 @@ namespace mainMenu
             for (int i = 0; i < equipingstones.Count; i++)
             {
                 int usingPosInt = int.Parse(equipingstones[i].inUsingSkillSlot);
-                if (equipingstones[i].skillStoneOfPlayerId != null)
-                    yield return allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipingstones[i].skillStoneOfPlayerId, Color.white);
+                if (equipingstones[i].InstanceId != null)
+                    yield return allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipingstones[i].InstanceId, Color.white);
                 allSlot[usingPosInt - 1]._DragAndDropCell.UpdateMyItem();
                 allSlot[usingPosInt - 1]._DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
             }

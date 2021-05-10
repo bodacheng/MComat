@@ -10,7 +10,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 调整目标等级 直接放在按钮上。
     public void PlusTargetLevel()
     {
-        StoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfo StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         if (StoneInfoModel == null)
             return;
         
@@ -29,7 +29,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void MinusTargetLevel()
     {
-        StoneOfPlayerInfoModel StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfo StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
         if (StoneInfoModel == null)
         {
             RefreshSkillLevelUpModule();

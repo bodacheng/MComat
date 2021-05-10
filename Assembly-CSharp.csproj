@@ -243,12 +243,12 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MailOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MemberOfTeam.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterOfPlayerDetailModel.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterOfPlayerInfo.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\OneTeam.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\RankOpponentsModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneGotchaInfoModel.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneOfPlayerInfoModel.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneOfPlayerInfo.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneLevelUpModel.cs" />
     <Compile Include="Assets\DataBaseAccess\Account\AccountSet.cs" />
     <Compile Include="Assets\DataBaseAccess\Account\AccountSet_localTest.cs" />
