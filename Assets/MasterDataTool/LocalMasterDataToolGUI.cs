@@ -35,6 +35,11 @@ public class LocalMasterDataToolGUI : Editor {
             _ConfigManager.OutputSKStonesStore();
         }
 
+        if (GUILayout.Button("(playFab)输出获取全部技能石的测试用cloudscript)"))
+        {
+            
+        }
+
         if (GUILayout.Button("(playFab)输出Json格式角色定义文件(只能在程序启动状态下正常运行)"))
         {
             _ConfigManager.OutputMonstersCatalog();
@@ -43,6 +48,11 @@ public class LocalMasterDataToolGUI : Editor {
         if (GUILayout.Button("(playFab)输出Json格式角色商店文件(只能在程序启动状态下正常运行)"))
         {
             _ConfigManager.OutputMonsterStore();
+        }
+
+        if (GUILayout.Button("(playFab)输出获取全部角色的测试用cloudscript)"))
+        {
+
         }
 
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))
