@@ -10,10 +10,10 @@ using System.Linq;
 public partial class LocalMasterDataTool : MonoBehaviour {
 
     public string[] chartypes;
-    public TextAsset CharacterConfigTextFile;
-    public string MonstersConfigFilePath;
-    public TextAsset SkillConfigTextFile;
-    public string SkillConfigFilePath;
+    public TextAsset CharConfigFile;
+    public string CharConfigFilePath;
+    public TextAsset SkillConfigFile;
+    public string SkillConfigPath;
 
     /// <summary>
     /// 生成gs2 技能石master更新文件
@@ -34,8 +34,10 @@ public partial class LocalMasterDataTool : MonoBehaviour {
     public void OutputMonstersCatalog()
     {
         MonstersConfigTable.LoadMonstersConfig();
-        PFDefine pFSKDefine = new PFDefine();
-        pFSKDefine.CatalogVersion = "Monsters";
+        PFDefine pFSKDefine = new PFDefine
+        {
+            CatalogVersion = "Monsters"
+        };
         List<PFDefine.Item> items = new List<PFDefine.Item>();
         List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)

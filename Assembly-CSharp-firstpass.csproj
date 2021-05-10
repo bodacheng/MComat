@@ -749,9 +749,17 @@
       <Project>{CFD99446-2050-1694-FB2C-565AD4E01465}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{E92E20E0-2099-5F2C-CDC6-263F7B6D3A00}</Project>
+      <Name>PlayFab</Name>
+    </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{F4DF3B01-DBF5-8062-902D-1D03B79D7515}</Project>
       <Name>PlayFabEditorExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{A6F66BB6-BDBD-06A4-4867-B5F5ADF9847A}</Project>
+      <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{DD389A5D-27BC-8773-6530-D1A0D7A6951B}</Project>
@@ -772,14 +780,6 @@
     <ProjectReference Include="UniTask.Linq.csproj">
       <Project>{C5523DD4-EE06-6B9D-1C90-4BB9D85BDF21}</Project>
       <Name>UniTask.Linq</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFab.csproj">
-      <Project>{E92E20E0-2099-5F2C-CDC6-263F7B6D3A00}</Project>
-      <Name>PlayFab</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{A6F66BB6-BDBD-06A4-4867-B5F5ADF9847A}</Project>
-      <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,7 +21,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
         }
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
-        List<CharConfig> AllNewCharacterConfigsOfAllTypes = new List<CharConfig>();
+        List<CharConfig> AllNewCharConfigsAllTypes = new List<CharConfig>();
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
@@ -58,7 +58,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
                     continue;
                 }
 
-                CharConfig _CharacterResourceInfo = new CharConfig
+                CharConfig _CharConfig = new CharConfig
                 {
                     RECORD_ID = "-1",
                     TYPE = chartype,
@@ -72,32 +72,32 @@ public partial class LocalMasterDataTool : MonoBehaviour
                 switch (outsideDataLink._C.Zokusei)
                 {
                     case Zokusei.blueMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.blueMagic;
+                        _CharConfig._zokusei = Zokusei.blueMagic;
                         break;
                     case Zokusei.redMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.redMagic;
+                        _CharConfig._zokusei = Zokusei.redMagic;
                         break;
                     case Zokusei.greenMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.greenMagic;
+                        _CharConfig._zokusei = Zokusei.greenMagic;
                         break;
                     case Zokusei.darkMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.darkMagic;
+                        _CharConfig._zokusei = Zokusei.darkMagic;
                         break;
                     case Zokusei.lightMagic:
-                        _CharacterResourceInfo._zokusei = Zokusei.lightMagic;
+                        _CharConfig._zokusei = Zokusei.lightMagic;
                         break;
                 }
-                _CharacterResourceInfo.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
-                _CharacterResourceInfo.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
-                _CharacterResourceInfo.MoveType = MoveType.Move_normal;
-                _CharacterResourceInfo.RushType = RushType.RushBack;
-                _CharacterResourceInfo.DEFENDABLE_FLAG = true;
-                _CharacterResourceInfo.InstructionCH = null;
-                _CharacterResourceInfo.InstructionEN = null;
-                _CharacterResourceInfo.InstructionJP = null;
-                _CharacterResourceInfo.RARITY_LEVEL = 1;
+                _CharConfig.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
+                _CharConfig.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
+                _CharConfig.MoveType = MoveType.Move_normal;
+                _CharConfig.RushType = RushType.RushBack;
+                _CharConfig.DEFENDABLE_FLAG = true;
+                _CharConfig.InstructionCH = null;
+                _CharConfig.InstructionEN = null;
+                _CharConfig.InstructionJP = null;
+                _CharConfig.RARITY_LEVEL = 1;
 
-                AllNewCharacterConfigsOfAllTypes.Add(_CharacterResourceInfo);
+                AllNewCharConfigsAllTypes.Add(_CharConfig);
             }
 
             //旧版本有的keyname可是Resource文件夹下没有的
@@ -125,7 +125,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
             }
         }
 
-        foreach (CharConfig characterResourceInfo in AllNewCharacterConfigsOfAllTypes)
+        foreach (CharConfig characterResourceInfo in AllNewCharConfigsAllTypes)
         {
             if (AllDeletedRecordsIDs.Count > 0)
             {

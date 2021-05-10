@@ -6,43 +6,43 @@ using UnityEditor;
 [CustomEditor(typeof(LocalMasterDataTool))]
 public class LocalMasterDataToolGUI : Editor {
 
-    LocalMasterDataTool _ConfigFileManager;
+    LocalMasterDataTool _ConfigManager;
     
     public override void OnInspectorGUI()
     {
-        _ConfigFileManager = (LocalMasterDataTool)target;
+        _ConfigManager = (LocalMasterDataTool)target;
         DrawDefaultInspector();
         
         //_ConfigFileManager.SkillConfigTextFile = EditorGUILayout.ObjectField("SkillConfigFile", _ConfigFileManager.SkillConfigTextFile, typeof(TextAsset), true) as TextAsset;
         
         if (GUILayout.Button("根据Resource文件夹生成所有角色配置文件"))
         {
-            _ConfigFileManager.UnitsConfigFileGenerate(_ConfigFileManager.MonstersConfigFilePath,_ConfigFileManager.CharacterConfigTextFile);
+            _ConfigManager.UnitsConfigFileGenerate(_ConfigManager.CharConfigFilePath,_ConfigManager.CharConfigFile);
         }
         
         if (GUILayout.Button("根据Resource文件夹生成,更新技能配置文件"))
         {
-            _ConfigFileManager.SkillConfigFileUpdate(_ConfigFileManager.SkillConfigFilePath, _ConfigFileManager.SkillConfigTextFile);
+            _ConfigManager.SkillConfigFileUpdate(_ConfigManager.SkillConfigPath, _ConfigManager.SkillConfigFile);
         }
 
         if (GUILayout.Button("(playFab)输出Json格式技能石定义文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigFileManager.OutputSKStonesCatalog();
+            _ConfigManager.OutputSKStonesCatalog();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式技能石商店文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigFileManager.OutputSKStonesStore();
+            _ConfigManager.OutputSKStonesStore();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式角色定义文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigFileManager.OutputMonstersCatalog();
+            _ConfigManager.OutputMonstersCatalog();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式角色商店文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigFileManager.OutputMonsterStore();
+            _ConfigManager.OutputMonsterStore();
         }
 
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))
@@ -111,7 +111,7 @@ public class LocalMasterDataToolGUI : Editor {
         
         if (GUILayout.Button("生成剧情用临时角色存档文件"))
         {
-            _ConfigFileManager.GenerateTutorialUnitsFiles();
+            _ConfigManager.GenerateTutorialUnitsFiles();
         }        
     }
 }

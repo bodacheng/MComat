@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Api.Dto.Form;
 using dataAccess;
-using Api.Dto.Model;
 
 namespace FightScene
 {
@@ -37,25 +35,25 @@ namespace FightScene
             switch (FightSceneNote.nextBattle._fightEventType)
             {
                 case FightEventType.Arena:
-                    RequestRewardForm form1 = new RequestRewardForm
-                    {
-                        userId = AccountSet._AccInfo.playerID,
-                        fightEventType = FightEventType.Arena,
-                        eventNum = 0 // 对手的id
-                    };
-                    IEnumerator requestReward1 = RewardManager.RequestRewardsExaution(
-                        form1,
-                        model => {
-                            int diamond = model.Diamond;
-                            int gold = model.Gold;
-                            FightOverControl.target.ShowRewards(gold, diamond);
-                        },
-                        model => {
-                            // 再次请求报酬？？
-                        },
-                        Setting.Language
-                    );
-                    yield return requestReward1;
+                    //RequestRewardForm form1 = new RequestRewardForm
+                    //{
+                    //    userId = AccountSet._AccInfo.playerID,
+                    //    fightEventType = FightEventType.Arena,
+                    //    eventNum = 0 // 对手的id
+                    //};
+                    //IEnumerator requestReward1 = RewardManager.RequestRewardsExaution(
+                    //    form1,
+                    //    model => {
+                    //        int diamond = model.Diamond;
+                    //        int gold = model.Gold;
+                    //        FightOverControl.target.ShowRewards(gold, diamond);
+                    //    },
+                    //    model => {
+                    //        // 再次请求报酬？？
+                    //    },
+                    //    Setting.Language
+                    //);
+                    //yield return requestReward1;
                     // 玩家rank远程已经进行了加分处理，这时候只需要以玩家id为key检索一下，本地刷新就可以
                     yield return Arena.GetPlayerRankInfo();
                     FightOverControl.target.rankInfo.gameObject.SetActive(true);
@@ -65,33 +63,33 @@ namespace FightScene
                 case FightEventType.Quest:
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
                     List<string> stoneids = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
-                    RequestRewardForm form = new RequestRewardForm
-                    {
-                        userId = AccountSet._AccInfo.playerID,
-                        fightEventType = FightEventType.Quest,
-                        eventNum = FightSceneNote.nextBattle.LocalFightID,
-                        StoneOfPlayerIDs = stoneids
-                    };
+                    //RequestRewardForm form = new RequestRewardForm
+                    //{
+                    //    userId = AccountSet._AccInfo.playerID,
+                    //    fightEventType = FightEventType.Quest,
+                    //    eventNum = FightSceneNote.nextBattle.LocalFightID,
+                    //    StoneOfPlayerIDs = stoneids
+                    //};
                     if (FightLogger.target.GetWinner() == Team.player1)
                     {
-                        IEnumerator requestReward = RewardManager.RequestRewardsExaution(
-                            form,
-                            model => {
-                                int diamond = model.Diamond;
-                                int gold = model.Gold;
-                                FightOverControl.target.ShowRewards(gold, diamond);
-                                for (int i = 0; i < model.stonesToGetExp.Count; i++)
-                                {
-                                    StoneOfPlayerInfoModel one = MySkillStones.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
-                                    one.EXP = model.stonesToGetExp[i].EXP;
-                                }
-                            },
-                            model => {
-                                // 再次请求报酬？？
-                            },
-                            Setting.Language
-                        );
-                        yield return requestReward;
+                        //IEnumerator requestReward = RewardManager.RequestRewardsExaution(
+                        //    form,
+                        //    model => {
+                        //        int diamond = model.Diamond;
+                        //        int gold = model.Gold;
+                        //        FightOverControl.target.ShowRewards(gold, diamond);
+                        //        for (int i = 0; i < model.stonesToGetExp.Count; i++)
+                        //        {
+                        //            StoneOfPlayerInfoModel one = MySkillStones.Get(model.stonesToGetExp[i].skillStoneOfPlayerId);
+                        //            one.EXP = model.stonesToGetExp[i].EXP;
+                        //        }
+                        //    },
+                        //    model => {
+                        //        // 再次请求报酬？？
+                        //    },
+                        //    Setting.Language
+                        //);
+                        //yield return requestReward;
                         FightOverControl.target.CheckNextArcadeLevel();
                     }
                 break;
