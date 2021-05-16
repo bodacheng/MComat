@@ -2,6 +2,15 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.PfEditor.Json;
+using System.Collections.Generic;
+using dataAccess;
+using Api.Dto.Model;
+using System;
+using Json;
+using LitJson;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 public class CloudScript
 {
@@ -62,6 +71,94 @@ public class CloudScript
         //Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
         Debug.Log(jsonResult);
+    }
+
+
+    class temp
+    {
+        public string ItemInstanceId;
+        public string ItemId;
+    }
+
+    public static void GachaTest(Action<List<StoneOfPlayerInfo>> action)
+    {
+        PlayFabClientAPI.ExecuteCloudScript(
+            new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "Gacha", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionParameter = new {
+                    CatalogVersion = "stoneTest2",
+                    tableName = "TestGotcha"
+                }, // The parameter provided to your function
+                GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+            },
+            (ExecuteCloudScriptResult result) => {
+                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                object messageValue;
+                jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                Debug.Log(messageValue);
+                StoneOfPlayerInfo stoneOfPlayerInfo = new StoneOfPlayerInfo();
+                var list = JsonConvert.DeserializeObject<List<JObject>>(messageValue.ToString()).Select(x => x?.ToObject<Dictionary<string, string>>()).ToList();
+                foreach (var v in list)
+                {
+                    foreach (var s in v)
+                    {
+                        if (s.Key == "ItemInstanceId")
+                        {
+                            stoneOfPlayerInfo.InstanceId = s.Value;
+                        }
+                        if (s.Key == "ItemId")
+                        {
+                            stoneOfPlayerInfo.skillId = s.Value;
+                        }
+                        //Debug.Log(s.Key + ":" + s.Value);
+                    }
+                }
+
+                MySkillStones.Add(stoneOfPlayerInfo);
+                List<StoneOfPlayerInfo> stones = new List<StoneOfPlayerInfo> { stoneOfPlayerInfo };
+                action(stones);
+            },
+            error => { Debug.Log(error.Error); });
+    }
+
+    public static void RandomRemove25Items()
+    {
+        var Items = new JsonArray();
+        List<string> ids = new List<string>();
+        foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in MySkillStones.Dic)
+        {
+            Items.Add(
+                new PlayFab.ServerModels.RevokeInventoryItem()
+                {
+                    ItemInstanceId = keyValuePair.Key
+                }
+            );
+            ids.Add(keyValuePair.Key);
+            if (Items.Count == 25)
+            {
+                break;
+            }
+        }
+
+        PlayFabClientAPI.ExecuteCloudScript(
+            new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "RandomRemove25Items", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionParameter = new { inputValue = Items.ToArray() }, // The parameter provided to your function
+                GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+            },
+        (ExecuteCloudScriptResult result) => {
+            foreach (string id in ids)
+            {
+                MySkillStones.RemoveStoneLocal(id);
+            };
+            PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            object messageValue;
+            jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+            Debug.Log(messageValue);
+        },
+        error => { Debug.Log(error.Error); });
     }
 }
 

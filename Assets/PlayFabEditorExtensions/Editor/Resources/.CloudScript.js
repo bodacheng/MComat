@@ -29,30 +29,6 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-handlers.getMonsterTest = function (args, context) {
-
-    // requestに全て詰め込む
-    var request = {
-        "CatalogVersion": "Monsters",  //カタログバージョンを指定
-        // ItemGrant型配列を定義
-        "ItemGrants": [
-            {
-                "PlayFabId": currentPlayerId,
-                "ItemId": "1"
-            },
-
-            {
-                "PlayFabId": currentPlayerId,
-                "ItemId": "6"
-            }
-        ]
-    };
-
-    // 全て詰め込んだ request を引数にserver.GrantItemsToUsersを呼び出す。
-    var playerStatResult = server.GrantItemsToUsers(request);
-
-};
-
 
 // This is a Cloud Script function. "args" is set to the value of the "FunctionParameter" 
 // parameter of the ExecuteCloudScript API.
@@ -96,6 +72,60 @@ handlers.makeAPICall = function (args, context) {
     // the PlayFab API, so you don't have to write extra code to issue HTTP requests. 
     var playerStatResult = server.UpdatePlayerStatistics(request);
 };
+
+handlers.getMonsterTest = function (args, context) {
+    var request = {
+    "CatalogVersion": "Monsters",
+    "ItemGrants": [
+        {"PlayFabId": currentPlayerId,"ItemId": "1"},
+        {"PlayFabId": currentPlayerId,"ItemId": "2"},
+        {"PlayFabId": currentPlayerId,"ItemId": "3"},
+        {"PlayFabId": currentPlayerId,"ItemId": "4"},
+        {"PlayFabId": currentPlayerId,"ItemId": "5"},
+        {"PlayFabId": currentPlayerId, "ItemId": "6" },
+        { "PlayFabId": currentPlayerId, "ItemId": "7" },
+        { "PlayFabId": currentPlayerId, "ItemId": "8" }, { "PlayFabId": currentPlayerId, "ItemId": "9" }, { "PlayFabId": currentPlayerId, "ItemId": "10" }, { "PlayFabId": currentPlayerId, "ItemId": "11" }, { "PlayFabId": currentPlayerId, "ItemId": "13" } 
+        ]
+    };
+    var playerStatResult = server.GrantItemsToUsers(request);
+};
+
+handlers.RandomRemove25Items = function (args, context) {
+    let items = [];
+    for (let i = 0; i < args.inputValue.length; i++) {
+        var one = {
+            "PlayFabId": currentPlayerId,
+            "ItemInstanceId": args.inputValue[i].ItemInstanceId
+        };
+        items.push(one);
+    }
+    var request = {
+        "Items": items
+    };
+    var Result = server.RevokeInventoryItems(request);
+    return { messageValue: Result};
+}
+
+handlers.Gacha = function (args, context) {
+    var request = {
+        "CatalogVersion": args.CatalogVersion,
+        "TableId": args.tableName
+    };
+    var Result = server.EvaluateRandomResultTable(request);
+
+    let itemIds = [];
+    itemIds.push(Result.ResultItemId);
+    var grantRequest = {
+        "PlayFabId": currentPlayerId,
+        "CatalogVersion": args.CatalogVersion,
+        "ItemIds": itemIds
+    };
+
+    var grantResult = server.GrantItemsToUser(grantRequest);
+    return { messageValue: grantResult["ItemGrantResults"] };
+}
+
+handlers.getStonesTest = function (args, context) {var request = {"CatalogVersion": "stoneTest2","ItemGrants": [{"PlayFabId": currentPlayerId,"ItemId": "1"},{"PlayFabId": currentPlayerId,"ItemId": "2"},{"PlayFabId": currentPlayerId,"ItemId": "3"},{"PlayFabId": currentPlayerId,"ItemId": "4"},{"PlayFabId": currentPlayerId,"ItemId": "5"},{"PlayFabId": currentPlayerId,"ItemId": "6"},{"PlayFabId": currentPlayerId,"ItemId": "7"},{"PlayFabId": currentPlayerId,"ItemId": "8"},{"PlayFabId": currentPlayerId,"ItemId": "9"},{"PlayFabId": currentPlayerId,"ItemId": "10"},{"PlayFabId": currentPlayerId,"ItemId": "11"},{"PlayFabId": currentPlayerId,"ItemId": "12"},{"PlayFabId": currentPlayerId,"ItemId": "13"},{"PlayFabId": currentPlayerId,"ItemId": "14"},{"PlayFabId": currentPlayerId,"ItemId": "15"},{"PlayFabId": currentPlayerId,"ItemId": "16"},{"PlayFabId": currentPlayerId,"ItemId": "17"},{"PlayFabId": currentPlayerId,"ItemId": "18"},{"PlayFabId": currentPlayerId,"ItemId": "19"},{"PlayFabId": currentPlayerId,"ItemId": "20"},{"PlayFabId": currentPlayerId,"ItemId": "21"},{"PlayFabId": currentPlayerId,"ItemId": "22"},{"PlayFabId": currentPlayerId,"ItemId": "23"},{"PlayFabId": currentPlayerId,"ItemId": "24"},{"PlayFabId": currentPlayerId,"ItemId": "25"},{"PlayFabId": currentPlayerId,"ItemId": "26"},{"PlayFabId": currentPlayerId,"ItemId": "27"},{"PlayFabId": currentPlayerId,"ItemId": "28"},{"PlayFabId": currentPlayerId,"ItemId": "29"},{"PlayFabId": currentPlayerId,"ItemId": "30"},{"PlayFabId": currentPlayerId,"ItemId": "31"},{"PlayFabId": currentPlayerId,"ItemId": "32"},{"PlayFabId": currentPlayerId,"ItemId": "33"},{"PlayFabId": currentPlayerId,"ItemId": "34"},{"PlayFabId": currentPlayerId,"ItemId": "35"},{"PlayFabId": currentPlayerId,"ItemId": "36"},{"PlayFabId": currentPlayerId,"ItemId": "37"},{"PlayFabId": currentPlayerId,"ItemId": "38"},{"PlayFabId": currentPlayerId,"ItemId": "39"},{"PlayFabId": currentPlayerId,"ItemId": "40"},{"PlayFabId": currentPlayerId,"ItemId": "41"},{"PlayFabId": currentPlayerId,"ItemId": "42"},{"PlayFabId": currentPlayerId,"ItemId": "43"},{"PlayFabId": currentPlayerId,"ItemId": "44"},{"PlayFabId": currentPlayerId,"ItemId": "45"},{"PlayFabId": currentPlayerId,"ItemId": "46"},{"PlayFabId": currentPlayerId,"ItemId": "47"},{"PlayFabId": currentPlayerId,"ItemId": "48"},{"PlayFabId": currentPlayerId,"ItemId": "49"},{"PlayFabId": currentPlayerId,"ItemId": "50"},{"PlayFabId": currentPlayerId,"ItemId": "51"},{"PlayFabId": currentPlayerId,"ItemId": "52"},{"PlayFabId": currentPlayerId,"ItemId": "53"},{"PlayFabId": currentPlayerId,"ItemId": "54"},{"PlayFabId": currentPlayerId,"ItemId": "55"},{"PlayFabId": currentPlayerId,"ItemId": "56"},{"PlayFabId": currentPlayerId,"ItemId": "57"},{"PlayFabId": currentPlayerId,"ItemId": "58"},{"PlayFabId": currentPlayerId,"ItemId": "59"},{"PlayFabId": currentPlayerId,"ItemId": "60"},{"PlayFabId": currentPlayerId,"ItemId": "61"},{"PlayFabId": currentPlayerId,"ItemId": "62"},{"PlayFabId": currentPlayerId,"ItemId": "63"},{"PlayFabId": currentPlayerId,"ItemId": "64"},{"PlayFabId": currentPlayerId,"ItemId": "65"},{"PlayFabId": currentPlayerId,"ItemId": "66"},{"PlayFabId": currentPlayerId,"ItemId": "67"},{"PlayFabId": currentPlayerId,"ItemId": "68"},{"PlayFabId": currentPlayerId,"ItemId": "69"},{"PlayFabId": currentPlayerId,"ItemId": "70"},{"PlayFabId": currentPlayerId,"ItemId": "71"},{"PlayFabId": currentPlayerId,"ItemId": "72"},{"PlayFabId": currentPlayerId,"ItemId": "73"},{"PlayFabId": currentPlayerId,"ItemId": "74"},{"PlayFabId": currentPlayerId,"ItemId": "75"},{"PlayFabId": currentPlayerId,"ItemId": "76"},{"PlayFabId": currentPlayerId,"ItemId": "77"},{"PlayFabId": currentPlayerId,"ItemId": "78"},{"PlayFabId": currentPlayerId,"ItemId": "79"},{"PlayFabId": currentPlayerId,"ItemId": "80"},{"PlayFabId": currentPlayerId,"ItemId": "81"},{"PlayFabId": currentPlayerId,"ItemId": "82"},{"PlayFabId": currentPlayerId,"ItemId": "83"},{"PlayFabId": currentPlayerId,"ItemId": "84"},{"PlayFabId": currentPlayerId,"ItemId": "85"},{"PlayFabId": currentPlayerId,"ItemId": "86"},{"PlayFabId": currentPlayerId,"ItemId": "87"},{"PlayFabId": currentPlayerId,"ItemId": "88"},{"PlayFabId": currentPlayerId,"ItemId": "89"},{"PlayFabId": currentPlayerId,"ItemId": "90"},{"PlayFabId": currentPlayerId,"ItemId": "91"},{"PlayFabId": currentPlayerId,"ItemId": "92"},{"PlayFabId": currentPlayerId,"ItemId": "93"},{"PlayFabId": currentPlayerId,"ItemId": "94"},{"PlayFabId": currentPlayerId,"ItemId": "95"},{"PlayFabId": currentPlayerId,"ItemId": "96"},{"PlayFabId": currentPlayerId,"ItemId": "97"},{"PlayFabId": currentPlayerId,"ItemId": "98"},{"PlayFabId": currentPlayerId,"ItemId": "99"},{"PlayFabId": currentPlayerId,"ItemId": "100"},{"PlayFabId": currentPlayerId,"ItemId": "101"},{"PlayFabId": currentPlayerId,"ItemId": "102"},{"PlayFabId": currentPlayerId,"ItemId": "103"},{"PlayFabId": currentPlayerId,"ItemId": "104"},{"PlayFabId": currentPlayerId,"ItemId": "105"},{"PlayFabId": currentPlayerId,"ItemId": "106"},{"PlayFabId": currentPlayerId,"ItemId": "107"},{"PlayFabId": currentPlayerId,"ItemId": "108"},{"PlayFabId": currentPlayerId,"ItemId": "109"},{"PlayFabId": currentPlayerId,"ItemId": "110"},{"PlayFabId": currentPlayerId,"ItemId": "111"},{"PlayFabId": currentPlayerId,"ItemId": "112"},{"PlayFabId": currentPlayerId,"ItemId": "113"},{"PlayFabId": currentPlayerId,"ItemId": "114"},{"PlayFabId": currentPlayerId,"ItemId": "115"},{"PlayFabId": currentPlayerId,"ItemId": "116"},{"PlayFabId": currentPlayerId,"ItemId": "117"},{"PlayFabId": currentPlayerId,"ItemId": "118"},{"PlayFabId": currentPlayerId,"ItemId": "119"},{"PlayFabId": currentPlayerId,"ItemId": "120"},{"PlayFabId": currentPlayerId,"ItemId": "121"},{"PlayFabId": currentPlayerId,"ItemId": "122"},{"PlayFabId": currentPlayerId,"ItemId": "123"},{"PlayFabId": currentPlayerId,"ItemId": "124"},{"PlayFabId": currentPlayerId,"ItemId": "125"},{"PlayFabId": currentPlayerId,"ItemId": "126"},{"PlayFabId": currentPlayerId,"ItemId": "127"},{"PlayFabId": currentPlayerId,"ItemId": "128"},{"PlayFabId": currentPlayerId,"ItemId": "129"},{"PlayFabId": currentPlayerId,"ItemId": "130"},{"PlayFabId": currentPlayerId,"ItemId": "131"},{"PlayFabId": currentPlayerId,"ItemId": "132"},{"PlayFabId": currentPlayerId,"ItemId": "133"},{"PlayFabId": currentPlayerId,"ItemId": "134"},{"PlayFabId": currentPlayerId,"ItemId": "135"},{"PlayFabId": currentPlayerId,"ItemId": "136"},{"PlayFabId": currentPlayerId,"ItemId": "137"},{"PlayFabId": currentPlayerId,"ItemId": "138"},{"PlayFabId": currentPlayerId,"ItemId": "139"},{"PlayFabId": currentPlayerId,"ItemId": "140"},{"PlayFabId": currentPlayerId,"ItemId": "141"},{"PlayFabId": currentPlayerId,"ItemId": "142"},{"PlayFabId": currentPlayerId,"ItemId": "143"},{"PlayFabId": currentPlayerId,"ItemId": "144"},{"PlayFabId": currentPlayerId,"ItemId": "145"},{"PlayFabId": currentPlayerId,"ItemId": "146"},{"PlayFabId": currentPlayerId,"ItemId": "147"},{"PlayFabId": currentPlayerId,"ItemId": "148"},{"PlayFabId": currentPlayerId,"ItemId": "149"},{"PlayFabId": currentPlayerId,"ItemId": "150"},{"PlayFabId": currentPlayerId,"ItemId": "151"},{"PlayFabId": currentPlayerId,"ItemId": "152"},{"PlayFabId": currentPlayerId,"ItemId": "153"},{"PlayFabId": currentPlayerId,"ItemId": "156"},{"PlayFabId": currentPlayerId,"ItemId": "154"},{"PlayFabId": currentPlayerId,"ItemId": "155"},{"PlayFabId": currentPlayerId,"ItemId": "157"},{"PlayFabId": currentPlayerId,"ItemId": "158"},{"PlayFabId": currentPlayerId,"ItemId": "159"},{"PlayFabId": currentPlayerId,"ItemId": "160"},{"PlayFabId": currentPlayerId,"ItemId": "161"},{"PlayFabId": currentPlayerId,"ItemId": "162"},{"PlayFabId": currentPlayerId,"ItemId": "163"},{"PlayFabId": currentPlayerId,"ItemId": "164"},{"PlayFabId": currentPlayerId,"ItemId": "165"},{"PlayFabId": currentPlayerId,"ItemId": "166"},{"PlayFabId": currentPlayerId,"ItemId": "167"},{"PlayFabId": currentPlayerId,"ItemId": "168"},{"PlayFabId": currentPlayerId,"ItemId": "169"},{"PlayFabId": currentPlayerId,"ItemId": "170"},{"PlayFabId": currentPlayerId,"ItemId": "171"},{"PlayFabId": currentPlayerId,"ItemId": "172"},{"PlayFabId": currentPlayerId,"ItemId": "173"},{"PlayFabId": currentPlayerId,"ItemId": "174"},{"PlayFabId": currentPlayerId,"ItemId": "175"},{"PlayFabId": currentPlayerId,"ItemId": "176"},{"PlayFabId": currentPlayerId,"ItemId": "177"},{"PlayFabId": currentPlayerId,"ItemId": "178"},{"PlayFabId": currentPlayerId,"ItemId": "179"},{"PlayFabId": currentPlayerId,"ItemId": "180"},{"PlayFabId": currentPlayerId,"ItemId": "181"},{"PlayFabId": currentPlayerId,"ItemId": "182"} ]};var playerStatResult = server.GrantItemsToUsers(request);};
 
 // This an example of a function that calls a PlayFab Entity API. The function is called using the 
 // 'ExecuteEntityCloudScript' API (https://api.playfab.com/documentation/CloudScript/method/ExecuteEntityCloudScript).

@@ -72,6 +72,12 @@ namespace mainMenu
         {
             MonsterOfPlayerInfo targetingCharInfo = MyMonsters.Get(monsterOfPlayerId);
             CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
+            if (_CharConfig == null)
+            {
+                Debug.Log("MonsterID:"+ targetingCharInfo.monsterId + " doesnt exist in this version");
+                yield break;
+            }
+
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {

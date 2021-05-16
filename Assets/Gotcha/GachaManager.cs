@@ -59,7 +59,36 @@ public class GachaManager : MonoBehaviour
         }
         PreScene.target.mainProcessRunner.RunAsQueued(Go());
     }
-    
+
+    public void GetAllSK()
+    {
+        CloudScript.GrantStonesTest();
+    }
+
+    public void GetAllM()
+    {
+        CloudScript.GrantMonsterTest();
+    }
+
+
+    public void RemovesAllStones()
+    {
+        //Server.RandomRemove25Items();
+        CloudScript.RandomRemove25Items();
+    }
+
+    public void GachaTest()
+    {
+        //Server.RandomRemove25Items();
+        CloudScript.GachaTest(temp);
+
+        void temp(List<StoneOfPlayerInfo> stones)
+        {
+            Result = stones;
+            PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+        } 
+    }
+
     public IEnumerator Gacha(string type, int count)
     {
         List<StoneOfPlayerInfo> Results = null;
@@ -71,6 +100,7 @@ public class GachaManager : MonoBehaviour
                 Results = (List<StoneOfPlayerInfo>)GET.Current;
                 break;
             case PlayerInfoRefMode.remoteTestPlayer:
+
                 break;
             case PlayerInfoRefMode.formalVersion:
                 break;

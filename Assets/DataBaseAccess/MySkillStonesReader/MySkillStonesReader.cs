@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Api.Dto.Model;
 using System.Collections.Generic;
 using UnityEngine;
 using Api.Dto.Model;
@@ -8,7 +8,7 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        static IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
+        public static IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
 
         public static void Clear()
