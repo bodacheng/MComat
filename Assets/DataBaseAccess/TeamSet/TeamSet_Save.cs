@@ -88,12 +88,12 @@ namespace dataAccess
                 case "00":
                     model = Default.ToMonsterTeamOfPlayerModel(monsterTeamOfPlayerId);
                     json = JsonConvert.SerializeObject(model);
-                    LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "TeamSet.json", json);
+                    LocalJson.SaveToJsonFile_persistentDataPath(null, "TeamSet.json", json);
                 break;
                 case "13":
                     model = Arena3V3.ToMonsterTeamOfPlayerModel(monsterTeamOfPlayerId);
                     json = JsonConvert.SerializeObject(model);
-                    LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", json);
+                    LocalJson.SaveToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", json);
                 break;
             }
             yield return model;

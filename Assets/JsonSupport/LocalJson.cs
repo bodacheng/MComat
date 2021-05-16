@@ -6,7 +6,7 @@ namespace Json
 {
     public static class LocalJson
     {
-        public static void SaveInfoToJsonFile_persistentDataPath(string subpath, string filename, string json)
+        public static void SaveToJsonFile_persistentDataPath(string subpath, string filename, string json)
         {
             //string wholepath = Path.Combine(Application.persistentDataPath, subpath);
             string wholepath;

@@ -21,7 +21,7 @@ public partial class ResourceDownLoad : MonoBehaviour
     [Space(7)]
     [Header("资源读取设置")]
     public ConfigureOptions _ResourceSetting;
-    public LocalMasterDataTool _ConfigFileManager;
+    public MasterDataTool _ConfigFileManager;
 
     [Space(7)]
     [Header("assetBundleURL。根据服务器可能有变化")]

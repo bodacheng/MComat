@@ -7,7 +7,7 @@ using Json;
 using Newtonsoft.Json;
 using System.Linq;
 
-public partial class LocalMasterDataTool : MonoBehaviour
+public partial class MasterDataTool : MonoBehaviour
 {
     /// <summary>
     /// 生成gs2 技能石master更新文件
@@ -35,7 +35,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
         pFSKDefine.Catalog = items.ToArray();
         string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
 
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneDefinationsJson.json", json);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "StoneDefinationsJson.json", json);
     }
 
     public void OutputSKStonesStore()
@@ -66,7 +66,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
 
         string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
         json = "[" + json + "]";
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "StoneStoreDefinationsJson.json", json);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "StoneStoreDefinationsJson.json", json);
     }
 
     public void OutputCloudScriptPart_GetAllStones()
@@ -94,6 +94,6 @@ public partial class LocalMasterDataTool : MonoBehaviour
         "var playerStatResult = server.GrantItemsToUsers(request);" +
         "};";
 
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "GetAllStonesCloudScriptPart.text", text);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "GetAllStonesCloudScriptPart.text", text);
     }
 }

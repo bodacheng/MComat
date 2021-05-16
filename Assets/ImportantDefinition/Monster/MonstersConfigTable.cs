@@ -165,7 +165,7 @@ public static class MonstersConfigTable
             sb.AppendLine(string.Join(delimiter, grid[index]));
         }
         
-        Debug.Log("尝试最终保存文件" + filePath);
+        Debug.Log("尝试最终保存文件（路径应该从Asset/开始，加json后缀）：" + filePath);
         StreamWriter outStream = File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();

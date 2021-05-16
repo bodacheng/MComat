@@ -52,7 +52,7 @@ namespace dataAccess
             try
             {
                 string json = JsonConvert.SerializeObject(stone);
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stone.InstanceId + ".json", json);
+                LocalJson.SaveToJsonFile_persistentDataPath("MyStones", stone.InstanceId + ".json", json);
             }
             catch (Exception e)
             {

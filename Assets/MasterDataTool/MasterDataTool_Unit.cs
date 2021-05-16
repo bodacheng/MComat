@@ -4,7 +4,7 @@ using dataAccess;
 using Api.Dto.Model;
 using Skill;
 
-public partial class LocalMasterDataTool : MonoBehaviour
+public partial class MasterDataTool : MonoBehaviour
 {
     // 由Resource文件夹更新角色配置文件信息所需要的工作应该有如下：
     // 首先，同prefabName 允许在数据库存在复数个条目。比如外观一样的红色魔法暴龙和蓝色魔法暴龙，他们可以prefabName一样但charResouceNum不同。

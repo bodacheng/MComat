@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Skill;
 using Log;
 
-public partial class LocalMasterDataTool : MonoBehaviour {
 
-    public string[] chartypes;
-    public TextAsset CharConfigFile;
-    public string CharConfigFilePath;
-    public TextAsset SkillConfigFile;
-    public string SkillConfigPath;
+public partial class MasterDataTool : MonoBehaviour {
 
     // 以下这个函数对技能表的更新机制企划如下：
     // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
@@ -34,11 +30,11 @@ public partial class LocalMasterDataTool : MonoBehaviour {
         {
             SkillConfigTable.Load(textAsset);
         }
-        
+
         List<string> KisoonRecordIDs = new List<string>();
         List<string> AllDeletedRecordIDs = new List<string>();
         List<SkillConfig> AllNewSkillConfigsOfAllTypes = new List<SkillConfig>();
-        
+
         foreach (string chartype in chartypes)
         {
             List<SkillConfig> SkillConfigsOfOldFileOFtype = SkillConfigTable.RowsToSkillConfigList(SkillConfigTable.FindAll_MONSTER_TYPE(chartype));
@@ -60,12 +56,12 @@ public partial class LocalMasterDataTool : MonoBehaviour {
                     return;
                 }
             }
-            
+
             //这个首先是确保了本地资源重名的情况下不会被重复登陆
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
             //接下来索引该type现在resource文件夹下的资源。如果是已经存在的
             List<SkillConfig> newSkillConfigsOfType = new List<SkillConfig>();
-            
+
             // 下面这一大堆针对各个攻击片段文件夹的循环，意思是说，原则上一发现一个新动画片段，那么只针对它添加一个技能条目。如果你想针对一个动画片段添加其他类型的攻击技能那只能手动
             // 并且如果旧的config文件中已经有针对一个动画资源的技能状态定义，那么以旧定义为准，不会去动它，即便你换了某个动画片段的Resource文件夹位置。
             // 你如果真换了某个动画片段的Resource文件夹位置，那意味着你可能本来觉得它是个GR类攻击，那后来觉得做GM攻击更合适，那你只能手动去数据库文件做相应更改，这个更新操作不会替你做这个事情。
@@ -82,7 +78,7 @@ public partial class LocalMasterDataTool : MonoBehaviour {
                     Debug.Log("本地" + chartype + "type" + "出现重名动画资源。资源名：" + _anim.name + "，考虑改资源文件名。skill表更新操作中断。");
                     return;
                 }
-                
+
                 if (!KisonnRecourdsOFRealNames.Contains(_anim.name))
                 {
                     SkillConfig OneConfig = new SkillConfig
@@ -122,7 +118,7 @@ public partial class LocalMasterDataTool : MonoBehaviour {
                     Debug.Log("本地" + chartype + "type" + "出现重名动画资源。资源名：" + _anim.name + "，考虑改资源文件名。skill表更新操作中断。");
                     return;
                 }
-                
+
                 if (!KisonnRecourdsOFRealNames.Contains(_anim.name))
                 {
                     SkillConfig OneConfig = new SkillConfig
@@ -162,7 +158,7 @@ public partial class LocalMasterDataTool : MonoBehaviour {
                     Debug.Log("本地" + chartype + "type" + "出现重名动画资源。资源名：" + _anim.name + "，考虑改资源文件名。skill表更新操作中断。");
                     return;
                 }
-                
+
                 if (!KisonnRecourdsOFRealNames.Contains(_anim.name))
                 {
                     SkillConfig OneConfig = new SkillConfig
@@ -209,12 +205,12 @@ public partial class LocalMasterDataTool : MonoBehaviour {
                     {
                         Debug.Log("原SkillConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
                     }
-                    
+
                     SkillConfigTable.rowList.Remove(row);
                 }
             }
         }
-        
+
         foreach (SkillConfig newSkillConfig in AllNewSkillConfigsOfAllTypes)
         {
             //if (AllDeletedRecordsIDs.Count > 0)
@@ -228,7 +224,7 @@ public partial class LocalMasterDataTool : MonoBehaviour {
             //    newSkillConfig.id = MaxOfIntList(KisoonIDs) + 1;
             //    KisoonIDs.Add(newSkillConfig.id);
             //} //没有必要用什么旧ID去补，这个本来工作本来就不能交给自动化，所以上面这些我们给commentout了
-            
+
             newSkillConfig.RECORD_ID = "plsAddNewIDHere";// RecordId应该开发者自行安排 String.Format("{0:D20}",newid);
             SkillConfigTable.Row newRow = SkillConfigTable.SkillConfigToRow(newSkillConfig);
             if (newRow != null && newRow.REAL_NAME != null)

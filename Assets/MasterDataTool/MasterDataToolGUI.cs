@@ -3,14 +3,14 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(LocalMasterDataTool))]
+[CustomEditor(typeof(MasterDataTool))]
 public class LocalMasterDataToolGUI : Editor {
 
-    LocalMasterDataTool _ConfigManager;
+    MasterDataTool _ConfigManager;
     
     public override void OnInspectorGUI()
     {
-        _ConfigManager = (LocalMasterDataTool)target;
+        _ConfigManager = (MasterDataTool)target;
         DrawDefaultInspector();
         
         //_ConfigFileManager.SkillConfigTextFile = EditorGUILayout.ObjectField("SkillConfigFile", _ConfigFileManager.SkillConfigTextFile, typeof(TextAsset), true) as TextAsset;

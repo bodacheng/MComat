@@ -88,18 +88,18 @@ public partial class Starter : MonoBehaviour
             Object[] stones = Resources.LoadAll("TestSaveData/MyStones", typeof(TextAsset));
             Object[] units = Resources.LoadAll("TestSaveData/AccountCharacterInfos", typeof(TextAsset));
 
-            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", arena3V3TeamSet.text);
-            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", localAccountInfo.text);
-            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "TeamSet.json", TeamSet.text);
+            LocalJson.SaveToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", arena3V3TeamSet.text);
+            LocalJson.SaveToJsonFile_persistentDataPath(null, "localAccountInfo.json", localAccountInfo.text);
+            LocalJson.SaveToJsonFile_persistentDataPath(null, "TeamSet.json", TeamSet.text);
 
             for (int i = 0; i < stones.Length; i++)
             {
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("MyStones", stones[i].name + ".json", ((TextAsset)(stones[i])).text);
+                LocalJson.SaveToJsonFile_persistentDataPath("MyStones", stones[i].name + ".json", ((TextAsset)(stones[i])).text);
             }
 
             for (int i = 0; i < units.Length; i++)
             {
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", units[i].name + ".json", ((TextAsset)(units[i])).text);
+                LocalJson.SaveToJsonFile_persistentDataPath("AccountCharacterInfos", units[i].name + ".json", ((TextAsset)(units[i])).text);
             }
         }
         else

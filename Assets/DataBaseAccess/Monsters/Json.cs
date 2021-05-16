@@ -54,7 +54,7 @@ namespace dataAccess
             {
                 DicAdd<string, MonsterOfPlayerInfo>.Add(Dic, _AccCharInfo.InstanceId, _AccCharInfo);            
                 string json = JsonConvert.SerializeObject(_AccCharInfo);
-                LocalJson.SaveInfoToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.InstanceId + ".json", json);
+                LocalJson.SaveToJsonFile_persistentDataPath("AccountCharacterInfos", _AccCharInfo.InstanceId + ".json", json);
                 returnValue = _AccCharInfo;
             }
             catch(Exception e)

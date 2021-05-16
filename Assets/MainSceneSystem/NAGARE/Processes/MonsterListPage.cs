@@ -62,7 +62,7 @@ public class MonsterListPage : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
     
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.37f, ModelShower._nearClipPlane);
+    readonly Vector3 screenPos = new Vector3(0.7f, 0.37f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)

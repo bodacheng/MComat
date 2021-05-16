@@ -39,7 +39,7 @@ namespace dataAccess
         public static void OverrideAccountOnLocalFile()
         {
             string json = JsonConvert.SerializeObject(_AccInfo);
-            LocalJson.SaveInfoToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);
+            LocalJson.SaveToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);
         }
     }
 }

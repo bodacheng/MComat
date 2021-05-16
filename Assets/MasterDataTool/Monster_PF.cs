@@ -4,7 +4,7 @@ using Json;
 using Newtonsoft.Json;
 using System.Linq;
 
-public partial class LocalMasterDataTool : MonoBehaviour
+public partial class MasterDataTool : MonoBehaviour
 {
     public void OutputMonstersCatalog()
     {
@@ -29,7 +29,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
         }
         pFSKDefine.Catalog = items.ToArray();
         string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "MonsterDefinationsJson.json", json);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterDefinationsJson.json", json);
     }
 
     public void OutputMonsterStore()
@@ -60,7 +60,7 @@ public partial class LocalMasterDataTool : MonoBehaviour
 
         string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
         json = "[" + json + "]";
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "MonsterStoresDefinationsJson.json", json);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterStoresDefinationsJson.json", json);
     }
 
     public void OutputCloudScriptPart_GetAllMonsters()
@@ -88,6 +88,6 @@ public partial class LocalMasterDataTool : MonoBehaviour
         "var playerStatResult = server.GrantItemsToUsers(request);" +
         "};";
 
-        LocalJson.SaveInfoToJsonFile_persistentDataPath("PlayFab", "GetAllMonstersCloudScriptPart.text", text);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "GetAllMonstersCloudScriptPart.text", text);
     }
 }
