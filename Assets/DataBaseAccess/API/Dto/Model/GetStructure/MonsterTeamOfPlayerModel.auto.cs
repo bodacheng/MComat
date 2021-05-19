@@ -9,47 +9,37 @@ namespace Api.Dto.Model
     /// バージョン：1.00 2019/07/02
     /// </summary>
     [Serializable]
-    public class MonsterTeamOfPlayerModel
+    public class TeamPos
     {
-        /// <summary>
-        /// プレーヤ所有出戦チームID
-        /// </summary>
-        public string monsterTeamOfPlayerId { get; set; }
-
-        /// <summary>
-        /// チームタイプ
-        /// </summary>
-        public string teamType { get; set; }
-
         /// <summary>
         /// プレーヤ所有モンスターID(前)
         /// </summary>
-        public string fMonsterOfPlayerId { get; set; }
+        public string f { get; set; }
 
         /// <summary>
         /// プレーヤ所有モンスターID(後)
         /// </summary>
-        public string bMonsterOfPlayerId { get; set; }
+        public string b { get; set; }
 
         /// <summary>
         /// プレーヤ所有モンスターID(左)
         /// </summary>
-        public string lMonsterOfPlayerId { get; set; }
+        public string l { get; set; }
 
         /// <summary>
         /// プレーヤ所有モンスターID(右)
         /// </summary>
-        public string rMonsterOfPlayerId { get; set; }
+        public string r { get; set; }
 
         public PosKeySet ToPosKeySet()
         {
             PosKeySet PosKeySet = new PosKeySet();
             List<PosNumWithLocalKey> posNumWithLocalKeys = new List<PosNumWithLocalKey>
             {
-                new PosNumWithLocalKey(0, bMonsterOfPlayerId),
-                new PosNumWithLocalKey(1, lMonsterOfPlayerId),
-                new PosNumWithLocalKey(2, rMonsterOfPlayerId),
-                new PosNumWithLocalKey(3, fMonsterOfPlayerId)
+                new PosNumWithLocalKey(0, b),
+                new PosNumWithLocalKey(1, l),
+                new PosNumWithLocalKey(2, r),
+                new PosNumWithLocalKey(3, f)
             };
             PosKeySet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray();
             return PosKeySet;

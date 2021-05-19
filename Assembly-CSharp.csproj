@@ -231,7 +231,6 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\AbstractForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\CertificationForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\GetRankInfoForm.auto.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SetMonsterTeamOfPlayerForm.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneLevelUpForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Form\SkillStoneMergeForm.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\Common\AbstractModel.cs" />
@@ -243,12 +242,12 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MailOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MemberOfTeam.cs" />
-    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterOfPlayerInfo.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\OneTeam.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\RankOpponentsModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneGotchaInfoModel.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneOfPlayerInfo.auto.cs" />
+    <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\TeamPos.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneLevelUpModel.cs" />
     <Compile Include="Assets\DataBaseAccess\Account\AccountSet.cs" />
     <Compile Include="Assets\DataBaseAccess\Account\AccountSet_localTest.cs" />

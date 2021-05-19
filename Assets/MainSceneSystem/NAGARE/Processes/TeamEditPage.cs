@@ -37,7 +37,6 @@ public class TeamEditPage : MainSceneProcess
                     () => mainProcessRunner.RunAsQueued(EnterProcess()),
                     () => { return; }
                 );
-
                 break;
             case TeamSetGameMode.story:
                 TeamSet.LoadTeamSet(TeamSetGameMode.story, Team3V3LoadFinished);
@@ -65,7 +64,7 @@ public class TeamEditPage : MainSceneProcess
     {
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-        mainProcessRunner.RunAsQueued(TeamSet.SaveTeamSet(TeamSet.targetTeamMode));// 退出队伍编辑画面即保存
+        TeamSet.SaveTeamSet(TeamSet.targetTeamMode);
     }
     
     readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);

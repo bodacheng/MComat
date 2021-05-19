@@ -8,28 +8,28 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static MonsterTeamOfPlayerModel LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
+        public static TeamPos LoadMyTeamSetInfoViaJsonFile(string jsonFilename)
         {
             string wholepath = Application.persistentDataPath + "/" + jsonFilename;
-            MonsterTeamOfPlayerModel TeamSet;
+            TeamPos TeamSet;
             if (File.Exists(wholepath))
             {
                 try
                 {
                     string dataAsJson = File.ReadAllText(wholepath);
-                    TeamSet = JsonConvert.DeserializeObject<MonsterTeamOfPlayerModel>(dataAsJson);
+                    TeamSet = JsonConvert.DeserializeObject<TeamPos>(dataAsJson);
                 }
                 catch (Exception e)
                 {
                     Debug.Log("读取阵容配置文件："+jsonFilename+"发生异常"+ e);
-                    TeamSet = new MonsterTeamOfPlayerModel();
+                    TeamSet = new TeamPos();
                 }
                 return TeamSet;
             }
             else
             {
                 Debug.Log("读取阵容配置文件："+jsonFilename+"没有找到");
-                return new MonsterTeamOfPlayerModel();
+                return new TeamPos();
             }
         }
     }

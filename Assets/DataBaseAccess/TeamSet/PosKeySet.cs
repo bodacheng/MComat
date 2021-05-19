@@ -15,25 +15,24 @@ public class PosKeySet
         PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null), new PosNumWithLocalKey(3, null) };
     }
     
-    public MonsterTeamOfPlayerModel ToMonsterTeamOfPlayerModel(string teamType)
+    public TeamPos ToTeamPos()
     {
-        MonsterTeamOfPlayerModel model = new MonsterTeamOfPlayerModel();
-        model.teamType = teamType;
+        TeamPos model = new TeamPos();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             switch (PosNumsWithLocalKeys[i].posNum)
             {
                 case 0:
-                    model.bMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.b = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
                 case 1:
-                    model.lMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.l = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
                 case 2:
-                    model.rMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.r = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
                 case 3:
-                    model.fMonsterOfPlayerId = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.f = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
             }
         }

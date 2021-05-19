@@ -6,7 +6,7 @@ namespace Api.Dto.Model
     {
         readonly string playerID;
         readonly List<MemberOfTeam> membersInfo;
-        readonly MonsterTeamOfPlayerModel teamSetInfo;
+        readonly TeamPos teamSetInfo;
         
         public LocalFight ToFightInfo()
         {

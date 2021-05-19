@@ -74,14 +74,14 @@ namespace dataAccess
                             switch (teamSetGameMode.ToString())
                             {
                                 case "00":
-                                    Default = JsonConvert.DeserializeObject<MonsterTeamOfPlayerModel>(userDataRecord.Value).ToPosKeySet();
+                                    Default = JsonConvert.DeserializeObject<TeamPos>(userDataRecord.Value).ToPosKeySet();
                                     break;
                                 case "11":
                                     break;
                                 case "12":
                                     break;
                                 case "13":
-                                    Arena3V3 = JsonConvert.DeserializeObject<MonsterTeamOfPlayerModel>(userDataRecord.Value).ToPosKeySet();
+                                    Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userDataRecord.Value).ToPosKeySet();
                                     break;
                                 case "14":
                                     break;
