@@ -8,18 +8,23 @@ using Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using dataAccess;
+using Api.Dto.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 // 站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
 namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static void SaveTeamSet(TeamSetGameMode teamSetGameMode)
+        public static void SaveTeamSet(TeamSetGameMode Mode)
         {
             TeamPos form = new TeamPos();
-            switch (teamSetGameMode)
+            switch (Mode)
             {
                 case TeamSetGameMode.story:
                     string B = Default.GetMonsterOfPlayerIdOnPos(0);
@@ -27,10 +32,10 @@ namespace dataAccess
                     string F = Default.GetMonsterOfPlayerIdOnPos(2);
                     string R = Default.GetMonsterOfPlayerIdOnPos(3);
                     
-                    form.b = (B != null && B.Length == 20) ? B : null;
-                    form.l = (L != null && L.Length == 20) ? L : null;
-                    form.f = (F != null && F.Length == 20) ? F : null;
-                    form.r = (R != null && R.Length == 20) ? R : null;
+                    form.b = (B != null) ? B : null;
+                    form.l = (L != null) ? L : null;
+                    form.f = (F != null) ? F : null;
+                    form.r = (R != null) ? R : null;
                     break;
                 case TeamSetGameMode.arena3V3:
                     form.b = Arena3V3.GetMonsterOfPlayerIdOnPos(0);
@@ -43,8 +48,8 @@ namespace dataAccess
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    TeamPos value = OverrideTeamSetInfoOnJsonFile(teamSetGameMode);
-                    switch (teamSetGameMode)
+                    TeamPos value = OverrideTeamSetInfoOnJsonFile(Mode);
+                    switch (Mode)
                     {
                         case TeamSetGameMode.story:
                             Default = value.ToPosKeySet();
@@ -57,60 +62,31 @@ namespace dataAccess
                 case PlayerInfoRefMode.formalVersion:
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
+                    string targetModeCode = "";
+                    switch (Mode)
+                    {
+                        case TeamSetGameMode.story:
+                            targetModeCode = "00";
+                            break;
+                        case TeamSetGameMode.arena3V3:
+                            targetModeCode = "11";
+                            break;
+                    }
                     PlayFabClientAPI.UpdateUserData(
                         new UpdateUserDataRequest()
                         {
                             Data = new Dictionary<string, string>()
                             {
-                                {"00", JsonConvert.SerializeObject(form) }
+                                {targetModeCode, JsonConvert.SerializeObject(form) }
                             }
                         },
-                        result => Debug.Log("Successfully updated user data"),
+                        result => Debug.Log("Successfully updated Team Data of :"+ Mode),
                         errorCallback => {
                             Debug.Log(errorCallback.Error);
                         }
                     );
                     break;
             }
-        }    
-        
-        public static TeamPos OverrideTeamSetInfoOnJsonFile(TeamSetGameMode monsterTeamOfPlayerId)
-        {
-            string json;
-            TeamPos model = null;
-            switch (monsterTeamOfPlayerId)
-            {
-                case TeamSetGameMode.story:
-                    model = Default.ToTeamPos();
-                    json = JsonConvert.SerializeObject(model);
-                    LocalJson.SaveToJsonFile_persistentDataPath(null, "TeamSet.json", json);
-                break;
-                case TeamSetGameMode.arena3V3:
-                    model = Arena3V3.ToTeamPos();
-                    json = JsonConvert.SerializeObject(model);
-                    LocalJson.SaveToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", json);
-                break;
-            }
-            return model;
         }
     }
 }
-
-//switch (teamSetGameMode.ToString())
-//{
-//    case "00":
-//        Default = JsonConvert.DeserializeObject<TeamPos>(userDataRecord.Value).ToPosKeySet();
-//        break;
-//    case "11":
-//        break;
-//    case "12":
-//        break;
-//    case "13":
-//        Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userDataRecord.Value).ToPosKeySet();
-//        break;
-//    case "14":
-//        break;
-//    default:
-//        Debug.Log("队伍阵型信息不明");
-//        break;
-//}

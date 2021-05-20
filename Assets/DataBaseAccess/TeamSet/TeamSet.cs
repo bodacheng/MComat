@@ -36,25 +36,18 @@ namespace dataAccess
         }
         #endregion
         
-        // 技能石升级
-        public static void LoadTeamSet(TeamSetGameMode teamSetGameMode, Action<int> finished)
+        public static void LoadTeamSet(TeamSetGameMode Mode, Action<int> finished)
         {
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    switch (teamSetGameMode.ToString())
+                    switch (Mode)
                     {
-                        case "00":
+                        case TeamSetGameMode.story:
                             Default = LoadMyTeamSetInfoViaJsonFile("TeamSet.json").ToPosKeySet();
                             break;
-                        case "11":
-                            break;
-                        case "12":
-                            break;
-                        case "13":
+                        case TeamSetGameMode.arena3V3:
                             Arena3V3 = LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json").ToPosKeySet();
-                            break;
-                        case "14":
                             break;
                         default:
                              Debug.Log("队伍阵型信息不明");
@@ -63,27 +56,32 @@ namespace dataAccess
                     finished.Invoke(1);
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    PlayFabClientAPI.GetUserData
-                    (
+                    string targetModeCode = "";
+                    switch (Mode)
+                    {
+                        case TeamSetGameMode.story:
+                            targetModeCode = "00";
+                            break;
+                        case TeamSetGameMode.arena3V3:
+                            targetModeCode = "11";
+                            break;
+                    }
+                    Debug.Log(Mode);
+                    PlayFabClientAPI.GetUserData(
                         new GetUserDataRequest() {
-                            PlayFabId = AccountSet._AccInfo.PlayerName,
-                            Keys = new List<string>() { teamSetGameMode.ToString() }
+                            PlayFabId = AccountSet._AccInfo.playerID,
+                            Keys = new List<string>() { targetModeCode }
                         },
                         (GetUserDataResult obj) => {
-                            UserDataRecord userDataRecord = obj.Data[teamSetGameMode.ToString()];
-                            switch (teamSetGameMode.ToString())
+                            Debug.Log(obj.Data[targetModeCode]);
+                            UserDataRecord userData = obj.Data[targetModeCode];
+                            switch (Mode)
                             {
-                                case "00":
-                                    Default = JsonConvert.DeserializeObject<TeamPos>(userDataRecord.Value).ToPosKeySet();
+                                case TeamSetGameMode.story:
+                                    Default = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
                                     break;
-                                case "11":
-                                    break;
-                                case "12":
-                                    break;
-                                case "13":
-                                    Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userDataRecord.Value).ToPosKeySet();
-                                    break;
-                                case "14":
+                                case TeamSetGameMode.arena3V3:
+                                    Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
                                     break;
                                 default:
                                     Debug.Log("队伍阵型信息不明");
@@ -92,6 +90,7 @@ namespace dataAccess
                             finished.Invoke(1);
                         },
                         errorCallback => {
+                            Debug.Log(errorCallback);
                             finished.Invoke(-1);
                         }
                     );

@@ -7,7 +7,6 @@ using UnityEngine;
 [System.Serializable]
 public class PosKeySet
 {
-    public string recordId;
     public PosNumWithLocalKey[] PosNumsWithLocalKeys = {};
     
     public PosKeySet()
