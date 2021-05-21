@@ -11,7 +11,7 @@ public class PosKeySet
     
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null), new PosNumWithLocalKey(3, null) };
+        PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
     }
     
     public TeamPos ToTeamPos()
@@ -21,16 +21,13 @@ public class PosKeySet
         {
             switch (PosNumsWithLocalKeys[i].posNum)
             {
-                case 0:
-                    model.b = PosNumsWithLocalKeys[i].monsterOfPlayerId;
-                break;
                 case 1:
                     model.l = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
                 case 2:
                     model.r = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
-                case 3:
+                case 0:
                     model.f = PosNumsWithLocalKeys[i].monsterOfPlayerId;
                 break;
             }

@@ -90,7 +90,7 @@ public class TeamEditManager : MonoBehaviour
             yield return ChangeIconOnPos(returns[i].posNum);
         }
     }
-        
+
     // 纯渲染函数
     IEnumerator ChangeIconOnPos(int posNum)
     {

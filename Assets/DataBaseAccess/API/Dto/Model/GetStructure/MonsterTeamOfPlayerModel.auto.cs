@@ -17,11 +17,6 @@ namespace Api.Dto.Model
         public string f { get; set; }
 
         /// <summary>
-        /// プレーヤ所有モンスターID(後)
-        /// </summary>
-        public string b { get; set; }
-
-        /// <summary>
         /// プレーヤ所有モンスターID(左)
         /// </summary>
         public string l { get; set; }
@@ -36,10 +31,9 @@ namespace Api.Dto.Model
             PosKeySet PosKeySet = new PosKeySet();
             List<PosNumWithLocalKey> posNumWithLocalKeys = new List<PosNumWithLocalKey>
             {
-                new PosNumWithLocalKey(0, b),
                 new PosNumWithLocalKey(1, l),
                 new PosNumWithLocalKey(2, r),
-                new PosNumWithLocalKey(3, f)
+                new PosNumWithLocalKey(0, f)
             };
             PosKeySet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray();
             return PosKeySet;

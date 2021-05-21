@@ -8,13 +8,6 @@ using Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
-using dataAccess;
-using Api.Dto.Model;
-using System.Collections.Generic;
-using System.Linq;
 
 // 站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
 namespace dataAccess
@@ -27,21 +20,18 @@ namespace dataAccess
             switch (Mode)
             {
                 case TeamSetGameMode.story:
-                    string B = Default.GetMonsterOfPlayerIdOnPos(0);
+                    string F = Default.GetMonsterOfPlayerIdOnPos(0);
                     string L = Default.GetMonsterOfPlayerIdOnPos(1);
-                    string F = Default.GetMonsterOfPlayerIdOnPos(2);
-                    string R = Default.GetMonsterOfPlayerIdOnPos(3);
+                    string R = Default.GetMonsterOfPlayerIdOnPos(2);
                     
-                    form.b = (B != null) ? B : null;
                     form.l = (L != null) ? L : null;
                     form.f = (F != null) ? F : null;
                     form.r = (R != null) ? R : null;
                     break;
                 case TeamSetGameMode.arena3V3:
-                    form.b = Arena3V3.GetMonsterOfPlayerIdOnPos(0);
+                    form.f = Arena3V3.GetMonsterOfPlayerIdOnPos(0);
                     form.l = Arena3V3.GetMonsterOfPlayerIdOnPos(1);
-                    form.f = Arena3V3.GetMonsterOfPlayerIdOnPos(2);
-                    form.r = Arena3V3.GetMonsterOfPlayerIdOnPos(3);
+                    form.r = Arena3V3.GetMonsterOfPlayerIdOnPos(2);
                     break;
             }
 

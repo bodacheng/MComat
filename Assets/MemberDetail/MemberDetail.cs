@@ -71,12 +71,12 @@ namespace mainMenu
             }
         }
         
-        void AddHeroIconFeatureToMonsterBox(string CharLocalId, Button targetButton)
+        void AddHeroIconFeatureToMonsterBox(string instanceId, Button targetButton)
         {
             IEnumerator MonsterIconButton()
             {
-                MonsterBox.target.Select(CharLocalId);
-                yield return target.SetMemberDetailFocusingChar(CharLocalId);//确立focusing角色
+                MonsterBox.target.Select(instanceId);
+                yield return target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
                 target.RefreshMemberDetailPageByFocusingChar();
             }
             void Trigger()
