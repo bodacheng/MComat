@@ -73,7 +73,7 @@ namespace dataAccess
             return (max + 1).ToString();
         }
         
-        public static IEnumerator LocalSaveDataGetAllStones()
+        public static void LocalSaveDataGetAllStones()
         {
             //LoadAMySkillstones();
             //LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
@@ -89,7 +89,7 @@ namespace dataAccess
                     EXP = 0,
                     Inherent = "false"
                 };
-                yield return Add(stoneInfo);
+                Add(stoneInfo);
             }
             PurchaseAllStones(SkillConfigTable.SkillConfigRefDic.Values.ToList(), 0);
         }

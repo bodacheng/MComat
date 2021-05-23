@@ -106,6 +106,22 @@ handlers.RandomRemove25Items = function (args, context) {
     return { messageValue: Result};
 }
 
+handlers.SkillEdit = function (args, context) {
+    let log = [];
+    for (let i = 0; i < args.inputValue.length; i++) {
+
+        var item = args.inputValue[i];
+        var request = {
+            "PlayFabId": currentPlayerId,
+            "ItemInstanceId": item.ItemInstanceId,
+            "Data": item.Data
+        };
+        var Result = server.UpdateUserInventoryItemCustomData(request);        
+        log.push(Result);
+    }
+    return { messageValue: log };
+}
+
 handlers.Gacha = function (args, context) {
     var request = {
         "CatalogVersion": args.CatalogVersion,

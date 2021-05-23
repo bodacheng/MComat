@@ -33,7 +33,10 @@ public static class PlayFabRead
                             StoneOfPlayerInfo skillStoneOfPlayerInfo = new StoneOfPlayerInfo
                             {
                                 InstanceId = item.ItemInstanceId,
-                                skillId = item.ItemId
+                                skillId = item.ItemId,
+                                inUsingMonsterOfPlayerId = (item.CustomData != null && item.CustomData.ContainsKey("monsterid")) ? item.CustomData["monsterid"] : null,
+                                inUsingSkillSlot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
+
                             };
                             MySkillStones.Read(skillStoneOfPlayerInfo);
                             break;

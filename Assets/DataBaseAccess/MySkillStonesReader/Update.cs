@@ -1,24 +1,37 @@
 ﻿using System.Collections;
 using UnityEngine;
+using dataAccess;
+using Api.Dto.Model;
+using System.Collections.Generic;
+using System;
 
 namespace dataAccess
 {
     public partial class MySkillStones
     {
         // 更新存档数据
-        public static IEnumerator Update(string stoneOfPlayerID)
+        public static void Update(IDictionary<string, Tuple<string, string>> ToEditStones, Action success, Action fail)
         {
-            if (!Dic.ContainsKey(stoneOfPlayerID) || Dic[stoneOfPlayerID] == null)
-            {
-                Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + stoneOfPlayerID);
-                yield break;
-            }
             switch (AccountSet.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
-                    Update_Json(Dic[stoneOfPlayerID]);
+                    foreach (KeyValuePair<string, Tuple<string, string>> kv in ToEditStones)
+                    {
+                        if (!Dic.ContainsKey(kv.Key) || Dic[kv.Key] == null)
+                        {
+                            Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + kv.Key);
+                            fail.Invoke();
+                            return;
+                        }
+                        StoneOfPlayerInfo ofPlayerInfo = Dic[kv.Key].Clone();
+                        ofPlayerInfo.inUsingMonsterOfPlayerId = kv.Value.Item1;
+                        ofPlayerInfo.inUsingSkillSlot = kv.Value.Item2;
+                        Update_Json(ofPlayerInfo);
+                    }
+                    success.Invoke();
                 break;
                 case PlayerInfoRefMode.remoteTestPlayer:
+                    CloudScript.UpdateSkillEdit(ToEditStones, success, fail);
                 break;
                 case PlayerInfoRefMode.formalVersion:
                 break;

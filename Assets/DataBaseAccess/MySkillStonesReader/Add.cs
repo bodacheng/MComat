@@ -8,11 +8,10 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static IEnumerator Add(StoneOfPlayerInfo one)
+        public static void Add(StoneOfPlayerInfo one)
         {
             DicAdd<string, StoneOfPlayerInfo>.Add(Dic, one.InstanceId, one);
             GenerateStoneModelByAccID(one.InstanceId);
-            yield return Update(one.InstanceId);
         }
 
         /// <summary>

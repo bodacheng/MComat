@@ -138,7 +138,7 @@ public class GachaManager : MonoBehaviour
             inUsingMonsterOfPlayerId = "-1",
             inUsingSkillSlot = null
         };
-        yield return MySkillStones.Add(stoneInfo);
+        MySkillStones.Add(stoneInfo);
         yield return stoneInfo;
     }
 }

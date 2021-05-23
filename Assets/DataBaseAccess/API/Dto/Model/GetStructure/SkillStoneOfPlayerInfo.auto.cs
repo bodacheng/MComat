@@ -75,5 +75,18 @@ namespace Api.Dto.Model {
         {
             return LevelExpConfig.GetCurrentInfo(EXP).currentLevel;
         }
+
+        public StoneOfPlayerInfo Clone()
+        {
+            StoneOfPlayerInfo info = new StoneOfPlayerInfo()
+            {
+                InstanceId = this.InstanceId,
+                skillId = this.skillId,
+                EXP = this.EXP,
+                BreakThrough = this.BreakThrough,
+                Inherent = this.Inherent
+            };
+            return info;
+        }
     }
 }

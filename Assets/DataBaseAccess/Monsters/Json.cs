@@ -90,7 +90,7 @@ namespace dataAccess
                         inUsingMonsterOfPlayerId = i.ToString(),
                         inUsingSkillSlot = "1"
                     };
-                    yield return MySkillStones.Add(stoneInfo);
+                    MySkillStones.Add(stoneInfo);
                 }
                 Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
                 yield return AddToAccount(_Char);

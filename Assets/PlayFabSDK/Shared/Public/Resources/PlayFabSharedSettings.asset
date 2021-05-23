@@ -16,9 +16,6 @@ MonoBehaviour:
   DeveloperSecretKey: 6MUEIU8MKT9XZGCJAC4HWQ331C163AFCKPNSWNBMETDUTXIUMQ
   ProductionEnvironmentUrl: 
   RequestType: 2
-  AdvertisingIdType: 
-  AdvertisingIdValue: 
-  DisableAdvertising: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000

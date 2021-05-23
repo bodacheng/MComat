@@ -38,7 +38,7 @@ namespace mainMenu
                         _slot._DragAndDropCell.RemoveToTemp();
                     }
                 }
-                yield return target.UpdateMyStonesBaseOnSlotsExecution(info);
+                yield return target.UpdateMyStonesBaseOnSlots(info);
                 SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 NineSlotsStatusRefresh();
             }
