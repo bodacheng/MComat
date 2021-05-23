@@ -9,22 +9,15 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public IEnumerator UpdateMyStonesBaseOnSlots(MonsterOfPlayerInfo accCharInfo)
+        public void UpdateStonesBaseOnSlots(MonsterOfPlayerInfo info)
         {
             NineAndTwo.SkillEditError valR = target.CheckEditBasedOnCurrent();
             if (valR != NineAndTwo.SkillEditError.Perfect)
             {
-                target.ValiationWarn(valR, accCharInfo.InstanceId);
-                yield break;
+                target.ValiationWarn(valR, info.InstanceId);
+                return;
             }
-            SkillEditExecution(accCharInfo);
-        }
-
-        void SkillEditExecution(MonsterOfPlayerInfo accCharInfo)
-        {
-            // 先把所有这个角色装备中的旧石头卸载。事实上，如果某个石头的装备情况没发生变化，那么就产生了一些冗余功。但我感觉不如就这样，因为客户端是可以做手脚的，
-            // 如果你用客户端判断是不是有石头在九宫格内位置没发生变化，来决定是否需要通信，那万一被人做了手脚。。
-            List<StoneOfPlayerInfo> equiping = MySkillStones.GetEquipingStones(accCharInfo.InstanceId);
+            List<StoneOfPlayerInfo> equiping = MySkillStones.GetEquipingStones(info.InstanceId);
             // slot stoneid
             IDictionary<string, string> beforeDic = new Dictionary<string, string>();
             for (int i = 0; i < equiping.Count; i++)
@@ -54,7 +47,7 @@ namespace mainMenu
                 if (allSlot[i]._DragAndDropCell.GetItem() != null)
                 {
                     if (!afterDic.ContainsKey((i + 1).ToString()))
-                        afterDic.Add((i + 1).ToString(), allSlot[i]._DragAndDropCell.GetItem().SkillStoneOfPlayerId);
+                        afterDic.Add((i + 1).ToString(), allSlot[i]._DragAndDropCell.GetItem().equipingId);
                     else
                         Debug.Log("严重逻辑错误。怎么办待定");
                 }
@@ -79,22 +72,19 @@ namespace mainMenu
 
                     if (afterDic[i.ToString()] != null)
                     {
-                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(accCharInfo.InstanceId, i.ToString()));
+                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(info.InstanceId, i.ToString()));
                     }
                 }
             }
 
-            foreach (KeyValuePair<string, Tuple<string, string>> kv in ToEditStones)
+            void sucess(IDictionary<string, Tuple<string, string>> ee)
             {
-                Debug.Log(kv.Key + ":" + kv.Value.Item1 + " : " + kv.Value.Item2);
-            }
-
-            IEnumerator successtemp(IDictionary<string, Tuple<string, string>> ee)
-            {
-                RefreshLocalStoneParams(ee);
-                yield return ReadANineAndTwo(accCharInfo);
+                MySkillStones.RefreshLocalStoneParams(ee);
+                ReadANineAndTwo(info);
+                SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 SeletedRender(null);
-                yield return MemberDetail.target.SkillEditConfirmAnimation();
+                MemberDetail.target.SkillEditConfirmAnimation();
+
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
                     step = ProcessesRunner.Main.currentProcess.Step,
@@ -103,15 +93,9 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
 
-            void sucess()
+            void error()
             {
-                mainProcessRunner.RunAsQueued(successtemp(ToEditStones));
-            }
-
-
-            IEnumerator failtemp()
-            {
-                yield return ReadANineAndTwo(accCharInfo);
+                ReadANineAndTwo(info);
                 SeletedRender(null);
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
@@ -121,28 +105,10 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
 
-            void error()
-            {
-                mainProcessRunner.RunAsQueued(failtemp());
-            }
-
-            MySkillStones.Update(ToEditStones, sucess, error);
+            MySkillStones.Update(ToEditStones, () => sucess(ToEditStones), error);
         }
 
-        void RefreshLocalStoneParams(IDictionary<string, Tuple<string, string>> ToEditStones)
-        {
-            foreach (KeyValuePair<string, Tuple<string, string>> kv in ToEditStones)
-            {
-                if (!MySkillStones.Dic.ContainsKey(kv.Key) || MySkillStones.Dic[kv.Key] == null)
-                {
-                    Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + kv.Key);
-                    return;
-                }
-                StoneOfPlayerInfo ofPlayerInfo = MySkillStones.Dic[kv.Key];
-                ofPlayerInfo.inUsingMonsterOfPlayerId = kv.Value.Item1;
-                ofPlayerInfo.inUsingSkillSlot = kv.Value.Item2;
-            }
-        }
+
 
         // 下面这个貌似还是有地方用。。。先别删
         IEnumerator RemoveStone(string stoneID)

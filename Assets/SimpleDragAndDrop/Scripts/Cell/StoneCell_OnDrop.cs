@@ -44,7 +44,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         }
                     break;
                     case CellPhase.SKLevelUpMSlot:
-                        if (item.SkillStoneOfPlayerId != SSLevelUpManager.target.GetTargetStoneID())
+                        if (item.equipingId != SSLevelUpManager.target.GetTargetStoneID())
                         {
                             Install(sourceCell, this);
                         }

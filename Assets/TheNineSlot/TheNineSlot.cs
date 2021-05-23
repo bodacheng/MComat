@@ -124,7 +124,7 @@ namespace mainMenu
                     SKStoneItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
                     if (_SkillStone != null && _SkillStone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshInfo(_SkillStone.SkillStoneOfPlayerId);
+                        _skillStoneDetail.RefreshInfo(_SkillStone.equipingId);
                         mainProcessRunner.RunAsQueued(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();
@@ -176,7 +176,7 @@ namespace mainMenu
                                 if (_stone != null && _stone._SkillConfig != null)
                                 {
                                     if (FightGlobalSetting._skillStoneHasExp)
-                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.SkillStoneOfPlayerId, true);
+                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.equipingId, true);
                                 }
                             }
                         }
@@ -193,16 +193,11 @@ namespace mainMenu
             };
         }
         
-        public IEnumerator StartUp()
+        public void StartUp()
         {
             NineSlotT.gameObject.SetActive(false);
-            yield return GetNineSlotReady();
-        }
-        
-        IEnumerator GetNineSlotReady()
-        {
             SeletedRender(null);
-            
+
             A1Slot = new SkillStoneSlot(1, A1DragAndDropCell);
             A2Slot = new SkillStoneSlot(2, A2DragAndDropCell);
             A3Slot = new SkillStoneSlot(3, A3DragAndDropCell);
@@ -212,7 +207,7 @@ namespace mainMenu
             C1Slot = new SkillStoneSlot(7, C1DragAndDropCell);
             C2Slot = new SkillStoneSlot(8, C2DragAndDropCell);
             C3Slot = new SkillStoneSlot(9, C3DragAndDropCell);
-            
+
             allSlot.Clear();
             allSlot.Add(A1Slot);
             allSlot.Add(A2Slot);
@@ -223,12 +218,12 @@ namespace mainMenu
             allSlot.Add(C1Slot);
             allSlot.Add(C2Slot);
             allSlot.Add(C3Slot);
-            
+
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 SlotButtonBeheviour(_slot);
             }
-            yield return ReadANineAndTwo(null);
+            ReadANineAndTwo(null);
         }
         
         // 当前技能编辑形成的各项参数更新

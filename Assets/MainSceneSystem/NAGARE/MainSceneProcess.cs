@@ -13,29 +13,6 @@ namespace mainMenu
         public ProcessesRunner SubProcessesRunner;
         public MissionWatcher missionWatcher;
 
-        public ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
-        public void AccLoadFinished(int value)
-        {
-            accLoadFinished.Value = value;
-        }
-
-        public ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
-        public void ItemsLoadFinished(int value)
-        {
-            itemsLoadFinished.Value = value;
-        }
-
-        public ReactiveProperty<int> team3v3LoadFinished = new ReactiveProperty<int>(0);
-        public void Team3V3LoadFinished(int value)
-        {
-            team3v3LoadFinished.Value = value;
-        }
-        public ReactiveProperty<int> teamArenaLoadFinished = new ReactiveProperty<int>(0);
-        public void TeamArenaLoadFinished(int value)
-        {
-            teamArenaLoadFinished.Value = value;
-        }
-
         public void EelementsInherit(PreScene _preparingScene)
         {
             _SelfFightManager = _preparingScene._SelfFightManager;

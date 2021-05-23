@@ -9,6 +9,18 @@ using Api.Dto.Model;
 
 public class FrontPage : MainSceneProcess
 {
+    ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
+    void AccLoadFinished(int value)
+    {
+        accLoadFinished.Value = value;
+    }
+
+    ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
+    void ItemsLoadFinished(int value)
+    {
+        itemsLoadFinished.Value = value;
+    }
+
     public FrontPage()
     {
         Step = MainSceneStep.FrontPage;
@@ -63,6 +75,9 @@ public class FrontPage : MainSceneProcess
     public override void ProcessEnd()
     {
         missionWatcher.DisposeAll();
+        AccLoadFinished(0);
+        ItemsLoadFinished(0);
+
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         UpperInfoBar.target.T.gameObject.SetActive(false);

@@ -103,30 +103,25 @@ namespace mainMenu
         }
         
         // Show Character icon using this SkillStone
-        public IEnumerator ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
+        public void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
         {
-            if (Item == null || Item.SkillStoneOfPlayerId == null)
+            if (Item == null || Item.equipingId == null)
             {
                 targetIcon.gameObject.SetActive(false);
-                yield break;
+                return;
             }
-            StoneOfPlayerInfo SSOfPlayerInfo = MySkillStones.Get(Item.SkillStoneOfPlayerId);
-            if (SSOfPlayerInfo == null)
+            StoneOfPlayerInfo SSInfo = MySkillStones.Get(Item.equipingId);
+            if (SSInfo == null || SSInfo.inUsingMonsterOfPlayerId == null)
             {
-                Debug.Log("逻辑错误. SkillStoneOfPlayerId:"+ Item.SkillStoneOfPlayerId);
-                yield break;
+                targetIcon.gameObject.SetActive(false);
+                return;
             }
             
-            if (SSOfPlayerInfo.inUsingMonsterOfPlayerId == null)
-            {
-                targetIcon.gameObject.SetActive(false);
-                yield break;
-            }
-            MonsterOfPlayerInfo _one = MyMonsters.Get(SSOfPlayerInfo.inUsingMonsterOfPlayerId);
+            MonsterOfPlayerInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
                 targetIcon.gameObject.SetActive(false);
-                yield break;
+                return;
             }
             targetIcon.gameObject.SetActive(true);
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);

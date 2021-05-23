@@ -7,6 +7,17 @@ using UniRx;
 
 public class TeamEditPage : MainSceneProcess
 {
+    ReactiveProperty<int> team3v3LoadFinished = new ReactiveProperty<int>(0);
+    void Team3V3LoadFinished(int value)
+    {
+        team3v3LoadFinished.Value = value;
+    }
+    ReactiveProperty<int> teamArenaLoadFinished = new ReactiveProperty<int>(0);
+    void TeamArenaLoadFinished(int value)
+    {
+        teamArenaLoadFinished.Value = value;
+    }
+
     public IEnumerator EnterProcess()
     {
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
@@ -63,6 +74,9 @@ public class TeamEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        missionWatcher.DisposeAll();
+        Team3V3LoadFinished(0);
+        TeamArenaLoadFinished(0);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         TeamSet.SaveTeamSet(TeamSet.targetTeamMode);

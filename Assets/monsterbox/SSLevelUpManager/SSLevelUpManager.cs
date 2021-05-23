@@ -124,9 +124,9 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (_stone != null && _stone._SkillConfig != null)
             {
                 // 如果点击的不是升级对象技能石
-                if (_stone.SkillStoneOfPlayerId != stoneOfPlayerId)
+                if (_stone.equipingId != stoneOfPlayerId)
                 {
-                    _MSkillStoneDetail.RefreshInfo(_stone.SkillStoneOfPlayerId);
+                    _MSkillStoneDetail.RefreshInfo(_stone.equipingId);
                 }
             }
             else{

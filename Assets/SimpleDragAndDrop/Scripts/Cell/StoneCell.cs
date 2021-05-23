@@ -80,16 +80,11 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             if (gameObject.activeSelf)
             {
-                ShowUsingCharIcon(myDadItem,_charIcon);
+                SkillStonesBox.target.ShowUsingChar(myDadItem, _charIcon);
             }
         }
     }
-    
-    void ShowUsingCharIcon(SKStoneItem dragAndDropItem, HeroIcon targetIcon)
-    {
-        _SingleThreadProcesser.RunFreely(SkillStonesBox.target.ShowUsingChar(dragAndDropItem, targetIcon).ToUniTask());
-    }
-    
+        
     /// <summary>
     /// Manualy add item into this cell
     /// </summary>

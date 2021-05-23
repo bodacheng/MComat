@@ -34,15 +34,15 @@ namespace mainMenu
             
             List<string> IDs = new List<string>();
             
-            string A1 = A1DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string A2 = A2DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string A3 = A3DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string B1 = B1DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string B2 = B2DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string B3 = B3DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string C1 = C1DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string C2 = C2DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
-            string C3 = C3DragAndDropCell.GetItem()?.SkillStoneOfPlayerId;
+            string A1 = A1DragAndDropCell.GetItem()?.equipingId;
+            string A2 = A2DragAndDropCell.GetItem()?.equipingId;
+            string A3 = A3DragAndDropCell.GetItem()?.equipingId;
+            string B1 = B1DragAndDropCell.GetItem()?.equipingId;
+            string B2 = B2DragAndDropCell.GetItem()?.equipingId;
+            string B3 = B3DragAndDropCell.GetItem()?.equipingId;
+            string C1 = C1DragAndDropCell.GetItem()?.equipingId;
+            string C2 = C2DragAndDropCell.GetItem()?.equipingId;
+            string C3 = C3DragAndDropCell.GetItem()?.equipingId;
             
             if (A1 != null)
                 IDs.Add(A1);

@@ -9,6 +9,12 @@ public class MonsterListPage : MainSceneProcess
 {
     public bool loadFinished;
 
+    ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
+    void ItemsLoadFinished(int value)
+    {
+        itemsLoadFinished.Value = value;
+    }
+
     public MonsterListPage()
     {
         Step = MainSceneStep.MonsterList;
@@ -56,13 +62,14 @@ public class MonsterListPage : MainSceneProcess
     public override void ProcessEnd()
     {
         missionWatcher.DisposeAll();
+        ItemsLoadFinished(0);
         MemberDetail.target.ClearHeroIconsFeatures();
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
         MemberDetail.target.MemberInfoT.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
     
-    readonly Vector3 screenPos = new Vector3(0.7f, 0.37f, ModelShower._nearClipPlane);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
         if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)

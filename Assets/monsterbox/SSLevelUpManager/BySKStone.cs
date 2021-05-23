@@ -15,7 +15,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             SKStoneItem Material = skillboxcell.GetItem();
             if (MaterialSlots[i].GetItem() == null && Material != null)
             {
-                if (Material.SkillStoneOfPlayerId != StoneInfoModel.InstanceId)
+                if (Material.equipingId != StoneInfoModel.InstanceId)
                 {
                     StoneCell.Install(skillboxcell, MaterialSlots[i]);
                     break;
@@ -51,11 +51,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         SKStoneItem item4 = cell4.GetItem();
         SKStoneItem item5 = cell5.GetItem();
         
-        int point1 = item1 != null ? StoneExpManager.ConvertSKStoneToExp(item1.SkillStoneOfPlayerId) : 0;
-        int point2 = item2 != null ? StoneExpManager.ConvertSKStoneToExp(item2.SkillStoneOfPlayerId) : 0;
-        int point3 = item3 != null ? StoneExpManager.ConvertSKStoneToExp(item3.SkillStoneOfPlayerId) : 0;
-        int point4 = item4 != null ? StoneExpManager.ConvertSKStoneToExp(item4.SkillStoneOfPlayerId) : 0;
-        int point5 = item5 != null ? StoneExpManager.ConvertSKStoneToExp(item5.SkillStoneOfPlayerId) : 0;
+        int point1 = item1 != null ? StoneExpManager.ConvertSKStoneToExp(item1.equipingId) : 0;
+        int point2 = item2 != null ? StoneExpManager.ConvertSKStoneToExp(item2.equipingId) : 0;
+        int point3 = item3 != null ? StoneExpManager.ConvertSKStoneToExp(item3.equipingId) : 0;
+        int point4 = item4 != null ? StoneExpManager.ConvertSKStoneToExp(item4.equipingId) : 0;
+        int point5 = item5 != null ? StoneExpManager.ConvertSKStoneToExp(item5.equipingId) : 0;
         
         int fullAmount = StoneExpManager.GoldToExp(point1) + StoneExpManager.GoldToExp(point2) + StoneExpManager.GoldToExp(point3) + StoneExpManager.GoldToExp(point4) + StoneExpManager.GoldToExp(point5);
         return fullAmount;

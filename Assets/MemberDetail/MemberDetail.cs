@@ -146,20 +146,20 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(CharModelAndSkillRenderProcess(MonsterOfPlayerInfo.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.RunAsQueued(CharModelRender(MonsterOfPlayerInfo.GetCharDataInfo(_focusing)));
         }
         
-        public IEnumerator CharModelAndSkillRenderProcess(CharDataInfo _CharDataInfo)
+        public IEnumerator CharModelRender(CharDataInfo info)
         {
-            if (_CharDataInfo == null)
+            if (info == null)
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 _SkillsPrintOut.focusingC = null;
                 IEnumerator readshowmodel = ModelShower.target.ShowMyModel(null);
                 yield return readshowmodel;
             }else{
-                _SkillsPrintOut.focusCharConfigID = _CharDataInfo.ResourceID;
-                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(_CharDataInfo.monsterOfPlayerId);
+                _SkillsPrintOut.focusCharConfigID = info.ResourceID;
+                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(info.monsterOfPlayerId);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)
@@ -171,7 +171,7 @@ namespace mainMenu
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
                 if (outsideDataLink == null)
                 {
-                    Debug.Log("角色模型构成貌似有问题，monsterid：" + _CharDataInfo.ResourceID);
+                    Debug.Log("角色模型构成貌似有问题，monsterid：" + info.ResourceID);
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
@@ -181,14 +181,11 @@ namespace mainMenu
         }
 
         // 纯表现系
-        public IEnumerator SkillEditConfirmAnimation()
+        public void SkillEditConfirmAnimation()
         {
-            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
             CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
             string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
             EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
-            yield return new WaitForSeconds(0.1f);
-            SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化

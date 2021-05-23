@@ -10,6 +10,12 @@ public class MonsterEditPage : MainSceneProcess
 {
     public static bool loadFinished;
 
+    ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
+    void ItemsLoadFinished(int value)
+    {
+        itemsLoadFinished.Value = value;
+    }
+
     public IEnumerator EnterProcess()
     {
         loadFinished = false;
@@ -27,9 +33,9 @@ public class MonsterEditPage : MainSceneProcess
         SkillStonesBox.target.CellsFeatureLoad(2);
         yield return SkillEditButtonFeature(MemberDetail.target._focusing);
         SkillStonesBox.target._skillStoneDetail.Clear();
-        
+
         // 没这行的话从技能石升级画面返回的话角色模型加载不出来
-        yield return MemberDetail.target.CharModelAndSkillRenderProcess(MonsterOfPlayerInfo.GetCharDataInfo(MemberDetail.target._focusing));
+        yield return MemberDetail.target.CharModelRender(MonsterOfPlayerInfo.GetCharDataInfo(MemberDetail.target._focusing));
         
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
@@ -53,6 +59,7 @@ public class MonsterEditPage : MainSceneProcess
     public override void ProcessEnter()
     {
         ItemLoader.LoadAll(ItemsLoadFinished);
+        
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 itemsLoadFinished
@@ -73,6 +80,7 @@ public class MonsterEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        ItemsLoadFinished(0);
         missionWatcher.DisposeAll();
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
@@ -101,14 +109,14 @@ public class MonsterEditPage : MainSceneProcess
             Debug.Log("到达了没道理到达的地方");
             yield break;
         }
-        yield return TheNineSlot.target.ReadANineAndTwo(_AccCharInfo);
+        TheNineSlot.target.ReadANineAndTwo(_AccCharInfo);
         CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.monsterId);
         SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
         SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            mainProcessRunner.RunAsQueued(TheNineSlot.target.UpdateMyStonesBaseOnSlots(_AccCharInfo));
+            TheNineSlot.target.UpdateStonesBaseOnSlots(_AccCharInfo);
         }
         void SkillUpdateValidation()
         {

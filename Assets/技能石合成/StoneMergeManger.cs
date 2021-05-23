@@ -102,11 +102,11 @@ public class StoneMergeManger : MonoBehaviour
         SKStoneItem item4 = cell4.GetItem();
         SKStoneItem item5 = cell5.GetItem();
         
-        skillStoneLevelUpForm.M1Stone = item1 != null ? item1.SkillStoneOfPlayerId : null;
-        skillStoneLevelUpForm.M2Stone = item2 != null ? item2.SkillStoneOfPlayerId : null;
-        skillStoneLevelUpForm.M3Stone = item3 != null ? item3.SkillStoneOfPlayerId : null;
-        skillStoneLevelUpForm.M4Stone = item4 != null ? item4.SkillStoneOfPlayerId : null;
-        skillStoneLevelUpForm.M5Stone = item5 != null ? item5.SkillStoneOfPlayerId : null;
+        skillStoneLevelUpForm.M1Stone = item1 != null ? item1.equipingId : null;
+        skillStoneLevelUpForm.M2Stone = item2 != null ? item2.equipingId : null;
+        skillStoneLevelUpForm.M3Stone = item3 != null ? item3.equipingId : null;
+        skillStoneLevelUpForm.M4Stone = item4 != null ? item4.equipingId : null;
+        skillStoneLevelUpForm.M5Stone = item5 != null ? item5.equipingId : null;
                 
         yield return Merge(skillStoneLevelUpForm,
              model =>

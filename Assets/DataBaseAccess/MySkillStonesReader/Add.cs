@@ -30,7 +30,7 @@ namespace dataAccess
             item.Inherent = StoneOfPlayerInfo.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[skillStoneOfPlayerId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
-            item.SkillStoneOfPlayerId = skillStoneOfPlayerId;
+            item.equipingId = skillStoneOfPlayerId;
             item.gameObject.transform.SetParent(SkillStonesBox._stonesTempContainer);
 
             DicAdd<string, SKStoneItem>.Add(RenderModelDic, skillStoneOfPlayerId, item);

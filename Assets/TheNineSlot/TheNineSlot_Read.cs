@@ -9,13 +9,14 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public IEnumerator ReadANineAndTwo(MonsterOfPlayerInfo _AccCharInfo)
+        public void ReadANineAndTwo(MonsterOfPlayerInfo _AccCharInfo)
         {
             ForceClearAll();
             
             if (_AccCharInfo == null)
             {
-                yield break;
+                Debug.Log("严重错误");
+                return;
             }
             List<StoneOfPlayerInfo> equipingstones = MySkillStones.GetEquipingStones(_AccCharInfo.InstanceId);
 
@@ -28,7 +29,10 @@ namespace mainMenu
             {
                 int usingPosInt = int.Parse(equipingstones[i].inUsingSkillSlot);
                 if (equipingstones[i].InstanceId != null)
-                    yield return allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipingstones[i].InstanceId, Color.white);
+                {
+                    allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipingstones[i].InstanceId, Color.white);
+                }
+
                 allSlot[usingPosInt - 1]._DragAndDropCell.UpdateMyItem();
                 allSlot[usingPosInt - 1]._DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
             }
@@ -39,7 +43,7 @@ namespace mainMenu
         // 撤销编辑
         public void ResetNineSlot()
         {
-            mainProcessRunner.RunAsQueued(target.ReadANineAndTwo(MemberDetail.target._focusing));
+            target.ReadANineAndTwo(MemberDetail.target._focusing);
         }
     }
 }

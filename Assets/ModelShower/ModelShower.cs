@@ -28,7 +28,6 @@ public class ModelShower : MonoBehaviour
     
     PinchZoom pinchZoom = new PinchZoom();
     GameObject showingChar;
-    string showingCharResourceId;
     
     void Awake()
     {
@@ -46,29 +45,19 @@ public class ModelShower : MonoBehaviour
     
     public IEnumerator ShowModel(string monsterID)
     {
-        if (showingCharResourceId == monsterID)
-        {
-            yield return showingChar;
-            yield break;
-        }
         if (showingChar != null)
         {
             showingChar.SetActive(false);
         }
-        showingCharResourceId = monsterID;
-        if (showingCharResourceId == null)
+        if (monsterID == null)
         {
             yield break;
         }
         
-        IEnumerator focusingOneModel = GeneralModelPool.GetModel(showingCharResourceId, true);
+        IEnumerator focusingOneModel = GeneralModelPool.GetModel(monsterID, true);
         yield return focusingOneModel;
         if (focusingOneModel.Current == null)
         {
-            if (showingChar != null)
-            {
-                showingChar.SetActive(false);
-            }
             Debug.Log("模型错误");
             yield break;
         }

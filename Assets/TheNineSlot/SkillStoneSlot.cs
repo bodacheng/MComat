@@ -25,12 +25,15 @@ public class SkillStoneSlot
         this._DragAndDropCell._SkillStoneSlot = this;
     }
 
-    public IEnumerator TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
+    public void TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
     {
-        StoneOfPlayerInfo SkillStoneOfPlayerInfoModel = MySkillStones.Get(stoneOfPlayerID);
         SKStoneItem stoneModel = MySkillStones.GetRenderModel(stoneOfPlayerID);
         if (stoneModel == null)
-            yield break;
+        {
+            Debug.Log("wrong...");
+            return;
+        }
+
         stoneModel.GetComponent<Image>().color = itemColor;
         _DragAndDropCell.GetComponent<Image>().color = stoneModel._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
         _DragAndDropCell.AddItem(stoneModel);

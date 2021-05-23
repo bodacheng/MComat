@@ -23,7 +23,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     //自定义item属性
     public SkillConfig _SkillConfig;
     public bool Inherent;
-    public string SkillStoneOfPlayerId;
+    public string equipingId;
     public bool _using = false;
     
     /// <summary>
@@ -45,7 +45,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     public void ShowStoneLevel()
     {
         info.gameObject.SetActive(true);
-        StoneOfPlayerInfo sspim = MySkillStones.Get(SkillStoneOfPlayerId);
+        StoneOfPlayerInfo sspim = MySkillStones.Get(equipingId);
         info.text = sspim.GetLevel().ToString();
     }
     

@@ -149,7 +149,7 @@ namespace mainMenu
             yield return _SkillStonesBox_Show.StartUp();
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
-            yield return (TheNineSlot.target.StartUp());
+            TheNineSlot.target.StartUp();
             yield return _SelfFightManager.INITeamPosButtons();
 
             HurtObjectManager.ConstructDPool();
