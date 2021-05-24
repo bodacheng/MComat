@@ -14,11 +14,14 @@ namespace dataAccess
 {
     public partial class MySkillStones
     {
-        public static void LoadAllLocal()
+        public static void LoadLocal()
         {
             Clear();
             List<StoneOfPlayerInfo> list = LoadAll_Json(Application.persistentDataPath + "/MyStones");
-            ConvertListToDic(list);
+            foreach (StoneOfPlayerInfo stoneinfo in list)
+            {
+                Add(stoneinfo);
+            }
         }
 
         static List<StoneOfPlayerInfo> LoadAll_Json(string filePath)
@@ -90,32 +93,7 @@ namespace dataAccess
                     Inherent = "false"
                 };
                 Add(stoneInfo);
-            }
-            PurchaseAllStones(SkillConfigTable.SkillConfigRefDic.Values.ToList(), 0);
-        }
-
-        public static void PurchaseAllStones(List<SkillConfig> stones, int i)
-        {
-            if (i != stones.Count - 1)
-            {
-                SkillConfig targetStoneConfig = stones[i];
-                PlayFabClientAPI.PurchaseItem(
-                    new PlayFab.ClientModels.PurchaseItemRequest()
-                    {
-                        CatalogVersion = "stoneTest2",
-                        ItemId = targetStoneConfig.RECORD_ID,
-                        StoreId = "stone",
-                        VirtualCurrency = "GD",
-                        Price = 0
-                    }, result =>
-                    {
-                        Debug.Log("成功购买" + targetStoneConfig.RECORD_ID);
-                        PurchaseAllStones(stones, i + 1);
-                    }, error =>
-                    {
-                        Debug.Log(error.GenerateErrorReport());
-                    }
-                );
+                Update_Json(stoneInfo);
             }
         }
     }

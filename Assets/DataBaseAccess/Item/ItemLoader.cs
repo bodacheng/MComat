@@ -10,7 +10,7 @@ namespace dataAccess
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     MyMonsters.LoadLocal();
-                    MySkillStones.LoadAllLocal();
+                    MySkillStones.LoadLocal();
                     finished.Invoke(1);
                     break;
                 case PlayerInfoRefMode.formalVersion:

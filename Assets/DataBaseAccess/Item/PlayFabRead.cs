@@ -30,7 +30,7 @@ public static class PlayFabRead
                             DicAdd<string, MonsterOfPlayerInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
                             break;
                         case "stoneTest2":
-                            StoneOfPlayerInfo skillStoneOfPlayerInfo = new StoneOfPlayerInfo
+                            StoneOfPlayerInfo Info = new StoneOfPlayerInfo
                             {
                                 InstanceId = item.ItemInstanceId,
                                 skillId = item.ItemId,
@@ -38,7 +38,7 @@ public static class PlayFabRead
                                 inUsingSkillSlot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
 
                             };
-                            MySkillStones.Read(skillStoneOfPlayerInfo);
+                            MySkillStones.Add(Info);
                             break;
                     }
                 }

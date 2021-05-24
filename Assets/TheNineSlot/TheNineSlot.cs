@@ -223,7 +223,6 @@ namespace mainMenu
             {
                 SlotButtonBeheviour(_slot);
             }
-            ReadANineAndTwo(null);
         }
         
         // 当前技能编辑形成的各项参数更新

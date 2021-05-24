@@ -17,23 +17,23 @@ namespace dataAccess
         /// <summary>
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
-        /// <param name="skillStoneOfPlayerId">技能石账户id</param>
-        public static void GenerateStoneModelByAccID(string skillStoneOfPlayerId)
+        /// <param name="instanceId">技能石账户id</param>
+        public static void GenerateStoneModelByAccID(string instanceId)
         {
-            if (RenderModelDic.ContainsKey(skillStoneOfPlayerId))
+            if (RenderModelDic.ContainsKey(instanceId))
             {
-                if (RenderModelDic[skillStoneOfPlayerId] != null)
+                if (RenderModelDic[instanceId] != null)
                     return;
             }
-            StoneOfPlayerInfo StoneOfPlayerInfo = Get(skillStoneOfPlayerId);
-            SKStoneItem item = GenerateNewStoneModel_Resource(StoneOfPlayerInfo.skillId, true);
-            item.Inherent = StoneOfPlayerInfo.Inherent == "true";
-            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[skillStoneOfPlayerId].skillId);
+            StoneOfPlayerInfo info = Get(instanceId);
+            SKStoneItem item = GenerateNewStoneModel_Resource(info.skillId, true);
+            item.Inherent = info.Inherent == "true";
+            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[instanceId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
-            item.equipingId = skillStoneOfPlayerId;
+            item.equipingId = instanceId;
             item.gameObject.transform.SetParent(SkillStonesBox._stonesTempContainer);
 
-            DicAdd<string, SKStoneItem>.Add(RenderModelDic, skillStoneOfPlayerId, item);
+            DicAdd<string, SKStoneItem>.Add(RenderModelDic, instanceId, item);
         }
 
         public static SKStoneItem GenerateNewStoneModel_Memory(string skillID, bool openStoneFeature)

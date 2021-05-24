@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
-using System.Collections;
 
 namespace mainMenu
 {

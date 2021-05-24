@@ -18,5 +18,19 @@ namespace dataAccess
                     Debug.Log("重复的角色存档id：" + one.InstanceId);
             }
         }
+
+        public static void LoadTutorial()
+        {
+            List<MonsterOfPlayerInfo> charList = new List<MonsterOfPlayerInfo>();
+            //charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
+            Dic.Clear();
+            foreach (MonsterOfPlayerInfo one in charList)
+            {
+                if (!Dic.ContainsKey(one.InstanceId))
+                    Dic.Add(one.InstanceId, one);
+                else
+                    Debug.Log("重复的角色存档id：" + one.InstanceId);
+            }
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace dataAccess
             return info;
         }
         
-        public static IEnumerator AddNewCharToJsonSaveData(MonsterOfPlayerInfo _AccCharInfo)
+        public static MonsterOfPlayerInfo AddNewCharToJsonSaveData(MonsterOfPlayerInfo _AccCharInfo)
         {
             MonsterOfPlayerInfo returnValue = null;
             try
@@ -61,7 +61,7 @@ namespace dataAccess
             {
                 Debug.Log(e);                
             }
-            yield return returnValue;
+            return returnValue;
         }
         
         public static IEnumerator LocalSaveDataGetAllCharacters()
@@ -93,7 +93,7 @@ namespace dataAccess
                     MySkillStones.Add(stoneInfo);
                 }
                 Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
-                yield return AddToAccount(_Char);
+                AddNewCharToJsonSaveData(_Char);
                 i++;
             }
             //yield return MonsterBox.DisplayMonsterIcons();
