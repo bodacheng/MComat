@@ -35,7 +35,7 @@ namespace dataAccess
                     break;
             }
 
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     TeamPos value = OverrideTeamSetInfoOnJsonFile(Mode);

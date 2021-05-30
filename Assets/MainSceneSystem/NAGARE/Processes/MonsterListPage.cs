@@ -38,7 +38,7 @@ public class MonsterListPage : MainSceneProcess
     public override void ProcessEnter()
     {
         loadFinished = false;
-        switch (AccountSet._AccInfo.accountprogress)
+        switch (Account._AccInfo.accountprogress)
         {
             case PlayerAccountProgressStep.Freedom:
                 break;

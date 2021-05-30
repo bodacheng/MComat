@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 
-public class AccProperty
+public class Currencies
 {
-    public static AccProperty value = new AccProperty();
+    public static int coin;//智慧果实
+    public static int diamond;
 
-    int coin;//智慧果实
-    int diamond;
-
-    public int DiamondCount
+    static public int DiamondCount
     {
         get => diamond;
         set
@@ -16,7 +14,7 @@ public class AccProperty
         }
     }
 
-    public int CoinCount
+    static public int CoinCount
     {
         get => coin;
         set

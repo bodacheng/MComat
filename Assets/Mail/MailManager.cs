@@ -97,7 +97,7 @@ public class MailManager : MonoBehaviour {
     
     static IEnumerator Request(SuccessDelegate<GetMailsOfPlayerModel> success, FailDelegate<GetMailsOfPlayerModel> fail, ApiLanguage apiLanguage)
     {
-        switch(AccountSet.ReferenceMode)
+        switch(Account.ReferenceMode)
         {
             case PlayerInfoRefMode.formalVersion:
                 break;

@@ -14,9 +14,9 @@ public class ArcadeFrontProcess : MainSceneProcess
         
         ArcadeManager.target.INIPagingSystem(2);
         
-        if (ArcadeManager.ArcadeStages.ContainsKey(AccountSet._AccInfo.ArcadeProcess))
+        if (ArcadeManager.ArcadeStages.ContainsKey(Account._AccInfo.ArcadeProcess))
         {
-            StageInfo StageInfo = ArcadeManager.ArcadeStages[AccountSet._AccInfo.ArcadeProcess];
+            StageInfo StageInfo = ArcadeManager.ArcadeStages[Account._AccInfo.ArcadeProcess];
             ArcadeManager.target.IconButtonFeature(StageInfo.MemberIcons[0]);
         }else{
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");

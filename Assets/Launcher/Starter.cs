@@ -13,7 +13,7 @@ public partial class Starter : MonoBehaviour
     // 启动本地测试模式
     public void BeginLocalTestMode()
     {
-        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        Account.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         EnterFrontScene();
     }
 
@@ -41,7 +41,7 @@ public partial class Starter : MonoBehaviour
     IEnumerator SkillShowerMode()
     {
         DeleteLocalSaveDate();
-        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        Account.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         MySkillStones.LocalSaveDataGetAllStones();
         yield return MyMonsters.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);
@@ -75,7 +75,7 @@ public partial class Starter : MonoBehaviour
     bool UseBackUpData = false;
     IEnumerator _StartNewLocalTestMode()
     {
-        AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
+        Account.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
         if (UseBackUpData)
         {
             DeleteLocalSaveDate();
@@ -117,11 +117,13 @@ public partial class Starter : MonoBehaviour
     {
         PlayFabLogin.CustomIDLogin(
             result => {
-                Debug.Log( " 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken );
-                AccountSet._AccInfo = new PlayerAccountInfo();
-                AccountSet._AccInfo.playerID = result.PlayFabId;
+                Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+                Account._AccInfo = new PlayerAccountInfo
+                {
+                    playerID = result.PlayFabId
+                };
                 //CloudScript.GrantStonesTest();
-                AccountSet.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
+                Account.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
                 EnterFrontScene();
             },
             fail => {

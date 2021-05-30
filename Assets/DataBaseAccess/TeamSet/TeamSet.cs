@@ -38,7 +38,7 @@ namespace dataAccess
         
         public static void LoadTeamSet(TeamSetGameMode Mode, Action<int> finished)
         {
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     switch (Mode)
@@ -69,7 +69,7 @@ namespace dataAccess
                     Debug.Log(Mode);
                     PlayFabClientAPI.GetUserData(
                         new GetUserDataRequest() {
-                            PlayFabId = AccountSet._AccInfo.playerID,
+                            PlayFabId = Account._AccInfo.playerID,
                             Keys = new List<string>() { targetModeCode }
                         },
                         (GetUserDataResult obj) => {

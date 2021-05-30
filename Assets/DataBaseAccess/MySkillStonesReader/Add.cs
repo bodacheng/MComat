@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 using Skill;
@@ -45,6 +44,11 @@ namespace dataAccess
             }
 
             GameObject pretab = SkillIconsDic.Instance.Get(skillID);
+            if (pretab == null)
+            {
+                Debug.Log("Load Stone model fail:" + skillID);
+                return null;
+            }
             GameObject newIcon = Object.Instantiate(pretab);
             SKStoneItem item = newIcon.GetComponent<SKStoneItem>();
             if (item == null)

@@ -92,7 +92,7 @@ public class GachaManager : MonoBehaviour
     public IEnumerator Gacha(string type, int count)
     {
         List<StoneOfPlayerInfo> Results = null;
-        switch (AccountSet.ReferenceMode)
+        switch (Account.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 IEnumerator GET = Gotcha(type, count);

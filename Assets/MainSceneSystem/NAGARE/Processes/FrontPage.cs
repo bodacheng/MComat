@@ -15,6 +15,12 @@ public class FrontPage : MainSceneProcess
         accLoadFinished.Value = value;
     }
 
+    ReactiveProperty<int> StatisticsFinished = new ReactiveProperty<int>(0);
+    void StatisticsLoadFinished(int value)
+    {
+        StatisticsFinished.Value = value;
+    }
+
     ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
     void ItemsLoadFinished(int value)
     {
@@ -56,13 +62,14 @@ public class FrontPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        AccountSet.LoadCustomerInfo(AccLoadFinished);
+        Account.GetPlayerData(AccLoadFinished);
+        Account.GetStatistics(StatisticsLoadFinished);
         //AccountCharsSet.LoadTutorial();
         ItemLoader.LoadAll(ItemsLoadFinished);
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                accLoadFinished, itemsLoadFinished
+                accLoadFinished, itemsLoadFinished, StatisticsFinished
             },
             () =>
             {

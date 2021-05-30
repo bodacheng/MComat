@@ -33,9 +33,9 @@ namespace mainMenu
         {
             List<String> targetSKs = MySkillStones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
             targetSKs = Order(targetSKs);
-            if (targetSKs.Count > AccountSet._AccInfo.Stoneboxsize)
+            if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
             {
-                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + AccountSet._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
+                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + Account._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
                 return;
             }
             

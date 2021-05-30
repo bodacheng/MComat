@@ -25,21 +25,21 @@ namespace mainMenu
                         }
                         
                         // 不可拖向太超前的关卡
-                        if (_Scrollbar.value > PageD(AccountSet._AccInfo.ArcadeProcess, StageCount) + (float) 0.5 / StageCount)
+                        if (_Scrollbar.value > PageD(Account._AccInfo.ArcadeProcess, StageCount) + (float) 0.5 / StageCount)
                         {
-                            JumpTo(PageD(AccountSet._AccInfo.ArcadeProcess, StageCount));
+                            JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
                         }
                         
                         if (!JumpToNewStage.gameObject.activeSelf)
                         {
-                            if (Mathf.Abs(PageD(AccountSet._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)
+                            if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)
                             {
                                 JumpToNewStage.gameObject.SetActive(true);
                             }
                         }
                         else
                         {
-                            if (Mathf.Abs(PageD(AccountSet._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) <= 0.2f)
+                            if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) <= 0.2f)
                             {
                                 JumpToNewStage.gameObject.SetActive(false);
                             }
@@ -49,7 +49,7 @@ namespace mainMenu
             };
             void temp()
             {
-                JumpTo(PageD(AccountSet._AccInfo.ArcadeProcess, StageCount));
+                JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
             }
             JumpToNewStage.onClick.RemoveAllListeners();
             JumpToNewStage.onClick.AddListener(temp);

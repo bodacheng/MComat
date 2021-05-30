@@ -58,7 +58,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 技能石升级
     public IEnumerator LevelUpStoneTest(SkillStoneLevelUpForm form, SuccessDelegate<SkillStoneLevelUpModel> success, FailDelegate<SkillStoneLevelUpModel> fail, ApiLanguage apiLanguage)
     {
-        switch (AccountSet.ReferenceMode)
+        switch (Account.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 SkillStoneLevelUpModel SkillStoneLevelUpModel = new SkillStoneLevelUpModel();

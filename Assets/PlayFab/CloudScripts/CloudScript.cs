@@ -73,7 +73,6 @@ public class CloudScript
         Debug.Log(jsonResult);
     }
 
-
     class temp
     {
         public string ItemInstanceId;

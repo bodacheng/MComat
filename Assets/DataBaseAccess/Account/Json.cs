@@ -6,9 +6,9 @@ using Json;
 
 namespace dataAccess
 {
-    public partial class AccountSet
+    public partial class Account
     {
-        public static void LoadCustomerInfoViaLocalFile()
+        public static void GetPlayerDataViaLocal()
         {
             bool ok = false;
             try
@@ -32,11 +32,11 @@ namespace dataAccess
             }
             if (!ok)
             {
-                OverrideAccountOnLocalFile();
+                UpdatePlayerDataLocal();
             }
         }
         
-        public static void OverrideAccountOnLocalFile()
+        static void UpdatePlayerDataLocal()
         {
             string json = JsonConvert.SerializeObject(_AccInfo);
             LocalJson.SaveToJsonFile_persistentDataPath(null, "localAccountInfo.json", json);

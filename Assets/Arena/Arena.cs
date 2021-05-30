@@ -29,7 +29,7 @@ namespace dataAccess
         
         public static IEnumerator GetPlayerRankInfoExecution(GetRankInfoForm form, SuccessDelegate<GetRankInfoOfPlayerModel> success, FailDelegate<GetRankInfoOfPlayerModel> fail, ApiLanguage apiLanguage)
         {
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.formalVersion:
                     break;

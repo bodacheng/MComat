@@ -12,7 +12,7 @@ namespace dataAccess
         // 更新存档数据
         public static void Update(IDictionary<string, Tuple<string, string>> ToEditStones, Action success, Action fail)
         {
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     foreach (KeyValuePair<string, Tuple<string, string>> kv in ToEditStones)

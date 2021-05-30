@@ -6,7 +6,7 @@ namespace dataAccess
     {
         public static void LoadAll(Action<int> finished)
         {
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     MyMonsters.LoadLocal();

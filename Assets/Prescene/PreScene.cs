@@ -180,7 +180,7 @@ namespace mainMenu
                 else
                 {
                     // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-                    switch (AccountSet._AccInfo.accountprogress)
+                    switch (Account._AccInfo.accountprogress)
                     {
                         case PlayerAccountProgressStep.Freedom:
                             trySwitchToStep(MainMenuNote.goingtostep, false);

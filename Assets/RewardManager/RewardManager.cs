@@ -9,7 +9,7 @@ public static class RewardManager
 {
     public static void RequestRewardsExaution(SuccessDelegate<GetRewardModel> success, FailDelegate<GetRewardModel> fail, ApiLanguage apiLanguage)
     {
-        switch (AccountSet.ReferenceMode)
+        switch (Account.ReferenceMode)
         {
             case PlayerInfoRefMode.localTestSaveData:
                 break;

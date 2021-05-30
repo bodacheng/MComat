@@ -16,7 +16,7 @@ namespace ServerAPI
                 new PlayFab.ServerModels.GrantItemsToUserRequest()
                 {
                     CatalogVersion = CatalogVersion,
-                    PlayFabId = AccountSet._AccInfo.playerID,
+                    PlayFabId = Account._AccInfo.playerID,
                     ItemIds = ItemIds
                 },
                 action,
@@ -39,7 +39,7 @@ namespace ServerAPI
                 Items.Add(
                     new RevokeInventoryItem()
                     {
-                        PlayFabId = AccountSet._AccInfo.playerID,
+                        PlayFabId = Account._AccInfo.playerID,
                         ItemInstanceId = keyValuePair.Key
                     });
                 if (Items.Count == 25)

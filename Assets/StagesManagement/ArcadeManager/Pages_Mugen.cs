@@ -48,14 +48,14 @@ namespace mainMenu
         float CurrentTargetScrollbarValue()
         {
             float targetScrollbarValue;
-            if (AccountSet._AccInfo.ArcadeProcess <= 3)
+            if (Account._AccInfo.ArcadeProcess <= 3)
             {
                 targetScrollbarValue = 0;
             }else{
                 VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
                 // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
                 targetScrollbarValue = 
-                ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (AccountSet._AccInfo.ArcadeProcess - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
+                ((pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (Account._AccInfo.ArcadeProcess - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
                 / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
             }
             return targetScrollbarValue;

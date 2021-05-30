@@ -249,10 +249,10 @@
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneOfPlayerInfo.auto.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\TeamPos.cs" />
     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneLevelUpModel.cs" />
-    <Compile Include="Assets\DataBaseAccess\AccProperty.cs" />
-    <Compile Include="Assets\DataBaseAccess\Account\AccountSet.cs" />
+    <Compile Include="Assets\DataBaseAccess\Account\Account.cs" />
     <Compile Include="Assets\DataBaseAccess\Account\Json.cs" />
     <Compile Include="Assets\DataBaseAccess\Account\Remote.cs" />
+    <Compile Include="Assets\DataBaseAccess\Item\Currencies.cs" />
     <Compile Include="Assets\DataBaseAccess\Item\ItemLoader.cs" />
     <Compile Include="Assets\DataBaseAccess\Item\PlayFabRead.cs" />
     <Compile Include="Assets\DataBaseAccess\Monsters\Json.cs" />

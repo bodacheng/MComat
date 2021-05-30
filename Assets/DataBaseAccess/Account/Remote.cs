@@ -10,49 +10,18 @@ using System;
 
 namespace dataAccess
 {
-    public partial class AccountSet
+    public partial class Account
     {
-        static void LoadAccInfoRemote(Action<int> finished)
+        static void GetUserDataRemote(Action<int> finished)
         {
             PlayFabClientAPI.GetUserData
             (
                 new GetUserDataRequest() {
-                    PlayFabId = AccountSet._AccInfo.playerID,
-                    Keys = new List<string>() { "PlayerName", "Stoneboxsize", "ArcadeProcess"}
+                    PlayFabId = _AccInfo.playerID,
+                    Keys = new List<string>() { "PlayerName" }
                 },
                 (GetUserDataResult obj) => {
-
-                    AccountSet._AccInfo.PlayerName = obj.Data["PlayerName"].Value;
-
-                    Dictionary<string, string> NoDatas = new Dictionary<string, string>();
-
-                    int size;
-                    if (obj.Data.ContainsKey("Stoneboxsize"))
-                    {
-                        int.TryParse(obj.Data["Stoneboxsize"].Value, out size);
-                        AccountSet._AccInfo.Stoneboxsize = size;
-                    }
-                    else
-                    {
-                        NoDatas.Add("Stoneboxsize", "50");
-                    }
-
-                    int process;
-                    if (obj.Data.ContainsKey("ArcadeProcess"))
-                    {
-                        int.TryParse(obj.Data["ArcadeProcess"].Value, out process);
-                        AccountSet._AccInfo.ArcadeProcess = process;
-                    }
-                    else
-                    {
-                        NoDatas.Add("ArcadeProcess", "0");
-                    }
-
-                    if (NoDatas.Count > 0)
-                    {
-                        SetUserData(NoDatas);
-                    }
-
+                    //_AccInfo.PlayerName = obj.Data["PlayerName"].Value;
                     finished.Invoke(1);
                 },
                 errorCallback => {
@@ -60,6 +29,40 @@ namespace dataAccess
                     finished.Invoke(-1);
                 }
             );
+        }
+
+        static void GetStatisticsRemote(Action<int> finished)
+        {
+            PlayFabClientAPI.GetPlayerStatistics(
+                new GetPlayerStatisticsRequest(),
+                (GetPlayerStatisticsResult result) => {
+                    OnGetStatistics(result);
+                    finished(1);
+                },
+                error =>
+                {
+                    Debug.Log(error.GenerateErrorReport());
+                    finished.Invoke(-1);
+                }
+            );
+        }
+
+        static void OnGetStatistics(GetPlayerStatisticsResult result)
+        {
+            foreach(StatisticValue value in result.Statistics)
+            {
+                switch (value.StatisticName)
+                {
+                    case "Stoneboxsize":
+                        _AccInfo.Stoneboxsize = value.Value;
+                        break;
+                    case "ArcadeProcess":
+                        _AccInfo.ArcadeProcess = value.Value;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         static void SetUserData(Dictionary<string, string> values)

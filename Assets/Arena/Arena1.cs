@@ -30,7 +30,7 @@ namespace dataAccess
         
         static IEnumerator GetOpponentsE(GetRankInfoForm form, SuccessDelegate<RankOpponentsModel> success, FailDelegate<RankOpponentsModel> fail, ApiLanguage apiLanguage)
         {
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.formalVersion:
                     break;
@@ -82,7 +82,7 @@ namespace dataAccess
         
         static IEnumerator GetOpponentTeamInfoE(GetRankInfoForm form, SuccessDelegate<OneTeam> success, FailDelegate<OneTeam> fail, ApiLanguage apiLanguage)
         {
-            switch (AccountSet.ReferenceMode)
+            switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.formalVersion:
                     break;

@@ -44,7 +44,17 @@ public static class PlayFabRead
                 }
                 foreach (var kv in result.VirtualCurrency)
                 {
-                    Debug.Log(kv.Key + ":" + kv.Value);
+                    switch (kv.Key)
+                    {
+                        case "GD":
+                            Currencies.CoinCount = kv.Value;
+                            break;
+                        case "DM":
+                            Currencies.DiamondCount = kv.Value;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 finished.Invoke(1);
             },

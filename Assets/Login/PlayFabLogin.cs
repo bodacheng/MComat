@@ -10,29 +10,11 @@ public class PlayFabLogin
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest
             {
-                CustomId = SystemInfo.deviceUniqueIdentifier,
+                CustomId = "boda",
                 CreateAccount = true
             },
             sucess,
             fail
-        );
-    }
-
-    public static void IOSDeviceIDLogin()
-    {
-        PlayFabClientAPI.LoginWithIOSDeviceID (
-            new LoginWithIOSDeviceIDRequest
-            {
-                CreateAccount = true
-            },
-            result =>
-            {
-                Debug.Log("playfab login successed?");
-            },
-            error =>
-            {
-                Debug.Log(error.GenerateErrorReport());
-            }
         );
     }
 }
