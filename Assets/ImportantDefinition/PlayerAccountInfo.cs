@@ -5,43 +5,10 @@ public class PlayerAccountInfo
 {
     public string playerID;
     public string PlayerName;
-    
-    int coin;//智慧果实
-    int diamond;
+
     int stoneboxsize;
-    
     int arcadeProcess;
 
-    float bgmVolumn = 0.5f, effectsVolumn = 0.5f;
-    
-    public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
-
-    public PlayerAccountInfo()
-    {
-        PlayerName = "helloKitty";
-        coinCount = 999999999;
-        diamondCount = 0;
-        Stoneboxsize = 500;
-    }
-    
-    public float BgmVolumn
-    {
-        get => bgmVolumn;
-        set 
-        {
-            bgmVolumn = Mathf.Clamp(value, 0, 1);
-        }
-    }
-    
-    public float EffectsVolumn
-    {
-        get => effectsVolumn;
-        set 
-        {
-            effectsVolumn = Mathf.Clamp(value, 0, 1);
-        }
-    }
-    
     public int ArcadeProcess
     {
         get => arcadeProcess;
@@ -50,7 +17,7 @@ public class PlayerAccountInfo
             arcadeProcess = Mathf.Clamp(value, 1, 100);
         }
     }
-    
+
     public int Stoneboxsize
     {
         get => stoneboxsize;
@@ -59,28 +26,12 @@ public class PlayerAccountInfo
             stoneboxsize = Mathf.Clamp(value, 0, value);
         }
     }
-    
-    public int diamondCount
-    {
-        get => diamond;
-        set
-        {
-            diamond = Mathf.Clamp(value, 0, value);
-        }
-    }
 
-    public int coinCount
-    {
-        get => coin;
-        set
-        {
-            coin = Mathf.Clamp(value, 0, value);
-        }
-    }
+    public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
 
-    public void PlusCoin(int plus)
+    public PlayerAccountInfo()
     {
-        coinCount = coinCount + plus;
+        PlayerName = "helloKitty";
     }
 }
 

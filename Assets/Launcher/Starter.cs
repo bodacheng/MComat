@@ -42,7 +42,6 @@ public partial class Starter : MonoBehaviour
     {
         DeleteLocalSaveDate();
         AccountSet.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        AccountSet.OverrideAccountOnLocalFile();
         MySkillStones.LocalSaveDataGetAllStones();
         yield return MyMonsters.LocalSaveDataGetAllCharacters();
         SceneManager.LoadScene(1);
@@ -105,7 +104,6 @@ public partial class Starter : MonoBehaviour
         else
         {
             DeleteLocalSaveDate();
-            AccountSet.OverrideAccountOnLocalFile();
             MySkillStones.LocalSaveDataGetAllStones();
             yield return MyMonsters.LocalSaveDataGetAllCharacters();
         }

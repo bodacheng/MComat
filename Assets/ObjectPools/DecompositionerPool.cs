@@ -112,7 +112,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         if (decompositioner.audioSource != null)
         {
-            decompositioner.audioSource.volume = AccountSet._AccInfo.EffectsVolumn;
+            decompositioner.audioSource.volume = AppSetting.value.EffectsVolumn;
             decompositioner.audioSource.minDistance = 20;
             decompositioner.audioSource.maxDistance = 80;
         }

@@ -18,24 +18,41 @@ namespace dataAccess
             (
                 new GetUserDataRequest() {
                     PlayFabId = AccountSet._AccInfo.playerID,
-                    Keys = new List<string>() { "CustomerInfo" }
+                    Keys = new List<string>() { "PlayerName", "Stoneboxsize", "ArcadeProcess"}
                 },
                 (GetUserDataResult obj) => {
-                    
-                    foreach (var a in obj.Data)
-                    {
-                        Debug.Log(a);
-                    }
 
-                    if (!obj.Data.ContainsKey("CustomerInfo"))
+                    AccountSet._AccInfo.PlayerName = obj.Data["PlayerName"].Value;
+
+                    Dictionary<string, string> NoDatas = new Dictionary<string, string>();
+
+                    int size;
+                    if (obj.Data.ContainsKey("Stoneboxsize"))
                     {
-                        SetUserData();
+                        int.TryParse(obj.Data["Stoneboxsize"].Value, out size);
+                        AccountSet._AccInfo.Stoneboxsize = size;
                     }
                     else
                     {
-                        UserDataRecord userDataRecord = obj.Data["CustomerInfo"];
-                        _AccInfo = JsonConvert.DeserializeObject<PlayerAccountInfo>(userDataRecord.Value);
+                        NoDatas.Add("Stoneboxsize", "50");
                     }
+
+                    int process;
+                    if (obj.Data.ContainsKey("ArcadeProcess"))
+                    {
+                        int.TryParse(obj.Data["ArcadeProcess"].Value, out process);
+                        AccountSet._AccInfo.ArcadeProcess = process;
+                    }
+                    else
+                    {
+                        NoDatas.Add("ArcadeProcess", "0");
+                    }
+
+                    if (NoDatas.Count > 0)
+                    {
+                        SetUserData(NoDatas);
+                    }
+
                     finished.Invoke(1);
                 },
                 errorCallback => {
@@ -45,16 +62,11 @@ namespace dataAccess
             );
         }
 
-        static void SetUserData()
+        static void SetUserData(Dictionary<string, string> values)
         {
             PlayFabClientAPI.UpdateUserData(
                 new UpdateUserDataRequest{
-                    Data = new Dictionary<string, string>
-                    {
-                        { "PlayerName",  AccountSet._AccInfo.PlayerName },
-                        { "coinCount", AccountSet._AccInfo.coinCount.ToString() },
-                        { "diamondCount", AccountSet._AccInfo.diamondCount.ToString() }
-                    }
+                    Data = values
                 },
                 result =>
                 {

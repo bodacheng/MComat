@@ -16,13 +16,13 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);
         // +号代表直接把技能石升到下一级所需要的经验全数补充上，不够的话就把当前所有剩余的金币加上
-        if (StoneExpManager.GoldToExp(AccountSet._AccInfo.coinCount) >= current.expToNextLevel)
+        if (StoneExpManager.GoldToExp(AccProperty.value.CoinCount) >= current.expToNextLevel)
         {
             CurrentGoldExaust += StoneExpManager.ExpToGold(current.expToNextLevel);
         }
         else
         {
-            CurrentGoldExaust += AccountSet._AccInfo.coinCount;
+            CurrentGoldExaust += AccProperty.value.CoinCount;
         }
         RefreshSkillLevelUpModule();
     }

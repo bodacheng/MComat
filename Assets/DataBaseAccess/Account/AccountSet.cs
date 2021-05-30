@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 
 namespace dataAccess
 {
@@ -20,21 +19,6 @@ namespace dataAccess
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
                     LoadAccInfoRemote(finished);
-                    break;
-            }
-        }
-
-        public static void SaveCustomerInfo()
-        {
-            switch (ReferenceMode)
-            {
-                case PlayerInfoRefMode.formalVersion:
-                    break;
-                case PlayerInfoRefMode.localTestSaveData:
-                    OverrideAccountOnLocalFile();
-                    break;
-                case PlayerInfoRefMode.remoteTestPlayer:
-                    SetUserData();
                     break;
             }
         }

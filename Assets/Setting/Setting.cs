@@ -16,7 +16,7 @@ public class Setting : MonoBehaviour {
     void Awake()
     {
         target = this;
-        LoadProgrameSettingFromAccount();
+        LoadAppSetting();
     }
     
     // 打开Setting面板。战斗界面置于暂停按钮的option按钮上。主界面直接置于上方悬挂按钮的option按钮上
@@ -30,7 +30,7 @@ public class Setting : MonoBehaviour {
     // 按钮函数，置于Seting面板返回键上
     public void Close()
     {
-        SaveProgrameSettingToAccount();
+        SaveAppSetting();
         SettingCanvas.sortingOrder = 0;
         LoadingCanvas.target.ClearHigtLight();
         SettingCanvas.gameObject.SetActive(false);
@@ -43,19 +43,19 @@ public class Setting : MonoBehaviour {
         onEffectsSoundChange();
     }
     
-    public void LoadProgrameSettingFromAccount()
+    public void LoadAppSetting()
     {
-        bgmSLider.value = AccountSet._AccInfo.BgmVolumn;
-        effectsSoundsSlider.value = AccountSet._AccInfo.EffectsVolumn;
+        bgmSLider.value = AppSetting.value.BgmVolumn;
+        effectsSoundsSlider.value = AppSetting.value.EffectsVolumn;
         bgmSource.volume = bgmSLider.value;
         AudioManager.effectsVolumn = effectsSoundsSlider.value;
     }
     
-    void SaveProgrameSettingToAccount()
+    void SaveAppSetting()
     {
-        AccountSet._AccInfo.BgmVolumn = bgmSLider.value;
-        AccountSet._AccInfo.EffectsVolumn = effectsSoundsSlider.value;
-        AccountSet.SaveCustomerInfo();
+        AppSetting.value.BgmVolumn = bgmSLider.value;
+        AppSetting.value.EffectsVolumn = effectsSoundsSlider.value;
+        AppSetting.Save();
     }
 
     public void onBgmChange()

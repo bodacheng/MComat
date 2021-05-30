@@ -228,7 +228,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }else{
             minusLevel.gameObject.SetActive(false);
         }
-        if (AccountSet._AccInfo.coinCount == CurrentGoldExaust)
+        if (AccProperty.value.CoinCount == CurrentGoldExaust)
         {
             plusLevel.gameObject.SetActive(false);
         }else{

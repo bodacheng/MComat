@@ -66,6 +66,7 @@ namespace mainMenu
         async void Start()
         {
             Screen.SetResolution(1920, 1080, true);
+            AppSetting.Load();
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
 

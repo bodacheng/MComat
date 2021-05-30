@@ -19,7 +19,7 @@ public class UpperInfoBar : MonoBehaviour
     public void Refresh()
     {
         UserID.text = AccountSet._AccInfo.PlayerName; //SystemInfo.deviceUniqueIdentifier;
-        accountDiamondCoin.text = AccountSet._AccInfo.diamondCount.ToString();
-        accountIntelliCoin.text = AccountSet._AccInfo.coinCount.ToString();
+        accountDiamondCoin.text = AccProperty.value.DiamondCount.ToString();
+        accountIntelliCoin.text = AccProperty.value.CoinCount.ToString();
     }
 }

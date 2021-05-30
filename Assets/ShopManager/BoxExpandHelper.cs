@@ -75,7 +75,6 @@ public class BoxExpandHelper : MonoBehaviour
         {
             case PlayerInfoRefMode.localTestSaveData:
                 AccountSet._AccInfo.Stoneboxsize = AccountSet._AccInfo.Stoneboxsize + ExpandCount;
-                AccountSet.SaveCustomerInfo();
             break;
             case PlayerInfoRefMode.remoteTestPlayer:
             break;

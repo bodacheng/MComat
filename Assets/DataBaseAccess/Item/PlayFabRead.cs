@@ -42,6 +42,10 @@ public static class PlayFabRead
                             break;
                     }
                 }
+                foreach (var kv in result.VirtualCurrency)
+                {
+                    Debug.Log(kv.Key + ":" + kv.Value);
+                }
                 finished.Invoke(1);
             },
             errorCallback => {
@@ -49,4 +53,5 @@ public static class PlayFabRead
                 finished.Invoke(-1);
             });
     }
+
 }
