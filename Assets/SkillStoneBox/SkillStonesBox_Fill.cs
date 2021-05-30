@@ -36,7 +36,6 @@ namespace mainMenu
             if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
             {
                 Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + Account._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
-                return;
             }
             
             foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
@@ -48,6 +47,12 @@ namespace mainMenu
             for (int i = 0; i < targetSKs.Count; i++)
             {
                 CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
+                if (_SkillStoneCell == null)
+                {
+                    Debug.Log("Stone box exceed");
+                    continue;
+                }
+
                 if (!Stones.GetRenderModel(targetSKs[i])._using)
                 {
                     _SkillStoneCell.AddItem(Stones.GetRenderModel(targetSKs[i]));

@@ -39,33 +39,38 @@ public static class GeneralModelPool {
         AutoReturnMissions.Add(one);
     }
     
-    public static IEnumerator GetModel(string ResourceID, bool FromPool)
+    public static IEnumerator GetModel(string ModelID, bool FromPool)
     {
         Data_Center target = null;
         if (FromPool)
         {
-            if (!ModelDic.ContainsKey(ResourceID))
+            if (!ModelDic.ContainsKey(ModelID))
             {
-                yield return ConstructPool(ResourceID);
-            }
-            for (int i = 0; i < ModelDic[ResourceID].Count; i++)
-            {
-                if (!ModelDic[ResourceID][i].WholeT.gameObject.activeSelf)
+                yield return ConstructPool(ModelID);
+                if (!ModelDic.ContainsKey(ModelID))
                 {
-                    target = ModelDic[ResourceID][i];
+                    yield return null;
+                    yield break;
+                }
+            }
+            for (int i = 0; i < ModelDic[ModelID].Count; i++)
+            {
+                if (!ModelDic[ModelID][i].WholeT.gameObject.activeSelf)
+                {
+                    target = ModelDic[ModelID][i];
                 }
             }
             if (target == null)
             {
-                IEnumerator buildmodelproess = CreateCharModel(ResourceID);
+                IEnumerator buildmodelproess = CreateCharModel(ModelID);
                 yield return buildmodelproess;
                 target = (Data_Center)buildmodelproess.Current;
-                ModelDic[ResourceID].Add(target);
+                ModelDic[ModelID].Add(target);
             }
             target.WholeT.gameObject.SetActive(true);
-            AutoReturn(target, ResourceID);
+            AutoReturn(target, ModelID);
         }else{
-            IEnumerator buildmodelproess = CreateCharModel(ResourceID);
+            IEnumerator buildmodelproess = CreateCharModel(ModelID);
             yield return buildmodelproess;
             target = (Data_Center)buildmodelproess.Current;
         }
@@ -82,9 +87,9 @@ public static class GeneralModelPool {
     
     public static IEnumerator ConstructPool(string monsterID)
     {
-        IEnumerator buildmodelproess = CreateCharModel(monsterID);
-        yield return buildmodelproess;
-        Data_Center _TempDATACENTER = (Data_Center)buildmodelproess.Current;
+        IEnumerator proess = CreateCharModel(monsterID);
+        yield return proess;
+        Data_Center _TempDATACENTER = (Data_Center)proess.Current;
         if (_TempDATACENTER != null)
         {
             _TempDATACENTER.WholeT.gameObject.SetActive(false);

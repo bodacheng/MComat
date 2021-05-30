@@ -7,8 +7,7 @@ using System;
 
 // 贩卖过多的技能石？ 扩张技能石盒？
 public class BoxExpandHelper : MonoBehaviour
-{    
-    #region 扩张    
+{
     public Canvas ExpansionT;
 
     public RectTransform OptionT;
@@ -53,12 +52,10 @@ public class BoxExpandHelper : MonoBehaviour
     
     void ChooseFive()
     {
-        PreScene.target.mainProcessRunner.RunAsQueued(BoxExpansion(5));
     }
     
     void ChooseTen()
     {
-        PreScene.target.mainProcessRunner.RunAsQueued(BoxExpansion(10));
     }
     
     void ShowResult()
@@ -66,45 +63,9 @@ public class BoxExpandHelper : MonoBehaviour
         OptionT.gameObject.SetActive(false);
         ResultConfirmT.gameObject.SetActive(true);
     }
-    
-    // 扩张了格子之后没个单独的process，有一个成功提示按说就可以
-    public IEnumerator BoxExpansion(int ExpandCount)
-    {
-        OptionT.gameObject.SetActive(false);
-        switch (Account.ReferenceMode)
-        {
-            case PlayerInfoRefMode.localTestSaveData:
-                Account._AccInfo.Stoneboxsize = Account._AccInfo.Stoneboxsize + ExpandCount;
-            break;
-            case PlayerInfoRefMode.remoteTestPlayer:
-            break;
-            case PlayerInfoRefMode.formalVersion:
-            break;
-        }
-        
-        //try 
-        //{
-        //    if ((bool)expansionProcess.Current)
-        //    {
-        //        Result.text = " 成功扩张技能石盒 ";
-        //    }else{
-        //        Result.text = " 失败 ";
-        //    }            
-        //}
-        //catch(Exception e)
-        //{
-        //    Result.text = " 失败 ";
-        //    Debug.Log(e);
-        //}
-        ShowResult();
-        yield break;
-    }
-    #endregion
-    
-    #region 贩卖    
+       
     void GoToStoneSell()
     {
         PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList,true); // 没有单独的技能石贩卖画面所以只能送到这里
     }
-    #endregion
 }

@@ -30,9 +30,11 @@ public class StonesPage : MainSceneProcess
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
+            Debug.Log(CheckIfExceedLimit.Count);
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
+        Debug.Log("sadqwd");
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);
         SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
@@ -72,6 +74,8 @@ public class StonesPage : MainSceneProcess
         SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
-        SSLevelUpManager.target.CloseLevelUpPage();
+
+        // 下面这句相当意义不明
+        //SSLevelUpManager.target.CloseLevelUpPage();
     }
 }

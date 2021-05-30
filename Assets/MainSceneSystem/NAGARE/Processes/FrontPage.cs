@@ -15,10 +15,10 @@ public class FrontPage : MainSceneProcess
         accLoadFinished.Value = value;
     }
 
-    ReactiveProperty<int> StatisticsFinished = new ReactiveProperty<int>(0);
+    ReactiveProperty<int> statisticsFinished = new ReactiveProperty<int>(0);
     void StatisticsLoadFinished(int value)
     {
-        StatisticsFinished.Value = value;
+        statisticsFinished.Value = value;
     }
 
     ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
@@ -69,7 +69,7 @@ public class FrontPage : MainSceneProcess
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                accLoadFinished, itemsLoadFinished, StatisticsFinished
+                accLoadFinished, itemsLoadFinished, statisticsFinished
             },
             () =>
             {

@@ -106,6 +106,11 @@ namespace mainMenu
             }
             
             CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
+            if (Ref == null)
+            {
+                Debug.Log("No this monster:" + _focusing.monsterId);
+                return;
+            }
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
             
             // mini nineslot show

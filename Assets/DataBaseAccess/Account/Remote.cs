@@ -53,7 +53,7 @@ namespace dataAccess
             {
                 switch (value.StatisticName)
                 {
-                    case "Stoneboxsize":
+                    case "StoneBoxSize":
                         _AccInfo.Stoneboxsize = value.Value;
                         break;
                     case "ArcadeProcess":
