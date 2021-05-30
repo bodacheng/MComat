@@ -12,7 +12,7 @@ using PlayFab;
 
 namespace dataAccess
 {
-    public partial class MySkillStones
+    public partial class Stones
     {
         public static void LoadLocal()
         {

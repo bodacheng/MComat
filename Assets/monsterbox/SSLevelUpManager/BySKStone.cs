@@ -8,7 +8,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 素材的添加与移除
     public void AddMaterial(StoneCell skillboxcell)
     {
-        StoneOfPlayerInfo StoneInfoModel = MySkillStones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfo StoneInfoModel = Stones.Get(stoneOfPlayerId);
         for (int i = 0; i < MaterialSlots.Count; i++)
         {
             MaterialSlots[i].UpdateMyItem();

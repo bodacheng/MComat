@@ -10,7 +10,7 @@ public static class PlayFabRead
     public static void LoadItems(Action<int> finished)
     {
         MyMonsters.Dic.Clear();
-        MySkillStones.Clear();
+        Stones.Clear();
 
         PlayFabClientAPI.GetUserInventory(
             new GetUserInventoryRequest(),
@@ -38,7 +38,7 @@ public static class PlayFabRead
                                 inUsingSkillSlot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
 
                             };
-                            MySkillStones.Add(Info);
+                            Stones.Add(Info);
                             break;
                     }
                 }

@@ -34,7 +34,7 @@ namespace ServerAPI
         {
             List<RevokeInventoryItem> Items = new List<RevokeInventoryItem>();
 
-            foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in MySkillStones.Dic)
+            foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Stones.Dic)
             {
                 Items.Add(
                     new RevokeInventoryItem()
@@ -56,8 +56,8 @@ namespace ServerAPI
                 (PlayFab.AdminModels.RevokeInventoryItemsResult result) => {
                     for (int i =0; i < Items.Count; i++)
                     {
-                        Debug.Log("this stone is deleted:" + Items[i].ItemInstanceId + " (" + MySkillStones.Get(Items[i].ItemInstanceId).skillId + ")");
-                        MySkillStones.RemoveStoneLocal(Items[i].ItemInstanceId);
+                        Debug.Log("this stone is deleted:" + Items[i].ItemInstanceId + " (" + Stones.Get(Items[i].ItemInstanceId).skillId + ")");
+                        Stones.RemoveStoneLocal(Items[i].ItemInstanceId);
                     }
                 },
                 OnError);

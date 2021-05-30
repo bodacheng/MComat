@@ -27,7 +27,7 @@ public class SkillStoneSlot
 
     public void TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
     {
-        SKStoneItem stoneModel = MySkillStones.GetRenderModel(stoneOfPlayerID);
+        SKStoneItem stoneModel = Stones.GetRenderModel(stoneOfPlayerID);
         if (stoneModel == null)
         {
             Debug.Log("wrong...");

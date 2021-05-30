@@ -65,7 +65,7 @@ public static class FightLoad
     {
         FightSceneNote.nextBattle = stage;
         SkillStonesBox.PreventCellsFromDestroy();
-        MySkillStones.PreventStonesFromDestroy();
+        Stones.PreventStonesFromDestroy();
         ArcadeManager.ArcadeStages.Clear();
         GeneralModelPool.Clear();
         SceneManager.LoadScene(2);

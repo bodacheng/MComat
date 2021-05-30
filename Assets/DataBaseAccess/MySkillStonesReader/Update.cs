@@ -7,7 +7,7 @@ using System;
 
 namespace dataAccess
 {
-    public partial class MySkillStones
+    public partial class Stones
     {
         // 更新存档数据
         public static void Update(IDictionary<string, Tuple<string, string>> ToEditStones, Action success, Action fail)

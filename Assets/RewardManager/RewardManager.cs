@@ -22,7 +22,7 @@ public static class RewardManager
         
     public static void ExpUpForStones_Local(string StoneOfPlayerID, int addExp)
     {
-        StoneOfPlayerInfo stoneOfPlayer =  MySkillStones.Get(StoneOfPlayerID);
+        StoneOfPlayerInfo stoneOfPlayer =  Stones.Get(StoneOfPlayerID);
         int formerExp = stoneOfPlayer.EXP;
         stoneOfPlayer.EXP = formerExp + addExp;
         //yield return MySkillStones.Update(StoneOfPlayerID);

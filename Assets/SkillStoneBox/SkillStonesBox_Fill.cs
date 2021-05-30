@@ -31,7 +31,7 @@ namespace mainMenu
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public void PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
         {
-            List<String> targetSKs = MySkillStones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
+            List<String> targetSKs = Stones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
             {
@@ -48,9 +48,9 @@ namespace mainMenu
             for (int i = 0; i < targetSKs.Count; i++)
             {
                 CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                if (!MySkillStones.GetRenderModel(targetSKs[i])._using)
+                if (!Stones.GetRenderModel(targetSKs[i])._using)
                 {
-                    _SkillStoneCell.AddItem(MySkillStones.GetRenderModel(targetSKs[i]));
+                    _SkillStoneCell.AddItem(Stones.GetRenderModel(targetSKs[i]));
                     //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }

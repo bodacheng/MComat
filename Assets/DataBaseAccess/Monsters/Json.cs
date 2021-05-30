@@ -82,7 +82,7 @@ namespace dataAccess
                 {
                     StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
                     {
-                        InstanceId = MySkillStones.GetNonRepeatID_LocalSave(),
+                        InstanceId = Stones.GetNonRepeatID_LocalSave(),
                         skillId = INHERENTSkills.Key,
                         EXP = 0,
                         BreakThrough = 0,
@@ -90,7 +90,7 @@ namespace dataAccess
                         inUsingMonsterOfPlayerId = i.ToString(),
                         inUsingSkillSlot = "1"
                     };
-                    MySkillStones.Add(stoneInfo);
+                    Stones.Add(stoneInfo);
                 }
                 Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
                 AddNewCharToJsonSaveData(_Char);

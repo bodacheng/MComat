@@ -110,7 +110,7 @@ namespace mainMenu
                 targetIcon.gameObject.SetActive(false);
                 return;
             }
-            StoneOfPlayerInfo SSInfo = MySkillStones.Get(Item.equipingId);
+            StoneOfPlayerInfo SSInfo = Stones.Get(Item.equipingId);
             if (SSInfo == null || SSInfo.inUsingMonsterOfPlayerId == null)
             {
                 targetIcon.gameObject.SetActive(false);
@@ -168,10 +168,10 @@ namespace mainMenu
                     far = false
                 };
                 
-                List<string> SkillStonesOfType_normal = MySkillStones.TargetStonesFromAccount(filterForm0);
-                List<string> SkillStonesOfType_EX1 = MySkillStones.TargetStonesFromAccount(filterForm1);
-                List<string> SkillStonesOfType_EX2 = MySkillStones.TargetStonesFromAccount(filterForm2);
-                List<string> SkillStonesOfType_EX3 = MySkillStones.TargetStonesFromAccount(filterForm3);
+                List<string> SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
+                List<string> SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
+                List<string> SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
+                List<string> SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
                 
                 if (SkillStonesOfType_normal.Count > Account._AccInfo.Stoneboxsize)
                 {

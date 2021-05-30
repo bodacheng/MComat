@@ -114,7 +114,7 @@ public class CloudScript
                     }
                 }
 
-                MySkillStones.Add(stoneOfPlayerInfo);
+                Stones.Add(stoneOfPlayerInfo);
                 List<StoneOfPlayerInfo> stones = new List<StoneOfPlayerInfo> { stoneOfPlayerInfo };
                 action(stones);
             },
@@ -125,7 +125,7 @@ public class CloudScript
     {
         var Items = new JsonArray();
         List<string> ids = new List<string>();
-        foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in MySkillStones.Dic)
+        foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Stones.Dic)
         {
             Items.Add(
                 new PlayFab.ServerModels.RevokeInventoryItem()
@@ -150,7 +150,7 @@ public class CloudScript
         (ExecuteCloudScriptResult result) => {
             foreach (string id in ids)
             {
-                MySkillStones.RemoveStoneLocal(id);
+                Stones.RemoveStoneLocal(id);
             };
             PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
             object messageValue;

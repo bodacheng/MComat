@@ -44,7 +44,7 @@ namespace mainMenu
         // 额外生成一个技能石图像
         void IconForShow(string skillID)
         {
-            SKStoneItem item = MySkillStones.GenerateNewStoneModel_Memory(skillID, false);
+            SKStoneItem item = Stones.GenerateNewStoneModel_Memory(skillID, false);
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT) 
@@ -82,7 +82,7 @@ namespace mainMenu
         
         public void RefreshInfo(string skillStoneOfPlayerId)
         {
-            StoneOfPlayerInfo currentstone = MySkillStones.Get(skillStoneOfPlayerId);
+            StoneOfPlayerInfo currentstone = Stones.Get(skillStoneOfPlayerId);
             if (currentstone == null)
             {
                 Clear();

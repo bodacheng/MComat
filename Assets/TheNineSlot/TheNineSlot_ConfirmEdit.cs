@@ -17,12 +17,12 @@ namespace mainMenu
                 target.ValiationWarn(valR, info.InstanceId);
                 return;
             }
-            List<StoneOfPlayerInfo> equiping = MySkillStones.GetEquipingStones(info.InstanceId);
+            List<StoneOfPlayerInfo> equiping = Stones.GetEquipingStones(info.InstanceId);
             // slot stoneid
             IDictionary<string, string> beforeDic = new Dictionary<string, string>();
             for (int i = 0; i < equiping.Count; i++)
             {
-                StoneOfPlayerInfo stone = MySkillStones.Get(equiping[i].InstanceId);
+                StoneOfPlayerInfo stone = Stones.Get(equiping[i].InstanceId);
                 if (stone.inUsingSkillSlot != null)
                 {
                     if (!beforeDic.ContainsKey(stone.inUsingSkillSlot))
@@ -79,7 +79,7 @@ namespace mainMenu
 
             void sucess(IDictionary<string, Tuple<string, string>> ee)
             {
-                MySkillStones.RefreshLocalStoneParams(ee);
+                Stones.RefreshLocalStoneParams(ee);
                 ReadANineAndTwo(info);
                 SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
                 SeletedRender(null);
@@ -105,7 +105,7 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
 
-            MySkillStones.Update(ToEditStones, () => sucess(ToEditStones), error);
+            Stones.Update(ToEditStones, () => sucess(ToEditStones), error);
         }
 
 
@@ -114,7 +114,7 @@ namespace mainMenu
         IEnumerator RemoveStone(string stoneID)
         {
             // 将原先九宫格对应位置的技能石卸载。即将其inUsingMonsterOfPlayerId变为null。
-            StoneOfPlayerInfo formerStoneInfo = MySkillStones.Get(stoneID);
+            StoneOfPlayerInfo formerStoneInfo = Stones.Get(stoneID);
             if (formerStoneInfo != null)
             {
                 if (formerStoneInfo.Inherent == "true")

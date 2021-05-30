@@ -8,10 +8,10 @@ public class ShowAllMyStoneLevel : MonoBehaviour
     {
         if (phase == 1)
         {
-            MySkillStones.ShowAllMyStoneLevel();
+            Stones.ShowAllMyStoneLevel();
             phase = 2;
         }else{
-            MySkillStones.CloseAllMyStoneFloatInfo();
+            Stones.CloseAllMyStoneFloatInfo();
             phase = 1; 
         }        
     }

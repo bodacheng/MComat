@@ -18,7 +18,7 @@ namespace mainMenu
                 Debug.Log("严重错误");
                 return;
             }
-            List<StoneOfPlayerInfo> equipingstones = MySkillStones.GetEquipingStones(_AccCharInfo.InstanceId);
+            List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(_AccCharInfo.InstanceId);
 
             for (int i = 1; i <= 9; i++)
             {

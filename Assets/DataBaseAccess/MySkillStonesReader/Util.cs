@@ -8,7 +8,7 @@ using System.Linq;
 // 配置文件属于资源信息，不是账户信息，应该分离开处理。
 namespace dataAccess
 {
-    public partial class MySkillStones
+    public partial class Stones
     {
         #region 技能石模型相关
         // 把所有技能的等级显示出来
@@ -106,15 +106,15 @@ namespace dataAccess
             List<string> exceptStones = new List<string>();
             for (int i = 0; i < exceptSkIDs.Count; i++)
             {
-                List<string> exceptAccIds = MySkillStones.GetMyStonesBySkillID(exceptSkIDs[i]);
+                List<string> exceptAccIds = Stones.GetMyStonesBySkillID(exceptSkIDs[i]);
                 exceptStones.AddRange(exceptAccIds);
             }
-            List<string> StoneAccIDs = MySkillStones.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
+            List<string> StoneAccIDs = Stones.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
             if (StoneAccIDs.Count == 0)
                 return null;
             int ranDom = Random.Range(0, StoneAccIDs.Count);
             string stoneAccID = StoneAccIDs[ranDom];
-            infoModel = MySkillStones.Get(stoneAccID);
+            infoModel = Stones.Get(stoneAccID);
             return infoModel;
         }
 

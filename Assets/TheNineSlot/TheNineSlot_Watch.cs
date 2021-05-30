@@ -14,7 +14,7 @@ namespace mainMenu
             List<string> IDlist = GetUsingStonesId();
             for (int i = 0; i < IDlist.Count; i++)
             {
-                returnValue.Add(MySkillStones.Get(IDlist[i]));
+                returnValue.Add(Stones.Get(IDlist[i]));
             }
             return returnValue;
         }

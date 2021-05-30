@@ -6,7 +6,7 @@ using System;
 
 namespace dataAccess
 {
-    public partial class MySkillStones
+    public partial class Stones
     {
         public static IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
@@ -49,7 +49,7 @@ namespace dataAccess
                     Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + kv.Key);
                     return;
                 }
-                StoneOfPlayerInfo ofPlayerInfo = MySkillStones.Dic[kv.Key];
+                StoneOfPlayerInfo ofPlayerInfo = Stones.Dic[kv.Key];
                 ofPlayerInfo.inUsingMonsterOfPlayerId = kv.Value.Item1;
                 ofPlayerInfo.inUsingSkillSlot = kv.Value.Item2;
             }

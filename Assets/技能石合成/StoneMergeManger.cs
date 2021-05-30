@@ -112,17 +112,17 @@ public class StoneMergeManger : MonoBehaviour
              model =>
              {
                 if (skillStoneLevelUpForm.M1Stone != null)
-                    MySkillStones.RemoveStoneLocal(skillStoneLevelUpForm.M1Stone);
+                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M1Stone);
                 if (skillStoneLevelUpForm.M2Stone != null)
-                    MySkillStones.RemoveStoneLocal(skillStoneLevelUpForm.M2Stone);
+                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M2Stone);
                 if (skillStoneLevelUpForm.M3Stone != null)
-                    MySkillStones.RemoveStoneLocal(skillStoneLevelUpForm.M3Stone);
+                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M3Stone);
                 if (skillStoneLevelUpForm.M4Stone != null)
-                    MySkillStones.RemoveStoneLocal(skillStoneLevelUpForm.M4Stone);
+                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M4Stone);
                 if (skillStoneLevelUpForm.M5Stone != null)
-                    MySkillStones.RemoveStoneLocal(skillStoneLevelUpForm.M5Stone);
+                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M5Stone);
                     
-                MySkillStones.Add(model.stone);
+                Stones.Add(model.stone);
              },
              model => {
              

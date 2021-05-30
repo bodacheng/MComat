@@ -1,6 +1,6 @@
 ﻿namespace dataAccess
 {
-    public partial class MySkillStones
+    public partial class Stones
     {
         // 删除一个技能石
         public static void RemoveStoneLocal(string stoneID)

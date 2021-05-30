@@ -5,7 +5,7 @@ using Skill;
 
 namespace dataAccess
 {
-    public partial class MySkillStones
+    public partial class Stones
     {
         public static void Add(StoneOfPlayerInfo one)
         {

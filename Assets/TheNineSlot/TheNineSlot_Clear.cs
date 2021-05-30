@@ -22,7 +22,7 @@ namespace mainMenu
                 return;
 
             MonsterOfPlayerInfo info = MemberDetail.target._focusing;
-            StoneOfPlayerInfo originSkillInfo = MySkillStones.GetOriginSkillOfMonster(info.InstanceId);
+            StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.InstanceId);
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 SKStoneItem sK = _slot._DragAndDropCell.GetItem();
