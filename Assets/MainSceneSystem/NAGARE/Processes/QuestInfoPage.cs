@@ -11,7 +11,7 @@ public class QuestInfoPage : MainSceneProcess
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
-        yield return GetReadyForQuestInfoPage();
+        GetReadyForQuestInfoPage();
     }
     
     public QuestInfoPage()
@@ -31,7 +31,7 @@ public class QuestInfoPage : MainSceneProcess
     }
     
     // 这个函数目前是固定使用“默认队伍配置”
-    public IEnumerator GetReadyForQuestInfoPage()
+    public void GetReadyForQuestInfoPage()
     {
         FightPreparePage.target.QuestName.text = FightLoad.ToBeLoad.battleNameJPG;
         switch(FightLoad.ToBeLoadMode)
@@ -44,7 +44,7 @@ public class QuestInfoPage : MainSceneProcess
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
-                yield return FightLoad.Arena();
+                FightLoad.Arena();
                 break;
             case TeamSetGameMode.story:
                 void GoToTeamEdit_Arcade()
@@ -54,7 +54,7 @@ public class QuestInfoPage : MainSceneProcess
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
-                yield return FightLoad.Arcade();
+                FightLoad.Arcade();
                 break;
         }
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);

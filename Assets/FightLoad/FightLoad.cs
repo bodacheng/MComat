@@ -18,65 +18,47 @@ public static class FightLoad
         ToBeLoadMode = teamSetGameMode;
     }
     
-    public static IEnumerator Arcade()
+    public static void Arcade()
     {
         ToBeLoad.LoadLocalFightFromScript();
         PosKeySet set = TeamSet.Default;
-        IEnumerator getDefaultTeamSet = TeamSet.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
-        yield return getDefaultTeamSet;
-        if (getDefaultTeamSet.Current == null)
-        {
-            Debug.Log("获取我方人员错误");
-            yield break;
-        }
-        ToBeLoad.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getDefaultTeamSet.Current;
+        ToBeLoad.localFight.HeroSets = TeamSet.ToDic(set);
     }
     
-    public static IEnumerator Arena()
+    public static void Arena()
     {
         PosKeySet set = TeamSet.Arena3V3;
-        IEnumerator getArenaTeam = TeamSet.MyTeamByEntryLimit(ToBeLoad.EntryMemberNum, set);
-        yield return getArenaTeam;
-        if (getArenaTeam.Current == null)
-        {
-            Debug.Log("获取我方人员错误");
-            yield break;
-        }
-        ToBeLoad.localFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)getArenaTeam.Current;
+        ToBeLoad.localFight.HeroSets = TeamSet.ToDic(set);
     }
     
     #region 进入战斗
     public static void GoTo()
     {
-        IEnumerator LoadAndGo()
+        switch (ToBeLoadMode)
         {
-            switch(ToBeLoadMode)
-            {
-                case TeamSetGameMode.story:
-                    yield return Arcade();
-                    break;
-                case TeamSetGameMode.arena3V3:
-                    yield return Arena();
-                    break;
-            }
-            if (ToBeLoad.localFight.HeroSets.values.Count < 1 || ToBeLoad.localFight.EnemySets.values.Count < 1)
-            {
-                string error;
-                switch (Setting.Language)
-                {
-                    case ApiLanguage.JaJp:
-                        error = "チームメンバーは3人未満でステージに入場出来ません。";
-                        break;
-                    default:
-                        error = "队伍人员不够。";
-                        break;
-                }
-                LoadingCanvas.target.ArrangeWarnWindow(error);
-                yield break;
-            }
-            Go(ToBeLoad);
+            case TeamSetGameMode.story:
+                Arcade();
+                break;
+            case TeamSetGameMode.arena3V3:
+                Arena();
+                break;
         }
-        PreScene.target.mainProcessRunner.RunAsQueued(LoadAndGo());
+        if (ToBeLoad.localFight.HeroSets.values.Count < 1 || ToBeLoad.localFight.EnemySets.values.Count < 1)
+        {
+            string error;
+            switch (Setting.Language)
+            {
+                case ApiLanguage.JaJp:
+                    error = "チームメンバーは3人未満でステージに入場出来ません。";
+                    break;
+                default:
+                    error = "队伍人员不够。";
+                    break;
+            }
+            LoadingCanvas.target.ArrangeWarnWindow(error);
+            return;
+        }
+        Go(ToBeLoad);
     }
     
     public static void Go(StageScriptableObject stage)

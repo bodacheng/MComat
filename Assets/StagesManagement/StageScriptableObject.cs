@@ -10,8 +10,6 @@ public class StageScriptableObject : ScriptableObject
     [SerializeField]
     public int LocalFightID;
     [SerializeField]
-    public int EntryMemberNum;
-    [SerializeField]
     public int BattleGroundID;
     
     [SerializeField]
