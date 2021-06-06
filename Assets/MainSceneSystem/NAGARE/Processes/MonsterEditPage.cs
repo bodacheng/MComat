@@ -111,8 +111,8 @@ public class MonsterEditPage : MainSceneProcess
         TheNineSlot.target.ReadANineAndTwo(_AccCharInfo);
         CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.monsterId);
         SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
-        SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
-        yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
+        SkillStonesBox.target.RestFilter();
+        SkillStonesBox.target.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
             TheNineSlot.target.UpdateStonesBaseOnSlots(_AccCharInfo);
@@ -180,7 +180,7 @@ public class MonsterEditPage : MainSceneProcess
         }
         CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.monsterId);
         SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
-        SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
-        yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
+        SkillStonesBox.target.RestFilter();
+        SkillStonesBox.target.EXTabsFeatureRefresh(false);
     }
 }

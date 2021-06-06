@@ -45,8 +45,8 @@ public class StonesPage : MainSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
-        yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);
-        SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+        SkillStonesBox.target.EXTabsFeatureRefresh(true);
+        SkillStonesBox.target.RestFilter();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (

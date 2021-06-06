@@ -19,8 +19,8 @@ public class StoneMerge : MainSceneProcess
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.CellsFeatureLoad(-1);
-        SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
-        yield return SkillStonesBox.target.EXTabsFeatureRefresh(false);
+        SkillStonesBox.target.RestFilter();
+        SkillStonesBox.target.EXTabsFeatureRefresh(false);
         SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (

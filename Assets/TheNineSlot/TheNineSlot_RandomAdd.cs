@@ -51,7 +51,7 @@ namespace mainMenu
                     AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
                     yield return null;
                     NineSlotsStatusRefresh();
-                    SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+                    SkillStonesBox.target.RestFilter();
                 }
 
                 PreScene.target.mainProcessRunner.RunAsQueued(temp());
@@ -89,7 +89,7 @@ namespace mainMenu
                 AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
                 yield return null;
                 NineSlotsStatusRefresh();
-                SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+                SkillStonesBox.target.RestFilter();
             }
 
             PreScene.target.mainProcessRunner.RunAsQueued(temp());

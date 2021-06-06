@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Soul;
-using Unity.Jobs;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
 //Those paremeters are sent to all parts of character from here.

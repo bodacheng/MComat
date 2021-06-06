@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F4DF3B01-DBF5-8062-902D-1D03B79D7515}</ProjectGuid>
+    <ProjectGuid>{874A125E-AB13-6D48-0E2C-9890F14DF9BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>PlayFabEditorExtensions</AssemblyName>
@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.10.2.0</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.9.4.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneOSX:2</UnityBuildTarget>
     <UnityVersion>2019.4.9f1</UnityVersion>
@@ -285,80 +285,74 @@
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
     </Reference>
     <Reference Include="Purchasing.Common">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
     </Reference>
     <Reference Include="Stores">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
     </Reference>
     <Reference Include="Apple">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
     </Reference>
     <Reference Include="AppleMacos">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleMacos.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleMacos.dll</HintPath>
     </Reference>
     <Reference Include="AppleCore">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleCore.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleCore.dll</HintPath>
     </Reference>
     <Reference Include="Security">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
     </Reference>
     <Reference Include="FacebookStore">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
     </Reference>
     <Reference Include="winrt">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
     <Reference Include="JMOAssets_MatCapWelcome">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
     </Reference>
     <Reference Include="POFX_Runtime">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
     </Reference>
     <Reference Include="POFX_Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -715,16 +709,16 @@
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

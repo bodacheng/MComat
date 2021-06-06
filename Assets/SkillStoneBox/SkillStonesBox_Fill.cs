@@ -4,12 +4,15 @@ using UnityEngine;
 using System;
 using dataAccess;
 using Skill;
+using UniRx;
 
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        public StoneFilterForm CurrentFilter()
+        ReactiveProperty<StoneFilterForm> myForm;
+
+        public void RestFilter()
         {
             StoneFilterForm filterForm = new StoneFilterForm
             {
@@ -20,18 +23,25 @@ namespace mainMenu
                 far = farCheckBox.isOn,
                 rare = rares
             };
-            return filterForm;
+
+            myForm.Value = filterForm;
         }
-        
-        public void PutSkillStonesToBox(StoneFilterForm filterForm)
+
+        public class StoneFilterForm
         {
-            PutSkillStonesToBox(filterForm, null, null);
+            public string type;
+            public BehaviorType BType = BehaviorType.NONE;
+            public int[] exType = { 0, 1, 2, 3 };
+            public bool close = false;
+            public bool near = false;
+            public bool far = false;
+            public List<int> rare = new List<int> { 0, 1, 2, 3, 4, 5 };
         }
-        
+
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public void PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
+        public void PutSkillStonesToBox()
         {
-            List<string> targetSKs = Stones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
+            List<string> targetSKs = Stones.TargetStonesFromAccount_except(myForm.Value, null, null, false);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
             {
@@ -66,18 +76,8 @@ namespace mainMenu
                     //Debug.Log("有使用中的技能石头，直接跳过这一格");
                 }
             }
-            StoneDeleteManger.target.RefreshSelectedRender();
-        }
-
-        public class StoneFilterForm
-        {
-            public string type;
-            public BehaviorType BType = BehaviorType.NONE;
-            public int[] exType = { 0,1,2,3 };
-            public bool close = false;
-            public bool near = false;
-            public bool far = false;
-            public List<int> rare = new List<int> { 0,1,2,3,4,5};
+            if (StoneDeleteManger.target != null)
+                StoneDeleteManger.target.RefreshSelectedRender();
         }
     }
 }

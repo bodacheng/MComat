@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UniRx;
 
 namespace mainMenu
 {
@@ -48,12 +49,18 @@ namespace mainMenu
         public static RectTransform _stonesTempContainer;
         
         public static SkillStonesBox target;
-        
+
         void Awake()
         {
             _Selected = SelectedFrame;
             _stonesTempContainer = stonesTempContainer;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
+
+            myForm = new ReactiveProperty<StoneFilterForm>();
+            myForm.Subscribe(x =>
+            {
+                PutSkillStonesToBox();
+            }).AddTo(this);
         }
 
         public string GetFocusingType()
@@ -74,7 +81,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 0;
-            PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+            RestFilter();
         }
         
         // Button feature
@@ -82,7 +89,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 1;
-            PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+            RestFilter();
         }
         
         // Button feature
@@ -90,7 +97,7 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 2;
-            PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+            RestFilter();
         }
         
         // Button feature
@@ -98,11 +105,11 @@ namespace mainMenu
         {
             _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 3;
-            PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+            RestFilter();
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
-        public IEnumerator EXTabsFeatureRefresh(bool viewingMode)
+        public void EXTabsFeatureRefresh(bool viewingMode)
         {
             if (viewingMode)
             {
@@ -127,23 +134,18 @@ namespace mainMenu
                 types.gameObject.SetActive(false);
             }
             closeCheckBox.onValueChanged.RemoveAllListeners();
-            closeCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
+            closeCheckBox.onValueChanged.AddListener(delegate { RestFilter(); });
             nearCheckBox.onValueChanged.RemoveAllListeners();
-            nearCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
+            nearCheckBox.onValueChanged.AddListener(delegate { RestFilter(); });
             farCheckBox.onValueChanged.RemoveAllListeners();
-            farCheckBox.onValueChanged.AddListener(delegate { RangeCheckBoxOnValueChanged(); });
-            yield break;
-        }
-        
-        void RangeCheckBoxOnValueChanged()
-        {
-            PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+            farCheckBox.onValueChanged.AddListener(delegate { RestFilter(); });
         }
         
         public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            mainProcessRunner.RunAsQueued(EXTabsFeatureRefresh(true));
+            EXTabsFeatureRefresh(true);
+            RestFilter();
         }
     }
 }

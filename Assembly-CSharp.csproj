@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BBE442A7-28CD-B521-9CC4-A2211D8896FC}</ProjectGuid>
+    <ProjectGuid>{D42C09C4-BDF6-1E53-86F6-DDE1BA94A620}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.10.2.0</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.9.4.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneOSX:2</UnityBuildTarget>
     <UnityVersion>2019.4.9f1</UnityVersion>
@@ -390,16 +390,6 @@
     <Compile Include="Assets\MemberDetail\LevelManager.cs" />
     <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
     <Compile Include="Assets\ModelShower\ModelShower.cs" />
-    <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
-    <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager\Execution.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
-    <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
-    <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
-    <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
-    <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
     <Compile Include="Assets\NetFightScene\NetFightScene.cs" />
     <Compile Include="Assets\ObjectPools\DecompositionerPool.cs" />
     <Compile Include="Assets\OldUseless\DebugManager.cs" />
@@ -563,9 +553,6 @@
     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
     <Compile Include="Assets\Structure\Sys.cs" />
     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
-    <Compile Include="Assets\TheBlur\Blur.cs" />
-    <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
-    <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\FightOverShow\IconAndSKillShowUISet.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_ByAcc.cs" />
@@ -606,13 +593,6 @@
     <Compile Include="Assets\UI\BackGroundPS.cs" />
     <Compile Include="Assets\UI\ExBarBurn.cs" />
     <Compile Include="Assets\UI\ImageGliter.cs" />
-    <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />
-    <Compile Include="Assets\UI\Oldscripts\FloatOnHead.cs" />
-    <Compile Include="Assets\UI\Oldscripts\NetWork\fightingSceneNetworkManager.cs" />
-    <Compile Include="Assets\UI\Oldscripts\PUNMenu.cs" />
-    <Compile Include="Assets\UI\Oldscripts\RongLianGamen.cs" />
-    <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
-    <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
     <Compile Include="Assets\UI\ReturnButtonManager.cs" />
     <Compile Include="Assets\UI\SciFic Icons\Scripts\IconScript.cs" />
     <Compile Include="Assets\UI\SciFic Icons\Scripts\ImageFadeIn.cs" />
@@ -663,6 +643,13 @@
     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerParticle.cs" />
     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerText.cs" />
     <Compile Include="Assets\UI\SideCharIcon.cs" />
+    <Compile Include="Assets\UI\oldscripts\Debug_Char_Set.cs" />
+    <Compile Include="Assets\UI\oldscripts\FloatOnHead.cs" />
+    <Compile Include="Assets\UI\oldscripts\NetWork\fightingSceneNetworkManager.cs" />
+    <Compile Include="Assets\UI\oldscripts\PUNMenu.cs" />
+    <Compile Include="Assets\UI\oldscripts\RongLianGamen.cs" />
+    <Compile Include="Assets\UI\oldscripts\Save_Trans.cs" />
+    <Compile Include="Assets\UI\oldscripts\SwapAllModelShader.cs" />
     <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
     <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystickScreenSizeUpdater.cs" />
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
@@ -670,6 +657,19 @@
     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
     <Compile Include="Assets\UpperInfoBar\UpperInfoBar.cs" />
     <Compile Include="Assets\missionWatcher\MissionWatcher.cs" />
+    <Compile Include="Assets\monsterbox\MonsterBox.cs" />
+    <Compile Include="Assets\monsterbox\MonsterboxFilter.cs" />
+    <Compile Include="Assets\monsterbox\SSLevelUpManager\ByGold.cs" />
+    <Compile Include="Assets\monsterbox\SSLevelUpManager\BySKStone.cs" />
+    <Compile Include="Assets\monsterbox\SSLevelUpManager\Execution.cs" />
+    <Compile Include="Assets\monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
+    <Compile Include="Assets\monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
+    <Compile Include="Assets\monsterbox\SkillStoneBoxTabEffectsManager.cs" />
+    <Compile Include="Assets\monsterbox\SkillStoneDetail.cs" />
+    <Compile Include="Assets\monsterbox\StoneDeleteManger.cs" />
+    <Compile Include="Assets\theBlur\Blur.cs" />
+    <Compile Include="Assets\theBlur\Blur_basicdata.cs" />
+    <Compile Include="Assets\theBlur\CircularBuffer.cs" />
     <Compile Include="Assets\技能石合成\StoneMergeManger.cs" />
     <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
@@ -1453,58 +1453,52 @@
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
     </Reference>
     <Reference Include="Purchasing.Common">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Purchasing.Common.dll</HintPath>
     </Reference>
     <Reference Include="Stores">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
     </Reference>
     <Reference Include="Apple">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
     </Reference>
     <Reference Include="AppleMacos">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleMacos.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleMacos.dll</HintPath>
     </Reference>
     <Reference Include="AppleCore">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleCore.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Apple/AppleCore.dll</HintPath>
     </Reference>
     <Reference Include="Security">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
     </Reference>
     <Reference Include="FacebookStore">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
     </Reference>
     <Reference Include="winrt">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/JsonSupport/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="POFX_Runtime">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -1861,114 +1855,114 @@
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.9f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Monetization">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{75883105-9718-7D52-49BE-8F73049FADDB}</Project>
+      <Project>{84E95158-C26D-C721-2578-C58A46E4DE54}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
-      <Project>{CFD99446-2050-1694-FB2C-565AD4E01465}</Project>
+      <Project>{D9FF62E3-C749-051A-AAAA-7A236C8B83A5}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFab.csproj">
-      <Project>{E92E20E0-2099-5F2C-CDC6-263F7B6D3A00}</Project>
+      <Project>{A4C5C97D-798B-7AC9-7F6E-42E76EF9397A}</Project>
       <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
-      <Project>{F4DF3B01-DBF5-8062-902D-1D03B79D7515}</Project>
+      <Project>{874A125E-AB13-6D48-0E2C-9890F14DF9BF}</Project>
       <Name>PlayFabEditorExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{A6F66BB6-BDBD-06A4-4867-B5F5ADF9847A}</Project>
+      <Project>{20DB9ADB-D7A2-A54F-9F0A-182D7DBA668C}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{DD389A5D-27BC-8773-6530-D1A0D7A6951B}</Project>
+      <Project>{3C4080D4-31C8-706A-DA81-570650E614CF}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{C38A86AB-DB38-CE93-B53A-1ED2BFB72E67}</Project>
+      <Project>{F2FCB675-6750-014D-88A4-BCEEB4FC0E73}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{CC4D043E-41D2-23DF-E1D3-661D83F799B1}</Project>
+      <Project>{1442D072-F304-4B64-261B-524FA5CDD56B}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{D919D478-9749-E80F-0A67-12C4B3915B3A}</Project>
+      <Project>{2BD1E94F-1070-1B16-8D2B-96AEFAB73118}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{C5523DD4-EE06-6B9D-1C90-4BB9D85BDF21}</Project>
+      <Project>{A499BC27-1E12-90F1-22E6-8C6AF8B2E145}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
   </ItemGroup>

@@ -81,7 +81,7 @@ namespace mainMenu
             {
                 Stones.RefreshLocalStoneParams(ee);
                 ReadANineAndTwo(info);
-                SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
+                SkillStonesBox.target.RestFilter();
                 SeletedRender(null);
                 MemberDetail.target.SkillEditConfirmAnimation();
 

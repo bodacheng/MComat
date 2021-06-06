@@ -156,16 +156,9 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         SKStoneItem targetStone = Stones.GetRenderModel(stoneOfPlayerId);
-        List<string> GetSameSkillIdStones = Stones.GetMyStonesBySkillID(targetStone._SkillConfig.RECORD_ID);
-        List<string> extra = new List<string>();
-        for (int i = 0; i < GetSameSkillIdStones.Count; i++)
-        {
-            if (GetSameSkillIdStones[i] != stoneOfPlayerId)
-                extra.Add(GetSameSkillIdStones[i]);
-        }
+        targetStone._using = true;
+        SkillStonesBox.target.RestFilter();
         SkillStonesBox.target.rares = new List<int> { 0, 1, 2 };
-        SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
-        SkillStonesBox.target.PutSkillStonesToBox(filterForm, new List<string> {stoneOfPlayerId}, extra);
         SkillStonesBox.target.CellsFeatureLoad(0);
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
@@ -175,9 +168,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void CloseLevelUpPage()
     {
         SkillStonesBox.target.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
-        SkillStonesBox.StoneFilterForm filterForm = SkillStonesBox.target.CurrentFilter();
-        SkillStonesBox.target.PutSkillStonesToBox(filterForm);
         SKStoneItem targetStone = Stones.GetRenderModel(stoneOfPlayerId);
+        targetStone._using = false;
+        SkillStonesBox.target.RestFilter();
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         ReturnAllMaterialsToBox();
