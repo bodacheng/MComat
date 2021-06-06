@@ -140,8 +140,9 @@ namespace mainMenu
             farCheckBox.onValueChanged.RemoveAllListeners();
             farCheckBox.onValueChanged.AddListener(delegate { RestFilter(); });
         }
-        
-        public void TypeDropDownBehaviour()// 直接放在type下拉按钮上的功能
+
+        // 直接放在type下拉按钮上的功能
+        public void TypeDropDownBehaviour()
         {
             string targetType = types.options[types.value].text.Clone() as string;
             EXTabsFeatureRefresh(true);

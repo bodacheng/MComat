@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
 using dataAccess;
 using Skill;
 using UniRx;
@@ -67,13 +65,11 @@ namespace mainMenu
                 if (!Stones.GetRenderModel(targetSKs[i])._using)
                 {
                     _Cell.AddItem(Stones.GetRenderModel(targetSKs[i]));
-                    //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }
                 else
                 {
                     _Cell.UpdateMyItem();
-                    //Debug.Log("有使用中的技能石头，直接跳过这一格");
                 }
             }
             if (StoneDeleteManger.target != null)
