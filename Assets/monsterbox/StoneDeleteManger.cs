@@ -30,7 +30,7 @@ public class StoneDeleteManger : MonoBehaviour
     public void EnterDeleteMode()
     {
         SkillStonesBox._Selected.SetActive(false);
-        foreach (KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDictionary)
+        foreach (KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDic)
         {
             Button button = KV.Value.GetComponent<Button>();
             button.onClick.AddListener(delegate { SelectForDelete(KV.Value); });
@@ -73,7 +73,6 @@ public class StoneDeleteManger : MonoBehaviour
         EnterDeleteModeButton.gameObject.SetActive(true);
         CurrentSelectedCount.text = "";
         ClearSelect();
-        SkillStonesBox.GenerateCells();
         SkillStonesBox.CellsFeatureLoad(1);
         autoHide.Dispose();
     }
@@ -91,7 +90,7 @@ public class StoneDeleteManger : MonoBehaviour
     // 显示正选择中的技能石
     public void RefreshSelectedRender()
     {
-        foreach(KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDictionary)
+        foreach(KeyValuePair<int, StoneCell> KV in SkillStonesBox.CellsDic)
         {
             StoneCell cell = KV.Value;
             if (cell.GetItem() == null)

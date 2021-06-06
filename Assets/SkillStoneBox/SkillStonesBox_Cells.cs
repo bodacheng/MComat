@@ -22,15 +22,7 @@ namespace mainMenu
         [Header("石头滚动视窗")]
         public ScrollRect stoneviewScrollRect;
         
-        public static IDictionary<int, StoneCell> CellsDictionary = new Dictionary<int, StoneCell>();
-        
-        public static void PreventCellsFromDestroy()
-        {
-            foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDictionary)
-            {
-                keyValuePair.Value.transform.SetParent( ResourceKeeper.dontDestroyOnLoadParent);
-            }
-        }
+        public IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
         
         // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
         public void GenerateCells()
@@ -38,26 +30,26 @@ namespace mainMenu
             int hangshu = 1;
             for (int i = 0; i < Account._AccInfo.Stoneboxsize; i++)
             {
-                if (!CellsDictionary.ContainsKey(i))
+                if (!CellsDic.ContainsKey(i))
                 {
                     StoneCell cell = Instantiate(Cellprefab);
                     cell.empty = new Color(1, 1, 1, 0.6f);
                     cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
                     cell._SkillStoneSlot = null;
-                    CellsDictionary.Add(i, cell);
+                    CellsDic.Add(i, cell);
                 }
                 
                 //CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
-                CellsDictionary[i].gameObject.SetActive(true);
-                if (CellsDictionary[i].transform.parent != BoxT)
+                CellsDic[i].gameObject.SetActive(true);
+                if (CellsDic[i].transform.parent != BoxT)
                 {
-                    CellsDictionary[i].transform.SetParent(BoxT);
-                    CellsDictionary[i].transform.localPosition = Vector3.zero;
-                    CellsDictionary[i].transform.localScale = Vector3.one;
+                    CellsDic[i].transform.SetParent(BoxT);
+                    CellsDic[i].transform.localPosition = Vector3.zero;
+                    CellsDic[i].transform.localScale = Vector3.one;
                 }
                 
-                CellsDictionary[i]._selected.SetActive(false);
+                CellsDic[i]._selected.SetActive(false);
             }
             GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             hangshu = Account._AccInfo.Stoneboxsize / GridLayoutGroup.constraintCount + 1;
@@ -68,24 +60,24 @@ namespace mainMenu
         // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
         public void CellsFeatureLoad(int mode)
         {
-            for (int i = 0; i < CellsDictionary.Count; i++)
+            for (int i = 0; i < CellsDic.Count; i++)
             {
                 switch(mode)
                 {
                     case -1:
-                        CellButtonBeheviour_StoneMergeMode(CellsDictionary[i]);
+                        CellButtonBeheviour_StoneMergeMode(CellsDic[i]);
                     break;
                     case 0:
-                        CellButtonBeheviour_MAdd(CellsDictionary[i]);
+                        CellButtonBeheviour_MAdd(CellsDic[i]);
                     break;
                     case 1:
-                        CellButtonBeheviour_STStoneShow(CellsDictionary[i]);
+                        CellButtonBeheviour_STStoneShow(CellsDic[i]);
                     break;
                     case 2:
-                        CellButtonBeheviour_EditCharSkill(CellsDictionary[i]);
+                        CellButtonBeheviour_EditCharSkill(CellsDic[i]);
                     break;
                     case 3:
-                        CellButtonBeheviour_SKillShowMode(CellsDictionary[i]);
+                        CellButtonBeheviour_SKillShowMode(CellsDic[i]);
                     break;
                 }
             }
@@ -93,7 +85,7 @@ namespace mainMenu
         
         public StoneCell GetFirstEmptyCell()
         {
-            foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDictionary)
+            foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDic)
             {
                 if (keyValuePair.Value.GetItem() != null)
                     continue;

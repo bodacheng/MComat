@@ -11,7 +11,7 @@ public class SkillEditTry_A2Filled : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(new List<Transform> {SkillStonesBox.CellsDictionary[1].transform , TheNineSlot.target.A2DragAndDropCell.transform});
+        //LoadingCanvas.target.HigtLightRect(new List<Transform> {SkillStonesBox.CellsDic[1].transform , TheNineSlot.target.A2DragAndDropCell.transform});
     }
     
     public override void ProcessEnd()

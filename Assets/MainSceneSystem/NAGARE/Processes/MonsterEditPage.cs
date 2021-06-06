@@ -29,7 +29,6 @@ public class MonsterEditPage : MainSceneProcess
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
         PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.GenerateCells();
         SkillStonesBox.target.CellsFeatureLoad(2);
         yield return SkillEditButtonFeature(MemberDetail.target._focusing);
         SkillStonesBox.target._skillStoneDetail.Clear();
@@ -155,7 +154,6 @@ public class MonsterEditPage : MainSceneProcess
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
         PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.GenerateCells();
         SkillStonesBox.target.CellsFeatureLoad(3);
         yield return SkillEditButtonFeature_SP(MemberDetail.target._focusing);
         

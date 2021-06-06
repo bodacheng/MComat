@@ -24,7 +24,6 @@ public class StonesPage : MainSceneProcess
     {
         SkillStonesBox.target._skillStoneDetail.Clear();
         yield return CommonEnterProcess();
-        SkillStonesBox.target.GenerateCells();
         SkillStonesBox.target.CellsFeatureLoad(1);
     }
     
@@ -32,7 +31,6 @@ public class StonesPage : MainSceneProcess
     public static IEnumerator EnterProcess<T>(T t)
     {
         yield return CommonEnterProcess();
-        SkillStonesBox.target.GenerateCells();
         SSLevelUpManager.target.OpenLevelUpPage(t as string);
     }
     

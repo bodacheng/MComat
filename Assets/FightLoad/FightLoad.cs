@@ -64,7 +64,6 @@ public static class FightLoad
     public static void Go(StageScriptableObject stage)
     {
         FightSceneNote.nextBattle = stage;
-        SkillStonesBox.PreventCellsFromDestroy();
         Stones.PreventStonesFromDestroy();
         ArcadeManager.ArcadeStages.Clear();
         GeneralModelPool.Clear();

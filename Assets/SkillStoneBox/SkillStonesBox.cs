@@ -55,14 +55,7 @@ namespace mainMenu
             _stonesTempContainer = stonesTempContainer;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
         }
-        
-        public IEnumerator StartUp()
-        {
-            GenerateCells();
-            CellsFeatureLoad(1);
-            yield return null ;
-        }
-        
+
         public string GetFocusingType()
         {
             return focusingtype;

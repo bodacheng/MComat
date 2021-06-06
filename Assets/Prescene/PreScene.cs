@@ -146,8 +146,6 @@ namespace mainMenu
             HeroIcon.INIFrames();
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
-            yield return _SkillStonesBox_NineSlot.StartUp();
-            yield return _SkillStonesBox_Show.StartUp();
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
             TheNineSlot.target.StartUp();

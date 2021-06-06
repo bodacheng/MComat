@@ -38,7 +38,7 @@ namespace mainMenu
                 Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + Account._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
             }
             
-            foreach (KeyValuePair<int, StoneCell> cellPair in CellsDictionary)
+            foreach (KeyValuePair<int, StoneCell> cellPair in CellsDic)
             {
                 cellPair.Value.RemoveToTemp();
             }
@@ -46,22 +46,23 @@ namespace mainMenu
             int cellindex = 0;
             for (int i = 0; i < targetSKs.Count; i++)
             {
-                CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
-                if (_SkillStoneCell == null)
+                CellsDic.TryGetValue(cellindex, out StoneCell _Cell);
+                if (_Cell == null)
                 {
                     Debug.Log("Stone box exceed："+ cellindex);
+                    Debug.Log("此时技能石头盒子的总容量：" + CellsDic.Count);
                     continue;
                 }
 
                 if (!Stones.GetRenderModel(targetSKs[i])._using)
                 {
-                    _SkillStoneCell.AddItem(Stones.GetRenderModel(targetSKs[i]));
+                    _Cell.AddItem(Stones.GetRenderModel(targetSKs[i]));
                     //_SkillStoneCell.image.color = !AccountCharsSet.CheckExist(MySkillStonesReader.Get(targetSKs[i]).inUsingMonsterOfPlayerId) ? Color.white : Color.yellow;
                     cellindex++;
                 }
                 else
                 {
-                    _SkillStoneCell.UpdateMyItem();
+                    _Cell.UpdateMyItem();
                     //Debug.Log("有使用中的技能石头，直接跳过这一格");
                 }
             }
