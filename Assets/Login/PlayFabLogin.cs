@@ -10,7 +10,7 @@ public class PlayFabLogin
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest
             {
-                CustomId = "boda",
+                CustomId = SystemInfo.deviceUniqueIdentifier,
                 CreateAccount = true
             },
             sucess,

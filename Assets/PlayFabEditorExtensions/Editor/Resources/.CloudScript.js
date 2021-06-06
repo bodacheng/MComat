@@ -75,26 +75,37 @@ handlers.makeAPICall = function (args, context) {
 };
 
 handlers.buildBasicData = function (args, context) {
-    var request = {
-        PlayFabId: currentPlayerId,
-        Statistics: [
-            {
-                StatisticName: "StoneBoxSize",
-                Value: 50
-            },
-            {
-                StatisticName: "ArcadeProcess",
-                Value: 1
-            }
-        ]
-    };
-    // The pre-defined "server" object has functions corresponding to each PlayFab server API 
-    // (https://api.playfab.com/Documentation/Server). It is automatically 
-    // authenticated as your title and handles all communication with 
-    // the PlayFab API, so you don't have to write extra code to issue HTTP requests.
 
-    var playerStatResult = server.UpdatePlayerStatistics(request);
+    var updateUserDataResult = server.UpdateUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Data: {
+            "StoneBoxSize": 50,
+            "ArcadeProcess": 1
+        }
+    });
+    return { messageValue: updateUserDataResult };
 };
+
+handlers.expandBox = function (args, context) {
+
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["StoneBoxSize"]
+    });
+
+    var StoneBoxSize = Number(playerData.Data["StoneBoxSize"].Value) + Number(5);
+
+    var updateUserDataResult = server.UpdateUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Data: {
+            "StoneBoxSize": StoneBoxSize,
+        }
+    });
+
+    return StoneBoxSize;
+};
+
+
 
 handlers.getMonsterTest = function (args, context) {
     var request = {

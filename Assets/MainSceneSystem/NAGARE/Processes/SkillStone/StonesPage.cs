@@ -30,11 +30,9 @@ public class StonesPage : MainSceneProcess
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
-            Debug.Log(CheckIfExceedLimit.Count);
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
-        Debug.Log("sadqwd");
         yield return SkillStonesBox.target.EXTabsFeatureRefresh(true);
         SkillStonesBox.target.PutSkillStonesToBox(SkillStonesBox.target.CurrentFilter());
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);

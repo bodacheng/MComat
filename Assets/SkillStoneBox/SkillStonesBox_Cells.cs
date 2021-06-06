@@ -139,33 +139,21 @@ namespace mainMenu
                 {
                     type = C_Types[i],
                     exType = new int[1] { 0 },
-                    close = false,
-                    near = false,
-                    far = false
                 };
                 StoneFilterForm filterForm1 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 1 },
-                    close = false,
-                    near = false,
-                    far = false
                 };
                 StoneFilterForm filterForm2 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 2 },
-                    close = false,
-                    near = false,
-                    far = false
                 };
                 StoneFilterForm filterForm3 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 3 },
-                    close = false,
-                    near = false,
-                    far = false
                 };
                 
                 List<string> SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
