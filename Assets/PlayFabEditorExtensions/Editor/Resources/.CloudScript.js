@@ -122,7 +122,7 @@ handlers.getMonsterTest = function (args, context) {
     var playerStatResult = server.GrantItemsToUsers(request);
 };
 
-handlers.RemoveAllItems = function (args, context) {
+handlers.Remove25Stones = function (args, context) {
 
     var request = {
         "PlayFabId": currentPlayerId
@@ -131,28 +131,28 @@ handlers.RemoveAllItems = function (args, context) {
     var items = server.GetUserInventory(request);
 
     let toRemove = [];
+    var deletedCount = 0;
+    for (var i = 0; i < items.Inventory.length; i++) {
 
-    var count = 0;
-    for (var i = 0; i < items.Inventory.length; i++)
-    {
+        if (items.Inventory[i].CatalogVersion != "stoneTest2")
+            continue;
+
         var item = {
             "ItemInstanceId": items.Inventory[i].ItemInstanceId,
-            "PlayFabId" : currentPlayerId
+            "PlayFabId": currentPlayerId
         };
         toRemove.push(item);
-        count += 1;
-        if (count == 25 || i == items.Inventory.length -1) {
+        if ((toRemove.length == 25) || (i == items.Inventory.length - 1)) {
             var deleteRequest = {
                 "Items": toRemove
             };
-            
+            deletedCount += toRemove.length;
             var Result = server.RevokeInventoryItems(deleteRequest);
-            toRemove = [];
-            count = 0;
+            break;
         }
     }
-
-    return { messageValue: "all deleted"};
+    var currentItemCount = Number(items.Inventory.length) - Number(deletedCount);
+    return { currentItemCount: currentItemCount};
 }
 
 handlers.SkillEdit = function (args, context) {

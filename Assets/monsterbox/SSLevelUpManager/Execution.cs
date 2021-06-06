@@ -22,11 +22,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         skillStoneLevelUpForm.targetStoneID = PlayerSkillStoneID;
         
-        skillStoneLevelUpForm.M1Stone = item1 != null ? item1.equipingId : null;
-        skillStoneLevelUpForm.M2Stone = item2 != null ? item2.equipingId : null;
-        skillStoneLevelUpForm.M3Stone = item3 != null ? item3.equipingId : null;
-        skillStoneLevelUpForm.M4Stone = item4 != null ? item4.equipingId : null;
-        skillStoneLevelUpForm.M5Stone = item5 != null ? item5.equipingId : null;
+        skillStoneLevelUpForm.M1Stone = item1 != null ? item1.instanceId : null;
+        skillStoneLevelUpForm.M2Stone = item2 != null ? item2.instanceId : null;
+        skillStoneLevelUpForm.M3Stone = item3 != null ? item3.instanceId : null;
+        skillStoneLevelUpForm.M4Stone = item4 != null ? item4.instanceId : null;
+        skillStoneLevelUpForm.M5Stone = item5 != null ? item5.instanceId : null;
         
         skillStoneLevelUpForm.UseGold = CurrentGoldExaust.ToString();
         

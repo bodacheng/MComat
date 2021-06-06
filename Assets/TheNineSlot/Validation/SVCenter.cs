@@ -139,9 +139,9 @@ public static class SVCenter
             Debug.Log("固有技能无法移出，返回");
             return false;
         }
-        if (MyMonsters.CheckExist(Stones.Get(item.equipingId).inUsingMonsterOfPlayerId))
+        if (MyMonsters.CheckExist(Stones.Get(item.instanceId).inUsingMonsterOfPlayerId))
         {
-            string monsterPlayerID = Stones.Get(item.equipingId).inUsingMonsterOfPlayerId;
+            string monsterPlayerID = Stones.Get(item.instanceId).inUsingMonsterOfPlayerId;
             NineAndTwo.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
             if (valR3 != NineAndTwo.SkillEditError.Perfect)
             {

@@ -31,7 +31,7 @@ namespace mainMenu
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public void PutSkillStonesToBox(StoneFilterForm filterForm, List<string> exceptSkIDs, List<string> extraList)
         {
-            List<String> targetSKs = Stones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
+            List<string> targetSKs = Stones.TargetStonesFromAccount_except(filterForm, exceptSkIDs, extraList, false);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
             {
@@ -49,7 +49,7 @@ namespace mainMenu
                 CellsDictionary.TryGetValue(cellindex, out StoneCell _SkillStoneCell);
                 if (_SkillStoneCell == null)
                 {
-                    Debug.Log("Stone box exceed");
+                    Debug.Log("Stone box exceed："+ cellindex);
                     continue;
                 }
 

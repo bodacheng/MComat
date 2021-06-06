@@ -70,10 +70,9 @@ public class GachaManager : MonoBehaviour
         CloudScript.GrantMonsterTest();
     }
 
-
-    public void RemovesAllStones()
+    public void Remove25Stones()
     {
-        CloudScript.RemoveAllItems();
+        CloudScript.Remove25Stones();
     }
 
     public void GachaTest()

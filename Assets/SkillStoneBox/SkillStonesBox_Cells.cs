@@ -105,12 +105,12 @@ namespace mainMenu
         // Show Character icon using this SkillStone
         public void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
         {
-            if (Item == null || Item.equipingId == null)
+            if (Item == null || Item.instanceId == null)
             {
                 targetIcon.gameObject.SetActive(false);
                 return;
             }
-            StoneOfPlayerInfo SSInfo = Stones.Get(Item.equipingId);
+            StoneOfPlayerInfo SSInfo = Stones.Get(Item.instanceId);
             if (SSInfo == null || SSInfo.inUsingMonsterOfPlayerId == null)
             {
                 targetIcon.gameObject.SetActive(false);

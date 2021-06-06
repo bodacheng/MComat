@@ -2,9 +2,23 @@
 using mainMenu;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using dataAccess;
 
 public class StonesPage : MainSceneProcess
-{ 
+{
+    ReactiveProperty<int> userReadOnlyDataLoadFinished = new ReactiveProperty<int>(0);
+    void UserReadOnlyDataLoadFinished(int value)
+    {
+        userReadOnlyDataLoadFinished.Value = value;
+    }
+
+    ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
+    void ItemsLoadFinished(int value)
+    {
+        itemsLoadFinished.Value = value;
+    }
+
     //EnterProcess()内绝不能出现triggerMainProcess
     public static IEnumerator EnterProcess()
     {
@@ -55,11 +69,23 @@ public class StonesPage : MainSceneProcess
     
     public override void ProcessEnter<T>(T t)
     {
-        SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        if (t != null)
-            mainProcessRunner.RunAsQueued(EnterProcess(t));
-        else
-            mainProcessRunner.RunAsQueued(EnterProcess());
+        Account.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
+        ItemLoader.LoadAll(ItemsLoadFinished);
+
+        missionWatcher = new MissionWatcher(
+            new List<ReactiveProperty<int>>() {
+                itemsLoadFinished, userReadOnlyDataLoadFinished
+            },
+            () =>
+            {
+                SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
+                if (t != null)
+                    mainProcessRunner.RunAsQueued(EnterProcess(t));
+                else
+                    mainProcessRunner.RunAsQueued(EnterProcess());
+            },
+            () => { Debug.Log("错误，怎么办？"); }
+        );
     }
     
     public override void ProcessEnter()
@@ -69,6 +95,10 @@ public class StonesPage : MainSceneProcess
 
     public override void ProcessEnd()
     {
+        missionWatcher.DisposeAll();
+        ItemsLoadFinished(0);
+        UserReadOnlyDataLoadFinished(0);
+
         SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);

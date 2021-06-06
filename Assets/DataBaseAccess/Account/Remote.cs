@@ -31,6 +31,28 @@ namespace dataAccess
             );
         }
 
+        static void GetUserReadOnlyDataRemote(Action<int> finished)
+        {
+            PlayFabClientAPI.GetUserReadOnlyData
+            (
+                new GetUserDataRequest()
+                {
+                    PlayFabId = _AccInfo.playerID,
+                    Keys = new List<string>() { "ArcadeProcess", "StoneBoxSize" }
+                },
+                (GetUserDataResult obj) => {
+                    _AccInfo.ArcadeProcess = int.Parse(obj.Data["ArcadeProcess"].Value);
+                    _AccInfo.Stoneboxsize = int.Parse(obj.Data["StoneBoxSize"].Value);
+                    Debug.Log("读取的盒子容量是："+ _AccInfo.Stoneboxsize);
+                    finished.Invoke(1);
+                },
+                errorCallback => {
+                    Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
+                    finished.Invoke(-1);
+                }
+            );
+        }
+
         static void GetStatisticsRemote(Action<int> finished)
         {
             PlayFabClientAPI.GetPlayerStatistics(
@@ -53,12 +75,6 @@ namespace dataAccess
             {
                 switch (value.StatisticName)
                 {
-                    case "StoneBoxSize":
-                        _AccInfo.Stoneboxsize = value.Value;
-                        break;
-                    case "ArcadeProcess":
-                        _AccInfo.ArcadeProcess = value.Value;
-                        break;
                     default:
                         break;
                 }

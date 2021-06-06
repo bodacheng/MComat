@@ -9,10 +9,16 @@ using Api.Dto.Model;
 
 public class FrontPage : MainSceneProcess
 {
-    ReactiveProperty<int> accLoadFinished = new ReactiveProperty<int>(0);
-    void AccLoadFinished(int value)
+    ReactiveProperty<int> userDataLoadFinished = new ReactiveProperty<int>(0);
+    void UserDataLoadFinished(int value)
     {
-        accLoadFinished.Value = value;
+        userDataLoadFinished.Value = value;
+    }
+
+    ReactiveProperty<int> userReadOnlyDataLoadFinished = new ReactiveProperty<int>(0);
+    void UserReadOnlyDataLoadFinished(int value)
+    {
+        userReadOnlyDataLoadFinished.Value = value;
     }
 
     ReactiveProperty<int> statisticsFinished = new ReactiveProperty<int>(0);
@@ -62,14 +68,16 @@ public class FrontPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        Account.GetPlayerData(AccLoadFinished);
+        Account.GetUserData(UserDataLoadFinished);
+        Account.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
         Account.GetStatistics(StatisticsLoadFinished);
+
         //AccountCharsSet.LoadTutorial();
         ItemLoader.LoadAll(ItemsLoadFinished);
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                accLoadFinished, itemsLoadFinished, statisticsFinished
+                userDataLoadFinished, itemsLoadFinished, statisticsFinished, userReadOnlyDataLoadFinished
             },
             () =>
             {
@@ -82,8 +90,10 @@ public class FrontPage : MainSceneProcess
     public override void ProcessEnd()
     {
         missionWatcher.DisposeAll();
-        AccLoadFinished(0);
+        UserDataLoadFinished(0);
         ItemsLoadFinished(0);
+        UserReadOnlyDataLoadFinished(0);
+        StatisticsLoadFinished(0);
 
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);

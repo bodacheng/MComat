@@ -20,8 +20,8 @@ namespace mainMenu
                 SKStoneItem _stone = _SkillStoneCell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
-                    _skillStoneDetail.RefreshInfo(_stone.equipingId);
-                    SSLevelUpManager.target.SetTargetStoneID(_stone.equipingId);
+                    _skillStoneDetail.RefreshInfo(_stone.instanceId);
+                    SSLevelUpManager.target.SetTargetStoneID(_stone.instanceId);
                 }else{
                     _skillStoneDetail.Clear();
                 }
@@ -43,7 +43,7 @@ namespace mainMenu
                                     SKStoneItem _stone = _SkillStoneCell.GetItem();
                                     if (_stone != null && _stone._SkillConfig != null)
                                     {
-                                        SSLevelUpManager.target.OpenLevelUpPage(_stone.equipingId);
+                                        SSLevelUpManager.target.OpenLevelUpPage(_stone.instanceId);
                                     }
                                 }
                             }

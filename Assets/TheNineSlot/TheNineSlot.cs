@@ -124,7 +124,7 @@ namespace mainMenu
                     SKStoneItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
                     if (_SkillStone != null && _SkillStone._SkillConfig != null)
                     {
-                        _skillStoneDetail.RefreshInfo(_SkillStone.equipingId);
+                        _skillStoneDetail.RefreshInfo(_SkillStone.instanceId);
                         mainProcessRunner.RunAsQueued(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();
@@ -176,7 +176,7 @@ namespace mainMenu
                                 if (_stone != null && _stone._SkillConfig != null)
                                 {
                                     if (FightGlobalSetting._skillStoneHasExp)
-                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.equipingId, true);
+                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
                                 }
                             }
                         }

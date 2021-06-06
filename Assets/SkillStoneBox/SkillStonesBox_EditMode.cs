@@ -25,7 +25,7 @@ namespace mainMenu
                 SKStoneItem _stone = _SkillStoneCell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
-                    _skillStoneDetail.RefreshInfo(_stone.equipingId);
+                    _skillStoneDetail.RefreshInfo(_stone.instanceId);
                 }else{
                     _skillStoneDetail.Clear();
                 }
@@ -74,7 +74,7 @@ namespace mainMenu
                                 if (_stone != null && _stone._SkillConfig != null)
                                 {
                                     if (FightGlobalSetting._skillStoneHasExp)
-                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.equipingId, true);
+                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
                                 }
                             }
                         }

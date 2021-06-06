@@ -47,7 +47,7 @@ namespace mainMenu
                 if (allSlot[i]._DragAndDropCell.GetItem() != null)
                 {
                     if (!afterDic.ContainsKey((i + 1).ToString()))
-                        afterDic.Add((i + 1).ToString(), allSlot[i]._DragAndDropCell.GetItem().equipingId);
+                        afterDic.Add((i + 1).ToString(), allSlot[i]._DragAndDropCell.GetItem().instanceId);
                     else
                         Debug.Log("严重逻辑错误。怎么办待定");
                 }

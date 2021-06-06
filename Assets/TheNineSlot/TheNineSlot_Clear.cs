@@ -30,7 +30,7 @@ namespace mainMenu
                 {
                     continue;
                 }
-                if (originSkillInfo == null || (originSkillInfo != null && (sK.equipingId != originSkillInfo.InstanceId)))
+                if (originSkillInfo == null || (originSkillInfo != null && (sK.instanceId != originSkillInfo.InstanceId)))
                 {
                     _slot._DragAndDropCell.RemoveToTemp();
                 }

@@ -42,6 +42,7 @@ public static class PlayFabRead
                             break;
                     }
                 }
+                Debug.Log("目前技能石总数量："+ Stones.Dic.Count);
                 foreach (var kv in result.VirtualCurrency)
                 {
                     switch (kv.Key)

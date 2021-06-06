@@ -136,37 +136,20 @@ public class CloudScript
             error => { Debug.Log(error.Error); });
     }
 
-    public static void RemoveAllItems()
+    public static void Remove25Stones()
     {
-        var Items = new JsonArray();
-        List<string> ids = new List<string>();
-        foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Stones.Dic)
-        {
-            Items.Add(
-                new PlayFab.ServerModels.RevokeInventoryItem()
-                {
-                    ItemInstanceId = keyValuePair.Key
-                }
-            );
-            ids.Add(keyValuePair.Key);
-            if (Items.Count == 25)
-            {
-                break;
-            }
-        }
-
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "RemoveAllItems", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionName = "Remove25Stones", // Arbitrary function name (must exist in your uploaded cloud.js file)
                 //FunctionParameter = new { inputValue = Items.ToArray() }, // The parameter provided to your function
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },
         (ExecuteCloudScriptResult result) => {
             PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            object messageValue;
-            jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-            Debug.Log(messageValue);
+            object currentItemCount;
+            jsonResult.TryGetValue("currentItemCount", out currentItemCount); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+            Debug.Log(currentItemCount);
             ItemLoader.LoadAll(new Action<int> ((x)=> { }));
         },
         error => { Debug.Log(error.Error); });
