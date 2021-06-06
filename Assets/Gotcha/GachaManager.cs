@@ -73,8 +73,7 @@ public class GachaManager : MonoBehaviour
 
     public void RemovesAllStones()
     {
-        //Server.RandomRemove25Items();
-        CloudScript.RandomRemove25Items();
+        CloudScript.RemoveAllItems();
     }
 
     public void GachaTest()

@@ -105,8 +105,6 @@ handlers.expandBox = function (args, context) {
     return StoneBoxSize;
 };
 
-
-
 handlers.getMonsterTest = function (args, context) {
     var request = {
     "CatalogVersion": "Monsters",
@@ -124,20 +122,37 @@ handlers.getMonsterTest = function (args, context) {
     var playerStatResult = server.GrantItemsToUsers(request);
 };
 
-handlers.RandomRemove25Items = function (args, context) {
-    let items = [];
-    for (let i = 0; i < args.inputValue.length; i++) {
-        var one = {
-            "PlayFabId": currentPlayerId,
-            "ItemInstanceId": args.inputValue[i].ItemInstanceId
-        };
-        items.push(one);
-    }
+handlers.RemoveAllItems = function (args, context) {
+
     var request = {
-        "Items": items
+        "PlayFabId": currentPlayerId
     };
-    var Result = server.RevokeInventoryItems(request);
-    return { messageValue: Result};
+
+    var items = server.GetUserInventory(request);
+
+    let toRemove = [];
+
+    var count = 0;
+    for (var i = 0; i < items.Inventory.length; i++)
+    {
+        var item = {
+            "ItemInstanceId": items.Inventory[i].ItemInstanceId,
+            "PlayFabId" : currentPlayerId
+        };
+        toRemove.push(item);
+        count += 1;
+        if (count == 25 || i == items.Inventory.length -1) {
+            var deleteRequest = {
+                "Items": toRemove
+            };
+            
+            var Result = server.RevokeInventoryItems(deleteRequest);
+            toRemove = [];
+            count = 0;
+        }
+    }
+
+    return { messageValue: "all deleted"};
 }
 
 handlers.SkillEdit = function (args, context) {

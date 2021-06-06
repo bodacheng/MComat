@@ -136,7 +136,7 @@ public class CloudScript
             error => { Debug.Log(error.Error); });
     }
 
-    public static void RandomRemove25Items()
+    public static void RemoveAllItems()
     {
         var Items = new JsonArray();
         List<string> ids = new List<string>();
@@ -158,19 +158,16 @@ public class CloudScript
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "RandomRemove25Items", // Arbitrary function name (must exist in your uploaded cloud.js file)
-                FunctionParameter = new { inputValue = Items.ToArray() }, // The parameter provided to your function
+                FunctionName = "RemoveAllItems", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                //FunctionParameter = new { inputValue = Items.ToArray() }, // The parameter provided to your function
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },
         (ExecuteCloudScriptResult result) => {
-            foreach (string id in ids)
-            {
-                Stones.RemoveStoneLocal(id);
-            };
             PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
             object messageValue;
             jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
             Debug.Log(messageValue);
+            ItemLoader.LoadAll(new Action<int> ((x)=> { }));
         },
         error => { Debug.Log(error.Error); });
     }
