@@ -4127,11 +4127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chartypes:
   - human
-  CharacterConfigTextFile: {fileID: 4900000, guid: a8dfd9feec637466989cc8c3dc8b20b2,
-    type: 3}
-  MonstersConfigFilePath: Assets/MonstersConfig.csv
-  SkillConfigTextFile: {fileID: 4900000, guid: 1c9054f9937bf4d358a40ad7b949fcac, type: 3}
-  SkillConfigFilePath: Assets/mst_skill.csv
+  CharConfigFile: {fileID: 0}
+  CharConfigFilePath: 
+  SkillConfigFile: {fileID: 0}
+  SkillConfigPath: 
 --- !u!1 &2075428156307059469
 GameObject:
   m_ObjectHideFlags: 0

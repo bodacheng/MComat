@@ -71,7 +71,7 @@ public class LocalMasterDataToolGUI : Editor {
                         overridden = true,
                         name = "iPhone",
                         maxTextureSize = 2048,
-                        format = TextureImporterFormat.ASTC_RGBA_4x4,
+                        format = TextureImporterFormat.ASTC_4x4,
                         compressionQuality = 50,
                         allowsAlphaSplitting = false
                     };
@@ -81,7 +81,7 @@ public class LocalMasterDataToolGUI : Editor {
                         overridden = true,
                         name = "iPhone",
                         maxTextureSize = 2048,
-                        format = TextureImporterFormat.ASTC_RGB_4x4,
+                        format = TextureImporterFormat.ASTC_4x4,
                         compressionQuality = 50,
                         allowsAlphaSplitting = false
                     };
