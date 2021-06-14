@@ -25,7 +25,7 @@ namespace dataAccess
                     return;
             }
             StoneOfPlayerInfo info = Get(instanceId);
-            SKStoneItem item = GenerateNewStoneModel_Resource(info.skillId, true);
+            SKStoneItem item = GenerateStoneModel(info.skillId, true);
             item.Inherent = info.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[instanceId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
@@ -35,44 +35,22 @@ namespace dataAccess
             DicAdd<string, SKStoneItem>.Add(RenderModelDic, instanceId, item);
         }
 
-        public static SKStoneItem GenerateNewStoneModel_Memory(string skillID, bool openStoneFeature)
+        // 生成展示用技能石（额外模型）
+        // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
+        public static SKStoneItem GenerateStoneModel(string skillID, bool openStoneFeature)
         {
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             if (skillConfig == null)
             {
                 return null;
             }
-
+            SKStoneItem item;
             GameObject pretab = SkillIconsDic.Instance.Get(skillID);
             if (pretab == null)
             {
-                Debug.Log("Load Stone model fail:" + skillID);
-                return null;
+                pretab = SkillIconsDic.Instance.FindSkillIconByResource_P(skillID);
             }
             GameObject newIcon = Object.Instantiate(pretab);
-            SKStoneItem item = newIcon.GetComponent<SKStoneItem>();
-            if (item == null)
-            {
-                item = newIcon.AddComponent<SKStoneItem>();
-            }
-            item._SkillConfig = skillConfig;
-            item.enabled = openStoneFeature;
-            return item;
-        }
-
-        // 生成展示用技能石（额外模型）
-        // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
-        public static SKStoneItem GenerateNewStoneModel_Resource(string skillID, bool openStoneFeature)
-        {
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
-            if (skillConfig == null)
-            {
-                return null;
-            }
-
-            SKStoneItem item;
-            GameObject Icon = SkillIconsDic.Instance.FindSkillIconByResource_P(skillID);
-            GameObject newIcon = Object.Instantiate(Icon);
             item = newIcon.GetComponent<SKStoneItem>();
             if (item == null)
             {

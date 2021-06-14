@@ -5313,6 +5313,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3459889388137632553}
+  - component: {fileID: 7468211094419698774}
+  - component: {fileID: 6013925042266464459}
   m_Layer: 0
   m_Name: Bip001 R Calf
   m_TagString: Untagged
@@ -5335,6 +5337,33 @@ Transform:
   m_Father: {fileID: 303566720113564805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7468211094419698774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367024739066216318}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.015, z: 0.01}
+  m_Center: {x: -0.02, y: 0, z: 0}
+--- !u!114 &6013925042266464459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367024739066216318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Center: {fileID: 2769224687758642736}
+  myColliderMustEquip: {fileID: 7468211094419698774}
 --- !u!1 &372304790585271201
 GameObject:
   m_ObjectHideFlags: 0
@@ -10834,7 +10863,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.07, y: 0.04, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5626232403925142131
 MonoBehaviour:
@@ -10849,7 +10878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Center: {fileID: 2769224687758642736}
-  myColliderMustEquip: {fileID: 0}
+  myColliderMustEquip: {fileID: 7701928345687499732}
 --- !u!1 &1017155311419544239
 GameObject:
   m_ObjectHideFlags: 0
@@ -39791,6 +39820,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4997406617763274963}
+  - component: {fileID: 8941180950697866133}
+  - component: {fileID: 4873970023368171563}
   m_Layer: 0
   m_Name: Bip001 L Calf
   m_TagString: Untagged
@@ -39813,6 +39844,33 @@ Transform:
   m_Father: {fileID: 8930626860217867019}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8941180950697866133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287390609613420427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Center: {fileID: 2769224687758642736}
+  myColliderMustEquip: {fileID: 4873970023368171563}
+--- !u!65 &4873970023368171563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287390609613420427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.015, z: 0.01}
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!1 &5297182497404834625
 GameObject:
   m_ObjectHideFlags: 0
@@ -41800,6 +41858,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3709361783119689343}
+  - component: {fileID: 4516427552552023977}
+  - component: {fileID: 7974035851841133181}
   m_Layer: 0
   m_Name: Bip001 Head
   m_TagString: Untagged
@@ -41822,6 +41882,33 @@ Transform:
   m_Father: {fileID: 8346321543860643467}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4516427552552023977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157026910820294717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Center: {fileID: 0}
+  myColliderMustEquip: {fileID: 7974035851841133181}
+--- !u!65 &7974035851841133181
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157026910820294717}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.025, y: 0.025, z: 0.025}
+  m_Center: {x: -0.008, y: 0, z: 0}
 --- !u!1 &7162936930348964496
 GameObject:
   m_ObjectHideFlags: 0

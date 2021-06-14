@@ -65,15 +65,15 @@ public partial class NineForShow : MonoBehaviour
     {
         ClearCurrent();
 
-        A1S = Stones.GenerateNewStoneModel_Memory(A1skillid, false);
-        A2S = Stones.GenerateNewStoneModel_Memory(A2skillid, false);
-        A3S = Stones.GenerateNewStoneModel_Memory(A3skillid, false);
-        B1S = Stones.GenerateNewStoneModel_Memory(B1skillid, false);
-        B2S = Stones.GenerateNewStoneModel_Memory(B2skillid, false);
-        B3S = Stones.GenerateNewStoneModel_Memory(B3skillid, false);
-        C1S = Stones.GenerateNewStoneModel_Memory(C1skillid, false);
-        C2S = Stones.GenerateNewStoneModel_Memory(C2skillid, false);
-        C3S = Stones.GenerateNewStoneModel_Memory(C3skillid, false);
+        A1S = Stones.GenerateStoneModel(A1skillid, false);
+        A2S = Stones.GenerateStoneModel(A2skillid, false);
+        A3S = Stones.GenerateStoneModel(A3skillid, false);
+        B1S = Stones.GenerateStoneModel(B1skillid, false);
+        B2S = Stones.GenerateStoneModel(B2skillid, false);
+        B3S = Stones.GenerateStoneModel(B3skillid, false);
+        C1S = Stones.GenerateStoneModel(C1skillid, false);
+        C2S = Stones.GenerateStoneModel(C2skillid, false);
+        C3S = Stones.GenerateStoneModel(C3skillid, false);
 
         if (A1S != null)
         {
