@@ -16,12 +16,11 @@ public partial class FightAttriCalReference
     public ComboHitCount _ComboHitCount = new ComboHitCount();
     readonly KnockOffCount _knockOffCount = new KnockOffCount();
     readonly BeHitCount _BeHitCount = new BeHitCount();
-    readonly List<BO_Limb> myBOHitBoxeComponent = new List<BO_Limb>();
+    readonly List<BO_Limb> myLimbs = new List<BO_Limb>();
     readonly List<E_Damage> Event_Damage_List = new List<E_Damage>();
     readonly List<V_Damage> ICauseDamages = new List<V_Damage>();
     readonly List<Collider> myColliders = new List<Collider>();
     readonly List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
-    readonly IDictionary<Collider, Vector3> myColliderSizes = new Dictionary<Collider, Vector3>();
     
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
@@ -56,26 +55,26 @@ public partial class FightAttriCalReference
 
     public void AddToBOHitBoxeComponent(BO_Limb bO_Hitbox)
     {
-        if (!myBOHitBoxeComponent.Contains(bO_Hitbox))
+        if (!myLimbs.Contains(bO_Hitbox))
         {
-            myBOHitBoxeComponent.Add(bO_Hitbox);
+            myLimbs.Add(bO_Hitbox);
         }
     }
     
-    public void EnableAllHitBoxCollider(bool _bool)
+    public void EnableAllLimbs(bool _bool)
     {
-        foreach (BO_Limb hitbox in myBOHitBoxeComponent)
+        foreach (BO_Limb hitbox in myLimbs)
         {
             if (hitbox.myColliderMustEquip != null)
                 hitbox.myColliderMustEquip.isTrigger = !_bool;
         }
     }
         
-    public void ChangeLayerForAllSelfColliders(int layer)
+    public void ChangeLayerForLimbs(int layer)
     {
-        for (int i = 0; i < myBOHitBoxeComponent.Count; i++)
+        for (int i = 0; i < myLimbs.Count; i++)
         {
-            BO_Limb _BO_Hitbox = myBOHitBoxeComponent[i];
+            BO_Limb _BO_Hitbox = myLimbs[i];
             _BO_Hitbox.gameObject.layer = layer;
         }
         _Center.geometryCenter.gameObject.layer = layer;
@@ -86,16 +85,16 @@ public partial class FightAttriCalReference
     public void FindAllSelfCollidersAndIgnoreCollision()
     {
         myColliders.Clear();
-        myColliderSizes.Clear();
-        if (myBOHitBoxeComponent != null)
+        if (myLimbs != null)
         {
-            foreach (BO_Limb _BO_Hitbox in myBOHitBoxeComponent)
+            foreach (BO_Limb _BO_Hitbox in myLimbs)
             {
                 _BO_Hitbox.INI();
                 if (_BO_Hitbox.myColliderMustEquip != null && !myColliders.Contains(_BO_Hitbox.myColliderMustEquip))
                 {
+                    PhysicMaterial physicMaterial = Resources.Load<PhysicMaterial>("physics/temp");
+                    _BO_Hitbox.myColliderMustEquip.material = physicMaterial;
                     myColliders.Add(_BO_Hitbox.myColliderMustEquip);
-                    myColliderSizes.Add(_BO_Hitbox.myColliderMustEquip, ((BoxCollider)_BO_Hitbox.myColliderMustEquip).size);
                 }
             }
         }

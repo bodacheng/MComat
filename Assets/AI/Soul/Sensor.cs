@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using FightScene;
-using Unity.Jobs;
 
 public class Sensor
 {

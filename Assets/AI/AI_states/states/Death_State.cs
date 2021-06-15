@@ -39,7 +39,7 @@ namespace Soul
             pEvents.CloseAllPersonalityEffects();
             _BasicPhysicSupport.SetUsingGravity(false);
             _DATA_CENTER.IsDead.Value = true;
-            _FightAttriCalRef.ChangeLayerForAllSelfColliders(14);
+            _FightAttriCalRef.ChangeLayerForLimbs(14);
             _Rigidbody.velocity = Vector3.zero;
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;

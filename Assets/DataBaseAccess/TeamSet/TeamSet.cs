@@ -66,26 +66,42 @@ namespace dataAccess
                             targetModeCode = "11";
                             break;
                     }
-                    Debug.Log(Mode);
                     PlayFabClientAPI.GetUserData(
                         new GetUserDataRequest() {
                             PlayFabId = Account._AccInfo.playerID,
                             Keys = new List<string>() { targetModeCode }
                         },
                         (GetUserDataResult obj) => {
-                            Debug.Log(obj.Data[targetModeCode]);
-                            UserDataRecord userData = obj.Data[targetModeCode];
-                            switch (Mode)
+                            if (obj.Data.ContainsKey(targetModeCode))
                             {
-                                case TeamSetGameMode.story:
-                                    Default = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
-                                    break;
-                                case TeamSetGameMode.arena3V3:
-                                    Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
-                                    break;
-                                default:
-                                    Debug.Log("队伍阵型信息不明");
-                                    break;
+                                UserDataRecord userData = obj.Data[targetModeCode];
+                                switch (Mode)
+                                {
+                                    case TeamSetGameMode.story:
+                                        Default = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                                        break;
+                                    case TeamSetGameMode.arena3V3:
+                                        Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                                        break;
+                                    default:
+                                        Debug.Log("队伍阵型信息不明");
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                switch (Mode)
+                                {
+                                    case TeamSetGameMode.story:
+                                        Default = new PosKeySet();
+                                        break;
+                                    case TeamSetGameMode.arena3V3:
+                                        Arena3V3 = new PosKeySet();
+                                        break;
+                                    default:
+                                        Debug.Log("队伍阵型信息不明");
+                                        break;
+                                }
                             }
                             finished.Invoke(1);
                         },

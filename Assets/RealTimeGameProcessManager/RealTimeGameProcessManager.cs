@@ -153,8 +153,9 @@ namespace FightScene
             
             FightTeam1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
             FightTeam2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
-            FightTeam1.teamConfig = heroTeamConfig;
-            FightTeam2.teamConfig = EnemyTeamConfig;
+
+            target.FightTeam1.teamConfig = heroTeamConfig;
+            target.FightTeam2.teamConfig = EnemyTeamConfig;
             
             yield return FightTeam1.Instantiate(stage.localFight.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
             yield return FightTeam2.Instantiate(stage.localFight.EnemySets, stage.Team2HpRate ,stage.team2CGMode);

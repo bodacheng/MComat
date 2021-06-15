@@ -94,14 +94,8 @@ public partial class Data_Center : MonoBehaviour
     public void BodyElementTagAndLayerSet(TeamConfig _TeamConfig)
     {
         this._TeamConfig = _TeamConfig;
-        if (this._TeamConfig != null)
-        {
-            gameObject.layer = this._TeamConfig.mylayer;
-            gameObject.tag = this._TeamConfig.my_tag;
-        }else{
-            gameObject.layer = 0;
-            gameObject.tag = "Untagged";
-        }
+        gameObject.layer = this._TeamConfig.mylayer;
+        gameObject.tag = this._TeamConfig.my_tag;
 
         Sensor.SetDectectLayer(_TeamConfig,this);
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
@@ -158,11 +152,11 @@ public partial class Data_Center : MonoBehaviour
 
     public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)
     {
-        BodyElementTagAndLayerSet(_TeamConfig);
         IsDead.Value = false;
-        FightDataRef.FindAllSelfCollidersAndIgnoreCollision();//上面那个防御盾设置保证了这一步也能把防御盾碰撞体处理。
-        FightDataRef.ChangeLayerForAllSelfColliders(_TeamConfig.mylayer);
-        FightDataRef.EnableAllHitBoxCollider(true);
+        BodyElementTagAndLayerSet(_TeamConfig);
+        FightDataRef.FindAllSelfCollidersAndIgnoreCollision();
+        FightDataRef.ChangeLayerForLimbs(_TeamConfig.mylayer);
+        FightDataRef.EnableAllLimbs(true);
         FightDataRef.INI();
         FightDataRef.CurrentHp.Value = nineSkillHp;
         FightDataRef.criticalGaugeMode = criticalGaugeMode;
