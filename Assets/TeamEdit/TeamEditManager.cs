@@ -56,7 +56,7 @@ public class TeamEditManager : MonoBehaviour
     {
         if (focusingPosNum != -1)
         {
-            yield return ChangeTeamPos(CharAccId, focusingPosNum);
+            ChangeTeamPos(CharAccId, focusingPosNum);
             CancelSelect();
             MonsterBox.target.CancelSelect();
         }
@@ -82,23 +82,23 @@ public class TeamEditManager : MonoBehaviour
     #endregion
     
     // 修改对象队伍编程
-    public IEnumerator ChangeTeamPos(string monsterlocalID,int targetPos)
+    public void ChangeTeamPos(string monsterlocalID,int targetPos)
     {
         List<PosNumWithLocalKey> returns = TeamSet.GetTargetSet().SetPosMemByMonsterOfPlayerID(targetPos, monsterlocalID);
         for (int i = 0; i < returns.Count;i++)
         {
-            yield return ChangeIconOnPos(returns[i].posNum);
+            ChangeIconOnPos(returns[i].posNum);
         }
     }
 
     // 纯渲染函数
-    IEnumerator ChangeIconOnPos(int posNum)
+    void ChangeIconOnPos(int posNum)
     {
         if (teamButtonDic.ContainsKey(posNum))
         {
             HeroIcon tar = teamButtonDic[posNum];
             string PosMonsterOfPlayerId = TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(posNum);
-            yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(PosMonsterOfPlayerId, tar);
+            HeroIcon.ChangeHeroIconByInstanceId(PosMonsterOfPlayerId, tar);
         }
         else
         {
@@ -107,7 +107,7 @@ public class TeamEditManager : MonoBehaviour
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    public IEnumerator INITeamPosButtons()
+    public void INITeamPosButtons()
     {
         teamButtonDic.Clear();
         teamButtonDic.Add(0, team1front);
@@ -115,19 +115,15 @@ public class TeamEditManager : MonoBehaviour
         teamButtonDic.Add(2, team1right);
         
         // 适配队伍编辑器各个位置初始头像
-        yield return ChangeIconOnPos(0);
-        yield return ChangeIconOnPos(1);
-        yield return ChangeIconOnPos(2);
+        ChangeIconOnPos(0);
+        ChangeIconOnPos(1);
+        ChangeIconOnPos(2);
         
         RemoveButton.onClick.RemoveAllListeners();
         void Remove()
         {
-            IEnumerator RemoveSelected()
-            {
-                yield return ChangeTeamPos(null, focusingPosNum);
-                CancelSelect();
-            }
-            PreScene.target.mainProcessRunner.RunAsQueued(RemoveSelected());
+            ChangeTeamPos(null, focusingPosNum);
+            CancelSelect();
         }
         RemoveButton.onClick.AddListener(Remove);
 
@@ -137,7 +133,7 @@ public class TeamEditManager : MonoBehaviour
         {
             if (MonsterBox.selectingAccID != null)
             {
-                yield return ChangeTeamPos(MonsterBox.selectingAccID, posNum);
+                Remove();
                 MonsterBox.target.CancelSelect();
                 CancelSelect();
             }

@@ -18,13 +18,13 @@ public class TeamEditPage : MainSceneProcess
         teamArenaLoadFinished.Value = value;
     }
 
-    public IEnumerator EnterProcess()
+    public void EnterProcess()
     {
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        yield return PreScene.target.TeamEditor.INITeamPosButtons();
+        PreScene.target.TeamEditor.INITeamPosButtons();
         if (MemberDetail.target._focusing != null)
             PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
@@ -46,7 +46,7 @@ public class TeamEditPage : MainSceneProcess
                     new List<ReactiveProperty<int>>() {
                         teamArenaLoadFinished
                     },
-                    () => mainProcessRunner.RunAsQueued(EnterProcess()),
+                    () => EnterProcess(),
                     () => { return; }
                 );
                 break;
@@ -56,7 +56,7 @@ public class TeamEditPage : MainSceneProcess
                     new List<ReactiveProperty<int>>() {
                         team3v3LoadFinished
                     },
-                    () => mainProcessRunner.RunAsQueued(EnterProcess()),
+                    () => EnterProcess(),
                     () => { return; }
                 );
                 break;
@@ -64,7 +64,7 @@ public class TeamEditPage : MainSceneProcess
                 break;
         }
 
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        EnterProcess();
         UnityEngine.Events.UnityAction unityAction = () =>
         {
             PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后

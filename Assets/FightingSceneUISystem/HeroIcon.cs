@@ -110,11 +110,11 @@ public class HeroIcon : MonoBehaviour {
             frame.sprite = frames[zokusei];                
     }
     
-    public static IEnumerator ChangeHeroIconByMonsterOfPlayerId(string PosMonsterOfPlayerId, HeroIcon Icon)
+    public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)
     {
-        if (PosMonsterOfPlayerId != null)
+        if (instanceId != null)
         {
-            MonsterOfPlayerInfo _one = MyMonsters.Get(PosMonsterOfPlayerId);
+            MonsterOfPlayerInfo _one = MyMonsters.Get(instanceId);
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
             ChangeHeroIconByMonsterID(charConfig.RECORD_ID,Icon);
         }
@@ -122,7 +122,6 @@ public class HeroIcon : MonoBehaviour {
         {
             Icon.ChangeIcon(null, Zokusei.Null);
         }
-        yield break;
     }
     
     public static void ChangeHeroIconByMonsterID(string monsterRecordID, HeroIcon Icon)

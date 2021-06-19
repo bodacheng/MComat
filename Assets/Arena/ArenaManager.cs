@@ -25,7 +25,7 @@ public class ArenaManager : MonoBehaviour
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     public IEnumerator LoadArena()
     {
-        yield return myTeam.ShowMyTeam();
+        myTeam.ShowMyTeam();
         yield return Arena.GetPlayerRankInfo();
         yield return Arena.GetOpponentsBasicInfo();
         

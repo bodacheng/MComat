@@ -49,15 +49,15 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     }
     
     // myTeam 机能加载
-    public IEnumerator ShowMyTeam()
+    public void ShowMyTeam()
     {
         string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(0);
         string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(1);
         string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(2);
         
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos1MonsterOfPlayerId, member1);
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos2MonsterOfPlayerId, member2);
-        yield return HeroIcon.ChangeHeroIconByMonsterOfPlayerId(Pos3MonsterOfPlayerId, member3);
+        HeroIcon.ChangeHeroIconByInstanceId(Pos1MonsterOfPlayerId, member1);
+        HeroIcon.ChangeHeroIconByInstanceId(Pos2MonsterOfPlayerId, member2);
+        HeroIcon.ChangeHeroIconByInstanceId(Pos3MonsterOfPlayerId, member3);
         
         void GoToTeamEdit()
         {
