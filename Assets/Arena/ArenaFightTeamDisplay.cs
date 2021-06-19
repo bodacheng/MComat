@@ -41,7 +41,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
         {
-            FightLoad.PreLoad(_SO, TeamSetGameMode.arena3V3);
+            FightLoad.PreLoad(_SO, "arena");
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
         }
         BigButton.onClick.AddListener(PrepareForIt);
@@ -61,8 +61,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         
         void GoToTeamEdit()
         {
-            TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
-            PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+            PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
         }
         BigButton.onClick.RemoveAllListeners();
         BigButton.onClick.AddListener(GoToTeamEdit);

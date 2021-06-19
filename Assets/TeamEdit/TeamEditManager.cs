@@ -38,11 +38,11 @@ public class TeamEditManager : MonoBehaviour
     }
 
     #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
-    public void AddHeroIconFeaturesToMonsterBox()
+    public void AddHeroIconFeaturesToMonsterBox(string teamMode)
     {
         foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
         {
-            AddHeroIconFeatureToMonsterBox(keyValuePair.Key,keyValuePair.Value.iconButton);
+            AddHeroIconFeatureToMonsterBox(keyValuePair.Key, teamMode, keyValuePair.Value.iconButton);
         }
     }
 
@@ -52,11 +52,11 @@ public class TeamEditManager : MonoBehaviour
         HeroIcon.Seletedfeature(null, selectedFrame, 200f);
     }
 
-    IEnumerator MonsterIconButton(string CharAccId)
+    IEnumerator MonsterIconButton(string CharAccId, string teammode)
     {
         if (focusingPosNum != -1)
         {
-            ChangeTeamPos(CharAccId, focusingPosNum);
+            ChangeTeamPos(CharAccId, focusingPosNum, teammode);
             CancelSelect();
             MonsterBox.target.CancelSelect();
         }
@@ -71,33 +71,33 @@ public class TeamEditManager : MonoBehaviour
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
     }
 
-    void AddHeroIconFeatureToMonsterBox(string CharAccId, Button targetButton)
+    void AddHeroIconFeatureToMonsterBox(string CharAccId, string teammode, Button targetButton)
     {
         void Trigger()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton(CharAccId));
+            PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton(CharAccId, teammode));
         }
         targetButton.onClick.AddListener(Trigger);
     }
     #endregion
     
     // 修改对象队伍编程
-    public void ChangeTeamPos(string monsterlocalID,int targetPos)
+    public void ChangeTeamPos(string instanceID, int targetPos, string teammode)
     {
-        List<PosNumWithLocalKey> returns = TeamSet.GetTargetSet().SetPosMemByMonsterOfPlayerID(targetPos, monsterlocalID);
+        List<PosNumWithLocalKey> returns = TeamSet.GetTargetSet(teammode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
         for (int i = 0; i < returns.Count;i++)
         {
-            ChangeIconOnPos(returns[i].posNum);
+            ChangeIconOnPos(returns[i].posNum, teammode);
         }
     }
 
     // 纯渲染函数
-    void ChangeIconOnPos(int posNum)
+    void ChangeIconOnPos(int posNum, string teammode)
     {
         if (teamButtonDic.ContainsKey(posNum))
         {
             HeroIcon tar = teamButtonDic[posNum];
-            string PosMonsterOfPlayerId = TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(posNum);
+            string PosMonsterOfPlayerId = TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(posNum);
             HeroIcon.ChangeHeroIconByInstanceId(PosMonsterOfPlayerId, tar);
         }
         else
@@ -107,7 +107,7 @@ public class TeamEditManager : MonoBehaviour
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    public void INITeamPosButtons()
+    public void INITeamPosButtons(string teammode)
     {
         teamButtonDic.Clear();
         teamButtonDic.Add(0, team1front);
@@ -115,21 +115,20 @@ public class TeamEditManager : MonoBehaviour
         teamButtonDic.Add(2, team1right);
         
         // 适配队伍编辑器各个位置初始头像
-        ChangeIconOnPos(0);
-        ChangeIconOnPos(1);
-        ChangeIconOnPos(2);
+        ChangeIconOnPos(0, teammode);
+        ChangeIconOnPos(1, teammode);
+        ChangeIconOnPos(2, teammode);
         
         RemoveButton.onClick.RemoveAllListeners();
         void Remove()
         {
-            ChangeTeamPos(null, focusingPosNum);
+            ChangeTeamPos(null, focusingPosNum, teammode);
             CancelSelect();
         }
         RemoveButton.onClick.AddListener(Remove);
 
-        team1front.iconButton.onClick.RemoveAllListeners();
-
-        IEnumerator setPos(int posNum)
+        
+        IEnumerator SetPos(int posNum)
         {
             if (MonsterBox.selectingAccID != null)
             {
@@ -155,7 +154,7 @@ public class TeamEditManager : MonoBehaviour
                         HeroIcon.Seletedfeature(null, selectedFrame, 200f);
                         break;
                 }
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
                 MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                 if (MemberDetail.target._focusing != null)
                     _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
@@ -166,23 +165,24 @@ public class TeamEditManager : MonoBehaviour
             }
         }
 
+        team1front.iconButton.onClick.RemoveAllListeners();
         void pos1F()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(setPos(0));
+            PreScene.target.mainProcessRunner.RunAsQueued(SetPos(0));
         }
         team1front.iconButton.onClick.AddListener(pos1F);
         
         team1left.iconButton.onClick.RemoveAllListeners();
         void pos1L()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(setPos(1));
+            PreScene.target.mainProcessRunner.RunAsQueued(SetPos(1));
         }
         team1left.iconButton.onClick.AddListener(pos1L);
         
         team1right.iconButton.onClick.RemoveAllListeners();
         void pos1R()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(setPos(2));
+            PreScene.target.mainProcessRunner.RunAsQueued(SetPos(2));
         }
         team1right.iconButton.onClick.AddListener(pos1R);
     }

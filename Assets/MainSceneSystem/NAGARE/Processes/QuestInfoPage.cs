@@ -36,21 +36,19 @@ public class QuestInfoPage : MainSceneProcess
         FightPreparePage.target.QuestName.text = FightLoad.ToBeLoad.battleNameJPG;
         switch(FightLoad.ToBeLoadMode)
         {
-            case TeamSetGameMode.arena3V3:
+            case "arena":
                 void GoToTeamEdit_Arena()
                 {
-                    TeamSet.SwitchTargetTeam(TeamSetGameMode.arena3V3);
-                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront,true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
                 FightLoad.Arena();
                 break;
-            case TeamSetGameMode.story:
+            case "arcade":
                 void GoToTeamEdit_Arcade()
                 {
-                    TeamSet.SwitchTargetTeam(TeamSetGameMode.story);
-                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);

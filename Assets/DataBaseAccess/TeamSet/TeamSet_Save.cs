@@ -14,12 +14,12 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static void SaveTeamSet(TeamSetGameMode Mode)
+        public static void SaveTeamSet(string Mode)
         {
             TeamPos form = new TeamPos();
             switch (Mode)
             {
-                case TeamSetGameMode.story:
+                case "arcade":
                     string F = Default.GetMonsterOfPlayerIdOnPos(0);
                     string L = Default.GetMonsterOfPlayerIdOnPos(1);
                     string R = Default.GetMonsterOfPlayerIdOnPos(2);
@@ -28,7 +28,7 @@ namespace dataAccess
                     form.f = (F != null) ? F : null;
                     form.r = (R != null) ? R : null;
                     break;
-                case TeamSetGameMode.arena3V3:
+                case "arena":
                     form.f = Arena3V3.GetMonsterOfPlayerIdOnPos(0);
                     form.l = Arena3V3.GetMonsterOfPlayerIdOnPos(1);
                     form.r = Arena3V3.GetMonsterOfPlayerIdOnPos(2);
@@ -41,10 +41,10 @@ namespace dataAccess
                     TeamPos value = OverrideTeamSetInfoOnJsonFile(Mode);
                     switch (Mode)
                     {
-                        case TeamSetGameMode.story:
+                        case "arcade":
                             Default = value.ToPosKeySet();
                             break;
-                        case TeamSetGameMode.arena3V3:
+                        case "arena":
                             Arena3V3 = value.ToPosKeySet();
                             break;
                     }
@@ -55,11 +55,11 @@ namespace dataAccess
                     string targetModeCode = "";
                     switch (Mode)
                     {
-                        case TeamSetGameMode.story:
-                            targetModeCode = "00";
+                        case "arcade":
+                            targetModeCode = "arcade";
                             break;
-                        case TeamSetGameMode.arena3V3:
-                            targetModeCode = "11";
+                        case "arena":
+                            targetModeCode = "arena";
                             break;
                     }
                     PlayFabClientAPI.UpdateUserData(

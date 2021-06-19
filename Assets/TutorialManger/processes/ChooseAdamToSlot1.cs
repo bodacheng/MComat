@@ -21,6 +21,6 @@ public class ChooseAdamToSlot1 : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(0) == "1";
+        return false;//TeamSet.GetTargetSet().GetMonsterOfPlayerIdOnPos(0) == "1";
     }
 }

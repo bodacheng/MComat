@@ -153,7 +153,7 @@ namespace mainMenu
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             yield return ArrangeTeamBySelection();
-            FightLoad.PreLoad(stage, TeamSetGameMode.SelfFight);
+            FightLoad.PreLoad(stage, "self");
             FightLoad.GoTo();
         }
         

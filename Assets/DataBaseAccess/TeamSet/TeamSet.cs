@@ -12,41 +12,32 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static TeamSetGameMode targetTeamMode;
         public static PosKeySet Default = new PosKeySet();
         public static PosKeySet Arena3V3 = new PosKeySet();
 
-        // 决定本模块将处理哪一组玩家队伍的编辑。竞技场还是arcade
-        #region targetTeam
-        public static void SwitchTargetTeam(TeamSetGameMode mode)
+        public static PosKeySet GetTargetSet(string mode)
         {
-            targetTeamMode = mode;
-        }
-        
-        public static PosKeySet GetTargetSet()
-        {
-            switch(targetTeamMode)
+            switch(mode)
             {
-                case TeamSetGameMode.story:
+                case "arcade":
                     return Default;
-                case TeamSetGameMode.arena3V3:
+                case "arena":
                     return Arena3V3;
             }
             return null;
         }
-        #endregion
-        
-        public static void LoadTeamSet(TeamSetGameMode Mode, Action<int> finished)
+
+        public static void LoadTeamSet(string Mode, Action<int> finished)
         {
             switch (Account.ReferenceMode)
             {
                 case PlayerInfoRefMode.localTestSaveData:
                     switch (Mode)
                     {
-                        case TeamSetGameMode.story:
+                        case "arcade":
                             Default = LoadMyTeamSetInfoViaJsonFile("TeamSet.json").ToPosKeySet();
                             break;
-                        case TeamSetGameMode.arena3V3:
+                        case "arena":
                             Arena3V3 = LoadMyTeamSetInfoViaJsonFile("arena3V3TeamSet.json").ToPosKeySet();
                             break;
                         default:
@@ -56,16 +47,7 @@ namespace dataAccess
                     finished.Invoke(1);
                     break;
                 case PlayerInfoRefMode.remoteTestPlayer:
-                    string targetModeCode = "";
-                    switch (Mode)
-                    {
-                        case TeamSetGameMode.story:
-                            targetModeCode = "00";
-                            break;
-                        case TeamSetGameMode.arena3V3:
-                            targetModeCode = "11";
-                            break;
-                    }
+                    string targetModeCode = Mode;
                     PlayFabClientAPI.GetUserData(
                         new GetUserDataRequest() {
                             PlayFabId = Account._AccInfo.playerID,
@@ -77,10 +59,10 @@ namespace dataAccess
                                 UserDataRecord userData = obj.Data[targetModeCode];
                                 switch (Mode)
                                 {
-                                    case TeamSetGameMode.story:
+                                    case "arcade":
                                         Default = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
                                         break;
-                                    case TeamSetGameMode.arena3V3:
+                                    case "arena":
                                         Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
                                         break;
                                     default:
@@ -92,10 +74,10 @@ namespace dataAccess
                             {
                                 switch (Mode)
                                 {
-                                    case TeamSetGameMode.story:
+                                    case "arcade":
                                         Default = new PosKeySet();
                                         break;
-                                    case TeamSetGameMode.arena3V3:
+                                    case "arena":
                                         Arena3V3 = new PosKeySet();
                                         break;
                                     default:
@@ -138,12 +120,5 @@ namespace dataAccess
             }
             return teamMembers;
         }
-    }
-    
-    public enum TeamSetGameMode
-    {
-        story = 1,
-        arena3V3 = 2,
-        SelfFight = 3
     }
 }

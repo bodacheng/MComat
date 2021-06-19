@@ -9,18 +9,18 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static TeamPos OverrideTeamSetInfoOnJsonFile(TeamSetGameMode mode)
+        public static TeamPos OverrideTeamSetInfoOnJsonFile(string mode)
         {
             string json;
             TeamPos model = null;
             switch (mode)
             {
-                case TeamSetGameMode.story:
+                case "arcade":
                     model = Default.ToTeamPos();
                     json = JsonConvert.SerializeObject(model);
                     LocalJson.SaveToJsonFile_persistentDataPath(null, "TeamSet.json", json);
                     break;
-                case TeamSetGameMode.arena3V3:
+                case "arena":
                     model = Arena3V3.ToTeamPos();
                     json = JsonConvert.SerializeObject(model);
                     LocalJson.SaveToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", json);

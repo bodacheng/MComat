@@ -8,11 +8,11 @@ public static class FightLoad
 {
     #region 待加载战斗信息
     public static StageScriptableObject ToBeLoad;
-    public static TeamSetGameMode ToBeLoadMode;
+    public static string ToBeLoadMode;
     #endregion
     
     // 加载战斗信息
-    public static void PreLoad(StageScriptableObject stageScriptableObject, TeamSetGameMode teamSetGameMode)
+    public static void PreLoad(StageScriptableObject stageScriptableObject, string teamSetGameMode)
     {
         ToBeLoad = stageScriptableObject;
         ToBeLoadMode = teamSetGameMode;
@@ -36,10 +36,10 @@ public static class FightLoad
     {
         switch (ToBeLoadMode)
         {
-            case TeamSetGameMode.story:
+            case "arcade":
                 Arcade();
                 break;
-            case TeamSetGameMode.arena3V3:
+            case "arena":
                 Arena();
                 break;
         }
