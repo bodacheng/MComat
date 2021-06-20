@@ -149,7 +149,7 @@ namespace mainMenu
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
             TheNineSlot.target.StartUp();
-            yield return _SelfFightManager.INITeamPosButtons();
+            _SelfFightManager.INITeamPosButtons();
 
             HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)

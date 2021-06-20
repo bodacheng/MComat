@@ -77,8 +77,8 @@
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableBeginDragTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/Repeat.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/InspectableReactiveProperty.cs" />
-    <Compile Include="Assets/Plugins/UniRx/Scripts/Tasks/TaskObservableExtensions.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/InternalUtil/ImmutableList.cs" />
+    <Compile Include="Assets/Plugins/UniRx/Scripts/Tasks/TaskObservableExtensions.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableTransformChangedTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Notifiers/MessageBroker.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/UnityEventExtensions.cs" />
@@ -214,8 +214,8 @@
     <Compile Include="Assets/Plugins/UniRx/Scripts/System/IOptimizedObservable.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/UnityGraphicExtensions.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/SelectMany.cs" />
-    <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservablePointerClickTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/Dematerialize.cs" />
+    <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservablePointerClickTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableUpdateSelectedTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/Start.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/TakeLast.cs" />
@@ -241,8 +241,8 @@
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableAnimatorTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Disposables/BooleanDisposable.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Observable.Conversions.cs" />
-    <Compile Include="Assets/Plugins/UniRx/Scripts/Disposables/ICancelable.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/Operators/First.cs" />
+    <Compile Include="Assets/Plugins/UniRx/Scripts/Disposables/ICancelable.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableLateUpdateTrigger.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Diagnostics/LogEntryExtensions.cs" />
     <Compile Include="Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableEndDragTrigger.cs" />

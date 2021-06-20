@@ -78,8 +78,8 @@
     <Compile Include="Assets/RealTimeGameProcessManager/RotationMode/RotationMode_INI.cs" />
     <Compile Include="Assets/RewardManager/RewardManager.cs" />
     <Compile Include="Assets/Camera/Modes/StartToEndMode.cs" />
-    <Compile Include="Assets/CSV2Table/Demo/C2TDemo.cs" />
     <Compile Include="Assets/AI/AI_states/states/Counter_State.cs" />
+    <Compile Include="Assets/CSV2Table/Demo/C2TDemo.cs" />
     <Compile Include="Assets/UI/Oldscripts/Debug_Char_Set.cs" />
     <Compile Include="Assets/BOWeaponSystem/HittingSystemDefinitions/V_Damage.cs" />
     <Compile Include="Assets/JsonSupport/UnityLitJson/JsonMockWrapper.cs" />
@@ -165,11 +165,11 @@
     <Compile Include="Assets/Asstes/Sci-Fi Arsenal/InteractiveDemo/Demo Scripts/SciFiLoadSceneOnClick2.cs" />
     <Compile Include="Assets/TutorialManger/processes/ClickTeamEditSlotOne.cs" />
     <Compile Include="Assets/AI/AI_states/states/Hurts/Hurt_State_light.cs" />
+    <Compile Include="Assets/StagesManagement/ArcadeManager/Pages.cs" />
     <Compile Include="Assets/Asstes/Sci-Fi Arsenal/Sci-Fi Effects/Scripts/SciFiLightFlicker.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/ScriptRead.cs" />
     <Compile Include="Assets/Language/LanguageConverterManger.cs" />
-    <Compile Include="Assets/StagesManagement/ArcadeManager/Pages.cs" />
     <Compile Include="Assets/JsonSupport/LocalJson.cs" />
     <Compile Include="Assets/Arena/RankInfo.cs" />
     <Compile Include="Assets/MasterDataTool/MasterDataTool_SK.cs" />
@@ -217,8 +217,8 @@
     <Compile Include="Assets/NetFightScene/NetFightScene.cs" />
     <Compile Include="Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_ManagerGUI.cs" />
     <Compile Include="Assets/POFX/Scripts/FX/POFX_Blur.cs" />
-    <Compile Include="Assets/DataBaseAccess/API/Dto/Model/Common/AbstractModel.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/StagesManagerGUI.cs" />
+    <Compile Include="Assets/DataBaseAccess/API/Dto/Model/Common/AbstractModel.cs" />
     <Compile Include="Assets/Asstes/JMO Assets/MatCap Shaders/Demo/Assets/MC_AutoRotate.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/SkillStone/StonesPage.cs" />
     <Compile Include="Assets/PlayFab/Defs/PFSKSTDefine.cs" />
@@ -330,8 +330,8 @@
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Input/ScrollGamepadManager.cs" />
     <Compile Include="Assets/UI/SciFic Icons/Scripts/IconScript.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/FavoriteButton.cs" />
-    <Compile Include="Assets/TutorialManger/TutorialLogger.cs" />
     <Compile Include="Assets/SkillStoneBox/SkillStonesBox_ShowMode.cs" />
+    <Compile Include="Assets/TutorialManger/TutorialLogger.cs" />
     <Compile Include="Assets/Asstes/FloatingCombatText/DemoScene/DemoController.cs" />
     <Compile Include="Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager.cs" />
     <Compile Include="Assets/SkillStoneBox/SkillStonesBox_EditMode.cs" />
@@ -519,9 +519,9 @@
     <Compile Include="Assets/AI/SoulConstruct/AIScriptReading.cs" />
     <Compile Include="Assets/Ultimate Joystick/_Examples/Spaceship Example/Scripts/PlayerController.cs" />
     <Compile Include="Assets/Asstes/FloatingCombatText/Scripts/CombatTextType.cs" />
+    <Compile Include="Assets/AnimControl/Animation_Manger_methodsGround2.cs" />
     <Compile Include="Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" />
     <Compile Include="Assets/CSV2Table/Scripts/CsvParser.cs" />
-    <Compile Include="Assets/AnimControl/Animation_Manger_methodsGround2.cs" />
     <Compile Include="Assets/TutorialManger/processes/ReturnOne.cs" />
     <Compile Include="Assets/DataBaseAccess/API/Dto/Model/GetRewardModel.cs" />
     <Compile Include="Assets/DataBaseAccess/API/Dto/Model/SkillStoneLevelUpModel.cs" />
@@ -554,8 +554,8 @@
     <Compile Include="Assets/DATA_CENTER/Chracter_DATA_CENTER/Data_Center.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/SpotlightButton.cs" />
     <Compile Include="Assets/SkillStoneBox/SkillStonesBox_SKillShower.cs" />
-    <Compile Include="Assets/RPGTALK/Scripts/Helpers/TextWithIcon.cs" />
     <Compile Include="Assets/Scene/ABLoadScene/downloads/downloads_charcomponents.cs" />
+    <Compile Include="Assets/RPGTALK/Scripts/Helpers/TextWithIcon.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/MonsterEditPage.cs" />
     <Compile Include="Assets/AI/Soul/BuffsRunner.cs" />
     <Compile Include="Assets/FPSLabel/FPSLabelStarter.cs" />
@@ -1865,50 +1865,17 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.SecurityStub">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Analytics">
-      <HintPath>Library/ScriptAssemblies/Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.Codeless">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Monetization">
-      <HintPath>Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
@@ -1919,11 +1886,20 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Purchasing.SecurityStub">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
@@ -1931,11 +1907,32 @@
     <Reference Include="com.unity.multiplayer-weaver.Editor">
       <HintPath>Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Analytics">
+      <HintPath>Library/ScriptAssemblies/Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
+      <HintPath>Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Purchasing.SecurityCore">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing.Codeless">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
@@ -1948,6 +1945,9 @@
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Monetization">
+      <HintPath>Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
@@ -1967,14 +1967,6 @@
     <ProjectReference Include="PlayFabSDKEditor.csproj">
       <Project>{A6F66BB6-BDBD-06A4-4867-B5F5ADF9847A}</Project>
       <Name>PlayFabSDKEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{D919D478-9749-E80F-0A67-12C4B3915B3A}</Project>
-      <Name>UniTask.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{DD389A5D-27BC-8773-6530-D1A0D7A6951B}</Project>
-      <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{F4DF3B01-DBF5-8062-902D-1D03B79D7515}</Project>
@@ -1996,9 +1988,17 @@
       <Project>{CFD99446-2050-1694-FB2C-565AD4E01465}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{D919D478-9749-E80F-0A67-12C4B3915B3A}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
       <Project>{C38A86AB-DB38-CE93-B53A-1ED2BFB72E67}</Project>
       <Name>UniTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{DD389A5D-27BC-8773-6530-D1A0D7A6951B}</Project>
+      <Name>UniTask.Addressables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

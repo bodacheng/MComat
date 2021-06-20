@@ -125,34 +125,26 @@ namespace mainMenu
             stage.Team2Mode = TeamMode.multiraid;
         }
         
-        IEnumerator ArrangeTeamBySelection()
+        void ArrangeTeamBySelection()
         {
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
-                    IEnumerator enumerator1 = _team1positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
-                    yield return enumerator1;
-                    _selfFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)enumerator1.Current;
-                    IEnumerator enumerator2 = _team2positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
-                    yield return enumerator2;
-                    _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator2.Current;
-                break;
+                    _selfFight.HeroSets = _team1positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
+                    _selfFight.EnemySets = _team2positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
+                    break;
                 case TeamMode.rotation:
-                    IEnumerator enumerator3 = _team1positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
-                    yield return enumerator3;
-                    _selfFight.HeroSets = (MultiDictionary<int, int, CharDataInfo>)enumerator3.Current;
-                    IEnumerator enumerator4 = _team2positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
-                    yield return enumerator4;
-                    _selfFight.EnemySets = (MultiDictionary<int, int, CharDataInfo>)enumerator4.Current;
-                break;
+                    _selfFight.HeroSets = _team1positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
+                    _selfFight.EnemySets = _team2positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
+                    break;
             }
             stage.localFight = _selfFight;
         }
 
-        public IEnumerator FightStart()
+        public void FightStart()
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
-            yield return ArrangeTeamBySelection();
+            ArrangeTeamBySelection();
             FightLoad.PreLoad(stage, "self");
             FightLoad.GoTo();
         }
@@ -342,7 +334,7 @@ namespace mainMenu
             HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
         }
 
-        public IEnumerator INITeamPosButtons()
+        public void INITeamPosButtons()
         {
             IniMutiRaidModeCharIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
             IniMutiRaidModeCharIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
@@ -351,12 +343,7 @@ namespace mainMenu
             IniRotationModeCharIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
                        
             FightStartBUtton.onClick.RemoveAllListeners();
-            void AskStartFight()
-            {
-                PreScene.target.mainProcessRunner.RunAsQueued(FightStart());
-            }
-            FightStartBUtton.onClick.AddListener(AskStartFight);
-            yield break;
+            FightStartBUtton.onClick.AddListener(FightStart);
         }
 
         void OneTeamPosButtonBehaviour(Team team, int pos)

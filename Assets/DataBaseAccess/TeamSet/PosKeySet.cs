@@ -35,7 +35,7 @@ public class PosKeySet
         return model;
     }
     
-    public IEnumerator LoadTeamBasedOnAccountInfo()
+    public MultiDictionary<int, int, CharDataInfo> LoadTeamBasedOnAccountInfo()
     {
         MultiDictionary<int, int, CharDataInfo> multiDictionary = new MultiDictionary<int, int, CharDataInfo>();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
@@ -50,7 +50,7 @@ public class PosKeySet
                 }
             }
         }
-        yield return multiDictionary;
+        return multiDictionary;
     }
     
     public void SetPosMemInfoByLocalID(int posNum, string monsterofplayerid)
