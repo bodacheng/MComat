@@ -105,7 +105,7 @@ namespace FightScene
             else
             {
                 MobileInputsManager.target.FocusCharInputs(focusingChar._MyBehaviorRunner, focusingChar.Zokusei);
-                if (FightSceneNote.nextBattle._fightEventType == FightEventType.Screensaver)
+                if (FightLoad.ToBeLoad._fightEventType == FightEventType.Screensaver)
                 {
                     MobileInputsManager.target.TurnOffButtons();
                 }
@@ -188,7 +188,7 @@ namespace FightScene
         public void CameraParaAdjustment(Team myTeam)
         {
             C_Mode c_Mode;
-            if (FightSceneNote.nextBattle.Team1Mode == TeamMode.multiraid)
+            if (FightLoad.ToBeLoad.Team1Mode == TeamMode.multiraid)
             {
                 c_Mode = C_Mode.CertainYAntiVibration;
             }

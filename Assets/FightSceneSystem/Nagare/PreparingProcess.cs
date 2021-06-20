@@ -21,9 +21,9 @@ public class PreparingProcess : FSceneProcess
         RealTimeGameProcessManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null);
         //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
-        if (FightSceneNote.nextBattle != null)
+        if (FightLoad.ToBeLoad != null)
         {
-            yield return RealTimeGameProcessManager.target.LoadGame(FightSceneNote.nextBattle);
+            yield return RealTimeGameProcessManager.target.LoadGame(FightLoad.ToBeLoad);
         }
         RealTimeGameProcessManager.target.AllMembers.Clear();
         DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);

@@ -4,11 +4,6 @@
 // 但是，系统角度讲整个程序还是分成主菜单类和战斗场景类两个大的scene，那么这个地方我们针对这两个大的scene，
 // 分别搞了个用于记录的单元。
 
-public class FightSceneNote
-{
-    public static StageScriptableObject nextBattle;
-}
-
 public class MainMenuNote
 {
     public static MainSceneStep goingtostep = MainSceneStep.FrontPage;

@@ -130,14 +130,14 @@ namespace FightScene
         // ArcadeNext
         public void CheckNextArcadeLevel()
         {
-            if (FightSceneNote.nextBattle._fightEventType == FightEventType.Quest)
+            if (FightLoad.ToBeLoad._fightEventType == FightEventType.Quest)
             {
-                if (ArcadeManager.ArcadeStages.ContainsKey(FightSceneNote.nextBattle.LocalFightID + 1))
+                if (ArcadeManager.ArcadeStages.ContainsKey(FightLoad.ToBeLoad.LocalFightID + 1))
                 {
                     NextLevelButton.onClick.RemoveAllListeners();
                     void LoadNextLevel()
                     {
-                        FightSceneNote.nextBattle = ArcadeManager.ArcadeStages[FightSceneNote.nextBattle.LocalFightID + 1].stageConfig;
+                        FightLoad.ToBeLoad = ArcadeManager.ArcadeStages[FightLoad.ToBeLoad.LocalFightID + 1].stageConfig;
                         FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
                     }
                     NextLevelButton.onClick.AddListener(LoadNextLevel);

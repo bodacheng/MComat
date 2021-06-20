@@ -1,8 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
 using mainMenu;
-using System.Collections;
-using UnityEngine;
 
 public static class FightLoad
 {
@@ -63,7 +61,7 @@ public static class FightLoad
     
     public static void Go(StageScriptableObject stage)
     {
-        FightSceneNote.nextBattle = stage;
+        ToBeLoad = stage;
         Stones.PreventStonesFromDestroy();
         ArcadeManager.ArcadeStages.Clear();
         GeneralModelPool.Clear();
