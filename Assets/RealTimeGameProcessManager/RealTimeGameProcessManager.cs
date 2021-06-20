@@ -41,6 +41,8 @@ namespace FightScene
         public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
         public static IDictionary<Team, List<Data_Center>> FightingMembers = new Dictionary<Team, List<Data_Center>>();
 
+        StageScriptableObject loadFight;
+
         public static void AddOrRemoveFightingMember(Data_Center member, Team team, bool add) // add:true remove: false
         {
             if (!FightingMembers.ContainsKey(team))
@@ -105,10 +107,6 @@ namespace FightScene
             else
             {
                 MobileInputsManager.target.FocusCharInputs(focusingChar._MyBehaviorRunner, focusingChar.Zokusei);
-                if (FightLoad.ToBeLoad._fightEventType == FightEventType.Screensaver)
-                {
-                    MobileInputsManager.target.TurnOffButtons();
-                }
             }
         }
         
@@ -128,6 +126,8 @@ namespace FightScene
         
         public IEnumerator LoadGame(StageScriptableObject stage)
         {
+            loadFight = stage;
+
             BoundaryControllByGod.target.ChangeBackGround(stage.BattleGroundID);
             switch (stage.Team1Mode)
             {
@@ -188,7 +188,7 @@ namespace FightScene
         public void CameraParaAdjustment(Team myTeam)
         {
             C_Mode c_Mode;
-            if (FightLoad.ToBeLoad.Team1Mode == TeamMode.multiraid)
+            if (loadFight.Team1Mode == TeamMode.multiraid)
             {
                 c_Mode = C_Mode.CertainYAntiVibration;
             }

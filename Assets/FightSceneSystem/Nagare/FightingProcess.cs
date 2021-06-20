@@ -20,7 +20,7 @@
             //{
             //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
             //}
-            if (FightLoad.ToBeLoad._fightEventType == FightEventType.Screensaver)
+            if (NetFightScene.Fight._fightEventType == FightEventType.Screensaver)
             {
                 NetFightScene.target.ScreensaverCanvas.gameObject.SetActive(true);
                 NetFightScene.target.FightCanvas.gameObject.SetActive(false);

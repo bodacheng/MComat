@@ -64,8 +64,7 @@ namespace mainMenu
                     StageButton newButton = Instantiate(pretab);
                     void LoadThisStage()
                     {
-                        FightLoad.PreLoad(ArcadeStages[one.LocalFightID].stageConfig, "arcade");
-                        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo,true);
+                        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.LocalFightID].stageConfig, true);
                     }
                     newButton.button.onClick.AddListener(LoadThisStage);
                     newButton.ID = one.LocalFightID;

@@ -145,8 +145,7 @@ namespace mainMenu
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             ArrangeTeamBySelection();
-            FightLoad.PreLoad(stage, "self");
-            FightLoad.GoTo();
+            FightLoad.Go(stage);
         }
         
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行

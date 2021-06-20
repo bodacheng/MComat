@@ -1,37 +1,32 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
 using mainMenu;
+using FightScene;
 
 public static class FightLoad
 {
-    #region 待加载战斗信息
-    public static StageScriptableObject ToBeLoad;
-    public static string ToBeLoadMode;
-    #endregion
-    
-    // 加载战斗信息
-    public static void PreLoad(StageScriptableObject stageScriptableObject, string teamSetGameMode)
+    public static void Go(StageScriptableObject stage, bool loadWithMyTeam = false)
     {
-        ToBeLoad = stageScriptableObject;
-        ToBeLoadMode = teamSetGameMode;
+        if (stage.localFight == null)
+            stage.localFight = new LocalFight();
 
-        PosKeySet set = null;
-        switch (ToBeLoadMode)
+        if (loadWithMyTeam)
         {
-            case "arcade":
-                set = TeamSet.Default;                
-                break;
-            case "arena":
-                set = TeamSet.Arena3V3;
-                break;
-        }
-        ToBeLoad.localFight.HeroSets = TeamSet.ToDic(set);
-    }
+            PosKeySet set = null;
+            switch (stage._fightEventType)
+            {
+                case FightEventType.Quest:
+                    set = TeamSet.Default;
+                    break;
+                case FightEventType.Arena:
+                    set = TeamSet.Arena3V3;
+                    break;
+            }
 
-    #region 进入战斗
-    public static void GoTo()
-    {
-        if (ToBeLoad.localFight.HeroSets.values.Count < 1 || ToBeLoad.localFight.EnemySets.values.Count < 1)
+            stage.localFight.HeroSets = TeamSet.ToDic(set);
+        }
+
+        if (stage.localFight.HeroSets.values.Count < 1 || stage.localFight.EnemySets.values.Count < 1)
         {
             string error;
             switch (Setting.Language)
@@ -46,16 +41,12 @@ public static class FightLoad
             LoadingCanvas.target.ArrangeWarnWindow(error);
             return;
         }
-        Go(ToBeLoad);
-    }
-    
-    public static void Go(StageScriptableObject stage)
-    {
-        ToBeLoad = stage;
+
+        NetFightScene.Fight = stage;
+
         Stones.PreventStonesFromDestroy();
         ArcadeManager.ArcadeStages.Clear();
         GeneralModelPool.Clear();
         SceneManager.LoadScene(2);
     }
-    #endregion
 }

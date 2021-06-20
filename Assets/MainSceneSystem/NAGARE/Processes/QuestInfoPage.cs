@@ -4,9 +4,12 @@ using dataAccess;
 
 public class QuestInfoPage : MainSceneProcess
 {
+    StageScriptableObject loadFight;
+
     // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
-    public IEnumerator EnterProcess()
+    public IEnumerator EnterProcess(StageScriptableObject stage)
     {
+        loadFight = stage;
         yield return ModelShower.target.ShowMyModel(null);
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
@@ -20,23 +23,23 @@ public class QuestInfoPage : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
     
-    public override void ProcessEnter()
+    public override void ProcessEnter<T>(T t)
     {
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        mainProcessRunner.RunAsQueued(EnterProcess(t as StageScriptableObject));
     }
     
     public override void ProcessEnd()
     {
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
     }
-    
+
     // 这个函数目前是固定使用“默认队伍配置”
     public void GetReadyForQuestInfoPage()
     {
-        FightPreparePage.target.QuestName.text = FightLoad.ToBeLoad.battleNameJPG;
-        switch(FightLoad.ToBeLoadMode)
+        FightPreparePage.target.QuestName.text = loadFight.battleNameJPG;
+        switch (loadFight._fightEventType)
         {
-            case "arena":
+            case FightEventType.Arena:
                 void GoToTeamEdit_Arena()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
@@ -44,7 +47,7 @@ public class QuestInfoPage : MainSceneProcess
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
                 break;
-            case "arcade":
+            case FightEventType.Quest:
                 void GoToTeamEdit_Arcade()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
@@ -54,8 +57,12 @@ public class QuestInfoPage : MainSceneProcess
                 break;
         }
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
-        FightPreparePage.target.StageMembersInfoShow(FightLoad.ToBeLoad);
+        FightPreparePage.target.StageMembersInfoShow(loadFight);
         FightPreparePage.target.BeginFight.onClick.RemoveAllListeners();
-        FightPreparePage.target.BeginFight.onClick.AddListener(FightLoad.GoTo);
+        void Go()
+        {
+            FightLoad.Go(loadFight, true);
+        }
+        FightPreparePage.target.BeginFight.onClick.AddListener(Go);
     }
 }

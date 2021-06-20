@@ -205,7 +205,7 @@ namespace mainMenu
         {
             LoadingCanvas.target.ArrangeConfirmWindow(
                 delegate {
-                    FightLoad.Go(stage);
+                    FightLoad.Go(stage, true);
                 }, "开打？");
         }
 
