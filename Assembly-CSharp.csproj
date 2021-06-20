@@ -206,7 +206,6 @@
     <Compile Include="Assets/RPGTALK/Scripts/Helpers/TMP_Translator.cs" />
     <Compile Include="Assets/StagesManagement/StageButton.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Panel/SplashScreenManager.cs" />
-    <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/ParticleSystemController/SaveParticleSystemScript.cs" />
     <Compile Include="Assets/BOWeaponSystem/Decompositioner.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/ChapterButton.cs" />
     <Compile Include="Assets/TheNineSlot/MiniNineSlots/NineForShow_ByAcc.cs" />
@@ -326,7 +325,6 @@
     <Compile Include="Assets/ImportantDefinition/PlayerAccountInfo.cs" />
     <Compile Include="Assets/Setting/Setting.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Gacha/GachaResult.cs" />
-    <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/ParticleSystemController/ParticleSystemControllerEditor.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Input/ScrollGamepadManager.cs" />
     <Compile Include="Assets/UI/SciFic Icons/Scripts/IconScript.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/FavoriteButton.cs" />
@@ -377,7 +375,6 @@
     <Compile Include="Assets/POFX/Scripts/POFX.cs" />
     <Compile Include="Assets/RealTimeGameProcessManager/FightTeam.cs" />
     <Compile Include="Assets/AI/buttons/zokuseiButtonEffectsGroup.cs" />
-    <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/ParticleSystemController/ParticleSystemController.cs" />
     <Compile Include="Assets/Asstes/FloatingCombatText/Scripts/OverlayCanvasController.cs" />
     <Compile Include="Assets/UI/Oldscripts/Save_Trans.cs" />
     <Compile Include="Assets/TutorialManger/processes/SelectASlot/SkillEditA1Try.cs" />
@@ -634,7 +631,6 @@
     <Compile Include="Assets/AI/Soul/SkillSet/NineAndTwo_Validation.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
     <Compile Include="Assets/Personality/FaceControl/BlendShapeProxy.cs" />
-    <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/ParticleSystemController/Serializables.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/Snippets/RPGTalkFollowCharacter.cs" />
     <Compile Include="Assets/Monsterbox/SkillStoneDetail.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" />

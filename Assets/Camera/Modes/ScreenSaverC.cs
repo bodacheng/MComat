@@ -16,16 +16,6 @@ class ScreenSaverC : CameraMode
         this.XZDis = XZDis;
         this.YDis = YDis;
     }
-    
-    /// <summary>
-    /// 获取某向量的垂直向量（方向是左手边?）
-    /// </summary>
-    Vector3 GetVerticalDir(Vector3 _dir)
-    {
-        //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
-        //return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
-        return new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
-    }
 
     float h = 0.3f;//相机旋转速度
     public override void LocalUpdate(Camera _camera)
