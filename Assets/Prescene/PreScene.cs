@@ -201,7 +201,7 @@ namespace mainMenu
             TutorialRunner.Main.ProcessNagare();
         }
 
-        public void AskIfLoadFight(StageScriptableObject stage)
+        public void AskIfLoadFight(FightInfo stage)
         {
             LoadingCanvas.target.ArrangeConfirmWindow(
                 delegate {
@@ -211,13 +211,13 @@ namespace mainMenu
 
         public void BeginSkillTest_Rotatiom()
         {
-            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
+            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             FightLoad.Go(stage);
         }
 
         public void BeginSkillTest_Multi()
         {
-            StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.multiraid);
+            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.multiraid);
             FightLoad.Go(stage);
         }
 

@@ -50,7 +50,7 @@ namespace FightScene
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
 
-        public static StageScriptableObject Fight;
+        public static FightInfo Fight;
 
         void Awake()
         {

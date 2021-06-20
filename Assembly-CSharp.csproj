@@ -285,7 +285,7 @@
     <Compile Include="Assets/Monsterbox/SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Shop/StoneBoxExpansion.cs" />
     <Compile Include="Assets/Camera/Modes/TopDownWatchCamera.cs" />
-    <Compile Include="Assets/StagesManagement/StageScriptableObject.cs" />
+    <Compile Include="Assets/StagesManagement/FightInfo.cs" />
     <Compile Include="Assets/Camera/Modes/TeamEditCamera.cs" />
     <Compile Include="Assets/Camera/PinchZoom/PinchZoom.cs" />
     <Compile Include="Assets/Login/PlayFabLogin.cs" />
@@ -687,7 +687,6 @@
     <None Include="Assets/Asstes/enviroments/Top-Down Dungeons2/Standard Assets/Effects/ImageEffects/Shaders/VortexEffect.shader" />
     <None Include="Assets/Resources/TestSaveData/MyStones/195.json" />
     <None Include="Assets/Resources/TestSaveData/MyStones/286.json" />
-    <None Include="Assets/Resources/stageTemp/fdfsdf.json" />
     <None Include="Assets/Resources/TestSaveData/MyStones/256.json" />
     <None Include="Assets/Resources/TestSaveData/MyStones/19.json" />
     <None Include="Assets/Resources/TestSaveData/MyStones/95.json" />

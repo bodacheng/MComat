@@ -2,8 +2,10 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Playables;
+using Newtonsoft.Json;
+using System;
 
-public class StageScriptableObject : ScriptableObject
+public class FightInfo : ScriptableObject
 {
     public FightEventType eventType;
     
@@ -39,7 +41,7 @@ public class StageScriptableObject : ScriptableObject
     [MenuItem ("Stage/Create StageScriptEditor")]
     static void CreateExampleAsset ()
     {
-        var exampleAsset = CreateInstance<StageScriptableObject> ();
+        var exampleAsset = CreateInstance<FightInfo> ();
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
         AssetDatabase.Refresh();
     }
@@ -47,7 +49,7 @@ public class StageScriptableObject : ScriptableObject
     
     public void LoadLocalFightFromScript()
     {
-        localFight = FightMembers.LoadOneLocalFightByScript(Script);
+        localFight = LoadMembersFromScript();
         localFight.SetEnemyLevel(stageLevel);
     }
     
@@ -61,10 +63,28 @@ public class StageScriptableObject : ScriptableObject
         }
         return enterRingLocalIDs;
     }
-    
-    public static StageScriptableObject ArenaStage(FightMembers LocalFight)
+
+    FightMembers LoadMembersFromScript()
     {
-        StageScriptableObject stage = CreateInstance<StageScriptableObject>();
+        FightMembers _localFight = new FightMembers();
+        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
+        try
+        {
+            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
+            _localFight.EnemySets._SerializableSets = targetValue;
+            _localFight.EnemySets.ConvertSerializableArrayToDictionary();
+            return _localFight;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+            return null;
+        }
+    }
+
+    public static FightInfo ArenaStage(FightMembers LocalFight)
+    {
+        FightInfo stage = CreateInstance<FightInfo>();
         stage.localFight = LocalFight;
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
@@ -73,9 +93,9 @@ public class StageScriptableObject : ScriptableObject
         return stage;
     }
     
-    public static StageScriptableObject RandomStage()
+    public static FightInfo RandomStage()
     {
-        StageScriptableObject stage = CreateInstance<StageScriptableObject>();
+        FightInfo stage = CreateInstance<FightInfo>();
         stage.localFight = StagesManager.RandomFight();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
@@ -84,9 +104,9 @@ public class StageScriptableObject : ScriptableObject
         return stage;
     }
     
-    public static StageScriptableObject RandomSkillTestStage(TeamMode teamMode)
+    public static FightInfo RandomSkillTestStage(TeamMode teamMode)
     {
-        StageScriptableObject stage = CreateInstance<StageScriptableObject>();
+        FightInfo stage = CreateInstance<FightInfo>();
         stage.localFight = StagesManager.RandomSkillTest(teamMode);
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;

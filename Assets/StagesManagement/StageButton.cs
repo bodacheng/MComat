@@ -12,7 +12,7 @@ public class StageButton : MonoBehaviour
 
 public class StageInfo
 {
-    public StageScriptableObject stageConfig;
+    public FightInfo stageConfig;
     public StageButton stageButton;
     public List<HeroIcon> MemberIcons;
     

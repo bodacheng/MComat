@@ -41,9 +41,9 @@ public class ArenaManager : MonoBehaviour
                 IEnumerator opponentteam = Arena.GetOpponentTeamInfo(opponentInfo.playerID);
                 yield return opponentteam;
                 OneTeam oneTeam = (OneTeam)opponentteam.Current;
-                yield return target.AddFightToList(StageScriptableObject.ArenaStage(oneTeam.ToFightInfo()));
+                yield return target.AddFightToList(FightInfo.ArenaStage(oneTeam.ToFightInfo()));
             }else{
-                yield return target.AddFightToList(StageScriptableObject.RandomStage());
+                yield return target.AddFightToList(FightInfo.RandomStage());
             }
         }
         

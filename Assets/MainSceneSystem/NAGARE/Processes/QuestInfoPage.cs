@@ -4,10 +4,10 @@ using dataAccess;
 
 public class QuestInfoPage : MainSceneProcess
 {
-    StageScriptableObject loadFight;
+    FightInfo loadFight;
 
     // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
-    public IEnumerator EnterProcess(StageScriptableObject stage)
+    public IEnumerator EnterProcess(FightInfo stage)
     {
         loadFight = stage;
         yield return ModelShower.target.ShowMyModel(null);
@@ -25,7 +25,7 @@ public class QuestInfoPage : MainSceneProcess
     
     public override void ProcessEnter<T>(T t)
     {
-        mainProcessRunner.RunAsQueued(EnterProcess(t as StageScriptableObject));
+        mainProcessRunner.RunAsQueued(EnterProcess(t as FightInfo));
     }
     
     public override void ProcessEnd()

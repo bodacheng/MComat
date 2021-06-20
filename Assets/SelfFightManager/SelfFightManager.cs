@@ -43,7 +43,7 @@ namespace mainMenu
         IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
 
         FightMembers _selfFight = new FightMembers { };
-        StageScriptableObject stage;
+        FightInfo stage;
         Team focusingTeam;
         int focusingPosNum = -1;
         
@@ -54,7 +54,7 @@ namespace mainMenu
 
         void Start()
         {
-            stage = new StageScriptableObject
+            stage = new FightInfo
             {
                 BattleGroundID = 0
             };

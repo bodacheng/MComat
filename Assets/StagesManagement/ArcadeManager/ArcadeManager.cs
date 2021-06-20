@@ -54,10 +54,10 @@ namespace mainMenu
         // 2020523 : 计划根据账户进度选择是否显示隐藏关卡
         public IEnumerator INIArcadeStageButtons()
         {
-            List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(StageScriptableObject)).ToList();
+            List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
             foreach (Object _object in stageScriptableObjects)
             {
-                StageScriptableObject one = (StageScriptableObject)_object;
+                FightInfo one = (FightInfo)_object;
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
                     one.LoadLocalFightFromScript();

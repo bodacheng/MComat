@@ -5,7 +5,7 @@ using FightScene;
 
 public static class FightLoad
 {
-    public static void Go(StageScriptableObject stage, bool loadWithMyTeam = false)
+    public static void Go(FightInfo stage, bool loadWithMyTeam = false)
     {
         if (stage.localFight == null)
             stage.localFight = new FightMembers();

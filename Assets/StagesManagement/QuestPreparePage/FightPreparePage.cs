@@ -22,7 +22,7 @@ namespace mainMenu
             target = this;
         }
         
-        public void StageMembersInfoShow(StageScriptableObject stage)
+        public void StageMembersInfoShow(FightInfo stage)
         {            
             MemberInfosShow(stage.localFight.HeroSets.values, myTeamShowT);
             MemberInfosShow(stage.localFight.EnemySets.values, enemyTeamShowT);

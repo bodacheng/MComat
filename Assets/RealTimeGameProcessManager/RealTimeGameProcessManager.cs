@@ -41,7 +41,7 @@ namespace FightScene
         public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
         public static IDictionary<Team, List<Data_Center>> FightingMembers = new Dictionary<Team, List<Data_Center>>();
 
-        StageScriptableObject loadFight;
+        FightInfo loadFight;
 
         public static void AddOrRemoveFightingMember(Data_Center member, Team team, bool add) // add:true remove: false
         {
@@ -124,7 +124,7 @@ namespace FightScene
             Refresh();
         }
         
-        public IEnumerator LoadGame(StageScriptableObject stage)
+        public IEnumerator LoadGame(FightInfo stage)
         {
             loadFight = stage;
 

@@ -12,7 +12,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public Button BigButton;
         
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public IEnumerator AddFightToList(StageScriptableObject _SO)
+    public IEnumerator AddFightToList(FightInfo _SO)
     {
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (int index = 0; index < _SO.localFight.EnemySets._SerializableSets.Length; index++)
