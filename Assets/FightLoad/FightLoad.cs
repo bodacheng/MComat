@@ -14,33 +14,23 @@ public static class FightLoad
     {
         ToBeLoad = stageScriptableObject;
         ToBeLoadMode = teamSetGameMode;
-    }
-    
-    public static void Arcade()
-    {
-        ToBeLoad.LoadLocalFightFromScript();
-        PosKeySet set = TeamSet.Default;
-        ToBeLoad.localFight.HeroSets = TeamSet.ToDic(set);
-    }
-    
-    public static void Arena()
-    {
-        PosKeySet set = TeamSet.Arena3V3;
-        ToBeLoad.localFight.HeroSets = TeamSet.ToDic(set);
-    }
-    
-    #region 进入战斗
-    public static void GoTo()
-    {
+
+        PosKeySet set = null;
         switch (ToBeLoadMode)
         {
             case "arcade":
-                Arcade();
+                set = TeamSet.Default;                
                 break;
             case "arena":
-                Arena();
+                set = TeamSet.Arena3V3;
                 break;
         }
+        ToBeLoad.localFight.HeroSets = TeamSet.ToDic(set);
+    }
+
+    #region 进入战斗
+    public static void GoTo()
+    {
         if (ToBeLoad.localFight.HeroSets.values.Count < 1 || ToBeLoad.localFight.EnemySets.values.Count < 1)
         {
             string error;

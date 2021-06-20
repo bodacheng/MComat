@@ -43,7 +43,6 @@ public class QuestInfoPage : MainSceneProcess
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
-                FightLoad.Arena();
                 break;
             case "arcade":
                 void GoToTeamEdit_Arcade()
@@ -52,7 +51,6 @@ public class QuestInfoPage : MainSceneProcess
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
-                FightLoad.Arcade();
                 break;
         }
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
