@@ -15,10 +15,10 @@ public class FrontPage : MainSceneProcess
         userDataLoadFinished.Value = value;
     }
 
-    ReactiveProperty<int> userReadOnlyDataLoadFinished = new ReactiveProperty<int>(0);
+    ReactiveProperty<int> userReadOnlyDataLoadLoaded = new ReactiveProperty<int>(0);
     void UserReadOnlyDataLoadFinished(int value)
     {
-        userReadOnlyDataLoadFinished.Value = value;
+        userReadOnlyDataLoadLoaded.Value = value;
     }
 
     ReactiveProperty<int> statisticsFinished = new ReactiveProperty<int>(0);
@@ -31,6 +31,18 @@ public class FrontPage : MainSceneProcess
     void ItemsLoadFinished(int value)
     {
         itemsLoadFinished.Value = value;
+    }
+
+    ReactiveProperty<int> arenaTFinished = new ReactiveProperty<int>(0);
+    void ArenaTFinished(int value)
+    {
+        arenaTFinished.Value = value;
+    }
+
+    ReactiveProperty<int> arcadeTFinished = new ReactiveProperty<int>(0);
+    void ArcadeTFinished(int value)
+    {
+        arcadeTFinished.Value = value;
     }
 
     public FrontPage()
@@ -75,9 +87,12 @@ public class FrontPage : MainSceneProcess
         //AccountCharsSet.LoadTutorial();
         ItemLoader.LoadAll(ItemsLoadFinished);
 
+        TeamSet.LoadTeamSet("arena", ArenaTFinished);
+        TeamSet.LoadTeamSet("arcade", ArcadeTFinished);
+
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
-                userDataLoadFinished, itemsLoadFinished, statisticsFinished, userReadOnlyDataLoadFinished
+                userDataLoadFinished, itemsLoadFinished, statisticsFinished, userReadOnlyDataLoadLoaded, arcadeTFinished, arenaTFinished
             },
             () =>
             {

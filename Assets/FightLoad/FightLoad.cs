@@ -12,18 +12,7 @@ public static class FightLoad
 
         if (loadWithMyTeam)
         {
-            PosKeySet set = null;
-            switch (stage.eventType)
-            {
-                case FightEventType.Quest:
-                    set = TeamSet.Default;
-                    break;
-                case FightEventType.Arena:
-                    set = TeamSet.Arena3V3;
-                    break;
-            }
-
-            stage.fightMembers.HeroSets = TeamSet.ToDic(set);
+            stage.LoadMyTeam();
         }
 
         if (stage.fightMembers.HeroSets.values.Count < 1 || stage.fightMembers.EnemySets.values.Count < 1)

@@ -4,6 +4,9 @@ using UnityEditor;
 using UnityEngine.Playables;
 using Newtonsoft.Json;
 using System;
+using dataAccess;
+using mainMenu;
+using FightScene;
 
 public class FightInfo : ScriptableObject
 {
@@ -39,7 +42,7 @@ public class FightInfo : ScriptableObject
     
     #if UNITY_EDITOR
     [MenuItem ("Stage/Create StageScriptEditor")]
-    static void CreateExampleAsset ()
+    static void CreateExampleAsset()
     {
         var exampleAsset = CreateInstance<FightInfo> ();
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
@@ -51,6 +54,21 @@ public class FightInfo : ScriptableObject
     {
         fightMembers = LoadMembersFromScript();
         fightMembers.SetEnemyLevel(stageLevel);
+    }
+
+    public void LoadMyTeam()
+    {
+        PosKeySet set = null;
+        switch (eventType)
+        {
+            case FightEventType.Quest:
+                set = TeamSet.Default;
+                break;
+            case FightEventType.Arena:
+                set = TeamSet.Arena3V3;
+                break;
+        }
+        fightMembers.HeroSets = TeamSet.ToDic(set);
     }
     
     public List<string> GetTeam1EnterRingLocalIds(FightMembers localFight)

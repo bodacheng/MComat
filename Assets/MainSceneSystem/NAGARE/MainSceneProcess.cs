@@ -1,5 +1,4 @@
-﻿using UniRx;
-
+﻿
 namespace mainMenu
 {
     public abstract class MainSceneProcess : SceneProcess

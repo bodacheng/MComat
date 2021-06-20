@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using mainMenu;
-using dataAccess;
+using UnityEngine;
 
 public class QuestInfoPage : MainSceneProcess
 {
@@ -50,6 +50,7 @@ public class QuestInfoPage : MainSceneProcess
             case FightEventType.Quest:
                 void GoToTeamEdit_Arcade()
                 {
+                    Debug.Log("arcade");
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();

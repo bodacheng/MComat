@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using dataAccess;
 using System.Collections;
 using UniRx;
 
@@ -58,12 +57,14 @@ namespace mainMenu
             foreach (Object _object in stageScriptableObjects)
             {
                 FightInfo one = (FightInfo)_object;
+                one.eventType = FightEventType.Quest;
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
                     one.LoadLocalFightFromScript();
                     StageButton newButton = Instantiate(pretab);
                     void LoadThisStage()
                     {
+                        ArcadeStages[one.LocalFightID].stageConfig.LoadMyTeam();
                         PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.LocalFightID].stageConfig, true);
                     }
                     newButton.button.onClick.AddListener(LoadThisStage);
