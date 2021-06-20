@@ -71,12 +71,12 @@ namespace mainMenu
                     newButton.text.text = "Stage" + one.LocalFightID.ToString();
                     newButton.name = "Stage" + one.LocalFightID.ToString();
                     
-                    for (int i = 0; i < one.localFight.EnemySets.values.Count; i++)
+                    for (int i = 0; i < one.fightMembers.EnemySets.values.Count; i++)
                     {
-                        IEnumerator onecoroutine = MonsterIconDic.LoadAndGet(one.localFight.EnemySets.values[i].ResourceID);
+                        IEnumerator onecoroutine = MonsterIconDic.LoadAndGet(one.fightMembers.EnemySets.values[i].ResourceID);
                         yield return onecoroutine;
                     }
-                    List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.localFight.EnemySets.values, newButton.IconsT);
+                    List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.fightMembers.EnemySets.values, newButton.IconsT);
                     for (int i = 0; i < heroIcons.Count; i++)
                     {
                         HeroIcon heroIcon = heroIcons[i];

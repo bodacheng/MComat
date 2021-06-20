@@ -28,7 +28,7 @@ public class FightInfo : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
     
-    public FightMembers localFight = new FightMembers();
+    public FightMembers fightMembers = new FightMembers();
     public int stageLevel = 1;
     public float Team1HpRate = 1f;
     public float Team2HpRate = 1f;
@@ -49,8 +49,8 @@ public class FightInfo : ScriptableObject
     
     public void LoadLocalFightFromScript()
     {
-        localFight = LoadMembersFromScript();
-        localFight.SetEnemyLevel(stageLevel);
+        fightMembers = LoadMembersFromScript();
+        fightMembers.SetEnemyLevel(stageLevel);
     }
     
     public List<string> GetTeam1EnterRingLocalIds(FightMembers localFight)
@@ -85,7 +85,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo ArenaStage(FightMembers LocalFight)
     {
         FightInfo stage = CreateInstance<FightInfo>();
-        stage.localFight = LocalFight;
+        stage.fightMembers = LocalFight;
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -96,7 +96,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomStage()
     {
         FightInfo stage = CreateInstance<FightInfo>();
-        stage.localFight = StagesManager.RandomFight();
+        stage.fightMembers = StagesManager.RandomFight();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -107,7 +107,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)
     {
         FightInfo stage = CreateInstance<FightInfo>();
-        stage.localFight = StagesManager.RandomSkillTest(teamMode);
+        stage.fightMembers = StagesManager.RandomSkillTest(teamMode);
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;

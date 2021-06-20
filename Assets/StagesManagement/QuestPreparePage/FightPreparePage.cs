@@ -24,8 +24,8 @@ namespace mainMenu
         
         public void StageMembersInfoShow(FightInfo stage)
         {            
-            MemberInfosShow(stage.localFight.HeroSets.values, myTeamShowT);
-            MemberInfosShow(stage.localFight.EnemySets.values, enemyTeamShowT);
+            MemberInfosShow(stage.fightMembers.HeroSets.values, myTeamShowT);
+            MemberInfosShow(stage.fightMembers.EnemySets.values, enemyTeamShowT);
         }
         
         public static List<HeroIcon> MemberInfosShow(List<CharDataInfo> HeroSets, RectTransform _ShowT)

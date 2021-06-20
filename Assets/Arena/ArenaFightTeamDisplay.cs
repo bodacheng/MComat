@@ -15,12 +15,12 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public IEnumerator AddFightToList(FightInfo _SO)
     {
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
-        for (int index = 0; index < _SO.localFight.EnemySets._SerializableSets.Length; index++)
+        for (int index = 0; index < _SO.fightMembers.EnemySets._SerializableSets.Length; index++)
         {
-            for (int index2 = 0; index2 < _SO.localFight.EnemySets._SerializableSets[index].value.Length; index2++)
+            for (int index2 = 0; index2 < _SO.fightMembers.EnemySets._SerializableSets[index].value.Length; index2++)
             {
-                int posNum = _SO.localFight.EnemySets._SerializableSets[index].value[index2]._Key2;
-                CharDataInfo charDataInfo = _SO.localFight.EnemySets._SerializableSets[index].value[index2]._Value;
+                int posNum = _SO.fightMembers.EnemySets._SerializableSets[index].value[index2]._Key2;
+                CharDataInfo charDataInfo = _SO.fightMembers.EnemySets._SerializableSets[index].value[index2]._Value;
                 HeroIcon target = null;
                 switch(posNum)
                 {

@@ -138,7 +138,7 @@ namespace mainMenu
                     _selfFight.EnemySets = _team2positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
                     break;
             }
-            stage.localFight = _selfFight;
+            stage.fightMembers = _selfFight;
         }
 
         public void FightStart()

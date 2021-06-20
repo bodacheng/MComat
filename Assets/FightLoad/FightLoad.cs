@@ -7,8 +7,8 @@ public static class FightLoad
 {
     public static void Go(FightInfo stage, bool loadWithMyTeam = false)
     {
-        if (stage.localFight == null)
-            stage.localFight = new FightMembers();
+        if (stage.fightMembers == null)
+            stage.fightMembers = new FightMembers();
 
         if (loadWithMyTeam)
         {
@@ -23,10 +23,10 @@ public static class FightLoad
                     break;
             }
 
-            stage.localFight.HeroSets = TeamSet.ToDic(set);
+            stage.fightMembers.HeroSets = TeamSet.ToDic(set);
         }
 
-        if (stage.localFight.HeroSets.values.Count < 1 || stage.localFight.EnemySets.values.Count < 1)
+        if (stage.fightMembers.HeroSets.values.Count < 1 || stage.fightMembers.EnemySets.values.Count < 1)
         {
             string error;
             switch (Setting.Language)
