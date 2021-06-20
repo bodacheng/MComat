@@ -32,7 +32,7 @@ namespace FightScene
             // quest结束：显示技能石经验获得情况和报酬信息？
             // 自我战斗结束：显示战斗分析？
             // 技能测试：显示战斗分析？
-            switch (NetFightScene.Fight._fightEventType)
+            switch (NetFightScene.Fight.eventType)
             {
                 case FightEventType.Arena:
                     //RequestRewardForm form1 = new RequestRewardForm

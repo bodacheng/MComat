@@ -12,7 +12,7 @@ public partial class StagesManagerGUI : Editor {
         {
             if (_stagesManager.FightScript != null)
             {
-                LocalFight one = _stagesManager.LoadOneLocalFight_Json(_stagesManager.FightScript);
+                FightMembers one = _stagesManager.LoadOneLocalFight_Json(_stagesManager.FightScript);
                 if (one != null)
                 {
                     _stagesManager.EditoringFight = one;

@@ -8,9 +8,9 @@ namespace Api.Dto.Model
         readonly List<MemberOfTeam> membersInfo;
         readonly TeamPos teamSetInfo;
         
-        public LocalFight ToFightInfo()
+        public FightMembers ToFightInfo()
         {
-            LocalFight LocalFight = new LocalFight();
+            FightMembers LocalFight = new FightMembers();
             PosKeySet posKeySet = teamSetInfo.ToPosKeySet();
             for (int i = 0; i < membersInfo.Count; i++)
             {

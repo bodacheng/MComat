@@ -8,12 +8,12 @@ public static class FightLoad
     public static void Go(StageScriptableObject stage, bool loadWithMyTeam = false)
     {
         if (stage.localFight == null)
-            stage.localFight = new LocalFight();
+            stage.localFight = new FightMembers();
 
         if (loadWithMyTeam)
         {
             PosKeySet set = null;
-            switch (stage._fightEventType)
+            switch (stage.eventType)
             {
                 case FightEventType.Quest:
                     set = TeamSet.Default;

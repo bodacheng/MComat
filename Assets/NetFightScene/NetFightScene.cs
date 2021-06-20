@@ -79,7 +79,7 @@ namespace FightScene
             FightOverProcess fightOverProcess = new FightOverProcess();
             BasicTryProcess basicTryProcess = new BasicTryProcess();
             
-            switch(Fight._fightEventType)
+            switch(Fight.eventType)
             {
                 case FightEventType.SkillTest:
                 case FightEventType.Self:
@@ -120,7 +120,7 @@ namespace FightScene
         {
             RealTimeGameProcessManager.target.FightTeam1.ModeStart();
             
-            if (Fight._fightEventType == FightEventType.Test)
+            if (Fight.eventType == FightEventType.Test)
             {
                 RealTimeGameProcessManager.target.FightTeam2.LetAllCharactersChangeToTestMode();
             }
@@ -138,7 +138,7 @@ namespace FightScene
                     RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values[0], false);
                     break;
             }
-            if (Fight._fightEventType == FightEventType.Screensaver)
+            if (Fight.eventType == FightEventType.Screensaver)
                 RealTimeGameProcessManager.target.ScreenSaverC(RealTimeGameProcessManager.playerTeam);
         }
     }

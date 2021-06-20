@@ -11,11 +11,11 @@ public partial class StagesManager : MonoBehaviour
 {
     public string fightScriptPath;
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
-    public LocalFight EditoringFight;
+    public FightMembers EditoringFight;
 
-    public LocalFight LoadOneLocalFight_Json(TextAsset Script)
+    public FightMembers LoadOneLocalFight_Json(TextAsset Script)
     {
-        LocalFight _localFight = new LocalFight();
+        FightMembers _localFight = new FightMembers();
         MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
@@ -39,7 +39,7 @@ public partial class StagesManager : MonoBehaviour
         }
     }
     
-    public void SaveFightAsJson(string path, LocalFight localFight)
+    public void SaveFightAsJson(string path, FightMembers localFight)
     {
         if (localFight == null || localFight.EnemySets == null)
             return;

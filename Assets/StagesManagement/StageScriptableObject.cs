@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 
 public class StageScriptableObject : ScriptableObject
 {
-    public FightEventType _fightEventType = FightEventType.Arena;
+    public FightEventType eventType;
     
     [SerializeField]
     public int LocalFightID;
@@ -26,14 +26,14 @@ public class StageScriptableObject : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
     
-    public LocalFight localFight = new LocalFight();
+    public FightMembers localFight = new FightMembers();
     public int stageLevel = 1;
     public float Team1HpRate = 1f;
     public float Team2HpRate = 1f;
     public CriticalGaugeMode team1CGMode = CriticalGaugeMode.normal;
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
-    public TeamMode Team1Mode = TeamMode.multiraid;
-    public TeamMode Team2Mode = TeamMode.multiraid;
+    public TeamMode Team1Mode;
+    public TeamMode Team2Mode;
     
     #if UNITY_EDITOR
     [MenuItem ("Stage/Create StageScriptEditor")]
@@ -47,11 +47,11 @@ public class StageScriptableObject : ScriptableObject
     
     public void LoadLocalFightFromScript()
     {
-        localFight = LocalFight.LoadOneLocalFightByScript(Script);
+        localFight = FightMembers.LoadOneLocalFightByScript(Script);
         localFight.SetEnemyLevel(stageLevel);
     }
     
-    public List<string> GetTeam1EnterRingLocalIds(LocalFight localFight)
+    public List<string> GetTeam1EnterRingLocalIds(FightMembers localFight)
     {
         List<string> enterRingLocalIDs = new List<string>();
         foreach(CharDataInfo _one in localFight.HeroSets.values)
@@ -62,14 +62,14 @@ public class StageScriptableObject : ScriptableObject
         return enterRingLocalIDs;
     }
     
-    public static StageScriptableObject ArenaStage(LocalFight LocalFight)
+    public static StageScriptableObject ArenaStage(FightMembers LocalFight)
     {
         StageScriptableObject stage = CreateInstance<StageScriptableObject>();
         stage.localFight = LocalFight;
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
-        stage._fightEventType = FightEventType.Arena;
+        stage.eventType = FightEventType.Arena;
         return stage;
     }
     
@@ -80,7 +80,7 @@ public class StageScriptableObject : ScriptableObject
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
-        stage._fightEventType = FightEventType.Arena;
+        stage.eventType = FightEventType.Arena;
         return stage;
     }
     
@@ -91,7 +91,7 @@ public class StageScriptableObject : ScriptableObject
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;
-        stage._fightEventType = FightEventType.SkillTest;
+        stage.eventType = FightEventType.SkillTest;
         return stage;
     }
 }

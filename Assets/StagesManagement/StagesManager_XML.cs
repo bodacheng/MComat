@@ -9,9 +9,9 @@ using UnityEditor;
 
 public partial class StagesManager : MonoBehaviour
 {
-    public LocalFight LoadOneLocalFight_XML(TextAsset Script)
+    public FightMembers LoadOneLocalFight_XML(TextAsset Script)
     {
-        LocalFight _localFight = new LocalFight();
+        FightMembers _localFight = new FightMembers();
         
         MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
@@ -54,7 +54,7 @@ public partial class StagesManager : MonoBehaviour
         }
     }
 
-    public void SaveFightAsXml(string path, LocalFight localFight)
+    public void SaveFightAsXml(string path, FightMembers localFight)
     {
         if (localFight == null)
         {

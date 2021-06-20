@@ -42,7 +42,7 @@ namespace mainMenu
 
         IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
 
-        LocalFight _selfFight = new LocalFight { };
+        FightMembers _selfFight = new FightMembers { };
         StageScriptableObject stage;
         Team focusingTeam;
         int focusingPosNum = -1;
@@ -92,7 +92,7 @@ namespace mainMenu
             RFrame.gameObject.SetActive(false);
             MFrame.gameObject.SetActive(true);
             TFrame.gameObject.SetActive(false);
-            stage._fightEventType = FightEventType.Self;
+            stage.eventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
         }
@@ -106,7 +106,7 @@ namespace mainMenu
             RFrame.gameObject.SetActive(true);
             MFrame.gameObject.SetActive(false);
             TFrame.gameObject.SetActive(false);
-            stage._fightEventType = FightEventType.Self;
+            stage.eventType = FightEventType.Self;
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
         }
@@ -120,7 +120,7 @@ namespace mainMenu
             RFrame.gameObject.SetActive(false);
             MFrame.gameObject.SetActive(false);
             TFrame.gameObject.SetActive(true);
-            stage._fightEventType = FightEventType.Test;
+            stage.eventType = FightEventType.Test;
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
         }

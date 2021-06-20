@@ -4,7 +4,7 @@ using System.Linq;
 
 public partial class StagesManager : MonoBehaviour
 {
-    public static LocalFight RandomFight()
+    public static FightMembers RandomFight()
     {
         string focusingtype = "human";
         
@@ -12,7 +12,7 @@ public partial class StagesManager : MonoBehaviour
         List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
 
-        LocalFight target = new LocalFight();
+        FightMembers target = new FightMembers();
 
         CharDataInfo char1 = new CharDataInfo
         {
@@ -37,7 +37,7 @@ public partial class StagesManager : MonoBehaviour
         return target;
     }
 
-    public static LocalFight RandomSkillTest(TeamMode teamMode)
+    public static FightMembers RandomSkillTest(TeamMode teamMode)
     {
         string focusingtype = "human";
 
@@ -50,7 +50,7 @@ public partial class StagesManager : MonoBehaviour
         List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
 
-        LocalFight target = new LocalFight();
+        FightMembers target = new FightMembers();
 
         CharDataInfo char1 = new CharDataInfo
         {

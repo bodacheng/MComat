@@ -5,13 +5,13 @@ using System;
 using System.IO;
 
 [Serializable]
-public class LocalFight
+public class FightMembers
 {
     [NonSerialized]
     public MultiDictionary<int, int, CharDataInfo> HeroSets = new MultiDictionary<int, int, CharDataInfo>();
     public MultiDictionary<int, int, CharDataInfo> EnemySets = new MultiDictionary<int, int, CharDataInfo>();
     
-    public LocalFight()
+    public FightMembers()
     {
     }
     
@@ -23,9 +23,9 @@ public class LocalFight
         }
     }
        
-    public static LocalFight LoadOneLocalFightByScript(TextAsset Script)
+    public static FightMembers LoadOneLocalFightByScript(TextAsset Script)
     {
-        LocalFight _localFight = new LocalFight();
+        FightMembers _localFight = new FightMembers();
         MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
@@ -41,7 +41,7 @@ public class LocalFight
         }
     }
     
-    public static LocalFight LoadOneLocalFightByScript_XML(TextAsset Script)
+    public static FightMembers LoadOneLocalFightByScript_XML(TextAsset Script)
     {
         MultiDictionary<int, int, CharDataInfo>.SerializableSets[] enemySets;
         try
@@ -62,7 +62,7 @@ public class LocalFight
                 var reader = new StringReader(Script.text);
                 enemySets = serializer.Deserialize(reader) as MultiDictionary<int, int, CharDataInfo>.SerializableSets[];
             }
-            LocalFight fight = new LocalFight();
+            FightMembers fight = new FightMembers();
             fight.EnemySets._SerializableSets = enemySets;
             fight.EnemySets.ConvertSerializableArrayToDictionary();
             return fight;

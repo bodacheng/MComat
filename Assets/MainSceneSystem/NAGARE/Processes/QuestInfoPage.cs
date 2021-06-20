@@ -37,7 +37,7 @@ public class QuestInfoPage : MainSceneProcess
     public void GetReadyForQuestInfoPage()
     {
         FightPreparePage.target.QuestName.text = loadFight.battleNameJPG;
-        switch (loadFight._fightEventType)
+        switch (loadFight.eventType)
         {
             case FightEventType.Arena:
                 void GoToTeamEdit_Arena()

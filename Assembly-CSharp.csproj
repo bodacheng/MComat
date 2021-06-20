@@ -571,7 +571,7 @@
     <Compile Include="Assets/FightLogger/FightLogger.cs" />
     <Compile Include="Assets/AnimControl/dontuse/NullStateProcess.cs" />
     <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/UniqueProjectiles/ProjectileMoveScript.cs" />
-    <Compile Include="Assets/StagesManagement/LocalFight.cs" />
+    <Compile Include="Assets/StagesManagement/FightMembers.cs" />
     <Compile Include="Assets/Camera/Modes/LerpToCertainDistance.cs" />
     <Compile Include="Assets/DataBaseAccess/Account/Remote.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Event/PressKeyEvent.cs" />

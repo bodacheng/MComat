@@ -130,7 +130,7 @@ namespace FightScene
         // ArcadeNext
         public void CheckNextArcadeLevel()
         {
-            if (NetFightScene.Fight._fightEventType == FightEventType.Quest)
+            if (NetFightScene.Fight.eventType == FightEventType.Quest)
             {
                 if (ArcadeManager.ArcadeStages.ContainsKey(NetFightScene.Fight.LocalFightID + 1))
                 {

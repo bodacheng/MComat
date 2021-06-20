@@ -53,7 +53,7 @@ public partial class Starter : MonoBehaviour
         if (enterFrontPageFirst)
         {
             StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
-            stage._fightEventType = FightEventType.Screensaver;
+            stage.eventType = FightEventType.Screensaver;
             FightLoad.Go(stage);
         }else{
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
@@ -108,7 +108,7 @@ public partial class Starter : MonoBehaviour
             yield return MyMonsters.LocalSaveDataGetAllCharacters();
         }
         StageScriptableObject stage = StageScriptableObject.RandomSkillTestStage(TeamMode.rotation);
-        stage._fightEventType = FightEventType.Screensaver;
+        stage.eventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
     }
 
