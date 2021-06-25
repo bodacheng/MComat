@@ -22,27 +22,27 @@ public class PosKeySet
             switch (PosNumsWithLocalKeys[i].posNum)
             {
                 case 1:
-                    model.l = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.l = PosNumsWithLocalKeys[i].instanceID;
                 break;
                 case 2:
-                    model.r = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.r = PosNumsWithLocalKeys[i].instanceID;
                 break;
                 case 0:
-                    model.f = PosNumsWithLocalKeys[i].monsterOfPlayerId;
+                    model.f = PosNumsWithLocalKeys[i].instanceID;
                 break;
             }
         }
         return model;
     }
     
-    public MultiDictionary<int, int, CharDataInfo> LoadTeamBasedOnAccountInfo()
+    public MultiDictionary<int, int, CharDataInfo> LoadTeamDic()
     {
         MultiDictionary<int, int, CharDataInfo> multiDictionary = new MultiDictionary<int, int, CharDataInfo>();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
-            if (PosNumsWithLocalKeys[i].monsterOfPlayerId != null)
+            if (PosNumsWithLocalKeys[i].instanceID != null)
             {
-                MonsterOfPlayerInfo GetMonsterOfPlayerDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].monsterOfPlayerId);
+                MonsterOfPlayerInfo GetMonsterOfPlayerDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
                 if (GetMonsterOfPlayerDetailModel != null)
                 {
                     CharDataInfo charDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(GetMonsterOfPlayerDetailModel);
@@ -60,7 +60,7 @@ public class PosKeySet
             if (PosNumsWithLocalKeys[i].posNum == posNum)
             {
                 Debug.Log(this + ":" + monsterofplayerid);
-                PosNumsWithLocalKeys[i].monsterOfPlayerId = monsterofplayerid;
+                PosNumsWithLocalKeys[i].instanceID = monsterofplayerid;
                 return;
             }
         }
@@ -75,7 +75,7 @@ public class PosKeySet
         
         foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
         {
-            if (_Set.monsterOfPlayerId == monsterlocalID && _Set.monsterOfPlayerId != null)
+            if (_Set.instanceID == monsterlocalID && _Set.instanceID != null)
             {
                 if (_Set.posNum != targetPos)
                 {
@@ -109,7 +109,7 @@ public class PosKeySet
     
     public string GetMonsterOfPlayerIdOnPos(int PosNum)
     {
-        return GetPosMemInfo(PosNum) != null ? GetPosMemInfo(PosNum).monsterOfPlayerId ?? null : null;
+        return GetPosMemInfo(PosNum) != null ? GetPosMemInfo(PosNum).instanceID ?? null : null;
     }
     
     public void ChangePosition(int position1, int position2)
@@ -117,9 +117,9 @@ public class PosKeySet
         PosNumWithLocalKey PosNumWithLocalKey1 = GetPosMemInfo(position1);
         PosNumWithLocalKey PosNumWithLocalKey2 = GetPosMemInfo(position2);
         
-        string temp = PosNumWithLocalKey2.monsterOfPlayerId;
-        PosNumWithLocalKey2.monsterOfPlayerId = PosNumWithLocalKey1.monsterOfPlayerId;
-        PosNumWithLocalKey1.monsterOfPlayerId = temp;
+        string temp = PosNumWithLocalKey2.instanceID;
+        PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
+        PosNumWithLocalKey1.instanceID = temp;
     }
     
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
@@ -127,9 +127,9 @@ public class PosKeySet
     {
         PosNumWithLocalKey PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
         PosNumWithLocalKey PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
-        string temp = PosNumWithLocalKey2.monsterOfPlayerId;
-        PosNumWithLocalKey2.monsterOfPlayerId = PosNumWithLocalKey1.monsterOfPlayerId;
-        PosNumWithLocalKey1.monsterOfPlayerId = temp;
+        string temp = PosNumWithLocalKey2.instanceID;
+        PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
+        PosNumWithLocalKey1.instanceID = temp;
     }
     
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
@@ -138,8 +138,8 @@ public class PosKeySet
         List<string> onsetMonsterOfPlayerIds = new List<string>();
         foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
         {
-            if (_Set.monsterOfPlayerId != null)
-                onsetMonsterOfPlayerIds.Add(_Set.monsterOfPlayerId);
+            if (_Set.instanceID != null)
+                onsetMonsterOfPlayerIds.Add(_Set.instanceID);
         }
         return onsetMonsterOfPlayerIds;
     }
@@ -151,9 +151,9 @@ public class PosKeySet
             return null;
         foreach (PosNumWithLocalKey _set in this.PosNumsWithLocalKeys)
         {
-            if (_set.monsterOfPlayerId != null)
+            if (_set.instanceID != null)
             {
-                if (_set.monsterOfPlayerId == localID)
+                if (_set.instanceID == localID)
                     return _set;
             }
         }
@@ -164,7 +164,7 @@ public class PosKeySet
 [System.Serializable]
 public class PosNumWithLocalKey
 {
-    public string monsterOfPlayerId;
+    public string instanceID;
     public int posNum;
     
     public PosNumWithLocalKey()
@@ -174,6 +174,6 @@ public class PosNumWithLocalKey
     public PosNumWithLocalKey(int posNum, string monsterOfPlayerId)
     {
         this.posNum = posNum;
-        this.monsterOfPlayerId = monsterOfPlayerId;
+        this.instanceID = monsterOfPlayerId;
     }
 }

@@ -130,12 +130,12 @@ namespace mainMenu
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
-                    _selfFight.HeroSets = _team1positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
-                    _selfFight.EnemySets = _team2positionLocalCharKeySet_M.LoadTeamBasedOnAccountInfo();
+                    _selfFight.HeroSets = _team1positionLocalCharKeySet_M.LoadTeamDic();
+                    _selfFight.EnemySets = _team2positionLocalCharKeySet_M.LoadTeamDic();
                     break;
                 case TeamMode.rotation:
-                    _selfFight.HeroSets = _team1positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
-                    _selfFight.EnemySets = _team2positionLocalCharKeySet_R.LoadTeamBasedOnAccountInfo();
+                    _selfFight.HeroSets = _team1positionLocalCharKeySet_R.LoadTeamDic();
+                    _selfFight.EnemySets = _team2positionLocalCharKeySet_R.LoadTeamDic();
                     break;
             }
             stage.fightMembers = _selfFight;

@@ -116,7 +116,7 @@ public static class GeneralModelPool {
             yield return buildmodelproess = (CharsManager.target.CreateModelForShowingByStreamingAssets(ResourceID));
             break;
         }
-        Data_Center _TempDATACENTER = (Data_Center)buildmodelproess.Current;
-        yield return _TempDATACENTER;
+        Data_Center _Temp = (Data_Center)buildmodelproess.Current;
+        yield return _Temp;
     }
 }
