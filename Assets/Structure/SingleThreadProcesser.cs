@@ -101,13 +101,13 @@ public class SingleThreadProcesser : MonoBehaviour
 
     private async UniTask AsQueue(UniTask origin)
     {
-        await temp(origin);
+        await WaitForTurn(origin);
         await origin;
     }
 
-    private async UniTask<bool> temp(UniTask origin)
+    private async UniTask WaitForTurn(UniTask origin)
     {
-        return (processQueue.IndexOf(origin) == 0);
+        await UniTask.WaitUntil(() => processQueue.IndexOf(origin) == 0);
     }
 
     /// <summary>

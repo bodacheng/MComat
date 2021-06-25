@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Api.Dto.Model;
+﻿using Api.Dto.Model;
 using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +6,28 @@ using UnityEngine;
 [System.Serializable]
 public class PosKeySet
 {
-    public PosNumWithLocalKey[] PosNumsWithLocalKeys = {};
+    [System.Serializable]
+    public class OneSet
+    {
+        public string instanceID;
+        public int posNum;
+
+        public OneSet()
+        {
+        }
+
+        public OneSet(int posNum, string monsterOfPlayerId)
+        {
+            this.posNum = posNum;
+            this.instanceID = monsterOfPlayerId;
+        }
+    }
+
+    public OneSet[] PosNumsWithLocalKeys = {};
     
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new PosNumWithLocalKey[] { new PosNumWithLocalKey(0, null), new PosNumWithLocalKey(1, null), new PosNumWithLocalKey(2, null) };
+        PosNumsWithLocalKeys = new OneSet[] { new OneSet(0, null), new OneSet(1, null), new OneSet(2, null) };
     }
     
     public TeamPos ToTeamPos()
@@ -67,13 +83,13 @@ public class PosKeySet
         Debug.Log("没找着对应的位置键："+posNum);
     }
     
-    public List<PosNumWithLocalKey> SetPosMemByMonsterOfPlayerID(int targetPos,string monsterlocalID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
+    public List<OneSet> SetPosMemByMonsterOfPlayerID(int targetPos,string monsterlocalID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
     {
         if (targetPos == -1)
-            return new List<PosNumWithLocalKey>();
+            return new List<OneSet>();
         bool inTeamMemberChange = false;
         
-        foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
+        foreach (OneSet _Set in PosNumsWithLocalKeys)
         {
             if (_Set.instanceID == monsterlocalID && _Set.instanceID != null)
             {
@@ -81,7 +97,7 @@ public class PosKeySet
                 {
                     inTeamMemberChange = true;
                     ChangePosition(targetPos, _Set.posNum);
-                    return new List<PosNumWithLocalKey> {GetPosMemInfo(targetPos), _Set};
+                    return new List<OneSet> {GetPosMemInfo(targetPos), _Set};
                 }
                 else
                 {
@@ -92,12 +108,12 @@ public class PosKeySet
         if (!inTeamMemberChange)
         {
             SetPosMemInfoByLocalID(targetPos, monsterlocalID);
-            return new List<PosNumWithLocalKey> {GetPosMemInfo(targetPos)};
+            return new List<OneSet> {GetPosMemInfo(targetPos)};
         }
-        return new List<PosNumWithLocalKey>();
+        return new List<OneSet>();
     }
     
-    public PosNumWithLocalKey GetPosMemInfo(int PosNum)
+    public OneSet GetPosMemInfo(int PosNum)
     {
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
@@ -114,8 +130,8 @@ public class PosKeySet
     
     public void ChangePosition(int position1, int position2)
     {
-        PosNumWithLocalKey PosNumWithLocalKey1 = GetPosMemInfo(position1);
-        PosNumWithLocalKey PosNumWithLocalKey2 = GetPosMemInfo(position2);
+        OneSet PosNumWithLocalKey1 = GetPosMemInfo(position1);
+        OneSet PosNumWithLocalKey2 = GetPosMemInfo(position2);
         
         string temp = PosNumWithLocalKey2.instanceID;
         PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
@@ -125,8 +141,8 @@ public class PosKeySet
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
     public static void ChangePositionBetweenDifferentTeamSets(int position1, PosKeySet team1, int position2, PosKeySet team2)
     {
-        PosNumWithLocalKey PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
-        PosNumWithLocalKey PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
+        OneSet PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
+        OneSet PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
         string temp = PosNumWithLocalKey2.instanceID;
         PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
         PosNumWithLocalKey1.instanceID = temp;
@@ -136,7 +152,7 @@ public class PosKeySet
     public List<string> GetAllOnSetMonsterOfPlayerIds()
     {
         List<string> onsetMonsterOfPlayerIds = new List<string>();
-        foreach (PosNumWithLocalKey _Set in PosNumsWithLocalKeys)
+        foreach (OneSet _Set in PosNumsWithLocalKeys)
         {
             if (_Set.instanceID != null)
                 onsetMonsterOfPlayerIds.Add(_Set.instanceID);
@@ -145,11 +161,11 @@ public class PosKeySet
     }
     
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
-    public PosNumWithLocalKey GetPosMemInfoByLocalID(string localID)
+    public OneSet GetPosMemInfoByLocalID(string localID)
     {
         if (PosNumsWithLocalKeys == null)
             return null;
-        foreach (PosNumWithLocalKey _set in this.PosNumsWithLocalKeys)
+        foreach (OneSet _set in this.PosNumsWithLocalKeys)
         {
             if (_set.instanceID != null)
             {
@@ -158,22 +174,5 @@ public class PosKeySet
             }
         }
         return null;
-    }
-}
-
-[System.Serializable]
-public class PosNumWithLocalKey
-{
-    public string instanceID;
-    public int posNum;
-    
-    public PosNumWithLocalKey()
-    {
-    }
-
-    public PosNumWithLocalKey(int posNum, string monsterOfPlayerId)
-    {
-        this.posNum = posNum;
-        this.instanceID = monsterOfPlayerId;
     }
 }

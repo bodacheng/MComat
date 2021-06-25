@@ -29,11 +29,11 @@ namespace Api.Dto.Model
         public PosKeySet ToPosKeySet()
         {
             PosKeySet PosKeySet = new PosKeySet();
-            List<PosNumWithLocalKey> posNumWithLocalKeys = new List<PosNumWithLocalKey>
+            List<PosKeySet.OneSet> posNumWithLocalKeys = new List<PosKeySet.OneSet>
             {
-                new PosNumWithLocalKey(1, l),
-                new PosNumWithLocalKey(2, r),
-                new PosNumWithLocalKey(0, f)
+                new PosKeySet.OneSet(1, l),
+                new PosKeySet.OneSet(2, r),
+                new PosKeySet.OneSet(0, f)
             };
             PosKeySet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray();
             return PosKeySet;

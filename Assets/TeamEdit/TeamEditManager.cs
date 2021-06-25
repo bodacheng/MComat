@@ -84,7 +84,7 @@ public class TeamEditManager : MonoBehaviour
     // 修改对象队伍编程
     public void ChangeTeamPos(string instanceID, int targetPos, string teammode)
     {
-        List<PosNumWithLocalKey> returns = TeamSet.GetTargetSet(teammode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
+        List<PosKeySet.OneSet> returns = TeamSet.GetTargetSet(teammode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
         for (int i = 0; i < returns.Count;i++)
         {
             ChangeIconOnPos(returns[i].posNum, teammode);
