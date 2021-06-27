@@ -8,7 +8,7 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         public IDictionary<string, List<string>> ConditionAndRespond = new Dictionary<string, List<string>>();
-        public MultiDictionary<string, string, int> ConditionAndRespondPriority = new MultiDictionary<string, string, int>();// 注意，这个字典是value越小代表有限度越高
+        public MultiDict<string, string, int> ConditionAndRespondPriority = new MultiDict<string, string, int>();// 注意，这个字典是value越小代表有限度越高
         public IDictionary<string, string> BehaviourAndStrategicExitCondition = new Dictionary<string, string>();
         public List<string> AllConditionCodes;
 

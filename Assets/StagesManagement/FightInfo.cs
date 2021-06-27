@@ -85,10 +85,10 @@ public class FightInfo : ScriptableObject
     FightMembers LoadMembersFromScript()
     {
         FightMembers _localFight = new FightMembers();
-        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
+        MultiDict<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
-            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
+            targetValue = JsonConvert.DeserializeObject<MultiDict<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
             _localFight.EnemySets._SerializableSets = targetValue;
             _localFight.EnemySets.ConvertSerializableArrayToDictionary();
             return _localFight;

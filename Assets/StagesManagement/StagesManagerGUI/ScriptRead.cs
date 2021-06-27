@@ -16,9 +16,9 @@ public partial class StagesManagerGUI : Editor {
                 if (one != null)
                 {
                     _stagesManager.EditoringFight = one;
-                    foreach (MultiDictionary<int,int,CharDataInfo>.SerializableSets _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
+                    foreach (MultiDict<int,int,CharDataInfo>.SerializableSets _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
                     {
-                        foreach (MultiDictionary<int,int,CharDataInfo>.SerializableSet set in _one.value)
+                        foreach (MultiDict<int,int,CharDataInfo>.SerializableSet set in _one.value)
                         {
                             if (set._Value != null)
                             {

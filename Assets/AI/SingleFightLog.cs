@@ -75,9 +75,9 @@ namespace Soul
             StateInterruptedTimes.Clear();
         }
 
-        readonly MultiDictionary<string, string, int> skillnobenefitlog = new MultiDictionary<string, string, int>();
+        readonly MultiDict<string, string, int> skillnobenefitlog = new MultiDict<string, string, int>();
         // 本函数的运行紧邻WriteLog之后
-        public void AnalysisLog(MultiDictionary<string, string, int> _ConditionAndRespondPriority)
+        public void AnalysisLog(MultiDict<string, string, int> _ConditionAndRespondPriority)
         {
             if (MyBehaviourHistory.Count % 10 != 0 || MyBehaviourHistory.Count < 10)
             {

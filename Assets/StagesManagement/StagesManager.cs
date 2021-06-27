@@ -16,10 +16,10 @@ public partial class StagesManager : MonoBehaviour
     public FightMembers LoadOneLocalFight_Json(TextAsset Script)
     {
         FightMembers _localFight = new FightMembers();
-        MultiDictionary<int, int, CharDataInfo>.SerializableSets[] targetValue;
+        MultiDict<int, int, CharDataInfo>.SerializableSets[] targetValue;
         try
         {
-            targetValue = JsonConvert.DeserializeObject<MultiDictionary<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
+            targetValue = JsonConvert.DeserializeObject<MultiDict<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
             #if UNITY_EDITOR
             string _path = AssetDatabase.GetAssetPath(Script);
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
@@ -44,8 +44,8 @@ public partial class StagesManager : MonoBehaviour
         if (localFight == null || localFight.EnemySets == null)
             return;
                
-        MultiDictionary<int, int, CharDataInfo> UnNullDic = new MultiDictionary<int, int, CharDataInfo>();
-        foreach (MultiDictionary<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
+        MultiDict<int, int, CharDataInfo> UnNullDic = new MultiDict<int, int, CharDataInfo>();
+        foreach (MultiDict<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
         {
             for (int i = 0; i < sets.value.Length;i++)
             {

@@ -37,8 +37,8 @@ namespace mainMenu
         public HeroIcon team11_R, team12_R, team13_R;
         public HeroIcon team21_R, team22_R, team23_R;
 
-        public MultiDictionary<Team, int, HeroIcon> teamButtonDic_M = new MultiDictionary<Team, int, HeroIcon>();
-        public MultiDictionary<Team, int, HeroIcon> teamButtonDic_R = new MultiDictionary<Team, int, HeroIcon>();
+        public MultiDict<Team, int, HeroIcon> teamButtonDic_M = new MultiDict<Team, int, HeroIcon>();
+        public MultiDict<Team, int, HeroIcon> teamButtonDic_R = new MultiDict<Team, int, HeroIcon>();
 
         IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
 
@@ -251,7 +251,7 @@ namespace mainMenu
             //} 
         }
 
-        IEnumerator ChangeIconOnPos(int posNum, MultiDictionary<Team, int, HeroIcon> teamButtonDic, PosKeySet positionLocalCharKey)
+        IEnumerator ChangeIconOnPos(int posNum, MultiDict<Team, int, HeroIcon> teamButtonDic, PosKeySet positionLocalCharKey)
         {
             if (posNum == -1)
             {

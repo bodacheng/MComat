@@ -5,7 +5,7 @@ using UnityEngine;
 /// 复合字典
 /// </summary>
 [System.Serializable]
-public class MultiDictionary<Key1, Key2, Value>
+public class MultiDict<Key1, Key2, Value>
 {
     /// <summary>
     /// 字典结构
@@ -142,9 +142,9 @@ public class SSIMultiDictionary
 {
     public SSIMultiDictionary()
     {
-        main = new MultiDictionary<string, string, int>();        
+        main = new MultiDict<string, string, int>();        
     }
-    public MultiDictionary<string, string, int> main = new MultiDictionary<string, string, int>();
+    public MultiDict<string, string, int> main = new MultiDict<string, string, int>();
     List<KeyValuePair<string, List<string>>> temp;
     public List<KeyValuePair<string, string>> GiveOutMin()
     {

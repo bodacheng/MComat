@@ -29,7 +29,7 @@ namespace FightScene
             }
         }
 
-        public override void ArrangeAllTeamMembersToPosition(MultiDictionary<int, int, Data_Center> heromultiDictionary)
+        public override void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
             foreach (KeyValuePair<int, List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
             {

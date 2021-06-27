@@ -98,9 +98,9 @@ namespace dataAccess
             }
         }
         
-        public static MultiDictionary<int, int, CharDataInfo> ToDic(PosKeySet PosKeySet)
+        public static MultiDict<int, int, CharDataInfo> ToDic(PosKeySet PosKeySet)
         {
-            MultiDictionary<int, int, CharDataInfo> teamMembers = new MultiDictionary<int, int, CharDataInfo>();
+            MultiDict<int, int, CharDataInfo> teamMembers = new MultiDict<int, int, CharDataInfo>();
             for (int i = 0; i < 3; i++)
             {
                 if (PosKeySet.GetMonsterOfPlayerIdOnPos(i) == null)

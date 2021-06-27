@@ -12,7 +12,7 @@ namespace FightScene
     public class FightTeam : MonoBehaviour
     {
         public TeamMode TeamMode;
-        public MultiDictionary<int, int, Data_Center> TeamMembers = new MultiDictionary<int, int, Data_Center>();
+        public MultiDict<int, int, Data_Center> TeamMembers = new MultiDict<int, int, Data_Center>();
         public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
         public TeamConfig teamConfig;
         public RectTransform sideIconsContainer;
@@ -30,7 +30,7 @@ namespace FightScene
             return CharIconDic.ContainsKey(d) ? CharIconDic[d]: null;
         }
 
-        public IEnumerator CharsLoad(MultiDictionary<int, int, CharDataInfo> MembersSets)
+        public IEnumerator CharsLoad(MultiDict<int, int, CharDataInfo> MembersSets)
         {
             foreach (KeyValuePair<int, List<int>> keys in MembersSets.GetAllUnNullKeys())
             {
@@ -80,12 +80,12 @@ namespace FightScene
         }
 
         // for multiRaid
-        public virtual void ArrangeAllTeamMembersToPosition(MultiDictionary<int, int, Data_Center> heromultiDictionary)
+        public virtual void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
         }
         
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-        public IEnumerator Instantiate(MultiDictionary<int, int, CharDataInfo> CharacterSets, float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public IEnumerator Instantiate(MultiDict<int, int, CharDataInfo> CharacterSets, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             yield return CharsLoad(CharacterSets);
             InstantiateCharsIconsAndFloatHPBar();

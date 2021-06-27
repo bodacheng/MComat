@@ -4,8 +4,8 @@
 public class FightMembers
 {
     [NonSerialized]
-    public MultiDictionary<int, int, CharDataInfo> HeroSets = new MultiDictionary<int, int, CharDataInfo>();
-    public MultiDictionary<int, int, CharDataInfo> EnemySets = new MultiDictionary<int, int, CharDataInfo>();
+    public MultiDict<int, int, CharDataInfo> HeroSets = new MultiDict<int, int, CharDataInfo>();
+    public MultiDict<int, int, CharDataInfo> EnemySets = new MultiDict<int, int, CharDataInfo>();
     
     public FightMembers()
     {
