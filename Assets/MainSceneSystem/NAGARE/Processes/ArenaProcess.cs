@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using mainMenu;
+using UnityEngine;
 
 public class ArenaProcess : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
+        Debug.Log("arena");
         yield return ArenaManager.target.LoadArena();
+        Debug.Log("arena 1");
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
+        Debug.Log("arena loaded");
     }
     
     public ArenaProcess()

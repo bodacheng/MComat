@@ -52,7 +52,7 @@ public class TeamEditManager : MonoBehaviour
         HeroIcon.Seletedfeature(null, selectedFrame, 200f);
     }
 
-    IEnumerator MonsterIconButton(string CharAccId, string teammode)
+    void MonsterIconButton(string CharAccId, string teammode)
     {
         if (focusingPosNum != -1)
         {
@@ -65,7 +65,7 @@ public class TeamEditManager : MonoBehaviour
             MonsterBox.target.Select(CharAccId);
         }
 
-        yield return MemberDetail.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
+        MemberDetail.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
         // mini nineslot show
         _nineForShow.ShowStones_Acc(CharAccId);
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
@@ -75,7 +75,7 @@ public class TeamEditManager : MonoBehaviour
     {
         void Trigger()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton(CharAccId, teammode));
+            MonsterIconButton(CharAccId, teammode);
         }
         targetButton.onClick.AddListener(Trigger);
     }
@@ -128,7 +128,7 @@ public class TeamEditManager : MonoBehaviour
         RemoveButton.onClick.AddListener(Remove);
 
         
-        IEnumerator SetPos(int posNum)
+        void SetPos(int posNum)
         {
             if (MonsterBox.selectingAccID != null)
             {
@@ -154,7 +154,7 @@ public class TeamEditManager : MonoBehaviour
                         HeroIcon.Seletedfeature(null, selectedFrame, 200f);
                         break;
                 }
-                yield return MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
                 MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
                 if (MemberDetail.target._focusing != null)
                     _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
@@ -168,21 +168,21 @@ public class TeamEditManager : MonoBehaviour
         team1front.iconButton.onClick.RemoveAllListeners();
         void pos1F()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(SetPos(0));
+            SetPos(0);
         }
         team1front.iconButton.onClick.AddListener(pos1F);
         
         team1left.iconButton.onClick.RemoveAllListeners();
         void pos1L()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(SetPos(1));
+            SetPos(1);
         }
         team1left.iconButton.onClick.AddListener(pos1L);
         
         team1right.iconButton.onClick.RemoveAllListeners();
         void pos1R()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(SetPos(2));
+            SetPos(2);
         }
         team1right.iconButton.onClick.AddListener(pos1R);
     }

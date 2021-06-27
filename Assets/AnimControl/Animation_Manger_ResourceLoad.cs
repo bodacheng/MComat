@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class Animation_Manger{
 
-    public IEnumerator PreloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
+    public void PreloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
     {
         List<AnimationClip> basicAnims = new List<AnimationClip>();
         string basicPackKey = animPath + "/" + basicPackName;
@@ -225,7 +225,6 @@ public partial class Animation_Manger{
 
         Animator.runtimeAnimatorController = animatorOverride;// 622！！！！！
         ////////////    以上内容为个性化动画片段对base层基础动画的覆盖   /////////////
-        yield break;
     }
 
     public IEnumerator PreloadPersonalAnimResourceMode(string animPath, string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)

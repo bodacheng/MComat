@@ -11,7 +11,7 @@ namespace mainMenu
         GameObject triggerExplosionPretab0;
         ParticleSystem triggerExplosion0;
         
-        public IEnumerator StartUp()
+        public void StartUp()
         {
             ZokuseiStoneTagsGroup red = new ZokuseiStoneTagsGroup();
             ZokuseiStoneTagsGroup blue = new ZokuseiStoneTagsGroup();
@@ -36,8 +36,6 @@ namespace mainMenu
             
             triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/lightMagic/explosion0", typeof(GameObject)) as GameObject;
             triggerExplosion0 = Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
-            
-            yield break;
         }
         
         public void CloseShowingZokuseiTagEffects()

@@ -54,10 +54,8 @@ namespace mainMenu
 
         void Start()
         {
-            stage = new FightInfo
-            {
-                BattleGroundID = 0
-            };
+            stage = ScriptableObject.CreateInstance<FightInfo>();
+            stage.BattleGroundID = 0;
         }
 
         public void Clear()

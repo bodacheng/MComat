@@ -21,7 +21,11 @@ namespace mainMenu
         public RectTransform fire1T;
         public RectTransform fire2T;
         public RectTransform SkillShowT;
-        
+
+        [Space(11)]
+        [Header("Runner")]
+        public SingleThreadProcesser runner;
+
         [Space(11)]
         [Header("Skill Info")]
         public SkillStoneDetail _skillStoneDetail;
@@ -103,9 +107,9 @@ namespace mainMenu
                         }
                     }
                 }
-                
+
                 //////// 超级功能 ////////
-                TheNineSlot.target.mainProcessRunner.RunAsQueued(SkillShowRunWithPrepare(_SE.REAL_NAME));                
+                runner.RunAsQueued(SkillShowRunWithPrepare(_SE.REAL_NAME));                
                 IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。

@@ -29,32 +29,18 @@ namespace mainMenu
             }
             else
             {
-                IEnumerator temp()
-                {
-                    // 如果角色有原生技能，则已经存在于targetSkillSet当中
-                    AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.A1skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.A2skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.A3skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.B1skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.B2skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.B3skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.C1skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.C2skillid);
-                    yield return null;
-                    AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
-                    yield return null;
-                    NineSlotsStatusRefresh();
-                    SkillStonesBox.target.RestFilter();
-                }
-
-                PreScene.target.mainProcessRunner.RunAsQueued(temp());
+                // 如果角色有原生技能，则已经存在于targetSkillSet当中
+                AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.A1skillid);
+                AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.A2skillid);
+                AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.A3skillid);
+                AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.B1skillid);
+                AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.B2skillid);
+                AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.B3skillid);
+                AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.C1skillid);
+                AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.C2skillid);
+                AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
+                NineSlotsStatusRefresh();
+                SkillStonesBox.target.RestFilter();
             }
         }
 
@@ -66,36 +52,21 @@ namespace mainMenu
             // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
             NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet(charConfig.TYPE, originSkillInfo?.skillId, 1, true);
 
-            IEnumerator temp()
-            {
-                ForceClearAll();
-                // 如果角色有原生技能，则已经存在于targetSkillSet当中
-                AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.A1skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.A2skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.A3skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.B1skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.B2skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.B3skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.C1skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.C2skillid);
-                yield return null;
-                AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
-                yield return null;
-                NineSlotsStatusRefresh();
-                SkillStonesBox.target.RestFilter();
-            }
-
-            PreScene.target.mainProcessRunner.RunAsQueued(temp());
+            ForceClearAll();
+            // 如果角色有原生技能，则已经存在于targetSkillSet当中
+            AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.A1skillid);
+            AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.A2skillid);
+            AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.A3skillid);
+            AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.B1skillid);
+            AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.B2skillid);
+            AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.B3skillid);
+            AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.C1skillid);
+            AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.C2skillid);
+            AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
+            NineSlotsStatusRefresh();
+            SkillStonesBox.target.RestFilter();
         }
 
-        
         void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillid)
         {
             if (allSlot[targetSlot - 1]._DragAndDropCell.GetItem() != null)

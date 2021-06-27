@@ -52,13 +52,13 @@ namespace mainMenu
             if (index == -1)
                 index = keys.Count - 1;
             string targetMonsterOfPlayerID = keys[index];
-            IEnumerator MonsterIconButton()
+            void MonsterIconButton()
             {
-                yield return target.SetMemberDetailFocusingChar(targetMonsterOfPlayerID);//确立focusing角色
+                target.SetMemberDetailFocusingChar(targetMonsterOfPlayerID);//确立focusing角色
                 target.RefreshMemberDetailPageByFocusingChar();
-                yield return MonsterEditPage.SkillShowSpEnterProcess();
+                MonsterEditPage.SkillShowSpEnterProcess();
             }
-            PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton());
+            MonsterIconButton();
         }
         #endregion
         
@@ -73,17 +73,13 @@ namespace mainMenu
         
         void AddHeroIconFeatureToMonsterBox(string instanceId, Button targetButton)
         {
-            IEnumerator MonsterIconButton()
+            void MonsterIconButton()
             {
                 MonsterBox.target.Select(instanceId);
-                yield return target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
+                target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
                 target.RefreshMemberDetailPageByFocusingChar();
             }
-            void Trigger()
-            {
-                PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton());
-            }
-            targetButton.onClick.AddListener(Trigger);
+            targetButton.onClick.AddListener(MonsterIconButton);
         }
         
         public void ClearHeroIconsFeatures()
@@ -194,11 +190,11 @@ namespace mainMenu
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(MonsterOfPlayerInfo accountCharacterInfo)
+        public IEnumerator Step2INIForUIRefresh(MonsterOfPlayerInfo accCharInfo)
         {
-            if (accountCharacterInfo != null)
+            if (accCharInfo != null)
             {
-                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accountCharacterInfo.InstanceId);
+                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accCharInfo.InstanceId);
                 yield return focusingOneModel;
                 if (focusingOneModel.Current == null)
                 {
@@ -212,8 +208,8 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accountCharacterInfo.monsterId);
-                CharDataInfo characterDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(accountCharacterInfo);
+                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.monsterId);
+                CharDataInfo characterDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(accCharInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 
@@ -225,10 +221,9 @@ namespace mainMenu
         }
 
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
-        public IEnumerator SetMemberDetailFocusingChar(string localID)
+        public void SetMemberDetailFocusingChar(string localID)
         {
             _focusing = MyMonsters.Get(localID);
-            yield break;
         }
 
         Vector3 tempV;

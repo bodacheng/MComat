@@ -145,7 +145,7 @@ namespace mainMenu
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
-            yield return _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
+            _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
             // 关卡按钮一次生成就可以
             yield return ArcadeManager.target.INIArcadeStageButtons();
             TheNineSlot.target.StartUp();
@@ -154,7 +154,7 @@ namespace mainMenu
             HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
-                yield return MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色
+                MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色
                 MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
             }
         }

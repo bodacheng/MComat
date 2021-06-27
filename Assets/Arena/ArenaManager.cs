@@ -21,14 +21,19 @@ public class ArenaManager : MonoBehaviour
     {
         PreScene.target.mainProcessRunner.RunAsQueued(target.LoadArena());
     }
-        
+
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     public IEnumerator LoadArena()
     {
         myTeam.ShowMyTeam();
+        Debug.Log("asdafsdfs");
+        yield break;
         yield return Arena.GetPlayerRankInfo();
         yield return Arena.GetOpponentsBasicInfo();
+
+
         
+
         PlayerArenaRankInfo opponent1Info = Arena.rankOpponentsModel.strongTeam;
         PlayerArenaRankInfo opponent2Info = Arena.rankOpponentsModel.normalTeam1;
         PlayerArenaRankInfo opponent3Info = Arena.rankOpponentsModel.normalTeam2;
@@ -46,6 +51,8 @@ public class ArenaManager : MonoBehaviour
                 yield return target.AddFightToList(FightInfo.RandomStage());
             }
         }
+
+        
         
         yield return temp(Fight1, opponent1Info);
         yield return temp(Fight2, opponent2Info);

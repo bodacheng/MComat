@@ -3,7 +3,6 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UniRx;
-using System;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
@@ -13,20 +12,12 @@ public class SingleThreadProcesser : MonoBehaviour
 
     public async void RunAsQueued(UniTask origin)
     {
-        UniTask whole = AsQueue(origin);
-        processQueue.Add(whole);
-        await whole;
-        processQueue.Remove(whole);
-        Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        await QueueRun(origin);
     }
 
     public async void RunAsQueued(UniTask origin, UnityEngine.Events.UnityAction afterToDo)
     {
-        UniTask whole = AsQueue(origin);
-        processQueue.Add(whole);
-        await whole;
-        processQueue.Remove(whole);
-        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        await QueueRun(origin);
         afterToDo();
     }
 
@@ -37,11 +28,7 @@ public class SingleThreadProcesser : MonoBehaviour
     public async void RunAsQueued(IEnumerator _process)
     {
         UniTask origin = EnumeratorAsyncExtensions.ToUniTask(_process, this);
-        UniTask whole = AsQueue(origin);
-        processQueue.Add(whole);
-        await whole;
-        processQueue.Remove(whole);
-        //Debug.Log("runner"+ this + "  process count:" + processQueue.Count) ;
+        await QueueRun(origin);
     }
 
     /// <summary>
@@ -53,50 +40,24 @@ public class SingleThreadProcesser : MonoBehaviour
     public async UniTask RunAsQueued_UniTask(IEnumerator _process)
     {
         UniTask origin = EnumeratorAsyncExtensions.ToUniTask(_process, this);
-        UniTask whole = AsQueue(origin);
-        processQueue.Add(whole);
-        await whole;
-        processQueue.Remove(whole);
-        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
-    }
-
-    /// <summary>
-    /// 同时执行多个コルーチン，转换为UniTask以多线程执行任务。
-    /// 往往执行此操作需要观察其执行，因此只有UniTask版本
-    /// </summary>
-    /// <param name="_processes"></param>
-    /// <returns></returns>
-    public async UniTask RunAsQueued_UniTask(List<IEnumerator> _processes)
-    {
-        List<UniTask> tasks = new List<UniTask>();
-        for (int i = 0; i < _processes.Count; i++)
-        {
-            UniTask task = EnumeratorAsyncExtensions.ToUniTask(_processes[i], this);
-            tasks.Add(task);
-        }
-
-        UniTask whole = AsQueue(UniTask.WhenAll(tasks.ToArray()));
-        processQueue.Add(whole);
-        await whole;
-        processQueue.Remove(whole);
-        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
+        await QueueRun(origin);
     }
 
     public async UniTask RunAsQueued_UniTask(List<IEnumerator> _processes, UnityEngine.Events.UnityAction afterToDo)
     {
-        List<UniTask> tasks = new List<UniTask>();
         for (int i = 0; i < _processes.Count; i++)
         {
-            UniTask task = EnumeratorAsyncExtensions.ToUniTask(_processes[i], this);
-            tasks.Add(task);
+            await RunAsQueued_UniTask(_processes[i]);
         }
-
-        UniTask whole = AsQueue(UniTask.WhenAll(tasks.ToArray()));
-        processQueue.Add(whole);
-        await whole;
-        processQueue.Remove(whole);
-        //Debug.Log("runner" + this + "  process count:" + processQueue.Count);
         afterToDo();
+    }
+
+    public async UniTask QueueRun(UniTask origin)
+    {
+        UniTask whole = AsQueue(origin);
+        processQueue.Add(origin);
+        await whole;
+        processQueue.Remove(origin);
     }
 
     private async UniTask AsQueue(UniTask origin)

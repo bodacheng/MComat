@@ -53,6 +53,7 @@ public class FrontPage : MainSceneProcess
 
     public IEnumerator EnterProcess()
     {
+        Debug.Log("front");
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
@@ -70,12 +71,13 @@ public class FrontPage : MainSceneProcess
                 break;
             }
         }
-        yield return MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
+        MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
         yield return ModelShower.target.ShowMyModel(focusLocalid);
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(true);
         UpperInfoBar.target.T.gameObject.SetActive(true);
+        Debug.Log("front ended");
     }
     
     public override void ProcessEnter()

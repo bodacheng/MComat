@@ -75,7 +75,7 @@ public partial class Data_Center : MonoBehaviour
                     yield return (Animation_Manger.preloadBasicPersonalAnimsStreamingAssetMode(type, basicPackName));
                     break;
                 case ResourceLoadMode.Resource:
-                    yield return (Animation_Manger.PreloadBasicPersonalAnimsResourceMode(type, basicPackName));
+                    Animation_Manger.PreloadBasicPersonalAnimsResourceMode(type, basicPackName);
                     break;
             }
             Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
