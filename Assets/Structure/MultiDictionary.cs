@@ -11,7 +11,7 @@ public class MultiDict<Key1, Key2, Value>
     /// 字典结构
     /// </summary>
     public Dictionary<Key1, Dictionary<Key2, Value>> mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
-    public Dictionary<Key1, List<Key2>> unnullkeys = new Dictionary<Key1, List<Key2>>();
+    public Dictionary<Key1, List<Key2>> keys = new Dictionary<Key1, List<Key2>>();
     public List<Value> values = new List<Value>();
 
      /// <summary>
@@ -49,7 +49,7 @@ public class MultiDict<Key1, Key2, Value>
     public Dictionary<Key1, Dictionary<Key2, Value>> ConvertSerializableArrayToDictionary()
     {
         mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
-        unnullkeys = new Dictionary<Key1, List<Key2>>();
+        keys = new Dictionary<Key1, List<Key2>>();
         values.Clear();
         foreach(SerializableSets _oneSerializableSets in _SerializableSets)
         {
@@ -80,7 +80,7 @@ public class MultiDict<Key1, Key2, Value>
             {
                 dict2.Add(key2, value);
                 values.Add(value);
-                unnullkeys[key1].Add(key2);
+                keys[key1].Add(key2);
             }
         }
         else
@@ -91,7 +91,7 @@ public class MultiDict<Key1, Key2, Value>
             };
             mDict.Add(key1, dict2);
             values.Add(value);
-            unnullkeys.Add(key1, new List<Key2>() { key2 });
+            keys.Add(key1, new List<Key2>() { key2 });
         }
         ConvertDictionaryToSerializableArray();
     }
@@ -114,13 +114,13 @@ public class MultiDict<Key1, Key2, Value>
     {
         mDict.Clear();
         values.Clear();
-        unnullkeys.Clear();
+        keys.Clear();
         _SerializableSets = null;
     }
     
     public Dictionary<Key1, List<Key2>> GetAllUnNullKeys()
     {
-        return unnullkeys;
+        return keys;
     }
     
     [System.Serializable]
