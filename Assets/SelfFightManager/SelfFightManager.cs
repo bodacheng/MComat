@@ -60,11 +60,11 @@ namespace mainMenu
 
         public void Clear()
         {
-            foreach (HeroIcon Icon in teamButtonDic_M.values)
+            foreach (HeroIcon Icon in teamButtonDic_M.GetValues())
             {
                 Icon.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (HeroIcon Icon in teamButtonDic_R.values)
+            foreach (HeroIcon Icon in teamButtonDic_R.GetValues())
             {
                 Icon.ChangeIcon(null, Zokusei.Null);
             }

@@ -15,7 +15,7 @@ public static class FightLoad
             stage.LoadMyTeam();
         }
 
-        if (stage.fightMembers.HeroSets.values.Count < 1 || stage.fightMembers.EnemySets.values.Count < 1)
+        if (stage.fightMembers.HeroSets.GetValues().Count < 1 || stage.fightMembers.EnemySets.GetValues().Count < 1)
         {
             string error;
             switch (Setting.Language)

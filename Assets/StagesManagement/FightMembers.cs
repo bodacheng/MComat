@@ -10,12 +10,12 @@ public class FightMembers
     public FightMembers()
     {
     }
-    
+
     public void SetEnemyLevel(int level)
     {
-        for (int i = 0; i < EnemySets.values.Count; i++)
+        foreach (var charData in EnemySets.GetValues())
         {
-            EnemySets.values[i]._NineAndTwo.SetSkillLevel(level);
+            charData._NineAndTwo.SetSkillLevel(level);
         }
     }
 }

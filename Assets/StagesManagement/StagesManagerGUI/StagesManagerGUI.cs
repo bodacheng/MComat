@@ -119,14 +119,14 @@ public partial class StagesManagerGUI : Editor {
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         if (GUILayout.Button("保存战斗关卡至本地文档json", ButtonStyle_save))
         {
-            for (int i = 0; i < _stagesManager.EditoringFight.EnemySets.values.Count; i++)
+            for (int i = 0; i < _stagesManager.EditoringFight.EnemySets.GetValues().Count; i++)
             {
-                if (_stagesManager.EditoringFight.EnemySets.values[i].ResourceID == "-1")
+                if (_stagesManager.EditoringFight.EnemySets.GetValues()[i].ResourceID == "-1")
                 {
                     Debug.Log("未安排有效角色ID");
                     return;
                 }
-                _stagesManager.EditoringFight.EnemySets.values[i]._NineAndTwo.SortNineAndTwo();
+                _stagesManager.EditoringFight.EnemySets.GetValues()[i]._NineAndTwo.SortNineAndTwo();
             }
             _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.EditoringFight);
         }

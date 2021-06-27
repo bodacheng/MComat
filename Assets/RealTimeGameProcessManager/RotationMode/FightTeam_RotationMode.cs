@@ -24,7 +24,7 @@ namespace FightScene
         
         public override void Clear()
         {
-            foreach (Data_Center one in TeamMembers.values)
+            foreach (Data_Center one in TeamMembers.GetValues())
             {
                 one.FightDataRef.Clear();
             }
@@ -47,7 +47,7 @@ namespace FightScene
                     character_data_Center.WholeT.gameObject.SetActive(true);
                 }
             }
-            ChangeFightingMember_ReadyToGo(heromultiDictionary.values[0], TeamStandPoints[0]);
+            ChangeFightingMember_ReadyToGo(heromultiDictionary.GetValues()[0], TeamStandPoints[0]);
         }
         
         public void Rotation_LocalFightingUpdate()
@@ -67,7 +67,7 @@ namespace FightScene
         public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, Transform IniStandPoint)
         {
             bool memberchanged = false;
-            foreach (Data_Center data_Center in TeamMembers.values)
+            foreach (Data_Center data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
                 {
@@ -95,7 +95,7 @@ namespace FightScene
         // 切换队员
         bool ChangeFightingMember(Data_Center _changeTo)
         {
-            if (!(TeamMembers.values.Count > 1) || RotationMode_fightingMember == _changeTo)
+            if (!(TeamMembers.GetValues().Count > 1) || RotationMode_fightingMember == _changeTo)
             {
                 return false;
             }
@@ -109,7 +109,7 @@ namespace FightScene
             {
                 targetposition = RotationMode_fightingMember.transform.position;
             }
-            foreach (Data_Center data_Center in TeamMembers.values)
+            foreach (Data_Center data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
                 {
@@ -159,12 +159,12 @@ namespace FightScene
         // 计算时间统计可上场角色，更新上场冷却图标UI
         void WaitToTriggerMemberChange()
         {
-            for (int i = 0; i < TeamMembers.values.Count; i++)
+            for (int i = 0; i < TeamMembers.GetValues().Count; i++)
             {
-                if (RefreshTimeDic[TeamMembers.values[i]] > 0)
+                if (RefreshTimeDic[TeamMembers.GetValues()[i]] > 0)
                 {
-                    RefreshTimeDic[TeamMembers.values[i]] -= Time.deltaTime; // 角色切换倒计时;
-                    CharIconDic[TeamMembers.values[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[TeamMembers.values[i]] / 10);
+                    RefreshTimeDic[TeamMembers.GetValues()[i]] -= Time.deltaTime; // 角色切换倒计时;
+                    CharIconDic[TeamMembers.GetValues()[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[TeamMembers.GetValues()[i]] / 10);
                 }
             }
             
@@ -219,23 +219,23 @@ namespace FightScene
             time_counter += Time.deltaTime;
             if (RotationMode_fightingMember != null && RotationMode_fightingMember.IsDead.Value)
             {
-                if (TeamMembers.values.Count > 0)
+                if (TeamMembers.GetValues().Count > 0)
                 {
-                    for (int i = 0; i < TeamMembers.values.Count; i++)
+                    for (int i = 0; i < TeamMembers.GetValues().Count; i++)
                     {
-                        ReadyForNextMember(TeamMembers.values[i]);
+                        ReadyForNextMember(TeamMembers.GetValues()[i]);
                     }
                 }
             }
             if (time_counter > 6f)
             {
-                if (TeamMembers.values.Count > 0)
+                if (TeamMembers.GetValues().Count > 0)
                 {
-                    for (int i = 0; i < TeamMembers.values.Count; i++)
+                    for (int i = 0; i < TeamMembers.GetValues().Count; i++)
                     {
-                        if (RefreshTimeDic[TeamMembers.values[i]] <= 0)
+                        if (RefreshTimeDic[TeamMembers.GetValues()[i]] <= 0)
                         {
-                            ReadyForNextMember(TeamMembers.values[i]);
+                            ReadyForNextMember(TeamMembers.GetValues()[i]);
                         }
                         time_counter = 0f;
                     }
@@ -256,7 +256,7 @@ namespace FightScene
                     }
                 }
             }
-            foreach (Data_Center data_Center in TeamMembers.values)
+            foreach (Data_Center data_Center in TeamMembers.GetValues())
             {
                 if (!data_Center.IsDead.Value)
                 {

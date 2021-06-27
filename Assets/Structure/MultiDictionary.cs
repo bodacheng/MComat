@@ -12,7 +12,16 @@ public class MultiDict<Key1, Key2, Value>
     /// </summary>
     public Dictionary<Key1, Dictionary<Key2, Value>> mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
     public Dictionary<Key1, List<Key2>> keys = new Dictionary<Key1, List<Key2>>();
-    public List<Value> values = new List<Value>();
+
+    public List<Value> GetValues()
+    {
+        List<Value> values = new List<Value>();
+        foreach (var dics in mDict.Values)
+        {
+            values.AddRange(dics.Values);
+        }
+        return values;
+    }
 
      /// <summary>
     /// 序列化对象
@@ -50,7 +59,6 @@ public class MultiDict<Key1, Key2, Value>
     {
         mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
         keys = new Dictionary<Key1, List<Key2>>();
-        values.Clear();
         foreach(SerializableSets _oneSerializableSets in _SerializableSets)
         {
             Dictionary<Key2, Value> childDic = new Dictionary<Key2, Value>();
@@ -72,14 +80,11 @@ public class MultiDict<Key1, Key2, Value>
             var dict2 = mDict[key1];
             if (dict2.ContainsKey(key2))
             {
-                values.Remove(dict2[key2]);
                 dict2[key2] = value;
-                values.Add(value);
             } 
             else
             {
                 dict2.Add(key2, value);
-                values.Add(value);
                 keys[key1].Add(key2);
             }
         }
@@ -90,7 +95,6 @@ public class MultiDict<Key1, Key2, Value>
                 { key2, value }
             };
             mDict.Add(key1, dict2);
-            values.Add(value);
             keys.Add(key1, new List<Key2>() { key2 });
         }
         ConvertDictionaryToSerializableArray();
@@ -113,7 +117,6 @@ public class MultiDict<Key1, Key2, Value>
     public void Clear()
     {
         mDict.Clear();
-        values.Clear();
         keys.Clear();
         _SerializableSets = null;
     }

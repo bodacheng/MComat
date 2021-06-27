@@ -132,10 +132,10 @@ namespace FightScene
             switch (RealTimeGameProcessManager.playerTeam)
             {
                 case Team.player1:
-                    RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values[0], false);
+                    RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues()[0], false);
                     break;
                 case Team.player2:
-                    RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values[0], false);
+                    RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues()[0], false);
                     break;
             }
             if (Fight.eventType == FightEventType.Screensaver)

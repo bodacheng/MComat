@@ -113,7 +113,7 @@ namespace Soul
                 }
             }
             
-            if (skillnobenefitlog.values.Count > 0)
+            if (skillnobenefitlog.GetValues().Count > 0)
             {
                 foreach(KeyValuePair<string, Dictionary<string, int>> keyValuePair in skillnobenefitlog.mDict)
                 {

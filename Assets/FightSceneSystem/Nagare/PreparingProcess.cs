@@ -23,8 +23,8 @@ public class PreparingProcess : FSceneProcess
         FightLoadError.Instance.FightLoadErrors.Clear();
         yield return RealTimeGameProcessManager.target.LoadGame(NetFightScene.Fight);
         RealTimeGameProcessManager.target.AllMembers.Clear();
-        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
-        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
+        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());
         RealTimeGameProcessManager.FightingMembers.Clear();
         FightLogger.target.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
         EffectsManager.INIEffectsPool("hit_ground", null, 3);

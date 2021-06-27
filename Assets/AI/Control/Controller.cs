@@ -175,7 +175,7 @@ namespace Soul
                 }
             }
             
-            if (Triggerd.main.values.Count > 0)
+            if (Triggerd.main.GetValues().Count > 0)
             {
                 finalConditionStakeKeySet = Triggerd.GiveOutMin();
                 

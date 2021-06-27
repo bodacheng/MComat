@@ -13,7 +13,7 @@ namespace FightScene
         public override void Refresh()
         {
             base.Refresh();
-            foreach (Data_Center _datacenter in TeamMembers.values)
+            foreach (Data_Center _datacenter in TeamMembers.GetValues())
             {
                 if (multiRaidHitComboDic.ContainsKey(_datacenter))
                 {
@@ -57,7 +57,7 @@ namespace FightScene
 
         public override void Clear()
         {
-            foreach (Data_Center one in TeamMembers.values)
+            foreach (Data_Center one in TeamMembers.GetValues())
             {
                 one.FightDataRef.Clear();
             }
@@ -75,7 +75,7 @@ namespace FightScene
 
         protected override void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
-            foreach (Data_Center a_char in TeamMembers.values)
+            foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
 
@@ -152,7 +152,7 @@ namespace FightScene
         {
             SideCharIcon _SideCharIcon;
             Text hitCombo;
-            foreach (Data_Center a_char in TeamMembers.values)
+            foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 //  SideCharIcon整备
                 void Action1()
@@ -216,7 +216,7 @@ namespace FightScene
         public override List<Transform> TeamMemberTransforms()
         {
             List<Transform> transforms = new List<Transform>();
-            foreach (Data_Center a_char in TeamMembers.values)
+            foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
                 {

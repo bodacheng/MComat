@@ -175,10 +175,10 @@ namespace FightScene
             switch (playerTeam)
             {
                 case Team.player1:
-                    SwitchToCMode(FightTeam1.TeamMembers.values[0], false);
+                    SwitchToCMode(FightTeam1.TeamMembers.GetValues()[0], false);
                     break;
                 case Team.player2:
-                    SwitchToCMode(FightTeam2.TeamMembers.values[0], false);
+                    SwitchToCMode(FightTeam2.TeamMembers.GetValues()[0], false);
                     break;
             }
             NetFightScene.target.LoadStageFinished.Value = true;

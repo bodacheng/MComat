@@ -74,7 +74,7 @@ public class FightInfo : ScriptableObject
     public List<string> GetTeam1EnterRingLocalIds(FightMembers localFight)
     {
         List<string> enterRingLocalIDs = new List<string>();
-        foreach(CharDataInfo _one in localFight.HeroSets.values)
+        foreach(CharDataInfo _one in localFight.HeroSets.GetValues())
         {
             if (!enterRingLocalIDs.Contains(_one.monsterOfPlayerId))
                 enterRingLocalIDs.Add(_one.monsterOfPlayerId);

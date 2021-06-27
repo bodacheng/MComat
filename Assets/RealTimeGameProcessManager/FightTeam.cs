@@ -64,7 +64,7 @@ namespace FightScene
         protected SideCharIcon _tempSI;
         public void BarsPositionUpdate()
         {
-            foreach (Data_Center _one in TeamMembers.values)
+            foreach (Data_Center _one in TeamMembers.GetValues())
             {
                 CharIconDic.TryGetValue(_one, out _tempSI);
                 _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
@@ -95,7 +95,7 @@ namespace FightScene
         // 全队无敌
         public void TurnAllMembersInvincible(bool _Invincible)
         {
-            foreach (Data_Center a_char in TeamMembers.values)
+            foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 a_char.FightDataRef.Invincible = _Invincible;
             }
@@ -123,7 +123,7 @@ namespace FightScene
         SideCharIcon SideCharIcon3;
         public virtual void Refresh()
         {
-            foreach (Data_Center _datacenter in TeamMembers.values)
+            foreach (Data_Center _datacenter in TeamMembers.GetValues())
             {
                 CharIconDic.TryGetValue(_datacenter, out SideCharIcon3);
                 if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
@@ -146,7 +146,7 @@ namespace FightScene
 
         public bool IfAllCharsPreparedForBattle()
         {
-            foreach (Data_Center oneMember in TeamMembers.values)
+            foreach (Data_Center oneMember in TeamMembers.GetValues())
             {
                 if (!oneMember.IfPreparedForBattle())
                     return false;
@@ -156,7 +156,7 @@ namespace FightScene
         
         public void LetAllCharactersStartOff()
         {
-            foreach (Data_Center oneMember in TeamMembers.values)
+            foreach (Data_Center oneMember in TeamMembers.GetValues())
             {
                 oneMember._MyBehaviorRunner.controller.TestMode = false;
                 RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
@@ -166,7 +166,7 @@ namespace FightScene
         
         public void LetAllCharactersChangeToTestMode()
         {
-            foreach (Data_Center oneMember in TeamMembers.values)
+            foreach (Data_Center oneMember in TeamMembers.GetValues())
             {
                 oneMember._MyBehaviorRunner.controller.TestMode = true;
                 RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);

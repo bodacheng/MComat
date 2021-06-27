@@ -103,8 +103,8 @@ namespace FightScene
             }
 
             List<Data_Center> data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.values);
-            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.values);
+            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
+            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());
             FightOverControl.target.SkillLog(data_Centers);
             foreach (Data_Center one in data_Centers)
             {

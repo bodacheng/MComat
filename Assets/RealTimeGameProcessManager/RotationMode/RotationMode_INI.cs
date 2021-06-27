@@ -7,7 +7,7 @@ namespace FightScene
     {
         protected override void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
-            foreach (Data_Center a_char in TeamMembers.values)
+            foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
 
@@ -52,7 +52,7 @@ namespace FightScene
         {
             SideCharIcon _SideCharIcon;
             RefreshTimeDic.Clear();
-            foreach (Data_Center a_char in TeamMembers.values)
+            foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 //  时间刷新整备
                 if (!RefreshTimeDic.ContainsKey(a_char))
