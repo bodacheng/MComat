@@ -115,15 +115,11 @@ namespace Soul
             
             if (skillnobenefitlog.GetValues().Count > 0)
             {
-                foreach(KeyValuePair<string, Dictionary<string, int>> keyValuePair in skillnobenefitlog.mDict)
+                foreach(KeyValuePair<(string, string) ,int> keyValuePair in skillnobenefitlog.mDict)
                 {
-                    foreach(KeyValuePair<string, int> KV in keyValuePair.Value)
+                    if (skillnobenefitlog.Get(keyValuePair.Key.Item1, keyValuePair.Key.Item2) > 2) // 10个连续状态记录里某个条件反应大于两次没有正面效应，说明这个因果关系没有好的效益，修改其优先度
                     {
-                        if (skillnobenefitlog.Get(keyValuePair.Key, KV.Key) > 2) // 10个连续状态记录里某个条件反应大于两次没有正面效应，说明这个因果关系没有好的效益，修改其优先度
-                        {
-                            _ConditionAndRespondPriority.Set(keyValuePair.Key, KV.Key, _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key) + 1);
-                            Debug.Log(keyValuePair.Key + ":" +  KV.Key + ":" + _ConditionAndRespondPriority.Get(keyValuePair.Key, KV.Key));
-                        }
+                        _ConditionAndRespondPriority.Set(keyValuePair.Key.Item1, keyValuePair.Key.Item2, keyValuePair.Value + 1);
                     }
                 }
             }

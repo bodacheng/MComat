@@ -146,7 +146,7 @@ namespace Soul
         }
 
         string Condition;
-        List<KeyValuePair<string, string>> finalConditionStakeKeySet = new List<KeyValuePair<string, string>>();
+        List<(string, string)> finalConditionStateKeySet = new List<(string, string)>();
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
             Triggerd.main.Clear();
@@ -177,12 +177,12 @@ namespace Soul
             
             if (Triggerd.main.GetValues().Count > 0)
             {
-                finalConditionStakeKeySet = Triggerd.GiveOutMin();
+                finalConditionStateKeySet = Triggerd.GiveOutMin();
                 
-                if (finalConditionStakeKeySet.Count > 0)
+                if (finalConditionStateKeySet.Count > 0)
                 {
-                    int random = Random.Range(0, finalConditionStakeKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
-                    SkillEntity _SE = behaviorRunner.SkillEntityDic[finalConditionStakeKeySet[random].Value];
+                    int random = Random.Range(0, finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
+                    SkillEntity _SE = behaviorRunner.SkillEntityDic[finalConditionStateKeySet[random].Item2];
                     if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
                     {
                         MobileInputsManager.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
@@ -195,7 +195,7 @@ namespace Soul
                             {
                                 AI_Decided = true,
                                 stateKey = _SE.REAL_NAME,
-                                whyIDidThis = finalConditionStakeKeySet[random].Key
+                                whyIDidThis = finalConditionStateKeySet[random].Item1
                             }
                         );
                         behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);

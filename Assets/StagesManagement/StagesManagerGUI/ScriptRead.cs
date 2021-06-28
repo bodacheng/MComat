@@ -12,30 +12,16 @@ public partial class StagesManagerGUI : Editor {
         {
             if (_stagesManager.FightScript != null)
             {
-                FightMembers one = _stagesManager.LoadOneLocalFight_Json(_stagesManager.FightScript);
-                if (one != null)
+                _stagesManager.EditoringFight = FightMembers.LoadEnemies_Json(_stagesManager.FightScript);
+                foreach (var _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
                 {
-                    _stagesManager.EditoringFight = one;
-                    foreach (MultiDict<int,int,CharDataInfo>.SerializableSets _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
+                    CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(_one.value.ResourceID));
+                    if (_CharConfig == null)
                     {
-                        foreach (MultiDict<int,int,CharDataInfo>.SerializableSet set in _one.value)
-                        {
-                            if (set._Value != null)
-                            {
-                                CharConfig _CharacterResourceInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(set._Value.ResourceID));
-                                if (_CharacterResourceInfo == null)
-                                {
-                                    Debug.Log("检测到存档错误：ResourceID");
-                                    continue;
-                                }
-                                set._Value._NineAndTwo.SortNineAndTwo();
-                            }
-                        }
+                        Debug.Log("检测到存档错误：ResourceID");
+                        continue;
                     }
-                }
-                else
-                {
-                    Debug.Log("读取本地信息失败");
+                    _one.value._NineAndTwo.SortNineAndTwo();
                 }
             }
         }

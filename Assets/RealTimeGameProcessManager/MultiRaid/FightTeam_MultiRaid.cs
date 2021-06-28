@@ -31,26 +31,23 @@ namespace FightScene
 
         public override void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
-            foreach (KeyValuePair<int, List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
+            foreach (KeyValuePair<(int, int), Data_Center> kv in heromultiDictionary.mDict)
             {
-                foreach (int key in keys.Value)
+                Data_Center _DataCenter = heromultiDictionary.Get(kv.Key.Item1, kv.Key.Item2);
+                if (_DataCenter == null)
                 {
-                    Data_Center _DataCenter = heromultiDictionary.Get(keys.Key, key);
-                    if (_DataCenter == null)
-                    {
-                        continue;
-                    }
-                    if (TeamStandPoints[key] != null)
-                    {
-                        _DataCenter.WholeT.transform.position = TeamStandPoints[key].position;
-                        _DataCenter.WholeT.transform.rotation = TeamStandPoints[key].rotation;
-                        _DataCenter.WholeT.parent = null;
-                        _DataCenter.WholeT.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
-                    }
+                    continue;
+                }
+                if (TeamStandPoints[kv.Key.Item2] != null)
+                {
+                    _DataCenter.WholeT.transform.position = TeamStandPoints[kv.Key.Item2].position;
+                    _DataCenter.WholeT.transform.rotation = TeamStandPoints[kv.Key.Item2].rotation;
+                    _DataCenter.WholeT.parent = null;
+                    _DataCenter.WholeT.gameObject.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
                 }
             }
         }

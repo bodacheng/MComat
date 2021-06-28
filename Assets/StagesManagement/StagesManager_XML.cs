@@ -13,10 +13,10 @@ public partial class StagesManager : MonoBehaviour
     {
         FightMembers _localFight = new FightMembers();
         
-        MultiDict<int, int, CharDataInfo>.SerializableSets[] targetValue;
+        MultiDict<int, int, CharDataInfo>.SerializableSet[] targetValue;
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(MultiDict<int, int, CharDataInfo>.SerializableSets[]));
+            XmlSerializer serializer = new XmlSerializer(typeof(MultiDict<int, int, CharDataInfo>.SerializableSet[]));
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 //FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Open);
@@ -24,14 +24,14 @@ public partial class StagesManager : MonoBehaviour
                 //FileStream.Close();
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    targetValue = serializer.Deserialize(textReader) as MultiDict<int, int, CharDataInfo>.SerializableSets[];
+                    targetValue = serializer.Deserialize(textReader) as MultiDict<int, int, CharDataInfo>.SerializableSet[];
                 }
                 Debug.Log("读取了敌人战斗信息");
             }
             else
             {
                 var reader = new StringReader(Script.text);
-                targetValue = serializer.Deserialize(reader) as MultiDict<int, int, CharDataInfo>.SerializableSets[];
+                targetValue = serializer.Deserialize(reader) as MultiDict<int, int, CharDataInfo>.SerializableSet[];
                 Debug.Log("读取了敌人战斗信息");
             }
             
@@ -40,7 +40,6 @@ public partial class StagesManager : MonoBehaviour
             string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
             _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
             Debug.Log("4V4模式文件" + _path);
-            fightScriptPath = _path;
             #endif
             
             _localFight.EnemySets._SerializableSets = targetValue;
@@ -61,21 +60,14 @@ public partial class StagesManager : MonoBehaviour
             return;
         }
         MultiDict<int, int, CharDataInfo> UnNullDic = new MultiDict<int, int, CharDataInfo>();
-        foreach (MultiDict<int, int, CharDataInfo>.SerializableSets sets in localFight.EnemySets._SerializableSets)
+        foreach (MultiDict<int, int, CharDataInfo>.SerializableSet sets in localFight.EnemySets._SerializableSets)
         {
-            for (int i = 0; i < sets.value.Length;i++)
-            {
-                List<CharDataInfo> unNullValues = new List<CharDataInfo>();
-                if (!String.IsNullOrEmpty(sets.value[i]._Value.ResourceID))
-                {
-                    UnNullDic.Set(sets.key1,sets.value[i]._Key2,sets.value[i]._Value);
-                }
-            }
+            UnNullDic.Set(sets.key1, sets.key2 , sets.value);
         }
 
         try
         {
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDict<int, int, CharDataInfo>.SerializableSets[]));
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDict<int, int, CharDataInfo>.SerializableSet[]));
             FileStream FileStream;
             FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
             XmlSerializer.Serialize(FileStream, UnNullDic._SerializableSets);

@@ -128,7 +128,7 @@ public partial class StagesManagerGUI : Editor {
                 }
                 _stagesManager.EditoringFight.EnemySets.GetValues()[i]._NineAndTwo.SortNineAndTwo();
             }
-            _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.EditoringFight);
+            _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.EditoringFight.EnemySets);
         }
         //if (GUILayout.Button("保存战斗关卡至本地文档xml",ButtonStyle_save))
         //{

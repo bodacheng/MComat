@@ -17,25 +17,22 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (int index = 0; index < _SO.fightMembers.EnemySets._SerializableSets.Length; index++)
         {
-            for (int index2 = 0; index2 < _SO.fightMembers.EnemySets._SerializableSets[index].value.Length; index2++)
+            int posNum = _SO.fightMembers.EnemySets._SerializableSets[index].key2;
+            CharDataInfo charDataInfo = _SO.fightMembers.EnemySets._SerializableSets[index].value;
+            HeroIcon target = null;
+            switch (posNum)
             {
-                int posNum = _SO.fightMembers.EnemySets._SerializableSets[index].value[index2]._Key2;
-                CharDataInfo charDataInfo = _SO.fightMembers.EnemySets._SerializableSets[index].value[index2]._Value;
-                HeroIcon target = null;
-                switch(posNum)
-                {
-                    case 0:
-                        target = member1;
+                case 0:
+                    target = member1;
                     break;
-                    case 1:
-                        target = member2;
+                case 1:
+                    target = member2;
                     break;
-                    case 2:
-                        target = member3;
+                case 2:
+                    target = member3;
                     break;
-                }
-                HeroIcon.ChangeHeroIconByMonsterID(charDataInfo.ResourceID, target);
             }
+            HeroIcon.ChangeHeroIconByMonsterID(charDataInfo.ResourceID, target);
         }
         _SO.eventType = FightEventType.Arena;
         BigButton.onClick.RemoveAllListeners();

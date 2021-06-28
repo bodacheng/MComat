@@ -34,18 +34,14 @@ namespace FightScene
         
         public override void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
-            foreach (KeyValuePair<int, List<int>> keys in heromultiDictionary.GetAllUnNullKeys())
+            foreach (KeyValuePair<(int, int), Data_Center> kv in heromultiDictionary.mDict)
             {
-                foreach (int key in keys.Value)
+                if (kv.Value == null)
                 {
-                    Data_Center character_data_Center = heromultiDictionary.Get(keys.Key, key);
-                    if (character_data_Center == null)
-                    {
-                        continue;
-                    }
-                    character_data_Center.WholeT.parent = null;
-                    character_data_Center.WholeT.gameObject.SetActive(true);
+                    continue;
                 }
+                kv.Value.WholeT.parent = null;
+                kv.Value.WholeT.gameObject.SetActive(true);
             }
             ChangeFightingMember_ReadyToGo(heromultiDictionary.GetValues()[0], TeamStandPoints[0]);
         }

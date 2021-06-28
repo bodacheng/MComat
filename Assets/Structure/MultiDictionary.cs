@@ -10,62 +10,43 @@ public class MultiDict<Key1, Key2, Value>
     /// <summary>
     /// 字典结构
     /// </summary>
-    public Dictionary<Key1, Dictionary<Key2, Value>> mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
-    public Dictionary<Key1, List<Key2>> keys = new Dictionary<Key1, List<Key2>>();
+    ///
+    public Dictionary<(Key1, Key2), Value> mDict = new Dictionary<(Key1, Key2), Value>();
 
     public List<Value> GetValues()
     {
-        List<Value> values = new List<Value>();
-        foreach (var dics in mDict.Values)
-        {
-            values.AddRange(dics.Values);
-        }
-        return values;
+        return mDict.Values.ToList();
     }
 
      /// <summary>
     /// 序列化对象
     /// </summary>
-    public SerializableSets[] _SerializableSets;
-    
+    public SerializableSet[] _SerializableSets;
+
     // 该函数设置为private，成为Set函数内部处理，为了是简化程序
-    private SerializableSets[] ConvertDictionaryToSerializableArray()
+    public SerializableSet[] ConvertDictionaryToSerializableArray()
     {
-        List<SerializableSets> temp = new List<SerializableSets>();
-        foreach (KeyValuePair<Key1,Dictionary<Key2, Value>> keyValuePair in mDict)
+        List<SerializableSet> temp = new List<SerializableSet>();
+        foreach (KeyValuePair<(Key1, Key2), Value> keyValuePair in mDict)
         {
-            SerializableSets serializableSets = new SerializableSets
+            SerializableSet serializableSet = new SerializableSet
             {
-                key1 = keyValuePair.Key
+                key1 = keyValuePair.Key.Item1,
+                key2 = keyValuePair.Key.Item2,
+                value = keyValuePair.Value
             };
-            List<SerializableSet> set = new List<SerializableSet>();
-            foreach(KeyValuePair<Key2, Value> _KeyValuePair in keyValuePair.Value)
-            {
-                SerializableSet serializableSet = new SerializableSet
-                {
-                    _Key2 = _KeyValuePair.Key,
-                    _Value = _KeyValuePair.Value
-                };
-                set.Add(serializableSet);
-            }
-            serializableSets.value = set.ToArray();
-            temp.Add(serializableSets);
+            temp.Add(serializableSet);
         }
         _SerializableSets = temp.ToArray();
         return _SerializableSets;
     }
     
-    public Dictionary<Key1, Dictionary<Key2, Value>> ConvertSerializableArrayToDictionary()
+    public Dictionary<(Key1, Key2), Value> ConvertSerializableArrayToDictionary()
     {
-        mDict = new Dictionary<Key1, Dictionary<Key2, Value>>();
-        keys = new Dictionary<Key1, List<Key2>>();
-        foreach(SerializableSets _oneSerializableSets in _SerializableSets)
+        mDict = new Dictionary<(Key1, Key2), Value>();
+        foreach(SerializableSet _set in _SerializableSets)
         {
-            Dictionary<Key2, Value> childDic = new Dictionary<Key2, Value>();
-            foreach(SerializableSet set in _oneSerializableSets.value)
-            {
-                Set(_oneSerializableSets.key1, set._Key2,set._Value);
-            }
+            mDict.Add((_set.key1, _set.key2), _set.value);
         }
         return mDict;
     }
@@ -75,27 +56,13 @@ public class MultiDict<Key1, Key2, Value>
     /// </summary>
     public void Set(Key1 key1, Key2 key2, Value value)
     {
-        if (mDict.ContainsKey(key1))
+        if (mDict.ContainsKey((key1, key2)))
         {
-            var dict2 = mDict[key1];
-            if (dict2.ContainsKey(key2))
-            {
-                dict2[key2] = value;
-            } 
-            else
-            {
-                dict2.Add(key2, value);
-                keys[key1].Add(key2);
-            }
+            mDict[(key1, key2)] = value;
         }
         else
         {
-            var dict2 = new Dictionary<Key2, Value>
-            {
-                { key2, value }
-            };
-            mDict.Add(key1, dict2);
-            keys.Add(key1, new List<Key2>() { key2 });
+            mDict.Add((key1, key2), value);
         }
         ConvertDictionaryToSerializableArray();
     }
@@ -105,39 +72,25 @@ public class MultiDict<Key1, Key2, Value>
     /// </summary>
     public Value Get(Key1 key1, Key2 key2, Value defaultValue = default)
     {
-        if (mDict.ContainsKey(key1))
+        if (mDict.ContainsKey((key1, key2)))
         {
-            var dict2 = mDict[key1];
-            if (dict2.ContainsKey(key2))
-                return dict2[key2];
+            return mDict[(key1, key2)];
         }
         return defaultValue;
     }
-        
+
     public void Clear()
     {
         mDict.Clear();
-        keys.Clear();
         _SerializableSets = null;
-    }
-    
-    public Dictionary<Key1, List<Key2>> GetAllUnNullKeys()
-    {
-        return keys;
-    }
-    
-    [System.Serializable]
-    public struct SerializableSets
-    {
-        public Key1 key1;
-        public SerializableSet[] value;
     }
     
     [System.Serializable]
     public struct SerializableSet
     {
-        public Key2 _Key2;
-        public Value _Value;
+        public Key1 key1;
+        public Key2 key2;
+        public Value value;
     }
 }
 
@@ -148,45 +101,27 @@ public class SSIMultiDictionary
         main = new MultiDict<string, string, int>();        
     }
     public MultiDict<string, string, int> main = new MultiDict<string, string, int>();
-    List<KeyValuePair<string, List<string>>> temp;
-    public List<KeyValuePair<string, string>> GiveOutMin()
-    {
-        temp = new List<KeyValuePair<string, List<string>>>();//各个大key所属的对应最终最小值的小key
-        foreach (KeyValuePair<string,Dictionary<string, int>> BigPair in main.mDict)
-        {
-            Dictionary<string, int> LittleDic = BigPair.Value;
-            List<string> minkeys = LittleDic.Keys.Select(x => new { x, y = LittleDic[x] }).GroupBy(x => x.y).OrderBy(x => x.Key).First().Select(x => x.x).ToList();
-            if (minkeys.Count > 0)
-            {
-                temp.Add(new KeyValuePair<string, List<string>>(BigPair.Key,minkeys));
-            }
-        }
 
-        int Minimum = 9999999;
-        string minusBigKey;
-        List<KeyValuePair<string, List<string>>> allMinusBigKeys = new List<KeyValuePair<string, List<string>>>();
-        for (int i = 0; i < temp.Count; i++)
+    public List<(string, string)> GiveOutMin()
+    {
+        int min = 999999999;
+        List<(string, string)> minkeys = null;
+        foreach (KeyValuePair<(string, string), int> BigPair in main.mDict)
         {
-            if (main.Get(temp[i].Key, temp[i].Value[0]) < Minimum)
+            if (BigPair.Value < min)
             {
-                Minimum = main.Get(temp[i].Key, temp[i].Value[0]);
-                minusBigKey = temp[i].Key;
-                allMinusBigKeys.Clear();
-                allMinusBigKeys.Add(new KeyValuePair<string, List<string>> (temp[i].Key, temp[i].Value));
+                minkeys = new List<(string, string)>();
+                minkeys.Add(BigPair.Key);
             }
-            else if (main.Get(temp[i].Key, temp[i].Value[0]) == Minimum)
+            else if (BigPair.Value == min)
             {
-                allMinusBigKeys.Add(new KeyValuePair<string, List<string>> (temp[i].Key, temp[i].Value));
+                if (minkeys == null)
+                {
+                    minkeys = new List<(string, string)>();
+                }
+                minkeys.Add(BigPair.Key);
             }
         }
-        List<KeyValuePair<string, string>> final_minkeys = new List<KeyValuePair<string, string>>();
-        for (int i = 0; i < allMinusBigKeys.Count; i++)
-        {
-            for (int y = 0; y < allMinusBigKeys[i].Value.Count;y++)
-            {
-                final_minkeys.Add(new KeyValuePair<string, string>(allMinusBigKeys[i].Key,allMinusBigKeys[i].Value[y]));
-            }
-        }
-        return final_minkeys;
+        return minkeys;
     }
 }

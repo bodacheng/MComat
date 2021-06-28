@@ -32,21 +32,18 @@ namespace FightScene
 
         public IEnumerator CharsLoad(MultiDict<int, int, CharDataInfo> MembersSets)
         {
-            foreach (KeyValuePair<int, List<int>> keys in MembersSets.GetAllUnNullKeys())
+            foreach (KeyValuePair<(int, int), CharDataInfo> kv in MembersSets.mDict)
             {
-                foreach (int key in keys.Value)
+                CharDataInfo _one = kv.Value;
+                Data_Center dcenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
+                if (dcenter == null)
                 {
-                    CharDataInfo _one = MembersSets.Get(keys.Key, key);
-                    Data_Center model = TeamMembers.Get(keys.Key, key);
-                    if (model == null)
-                    {
-                        IEnumerator char_DC = CharsManager.target.CreateCharacter(_one);
-                        yield return char_DC;
-                        model = (Data_Center)char_DC.Current;
-                    }
-                    TeamMembers.Set(keys.Key, key, model);
-                    DicAdd<Data_Center, CharDataInfo>.Add(CharDataInfoRef, TeamMembers.Get(keys.Key, key), _one);
+                    IEnumerator char_DC = CharsManager.target.CreateCharacter(_one);
+                    yield return char_DC;
+                    dcenter = (Data_Center)char_DC.Current;
                 }
+                TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, dcenter);
+                DicAdd<Data_Center, CharDataInfo>.Add(CharDataInfoRef, dcenter, _one);
             }
         }
 

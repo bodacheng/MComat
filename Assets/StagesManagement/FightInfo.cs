@@ -52,7 +52,7 @@ public class FightInfo : ScriptableObject
     
     public void LoadLocalFightFromScript()
     {
-        fightMembers = LoadMembersFromScript();
+        fightMembers = FightMembers.LoadEnemies_Json(Script);
         fightMembers.SetEnemyLevel(stageLevel);
     }
 
@@ -80,24 +80,6 @@ public class FightInfo : ScriptableObject
                 enterRingLocalIDs.Add(_one.monsterOfPlayerId);
         }
         return enterRingLocalIDs;
-    }
-
-    FightMembers LoadMembersFromScript()
-    {
-        FightMembers _localFight = new FightMembers();
-        MultiDict<int, int, CharDataInfo>.SerializableSets[] targetValue;
-        try
-        {
-            targetValue = JsonConvert.DeserializeObject<MultiDict<int, int, CharDataInfo>.SerializableSets[]>(Script.text);
-            _localFight.EnemySets._SerializableSets = targetValue;
-            _localFight.EnemySets.ConvertSerializableArrayToDictionary();
-            return _localFight;
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.ToString());
-            return null;
-        }
     }
 
     public static FightInfo ArenaStage(FightMembers LocalFight)
