@@ -4,7 +4,7 @@ using Api.Common;
 using Api.Dto.Form;
 using Newtonsoft.Json;
 using Api.Dto.Model;
-using Json;
+using dataAccess;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
@@ -75,6 +75,26 @@ namespace dataAccess
                             Debug.Log(errorCallback.Error);
                         }
                     );
+
+
+                    ////
+
+                    if (targetModeCode == "arena")
+                    {
+                        PlayFabClientAPI.UpdateUserData(
+                            new UpdateUserDataRequest()
+                            {
+                                Data = new Dictionary<string, string>()
+                                {
+                                    {"DefendTeam", JsonConvert.SerializeObject(TeamSet.ToDic(Arena3V3)._SerializableSets) }
+                                }
+                            },
+                            result => Debug.Log("Successfully Saved Defend Team"),
+                            errorCallback => {
+                                Debug.Log(errorCallback.Error);
+                            }
+                        );
+                    }
                     break;
             }
         }

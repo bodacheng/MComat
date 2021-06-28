@@ -57,6 +57,7 @@ namespace mainMenu
             foreach (Object _object in stageScriptableObjects)
             {
                 FightInfo one = (FightInfo)_object;
+                continue;//
                 one.eventType = FightEventType.Quest;
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
@@ -71,7 +72,7 @@ namespace mainMenu
                     newButton.ID = one.LocalFightID;
                     newButton.text.text = "Stage" + one.LocalFightID.ToString();
                     newButton.name = "Stage" + one.LocalFightID.ToString();
-                    
+
                     for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
                     {
                         IEnumerator onecoroutine = MonsterIconDic.LoadAndGet(one.fightMembers.EnemySets.GetValues()[i].ResourceID);
@@ -88,7 +89,7 @@ namespace mainMenu
                         heroIcon.iconButton.onClick.RemoveAllListeners();
                         heroIcon.iconButton.onClick.AddListener(temp);
                     }
-                    
+
                     StageInfo stageInfo = new StageInfo
                     {
                         stageConfig = one,
@@ -96,9 +97,12 @@ namespace mainMenu
                         MemberIcons = heroIcons
                     };
                     ArcadeStages.Add(one.LocalFightID, stageInfo);
-                }else{
-                    Debug.Log("重复的Arcade模式关卡ID："+ one.LocalFightID);
                 }
+                else
+                {
+                    Debug.Log("重复的Arcade模式关卡ID：" + one.LocalFightID);
+                }
+
             }
             StageCount = ArcadeStages.Count;
         }
