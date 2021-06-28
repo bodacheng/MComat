@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using dataAccess;
 using Api.Dto.Model;
 using System;
-using Json;
-using LitJson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
@@ -45,7 +43,7 @@ public class CloudScript
         (ExecuteCloudScriptResult result) => {
             int newSize = Convert.ToInt32(result.FunctionResult);
             Account._AccInfo.Stoneboxsize = newSize;
-            Debug.Log("盒子容量成功扩大到"+ Account._AccInfo.Stoneboxsize);
+            Debug.Log("盒子容量成功扩大到" + Account._AccInfo.Stoneboxsize);
         },
         error => { Debug.Log("failed"); });
     }
@@ -86,12 +84,6 @@ public class CloudScript
         //Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
         Debug.Log(jsonResult);
-    }
-
-    class temp
-    {
-        public string ItemInstanceId;
-        public string ItemId;
     }
 
     public static void GachaTest(Action<List<StoneOfPlayerInfo>> action)
@@ -150,7 +142,7 @@ public class CloudScript
             object currentItemCount;
             jsonResult.TryGetValue("currentItemCount", out currentItemCount); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
             Debug.Log(currentItemCount);
-            ItemLoader.LoadAll(new Action<int> ((x)=> { }));
+            ItemLoader.LoadAll(new Action<int>((x) => { }));
         },
         error => { Debug.Log(error.Error); });
     }

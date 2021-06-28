@@ -55,7 +55,7 @@ namespace FightScene
                     //);
                     //yield return requestReward1;
                     // 玩家rank远程已经进行了加分处理，这时候只需要以玩家id为key检索一下，本地刷新就可以
-                    yield return Arena.GetPlayerRankInfo();
+
                     FightOverControl.target.rankInfo.gameObject.SetActive(true);
                     FightOverControl.target.rankInfo.RankPointChange(0,0);
                     yield return FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。

@@ -354,7 +354,6 @@
     <Compile Include="Assets/AI/Soul/BehaviorRunner_unused.cs" />
     <Compile Include="Assets/SkillEvents/BO_Ani_E.cs" />
     <Compile Include="Assets/LoadingCanvas/LoadingCanvas_HightLight.cs" />
-    <Compile Include="Assets/DataBaseAccess/API/Dto/Model/GetRankInfoOfPlayerModel.auto.cs" />
     <Compile Include="Assets/FightSceneSystem/Nagare/CountDownProcess.cs" />
     <Compile Include="Assets/BoundaryControl/BoundaryControllByGod.cs" />
     <Compile Include="Assets/ResourceLoading/CachManager.cs" />
@@ -474,7 +473,6 @@
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Mail/MailDetailProcess.cs" />
     <Compile Include="Assets/SKillAnalyzer/SKillAnalyzer.cs" />
     <Compile Include="Assets/Arena/ArenaFightTeamDisplay.cs" />
-    <Compile Include="Assets/DataBaseAccess/API/Dto/Form/GetRankInfoForm.auto.cs" />
     <Compile Include="Assets/AnimControl/StateEnterd.cs" />
     <Compile Include="Assets/AI/AI_states/states/Dash_Back_State.cs" />
     <Compile Include="Assets/PlayFab/Defs/PFDefine.cs" />

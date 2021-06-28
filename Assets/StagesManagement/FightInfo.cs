@@ -2,11 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Playables;
-using Newtonsoft.Json;
-using System;
 using dataAccess;
-using mainMenu;
-using FightScene;
 
 public class FightInfo : ScriptableObject
 {
