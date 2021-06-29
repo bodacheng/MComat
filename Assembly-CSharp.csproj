@@ -390,7 +390,7 @@
     <Compile Include="Assets/ImportantDefinition/Skill/SkillConfig/INHERENT_SKILLTable.cs" />
     <Compile Include="Assets/AnimControl/Animation_Manger_StreamingAssetsLoad.cs" />
     <Compile Include="Assets/TutorialManger/WaitProcess.cs" />
-    <Compile Include="Assets/AI/Soul/SkillSet/NineAndTwo_INI.cs" />
+    <Compile Include="Assets/AI/Soul/SkillSet/SkillSet_INI.cs" />
     <Compile Include="Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" />
     <Compile Include="Assets/Camera/Modes/ScreenSaverC.cs" />
     <Compile Include="Assets/Arena/PlayerArenaRankInfo.cs" />
@@ -421,7 +421,7 @@
     <Compile Include="Assets/BOWeaponSystem/Health System/ResistanceManager.cs" />
     <Compile Include="Assets/ImportantDefinition/Monster/CharDataInfo.cs" />
     <Compile Include="Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager_detect.cs" />
-    <Compile Include="Assets/AI/Soul/SkillSet/NineAndTwo.cs" />
+    <Compile Include="Assets/AI/Soul/SkillSet/SkillSet.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/CharSelect.cs" />
     <Compile Include="Assets/Setting/FightGlobalSetting.cs" />
     <Compile Include="Assets/AI/AI_states/Behaviors_Dictionary.cs" />
@@ -453,7 +453,7 @@
     <Compile Include="Assets/RealTimeGameProcessManager/MultiRaid/FightTeam_MultiRaid.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Shop/ShopTop.cs" />
     <Compile Include="Assets/DATA_CENTER/Chracter_DATA_CENTER/OutsideDataLink.cs" />
-    <Compile Include="Assets/AI/Soul/SkillSet/NineAndTwo_Tools.cs" />
+    <Compile Include="Assets/AI/Soul/SkillSet/SkillSet_Tools.cs" />
     <Compile Include="Assets/TheNineSlot/TheNineSlot_RandomAdd.cs" />
     <Compile Include="Assets/Scene/ABLoadScene/downloads/DownLoad_CMM.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/RPGTalkLocalizationString.cs" />
@@ -625,7 +625,7 @@
     <Compile Include="Assets/AI/AI_states/states/G_Ani_MoveEscape_State.cs" />
     <Compile Include="Assets/DataBaseAccess/API/Dto/Model/GetMergedStoneModel.auto.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/Snippets/RPGTalkSaveInstance.cs" />
-    <Compile Include="Assets/AI/Soul/SkillSet/NineAndTwo_Validation.cs" />
+    <Compile Include="Assets/AI/Soul/SkillSet/SkillSet_Validation.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
     <Compile Include="Assets/Personality/FaceControl/BlendShapeProxy.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/Snippets/RPGTalkFollowCharacter.cs" />
