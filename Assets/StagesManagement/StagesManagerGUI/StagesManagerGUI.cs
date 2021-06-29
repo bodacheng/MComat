@@ -97,9 +97,7 @@ public partial class StagesManagerGUI : Editor {
                 NineSlotPart();// 为了刷新格子颜色
             }
         }
-        
-        focusingCharInfo.set.RefreshSkillNumsByConfigs();
-                
+                        
         SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(GetFocusSkillId());
         if (defaultSkillConfig == null)
         {

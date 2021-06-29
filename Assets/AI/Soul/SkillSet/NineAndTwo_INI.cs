@@ -20,15 +20,15 @@ public partial class NineAndTwo
     
     public void SortNineAndTwo()
     {
-        AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfigByID(a1) : new SkillConfig();
-        AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfigByID(a2) : new SkillConfig();
-        AConfig3 = a3 != null ? SkillConfigTable.GetSkillConfigByID(a3) : new SkillConfig();
-        BConfig1 = b1 != null ? SkillConfigTable.GetSkillConfigByID(b1) : new SkillConfig();
-        BConfig2 = b2 != null ? SkillConfigTable.GetSkillConfigByID(b2) : new SkillConfig();
-        BConfig3 = b3 != null ? SkillConfigTable.GetSkillConfigByID(b3) : new SkillConfig();
-        CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfigByID(c1) : new SkillConfig();
-        CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfigByID(c2) : new SkillConfig();
-        CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfigByID(c3) : new SkillConfig();
+        SkillConfig AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfigByID(a1) : new SkillConfig();
+        SkillConfig AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfigByID(a2) : new SkillConfig();
+        SkillConfig AConfig3 = a3 != null ? SkillConfigTable.GetSkillConfigByID(a3) : new SkillConfig();
+        SkillConfig BConfig1 = b1 != null ? SkillConfigTable.GetSkillConfigByID(b1) : new SkillConfig();
+        SkillConfig BConfig2 = b2 != null ? SkillConfigTable.GetSkillConfigByID(b2) : new SkillConfig();
+        SkillConfig BConfig3 = b3 != null ? SkillConfigTable.GetSkillConfigByID(b3) : new SkillConfig();
+        SkillConfig CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfigByID(c1) : new SkillConfig();
+        SkillConfig CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfigByID(c2) : new SkillConfig();
+        SkillConfig CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfigByID(c3) : new SkillConfig();
 
         float level = GetAerLevel();
         

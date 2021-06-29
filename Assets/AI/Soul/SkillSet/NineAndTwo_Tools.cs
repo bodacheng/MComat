@@ -163,57 +163,41 @@ public partial class NineAndTwo
     
     public SkillConfig GetA1Config()
     {
-        return AConfig1;
+        return SkillConfigTable.GetSkillConfigByID(a1);
     }
     public SkillConfig GetA2Config()
     {
-        return AConfig2;
+        return SkillConfigTable.GetSkillConfigByID(a2);
     }
     public SkillConfig GetA3Config()
     {
-        return AConfig3;
+        return SkillConfigTable.GetSkillConfigByID(a3);
     }
     public SkillConfig GetB1Config()
     {
-        return BConfig1;
+        return SkillConfigTable.GetSkillConfigByID(b1);
     }
     public SkillConfig GetB2Config()
     {
-        return BConfig2;
+        return SkillConfigTable.GetSkillConfigByID(b2);
     }
     public SkillConfig GetB3Config()
     {
-        return BConfig3;
+        return SkillConfigTable.GetSkillConfigByID(b3);
     }
     public SkillConfig GetC1Config()
     {
-        return CConfig1;
+        return SkillConfigTable.GetSkillConfigByID(c1);
     }
     public SkillConfig GetC2Config()
     {
-        return CConfig2;
+        return SkillConfigTable.GetSkillConfigByID(c2);
     }
     public SkillConfig GetC3Config()
     {
-        return CConfig3;
+        return SkillConfigTable.GetSkillConfigByID(c3);
     }
-    
-    //这个函数是服务于stagesmanager。因为编辑关卡的时候是直接去编辑九宫格的config
-    public void RefreshSkillNumsByConfigs()
-    {
-        a1 = AConfig1?.RECORD_ID;
-        a2 = AConfig2?.RECORD_ID;
-        a3 = AConfig3?.RECORD_ID;
-
-        b1 = BConfig1?.RECORD_ID;
-        b2 = BConfig2?.RECORD_ID;
-        b3 = BConfig3?.RECORD_ID;
-
-        c1 = CConfig1?.RECORD_ID;
-        c2 = CConfig2?.RECORD_ID;
-        c3 = CConfig3?.RECORD_ID;
-    }
-    
+        
     public SkillEntity GetM_STS()
     {
         return M;
