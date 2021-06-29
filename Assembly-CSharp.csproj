@@ -499,7 +499,6 @@
     <Compile Include="Assets/AI/AI_states/states/Hurts/Hurt_State_Super.cs" />
     <Compile Include="Assets/AI/AI_states/states/Hurts/Hurt_State_Slight.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/CustomInputField.cs" />
-    <Compile Include="Assets/ImportantDefinition/Skill/SkillConfig/PassiveSkillEntitys.cs" />
     <Compile Include="Assets/Resources/effectsresource/Effect3FromJapanNet/eff_magiccircle_sample/UvScroll.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Gacha/GachaAnim.cs" />
     <Compile Include="Assets/Asstes/Hovl Studio/Wizard spells pack/Scripts/FrontSpawner.cs" />

@@ -45,11 +45,11 @@ public partial class NineAndTwo
         C3 = CConfig3 != null ? GetSE(c3, level) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
-        PassiveSkillEntitys passiveSkillConfigs = new PassiveSkillEntitys(moveType, canDefend, rushType);
-        D = passiveSkillConfigs.D_SE;
-        M = passiveSkillConfigs.M_SE;
+        D = Def ? SkillEntity.GetD_SE() : null;
+        M = SkillEntity.GetM_SE(MoveType);
         M.CANBECANCELLEDTO = false;
-        R = passiveSkillConfigs.R_SE;
+        R = SkillEntity.GetR_SE(RushType);
+
         //////////////////////////////////////////////////////////////////////////
         
         H1_E_list.Clear();

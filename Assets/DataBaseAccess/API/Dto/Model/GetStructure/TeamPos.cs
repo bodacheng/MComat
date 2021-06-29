@@ -34,7 +34,7 @@ namespace Api.Dto.Model {
                 };
                 
                 List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accountCharInfo.InstanceId);
-                NineAndTwo nineAndTwo = new NineAndTwo();
+                NineAndTwo set = new NineAndTwo();
                 CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accountCharInfo.monsterId));
                 if (_CharConfigInfo == null)
                 {
@@ -46,47 +46,45 @@ namespace Api.Dto.Model {
                     switch(targets[i].inUsingSkillSlot)
                     {
                         case "1":
-                            nineAndTwo.a1 = targets[i].skillId;
-                            nineAndTwo.A1lv = targets[i].GetLevel();
+                            set.a1 = targets[i].skillId;
+                            set.A1lv = targets[i].GetLevel();
                         break;
                         case "2":
-                            nineAndTwo.a2 = targets[i].skillId;
-                            nineAndTwo.A2lv = targets[i].GetLevel();
+                            set.a2 = targets[i].skillId;
+                            set.A2lv = targets[i].GetLevel();
                         break;
                         case "3":
-                            nineAndTwo.a3 = targets[i].skillId;
-                            nineAndTwo.A3lv = targets[i].GetLevel();
+                            set.a3 = targets[i].skillId;
+                            set.A3lv = targets[i].GetLevel();
                         break;
                         case "4":
-                            nineAndTwo.b1 = targets[i].skillId;
-                            nineAndTwo.B1lv = targets[i].GetLevel();
+                            set.b1 = targets[i].skillId;
+                            set.B1lv = targets[i].GetLevel();
                         break;
                         case "5":
-                            nineAndTwo.b2 = targets[i].skillId;
-                            nineAndTwo.B2lv = targets[i].GetLevel();
+                            set.b2 = targets[i].skillId;
+                            set.B2lv = targets[i].GetLevel();
                         break;
                         case "6":
-                            nineAndTwo.b3 = targets[i].skillId;
-                            nineAndTwo.B3lv = targets[i].GetLevel();
+                            set.b3 = targets[i].skillId;
+                            set.B3lv = targets[i].GetLevel();
                         break;
                         case "7":
-                            nineAndTwo.c1 = targets[i].skillId;
-                            nineAndTwo.C1lv = targets[i].GetLevel();
+                            set.c1 = targets[i].skillId;
+                            set.C1lv = targets[i].GetLevel();
                         break;
                         case "8":
-                            nineAndTwo.c2 = targets[i].skillId;
-                            nineAndTwo.C2lv = targets[i].GetLevel();
+                            set.c2 = targets[i].skillId;
+                            set.C2lv = targets[i].GetLevel();
                         break;
                         case "9":
-                            nineAndTwo.c3 = targets[i].skillId;
-                            nineAndTwo.C3lv = targets[i].GetLevel();
+                            set.c3 = targets[i].skillId;
+                            set.C3lv = targets[i].GetLevel();
                         break;
                     }
                 }
-                nineAndTwo.moveType = _CharConfigInfo.MoveType;
-                nineAndTwo.rushType = _CharConfigInfo.RushType;
-                nineAndTwo.canDefend = _CharConfigInfo.DEFENDABLE_FLAG;
-                charDataInfo.set = nineAndTwo;
+                set.SetPassive(_CharConfigInfo.DEFENDABLE_FLAG, _CharConfigInfo.MoveType, _CharConfigInfo.RushType);
+                charDataInfo.set = set;
                 charDataInfo.set.SortNineAndTwo();
                 return charDataInfo;
             }

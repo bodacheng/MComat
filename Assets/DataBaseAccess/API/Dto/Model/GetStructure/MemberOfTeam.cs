@@ -66,9 +66,7 @@ namespace Api.Dto.Model
                     break;
                 }
             }
-            nineAndTwo.moveType = _CharConfigInfo.MoveType;
-            nineAndTwo.rushType = _CharConfigInfo.RushType;
-            nineAndTwo.canDefend = _CharConfigInfo.DEFENDABLE_FLAG;
+            nineAndTwo.SetPassive(_CharConfigInfo.DEFENDABLE_FLAG, _CharConfigInfo.MoveType, _CharConfigInfo.RushType);
             charData.set = nineAndTwo;
             charData.set.SortNineAndTwo();
             return charData;

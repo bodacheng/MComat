@@ -175,6 +175,169 @@ namespace Skill
         {
             return FightGlobalSetting._HP_coefficient * originHP * (10 + level) / 11;
         }
+
+        public static SkillEntity GetR_SE(RushType RStyle)
+        {
+            SkillEntity R_SE = null;
+            switch (RStyle)
+            {
+                case RushType.Rush:
+                    R_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Rush",
+                        LEVEL = 0,
+                        StateType = BehaviorType.AC,
+                        AT = 0,
+                        HP = 0,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Acc,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = -1
+                    };
+                    break;
+                case RushType.RushBack:
+                    R_SE = new SkillEntity
+                    {
+                        REAL_NAME = "RushBack",
+                        LEVEL = 0,
+                        StateType = BehaviorType.AC,
+                        AT = 0,
+                        HP = 0,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Acc,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = -1
+                    };
+                    break;
+                case RushType.None:
+                    R_SE = null;
+                    break;
+            }
+            return R_SE;
+        }
+
+        public static SkillEntity GetD_SE()
+        {
+            return new SkillEntity
+            {
+                REAL_NAME = "Defend",
+                LEVEL = 0,
+                StateType = BehaviorType.Def,
+                AT = 0,
+                HP = 0,
+                AIAttrs = new AIAttrs
+                {
+                    AI_MIN_DIS = -1,
+                    AI_MAX_DIS = -1
+                },
+                CasualTo = null,
+                ForcedTransitions = null,
+                EnterInput = InputKey.Defend,
+                ExitInput = InputKey.Defend_Cancel,
+                SP_LEVEL = -1
+            };
+        }
+
+        public static SkillEntity GetM_SE(MoveType moveType)
+        {
+            SkillEntity M_SE;
+            switch (moveType)
+            {
+                case MoveType.Move_normal:
+                    M_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Move",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = -1
+                    };
+                    break;
+                case MoveType.Move_slow:
+                    M_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Move",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = -1
+                    };
+                    break;
+                case MoveType.Move_fast:
+                    M_SE = new SkillEntity()
+                    {
+                        REAL_NAME = "Move",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = -1
+                    };
+                    break;
+                default:
+                    M_SE = new SkillEntity
+                    {
+                        REAL_NAME = "Move",
+                        LEVEL = 0,
+                        StateType = BehaviorType.MV,
+                        AT = 0,
+                        HP = 0,
+                        AIAttrs = new AIAttrs
+                        {
+                            AI_MIN_DIS = -1,
+                            AI_MAX_DIS = -1
+                        },
+                        CasualTo = null,
+                        ForcedTransitions = null,
+                        EnterInput = InputKey.Null,
+                        ExitInput = InputKey.Null,
+                        SP_LEVEL = -1
+                    };
+                    break;
+            }
+            return M_SE;
+        }
     }
     
     public enum MoveType
