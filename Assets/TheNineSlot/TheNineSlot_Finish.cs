@@ -32,31 +32,31 @@ public partial class NineAndTwo
         switch (targetSlot)
         {
             case 1:
-                skillid = nineAndTwo.A1skillid;
+                skillid = nineAndTwo.a1;
                 break;
             case 2:
-                skillid = nineAndTwo.A2skillid;
+                skillid = nineAndTwo.a2;
                 break;
             case 3:
-                skillid = nineAndTwo.A3skillid;
+                skillid = nineAndTwo.a3;
                 break;
             case 4:
-                skillid = nineAndTwo.B1skillid;
+                skillid = nineAndTwo.b1;
                 break;
             case 5:
-                skillid = nineAndTwo.B2skillid;
+                skillid = nineAndTwo.b2;
                 break;
             case 6:
-                skillid = nineAndTwo.B3skillid;
+                skillid = nineAndTwo.b3;
                 break;
             case 7:
-                skillid = nineAndTwo.C1skillid;
+                skillid = nineAndTwo.c1;
                 break;
             case 8:
-                skillid = nineAndTwo.C2skillid;
+                skillid = nineAndTwo.c2;
                 break;
             case 9:
-                skillid = nineAndTwo.C3skillid;
+                skillid = nineAndTwo.c3;
                 break;
         }
 
@@ -71,8 +71,8 @@ public partial class NineAndTwo
         if (targetSlot == 7)
         {
             // 第一列技能必须有普通技能
-            SkillConfig A1skillConfig = SkillConfigTable.GetSkillConfigByID(nineAndTwo.A1skillid);
-            SkillConfig B1skillConfig = SkillConfigTable.GetSkillConfigByID(nineAndTwo.B1skillid);
+            SkillConfig A1skillConfig = SkillConfigTable.GetSkillConfigByID(nineAndTwo.a1);
+            SkillConfig B1skillConfig = SkillConfigTable.GetSkillConfigByID(nineAndTwo.b1);
             if (A1skillConfig.SP_LEVEL != 0 && B1skillConfig.SP_LEVEL != 0)
             {
                 filterForm = new SkillStonesBox.StoneFilterForm
@@ -124,39 +124,39 @@ public partial class NineAndTwo
         switch (targetSlot)
         {
             case 1:
-                nineAndTwo.A1skillid = skillid;
+                nineAndTwo.a1 = skillid;
                 break;
             case 2:
-                nineAndTwo.A2skillid = skillid;
+                nineAndTwo.a2 = skillid;
                 break;
             case 3:
-                nineAndTwo.A3skillid = skillid;
+                nineAndTwo.a3 = skillid;
                 break;
             case 4:
-                nineAndTwo.B1skillid = skillid;
+                nineAndTwo.b1 = skillid;
                 break;
             case 5:
-                nineAndTwo.B2skillid = skillid;
+                nineAndTwo.b2 = skillid;
                 break;
             case 6:
-                nineAndTwo.B3skillid = skillid;
+                nineAndTwo.b3 = skillid;
                 break;
             case 7:
-                nineAndTwo.C1skillid = skillid;
+                nineAndTwo.c1 = skillid;
                 break;
             case 8:
-                nineAndTwo.C2skillid = skillid;
+                nineAndTwo.c2 = skillid;
                 break;
             case 9:
-                nineAndTwo.C3skillid = skillid;
+                nineAndTwo.c3 = skillid;
                 break;
         }
         if (targetSlot == 9)
         {
             NineAndTwo.SkillEditError valR = NineAndTwo.CheckEdit(
-                nineAndTwo.A1skillid, nineAndTwo.A2skillid, nineAndTwo.A3skillid,
-                nineAndTwo.B1skillid, nineAndTwo.B2skillid, nineAndTwo.B3skillid,
-                nineAndTwo.C1skillid, nineAndTwo.C2skillid, nineAndTwo.C3skillid);
+                nineAndTwo.a1, nineAndTwo.a2, nineAndTwo.a3,
+                nineAndTwo.b1, nineAndTwo.b2, nineAndTwo.b3,
+                nineAndTwo.c1, nineAndTwo.c2, nineAndTwo.c3);
             if (valR == SkillEditError.Perfect)
                 return nineAndTwo;
             else

@@ -25,9 +25,9 @@ public class CharConfig
     {
         CharDataInfo characterDataInfo = new CharDataInfo
         {
-            monsterOfPlayerId = localID,
-            ResourceID = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
-            _NineAndTwo = null
+            id = localID,
+            r_id = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。
+            set = null
         };
         return characterDataInfo;
     }

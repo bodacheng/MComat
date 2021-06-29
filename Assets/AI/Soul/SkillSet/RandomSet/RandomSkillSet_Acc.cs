@@ -25,7 +25,7 @@ public partial class NineAndTwo
         {
             if (originSkillConfig != null && originSkillConfig.SP_LEVEL == 0)
             {
-                nineAndTwo.A1skillid = originSkillConfig.RECORD_ID;
+                nineAndTwo.a1 = originSkillConfig.RECORD_ID;
                 return RandomSkillSetRec(focusingtype, nineAndTwo, targetSlot + 1, originSkillConfig, baseOnAcc);
             }
 
@@ -42,7 +42,7 @@ public partial class NineAndTwo
         {
             if (originSkillConfig != null && originSkillConfig.SP_LEVEL != 0)
             {
-                nineAndTwo.A2skillid = originSkillConfig.RECORD_ID;
+                nineAndTwo.a2 = originSkillConfig.RECORD_ID;
                 return RandomSkillSetRec(focusingtype, nineAndTwo, targetSlot + 1, originSkillConfig, baseOnAcc);
             }
             filterForm = new SkillStonesBox.StoneFilterForm
@@ -93,31 +93,31 @@ public partial class NineAndTwo
         switch (targetSlot)
         {
             case 1:
-                nineAndTwo.A1skillid = skillid;
+                nineAndTwo.a1 = skillid;
                 break;
             case 2:
-                nineAndTwo.A2skillid = skillid;
+                nineAndTwo.a2 = skillid;
                 break;
             case 3:
-                nineAndTwo.A3skillid = skillid;
+                nineAndTwo.a3 = skillid;
                 break;
             case 4:
-                nineAndTwo.B1skillid = skillid;
+                nineAndTwo.b1 = skillid;
                 break;
             case 5:
-                nineAndTwo.B2skillid = skillid;
+                nineAndTwo.b2 = skillid;
                 break;
             case 6:
-                nineAndTwo.B3skillid = skillid;
+                nineAndTwo.b3 = skillid;
                 break;
             case 7:
-                nineAndTwo.C1skillid = skillid;
+                nineAndTwo.c1 = skillid;
                 break;
             case 8:
-                nineAndTwo.C2skillid = skillid;
+                nineAndTwo.c2 = skillid;
                 break;
             case 9:
-                nineAndTwo.C3skillid = skillid;
+                nineAndTwo.c3 = skillid;
                 break;
         }
         if (targetSlot == 9)

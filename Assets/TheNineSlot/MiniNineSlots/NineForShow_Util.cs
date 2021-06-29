@@ -8,9 +8,9 @@ public partial class NineForShow : MonoBehaviour
     public void ShowStones_DataInfo(CharDataInfo _CharDataInfo)
     {
         ShowStones(
-            _CharDataInfo._NineAndTwo.A1skillid, _CharDataInfo._NineAndTwo.A2skillid, _CharDataInfo._NineAndTwo.A3skillid,
-            _CharDataInfo._NineAndTwo.B1skillid, _CharDataInfo._NineAndTwo.B2skillid, _CharDataInfo._NineAndTwo.B3skillid,
-            _CharDataInfo._NineAndTwo.C1skillid, _CharDataInfo._NineAndTwo.C2skillid, _CharDataInfo._NineAndTwo.C3skillid
+            _CharDataInfo.set.a1, _CharDataInfo.set.a2, _CharDataInfo.set.a3,
+            _CharDataInfo.set.b1, _CharDataInfo.set.b2, _CharDataInfo.set.b3,
+            _CharDataInfo.set.c1, _CharDataInfo.set.c2, _CharDataInfo.set.c3
         );
     }
 

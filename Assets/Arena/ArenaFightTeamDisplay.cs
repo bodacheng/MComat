@@ -32,7 +32,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     target = member3;
                     break;
             }
-            HeroIcon.ChangeHeroIconByMonsterID(charDataInfo.ResourceID, target);
+            HeroIcon.ChangeHeroIconByMonsterID(charDataInfo.r_id, target);
         }
         _SO.eventType = FightEventType.Arena;
         BigButton.onClick.RemoveAllListeners();

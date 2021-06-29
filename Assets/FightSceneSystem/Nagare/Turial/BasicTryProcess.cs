@@ -115,7 +115,7 @@ public class BasicTryProcess : FSceneProcess
             
             break;
             case 2:
-            if (Adam._MyBehaviorRunner.GetNowState().StateKey == adamInfo._NineAndTwo.GetA3Config().REAL_NAME)
+            if (Adam._MyBehaviorRunner.GetNowState().StateKey == adamInfo.set.GetA3Config().REAL_NAME)
             {
                 Step = 3;
                     Debug.Log("Success3");

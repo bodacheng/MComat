@@ -78,15 +78,15 @@ namespace mainMenu
             string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
             string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
 
-            returnValue.A1skillid = A1;
-            returnValue.A2skillid = A2;
-            returnValue.A3skillid = A3;
-            returnValue.B1skillid = B1;
-            returnValue.B2skillid = B2;
-            returnValue.B3skillid = B3;
-            returnValue.C1skillid = C1;
-            returnValue.C2skillid = C2;
-            returnValue.C3skillid = C3;
+            returnValue.a1 = A1;
+            returnValue.a2 = A2;
+            returnValue.a3 = A3;
+            returnValue.b1 = B1;
+            returnValue.b2 = B2;
+            returnValue.b3 = B3;
+            returnValue.c1 = C1;
+            returnValue.c2 = C2;
+            returnValue.c3 = C3;
 
             return returnValue;
         }

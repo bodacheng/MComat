@@ -7,26 +7,26 @@ public partial class NineAndTwo
     {
         List<string> IDs = new List<string>();
         
-        if (A1skillid != null)
-            IDs.Add(A1skillid);
-        if (A2skillid != null)
-            IDs.Add(A2skillid);
-        if (A3skillid != null)
-            IDs.Add(A3skillid);
+        if (a1 != null)
+            IDs.Add(a1);
+        if (a2 != null)
+            IDs.Add(a2);
+        if (a3 != null)
+            IDs.Add(a3);
             
-        if (B1skillid != null)
-            IDs.Add(B1skillid);
-        if (B2skillid != null)
-            IDs.Add(B2skillid);
-        if (B3skillid != null)
-            IDs.Add(B3skillid);
+        if (b1 != null)
+            IDs.Add(b1);
+        if (b2 != null)
+            IDs.Add(b2);
+        if (b3 != null)
+            IDs.Add(b3);
             
-        if (C1skillid != null)
-            IDs.Add(C1skillid);
-        if (C2skillid != null)
-            IDs.Add(C2skillid);
-        if (C3skillid != null)
-            IDs.Add(C3skillid);
+        if (c1 != null)
+            IDs.Add(c1);
+        if (c2 != null)
+            IDs.Add(c2);
+        if (c3 != null)
+            IDs.Add(c3);
             
         return IDs;
     }
@@ -36,26 +36,26 @@ public partial class NineAndTwo
     {
         List<int> levels = new List<int>();
 
-        if (A1skillid != null)
-            levels.Add(A1level);
-        if (A2skillid != null)
-            levels.Add(A2level);
-        if (A3skillid != null)
-            levels.Add(A3level);
+        if (a1 != null)
+            levels.Add(A1lv);
+        if (a2 != null)
+            levels.Add(A2lv);
+        if (a3 != null)
+            levels.Add(A3lv);
             
-        if (B1skillid != null)
-            levels.Add(B1level);
-        if (B2skillid != null)
-            levels.Add(B2level);
-        if (B3skillid != null)
-            levels.Add(B3level);
+        if (b1 != null)
+            levels.Add(B1lv);
+        if (b2 != null)
+            levels.Add(B2lv);
+        if (b3 != null)
+            levels.Add(B3lv);
             
-        if (C1skillid != null)
-            levels.Add(C1level);
-        if (C2skillid != null)
-            levels.Add(C2level);
-        if (C3skillid != null)
-            levels.Add(C3level);
+        if (c1 != null)
+            levels.Add(C1lv);
+        if (c2 != null)
+            levels.Add(C2lv);
+        if (c3 != null)
+            levels.Add(C3lv);
 
         float aver = 0;
         for (int i = 0; i < levels.Count; i++)
@@ -201,17 +201,17 @@ public partial class NineAndTwo
     //这个函数是服务于stagesmanager。因为编辑关卡的时候是直接去编辑九宫格的config
     public void RefreshSkillNumsByConfigs()
     {
-        A1skillid = AConfig1?.RECORD_ID;
-        A2skillid = AConfig2?.RECORD_ID;
-        A3skillid = AConfig3?.RECORD_ID;
+        a1 = AConfig1?.RECORD_ID;
+        a2 = AConfig2?.RECORD_ID;
+        a3 = AConfig3?.RECORD_ID;
 
-        B1skillid = BConfig1?.RECORD_ID;
-        B2skillid = BConfig2?.RECORD_ID;
-        B3skillid = BConfig3?.RECORD_ID;
+        b1 = BConfig1?.RECORD_ID;
+        b2 = BConfig2?.RECORD_ID;
+        b3 = BConfig3?.RECORD_ID;
 
-        C1skillid = CConfig1?.RECORD_ID;
-        C2skillid = CConfig2?.RECORD_ID;
-        C3skillid = CConfig3?.RECORD_ID;
+        c1 = CConfig1?.RECORD_ID;
+        c2 = CConfig2?.RECORD_ID;
+        c3 = CConfig3?.RECORD_ID;
     }
     
     public SkillEntity GetM_STS()
@@ -222,14 +222,14 @@ public partial class NineAndTwo
     // 平均设置所有技能的等级，只能用于关卡制作等等
     public void SetSkillLevel(int level)
     {
-        A1level = level;
-        A2level = level;
-        A3level = level;
-        B1level = level;
-        B2level = level;
-        B3level = level;
-        C1level = level;
-        C2level = level;
-        C3level = level;
+        A1lv = level;
+        A2lv = level;
+        A3lv = level;
+        B1lv = level;
+        B2lv = level;
+        B3lv = level;
+        C1lv = level;
+        C2lv = level;
+        C3lv = level;
     }
 }

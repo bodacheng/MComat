@@ -29,7 +29,7 @@ public partial class NineAndTwo
     public static List<int> RemainSlotSPLevelCal(NineAndTwo current)
     {
         int remainSlotCount = 9 - current.SkillIDList().Count;
-        int currentPoint = SkillBalancePoint(current.A1skillid, current.A2skillid, current.A3skillid, current.B1skillid, current.B2skillid, current.B3skillid, current.C1skillid, current.C2skillid, current.C3skillid);
+        int currentPoint = SkillBalancePoint(current.a1, current.a2, current.a3, current.b1, current.b2, current.b3, current.c1, current.c2, current.c3);
         int point = currentPoint + (remainSlotCount - 1) * 10;
         List<int> returnValue = new List<int>();
         if (point >= 30)

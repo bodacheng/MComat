@@ -29,8 +29,8 @@ namespace Api.Dto.Model {
             {
                 CharDataInfo charDataInfo = new CharDataInfo
                 {
-                    ResourceID = accountCharInfo.monsterId,
-                    monsterOfPlayerId = accountCharInfo.InstanceId
+                    r_id = accountCharInfo.monsterId,
+                    id = accountCharInfo.InstanceId
                 };
                 
                 List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accountCharInfo.InstanceId);
@@ -46,48 +46,48 @@ namespace Api.Dto.Model {
                     switch(targets[i].inUsingSkillSlot)
                     {
                         case "1":
-                            nineAndTwo.A1skillid = targets[i].skillId;
-                            nineAndTwo.A1level = targets[i].GetLevel();
+                            nineAndTwo.a1 = targets[i].skillId;
+                            nineAndTwo.A1lv = targets[i].GetLevel();
                         break;
                         case "2":
-                            nineAndTwo.A2skillid = targets[i].skillId;
-                            nineAndTwo.A2level = targets[i].GetLevel();
+                            nineAndTwo.a2 = targets[i].skillId;
+                            nineAndTwo.A2lv = targets[i].GetLevel();
                         break;
                         case "3":
-                            nineAndTwo.A3skillid = targets[i].skillId;
-                            nineAndTwo.A3level = targets[i].GetLevel();
+                            nineAndTwo.a3 = targets[i].skillId;
+                            nineAndTwo.A3lv = targets[i].GetLevel();
                         break;
                         case "4":
-                            nineAndTwo.B1skillid = targets[i].skillId;
-                            nineAndTwo.B1level = targets[i].GetLevel();
+                            nineAndTwo.b1 = targets[i].skillId;
+                            nineAndTwo.B1lv = targets[i].GetLevel();
                         break;
                         case "5":
-                            nineAndTwo.B2skillid = targets[i].skillId;
-                            nineAndTwo.B2level = targets[i].GetLevel();
+                            nineAndTwo.b2 = targets[i].skillId;
+                            nineAndTwo.B2lv = targets[i].GetLevel();
                         break;
                         case "6":
-                            nineAndTwo.B3skillid = targets[i].skillId;
-                            nineAndTwo.B3level = targets[i].GetLevel();
+                            nineAndTwo.b3 = targets[i].skillId;
+                            nineAndTwo.B3lv = targets[i].GetLevel();
                         break;
                         case "7":
-                            nineAndTwo.C1skillid = targets[i].skillId;
-                            nineAndTwo.C1level = targets[i].GetLevel();
+                            nineAndTwo.c1 = targets[i].skillId;
+                            nineAndTwo.C1lv = targets[i].GetLevel();
                         break;
                         case "8":
-                            nineAndTwo.C2skillid = targets[i].skillId;
-                            nineAndTwo.C2level = targets[i].GetLevel();
+                            nineAndTwo.c2 = targets[i].skillId;
+                            nineAndTwo.C2lv = targets[i].GetLevel();
                         break;
                         case "9":
-                            nineAndTwo.C3skillid = targets[i].skillId;
-                            nineAndTwo.C3level = targets[i].GetLevel();
+                            nineAndTwo.c3 = targets[i].skillId;
+                            nineAndTwo.C3lv = targets[i].GetLevel();
                         break;
                     }
                 }
                 nineAndTwo.moveType = _CharConfigInfo.MoveType;
                 nineAndTwo.rushType = _CharConfigInfo.RushType;
                 nineAndTwo.canDefend = _CharConfigInfo.DEFENDABLE_FLAG;
-                charDataInfo._NineAndTwo = nineAndTwo;
-                charDataInfo._NineAndTwo.SortNineAndTwo();
+                charDataInfo.set = nineAndTwo;
+                charDataInfo.set.SortNineAndTwo();
                 return charDataInfo;
             }
             catch (Exception e)

@@ -74,7 +74,7 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.GetValues())
             {
-                a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char]._NineAndTwo.SkillEntityList()), teamCGMode);
+                a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char].set.SkillEntityList()), teamCGMode);
 
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>
@@ -165,8 +165,8 @@ namespace FightScene
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
                     CharDataInfo charDInfo = CharDataInfoRef[a_char];
-                    CharConfig _charConfig = MonstersConfigTable.GetCharConfig(charDInfo.ResourceID);
-                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.GetMonsterIconSyn(charDInfo.ResourceID), _charConfig._zokusei);
+                    CharConfig _charConfig = MonstersConfigTable.GetCharConfig(charDInfo.r_id);
+                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.GetMonsterIconSyn(charDInfo.r_id), _charConfig._zokusei);
                     _SideCharIcon.gameObject.SetActive(true);
                 }
                 else

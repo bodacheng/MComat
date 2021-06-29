@@ -182,7 +182,7 @@ namespace FightScene
             List<string> stones = new List<string>();
             foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in CharDataInfoRef)
             {
-                List<StoneOfPlayerInfo> mystones = Stones.GetEquipingStones(keyValuePair.Value.monsterOfPlayerId);
+                List<StoneOfPlayerInfo> mystones = Stones.GetEquipingStones(keyValuePair.Value.id);
                 for (int i = 0; i < mystones.Count; i++)
                 {
                     stones.Add(mystones[i].InstanceId);

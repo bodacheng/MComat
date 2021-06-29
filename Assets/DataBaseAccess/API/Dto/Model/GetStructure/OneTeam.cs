@@ -17,7 +17,7 @@ namespace Api.Dto.Model
                 CharDataInfo CharDataInfo = membersInfo[i].ToCharDataInfo();
                 for (int y = 0; y < posKeySet.PosNumsWithLocalKeys.Length; y++)
                 {
-                    if (posKeySet.PosNumsWithLocalKeys[y].instanceID == CharDataInfo.monsterOfPlayerId)
+                    if (posKeySet.PosNumsWithLocalKeys[y].instanceID == CharDataInfo.id)
                     {
                         LocalFight.EnemySets.Set(0, posKeySet.PosNumsWithLocalKeys[y].posNum, CharDataInfo);
                     }

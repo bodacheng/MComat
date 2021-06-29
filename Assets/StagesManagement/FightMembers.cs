@@ -22,7 +22,7 @@ public class FightMembers
     {
         foreach (var charData in EnemySets.GetValues())
         {
-            charData._NineAndTwo.SetSkillLevel(level);
+            charData.set.SetSkillLevel(level);
         }
     }
 

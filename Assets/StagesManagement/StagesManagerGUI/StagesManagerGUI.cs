@@ -41,7 +41,7 @@ public partial class StagesManagerGUI : Editor {
                 focusingPosID = focusingPosID ?? "0";
                 focusingCharInfo = new CharDataInfo
                 {
-                    monsterOfPlayerId = focusingPosID
+                    id = focusingPosID
                 };
                 _stagesManager.EditoringFight.EnemySets.Set(0, int.Parse(focusingPosID), focusingCharInfo);
             }
@@ -70,8 +70,8 @@ public partial class StagesManagerGUI : Editor {
             targetSlot = 0;
             if (string.IsNullOrEmpty(focusingtype))
                 return;
-            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.ResourceID);
-            focusingCharInfo._NineAndTwo = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1, false);
+            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.r_id);
+            focusingCharInfo.set = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1, false);
         }
                 
         // 技能组评价
@@ -83,7 +83,7 @@ public partial class StagesManagerGUI : Editor {
         // 技能选择
         if (GetFocusSkillId() == null)
         {
-            SelectInher(focusingCharInfo.ResourceID);
+            SelectInher(focusingCharInfo.r_id);
             if (selectedInhereskill == 0)
             {
                 SkillSelect();
@@ -98,7 +98,7 @@ public partial class StagesManagerGUI : Editor {
             }
         }
         
-        focusingCharInfo._NineAndTwo.RefreshSkillNumsByConfigs();
+        focusingCharInfo.set.RefreshSkillNumsByConfigs();
                 
         SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(GetFocusSkillId());
         if (defaultSkillConfig == null)
@@ -121,12 +121,12 @@ public partial class StagesManagerGUI : Editor {
         {
             for (int i = 0; i < _stagesManager.EditoringFight.EnemySets.GetValues().Count; i++)
             {
-                if (_stagesManager.EditoringFight.EnemySets.GetValues()[i].ResourceID == "-1")
+                if (_stagesManager.EditoringFight.EnemySets.GetValues()[i].r_id == "-1")
                 {
                     Debug.Log("未安排有效角色ID");
                     return;
                 }
-                _stagesManager.EditoringFight.EnemySets.GetValues()[i]._NineAndTwo.SortNineAndTwo();
+                _stagesManager.EditoringFight.EnemySets.GetValues()[i].set.SortNineAndTwo();
             }
             _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.EditoringFight.EnemySets);
         }

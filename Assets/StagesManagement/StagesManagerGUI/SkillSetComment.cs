@@ -11,9 +11,9 @@ public partial class StagesManagerGUI : Editor {
         // 技能组评价
         GUILayout.BeginHorizontal();
         se = NineAndTwo.CheckEdit(
-            focusingCharInfo._NineAndTwo.GetA1Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetA2Config()?.RECORD_ID, focusingCharInfo._NineAndTwo.GetA3Config()?.RECORD_ID,
-            focusingCharInfo._NineAndTwo.GetB1Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetB2Config()?.RECORD_ID, focusingCharInfo._NineAndTwo.GetB3Config()?.RECORD_ID,
-            focusingCharInfo._NineAndTwo.GetC1Config()?.RECORD_ID,focusingCharInfo._NineAndTwo.GetC2Config()?.RECORD_ID, focusingCharInfo._NineAndTwo.GetC3Config()?.RECORD_ID);
+            focusingCharInfo.set.GetA1Config()?.RECORD_ID,focusingCharInfo.set.GetA2Config()?.RECORD_ID, focusingCharInfo.set.GetA3Config()?.RECORD_ID,
+            focusingCharInfo.set.GetB1Config()?.RECORD_ID,focusingCharInfo.set.GetB2Config()?.RECORD_ID, focusingCharInfo.set.GetB3Config()?.RECORD_ID,
+            focusingCharInfo.set.GetC1Config()?.RECORD_ID,focusingCharInfo.set.GetC2Config()?.RECORD_ID, focusingCharInfo.set.GetC3Config()?.RECORD_ID);
             
         switch (se)
         {

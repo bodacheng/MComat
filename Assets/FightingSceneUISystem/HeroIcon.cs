@@ -150,10 +150,10 @@ public class HeroIcon : MonoBehaviour {
     public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, CharDataInfo CharDataInfo, RectTransform T)
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
-        CharConfig charConfig = MonstersConfigTable.GetCharConfig(CharDataInfo.ResourceID);
+        CharConfig charConfig = MonstersConfigTable.GetCharConfig(CharDataInfo.r_id);
         if (charConfig == null)
         {
-            Debug.Log("?? : " + CharDataInfo.ResourceID);
+            Debug.Log("?? : " + CharDataInfo.r_id);
             return null;
         }
         MyMemberIcon.CharDataInfo = CharDataInfo;

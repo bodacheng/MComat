@@ -9,7 +9,7 @@ public partial class StagesManagerGUI : Editor {
     string CharSelect()
     {
         // 角色选择
-        CharConfig focusingCharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(focusingCharInfo.ResourceID));
+        CharConfig focusingCharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(focusingCharInfo.r_id));
         focusingtype = focusingCharConfig != null ? EditorGUILayout.TextField("CharacerType", focusingCharConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         CharIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
         foreach(KeyValuePair<string,string> keyValuePair in MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype))
@@ -19,7 +19,7 @@ public partial class StagesManagerGUI : Editor {
         int index = 0;
         foreach (KeyValuePair<string, string> keyValuePair in CharIDsAndNames)
         {
-            if (keyValuePair.Key == focusingCharInfo.ResourceID)
+            if (keyValuePair.Key == focusingCharInfo.r_id)
             {
                 selectedmonsterindex = index;
                 break;
@@ -27,8 +27,8 @@ public partial class StagesManagerGUI : Editor {
             index++;
         }
         selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, CharIDsAndNames.Values.ToArray());
-        focusingCharInfo.ResourceID =  CharIDsAndNames.Count > selectedmonsterindex ? CharIDsAndNames.ElementAt(selectedmonsterindex).Key : null;
-        return focusingCharInfo.ResourceID;
+        focusingCharInfo.r_id =  CharIDsAndNames.Count > selectedmonsterindex ? CharIDsAndNames.ElementAt(selectedmonsterindex).Key : null;
+        return focusingCharInfo.r_id;
     }
 }
 #endif

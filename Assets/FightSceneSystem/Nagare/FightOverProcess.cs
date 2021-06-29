@@ -161,15 +161,15 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 
-                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.ResourceID));
-                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value._NineAndTwo, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
+                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
                 i++;
             }
             i = 0;
@@ -180,15 +180,15 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value._NineAndTwo = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 
-                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.ResourceID));
-                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value._NineAndTwo, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
+                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
                 i++;
             }
             FightOverControl.target.LocalGameRestart();

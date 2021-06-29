@@ -2,9 +2,9 @@
 [System.Serializable]
 public class CharDataInfo
 {
-    public string monsterOfPlayerId;
-    public string ResourceID;
-    public NineAndTwo _NineAndTwo = new NineAndTwo();
+    public string id;
+    public string r_id;
+    public NineAndTwo set = new NineAndTwo();
     
     public CharDataInfo Clone()
     {
@@ -14,7 +14,7 @@ public class CharDataInfo
     public CharDataInfo DeepCopy()
     {
         CharDataInfo Copy = this.Clone();
-        Copy._NineAndTwo = Copy._NineAndTwo.DeepCopy();
+        Copy.set = Copy.set.DeepCopy();
         return Copy;
     }
 
@@ -24,8 +24,8 @@ public class CharDataInfo
 
     public CharDataInfo(string localID, string ResourceID,NineAndTwo _NineAndTwo)
     {
-        monsterOfPlayerId = localID;
-        this.ResourceID = ResourceID;
-        this._NineAndTwo = _NineAndTwo;
+        id = localID;
+        this.r_id = ResourceID;
+        this.set = _NineAndTwo;
     }
 }

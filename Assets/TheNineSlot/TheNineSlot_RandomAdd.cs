@@ -30,15 +30,15 @@ namespace mainMenu
             else
             {
                 // 如果角色有原生技能，则已经存在于targetSkillSet当中
-                AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.A1skillid);
-                AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.A2skillid);
-                AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.A3skillid);
-                AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.B1skillid);
-                AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.B2skillid);
-                AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.B3skillid);
-                AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.C1skillid);
-                AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.C2skillid);
-                AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
+                AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.a1);
+                AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.a2);
+                AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.a3);
+                AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.b1);
+                AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.b2);
+                AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.b3);
+                AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.c1);
+                AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.c2);
+                AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.c3);
                 NineSlotsStatusRefresh();
                 SkillStonesBox.target.RestFilter();
             }
@@ -54,15 +54,15 @@ namespace mainMenu
 
             ForceClearAll();
             // 如果角色有原生技能，则已经存在于targetSkillSet当中
-            AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.A1skillid);
-            AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.A2skillid);
-            AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.A3skillid);
-            AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.B1skillid);
-            AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.B2skillid);
-            AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.B3skillid);
-            AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.C1skillid);
-            AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.C2skillid);
-            AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.C3skillid);
+            AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.a1);
+            AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.a2);
+            AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.a3);
+            AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.b1);
+            AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.b2);
+            AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.b3);
+            AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.c1);
+            AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.c2);
+            AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.c3);
             NineSlotsStatusRefresh();
             SkillStonesBox.target.RestFilter();
         }

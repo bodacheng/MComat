@@ -10,34 +10,34 @@ public partial class StagesManagerGUI : Editor
         switch(targetSlot)
         {
             case 1:
-            focusingCharInfo._NineAndTwo.A1skillid = skillID;
+            focusingCharInfo.set.a1 = skillID;
             break;
             case 2:
-            focusingCharInfo._NineAndTwo.A2skillid = skillID;
+            focusingCharInfo.set.a2 = skillID;
             break;
             case 3:
-            focusingCharInfo._NineAndTwo.A3skillid = skillID;
+            focusingCharInfo.set.a3 = skillID;
             break;
             case 4:
-            focusingCharInfo._NineAndTwo.B1skillid = skillID;
+            focusingCharInfo.set.b1 = skillID;
             break;
             case 5:
-            focusingCharInfo._NineAndTwo.B2skillid = skillID;
+            focusingCharInfo.set.b2 = skillID;
             break;
             case 6:
-            focusingCharInfo._NineAndTwo.B3skillid = skillID;
+            focusingCharInfo.set.b3 = skillID;
             break;
             case 7:
-            focusingCharInfo._NineAndTwo.C1skillid = skillID;
+            focusingCharInfo.set.c1 = skillID;
             break;
             case 8:
-            focusingCharInfo._NineAndTwo.C2skillid = skillID;
+            focusingCharInfo.set.c2 = skillID;
             break;
             case 9:
-            focusingCharInfo._NineAndTwo.C3skillid = skillID;
+            focusingCharInfo.set.c3 = skillID;
             break;
         }
-        focusingCharInfo._NineAndTwo.SortNineAndTwo();
+        focusingCharInfo.set.SortNineAndTwo();
     }
     
     string GetFocusSkillId()
@@ -45,23 +45,23 @@ public partial class StagesManagerGUI : Editor
         switch(targetSlot)
         {
             case 1:
-            return focusingCharInfo._NineAndTwo.A1skillid;
+            return focusingCharInfo.set.a1;
             case 2:
-            return focusingCharInfo._NineAndTwo.A2skillid;
+            return focusingCharInfo.set.a2;
             case 3:
-            return focusingCharInfo._NineAndTwo.A3skillid;
+            return focusingCharInfo.set.a3;
             case 4:
-            return focusingCharInfo._NineAndTwo.B1skillid;
+            return focusingCharInfo.set.b1;
             case 5:
-            return focusingCharInfo._NineAndTwo.B2skillid;
+            return focusingCharInfo.set.b2;
             case 6:
-            return focusingCharInfo._NineAndTwo.B3skillid;
+            return focusingCharInfo.set.b3;
             case 7:
-            return focusingCharInfo._NineAndTwo.C1skillid;
+            return focusingCharInfo.set.c1;
             case 8:
-            return focusingCharInfo._NineAndTwo.C2skillid;
+            return focusingCharInfo.set.c2;
             case 9:
-            return focusingCharInfo._NineAndTwo.C3skillid;
+            return focusingCharInfo.set.c3;
             default:
                 return null;
         }

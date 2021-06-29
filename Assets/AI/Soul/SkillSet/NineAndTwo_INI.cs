@@ -20,29 +20,29 @@ public partial class NineAndTwo
     
     public void SortNineAndTwo()
     {
-        AConfig1 = A1skillid != null ? SkillConfigTable.GetSkillConfigByID(A1skillid) : new SkillConfig();
-        AConfig2 = A2skillid != null ? SkillConfigTable.GetSkillConfigByID(A2skillid) : new SkillConfig();
-        AConfig3 = A3skillid != null ? SkillConfigTable.GetSkillConfigByID(A3skillid) : new SkillConfig();
-        BConfig1 = B1skillid != null ? SkillConfigTable.GetSkillConfigByID(B1skillid) : new SkillConfig();
-        BConfig2 = B2skillid != null ? SkillConfigTable.GetSkillConfigByID(B2skillid) : new SkillConfig();
-        BConfig3 = B3skillid != null ? SkillConfigTable.GetSkillConfigByID(B3skillid) : new SkillConfig();
-        CConfig1 = C1skillid != null ? SkillConfigTable.GetSkillConfigByID(C1skillid) : new SkillConfig();
-        CConfig2 = C2skillid != null ? SkillConfigTable.GetSkillConfigByID(C2skillid) : new SkillConfig();
-        CConfig3 = C3skillid != null ? SkillConfigTable.GetSkillConfigByID(C3skillid) : new SkillConfig();
+        AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfigByID(a1) : new SkillConfig();
+        AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfigByID(a2) : new SkillConfig();
+        AConfig3 = a3 != null ? SkillConfigTable.GetSkillConfigByID(a3) : new SkillConfig();
+        BConfig1 = b1 != null ? SkillConfigTable.GetSkillConfigByID(b1) : new SkillConfig();
+        BConfig2 = b2 != null ? SkillConfigTable.GetSkillConfigByID(b2) : new SkillConfig();
+        BConfig3 = b3 != null ? SkillConfigTable.GetSkillConfigByID(b3) : new SkillConfig();
+        CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfigByID(c1) : new SkillConfig();
+        CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfigByID(c2) : new SkillConfig();
+        CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfigByID(c3) : new SkillConfig();
 
         float level = GetAerLevel();
         
-        A1 = AConfig1 != null ? GetSE(A1skillid, level) : null;
-        A2 = AConfig2 != null ? GetSE(A2skillid, level) : null;
-        A3 = AConfig3 != null ? GetSE(A3skillid, level) : null;
+        A1 = AConfig1 != null ? GetSE(a1, level) : null;
+        A2 = AConfig2 != null ? GetSE(a2, level) : null;
+        A3 = AConfig3 != null ? GetSE(a3, level) : null;
         
-        B1 = BConfig1 != null ? GetSE(B1skillid, level) : null;
-        B2 = BConfig2 != null ? GetSE(B2skillid, level) : null;
-        B3 = BConfig3 != null ? GetSE(B3skillid, level) : null;
+        B1 = BConfig1 != null ? GetSE(b1, level) : null;
+        B2 = BConfig2 != null ? GetSE(b2, level) : null;
+        B3 = BConfig3 != null ? GetSE(b3, level) : null;
         
-        C1 = CConfig1 != null ? GetSE(C1skillid, level) : null;
-        C2 = CConfig2 != null ? GetSE(C2skillid, level) : null;
-        C3 = CConfig3 != null ? GetSE(C3skillid, level) : null;
+        C1 = CConfig1 != null ? GetSE(c1, level) : null;
+        C2 = CConfig2 != null ? GetSE(c2, level) : null;
+        C3 = CConfig3 != null ? GetSE(c3, level) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         PassiveSkillEntitys passiveSkillConfigs = new PassiveSkillEntitys(moveType, canDefend, rushType);

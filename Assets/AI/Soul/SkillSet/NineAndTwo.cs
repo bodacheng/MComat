@@ -4,11 +4,11 @@ using System;
 [Serializable]
 public partial class NineAndTwo {
 
-    public string A1skillid, A2skillid, A3skillid;
-    public string B1skillid, B2skillid, B3skillid;
-    public string C1skillid, C2skillid, C3skillid;
+    public string a1, a2, a3;
+    public string b1, b2, b3;
+    public string c1, c2, c3;
     
-    public int A1level = 0, A2level = 0, A3level = 0, B1level = 0, B2level = 0, B3level = 0, C1level = 0, C2level = 0, C3level = 0;
+    public int A1lv = 0, A2lv = 0, A3lv = 0, B1lv = 0, B2lv = 0, B3lv = 0, C1lv = 0, C2lv = 0, C3lv = 0;
     
     public bool canDefend;
     public MoveType moveType;
@@ -18,9 +18,9 @@ public partial class NineAndTwo {
     
     public NineAndTwo()
     {
-        A1skillid = null; A2skillid = null; A3skillid = null;
-        B1skillid = null; B2skillid = null; B3skillid = null;
-        C1skillid = null; C2skillid = null; C3skillid = null;
+        a1 = null; a2 = null; a3 = null;
+        b1 = null; b2 = null; b3 = null;
+        c1 = null; c2 = null; c3 = null;
         
         moveType = MoveType.Move_normal;
         canDefend = false;
@@ -36,22 +36,22 @@ public partial class NineAndTwo {
         CConfig2 = new SkillConfig();
         CConfig3 = new SkillConfig();
         
-        A1level = 0; 
-        A2level = 0;
-        A3level = 0;
-        B1level = 0;
-        B2level = 0;
-        B3level = 0;
-        C1level = 0;
-        C2level = 0; 
-        C3level = 0;
+        A1lv = 0; 
+        A2lv = 0;
+        A3lv = 0;
+        B1lv = 0;
+        B2lv = 0;
+        B3lv = 0;
+        C1lv = 0;
+        C2lv = 0; 
+        C3lv = 0;
     }
     
     public NineAndTwo(MoveType moveType,bool canDefend, RushType rushType)
     {
-        A1skillid = null; A2skillid = null; A3skillid = null;
-        B1skillid = null; B2skillid = null; B3skillid = null;
-        C1skillid = null; C2skillid = null; C3skillid = null;
+        a1 = null; a2 = null; a3 = null;
+        b1 = null; b2 = null; b3 = null;
+        c1 = null; c2 = null; c3 = null;
 
         this.moveType = moveType;
         this.canDefend = canDefend;

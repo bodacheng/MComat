@@ -159,8 +159,8 @@ namespace mainMenu
                 IEnumerator readshowmodel = ModelShower.target.ShowMyModel(null);
                 yield return readshowmodel;
             }else{
-                _SkillsPrintOut.focusCharConfigID = info.ResourceID;
-                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(info.monsterOfPlayerId);
+                _SkillsPrintOut.focusCharConfigID = info.r_id;
+                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(info.id);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)
@@ -172,7 +172,7 @@ namespace mainMenu
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
                 if (outsideDataLink == null)
                 {
-                    Debug.Log("角色模型构成貌似有问题，monsterid：" + info.ResourceID);
+                    Debug.Log("角色模型构成貌似有问题，monsterid：" + info.r_id);
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
@@ -211,7 +211,7 @@ namespace mainMenu
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.monsterId);
                 CharDataInfo characterDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(accCharInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
-                yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo._NineAndTwo, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
+                yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo.set, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 
                 if (aI_DATA_CENTER._MyBehaviorRunner != null)
                     aI_DATA_CENTER._MyBehaviorRunner.ChangeState("Empty");
