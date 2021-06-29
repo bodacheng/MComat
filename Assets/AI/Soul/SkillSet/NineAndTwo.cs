@@ -2,7 +2,7 @@
 using System;
 
 [Serializable]
-public partial class NineAndTwo {
+public partial class SkillSet {
 
     public string a1, a2, a3;
     public string b1, b2, b3;
@@ -29,7 +29,7 @@ public partial class NineAndTwo {
         return RushType;
     }
 
-    public NineAndTwo()
+    public SkillSet()
     {
         a1 = null; a2 = null; a3 = null;
         b1 = null; b2 = null; b3 = null;
@@ -50,7 +50,7 @@ public partial class NineAndTwo {
         C3lv = 0;
     }
 
-    public NineAndTwo(MoveType moveType, bool canDefend, RushType rushType)
+    public SkillSet(MoveType moveType, bool canDefend, RushType rushType)
     {
         a1 = null; a2 = null; a3 = null;
         b1 = null; b2 = null; b3 = null;
@@ -61,9 +61,9 @@ public partial class NineAndTwo {
         this.RushType = rushType;
     }
 
-    public NineAndTwo DeepCopy()
+    public SkillSet DeepCopy()
     {
-        return (NineAndTwo)MemberwiseClone();
+        return (SkillSet)MemberwiseClone();
     }
 
     public void SetPassive(bool _Def, MoveType _MoveType, RushType _RushType)

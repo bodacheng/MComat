@@ -4,7 +4,7 @@ using UnityEngine;
 using mainMenu;
 using System.Linq;
 
-public partial class NineAndTwo
+public partial class SkillSet
 {
     // exceptSkIDs : 除了这些技能ID。切记是技能ID
     static string RandomSkillIDOfStone(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
@@ -26,7 +26,7 @@ public partial class NineAndTwo
         return StoneSkillIDs[ranDom];
     }
 
-    public static List<int> RemainSlotSPLevelCal(NineAndTwo current)
+    public static List<int> RemainSlotSPLevelCal(SkillSet current)
     {
         int remainSlotCount = 9 - current.SkillIDList().Count;
         int currentPoint = SkillBalancePoint(current.a1, current.a2, current.a3, current.b1, current.b2, current.b3, current.c1, current.c2, current.c3);

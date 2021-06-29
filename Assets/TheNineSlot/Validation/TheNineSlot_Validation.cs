@@ -8,16 +8,16 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         // 基于当前九宫格对技能编辑进行合法判断 包括首发技能检测
-        public NineAndTwo.SkillEditError CheckEditBasedOnCurrent()
+        public SkillSet.SkillEditError CheckEditBasedOnCurrent()
         {
             List<string> nineskillids = target.GetCurrentNineSlotAllSkillIds();
-            return NineAndTwo.CheckEdit(nineskillids[0], nineskillids[1], nineskillids[2], 
+            return SkillSet.CheckEdit(nineskillids[0], nineskillids[1], nineskillids[2], 
                                         nineskillids[3], nineskillids[4], nineskillids[5],
                                         nineskillids[6], nineskillids[7], nineskillids[8]);
         }
         
         // 基于角色存档对技能编辑进行合法判断. 必须接受完整validation检测
-        public NineAndTwo.SkillEditError CheckEditAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
+        public SkillSet.SkillEditError CheckEditAfterOneStoneRemoved(string monsterOfPlayerId, string SkillID)
         {
             List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(monsterOfPlayerId);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
@@ -54,7 +54,7 @@ namespace mainMenu
                         break;
                 }
             }
-            return NineAndTwo.CheckEdit(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+            return SkillSet.CheckEdit(A1, A2, A3, B1, B2, B3, C1, C2, C3);
         }
     }
 }

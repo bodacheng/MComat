@@ -71,7 +71,7 @@ public partial class StagesManagerGUI : Editor {
             if (string.IsNullOrEmpty(focusingtype))
                 return;
             KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.r_id);
-            focusingCharInfo.set = NineAndTwo.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1, false);
+            focusingCharInfo.set = SkillSet.RandomSkillSet(focusingtype, INHERENTSkills.Key, 1, false);
         }
                 
         // 技能组评价

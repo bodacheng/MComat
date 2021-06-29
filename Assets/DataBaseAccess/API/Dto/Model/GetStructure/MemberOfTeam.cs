@@ -17,7 +17,7 @@ namespace Api.Dto.Model
                 id = MonsterInfo.InstanceId
             };
             List<StoneOfPlayerInfo> targets = stones;
-            NineAndTwo nineAndTwo = new NineAndTwo();
+            SkillSet nineAndTwo = new SkillSet();
             CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(charData.r_id));
             if (_CharConfigInfo == null)
             {

@@ -65,9 +65,9 @@ namespace mainMenu
             return IDs;
         }
 
-        public NineAndTwo GetCurrentNineAndTwo()
+        public SkillSet GetCurrentNineAndTwo()
         {
-            NineAndTwo returnValue = new NineAndTwo();
+            SkillSet returnValue = new SkillSet();
             string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
             string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
             string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;

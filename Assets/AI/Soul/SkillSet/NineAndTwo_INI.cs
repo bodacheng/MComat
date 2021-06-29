@@ -3,7 +3,7 @@ using UnityEngine;
 using Skill;
 using System.Linq;
 
-public partial class NineAndTwo
+public partial class SkillSet
 {
     SkillEntity A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
 

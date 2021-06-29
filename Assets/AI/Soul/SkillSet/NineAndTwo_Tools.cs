@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Skill;
 
-public partial class NineAndTwo
+public partial class SkillSet
 {
     public List<string> SkillIDList()
     {

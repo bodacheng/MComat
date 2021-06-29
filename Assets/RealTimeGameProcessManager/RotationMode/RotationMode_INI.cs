@@ -9,7 +9,7 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.GetValues())
             {
-                a_char.Step3Initialize(teamConfig, TeamHpRate * NineAndTwo.INI_Hp(CharDataInfoRef[a_char].set.SkillEntityList()), teamCGMode);
+                a_char.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(CharDataInfoRef[a_char].set.SkillEntityList()), teamCGMode);
 
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>

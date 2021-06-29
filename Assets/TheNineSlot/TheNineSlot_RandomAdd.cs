@@ -20,12 +20,12 @@ namespace mainMenu
         {
             MonsterOfPlayerInfo info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
-            NineAndTwo now = TheNineSlot.target.GetCurrentNineAndTwo();
-            NineAndTwo targetSkillSet = NineAndTwo.FixSkillSet(charConfig.TYPE, now, 1, true);
+            SkillSet now = TheNineSlot.target.GetCurrentNineAndTwo();
+            SkillSet targetSkillSet = SkillSet.FixSkillSet(charConfig.TYPE, now, 1, true);
 
             if (targetSkillSet == null)
             {
-                target.ValiationWarn(NineAndTwo.SkillEditError.UnableToFinish, MemberDetail.target._focusing.InstanceId);
+                target.ValiationWarn(SkillSet.SkillEditError.UnableToFinish, MemberDetail.target._focusing.InstanceId);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace mainMenu
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
             StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.InstanceId);
             // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
-            NineAndTwo targetSkillSet = NineAndTwo.RandomSkillSet(charConfig.TYPE, originSkillInfo?.skillId, 1, true);
+            SkillSet targetSkillSet = SkillSet.RandomSkillSet(charConfig.TYPE, originSkillInfo?.skillId, 1, true);
 
             ForceClearAll();
             // 如果角色有原生技能，则已经存在于targetSkillSet当中

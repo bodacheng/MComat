@@ -161,10 +161,10 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 
@@ -180,10 +180,10 @@ namespace FightScene
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value.set = NineAndTwo.RandomSkillSet("human", null, 1, false);
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 

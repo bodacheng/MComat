@@ -11,8 +11,8 @@ namespace mainMenu
     {
         public void UpdateStonesBaseOnSlots(MonsterOfPlayerInfo info)
         {
-            NineAndTwo.SkillEditError valR = target.CheckEditBasedOnCurrent();
-            if (valR != NineAndTwo.SkillEditError.Perfect)
+            SkillSet.SkillEditError valR = target.CheckEditBasedOnCurrent();
+            if (valR != SkillSet.SkillEditError.Perfect)
             {
                 target.ValiationWarn(valR, info.InstanceId);
                 return;

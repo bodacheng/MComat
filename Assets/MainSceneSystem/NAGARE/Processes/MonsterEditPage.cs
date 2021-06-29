@@ -120,8 +120,8 @@ public class MonsterEditPage : MainSceneProcess
         void SkillUpdateValidation()
         {
             // 第一列技能必须有普通技能
-            NineAndTwo.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
-            if (valR != NineAndTwo.SkillEditError.Perfect)
+            SkillSet.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
+            if (valR != SkillSet.SkillEditError.Perfect)
             {
                 TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.InstanceId);
                 return;

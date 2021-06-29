@@ -5,12 +5,12 @@ using Api.Dto.Model;
 using mainMenu;
 using Skill;
 
-public partial class NineAndTwo
+public partial class SkillSet
 {
     // 根据账户内拥有的技能石来补完当前九宫格
-    public static NineAndTwo FixSkillSet(string type, NineAndTwo originSkillSet, int skilllevel, bool baseOnAcc)
+    public static SkillSet FixSkillSet(string type, SkillSet originSkillSet, int skilllevel, bool baseOnAcc)
     {
-        NineAndTwo nineAndTwo = SkillSetRandomFix(type, originSkillSet, 1, baseOnAcc);
+        SkillSet nineAndTwo = SkillSetRandomFix(type, originSkillSet, 1, baseOnAcc);
         if (nineAndTwo == null)
         {
             Debug.Log("无法根据现在的技能石安排合法补全九宫格");
@@ -21,7 +21,7 @@ public partial class NineAndTwo
         return nineAndTwo;
     }
 
-    static NineAndTwo SkillSetRandomFix(string focusingtype, NineAndTwo nineAndTwo, int targetSlot, bool baseOnAcc)
+    static SkillSet SkillSetRandomFix(string focusingtype, SkillSet nineAndTwo, int targetSlot, bool baseOnAcc)
     {
         if (targetSlot == 10)
         {
@@ -153,7 +153,7 @@ public partial class NineAndTwo
         }
         if (targetSlot == 9)
         {
-            NineAndTwo.SkillEditError valR = NineAndTwo.CheckEdit(
+            SkillSet.SkillEditError valR = SkillSet.CheckEdit(
                 nineAndTwo.a1, nineAndTwo.a2, nineAndTwo.a3,
                 nineAndTwo.b1, nineAndTwo.b2, nineAndTwo.b3,
                 nineAndTwo.c1, nineAndTwo.c2, nineAndTwo.c3);

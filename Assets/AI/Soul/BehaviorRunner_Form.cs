@@ -106,7 +106,7 @@ namespace Soul
             }
         }
 
-        public void FormFightingSetsByNineAndTwo(NineAndTwo nineAndTwo)
+        public void FormFightingSetsByNineAndTwo(SkillSet nineAndTwo)
         {
             nineAndTwo.SortNineAndTwo();
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。

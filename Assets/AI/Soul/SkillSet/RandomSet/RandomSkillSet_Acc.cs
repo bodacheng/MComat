@@ -5,12 +5,12 @@ using Skill;
 using Api.Dto.Model;
 using mainMenu;
 
-public partial class NineAndTwo
+public partial class SkillSet
 {
     // 随机技能组
-    public static NineAndTwo RandomSkillSet(string type, string originSkill, int skilllevel, bool baseOnAcc)
+    public static SkillSet RandomSkillSet(string type, string originSkill, int skilllevel, bool baseOnAcc)
     {
-        NineAndTwo nineAndTwo = new NineAndTwo();
+        SkillSet nineAndTwo = new SkillSet();
         SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
         nineAndTwo = RandomSkillSetRec(type, nineAndTwo, 1, originSkillConfig, baseOnAcc);
         nineAndTwo.SetSkillLevel(skilllevel);
@@ -18,7 +18,7 @@ public partial class NineAndTwo
         return nineAndTwo;
     }
 
-    static NineAndTwo RandomSkillSetRec(string focusingtype, NineAndTwo nineAndTwo, int targetSlot, SkillConfig originSkillConfig, bool baseOnAcc)
+    static SkillSet RandomSkillSetRec(string focusingtype, SkillSet nineAndTwo, int targetSlot, SkillConfig originSkillConfig, bool baseOnAcc)
     {
         SkillStonesBox.StoneFilterForm filterForm;
         if (targetSlot == 1)
@@ -48,7 +48,7 @@ public partial class NineAndTwo
             filterForm = new SkillStonesBox.StoneFilterForm
             {
                 type = focusingtype,
-                exType = NineAndTwo.RemainSlotSPLevelCal(nineAndTwo).ToArray(),
+                exType = SkillSet.RemainSlotSPLevelCal(nineAndTwo).ToArray(),
                 close = false,
                 near = false,
                 far = false
@@ -59,7 +59,7 @@ public partial class NineAndTwo
             filterForm = new SkillStonesBox.StoneFilterForm
             {
                 type = focusingtype,
-                exType = NineAndTwo.RemainSlotSPLevelCal(nineAndTwo).ToArray(),
+                exType = SkillSet.RemainSlotSPLevelCal(nineAndTwo).ToArray(),
                 close = false,
                 near = false,
                 far = false

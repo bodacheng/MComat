@@ -142,8 +142,8 @@ public static class SVCenter
         if (MyMonsters.CheckExist(Stones.Get(item.instanceId).inUsingMonsterOfPlayerId))
         {
             string monsterPlayerID = Stones.Get(item.instanceId).inUsingMonsterOfPlayerId;
-            NineAndTwo.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
-            if (valR3 != NineAndTwo.SkillEditError.Perfect)
+            SkillSet.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
+            if (valR3 != SkillSet.SkillEditError.Perfect)
             {
                 TheNineSlot.target.ValiationWarn(valR3, monsterPlayerID);
                 return false;

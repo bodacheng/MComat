@@ -7,12 +7,12 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void ValiationWarn(NineAndTwo.SkillEditError skillEditError, string monsterOfPlayerID)
+        public void ValiationWarn(SkillSet.SkillEditError skillEditError, string monsterOfPlayerID)
         {
             MonsterOfPlayerInfo charInfo = MyMonsters.Get(monsterOfPlayerID);
             switch(skillEditError)
             {
-                case NineAndTwo.SkillEditError.RepeatedSkill:
+                case SkillSet.SkillEditError.RepeatedSkill:
                     IEnumerator temp()
                     {
                         _ValiWarn.text = "不可装备相同技能";
@@ -21,7 +21,7 @@ namespace mainMenu
                     }
                     PreScene.target.mainProcessRunner.RunAsQueued(temp());
                 break;
-                case NineAndTwo.SkillEditError.UnBalanced:
+                case SkillSet.SkillEditError.UnBalanced:
                     IEnumerator temp2()
                     {
                         _ValiWarn.text = "角色："+ monsterOfPlayerID + "技能点数失衡";
@@ -30,7 +30,7 @@ namespace mainMenu
                     }
                     PreScene.target.mainProcessRunner.RunAsQueued(temp2());
                 break;
-                case NineAndTwo.SkillEditError.NoNormalStart:
+                case SkillSet.SkillEditError.NoNormalStart:
                     IEnumerator temp3()
                     {
                         _ValiWarn.text = "第一竖列必须有一个非必杀技";
@@ -39,7 +39,7 @@ namespace mainMenu
                     }
                     PreScene.target.mainProcessRunner.RunAsQueued(temp3());
                 break;
-                case NineAndTwo.SkillEditError.UnableToFinish:
+                case SkillSet.SkillEditError.UnableToFinish:
                     IEnumerator temp4()
                     {
                         _ValiWarn.text = "没法补全当前九宫格";

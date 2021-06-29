@@ -34,7 +34,7 @@ namespace Api.Dto.Model {
                 };
                 
                 List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accountCharInfo.InstanceId);
-                NineAndTwo set = new NineAndTwo();
+                SkillSet set = new SkillSet();
                 CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accountCharInfo.monsterId));
                 if (_CharConfigInfo == null)
                 {
@@ -133,7 +133,7 @@ namespace Api.Dto.Model {
                         break;
                 }
             }
-            int wholePoint = NineAndTwo.SkillBalancePoint(A1,A2,A3,B1,B2,B3,C1,C2,C3);
+            int wholePoint = SkillSet.SkillBalancePoint(A1,A2,A3,B1,B2,B3,C1,C2,C3);
             return wholePoint;
         }
 	}

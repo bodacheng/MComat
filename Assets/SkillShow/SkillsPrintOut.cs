@@ -194,7 +194,7 @@ namespace mainMenu
         }
 
         // 打印出技能显示画面
-        public void SkillScriptReader(NineAndTwo nineAndTwo, Zokusei zokusei)
+        public void SkillScriptReader(SkillSet nineAndTwo, Zokusei zokusei)
         {
             DestroyFloatingMarks();
             ClearRenderPs();

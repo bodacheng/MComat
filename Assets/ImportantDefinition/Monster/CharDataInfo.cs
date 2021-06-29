@@ -4,7 +4,7 @@ public class CharDataInfo
 {
     public string id;
     public string r_id;
-    public NineAndTwo set = new NineAndTwo();
+    public SkillSet set = new SkillSet();
     
     public CharDataInfo Clone()
     {
@@ -22,7 +22,7 @@ public class CharDataInfo
     {
     }
 
-    public CharDataInfo(string localID, string ResourceID,NineAndTwo _NineAndTwo)
+    public CharDataInfo(string localID, string ResourceID,SkillSet _NineAndTwo)
     {
         id = localID;
         this.r_id = ResourceID;

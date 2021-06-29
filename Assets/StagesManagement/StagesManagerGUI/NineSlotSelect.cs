@@ -140,7 +140,7 @@ public partial class StagesManagerGUI : Editor {
         GUILayout.EndHorizontal();
     }
     
-    bool Repeated(NineAndTwo _NineAndTwo, string recordID)
+    bool Repeated(SkillSet _NineAndTwo, string recordID)
     {
         List<string> currentSkillList = _NineAndTwo.SkillIDList();
         int count = 0;

@@ -110,7 +110,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public IEnumerator Step2Initialize(string type, NineAndTwo _NineAndTwo, Zokusei _zokusei, string personalMagic)
+    public IEnumerator Step2Initialize(string type, SkillSet _NineAndTwo, Zokusei _zokusei, string personalMagic)
     {
         if (!phase2Initialized)
         {
