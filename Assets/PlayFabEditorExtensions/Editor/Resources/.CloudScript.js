@@ -171,6 +171,31 @@ handlers.SkillEdit = function (args, context) {
     return { messageValue: log };
 }
 
+handlers.GetLeaderboardAroundUser = function (args, context) {
+    var request = {
+        "PlayFabId": currentPlayerId,
+        "MaxResultsCount": 4,
+        "StatisticName": "arenapoint"
+    };
+    var Result = server.GetLeaderboardAroundUser(request);
+
+    let teamInfo = [];
+    for (let i = 0; i < Result.Leaderboard.length; i++) {
+
+        var playerTeamData = server.GetUserData({
+            PlayFabId: Result.Leaderboard[i].PlayFabId,
+            Keys: ["DefendTeam"]
+        });
+
+        var item = {
+            "PlayerLeaderboardEntry": Result.Leaderboard[i],
+            "teamInfo": playerTeamData
+        };
+        teamInfo.push(item);
+    }
+    return { messageValue: teamInfo };
+}
+
 handlers.Gacha = function (args, context) {
     var request = {
         "CatalogVersion": args.CatalogVersion,
