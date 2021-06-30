@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using mainMenu;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ public class ArenaProcess : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         Debug.Log("arena");
+        
+        CloudScript.GetLeaderboardAroundUser(() => {}, () => {});
+        
         yield return ArenaManager.target.LoadArena();
-        Debug.Log("arena 1");
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
         Debug.Log("arena loaded");
     }

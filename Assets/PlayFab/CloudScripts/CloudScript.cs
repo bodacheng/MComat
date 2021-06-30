@@ -185,5 +185,26 @@ public class CloudScript
             fail.Invoke();
         });
     }
+
+    public static void GetLeaderboardAroundUser(Action success, Action fail)
+    {
+        PlayFabClientAPI.ExecuteCloudScript(
+            new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "GetLeaderboardAroundUser",
+                GeneratePlayStreamEvent = true
+            },
+            (ExecuteCloudScriptResult result) => {
+                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                object messageValue;
+                jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                Debug.Log(messageValue);
+                success.Invoke();
+            },
+            error => {
+                Debug.Log(error.Error);
+                fail.Invoke();
+            });
+    }
 }
 
