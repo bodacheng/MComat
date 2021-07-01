@@ -81,6 +81,19 @@ namespace dataAccess
 
                     if (targetModeCode == "arena")
                     {
+                        PlayFabClientAPI.ExecuteCloudScript(
+                            new ExecuteCloudScriptRequest()
+                            {
+                                FunctionName = "TestUpdateArenaPoint",
+                                GeneratePlayStreamEvent = true
+                            },
+                            (ExecuteCloudScriptResult result) => {
+                                Debug.Log(result);
+                            },
+                            error => {
+                                Debug.Log(error.Error);
+                            });
+
                         PlayFabClientAPI.UpdateUserData(
                             new UpdateUserDataRequest()
                             {
@@ -95,22 +108,6 @@ namespace dataAccess
                             }
                         );
                         
-                        PlayFabClientAPI.UpdatePlayerStatistics(
-                            new UpdatePlayerStatisticsRequest()
-                            {
-                                Statistics = new List<StatisticUpdate> {
-                                    new StatisticUpdate { StatisticName = "arenapoint", Value = 1 },
-                                }
-                            },
-                            result =>
-                            {
-                                Debug.Log(result);
-                            },
-                            error =>
-                            {
-                                Debug.Log(error);
-                            }
-                        );
                     }
                     break;
             }
