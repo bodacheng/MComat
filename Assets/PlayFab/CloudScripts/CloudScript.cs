@@ -196,15 +196,37 @@ public class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                object messageValue;
-                jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                Debug.Log(messageValue);
+
+                object teamInfos;
+                jsonResult.TryGetValue("teamInfos", out teamInfos); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                string json = JsonConvert.SerializeObject(teamInfos);
+                Debug.Log(json);
+
+                //Temp obj = JsonUtility.FromJson<Temp>(json);
+                //Debug.Log(obj);
+
+                List<LeaderboardInfo> oo = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
+                   new JsonSerializerSettings
+                   {
+                       NullValueHandling = NullValueHandling.Ignore
+                   });
+                for (int i = 0; i < oo.Count; i++)
+                {
+                    Debug.Log(oo[i].Team.Length);
+                }
+                
                 success.Invoke();
             },
             error => {
                 Debug.Log(error.Error);
                 fail.Invoke();
             });
+    }
+
+    public class LeaderboardInfo
+    {
+        public PlayerLeaderboardEntry PlayerLeaderboardEntry;
+        public MultiDict<int, int, CharDataInfo>.SerializableSet[] Team;
     }
 }
 

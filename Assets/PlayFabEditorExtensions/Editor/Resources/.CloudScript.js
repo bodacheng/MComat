@@ -194,7 +194,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     };
     var Result = server.GetLeaderboardAroundUser(request);
 
-    let teamInfo = [];
+    let teamInfos = [];
     for (let i = 0; i < Result.Leaderboard.length; i++) {
 
         var playerTeamData = server.GetUserData({
@@ -204,11 +204,11 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
 
         var item = {
             "PlayerLeaderboardEntry": Result.Leaderboard[i],
-            "teamInfo": playerTeamData
+            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
         };
-        teamInfo.push(item);
+        teamInfos.push(item);
     }
-    return { messageValue: teamInfo };
+    return { teamInfos };
 }
 
 handlers.Gacha = function (args, context) {
