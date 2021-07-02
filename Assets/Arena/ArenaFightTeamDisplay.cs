@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
-using System.Collections;
 using dataAccess;
 
 // 该模块只用于竞技场front画面的玩家队伍显示和挑战敌人队伍显示
@@ -12,13 +11,13 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public Button BigButton;
         
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public IEnumerator AddFightToList(FightInfo _SO)
+    public void AddFightToList(LeaderboardInfo LInfo)
     {
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
-        for (int index = 0; index < _SO.fightMembers.EnemySets._SerializableSets.Length; index++)
+        for (int index = 0; index < LInfo.Team.Length; index++)
         {
-            int posNum = _SO.fightMembers.EnemySets._SerializableSets[index].key2;
-            CharDataInfo charDataInfo = _SO.fightMembers.EnemySets._SerializableSets[index].value;
+            int posNum = LInfo.Team[index].key2;
+            CharDataInfo charDataInfo = LInfo.Team[index].value;
             HeroIcon target = null;
             switch (posNum)
             {
@@ -34,14 +33,19 @@ public class ArenaFightTeamDisplay : MonoBehaviour
             }
             HeroIcon.ChangeHeroIconByMonsterID(charDataInfo.r_id, target);
         }
-        _SO.eventType = FightEventType.Arena;
+
+        FightMembers fightMembers = new FightMembers();
+        fightMembers.EnemySets._SerializableSets = LInfo.Team;
+        fightMembers.EnemySets.ConvertSerializableArrayToDictionary();
+        FightInfo stage = FightInfo.ArenaStage(fightMembers);
+        stage.eventType = FightEventType.Arena;
+
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, _SO, true);
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, LInfo, true);
         }
         BigButton.onClick.AddListener(PrepareForIt);
-        yield break;
     }
     
     // myTeam 机能加载

@@ -2,18 +2,21 @@
 using System.Collections;
 using mainMenu;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ArenaProcess : MainSceneProcess
 {
-    public IEnumerator EnterProcess()
+    public void EnterProcess()
     {
-        Debug.Log("arena");
+        CloudScript.GetLeaderboardAroundUser(
+            (List<LeaderboardInfo> obj) =>
+            {
+                ArenaManager.target.LoadArena(obj);
+            } ,
+            () => {}
+        );
         
-        CloudScript.GetLeaderboardAroundUser(() => {}, () => {});
-        
-        yield return ArenaManager.target.LoadArena();
         ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
-        Debug.Log("arena loaded");
     }
     
     public ArenaProcess()
@@ -24,7 +27,7 @@ public class ArenaProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        EnterProcess();
     }
     
     public override void ProcessEnd()

@@ -186,7 +186,7 @@ public class CloudScript
         });
     }
 
-    public static void GetLeaderboardAroundUser(Action success, Action fail)
+    public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success, Action fail)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
@@ -202,31 +202,23 @@ public class CloudScript
                 string json = JsonConvert.SerializeObject(teamInfos);
                 Debug.Log(json);
 
-                //Temp obj = JsonUtility.FromJson<Temp>(json);
-                //Debug.Log(obj);
-
                 List<LeaderboardInfo> oo = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
                    new JsonSerializerSettings
                    {
                        NullValueHandling = NullValueHandling.Ignore
                    });
-                for (int i = 0; i < oo.Count; i++)
-                {
-                    Debug.Log(oo[i].Team.Length);
-                }
-                
-                success.Invoke();
+
+                success.Invoke(oo);
             },
             error => {
                 Debug.Log(error.Error);
                 fail.Invoke();
             });
     }
-
-    public class LeaderboardInfo
-    {
-        public PlayerLeaderboardEntry PlayerLeaderboardEntry;
-        public MultiDict<int, int, CharDataInfo>.SerializableSet[] Team;
-    }
 }
 
+public class LeaderboardInfo
+{
+    public PlayerLeaderboardEntry PlayerLeaderboardEntry;
+    public MultiDict<int, int, CharDataInfo>.SerializableSet[] Team;
+}

@@ -24,7 +24,7 @@ public class ArenaManager : MonoBehaviour
     
     public void RefreshOpponent()
     {
-        PreScene.target.mainProcessRunner.RunAsQueued(target.LoadArena());
+        //PreScene.target.mainProcessRunner.RunAsQueued(target.LoadArena());
     }
 
     public static void SaveDefend(MultiDict<int, int, CharDataInfo> myteam, Action<int> finished)
@@ -54,34 +54,26 @@ public class ArenaManager : MonoBehaviour
     }
 
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
-    public IEnumerator LoadArena()
+    public void LoadArena(List<LeaderboardInfo> leaderboards)
     {
         myTeam.ShowMyTeam();
-        Debug.Log("asdafsdfs");
-        yield break;
-        Arena.GetPlayerRankInfo();
-
-        PlayerArenaRankInfo opponent1Info = Arena.rankOpponentsModel.strongTeam;
-        PlayerArenaRankInfo opponent2Info = Arena.rankOpponentsModel.normalTeam1;
-        PlayerArenaRankInfo opponent3Info = Arena.rankOpponentsModel.normalTeam2;
-        PlayerArenaRankInfo opponent4Info = Arena.rankOpponentsModel.weakTeam;
-        
-        //IEnumerator temp(ArenaFightTeamDisplay target, PlayerArenaRankInfo opponentInfo)
-        //{
-        //    if (opponent1Info.isRealPlayer)
-        //    {
-        //        IEnumerator opponentteam = Arena.GetOpponentTeamInfo(opponentInfo.playerID);
-        //        yield return opponentteam;
-        //        OneTeam oneTeam = (OneTeam)opponentteam.Current;
-        //        yield return target.AddFightToList(FightInfo.ArenaStage(oneTeam.ToFightInfo()));
-        //    }else{
-        //        yield return target.AddFightToList(FightInfo.RandomStage());
-        //    }
-        //}
-
-        //yield return temp(Fight1, opponent1Info);
-        //yield return temp(Fight2, opponent2Info);
-        //yield return temp(Fight3, opponent3Info);
-        //yield return temp(Fight4, opponent4Info);
+        for (int i = 0; i < leaderboards.Count; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    Fight1.AddFightToList(leaderboards[i]);
+                    break;
+                case 1:
+                    Fight2.AddFightToList(leaderboards[i]);
+                    break;
+                case 2:
+                    Fight3.AddFightToList(leaderboards[i]);
+                    break;
+                case 3:
+                    Fight4.AddFightToList(leaderboards[i]);
+                    break;
+            }
+        }
     }
 }
