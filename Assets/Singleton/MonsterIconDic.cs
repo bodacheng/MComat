@@ -9,13 +9,7 @@ public static class MonsterIconDic {
     static AssetBundle readingBundle;
     static readonly IDictionary<string, Sprite> Dic = new Dictionary<string, Sprite>();
     
-    public static Sprite GetMonsterIconSyn(string monsterid)
-    {
-        Dic.TryGetValue(monsterid, out Sprite Sprite);
-        return Sprite;
-    }
-    
-    public static Sprite LoadAndGet(string monsterId)
+    public static Sprite Get(string rId)
     {
         switch (ResourceLoadingSetting.IconLoadingMode)
         {
@@ -25,7 +19,7 @@ public static class MonsterIconDic {
                 //yield return coroutine.Current;
                 break;
             case ResourceLoadMode.Resource:
-                return FindByResource(monsterId);
+                return FindByResource(rId);
             case ResourceLoadMode.StreamingAssetAB:
                 break;
         }

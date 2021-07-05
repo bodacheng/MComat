@@ -270,7 +270,7 @@ namespace mainMenu
             {
                 MonsterOfPlayerInfo _one = MyMonsters.Get(PositionMonsterOfPlayerId);
                 CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
-                tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.GetMonsterIconSyn(charConfig.RECORD_ID),
+                tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
                     charConfig == null ? Zokusei.Null : charConfig._zokusei);
             }
             else

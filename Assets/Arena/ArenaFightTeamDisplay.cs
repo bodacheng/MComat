@@ -33,7 +33,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
             }
             HeroIcon.ChangeHeroIconByRID(charDataInfo.r_id, target);
         }
-
+        
         FightMembers fightMembers = new FightMembers();
         fightMembers.EnemySets._SerializableSets = LInfo.Team;
         fightMembers.EnemySets.ConvertSerializableArrayToDictionary();

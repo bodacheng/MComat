@@ -81,11 +81,11 @@ namespace mainMenu
             HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
             if (targetingIcon == null)
             {
-                MonsterIconDic.LoadAndGet(_CharConfig.RECORD_ID);
+                MonsterIconDic.Get(_CharConfig.RECORD_ID);
                 targetingIcon = Instantiate(target.noMagic);
                 targetingIcon.name = _CharConfig.REAL_NAME + "_icon";
                 targetingIcon._CharConfig = _CharConfig;
-                targetingIcon.ChangeIcon(MonsterIconDic.GetMonsterIconSyn(_CharConfig.RECORD_ID), _CharConfig._zokusei);
+                targetingIcon.ChangeIcon(MonsterIconDic.Get(_CharConfig.RECORD_ID), _CharConfig._zokusei);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, monsterOfPlayerId, targetingIcon);
             }
             if (clearButtonFeature)

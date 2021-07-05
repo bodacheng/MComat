@@ -117,7 +117,7 @@ namespace mainMenu
             }
             targetIcon.gameObject.SetActive(true);
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
-            targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.GetMonsterIconSyn(charConfig.RECORD_ID),
+            targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
             charConfig == null ? Zokusei.Null : charConfig._zokusei);
         }
         

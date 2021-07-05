@@ -127,7 +127,7 @@ public class HeroIcon : MonoBehaviour {
     public static void ChangeHeroIconByRID(string rID, HeroIcon Icon)
     {
         CharConfig charConfig = MonstersConfigTable.GetCharConfig(rID);
-        Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
+        Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
     }
         
     public static void Seletedfeature(HeroIcon _charIcon, GameObject selectedFrame, float size)
@@ -158,7 +158,7 @@ public class HeroIcon : MonoBehaviour {
         }
         MyMemberIcon.CharDataInfo = CharDataInfo;
         MyMemberIcon._CharConfig = charConfig;
-        MyMemberIcon.ChangeIcon(MonsterIconDic.GetMonsterIconSyn(charConfig.RECORD_ID), charConfig._zokusei);
+        MyMemberIcon.ChangeIcon(MonsterIconDic.Get(charConfig.RECORD_ID), charConfig._zokusei);
         MyMemberIcon.transform.SetParent(T);
         MyMemberIcon.transform.localPosition = Vector3.one;
         MyMemberIcon.transform.localScale = Vector3.one;
