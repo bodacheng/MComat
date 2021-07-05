@@ -92,7 +92,7 @@
      <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\FightOverProcess.cs" />
      <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
-     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager_Cach.cs" />
+     <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />
      <Compile Include="Assets\Gotcha\GachaManager.cs" />
      <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
      <Compile Include="Assets\Arena\ArenaManager.cs" />
@@ -256,7 +256,7 @@
      <Compile Include="Assets\Camera\Modes\keepTargetLeftCamera.cs" />
      <Compile Include="Assets\Structure\SingleAssignmentDisposableCleaner.cs" />
      <Compile Include="Assets\MasterDataTool\Skill_PF.cs" />
-     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager.cs" />
+     <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
      <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Demo\Assets\MC_SwitchTexture.cs" />
@@ -314,7 +314,7 @@
      <Compile Include="Assets\Singleton\SkillIconsDic\SkillIconsDic.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Common.cs" />
-     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager_Resource.cs" />
+     <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Resource.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\StoryProcess.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
      <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
@@ -588,7 +588,7 @@
      <Compile Include="Assets\DataBaseAccess\API\Dto\Form\Common\CertificationForm.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiDragMouseOrbit.cs" />
-     <Compile Include="Assets\ResourceLoading\CharacterManager\CharsManager_StreamingAssets.cs" />
+     <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_StreamingAssets.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonAttribute.cs" />
      <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetMailsOfPlayerModel.auto.cs" />
      <Compile Include="Assets\Scene\ABLoadScene\downloads\ResourceDownLoad.cs" />

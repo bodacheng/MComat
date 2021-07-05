@@ -62,7 +62,7 @@ public static class GeneralModelPool {
             }
             if (target == null)
             {
-                IEnumerator buildmodelproess = CreateCharModel(ModelID);
+                IEnumerator buildmodelproess = CreateUnit(ModelID);
                 yield return buildmodelproess;
                 target = (Data_Center)buildmodelproess.Current;
                 ModelDic[ModelID].Add(target);
@@ -70,7 +70,7 @@ public static class GeneralModelPool {
             target.WholeT.gameObject.SetActive(true);
             AutoReturn(target, ModelID);
         }else{
-            IEnumerator buildmodelproess = CreateCharModel(ModelID);
+            IEnumerator buildmodelproess = CreateUnit(ModelID);
             yield return buildmodelproess;
             target = (Data_Center)buildmodelproess.Current;
         }
@@ -85,38 +85,38 @@ public static class GeneralModelPool {
         yield return enumerator.Current;
     }
     
-    public static IEnumerator ConstructPool(string monsterID)
+    public static IEnumerator ConstructPool(string rID)
     {
-        IEnumerator proess = CreateCharModel(monsterID);
+        IEnumerator proess = CreateUnit(rID);
         yield return proess;
-        Data_Center _TempDATACENTER = (Data_Center)proess.Current;
-        if (_TempDATACENTER != null)
+        Data_Center _D = (Data_Center)proess.Current;
+        if (_D != null)
         {
-            _TempDATACENTER.WholeT.gameObject.SetActive(false);
-            List<Data_Center> data_Centers = new List<Data_Center>() { _TempDATACENTER };
-            DicAdd<string, List<Data_Center>>.Add(ModelDic, monsterID, data_Centers);
+            _D.WholeT.gameObject.SetActive(false);
+            List<Data_Center> data_Centers = new List<Data_Center>() { _D };
+            DicAdd<string, List<Data_Center>>.Add(ModelDic, rID, data_Centers);
         }else{
-            Debug.Log("角色"+monsterID+"构建失败");
+            Debug.Log("角色"+rID+"构建失败");
             yield return null;
         }
     }
     
-    public static IEnumerator CreateCharModel(string ResourceID)
+    public static IEnumerator CreateUnit(string rID)
     {
-        IEnumerator buildmodelproess = null;
+        IEnumerator proess = null;
         switch(ResourceLoadingSetting.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-            yield return buildmodelproess= (CharsManager.target.CreateModelForShowingByCach(ResourceID));
+            yield return proess= (UnitCreator.CreateRawUnit_Cach(rID));
             break;
             case ResourceLoadMode.Resource:
-            yield return buildmodelproess = (CharsManager.target.CreateModelForShowingByResource(ResourceID));
+            yield return proess = (UnitCreator.CreateRawUnit_Resource(rID));
             break;
             case ResourceLoadMode.StreamingAssetAB:
-            yield return buildmodelproess = (CharsManager.target.CreateModelForShowingByStreamingAssets(ResourceID));
+            yield return proess = (UnitCreator.CreateRawUnit_StreamingAssets(rID));
             break;
         }
-        Data_Center _Temp = (Data_Center)buildmodelproess.Current;
+        Data_Center _Temp = (Data_Center)proess.Current;
         yield return _Temp;
     }
 }
