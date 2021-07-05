@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 using Api.Common;
 using Api.Dto.Form;
 using Newtonsoft.Json;
 using Api.Dto.Model;
-using dataAccess;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
@@ -14,7 +13,29 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static void SaveTeamSet(string Mode)
+        public static void ArenaDefendTeamSave(Action<int> finished)
+        {
+            PlayFabClientAPI.UpdateUserData(
+                new UpdateUserDataRequest()
+                {
+                    Data = new Dictionary<string, string>()
+                    {
+                        {"DefendTeam", JsonConvert.SerializeObject(TeamSet.ToDic(Arena3V3)._SerializableSets) }
+                    }
+                },
+                result =>
+                {
+                    Debug.Log("Successfully Saved Defend Team");
+                    finished.Invoke(1);
+                },
+                errorCallback => {
+                    Debug.Log(errorCallback.Error);
+                    finished.Invoke(0);
+                }
+            );
+        }
+        
+        public static void SaveTeamSet(string Mode, Action<int> success)
         {
             TeamPos form = new TeamPos();
             switch (Mode)
@@ -48,6 +69,7 @@ namespace dataAccess
                             Arena3V3 = value.ToPosKeySet();
                             break;
                     }
+                    success.Invoke(1);
                     break;
                 case PlayerInfoRefMode.formalVersion:
                     break;
@@ -70,45 +92,16 @@ namespace dataAccess
                                 {targetModeCode, JsonConvert.SerializeObject(form) }
                             }
                         },
-                        result => Debug.Log("Successfully updated Team Data of :"+ Mode),
+                        result =>
+                        {
+                            Debug.Log("Successfully updated Team Data of :" + Mode);
+                            success.Invoke(1);
+                        },
                         errorCallback => {
                             Debug.Log(errorCallback.Error);
+                            success.Invoke(-1);
                         }
                     );
-
-
-                    ////
-
-                    if (targetModeCode == "arena")
-                    {
-                        PlayFabClientAPI.ExecuteCloudScript(
-                            new ExecuteCloudScriptRequest()
-                            {
-                                FunctionName = "TestUpdateArenaPoint",
-                                GeneratePlayStreamEvent = true
-                            },
-                            (ExecuteCloudScriptResult result) => {
-                                Debug.Log(result);
-                            },
-                            error => {
-                                Debug.Log(error.Error);
-                            });
-
-                        PlayFabClientAPI.UpdateUserData(
-                            new UpdateUserDataRequest()
-                            {
-                                Data = new Dictionary<string, string>()
-                                {
-                                    {"DefendTeam", JsonConvert.SerializeObject(TeamSet.ToDic(Arena3V3)._SerializableSets) }
-                                }
-                            },
-                            result => Debug.Log("Successfully Saved Defend Team"),
-                            errorCallback => {
-                                Debug.Log(errorCallback.Error);
-                            }
-                        );
-                        
-                    }
                     break;
             }
         }

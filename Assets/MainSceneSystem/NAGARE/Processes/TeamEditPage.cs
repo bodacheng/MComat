@@ -8,17 +8,23 @@ public class TeamEditPage : MainSceneProcess
 {
     string teamMode;
 
-    ReactiveProperty<int> team3v3LoadFinished = new ReactiveProperty<int>(0);
-    void Team3V3LoadFinished(int value)
+    ReactiveProperty<int> teamSavedFinished = new ReactiveProperty<int>(0);
+    void TeamSaveFinished(int value)
     {
-        team3v3LoadFinished.Value = value;
+        teamSavedFinished.Value = value;
     }
-    ReactiveProperty<int> teamArenaLoadFinished = new ReactiveProperty<int>(0);
-    void TeamArenaLoadFinished(int value)
+    ReactiveProperty<int> arenaDefendSaved = new ReactiveProperty<int>(0);
+    void ArenaDefendSaved(int value)
     {
-        teamArenaLoadFinished.Value = value;
+        arenaDefendSaved.Value = value;
     }
-
+    
+    public TeamEditPage()
+    {
+        Step = MainSceneStep.TeamEditFront;
+        EelementsInherit(PreScene.target);
+    }
+    
     public void EnterProcess(string teammode)
     {
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
@@ -29,54 +35,53 @@ public class TeamEditPage : MainSceneProcess
         if (MemberDetail.target._focusing != null)
             PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
-
         MonsterBox.DisplayMonsterIcons(true);
         PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后
     }
     
-    public TeamEditPage()
-    {
-        Step = MainSceneStep.TeamEditFront;
-        EelementsInherit(PreScene.target);
-    }
-
     public override void ProcessEnter<T>(T mode)
     {
         teamMode = mode as string;
-        switch (teamMode)
-        {
-            case "arena":
-                TeamSet.LoadTeamSet("arena", TeamArenaLoadFinished);
-                missionWatcher = new MissionWatcher(
-                    new List<ReactiveProperty<int>>() {
-                        teamArenaLoadFinished
-                    },
-                    () => EnterProcess(teamMode),
-                    () => { return; }
-                );
-                break;
-            case "arcade":
-                TeamSet.LoadTeamSet("arcade", Team3V3LoadFinished);
-                missionWatcher = new MissionWatcher(
-                    new List<ReactiveProperty<int>>() {
-                        team3v3LoadFinished
-                    },
-                    () => EnterProcess(teamMode),
-                    () => { return; }
-                );
-                break;
-        }
+        EnterProcess(teamMode);
     }
     
     public override void ProcessEnd()
     {
-        TeamSet.SaveTeamSet(teamMode);
-
-        missionWatcher.DisposeAll();
-        Team3V3LoadFinished(0);
-        TeamArenaLoadFinished(0);
-        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
-        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+        TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
+        switch (teamMode)
+        {
+            case "arena":
+                TeamSet.ArenaDefendTeamSave(ArenaDefendSaved);
+                missionWatcher = new MissionWatcher(
+                    new List<ReactiveProperty<int>>() {
+                        arenaDefendSaved, teamSavedFinished
+                    },
+                    () => {
+                        TeamSaveFinished(0);
+                        ArenaDefendSaved(0); 
+                        missionWatcher.DisposeAll();
+                        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
+                        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+                    },
+                    () => { Debug.Log("返回大厅？"); }
+                );
+                break;
+            case "arcade":
+                missionWatcher = new MissionWatcher(
+                    new List<ReactiveProperty<int>>() {
+                        teamSavedFinished
+                    },
+                    () => {                 
+                        TeamSaveFinished(0);
+                        ArenaDefendSaved(0);
+                        missionWatcher.DisposeAll();
+                        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
+                        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+                    },
+                    () => { Debug.Log("返回大厅？"); }
+                );
+                break;
+        }
     }
     
     readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);

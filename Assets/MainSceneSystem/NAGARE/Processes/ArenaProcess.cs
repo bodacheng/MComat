@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections;
-using mainMenu;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using mainMenu;
 
 public class ArenaProcess : MainSceneProcess
 {
     public void EnterProcess()
     {
-        CloudScript.GetLeaderboardAroundUser(
-            (List<LeaderboardInfo> obj) =>
-            {
-                ArenaManager.target.LoadArena(obj);
-            } ,
-            () => {}
-        );
-        
-        ArenaManager.target.ArenaCanvas.gameObject.SetActive(true);
+        ArenaManager.target.RefreshOpponent();
     }
     
     public ArenaProcess()

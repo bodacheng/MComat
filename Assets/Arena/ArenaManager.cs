@@ -25,8 +25,19 @@ public class ArenaManager : MonoBehaviour
     public void RefreshOpponent()
     {
         //PreScene.target.mainProcessRunner.RunAsQueued(target.LoadArena());
+        CloudScript.GetLeaderboardAroundUser(
+            (List<LeaderboardInfo> obj) =>
+            {
+                LoadArena(obj);
+                ArenaCanvas.gameObject.SetActive(true);
+            } ,
+            () =>
+            {
+                // 返回游戏大厅
+            }
+        );
     }
-
+    
     public static void SaveDefend(MultiDict<int, int, CharDataInfo> myteam, Action<int> finished)
     {
         switch (Account.ReferenceMode)
