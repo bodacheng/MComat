@@ -63,15 +63,14 @@ namespace mainMenu
             SingleThreadProcesser.backup = mainProcessRunner;
         }
 
-        async void Start()
+        void Start()
         {
             Screen.SetResolution(1920, 1080, true);
             AppSetting.Load();
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
 
-            UniTask uniTask = mainProcessRunner.RunAsQueued_UniTask(StartUp());
-            await uniTask;
+            StartUp();
 
             BasicPhase();
             ToInitialPhase();
@@ -140,14 +139,14 @@ namespace mainMenu
             #endregion
         }
 
-        IEnumerator StartUp()
+        void StartUp()
         {
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
             // 关卡按钮一次生成就可以
-            yield return ArcadeManager.target.INIArcadeStageButtons();
+            ArcadeManager.target.INIArcadeStageButtons();
             TheNineSlot.target.StartUp();
             _SelfFightManager.INITeamPosButtons();
 

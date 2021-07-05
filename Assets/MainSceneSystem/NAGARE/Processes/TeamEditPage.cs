@@ -30,12 +30,8 @@ public class TeamEditPage : MainSceneProcess
             PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
 
-
-        UnityEngine.Events.UnityAction unityAction = () =>
-        {
-            PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后
-        };
-        mainProcessRunner.RunAsQueued(MonsterBox.DisplayMonsterIcons(true), unityAction);
+        MonsterBox.DisplayMonsterIcons(true);
+        PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后
     }
     
     public TeamEditPage()

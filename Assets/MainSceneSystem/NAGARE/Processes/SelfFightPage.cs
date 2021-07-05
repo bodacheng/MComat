@@ -22,7 +22,7 @@ public class SelfFightPage : MainSceneProcess
 
     public async UniTask enter()
     {
-        await MonsterBox.DisplayMonsterIcons(true);
+        MonsterBox.DisplayMonsterIcons(true);
         _SelfFightManager.AddHeroIconFeaturesToMonsterBox();
         temp();
     }

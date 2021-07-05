@@ -15,21 +15,21 @@ public static class MonsterIconDic {
         return Sprite;
     }
     
-    public static IEnumerator LoadAndGet(string monsterId)
+    public static Sprite LoadAndGet(string monsterId)
     {
-        IEnumerator coroutine = null;
         switch (ResourceLoadingSetting.IconLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                coroutine = FindByCach(monsterId);
+                //coroutine = FindByCach(monsterId);
+                //yield return coroutine;
+                //yield return coroutine.Current;
                 break;
             case ResourceLoadMode.Resource:
-                coroutine = FindByResource(monsterId);
-                break;
+                return FindByResource(monsterId);
             case ResourceLoadMode.StreamingAssetAB:
                 break;
         }
-        yield return coroutine;
+        return null;
     }
 
     static IEnumerator FindByCach(string resource_id)
@@ -76,17 +76,16 @@ public static class MonsterIconDic {
         yield return readingSprite;
     }
 
-    static IEnumerator FindByResource(string monsterId)
+    static Sprite FindByResource(string monsterId)
     {
         Dic.TryGetValue(monsterId, out Sprite Sprite);
         if (Sprite == null)
             Sprite = Resources.Load<Sprite>("Sprites/monsterIcons/" + monsterId);
         else
         {
-            yield return Sprite;
-            yield break;
+            return Sprite;
         }
         DicAdd<string, Sprite>.Add(Dic, monsterId, Sprite);            
-        yield return Sprite;
+        return Sprite;
     }
 }

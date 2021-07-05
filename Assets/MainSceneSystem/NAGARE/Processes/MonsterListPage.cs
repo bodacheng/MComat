@@ -23,7 +23,7 @@ public class MonsterListPage : MainSceneProcess
 
     public async UniTask Enter()
     {
-        await MonsterBox.DisplayMonsterIcons(true);
+        MonsterBox.DisplayMonsterIcons(true);
         MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
         PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);

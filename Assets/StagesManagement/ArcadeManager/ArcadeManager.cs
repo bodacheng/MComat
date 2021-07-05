@@ -51,7 +51,7 @@ namespace mainMenu
         // 原则上这些玩意没有每次都去生成的道理..
         // 而且这个功能可能做一些扩展，比如关卡图标可以搞个特殊一类的
         // 2020523 : 计划根据账户进度选择是否显示隐藏关卡
-        public IEnumerator INIArcadeStageButtons()
+        public void INIArcadeStageButtons()
         {
             List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
             foreach (Object _object in stageScriptableObjects)
@@ -75,8 +75,7 @@ namespace mainMenu
 
                     for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
                     {
-                        IEnumerator onecoroutine = MonsterIconDic.LoadAndGet(one.fightMembers.EnemySets.GetValues()[i].r_id);
-                        yield return onecoroutine;
+                        MonsterIconDic.LoadAndGet(one.fightMembers.EnemySets.GetValues()[i].r_id);
                     }
                     List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
                     for (int i = 0; i < heroIcons.Count; i++)

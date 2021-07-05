@@ -31,7 +31,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     target = member3;
                     break;
             }
-            HeroIcon.ChangeHeroIconByMonsterID(charDataInfo.r_id, target);
+            HeroIcon.ChangeHeroIconByRID(charDataInfo.r_id, target);
         }
 
         FightMembers fightMembers = new FightMembers();
@@ -43,7 +43,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, LInfo, true);
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
         }
         BigButton.onClick.AddListener(PrepareForIt);
     }
