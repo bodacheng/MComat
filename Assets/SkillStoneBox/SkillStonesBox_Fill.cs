@@ -2,14 +2,13 @@
 using UnityEngine;
 using dataAccess;
 using Skill;
-using UniRx;
 
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        ReactiveProperty<StoneFilterForm> myForm;
-
+        private StoneFilterForm form;
+        
         public void RestFilter()
         {
             StoneFilterForm filterForm = new StoneFilterForm
@@ -22,7 +21,8 @@ namespace mainMenu
                 rare = rares
             };
 
-            myForm.Value = filterForm;
+            form = filterForm;
+            PutSkillStonesToBox();
         }
 
         public class StoneFilterForm
@@ -30,16 +30,16 @@ namespace mainMenu
             public string type;
             public BehaviorType BType = BehaviorType.NONE;
             public int[] exType = { 0, 1, 2, 3 };
-            public bool close = false;
-            public bool near = false;
-            public bool far = false;
+            public bool close;
+            public bool near;
+            public bool far;
             public List<int> rare = new List<int> { 0, 1, 2, 3, 4, 5 };
         }
 
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
         public void PutSkillStonesToBox()
         {
-            List<string> targetSKs = Stones.TargetStonesFromAccount_except(myForm.Value, null, null, false);
+            List<string> targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
             targetSKs = Order(targetSKs);
             if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
             {
@@ -50,7 +50,7 @@ namespace mainMenu
             {
                 cellPair.Value.RemoveToTemp();
             }
-
+            
             int cellindex = 0;
             for (int i = 0; i < targetSKs.Count; i++)
             {

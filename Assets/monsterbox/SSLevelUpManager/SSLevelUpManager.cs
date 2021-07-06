@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Api.Dto.Model;
 using DG.Tweening;
-using System.Collections;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {

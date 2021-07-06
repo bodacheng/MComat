@@ -2,7 +2,6 @@
 using dataAccess;
 using Api.Dto.Model;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
 using Skill;
 

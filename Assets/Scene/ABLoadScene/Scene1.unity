@@ -3469,11 +3469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ad8823b6018414bb72aea2fadf9547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fightScriptPath: /Resources/StageConfigFiles/oneFight.json
   FightScript: {fileID: 4900000, guid: ef1cd552d263e4fda9311c22057a6367, type: 3}
   EditoringFight:
     EnemySets:
-      values: []
       _SerializableSets: []
 --- !u!4 &1848167670
 Transform:
@@ -4224,7 +4222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectPlayerInfoRefMode: 0
-  enterFrontPageFirst: 0
+  enterFrontPageFirst: 1
 --- !u!4 &2075428156307059471
 Transform:
   m_ObjectHideFlags: 0

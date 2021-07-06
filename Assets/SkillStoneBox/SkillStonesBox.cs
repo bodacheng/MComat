@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UniRx;
 
 namespace mainMenu
 {
@@ -55,12 +53,6 @@ namespace mainMenu
             _Selected = SelectedFrame;
             _stonesTempContainer = stonesTempContainer;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
-
-            myForm = new ReactiveProperty<StoneFilterForm>();
-            myForm.Subscribe(x =>
-            {
-                PutSkillStonesToBox();
-            }).AddTo(this);
         }
 
         public string GetFocusingType()
