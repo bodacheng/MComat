@@ -2,17 +2,6 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-
-public class ConfigureOptions : MonoBehaviour
-{
-    public ResourceLoadMode ConfigFileLoadingMode;
-    public ResourceLoadMode ModelLoadingMode;
-    public ResourceLoadMode AnimationLoadingMode;
-    public ResourceLoadMode MagicLoadingMode;
-    public ResourceLoadMode IconLoadingMode;
-    public ResourceLoadMode bgmAndCvs;
-}
-
 [CustomEditor(typeof(ConfigureOptions))]
 public class ConfigureOptionsGUI : Editor
 {
@@ -27,7 +16,21 @@ public class ConfigureOptionsGUI : Editor
         _Setting.IconLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("IconLoadingMode:", _Setting.IconLoadingMode);
     }
 }
+
 #endif
+
+public class ConfigureOptions : MonoBehaviour
+{
+    public ResourceLoadMode ConfigFileLoadingMode;
+    public ResourceLoadMode ModelLoadingMode;
+    public ResourceLoadMode AnimationLoadingMode;
+    public ResourceLoadMode MagicLoadingMode;
+    public ResourceLoadMode IconLoadingMode;
+    public ResourceLoadMode bgmAndCvs;
+}
+
+
+
 
 public enum ResourceLoadMode
 {
