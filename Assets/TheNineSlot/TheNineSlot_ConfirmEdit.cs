@@ -64,15 +64,20 @@ namespace mainMenu
             {
                 if (beforeDic[i.ToString()] != afterDic[i.ToString()])
                 {
-                    // 如果原来的位置上有石头
-                    if (beforeDic[i.ToString()] != null)
-                    {
-                        ToEditStones.Add(beforeDic[i.ToString()], Tuple.Create(string.Empty, string.Empty));
-                    }
-
                     if (afterDic[i.ToString()] != null)
                     {
                         ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(info.InstanceId, i.ToString()));
+                    }
+                }
+            }
+            
+            for (int i = 1; i < 10; i++)
+            {
+                if (beforeDic[i.ToString()] != afterDic[i.ToString()])
+                {
+                    if (beforeDic[i.ToString()] != null && !ToEditStones.ContainsKey(beforeDic[i.ToString()]))
+                    {
+                        ToEditStones.Add(beforeDic[i.ToString()], Tuple.Create(string.Empty, string.Empty));
                     }
                 }
             }

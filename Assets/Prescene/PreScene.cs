@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
-using UniRx;
+using UnityEngine.SceneManagement;
 
 namespace mainMenu
 {
@@ -56,7 +53,7 @@ namespace mainMenu
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform MainMenuBottonsT;
         public RectTransform ArcadeTeamEditT;
-
+        
         void Awake()
         {
             target = this;
@@ -74,6 +71,11 @@ namespace mainMenu
 
             BasicPhase();
             ToInitialPhase();
+        }
+        
+        public static void ReturnToLobby(string error)
+        {
+            LoadingCanvas.target.ArrangeConfirmWindow((() => { SceneManager.LoadScene(1);}), error);
         }
 
         void BasicPhase()
