@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
-#endif
+
 
 public class ConfigureOptions : MonoBehaviour
 {
@@ -27,6 +27,7 @@ public class ConfigureOptionsGUI : Editor
         _Setting.IconLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("IconLoadingMode:", _Setting.IconLoadingMode);
     }
 }
+#endif
 
 public enum ResourceLoadMode
 {

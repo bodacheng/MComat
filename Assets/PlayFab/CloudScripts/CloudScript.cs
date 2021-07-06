@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using PlayFab.PfEditor.Json;
+//using PlayFab.PfEditor.Json;
 using System.Collections.Generic;
 using dataAccess;
 using Api.Dto.Model;
@@ -26,7 +26,6 @@ public class CloudScript
 
     static void OnCloudHelloWorld(ExecuteCloudScriptResult result)
     {
-        Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
         object messageValue;
         jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
@@ -150,7 +149,7 @@ public class CloudScript
     // k v : stoneid , equipingMonster, slot
     public static void UpdateSkillEdit(IDictionary<string, Tuple<string, string>> ToEditStones, Action success, Action fail)
     {
-        var Items = new JsonArray();
+        List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest> Items = new List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest>();
         foreach (KeyValuePair<string, Tuple<string, string>> keyValuePair in ToEditStones)
         {
             PlayFab.ServerModels.UpdateUserInventoryItemDataRequest itemUpdate = new PlayFab.ServerModels.UpdateUserInventoryItemDataRequest
