@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
+using mainMenu;
 
 public class ArenaManager : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class ArenaManager : MonoBehaviour
             } ,
             () =>
             {
-                // 返回游戏大厅
+                PreScene.ReturnToLobby("通讯错误");
             }
         );
     }

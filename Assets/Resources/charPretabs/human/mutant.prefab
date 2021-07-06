@@ -24590,7 +24590,6 @@ MonoBehaviour:
     RARITY_LEVEL: 0
     ForcedTransitions: []
   ConditionAndRespondPriority:
-    values: 
     _SerializableSets: []
   AllConditionCodes: []
   AI_States_path: 
@@ -35497,7 +35496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Center: {fileID: 0}
+  Center: {fileID: 6360906421445867847}
   myColliderMustEquip: {fileID: 8603982166774813639}
 --- !u!1 &3514154168980680377
 GameObject:
