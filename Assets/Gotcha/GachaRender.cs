@@ -103,6 +103,8 @@ public class GachaRender : MonoBehaviour
     {
         starfallAnimEnd = false;
         Reset();
+        
+        if (results != null)
         foreach (StoneOfPlayerInfo stoneinfo in results)
         {
             starFallAnimOneProcess = StartCoroutine(OneStarFallAnim());

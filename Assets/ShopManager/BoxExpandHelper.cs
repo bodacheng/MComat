@@ -52,11 +52,12 @@ public class BoxExpandHelper : MonoBehaviour
     
     void ChooseFive()
     {
-        CloudScript.ExpandBox();
+        CloudScript.ExpandBox5();
     }
     
     void ChooseTen()
     {
+        CloudScript.ExpandBox10();
     }
     
     void ShowResult()

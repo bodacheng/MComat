@@ -86,7 +86,7 @@ handlers.buildBasicData = function (args, context) {
     return { messageValue: updateUserDataResult };
 };
 
-handlers.expandBox = function (args, context) {
+handlers.expandBox5 = function (args, context) {
 
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
@@ -94,6 +94,25 @@ handlers.expandBox = function (args, context) {
     });
 
     var StoneBoxSize = Number(playerData.Data["StoneBoxSize"].Value) + Number(5);
+
+    var updateUserDataResult = server.UpdateUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Data: {
+            "StoneBoxSize": StoneBoxSize,
+        }
+    });
+
+    return StoneBoxSize;
+};
+
+handlers.expandBox10 = function (args, context) {
+
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["StoneBoxSize"]
+    });
+
+    var StoneBoxSize = Number(playerData.Data["StoneBoxSize"].Value) + Number(10);
 
     var updateUserDataResult = server.UpdateUserReadOnlyData({
         PlayFabId: currentPlayerId,
