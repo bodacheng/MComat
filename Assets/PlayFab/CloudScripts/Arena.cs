@@ -16,10 +16,19 @@ public partial class CloudScript
                 FunctionParameter = new { inputValue = info._SerializableSets },
                 GeneratePlayStreamEvent = true
             },
-            result =>
+            (ExecuteCloudScriptResult result) =>
             {
-                finished.Invoke(1);
-                Debug.Log(result.FunctionResult);
+                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                object succeed;
+                jsonResult.TryGetValue("success", out succeed);
+                if ((bool)succeed)
+                {
+                    finished.Invoke(1);
+                }
+                else
+                {
+                    Debug.Log("通讯错误");
+                }
             },
             error =>
             {

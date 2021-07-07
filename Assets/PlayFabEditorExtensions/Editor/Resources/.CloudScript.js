@@ -196,6 +196,10 @@ handlers.ArenaDefendTeamSave = function (args, context) {
         var item = args.inputValue[i];
         members.push(item);
     }
+
+    if (members.length != 3) {
+        return { success: false  };
+    }
     
     var request = {
         "PlayFabId": currentPlayerId,
@@ -204,7 +208,10 @@ handlers.ArenaDefendTeamSave = function (args, context) {
         }
     };
     var Result = server.UpdateUserData(request);
-    return { messageValue: members };
+    return {
+        success: true,
+        messageValue: members
+    };
 
 }
 
