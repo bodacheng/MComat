@@ -611,7 +611,7 @@
      <Compile Include="Assets\StagesManagement\ArcadeManager\Pages_Mugen.cs" />
      <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\ShowAllMyStoneLevel.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
-     <Compile Include="Assets\PlayFab\CloudScripts\CloudScript.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Gotcha.cs" />
      <Compile Include="Assets\Language\LanguageCodeTable.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiFireProjectile.cs" />
      <Compile Include="Assets\AI\AI_states\states\G_Ani_MoveEscape_State.cs" />
@@ -650,7 +650,7 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Dev.cs" />
-     <Compile Include="Assets\PlayFab\CloudScripts\Gotcha.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Arena.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\SkillEdit.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />

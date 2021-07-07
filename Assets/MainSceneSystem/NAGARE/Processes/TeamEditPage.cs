@@ -51,7 +51,7 @@ public class TeamEditPage : MainSceneProcess
         switch (teamMode)
         {
             case "arena":
-                TeamSet.ArenaDefendTeamSave(ArenaDefendSaved);
+                CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
                 missionWatcher = new MissionWatcher(
                     new List<ReactiveProperty<int>>() {
                         arenaDefendSaved, teamSavedFinished

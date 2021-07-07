@@ -11,11 +11,6 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static void ArenaDefendTeamSave(Action<int> finished)
-        {
-            CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(Arena3V3));
-        }
-        
         public static void SaveTeamSet(string Mode, Action<int> success)
         {
             TeamPos form = new TeamPos();

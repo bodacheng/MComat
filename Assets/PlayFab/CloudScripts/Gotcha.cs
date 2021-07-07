@@ -1,7 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-//using PlayFab.PfEditor.Json;
 using System.Collections.Generic;
 using dataAccess;
 using Api.Dto.Model;
@@ -12,68 +11,45 @@ using System.Linq;
 
 public partial class CloudScript
 {
-    public static void ArenaDefendTeamSave(MultiDict<int, int, CharDataInfo> info)
+    public static void GachaTest(Action<List<StoneOfPlayerInfo>> action)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "ArenaDefendTeamSave",
-                FunctionParameter = new { inputValue = info._SerializableSets },
-                GeneratePlayStreamEvent = true
-            },
-            result =>
-            {
-                Debug.Log(result.FunctionResult);
-            },
-            error =>
-            {
-                Debug.Log(error.Error);
-            } 
-        );
-    }
-    
-    public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success, Action fail)
-    {
-        PlayFabClientAPI.ExecuteCloudScript(
-            new ExecuteCloudScriptRequest()
-            {
-                FunctionName = "GetLeaderboardAroundUser",
-                GeneratePlayStreamEvent = true
+                FunctionName = "Gacha", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionParameter = new {
+                    CatalogVersion = "stoneTest2",
+                    tableName = "TestGotcha"
+                }, // The parameter provided to your function
+                GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },
             (ExecuteCloudScriptResult result) => {
-
-                try
+                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                object messageValue;
+                jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                Debug.Log(messageValue);
+                StoneOfPlayerInfo stoneOfPlayerInfo = new StoneOfPlayerInfo();
+                var list = JsonConvert.DeserializeObject<List<JObject>>(messageValue.ToString()).Select(x => x?.ToObject<Dictionary<string, string>>()).ToList();
+                foreach (var v in list)
                 {
-                    PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-
-                    object teamInfos;
-                    jsonResult.TryGetValue("teamInfos",
-                        out teamInfos); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                    string json = JsonConvert.SerializeObject(teamInfos);
-                    Debug.Log(json);
-
-                    List<LeaderboardInfo> oo = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
-                        new JsonSerializerSettings
+                    foreach (var s in v)
+                    {
+                        if (s.Key == "ItemInstanceId")
                         {
-                            NullValueHandling = NullValueHandling.Ignore
-                        });
-                    success.Invoke(oo);
+                            stoneOfPlayerInfo.InstanceId = s.Value;
+                        }
+                        if (s.Key == "ItemId")
+                        {
+                            stoneOfPlayerInfo.skillId = s.Value;
+                        }
+                        //Debug.Log(s.Key + ":" + s.Value);
+                    }
                 }
-                catch (Exception e)
-                {
-                    Debug.Log(e);
-                    success.Invoke(new List<LeaderboardInfo>());
-                }
+
+                Stones.Add(stoneOfPlayerInfo);
+                List<StoneOfPlayerInfo> stones = new List<StoneOfPlayerInfo> { stoneOfPlayerInfo };
+                action(stones);
             },
-            error => {
-                Debug.Log(error.Error);
-                fail.Invoke();
-        });
-    }
-    
-    public class LeaderboardInfo
-    {
-        public PlayerLeaderboardEntry PlayerLeaderboardEntry;
-        public MultiDict<int, int, CharDataInfo>.SerializableSet[] Team;
+            error => { Debug.Log(error.Error); });
     }
 }
