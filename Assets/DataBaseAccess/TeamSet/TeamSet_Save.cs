@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Api.Common;
-using Api.Dto.Form;
 using Newtonsoft.Json;
 using Api.Dto.Model;
 using PlayFab;
@@ -15,24 +13,7 @@ namespace dataAccess
     {
         public static void ArenaDefendTeamSave(Action<int> finished)
         {
-            PlayFabClientAPI.UpdateUserData(
-                new UpdateUserDataRequest()
-                {
-                    Data = new Dictionary<string, string>()
-                    {
-                        {"DefendTeam", JsonConvert.SerializeObject(TeamSet.ToDic(Arena3V3)._SerializableSets) }
-                    }
-                },
-                result =>
-                {
-                    Debug.Log("Successfully Saved Defend Team");
-                    finished.Invoke(1);
-                },
-                errorCallback => {
-                    Debug.Log(errorCallback.Error);
-                    finished.Invoke(0);
-                }
-            );
+            CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(Arena3V3));
         }
         
         public static void SaveTeamSet(string Mode, Action<int> success)

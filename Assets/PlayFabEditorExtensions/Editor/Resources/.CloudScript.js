@@ -190,6 +190,24 @@ handlers.SkillEdit = function (args, context) {
     return { messageValue: log };
 }
 
+handlers.ArenaDefendTeamSave = function (args, context) {
+    let members = [];
+    for (let i = 0; i < args.inputValue.length; i++) {
+        var item = args.inputValue[i];
+        members.push(item);
+    }
+    
+    var request = {
+        "PlayFabId": currentPlayerId,
+        "Data": {
+            "DefendTeam": JSON.stringify(members)
+        }
+    };
+    var Result = server.UpdateUserData(request);
+    return { messageValue: members };
+
+}
+
 handlers.TestUpdateArenaPoint = function (args, context) {
     var request = {
         PlayFabId: currentPlayerId,

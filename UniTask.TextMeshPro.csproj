@@ -13,7 +13,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{78d419d9-4997-0fe8-0a67-12c4b3915b3a}</ProjectGuid>
+    <ProjectGuid>{4fe9d12b-7010-161b-8d2b-96aefab73118}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -283,50 +283,41 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.iOS.Extensions">
- <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
- </Reference>
  <Reference Include="POFX_Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="log4netPlastic">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="POFX_Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Plastic.Antlr3.Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="JMOAssets_MatCapWelcome">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
  </Reference>
  <Reference Include="DOTweenEditor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="unityplastic">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.iOS.Extensions.Xcode">
- <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.iOS.Extensions.Common">
- <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -674,18 +665,18 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{ab868ac3-38db-93ce-b53a-1ed2bfb72e67}</Project>
+      <Project>{75b6fcf2-5067-4d01-88a4-bceeb4fc0e73}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
   </ItemGroup>

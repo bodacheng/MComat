@@ -161,6 +161,26 @@ public class CloudScript
         error => { Debug.Log(error.Error); });
     }
 
+    public static void ArenaDefendTeamSave(MultiDict<int, int, CharDataInfo> info)
+    {
+        PlayFabClientAPI.ExecuteCloudScript(
+            new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "ArenaDefendTeamSave",
+                FunctionParameter = new { inputValue = info._SerializableSets },
+                GeneratePlayStreamEvent = true
+            },
+            result =>
+            {
+                Debug.Log(result.FunctionResult);
+            },
+            error =>
+            {
+                Debug.Log(error.Error);
+            } 
+        );
+    }
+
     // k v : stoneid , equipingMonster, slot
     public static void UpdateSkillEdit(IDictionary<string, Tuple<string, string>> ToEditStones, Action success, Action fail)
     {
@@ -209,20 +229,29 @@ public class CloudScript
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
-                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
 
-                object teamInfos;
-                jsonResult.TryGetValue("teamInfos", out teamInfos); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                string json = JsonConvert.SerializeObject(teamInfos);
-                Debug.Log(json);
+                try
+                {
+                    PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
 
-                List<LeaderboardInfo> oo = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
-                   new JsonSerializerSettings
-                   {
-                       NullValueHandling = NullValueHandling.Ignore
-                   });
+                    object teamInfos;
+                    jsonResult.TryGetValue("teamInfos",
+                        out teamInfos); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                    string json = JsonConvert.SerializeObject(teamInfos);
+                    Debug.Log(json);
 
-                success.Invoke(oo);
+                    List<LeaderboardInfo> oo = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
+                        new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore
+                        });
+                    success.Invoke(oo);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                    success.Invoke(new List<LeaderboardInfo>());
+                }
             },
             error => {
                 Debug.Log(error.Error);
