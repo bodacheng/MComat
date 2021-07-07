@@ -13,7 +13,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{c4092cd4-f6bd-531e-86f6-dde1ba94a620}</ProjectGuid>
+    <ProjectGuid>{a742e4bb-cd28-21b5-9cc4-a2211d8896fc}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -56,7 +56,7 @@
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA3Try.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\HorizontalSelector.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Cach.cs" />
-     <Compile Include="Assets\monsterbox\SSLevelUpManager\ByGold.cs" />
+     <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectMaterialMonster.cs" />
      <Compile Include="Assets\Camera\Modes\OneVOneMode.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\ShaderManager.cs" />
@@ -76,7 +76,7 @@
      <Compile Include="Assets\Camera\Modes\StartToEndMode.cs" />
      <Compile Include="Assets\AI\AI_states\states\Counter_State.cs" />
      <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
-     <Compile Include="Assets\UI\oldscripts\Debug_Char_Set.cs" />
+     <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />
      <Compile Include="Assets\BOWeaponSystem\HittingSystemDefinitions\V_Damage.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonMockWrapper.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\RPGTalkLanguage.cs" />
@@ -126,7 +126,7 @@
      <Compile Include="Assets\DataBaseAccess\Item\Currencies.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Eraser.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerParticle.cs" />
-     <Compile Include="Assets\monsterbox\SSLevelUpManager\BySKStone.cs" />
+     <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToMemberDetail.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\DATACENTERGUI.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
@@ -134,7 +134,7 @@
      <Compile Include="Assets\FightOverControl\FightOverControl.cs" />
      <Compile Include="Assets\UI\SideCharIcon.cs" />
      <Compile Include="Assets\Setting\AppSetting.cs" />
-     <Compile Include="Assets\monsterbox\StoneDeleteManger.cs" />
+     <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
      <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />
@@ -275,8 +275,8 @@
      <Compile Include="Assets\missionWatcher\MissionWatcher.cs" />
      <Compile Include="Assets\DataBaseAccess\Account\Account.cs" />
      <Compile Include="Assets\Scene\ABLoadScene\downloads\downloads_anim.cs" />
-     <Compile Include="Assets\monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
-     <Compile Include="Assets\monsterbox\SkillStoneBoxTabEffectsManager.cs" />
+     <Compile Include="Assets\Monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
+     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\StoneBoxExpansion.cs" />
      <Compile Include="Assets\Camera\Modes\TopDownWatchCamera.cs" />
      <Compile Include="Assets\StagesManagement\FightInfo.cs" />
@@ -306,7 +306,7 @@
      <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\SkillStoneGotchaInfoModel.auto.cs" />
      <Compile Include="Assets\AI\Soul\SkillCancelFlag.cs" />
      <Compile Include="Assets\TutorialManger\processes\ALineConfirm.cs" />
-     <Compile Include="Assets\monsterbox\MonsterboxFilter.cs" />
+     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
      <Compile Include="Assets\Scene\TITLE_SCENE\Intro.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Sekka.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_FlatColor.cs" />
@@ -335,7 +335,7 @@
      <Compile Include="Assets\DataBaseAccess\Account\Json.cs" />
      <Compile Include="Assets\Camera\Modes\GodplayerCamera.cs" />
      <Compile Include="Assets\TutorialManger\Tutorial\TutorialHelper.cs" />
-     <Compile Include="Assets\UI\oldscripts\RongLianGamen.cs" />
+     <Compile Include="Assets\UI\Oldscripts\RongLianGamen.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_ValidationWarn.cs" />
      <Compile Include="Assets\Setting\ConfigureOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
@@ -360,7 +360,7 @@
      <Compile Include="Assets\Camera\Modes\WatchOverCamera.cs" />
      <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerImage.cs" />
-     <Compile Include="Assets\monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
+     <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\ScrollForMore.cs" />
      <Compile Include="Assets\POS_Sys\E_Damage.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiBeamScript.cs" />
@@ -369,7 +369,7 @@
      <Compile Include="Assets\RealTimeGameProcessManager\FightTeam.cs" />
      <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
-     <Compile Include="Assets\UI\oldscripts\Save_Trans.cs" />
+     <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
      <Compile Include="Assets\SelfFightManager\SelfFightManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SliderManager.cs" />
@@ -408,7 +408,7 @@
      <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\TeamPos.cs" />
      <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextController.cs" />
-     <Compile Include="Assets\UI\oldscripts\SwapAllModelShader.cs" />
+     <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
      <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\ResistanceManager.cs" />
@@ -430,7 +430,7 @@
      <Compile Include="Assets\AI\GUI\SkillOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\SceneProcess.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_CachLoad.cs" />
-     <Compile Include="Assets\UI\oldscripts\FloatOnHead.cs" />
+     <Compile Include="Assets\UI\Oldscripts\FloatOnHead.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TextWithIconSimpleText.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerText.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\PreparingProcess.cs" />
@@ -453,7 +453,7 @@
      <Compile Include="Assets\DynamicStarrySky\Demos\Space\Scripts\SpinPlanet.cs" />
      <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\TriggerConditions\BehaviorTriggerCondition.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_heavy.cs" />
-     <Compile Include="Assets\monsterbox\SSLevelUpManager\Execution.cs" />
+     <Compile Include="Assets\Monsterbox\SSLevelUpManager\Execution.cs" />
      <Compile Include="Assets\Camera\Modes\TouchTopDownCamera.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillShowPage.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem.cs" />
@@ -494,7 +494,7 @@
      <Compile Include="Assets\Resources\effectsresource\Effect3FromJapanNet\eff_magiccircle_sample\UvScroll.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
-     <Compile Include="Assets\UI\oldscripts\NetWork\fightingSceneNetworkManager.cs" />
+     <Compile Include="Assets\UI\Oldscripts\NetWork\fightingSceneNetworkManager.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\BaseStarDataRenderer.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\HoldKeyEvent.cs" />
@@ -547,7 +547,7 @@
      <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
      <Compile Include="Assets\Mail\MailManager.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\Health_BasicClasses.cs" />
-     <Compile Include="Assets\UI\oldscripts\PUNMenu.cs" />
+     <Compile Include="Assets\UI\Oldscripts\PUNMenu.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\PointerEnterEvents.cs" />
      <Compile Include="Assets\ResourceLoading\HurtObjectLoad\HurtObjectManager_Cach.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
@@ -571,7 +571,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Fix\LayoutGroupPositionFix.cs" />
      <Compile Include="Assets\AI\AI_states\states\Defend_State.cs" />
      <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
-     <Compile Include="Assets\theBlur\CircularBuffer.cs" />
+     <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalk.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\UIParticleRenderer.cs" />
@@ -596,9 +596,9 @@
      <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicLightFade.cs" />
      <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\CsvParser2.cs" />
-     <Compile Include="Assets\monsterbox\MonsterBox.cs" />
+     <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
      <Compile Include="Assets\UI\ExBarBurn.cs" />
-     <Compile Include="Assets\theBlur\Blur.cs" />
+     <Compile Include="Assets\TheBlur\Blur.cs" />
      <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Pixelate.cs" />
@@ -621,7 +621,7 @@
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
      <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkFollowCharacter.cs" />
-     <Compile Include="Assets\monsterbox\SkillStoneDetail.cs" />
+     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\FrontPage.cs" />
      <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\SkillEntity.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\BasicState.cs" />
@@ -638,7 +638,7 @@
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
      <Compile Include="Assets\AI\Soul\Sensor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\SliderGamepadManager.cs" />
-     <Compile Include="Assets\theBlur\Blur_basicdata.cs" />
+     <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
      <Compile Include="Assets\AI\buttons\ZokuseiStoneTagsGroup.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
      <Compile Include="Assets\UI\BackGroundPS.cs" />
@@ -648,6 +648,10 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Dev.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Gotcha.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\SkillEdit.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />
@@ -1468,22 +1472,28 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
  <Reference Include="POFX_Runtime">
- <HintPath>/Users/bo_dacheng/KojinTest/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>/Users/bo_dacheng/KojinTest/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Common">
+ <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -1831,144 +1841,144 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
  <Reference Include="Purchasing.Common">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Purchasing.Common.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Purchasing.Common.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Tilemap.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.SecurityStub">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Sprite.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-weaver.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Analytics">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Analytics.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.SecurityCore">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Runtime">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.Codeless">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.Stores">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Monetization">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements.Editor">
- <HintPath>/Users/bo_dacheng/KojinTest/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{5851e984-6dc2-21c7-2578-c58a46e4de54}</Project>
+      <Project>{05318875-1897-527d-49be-8f73049faddb}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{db9adb20-a2d7-4fa5-9f0a-182d7dba668c}</Project>
+      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
-      <Project>{5e124a87-13ab-486d-0e2c-9890f14df9bf}</Project>
+      <Project>{013bdff4-f5db-6280-902d-1d03b79d7515}</Project>
       <Name>PlayFabEditorExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFab.csproj">
-      <Project>{7dc9c5a4-8b79-c97a-7f6e-42e76ef9397a}</Project>
+      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
       <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{72d04214-04f3-644b-261b-524fa5cdd56b}</Project>
+      <Project>{3e044dcc-d241-df23-e1d3-661d83f799b1}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{27bc99a4-121e-f190-22e6-8c6af8b2e145}</Project>
+      <Project>{d43d52c5-06ee-9d6b-1c90-4bb9d85bdf21}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
-      <Project>{e362ffd9-49c7-1a05-aaaa-7a236c8b83a5}</Project>
+      <Project>{4694d9cf-5020-9416-fb2c-565ad4e01465}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{4fe9d12b-7010-161b-8d2b-96aefab73118}</Project>
+      <Project>{78d419d9-4997-0fe8-0a67-12c4b3915b3a}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{75b6fcf2-5067-4d01-88a4-bceeb4fc0e73}</Project>
+      <Project>{ab868ac3-38db-93ce-b53a-1ed2bfb72e67}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{d480403c-c831-6a70-da81-570650e614cf}</Project>
+      <Project>{5d9a38dd-bc27-7387-6530-d1a0d7a6951b}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
   </ItemGroup>

@@ -22,9 +22,9 @@ public class ArenaManager : MonoBehaviour
     {
         //PreScene.target.mainProcessRunner.RunAsQueued(target.LoadArena());
         CloudScript.GetLeaderboardAroundUser(
-            (List<LeaderboardInfo> obj) =>
+            (List<CloudScript.LeaderboardInfo> obj) =>
             {
-                List<LeaderboardInfo> exceptSelf = new List<LeaderboardInfo>();
+                List<CloudScript.LeaderboardInfo> exceptSelf = new List<CloudScript.LeaderboardInfo>();
                 for (int i = 0; i < obj.Count; i++)
                 {
                     if (obj[i].PlayerLeaderboardEntry.PlayFabId != Account._AccInfo.playerID)
@@ -43,7 +43,7 @@ public class ArenaManager : MonoBehaviour
     }
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
-    public void LoadArena(List<LeaderboardInfo> leaderboards)
+    public void LoadArena(List<CloudScript.LeaderboardInfo> leaderboards)
     {
         myTeam.ShowMyTeam();
         foreach (Transform c in EnemiesT)
