@@ -13,11 +13,10 @@ public class StoneMerge : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         yield return ModelShower.target.ShowMyModel(null);
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
+        PageTo.Go(MainSceneStep.StoneMerge);
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
         StoneMergeManger.target._Canvas.gameObject.SetActive(true);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target.CellsFeatureLoad(-1);
         SkillStonesBox.target.RestFilter();
         SkillStonesBox.target.EXTabsFeatureRefresh(false);
@@ -39,10 +38,8 @@ public class StoneMerge : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
         StoneMergeManger.target.ReturnAllMaterialsToBox();
         StoneMergeManger.target._Canvas.gameObject.SetActive(false);
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 }

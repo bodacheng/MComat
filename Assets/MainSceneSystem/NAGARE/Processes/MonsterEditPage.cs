@@ -27,8 +27,7 @@ public class MonsterEditPage : MainSceneProcess
         }
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.MemberDetail_edit);
         SkillStonesBox.target.CellsFeatureLoad(2);
         SkillEditButtonFeature(MemberDetail.target._focusing);
         SkillStonesBox.target._skillStoneDetail.Clear();
@@ -81,8 +80,6 @@ public class MonsterEditPage : MainSceneProcess
     {
         ItemsLoadFinished(0);
         missionWatcher.DisposeAll();
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
@@ -152,8 +149,7 @@ public class MonsterEditPage : MainSceneProcess
         loadFinished = false;
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);                
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(false);
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.MemberDetail_edit);
         SkillStonesBox.target.CellsFeatureLoad(3);
         SkillEditButtonFeature_SP(MemberDetail.target._focusing);
         

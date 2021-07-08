@@ -27,8 +27,7 @@ public class TeamEditPage : MainSceneProcess
     
     public void EnterProcess(string teammode)
     {
-        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PageTo.Go(MainSceneStep.TeamEditFront);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         PreScene.target.TeamEditor.INITeamPosButtons(teammode);

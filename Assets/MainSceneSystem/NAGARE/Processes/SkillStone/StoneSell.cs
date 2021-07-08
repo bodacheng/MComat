@@ -34,6 +34,5 @@ public class StoneSell : MainSceneProcess
     {
         StoneDeleteManger.target.ExitDeleteMode();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
     }
 }

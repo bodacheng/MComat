@@ -36,19 +36,11 @@ namespace mainMenu
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
-
-        [Space(7)]
-        [Header("CustomGUISkin")]
-        public GUISkin CustomGUISkin;
-
+        
         [Space(7)]
         [Header("自我战斗管理模块")]
         public SelfFightManager _SelfFightManager;
-
-        [Space(7)]
-        [Header("Canvas")]
-        public Canvas MainMenuCanvas;
-
+        
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform MainMenuBottonsT;
@@ -82,11 +74,7 @@ namespace mainMenu
         {
             LoadingCanvas.target.TurnOnProcessDescription(false);
             Application.targetFrameRate = 60;
-
-            _SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-            _SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
             MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
-            MainMenuCanvas.gameObject.SetActive(false);
             UpperInfoBar.target.T.gameObject.SetActive(false);
 
             #region 主界面各大画面

@@ -11,7 +11,6 @@ namespace mainMenu
         public SingleThreadProcesser mainProcessRunner;
         
         [Header("画面主模块parent")]
-        public RectTransform SkillBoxCanvas;
         public RectTransform BoxT, stonesTempContainer;
         
         [Space(7)]

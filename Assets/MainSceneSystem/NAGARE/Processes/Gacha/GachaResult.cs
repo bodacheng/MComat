@@ -8,8 +8,7 @@ public class GachaResult : MainSceneProcess
 {
     public IEnumerator EnterProcess()
     {
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
-        GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.GotchaResult);
         GachaManager.target.GotchaFrontT.gameObject.SetActive(false);
         GachaManager.target.GotchaResultT.gameObject.SetActive(true);
         CameraManager._camera.gameObject.SetActive(false);

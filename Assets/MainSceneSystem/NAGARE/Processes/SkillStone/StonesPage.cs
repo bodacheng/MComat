@@ -47,7 +47,6 @@ public class StonesPage : MainSceneProcess
         }
         SkillStonesBox.target.EXTabsFeatureRefresh(true);
         SkillStonesBox.target.RestFilter();
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(true);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
@@ -99,7 +98,6 @@ public class StonesPage : MainSceneProcess
 
         SkillStonesBox.target._skillStoneDetail.Clear();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
-        SkillStonesBox.target.SkillBoxCanvas.gameObject.SetActive(false);
 
         // 下面这句相当意义不明
         //SSLevelUpManager.target.CloseLevelUpPage();

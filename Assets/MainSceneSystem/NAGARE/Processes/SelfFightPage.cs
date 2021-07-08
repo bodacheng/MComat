@@ -5,9 +5,8 @@ public class SelfFightPage : MainSceneProcess
 {
     public void temp()
     {
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);       
-        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PageTo.Go(MainSceneStep.SelfFightFront);
+        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);

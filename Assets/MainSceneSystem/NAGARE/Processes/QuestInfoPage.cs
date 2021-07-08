@@ -11,8 +11,7 @@ public class QuestInfoPage : MainSceneProcess
     {
         loadFight = stage;
         yield return ModelShower.target.ShowMyModel(null);
-        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PageTo.Go(MainSceneStep.QuestInfo);
         FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
         GetReadyForQuestInfoPage();
     }

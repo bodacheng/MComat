@@ -19,7 +19,7 @@ public class GachaFront : MainSceneProcess
         }
         
         BackGroundPS.target.Off();
-        PreScene.target.MainMenuCanvas.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.GotchaFront);
         GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
         GachaManager.target.GotchaFrontT.gameObject.SetActive(true);
         GachaManager.target.GotchaResultT.gameObject.SetActive(false);

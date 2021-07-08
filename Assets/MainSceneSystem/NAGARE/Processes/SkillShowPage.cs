@@ -26,9 +26,7 @@ public class SkillShowPage : MainSceneProcess
             _CharConfig._zokusei
         );
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
-        
-        PreScene.target._SkillStonesBox_NineSlot.SkillBoxCanvas.gameObject.SetActive(false);
-        PreScene.target._SkillStonesBox_Show.SkillBoxCanvas.gameObject.SetActive(false);
+        PageTo.Go(MainSceneStep.MemberDetail_show);
         MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
