@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UniRx;
 
 namespace mainMenu
@@ -47,16 +46,12 @@ namespace mainMenu
             return ArcadeStages[stageno]?.stageButton;
         }
         
-        // 原则上这些玩意没有每次都去生成的道理..
-        // 而且这个功能可能做一些扩展，比如关卡图标可以搞个特殊一类的
-        // 2020523 : 计划根据账户进度选择是否显示隐藏关卡
         public void INIArcadeStageButtons()
         {
             List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
             foreach (Object _object in stageScriptableObjects)
             {
                 FightInfo one = (FightInfo)_object;
-                continue;//
                 one.eventType = FightEventType.Quest;
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
@@ -100,7 +95,6 @@ namespace mainMenu
                 {
                     Debug.Log("重复的Arcade模式关卡ID：" + one.LocalFightID);
                 }
-
             }
             StageCount = ArcadeStages.Count;
         }

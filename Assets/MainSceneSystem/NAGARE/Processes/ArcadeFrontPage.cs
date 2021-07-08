@@ -8,8 +8,15 @@ public class ArcadeFrontPage : MainSceneProcess
 {
     public bool loadFinished;
     
-    public IEnumerator EnterProcess()
+    public ArcadeFrontPage()
     {
+        Step = MainSceneStep.ArcadeFront;
+        EelementsInherit(PreScene.target);
+    }
+    
+    public override void ProcessEnter()
+    {
+        loadFinished = false;
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.5f, 0.1f);
         
         ArcadeManager.target.INIPagingSystem(2);
@@ -20,22 +27,9 @@ public class ArcadeFrontPage : MainSceneProcess
             ArcadeManager.target.IconButtonFeature(StageInfo.MemberIcons[0]);
         }else{
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");
-            yield return ModelShower.target.ShowMyModel(null);
         }
         PageTo.Go(MainSceneStep.ArcadeFront);
         loadFinished = true;
-    }
-    
-    public ArcadeFrontPage()
-    {
-        Step = MainSceneStep.ArcadeFront;
-        EelementsInherit(PreScene.target);
-    }
-    
-    public override void ProcessEnter()
-    {
-        loadFinished = false;
-        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()
