@@ -60,7 +60,6 @@ namespace mainMenu
             FightGlobalSetting.scenestep = 0;
 
             StartUp();
-
             BasicPhase();
             ToInitialPhase();
         }
@@ -74,9 +73,8 @@ namespace mainMenu
         {
             LoadingCanvas.target.TurnOnProcessDescription(false);
             Application.targetFrameRate = 60;
-            MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
             UpperInfoBar.target.T.gameObject.SetActive(false);
-
+            
             #region 主界面各大画面
             FrontPage frontPage = new FrontPage();
             TeamEditPage teamEditFront = new TeamEditPage();
@@ -113,8 +111,8 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Main.Add(MainSceneStep.MonsterList, memberDetail);
-            ProcessesRunner.Main.Add(MainSceneStep.MemberDetail_edit, memberDetail_edit);
-            ProcessesRunner.Main.Add(MainSceneStep.MemberDetail_show, memberDetail_Skillshow);
+            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetail_edit);
+            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_Skillshow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontProcess);
             ProcessesRunner.Main.Add(MainSceneStep.Arena, areanaProcess);
@@ -153,7 +151,7 @@ namespace mainMenu
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
                 charSwitcher.gameObject.SetActive(true);
-                trySwitchToStep(MainSceneStep.MemberDetail_edit, false);
+                trySwitchToStep(MainSceneStep.UnitSkillEdit, false);
             }
             else
             {

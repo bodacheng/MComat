@@ -5,12 +5,11 @@ public class SelfFightPage : MainSceneProcess
 {
     public void temp()
     {
-        PageTo.Go(MainSceneStep.SelfFightFront);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
-        _SelfFightManager.SelfFightCanvas.gameObject.SetActive(true);
         _SelfFightManager.SwitchToRotationMode();
+        PageTo.Go(MainSceneStep.SelfFightFront);
     }
     
     public SelfFightPage()
@@ -34,7 +33,6 @@ public class SelfFightPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        _SelfFightManager.SelfFightCanvas.gameObject.SetActive(false);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
     }
 }

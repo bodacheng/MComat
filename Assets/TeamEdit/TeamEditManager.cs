@@ -32,7 +32,7 @@ public class TeamEditManager : MonoBehaviour
         void SkillEdit()
         {
             if (MemberDetail.target._focusing.InstanceId != null)
-                PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+                PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
         }
         SkillEditButton.onClick.AddListener(SkillEdit);
     }

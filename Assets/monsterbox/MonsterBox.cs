@@ -1,21 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using dataAccess;
 using Api.Dto.Model;
-using Cysharp.Threading.Tasks;
 
 namespace mainMenu
 {
     public class MonsterBox : MonoBehaviour
     {
         public static MonsterBox target;
-
-        [Space(7)]
-        [Header("进程处理器")]
-        public SingleThreadProcesser ProcessRunner;
-
+        
         [Space(7)]
         [Header("monsterboxFilter")]
         public MonsterboxFilter _monsterboxFilter;

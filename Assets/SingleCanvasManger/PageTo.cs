@@ -14,7 +14,7 @@ public class PageTo : MonoBehaviour
         SK_Show,
         MonsterBox,
         UnitSkillEdit,
-        MemberDetail,
+        UnitSkillShow,
         Gotcha,
         StoneBoxExpansion,
         StoneMerge;
@@ -23,22 +23,25 @@ public class PageTo : MonoBehaviour
     
     void Awake()
     {
-        Dic.Add(MainSceneStep.FrontPage, Main);
-        Dic.Add(MainSceneStep.ArcadeFront, Arcade);
-        Dic.Add(MainSceneStep.Arena, Arena3V3);
-        Dic.Add(MainSceneStep.SelfFightFront, SelfFight);
-        Dic.Add(MainSceneStep.QuestInfo, QuestShow);
-        Dic.Add(MainSceneStep.TeamEditFront, TeamEdit);
-        Dic.Add(MainSceneStep.ShopTop, ShopTop);
-        Dic.Add(MainSceneStep.SkillStoneList, SK_Show);
-        Dic.Add(MainSceneStep.MonsterList, MonsterBox);
-        Dic.Add(MainSceneStep.MemberDetail_edit, UnitSkillEdit);
-        Dic.Add(MainSceneStep.MemberDetail_show, MemberDetail);
-        Dic.Add(MainSceneStep.GotchaFront, Gotcha);
-        Dic.Add(MainSceneStep.GotchaAnim, Gotcha);
-        Dic.Add(MainSceneStep.GotchaResult, Gotcha);
-        Dic.Add(MainSceneStep.BoxExpansion, StoneBoxExpansion);
-        Dic.Add(MainSceneStep.StoneMerge, StoneMerge);
+        Dic = new Dictionary<MainSceneStep, Canvas>
+        {
+            {MainSceneStep.FrontPage, Main},
+            {MainSceneStep.ArcadeFront, Arcade},
+            {MainSceneStep.Arena, Arena3V3},
+            {MainSceneStep.SelfFightFront, SelfFight},
+            {MainSceneStep.QuestInfo, QuestShow},
+            {MainSceneStep.TeamEditFront, TeamEdit},
+            {MainSceneStep.ShopTop, ShopTop},
+            {MainSceneStep.SkillStoneList, SK_Show},
+            {MainSceneStep.MonsterList, MonsterBox},
+            {MainSceneStep.UnitSkillEdit, UnitSkillEdit},
+            {MainSceneStep.UnitSkillShow, UnitSkillShow},
+            {MainSceneStep.GotchaFront, Gotcha},
+            {MainSceneStep.GotchaAnim, Gotcha},
+            {MainSceneStep.GotchaResult, Gotcha},
+            {MainSceneStep.BoxExpansion, StoneBoxExpansion},
+            {MainSceneStep.StoneMerge, StoneMerge}
+        };
     }
 
     public static void Go(MainSceneStep step)

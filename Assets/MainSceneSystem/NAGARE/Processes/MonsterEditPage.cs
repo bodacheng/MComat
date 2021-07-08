@@ -27,7 +27,7 @@ public class MonsterEditPage : MainSceneProcess
         }
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
-        PageTo.Go(MainSceneStep.MemberDetail_edit);
+        PageTo.Go(MainSceneStep.UnitSkillEdit);
         SkillStonesBox.target.CellsFeatureLoad(2);
         SkillEditButtonFeature(MemberDetail.target._focusing);
         SkillStonesBox.target._skillStoneDetail.Clear();
@@ -50,7 +50,7 @@ public class MonsterEditPage : MainSceneProcess
     
     public MonsterEditPage()
     {
-        Step = MainSceneStep.MemberDetail_edit;
+        Step = MainSceneStep.UnitSkillEdit;
         EelementsInherit(PreScene.target);
     }
     
@@ -149,7 +149,7 @@ public class MonsterEditPage : MainSceneProcess
         loadFinished = false;
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);                
         SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
-        PageTo.Go(MainSceneStep.MemberDetail_edit);
+        PageTo.Go(MainSceneStep.UnitSkillEdit);
         SkillStonesBox.target.CellsFeatureLoad(3);
         SkillEditButtonFeature_SP(MemberDetail.target._focusing);
         

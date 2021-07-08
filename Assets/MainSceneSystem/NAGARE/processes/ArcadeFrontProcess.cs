@@ -22,8 +22,7 @@ public class ArcadeFrontProcess : MainSceneProcess
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");
             yield return ModelShower.target.ShowMyModel(null);
         }
-        
-        ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.ArcadeFront);
         loadFinished = true;
     }
     
@@ -41,7 +40,6 @@ public class ArcadeFrontProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        ArcadeManager.target._ArcadeCanvas.gameObject.SetActive(false);
     }
     
     readonly Vector3 screenPos = new Vector3(0.3f, 0.23f, ModelShower._nearClipPlane);

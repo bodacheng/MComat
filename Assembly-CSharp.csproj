@@ -363,6 +363,7 @@
      <Compile Include="Assets\SkillStoneBox\SkillStonesBox.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerImage.cs" />
      <Compile Include="Assets\monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
+     <Compile Include="Assets\SingleCanvasManger\PageTo.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\ScrollForMore.cs" />
      <Compile Include="Assets\POS_Sys\E_Damage.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiBeamScript.cs" />
@@ -652,7 +653,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\SingleCanvasManger\PageTo.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

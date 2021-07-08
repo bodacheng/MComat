@@ -10,10 +10,6 @@ namespace mainMenu
     public class SelfFightManager : MonoBehaviour
     {
         [Space(7)]
-        [Header("SelfFightCanvas")]
-        public Canvas SelfFightCanvas;
-        
-        [Space(7)]
         [Header("基本UI元素")]
         public Button FightStartBUtton;
 

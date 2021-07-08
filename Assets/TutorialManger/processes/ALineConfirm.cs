@@ -16,7 +16,7 @@ public class ALineConfirm : TutorialProcess
     {
         return 
         (
-            MainSceneLogger.Logs[MainSceneLogger.Logs.Count - 1].step == MainSceneStep.MemberDetail_edit 
+            MainSceneLogger.Logs[MainSceneLogger.Logs.Count - 1].step == MainSceneStep.UnitSkillEdit 
             &&
             MainSceneLogger.Logs[MainSceneLogger.Logs.Count - 1].description == "success"
         );

@@ -13,7 +13,7 @@ public class SkillEditA1Try : TutorialProcess
     public override void ProcessEnter()
     {
         waitCompleted = false;
-        memberDetail_Edit = (MonsterEditPage)ProcessesRunner.Main.GetProcess(MainSceneStep.MemberDetail_edit);
+        memberDetail_Edit = (MonsterEditPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitSkillEdit);
     }
     
     public override void ProcessEnd()

@@ -9,7 +9,6 @@ namespace mainMenu
 {
     public partial class ArcadeManager : MonoBehaviour
     {
-        public Canvas _ArcadeCanvas;
         public RectTransform ButtonsContainer;
         
         [Space(7)]

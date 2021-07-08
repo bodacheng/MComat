@@ -20,7 +20,6 @@ namespace mainMenu
         public RectTransform attacksT;
         public RectTransform fire1T;
         public RectTransform fire2T;
-        public RectTransform SkillShowT;
 
         [Space(11)]
         [Header("Runner")]
@@ -148,7 +147,7 @@ namespace mainMenu
             GameObject particle = Instantiate(skillflowparticle);
             floatingMarks.Add(particle);
             particle.SetActive(true);
-            particle.transform.SetParent(SkillShowT);
+            particle.transform.SetParent(startT);
             particle.transform.position = startT.position;
             particle.transform.localScale = Vector3.one;
             particle.transform.DOMove(endT.position,1f).OnComplete(DestroyFloatingMarks);

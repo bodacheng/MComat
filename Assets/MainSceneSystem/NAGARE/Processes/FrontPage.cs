@@ -58,7 +58,6 @@ public class FrontPage : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
 
         string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
         if (focusLocalid == null)

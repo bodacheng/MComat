@@ -24,6 +24,12 @@ namespace Soul
             physicMissionDisposable = new SingleAssignmentDisposable();
             physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
+                    if (gameObject == null)
+                    {
+                        physicMissionDisposable.Dispose();
+                        return;
+                    }
+                    
                     if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
                     {
                         tween.Kill(false);

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using mainMenu;
 using Api.Dto.Model;
 
@@ -7,11 +6,11 @@ public class SkillShowPage : MainSceneProcess
 {
     public SkillShowPage()
     {
-        Step = MainSceneStep.MemberDetail_show;
+        Step = MainSceneStep.UnitSkillShow;
         EelementsInherit(PreScene.target);
     }
     
-    public IEnumerator EnterProcess()
+    public override void ProcessEnter()
     {
         CharDataInfo _CharDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(MemberDetail.target._focusing);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( _CharDataInfo);
@@ -26,24 +25,13 @@ public class SkillShowPage : MainSceneProcess
             _CharConfig._zokusei
         );
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
-        PageTo.Go(MainSceneStep.MemberDetail_show);
-        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.UnitSkillShow);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
-        MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(true);
-        //this._CameraManager.Assign_LerpToCertainPlaceCamera(this._MemberDetail.MemDetailWatchPos.position, this._MemberDetail.MemDetailWatchPos.rotation);
-        yield return null;
-    }
-       
-    public override void ProcessEnter()
-    {
-        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()
     {
         MemberDetail.target._SkillsPrintOut.ClearRenderPs();
-        MemberDetail.target.MemberDetailCanvas.gameObject.SetActive(false);
-        MemberDetail.target._SkillsPrintOut.SkillShowT.gameObject.SetActive(false);
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);

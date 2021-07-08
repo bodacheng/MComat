@@ -16,7 +16,6 @@ namespace mainMenu
         
         [Space(11)]
         [Header("角色明细T，技能显示T")]
-        public RectTransform MemberDetailCanvas;
         public RectTransform MemberInfoT;
                 
         [Space(7)]
@@ -122,7 +121,7 @@ namespace mainMenu
             void SkillShow()
             {
                 if (target._focusing.InstanceId != null)
-                    PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_show, true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillShow, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
             SkillShowButton.onClick.AddListener(SkillShow);
@@ -132,7 +131,7 @@ namespace mainMenu
             void SkillEdit()
             {
                 if (target._focusing.InstanceId != null)
-                    PreScene.target.trySwitchToStep(MainSceneStep.MemberDetail_edit, true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
 
