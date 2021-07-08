@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using mainMenu;
-using Cysharp.Threading.Tasks;
 using dataAccess;
 using System.Collections.Generic;
 using UniRx;
@@ -20,16 +19,15 @@ public class MonsterListPage : MainSceneProcess
         Step = MainSceneStep.MonsterList;
         EelementsInherit(PreScene.target);
     }
-
-    public async UniTask Enter()
+    
+    void Enter()
     {
         PageTo.Go(MainSceneStep.MonsterList);
-        MonsterBox.target.canvas.gameObject.SetActive(true);
+        MonsterBox.target.Open(true);
         MonsterBox.DisplayMonsterIcons(true);
         MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
         loadFinished = true;
     }
@@ -47,12 +45,12 @@ public class MonsterListPage : MainSceneProcess
                 MyMonsters.LoadTutorial();
                 break;
         }
-
+        
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 itemsLoadFinished
             },
-            Enter(),
+            Enter,
             () => { Debug.Log("错误，怎么办？"); }
         );
     }
@@ -63,7 +61,7 @@ public class MonsterListPage : MainSceneProcess
         ItemsLoadFinished(0);
         MemberDetail.target.ClearHeroIconsFeatures();
         MemberDetail.target.MemberInfoT.gameObject.SetActive(false);
-        MonsterBox.target.canvas.gameObject.SetActive(false);
+        MonsterBox.target.Open(false);
     }
     
     readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);

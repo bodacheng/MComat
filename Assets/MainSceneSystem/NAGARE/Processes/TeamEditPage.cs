@@ -35,7 +35,7 @@ public class TeamEditPage : MainSceneProcess
         MonsterBox.DisplayMonsterIcons(true);
         PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         PageTo.Go(MainSceneStep.TeamEditFront);
-        MonsterBox.target.canvas.gameObject.SetActive(true);
+        MonsterBox.target.Open(true);
     }
     
     public override void ProcessEnter<T>(T mode)
@@ -46,7 +46,7 @@ public class TeamEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        MonsterBox.target.canvas.gameObject.SetActive(false);
+        MonsterBox.target.Open(false);
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {

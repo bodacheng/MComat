@@ -11,7 +11,8 @@ namespace mainMenu
         public static MonsterBox target;
         
         [Header("Canvas")] 
-        public Canvas canvas;
+        [SerializeField]
+        Canvas canvas;
         
         [Space(7)]
         [Header("monsterboxFilter")]
@@ -42,6 +43,11 @@ namespace mainMenu
         {
             noMagic.gameObject.SetActive(false);
             target = this; //放在start是确保每次进入菜单场景都运行
+        }
+
+        public void Open(bool on)
+        {
+            canvas.gameObject.SetActive(on);
         }
         
         public static HeroIcon GetCharIcon(string monsterofplayid)

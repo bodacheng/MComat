@@ -10,7 +10,7 @@ public class SelfFightPage : MainSceneProcess
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _SelfFightManager.SwitchToRotationMode();
         PageTo.Go(MainSceneStep.SelfFightFront);
-        MonsterBox.target.canvas.gameObject.SetActive(true);
+        MonsterBox.target.Open(true);
     }
     
     public SelfFightPage()
@@ -34,6 +34,6 @@ public class SelfFightPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        MonsterBox.target.canvas.gameObject.SetActive(false);
+        MonsterBox.target.Open(false);
     }
 }
