@@ -7,7 +7,6 @@ using UniRx;
 public class TeamEditPage : MainSceneProcess
 {
     string teamMode;
-
     ReactiveProperty<int> teamSavedFinished = new ReactiveProperty<int>(0);
     void TeamSaveFinished(int value)
     {
@@ -27,7 +26,6 @@ public class TeamEditPage : MainSceneProcess
     
     public void EnterProcess(string teammode)
     {
-        PageTo.Go(MainSceneStep.TeamEditFront);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         PreScene.target.TeamEditor.INITeamPosButtons(teammode);
@@ -36,6 +34,8 @@ public class TeamEditPage : MainSceneProcess
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
         MonsterBox.DisplayMonsterIcons(true);
         PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        PageTo.Go(MainSceneStep.TeamEditFront);
+        MonsterBox.target.canvas.gameObject.SetActive(true);
     }
     
     public override void ProcessEnter<T>(T mode)
@@ -46,6 +46,7 @@ public class TeamEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        MonsterBox.target.canvas.gameObject.SetActive(false);
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {

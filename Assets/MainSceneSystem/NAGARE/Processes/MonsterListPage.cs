@@ -24,6 +24,7 @@ public class MonsterListPage : MainSceneProcess
     public async UniTask Enter()
     {
         PageTo.Go(MainSceneStep.MonsterList);
+        MonsterBox.target.canvas.gameObject.SetActive(true);
         MonsterBox.DisplayMonsterIcons(true);
         MemberDetail.target.AddHeroIconFeaturesToMonsterBox();// 该处理紧随MonsterBox.DisplayMonsterIcons之后
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -62,7 +63,7 @@ public class MonsterListPage : MainSceneProcess
         ItemsLoadFinished(0);
         MemberDetail.target.ClearHeroIconsFeatures();
         MemberDetail.target.MemberInfoT.gameObject.SetActive(false);
-        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+        MonsterBox.target.canvas.gameObject.SetActive(false);
     }
     
     readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);

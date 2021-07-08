@@ -10,6 +10,9 @@ namespace mainMenu
     {
         public static MonsterBox target;
         
+        [Header("Canvas")] 
+        public Canvas canvas;
+        
         [Space(7)]
         [Header("monsterboxFilter")]
         public MonsterboxFilter _monsterboxFilter;
