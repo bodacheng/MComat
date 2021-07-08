@@ -1,13 +1,14 @@
 ﻿using mainMenu;
 
-public class ArenaProcess : MainSceneProcess
+public class ArenaPage : MainSceneProcess
 {
-    public void EnterProcess()
+    void EnterProcess()
     {
+        PageTo.Go(MainSceneStep.Arena);
         ArenaManager.target.RefreshOpponent();
     }
     
-    public ArenaProcess()
+    public ArenaPage()
     {
         Step = MainSceneStep.Arena;
         EelementsInherit(PreScene.target);
@@ -20,6 +21,5 @@ public class ArenaProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        ArenaManager.target.ArenaCanvas.gameObject.SetActive(false);
     }
 }

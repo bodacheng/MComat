@@ -4,7 +4,7 @@
 public class GoToStageOne : TutorialProcess
 {
     bool missionCompleted;
-    ArcadeFrontProcess ArcadeFrontProcess;
+    ArcadeFrontPage _arcadeFrontPage;
     
     public GoToStageOne()
     {
@@ -14,7 +14,7 @@ public class GoToStageOne : TutorialProcess
     public override void ProcessEnter()
     {
         missionCompleted = false;
-        ArcadeFrontProcess = (ArcadeFrontProcess)ProcessesRunner.Main.GetProcess(MainSceneStep.ArcadeFront);
+        _arcadeFrontPage = (ArcadeFrontPage)ProcessesRunner.Main.GetProcess(MainSceneStep.ArcadeFront);
     }
     
     public override void ProcessEnd()
@@ -31,7 +31,7 @@ public class GoToStageOne : TutorialProcess
     {
         if (!missionCompleted)
         {
-            if (ArcadeFrontProcess.loadFinished)
+            if (_arcadeFrontPage.loadFinished)
             {
                 LoadingCanvas.target.HigtLightRect(ArcadeManager.target.GetStageButton(1).button.transform);
                 missionCompleted = true;

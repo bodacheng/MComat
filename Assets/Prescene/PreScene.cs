@@ -86,7 +86,7 @@ namespace mainMenu
             MonsterListPage memberDetail = new MonsterListPage();
             MonsterEditPage memberDetail_edit = new MonsterEditPage();
             SkillShowPage memberDetail_Skillshow = new SkillShowPage();
-            ArcadeFrontProcess arcadeFrontProcess = new ArcadeFrontProcess();
+            ArcadeFrontPage arcadeFrontPage = new ArcadeFrontPage();
 
             // Shop
             ShopTop shopTop = new ShopTop();
@@ -97,7 +97,7 @@ namespace mainMenu
             GachaFront gachaFront = new GachaFront();
             GachaAnim gotchaAnim = new GachaAnim();
             GachaResult gachaResult = new GachaResult();
-            ArenaProcess areanaProcess = new ArenaProcess();
+            ArenaPage areanaPage = new ArenaPage();
 
             // mail
             MailBoxProcess mailBox = new MailBoxProcess();
@@ -114,8 +114,8 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetail_edit);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_Skillshow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
-            ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontProcess);
-            ProcessesRunner.Main.Add(MainSceneStep.Arena, areanaProcess);
+            ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontPage);
+            ProcessesRunner.Main.Add(MainSceneStep.Arena, areanaPage);
             ProcessesRunner.Main.Add(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.Add(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
             ProcessesRunner.Main.Add(MainSceneStep.BoxExpansion, stoneBoxExpansion);

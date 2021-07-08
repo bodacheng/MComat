@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using dataAccess;
 
-public class ArcadeFrontProcess : MainSceneProcess
+public class ArcadeFrontPage : MainSceneProcess
 {
     public bool loadFinished;
     
@@ -26,7 +26,7 @@ public class ArcadeFrontProcess : MainSceneProcess
         loadFinished = true;
     }
     
-    public ArcadeFrontProcess()
+    public ArcadeFrontPage()
     {
         Step = MainSceneStep.ArcadeFront;
         EelementsInherit(PreScene.target);

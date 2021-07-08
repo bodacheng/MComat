@@ -11,7 +11,7 @@ public class BoxOverLoadFix : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        BoxOverLoadFixManager.target.T.gameObject.SetActive(true);
+        PageTo.Go(MainSceneStep.BoxOverLoadHelper);
         BoxOverLoadFixManager.target.ArrangeButtonsFeature();
     }
     

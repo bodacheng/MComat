@@ -244,7 +244,7 @@
      <Compile Include="Assets\AI\AI_states\states\G_M_Attack_State.cs" />
      <Compile Include="Assets\DataBaseAccess\StoneExpManager.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaProcess.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaPage.cs" />
      <Compile Include="Assets\Mail\MailModel.cs" />
      <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystickScreenSizeUpdater.cs" />
      <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\Util.cs" />
@@ -615,7 +615,7 @@
      <Compile Include="Assets\BOWeaponSystem\Health System\BO_Limb.cs" />
      <Compile Include="Assets\StagesManagement\ArcadeManager\Pages_Mugen.cs" />
      <Compile Include="Assets\DataBaseAccess\MySkillStonesReader\ShowAllMyStoneLevel.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontProcess.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArcadeFrontPage.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Gotcha.cs" />
      <Compile Include="Assets\Language\LanguageCodeTable.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiFireProjectile.cs" />

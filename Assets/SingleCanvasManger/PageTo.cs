@@ -16,6 +16,7 @@ public class PageTo : MonoBehaviour
         UnitSkillEdit,
         UnitSkillShow,
         Gotcha,
+        BoxExceedFixer,
         StoneBoxExpansion,
         StoneMerge;
 
@@ -39,6 +40,7 @@ public class PageTo : MonoBehaviour
             {MainSceneStep.GotchaFront, Gotcha},
             {MainSceneStep.GotchaAnim, Gotcha},
             {MainSceneStep.GotchaResult, Gotcha},
+            {MainSceneStep.BoxOverLoadHelper, BoxExceedFixer},
             {MainSceneStep.BoxExpansion, StoneBoxExpansion},
             {MainSceneStep.StoneMerge, StoneMerge}
         };
