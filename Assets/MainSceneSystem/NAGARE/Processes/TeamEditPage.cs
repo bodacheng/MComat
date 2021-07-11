@@ -63,7 +63,7 @@ public class TeamEditPage : MainSceneProcess
                         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
                         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
                     },
-                    () => { PreScene.ReturnToLobby("返回大厅？"); }
+                    () => { PreScene.ReturnToLobby("返回大厅."); }
                 );
                 break;
             case "arcade":
