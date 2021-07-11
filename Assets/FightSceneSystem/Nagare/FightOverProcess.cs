@@ -34,26 +34,13 @@ namespace FightScene
             switch (NetFightScene.Fight.GetEventType())
             {
                 case FightEventType.Arena:
-                    //RequestRewardForm form1 = new RequestRewardForm
-                    //{
-                    //    userId = AccountSet._AccInfo.playerID,
-                    //    fightEventType = FightEventType.Arena,
-                    //    eventNum = 0 // 对手的id
-                    //};
-                    //IEnumerator requestReward1 = RewardManager.RequestRewardsExaution(
-                    //    form1,
-                    //    model => {
-                    //        int diamond = model.Diamond;
-                    //        int gold = model.Gold;
-                    //        FightOverControl.target.ShowRewards(gold, diamond);
-                    //    },
-                    //    model => {
-                    //        // 再次请求报酬？？
-                    //    },
-                    //    Setting.Language
-                    //);
-                    //yield return requestReward1;
-                    // 玩家rank远程已经进行了加分处理，这时候只需要以玩家id为key检索一下，本地刷新就可以
+                    if (FightLogger.target.GetWinner() == Team.player1)
+                    {
+                        CloudScript.ArenaPointUpBy1(
+                        () => {Debug.Log("胜利加分");},
+                            () => {Debug.Log("没能加分成功");}
+                        );
+                    }
                     FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:

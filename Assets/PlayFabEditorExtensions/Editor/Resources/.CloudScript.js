@@ -232,8 +232,7 @@ handlers.TestUpdateArenaPoint = function (args, context) {
 // 竞技场分数+1
 handlers.arenaPointUpBy1 = function (args, context) {
     var getRequest = {
-        PlayFabId: currentPlayerId,
-        StatisticNames = ["arenapoint"]
+        PlayFabId: currentPlayerId
     };
     var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
     var point = { StatisticName: "arenapoint", Value: 1 };

@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using mainMenu;
-using LitJson;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using System;
 
 namespace dataAccess
@@ -54,7 +51,7 @@ namespace dataAccess
                 }
             );
         }
-
+        
         static void GetStatisticsRemote(Action<int> finished)
         {
             PlayFabClientAPI.GetPlayerStatistics(

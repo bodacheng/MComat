@@ -1,4 +1,5 @@
 ﻿using mainMenu;
+using UnityEngine;
 
 public class ArenaPage : MainSceneProcess
 {

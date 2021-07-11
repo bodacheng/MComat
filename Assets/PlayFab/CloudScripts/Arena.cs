@@ -77,6 +77,29 @@ public partial class CloudScript
         });
     }
     
+    public static void ArenaPointUpBy1(Action success, Action fail)
+    {
+        PlayFabClientAPI.ExecuteCloudScript(
+            new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "arenaPointUpBy1",
+                GeneratePlayStreamEvent = true
+            },
+            (ExecuteCloudScriptResult result) => {
+                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                object playerStatResult;
+                jsonResult.TryGetValue("playerStatResult",
+                    out playerStatResult); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                string json = JsonConvert.SerializeObject(playerStatResult);
+                Debug.Log(json);
+                success.Invoke();
+            },
+            error => {
+                Debug.Log(error.Error);
+                fail.Invoke();
+            });
+    }
+    
     public class LeaderboardInfo
     {
         public PlayerLeaderboardEntry PlayerLeaderboardEntry;
