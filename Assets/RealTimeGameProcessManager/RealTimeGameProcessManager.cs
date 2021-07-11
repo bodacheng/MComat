@@ -160,7 +160,7 @@ namespace FightScene
             yield return FightTeam1.Instantiate(stage.fightMembers.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
             yield return FightTeam2.Instantiate(stage.fightMembers.EnemySets, stage.Team2HpRate ,stage.team2CGMode);
             
-            if (stage.eventType == FightEventType.Screensaver)
+            if (stage.GetEventType() == FightEventType.Screensaver)
             {
                 FightTeam1.TurnAllMembersInvincible(true);
                 FightTeam2.TurnAllMembersInvincible(true);

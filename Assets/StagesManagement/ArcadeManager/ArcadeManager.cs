@@ -52,7 +52,7 @@ namespace mainMenu
             foreach (Object _object in stageScriptableObjects)
             {
                 FightInfo one = (FightInfo)_object;
-                one.eventType = FightEventType.Quest;
+                one.SetEventType(FightEventType.Quest);
                 if (!ArcadeStages.ContainsKey(one.LocalFightID))
                 {
                     one.LoadLocalFightFromScript();

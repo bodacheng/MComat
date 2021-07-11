@@ -6,8 +6,18 @@ using dataAccess;
 
 public class FightInfo : ScriptableObject
 {
-    public FightEventType eventType;
-    
+    FightEventType eventType;
+
+    public FightEventType GetEventType()
+    {
+        return eventType;
+    }
+
+    public void SetEventType(FightEventType eventType)
+    {
+        this.eventType = eventType;
+    }
+
     [SerializeField]
     public int LocalFightID;
     [SerializeField]

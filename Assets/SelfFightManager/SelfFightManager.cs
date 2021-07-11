@@ -86,7 +86,7 @@ namespace mainMenu
             RFrame.gameObject.SetActive(false);
             MFrame.gameObject.SetActive(true);
             TFrame.gameObject.SetActive(false);
-            stage.eventType = FightEventType.Self;
+            stage.SetEventType(FightEventType.Self);
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
         }
@@ -100,7 +100,7 @@ namespace mainMenu
             RFrame.gameObject.SetActive(true);
             MFrame.gameObject.SetActive(false);
             TFrame.gameObject.SetActive(false);
-            stage.eventType = FightEventType.Self;
+            stage.SetEventType(FightEventType.Self);
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
         }
@@ -114,7 +114,7 @@ namespace mainMenu
             RFrame.gameObject.SetActive(false);
             MFrame.gameObject.SetActive(false);
             TFrame.gameObject.SetActive(true);
-            stage.eventType = FightEventType.Test;
+            stage.SetEventType(FightEventType.Test);
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
         }
