@@ -1,30 +1,25 @@
-﻿using System.Collections;
-using Api.Dto.Model;
-using dataAccess;
-using Api.Dto.Form;
-using Api.Common;
-using mainMenu;
+﻿using System;
+using FightScene;
+using UnityEngine;
 
 public static class RewardManager
 {
-    public static void RequestRewardsExaution(SuccessDelegate<GetRewardModel> success, FailDelegate<GetRewardModel> fail, ApiLanguage apiLanguage)
+    public static void RequestRewards(Action success, Action fail)
     {
-        switch (Account.ReferenceMode)
+        switch (NetFightScene.Fight.GetEventType())
         {
-            case PlayerInfoRefMode.localTestSaveData:
+            case FightEventType.Arena:
+                CloudScript.ArenaPointUpBy1(
+                    () => {Debug.Log("胜利加分");},
+                    () => {Debug.Log("没能加分成功");}
+                );
                 break;
-            case PlayerInfoRefMode.formalVersion:
+            case FightEventType.Quest:
                 break;
-            case PlayerInfoRefMode.remoteTestPlayer:
+            case FightEventType.Self:
+                break;
+            case FightEventType.SkillTest:
                 break;
         }
-    }
-        
-    public static void ExpUpForStones_Local(string StoneOfPlayerID, int addExp)
-    {
-        StoneOfPlayerInfo stoneOfPlayer =  Stones.Get(StoneOfPlayerID);
-        int formerExp = stoneOfPlayer.EXP;
-        stoneOfPlayer.EXP = formerExp + addExp;
-        //yield return MySkillStones.Update(StoneOfPlayerID);
     }
 }

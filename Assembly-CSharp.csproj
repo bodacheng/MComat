@@ -512,7 +512,6 @@
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\CsvParser.cs" />
      <Compile Include="Assets\TutorialManger\processes\ReturnOne.cs" />
-     <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetRewardModel.cs" />
      <Compile Include="Assets\DataBaseAccess\API\Dto\Model\SkillStoneLevelUpModel.cs" />
      <Compile Include="Assets\DataBaseAccess\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkArea.cs" />
