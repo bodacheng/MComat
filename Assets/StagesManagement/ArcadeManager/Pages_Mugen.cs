@@ -1,47 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using UniRx;
 
 namespace mainMenu
 {
     public partial class ArcadeManager : MonoBehaviour
     {
-        void MugenPageFeature()
+        void NormalAlignment()
         {
-            autoCommand = new SingleAssignmentDisposable
+            if (!JumpToNewStage.gameObject.activeSelf)
             {
-                Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                    {
-                        if (FightGlobalSetting.scenestep != 0 || JumpToNewStage.IsDestroyed() || JumpToNewStage == null || JumpToNewStage.gameObject == null)
-                        {
-                            autoCommand.Dispose();
-                            return;
-                        }
-                        if (!JumpToNewStage.gameObject.activeSelf)
-                        {
-                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.1f)
-                            {
-                                JumpToNewStage.gameObject.SetActive(true);
-                            }
-                        }
-                        else
-                        {
-                            if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) <= 0.1f)
-                            {
-                                JumpToNewStage.gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                )
-            };
-            void temp()
-            {
-                JumpTo(CurrentTargetScrollbarValue());
+                if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) > 0.1f)
+                {
+                    JumpToNewStage.gameObject.SetActive(true);
+                }
             }
-            JumpToNewStage.onClick.RemoveAllListeners();
-            JumpToNewStage.onClick.AddListener(temp);
-            temp();
+            else
+            {
+                if (Mathf.Abs(CurrentTargetScrollbarValue() - _Scrollbar.value) <= 0.1f)
+                {
+                    JumpToNewStage.gameObject.SetActive(false);
+                }
+            }
         }
         
         float CurrentTargetScrollbarValue()

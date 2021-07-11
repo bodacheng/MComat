@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using dataAccess;
-using UniRx;
 
 namespace mainMenu
 {
@@ -12,48 +11,28 @@ namespace mainMenu
             JumpTo(PageV(_Scrollbar.value, StageCount));
         }
         
-        void OneChapterFiveLevel()
+        void FiveSetAlignment()
         {
-            autoCommand = new SingleAssignmentDisposable
-            {
-                Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                    {
-                        if (FightGlobalSetting.scenestep != 0 || JumpToNewStage.IsDestroyed() || JumpToNewStage == null || JumpToNewStage.gameObject == null)
-                        {
-                            autoCommand.Dispose();
-                            return;
-                        }
-                        
-                        // 不可拖向太超前的关卡
-                        if (_Scrollbar.value > PageD(Account._AccInfo.ArcadeProcess, StageCount) + (float) 0.5 / StageCount)
-                        {
-                            JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
-                        }
-                        
-                        if (!JumpToNewStage.gameObject.activeSelf)
-                        {
-                            if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)
-                            {
-                                JumpToNewStage.gameObject.SetActive(true);
-                            }
-                        }
-                        else
-                        {
-                            if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) <= 0.2f)
-                            {
-                                JumpToNewStage.gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                )
-            };
-            void temp()
+            // 不可拖向太超前的关卡
+            if (_Scrollbar.value > PageD(Account._AccInfo.ArcadeProcess, StageCount) + (float) 0.5 / StageCount)
             {
                 JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
             }
-            JumpToNewStage.onClick.RemoveAllListeners();
-            JumpToNewStage.onClick.AddListener(temp);
-            temp();
+                        
+            if (!JumpToNewStage.gameObject.activeSelf)
+            {
+                if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)
+                {
+                    JumpToNewStage.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) <= 0.2f)
+                {
+                    JumpToNewStage.gameObject.SetActive(false);
+                }
+            }
         }
         
         // 给关卡号返回应该的scrollbar值。

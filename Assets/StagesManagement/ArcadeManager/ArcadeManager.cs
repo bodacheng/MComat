@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
 
 namespace mainMenu
 {
@@ -32,7 +31,6 @@ namespace mainMenu
         
         public static ArcadeManager target;        
         public static IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
-        SingleAssignmentDisposable autoCommand;
 
         int StageCount;
         

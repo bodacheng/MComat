@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using dataAccess;
+using System;
 
 namespace mainMenu
 {
     public partial class ArcadeManager : MonoBehaviour
     {
+        private Action EndDragExtra;
+        
         // 分页排版
         // mode 1: 无限模式 2. 5个关卡算一个章节模式
         public void INIPagingSystem(int mode)
@@ -23,23 +26,35 @@ namespace mainMenu
                 ArcadeStages[i].stageButton.gameObject.transform.SetParent(ButtonsContainer);
                 ArcadeStages[i].stageButton.gameObject.transform.localScale = Vector3.one;
             }
-            VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
-            ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (pretab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * ArcadeStages.Count);
+            VerticalLayoutGroup vGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
+            ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (pretab.button.GetComponent<RectTransform>().rect.height + vGroup.spacing) * ArcadeStages.Count);
             
+            JumpToNewStage.onClick.RemoveAllListeners();
+            Action JumpToButtonFeature = () => {};
             if (mode == 1)
             {
-                MugenPageFeature();
+                JumpToButtonFeature = () =>
+                {
+                    JumpTo(CurrentTargetScrollbarValue());
+                };
+                EndDragExtra = NormalAlignment;
             }
             if (mode == 2)
             {
-                OneChapterFiveLevel();
+                JumpToButtonFeature = () =>
+                {
+                    JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
+                };
+                EndDragExtra = FiveSetAlignment;
             }
+            JumpToNewStage.onClick.AddListener(JumpToButtonFeature.Invoke);
             RefreshRender();
         }
         
         public void JumpTo(float target)
         {
-            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value= x, target, 0.5f);
+            DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value = x, target, 0.5f).
+                OnComplete((() => {EndDragExtra.Invoke();}));
         }
         
         void RefreshRender()

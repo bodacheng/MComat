@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: 
-  eventType: 0
-  LocalFightID: 1
+  LocalFightID: 3
   BattleGroundID: 0
   battleNameENG: 
   battleNameJPG: 

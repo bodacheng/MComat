@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using mainMenu;
+﻿using mainMenu;
 using UnityEngine;
 using DG.Tweening;
 using dataAccess;
