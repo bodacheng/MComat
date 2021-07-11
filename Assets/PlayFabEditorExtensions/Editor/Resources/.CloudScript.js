@@ -212,7 +212,6 @@ handlers.ArenaDefendTeamSave = function (args, context) {
         success: true,
         messageValue: members
     };
-
 }
 
 handlers.TestUpdateArenaPoint = function (args, context) {
@@ -228,6 +227,36 @@ handlers.TestUpdateArenaPoint = function (args, context) {
     // authenticated as your title and handles all communication with 
     // the PlayFab API, so you don't have to write extra code to issue HTTP requests. 
     var playerStatResult = server.UpdatePlayerStatistics(request);
+};
+
+// 竞技场分数+1
+handlers.arenaPointUpBy1 = function (args, context) {
+    var getRequest = {
+        PlayFabId: currentPlayerId,
+        StatisticNames = ["arenapoint"]
+    };
+    var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
+    var point = { StatisticName: "arenapoint", Value: 1 };
+    for (i = 0; i < playerStats.length; ++i) {
+        if (playerStats[i].StatisticName === "arenapoint") {
+            point.Value = playerStats[i].Value + 1;
+        }
+    }
+    
+    var request = {
+        PlayFabId: currentPlayerId,
+        Statistics: [{
+            StatisticName: "arenapoint",
+            Value: 2
+        }]
+    };
+    
+    var playerStatResult = server.UpdatePlayerStatistics({
+        PlayFabId: currentPlayerId,
+        Statistics: [point]
+    });
+
+    return { playerStatResult };
 };
 
 handlers.GetLeaderboardAroundUser = function (args, context) {

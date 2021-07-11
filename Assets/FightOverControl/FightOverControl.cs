@@ -72,7 +72,7 @@ namespace FightScene
         
         // 战斗结束后统计技能石升级情况时的画面显示
         List<NineForShow> NineForShows = new List<NineForShow>();
-        public IEnumerator ShowSKillSets(FightTeam fightTeam)
+        public void ShowSKillSets(FightTeam fightTeam)
         {
             NineForShows.Clear();
             foreach (Transform child in IconAndSKillShowUISetT) 
@@ -92,7 +92,6 @@ namespace FightScene
                 iconAndSKillShowUISet.transform.localScale = Vector3.one;
                 nineForShow.ShowStones_Acc(keyValuePair.Value.id);
             }
-            yield break;
         }
         
         // 胜利字幕与对应页面加载

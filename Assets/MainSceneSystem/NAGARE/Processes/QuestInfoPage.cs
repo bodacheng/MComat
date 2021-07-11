@@ -1,16 +1,14 @@
-﻿using System.Collections;
+﻿using dataAccess;
 using mainMenu;
-using UnityEngine;
 
 public class QuestInfoPage : MainSceneProcess
 {
     FightInfo loadFight;
 
     // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
-    public IEnumerator EnterProcess(FightInfo stage)
+    public void EnterProcess(FightInfo stage)
     {
         loadFight = stage;
-        yield return ModelShower.target.ShowMyModel(null);
         PageTo.Go(MainSceneStep.QuestInfo);
         GetReadyForQuestInfoPage();
     }
@@ -23,7 +21,7 @@ public class QuestInfoPage : MainSceneProcess
     
     public override void ProcessEnter<T>(T t)
     {
-        mainProcessRunner.RunAsQueued(EnterProcess(t as FightInfo));
+        EnterProcess(t as FightInfo);
     }
     
     public override void ProcessEnd()
@@ -37,6 +35,7 @@ public class QuestInfoPage : MainSceneProcess
         switch (loadFight.GetEventType())
         {
             case FightEventType.Arena:
+                loadFight.fightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
                 void GoToTeamEdit_Arena()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
@@ -47,7 +46,6 @@ public class QuestInfoPage : MainSceneProcess
             case FightEventType.Quest:
                 void GoToTeamEdit_Arcade()
                 {
-                    Debug.Log("arcade");
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
                 FightPreparePage.target.EditTeamButton.onClick.RemoveAllListeners();

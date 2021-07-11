@@ -4,8 +4,8 @@ public class ArenaPage : MainSceneProcess
 {
     void EnterProcess()
     {
-        PageTo.Go(MainSceneStep.Arena);
         ArenaManager.target.RefreshOpponent();
+        PageTo.Go(MainSceneStep.Arena);
     }
     
     public ArenaPage()
