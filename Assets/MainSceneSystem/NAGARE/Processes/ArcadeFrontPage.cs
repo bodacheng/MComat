@@ -18,13 +18,17 @@ public class ArcadeFrontPage : MainSceneProcess
     {
         loadFinished = false;
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.5f, 0.1f);
+        if (ArcadeManager.ArcadeStages.Count == 0)
+        {
+            Debug.Log("无有效关卡");
+            return;
+        }
         
         ArcadeManager.target.INIPagingSystem(2);
-        
         if (ArcadeManager.ArcadeStages.ContainsKey(Account._AccInfo.ArcadeProcess))
         {
             StageInfo StageInfo = ArcadeManager.ArcadeStages[Account._AccInfo.ArcadeProcess];
-            ArcadeManager.target.IconButtonFeature(StageInfo.MemberIcons[0]);
+            ArcadeManager.target.IconButtonFeature(StageInfo.stageButton.MemberIcons[0]);
         }else{
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");
         }

@@ -12,7 +12,6 @@ public class QuestInfoPage : MainSceneProcess
         loadFight = stage;
         yield return ModelShower.target.ShowMyModel(null);
         PageTo.Go(MainSceneStep.QuestInfo);
-        FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
         GetReadyForQuestInfoPage();
     }
     
@@ -29,7 +28,6 @@ public class QuestInfoPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(false);
     }
 
     // 这个函数目前是固定使用“默认队伍配置”
@@ -56,7 +54,6 @@ public class QuestInfoPage : MainSceneProcess
                 FightPreparePage.target.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
                 break;
         }
-        FightPreparePage.target.QuestPreparePageCanvas.gameObject.SetActive(true);
         FightPreparePage.target.StageMembersInfoShow(loadFight);
         FightPreparePage.target.BeginFight.onClick.RemoveAllListeners();
         void Go()

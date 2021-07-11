@@ -94,6 +94,10 @@ namespace mainMenu
             // 不管有多少关，0永远是第0至5关的目标滚动轴值
             // 如果回头时候看不懂这个函数那可以假设有10个关卡，
             // 一步步推导看看什么意思。
+
+            if (levelCount < 5)
+                return 0;
+            
             float temp = 0;
             temp = levelCount - 5;
             temp = System.Math.Abs(temp) < 0.001 ? 0f : 5f / (float)temp;

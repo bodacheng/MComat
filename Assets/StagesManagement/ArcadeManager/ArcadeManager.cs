@@ -48,8 +48,8 @@ namespace mainMenu
         
         public void INIArcadeStageButtons()
         {
-            List<Object> stageScriptableObjects = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
-            foreach (Object _object in stageScriptableObjects)
+            List<Object> stageResources = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
+            foreach (Object _object in stageResources)
             {
                 FightInfo one = (FightInfo)_object;
                 one.SetEventType(FightEventType.Quest);
@@ -64,9 +64,9 @@ namespace mainMenu
                     }
                     newButton.button.onClick.AddListener(LoadThisStage);
                     newButton.ID = one.LocalFightID;
-                    newButton.text.text = "Stage" + one.LocalFightID.ToString();
-                    newButton.name = "Stage" + one.LocalFightID.ToString();
-
+                    newButton.text.text = "Stage" + one.LocalFightID;
+                    newButton.name = "Stage" + one.LocalFightID;
+                    
                     for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
                     {
                         MonsterIconDic.Get(one.fightMembers.EnemySets.GetValues()[i].r_id);
@@ -82,12 +82,12 @@ namespace mainMenu
                         heroIcon.iconButton.onClick.RemoveAllListeners();
                         heroIcon.iconButton.onClick.AddListener(temp);
                     }
+                    newButton.MemberIcons = heroIcons;
 
                     StageInfo stageInfo = new StageInfo
                     {
                         stageConfig = one,
-                        stageButton = newButton,
-                        MemberIcons = heroIcons
+                        stageButton = newButton
                     };
                     ArcadeStages.Add(one.LocalFightID, stageInfo);
                 }

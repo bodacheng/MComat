@@ -8,7 +8,6 @@ namespace mainMenu
     {
         [Space(7)]
         [Header("UI elements")]
-        public Canvas QuestPreparePageCanvas;
         public Text QuestName;
         public HeroIcon FighterIcon;
         public RectTransform myTeamShowT;
