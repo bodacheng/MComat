@@ -20,30 +20,30 @@ public class StonesPage : MainSceneProcess
     }
 
     //EnterProcess()内绝不能出现triggerMainProcess
-    public static IEnumerator EnterProcess()
+    public static void EnterProcess()
     {
         SkillStonesBox.target._skillStoneDetail.Clear();
-        yield return CommonEnterProcess();
+        CommonEnterProcess();
         SkillStonesBox.target.CellsFeatureLoad(1);
     }
     
     //EnterProcess()内绝不能出现triggerMainProcess
-    public static IEnumerator EnterProcess<T>(T t)
+    public static void EnterProcess<T>(T t)
     {
-        yield return CommonEnterProcess();
+        CommonEnterProcess();
         SSLevelUpManager.target.OpenLevelUpPage(t as string);
     }
     
-    static IEnumerator CommonEnterProcess()
+    static void CommonEnterProcess()
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
+        PageTo.Go(MainSceneStep.SkillStoneList);
         PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
-        yield return ModelShower.target.ShowMyModel(null);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            yield break;
+            return;
         }
         SkillStonesBox.target.EXTabsFeatureRefresh(true);
         SkillStonesBox.target.RestFilter();
@@ -68,7 +68,7 @@ public class StonesPage : MainSceneProcess
     {
         Account.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
         ItemLoader.LoadAll(ItemsLoadFinished);
-
+        
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 itemsLoadFinished, userReadOnlyDataLoadFinished
@@ -77,9 +77,9 @@ public class StonesPage : MainSceneProcess
             {
                 SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
                 if (t != null)
-                    mainProcessRunner.RunAsQueued(EnterProcess(t));
+                    EnterProcess(t);
                 else
-                    mainProcessRunner.RunAsQueued(EnterProcess());
+                    EnterProcess();
             },
             () => { Debug.Log("错误，怎么办？"); }
         );

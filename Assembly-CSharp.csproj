@@ -167,7 +167,6 @@
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\ScriptRead.cs" />
      <Compile Include="Assets\Language\LanguageConverterManger.cs" />
      <Compile Include="Assets\JsonSupport\LocalJson.cs" />
-     <Compile Include="Assets\Arena\RankInfo.cs" />
      <Compile Include="Assets\MasterDataTool\MasterDataTool_SK.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManager.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\TableCodeGen.cs" />

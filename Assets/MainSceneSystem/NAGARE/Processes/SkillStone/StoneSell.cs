@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class StoneSell : MainSceneProcess
 {
-    public IEnumerator EnterProcess()
+    void EnterProcess()
     {
-        yield return StonesPage.EnterProcess();
+        StonesPage.EnterProcess();
         StoneDeleteManger.target.EnterDeleteMode();
     }
     
@@ -19,7 +19,7 @@ public class StoneSell : MainSceneProcess
     public override void ProcessEnter()
     {
         SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        EnterProcess();
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),

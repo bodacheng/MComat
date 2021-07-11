@@ -49,10 +49,7 @@ namespace FightScene
         public RectTransform RewardsTransform;
         public Text goldrewards;
         public Text diamondrewards;
-        
-        [Header("RankInfo")]
-        public RankInfo rankInfo;
-        
+
         void Awake()
         {
             target = this;
